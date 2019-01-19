@@ -129,5 +129,8 @@ You can submit a support ticket or ask a question from our [support page](https:
 	** First Release **. This is the first release of our plugin.
 
 == Upgrade Notice ==
-= 0.1.2 =
+
+= 0.1.0 =
    Bug fixes and some improvements.
+= 0.0.1 =
+   Initial improvements.
