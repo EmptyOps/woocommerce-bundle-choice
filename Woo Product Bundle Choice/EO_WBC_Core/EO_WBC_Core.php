@@ -87,7 +87,7 @@ class EO_WBC_Core{
         {
             $sql = "CREATE TABLE `$eo_wbc_order_map`( ";
             $sql .= "  `order_id`  int(11) NOT NULL, ";
-            $sql .= "  `order_map`  varchar(128) NOT NULL, ";
+            $sql .= "  `order_map` text NOT NULL, ";
             $sql .= "  PRIMARY KEY(`order_id`)";
             $sql .= ") ".$wpdb->get_charset_collate().";";
             require_once( ABSPATH . '/wp-admin/includes/upgrade.php' );

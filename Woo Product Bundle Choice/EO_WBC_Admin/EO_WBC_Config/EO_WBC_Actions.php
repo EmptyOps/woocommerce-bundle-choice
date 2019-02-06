@@ -2,8 +2,7 @@
 class EO_WBC_Actions
 {
     public function __construct()
-    {      
-        
+    {                  
             //Add Map Request
             if(    (isset($_POST['eo_wbc_first_category']) && isset($_POST['eo_wbc_second_category']) )
                 && $_POST['eo_wbc_first_category']
@@ -33,13 +32,23 @@ class EO_WBC_Actions
                 && $_POST['eo_wbc_second_name']
                 && $_POST['eo_wbc_second_slug']
                 && $_POST['eo_wbc_collection_title']
+                && strlen($_POST['eo_wbc_btn_setting'])                
+                && !empty($_POST['eo_wbc_btn_position'])                                
                 ){
                     $this->config_save();
             }            
     }
     
     public function config_save()
-    {  
+    {          
+        //Button setting style,(Default/Shortcode)        
+        update_option('eo_wbc_btn_setting',$_POST['eo_wbc_btn_setting']); 
+        if ($_POST['eo_wbc_btn_setting']=="0") { //if default is choosen
+
+            //position of button (Top/Bottom/Middle/Custom)
+            update_option('eo_wbc_btn_position',$_POST['eo_wbc_btn_position']);           
+        }        
+
         update_option('eo_wbc_first_name',$_POST['eo_wbc_first_name']);//FIRST : NAME
         update_option('eo_wbc_first_slug',$_POST['eo_wbc_first_slug']);//FIRST : SLUG
         
@@ -94,9 +103,9 @@ class EO_WBC_Actions
             update_option('eo_wbc_config_map',"1");
             add_action( 'admin_notices',function (){
                 echo "<div class='notice notice-success is-dismissible'><p>".__( '<strong>New Map Added Successfully.</strong>', 'woocommerce' )."</p></div>";
-            });
+            });            
             if(isset($_GET['callback']) && $_GET['callback']==1)
-            {
+            {                
                 //return back to admin home if we have arrived from there.
                 echo "<script>window.location.href = '".admin_url('admin.php?page=eo-wbc-home')."';</script>";
                 exit();

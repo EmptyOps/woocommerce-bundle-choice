@@ -9,6 +9,14 @@ class EO_WBC_Support
         return function_exists('wc_get_product')?wc_get_product($product_id):WC()->product_factory->get_product($product_id,array());
     }
     
+    public static function eo_wbc_has_shortcode($content, $tag){
+        return function_exists('has_shortcode')
+                    ?
+                has_shortcode($content,$tag)
+                    :
+                self::eo_wbc_wp_has_shortcode($content,$tag);
+    }
+
     public static function eo_wbc_get_product_variation_attributes( $variation_id ) {    	
     	if(is_null($variation_id))
     	{
@@ -25,8 +33,7 @@ class EO_WBC_Support
     }
     
     private static function eo_wbc_support_get_product_variation_attributes( $variation_id ) {
-        // Build variation data from meta.
-        var_dump("Inside execution");
+        // Build variation data from meta.        
         $all_meta                = get_post_meta( $variation_id );
         $parent_id               = wp_get_post_parent_id( $variation_id );
         $parent_attributes       = array_filter( (array) get_post_meta( $parent_id, '_product_attributes', true ) );
@@ -89,6 +96,30 @@ class EO_WBC_Support
         $page_id   = wc_get_page_id( $page );
         $permalink = 0 < $page_id ? get_permalink( $page_id ) : get_home_url();
         return apply_filters( 'woocommerce_get_' . $page . '_page_permalink', $permalink );
+    }
+    private function eo_wbc_wp_has_shortcode( $content, $tag ) {
+            if ( false === strpos( $content, '[' ) ) {
+                    return false;
+            }
+    
+        if ( self::eo_wbc_wp_shortcode_exists( $tag ) ) {
+                    preg_match_all( '/' . get_shortcode_regex() . '/', $content, $matches, PREG_SET_ORDER );
+                    if ( empty( $matches ) )
+                            return false;
+    
+                    foreach ( $matches as $shortcode ) {
+                            if ( $tag === $shortcode[2] ) {
+                                    return true;
+                            } elseif ( ! empty( $shortcode[5] ) && self::eo_wbc_wp_has_shortcode( $shortcode[5], $tag ) ) {
+                                    return true;
+                            }
+                    }
+            }
+            return false;
+     }
+    private function eo_wbc_wp_shortcode_exists( $tag ) {
+            global $shortcode_tags;
+            return array_key_exists( $tag, $shortcode_tags );
     }
 }
 

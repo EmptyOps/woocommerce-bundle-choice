@@ -10,7 +10,7 @@ class EO_WBC_Head_Banner{
         	<div style="display: inline-block;">
         		<h1><?php _e(constant('EO_WBC_PLUGIN_NAME')."&nbsp;&nbsp;&nbsp;".constant('EO_WBC_PLUGIN_VERSION')) ?></h1>
         		<p class="info">
-        			Thank you for installing Woocommerce Bundled Choice! Woocommerce Bundled Choice excites users to buy with joy.			
+        			Thank you for installing Woocommerce Bundle Choice! Woocommerce Bundle Choice excites users to buy with joy.	
         		</p>
         	</div>	
         </div>

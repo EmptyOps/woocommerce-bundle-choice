@@ -5,31 +5,20 @@ class EO_WBC_Product
     {       
         $this->eo_wbc_config();            //Disable 'Add to Cart Button' and Set 'Sold Individually'
         $this->eo_wbc_add_breadcrumb();    //Add Breadcrumb        
-        $this->eo_wbc_render();            //Render View and Routings                        
+        $this->eo_wbc_render();            //Render View and Routings                                
     }
     
     private function eo_wbc_config()
     {        
         //Remove add to cart button
         remove_action( 
-                'woocommerce_after_shop_loop_item',
-                'woocommerce_template_loop_add_to_cart'
-            );
-
-        add_filter( 'woocommerce_product_single_add_to_cart_text',function(){
-            if($this->eo_wbc_get_category()==get_option('eo_wbc_first_slug')){
-
-                return "Select This ".get_option('eo_wbc_first_name');
-            }
-            elseif($this->eo_wbc_get_category()==get_option('eo_wbc_second_slug')){
-
-                return "Select This ".get_option('eo_wbc_second_name');
-            }    
-        });
+            'woocommerce_after_shop_loop_item',
+            'woocommerce_template_loop_add_to_cart'
+        );
     }
 
     private function eo_wbc_add_breadcrumb()
-    {
+    {   
         //Adding Breadcrumb
         add_action( 'woocommerce_before_single_product',function(){
 
@@ -63,31 +52,23 @@ class EO_WBC_Product
             
             wp_enqueue_script('eo_wbc_add_to_cart_js');
         });
-            
+          
         //Adding own ADD_TO_CART_BUTTON
-        add_action('wp_footer',function(){
-
-            if($this->eo_wbc_get_category()==get_option('eo_wbc_first_slug')){
-
-                $eo_wbc_btn_text="Select This ".get_option('eo_wbc_first_name');
-            }
-            elseif($this->eo_wbc_get_category()==get_option('eo_wbc_second_slug')){
-
-                $eo_wbc_btn_text="Select This ".get_option('eo_wbc_second_name');
-            }
+        add_action('wp_footer',function(){            
         ?>
        	<script type="text/javascript">
-    		jQuery(document).ready(function(){
+    		jQuery(".single_add_to_cart_button.button.alt").ready(function(){
+                jQuery('form.cart').prepend("<input type='hidden' name='eo_wbc_target' value='<?php echo $this->eo_wbc_get_category(); ?>'/><input type='hidden' name='eo_wbc_product_id' value='<?php global $post; echo $post->ID; ?>'/>")
     			jQuery(".single_add_to_cart_button.button.alt:not(.disabled)").replaceWith(
     			     "<a href='#' id='eo_wbc_add_to_cart' class='single_add_to_cart_button button alt'>"
-                     +"<?php _e($eo_wbc_btn_text); ?>"
+                     +"<?php _e('Add to cart'); ?>"
                      +"</a>"
-                     );
+                    );
     			});
     	</script>
        <?php    
        });
-    } 
+    }
     
     private function eo_wbc_product_route(){
         global $post;
@@ -98,12 +79,12 @@ class EO_WBC_Product
             if($category==get_option('eo_wbc_first_slug')){
                 $url=get_bloginfo('url').'/product-category/'.$this->eo_wbc_category_link()
                     .'/?EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
-                    .'&STEP=2&FIRST='.$post->ID.'&SECOND='.sanitize_text_field($_GET['SECOND']);
+                    .'&STEP=2&FIRST='.$post->ID.'&SECOND='.sanitize_text_field($_GET['SECOND']).'&EO_WBC_CODE='.sanitize_text_field($_GET['EO_WBC_CODE']);
             }
             elseif($category==get_option('eo_wbc_second_slug')){
                 $url=get_bloginfo('url').'/product-category/'.$this->eo_wbc_category_link()
                     .'/?EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
-                    .'&STEP=2&FIRST='.sanitize_text_field($_GET['FIRST']).'&SECOND='.$post->ID;
+                    .'&STEP=2&FIRST='.sanitize_text_field($_GET['FIRST']).'&SECOND='.$post->ID.'&EO_WBC_CODE='.sanitize_text_field($_GET['EO_WBC_CODE']);
             }
         }
         
@@ -113,13 +94,13 @@ class EO_WBC_Product
             {
                 $url=get_bloginfo('url').get_option('eo_wbc_review_page')
                     .'?EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
-                    .'&STEP=3&FIRST='.$post->ID.'&SECOND='.sanitize_text_field($_GET['SECOND']);
+                    .'&STEP=3&FIRST='.$post->ID.'&SECOND='.sanitize_text_field($_GET['SECOND']).'&EO_WBC_CODE='.sanitize_text_field($_GET['EO_WBC_CODE']);
             }
             elseif (sanitize_text_field($_GET['SECOND'])==='')
             {
                 $url=get_bloginfo('url').get_option('eo_wbc_review_page')
                     .'?EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
-                    .'&STEP=3&FIRST='.sanitize_text_field($_GET['FIRST']).'&SECOND='.$post->ID;
+                    .'&STEP=3&FIRST='.sanitize_text_field($_GET['FIRST']).'&SECOND='.$post->ID.'&EO_WBC_CODE='.sanitize_text_field($_GET['EO_WBC_CODE']);
             }
         }
         return $url;

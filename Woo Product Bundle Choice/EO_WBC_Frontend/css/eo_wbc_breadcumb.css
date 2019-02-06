@@ -3,23 +3,17 @@
   text-align: center;
   width:100%;  
 }
-#crumbs h1 {  
-  text-transform: uppercase;
-  font-size: .9rem;
-  font-weight: 600;
-  letter-spacing: .01rem;
-  color: #8093A7;
-}
 #crumbs ul {
   list-style: none;
   display: inline-table;
   width:inherit;
+  margin: 0px;
 }
 #crumbs ul li{
-  width:30%;
+  width:calc((100% - 260px) / 3);
   display: inline;
   float: left;
-  height: 50px;
+  height: 0px;
   background: #F3F5FA;
   text-align: left;
   padding: 30px 20px 50px 50px;

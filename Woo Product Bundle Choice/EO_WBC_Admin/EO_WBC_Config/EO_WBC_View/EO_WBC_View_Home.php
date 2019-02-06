@@ -1,3 +1,4 @@
+
 <style>
     .info{
         color:grey;
@@ -133,9 +134,18 @@
           }
     }       
 </style>
+<?php 
+  //Footer Rating bar :)
+  add_filter( 'admin_footer_text',function($footer_text){
+    return __("<p id='footer-left' class='alignleft'>
+        If you like <strong>WooCommerce Bundle Choice</strong> please leave us a <a href='https://wordpress.org/support/plugin/woo-bundle-choice/reviews?rate=5#new-post' target='_blank' class='wc-rating-link' data-rated='Thanks :)'>★★★★★</a> rating. A huge thanks in advance! </p>");
+  });
+?>
 <div class="wrap woocommerce">
 <h1></h1>
 	<?php EO_WBC_Head_Banner::get_head_banner(); ?> 
+  <br/>
+        <p><a href="https://wordpress.org/support/plugin/woo-bundle-choice" target="_blank">If you are facing any issue, please write to us immediately.</a></p>
 	<br/>
 	<hr/>
 	<div style="clear:both;"></div>

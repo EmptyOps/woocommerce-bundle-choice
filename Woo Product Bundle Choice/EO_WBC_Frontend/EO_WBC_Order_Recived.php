@@ -2,7 +2,8 @@
 class EO_WBC_Order_Recived{
     public function __construct()
     {
-        add_action('woocommerce_thankyou',function($order_id){
+
+        add_action('woocommerce_thankyou',function($order_id){            
             $sets=WC()->session->get('EO_WBC_MAPS');
             $maps=array();
             if(!is_null($sets))
@@ -21,9 +22,9 @@ class EO_WBC_Order_Recived{
                         }
                     $maps[]=$map;
                 }
-
+                
                 global $wpdb;                
-                $wpdb->insert($wpdb->prefix.'eo_wbc_order_maps',array('order_id'=>$order_id,'order_map'=>json_encode($maps)),array("%d","%s"));
+                $wpdb->insert($wpdb->prefix.'eo_wbc_order_maps',array('order_id'=>$order_id,'order_map'=>json_encode($maps)),array("%s","%s"));                
                 
                 //Clearing Plugin Session data                
                 WC()->session->set('EO_WBC_SETS',NULL);

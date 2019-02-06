@@ -2,16 +2,14 @@
 class EO_WBC_Cart{
     public function __construct(){
         
-        require_once 'EO_WBC_Support.php';
+        if(isset($_GET['EO_WBC_REMOVE'])){
+            $this->eo_wbc_remove();
+        }     
 
         if(WC()->session->get('EO_WBC_SETS'))//Destroy EO_WBC_SETS data if session is available
         {
             WC()->session->set('EO_WBC_SETS',NULL);
         }
-
-        if(isset($_GET['EO_WBC_REMOVE'])){
-            $this->eo_wbc_remove();
-        }     
 
         if(isset($_GET['empty_cart']) && sanitize_text_field($_GET['empty_cart'])==1){
             $this->eo_wbc_empty_cart();
@@ -28,13 +26,11 @@ class EO_WBC_Cart{
         if(isset($eo_wbc_maps[$_GET['EO_WBC_REMOVE']])){
     		unset($eo_wbc_maps[sanitize_text_field($_GET['EO_WBC_REMOVE'])]);
 	        WC()->session->set('EO_WBC_MAPS',$eo_wbc_maps);
-	        var_dump($eo_wbc_maps);
-	        
+	        	        
 	        //Reload cart data
 	        WC()->cart->empty_cart();	        
 	        foreach ($eo_wbc_maps as $index=>$set)
-	        {	 
-	        	var_dump($index);
+	        {	 	        
 	        	if($set["FIRST"]){       	
 		        	wc()->cart->add_to_cart(
 	                	$set["FIRST"][0],

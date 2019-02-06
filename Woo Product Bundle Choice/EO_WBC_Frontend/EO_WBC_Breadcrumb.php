@@ -3,15 +3,11 @@ class EO_WBC_Breadcrumb
 {
     public static function eo_wbc_add_css()
     {
-        add_action( 'wp_enqueue_scripts',function(){
-            wp_register_style('breadcumb',plugins_url('/css/eo_wbc_breadcumb.css',__FILE__));
-            wp_enqueue_style('breadcumb');
-        }); 
+       require_once 'css/eo_wbc_breadcrumb.php';
     }  
     public static function eo_wbc_add_breadcrumb($step=1,$begin)
-    {
-        $html='<br/><br/><div id="crumbs">
-              <ul>';
+    {	
+        $html='<br/><br/><div id="crumbs"><ul>';
         
         if($begin==get_option('eo_wbc_first_slug'))
         {

@@ -1,136 +1,155 @@
-=== WooCommerce Bundle Choice ===
+=== Woo Product Bundle Choice ===
 Contributors: emptyopssphere
-Tags: buy in pair, WooCommerce product bundle, design your own, product bundles, combine two products, product kit, product combination, matching products,grouping two products
+Tags: woo,product bundle,product bundles,bundle,bundles
 Requires at least: 3.5
-Tested up to: 5.0.2
+Tested up to: 5.0.3
 Requires PHP: 5.3
-Stable tag: 0.1.0
+Stable tag: 0.1.4
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-This WooCommerce plugin allow users to easily and seamlessly bundle(choose) their choice while buying based on recommendations set by admin by use of product categories. 
+This plugin allows users to bundle(choose) their choice based on recommendations which leads to product bundles
 
 == Description ==
-WooCommerce Bundle Choice is a free WooCommerce plugin, which allows users for combination based buying. This plugin makes user capable of grouping two products which are implicitly product bundling by the user. When products compliment each other enables the skilled production of a variety of product bundles.
+Woo Product Bundle Choice is a free WooCommerce plugin, which allows users for combination based buying. Using this plugin user can easily create a product bundle which makes user capable of grouping two products by themselves. When products compliment each other enables the skilled production of a variety of product bundles.
 
-This plugin also allows users to dynamically create their own assortments, by mixing and matching products. 
+This plugin allows users to dynamically create their assortments, by mixing and matching products which eventually leads to a product bundling. Setting recommendations is made really easy, which admin can do easily by use of product categories.
 
-== KEY POINTS ==
+= Key Points =
 
 * Easy to use
 * Easy to install
-* Easy Product combination based on categories
-* Compatible With All WooCommerce Plugins of course including Popular Ones 
+* Easy to create product bundles based on categories
+* Compatible with All WooCommerce Plugins of course including Popular Ones 
+* Works with any WooCommerce themes
 
-== Advantages ==
+= Advantages =
 
+* A product bundling as per user choice 
 * Supports all kind of product inventories
-* Lets user to easily group two products with nice experience 
+* Lets user to easily bundle two products with nice experience 
 * Provides nice and seamless navigation experience to the user
 * Gives user more varieties for choosing a matching product
-* Enables skilled production which leads to good results 
-* Mixing and matching products Provide users freedom for choosing their favorite assortments.
+* Enables skilled production which leads to good results
+* Mixing and matching products through product bundle feature, provide users freedom for choosing their favorite assortments.
 
-== Compatibility with other plugins/Officially tested plugins ==
+= Use Cases =
+To simply put, it doesn’t matter which category your website belongs to if you think you have the products that the user would like to buy in a pair and you can suggest matching recommendations that can make a difference then you should use our plugin.
 
-We have tested WooCommerce Bundle Choice with Wordpress 3.5 to 5.0.2 and WooCommerce 2.0 to 3.5.3 and our plugin is technically compatible with all the other plugins.
+If you are interested in our plugin, click [here](http://101.53.136.134/apps/yc_plugin/use-cases/) to read more.
 
-== Live Demo  ==
 
-1. Demo with [Jewellary](http://101.53.136.134/demo/jewellery/)
+= Compatibility with other plugins/Officially tested plugins =
+
+We have tested WooCommerce Bundle Choice with Wordpress 3.5 to 5.0.3 and WooCommerce 2.0 to 3.5.3 and our plugin is technically compatible with all the other plugins.
+
+= Live Demo  =
+
+1. Demo with [jewelry](http://101.53.136.134/demo/jewellery/)
 1. Demo with [Textile](http://101.53.136.134/demo/yc_textile/)
 
-== Documentation ==
+= Documentation =
 
-* WooCommecer  Bundle Choice`s  full documentation is available [here](http://101.53.136.134/apps/yc_plugin/documentation/).
+* Woo Product Bundle Choice’s full documentation is available [here](http://101.53.136.134/apps/yc_plugin/documentation/).
 
-== FOR SUPPORT, SUGGESTIONS, FEATURE REQUEST AND BUG REPORTING ==
+= FOR SUPPORT, SUGGESTIONS, FEATURE REQUEST AND BUG REPORTING =
 
-If you have suggestions about how to improve WooCommerce Bundle Choice, you can [write us](https://wordpress.org/support/plugin/woocommerce-bundle-choice), so we can enhance our WooCommerce Bundle Choice plugin.
+If you have suggestions about how to improve Woo Product Bundle Choice, you can [write us](https://wordpress.org/support/plugin/woo-bundle-choice), so we can enhance our our Woo Product Bundle Choice plugin.
 
 == Installation ==
-== Easy Installation Tutorial ==
-[youtube https://www.youtube.com/watch?v=cWxvSi_Wq6w]
+**1. Installation** 
 
-== Easy Installation Steps ==
-1. Please make sure that you installed WooCommerce
-1. Go to plugins in your dashboard and select “Add New”
-1. Search for “WooCommerce Bundle Choice”, Install & Activate it
-1. Done!
+*[installation guide](http://101.53.136.134/apps/yc_plugin/installation/)*
+  
+OR
+
+*Watch quick setup video guide*
+[youtube https://www.youtube.com/watch?v=TBh776iHFEY]
+
+**2. How to place buttons anywhere on any page?**
+
+= Shortcode =
+
+    Use [ woo-bundle-choice-btn ] to place Choice Button anywhere.
+
+= For details watch the video =
+[youtube https://www.youtube.com/watch?v=QPQcRID_SGE]
 
 == Frequently Asked Questions ==
-
 =How it works?=
-After installing the plugin, there will be a widget displayed on the website home page, which will contain two buttons to start with, that will enable users to easily combine recommended matching products.
+After installing the plugin, there will be a widget displayed on the website home page, which will contain two buttons to start with, that will enable users to bundle recommended matching products easily.
 
 = Offers premium support? =
 We offer full support to help you at free of cost.  
-			
+      
 = Installation instructions? =
 
-* Go to Plugins -> Add New section from your admin account and search for Woocommerce Bundle Choice.
+* Go to Plugins -> Add New section from your admin account and search for Woo Product Bundle Choice.
 
 * You can also install this plugin manually.
-    1.  Download the plugin’s ZIP archive and unzip it.
-    1. Copy the unzipped Woocommerce Bundle choice folder to the /wp-content/plugins/ directory.
-    1. Activate the plugin through the ‘Plugins’ menu in WordPress.
+    1. You can also install this plugin manually.
+    1. Download the plugin's ZIP archive and unzip it.
+    1. Copy the unzipped Woo Product Bundle choice folder to the /wp-content/plugins/ directory.
+    1. Activate the plugin through the Plugins menu in WordPress.
 
 = Is it compatible with any kinds of WooCommerce Theme? =
-Yes, it’s compatible with any WooCommerce theme. If you ever face any issue please write to us on [support forum](https://wordpress.org/support/plugin/woocommerce-bundle-choice/)
-			
+Yes, its compatible with any WooCommerce theme. If you ever face any issue, please write to us on the [support forum](https://wordpress.org/support/plugin/woo-bundle-choice/)
+      
 = Does it work with product QuickView? =
-  Yes. However since its different navigation experience quickview doesn`t matter much.
-            
+  Yes. However, since its different navigation experience, QuickView doesn't matter much.
+
 = Does it work on Multiple Site? =
-Yes it is.
-					
+Yes, it is.
+          
 = Is this plugin works in any kind of inventories, such as clothing, jewelry, accessories etc..? =
-Yes. This plugin works with all inventories out of the box for e.g. Clothing, cosmetics, electronic items and accessories, furniture, jewelry and all others.  
+Yes. This plugin works with all inventories out of the box, e.g. Clothing, cosmetics, electronic items and accessories, furniture, jewelry, and all others.
 
 = Is there any monthly fee or required upgrade? =
-No, you can use Woocommerce Bundle Choice for free forever. 
+No, you can use Woo Product Bundle Choice for free forever.
 
 = Is it secure? =
-We follow all best WordPress security practices. Plus it’s open source, so we will have a large community looking out for potential weaknesses when it comes to your data.
+We follow all the best WordPress security practices. Plus it is open source, so we will have a large community looking out for potential weaknesses when it comes to your data.
             
 = With which WordPress version this Plugin is compatible? =
-  It is compatible from 3.5 to 5.0.2 WordPress version.
+  It is compatible from 3.5 to 5.0.3 WordPress version.
            
 = Where can I report bugs or contribute to the project? =
- Bugs can be reported either in our support forum or preferably on the Woocommerce Bundle Choice [GitHub repository](https://github.com/EmptyOps/woocommerce-bundle-choice). 
+ Bugs can be reported either in our support forum or preferably on the Woo Product Bundle Choice [GitHub repository](https://github.com/EmptyOps/woocommerce-bundle-choice). 
             
 = Where can I find complete documentation? =
 Full documentation is available [here](http://101.53.136.134/apps/yc_plugin/documentation/).
             
 = Where can I ask for help? =
-You can submit a support ticket or ask a question from our [support page](https://wordpress.org/support/plugin/woocommerce-bundle-choice/) at anytime.
+You can submit a support ticket or ask a question from our [support page](https://wordpress.org/support/plugin/woo-bundle-choice/) at any time.
 
 = How to configure and use it? =
-* Add product categories and sub-categories if needed.				
-* Go to Bundled Choice > Configuration 
-	1. Select first category
-	1. Select second category
-	1. Rename preview tag title if needed.
-* Go to Bundled Choice > Mapping
-	1. Select first category node`s sub-category which was selected in previous step.
-	1. Similarly select second category's sub-category.
-	1. Click `Save New Map`. 
-	1. Follow above steps recursively to add more maps.
-* Now navigate to your site's home page where you can find two buttons representing each categories.
-* [ *You may also like to see our quick configuration tutorial video.* ](http://youtube.com/)
+Please go through our [installation guide](http://101.53.136.134/apps/yc_plugin/documentation/), you will find it really easy to set up and start using it.
 
 == Screenshots ==
 1. Configure Woocommerce Bundle Choice Plugin by selecting two main product category.
-2. Creating map is process of binding links between product sub-categories, which will eventually let user combine products based on these category mappings.
+2. Creating a map is the process of binding links between product sub-categories, which will eventually let user combine products based on these category mappings.
 3. Home page after plugin fully configured.
 
 == Changelog ==
-= 0.1.0 (January 14, 2019) =
-	** First Release **. This is the first release of our plugin.
+= 0.1.4 (February 05, 2019) =
+  **Admin Upgrade**. changes in admin's button placement and configuration using product categories
+= 0.1.3 (January 28, 2019) =
+  **Admin Upgrade**. changes in admin's button placement and configuration
+= 0.1.2 (January 25, 2019) =
+  **Feature Update**. New feature to customize choice button location.
+= 0.1.1 (January 23, 2019) =
+  **Css Improvement**. Css improved in product preview page and in breadcrumb section.
+= 0.1.0 (January 21, 2019) =
+  **First Release**. This is the first release of our plugin.
 
 == Upgrade Notice ==
-
+= 0.1.4 =
+  changes in admin's button placement and configuration using product categories.
+= 0.1.3 =
+    the admin can now place choice buttons anywhere and on any page.
+= 0.1.2 =
+    A user can add Choice Buttons to anywhere on pages.
+= 0.1.1 =
+  Css Improved.
 = 0.1.0 =
-   Bug fixes and some improvements.
-= 0.0.1 =
-   Initial improvements.
+    Bug fixes and some improvements.

@@ -2,16 +2,23 @@
 class EO_WBC_Category
 {
     public function __construct()
-    { 
+    {   
         //If add to cart triggred
+        // Detection : only one category item get length > 0 
+        //   i.e. using XOR check if only one of two have been set.
         if(
-                (isset($_GET['FIRST']) && isset($_GET['SECOND']))
-            &&  (strlen(sanitize_text_field($_GET['FIRST']))>0 XOR strlen(sanitize_text_field($_GET['SECOND']))>0) 
-            &&  isset($_GET['CART'])
-         ){
+            (isset($_GET['FIRST']) && isset($_GET['SECOND']))
+            && 
+            (strlen(sanitize_text_field($_GET['FIRST']))>0 
+                XOR 
+            strlen(sanitize_text_field($_GET['SECOND']))>0) 
+            && 
+            isset($_GET['CART'])
+        ){
+            //Iff condition is mutual exclusive, store it to  the session.
             $this->eo_wbc_add_to_cart();            
-        }       
-      
+        } 
+
         //if Current-Category is either belongs to FIRST OR SECOND Category then initiate application        
         if(
     		$this->eo_wbc_get_category()==get_option('eo_wbc_first_slug') 
@@ -23,52 +30,55 @@ class EO_WBC_Category
             $this->eo_wbc_render();            
         }                
     }
+
     private function eo_wbc_add_to_cart()
     {
-        $cart=base64_decode(sanitize_text_field($_GET['CART']),TRUE);
-        
+        $cart=base64_decode(sanitize_text_field($_GET['CART']),TRUE);        
         if($cart){
 
             $cart=str_replace("\\",'',$cart);
-            $cart=json_decode($cart);
-
+            $cart=(array)json_decode($cart);
             if(is_array($cart) OR is_object($cart)){
-                    if(strlen(sanitize_text_field($_GET['FIRST']))>0 && filter_var(sanitize_text_field($_GET['FIRST']),FILTER_VALIDATE_INT))
-                    {
-                        WC()->session->set('EO_WBC_SETS',array(
-                                                            'FIRST'=>array
-                                                                        (
-                                    (isset($cart->product_id)?$cart->product_id:sanitize_text_field($_GET['FIRST'])),
-                                        $cart->quantity,
-                                        (isset($cart->variation_id)?$cart->variation_id:NULL)
-                                                                            
-                                                                        ),
-                                                             'SECOND'=>NULL
-                                                           )
-                                           );
-                    }
-                    elseif (strlen(sanitize_text_field($_GET['SECOND']))>0 && filter_var(sanitize_text_field($_GET['SECOND']),FILTER_VALIDATE_INT))
-                    {
-                        WC()->session->set('EO_WBC_SETS',array(
-                                                            'FIRST'=>NULL,
-                                                            'SECOND'=>array(
-                                    (isset($cart->product_id)?$cart->product_id:sanitize_text_field($_GET['SECOND'])),
-                                                $cart->quantity,
-                                                (isset($cart->variation_id)?$cart->variation_id:NULL)
-                                                                            )
-                                                        )
-                                            );
-                    }
-            }            
+                   
+                //if product belongs to first target;
+                if (get_option('eo_wbc_first_slug')==$cart['eo_wbc_target']) {
+
+                    WC()->session->set('EO_WBC_SETS',
+                        array(
+                            'FIRST'=>array(
+                                            $cart['eo_wbc_product_id'],
+                                            $cart['quantity'],
+                                            (isset($cart['variation_id'])?$cart['variation_id']:NULL)
+                                        ),
+                            'SECOND'=>NULL
+                                                
+                    ));
+                }
+                //if product belongs to second target;
+                elseif (get_option('eo_wbc_second_slug')==$cart['eo_wbc_target']) {
+
+                    WC()->session->set('EO_WBC_SETS',
+                        array(
+                            'FIRST'=>NULL,
+                            'SECOND'=>array(
+                                            $cart['eo_wbc_product_id'],
+                                            $cart['quantity'],
+                                            (isset($cart['variation_id'])?$cart['variation_id']:NULL)
+                                        )
+                    ));
+                }                                              
+            }                        
         }
     }
+
     private function eo_wbc_add_breadcrumb()
-    {
-    	//Add Breadcumb at top....
+    {	        
+    	//Add Breadcumb at top....		
         add_action( 'woocommerce_before_shop_loop',function(){            
             echo EO_WBC_Breadcrumb::eo_wbc_add_breadcrumb(sanitize_text_field($_GET['STEP']),sanitize_text_field($_GET['BEGIN'])).'<br/><br/>';
-        }, 15 );
+        }, 20);
     }
+
     private function eo_wbc_render()
     {           
         //Hide Add to cart in Shop and product_category page
@@ -78,10 +88,11 @@ class EO_WBC_Category
         add_filter( 'post_type_link',function($url){
             return $url.'?EO_WBC=1'.
                             '&BEGIN='.sanitize_text_field($_GET['BEGIN']).
-                            '&STEP='.sanitize_text_field($_GET['STEP']).
+                            '&STEP='.sanitize_text_field($_GET['STEP']).                            
                             '&FIRST='.sanitize_text_field(isset($_GET['FIRST'])?$_GET['FIRST']:'').
-                            '&SECOND='.sanitize_text_field(isset($_GET['SECOND'])?$_GET['SECOND']:'');
-        });            
+                            '&SECOND='.sanitize_text_field(isset($_GET['SECOND'])?$_GET['SECOND']:'').
+                            '&EO_WBC_CODE='.sanitize_text_field($_GET['EO_WBC_CODE']);
+        });
     }
     
     private function eo_wbc_id_2_slug($id)
@@ -91,7 +102,6 @@ class EO_WBC_Category
     
     /**
      * Function to find current page's product super category
-     * @method eo_wbc_get_category()
      * @param null
      * @return string
      */

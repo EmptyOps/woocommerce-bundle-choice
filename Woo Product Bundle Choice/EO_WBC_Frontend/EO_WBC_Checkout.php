@@ -2,7 +2,7 @@
 class EO_WBC_Checkout{
     public function __construct()
     {
-           require_once 'EO_WBC_Support.php';
+           //require_once 'EO_WBC_Support.php';
            $this->eo_wps_add_js();//Load Jquery and product info contents...     
     }
 
@@ -50,12 +50,12 @@ class EO_WBC_Checkout{
     {
             $price=0;
             $html="<tr><td><div><strong>".
-                __(EO_WBC_Support::wc_get_product($map['FIRST'][0])->get_title().($map['FIRST'][2]  ? "&nbsp; -&nbsp;".implode(',',EO_WBC_Support::wc_get_product_variation_attributes($map['FIRST'][2])):''))."</strong>&nbsp;X&nbsp;{$map["FIRST"][1]}</div>";
+                __(EO_WBC_Support::eo_wbc_get_product($map['FIRST'][0])->get_title().($map['FIRST'][2]  ? "&nbsp; -&nbsp;".implode(',',EO_WBC_Support::eo_wbc_get_product_variation_attributes($map['FIRST'][2])):''))."</strong>&nbsp;X&nbsp;{$map["FIRST"][1]}</div>";
                 $price+=get_post_meta($map['FIRST'][2]?$map['FIRST'][2]:$map['FIRST'][0],'_price',TRUE)*$map["FIRST"][1];
             if($map["SECOND"])
             {
                 $html.="<strong style='color: red;'>+</strong><div><strong>".
-                    __(EO_WBC_Support::wc_get_product($map['SECOND'][0])->get_title().($map['SECOND'][2]  ? "&nbsp; -&nbsp;".implode(',',EO_WBC_Support::wc_get_product_variation_attributes($map['SECOND'][2])):''))."</strong>&nbsp;X&nbsp;{$map["SECOND"][1]}</div></td>";
+                    __(EO_WBC_Support::eo_wbc_get_product($map['SECOND'][0])->get_title().($map['SECOND'][2]  ? "&nbsp; -&nbsp;".implode(',',EO_WBC_Support::eo_wbc_get_product_variation_attributes($map['SECOND'][2])):''))."</strong>&nbsp;X&nbsp;{$map["SECOND"][1]}</div></td>";
                     $price+=get_post_meta($map['SECOND'][2]?$map['SECOND'][2]:$map['SECOND'][0],'_price',TRUE)*$map["SECOND"][1];
             }
             $html.="<td><h6>".__(get_woocommerce_currency_symbol(get_option('woocommerce_currency'))." ".$price)."</h6></td></tr>";
