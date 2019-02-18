@@ -199,34 +199,29 @@ class EO_WBC_Cart{
 				<span class="column"><?php echo $second->get_image('thumbnail'); ?></span>
 				<?php endif; ?>
 			</td>
-			<td>
-				<div>
-					<p><?php _e($first->get_title().
-					    ($cart['FIRST'][2]  ? "<br/>&nbsp; - &nbsp;".implode(',',EO_WBC_Support::eo_wbc_get_product_variation_attributes($cart['FIRST'][2])) :'')); ?></p>			
-				</div>
-				<div>
-					<?php if($cart['SECOND']):?>
-					<p><?php _e($second->get_title().
-					       ($cart['SECOND'][2] ? "<br/>&nbsp; - &nbsp;".implode(',',EO_WBC_Support::eo_wbc_get_product_variation_attributes($cart['SECOND'][2])):'')); ?></p>
-					<?php endif; ?>                               	
-				</div>									
-			</td>
-			<td>
-				<div>
-					<p><?php _e(get_woocommerce_currency_symbol(get_option('woocommerce_currency'))." ".get_post_meta($cart['FIRST'][2]?$cart['FIRST'][2]:$cart['FIRST'][0],'_price',TRUE));?></p>
-					<?php $price=(get_post_meta($cart['FIRST'][2]?$cart['FIRST'][2]:$cart['FIRST'][0],'_price',TRUE)*$cart['FIRST'][1]); ?>
-				 </div>
-				 <div>   
-				 	<?php if($cart['SECOND']):?>
-					<p><?php _e(get_woocommerce_currency_symbol(get_option('woocommerce_currency'))." ".get_post_meta($cart['SECOND'][2]?$cart['SECOND'][2]:$cart['SECOND'][0],'_price',TRUE));?></p>
-						<?php $price+=(get_post_meta($cart['SECOND'][2]?$cart['SECOND'][2]:$cart['SECOND'][0],'_price',TRUE)*$cart['SECOND'][1]); ?>
-					<?php endif; ?>
-				</div>
-			</td>
-			<td>
-				<p><?php _e($cart['FIRST'][1]); ?></p>
+			<td>			
+				<p><?php _e($first->get_title().
+				    ($cart['FIRST'][2]  ? "<br/>&nbsp; - &nbsp;".implode(',',EO_WBC_Support::eo_wbc_get_product_variation_attributes($cart['FIRST'][2])) :'')); ?></p>			
+			
 				<?php if($cart['SECOND']):?>
-				<p><?php _e($cart['SECOND'][1]); ?></p>
+				<p><?php _e($second->get_title().
+				       ($cart['SECOND'][2] ? "<br/>&nbsp; - &nbsp;".implode(',',EO_WBC_Support::eo_wbc_get_product_variation_attributes($cart['SECOND'][2])):'')); ?></p>
+				<?php endif; ?>                               	
+			</td>
+			<td>				
+				<p><?php _e(get_woocommerce_currency_symbol(get_option('woocommerce_currency'))." ".get_post_meta($cart['FIRST'][2]?$cart['FIRST'][2]:$cart['FIRST'][0],'_price',TRUE));?></p>
+				<?php $price=(get_post_meta($cart['FIRST'][2]?$cart['FIRST'][2]:$cart['FIRST'][0],'_price',TRUE)*$cart['FIRST'][1]); ?>
+			
+			
+			 	<?php if($cart['SECOND']):?>
+				<p><?php _e(get_woocommerce_currency_symbol(get_option('woocommerce_currency'))." ".get_post_meta($cart['SECOND'][2]?$cart['SECOND'][2]:$cart['SECOND'][0],'_price',TRUE));?></p>
+					<?php $price+=(get_post_meta($cart['SECOND'][2]?$cart['SECOND'][2]:$cart['SECOND'][0],'_price',TRUE)*$cart['SECOND'][1]); ?>
+				<?php endif; ?>				
+			</td>
+			<td>
+				<p style="text-align: center;"><?php _e($cart['FIRST'][1]); ?></p>
+				<?php if($cart['SECOND']):?>
+				<p style="text-align: center;"><?php _e($cart['SECOND'][1]); ?></p>
 				<?php endif; ?>
 			</td>
 			<td>

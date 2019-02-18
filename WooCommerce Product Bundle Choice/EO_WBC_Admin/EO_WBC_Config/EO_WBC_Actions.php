@@ -39,7 +39,7 @@ class EO_WBC_Actions
             }            
     }
     
-    public function config_save()
+    private function config_save()
     {          
         //Button setting style,(Default/Shortcode)        
         update_option('eo_wbc_btn_setting',$_POST['eo_wbc_btn_setting']); 
@@ -84,14 +84,14 @@ class EO_WBC_Actions
         }                
     }
     
-    public function map_add()
+    private function map_add()
     {
         global $wpdb;
         
         $eo_wbc_first_category=$_POST['eo_wbc_first_category'];
         $eo_wbc_second_category=$_POST['eo_wbc_second_category'];
         
-        if($wpdb->get_var("select * from {$wpdb->prefix}eo_wbc_cat_maps where first_cat_id='{$eo_wbc_first_category}' and second_cat_id='{$eo_wbc_second_category}'"))
+        if($wpdb->get_var("select * from {$wpdb->prefix}eo_wbc_cat_maps where first_cat_id in ('{$eo_wbc_first_category}','{$eo_wbc_second_category}') and second_cat_id in ('{$eo_wbc_first_category}','{$eo_wbc_second_category}')"))
         {
             add_action( 'admin_notices',function (){
                 echo "<div class='notice notice-warning is-dismissible'><p>".__( '<strong>Map Already Exists.</strong>', 'woocommerce' )."</p></div>";
@@ -112,7 +112,8 @@ class EO_WBC_Actions
             }            
         }
     }
-    public function map_remove()
+    
+    private function map_remove()
     {       
         global $wpdb;
         $wpdb->delete($wpdb->prefix.'eo_wbc_cat_maps',array('first_cat_id'=>$_POST['eo_wbc_source'],'second_cat_id'=>$_POST['eo_wbc_target']),array('%s','%s'));

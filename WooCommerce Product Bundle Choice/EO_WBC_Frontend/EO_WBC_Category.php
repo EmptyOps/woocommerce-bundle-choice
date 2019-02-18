@@ -38,6 +38,7 @@ class EO_WBC_Category
 
             $cart=str_replace("\\",'',$cart);
             $cart=(array)json_decode($cart);
+            
             if(is_array($cart) OR is_object($cart)){
                    
                 //if product belongs to first target;
@@ -90,8 +91,7 @@ class EO_WBC_Category
                             '&BEGIN='.sanitize_text_field($_GET['BEGIN']).
                             '&STEP='.sanitize_text_field($_GET['STEP']).                            
                             '&FIRST='.sanitize_text_field(isset($_GET['FIRST'])?$_GET['FIRST']:'').
-                            '&SECOND='.sanitize_text_field(isset($_GET['SECOND'])?$_GET['SECOND']:'').
-                            '&EO_WBC_CODE='.sanitize_text_field($_GET['EO_WBC_CODE']);
+                            '&SECOND='.sanitize_text_field(isset($_GET['SECOND'])?$_GET['SECOND']:'');
         });
     }
     

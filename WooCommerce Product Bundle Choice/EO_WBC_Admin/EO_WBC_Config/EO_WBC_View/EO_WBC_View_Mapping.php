@@ -22,6 +22,18 @@
         }
         return $category_option_list;
     }   
+
+    function eo_wbc_attributes()
+    {
+        $taxonomies="";
+        foreach (wc_get_attribute_taxonomies() as $attribute) {                     
+            $taxonomies.="<option disabled='disabled' value='".$attribute->attribute_id."'>".$attribute->attribute_label."</option>";
+            foreach (get_terms(wc_attribute_taxonomy_name($attribute->attribute_name)) as $term){
+                $taxonomies.="<option value='".$term->term_id."'>-- ".$term->name."</option>";   
+            }
+        }
+        return $taxonomies;
+    }
 ?>
 <form name="eo_wbc_remove_frm" action="<?php echo admin_url('admin.php?page=eo-wbc-map'); ?>" method="post">
 	<?php wp_nonce_field('eo_wbc_nonce_remove_map'); ?>
@@ -43,6 +55,7 @@
         <p><a href="https://wordpress.org/support/plugin/woo-bundle-choice" target="_blank">If you are facing any issue, please write to us immediately.</a></p>
 	<br/>
 	<hr/>
+
     <br/>
     <form action="<?php echo admin_url('admin.php?page=eo-wbc-map'); ?>" method="post">
     			<?php wp_nonce_field('eo_wbc_nonce_add_map'); ?>
@@ -68,9 +81,9 @@
                     ?>
                     	<tr class="alternate">
                             <td class="check-column"></td>                        
-                            <td class="column-columnname num"><?php echo get_term_by('id',$map['first_cat_id'],'product_cat')->name;?></td>
+                            <td class="column-columnname num"><?php echo get_term_by('term_taxonomy_id',$map['first_cat_id'],'category')->name;?></td>
                             <td class="column-columnname num"><-------------------></td>
-                            <td class="column-columnname num"><?php echo get_term_by('id',$map['second_cat_id'],'product_cat')->name;?></td>
+                            <td class="column-columnname num"><?php echo get_term_by('term_taxonomy_id',$map['second_cat_id'],'category')->name;?></td>
                             <td class="column-columnname num"><a href="#" onclick="eo_wbc_remove_map('<?php echo $map['first_cat_id']; ?>','<?php echo $map['second_cat_id'] ?>')">Remove</a></td>                       
                     	</tr>                    
                     <?php  endforeach; else: ?>
@@ -103,14 +116,18 @@
                         <th class="check-column"></th>                            
                         <th class="manage-column column-columnname num" scope="col">
                                 <select name="eo_wbc_first_category" id="eo_wbc_first_category">
-            						<?php echo eo_wbc_prime_category(get_option('eo_wbc_first_slug'),'') ?>
+                                    <option disabled="disabled">Category</option>
+            						<?php echo eo_wbc_prime_category(get_option('eo_wbc_first_slug'),' -- ') ?>
+                                    <?php echo eo_wbc_attributes(); ?>
             					</select>
             					<p class="info">( Select sub-category from first category. )</p>
     					</th>
                         <th class="manage-column column-columnname num" scope="col"><-------------------></th>
                         <th class="manage-column column-columnname num" scope="col">
                             	<select name="eo_wbc_second_category" id="eo_wbc_second_category">
-        							<?php echo eo_wbc_prime_category(get_option('eo_wbc_second_slug'),'') ?>
+                                    <option disabled="disabled">Category</option>
+        							<?php echo eo_wbc_prime_category(get_option('eo_wbc_second_slug'),' -- ') ?>
+                                    <?php echo eo_wbc_attributes(); ?>
         						</select>            						
         						<p class="info">( Select sub-category from second category. )</p>
                         </th>                            
@@ -120,6 +137,11 @@
            </table>
     </form>    
 </div>
+<?php
+    /*var_dump(get_term_by('term_taxonomy_id',17,'category')); 
+                            if($ob->taxonomy=='product_cat') //its product category
+    var_dump(get_term_by('term_taxonomy_id',25,'category')); // else its attribute*/
+?>
 <script type="text/javascript">
 	function eo_wbc_remove_map(first,second)
 	{

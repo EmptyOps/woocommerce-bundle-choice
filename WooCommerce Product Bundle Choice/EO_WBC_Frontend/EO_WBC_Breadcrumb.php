@@ -20,21 +20,21 @@ class EO_WBC_Breadcrumb
         $html.='<li';
         if($step>=3){ $html.=' class="active"'; }
         
-        $html.='><div><span class="step">3 </span>&nbsp;<span class="step-name">'.(get_option('eo_wbc_collection_title')?get_option('eo_wbc_collection_title'):"Preview").'</span><div></li></div>';        
+        $html.='><div><span class="step">3 </span><span class="step-name">'.(get_option('eo_wbc_collection_title')?get_option('eo_wbc_collection_title'):"Preview").'</span><div></li></div>';        
         return $html;             
     }
     private static function eo_wbc_breadcumb_first_html($step,$order)
     {
         $html='<li';
         if($step>=$order){ $html.=' class="active"';}
-        $html.='><div><span class="step">'.$order.' </span>&nbsp;<span class="step-name">'.get_option('eo_wbc_first_name').'</span></div></li>';
+        $html.='><div><span class="step">'.$order.' </span><span class="step-name">'.get_option('eo_wbc_first_name').'</span></div></li>';
         return $html;
     }
     private static function eo_wbc_breadcumb_second_html($step,$order)
     {
         $html='<li';
         if($step>=$order){ $html.=' class="active"';}
-        $html.='><div><span class="step">'.$order.' </span>&nbsp;<span class="step-name">'.get_option('eo_wbc_second_name').'</span></div></li>';
+        $html.='><div><span class="step">'.$order.' </span><span class="step-name">'.get_option('eo_wbc_second_name').'</span></div></li>';
         return $html;
     }
 }

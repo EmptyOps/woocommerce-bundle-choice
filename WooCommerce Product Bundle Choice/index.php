@@ -3,11 +3,11 @@
 * Plugin Name: Woocommerce Bundle Choice
 * Plugin URI: https://wordpress.org/plugins/woocommerce-bundle-choice/
 * Description: An E-Commerce tool that let your customer's buy product in a set and create map that relates between your product categories.
-* Version: 0.1.4
+* Version: 0.1.5
 * Author: emptyopssphere
 * Author URI: https://profiles.wordpress.org/emptyopssphere
 * Requires at least: 3.5
-* Tested up to: 5.0.3
+* Tested up to: 5.1
 * License: GPLv3+
 * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 */

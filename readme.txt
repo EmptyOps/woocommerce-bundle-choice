@@ -2,9 +2,9 @@
 Contributors: emptyopssphere
 Tags: woocommerce,product bundle,product bundles,woocommerce product bundles,bundles,bundle,woo,woocommerce product bundle
 Requires at least: 3.5
-Tested up to: 5.0.3
+Tested up to: 5.1
 Requires PHP: 5.3
-Stable tag: 0.1.4
+Stable tag: 0.1.5
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -43,7 +43,7 @@ If you are interested in our plugin, click [here](http://101.53.136.134/apps/yc_
 
 = Compatibility with other plugins/Officially tested plugins =
 
-We have tested WooCommerce Product Bundle Choice with Wordpress 3.5 to 5.0.3 and WooCommerce 2.0 to 3.5.3 and our plugin is technically compatible with all the other plugins.
+We have tested WooCommerce Product Bundle Choice with Wordpress 3.5 to 5.1 and WooCommerce 2.0 to 3.5.3 and our plugin is technically compatible with all the other plugins.
 
 = Live Demo  =
 
@@ -131,7 +131,7 @@ No, you can use the  WooCommerce Product Bundle Choice for free forever.
 We follow all the best WordPress security practices. Plus it is open source, so we will have a large community looking out for potential weaknesses when it comes to your data.
             
 = With which WordPress version this Plugin is compatible? =
-  It is compatible from 3.5 to 5.0.3 WordPress version.
+  It is compatible from 3.5 to 5.1 WordPress version.
            
 = Where can I report bugs or contribute to the project? =
  Bugs can be reported either in our support forum or preferably on the WooCommerce Product Bundle Choice Choice [GitHub repository](https://github.com/EmptyOps/woocommerce-bundle-choice). 

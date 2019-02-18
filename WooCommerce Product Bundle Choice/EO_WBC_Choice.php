@@ -88,7 +88,7 @@ class EO_WBC_Choice{
             add_action('template_redirect',function(){
                 
                 //Start session by saving cookie if not available.
-                if(!wc()->session->has_session())
+                if(!isset( $_COOKIE[ $this->_cookie ] ) || $this->_has_cookie || is_user_logged_in())
                 {
                     wc()->session->set_customer_session_cookie(TRUE);
                 }
