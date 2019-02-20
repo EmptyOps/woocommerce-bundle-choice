@@ -75,12 +75,13 @@ class EO_WBC_Product
         $url=null;        
         $category=$this->eo_wbc_get_category();
         if(sanitize_text_field($_GET['STEP'])==1)
-        {            
-            $cart=sanitize_text_field($_GET['CART']);
+        {   
+            $cart=isset($_GET['CART'])?sanitize_text_field($_GET['CART']):NULL;
             if(isset($_GET['REDIRECT']) && sanitize_text_field($_GET['REDIRECT'])==1 
                 &&
               isset($_GET['CART']) && !empty($cart)) 
             {                                
+
                 //if redirec signal is set and cart data are ready then
                 //relocate user to target path.
                 if($category==get_option('eo_wbc_first_slug')){
@@ -196,14 +197,16 @@ class EO_WBC_Product
         $tax=array();//array to hold taxonomy slugs
         foreach ($category as $term_id)
         {
-            $term_object=get_term_by('term_taxonomy_id',$term_id,'category');            
-            if($term_object->taxonomy=='product_cat'){
-                $cat[]=$term_object->term_id;
-            }
-            else
-            {
-                $tax[]=$term_object->term_id;                                   
-            }
+            $term_object=get_term_by('term_taxonomy_id',$term_id,'category');
+            if(!empty($term_object)){
+                if($term_object->taxonomy=='product_cat'){
+                    $cat[]=$term_object->term_id;
+                }
+                else
+                {
+                    $tax[]=$term_object->term_id;                                   
+                }
+            }                        
         }
         $link='';
 
@@ -230,8 +233,10 @@ class EO_WBC_Product
             
             $filter_query=array();
             foreach ($tax as $tax_id) {
-                $term_object=get_term_by('term_taxonomy_id',$tax_id,'category');                
-                $filter_query[str_replace('pa_','',$term_object->taxonomy)][]=$term_object->slug;
+                $term_object=get_term_by('term_taxonomy_id',$tax_id,'category');  
+                if(!empty($term_object)){
+                    $filter_query[str_replace('pa_','',$term_object->taxonomy)][]=$term_object->slug;    
+                }                             
             }            
 
             foreach ($filter_query as $filter_name => $filters) {

@@ -11,30 +11,35 @@ class EO_WBC_View_Order
       add_action('wp_head',function(){
            ?>
             <style>
-                .eo_wbc_column-2{
-                  float: left;
-                  width: 330px;
-                  padding: 0px;
-                }
-                .eo_wbc_column-1{
-                  float: left;
-                  width:calc(100%-330px);
-                  padding: 0px;
+                .eo_wbc_column-2{                 
+                  width: 300px;
                 }
                 
+                .eo_wbc_column-1{                  
+                  width:300px;                  
+                }
+
+                .eo_wbc_column-2,.eo_wbc_column-1{
+                  float: left;
+                  padding: 0px;
+                  font-size: small;
+                  padding-right: 15px;
+                  padding-bottom: 15px;                
+                  box-sizing: border-box;                  
+                  max-width: 200px;
+                }
+
                 /* Clear floats after image containers */
                 .eo_wbc_row::after {
                   content: "";
                   clear: both;
                   display: table;
-                }
+                }                
                 @media screen and (max-width: 500px) {
-                  .eo_wbc_column-2{
+                  
+                  .eo_wbc_column-2,.eo_wbc_column-1{
                     width: 100%;
-                  }
-                  .eo_wbc_column-1{
-                    width: 100%;
-                  }
+                  }                  
                 }
             </style>
            <?php  
@@ -73,25 +78,25 @@ class EO_WBC_View_Order
         $price=0;
         $row="<tr>".
             "<td class=\'eo_wbc_row\'>".
-            "<span class=\'eo_wbc_column-2\'>".
-            EO_WBC_Support::eo_wbc_get_product($set[0][0])->get_image("thumbnail");
+              "<span class=\'eo_wbc_column-1\'>".
+                  EO_WBC_Support::eo_wbc_get_product($set[0][0])->get_image("thumbnail").
+                  "&nbsp;&nbsp;<p>".EO_WBC_Support::eo_wbc_get_product($set[0][0])->get_title().($set[0][2]  ? "<br/>&nbsp; -&nbsp;".implode(',',EO_WBC_Support::eo_wbc_get_product_variation_attributes($set[0][2])):'')."&nbsp;X&nbsp;{$set[0][1]}</p>";
+                    $price+=get_post_meta($set[0][2]?$set[0][2]:$set[0][0],'_price',TRUE)*$set[0][1];
+                              
         if($set[1]){
-           $row.="&nbsp;&nbsp;".EO_WBC_Support::eo_wbc_get_product($set[1][0])->get_image("thumbnail");
-        }
-        
-        $row.="</span><span class=\'eo_wbc_column-1\'><p>".EO_WBC_Support::eo_wbc_get_product($set[0][0])->get_title().($set[0][2]  ? "<br/>&nbsp; -&nbsp;".implode(',',EO_WBC_Support::eo_wbc_get_product_variation_attributes($set[0][2])):'')."&nbsp;X&nbsp;{$set[0][1]}</p>";
-        $price+=get_post_meta($set[0][2]?$set[0][2]:$set[0][0],'_price',TRUE)*$set[0][1];
-        if($set[1]){
-            $row.="<p>".EO_WBC_Support::eo_wbc_get_product($set[1][0])->get_title().($set[1][2]  ? "<br/>&nbsp; -&nbsp;".implode(',',EO_WBC_Support::eo_wbc_get_product_variation_attributes($set[1][2])):'')."&nbsp;X&nbsp;{$set[1][1]}</p>";
+           $row.="</span><span class=\'eo_wbc_column-2\'>".
+                EO_WBC_Support::eo_wbc_get_product($set[1][0])->get_image("thumbnail").
+                "&nbsp;&nbsp;<p>".EO_WBC_Support::eo_wbc_get_product($set[1][0])->get_title().($set[1][2]  ? "<br/>&nbsp; -&nbsp;".implode(',',EO_WBC_Support::eo_wbc_get_product_variation_attributes($set[1][2])):'')."&nbsp;X&nbsp;{$set[1][1]}</p>";
             $price+=get_post_meta($set[1][2]?$set[1][2]:$set[1][0],'_price',TRUE)*$set[1][1];
         }
-         
+        
         $row.="</span>".
             "</td>".
-            "<td style=\"min-width:auto;\">".
-            "<p>".get_woocommerce_currency_symbol(get_option('woocommerce_currency'))." ".($price)."</p>".
-            "</td>".
+              "<td style=\"min-width:auto;\">".
+                "<p>".get_woocommerce_currency_symbol(get_option('woocommerce_currency'))." ".($price)."</p>".
+              "</td>".
             "</tr>";
+
         return $row;
     }
 }

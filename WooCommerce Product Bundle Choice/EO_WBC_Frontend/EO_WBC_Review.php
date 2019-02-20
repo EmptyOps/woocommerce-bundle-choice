@@ -186,7 +186,7 @@ class EO_WBC_Review
             return EO_WBC_Breadcrumb::eo_wbc_add_breadcrumb(sanitize_text_field($_GET['STEP']),sanitize_text_field($_GET['BEGIN'])).'<br/><br/>'.do_shortcode('[product_page id="'.$_GET['FIRST'].'"]').do_shortcode('[product_page id="'.$_GET['SECOND'].'"]').'<form action="" method="post" class="woocommerce" style="float:right;">
                         <input type="hidden" name="add_to_cart" value=1>
                         <button class="checkout-button button alt wc-forward">Add This To Cart</button>
-            </form>';
+            </form><style>@media only screen and (max-width: 600px) {.checkout-button.button.alt.wc-forward{ display:grid;position: relative;margin: auto; } }.woocommerce div.product .product_title{ font-size: 1em !important;}</style>';
        });
         remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
         remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_upsell_display', 15 );
@@ -206,13 +206,13 @@ class EO_WBC_Review
                 WC()->session->set('TMP_EO_WBC_SETS',WC()->session->get('EO_WBC_SETS'));
             }
             $set=WC()->session->get('TMP_EO_WBC_SETS');
-            if($post->ID==$set['FIRST'][0])
+            if(!empty($set['FIRST'][0]) && $post->ID==$set['FIRST'][0])
             {
                 _e(get_woocommerce_currency_symbol(get_option('woocommerce_currency'))." ".
                                 get_post_meta($set['FIRST'][2]?$set['FIRST'][2]:$set['FIRST'][0],'_price',TRUE).
                                 "&nbsp;X&nbsp;".$set['FIRST'][1]);    
             }
-            elseif ($post->ID==$set['SECOND'][0]) {
+            elseif(!empty($set['SECOND'][0]) && $post->ID==$set['SECOND'][0]) {
                 _e(get_woocommerce_currency_symbol(get_option('woocommerce_currency'))." ".
                                 get_post_meta($set['SECOND'][2]?$set['SECOND'][2]:$set['SECOND'][0],'_price',TRUE).
                                 "&nbsp;X&nbsp;".$set['SECOND'][1]);    

@@ -152,6 +152,16 @@ class EO_WBC_Cart{
         add_action('woocommerce_before_cart_contents',function(){
             ?>
             	<style>
+                    tr.cart_item
+                    {
+                        display: none;
+                    }
+                    
+                    [name="update_cart"]
+                    {
+                        display: none !important;   
+                    }
+
                     table.cart img{
                         width: 150px !important;
                         height: auto !important;
@@ -167,6 +177,33 @@ class EO_WBC_Cart{
                       clear: both;
                       display: table;
                     }
+                    .shop_table{
+                        font-size: medium; 
+                        text-align: left !important;                                             
+                    }
+                    .woocommerce table.shop_table th
+                    {                        
+                        padding-right: 2em !important;                        
+                    }
+                    #eo_wbc_extra_btn a{
+                        margin-bottom: 2em;
+                    }
+                    #eo_wbc_extra_btn::after{
+                        content: '\A';
+                        white-space: pre;                         
+                    }
+                    @media screen and (max-width: 720px) {
+                        td[data-title="Thumbnail"] {
+                            display: flex !important;
+                        }
+                        span.column::before{
+                            content: '\A\A';
+                            white-space: pre;
+                        }
+                        #eo_wbc_extra_btn{
+                            display: grid;
+                        }                                             
+                    }                    
                 </style>
             <?php 
             $maps=(WC()->session->get('EO_WBC_MAPS'));            
@@ -180,8 +217,8 @@ class EO_WBC_Cart{
             // 1 Continue Shopping
             // 2 Empty Cart
             add_action('woocommerce_after_cart_table',function(){
-                echo '<div style="float:right;"><a href="'.get_bloginfo('url').'" class="checkout-button button alt wc-backword">Continue Shopping</a>
-              <a href="./?EO_WBC=1&empty_cart=1" class="checkout-button button alt wc-backword">Empty Cart</a></div><div style="clear:both;"><br/><br/></div>';
+                echo '<div style="float:right;" id="eo_wbc_extra_btn"><a href="'.get_bloginfo('url').'" class="checkout-button button alt wc-backword">Continue Shopping</a><br style="display:none;" />
+              <a href="./?EO_WBC=1&empty_cart=1" class="checkout-button button alt wc-backword">Empty Cart</a></div><div style="clear:both;"></div>';
             });
     }
     private function eo_wbc_cart_ui($index,$cart)
@@ -190,16 +227,16 @@ class EO_WBC_Cart{
         $second=$cart['SECOND']?EO_WBC_Support::eo_wbc_get_product($cart['SECOND'][0]):FALSE;
         ?>
 		<tr>
-			<td>
+			<td data-title="">
 				<a href="?EO_WBC=1&EO_WBC_REMOVE=<?php echo $index;?>" class="remove" aria-label="Remove this item" >&times;</a> 									
 			</td>
-			<td class="row">
+			<td class="row" data-title="Thumbnail">
 				<span class="column"><?php echo $first->get_image('thumbnail'); ?></span>
 				<?php if($cart['SECOND']):?>						
 				<span class="column"><?php echo $second->get_image('thumbnail'); ?></span>
 				<?php endif; ?>
 			</td>
-			<td>			
+			<td data-title="Product">			
 				<p><?php _e($first->get_title().
 				    ($cart['FIRST'][2]  ? "<br/>&nbsp; - &nbsp;".implode(',',EO_WBC_Support::eo_wbc_get_product_variation_attributes($cart['FIRST'][2])) :'')); ?></p>			
 			
@@ -208,7 +245,7 @@ class EO_WBC_Cart{
 				       ($cart['SECOND'][2] ? "<br/>&nbsp; - &nbsp;".implode(',',EO_WBC_Support::eo_wbc_get_product_variation_attributes($cart['SECOND'][2])):'')); ?></p>
 				<?php endif; ?>                               	
 			</td>
-			<td>				
+			<td data-title="Price">				
 				<p><?php _e(get_woocommerce_currency_symbol(get_option('woocommerce_currency'))." ".get_post_meta($cart['FIRST'][2]?$cart['FIRST'][2]:$cart['FIRST'][0],'_price',TRUE));?></p>
 				<?php $price=(get_post_meta($cart['FIRST'][2]?$cart['FIRST'][2]:$cart['FIRST'][0],'_price',TRUE)*$cart['FIRST'][1]); ?>
 			
@@ -218,13 +255,13 @@ class EO_WBC_Cart{
 					<?php $price+=(get_post_meta($cart['SECOND'][2]?$cart['SECOND'][2]:$cart['SECOND'][0],'_price',TRUE)*$cart['SECOND'][1]); ?>
 				<?php endif; ?>				
 			</td>
-			<td>
-				<p style="text-align: center;"><?php _e($cart['FIRST'][1]); ?></p>
+			<td data-title="Quantity">
+				<p><?php _e($cart['FIRST'][1]); ?></p>
 				<?php if($cart['SECOND']):?>
-				<p style="text-align: center;"><?php _e($cart['SECOND'][1]); ?></p>
+				<p><?php _e($cart['SECOND'][1]); ?></p>
 				<?php endif; ?>
 			</td>
-			<td>
+			<td data-title="Cost">
 				<p><?php _e(get_woocommerce_currency_symbol(get_option('woocommerce_currency'))." ".$price); ?></p>
 			</td>								
 		</tr>

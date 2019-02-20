@@ -54,6 +54,33 @@ function eo_wbc_admin_config_category_options()
         color:grey;
         font-style: italic;
     }
+    fieldset{
+        border: 1px solid black;
+    }
+    @media only screen and (max-width: 600px) {
+        #wpwrap input,select,tr{
+           display: grid !important;        
+        }
+        table,input,select{
+            width: 100%;
+        }
+    }
+    legend{
+        font-size: larger;
+        font-weight: bold;
+        margin: 3px;
+        background-color:rgb(255,255,255);
+    }
+    fieldset{
+        padding: 10px;
+        border-radius: 3px;
+    }
+    #form_ui table,input,select{
+        width: -webkit-fill-available;
+    }
+    tr{
+        vertical-align: initial;
+    }    
 </style>
 <div class="wrap woocommerce">
 <h1></h1>
@@ -65,183 +92,186 @@ function eo_wbc_admin_config_category_options()
     <hr/>    
     <form action="" method="post">
     <?php wp_nonce_field('eo_wbc_nonce_config'); ?>
-    <input type="hidden" name="eo_wbc_action" value="eo_wbc_save_config">
-    
-    <table cellspacing="30">
+    <input type="hidden" name="eo_wbc_action" value="eo_wbc_save_config">    
+    <table id="form_ui">
     	<tbody>
             <tr>
                 <th colspan="2" style="text-align: left;"><h2><u>Choice Buttons Configuration</u></h2></th>
             </tr>
-            <tr>
+            <tr>               
                 <td>
-                    <h3>Buttons Configuration</h3>
-                    <span class="info">( Set custom position of choice buttons. )</span>
-                </td>
-                <td>
-                    <table cellspacing="30">
-                        <tr>
-                            <td><strong>Setting</strong></td>
-                            <td>
-                                <div>
-                                    <select name="eo_wbc_btn_setting" style="width: 100%;">
-                                        <option value="0" selected="selected">Default</option>
-                                        <option value="1">Shortcode</option>
-                                    </select>
-                                </div>
-                                <span class="info">( Choose type of setup.<br/>&nbsp;Default : non-technical users.<br/>&nbsp;Shortcode : technical users only. )</span>
-                            </td>                        
-                        </tr>
-                        <tr class="eo_wbc_btn_setting_position_toggle">
-                            <td>
-                                <strong>Position</strong>
-                                <div class="eo_wbc_position_toggle" hidden="hidden">
-                                    <br/>                                    
-                                    <p>&nbsp;</p>                                  
-                                </div>                                
-                            </td>                           
-                            <td>
-                                <select name='eo_wbc_btn_position' style="width: 100%;">
-                                    <option value="begining" selected="selected">Begining</option>
-                                    <option value="middle">Middle</option>
-                                    <option value="end">End</option>
-                                    <option value="2">After 1st section</option>
-                                    <option value="3">After 2nd section</option>
-                                    <option value="4">After 3rd section</option>
-                                    <option value="5">After 4th section</option>
-                                    <option value="6">After 5th section</option>
-                                    <option value="7">After 6th section</option>
-                                    <option value="8">After 7th section</option>
-                                    <option value="9">After 8th section</option>                                    
-                                    <option value="10">After 9th section</option>
-                                    <option value="hide">Hide on home page</option>
-                                </select>                                
-                                <span class="info">( Position of buttons on your home page. )</span>
-                            </td>
-                        </tr>                        
-                    </table>
+                    <fieldset>
+                        <legend>Buttons Configuration</legend>
+                        <span class="info">( Set custom position of choice buttons. )</span>
+                        <hr/>
+                        <table>
+                            <tr>
+                                <td><strong>Setting</strong></td>
+                                <td>
+                                    <div>
+                                        <select name="eo_wbc_btn_setting" style="width: 100%;">
+                                            <option value="0" selected="selected">Default</option>
+                                            <option value="1">Shortcode</option>
+                                        </select>
+                                    </div>
+                                    <span class="info">( Choose type of setup.<br/>&nbsp;Default : non-technical users.<br/>&nbsp;Shortcode : technical users only. )</span>
+                                </td>                        
+                            </tr>
+                            <tr class="eo_wbc_btn_setting_position_toggle">
+                                <td>
+                                    <strong>Position</strong>
+                                    <div class="eo_wbc_position_toggle" hidden="hidden">
+                                        <br/>                                    
+                                        <p>&nbsp;</p>                                  
+                                    </div>                                
+                                </td>                           
+                                <td>
+                                    <select name='eo_wbc_btn_position' style="width: 100%;">
+                                        <option value="begining" selected="selected">Begining</option>
+                                        <option value="middle">Middle</option>
+                                        <option value="end">End</option>
+                                        <option value="2">After 1st section</option>
+                                        <option value="3">After 2nd section</option>
+                                        <option value="4">After 3rd section</option>
+                                        <option value="5">After 4th section</option>
+                                        <option value="6">After 5th section</option>
+                                        <option value="7">After 6th section</option>
+                                        <option value="8">After 7th section</option>
+                                        <option value="9">After 8th section</option>                                    
+                                        <option value="10">After 9th section</option>
+                                        <option value="hide">Hide on home page</option>
+                                    </select>                                
+                                    <span class="info">( Position of buttons on your home page. )</span>
+                                </td>
+                            </tr>                        
+                        </table>
+                    </fieldset>                    
                 </td>                
             </tr>
             <tr>
                 <th colspan="2" style="text-align: left;"><h2><u>Navigation & Product Category</u></h2></th>
             </tr>
-    		<tr>
+    		<tr>    			
     			<td>
-    				<h3>First Category</h3>
-    				<span class="info">( The first of any two product that would you like to present. )</span>
-    			</td>    			
-    			<td>
-    				<table cellspacing="30">
-    					<tr>    				
-    						<td>
-    							<strong>Name</strong>    							   							
-    						</td>
-    						<td>
-	    						<select name='eo_wbc_first_name' onChange="nameChanged('first',this)" style="width: 100%;">
-    							<?php 
+                    <fieldset>
+                        <legend>First Category</legend>                        
+                        <span class="info">( The first of any two product that would you like to present. )</span>                        
+                        <hr/>
+                        <table>
+                        <tr>                    
+                            <td>
+                                <strong>Name</strong>                                                           
+                            </td>
+                            <td>
+                                <select name='eo_wbc_first_name' onChange="nameChanged('first',this)" style="width: 100%;">
+                                <?php 
                                     foreach ($cat_name as $name)
                                     {
                                         echo "<option name='".$name."'>".$name."</option>";
                                     }
-    						      ?>
-    							</select>
-    							<span class="info">( Name to your first category. )</span>
-    						</td>
-    					</tr>
-    					<tr>
-    						<td>
-    							<strong>Slug</strong>    							
-    						</td>    						
-    						<td>
-  								<select name='eo_wbc_first_slug' onChange="slug2url('first',this)" style="width: 100%;">
-            						<?php 
+                                  ?>
+                                </select>
+                                <span class="info">( Name to your first category. )</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Slug</strong>                               
+                            </td>                           
+                            <td>
+                                <select name='eo_wbc_first_slug' onChange="slug2url('first',this)" style="width: 100%;">
+                                    <?php 
                                         foreach ($cat_slug as $slug)
                                         {
                                             echo "<option name='".$slug."'>".$slug."</option>";
                                         }
-            						?>
-            					</select>
-            					<span class="info">( Optional! slug is url friendly name. )</span>    						
-    						</td>
-    					</tr>
-    					<tr>
-    						<td><strong>URL</strong></td>
-    						<td>
-  								<div><input type="text" width="100%" size=50 placeholder="relative url of first product" 
-    									name="eo_wbc_first_url" value="<?php echo get_option("eo_wbc_first_url") ?>"></div>    									
-    							<span class="info">( Optional! Set SEO friendly url of your like. )</span>    						
-    						</td>
-    					</tr>    					 					
-    				</table>
-    				<hr/>
+                                    ?>
+                                </select>
+                                <span class="info">( Optional! slug is url friendly name. )</span>                          
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>URL</strong></td>
+                            <td>
+                                <div><input type="text" width="100%" size=30 placeholder="relative url of first product" 
+                                        name="eo_wbc_first_url" value="<?php echo get_option("eo_wbc_first_url") ?>"></div>                                     
+                                <span class="info">( Optional! Set SEO friendly url of your like. )</span>                          
+                            </td>
+                        </tr>                                           
+                    </table>
+                    </fieldset>    				
+    				<br/><hr/><br/>
     			</td>
     		</tr>
     		<tr>
     			<td>
-    				<h3>Second Category</h3>
-    				<span class="info">( The second of any two product that would you like to present. )</span>
-    			</td>
-    			<td>
-        			<table cellspacing="30">
-        					<tr>    				
-        						<td><strong>Name</strong></td>
-        						<td>
-    	    						<select name='eo_wbc_second_name' onChange="nameChanged('second',this)" style="width: 100%;">
-                						<?php 
+                    <fieldset>
+                        <legend>Second Category</legend>
+                        <span class="info">( The second of any two product that would you like to present. )</span>
+                        <hr/>
+                        <table>
+                            <tr>                    
+                                <td><strong>Name</strong></td>
+                                <td>
+                                    <select name='eo_wbc_second_name' onChange="nameChanged('second',this)" style="width: 100%;">
+                                        <?php 
                                             foreach ($cat_name as $name)
                                             {
                                                 echo "<option name='".$name."'>".$name."</option>";
                                             }
-                						?>
-                					</select>
-                					<span class="info">( Name to your second category. )</span>
-        						</td>
-        					</tr>
-        					<tr>
-        						<td><strong>Slug</strong></td>
-        						<td>
-      								<select name='eo_wbc_second_slug' onChange="slug2url('second',this)" style="width: 100%;">
-                						<?php 
+                                        ?>
+                                    </select>
+                                    <span class="info">( Name to your second category. )</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Slug</strong></td>
+                                <td>
+                                    <select name='eo_wbc_second_slug' onChange="slug2url('second',this)" style="width: 100%;">
+                                        <?php 
                                             foreach ($cat_slug as $slug)
                                             {
                                                 echo "<option name='".$slug."'>".$slug."</option>";
                                             }
-                						?>
-                					</select> 
-                					<span class="info">( Optional! slug is url friendly name. )</span>  						
-        						</td>
-        					</tr>
-        					<tr>
-        						<td><strong>URL</strong></td>
-        						<td>
-      								<div><input type="text" width="100%" size=50 placeholder="relative url of second product" 
-    									name="eo_wbc_second_url" value="<?php echo get_option("eo_wbc_second_url") ?>"></div>    							
-    								<p class="info">( Optional! Set SEO friendly url of your like )</p> 						
-        						</td>
-        					</tr>        					    					
-        				</table>
-        				<hr/>
+                                        ?>
+                                    </select> 
+                                    <span class="info">( Optional! slug is url friendly name. )</span>                          
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>URL</strong></td>
+                                <td>
+                                    <div><input type="text" width="100%" size=30 placeholder="relative url of second product" 
+                                        name="eo_wbc_second_url" value="<?php echo get_option("eo_wbc_second_url") ?>"></div>                               
+                                    <p class="info">( Optional! Set SEO friendly url of your like )</p>                         
+                                </td>
+                            </tr>                                                   
+                        </table>
+                    </fieldset>
+                    <br/><hr/><br/>
     			</td>
     		</tr>
-    		<tr>
+    		<tr>    			
     			<td>
-    				<h3>Preview</h3>
-    				<span class="info">( The final result of first category and second category. )</span>
-    			</td>
-    			<td>
-    				<table cellspacing="30">
-        					<tr>    				
-        						<td><strong>Name</strong></td>
-        						<td>
-    	    						<input type="text" name="eo_wbc_collection_title" value="<?php
-                            					
-                            					    echo get_option('eo_wbc_collection_title')?get_option('eo_wbc_collection_title'):"Preview";
-                            										          					
-                    					?>" placeholder="Title of third step" style="width: 100%;" required="required">
-                    				<span class="info">( Name to combination of two categories. )</span>
-        						</td>
-        					</tr>        					    					
-        			</table>
-        			<hr/>
+                    <fieldset>
+                        <legend>Preview</legend>
+                        <span class="info">( The final result of first category and second category. )</span>
+                        <hr/>
+                        <table>
+                            <tr>                    
+                                <td><strong>Name</strong></td>
+                                <td>
+                                    <input type="text" name="eo_wbc_collection_title" value="<?php
+                                                
+                                                    echo get_option('eo_wbc_collection_title')?get_option('eo_wbc_collection_title'):"Preview";
+                                                                                                
+                                        ?>" placeholder="Title of third step" style="width: 100%;" required="required">
+                                    <span class="info">( Name to combination of two categories. )</span>
+                                </td>
+                            </tr>                                                   
+                        </table>
+                    </fieldset>    				
+        			<br/><hr/><br/>
     			</td>
     		</tr>	
 			<tr>

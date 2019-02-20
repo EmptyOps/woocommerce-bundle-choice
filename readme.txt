@@ -4,7 +4,7 @@ Tags: woocommerce,product bundle,product bundles,woocommerce product bundles,bun
 Requires at least: 3.5
 Tested up to: 5.1
 Requires PHP: 5.3
-Stable tag: 0.1.5
+Stable tag: 0.1.6
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -151,6 +151,10 @@ Please go through our [installation guide](http://101.53.136.134/apps/yc_plugin/
 3. Home page after plugin fully configured.
 
 == Changelog ==
+= 0.1.6 (February 20, 2019) =
+  **UI Upgraded**. Adopted Mobile First Approach.
+= 0.1.5 (February 18, 2019) =
+  **Bug Fix**. Improved routing based on product attributes.
 = 0.1.4 (February 05, 2019) =
   **Frontend Upgrade**. Enhanced Routing and Improved GUI
 = 0.1.3 (January 28, 2019) =
@@ -163,13 +167,17 @@ Please go through our [installation guide](http://101.53.136.134/apps/yc_plugin/
   **First Release**. This is the first release of our plugin.
 
 == Upgrade Notice ==
+= 0.1.6 (February 20, 2019) =
+    Adopted Mobile First Approach.
+= 0.1.5 (February 18, 2019) =
+    Improved routing based on product attributes.
 = 0.1.4 =
-   Enhanced Routing and Improved GUI
+    Enhanced Routing and Improved GUI
 = 0.1.3 =
     the admin can now place choice buttons anywhere and on any page.
 = 0.1.2 =
     A user can add Choice Buttons to anywhere on pages.
 = 0.1.1 =
-  Css Improved.
+    Css Improved.
 = 0.1.0 =
     Bug fixes and some improvements.

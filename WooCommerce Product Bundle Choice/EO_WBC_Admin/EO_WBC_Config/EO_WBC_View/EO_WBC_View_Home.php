@@ -132,7 +132,32 @@
           .breadcrumb__step:first-child {
             color: var(--breadcrumb-theme-1);        
           }
-    }       
+    } 
+    @media only screen and (max-width: 782px) {
+        .breadcrumb{
+            display: grid;
+            border-radius: 0px;
+        }
+        .breadcrumb__step::before{
+          top: -10px;
+        }
+        .breadcrumb__step::after{
+          content: '';
+          display:none;
+        }
+        .breadcrumb__step:first-child::before{
+            left: 46px;
+        }
+        .breadcrumb a{
+          height: 16px;
+          border-bottom: 1px solid black;
+          overflow: hidden;
+          padding-top: 5px;
+          padding-bottom: 25px;
+          margin-bottom: 2px;
+          color: var(--breadcrumb-theme-1);
+        }
+    }      
 </style>
 <?php 
   //Footer Rating bar :)

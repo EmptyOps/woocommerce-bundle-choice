@@ -8,7 +8,7 @@ class EO_WBC_Core{
         register_deactivation_hook($this->_eo_wbc_,array(__CLASS__,'eo_wbc_deactivate'));
         register_uninstall_hook($this->_eo_wbc_,array(__CLASS__,'eo_wbc_uninstall'));        
     }
-    public function eo_wbc_activate(){
+    public static function eo_wbc_activate(){
         #Plugin Activation Code
         
         //add category count to hopp on.
@@ -124,12 +124,12 @@ class EO_WBC_Core{
         });
             
     }
-    public function eo_wbc_deactivate(){
+    public static function eo_wbc_deactivate(){
         #Plugin Deactivation Code
         //Plugin Activated
         update_option('eo_wbc_active',"0");
     }
-    public function eo_wbc_uninstall(){
+    public static function eo_wbc_uninstall(){
         #Plugin Uninstall
         
         //Remove category count options.

@@ -47,6 +47,32 @@
         color:grey !important;
         font-style: italic;
     }
+
+    @media only screen and (max-width: 782px) {
+        #add_maps_row{            
+            display: grid !important;        
+        }
+        #add_maps_row th:nth-child(3){            
+            display: none !important;
+        }
+        #add_maps_row th:nth-child(2)::before{            
+            content: "First Product Category \A\A";            
+            display: grid;
+            font-size: medium;
+            font-weight: 600;
+            white-space: pre;
+        }
+        #add_maps_row th:nth-child(4)::before{            
+            content: "Second Product Category \A\A";
+            display: grid;            
+            font-size: medium;
+            font-weight: 600;
+            white-space: pre;
+        }
+        tfoot{
+            display: none;
+        }
+    }
 </style>
 <div class="wrap woocommerce">
 <h1></h1>
@@ -78,11 +104,11 @@
                         $maps=$wpdb->get_results($query,'ARRAY_A');
                         if(count($maps)>0):
                         foreach ($maps as $map):
-                    ?>
+                    ?>                        
                     	<tr class="alternate">
                             <td class="check-column"></td>                        
                             <td class="column-columnname num"><?php echo get_term_by('term_taxonomy_id',$map['first_cat_id'],'category')->name;?></td>
-                            <td class="column-columnname num"><-------------------></td>
+                            <td class="column-columnname num"><----------------------></td>
                             <td class="column-columnname num"><?php echo get_term_by('term_taxonomy_id',$map['second_cat_id'],'category')->name;?></td>
                             <td class="column-columnname num"><a href="#" onclick="eo_wbc_remove_map('<?php echo $map['first_cat_id']; ?>','<?php echo $map['second_cat_id'] ?>')">Remove</a></td>                       
                     	</tr>                    
@@ -112,7 +138,12 @@
             <br/>
             <table class="widefat fixed">
             	<tbody>
-                	<tr>
+                    <tr>
+                        <th class="check-column">&nbsp;</th>
+                        <td colspan="3" style="text-align: center;font-size: larger;font-weight: bold;">Add New Maps</td>
+                        <th class="manage-column column-columnname num">&nbsp;</th>
+                    </tr>
+                	<tr id="add_maps_row">
                         <th class="check-column"></th>                            
                         <th class="manage-column column-columnname num" scope="col">
                                 <select name="eo_wbc_first_category" id="eo_wbc_first_category">
@@ -122,7 +153,7 @@
             					</select>
             					<p class="info">( Select sub-category from first category. )</p>
     					</th>
-                        <th class="manage-column column-columnname num" scope="col"><-------------------></th>
+                        <th class="manage-column column-columnname num" scope="col"><----------------------></th>
                         <th class="manage-column column-columnname num" scope="col">
                             	<select name="eo_wbc_second_category" id="eo_wbc_second_category">
                                     <option disabled="disabled">Category</option>
@@ -137,11 +168,7 @@
            </table>
     </form>    
 </div>
-<?php
-    /*var_dump(get_term_by('term_taxonomy_id',17,'category')); 
-                            if($ob->taxonomy=='product_cat') //its product category
-    var_dump(get_term_by('term_taxonomy_id',25,'category')); // else its attribute*/
-?>
+
 <script type="text/javascript">
 	function eo_wbc_remove_map(first,second)
 	{

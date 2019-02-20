@@ -80,12 +80,12 @@ class EO_WBC_Home
             '}'.
             '@media (min-width: 481px) and (max-width: 767px) {'.
               '.eo_button_container{'.
-                'display: inline-grid;'.
+                'display:grid;'.
               '}'.
             '}'.
             '@media (min-width: 320px) and (max-width: 480px) {'.
              '.eo_button_container{'.
-                'display: inline-grid;'.
+                'display:grid;'.
               '}'.
             '}'.
         '</style>'.        
