@@ -216,10 +216,10 @@ class EO_WBC_Cart{
             // Adding Buttons
             // 1 Continue Shopping
             // 2 Empty Cart
-            add_action('woocommerce_after_cart_table',function(){
+          /*  add_action('woocommerce_after_cart_table',function(){
                 echo '<div style="float:right;" id="eo_wbc_extra_btn"><a href="'.get_bloginfo('url').'" class="checkout-button button alt wc-backword">Continue Shopping</a><br style="display:none;" />
               <a href="./?EO_WBC=1&empty_cart=1" class="checkout-button button alt wc-backword">Empty Cart</a></div><div style="clear:both;"></div>';
-            });
+            });*/
     }
     private function eo_wbc_cart_ui($index,$cart)
     {  
