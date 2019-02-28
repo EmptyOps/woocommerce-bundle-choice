@@ -94,8 +94,10 @@ class EO_WBC_Choice{
                 }
 
                 //Supporting function for older versions of worpress and woocommerce.
-                require_once apply_filters('eo_wbc_front_support','EO_WBC_Frontend/EO_WBC_Support.php',33);
-
+                if(!class_exists('EO_WBC_Support'))       
+                {
+                    require_once apply_filters('eo_wbc_front_support','EO_WBC_Frontend/EO_WBC_Support.php',33);
+                }
                 //Front Page to provide LINK to Select BEGIN WITH PRODUCT
                 if(is_front_page())                    
                 {   
@@ -141,8 +143,7 @@ class EO_WBC_Choice{
                 }
                 
                 //Cart Page to enlist SETS added to the cart
-                if(is_cart())
-                {                
+                if(is_cart()){                
                     if(wc()->session->get("EO_WBC_MAPS",FALSE)){
                         
                         require_once apply_filters('eo_wbc_front_cart','EO_WBC_Frontend/EO_WBC_Cart.php',35);
@@ -151,15 +152,13 @@ class EO_WBC_Choice{
                 }
                 
                 //Checkout page to make payment and confirm order
-                if(is_checkout())
-                {
+                if(is_checkout()){
                     require_once apply_filters('eo_wpc_front_checkout','EO_WBC_Frontend/EO_WBC_Checkout.php',35);
                     new EO_WBC_Checkout();
                 }
                 
                 //Page shown after completion of checkout ie: formated bill & shipping detaiils
-                if(is_order_received_page())
-                {
+                if(is_order_received_page()){
                     require_once apply_filters('eo_wbc_front_order_recived','EO_WBC_Frontend/EO_WBC_Order_Recived.php',35);
                     new EO_WBC_Order_Recived();
                 }
@@ -172,8 +171,7 @@ class EO_WBC_Choice{
                         new EO_WBC_View_Order();
                     }
                 }
-                else
-                {
+                else{
                     if($this->eo_wbc_is_endpoint_url('view-order'))
                     {
                         require_once apply_filters('eo_wbc_front_view_order','EO_WBC_Frontend/EO_WBC_View_Order.php',35);
@@ -185,8 +183,7 @@ class EO_WBC_Choice{
         }
     }
     //Frontend sercive method, to add shortcode functinality and save FG_COLOR to session.
-    private function eo_wbc_front_service()
-    { 
+    private function eo_wbc_front_service(){ 
         //Perform shortcode routine if required.
         add_shortcode('woo-bundle-choice-btn',function(){
             require_once apply_filters('eo_wbc_front_home','EO_WBC_Frontend/EO_WBC_Home.php');               

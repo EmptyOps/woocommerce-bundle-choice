@@ -83,6 +83,7 @@
 	<hr/>
 
     <br/>
+
     <form action="<?php echo admin_url('admin.php?page=eo-wbc-map'); ?>" method="post">
     			<?php wp_nonce_field('eo_wbc_nonce_add_map'); ?>
     			<input type="hidden" name="eo_wbc_action" value="eo_wbc_add_map">
@@ -93,6 +94,7 @@
                     <th class="manage-column column-columnname num" scope="col">First Product Category</th>                        
                     <th class="manage-column column-columnname num" scope="col"></th>
                     <th class="manage-column column-columnname num" scope="col">Second Product Category</th>                        
+                    <th class="manage-column column-columnname num" scope="col">Discount</th>
                     <th class="manage-column column-columnname num" scope="col">Action</th>
                 </tr>
                 </thead>
@@ -103,13 +105,34 @@
                         $query='select * from `'.$wpdb->prefix.'eo_wbc_cat_maps`';
                         $maps=$wpdb->get_results($query,'ARRAY_A');
                         if(count($maps)>0):
-                        foreach ($maps as $map):
+                        foreach ($maps as $map):                            
                     ?>                        
                     	<tr class="alternate">
                             <td class="check-column"></td>                        
-                            <td class="column-columnname num"><?php echo get_term_by('term_taxonomy_id',$map['first_cat_id'],'category')->name;?></td>
-                            <td class="column-columnname num"><----------------------></td>
-                            <td class="column-columnname num"><?php echo get_term_by('term_taxonomy_id',$map['second_cat_id'],'category')->name;?></td>
+                            <td class="column-columnname num">
+                                <?php 
+                                    $first_term=get_term_by('term_taxonomy_id',$map['first_cat_id'],'category');
+                                    echo 
+                                        (empty($first_term)
+                                            ?
+                                        get_term_by('term_taxonomy_id',$map['first_cat_id'],'product_cat')->name
+                                            :
+                                        get_term_by('term_taxonomy_id',$map['first_cat_id'],'category')->name); 
+                                ?>
+                            </td>
+                            <td class="column-columnname num"><------------></td>
+                            <td class="column-columnname num">
+                                <?php 
+                                    $second_term=get_term_by('term_taxonomy_id',$map['second_cat_id'],'category');
+                                    echo 
+                                        (empty($second_term)
+                                            ?
+                                        get_term_by('term_taxonomy_id',$map['second_cat_id'],'product_cat')->name
+                                            :
+                                        get_term_by('term_taxonomy_id',$map['second_cat_id'],'category')->name);
+                                ?>                                
+                            </td>
+                            <td class="column-columnname num"><?php echo $map['discount']?></td>
                             <td class="column-columnname num"><a href="#" onclick="eo_wbc_remove_map('<?php echo $map['first_cat_id']; ?>','<?php echo $map['second_cat_id'] ?>')">Remove</a></td>                       
                     	</tr>                    
                     <?php  endforeach; else: ?>
@@ -130,7 +153,8 @@
                             <th class="check-column"></th>
                             <th class="manage-column column-columnname num" scope="col">First Product Category</th>                            
                             <th class="manage-column column-columnname num" scope="col"></th>
-                            <th class="manage-column column-columnname num" scope="col">Second Product Category</th>                            
+                            <th class="manage-column column-columnname num" scope="col">Second Product Category</th>
+                            <th class="manage-column column-columnname num" scope="col">Discount</th>
                             <th class="manage-column column-columnname num" scope="col">Action</th>            
                     </tr>
                 </tfoot>
@@ -153,7 +177,7 @@
             					</select>
             					<p class="info">( Select sub-category from first category. )</p>
     					</th>
-                        <th class="manage-column column-columnname num" scope="col"><----------------------></th>
+                        <th class="manage-column column-columnname num" scope="col"><-------------></th>
                         <th class="manage-column column-columnname num" scope="col">
                             	<select name="eo_wbc_second_category" id="eo_wbc_second_category">
                                     <option disabled="disabled">Category</option>
@@ -161,7 +185,12 @@
                                     <?php echo eo_wbc_attributes(); ?>
         						</select>            						
         						<p class="info">( Select sub-category from second category. )</p>
-                        </th>                            
+                        </th>
+                        <th class="manage-column column-columnname num" scope="col">
+                                <input type="number" name="eo_wbc_add_discount" min="0" max="100" value="0" step="0" style="text-align: right;"/>
+                                <p class="info">( Discount rate in % )</p>
+                        </th>
+                                                    
                         <th class="manage-column column-columnname num" scope="col"><button class="button button-primary button-hero action" style="float: right">Save New Map</button></th>            
                      </tr>
                  </tbody>

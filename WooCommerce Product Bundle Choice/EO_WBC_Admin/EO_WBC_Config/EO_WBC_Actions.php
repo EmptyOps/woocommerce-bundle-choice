@@ -90,6 +90,7 @@ class EO_WBC_Actions
         
         $eo_wbc_first_category=$_POST['eo_wbc_first_category'];
         $eo_wbc_second_category=$_POST['eo_wbc_second_category'];
+        $eo_wbc_add_discount=$_POST['eo_wbc_add_discount']?$_POST['eo_wbc_add_discount']:0;
         
         if($wpdb->get_var("select * from {$wpdb->prefix}eo_wbc_cat_maps where first_cat_id in ('{$eo_wbc_first_category}','{$eo_wbc_second_category}') and second_cat_id in ('{$eo_wbc_first_category}','{$eo_wbc_second_category}')"))
         {
@@ -99,7 +100,8 @@ class EO_WBC_Actions
         }
         else
         {
-            $wpdb->insert($wpdb->prefix.'eo_wbc_cat_maps',array('first_cat_id'=>$eo_wbc_first_category,'second_cat_id'=>$eo_wbc_second_category),array("%s","%s"));
+            $wpdb->insert($wpdb->prefix.'eo_wbc_cat_maps',array('first_cat_id'=>$eo_wbc_first_category,'second_cat_id'=>$eo_wbc_second_category,'discount'=>$eo_wbc_add_discount.'%'),array("%s","%s","%s"));            
+
             update_option('eo_wbc_config_map',"1");
             add_action( 'admin_notices',function (){
                 echo "<div class='notice notice-success is-dismissible'><p>".__( '<strong>New Map Added Successfully.</strong>', 'woocommerce' )."</p></div>";
@@ -117,7 +119,7 @@ class EO_WBC_Actions
     {       
         global $wpdb;
         $wpdb->delete($wpdb->prefix.'eo_wbc_cat_maps',array('first_cat_id'=>$_POST['eo_wbc_source'],'second_cat_id'=>$_POST['eo_wbc_target']),array('%s','%s'));
-
+        
         $map_count = "select count(*) from ".$wpdb->prefix."eo_wbc_cat_maps";
         $map_count = $wpdb->get_var($map_count);
         if($map_count==0)

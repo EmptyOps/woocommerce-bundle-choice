@@ -71,26 +71,26 @@ class EO_WBC_Product
     }
     
     private function eo_wbc_product_route(){
+
         global $post;
         $url=null;        
         $category=$this->eo_wbc_get_category();
         if(sanitize_text_field($_GET['STEP'])==1)
         {   
-            $cart=isset($_GET['CART'])?sanitize_text_field($_GET['CART']):NULL;
-            if(isset($_GET['REDIRECT']) && sanitize_text_field($_GET['REDIRECT'])==1 
-                &&
-              isset($_GET['CART']) && !empty($cart)) 
-            {                                
 
+            if(!empty($_GET['CART']) && !empty($_GET['REDIRECT']) && sanitize_text_field($_GET['REDIRECT'])==1)
+            {    
                 //if redirec signal is set and cart data are ready then
                 //relocate user to target path.
                 if($category==get_option('eo_wbc_first_slug')){
+
                     $url=get_bloginfo('url').'/product-category/'.$this->eo_wbc_category_link()
                         .'EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
                         .'&STEP=2&FIRST='.$post->ID.'&SECOND='.sanitize_text_field($_GET['SECOND'])
                         ."&CART=".sanitize_text_field($_GET['CART']);
                 }
                 elseif($category==get_option('eo_wbc_second_slug')){
+
                     $url=get_bloginfo('url').'/product-category/'.$this->eo_wbc_category_link()
                         .'EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
                         .'&STEP=2&FIRST='.sanitize_text_field($_GET['FIRST']).'&SECOND='.$post->ID
@@ -113,19 +113,23 @@ class EO_WBC_Product
             }            
         }
         
-        if(sanitize_text_field($_GET['STEP'])==2)
+        elseif(sanitize_text_field($_GET['STEP'])==2)
         {
-            if(sanitize_text_field($_GET['FIRST'])==='')
+            if(sanitize_text_field($_GET['FIRST'])==='' OR $category==get_option('eo_wbc_first_slug'))
             {
                 $url=get_bloginfo('url').get_option('eo_wbc_review_page')
                     .'?EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
                     .'&STEP=3&FIRST='.$post->ID.'&SECOND='.sanitize_text_field($_GET['SECOND']);
             }
-            elseif (sanitize_text_field($_GET['SECOND'])==='')
+            elseif (sanitize_text_field($_GET['SECOND'])==='' OR $category==get_option('eo_wbc_second_slug'))
             {
                 $url=get_bloginfo('url').get_option('eo_wbc_review_page')
                     .'?EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
                     .'&STEP=3&FIRST='.sanitize_text_field($_GET['FIRST']).'&SECOND='.$post->ID;
+            }
+            else
+            {
+                $url='';
             }
         }        
         return $url;

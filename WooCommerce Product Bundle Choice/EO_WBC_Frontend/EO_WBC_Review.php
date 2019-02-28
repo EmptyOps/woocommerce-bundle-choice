@@ -3,10 +3,16 @@ class EO_WBC_Review
 {
     public function __construct()
     {  
+        if(empty($_GET['FIRST']) || empty($_GET['SECOND']))
+        {            
+            exit(wp_redirect(EO_WBC_Support::eo_wbc_get_cart_url()));
+            return;
+        } 
+
         $this->eo_wbc_add_css();    //images style
         $this->eo_wbc_render();    //Page Review cart data
         
-        if(isset($_POST['add_to_cart']) && sanitize_text_field($_POST['add_to_cart'])==1)
+        if( !empty($_POST['add_to_cart']) && sanitize_text_field($_POST['add_to_cart'])==1)
         {
             $this->eo_wbc_add_this_to_cart();
         }
@@ -143,12 +149,13 @@ class EO_WBC_Review
     private function eo_wbc_add_to_cart()
     {
         $cart=base64_decode(sanitize_text_field($_GET['CART']),TRUE);
-        if (strlen($cart)>0){
+        if (!empty($cart)){
             
             $cart=str_replace("\\",'',$cart);
             $cart=(array)json_decode($cart);
 
             if(is_array($cart) OR is_object($cart)){
+
                 //if product belongs to first target;
                 $eo_wbc_sets=WC()->session->get('EO_WBC_SETS',array());                
                 if (get_option('eo_wbc_first_slug')==$cart['eo_wbc_target']) {
@@ -174,11 +181,12 @@ class EO_WBC_Review
     }
     
     private function eo_wbc_render()
-    {        
+    {   
+
         add_filter('the_content',function(){
             
-            if((strlen(sanitize_text_field($_GET['FIRST']))>0 && strlen(sanitize_text_field($_GET['SECOND']))>0) && isset($_GET['CART']))
-            {
+            if( !empty($_GET['FIRST']) && !empty($_GET['SECOND']) && !empty($_GET['CART']) )
+            {                
                 //if data available at _GET then add to out custom cart
                 $this->eo_wbc_add_to_cart();
             }

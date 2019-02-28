@@ -6,7 +6,8 @@ class EO_WBC_Core{
         $this->_eo_wbc_=$file;
         register_activation_hook($this->_eo_wbc_,array(__CLASS__,'eo_wbc_activate'));
         register_deactivation_hook($this->_eo_wbc_,array(__CLASS__,'eo_wbc_deactivate'));
-        register_uninstall_hook($this->_eo_wbc_,array(__CLASS__,'eo_wbc_uninstall'));        
+        register_uninstall_hook($this->_eo_wbc_,array(__CLASS__,'eo_wbc_uninstall'));      
+        $this->update_manager();  
     }
     public static function eo_wbc_activate(){
         #Plugin Activation Code
@@ -98,16 +99,17 @@ class EO_WBC_Core{
          * create table to store maps between product that is created by admin
          */
         $eo_wbc_cat_map= $wpdb->prefix."eo_wbc_cat_maps";
+        require_once( ABSPATH . '/wp-admin/includes/upgrade.php' );
+        
         if($wpdb->get_var( "show tables like '$eo_wbc_cat_map'" ) != $eo_wbc_cat_map)
         {
             $sql='';
             $sql = "CREATE TABLE `$eo_wbc_cat_map` ( ";
             $sql .= " `first_cat_id` VARCHAR(125) NOT NULL , `second_cat_id` VARCHAR(125) NOT NULL , PRIMARY KEY (`first_cat_id`, `second_cat_id`)";
-            $sql .= ") ".$wpdb->get_charset_collate().";";
-            
-            require_once( ABSPATH . '/wp-admin/includes/upgrade.php' );
-            dbDelta($sql);
+            $sql .= ") ".$wpdb->get_charset_collate().";";                        
+            dbDelta($sql);            
         }
+        
         update_option('eo_wbc_active',"1");
         add_action( 'activated_plugin',function(){
             if(!
@@ -204,6 +206,29 @@ class EO_WBC_Core{
             require_once( ABSPATH . '/wp-admin/includes/upgrade.php' );
             dbDelta($sql);
         }        
+    }
+
+    private function update_manager()
+    {
+        /**
+        * This section of code is intended to update necessary elements of plugin
+        * such as database
+        * @param none
+        * @desc method of updating databases.
+        **/
+        global $wpdb;
+        $eo_wbc_cat_map= $wpdb->prefix."eo_wbc_cat_maps";
+        require_once( ABSPATH . '/wp-admin/includes/upgrade.php' );
+
+        if(version_compare(EO_WBC_PLUGIN_VERSION,get_option('eo_wbc_version'),'>') )
+        {
+            if($wpdb->get_var("SHOW COLUMNS FROM `$eo_wbc_cat_map` LIKE 'discount'" ) != 'discount')
+            {
+                $sql="alter TABLE `".$eo_wbc_cat_map."` ADD `discount` VARCHAR(20) not null DEFAULT '0%' AFTER `second_cat_id` ";   
+                $wpdb->query($sql);
+            }            
+            update_option('eo_wbc_version',EO_WBC_PLUGIN_VERSION);
+        }                   
     }
 }
 ?>

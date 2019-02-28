@@ -6,15 +6,7 @@ class EO_WBC_Category
         //If add to cart triggred
         // Detection : only one category item get length > 0 
         //   i.e. using XOR check if only one of two have been set.
-        if(
-            (isset($_GET['FIRST']) && isset($_GET['SECOND']))
-            && 
-            (strlen(sanitize_text_field($_GET['FIRST']))>0 
-                XOR 
-            strlen(sanitize_text_field($_GET['SECOND']))>0) 
-            && 
-            isset($_GET['CART'])
-        ){
+        if( !empty($_GET['CART']) && empty($_GET['EO_CHANGE']) && ( empty($_GET['FIRST']) XOR empty($_GET['SECOND']) ) ) {
             //Iff condition is mutual exclusive, store it to  the session.
             $this->eo_wbc_add_to_cart();            
         } 
@@ -22,7 +14,7 @@ class EO_WBC_Category
         //if Current-Category is either belongs to FIRST OR SECOND Category then initiate application        
         if(
     		$this->eo_wbc_get_category()==get_option('eo_wbc_first_slug') 
-    		OR
+    		  OR
     		$this->eo_wbc_get_category()==get_option('eo_wbc_second_slug')
         ){
         	
@@ -31,15 +23,15 @@ class EO_WBC_Category
         }                
     }
 
-    private function eo_wbc_add_to_cart()
-    {
+    private function eo_wbc_add_to_cart() {
+        
         $cart=base64_decode(sanitize_text_field($_GET['CART']),TRUE);        
-        if($cart){
+        if(!empty($cart)){
 
             $cart=str_replace("\\",'',$cart);
             $cart=(array)json_decode($cart);
             
-            if(is_array($cart) OR is_object($cart)){
+            if(is_array($cart) OR is_object($cart)) {
                    
                 //if product belongs to first target;
                 if (get_option('eo_wbc_first_slug')==$cart['eo_wbc_target']) {
@@ -87,11 +79,37 @@ class EO_WBC_Category
         
         //Add information to end of pemalink of product
         add_filter( 'post_type_link',function($url){
-            return $url.'?EO_WBC=1'.
+            return  $url.'?EO_WBC=1'.
                             '&BEGIN='.sanitize_text_field($_GET['BEGIN']).
                             '&STEP='.sanitize_text_field($_GET['STEP']).                            
-                            '&FIRST='.sanitize_text_field(isset($_GET['FIRST'])?$_GET['FIRST']:'').
-                            '&SECOND='.sanitize_text_field(isset($_GET['SECOND'])?$_GET['SECOND']:'');
+                            '&FIRST='.
+                            (
+                                $this->eo_wbc_get_category()==get_option('eo_wbc_first_slug') 
+                                    ?
+                                ''
+                                    :
+                                (
+                                    !empty($_GET['FIRST'])
+                                        ? 
+                                    sanitize_text_field( $_GET['FIRST'])
+                                        :
+                                    ''
+                                )
+                            ).
+                            '&SECOND='.
+                            (
+                                $this->eo_wbc_get_category()==get_option('eo_wbc_second_slug')
+                                    ?
+                                ''
+                                    :
+                                (
+                                    !empty($_GET['SECOND'])
+                                        ?
+                                    sanitize_text_field($_GET['SECOND'])
+                                        :
+                                    ''
+                                )
+                            );
         });
     }
     

@@ -1,9 +1,27 @@
 <?php
 class EO_WBC_Checkout{
     public function __construct()
-    {
-           //require_once 'EO_WBC_Support.php';
-           $this->eo_wps_add_js();//Load Jquery and product info contents...     
+    {        
+        $this->eo_wps_add_js();//Load Jquery and product info contents...     
+/*
+        add_action('woocommerce_cart_calculate_fees',function($cart){
+            wc()->cart->set_discount_total("1000");
+            var_dump(wc()->cart->get_total_discount( ));
+            var_dump(wc()->cart->get_cart_total());
+            $cart=WC()->cart;
+            
+            $discount = $cart->subtotal * 0.1;
+            $cart->add_fee( 'You saved 10% on bundled product.', -$discount);
+        });*/
+
+/*        wc()->cart->add_fee('Handling',500);
+
+        var_dump(wc()->cart->get_fees());
+
+    */ 
+
+
+
     }
 
     private function eo_wps_add_js()

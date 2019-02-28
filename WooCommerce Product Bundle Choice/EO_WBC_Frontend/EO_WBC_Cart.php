@@ -1,5 +1,6 @@
 <?php
 class EO_WBC_Cart{
+
     public function __construct(){
         
         if(isset($_GET['EO_WBC_REMOVE'])){
@@ -14,10 +15,10 @@ class EO_WBC_Cart{
         if(isset($_GET['empty_cart']) && sanitize_text_field($_GET['empty_cart'])==1){
             $this->eo_wbc_empty_cart();
         }        
-
+        
         $this->eo_wbc_cart_service();
         $this->eo_wbc_add_css();
-        $this->eo_wbc_render();
+        $this->eo_wbc_render();       
     }
    
     private function eo_wbc_remove(){

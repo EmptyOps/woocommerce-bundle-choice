@@ -4,7 +4,7 @@ Tags: woocommerce,product bundle,product bundles,woocommerce product bundles,bun
 Requires at least: 3.5
 Tested up to: 5.1
 Requires PHP: 5.3
-Stable tag: 0.1.6
+Stable tag: 0.2.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -43,7 +43,7 @@ If you are interested in our plugin, click [here](http://101.53.136.134/apps/yc_
 
 = Compatibility with other plugins/Officially tested plugins =
 
-We have tested WooCommerce Product Bundle Choice with Wordpress 3.5 to 5.1 and WooCommerce 2.0 to 3.5.3 and our plugin is technically compatible with all the other plugins.
+We have tested WooCommerce Product Bundle Choice with Wordpress 3.5 to 5.1 and WooCommerce 2.0 to 3.5.5 and our plugin is technically compatible with all the other plugins.
 
 = Live Demo  =
 
@@ -151,6 +151,9 @@ Please go through our [installation guide](http://101.53.136.134/apps/yc_plugin/
 3. Home page after plugin fully configured.
 
 == Changelog ==
+= 0.2.0 (February 28, 2019) =
+  **Navigation**. now users can navigate forth and back.
+  **Discount**. admin can allow discount to his/her visitors.
 = 0.1.6 (February 20, 2019) =
   **UI Upgraded**. Adopted Mobile First Approach.
 = 0.1.5 (February 18, 2019) =
@@ -167,6 +170,9 @@ Please go through our [installation guide](http://101.53.136.134/apps/yc_plugin/
   **First Release**. This is the first release of our plugin.
 
 == Upgrade Notice ==
+= 0.2.0 (February 28, 2019) =
+    Now users can navigate forth and back.
+    Admin can allow discount to his/her visitors.
 = 0.1.6 (February 20, 2019) =
     Adopted Mobile First Approach.
 = 0.1.5 (February 18, 2019) =

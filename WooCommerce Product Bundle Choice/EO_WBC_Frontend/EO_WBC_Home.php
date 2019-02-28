@@ -3,15 +3,15 @@ class EO_WBC_Home
 {
     public function __construct()
     {
-        $this->eo_wbc_the_content();        
-        $this->eo_wbc_clean();   
+        $this->eo_wbc_the_content(); // Add two buttons on designated section.
+        $this->eo_wbc_clean();   // Cleanup session data
     }
 	
     public static function eo_wbc_do_shortcode()
     {
-      $self=new self;
-      $self->eo_wbc_clean();
-      $self->eo_wbc_buttons().$self->eo_wbc_code();
+      $self=new self; //initalize self instence.
+      $self->eo_wbc_clean(); //cleanup session data
+      $self->eo_wbc_buttons().$self->eo_wbc_code(); //return two buttons to shortcode.
     }
 
     private function eo_wbc_the_content()
@@ -21,7 +21,8 @@ class EO_WBC_Home
          * 1. Start with First Product
          * 2. Start with Second Product       
          */ 
-        add_action('wp_footer',function(){
+        add_action('wp_footer',function(){  //setup button position in specific position of page.
+
           if(!get_option('eo_wbc_btn_setting') && !(get_option('eo_wbc_btn_position')=='hide'))
          {
             $script="<script>jQuery(document).ready(function(){ ";
@@ -51,7 +52,7 @@ class EO_WBC_Home
         });
     }
 
-    private function eo_wbc_code()
+    private function eo_wbc_code() //script to get color code from buttons
     {
         return '<script>'.
                 'jQuery(document).ready(function($){'.
@@ -62,7 +63,7 @@ class EO_WBC_Home
                '</script>';
     }
 
-    private function eo_wbc_buttons(){
+    private function eo_wbc_buttons(){ //the two buttons UI
 
         return '<div id="wbc_"><p style="font-size: 1.6em;text-align:center;">Make your own pair from recommandation</p></div>'.
         '<style>'.
