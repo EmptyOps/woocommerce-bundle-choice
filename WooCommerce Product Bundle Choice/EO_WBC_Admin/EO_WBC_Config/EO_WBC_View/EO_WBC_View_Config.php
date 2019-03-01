@@ -274,12 +274,12 @@ function eo_wbc_admin_config_category_options()
         			<br/><hr/><br/>
     			</td>
     		</tr>	
-			<tr>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
+			<tr>				
     			<td>    			
     				<button class="button button-primary button-hero action" style="float: right">Save</button>    			
     			</td>
+                <td></td>
+                <td></td>
     		</tr>		
     	</tbody>    	
     </table>

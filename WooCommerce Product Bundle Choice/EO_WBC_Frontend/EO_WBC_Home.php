@@ -11,7 +11,7 @@ class EO_WBC_Home
     {
       $self=new self; //initalize self instence.
       $self->eo_wbc_clean(); //cleanup session data
-      $self->eo_wbc_buttons().$self->eo_wbc_code(); //return two buttons to shortcode.
+      return $self->eo_wbc_buttons().$self->eo_wbc_code(); //return two buttons to shortcode.
     }
 
     private function eo_wbc_the_content()
@@ -78,13 +78,8 @@ class EO_WBC_Home
                 'content: "";'.
                 'display: inline-block;'.
                 'float: none!important;'.
-            '}'.
-            '@media (min-width: 481px) and (max-width: 767px) {'.
-              '.eo_button_container{'.
-                'display:grid;'.
-              '}'.
-            '}'.
-            '@media (min-width: 320px) and (max-width: 480px) {'.
+            '}'.            
+            '@media (max-width: 600px){'.
              '.eo_button_container{'.
                 'display:grid;'.
               '}'.

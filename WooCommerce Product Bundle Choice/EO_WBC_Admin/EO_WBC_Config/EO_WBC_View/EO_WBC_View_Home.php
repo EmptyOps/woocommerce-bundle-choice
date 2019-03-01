@@ -125,6 +125,20 @@
         color: var(--breadcrumb-theme-1);  
         /* cursor: default; */
     }
+
+    blockquote:before {
+        font-family: Georgia, serif;        
+        font-size: 2em;        
+        content: "\201C";
+    }
+    blockquote:after {
+        font-family: Georgia, serif;
+        position: relative;
+        bottom: -1em;
+        font-size:2em;
+        content: "\201D";
+    }
+
     @media screen and (max-width: 550px) {
           .breadcrumb a{
             color: var(--breadcrumb-theme-2);
@@ -140,6 +154,7 @@
         }
         .breadcrumb__step::before{
           top: -10px;
+          left: 10px !important;
         }
         .breadcrumb__step::after{
           content: '';
@@ -223,6 +238,8 @@
 	    		<br/><br/>
 	    		<div style="text-align: center;">
 	    			<a href="<?php echo bloginfo('url').'?#wbc_' ?>" class="button button-primary button-hero action">Let's check it out</a>
+            <br/><br/>
+            <blockquote>It will redirect to buttons widget on home, if you have used shortcode than find it on particular page yourself.</blockquote>
 	    		</div>
 	    	</span>
 	    	<?php endif;?>

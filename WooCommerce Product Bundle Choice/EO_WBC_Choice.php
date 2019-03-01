@@ -187,7 +187,11 @@ class EO_WBC_Choice{
         //Perform shortcode routine if required.
         add_shortcode('woo-bundle-choice-btn',function(){
             require_once apply_filters('eo_wbc_front_home','EO_WBC_Frontend/EO_WBC_Home.php');               
-            return EO_WBC_Home::eo_wbc_do_shortcode();                        
+            if(!class_exists('EO_WBC_Home'))
+            {
+                require_once apply_filters('eo_wbc_front_home','EO_WBC_Frontend/EO_WBC_Home.php',35);
+            } 
+            return EO_WBC_Home::eo_wbc_do_shortcode();
         });                     
     }
     

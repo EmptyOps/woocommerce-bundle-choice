@@ -3,7 +3,7 @@
 * Plugin Name: Woocommerce Bundle Choice
 * Plugin URI: https://wordpress.org/plugins/woocommerce-bundle-choice/
 * Description: An E-Commerce tool that let your customer's buy product in a set and create map that relates between your product categories.
-* Version: 0.2.0
+* Version: 0.2.1
 * Author: emptyopssphere
 * Author URI: https://profiles.wordpress.org/emptyopssphere
 * Requires at least: 3.5
@@ -114,5 +114,7 @@ function get_set_discount($set,&$discount)
 
     return $discount;
 }
+
+add_filter( 'widget_text', 'do_shortcode' );
 
 ?>
