@@ -100,6 +100,7 @@ We offer full support to help you at free of cost.
 * This plugin allows users to dynamically create their product combinations, by mixing and matching products which eventually leads to product bundles.
 * By combining two products the user can select a perfect match of products in a very short time, so It's also a time-saving technique.
 * Some users might be confused about the perfect color combination and the perfect match of products, so this plugin helps users for choosing their desired matching pair.
+* There are some inventories like jewelry, in which you can add a feature like design your own ring and which also enhance the consumer's interest too, likewise, you can add this feature in any inventory.
 
 = Is it compatible with any kinds of WooCommerce Theme? =
 Yes, its compatible with any WooCommerce theme. If you ever face any issue, please write to us on the [support forum](https://wordpress.org/support/plugin/woo-bundle-choice/)
@@ -123,7 +124,7 @@ Yes, it is.
 No, you can use the WooCommerce Product Bundle Choice for free forever.
 
 = Is this plugin works in any kind of inventories, such as clothing, jewelry, accessories etc..? =
-Yes. This plugin works with all inventories out of the box, e.g. Clothing, cosmetics, electronic items and accessories, furniture, jewelry, and all others.
+Yes. This plugin works with all inventories out of the box, e.g. Clothing, cosmetics, electronic items and accessories, furniture, jewelry, and all others. This plugin allows you to design your own products, which is supported in all kind of inventories. 
 
 = Is there any monthly fee or required upgrade? =
 No, you can use the  WooCommerce Product Bundle Choice for free forever.
