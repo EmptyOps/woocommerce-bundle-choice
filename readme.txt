@@ -1,6 +1,6 @@
 === WooCommerce Product Bundle Choice ===
 Contributors: emptyopssphere
-Tags: woocommerce,product bundle,product bundles,woocommerce product bundles,bundles,bundle,woo,woocommerce product bundle
+Tags: woocommerce,product bundle,product bundles,woocommerce product bundles,bundles,bundle,woo,woocommerce product bundle,design your own,buy in pair
 Requires at least: 3.5
 Tested up to: 5.1
 Requires PHP: 5.3
