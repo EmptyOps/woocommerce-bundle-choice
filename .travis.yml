@@ -84,5 +84,6 @@ after_script:
 branches:
   only:
     - master
+    - wbctests
     - /^\d+\.\d+(\.\d+)?(-\S*)?$/
     - /^release\//
