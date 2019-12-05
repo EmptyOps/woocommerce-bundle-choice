@@ -84,7 +84,7 @@ These are only some of many extensions. You can see enitre list of Extensions on
 * [Basic Configurations](https://www.youtube.com/watch?v=IWeac2HCKhQ)
 * [Appearance](https://www.youtube.com/watch?v=nJqn4umAw94)
 * [Filters](https://www.youtube.com/watch?v=UysQox5AH7I)
-* [Using Shortcode)(youtube https://www.youtube.com/watch?v=QPQcRID_SGE)
+* [Using Shortcode](youtube https://www.youtube.com/watch?v=QPQcRID_SGE)
 
 ## Use Cases ##
 
