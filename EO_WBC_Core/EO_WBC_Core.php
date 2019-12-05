@@ -237,7 +237,7 @@ class EO_WBC_Core{
         $eo_wbc_cat_map= $wpdb->prefix."eo_wbc_cat_maps";
         require_once( ABSPATH . '/wp-admin/includes/upgrade.php' );
 
-        if(version_compare(EO_WBC_PLUGIN_VERSION,get_option('eo_wbc_version'),'>') )
+        /*if(version_compare(EO_WBC_PLUGIN_VERSION,get_option('eo_wbc_version'),'>') )
         {
             if($wpdb->get_var("SHOW COLUMNS FROM `".$eo_wbc_cat_map."` LIKE 'discount'" ) != 'discount')
             {
@@ -274,7 +274,7 @@ class EO_WBC_Core{
             }            
 
             update_option('eo_wbc_version',EO_WBC_PLUGIN_VERSION);
-        }
+        }*/
     }
 }
 ?>
