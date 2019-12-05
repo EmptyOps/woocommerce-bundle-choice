@@ -62,21 +62,85 @@ class EO_WBC_Core{
             add_option('eo_wbc_config_map',"0");
         }
                 
-        $page_check = get_page_by_title('Product Review');
-        $new_page_template='';
-        $new_page = array(
-            'post_type' => 'page',
-            'post_title' => 'Product Review',
-            'post_name'=>'eo-wbc-product-review',
-            'post_content' => '',
-            'post_status' => 'publish',
-            'post_author' => 1,
-        );
-        if(!isset($page_check->ID)){
-            $new_page_id = wp_insert_post($new_page);
-            if(!empty($new_page_template)){
-                update_post_meta($new_page_id, '_wp_page_template', $new_page_template);
+        
+        
+        if( function_exists('get_page_by_path') && !isset(get_page_by_path('eo-wbc-product-review')->ID)){
+            
+            $product_review_page_id = wp_insert_post(array(
+                'post_type' => 'page',
+                'post_title' => 'Product Review',
+                'post_name'=>'eo-wbc-product-review',
+                'post_content' => '',
+                'post_status' => 'publish',
+                'post_author' => get_current_user_id(),
+            ));
+
+            if(!empty($product_review_page_id)){
+                update_post_meta($product_review_page_id, '_wp_page_template','');
             }
+        }
+
+        if( function_exists('get_page_by_path') && !isset(get_page_by_path('design-your-own-ring')->ID)){
+            
+            $post_content='<div class="ui inverted segment">
+                            <div class="ui active inverted fluid placeholder">
+                                <div class="paragraph">
+                                    <div class="line"></div>
+                                    <div class="line"></div>
+                                    <div class="line"></div>
+                                    <div class="line"></div>
+                                    <div class="line"></div>
+                                    <div class="line"></div>
+                                    <div class="line"></div>
+                                    <div class="line"></div>
+                                    <div class="line"></div>
+                                    <div class="line"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <br/><br/>
+                        <!-- wp:shortcode -->
+                            [woo-bundle-choice-btn]
+                        <!-- /wp:shortcode -->
+                        <div class="ui segment fluid">
+                            <div class="ui three cards">
+                              <div class="ui inverted card">
+                                <div class="content">
+                                  <div class="ui inverted placeholder">
+                                    <div class="rectangular"><img src="'.plugins_url(basename(EO_WBC_PLUGIN_DIR).'/asset/diamond-sample.png').'"/></div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="ui inverted card">
+                                <div class="content">
+                                  <div class="ui inverted placeholder">
+                                    <div class="rectangular" style="padding-bottom: 25%;"><img class="ui small image" style="height: 50%;width: 50%;margin-left: 25%;margin-top: 25%;"  src="'.plugins_url(basename(EO_WBC_PLUGIN_DIR).'/asset/right-arrow-sample.png').'"/></div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="ui inverted card">
+                                <div class="content">
+                                  <div class="ui inverted placeholder">
+                                    <div class="rectangular"><img src="'.plugins_url(basename(EO_WBC_PLUGIN_DIR).'/asset/ring-sample.png').'"/></div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                        </div>';
+
+            $home_sample_post_id = wp_insert_post(array(
+                'post_type' => 'page',
+                'post_title' => 'Design your own ring',
+                'post_name'=>'design-your-own-ring',
+                'post_content' =>$post_content,
+
+                'post_status' => 'publish',
+                'post_author' => get_current_user_id(),
+            ));
+
+            if(!empty($home_sample_post_id)){
+                update_post_meta($home_sample_post_id, '_wp_page_template','');
+            }            
         }
         
         /**
@@ -105,7 +169,7 @@ class EO_WBC_Core{
         {
             $sql='';
             $sql = "CREATE TABLE `$eo_wbc_cat_map` ( ";
-            $sql .= " `first_cat_id` VARCHAR(125) NOT NULL , `second_cat_id` VARCHAR(125) NOT NULL , PRIMARY KEY (`first_cat_id`, `second_cat_id`)";
+            $sql .= " `first_cat_id` VARCHAR(125) NOT NULL , `second_cat_id` VARCHAR(125) NOT NULL, `discount` VARCHAR(20) not null DEFAULT '0%', PRIMARY KEY (`first_cat_id`, `second_cat_id`)";
             $sql .= ") ".$wpdb->get_charset_collate().";";                        
             dbDelta($sql);            
         }
@@ -126,90 +190,43 @@ class EO_WBC_Core{
         });
             
     }
+
     public static function eo_wbc_deactivate(){
-        #Plugin Deactivation Code
-        //Plugin Activated
+
+        #Plugin Deactivation Code        
         update_option('eo_wbc_active',"0");
     }
+
     public static function eo_wbc_uninstall(){
+
         #Plugin Uninstall
-        
-        //Remove category count options.
-        if(get_option('eo_wbc_category_count')){
-            delete_option('eo_wbc_category_count');
-        }
-        
-        //Name of first product
-        if(get_option('eo_wbc_first_name')){
-            delete_option('eo_wbc_first_name');
-        }
-        
-        //Slug of first product
-        if(get_option('eo_wbc_first_slug')){
-            delete_option('eo_wbc_first_slug');
-        }
-        
-        //URL of first product
-        if(get_option('eo_wbc_first_url')){
-            delete_option('eo_wbc_first_url');
-        }
-        
-        //Name of second product
-        if(get_option('eo_wbc_second_name')){
-            delete_option('eo_wbc_second_name');
-        }
-        //Slug of second product
-        if(get_option('eo_wbc_second_slug')){
-            delete_option('eo_wbc_second_slug');
-        }
-        //URL of second product
-        if(get_option('eo_wbc_second_url')){
-            delete_option('eo_wbc_second_url');
-        }
-        
-        //Remove name to final collaction
-        if(get_option('eo_wbc_collection_name')){
-            delete_option('eo_wbc_collection_name');
-        }
-        
-        //URL to product review page
-        if(get_option('eo_wbc_review_page')){
-            delete_option('eo_wbc_review_page');
-        }
-               
-        //Configuration status -- if categories are selected
-        if(get_option('eo_wbc_config_category')){
-            delete_option('eo_wbc_config_category');
-        }
-        //Configuration status -- if maps are created
-        if(get_option('eo_wbc_config_map')){
-            delete_option('eo_wbc_config_map');
-        }
-        
+
         //Remove table... order_maps
         global $wpdb;
         $eo_wbc_order_map= $wpdb->prefix."eo_wbc_order_maps";
+
         if($wpdb->get_var( "SHOW TABLES LIKE '$eo_wbc_order_map'" ) == $eo_wbc_order_map)
         {
             $sql='';
-            $sql = "DROP TABLE `$eo_wbc_order_map`;";
+            $sql = "DROP TABLE `".$eo_wbc_order_map."`;";
             require_once( ABSPATH . '/wp-admin/includes/upgrade.php' );
             dbDelta($sql);
         }
         
         //Remove table... cat_maps
         $eo_wbc_cat_map= $wpdb->prefix."eo_wbc_cat_maps";
-        if($wpdb->get_var( "SHOW TABLES LIKE '$eo_wbc_cat_map'" ) == $eo_wbc_cat_map)
-        {
+
+        if($wpdb->get_var( "SHOW TABLES LIKE '$eo_wbc_cat_map'" ) == $eo_wbc_cat_map) {
+
             $sql='';
-            $sql = "DROP TABLE `$eo_wbc_cat_map`;";
+            $sql = "DROP TABLE `".$eo_wbc_cat_map."`;";
             require_once( ABSPATH . '/wp-admin/includes/upgrade.php' );
             dbDelta($sql);
         }        
     }
 
-    private function update_manager()
-    {
+    private function update_manager() {
+        
         /**
         * This section of code is intended to update necessary elements of plugin
         * such as database
@@ -222,13 +239,42 @@ class EO_WBC_Core{
 
         if(version_compare(EO_WBC_PLUGIN_VERSION,get_option('eo_wbc_version'),'>') )
         {
-            if($wpdb->get_var("SHOW COLUMNS FROM `$eo_wbc_cat_map` LIKE 'discount'" ) != 'discount')
+            if($wpdb->get_var("SHOW COLUMNS FROM `".$eo_wbc_cat_map."` LIKE 'discount'" ) != 'discount')
             {
                 $sql="alter TABLE `".$eo_wbc_cat_map."` ADD `discount` VARCHAR(20) not null DEFAULT '0%' AFTER `second_cat_id` ";   
                 $wpdb->query($sql);
             }            
+
+            //surpress mapping system for update error...
+            if(version_compare('0.5.0',get_option('eo_wbc_version'),'>') ){
+
+                global $wpdb;
+                $query='select * from `'.$wpdb->prefix.'eo_wbc_cat_maps`';
+                $maps=$wpdb->get_results($query,'ARRAY_A');
+                if(!empty($maps)){                
+
+                    for ($i=0; $i < count($maps) ; $i++) { 
+
+                        $first_term_taxonomy_id=$wpdb->get_var("SELECT term_taxonomy_id FROM `{$wpdb->prefix}term_taxonomy` INNER JOIN `{$wpdb->prefix}terms` ON wbc_terms.term_id=wbc_term_taxonomy.term_id AND wbc_term_taxonomy.taxonomy='product_cat' AND wbc_terms.term_id={$maps[$i]['first_cat_id']}");
+
+                        $second_term_taxonomy_id=$wpdb->get_var("SELECT term_taxonomy_id FROM `{$wpdb->prefix}term_taxonomy` INNER JOIN `{$wpdb->prefix}terms` ON wbc_terms.term_id=wbc_term_taxonomy.term_id AND wbc_term_taxonomy.taxonomy='product_cat' AND wbc_terms.term_id={$maps[$i]['second_cat_id']}");
+
+                        if(!$first_term_taxonomy_id){
+                            $first_term_taxonomy_id=$wpdb->get_var("SELECT term_taxonomy_id FROM `wbc_term_taxonomy` where taxonomy LIKE 'pa_%' and term_id={$maps[$i]['first_cat_id']}");
+                        }
+                        if(!$second_term_taxonomy_id){
+                            $second_term_taxonomy_id=$wpdb->get_var("SELECT term_taxonomy_id FROM `wbc_term_taxonomy` where taxonomy LIKE 'pa_%' and term_id={$maps[$i]['second_cat_id']}");
+                        }   
+
+                        if($first_term_taxonomy_id && $second_term_taxonomy_id){
+                            $wpdb->query("UPDATE `wbc_eo_wbc_cat_maps` SET `first_cat_id`={$first_term_taxonomy_id},`second_cat_id`={$second_term_taxonomy_id} WHERE first_cat_id={$maps[$i]['first_cat_id']} AND second_cat_id={$maps[$i]['second_cat_id']}");
+                        }
+                    }                
+                }
+            }            
+
             update_option('eo_wbc_version',EO_WBC_PLUGIN_VERSION);
-        }                   
+        }
     }
 }
 ?>

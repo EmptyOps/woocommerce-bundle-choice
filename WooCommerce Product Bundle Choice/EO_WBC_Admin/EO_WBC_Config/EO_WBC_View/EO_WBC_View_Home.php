@@ -1,4 +1,3 @@
-
 <style>
     .info{
         color:grey;
@@ -174,74 +173,74 @@
         }
     }      
 </style>
-<?php 
-  //Footer Rating bar :)
-  add_filter( 'admin_footer_text',function($footer_text){
-    return __("<p id='footer-left' class='alignleft'>
-        If you like <strong>WooCommerce Bundle Choice</strong> please leave us a <a href='https://wordpress.org/support/plugin/woo-bundle-choice/reviews?rate=5#new-post' target='_blank' class='wc-rating-link' data-rated='Thanks :)'>★★★★★</a> rating. A huge thanks in advance! </p>");
-  });
-?>
+
 <div class="wrap woocommerce">
-<h1></h1>
-	<?php EO_WBC_Head_Banner::get_head_banner(); ?> 
+  <h1></h1>
+	<?php EO_WBC_Head_Banner::get_head_banner(); ?>
   <br/>
-        <p><a href="https://wordpress.org/support/plugin/woo-bundle-choice" target="_blank">If you are facing any issue, please write to us immediately.</a></p>
+        <p><a href="https://wordpress.org/support/plugin/woo-bundle-choice" target="_blank"><?php _e("If you are facing any issue, please write to us immediately.","woo-bundle-choice"); ?></a></p>  
 	<br/>
-	<hr/>
+  <?php do_action('eo_wbc_menu_tabs','eo-wbc-home'); ?> 
+	<hr/>  
 	<div style="clear:both;"></div>
-	    <span><h3>Getting started! Just do two steps below and you are all done!</h3></span>	    
-	    <?php 
-	       $config_status=get_option('eo_wbc_config_category');
-	       $map_status=get_option('eo_wbc_config_map');
-	       
-	       $bar_request=($config_status==0)?0:$config_status+$map_status;
-	       
-	       if(isset($_GET['bar']) && $_GET['bar']!==NULL)
-	       {
-	           $bar_request=$_GET['bar'];
-	       }	       
-	    ?>
-	    <div class="breadcrumb">
-	    	<a class="breadcrumb__step <?php echo $bar_request==0 ? 'breadcrumb__step--active--2':'breadcrumb__step--active'; ?>" href="<?php echo admin_url( 'admin.php?page=eo-wbc-home&bar=0' ); ?>">
-	    			<strong>Select Two Categories</strong>
-			</a>	    	
-	    	<a class="breadcrumb__step <?php echo ($bar_request==1) ? 'breadcrumb__step--active--2':($bar_request<1?'':($bar_request>=1?'breadcrumb__step--active':'')) ?>" href="<?php echo $map_status?admin_url('admin.php?page=eo-wbc-home&bar=1'):'#'; ?>">
-	    			<strong>Map Categories</strong>
-	    	</a>
-	    	<a class="breadcrumb__step <?php echo ($bar_request==2) ?'breadcrumb__step--active--2':($bar_request<2?'':($bar_request>=2?'breadcrumb__step--active':'')); ?>" 
-	    					href="<?php echo ($config_status && $map_status)?admin_url('admin.php?page=eo-wbc-home&bar=2'):'#'; ?>">
-	    			<strong>Done</strong>
-	    	</a>
-	    </div>
-	    <br/>
-	    <br/>	    
-	    <div class="eo_wbc_action" >	    	
-	    	<?php if($bar_request==0): ?>
-	    	<span class="info">
-	    		<span style="font-size: large;">Configure Woocommerce Bundled Choice Plugin by selecting two main product category. </span>
-	    		<br/><br/>
-	    		<div style="text-align: center;">
-	    			<a href="<?php echo admin_url( 'admin.php?page=eo-wbc-setting&callback=1'); ?>" class="button button-primary button-hero action">Select Two Categories</a>
-	    		</div>
-	    	</span>
-	    	<?php elseif ($bar_request==1): ?>
-	    	<span class="info">
-	    		<span style="font-size: large;">Creating map is process of binding links between product sub-categories, which will eventually let user combine products based on these category mappings. </span>
-	    		<br/><br/>
-	    		<div style="text-align: center;">
-	    			<a href="<?php echo admin_url( 'admin.php?page=eo-wbc-map&callback=1' ); ?>" class="button button-primary button-hero action">Map Categories.</a>
-	    		</div>
-	    	</span>
-	    	<?php elseif ($bar_request>=2) :?>
-	    	<span class="info">
-	    		<span style="font-size: large;">You are all done, plugin is working.</span>
-	    		<br/><br/>
-	    		<div style="text-align: center;">
-	    			<a href="<?php echo bloginfo('url').'?#wbc_' ?>" class="button button-primary button-hero action">Let's check it out</a>
-            <br/><br/>
-            <blockquote>It will redirect to buttons widget on home, if you have used shortcode than find it on particular page yourself.</blockquote>
-	    		</div>
-	    	</span>
-	    	<?php endif;?>
-	    </div>
+    <span><h3><?php _e("Getting started! Just do two steps below and you are all done!","woo-bundle-choice"); ?></h3></span>	    
+    <?php 
+       $config_status=get_option('eo_wbc_config_category');
+       $map_status=get_option('eo_wbc_config_map');
+       
+       $bar_request=($config_status==0)?0:$config_status+$map_status;
+       
+       if(isset($_GET['bar']) && $_GET['bar']!==NULL)
+       {
+           $bar_request=$_GET['bar'];
+       }	       
+    ?>
+    <div class="breadcrumb">
+    	<a class="breadcrumb__step <?php echo $bar_request==0 ? 'breadcrumb__step--active--2':'breadcrumb__step--active'; ?>" href="<?php echo admin_url( 'admin.php?page=eo-wbc-home&bar=0' ); ?>">
+    			<strong><?php _e("Select Two Categories","woo-bundle-choice"); ?></strong>
+		</a>	    	
+    	<a class="breadcrumb__step <?php echo ($bar_request==1) ? 'breadcrumb__step--active--2':($bar_request<1?'':($bar_request>=1?'breadcrumb__step--active':'')) ?>" href="<?php echo $map_status?admin_url('admin.php?page=eo-wbc-home&bar=1'):'#'; ?>">
+    			<strong><?php _e("Map Categories","woo-bundle-choice"); ?></strong>
+    	</a>
+    	<a class="breadcrumb__step <?php echo ($bar_request==2) ?'breadcrumb__step--active--2':($bar_request<2?'':($bar_request>=2?'breadcrumb__step--active':'')); ?>" 
+    					href="<?php echo ($config_status && $map_status)?admin_url('admin.php?page=eo-wbc-home&bar=2'):'#'; ?>">
+    			<strong><?php _e("Done","woo-bundle-choice"); ?></strong>
+    	</a>
+    </div>
+    <br/>
+    <br/>	    
+    <div class="eo_wbc_action" >	    	
+    	<?php if($bar_request==0): ?>
+    	<span class="info">
+    		<span style="font-size: large;"><?php _e("Configure Woocommerce Bundled Choice Plugin by selecting two main product category.","woo-bundle-choice"); ?></span>
+    		<br/><br/>
+    		<div style="text-align: center;">
+    			<a href="<?php echo admin_url( 'admin.php?page=eo-wbc-setting&callback=1'); ?>" class="button button-primary button-hero action"><?php _e("Select Two Categories","woo-bundle-choice"); ?></a>
+    		</div>
+    	</span>
+    	<?php elseif ($bar_request==1): ?>
+    	<span class="info">
+    		<span style="font-size: large;"><?php _e("Creating map is process of binding links between product sub-categories, which will eventually let user combine products based on these category mappings.","woo-bundle-choice"); ?></span>
+    		<br/><br/>
+    		<div style="text-align: center;">
+    			<a href="<?php echo admin_url( 'admin.php?page=eo-wbc-map&callback=1' ); ?>" class="button button-primary button-hero action"><?php _e("Map Categories.","woo-bundle-choice"); ?></a>
+    		</div>
+    	</span>
+    	<?php elseif ($bar_request>=2) :?>
+    	<span class="info">
+    		<span style="font-size: large;"><?php _e("You are all done, plugin is working.","woo-bundle-choice"); ?></span>
+    		<br/><br/>
+    		<div style="text-align: center;">
+    			<a href="<?php echo bloginfo('url').'?#wbc_' ?>" class="button button-primary button-hero action"><?php _e("Let's check it out","woo-bundle-choice"); ?></a>
+          <br/><br/>
+          <blockquote><?php _e("It will redirect to buttons widget on the home if you have used a short-code than find it on the particular page yourself.","woo-bundle-choice");?></blockquote>
+    		</div>
+    	</span>
+    	<?php endif;?>
+    </div>
+    <br/>
+  </div>      
 </div>
+
+<?php EO_WBC_Head_Banner::get_footer_line(); ?>
+

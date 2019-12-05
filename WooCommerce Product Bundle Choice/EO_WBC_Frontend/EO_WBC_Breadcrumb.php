@@ -8,47 +8,89 @@ class EO_WBC_Breadcrumb
     
     public static function eo_wbc_add_breadcrumb($step=1,$begin){
 
-        $html='<br/><br/><div id="crumbs"><ul>';
-        
-        if($begin==get_option('eo_wbc_first_slug'))
-        {
-            $html.=self::eo_wbc_breadcumb_first_html($step,1).self::eo_wbc_breadcumb_second_html($step,2);
-        }
-        elseif ($begin==get_option('eo_wbc_second_slug'))
-        {
-            $html.=self::eo_wbc_breadcumb_second_html($step,1).self::eo_wbc_breadcumb_first_html($step,2);
-        }
-        $html.='<li';
-        if($step>=3){ $html.=' class="active"'; }
-        
-        $html.='><a href="'.( (empty($_GET['EO_CHANGE']) XOR empty($_GET['EO_VIEW']) ) && !empty($_GET['FIRST']) && !empty($_GET['SECOND'])?get_bloginfo('url')
+        /* *
+            CLASS: 
+            -------------------------------------------------
+            ordered - mark as rodered type of breadcrumb.
+            completed - mark as completed and add check mark.
+            disabled - incomplete breadcrumb.
+            title - set title on breadcrumb.
+            description - set description on breadcrumb.
+         */
+
+        $html='<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><div class="eo-wbc-container">';
+            $html.='<div class="ui ordered steps">';
+                if($begin==get_option('eo_wbc_first_slug'))
+                {
+                    $html.=self::eo_wbc_breadcumb_first_html($step,1).self::eo_wbc_breadcumb_second_html($step,2);
+                }
+                elseif ($begin==get_option('eo_wbc_second_slug'))
+                {
+                    $html.=self::eo_wbc_breadcumb_second_html($step,1).self::eo_wbc_breadcumb_first_html($step,2);
+                }
+                $html.='<div data-href="'.( (empty($_GET['EO_CHANGE']) XOR empty($_GET['EO_VIEW']) ) && !empty($_GET['FIRST']) && !empty($_GET['SECOND'])?get_bloginfo('url')
                     .get_option('eo_wbc_review_page') 
                     .'?EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
-                    .'&STEP=3&FIRST='.sanitize_text_field($_GET['FIRST']).'&SECOND='.sanitize_text_field($_GET['SECOND']):'#' ).'"><div><span class="step">3 </span><span class="step-name">'.(get_option('eo_wbc_collection_title')?get_option('eo_wbc_collection_title'):"Preview").'</span><div></a></li></div>';        
-        return $html;             
+                    .'&STEP=3&FIRST='.sanitize_text_field($_GET['FIRST']).'&SECOND='.sanitize_text_field($_GET['SECOND']):'#' ).'" class="'.(($step==3)?'active ':(($step>3)?'completed ':'disabled')).' step">';
+                        $html.=(($step<=3)&&get_option('eo_wbc_collection_icon',FALSE)&&get_option('eo_wbc_show_hide_breadcrumb_icon','0'))?'<img src="'.wp_get_attachment_url(get_option('eo_wbc_collection_icon')).'"/>':'';
+                        $html.='<div class="content">';                                               
+                            $html.='<div class="title">'.get_option('eo_wbc_collection_title','Preview').'</div>';
+                        $html.='</div>';
+                $html.='</div>';
+            $html.='</div>';
+        $html.='</div>';
+
+        if(get_option('eo_wbc_show_hide_breadcrumb_icon','0')==='1'){
+            $html.="<style>.eo-wbc-container>.ui.ordered.steps .step:before{content:''}</style>";
+        }        
+        $html.="<script>jQuery(document).ready(function(){ jQuery('.eo-wbc-container>.ui.steps .step').on('click',function(){ console.log('click'); if(jQuery(this).attr('data-href')!='#'){  console.log('redirecting'); window.location.href=jQuery(this).attr('data-href'); } }); })</script>";
+
+        return $html;
+         
     }
 
     private static function eo_wbc_breadcumb_first_html($step,$order){
 
-        $html='<li';
-        if($step>=$order){ $html.=' class="active"';}
-        $html.='><a href="'.
-        (empty($_GET['FIRST'])?'#':self::eo_wbc_breadcrumb_view_url(sanitize_text_field($_GET['FIRST']),$order)).'"><div><span class="step">'.$order.' </span><span class="step-name">'.get_option('eo_wbc_first_name').'</span></div></a><div>
-        <a class="eo_wbc_change" href="'.(empty($_GET['FIRST'])?'#':self::eo_wbc_breadcrumb_change_url($order,$_GET['FIRST']))
-        .'" style="font-size: x-small;position: relative;bottom: 20px;float:right;">Change</a></div></li>';
+
+
+        $html='<div data-href="'.
+        (empty($_GET['FIRST'])?'#':
+        self::eo_wbc_breadcrumb_view_url(sanitize_text_field($_GET['FIRST']),$order)).'" class="'.(($step==$order)?'active ':(($step>$order)?'completed ':'disabled')).' step">'.            
+            (($step<=$order)&&get_option('eo_wbc_first_icon',FALSE)&&get_option('eo_wbc_show_hide_breadcrumb_icon','0')
+                ?
+                '<img src="'.wp_get_attachment_url(get_option('eo_wbc_first_icon')).'">'
+                :''
+            ).'
+            <div class="content">
+              <div class="title">'.get_option('eo_wbc_first_name','').'</div>
+              <div class="description">
+                <a href="'.(empty($_GET['FIRST'])?'#':self::eo_wbc_breadcrumb_change_url($order,$_GET['FIRST'])).'" >Change
+                </a>                
+              </div>
+            </div>
+        </div>';
         return $html;
     }
 
     private static function eo_wbc_breadcumb_second_html($step,$order){
 
-        $html='<li';
-        if($step>=$order){ $html.=' class="active"';}
-        $html.='><a href="'.
+
+        $html='<div data-href="'.
         (empty($_GET['SECOND'])?'#':
-        self::eo_wbc_breadcrumb_view_url(sanitize_text_field($_GET['SECOND']),$order)).'"><div><span class="step">'.$order.' </span><span class="step-name">'.get_option('eo_wbc_second_name').'</span></div></a><div>
-        <a class="eo_wbc_change" href="'.
-            (empty($_GET['SECOND'])?'#':self::eo_wbc_breadcrumb_change_url($order,$_GET['SECOND']))            
-        .'" style="font-size: x-small;position: relative;bottom: 2em;float:right;">Change</a></div></li>';
+        self::eo_wbc_breadcrumb_view_url(sanitize_text_field($_GET['SECOND']),$order)).'" class="'.(($step==$order)?'active ':(($step>$order)?'completed ':'disabled')).' step">'.            
+            (($step<=$order)&&get_option('eo_wbc_second_icon',FALSE)&&get_option('eo_wbc_show_hide_breadcrumb_icon','0')
+                ?
+                '<img src="'.wp_get_attachment_url(get_option('eo_wbc_second_icon')).'">'
+                :''
+            ).'
+            <div class="content">
+              <div class="title">'.get_option('eo_wbc_second_name','').'</div>
+              <div class="description">
+                <a href="'.(empty($_GET['FIRST'])?'#':self::eo_wbc_breadcrumb_change_url($order,$_GET['SECOND'])).'" >Change
+                </a>                
+              </div>
+            </div>
+        </div>';
         return $html;
     }
 
@@ -74,7 +116,7 @@ class EO_WBC_Breadcrumb
         } 
     } 
 
-    private static function eo_wbc_breadcrumb_change_url($order,$product_id){
+    public static function eo_wbc_breadcrumb_change_url($order,$product_id){
         $url='';
         if ($order==1) {
             if(self::eo_wbc_breadcrumb_get_category($product_id)==get_option('eo_wbc_first_slug')){
@@ -82,8 +124,8 @@ class EO_WBC_Breadcrumb
                 $url=get_bloginfo('url').get_option('eo_wbc_first_url').
                 '?EO_WBC=1&BEGIN='.get_option('eo_wbc_first_slug').
                 '&STEP=1'.
-                '&FIRST='.sanitize_text_field(empty($_GET['FIRST'])?'':$_GET['FIRST']).
-                '&SECOND='.sanitize_text_field(empty($_GET['SECOND'])?'':$_GET['SECOND']).
+                /*'&FIRST='.sanitize_text_field(empty($_GET['FIRST'])?'':$_GET['FIRST']).
+                '&SECOND='.sanitize_text_field(empty($_GET['SECOND'])?'':$_GET['SECOND']).*/
                 '&EO_CHANGE=1';
             }
             elseif (self::eo_wbc_breadcrumb_get_category($product_id)==get_option('eo_wbc_second_slug')) {
@@ -91,8 +133,8 @@ class EO_WBC_Breadcrumb
                 $url=get_bloginfo('url').get_option('eo_wbc_second_url').
                 '?EO_WBC=1&BEGIN='.get_option('eo_wbc_second_slug').
                 '&STEP=1'.
-                '&FIRST='.sanitize_text_field(empty($_GET['FIRST'])?'':$_GET['FIRST']).
-                '&SECOND='.sanitize_text_field(empty($_GET['SECOND'])?'':$_GET['SECOND']).
+                /*'&FIRST='.sanitize_text_field(empty($_GET['FIRST'])?'':$_GET['FIRST']).
+                '&SECOND='.sanitize_text_field(empty($_GET['SECOND'])?'':$_GET['SECOND']).*/
                 '&EO_CHANGE=1';
             }            
         }
@@ -121,7 +163,13 @@ class EO_WBC_Breadcrumb
                 $variable_status=TRUE;
             }
 
-            $terms=wp_get_post_terms($product->get_id(),get_taxonomies(),array('fields'=>'ids'));            
+            if(method_exists($product,'get_id')){
+                $post_id=$product->get_id();
+            } else {
+                $post_id=$product->ID;
+            } 
+
+            $terms=wp_get_post_terms($post_id,get_taxonomies(),array('fields'=>'ids'));            
             if($variable_status)
             {   
                 $new_terms=array();
@@ -188,7 +236,7 @@ class EO_WBC_Breadcrumb
             }
             else
             {
-                $link.=($this->eo_wbc_get_category()==get_option('eo_wbc_first_slug'))
+                $link.=(self::eo_wbc_breadcrumb_get_category($product_id)==get_option('eo_wbc_first_slug'))
                             ?
                         get_option('eo_wbc_second_slug')
                             :
@@ -213,7 +261,7 @@ class EO_WBC_Breadcrumb
             }        
             $url=get_bloginfo('url').'/product-category/'.$link
                         .'EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
-                        .'&STEP=2&FIRST='.(sanitize_text_field($_GET['FIRST'])).'&SECOND='.(sanitize_text_field($_GET['SECOND'])).'&EO_CHANGE=1';
+                        .'&STEP=2&FIRST='.( $_GET['BEGIN']==get_option('eo_wbc_first_slug')? sanitize_text_field($_GET['FIRST']):'').'&SECOND='.($_GET['BEGIN']==get_option('eo_wbc_second_slug')?sanitize_text_field($_GET['SECOND']):'').'&EO_CHANGE=1';
         }
         return $url;
     }

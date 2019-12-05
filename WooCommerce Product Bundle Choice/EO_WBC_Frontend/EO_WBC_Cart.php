@@ -152,6 +152,7 @@ class EO_WBC_Cart{
         //Adding Custome Cart Table Data.......        
         add_action('woocommerce_before_cart_contents',function(){
             ?>
+                <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
             	<style>
                     tr.cart_item
                     {
@@ -172,11 +173,13 @@ class EO_WBC_Cart{
                       width: 40% !important;
                       padding: 5px;
                     }
-
+                    .row{
+                        padding: 2px !important;
+                    }
                     .row::after {
                       content: "";
                       clear: both;
-                      display: table;
+                      display: table;                      
                     }
                     .shop_table{
                         font-size: medium; 
@@ -232,10 +235,12 @@ class EO_WBC_Cart{
 				<a href="?EO_WBC=1&EO_WBC_REMOVE=<?php echo $index;?>" class="remove" aria-label="Remove this item" >&times;</a> 									
 			</td>
 			<td class="row" data-title="Thumbnail">
-				<span class="column"><?php echo $first->get_image('thumbnail'); ?></span>
-				<?php if($cart['SECOND']):?>						
-				<span class="column"><?php echo $second->get_image('thumbnail'); ?></span>
-				<?php endif; ?>
+                <div style="display:grid;grid-template-columns: auto auto;">
+    				<span><?php echo $first->get_image('thumbnail'); ?></span>
+    				<?php if($cart['SECOND']):?>						
+    				<span><?php echo $second->get_image('thumbnail'); ?></span>
+				    <?php endif; ?>
+                </div>
 			</td>
 			<td data-title="Product">			
 				<p><?php _e($first->get_title().
@@ -246,14 +251,24 @@ class EO_WBC_Cart{
 				       ($cart['SECOND'][2] ? "<br/>&nbsp; - &nbsp;".implode(',',EO_WBC_Support::eo_wbc_get_product_variation_attributes($cart['SECOND'][2])):'')); ?></p>
 				<?php endif; ?>                               	
 			</td>
-			<td data-title="Price">				
-				<p><?php _e(get_woocommerce_currency_symbol(get_option('woocommerce_currency'))." ".get_post_meta($cart['FIRST'][2]?$cart['FIRST'][2]:$cart['FIRST'][0],'_price',TRUE));?></p>
-				<?php $price=(get_post_meta($cart['FIRST'][2]?$cart['FIRST'][2]:$cart['FIRST'][0],'_price',TRUE)*$cart['FIRST'][1]); ?>
+			<td data-title="Price">	
+				<p>
+                    <?php 
+                        $product_obj=EO_WBC_Support::eo_wbc_get_product($cart['FIRST'][2]?$cart['FIRST'][2]:$cart['FIRST'][0]);
+                        _e($product_obj->get_price_html()); 
+                    ?>                    
+                </p>
+				<?php $price=($product_obj->get_price()*$cart['FIRST'][1]); ?>
 			
 			
 			 	<?php if($cart['SECOND']):?>
-				<p><?php _e(get_woocommerce_currency_symbol(get_option('woocommerce_currency'))." ".get_post_meta($cart['SECOND'][2]?$cart['SECOND'][2]:$cart['SECOND'][0],'_price',TRUE));?></p>
-					<?php $price+=(get_post_meta($cart['SECOND'][2]?$cart['SECOND'][2]:$cart['SECOND'][0],'_price',TRUE)*$cart['SECOND'][1]); ?>
+				    <p>
+                        <?php 
+                            $product_obj=EO_WBC_Support::eo_wbc_get_product($cart['SECOND'][2]?$cart['SECOND'][2]:$cart['SECOND'][0]);
+                            _e($product_obj->get_price_html()); 
+                        ?>                        
+                    </p>
+					<?php $price+=($product_obj->get_price()*$cart['SECOND'][1]); ?>
 				<?php endif; ?>				
 			</td>
 			<td data-title="Quantity">
@@ -263,12 +278,13 @@ class EO_WBC_Cart{
 				<?php endif; ?>
 			</td>
 			<td data-title="Cost">
-				<p><?php _e(get_woocommerce_currency_symbol(get_option('woocommerce_currency'))." ".$price); ?></p>
+				<p><?php                                     
+                    _e(wc_price($price)); 
+                ?></p>
 			</td>								
 		</tr>
 		<?php               
-    }
-    
+    }    
 }
 ?>
 

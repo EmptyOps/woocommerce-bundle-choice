@@ -68,7 +68,7 @@ class EO_WBC_Orders
        }
            $row.="</td>".
            "<td style=\"min-width:40px;text-align:right;vertical-align: middle;\">".
-           "".get_woocommerce_currency_symbol(get_option('woocommerce_currency')).($price)."".
+           "".wc_price($price)."".
            "</td>".
            "</tr>";
        return $row;
