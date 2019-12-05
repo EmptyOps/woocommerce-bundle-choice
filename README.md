@@ -1,13 +1,13 @@
 # WooCommerce Product Bundle Choice | Ring Builder, Pair Maker and Guidance Tool #
-**Contributors:** emptyopssphere
-**Tags:** woocommerce,product bundle,product bundles,woocommerce product bundles,bundles,bundle,woo,woocommerce product bundle,design your own,buy in pair
-**Donate link:** https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=hi0001234d1gmail.com&item_name=+Favorite+WooCommerce+Product+Bundle+Choice++Download+WooCommerce+Product+Bundle+Choice+Plugin+Donation¤cy_code=USD&source=url
-**Requires at least:** 3.5
-**Tested up to:** 5.3
-**Requires PHP:** 5.3
-**Stable tag:** 0.5.35
-**License:** GPLv3 or later
-**License URI:** http://www.gnu.org/licenses/gpl-3.0.html
+**Contributors:** emptyopssphere<br>
+**Tags:** woocommerce,product bundle,product bundles,woocommerce product bundles,bundles,bundle,woo,woocommerce product bundle,design your own,buy in pair<br>
+**Donate link:** https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=hi0001234d1gmail.com&item_name=+Favorite+WooCommerce+Product+Bundle+Choice++Download+WooCommerce+Product+Bundle+Choice+Plugin+Donation¤cy_code=USD&source=url<br>
+**Requires at least:** 3.5<br>
+**Tested up to:** 5.3<br>
+**Requires PHP:** 5.3<br>
+**Stable tag:** 0.5.35<br>
+**License:** GPLv3 or later<br>
+**License URI:** http://www.gnu.org/licenses/gpl-3.0.html<br>
 
 Product bundling as ring builder for jewelry, pair maker for clothing, grocery and guidance tool for home decor, cosmetics etc.
 
@@ -61,7 +61,7 @@ Rapnet is for Diamond/Jewelry websites. Instantly pull the product's feed into y
 These are only some of many extensions. You can see enitre list of Extensions on our website created by the team of Sphere Plugins (https://sphereplugins.com/products/extensions/)
 
 
-###Advantages of WBC:###
+### Advantages of WBC: ###
 * Easy to use.
 * Easy to Install.
 * Lightning ready.
@@ -70,7 +70,7 @@ These are only some of many extensions. You can see enitre list of Extensions on
 * Supports every inventory.
 * Mix and Match Products for clothing.
 
-###Features of WBC:###
+### Features of WBC: ###
 * Product Bundling with users choice.
 * Ring Builder Plugin for WordPress
 * Plugin widget can be placed anywhere within a shortcode.
@@ -86,17 +86,17 @@ These are only some of many extensions. You can see enitre list of Extensions on
 * [Filters](https://www.youtube.com/watch?v=UysQox5AH7I)
 * [Using Shortcode)(youtube https://www.youtube.com/watch?v=QPQcRID_SGE)
 
-##Use Cases##
+## Use Cases ##
 
 To simply put, it does not matter which category your website belongs to if you think you have the products that the user would like to buy in a pair and you can suggest matching recommendations that can make a difference then you should use our plugin.
 
 If you are interested in our plugin, click [here](https://woo-product-bundle.sphere.emptyops.com/use-cases/) to read more.
 
-##Compatibility with other plugins/Officially tested plugins##
+## Compatibility with other plugins/Officially tested plugins ##
 
 We have tested WooCommerce Product Bundle Choice with Wordpress 3.5 to 5.3 and WooCommerce 2.0 to 3.8.0 and our plugin is technically compatible with all the other plugins.
 
-##Live Demo##
+## Live Demo ##
 Now that you know how this plugin works, is there any reason to not use it? Do you want to see the live demo?
 
 You can check our active user's website's demo from different fields :
@@ -104,7 +104,7 @@ You can check our active user's website's demo from different fields :
 1. Live Site [Diamond & Ring](http://cvddiamond.xyz/)
 1. Demo with [Textile](http://101.53.136.134/demo/yc_textile/)
 
-##Our Pro Extensions##
+## Our Pro Extensions ##
 
 1. [Catelog Grid View](https://sphereplugins.com/buy-a-plugin-extension/?cemail=none&cpname=Catelog%20Grid%20View) 
 Let customers browse your inventory in tabular view, which is handy tool for diamond industry.
@@ -113,10 +113,10 @@ Order emails sent to customers from your shop will be customized based on what u
 1. [Rapnet Instant Inventory](https://sphereplugins.com/buy-a-plugin-extension/?cemail=none&cpname=Rapnet%20Instant%20Inventory) 
 Add the Rapnet Instant Inventory showcase to your site. It will be coustomized as per your requirement.
 
-#Documentation#
+# Documentation #
 
 * WooCommerce Product Bundle Choice full documentation is available [here](https://woo-product-bundle.sphere.emptyops.com/documentation/).
 
-##FOR SUPPORT, SUGGESTIONS, FEATURE REQUEST AND BUG REPORTING##
+## FOR SUPPORT, SUGGESTIONS, FEATURE REQUEST AND BUG REPORTING ##
 
 If you have suggestions about how to improve WooCommerce Product Bundle Choice, you can [write us](https://wordpress.org/support/plugin/woo-bundle-choice), so we can enhance our WooCommerce Product Bundle Choice plugin.
