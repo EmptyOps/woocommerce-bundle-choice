@@ -11,20 +11,7 @@ cache:
     - vendor
     - $HOME/.composer/cache
 
-# Test main supported versions of PHP against latest WP.
-php:
-  - 5.6
-  - 7.0
-  - 7.1
-  - 7.2
-  - 7.3
-env:
-  - WP_VERSION=latest WP_MULTISITE=0
-
-# Additional tests against stable PHP (min version is 5.6)
-# and code coverage report.
 matrix:
-  fast_finish: true
   include:
     - php: 7.1
       env: WP_VERSION=latest
@@ -37,31 +24,40 @@ matrix:
     - php: 5.6
       env: WP_VERSION=trunk
     - php: 5.6
+      env: WP_TRAVISCI=phpcs
+    - php: 5.3
+      env: WP_VERSION=latest
+      dist: trusty
 
 before_script:
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
   - |
-    # Remove Xdebug for a huge performance increase:
     if [ -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ]; then
       phpenv config-rm xdebug.ini
     else
       echo "xdebug.ini does not exist"
     fi
   - |
-    # Install WP Test suite, install PHPUnit globally:
-    if [[ ! -z "$WP_VERSION" ]]; then
-      bash tests/bin/install.sh woocommerce_test root '' localhost $WP_VERSION
-      composer global require "phpunit/phpunit=5.7.*|7.5.*"
+    if [[ ! -z "$WP_VERSION" ]] ; then
+      bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
+      composer global require "phpunit/phpunit=4.8.*|5.7.*"
     fi
-  - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1280x1024x16"
+  - |
+    if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
+      composer global require wp-coding-standards/wpcs
+      phpcs --config-set installed_paths $HOME/.composer/vendor/wp-coding-standards/wpcs
+    fi
 
 script:
-  - bash tests/bin/phpunit.sh
-  - bash tests/bin/phpcs.sh
-  - travis_retry bash tests/bin/run-e2e-CI.sh
-
-after_script:
-  - bash tests/bin/travis.sh after
+  - |
+    if [[ ! -z "$WP_VERSION" ]] ; then
+      phpunit
+      WP_MULTISITE=1 phpunit
+    fi
+  - |
+    if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
+      phpcs
+    fi
 
 # Specifies that Travis should create builds for master and release branches and also tags.
 branches:
