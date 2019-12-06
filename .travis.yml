@@ -21,7 +21,7 @@ matrix:
       env: WP_VERSION=latest multisite=0
 
 before_install:
-
+  - wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -P $(pwd)
 
 before_script:
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
