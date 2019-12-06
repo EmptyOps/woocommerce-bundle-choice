@@ -1,4 +1,4 @@
-sudo: false
+sudo: required
 dist: trusty
 
 language: php
@@ -7,10 +7,6 @@ notifications:
   email:
     on_success: never
     on_failure: change
-
-branches:
-  only:
-    - master
 
 services:
   - mysql
@@ -25,7 +21,7 @@ matrix:
       env: WP_VERSION=latest multisite=0
 
 before_install:
-  - wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar  
+  - wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -P
 install:
   - php wp-cli.phar plugin install woocommerce --activate
   - wp core update-db --network
