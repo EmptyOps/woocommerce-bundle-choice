@@ -1,10 +1,11 @@
 <?php
-    
-    wp_register_style( 'eo-wbc-ui',plugin_dir_url(EO_WBC_PLUGIN_FILE).'css/fomantic/semantic.min.css');
-    wp_enqueue_style( 'eo-wbc-ui');      
+    add_action('admin_enqueue_scripts',function(){
+        wp_register_style( 'eo-wbc-ui',plugin_dir_url(EO_WBC_PLUGIN_FILE).'css/fomantic/semantic.min.css');
+        wp_enqueue_style( 'eo-wbc-ui');      
 
-    wp_register_script( 'eo-wbc-ui',plugin_dir_url(EO_WBC_PLUGIN_FILE).'js/fomantic/semantic.min.js');
-    wp_enqueue_script( 'eo-wbc-ui' );  
+        wp_register_script( 'eo-wbc-ui',plugin_dir_url(EO_WBC_PLUGIN_FILE).'js/fomantic/semantic.min.js');
+        wp_enqueue_script( 'eo-wbc-ui' );  
+    });
 
     add_action('admin_head',function(){        
         echo '<link rel="stylesheet" href="'.plugins_url('/EO_WBC_CSS/flipswitch.css',__FILE__).'" type="text/css" media="all" />';
