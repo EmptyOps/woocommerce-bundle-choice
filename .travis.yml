@@ -20,13 +20,11 @@ matrix:
     - php: 7.2
       env: WP_VERSION=latest multisite=0
 
-before_install:
-  - wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -P $(pwd)
-
 before_script:
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
-  - php wp-cli.phar plugin install woocommerce --activate
-  - php wp-cli.phar core update-db --network
+  - wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -P $(pwd)/
+  - wp plugin install woocommerce --activate
+  - wp core update-db --network
   - |
     if [ -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ]; then
       phpenv config-rm xdebug.ini
