@@ -1,4 +1,3 @@
-sudo: required
 dist: trusty
 
 language: php
@@ -8,6 +7,10 @@ notifications:
     on_success: never
     on_failure: change
 
+branches:
+  only:
+    - master
+
 services:
   - mysql
 
@@ -15,12 +18,17 @@ cache:
   directories:
     - $HOME/.composer/cache
 
-matrix:
+env:
+  global:
+    - PATH="$TRAVIS_BUILD_DIR/vendor/bin:$PATH"
+    - WP_CLI_BIN_DIR="$TRAVIS_BUILD_DIR/vendor/bin"
+
+jobs:
   include:
     - php: 7.2
-      env: WP_VERSION=latest WP_MULTISITE=0 TEST_PACKAGE="wp-cli/wp-cli-bundle wp-cli/wp-cli"
+      env: WP_VERSION=latest WP_MULTISITE=0 RUN_PHPCS=1
 
-before_script:
+before_script:  
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
   - wp plugin install woocommerce --activate
   - wp core update-db --network
@@ -45,13 +53,12 @@ script:
   - |
     if [[ ! -z "$WP_VERSION" ]] ; then
       phpunit
-      WP_MULTISITE=0 phpunit
+      WP_MULTISITE=1 phpunit
     fi
   - |
     if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
       phpcs
     fi
 branches:
-  only:
-    - master
+  only:    
     - wbctests

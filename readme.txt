@@ -12,16 +12,18 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Product bundling as ring builder for jewelry, pair maker for clothing, grocery and guidance tool for home decor, cosmetics etc.
 
 == Description ==
-WooCommerce Product Bundle Choice - also known as WBC helps you create product bundles with the following features:
+WooCommerce Product Bundle Choice – also known as WBC helps you to create exciting functionalities and experience on your website with the help of anyone of the following modules:
 
 1. Ring Builder
 2. Pair Maker
 3. Jewelry Customization
 4. Bulk update Price (Any type of Inventory)
 
-We also have Rapnet Extension.
+We also have Rapnet Extension, read more about it below in the Extensions section..
 
-It does not matter to which category your website belongs to, if you are selling anything that you think can be sold in a pair/bundle then this plugin is absolutely for you.
+It does not matter to which category your website belongs to, if you are selling anything that you think can be sold in a pair/bundle then this plugin is absolutely for you. Our philosophy is to provide technology that enables users to make bundles of their choice that is why the name product bundle (of) choice and this becomes really exiciting for users when they have preset recommendation set by website admins.
+
+We provide both the features in a single plugin, ring builder feature will be useful for you if you have a jewelry/diamond website. It is also useful to create efficient diamond [filters](http://cvddiamond.xyz/product-category/solitaire/?EO_WBC=1&BEGIN=solitaire&STEP=1) for real diamonds as well as lab grown or CVD diamonds and pair maker feature will be useful for you if you have anything that you think can be sold in a pair like fashion, apparel, household items – anything etc
 
 We provide both the features in a single plugin but ring builder feature will be useful for you if you have a jewelry/diamond website like lab grown or CVD diamond and pair maker feature will be useful for you if you have anything that you think can be sold in a pair like fashion, apparel, household items - anything etc.
 
@@ -31,7 +33,7 @@ In short, it supports every kind of inventory.
 == UNDERSTANDING FEATURES ==
 
 = 1. RING BUILDER =
-This ring builder feature means online virtual designing of any jewelry item on the screen itself. For example, you are selling cvd diamond or lab grown diamonf online, then the customer step by step combines a pair of – firstly ring setting/mount with diamond and so on. This way combining pair with different parts creates a complete product or pattern.[See a Demo](http://cvddiamond.xyz/product-category/solitaire/?EO_WBC=1&BEGIN=solitaire&STEP=1)
+This ring builder feature means online virtual designing of any jewelry item on the screen itself. For example, you are selling cvd diamond or lab grown diamonf online, then the customer step by step combines a pair of – firstly ring setting/mount with diamond and so on. This way combining pair with different parts creates a complete product or pattern. [See a Demo](http://cvddiamond.xyz/product-category/solitaire/?EO_WBC=1&BEGIN=solitaire&STEP=1)
 
 = 2. PAIR MAKER =
 For example, you are selling clothes online then the customer after selecting top-wear is guided for the bottom wear automatically. So if by chance, user is confused then the plugin guides by mixing and matching different alternatives from the stock and thus pair of clothing is created for the customer. [See a Demo](http://101.53.136.134/demo/yc_textile/)
@@ -46,19 +48,19 @@ It is obvious that any e-commerce website has many products. And the vendors lik
 
 With different add-ons from our collection of extensions, you can make your store look more professional and easy to use for the website vistors.
 
-WooCommerce Table View (https://sphereplugins.com/product/woocommerce-product-bundle-table-view/)
+[WooCommerce Table View](https://sphereplugins.com/product/woocommerce-product-bundle-table-view/)
 
 You can show products in a tabular view for its an easy navigation and built according to users choice.
 
-WooCommerce Product Bundle in E-mail (https://sphereplugins.com/product/woocommerce-product-bundle-e-mail-view/)
+[WooCommerce Product Bundle in E-mail](https://sphereplugins.com/product/woocommerce-product-bundle-e-mail-view/)
 
 It allows you to send products to your prospects in their inbox. Complete User Experience with Flawless Order Processing.
 
-Rapnet Integration Extension (https://sphereplugins.com/product/woocommerce-rapnet-integration-extension/)
+[Rapnet Integration Extension](https://sphereplugins.com/product/woocommerce-rapnet-integration-extension/)
 
 Rapnet is for Diamond/Jewelry websites. Instantly pull the product's feed into your store and ready to go for selling.
 
-These are only some of many extensions. You can see enitre list of Extensions on our website created by the team of Sphere Plugins (https://sphereplugins.com/products/extensions/)
+These are only some of many extensions. You can see enitre list of Extensions on our website created by the team of [Sphere Plugins](https://sphereplugins.com/products/extensions/).
 
 
 Advantages of WBC:
@@ -116,11 +118,11 @@ You can check our active user's website's demo from different fields :
 
 = Our Pro Extensions  =
 
-1. [Catelog Grid View](https://sphereplugins.com/buy-a-plugin-extension/?cemail=none&cpname=Catelog%20Grid%20View) 
+1. [Catelog Grid View](https://sphereplugins.com/product/woocommerce-product-bundle-table-view/) 
 Let customers browse your inventory in tabular view, which is handy tool for diamond industry.
-1. [Woo Product Bundle Choice - Email](https://sphereplugins.com/buy-a-plugin-extension/?cemail=none&cpname=Woo%20Product%20Bundle%20Choice%20-%20Email) 
+1. [Woo Product Bundle Choice - Email](https://sphereplugins.com/product/woocommerce-product-bundle-e-mail-view/) 
 Order emails sent to customers from your shop will be customized based on what user have built, which helps in providing users with complete experience.
-1. [Rapnet Instant Inventory](https://sphereplugins.com/buy-a-plugin-extension/?cemail=none&cpname=Rapnet%20Instant%20Inventory) 
+1. [Rapnet Instant Inventory](https://sphereplugins.com/product/woocommerce-rapnet-integration-extension/) 
 Add the Rapnet Instant Inventory showcase to your site. It will be coustomized as per your requirement.
 
 = Documentation =
