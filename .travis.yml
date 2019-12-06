@@ -30,8 +30,8 @@ jobs:
 
 before_script:  
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
-  - wp plugin install woocommerce --activate
-  - wp core update-db --network
+  - php $WP_CLI_BIN_DIR/wp plugin install woocommerce --activate
+  - php $WP_CLI_BIN_DIR/wp core update-db --network
   - |
     if [ -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ]; then
       phpenv config-rm xdebug.ini
