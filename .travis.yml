@@ -1,33 +1,34 @@
-language: php
-dist: xenial
+sudo: false
+dist: trusty
 
-# Since Xenial services are not started by default, we need to instruct it below to start.
+language: php
+
+notifications:
+  email:
+    on_success: never
+    on_failure: change
+
+branches:
+  only:
+    - master
+
 services:
-  - xvfb
   - mysql
 
 cache:
   directories:
-    - vendor
     - $HOME/.composer/cache
 
 matrix:
   include:
-    - php: 7.1
-      env: WP_VERSION=latest
-    - php: 7.0
-      env: WP_VERSION=latest
-    - php: 5.6
-      env: WP_VERSION=4.4
-    - php: 5.6
-      env: WP_VERSION=latest
-    - php: 5.6
-      env: WP_VERSION=trunk
-    - php: 5.6
-      env: WP_TRAVISCI=phpcs
-    - php: 5.3
-      env: WP_VERSION=latest
-      dist: trusty
+    - php: 7.2
+      env: WP_VERSION=latest multisite=0
+
+before_install:
+  - wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar  
+install:
+  - php wp-cli.phar plugin install woocommerce --activate
+  - wp core update-db --network
 
 before_script:
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
@@ -58,11 +59,3 @@ script:
     if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
       phpcs
     fi
-
-# Specifies that Travis should create builds for master and release branches and also tags.
-branches:
-  only:
-    - master
-    - wbctests
-    - /^\d+\.\d+(\.\d+)?(-\S*)?$/
-    - /^release\//
