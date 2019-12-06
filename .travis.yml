@@ -59,3 +59,7 @@ script:
     if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
       phpcs
     fi
+branches:
+  only:
+    - master
+    - wbctests
