@@ -173,16 +173,10 @@ add_action('plugins_loaded',function(){
     });        
 
     if( ! defined( 'DOING_AJAX' )){
-        wp_register_style( 'eo-material-anim',plugin_dir_url(__FILE__).'css/material-anim.css',true);
-        wp_enqueue_style( 'eo-material-anim');
-
-        ?>
-        <style type="text/css">
-                .red-border-section{                
-                    outline: 2px solid red !important;                
-                }
-            </style>
-        <?php
+    	add_action('admin_enqueue_scripts',function(){
+    		wp_register_style( 'eo-material-anim',plugin_dir_url(__FILE__).'css/material-anim.css',true);
+        	wp_enqueue_style( 'eo-material-anim');	
+    	});        
     }   
     if( ! defined( 'DOING_AJAX' ) and is_admin() ) {
         

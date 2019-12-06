@@ -1,3 +1,7 @@
+.red-border-section{                
+  outline: 2px solid red !important;                
+}
+
 #customize-control-btn_position_setting_selector_btn {
   position: relative;
   text-align: center;    

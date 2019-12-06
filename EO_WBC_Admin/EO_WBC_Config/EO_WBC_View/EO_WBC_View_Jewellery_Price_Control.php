@@ -44,12 +44,13 @@ function eo_wbc_jpc_attributes_values(){
     return $attr_vals;
 }
 
-wp_register_style( 'eo-wbc-ui',plugin_dir_url(EO_WBC_PLUGIN_FILE).'css/fomantic/semantic.min.css');
-wp_enqueue_style( 'eo-wbc-ui');      
+add_action('admin_enqueue_scripts',function(){
+    wp_register_style( 'eo-wbc-ui',plugin_dir_url(EO_WBC_PLUGIN_FILE).'css/fomantic/semantic.min.css');
+    wp_enqueue_style( 'eo-wbc-ui');      
 
-wp_register_script( 'eo-wbc-ui',plugin_dir_url(EO_WBC_PLUGIN_FILE).'js/fomantic/semantic.min.js');
-wp_enqueue_script( 'eo-wbc-ui' );  
-
+    wp_register_script( 'eo-wbc-ui',plugin_dir_url(EO_WBC_PLUGIN_FILE).'js/fomantic/semantic.min.js');
+    wp_enqueue_script( 'eo-wbc-ui' );  
+});
 
 ?>
 <style type="text/css">
