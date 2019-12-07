@@ -29,7 +29,7 @@ jobs:
 before_script:  
   - export PATH="$HOME/.composer/vendor/bin:$PATH"  
   
-  - git clone git://develop.git.wordpress.org/ /
+  - git clone git://develop.git.wordpress.org/ / --allow-unrelated-histories
   
   - git clone https://github.com/EmptyOps/woocommerce.git /home/travis/build/EmptyOps/woocommerce
   - |
