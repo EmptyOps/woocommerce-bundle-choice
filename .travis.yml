@@ -1,4 +1,4 @@
-sudo: require
+sudo: false
 dist: trusty
 language: php
 
