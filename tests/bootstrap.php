@@ -23,8 +23,6 @@ require_once $_tests_dir . '/includes/functions.php';
  * Manually load the plugin being tested.
  */
 function _manually_load_plugin() {
-	
-	require getenv('WP_DEVELOP_DIR').'/tests/phpunit/includes/factory.php';
 
 	require dirname( dirname( dirname( __FILE__ ) ) ). '/woocommerce/tests/bootstrap.php';
 	require dirname( dirname( __FILE__ ) ) . '/woo-bundle-choice.php';	
