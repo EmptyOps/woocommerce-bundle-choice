@@ -29,9 +29,7 @@ jobs:
 
 before_script:  
   - export PATH="$HOME/.composer/vendor/bin:$PATH"  
-  - mkdir /dump -p
-  - git clone https://github.com/WordPress/wordpress-develop.git /dump
-  - mv /dump/tests / -r
+  - git clone https://github.com/WordPress/wordpress-develop.git
   
   - git clone https://github.com/EmptyOps/woocommerce.git /home/travis/build/EmptyOps/woocommerce
   - |
