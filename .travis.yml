@@ -31,8 +31,8 @@ before_script:
   - export PATH="$HOME/.composer/vendor/bin:$PATH"  
   #- git clone https://github.com/WordPress/wordpress-develop.git $WP_CLI_BIN_DIR
   - wget https://github.com/WordPress/wordpress-develop/archive/master.zip
-  - tar -xf master.zip
-    
+  - unzip master.zip
+
   - git clone https://github.com/EmptyOps/woocommerce.git /home/travis/build/EmptyOps/woocommerce
   - |
     if [ -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ]; then
