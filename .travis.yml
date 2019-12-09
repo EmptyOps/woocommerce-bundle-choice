@@ -22,6 +22,24 @@ env:
     - WP_CLI_BIN_DIR="$TRAVIS_BUILD_DIR/vendor/bin"
     - WP_VERSION=latest WP_MULTISITE=0
 
+modules:
+      enabled:
+        - WPLoader
+      config:
+        WPLoader:
+          multisite: false
+          wpRootFolder: "/tmp/wordpress"
+          dbName: "wordpresss_tests"
+          dbHost: "localhost"
+          dbUser: "root"
+          dbPassword: "password"
+          isolatedInstall: true
+          tablePrefix: "wptests_"
+          domain: "wordrpess.localhost"
+          adminEmail: "admin@wordpress.localhost"                            
+          plugins: ['', 'my-plugin/my-plugin.php']
+          activatePlugins: ['hello.php', 'my-plugin/my-plugin.php']
+
 jobs:
   include:
     - php: 7.2

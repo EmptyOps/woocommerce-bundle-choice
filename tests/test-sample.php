@@ -8,10 +8,10 @@
 /**
  * Sample test case.
  */
-$wp_tests_dir = getenv( 'WP_TESTS_DIR' ) ? getenv( 'WP_TESTS_DIR' ) : '/tmp/wordpress-tests-lib';
+/*$wp_tests_dir = getenv( 'WP_TESTS_DIR' ) ? getenv( 'WP_TESTS_DIR' ) : '/tmp/wordpress-tests-lib';
 
 include ($wp_tests_dir.'/abstract-testcase.php');
-include ($wp_tests_dir.'/testcase.php');	
+include ($wp_tests_dir.'/testcase.php');	*/
 
 //$wp_tests_dir = '/home/travis/build/EmptyOps/wptest/tests/';
 
