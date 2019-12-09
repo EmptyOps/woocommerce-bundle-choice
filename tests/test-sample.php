@@ -8,15 +8,15 @@
 /**
  * Sample test case.
  */
-/*$wp_tests_dir = getenv( 'WP_TESTS_DIR' ) ? getenv( 'WP_TESTS_DIR' ) : '/tmp/wordpress-tests-lib';
+if ( ! file_exists( $_tests_dir . '/includes/functions.php' ) ) {
+	echo "Could not find $_tests_dir/includes/functions.php, have you run bin/install-wp-tests.sh ?" . PHP_EOL; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	exit( 1 );
+}
 
-include ($wp_tests_dir.'/abstract-testcase.php');
-include ($wp_tests_dir.'/testcase.php');	*/
-
-//$wp_tests_dir = '/home/travis/build/EmptyOps/wptest/tests/';
-
-//include ($wp_tests_dir.'phpunit/includes/abstract-testcase.php');
-//include ($wp_tests_dir.'phpunit/includes/testcase.php');	
+// Give access to tests_add_filter() function.
+require_once $_tests_dir . '/includes/functions.php';
+require_once ($_tests_dir.'/includes/abstract-testcase.php');
+require_once ($_tests_dir.'/includes/testcase.php');	
 
 class SampleTest extends WP_UnitTestCase {
 
