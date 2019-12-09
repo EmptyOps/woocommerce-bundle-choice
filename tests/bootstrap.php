@@ -4,6 +4,7 @@
  *
  * @package Woo_Bundle_Choice
  */
+require_once(getenv( 'HOME' ) .'/.composer/vendor/autoload.php');
 
 $_tests_dir = getenv( 'WP_TESTS_DIR' );
 
@@ -27,7 +28,7 @@ function _manually_load_plugin() {
 	//Include all files from WP tests library.
 	$include_path='/home/travis/build/EmptyOps/wptest/tests/phpunit/includes/';
 	
-	include($include_path.'factory/class-wp-unittest-factory-for-thing.php');
+/*	include($include_path.'factory/class-wp-unittest-factory-for-thing.php');
 
 	include ($include_path.'factory/class-wp-unittest-factory-for-user.php');
 	include($include_path.'factory/class-wp-unittest-factory-for-post.php');
@@ -44,7 +45,7 @@ function _manually_load_plugin() {
 			
 	
 	include ($include_path.'factory/class-wp-unittest-generator-sequence.php');
-	include ($include_path.'factory/class-wp-unittest-factory.php');
+	include ($include_path.'factory/class-wp-unittest-factory.php');*/
 
 
 	activate_plugin('woocommerce/woocommerce.php');
