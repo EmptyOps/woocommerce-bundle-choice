@@ -1,3 +1,4 @@
+sudo: required
 dist: trusty
 language: php
 
@@ -28,11 +29,8 @@ jobs:
 
 before_script:  
   - export PATH="$HOME/.composer/vendor/bin:$PATH"  
-  - export WP_DEVELOP_DIR=/tmp/wordpress/
-  - mkdir -p $WP_DEVELOP_DIR
-    # Use the Git mirror of WordPress.
-  - git clone --depth=1 --branch="$WP_VERSION" git://develop.git.wordpress.org/ $WP_DEVELOP_DIR
-  
+  - git clone https://github.com/WordPress/wordpress-develop.git /home/travis/build/EmptyOps/wptest  
+
   - git clone https://github.com/EmptyOps/woocommerce.git /home/travis/build/EmptyOps/woocommerce
   - |
     if [ -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ]; then
