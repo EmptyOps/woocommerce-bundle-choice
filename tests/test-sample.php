@@ -15,7 +15,7 @@ if ( ! $_tests_dir ) {
 // Give access to tests_add_filter() function.
 require_once $_tests_dir . '/includes/functions.php';
 
-activate_plugin('woocommerce/woocommerce.php');
+activate_plugin('/home/travis/build/EmptyOps/woocommerce/woocommerce.php');
 
 class SampleTest extends WP_UnitTestCase {
 
