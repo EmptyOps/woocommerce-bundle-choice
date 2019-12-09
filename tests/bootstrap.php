@@ -23,6 +23,7 @@ require_once $_tests_dir . '/includes/functions.php';
  * Manually load the plugin being tested.
  */
 function _manually_load_plugin() {
+
 	//Include all files from WP tests library.
 	$dir = new RecursiveDirectoryIterator('/home/travis/build/EmptyOps/wptest/tests/phpunit/includes');
 	$iter = new RecursiveIteratorIterator($dir);
@@ -30,7 +31,7 @@ function _manually_load_plugin() {
 	foreach ( $files as $file ) {
 	  include $file;
 	}
-
+	
 	require dirname( dirname( dirname( __FILE__ ) ) ). '/woocommerce/tests/bootstrap.php';
 	require dirname( dirname( __FILE__ ) ) . '/woo-bundle-choice.php';	
 }
