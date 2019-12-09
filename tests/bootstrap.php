@@ -23,30 +23,28 @@ require_once $_tests_dir . '/includes/functions.php';
  * Manually load the plugin being tested.
  */
 function _manually_load_plugin() {
+		
+	include($_tests_dir.'factory/class-wp-unittest-factory-for-thing.php');
 
-	//Include all files from WP tests library.
-	$include_path='/home/travis/build/EmptyOps/wptest/tests/phpunit/includes/';
+	include ($_tests_dir.'factory/class-wp-unittest-factory-for-user.php');
+	include($_tests_dir.'factory/class-wp-unittest-factory-for-post.php');
+	include($_tests_dir.'factory/class-wp-unittest-factory-for-term.php');
+
+	include($_tests_dir.'factory/class-wp-unittest-factory-for-blog.php');
+
+	include($_tests_dir.'factory/class-wp-unittest-factory-for-attachment.php');
+	include($_tests_dir.'factory/class-wp-unittest-factory-callback-after-create.php');
 	
-	include($include_path.'factory/class-wp-unittest-factory-for-thing.php');
-
-	include ($include_path.'factory/class-wp-unittest-factory-for-user.php');
-	include($include_path.'factory/class-wp-unittest-factory-for-post.php');
-	include($include_path.'factory/class-wp-unittest-factory-for-term.php');
-
-	include($include_path.'factory/class-wp-unittest-factory-for-blog.php');
-
-	include($include_path.'factory/class-wp-unittest-factory-for-attachment.php');
-	include($include_path.'factory/class-wp-unittest-factory-callback-after-create.php');
-	
-	include($include_path.'factory/class-wp-unittest-factory-for-bookmark.php');
-	include($include_path.'factory/class-wp-unittest-factory-for-comment.php');
-	include($include_path.'factory/class-wp-unittest-factory-for-network.php');	
+	include($_tests_dir.'factory/class-wp-unittest-factory-for-bookmark.php');
+	include($_tests_dir.'factory/class-wp-unittest-factory-for-comment.php');
+	include($_tests_dir.'factory/class-wp-unittest-factory-for-network.php');	
 			
 	
-	include ($include_path.'factory/class-wp-unittest-generator-sequence.php');
-	include ($include_path.'factory/class-wp-unittest-factory.php');
+	include ($_tests_dir.'factory/class-wp-unittest-generator-sequence.php');
+	include ($_tests_dir.'factory/class-wp-unittest-factory.php');
 
-	include ($include_path.'testcase.php');
+	include ($_tests_dir.'abstract-testcase.php');
+	include ($_tests_dir.'testcase.php');	
 
 	activate_plugin('woocommerce/woocommerce.php');
 
