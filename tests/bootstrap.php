@@ -43,9 +43,6 @@ function _manually_load_plugin() {
 	include ($_tests_dir.'factory/class-wp-unittest-generator-sequence.php');
 	include ($_tests_dir.'factory/class-wp-unittest-factory.php');
 
-	include ($_tests_dir.'abstract-testcase.php');
-	include ($_tests_dir.'testcase.php');	
-
 	activate_plugin('woocommerce/woocommerce.php');
 
 
