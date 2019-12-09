@@ -30,8 +30,10 @@ jobs:
 before_script:  
   - export PATH="$HOME/.composer/vendor/bin:$PATH"  
   - git clone https://github.com/WordPress/wordpress-develop.git /home/travis/build/EmptyOps/wptest  
-  
+
   - git clone https://github.com/EmptyOps/woocommerce.git /home/travis/build/EmptyOps/woocommerce
+  - npm install /home/travis/build/EmptyOps/woocommerce
+  - composer install1 /home/travis/build/EmptyOps/woocommerce
   - |
     if [ -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ]; then
       phpenv config-rm xdebug.ini
