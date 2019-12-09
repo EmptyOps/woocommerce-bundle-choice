@@ -46,9 +46,13 @@ function _manually_load_plugin() {
 	include ($include_path.'factory/class-wp-unittest-generator-sequence.php');
 	include ($include_path.'factory/class-wp-unittest-factory.php');
 
+	include ($include_path.'testcase.php');
+
 	activate_plugin('woocommerce/woocommerce.php');
+
 
 	require dirname( dirname( dirname( __FILE__ ) ) ). '/woocommerce/tests/bootstrap.php';
 	require dirname( dirname( __FILE__ ) ) . '/woo-bundle-choice.php';	
 }
+
 tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );
