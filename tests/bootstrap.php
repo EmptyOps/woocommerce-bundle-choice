@@ -24,24 +24,24 @@ require_once $_tests_dir . '/includes/functions.php';
  */
 function _manually_load_plugin() {
 		
-	include($_tests_dir.'factory/class-wp-unittest-factory-for-thing.php');
+	include($_tests_dir.'/factory/class-wp-unittest-factory-for-thing.php');
 
-	include ($_tests_dir.'factory/class-wp-unittest-factory-for-user.php');
-	include($_tests_dir.'factory/class-wp-unittest-factory-for-post.php');
-	include($_tests_dir.'factory/class-wp-unittest-factory-for-term.php');
+	include ($_tests_dir.'/factory/class-wp-unittest-factory-for-user.php');
+	include($_tests_dir.'/factory/class-wp-unittest-factory-for-post.php');
+	include($_tests_dir.'/factory/class-wp-unittest-factory-for-term.php');
 
-	include($_tests_dir.'factory/class-wp-unittest-factory-for-blog.php');
+	include($_tests_dir.'/factory/class-wp-unittest-factory-for-blog.php');
 
-	include($_tests_dir.'factory/class-wp-unittest-factory-for-attachment.php');
-	include($_tests_dir.'factory/class-wp-unittest-factory-callback-after-create.php');
+	include($_tests_dir.'/factory/class-wp-unittest-factory-for-attachment.php');
+	include($_tests_dir.'/factory/class-wp-unittest-factory-callback-after-create.php');
 	
-	include($_tests_dir.'factory/class-wp-unittest-factory-for-bookmark.php');
-	include($_tests_dir.'factory/class-wp-unittest-factory-for-comment.php');
-	include($_tests_dir.'factory/class-wp-unittest-factory-for-network.php');	
+	include($_tests_dir.'/factory/class-wp-unittest-factory-for-bookmark.php');
+	include($_tests_dir.'/factory/class-wp-unittest-factory-for-comment.php');
+	include($_tests_dir.'/factory/class-wp-unittest-factory-for-network.php');	
 			
 	
-	include ($_tests_dir.'factory/class-wp-unittest-generator-sequence.php');
-	include ($_tests_dir.'factory/class-wp-unittest-factory.php');
+	include ($_tests_dir.'/factory/class-wp-unittest-generator-sequence.php');
+	include ($_tests_dir.'/factory/class-wp-unittest-factory.php');
 
 	activate_plugin('woocommerce/woocommerce.php');
 
