@@ -17,11 +17,7 @@ require_once $_tests_dir . '/includes/functions.php';
 
 echo "Enabling woocommerce......".PHP_EOL;
 
-require_once '../../woocommerce/woocommerce.php';
-
 activate_plugin('woocommerce/woocommerce.php');
-
-
 
 class SampleTest extends WP_UnitTestCase {
 
