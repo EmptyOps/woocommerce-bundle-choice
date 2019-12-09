@@ -10,8 +10,8 @@
  */
 $wp_tests_dir = '/home/travis/build/EmptyOps/wptest/tests/';
 
-include ($wp_tests_dir.'phpunit/includes/abstract-testcase.php');
-include ($wp_tests_dir.'phpunit/includes/testcase.php');	
+//include ($wp_tests_dir.'phpunit/includes/abstract-testcase.php');
+//include ($wp_tests_dir.'phpunit/includes/testcase.php');	
 
 class SampleTest extends WP_UnitTestCase {
 
