@@ -28,29 +28,8 @@ function _manually_load_plugin() {
 
 	//Include all files from WP tests library.
 	$include_path='/home/travis/build/EmptyOps/wptest/tests/phpunit/includes/';
-	
-/*	include($include_path.'factory/class-wp-unittest-factory-for-thing.php');
-
-	include ($include_path.'factory/class-wp-unittest-factory-for-user.php');
-	include($include_path.'factory/class-wp-unittest-factory-for-post.php');
-	include($include_path.'factory/class-wp-unittest-factory-for-term.php');
-
-	include($include_path.'factory/class-wp-unittest-factory-for-blog.php');
-
-	include($include_path.'factory/class-wp-unittest-factory-for-attachment.php');
-	include($include_path.'factory/class-wp-unittest-factory-callback-after-create.php');
-	
-	include($include_path.'factory/class-wp-unittest-factory-for-bookmark.php');
-	include($include_path.'factory/class-wp-unittest-factory-for-comment.php');
-	include($include_path.'factory/class-wp-unittest-factory-for-network.php');	
-			
-	
-	include ($include_path.'factory/class-wp-unittest-generator-sequence.php');
-	include ($include_path.'factory/class-wp-unittest-factory.php');*/
-
 
 	activate_plugin('woocommerce/woocommerce.php');
-
 
 	require dirname( dirname( dirname( __FILE__ ) ) ). '/woocommerce/tests/bootstrap.php';
 	require dirname( dirname( __FILE__ ) ) . '/woo-bundle-choice.php';	
