@@ -33,7 +33,7 @@ before_script:
 
   - git clone https://github.com/EmptyOps/woocommerce.git /home/travis/build/EmptyOps/woocommerce
   - npm install /home/travis/build/EmptyOps/woocommerce
-  - composer install /home/travis/build/EmptyOps/woocommerce
+  - composer install -d=/home/travis/build/EmptyOps/woocommerce
   - |
     if [ -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ]; then
       phpenv config-rm xdebug.ini
