@@ -29,7 +29,7 @@ function _manually_load_plugin() {
 	//Include all files from WP tests library.
 	//$include_path='/home/travis/build/EmptyOps/wptest/tests/phpunit/includes/';
 
-	//activate_plugin('woocommerce/woocommerce.php');
+	activate_plugin('woocommerce/woocommerce.php');
 
 	//require dirname( dirname( dirname( __FILE__ ) ) ). '/woocommerce/tests/bootstrap.php';
 	require dirname( dirname( __FILE__ ) ) . '/woo-bundle-choice.php';	
