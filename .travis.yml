@@ -29,9 +29,9 @@ jobs:
 
 before_script:    
   - export PATH="$HOME/.composer/vendor/bin:$PATH"    
-  - curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar 
-  - chmod +x wp-cli.phar 
-  - mv wp-cli.phar /tmp/wordpress/wp
+  - curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar > wp
+  - chmod +x wp 
+  - mv wp-cli.phar /tmp/wordpress/
   - php /tmp/wordpress/wp plugin install woocommerce --activate
   - git clone https://github.com/EmptyOps/woocommerce.git /home/travis/build/EmptyOps/woocommerce
   - |
