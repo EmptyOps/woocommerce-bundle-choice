@@ -28,8 +28,7 @@ jobs:
       env: WP_VERSION=latest WP_MULTISITE=0 RUN_PHPCS=1
 
 before_script:    
-  - export PATH="$HOME/.composer/vendor/bin:$PATH"        
-  - git clone https://github.com/EmptyOps/woocommerce.git /home/travis/build/EmptyOps/woocommerce
+  - export PATH="$HOME/.composer/vendor/bin:$PATH"          
   - |
     if [ -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ]; then
       phpenv config-rm xdebug.ini
@@ -48,12 +47,12 @@ before_script:
     fi
 
 script:
+  - curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar > wp
+  - chmod +x wp 
+  - mv wp /tmp/wordpress/
+  - php /tmp/wordpress/wp plugin install woocommerce --activate
   - |
-    if [[ ! -z "$WP_VERSION" ]] ; then
-      curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar > wp
-      chmod +x wp 
-      mv wp /tmp/wordpress/
-      php /tmp/wordpress/wp plugin install woocommerce --activate
+    if [[ ! -z "$WP_VERSION" ]] ; then      
       phpunit      
     fi
   - |
