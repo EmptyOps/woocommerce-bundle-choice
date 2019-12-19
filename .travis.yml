@@ -31,7 +31,7 @@ before_script:
   - export PATH="$HOME/.composer/vendor/bin:$PATH"    
   - curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar 
   - chmod +x wp-cli.phar 
-  - move wp-cli.phar /tmp/wordpress/wp
+  - mv wp-cli.phar /tmp/wordpress/wp
   - php /tmp/wordpress/wp plugin install woocommerce --activate
   - git clone https://github.com/EmptyOps/woocommerce.git /home/travis/build/EmptyOps/woocommerce
   - |
