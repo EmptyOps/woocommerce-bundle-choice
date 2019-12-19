@@ -52,7 +52,7 @@ script:
     if [[ ! -z "$WP_VERSION" ]] ; then
       curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar > wp
       chmod +x wp 
-      mv wp-cli.phar /tmp/wordpress/
+      mv wp /tmp/wordpress/
       php /tmp/wordpress/wp plugin install woocommerce --activate
       phpunit      
     fi
