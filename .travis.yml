@@ -49,7 +49,7 @@ script:
   - curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar > wp
   - chmod +x wp 
   - mv wp /tmp/wordpress/
-  - composer require woocommerce/woocommerce
+  - composer require global woocommerce/woocommerce
   - composer install --no-dev -d /tmp/wordpress/
   - php /tmp/wordpress/wp plugin activate woocommerce  
   - |
