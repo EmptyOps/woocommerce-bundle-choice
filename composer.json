@@ -1,0 +1,18 @@
+{
+    "type": "project",
+    "config": {
+        "vendor-dir": "/home/travis/.composer/vendor"
+    },
+    "extra": {
+        "wordpress-install-dir": "/tmp/wordpress/"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url" : "https://wpackagist.org"
+        }
+    ],
+    "require": {
+        "wpackagist-plugin/woocommerce": "^3.8",        
+    }    
+}
