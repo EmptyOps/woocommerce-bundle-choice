@@ -48,9 +48,8 @@ before_script:
 script:
   - curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar > wp
   - chmod +x wp 
-  - mv wp /tmp/wordpress/
-  - composer /tmp/wordpress/ require woocommerce/woocommerce
-  - composer install --no-dev -d /tmp/wordpress/
+  - mv wp /tmp/wordpress/  
+  - composer install --no-dev
   - php /tmp/wordpress/wp plugin activate woocommerce  
   - |
     if [[ ! -z "$WP_VERSION" ]] ; then      
