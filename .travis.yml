@@ -50,7 +50,7 @@ script:
   - chmod +x wp 
   - mv wp /tmp/wordpress/
   - composer require woocommerce/woocommerce
-  - composer install --no-dev
+  - composer install --no-dev -d /tmp/wordpress/
   - php /tmp/wordpress/wp plugin activate woocommerce  
   - |
     if [[ ! -z "$WP_VERSION" ]] ; then      
