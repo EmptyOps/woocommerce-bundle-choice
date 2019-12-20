@@ -13,6 +13,6 @@
         }
     ],
     "require": {
-        "wpackagist-plugin/woocommerce": "^3.8",        
-    }    
+        "wpackagist-plugin/woocommerce": "^3.8"
+    }
 }
