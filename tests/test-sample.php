@@ -17,7 +17,7 @@ require_once $_tests_dir . '/includes/functions.php';
 
 //echo "Enabling woocommerce......".PHP_EOL;
 
-//require_once '/home/travis/build/EmptyOps/woocommerce/woocommerce.php';
+require_once '/tmp/wordpress/wp-content/plugins/woocommerce/woocommerce.php';
 
 activate_plugin('woocommerce/woocommerce.php');
 
@@ -32,5 +32,6 @@ class SampleTest extends WP_UnitTestCase {
 	}
 	public function test_another(){		
 		$this->assertTrue( class_exists('WooCommerce') );
+
 	}
 }
