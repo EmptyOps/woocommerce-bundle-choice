@@ -8,7 +8,9 @@ require_once $wp_tests_dir . '/includes/functions.php';
 require_once $wp_tests_dir . '/includes/bootstrap.php';
 require_once $wp_tests_dir . '/includes/listener-loader.php';
 
-require_once dirname( dirname( __FILE__ ) ) . '/woo-bundle-choice.php';		
+$plugin_dir = dirname( dirname( __FILE__ ) );
+
+require_once $plugin_dir . '/woo-bundle-choice.php';		
 
 activate_plugin('woocommerce/woocommerce.php');
 activate_plugin('woocommerce-bundle-choice/woo-bundle-choice.php');		
@@ -24,7 +26,8 @@ class UserHome extends WP_UnitTestCase {
 		$this->assertTrue( class_exists('WooCommerce') );
 	}
 
-	public function test_automatic_install(){
+	public function test_button_css(){
+		require_once constant('EO_WBC_PLUGIN_DIR').'EO_WBC_Frontend/EO_WBC_Home.php';
 		$this->assertTrue(class_exists('EO_WBC_Home'));		
 
 		$home = EO_WBC_Home();
