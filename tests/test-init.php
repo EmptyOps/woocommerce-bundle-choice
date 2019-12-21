@@ -43,10 +43,10 @@ class InitTest extends WP_UnitTestCase {
 	    }
 
 		$catat=new EO_WBC_CatAt();		
-		update_option('eo_wbc_cats',serialize($catat->create_category($category)));
-		$this->assertNotEmpty(get_option('eo_wbc_cats'));
-		$this->assertIsArray(unserialize(get_option('eo_wbc_cats')));
-
-
+		$category_result=$catat->create_category($category);
+		update_option('eo_wbc_cats',serialize($category_result));
+		$this->assertNotFalse($category_result);
+		$this->assertIsArray($category_result);
+		$this->assertEquals($category_result,get_option('eo_wbc_cats'));
 	}
 }
