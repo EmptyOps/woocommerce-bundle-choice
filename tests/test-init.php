@@ -22,17 +22,7 @@ class InitTest extends WP_UnitTestCase {
 
 		echo constant('EO_WBC_PLUGIN_DIR').'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/library/EO_WBC_CatAt.php';// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
-		$index=0;
-		$category=array();
-	    while(!empty($_POST['cat_value_'.$index])){
-	      	if(!empty($_POST['cat_'.$index])){
-	        	$_category[$index]['name']=$_POST['cat_value_'.$index];
-	          	$category[]=$_category[$index];
-	        }
-	        $index++;
-	    }      
-
-	    $index=0;
+	    /*$index=0;
 	    $attributes=array();
 	    while(!empty($_POST['attr_value_'.$index])){
 	        if(!empty($_POST['attr_'.$index])){
@@ -40,10 +30,10 @@ class InitTest extends WP_UnitTestCase {
 	          	$attributes[]=$_atttriutes[$index]; 
 	        }
 	        $index++;
-	    }
+	    }*/
 
 		$catat=new EO_WBC_CatAt();		
-		$category_result=$catat->create_category($category);
+		$category_result=$catat->create_category($_category);
 		update_option('eo_wbc_cats',serialize($category_result));
 		$this->assertNotFalse($category_result);
 		$this->assertIsArray($category_result);
