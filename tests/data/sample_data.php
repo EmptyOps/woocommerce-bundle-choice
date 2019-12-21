@@ -1,4 +1,5 @@
 <?php
+    $_img_url=constant('EO_WBC_PLUGIN_DIR').'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/';
 	$_category=array(
                 array(
                     'thumb' => '',
