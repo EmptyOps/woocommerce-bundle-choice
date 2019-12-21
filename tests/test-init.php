@@ -5,7 +5,7 @@ if ( ! $_tests_dir ) {
 }
 require_once $_tests_dir . '/includes/functions.php';
 activate_plugin('woocommerce/woocommerce.php');
-error_log(get_option('site_url').PHP_EOL);
+activate_plugin('woo-bundle-choice/woo-bundle-choice.php');
 
 class InitTest extends WP_UnitTestCase {
 
@@ -17,6 +17,8 @@ class InitTest extends WP_UnitTestCase {
 		
 		require_once(constant('EO_WBC_PLUGIN_DIR').'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/library/EO_WBC_CatAt.php');
 		require_once('data/sample_data.php');
+		
+		echo constant('EO_WBC_PLUGIN_DIR').'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/library/EO_WBC_CatAt.php'// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 		$index=0;
 		$category=array();
