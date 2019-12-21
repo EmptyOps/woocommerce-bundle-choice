@@ -15,6 +15,6 @@ class InitTest extends WP_UnitTestCase {
 
 	public function test_home_links(){
 		echo get_option('site_url').PHP_EOL;
-		$this->assertEquals( 'http://example.org/', get_option('site_url') );
+		$this->assertEquals( 'http://localhost/', get_option('site_url') );
 	}
 }
