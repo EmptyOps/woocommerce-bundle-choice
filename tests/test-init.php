@@ -5,7 +5,7 @@ if ( ! $_tests_dir ) {
 }
 require_once $_tests_dir . '/includes/functions.php';
 activate_plugin('woocommerce/woocommerce.php');
-echo get_option('site_url');
+error_log(get_option('site_url').PHP_EOL);
 
 class InitTest extends WP_UnitTestCase {
 
@@ -14,6 +14,7 @@ class InitTest extends WP_UnitTestCase {
 	}
 
 	public function test_home_links(){
+		echo get_option('site_url').PHP_EOL;
 		$this->assertEquals( 'http://example.org/', get_option('site_url') );
 	}
 }
