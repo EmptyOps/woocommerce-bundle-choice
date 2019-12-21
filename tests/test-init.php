@@ -5,7 +5,7 @@ if ( ! $_tests_dir ) {
 }
 require_once $_tests_dir . '/includes/functions.php';
 activate_plugin('woocommerce/woocommerce.php');
-activate_plugin('woo-bundle-choice/woo-bundle-choice.php');
+activate_plugin('woocommerce-bundle-choice/woo-bundle-choice.php');
 
 class InitTest extends WP_UnitTestCase {
 
