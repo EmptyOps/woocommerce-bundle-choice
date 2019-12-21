@@ -30,7 +30,7 @@ class UserHome extends WP_UnitTestCase {
 		require_once constant('EO_WBC_PLUGIN_DIR').'EO_WBC_Frontend/EO_WBC_Home.php';
 		$this->assertTrue(class_exists('EO_WBC_Home'));		
 
-		$home = EO_WBC_Home();
+		$home = new EO_WBC_Home();
 		$this->assertIsString($home->eo_wbc_buttons_css());
 		$this->assertNotEmpty($home->eo_wbc_buttons_css());
 	}
