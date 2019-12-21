@@ -31,6 +31,6 @@ class UserHome extends WP_UnitTestCase {
 		$this->assertTrue(class_exists('EO_WBC_Home'));		
 
 		$home = new EO_WBC_Home();
-		$this->$this->assertEmpty($home->show_buttons());		
+		$this->assertEmpty($home->show_buttons());		
 	}
 }
