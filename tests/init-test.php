@@ -8,6 +8,7 @@ class InitTest extends WP_UnitTestCase {
 		}
 		require_once $_tests_dir . '/includes/functions.php';
 		activate_plugin('woocommerce/woocommerce.php');
+		echo get_option('site_url');
 	}
 
 	public function test_woocommerce_exists(){		
@@ -15,7 +16,6 @@ class InitTest extends WP_UnitTestCase {
 	}
 
 	public function test_home_links(){
-
 		$this->assertEquals( 'http://example.org/', get_option('site_url') );
 	}
 }
