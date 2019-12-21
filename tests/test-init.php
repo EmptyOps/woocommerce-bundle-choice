@@ -37,6 +37,6 @@ class InitTest extends WP_UnitTestCase {
 		update_option('eo_wbc_cats',serialize($category_result));
 		$this->assertNotFalse($category_result);
 		$this->assertIsArray($category_result);
-		$this->assertEquals($category_result,get_option('eo_wbc_cats'));
+		$this->assertEquals($category_result,unserialize(get_option('eo_wbc_cats')));
 	}
 }
