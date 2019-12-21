@@ -33,17 +33,19 @@ class WBC_TEST
 			exit( 1 );
 		}	
 
+		require_once $this->wp_tests_dir . '/includes/functions.php';
+		require_once $this->wp_tests_dir . '/includes/bootstrap.php';
+		require_once $this->wp_tests_dir . '/includes/listener-loader.php';
+
 		tests_add_filter( 'muplugins_loaded', array( $this, 'load_wbc' ) );		
 		tests_add_filter( 'setup_theme', array( $this, 'install_wbc' ) );
 
-		// load WC testing framework
+		// load WBC testing framework
 		$this->includes();
 	}
 
 	public function includes() {				
-		require_once $this->wp_tests_dir . '/includes/functions.php';
-		require_once $this->wp_tests_dir . '/includes/bootstrap.php';
-		require_once $this->wp_tests_dir . '/includes/listener-loader.php';
+		
 	}
 
 	public function load_wbc() {		
@@ -55,7 +57,7 @@ class WBC_TEST
 		// Clean existing install first.
 		define( 'WP_UNINSTALL_PLUGIN', true );
 		define( 'WC_REMOVE_ALL_DATA', true );
-		
+
 		activate_plugin('woocommerce/woocommerce.php');
 		activate_plugin('woocommerce-bundle-choice/woo-bundle-choice.php');		
 	}
