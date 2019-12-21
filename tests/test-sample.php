@@ -8,18 +8,18 @@
 /**
  * Sample test case.
  */
-$_tests_dir = getenv( 'WP_TESTS_DIR' );
+/*$_tests_dir = getenv( 'WP_TESTS_DIR' );
 if ( ! $_tests_dir ) {
 	$_tests_dir = rtrim( sys_get_temp_dir(), '/\\' ) . '/wordpress-tests-lib';
-}
+}*/
 // Give access to tests_add_filter() function.
-require_once $_tests_dir . '/includes/functions.php';
+//require_once $_tests_dir . '/includes/functions.php';
 
 //echo "Enabling woocommerce......".PHP_EOL;
 
-require_once '/tmp/wordpress/wp-content/plugins/woocommerce/woocommerce.php';
+//require_once '/tmp/wordpress/wp-content/plugins/woocommerce/woocommerce.php';
 
-activate_plugin('woocommerce/woocommerce.php');
+//activate_plugin('woocommerce/woocommerce.php');
 
 class SampleTest extends WP_UnitTestCase {
 
