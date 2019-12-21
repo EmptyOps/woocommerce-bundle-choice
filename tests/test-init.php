@@ -15,7 +15,7 @@ class InitTest extends WP_UnitTestCase {
 
 	public function test_automatic_install(){
 		
-		require_once(EO_WBC_PLUGIN_DIR.'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/library/EO_WBC_CatAt.php');
+		require_once(constant('EO_WBC_PLUGIN_DIR').'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/library/EO_WBC_CatAt.php');
 		require_once('data/sample_data.php');
 
 		$index=0;
@@ -43,6 +43,6 @@ class InitTest extends WP_UnitTestCase {
 		$this->assertNotEmpty(get_option('eo_wbc_cats'));
 		$this->assertIsArray(unserialize(get_option('eo_wbc_cats')));
 
-		
+
 	}
 }
