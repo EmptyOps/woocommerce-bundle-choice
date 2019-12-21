@@ -1,4 +1,12 @@
 <?php
+$wp_tests_dir = getenv( 'WP_TESTS_DIR' ) ? getenv( 'WP_TESTS_DIR' ) : '/tmp/wordpress-tests-lib';
+require_once $wp_tests_dir . '/includes/functions.php';
+require_once $wp_tests_dir . '/includes/bootstrap.php';
+require_once $wp_tests_dir . '/includes/listener-loader.php';
+
+activate_plugin('woocommerce/woocommerce.php');
+activate_plugin('woocommerce-bundle-choice/woo-bundle-choice.php');		
+
 class InitTest extends WP_UnitTestCase {
 
 	public function test_woocommerce_exists(){		
