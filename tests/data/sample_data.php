@@ -1,86 +1,5 @@
-<?php 
-  $_atttriutes=array(
-                    array(
-                        'label' => 'Carat',
-                        'range'=>true,
-                        'terms' => array('min'=>'0.2','max'=>'25'),
-                        'description' => 'Carat attributes for diamond shape',
-                        'slug' => 'eo_carat_attr'
-                    ),
-                    array(
-                        'label' => 'Clarity',
-                        'terms' => array('IF','VVS1','VVS2','VS1','VS2','SI1'),
-                        'description' => 'Clarity attributes for diamond shape',
-                        'slug' => 'eo_clarity_attr'
-                    ),
-                    array(
-                        'label' => 'Colour',
-                        'terms' => array('D','E','F','G','H','I','J','K','L','M'),
-                        'description' => 'Colour attributes for diamond shape',
-                        'slug' => 'eo_colour_attr'
-                    ),
-                    array(
-                        'label' => 'Polish',
-                        'terms' => array('Excellent','Very Good','Good','Fair'),
-                        'description' => 'Polish attributes for diamond shape',
-                        'slug' => 'eo_polish_attr'
-                    ),
-                    array(
-                        'label' => 'Symmertry',
-                        'terms' => array('Excellent','Very Good','Good','Fair'),
-                        'description' => 'Symmertry attributes for diamond shape',
-                        'slug' => 'eo_symmertry_attr'
-                    ),
-                    array(
-                        'label' => 'Fluorescence',
-                        'terms' => array('None','Very','Slight','Slight','Faint'),
-                        'description' => 'Fluorescence attributes for diamond shape',
-                        'slug' => 'eo_fluorescence_attr'
-                    ),
-                    array(
-                        'label' => 'Depth',
-                        'range'=>true,
-                        'terms' => array('min'=>'45','max'=>'85'),        
-                        'description' => 'Depth attributes for diamond shape',
-                        'slug' => 'eo_depth_attr'
-                    ),
-                    array(
-                        'label' => 'Size',
-                        'range'=>true,
-                        'terms' => array('min'=>'4','max'=>'7'),        
-                        'description' => 'Size attributes for settings',
-                        'slug' => 'eo_size_attr'
-                    ),
-                    array(
-                        'label' => 'Table',
-                        'range'=>true,
-                        'terms' => array('min'=>'45','max'=>'85'),
-                        'description' => 'Table attributes for diamond shape',
-                        'slug' => 'eo_table_attr'
-                    ),
-                    array(
-                        'label' => 'Grading Report',
-                        'terms' => array('GIA','IGI','AGS','HRD'),
-                        'description' => 'Grading report attributes for diamond shape',
-                        'slug' => 'eo_grading_report_attr'
-                    ),
-                    array(
-                        'label' => 'Ring Style',
-                        'terms' => array('Halo','Pave','Solitaire','Trilogy'),
-                        'description' => 'Ring style attributes for diamond shape',
-                        'slug' => 'eo_ring_style_attr'
-                    ),
-                    array(
-                        'label' => 'Metal',
-                        'terms' => array('14K White Gold','18K White Gold','14K Yellow Gold','18K Yellow Gold','14K Rose Gold','18K Rose Gold','Platinum'),
-                        'description' => 'Metal attributes for diamond shape',
-                        'slug' => 'eo_metal_attr'
-                    ),
-                  ); 
-
-  $_img_url=EO_WBC_PLUGIN_DIR.'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/';
-  
-  $_category=array(
+<?php
+	$_category=array(
                 array(
                     'thumb' => '',
                     'name' => 'Diamond Shape',
@@ -305,41 +224,85 @@
                  )
               );
 
-  $_step=1;
+	$_atttriutes=array(
+                array(
+                    'label' => 'Carat',
+                    'range'=>true,
+                    'terms' => array('min'=>'0.2','max'=>'25'),
+                    'description' => 'Carat attributes for diamond shape',
+                    'slug' => 'eo_carat_attr'
+                ),
+                array(
+                    'label' => 'Clarity',
+                    'terms' => array('IF','VVS1','VVS2','VS1','VS2','SI1'),
+                    'description' => 'Clarity attributes for diamond shape',
+                    'slug' => 'eo_clarity_attr'
+                ),
+                array(
+                    'label' => 'Colour',
+                    'terms' => array('D','E','F','G','H','I','J','K','L','M'),
+                    'description' => 'Colour attributes for diamond shape',
+                    'slug' => 'eo_colour_attr'
+                ),
+                array(
+                    'label' => 'Polish',
+                    'terms' => array('Excellent','Very Good','Good','Fair'),
+                    'description' => 'Polish attributes for diamond shape',
+                    'slug' => 'eo_polish_attr'
+                ),
+                array(
+                    'label' => 'Symmertry',
+                    'terms' => array('Excellent','Very Good','Good','Fair'),
+                    'description' => 'Symmertry attributes for diamond shape',
+                    'slug' => 'eo_symmertry_attr'
+                ),
+                array(
+                    'label' => 'Fluorescence',
+                    'terms' => array('None','Very','Slight','Slight','Faint'),
+                    'description' => 'Fluorescence attributes for diamond shape',
+                    'slug' => 'eo_fluorescence_attr'
+                ),
+                array(
+                    'label' => 'Depth',
+                    'range'=>true,
+                    'terms' => array('min'=>'45','max'=>'85'),        
+                    'description' => 'Depth attributes for diamond shape',
+                    'slug' => 'eo_depth_attr'
+                ),
+                array(
+                    'label' => 'Size',
+                    'range'=>true,
+                    'terms' => array('min'=>'4','max'=>'7'),        
+                    'description' => 'Size attributes for settings',
+                    'slug' => 'eo_size_attr'
+                ),
+                array(
+                    'label' => 'Table',
+                    'range'=>true,
+                    'terms' => array('min'=>'45','max'=>'85'),
+                    'description' => 'Table attributes for diamond shape',
+                    'slug' => 'eo_table_attr'
+                ),
+                array(
+                    'label' => 'Grading Report',
+                    'terms' => array('GIA','IGI','AGS','HRD'),
+                    'description' => 'Grading report attributes for diamond shape',
+                    'slug' => 'eo_grading_report_attr'
+                ),
+                array(
+                    'label' => 'Ring Style',
+                    'terms' => array('Halo','Pave','Solitaire','Trilogy'),
+                    'description' => 'Ring style attributes for diamond shape',
+                    'slug' => 'eo_ring_style_attr'
+                ),
+                array(
+                    'label' => 'Metal',
+                    'terms' => array('14K White Gold','18K White Gold','14K Yellow Gold','18K Yellow Gold','14K Rose Gold','18K Rose Gold','Platinum'),
+                    'description' => 'Metal attributes for diamond shape',
+                    'slug' => 'eo_metal_attr'
+                ) ); 
 
-  if(!empty($_POST)) {
-
-    if(isset($_POST['_wpnonce']) && wp_verify_nonce($_POST['_wpnonce'],'eo_wbc_auto_jewel')) {
-      $index=0;
-      $category=array();
-      while(!empty($_POST['cat_value_'.$index])){
-        if(!empty($_POST['cat_'.$index])){
-          $_category[$index]['name']=$_POST['cat_value_'.$index];
-          $category[]=$_category[$index];
-        }
-        $index++;
-      }      
-
-      $index=0;
-      $attributes=array();
-      while(!empty($_POST['attr_value_'.$index])){
-        if(!empty($_POST['attr_'.$index])){
-          $_atttriutes[$index]['name']=$_POST['attr_value_'.$index];
-          $attributes[]=$_atttriutes[$index]; 
-        }
-        $index++;
-      }
-
-      ////////////////////////////////////////////////////////////////////////
-      require_once ('library/EO_WBC_CatAt.php');
-      $catat=new EO_WBC_CatAt();
-
-          if(!empty($category)){
-            //Send for creation and update returned array.
-            $catat_category=$catat->create_category($category);
-            update_option('eo_wbc_cats',serialize($catat_category));           
-
-            $catat->add_maps(array(
+	$_maps=array(
                 array(
                     ['slug','eo_diamond_round_shape_cat','product_cat'],
                     ['slug','eo_setting_round_shape_cat','product_cat']
@@ -379,159 +342,4 @@
                 array(
                     ['slug','eo_diamond_cushion_shape_cat','product_cat'],
                     ['slug','eo_setting_cushion_shape_cat','product_cat']
-                )
-            ));
-
-            update_option('eo_wbc_first_name','Diamond Shape');//FIRST : NAME
-            update_option('eo_wbc_first_slug','eo_diamond_shape_cat');//FIRST : SLUG
-            update_option('eo_wbc_first_url','/product-category/eo_diamond_shape_cat/');//FIRST : NAME
-            
-            update_option('eo_wbc_second_name','Setting Shape');//SECOND : NAME
-            update_option('eo_wbc_second_slug','eo_setting_shape_cat');//SECOND : SLUG
-            update_option('eo_wbc_second_url','/product-category/eo_setting_shape_cat/');//SECOND : URL   
-
-            update_option('eo_wbc_config_category',1);
-            update_option('eo_wbc_config_map',1);    
-            update_option('eo_wbc_btn_setting','0');
-            update_option('eo_wbc_btn_position','begining');
-
-          }
-
-          if(!empty($attributes)){
-            //Send for creation and update returned array.
-            $catat_attribute=$catat->create_attribute($attributes);            
-            update_option('eo_wbc_attr',serialize($catat_attribute));
-            $catat->add_filters();     
-            update_option('eo_wbc_filter_enable','1');     
-          } 
-      
-      ///////////////////////////////////////////////////////////////////////
-      
-    }
-    
-    if(!empty($_POST['step'])){
-      if($_POST['step']==3) {
-
-        ?>
-        <script type="text/javascript" >
-        jQuery(document).ready(function($) {            
-
-            var eo_wbc_max_products=<?php echo($catat->get_product_size()); ?>;            
-            function eo_wbc_add_products(index){
-
-                if(index>=eo_wbc_max_products){
-                    
-                    window.location.href="<?php echo(admin_url('admin.php?page=eo-wbc-home')); ?>";
-                    return false;
-                }
-
-                jQuery(".button.button-primary.button-hero.action.disabled").val("Adding "+(index+1)+" of "+eo_wbc_max_products+" products");
-
-                var data = {
-                    'action': 'eo_wbc_add_products',
-                    'product_index':index 
-                };
-
-                jQuery.post('<?php echo admin_url( 'admin-ajax.php' ); ?>', data, function(response) {
-                    
-                    eo_wbc_add_products(++index);                    
-                });                
-            }   
-            
-            $(".button.button-primary.button-hero.action").on('click',function(e){
-                e.stopPropagation();
-                e.preventDefault();
-                if(!$(this).hasClass('disabled')) {
-                    $(".button.button-hero.action:not(.disabled)").toggleClass('disabled');
-                    eo_wbc_add_products(0);                        
-                }                
-                return false;
-            });
-
-        });
-        </script> <?php
-      }      
-        $_step=$_POST['step'];
-    } else {
-        $_step=1;
-    }
-    
-  }
-?>
-
-<div class="wrap woocommerce">
-  <h1></h1>
-  <?php EO_WBC_Head_Banner::get_head_banner(); ?> 
-  <br/>
-        <p><a href="https://wordpress.org/support/plugin/woo-bundle-choice" target="_blank"><?php _e("If you are facing any issue, please write to us immediately.","woo-bundle-choice"); ?></a></p>
-  <br/>
-  <hr/>
-  <div style="clear:both;"></div>
-  
-  <form method="post">
-    <?php wp_nonce_field('eo_wbc_auto_jewel'); ?>
-    <input type="hidden" name="step" value="<?php echo $_step+1; ?>">
-    <div>
-      <h1><strong>Jewellary Setup</strong></h1>
-      <p>You are at step <?php echo $_step; ?> of 3 steps.</p>
-        <table class="form-table">
-          <tbody>
-            <tr valign="top">
-              <!-- Sample Product Installation -->
-              <?php if( !empty($_POST['step']) && $_POST['step']==3):?>
-                <th>
-                  <h3>Sample Products</h3>
-                </th>
-              </tr>
-              <tr>
-                <td> Sample products of rings and diamond will be added.</td>
-              <!-- Attributes Installation -->
-              <?php elseif($_step==2):?>
-                <th>
-                  <h3>Attributes</h3>
-                </th>
-              </tr>
-              <tr>
-                <td>                    
-                  <?php foreach ($_atttriutes as $index=>$_attr): ?>                                                                  
-                    <input type="checkbox" name="attr_<?php echo $index; ?>" id="<?php _e($_attr['slug']); ?>" value="<?php _e($_attr['slug']) ?>" checked="checked">
-                    <input type="text" name="attr_value_<?php echo $index; ?>" placeholder="<?php _e($_attr['label']) ?>" value="<?php _e($_attr['label']); ?>">
-                    <!--<label for="<?php _e($_attr['slug']); ?>"><?php _e($_attr['label']); ?></label>-->
-                    <br/><br/>                        
-                  <?php endforeach;?>                      
-                </td>
-              <!-- Category Installation -->
-              <?php else:?>
-                <th>
-                  <h3>Category</h3>
-                </th>
-              </tr>
-              <tr>
-                <td>                    
-                  <?php foreach ($_category as $index=>$_cat): ?>                                              
-                    <input type="checkbox" name="cat_<?php echo $index; ?>" id="<?php _e($_cat['name']); ?>" value="<?php _e($_cat['slug']) ?>" checked="checked">
-                    <!--<label for="<?php //_e($_cat['name']); ?>"><?php //_e($_cat['name']); ?></label> -->    
-                    <input type="text" name="cat_value_<?php echo $index; ?>" placeholder="<?php _e($_cat['name']) ?>" value="<?php _e($_cat['name']); ?>">
-                    <br/><br/>                        
-                  <?php endforeach;?>                      
-                </td>
-              <?php endif; ?>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td>
-                <?php $_steps=["catagorie(s)","attribute(s)","product(s)"]; ?>
-                <input type="submit" name="save" value="<?php printf(__("Create sample %1s","woo-bundle-choice"),$_steps[$_step-1]); ?>"  class="button button-primary button-hero action">                
-              </td>
-              <td>
-                <a href="#" class="button button-hero action" onclick="if(!jQuery(this).hasClass('disabled')){ window.location.href='<?php echo admin_url('admin.php?page=eo-wbc-home'); ?>'; }">Cancel</a>
-              </td>
-            </tr>
-          </tfoot>
-        </table>
-    </div>            
-  </form>
-</div>
-
-<?php EO_WBC_Head_Banner::get_footer_line(); ?>
+                ) );
