@@ -26,7 +26,9 @@ class AdminMapping extends WP_UnitTestCase {
 
 	public function test_mapping(){
 
+		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Head_Banner.php');
 		require_once(constant('EO_WBC_PLUGIN_DIR').'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Mapping.php');
+
 
 		$HasCat = eo_wbc_product_has_cat_parent($term_id1,$term_id2);
 
