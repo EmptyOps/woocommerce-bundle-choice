@@ -34,6 +34,10 @@ class AdminMapping extends WP_UnitTestCase {
 
 		$HasCat = eo_wbc_product_has_cat_parent($term_id1,$term_id2);
 
+		$HasCat->expects($this->once())
+	     ->method('method')
+	     ->with($this->equalTo($arg1),$this->equalTo($arg2));
+
 		$this->assertIsBool($HasCat);
 		$this->assertNotFalse($HasCat);
 
@@ -41,6 +45,13 @@ class AdminMapping extends WP_UnitTestCase {
 
 		$this->assertNotFalse($PrimeCat);
 		$this->assertNotNull($PrimeCat);
+		$this->assertStringNotContainsString($PrimeCat);
+
+		$attrib = eo_wbc_attributes();
+
+		$this->assertNotFalse($attrib);
+		$this->assertNotNull($attrib);
+		$this->assertStringNotContainsString($attrib);
 
 	}
 }
