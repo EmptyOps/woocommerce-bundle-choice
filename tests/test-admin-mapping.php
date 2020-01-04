@@ -58,7 +58,7 @@ class AdminMapping extends WP_UnitTestCase {
 	public function formData_save(){
 
 		require_once(constant('EO_WBC_PLUGIN_DIR').'EO_WBC_Admin/EO_WBC_Config/EO_WBC_Actions.php');
-		require_once(constant('EO_WBC_PLUGIN_DIR').'EO_WBC_Admin/EO_WBC_Config/EO_WBC_List_Table')
+		require_once(constant('EO_WBC_PLUGIN_DIR').'EO_WBC_Admin/EO_WBC_Config/EO_WBC_List_Table');
 
 		$data1 = $_POST['eo_wbc_first_category'] = "Asscher";
 		$data2 = $_POST['eo_wbc_second_category'] = "Asscher Setting";
