@@ -26,6 +26,8 @@ class AdminFilters extends WP_UnitTestCase {
 
 	public function test_filters(){
 
+		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Head_Banner.php');
+		require_once(constant('EO_WBC_PLUGIN_DIR').'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_List_Table.php');
 		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Filter.php');
 
 		$PrimeCat = eo_wbc_prime_category_($slug='',$prefix='');
