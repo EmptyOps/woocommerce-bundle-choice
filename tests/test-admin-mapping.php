@@ -60,10 +60,9 @@ class AdminMapping extends WP_UnitTestCase {
 		require_once(constant('EO_WBC_PLUGIN_DIR').'EO_WBC_Admin/EO_WBC_Config/EO_WBC_Actions.php');
 		require_once(constant('EO_WBC_PLUGIN_DIR').'EO_WBC_Admin/EO_WBC_Config/EO_WBC_List_Table');
 
-		$data1 = $_POST['eo_wbc_first_category'] = "Asscher";
-		$data2 = $_POST['eo_wbc_second_category'] = "Asscher Setting";
-		$data3 = $_POST['eo_wbc_add_discount'] = "2";
-		$data4 = $_POST['_wpnonce'] = "eo_wbc_nonce_add_map";
+		$data1 = $_POST['eo_wbc_second_category'] = 'Asscher';
+		$data3 = $_POST['eo_wbc_add_discount'] = '2';
+		$data4 = $_POST['_wpnonce'] = 'eo_wbc_nonce_add_map';
 
 		$saveForm = new EO_WBC_Actions();
 		$saveForm->map_add();
