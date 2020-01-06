@@ -5,7 +5,7 @@ add_action('admin_enqueue_scripts',function(){
 
     wp_register_script( 'eo-wbc-ui',plugin_dir_url(EO_WBC_PLUGIN_FILE).'js/fomantic/semantic.min.js');
     wp_enqueue_script( 'eo-wbc-ui' );
-})    
+});    
 
 function eo_wbc_admin_config_category_options($slug='')
 {
