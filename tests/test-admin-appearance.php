@@ -38,7 +38,6 @@ class AdminAppearance extends WP_UnitTestCase {
 		$data3 = $_POST['_wpnonce'] = 'eo_wbc_personalize';
 
 		$SaveForm = new EO_WBC_Actions();
-		$SaveForm->save_personalize();
 
 		$this->assertEquals($Testdata1,get_option('eo_wbc_home_btn_tagline'));
 		$this->assertEquals($Testdata2,get_option('eo_wbc_home_default_button'));
