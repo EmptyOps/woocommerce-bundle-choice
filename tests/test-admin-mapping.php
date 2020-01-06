@@ -68,12 +68,10 @@ class AdminMapping extends WP_UnitTestCase {
 		$saveForm = new EO_WBC_Actions();
 		$saveForm->map_add();
 
-		print_r($GetForm->get_maps());
-
 		$GetForm = new EO_WBC_List_Table();
 
 		$Data = array('first_cat_id'=>$data1,'second_cat_id'=>$data2,'discount'=>$data3.'%');
 
-		// $this->assertEquals($Data,$GetForm->get_maps());
+		$this->assertEquals($Data,$GetForm->get_maps());
 	}
 }
