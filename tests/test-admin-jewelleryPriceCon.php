@@ -32,13 +32,11 @@ class AdminJewelryPriceControl extends WP_UnitTestCase {
 		$testFunc1 =  eo_wbc_jpc_list_categories($slug='',$prefix='');
 
 		$this->assertNotNull($testFunc1);
-		$this->assertStringNotContainsString($testFunc1);
 		$this->assertNotFalse($testFunc1);
 
 		$testFunc2 = eo_wbc_jpc_list_attributes();
 
 		$this->assertNotNull($testFunc2);
-		$this->assertStringNotContainsString($testFunc2);
 		$this->assertNotFalse($testFunc2);
 
 		$testFunc3 = eo_wbc_jpc_attributes_values();
