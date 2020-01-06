@@ -45,13 +45,11 @@ class AdminMapping extends WP_UnitTestCase {
 
 		$this->assertNotFalse($PrimeCat);
 		$this->assertNotNull($PrimeCat);
-		$this->assertStringNotContainsString($PrimeCat);
 
 		$attrib = eo_wbc_attributes();
 
 		$this->assertNotFalse($attrib);
 		$this->assertNotNull($attrib);
-		$this->assertStringNotContainsString($attrib);
 
 	}
 
