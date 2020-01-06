@@ -18,33 +18,39 @@ activate_plugin('woocommerce-bundle-choice/woo-bundle-choice.php');
 /**
 * Backend unit testing.
 */
-class AdminFilters extends WP_UnitTestCase {
+class AdminJewelryPriceControl extends WP_UnitTestCase {
 
     public function test_woocommerce_exists(){		
 		$this->assertTrue( class_exists('WooCommerce') );
 	}
 
-	public function test_filters(){
+	public function test_Error(){
 
 		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Head_Banner.php');
-		require_once(constant('EO_WBC_PLUGIN_DIR').'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_First_Filter_Table.php');
-		require_once(constant('EO_WBC_PLUGIN_DIR').'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Second_Filter_Table.php');
-		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Filter.php');
+		require_once(constant('EO_WBC_PLUGIN_DIR').'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Jewellery_Price_Control.php');
 
-		$FirstFilterTable = new EO_WBC_First_Filter_Table();
-		$SecondFilterTable = new EO_WBC_Second_Filter_Table();
+		$testFunc1 =  eo_wbc_jpc_list_categories($slug='',$prefix='');
 
-		$PrimeCat = eo_wbc_prime_category_($slug='',$prefix='');
+		$this->assertNotNull($testFunc1);
+		$this->assertStringNotContainsString($testFunc1);
+		$this->assertNotFalse($testFunc1);
 
-		$this->assertNotFalse($PrimeCat);
-		$this->assertNotNull($PrimeCat);
-		$this->assertStringNotContainsString($PrimeCat);
+		$testFunc2 = eo_wbc_jpc_list_attributes();
 
-		$Attributes = eo_wbc_attributes_();
+		$this->assertNotNull($testFunc2);
+		$this->assertStringNotContainsString($testFunc2);
+		$this->assertNotFalse($testFunc2);
 
-		$this->assertNotFalse($Attributes);
-		$this->assertNotNull($Attributes);
-		$this->assertStringNotContainsString($Attributes);
+		$testFunc3 = eo_wbc_jpc_attributes_values();
+
+		update_option('eo_wbc_cats',serialize($testFunc3)); 
+		$this->assertIsArray($testFunc3);
+		$this->assertNotFalse($testFunc3);
+		$this->assertEquals($testFunc3,unserialize(get_option('eo_wbc_cats')));
+
 
 	}
+
 }
+
+?>
