@@ -29,22 +29,22 @@ class AdminJewelryPriceControl extends WP_UnitTestCase {
 		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Head_Banner.php');
 		require_once(constant('EO_WBC_PLUGIN_DIR').'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Jewellery_Price_Control.php');
 
-		$testFunc1 =  eo_wbc_jpc_list_categories($slug='',$prefix='');
+		$eo_wbc_jpc_list_categories =  eo_wbc_jpc_list_categories($slug='',$prefix='');
 
-		$this->assertNotNull($testFunc1);
-		$this->assertNotFalse($testFunc1);
+		$this->assertNotNull($eo_wbc_jpc_list_categories);
+		$this->assertNotFalse($eo_wbc_jpc_list_categories);
 
-		$testFunc2 = eo_wbc_jpc_list_attributes();
+		$eo_wbc_jpc_list_attributes = eo_wbc_jpc_list_attributes();
 
-		$this->assertNotNull($testFunc2);
-		$this->assertNotFalse($testFunc2);
+		$this->assertNotNull($eo_wbc_jpc_list_attributes);
+		$this->assertNotFalse($eo_wbc_jpc_list_attributes);
 
-		$testFunc3 = eo_wbc_jpc_attributes_values();
+		$eo_wbc_jpc_attributes_values = eo_wbc_jpc_attributes_values();
 
-		update_option('eo_wbc_cats',serialize($testFunc3)); 
-		$this->assertIsArray($testFunc3);
-		$this->assertNotFalse($testFunc3);
-		$this->assertEquals($testFunc3,unserialize(get_option('eo_wbc_cats')));
+		update_option('eo_wbc_cats',serialize($eo_wbc_jpc_attributes_values)); 
+		$this->assertIsArray($eo_wbc_jpc_attributes_values);
+		$this->assertNotFalse($eo_wbc_jpc_attributes_values);
+		$this->assertEquals($eo_wbc_jpc_attributes_values,unserialize(get_option('eo_wbc_cats')));
 
 
 	}

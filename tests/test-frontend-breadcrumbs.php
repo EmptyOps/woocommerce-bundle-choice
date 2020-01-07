@@ -24,10 +24,43 @@ class FrontendBreadcrumb extends WP_UnitTestCase {
 		$this->assertTrue( class_exists('WooCommerce') );
 	}
 
-	public function test_save_data(){
+	public function Breadcrumb(){
 
-		// require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Admin/EO_WBC_Frontend/EO_WBC_Breadcrumb.php');
+		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Admin/EO_WBC_Frontend/
+			EO_WBC_Breadcrumb.php');
 
+		$BreaadClass = new EO_WBC_Breadcrumb();
+
+		$eo_wbc_add_breadcrumb = $BreaadClass->eo_wbc_add_breadcrumb($step=1,$begin);
+
+		$this->assertNotFalse($eo_wbc_add_breadcrumb);
+		$this->assertIsString($eo_wbc_add_breadcrumb);
+		$this->assertNotNull($eo_wbc_add_breadcrumb);
+
+
+		$eo_wbc_breadcumb_first_html = $BreaadClass->eo_wbc_breadcumb_first_html($step,$order);
+
+		$this->assertNotFalse($eo_wbc_breadcumb_first_html);
+		$this->assertIsString($eo_wbc_breadcumb_first_html);
+		$this->assertNotNull($eo_wbc_breadcumb_first_html);
+
+		$eo_wbc_breadcumb_second_html = $BreaadClass->eo_wbc_breadcumb_second_html($step,$order);
+
+		$this->assertNotFalse($eo_wbc_breadcumb_second_html);
+		$this->assertIsString($eo_wbc_breadcumb_second_html);
+		$this->assertNotNull($eo_wbc_breadcumb_second_html);
+
+		$eo_wbc_breadcrumb_view_url = $BreaadClass->eo_wbc_breadcrumb_view_url($product_id,$order);
+
+		$this->assertNotFalse($eo_wbc_breadcrumb_view_url);
+		$this->assertIsString($eo_wbc_breadcrumb_view_url);
+		$this->assertNotNull($eo_wbc_breadcrumb_view_url);
+
+		$eo_wbc_breadcrumb_get_category = $BreaadClass->eo_wbc_breadcrumb_get_category($product_id);
+
+		$this->assertNotFalse($eo_wbc_breadcrumb_get_category);
+		$this->assertIsString($eo_wbc_breadcrumb_get_category);
+		$this->assertNotNull($eo_wbc_breadcrumb_get_category);
 		
 	}
 
