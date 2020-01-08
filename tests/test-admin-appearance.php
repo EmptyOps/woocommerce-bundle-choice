@@ -34,12 +34,17 @@ class AdminAppearance extends WP_UnitTestCase {
 
 		$Testdata1 = $_POST['eo_wbc_home_btn_tagline'] = 'hello';
 		$Testdata2 = $_POST['eo_wbc_home_default_button'] = '1';
+		$Testdata3 = $_POST['eo_wbc_home_btn_color'] = 'green';
+		$Testdata4 = $_POST['eo_wbc_show_hide_breadcrumb_icon'] = '1';
 		$_POST['eo_wbc_action'] = 'eo_wbc_personalize';
 		$_POST['_wpnonce'] = wp_create_nonce('eo_wbc_personalize');
 		$SaveForm = new EO_WBC_Actions();
 
 		$this->assertEquals($Testdata1,get_option('eo_wbc_home_btn_tagline'));
 		$this->assertEquals($Testdata2,get_option('eo_wbc_home_default_button'));
+		$this->assertEquals($Testdata3,get_option('eo_wbc_home_btn_color'));
+		$this->assertEquals($Testdata4,get_option('eo_wbc_show_hide_breadcrumb_icon'));
+
 	}
 
 }
