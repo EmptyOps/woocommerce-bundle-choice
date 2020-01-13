@@ -24,7 +24,7 @@ class FrontendViewOrder extends WP_UnitTestCase {
 		$this->assertTrue( class_exists('WooCommerce') );
 	}
 
-	public function test_view_order){
+	public function test_view_order(){
 
 		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Frontend/EO_WBC_View_Order.php');
 
