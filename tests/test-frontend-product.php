@@ -30,7 +30,7 @@ class FrontendProduct extends WP_UnitTestCase {
 		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Admin/EO_WBC_Support.php');
 		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Frontend/EO_WBC_Product.php');
 
-
+		global $post;
 		$LoadEO_WBC_Product = new EO_WBC_Product();
 
 		$EO_WBC_CatAt = new EO_WBC_CatAt();
@@ -46,8 +46,7 @@ class FrontendProduct extends WP_UnitTestCase {
 			}
 		}
 		
-
-		global $post = $p;
+		$post = $p;
 
 		$eo_wbc_category_link = $LoadEO_WBC_Product->eo_wbc_category_link($variable_status=FALSE);
 		$this->assertNotFalse($eo_wbc_category_link);
