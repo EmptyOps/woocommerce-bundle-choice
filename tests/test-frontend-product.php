@@ -34,20 +34,18 @@ class FrontendProduct extends WP_UnitTestCase {
 		$LoadEO_WBC_Product = new EO_WBC_Product();
 
 		$EO_WBC_CatAt = new EO_WBC_CatAt();
-		$create_products = $EO_WBC_CatAt->create_products($args);
+		$create_products = $EO_WBC_CatAt->create_products($EO_WBC_CatAt->product);
 
 		$p = null;
-		if(!empty())
+		$old_product = get_page_by_title('Setting #8800950587', OBJECT, 'product' );
+		if(!is_wp_error($old_product) and !empty($old_product))
 		{
-			$old_product = get_page_by_title('Setting #8800950587', OBJECT, 'product' );
-			if(!is_wp_error($old_product) and !empty($old_product))
+			if('publish' === get_post_status( $old_product->ID ))
 			{
-				if('publish' === get_post_status( $old_product->ID ))
-				{
-					$p = wc_get_product($old_product->ID);
-				}
+				$p = wc_get_product($old_product->ID);
 			}
 		}
+		
 
 		global $post = $p;
 
