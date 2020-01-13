@@ -50,7 +50,7 @@ class AdminConfiguration extends WP_UnitTestCase {
 		$second_slug = $_POST['eo_wbc_second_slug'] = 'eo_setting_shape_cat';
 		$collection_title = $_POST['eo_wbc_collection_title'] = 'Ring';
 		$btn_setting = $_POST['eo_wbc_btn_setting'] = '1';
-		$btn_position = $_POST['eo_wbc_btn_position' = 'begining';
+		$btn_position = $_POST['eo_wbc_btn_position'] = 'begining';
 		$filter_enable = $_POST['eo_wbc_filter_enable'] = '1';
 		$first_url = $_POST['eo_wbc_first_url'] = '/product-category/eo_diamond_shape_cat/';
 		$second_url = $_POST['eo_wbc_second_url'] = '/product-category/eo_setting_shape_cat/';
