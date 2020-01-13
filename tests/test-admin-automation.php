@@ -35,5 +35,17 @@ class AdminAutomation extends WP_UnitTestCase {
 		$this->assertNotFalse($category_result);
 		$this->assertIsArray($category_result);
 		$this->assertEquals($category_result,unserialize(get_option('eo_wbc_cats')));
+
+		$attribute_result = $catat->create_attribute($_atttriutes);
+		update_option('eo_wbc_cats',serialize($attribute_result));
+		$this->assertNotFalse($attribute_result);
+		$this->assertIsArray($attribute_result);
+		$this->assertEquals($attribute_result,unserialize(get_option('eo_wbc_cats')));
+
+		$maps_result = $catat->add_maps($_maps);
+		update_option('eo_wbc_cats',serialize($maps_result));
+		$this->assertNotFalse($maps_result);
+		$this->assertIsArray($maps_result);
+		$this->assertEquals($maps_result,unserialize(get_option('eo_wbc_cats')));
 	}
 }

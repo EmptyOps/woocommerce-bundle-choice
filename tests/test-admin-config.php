@@ -43,12 +43,35 @@ class AdminConfiguration extends WP_UnitTestCase {
 
 		require_once(constant('EO_WBC_PLUGIN_DIR').'EO_WBC_Admin/EO_WBC_Config/EO_WBC_Actions.php');
 
-		$data = $_POST['eo_wbc_inventory_type'] = "jewelry";
+		$inventory_type  = $_POST['eo_wbc_inventory_type'] = 'jewelry';
+		$first_name = $_POST['eo_wbc_first_name'] = 'Diamond';
+		$first_slug = $_POST['eo_wbc_first_slug'] = 'eo_diamond_sahpe_cat';
+		$second_name = $_POST['eo_wbc_second_name'] = 'Setting'
+		$second_slug = $_POST['eo_wbc_second_slug'] = 'eo_setting_shape_cat';
+		$collection_title = $_POST['eo_wbc_collection_title'] = 'Ring';
+		$btn_setting = $_POST['eo_wbc_btn_setting'] = '1';
+		$btn_position = $_POST['eo_wbc_btn_position' = 'begining';
+		$filter_enable = $_POST['eo_wbc_filter_enable'] = '1';
+		$first_url = $_POST['eo_wbc_first_url'] = '/product-category/eo_diamond_shape_cat/';
+		$second_url = $_POST['eo_wbc_second_url'] = '/product-category/eo_setting_shape_cat/';
+		$_POST['_wpnonce'] = wp_create_nonce('eo_wbc_nonce_config');
+		$_POST['eo_wbc_action'] ='eo_wbc_save_config';
+
 
 		$saveForm = new EO_WBC_Actions();
-		$saveForm->config_save();
 
-		$this->assertEquals($data,get_option('eo_wbc_inventory_type'));
+		$this->assertEquals($inventory_type, get_option('eo_wbc_inventory_type'));
+		$this->assertEquals($first_name,get_option('eo_wbc_first_name'));
+		$this->assertEquals($first_slug,get_option('eo_wbc_first_slug'));
+		$this->assertEquals($second_name,get_option('eo_wbc_second_name'));
+		$this->assertEquals($second_slug,get_option('eo_wbc_second_slug'));
+		$this->assertEquals($collection_title,get_option('eo_wbc_collection_title'));
+		$this->assertEquals($btn_setting,get_option('eo_wbc_btn_setting'));
+		$this->assertEquals($btn_position,get_option('eo_wbc_btn_position'));
+		$this->assertEquals($first_url,get_option('eo_wbc_first_url'));
+		$this->assertEquals($second_url,get_option('eo_wbc_second_url'));
+		$this->assertEquals($filter_enable,get_option('eo_wbc_filter_enable'));
+
 	}
 
 }

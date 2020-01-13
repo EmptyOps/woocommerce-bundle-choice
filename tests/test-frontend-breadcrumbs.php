@@ -26,7 +26,7 @@ class FrontendBreadcrumb extends WP_UnitTestCase {
 
 	public function Breadcrumb(){
 
-		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Admin/EO_WBC_Frontend/
+		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Frontend/
 			EO_WBC_Breadcrumb.php');
 
 		$BreaadClass = new EO_WBC_Breadcrumb();
