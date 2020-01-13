@@ -46,7 +46,7 @@ class AdminConfiguration extends WP_UnitTestCase {
 		$inventory_type  = $_POST['eo_wbc_inventory_type'] = 'jewelry';
 		$first_name = $_POST['eo_wbc_first_name'] = 'Diamond';
 		$first_slug = $_POST['eo_wbc_first_slug'] = 'eo_diamond_sahpe_cat';
-		$second_name = $_POST['eo_wbc_second_name'] = 'Setting'
+		$second_name = $_POST['eo_wbc_second_name'] = 'Setting';
 		$second_slug = $_POST['eo_wbc_second_slug'] = 'eo_setting_shape_cat';
 		$collection_title = $_POST['eo_wbc_collection_title'] = 'Ring';
 		$btn_setting = $_POST['eo_wbc_btn_setting'] = '1';
