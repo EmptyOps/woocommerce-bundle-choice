@@ -34,7 +34,7 @@ class AdminFirstFilterTable extends WP_UnitTestCase {
 		$this->assertIsArray($get_filters);
 		$this->assertNotFalse($get_filters);		
 
-		$column_cb = $LoadEO_WBC_First_Filter_Table->column_cb($item);
+		$column_cb = $LoadEO_WBC_First_Filter_Table->column_cb(array('id'=>0));
 		$this->assertNotFalse($column_cb);
 		$this->assertNotNull($column_cb);
 		$this->assertIsString($column_cb);
