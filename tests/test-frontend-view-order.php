@@ -29,13 +29,7 @@ class FrontendViewOrder extends WP_UnitTestCase {
 		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Frontend/EO_WBC_View_Order.php');
 
 		$LoadEO_WBC_View_Order = new EO_WBC_View_Order();
-
-		ob_end_clean();
-		ob_start();
-		$eo_wbc_add_css = $LoadEO_WBC_View_Order->eo_wbc_add_css();		
-		$res = ob_get_clean();
-		$this->assertNotEmpty($res);
-
+		
 		$EO_WBC_View_Order = $LoadEO_WBC_View_Order->eo_wbc_render();
 		$this->assertTrue( has_action( 'woocommerce_view_order', 'function($order_id)') );
 

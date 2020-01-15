@@ -40,7 +40,7 @@ class AdminAppearance extends WP_UnitTestCase {
 		$SaveForm = new EO_WBC_Actions();
 
 		$this->assertEquals($Testdata1,get_option('eo_wbc_home_btn_tagline'));
-		$this->assertEquals(!$Testdata2,get_option('eo_wbc_home_default_button'));
+		$this->assertEquals('0',get_option('eo_wbc_home_default_button'));
 		$this->assertEquals($Testdata3,get_option('eo_wbc_home_btn_color'));
 		$this->assertEquals($Testdata4,get_option('eo_wbc_show_hide_breadcrumb_icon'));
 
