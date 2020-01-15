@@ -9,13 +9,13 @@ if(!class_exists('EO_WBC_List_Table')){
 	
 	class EO_WBC_List_Table extends WP_List_Table{
 		
-		public function __construct(){			
+		public function __construct(){
+
 			 parent::__construct([
 	                        'singular' => 'map', 
 	                        'plural'   => 'maps', 
 	                        'ajax'     => false 
                         ]);
-			}
 		}
 		
 		public function get_maps(){
