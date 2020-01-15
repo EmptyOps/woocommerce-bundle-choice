@@ -26,6 +26,7 @@ class AdminFirstFilterTable extends WP_UnitTestCase {
 
 	public function test_first_filter_table(){
 
+		$_REQUEST['page'] = 'eo-wbc-filter';
 		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_First_Filter_Table.php');
 
 		$LoadEO_WBC_First_Filter_Table = new EO_WBC_First_Filter_Table();
