@@ -30,6 +30,25 @@ class FrontendReview extends WP_UnitTestCase {
 
 		$LoadEO_WBC_Review = new EO_WBC_Review();
 
+		$FIRST = get_page_by_title('Setting #8800950587', OBJECT, 'product' );
+		$SECOND = get_page_by_title('Round Diamond #89302496', OBJECT, 'product' );
+
+		if(!is_wp_error($FIRST) and !empty($FIRST))
+		{
+			if('publish' === get_post_status( $FIRST->ID ))
+			{
+				$_GET['FIRST'] = $FIRST->ID
+			}
+		}
+
+		if(!is_wp_error($SECOND) and !empty($SECOND))
+		{
+			if('publish' === get_post_status( $SECOND->ID ))
+			{
+				$_GET['SECOND'] = $SECOND->ID
+			}
+		}		
+
 		$eo_wbc_buttons_css = $LoadEO_WBC_Review->eo_wbc_buttons_css();		
 		$this->assertNotEmpty($eo_wbc_buttons_css);
 		$this->assertIsString($eo_wbc_buttons_css);
