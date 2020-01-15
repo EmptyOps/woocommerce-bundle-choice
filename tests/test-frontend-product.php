@@ -12,7 +12,7 @@ require_once dirname( dirname( __FILE__ ) ) . '/woo-bundle-choice.php';
 
 require_once 'db-setup.php';
 
-require_once 'data/sample_data.php';
+
 
 activate_plugin('woocommerce/woocommerce.php');
 activate_plugin('woocommerce-bundle-choice/woo-bundle-choice.php');		
@@ -37,6 +37,7 @@ class FrontendProduct extends WP_UnitTestCase {
 		global $post;
 
 		$EO_WBC_CatAt = new EO_WBC_CatAt();
+		require_once 'data/sample_data.php';
 		$create_products = $EO_WBC_CatAt->create_products($_product);
 
 		$p = null;
