@@ -32,7 +32,6 @@ class FrontendViewOrder extends WP_UnitTestCase {
 
 		/*$EO_WBC_View_Order = $LoadEO_WBC_View_Order->eo_wbc_render();*/
 		
-
 		$get_sets = $LoadEO_WBC_View_Order->get_sets($sets);
 		$this->assertNotFalse($get_sets);
 		$this->assertNotNull($get_sets);
@@ -40,8 +39,7 @@ class FrontendViewOrder extends WP_UnitTestCase {
 
 		$get_set = $LoadEO_WBC_View_Order->get_set($set);
 		$this->assertNotFalse($get_set);
-		$this->assertNotNull($get_set);
-		
+		$this->assertNotNull($get_set);		
 
 	}
 
