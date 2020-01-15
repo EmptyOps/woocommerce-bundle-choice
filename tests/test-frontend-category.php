@@ -30,7 +30,7 @@ class FrontendCategory extends WP_UnitTestCase {
 		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Frontend/EO_WBC_Breadcrumb.php');
 		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Frontend/EO_WBC_Category.php');
 
-		$LoadEO_WBC_Category = new EO_WBC_Cetegory();
+		$LoadEO_WBC_Category = new EO_WBC_Category();
 
 		$eo_wbc_add_to_cart_link = $LoadEO_WBC_Category->eo_wbc_add_to_cart_link();
 		$this->assertNotFalse($eo_wbc_add_to_cart_link);
