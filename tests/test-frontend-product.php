@@ -38,7 +38,7 @@ class FrontendProduct extends WP_UnitTestCase {
 
 		$EO_WBC_CatAt = new EO_WBC_CatAt();
 		require_once 'data/sample_data.php';
-		$create_products = $EO_WBC_CatAt->create_products($_product);
+		$create_products = $EO_WBC_CatAt->create_products($EO_WBC_CatAt->product);
 
 		$p = null;
 		$old_product = get_page_by_title('Setting #8800950587', OBJECT, 'product' );
