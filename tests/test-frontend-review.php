@@ -37,7 +37,7 @@ class FrontendReview extends WP_UnitTestCase {
 		{
 			if('publish' === get_post_status( $FIRST->ID ))
 			{
-				$_GET['FIRST'] = $FIRST->ID
+				$_GET['FIRST'] = $FIRST->ID;
 			}
 		}
 
@@ -45,7 +45,7 @@ class FrontendReview extends WP_UnitTestCase {
 		{
 			if('publish' === get_post_status( $SECOND->ID ))
 			{
-				$_GET['SECOND'] = $SECOND->ID
+				$_GET['SECOND'] = $SECOND->ID;
 			}
 		}		
 
