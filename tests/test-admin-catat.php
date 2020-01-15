@@ -29,24 +29,40 @@ class AdminCatAt extends WP_UnitTestCase {
 		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Admin/EO_WBC_Support.php');
 		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/library/EO_WBC_CatAt.php');
 
+		require_once('data/sample_data.php');
+
 		$LoadEO_WBC_CatAt = new EO_WBC_CatAt();
 
-		$create_category = $LoadEO_WBC_CatAt->create_category($args);
-		update_option('eo_wbc_cats',serialize($create_category)); 
+		$create_category = $LoadEO_WBC_CatAt->create_category($_category);		
 		$this->assertIsArray($create_category);
-		$this->assertNotFalse($create_category);
-		$this->assertEquals($create_category,unserialize(get_option('eo_wbc_cats')));
+		$this->assertNotFalse($create_category);				
+
+		$create_attribute = $LoadEO_WBC_CatAt->create_attribute($_atttriutes);		
+		$this->assertIsArray($create_attribute);
+		$this->assertNotFalse($create_attribute);		
 
 		$create_product = $LoadEO_WBC_CatAt->create_products($LoadEO_WBC_CatAt->product);
 
-		$create_attribute = $LoadEO_WBC_CatAt->create_attribute( $args );
-		update_option('eo_wbc_cats',serialize($create_attribute));
-		$this->assertIsArray($create_attribute);
-		$this->assertNotFalse($create_attribute);
-		$this->assertEquals($create_attribute,unserialize(get_option('eo_wbc_cats')));
+		if(!empty($LoadEO_WBC_CatAt->product)){
 
+			$first_product_name = $LoadEO_WBC_CatAt->product[0]['title'];
+			$last_product_name = $LoadEO_WBC_CatAt->product[count($LoadEO_WBC_CatAt->product)-1]['title'];
 
+			$this->assertTrue($this->product_exists($first_product_name));
+			$this->assertTrue($this->product_exists($last_product_name));
+		}
+	}
 
+	public function product_exists($name=''){
+		if(!empty($name)){
+			$product = get_page_by_title( $name, OBJECT, 'product' );
+
+			if(!is_wp_error($product) and !empty($product)){
+				if('publish' === get_post_status( $product->ID )){
+					return true;
+				}					
+			}
+		}
 	}
 
 }

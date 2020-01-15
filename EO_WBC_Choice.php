@@ -81,6 +81,9 @@ class EO_WBC_Choice{
         require_once apply_filters('eo_wbc_admin_order_view','EO_WBC_Admin/EO_WBC_Orders/EO_WBC_Orders.php',30);
         //Lad view for plugin configuration.
         require_once apply_filters('eo_wbc_admin_config','EO_WBC_Admin/EO_WBC_Config/EO_WBC_Config.php',30);
+        //Load handler to the attribute image upload settings
+        
+        require_once apply_filters('eo_wbc_admin_attr_icons','EO_WBC_Admin/EO_WBC_Service/admin_service_attr_icons.php',30);
         
         //Show warning if any error logged in our system.
         if(!empty(get_option('eo_wbc_error_report',0))){
