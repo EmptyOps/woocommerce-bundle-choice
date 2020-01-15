@@ -28,20 +28,20 @@ class FrontendViewOrder extends WP_UnitTestCase {
 
 		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Frontend/EO_WBC_View_Order.php');
 
-		$LoadEO_WBC_View_Order = new EO_WBC_View_Order();
+		/*$LoadEO_WBC_View_Order = new EO_WBC_View_Order();
+
+		$EO_WBC_View_Order = $LoadEO_WBC_View_Order->eo_wbc_render();*/
 		
-		$EO_WBC_View_Order = $LoadEO_WBC_View_Order->eo_wbc_render();
-		$this->assertTrue( has_action( 'woocommerce_view_order', 'function($order_id)') );
 
 		$get_sets = $LoadEO_WBC_View_Order->get_sets($sets);
 		$this->assertNotFalse($get_sets);
 		$this->assertNotNull($get_sets);
-		$this->assertContainsOnly($get_sets);
+		
 
 		$get_set = $LoadEO_WBC_View_Order->get_set($set);
 		$this->assertNotFalse($get_set);
 		$this->assertNotNull($get_set);
-		$this->assertContainsOnly($get_set);
+		
 
 	}
 
