@@ -47,5 +47,29 @@ class AdminAutomation extends WP_UnitTestCase {
 		$this->assertNotFalse($maps_result);
 		$this->assertIsArray($maps_result);
 		$this->assertEquals($maps_result,unserialize(get_option('eo_wbc_cats')));
+
+		$carat= new EO_WBC_CatAt();
+		$carat->create_products($carat->product);
+
+		if(!empty($carat->product)){
+
+			$first_product_name = $carat->product[0]['title'];
+			$last_product_name = $carat->product[count($carat->product)-1]['title'];
+
+			$this->assertTrue($this->product_exists($first_product_name));
+			$this->assertTrue($this->product_exists($last_product_name));
+		}
+	}
+
+	public function product_exists($name=''){
+		if(!empty($name)){
+			$product = get_page_by_title( $name, OBJECT, 'product' );
+
+			if(!is_wp_error($product) and !empty($product)){
+				if('publish' === get_post_status( $product->ID )){
+					return true;
+				}					
+			}
+		}
 	}
 }
