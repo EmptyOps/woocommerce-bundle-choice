@@ -28,9 +28,9 @@ class FrontendViewOrder extends WP_UnitTestCase {
 
 		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Frontend/EO_WBC_View_Order.php');
 
-		/*$LoadEO_WBC_View_Order = new EO_WBC_View_Order();
+		$LoadEO_WBC_View_Order = new EO_WBC_View_Order();
 
-		$EO_WBC_View_Order = $LoadEO_WBC_View_Order->eo_wbc_render();*/
+		/*$EO_WBC_View_Order = $LoadEO_WBC_View_Order->eo_wbc_render();*/
 		
 
 		$get_sets = $LoadEO_WBC_View_Order->get_sets($sets);
