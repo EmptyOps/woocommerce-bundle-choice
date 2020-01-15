@@ -58,7 +58,7 @@ if(!class_exists('EO_WBC_List_Table')){
 	        	endforeach; 
 	        	return array($_ID,$_maps);
 	        else:
-	        	return false;
+	        	return array();
             endif;          
 		}
 

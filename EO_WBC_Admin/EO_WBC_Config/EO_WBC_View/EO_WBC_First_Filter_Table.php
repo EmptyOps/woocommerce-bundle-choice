@@ -57,7 +57,7 @@ if(!class_exists('EO_WBC_First_Filter_Table')){
             	}
             	return $_rows;
             } else {
-	        	return false;
+	        	return array();
 	        }                     
 		}
 
