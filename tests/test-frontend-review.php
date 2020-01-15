@@ -30,19 +30,18 @@ class FrontendReview extends WP_UnitTestCase {
 
 		$LoadEO_WBC_Review = new EO_WBC_Review();
 
-		$eo_wbc_add_css = $LoadEO_WBC_Review->eo_wbc_add_css();
-		$this->assertTrue( has_action( 'wp_head', 'function()') );
+		$eo_wbc_buttons_css = $LoadEO_WBC_Review->eo_wbc_buttons_css();		
+		$this->assertNotEmpty($eo_wbc_buttons_css);
+		$this->assertIsString($eo_wbc_buttons_css);
 
-		$eo_wbc_buttons_css = $LoadEO_WBC_Review->eo_wbc_buttons_css();
-		$this->assertNotFalse($eo_wbc_buttons_css);
-		$this->assertNOtNull($eo_wbc_buttons_css);
-		$this->assertContainsOnly($eo_wbc_buttons_css);
 
+		ob_end_clean();
+		ob_start();
 		$eo_wbc_render = $LoadEO_WBC_Review->eo_wbc_render();
-		$this->assertTrue( has_action('wp_enqueue_scripts','function()'));
-		$this->assertTrue( has_action('wp_footer','function()'));
-		$this->assertTrue( has_action('the_content','function()'));
-
+		$render_string = ob_get_clean();
+		$this->assertNotEmpty($render_string);
+		$this->assertIsString($render_string);
+		
 	}
 
 }

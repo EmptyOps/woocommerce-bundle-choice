@@ -32,35 +32,41 @@ class FrontendHome extends WP_UnitTestCase {
 
 		// $this->seePageIs('/product-category/eo_diamond_shape_cat/?EO_WBC=1&BEGIN=eo_diamond_shape_cat&STEP=1');
 
-		$this->assertRedirectedTo('/product-category/eo_diamond_shape_cat/?EO_WBC=1&BEGIN=eo_diamond_shape_cat&STEP=1');
+		$this->assertRedirect('/product-category/eo_diamond_shape_cat/?EO_WBC=1&BEGIN=eo_diamond_shape_cat&STEP=1');
 
+		ob_end_flush();
+		ob_start();
 		$eo_wbc_do_shortcode = $LoadEO_WBC_Home->eo_wbc_do_shortcode();
-		$this->assertNotFalse($eo_wbc_do_shortcode);
-		$this->assertNotNull($eo_wbc_do_shortcode);
-		$this->assertContainsOnly($eo_wbc_do_shortcode);
-
+		$res = ob_get_flush();
+		$this->assertNotFalse($res);
+		$this->assertNotNull($res);
+		
+		ob_end_flush();
+		ob_start();
 		$LoadEO_WBC_Home->show_buttons();
-		$this->assertTrue( has_filter('the_content','function($content)') );
-		$this->assertTrue( has_action( 'wp_footer', 'function ()' ) );
-
+		$res = ob_get_flush();
+		$this->assertNotFalse($res);
+		$this->assertNotNull($res);
+		
+		ob_end_flush();
+		ob_start();
 		$LoadEO_WBC_Home->eo_wbc_the_content();
-		$this->assertTrue( has_action('wp_footer', 'function ()' ) );
-
+		$res = ob_get_flush();
+		$this->assertNotFalse($res);
+		$this->assertNotNull($res);
+		
 		$wbc_code = $LoadEO_WBC_Home->eo_wbc_code();
 		$this->assertNotFalse($wbc_code);
 		$this->assertNotNull($wbc_code);
-		$this->assertContainsOnly($wbc_code);
-
+		
 		$buttons_css = $LoadEO_WBC_Home->eo_wbc_buttons_css();
 		$this->assertNotFalse($buttons_css);
-		$this->assertNotNull($buttons_css);
-		$this->assertContainsOnly($buttons_css);
+		$this->assertNotNull($buttons_css);		
 
 		$wbc_buttons = $LoadEO_WBC_Home->eo_wbc_buttons();
 		$this->assertNotFalse($wbc_buttons);
 		$this->assertNotNull($wbc_buttons);
-		$this->assertContainsOnly($wbc_buttons);
-
+		
 	}
 
 }
