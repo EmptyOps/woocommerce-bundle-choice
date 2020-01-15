@@ -39,6 +39,8 @@ class FrontendReview extends WP_UnitTestCase {
 			{
 				$_GET['FIRST'] = $FIRST->ID;
 			}
+		} else {
+			$_GET['FIRST'] = 420;
 		}
 
 		if(!is_wp_error($SECOND) and !empty($SECOND))
@@ -47,6 +49,8 @@ class FrontendReview extends WP_UnitTestCase {
 			{
 				$_GET['SECOND'] = $SECOND->ID;
 			}
+		} else {
+			$_GET['SECOND'] = 840;
 		}		
 
 		$eo_wbc_buttons_css = $LoadEO_WBC_Review->eo_wbc_buttons_css();		
