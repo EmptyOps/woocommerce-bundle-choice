@@ -48,11 +48,11 @@ class FrontendHome extends WP_UnitTestCase {
 		$this->assertNotNull($res);
 		
 		
-		ob_start();
+		/*ob_start();
 		$LoadEO_WBC_Home->eo_wbc_the_content();
 		$res = ob_get_flush();
 		$this->assertNotFalse($res);
-		$this->assertNotNull($res);
+		$this->assertNotNull($res);*/
 		
 		$wbc_code = $LoadEO_WBC_Home->eo_wbc_code();
 		$this->assertNotFalse($wbc_code);

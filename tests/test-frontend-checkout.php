@@ -27,11 +27,8 @@ class FrontendCheckout extends WP_UnitTestCase {
 	public function test_checkout(){
 
 		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Frontend/EO_WBC_Checkout.php');
-		ob_flush();
-		ob_start();
-		new EO_WBC_Checkout();
-		$LoadEO_WBC_Checkout  = ob_get_clean();
-
+		
+		$LoadEO_WBC_Checkout  = new EO_WBC_Checkout();
 
 		$eo_wps_add_js = $LoadEO_WBC_Checkout->eo_wps_add_js();
 		$this->assertTrue( has_action( 'wp_enqueue_scripts', 'function()' ) );
@@ -40,12 +37,12 @@ class FrontendCheckout extends WP_UnitTestCase {
 		$eo_wbc_render = $LoadEO_WBC_Checkout->eo_wbc_render();
 		$this->assertNotFalse($eo_wbc_render);
 		$this->assertNotNull($eo_wbc_render);
-		$this->assertContainsOnly($eo_wbc_render);
+		/*$this->assertContainsOnly($eo_wbc_render);*/
 
 		$checkout_rows = $LoadEO_WBC_Checkout->checkout_rows($map);
 		$this->assertNotFalse($checkout_rows);
 		$this->assertNotNull($checkout_rows);
-		$this->assertContainsOnly($checkout_rows);
+		/*$this->assertContainsOnly($checkout_rows);*/
 	}
 
 }
