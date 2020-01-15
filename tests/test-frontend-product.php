@@ -10,6 +10,8 @@ require_once $wp_tests_dir . '/includes/listener-loader.php';
 
 require_once dirname( dirname( __FILE__ ) ) . '/woo-bundle-choice.php';		
 
+require_once 'db-setup.php';
+
 activate_plugin('woocommerce/woocommerce.php');
 activate_plugin('woocommerce-bundle-choice/woo-bundle-choice.php');		
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -33,7 +35,7 @@ class FrontendProduct extends WP_UnitTestCase {
 		global $post;
 
 		$EO_WBC_CatAt = new EO_WBC_CatAt();
-		$create_products = $EO_WBC_CatAt->create_products($EO_WBC_CatAt->product);
+		$create_products = $EO_WBC_CatAt->create_products($EO_WBC_CatAt->product[0]);
 
 		$p = null;
 		$old_product = get_page_by_title('Setting #8800950587', OBJECT, 'product' );
@@ -61,38 +63,28 @@ class FrontendProduct extends WP_UnitTestCase {
 		$this->assertContainsOnly($make_pair_route);
 
 		$make_pair = $LoadEO_WBC_Product->eo_wbc_make_pair();
-		$this->assertTrue( has_action( 'wp_enqueue_scripts', 'function()' ) );
-		$this->assertTrue( has_action( 'woocommerce_after_add_to_cart_button','function()' ) );
-		$this->assertTrue( has_action( 'wp_head','function()' ) );
-		$this->assertTrue( has_action( 'wp_footer','function()' ) );
-
+		
 		$wbc_config = $LoadEO_WBC_Product->eo_wbc_config();
-		$this->assertTrue( has_filter( 'woocommerce_product_single_add_to_cart_text','function()' ) );
+		
 		
 		$add_breadcrumb = $LoadEO_WBC_Product->eo_wbc_add_breadcrumb();
-		$this->assertTrue( has_action( 'woocommerce_before_single_product','function()' ) );
+		
 
 		$eo_wbc_render = $LoadEO_WBC_Product->eo_wbc_render();
-		$this->assertTrue( has_action( 'wp_enqueue_scripts','function()' ) );
-		$this->assertTrue( has_action( 'wp_footer','function()' ) );
-
+		
 		$product_route = $LoadEO_WBC_Product->eo_wbc_product_route();
 		$this->assertNotNull($product_route);
 		$this->assertNotFalse($product_route);
 		$this->assertContainsOnly($product_route);
 
-		$sub_categories =$LoadEO_WBC_Product->eo_wbc_sub_categories($slug);
-		update_option('eo_wbc_cats',serialize($sub_categories)); 
+		$sub_categories =$LoadEO_WBC_Product->eo_wbc_sub_categories(get_option('eo_wbc_first_slug'));		
 		$this->assertIsArray($sub_categories);
-		$this->assertNotFalse($sub_categories);
-		$this->assertEquals($sub_categories,unserialize(get_option('eo_wbc_cats')));
+		$this->assertNotFalse($sub_categories);		
 
 		$get_category = $LoadEO_WBC_Product->eo_wbc_get_category();
 		$this->assertNotFalse($get_category);
 		$this->assertNotNull($get_category);
-		$this->assertContainsOnly($get_category);
-
-
+		$this->assertIsString($get_category);
 	}
 
 }
