@@ -40,13 +40,13 @@ class AdminFilters extends WP_UnitTestCase {
 
 		$this->assertNotFalse($PrimeCat);
 		$this->assertNotNull($PrimeCat);
-		$this->assertContainsOnly($PrimeCat);
+		$this->assertIsString($PrimeCat);
 
 		$Attributes = eo_wbc_attributes_();
 
 		$this->assertNotFalse($Attributes);
 		$this->assertNotNull($Attributes);
-		$this->assertContainsOnly($Attributes);
+		$this->assertIsString($Attributes);
 
 	}
 }
