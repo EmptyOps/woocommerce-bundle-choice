@@ -30,35 +30,25 @@ class AdminFirstFilterTable extends WP_UnitTestCase {
 
 		$LoadEO_WBC_First_Filter_Table = new EO_WBC_First_Filter_Table();
 
-		$get_filters = $LoadEO_WBC_First_Filter_Table->get_filters();
-		update_option('eo_wbc_cats',serialize($get_filters)); 
+		$get_filters = $LoadEO_WBC_First_Filter_Table->get_filters();		
 		$this->assertIsArray($get_filters);
-		$this->assertNotFalse($get_filters);
-		$this->assertEquals($get_filters,unserialize(get_option('eo_wbc_cats')));
+		$this->assertNotFalse($get_filters);		
 
 		$column_cb = $LoadEO_WBC_First_Filter_Table->column_cb($item);
 		$this->assertNotFalse($column_cb);
 		$this->assertNotNull($column_cb);
-		$this->assertContainsOnly($column_cb);
+		$this->assertIsString($column_cb);
 
 		$get_columns = $LoadEO_WBC_First_Filter_Table->get_columns();
-		update_option('eo_wbc_cats',serialize($get_columns)); 
+		
 		$this->assertIsArray($get_columns);
 		$this->assertNotFalse($get_columns);
-		$this->assertEquals($get_columns,unserialize(get_option('eo_wbc_cats')));
-
-		$column_default = $LoadEO_WBC_First_Filter_Table->column_default( $item, $column_name );
-
-		update_option('eo_wbc_cats',serialize($column_default)); 
-		$this->assertIsArray($column_default);
-		$this->assertNotFalse($column_default);
-		$this->assertEquals($column_default,unserialize(get_option('eo_wbc_cats')));
-
+		
 		$get_bulk_actions = $LoadEO_WBC_First_Filter_Table->get_bulk_actions();
-		update_option('eo_wbc_cats',serialize($get_bulk_actions)); 
+		
 		$this->assertIsArray($get_bulk_actions);
 		$this->assertNotFalse($get_bulk_actions);
-		$this->assertEquals($get_bulk_actions,unserialize(get_option('eo_wbc_cats')));
+		
 
 	}
 
