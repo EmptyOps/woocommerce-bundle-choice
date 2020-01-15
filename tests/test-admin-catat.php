@@ -26,11 +26,11 @@ class AdminCatAt extends WP_UnitTestCase {
 
 	public function test_catat(){
 
-		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Admin/EO_WBC_Support.php');
-		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/library/EO_WBC_CatAt.php');
-
 		require_once('data/sample_data.php');
 
+		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Admin/EO_WBC_Support.php');
+		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/library/EO_WBC_CatAt.php');
+		
 		$LoadEO_WBC_CatAt = new EO_WBC_CatAt();
 
 		$create_category = $LoadEO_WBC_CatAt->create_category($_category);		
