@@ -40,15 +40,14 @@ class FrontendHome extends WP_UnitTestCase {
 		$res = ob_get_flush();
 		$this->assertNotFalse($res);
 		$this->assertNotNull($res);
-		
-		ob_end_flush();
+
 		ob_start();
 		$LoadEO_WBC_Home->show_buttons();
 		$res = ob_get_flush();
 		$this->assertNotFalse($res);
 		$this->assertNotNull($res);
 		
-		ob_end_flush();
+		
 		ob_start();
 		$LoadEO_WBC_Home->eo_wbc_the_content();
 		$res = ob_get_flush();

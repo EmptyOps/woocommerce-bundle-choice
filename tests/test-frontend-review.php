@@ -27,8 +27,7 @@ class FrontendReview extends WP_UnitTestCase {
 	public function test_review(){
 
 		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Frontend/EO_WBC_Review.php');
-
-		$LoadEO_WBC_Review = new EO_WBC_Review();
+		
 
 		$FIRST = get_page_by_title('Setting #8800950587', OBJECT, 'product' );
 		$SECOND = get_page_by_title('Round Diamond #89302496', OBJECT, 'product' );
@@ -52,6 +51,8 @@ class FrontendReview extends WP_UnitTestCase {
 		} else {
 			$_GET['SECOND'] = 840;
 		}		
+
+		$LoadEO_WBC_Review = new EO_WBC_Review();
 
 		$eo_wbc_buttons_css = $LoadEO_WBC_Review->eo_wbc_buttons_css();		
 		$this->assertNotEmpty($eo_wbc_buttons_css);
