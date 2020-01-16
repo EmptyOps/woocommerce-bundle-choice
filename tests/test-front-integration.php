@@ -80,6 +80,7 @@ class TestFronIntegration extends WP_UnitTestCase {
 
 			$this->product_status =  $factory_object->create_products($this->product);
 		});
+		
 	}
 
 	public function test_automation_status(){
