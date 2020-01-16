@@ -23,7 +23,8 @@ require_once('data/sample_data.php');
 */
 class TestFronIntegration extends WP_UnitTestCase {
 	function __construct(){
-		$this->init();
+		add_action('woocommerce_init',array($this,'init'));
+		/*$this->init();*/
 	}
 
 	function index(){
