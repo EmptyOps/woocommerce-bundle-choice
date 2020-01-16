@@ -23,7 +23,7 @@ require_once('data/sample_data.php');
 */
 class TestFronIntegration extends WP_UnitTestCase {
 	
-	function static setUpBeforeClass() { 
+	static function setUpBeforeClass() { 
         // Called once just like normal constructor    
     	add_action('woocommerce_init',function(){    		
 
@@ -80,7 +80,7 @@ class TestFronIntegration extends WP_UnitTestCase {
 
 			$this->product_status =  $factory_object->create_products($this->product);
 		});
-		
+
 	}
 
 	public function test_automation_status(){
