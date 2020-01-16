@@ -21,7 +21,7 @@ require_once('data/sample_data.php');
 /**
 * Backend unit testing.
 */
-class AdminAppearance extends WP_UnitTestCase {
+class TestFronIntegration extends WP_UnitTestCase {
 	function __construct(){
 		$this->init();
 	}
