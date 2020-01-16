@@ -93,6 +93,7 @@ class TestFronIntegration extends WP_UnitTestCase {
 		$this->assertIsArray($this->category_status);
 
 		$this->assertNotFalse($this->attribute_status);
+		
 		$this->assertIsArray($this->attribute_status);
 
 		$this->assertTrue($this->map_status);
