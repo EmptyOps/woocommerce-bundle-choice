@@ -37,11 +37,11 @@ class AdminAppearance extends WP_UnitTestCase {
 		global $_category;
     	global $_img_url;
 
-    	$this->product = $_product
-    	$this->maps = $_maps
-    	$this->atttriutes = $_atttriutes
-    	$this->category = $_category
-    	$this->img_url = $_img_url
+    	$this->product = $_product;
+    	$this->maps = $_maps;
+    	$this->atttriutes = $_atttriutes;
+    	$this->category = $_category;
+    	$this->img_url = $_img_url;
     	
 		/**
 		 * create table to store orders in a SETS form that are recived from customers
