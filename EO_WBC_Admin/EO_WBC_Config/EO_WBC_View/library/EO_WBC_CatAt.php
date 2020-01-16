@@ -1801,7 +1801,9 @@ if(!class_exists('EO_WBC_CatAt')){
 					    $variation_obj->save(); // Save the data
 					}
 				}									
+				return true;
 			}
+			return false;
 		}
 
 		function add_filters(){
@@ -2214,8 +2216,9 @@ if(!class_exists('EO_WBC_CatAt')){
 				        }
 					}
 				}
+				return true;
 			}
-			
+			return false;
 		}
 
 		/**
