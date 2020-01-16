@@ -89,12 +89,9 @@ class TestFronIntegration extends WP_UnitTestCase {
 	public function test_automation_status(){
 		//Check if automation was successfull;
 
-		$this->assertNotFalse($this->category_status);
-		$this->assertIsArray($this->category_status);
+		$this->assertNotFalse($this->category_status);		
 
-		$this->assertNotFalse($this->attribute_status);
-		
-		$this->assertIsArray($this->attribute_status);
+		$this->assertNotFalse($this->attribute_status);				
 
 		$this->assertTrue($this->map_status);
 		
