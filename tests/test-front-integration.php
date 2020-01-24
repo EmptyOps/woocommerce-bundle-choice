@@ -90,6 +90,10 @@ class TestFronIntegration extends WP_UnitTestCase {
 
 		$this->assertNotFalse($this->attribute_status);				
 
+		$this->assertNotEmpty($this->maps);
+
+		$this->assertIsArray($this->maps);
+
 		$this->assertTrue($this->map_status);
 		
 		$this->assertTrue($this->product_status);
