@@ -227,8 +227,12 @@ class EO_WBC_Cart{
     }
     private function eo_wbc_cart_ui($index,$cart)
     {  
+        
         $first=EO_WBC_Support::eo_wbc_get_product($cart['FIRST'][0]);
+
         $second=$cart['SECOND']?EO_WBC_Support::eo_wbc_get_product($cart['SECOND'][0]):FALSE;
+
+        if(empty($first) or (!empty($cart['SECOND']) and empty(EO_WBC_Support::eo_wbc_get_product($cart['SECOND'][0])))) return false;
         ?>
 		<tr>
 			<td data-title="">

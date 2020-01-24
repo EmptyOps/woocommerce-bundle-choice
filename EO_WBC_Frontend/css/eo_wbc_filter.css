@@ -20,6 +20,10 @@
     height: 100%;					
 }			
 
+.double-gutter .tmb{
+    width: 50%;
+    display: inline-flex;
+}
 .ui-accordion-content.ui-helper-reset.ui-widget-content.ui-corner-bottom.ui-accordion-content-active{
 	background-color: white !important;
 	color:rgb(134, 134, 134);

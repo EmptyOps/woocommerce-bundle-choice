@@ -306,8 +306,12 @@ class EO_WBC_Actions
         $filter_label=(!empty($_POST["filter_label"])?$_POST["filter_label"]:"");
         $filter_advanced=(!empty($_POST["filter_advanced"])?"1":"0");
         $filter_dependent=(!empty($_POST["filter_dependent"])?"1":"0");
+        $filter_width=$_POST["filter_width"];
         $filter_input=$_POST["filter_input"];
         $filter_order=$_POST["filter_order"];
+
+        $filter_icon_size = $_POST['filter_icon_size'];
+        $filter_icon_font_size = $_POST['filter_icon_font_size'];
         
         $filter_data=unserialize(get_option($filter_action,"a:0:{}"));
         
@@ -320,16 +324,24 @@ class EO_WBC_Actions
                 return;
             }
         }
-
-        $filter_data[]=array(
+        $data=array(
                         'name'=>$filter_name,
                         'type'=>$filter_type,
                         'label'=>$filter_label,
                         'advance'=>$filter_advanced,
                         'dependent'=>$filter_dependent,
+                        'column_width' => $filter_width,
                         'input'=>$filter_input,
                         'order'=>$filter_order,
-                    );    
+                    );
+        
+        if($filter_input == 'icon' || $filter_input == 'icon_text'){
+            $data['icon_size'] = $filter_icon_size;
+            $data['font_size'] = $filter_icon_font_size;
+        }       
+
+        $filter_data[] = $data;
+
         update_option($filter_action,serialize($filter_data)); 
         add_action( 'admin_notices',function (){
             echo "<div class='notice notice-success is-dismissible'><p><strong>".__( 'New Filter Added Successfully.', 'woo-bundle-choice' )."</strong></p></div>";
@@ -340,9 +352,9 @@ class EO_WBC_Actions
 /////////////////////////////////////////////////
     private function map_bulk_edit(){
         
-        $_maps=$_POST['cb'];
+        $_maps=$_POST['cb'];        
         foreach ($_maps as $key => $value) {
-            $_maps[$key]=explode('_',$value);
+            $_maps[$key]=explode(':',$value);
         }        
     }
 /////////////////////////////////////////////////
@@ -374,27 +386,31 @@ class EO_WBC_Actions
     //Delete map function
     private function map_delete($map){        
 
-        $set=explode('_', $map);        
-        global $wpdb;
-        $wpdb->delete($wpdb->prefix.'eo_wbc_cat_maps',array('first_cat_id'=>$set[0],'second_cat_id'=>$set[1]));
-        $map_count = "select count(*) from ".$wpdb->prefix."eo_wbc_cat_maps";
-        $map_count = $wpdb->get_var($map_count);
-        if($map_count==0)
-        {
-            update_option('eo_wbc_config_map',"0");
-        }        
+        $set=explode(':', $map);     
+        $maps=unserialize(get_option('eo_wbc_cat_maps',"a:0:{}"));
+
+        foreach ($maps as $key=>$value) {    
+
+            if($value[0]==$set[0] and $value[1]==$set[1]) {                 
+                unset($maps[$key]);
+            }
+        }
+
+        update_option('eo_wbc_cat_maps',serialize($maps));
     }
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 
     private function config_save()
     {   
-        //Button setting style,(Default/Shortcode)        
-        update_option('eo_wbc_btn_setting',$_POST['eo_wbc_btn_setting']); 
-        if ($_POST['eo_wbc_btn_setting']=="0" || $_POST['eo_wbc_btn_setting']=="2") { //if on home page.
+        //Button setting style,(Default/Shortcode)      
+        if(!empty($_POST['eo_wbc_btn_setting'])) {
+            update_option('eo_wbc_btn_setting',$_POST['eo_wbc_btn_setting']); 
+            if ($_POST['eo_wbc_btn_setting']=="0" || $_POST['eo_wbc_btn_setting']=="2") { //if on home page.
 
-            //position of button (Top/Bottom/Middle/Custom)
-            update_option('eo_wbc_btn_position',$_POST['eo_wbc_btn_position']);           
+                //position of button (Top/Bottom/Middle/Custom)
+                update_option('eo_wbc_btn_position',$_POST['eo_wbc_btn_position']);           
+            }            
         }        
 
         update_option('eo_wbc_first_name',$_POST['eo_wbc_first_name']);//FIRST : NAME
@@ -492,13 +508,53 @@ class EO_WBC_Actions
         // echo "</pre>";
         // return 0;
         
-        global $wpdb;
-        
+        global $wpdb;        
+
         $eo_wbc_first_category=$_POST['eo_wbc_first_category'];
         $eo_wbc_second_category=$_POST['eo_wbc_second_category'];
-        $eo_wbc_add_discount=$_POST['eo_wbc_add_discount']?$_POST['eo_wbc_add_discount']:0;
+
+        if(!empty($_POST['range_first'])) {
+            $eo_wbc_first_category=$eo_wbc_first_category.','.$_POST['eo_wbc_first_category_range'];
+        }    
         
-        if($wpdb->get_var("select * from {$wpdb->prefix}eo_wbc_cat_maps where first_cat_id in ('{$eo_wbc_first_category}','{$eo_wbc_second_category}') and second_cat_id in ('{$eo_wbc_first_category}','{$eo_wbc_second_category}')"))
+        if(!empty($_POST['range_second'])) {
+            $eo_wbc_second_category=$eo_wbc_second_category.','.$_POST['eo_wbc_second_category_range'];
+        }
+
+        $eo_wbc_add_discount=$_POST['eo_wbc_add_discount']?$_POST['eo_wbc_add_discount']:0;
+
+        $maps=unserialize(get_option('eo_wbc_cat_maps',"a:0:{}"));
+        
+        if(!empty($maps) and !is_wp_error($maps)){
+
+            $match_found = false;
+            foreach ($maps as $key=>$value) {    
+
+                if($value[0]==$eo_wbc_first_category and $value[1]==$eo_wbc_second_category) {                 
+                    $match_found = true;
+                    break;
+                } elseif ($value[1]==$eo_wbc_first_category and $value[0]==$eo_wbc_second_category) {
+                    $match_found = true;
+                    break;
+                }
+            }
+
+            if($match_found){
+                add_action( 'admin_notices',function (){
+                    echo "<div class='notice notice-warning is-dismissible'><p><strong>".__( 'Mapping Already Exists.', 'woo-bundle-choice' )."</strong></p></div>";
+                });
+                return;
+            } else {
+                $maps[] = array($eo_wbc_first_category,$eo_wbc_second_category,$eo_wbc_add_discount);
+            }
+
+        } else {
+            $maps = array(array($eo_wbc_first_category,$eo_wbc_second_category,$eo_wbc_add_discount));
+        }
+
+        update_option('eo_wbc_cat_maps',serialize($maps)); 
+        
+        /*if($wpdb->get_var("select * from {$wpdb->prefix}eo_wbc_cat_maps where first_cat_id in ('{$eo_wbc_first_category}','{$eo_wbc_second_category}') and second_cat_id in ('{$eo_wbc_first_category}','{$eo_wbc_second_category}')"))
         {
             add_action( 'admin_notices',function (){
                 echo "<div class='notice notice-warning is-dismissible'><p><strong>".__( 'Map Already Exists.', 'woo-bundle-choice' )."</strong></p></div>";
@@ -524,7 +580,7 @@ class EO_WBC_Actions
                     echo "<div class='notice notice-error is-dismissible'><p><strong>".__( 'Error! Failed to add new map. please contact our developers for help.', 'woo-bundle-choice' )."</strong></p></div>";
                 });        
             }
-        }
+        }*/
     }
     //Save Personalize
     private function save_personalize(){
@@ -586,9 +642,14 @@ class EO_WBC_Actions
         /**
         *  Save text for product add to cart button
         */
-        if(isset($_POST['eo_wbc_add_to_cart_text']))
+        if(isset($_POST['eo_wbc_add_to_cart_text_first']))
         {
-            update_option('eo_wbc_add_to_cart_text',$_POST['eo_wbc_add_to_cart_text']);
+            update_option('eo_wbc_add_to_cart_text_first',$_POST['eo_wbc_add_to_cart_text_first']);
+        }
+
+        if(isset($_POST['eo_wbc_add_to_cart_text_second']))
+        {
+            update_option('eo_wbc_add_to_cart_text_second',$_POST['eo_wbc_add_to_cart_text_second']);
         }
         /**
          * Save Homepage button setting.
@@ -667,9 +728,19 @@ class EO_WBC_Actions
         {
             update_option('eo_wbc_filter_config_slidernode_color',$_POST['eo_wbc_filter_config_slidernode_color']);
         }  
+        
         if(isset($_POST['eo_wbc_filter_config_slidertrack_color']))
         {
             update_option('eo_wbc_filter_config_slidertrack_color',$_POST['eo_wbc_filter_config_slidertrack_color']);
+        }  
+
+        if(!empty($_POST['eo_wbc_filter_config_icon_size']))
+        {
+            update_option('eo_wbc_filter_config_icon_size',$_POST['eo_wbc_filter_config_icon_size']);
+        }  
+        if(!empty($_POST['eo_wbc_filter_config_icon_label_size']))
+        {
+            update_option('eo_wbc_filter_config_icon_label_size',$_POST['eo_wbc_filter_config_icon_label_size']);
         }  
 
 

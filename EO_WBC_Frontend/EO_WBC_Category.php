@@ -93,7 +93,7 @@ class EO_WBC_Category
     private function eo_wbc_add_filters() {
         //Add product filter widget...
         
-        add_action( 'woocommerce_before_shop_loop',function(){            
+        add_action( 'woocommerce_archive_description',function(){            
             if (class_exists('EO_WBC_Filter_Widget')) {
                 new EO_WBC_Filter_Widget();                                
             }
@@ -104,7 +104,7 @@ class EO_WBC_Category
     private function eo_wbc_add_breadcrumb()
     {	        
     	//Add Breadcumb at top....		
-        add_action( 'woocommerce_before_shop_loop',function(){            
+        add_action( 'woocommerce_archive_description',function(){            
             echo EO_WBC_Breadcrumb::eo_wbc_add_breadcrumb(sanitize_text_field($_GET['STEP']),sanitize_text_field($_GET['BEGIN'])).'<br/><br/>';
         }, 120);
     }

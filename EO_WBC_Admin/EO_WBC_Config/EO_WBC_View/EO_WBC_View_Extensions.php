@@ -116,7 +116,7 @@
 					</div>
 					<div class="addons-banner-block-item-content">
 						<h3>Catelog Grid View</h3>
-						<p>Let customers browse your inventory in a tabular view, which is a handy tool for diamond industry, <a target="_blank" href="http://cvddiamond.xyz/product-category/solitaire/?EO_WBC=1&BEGIN=solitaire&STEP=1&EO_WBC_CODE=cmdiKDUxLCA1MSwgNTEpL3JnYigzNSwgMzUsIDM1KQ==">Click here for demo.</a> </p>
+						<p>Let customers browse your inventory in a tabular view, which is a handy tool for diamond industry, <a target="_blank" href="https://www.emptyops.com/demo/jewelry-demo/product-category/eo_diamond_shape_cat/?EO_WBC=1&BEGIN=eo_diamond_shape_cat&STEP=1">Click here for demo.</a> </p>
 						<div class="inline-buttons">
 							<a class="addons-button addons-button-solid" target="_blank" href="https://sphereplugins.com/product/woocommerce-product-bundle-table-view/">Buy Now</a>							
 						</div>

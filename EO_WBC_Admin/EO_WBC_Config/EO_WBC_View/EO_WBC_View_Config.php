@@ -1,11 +1,10 @@
 <?php    
-add_action('admin_enqueue_scripts',function(){
+
     wp_register_style( 'eo-wbc-ui',plugin_dir_url(EO_WBC_PLUGIN_FILE).'css/fomantic/semantic.min.css');
     wp_enqueue_style( 'eo-wbc-ui');      
 
     wp_register_script( 'eo-wbc-ui',plugin_dir_url(EO_WBC_PLUGIN_FILE).'js/fomantic/semantic.min.js');
     wp_enqueue_script( 'eo-wbc-ui' );
-});    
 
 function eo_wbc_admin_config_category_options($slug='')
 {
@@ -120,7 +119,7 @@ function eo_wbc_admin_config_category_options($slug='')
                         <hr/>
                         <table>
                             <tr>
-                                <td><strong><?php _e("What do yo stands for?","woo-bundle-choice"); ?></strong></td>
+                                <td><strong><?php _e("What do you stands for?","woo-bundle-choice"); ?></strong></td>
                                 <td style="max-width: 25em;">
                                     <select name="eo_wbc_inventory_type">
                                         <option value="jewelry">Jewelry</option>
@@ -417,7 +416,7 @@ function eo_wbc_admin_config_category_options($slug='')
     			</td>
     		</tr>
             <tr>
-                <th colspan="2" style="text-align: left;"><h2><u><?php _e("Extra Configurations","woo-bundle-choice"); ?><?php echo ' rs:'.(get_option('eo_wbc_filter_enable')); ?></u></h2></th>
+                <th colspan="2" style="text-align: left;"><h2><u><?php _e("Extra Configurations","woo-bundle-choice"); ?></u></h2></th>
             </tr>                           
             <tr>               
                 <td>

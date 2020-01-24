@@ -23,7 +23,7 @@ class EO_WBC_Review
         add_action( 'wp_head',function(){
             ?>
                 <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
-                <style> div.row{ display: flex !important; flex-flow: column !important; } div.row div{ margin-top:1em; } div.woocommerce{ width:100%; } .eo_wbc_first{ float:left; display: inline-block; width:50%; } .eo_wbc_second{ display: inline-block; left: 50%; width:50%; } @media only screen and (max-width: 720px){ .eo_wbc_first{ width:100% } .eo_wbc_second{ width:100%; } } </style>
+                <!-- <style> div.row{ display: flex !important; flex-flow: column !important; } div.row div{ margin-top:1em; } div.woocommerce{ width:100%; } .eo_wbc_first{ float:left; display: inline-block; width:50%; } .eo_wbc_second{ display: inline-block; left: 50%; width:50%; } @media only screen and (max-width: 720px){ .eo_wbc_first{ width:100% } .eo_wbc_second{ width:100%; } } </style> -->
             <?php
             /*<style>
                 div.row{
@@ -269,17 +269,17 @@ class EO_WBC_Review
                 $second=EO_WBC_Support::eo_wbc_get_product((int)($set['SECOND'][2]?$set['SECOND'][2]:$set['SECOND'][0]));                
 
                 $content=EO_WBC_Breadcrumb::eo_wbc_add_breadcrumb(sanitize_text_field($_GET['STEP']),sanitize_text_field($_GET['BEGIN'])).'<br/>';
-                                
+                
                 $content.='<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><div class="ui special cards centered">'.
                     '<div class="card">'.
                         '<div class="blurring dimmable image">'.
                           '<div class="ui dimmer inverted transition hidden">'.
                             '<div class="content">'.
                                 '<div class="center">'.
-                                    '<a class="ui button primary" href="'.EO_WBC_Breadcrumb::eo_wbc_breadcrumb_change_url((!empty($__['BEGIN']) && $_GET['BEGIN']==get_option('eo_wbc_first_slug') ? 2 : 1),(empty($set['FIRST'][2])?$set['FIRST'][0]:$set['FIRST'][2])).'" >Change</a>'.
+                                    '<a class="ui button primary" href="'.EO_WBC_Breadcrumb::eo_wbc_breadcrumb_change_url((!empty($_GET['BEGIN']) && $_GET['BEGIN']==get_option('eo_wbc_first_slug') ? 1 : 2),(empty($set['FIRST'][2])?$set['FIRST'][0]:$set['FIRST'][2])).'" >Change</a>'.
                                 '</div>'.
                             '</div>'.
-                          '</div>'.$first->get_image('thumbnail').
+                          '</div>'.$first->get_image('full').
                           '</div>'.
                         '<div class="content">'.
                             '<div class="header">'.($first->get_title()).'</div>'.
@@ -297,11 +297,11 @@ class EO_WBC_Review
                           '<div class="ui dimmer inverted transition hidden">'.
                             '<div class="content">'.
                                 '<div class="center">'.
-                                    '<a class="ui button primary" href="'.EO_WBC_Breadcrumb::eo_wbc_breadcrumb_change_url((!empty($__['BEGIN']) && $_GET['BEGIN']==get_option('eo_wbc_first_slug') ? 1 : 2),(empty($set['SECOND'][2])?$set['SECOND'][0]:$set['SECOND'][2])).'">Change</a>'.        
+                                    '<a class="ui button primary" href="'.EO_WBC_Breadcrumb::eo_wbc_breadcrumb_change_url((!empty($_GET['BEGIN']) && $_GET['BEGIN']==get_option('eo_wbc_first_slug') ? 2 : 1),(empty($set['SECOND'][2])?$set['SECOND'][0]:$set['SECOND'][2])).'">Change</a>'.        
                                 '</div>'.
                             '</div>'.
                           '</div>'.
-                          $second->get_image('thumbnail').
+                          $second->get_image('full').
                         '</div>'.
                         '<div class="content">'.
                             '<div class="header">'.__($second->get_title()).'</div>'.
@@ -315,11 +315,11 @@ class EO_WBC_Review
                         '</div>'.
                     '</div>'.
                 '</div>'.
-                '<form action="" method="post" class="woocommerce" style="float:right;margin-top: 1.5em;">'.
+                '<div class="ui row"><form action="" method="post" class="woocommerce" style="float:right;margin-top: 1.5em;">'.
                     '<input type="hidden" name="add_to_cart" value=1>'.
-                    '<button class="ui button" style="background-color:'.get_option('eo_wbc_active_breadcrumb_color',wc()->session->get('EO_WBC_BG_COLOR',FALSE)).'">'.__('Add This To Cart','woo-bundle-choice').
+                    '<button class="ui button right floated aligned" style="background-color:'.get_option('eo_wbc_active_breadcrumb_color',wc()->session->get('EO_WBC_BG_COLOR',FALSE)).'">'.__('Add This To Cart','woo-bundle-choice').
                     '</button>'.
-                '</form>';                
+                '</form></div>';                
                 return $content;
             } else {
                 

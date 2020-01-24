@@ -1,6 +1,6 @@
 jQuery(document).ready(function(){	
-	jQuery(".summary,.summary-product,.entry-summary").off('click','#eo_wbc_add_to_cart:not(.disabled)');
-	jQuery(".summary,.summary-product,.entry-summary").on('click','#eo_wbc_add_to_cart:not(.disabled)',function(e){			
+	jQuery("body").off('click','#eo_wbc_add_to_cart:not(.disabled)');
+	jQuery("body").on('click','#eo_wbc_add_to_cart:not(.disabled)',function(e){			
 		e.stopPropagation();
 		e.preventDefault();
 		//console.log("LOG : "+eo_wbc_object.url+'&CART='+window.btoa(form_2_json(jQuery('form.cart'))));

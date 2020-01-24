@@ -2,8 +2,6 @@
 class EO_WBC_Menu
 {	
 	function __construct($menu) {
-		
-
 
 		if(is_array($menu) && !empty($menu['menu_page'])) {
 			/**

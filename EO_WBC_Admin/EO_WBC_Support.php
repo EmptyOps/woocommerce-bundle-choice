@@ -258,7 +258,7 @@ if(!class_exists('EO_WBC_Support')) {
             
             return $resultArray;
         }
-        //EO_WBC_Support::get_term_by_term_taxonomy_id
+        //EO_WBC_Support::get_term_by_term_taxonomy_id  //This thing is cachable so consider future upgradation
         public static function get_term_by_term_taxonomy_id($id){
             
             global $wpdb;

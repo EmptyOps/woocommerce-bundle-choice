@@ -1,4 +1,5 @@
 <?php 
+  
   $_atttriutes=array(
                     array(
                         'label' => 'Carat',
@@ -336,7 +337,7 @@
 
           if(!empty($category)){
             //Send for creation and update returned array.
-            $catat_category=$catat->create_category($category);
+            $catat_category=$catat->create_category($category);            
             update_option('eo_wbc_cats',serialize($catat_category));           
 
             $catat->add_maps(array(
@@ -443,7 +444,8 @@
                 e.preventDefault();
                 if(!$(this).hasClass('disabled')) {
                     $(".button.button-hero.action:not(.disabled)").toggleClass('disabled');
-                    eo_wbc_add_products(0);                        
+                    eo_wbc_add_products(0);
+                    //eo_wbc_add_products(119);
                 }                
                 return false;
             });

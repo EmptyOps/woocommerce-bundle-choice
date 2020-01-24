@@ -3,11 +3,11 @@
 * Plugin Name: WooCommerce Product Bundle Choice | Ring Builder, Pair Maker and Guidance Tool
 * Plugin URI: https://wordpress.org/plugins/woocommerce-bundle-choice/
 * Description: An E-Commerce tool that let your customer's buy product in a set and create map that relates between your product categories.
-* Version: 0.5.35
+* Version: 0.5.46
 * Author: emptyopssphere
 * Author URI: https://profiles.wordpress.org/emptyopssphere
 * Requires at least: 3.5
-* Tested up to: 5.3
+* Tested up to: 5.3.2
 * License: GPLv3+
 * License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 * Text Domain: woo-bundle-choice
@@ -27,12 +27,11 @@ define('EO_WBC_PLUGIN_NAME',get_plugin_data(__FILE__)['Name']);
 define('EO_WBC_PLUGIN_FILE',__FILE__);
 define('EO_WBC_PLUGIN_VERSION',get_plugin_data(__FILE__)['Version']);
 define('EO_WBC_PLUGIN_DIR',plugin_dir_path( __FILE__ ));
-
-define('EO_WBC_PLUGIN_ICO',plugins_url('woo-bundle-choice/EO_WBC_Admin/EO_WBC_Config/icon.png'));
+define('EO_WBC_PLUGIN_ICO',plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/EO_WBC_Admin/EO_WBC_Config/icon.png'));
+define('EO_WBC_PLUGIN_ICO_BIG',plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/EO_WBC_Cart.png'));
 
 //Load support file...
-if(!class_exists('EO_WBC_Support'))       
-{
+if(!class_exists('EO_WBC_Support')) {
     require_once apply_filters('eo_wbc_support','EO_WBC_Admin/EO_WBC_Support.php',33);
 }
 
@@ -47,6 +46,14 @@ new EO_WBC_Core(__FILE__);
 
 //Begin action only if all plugins are loaded.
 add_action('plugins_loaded',function(){   
+    
+    // Generate caches.
+    require_once 'class-cache-manager.php';
+    /*add_action('init',function(){
+        var_dump(wp_cache_get('cache_taxonomy','eo_wbc'));    
+    });*/
+    
+
     //var_dump(get_post_meta( 413, '_product_attributes' ));    
     if(defined( 'DOING_AJAX' )) {
 
@@ -121,7 +128,7 @@ add_action('plugins_loaded',function(){
 
         wp_register_style( 'eo-material-anim',plugin_dir_url(__FILE__).'css/material-anim.css',true);
         wp_enqueue_style( 'eo-material-anim');             
-      
+        
         /*get_theme_mod( 'my-custom-color' );*/
     },100);
 
@@ -173,38 +180,53 @@ add_action('plugins_loaded',function(){
     });        
 
     if( ! defined( 'DOING_AJAX' )){
-    	add_action('admin_enqueue_scripts',function(){
-    		wp_register_style( 'eo-material-anim',plugin_dir_url(__FILE__).'css/material-anim.css',true);
-        	wp_enqueue_style( 'eo-material-anim');	
-    	});        
+        
+        add_action( 'wp_enqueue_scripts',function(){
+            wp_register_style( 'eo-material-anim',plugin_dir_url(__FILE__).'css/material-anim.css',true);
+            wp_enqueue_style( 'eo-material-anim');
+        });
     }   
     if( ! defined( 'DOING_AJAX' ) and is_admin() ) {
-        
-    ?>        
+        ob_start();
+        ?>        
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script>                   
             
             jQuery(document).ready(function($){   
 
                 var getUniqueSelector = function (el) {
-                  if (!el) { return; }
-                  var selector = (el.tagName || '').toLowerCase();
-                  if (el.id) {
-                    selector += '#' + el.id;
-                  }
-                  
-                  for (var i = 0, len = el.attributes.length; i < len; i++) {
-                    
-                    value=((el.attributes[i].value).replace(/red-border-section/g,'')).trim();
-                    
-                    if(value!=''){
+                      if (!el) { return; }
+                      var selectors=Array();            
+                      
+                      $.each($(el).parentsUntil('body').add($(el)),function(index,element){
+                          
+                          if($(element).length>0){
 
-                        selector += '[' + el.attributes[i].name + '="' + ((el.attributes[i].value).replace(/red-border-section/g,'')).trim() + '"]';    
-                    }                    
-                  }
-                  index=(jQuery(el).index())-1;                  
-                  selector+=':eq('+index+')';
-                  return selector;
+                              var selector = (element.tagName || '').toLowerCase();
+                              if (element.id) {
+                                selector += '#' + element.id;
+                              }
+                              
+                              for (var i = 0, len = element.attributes.length; i < len; i++) {
+                                if((element.attributes[i].name).trim()=='class'){
+
+                                    value=((element.attributes[i].value).replace(/red-border-section/g,'')).trim();  
+                                    if(value!=''){
+                                        selector += '[' + element.attributes[i].name + '="' + ((element.attributes[i].value).replace(/red-border-section/g,'')).trim() + '"]';    
+                                    }
+                                }                    
+                              }
+                              var parent = $(element).parent();
+                              var sameTagSiblings = parent.children(selector);                                                  
+                              /*if (sameTagSiblings.length > 1) { */
+                                  var allSiblings = parent.children();
+                                  var index = allSiblings.index(element) + 1;                        
+                                  selector += ':nth-child(' + index + ')';                        
+                              /*}*/
+                              selectors.push(selector);
+                          }
+                      });
+                      return selectors.join('>');
                 };                     
 
                 $(document).on('click','#_customize-input-btn_position_setting_selector_btn',function(e){
@@ -234,7 +256,7 @@ add_action('plugins_loaded',function(){
                 });
             });                
         </script>                
-    <?php
+    <?php                
     }
 
 },15);
@@ -311,22 +333,35 @@ if( !function_exists('eo_wbc_woocommerce_available_actions') ){
                 }
                 $second_cat_tax=implode(',',$second_cat_tax);
 
+                if(empty($first_cat_tax) or empty($second_cat_tax)) return 0;
 
                 $query="SELECT `discount` FROM `".$wpdb->prefix."eo_wbc_cat_maps` WHERE  `first_cat_id` in({$first_cat_tax}) and `second_cat_id` in({$second_cat_tax}) or `first_cat_id` in({$second_cat_tax}) and `second_cat_id` in({$first_cat_tax})";                
 
                 $discount_rates=$wpdb->get_results($query,'ARRAY_N');
 
-                $set_total= EO_WBC_Support::eo_wbc_get_product(empty($set['FIRST'][2])?$set['FIRST'][0]:$set['FIRST'][2])->get_price() *  $set['FIRST'][1]
-                                +
-                            EO_WBC_Support::eo_wbc_get_product(empty($set['SECOND'][2])?$set['SECOND'][0]:$set['SECOND'][2])->get_price() * $set['SECOND'][1];
+                $_first_product = EO_WBC_Support::eo_wbc_get_product(empty($set['FIRST'][2])?$set['FIRST'][0]:$set['FIRST'][2]);
+                $_second_product = EO_WBC_Support::eo_wbc_get_product(empty($set['SECOND'][2])?$set['SECOND'][0]:$set['SECOND'][2]);
 
-                foreach ($discount_rates as $rate) {
-                    
-                    $discount_value=($set_total * str_replace('%','',$rate[0]))/100;
+                $discount = 0;
+                
+                if(!empty($_first_product) and !empty($_second_product) and !is_wp_error($_first_product) and !is_wp_error($_second_product)){
 
-                    $set_total-=$discount_value;
-                    $discount+=$discount_value;
-                }         
+                    $set_total= $_first_product->get_price() *  $set['FIRST'][1]
+                                    +
+                                $_second_product->get_price() * $set['SECOND'][1];
+
+                    if(!empty($discount_rates)){
+
+                        foreach ($discount_rates as $rate) {
+                            
+                            $discount_value=($set_total * str_replace('%','',$rate[0]))/100;
+
+                            $set_total-=$discount_value;
+                            $discount+=$discount_value;
+                        }         
+                    }
+                }
+
                 return $discount;
             }
         }

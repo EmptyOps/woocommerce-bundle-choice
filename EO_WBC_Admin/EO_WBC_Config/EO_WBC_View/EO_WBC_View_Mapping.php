@@ -1,17 +1,24 @@
 <?php  
-    add_action('admin_enqueue_scripts',function(){
-        wp_register_style( 'eo-wbc-ui',plugin_dir_url(EO_WBC_PLUGIN_FILE).'css/fomantic/semantic.min.css');
-        wp_enqueue_style( 'eo-wbc-ui');      
+    
+    wp_register_style( 'eo-wbc-ui',plugin_dir_url(EO_WBC_PLUGIN_FILE).'css/fomantic/semantic.min.css');
+    wp_enqueue_style( 'eo-wbc-ui');      
 
-        wp_register_script( 'eo-wbc-ui',plugin_dir_url(EO_WBC_PLUGIN_FILE).'js/fomantic/semantic.min.js');
-        wp_enqueue_script( 'eo-wbc-ui' );
-    });
+    wp_register_script( 'eo-wbc-ui',plugin_dir_url(EO_WBC_PLUGIN_FILE).'js/fomantic/semantic.min.js');
+    wp_enqueue_script( 'eo-wbc-ui' );
 
     $error_flag=true;
     if (get_option('eo_wbc_first_slug',false) && get_option('eo_wbc_second_slug',false)) {
         
-        $_first_id=@(get_term_by('slug',get_option('eo_wbc_first_slug'),'product_cat')->term_id);
-        $_second_id=@(get_term_by('slug',get_option('eo_wbc_second_slug'),'product_cat')->term_id);
+        $_first_id=@(get_term_by('slug',get_option('eo_wbc_first_slug'),'product_cat'));
+        $_second_id=@(get_term_by('slug',get_option('eo_wbc_second_slug'),'product_cat'));
+
+        if(!empty($_first_id) && is_wp_error($_first_id)){
+            $_first_id = $_first_id->term_id;
+        } else { $_first_id = false; }
+        
+        if(!empty($_second_id) && is_wp_error($_second_id)){
+            $_second_id = $_second_id->term_id;
+        } else { $_second_id = false; }
 
         if($_first_id && $_second_id){
 
@@ -206,8 +213,13 @@
                         <th class="manage-column column-columnname num">&nbsp;</th>
                     </tr>
                     <tr id="add_maps_row">
-                        <th class="check-column"></th>                            
+                        <th class="check-column"></th>                        
                         <th class="manage-column column-columnname num" scope="col">
+                            <div>
+                                <input type="checkbox" name="range_first" id="range_first" value=1>
+                                <span class="info">(Select range?)</span>
+                            </div>
+                            <br/>
                             <div class="ui search fluid clearable selection dropdown">
                               <input type="hidden" name="eo_wbc_first_category" id="eo_wbc_first_category">
                               <i class="dropdown icon"></i>
@@ -216,6 +228,29 @@
 
                                 <div class="header">Product search</div>
                                 <div data-search-tag="eo_wbc_first_category"></div>
+                                <div class="divider"></div>
+
+                                
+                                <?php $category_list=eo_wbc_prime_category(get_option('eo_wbc_first_slug'),' -- '); ?>
+                                <?php $attribute_list=eo_wbc_attributes(); ?>
+
+                                <?php echo( !empty($category_list)?'<div class="header">Product Category</div>':'' ); ?>
+
+                                <?php echo $category_list ?>
+                                
+                                <?php echo $attribute_list ?>
+
+                              </div>
+                            </div>
+                            <br/>
+                            <div class="ui search fluid clearable selection dropdown" style="display: none;">
+                              <input type="hidden" name="eo_wbc_first_category_range" id="eo_wbc_first_category_range">
+                              <i class="dropdown icon"></i>
+                              <div class="default text">Product or Meta</div>
+                              <div class="menu">
+
+                                <div class="header">Product search</div>
+                                <div data-search-tag="eo_wbc_first_category_range"></div>
                                 <div class="divider"></div>
 
                                 
@@ -245,7 +280,11 @@
                         </th>
                         <th class="manage-column column-columnname num" scope="col"><-------------></th>
                         <th class="manage-column column-columnname num" scope="col">
-                            
+                            <div>
+                                <input type="checkbox" name="range_second" id="range_second" value=1>
+                                <span class="info">(Select range?)</span>
+                            </div>
+                            <br/>
                             <div class="ui search fluid clearable selection dropdown">
                                 <input type="hidden" name="eo_wbc_second_category" id="eo_wbc_second_category">
                                 <i class="dropdown icon"></i>
@@ -267,6 +306,29 @@
 
                                 </div>
                             </div>
+                            <br/>
+                            <div class="ui search fluid clearable selection dropdown" style="display:none;">
+                                <input type="hidden" name="eo_wbc_second_category_range" id="eo_wbc_second_category_range">
+                                <i class="dropdown icon"></i>
+                                <div class="default text">Product or Meta</div>
+                                <div class="menu">             
+
+                                    <div class="header">Product search</div>
+                                    <div data-search-tag="eo_wbc_second_category_range"></div>
+                                    <div class="divider"></div>
+
+                                    <?php $category_list=eo_wbc_prime_category(get_option('eo_wbc_second_slug'),' -- '); ?>
+                                    <?php $attribute_list=eo_wbc_attributes(); ?>
+
+                                    <?php echo( !empty($category_list)?'<div class="header">Product Category</div>':'' ); ?>
+
+                                    <?php echo $category_list ?>
+                                    
+                                    <?php echo $attribute_list ?>
+
+                                </div>
+                            </div>
+
                             <p class="info">( <?php _e("Select sub-category or attribute from second category.","woo-bundle-choice"); ?> )</p>
                             <?php if(empty($category_list) AND empty($attribute_list) ): ?>
                             <script type="text/javascript">
@@ -291,10 +353,25 @@
            </table>
        </form>
    </fieldset>
+   
    <script type="text/javascript">
         
         jQuery(document).ready(function($){
             
+            $('#range_first,#range_second').on('change',function(){
+                if(jQuery('#range_first').filter(':checked').length){
+                    jQuery('#eo_wbc_first_category_range').parent().css('display','block');
+                } else {
+                    jQuery('#eo_wbc_first_category_range').parent().css('display','none');
+                }
+
+                if(jQuery('#range_second').filter(':checked').length){
+                    jQuery('#eo_wbc_second_category_range').parent().css('display','block');
+                } else {
+                    jQuery('#eo_wbc_second_category_range').parent().css('display','none');
+                }
+            });
+
             $('.ui.fluid.selection.dropdown').dropdown({                
                 sortSelect: true,
                 fullTextSearch:'exact'                

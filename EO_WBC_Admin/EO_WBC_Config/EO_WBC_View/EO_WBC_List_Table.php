@@ -21,44 +21,47 @@ if(!class_exists('EO_WBC_List_Table')){
 		public function get_maps(){
 
             global $wpdb;
-            $query='select * from `'.$wpdb->prefix.'eo_wbc_cat_maps`';
-            $maps=$wpdb->get_results($query,'ARRAY_A');
-            if(count($maps)>0):
-            	$_maps=array();
-            	$_ID=array();
+            /*$query='select * from `'.$wpdb->prefix.'eo_wbc_cat_maps`';
+            $maps=$wpdb->get_results($query,'ARRAY_A');*/
+            $maps = unserialize(get_option('eo_wbc_cat_maps',"a:0:{}"));
+            if(!empty($maps) and !is_wp_error($maps)):
+            	$rows=array();
+            	$ID=array();
 	            foreach ($maps as $map):                            
-	            		$_first_term=false;
-	            		$_second_term=false;
-	            		
-	            		if( strpos($map['first_cat_id'], 'pid_' )===0 ){	
+	            			            		
+	            		if( strpos($map[0], 'pid_' )===0 ){	
 	            			//get product title here...
-	            			$_first_term=EO_WBC_Support::eo_wbc_get_product((int)substr($map['first_cat_id'],4));
+	            			$_first=[EO_WBC_Support::eo_wbc_get_product((int)substr(explode(',',$map[0])[0],4))];
 	            		} else {
-	            			$_first_term=EO_WBC_Support::get_term_by_term_taxonomy_id($map['first_cat_id']);	
+	            			$firsts = explode(',',$map[0]);
+	            			$_first=[EO_WBC_Support::get_term_by_term_taxonomy_id($firsts[0]),
+	            					(!empty($firsts[1])?EO_WBC_Support::get_term_by_term_taxonomy_id($firsts[1]):false)];	
 	            		}
 	            		
-	            		if( strpos($map['second_cat_id'], 'pid_' ) ===0 ){	
+	            		if( strpos($map[1], 'pid_' ) ===0 ){	
 	            			//get product title here...
-	            			$_second_term=EO_WBC_Support::eo_wbc_get_product((int)substr($map['second_cat_id'],4));
+	            			$_second=[EO_WBC_Support::eo_wbc_get_product((int)substr(explode(',',$map[1])[0],4))];
 	            		} else {
-	            			$_second_term=EO_WBC_Support::get_term_by_term_taxonomy_id($map['second_cat_id']);
+	            			$seconds = explode(',',$map[1]);
+	            			$_second=[EO_WBC_Support::get_term_by_term_taxonomy_id($seconds[0]),
+	            					(!empty($seconds[1])?EO_WBC_Support::get_term_by_term_taxonomy_id($seconds[1]):false)];
 	            		}
 	            		
-	            		if(!(empty($_first_term) OR empty($_second_term))){
+	            		if(!(empty($_first) and empty($_second))){
 	            			
-		            		$_ID[]=array('first'=>@$map['first_cat_id'],'second'=>@$map['second_cat_id']);
-		            		$_maps[]=array( 'id'=>@$_first_term->term_taxonomy_id.'_'.@$_second_term->term_taxonomy_id,
-		            						'slug'=>@$_first_term->slug.'_'.@$_second_term->slug,
-		            						'first_term'=>@$_first_term->name,
-		            						'second_term'=>@$_second_term->name,
-		            						'discount'=>$map['discount']
+		            		$ID[]=array('first'=>@$map[0],'second'=>@$map[1]);
+		            		$rows[]=array( 'id'=>@$map[0].':'.@$map[1],
+		            						'slug'=>@$_first[0]->slug.(!empty($_first[1])?','.$_first[1]->slug:'').':'.@$_second[0]->slug.(!empty($_second[1])?','.$_second[1]->slug:''),
+		            						'first_term'=>@$_first[0]->name.(!empty($_first[1])?','.$_first[1]->name:''),
+		            						'second_term'=>@$_second[0]->name.(!empty($_second[1])?','.$_second[1]->name:''),
+		            						'discount'=>$map[2].'%'
 		            					);
 		            	}
 
 	        	endforeach; 
-	        	return array($_ID,$_maps);
+	        	return array($ID,$rows);
 	        else:
-	        	return array();
+	        	return false;
             endif;          
 		}
 

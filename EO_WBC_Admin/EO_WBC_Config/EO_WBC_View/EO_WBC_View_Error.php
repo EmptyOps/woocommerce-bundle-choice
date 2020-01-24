@@ -85,10 +85,9 @@
 			clean_send();
 		}
 	}
-  	add_action('admin_enqueue_scripts',function(){
-		wp_enqueue_script('wp-theme-plugin-editor');
-		wp_enqueue_style('wp-codemirror');    
-	});
+  
+	wp_enqueue_script('wp-theme-plugin-editor');
+	wp_enqueue_style('wp-codemirror');    
 ?>
 <div class="wrap woocommerce">
 <h1></h1>

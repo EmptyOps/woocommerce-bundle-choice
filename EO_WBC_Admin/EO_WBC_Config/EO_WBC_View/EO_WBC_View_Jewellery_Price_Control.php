@@ -44,13 +44,12 @@ function eo_wbc_jpc_attributes_values(){
     return $attr_vals;
 }
 
-add_action('admin_enqueue_scripts',function(){
-    wp_register_style( 'eo-wbc-ui',plugin_dir_url(EO_WBC_PLUGIN_FILE).'css/fomantic/semantic.min.css');
-    wp_enqueue_style( 'eo-wbc-ui');      
+wp_register_style( 'eo-wbc-ui',plugin_dir_url(EO_WBC_PLUGIN_FILE).'css/fomantic/semantic.min.css');
+wp_enqueue_style( 'eo-wbc-ui');      
 
-    wp_register_script( 'eo-wbc-ui',plugin_dir_url(EO_WBC_PLUGIN_FILE).'js/fomantic/semantic.min.js');
-    wp_enqueue_script( 'eo-wbc-ui' );  
-});
+wp_register_script( 'eo-wbc-ui',plugin_dir_url(EO_WBC_PLUGIN_FILE).'js/fomantic/semantic.min.js');
+wp_enqueue_script( 'eo-wbc-ui' );  
+
 
 ?>
 <style type="text/css">
@@ -62,10 +61,6 @@ add_action('admin_enqueue_scripts',function(){
 <div class="wrap woocommerce">
     <h1></h1>
 	<?php	EO_WBC_Head_Banner::get_head_banner(); ?>
-    <?php     
-    if(empty($error_flag)){
-        echo "<div class='notice notice-error is-dismissible'><p>".__( '<strong>Product mapping is  possibly incorrect,</strong> please ensure required products have at least assigned to the main product categories.', 'woocommerce' )."</p></div>";
-    } ?>
     <br/>
         <p><a href="https://wordpress.org/support/plugin/woo-bundle-choice" target="_blank"><?php _e('If you are facing any issue, please write to us immediately.',"woo-bundle-choice"); ?></a></p>
 	<br/>
