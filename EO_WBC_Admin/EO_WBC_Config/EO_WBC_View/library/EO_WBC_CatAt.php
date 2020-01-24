@@ -1736,6 +1736,8 @@ if(!class_exists('EO_WBC_CatAt')){
 					    'post_type' => "product",
 					));
 
+					if(is_wp_error($product_id) or empty($product_id)) continue;
+
 					wp_set_object_terms( $product_id,$product['type'],'product_type');
 					wp_set_object_terms( $product_id,$product['category'],'product_cat');					
 					update_post_meta( $product_id, '_product_attributes', $product['attribute'] );
@@ -2126,7 +2128,7 @@ if(!class_exists('EO_WBC_CatAt')){
 			    		return false;
 			    	}
 			    } else {
-			    	if(isset($id['term_id'])){
+			    	if(!is_wp_error($id) and !empty($id['term_id'])){
 			    		return $id['term_id'];
 			    	} else {
 			    		return false;
