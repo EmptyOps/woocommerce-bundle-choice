@@ -29,7 +29,7 @@ class WBC_TEST
 		$this->wp_tests_dir = getenv( 'WP_TESTS_DIR' ) ? getenv( 'WP_TESTS_DIR' ) : '/tmp/wordpress-tests-lib';
 
 		if ( ! file_exists( $this->wp_tests_dir . '/includes/functions.php' ) ) {
-			echo "Could not find $_tests_dir/includes/functions.php, have you run bin/install-wp-tests.sh ?" . PHP_EOL; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo "Could not find ".$this->wp_tests_dir."/includes/functions.php, have you run bin/install-wp-tests.sh ?" . PHP_EOL; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			exit( 1 );
 		}	
 

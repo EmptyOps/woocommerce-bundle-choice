@@ -18,69 +18,22 @@ activate_plugin('woocommerce-bundle-choice/woo-bundle-choice.php');
 require_once(constant('EO_WBC_PLUGIN_DIR').'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/library/EO_WBC_CatAt.php');
 require_once('data/sample_data.php');	    
 
-$_maps=array(
-    array(
-        ['slug','eo_diamond_round_shape_cat','product_cat'],
-        ['slug','eo_setting_round_shape_cat','product_cat']
-    ),
-    array(
-        ['slug','eo_diamond_princess_shape_cat','product_cat'],
-        ['slug','eo_setting_pear_shape_cat','product_cat']
-    ),
-    array(
-        ['slug','eo_diamond_emerald_shape_cat','product_cat'],
-        ['slug','eo_setting_emerald_shape_cat','product_cat']
-    ),
-    array(
-        ['slug','eo_diamond_asscher_shape_cat','product_cat'],
-        ['slug','eo_setting_asscher_shape_cat','product_cat']
-    ),
-    array(
-        ['slug','eo_diamond_marquise_shape_cat','product_cat'],
-        ['slug','eo_setting_marquise_shape_cat','product_cat']
-    ),
-    array(
-        ['slug','eo_diamond_oval_shape_cat','product_cat'],
-        ['slug','eo_setting_oval_shape_cat','product_cat']
-    ),
-    array(
-        ['slug','eo_diamond_radiant_shape_cat','product_cat'],
-        ['slug','eo_setting_radiant_shape_cat','product_cat']
-    ),
-    array(
-        ['slug','eo_diamond_pear_shape_cat','product_cat'],
-        ['slug','eo_setting_pear_shape_cat','product_cat']
-    ),
-    array(
-        ['slug','eo_diamond_heart_shape_cat','product_cat'],
-        ['slug','eo_setting_heart_shape_cat','product_cat']
-    ),
-    array(
-        ['slug','eo_diamond_cushion_shape_cat','product_cat'],
-        ['slug','eo_setting_cushion_shape_cat','product_cat']
-    ) );
-
 /**
 * Backend unit testing.
 */
 class TestFronIntegration extends WP_UnitTestCase {
-	
-	static function setUpBeforeClass() { 
-        // Called once just like normal constructor    
-    	add_action('woocommerce_init',function(){    		
+		
+	public function test_automation_status(){
+		//Check if automation was successfull;
 
-			global $_product;
+		global $_product;
 			global $_maps;
 			global $_atttriutes;
 			global $_category;
-	    	global $_img_url;
+	    	global $_img_url;	
 
-	    	$this->product = $_product;
-	    	$this->maps = $_maps;
-	    	$this->atttriutes = $_atttriutes;
-	    	$this->category = $_category;
-	    	$this->img_url = $_img_url;
-	    	
+		add_action('woocommerce_init',function() use(&$_product,&$_maps,&$_atttriutes,&$_category,&$_img_url){    		   		
+
 			/**
 			 * create table to store orders in a SETS form that are recived from customers
 			 */
@@ -115,18 +68,15 @@ class TestFronIntegration extends WP_UnitTestCase {
 
 			$factory_object = new EO_WBC_CatAt();
 
-			$this->category_status =  $factory_object->create_category($this->category);
-			$this->attribute_status =  $factory_object->create_attribute($this->atttriutes);
+			$this->category_status =  $factory_object->create_category($_category);
+			$this->attribute_status =  $factory_object->create_attribute($_atttriutes);
 
-			$this->map_status =  $factory_object->add_maps($this->maps);
+			$this->map_status =  $factory_object->add_maps($_maps);
 
-			$this->product_status =  $factory_object->create_products($this->product);
+			$this->product_status =  $factory_object->create_products($_product);
 		});
 
-	}
-
-	public function test_automation_status(){
-		//Check if automation was successfull;
+		do_action('woocommerce_init');		
 
 		$this->assertNotFalse($this->category_status);		
 
