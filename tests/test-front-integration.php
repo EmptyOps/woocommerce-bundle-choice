@@ -16,7 +16,7 @@ activate_plugin('woocommerce-bundle-choice/woo-bundle-choice.php');
 /////////////////////////////////////////////////////////////////////////////////////////////
 
 require_once(constant('EO_WBC_PLUGIN_DIR').'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/library/EO_WBC_CatAt.php');
-require_once('data/sample_data.php');	    
+
 
 /**
 * Backend unit testing.
@@ -27,11 +27,7 @@ class TestFronIntegration extends WP_UnitTestCase {
         // Called once just like normal constructor    
     	add_action('woocommerce_init',function(){    		
 
-			global $_product;
-			global $_maps;
-			global $_atttriutes;
-			global $_category;
-	    	global $_img_url;
+    		require_once('data/sample_data.php');	    
 
 	    	$this->product = $_product;
 	    	$this->maps = $_maps;
@@ -90,11 +86,11 @@ class TestFronIntegration extends WP_UnitTestCase {
 
 		$this->assertNotFalse($this->attribute_status);				
 
-/*		$this->assertNotEmpty($this->maps);
+		$this->assertNotEmpty($this->maps);
 
 		$this->assertIsArray($this->maps);
 
-		$this->assertTrue($this->map_status);*/
+		$this->assertTrue($this->map_status);
 		
 		$this->assertTrue($this->product_status);
 
