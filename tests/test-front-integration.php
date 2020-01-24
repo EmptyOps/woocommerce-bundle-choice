@@ -31,6 +31,8 @@ class TestFronIntegration extends WP_UnitTestCase {
 
 	    	$this->product = $_product;
 	    	$this->maps = $_maps;
+	    	var_dump($_maps);
+	    		print_r($_maps);
 	    	$this->atttriutes = $_atttriutes;
 	    	$this->category = $_category;
 	    	$this->img_url = $_img_url;
