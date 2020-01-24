@@ -6,7 +6,7 @@ class EO_WBC_Home
         if(isset($_SERVER['HTTP_REFERER'])){
           update_option('eo_wbc_mapping_error_report',$_SERVER['HTTP_REFERER']);
         }
-      }        
+      }              
     }
 
     public function show_buttons(){
@@ -217,7 +217,10 @@ class EO_WBC_Home
               $script.="var eo_wbc_mid=(jQuery(eo_wbc_content).children().length/2);".
                     "jQuery(eo_wbc_content).children(':eq('+Math.floor(eo_wbc_mid)+')').before('".$this->eo_wbc_buttons()."');";
             }
-            else{
+            else {
+              $script.="jQuery(eo_wbc_content).append('".$this->eo_wbc_buttons()."');";
+            }
+            /*else{
               $script.="var eo_wbc_count=jQuery(eo_wbc_content).children().length;".
                     "if(eo_wbc_count<=Number('".(get_option('eo_wbc_btn_position',1)-1)."')){".
                     " jQuery(eo_wbc_content).append('".$this->eo_wbc_buttons()."');".
@@ -225,7 +228,7 @@ class EO_WBC_Home
                     " jQuery(eo_wbc_content).children(':eq('+Number('".(get_option('eo_wbc_btn_position',1)-1)."')+')')".
                     ".before('".$this->eo_wbc_buttons().
                     "'); }";
-            }            
+            }            */
             $script.="});</script>";            
             echo $script.$this->eo_wbc_code();            
           }  

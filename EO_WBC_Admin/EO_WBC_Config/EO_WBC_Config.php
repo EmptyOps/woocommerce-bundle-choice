@@ -2,7 +2,56 @@
 class EO_WBC_Config
 {   
     public function __construct() {
+        
+      /*  add_action('woocommerce_init',function(){
+             require_once(EO_WBC_PLUGIN_DIR.'/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/library/EO_WBC_CatAt.php');
+    $catat = new EO_WBC_CatAt();
+    echo $catat->add_maps(array(
+                array(
+                    ['slug','eo_diamond_round_shape_cat','product_cat'],
+                    ['slug','eo_setting_round_shape_cat','product_cat']
+                ),
+                array(
+                    ['slug','eo_diamond_princess_shape_cat','product_cat'],
+                    ['slug','eo_setting_pear_shape_cat','product_cat']
+                ),
+                array(
+                    ['slug','eo_diamond_emerald_shape_cat','product_cat'],
+                    ['slug','eo_setting_emerald_shape_cat','product_cat']
+                ),
+                array(
+                    ['slug','eo_diamond_asscher_shape_cat','product_cat'],
+                    ['slug','eo_setting_asscher_shape_cat','product_cat']
+                ),
+                array(
+                    ['slug','eo_diamond_marquise_shape_cat','product_cat'],
+                    ['slug','eo_setting_marquise_shape_cat','product_cat']
+                ),
+                array(
+                    ['slug','eo_diamond_oval_shape_cat','product_cat'],
+                    ['slug','eo_setting_oval_shape_cat','product_cat']
+                ),
+                array(
+                    ['slug','eo_diamond_radiant_shape_cat','product_cat'],
+                    ['slug','eo_setting_radiant_shape_cat','product_cat']
+                ),
+                array(
+                    ['slug','eo_diamond_pear_shape_cat','product_cat'],
+                    ['slug','eo_setting_pear_shape_cat','product_cat']
+                ),
+                array(
+                    ['slug','eo_diamond_heart_shape_cat','product_cat'],
+                    ['slug','eo_setting_heart_shape_cat','product_cat']
+                ),
+                array(
+                    ['slug','eo_diamond_cushion_shape_cat','product_cat'],
+                    ['slug','eo_setting_cushion_shape_cat','product_cat']
+                )
+            ));
+    die();
+});*/
 
+        $this->init();
         $this->menu();   
         $this->admin_actions();     
     }
@@ -15,8 +64,8 @@ class EO_WBC_Config
          * 1. Home page
          * 2. Config Page
          * 3. Mapping Page
-         */
-                
+         */       
+
         //Main Menu and home page
         require_once 'EO_WBC_View/EO_WBC_View_Head_Banner.php';
 
@@ -26,6 +75,10 @@ class EO_WBC_Config
 
             add_menu_page('Woo Product Bundle Choice',__('Woo Product Bundle Choice','woo-bundle-choice'),'administrator','eo-wbc-home',array($this,'eo_wbc_home'),constant('EO_WBC_PLUGIN_ICO'));   
             $this->menu_slugs['Home']='eo-wbc-home';
+
+            //Setting page.
+            add_submenu_page(null, __('Setup WooCommerce Product Bundle Choice','woo-bundle-choice'), __('Setup WooCommerce Product Bundle Choice','woo-bundle-choice'), 'administrator', 'eo-wbc-init',array($this,'eo_wbc_init'));                    
+            $this->menu_slugs['Configuration']='eo-wbc-init';
             
             //Configuration Page
             add_submenu_page('eo-wbc-home', __('Configuration','woo-bundle-choice'), __('Configuration','woo-bundle-choice'), 'administrator', 'eo-wbc-setting',array($this,'eo_wbc_config'));                    
@@ -52,8 +105,6 @@ class EO_WBC_Config
             add_submenu_page('eo-wbc-home', __('Logs','woo-bundle-choice'), __('Logs','woo-bundle-choice'), 'administrator', 'eo-wbc-logs',array($this,'eo_wbc_logs'));           
             $this->menu_slugs['Logs']='eo-wbc-logs';
 
-
-
         },11);
 
         add_action('eo_wbc_menu_tabs',function($menu_slug){            
@@ -73,8 +124,23 @@ class EO_WBC_Config
         });
     }    
     
-    function eo_wbc_home() {           
+    function init(){
+        
+        if(!empty($_GET) and !empty($_GET['page']) and $_GET['page']=='eo-wbc-init' and !empty($_GET['wbc_setup']) ){
+            require_once apply_filters( 'eo_wbc_admin_setup_wizard','EO_WBC_View/EO_WBC_Setup_Wizard.php');        
+        }                
+    }
 
+    function eo_wbc_init() {
+        
+        if(isset($_GET) && !empty($_GET['wbc_setup'])) {                        
+            require_once apply_filters('eo_wbc_admin_setup_wizard','EO_WBC_View/EO_WBC_Setup_Wizard.php');
+        }        
+    }
+
+    function eo_wbc_home() {           
+        
+        //var_dump(wp_cache_get('cache_taxonomy','eo_wbc'));
         if(isset($_GET) && !empty($_GET['eo_wbc_view_auto_jewel'])) {
 
             require_once apply_filters('eo_wbc_admin_config_home_page','EO_WBC_View/EO_WBC_View_Auto_Jewel.php');
@@ -126,8 +192,8 @@ class EO_WBC_Config
         //Menu based on inventory
         switch(get_option('eo_wbc_inventory_type')){
             case 'jewelry':
-                add_submenu_page('eo-wbc-home', __('Jewellery Control(Beta)','woo-bundle-choice'), __('Jewellery Control(Beta)','woo-bundle-choice'), 'administrator', 'eo-wbc-jewellery-price-control',array($this,'eo_wbc_jewellery_price_control'));           
-                $this->menu_slugs['Jewellery Control(Beta)']='eo-wbc-jewellery-price-control';
+                add_submenu_page('eo-wbc-home', __('Price Control(Beta)','woo-bundle-choice'), __('Price Control(Beta)','woo-bundle-choice'), 'administrator', 'eo-wbc-jewellery-price-control',array($this,'eo_wbc_jewellery_price_control'));           
+                $this->menu_slugs['Price Control(Beta)']='eo-wbc-jewellery-price-control';
                 break;
         }
     } 
@@ -137,6 +203,7 @@ class EO_WBC_Config
         add_action( 'save_post',array($this,'jpc_update'),10,3); 
     } 
 
+    #Jewellary Price Update
     function jpc_update( $post_ID, $post, $update){                           
 
         if ( $post->post_type != 'product') return;
@@ -149,7 +216,7 @@ class EO_WBC_Config
         
         $q_att="( SELECT DISTINCT({$wpdb->prefix}term_relationships.object_id), {$wpdb->prefix}terms.name,{$wpdb->prefix}terms.slug,{$wpdb->prefix}term_taxonomy.taxonomy FROM {$wpdb->prefix}term_relationships LEFT JOIN {$wpdb->prefix}term_taxonomy ON {$wpdb->prefix}term_relationships.term_taxonomy_id={$wpdb->prefix}term_taxonomy.term_taxonomy_id LEFT JOIN {$wpdb->prefix}terms ON {$wpdb->prefix}term_taxonomy.term_id={$wpdb->prefix}terms.term_id WHERE {$wpdb->prefix}term_taxonomy.taxonomy LIKE 'pa_%' )";                
         
-        $jpc_data=json_decode( unserialize(get_option('eo_wbc_jpc_data',serialize(array()))) );
+        $jpc_data=unserialize(get_option('eo_wbc_jpc_data',serialize(array())) );
         if(is_array($jpc_data) OR is_object($jpc_data)){
 
             foreach ($jpc_data as $q_data) {
@@ -234,7 +301,7 @@ class EO_WBC_Config
         
         $q_att="( SELECT DISTINCT({$wpdb->prefix}term_relationships.object_id), {$wpdb->prefix}terms.name,{$wpdb->prefix}terms.slug,{$wpdb->prefix}term_taxonomy.taxonomy FROM {$wpdb->prefix}term_relationships LEFT JOIN {$wpdb->prefix}term_taxonomy ON {$wpdb->prefix}term_relationships.term_taxonomy_id={$wpdb->prefix}term_taxonomy.term_taxonomy_id LEFT JOIN {$wpdb->prefix}terms ON {$wpdb->prefix}term_taxonomy.term_id={$wpdb->prefix}terms.term_id WHERE {$wpdb->prefix}term_taxonomy.taxonomy LIKE 'pa_%' )";                
         
-        $jpc_data=json_decode( unserialize(get_option('eo_wbc_jpc_data',serialize(array()))) );
+        $jpc_data=unserialize(get_option('eo_wbc_jpc_data',serialize(array())));
         if(is_array($jpc_data) OR is_object($jpc_data)){
 
             foreach ($jpc_data as $q_data) {

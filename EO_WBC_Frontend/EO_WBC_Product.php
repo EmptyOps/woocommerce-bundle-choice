@@ -1,32 +1,32 @@
 <?php
-class EO_WBC_Product {
+class EO_WBC_Product
+{
+    public function __construct()
+    {   
+        $this->att_link =array();
 
-    public function __construct() {  
-
-        if(isset($_GET['EO_WBC'])) {
-
+        if (isset($_GET['EO_WBC'])) {
+            $this->eo_wbc_render(); //Render View and Routings
             $this->eo_wbc_config();            //Disable 'Add to Cart Button' and Set 'Sold Individually'
-            $this->eo_wbc_add_breadcrumb();    //Add Breadcrumb        
-            $this->eo_wbc_render();            //Render View and Routings                                       
-
-        } elseif( get_option('eo_wbc_pair_status','1')=='1' ) {
-           
+            $this->eo_wbc_add_breadcrumb();    //Add Breadcrumb
+                        
+        } elseif (get_option('eo_wbc_pair_status',false)=='1') {
             $this->eo_wbc_make_pair();
-        }       
+        }     
+
     }
     //It's just temporary fix so we need strong model to handle this changes.
-    private function eo_wbc_make_pair_route() {
+    private function eo_wbc_make_pair_route()
+    {
         global $post;
         $url='';
         $category=$this->eo_wbc_get_category();
 
-        if($category==get_option('eo_wbc_first_slug')) {
+        if ($category==get_option('eo_wbc_first_slug')) {
             $url=get_permalink($post->ID)
                 .'?EO_WBC=1&BEGIN='.sanitize_text_field($category)
                 .'&STEP=1&FIRST='.$post->ID."&SECOND=&REDIRECT=1";
-        }
-        elseif($category==get_option('eo_wbc_second_slug')) {
-
+        } elseif ($category==get_option('eo_wbc_second_slug')) {
             $url=get_permalink($post->ID)
                 .'?EO_WBC=1&BEGIN='.sanitize_text_field($category)
                 .'&STEP=1&FIRST=&SECOND='.$post->ID."&REDIRECT=1";
@@ -34,7 +34,8 @@ class EO_WBC_Product {
         return $url;
     }
     //Show make pair button to only those are available for pairing as per mapping.
-    private function eo_wbc_make_pair() {
+    private function eo_wbc_make_pair()
+    {
         
         $url=$this->eo_wbc_category_link();
         $category=$this->eo_wbc_get_category();
@@ -69,7 +70,7 @@ class EO_WBC_Product {
             });
 
             add_action('woocommerce_after_add_to_cart_button',function(){                
-                echo "<button href='#' id='eo_wbc_add_to_cart' class='single_add_to_cart_button button alt make_pair'>".get_option('eo_wbc_pair_text',__('Add to pair','woo-bundle-choice'))."</button>";
+                echo "<button href='#' id='eo_wbc_add_to_cart' class='single_add_to_cart_button button alt make_pair btn btn-default'>".get_option('eo_wbc_pair_text',__('Add to pair','woo-bundle-choice'))."</button>";
             });
             //Add css to the head
             add_Action('wp_head',function(){
@@ -82,7 +83,7 @@ class EO_WBC_Product {
                             .make_pair{
                                 margin-top: 1em !important;
                             }
-                        }
+                        }                        
                     </style>
                 <?php
             });
@@ -108,8 +109,13 @@ class EO_WBC_Product {
             'woocommerce_after_shop_loop_item',
             'woocommerce_template_loop_add_to_cart'
         );
-        add_filter('woocommerce_product_single_add_to_cart_text',function(){
-            return get_option('eo_wbc_add_to_cart_text',__('Continue','woo-bundle-choice'));
+        add_filter('woocommerce_product_single_add_to_cart_text', function() {
+            $category = $this->eo_wbc_get_category();
+            if($category == get_option('eo_wbc_first_slug')){
+                return get_option('eo_wbc_add_to_cart_text_first', __('Continue', 'woo-bundle-choice'));
+            } elseif( $category == get_option('eo_wbc_second_slug') ) {
+                return get_option('eo_wbc_add_to_cart_text_second', __('Continue', 'woo-bundle-choice'));
+            }            
         });
     }
 
@@ -117,18 +123,20 @@ class EO_WBC_Product {
     {   
         //Adding Breadcrumb
         add_action( 'woocommerce_before_single_product',function(){
-
-            echo EO_WBC_Breadcrumb::eo_wbc_add_breadcrumb(
-                                            sanitize_text_field($_GET['STEP']),
-                                            sanitize_text_field($_GET['BEGIN'])
-                                        ).'<br/><br/>';
+            if(!empty($_GET) && !empty($_GET['STEP']) && !empty($_GET['BEGIN'])){
+                echo EO_WBC_Breadcrumb::eo_wbc_add_breadcrumb(
+                                                sanitize_text_field($_GET['STEP']),
+                                                sanitize_text_field($_GET['BEGIN'])
+                                            ).'<br/><br/>';
+            }
         }, 15 );
     }
     
     private function eo_wbc_render()
-    {
+    {   
+        $redirect_url = $this->eo_wbc_product_route();
         //Registering Scripts : JavaScript
-        add_action( 'wp_enqueue_scripts',function(){
+        add_action( 'wp_enqueue_scripts',function() use(&$redirect_url){
 
             global $post;
             wp_register_script(
@@ -143,13 +151,25 @@ class EO_WBC_Product {
             wp_localize_script(
                 'eo_wbc_add_to_cart_js',
                 'eo_wbc_object',
-                array('url'=>$this->eo_wbc_product_route())
+                array('url'=>$redirect_url)
             );            
             wp_enqueue_script('eo_wbc_add_to_cart_js');
         });
           
         //Adding own ADD_TO_CART_BUTTON
-        add_action('wp_footer',function(){            
+        add_action('wp_footer',function(){   
+            echo "<style>.double-gutter .tmb{ width: 50%;display: inline-flex; }</style>";         
+            $category = $this->eo_wbc_get_category();
+            $btn_text = '';
+            if($category == get_option('eo_wbc_first_slug')){
+                $btn_text = get_option('eo_wbc_add_to_cart_text_first', __('Continue', 'woo-bundle-choice'));
+            } elseif( $category == get_option('eo_wbc_second_slug') ) {
+                $btn_text = get_option('eo_wbc_add_to_cart_text_second', __('Continue', 'woo-bundle-choice'));
+            }
+
+            if(empty($btn_text)){
+                $btn_text = 'Continue';
+            }
         ?>
         <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
        	<script type="text/javascript">
@@ -157,7 +177,7 @@ class EO_WBC_Product {
                 jQuery('form.cart').prepend("<input type='hidden' name='eo_wbc_target' value='<?php echo $this->eo_wbc_get_category(); ?>'/><input type='hidden' name='eo_wbc_product_id' value='<?php global $post; echo $post->ID; ?>'/>");
     			jQuery(".single_add_to_cart_button.button.alt:not(.disabled)").replaceWith(
     			     "<button href='#' id='eo_wbc_add_to_cart' class='single_add_to_cart_button button alt'>"
-                     +"<?php get_option('eo_wbc_add_to_cart_text')? _e(get_option('eo_wbc_add_to_cart_text'),'woo-bundle-choice') : _e('Continue','woo-bundle-choice'); ?>"
+                     +"<?php echo $btn_text; ?>"
                      +"</button>"
                     );
     			});
@@ -178,21 +198,25 @@ class EO_WBC_Product {
             {    
                 //if redirec signal is set and cart data are ready then
                 //relocate user to target path.
+
                 if($category==get_option('eo_wbc_first_slug')){
                     $category_link=$this->eo_wbc_category_link();
                     $url=get_bloginfo('url').'/product-category/'.$category_link
                         .'EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
                         .'&STEP=2&FIRST='.$post->ID.'&SECOND='.sanitize_text_field($_GET['SECOND'])
-                        ."&CART=".sanitize_text_field($_GET['CART']).'&CAT_LINK='.substr($category_link,0,strpos($category_link,'/'));
+                        ."&CART=".sanitize_text_field($_GET['CART']).'&ATT_LINK='.implode(' ',$this->att_link).'&CAT_LINK='.substr($category_link,0,strpos($category_link,'/'));
                 }
                 elseif($category==get_option('eo_wbc_second_slug')){
                     $category_link=$this->eo_wbc_category_link();
                     $url=get_bloginfo('url').'/product-category/'.$category_link
                         .'EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
                         .'&STEP=2&FIRST='.sanitize_text_field($_GET['FIRST']).'&SECOND='.$post->ID
-                        ."&CART=".sanitize_text_field($_GET['CART']).'&CAT_LINK='.substr($category_link,0,strpos($category_link,'/'));
-                }                                
-                header("Location: {$url}");
+                        ."&CART=".sanitize_text_field($_GET['CART']).'&ATT_LINK='.implode(' ',$this->att_link).'&CAT_LINK='.substr($category_link,0,strpos($category_link,'/'));
+                } 
+                
+                return header("Location: {$url}");
+                wp_die();
+                //wp_safe_redirect($url ,301 );               
             }
             else
             {
@@ -235,101 +259,114 @@ class EO_WBC_Product {
      * @return string
      *  string of mapped category to current category item
      */
-    private function eo_wbc_category_link($variable_status=FALSE){
-
+    private function eo_wbc_category_link($variable_status=FALSE){        
         global $post;
 
-        $variable_status=FALSE;//status if product is varaible in nature.
+        $variation=FALSE;//status if product is varaible in nature.
         $cart=NULL;//storage variable for cart data if redirected from 'Add to cart' action.
 
         if(isset($_GET['CART']))
         {
             $cart=str_replace("\\",'',base64_decode(sanitize_text_field($_GET['CART']),TRUE));
             $cart=(array)json_decode($cart);
-         
+                        
             if(!empty($cart['variation_id']))
             {
-                $variable_status=TRUE;
+                $variation=$cart['variation_id'];
             }    
         }                
 
-        $terms=wp_get_post_terms($post->ID,get_taxonomies()); 
+        // Get all category and attributes.
+        $terms=wp_get_post_terms($post->ID,get_taxonomies());     
+        $maps = wp_cache_get( 'cache_maps', 'eo_wbc');
+        $product_in = array();        
+        // Gathering all terms for the product that is added to the cart.
+        if(!is_wp_error($terms) and !empty($terms) and is_array($terms) and is_array($maps) ){
+            if($variation){
+                
+                $variation_attributes = wc_get_product($variation)->get_attributes();                
+                $variation_terms = array();
+                array_walk($terms,function($term,$index) use(&$variation_attributes,&$variation_terms){
+                    if( $term->taxonomy=='product_cat' or (array_key_exists($term->taxonomy, $variation_attributes) and $variation_attributes[$term->taxonomy] == $term->slug) ) {
+                        array_push($variation_terms,$term->term_taxonomy_id);
+                    }
+                });    
+                $terms = $variation_terms;
+            } else {
+                array_walk($terms,function($term,$index){
+                    $terms[$index] = $term->term_taxonomy_id;
+                });    
+            } 
 
-        foreach ($terms as $key=>$term)
-        {   
-            $terms[$key]=$term->term_taxonomy_id;
+            // Gather all target of the maps           
+            $map_column = 0;
+            if($this->eo_wbc_get_category()==get_option('eo_wbc_first_slug')) { $map_column = 0; }
+            elseif($this->eo_wbc_get_category()==get_option('eo_wbc_second_slug')) { $map_column = 1; }            
+            $product_code = "pid_{$post->ID}";
+                        
+            $terms =array_filter(array_map(function($map) use(&$terms,&$map_column,&$product_code,&$product_in){
+                
+                if(array_intersect($terms,$map[$map_column])){
+                    if($map_column == 0) return $map[1];
+                    else return $map[0];
+                } elseif(in_array( $product_code, $map[$map_column] )) {
+                    
+                    if($map_column == 0){
+                        $product_in = array_merge( $product_in, $map[1] );
+                    } else {
+                        $product_in = array_merge( $product_in, $map[0] );
+                    }
+
+                    return false;
+                } else {
+                    return false;
+                }                
+
+            },$maps));
+        } 
+        
+        $category=array();//array to hold category slugs
+        $taxonomy=array();//array to hold taxonomy slugs
+        if(!is_wp_error($terms) and !empty($terms)) {
+            array_walk($terms,function($term) use(&$category,&$taxonomy){
+
+                if(is_array($term)) {
+                    foreach ($term as $_term_) {
+                        $_term_ = get_term_by('term_taxonomy_id', $_term_);
+                        if(!is_wp_error($_term_) and !empty($_term_)) {
+                            $_taxonomy_ = $_term_->taxonomy;                            
+                            if($_taxonomy_==='product_cat') {
+
+                                $category[]= $_term_->slug;
+
+                            } elseif( substr($_taxonomy_,0,3) =='pa_' ) {
+
+                                $taxonomy[substr($_term_->taxonomy,3)][] = $_term_->slug;
+                            }
+                        }
+                    }
+                } else {
+                    $_term_ = get_term_by('term_taxonomy_id', $_term_);
+                    if(!is_wp_error($_term_) and !empty($_term_)) {
+                        $_taxonomy_ = $_term_->taxonomy;                        
+                        if($_taxonomy_==='product_cat') {
+
+                            $category[]= $_term_->slug;
+
+                        } elseif( substr($_taxonomy_,0,3) =='pa_' ) {
+                            
+                            $taxonomy[substr($_term_->taxonomy,3)][] = $_term_->slug;
+                        }
+                    }
+                }
+            });
         }
         
-        if($variable_status)
-        {   
-            $new_terms=array();
-            foreach ($terms as $term_id) {                
-                $term_object=EO_WBC_Support::get_term_by_term_taxonomy_id($term_id);                
-                if($term_object->taxonomy=='product_cat' 
-                    or
-                    in_array(
-                        $term_object->slug,
-                        array_values(EO_WBC_Support::eo_wbc_get_product_variation_attributes($cart['variation_id']))) 
-                ){
-                    $new_terms[]=$term_id;
-                }          
-            }
-            $terms=$new_terms;
-        }
-
-        $category=array();        
-        foreach ($terms as $term)
-        {
-            $query='';
-            global $wpdb;
-            if($this->eo_wbc_get_category()==get_option('eo_wbc_first_slug')){
-                $query="select * from `{$wpdb->prefix}eo_wbc_cat_maps` "."where first_cat_id={$term}";
-            }
-            elseif($this->eo_wbc_get_category()==get_option('eo_wbc_second_slug')){
-                $query="select * from `{$wpdb->prefix}eo_wbc_cat_maps` "."where second_cat_id={$term}";
-            }            
-            
-            $maps=$wpdb->get_results($query,'ARRAY_N');           
-
-            if( is_array($maps) && !empty($maps) ){
-
-                foreach ($maps as $map){
-
-                    if($map[0]==$term){
-                       
-                        $category[]=$map[1];
-                    }
-                    else{
-                       
-                        $category[]=$map[0];
-                    }
-                }
-            }              
-        }                        
-        //remove empty array space and duplicate values
-        $category=array_unique(array_filter($category));                
-        
-        $cat=array();//array to hold category slugs
-        $tax=array();//array to hold taxonomy slugs
-        foreach ($category as $term_id)
-        {
-            $term_object=EO_WBC_Support::get_term_by_term_taxonomy_id($term_id);            
-
-            if(!empty($term_object)){
-                if($term_object->taxonomy=='product_cat'){
-                    $cat[]=$term_object->slug;
-                }
-                else
-                {
-                    $tax[]=$term_object->term_taxonomy_id;                                   
-                }
-            }                        
-        }
         $link='';        
         //if category maping is available then make url filter to category
         //else add default category to the link.
-        if(is_array($cat) && count($cat)>0){
-            $link=implode( (get_option('eo_wbc_map_cat_pref','and')==='and'?'+':',') , $cat );                  
+        if(is_array($category) && !empty($category)) {
+            $link=implode( (get_option('eo_wbc_map_cat_pref','and')==='and'?'+':',') , $category );                  
         }
         else
         {
@@ -340,52 +377,27 @@ class EO_WBC_Product {
                     get_option('eo_wbc_first_slug');                    
         }
 
-        $link.="/?";   
-        if(is_array($tax) && count($tax)>0){            
+        $link.="/?";           
+        if(is_array($taxonomy) && !empty($taxonomy)){            
             
             $filter_query=array();
-            foreach ($tax as $tax_id) {
-                $term_object=EO_WBC_Support::get_term_by_term_taxonomy_id($tax_id);  
-                if(!empty($term_object)){
-                    $filter_query[str_replace('pa_','',$term_object->taxonomy)][]=$term_object->slug;    
-                }                             
-            }            
-
             $attr_pref=get_option('eo_wbc_map_attr_pref','or');
-            $glue=($attr_pref==='or'?',':'+');           
-            foreach ($filter_query as $filter_name => $filters) {                 
-                $link.="query_type_{$filter_name}={$attr_pref}&filter_{$filter_name}=".implode($glue,$filters)."&";
-            }       
+            $glue=($attr_pref === 'or' ? ',' : '+' );           
+
+            foreach ($taxonomy as  $_tax => $_tems) {
+                $filter_query["query_type_{$_tax}"] = $attr_pref;
+                $filter_query["filter_{$_tax}"] = implode($glue,array_unique(array_filter($_tems)));
+            }
+            $link.=http_build_query($filter_query).'&';            
         }    
 
-        /*URL condition for product to products based mappings...*/
-        global $wpdb;        
-        if($this->eo_wbc_get_category()==get_option('eo_wbc_first_slug')){
-            $query="select * from `{$wpdb->prefix}eo_wbc_cat_maps` where first_cat_id='pid_{$post->ID}'";
-        }
-        elseif($this->eo_wbc_get_category()==get_option('eo_wbc_second_slug')){
-            $query="select * from `{$wpdb->prefix}eo_wbc_cat_maps` where second_cat_id='pid_{$post->ID}'";
-        }                    
-        $maps=$wpdb->get_results($query,'ARRAY_N');  
-        
-        $products_in=array();
-        
-        array_walk($maps,function($record) use(&$products_in,&$post){            
-            if($record[0]=="pid_{$post->ID}") {
+        if(!empty($product_in) && is_array($product_in)) {
+            $product_in = array_filter($product_in);
+            $product_in = array_map(function($product_in){ return substr($product_in,4); },$product_in);
+
+            $link.='products_in='.implode(',',$product_in).'&';
+        }             
                 
-                $products_in[]=substr($record[1],4);              
-                
-            } else {
-                
-                $products_in[]=substr($record[0],4);                
-            }
-        });
-        
-        if(!empty($products_in) && is_array($products_in)) {
-            $link=$link.'products_in='.implode(',',$products_in).'&';
-        }               
-        /*end of section for product to products based mappings*/        
-        
         return $link;
     }
 
@@ -403,10 +415,11 @@ class EO_WBC_Product {
         ));
         
         $category=array();
-
-        foreach ($map_base as $base) {            
-            $category=array_merge(array($base->slug),$this->eo_wbc_sub_categories($base->slug));            
-        }
+        if(!empty($map_base)){
+            foreach ($map_base as $base) {            
+                $category=array_merge(array($base->slug),$this->eo_wbc_sub_categories($base->slug));            
+            }    
+        }        
         return $category;
     } 
 
@@ -494,5 +507,5 @@ class EO_WBC_Product {
                 }               
             }
         }
-    } 
+    }
 }

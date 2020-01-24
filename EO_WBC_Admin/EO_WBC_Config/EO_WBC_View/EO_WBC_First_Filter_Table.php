@@ -52,6 +52,7 @@ if(!class_exists('EO_WBC_First_Filter_Table')){
             						'label'=>$item['label'],
             						'type'=>($item['advance']=='1'?__('Yes','woo-bundle-choice'):__('No','woo-bundle-choice')),
             						'input'=>$item['input'],
+                                    'column_width'=>( empty($item['column_width'])? '0%' : $item['column_width'].'%' ),
                                     'order'=>empty($item['order'])?'0':$item['order']
             					);                    
             	}
@@ -84,6 +85,7 @@ if(!class_exists('EO_WBC_First_Filter_Table')){
             'label'   => __('Label','woo-bundle-choice'),
             'type'=>__('Advance filter','woo-bundle-choice'),
             'input'=>__('Input type','woo-bundle-choice'),
+            'column_width'=>__('Column Width','woo-bundle-choice'),
             'order'=>__('Ordering','woo-bundle-choice')
           );
           return $columns;
@@ -92,7 +94,7 @@ if(!class_exists('EO_WBC_First_Filter_Table')){
         //make data ready to be shown.
         function prepare_items() {
           	$columns = $this->get_columns();
-          
+            
         	$hidden = array();
     	    $sortable = array();
 
@@ -102,7 +104,9 @@ if(!class_exists('EO_WBC_First_Filter_Table')){
 
 		  	$per_page = 5;
 		  	$current_page = $this->get_pagenum();            
-		  	$total_items = count($data);
+            if(is_array($data) || is_object($data)){
+                $total_items = count($data);    
+            }		  	
 		  	
 		  	// only ncessary because we have sample data
 		  	/*if(is_array($data)){
@@ -123,7 +127,8 @@ if(!class_exists('EO_WBC_First_Filter_Table')){
                 case 'filter':                    
                 case 'label':
                 case 'type':     
-                case 'input':    
+                case 'input':   
+                case 'column_width': 
                 case 'order':                           
                   return $item[ $column_name ];
                 default:

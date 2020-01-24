@@ -1,11 +1,10 @@
 <?php
-    add_action('admin_enqueue_scripts',function(){
-        wp_register_style( 'eo-wbc-ui',plugin_dir_url(EO_WBC_PLUGIN_FILE).'css/fomantic/semantic.min.css');
-        wp_enqueue_style( 'eo-wbc-ui');      
+    
+    wp_register_style( 'eo-wbc-ui',plugin_dir_url(EO_WBC_PLUGIN_FILE).'css/fomantic/semantic.min.css');
+    wp_enqueue_style( 'eo-wbc-ui');      
 
-        wp_register_script( 'eo-wbc-ui',plugin_dir_url(EO_WBC_PLUGIN_FILE).'js/fomantic/semantic.min.js');
-        wp_enqueue_script( 'eo-wbc-ui' );  
-    });
+    wp_register_script( 'eo-wbc-ui',plugin_dir_url(EO_WBC_PLUGIN_FILE).'js/fomantic/semantic.min.js');
+    wp_enqueue_script( 'eo-wbc-ui' );  
 
     add_action('admin_head',function(){        
         echo '<link rel="stylesheet" href="'.plugins_url('/EO_WBC_CSS/flipswitch.css',__FILE__).'" type="text/css" media="all" />';
@@ -171,13 +170,13 @@
            <div class="ui form">
 
                 <div class="inline field">
-                    <label><?php _e('Headers','woo-bundle-choice'); ?></label>
+                    <label><?php _e('Header font style','woo-bundle-choice'); ?></label>
                     <input type="text" name="eo_wbc_filter_config_font_family" value="<?php echo get_option('eo_wbc_filter_config_font_family',''); ?>" >
                     <div class="info">( <?php _e("Font family to be used in filters.","woo-bundle-choice"); ?> )</div>
                 </div>
 
                 <div class="inline field">
-                    <label><?php _e('Headers color','woo-bundle-choice'); ?></label>
+                    <label><?php _e('Header font color','woo-bundle-choice'); ?></label>
                     <input type="color" name="eo_wbc_filter_config_header_color" value="<?php echo get_option('eo_wbc_filter_config_header_color','#4285f4'); ?>" >
                     <div class="info">( <?php _e("Color for headers in filters widget.","woo-bundle-choice"); ?> )</div>
                 </div>
@@ -200,6 +199,16 @@
                     <div class="info">( <?php _e("Color for slider's track between nodes.","woo-bundle-choice"); ?> )</div>
                 </div>
 
+                <div class="inline field">
+                    <label><?php _e('Icon Size','woo-bundle-choice'); ?></label>
+                    <input type="text" name="eo_wbc_filter_config_icon_size" value="<?php echo get_option('eo_wbc_filter_config_icon_size','50px'); ?>">
+                    <div class="info">( <?php _e("Define size of icon at filter in px.","woo-bundle-choice"); ?> )</div>
+                </div>
+                <div class="inline field">
+                    <label><?php _e('Icon label size','woo-bundle-choice'); ?></label>
+                    <input type="text" name="eo_wbc_filter_config_icon_label_size" value="<?php echo get_option('eo_wbc_filter_config_icon_label_size','0.78571429rem'); ?>">
+                    <div class="info">( <?php _e("Define size of icon label in rem.","woo-bundle-choice"); ?> )</div>
+                </div>
             </div>
         </div>
 
@@ -207,9 +216,15 @@
           <h3><?php _e('Product Page Settings','woo-bundle-choice'); ?></h3>
           <div class="ui form">
               <div class="inline field">
-                  <label><?php _e('Add to Cart Button Text','woo-bundle-choice'); ?></label>
-                  <input type="text" name="eo_wbc_add_to_cart_text" value="<?php echo get_option('eo_wbc_add_to_cart_text',''); ?>">
-                  <div class="info">( <?php _e('Text to be shown on add to cart button on product page.','woo-bundle-choice');?> )</div>
+                  <label><?php _e('First Category Add to Cart Button Text','woo-bundle-choice'); ?></label>
+                  <input type="text" name="eo_wbc_add_to_cart_text_first" value="<?php echo get_option('eo_wbc_add_to_cart_text_first',''); ?>">
+                  <div class="info">( <?php _e('Text to be shown on add to cart button on product page for the first category.','woo-bundle-choice');?> )</div>
+              </div>
+
+              <div class="inline field">
+                  <label><?php _e('Second Category Add to Cart Button Text','woo-bundle-choice'); ?></label>
+                  <input type="text" name="eo_wbc_add_to_cart_text_second" value="<?php echo get_option('eo_wbc_add_to_cart_text_second',''); ?>">
+                  <div class="info">( <?php _e('Text to be shown on add to cart button on product page for the second category.','woo-bundle-choice');?> )</div>
               </div>
           </div>
         </div>         
