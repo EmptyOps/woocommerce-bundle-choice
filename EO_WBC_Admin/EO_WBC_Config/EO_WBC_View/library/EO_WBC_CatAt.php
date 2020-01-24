@@ -10555,7 +10555,7 @@ if(!class_exists('EO_WBC_CatAt')){
 						    'post_status'  => 'publish',
 						    'post_parent'  => $parent_id,
 						    'post_type'    => 'product_variation',
-						    'guid'        => wc_get_product($parent_id)->get_permalink()
+						    'guid'        => EO_WBC_Support::eo_wbc_get_product($parent_id)->get_permalink()
 						);						
 
 						$variation_id = wp_insert_post( $variation_data );
