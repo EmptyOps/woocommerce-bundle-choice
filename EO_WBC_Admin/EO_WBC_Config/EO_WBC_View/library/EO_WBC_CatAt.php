@@ -10524,11 +10524,11 @@ if(!class_exists('EO_WBC_CatAt')){
 				//////////////////////////////////////////////////////////////////////////////
 				foreach ($args as $index => $product) {
 					
-					$product = new WC_Product_Variable();
-					$product->set_name($product['title']);
-					$product->set_category_ids(array_map(function($term){ return get_term_by( 'slug',$term,'product_cat')->term_id; },$product['category']));
-					$product->save();
-					$product_id = $product->get_id();
+					$p = new WC_Product_Variable();
+					$p->set_name($product['title']);
+					$p->set_category_ids(array_map(function($term){ return get_term_by( 'slug',$term,'product_cat')->term_id; },$product['category']));
+					$p->save();
+					$product_id = $p->get_id();
 
 					update_post_meta( $product_id, '_product_attributes', $product['attribute'] );
 
@@ -10604,6 +10604,7 @@ if(!class_exists('EO_WBC_CatAt')){
 
 					    $variation_obj->save(); // Save the data
 					}
+					$p->save();
 				}									
 			}
 		}
