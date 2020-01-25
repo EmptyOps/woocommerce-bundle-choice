@@ -8,7 +8,7 @@ require_once $wp_tests_dir . '/includes/functions.php';
 require_once $wp_tests_dir . '/includes/bootstrap.php';
 require_once $wp_tests_dir . '/includes/listener-loader.php';
 
-//require_once ABSPATH . 'wp-content/plugins/woocommerce/woocommerce.php';
+require_once ABSPATH . 'wp-content/plugins/woocommerce/woocommerce.php';
 require_once dirname( dirname( __FILE__ ) ) . '/woo-bundle-choice.php';		
 
 activate_plugin('woocommerce/woocommerce.php');

@@ -17,16 +17,6 @@ TMPDIR=$(echo $TMPDIR | sed -e "s/\/$//")
 WP_TESTS_DIR=${WP_TESTS_DIR-$TMPDIR/wordpress-tests-lib}
 WP_CORE_DIR=${WP_CORE_DIR-$TMPDIR/wordpress/}
 
-curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar > wp
-chmod +x wp
-mv wp /tmp/wordpress/
-echo "Moving composer.json"
-cp composer.json ${WP_CORE_DIR}
-composer install -d ${WP_CORE_DIR}
-echo "Installing dependency"
-composer global require "phpunit/phpunit=5.7.*|7.5.*"
-php /tmp/wordpress/wp plugin activate woocommerce
-
 download() {
     if [ `which curl` ]; then
         curl -s "$1" > "$2";
@@ -163,3 +153,14 @@ install_db() {
 install_wp
 install_test_suite
 install_db
+
+
+curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar > wp
+chmod +x wp
+mv wp /tmp/wordpress/
+echo "Moving composer.json"
+cp composer.json ${WP_CORE_DIR}
+composer install -d ${WP_CORE_DIR}
+echo "Installing dependency"
+composer global require "phpunit/phpunit=5.7.*|7.5.*"
+php /tmp/wordpress/wp plugin activate woocommerce
