@@ -37,16 +37,16 @@ class TestFronIntegration extends WP_UnitTestCase {
 
         	do_action('woocommerce_init');
         	
-        	wp_set_current_user(1);        	
+        	//wp_set_current_user(1);        	
         	
         	require_once(constant('EO_WBC_PLUGIN_DIR').'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/library/EO_WBC_CatAt.php');
 
 			$factory_object = new EO_WBC_CatAt();
 
-			$this->category_status =  $factory_object->create_category($_category);
-			$this->attribute_status =  $factory_object->create_attribute($_atttriutes);			
-			$this->map_status =  $factory_object->add_maps($_maps);				
-			$this->product_status =  $factory_object->create_products($_product);
+			$this->category_status =  !empty($factory_object->create_category($_category));
+			$this->attribute_status =  !empty($factory_object->create_attribute($_atttriutes));			
+			$this->map_status =  !empty($factory_object->add_maps($_maps));				
+			$this->product_status =  !empty($factory_object->create_products($_product));
         /*});*/
     }
 	

@@ -10519,7 +10519,6 @@ if(!class_exists('EO_WBC_CatAt')){
 			
 			if(!empty($args) || is_array($args)) {
 
-				error_log(get_current_user_id());
 				//////////////////////////////////////////////////////////////////////////////
 				//////////////////////////////////////////////////////////////////////////////
 				foreach ($args as $index => $product) {
@@ -10598,6 +10597,9 @@ if(!class_exists('EO_WBC_CatAt')){
 					    $variation_obj->save(); // Save the data
 					}
 				}									
+				return true;
+			} else {
+				return false;
 			}
 		}
 
