@@ -37,7 +37,7 @@ class WBC_TEST
 		require_once $this->wp_tests_dir . '/includes/bootstrap.php';
 		require_once $this->wp_tests_dir . '/includes/listener-loader.php';
 
-		tests_add_filter( 'plugins_loaded', array( $this, 'load_wbc' ) );		
+		tests_add_filter( 'muplugins_loaded', array( $this, 'load_wbc' ) );		
 		tests_add_filter( 'setup_theme', array( $this, 'install_wbc' ) );
 
 		// load WBC testing framework
@@ -48,7 +48,8 @@ class WBC_TEST
 		
 	}
 
-	public function load_wbc() {		
+	public function load_wbc() {	
+		require_once ABSPATH . '/wp-content/plugins/woocommerce/woocommerce.php';			
 		require_once $this->plugin_dir . '/woo-bundle-choice.php';		
 	}
 

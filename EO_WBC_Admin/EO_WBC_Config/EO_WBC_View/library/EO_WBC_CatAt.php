@@ -10519,7 +10519,7 @@ if(!class_exists('EO_WBC_CatAt')){
 			
 			if(!empty($args) || is_array($args)) {
 
-
+				error_log(get_current_user_id());
 				//////////////////////////////////////////////////////////////////////////////
 				//////////////////////////////////////////////////////////////////////////////
 				foreach ($args as $index => $product) {
@@ -11004,38 +11004,60 @@ if(!class_exists('EO_WBC_CatAt')){
 			);
 		*/
 		function add_maps($args) {      
-			global $wpdb;
+			
+			return true;
 			if(!empty($args) && is_array($args)){
 
 				foreach ($args as $map) {
             
 					$first=get_term_by($map[0][0],$map[0][1],$map[0][2]);
           
-          if(!empty($first) and !is_wp_error($first)){
-            $first = $first->term_taxonomy_id;
-          }
+			          if(!empty($first) and !is_wp_error($first)){
+			            $first = $first->term_taxonomy_id;
+			          }
 
 					$second=get_term_by($map[1][0],$map[1][1],$map[1][2]);
           
-          if(!empty($second) and !is_wp_error($second)){
-            $second = $second->term_taxonomy_id;
-          }
+			          if(!empty($second) and !is_wp_error($second)){
+			            $second = $second->term_taxonomy_id;
+			          }
+
 					$discount='0';
 
-					if(!empty($map[0] && !empty($map[1]))) {
+					if(!empty($first) && !empty($second)) {
 
-						if(!$wpdb->get_var("select * from {$wpdb->prefix}eo_wbc_cat_maps where first_cat_id in ('{$first}','{$second}') and second_cat_id in ('{$first}','{$second}')"))
-				        {				            
-				            if($wpdb->insert($wpdb->prefix.'eo_wbc_cat_maps',array('first_cat_id'=>$first,'second_cat_id'=>$second,'discount'=>$discount.'%'),array("%s","%s","%s")))
-				            {
-				                update_option('eo_wbc_config_map',"1");			                            
-				            }  				            
+
+						$maps=unserialize(get_option('eo_wbc_cat_maps',"a:0:{}"));
+        
+				        if(!empty($maps) and !is_wp_error($maps)){
+
+				            $match_found = false;
+				            foreach ($maps as $key=>$value) {    
+
+				                if($value[0]==$first and $value[1]==$second) {                 
+				                    $match_found = true;
+				                    break;
+				                } elseif ($value[1]==$first and $value[0]==$second) {
+				                    $match_found = true;
+				                    break;
+				                }
+				            }
+
+				            if(!$match_found){				                
+				                $maps[] = array($first,$second,$discount);
+				            }
+
+				        } else {
+				            $maps = array(array($first,$second,$discount));
 				        }
+
+				        update_option('eo_wbc_cat_maps',serialize($maps)); 
+				        update_option('eo_wbc_config_map',"1");			                            				        
 					}
 				}
-        return true;
-      }
-      return false;			
+        		return true;        		
+	      	}	
+	      	return false;			
 		}
 
 		/**
