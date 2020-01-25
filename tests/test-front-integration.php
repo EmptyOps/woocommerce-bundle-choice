@@ -24,12 +24,14 @@ require_once(constant('EO_WBC_PLUGIN_DIR').'EO_WBC_Admin/EO_WBC_Config/EO_WBC_Vi
 class TestFronIntegration extends WP_UnitTestCase {
 
 	public function setUp() {
+		include_once WC_ABSPATH . 'includes/class-wc-product-factory.php';
+		WC()->product_factory = new WC_Product_Factory();;
+
         /*add_action('plugins_loaded',function(){*/
 
         	do_action('woocommerce_init');
         	
-        	wp_set_current_user(1);
-
+        	wp_set_current_user(1);        	
         	require_once('data/sample_data.php');
         	require_once(constant('EO_WBC_PLUGIN_DIR').'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/library/EO_WBC_CatAt.php');
 
@@ -44,12 +46,12 @@ class TestFronIntegration extends WP_UnitTestCase {
 	
 	public function test_automation_status(){
 		
-
+		$this->assertTrue(class_exists( 'WooCommerce', false ));
+		$this->assertFalse(empty(WC()->product_factory));
 
 		$this->setUp();
 
 		$this->assertTrue($this->category_status);		
-
 		$this->assertTrue($this->attribute_status);	
 		
 		$this->assertTrue($this->map_status);
