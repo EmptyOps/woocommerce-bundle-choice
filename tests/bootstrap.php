@@ -57,7 +57,7 @@ class WBC_TEST
 
 		// Clean existing install first.
 		define( 'WP_UNINSTALL_PLUGIN', true );
-		define( 'WC_REMOVE_ALL_DATA', true );
+		//define( 'WC_REMOVE_ALL_DATA', true );
 
 		activate_plugin('woocommerce/woocommerce.php');
 		activate_plugin('woocommerce-bundle-choice/woo-bundle-choice.php');		
