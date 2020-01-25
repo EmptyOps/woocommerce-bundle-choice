@@ -40,6 +40,8 @@ class TestFronIntegration extends WP_UnitTestCase {
 	
 	public function test_automation_status(){
 		
+		wp_set_current_user(1);
+
 		$this->setUp();
 
 		$this->assertTrue($this->category_status);		
