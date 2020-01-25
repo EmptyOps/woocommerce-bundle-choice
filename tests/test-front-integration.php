@@ -84,7 +84,7 @@ class TestFronIntegration extends WP_UnitTestCase {
 		$this->assertIsString($home_screen);
 
 
-		$wp_query = new WP_Query(array(
+		$wp_query = new WP_Query(array(			
 		    'post_type' => 'product',
 		    'tax_query' => array(
 		        'relation' => 'OR',
@@ -96,12 +96,15 @@ class TestFronIntegration extends WP_UnitTestCase {
 		    )
 		));
 
+		$wp_query->queried_object = get_term_by( 'slug', get_option('eo_wbc_first_slug'), 'product_cat');
+		
 		$_GET['EO_WBC'] = 1;
 		$_GET['BEGIN'] = get_option('eo_wbc_first_slug');
 		$_GET['STEP'] = 1;
 		
 		require_once EO_WBC_PLUGIN_DIR.'/EO_WBC_Frontend/EO_WBC_Category.php';
-		
+
+
 		ob_start();
 		$category = new EO_WBC_Category();
 		$category_screen = ob_get_flush();
