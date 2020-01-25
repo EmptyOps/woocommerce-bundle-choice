@@ -7,7 +7,7 @@ class EO_WBC_Core{
         register_activation_hook($this->_eo_wbc_,array(__CLASS__,'eo_wbc_activate'));
         register_deactivation_hook($this->_eo_wbc_,array(__CLASS__,'eo_wbc_deactivate'));
         register_uninstall_hook($this->_eo_wbc_,array(__CLASS__,'eo_wbc_uninstall'));      
-        $this->update_manager();  
+        //$this->update_manager();  
     }
     public static function eo_wbc_activate(){
         #Plugin Activation Code
