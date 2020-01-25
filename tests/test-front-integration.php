@@ -26,18 +26,16 @@ class TestFronIntegration extends WP_UnitTestCase {
 
 	public function setUp() {
 		include_once WC_ABSPATH . 'includes/class-wc-product-factory.php';
-		WC()->product_factory = new WC_Product_Factory();;
+		WC()->product_factory = new WC_Product_Factory();
 
-        /*add_action('plugins_loaded',function(){*/
+        
         	global $_category;
         	global $_atttriutes;
         	global $_maps;
         	global $_product;
         	global $_img_url;
 
-        	do_action('woocommerce_init');
-        	
-        	//wp_set_current_user(1);        	
+        	do_action('woocommerce_init');   	
         	
         	require_once(constant('EO_WBC_PLUGIN_DIR').'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/library/EO_WBC_CatAt.php');
 
@@ -47,7 +45,7 @@ class TestFronIntegration extends WP_UnitTestCase {
 			$this->attribute_status =  !empty($factory_object->create_attribute($_atttriutes));			
 			$this->map_status =  !empty($factory_object->add_maps($_maps));				
 			$this->product_status =  !empty($factory_object->create_products($_product));
-        /*});*/
+        
     }
 	
 	public function test_automation_status(){
@@ -63,6 +61,49 @@ class TestFronIntegration extends WP_UnitTestCase {
 		$this->assertTrue($this->map_status);
 		
 		$this->assertTrue($this->product_status);
+	}
+
+	public function test_intigration(){
+
+		/*
+		*	1.	Begin with button and select diamond
+		*	2.	Select A Product
+		*	3.	Redirect to Product Page
+		*	4.	Add to cart action
+		*	5.	Select another product
+		*	6.	Preview Page
+		*	7.	Check cart
+		*/
+		global $wp_query;
+		require_once EO_WBC_PLUGIN_DIR.'/EO_WBC_Frontend/EO_WBC_Home.php';
+		$home  = new EO_WBC_Home();
+		ob_start();
+		$home->show_buttons();
+		$home_screen = ob_get_flush();
+
+		$this->assertIsString($home_screen);
+
+
+		/*$wp_query = new WP_Query(array(
+		    'post_type' => 'product',
+		    'tax_query' => array(
+		        'relation' => 'OR',
+		        array(
+		            'taxonomy' => 'product_cat',
+		            'field'    => 'slug',
+		            'terms'    => array( get_option('eo_wbc_first_slug') ),
+		        )
+		    )
+		));*/
+
+		wp_safe_redirect( get_bloginfo('url').get_option('eo_wbc_first_url').'?EO_WBC=1&BEGIN='.get_option('eo_wbc_first_slug').'&STEP=1' );
+		require_once EO_WBC_PLUGIN_DIR.'/EO_WBC_Frontend/EO_WBC_Category.php';
+
+		ob_start();
+		$category = new EO_WBC_Category();
+		$category_screen = ob_get_flush();
+		$this->assertIsString($category_screen);
+
 	}
 
 }
