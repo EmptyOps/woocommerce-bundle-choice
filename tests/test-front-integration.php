@@ -25,7 +25,11 @@ class TestFronIntegration extends WP_UnitTestCase {
 
 	public function setUp() {
         /*add_action('plugins_loaded',function(){*/
+
         	do_action('woocommerce_init');
+        	
+        	wp_set_current_user(1);
+
         	require_once('data/sample_data.php');
         	require_once(constant('EO_WBC_PLUGIN_DIR').'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/library/EO_WBC_CatAt.php');
 
@@ -40,7 +44,7 @@ class TestFronIntegration extends WP_UnitTestCase {
 	
 	public function test_automation_status(){
 		
-		wp_set_current_user(1);
+
 
 		$this->setUp();
 
