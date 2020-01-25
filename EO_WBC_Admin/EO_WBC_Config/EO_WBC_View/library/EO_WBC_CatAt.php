@@ -10518,8 +10518,8 @@ if(!class_exists('EO_WBC_CatAt')){
 		public function create_products($args) {
 			
 			if(!empty($args) || is_array($args)) {
-				
-				fwrite(STDERR, print_r("User_ID.:".get_current_user_id(), TRUE));
+
+				error_log(get_current_user_id());
 				//////////////////////////////////////////////////////////////////////////////
 				//////////////////////////////////////////////////////////////////////////////
 				foreach ($args as $index => $product) {
@@ -10546,8 +10546,6 @@ if(!class_exists('EO_WBC_CatAt')){
 					}
 
 					$parent_id = $product_id;
-
-					fwrite(STDERR, print_r("Post_id.:".$parent_id, TRUE));
 
 					foreach ($product['variation'] as $var_index => $variation) {						
 

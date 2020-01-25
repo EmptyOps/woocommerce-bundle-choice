@@ -17,6 +17,7 @@ activate_plugin('woocommerce-bundle-choice/woo-bundle-choice.php');
 /////////////////////////////////////////////////////////////////////////////////////////////
 
 require_once(constant('EO_WBC_PLUGIN_DIR').'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/library/EO_WBC_CatAt.php');
+require_once('data/sample_data.php');
 
 /*
 * Backend unit testing.
@@ -28,11 +29,16 @@ class TestFronIntegration extends WP_UnitTestCase {
 		WC()->product_factory = new WC_Product_Factory();;
 
         /*add_action('plugins_loaded',function(){*/
+        	global $_category;
+        	global $_atttriutes;
+        	global $_maps;
+        	global $_product;
+        	global $_img_url;
 
         	do_action('woocommerce_init');
         	
         	wp_set_current_user(1);        	
-        	require_once('data/sample_data.php');
+        	
         	require_once(constant('EO_WBC_PLUGIN_DIR').'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/library/EO_WBC_CatAt.php');
 
 			$factory_object = new EO_WBC_CatAt();
@@ -49,7 +55,7 @@ class TestFronIntegration extends WP_UnitTestCase {
 		$this->assertTrue(class_exists( 'WooCommerce', false ));
 		$this->assertFalse(empty(WC()->product_factory));
 
-		$this->setUp();
+		//$this->setUp();
 
 		$this->assertTrue($this->category_status);		
 		$this->assertTrue($this->attribute_status);	
