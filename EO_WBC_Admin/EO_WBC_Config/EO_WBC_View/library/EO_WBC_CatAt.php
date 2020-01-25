@@ -10558,7 +10558,7 @@ if(!class_exists('EO_WBC_CatAt')){
 
 						$variation_id = wp_insert_post( $variation_data );*/
 
-						$variation_obj = new WC_Product_Variation( $variation_id );
+						$variation_obj = new WC_Product_Variation();
 
 						$variation_obj->set_props(
 							array(
