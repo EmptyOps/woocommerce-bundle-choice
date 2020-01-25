@@ -10523,17 +10523,21 @@ if(!class_exists('EO_WBC_CatAt')){
 				//////////////////////////////////////////////////////////////////////////////
 				//////////////////////////////////////////////////////////////////////////////
 				foreach ($args as $index => $product) {
-					
-					$p = new WC_Product_Variable();
-					$p->set_name($product['title']);
-					$p->set_category_ids(array_map(function($term){ return get_term_by( 'slug',$term,'product_cat')->term_id; },$product['category']));
-					$p->save();
-					$product_id = $p->get_id();
+						
+					$product_id= wp_insert_post( array(
+					    'post_author' => get_current_user_id(),
+					    'post_title' => $product['title'],
+					    'post_content' => $product['content'],
+					    'post_status' => 'publish',
+					    'post_type' => "product",
+					));
 
+					wp_set_object_terms( $product_id,$product['type'],'product_type');
+					wp_set_object_terms( $product_id,$product['category'],'product_cat');					
 					update_post_meta( $product_id, '_product_attributes', $product['attribute'] );
 
 					foreach ($product['attribute'] as $attr_index => $attribute) {
-						wp_set_object_terms( $product_id, explode('|',$attribute['value']) , $attr_index );	
+						wp_set_object_terms( $product_id, explode('|',$attribute['value']) , $attr_index );						
 					}
 					
 					$img_id=$this->add_image_gallary($product['thumb']);
@@ -10547,7 +10551,7 @@ if(!class_exists('EO_WBC_CatAt')){
 
 					foreach ($product['variation'] as $var_index => $variation) {						
 
-						/*$variation_data = array(
+						$variation_data = array(
 						    'post_title'   => $product['title'],
 						    'post_name'   => 'product-'.$parent_id.'-variation',						    
 						    'post_status'  => 'publish',
@@ -10556,21 +10560,12 @@ if(!class_exists('EO_WBC_CatAt')){
 						    'guid'        => EO_WBC_Support::eo_wbc_get_product($parent_id)->get_permalink()
 						);						
 
-						$variation_id = wp_insert_post( $variation_data );*/
+						$variation_id = wp_insert_post( $variation_data );
 
-						$variation_obj = new WC_Product_Variation();
+						$variation_obj = new WC_Product_Variation( $variation_id );
 
-						$variation_obj->set_props(
-							array(
-								'parent_id'     => $parent_id,					
-								'regular_price' => $variation['regular_price'],					
-							)
-						);
-						$variation_obj->save();
-						$variation_id = $variation_obj->get_id();
-
-						/*update_post_meta( $variation_id, '_regular_price',$variation['regular_price'] );*/
-						/*update_post_meta( $variation_id, '_price', $variation['regular_price']);*/						
+						update_post_meta( $variation_id, '_regular_price',$variation['regular_price'] );
+						update_post_meta( $variation_id, '_price', $variation['regular_price']);						
 						update_post_meta( $variation_id, '_sales_price', $variation['price']);
 						update_post_meta( $variation_id, '_manage_stock','no' );						
 																		
@@ -10604,7 +10599,6 @@ if(!class_exists('EO_WBC_CatAt')){
 
 					    $variation_obj->save(); // Save the data
 					}
-					$p->save();
 				}									
 			}
 		}
