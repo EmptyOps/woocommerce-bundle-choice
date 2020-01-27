@@ -141,6 +141,7 @@ class TestFronIntegration extends WP_UnitTestCase {
 		$product = new EO_WBC_Product();
 
 		global $_product;
+		$set = array();
 		include_once WC_ABSPATH . 'includes/wc-template-functions.php';		
 
 		$product_url = $product->eo_wbc_product_route();
@@ -166,6 +167,8 @@ class TestFronIntegration extends WP_UnitTestCase {
        	$_GET['FIRST'] = $post->ID;
        	$_GET['STEP'] = 2;
        	$_GET['CART'] = $cart;
+
+       	$sets['FIRST'] = array($post->ID,1,$variation_id);
        	
        	$this->assertNotEmpty( $product->eo_wbc_category_link() );
 
@@ -193,8 +196,12 @@ class TestFronIntegration extends WP_UnitTestCase {
        	$_GET['SECOND'] = $post->ID;
        	$_GET['STEP'] = 3;
        	$_GET['CART'] = $cart;
-       	
+
+       	$sets['SECOND'] = array($post->ID,1,$variation_id);
+
        	$this->assertNotEmpty( $product->eo_wbc_category_link() );
+
+       	WC()->session->set('EO_WBC_SETS',$sets);
 
        	// Load preview page.
        	require_once EO_WBC_PLUGIN_DIR.'/EO_WBC_Frontend/EO_WBC_Review.php';		
@@ -202,7 +209,10 @@ class TestFronIntegration extends WP_UnitTestCase {
 
 		$_POST['add_to_cart'] = 1;		
 		$review->eo_wbc_add_this_to_cart();
-		//$this->assertNotFalse(WC()->session->get('EO_WBC_SETS',false));
+
+		
+
+		$this->assertNotFalse(WC()->session->get('EO_WBC_SETS',false));
 		$this->assertNotFalse(WC()->session->get('EO_WBC_MAPS',false));
         
 	}

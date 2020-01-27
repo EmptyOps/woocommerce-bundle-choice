@@ -212,6 +212,7 @@ class EO_WBC_Review
                 WC()->session->set('EO_WBC_SETS',$eo_wbc_sets);
             }
         }
+        
     }
 
     private function eo_wbc_buttons_css(){
