@@ -200,8 +200,9 @@ class TestFronIntegration extends WP_UnitTestCase {
 		$review = new EO_WBC_Review();
 
 		$_POST['add_to_cart'] = 1;
+		ob_start();
 		$review = new EO_WBC_Review();
-
+		ob_end_flush();
 		$this->assertNotFalse(WC()->session->get('EO_WBC_SETS',false));
 		$this->assertNotFalse(WC()->session->get('EO_WBC_MAPS',false));
         
