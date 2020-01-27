@@ -66,7 +66,6 @@ class FrontendHome extends WP_UnitTestCase {
 		$this->assertNotFalse($wbc_buttons);
 		$this->assertNotNull($wbc_buttons);
 		
-		ob_end_clean();
 		ob_end_flush();
 		
 	}
