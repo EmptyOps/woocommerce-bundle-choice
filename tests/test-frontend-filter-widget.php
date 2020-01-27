@@ -9,7 +9,6 @@ require_once $wp_tests_dir . '/includes/bootstrap.php';
 require_once $wp_tests_dir . '/includes/listener-loader.php';
 
 require_once dirname( dirname( __FILE__ ) ) . '/woo-bundle-choice.php';		
-require_once 'import_data_init.php';
 
 activate_plugin('woocommerce/woocommerce.php');
 activate_plugin('woocommerce-bundle-choice/woo-bundle-choice.php');		
@@ -26,6 +25,8 @@ class FrontendFilterWidget extends WP_UnitTestCase {
 	}
 
 	public function test_filter_widget(){
+
+		require_once 'import_data_init.php';
 
 		global $wp_query;
 		$wp_query->queried_object = get_term_by( 'slug', get_option('eo_wbc_first_slug'), 'product_cat');
