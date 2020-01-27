@@ -138,7 +138,7 @@ class TestFronIntegration extends WP_UnitTestCase {
 		$product = new EO_WBC_Product();
 
 		global $_product;
-		include_once WC_ABSPATH . 'includes/wc-template-functions.php'
+		include_once WC_ABSPATH . 'includes/wc-template-functions.php';
 
 		$product_url = $product->eo_wbc_product_route();
 
