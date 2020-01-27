@@ -57,6 +57,9 @@ class FrontendReview extends WP_UnitTestCase {
 		$LoadEO_WBC_Review = new EO_WBC_Review();
 		$render_string = ob_get_flush();		
 		$this->assertIsString($render_string);
+
+		ob_end_clean();
+		ob_end_flush();
 		
 		/*$eo_wbc_buttons_css = $LoadEO_WBC_Review->eo_wbc_buttons_css();		
 		$this->assertNotEmpty($eo_wbc_buttons_css);
