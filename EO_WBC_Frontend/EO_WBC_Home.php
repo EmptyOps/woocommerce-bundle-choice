@@ -190,7 +190,7 @@ class EO_WBC_Home
       return $self->eo_wbc_buttons().$self->eo_wbc_code(); //return two buttons to shortcode.
     }
 
-    private function eo_wbc_the_content()
+    public function eo_wbc_the_content()
     {
         /**
          * Adding Buttons to start with
@@ -235,7 +235,7 @@ class EO_WBC_Home
         },100);
     }
 
-    private function eo_wbc_code() //script to get color code from buttons
+    public function eo_wbc_code() //script to get color code from buttons
     {
         return '<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><script>'.
                 'jQuery(document).ready(function($){'.
@@ -247,7 +247,7 @@ class EO_WBC_Home
                '</script>';
     }
 
-    private function eo_wbc_buttons_css(){
+    public function eo_wbc_buttons_css(){
       return '.eo-wbc-container .ui.buttons .button{'.
           (get_option('eo_wbc_home_btn_color')?'background-color:'.get_option('eo_wbc_home_btn_color').' !important;':'').
           (get_option('eo_wbc_home_btn_text_color')?'color:'.get_option('eo_wbc_home_btn_text_color','#ffffff').' !important;':'').
@@ -257,14 +257,14 @@ class EO_WBC_Home
             
     }
 
-    private function eo_wbc_buttons(){ //the two buttons UI
+    public function eo_wbc_buttons(){ //the two buttons UI
 
       $heading=get_option('eo_wbc_home_btn_tagline',__('Make your own pair from recommendation','woo-bundle-choice'));
 
       return '<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><div id="wbc_" class="eo-wbc-container"><h2 class="ui center aligned header" style="text-align: center !important;">'.($heading?$heading:__('Make your own pair from recommendation','woo-bundle-choice')).'</h2><div class="ui grid center aligned container"><div class="ui buttons large row stackable"><button class="ui button primary column" href="'. get_bloginfo('url').get_option('eo_wbc_first_url').'?EO_WBC=1&BEGIN='.get_option('eo_wbc_first_slug').'&STEP=1" >'.(get_option('eo_wbc_home_btn_text',__('Start with ','woo-bundle-choice'))).' '.get_option('eo_wbc_first_name','FIRST').'</button> <div class="or"></div><button class="ui button primary column" href="'.get_bloginfo('url').get_option('eo_wbc_second_url').'?EO_WBC=1&BEGIN='.get_option('eo_wbc_second_slug').'&STEP=1" >'. (get_option('eo_wbc_home_btn_text',__('Start with','woo-bundle-choice'))).' '.get_option('eo_wbc_second_name','SECOND').'</button></div></div><style>.ui.grid{margin-left: auto;margin-right: auto;}  '.$this->eo_wbc_buttons_css().' @media only screen and (max-width: 768px){ .eo-wbc-container .ui.buttons .button{ border-radius: 0 !important; } }</style><br/><br/></div><!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->';
     }
 
-    private function eo_wbc_clean() { //terminate session bundle set data as use is on home page and rejects all changes.       
+    public function eo_wbc_clean() { //terminate session bundle set data as use is on home page and rejects all changes.       
       if(function_exists('wc') && !empty(wc()->session)){
         wc()->session->set('EO_WBC_SETS',NULL);               
       }
