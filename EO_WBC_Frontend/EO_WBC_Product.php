@@ -330,6 +330,7 @@ class EO_WBC_Product
         if(!is_wp_error($terms) and !empty($terms)) {
             array_walk($terms,function($term) use(&$category,&$taxonomy){
 
+                $_term_ = null;
                 if(is_array($term)) {
                     foreach ($term as $_term_) {
                         $_term_ = get_term_by('term_taxonomy_id', $_term_);
