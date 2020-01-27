@@ -135,8 +135,72 @@ class TestFronIntegration extends WP_UnitTestCase {
 		$_GET['SECOND'] = '';
 
 		require_once EO_WBC_PLUGIN_DIR.'/EO_WBC_Frontend/EO_WBC_Product.php';		
-		
+		$product = new EO_WBC_Product();
 
+		global $_product;
+		$product_url = $product->eo_wbc_product_route();
+
+		$post = get_page_by_title('Round Diamond #89302496' , OBJECT, 'product' );        
+        $variable_product = new WC_Product_Variable($post->ID);        
+        $variation_id = $variable_product->get_available_variations()[1]['variation_id'];
+
+        $this->assertEquals( get_permalink($post->ID)
+                        .'?EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
+                        .'&STEP=1&FIRST='.$post->ID.'&SECOND='.sanitize_text_field($_GET['SECOND'])."&REDIRECT=1" , $product->eo_wbc_product_route());
+
+        $data = $_product[1]['variation'][0];
+        $data['eo_wbc_target'] = get_option('eo_wbc_first_slug');
+        $data['eo_wbc_product_id'] = $post->ID;
+        $data['quantity'] = 1;
+        $data['add-to-cart'] = $post->ID;
+        $data['product_id'] = $post->ID;
+        $data['variation_id'] = $variation_id;      	
+
+        $cart = base64_encode($data);
+
+       	$_GET['FIRST'] = $post->ID;
+       	$_GET['STEP'] = 2;
+       	$_GET['CART'] = $cart;
+       	
+       	$this->$this->assertNotEmpty( $product->eo_wbc_category_link() );
+
+
+       	//Second Product load...
+
+       	$post = get_page_by_title('Setting #8800950587' , OBJECT, 'product' );        
+        $variable_product = new WC_Product_Variable($post->ID);        
+        $variation_id = $variable_product->get_available_variations()[1]['variation_id'];
+
+        $this->assertEquals( get_bloginfo('url').get_option('eo_wbc_review_page')
+                    .'?EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
+                    .'&STEP=3&FIRST='.sanitize_text_field($_GET['FIRST']).'&SECOND='.$post->ID , $product->eo_wbc_product_route());
+
+        $data = $_product[0]['variation'][0];
+        $data['eo_wbc_target'] = get_option('eo_wbc_second_slug');
+        $data['eo_wbc_product_id'] = $post->ID;
+        $data['quantity'] = 1;
+        $data['add-to-cart'] = $post->ID;
+        $data['product_id'] = $post->ID;
+        $data['variation_id'] = $variation_id;      	
+
+        $cart = base64_encode($data);
+
+       	$_GET['SECOND'] = $post->ID;
+       	$_GET['STEP'] = 3;
+       	$_GET['CART'] = $cart;
+       	
+       	$this->$this->assertNotEmpty( $product->eo_wbc_category_link() );
+
+       	// Load preview page.
+       	require_once EO_WBC_PLUGIN_DIR.'/EO_WBC_Frontend/EO_WBC_Review.php';		
+		$review = new EO_WBC_Review();
+
+		$_POST['add_to_cart'] = 1;
+		$review->___construct();
+
+		$this->assertNotFalse(WC()->session->get('EO_WBC_SETS',false));
+		$this->assertNotFalse(WC()->session->get('EO_WBC_MAPS',false));
+        
 	}
 
 }

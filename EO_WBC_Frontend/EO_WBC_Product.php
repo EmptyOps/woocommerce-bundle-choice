@@ -186,7 +186,7 @@ class EO_WBC_Product
        });
     }
     
-    private function eo_wbc_product_route(){
+    public function eo_wbc_product_route(){
 
         global $post;
         $url=null;        
@@ -259,7 +259,7 @@ class EO_WBC_Product
      * @return string
      *  string of mapped category to current category item
      */
-    private function eo_wbc_category_link($variable_status=FALSE){        
+    public function eo_wbc_category_link($variable_status=FALSE){        
         global $post;
 
         $variation=FALSE;//status if product is varaible in nature.
