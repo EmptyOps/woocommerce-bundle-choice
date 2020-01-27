@@ -5,7 +5,7 @@ class EO_WBC_Checkout{
         $this->eo_wps_add_js();//Load Jquery and product info contents...     
     }
 
-    private function eo_wps_add_js()
+    public function eo_wps_add_js()
     {
         //Adding JQuery Library....
         add_action( 'wp_enqueue_scripts',function(){
@@ -28,7 +28,7 @@ class EO_WBC_Checkout{
         });                
     }
         
-    private function eo_wbc_render()
+    public function eo_wbc_render()
     {        
         $res="";
         if(WC()->session->get('EO_WBC_MAPS')){
@@ -45,7 +45,7 @@ class EO_WBC_Checkout{
         }
     }
     
-    private function checkout_rows($map)
+    public function checkout_rows($map)
     {
             $price=0;            
             $html="<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><tr><td><div><strong>".
