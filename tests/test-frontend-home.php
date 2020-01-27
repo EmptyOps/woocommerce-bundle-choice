@@ -37,13 +37,13 @@ class FrontendHome extends WP_UnitTestCase {
 		ob_end_flush();
 		ob_start();
 		$eo_wbc_do_shortcode = $LoadEO_WBC_Home->eo_wbc_do_shortcode();
-		$res = ob_get_flush();
+		$res = ob_get_contents();
 		$this->assertNotFalse($res);
 		$this->assertNotNull($res);
 
 		ob_start();
 		$LoadEO_WBC_Home->show_buttons();
-		$res = ob_get_flush();
+		$res = ob_get_contents();
 		$this->assertNotFalse($res);
 		$this->assertNotNull($res);
 		
@@ -64,9 +64,7 @@ class FrontendHome extends WP_UnitTestCase {
 
 		$wbc_buttons = $LoadEO_WBC_Home->eo_wbc_buttons();
 		$this->assertNotFalse($wbc_buttons);
-		$this->assertNotNull($wbc_buttons);
-		
-		@ob_end_flush();
+		$this->assertNotNull($wbc_buttons);		
 		
 	}
 
