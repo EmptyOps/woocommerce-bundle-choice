@@ -54,9 +54,9 @@ class FrontendHome extends WP_UnitTestCase {
 		$this->assertNotFalse($res);
 		$this->assertNotNull($res);*/
 		
-		$wbc_code = $LoadEO_WBC_Home->eo_wbc_code();
+		/*$wbc_code = $LoadEO_WBC_Home->eo_wbc_code();
 		$this->assertNotFalse($wbc_code);
-		$this->assertNotNull($wbc_code);
+		$this->assertNotNull($wbc_code);*/
 		
 		$buttons_css = $LoadEO_WBC_Home->eo_wbc_buttons_css();
 		$this->assertNotFalse($buttons_css);

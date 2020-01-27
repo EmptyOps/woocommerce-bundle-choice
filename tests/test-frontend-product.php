@@ -18,7 +18,7 @@ activate_plugin('woocommerce/woocommerce.php');
 activate_plugin('woocommerce-bundle-choice/woo-bundle-choice.php');		
 /////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////
-
+require_once 'data/sample_data.php';
 /**
 * Backend unit testing.
 */
@@ -35,10 +35,10 @@ class FrontendProduct extends WP_UnitTestCase {
 		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Frontend/EO_WBC_Product.php');
 
 		global $post;
-
+		global $_product;
 		$EO_WBC_CatAt = new EO_WBC_CatAt();
-		require_once 'data/sample_data.php';
-		$create_products = $EO_WBC_CatAt->create_products($EO_WBC_CatAt->product);
+		
+		$create_products = $EO_WBC_CatAt->create_products($_product);
 
 		$p = null;
 		$old_product = get_page_by_title('Setting #8800950587', OBJECT, 'product' );
