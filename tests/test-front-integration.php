@@ -87,12 +87,15 @@ class TestFronIntegration extends WP_UnitTestCase {
 		*	6.	Preview Page
 		*	7.	Check cart
 		*/
-
-		include_once WC_ABSPATH . 'includes/class-wc-session-handler.php';
-		WC()->session = new WC_Session_Handler();
+		WC()->includes();
+		WC()->frontend_includes();
+		WC()->include_template_functions();		
 		
+		/*include_once WC_ABSPATH . 'includes/class-wc-session-handler.php';
+		WC()->session = new WC_Session_Handler();
+
 		include_once WC_ABSPATH . 'includes/class-wc-cart.php';
-		WC()->cart = new WC_Cart();
+		WC()->cart = new WC_Cart();*/
 		//Home page
 		global $wp_query;
 		require_once EO_WBC_PLUGIN_DIR.'/EO_WBC_Frontend/EO_WBC_Home.php';
