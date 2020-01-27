@@ -16,7 +16,7 @@ class EO_WBC_Product
 
     }
     //It's just temporary fix so we need strong model to handle this changes.
-    private function eo_wbc_make_pair_route()
+    public function eo_wbc_make_pair_route()
     {
         global $post;
         $url='';
@@ -34,7 +34,7 @@ class EO_WBC_Product
         return $url;
     }
     //Show make pair button to only those are available for pairing as per mapping.
-    private function eo_wbc_make_pair()
+    public function eo_wbc_make_pair()
     {
         
         $url=$this->eo_wbc_category_link();
@@ -102,7 +102,7 @@ class EO_WBC_Product
         }       
     }
 
-    private function eo_wbc_config()
+    public function eo_wbc_config()
     {        
         //Remove add to cart button
         remove_action( 
@@ -119,7 +119,7 @@ class EO_WBC_Product
         });
     }
 
-    private function eo_wbc_add_breadcrumb()
+    public function eo_wbc_add_breadcrumb()
     {   
         //Adding Breadcrumb
         add_action( 'woocommerce_before_single_product',function(){
@@ -132,7 +132,7 @@ class EO_WBC_Product
         }, 15 );
     }
     
-    private function eo_wbc_render()
+    public function eo_wbc_render()
     {   
         $redirect_url = $this->eo_wbc_product_route();
         //Registering Scripts : JavaScript
@@ -405,7 +405,7 @@ class EO_WBC_Product
     /**
     *
     */
-    private function eo_wbc_sub_categories($slug) {        
+    public function eo_wbc_sub_categories($slug) {        
         
         $map_base = get_categories(array(
             'hierarchical' => 1,
@@ -428,7 +428,7 @@ class EO_WBC_Product
      * @method Returns Current-Product's top level catgory
      * @return string
      */    
-    private function eo_wbc_get_category()
+    public function eo_wbc_get_category()
     {
         global $post;
 
