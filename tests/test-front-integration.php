@@ -92,6 +92,7 @@ class TestFronIntegration extends WP_UnitTestCase {
 		WC()->include_template_functions();	
 		WC()->initialize_session();
 		WC()->initialize_cart();
+		WC()->init();
 		/*include_once WC_ABSPATH . 'includes/class-wc-session-handler.php';
 		WC()->session = new WC_Session_Handler();
 
