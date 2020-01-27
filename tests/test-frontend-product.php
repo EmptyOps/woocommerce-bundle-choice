@@ -57,6 +57,11 @@ class FrontendProduct extends WP_UnitTestCase {
 		
 		$post = $p;
 
+		$_GET['STEP'] = 1;
+		$_GET['FIRST'] = '';
+		$_GET['SECOND'] = '';
+		$_GET['BEGIN'] = get_option('eo_wbc_first_slug');
+
 		$LoadEO_WBC_Product = new EO_WBC_Product();
 
 		$eo_wbc_category_link = $LoadEO_WBC_Product->eo_wbc_category_link($variable_status=FALSE);
