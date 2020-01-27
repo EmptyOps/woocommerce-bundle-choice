@@ -35,10 +35,10 @@ require_once(constant('EO_WBC_PLUGIN_DIR').'EO_WBC_Admin/EO_WBC_Config/EO_WBC_Vi
 
 $factory_object = new EO_WBC_CatAt();
 
-$this->category_status =  !empty($factory_object->create_category($_category));
-$this->attribute_status =  !empty($factory_object->create_attribute($_atttriutes));			
-$this->map_status =  !empty($factory_object->add_maps($_maps));				
-$this->product_status =  !empty($factory_object->create_products($_product));
+$factory_object->create_category($_category);
+$factory_object->create_attribute($_atttriutes);			
+$factory_object->add_maps($_maps);				
+$factory_object->create_products($_product);
 
 update_option('eo_wbc_first_name','Diamond Shape');//FIRST : NAME
 update_option('eo_wbc_first_slug','eo_diamond_shape_cat');//FIRST : SLUG
@@ -76,5 +76,5 @@ $variation_id = $variable_product->get_available_variations()[0]['variation_id']
 
 	WC()->session->set('EO_WBC_SETS',$sets);
 
-$this->assertNotFalse(WC()->session->get('EO_WBC_SETS',false));
-$this->assertNotFalse(WC()->session->get('EO_WBC_MAPS',false));
+WC()->session->get('EO_WBC_SETS',false);
+WC()->session->get('EO_WBC_MAPS',false);
