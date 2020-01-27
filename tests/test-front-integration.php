@@ -139,6 +139,7 @@ class TestFronIntegration extends WP_UnitTestCase {
 
 		global $_product;
 		include_once WC_ABSPATH . 'includes/wc-template-functions.php';
+		include_once WC_ABSPATH . 'includes/class-wc-session-handler.php';
 
 		$product_url = $product->eo_wbc_product_route();
 
@@ -198,7 +199,7 @@ class TestFronIntegration extends WP_UnitTestCase {
 		$review = new EO_WBC_Review();
 
 		$_POST['add_to_cart'] = 1;
-		$review->__construct();
+		$review = new EO_WBC_Review();
 
 		$this->assertNotFalse(WC()->session->get('EO_WBC_SETS',false));
 		$this->assertNotFalse(WC()->session->get('EO_WBC_MAPS',false));
