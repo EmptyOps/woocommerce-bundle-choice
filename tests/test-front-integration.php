@@ -88,6 +88,9 @@ class TestFronIntegration extends WP_UnitTestCase {
 		*	7.	Check cart
 		*/
 
+		include_once WC_ABSPATH . 'includes/class-wc-session-handler.php';
+		WC()->session = new WC_Session_Handler();
+
 		//Home page
 		global $wp_query;
 		require_once EO_WBC_PLUGIN_DIR.'/EO_WBC_Frontend/EO_WBC_Home.php';
@@ -138,9 +141,7 @@ class TestFronIntegration extends WP_UnitTestCase {
 		$product = new EO_WBC_Product();
 
 		global $_product;
-		include_once WC_ABSPATH . 'includes/wc-template-functions.php';
-		include_once WC_ABSPATH . 'includes/class-wc-session-handler.php';
-		WC()->session = new WC_Session_Handler();
+		include_once WC_ABSPATH . 'includes/wc-template-functions.php';		
 
 		$product_url = $product->eo_wbc_product_route();
 
