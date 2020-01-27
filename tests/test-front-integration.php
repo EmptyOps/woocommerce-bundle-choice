@@ -45,6 +45,19 @@ class TestFronIntegration extends WP_UnitTestCase {
 			$this->attribute_status =  !empty($factory_object->create_attribute($_atttriutes));			
 			$this->map_status =  !empty($factory_object->add_maps($_maps));				
 			$this->product_status =  !empty($factory_object->create_products($_product));
+
+			update_option('eo_wbc_first_name','Diamond Shape');//FIRST : NAME
+            update_option('eo_wbc_first_slug','eo_diamond_shape_cat');//FIRST : SLUG
+            update_option('eo_wbc_first_url','/product-category/eo_diamond_shape_cat/');//FIRST : NAME
+            
+            update_option('eo_wbc_second_name','Setting Shape');//SECOND : NAME
+            update_option('eo_wbc_second_slug','eo_setting_shape_cat');//SECOND : SLUG
+            update_option('eo_wbc_second_url','/product-category/eo_setting_shape_cat/');//SECOND : URL   
+
+            update_option('eo_wbc_config_category',1);
+            update_option('eo_wbc_config_map',1);    
+            update_option('eo_wbc_btn_setting','0');
+            update_option('eo_wbc_btn_position','begining');
         
     }
 	
@@ -103,7 +116,6 @@ class TestFronIntegration extends WP_UnitTestCase {
 		$_GET['STEP'] = 1;
 		
 		require_once EO_WBC_PLUGIN_DIR.'/EO_WBC_Frontend/EO_WBC_Category.php';
-
 
 		ob_start();
 		$category = new EO_WBC_Category();
