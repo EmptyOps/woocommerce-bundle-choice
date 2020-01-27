@@ -198,7 +198,7 @@ class TestFronIntegration extends WP_UnitTestCase {
 		$review = new EO_WBC_Review();
 
 		$_POST['add_to_cart'] = 1;
-		$review->___construct();
+		$review->__construct();
 
 		$this->assertNotFalse(WC()->session->get('EO_WBC_SETS',false));
 		$this->assertNotFalse(WC()->session->get('EO_WBC_MAPS',false));
