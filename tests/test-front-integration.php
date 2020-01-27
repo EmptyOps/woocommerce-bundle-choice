@@ -144,7 +144,7 @@ class TestFronIntegration extends WP_UnitTestCase {
 
 		$post = get_page_by_title('Round Diamond #89302496' , OBJECT, 'product' );        
         $variable_product = new WC_Product_Variable($post->ID);        
-        $variation_id = $variable_product->get_available_variations()[1]['variation_id'];
+        $variation_id = $variable_product->get_available_variations()[0]['variation_id'];
 
         $this->assertEquals( get_permalink($post->ID)
                         .'?EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
@@ -171,7 +171,7 @@ class TestFronIntegration extends WP_UnitTestCase {
 
        	$post = get_page_by_title('Setting #8800950587' , OBJECT, 'product' );        
         $variable_product = new WC_Product_Variable($post->ID);        
-        $variation_id = $variable_product->get_available_variations()[1]['variation_id'];
+        $variation_id = $variable_product->get_available_variations()[0]['variation_id'];
 
         $this->assertEquals( get_bloginfo('url').get_option('eo_wbc_review_page')
                     .'?EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
