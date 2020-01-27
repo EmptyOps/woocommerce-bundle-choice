@@ -27,10 +27,9 @@ class FrontendFilterWidget extends WP_UnitTestCase {
 	public function test_filter_widget(){
 
 		global $wp_query;
-
-		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Frontend/EO_WBC_Filter_Widget.php');
-
 		$wp_query->queried_object = get_term_by( 'slug', get_option('eo_wbc_first_slug'), 'product_cat');
+
+		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Frontend/EO_WBC_Filter_Widget.php');		
 
 		$LoadEO_WBC_Filter_Widget = new EO_WBC_Filter_Widget();
 
