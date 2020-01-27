@@ -87,6 +87,8 @@ class TestFronIntegration extends WP_UnitTestCase {
 		*	6.	Preview Page
 		*	7.	Check cart
 		*/
+
+		//Home page
 		global $wp_query;
 		require_once EO_WBC_PLUGIN_DIR.'/EO_WBC_Frontend/EO_WBC_Home.php';
 		$home  = new EO_WBC_Home();
@@ -97,6 +99,7 @@ class TestFronIntegration extends WP_UnitTestCase {
 		$this->assertIsString($home_screen);
 
 
+		//Category Page
 		$wp_query = new WP_Query(array(			
 		    'post_type' => 'product',
 		    'tax_query' => array(
@@ -121,6 +124,18 @@ class TestFronIntegration extends WP_UnitTestCase {
 		$category = new EO_WBC_Category();
 		$category_screen = ob_get_flush();
 		$this->assertIsString($category_screen);
+		$this->assertEquals(get_option('eo_wbc_first_slug'), $category->eo_wbc_get_category());
+
+		//Product Page
+
+		global $post;
+		$post = get_page_by_title('Round Diamond #89302496' , OBJECT, 'product' );
+
+		$_GET['FIRST'] = '';
+		$_GET['SECOND'] = '';
+
+		require_once EO_WBC_PLUGIN_DIR.'/EO_WBC_Frontend/EO_WBC_Product.php';		
+		
 
 	}
 
