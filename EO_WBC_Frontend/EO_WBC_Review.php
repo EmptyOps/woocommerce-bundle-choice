@@ -15,6 +15,8 @@ class EO_WBC_Review
         if( !empty($_POST['add_to_cart']) && sanitize_text_field($_POST['add_to_cart'])==1)
         {
             $this->eo_wbc_add_this_to_cart();
+            //Redirect to cart page.       
+            exit(wp_redirect(EO_WBC_Support::eo_wbc_get_cart_url()));
         }
     }
     
@@ -58,7 +60,7 @@ class EO_WBC_Review
         });            
     }
     
-    private function eo_wbc_add_this_to_cart()
+    public function eo_wbc_add_this_to_cart()
     {
         $eo_wbc_sets=WC()->session->get('EO_WBC_SETS',NULL);
         $eo_wbc_maps=WC()->session->get('EO_WBC_MAPS',array());
@@ -176,9 +178,7 @@ class EO_WBC_Review
         {
             wc_add_notice(__('Unexpected error has occured','woo-bundle-choice'),'error');
             wc_print_notices();
-        }        
-        //Redirect to cart page.       
-        exit(wp_redirect(EO_WBC_Support::eo_wbc_get_cart_url()));
+        }                
     }
     
     private function eo_wbc_add_to_cart()
