@@ -50,9 +50,8 @@ class AdminAutomation extends WP_UnitTestCase {
 		$this->assertNotFalse($attribute_result);
 		$this->assertIsArray($attribute_result);
 		$this->assertEquals($attribute_result,unserialize(get_option('eo_wbc_cats')));
-
-		$catat->add_maps($_maps);		
-		$this->assertNotFalse(get_option('eo_wbc_config_map',false));		
+			
+		$this->assertNotFalse($catat->add_maps($_maps));		
 
 		$carat= new EO_WBC_CatAt();
 		$carat->create_products($carat->product);
