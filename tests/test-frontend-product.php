@@ -61,6 +61,7 @@ class FrontendProduct extends WP_UnitTestCase {
 		$_GET['FIRST'] = '';
 		$_GET['SECOND'] = '';
 		$_GET['BEGIN'] = get_option('eo_wbc_first_slug');
+		$wp_query->queried_object = get_term_by( 'slug', get_option('eo_wbc_first_slug'), 'product_cat');
 
 		$LoadEO_WBC_Product = new EO_WBC_Product();
 
