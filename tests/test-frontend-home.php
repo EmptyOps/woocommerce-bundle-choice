@@ -36,13 +36,13 @@ class FrontendHome extends WP_UnitTestCase {
 		
 		ob_start();
 		$eo_wbc_do_shortcode = $LoadEO_WBC_Home->eo_wbc_do_shortcode();
-		$res = ob_get_contents();
+		$res = ob_get_flush();
 		$this->assertNotFalse($res);
 		$this->assertNotNull($res);
 
 		ob_start();
 		$LoadEO_WBC_Home->show_buttons();
-		$res = ob_get_contents();
+		$res = ob_get_flush();
 		$this->assertNotFalse($res);
 		$this->assertNotNull($res);
 		
