@@ -25,7 +25,7 @@ require_once('data/sample_data.php');
 class TestFronIntegration extends WP_UnitTestCase {
 
 	public function setUp() {
-		include_once WC_ABSPATH . 'includes/class-wc-product-factory.php';
+		include_once WC_ABSPATH . 'includes/class-wc-product-factory.php';		
 		WC()->product_factory = new WC_Product_Factory();
 
         
@@ -138,6 +138,8 @@ class TestFronIntegration extends WP_UnitTestCase {
 		$product = new EO_WBC_Product();
 
 		global $_product;
+		include_once WC_ABSPATH . 'includes/wc-template-functions.php'
+
 		$product_url = $product->eo_wbc_product_route();
 
 		$post = get_page_by_title('Round Diamond #89302496' , OBJECT, 'product' );        
@@ -156,7 +158,7 @@ class TestFronIntegration extends WP_UnitTestCase {
         $data['product_id'] = $post->ID;
         $data['variation_id'] = $variation_id;      	
 
-        $cart = base64_encode($data);
+		$cart = base64_encode($data);
 
        	$_GET['FIRST'] = $post->ID;
        	$_GET['STEP'] = 2;
