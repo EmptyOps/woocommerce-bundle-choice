@@ -21,7 +21,7 @@ class EO_WBC_Cart{
         $this->eo_wbc_render();       
     }
    
-    private function eo_wbc_remove(){
+    public function eo_wbc_remove(){
     
         $eo_wbc_maps=WC()->session->get('EO_WBC_MAPS',array());   
         if(isset($eo_wbc_maps[$_GET['EO_WBC_REMOVE']])){
@@ -56,7 +56,7 @@ class EO_WBC_Cart{
         
     
     
-    private function eo_wbc_empty_cart(){
+    public function eo_wbc_empty_cart(){
         //empty cart on user request
         WC()->session->set('EO_WBC_SETS',NULL);
         WC()->session->set('EO_WBC_MAPS',NULL);
@@ -65,7 +65,7 @@ class EO_WBC_Cart{
         exit(wp_redirect(EO_WBC_Support::eo_wbc_get_cart_url()));
     }
     
-    private function eo_wbc_add_css()
+    public function eo_wbc_add_css()
     {
         //Adding JQuery Library....
         add_action( 'wp_enqueue_scripts',function(){
@@ -75,7 +75,7 @@ class EO_WBC_Cart{
         });
     }
     
-    private function eo_wbc_cart_service()
+    public function eo_wbc_cart_service()
     {    	
         $eo_wbc_maps=WC()->session->get('EO_WBC_MAPS',array());
         foreach (wc()->cart->cart_contents as $cart_key=>$cart_item)
@@ -146,7 +146,7 @@ class EO_WBC_Cart{
         WC()->session->set('EO_WBC_MAPS',$eo_wbc_maps);            
     }
     
-    private function eo_wbc_render()
+    public function eo_wbc_render()
     {
         //Removing Cart Table data.....
         //Adding Custome Cart Table Data.......        
@@ -225,7 +225,7 @@ class EO_WBC_Cart{
               <a href="./?EO_WBC=1&empty_cart=1" class="checkout-button button alt wc-backword">Empty Cart</a></div><div style="clear:both;"></div>';
             });*/
     }
-    private function eo_wbc_cart_ui($index,$cart)
+    public function eo_wbc_cart_ui($index,$cart)
     {  
         
         $first=EO_WBC_Support::eo_wbc_get_product($cart['FIRST'][0]);
