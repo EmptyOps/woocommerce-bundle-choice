@@ -164,7 +164,7 @@ class TestFronIntegration extends WP_UnitTestCase {
        	$_GET['STEP'] = 2;
        	$_GET['CART'] = $cart;
        	
-       	$this->$this->assertNotEmpty( $product->eo_wbc_category_link() );
+       	$this->assertNotEmpty( $product->eo_wbc_category_link() );
 
 
        	//Second Product load...
@@ -191,7 +191,7 @@ class TestFronIntegration extends WP_UnitTestCase {
        	$_GET['STEP'] = 3;
        	$_GET['CART'] = $cart;
        	
-       	$this->$this->assertNotEmpty( $product->eo_wbc_category_link() );
+       	$this->assertNotEmpty( $product->eo_wbc_category_link() );
 
        	// Load preview page.
        	require_once EO_WBC_PLUGIN_DIR.'/EO_WBC_Frontend/EO_WBC_Review.php';		
