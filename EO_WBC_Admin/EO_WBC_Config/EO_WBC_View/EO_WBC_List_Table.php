@@ -103,7 +103,10 @@ if(!class_exists('EO_WBC_List_Table')){
 
 		  	$per_page = 5;
 		  	$current_page = $this->get_pagenum();
-		  	$total_items = count($data);
+		  	$total_items = 0;
+		  	if(is_array($data) and !empty($data)){
+		  		$total_items = count($data);	
+		  	}	  	
 		  	
 		  	// only ncessary because we have sample data
 		  	if(is_array($data)){
