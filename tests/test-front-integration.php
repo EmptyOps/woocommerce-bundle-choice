@@ -140,6 +140,7 @@ class TestFronIntegration extends WP_UnitTestCase {
 		global $_product;
 		include_once WC_ABSPATH . 'includes/wc-template-functions.php';
 		include_once WC_ABSPATH . 'includes/class-wc-session-handler.php';
+		WC()->session = new WC_Session_Handler();
 
 		$product_url = $product->eo_wbc_product_route();
 
