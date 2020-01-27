@@ -34,11 +34,13 @@ class FrontendProduct extends WP_UnitTestCase {
 		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Admin/EO_WBC_Support.php');
 		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Frontend/EO_WBC_Product.php');
 
-		include_once WC_ABSPATH . 'includes/class-wc-product-factory.php';		
-		WC()->product_factory = new WC_Product_Factory();
-
 		global $post;
 		global $_product;
+
+		include_once WC_ABSPATH . 'includes/class-wc-product-factory.php';		
+		WC()->product_factory = new WC_Product_Factory();
+		do_action('woocommerce_init');
+
 		$EO_WBC_CatAt = new EO_WBC_CatAt();
 		
 		$create_products = $EO_WBC_CatAt->create_products($_product);
