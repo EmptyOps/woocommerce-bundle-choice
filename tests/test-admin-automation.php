@@ -10,10 +10,11 @@ require_once $wp_tests_dir . '/includes/listener-loader.php';
 
 require_once dirname( dirname( __FILE__ ) ) . '/woo-bundle-choice.php';		
 require_once 'db-setup.php';		
-
+require_once('data/sample_data.php');
 
 activate_plugin('woocommerce/woocommerce.php');
-activate_plugin('woocommerce-bundle-choice/woo-bundle-choice.php');		
+activate_plugin('woocommerce-bundle-choice/woo-bundle-choice.php');	
+
 /////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -28,8 +29,14 @@ class AdminAutomation extends WP_UnitTestCase {
 
 	public function test_automatic_install(){
 		
+		global $_category;
+    	global $_atttriutes;
+    	global $_maps;
+    	global $_product;
+    	global $_img_url;
+
 		require_once(constant('EO_WBC_PLUGIN_DIR').'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/library/EO_WBC_CatAt.php');
-		require_once('data/sample_data.php');	    
+			    
 
 		$catat=new EO_WBC_CatAt();		
 		$category_result=$catat->create_category($_category);
