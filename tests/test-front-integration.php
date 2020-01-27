@@ -90,7 +90,9 @@ class TestFronIntegration extends WP_UnitTestCase {
 
 		include_once WC_ABSPATH . 'includes/class-wc-session-handler.php';
 		WC()->session = new WC_Session_Handler();
-
+		
+		include_once WC_ABSPATH . 'includes/class-wc-cart.php';
+		WC()->cart = new WC_Cart();
 		//Home page
 		global $wp_query;
 		require_once EO_WBC_PLUGIN_DIR.'/EO_WBC_Frontend/EO_WBC_Home.php';
