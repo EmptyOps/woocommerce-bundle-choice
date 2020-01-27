@@ -19,6 +19,14 @@ activate_plugin('woocommerce-bundle-choice/woo-bundle-choice.php');
 require_once(constant('EO_WBC_PLUGIN_DIR').'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/library/EO_WBC_CatAt.php');
 require_once('data/sample_data.php');
 
+WC()->includes();
+WC()->frontend_includes();
+WC()->include_template_functions();	
+WC()->init();
+WC()->initialize_session();
+WC()->initialize_cart();
+
+
 include_once WC_ABSPATH . 'includes/class-wc-product-factory.php';		
 WC()->product_factory = new WC_Product_Factory();
 
@@ -53,12 +61,7 @@ update_option('eo_wbc_config_map',1);
 update_option('eo_wbc_btn_setting','0');
 update_option('eo_wbc_btn_position','begining');
     
-WC()->includes();
-WC()->frontend_includes();
-WC()->include_template_functions();	
-WC()->init();
-WC()->initialize_session();
-WC()->initialize_cart();
+
 
 $wp_query->queried_object = get_term_by( 'slug', get_option('eo_wbc_first_slug'), 'product_cat');
 
