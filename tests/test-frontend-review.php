@@ -51,20 +51,25 @@ class FrontendReview extends WP_UnitTestCase {
 		} else {
 			$_GET['SECOND'] = 840;
 		}		
-
+		
+		ob_end_clean();
+		ob_start();
 		$LoadEO_WBC_Review = new EO_WBC_Review();
-
+		$render_string = ob_get_clean();
+		$this->assertNotEmpty($render_string);
+		$this->assertIsString($render_string);
+		
 		/*$eo_wbc_buttons_css = $LoadEO_WBC_Review->eo_wbc_buttons_css();		
 		$this->assertNotEmpty($eo_wbc_buttons_css);
 		$this->assertIsString($eo_wbc_buttons_css);*/
 
 
-		ob_end_clean();
+		/*ob_end_clean();
 		ob_start();
 		$eo_wbc_render = $LoadEO_WBC_Review->eo_wbc_render();
 		$render_string = ob_get_clean();
 		$this->assertNotEmpty($render_string);
-		$this->assertIsString($render_string);
+		$this->assertIsString($render_string);*/
 		
 	}
 
