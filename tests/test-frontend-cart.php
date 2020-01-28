@@ -30,17 +30,9 @@ class FrontendCart extends WP_UnitTestCase {
 
 		$LoadEO_WBC_Cart = new EO_WBC_Cart();
 
-		$eo_wbc_add_css = $LoadEO_WBC_Cart->eo_wbc_add_css();
-		$this->assertTrue( has_action('wp_enqueue_scripts','function()' ));
-
-		$LoadEO_WBC_Cart->eo_wbc_render();
-		$this->assertTrue( has_action('woocommerce_before_cart_contents', 'function ()' ));
-
-		$eo_wbc_cart_service = $LoadEO_WBC_Cart->eo_wbc_cart_service();
-		update_option('eo_wbc_cats',$eo_wbc_cart_service);
+		$eo_wbc_cart_service = $LoadEO_WBC_Cart->eo_wbc_cart_service();		
 		$this->assertIsArray($eo_wbc_cart_service);
 		$this->assertNotFalse($eo_wbc_cart_service);
-		$this->assertEquals($eo_wbc_cart_service,unserialize(get_option('eo_wbc_cats')));
 
 	}
 
