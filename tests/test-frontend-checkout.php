@@ -107,14 +107,14 @@ class FrontendCheckout extends WP_UnitTestCase {
 				$sets['SECOND'] = array($post->ID,1,$variation_id);
 
 				WC()->session->set('EO_WBC_SETS',$sets);
-				
-		
+				WC()->session->set('EO_WBC_MAPS',$sets);
+
 		$LoadEO_WBC_Checkout  = new EO_WBC_Checkout();
 
 		/*$eo_wps_add_js = $LoadEO_WBC_Checkout->eo_wps_add_js();
 		$this->assertTrue( has_action( 'wp_enqueue_scripts', 'function()' ) );
-		$this->assertTrue( has_action( 'wp_footer', 'function()' ) );
-*/
+		$this->assertTrue( has_action( 'wp_footer', 'function()' ) ); */
+
 		$eo_wbc_render = $LoadEO_WBC_Checkout->eo_wbc_render();
 		$this->assertNotFalse($eo_wbc_render);
 		$this->assertNotNull($eo_wbc_render);
