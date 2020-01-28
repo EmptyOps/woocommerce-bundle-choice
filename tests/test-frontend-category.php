@@ -51,6 +51,52 @@ class FrontendCategory extends WP_UnitTestCase {
 			$factory_object->create_attribute($_atttriutes);			
 			$factory_object->add_maps($_maps);							
 			$wp_query->queried_object = get_term_by( 'slug', 'eo_diamond_shape_cat' , 'product_cat');
+
+			update_option('eo_wbc_first_name','Diamond Shape');//FIRST : NAME
+			update_option('eo_wbc_first_slug','eo_diamond_shape_cat');//FIRST : SLUG
+			update_option('eo_wbc_first_url','/product-category/eo_diamond_shape_cat/');//FIRST : NAME
+
+			update_option('eo_wbc_second_name','Setting Shape');//SECOND : NAME
+			update_option('eo_wbc_second_slug','eo_setting_shape_cat');//SECOND : SLUG
+			update_option('eo_wbc_second_url','/product-category/eo_setting_shape_cat/');//SECOND : URL   
+
+			update_option('eo_wbc_config_category',1);
+			update_option('eo_wbc_config_map',1);    
+			update_option('eo_wbc_btn_setting','0');
+			update_option('eo_wbc_btn_position','begining');
+
+			$wp_query->queried_object = get_term_by( 'slug', get_option('eo_wbc_first_slug'), 'product_cat');
+
+			$post = get_page_by_title('Round Diamond #89302496' , OBJECT, 'product' );        
+			$variable_product = new WC_Product_Variable($post->ID);        
+			$variation_id = $variable_product->get_available_variations()[0]['variation_id'];
+
+				$sets['FIRST'] = array($post->ID,1,$variation_id);
+				
+				$_GET['EO_WBC'] = 1;
+				$_GET['BEGIN'] = get_option('eo_wbc_first_slug');
+				$_GET['STEP'] = 1;
+				
+
+				$data = $_product[1]['variation'][0];
+			    $data['eo_wbc_target'] = get_option('eo_wbc_first_slug');
+			    $data['eo_wbc_product_id'] = $post->ID;
+			    $data['quantity'] = 1;
+			    $data['add-to-cart'] = $post->ID;
+			    $data['product_id'] = $post->ID;
+			    $data['variation_id'] = $variation_id;      	
+
+				$cart = base64_encode(json_encode($data));
+
+				$_GET['CART'] = $cart;
+
+				$post = get_page_by_title('Setting #8800950587' , OBJECT, 'product' );        
+			$variable_product = new WC_Product_Variable($post->ID);        
+			$variation_id = $variable_product->get_available_variations()[0]['variation_id'];
+
+				$sets['SECOND'] = array($post->ID,1,$variation_id);
+
+				WC()->session->set('EO_WBC_SETS',$sets);
 		}
 
 		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Admin/EO_WBC_Support.php');
