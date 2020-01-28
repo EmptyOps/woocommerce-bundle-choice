@@ -112,6 +112,10 @@ class FrontendCheckout extends WP_UnitTestCase {
 
 		$LoadEO_WBC_Checkout  = new EO_WBC_Checkout();
 
+		fwrite(STDERR, print_r($sets, TRUE));
+
+		fwrite(STDERR, print_r(WC()->session->get('EO_WBC_SETS'), TRUE));
+
 		/*$eo_wps_add_js = $LoadEO_WBC_Checkout->eo_wps_add_js();
 		$this->assertTrue( has_action( 'wp_enqueue_scripts', 'function()' ) );
 		$this->assertTrue( has_action( 'wp_footer', 'function()' ) ); */
@@ -121,7 +125,7 @@ class FrontendCheckout extends WP_UnitTestCase {
 		$this->assertNotNull($eo_wbc_render);
 		/*$this->assertContainsOnly($eo_wbc_render);*/
 
-		fwrite(STDERR, print_r($sets, TRUE));
+
 
 		$checkout_rows = $LoadEO_WBC_Checkout->checkout_rows($sets);
 		$this->assertIsString($checkout_rows);				
