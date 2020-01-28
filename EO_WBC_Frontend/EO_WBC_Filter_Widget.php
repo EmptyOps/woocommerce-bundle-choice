@@ -15,7 +15,7 @@ class EO_WBC_Filter_Widget {
 		}
 	}
 
-	private function eo_wbc_filter_enque_asset()
+	public function eo_wbc_filter_enque_asset()
 	{
 		$current_category=$this->_category;
 		$site_url=site_url();
@@ -161,7 +161,7 @@ class EO_WBC_Filter_Widget {
         
 	}		
 
-	private function product_url() {
+	public function product_url() {
 		$url='?EO_WBC=1'.
             '&BEGIN='.sanitize_text_field($_GET['BEGIN']).
             '&STEP='.sanitize_text_field($_GET['STEP']).                            
@@ -197,7 +197,7 @@ class EO_WBC_Filter_Widget {
 	}
 
 	//Returns minimum value and maximum value of range;
-	private function range_min_max($id,$title='',$filter_type=0) {
+	public function range_min_max($id,$title='',$filter_type=0) {
 		
 		$field_title='';	
 		$field_slug='';
@@ -304,7 +304,7 @@ class EO_WBC_Filter_Widget {
 	}
 
 	//Generate text slider/ non-labeled sliders
-	private function input_text_slider($id,$title,$filter_type,$desktop=1,$width='50') {
+	public function input_text_slider($id,$title,$filter_type,$desktop=1,$width='50') {
 		$filter=$this->range_min_max($id,$title,$filter_type);						
 		if(!$filter) return false;		
 
@@ -367,7 +367,7 @@ class EO_WBC_Filter_Widget {
 
 	//Returns all values in range;
 	//@input : filter_type - wether it is category filter or term filter;
-	private function range_steps($id,$title='',$filter_type=0) {
+	public function range_steps($id,$title='',$filter_type=0) {
 
 		$list=array();		
 		$field_title='';	
@@ -434,7 +434,7 @@ class EO_WBC_Filter_Widget {
 	}
 
 	//Generate step slider;
-	private function input_step_slider($id,$title,$filter_type,$desktop=1,$width='50') {
+	public function input_step_slider($id,$title,$filter_type,$desktop=1,$width='50') {
 
 		$filter=$this->range_steps($id,$title,$filter_type);
 		if(empty($filter)) return false;
@@ -481,7 +481,7 @@ class EO_WBC_Filter_Widget {
 	}
 
 	//Generate checkbox based filter option;
-	private function input_checkbox($id,$title,$filter_type,$desktop=1,$width='50') {
+	public function input_checkbox($id,$title,$filter_type,$desktop=1,$width='50') {
 		$filter=$this->range_steps($id,$title,$filter_type);
 		if(empty($filter)) return false;
 
@@ -591,7 +591,7 @@ class EO_WBC_Filter_Widget {
 		endif;			
 	}
 	
-	private function get_widget() {
+	public function get_widget() {
 
 		$current_category=$this->_category;
 
@@ -1113,7 +1113,7 @@ class EO_WBC_Filter_Widget {
 		<?php			
 	}
 
-	private function eo_wbc_filter_ui_icon($id,$title='',$type=0,$input='icon',$desktop=1,$width='50',$icon_width=FALSE,$label_size=FALSE) {
+	public function eo_wbc_filter_ui_icon($id,$title='',$type=0,$input='icon',$desktop=1,$width='50',$icon_width=FALSE,$label_size=FALSE) {
 		global $woocommerce;
 		$icon_css = '';
 		if($input == 'icon'){
@@ -1339,7 +1339,7 @@ class EO_WBC_Filter_Widget {
 	}	
 
 	//convert category id to slug
-	private function eo_wbc_id_2_slug($id) {
+	public function eo_wbc_id_2_slug($id) {
 		$term = get_term_by('id',$id,'product_cat');
 
 		if(empty($term) or is_wp_error($term)){
@@ -1349,7 +1349,7 @@ class EO_WBC_Filter_Widget {
 		}
     }
     
-    private function eo_wbc_get_category()
+    public function eo_wbc_get_category()
     {        
         global $wp_query;        
         
