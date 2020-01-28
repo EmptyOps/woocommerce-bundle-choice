@@ -121,6 +121,8 @@ class FrontendCheckout extends WP_UnitTestCase {
 		$this->assertNotNull($eo_wbc_render);
 		/*$this->assertContainsOnly($eo_wbc_render);*/
 
+		printf(STDERR,print_r($sets,true));
+
 		$checkout_rows = $LoadEO_WBC_Checkout->checkout_rows($sets);
 		$this->assertIsString($checkout_rows);				
 	}
