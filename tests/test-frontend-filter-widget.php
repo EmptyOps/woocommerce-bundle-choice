@@ -27,11 +27,12 @@ class FrontendFilterWidget extends WP_UnitTestCase {
 	public function test_filter_widget(){
 
 		require_once 'import_data_init.php';
+
 		global $post;
 		global $_product;
 		global $wp_query;
 		
-		$wp_query->queried_object = get_term_by( 'slug', get_option('eo_wbc_first_slug'), 'product_cat');
+		$wp_query->queried_object = get_term_by( 'slug', 'eo_diamond_shape_cat', 'product_cat');
 
 		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Frontend/EO_WBC_Filter_Widget.php');		
 

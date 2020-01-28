@@ -48,15 +48,6 @@ class FrontendProduct extends WP_UnitTestCase {
 		
 		$create_products = $EO_WBC_CatAt->create_products($_product);
 
-		$p = null;
-		$old_product = get_page_by_title('Setting #8800950587', OBJECT, 'product' );
-		if(!is_wp_error($old_product) and !empty($old_product))
-		{			
-			$p = wc_get_product($old_product->ID);			
-		}
-		
-		$post = $p;
-
 		$_GET['STEP'] = 1;
 		$_GET['FIRST'] = '';
 		$_GET['SECOND'] = '';
