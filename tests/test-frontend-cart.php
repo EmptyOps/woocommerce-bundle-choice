@@ -26,6 +26,7 @@ class FrontendCart extends WP_UnitTestCase {
 
 	public function test_cart_data(){
 
+		require_once 'import_data_init.php';
 		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Frontend/EO_WBC_Cart.php');
 
 		$LoadEO_WBC_Cart = new EO_WBC_Cart();
