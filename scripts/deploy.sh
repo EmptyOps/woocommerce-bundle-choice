@@ -20,14 +20,7 @@ PLUGIN="woo-bundle-choice"
 PROJECT_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
 PLUGIN_BUILDS_PATH="$PROJECT_ROOT/builds"
 PLUGIN_BUILD_CONFIG_PATH="$PROJECT_ROOT/build-cfg"
-VERSION=$(php -f "$PLUGIN_BUILD_CONFIG_PATH/utils/get_plugin_version.php" "$PROJECT_ROOT" "$PLUGIN")
-ZIP_FILE="$PLUGIN_BUILDS_PATH/$PLUGIN-$VERSION.zip"
-
-# Ensure the zip file for the current version has been built
-if [ ! -f "$ZIP_FILE" ]; then
-    echo "Built zip file $ZIP_FILE does not exist" 1>&2
-    exit 1
-fi
+VERSION=$(php -f "$PLUGIN_BUILD_CONFIG_PATH/utils/version.php")
 
 # Check if the tag exists for the version we are building
 TAG=$(svn ls "https://plugins.svn.wordpress.org/$PLUGIN/tags/$VERSION")
@@ -39,13 +32,14 @@ if [ $error == 0 ]; then
 fi
   
 cd "$PLUGIN_BUILDS_PATH"
-# Remove any unzipped dir so we start from scratch
-rm -fR "$PLUGIN"
-# Unzip the built plugin
-unzip -q -o "$ZIP_FILE"
+# Remove any file so we start from scratch
+rm -fR "*"
 
-# Clean up any previous svn dir
-rm -fR svn
+# Unzip the built plugin
+#unzip -q -o "$ZIP_FILE"
+
+# Copy all but testing and deployment files.
+rsync -avr --exclude='bin' --exclude='build-cfg' --exclude='builds' --exclude='phpcs.xml.dist' --exclude='phpunit.xml.dist' --exclude='scripts' --exclude='tests' --exclude='wp-cli.phar' --exclude='.git' --exclude='.gitignore' --exclude='.phpintel' --exclude='.travis.yml' "$PROJECT_ROOT" "$PLUGIN_BUILDS_PATH/$PLUGIN"
 
 # Checkout the SVN repo
 svn co -q "http://svn.wp-plugins.org/$PLUGIN" svn
