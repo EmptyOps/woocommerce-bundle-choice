@@ -112,10 +112,6 @@ class FrontendCheckout extends WP_UnitTestCase {
 
 		$LoadEO_WBC_Checkout  = new EO_WBC_Checkout();
 
-		fwrite(STDERR, print_r($sets, TRUE));
-
-		fwrite(STDERR, print_r(WC()->session->get('EO_WBC_SETS'), TRUE));
-
 		/*$eo_wps_add_js = $LoadEO_WBC_Checkout->eo_wps_add_js();
 		$this->assertTrue( has_action( 'wp_enqueue_scripts', 'function()' ) );
 		$this->assertTrue( has_action( 'wp_footer', 'function()' ) ); */
