@@ -13,7 +13,6 @@ require_once dirname( dirname( __FILE__ ) ) . '/woo-bundle-choice.php';
 activate_plugin('woocommerce/woocommerce.php');
 activate_plugin('woocommerce-bundle-choice/woo-bundle-choice.php');		
 
-require_once 'import_data_init.php';
 /////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -28,8 +27,7 @@ class FrontendCategory extends WP_UnitTestCase {
 
 	public function test_category_data(){
 
-		global $wp_query;		
-		$wp_query->queried_object = get_term_by( 'slug', get_option('eo_wbc_first_slug'), 'product_cat');
+		require_once 'import_data_init.php';
 
 		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Admin/EO_WBC_Support.php');
 		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Frontend/EO_WBC_Breadcrumb.php');
