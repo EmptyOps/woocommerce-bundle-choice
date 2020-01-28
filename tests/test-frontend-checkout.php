@@ -121,7 +121,7 @@ class FrontendCheckout extends WP_UnitTestCase {
 		$this->assertNotNull($eo_wbc_render);
 		/*$this->assertContainsOnly($eo_wbc_render);*/
 
-		$checkout_rows = $LoadEO_WBC_Checkout->checkout_rows($map);
+		$checkout_rows = $LoadEO_WBC_Checkout->checkout_rows($sets);
 		$this->assertNotFalse($checkout_rows);
 		$this->assertNotNull($checkout_rows);
 		/*$this->assertContainsOnly($checkout_rows);*/
