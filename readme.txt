@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=hi000
 Requires at least: 3.5
 Tested up to: 5.3.2
 Requires PHP: 5.3
-Stable tag: 0.5.46
+Stable tag: 0.5.47
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -202,19 +202,21 @@ Yes, it is.
 5. Home page after plugin fully configured.
 
 == Changelog ==
-= 0.5.45 (Dec 09, 2020) =
+= 0.5.47 (Jan 28, 2020) =
+  ** Feature ** Bug-fixed warning at filter config page for table.
+= 0.5.45 (Dec 23, 2020) =
   ** Feature ** Range based filter on product attribute.
-= 0.5.44 (Dec 09, 2020) =
+= 0.5.44 (Jan 23, 2020) =
   ** Fixup ** fixed filter and breadcrumb at full width.
-= 0.5.43 (Dec 09, 2020) =
+= 0.5.43 (Jan 17, 2020) =
   ** Landing setup inclusion ** Included on-bording installation guide.
-= 0.5.42 (Dec 09, 2020) =
+= 0.5.42 (Jan 13, 2020) =
   ** UI Fix ** Breadcrumb icon flex size.
-= 0.5.41 (Dec 04, 2020) =
+= 0.5.41 (Jan 10, 2020) =
   ** UI Fix ** Breadcrumb fixup. 
-= 0.5.40 (Dec 04, 2020) =
+= 0.5.40 (Jan 08, 2020) =
   ** UI and Bug-fix ** Automation fixes. 
-= 0.5.39 (Dec 04, 2020) =
+= 0.5.39 (Jan 04, 2020) =
   ** UI and Bug-fix ** Icons UI fixed and bugs fixed for filters. 
 = 0.5.38 (Dec 30, 2019) =
   ** Bug-fix ** Error fixed on product page, breadcrumb and added new automation catelog.
