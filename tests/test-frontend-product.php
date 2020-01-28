@@ -51,11 +51,8 @@ class FrontendProduct extends WP_UnitTestCase {
 		$p = null;
 		$old_product = get_page_by_title('Setting #8800950587', OBJECT, 'product' );
 		if(!is_wp_error($old_product) and !empty($old_product))
-		{
-			if('publish' === get_post_status( $old_product->get_id()))
-			{
-				$p = wc_get_product($old_product->get_id());
-			}
+		{			
+			$p = wc_get_product($old_product->ID);			
 		}
 		
 		$post = $p;
