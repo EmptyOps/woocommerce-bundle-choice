@@ -29,6 +29,8 @@ class FrontendCategory extends WP_UnitTestCase {
 
 		require_once 'import_data_init.php';
 
+		global $post;
+
 		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Admin/EO_WBC_Support.php');
 		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Frontend/EO_WBC_Breadcrumb.php');
 		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Frontend/EO_WBC_Category.php');		
@@ -43,7 +45,7 @@ class FrontendCategory extends WP_UnitTestCase {
 		$this->assertNotFalse($eo_wbc_prev_url);
 		$this->assertNotNull($eo_wbc_prev_url);
 
-		$eo_wbc_product_url = $LoadEO_WBC_Category->eo_wbc_product_url($url);
+		$eo_wbc_product_url = $LoadEO_WBC_Category->eo_wbc_product_url(get_permalink($post->ID));
 		$this->assertNotFalse($eo_wbc_product_url);
 		$this->assertNotNull($eo_wbc_product_url);		
 		
