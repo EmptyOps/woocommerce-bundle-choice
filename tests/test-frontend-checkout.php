@@ -108,7 +108,7 @@ class FrontendCheckout extends WP_UnitTestCase {
 				$sets['SECOND'] = array($post->ID,1,$variation_id);
 				$_GET['SECOND'] = $post->ID;
 				WC()->session->set('EO_WBC_SETS',$sets);
-				WC()->session->set('EO_WBC_MAPS',$sets);
+				WC()->session->set('EO_WBC_MAPS',array($sets));
 
 		$LoadEO_WBC_Checkout  = new EO_WBC_Checkout();
 
