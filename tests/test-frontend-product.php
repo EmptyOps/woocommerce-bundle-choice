@@ -52,9 +52,9 @@ class FrontendProduct extends WP_UnitTestCase {
 		$old_product = get_page_by_title('Setting #8800950587', OBJECT, 'product' );
 		if(!is_wp_error($old_product) and !empty($old_product))
 		{
-			if('publish' === get_post_status( $old_product->ID ))
+			if('publish' === get_post_status( $old_product->getid()))
 			{
-				$p = wc_get_product($old_product->ID);
+				$p = wc_get_product($old_product->get_id());
 			}
 		}
 		
@@ -71,9 +71,8 @@ class FrontendProduct extends WP_UnitTestCase {
 
 		$LoadEO_WBC_Product = new EO_WBC_Product();
 
-		$eo_wbc_category_link = $LoadEO_WBC_Product->eo_wbc_category_link($variable_status=FALSE);
-		$this->assertNotFalse($eo_wbc_category_link);
-		$this->assertNotNull($eo_wbc_category_link);
+		$eo_wbc_category_link = $LoadEO_WBC_Product->eo_wbc_category_link();		
+		$this->assertIsString($eo_wbc_category_link);
 		
 
 
