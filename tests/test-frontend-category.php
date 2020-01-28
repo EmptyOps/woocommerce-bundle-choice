@@ -35,6 +35,20 @@ class FrontendCategory extends WP_UnitTestCase {
 
 		$wp_query->queried_object = term_exists( 'eo_diamond_shape_cat' , 'product_cat' );
 		if (empty($wp_query->queried_object) or is_wp_error($wp_query->queried_object)) {
+
+			require_once(constant('EO_WBC_PLUGIN_DIR').'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/library/EO_WBC_CatAt.php');
+			require_once('data/sample_data.php');
+
+			WC()->includes();
+			WC()->frontend_includes();
+			WC()->include_template_functions();	
+			WC()->init();
+			WC()->initialize_session();
+			WC()->initialize_cart();
+
+
+			include_once WC_ABSPATH . 'includes/class-wc-product-factory.php';		
+			WC()->product_factory = new WC_Product_Factory();
 						
 			global $_category;
 			global $_atttriutes;
@@ -49,7 +63,9 @@ class FrontendCategory extends WP_UnitTestCase {
 
 			$factory_object->create_category($_category);
 			$factory_object->create_attribute($_atttriutes);			
-			$factory_object->add_maps($_maps);							
+			$factory_object->add_maps($_maps);					
+			$factory_object->create_products($_product);
+
 			$wp_query->queried_object = get_term_by( 'slug', 'eo_diamond_shape_cat' , 'product_cat');
 
 			update_option('eo_wbc_first_name','Diamond Shape');//FIRST : NAME
