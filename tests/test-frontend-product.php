@@ -96,12 +96,12 @@ class FrontendProduct extends WP_UnitTestCase {
 		$this->assertNotNull($product_route);
 		$this->assertNotFalse($product_route);		*/
 
-		$sub_categories =$LoadEO_WBC_Product->eo_wbc_sub_categories(get_option('eo_wbc_first_slug'));		
+		/*$sub_categories =$LoadEO_WBC_Product->eo_wbc_sub_categories(get_option('eo_wbc_first_slug'));		
 		$this->assertIsArray($sub_categories);
-		$this->assertNotFalse($sub_categories);		
+		$this->assertNotFalse($sub_categories);*/		
 
-		$get_category = $LoadEO_WBC_Product->eo_wbc_get_category();
-		$this->assertNotFalse($get_category);
+		/*$get_category = $LoadEO_WBC_Product->eo_wbc_get_category();
+		$this->assertNotFalse($get_category);*/
 /*		$this->assertNotNull($get_category);
 		$this->assertIsString($get_category);*/
 	}
