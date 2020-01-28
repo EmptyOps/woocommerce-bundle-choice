@@ -141,9 +141,9 @@ class FrontendFilterWidget extends WP_UnitTestCase {
 		$this->assertNotFalse($eo_wbc_get_category);
 		$this->assertNotNull($eo_wbc_get_category);
 
-		$get_filtered_price = $LoadEO_WBC_Filter_Widget->get_filtered_price();
+		/*$get_filtered_price = $LoadEO_WBC_Filter_Widget->get_filtered_price();
 		$this->assertNotFalse($get_filtered_price);
-		$this->assertNotNull($get_filtered_price);
+		$this->assertNotNull($get_filtered_price);*/
 
 
 	}
