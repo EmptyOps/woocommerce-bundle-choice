@@ -31,7 +31,7 @@ class EO_WBC_Category
         }        
     }
 
-    private function eo_wbc_add_to_cart() {
+    public function eo_wbc_add_to_cart() {
         
         $cart=base64_decode(sanitize_text_field($_GET['CART']),TRUE);        
         if(!empty($cart)){
@@ -72,7 +72,7 @@ class EO_WBC_Category
         }
     }
 
-    private function eo_wbc_add_to_cart_link() {
+    public function eo_wbc_add_to_cart_link() {
         
         $cart=base64_decode(sanitize_text_field($_GET['CART']),TRUE);
         
@@ -90,7 +90,7 @@ class EO_WBC_Category
         }
     }
 
-    private function eo_wbc_add_filters() {
+    public function eo_wbc_add_filters() {
         //Add product filter widget...
         
         add_action( 'woocommerce_archive_description',function(){            
@@ -101,7 +101,7 @@ class EO_WBC_Category
         
     }
 
-    private function eo_wbc_add_breadcrumb()
+    public function eo_wbc_add_breadcrumb()
     {	        
     	//Add Breadcumb at top....		
         add_action( 'woocommerce_archive_description',function(){            
@@ -109,7 +109,7 @@ class EO_WBC_Category
         }, 120);
     }
 
-    private function eo_wbc_render()
+    public function eo_wbc_render()
     {   
         if(get_option('eo_wbc_pair_maker_status',FALSE) && isset($_GET) && !empty($_GET['STEP']) && $_GET['STEP']==2 && (empty($_GET['FIRST']) XOR empty($_GET['SECOND']))){
 
@@ -354,7 +354,7 @@ class EO_WBC_Category
         }, 9 );
     }
         
-    function eo_wbc_prev_url(){
+    public function eo_wbc_prev_url(){
         $site_ = site_url();
         if($this->eo_wbc_get_category()==get_option('eo_wbc_first_slug')){
             $_cat=get_option('eo_wbc_second_slug');
@@ -363,7 +363,7 @@ class EO_WBC_Category
         }
         return $site_."/product-category/{$_cat}/?EO_WBC=1&BEGIN={$_cat}&STEP=1&FIRST=&SECOND=";
     }
-    function eo_wbc_product_url($url){
+    public function eo_wbc_product_url($url){
         return  $url.'?EO_WBC=1'.
                         '&BEGIN='.sanitize_text_field($_GET['BEGIN']).
                         '&STEP='.sanitize_text_field($_GET['STEP']).                            
@@ -397,7 +397,7 @@ class EO_WBC_Category
                         );
     }
 
-    private function eo_wbc_id_2_slug($id)
+    public function eo_wbc_id_2_slug($id)
     {
         return get_term_by('id',$id,'product_cat')->slug;
     }

@@ -62,12 +62,7 @@ class FrontendCategory extends WP_UnitTestCase {
 		$this->assertNotFalse($eo_wbc_product_url);
 		$this->assertNotNull($eo_wbc_product_url);
 		$this->assertContainsOnly($eo_wbc_product_url);
-
-		$id = '20999';
-
-		$eo_wbc_id_2_slug = $LoadEO_WBC_Category->eo_wbc_id_2_slug($id);
-		$this->assertIsBool($eo_wbc_id_2_slug);
-
+		
 		$eo_wbc_get_category = $LoadEO_WBC_Category->eo_wbc_get_category();
 		$this->assertNotFalse($eo_wbc_get_category);
 		$this->assertNotNull($eo_wbc_get_category);
