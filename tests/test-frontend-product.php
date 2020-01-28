@@ -35,7 +35,10 @@ class FrontendProduct extends WP_UnitTestCase {
 		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Admin/EO_WBC_Support.php');
 		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Frontend/EO_WBC_Product.php');
 
+		require_once 'import_data_init.php';
+
 		global $post;
+
 		global $_product;
 
 		include_once WC_ABSPATH . 'includes/class-wc-product-factory.php';		
