@@ -38,21 +38,7 @@ class FrontendProduct extends WP_UnitTestCase {
 		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/library/EO_WBC_CatAt.php');
 		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Admin/EO_WBC_Support.php');
 		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Frontend/EO_WBC_Product.php');
-
-
-		include_once WC_ABSPATH . 'includes/class-wc-product-factory.php';		
-		WC()->product_factory = new WC_Product_Factory();
-		
-
-		$EO_WBC_CatAt = new EO_WBC_CatAt();
-		
-		$create_products = $EO_WBC_CatAt->create_products($_product);
-
-		$_GET['STEP'] = 1;
-		$_GET['FIRST'] = '';
-		$_GET['SECOND'] = '';
-		$_GET['BEGIN'] = get_option('eo_wbc_first_slug');
-		
+			
 		global $wp_query;
 
 		$wp_query->queried_object = term_exists( 'eo_diamond_shape_cat' , 'product_cat' );
@@ -136,6 +122,11 @@ class FrontendProduct extends WP_UnitTestCase {
 
 				WC()->session->set('EO_WBC_SETS',$sets);
 		}
+
+		$_GET['STEP'] = 1;
+		$_GET['FIRST'] = '';
+		$_GET['SECOND'] = '';
+		$_GET['BEGIN'] = get_option('eo_wbc_first_slug');
 
 		$LoadEO_WBC_Product = new EO_WBC_Product();
 
