@@ -38,36 +38,21 @@ class FrontendCategory extends WP_UnitTestCase {
 		$eo_wbc_add_to_cart_link = $LoadEO_WBC_Category->eo_wbc_add_to_cart_link();
 		$this->assertNotFalse($eo_wbc_add_to_cart_link);
 		$this->assertNotNull($eo_wbc_add_to_cart_link);
-		$this->assertContainsOnly($eo_wbc_add_to_cart_link);
 
 		$LoadEO_WBC_Category->eo_wbc_add_filters();
 		$this->assertTrue( hsa_action('woocommerce_before_shop_loop','function()'));
-
-		$LoadEO_WBC_Breadcrumb = new EO_WBC_Breadcrumb();
-		$LoadEO_WBC_Category->eo_wbc_add_breadcrumb();
-		$this->assertTrue( hsa_action('woocommerce_before_shop_loop','function()'));
-
-		$eo_wbc_render = $LoadEO_WBC_Category->eo_wbc_render();
-		$this->assertTrue( has_action( 'wp_enqueue_scripts', 'function()') );
-		$this->assertTrue( has_action( 'wp_head', 'fucntion()') );
-		$this->assertTrue( has_action( 'wp_footer', 'fucntion()') );
-		$this->assertTrue( has_action( 'woocommerce_no_products_found', 'fucntion()') );
-
+				
 		$eo_wbc_prev_url = $LoadEO_WBC_Category->eo_wbc_prev_url();
 		$this->assertNotFalse($eo_wbc_prev_url);
 		$this->assertNotNull($eo_wbc_prev_url);
-		$this->assertContainsOnly($eo_wbc_prev_url);
 
 		$eo_wbc_product_url = $LoadEO_WBC_Category->eo_wbc_product_url($url);
 		$this->assertNotFalse($eo_wbc_product_url);
-		$this->assertNotNull($eo_wbc_product_url);
-		$this->assertContainsOnly($eo_wbc_product_url);
+		$this->assertNotNull($eo_wbc_product_url);		
 		
 		$eo_wbc_get_category = $LoadEO_WBC_Category->eo_wbc_get_category();
 		$this->assertNotFalse($eo_wbc_get_category);
 		$this->assertNotNull($eo_wbc_get_category);
-		$this->assertContainsOnly($eo_wbc_get_category);
-
 	}
 
 }
