@@ -47,6 +47,8 @@ class EO_WBC_Checkout{
     
     public function checkout_rows($map)
     {
+            if(empty($map) or !is_array($map) or !is_object($map)) return false;
+            
             $price=0;            
             $html="<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><tr><td><div><strong>".
                 __(EO_WBC_Support::eo_wbc_get_product($map['FIRST'][0])->get_title().($map['FIRST'][2]  ? "&nbsp; -&nbsp;".implode(',',EO_WBC_Support::eo_wbc_get_product_variation_attributes($map['FIRST'][2])):''))."</strong>&nbsp;X&nbsp;{$map["FIRST"][1]}</div>";
