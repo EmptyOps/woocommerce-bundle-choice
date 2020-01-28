@@ -28,11 +28,35 @@ class FrontendCategory extends WP_UnitTestCase {
 	public function test_category_data(){
 
 		require_once 'import_data_init.php';
+		
 		global $post;
 		global $wp_query;
+		global $factory_object;
 
-		$wp_query->queried_object = get_term_by( 'slug', 'eo_diamond_shape_cat' , 'product_cat');
-		
+		$wp_query->queried_object = term_exists( 'eo_diamond_shape_cat' , 'product_cat' );
+		if (empty($wp_query->queried_object) or is_wp_error($wp_query->queried_object)) {
+			
+			include_once WC_ABSPATH . 'includes/class-wc-product-factory.php';		
+			WC()->product_factory = new WC_Product_Factory();
+
+			global $_category;
+			global $_atttriutes;
+			global $_maps;
+			global $_product;
+			global $_img_url;
+
+			global $wp_query;
+			global $post;
+
+			$factory_object = new EO_WBC_CatAt();
+
+			$factory_object->create_category($_category);
+			$factory_object->create_attribute($_atttriutes);			
+			$factory_object->add_maps($_maps);				
+			$factory_object->create_products($_product);
+			$wp_query->queried_object = get_term_by( 'slug', 'eo_diamond_shape_cat' , 'product_cat');
+		}
+
 		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Admin/EO_WBC_Support.php');
 		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Frontend/EO_WBC_Breadcrumb.php');
 		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Frontend/EO_WBC_Category.php');		
