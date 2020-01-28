@@ -51,6 +51,18 @@ $variation_id = $variable_product->get_available_variations()[0]['variation_id']
 
 	$sets['FIRST'] = array($post->ID,1,$variation_id);
 	
+	$data = $_product[1]['variation'][0];
+    $data['eo_wbc_target'] = get_option('eo_wbc_first_slug');
+    $data['eo_wbc_product_id'] = $post->ID;
+    $data['quantity'] = 1;
+    $data['add-to-cart'] = $post->ID;
+    $data['product_id'] = $post->ID;
+    $data['variation_id'] = $variation_id;      	
+
+	$cart = base64_encode(json_encode($data));
+
+	$_GET['CART'] = $cart;
+
 	$post = get_page_by_title('Setting #8800950587' , OBJECT, 'product' );        
 $variable_product = new WC_Product_Variable($post->ID);        
 $variation_id = $variable_product->get_available_variations()[0]['variation_id'];
