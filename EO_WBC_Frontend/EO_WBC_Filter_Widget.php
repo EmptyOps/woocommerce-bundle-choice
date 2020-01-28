@@ -616,6 +616,8 @@ class EO_WBC_Filter_Widget {
 		$non_adv_ordered_filter=array();
 		$adv_ordered_filter=array();
 
+		if(!is_array($filter) or !is_object($filter) or empty($filter)) return false;
+
 		foreach ($filter as $key => $item) {
 
 			if($item['advance']==0){
