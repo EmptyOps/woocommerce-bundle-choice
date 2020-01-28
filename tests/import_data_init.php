@@ -51,6 +51,11 @@ $variation_id = $variable_product->get_available_variations()[0]['variation_id']
 
 	$sets['FIRST'] = array($post->ID,1,$variation_id);
 	
+	$_GET['EO_WBC'] = 1;
+	$_GET['BEGIN'] = get_option('eo_wbc_first_slug');
+	$_GET['STEP'] = 1;
+	
+
 	$data = $_product[1]['variation'][0];
     $data['eo_wbc_target'] = get_option('eo_wbc_first_slug');
     $data['eo_wbc_product_id'] = $post->ID;
