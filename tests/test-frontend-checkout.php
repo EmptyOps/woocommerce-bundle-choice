@@ -86,6 +86,7 @@ class FrontendCheckout extends WP_UnitTestCase {
 				$_GET['EO_WBC'] = 1;
 				$_GET['BEGIN'] = get_option('eo_wbc_first_slug');
 				$_GET['STEP'] = 1;
+				$_GET['FIRST'] = $post->ID;
 				
 
 				$data = $_product[1]['variation'][0];
@@ -105,7 +106,7 @@ class FrontendCheckout extends WP_UnitTestCase {
 			$variation_id = $variable_product->get_available_variations()[0]['variation_id'];
 
 				$sets['SECOND'] = array($post->ID,1,$variation_id);
-
+				$_GET['SECOND'] = $post->ID;
 				WC()->session->set('EO_WBC_SETS',$sets);
 				WC()->session->set('EO_WBC_MAPS',$sets);
 
