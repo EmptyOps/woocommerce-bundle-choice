@@ -82,7 +82,7 @@ class FrontendProduct extends WP_UnitTestCase {
 		$this->assertNotNull($make_pair_route);
 		
 
-		$make_pair = $LoadEO_WBC_Product->eo_wbc_make_pair();
+		/*$make_pair = $LoadEO_WBC_Product->eo_wbc_make_pair();
 		
 		$wbc_config = $LoadEO_WBC_Product->eo_wbc_config();
 		
@@ -90,7 +90,7 @@ class FrontendProduct extends WP_UnitTestCase {
 		$add_breadcrumb = $LoadEO_WBC_Product->eo_wbc_add_breadcrumb();
 		
 
-		$eo_wbc_render = $LoadEO_WBC_Product->eo_wbc_render();
+		$eo_wbc_render = $LoadEO_WBC_Product->eo_wbc_render();*/
 		
 		/*$product_route = $LoadEO_WBC_Product->eo_wbc_product_route();
 		$this->assertNotNull($product_route);
@@ -102,8 +102,8 @@ class FrontendProduct extends WP_UnitTestCase {
 
 		$get_category = $LoadEO_WBC_Product->eo_wbc_get_category();
 		$this->assertNotFalse($get_category);
-		$this->assertNotNull($get_category);
-		$this->assertIsString($get_category);
+/*		$this->assertNotNull($get_category);
+		$this->assertIsString($get_category);*/
 	}
 
 }
