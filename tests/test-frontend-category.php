@@ -35,10 +35,7 @@ class FrontendCategory extends WP_UnitTestCase {
 
 		$wp_query->queried_object = term_exists( 'eo_diamond_shape_cat' , 'product_cat' );
 		if (empty($wp_query->queried_object) or is_wp_error($wp_query->queried_object)) {
-			
-			include_once WC_ABSPATH . 'includes/class-wc-product-factory.php';		
-			WC()->product_factory = new WC_Product_Factory();
-
+						
 			global $_category;
 			global $_atttriutes;
 			global $_maps;
@@ -52,8 +49,7 @@ class FrontendCategory extends WP_UnitTestCase {
 
 			$factory_object->create_category($_category);
 			$factory_object->create_attribute($_atttriutes);			
-			$factory_object->add_maps($_maps);				
-			$factory_object->create_products($_product);
+			$factory_object->add_maps($_maps);							
 			$wp_query->queried_object = get_term_by( 'slug', 'eo_diamond_shape_cat' , 'product_cat');
 		}
 
