@@ -31,7 +31,7 @@ class FrontendCart extends WP_UnitTestCase {
 		ob_start();
 		$LoadEO_WBC_Cart = new EO_WBC_Cart();
 		$eo_wbc_cart_service = $LoadEO_WBC_Cart->eo_wbc_cart_service();		
-		$this->assertNotEmpty(ob_get_contents());
+		$this->assertIsString(ob_get_contents());
 	}
 
 }
