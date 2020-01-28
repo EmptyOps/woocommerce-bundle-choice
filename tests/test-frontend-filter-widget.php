@@ -123,15 +123,15 @@ class FrontendFilterWidget extends WP_UnitTestCase {
 		$this->assertNotFalse($product_url);
 		$this->assertNotNull($product_url);		
 
-		$range_min_max = $LoadEO_WBC_Filter_Widget->range_min_max($id,$title='',$filter_type=0);
+		/*$range_min_max = $LoadEO_WBC_Filter_Widget->range_min_max($id,$title='',$filter_type=0);
 		$this->assertIsArray($range_min_max);
-		$this->assertNotFalse($range_min_max);
+		$this->assertNotFalse($range_min_max);*/
 
-		$range_steps = $LoadEO_WBC_Filter_Widget->range_steps($id,$title='',$filter_type=0);
+		/*$range_steps = $LoadEO_WBC_Filter_Widget->range_steps($id,$title='',$filter_type=0);
 		update_option('eo_wbc_cats',serialize($range_steps)); 
 		$this->assertIsArray($range_steps);
 		$this->assertNotFalse($range_steps);
-		$this->assertEquals($range_steps,unserialize(get_option('eo_wbc_cats')));
+		$this->assertEquals($range_steps,unserialize(get_option('eo_wbc_cats')));*/
 
 		/*$id ='34683';
 		$eo_wbc_id_2_slug = $LoadEO_WBC_Filter_Widget->eo_wbc_id_2_slug($id);
