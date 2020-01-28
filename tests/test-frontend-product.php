@@ -31,15 +31,14 @@ class FrontendProduct extends WP_UnitTestCase {
 
 	public function test_product_data(){
 
+		require_once 'import_data_init.php';
+		global $post;
+		global $_product;
+
 		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/library/EO_WBC_CatAt.php');
 		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Admin/EO_WBC_Support.php');
 		require_once(constant('EO_WBC_PLUGIN_DIR'). 'EO_WBC_Frontend/EO_WBC_Product.php');
 
-		require_once 'import_data_init.php';
-
-		global $post;
-
-		global $_product;
 
 		include_once WC_ABSPATH . 'includes/class-wc-product-factory.php';		
 		WC()->product_factory = new WC_Product_Factory();
