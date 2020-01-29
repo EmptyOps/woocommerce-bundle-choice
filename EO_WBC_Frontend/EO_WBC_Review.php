@@ -267,7 +267,7 @@ class EO_WBC_Review
             if(!empty($set)){
 
                 $first=EO_WBC_Support::eo_wbc_get_product((int)($set['FIRST'][2]?$set['FIRST'][2]:$set['FIRST'][0]));
-                $second=EO_WBC_Support::eo_wbc_get_product((int)($set['SECOND'][2]?$set['SECOND'][2]:$set['SECOND'][0]));                
+                $second=EO_WBC_Support::eo_wbc_get_product((int)($set['SECOND'][2]?$set['SECOND'][2]:$set['SECOND'][0]));
 
                 $content=EO_WBC_Breadcrumb::eo_wbc_add_breadcrumb(sanitize_text_field($_GET['STEP']),sanitize_text_field($_GET['BEGIN'])).'<br/>';
                 
@@ -289,7 +289,7 @@ class EO_WBC_Review
                         '</div>'.
                         '<div class="extra content">'.
                             '<div class="header description">'.
-                                ($first->get_price_html()."&nbsp;X&nbsp;".$set['FIRST'][1]).
+                                (wc_price($first->get_price())."&nbsp;X&nbsp;".$set['FIRST'][1]).
                             '</div>'.
                         '</div>'.
                     '</div>'.
@@ -311,7 +311,7 @@ class EO_WBC_Review
                         '</div>'.
                         '<div class="extra content">'.
                             '<div class="header description">'.
-                                ($second->get_price_html()."&nbsp;X&nbsp;".$set['SECOND'][1]).
+                                (wc_price($second->get_price())."&nbsp;X&nbsp;".$set['SECOND'][1]).
                             '</div>'.
                         '</div>'.
                     '</div>'.

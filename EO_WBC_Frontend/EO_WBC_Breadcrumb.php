@@ -19,14 +19,23 @@ class EO_WBC_Breadcrumb
             self::$set = $set;
             self::$tmp_set = $tmp_set; 
             if(!empty($set['FIRST'])){
-                self::$first=EO_WBC_Support::eo_wbc_get_product((int)($set['FIRST'][2]?$set['FIRST'][2]:$set['FIRST'][0]));    
+                self::$first=EO_WBC_Support::eo_wbc_get_product((int)($set['FIRST'][2]?$set['FIRST'][2]:$set['FIRST'][0]));                    
+            }
+
+            if(empty(self::$first) and !empty($_GET['FIRST']) and !empty($tmp_set) and $tmp_set['FIRST'][0]==$_GET['FIRST']) {
+                var_dump("sdfgsjdfklhsg");
+                self::$first=EO_WBC_Support::eo_wbc_get_product((int)($tmp_set['FIRST'][2]?$tmp_set['FIRST'][2]:$tmp_set['FIRST'][0]));
             }
             
             if(!empty($set['SECOND'])){
                 self::$second=EO_WBC_Support::eo_wbc_get_product((int)($set['SECOND'][2]?$set['SECOND'][2]:$set['SECOND'][0]));                
             }                        
+
+            if(empty(self::$second) and !empty($_GET['SECOND']) and !empty($tmp_set) and $tmp_set['SECOND'][0]==$_GET['SECOND']) {
+                self::$second=EO_WBC_Support::eo_wbc_get_product((int)($tmp_set['SECOND'][2]?$tmp_set['SECOND'][2]:$tmp_set['SECOND'][0]));
+            }
         }
-        /* *
+        /**
             CLASS: 
             -------------------------------------------------
             ordered - mark as rodered type of breadcrumb.

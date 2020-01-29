@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=hi000
 Requires at least: 3.5
 Tested up to: 5.3.2
 Requires PHP: 5.3
-Stable tag: 0.5.48
+Stable tag: 0.5.49
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -202,10 +202,12 @@ Yes, it is.
 5. Home page after plugin fully configured.
 
 == Changelog ==
+= 0.5.49 (Jan 29, 2020) =
+  ** Bug-fix ** Bug-fix for breadcrumb section where image was not shown as the user visit back to preview page and UI fix on cart page.
 = 0.5.48 (Jan 29, 2020) =
-  ** Feature ** Bug fix filters not visible due to last update.
+  ** Bug-fix ** Bug fix filters not visible due to last update.
 = 0.5.47 (Jan 28, 2020) =
-  ** Feature ** Bug-fixed warning at filter config page for table.
+  ** Bug-fix ** Bug-fixed warning at filter config page for table.
 = 0.5.45 (Dec 23, 2020) =
   ** Feature ** Range based filter on product attribute.
 = 0.5.44 (Jan 23, 2020) =

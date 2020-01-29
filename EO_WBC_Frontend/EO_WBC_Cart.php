@@ -143,7 +143,8 @@ class EO_WBC_Cart{
                 );
             }
         }
-        WC()->session->set('EO_WBC_MAPS',$eo_wbc_maps);            
+        WC()->session->set('EO_WBC_MAPS',$eo_wbc_maps);      
+
     }
     
     public function eo_wbc_render()
@@ -164,37 +165,27 @@ class EO_WBC_Cart{
                         display: none !important;   
                     }
 
-                    table.cart img{
-                        width: 150px !important;
-                        height: auto !important;
+                    .shop_table td{
+                        font-size: medium;                         
+                        vertical-align: middle !important;
                     }
-                    .column {
-                      float: left;
-                      width: 40% !important;
-                      padding: 5px;
-                    }
-                    .row{
-                        padding: 2px !important;
-                    }
-                    .row::after {
-                      content: "";
-                      clear: both;
-                      display: table;                      
-                    }
-                    .shop_table{
-                        font-size: medium; 
-                        text-align: left !important;                                             
-                    }
+
+
+
                     .woocommerce table.shop_table th
                     {                        
                         padding-right: 2em !important;                        
                     }
+                    
                     #eo_wbc_extra_btn a{
                         margin-bottom: 2em;
                     }
                     #eo_wbc_extra_btn::after{
                         content: '\A';
                         white-space: pre;                         
+                    }
+                    [data-title="Price"],[data-title="Quantity"],[data-title="Cost"]{
+                        text-align: right !important;
                     }
                     @media screen and (max-width: 720px) {
                         td[data-title="Thumbnail"] {
@@ -238,12 +229,14 @@ class EO_WBC_Cart{
 			<td data-title="">
 				<a href="?EO_WBC=1&EO_WBC_REMOVE=<?php echo $index;?>" class="remove" aria-label="Remove this item" >&times;</a> 									
 			</td>
-			<td class="row" data-title="Thumbnail">
-                <div style="display:grid;grid-template-columns: auto auto;">
-    				<span><?php echo $first->get_image('thumbnail'); ?></span>
-    				<?php if($cart['SECOND']):?>						
-    				<span><?php echo $second->get_image('thumbnail'); ?></span>
-				    <?php endif; ?>
+			<td data-title="Thumbnail">
+                <div class="ui two equal width column grid">
+                    <div class="row">
+    				    <span class="column ui small image"><?php echo $first->get_image('thumbnail'); ?></span>
+    				    <?php if($cart['SECOND']):?>						
+    				        <span class="column ui small image"><?php echo $second->get_image('thumbnail'); ?></span>
+				        <?php endif; ?>
+                    </div>
                 </div>
 			</td>
 			<td data-title="Product">			
@@ -259,7 +252,7 @@ class EO_WBC_Cart{
 				<p>
                     <?php 
                         $product_obj=EO_WBC_Support::eo_wbc_get_product($cart['FIRST'][2]?$cart['FIRST'][2]:$cart['FIRST'][0]);
-                        _e($product_obj->get_price_html()); 
+                        _e(wc_price($product_obj->get_price())); 
                     ?>                    
                 </p>
 				<?php $price=($product_obj->get_price()*$cart['FIRST'][1]); ?>
@@ -269,7 +262,7 @@ class EO_WBC_Cart{
 				    <p>
                         <?php 
                             $product_obj=EO_WBC_Support::eo_wbc_get_product($cart['SECOND'][2]?$cart['SECOND'][2]:$cart['SECOND'][0]);
-                            _e($product_obj->get_price_html()); 
+                            _e(wc_price($product_obj->get_price())); 
                         ?>                        
                     </p>
 					<?php $price+=($product_obj->get_price()*$cart['SECOND'][1]); ?>
@@ -282,9 +275,9 @@ class EO_WBC_Cart{
 				<?php endif; ?>
 			</td>
 			<td data-title="Cost">
-				<p><?php                                     
-                    _e(wc_price($price)); 
-                ?></p>
+                <div class="ui middle aligned four column centered grid">
+				    <?php _e(wc_price($price)); ?>
+                </div>
 			</td>								
 		</tr>
 		<?php               
