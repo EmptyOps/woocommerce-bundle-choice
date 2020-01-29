@@ -39,7 +39,7 @@ rm -fR "*"
 #unzip -q -o "$ZIP_FILE"
 
 # Copy all but testing and deployment files.
-rsync -avr --exclude='bin' --exclude='build-cfg' --exclude='builds' --exclude='phpcs.xml.dist' --exclude='phpunit.xml.dist' --exclude='scripts' --exclude='tests' --exclude='wp-cli.phar' --exclude='.git' --exclude='.gitignore' --exclude='.phpintel' --exclude='.travis.yml' "$PROJECT_ROOT/*" "$PLUGIN_BUILDS_PATH/$PLUGIN"
+rsync -avr --exclude='bin' --exclude='build-cfg' --exclude='builds' --exclude='phpcs.xml.dist' --exclude='phpunit.xml.dist' --exclude='scripts' --exclude='tests' --exclude='wp-cli.phar' --exclude='.git' --exclude='.gitignore' --exclude='.phpintel' --exclude='.travis.yml' "$PROJECT_ROOT/" "$PLUGIN_BUILDS_PATH/$PLUGIN"
 
 # Checkout the SVN repo
 svn co -q "http://svn.wp-plugins.org/$PLUGIN" svn
