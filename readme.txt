@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=hi000
 Requires at least: 3.5
 Tested up to: 5.3.2
 Requires PHP: 5.3
-Stable tag: 0.5.49
+Stable tag: 0.5.50
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -19,7 +19,7 @@ WooCommerce Product Bundle Choice – also known as WBC -- helps you to create e
 3. Jewelry Customization
 4. Bulk update Price (Any type of Inventory)
 
-We also have Rapnet Extension, read more about it below in the Extensions section. This is a extension which means this one is not free.
+We also have `Rapnet Extension`, we also support other `Diamond APIs` please read more about it below in the Extensions section. This is a extension which means this one is not free.
 
 It does not matter to which category your website belongs to if you are selling anything that you think can be sold in a pair/bundle then this plugin is absolutely for you. Our philosophy is to provide technology that enables users to make bundles of their choice that is why the name product bundle (of) choice and this becomes truly exciting for users when they have preset recommendation set by website admins.
 
@@ -55,6 +55,18 @@ Note: However, please note that filters are completely free and available in thi
 Order emails sent to customers from your shop will be customized based on what users have built, which helps in providing users with a complete experience.
 
 [Rapnet Integration Extension](https://sphereplugins.com/product/woocommerce-rapnet-integration-extension/)
+
+= Entire list of APIs we support =
+1. Rapnet Instant Inventory API
+1. Glow star Diamond API
+1. Under development, you can pre-order!
+  * IDEX (International Diamond Exchange)
+  * MID House of Diamonds Api
+  * POLYGON Vertual Inventory Api
+  * GEMFIND Diamond Link Api
+  * Virtual Diamond Boutique Api
+  * JewelCloud Api
+1. You can also send us [Request](https://sphereplugins.com/contact-us/") to have us support missing API
 
 Rapnet Instant Inventory Integration Extension is for Diamond/Jewelry websites. Instantly pull the diamonds' feed into your store and ready to go for selling.
 Rapnet integration requires rapnet instant inventory account however as an alternative we are providing other API integrations as well please visit above link to know more about it.
