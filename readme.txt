@@ -1,4 +1,4 @@
-=== WooCommerce Product Bundle Choice | Ring Builder, Pair Maker and Guidance Tool ===
+﻿=== WooCommerce Product Bundle Choice | Ring Builder, Pair Maker and Guidance Tool ===
 Contributors: emptyopssphere
 Tags: woocommerce,product bundle,product bundles,woocommerce product bundles,bundles,bundle,woo,woocommerce product bundle,design your own,buy in pair
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=hi0001234d1gmail.com&item_name=+Favorite+WooCommerce+Product+Bundle+Choice++Download+WooCommerce+Product+Bundle+Choice+Plugin+Donation¤cy_code=USD&source=url
@@ -214,6 +214,8 @@ Yes, it is.
 5. Home page after plugin fully configured.
 
 == Changelog ==
+= 0.5.51 (Jan 31, 2020) =
+  ** Feature ** Adding feature to support comma based integer filtering.
 = 0.5.49 (Jan 29, 2020) =
   ** Bug-fix ** Bug-fix for breadcrumb section where image was not shown as the user visit back to preview page and UI fix on cart page.
 = 0.5.48 (Jan 29, 2020) =

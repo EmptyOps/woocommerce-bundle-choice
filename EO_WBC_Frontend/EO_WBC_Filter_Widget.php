@@ -203,7 +203,7 @@ class EO_WBC_Filter_Widget {
 		$field_slug='';
 		$min_value=array("id"=>'',"slug"=>'',"name"=>"0","type"=>'');
 		$max_value=array("id"=>'',"slug"=>'',"name"=>"0","type"=>'');
-
+		$seprator = '.';
 		if ($filter_type) {
 
 			$term=EO_WBC_Support::eo_wbc_get_attribute($id);
@@ -222,16 +222,24 @@ class EO_WBC_Filter_Widget {
 
 				if( is_wp_error($taxonomies) or empty($taxonomies) ) return false;
 
-				$min_value=array("id"=>$taxonomies[0]->term_id,"slug"=>$taxonomies[0]->slug,"name"=>$taxonomies[0]->name,"type"=>'attr');
-				$max_value=array("id"=>$taxonomies[0]->term_id,"slug"=>$taxonomies[0]->slug,"name"=>$taxonomies[0]->name,"type"=>'attr');
+				$min_value=array("id"=>$taxonomies[0]->term_id,"slug"=>$taxonomies[0]->slug,"name"=>str_replace(',','.',$taxonomies[0]->name),"type"=>'attr');
+				$max_value=array("id"=>$taxonomies[0]->term_id,"slug"=>$taxonomies[0]->slug,"name"=>str_replace(',','.',$taxonomies[0]->name),"type"=>'attr');
 
 				foreach ($taxonomies as $taxonomy){
-					if($taxonomy->name < $min_value['name']){
-						$min_value=array("id"=>$taxonomy->term_id,"slug"=>$taxonomy->slug,"name"=>$taxonomy->name,"type"=>'attr');
+					if(str_replace(',','.',$taxonomy->name) < str_replace(',','.',$min_value['name'])){
+						$min_value=array("id"=>$taxonomy->term_id,"slug"=>$taxonomy->slug,"name"=>str_replace(',','.',$taxonomy->name),"type"=>'attr');
+						//To markdown if coma is used as seperator of in numeric value.
+						if(strpos($taxonomy->name,',')!==false){
+							$seprator = ',';
+						}
 					}
 
-					if($taxonomy->name > $max_value['name']){
-						$max_value=array("id"=>$taxonomy->term_id,"slug"=>$taxonomy->slug,"name"=>$taxonomy->name,"type"=>'attr');
+					if(str_replace(',','.',$taxonomy->name) > str_replace(',','.',$max_value['name'])){
+						$max_value=array("id"=>$taxonomy->term_id,"slug"=>$taxonomy->slug,"name"=>str_replace(',','.',$taxonomy->name),"type"=>'attr');
+						//To markdown if coma is used as seperator of in numeric value.
+						if(strpos($taxonomy->name,',')!==false){
+							$seprator = ',';
+						}
 					}				                	  	
 	        	}
 		        
@@ -276,7 +284,7 @@ class EO_WBC_Filter_Widget {
 		    	return false;
 		    }
 		}		
-		return array('min_value'=>$min_value,'max_value'=>$max_value,'title'=>$field_title,'slug'=>$field_slug);
+		return array('min_value'=>$min_value,'max_value'=>$max_value,'title'=>$field_title,'slug'=>$field_slug,'seprator'=>$seprator);
 	}
 	
 	public function get_width_class($percent_value){
@@ -331,15 +339,15 @@ class EO_WBC_Filter_Widget {
 			<div class="ui tiny form">
 			  <div class="three fields">
 			    <div class="field">	      
-			      <input value="<?php echo $filter['min_value']['name']; ?>" type="text" class="text_slider_<?php echo $filter['slug'] ?> aligned left" name="text_min_<?php echo $filter['slug'] ?>">
+			      <input value="<?php echo ($filter['seprator']=='.'?$filter['min_value']['name']:str_replace('.',',',$filter['min_value']['name'])); ?>" type="text" class="text_slider_<?php echo $filter['slug'] ?> aligned left" name="text_min_<?php echo $filter['slug'] ?>">
 			    </div>
 			    <div class="field"></div>
 			    <div class="field">	      
-			      <input value="<?php echo $filter['max_value']['name']; ?>" type="text" class="text_slider_<?php echo $filter['slug'] ?> aligned right" name="text_max_<?php echo $filter['slug'] ?>">
+			      <input value="<?php echo ($filter['seprator']=='.'?$filter['max_value']['name']:str_replace('.',',',$filter['max_value']['name'])); ?>" type="text" class="text_slider_<?php echo $filter['slug'] ?> aligned right" name="text_max_<?php echo $filter['slug'] ?>">
 			    </div>
 			  </div>	  
 			</div>			
-			<div class="ui range slider text_slider" id="text_slider_<?php echo $filter['slug'] ?>" data-min="<?php echo $filter['min_value']['name']; ?>" data-max="<?php echo $filter['max_value']['name']; ?>" data-slug="<?php echo $filter['slug'] ?>"></div>
+			<div class="ui range slider text_slider" id="text_slider_<?php echo $filter['slug'] ?>" data-min="<?php echo $filter['min_value']['name']; ?>" data-max="<?php echo $filter['max_value']['name']; ?>" data-slug="<?php echo $filter['slug'] ?>" data-sep="<?php echo $filter['seprator']; ?>"></div>
 		</div>
 		<?php
 		else:
@@ -950,8 +958,8 @@ class EO_WBC_Filter_Widget {
 							if(typeof __slugs != typeof undefined && __slugs != false){
 								//PASS
 							} else {
-					        	$("input[name='text_min_"+$(e).attr('data-slug')+"']").val(Number(min).toFixed(2));
-					        	$("input[name='text_max_"+$(e).attr('data-slug')+"']").val(Number(max).toFixed(2));
+					        	$("input[name='text_min_"+$(e).attr('data-slug')+"']").val(_sep=='.'?Number(min).toFixed(2):(Number(min).toFixed(2)).toString().replace('.',','));
+					        	$("input[name='text_max_"+$(e).attr('data-slug')+"']").val(_sep=='.'?Number(max).toFixed(2):(Number(max).toFixed(2)).toString().replace('.',','));
 					        }					      	
 						}
 
@@ -960,6 +968,7 @@ class EO_WBC_Filter_Widget {
 							_labels = $(e).attr('data-labels');
 							_min = Number ($(e).attr('data-min'));						
 							_max = Number($(e).attr('data-max'));
+							_sep = $(e).attr('data-sep');
 
 							if(typeof _labels != typeof undefined && _labels != false){
 								_labels=_labels.split(',');
@@ -983,6 +992,7 @@ class EO_WBC_Filter_Widget {
 						        	$("input[name='max_"+$(e).attr('data-slug')+"']").val(__slugs.split(',')[max]);
 
 								} else {
+
 						        	$("input[name='min_"+$(e).attr('data-slug')+"']").val(Number(min).toFixed(2));
 						        	$("input[name='max_"+$(e).attr('data-slug')+"']").val(Number(max).toFixed(2));
 						        }

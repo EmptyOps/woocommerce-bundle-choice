@@ -9,9 +9,14 @@ class EO_WBC_Filter
         else*/ {        	
             if($numeric_range)
             {	
-            	$list=get_terms(array('taxonomy'=>$term,'hide_empty'=>FALSE));            	            	            	
+            	$list=get_terms(array('taxonomy'=>$term,'hide_empty'=>FALSE));  
+
+            	$min = str_replace(',', '.', $min);
+            	$max = str_replace(',', '.', $max);
+
             	$list=array_filter($list,function($element) use($min,$max){
-					return ( (float)$element->name >= (float)$min AND (float)$element->name <= (float)$max );
+
+					return ( (float)str_replace(',','.',$element->name) >= (float)$min AND (float)str_replace(',','.',$element->name) <= (float)$max );
 				});			
 				$list_slug = array();
 				array_walk($list,function($e) use(&$list_slug){
