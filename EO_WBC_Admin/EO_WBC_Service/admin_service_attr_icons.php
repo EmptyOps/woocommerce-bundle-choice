@@ -201,6 +201,6 @@ class AttrIcons{
 	}
 }
 
-if(function_exists('get_current_screen')){
+if(!empty($_GET['taxonomy']) and is_admin()) {
 	new AttrIcons();
 }
