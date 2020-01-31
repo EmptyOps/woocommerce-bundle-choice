@@ -25,11 +25,11 @@ VERSION=$(php -f "$PLUGIN_BUILD_CONFIG_PATH/utils/version.php")
 # Check if the tag exists for the version we are building
 TAG=$(svn ls "https://plugins.svn.wordpress.org/$PLUGIN/tags/$VERSION")
 error=$?
-#if [ $error == 0 ]; then
+if [ $error == 0 ]; then
     # Tag exists, don't deploy
-    #echo "Tag already exists for version $VERSION, aborting deployment"
-    #exit 1
-#fi
+    echo "Tag already exists for version $VERSION, aborting deployment"
+    exit 1
+fi
   
 cd "$PLUGIN_BUILDS_PATH"
 # Remove any file so we start from scratch
