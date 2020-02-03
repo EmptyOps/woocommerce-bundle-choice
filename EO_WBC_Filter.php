@@ -120,7 +120,7 @@ class EO_WBC_Filter
 			                        $tax_query[]=array(
 			                            'taxonomy' => $attr,
 			                            'field' => 'slug',
-			                            'terms' => explode(',',$_GET['checklist_'.$attr]),
+			                            'terms' => array_filter(explode(',',$_GET['checklist_'.$attr])),
 			                            'compare'=>'EXISTS IN'
 			                        );     
 			                    } 

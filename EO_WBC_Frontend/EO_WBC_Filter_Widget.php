@@ -892,8 +892,21 @@ class EO_WBC_Filter_Widget {
 				<input type="hidden" name="products_in" value="<?php echo $_GET['products_in'] ?>" />			
 			<?php endif; ?>
 
-			<?php				
-				if(!empty($this->__filters)){
+			<?php		
+				if(!empty($this->__filters)){	
+
+					/* This block shall be removed as its purpose is to remove duplicates as we do not know the cause of multiple instence. */
+					$serialized_filter = array_map(function($e){
+						return serialize($e);
+					},$this->__filters);
+
+					$serialized_filter = array_unique($serialized_filter);
+
+					$this->__filters = array_map(function($e){
+						return unserialize($e);
+					},$serialized_filter);				
+					/* To be removed block ends. */
+
 					foreach ($this->__filters as $__filter) {						
 						?>
 							<input type="<?php echo $__filter['type'] ?>" name="<?php echo $__filter['name'] ?>" id="<?php echo $__filter['id'] ?>" class="<?php echo $__filter['class'] ?>" value="<?php echo $__filter['value'] ?>" <?php echo (isset($__filter['data-edit'])?'data-edit="'.$__filter['data-edit'].'"':'') ?>/>
@@ -1161,7 +1174,7 @@ class EO_WBC_Filter_Widget {
 			if(empty($term_item->term_id) and $type == 1){
 
 				$icon = get_term_meta( $term_item->id, $term->slug . '_attachment');
-				if(is_array($icon)){
+				if(is_array($icon) and !empty($icon)){
 					$icon = $icon[0];
 				} else {
 					$icon = $woocommerce->plugin_url() . '/assets/images/placeholder.png';
@@ -1195,8 +1208,6 @@ class EO_WBC_Filter_Widget {
 							"mark"=> $mark
 						);					
 			
-						
-
 			if(in_array($term_item->slug,$query_list)) {
 				$cat_filter_list[]=$term_item->slug;
 			}
@@ -1281,11 +1292,17 @@ class EO_WBC_Filter_Widget {
 		<script>
 			jQuery(document).ready(function($){
 				
-				__data_filter_slug="<?php echo $term->slug; ?>";
-				if(__data_filter_slug){
+				/*__data_filter_slug="<?php echo $term->slug; ?>";*/
+				/*if(__data_filter_slug){*/
+				if("<?php echo $term->slug; ?>") {
 					//TO BE FIXED LATER.
-					jQuery('[data-filter="'+__data_filter_slug+'"]:not(.none_editable)').off();
-					jQuery('[data-filter="'+__data_filter_slug+'"]:not(.none_editable)').on('click',function(e){
+					/*jQuery('[data-filter="'+__data_filter_slug+'"]:not(.none_editable)').off();
+					jQuery('[data-filter="'+__data_filter_slug+'"]:not(.none_editable)').on('click',function(e){*/
+
+					jQuery('[data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)').off();
+					jQuery('[data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)').on('click',function(e){
+
+						
 						
 						e.stopPropagation();
 						e.preventDefault();
@@ -1296,14 +1313,22 @@ class EO_WBC_Filter_Widget {
 						var filter_list= undefined;
 						var filter_target = undefined;
 
+						console.log(icon_filter_type);
+
 						if(icon_filter_type == 1) {
-							filter_list = jQuery('[name="checklist_'+__data_filter_slug+'"]');							
+							/*filter_list = jQuery('[name="checklist_'+__data_filter_slug+'"]');*/
+							filter_list = jQuery('[name="checklist_'+"<?php echo $term->slug; ?>"+'"]');
 							filter_target = jQuery('[name="_attribute"]');
+
+							/*console.log(jQuery('[name="checklist_'+__data_filter_slug+'"]'));*/
+							console.log(jQuery('[name="checklist_'+"<?php echo $term->slug; ?>"+'"]'));
+							console.log(jQuery('[name="_attribute"]'));
 						} else {
-							filter_list = jQuery('[name="cat_filter_'+__data_filter_slug+'"]');
+							/*filter_list = jQuery('[name="cat_filter_'+__data_filter_slug+'"]');*/
+							filter_list = jQuery('[name="cat_filter_'+"<?php echo $term->slug; ?>"+'"]');
 							filter_target = jQuery('[name="_category"]');
 						}						
-																
+						
 						if(filter_list.val().includes( jQuery(this).attr('data-slug'))){
 							filter_list.val(filter_list.val().replace(','+jQuery(this).attr('data-slug'),''));
 						}
@@ -1329,9 +1354,11 @@ class EO_WBC_Filter_Widget {
 						var icon_filter_type = "<?php echo $type; ?>";
 						var filter_list= undefined;
 						if(icon_filter_type == 1) {
-							filter_list = jQuery('[name="checklist_'+__data_filter_slug+'"]');
+							/*filter_list = jQuery('[name="checklist_'+__data_filter_slug+'"]');*/
+							filter_list = jQuery('[name="checklist_'+"<?php echo $term->slug; ?>"+'"]');
 						} else {
-							filter_list = jQuery('[name="cat_filter_'+__data_filter_slug+'"]');
+							/*filter_list = jQuery('[name="cat_filter_'+__data_filter_slug+'"]');*/
+							filter_list = jQuery('[name="cat_filter_'+"<?php echo $term->slug; ?>"+'"]');
 						}
 
 						if(jQuery(filter_list).attr('data-edit')=='1') {
@@ -1359,8 +1386,7 @@ class EO_WBC_Filter_Widget {
 		}
     }
     
-    public function eo_wbc_get_category()
-    {        
+    public function eo_wbc_get_category() {        
         global $wp_query;        
         
         //get list of slug which are ancestors of current page item's category
