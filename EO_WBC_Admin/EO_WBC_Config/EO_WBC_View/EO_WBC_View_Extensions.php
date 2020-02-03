@@ -65,7 +65,7 @@
 	    -webkit-box-direction: normal;
 	    -webkit-flex-direction: column;
 	    flex-direction: column;
-	    height: 250px;
+	    height: 500px;
 	    -webkit-box-pack: justify;
 	    -webkit-justify-content: space-between;
 	    justify-content: space-between;
@@ -143,6 +143,23 @@
 					<div class="addons-banner-block-item-content">
 						<h3>Rapnet Instant Inventory</h3>
 						<p>Add the Rapnet Instant Inventory showcase to your site. It will be customized as per your requirements.</p>
+
+						<p style="font-size: x-small;"><strong>Entire list of APIs we support</strong><br/>
+				          1. Rapnet Instant Inventory API<br/>
+				          2. Glow star Diamond API<br/>
+				          3. Under development, you can pre-order!
+				      	</p>
+			              <ol style="font-size: x-small;">
+			                <li>IDEX (International Diamond Exchange)</li>
+			                <li>MID House of Diamonds Api</li>
+			                <li>POLYGON Vertual Inventory Api</li>
+			                <li>GEMFIND Diamond Link Api</li>
+			                <li>Virtual Diamond Boutique Api</li>
+			                <li>JewelCloud Api</li>
+			              </ol>
+			            <p style="font-size: x-small;">
+				          4. You can also send us <a href="https://sphereplugins.com/contact-us/">Request</a> to have us support missing API
+				        </p>
 						<div class="inline-buttons">
 							<a class="addons-button addons-button-solid" target="_blank" href="https://sphereplugins.com/product/rapnet-instant-inventory-integration/">I'm Interested</a>							
 						</div>

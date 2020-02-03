@@ -1,6 +1,26 @@
 
 <?php
 
+function eo_wbc_jpc_get_apis() {    
+
+    if(!(is_plugin_active('diamond-api-integrator/diamond-api-integrator.php') or is_plugin_active('xl-csv-import-export/excel-csv-import-export.php'))){ return false; }
+
+    $_data = unserialize(get_option( 'eo_dapii_data', 'a:0:{}' ));      
+    if(!empty($_data['apis']) and is_array($_data) ) {
+
+        $api_option='';
+        foreach ($_data['apis'] as $key => $value) {            
+            $api_option = $api_option . '<div class="item" data-value="'.$key.'">'.$value['name'].'</div>';  
+        }  
+        $api_option = $api_option . '<div class="item" data-value="GlowStar">Glow Star</div>' .
+                  '<div class="item" data-value="Rapnet">Rapnet</div>';
+        return $api_option;
+
+    } else {
+        return false;
+    }
+}
+
 function eo_wbc_jpc_list_categories($slug='',$prefix=''){
     $map_base = get_categories(array(
         'exclude'=>array(1),
@@ -73,6 +93,33 @@ wp_enqueue_script( 'eo-wbc-ui' );
             <div class="ui segment">
                 <h4 class="ui dividing header">Price Control</h4>
                 <p class="info">(Set pricing method to update price in bulk. For eg.: based on gold,diamond price changes, you might want to bulk update prices.)</p>
+                <?php 
+                // Check if API Integrator/CSV_XML_Upload/Download is installed.
+                $_api_list = eo_wbc_jpc_get_apis();
+                if($_api_list !== false) :                    
+                
+                ?>
+                    <div class="two fields">
+                        <div class="field">
+                            <label>API/Supplier</label>
+                            <div class="ui selection dropdown">
+                              <input type="hidden" name="jpc_api">
+                              <i class="dropdown icon"></i>
+                              <div class="default text">Select API</div>
+                              <div class="menu">
+                                <!-- <div class="item" data-value="Default">Default</div>
+                                <div class="item" data-value="GlowStar">Glow Star</div>
+                                <div class="item" data-value="Rapnet">Rapnet</div> -->
+                                <?php echo $_api_list; ?>
+
+                              </div>
+                            </div>
+                        </div> 
+                    </div>
+                <?php 
+                endif;
+                ?>
+
                 <div class="two fields">
                     <div class="field">
                         <label>Field</label>    
@@ -188,6 +235,9 @@ wp_enqueue_script( 'eo-wbc-ui' );
     </form>
     <script>
         jQuery(document).ready(function($){
+            
+            jQuery('.dropdown').dropdown();
+
             window.eo_wbc=new Object();
 
             window.eo_wbc.attributes=JSON.parse('<?php echo json_encode(eo_wbc_jpc_attributes_values()); ?>')

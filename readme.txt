@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=hi000
 Requires at least: 3.5
 Tested up to: 5.3.2
 Requires PHP: 5.3
-Stable tag: 0.5.51
+Stable tag: 0.5.52
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -214,6 +214,8 @@ Yes, it is.
 5. Home page after plugin fully configured.
 
 == Changelog ==
+= 0.5.52 (Feb 3, 2020) =
+  ** Feature ** Adding api selection list to inventory management section and fixing error for filter on based of attributes for icons.
 = 0.5.51 (Jan 31, 2020) =
   ** Feature ** Adding feature to support comma based integer filtering.
 = 0.5.49 (Jan 29, 2020) =

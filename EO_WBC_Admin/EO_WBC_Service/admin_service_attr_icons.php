@@ -200,7 +200,4 @@ class AttrIcons{
 		return $columns;
 	}
 }
-
-if(!empty($_GET['taxonomy']) and is_admin()) {
-	new AttrIcons();
-}
+new AttrIcons();
