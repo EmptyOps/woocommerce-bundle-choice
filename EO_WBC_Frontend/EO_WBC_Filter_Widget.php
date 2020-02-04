@@ -312,7 +312,7 @@ class EO_WBC_Filter_Widget {
 	}
 
 	//Generate text slider/ non-labeled sliders
-	public function input_text_slider($id,$title,$filter_type,$desktop=1,$width='50') {
+	public function input_text_slider($id,$title,$filter_type,$desktop=1,$width='50',$reset =  0) {
 		$filter=$this->range_min_max($id,$title,$filter_type);						
 		if(!$filter) return false;		
 
@@ -335,7 +335,13 @@ class EO_WBC_Filter_Widget {
 			
 		?>
 		<div class="<?php echo $this->get_width_class($width); ?>">
-			<h3 class="ui header"><?php echo $filter['title']; ?></h3>			
+			<p>
+				<span class="ui header"><?php echo $filter['title']; ?></span>
+				<?php if($reset): ?>
+				&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_slider(event,'<?php echo $filter['slug'] ?>','<?php echo $filter['min_value']['name']; ?>','<?php echo $filter['max_value']['name']; ?>')">&nbsp;<u>reset</u></span>
+				<?php endif; ?>
+			</p>
+
 			<div class="ui tiny form">
 			  <div class="three fields">
 			    <div class="field">	      
@@ -355,6 +361,9 @@ class EO_WBC_Filter_Widget {
 		<div class="title">
 		    <i class="dropdown icon"></i>		    
 		    <?php echo $filter['title']; ?>
+		    <?php if($reset): ?>
+			&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_slider(event,'<?php echo $filter['slug'] ?>','<?php echo $filter['min_value']['name']; ?>','<?php echo $filter['max_value']['name']; ?>')">&nbsp;<u>reset</u></span>
+			<?php endif; ?>
 		</div>
 	  	<div class="content">	
 	  		<div class="ui tiny form">
@@ -442,7 +451,7 @@ class EO_WBC_Filter_Widget {
 	}
 
 	//Generate step slider;
-	public function input_step_slider($id,$title,$filter_type,$desktop=1,$width='50') {
+	public function input_step_slider($id,$title,$filter_type,$desktop=1,$width='50',$reset = 0) {		
 
 		$filter=$this->range_steps($id,$title,$filter_type);
 		if(empty($filter)) return false;
@@ -470,7 +479,12 @@ class EO_WBC_Filter_Widget {
 			
 		?>
 		<div class="<?php echo $this->get_width_class($width); ?>">
-			<h3 class="ui header"><?php echo $filter['title']; ?></h3>		
+			<p>
+				<span class="ui header"><?php echo $filter['title']; ?></span>
+				<?php if($reset): ?>
+				&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_slider(event,'<?php echo $filter['slug'] ?>',0,<?php echo count(array_filter($items_slug)); ?>)">&nbsp;<u>reset</u></span>
+				<?php endif; ?>
+			</p>
 
 			<div class="ui labeled ticked range slider" id="text_slider_<?php echo $filter['slug'] ?>" data-slug="<?php echo $filter['slug'] ?>" data-labels="<?php echo(implode(",", $items_name)); ?>" data-slugs="<?php echo(implode(",", $items_slug)); ?>" style="bottom: -12.5%;"></div>
 		</div>
@@ -480,6 +494,9 @@ class EO_WBC_Filter_Widget {
 		<div class="title">
 		    <i class="dropdown icon"></i>		    
 		    <?php echo $filter['title']; ?>
+		    <?php if($reset): ?>
+			&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_slider(event,'<?php echo $filter['slug'] ?>',0,<?php echo count(array_filter($items_slug)); ?>)">&nbsp;<u>reset</u></span>
+			<?php endif; ?>
 		</div>
 	  	<div class="content">		    
 	  		<div class="ui labeled ticked range slider" id="text_slider_<?php echo $filter['slug'] ?>" data-slug="<?php echo $filter['slug'] ?>" data-labels="<?php echo(implode(",", $items_name)); ?>" data-slugs="<?php echo(implode(",", $items_slug)); ?>" style="bottom: -12.5%;"></div>
@@ -489,7 +506,7 @@ class EO_WBC_Filter_Widget {
 	}
 
 	//Generate checkbox based filter option;
-	public function input_checkbox($id,$title,$filter_type,$desktop=1,$width='50') {
+	public function input_checkbox($id,$title,$filter_type,$desktop = 1, $reset = 0, $width = '50') {
 		$filter=$this->range_steps($id,$title,$filter_type);
 		if(empty($filter)) return false;
 
@@ -504,7 +521,12 @@ class EO_WBC_Filter_Widget {
 			
 		?>
 		<div class="<?php echo $this->get_width_class($width); ?>">
-			<h3 class="ui header"><?php echo($filter['title']); ?></h3>			
+			<p>
+				<span class="ui header"><?php echo($filter['title']); ?></span> 
+				<?php if($reset): ?>
+				&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_checkbox(event,'.checklist_<?php echo $filter['slug'] ?>')">&nbsp;<u>reset</u></span>
+				<?php endif; ?>
+			</p>
 			<div class="ui tiny form">
 				<?php foreach ($filter['list'] as $term) : ?>
 					<div class="ui checkbox checked">
@@ -520,6 +542,9 @@ class EO_WBC_Filter_Widget {
 		<div class="title">
 		    <i class="dropdown icon"></i>		    
 		    <?php echo($filter['title']); ?>
+		    <?php if($reset): ?>
+			&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_checkbox(event,'.checklist_<?php echo $filter['slug'] ?>')">&nbsp;<u>reset</u></span>	
+			<?php endif; ?>
 		</div>
 	  	<div class="content">	
 	  		<div class="ui tiny form">
@@ -535,7 +560,7 @@ class EO_WBC_Filter_Widget {
 		endif;
 	}
 
-	private function slider_price($desktop=1,$width='50') {
+	private function slider_price($desktop=1,$width='50', $reset = 1) {
 
 		$prices = $this->get_filtered_price();
 		$min    = floor( $prices->min_price );
@@ -561,7 +586,12 @@ class EO_WBC_Filter_Widget {
 			
 		?>
 		<div class="<?php echo $this->get_width_class($width); ?>">
-			<h3 class="ui header">Price</h3>			
+			<p>
+				<span class="ui header">Price</span>				
+				<?php if($reset): ?>
+				&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_slider(event,'#text_slider_price')">&nbsp;<u>reset</u></span>
+				<?php endif; ?>
+			</p>			
 			<div class="ui tiny form">
 			  <div class="three fields">
 			    <div class="field">	      
@@ -580,7 +610,10 @@ class EO_WBC_Filter_Widget {
 		?>
 		<div class="title">
 		    <i class="dropdown icon"></i>		    
-		    Price
+		    Price		    
+			<?php if($reset): ?>
+			&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_slider(event,'#text_slider_price')">&nbsp;<u>reset</u></span>
+			<?php endif; ?>
 		</div>
 	  	<div class="content">	
 	  		<div class="ui tiny form">
@@ -669,7 +702,7 @@ class EO_WBC_Filter_Widget {
 
 									if($item['type']==0 && ($item['input']=='icon' OR $item['input']=='icon_text')) {
 
-										$this->eo_wbc_filter_ui_icon($item['name'],$item['label'],$item['type'],$item['input'],1,$item['column_width'],(isset($item['icon_size'])?$item['icon_size']:false),(isset($item['font_size'])?$item['font_size']:false));							
+										$this->eo_wbc_filter_ui_icon($item['name'],$item['label'],$item['type'],$item['input'],1,$item['column_width'],(isset($item['icon_size'])?$item['icon_size']:false),(isset($item['font_size'])?$item['font_size']:false),$reset=!empty($item['reset']));							
 										
 										$term = get_term_by('id',$item['name'],'product_cat');
 
@@ -679,25 +712,25 @@ class EO_WBC_Filter_Widget {
 									}
 									elseif ($item['type']==0 ) {
 
-										$this->input_step_slider($item['name'],$item['label'],$item['type'],1,$item['column_width']);		
+										$this->input_step_slider($item['name'],$item['label'],$item['type'],1,$item['column_width'],$reset=!empty($item['reset']));		
 									}
 									elseif($item['type']==1 ) {
 										switch ($item['input']) {
 											case 'icon':
 											case 'icon_text':												
-												$this->eo_wbc_filter_ui_icon($item['name'],$item['label'],$item['type'],$item['input'],1,$item['column_width'],(isset($item['icon_size'])?$item['icon_size']:false),(isset($item['font_size'])?$item['font_size']:false));				
+												$this->eo_wbc_filter_ui_icon($item['name'],$item['label'],$item['type'],$item['input'],1,$item['column_width'],(isset($item['icon_size'])?$item['icon_size']:false),(isset($item['font_size'])?$item['font_size']:false),$reset=!empty($item['reset']));				
 												break;
 											case 'numeric_slider':
-												$this->input_text_slider($item['name'],$item['label'],$item['type'],1,$item['column_width']);
+												$this->input_text_slider($item['name'],$item['label'],$item['type'],1,$item['column_width'],$reset=!empty($item['reset']));
 												break;
 											case 'text_slider':
-												$this->input_step_slider($item['name'],$item['label'],$item['type'],1,$item['column_width']);
+												$this->input_step_slider($item['name'],$item['label'],$item['type'],1,$item['column_width'],$reset=!empty($item['reset']));
 												break;
 											case 'checkbox':
-												$this->input_checkbox($item['name'],$item['label'],$item['type'],1,$item['column_width']);
+												$this->input_checkbox($item['name'],$item['label'],$item['type'],1,$item['column_width'],$reset=!empty($item['reset']));
 												break;						
 											default:
-												$this->input_step_slider($item['name'],$item['label'],$item['type'],1,$item['column_width']);
+												$this->input_step_slider($item['name'],$item['label'],$item['type'],1,$item['column_width'],$reset=!empty($item['reset']));
 										}		
 										$term = EO_WBC_Support::eo_wbc_get_attribute($item['name']);		
 										if(!empty($term) and !is_wp_error($term) ){
@@ -718,7 +751,7 @@ class EO_WBC_Filter_Widget {
 
 										if($item['type']==0 && ($item['input']=='icon' OR $item['input']=='icon_text')) {
 
-											$this->eo_wbc_filter_ui_icon($item['name'],$item['label'],$item['type'],$item['input'],0,$item['column_width'],(isset($item['icon_size'])?$item['icon_size']:false),(isset($item['font_size'])?$item['font_size']:false));								
+											$this->eo_wbc_filter_ui_icon($item['name'],$item['label'],$item['type'],$item['input'],0,$item['column_width'],(isset($item['icon_size'])?$item['icon_size']:false),(isset($item['font_size'])?$item['font_size']:false),$reset=!empty($item['reset']));								
 											$cat_term=@get_term_by('id',$item['name'],'product_cat');
 											
 											if(!empty($cat_term) and !is_wp_error($cat_term)){
@@ -727,26 +760,26 @@ class EO_WBC_Filter_Widget {
 										}
 										elseif ($item['type']==0 ) {
 
-											$this->input_step_slider($item['name'],$item['label'],$item['type'],0,$item['column_width']);		
+											$this->input_step_slider($item['name'],$item['label'],$item['type'],0,$item['column_width'],$reset=!empty($item['reset']));		
 										}
 										elseif($item['type']==1 ) {
 
 											switch ($item['input']) {
 												case 'icon':
 												case 'icon_text':												
-													$this->eo_wbc_filter_ui_icon($item['name'],$item['label'],$item['type'],$item['input'],0,$item['column_width'],(isset($item['icon_size'])?$item['icon_size']:false),(isset($item['font_size'])?$item['font_size']:false));			
+													$this->eo_wbc_filter_ui_icon($item['name'],$item['label'],$item['type'],$item['input'],0,$item['column_width'],(isset($item['icon_size'])?$item['icon_size']:false),(isset($item['font_size'])?$item['font_size']:false),$reset=!empty($item['reset']));			
 													break;
 												case 'numeric_slider':
-													$this->input_text_slider($item['name'],$item['label'],$item['type'],0,$item['column_width']);
+													$this->input_text_slider($item['name'],$item['label'],$item['type'],0,$item['column_width'],$reset=!empty($item['reset']));
 													break;
 												case 'text_slider':
-													$this->input_step_slider($item['name'],$item['label'],$item['type'],0,$item['column_width']);
+													$this->input_step_slider($item['name'],$item['label'],$item['type'],0,$item['column_width'],$reset=!empty($item['reset']));
 													break;
 												case 'checkbox':
-													$this->input_checkbox($item['name'],$item['label'],$item['type'],0,$item['column_width']);
+													$this->input_checkbox($item['name'],$item['label'],$item['type'],0,$item['column_width'],$reset=!empty($item['reset']));
 													break;						
 												default:
-													$this->input_step_slider($item['name'],$item['label'],$item['type'],0,$item['column_width']);
+													$this->input_step_slider($item['name'],$item['label'],$item['type'],0,$item['column_width'],$reset=!empty($item['reset']));
 											}	
 													
 											$term = EO_WBC_Support::eo_wbc_get_attribute($item['name']);
@@ -971,6 +1004,7 @@ class EO_WBC_Filter_Widget {
 							if(typeof __slugs != typeof undefined && __slugs != false){
 								//PASS
 							} else {
+								_sep = $(e).attr('data-sep');
 					        	$("input[name='text_min_"+$(e).attr('data-slug')+"']").val(_sep=='.'?Number(min).toFixed(2):(Number(min).toFixed(2)).toString().replace('.',','));
 					        	$("input[name='text_max_"+$(e).attr('data-slug')+"']").val(_sep=='.'?Number(max).toFixed(2):(Number(max).toFixed(2)).toString().replace('.',','));
 					        }					      	
@@ -1136,7 +1170,7 @@ class EO_WBC_Filter_Widget {
 		<?php			
 	}
 
-	public function eo_wbc_filter_ui_icon($id,$title='',$type=0,$input='icon',$desktop=1,$width='50',$icon_width=FALSE,$label_size=FALSE) {
+	public function eo_wbc_filter_ui_icon($id,$title='',$type=0,$input='icon',$desktop=1,$width='50',$icon_width=FALSE,$label_size=FALSE,$reset = 0) {
 		global $woocommerce;
 		$icon_css = '';
 		if($input == 'icon'){
@@ -1241,7 +1275,12 @@ class EO_WBC_Filter_Widget {
 			
 		?>
 			<div class="<?php echo $this->get_width_class($width); ?>">
-				<h3 class="ui header"><?php echo($title); ?></h3>						
+				<p>
+					<spna class="ui header"><?php echo($title); ?></spna>
+					<?php if($reset): ?>
+				&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_icon(event,'<?php echo $term->slug; ?>')">&nbsp;<u>reset</u></span>
+				<?php endif; ?>
+				</p>
 				<div class="ui tiny images ui equal width center aligned grid" style="text-align: center;">				
 					<?php foreach ($list as $filter_icon): ?>
 						<div title="<?php $filter_icon["name"]; ?>"
@@ -1266,6 +1305,9 @@ class EO_WBC_Filter_Widget {
 			<div class="title">
 			    <i class="dropdown icon"></i>		    
 			    <?php echo($title); ?>
+			    <?php if($reset): ?>
+				&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_icon(event,'<?php echo $term->slug; ?>')">&nbsp;<u>reset</u></span>
+				<?php endif; ?>
 			</div>
 		  	<div class="content">	
 		  		<div class="ui tiny images" style="text-align: justify;">

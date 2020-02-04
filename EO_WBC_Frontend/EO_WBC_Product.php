@@ -264,6 +264,7 @@ class EO_WBC_Product
 
         $variation=FALSE;//status if product is varaible in nature.
         $cart=NULL;//storage variable for cart data if redirected from 'Add to cart' action.
+        echo "<pre>";
 
         if(isset($_GET['CART']))
         {
@@ -276,32 +277,51 @@ class EO_WBC_Product
             }    
         }                
 
-        // Get all category and attributes.
-        $terms=wp_get_post_terms($post->ID,get_taxonomies());     
-        $maps = wp_cache_get( 'cache_maps', 'eo_wbc');
+        // Get all category and attributes.        
+        $non_var_terms = array();
+        $product_terms = wc_get_product($post->ID)->get_attributes();
+
+        if(!is_wp_error( $product_terms )  and !empty($product_terms)) {
+            foreach ($product_terms as $product_taxonomy => $product_term) {
+                if($product_term['variation']===false and !empty($product_term['options']) and is_array($product_term['options'])) {
+
+                    $non_var_terms = array_merge($non_var_terms,$product_term['options']);    
+                }
+            }
+        }
+                
+        $terms=wp_get_post_terms($post->ID,get_taxonomies());        
+        $maps = wp_cache_get( 'cache_maps', 'eo_wbc');        
         $product_in = array();        
         // Gathering all terms for the product that is added to the cart.
         if(!is_wp_error($terms) and !empty($terms) and is_array($terms) and is_array($maps) ){
             if($variation){
                 
                 $variation_attributes = wc_get_product($variation)->get_attributes();                
-                $variation_terms = array();
+                $variation_terms = array();                
                 array_walk($terms,function($term,$index) use(&$variation_attributes,&$variation_terms){
                     if( $term->taxonomy=='product_cat' or (array_key_exists($term->taxonomy, $variation_attributes) and $variation_attributes[$term->taxonomy] == $term->slug) ) {
                         array_push($variation_terms,$term->term_taxonomy_id);
                     }
                 });    
                 $terms = $variation_terms;
+                if (!empty($non_var_terms) and !is_wp_error($non_var_terms)) {
+                    $terms = array_merge($terms,$non_var_terms);
+                }                                
             } else {
                 array_walk($terms,function($term,$index){
                     $terms[$index] = $term->term_taxonomy_id;
                 });    
             } 
 
+            print_r($terms);
+            var_dump($maps);
+
             // Gather all target of the maps           
             $map_column = 0;
             if($this->eo_wbc_get_category()==get_option('eo_wbc_first_slug')) { $map_column = 0; }
             elseif($this->eo_wbc_get_category()==get_option('eo_wbc_second_slug')) { $map_column = 1; }            
+            
             $product_code = "pid_{$post->ID}";
                         
             $terms =array_filter(array_map(function($map) use(&$terms,&$map_column,&$product_code,&$product_in){
@@ -309,27 +329,24 @@ class EO_WBC_Product
                 if(array_intersect($terms,$map[$map_column])){
                     if($map_column == 0) return $map[1];
                     else return $map[0];
-                } elseif(in_array( $product_code, $map[$map_column] )) {
-                    
+                } elseif(in_array( $product_code, $map[$map_column] )) {                    
                     if($map_column == 0){
                         $product_in = array_merge( $product_in, $map[1] );
                     } else {
                         $product_in = array_merge( $product_in, $map[0] );
                     }
-
                     return false;
                 } else {
                     return false;
                 }                
-
             },$maps));
-        } 
-        
+
+        }         
+
         $category=array();//array to hold category slugs
         $taxonomy=array();//array to hold taxonomy slugs
         if(!is_wp_error($terms) and !empty($terms)) {
             array_walk($terms,function($term) use(&$category,&$taxonomy){
-
                 $_term_ = null;
                 if(is_array($term)) {
                     foreach ($term as $_term_) {
@@ -348,6 +365,7 @@ class EO_WBC_Product
                     }
                 } else {
                     $_term_ = get_term_by('term_taxonomy_id', $_term_);
+
                     if(!is_wp_error($_term_) and !empty($_term_)) {
                         $_taxonomy_ = $_term_->taxonomy;                        
                         if($_taxonomy_==='product_cat') {
@@ -398,7 +416,6 @@ class EO_WBC_Product
 
             $link.='products_in='.implode(',',$product_in).'&';
         }             
-                
         return $link;
     }
 

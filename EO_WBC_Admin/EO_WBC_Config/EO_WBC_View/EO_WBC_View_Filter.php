@@ -61,7 +61,7 @@
 				    
 				    $ob=new EO_WBC_First_Filter_Table();
 				    $ob->prepare_items();
-				    $ob->display();				    
+				    $ob->display();
 				?>   				
 				<input type="hidden" name="eo_wbc_action" value="bulk-filter-action">
 				<input type="hidden" name="eo_filter_target" value="eo_wbc_add_filter_first">
@@ -198,6 +198,20 @@
 									</tbody>
 								</table>
 							</td>							
+							<td>								
+								<table>
+									<tbody>
+										<tr>
+											<td>
+												<label>Add reset link?</label>
+												<input type="checkbox" value="1" name="filter_reset"/>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+						<tr  class="form-filter-td">
 							<td>								
 								<table>
 									<tbody>
@@ -365,6 +379,20 @@
 									</tbody>
 								</table>
 							</td>							
+							<td>								
+								<table>
+									<tbody>
+										<tr>
+											<td>
+												<label>Add reset link?</label>
+												<input type="checkbox" value="1" name="filter_reset"/>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+						<tr class="form-filter-td">							
 							<td>
 								<table>
 									<tbody>

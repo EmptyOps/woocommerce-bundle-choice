@@ -310,6 +310,11 @@ class EO_WBC_Actions
         $filter_input=$_POST["filter_input"];
         $filter_order=$_POST["filter_order"];
 
+        $filter_reset = 0;
+        if(isset($_POST['filter_reset'])){
+            $filter_reset = 1;
+        }
+
         $filter_icon_size = $_POST['filter_icon_size'];
         $filter_icon_font_size = $_POST['filter_icon_font_size'];
         
@@ -333,6 +338,7 @@ class EO_WBC_Actions
                         'column_width' => $filter_width,
                         'input'=>$filter_input,
                         'order'=>$filter_order,
+                        'reset'=>$filter_reset,
                     );
         
         if($filter_input == 'icon' || $filter_input == 'icon_text'){
