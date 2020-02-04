@@ -112,7 +112,7 @@
 				<!-- Table View Extension -->
 				<div class="addons-banner-block-item">
 					<div class="addons-banner-block-item-icon">
-						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url('woo-bundle-choice/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/grid_view_ext.png') ?>">
+						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/grid_view_ext.png') ?>">
 					</div>
 					<div class="addons-banner-block-item-content">
 						<h3>Catelog Grid View</h3>
@@ -125,7 +125,7 @@
 				<!-- Email Extension -->
 				<div class="addons-banner-block-item">
 					<div class="addons-banner-block-item-icon">
-						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url('woo-bundle-choice/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/email_ext.png') ?>">
+						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/email_ext.png') ?>">
 					</div>
 					<div class="addons-banner-block-item-content">
 						<h3>Woo Product Bundle Choice - Email</h3>
@@ -138,7 +138,7 @@
 				<!-- Rapnet Extension -->
 				<div class="addons-banner-block-item">
 					<div class="addons-banner-block-item-icon">
-						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url('woo-bundle-choice/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/rapnet_ext.png') ?>">
+						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/rapnet_ext.png') ?>">
 					</div>
 					<div class="addons-banner-block-item-content">
 						<h3>Rapnet Instant Inventory</h3>
@@ -161,7 +161,7 @@
 				          4. You can also send us <a href="https://sphereplugins.com/contact-us/">Request</a> to have us support missing API
 				        </p>
 						<div class="inline-buttons">
-							<a class="addons-button addons-button-solid" target="_blank" href="https://sphereplugins.com/product/rapnet-instant-inventory-integration/">I'm Interested</a>							
+							<a class="addons-button addons-button-solid" target="_blank" href="https://sphereplugins.com/product/woocommerce-rapnet-integration-extension/">I'm Interested</a>							
 						</div>
 					</div>
 				</div>
@@ -170,7 +170,7 @@
 				<!-- N-Step Extension -->
 				<div class="addons-banner-block-item">
 					<div class="addons-banner-block-item-icon">
-						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url('woo-bundle-choice/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/multi_step_ext.png') ?>">
+						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/multi_step_ext.png') ?>">
 					</div>
 					<div class="addons-banner-block-item-content">
 						<h3>Multi Category/Multi Step navigation Extension</h3>
@@ -182,7 +182,7 @@
 				</div>
 				<div class="addons-banner-block-item">
 					<div class="addons-banner-block-item-icon">
-						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url('woo-bundle-choice/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/ring_maker.png') ?>">
+						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/ring_maker.png') ?>">
 					</div>
 					<div class="addons-banner-block-item-content">
 						<h3>AI powered diamond ring image maker</h3>
@@ -194,7 +194,7 @@
 				</div>
 				<div class="addons-banner-block-item">						
 					<div class="addons-banner-block-item-icon">
-						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url('woo-bundle-choice/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/suggesion_giver.png') ?>">
+						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/suggesion_giver.png') ?>">
 					</div>
 					<div class="addons-banner-block-item-content">
 						<h3>AI powered suggestion for clothig pair maker</h3>

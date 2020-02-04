@@ -139,3 +139,24 @@ jQuery(document).ready(function($){
 
 	});	
 });
+
+function reset_icon(e,selector){
+	e.preventDefault();
+	e.stopPropagation()
+	jQuery('.eo_wbc_filter_icon_select[data-filter="'+selector+'"]').trigger('click');
+	return false;
+}
+
+function reset_slider(e,selector,first,second){	
+	e.preventDefault();
+	e.stopPropagation()
+	jQuery(".ui.slider[data-slug='"+selector+"']").slider('set rangeValue',first,second);
+	return false;
+}
+
+function reset_checkbox(e,selector){
+	e.preventDefault();
+	e.stopPropagation()
+	jQuery(selector).filter(":not(:checked)").trigger('click');
+	return false;
+}
