@@ -154,6 +154,13 @@ function reset_slider(e,selector,first,second){
 	return false;
 }
 
+function reset_price(e,min,max) {
+	e.preventDefault();
+	e.stopPropagation()
+	jQuery(".ui.slider[data-slug='price']").slider('set rangeValue',min,max);
+	return false;	
+}
+
 function reset_checkbox(e,selector){
 	e.preventDefault();
 	e.stopPropagation()

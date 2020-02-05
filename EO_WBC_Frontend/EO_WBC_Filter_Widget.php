@@ -589,7 +589,7 @@ class EO_WBC_Filter_Widget {
 			<p>
 				<span class="ui header">Price</span>				
 				<?php if($reset): ?>
-				&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_slider(event,'#text_slider_price')">&nbsp;<u>reset</u></span>
+				&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_price(event,'<?php echo $min; ?>','<?php echo $max; ?>')">&nbsp;<u>reset</u></span>
 				<?php endif; ?>
 			</p>			
 			<div class="ui tiny form">
@@ -612,7 +612,7 @@ class EO_WBC_Filter_Widget {
 		    <i class="dropdown icon"></i>		    
 		    Price		    
 			<?php if($reset): ?>
-			&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_slider(event,'#text_slider_price')">&nbsp;<u>reset</u></span>
+			&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_price(event,'<?php echo $min; ?>','<?php echo $max; ?>')">&nbsp;<u>reset</u></span>
 			<?php endif; ?>
 		</div>
 	  	<div class="content">	
