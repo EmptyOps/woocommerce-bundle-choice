@@ -264,8 +264,6 @@ class EO_WBC_Product
 
         $variation=FALSE;//status if product is varaible in nature.
         $cart=NULL;//storage variable for cart data if redirected from 'Add to cart' action.
-        echo "<pre>";
-
         if(isset($_GET['CART']))
         {
             $cart=str_replace("\\",'',base64_decode(sanitize_text_field($_GET['CART']),TRUE));
