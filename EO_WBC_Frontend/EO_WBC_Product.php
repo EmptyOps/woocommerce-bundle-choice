@@ -314,9 +314,6 @@ class EO_WBC_Product
                 });    
             } 
 
-            print_r($terms);
-            var_dump($maps);
-
             // Gather all target of the maps           
             $map_column = 0;
             if($this->eo_wbc_get_category()==get_option('eo_wbc_first_slug')) { $map_column = 0; }
