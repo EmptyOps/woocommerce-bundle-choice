@@ -144,6 +144,28 @@ class EO_WBC_Actions
             ){
                 $this->filter_add();
             }
+
+            //Configure filter request
+            elseif( isset($_POST)
+                    && isset($_POST['_wpnonce'])
+                    && wp_verify_nonce($_POST['_wpnonce'],'eo_wbc_save_filter_config')
+                    && $_POST['eo_wbc_action']==='save-filter-config'                    
+            ){
+
+                if(!empty($_POST['filter_alternate_first'])){
+                    
+                    update_option( 'eo_wbc_first_collapse_view', 1 );
+                } else {
+                    update_option( 'eo_wbc_first_collapse_view', 0 );
+                }
+                
+                if(!empty($_POST['filter_alternate_second'])){
+
+                    update_option( 'eo_wbc_second_collapse_view', 1 );
+                } else {
+                    update_option( 'eo_wbc_second_collapse_view', 0 );
+                }
+            }
             
             //Bulk edit,delete filter request
             elseif( isset($_POST)

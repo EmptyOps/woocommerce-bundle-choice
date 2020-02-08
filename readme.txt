@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=hi000
 Requires at least: 3.5
 Tested up to: 5.3.2
 Requires PHP: 5.3
-Stable tag: 0.5.56
+Stable tag: 0.5.57
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -60,11 +60,11 @@ Order emails sent to customers from your shop will be customized based on what u
 1. Rapnet Instant Inventory API
 1. Glow star Diamond API
 1. Under development, you can pre-order!
-  * IDEX (International Diamond Exchange)
+  * IDEX (International Diamond Exchange Api)
   * MID House of Diamonds Api
   * POLYGON Vertual Inventory Api
   * GEMFIND Diamond Link Api
-  * Virtual Diamond Boutique Api
+  * VDB (Virtual Diamond Boutique Api)
   * JewelCloud Api
 1. You can also send us [Request](https://sphereplugins.com/contact-us/") to have us support missing API
 
@@ -214,6 +214,8 @@ Yes, it is.
 5. Home page after plugin fully configured.
 
 == Changelog ==
+= 0.5.56 (Feb 8, 2020) =
+  ** Bug-Fix and Feature ** collapsable filter view and bug fixed for filter UI.
 = 0.5.54 (Feb 4, 2020) =
   ** Bug-Fix ** fixing forgotton var_dump and print_r.
 = 0.5.53 (Feb 4, 2020) =

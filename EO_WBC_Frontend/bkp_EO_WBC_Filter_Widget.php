@@ -6,7 +6,7 @@ class EO_WBC_Filter_Widget {
 		$this->_category=$this->eo_wbc_get_category();
 		if(!empty($this->_category)){
 		
-			if(get_option('eo_wbc_dropdown_filter',false) and !wp_is_mobile()) {
+			if(get_option('eo_wbc_dropdown_filter',true) and !wp_is_mobile()) {
 
 				require_once 'includes/dropdown_filter.php';				
 
@@ -22,8 +22,8 @@ class EO_WBC_Filter_Widget {
 		}
 	}
 
-	public function eo_wbc_filter_enque_asset() {
-
+	public function eo_wbc_filter_enque_asset()
+	{
 		$current_category=$this->_category;
 		$site_url=site_url();
 
@@ -64,7 +64,9 @@ class EO_WBC_Filter_Widget {
 				
 				@media only screen and (max-width: 768px) {
 					.ui.segments>.ui.segment{
-						padding:0px !important;						
+						padding-left:0px !important;
+						padding-right:0px !important;
+						padding-top:0px !important;
 					}
 				}
 				.ui.slider:not(.vertical):not(.checkbox){
@@ -142,7 +144,7 @@ class EO_WBC_Filter_Widget {
 					width:".get_option('eo_wbc_filter_config_icon_size','min-content')." !important;
 					margin:auto auto;
 				}
-								
+				
 				/*Modifications............................*/
 			</style>";	
 
@@ -291,9 +293,7 @@ class EO_WBC_Filter_Widget {
 		return array('min_value'=>$min_value,'max_value'=>$max_value,'title'=>$field_title,'slug'=>$field_slug,'seprator'=>$seprator);
 	}
 	
-	public function get_width_class($percent_value = 50){		
-		$percent_value = empty($percent_value)? 50 :$percent_value;
-
+	public function get_width_class($percent_value){
 		if(empty($this->width_class)){
 			$this->width_class = array( '1' =>'one wide column',
 										'2' => 'two wide column',
@@ -512,7 +512,7 @@ class EO_WBC_Filter_Widget {
 	}
 
 	//Generate checkbox based filter option;
-	public function input_checkbox($id,$title,$filter_type,$desktop = 1, $width = '50',$reset = 0) {
+	public function input_checkbox($id,$title,$filter_type,$desktop = 1, $reset = 0, $width = '50') {
 		$filter=$this->range_steps($id,$title,$filter_type);
 		if(empty($filter)) return false;
 
@@ -523,7 +523,8 @@ class EO_WBC_Filter_Widget {
 										"class"=>"",
 									"value"=>implode(',',EO_WBC_Support::array_column($filter['list'],'slug')),
 									));
-		if($desktop):					
+		if($desktop):			
+			
 		?>
 		<div class="<?php echo $this->get_width_class($width); ?>">
 			<p>
@@ -637,253 +638,6 @@ class EO_WBC_Filter_Widget {
 		endif;			
 	}
 	
-	public function load_mobile($general_filters, $advance_filters) {
-		
-		?><div class="ui segment"><?php
-			?><div class="ui styled fluid accordion" style="border-top-left-radius: 0px !important; border-top-right-radius: 0px !important;"><?php
-				$this->load_grid_mobile($general_filters);
-				$this->slider_price(0);
-			?></div><?php
-		?></div><?php
-		if(!is_wp_error($advance_filters) and !empty($advance_filters)) {
-			?><div class="ui segment secondary"><?php
-				?><div class="ui styled fluid accordion" style="border-top-left-radius: 0px !important; border-top-right-radius: 0px !important;"><?php
-					$this->load_grid_mobile($advance_filters);					
-				?></div><?php
-			?></div><?php
-		}
-	}
-
-	public function load_grid_mobile($filter) {
-		foreach ($filter as $key => $item) {
-			if($item['type']==0 && ($item['input']=='icon' OR $item['input']=='icon_text')) {
-
-				$this->eo_wbc_filter_ui_icon($item['name'],$item['label'],$item['type'],$item['input'],0,$item['column_width'],(isset($item['icon_size'])?$item['icon_size']:false),(isset($item['font_size'])?$item['font_size']:false));								
-				$term = @get_term_by('id',$item['name'],'product_cat');
-				if(!empty($term) and !is_wp_error($term)){
-					$_category[]=$term->slug;	
-				}				
-			}
-			elseif ($item['type']==0 ) {
-
-				$this->input_step_slider($item['name'],$item['label'],$item['type'],0,$item['column_width']);		
-			}
-			elseif($item['type']==1 ) {				
-				switch ($item['input']) {
-					case 'icon':
-					case 'icon_text':												
-						$this->eo_wbc_filter_ui_icon($item['name'],$item['label'],$item['type'],$item['input'],0,$item['column_width'],(isset($item['icon_size'])?$item['icon_size']:false),(isset($item['font_size'])?$item['font_size']:false));
-						break;
-					case 'numeric_slider':
-						$this->input_text_slider($item['name'],$item['label'],$item['type'],0,$item['column_width']);
-						break;
-					case 'text_slider':
-						$this->input_step_slider($item['name'],$item['label'],$item['type'],0,$item['column_width']);
-						break;
-					case 'checkbox':
-						$this->input_checkbox($item['name'],$item['label'],$item['type'],0,$item['column_width']);
-						break;						
-					default:
-						$this->input_step_slider($item['name'],$item['label'],$item['type'],0,$item['column_width']);
-				}
-				$term=EO_WBC_Support::eo_wbc_get_attribute($item['name']);
-				if(!empty($term) and !is_wp_error( $term )){
-					$_attr_list[]=$term->slug;	
-				}				
-			}
-		}
-	}
-
-	public function load_desktop($general_filters, $advance_filters) {
-		
-		$category = $this->_category;
-		
-		if(
-			(get_option('eo_wbc_first_slug') === $category and get_option( 'eo_wbc_first_collapse_view',false)) 
-			or 
-			(get_option('eo_wbc_second_slug') === $category and get_option( 'eo_wbc_second_collapse_view',false))
-		){
-			?>
-			<div class="eo-wbc-container filters container">				
-				<div class="ui horizontal segments" style="border: 0px solid transparent;box-shadow: none !important;">
-					<?php $this->load_collapsable_desktop($general_filters, $advance_filters); ?>
-				</div>
-			</div>
-			<?php
-		} else {
-			?>
-			<div class="eo-wbc-container filters container">
-				<div class="ui segments">
-					<div class="ui segment"><?php
-					?><div class="ui grid container align middle relaxed"><?php
-						$this->load_grid_desktop($general_filters);
-						$this->slider_price();
-					?></div><?php
-				?></div><?php
-				if(!is_wp_error($advance_filters) and !empty($advance_filters)){
-					?><div class="ui segment secondary"><?php
-						?><div class="ui grid container align middle relaxed"><?php					
-							$this->load_grid_desktop($advance_filters);					
-						?></div><?php
-					?></div><?php
-				}			
-			?>
-				</div>
-			</div>
-			<?php if( !empty($advance_filters) ) { ?>
-				<div class="ui grid centered">
-					<div class="row">
-						<div class="ui button primary" id="advance_filter" style="border-radius: 0 0 0 0;width: fit-content !important;">Advance Filter&nbsp;<i class="ui icon angle double up"></i></div>
-					</div>
-				</div>
-			<?php			
-			}
-		}
-	}
-
-	public function load_grid_desktop($filters) {
-
-		if(!empty($filters) && (is_array($filters) or is_object($filters) ) ){
-			foreach ($filters as $key => $item) {
-
-				if($item['type']==0 && ($item['input']=='icon' OR $item['input']=='icon_text')) {
-
-					$this->eo_wbc_filter_ui_icon($item['name'],$item['label'],$item['type'],$item['input'],1,$item['column_width'],(isset($item['icon_size'])?$item['icon_size']:false),(isset($item['font_size'])?$item['font_size']:false),$reset=!empty($item['reset']));							
-									
-						$term = get_term_by('id',$item['name'],'product_cat');
-
-						if( !empty( $term ) and !is_wp_error( $term ) ) {
-							$_category[] = $term->slug;
-						}
-				} elseif ($item['type']==0 ) {
-
-					$this->input_step_slider($item['name'],$item['label'],$item['type'],1,$item['column_width'],$reset=!empty($item['reset']));		
-				}
-				elseif($item['type']==1 ) {
-					switch ($item['input']) {
-						case 'icon':
-						case 'icon_text':												
-							$this->eo_wbc_filter_ui_icon($item['name'],$item['label'],$item['type'],$item['input'],1,$item['column_width'],(isset($item['icon_size'])?$item['icon_size']:false),(isset($item['font_size'])?$item['font_size']:false),$reset=!empty($item['reset']));				
-							break;
-						case 'numeric_slider':
-							$this->input_text_slider($item['name'],$item['label'],$item['type'],1,$item['column_width'],$reset=!empty($item['reset']));
-							break;
-						case 'text_slider':
-							$this->input_step_slider($item['name'],$item['label'],$item['type'],1,$item['column_width'],$reset=!empty($item['reset']));
-							break;
-						case 'checkbox':
-							$this->input_checkbox($item['name'],$item['label'],$item['type'],1,$item['column_width'],$reset=!empty($item['reset']));
-							break;						
-						default:
-							$this->input_step_slider($item['name'],$item['label'],$item['type'],1,$item['column_width'],$reset=!empty($item['reset']));
-					}		
-					$term = EO_WBC_Support::eo_wbc_get_attribute($item['name']);		
-					if(!empty($term) and !is_wp_error($term) ){
-						$_attr_list[]=$term->slug;	
-					}			
-				}
-			}
-		}		
-	}
-
-	public function load_collapsable_desktop($general_filters, $advance_filters) {
-		
-		$filters = array_merge($general_filters,$advance_filters);
-
-		if(!is_wp_error($filters) and !empty($filters)){
-			?><div class="ui text menu"><?php	
-			foreach ($filters as $item_index=>$item) {
-				
- 				$term = null;
-				if($item['type']==0){
-					$term = get_term_by('id',$item['name'],'product_cat');
-				} else {
-					$term = EO_WBC_Support::eo_wbc_get_attribute($item['name']);
-				}				
-				?>				
-				
-				<a class="ui dropdown item">
-					<?php echo $term->name; ?>
-					&nbsp;<i class="chevron down icon"></i>
-					<div class="menu">
-						<div class="item" style="width: max-content !important;min-width: 33vw;max-width: 33vw;">
-				
-				    <?php 
-				      	if($item['type']==0 && ($item['input']=='icon' OR $item['input']=='icon_text')) {
-
-							$this->eo_wbc_filter_ui_icon($item['name'],$item['label'],$item['type'],$item['input'],1,100,(isset($item['icon_size'])?$item['icon_size']:false),(isset($item['font_size'])?$item['font_size']:false),$reset=!empty($item['reset']));							
-											
-								$term = get_term_by('id',$item['name'],'product_cat');
-
-								if( !empty( $term ) and !is_wp_error( $term ) ) {
-									$_category[] = $term->slug;
-								}
-						} elseif ($item['type']==0 ) {
-
-							$this->input_step_slider($item['name'],$item['label'],$item['type'],1,100,$reset=!empty($item['reset']));		
-						}
-						elseif($item['type']==1 ) {
-							switch ($item['input']) {
-								case 'icon':
-								case 'icon_text':												
-									$this->eo_wbc_filter_ui_icon($item['name'],$item['label'],$item['type'],$item['input'],1,100,(isset($item['icon_size'])?$item['icon_size']:false),(isset($item['font_size'])?$item['font_size']:false),$reset=!empty($item['reset']));				
-									break;
-								case 'numeric_slider':
-									$this->input_text_slider($item['name'],$item['label'],$item['type'],1,100,$reset=!empty($item['reset']));
-									break;
-								case 'text_slider':
-									$this->input_step_slider($item['name'],$item['label'],$item['type'],1,100,$reset=!empty($item['reset']));
-									break;
-								case 'checkbox':
-									$this->input_checkbox($item['name'],$item['label'],$item['type'],1,100,$reset=!empty($item['reset']));
-									break;						
-								default:
-									$this->input_step_slider($item['name'],$item['label'],$item['type'],1,100,$reset=!empty($item['reset']));
-							}		
-							$term = EO_WBC_Support::eo_wbc_get_attribute($item['name']);		
-							if(!empty($term) and !is_wp_error($term) ){
-								$_attr_list[]=$term->slug;	
-							}			
-						}
-				    ?>				
-						</div>
-					</div>
-				</a>	
-				<?php				
-			}
-			?><a class="ui dropdown item">Price&nbsp;<i class="chevron down icon"></i>
-				<div class="menu">
-					<div class="item" style="width: max-content !important;min-width: 33vw;max-width: 33vw;">				
-						<?php $this->slider_price(); ?>
-					</div>
-				</div>
-			</a>
-			<?php
-			?></div><?php			
-		}
-		?>
-			<script type="text/javascript">
-				jQuery(document).ready(function(){	
-					jQuery(".dropdown").dropdown({
-						keepOnScreen:true,
-						on:'hover',
-						onShow:function(){
-							toggle_ = jQuery(this).find('.icon');
-							jQuery(toggle_).removeClass('down');
-							jQuery(toggle_).addClass('up');
-						},
-						onHide:function(){
-							toggle_ = jQuery(this).find('.icon');
-							jQuery(toggle_).removeClass('up');
-							jQuery(toggle_).addClass('down');
-						}
-					});				
-				});
-			</script>
-		<?php
-		
-	}
-
 	public function get_widget() {
 
 		$current_category=$this->_category;
@@ -935,46 +689,228 @@ class EO_WBC_Filter_Widget {
 		<!--Primary filter button that will only be visible on desktop/tablet-->
 		<!-- This widget is created with Wordpress plugin - WooCommerce Product bundle choice -->
 		<div id="loading"></div>
-		    							
-		<?php 
-			if(wp_is_mobile()) {
+		<div class="ui grid mobile only container centered" style="margin-left: 0 !important; margin-right: 0 !important">
+			<div class="row">
+				<div class="ui button primary fluid" id="primary_filter" style="border-radius: 0 0 0 0;margin-right: 0;">Filters&nbsp;&nbsp;<i class="ui icon angle up"></i></div>
+			</div>
+		</div>
 
-				
-				if(!is_wp_error($non_adv_ordered_filter) and !empty($non_adv_ordered_filter)) {
+		<div class="eo-wbc-container filters container">
+			<div class="ui segments">    			
+				<div class="ui segment">
+					<!-- Begin Primary filters -->
+					
+				  	<div class="ui grid computer tablet only align middle relaxed">				  		
+				  		<!-- Filters to be shown at desktop and tablet systems only. -->				  		
+		  				<?php
+							if(!empty($non_adv_ordered_filter) && (is_array($non_adv_ordered_filter) or is_object($non_adv_ordered_filter) ) ){
+								foreach ($non_adv_ordered_filter as $key => $item) {
 
-				?>
-					<div class="ui grid container centered" style="margin-left: 0 !important; margin-right: 0 !important">
-						<div class="row">
-							<div class="ui button primary fluid" id="primary_filter" style="border-radius: 0 0 0 0;margin-right: 0;">Filters&nbsp;&nbsp;<i class="ui icon angle up"></i></div>
+									if($item['type']==0 && ($item['input']=='icon' OR $item['input']=='icon_text')) {
+
+										$this->eo_wbc_filter_ui_icon($item['name'],$item['label'],$item['type'],$item['input'],1,$item['column_width'],(isset($item['icon_size'])?$item['icon_size']:false),(isset($item['font_size'])?$item['font_size']:false),$reset=!empty($item['reset']));							
+										
+										$term = get_term_by('id',$item['name'],'product_cat');
+
+										if( !empty( $term ) and !is_wp_error( $term ) ) {
+											$_category[] = $term->slug;
+										}
+									}
+									elseif ($item['type']==0 ) {
+
+										$this->input_step_slider($item['name'],$item['label'],$item['type'],1,$item['column_width'],$reset=!empty($item['reset']));		
+									}
+									elseif($item['type']==1 ) {
+										switch ($item['input']) {
+											case 'icon':
+											case 'icon_text':												
+												$this->eo_wbc_filter_ui_icon($item['name'],$item['label'],$item['type'],$item['input'],1,$item['column_width'],(isset($item['icon_size'])?$item['icon_size']:false),(isset($item['font_size'])?$item['font_size']:false),$reset=!empty($item['reset']));				
+												break;
+											case 'numeric_slider':
+												$this->input_text_slider($item['name'],$item['label'],$item['type'],1,$item['column_width'],$reset=!empty($item['reset']));
+												break;
+											case 'text_slider':
+												$this->input_step_slider($item['name'],$item['label'],$item['type'],1,$item['column_width'],$reset=!empty($item['reset']));
+												break;
+											case 'checkbox':
+												$this->input_checkbox($item['name'],$item['label'],$item['type'],1,$item['column_width'],$reset=!empty($item['reset']));
+												break;						
+											default:
+												$this->input_step_slider($item['name'],$item['label'],$item['type'],1,$item['column_width'],$reset=!empty($item['reset']));
+										}		
+										$term = EO_WBC_Support::eo_wbc_get_attribute($item['name']);		
+										if(!empty($term) and !is_wp_error($term) ){
+											$_attr_list[]=$term->slug;	
+										}			
+									}
+								}
+							}
+						?>									
+						<?php $this->slider_price(); ?>						
+				  	</div>				  	
+				  	<div class="ui grid container mobile only" style="padding-bottom: 0px;">
+			  			<!-- Filters to be shown at mobile only. -->
+				  		<div class="ui styled fluid accordion" style="border-top-left-radius: 0px !important; border-top-right-radius: 0px !important;">
+						  	<?php
+								if( !empty($non_adv_ordered_filter) && ( is_array($non_adv_ordered_filter) or is_object($non_adv_ordered_filter)) ){
+									foreach ($non_adv_ordered_filter as $key => $item) {
+
+										if($item['type']==0 && ($item['input']=='icon' OR $item['input']=='icon_text')) {
+
+											$this->eo_wbc_filter_ui_icon($item['name'],$item['label'],$item['type'],$item['input'],0,$item['column_width'],(isset($item['icon_size'])?$item['icon_size']:false),(isset($item['font_size'])?$item['font_size']:false),$reset=!empty($item['reset']));								
+											$cat_term=@get_term_by('id',$item['name'],'product_cat');
+											
+											if(!empty($cat_term) and !is_wp_error($cat_term)){
+												$_category[]=$cat_term->slug;	
+											}			
+										}
+										elseif ($item['type']==0 ) {
+
+											$this->input_step_slider($item['name'],$item['label'],$item['type'],0,$item['column_width'],$reset=!empty($item['reset']));		
+										}
+										elseif($item['type']==1 ) {
+
+											switch ($item['input']) {
+												case 'icon':
+												case 'icon_text':												
+													$this->eo_wbc_filter_ui_icon($item['name'],$item['label'],$item['type'],$item['input'],0,$item['column_width'],(isset($item['icon_size'])?$item['icon_size']:false),(isset($item['font_size'])?$item['font_size']:false),$reset=!empty($item['reset']));			
+													break;
+												case 'numeric_slider':
+													$this->input_text_slider($item['name'],$item['label'],$item['type'],0,$item['column_width'],$reset=!empty($item['reset']));
+													break;
+												case 'text_slider':
+													$this->input_step_slider($item['name'],$item['label'],$item['type'],0,$item['column_width'],$reset=!empty($item['reset']));
+													break;
+												case 'checkbox':
+													$this->input_checkbox($item['name'],$item['label'],$item['type'],0,$item['column_width'],$reset=!empty($item['reset']));
+													break;						
+												default:
+													$this->input_step_slider($item['name'],$item['label'],$item['type'],0,$item['column_width'],$reset=!empty($item['reset']));
+											}	
+													
+											$term = EO_WBC_Support::eo_wbc_get_attribute($item['name']);
+											if(!empty($term) && !empty($term->slug)){
+												$_attr_list[] = $term->slug;	
+											} 					
+										}
+									}
+								}
+							?>
+							<?php $this->slider_price(0); ?>
 						</div>
-					</div>
-				<?php
+					</div>					
+				</div>
+				<?php if( !empty($adv_ordered_filter) ): ?>
+				<div class="ui segment secondary">
+					<!-- Begin Advance filters -->
+					<div class="ui grid container computer tablet only align middle relaxed">					  	
+					  	<!-- Filters to be shown at desktop and tablet systems only. -->					  		
+		  				<?php 
+							if( !empty($adv_ordered_filter) && (is_array($adv_ordered_filter) or is_object($adv_ordered_filter)) ){
+								foreach ($adv_ordered_filter as $key => $item) {
 
-				}				
-				?>
-					<div class="eo-wbc-container filters container">
-						<div class="ui segments">    			
-				<?php
-				$this->load_mobile($non_adv_ordered_filter, $adv_ordered_filter);
-				?>		</div>
-					</div>
-				<?php
+									if($item['type']==0 && ($item['input']=='icon' OR $item['input']=='icon_text')) {
 
-				if( !empty($adv_ordered_filter) ) {
-					?>
-					<div class="ui grid centered">
-						<div class="row">
-							<div class="ui button primary" id="advance_filter" style="border-radius: 0 0 0 0;width: fit-content !important;">Advance Filter&nbsp;<i class="ui icon angle double up"></i></div>
-						</div>
-					</div>
-					<?php			
-				}
+										$this->eo_wbc_filter_ui_icon($item['name'],$item['label'],$item['type'],$item['input'],1,$item['column_width'],(isset($item['icon_size'])?$item['icon_size']:false),(isset($item['font_size'])?$item['font_size']:false));								
+										$cat_term=@get_term_by('id',$item['name'],'product_cat');
+										
+										if(!empty($cat_term) and !is_wp_error($cat_term)){
 
-			} else {				
-				$this->load_desktop($non_adv_ordered_filter, $adv_ordered_filter);				
-			}
-		?>	
-		
+											$_category[]=$cat_term->slug;
+										}
+									}
+									elseif ($item['type']==0 ) {
+
+										$this->input_step_slider($item['name'],$item['label'],$item['type'],1,$item['column_width']);		
+									}
+									elseif($item['type']==1 ) {
+
+										switch ($item['input']) {
+											case 'icon':
+											case 'icon_text':												
+												$this->eo_wbc_filter_ui_icon($item['name'],$item['label'],$item['type'],$item['input'],1,$item['column_width'],(isset($item['icon_size'])?$item['icon_size']:false),(isset($item['font_size'])?$item['font_size']:false));				
+												break;
+											case 'numeric_slider':
+												$this->input_text_slider($item['name'],$item['label'],$item['type'],1,$item['column_width']);
+												break;
+											case 'text_slider':
+												$this->input_step_slider($item['name'],$item['label'],$item['type'],1,$item['column_width']);
+												break;
+											case 'checkbox':
+												$this->input_checkbox($item['name'],$item['label'],$item['type'],1,$item['column_width']);
+												break;						
+											default:
+												$this->input_step_slider($item['name'],$item['label'],$item['type'],1,$item['column_width']);
+										}
+										
+										$term = EO_WBC_Support::eo_wbc_get_attribute($item['name']);
+										if(!empty($term) and !is_wp_error($term) ){
+											$_attr_list[]=$term->slug;	
+										}				
+									}
+								}
+							}
+		  				?>		  				
+					</div>
+					
+					<div class="ui grid container mobile only middle aligned" style="padding-bottom: 0px;">
+				  			<!-- Filters to be shown at mobile only. -->
+					  		<div class="ui styled fluid accordion">
+							  	<?php 
+								if((is_array($adv_ordered_filter) or is_object($adv_ordered_filter)) and !empty($adv_ordered_filter)){
+								  	foreach ($adv_ordered_filter as $key => $item) {
+
+										if($item['type']==0 && ($item['input']=='icon' OR $item['input']=='icon_text')) {
+
+											$this->eo_wbc_filter_ui_icon($item['name'],$item['label'],$item['type'],$item['input'],0,$item['column_width'],(isset($item['icon_size'])?$item['icon_size']:false),(isset($item['font_size'])?$item['font_size']:false));								
+											$term = @get_term_by('id',$item['name'],'product_cat');
+											if(!empty($term) and !is_wp_error($term)){
+												$_category[]=$term->slug;	
+											}				
+										}
+										elseif ($item['type']==0 ) {
+
+											$this->input_step_slider($item['name'],$item['label'],$item['type'],0,$item['column_width']);		
+										}
+										elseif($item['type']==1 ) {				
+											switch ($item['input']) {
+												case 'icon':
+												case 'icon_text':												
+													$this->eo_wbc_filter_ui_icon($item['name'],$item['label'],$item['type'],$item['input'],0,$item['column_width'],(isset($item['icon_size'])?$item['icon_size']:false),(isset($item['font_size'])?$item['font_size']:false));
+													break;
+												case 'numeric_slider':
+													$this->input_text_slider($item['name'],$item['label'],$item['type'],0,$item['column_width']);
+													break;
+												case 'text_slider':
+													$this->input_step_slider($item['name'],$item['label'],$item['type'],0,$item['column_width']);
+													break;
+												case 'checkbox':
+													$this->input_checkbox($item['name'],$item['label'],$item['type'],0,$item['column_width']);
+													break;						
+												default:
+													$this->input_step_slider($item['name'],$item['label'],$item['type'],0,$item['column_width']);
+											}
+											$term=EO_WBC_Support::eo_wbc_get_attribute($item['name']);
+											if(!empty($term) and !is_wp_error( $term )){
+												$_attr_list[]=$term->slug;	
+											}				
+										}
+									}
+								}
+							  	?>
+							</div>
+					</div>					
+				</div>
+				<?php endif; ?>
+			</div>
+		</div>	
+		<?php if( !empty($adv_ordered_filter) ): ?>
+		<div class="ui grid centered">
+			<div class="row">
+				<div class="ui button primary" id="advance_filter" style="border-radius: 0 0 0 0;width: fit-content !important;">Advance Filter&nbsp;<i class="ui icon angle double up"></i></div>
+			</div>
+		</div>			
+		<?php endif; ?>
 		<!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
 		<!--WooCommerce Product Bundle Choice filter form-->
 		<form method="GET" name="eo_wbc_filter" id="eo_wbc_filter" style="clear: both;">
@@ -1380,7 +1316,7 @@ class EO_WBC_Filter_Widget {
 				<?php endif; ?>
 			</div>
 		  	<div class="content">	
-		  		<div class="ui tiny images" style="text-align: center;">
+		  		<div class="ui tiny images" style="text-align: justify;">
 					<?php foreach ($list as $filter_icon): ?>
 						<div title="<?php $filter_icon["name"]; ?>"
 							class="eo_wbc_filter_icon <?php echo $non_edit ? 'none_editable':'' ?> 

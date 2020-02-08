@@ -1,4 +1,14 @@
 <?php	
+	
+	/*add_action( 'admin_enqueue_scripts',function(){*/
+		wp_register_style('eo_wbc_semaintic_style',plugin_dir_url(constant('EO_WBC_PLUGIN_FILE')).'css/fomantic/semantic.min.css',false,'1.0');
+		wp_enqueue_style('eo_wbc_semaintic_style');
+
+		wp_register_script('eo_wbc_semaintic_script',plugin_dir_url(constant('EO_WBC_PLUGIN_FILE')).'js/fomantic/semantic.min.js',array('jquery'),'1.0');
+		wp_enqueue_script('eo_wbc_semaintic_script');
+
+	/*},10);*/	
+
 	function eo_wbc_prime_category_($slug='',$prefix='')
     {
         $map_base = get_categories(array(
@@ -53,7 +63,67 @@
 	        <p><a href="https://wordpress.org/support/plugin/woo-bundle-choice" target="_blank"><?php _e('If you are facing any issue, please write to us immediately.',"woo-bundle-choice"); ?></a></p>
 		<br/>
 	    <?php do_action('eo_wbc_menu_tabs','eo-wbc-filter'); ?>
-		<hr/>	
+		<hr/>
+
+		<h3>Filter configuration</h3>	
+		<div class="ui segment">
+			<form class="ui form" method="post" action="">
+				<?php echo wp_nonce_field('eo_wbc_save_filter_config'); ?>
+				<input type="hidden" name="eo_wbc_action" value="save-filter-config">
+				<div class="field">
+					<h4 class="ui dividing header">Alternate filter widget&nbsp;
+						<span class="ui icon" data-tooltip="Swich filter UI between Grid and Expand/Collapse view." data-position="top left" data-inverted="">
+  							<i class="question circle outline icon "></i>
+  						</span>
+					</h4>
+					
+					<div class="field">
+						<label>Default(Grid View)</label>
+						<div class="grouped fields">
+							<div class="field">
+								<div class="ui toggle checkbox">
+								    <input type="radio" id="default_alternate_first" class="hidden" name="filter_alternate_first" <?php echo get_option('eo_wbc_first_collapse_view',0) == 0?'checked="checked"':'';  ?> value='0'>
+								    <label for="default_alternate_first">First Category</label>
+								</div>
+							</div>	
+							<div class="field">
+								<div class="ui toggle checkbox">
+								    <div class="ui toggle checkbox">
+									    <input type="radio" id="default_alternate_second" class="hidden" name="filter_alternate_second" <?php echo get_option('eo_wbc_second_collapse_view',0) == 0 ? 'checked="checked"' : '' ;  ?> value='0'>
+									    <label for="default_alternate_second">Second Category</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="field">
+						<label>Expand/Collapse</label>
+						<div class="grouped fields">
+							<div class="field">
+								<div class="ui toggle checkbox">
+								    <input type="radio" id="expand_collapse_alternate_first" class="hidden" name="filter_alternate_first" <?php echo get_option('eo_wbc_first_collapse_view',0) == 1?'checked="checked"':'';  ?> value='1'>
+								    <label for="expand_collapse_alternate_first">First Category</label>
+								</div>
+							</div>	
+							<div class="field">
+								<div class="ui toggle checkbox">
+								    <div class="ui toggle checkbox">
+									    <input type="radio" id="expand_collapse_alternate_second" class="hidden" name="filter_alternate_second" <?php echo get_option('eo_wbc_second_collapse_view',0) == 1 ? 'checked="checked"' : '' ;  ?> value='1'>
+									    <label for="expand_collapse_alternate_second">Second Category</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="field">
+					<input type="submit" class="ui primary button" name="save_filter_cfg" value="Save">
+				</div>
+			</form>
+		</div>
+
 		<h3><?php printf(__("%s's filter configuration"),get_option('eo_wbc_first_name','First category')); ?></h3>	
 		<div style="border: 1px solid black;padding:3em;" class="boxed-container">
             <form target="_self" action="" method="post">				
@@ -417,6 +487,9 @@
 
 <script>
 	jQuery(document).ready(function($){
+		
+		jQuery(".popup").popup({transition:'Horizontal Flip'});
+
 		$('[name="filter_name"],[name="filter_input"]').on('change',function(){
 
 			group = jQuery(this).attr('data-group');
