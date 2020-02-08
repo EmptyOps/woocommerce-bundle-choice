@@ -806,7 +806,7 @@ class EO_WBC_Filter_Widget {
 					<?php echo $term->name; ?>
 					&nbsp;<i class="chevron down icon"></i>
 					<div class="menu">
-						<div class="item" style="width: max-content !important;min-width: 33vw;max-width: 33vw;">
+						<div class="item" style="width: max-content !important;min-width: 33vw;display: table-cell;">
 				
 				    <?php 
 				      	if($item['type']==0 && ($item['input']=='icon' OR $item['input']=='icon_text')) {
@@ -853,7 +853,7 @@ class EO_WBC_Filter_Widget {
 			}
 			?><a class="ui dropdown item">Price&nbsp;<i class="chevron down icon"></i>
 				<div class="menu">
-					<div class="item" style="width: max-content !important;min-width: 33vw;max-width: 33vw;">				
+					<div class="item" style="width: max-content !important;min-width: 33vw;max-width: 33vw;display: table-cell;">				
 						<?php $this->slider_price(); ?>
 					</div>
 				</div>
