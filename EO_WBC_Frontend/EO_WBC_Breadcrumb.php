@@ -190,8 +190,8 @@ class EO_WBC_Breadcrumb
                             <div class="ui grid">
                                 <div class="column">3</div>
                                 <div class="column" style="text-align: left;">
-                                    <div class="description">Review</div>
-                                    <div class="title"><?php echo get_option('eo_wbc_collection_title','Preview'); ?></div>
+                                    <div class="description">Preview</div>
+                                    <div class="title"><?php echo get_option('eo_wbc_collection_title','Product'); ?></div>
                                 </div>             
                             </div>               
                             <div class="column ">

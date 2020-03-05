@@ -23,7 +23,7 @@ class EO_WBC_Orders
    //Method that has collection of sets and invoke `get_set` method for details.
    public function eo_wbc_get_sets($sets)
    {
-       if(count($sets)>0)
+       if(!empty($sets))
        {
            $rows='';
            foreach ($sets as $set)
