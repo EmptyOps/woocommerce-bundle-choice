@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=hi000
 Requires at least: 3.5
 Tested up to: 5.3.2
 Requires PHP: 5.3
-Stable tag: 0.5.58
+Stable tag: 0.5.60
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -214,6 +214,8 @@ Yes, it is.
 5. Home page after plugin fully configured.
 
 == Changelog ==
+= 0.5.60 (March 5, 2020 )=
+  ** Performance Improvements. Some critical bug fixes. ** Performance improvements in some code parts and a critical bug fixed in order module. 
 = 0.5.56 (Feb 8, 2020) =
   ** Bug-Fix and Feature ** collapsable filter view and bug fixed for filter UI.
 = 0.5.54 (Feb 4, 2020) =

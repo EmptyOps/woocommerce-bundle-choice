@@ -220,15 +220,17 @@ class EO_WBC_Product
             }
             else
             {
-                if($category==get_option('eo_wbc_first_slug')){
+                if($category==get_option('eo_wbc_first_slug') and !empty($_GET['SECOND'])){
                     $url=get_permalink($post->ID)
                         .'?EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
                         .'&STEP=1&FIRST='.$post->ID.'&SECOND='.sanitize_text_field($_GET['SECOND'])."&REDIRECT=1";
                 }
-                elseif($category==get_option('eo_wbc_second_slug')){
+                elseif($category==get_option('eo_wbc_second_slug') else !empty($_GET['FIRST'])) {
                     $url=get_permalink($post->ID)
                         .'?EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
                         .'&STEP=1&FIRST='.sanitize_text_field($_GET['FIRST']).'&SECOND='.$post->ID."&REDIRECT=1";
+                } else {
+                    $url=get_permalink($post->ID);
                 }                          
             }            
         }
