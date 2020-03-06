@@ -85,7 +85,7 @@ class EO_WBC_Core{
             $post_content='<div class="ui inverted segment">
                             <div class="ui active inverted fluid placeholder">
                                  <div class="rectangular">
-                                    <img src="'.plugins_url(basename(EO_WBC_PLUGIN_DIR).'/asset/banner.jpg').'"/>
+                                    <img src="'.plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/asset/banner.jpg').'"/>
                                  </div>
                             </div>
                         </div>
@@ -98,21 +98,21 @@ class EO_WBC_Core{
                               <div class="ui inverted card">
                                 <div class="content">
                                   <div class="ui inverted placeholder">
-                                    <div class="rectangular"><img src="'.plugins_url(basename(EO_WBC_PLUGIN_DIR).'/asset/diamond-sample.png').'"/></div>
+                                    <div class="rectangular"><img src="'.plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/asset/diamond-sample.png').'"/></div>
                                   </div>
                                 </div>
                               </div>
                               <div class="ui inverted card">
                                 <div class="content">
                                   <div class="ui inverted placeholder">
-                                    <div class="rectangular" style="padding-bottom: 25%;"><img class="ui small image" style="height: 50%;width: 50%;margin-left: 25%;margin-top: 25%;"  src="'.plugins_url(basename(EO_WBC_PLUGIN_DIR).'/asset/right-arrow-sample.png').'"/></div>
+                                    <div class="rectangular" style="padding-bottom: 25%;"><img class="ui small image" style="height: 50%;width: 50%;margin-left: 25%;margin-top: 25%;"  src="'.plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/asset/right-arrow-sample.png').'"/></div>
                                   </div>
                                 </div>
                               </div>
                               <div class="ui inverted card">
                                 <div class="content">
                                   <div class="ui inverted placeholder">
-                                    <div class="rectangular"><img src="'.plugins_url(basename(EO_WBC_PLUGIN_DIR).'/asset/ring-sample.png').'"/></div>
+                                    <div class="rectangular"><img src="'.plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/asset/ring-sample.png').'"/></div>
                                   </div>
                                 </div>
                               </div>
