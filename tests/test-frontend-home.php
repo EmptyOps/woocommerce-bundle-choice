@@ -34,6 +34,10 @@ class FrontendHome extends WP_UnitTestCase {
 
 		//$this->assertRedirect('/product-category/eo_diamond_shape_cat/?EO_WBC=1&BEGIN=eo_diamond_shape_cat&STEP=1');
 		
+		set_option('eo_wbc_first_slug','eo_diamond_shape_cat');
+		set_option('eo_wbc_second_slug','eo_setting_shape_cat');
+
+
 		ob_start();
 		$eo_wbc_do_shortcode = $LoadEO_WBC_Home->eo_wbc_do_shortcode();
 		$res = ob_get_flush();
