@@ -63,7 +63,8 @@ if(eo_wbc_object.disp_regular){
 
 			var form=jQuery("form#eo_wbc_filter");	
 			var site_url=eo_wbc_object.eo_cat_site_url;
-			var ajax_url=site_url+eo_wbc_object.eo_cat_query;					
+			var ajax_url=site_url+eo_wbc_object.eo_cat_query;	
+			console.log(ajax_url);				
 			jQuery.ajax({
 				url: ajax_url,//form.attr('action'),
 				data:form.serialize(), // form data
