@@ -2,6 +2,7 @@
 class EO_WBC_Home
 {
     public function __construct() {
+      
       if(isset($_GET['report']) && !empty($_GET['report'])){
         if(isset($_SERVER['HTTP_REFERER'])){
           update_option('eo_wbc_mapping_error_report',$_SERVER['HTTP_REFERER']);
@@ -260,8 +261,22 @@ class EO_WBC_Home
     public function eo_wbc_buttons(){ //the two buttons UI
 
       $heading=get_option('eo_wbc_home_btn_tagline',__('Make your own pair from recommendation','woo-bundle-choice'));
+            
+      $first_url = esc_url(get_term_link( get_option('eo_wbc_first_slug'),'product_cat'));
+      if(strpos($first_url, '?')!==false){
+          $first_url.='&';
+      } else {
+          $first_url.='?';
+      }
 
-      return '<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><div id="wbc_" class="eo-wbc-container"><h2 class="ui center aligned header" style="text-align: center !important;">'.($heading?$heading:__('Make your own pair from recommendation','woo-bundle-choice')).'</h2><div class="ui grid center aligned container"><div class="ui buttons large row stackable"><button class="ui button primary column" href="'. get_bloginfo('url').get_option('eo_wbc_first_url').'?EO_WBC=1&BEGIN='.get_option('eo_wbc_first_slug').'&STEP=1" >'.(get_option('eo_wbc_home_btn_text',__('Start with ','woo-bundle-choice'))).' '.get_option('eo_wbc_first_name','FIRST').'</button> <div class="or"></div><button class="ui button primary column" href="'.get_bloginfo('url').get_option('eo_wbc_second_url').'?EO_WBC=1&BEGIN='.get_option('eo_wbc_second_slug').'&STEP=1" >'. (get_option('eo_wbc_home_btn_text',__('Start with','woo-bundle-choice'))).' '.get_option('eo_wbc_second_name','SECOND').'</button></div></div><style>.ui.grid{margin-left: auto;margin-right: auto;}  '.$this->eo_wbc_buttons_css().' @media only screen and (max-width: 768px){ .eo-wbc-container .ui.buttons .button{ border-radius: 0 !important; } }</style><br/><br/></div><!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->';
+      $second_url = esc_url(get_term_link( get_option('eo_wbc_second_slug'),'product_cat'));
+      if(strpos($second_url, '?')!==false){
+          $second_url.='&';
+      } else {
+          $second_url.='?';
+      }      
+
+      return '<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><div id="wbc_" class="eo-wbc-container"><h2 class="ui center aligned header" style="text-align: center !important;">'.($heading?$heading:__('Make your own pair from recommendation','woo-bundle-choice')).'</h2><div class="ui grid center aligned container"><div class="ui buttons large row stackable"><button class="ui button primary column" href="'. $first_url .'EO_WBC=1&BEGIN='.get_option('eo_wbc_first_slug').'&STEP=1" >'.(get_option('eo_wbc_home_btn_text',__('Start with ','woo-bundle-choice'))).' '.get_option('eo_wbc_first_name','FIRST').'</button> <div class="or"></div><button class="ui button primary column" href="'. $second_url .'EO_WBC=1&BEGIN='.get_option('eo_wbc_second_slug').'&STEP=1" >'. (get_option('eo_wbc_home_btn_text',__('Start with','woo-bundle-choice'))).' '.get_option('eo_wbc_second_name','SECOND').'</button></div></div><style>.ui.grid{margin-left: auto;margin-right: auto;}  '.$this->eo_wbc_buttons_css().' @media only screen and (max-width: 768px){ .eo-wbc-container .ui.buttons .button{ border-radius: 0 !important; } }</style><br/><br/></div><!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->';
     }
 
     public function eo_wbc_clean() { //terminate session bundle set data as use is on home page and rejects all changes.       

@@ -149,6 +149,13 @@ class EO_WBC_Filter_Widget {
         }, 10 );
 
         wp_register_script('eo_wbc_filter_js',plugins_url('js/eo_wbc_filter.js',__FILE__),array('jquery'));
+
+        $site_url = esc_url(get_term_link( $current_category,'product_cat'));
+      	if(strpos($site_url, '?')!==false){
+          	$site_url.='&';
+      	} else {
+          	$site_url.='?';
+      	}
         
         wp_localize_script('eo_wbc_filter_js','eo_wbc_object',array(
         					'eo_product_url'=>$this->product_url(),
@@ -157,7 +164,7 @@ class EO_WBC_Filter_Widget {
         					'eo_admin_ajax_url'=>$site_url."/wp-admin/admin-ajax.php",
         					'eo_part_site_url'=>$site_url.'/product/',
         					'eo_part_end_url'=>'/'.$this->product_url(),
-        					'eo_cat_site_url'=>$site_url."/product-category/".$current_category,
+        					'eo_cat_site_url'=>$site_url,
         					'eo_cat_query'=>'/?'.http_build_query($_GET)
         				));            
 

@@ -35,8 +35,7 @@ class EO_WBC_Product
     }
     //Show make pair button to only those are available for pairing as per mapping.
     public function eo_wbc_make_pair()
-    {
-        
+    {        
         $url=$this->eo_wbc_category_link();
         $category=$this->eo_wbc_get_category();
 
@@ -135,6 +134,7 @@ class EO_WBC_Product
     public function eo_wbc_render()
     {   
         $redirect_url = $this->eo_wbc_product_route();
+        
         //Registering Scripts : JavaScript
         add_action( 'wp_enqueue_scripts',function() use(&$redirect_url){
 
@@ -190,69 +190,70 @@ class EO_WBC_Product
 
         global $post;
         $url=null;        
-        $category=$this->eo_wbc_get_category();        
+        $category=$this->eo_wbc_get_category();    
+
         if(sanitize_text_field($_GET['STEP'])==1)
         {   
 
             if(!empty($_GET['CART']) && !empty($_GET['REDIRECT']) && sanitize_text_field($_GET['REDIRECT'])==1)
             {    
                 //if redirec signal is set and cart data are ready then
-                //relocate user to target path.
-
+                //relocate user to target path.                
+      
                 if($category==get_option('eo_wbc_first_slug')){
                     $category_link=$this->eo_wbc_category_link();
-                    $url=get_bloginfo('url').'/product-category/'.$category_link
+                    $url=get_bloginfo('url').'/index.php/product-category/'.$category_link
                         .'EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
                         .'&STEP=2&FIRST='.$post->ID.'&SECOND='.sanitize_text_field($_GET['SECOND'])
                         ."&CART=".sanitize_text_field($_GET['CART']).'&ATT_LINK='.implode(' ',$this->att_link).'&CAT_LINK='.substr($category_link,0,strpos($category_link,'/'));
                 }
                 elseif($category==get_option('eo_wbc_second_slug')){
                     $category_link=$this->eo_wbc_category_link();
-                    $url=get_bloginfo('url').'/product-category/'.$category_link
+                    $url=get_bloginfo('url').'/index.php/product-category/'.$category_link
                         .'EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
                         .'&STEP=2&FIRST='.sanitize_text_field($_GET['FIRST']).'&SECOND='.$post->ID
                         ."&CART=".sanitize_text_field($_GET['CART']).'&ATT_LINK='.implode(' ',$this->att_link).'&CAT_LINK='.substr($category_link,0,strpos($category_link,'/'));
-                } 
-                
+                }                
+
                 return header("Location: {$url}");
                 wp_die();
                 //wp_safe_redirect($url ,301 );               
             }
             else
             {
-                if($category==get_option('eo_wbc_first_slug') and !empty($_GET['SECOND'])){
+                if($category==get_option('eo_wbc_first_slug')) {
                     $url=get_permalink($post->ID)
                         .'?EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
-                        .'&STEP=1&FIRST='.$post->ID.'&SECOND='.sanitize_text_field($_GET['SECOND'])."&REDIRECT=1";
+                        .'&STEP=1&FIRST='.$post->ID.'&SECOND='.sanitize_text_field(empty($_GET['SECOND'])?'':$_GET['SECOND'])."&REDIRECT=1";
                 }
-                elseif($category==get_option('eo_wbc_second_slug') and !empty($_GET['FIRST'])) {
+                elseif($category==get_option('eo_wbc_second_slug')) {
                     $url=get_permalink($post->ID)
                         .'?EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
-                        .'&STEP=1&FIRST='.sanitize_text_field($_GET['FIRST']).'&SECOND='.$post->ID."&REDIRECT=1";
+                        .'&STEP=1&FIRST='.sanitize_text_field(empty($_GET['FIRST'])?'':$_GET['FIRST']).'&SECOND='.$post->ID."&REDIRECT=1";
                 } else {
                     $url=get_permalink($post->ID);
                 }                          
             }            
         }
         
-        elseif(sanitize_text_field($_GET['STEP'])==2)
-        {
+        elseif(sanitize_text_field($_GET['STEP'])==2) {   
+            
             if(sanitize_text_field($_GET['FIRST'])==='' OR $category==get_option('eo_wbc_first_slug'))
             {
-                $url=get_bloginfo('url').get_option('eo_wbc_review_page')
+                $url=get_page_by_path('eo-wbc-product-review')->guid
                     .'?EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
                     .'&STEP=3&FIRST='.$post->ID.'&SECOND='.sanitize_text_field($_GET['SECOND']);
             }
             elseif (sanitize_text_field($_GET['SECOND'])==='' OR $category==get_option('eo_wbc_second_slug'))
             {
-                $url=get_bloginfo('url').get_option('eo_wbc_review_page')
+                $url=get_page_by_path('eo-wbc-product-review')->guid
                     .'?EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
                     .'&STEP=3&FIRST='.sanitize_text_field($_GET['FIRST']).'&SECOND='.$post->ID;
             }
             else
             {
                 $url='';
-            }
+            }            
         }        
         return $url;
     }
