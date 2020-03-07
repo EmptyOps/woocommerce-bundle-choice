@@ -261,7 +261,11 @@ class EO_WBC_Home
     public function eo_wbc_buttons(){ //the two buttons UI
 
       $heading=get_option('eo_wbc_home_btn_tagline',__('Make your own pair from recommendation','woo-bundle-choice'));
-            
+
+      $first_url = get_term_link( get_option('eo_wbc_first_slug'),'product_cat');
+      if(empty($first_url) or is_wp_error($first_url)){
+        $first_url = get_bloginfo('url').'index.php/'.get_option('eo_wbc_first_slug')
+      }
       $first_url = esc_url(get_term_link( get_option('eo_wbc_first_slug'),'product_cat'));
       if(strpos($first_url, '?')!==false){
           $first_url.='&';
@@ -269,6 +273,11 @@ class EO_WBC_Home
           $first_url.='?';
       }
 
+      $second_url = esc_url(get_term_link( get_option('eo_wbc_second_slug'),'product_cat'));
+      $second_url = get_term_link( get_option('eo_wbc_second_slug'),'product_cat');
+      if(empty($second_url) or is_wp_error($second_url)){
+        $second_url = get_bloginfo('url').'index.php/'.get_option('eo_wbc_second_slug')
+      }
       $second_url = esc_url(get_term_link( get_option('eo_wbc_second_slug'),'product_cat'));
       if(strpos($second_url, '?')!==false){
           $second_url.='&';
