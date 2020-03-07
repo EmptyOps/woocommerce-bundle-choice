@@ -238,15 +238,26 @@ class EO_WBC_Product
         
         elseif(sanitize_text_field($_GET['STEP'])==2) {   
             
+            $review_page_url = '';
+
+            $review_page = get_page_by_path('eo-wbc-product-review');
+            if(empty($review_page) or is_wp_error($review_page)){
+                $review_page_url = get_bloginfo('url').'index.php/'.get_option('eo_wbc_review_page')
+            } else {
+                $review_page_url = $review_page->guid
+            }
+
+            
+
             if(sanitize_text_field($_GET['FIRST'])==='' OR $category==get_option('eo_wbc_first_slug'))
             {
-                $url=get_page_by_path('eo-wbc-product-review')->guid
+                $url=$review_page_url
                     .'?EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
                     .'&STEP=3&FIRST='.$post->ID.'&SECOND='.sanitize_text_field($_GET['SECOND']);
             }
             elseif (sanitize_text_field($_GET['SECOND'])==='' OR $category==get_option('eo_wbc_second_slug'))
             {
-                $url=get_page_by_path('eo-wbc-product-review')->guid
+                $url=$review_page_url
                     .'?EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
                     .'&STEP=3&FIRST='.sanitize_text_field($_GET['FIRST']).'&SECOND='.$post->ID;
             }
@@ -310,7 +321,7 @@ class EO_WBC_Product
                     $terms = array_merge($terms,$non_var_terms);
                 }                                
             } else {
-                array_walk($terms,function($term,$index){
+                $terms = array_walk($terms,function($term,$index){
                     $terms[$index] = $term->term_taxonomy_id;
                 });    
             } 

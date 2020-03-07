@@ -436,8 +436,10 @@ class EO_WBC_Actions
             update_option('eo_wbc_btn_setting',$_POST['eo_wbc_btn_setting']); 
             if ($_POST['eo_wbc_btn_setting']=="0" || $_POST['eo_wbc_btn_setting']=="2") { //if on home page.
 
-                //position of button (Top/Bottom/Middle/Custom)
-                update_option('eo_wbc_btn_position',$_POST['eo_wbc_btn_position']);           
+                if(!empty($_POST['eo_wbc_btn_position'])){
+                    //position of button (Top/Bottom/Middle/Custom)
+                    update_option('eo_wbc_btn_position',$_POST['eo_wbc_btn_position']);           
+                }
             }            
         }        
 

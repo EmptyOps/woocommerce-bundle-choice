@@ -144,8 +144,12 @@ class Cache_Manager {
 		$terms =array_map(function($term){
 			return $term->term_taxonomy_id;			
 		},$terms);
-
-		return array_values($terms);		
+		if(!empty($terms)){
+			return array_values($terms);		
+		} else {
+			return array();
+		}
+		
 	}
 }
 
