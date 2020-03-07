@@ -183,11 +183,13 @@ class TestFronIntegration extends WP_UnitTestCase {
 
        	//Second Product load...
 
+       	update_option( 'eo_wbc_review_page','/eo-wbc-product-review/');
+
        	$post = get_page_by_title('Setting #8800950587' , OBJECT, 'product' );        
         $variable_product = new WC_Product_Variable($post->ID);        
         $variation_id = $variable_product->get_available_variations()[0]['variation_id'];
 
-        $this->assertEquals( get_bloginfo('url').get_option('eo_wbc_review_page')
+        $this->assertEquals( get_bloginfo('url').'/index.php'.get_option('eo_wbc_review_page')
                     .'?EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
                     .'&STEP=3&FIRST='.sanitize_text_field($_GET['FIRST']).'&SECOND='.$post->ID , $product->eo_wbc_product_route());
 

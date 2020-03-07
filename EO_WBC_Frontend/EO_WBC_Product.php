@@ -242,7 +242,7 @@ class EO_WBC_Product
 
             $review_page = get_page_by_path('eo-wbc-product-review');
             if(empty($review_page) or is_wp_error($review_page)){
-                $review_page_url = get_bloginfo('url').'index.php/'.get_option('eo_wbc_review_page');
+                $review_page_url = get_bloginfo('url').'/index.php'.get_option('eo_wbc_review_page');
             } else {
                 $review_page_url = $review_page->guid;
             }           
