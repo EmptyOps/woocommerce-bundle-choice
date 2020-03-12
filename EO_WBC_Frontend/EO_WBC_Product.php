@@ -256,7 +256,7 @@ class EO_WBC_Product
             $review_page = get_page_by_path('eo-wbc-product-review');
             
             if(empty($review_page) or is_wp_error($review_page)){
-                $review_page_url = get_bloginfo('url').'/index.php'.get_option('eo_wbc_review_page');
+                $review_page_url = home_url('/eo_wbc_review_page/');
             } else {
                 $review_page_url = get_permalink($review_page);
             }           
@@ -367,7 +367,7 @@ class EO_WBC_Product
 
         $category=array();//array to hold category slugs
         $taxonomy=array();//array to hold taxonomy slugs
-        if(!is_wp_error($terms) and !empty($terms)) {
+        if(!is_wp_error($terms) and !empty($terms) and is_array($terms)) {
             array_walk($terms,function($term) use(&$category,&$taxonomy){
                 $_term_ = null;
                 if(is_array($term)) {
