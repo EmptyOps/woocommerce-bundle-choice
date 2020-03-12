@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=hi000
 Requires at least: 3.5
 Tested up to: 5.3.2
 Requires PHP: 5.3
-Stable tag: 0.5.62
+Stable tag: 0.5.63
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -214,6 +214,8 @@ Yes, it is.
 5. Home page after plugin fully configured.
 
 == Changelog ==
+= 0.5.63 (March 12, 2020 )=
+  ** Critical Bug fix ** Related to woocommerce latest version. Redirect and ajax compatiblity issue fixes.
 = 0.5.62 (March 12, 2020 )=
   ** Critical Bug fix ** Related to woocommerce latest version. Redirect and ajax compatiblity issue fixes.
 = 0.5.61 (March 6, 2020 )=

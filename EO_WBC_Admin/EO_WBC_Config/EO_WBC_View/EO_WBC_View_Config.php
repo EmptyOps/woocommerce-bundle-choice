@@ -180,7 +180,7 @@ function eo_wbc_admin_config_category_options($slug='')
                                     <p class="info">( <?php _e("Choose type of setup.<br/>&nbsp;Default : non-technical users.<br/>&nbsp;Shortcode : technical users only.","woo-bundle-choice"); ?> )</p>
                                     <p id="customizer-link" style="display: none;"><a class="button button-primary" href="<?php echo admin_url('customize.php?autofocus[control]=btn_position_setting_selector_btn'); ?>">Choose where you want to display buttons on home page</a><br/><p>
 
-                                    <p id="custom-landing-link" style="display: none;"><a target="_blank" href="<?php echo get_permalink(get_page_by_path('design-your-own-ring')); ?>">View how landing page will look like</a><br/><p>
+                                    <p id="custom-landing-link" style="display: none;"><a target="_blank" href="<?php echo get_permalink(get_permalink(get_page_by_path('design-your-own-ring'))); ?>">View how landing page will look like</a><br/><p>
 
                                 </td>                        
                             </tr>
