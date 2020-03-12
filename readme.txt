@@ -120,6 +120,9 @@ These are only some of many extensions. You can see enitre list of Extensions on
     [ Filters ]
   [youtube https://www.youtube.com/watch?v=UysQox5AH7I]
 
+    [ Mapping ]
+  [youtube https://www.youtube.com/watch?v=8RQ9D_fgZf0&t=21s]
+
 = Using Shortcode =
 
 [youtube https://www.youtube.com/watch?v=QPQcRID_SGE]
@@ -166,6 +169,9 @@ If you have suggestions about how to improve WooCommerce Product Bundle Choice, 
 
     [ Filters ]
   [youtube https://www.youtube.com/watch?v=UysQox5AH7I]
+
+    [ Mapping ]
+  [youtube https://www.youtube.com/watch?v=8RQ9D_fgZf0&t=21s]
 
 **2. How to place buttons anywhere on any page?**
 
