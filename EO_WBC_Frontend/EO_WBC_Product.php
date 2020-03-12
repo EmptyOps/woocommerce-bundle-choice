@@ -256,7 +256,7 @@ class EO_WBC_Product
             $review_page = get_page_by_path('eo-wbc-product-review');
             
             if(empty($review_page) or is_wp_error($review_page)){
-                $review_page_url = home_url('/eo_wbc_review_page/');
+                $review_page_url = home_url('/eo-wbc-product-review/');
             } else {
                 $review_page_url = get_permalink($review_page);
             }           
