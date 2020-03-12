@@ -66,7 +66,7 @@ class EO_WBC_Breadcrumb
                 }
             ?>          
             <div 
-                data-href="<?php echo ( (empty($_GET['EO_CHANGE']) XOR empty($_GET['EO_VIEW'])) && !empty($_GET['FIRST']) && !empty($_GET['SECOND']) ? get_bloginfo('url')
+                data-href="<?php echo ( (empty($_GET['EO_CHANGE']) XOR empty($_GET['EO_VIEW'])) && !empty($_GET['FIRST']) && !empty($_GET['SECOND']) ? get_bloginfo('url').'/index.php'
                     .get_option('eo_wbc_review_page')
                     .'?EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
                     .'&STEP=3&FIRST='.sanitize_text_field($_GET['FIRST']).'&SECOND='.sanitize_text_field($_GET['SECOND']):'#' ); ?>" 
@@ -179,7 +179,7 @@ class EO_WBC_Breadcrumb
                 {
                     $html.=self::eo_wbc_breadcumb_second_html($step,1).self::eo_wbc_breadcumb_first_html($step,2);
                 }
-                $html.='<div data-href="'.( (empty($_GET['EO_CHANGE']) XOR empty($_GET['EO_VIEW']) ) && !empty($_GET['FIRST']) && !empty($_GET['SECOND'])?get_bloginfo('url')
+                $html.='<div data-href="'.( (empty($_GET['EO_CHANGE']) XOR empty($_GET['EO_VIEW']) ) && !empty($_GET['FIRST']) && !empty($_GET['SECOND'])?get_bloginfo('url').'/index.php'
                     .get_option('eo_wbc_review_page')
                     .'?EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
                     .'&STEP=3&FIRST='.sanitize_text_field($_GET['FIRST']).'&SECOND='.sanitize_text_field($_GET['SECOND']):'#' ).'" class="'.(($step==3)?'active ':(($step>3)?'completed ':'disabled')).' step">';
@@ -283,10 +283,8 @@ class EO_WBC_Breadcrumb
                         <?php _e(wc_price(self::$second->get_price())); ?>
                         <br/>
                         <u><a href="<?php echo (!empty($_GET['SECOND'])?self::eo_wbc_breadcrumb_view_url(sanitize_text_field($_GET['SECOND']),$order):'#'); ?>">View</a></u>&nbsp;|&nbsp;<u><a href="<?php echo (!empty($_GET['SECOND'])?self::eo_wbc_breadcrumb_change_url($order,sanitize_text_field($_GET['SECOND'])):'#'); ?>">Remove</a></u>
-                    </div>
-                
-            <?php endif; ?>
-            
+                    </div>                
+            <?php endif; ?>            
             </div>
         </div>
         <?php
@@ -352,7 +350,7 @@ class EO_WBC_Breadcrumb
         if ($order==1) {
             if(self::eo_wbc_breadcrumb_get_category($chage_product_id)==get_option('eo_wbc_first_slug')){
 
-                $url=get_bloginfo('url').get_option('eo_wbc_first_url').
+                $url=get_bloginfo('url').'/index.php'.get_option('eo_wbc_first_url').
                 '?EO_WBC=1&BEGIN='.get_option('eo_wbc_first_slug').
                 '&STEP=1'.
                 /*'&FIRST='.sanitize_text_field(empty($_GET['FIRST'])?'':$_GET['FIRST']).
@@ -361,7 +359,7 @@ class EO_WBC_Breadcrumb
             }
             elseif (self::eo_wbc_breadcrumb_get_category($chage_product_id)==get_option('eo_wbc_second_slug')) {
 
-                $url=get_bloginfo('url').get_option('eo_wbc_second_url').
+                $url=get_bloginfo('url').'/index.php'.get_option('eo_wbc_second_url').
                 '?EO_WBC=1&BEGIN='.get_option('eo_wbc_second_slug').
                 '&STEP=1'.
                 /*'&FIRST='.sanitize_text_field(empty($_GET['FIRST'])?'':$_GET['FIRST']).
@@ -382,102 +380,141 @@ class EO_WBC_Breadcrumb
                 //$target='SECOND';
                 if(empty($_GET['FIRST'])) return '#';
                 $product=new WC_Product($_GET['FIRST']);
-            }            
+            }      
 
             if(empty($product)) return '#';            
             $variable_status=FALSE;//status if product is varaible in nature.
             $cart=NULL;//storage variable for cart data if redirected from 'Add to cart' action.
             
-            if($product->is_type( 'variable' ))
-            {
+            if($product->is_type( 'variable' )) {
+
                 $variable_status=TRUE;
             }
 
-            if(method_exists($product,'get_id')){
+            if(method_exists($product,'get_id')) {
+
                 $post_id=$product->get_id();
+
             } else {
+
                 $post_id=$product->ID;
             } 
 
-            $terms=wp_get_post_terms($post_id,get_taxonomies(),array('fields'=>'ids'));            
-            if($variable_status)
-            {   
-                $new_terms=array();
-                foreach ($terms as $term_id) {
-                    $term_object=get_term_by('term_taxonomy_id',$term_id,'category');
-                    if($term_object->taxonomy=='product_cat' 
-                        or
-                        in_array(
-                            $term_object->slug,
-                            array_values(wc_get_product_variation_attributes($cart['variation_id']))) 
-                    ){
-                        $new_terms[]=$term_id;
-                    }          
-                }
-                $terms=$new_terms;
-            }
+            $terms=wp_get_post_terms($post_id,get_taxonomies(),array('fields'=>'ids'));
+            $maps = wp_cache_get( 'cache_maps', 'eo_wbc');  
 
             $category=array();        
-            foreach ($terms as $term)
-            {
-                global $wpdb;
-                $query="select * from `{$wpdb->prefix}eo_wbc_cat_maps` "."where first_cat_id={$term} or second_cat_id={$term}";
-                
-                $maps=$wpdb->get_results($query,'ARRAY_N');                       
-                foreach ($maps as $map){
+            
+            if(!is_wp_error($terms) and !empty($terms) and is_array($terms) and is_array($maps) ){
 
-                    if($map[0]==$term){
-                       
-                        $category[]=$map[1];
+                if($variable_status)
+                {   
+                    $new_terms=array();
+                    foreach ($terms as $term_id) {
+                        $term_object=get_term_by('term_taxonomy_id',$term_id,'category');
+                        if($term_object->taxonomy=='product_cat' 
+                            or
+                            in_array(
+                                $term_object->slug,
+                                array_values(wc_get_product_variation_attributes($cart['variation_id']))) 
+                        ){
+                            $new_terms[]=$term_id;
+                        }          
                     }
-                    else{
-                       
-                        $category[]=$map[0];
-                    }
+                    $terms=$new_terms;
                 }
-            }        
+
+                // Gather all target of the maps           
+                $map_column = 0;
+                if(self::eo_wbc_breadcrumb_get_category($post_id)==get_option('eo_wbc_first_slug')) { $map_column = 0; }
+                elseif(self::eo_wbc_breadcrumb_get_category($post_id)==get_option('eo_wbc_second_slug')) { $map_column = 1; }
+                
+                $product_code = "pid_{$post_id}";
+                            
+                if(!empty($terms) and is_array($terms)){
+                    $terms =array_filter(array_map(function($map) use(&$terms,&$map_column,&$product_code,&$category){
+                        
+                        if(array_intersect($terms,$map[$map_column])){
+                            if($map_column == 0) return $map[1];
+                            else return $map[0];
+                        } elseif(in_array( $product_code, $map[$map_column] )) {                    
+                            if($map_column == 0){
+                                $category = array_merge( $category, $map[1] );
+                            } else {
+                                $category = array_merge( $category, $map[0] );
+                            }
+                            return false;
+                        } else {
+                            return false;
+                        }                
+                    },$maps));
+                }
+            }
+         
             //remove empty array space and duplicate values
             $category=array_unique(array_filter($category));        
             
             $cat=array();//array to hold category slugs
             $tax=array();//array to hold taxonomy slugs
-            foreach ($category as $term_id)
-            {
-                $term_object=get_term_by('term_taxonomy_id',$term_id,'category');
-                if(!empty($term_object)){
-                    if($term_object->taxonomy=='product_cat'){
-                        $cat[]=$term_object->term_id;
+
+            if(!is_wp_error($terms) and !empty($terms)) {
+            array_walk($terms,function($term) use(&$cat,&$tax){
+                    $_term_ = null;
+                    if(is_array($term)) {
+                        foreach ($term as $_term_) {
+                            $_term_ = get_term_by('term_taxonomy_id', $_term_);
+                            if(!is_wp_error($_term_) and !empty($_term_)) {
+                                $_taxonomy_ = $_term_->taxonomy;                            
+                                if($_taxonomy_==='product_cat') {
+
+                                    $cat[]= $_term_->slug;
+
+                                } elseif( substr($_taxonomy_,0,3) =='pa_' ) {
+
+                                    $tax[substr($_term_->taxonomy,3)][] = $_term_->slug;
+                                }
+                            }
+                        }
+                    } else {
+                        $_term_ = get_term_by('term_taxonomy_id', $_term_);
+
+                        if(!is_wp_error($_term_) and !empty($_term_)) {
+                            $_taxonomy_ = $_term_->taxonomy;                        
+                            if($_taxonomy_==='product_cat') {
+
+                                $cat[]= $_term_->slug;
+
+                            } elseif( substr($_taxonomy_,0,3) =='pa_' ) {
+                                
+                                $tax[substr($_term_->taxonomy,3)][] = $_term_->slug;
+                            }
+                        }
                     }
-                    else
-                    {
-                        $tax[]=$term_object->term_id;                                   
-                    }
-                }                        
+                });
             }
+           
             $link='';
 
             //if category maping is available then make url filter to category
             //else add default category to the link.
-            if(is_array($cat) && count($cat)>0){
-                foreach ($cat as $term_id){
-                    $link.=get_term_by('term_taxonomy_id',$term_id,'category')->slug.',';    
-                }                        
-                $link=substr($link,0,-1);//remove ',' at the end of category filter.
+            if(!empty($cat) and is_array($cat)) {
+                
+                $link=implode( (get_option('eo_wbc_map_cat_pref','and')==='and'?'+':',') , $cat );                
             }            
             else
-            {
+            {                   
                 $link.=(self::eo_wbc_breadcrumb_get_category($chage_product_id)==get_option('eo_wbc_first_slug'))
                             ?
-                        get_option('eo_wbc_second_slug')
+                        get_option('eo_wbc_first_slug')
                             :
-                        get_option('eo_wbc_first_slug');
+                        get_option('eo_wbc_second_slug');
             }
             
             $cat_link=$link;
 
             $link.="/?";        
 
-            if(is_array($tax) && count($tax)>0){            
+            if(!empty($tax) and is_array($tax)){            
                 
                 $filter_query=array();
                 if( !empty($tax) && (is_object($tax) or is_array($tax)) ) {
@@ -495,9 +532,16 @@ class EO_WBC_Breadcrumb
                 }
             }        
 
-            $url=get_bloginfo('url').'/product-category/'.$link
-                        .'EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
-                        .'&STEP=2&FIRST='.( $_GET['BEGIN']==get_option('eo_wbc_first_slug')? sanitize_text_field($_GET['FIRST']):'').'&SECOND='.($_GET['BEGIN']==get_option('eo_wbc_second_slug')?sanitize_text_field($_GET['SECOND']):'').'&EO_CHANGE=1'.'&CAT_LINK='.$cat_link;            
+            $url=get_bloginfo('url').'/index.php'.'/product-category/'.$link
+                        .'EO_WBC=1&BEGIN='.sanitize_text_field(@$_GET['BEGIN'])
+                        .'&STEP=2&FIRST='.($_GET['BEGIN']==get_option('eo_wbc_first_slug')? sanitize_text_field($_GET['FIRST']):'').'&SECOND='.($_GET['BEGIN']==get_option('eo_wbc_second_slug')?sanitize_text_field($_GET['SECOND']):'').'&EO_CHANGE=1'.'&CAT_LINK='.$cat_link;            
+                        
+            if(!empty($category) && is_array($category)) {
+                $category = array_filter($category);
+                $category = array_map(function($category){ return substr($category,4); },$category);
+
+                $link.='products_in='.implode(',',$category).'&';
+            }  
         }
         return $url;
     }

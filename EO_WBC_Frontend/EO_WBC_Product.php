@@ -192,47 +192,60 @@ class EO_WBC_Product
         $url=null;        
         $category=$this->eo_wbc_get_category();    
 
-        if(sanitize_text_field($_GET['STEP'])==1)
-        {   
+        if(sanitize_text_field($_GET['STEP'])==1) {   
 
-            if(!empty($_GET['CART']) && !empty($_GET['REDIRECT']) && sanitize_text_field($_GET['REDIRECT'])==1)
-            {    
+            if(!empty($_GET['CART']) && !empty($_GET['REDIRECT']) && sanitize_text_field($_GET['REDIRECT'])==1) {
                 //if redirec signal is set and cart data are ready then
                 //relocate user to target path.                
       
-                if($category==get_option('eo_wbc_first_slug')){
+                if($category==get_option('eo_wbc_first_slug')) {
+
                     $category_link=$this->eo_wbc_category_link();
                     $url=get_bloginfo('url').'/index.php/product-category/'.$category_link
                         .'EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
                         .'&STEP=2&FIRST='.$post->ID.'&SECOND='.sanitize_text_field($_GET['SECOND'])
                         ."&CART=".sanitize_text_field($_GET['CART']).'&ATT_LINK='.implode(' ',$this->att_link).'&CAT_LINK='.substr($category_link,0,strpos($category_link,'/'));
-                }
-                elseif($category==get_option('eo_wbc_second_slug')){
+
+                } elseif($category==get_option('eo_wbc_second_slug')) {
+
                     $category_link=$this->eo_wbc_category_link();
                     $url=get_bloginfo('url').'/index.php/product-category/'.$category_link
                         .'EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
                         .'&STEP=2&FIRST='.sanitize_text_field($_GET['FIRST']).'&SECOND='.$post->ID
                         ."&CART=".sanitize_text_field($_GET['CART']).'&ATT_LINK='.implode(' ',$this->att_link).'&CAT_LINK='.substr($category_link,0,strpos($category_link,'/'));
-                }                
-
+                } 
+                
                 return header("Location: {$url}");
                 wp_die();
                 //wp_safe_redirect($url ,301 );               
-            }
-            else
-            {
+            } else {
+
                 if($category==get_option('eo_wbc_first_slug')) {
+
                     $url=get_permalink($post->ID)
                         .'?EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
                         .'&STEP=1&FIRST='.$post->ID.'&SECOND='.sanitize_text_field(empty($_GET['SECOND'])?'':$_GET['SECOND'])."&REDIRECT=1";
-                }
-                elseif($category==get_option('eo_wbc_second_slug')) {
+
+                } elseif($category==get_option('eo_wbc_second_slug')) {
+
                     $url=get_permalink($post->ID)
                         .'?EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
                         .'&STEP=1&FIRST='.sanitize_text_field(empty($_GET['FIRST'])?'':$_GET['FIRST']).'&SECOND='.$post->ID."&REDIRECT=1";
                 } else {
-                    $url=get_permalink($post->ID);
-                }                          
+                    // well due to some reason could not determine category properly so working based on begin offset recived via _GET.
+                    $begin = sanitize_text_field($_GET['BEGIN']);
+                    $url = get_permalink($post->ID);
+                    if($begin==get_option('eo_wbc_first_slug')){
+
+                        $url.= '?EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
+                        .'&STEP=1&FIRST='.$post->ID.'&SECOND='.sanitize_text_field(empty($_GET['SECOND'])?'':$_GET['SECOND'])."&REDIRECT=1";
+
+                    } elseif($begin==get_option('eo_wbc_second_slug')) {
+
+                        $url.= '?EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
+                        .'&STEP=1&FIRST='.sanitize_text_field(empty($_GET['FIRST'])?'':$_GET['FIRST']).'&SECOND='.$post->ID."&REDIRECT=1";
+                    }                    
+                }
             }            
         }
         
@@ -331,23 +344,24 @@ class EO_WBC_Product
             
             $product_code = "pid_{$post->ID}";
                         
-            $terms =array_filter(array_map(function($map) use(&$terms,&$map_column,&$product_code,&$product_in){
-                
-                if(array_intersect($terms,$map[$map_column])){
-                    if($map_column == 0) return $map[1];
-                    else return $map[0];
-                } elseif(in_array( $product_code, $map[$map_column] )) {                    
-                    if($map_column == 0){
-                        $product_in = array_merge( $product_in, $map[1] );
+            if(!empty($terms) and is_array($terms)){
+                $terms =array_filter(array_map(function($map) use(&$terms,&$map_column,&$product_code,&$product_in){
+                    
+                    if(array_intersect($terms,$map[$map_column])){
+                        if($map_column == 0) return $map[1];
+                        else return $map[0];
+                    } elseif(in_array( $product_code, $map[$map_column] )) {                    
+                        if($map_column == 0){
+                            $product_in = array_merge( $product_in, $map[1] );
+                        } else {
+                            $product_in = array_merge( $product_in, $map[0] );
+                        }
+                        return false;
                     } else {
-                        $product_in = array_merge( $product_in, $map[0] );
-                    }
-                    return false;
-                } else {
-                    return false;
-                }                
-            },$maps));
-
+                        return false;
+                    }                
+                },$maps));
+            }
         }         
 
         $category=array();//array to hold category slugs
@@ -452,9 +466,10 @@ class EO_WBC_Product
      * @method Returns Current-Product's top level catgory
      * @return string
      */    
-    public function eo_wbc_get_category()
-    {
+    public function eo_wbc_get_category() {
+
         global $post;
+        $__category = false;
 
         $terms=wc_get_product_terms( $post->ID, 'product_cat', array( 'fields' => 'slugs' ));
         $first_cat=get_option('eo_wbc_first_slug');
@@ -468,69 +483,96 @@ class EO_WBC_Product
         $second_cat_list=array_merge(array($second_cat),$this->eo_wbc_sub_categories($second_cat));        
 
         
-        if(count(array_intersect($terms,$first_cat_list))>0)
+        if(@count(array_intersect($terms,$first_cat_list))>0)
         {      
             if(!empty($_GET['BEGIN']) && $_GET['BEGIN']==$first_cat){
 
                 if(!empty($_GET['STEP']) && $_GET['STEP']==1){
 
-                    return $first_cat;
+                    $__category = $first_cat;
 
                 } elseif(!empty($_GET['STEP']) && $_GET['STEP']==2){
 
-                    return $second_cat;
+                    $__category = $second_cat;
 
                 } else{
 
-                    return FALSE;
+                    $__category = FALSE;
                 }
 
             } elseif(!empty($_GET['BEGIN']) && $_GET['BEGIN']==$second_cat) {
 
                 if(!empty($_GET['STEP']) && $_GET['STEP']==1){
 
-                    return $second_cat;
+                    $__category = $second_cat;
 
                 } elseif(!empty($_GET['STEP']) && $_GET['STEP']==2){
 
-                    return $first_cat;
+                    $__category = $first_cat;
                 } else{
 
-                    return FALSE;
+                    $__category = FALSE;
                 }               
-            }            
-        }
-        elseif(count(array_intersect($terms,$second_cat_list))>0)
-        {
+            }     
+
+        } elseif(count(array_intersect($terms,$second_cat_list))>0) {
+
             if(!empty($_GET['BEGIN']) && $_GET['BEGIN']==$first_cat){
 
                 if(!empty($_GET['STEP']) && $_GET['STEP']==1){
 
-                    return $first_cat;
+                    $__category = $first_cat;
 
                 } elseif(!empty($_GET['STEP']) && $_GET['STEP']==2){
 
-                    return $second_cat;
+                    $__category = $second_cat;
 
                 } else{
 
-                    return FALSE;
+                    $__category = FALSE;
                 }
 
             } elseif(!empty($_GET['BEGIN']) && $_GET['BEGIN']==$second_cat) {
 
                 if(!empty($_GET['STEP']) && $_GET['STEP']==1){
 
-                    return $second_cat;
+                    $__category = $second_cat;
 
                 } elseif(!empty($_GET['STEP']) && $_GET['STEP']==2){
 
-                    return $first_cat;
+                    $__category = $first_cat;
                 } else{
 
-                    return FALSE;
+                    $__category = FALSE;
                 }               
             }
         }
+
+        if(empty($__category) or ($__category!=get_option('eo_wbc_first_slug') and $__category!=get_option('eo_wbc_second_slug'))) {
+            if(!empty($_GET['BEGIN']) and !empty($_GET['STEP'])){
+                
+                $__begin = sanitize_text_field($_GET['BEGIN']);
+                $__step = sanitize_text_field($_GET['STEP']);
+
+                if($__begin == get_option('eo_wbc_first_slug')) {
+                    
+                    if ($__step == 1) {
+                        $__category = get_option('eo_wbc_first_slug');
+                    } elseif($__step == 2) {
+                        $__category = get_option('eo_wbc_second_slug');
+                    }
+
+                } elseif( $__begin == get_option('eo_wbc_second_slug')) {
+                    
+                    if ($__step == 1) {
+                        $__category = get_option('eo_wbc_second_slug');
+                    } elseif($__step == 2) {
+                        $__category = get_option('eo_wbc_first_slug');
+                    }
+                }
+            }
+        }
+
+        return $__category;
     }
 }
