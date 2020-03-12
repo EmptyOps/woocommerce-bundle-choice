@@ -204,6 +204,9 @@
 						</div>
 					</div>
 				</div>
+			</div>
+
+			<div class="addons-banner-block-items">
 				<div class="addons-banner-block-item">						
 					<div class="addons-banner-block-item-icon">
 						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/EO_WBC_Cart.png') ?>">
@@ -240,6 +243,9 @@
 						</div>
 					</div>
 				</div>
+			</div>
+
+			<div class="addons-banner-block-items">
 				<div class="addons-banner-block-item">						
 					<div class="addons-banner-block-item-icon">
 						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/EO_WBC_Cart.png') ?>">
@@ -276,6 +282,9 @@
 						</div>
 					</div>
 				</div>
+			</div>
+
+			<div class="addons-banner-block-items">
 				<div class="addons-banner-block-item">						
 					<div class="addons-banner-block-item-icon">
 						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/EO_WBC_Cart.png') ?>">
@@ -312,6 +321,9 @@
 						</div>
 					</div>
 				</div>
+			</div>
+
+			<div class="addons-banner-block-items">
 				<div class="addons-banner-block-item">						
 					<div class="addons-banner-block-item-icon">
 						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/EO_WBC_ViewWithShape.jpg') ?>">
@@ -348,6 +360,9 @@
 						</div>
 					</div>
 				</div>
+			</div>
+
+			<div class="addons-banner-block-items">
 				<div class="addons-banner-block-item">						
 					<div class="addons-banner-block-item-icon">
 						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/EO_WBC_Cart.png') ?>">
@@ -384,6 +399,9 @@
 						</div>
 					</div>
 				</div>
+			</div>
+
+			<div class="addons-banner-block-items">
 				<div class="addons-banner-block-item">						
 					<div class="addons-banner-block-item-icon">
 						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/EO_WBC_Cart.png') ?>">
@@ -420,6 +438,9 @@
 						</div>
 					</div>
 				</div>
+			</div>
+
+			<div class="addons-banner-block-items">
 				<div class="addons-banner-block-item">						
 					<div class="addons-banner-block-item-icon">
 						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/EO_WBC_Cart.png') ?>">
@@ -456,6 +477,9 @@
 						</div>
 					</div>
 				</div>
+			</div>
+
+			<div class="addons-banner-block-items">
 				<div class="addons-banner-block-item">						
 					<div class="addons-banner-block-item-icon">
 						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/EO_WBC_Cart.png') ?>">
@@ -468,7 +492,11 @@
 						</div>
 					</div>
 				</div>
-
+				
+				<div class="addons-banner-block-item" style="visibility: hidden;">
+				</div>
+				<div class="addons-banner-block-item" style="visibility: hidden;">
+				</div>
 
 			</div>
 		</div>
