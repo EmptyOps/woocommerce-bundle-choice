@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=hi000
 Requires at least: 3.5
 Tested up to: 5.3.2
 Requires PHP: 5.3
-Stable tag: 0.5.61
+Stable tag: 0.5.62
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -132,7 +132,7 @@ If you are interested in our plugin, click [here](https://www.woo-product-bundle
 
 = Compatibility with other plugins/Officially tested plugins =
 
-We have tested WooCommerce Product Bundle Choice with Wordpress 3.5 to 5.3 and WooCommerce 2.0 to 3.9.3 and our plugin is technically compatible with all the other plugins.
+We have tested WooCommerce Product Bundle Choice with Wordpress 3.5 to 5.3.2 and WooCommerce 2.0 to 4.0.0 and our plugin is technically compatible with all the other plugins.
 
 = Live Demo  =
 Now that you know how this plugin works, is there any reason to not use it? Do you want to see the live demo?
@@ -214,6 +214,8 @@ Yes, it is.
 5. Home page after plugin fully configured.
 
 == Changelog ==
+= 0.5.62 (March 12, 2020 )=
+  ** Critical Bug fix ** Related to woocommerce latest version. Redirect and ajax compatiblity issue fixes.
 = 0.5.61 (March 6, 2020 )=
   ** Critical bug fix. ** Related to woocommerce latest version. Redirect and permalink compatiblity issue fixes.
 = 0.5.60 (March 5, 2020 )=
