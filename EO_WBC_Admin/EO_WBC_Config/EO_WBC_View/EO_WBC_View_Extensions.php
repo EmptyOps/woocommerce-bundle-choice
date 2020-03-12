@@ -204,6 +204,272 @@
 						</div>
 					</div>
 				</div>
+				<div class="addons-banner-block-item">						
+					<div class="addons-banner-block-item-icon">
+						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/EO_WBC_Cart.png') ?>">
+					</div>
+					<div class="addons-banner-block-item-content">
+						<h3>Color images on category & item page</h3>
+						<p>Help users see item images in different colors as they switch the color on category and item pages.</p>
+						<div class="inline-buttons">
+							<a class="addons-button addons-button-solid" target="_blank" href="https://sphereplugins.com/product/color-images-on-category-item-page/">Get free access</a>							
+						</div>
+					</div>
+				</div>
+				<div class="addons-banner-block-item">						
+					<div class="addons-banner-block-item-icon">
+						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/EO_WBC_Cart.png') ?>">
+					</div>
+					<div class="addons-banner-block-item-content">
+						<h3>Add An Inscription</h3>
+						<p>Let your users to specify the text to engrave on the ring.</p>
+						<div class="inline-buttons">
+							<a class="addons-button addons-button-solid" target="_blank" href="https://sphereplugins.com/product/add-an-inscription/">Get free access</a>							
+						</div>
+					</div>
+				</div>
+				<div class="addons-banner-block-item">						
+					<div class="addons-banner-block-item-icon">
+						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/EO_WBC_Cart.png') ?>">
+					</div>
+					<div class="addons-banner-block-item-content">
+						<h3>Recently viewed tab</h3>
+						<p>This extention will add a recently viewed thumbnail action to the tumbnail gethering of the item page apo click in which it will show to users the recently viewed item.</p>
+						<div class="inline-buttons">
+							<a class="addons-button addons-button-solid" target="_blank" href="https://sphereplugins.com/product/recently-viewed-tab/">Get free access</a>							
+						</div>
+					</div>
+				</div>
+				<div class="addons-banner-block-item">						
+					<div class="addons-banner-block-item-icon">
+						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/EO_WBC_Cart.png') ?>">
+					</div>
+					<div class="addons-banner-block-item-content">
+						<h3>Earring, pendant etc builder</h3>
+						<p>Like ring builder an extension to create earring, pendant etc builder.</p>
+						<div class="inline-buttons">
+							<a class="addons-button addons-button-solid" target="_blank" href="https://sphereplugins.com/product/earring-and-pendant-etc-builder/">Get free access</a>							
+						</div>
+					</div>
+				</div>
+				<div class="addons-banner-block-item">						
+					<div class="addons-banner-block-item-icon">
+						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/EO_WBC_Cart.png') ?>">
+					</div>
+					<div class="addons-banner-block-item-content">
+						<h3>Diamond Inspection feature</h3>
+						<p></p>
+						<div class="inline-buttons">
+							<a class="addons-button addons-button-solid" target="_blank" href="https://sphereplugins.com/product/diamond-inspection-feature/">Get free access</a>							
+						</div>
+					</div>
+				</div>
+				<div class="addons-banner-block-item">						
+					<div class="addons-banner-block-item-icon">
+						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/EO_WBC_Cart.png') ?>">
+					</div>
+					<div class="addons-banner-block-item-content">
+						<h3>Request a diamond</h3>
+						<p>A feature where user can send request to avail a specific diamond with specific characteristics if the diamond isn’t found in the exsting inventory.</p>
+						<div class="inline-buttons">
+							<a class="addons-button addons-button-solid" target="_blank" href="https://sphereplugins.com/product/request-a-diamond/">Get free access</a>							
+						</div>
+					</div>
+				</div>
+				<div class="addons-banner-block-item">						
+					<div class="addons-banner-block-item-icon">
+						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/EO_WBC_Cart.png') ?>">
+					</div>
+					<div class="addons-banner-block-item-content">
+						<h3>360/3d interactive videos – Diamond</h3>
+						<p>This extension will help embed 360 video of the diamond into website category page and item page given that you have 360 video available form the provider.</p>
+						<div class="inline-buttons">
+							<a class="addons-button addons-button-solid" target="_blank" href="https://sphereplugins.com/product/360-3d-interactive-videos-diamond/">Get free access</a>							
+						</div>
+					</div>
+				</div>
+				<div class="addons-banner-block-item">						
+					<div class="addons-banner-block-item-icon">
+						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/EO_WBC_Cart.png') ?>">
+					</div>
+					<div class="addons-banner-block-item-content">
+						<h3>360/3d interactive videos – Ring</h3>
+						<p>This extension will help embed 360 video of the ring into website category page and item page given that you have 360 video available form the provider.</p>
+						<div class="inline-buttons">
+							<a class="addons-button addons-button-solid" target="_blank" href="https://sphereplugins.com/product/360-3d-interactive-videos-ring/">Get free access</a>							
+						</div>
+					</div>
+				</div>
+				<div class="addons-banner-block-item">						
+					<div class="addons-banner-block-item-icon">
+						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/EO_WBC_Cart.png') ?>">
+					</div>
+					<div class="addons-banner-block-item-content">
+						<h3>Find my ring size</h3>
+						<p>This extension will provide detailed help and demonstration to users about how to figure out what their ring size is.</p>
+						<div class="inline-buttons">
+							<a class="addons-button addons-button-solid" target="_blank" href="https://sphereplugins.com/product/find-my-ring-size/">Get free access</a>							
+						</div>
+					</div>
+				</div>
+				<div class="addons-banner-block-item">						
+					<div class="addons-banner-block-item-icon">
+						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/EO_WBC_ViewWithShape.jpg') ?>">
+					</div>
+					<div class="addons-banner-block-item-content">
+						<h3>View with different shape</h3>
+						<p>This extension will provide detailed help and demonstration to users about how to figure out what their ring size is.</p>
+						<div class="inline-buttons">
+							<a class="addons-button addons-button-solid" target="_blank" href="https://sphereplugins.com/product/view-with-different-shape/">Get free access</a>							
+						</div>
+					</div>
+				</div>
+				<div class="addons-banner-block-item">						
+					<div class="addons-banner-block-item-icon">
+						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/EO_WBC_ViewWithCarat.jpg') ?>">
+					</div>
+					<div class="addons-banner-block-item-content">
+						<h3>View with real carat size</h3>
+						<p>An extension for viewing diamond size in real perspective & a option in filters for real view available filter.</p>
+						<div class="inline-buttons">
+							<a class="addons-button addons-button-solid" target="_blank" href="https://sphereplugins.com/product/view-with-real-carat-size/">Get free access</a>							
+						</div>
+					</div>
+				</div>
+				<div class="addons-banner-block-item">						
+					<div class="addons-banner-block-item-icon">
+						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/EO_WBC_DarkerLighterSkin.jpg') ?>">
+					</div>
+					<div class="addons-banner-block-item-content">
+						<h3>Darker/lighter skin</h3>
+						<p>This extension helps users visualize how the ring will look on their hand skin.</p>
+						<div class="inline-buttons">
+							<a class="addons-button addons-button-solid" target="_blank" href="https://sphereplugins.com/product/darker-lighter-skin/">Get free access</a>							
+						</div>
+					</div>
+				</div>
+				<div class="addons-banner-block-item">						
+					<div class="addons-banner-block-item-icon">
+						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/EO_WBC_Cart.png') ?>">
+					</div>
+					<div class="addons-banner-block-item-content">
+						<h3>Diamond API Integrations</h3>
+						<p>In this extension, we are providing API Integration service, you will need to get account for particular diamond exchange however in case of some free providers like Glowstar Diamond etc. that is not the case and we will guide you in the process of getting the approval(s)</p>
+						<div class="inline-buttons">
+							<a class="addons-button addons-button-solid" target="_blank" href="https://sphereplugins.com/product/woocommerce-diamond-api-integration/">Get free access</a>							
+						</div>
+					</div>
+				</div>
+				<div class="addons-banner-block-item">						
+					<div class="addons-banner-block-item-icon">
+						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/EO_WBC_Importexport.svg') ?>">
+					</div>
+					<div class="addons-banner-block-item-content">
+						<h3>Excel/CSV Import/Export</h3>
+						<p>Manage diamond inventory in excel or csv files, it is helpful when you want to manage and upload external inventories having no API or when you are getting them directly</p>
+						<div class="inline-buttons">
+							<a class="addons-button addons-button-solid" target="_blank" href="https://sphereplugins.com/product/import-export-csv-or-excel-needed-for-diamond-other-inventories/">Get free access</a>							
+						</div>
+					</div>
+				</div>
+				<div class="addons-banner-block-item">						
+					<div class="addons-banner-block-item-icon">
+						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/EO_WBC_Cart.png') ?>">
+					</div>
+					<div class="addons-banner-block-item-content">
+						<h3>Social Integrations</h3>
+						<p>Facebook like and share feature, twitter twit button and Pinterest pin button.</p>
+						<div class="inline-buttons">
+							<a class="addons-button addons-button-solid" target="_blank" href="https://sphereplugins.com/product/social-integrations/">Get free access</a>							
+						</div>
+					</div>
+				</div>
+				<div class="addons-banner-block-item">						
+					<div class="addons-banner-block-item-icon">
+						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/EO_WBC_Cart.png') ?>">
+					</div>
+					<div class="addons-banner-block-item-content">
+						<h3>Facebook shop/store</h3>
+						<p>Integrates WooCommere products for sell on Facebook shop/store</p>
+						<div class="inline-buttons">
+							<a class="addons-button addons-button-solid" target="_blank" href="https://sphereplugins.com/product/facebook-shop-store/">Get free access</a>							
+						</div>
+					</div>
+				</div>
+				<div class="addons-banner-block-item">						
+					<div class="addons-banner-block-item-icon">
+						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/EO_WBC_Cart.png') ?>">
+					</div>
+					<div class="addons-banner-block-item-content">
+						<h3>Drop a hint</h3>
+						<p>Cutomer engagement feature drop a hint.</p>
+						<div class="inline-buttons">
+							<a class="addons-button addons-button-solid" target="_blank" href="https://sphereplugins.com/product/drop-a-hint/">Get free access</a>							
+						</div>
+					</div>
+				</div>
+				<div class="addons-banner-block-item">						
+					<div class="addons-banner-block-item-icon">
+						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/EO_WBC_Cart.png') ?>">
+					</div>
+					<div class="addons-banner-block-item-content">
+						<h3>Recently purchased</h3>
+						<p>Cutomer engagement feature recently purchased.</p>
+						<div class="inline-buttons">
+							<a class="addons-button addons-button-solid" target="_blank" href="https://sphereplugins.com/product/recently-purchased/">Get free access</a>							
+						</div>
+					</div>
+				</div>
+				<div class="addons-banner-block-item">						
+					<div class="addons-banner-block-item-icon">
+						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/EO_WBC_Cart.png') ?>">
+					</div>
+					<div class="addons-banner-block-item-content">
+						<h3>Request more info/inquiry</h3>
+						<p>Cutomer engagement feature request more info/inquiry.</p>
+						<div class="inline-buttons">
+							<a class="addons-button addons-button-solid" target="_blank" href="https://sphereplugins.com/product/request-more-info-inquiry/">Get free access</a>							
+						</div>
+					</div>
+				</div>
+				<div class="addons-banner-block-item">						
+					<div class="addons-banner-block-item-icon">
+						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/EO_WBC_Cart.png') ?>">
+					</div>
+					<div class="addons-banner-block-item-content">
+						<h3>Schedule viewing</h3>
+						<p>Cutomer engagement feature schedule viewing.</p>
+						<div class="inline-buttons">
+							<a class="addons-button addons-button-solid" target="_blank" href="https://sphereplugins.com/product/schedule-viewing/">Get free access</a>							
+						</div>
+					</div>
+				</div>
+				<div class="addons-banner-block-item">						
+					<div class="addons-banner-block-item-icon">
+						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/EO_WBC_Cart.png') ?>">
+					</div>
+					<div class="addons-banner-block-item-content">
+						<h3>Email a friend</h3>
+						<p>Cutomer engagement feature email a friend.</p>
+						<div class="inline-buttons">
+							<a class="addons-button addons-button-solid" target="_blank" href="https://sphereplugins.com/product/email-a-friend/">Get free access</a>							
+						</div>
+					</div>
+				</div>
+				<div class="addons-banner-block-item">						
+					<div class="addons-banner-block-item-icon">
+						<img class="addons-img" style="height: inherit;" src="<?php echo plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Img/EO_WBC_Cart.png') ?>">
+					</div>
+					<div class="addons-banner-block-item-content">
+						<h3>Promotions</h3>
+						<p>Cutomer engagement feature promotions.</p>
+						<div class="inline-buttons">
+							<a class="addons-button addons-button-solid" target="_blank" href="https://sphereplugins.com/product/promotions/">Get free access</a>							
+						</div>
+					</div>
+				</div>
+
+
 			</div>
 		</div>
 	</div>
