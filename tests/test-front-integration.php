@@ -189,7 +189,7 @@ class TestFronIntegration extends WP_UnitTestCase {
         $variable_product = new WC_Product_Variable($post->ID);        
         $variation_id = $variable_product->get_available_variations()[0]['variation_id'];
 
-        $this->assertEquals( get_bloginfo('url').'/index.php'.get_option('eo_wbc_review_page')
+        $this->assertEquals( get_bloginfo('url').'/'.get_option('eo_wbc_review_page')
                     .'?EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
                     .'&STEP=3&FIRST='.sanitize_text_field($_GET['FIRST']).'&SECOND='.$post->ID , $product->eo_wbc_product_route());
 
