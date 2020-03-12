@@ -326,77 +326,7 @@ class EO_WBC_Review
                 
                 exit(wp_redirect(EO_WBC_Support::eo_wbc_get_cart_url()));                
             }            
-
-            /*$first=EO_WBC_Support::eo_wbc_get_product($cart['FIRST'][0]);
-            $second=EO_WBC_Support::eo_wbc_get_product($cart['SECOND'][0]);*/
-
-            
-                    
-               
-            /*if( !empty($_GET['FIRST']) && !empty($_GET['SECOND']) && !empty($_GET['CART']) )
-            {                
-                //if data available at _GET then add to out custom cart
-                $this->eo_wbc_add_to_cart();
-            }
-
-            return EO_WBC_Breadcrumb::eo_wbc_add_breadcrumb(sanitize_text_field($_GET['STEP']),sanitize_text_field($_GET['BEGIN'])).'<br/><br/>
-            <div class="clearfix" ><div class="eo_wbc_first">'.do_shortcode('[product_page id="'.$_GET['FIRST'].'"]').'</div>
-            <div class="eo_wbc_second">'.do_shortcode('[product_page id="'.$_GET['SECOND'].'"]').'</div></div>
-            <form action="" method="post" class="woocommerce" style="float:right;">
-                        <input type="hidden" name="add_to_cart" value=1>
-                        <button class="checkout-button button alt wc-forward" style="margin: 2em 0px;">'.__('Add This To Cart','woo-bundle-choice').'</button></form><style>@media only screen and (max-width: 600px) {.checkout-button.button.alt.wc-forward{ display:grid;position: relative;margin: auto; } }.woocommerce div.product .product_title{ font-size: 1em !important;}</style>';*/
-        });
-        
-        /*remove_action( 'woocommerce_product_thumbnails', 'woocommerce_show_product_thumbnails', 20 );
-
-        remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
-        remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_upsell_display', 15 );
-        remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
-        
-        remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_rating', 10 );
-        remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
-        remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20 );
-        remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );
-        remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
-        remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_sharing', 50 );
-
-        add_action('woocommerce_single_product_summary',function(){
-
-            global $post;            
-            if(WC()->session->get('EO_WBC_SETS')) {
-
-                WC()->session->set('TMP_EO_WBC_SETS',WC()->session->get('EO_WBC_SETS'));
-            }
-            $set=WC()->session->get('TMP_EO_WBC_SETS');            
-            if(!empty($set['FIRST'][0]) && $post->ID==$set['FIRST'][0]) {
-
-                $pro=EO_WBC_Support::eo_wbc_get_product($set['FIRST'][2]?$set['FIRST'][2]:$set['FIRST'][0]);                
-                echo ($pro->get_price_html()."&nbsp;X&nbsp;".$set['FIRST'][1]);    
-            }
-            if(!empty($set['SECOND'][0]) && $post->ID==$set['SECOND'][0]) {                
-
-                $pro=EO_WBC_Support::eo_wbc_get_product($set['SECOND'][2]?$set['SECOND'][2]:$set['SECOND'][0]);                
-                echo ($pro->get_price_html()."&nbsp;X&nbsp;".$set['SECOND'][1]);    
-            }
-        });*/
-
-        /////////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////////
-        //Remove and reset related products section 
-        //as some themes have called those implecitely.
-        //add_filter('woocommerce_product_related_posts_query', '__return_empty_array', 100);
-        /*add_filter( 'woocommerce_output_related_products_args',function($para){
-            $para['posts_per_page']= 0;
-            $para['columns']=0;            
-            return $para;
-        });*/
-        /////////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////////
-        //Remove and reset products tabs 
-        //which is fixed by remove actions but,
-        //return empty array will ensure it
-        /*add_filter('woocommerce_product_tabs',function($desc){                      
-            return array();
-        });*/
+           
+        });	   
     }
 }

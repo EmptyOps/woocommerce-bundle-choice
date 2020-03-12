@@ -161,8 +161,8 @@ class EO_WBC_Filter_Widget {
         					'eo_product_url'=>$this->product_url(),
         					//'eo_view_tabular'=>($current_category=='solitaire'?1:0),
         					'disp_regular'=>get_option('eo_wbc_e_tabview_status',false)?1:0,
-        					'eo_admin_ajax_url'=>$site_url."/wp-admin/admin-ajax.php",
-        					'eo_part_site_url'=>$site_url.'/product/',
+        					'eo_admin_ajax_url'=>admin_url( 'admin-ajax.php'),
+        					'eo_part_site_url'=>get_site_url().'/index.php',
         					'eo_part_end_url'=>'/'.$this->product_url(),
         					'eo_cat_site_url'=>$site_url,
         					'eo_cat_query'=>'/?'.http_build_query($_GET)
