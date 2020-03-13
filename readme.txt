@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=hi000
 Requires at least: 3.5
 Tested up to: 5.3.2
 Requires PHP: 5.3
-Stable tag: 0.5.64
+Stable tag: 0.5.65
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -220,6 +220,8 @@ Yes, it is.
 5. Home page after plugin fully configured.
 
 == Changelog ==
+= 0.5.65 (March 13, 2020 )=
+  ** Minor fix ** Fixed: javascript was written to output buffer which was supposed to only visible on customizer page only.
 = 0.5.64 (March 12, 2020 )=
   ** Critical Bug fix ** Fixed: array_walk() expects parameter 1 to be array, boolean given in EO_WBC_Frontend/EO_WBC_Product.php on line 402.
 = 0.5.63 (March 12, 2020 )=

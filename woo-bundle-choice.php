@@ -3,7 +3,7 @@
 * Plugin Name: WooCommerce Product Bundle Choice | Ring Builder, Pair Maker and Guidance Tool
 * Plugin URI: https://wordpress.org/plugins/woocommerce-bundle-choice/
 * Description: An E-Commerce tool that let your customer's buy product in a set and create map that relates between your product categories.
-* Version: 0.5.64
+* Version: 0.5.65
 * Author: emptyopssphere
 * Author URI: https://profiles.wordpress.org/emptyopssphere
 * Requires at least: 3.5
@@ -186,77 +186,15 @@ add_action('plugins_loaded',function(){
             wp_enqueue_style( 'eo-material-anim');
         });
     }   
-    if( ! defined( 'DOING_AJAX' ) and is_admin() ) {
+    
+    global $wp_customize;
+    if( ! defined( 'DOING_AJAX' ) and is_admin() and isset( $wp_customize )) {        
         ob_start();
         ?>        
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script>                   
-            
-            jQuery(document).ready(function($){   
-
-                var getUniqueSelector = function (el) {
-                      if (!el) { return; }
-                      var selectors=Array();            
-                      
-                      $.each($(el).parentsUntil('body').add($(el)),function(index,element){
-                          
-                          if($(element).length>0){
-
-                              var selector = (element.tagName || '').toLowerCase();
-                              if (element.id) {
-                                selector += '#' + element.id;
-                              }
-                              
-                              for (var i = 0, len = element.attributes.length; i < len; i++) {
-                                if((element.attributes[i].name).trim()=='class'){
-
-                                    value=((element.attributes[i].value).replace(/red-border-section/g,'')).trim();  
-                                    if(value!=''){
-                                        selector += '[' + element.attributes[i].name + '="' + ((element.attributes[i].value).replace(/red-border-section/g,'')).trim() + '"]';    
-                                    }
-                                }                    
-                              }
-                              var parent = $(element).parent();
-                              var sameTagSiblings = parent.children(selector);                                                  
-                              /*if (sameTagSiblings.length > 1) { */
-                                  var allSiblings = parent.children();
-                                  var index = allSiblings.index(element) + 1;                        
-                                  selector += ':nth-child(' + index + ')';                        
-                              /*}*/
-                              selectors.push(selector);
-                          }
-                      });
-                      return selectors.join('>');
-                };                     
-
-                $(document).on('click','#_customize-input-btn_position_setting_selector_btn',function(e){
-                    
-                    if($(this).val()=='Selection Enabled'){
-                        
-                        $(this).val('Enable Selection');                                
-                        $("#customize-preview iframe").contents().find('.red-border-section').removeClass('red-border-section');
-                        $("#customize-preview iframe").contents().off('mouseenter','div,section,article,span,main,p');
-
-                    } else {
-                        
-                        $(this).val('Selection Enabled');    
-                        $("#customize-preview iframe").contents().on('mouseenter','div,section,article,span,main,p',function(e){
-                            $("#customize-preview iframe").contents().find('.red-border-section').removeClass('red-border-section');
-                            $(this).addClass('red-border-section');
-                        });         
-                    }
-
-                    $("#customize-preview iframe").contents().on('click','.red-border-section',function(){
-
-                        $("#_customize-input-btn_position_setting_selector_text").val(getUniqueSelector(this));
-                        $('#_customize-input-btn_position_setting_selector_btn').val('Enable Selection');                        
-                        jQuery("#_customize-input-btn_position_setting_selector_text").trigger('change');
-                    });
-                    
-                });
-            });                
-        </script>                
-    <?php                
+            <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+            <script src="<?php echo plugin_dir_url(__FILE__).'js/'.stripslashes('customizer.js'); ?>"></script>                
+        <?php
+        echo ob_get_clean();        
     }
 
 },15);
