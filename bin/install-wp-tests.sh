@@ -159,6 +159,7 @@ curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.pha
 chmod +x wp
 mv wp /tmp/wordpress/
 echo "Moving composer.json"
+composer config -g github-oauth.github.com $GIT_TOKEN
 cp composer.json ${WP_CORE_DIR}
 composer install -d ${WP_CORE_DIR}
 echo "Installing dependency"
