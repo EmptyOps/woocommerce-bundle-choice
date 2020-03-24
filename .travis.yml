@@ -23,7 +23,9 @@ env:
   global:
     - PATH="$TRAVIS_BUILD_DIR/vendor/bin:$PATH"
     - WP_CLI_BIN_DIR="$TRAVIS_BUILD_DIR/vendor/bin"
-    - WP_VERSION=latest WP_MULTISITE=0    
+    - WP_VERSION=latest WP_MULTISITE=0
+    - WP_VERSION=3.7 WP_MULTISITE=0
+    - WP_VERSION=3.6 WP_MULTISITE=0    
 
 # jobs:
 #   include:
