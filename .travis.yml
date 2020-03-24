@@ -15,24 +15,24 @@ cache:
     - vendor
     - $HOME/.composer/cache
 
-php:
-  - 7.1
-  - 7.2
+# php:
+#   - 7.1
+#   - 7.2
 
 env:
   global:
     - PATH="$TRAVIS_BUILD_DIR/vendor/bin:$PATH"
     - WP_CLI_BIN_DIR="$TRAVIS_BUILD_DIR/vendor/bin"
     - WP_VERSION=latest WP_MULTISITE=0
-    - WP_VERSION=3.7 WP_MULTISITE=0
-    - WP_VERSION=3.6 WP_MULTISITE=0    
 
-# jobs:
-#   include:
-#     - php: 5.6
-#       env: WP_VERSION=3.5.2 WP_MULTISITE=0 RUN_PHPCS=1     
-#     - php: 7.2
-#       env: WP_VERSION=latest WP_MULTISITE=0 RUN_PHPCS=1    
+jobs:
+  include:
+    - php: 7.1
+      env: WP_VERSION=3.6 WP_MULTISITE=0 RUN_PHPCS=1     
+    - php: 7.2
+      env: WP_VERSION=3.7 WP_MULTISITE=0 RUN_PHPCS=1    
+    - php: 7.2
+      env: WP_VERSION=latest WP_MULTISITE=0 RUN_PHPCS=1    
 
 before_script:    
   - export PATH="$HOME/.composer/vendor/bin:$PATH"          
