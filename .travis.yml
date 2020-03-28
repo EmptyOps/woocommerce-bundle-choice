@@ -28,9 +28,9 @@ env:
 jobs:
   include:
     - php: 7.1
-      env: WP_VERSION=4.0 WP_MULTISITE=0 RUN_PHPCS=1     
+      env: WP_VERSION=5.0 WP_MULTISITE=0 RUN_PHPCS=1     
     - php: 7.2
-      env: WP_VERSION=4.5 WP_MULTISITE=0 RUN_PHPCS=1    
+      env: WP_VERSION=5.3 WP_MULTISITE=0 RUN_PHPCS=1    
     - php: 7.2
       env: WP_VERSION=latest WP_MULTISITE=0 RUN_PHPCS=1    
 
