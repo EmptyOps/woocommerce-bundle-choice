@@ -668,7 +668,7 @@ class EO_WBC_Filter_Widget {
 				$this->eo_wbc_filter_ui_icon($item['name'],$item['label'],$item['type'],$item['input'],0,$item['column_width'],(isset($item['icon_size'])?$item['icon_size']:false),(isset($item['font_size'])?$item['font_size']:false));								
 				$term = @get_term_by('id',$item['name'],'product_cat');
 				if(!empty($term) and !is_wp_error($term)){
-					$_category[]=$term->slug;	
+					$this->___category[]=$term->slug;	
 				}				
 			}
 			elseif ($item['type']==0 ) {
@@ -760,7 +760,7 @@ class EO_WBC_Filter_Widget {
 						$term = get_term_by('id',$item['name'],'product_cat');
 
 						if( !empty( $term ) and !is_wp_error( $term ) ) {
-							$_category[] = $term->slug;
+							$this->___category[] = $term->slug;
 						}
 				} elseif ($item['type']==0 ) {
 
@@ -823,7 +823,7 @@ class EO_WBC_Filter_Widget {
 								$term = get_term_by('id',$item['name'],'product_cat');
 
 								if( !empty( $term ) and !is_wp_error( $term ) ) {
-									$_category[] = $term->slug;
+									$this->___category[] = $term->slug;
 								}
 						} elseif ($item['type']==0 ) {
 
@@ -909,7 +909,7 @@ class EO_WBC_Filter_Widget {
 		//Advance filters count
 		$advance_count=0;		
 		//Category Filters
-		$_category=array();
+		$this->___category=array();
 		//Attribute Filters
 		$_attr_list=array();
 
@@ -996,7 +996,7 @@ class EO_WBC_Filter_Widget {
 			<input type="hidden" name="_category_query" id="eo_wbc_cat_query" 
 				value="<?php echo (!empty($_GET['CAT_LINK'])?','.sanitize_text_field($_GET['CAT_LINK']):'')?>" />
 
-			<input type="hidden" name="_category" value="<?php echo implode(',',$_category) ?>"/>
+			<input type="hidden" name="_category" value="<?php echo implode(',',$this->___category) ?>"/>
 			<input type="hidden" name="_attribute" id="eo_wbc_attr_query" value="" />			
 			<?php if(isset($_GET['products_in']) AND !empty($_GET['products_in']) ): ?>
 				<input type="hidden" name="products_in" value="<?php echo $_GET['products_in'] ?>" />			

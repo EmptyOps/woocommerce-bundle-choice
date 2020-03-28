@@ -3,11 +3,11 @@
 * Plugin Name: WooCommerce Product Bundle Choice | Ring Builder, Pair Maker and Guidance Tool
 * Plugin URI: https://wordpress.org/plugins/woocommerce-bundle-choice/
 * Description: An E-Commerce tool that let your customer's buy product in a set and create map that relates between your product categories.
-* Version: 0.5.65
+* Version: 0.5.66
 * Author: emptyopssphere
 * Author URI: https://profiles.wordpress.org/emptyopssphere
 * Requires at least: 3.5
-* Tested up to: 5.3.2
+* Tested up to: 5.4
 * License: GPLv3+
 * License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 * Text Domain: woo-bundle-choice
@@ -186,7 +186,7 @@ add_action('plugins_loaded',function(){
             wp_enqueue_style( 'eo-material-anim');
         });
     }   
-    
+
     global $wp_customize;
     if( ! defined( 'DOING_AJAX' ) and is_admin() and isset( $wp_customize )) {        
         ob_start();
