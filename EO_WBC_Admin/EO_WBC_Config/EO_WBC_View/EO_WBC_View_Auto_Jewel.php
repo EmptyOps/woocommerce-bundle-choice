@@ -495,9 +495,10 @@
               </tr>
               <tr>
                 <td>                    
-                  <?php foreach ($_atttriutes as $index=>$_attr): ?>                                                                  
-                    <input type="checkbox" name="attr_<?php echo $index; ?>" id="<?php _e($_attr['slug']); ?>" value="<?php _e($_attr['slug']) ?>" checked="checked">
-                    <input type="text" name="attr_value_<?php echo $index; ?>" placeholder="<?php _e($_attr['label']) ?>" value="<?php _e($_attr['label']); ?>">
+                  <?php foreach ($_atttriutes as $index=>$_attr): ?>             <tr>                                            
+                    <span>                                                     
+                    <input type="checkbox" name="attr_<?php echo $index; ?>" id="<?php _e($_attr['slug']); ?>" value="<?php _e($_attr['slug']) ?>" checked="checked"></span>
+                    <span><input type="text" name="attr_value_<?php echo $index; ?>" placeholder="<?php _e($_attr['label']) ?>" value="<?php _e($_attr['label']); ?>"></span></tr>
                     <!--<label for="<?php _e($_attr['slug']); ?>"><?php _e($_attr['label']); ?></label>-->
                     <br/><br/>                        
                   <?php endforeach;?>                      
@@ -510,11 +511,11 @@
               </tr>
               <tr>
                 <td>                    
-                  <?php foreach ($_category as $index=>$_cat): ?>                                              
-                    <input type="checkbox" name="cat_<?php echo $index; ?>" id="<?php _e($_cat['name']); ?>" value="<?php _e($_cat['slug']) ?>" checked="checked">
+                  <?php foreach ($_category as $index=>$_cat): ?>  <tr>                                            
+                    <span><input type="checkbox" name="cat_<?php echo $index; ?>" id="<?php _e($_cat['name']); ?>" value="<?php _e($_cat['slug']) ?>" checked="checked"></span>
                     <!--<label for="<?php //_e($_cat['name']); ?>"><?php //_e($_cat['name']); ?></label> -->    
-                    <input type="text" name="cat_value_<?php echo $index; ?>" placeholder="<?php _e($_cat['name']) ?>" value="<?php _e($_cat['name']); ?>">
-                    <br/><br/>                        
+                    <span><input type="text" name="cat_value_<?php echo $index; ?>" placeholder="<?php _e($_cat['name']) ?>" value="<?php _e($_cat['name']); ?>"></span></tr>
+                    <br/></br>
                   <?php endforeach;?>                      
                 </td>
               <?php endif; ?>

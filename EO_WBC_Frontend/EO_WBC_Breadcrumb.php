@@ -23,7 +23,7 @@ class EO_WBC_Breadcrumb
             }
 
             if(empty(self::$first) and !empty($_GET['FIRST']) and !empty($tmp_set) and $tmp_set['FIRST'][0]==$_GET['FIRST']) {
-                var_dump("sdfgsjdfklhsg");
+                
                 self::$first=EO_WBC_Support::eo_wbc_get_product((int)($tmp_set['FIRST'][2]?$tmp_set['FIRST'][2]:$tmp_set['FIRST'][0]));
             }
             
@@ -208,7 +208,7 @@ class EO_WBC_Breadcrumb
                                 ?>
                                 </div>
                             </div>
-                            <div class="column "><img src="<?php echo wp_get_attachment_url(get_option('eo_wbc_collection_icon')); ?>" style="margin: auto auto;"/></div>                            
+                            <div class="column" <?php echo empty(wp_get_attachment_url(get_option('eo_wbc_collection_icon')))?'style="visibility: hidden;"':""; ?>><img src="<?php echo wp_get_attachment_url(get_option('eo_wbc_collection_icon')); ?>" style="margin: auto auto;"/></div>                            
                         </div>                        
                         <?php
                         $html.=ob_get_clean();
@@ -237,7 +237,7 @@ class EO_WBC_Breadcrumb
                 </div>
                 <?php if(empty(self::$first)):?>
                 <div class="column ">&nbsp;</div>
-                <div class="column ">
+                <div class="column" <?php echo empty(wp_get_attachment_url(get_option('eo_wbc_first_icon')))?'style="visibility: hidden;"':""; ?>>
                     <img src="<?php echo wp_get_attachment_url(get_option('eo_wbc_first_icon')); ?>">
                 </div>
                 <?php else: ?>
@@ -272,7 +272,7 @@ class EO_WBC_Breadcrumb
                 </div>
                 <?php if(empty(self::$second)):?>
                 <div class="column ">&nbsp;</div>
-                <div class="column">
+                <div class="column" <?php echo empty(wp_get_attachment_url(get_option('eo_wbc_second_icon')))?'style="visibility: hidden;"':""; ?>>
                     <img src="<?php echo wp_get_attachment_url(get_option('eo_wbc_second_icon')); ?>">
                 </div>
                 <?php else: ?>                

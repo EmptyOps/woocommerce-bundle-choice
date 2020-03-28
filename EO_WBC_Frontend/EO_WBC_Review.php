@@ -22,41 +22,8 @@ class EO_WBC_Review
     
     private function eo_wbc_add_css()
     {
-        add_action( 'wp_head',function(){
-            ?>
-                <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
-                <!-- <style> div.row{ display: flex !important; flex-flow: column !important; } div.row div{ margin-top:1em; } div.woocommerce{ width:100%; } .eo_wbc_first{ float:left; display: inline-block; width:50%; } .eo_wbc_second{ display: inline-block; left: 50%; width:50%; } @media only screen and (max-width: 720px){ .eo_wbc_first{ width:100% } .eo_wbc_second{ width:100%; } } </style> -->
-            <?php
-            /*<style>
-                div.row{
-                    display: flex !important;
-                    flex-flow: column !important;
-                }
-                div.row div{
-                    margin-top:1em;
-                }
-                div.woocommerce{                        
-                    width:100%;
-                }   
-                .eo_wbc_first{            
-                    float:left;            
-                    display: inline-block;                        
-                    width:50%;
-                }           
-                .eo_wbc_second{
-                    display: inline-block;                        
-                    left: 50%;
-                    width:50%;
-                }                    
-                @media only screen and (max-width: 720px){
-                    .eo_wbc_first{    
-                        width:100%
-                    }
-                    .eo_wbc_second{
-                        width:100%;                            
-                    }
-                }
-            </style>*/
+        add_action( 'wp_head',function(){           
+           
         });            
     }
     
@@ -316,7 +283,7 @@ class EO_WBC_Review
                         '</div>'.
                     '</div>'.
                 '</div>'.
-                '<div class="ui row"><form action="" method="post" class="woocommerce" style="float:right;margin-top: 1.5em;">'.
+                '<div class="ui row" style="display:grid !important;"><form action="" method="post" class="woocommerce" style="float:right;margin-top: 1.5em;display:grid !important;">'.
                     '<input type="hidden" name="add_to_cart" value=1>'.
                     '<button class="ui button right floated aligned" style="background-color:'.get_option('eo_wbc_active_breadcrumb_color',wc()->session->get('EO_WBC_BG_COLOR',FALSE)).'">'.__('Add This To Cart','woo-bundle-choice').
                     '</button>'.
