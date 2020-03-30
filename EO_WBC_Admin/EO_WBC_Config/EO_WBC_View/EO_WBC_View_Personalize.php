@@ -163,6 +163,29 @@
                     </div>
                     <div class="info" style="max-width: 250px !important;padding-top: 3px;" >( <?php printf(__('You can upload icon from configuration page, click here to go to %s'),'<a href="'.admin_url('admin.php?page=eo-wbc-setting').'">configuration.</a>'); ?> )</div>
                 </div>
+                <!-- <div>
+                    <label><?php //_e('Bredcrumb template','woo-bundle-choice'); ?></label>
+                    <div class="grouped fields">                        
+                        <div class="field">
+                          <div class="ui slider checkbox">
+                            <input type="radio" name="eo_wbc_breadcrumb_template" <?php //echo empty(get_option('eo_wbc_breadcrumb_template',0))?"checked='checked'":""; ?> value="0">
+                            <label>Default</label>
+                          </div>
+                        </div>
+                        <div class="field">
+                          <div class="ui slider checkbox">
+                            <input type="radio" name="eo_wbc_breadcrumb_template" value="1" <?php //echo get_option('eo_wbc_breadcrumb_template',0)==1?"checked='checked'":""; ?>>
+                            <label>Alternate</label>
+                          </div>
+                        </div>
+                        <div class="field">
+                          <div class="ui slider checkbox">
+                            <input type="radio" name="eo_wbc_breadcrumb_template" value="2" <?php //echo get_option('eo_wbc_breadcrumb_template',0)==2?"checked='checked'":""; ?>>
+                            <label>Alternate 1.1</label>
+                          </div>
+                        </div>                        
+                    </div>
+                </div> -->
             </div>
         </div>
          <div class="ui bottom attached tab segment active" data-tab="filters">
