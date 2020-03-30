@@ -643,6 +643,11 @@ class EO_WBC_Actions
             update_option('eo_wbc_show_hide_breadcrumb_icon','0');
         }
 
+        if(isset($_POST['eo_wbc_breadcrumb_template']))
+        {
+            update_option('eo_wbc_breadcrumb_template',sanitize_text_field($_POST['eo_wbc_breadcrumb_template']));            
+        }        
+
         if(isset($_POST['eo_wbc_breadcrumb_icon_color_active']))
         {
             update_option('eo_wbc_breadcrumb_icon_color_active',$_POST['eo_wbc_breadcrumb_icon_color_active']);
