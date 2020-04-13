@@ -1,10 +1,10 @@
 <?php 
 
-defined( 'ABSPATH' ) || exit;
-
 namespace eo\wbc\controllers\admin;
 use eo\wbc\controllers\admin\menu\Admin_Menu_Factory;
 use eo\wbc\controllers\admin\menu\Admin_Menu;
+
+defined( 'ABSPATH' ) || exit;
 
 class Admin {
 

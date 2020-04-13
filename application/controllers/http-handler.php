@@ -1,11 +1,11 @@
 <?php 
 
-defined( 'ABSPATH' ) || exit;
-
 namespace eo\wbc\controllers;
 use eo\wbc\controllers\admin\menu\Admin_Menu_Factory;
 use eo\wbc\controllers\admin\Admin;
 use eo\wbc\controllers\Public_Handler;
+
+defined( 'ABSPATH' ) || exit;
 
 class Http_Handler {
 

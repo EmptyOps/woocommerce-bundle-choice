@@ -1,8 +1,8 @@
 <?php 
 
-defined( 'ABSPATH' ) || exit;
-
 namespace eo\wbc\controllers;
+
+defined( 'ABSPATH' ) || exit;
 
 class Public_Handler {
 

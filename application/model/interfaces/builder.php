@@ -3,9 +3,9 @@
 *	An interface for every builders.
 */
 
-defined( 'ABSPATH' ) || exit;
-
 namespace eo\wbc\model\interfaces;
+
+defined( 'ABSPATH' ) || exit;
 
 interface Builder {
 	/**

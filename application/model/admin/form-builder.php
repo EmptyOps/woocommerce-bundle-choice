@@ -5,10 +5,10 @@
 *	A form builder class to generate form based on the array of params recived.
 */
 
-defined( 'ABSPATH' ) || exit;
-
 namespace eo\wbc\model\admin;
 use eo\wbc\model\interfaces\Builder;
+
+defined( 'ABSPATH' ) || exit;
 
 class Form_Builder implements Builder {
 
