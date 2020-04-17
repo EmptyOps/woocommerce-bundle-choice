@@ -56,6 +56,9 @@ class Admin {
 
 				wp_register_script('eowbc_fomantic_js',constant('EOWBC_ASSET_URL').'js/fomantic/semantic.min.js');
 				wp_enqueue_script('eowbc_fomantic_js');
+
+				wp_register_script('eowbc_admin_js',constant('EOWBC_ASSET_URL').'js/admin-js.js');
+				wp_enqueue_script('eowbc_admin_js');
 			}, 10 );
 		});
 	}	

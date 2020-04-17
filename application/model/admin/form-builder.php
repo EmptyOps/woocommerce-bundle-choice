@@ -34,8 +34,70 @@ class Form_Builder implements Builder {
 			$sub_elements = array('visible_info', 'info_icon');
 
 			if(!empty($form['data']) and is_array($form['data'])) {
+				
+				if(!empty($form['tabs'])){
+					$tab_menu = '<div class="ui pointing secondary menu">';
+					$tab_segment = '';
+					$active = false;
+					foreach ($form['data'] as $tab_slug => $tab_data) {
 
-				foreach ($form['data'] as $id => $form_element) {
+						$tab_menu.='<a class="item '.(!$active?'active':'').'" data-tab="'.$tab_slug.'">'.$tab_data['label'].'</a>';
+						$tab_segment.='<div class="ui tab '.(!$active?'active':'').'" data-tab="'.$tab_slug.'">';
+						if(!$active){ $active = true; }
+						if(!empty($tab_data['form']) and is_array($tab_data['form'])){
+							foreach ($tab_data['form'] as $id => $form_element) {
+
+								if(!empty($form_element['type'])) {
+									$form_element = $this->process_property_group($form_element, $id);
+
+									foreach ($sub_elements as $skey => $svalue) {
+										if( isset($form_element[$svalue]) )
+										{
+											$form_element[$svalue] = $this->process_property_group($form_element[$svalue], $svalue);
+										}
+									}
+
+									ob_start();
+									
+									wbc()->load->template('component/form/input_'.$form_element['type'],$form_element);
+									if($form_element['type']=='devider'){
+										$tab_segment.=ob_get_clean();
+									} else {
+										$tab_segment.='<div class="fields">'.ob_get_clean().'</div>';
+									}
+								}
+							}
+						}
+						$tab_segment.='</div>';
+					}
+					$tab_menu.= '</div>';
+
+					$form_html.=$tab_menu.$tab_segment;
+
+				} else {
+					foreach ($form['data'] as $id => $form_element) {
+						if(!empty($form_element['type'])) {
+							$form_element = $this->process_property_group($form_element, $id);
+
+							foreach ($sub_elements as $skey => $svalue) {
+								if( isset($form_element[$svalue]) )
+								{
+									$form_element[$svalue] = $this->process_property_group($form_element[$svalue], $svalue);
+								}
+							}
+
+							ob_start();
+									
+							wbc()->load->template('component/form/input_'.$form_element['type'],$form_element);
+							if($form_element['type']=='devider'){
+								$tab_segment.=ob_get_clean();
+							} else {
+								$tab_segment.='<div class="fields">'.ob_get_clean().'</div>';
+							}
+						}
+					}
+				}
+				/*foreach ($form['data'] as $id => $form_element) {
 
 					if(!empty($form_element['type'])) {
 
@@ -54,7 +116,7 @@ class Form_Builder implements Builder {
 						?></div><?php
 						$form_html.=ob_get_clean();
 					}
-				}
+				}*/
 			}
 
 			wbc()->load->template('component/form/form',
@@ -70,7 +132,7 @@ class Form_Builder implements Builder {
 		}
 	}
 
-	function process_property_group(array $form_element, string $id) {
+	public function process_property_group(array $form_element, string $id) {
 		
 		if(isset($form_element['class'])){
 			$form_element['class'] = $this->process_property($form_element['class']);
