@@ -7,10 +7,14 @@
  * 
  */
 
-<?php if(!empty($body) || is_array($body)) { ?>
+<?php if(!empty($body) && is_array($body)) { ?>
 	
   <tbody>
-  		<?php wbc()->load->template('admin/component/table/wbc-row.php',$body); ?>
+  		<?php 
+		foreach ($body as $index => $row) {
+			wbc()->load->template('component/table/row.php', array("row"=>$row) ); 
+		}	
+		?>
   </tbody>
 
 <?php }

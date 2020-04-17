@@ -80,6 +80,15 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 						),
 						array(
 							'parent_slug'=>'eowbc',
+							'title'=>eowbc_lang('Price Control(Beta)'),
+							'menu_title'=>eowbc_lang('Price Control(Beta)'),
+							'capability'=>'manage_options',
+							'slug'=>'eowbc-price-control',
+							'template'=>'admin/menu/price_control',
+							'position'=>4
+						),
+						array(
+							'parent_slug'=>'eowbc',
 							'title'=>eowbc_lang('Extensions'),
 							'menu_title'=>eowbc_lang('Extensions'),
 							'capability'=>'manage_options',

@@ -12,42 +12,21 @@
 ?>
 	
  <tr>
-   <?php if(!empty($head) || is_array($head)) { 
+   <?php if(!empty($row) && is_array($row)) { 
 
-   		if(!empty($meta) || !empty($rows) || is_array($meta) || is_array($rows))
-   		{
-   			foreach ($rows as $index => $row) {
-		     	
-		     	if(in_array($meta['header'], $index)) { ?>
-		     		<th>
-					    <?php echo $row; ?>	
-					</th>
-		     	<?php }
-		     	else { ?>
-		     		<td>
-		     			<?php echo $row; ?>
-		     		</td>
-		     	<?php }
-		    } 
-   		}
+		foreach ($row as $index => $column) {
+     	
+	     	if(isset($column['is_header']) && $column['is_header'] == 1) { ?>
+	     		<th>
+				    <?php echo $column["val"]; ?>	
+				</th>
+	     	<?php }
+	     	else { ?>
+	     		<td>
+	     			<?php echo $column["val"]; ?>	
+	     		</td>
+	     	<?php }
+	    } 
 	}
-	elseif( !empty($body) || is_array($body)) { 
-
-		if(!empty($meta) || !empty($rows) || is_array($meta) || is_array($rows))
-   		{
-   			foreach ($rows as $index => $row) {
-		     	
-		     	if(in_array($meta['header'], $index)) { ?>
-		     		<th>
-					    <?php echo $row; ?>	
-					</th>
-		     	<?php }
-		     	else { ?>
-		     		<td>
-		     			<?php echo $row; ?>
-		     		</td>
-		     	<?php }
-		    } 
-   		}
-	} ?>
+	?>
  </tr>

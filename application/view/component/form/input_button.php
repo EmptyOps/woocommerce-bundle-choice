@@ -1,25 +1,11 @@
 <?php
 
 /**
-*	template to show checkbox as input method.
+*	template to show submit button for the input form.
 */
 
-if(!empty($id) and !empty($label)){	
-
+if(!empty($id) and !empty($label)){
 	?>	
-		<div class="field">	    	
-	    	<?php if(!empty($options) and is_array($options)): ?>
-	    		<div class="fields">
-	    		<?php foreach ($options as $checkbox_key => $checkbox_value) : ?>
-	    			<div class="field">
-				    	<div class="ui toggle checkbox <?php echo !empty($class)?$class:''; ?>">
-				        	<input type="checkbox" name="<?php echo $checkbox_key; ?>" id="<?php echo $checkbox_key; ?>" <?php echo (!empty($value) and in_array($checkbox_key,$value)) ? 'checked="checked"':''; ?>>
-				        	<label for="<?php echo $checkbox_key; ?>"><?php echo $checkbox_value; ?></label>
-				      	</div>
-				    </div>
-				<?php endforeach; ?>
-				</div>
-			<?php endif; ?>
-		</div>			
+	<button type="submit" <?php echo !empty($attr)?$attr:''; ?> id="<?php echo $id; ?>" name="<?php echo $id; ?>" class="ui button <?php echo !empty($class)?$class:''; ?>"><?php echo !empty($label)?$label:''; ?></button>		
 	<?php
 }

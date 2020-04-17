@@ -31,6 +31,7 @@ class Form_Builder implements Builder {
 		if(!empty($form) and is_array($form) and !empty($form['id']) and !empty($form['title'])){
 			
 			$form_html = '';
+			$sub_elements = array('visible_info', 'info_icon');
 
 			if(!empty($form['data']) and is_array($form['data'])) {
 
@@ -38,25 +39,14 @@ class Form_Builder implements Builder {
 
 					if(!empty($form_element['type'])) {
 
-						if(isset($form_element['class'])){
-							$form_element['class'] = $this->process_property($form_element['class']);
-						} else {
-							$form_element['class'] ='';
-						}
+						$form_element = $this->process_property_group($form_element, $id);
 
-						if(isset($form_element['attr'])){
-							$form_element['attr'] = $this->process_property($form_element['attr']);
-						} else {
-							$form_element['attr'] ='';
+						foreach ($sub_elements as $skey => $svalue) {
+							if( isset($form_element[$svalue]) )
+							{
+								$form_element[$svalue] = $this->process_property_group($form_element[$svalue], $svalue);
+							}
 						}
-
-						if(isset($form_element['size_class'])){
-							$form_element['size_class'] = $this->process_property($form_element['size_class']);
-						} else {
-							$form_element['size_class'] ='';
-						}
-
-						$form_element['id'] = str_replace(' ','_', $id);
 
 						ob_start();
 						?><div class="fields"><?php
@@ -78,6 +68,31 @@ class Form_Builder implements Builder {
 				)
 			);
 		}
+	}
+
+	function process_property_group(array $form_element, string $id) {
+		
+		if(isset($form_element['class'])){
+			$form_element['class'] = $this->process_property($form_element['class']);
+		} else {
+			$form_element['class'] ='';
+		}
+
+		if(isset($form_element['attr'])){
+			$form_element['attr'] = $this->process_property($form_element['attr']);
+		} else {
+			$form_element['attr'] ='';
+		}
+
+		if(isset($form_element['size_class'])){
+			$form_element['size_class'] = $this->process_property($form_element['size_class']);
+		} else {
+			$form_element['size_class'] ='';
+		}
+
+		$form_element['id'] = str_replace(' ','_', $id);
+
+		return $form_element;
 	}
 
 	public function process_property(array $property) {

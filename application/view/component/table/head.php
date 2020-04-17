@@ -3,12 +3,16 @@
 /**
  * Table header
  *
- * $head_item @array : It's contains details fo the table header data
+ * $head_item @array : It's contains details for the table header data
  * 
  */
-
-if( is_array(!empty($head) || $head)) { ?>
+echo "<pre>"; print_r($head); echo "</pre>";
+if(!empty($head) && is_array($head)) { ?>
 	<thead>
-		<?php wbc()->load->template('admin/component/table/wbc-row.php',$head); ?>
+		<?php 
+		foreach ($head as $index => $row) {
+			wbc()->load->template('component/table/row.php', array("row"=>$row) ); 
+		}	
+		?>
 	</thead>
 <?php }

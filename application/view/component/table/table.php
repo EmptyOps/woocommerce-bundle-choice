@@ -8,12 +8,13 @@
  *
  */
 
-if(!empty($head) || !empty($body_data) || is_array($head) ||  is_array($body)) { ?>
-<table class="ui celled structured table">
+//TODO use helper function here to check if var is non empty array
+if(!empty($id) && !empty($head) && !empty($body) && is_array($head) && is_array($body)) { ?>
+<table id="<?php echo $id; ?>" class="ui celled structured table <?php echo !empty($class)?$class:''; ?>" <?php echo !empty($attr)?$attr:''; ?>>
 
-	<?php wbc()->load->templates('admin/component/table/wbc-head.php',$head); ?>
+	<?php wbc()->load->template('component/table/head.php', array( "head"=>$head ) ); ?>
 
-	<?php wbc()->load->templates('admin/component/table/wbc-body.php',$body); ?>	
+	<?php wbc()->load->template('component/table/body.php', array( "body"=>$body ) ); ?>	
 
 </table>	
 <?php }

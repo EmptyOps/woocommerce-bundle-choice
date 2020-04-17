@@ -10,6 +10,13 @@ $form['method']='POST';
 
 $form['data'] = array(
 
+					'eowbc_configuration_section_visible_info'=>array(
+						'label'=>eowbc_lang('(Set pricing method to update price in bulk. For eg.: based on gold,diamond price changes, you might want to bulk update prices.)'),
+						'type'=>'visible_info',
+						'class'=>array('fluid', 'medium'),
+						'size_class'=>array('sixteen','wide'),
+						'inline'=>false,
+						), 
 					'form_text'=>array(
 						'label'=>'Form Text',
 						'type'=>'text',
@@ -18,7 +25,18 @@ $form['data'] = array(
 						'class'=>array('fluid'),
 						'size_class'=>array('sixteen','wide'),
 						'inline'=>true,
-					),	
+
+						'visible_info'=>array( 'label'=>'lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsum lorem ipsum',
+								'type'=>'visible_info',
+								'class'=>array('fluid', 'small'),
+								'size_class'=>array('sixteen','wide'),
+							),
+
+						'info_icon'=>array( 'text'=>'lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsum lorem ipsum',
+								'type'=>'info_icon',
+								'inline'=>true,
+							),
+						),	
 					'form_textare'=>array(
 						'label'=>'Form Textasf asdf ',
 						'type'=>'text',

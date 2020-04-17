@@ -20,6 +20,12 @@ if(!empty($id) and !empty($label)){
 		    	<?php endif; ?>
 		  	</div>		
 		</div>
+		<?php
+		if (isset($visible_info))
+		{
+			wbc()->load->template('component/form/input_visible_info',$visible_info); 
+		}
+		?>
 	</div>
 	<?php
 }
