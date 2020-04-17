@@ -90,9 +90,9 @@ class Form_Builder implements Builder {
 									
 							wbc()->load->template('component/form/input_'.$form_element['type'],$form_element);
 							if($form_element['type']=='devider'){
-								$tab_segment.=ob_get_clean();
+								$form_html.=ob_get_clean();
 							} else {
-								$tab_segment.='<div class="fields">'.ob_get_clean().'</div>';
+								$form_html.='<div class="fields">'.ob_get_clean().'</div>';
 							}
 						}
 					}

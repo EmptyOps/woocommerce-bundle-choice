@@ -1,0 +1,6 @@
+<?php
+
+/**
+*
+*	Form icon template
+/
