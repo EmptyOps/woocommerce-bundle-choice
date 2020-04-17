@@ -28,7 +28,7 @@ class Form_Builder implements Builder {
 
 	public function build(array $form){
 
-		if(!empty($form) and is_array($form) and !empty($form['id']) and !empty($form['title'])){
+		if(!empty($form) and is_array($form) and !empty($form['id']) /*and !empty($form['title'])*/){
 			
 			$form_html = '';
 			$sub_elements = array('visible_info', 'info_icon');
@@ -38,6 +38,14 @@ class Form_Builder implements Builder {
 				foreach ($form['data'] as $id => $form_element) {
 
 					if(!empty($form_element['type'])) {
+
+						if( $form_element['type'] == "table" ){
+							wbc()->load->model('admin\table-builder');
+							ob_start();
+							Table_Builder::instance()->build($form_element);
+							$form_html.=ob_get_clean();
+							continue;
+						}
 
 						$form_element = $this->process_property_group($form_element, $id);
 
@@ -49,9 +57,17 @@ class Form_Builder implements Builder {
 						}
 
 						ob_start();
-						?><div class="fields"><?php
+						
+						if( !isset($form_element['prev_inline']) || !$form_element['prev_inline'] ){
+							?><div class="<?php echo $form_element["inline"] ? "inline" : ""; ?> fields"><?php
+						}
+						
 						wbc()->load->template('component/form/input_'.$form_element['type'],$form_element);
-						?></div><?php
+
+						if( !isset($form_element['next_inline']) || !$form_element['next_inline'] ){
+							?></div><?php
+						}
+
 						$form_html.=ob_get_clean();
 					}
 				}

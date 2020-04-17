@@ -23,7 +23,15 @@
 	     	<?php }
 	     	else { ?>
 	     		<td>
-	     			<?php echo $column["val"]; ?>	
+	     			<?php 
+	     				if( !isset($column["is_icon"]) || !$column["is_icon"] ){
+		     				echo $column["val"]; 
+	     				}
+	     				else{?>
+			     			<i class="<?php echo !empty($column["icon_class"]) ? $column["icon_class"] : "";?> icon"></i><?php
+	     				}
+
+					?>	
 	     		</td>
 	     	<?php }
 	    } 

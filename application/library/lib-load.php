@@ -30,6 +30,18 @@ if(!class_exists('WBC_Loader')) {
 
 					require trailingslashit(constant('EOWBC_TEMPLATE_DIR')).$template_path.".php";
 				}
+				else 
+				{
+					//exception handling
+					if( true || constant('WP_DEBUG') == true )
+					{
+						throw new Exception("template file '".constant('EOWBC_TEMPLATE_DIR').$template_path.".php' is not found");
+					}
+					else 
+					{
+						//else show warning
+					}
+				}
 			}			
 		}
 
