@@ -1,7 +1,5 @@
 <?php
 defined( 'ABSPATH' ) || exit;
-
-
 $form = array();
 
 $form['id']='eowbc_configuration';
@@ -9,40 +7,40 @@ $form['title']='Configuration';
 $form['method']='POST';
 $form['tabs'] = true;
 $form['data'] = array(
-						'automation'=>array(
+						'config_automation'=>array(
 							
 								'label'=>'Automatic Configuration',
 								'form'=>array(
-											'business_type'=>array(
+											'config_business_type'=>array(
 												'label'=>'What do you stand for?',
 												'type'=>'select',
-												'value'=>'jewelery',
+												'value'=>wbc()->options->get_option('configuration','business_type'),
 												'options'=>array('jewelery'=>'Jewelery','clothing'=>'Clothing','home_decor'=>'Home Decor','others'=>'Others'),
 												'class'=>array('fluid'),
 												'size_class'=>array('eight','wide'),
 												'inline'=>true,
 											),
-											'automation_link'=>array(
+											'config_automation_link'=>array(
 												'label'=>'Click here for automated configuration and setup',
 												'type'=>'link',
 												'attr'=>array("href='".admin_url('admin.php?page=eowbc&automated_install=1')."'"),
 												'class'=>array('secondary')	
 											),
-											'save_automation'=>array(
+											'config_save_automation'=>array(
 												'label'=>'Save',
-												'type'=>'button',
-												'attr'=>array("href='".admin_url('admin.php?page=eowbc&automated_install=1')."'"),
-												'class'=>array('primary')	
+												'type'=>'button',				
+												'class'=>array('primary'),
+												'attr'=>array("data-action='save'")
 											)
 										)							
 							),
-						'buttons_conf'=>array(
+						'config_buttons_conf'=>array(
 								'label'=>'Buttons',
 								'form'=>array(
-									'buttons_page'=>array(
+									'config_buttons_page'=>array(
 											'label'=>'Choice button position',
 											'type'=>'select',
-											'value'=>'0',
+											'value'=>wbc()->options->get_option('configuration','buttons_page'),
 											'options'=>array(
 													'0'=>'Custom landing page',
 													'1'=>'Home page only',
@@ -53,107 +51,150 @@ $form['data'] = array(
 											'size_class'=>array('eight','wide'),
 											'inline'=>true,
 										),
-									'devider_make_pair'=>array(
+									'config_devider_make_pair'=>array(
 											'label'=>'Make Pair Button',
 											'type'=>'devider',
 										),
-									'enable_make_pair'=>array(
+									'config_enable_make_pair'=>array(
 											'label'=>'Enabled?',
 											'type'=>'checkbox',
-											'value'=>array(),
-											'options'=>array('make_pair_status'=>'Make pair button status.'),
+											'value'=>array(wbc()->options->get_option('configuration','enable_make_pair')),
+											'options'=>array('config_enable_make_pair'=>'Make pair button status.'),
 											'class'=>array()
 										),
-									'label_make_pair'=>array(
+									'config_label_make_pair'=>array(
 											'label'=>'Button label',
 											'type'=>'text',
-											'value'=>'',
+											'value'=>wbc()->options->get_option('configuration','label_make_pair'),
 											'class'=>array(),
 											'size_class'=>array('eight','wide'),
 											'inline'=>true,
 										),
-									'save_buttons_conf'=>array(
+									'config_save_buttons_conf'=>array(
 												'label'=>'Save',
 												'type'=>'button',		
-												'class'=>array('primary')	
+												'class'=>array('primary'),
+												'attr'=>array("data-action='save'")	
 											)
 									)
 							),
-						'navigation_conf'=>array(
+						'config_navigation_conf'=>array(
 								'label'=>'Navigations',
 								'form'=>array(
 									'devider_first_cat'=>array(
 											'label'=>'First Category',
 											'type'=>'devider',
 										),
-									'first_name'=>array(
+									'config_first_name'=>array(
 											'label'=>'Name',
 											'type'=>'select',
-											'value'=>'',
-											'options'=>array(),
+											'value'=>wbc()->options->get_option('configuration','first_name'),
+											'options'=>eo\wbc\model\Category_Attribute::instance()->get_category(),
 											'class'=>array(),
 											'size_class'=>array('eight','wide'),
 											'inline'=>true,
 										),
-									'first_icon'=>array(
-											'label'=>'Upload Icon',
+									'config_first_icon'=>array(
+											'label'=>'Icon',
 											'type'=>'icon',
-											'value'=>'',
+											'value'=>wbc()->options->get_option('configuration','first_icon'),
 											'class'=>array(),
 											'size_class'=>array('eight','wide'),
 											'inline'=>true,
 										),
-									'devider_second_cat'=>array(
+									'config_devider_second_cat'=>array(
 											'label'=>'Second Category',
 											'type'=>'devider',
 										),
-									'second_name'=>array(
+									'config_second_name'=>array(
 											'label'=>'Name',
 											'type'=>'select',
-											'value'=>'',
-											'options'=>array(),
+											'value'=>wbc()->options->get_option('configuration','second_name'),
+											'options'=>eo\wbc\model\Category_Attribute::instance()->get_category(),
 											'class'=>array(),
 											'size_class'=>array('eight','wide'),
 											'inline'=>true,
 										),
-									'second_icon'=>array(
-											'label'=>'Upload Icon',
+									'config_second_icon'=>array(
+											'label'=>'Icon',
 											'type'=>'icon',
-											'value'=>'',
+											'value'=>wbc()->options->get_option('configuration','second_icon'),
 											'class'=>array(),
 											'size_class'=>array('eight','wide'),
 											'inline'=>true,
 										),
-									'devider_preview'=>array(
+									'config_devider_preview'=>array(
 											'label'=>'Preview',
 											'type'=>'devider',
 										),
-									'preview_name'=>array(
+									'config_preview_name'=>array(
 											'label'=>'Name',
 											'type'=>'text',
-											'value'=>'',
+											'value'=>wbc()->options->get_option('configuration','preview_name'),
 											'class'=>array(),
 											'size_class'=>array('eight','wide'),
 											'inline'=>true,
 										),
-									'preview_icon'=>array(
-											'label'=>'Upload Icon',
+									'config_preview_icon'=>array(
+											'label'=>'Icon',
 											'type'=>'icon',
-											'value'=>'0',
-											'options'=>array(
-													'0'=>'Custom landing page',
-													'1'=>'Home page only',
-													'2'=>'Shortcode only',
-													'3'=>'Home page and Shortcode'
-												),
+											'value'=>wbc()->options->get_option('configuration','preview_icon'),	
 											'class'=>array(),
 											'size_class'=>array('eight','wide'),
 											'inline'=>true,
 										),									
-									'save_buttons_conf'=>array(
+									'config_save_buttons_conf'=>array(
 												'label'=>'Save',
 												'type'=>'button',		
-												'class'=>array('primary')	
+												'class'=>array('primary'),
+												'attr'=>array("data-action='save'")	
+											)
+									)
+							),
+						'config_extra_conf'=>array(
+								'label'=>'Extra',
+								'form'=>array(
+									'config_devider_filter'=>array(
+											'label'=>'Filter Configuration',
+											'type'=>'devider',
+										),
+									'config_filter_status'=>array(
+											'label'=>'Filter Status',
+											'type'=>'checkbox',
+											'value'=>array(wbc()->options->get_option('configuration','filter_status')),
+											'options'=>array('config_filter_status'=>' Check here to enable horizontal filter bar at category page.'),
+											'class'=>array(),
+											'size_class'=>array('eight','wide'),
+											'inline'=>true,
+										),
+									
+									'config_devider_pair_maker'=>array(
+											'label'=>'Pair Maker Configuration',
+											'type'=>'devider',
+										),
+									'config_pair_maker_status'=>array(
+											'label'=>'Pair Maker Status',
+											'type'=>'checkbox',
+											'value'=>array(wbc()->options->get_option('configuration','pair_maker_status')),
+											'options'=>array('config_pair_maker_status'=>' Check here to enable pair maker view at second step of category page.'),
+											'class'=>array(),
+											'size_class'=>array('eight','wide'),
+											'inline'=>true,
+										),
+									'config_pair_maker_upper_card'=>array(
+											'label'=>'Icon',
+											'type'=>'radio',
+											'value'=>wbc()->options->get_option('configuration','pair_maker_upper_card'),
+											'options'=>array('first'=>'First Category','second'=>'Second Category'),
+											'class'=>array(),
+											'size_class'=>array('eight','wide'),
+											'inline'=>true,
+										),								
+									'config_save_buttons_conf'=>array(
+												'label'=>'Save',
+												'type'=>'button',		
+												'class'=>array('primary'),
+												'attr'=>array("data-action='save'")
 											)
 									)
 							)
@@ -235,3 +276,4 @@ $form['data'] = array(
 
 wbc()->load->model('admin\form-builder');
 eo\wbc\model\admin\Form_Builder::instance()->build($form);
+wbc()->load->asset('js','admin/configuration');	

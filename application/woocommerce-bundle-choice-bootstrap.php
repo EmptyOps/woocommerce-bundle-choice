@@ -31,16 +31,27 @@ class WooCommerce_Bundle_Choice_Bootstrap {
 	private function __construct() {			
 
 		if((function_exists('is_ajax') and is_ajax()) or defined('WP_AJAX')) {
-
-			if(class_exists('Ajax_Handler'))
-				Ajax_Handler::process();			
+			
+			add_action( "wp_ajax_nopriv_eowbc_ajax",array($this,'ajax'),10);
+			add_action( "wp_ajax_eowbc_ajax",array($this,'ajax'),10);
 
 		} else {			
-			if(class_exists('Http_Handler'))
-				echo "http_handler";
-				/*die();*/
+			/*if(class_exists('Http_Handler')){*/
 				Http_Handler::process();				
+			/*}*/
 		}	
+	}
+
+	public function ajax(){
+		if(!empty($_POST['_wpnonce']) and !empty($_POST['resolver'])) {
+			
+			$resolver_path = constant('EOWBC_DIRECTORY').'application/controllers/ajax/'.sanitize_text_field($_POST['resolver']).'.php';
+						
+			if(file_exists($resolver_path)){
+				require_once $resolver_path;
+			}
+		}
+		die();
 	}
 
 	public static function activate( $network_wide ) {

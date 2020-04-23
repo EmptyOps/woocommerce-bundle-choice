@@ -78,12 +78,13 @@ if(!class_exists('WooCommerce_Bundle_Choice')) {
 			*	where the tool_name should only be added to the list.
 			*/
 
-			$helpers = array('eowbc-options','language');
+			$helpers = array('options'=>'WBC_Options','lang'=>'WBC_language','wc'=>'WBC_WC');
 
 			if(!empty($helpers)){
 
-				foreach ($helpers as $helper) {
-					require_once constant('EOWBC_HELPERS_DIR')."helper-${helper}.php";
+				foreach ($helpers as $helper=>$helper_class) {					
+					require_once constant('EOWBC_HELPERS_DIR')."helper-${helper_class}.php";
+					$this->$helper = $helper_class::instance();
 				}	
 			}
 		}
