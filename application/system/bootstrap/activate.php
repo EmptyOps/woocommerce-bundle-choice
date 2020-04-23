@@ -1,9 +1,10 @@
 <?php
 
-defined( 'ABSPATH' ) || exit;
-
 namespace eo\wbc\system\bootstrap;
 use \eo\wbc\helper\EOWBC_Options; 
+use eo\wbc\system\bootstrap\Setup_Wizard;
+
+defined( 'ABSPATH' ) || exit;
 
 class Activate {
 
@@ -20,6 +21,11 @@ class Activate {
 
 		$this->init_options();
 		$this->add_pages();
+
+		//setup wizard
+		if( true /*TODO check here if it's first time activate and setup wizard not ran yet then only run it*/ ) {
+			Setup_Wizard::instance()->init();
+		}
 	}	
 
 	public function init_options() {

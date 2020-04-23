@@ -48,6 +48,15 @@ class Form_Builder implements Builder {
 							foreach ($tab_data['form'] as $id => $form_element) {
 
 								if(!empty($form_element['type'])) {
+
+									if( $form_element['type'] == "table" ){
+										wbc()->load->model('admin\table-builder');
+										ob_start();
+										Table_Builder::instance()->build($form_element);
+										$tab_segment.=ob_get_clean();
+										continue;
+									}
+
 									$form_element = $this->process_property_group($form_element, $id);
 
 									foreach ($sub_elements as $skey => $svalue) {
@@ -59,12 +68,21 @@ class Form_Builder implements Builder {
 
 									ob_start();
 									
-									wbc()->load->template('component/form/input_'.$form_element['type'],$form_element);
-									if($form_element['type']=='devider'){
-										$tab_segment.=ob_get_clean();
-									} else {
-										$tab_segment.='<div class="fields">'.ob_get_clean().'</div>';
+									if( (!isset($form_element['prev_inline']) || !$form_element['prev_inline']) && $form_element['type']!='devider' ){
+										?><div class="<?php echo (isset($form_element["inline"]) && $form_element["inline"]) ? "inline" : ""; ?> fields"><?php
 									}
+
+									wbc()->load->template('component/form/input_'.$form_element['type'],$form_element);
+
+									if( (!isset($form_element['next_inline']) || !$form_element['next_inline']) && $form_element['type']!='devider' ){
+										?></div><?php
+									}
+
+									// if($form_element['type']=='devider'){
+										$tab_segment.=ob_get_clean();
+									// } else {
+									// 	$tab_segment.='<div class="fields">'.ob_get_clean().'</div>';
+									// }
 								}
 							}
 						}
@@ -77,6 +95,15 @@ class Form_Builder implements Builder {
 				} else {
 					foreach ($form['data'] as $id => $form_element) {
 						if(!empty($form_element['type'])) {
+
+							if( $form_element['type'] == "table" ){
+								wbc()->load->model('admin\table-builder');
+								ob_start();
+								Table_Builder::instance()->build($form_element);
+								$form_html.=ob_get_clean();
+								continue;
+							}
+
 							$form_element = $this->process_property_group($form_element, $id);
 
 							foreach ($sub_elements as $skey => $svalue) {
@@ -88,12 +115,21 @@ class Form_Builder implements Builder {
 
 							ob_start();
 									
-							wbc()->load->template('component/form/input_'.$form_element['type'],$form_element);
-							if($form_element['type']=='devider'){
-								$form_html.=ob_get_clean();
-							} else {
-								$form_html.='<div class="fields">'.ob_get_clean().'</div>';
+							if( (!isset($form_element['prev_inline']) || !$form_element['prev_inline']) && $form_element['type']!='devider' ){
+								?><div class="<?php echo (isset($form_element["inline"]) && $form_element["inline"]) ? "inline" : ""; ?> fields"><?php
 							}
+
+							wbc()->load->template('component/form/input_'.$form_element['type'],$form_element);
+
+							if( (!isset($form_element['next_inline']) || !$form_element['next_inline']) && $form_element['type']!='devider' ){
+								?></div><?php
+							}
+
+							// if($form_element['type']=='devider'){
+								$form_html.=ob_get_clean();
+							// } else {
+							// 	$form_html.='<div class="fields">'.ob_get_clean().'</div>';
+							// }
 						}
 					}
 				}
@@ -184,4 +220,235 @@ class Form_Builder implements Builder {
 			return '';
 		}
 	}
+
+	/**
+	 * $special_type	active_inactive, icon, image etc.
+	 */
+	public function ui_controls_collection(string $field_id, string $field_label, array $hide_defaults=array(), array $additional_fields=array(), array $info_text_overrides=array(), string $special_type=null, array $default_values = array() )  {
+		
+		$collection = array();
+
+		//TODO section title or section container ???
+
+
+		//defaults 
+		if( !in_array("text", $hide_defaults) )
+		{
+			$collection[$field_id.'_text'] = array(
+				'label'=>$field_label.' '.eowbc_lang('Text'),
+				'type'=>'text',
+				// 'class'=>array('fluid'),
+				'size_class'=>array('eight','wide'),
+				'inline'=>false,
+
+				'visible_info'=>array( 'label'=>( array_key_exists("text", $info_text_overrides) ? $info_text_overrides["text"] : eowbc_lang('Sets specified text on '.$field_label) ),
+					'type'=>'visible_info',
+					'class'=>array('small'),
+					// 'size_class'=>array('sixteen','wide'),
+				),
+			);
+		}
+
+		if( !in_array("font", $hide_defaults) )
+		{
+			$collection[$field_id.'_font'] = array(
+				'label'=>$field_label.' '.eowbc_lang('Text Font'),
+				'type'=>'text',
+				// 'class'=>array('fluid'),
+				'size_class'=>array('four','wide'),
+				'inline'=>false,
+
+				'visible_info'=>array( 'label'=>( array_key_exists("font", $info_text_overrides) ? $info_text_overrides["font"] : eowbc_lang('Specify the font family to be used on '.$field_label) ),
+					'type'=>'visible_info',
+					'class'=>array('small'),
+					// 'size_class'=>array('sixteen','wide'),
+				),
+			);
+		}
+
+		if( !in_array("radius", $hide_defaults) )
+		{
+			$collection[$field_id.'_radius'] = array(
+				'label'=>$field_label.' '.eowbc_lang('Radius (px)'),
+				'type'=>'text',
+				// 'class'=>array('fluid'),
+				'size_class'=>array('four','wide'),
+				'inline'=>false,
+
+				'visible_info'=>array( 'label'=>( array_key_exists("radius", $info_text_overrides) ? $info_text_overrides["radius"] : eowbc_lang('Sets specified radius on '.$field_label) ),
+					'type'=>'visible_info',
+					'class'=>array('small'),
+					// 'size_class'=>array('sixteen','wide'),
+				),
+			);
+		}
+
+		if( !in_array("backcolor", $hide_defaults) )
+		{
+			$ftot = 1;
+			if( $special_type == "active_inactive" )
+			{
+				$ftot += 1;
+			}
+
+			for($fi=0; $fi<$ftot; $fi++)
+			{
+				$special_lbl = $ftot < 2 ? "" : ( $fi == 0 ? eowbc_lang("Active ") : eowbc_lang("Inactive ") );
+
+				$collection[$field_id.'_backcolor_lbl'.$fi] = array(
+					'label'=>$field_label.' '.$special_lbl.eowbc_lang('Background Color'),
+					'type'=>'label',
+					// 'class'=>array('fluid'),
+					'size_class'=>array('eight','wide'),
+					'inline'=>true,
+
+					'info_icon'=>array( 'text'=>( array_key_exists("backcolor", $info_text_overrides) ? $info_text_overrides["backcolor"] : eowbc_lang('Sets specified color as background color on '.$field_label.( $special_lbl == "" ? "" : ' while its '.$special_lbl) ) ),
+						'type'=>'info_icon',
+					),
+				);
+
+				$collection[$field_id.'_backcolor'.$fi] = array(
+					'type'=>'color',
+					'size_class'=>array('eight','wide'),
+					'inline'=>false,
+				);
+			}
+		}
+
+		if( !in_array("hovercolor", $hide_defaults) )
+		{
+			$collection[$field_id.'_hovercolor_lbl'] = array(
+				'label'=>$field_label.' '.eowbc_lang('Hover Color'),
+				'type'=>'label',
+				// 'class'=>array('fluid'),
+				'size_class'=>array('eight','wide'),
+				'inline'=>true,
+
+				'info_icon'=>array( 'text'=>( array_key_exists("hovercolor", $info_text_overrides) ? $info_text_overrides["hovercolor"] : eowbc_lang('Sets specified color as hover color on '.$field_label) ),
+					'type'=>'info_icon',
+				),
+			);
+
+			$collection[$field_id.'_hovercolor'] = array(
+				'type'=>'color',
+				'size_class'=>array('eight','wide'),
+				'inline'=>false,
+			);
+		}
+
+		if( !in_array("textcolor", $hide_defaults) )
+		{
+			$collection[$field_id.'_textcolor_lbl'] = array(
+				'label'=>$field_label.' '.eowbc_lang('Text Color'),
+				'type'=>'label',
+				// 'class'=>array('fluid'),
+				'size_class'=>array('eight','wide'),
+				'inline'=>true,
+
+				'info_icon'=>array( 'text'=>( array_key_exists("textcolor", $info_text_overrides) ? $info_text_overrides["textcolor"] : eowbc_lang('Sets specified color as text color on '.$field_label) ),
+					'type'=>'info_icon',
+				),
+			);
+
+			$collection[$field_id.'_textcolor'] = array(
+				'type'=>'color',
+				'size_class'=>array('eight','wide'),
+				'inline'=>false,
+			);
+		}
+
+		if( !in_array("bordercolor", $hide_defaults) )
+		{
+			$collection[$field_id.'_bordercolor_lbl'] = array(
+				'label'=>$field_label.' '.eowbc_lang('Border Color'),
+				'type'=>'label',
+				// 'class'=>array('fluid'),
+				'size_class'=>array('eight','wide'),
+				'inline'=>true,
+
+				'info_icon'=>array( 'text'=>( array_key_exists("bordercolor", $info_text_overrides) ? $info_text_overrides["bordercolor"] : eowbc_lang('Sets specified color as border color on '.$field_label) ),
+					'type'=>'info_icon',
+				),
+			);
+
+			$collection[$field_id.'_bordercolor'] = array(
+				'type'=>'color',
+				'size_class'=>array('eight','wide'),
+				'inline'=>false,
+			);
+		}
+
+
+		//additional fields
+		foreach ($additional_fields as $key => $value) {
+			$field_id = $value["field_id"];
+			$field_label = $value["field_label"];
+
+			if( $value["type"] == "color" )	{
+				$ftot = 1;
+				if( $special_type == "active_inactive" ) {
+					$ftot += 1;
+				}
+
+				for($fi=0; $fi<$ftot; $fi++) {
+					$special_lbl = $ftot < 2 ? "" : ( $fi == 0 ? eowbc_lang("Active ") : eowbc_lang("Inactive ") );
+
+					$collection[$field_id.'_backcolor_lbl'.$fi] = array(
+						'label'=>$field_label.' '.$special_lbl.eowbc_lang('Color'),
+						'type'=>'label',
+						// 'class'=>array('fluid'),
+						'size_class'=>array('eight','wide'),
+						'inline'=>true,
+
+						'info_icon'=>array( 'text'=>( array_key_exists($field_id.$fi, $info_text_overrides) ? $info_text_overrides[$field_id.$fi] : eowbc_lang('Sets specified color as background color on '.$field_label.( $special_lbl == "" ? "" : ' while its '.$special_lbl) ) ),
+							'type'=>'info_icon',
+						),
+					);
+
+					$collection[$field_id.'_backcolor'.$fi] = array(
+						'type'=>'color',
+						'size_class'=>array('eight','wide'),
+						'inline'=>false,
+					);
+				}
+			}
+			elseif ($value["type"] == "checkbox") {
+				$collection[$field_id] = array(
+					'label'=>$field_label,
+					'type'=>'checkbox',
+					'value'=>array('1'),
+					'options'=>array('1'=>' '),
+					'class'=>array('fluid'),						
+					// 'size_class'=>array('eight','wide'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>( array_key_exists($field_id, $info_text_overrides) ? $info_text_overrides[$field_id] : "" ),
+						'type'=>'visible_info',
+						'class'=>array('small'),
+						// 'size_class'=>array('sixteen','wide'),
+					),
+				);
+			}
+			elseif ($value["type"] == "text") {
+				$collection[$field_id] = array(
+					'label'=>$field_label,
+					'type'=>'text',
+					'value'=>(array_key_exists($field_id, $default_values) ? $default_values[$field_id] : ""),
+					// 'class'=>array('fluid'),
+					'size_class'=>array('four','wide'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>( array_key_exists($field_id, $info_text_overrides) ? $info_text_overrides[$field_id] : "" ),
+						'type'=>'visible_info',
+						'class'=>array('small'),
+						// 'size_class'=>array('sixteen','wide'),
+					),
+				);
+			}
+		}
+
+
+		return $collection;
+	}
+
 }

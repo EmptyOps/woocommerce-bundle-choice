@@ -16,24 +16,36 @@
 
 		foreach ($row as $index => $column) {
      	
+     		//start tag
 	     	if(isset($column['is_header']) && $column['is_header'] == 1) { ?>
-	     		<th>
-				    <?php echo $column["val"]; ?>	
-				</th>
-	     	<?php }
+	     		<th <?php echo !empty($column['colspan']) ? 'colspan="'.$column['colspan'].'"' : '';?> class="<?php echo !empty($column['align']) ? $column['align'] : 'center';?> aligned header <?php echo !empty($column['class']) ? $column['class'] : '';?>">
+	     	<?php 
+	     	}
 	     	else { ?>
-	     		<td>
+	     		<td <?php echo !empty($column['colspan']) ? 'colspan="'.$column['colspan'].'"' : '';?> class="<?php echo !empty($column['align']) ? $column['align'] : 'center';?> aligned <?php echo !empty($column['class']) ? $column['class'] : '';?>">
 	     			<?php 
-	     				if( !isset($column["is_icon"]) || !$column["is_icon"] ){
-		     				echo $column["val"]; 
-	     				}
-	     				else{?>
-			     			<i class="<?php echo !empty($column["icon_class"]) ? $column["icon_class"] : "";?> icon"></i><?php
-	     				}
+			}
+ 			
+ 			//val
+			if( isset($column["is_icon"]) && $column["is_icon"] ){
+ 				wbc()->load->template('component/form/input_icon',array('icon_class'=>!empty($column["icon_class"]) ? $column["icon_class"] : "")); 
+			}
+			elseif ( isset($column["is_checkbox"]) && $column["is_checkbox"] ) {
+				wbc()->load->template('component/form/input_checkbox',$column["checkbox"]); 
+ 			}
+ 			else{
+				echo $column["val"]; 
+ 			}
 
-					?>	
+			//end tag
+			if(isset($column['is_header']) && $column['is_header'] == 1) { ?>
+				</th>
+	     	<?php 
+	     	}
+	     	else { ?>
 	     		</td>
-	     	<?php }
+	     	<?php 
+	     	}
 	    } 
 	}
 	?>

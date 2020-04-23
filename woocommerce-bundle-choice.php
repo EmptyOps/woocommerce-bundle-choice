@@ -47,7 +47,7 @@ if(!class_exists('WooCommerce_Bundle_Choice')) {
 			// load helper functions.
 			$this->load_helpers();
 			// load library.
-			$this->load_library();			
+			$this->load_library();		
 			// begin the work.
 			$this->init();
 		}
@@ -139,6 +139,10 @@ if(!class_exists('WooCommerce_Bundle_Choice')) {
 
 			do_action( 'before_eowbc_load' );
 			$bootstrap = eo\wbc\WooCommerce_Bundle_Choice_Bootstrap::instance();
+
+			//TODO temp
+			eo\wbc\WooCommerce_Bundle_Choice_Bootstrap::activate();			
+
 			register_activation_hook( __FILE__, 'eo\wbc\WooCommerce_Bundle_Choice_Bootstrap::activate');
 			register_deactivation_hook( __FILE__, 'eo\wbc\WooCommerce_Bundle_Choice_Bootstrap::deactivate');
 			register_uninstall_hook( __FILE__,'eo\wbc\WooCommerce_Bundle_Choice_Bootstrap::uninstall');			
