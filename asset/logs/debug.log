@@ -1,0 +1,4 @@
+[Apr 22 2020 13:13:47] Compile Error in /var/www/html/wpd/wp-content/plugins/woocommerce-bundle-choice-design-pattern/tests/view/admin/test-configuration.php at line number 42
+"Cannot declare class Admin_Configuration_Test, because the name is already in use"
+[Apr 22 2020 14:48:47] Compile Error in /var/www/html/wpd/wp-content/plugins/woocommerce-bundle-choice-design-pattern/tests/view/admin/test-configuration.php at line number 42
+"Cannot declare class Admin_Configuration_Test, because the name is already in use"
