@@ -163,5 +163,5 @@ echo "Moving composer.json"
 cp composer.json ${WP_CORE_DIR}
 composer install -d ${WP_CORE_DIR}
 echo "Installing dependency"
-composer global require "phpunit/phpunit=4.8.*|5.7.*"
+composer global require "phpunit/phpunit=5.7.*"
 php /tmp/wordpress/wp plugin activate woocommerce
