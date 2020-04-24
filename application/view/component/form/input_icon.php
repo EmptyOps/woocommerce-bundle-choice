@@ -16,4 +16,6 @@ if(!empty($id) and !empty($label)){
 	<input type="hidden" name="<?php echo $id ?>" value="<?php echo $value; ?>">
 	<div class="ui button inverted primary"><i class="cloud upload icon"></i>&nbsp; Change</div>
 </div>
-<?php } ?>
+<?php 
+}
+?>

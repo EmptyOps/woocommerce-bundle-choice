@@ -1,9 +1,9 @@
 <?php
 
-defined( 'ABSPATH' ) || exit;
-
 namespace eo\wbc\system\bootstrap;
-use \eo\wbc\helper\EOWBC_Options; 
+use eo\wbc\system\bootstrap\Setup_Wizard;
+
+defined( 'ABSPATH' ) || exit;
 
 class Activate {
 
@@ -17,9 +17,18 @@ class Activate {
 	}
 
 	private function __construct() {
-
+		return true;
 		$this->init_options();
 		$this->add_pages();
+
+		//setup wizard
+		// if( true /*TODO check here if it's first time activate and setup wizard not ran yet then only run it*/ ) {
+		// 	//add addmin page
+  //           add_submenu_page(null, __('Setup WooCommerce Product Bundle Choice','woo-bundle-choice'), __('Setup WooCommerce Product Bundle Choice','woo-bundle-choice'), 'administrator', 'eo-wbc-init', function(){
+  //           	Setup_Wizard::instance()->init();
+  //           });                    
+  //           //$this->menu_slugs['Configuration']='eo-wbc-init';
+		// }
 	}	
 
 	public function init_options() {
@@ -38,8 +47,8 @@ class Activate {
 						);
         if(!empty($init_options)) {
         	foreach ($init_options as $option=>$value) {
-				if(empty(EOWBC_Options::get_option($option, false))){
-					EOWBC_Options::set_option($option, $value);
+				if(empty(wbc()->options->get_option('configuration',$option, false))){
+					wbc()->options->update_option('configuration',$option, $value);
 				}
         	}
         	return true;

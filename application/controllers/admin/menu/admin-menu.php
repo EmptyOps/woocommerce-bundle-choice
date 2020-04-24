@@ -89,21 +89,21 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 						),
 						array(
 							'parent_slug'=>'eowbc',
-							'title'=>eowbc_lang('Extensions'),
-							'menu_title'=>eowbc_lang('Extensions'),
-							'capability'=>'manage_options',
-							'slug'=>'eowbc-extensions',
-							'template'=>'admin/menu/extensions',
-							'position'=>5
-						),
-						array(
-							'parent_slug'=>'eowbc',
 							'title'=>eowbc_lang('Logs'),
 							'menu_title'=>eowbc_lang('Logs'),
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-logs',
 							'template'=>'admin/menu/logs',
 							'position'=>6
+						),
+						array(
+							'parent_slug'=>'eowbc',
+							'title'=>eowbc_lang('Extensions'),
+							'menu_title'=>eowbc_lang('Extensions'),
+							'capability'=>'manage_options',
+							'slug'=>'eowbc-extensions',
+							'template'=>'admin/menu/extensions',
+							'position'=>5
 						),
 					);
 			$menu['submenu'] = $submenu;
