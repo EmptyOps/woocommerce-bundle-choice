@@ -49,11 +49,13 @@ $table['head'] = array(
 					0=>array(
 						0=>array(
 							'is_header' => 1, 
-							'val' => 'Field'
+							'val' => 'Field',
+							'align'=>'left'
 						),
 						1=>array(
 							'is_header' => 1, 
-							'val' => 'Type'
+							'val' => 'Type',
+							'align'=>'left'
 						),
 						2=>array(
 							'is_header' => 1, 
@@ -69,10 +71,12 @@ $table['body'] = array(
 					0=>array(
 						0=>array(
 							'is_header' => 0, 
-							'val' => 'Diamond'
+							'val' => 'Diamond',
+							'align'=>'left'
 						),
 						1=>array(
-							'val' => 'Category'
+							'val' => 'Category',
+							'align'=>'left'
 						),
 						2=>array(
 							'val' => ''
@@ -165,7 +169,8 @@ $table['head'] = array(
 						),
 						1=>array(
 							'is_header' => 1, 
-							'val' => 'Price'
+							'val' => 'Price',
+							'align'=>'left'
 						),
 						2=>array(
 							'is_header' => 1, 
@@ -182,7 +187,8 @@ $table['body'] = array(
 							'val' => 'x'
 						),
 						1=>array(
-							'val' => 'Regular Price:5<br>Sales Price:4'
+							'val' => 'Regular Price:5<br>Sales Price:4',
+							'align'=>'left'
 						),
 						2=>array(
 							'val' => '[Uncategorized]'

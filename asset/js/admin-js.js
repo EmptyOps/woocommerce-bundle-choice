@@ -1,6 +1,7 @@
 jQuery(document).ready(function($){
 	$(".ui.selection.dropdown").dropdown();	
 	$(".ui.pointing.secondary.menu>.item").tab();
+    $(".exclamation.circle.icon").popup({position:'bottom left',hoverable:true});
 
 	//Open wordpress media manager on button click
     jQuery('.field.upload_image>.ui.button').on('click',function(event){
