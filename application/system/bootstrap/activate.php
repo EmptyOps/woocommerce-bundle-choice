@@ -24,7 +24,11 @@ class Activate {
 
 		//setup wizard
 		if( true /*TODO check here if it's first time activate and setup wizard not ran yet then only run it*/ ) {
-			Setup_Wizard::instance()->init();
+			//add addmin page
+            add_submenu_page(null, __('Setup WooCommerce Product Bundle Choice','woo-bundle-choice'), __('Setup WooCommerce Product Bundle Choice','woo-bundle-choice'), 'administrator', 'eo-wbc-init', function(){
+            	Setup_Wizard::instance()->init();
+            });                    
+            //$this->menu_slugs['Configuration']='eo-wbc-init';
 		}
 	}	
 

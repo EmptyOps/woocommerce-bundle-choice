@@ -28,7 +28,7 @@
  			
  			//val
 			if( isset($column["is_icon"]) && $column["is_icon"] ){
- 				wbc()->load->template('component/form/input_icon',array('icon_class'=>!empty($column["icon_class"]) ? $column["icon_class"] : "")); 
+ 				wbc()->load->template('component/tiny_elements/icon',array('icon_class'=>!empty($column["icon_class"]) ? $column["icon_class"] : "")); 
 			}
 			elseif ( isset($column["is_checkbox"]) && $column["is_checkbox"] ) {
 				wbc()->load->template('component/form/input_checkbox',$column["checkbox"]); 

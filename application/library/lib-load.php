@@ -19,6 +19,25 @@ if(!class_exists('WBC_Loader')) {
 			//	no implemetations 
 		}
 
+		public function asset($type,$path) {
+			$_path = '';
+			$_handle = str_replace(' ','-',str_replace('/','-',$path));			
+			switch ($type) {
+				case 'css':
+					$_path = constant('EOWBC_ASSET_URL').'css'.'/'.$path.'.css';
+					wp_register_style($_handle, $_path);
+					wp_enqueue_style($_handle);
+					break;
+				case 'js':
+					$_path = constant('EOWBC_ASSET_URL').'js'.'/'.$path.'.js';
+					wp_register_script($_handle, $_path);
+					wp_enqueue_script($_handle);					
+					break;				
+				default:				
+					break;
+			}			
+		}
+
 		public function template( $template_path, $data=array() ) {
 			//	load template file under /view directory
 			if(defined('EOWBC_TEMPLATE_DIR')) {

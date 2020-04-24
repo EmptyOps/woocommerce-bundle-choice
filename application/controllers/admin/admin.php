@@ -58,8 +58,15 @@ class Admin {
 				wp_enqueue_script('eowbc_fomantic_js');
 
 				wp_register_script('eowbc_admin_js',constant('EOWBC_ASSET_URL').'js/admin-js.js');
-				wp_enqueue_script('eowbc_admin_js');
+				
+				wp_localize_script(
+                    'eowbc_admin_js',
+                    'eowbc_object',
+                    array('admin_url'=>admin_url( 'admin-ajax.php'))
+                );            
+                wp_enqueue_script('eowbc_admin_js');
 			}, 10 );
+			wp_enqueue_media();
 		});
 	}	
 }

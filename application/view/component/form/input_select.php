@@ -14,13 +14,13 @@ if(!empty($id) /*and !empty($label)*/){
 		}
 		?></td>
 		<div class="ui selection dropdown <?php echo !empty($class)?$class:''; ?>">
-		  	<input type="hidden" id="<?php echo $id; ?>" name="<?php echo $id; ?>">
+		  	<input type="hidden" id="<?php echo $id; ?>" name="<?php echo $id; ?>" value="<?php echo $value; ?>">
 		  	<i class="dropdown icon"></i>		
 		  	<div class="default text"></div>		  	
 		  	<div class="menu">
 		  		<?php if(!empty($options) and is_array($options)): ?>
-		  			<?php foreach($options as $key=>$value): ?>
-			    		<div class="item" data-value="<?php echo $key; ?>"><?php echo $value; ?></div>
+		  			<?php foreach($options as $key=>$item): ?>
+			    		<div class="item" data-value="<?php echo $key; ?>"><?php echo $item; ?></div>
 			    	<?php endforeach; ?>	
 		    	<?php endif; ?>
 		  	</div>		
