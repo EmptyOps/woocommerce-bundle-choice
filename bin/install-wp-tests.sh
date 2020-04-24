@@ -162,6 +162,4 @@ echo "Moving composer.json"
 #composer config -g github-oauth.github.com $GIT_TOKEN
 cp composer.json ${WP_CORE_DIR}
 composer install -d ${WP_CORE_DIR}
-echo "Installing dependency"
-composer global require "phpunit/phpunit=5.*"
 php /tmp/wordpress/wp plugin activate woocommerce
