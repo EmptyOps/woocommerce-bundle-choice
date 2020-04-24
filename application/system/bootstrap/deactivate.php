@@ -1,5 +1,4 @@
 <?php
-
 namespace eo\wbc\system\bootstrap;
 use \eo\wbc\helper\EOWBC_Options; 
 
