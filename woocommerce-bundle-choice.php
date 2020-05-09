@@ -9,7 +9,7 @@
  * @wordpress-plugin
  * Plugin Name: WooCommerce Product Bundle Choice -Design Pattern
  * Plugin URI: https://wordpress.org/plugins/woocommerce-bundle-choice/
- * Description: An E-Commerce tool that let your customer's buy product in a set and create map that relates between your product categories.
+ * Description: Product bundling as ring builder for jewelry, pair maker for clothing and guidance tool for home decor, cosmetics etc. Product bundling as per user's choice.
  * Version: 1.0.0
  * Author: emptyopssphere
  * Author URI: https://profiles.wordpress.org/emptyopssphere
@@ -40,6 +40,10 @@ if(!class_exists('WooCommerce_Bundle_Choice')) {
 		}
 
 		private function __construct() {			
+			//do nothing, construct_init will be called from plugins_loaded hook
+		}
+
+		public function construct_init() {			
 			// define constant before our work bwgins.
 			$this->define_constants();
 			// load neccesary tools.
@@ -78,7 +82,7 @@ if(!class_exists('WooCommerce_Bundle_Choice')) {
 			*	where the tool_name should only be added to the list.
 			*/
 
-			$helpers = array('options'=>'WBC_Options','lang'=>'WBC_language','wc'=>'WBC_WC');
+			$helpers = array('options'=>'WBC_Options','lang'=>'WBC_language','wc'=>'WBC_WC','common'=>'WBC_Common');
 
 			if(!empty($helpers)){
 
@@ -133,7 +137,7 @@ if(!class_exists('WooCommerce_Bundle_Choice')) {
 
 			defined('EOWBC_ICON') || define('EOWBC_ICON', constant('EOWBC_ASSET_URL').'icon/mini.png');
 			defined('EOWBC_JUMBO_ICON') || define('EOWBC_JUMBO_ICON', constant('EOWBC_ASSET_URL').'/icon/jumbo.png');
-			
+			defined('EOWBC_ICON_SVG') || define('EOWBC_ICON_SVG', 'https://www.emptyops.com/demo/zokri-shop/wp-content/uploads/2020/02/bundle_site_logo_2-1.svg');
 		}
 
 		public function init() {
@@ -141,8 +145,9 @@ if(!class_exists('WooCommerce_Bundle_Choice')) {
 			do_action( 'before_eowbc_load' );
 			$bootstrap = eo\wbc\WooCommerce_Bundle_Choice_Bootstrap::instance();
 
-			//TODO temp
-			eo\wbc\WooCommerce_Bundle_Choice_Bootstrap::activate();			
+			// //TODO temp. hiren added on around 23-04-2020
+			// eo\wbc\WooCommerce_Bundle_Choice_Bootstrap::activate();
+	        			
 
 			register_activation_hook( __FILE__, 'eo\wbc\WooCommerce_Bundle_Choice_Bootstrap::activate');
 			register_deactivation_hook( __FILE__, 'eo\wbc\WooCommerce_Bundle_Choice_Bootstrap::deactivate');
@@ -150,7 +155,9 @@ if(!class_exists('WooCommerce_Bundle_Choice')) {
 			do_action( 'after_eowbc_load' );			
 		}
 	}
-	add_action( 'plugins_loaded', 'WooCommerce_Bundle_Choice::instance' );
+	add_action( 'plugins_loaded', function() {
+		wbc()->construct_init();
+	});
 
 	if(!function_exists('wbc')){
 

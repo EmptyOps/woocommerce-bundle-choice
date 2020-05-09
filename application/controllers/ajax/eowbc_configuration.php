@@ -4,6 +4,8 @@
 *
 */
 
+$res = array( "type"=>"success", "msg"=>"" );
+
 if(wp_verify_nonce(sanitize_text_field($_POST['_wpnonce']),'eowbc_configuration')){
 	
 	wbc()->options->update_option('configuration','business_type',sanitize_text_field($_POST['config_business_type']));
@@ -31,6 +33,11 @@ if(wp_verify_nonce(sanitize_text_field($_POST['_wpnonce']),'eowbc_configuration'
 	wbc()->options->update_option('configuration','pair_maker_status',(empty($_POST['config_pair_maker_status'])?'':sanitize_text_field($_POST['config_pair_maker_status'])));
 
 	wbc()->options->update_option('configuration','pair_maker_upper_card',(empty($_POST['config_pair_maker_upper_card'])?'':sanitize_text_field($_POST['config_pair_maker_upper_card'])));	
-	echo true;
 }
+else {
+	$res["type"] = "error";
+	$res["msg"] = "Nonce validation failed";
+}
+
  
+echo json_encode($res);

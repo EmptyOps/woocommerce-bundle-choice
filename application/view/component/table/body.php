@@ -6,15 +6,14 @@
  * $body @array : It's contains details fo the table body data
  * 
  */
-
-if(!empty($body) && is_array($body)) { ?>
-	
-  <tbody>
+?>
+<tbody>
+<?php 
+	if(!empty($body) && is_array($body)) { ?>
   		<?php 
 		foreach ($body as $index => $row) {
 			wbc()->load->template('component/table/row', array("row"=>$row) ); 
 		}	
-		?>
-  </tbody>
-
-<?php }
+	} 
+?>
+</tbody>
