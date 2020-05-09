@@ -53,7 +53,8 @@ jQuery(document).ready(function($){
             },
             success:function(result,status,xhr){
                 
-                if(result){
+                resjson = jQuery.parseJson(result);
+                if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
                     $('body').toast({
                         class:'success',
                         position: 'bottom right',
@@ -61,9 +62,9 @@ jQuery(document).ready(function($){
                     });
                 } else {
                     $('body').toast({
-                        class:'error',
+                        class: (typeof(resjson["type"]) != undefined ? resjson["type"] : 'error'),
                         position: 'bottom right',
-                        message: `Failed!`
+                        message: (typeof(resjson["msg"]) != undefined ? resjson["msg"] : `Failed! Please check Logs page for for more details.`)
                     });
                 }                
             },

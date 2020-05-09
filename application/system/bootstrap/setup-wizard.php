@@ -19,6 +19,72 @@ class Setup_Wizard {
 
 	private function __construct() { }
 
+	public function build_setup_page() {
+
+		//add_action( 'admin_menu',array($this,'generate_menu'),11);
+		$this->generate_page();
+	}
+
+	public function generate_page(){
+		
+		$this->step = 1;
+		$this->form = 'basic_config';
+		$feature_option = array();
+
+		if(!empty($_GET['_wpnonce']) and wp_verify_nonce(sanitize_text_field($_GET['_wpnonce']),'eo_wbc_setup')){
+			
+			if(!empty($_GET['step'])){
+				
+				if(sanitize_text_field($_GET['step'])>3 or sanitize_text_field($_GET['step'])<1){ $_GET['step']=1; }
+
+				$forms = array('1' =>'basic_config', '2'=>'feature', '3'=>'finalize');
+				$this->step = sanitize_text_field($_GET['step']);
+				$this->form = empty($forms[$this->step])?$forms[1]:$forms[$this->step];
+			}
+			$this->action();
+
+		}
+
+		if( $this->step == 2 ) {
+			$feature_option = unserialize( wbc()->options->get_option('eo_wbc','feature_option',serialize(array())) );	//unserialize(get_option('eo_wbc_feature_option', serialize(array())) );
+		}
+
+  //       ob_start();        
+		
+		// $this->enqueue_script();
+		// $this->head();
+		// //render form page 
+		// call_user_func(array($this,$this->form));
+		// $this->footer();
+
+		// echo ob_get_clean();
+  //       exit();
+
+		$callback = $this->get_page( $this->step, $this->form, $feature_option );
+
+		$position = empty($menu['position'])?66:$menu['position'];
+
+		add_menu_page( eowbc_lang('Woo Choice Plugin Setup'),eowbc_lang('Woo Choice Plugin Setup'),'manage_options','eo-wbc-init',$callback,$this->get_icon_url(),$position );   
+
+		return true;
+	}
+
+	public function get_icon_url() {
+		return esc_url(apply_filters( 'eowbc_icon_url',constant('EOWBC_ICON')));
+	}
+
+	public function get_page(int $step, string $template, array $feature_option){
+
+		$template = empty($template)?'':$template;
+		$callback = (empty($template)?'':function() use(&$step, &$template, &$feature_option){
+
+			wbc()->load->template('admin/menu/page/header-part',array( "mode"=>"setup_wizard" ));
+			wbc()->load->template('admin/setup-wizard/setup-wizard',array( "step"=>$step, "template"=>$template, "feature_option"=>$feature_option ) );			
+			wbc()->load->template('admin/menu/page/footer-part',array( "mode"=>"setup_wizard" ));
+		});
+		return $callback;
+	}
+
 	public function init() {
 		
 		$this->step = 1;
@@ -36,8 +102,11 @@ class Setup_Wizard {
 			}
 			$this->action();
 		}
-		
-		\set_current_screen();
+
+		//06-04-2020: hiren turned off full screen mode enable in future when decided 
+		////require_once(ABSPATH . 'wp-admin/includes/screen.php');
+		// \set_current_screen();
+
         ob_start();        
 		
 		$this->enqueue_script();
@@ -56,7 +125,9 @@ class Setup_Wizard {
 			switch(sanitize_text_field($_GET['action'])) {
 				case 'feature':
 					
-					$options = ['ring_builder','pair_maker','rapnet_api','glowstar_api','guidance_tool','price_control'];
+					//on 08-05-2020: hiren changed the feature options that are presented during installation  
+					//$options = ['ring_builder','pair_maker','rapnet_api','glowstar_api','guidance_tool','price_control'];
+					$options = ['ring_builder','pair_maker','guidance_tool','price_control','filters_on_home','filters_on_shop_cat','opts_uis_on_item_page','spec_view_on_item_page','shortcodes','api_integrations','rapnet_api','glowstar_api'];
 					$feature_option= array();
 					foreach ($options as $option) {
 						if(!empty($_GET[$option])){
@@ -295,6 +366,3 @@ class Setup_Wizard {
 
 }
 
-add_action('admin_init',function(){
-	Setup_Wizard::getInstance()->init();
-});

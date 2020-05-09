@@ -4,6 +4,8 @@ namespace eo\wbc\controllers\admin;
 use eo\wbc\controllers\admin\menu\Admin_Menu_Factory;
 use eo\wbc\controllers\admin\menu\Admin_Menu;
 
+use eo\wbc\system\bootstrap\Setup_Wizard;
+
 defined( 'ABSPATH' ) || exit;
 
 class Admin {
@@ -28,9 +30,20 @@ class Admin {
 		
 		//	perform initial task
 		self::instance()->init();
-		//	show/render menu and pages
-		self::instance()->menu();
 
+		if(!empty($_GET['page']) and $_GET['page']=='eo-wbc-init' and !empty($_GET['wbc_setup']) ){
+            //Setup_Wizard::instance()->init();    
+            // add_action('admin_init',function(){
+				//Setup_Wizard::instance()->init();
+				
+				Setup_Wizard::instance()->build_setup_page();
+			// }); 
+        }
+        else {
+	    	//	show/render menu and pages
+			self::instance()->menu();
+        }
+	
 		do_action( 'after_admin_process_request' );
 	}
 
