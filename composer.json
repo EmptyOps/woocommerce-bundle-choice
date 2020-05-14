@@ -1,10 +1,6 @@
 {    
     "require": {
         "woocommerce/woocommerce": "^3.8",
-<<<<<<< HEAD
-        "phpunit/phpunit": "7.5.18"
-=======
         "phpunit/phpunit": "5.7.*"
->>>>>>> design-pattern
     }   
 }
