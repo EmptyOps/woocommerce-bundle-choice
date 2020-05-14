@@ -8,8 +8,14 @@
 	convertWarningsToExceptions="true"
 	>
 	<testsuites>
+<<<<<<< HEAD
 		<testsuite name='unit'>
 			<directory prefix="test-" suffix=".php">./tests/</directory>			
+=======
+		<testsuite>
+			<directory prefix="test-" suffix=".php">./tests/</directory>
+			<exclude>./tests/test-sample.php</exclude>
+>>>>>>> design-pattern
 		</testsuite>
 	</testsuites>
 </phpunit>

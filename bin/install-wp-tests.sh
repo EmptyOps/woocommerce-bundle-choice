@@ -159,9 +159,16 @@ curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.pha
 chmod +x wp
 mv wp /tmp/wordpress/
 echo "Moving composer.json"
+<<<<<<< HEAD
 composer config -g github-oauth.github.com $GIT_TOKEN
 cp composer.json ${WP_CORE_DIR}
 composer install -d ${WP_CORE_DIR}
 echo "Installing dependency"
 composer global require "phpunit/phpunit=5.7.*|7.5.*"
 php /tmp/wordpress/wp plugin activate woocommerce
+=======
+#composer config -g github-oauth.github.com $GIT_TOKEN
+cp composer.json ${WP_CORE_DIR}
+composer install -d ${WP_CORE_DIR}
+php /tmp/wordpress/wp plugin activate woocommerce
+>>>>>>> design-pattern
