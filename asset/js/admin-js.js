@@ -44,21 +44,36 @@ jQuery(document).ready(function($){
             form_type = 'POST';
         }
 
+        var serform = null;
+        if( jQuery(form).data("is_serialize") == undefined || jQuery(form).data("is_serialize") == "true" ) {
+            serform = jQuery(form).serialize();
+        }
+        else {
+            serform = "";
+            var formid = jQuery(form).attr("id");
+            jQuery('#'+formid+' input, #'+formid+' select, #'+formid+' textarea').each(
+                function(index){  
+                    var input = jQuery(this);
+                    serform += encodeURIComponent(input.attr('name'))+'='+encodeURIComponent(input.val())+'&';
+                }
+            );
+            console.log(serform);
+        }
+
         jQuery.ajax({
             url:eowbc_object.admin_url,
             type: form_type,
-            data:$(form).serialize(),
+            data: serform,
             beforeSend:function(xhr){
 
             },
             success:function(result,status,xhr){
-                
-                resjson = jQuery.parseJson(result);
+                var resjson = jQuery.parseJSON(result);
                 if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
                     $('body').toast({
                         class:'success',
                         position: 'bottom right',
-                        message: `Saved!`
+                        message: (typeof(resjson["msg"]) != undefined ? resjson["msg"] : `Saved!`)
                     });
                 } else {
                     $('body').toast({

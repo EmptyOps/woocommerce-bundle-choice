@@ -14,7 +14,7 @@
 							<div class="ui inverted green button" id="create_product">Add sample and Finish</div>	
 						</div>
 						<div class="field">
-			  				<u><a href="<?php echo admin_url('admin.php?page=eo-wbc-home'); ?>">Skip and finish</a></u>
+			  				<u><a href="<?php echo admin_url('admin.php?page=eowbc'); ?>">Skip and finish</a></u>
 			  			</div>
 					</div>
 				</div>

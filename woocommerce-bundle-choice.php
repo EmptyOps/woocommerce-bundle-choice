@@ -145,7 +145,7 @@ if(!class_exists('WooCommerce_Bundle_Choice')) {
 			do_action( 'before_eowbc_load' );
 			$bootstrap = eo\wbc\WooCommerce_Bundle_Choice_Bootstrap::instance();
 
-			// //TODO temp. hiren added on around 23-04-2020
+			// //TODO temp. hiren added on around 23-04-2020, to manually test activate class
 			// eo\wbc\WooCommerce_Bundle_Choice_Bootstrap::activate();
 	        			
 

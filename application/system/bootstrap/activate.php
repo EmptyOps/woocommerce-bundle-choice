@@ -20,8 +20,9 @@ class Activate {
 		$this->init_options();
 		$this->add_pages();
 
-		//setup wizard
-		if( true /*TODO check here if it's first time activate and setup wizard not ran yet then only run it*/ ) {
+		//setup wizard: check here if it's first time activate and setup wizard not ran yet then only run it
+		$eo_wbc_inventory_type = wbc()->options->get_option('eo_wbc','inventory_type','');
+		if( empty($eo_wbc_inventory_type) ) {
 			//add admin page
             add_submenu_page(null, __('Setup WooCommerce Product Bundle Choice','woo-bundle-choice'), __('Setup WooCommerce Product Bundle Choice','woo-bundle-choice'), 'administrator', 'eo-wbc-init', function(){});
 

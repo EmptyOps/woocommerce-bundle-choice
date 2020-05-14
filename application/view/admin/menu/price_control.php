@@ -345,6 +345,7 @@ $form = array();
 $form['id']='eowbc_price_control_save_update_prices';
 $form['title']= '';	// eowbc_lang('Pricing Method');
 $form['method']='POST';
+// $form['attr']= array('data-is_serialize="false"');
 
 $form['data'] = array(
 
@@ -382,6 +383,13 @@ $form['data'] = array(
 wbc()->load->model('admin\form-builder');
 eo\wbc\model\admin\Form_Builder::instance()->build($form);
 
+$jpc_data = array();
+$jpc_str = wbc()->options->get_option('price_control','rules_data', false);
+if( $jpc_str ) {
+	// $jpc_data = json_decode( stripslashes( unserialize( wbc()->options->get_option('price_control','rules_data',serialize(array())) ) ), true );
+	$jpc_data = json_decode( stripslashes( unserialize( $jpc_str ) ), true );
+}
+
 //js 
 ?>
 <script type="text/javascript">
@@ -389,7 +397,7 @@ eo\wbc\model\admin\Form_Builder::instance()->build($form);
 
 	window.eo_wbc.attributes=JSON.parse('<?php echo json_encode(eo_wbc_jpc_attributes_values()); ?>');
 
-    window.eo_wbc.jpc_data=JSON.parse(<?php echo ( false && 1 == 1 ? json_encode( unserialize( wbc()->options->get_option('price_control','rules_data',serialize(array())) ) ):"'[]'" ); ?>);
+    window.eo_wbc.jpc_data=JSON.parse('<?php echo json_encode( $jpc_data ); ?>');
 </script>
 <?php 
 wbc()->load->asset('js','admin/price_control');	
