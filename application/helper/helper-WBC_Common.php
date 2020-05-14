@@ -25,4 +25,16 @@ class WBC_Common {
 
 	}
 
+	public function var_dump(array $ar,$force_debug = false,$die = false) {
+		//TODO yet to implement optional arg force_debug
+
+		var_dump($ar); 
+
+		if( $die )
+		{
+			wp_die( 'die from the common helper var_dump function' );
+		}
+
+	}
+
 }

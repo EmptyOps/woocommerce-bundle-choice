@@ -136,7 +136,8 @@ class Setup_Wizard {
 					}											
 
 					if(!empty($feature_option)){
-						update_option('eo_wbc_feature_option', serialize($feature_option));
+						//update_option('eo_wbc_feature_option', serialize($feature_option));
+						wbc()->options->update_option('eo_wbc','feature_option', serialize($feature_option));
 					}
 
 					break;
@@ -146,7 +147,8 @@ class Setup_Wizard {
 				default:
 					//basic_config					
 					if(!empty($_GET['eo_wbc_inventory_type'])){
-						update_option( 'eo_wbc_inventory_type',sanitize_text_field($_GET['eo_wbc_inventory_type']));
+						//update_option( 'eo_wbc_inventory_type',sanitize_text_field($_GET['eo_wbc_inventory_type']));
+						wbc()->options->update_option('eo_wbc','inventory_type', sanitize_text_field($_GET['eo_wbc_inventory_type']));
 					}					
 			}
 		}

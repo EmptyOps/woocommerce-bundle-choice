@@ -17,7 +17,7 @@ if(!empty($form_html) and !empty($id) /*and !empty($title)*/){
 	?>
 	<div class="ui vertical padded segment">
 		<div class="ui form <?php !empty($class)?$class:''; ?>">
-			<form name="<?php echo $id; ?>" method="<?php echo empty($method)?'':$method; ?>" <?php echo !empty($attr)?$attr:'';?>>	  			
+			<form id="<?php echo $id; ?>" name="<?php echo $id; ?>" method="<?php echo empty($method)?'':$method; ?>" <?php echo !empty($attr)?$attr:'';?>>	  			
 				<?php wp_nonce_field($id, '_wpnonce'); ?>
 				<input type="hidden" name="action" value="<?php echo 'eowbc_ajax'; ?>">
 				<input type="hidden" name="resolver" value="<?php echo $id; ?>">

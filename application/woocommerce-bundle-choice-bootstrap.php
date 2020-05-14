@@ -54,13 +54,10 @@ class WooCommerce_Bundle_Choice_Bootstrap {
 		die();
 	}
 
-	public static function activate( /*$network_wide hiren commented argument as that seems to be a problem as to why WP is not calling this function but anyway its not verified if it fixes the problem and works with all versions and standards so do the needful */ ) {
-
-		//TODO temp. uncomment below lines 
-		// if ( ! current_user_can( 'activate_plugins' ) ) return;
-		// $plugin = isset( $_REQUEST['plugin'] ) ? $_REQUEST['plugin'] : '';
-		// check_admin_referer( "activate-plugin_{$plugin}" );
-
+	public static function activate( $network_wide /*$network_wide hiren commented argument as that seems to be a problem as to why WP is not calling this function but anyway its not verified if it fixes the problem and works with all versions and standards so do the needful */ ) {
+		if ( ! current_user_can( 'activate_plugins' ) ) return;
+		$plugin = isset( $_REQUEST['plugin'] ) ? $_REQUEST['plugin'] : '';
+		check_admin_referer( "activate-plugin_{$plugin}" );
 		Activate::instance();
 	}
 

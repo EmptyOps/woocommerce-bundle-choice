@@ -110,6 +110,8 @@ jQuery(document).ready(function(jQuery){
 
     }
 
+    console.log( "window.eo_wbc.jpc_data" );
+    console.log( window.eo_wbc.jpc_data );
     if(!jQuery.isEmptyObject(window.eo_wbc.jpc_data)) {
         /*Create table*/
         // jQuery('#jpc_price_ctl_table').parent().transition('show');
@@ -134,6 +136,7 @@ jQuery(document).ready(function(jQuery){
             }
         });
         
+        jQuery("[name='eo_wbc_jpc_form_data']").val(JSON.stringify(window.eo_wbc.jpc_data));
     }
 
     // jQuery("#jpc_save_price_ctl").on('click touch',function(){

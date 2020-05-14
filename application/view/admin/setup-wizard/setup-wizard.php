@@ -42,7 +42,7 @@ box-shadow: none;">
 <?php 
 	if( !empty($template) ){
 		$vars = array();
-		if(!empty($feature_option)) {
+		if(isset($feature_option)) {
 			$vars["feature_option"] = $feature_option;
 		}
 
