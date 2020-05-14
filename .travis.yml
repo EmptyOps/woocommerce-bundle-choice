@@ -1,9 +1,6 @@
 sudo: required
 dist: trusty
-<<<<<<< HEAD
-=======
 
->>>>>>> design-pattern
 language: php
 
 notifications:
@@ -11,37 +8,6 @@ notifications:
     on_success: never
     on_failure: change
 
-<<<<<<< HEAD
-services:
-  - mysql  
-
-cache:
-  directories:
-    - vendor
-    - $HOME/.composer/cache
-
-# php:
-#   - 7.1
-#   - 7.2
-
-env:
-  global:
-    - PATH="$TRAVIS_BUILD_DIR/vendor/bin:$PATH"
-    - WP_CLI_BIN_DIR="$TRAVIS_BUILD_DIR/vendor/bin"
-    - WP_VERSION=latest WP_MULTISITE=0
-
-jobs:
-  include:
-    - php: 7.1
-      env: WP_VERSION=5.0 WP_MULTISITE=0 RUN_PHPCS=1     
-    - php: 7.2
-      env: WP_VERSION=5.3 WP_MULTISITE=0 RUN_PHPCS=1    
-    - php: 7.2
-      env: WP_VERSION=latest WP_MULTISITE=0 RUN_PHPCS=1    
-
-before_script:    
-  - export PATH="$HOME/.composer/vendor/bin:$PATH"          
-=======
 branches:
   only:
     - master
@@ -70,7 +36,6 @@ matrix:
 
 before_script:
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
->>>>>>> design-pattern
   - |
     if [ -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ]; then
       phpenv config-rm xdebug.ini
@@ -79,12 +44,8 @@ before_script:
     fi
   - |
     if [[ ! -z "$WP_VERSION" ]] ; then
-<<<<<<< HEAD
-      bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION      
-=======
       bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
       composer global require "phpunit/phpunit=5.*"
->>>>>>> design-pattern
     fi
   - |
     if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
@@ -92,38 +53,13 @@ before_script:
       phpcs --config-set installed_paths $HOME/.composer/vendor/wp-coding-standards/wpcs
     fi
 
-<<<<<<< HEAD
-script:  
-  - |
-    if [[ ! -z "$WP_VERSION" ]] ; then       
-      phpunit      
-=======
 script:
   - |
     if [[ ! -z "$WP_VERSION" ]] ; then
       phpunit
       WP_MULTISITE=1 phpunit
->>>>>>> design-pattern
     fi
   - |
     if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
       phpcs
     fi
-<<<<<<< HEAD
-branches:
-  only:    
-    - wbctests
-    - master
-    
-deploy:
-  #
-  # Auto-deploys the built plugin to WordPress.org on push to master branch
-  #
-  provider: script
-  skip_cleanup: true
-  script: ./scripts/deploy.sh
-  on:
-    branch: master
-    php: 7.2
-=======
->>>>>>> design-pattern
