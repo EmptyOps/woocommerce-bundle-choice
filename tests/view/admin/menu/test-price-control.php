@@ -8,12 +8,10 @@ class  Admin_Price_Control_Test extends WP_UnitTestCase {
 		$_POST['eo_wbc_action'] = 'save_jpc_data';
 		$_POST['eo_wbc_jpc_form_data'] = '';
 
-		$expected = serialize(array(
-			"example_rule"=>"example_value"
-		));
+		$expected = ''; //serialize( array( "example_rule"=>"example_value" ) );
 
 		require_once constant('EOWBC_DIRECTORY').'application/controllers/ajax/'.sanitize_text_field($_POST['resolver']).'.php';
-		$result = get_option('eowbc_option_price_control',"a:0:{}");
+		$result = get_option('eowbc_option_price_control_rules_data', '');
 		$this->assertEquals($expected , $result);
 	}	
 }
