@@ -16,6 +16,12 @@ cache:
   directories:
     - $HOME/.composer/cache
 
+env:
+  global:
+    - PATH="$TRAVIS_BUILD_DIR/vendor/bin:$PATH"
+    - WP_CLI_BIN_DIR="$TRAVIS_BUILD_DIR/vendor/bin"
+    - WP_VERSION=latest WP_MULTISITE=0
+    
 matrix:
   include:
     - php: 7.2
