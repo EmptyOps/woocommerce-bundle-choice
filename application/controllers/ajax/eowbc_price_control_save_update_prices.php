@@ -30,6 +30,3 @@ else {
 
 
 echo json_encode($res);
-
-s:262:"[[{\"field_name\":\"Symmertry\",\"field_value\":\"eo_symmertry_attr\",\"field_type\":1,\"cmp_name\":\"Between\",\"cmp_value\":\"between\",\"value_name\":\"Excellent-Fair\",\"value_data\":[\"excellent\",\"fair\"]},{\"regular_price\":\"2\",\"sales_price\":\"1\"}]]";';
-    $optsun =
