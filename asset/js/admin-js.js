@@ -70,16 +70,21 @@ jQuery(document).ready(function($){
             success:function(result,status,xhr){
                 var resjson = jQuery.parseJSON(result);
                 if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
+                    console.log({
+                        class:'success',
+                        position: 'bottom right',
+                        message: (typeof(resjson["msg"]) != undefined && resjson["msg"] != "" ? resjson["msg"] : `Saved!`)
+                    });
                     $('body').toast({
                         class:'success',
                         position: 'bottom right',
-                        message: (typeof(resjson["msg"]) != undefined ? resjson["msg"] : `Saved!`)
+                        message: (typeof(resjson["msg"]) != undefined && resjson["msg"] != "" ? resjson["msg"] : `Saved!`)
                     });
                 } else {
                     $('body').toast({
                         class: (typeof(resjson["type"]) != undefined ? resjson["type"] : 'error'),
                         position: 'bottom right',
-                        message: (typeof(resjson["msg"]) != undefined ? resjson["msg"] : `Failed! Please check Logs page for for more details.`)
+                        message: (typeof(resjson["msg"]) != undefined && resjson["msg"] != "" ? resjson["msg"] : `Failed! Please check Logs page for for more details.`)
                     });
                 }                
             },
