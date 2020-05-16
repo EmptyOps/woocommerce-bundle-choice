@@ -1,7 +1,5 @@
 <?php
 
-namespace eo\wbc\controllers\admin\menu\page;
-
 class  Admin_Appearance_Test extends WP_UnitTestCase {
 	
 	function test_save_options() {
