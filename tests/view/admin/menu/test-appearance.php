@@ -46,6 +46,9 @@ class  Admin_Appearance_Test extends WP_UnitTestCase {
 		foreach ($expected as $key => $value) {
 			$result = get_option('eowbc_option_appearance_'.$key, serialize( array() ) );
 			//$this->assertEquals( serialize($value), $result );
+			echo "array check";
+			echo "<pre>"; print_r($value); echo "</pre>";
+			echo "<pre>"; print_r($result); echo "</pre>"; 
 			$this->assertEquals( wbc()->common->consistsOfTheSameValues($value, unserialize($result)), true );
 		}
 	}	
