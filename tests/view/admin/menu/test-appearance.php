@@ -45,7 +45,8 @@ class  Admin_Appearance_Test extends WP_UnitTestCase {
 		require_once constant('EOWBC_DIRECTORY').'application/controllers/ajax/'.sanitize_text_field($_POST['resolver']).'.php';
 		foreach ($expected as $key => $value) {
 			$result = get_option('eowbc_option_appearance_'.$key, serialize( array() ) );
-			$this->assertEquals( serialize($value), $result );
+			//$this->assertEquals( serialize($value), $result );
+			$this->assertEquals( wbc()->common->consistsOfTheSameValues($value, unserialize($result)), true );
 		}
 	}	
 }
