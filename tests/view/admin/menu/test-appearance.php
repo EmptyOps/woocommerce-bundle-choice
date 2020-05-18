@@ -48,7 +48,7 @@ class  Admin_Appearance_Test extends WP_UnitTestCase {
 			//$this->assertEquals( serialize($value), $result );
 			echo "array check";
 			echo "<pre>"; print_r($value); echo "</pre>";
-			echo "<pre>"; print_r($result); echo "</pre>"; 
+			echo "<pre>"; print_r( unserialize($result) ); echo "</pre>"; 
 			$this->assertEquals( wbc()->common->consistsOfTheSameValues($value, unserialize($result)), true );
 		}
 	}	
