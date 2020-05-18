@@ -25,10 +25,14 @@ class  Admin_Appearance_Test extends WP_UnitTestCase {
 			    if( $fv["type"] == "text" || $fv["type"] == "color" || $fv["type"] == "hidden" || $fv["type"] == "textarea" ) {	
 			    	if( isset($fv["sample_values"]) && sizeof($fv["sample_values"]) > 0 ) {
 			    		$random = $fv["sample_values"][array_rand($fv["sample_values"],1)[0]];
+			    		echo $fk." ".$random." ".array_rand($fv["sample_values"],1)[0];
+			    		wbc()->common->pr($fv["sample_values"]);
 			    	}
 			    } 
 			    else if( $fv["type"] == "checkbox" || $fv["type"] == "radio" || $fv["type"] == "select" ) {	
 					$random = array_rand($fv["options"],1)[0];
+					echo $fk." ".$random." ".array_rand($fv["options"],1)[0];
+			    	wbc()->common->pr($fv["options"]);
 			    } 
 
 			    //post
