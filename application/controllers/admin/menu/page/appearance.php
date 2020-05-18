@@ -99,10 +99,10 @@ if ( ! class_exists( 'Appearance' ) ) {
 			    	foreach ($tab["form"] as $fk => $fv) {
 					    //here we can override any particular field which needs specific sample values 
 					    if( $fv["type"] == "text" || $fv["type"] == "hidden" || $fv["type"] == "textarea" ) {	//non numeric 
-							$form_definition[$key][$fk]["sample_values"] = array( "abc", "xyz", "def", "uvw" );
+							$form_definition[$key]["form"][$fk]["sample_values"] = array( "abc", "xyz", "def", "uvw" );
 					    } 
 					    else if( $fv["type"] == "color" ) {	
-							$form_definition[$key][$fk]["sample_values"] = array( "red", "white", "green", "black" );
+							$form_definition[$key]["form"][$fk]["sample_values"] = array( "red", "white", "green", "black" );
 					    } 
 					    
 					    //no need to set for select/radio/checkboxes as we can use sample from its available options 
