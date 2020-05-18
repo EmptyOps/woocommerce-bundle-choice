@@ -46,13 +46,15 @@ class Eowbc_Appearance {
 		$res["type"] = "success";
 	    $res["msg"] = "";
 	    
+		wbc()->load->model('admin\form-builder');
+
 	    //loop through form tabs and save 
 	    foreach ($form_definition as $key => $tab) {
 	    	foreach ($tab["form"] as $fk => $fv) {
 			    //loop through form fields, read from POST/GET and save
 			    //may need to check field type here and read accordingly only
 			    //only for those for which POST is set
-			    if( isset($_POST[$fk]) ) {
+			    if( in_array($fv["type"], eo\wbc\model\admin\Form_Builder::savable_types()) && isset($_POST[$fk]) ) {
 			    	wbc()->options->update_option('appearance_'.$key,$fk,(empty($_POST[$fk])? '': sanitize_text_field( $_POST[$fk] ) ) );	
 			    }
 			}
