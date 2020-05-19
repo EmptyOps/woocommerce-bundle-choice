@@ -24,8 +24,12 @@ class  Admin_Appearance_Test extends WP_UnitTestCase {
 			    //here we can override any particular field which needs specific sample values 
 			    if( $fv["type"] == "text" || $fv["type"] == "color" || $fv["type"] == "hidden" || $fv["type"] == "textarea" ) {	
 			    	if( isset($fv["sample_values"]) && sizeof($fv["sample_values"]) > 0 ) {
-			    		$random = $fv["sample_values"][array_rand($fv["sample_values"],1)[0]];
-			    		echo $fk." ".$random." ".array_rand($fv["sample_values"],1)[0];
+			    		echo "Field ".$fk;
+			    		wbc()->common->pr($fv["sample_values"]);
+			    		$randa = array_rand($fv["sample_values"],1);
+			    		wbc()->common->pr($randa); 
+			    		$random = $fv["sample_values"][$randa[0]];
+			    		echo "Field ".$fk." ".$random." ".array_rand($fv["sample_values"],1)[0];
 			    		wbc()->common->pr($fv["sample_values"]);
 			    	}
 			    } 
