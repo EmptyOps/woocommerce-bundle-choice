@@ -1267,7 +1267,9 @@ class EO_WBC_Filter_Widget {
 			$term_list = $this->range_steps($id,$title,$type)['list'];
 		} else{
 			$term = get_term_by('id',$id,'product_cat');
-			$term_list = get_terms('product_cat', array('hide_empty' => 0, 'orderby' => 'ASC', 'child_of'=>$id));
+			$term_list = get_terms('product_cat', array('hide_empty' => 0, 'orderby' => 'menu_order', 'child_of'=>$id));
+			/*$term = get_term_by('id',$id,'product_cat');
+			$term_list = get_terms('product_cat', array('hide_empty' => 0, 'orderby' => 'ASC', 'child_of'=>$id));*/
 		}
 		
 		if( empty($term) or is_wp_error($term) ) return false;
