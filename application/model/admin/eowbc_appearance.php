@@ -1,4 +1,10 @@
 <?php
+
+
+/*
+*	Woocommerc Category and Attribute Model.
+*/
+
 namespace eo\wbc\model\admin;
 
 defined( 'ABSPATH' ) || exit;
@@ -38,16 +44,14 @@ class Eowbc_Appearance {
 		
 		$res = array();
 		$res["type"] = "success";
-	    $res["msg"] = "Saved Sucessfully";
-	    
+
+	    $res["msg"] = "";
 		wbc()->load->model('admin\form-builder');
 
 	    //loop through form tabs and save 
-	    wbc()->sanitize->clean($form_definition);
+
 	    foreach ($form_definition as $key => $tab) {
 	    	foreach ($tab["form"] as $fk => $fv) {
-	    		//\eo\wbc\library\Sanitize::instance();
-	    		
 			    //loop through form fields, read from POST/GET and save
 			    //may need to check field type here and read accordingly only
 			    //only for those for which POST is set
@@ -58,6 +62,5 @@ class Eowbc_Appearance {
 	    }
 
         return $res;
-	}
-	
+	}	
 }

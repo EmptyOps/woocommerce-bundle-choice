@@ -69,7 +69,7 @@ class Form_Builder implements Builder {
 									ob_start();
 									
 									if( (!isset($form_element['prev_inline']) || !$form_element['prev_inline']) && $form_element['type']!='devider' && $form_element['type']!='hidden' ){
-										?><div class="<?php echo (isset($form_element["inline"]) && $form_element["inline"]) ? "inline" : ""; ?> fields"><?php
+										?><div class="<?php echo isset($form_element["inline_class"]) ? $this->process_property($form_element["inline_class"]) : ""; ?> <?php echo (isset($form_element["inline"]) && $form_element["inline"]) ? "inline" : ""; ?> fields"><?php
 									}
 
 									wbc()->load->template('component/form/input_'.$form_element['type'],$form_element);
@@ -116,7 +116,7 @@ class Form_Builder implements Builder {
 							ob_start();
 									
 							if( (!isset($form_element['prev_inline']) || !$form_element['prev_inline']) && $form_element['type']!='devider' && $form_element['type']!='hidden' ){
-								?><div class="<?php echo (isset($form_element["inline"]) && $form_element["inline"]) ? "inline" : ""; ?> fields"><?php
+								?><div class="<?php echo isset($form_element["inline_class"]) ? $this->process_property($form_element["inline_class"]) : ""; ?> <?php echo (isset($form_element["inline"]) && $form_element["inline"]) ? "inline" : ""; ?> fields"><?php
 							}
 
 							wbc()->load->template('component/form/input_'.$form_element['type'],$form_element);

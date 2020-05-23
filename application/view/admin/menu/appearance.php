@@ -4,18 +4,14 @@ defined( 'ABSPATH' ) || exit;
 wbc()->load->model('admin/form-builder');
 wbc()->load->model('admin/eowbc_appearance');
 
-/*echo "<pre>";
-print_r(eo\wbc\controllers\admin\menu\page\Appearance::get_form_definition());
-echo "</pre>";
-die();*/
-
 $form = array();
 
 $form['id']='eowbc_appearance';
 $form['title']='Appearance Settings';
 $form['method']='POST';
 $form['tabs'] = true;
-$form['data'] = eo\wbc\model\admin\Eowbc_Appearance::instance()->get( eo\wbc\controllers\admin\menu\page\Appearance::get_form_definition());
+
+$form['data'] = eo\wbc\model\admin\Eowbc_Appearance::instance()->get( eo\wbc\controllers\admin\menu\page\Appearance::get_form_definition() );
 $form['submit_button'] = array(
 							'label'=>eowbc_lang('Save Appearance Settings'),
 							'type'=>'button',
