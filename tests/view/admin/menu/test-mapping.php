@@ -7,6 +7,8 @@ class  Admin_Mapping_Test extends WP_UnitTestCase {
 		$_POST['resolver'] = 'eowbc_mapping';
 		//$_POST['eo_wbc_action'] = 'save_jpc_data';
 
+		$tab_specific_skip_fileds = array('eowbc_price_control_methods_list_bulk');
+
 		//options 
 		$expected = array(); //serialize( array( "example_rule"=>"example_value" ) );
 		wbc()->load->model('admin\form-builder');
@@ -15,7 +17,7 @@ class  Admin_Mapping_Test extends WP_UnitTestCase {
 		//loop through form tabs and set random values from samples available for each fieled  
 		foreach ($form_definition as $key => $tab) {
 	    	foreach ($tab["form"] as $fk => $fv) {
-	    		if( !in_array($fv["type"], eo\wbc\model\admin\Form_Builder::savable_types()) ) {
+	    		if( !in_array($fv["type"], eo\wbc\model\admin\Form_Builder::savable_types()) || in_array($key, $tab_specific_skip_fileds) ) {
 	    			continue;
 	    		}
 
