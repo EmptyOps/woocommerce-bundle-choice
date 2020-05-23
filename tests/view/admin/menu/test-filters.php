@@ -57,8 +57,11 @@ class  Admin_Filters_Test extends WP_UnitTestCase {
 
 		foreach ($expected as $key => $value) {
 			$is_table_save = $key != "altr_filt_widgts" ? true : false;
-
 			$result = get_option('eowbc_option_filters_'.$key, serialize( array() ) ); 
+
+			wbc()->common->pr($is_table_save ? array( $value ) : $value);
+			wbc()->common->pr(unserialize($result));
+
 			$this->assertEquals( wbc()->common->consistsOfTheSameValues( $is_table_save ? array( $value ) : $value, unserialize($result)), true );
 		}
 

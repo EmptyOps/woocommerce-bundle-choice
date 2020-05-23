@@ -55,6 +55,10 @@ class  Admin_Mapping_Test extends WP_UnitTestCase {
 			$is_table_save = $key != "prod_mapping_pref" ? true : false;
 
 			$result = get_option('eowbc_option_mapping_'.$key, serialize( array() ) ); 
+
+			wbc()->common->pr($is_table_save ? array( $value ) : $value);
+			wbc()->common->pr(unserialize($result));
+			
 			$this->assertEquals( wbc()->common->consistsOfTheSameValues( $is_table_save ? array( $value ) : $value, unserialize($result)), true );
 		}
 
