@@ -1,17 +1,17 @@
 <?php
 
-class  Admin_Filters_Test extends WP_UnitTestCase {
+class  Admin_Mapping_Test extends WP_UnitTestCase {
 	
 	function test_save_options() {
-		$_POST['_wpnonce'] = wp_create_nonce('eowbc_filters');
-		$_POST['resolver'] = 'eowbc_filters';
+		$_POST['_wpnonce'] = wp_create_nonce('eowbc_mapping');
+		$_POST['resolver'] = 'eowbc_mapping';
 		//$_POST['eo_wbc_action'] = 'save_jpc_data';
 
 		//options 
 		$expected = array(); //serialize( array( "example_rule"=>"example_value" ) );
 		wbc()->load->model('admin\form-builder');
-		require_once constant('EOWBC_DIRECTORY').'application/controllers/admin/menu/page/filters.php';
-		$form_definition = eo\wbc\controllers\admin\menu\page\Filters::get_form_definition( true );
+		require_once constant('EOWBC_DIRECTORY').'application/controllers/admin/menu/page/mapping.php';
+		$form_definition = eo\wbc\controllers\admin\menu\page\Mapping::get_form_definition( true );
 		//loop through form tabs and set random values from samples available for each fieled  
 		foreach ($form_definition as $key => $tab) {
 	    	foreach ($tab["form"] as $fk => $fv) {
@@ -43,19 +43,16 @@ class  Admin_Filters_Test extends WP_UnitTestCase {
 	    }
 
 	    //save all three tabs
-	    $_POST["saved_tab_key"] = "altr_filt_widgts";
+	    $_POST["saved_tab_key"] = "prod_mapping_pref";
 	    include constant('EOWBC_DIRECTORY').'application/controllers/ajax/'.sanitize_text_field($_POST['resolver']).'.php';
 
-	    $_POST["saved_tab_key"] = "d_fconfig";
-	    include constant('EOWBC_DIRECTORY').'application/controllers/ajax/'.sanitize_text_field($_POST['resolver']).'.php';
-
-	    $_POST["saved_tab_key"] = "s_fconfig";
+	    $_POST["saved_tab_key"] = "map_creation_modification";
 	    include constant('EOWBC_DIRECTORY').'application/controllers/ajax/'.sanitize_text_field($_POST['resolver']).'.php';
 
 		foreach ($expected as $key => $value) {
-			$is_table_save = $key != "altr_filt_widgts" ? true : false;
+			$is_table_save = $key != "prod_mapping_pref" ? true : false;
 
-			$result = get_option('eowbc_option_filters_'.$key, serialize( array() ) ); 
+			$result = get_option('eowbc_option_mapping_'.$key, serialize( array() ) ); 
 			$this->assertEquals( wbc()->common->consistsOfTheSameValues( $is_table_save ? array( $value ) : $value, unserialize($result)), true );
 		}
 

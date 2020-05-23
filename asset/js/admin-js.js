@@ -1,3 +1,5 @@
+$ = jQuery;
+
 jQuery(document).ready(function($){
 	$(".ui.selection.dropdown").dropdown();	
 	$(".ui.pointing.secondary.menu>.item").tab();
@@ -44,7 +46,9 @@ jQuery(document).ready(function($){
             form_type = 'POST';
         }
 
-        if( jQuery(form).data("is_per_tab_save") != undefined && jQuery(form).data("is_per_tab_save") == "true" ) {
+        console.log( "is_per_tab_save " + jQuery(form).data("is_per_tab_save") );
+        if( jQuery(form).data("is_per_tab_save") != undefined && jQuery(form).data("is_per_tab_save") == true ) {
+            console.log( "is_per_tab_save in if" );
             var formid = jQuery(form).attr("id");
             jQuery('#'+formid+' #saved_tab_key').val( jQuery(this).data("tab_key") );
         }
@@ -75,11 +79,11 @@ jQuery(document).ready(function($){
             success:function(result,status,xhr){
                 var resjson = jQuery.parseJSON(result);
                 if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
-                    console.log({
-                        class:'success',
-                        position: 'bottom right',
-                        message: (typeof(resjson["msg"]) != undefined && resjson["msg"] != "" ? resjson["msg"] : `Saved!`)
-                    });
+                    // console.log({
+                    //     class:'success',
+                    //     position: 'bottom right',
+                    //     message: (typeof(resjson["msg"]) != undefined && resjson["msg"] != "" ? resjson["msg"] : `Saved!`)
+                    // });
                     $('body').toast({
                         class:'success',
                         position: 'bottom right',
@@ -107,35 +111,105 @@ jQuery(document).ready(function($){
         });
     });  
 
-
-    jQuery("#jpc_price_ctl_table").on('click touch','.ui.icon.delete,a>.ui.icon.delete',function(e){
+    $('input[data-action="bulk_select_all"]').on('change',function(e){
         e.preventDefault();
         e.stopPropagation();
-        jQuerythis_index=jQuery(this).index('#jpc_price_ctl_table .ui.icon.delete');
-        window.eo_wbc.jpc_data=window.eo_wbc.jpc_data.filter(function(e,i){
-            if(i==jQuerythis_index){ return false; } else{ return true }
-        });
 
-        jQuery(this).parentsUntil('tbody').remove();
+        var maincb = this;
+        var check_uncheck = jQuery(maincb).is(":checked");
 
-        if(jQuery("#jpc_price_ctl_table tbody").find('tr').length<=0){
-            //jQuery("#jpc_price_ctl_table").parent().transition('hide');
-            jQuery('.jpc_price_ctl_table').transition('hide');
-            jQuery("#jpc_save_price_ctl").transition('hide');
-        }  
-
-        do_delete();              
+        //set all checkboxes checked 
+        jQuery( "#" + jQuery(this).data("bulk_table_id") + " > tbody  > tr" ).each(function(i, row) {
+            var cb = jQuery(row).find('input[type=checkbox]')[0];
+            // if( check_uncheck ) {
+                jQuery(cb).prop('checked', check_uncheck);
+            // }
+            // else {
+            //     jQuery(cb).removeAttr('checked');
+            // }
+        });            
     });
 
-    $('button.ui.button[data-bulk_action="delete"], ').on('click',function(e){
+    $('button.ui.button[data-action="bulk"]').on('click',function(e){
         e.preventDefault();
         e.stopPropagation();
-        
-        do_delete();
-    }); 
 
-    function do_delete() {
+        //delete
+        if( jQuery( "#" + jQuery(this).data("bulk_table_id") + "_bulk" ).val() == "delete" ) {
+            var cbs = [];
 
-    }
+            //find table and loop through rows and prepare checked checkboxes
+            jQuery( "#" + jQuery(this).data("bulk_table_id") + " > tbody  > tr" ).each(function(i, row) {
+                var cb = jQuery(row).find('input[type=checkbox]')[0];
+                if( jQuery(cb).is(':checked') ) {
+                    cbs.push( cb );    
+                }
+            });
+
+            eowbc_do_delete(cbs, jQuery(this).data("tab_key"));   
+        }
+        else {
+            eowbc_toast_common( "warning", "Please select bulk action to apply" );
+        }
+    });
 
 });
+
+function eowbc_toast_common( toast_type_class, msg ) {
+    jQuery('body').toast({
+        class:toast_type_class,
+        position: 'bottom right',
+        message: msg
+    });
+}
+
+function eowbc_do_delete( cbs, saved_tab_key ) {
+
+        ids = [];
+        for(var i=0; i<cbs.length; i++) {
+            ids.push( jQuery(cbs[i]).val() );
+        }
+
+        var form = jQuery(cbs[0]).closest("form");
+
+        jQuery.ajax({
+            url:eowbc_object.admin_url,
+            type: 'POST',
+            data: { _wpnonce: jQuery( jQuery(form).find('input[name="_wpnonce"]')[0] ).val(),_wp_http_referer: jQuery( jQuery(form).find('input[name="_wp_http_referer"]')[0] ).val(), action: jQuery( jQuery(form).find('input[name="action"]')[0] ).val(), resolver: jQuery( jQuery(form).find('input[name="resolver"]')[0] ).val(), saved_tab_key: saved_tab_key, ids: ids, sub_action: "bulk_delete" },
+            beforeSend:function(xhr){
+
+            },
+            success:function(result,status,xhr){
+                var resjson = jQuery.parseJSON(result);
+                if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
+                    //remove rows 
+                    for(var i=0; i<cbs.length; i++) {
+                        jQuery(cbs[i]).closest('tr').remove();
+                    }
+
+                    $('body').toast({
+                        class:'success',
+                        position: 'bottom right',
+                        message: (typeof(resjson["msg"]) != undefined && resjson["msg"] != "" ? resjson["msg"] : `Saved!`)
+                    });
+                } else {
+                    $('body').toast({
+                        class: (typeof(resjson["type"]) != undefined ? resjson["type"] : 'error'),
+                        position: 'bottom right',
+                        message: (typeof(resjson["msg"]) != undefined && resjson["msg"] != "" ? resjson["msg"] : `Failed! Please check Logs page for for more details.`)
+                    });
+                }                
+            },
+            error:function(xhr,status,error){
+                /*console.log(xhr);*/
+                $('body').toast({
+                    class:'error',
+                    position: 'bottom right',
+                    message: `Network Error!`
+                });
+            },
+            complete:function(xhr,status){
+                /*console.log(xhr);*/
+            }
+        });
+    }

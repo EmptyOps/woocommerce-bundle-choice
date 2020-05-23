@@ -10,13 +10,22 @@ if(!empty($id) /*and !empty($label)*/){
 	if( empty($where) ){
 
 		$style_classes = "toggle";	//default style
-		if( !empty($style) && $style == "normal" ){
-			$style_classes = "";
+		if( isset($style) ){
+			if( $style == "normal" || $style == "normal_without_parent_div" ) {
+				$style_classes = "";	
+			}
+		}
+		else {
+			$style = "";
 		}
 
 	?>	
-		<div class="field">
-	    	<?php 
+		<?php 
+		if($style != "normal_without_parent_div") { ?>
+			<div class="field">
+		<?php 
+		}
+	
 			if(!empty($label))
 			{
 	    		wbc()->load->template('component/form/input_label',array('id'=>$id,'label'=>$label)); 
@@ -24,20 +33,36 @@ if(!empty($id) /*and !empty($label)*/){
 			?>
 			
 	    	<?php if(!empty($options) and is_array($options)): ?>
-	    		<div class="fields">
+
+	    		<?php 
+				if($style != "normal_without_parent_div") { ?>
+		    		<div class="fields">
+				<?php 
+				}
+				?>
+
 	    		<?php foreach ($options as $checkbox_key => $checkbox_value) : ?>
 	    			<div class="field">
 				    	<div class="ui <?php echo $style_classes;?> checkbox <?php echo !empty($class)?$class:''; ?>">
-				        	<input type="checkbox" name="<?php echo $checkbox_key; ?>" id="<?php echo $checkbox_key; ?>" <?php echo (!empty($value) and ( ( is_array($value) && in_array($checkbox_key,$value) ) || ( !is_array($value) && $checkbox_key==$value ) ) ) ? 'checked="checked"':''; ?> value="<?php echo $checkbox_key; ?>">
+				        	<input type="checkbox" name="<?php echo $checkbox_key; ?>" id="<?php echo $checkbox_key; ?>" <?php echo (!empty($value) and ( ( is_array($value) && in_array($checkbox_key,$value) ) || ( !is_array($value) && $checkbox_key==$value ) ) ) ? 'checked="checked"':''; ?> value="<?php echo $checkbox_key; ?>" <?php echo isset($options_attrs[$checkbox_key]) ? sanitize_text_field(implode( ' ', $options_attrs[$checkbox_key] )) : ""; ?>>
 				        	<?php 
 				        	if( !empty($checkbox_value) ) {?>
 				        		<label for="<?php echo $checkbox_key; ?>"><?php echo $checkbox_value; ?></label><?php 
 				        	}
 							?>
 				      	</div>
-				    </div>
+					</div>
+				    
 				<?php endforeach; ?>
-				</div>
+
+				<?php 
+				if($style != "normal_without_parent_div") { ?>
+		    		</div>
+				<?php 
+				}
+				?>
+
+
 			<?php endif; ?>
 
 			<?php
@@ -47,7 +72,12 @@ if(!empty($id) /*and !empty($label)*/){
 			}
 			?>	
 			
-		</div>	
+		<?php 
+		if($style != "normal_without_parent_div") { ?>
+    		</div>
+		<?php 
+		}
+		?>
 
 	<?php
 	}
@@ -55,7 +85,7 @@ if(!empty($id) /*and !empty($label)*/){
 		if(!empty($options) and is_array($options)): 
 			foreach ($options as $checkbox_key => $checkbox_value) : ?>
 				<div class="ui fitted checkbox <?php echo !empty($class)?$class:''; ?>">
-				  <input type="checkbox" name="<?php echo $checkbox_key; ?>" id="<?php echo $checkbox_key; ?>" <?php echo (!empty($value) and in_array($checkbox_key,$value)) ? 'checked="checked"':''; ?>>
+				  <input type="checkbox" name="<?php echo $checkbox_key; ?>" id="<?php echo $checkbox_key; ?>" <?php echo (!empty($value) and in_array($checkbox_key,$value)) ? 'checked="checked"':''; ?> <?php echo isset($options_attrs[$checkbox_key]) ? sanitize_text_field(implode( ' ', $options_attrs[$checkbox_key] )) : ""; ?> value="<?php echo $checkbox_key; ?>">
 				  <label><?php echo $checkbox_value; ?></label>
 				</div>		
 			<?php endforeach; ?>
