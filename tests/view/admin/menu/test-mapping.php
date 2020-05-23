@@ -7,7 +7,7 @@ class  Admin_Mapping_Test extends WP_UnitTestCase {
 		$_POST['resolver'] = 'eowbc_mapping';
 		//$_POST['eo_wbc_action'] = 'save_jpc_data';
 
-		$tab_specific_skip_fileds = array('eowbc_price_control_methods_list_bulk');
+		$tab_specific_skip_fileds = array('saved_tab_key','eowbc_price_control_methods_list_bulk');
 
 		//options 
 		$expected = array(); //serialize( array( "example_rule"=>"example_value" ) );
