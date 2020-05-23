@@ -54,14 +54,24 @@ class  Admin_Mapping_Test extends WP_UnitTestCase {
 		foreach ($expected as $key => $value) {
 			$is_table_save = $key != "prod_mapping_pref" ? true : false;
 
-			$result = unserialize( get_option('eowbc_option_mapping_'.$key, serialize( array() ) ) ); 
-			$result = $result[0];
-			unset($result["id"]);
+			$result = get_option('eowbc_option_mapping_'.$key, serialize( array() ) ); 
 
-			wbc()->common->pr($value);
-			wbc()->common->pr(($result));
+			if( $is_table_save ) {
+				$result = unserialize( $result ); 
+				$result = $result[0];
+				unset($result["id"]);
 
-			$this->assertEquals( wbc()->common->consistsOfTheSameValues( $value, $result ), true );
+				wbc()->common->pr($value);
+				wbc()->common->pr(($result));
+
+				$this->assertEquals( wbc()->common->consistsOfTheSameValues( $value, $result ), true );
+			}
+			else {
+				wbc()->common->pr($value);
+				wbc()->common->pr(unserialize($result));
+
+				$this->assertEquals( wbc()->common->consistsOfTheSameValues( $value, unserialize($result) ), true );
+			}
 		}
 
 		//here test delete action as well, for the last two tabs
