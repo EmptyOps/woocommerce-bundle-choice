@@ -54,12 +54,14 @@ class  Admin_Mapping_Test extends WP_UnitTestCase {
 		foreach ($expected as $key => $value) {
 			$is_table_save = $key != "prod_mapping_pref" ? true : false;
 
-			$result = get_option('eowbc_option_mapping_'.$key, serialize( array() ) ); 
+			$result = unserialize( get_option('eowbc_option_mapping_'.$key, serialize( array() ) ) ); 
+			$result = $result[0];
+			unset($result["id"]);
 
-			wbc()->common->pr($is_table_save ? array( $value ) : $value);
-			wbc()->common->pr(unserialize($result));
-			
-			$this->assertEquals( wbc()->common->consistsOfTheSameValues( $is_table_save ? array( $value ) : $value, unserialize($result)), true );
+			wbc()->common->pr($value);
+			wbc()->common->pr(($result));
+
+			$this->assertEquals( wbc()->common->consistsOfTheSameValues( $value, $result ), true );
 		}
 
 		//here test delete action as well, for the last two tabs
