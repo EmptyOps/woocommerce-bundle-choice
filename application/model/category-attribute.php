@@ -38,13 +38,33 @@ class Category_Attribute{
             'taxonomy' => 'product_cat'
         ));
         
-        $categories=array();
-       
-        foreach ($category as $_category) {                        
+        $categories=array();       	
+        foreach ($category as $_category) {                                	
             $categories[$_category->term_taxonomy_id] = $prefix.$_category->name;
-            $categories =array_merge($categories,$this->get_category($_category->term_id,'-'));
-        }
+            // using array_replace to merge the array by keeping the keys.
+            $categories = array_replace($categories,$this->get_category($_category->term_id,'-'));
+        }        
         return $categories;
 	}
-	
+
+	public function get_category_link( $category ) {
+		
+		if(empty($category)){ return false; } 
+
+		$link = get_term_link( $category,'product_cat');
+
+      	if(empty($link) or is_wp_error($link)) {
+        	$link = get_bloginfo('url').'index.php/product-category/'.$category;
+      	} else {
+        	$link = esc_url($link);  
+      	}
+      
+      	if(strpos($link, '?')!==false){
+          $link.='&';
+      	} else {
+          $link.='?';
+      	}
+
+      	return $link;      
+	}	
 }

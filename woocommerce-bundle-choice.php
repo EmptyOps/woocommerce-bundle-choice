@@ -82,7 +82,7 @@ if(!class_exists('WooCommerce_Bundle_Choice')) {
 			*	where the tool_name should only be added to the list.
 			*/
 
-			$helpers = array('options'=>'WBC_Options','lang'=>'WBC_language','wc'=>'WBC_WC','common'=>'WBC_Common');
+			$helpers = array('options'=>'WBC_Options','lang'=>'WBC_language','wc'=>'WBC_WC','common'=>'WBC_Common','session'=>'WBC_Session');
 
 			if(!empty($helpers)){
 
@@ -101,7 +101,7 @@ if(!class_exists('WooCommerce_Bundle_Choice')) {
 			*	where the lib_name should only be added to the list.
 			*/
 
-			$library = array('load'=>'WBC_Loader');
+			$library = array('load'=>'WBC_Loader','migration'=>'WBC_Migration','sanitize'=>'WBC_Sanitize');
 
 			if(!empty($library)){
 
@@ -128,6 +128,7 @@ if(!class_exists('WooCommerce_Bundle_Choice')) {
 			defined('EOWBC_ASSET_DIR') || define('EOWBC_ASSET_DIR', constant('EOWBC_DIRECTORY').'asset/');
 			defined('EOWBC_ASSET_URL') || define('EOWBC_ASSET_URL', plugins_url(constant('EOWBC_BASE_DIRECTORY')).'/asset/');
 			
+			defined('EOWBC_MIGRATION_DIR') || define('EOWBC_MIGRATION_DIR', constant('EOWBC_DIRECTORY').'application/migration/');			
 			defined('EOWBC_TOOLS_DIR') || define('EOWBC_TOOLS_DIR', constant('EOWBC_DIRECTORY').'application/system/tools/');
 			defined('EOWBC_HELPERS_DIR') || define('EOWBC_HELPERS_DIR', constant('EOWBC_DIRECTORY').'application/helper/');
 			defined('EOWBC_LIBRARY_DIR') || define('EOWBC_LIBRARY_DIR', constant('EOWBC_DIRECTORY').'application/library/');
@@ -143,15 +144,11 @@ if(!class_exists('WooCommerce_Bundle_Choice')) {
 		public function init() {
 
 			do_action( 'before_eowbc_load' );
-			$bootstrap = eo\wbc\WooCommerce_Bundle_Choice_Bootstrap::instance();
+			\eo\wbc\controllers\admin\Customizer::instance()->run();
+			$bootstrap = eo\wbc\WooCommerce_Bundle_Choice_Bootstrap::instance()->run();
 
 			// //TODO temp. hiren added on around 23-04-2020, to manually test activate class
-			// eo\wbc\WooCommerce_Bundle_Choice_Bootstrap::activate();
-	        			
-
-			register_activation_hook( __FILE__, 'eo\wbc\WooCommerce_Bundle_Choice_Bootstrap::activate');
-			register_deactivation_hook( __FILE__, 'eo\wbc\WooCommerce_Bundle_Choice_Bootstrap::deactivate');
-			register_uninstall_hook( __FILE__,'eo\wbc\WooCommerce_Bundle_Choice_Bootstrap::uninstall');			
+			// eo\wbc\WooCommerce_Bundle_Choice_Bootstrap::activate();						
 			do_action( 'after_eowbc_load' );			
 		}
 	}
@@ -165,4 +162,12 @@ if(!class_exists('WooCommerce_Bundle_Choice')) {
 			return WooCommerce_Bundle_Choice::instance();
 		}	
 	}
+	
+	if(!class_exists('eo\wbc\WooCommerce_Bundle_Choice_Bootstrap')){
+		require_once plugin_dir_path( __FILE__ ).'/application/woocommerce-bundle-choice-bootstrap.php';
+	}
+
+	register_activation_hook( __FILE__, 'eo\wbc\WooCommerce_Bundle_Choice_Bootstrap::activate');
+	register_deactivation_hook( __FILE__, 'eo\wbc\WooCommerce_Bundle_Choice_Bootstrap::deactivate');
+	register_uninstall_hook( __FILE__,'eo\wbc\WooCommerce_Bundle_Choice_Bootstrap::uninstall');
 }

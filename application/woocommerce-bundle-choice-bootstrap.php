@@ -29,7 +29,10 @@ class WooCommerce_Bundle_Choice_Bootstrap {
 	}
 
 	private function __construct() {			
+		// No implementation for safty.
+	}
 
+	public function run() {
 		if((function_exists('is_ajax') and is_ajax()) or defined('WP_AJAX')) {
 			
 			add_action( "wp_ajax_nopriv_eowbc_ajax",array($this,'ajax'),10);
@@ -43,37 +46,53 @@ class WooCommerce_Bundle_Choice_Bootstrap {
 	}
 
 	public function ajax(){
-		if(!empty($_POST['_wpnonce']) and !empty($_POST['resolver'])) {
-			
-			$resolver_path = constant('EOWBC_DIRECTORY').'application/controllers/ajax/'.sanitize_text_field($_POST['resolver']).'.php';
-						
+		if(!empty($_POST['_wpnonce']) and !empty($_POST['resolver'])) {			
+			$resolver_path = constant('EOWBC_DIRECTORY').'application/controllers/ajax/'.sanitize_text_field($_POST['resolver']).'.php';						
 			if(file_exists($resolver_path)){
 				require_once $resolver_path;
+			} else {
+				echo false;
 			}
 		}
 		die();
 	}
 
-	public static function activate( $network_wide /*$network_wide hiren commented argument as that seems to be a problem as to why WP is not calling this function but anyway its not verified if it fixes the problem and works with all versions and standards so do the needful */ ) {
+	public static function safe_load() {
+		wbc()->define_constants();			
+		wbc()->load_tools();	
+		wbc()->load_helpers();
+		wbc()->load_library();
+	}
+
+	public static function activate( $network_wide /*$network_wide hiren commented argument as that seems to be a problem as to why WP is not calling this function but anyway its not verified if it fixes the problem and works with all versions and standards so do the needful */ ) {			
+
 		if ( ! current_user_can( 'activate_plugins' ) ) return;
+		self::safe_load();
 		$plugin = isset( $_REQUEST['plugin'] ) ? $_REQUEST['plugin'] : '';
 		check_admin_referer( "activate-plugin_{$plugin}" );
-		Activate::instance();
+		Activate::instance()->run();
 	}
 
 	public static function deactivate( $network_wide ) {
+		if(!class_exists('eo\wbc\system\bootstrap\Activate')){
+			require_once plugin_dir_path( __FILE__ ).'system/bootstrap/deactivate.php';
+		}
 		if ( ! current_user_can( 'activate_plugins' ) ) return;
+		self::safe_load();
 		$plugin = isset( $_REQUEST['plugin'] ) ? $_REQUEST['plugin'] : '';
 		check_admin_referer( "deactivate-plugin_{$plugin}" );
-		Deactivate::instance();
+		Deactivate::instance()->run();
 	}
 
 	public static function uninstall( $network_wide ) {
-
+		if(!class_exists('eo\wbc\system\bootstrap\Activate')){
+			require_once plugin_dir_path( __FILE__ ).'system/bootstrap/uninstall.php';
+		}
 		if ( ! current_user_can( 'activate_plugins' ) ) return;
 		check_admin_referer( 'bulk-plugins' );
 		if ( __FILE__ != WP_UNINSTALL_PLUGIN  ) return;
-		Uninstall::instance();
+		self::safe_load();
+		Uninstall::instance()->run();
 	}		
 }	
 

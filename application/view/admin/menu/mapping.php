@@ -41,8 +41,8 @@ wbc()->load->model('admin\form-builder');
 
 $form = array();
 
-$form['id']='eowbc_filters';
-$form['title']='Filter Settings';
+$form['id']='eowbc_mapping';
+$form['title']='Mapping Settings';
 $form['method']='POST';
 $form['tabs'] = true;
 $form['data'] = array(

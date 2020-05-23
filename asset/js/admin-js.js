@@ -44,6 +44,11 @@ jQuery(document).ready(function($){
             form_type = 'POST';
         }
 
+        if( jQuery(form).data("is_per_tab_save") != undefined && jQuery(form).data("is_per_tab_save") == "true" ) {
+            var formid = jQuery(form).attr("id");
+            jQuery('#'+formid+' #saved_tab_key').val( jQuery(this).data("tab_key") );
+        }
+
         var serform = null;
         if( jQuery(form).data("is_serialize") == undefined || jQuery(form).data("is_serialize") == "true" ) {
             serform = jQuery(form).serialize();
@@ -70,16 +75,21 @@ jQuery(document).ready(function($){
             success:function(result,status,xhr){
                 var resjson = jQuery.parseJSON(result);
                 if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
+                    console.log({
+                        class:'success',
+                        position: 'bottom right',
+                        message: (typeof(resjson["msg"]) != undefined && resjson["msg"] != "" ? resjson["msg"] : `Saved!`)
+                    });
                     $('body').toast({
                         class:'success',
                         position: 'bottom right',
-                        message: (typeof(resjson["msg"]) != undefined ? resjson["msg"] : `Saved!`)
+                        message: (typeof(resjson["msg"]) != undefined && resjson["msg"] != "" ? resjson["msg"] : `Saved!`)
                     });
                 } else {
                     $('body').toast({
                         class: (typeof(resjson["type"]) != undefined ? resjson["type"] : 'error'),
                         position: 'bottom right',
-                        message: (typeof(resjson["msg"]) != undefined ? resjson["msg"] : `Failed! Please check Logs page for for more details.`)
+                        message: (typeof(resjson["msg"]) != undefined && resjson["msg"] != "" ? resjson["msg"] : `Failed! Please check Logs page for for more details.`)
                     });
                 }                
             },
@@ -95,5 +105,36 @@ jQuery(document).ready(function($){
                 /*console.log(xhr);*/
             }
         });
-    });   
+    });  
+
+
+    jQuery("#jpc_price_ctl_table").on('click touch','.ui.icon.delete,a>.ui.icon.delete',function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        jQuerythis_index=jQuery(this).index('#jpc_price_ctl_table .ui.icon.delete');
+        window.eo_wbc.jpc_data=window.eo_wbc.jpc_data.filter(function(e,i){
+            if(i==jQuerythis_index){ return false; } else{ return true }
+        });
+
+        jQuery(this).parentsUntil('tbody').remove();
+
+        if(jQuery("#jpc_price_ctl_table tbody").find('tr').length<=0){
+            //jQuery("#jpc_price_ctl_table").parent().transition('hide');
+            jQuery('.jpc_price_ctl_table').transition('hide');
+            jQuery("#jpc_save_price_ctl").transition('hide');
+        }  
+
+        do_delete();              
+    });
+
+    $('button.ui.button[data-bulk_action="delete"]').on('click',function(e){
+        e.preventDefault();
+        e.stopPropagation();        
+        do_delete();
+    }); 
+
+    function do_delete() {
+
+    }
+
 });

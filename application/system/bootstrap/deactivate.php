@@ -18,4 +18,8 @@ class Deactivate {
 	private function __construct() {
 
 	}	
+
+	public function run() {
+		
+	}
 }
