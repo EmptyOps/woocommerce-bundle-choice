@@ -2,6 +2,7 @@
 defined( 'ABSPATH' ) || exit;
 
 wbc()->load->model('admin\form-builder');
+wbc()->load->model('admin/eowbc_filters');
 
 $form = array();
 

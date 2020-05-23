@@ -60,4 +60,47 @@ class WBC_Common {
 	    return true;
 	}
 
+	public function nonZeroEmpty(&$var) {
+
+		return ( $var!==0 && $var!=="0" && empty($var) );
+	}
+
+	public function createUniqueId() {
+
+		return uniqid();
+	}
+
+	public function createUniqueHashId(array $a, array $fields_to_use, string $prefix = "") {
+
+		$str = $prefix;
+	    
+	    foreach ($a as $key => $aValue) {
+
+	        // check that expected value exists in the array
+	        if (!in_array($key, $fields_to_use)) {
+	            continue;
+	        }
+
+	        $str .= $aValue;
+
+	    }
+
+	    return md5($str);
+	}
+
+	public function dropdownSelectedvalueText($field, $selectedkey) {
+
+		$__selectedkey = "";
+		if( !wbc()->common->nonZeroEmpty($selectedkey) ) {
+			$__selectedkey = $selectedkey;
+		}
+
+		if( isset($field["options"][$__selectedkey]) ) {
+			return $field["options"][$__selectedkey];
+		}
+		else {
+			return "";
+		}	
+	}
+
 }

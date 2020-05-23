@@ -32,7 +32,7 @@ if ( ! class_exists( 'Filters' ) ) {
 						'is_header' => 1, 
 						'val' => '',
 						'is_checkbox' => true, 
-						'checkbox'=> array('id'=>'dummy','value'=>array(),'options'=>array('row0_col0_chk'=>''),'class'=>'','where'=>'in_table')
+						'checkbox'=> array('id'=>'dummy','value'=>array(),'options'=>array('row0_col0_chk'=>''), 'options_attrs'=>array('row0_col0_chk'=>array('data-action="bulk_select_all"', 'data-bulk_table_id="'.$table["id"].'"')),'class'=>'','where'=>'in_table')
 					),
 					1=>array(
 						'is_header' => 1, 
@@ -48,15 +48,27 @@ if ( ! class_exists( 'Filters' ) ) {
 					),
 					4=>array(
 						'is_header' => 1, 
-						'val' => 'Input Type'
+						'val' => 'Column Width'
 					),
 					5=>array(
 						'is_header' => 1, 
-						'val' => 'Column Width'
+						'val' => 'Ordering'
 					),
 					6=>array(
 						'is_header' => 1, 
-						'val' => 'Ordering'
+						'val' => 'Input Type'
+					),
+					7=>array(
+						'is_header' => 1, 
+						'val' => 'Icon Size'
+					),
+					8=>array(
+						'is_header' => 1, 
+						'val' => 'Icon Label Size'
+					),
+					9=>array(
+						'is_header' => 1, 
+						'val' => 'Add reset link?'
 					),
 				),
 			);
@@ -90,21 +102,21 @@ if ( ! class_exists( 'Filters' ) ) {
 				0=>array(
 					0=>array( 
 						'val' => eowbc_lang("No filter(s) exists, please add some filters."),
-						'colspan' => 7
+						'colspan' => 10
 					),
 				),
 			);
 
 			//Setting Page Filter Configuration's list
 			$sett_table = array();
-			$sett_table['id']='eowbc_price_control_methods_list';
+			$sett_table['id']='eowbc_price_control_sett_methods_list';
 			$sett_table['head'] = array(
 				0=>array(
 					0=>array(
 						'is_header' => 1, 
 						'val' => '',
 						'is_checkbox' => true, 
-						'checkbox'=> array('id'=>'dummy','value'=>array(),'options'=>array('row0_col0_chk'=>''),'class'=>'','where'=>'in_table')
+						'checkbox'=> array('id'=>'dummy','value'=>array(),'options'=>array('row0_col0_chk'=>''), 'options_attrs'=>array('row0_col0_chk'=>array('data-action="bulk_select_all"', 'data-bulk_table_id="'.$sett_table["id"].'"')),'class'=>'','where'=>'in_table')
 					),
 					1=>array(
 						'is_header' => 1, 
@@ -120,15 +132,27 @@ if ( ! class_exists( 'Filters' ) ) {
 					),
 					4=>array(
 						'is_header' => 1, 
-						'val' => 'Input Type'
+						'val' => 'Column Width'
 					),
 					5=>array(
 						'is_header' => 1, 
-						'val' => 'Column Width'
+						'val' => 'Ordering'
 					),
 					6=>array(
 						'is_header' => 1, 
-						'val' => 'Ordering'
+						'val' => 'Input Type'
+					),
+					7=>array(
+						'is_header' => 1, 
+						'val' => 'Icon Size'
+					),
+					8=>array(
+						'is_header' => 1, 
+						'val' => 'Icon Label Size'
+					),
+					9=>array(
+						'is_header' => 1, 
+						'val' => 'Add reset link?'
 					),
 				),
 			);
@@ -175,7 +199,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							'type'=>'hidden',
 							'value'=>'',
 							),
-						'first_category'=>array(
+						'first_category_altr_filt_widgts'=>array(
 							'label'=>eowbc_lang('First Category'),
 							'type'=>'radio',
 							'value'=>'fc1',
@@ -190,7 +214,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'size_class'=>array('sixteen','wide'),
 							),
 						),
-						'second_category'=>array(
+						'second_category_altr_filt_widgts'=>array(
 							'label'=>eowbc_lang('Second Category'),
 							'type'=>'radio',
 							'value'=>'sc1',
@@ -211,17 +235,17 @@ if ( ! class_exists( 'Filters' ) ) {
 							'class'=>array('secondary'),
 							//'size_class'=>array('eight','wide'),
 							'inline'=>false,
-							'attr'=>array('data-tab_key="altr_filt_widgts"'),
+							'attr'=>array('data-tab_key="altr_filt_widgts"', 'data-action="save"'),
 						)
 					)
 				),							
 				'd_fconfig'=>array(
 						'label'=>"Diamond Page Filter Configuration",
-						'form'=>array( 'bulk_action'=>array(
+						'form'=>array( $table["id"].'_bulk'=>array(
 								// 'label'=>'Bulk Actions',
 								'type'=>'select',
 								'value'=>'',
-								'options'=>array(''=>eowbc_lang('Bulk Actions'), '1'=>'Delete'),
+								'options'=>array(''=>eowbc_lang('Bulk Actions'), 'delete'=>'Delete'),
 								'class'=>array('fluid'),
 								'size_class'=>array('two','wide'),
 								'next_inline'=>true,
@@ -234,44 +258,45 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'size_class'=>array('eight','wide'),
 								'prev_inline'=>true,
 								'inline'=>true,
+								'attr'=>array('data-tab_key="d_fconfig"', 'data-bulk_table_id="'.$table["id"].'"', 'data-action="bulk"' )
 							),
 							'list'=>array_merge( $table , array(
 								'type'=>'table' )
 							), 
 
-							'save_sec_title'=>array(
+							'd_fconfig_save_sec_title'=>array(
 								'label'=>"Add Diamond Shape's filter",
 								'type'=>'label',
 								'size_class'=>array('eight','wide')
 							),
-							'filter_label'=>array(
+							'd_fconfig_filter_label'=>array(
 								'label'=>eowbc_lang('Filter'),
 								'type'=>'label',
 								//'class'=>array('fluid'),
 								'size_class'=>array('three','wide'),
-								'next_inline'=>true,
-								'inline'=>true,
+								// 'next_inline'=>true,
+								// 'inline'=>true,
 							),
-							'filter'=>array(
+							'd_fconfig_filter'=>array(
 								'type'=>'select',
 								'value'=>'',
 								'options'=>array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
 								'class'=>array('fluid'),
 								'size_class'=>array('three','wide'),
-								'prev_inline'=>true,
-								'next_inline'=>true,
-								'inline'=>true,
+								// 'prev_inline'=>true,
+								// 'next_inline'=>true,
+								// 'inline'=>true,
 							),
-							'label_label'=>array(
+							'd_fconfig_label_label'=>array(
 								'label'=>eowbc_lang('Label'),
 								'type'=>'label',
 								//'class'=>array('fluid'),
 								'size_class'=>array('three','wide'),
-								'prev_inline'=>true,
-								'next_inline'=>true,
-								'inline'=>true,
+								// 'prev_inline'=>true,
+								// 'next_inline'=>true,
+								// 'inline'=>true,
 							),
-							'label'=>array(
+							'd_fconfig_label'=>array(
 								'no_label' => true,
 								//'placeholder'=>eowbc_lang('Sales Price'),
 								'type'=>'text',
@@ -279,136 +304,136 @@ if ( ! class_exists( 'Filters' ) ) {
 								//'options'=>array(),
 								//'class'=>array('fluid'),
 								'size_class'=>array('three','wide'),
-								'prev_inline'=>true,
-								'next_inline'=>true,
-								'inline'=>true,
+								// 'prev_inline'=>true,
+								// 'next_inline'=>true,
+								// 'inline'=>true,
 							),
 							'd_fconfig_is_advanced'=>array(
 								'type'=>'checkbox',
-								'value'=>array('1'),
-								'options'=>array('1'=>'Is it advanced filter?'),
+								'value'=>array('d_fconfig_is_advanced'),
+								'options'=>array('d_fconfig_is_advanced'=>'Is it advanced filter?'),
 								'class'=>array('fluid'),
 								'style'=>'normal',
-								'prev_inline'=>true,
-								'inline'=>true,
+								// 'prev_inline'=>true,
+								// 'inline'=>true,
 							),
 
-							'column_width_label'=>array(
+							'd_fconfig_column_width_label'=>array(
 								'label'=>eowbc_lang('Column Width'),
 								'type'=>'label',
 								//'class'=>array('fluid'),
 								'size_class'=>array('three','wide'),
-								'next_inline'=>true,
-								'inline'=>true,
+								// 'next_inline'=>true,
+								// 'inline'=>true,
 							),
-							'column_width'=>array(
+							'd_fconfig_column_width'=>array(
 								'no_label' => true,
 								'type'=>'text',
 								'value'=>'0',
 								'size_class'=>array('three','wide'),
-								'prev_inline'=>true,
-								'next_inline'=>true,
-								'inline'=>true,
+								// 'prev_inline'=>true,
+								// 'next_inline'=>true,
+								// 'inline'=>true,
 							),
-							'ordering_label'=>array(
+							'd_fconfig_ordering_label'=>array(
 								'label'=>eowbc_lang('Ordering'),
 								'type'=>'label',
 								//'class'=>array('fluid'),
 								'size_class'=>array('three','wide'),
-								'prev_inline'=>true,
-								'next_inline'=>true,
-								'inline'=>true,
+								// 'prev_inline'=>true,
+								// 'next_inline'=>true,
+								// 'inline'=>true,
 							),
-							'ordering'=>array(
+							'd_fconfig_ordering'=>array(
 								'no_label' => true,
 								'type'=>'text',
 								'value'=>'0',
 								'size_class'=>array('three','wide'),
-								'prev_inline'=>true,
-								'next_inline'=>true,
-								'inline'=>true,
+								// 'prev_inline'=>true,
+								// 'next_inline'=>true,
+								// 'inline'=>true,
 							),
-							'input_type_label'=>array(
+							'd_fconfig_input_type_label'=>array(
 								'label'=>eowbc_lang('Input Type'),
 								'type'=>'label',
 								//'class'=>array('fluid'),
 								'size_class'=>array('three','wide'),
-								'prev_inline'=>true,
-								'next_inline'=>true,
-								'inline'=>true,
+								// 'prev_inline'=>true,
+								// 'next_inline'=>true,
+								// 'inline'=>true,
 							),
-							'input_type'=>array(
+							'd_fconfig_input_type'=>array(
 								'type'=>'select',
 								'value'=>'',
 								'options'=>array('0'=>'Icon Only'),
 								'class'=>array('fluid'),
 								'size_class'=>array('three','wide'),
-								'prev_inline'=>true,
-								'inline'=>true,
+								// 'prev_inline'=>true,
+								// 'inline'=>true,
 							),
 							
-							'icon_size_label'=>array(
+							'd_fconfig_icon_size_label'=>array(
 								'label'=>eowbc_lang('Icon Size'),
 								'type'=>'label',
 								//'class'=>array('fluid'),
 								'size_class'=>array('three','wide'),
-								'next_inline'=>true,
-								'inline'=>true,
+								// 'next_inline'=>true,
+								// 'inline'=>true,
 							),
-							'icon_size'=>array(
+							'd_fconfig_icon_size'=>array(
 								'no_label' => true,
 								'type'=>'text',
 								'value'=>'0',
 								'size_class'=>array('three','wide'),
-								'prev_inline'=>true,
-								'next_inline'=>true,
-								'inline'=>true,
+								// 'prev_inline'=>true,
+								// 'next_inline'=>true,
+								// 'inline'=>true,
 							),
-							'icon_label_size_label'=>array(
+							'd_fconfig_icon_label_size_label'=>array(
 								'label'=>eowbc_lang('Icon Label Size'),
 								'type'=>'label',
 								//'class'=>array('fluid'),
 								'size_class'=>array('three','wide'),
-								'prev_inline'=>true,
-								'next_inline'=>true,
-								'inline'=>true,
+								// 'prev_inline'=>true,
+								// 'next_inline'=>true,
+								// 'inline'=>true,
 							),
-							'icon_label_size'=>array(
+							'd_fconfig_icon_label_size'=>array(
 								'no_label' => true,
 								'type'=>'text',
 								'value'=>'0',
 								'size_class'=>array('three','wide'),
-								'prev_inline'=>true,
-								'next_inline'=>true,
-								'inline'=>true,
+								// 'prev_inline'=>true,
+								// 'next_inline'=>true,
+								// 'inline'=>true,
 							),
 							'd_fconfig_add_reset_link'=>array(
 								'type'=>'checkbox',
-								'value'=>array('1'),
-								'options'=>array('1'=>'Add reset link?'),
+								'value'=>array('d_fconfig_add_reset_link'),
+								'options'=>array('d_fconfig_add_reset_link'=>'Add reset link?'),
 								'class'=>array('fluid'),
 								'style'=>'normal',
-								'prev_inline'=>true,
-								'inline'=>true,
+								// 'prev_inline'=>true,
+								// 'inline'=>true,
 							),
 
-							'submit_btn'=>array(
+							'd_fconfig_submit_btn'=>array(
 								'label'=>eowbc_lang('Save'),
 								'type'=>'button',
 								'class'=>array('secondary'),
 								//'size_class'=>array('eight','wide'),
 								'inline'=>false,
-								'attr'=>array('data-tab_key="d_fconfig"'),
+								'attr'=>array('data-tab_key="d_fconfig"', 'data-action="save"'),
 							)
 						)
 					),
 				's_fconfig'=>array(
 						'label'=>"Settings Page Filter Configuration",
-						'form'=>array( 'bulk_action'=>array(
+						'form'=>array( $sett_table["id"].'_bulk'=>array(
 								// 'label'=>'Bulk Actions',
 								'type'=>'select',
 								'value'=>'',
-								'options'=>array(''=>eowbc_lang('Bulk Actions'), '1'=>'Delete'),
+								'options'=>array(''=>eowbc_lang('Bulk Actions'), 'delete'=>'Delete'),
 								'class'=>array('fluid'),
 								'size_class'=>array('two','wide'),
 								'next_inline'=>true,
@@ -421,44 +446,45 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'size_class'=>array('eight','wide'),
 								'prev_inline'=>true,
 								'inline'=>true,
+								'attr'=>array('data-tab_key="s_fconfig"', 'data-bulk_table_id="'.$sett_table["id"].'"', 'data-action="bulk"' )
 							),
 							'list'=>array_merge( $sett_table, array(
 								'type'=>'table' )
 							), 
 
-							'save_sec_title'=>array(
+							's_fconfig_save_sec_title'=>array(
 								'label'=>"Add Setting Shape's filter",
 								'type'=>'label',
 								'size_class'=>array('eight','wide')
 							),
-							'filter_label'=>array(
+							's_fconfig_filter_label'=>array(
 								'label'=>eowbc_lang('Filter'),
 								'type'=>'label',
 								//'class'=>array('fluid'),
 								'size_class'=>array('three','wide'),
-								'next_inline'=>true,
-								'inline'=>true,
+								// 'next_inline'=>true,
+								// 'inline'=>true,
 							),
-							'filter'=>array(
+							's_fconfig_filter'=>array(
 								'type'=>'select',
 								'value'=>'',
 								'options'=>array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
 								'class'=>array('fluid'),
 								'size_class'=>array('three','wide'),
-								'prev_inline'=>true,
-								'next_inline'=>true,
-								'inline'=>true,
+								// 'prev_inline'=>true,
+								// 'next_inline'=>true,
+								// 'inline'=>true,
 							),
-							'label_label'=>array(
+							's_fconfig_label_label'=>array(
 								'label'=>eowbc_lang('Label'),
 								'type'=>'label',
 								//'class'=>array('fluid'),
 								'size_class'=>array('three','wide'),
-								'prev_inline'=>true,
-								'next_inline'=>true,
-								'inline'=>true,
+								// 'prev_inline'=>true,
+								// 'next_inline'=>true,
+								// 'inline'=>true,
 							),
-							'label'=>array(
+							's_fconfig_label'=>array(
 								'no_label' => true,
 								//'placeholder'=>eowbc_lang('Sales Price'),
 								'type'=>'text',
@@ -466,126 +492,126 @@ if ( ! class_exists( 'Filters' ) ) {
 								//'options'=>array(),
 								//'class'=>array('fluid'),
 								'size_class'=>array('three','wide'),
-								'prev_inline'=>true,
-								'next_inline'=>true,
-								'inline'=>true,
+								// 'prev_inline'=>true,
+								// 'next_inline'=>true,
+								// 'inline'=>true,
 							),
 							's_fconfig_is_advanced'=>array(
 								'type'=>'checkbox',
-								'value'=>array('1'),
-								'options'=>array('1'=>'Is it advanced filter?'),
+								'value'=>array('s_fconfig_is_advanced'),
+								'options'=>array('s_fconfig_is_advanced'=>'Is it advanced filter?'),
 								'class'=>array('fluid'),
 								'style'=>'normal',
-								'prev_inline'=>true,
-								'inline'=>true,
+								// 'prev_inline'=>true,
+								// 'inline'=>true,
 							),
 
-							'column_width_label'=>array(
+							's_fconfig_column_width_label'=>array(
 								'label'=>eowbc_lang('Column Width'),
 								'type'=>'label',
 								//'class'=>array('fluid'),
 								'size_class'=>array('three','wide'),
-								'next_inline'=>true,
-								'inline'=>true,
+								// 'next_inline'=>true,
+								// 'inline'=>true,
 							),
-							'column_width'=>array(
+							's_fconfig_column_width'=>array(
 								'no_label' => true,
 								'type'=>'text',
 								'value'=>'0',
 								'size_class'=>array('three','wide'),
-								'prev_inline'=>true,
-								'next_inline'=>true,
-								'inline'=>true,
+								// 'prev_inline'=>true,
+								// 'next_inline'=>true,
+								// 'inline'=>true,
 							),
-							'ordering_label'=>array(
+							's_fconfig_ordering_label'=>array(
 								'label'=>eowbc_lang('Ordering'),
 								'type'=>'label',
 								//'class'=>array('fluid'),
 								'size_class'=>array('three','wide'),
-								'prev_inline'=>true,
-								'next_inline'=>true,
-								'inline'=>true,
+								// 'prev_inline'=>true,
+								// 'next_inline'=>true,
+								// 'inline'=>true,
 							),
-							'ordering'=>array(
+							's_fconfig_ordering'=>array(
 								'no_label' => true,
 								'type'=>'text',
 								'value'=>'0',
 								'size_class'=>array('three','wide'),
-								'prev_inline'=>true,
-								'next_inline'=>true,
-								'inline'=>true,
+								// 'prev_inline'=>true,
+								// 'next_inline'=>true,
+								// 'inline'=>true,
 							),
-							'input_type_label'=>array(
+							's_fconfig_input_type_label'=>array(
 								'label'=>eowbc_lang('Input Type'),
 								'type'=>'label',
 								//'class'=>array('fluid'),
 								'size_class'=>array('three','wide'),
-								'prev_inline'=>true,
-								'next_inline'=>true,
-								'inline'=>true,
+								// 'prev_inline'=>true,
+								// 'next_inline'=>true,
+								// 'inline'=>true,
 							),
-							'input_type'=>array(
+							's_fconfig_input_type'=>array(
 								'type'=>'select',
 								'value'=>'',
 								'options'=>array('0'=>'Icon Only'),
 								'class'=>array('fluid'),
 								'size_class'=>array('three','wide'),
-								'prev_inline'=>true,
-								'inline'=>true,
+								// 'prev_inline'=>true,
+								// 'inline'=>true,
 							),
 							
-							'icon_size_label'=>array(
+							's_fconfig_icon_size_label'=>array(
 								'label'=>eowbc_lang('Icon Size'),
 								'type'=>'label',
 								//'class'=>array('fluid'),
 								'size_class'=>array('three','wide'),
-								'next_inline'=>true,
-								'inline'=>true,
+								// 'next_inline'=>true,
+								// 'inline'=>true,
 							),
-							'icon_size'=>array(
+							's_fconfig_icon_size'=>array(
 								'no_label' => true,
 								'type'=>'text',
 								'value'=>'0',
 								'size_class'=>array('three','wide'),
-								'prev_inline'=>true,
-								'next_inline'=>true,
-								'inline'=>true,
+								// 'prev_inline'=>true,
+								// 'next_inline'=>true,
+								// 'inline'=>true,
 							),
-							'icon_label_size_label'=>array(
+							's_fconfig_icon_label_size_label'=>array(
 								'label'=>eowbc_lang('Icon Label Size'),
 								'type'=>'label',
 								//'class'=>array('fluid'),
 								'size_class'=>array('three','wide'),
-								'prev_inline'=>true,
-								'next_inline'=>true,
-								'inline'=>true,
+								// 'prev_inline'=>true,
+								// 'next_inline'=>true,
+								// 'inline'=>true,
 							),
-							'icon_label_size'=>array(
+							's_fconfig_icon_label_size'=>array(
 								'no_label' => true,
 								'type'=>'text',
 								'value'=>'0',
 								'size_class'=>array('three','wide'),
-								'prev_inline'=>true,
-								'next_inline'=>true,
-								'inline'=>true,
+								// 'prev_inline'=>true,
+								// 'next_inline'=>true,
+								// 'inline'=>true,
 							),
 							's_fconfig_add_reset_link'=>array(
 								'type'=>'checkbox',
-								'value'=>array('1'),
-								'options'=>array('1'=>'Add reset link?'),
+								'value'=>array('s_fconfig_add_reset_link'),
+								'options'=>array('s_fconfig_add_reset_link'=>'Add reset link?'),
 								'class'=>array('fluid'),
 								'style'=>'normal',
-								'prev_inline'=>true,
-								'inline'=>true,
+								// 'prev_inline'=>true,
+								// 'inline'=>true,
 							),
 
-							'submit_btn'=>array(
+							's_fconfig_submit_btn'=>array(
 								'label'=>eowbc_lang('Save'),
 								'type'=>'button',
 								'class'=>array('secondary'),
 								//'size_class'=>array('eight','wide'),
 								'inline'=>false,
-								'attr'=>array('data-tab_key="s_fconfig"'),
+								'attr'=>array('data-tab_key="s_fconfig"', 'data-action="save"'),
 							)
 						)
 					),
