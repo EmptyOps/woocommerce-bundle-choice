@@ -16,20 +16,24 @@ class Activate {
 		return self::$_instance;
 	}
 
-	private function __construct() {
+	private function __construct() {		
+	}	
+
+	public function run() {
+		//die();
 		$this->init_options();
 		$this->add_pages();
-
+		$this->migrate();
 		//setup wizard: check here if it's first time activate and setup wizard not ran yet then only run it
-		$eo_wbc_inventory_type = wbc()->options->get_option('eo_wbc','inventory_type','');
+		/*$eo_wbc_inventory_type = wbc()->options->get_option('eo_wbc','inventory_type','');
 		if( empty($eo_wbc_inventory_type) ) {
 			//add admin page
             add_submenu_page(null, __('Setup WooCommerce Product Bundle Choice','woo-bundle-choice'), __('Setup WooCommerce Product Bundle Choice','woo-bundle-choice'), 'administrator', 'eo-wbc-init', function(){});
 
             wp_redirect( admin_url('admin.php?page=eo-wbc-init&wbc_setup=1') );
 			exit;
-		}
-	}	
+		}*/
+	}
 
 	public function init_options() {
 		$init_options = array(
@@ -132,5 +136,9 @@ class Activate {
             }
             
         }        
+	}
+
+	public function migrate() {
+		wbc()->migration->run();
 	}
 }

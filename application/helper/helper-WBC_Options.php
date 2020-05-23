@@ -13,6 +13,21 @@ class WBC_Options {
 		return self::$_instance;
 	}
 
+	public function get_option_group(string $option,$default = false) {
+		$options = get_option('eowbc_option_'.$option,"");
+		if(!empty($options))  {		
+			return $options;
+		} else {
+			return $default;
+		}		
+	}
+
+	public function update_option_group(string $option,$value) {
+
+		update_option( 'eowbc_option_'.$option, $value );
+		return true;
+	}
+
 	public function get_option(string $option,$key,$default = false) {
 		$options = unserialize(get_option('eowbc_option_'.$option,"a:0:{}"));
 		if(!empty($options) and is_array($options) and !empty($options[$key]))  {		

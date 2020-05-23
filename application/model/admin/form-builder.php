@@ -171,6 +171,37 @@ class Form_Builder implements Builder {
 				}*/
 			}
 
+			//in case the submit button is specified outside all tabs, appliable when tabs are enabled for form 
+			if( isset($form['submit_button']) ) {
+				$id = !empty($form['submit_button']['id']) ? $form['submit_button']['id'] : "submit_button";
+				$form_element = $form['submit_button'];
+				if(!empty($form_element['type'])) {
+
+					$form_element = $this->process_property_group($form_element, $id);
+
+					foreach ($sub_elements as $skey => $svalue) {
+						if( isset($form_element[$svalue]) )
+						{
+							$form_element[$svalue] = $this->process_property_group($form_element[$svalue], $svalue);
+						}
+					}
+
+					ob_start();
+							
+					if( (!isset($form_element['prev_inline']) || !$form_element['prev_inline']) && $form_element['type']!='devider' && $form_element['type']!='hidden' ){
+						?><div class="<?php echo (isset($form_element["inline"]) && $form_element["inline"]) ? "inline" : ""; ?> fields"><?php
+					}
+
+					wbc()->load->template('component/form/input_'.$form_element['type'],$form_element);
+
+					if( (!isset($form_element['next_inline']) || !$form_element['next_inline']) && $form_element['type']!='devider' && $form_element['type']!='hidden' ){
+						?></div><?php
+					}
+
+					$form_html.=ob_get_clean();
+				}
+			}
+
 			wbc()->load->template('component/form/form',
 				array(
 					'form_html'=>$form_html,
@@ -449,6 +480,10 @@ class Form_Builder implements Builder {
 
 
 		return $collection;
+	}
+
+	public static function savable_types() {
+		return array("text","checkbox","color","hidden","radio","select","textarea");
 	}
 
 }

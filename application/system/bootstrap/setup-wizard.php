@@ -368,3 +368,6 @@ class Setup_Wizard {
 
 }
 
+add_action('admin_init',function(){
+	Setup_Wizard::getInstance()->init();
+});

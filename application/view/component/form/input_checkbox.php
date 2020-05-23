@@ -28,7 +28,7 @@ if(!empty($id) /*and !empty($label)*/){
 	    		<?php foreach ($options as $checkbox_key => $checkbox_value) : ?>
 	    			<div class="field">
 				    	<div class="ui <?php echo $style_classes;?> checkbox <?php echo !empty($class)?$class:''; ?>">
-				        	<input type="checkbox" name="<?php echo $checkbox_key; ?>" id="<?php echo $checkbox_key; ?>" <?php echo (!empty($value) and in_array($checkbox_key,$value)) ? 'checked="checked"':''; ?> value="<?php echo $checkbox_key; ?>">
+				        	<input type="checkbox" name="<?php echo $checkbox_key; ?>" id="<?php echo $checkbox_key; ?>" <?php echo (!empty($value) and ( ( is_array($value) && in_array($checkbox_key,$value) ) || ( !is_array($value) && $checkbox_key==$value ) ) ) ? 'checked="checked"':''; ?> value="<?php echo $checkbox_key; ?>">
 				        	<?php 
 				        	if( !empty($checkbox_value) ) {?>
 				        		<label for="<?php echo $checkbox_key; ?>"><?php echo $checkbox_value; ?></label><?php 

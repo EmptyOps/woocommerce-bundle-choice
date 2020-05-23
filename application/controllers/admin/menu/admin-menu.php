@@ -80,6 +80,15 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 						),
 						array(
 							'parent_slug'=>'eowbc',
+							'title'=>eowbc_lang('Tiny Features'),
+							'menu_title'=>eowbc_lang('Tiny Features'),
+							'capability'=>'manage_options',
+							'slug'=>'eowbc-tiny-features',
+							'template'=>'admin/menu/tiny_features',
+							'position'=>4
+						),
+						array(
+							'parent_slug'=>'eowbc',
 							'title'=>eowbc_lang('Price Control(Beta)'),
 							'menu_title'=>eowbc_lang('Price Control(Beta)'),
 							'capability'=>'manage_options',

@@ -29,8 +29,8 @@ if(!class_exists('WBC_Loader')) {
 					wp_enqueue_style($_handle);
 					break;
 				case 'js':
-					$_path = constant('EOWBC_ASSET_URL').'js'.'/'.$path.'.js';
-					wp_register_script($_handle, $_path);
+					$_path = constant('EOWBC_ASSET_URL').'js'.'/'.$path.'.js';					
+					wp_register_script($_handle, $_path,array('jquery'));
 					wp_enqueue_script($_handle);					
 					break;				
 				default:				
