@@ -17,7 +17,7 @@ class  Admin_Mapping_Test extends WP_UnitTestCase {
 		//loop through form tabs and set random values from samples available for each fieled  
 		foreach ($form_definition as $key => $tab) {
 	    	foreach ($tab["form"] as $fk => $fv) {
-	    		if( !in_array($fv["type"], eo\wbc\model\admin\Form_Builder::savable_types()) || in_array($key, $tab_specific_skip_fileds) ) {
+	    		if( !in_array($fv["type"], eo\wbc\model\admin\Form_Builder::savable_types()) || in_array($fk, $tab_specific_skip_fileds) ) {
 	    			continue;
 	    		}
 
