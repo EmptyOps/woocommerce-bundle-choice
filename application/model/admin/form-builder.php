@@ -326,7 +326,7 @@ class Form_Builder implements Builder {
 			{
 				$special_lbl = $ftot < 2 ? "" : ( $fi == 0 ? eowbc_lang("Active ") : eowbc_lang("Inactive ") );
 
-				$collection[$field_id.'_backcolor_lbl'.$fi] = array(
+				$collection[$field_id.'_backcolor_lbl'.($fi==0?"_active":"_inactive")] = array(
 					'label'=>$field_label.' '.$special_lbl.eowbc_lang('Background Color'),
 					'type'=>'label',
 					// 'class'=>array('fluid'),
@@ -448,7 +448,7 @@ class Form_Builder implements Builder {
 					'label'=>$field_label,
 					'type'=>'checkbox',
 					'value'=>array('1'),
-					'options'=>array('1'=>' '),
+					'options'=>(isset($value["options"]) ? $value["options"] : array('1'=>' ')),
 					'class'=>array('fluid'),						
 					// 'size_class'=>array('eight','wide'),
 					'inline'=>false,

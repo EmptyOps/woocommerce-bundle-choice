@@ -51,4 +51,12 @@ class WBC_WC {
 	        }
 	    }
     }
+
+    public static function eo_wbc_get_cart_url() {        
+        return function_exists('wc_get_cart_url')?wc_get_cart_url():apply_filters( 'woocommerce_get_cart_url', self::eo_wbc_support_get_page_permalink( 'cart' ));
+    }
+
+    public static function eo_wbc_get_product($product_id){
+        return function_exists('wc_get_product')?wc_get_product($product_id):WC()->product_factory->get_product($product_id,array());
+    }
 }
