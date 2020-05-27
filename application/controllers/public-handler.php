@@ -42,13 +42,13 @@ class Public_Handler {
 				    \eo\wbc\controllers\publics\pages\Home::instance()->init();
 
 				} elseif (is_product_category()) {
-			        \eo\wbc\controllers\publics\pages\Category::instance();
+			        \eo\wbc\controllers\publics\pages\Category::instance()->init();
 
 			    } elseif(is_product()) {			    	
 			    	\eo\wbc\controllers\publics\pages\Product::instance()->init();
 
 			    } elseif(is_page('Product Review')) {
-					\eo\wbc\controllers\publics\pages\Review::instance();        
+					\eo\wbc\controllers\publics\pages\Preview::instance();        
 					
 			    } elseif(is_cart()) {
 			    	\eo\wbc\controllers\publics\pages\Cart::instance();
