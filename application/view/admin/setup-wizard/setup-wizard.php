@@ -8,7 +8,7 @@ box-shadow: none;">
  	<div class="ui icon header" style="width: 100%;">
 		<img src="<?php echo constant('EOWBC_ICON_SVG'); ?>" style = 'max-width: 100;max-height: auto;'/>
 		<br/>
-		<p>WooCommerce Product Bundle Choice</p>
+		<p><?php echo constant('EOWBC_NAME'); ?></p>
 		<hr/>
 	</div>
 	
