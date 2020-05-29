@@ -65,4 +65,16 @@ class WBC_Options {
 			return false;
 		}
 	}
+
+	//interacts with core wp api directly
+	public function get(string $option,$default = false) {
+		return get_option($option,$default);
+	}
+
+	//interacts with core wp api directly
+	public function set(string $option,$value) {
+		update_option( $option, $value );
+		return true;
+	}
+
 }

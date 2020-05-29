@@ -48,13 +48,13 @@ class Public_Handler {
 			    	\eo\wbc\controllers\publics\pages\Product::instance()->init();
 
 			    } elseif(is_page('Product Review')) {
-					\eo\wbc\controllers\publics\pages\Preview::instance();        
+					\eo\wbc\controllers\publics\pages\Preview::instance()->init();        
 					
 			    } elseif(is_cart()) {
-			    	\eo\wbc\controllers\publics\pages\Cart::instance();
+			    	\eo\wbc\controllers\publics\pages\Cart::instance()->init();
 			    
 			    } elseif (is_checkout()) {
-			    	\eo\wbc\controllers\publics\pages\Checkout::instance();	
+			    	\eo\wbc\controllers\publics\pages\Checkout::instance()->init();	
 
 			    } elseif (is_order_received_page()) {
 					\eo\wbc\controllers\publics\pages\Order_Received::instance();	    

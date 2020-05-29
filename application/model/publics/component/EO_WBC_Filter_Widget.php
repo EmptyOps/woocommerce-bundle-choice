@@ -151,7 +151,7 @@ class EO_WBC_Filter_Widget {
 
         }, 10 );
 
-        wp_register_script('eo_wbc_filter_js',plugins_url('js/eo_wbc_filter.js',__FILE__),array('jquery'));
+        wp_register_script('eo_wbc_filter_js',plugins_url('asset/js/eo_wbc_filter.js',__FILE__),array('jquery'));
 
         $site_url = esc_url(get_term_link( $current_category,'product_cat'));
       	if(strpos($site_url, '?')!==false){
@@ -163,7 +163,7 @@ class EO_WBC_Filter_Widget {
         wp_localize_script('eo_wbc_filter_js','eo_wbc_object',array(
         					'eo_product_url'=>$this->product_url(),
         					//'eo_view_tabular'=>($current_category=='solitaire'?1:0),
-        					'disp_regular'=>get_option('eo_wbc_e_tabview_status',false)?1:0,
+        					'disp_regular'=>wbc()->options->get('eo_wbc_e_tabview_status',false)/*get_option('eo_wbc_e_tabview_status',false)*/?1:0,
         					'eo_admin_ajax_url'=>admin_url( 'admin-ajax.php'),
         					'eo_part_site_url'=>get_site_url().'/index.php',
         					'eo_part_end_url'=>'/'.$this->product_url(),
@@ -181,7 +181,7 @@ class EO_WBC_Filter_Widget {
             '&STEP='.sanitize_text_field($_GET['STEP']).                            
             '&FIRST='.
             (
-                $this->_category==get_option('eo_wbc_first_slug') 
+                $this->_category==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/ 
                     ?
                 ''
                     :
@@ -195,7 +195,7 @@ class EO_WBC_Filter_Widget {
             ).
             '&SECOND='.
             (
-                $this->_category==get_option('eo_wbc_second_slug')
+                $this->_category==wbc()->options->get_option('configuration','second_slug')/*get_option('eo_wbc_second_slug')*/
                     ?
                 ''
                     :
