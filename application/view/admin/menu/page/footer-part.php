@@ -3,7 +3,7 @@
 *	Displays the footer part of admin's page.
 */
 
-if( empty($mode) || $mode != "setup_wizard" ) {
+if( empty($mode) || ( $mode != "setup_wizard" && $mode != "plain" ) ) {
 
 	add_filter( 'admin_footer_text',function($footer_text){
 	    /* translators: %1s: <strong> tag */

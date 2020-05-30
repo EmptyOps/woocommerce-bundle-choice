@@ -99,7 +99,7 @@ class Jewelry {
                             ),
                           ); 
 
-          $_img_url= constant('EOWBC_ASSET_URL').'icon/sample_data/jewelry/';    // EO_WBC_PLUGIN_DIR.'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/';
+          $_img_url= constant('EOWBC_ASSET_URL').'img/sample_data/jewelry/';    // EO_WBC_PLUGIN_DIR.'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/';
           
           $_category=array(
                         array(
@@ -326,11 +326,30 @@ class Jewelry {
                          )
                       );
         
-        $_step=1;
-        wbc()->load->model('admin/sample_data/eowbc_jewelry');
-        $res = \eo\wbc\model\admin\sample_data\Eowbc_Jewelry::instance()->process_post( $_step ); 
+        $callback = $this->get_page( $_atttriutes, $_category );
+        $position = empty($position)?66:$position;
+        add_menu_page( constant('EOWBC_NAME').eowbc_lang(' Sample Data'),constant('EOWBC_NAME').eowbc_lang(' Sample Data'),'manage_options','eo-wbc-home',$callback,$this->get_icon_url(),$position );   
+    }
 
-        wbc()->load->template('admin/sample_data/main', array("_step"=>$_step,"_atttriutes"=>$_atttriutes,"_category"=>$_category)); 
+    public function get_icon_url() {
+        return esc_url(apply_filters( 'eowbc_icon_url',constant('EOWBC_ICON')));
+    }
+
+    public function get_page(array $_atttriutes, array $_category){
+
+        $callback = function() use(&$_atttriutes, &$_category){
+
+            wbc()->load->template('admin/menu/page/header-part',array( "mode"=>"plain" ));
+            
+            $_step=1;
+            wbc()->load->model('admin/sample_data/eowbc_jewelry');
+            $res = \eo\wbc\model\admin\sample_data\Eowbc_Jewelry::instance()->process_post( $_step ); 
+
+            wbc()->load->template('admin/sample_data/main', array("_step"=>$_step,"_atttriutes"=>$_atttriutes,"_category"=>$_category)); 
+
+            wbc()->load->template('admin/menu/page/footer-part',array( "mode"=>"plain" ));
+        };
+        return $callback;
     }
 
 }
