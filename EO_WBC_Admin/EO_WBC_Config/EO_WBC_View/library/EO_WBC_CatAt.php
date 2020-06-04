@@ -11007,7 +11007,6 @@ if(!class_exists('EO_WBC_CatAt')){
 		*/
 		function add_maps($args) {      
 			
-			return true;
 			if(!empty($args) && is_array($args)){
 
 				foreach ($args as $map) {
@@ -11054,12 +11053,12 @@ if(!class_exists('EO_WBC_CatAt')){
 				        }
 
 				        update_option('eo_wbc_cat_maps',serialize($maps)); 
-				        update_option('eo_wbc_config_map',"1");			                            				        
+				        update_option('eo_wbc_config_map',"1");       
 					}
 				}
         		return true;        		
-	      	}	
-	      	return false;			
+    	}	
+    	return false;			
 		}
 
 		/**

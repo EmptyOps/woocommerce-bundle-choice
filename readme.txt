@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=hi000
 Requires at least: 3.5
 Tested up to: 5.4
 Requires PHP: 5.3
-Stable tag: 0.5.68
+Stable tag: 0.5.69
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -220,6 +220,8 @@ Yes, it is.
 5. Home page after plugin fully configured.
 
 == Changelog ==
+= 0.5.69 (Jun 04,2020) =
+  ** Fixed critical errors ** Fixed critical errors, we highly recommend to update. 
 = 0.5.68 (May 21,2020) =
   ** Feature Update ** Feature to change the ordering of filter elements based on category from woocommerce product category panel.
 = 0.5.65 (March 13, 2020 )=

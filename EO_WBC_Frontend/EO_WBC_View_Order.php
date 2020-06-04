@@ -32,7 +32,7 @@ class EO_WBC_View_Order
     }
     public function get_sets($sets)
     {        
-        if(count($sets)>0)
+        if(!empty($sets))
         {
             $rows='';
             foreach ($sets as $set)

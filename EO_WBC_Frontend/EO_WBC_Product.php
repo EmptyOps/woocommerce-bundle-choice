@@ -216,7 +216,7 @@ class EO_WBC_Product
                 } 
                 
                 return header("Location: {$url}");
-                wp_die();
+                die();
                 //wp_safe_redirect($url ,301 );               
             } else {
 

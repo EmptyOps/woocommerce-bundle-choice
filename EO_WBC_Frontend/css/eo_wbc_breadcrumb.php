@@ -105,7 +105,6 @@
 				.eo-wbc-container>.ui.steps .step:last-child{ padding-right: 0.5em !important; 
 				}
 			}" 
-
 			:
 			" .ui.steps .step:after{width: 2.7rem !important;height: 2.7rem !important;} .ui.steps{overflow: hidden;} .ui.steps{ width:100% !important; } .second_mobile,.first_mobile{ margin:0px !important; } 
 			.ui.bottom.left.popup.second_mobile:before,.ui.bottom.left.popup.first_mobile:before,.ui.bottom.center.second_mobile.popup:before,.ui.bottom.center.first_mobile.popup:before{
@@ -115,8 +114,7 @@
 			}
 			"
 		) .
-		(get_option('eo_wbc_breadcrumb_template',0)==1?
-			"eo-wbc-container>.ui.steps{ 
+		(get_option('eo_wbc_breadcrumb_template',0)==1?"eo-wbc-container>.ui.steps{ 
 				border: 2px solid lightgray !important; 
 				box-shadow: 3px 3px 0 #efefef !important; 
 				padding: 2px !important; 
@@ -128,35 +126,28 @@
 				width: 3.9em !important;
 				height: 3.9em !important;
 			}
-			":""
-		).
-		(get_option('eo_wbc_breadcrumb_template',0)==2?"
-		
-		.eo-wbc-container.container .ui.steps {
-            border: unset !important;
-            box-shadow: 3px 3px 0 #d6d6d6;
-            border: 1px solid rgba(34, 36, 38, 0.11);
-        }
-       .eo-wbc-container.container .ui.steps .step:after {
-        	background-color: #fff;
-        	background-image: url(".plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/asset/icons8-arrow-100.png').") !important;
-        	background-position: -39px -30px !important;
-        	border: none !important;
-        	content: '';
-        	display: block !important;
-        	height: 51% !important;
-        	line-height: 0 !important;
-        	position: absolute !important;
-        	transform: translateY(-50%) translateX(50%) rotate(0deg) !important;
-        	width: 27px !important;
-    	}
-
-    	.eo-wbc-container .ui.steps .ui.equal.width.grid {	        
-	        align-item: center !important;
-	    }
-	    ":"")."</style>";	    
+			":"")
+		.(get_option('eo_wbc_breadcrumb_template',0)==2?".eo-wbc-container.container .ui.steps {
+	            border: unset !important;
+	            box-shadow: 3px 3px 0 #d6d6d6;
+	            border: 1px solid rgba(34, 36, 38, 0.11);
+		    }
+		   .eo-wbc-container.container .ui.steps .step:after {
+		    	background-color: #fff;
+		    	background-image: url('".plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/asset/icons8-arrow-100.png')."') !important;
+		    	background-position: -39px -30px !important;
+		    	border: none !important;
+		    	content: '';
+		    	display: block !important;
+		    	height: 51% !important;
+		    	line-height: 0 !important;
+		    	position: absolute !important;
+		    	transform: translateY(-50%) translateX(50%) rotate(0deg) !important;
+		    	width: 27px !important;
+			}
+			.eo-wbc-container .ui.steps .ui.equal.width.grid {	        
+		        align-item: center !important;
+		    }
+		    ":""
+		)."</style>";	    
 	});		
-?>
-
-
-<!--  -->

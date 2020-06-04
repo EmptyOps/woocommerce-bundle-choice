@@ -5,8 +5,10 @@ class EO_WBC_Breadcrumb
     public static $tmp_set = null;
     public static $first = null;
     public static $second = null;
-    public static function eo_wbc_add_css(){        
+    public static function eo_wbc_add_css(){    
+        ob_start();    
        require_once 'css/eo_wbc_breadcrumb.php';
+       echo ob_get_clean();
     }  
     
     public static function eo_wbc_add_breadcrumb($step=1,$begin){
