@@ -63,7 +63,7 @@ matrix:
           fi
     - language: node_js
       node_js:
-        - "latest"
+        - "10.21.0"
       script: node_modules/karma/bin/karma start karma.conf.js --single-run
       before_install:
         - export DISPLAY=:99.0
