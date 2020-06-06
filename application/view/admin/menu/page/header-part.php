@@ -3,7 +3,7 @@
 *	Displays the header part of admin's page.
 */
 
-if( empty($mode) || $mode != "setup_wizard" ) { 
+if( empty($mode) || ( $mode != "setup_wizard" && $mode != "plain" ) ) { 
 ?>
 <h2 class="ui header center aligned">   
 	<img class="ui avatar image" src="https://www.emptyops.com/demo/zokri-shop/wp-content/uploads/2020/02/bundle_site_logo_2-1.svg" /> 

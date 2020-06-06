@@ -39,6 +39,12 @@ class Admin {
 				Setup_Wizard::instance()->build_setup_page();
 			// }); 
         }
+        elseif(!empty($_GET['page']) and $_GET['page']=='eo-wbc-home' and ( (!empty($_GET['eo_wbc_view_auto_jewel']) and $_GET['eo_wbc_view_auto_jewel'] == 1) or (!empty($_GET['eo_wbc_view_auto_textile']) and $_GET['eo_wbc_view_auto_textile'] == 1) ) ){
+        	if( isset($_GET['eo_wbc_view_auto_jewel']) && $_GET['eo_wbc_view_auto_jewel'] == 1 ) {
+        		// apply_filters('eo_wbc_admin_sample_data_add_jewelry',array(\eo\wbc\controllers\admin\sample_data\Jewelry::instance(),'init'));	
+        		\eo\wbc\controllers\admin\sample_data\Jewelry::instance()->init();
+        	}
+        }
         else {
 	    	
 	    	
@@ -46,6 +52,9 @@ class Admin {
 	    	//	show/render menu and pages
 			self::instance()->menu();
         }
+
+        //Initiate Orders Page
+        \eo\wbc\controllers\admin\orders\Orders::instance()->init(); 
 	
 		do_action( 'wbc_after_admin_process_request' );
 	}

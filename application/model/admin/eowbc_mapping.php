@@ -154,10 +154,10 @@ class Eowbc_Mapping {
 
 				$mapping_data = unserialize(wbc()->options->get_option_group('mapping_'.$key,"a:0:{}"));
 		        
-		        foreach ($mapping_data as $fdkey=>$item) {
+		        foreach ($mapping_data as $fdkey=>$value) {
 		            
 		            $match_found = false;
-		            foreach ($maps as $key=>$value) {    
+		            // foreach ($item as $key=>$value) {    
 
 		                if(($value["eo_wbc_first_category"]==$table_data["eo_wbc_first_category"] and $value["eo_wbc_first_category_range"]==$table_data["eo_wbc_first_category_range"]) and ($value["eo_wbc_second_category"]==$table_data["eo_wbc_second_category"] and $value["eo_wbc_second_category_range"]==$table_data["eo_wbc_second_category_range"])) {                 
 		                    $match_found = true;
@@ -166,7 +166,7 @@ class Eowbc_Mapping {
 		                    $match_found = true;
 		                    break;
 		                }
-		            }
+		            // }
 
 		            if ($match_found) { 
 		                $res["type"] = "error";
