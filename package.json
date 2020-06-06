@@ -1,0 +1,32 @@
+{
+  "name": "woocommerce-bundle-choice",
+  "version": "1.0.0",
+  "description": "wordpress plugin to make ring builder widget",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EmptyOps/woocommerce-bundle-choice.git"
+  },
+  "author": "Emptyops",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/EmptyOps/woocommerce-bundle-choice/issues"
+  },
+  "homepage": "https://github.com/EmptyOps/woocommerce-bundle-choice#readme",
+  "devDependencies": {
+    "bufferutil": "^4.0.1",
+    "jasmine-core": "^3.5.0",
+    "karma": "^5.0.9",
+    "karma-chrome-launcher": "^3.1.0",
+    "karma-firefox-launcher": "^1.3.0",
+    "karma-jasmine": "^3.3.1",
+    "utf-8-validate": "^5.0.2"
+  },
+  "dependencies": {}
+}
