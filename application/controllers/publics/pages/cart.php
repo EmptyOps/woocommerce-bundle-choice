@@ -52,7 +52,7 @@ class Cart {
                         $set["FIRST"][0],
                         $set["FIRST"][1],
                         ($set["FIRST"][2]=='0'?NULL:$set["FIRST"][2]),
-                        ($set["FIRST"][2]=='0'?NULL:EO_WBC_Support::eo_wbc_get_product_variation_attributes($set["FIRST"][2]))
+                        ($set["FIRST"][2]=='0'?NULL:wbc()->wc->eo_wbc_get_product_variation_attributes($set["FIRST"][2]))
                       );
                 }
 
@@ -62,7 +62,7 @@ class Cart {
                         $set["SECOND"][0],
                         $set["SECOND"][1],
                         ($set["SECOND"][2]=='0'?NULL:$set["SECOND"][2]),
-                        ($set["SECOND"][2]=='0'?NULL:EO_WBC_Support::eo_wbc_get_product_variation_attributes($set["SECOND"][2]))
+                        ($set["SECOND"][2]=='0'?NULL:wbc()->wc->eo_wbc_get_product_variation_attributes($set["SECOND"][2]))
                       );
                 }
             }   
@@ -75,7 +75,7 @@ class Cart {
         WC()->session->set('EO_WBC_MAPS',NULL);
         WC()->session->set('EO_WBC_CART',NULL);
         WC()->cart->empty_cart();
-        exit(wp_redirect(EO_WBC_Support::eo_wbc_get_cart_url()));
+        exit(wp_redirect(wbc()->wc->eo_wbc_get_cart_url()));
     }
     
     public function eo_wbc_add_css()
@@ -234,11 +234,11 @@ class Cart {
     public function eo_wbc_cart_ui($index,$cart)
     {  
         
-        $first=EO_WBC_Support::eo_wbc_get_product($cart['FIRST'][0]);
+        $first=wbc()->wc->eo_wbc_get_product($cart['FIRST'][0]);
 
-        $second=$cart['SECOND']?EO_WBC_Support::eo_wbc_get_product($cart['SECOND'][0]):FALSE;
+        $second=$cart['SECOND']?wbc()->wc->eo_wbc_get_product($cart['SECOND'][0]):FALSE;
 
-        if(empty($first) or (!empty($cart['SECOND']) and empty(EO_WBC_Support::eo_wbc_get_product($cart['SECOND'][0])))) return false;
+        if(empty($first) or (!empty($cart['SECOND']) and empty(wbc()->wc->eo_wbc_get_product($cart['SECOND'][0])))) return false;
         
         wbc()->load->template('publics/cart', array("cart"=>$cart,"first"=>$first,"second"=>$second,"index"=>$index)); 
     }    

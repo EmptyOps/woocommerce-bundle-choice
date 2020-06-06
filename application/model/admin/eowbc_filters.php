@@ -49,10 +49,10 @@ class Eowbc_Filters {
 							);
 
 						foreach ($rv as $rvk => $rvv) {
-							// //skip the id
-							// if( $rvk == $key."_filter" ) {
-							// 	continue;
-							// }
+							//skip the id
+							if( $rvk == $key."_dependent" || $rvk == $key."_type" ) {
+								continue;
+							}
 
 							$row[] = array( 'val' => $rvv );
 						}

@@ -135,7 +135,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 							'range_first'=>array(
 								'type'=>'checkbox',
 								'value'=>array(''),
-								'options'=>array('range_first'=>eowbc_lang('Select range?')),
+								'options'=>array('1'=>eowbc_lang('Select range?')),
 								'inline_class'=>array('three'),
 								'style'=>'normal_without_parent_div',
 								'next_inline'=>true,

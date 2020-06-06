@@ -23,7 +23,7 @@ class Category {
         //   i.e. using XOR check if only one of two have been set.
         if( !empty($_GET['CART']) && empty($_GET['EO_CHANGE']) && ( empty($_GET['FIRST']) XOR empty($_GET['SECOND']) ) ) {
             //Iff condition is mutual exclusive, store it to  the session.
-            $this->eo_wbc_add_to_cart();            
+            $this->add2cart();            
         } 
 
         //if Current-Category is either belongs to FIRST OR SECOND Category then initiate application        
@@ -111,10 +111,11 @@ class Category {
     public function eo_wbc_add_filters() {
         //Add product filter widget...
         
-        add_action( 'woocommerce_archive_description',function(){            
-            if (class_exists('EO_WBC_Filter_Widget')) {
-                new EO_WBC_Filter_Widget();                                
-            }
+        add_action( 'woocommerce_archive_description',function(){     
+            wbc()->load->model('publics/component/EO_WBC_Filter_Widget');          
+            // if (class_exists('EO_WBC_Filter_Widget')) {
+                new \eo\wbc\model\publics\component\EO_WBC_Filter_Widget();                                
+            // }
         },130);         
         
     }
@@ -122,8 +123,9 @@ class Category {
     public function eo_wbc_add_breadcrumb()
     {           
         //Add Breadcumb at top....      
-        add_action( 'woocommerce_archive_description',function(){            
-            echo eo\wbc\model\publics\component\EO_WBC_Breadcrumb::eo_wbc_add_breadcrumb(sanitize_text_field($_GET['STEP']),sanitize_text_field($_GET['BEGIN'])).'<br/><br/>';
+        add_action( 'woocommerce_archive_description',function(){     
+            wbc()->load->model('publics/component/EO_WBC_Breadcrumb');       
+            echo \eo\wbc\model\publics\component\EO_WBC_Breadcrumb::eo_wbc_add_breadcrumb(sanitize_text_field($_GET['STEP']),sanitize_text_field($_GET['BEGIN'])).'<br/><br/>';
         }, 120);
     }
 
@@ -132,11 +134,12 @@ class Category {
         if(wbc()->options->get_option('configuration','pair_maker_status',FALSE)/*get_option('eo_wbc_pair_maker_status',FALSE)*/ && isset($_GET) && !empty($_GET['STEP']) && $_GET['STEP']==2 && (empty($_GET['FIRST']) XOR empty($_GET['SECOND']))){
 
             add_action( 'wp_enqueue_scripts',function(){ 
-                wp_register_style('eo_wbc_ui_css',plugin_dir_url(EO_WBC_PLUGIN_FILE).'asset/css/fomantic/semantic.min.css');
-                wp_enqueue_style( 'eo_wbc_ui_css');
-
-                wp_register_script('eo_wbc_ui_js',plugin_dir_url(EO_WBC_PLUGIN_FILE).'asset/js/fomantic/semantic.min.js');
-                wp_enqueue_script( 'eo_wbc_ui_js');
+                // wp_register_style('eo_wbc_ui_css',plugin_dir_url(EO_WBC_PLUGIN_FILE).'asset/css/fomantic/semantic.min.css');
+                // wp_enqueue_style( 'eo_wbc_ui_css');
+                // wp_register_script('eo_wbc_ui_js',plugin_dir_url(EO_WBC_PLUGIN_FILE).'asset/js/fomantic/semantic.min.js');
+                // wp_enqueue_script( 'eo_wbc_ui_js');
+                wbc()->load->asset('css','fomantic/semantic.min');
+                wbc()->load->asset('js','fomantic/semantic.min');
             },100);
 
             add_action('wp_head',function(){

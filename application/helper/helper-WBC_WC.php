@@ -104,5 +104,131 @@ class WBC_WC {
             return $id;
         }
     }
+
+    public static function eo_wbc_get_product_variation_attributes( $variation_id ) {
+
+        if(is_null($variation_id))
+        {
+             return ''; 
+        }
+        else
+        {           
+            $variation_meta=function_exists('wc_get_product_variation_attributes')
+                        ?
+                            wc_get_product_variation_attributes($variation_id)
+                            :
+                            self::eo_wbc_support_get_product_variation_attributes($variation_id);   
+
+            $var_attrs=array();                
+            foreach ($variation_meta as $taxonomy => $term_slug) {
+
+                $taxonomy=substr($taxonomy,strlen('attribute_'));
+                $taxonomy_name='';
+                
+                $taxonomies=wc_get_attribute_taxonomies();
+
+                foreach ($taxonomies as $tax) {
+                    if('pa_'.$tax->attribute_name==$taxonomy){
+                        $taxonomy_name=$tax->attribute_label;
+                    }
+                }
+                $var_attrs[]=($taxonomy_name?$taxonomy_name.': ':'').get_term_by('slug',$term_slug,$taxonomy)->name;                    
+            }
+            return array_filter($var_attrs);
+        }        
+    }
     
+    private static function eo_wbc_support_get_product_variation_attributes( $variation_id ) {
+        // Build variation data from meta.        
+        $all_meta                = get_post_meta( $variation_id );
+        $parent_id               = wp_get_post_parent_id( $variation_id );
+        $parent_attributes       = array_filter( (array) get_post_meta( $parent_id, '_product_attributes', true ) );
+        $found_parent_attributes = array();
+        $variation_attributes    = array();
+        
+        if(empty($all_meta)) return array();
+
+        // Compare to parent variable product attributes and ensure they match.
+        foreach ( $parent_attributes as $attribute_name => $options ) {
+            if ( ! empty( $options['is_variation'] ) ) {
+                $attribute                 = 'attribute_' . sanitize_title( $attribute_name );
+                $found_parent_attributes[] = $attribute;
+                if ( ! array_key_exists( $attribute, $variation_attributes ) ) {
+                    $variation_attributes[ $attribute ] = ''; // Add it - 'any' will be asumed.
+                }
+            }
+        }
+        
+        // Get the variation attributes from meta.
+        foreach ( $all_meta as $name => $value ) {
+            // Only look at valid attribute meta, and also compare variation level attributes and remove any which do not exist at parent level.
+            if ( 0 !== strpos( $name, 'attribute_' ) || ! in_array( $name, $found_parent_attributes ) ) {
+                unset( $variation_attributes[ $name ] );
+                continue;
+            }
+            /**
+             * Pre 2.4 handling where 'slugs' were saved instead of the full text attribute.
+             * Attempt to get full version of the text attribute from the parent.
+             */
+            if ( sanitize_title( $value[0] ) === $value[0] && version_compare( get_post_meta( $parent_id, '_product_version', true ), '2.4.0', '<' ) ) {
+                foreach ( $parent_attributes as $attribute ) {
+                    if ( 'attribute_' . sanitize_title( $attribute['name'] ) !== $name ) {
+                        continue;
+                    }
+                    $text_attributes = self::eo_wbc_support_get_text_attributes( $attribute['value'] );
+                    
+                    foreach ( $text_attributes as $text_attribute ) {
+                        if ( sanitize_title( $text_attribute ) === $value[0] ) {
+                            $value[0] = $text_attribute;
+                            break;
+                        }
+                    }
+                }
+            }
+            
+            $variation_attributes[ $name ] = $value[0];
+        }
+        
+        return $variation_attributes;
+    }
+    
+    private function eo_wbc_support_get_text_attributes( $raw_attributes ){
+        return array_filter( array_map( 'trim', explode( WC_DELIMITER, html_entity_decode( $raw_attributes, ENT_QUOTES, get_bloginfo( 'charset' ) ) ) ), array(self,'eo_wbc_support_get_text_attributes_filter_callback') );
+    }
+    
+    private function eo_wbc_support_get_text_attributes_filter_callback( $value ){
+        return '' !== $value;
+    }
+    
+    private static function eo_wbc_support_get_page_permalink( $page ) {
+        $page_id   = wc_get_page_id( $page );
+        $permalink = 0 < $page_id ? get_permalink( $page_id ) : get_home_url();
+        return apply_filters( 'woocommerce_get_' . $page . '_page_permalink', $permalink );
+    }
+
+    public static function eo_wbc_get_attribute( $id ) {
+
+        if(function_exists('wc_get_attribute')){
+            return wc_get_attribute($id);
+        } else {
+
+            foreach (wc_get_attribute_taxonomies() as $attributes) {                    
+
+                if($attributes->attribute_id==$id){
+
+                    $data                    = $attributes;
+                    $attribute               = new stdClass();
+                    $attribute->id           = (int) $data->attribute_id;
+                    $attribute->name         = $data->attribute_label;
+                    $attribute->slug         = wc_attribute_taxonomy_name( $data->attribute_name );
+                    $attribute->type         = $data->attribute_type;
+                    $attribute->order_by     = $data->attribute_orderby;
+                    $attribute->has_archives = (bool) $data->attribute_public;
+                    return $attribute;
+                }                    
+            }
+            return null;               
+        }
+    } 
+
 }

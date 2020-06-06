@@ -67,20 +67,20 @@ class View_Order {
         $row="<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><tr>".
             "<td class=\'eo_wbc_row\'>".
               "<span class=\'eo_wbc_column-1\'>".
-                  EO_WBC_Support::eo_wbc_get_product($set[0][0])->get_image("thumbnail")."&nbsp;&nbsp;<p>".
-                  EO_WBC_Support::eo_wbc_get_product($set[0][0])->get_title().
+                  wbc()->wc->eo_wbc_get_product($set[0][0])->get_image("thumbnail")."&nbsp;&nbsp;<p>".
+                  wbc()->wc->eo_wbc_get_product($set[0][0])->get_title().
                   ($set[0][2]  ? "<br/>&nbsp; -&nbsp;".
-                    implode(',',EO_WBC_Support::eo_wbc_get_product_variation_attributes($set[0][2])):'').
+                    implode(',',wbc()->wc->eo_wbc_get_product_variation_attributes($set[0][2])):'').
                   "&nbsp;X&nbsp;{$set[0][1]}</p>";
                     $price+=get_post_meta($set[0][2]?$set[0][2]:$set[0][0],'_price',TRUE)*$set[0][1];
                               
         if($set[1]){
            $row.="</span><span class=\'eo_wbc_column-2\'>".
-                EO_WBC_Support::eo_wbc_get_product($set[1][0])->get_image("thumbnail").
+                wbc()->wc->eo_wbc_get_product($set[1][0])->get_image("thumbnail").
                 "&nbsp;&nbsp;<p>".
-                EO_WBC_Support::eo_wbc_get_product($set[1][0])->get_title().
+                wbc()->wc->eo_wbc_get_product($set[1][0])->get_title().
                 ($set[1][2]  ? "<br/>&nbsp; -&nbsp;".
-                  implode(',',EO_WBC_Support::eo_wbc_get_product_variation_attributes($set[1][2])):'').
+                  implode(',',wbc()->wc->eo_wbc_get_product_variation_attributes($set[1][2])):'').
                 "&nbsp;X&nbsp;{$set[1][1]}</p>";
             $price+=get_post_meta($set[1][2]?$set[1][2]:$set[1][0],'_price',TRUE)*$set[1][1];
         }

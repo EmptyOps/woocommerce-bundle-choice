@@ -87,22 +87,25 @@ class Product {
             add_action( 'wp_enqueue_scripts',function(){
 
                 global $post;
-                wp_register_script(
-                    'eo_wbc_add_to_cart_js',
-                    plugins_url(
-                        'asset/js/publics/eo_wbc_single_add_to_cart.js'
-                        // ,
-                        // __FILE__
-                    ),
-                    array('jquery')
-                );
+                // wp_register_script(
+                //     'eo_wbc_add_to_cart_js',
+                //     plugins_url(
+                //         'asset/js/publics/eo_wbc_single_add_to_cart.js'
+                //         // ,
+                //         // __FILE__
+                //     ),
+                //     array('jquery')
+                // );
+                wbc()->load->asset('js','publics/eo_wbc_single_add_to_cart',array('jquery'));
                 
-                wp_localize_script(
-                    'eo_wbc_add_to_cart_js',
-                    'eo_wbc_object',
-                    array('url'=>$this->eo_wbc_make_pair_route())
-                );            
-                wp_enqueue_script('eo_wbc_add_to_cart_js');
+                // wp_localize_script(
+                //     'eo_wbc_add_to_cart_js',
+                //     'eo_wbc_object',
+                //     array('url'=>$this->eo_wbc_make_pair_route())
+                // );            
+                wbc()->load->asset('localize','publics/eo_wbc_single_add_to_cart',array( 'eo_wbc_object' => array('url'=>$this->eo_wbc_make_pair_route())));
+
+                // wp_enqueue_script('eo_wbc_add_to_cart_js');
             });
 
             add_action('woocommerce_after_add_to_cart_button',function(){                
@@ -165,6 +168,7 @@ class Product {
         //Adding Breadcrumb
         add_action( 'woocommerce_before_single_product',function(){
             if(!empty($_GET) && !empty($_GET['STEP']) && !empty($_GET['BEGIN'])){
+                wbc()->load->model('publics/component/EO_WBC_Breadcrumb'); 
                 echo \eo\wbc\model\publics\component\EO_WBC_Breadcrumb::eo_wbc_add_breadcrumb(
                                                 sanitize_text_field($_GET['STEP']),
                                                 sanitize_text_field($_GET['BEGIN'])
@@ -181,22 +185,25 @@ class Product {
         add_action( 'wp_enqueue_scripts',function() use(&$redirect_url){
 
             global $post;
-            wp_register_script(
-                'eo_wbc_add_to_cart_js',
-                plugins_url(
-                    'asset/js/publics/eo_wbc_single_add_to_cart.js'
-                    // ,
-                    // __FILE__
-                ),
-                array('jquery')
-            );
+            // wp_register_script(
+            //     'eo_wbc_add_to_cart_js',
+            //     plugins_url(
+            //         'asset/js/publics/eo_wbc_single_add_to_cart.js'
+            //         // ,
+            //         // __FILE__
+            //     ),
+            //     array('jquery')
+            // );
+            wbc()->load->asset('js','publics/eo_wbc_single_add_to_cart',array('jquery'));
             
-            wp_localize_script(
-                'eo_wbc_add_to_cart_js',
-                'eo_wbc_object',
-                array('url'=>$redirect_url)
-            );            
-            wp_enqueue_script('eo_wbc_add_to_cart_js');
+            // wp_localize_script(
+            //     'eo_wbc_add_to_cart_js',
+            //     'eo_wbc_object',
+            //     array('url'=>$redirect_url)
+            // );            
+            wbc()->load->asset('localize','publics/eo_wbc_single_add_to_cart',array( 'eo_wbc_object' => array('url'=>$redirect_url)));
+
+            // wp_enqueue_script('eo_wbc_add_to_cart_js');
         });
           
         //Adding own ADD_TO_CART_BUTTON

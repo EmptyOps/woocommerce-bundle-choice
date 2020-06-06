@@ -40,7 +40,7 @@ class Eowbc_Jewelry {
         return $res;
 	}
 
-	public function process_post(&$_step) {
+	public function process_post(&$_step, $_category, $_atttriutes) {
 
 		if(!empty($_POST)) {
 
@@ -68,13 +68,14 @@ class Eowbc_Jewelry {
 			  ////////////////////////////////////////////////////////////////////////
 			  //require_once ('library/EO_WBC_CatAt.php');
 			  //$catat=new EO_WBC_CatAt();
-			  $this->CatAtData();
+			  $this->CatAtData__construct();
 			  $catat = $this;
 
 			      if(!empty($category)){
 			        //Send for creation and update returned array.
 			        $catat_category=$catat->create_category($category);            
-			        update_option('eo_wbc_cats',serialize($catat_category));           
+			        // update_option('eo_wbc_cats',serialize($catat_category)); 
+			        wbc()->options->set('eo_wbc_cats',serialize($catat_category)); 
 
 			        $catat->add_maps(array(
 			            array(
@@ -137,8 +138,10 @@ class Eowbc_Jewelry {
 			        wbc()->options->update_option('configuration','config_category',1);
 			        // update_option('eo_wbc_config_map',1);    
 			        wbc()->options->update_option('configuration','config_map',1);
-			        update_option('eo_wbc_btn_setting','0');
-			        update_option('eo_wbc_btn_position','begining');
+			        // update_option('eo_wbc_btn_setting','0');
+			        wbc()->options->set('eo_wbc_btn_setting','0');
+			        // update_option('eo_wbc_btn_position','begining');
+			        wbc()->options->set('eo_wbc_btn_position','begining');
 
 			      }
 
@@ -149,7 +152,7 @@ class Eowbc_Jewelry {
 			        wbc()->options->set('eo_wbc_attr',serialize($catat_attribute));
 			        $catat->add_filters();     
 			        // update_option('eo_wbc_filter_enable','1');     
-			        wbc()->options->update_option('configuration','filter_status',1);
+			        wbc()->options->update_option('configuration','filter_status','1');
 			      } 
 			  
 			  ///////////////////////////////////////////////////////////////////////
@@ -168,20 +171,29 @@ class Eowbc_Jewelry {
 
 			            if(index>=eo_wbc_max_products){
 			                
-			                window.location.href="<?php echo(admin_url('admin.php?page=eo-wbc-home')); ?>";
+			                window.location.href="<?php echo(admin_url('admin.php?page=eowbc')); ?>";
 			                return false;
 			            }
 
 			            jQuery(".button.button-primary.button-hero.action.disabled").val("Adding "+(index+1)+" of "+eo_wbc_max_products+" products");
 
 			            var data = {
-			                'action': 'eo_wbc_add_products',
+			                //'action': 'eo_wbc_add_products',
+			                '_wpnonce': '<?php echo wp_create_nonce('sample_data_jewelry');?>',
+			                'action':'eowbc_ajax',
+			                'resolver':'sample_data/jewelry',
 			                'product_index':index 
 			            };
 
 			            jQuery.post('<?php echo admin_url( 'admin-ajax.php' ); ?>', data, function(response) {
-			                
-			                eo_wbc_add_products(++index);                    
+			            	var resjson = jQuery.parseJSON(response);
+			                if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
+				                eo_wbc_add_products(++index);                    
+			                } else {
+			                	var type = (typeof(resjson["type"]) != undefined ? resjson["type"] : 'error');
+			                	var msg = (typeof(resjson["msg"]) != undefined && resjson["msg"] != "" ? resjson["msg"] : `Failed! Please check Logs page for for more details.`);
+			                    eowbc_toast_common( type, msg );
+			                }  
 			            });                
 			        }   
 			        
@@ -207,7 +219,7 @@ class Eowbc_Jewelry {
 		}
 	}
 	
-	public function CatAtData(){
+	public function CatAtData__construct(){
 			$_img_url=constant('EOWBC_ASSET_URL').'icon/sample_data/jewelry/';	//EO_WBC_PLUGIN_DIR.'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/';
 			$this->gallay_img = $_img_url. 'Products/';
 			$this->product= array(
@@ -10586,10 +10598,14 @@ class Eowbc_Jewelry {
 		
 		public function create_product($index){
 
+			$res = array( "type"=>"success", "msg"=>"" );
+
 			global $wpdb;
 
-			if(!isset($this->product[$index])) return FALSE;
-
+			if(!isset($this->product[$index])) {
+				return array( "type"=>"error", "msg"=>"No product found at index ".$index );	//FALSE;
+			}
+		
 			$product=$this->product[$index];
 
 			$product_id= wp_insert_post( array(
@@ -10688,7 +10704,7 @@ class Eowbc_Jewelry {
 		    				}
 	    				}
 	    				
-	    				$var_ = new WC_Product_Variation();
+	    				$var_ = new \WC_Product_Variation();
 						$var_->set_props(
 							array(
 								'parent_id'     => $parent_id,							
@@ -10713,7 +10729,7 @@ class Eowbc_Jewelry {
 				update_post_meta( $parent_id, '_manage_stock','no' );						
 			}			
 
-			return TRUE;
+			return $res;	// TRUE;
 		}	
 
 		public function create_products($args) {
@@ -10760,7 +10776,7 @@ class Eowbc_Jewelry {
 
 						$variation_id = wp_insert_post( $variation_data );
 
-						$variation_obj = new WC_Product_Variation( $variation_id );
+						$variation_obj = new \WC_Product_Variation( $variation_id );
 
 						update_post_meta( $variation_id, '_regular_price',$variation['regular_price'] );
 						update_post_meta( $variation_id, '_price', $variation['regular_price']);						
@@ -10990,33 +11006,57 @@ class Eowbc_Jewelry {
 										                    );
 			}
 
+			wbc()->load->model('admin/eowbc_filters');
+			wbc()->load->model('admin\form-builder');
+
         	foreach ($this->filter as $index => $filters) {
 				
 				foreach($filters as $filter){        		
 
-	        		// $_data=unserialize(get_option($index,"a:0:{}"));
-	        		$_data = unserialize(wbc()->options->get_option_group('filters_'.$index,"a:0:{}"));
-	        		$names=array_column($_data,'name');
-	        		if( !in_array($filter['name'], $names)){
+	        		// // $_data=unserialize(get_option($index,"a:0:{}"));
+	        		// $_data = unserialize(wbc()->options->get_option_group('filters_'.$index,"a:0:{}"));
+	        		// $names=array_column($_data,'name');
+	        		// if( !in_array($filter['name'], $names)){
+	        			$prefix = "";
 	        			if( $index == "d_fconfig" ) {
-							$_data[]=array(
-		                        'd_fconfig_filter'=>$filter['name'],
-		                        'type'=>$filter['type'],
-		                        'd_fconfig_label'=>$filter['label'],
-		                        'd_fconfig_is_advanced'=>$filter['advance'],
-		                        'dependent'=>$filter['dependent'],
-		                        'input'=>$filter['input'],
-		                        'd_fconfig_column_width'=>$filter['column_width'],
-		                        'd_fconfig_ordering'=>(int)$filter['order'],
-		                    );   
+							$_POST["saved_tab_key"] = "d_fconfig";
+							$prefix = "d";
 	        			}
 	        			else {
-
+	        				$_POST["saved_tab_key"] = "s_fconfig";
+							$prefix = "s";
 	        			}
-	        			 	                
+	        			 	
+	        			$_POST[$prefix.'_fconfig_filter']=$filter['name'];
+		                $_POST[$prefix.'_fconfig_type']=$filter['type'];
+		                $_POST[$prefix.'_fconfig_label']=$filter['label'];
+		                $_POST[$prefix.'_fconfig_is_advanced']=$filter['advance'];
+		                $_POST[$prefix.'_fconfig_dependent']=$filter['dependent'];
+		                $_POST[$prefix.'_fconfig_input_type']=$filter['input'];
+		                $_POST[$prefix.'_fconfig_column_width']=$filter['column_width'];
+		                $_POST[$prefix.'_fconfig_ordering']=$filter['order'];
+		                $_POST[$prefix.'_fconfig_icon_size']='';
+		                $_POST[$prefix.'_fconfig_icon_label_size']='';
+		                $_POST[$prefix.'_fconfig_add_reset_link']='';
+
 	        			// update_option($index,serialize($_data)); 
-	        			wbc()->options->update_option_group( 'filters_'.$index, serialize($_data) );
-	        		}
+	        			// wbc()->options->update_option_group( 'filters_'.$index, serialize($_data) );
+	        			
+						$res = \eo\wbc\model\admin\Eowbc_Filters::instance()->save( \eo\wbc\controllers\admin\menu\page\Filters::get_form_definition() );
+
+						unset($_POST[$prefix.'_fconfig_filter']);
+		                unset($_POST[$prefix.'_fconfig_type']);
+		                unset($_POST[$prefix.'_fconfig_label']);
+		                unset($_POST[$prefix.'_fconfig_is_advanced']);
+		                unset($_POST[$prefix.'_fconfig_dependent']);
+		                unset($_POST[$prefix.'_fconfig_input_type']);
+		                unset($_POST[$prefix.'_fconfig_column_width']);
+		                unset($_POST[$prefix.'_fconfig_ordering']);
+		                unset($_POST[$prefix.'_fconfig_icon_size']);
+		                unset($_POST[$prefix.'_fconfig_icon_label_size']);
+		                unset($_POST[$prefix.'_fconfig_add_reset_link']);
+
+	        		// }
 	        	}
         	}        	
 		}
@@ -11162,7 +11202,7 @@ class Eowbc_Jewelry {
 
 			$name = basename($path);
 
-			$attachment_check=new Wp_Query( array(
+			$attachment_check=new \Wp_Query( array(
 		        'posts_per_page' => 1,
 		        'post_type'      => 'attachment',
 		        'name'           => implode('-',explode(' ',strtolower($name))).'-image'
@@ -11214,9 +11254,13 @@ class Eowbc_Jewelry {
 				)
 			);
 		*/
-		function add_maps($args) {      
-			
-			return true;
+		function add_maps($args) {     
+
+			//return true;
+
+			wbc()->load->model('admin/eowbc_mapping');
+			wbc()->load->model('admin\form-builder');
+
 			if(!empty($args) && is_array($args)){
 
 				foreach ($args as $map) {
@@ -11238,32 +11282,56 @@ class Eowbc_Jewelry {
 					if(!empty($first) && !empty($second)) {
 
 
-						$maps=unserialize(get_option('eo_wbc_cat_maps',"a:0:{}"));
+						// $maps=unserialize(get_option('eo_wbc_cat_maps',"a:0:{}"));
         
-				        if(!empty($maps) and !is_wp_error($maps)){
+				  //       if(!empty($maps) and !is_wp_error($maps)){
 
-				            $match_found = false;
-				            foreach ($maps as $key=>$value) {    
+				            // $match_found = false;
+				            // foreach ($maps as $key=>$value) {    
 
-				                if($value[0]==$first and $value[1]==$second) {                 
-				                    $match_found = true;
-				                    break;
-				                } elseif ($value[1]==$first and $value[0]==$second) {
-				                    $match_found = true;
-				                    break;
-				                }
-				            }
+				            //     if($value[0]==$first and $value[1]==$second) {                 
+				            //         $match_found = true;
+				            //         break;
+				            //     } elseif ($value[1]==$first and $value[0]==$second) {
+				            //         $match_found = true;
+				            //         break;
+				            //     }
+				            // }
 
-				            if(!$match_found){				                
-				                $maps[] = array($first,$second,$discount);
-				            }
+				            // if(!$match_found){				                
+				            //     $maps[] = array($first,$second,$discount);
+				            // }
 
-				        } else {
-				            $maps = array(array($first,$second,$discount));
-				        }
+				        // } else {
+				        //     $maps = array(array($first,$second,$discount));
+				        // }
 
-				        update_option('eo_wbc_cat_maps',serialize($maps)); 
-				        update_option('eo_wbc_config_map',"1");			                            				        
+						$_POST["saved_tab_key"] = "map_creation_modification";
+					 	
+	        			$_POST['range_first']='';
+		                $_POST['eo_wbc_first_category']=$first;
+		                $_POST['eo_wbc_first_category_range']='';
+
+		                $_POST['range_second']='';
+		                $_POST['eo_wbc_second_category']=$second;
+		                $_POST['eo_wbc_second_category_range']='';
+
+                        $_POST['eo_wbc_add_discount']='0';
+
+	        			$res = \eo\wbc\model\admin\Eowbc_Mapping::instance()->save( \eo\wbc\controllers\admin\menu\page\Mapping::get_form_definition() );
+
+	        			unset($_POST["saved_tab_key"]);
+	        			unset($_POST['range_first']);
+		                unset($_POST['eo_wbc_first_category']);
+		                unset($_POST['eo_wbc_first_category_range']);
+		                unset($_POST['range_second']);
+		                unset($_POST['eo_wbc_second_category']);
+		                unset($_POST['eo_wbc_second_category_range']);
+                        unset($_POST['eo_wbc_add_discount']);
+
+				        // update_option('eo_wbc_cat_maps',serialize($maps)); 
+				        // update_option('eo_wbc_config_map',"1");	
+				        wbc()->options->update_option('configuration','config_map',"1");		                            				        
 					}
 				}
         		return true;        		

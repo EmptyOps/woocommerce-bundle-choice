@@ -18,7 +18,7 @@ class Order_Received {
     }
 
     public function init() {
-         add_action('woocommerce_thankyou',function($order_id){            
+         add_action('woocommerce_thankyou',function($order_id){      
             $sets=WC()->session->get('EO_WBC_MAPS');
             $maps=array();
             if(!is_null($sets))

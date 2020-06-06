@@ -343,7 +343,7 @@ class Jewelry {
             
             $_step=1;
             wbc()->load->model('admin/sample_data/eowbc_jewelry');
-            $res = \eo\wbc\model\admin\sample_data\Eowbc_Jewelry::instance()->process_post( $_step ); 
+            $res = \eo\wbc\model\admin\sample_data\Eowbc_Jewelry::instance()->process_post( $_step, $_category, $_atttriutes ); 
 
             wbc()->load->template('admin/sample_data/main', array("_step"=>$_step,"_atttriutes"=>$_atttriutes,"_category"=>$_category)); 
 
