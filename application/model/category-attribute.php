@@ -67,4 +67,36 @@ class Category_Attribute{
 
       	return $link;      
 	}	
+
+  public function get_attribute($param = '') {
+    if(!empty($param)) {
+      if(is_numeric($param)) {
+        if(function_exists('wc_get_attribute')){
+           return wc_get_attribute($id);
+        } else {
+
+          foreach (wc_get_attribute_taxonomies() as $attribute) {
+
+            if($attribute->attribute_id==$param){
+                return $attribute;
+            }                    
+          }
+          return false;         
+        }
+      } elseif( is_string($param)) {
+
+        foreach (wc_get_attribute_taxonomies() as $attribute) {
+
+          if($attribute->attribute_name==$param){
+              return $attribute;
+          }                    
+        }
+        return false;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
 }

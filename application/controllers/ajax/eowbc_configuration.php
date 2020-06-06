@@ -8,7 +8,7 @@ $res = array( "type"=>"success", "msg"=>"Updated successfully!" );
 
 if(wp_verify_nonce(sanitize_text_field($_POST['_wpnonce']),'eowbc_configuration')){
 	
-	wbc()->options->update_option('configuration','business_type',sanitize_text_field($_POST['config_business_type']));
+	/*wbc()->options->update_option('configuration','business_type',sanitize_text_field($_POST['config_business_type']));*/
 	
 	wbc()->options->update_option('configuration','buttons_page',sanitize_text_field($_POST['config_buttons_page']));
 	
@@ -28,7 +28,7 @@ if(wp_verify_nonce(sanitize_text_field($_POST['_wpnonce']),'eowbc_configuration'
 	
 	wbc()->options->update_option('configuration','preview_icon',sanitize_text_field($_POST['config_preview_icon']));
 	
-	wbc()->options->update_option('configuration','filter_status',(empty($_POST['config_filter_status'])?'':sanitize_text_field($_POST['config_filter_status'])));
+	/*wbc()->options->update_option('configuration','filter_status',(empty($_POST['config_filter_status'])?'':sanitize_text_field($_POST['config_filter_status'])));*/
 
 	wbc()->options->update_option('configuration','pair_maker_status',(empty($_POST['config_pair_maker_status'])?'':sanitize_text_field($_POST['config_pair_maker_status'])));
 

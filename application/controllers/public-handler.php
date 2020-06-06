@@ -25,7 +25,12 @@ class Public_Handler {
 		*	root method to process all the frontend requests.
 		*/		
 		do_action( 'before_public_process_request' );		
+
 		//Perform plugin's task only if both configuration and mapping are completed.
+		
+		/*wbc()->options->update_option('configuration','config_category',1);
+		wbc()->options->update_option('configuration','config_map',1);*/
+
         if(
         	wbc()->options->get_option('configuration','config_category',0) == 1
              	and
@@ -44,7 +49,8 @@ class Public_Handler {
 				} elseif (is_product_category()) {
 			        \eo\wbc\controllers\publics\pages\Category::instance();
 
-			    } elseif(is_product()) {			    	
+			    } elseif(is_product()) {
+
 			    	\eo\wbc\controllers\publics\pages\Product::instance()->init();
 
 			    } elseif(is_page('Product Review')) {

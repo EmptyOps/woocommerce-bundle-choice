@@ -33,6 +33,25 @@ class WooCommerce_Bundle_Choice_Bootstrap {
 	}
 
 	public function run() {
+		add_action('created_term', array(\eo\wbc\controllers\admin\Term_Meta::instance(),'save_terms'), 10, 3);
+		add_action('edit_term', array(\eo\wbc\controllers\admin\Term_Meta::instance(),'save_terms'), 10, 3);
+
+		add_action('woocommerce_attribute_added', array(\eo\wbc\controllers\admin\Term_Meta::instance(),'save_taxonomy_form'), 10,2);
+		add_action('woocommerce_attribute_updated', array(\eo\wbc\controllers\admin\Term_Meta::instance(),'save_taxonomy_form'), 10, 2);
+
+		
+		
+		//Add form to the attribute page
+    	if(!empty($_GET['post_type']) and $_GET['post_type']=='product' and !empty($_GET['page']) and $_GET['page']=='product_attributes'){
+
+    		\eo\wbc\controllers\admin\Term_Meta::instance()->add_taxonomy_type();
+    		
+    	} elseif ( !empty($_GET['post_type']) and $_GET['post_type']=='product' and !empty($_GET['taxonomy']) and strpos($_GET['taxonomy'], 'pa_')!==false ) {
+    		
+    		\eo\wbc\controllers\admin\Term_Meta::instance()->add_attrubute_term_form($_GET['taxonomy']);
+
+    	}
+
 		if((function_exists('is_ajax') and is_ajax()) or defined('WP_AJAX')) {
 			
 			add_action( "wp_ajax_nopriv_eowbc_ajax",array($this,'ajax'),10);

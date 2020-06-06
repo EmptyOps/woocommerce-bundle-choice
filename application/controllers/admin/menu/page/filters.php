@@ -22,7 +22,7 @@ if ( ! class_exists( 'Filters' ) ) {
 		public static function get_form_definition( $is_add_sample_values = false ) {
 			
 			wbc()->load->model('admin/form-builder');
-
+			$inventory_type = wbc()->options->get_option('setting_status_setting_status_setting','inventory_type','');			
 			//Diamond Page Filter Configuration's list
 			$table = array();
 			$table['id']='eowbc_price_control_methods_list';
@@ -193,6 +193,32 @@ if ( ! class_exists( 'Filters' ) ) {
 			);
 
 			$form_definition = array(
+				'filter_setting'=>array(
+						'label'=>"Configuration",
+						'form'=>array( 
+							'filter_setting_filter'=>array(
+									'label'=>'Filter Configuration',
+									'type'=>'devider',
+								),
+							'filter_setting_status'=>array(
+									'label'=>'Filter Status',
+									'type'=>'checkbox',
+									'value'=>array(wbc()->options->get_option('filters_filter_setting','config_filter_status')),
+									'options'=>array('config_filter_status'=>' Check here to enable horizontal filter bar at category page.'),
+									'class'=>array(),
+									'size_class'=>array('eight','wide'),
+									'inline'=>true,
+								),							
+							'filter_setting_submit_btn'=>array(
+								'label'=>eowbc_lang('Save'),
+								'type'=>'button',
+								'class'=>array('secondary'),
+								//'size_class'=>array('eight','wide'),
+								'inline'=>false,
+								'attr'=>array('data-tab_key="altr_filt_widgts"', 'data-action="save"'),
+							)							
+						)
+					),
 				'altr_filt_widgts'=>array(
 					'label'=>'Alternate Filter Widgets',
 					'form'=> array(
@@ -243,7 +269,7 @@ if ( ! class_exists( 'Filters' ) ) {
 					)
 				),							
 				'd_fconfig'=>array(
-						'label'=>"Diamond Page Filter Configuration",
+						'label'=>($inventory_type==='jewelery'?"Diamond":"First")." Page Filter Configuration",
 						'form'=>array( $table["id"].'_bulk'=>array(
 								// 'label'=>'Bulk Actions',
 								'type'=>'select',
@@ -430,7 +456,7 @@ if ( ! class_exists( 'Filters' ) ) {
 						)
 					),
 				's_fconfig'=>array(
-						'label'=>"Settings Page Filter Configuration",
+						'label'=>($inventory_type==='jewelery'?"Settings":"Second")." Page Filter Configuration",
 						'form'=>array( $sett_table["id"].'_bulk'=>array(
 								// 'label'=>'Bulk Actions',
 								'type'=>'select',
@@ -618,8 +644,10 @@ if ( ! class_exists( 'Filters' ) ) {
 						)
 					),
 				
-				
 			);
+
+
+
 
 			if($is_add_sample_values) {
 				//loop through form tabs and set (random) sample values for each field  

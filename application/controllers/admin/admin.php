@@ -26,7 +26,7 @@ class Admin {
 
 	public static function process(){
 
-		do_action( 'before_admin_process_request' );		
+		do_action( 'wbc_before_admin_process_request' );		
 		
 		//	perform initial task
 		self::instance()->init();
@@ -40,11 +40,14 @@ class Admin {
 			// }); 
         }
         else {
+	    	
+	    	
+
 	    	//	show/render menu and pages
 			self::instance()->menu();
         }
 	
-		do_action( 'after_admin_process_request' );
+		do_action( 'wbc_after_admin_process_request' );
 	}
 
 	public function menu() {

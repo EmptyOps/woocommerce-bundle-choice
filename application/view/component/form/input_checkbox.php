@@ -36,11 +36,10 @@ if(!empty($id) /*and !empty($label)*/){
 
 	    		<?php 
 				if($style != "normal_without_parent_div") { ?>
-		    		<div class="fields">
+		    		<div class="<?php !empty($grouped)?_e('grouped'):'inline' ?> fields">
 				<?php 
 				}
-				?>
-
+				?>			
 	    		<?php foreach ($options as $checkbox_key => $checkbox_value) : ?>
 	    			<div class="field">
 				    	<div class="ui <?php echo $style_classes;?> checkbox <?php echo !empty($class)?$class:''; ?>">
