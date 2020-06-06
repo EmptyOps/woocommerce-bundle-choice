@@ -3,6 +3,7 @@ namespace eo\wbc\controllers\admin\menu\page;
 
 defined( 'ABSPATH' ) || exit;
 
+
 if ( ! class_exists( 'Appearance' ) ) {
 	class Appearance {
 
@@ -86,8 +87,197 @@ if ( ! class_exists( 'Appearance' ) ) {
 									'type'=>'visible_info',
 									'class'=>array('small'),
 									// 'size_class'=>array('sixteen','wide'),
+							),							
+						),
+						'appearence_product_page_devider_option_form'=>array(
+										'label'=>'Option Form',
+										'type'=>'devider',
+									),
+
+						'appearence_product_page_toggle_status'=>array(
+							'label'=>eowbc_lang('Toggle Button Enabled?'),
+							'type'=>'checkbox',
+							'value'=>array(wbc()->options->get_option('appearance_product_page','appearence_product_page_toggle_status')),
+							'options'=>array('appearence_product_page_toggle_status'=>'Toggle Button Status'),
+							'class'=>array('fluid'),						
+							// 'size_class'=>array('eight','wide'),
+							'inline'=>false,
+
+							'visible_info'=>array( 'label'=>eowbc_lang('Enables the toogle buton to toggle the variation form at product page.'),
+								'type'=>'visible_info',
+								'class'=>array('small'),
+								// 'size_class'=>array('sixteen','wide'),
 							),
-						)
+						),	
+						'appearence_product_page_toggle_init_status'=>array(
+							'label'=>eowbc_lang('Show variation form at initial?'),
+							'type'=>'checkbox',
+							'value'=>array(wbc()->options->get_option('appearance_product_page','appearence_product_page_toggle_init_status')),
+							'options'=>array('appearence_product_page_toggle_init_status'=>'Variation Form Visiblity'),
+							'class'=>array('fluid'),						
+							// 'size_class'=>array('eight','wide'),
+							'inline'=>false,
+
+							'visible_info'=>array( 'label'=>eowbc_lang('Enables to set the variation form open at initial.'),
+								'type'=>'visible_info',
+								'class'=>array('small'),
+								// 'size_class'=>array('sixteen','wide'),
+							),
+						),					
+						'appearence_product_page_toggle_text'=>array(
+							'label'=>eowbc_lang('Toggle Buton Text'),
+							'type'=>'text',
+							'value'=>wbc()->options->get_option('appearance_product_page','appearence_product_page_toggle_text',__('CUSTOMIZE THIS PRODUCT')),
+							'class'=>array('fluid'),						
+							'size_class'=>array('eight','wide'),
+							'inline'=>false,
+
+							'visible_info'=>array( 'label'=>eowbc_lang('Text to be shown on the toggle button.'),
+								'type'=>'visible_info',
+								'class'=>array('small','fluid'),
+								// 'size_class'=>array('sixteen','wide'),
+							)
+						),
+						'appearence_product_page_option_dimention'=>array(
+							'label'=>eowbc_lang('Options Box Dimention'),
+							'type'=>'text',
+							'value'=>wbc()->options->get_option('appearance_product_page','appearence_product_page_option_dimention','2em'),
+							'class'=>array('fluid'),						
+							'size_class'=>array('eight','wide'),
+							'inline'=>false,
+
+							'visible_info'=>array( 'label'=>eowbc_lang('The height and width of the option\'s box.<strong>(prepend px,em,rem as measurement)</strong>'),
+								'type'=>'visible_info',
+								'class'=>array('small','fluid'),
+								// 'size_class'=>array('sixteen','wide'),
+							)
+						),
+						'appearence_product_page_border_color'=>array(
+							'label'=>eowbc_lang('Options Border Color'),
+							'type'=>'color',
+							'value'=>wbc()->options->get_option('appearance_product_page','appearence_product_page_border_color','#ffffff'),
+							'class'=>array('fluid'),						
+							'size_class'=>array('eight','wide'),
+							'inline'=>false,
+
+							'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s border'),
+								'type'=>'visible_info',
+								'class'=>array('small','fluid'),
+								// 'size_class'=>array('sixteen','wide'),
+							)
+						),
+						'appearence_product_page_border_width'=>array(
+							'label'=>eowbc_lang('Options Border width'),
+							'type'=>'text',
+							'value'=>wbc()->options->get_option('appearance_product_page','appearence_product_page_border_width','1px'),
+							'class'=>array('fluid'),						
+							'size_class'=>array('eight','wide'),
+							'inline'=>false,
+
+							'visible_info'=>array( 'label'=>eowbc_lang('The border width of the option\'s border.<strong>(prepend px,em,rem as measurement)</strong>'),
+								'type'=>'visible_info',
+								'class'=>array('small','fluid'),
+								// 'size_class'=>array('sixteen','wide'),
+							)
+						),
+						'appearence_product_page_border_color_hover'=>array(
+							'label'=>eowbc_lang('Options Border Color on Hover'),
+							'type'=>'color',
+							'value'=>wbc()->options->get_option('appearance_product_page','appearence_product_page_border_color_hover','#ffffff'),
+							'class'=>array('fluid'),						
+							'size_class'=>array('eight','wide'),
+							'inline'=>false,
+
+							'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s border on hover.'),
+								'type'=>'visible_info',
+								'class'=>array('small'),
+								// 'size_class'=>array('sixteen','wide'),
+							)
+						),
+						'appearence_product_page_border_width_hover'=>array(
+							'label'=>eowbc_lang('Options Border width on Hover'),
+							'type'=>'text',
+							'value'=>wbc()->options->get_option('appearance_product_page','appearence_product_page_border_width_hover','1px'),
+							'class'=>array('fluid'),						
+							'size_class'=>array('eight','wide'),
+							'inline'=>false,
+
+							'visible_info'=>array( 'label'=>eowbc_lang('The border width of the option\'s border on hover.<strong>(prepend px,em,rem as measurement)</strong>'),
+								'type'=>'visible_info',
+								'class'=>array('small'),
+								// 'size_class'=>array('sixteen','wide'),
+							)
+						),
+						'appearence_product_page_border_radius'=>array(
+							'label'=>eowbc_lang('Options Border Radius'),
+							'type'=>'text',
+							'value'=>wbc()->options->get_option('appearance_product_page','appearence_product_page_border_radius','1px'),
+							'class'=>array('fluid'),						
+							'size_class'=>array('eight','wide'),
+							'inline'=>false,
+
+							'visible_info'=>array( 'label'=>eowbc_lang('The border radius of the option\'s border.<strong>(prepend px,em,rem as measurement)</strong>'),
+								'type'=>'visible_info',
+								'class'=>array('small'),
+								// 'size_class'=>array('sixteen','wide'),
+							)
+						),						
+						'appearence_product_page_font_color'=>array(
+							'label'=>eowbc_lang('Options Font Color'),
+							'type'=>'color',
+							'value'=>wbc()->options->get_option('appearance_product_page','appearence_product_page_font_color','#ffffff'),
+							'class'=>array('fluid'),						
+							'size_class'=>array('eight','wide'),
+							'inline'=>false,
+
+							'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s text.'),
+								'type'=>'visible_info',
+								'class'=>array('small'),
+								// 'size_class'=>array('sixteen','wide'),
+							)
+						),
+						'appearence_product_page_font_color_hover'=>array(
+							'label'=>eowbc_lang('Options Font Color on Hover'),
+							'type'=>'color',
+							'value'=>wbc()->options->get_option('appearance_product_page','appearence_product_page_font_color_hover','#ffffff'),
+							'class'=>array('fluid'),						
+							'size_class'=>array('eight','wide'),
+							'inline'=>false,
+
+							'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s text on hover.'),
+								'type'=>'visible_info',
+								'class'=>array('small'),
+								// 'size_class'=>array('sixteen','wide'),
+							)
+						),
+						'appearence_product_page_bg_color'=>array(
+							'label'=>eowbc_lang('Options Background Color'),
+							'type'=>'color',
+							'value'=>wbc()->options->get_option('appearance_product_page','appearence_product_page_bg_color','#ffffff'),
+							'class'=>array('fluid'),						
+							'size_class'=>array('eight','wide'),
+							'inline'=>false,
+
+							'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s background.'),
+								'type'=>'visible_info',
+								'class'=>array('small'),
+								// 'size_class'=>array('sixteen','wide'),
+							)
+						),
+						'appearence_product_page_bg_color_hover'=>array(
+							'label'=>eowbc_lang('Options Background Color on Hover'),
+							'type'=>'color',
+							'value'=>wbc()->options->get_option('appearance_product_page','appearence_product_page_bg_color_hover','#ffffff'),
+							'class'=>array('fluid'),						
+							'size_class'=>array('eight','wide'),
+							'inline'=>false,
+
+							'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s background on hover.'),
+								'type'=>'visible_info',
+								'class'=>array('small'),
+								// 'size_class'=>array('sixteen','wide'),
+							)
+						),
 					)
 				)
 				

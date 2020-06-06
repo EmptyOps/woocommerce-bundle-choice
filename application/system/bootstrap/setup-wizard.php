@@ -169,7 +169,7 @@ class Setup_Wizard {
 		            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		            <title><?php esc_html_e( 'WooCommerce Product Bundle Choice &rsaquo; Setup Wizard', 'woocommerce' ); ?></title>
 		            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-		            <link rel="stylesheet" type="text/css" href="<?php echo plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/css/fomantic/semantic.min.css'); ?>">
+		            <link rel="stylesheet" type="text/css" href="<?php echo constant('EOWBC_ASSET_URL').'css/fomantic/semantic.min.css'; ?>">
 		        </head>
 		        <body>
 		        	<div class="ui segment container" style="height: 100%;margin-bottom: 0px; border: none !important;
@@ -345,7 +345,7 @@ class Setup_Wizard {
 		?>
 					  	</form>
 					</div>
-					<script src="<?php echo plugins_url(basename(constant('EO_WBC_PLUGIN_DIR')).'/js/fomantic/semantic.min.js'); ?>"></script>
+					<script src="<?php echo constant('EOWBC_ASSET_URL').'js/fomantic/semantic.min.js'; ?>"></script>
 
 					<script>
 						jQuery(document).ready(function(){
@@ -369,5 +369,5 @@ class Setup_Wizard {
 }
 
 add_action('admin_init',function(){
-	Setup_Wizard::getInstance()->init();
+	Setup_Wizard::instance()->init();
 });

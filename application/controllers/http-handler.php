@@ -29,43 +29,20 @@ class Http_Handler {
 
 		if(is_admin()){
 
-			do_action( 'before_process_admin_request', array(self::instance(),'preprocess_admin_request') );			
+			do_action( 'wbc_before_process_admin_request' );	
 			// Process as admin request.								
 			Admin::process();
 			// call up request method here.
-			do_action( 'after_process_admin_request', array(self::instance(),'postprocess_admin_request') );
+			do_action( 'wbc_after_process_admin_request' );
 		} else {
-			do_action( 'before_process_public_request', array(self::instance(),'preprocess_public_request') );			
+			do_action( 'wbc_before_process_public_request' );			
 			// Process as public request.			
 			Public_Handler::process();
 			// call up request method here
-			do_action( 'after_process_public_request', array(self::instance(),'postprocess_public_request') );			
+			do_action( 'wbc_after_process_public_request' );			
 		}
 
 		do_action( 'after_process_request', array(self::instance(),'postprocess_request') );
 	}
 
-	public function preprocess_request(){
-		//	implementations
-	}
-
-	public function postprocess_request(){
-		//	implementations
-	}
-
-	public function preprocess_admin_request(){
-		//	implementations
-	}
-
-	public function postprocess_admin_request(){
-		//	implementations
-	}
-
-	public function preprocess_public_request(){
-		//	implementations
-	}
-
-	public function postprocess_public_request(){
-		//	implementations
-	}
 }

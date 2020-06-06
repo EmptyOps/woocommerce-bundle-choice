@@ -42,54 +42,17 @@
     }
 
     if(!empty($product_data)){
-    list($product_data_1, $product_data_2) = array_chunk($product_data, ceil(count($product_data) / 2));
-    ?>
+        $display_style = wbc()->options->get_option('tiny_features','specification_view_style','default');
+        if('default'===$display_style){
+            list($product_data_1, $product_data_2) = array_chunk($product_data, ceil(count($product_data) / 2));
+            
+            wbc()->load->template('publics/features/default',compact('product_data','product_data_1','product_data_2'));
 
-        <div class="ui two equal width grid container stackable product_specification">
-            <div class="row">
-                <?php if(!empty($product_data_1) and is_array($product_data_1)):?>
-                <div class="column">                            
-                    <table class="ui single line unstackable table" style="border: none;">  
-                      <tbody>                            
-                        <?php foreach ($product_data_1 as $data): ?> 
-                            <tr>
-                                <td style="border-top: 1px solid #dddddd;
-                border-left: none !important;
-                border-right: none !important;
-                border-bottom: none !important;"><?php echo $data[0]; ?> :</td>
-                                <td style="border-top: 1px solid #dddddd;
-                border-left: none !important;
-                border-right: none !important;
-                border-bottom: none !important;"><?php echo $data[1]; ?></td>    
-                            </tr>                            
-                        <?php endforeach;?>
-                      </tbody>
-                    </table>                                                
-                </div>
-                <?Php endif; ?>
-                <?php if(!empty($product_data_2) and is_array($product_data_2)):?>
-                <div class="column">                            
-                    <table class="ui single line unstackable table" style="border: none;">  
-                      <tbody>                            
-                        <?php foreach ($product_data_2 as $data): ?> 
-                            <tr>
-                                <td style="border-top: 1px solid #dddddd;
-                border-left: none !important;
-                border-right: none !important;
-                border-bottom: none !important;"><?php echo $data[0]; ?> :</td>
-                                <td style="border-top: 1px solid #dddddd;
-                border-left: none !important;
-                border-right: none !important;
-                border-bottom: none !important;"><?php echo $data[1]; ?></td>    
-                            </tr>                            
-                        <?php endforeach;?>
-                      </tbody>
-                    </table>
-                </div>
-                <?Php endif; ?>
-            </div>
-        </div>
-        <br/>            
-    <?php
+        } elseif ('template_1'===$display_style) {            
+            wbc()->load->template('publics/features/template_1',compact('product_data'));
+            
+        } elseif ('template_2'===$display_style) {
+            wbc()->load->template('publics/features/template_2',compact('product_data'));
+        }
     }
    

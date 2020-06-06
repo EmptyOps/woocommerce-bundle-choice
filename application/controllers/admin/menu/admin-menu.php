@@ -44,21 +44,12 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 						),
 						array(
 							'parent_slug'=>'eowbc',
-							'title'=>eowbc_lang('Configuration'),
-							'menu_title'=>eowbc_lang('Configuration'),
+							'title'=>eowbc_lang('General'),
+							'menu_title'=>eowbc_lang('General'),
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-configuration',
 							'template'=>'admin/menu/configuration',
 							'position'=>1
-						),
-						array(
-							'parent_slug'=>'eowbc',
-							'title'=>eowbc_lang('Mapping'),
-							'menu_title'=>eowbc_lang('Mapping'),
-							'capability'=>'manage_options',
-							'slug'=>'eowbc-mapping',
-							'template'=>'admin/menu/mapping',
-							'position'=>2
 						),
 						array(
 							'parent_slug'=>'eowbc',
@@ -69,6 +60,15 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 							'template'=>'admin/menu/filters',
 							'position'=>3
 						),
+						array(
+							'parent_slug'=>'eowbc',
+							'title'=>eowbc_lang('Mapping'),
+							'menu_title'=>eowbc_lang('Mapping'),
+							'capability'=>'manage_options',
+							'slug'=>'eowbc-mapping',
+							'template'=>'admin/menu/mapping',
+							'position'=>2
+						),						
 						array(
 							'parent_slug'=>'eowbc',
 							'title'=>eowbc_lang('Appearance'),
@@ -98,11 +98,11 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 						),
 						array(
 							'parent_slug'=>'eowbc',
-							'title'=>eowbc_lang('Logs'),
-							'menu_title'=>eowbc_lang('Logs'),
+							'title'=>eowbc_lang('Settings & Status'),
+							'menu_title'=>eowbc_lang('Settings & Status'),
 							'capability'=>'manage_options',
-							'slug'=>'eowbc-logs',
-							'template'=>'admin/menu/logs',
+							'slug'=>'eowbc-setting-status',
+							'template'=>'admin/menu/setting-status',
 							'position'=>6
 						),
 						array(
@@ -115,6 +115,11 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 							'position'=>5
 						),
 					);
+			$features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())));
+					
+			if(empty($features['price_control'])) {
+				unset($submenu[6]);
+			}
 			$menu['submenu'] = $submenu;
 			$menu = apply_filters( 'eowbc_menu', $menu );
 			return $menu;

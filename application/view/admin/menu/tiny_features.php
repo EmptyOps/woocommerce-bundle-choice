@@ -68,6 +68,15 @@ $form['data'] = array(
 											'size_class'=>array('eight','wide'),
 											'inline'=>true,
 										),
+									'tiny_features_specification_view_style'=>array(
+											'label'=>'Widget Template',
+											'type'=>'radio',
+											'value'=>wbc()->options->get_option('tiny_features','specification_view_style','default'),
+											'options'=>array('default'=>'Default Style','template_1'=>'Template 1','template_2'=>'Template 2'),
+											'class'=>array(),
+											'size_class'=>array('eight','wide'),
+											'inline'=>true,
+										),
 									'tiny_features_save_specification_view'=>array(
 												'label'=>'Save',
 												'type'=>'button',		

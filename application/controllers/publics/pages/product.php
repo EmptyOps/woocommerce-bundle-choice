@@ -18,13 +18,14 @@ class Product {
     }
 
     public function init() {
-        /*die();*/
+        //die();
         do_action('wbc_pre_product_page');        
         $this->specification_view();
+        $this->product_options_view();
         do_action('wbc_post_product_page');        
     }    
 
-    function specification_view() {
+    public function specification_view() {
         if(wbc()->options->get_option('tiny_features','specification_view_status',false) and wbc()->options->get_option('tiny_features','specification_view_default_status',false)){
 
             add_action('woocommerce_after_single_product_summary',function(){
@@ -32,5 +33,9 @@ class Product {
             });
             remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
         }
+    }
+
+    public function product_options_view() {
+        \eo\wbc\controllers\publics\Options::instance()->run();        
     }
 }

@@ -19,7 +19,7 @@ if(!class_exists('WBC_Loader')) {
 			//	no implemetations 
 		}
 
-		public function asset($type,$path) {
+		public function asset($type,$path,$param = array()) {
 			$_path = '';
 			$_handle = str_replace(' ','-',str_replace('/','-',$path));			
 			switch ($type) {
@@ -29,9 +29,15 @@ if(!class_exists('WBC_Loader')) {
 					wp_enqueue_style($_handle);
 					break;
 				case 'js':
-					$_path = constant('EOWBC_ASSET_URL').'js'.'/'.$path.'.js';					
-					wp_register_script($_handle, $_path,array('jquery'));
+					$_path = constant('EOWBC_ASSET_URL').'js'.'/'.$path.'.js';	
+					if(empty($param)){
+						$param = array('jquery');
+					}				
+					wp_register_script($_handle, $_path, $param );
 					wp_enqueue_script($_handle);					
+					break;
+				case 'localize':
+					wp_localize_script($_handle,array_keys($param)[0],$param[array_keys($param)[0]]);
 					break;				
 				default:				
 					break;
