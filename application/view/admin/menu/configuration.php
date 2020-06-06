@@ -21,7 +21,7 @@ $form['data'] = array(
 											'config_automation_link'=>array(
 												'label'=>'Click here for automated configuration and setup',
 												'type'=>'link',
-												'attr'=>array("href='".admin_url('admin.php?page=eowbc&automated_install=1')."'"),
+												'attr'=>array("href='".admin_url('admin.php?page=eo-wbc-home&eo_wbc_view_auto_jewel=1')."'"),
 												'class'=>array('secondary')	
 											),
 											/*'config_save_automation'=>array(
@@ -154,8 +154,7 @@ $form['data'] = array(
 												'attr'=>array("data-action='save'")	
 											)
 									)
-							),
-						
+							),						
 					);
 					
 					$features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())));

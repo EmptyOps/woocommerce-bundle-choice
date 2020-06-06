@@ -49,10 +49,10 @@ class Eowbc_Filters {
 							);
 
 						foreach ($rv as $rvk => $rvv) {
-							// //skip the id
-							// if( $rvk == $key."_filter" ) {
-							// 	continue;
-							// }
+							//skip the id
+							if( $rvk == $key."_dependent" || $rvk == $key."_type" ) {
+								continue;
+							}
 
 							$row[] = array( 'val' => $rvv );
 						}
@@ -111,7 +111,12 @@ class Eowbc_Filters {
 
 		    		//save
 			    	if( $is_table_save ) {
-			    		$table_data[$fk] = (empty($_POST[$fk])? $_POST[$fk]: sanitize_text_field( $_POST[$fk] ) ); 
+			    		if( $fk == "d_fconfig_ordering" || $fk == "s_fconfig_ordering" ) {
+				    		$table_data[$fk] = (int)$_POST[$fk]; 	
+			    		}
+			    		else {
+			    			$table_data[$fk] = (empty($_POST[$fk])? $_POST[$fk]: sanitize_text_field( $_POST[$fk] ) ); 
+			    		}
 			    	}
 			    	else {
 			    		wbc()->options->update_option('filters_'.$key,$fk,(empty($_POST[$fk])? $_POST[$fk]: sanitize_text_field( $_POST[$fk] ) ) );

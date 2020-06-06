@@ -311,9 +311,18 @@ if ( ! class_exists( 'Filters' ) ) {
 								'options'=>array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
 								'class'=>array('fluid'),
 								'size_class'=>array('three','wide'),
+								'attr'=>array("document.getElementById('d_fconfig_type').value=this.options[this.selectedIndex].getAttribute('data-type')")
 								// 'prev_inline'=>true,
 								// 'next_inline'=>true,
 								// 'inline'=>true,
+							),
+							'd_fconfig_type'=>array(
+							'type'=>'hidden',
+							'value'=>'',
+							),
+							'd_fconfig_dependent'=>array(
+							'type'=>'hidden',
+							'value'=>'',
 							),
 							'd_fconfig_label_label'=>array(
 								'label'=>eowbc_lang('Label'),
@@ -338,8 +347,8 @@ if ( ! class_exists( 'Filters' ) ) {
 							),
 							'd_fconfig_is_advanced'=>array(
 								'type'=>'checkbox',
-								'value'=>array('d_fconfig_is_advanced'),
-								'options'=>array('d_fconfig_is_advanced'=>'Is it advanced filter?'),
+								'value'=>array('1'),
+								'options'=>array('1'=>'Is it advanced filter?'),
 								'class'=>array('fluid'),
 								'style'=>'normal',
 								// 'prev_inline'=>true,
@@ -437,8 +446,8 @@ if ( ! class_exists( 'Filters' ) ) {
 							),
 							'd_fconfig_add_reset_link'=>array(
 								'type'=>'checkbox',
-								'value'=>array('d_fconfig_add_reset_link'),
-								'options'=>array('d_fconfig_add_reset_link'=>'Add reset link?'),
+								'value'=>array('1'),
+								'options'=>array('1'=>'Add reset link?'),
 								'class'=>array('fluid'),
 								'style'=>'normal',
 								// 'prev_inline'=>true,
@@ -499,9 +508,18 @@ if ( ! class_exists( 'Filters' ) ) {
 								'options'=>array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
 								'class'=>array('fluid'),
 								'size_class'=>array('three','wide'),
+								'attr'=>array("document.getElementById('s_fconfig_type').value=this.options[this.selectedIndex].getAttribute('data-type')")
 								// 'prev_inline'=>true,
 								// 'next_inline'=>true,
 								// 'inline'=>true,
+							),
+							's_fconfig_type'=>array(
+							'type'=>'hidden',
+							'value'=>'',
+							),
+							's_fconfig_dependent'=>array(
+							'type'=>'hidden',
+							'value'=>'',
 							),
 							's_fconfig_label_label'=>array(
 								'label'=>eowbc_lang('Label'),

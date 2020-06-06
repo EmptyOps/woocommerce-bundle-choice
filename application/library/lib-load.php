@@ -19,21 +19,34 @@ if(!class_exists('WBC_Loader')) {
 			//	no implemetations 
 		}
 
-		public function asset($type,$path,$param = array()) {
+		public function asset($type,$path,$param = array(),$version="") {
+
 			$_path = '';
 			$_handle = str_replace(' ','-',str_replace('/','-',$path));			
 			switch ($type) {
 				case 'css':
 					$_path = constant('EOWBC_ASSET_URL').'css'.'/'.$path.'.css';
-					wp_register_style($_handle, $_path);
+					if(empty($version)) {
+						wp_register_style($_handle, $_path);	
+					}
+					else {
+						wp_register_style($_handle, $_path, $version);	
+					}
 					wp_enqueue_style($_handle);
 					break;
 				case 'js':
 					$_path = constant('EOWBC_ASSET_URL').'js'.'/'.$path.'.js';	
 					if(empty($param)){
 						$param = array('jquery');
+
+					}
+
+					if(empty($version)) {
+						wp_register_script($_handle, $_path, $param );
+					}
+					else {
+						wp_register_script($_handle, $_path, $param, $version );
 					}				
-					wp_register_script($_handle, $_path, $param );
 					wp_enqueue_script($_handle);					
 					break;
 				case 'localize':
