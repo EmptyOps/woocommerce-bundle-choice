@@ -21,17 +21,17 @@
         </td>
         <td data-title="Product">           
             <p><?php _e($first->get_title().
-                ($cart['FIRST'][2]  ? "<br/>&nbsp; - &nbsp;".implode(',',EO_WBC_Support::eo_wbc_get_product_variation_attributes($cart['FIRST'][2])) :'')); ?></p>          
+                ($cart['FIRST'][2]  ? "<br/>&nbsp; - &nbsp;".implode(',',wbc()->wc->eo_wbc_get_product_variation_attributes($cart['FIRST'][2])) :'')); ?></p>          
         
             <?php if($cart['SECOND']):?>
             <p><?php _e($second->get_title().
-                   ($cart['SECOND'][2] ? "<br/>&nbsp; - &nbsp;".implode(',',EO_WBC_Support::eo_wbc_get_product_variation_attributes($cart['SECOND'][2])):'')); ?></p>
+                   ($cart['SECOND'][2] ? "<br/>&nbsp; - &nbsp;".implode(',',wbc()->wc->eo_wbc_get_product_variation_attributes($cart['SECOND'][2])):'')); ?></p>
             <?php endif; ?>                                 
         </td>
         <td data-title="Price"> 
             <p>
                 <?php 
-                    $product_obj=EO_WBC_Support::eo_wbc_get_product($cart['FIRST'][2]?$cart['FIRST'][2]:$cart['FIRST'][0]);
+                    $product_obj=wbc()->wc->eo_wbc_get_product($cart['FIRST'][2]?$cart['FIRST'][2]:$cart['FIRST'][0]);
                     _e(wc_price($product_obj->get_price())); 
                 ?>                    
             </p>
@@ -41,7 +41,7 @@
             <?php if($cart['SECOND']):?>
                 <p>
                     <?php 
-                        $product_obj=EO_WBC_Support::eo_wbc_get_product($cart['SECOND'][2]?$cart['SECOND'][2]:$cart['SECOND'][0]);
+                        $product_obj=wbc()->wc->eo_wbc_get_product($cart['SECOND'][2]?$cart['SECOND'][2]:$cart['SECOND'][0]);
                         _e(wc_price($product_obj->get_price())); 
                     ?>                        
                 </p>

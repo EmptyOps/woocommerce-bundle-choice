@@ -8,6 +8,7 @@ class EO_WBC_Breadcrumb
     public static $first = null;
     public static $second = null;
     public static function eo_wbc_add_css(){        
+        wp_die("eo_wbc_add_css called, upgrade the function as per new version DP branch ");
        require_once 'css/eo_wbc_breadcrumb.php';
     }  
     
@@ -42,6 +43,9 @@ class EO_WBC_Breadcrumb
             }
         }
 
+        //hiren added on 03-06-2020, as replacement to global loading of old version
+        self::eo_wbc_enque_asset();
+
         /**
             CLASS: 
             -------------------------------------------------
@@ -56,6 +60,14 @@ class EO_WBC_Breadcrumb
         } else {           
             return self::eo_wbc_breadcrumb_desktop($step,$begin);
         }
+    }
+
+    //hiren added on 03-06-2020, as replacement to global loading of old version
+    private static function eo_wbc_enque_asset() {
+        // add_action( 'wp_enqueue_scripts',function(){ 
+            wbc()->load->asset('css','fomantic/semantic.min',array(),'2.8.1');
+            wbc()->load->asset('js','fomantic/semantic.min',array(),'2.8.1');
+        // },100);
     }
 
     private static function eo_wbc_breadcrumb_mobile($step=1,$begin){
@@ -226,8 +238,13 @@ class EO_WBC_Breadcrumb
             if(self::eo_wbc_breadcrumb_get_category($chage_product_id)==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/){
 
                 $first_url = \eo\wbc\model\Category_Attribute::instance()->get_category_link(wbc()->options->get_option('configuration','first_slug'));
-                $url=get_bloginfo('url').'/index.php'.$first_url/*get_option('eo_wbc_first_url')*/.
-                '?EO_WBC=1&BEGIN='.wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/.
+                // $url=get_bloginfo('url').'/index.php'.$first_url/*get_option('eo_wbc_first_url')*/.
+                // '?EO_WBC=1&BEGIN='.wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/.
+                // '&STEP=1'.
+                // /*'&FIRST='.sanitize_text_field(empty($_GET['FIRST'])?'':$_GET['FIRST']).
+                // '&SECOND='.sanitize_text_field(empty($_GET['SECOND'])?'':$_GET['SECOND']).*/
+                // '&EO_CHANGE=1';
+                $url=$first_url.'EO_WBC=1&BEGIN='.wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/.
                 '&STEP=1'.
                 /*'&FIRST='.sanitize_text_field(empty($_GET['FIRST'])?'':$_GET['FIRST']).
                 '&SECOND='.sanitize_text_field(empty($_GET['SECOND'])?'':$_GET['SECOND']).*/
@@ -236,8 +253,13 @@ class EO_WBC_Breadcrumb
             elseif (self::eo_wbc_breadcrumb_get_category($chage_product_id)==wbc()->options->get_option('configuration','second_slug')/*get_option('eo_wbc_second_slug')*/) {
 
                 $second_url = \eo\wbc\model\Category_Attribute::instance()->get_category_link(wbc()->options->get_option('configuration','second_slug'));
-                $url=get_bloginfo('url').'/index.php'.$second_url/*get_option('eo_wbc_second_url')*/.
-                '?EO_WBC=1&BEGIN='.wbc()->options->get_option('configuration','second_slug')/*get_option('eo_wbc_second_slug')*/.
+                // $url=get_bloginfo('url').'/index.php'.$second_url/*get_option('eo_wbc_second_url')*/.
+                // '?EO_WBC=1&BEGIN='.wbc()->options->get_option('configuration','second_slug')/*get_option('eo_wbc_second_slug')*/.
+                // '&STEP=1'.
+                // /*'&FIRST='.sanitize_text_field(empty($_GET['FIRST'])?'':$_GET['FIRST']).
+                // '&SECOND='.sanitize_text_field(empty($_GET['SECOND'])?'':$_GET['SECOND']).*/
+                // '&EO_CHANGE=1';
+                $url=$second_url.'EO_WBC=1&BEGIN='.wbc()->options->get_option('configuration','second_slug')/*get_option('eo_wbc_second_slug')*/.
                 '&STEP=1'.
                 /*'&FIRST='.sanitize_text_field(empty($_GET['FIRST'])?'':$_GET['FIRST']).
                 '&SECOND='.sanitize_text_field(empty($_GET['SECOND'])?'':$_GET['SECOND']).*/
@@ -251,12 +273,12 @@ class EO_WBC_Breadcrumb
             if(self::eo_wbc_breadcrumb_get_category($chage_product_id)==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/){
                 //$target='FIRST';
                 if(empty($_GET['SECOND'])) return '#';
-                $product=new WC_Product($_GET['SECOND']);
+                $product=new \WC_Product($_GET['SECOND']);
             }
             elseif (self::eo_wbc_breadcrumb_get_category($chage_product_id)==wbc()->options->get_option('configuration','second_slug')/*get_option('eo_wbc_second_slug')*/) {
                 //$target='SECOND';
                 if(empty($_GET['FIRST'])) return '#';
-                $product=new WC_Product($_GET['FIRST']);
+                $product=new \WC_Product($_GET['FIRST']);
             }      
 
             if(empty($product)) return '#';            

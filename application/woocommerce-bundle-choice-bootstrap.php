@@ -46,7 +46,7 @@ class WooCommerce_Bundle_Choice_Bootstrap {
 	}
 
 	public function ajax(){
-		if(!empty($_POST['_wpnonce']) and !empty($_POST['resolver'])) {			
+		if(!empty($_POST['_wpnonce']) and !empty($_POST['resolver'])) {	
 			$resolver_path = constant('EOWBC_DIRECTORY').'application/controllers/ajax/'.sanitize_text_field($_POST['resolver']).'.php';						
 			if(file_exists($resolver_path)){
 				require_once $resolver_path;

@@ -53,14 +53,20 @@ class Public_Handler {
 			    } elseif(is_cart()) {
 			    	\eo\wbc\controllers\publics\pages\Cart::instance()->init();
 			    
-			    } elseif (is_checkout()) {
+			    } elseif (is_checkout() && !is_order_received_page()) {
 			    	\eo\wbc\controllers\publics\pages\Checkout::instance()->init();	
 
 			    } elseif (is_order_received_page()) {
-					\eo\wbc\controllers\publics\pages\Order_Received::instance();	    
+			    	//it is due to some bug in auto loader that we had to load some classes manually, let's fix at asap
+			    	require_once EOWBC_DIRECTORY.'application/controllers/publics/pages/order_received.php';
+
+					\eo\wbc\controllers\publics\pages\Order_Received::instance()->init();	    
 
 			    } elseif (wbc()->wc->is_wc_endpoint_url('view-order')) {
-					\eo\wbc\controllers\publics\pages\View_Order::instance();
+			    	//it is due to some bug in auto loader that we had to load some classes manually, let's fix at asap
+			    	require_once EOWBC_DIRECTORY.'application/controllers/publics/pages/view_order.php';
+
+					\eo\wbc\controllers\publics\pages\View_Order::instance()->init();
 
 			    }
         	},20);        	

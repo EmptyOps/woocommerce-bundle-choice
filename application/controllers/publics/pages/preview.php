@@ -20,7 +20,7 @@ class Preview {
     public function init() {
         if(empty($_GET['FIRST']) || empty($_GET['SECOND']))
         {            
-            exit(wp_redirect(EO_WBC_Support::eo_wbc_get_cart_url()));
+            exit(wp_redirect(wbc()->wc->eo_wbc_get_cart_url()));
             return;
         } 
 
@@ -31,7 +31,7 @@ class Preview {
         {
             $this->eo_wbc_add_this_to_cart();
             //Redirect to cart page.       
-            exit(wp_redirect(EO_WBC_Support::eo_wbc_get_cart_url()));
+            exit(wp_redirect(wbc()->wc->eo_wbc_get_cart_url()));
         }     
     }    
     
@@ -125,7 +125,7 @@ class Preview {
                                 $cart_details['FIRST'][0],
                                 $cart_details['FIRST'][1],
                                 $cart_details['FIRST'][2],
-                                is_null($cart_details['FIRST'][2])?null:EO_WBC_Support::eo_wbc_get_product_variation_attributes($cart_details['FIRST'][2])
+                                is_null($cart_details['FIRST'][2])?null:wbc()->wc->eo_wbc_get_product_variation_attributes($cart_details['FIRST'][2])
                             );                  
                 if($FIRT_CART_ID)
                 {
@@ -133,7 +133,7 @@ class Preview {
                                 $cart_details['SECOND'][0],
                                 $cart_details['SECOND'][1],
                                 $cart_details['SECOND'][2],
-                                is_null($cart_details['SECOND'][2])?null:EO_WBC_Support::eo_wbc_get_product_variation_attributes($cart_details['SECOND'][2])
+                                is_null($cart_details['SECOND'][2])?null:wbc()->wc->eo_wbc_get_product_variation_attributes($cart_details['SECOND'][2])
                             );
                     if($SECOND_CART_ID)
                     {
@@ -257,9 +257,10 @@ class Preview {
             $set=WC()->session->get('TMP_EO_WBC_SETS',FALSE);            
             if(!empty($set)){
 
-                $first=EO_WBC_Support::eo_wbc_get_product((int)($set['FIRST'][2]?$set['FIRST'][2]:$set['FIRST'][0]));
-                $second=EO_WBC_Support::eo_wbc_get_product((int)($set['SECOND'][2]?$set['SECOND'][2]:$set['SECOND'][0]));
+                $first=wbc()->wc->eo_wbc_get_product((int)($set['FIRST'][2]?$set['FIRST'][2]:$set['FIRST'][0]));
+                $second=wbc()->wc->eo_wbc_get_product((int)($set['SECOND'][2]?$set['SECOND'][2]:$set['SECOND'][0]));
 
+                wbc()->load->model('publics/component/EO_WBC_Breadcrumb');
                 $content= \eo\wbc\model\publics\component\EO_WBC_Breadcrumb::eo_wbc_add_breadcrumb(sanitize_text_field($_GET['STEP']),sanitize_text_field($_GET['BEGIN'])).'<br/>';
                 
                 $content.='<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><div class="ui special cards centered">'.
@@ -275,7 +276,7 @@ class Preview {
                           '</div>'.
                         '<div class="content">'.
                             '<div class="header">'.($first->get_title()).'</div>'.
-                            '<div class="meta">'.__($set['FIRST'][2]?"<br/>".implode('<br/>',EO_WBC_Support::eo_wbc_get_product_variation_attributes($set['FIRST'][2])):'').
+                            '<div class="meta">'.__($set['FIRST'][2]?"<br/>".implode('<br/>',wbc()->wc->eo_wbc_get_product_variation_attributes($set['FIRST'][2])):'').
                             '</div>'.
                         '</div>'.
                         '<div class="extra content">'.
@@ -297,7 +298,7 @@ class Preview {
                         '</div>'.
                         '<div class="content">'.
                             '<div class="header">'.__($second->get_title()).'</div>'.
-                            '<div class="meta">'.__($set['SECOND'][2]?"<br/>".implode('<br/>',EO_WBC_Support::eo_wbc_get_product_variation_attributes($set['SECOND'][2])):'').
+                            '<div class="meta">'.__($set['SECOND'][2]?"<br/>".implode('<br/>',wbc()->wc->eo_wbc_get_product_variation_attributes($set['SECOND'][2])):'').
                             '</div>'.
                         '</div>'.
                         '<div class="extra content">'.
@@ -315,7 +316,7 @@ class Preview {
                 return $content;
             } else {
                 
-                exit(wp_redirect(EO_WBC_Support::eo_wbc_get_cart_url()));                
+                exit(wp_redirect(wbc()->wc->eo_wbc_get_cart_url()));                
             }            
            
         });    

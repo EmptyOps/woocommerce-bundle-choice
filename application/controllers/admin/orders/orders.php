@@ -57,15 +57,15 @@ class Orders
    {   
        $price=0;
        $row="<tr>".
-           "<td style=\"min-width:330px;vertical-align: middle;\">".EO_WBC_Support::eo_wbc_get_product($set[0][0])->get_image("thumbnail")."&nbsp;";
+           "<td style=\"min-width:330px;vertical-align: middle;\">".wbc()->wc->eo_wbc_get_product($set[0][0])->get_image("thumbnail")."&nbsp;";
        if($set[1]){
-           $row.=EO_WBC_Support::eo_wbc_get_product($set[1][0])->get_image("thumbnail");
+           $row.=wbc()->wc->eo_wbc_get_product($set[1][0])->get_image("thumbnail");
        }
        $row.="</td>".
            "<td style=\"vertical-align: middle;\">".
-           "<h5>".EO_WBC_Support::eo_wbc_get_product($set[0][0])->get_title().($set[0][2]  ? "<br/>&nbsp; -".implode(',',EO_WBC_Support::eo_wbc_get_product_variation_attributes($set[0][2])):'')."</h5>";
+           "<h5>".wbc()->wc->eo_wbc_get_product($set[0][0])->get_title().($set[0][2]  ? "<br/>&nbsp; -".implode(',',wbc()->wc->eo_wbc_get_product_variation_attributes($set[0][2])):'')."</h5>";
        if($set[1]){
-           $row.="<h5>".EO_WBC_Support::eo_wbc_get_product($set[1][0])->get_title().($set[1][2]  ? "<br/>&nbsp; -".implode(',',EO_WBC_Support::eo_wbc_get_product_variation_attributes($set[1][2])):'')."</h5>";
+           $row.="<h5>".wbc()->wc->eo_wbc_get_product($set[1][0])->get_title().($set[1][2]  ? "<br/>&nbsp; -".implode(',',wbc()->wc->eo_wbc_get_product_variation_attributes($set[1][2])):'')."</h5>";
        }
        $row.="</td>".
            "<td style=\"vertical-align: middle;\">".

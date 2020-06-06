@@ -168,7 +168,7 @@ $form['data'] = array(
 											'label'=>'Filter Status',
 											'type'=>'checkbox',
 											'value'=>array(wbc()->options->get_option('configuration','filter_status')),
-											'options'=>array('config_filter_status'=>' Check here to enable horizontal filter bar at category page.'),
+											'options'=>array('1'=>' Check here to enable horizontal filter bar at category page.'),
 											'class'=>array(),
 											'size_class'=>array('eight','wide'),
 											'inline'=>true,
