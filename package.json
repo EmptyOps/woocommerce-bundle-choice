@@ -1,7 +1,7 @@
 {
   "name": "woocommerce-bundle-choice",
   "version": "1.0.0",
-  "description": "wordpress plugin to make ring builder widget",
+  "description": "woocommerce plugin to easily add ring builder feature on your site",
   "main": "index.js",
   "directories": {
     "test": "tests"
@@ -15,7 +15,7 @@
     "type": "git",
     "url": "git+https://github.com/EmptyOps/woocommerce-bundle-choice.git"
   },
-  "author": "Emptyops",
+  "author": "sphereplugins",
   "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/EmptyOps/woocommerce-bundle-choice/issues"
