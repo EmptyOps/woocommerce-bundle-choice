@@ -8,7 +8,7 @@ actor: AcceptanceTester
 modules:
     enabled:
         - PhpBrowser:
-            url: http://127.0.0.1:9000/EmptyOps/woocommerce-bundle-choice/  #$TRAVIS_BUILD_DIR #http://localhost/myapp
+            url: http://127.0.0.1:9000//home/travis/build/EmptyOps/woocommerce-bundle-choice  #$TRAVIS_BUILD_DIR #http://localhost/myapp
         - \Helper\Acceptance
     step_decorators: ~        
 
