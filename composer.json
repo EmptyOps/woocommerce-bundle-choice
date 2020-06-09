@@ -1,9 +1,11 @@
-{    
+{
     "require": {
         "woocommerce/woocommerce": "^3.8",
         "phpunit/phpunit": "5.7.*"
     },
     "require-dev": {
-        "codeception/codeception": "*",
-    }   
+        "codeception/codeception": "^4.1",
+        "codeception/module-phpbrowser": "^1.0.0",
+        "codeception/module-asserts": "^1.0.0"
+    }
 }
