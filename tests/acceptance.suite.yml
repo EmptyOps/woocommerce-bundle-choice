@@ -12,6 +12,6 @@ modules:
         - \Helper\Acceptance
     step_decorators: ~        
 
-echo "echoingnn TRAVIS_BUILD_DIR..."
-echo $TRAVIS_BUILD_DIR
+#echo "echoingnn TRAVIS_BUILD_DIR..."
+#echo $TRAVIS_BUILD_DIR
 #$php vendor/bin/codecept run --steps
