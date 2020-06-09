@@ -96,9 +96,9 @@ matrix:
             phpcs
           fi
 
-        # - php vendor/bin/codecept build
-        # - php vendor/bin/codecept run --steps --debug
-        - vendor/bin/wpcept run
+        - php vendor/bin/codecept build
+        - php vendor/bin/codecept run --steps --debug
+        # - vendor/bin/wpcept run
 
     # - language: node_js
     #   node_js:
