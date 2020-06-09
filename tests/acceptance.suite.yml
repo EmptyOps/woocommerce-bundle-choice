@@ -11,3 +11,6 @@ modules:
             url: http://127.0.0.1:9000 #http://localhost/myapp
         - \Helper\Acceptance
     step_decorators: ~        
+
+
+$php vendor/bin/codecept run --steps
