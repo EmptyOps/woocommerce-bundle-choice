@@ -52,7 +52,7 @@ download() {
 
 install_test_suite() {
 
-	WP_TESTS_DIR=${WP_TESTS_DIR-$WP_DEVELOP_DIR/wordpress-tests-lib}
+	WP_TESTS_DIR=${WP_TESTS_DIR-/tmp/wordpress-tests-lib}
 	DB_HOST=${4-localhost}
 	WP_CORE_DIR=${WP_CORE_DIR-$WP_DEVELOP_DIR/}
 
