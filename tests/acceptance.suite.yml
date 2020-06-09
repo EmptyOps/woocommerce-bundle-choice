@@ -1,17 +1,23 @@
-# Codeception Test Suite Configuration
-#
-# Suite for acceptance tests.
-# Perform tests in browser using the WebDriver or PhpBrowser.
-# If you need both WebDriver and PHPBrowser tests - create a separate suite.
+# # Codeception Test Suite Configuration
+# #
+# # Suite for acceptance tests.
+# # Perform tests in browser using the WebDriver or PhpBrowser.
+# # If you need both WebDriver and PHPBrowser tests - create a separate suite.
 
-actor: AcceptanceTester
+# actor: AcceptanceTester
+# modules:
+#     enabled:
+#         - PhpBrowser:
+#             url: http://127.0.0.1:9000//home/travis/build/EmptyOps/woocommerce-bundle-choice  #$TRAVIS_BUILD_DIR #http://localhost/myapp
+#         - \Helper\Acceptance
+#     step_decorators: ~        
+
+# #echo "echoingnn TRAVIS_BUILD_DIR..."
+# #echo $TRAVIS_BUILD_DIR
+# #$php vendor/bin/codecept run --steps
+
+# Codeception Acceptance Test Suite Configuration
+class_name: AcceptanceTester
 modules:
     enabled:
-        - PhpBrowser:
-            url: http://127.0.0.1:9000//home/travis/build/EmptyOps/woocommerce-bundle-choice  #$TRAVIS_BUILD_DIR #http://localhost/myapp
-        - \Helper\Acceptance
-    step_decorators: ~        
-
-#echo "echoingnn TRAVIS_BUILD_DIR..."
-#echo $TRAVIS_BUILD_DIR
-#$php vendor/bin/codecept run --steps
+        - WPWebDriver
