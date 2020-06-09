@@ -33,19 +33,19 @@ matrix:
       php: 7.2
       env: WP_VERSION=latest
       before_script:
-        - sudo apt-get update
-        - sudo apt-get install apache2 libapache2-mod-fastcgi
-        # enable php-fpm
-        - sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf
-        - sudo a2enmod rewrite actions fastcgi alias
-        - echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-        - sudo sed -i -e "s,www-data,travis,g" /etc/apache2/envvars
-        - sudo chown -R travis:travis /var/lib/apache2/fastcgi
-        - ~/.phpenv/versions/$(phpenv version-name)/sbin/php-fpm
-        # configure apache virtual hosts
-        - sudo cp -f build/travis-ci-apache /etc/apache2/sites-available/000-default.conf
-        - sudo sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-available/000-default.conf
-        - sudo service apache2 restart
+        # - sudo apt-get update
+        # - sudo apt-get install apache2 libapache2-mod-fastcgi
+        # # enable php-fpm
+        # - sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf
+        # - sudo a2enmod rewrite actions fastcgi alias
+        # - echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+        # - sudo sed -i -e "s,www-data,travis,g" /etc/apache2/envvars
+        # - sudo chown -R travis:travis /var/lib/apache2/fastcgi
+        # - ~/.phpenv/versions/$(phpenv version-name)/sbin/php-fpm
+        # # configure apache virtual hosts
+        # - sudo cp -f build/travis-ci-apache /etc/apache2/sites-available/000-default.conf
+        # - sudo sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-available/000-default.conf
+        # - sudo service apache2 restart
 
         - export PATH="$HOME/.composer/vendor/bin:$PATH"
         - |
@@ -56,16 +56,34 @@ matrix:
             echo "TRAVIS_BUILD_DIR... $TRAVIS_BUILD_DIR"
             echo "xdebug.ini does not exist"
           fi
-        - |
-          if [[ ! -z "$WP_VERSION" ]] ; then
-            bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
-            composer global require "phpunit/phpunit=5.*"
-          fi
+        # - |
+        #   if [[ ! -z "$WP_VERSION" ]] ; then
+        #     bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
+        #     composer global require "phpunit/phpunit=5.*"
+        #   fi
         - |
           if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
             composer global require wp-coding-standards/wpcs
             phpcs --config-set installed_paths $HOME/.composer/vendor/wp-coding-standards/wpcs
           fi
+
+        - ls -l ./
+
+        # Define vars.
+        - export WP_VERSION=master
+        - export WP_DEVELOP_DIR=/tmp/wordpress
+        - export WP_CORE_DIR=/tmp/wordpress/src
+        - export WP_CEPT_SERVER='127.0.0.1:8888'
+        # Install WordPress
+        - source travis.sh
+        - install-wordpress
+        # Start up a web server.
+        - php -S "$WP_CEPT_SERVER" -t "$WP_CORE_DIR" >/dev/null 2>&1 &
+        # Start up the webdriver.
+        - phantomjs --webdriver=4444 >/dev/null 2>&1 &
+        # Install Codeception and WP Browser.
+        # Doing this last gives the webdriver and server time to start up.
+        - composer install --prefer-source
 
       script:
         - |
@@ -78,8 +96,9 @@ matrix:
             phpcs
           fi
 
-        - php vendor/bin/codecept build
-        - php vendor/bin/codecept run --steps --debug
+        # - php vendor/bin/codecept build
+        # - php vendor/bin/codecept run --steps --debug
+        - vendor/bin/wpcept run
 
     # - language: node_js
     #   node_js:
