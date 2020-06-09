@@ -50,8 +50,10 @@ matrix:
         - export PATH="$HOME/.composer/vendor/bin:$PATH"
         - |
           if [ -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ]; then
+            echo "TRAVIS_BUILD_DIR... $TRAVIS_BUILD_DIR"
             phpenv config-rm xdebug.ini
           else
+            echo "TRAVIS_BUILD_DIR... $TRAVIS_BUILD_DIR"
             echo "xdebug.ini does not exist"
           fi
         - |
