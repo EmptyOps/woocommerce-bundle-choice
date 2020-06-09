@@ -77,7 +77,7 @@ matrix:
           fi
 
         - php vendor/bin/codecept build
-        - php vendor/bin/codecept run --steps
+        - php vendor/bin/codecept run --steps --debug
 
     # - language: node_js
     #   node_js:
