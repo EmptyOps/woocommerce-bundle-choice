@@ -42,6 +42,14 @@ install-wordpress() {
 	cd -
 }
 
+download() {
+    if [ `which curl` ]; then
+        curl -s "$1" > "$2";
+    elif [ `which wget` ]; then
+        wget -nv -O "$2" "$1"
+    fi
+}
+
 install_test_suite() {
 
 	WP_TESTS_DIR=${WP_TESTS_DIR-$WP_DEVELOP_DIR/wordpress-tests-lib}
