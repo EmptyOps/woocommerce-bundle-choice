@@ -75,7 +75,10 @@ matrix:
           if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
             phpcs
           fi
-          
+
+        - php vendor/bin/codecept build
+        - php vendor/bin/codecept run --steps
+
     # - language: node_js
     #   node_js:
     #     - "10.21.0"
