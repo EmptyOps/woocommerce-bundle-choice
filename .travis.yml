@@ -84,6 +84,7 @@ matrix:
         - phantomjs --webdriver=4444 >/dev/null 2>&1 &
         # Install Codeception and WP Browser.
         # Doing this last gives the webdriver and server time to start up.
+        - composer require codeception/module-webdriver --dev
         - composer install --prefer-source
         - composer update --prefer-source
 
