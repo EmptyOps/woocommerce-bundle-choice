@@ -141,8 +141,8 @@ composer_and_wp_plugins_install_update() {
 
     #build root
     composer require codeception/module-webdriver --dev
-    composer install --prefer-source
-    composer update --prefer-source
+    composer install #--prefer-source
+    composer update #--prefer-source
 }
 
 # EOF
