@@ -25,7 +25,8 @@ require_once $_tests_dir . '/includes/functions.php';
  */
 function _manually_load_plugin() {
 
-	require_once '/tmp/wordpress/wp-content/plugins/woocommerce/woocommerce.php';
+	// require_once '/tmp/wordpress/wp-content/plugins/woocommerce/woocommerce.php';
+	require_once '/tmp/wordpress/src/wp-content/plugins/woocommerce/woocommerce.php';
 	require dirname( dirname( __FILE__ ) ) . '/woocommerce-bundle-choice.php';
 }
 tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );
