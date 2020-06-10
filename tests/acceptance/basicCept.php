@@ -7,7 +7,6 @@
  * @since 1.0.0
  */
 
-var_dump( $scenario );
 $I = new AcceptanceTester( $scenario );
 $I->wantTo( 'Visit WordPress Dashboard' );
 $I->loginAsAdmin();
