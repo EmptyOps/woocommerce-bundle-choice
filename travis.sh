@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+WP_CORE_DIR=${WP_CORE_DIR-$WP_DEVELOP_DIR/}
+
 # Install WordPress.
 install-wordpress() {
 
@@ -54,7 +56,6 @@ install_test_suite() {
 
 	WP_TESTS_DIR=${WP_TESTS_DIR-/tmp/wordpress-tests-lib}
 	DB_HOST=${4-localhost}
-	WP_CORE_DIR=${WP_CORE_DIR-$WP_DEVELOP_DIR/}
 
 	WP_VERSION=${5-latest}
 
@@ -111,6 +112,25 @@ install_test_suite() {
 		sed $ioption "s|localhost|${DB_HOST}|" "$WP_TESTS_DIR"/wp-tests-config.php
 	fi
 
+}
+
+move_things() {
+	echo "Moving composer.json"
+	#composer config -g github-oauth.github.com $GIT_TOKEN
+	cp composer.json ${WP_CORE_DIR}
+	#commented and moved to composer function
+	# composer install -d ${WP_CORE_DIR}
+	# php /tmp/wordpress/wp plugin activate woocommerce
+}
+
+composer_and_wp_plugins_install_update() {
+
+	# composer install -d ${WP_CORE_DIR}
+	composer require codeception/module-webdriver -d ${WP_CORE_DIR} --dev
+    composer install -d ${WP_CORE_DIR} --prefer-source
+    composer update -d ${WP_CORE_DIR} --prefer-source
+
+	php /tmp/wordpress/wp plugin activate woocommerce
 }
 
 # EOF
