@@ -133,8 +133,8 @@ composer_and_wp_plugins_install_update() {
 
 	# composer install -d ${WP_CORE_DIR}
 	composer require codeception/module-webdriver -d ${WP_CORE_DIR} --dev
-    composer install -d ${WP_CORE_DIR} --prefer-source
-    composer update -d ${WP_CORE_DIR} --prefer-source
+    composer install -d ${WP_CORE_DIR} #--prefer-source
+    composer update -d ${WP_CORE_DIR} #--prefer-source
 
 	php /tmp/wordpress/wp plugin activate woocommerce
 }
