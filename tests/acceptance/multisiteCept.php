@@ -12,11 +12,11 @@ if ( ! getenv( 'WP_MULTISITE' ) ) {
 }
 
 $I = new AcceptanceTester( $scenario );
-$I->wantTo( 'Visit WordPress network Dashboard' );
-$I->loginAsAdmin();
-$I->see( 'Dashboard' );
-$I->amOnPage( '/wp-admin/network/' );
-$I->see( 'Network Admin' );
-$I->see( 'Create a New Site' );
+// $I->wantTo( 'Visit WordPress network Dashboard' );
+// $I->loginAsAdmin();
+// $I->see( 'Dashboard' );
+// $I->amOnPage( '/wp-admin/network/' );
+// $I->see( 'Network Admin' );
+// $I->see( 'Create a New Site' );
 
 // EOF
