@@ -16,6 +16,7 @@ class FirstCest
     	echo "Running the test...";
         $I->amOnPage('/');
         echo "Fetched the page...";
+        echo $I->grabPageSource();
         $I->see('Just another WordPress site');
     }
 }
