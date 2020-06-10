@@ -138,8 +138,8 @@ composer_and_wp_plugins_install_update() {
 
 	php /tmp/wordpress/wp plugin activate woocommerce
 
-	ls -l /tmp/wordpress/wp-content/plugins/
-	ls -l /tmp/wordpress/wp-content/plugins/woocommerce/
+	ls -l /tmp/wordpress/
+	# ls -l /tmp/wordpress/wp-content/plugins/woocommerce/
 }
 
 # EOF
