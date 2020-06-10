@@ -121,7 +121,9 @@ move_things() {
 
 	echo "Moving composer.json"
 	#composer config -g github-oauth.github.com $GIT_TOKEN
-	cp composer.json ${WP_CORE_DIR}
+	#cp composer.json ${WP_CORE_DIR}
+	mv composer.json ${WP_CORE_DIR}
+	
 	#commented and moved to composer function
 	# composer install -d ${WP_CORE_DIR}
 	# php /tmp/wordpress/wp plugin activate woocommerce
