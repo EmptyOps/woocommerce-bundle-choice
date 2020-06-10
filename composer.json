@@ -2,7 +2,7 @@
     "require": {
         "woocommerce/woocommerce": "^3.8",
         "phpunit/phpunit": "5.7.*",
-        "lucatume/wp-browser": "^1.14"
+        "lucatume/wp-browser": "*"
     },
     "require-dev": {
         "codeception/codeception": "^4.1",
