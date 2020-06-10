@@ -139,10 +139,10 @@ composer_and_wp_plugins_install_update() {
 
 	php /tmp/wordpress/wp plugin activate woocommerce
 
-    #build root
-    composer require codeception/module-webdriver --dev
-    composer install #--prefer-source
-    composer update #--prefer-source
+    # #build root
+    # composer require codeception/module-webdriver --dev
+    # composer install #--prefer-source
+    # composer update #--prefer-source
 }
 
 # EOF
