@@ -67,8 +67,6 @@ matrix:
             phpcs --config-set installed_paths $HOME/.composer/vendor/wp-coding-standards/wpcs
           fi
 
-        - ls -l ./
-
         # Define vars.
         - export WP_VERSION=master
         - export WP_DEVELOP_DIR=/tmp/wordpress
