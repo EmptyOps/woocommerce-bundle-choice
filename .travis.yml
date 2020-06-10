@@ -85,9 +85,6 @@ matrix:
         
         # Install Codeception and WP Browser.
         # Doing this last gives the webdriver and server time to start up.
-        # - composer require codeception/module-webdriver --dev
-        # - composer install --prefer-source
-        # - composer update --prefer-source
         - composer_and_wp_plugins_install_update
 
       script:

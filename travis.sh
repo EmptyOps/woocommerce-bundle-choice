@@ -131,12 +131,18 @@ move_things() {
 
 composer_and_wp_plugins_install_update() {
 
+	#wp root
 	# composer install -d ${WP_CORE_DIR}
-	composer require codeception/module-webdriver -d ${WP_CORE_DIR} --dev
+	#composer require codeception/module-webdriver -d ${WP_CORE_DIR} --dev
     composer install -d ${WP_CORE_DIR} #--prefer-source
-    composer update -d ${WP_CORE_DIR} #--prefer-source
+    #composer update -d ${WP_CORE_DIR} #--prefer-source
 
 	php /tmp/wordpress/wp plugin activate woocommerce
+
+    #build root
+    composer require codeception/module-webdriver --dev
+    composer install --prefer-source
+    composer update --prefer-source
 }
 
 # EOF
