@@ -137,6 +137,9 @@ composer_and_wp_plugins_install_update() {
     composer update -d ${WP_CORE_DIR} #--prefer-source
 
 	php /tmp/wordpress/wp plugin activate woocommerce
+
+	ls -l /tmp/wordpress/wp-content/plugins/
+	ls -l /tmp/wordpress/wp-content/plugins/woocommerce/
 }
 
 # EOF
