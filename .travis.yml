@@ -87,6 +87,8 @@ matrix:
         - git clone https://github.com/srimaln91/selenium-installer.git
         - cd selenium-installer
         - sudo bash selenium_install.sh
+        - selenium start
+        - cd ..
         
         # Install Codeception and WP Browser.
         # Doing this last gives the webdriver and server time to start up.
