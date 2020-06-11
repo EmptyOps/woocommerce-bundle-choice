@@ -150,6 +150,7 @@ composer_and_wp_plugins_install_update() {
 
     ls -l /tmp/wordpress/src/
     ls -l /tmp/wordpress/src/wp-content
+    ls -l /tmp/wordpress/src/wp-content/themes
 }
 
 # EOF
