@@ -87,14 +87,30 @@ matrix:
         #- phantomjs --webdriver=4444 >/dev/null 2>&1 &
         # - phantomjs --webdriver=4444 >/dev/null 2>&1 &
 
-        #selenium
-        - git clone https://github.com/srimaln91/selenium-installer.git
-        - cd selenium-installer
-        - sudo bash selenium_install.sh
-        - selenium start &
-        # - sleep 5s
-        - cd ..
+        # #selenium
+        # - git clone https://github.com/srimaln91/selenium-installer.git
+        # - cd selenium-installer
+        # - sudo bash selenium_install.sh
+        # - selenium start &
+        # # - sleep 5s
+        # - cd ..
         
+        #selenium, chrome etc. 
+        - echo "Config required"
+        - "export DISPLAY=:99.0"
+        - "sh -e /etc/init.d/xvfb start"
+        - sleep 3 # give xvfb some time to start
+
+        - echo "Download selenium-server-standalone jar file"
+        - wget -c -nc --retry-connrefused --tries=0 https://bit.ly/2TlkRyu -O selenium-server-standalone.jar
+
+        - echo "Download chromedriver"
+        - wget https://chromedriver.storage.googleapis.com/74.0.3729.6/chromedriver_linux64.zip
+        - unzip -o -q chromedriver_linux64.zip
+
+        - echo "Run selenium-server"
+        - nohup bash -c "java -jar selenium-server-standalone.jar &" && sleep 1; cat nohup.out
+
         # Install Codeception and WP Browser.
         # Doing this last gives the webdriver and server time to start up.
         - composer_and_wp_plugins_install_update
