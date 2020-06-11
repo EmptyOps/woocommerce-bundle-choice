@@ -113,7 +113,7 @@ matrix:
         - echo "Run selenium-server"
         # # - nohup bash -c "java -jar selenium-server-standalone.jar &" && sleep 1; cat nohup.out
         # - nohup bash -c "java -jar selenium-server-standalone.jar &" && sleep 1; 
-        - nohup bash -c "java -jar selenium-server-standalone.jar -Dwebdriver.chrome.driver=\"chromedriver\" -Dwebdriver.chrome.whitelistedIps=\"localhost\" &" && sleep 1; 
+        - nohup bash -c "java -jar selenium-server-standalone.jar -Dwebdriver.chrome.driver=\"chromedriver\" &" && sleep 1; 
 
 
         # Install Codeception and WP Browser.
