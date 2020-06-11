@@ -147,6 +147,8 @@ composer_and_wp_plugins_install_update() {
     # composer require codeception/module-webdriver --dev
     # composer install #--prefer-source
     # composer update #--prefer-source
+
+    ls -l /tmp/wordpress/src/wp-content/
 }
 
 # EOF
