@@ -23,4 +23,4 @@ class_name: AcceptanceTester
 #         - WPWebDriver
 modules:
     enabled:
-        - Selenium2
+        - selenium
