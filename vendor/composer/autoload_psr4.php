@@ -55,7 +55,7 @@ return array(
     'GuzzleHttp\\' => array($vendorDir . '/guzzlehttp/guzzle/src'),
     'Gettext\\Languages\\' => array($vendorDir . '/gettext/languages/src'),
     'Gettext\\' => array($vendorDir . '/gettext/gettext/src'),
-    'Facebook\\WebDriver\\' => array($vendorDir . '/php-webdriver/webdriver/lib'),
+    'Facebook\\WebDriver\\' => array($vendorDir . '/facebook/webdriver/lib', $vendorDir . '/php-webdriver/webdriver/lib'),
     'Doctrine\\Instantiator\\' => array($vendorDir . '/doctrine/instantiator/src/Doctrine/Instantiator'),
     'Doctrine\\Common\\Inflector\\' => array($vendorDir . '/doctrine/inflector/lib/Doctrine/Common/Inflector'),
     'DeepCopy\\' => array($vendorDir . '/myclabs/deep-copy/src/DeepCopy'),

@@ -12,25 +12,26 @@
 #         - \Helper\Acceptance
 #     step_decorators: ~        
 
-# Codeception Acceptance Test Suite Configuration
-class_name: AcceptanceTester
-# modules:
-#     enabled:
-#         - WPWebDriver
+# # Codeception Acceptance Test Suite Configuration
+# class_name: AcceptanceTester
+# # modules:
+# #     enabled:
+# #         - WPWebDriver
 
 # modules:
 #     enabled:
 #         - Selenium2
 
+actor: AcceptanceTester
 modules:
     enabled:
-        - WebDriver:
+        - WebDriver
+        - \Helper\Acceptance
+    config:
+        WebDriver:
             url: 'http://127.0.0.1:8888'
-            window_size: false # disabled in ChromeDriver
-            port: 9515
             browser: chrome
             capabilities:
                 "goog:chromeOptions":
                     args: ["--headless", "--disable-gpu", "--window-size=1024,768"]
-        - \Helper\Acceptance
-    step_decorators: ~        
+    step_decorators: ~    

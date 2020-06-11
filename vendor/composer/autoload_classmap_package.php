@@ -7,267 +7,271 @@ $baseDir   = dirname($vendorDir);
 
 return array( 
 	'tad\\WPBrowser\\Adapters\\PHPUnit\\Framework\\Assert' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Adapters/PHPUnit/Framework/Assert.php'
 	),
 	'tad\\WPBrowser\\Adapters\\Process' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Adapters/Process.php'
 	),
 	'tad\\WPBrowser\\Adapters\\WP' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Adapters/WP.php'
 	),
 	'tad\\WPBrowser\\Compat\\Codeception\\Version2\\Unit' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Compat/Codeception/Version2/Unit.php'
 	),
 	'tad\\WPBrowser\\Compat\\Compatibility' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Compat/Compatibility.php'
 	),
 	'tad\\WPBrowser\\Connector\\WordPress' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Connector/WordPress.php'
 	),
 	'tad\\WPBrowser\\Documentation\\TableGenerator' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Documentation/TableGenerator.php'
 	),
 	'tad\\WPBrowser\\Environment\\Constants' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Environment/Constants.php'
 	),
 	'tad\\WPBrowser\\Environment\\System' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Environment/System.php'
 	),
 	'tad\\WPBrowser\\Events\\EventDispatcherAdapter' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Events/EventDispatcherAdapter.php'
 	),
 	'tad\\WPBrowser\\Events\\WpbrowserEvent' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Events/WpbrowserEvent.php'
 	),
 	'tad\\WPBrowser\\Exceptions\\DumpException' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Exceptions/DumpException.php'
 	),
 	'tad\\WPBrowser\\Exceptions\\WpCliException' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Exceptions/WpCliException.php'
 	),
 	'tad\\WPBrowser\\Extension\\Copier' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Extension/Copier.php'
 	),
 	'tad\\WPBrowser\\Extension\\Events' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Extension/Events.php'
 	),
 	'tad\\WPBrowser\\Extension\\Symlinker' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Extension/Symlinker.php'
 	),
 	'tad\\WPBrowser\\Filesystem\\FileReplacers\\AbstractFileReplacer' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Filesystem/FileReplacers/AbstractFileReplacer.php'
 	),
 	'tad\\WPBrowser\\Filesystem\\FileReplacers\\HtaccesReplacer' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Filesystem/FileReplacers/HtaccesReplacer.php'
 	),
 	'tad\\WPBrowser\\Filesystem\\FileReplacers\\WPConfigReplacer' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Filesystem/FileReplacers/WPConfigReplacer.php'
 	),
 	'tad\\WPBrowser\\Filesystem\\Filesystem' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Filesystem/Filesystem.php'
 	),
 	'tad\\WPBrowser\\Generators\\Blog' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Generators/Blog.php'
 	),
 	'tad\\WPBrowser\\Generators\\Comment' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Generators/Comment.php'
 	),
 	'tad\\WPBrowser\\Generators\\Date' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Generators/Date.php'
 	),
 	'tad\\WPBrowser\\Generators\\Links' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Generators/Links.php'
 	),
 	'tad\\WPBrowser\\Generators\\Post' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Generators/Post.php'
 	),
 	'tad\\WPBrowser\\Generators\\RedirectingWPConfig' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Generators/RedirectingWPConfig.php'
 	),
 	'tad\\WPBrowser\\Generators\\Tables' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Generators/Tables.php'
 	),
 	'tad\\WPBrowser\\Generators\\TemplateProviderInterface' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Generators/TemplateProviderInterface.php'
 	),
 	'tad\\WPBrowser\\Generators\\User' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Generators/User.php'
 	),
 	'tad\\WPBrowser\\Generators\\WpPassword' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Generators/WpPassword.php'
 	),
 	'tad\\WPBrowser\\Iterators\\Filters\\ActionsQueriesFilter' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Iterators/Filters/ActionsQueriesFilter.php'
 	),
 	'tad\\WPBrowser\\Iterators\\Filters\\ClassMethodQueriesFilter' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Iterators/Filters/ClassMethodQueriesFilter.php'
 	),
 	'tad\\WPBrowser\\Iterators\\Filters\\FactoryQueriesFilter' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Iterators/Filters/FactoryQueriesFilter.php'
 	),
 	'tad\\WPBrowser\\Iterators\\Filters\\FiltersQueriesFilter' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Iterators/Filters/FiltersQueriesFilter.php'
 	),
 	'tad\\WPBrowser\\Iterators\\Filters\\FunctionQueriesFilter' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Iterators/Filters/FunctionQueriesFilter.php'
 	),
 	'tad\\WPBrowser\\Iterators\\Filters\\MainStatementQueriesFilter' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Iterators/Filters/MainStatementQueriesFilter.php'
 	),
 	'tad\\WPBrowser\\Iterators\\Filters\\QueriesCallerBasedFilterIterator' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Iterators/Filters/QueriesCallerBasedFilterIterator.php'
 	),
 	'tad\\WPBrowser\\Iterators\\Filters\\QueriesCallerBasedKeepingFilterIterator' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Iterators/Filters/QueriesCallerBasedKeepingFilterIterator.php'
 	),
 	'tad\\WPBrowser\\Iterators\\Filters\\SetupTearDownQueriesFilter' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Iterators/Filters/SetupTearDownQueriesFilter.php'
 	),
 	'tad\\WPBrowser\\Module\\Support\\DbDump' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Module/Support/DbDump.php'
 	),
 	'tad\\WPBrowser\\Module\\Support\\UriToIndexMapper' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Module/Support/UriToIndexMapper.php'
 	),
 	'tad\\WPBrowser\\Module\\Support\\WordPressDatabase' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Module/Support/WordPressDatabase.php'
 	),
 	'tad\\WPBrowser\\Module\\Support\\WordPressDirectories' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Module/Support/WordPressDirectories.php'
 	),
 	'tad\\WPBrowser\\Module\\Support\\WPHealthcheck' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Module/Support/WPHealthcheck.php'
 	),
 	'tad\\WPBrowser\\Module\\Traits\\WithEvents' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Module/Traits/WithEvents.php'
 	),
 	'tad\\WPBrowser\\Module\\WPLoader\\FactoryStore' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Module/WPLoader/FactoryStore.php'
 	),
 	'tad\\WPBrowser\\Module\\WPLoader\\Filters' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Module/WPLoader/Filters.php'
 	),
 	'tad\\WPBrowser\\Module\\WPLoader\\FiltersGroup' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Module/WPLoader/FiltersGroup.php'
 	),
 	'tad\\WPBrowser\\Polyfills\\Dotenv\\Dotenv' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Polyfills/Dotenv/Dotenv.php'
 	),
 	'tad\\WPBrowser\\Services\\WP\\Bootstrapper' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Services/WP/Bootstrapper.php'
 	),
 	'tad\\WPBrowser\\StubProphecy\\Arg' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/StubProphecy/Arg.php'
 	),
 	'tad\\WPBrowser\\StubProphecy\\ArgInterface' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/StubProphecy/ArgInterface.php'
 	),
 	'tad\\WPBrowser\\StubProphecy\\CeteraArg' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/StubProphecy/CeteraArg.php'
 	),
 	'tad\\WPBrowser\\StubProphecy\\MethodProphecy' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/StubProphecy/MethodProphecy.php'
 	),
 	'tad\\WPBrowser\\StubProphecy\\Promise' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/StubProphecy/Promise.php'
 	),
 	'tad\\WPBrowser\\StubProphecy\\StubProphecy' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/StubProphecy/StubProphecy.php'
 	),
 	'tad\\WPBrowser\\StubProphecy\\StubProphecyException' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/StubProphecy/StubProphecyException.php'
 	),
 	'tad\\WPBrowser\\Template\\Data' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Template/Data.php'
 	),
 	'tad\\WPBrowser\\Traits\\WithCodeceptionModuleConfig' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Traits/WithCodeceptionModuleConfig.php'
 	),
 	'tad\\WPBrowser\\Traits\\WithCodeceptionTestCaseEnhancements' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Traits/WithCodeceptionTestCaseEnhancements.php'
 	),
 	'tad\\WPBrowser\\Traits\\WithEvents' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Traits/WithEvents.php'
 	),
+	'tad\\WPBrowser\\Traits\\WithRequestTime' => array(
+		'version' => '2.6.1.0',
+		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Traits/WithRequestTime.php'
+	),
 	'tad\\WPBrowser\\Traits\\WithStubProphecy' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Traits/WithStubProphecy.php'
 	),
 	'tad\\WPBrowser\\Traits\\WithWordPressFilters' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Traits/WithWordPressFilters.php'
 	),
 	'tad\\WPBrowser\\Traits\\WithWpCli' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Traits/WithWpCli.php'
 	),
 	'tad\\WPBrowser\\Utils\\Configuration' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Utils/Configuration.php'
 	),
 	'tad\\WPBrowser\\Utils\\Map' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Utils/Map.php'
 	),
 	'phpDocumentor\\Reflection\\Element' => array(
@@ -4475,6 +4479,530 @@ return array(
 		'path'    => $vendorDir . '/gettext/gettext/src/Utils/StringReader.php'
 	),
 	'Facebook\\WebDriver\\AbstractWebDriverCheckboxOrRadio' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/AbstractWebDriverCheckboxOrRadio.php'
+	),
+	'Facebook\\WebDriver\\Chrome\\ChromeDriver' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Chrome/ChromeDriver.php'
+	),
+	'Facebook\\WebDriver\\Chrome\\ChromeDriverService' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Chrome/ChromeDriverService.php'
+	),
+	'Facebook\\WebDriver\\Chrome\\ChromeOptions' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Chrome/ChromeOptions.php'
+	),
+	'Facebook\\WebDriver\\Cookie' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Cookie.php'
+	),
+	'Facebook\\WebDriver\\Exception\\ElementNotSelectableException' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Exception/ElementNotSelectableException.php'
+	),
+	'Facebook\\WebDriver\\Exception\\ElementNotVisibleException' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Exception/ElementNotVisibleException.php'
+	),
+	'Facebook\\WebDriver\\Exception\\ExpectedException' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Exception/ExpectedException.php'
+	),
+	'Facebook\\WebDriver\\Exception\\IMEEngineActivationFailedException' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Exception/IMEEngineActivationFailedException.php'
+	),
+	'Facebook\\WebDriver\\Exception\\IMENotAvailableException' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Exception/IMENotAvailableException.php'
+	),
+	'Facebook\\WebDriver\\Exception\\IndexOutOfBoundsException' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Exception/IndexOutOfBoundsException.php'
+	),
+	'Facebook\\WebDriver\\Exception\\InvalidCookieDomainException' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Exception/InvalidCookieDomainException.php'
+	),
+	'Facebook\\WebDriver\\Exception\\InvalidCoordinatesException' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Exception/InvalidCoordinatesException.php'
+	),
+	'Facebook\\WebDriver\\Exception\\InvalidElementStateException' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Exception/InvalidElementStateException.php'
+	),
+	'Facebook\\WebDriver\\Exception\\InvalidSelectorException' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Exception/InvalidSelectorException.php'
+	),
+	'Facebook\\WebDriver\\Exception\\MoveTargetOutOfBoundsException' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Exception/MoveTargetOutOfBoundsException.php'
+	),
+	'Facebook\\WebDriver\\Exception\\NoAlertOpenException' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Exception/NoAlertOpenException.php'
+	),
+	'Facebook\\WebDriver\\Exception\\NoCollectionException' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Exception/NoCollectionException.php'
+	),
+	'Facebook\\WebDriver\\Exception\\NoScriptResultException' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Exception/NoScriptResultException.php'
+	),
+	'Facebook\\WebDriver\\Exception\\NoStringException' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Exception/NoStringException.php'
+	),
+	'Facebook\\WebDriver\\Exception\\NoStringLengthException' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Exception/NoStringLengthException.php'
+	),
+	'Facebook\\WebDriver\\Exception\\NoStringWrapperException' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Exception/NoStringWrapperException.php'
+	),
+	'Facebook\\WebDriver\\Exception\\NoSuchCollectionException' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Exception/NoSuchCollectionException.php'
+	),
+	'Facebook\\WebDriver\\Exception\\NoSuchDocumentException' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Exception/NoSuchDocumentException.php'
+	),
+	'Facebook\\WebDriver\\Exception\\NoSuchDriverException' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Exception/NoSuchDriverException.php'
+	),
+	'Facebook\\WebDriver\\Exception\\NoSuchElementException' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Exception/NoSuchElementException.php'
+	),
+	'Facebook\\WebDriver\\Exception\\NoSuchFrameException' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Exception/NoSuchFrameException.php'
+	),
+	'Facebook\\WebDriver\\Exception\\NoSuchWindowException' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Exception/NoSuchWindowException.php'
+	),
+	'Facebook\\WebDriver\\Exception\\NullPointerException' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Exception/NullPointerException.php'
+	),
+	'Facebook\\WebDriver\\Exception\\ScriptTimeoutException' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Exception/ScriptTimeoutException.php'
+	),
+	'Facebook\\WebDriver\\Exception\\SessionNotCreatedException' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Exception/SessionNotCreatedException.php'
+	),
+	'Facebook\\WebDriver\\Exception\\StaleElementReferenceException' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Exception/StaleElementReferenceException.php'
+	),
+	'Facebook\\WebDriver\\Exception\\TimeOutException' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Exception/TimeOutException.php'
+	),
+	'Facebook\\WebDriver\\Exception\\UnableToSetCookieException' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Exception/UnableToSetCookieException.php'
+	),
+	'Facebook\\WebDriver\\Exception\\UnexpectedAlertOpenException' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Exception/UnexpectedAlertOpenException.php'
+	),
+	'Facebook\\WebDriver\\Exception\\UnexpectedJavascriptException' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Exception/UnexpectedJavascriptException.php'
+	),
+	'Facebook\\WebDriver\\Exception\\UnexpectedTagNameException' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Exception/UnexpectedTagNameException.php'
+	),
+	'Facebook\\WebDriver\\Exception\\UnknownCommandException' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Exception/UnknownCommandException.php'
+	),
+	'Facebook\\WebDriver\\Exception\\UnknownServerException' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Exception/UnknownServerException.php'
+	),
+	'Facebook\\WebDriver\\Exception\\UnrecognizedExceptionException' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Exception/UnrecognizedExceptionException.php'
+	),
+	'Facebook\\WebDriver\\Exception\\UnsupportedOperationException' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Exception/UnsupportedOperationException.php'
+	),
+	'Facebook\\WebDriver\\Exception\\WebDriverCurlException' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Exception/WebDriverCurlException.php'
+	),
+	'Facebook\\WebDriver\\Exception\\WebDriverException' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Exception/WebDriverException.php'
+	),
+	'Facebook\\WebDriver\\Exception\\XPathLookupException' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Exception/XPathLookupException.php'
+	),
+	'Facebook\\WebDriver\\Firefox\\FirefoxDriver' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Firefox/FirefoxDriver.php'
+	),
+	'Facebook\\WebDriver\\Firefox\\FirefoxPreferences' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Firefox/FirefoxPreferences.php'
+	),
+	'Facebook\\WebDriver\\Firefox\\FirefoxProfile' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Firefox/FirefoxProfile.php'
+	),
+	'Facebook\\WebDriver\\Interactions\\Internal\\WebDriverButtonReleaseAction' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Interactions/Internal/WebDriverButtonReleaseAction.php'
+	),
+	'Facebook\\WebDriver\\Interactions\\Internal\\WebDriverClickAction' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Interactions/Internal/WebDriverClickAction.php'
+	),
+	'Facebook\\WebDriver\\Interactions\\Internal\\WebDriverClickAndHoldAction' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Interactions/Internal/WebDriverClickAndHoldAction.php'
+	),
+	'Facebook\\WebDriver\\Interactions\\Internal\\WebDriverContextClickAction' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Interactions/Internal/WebDriverContextClickAction.php'
+	),
+	'Facebook\\WebDriver\\Interactions\\Internal\\WebDriverCoordinates' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Interactions/Internal/WebDriverCoordinates.php'
+	),
+	'Facebook\\WebDriver\\Interactions\\Internal\\WebDriverDoubleClickAction' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Interactions/Internal/WebDriverDoubleClickAction.php'
+	),
+	'Facebook\\WebDriver\\Interactions\\Internal\\WebDriverKeyDownAction' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Interactions/Internal/WebDriverKeyDownAction.php'
+	),
+	'Facebook\\WebDriver\\Interactions\\Internal\\WebDriverKeysRelatedAction' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Interactions/Internal/WebDriverKeysRelatedAction.php'
+	),
+	'Facebook\\WebDriver\\Interactions\\Internal\\WebDriverKeyUpAction' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Interactions/Internal/WebDriverKeyUpAction.php'
+	),
+	'Facebook\\WebDriver\\Interactions\\Internal\\WebDriverMouseAction' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Interactions/Internal/WebDriverMouseAction.php'
+	),
+	'Facebook\\WebDriver\\Interactions\\Internal\\WebDriverMouseMoveAction' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Interactions/Internal/WebDriverMouseMoveAction.php'
+	),
+	'Facebook\\WebDriver\\Interactions\\Internal\\WebDriverMoveToOffsetAction' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Interactions/Internal/WebDriverMoveToOffsetAction.php'
+	),
+	'Facebook\\WebDriver\\Interactions\\Internal\\WebDriverSendKeysAction' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Interactions/Internal/WebDriverSendKeysAction.php'
+	),
+	'Facebook\\WebDriver\\Interactions\\Internal\\WebDriverSingleKeyAction' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Interactions/Internal/WebDriverSingleKeyAction.php'
+	),
+	'Facebook\\WebDriver\\Interactions\\Touch\\WebDriverDoubleTapAction' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Interactions/Touch/WebDriverDoubleTapAction.php'
+	),
+	'Facebook\\WebDriver\\Interactions\\Touch\\WebDriverDownAction' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Interactions/Touch/WebDriverDownAction.php'
+	),
+	'Facebook\\WebDriver\\Interactions\\Touch\\WebDriverFlickAction' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Interactions/Touch/WebDriverFlickAction.php'
+	),
+	'Facebook\\WebDriver\\Interactions\\Touch\\WebDriverFlickFromElementAction' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Interactions/Touch/WebDriverFlickFromElementAction.php'
+	),
+	'Facebook\\WebDriver\\Interactions\\Touch\\WebDriverLongPressAction' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Interactions/Touch/WebDriverLongPressAction.php'
+	),
+	'Facebook\\WebDriver\\Interactions\\Touch\\WebDriverMoveAction' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Interactions/Touch/WebDriverMoveAction.php'
+	),
+	'Facebook\\WebDriver\\Interactions\\Touch\\WebDriverScrollAction' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Interactions/Touch/WebDriverScrollAction.php'
+	),
+	'Facebook\\WebDriver\\Interactions\\Touch\\WebDriverScrollFromElementAction' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Interactions/Touch/WebDriverScrollFromElementAction.php'
+	),
+	'Facebook\\WebDriver\\Interactions\\Touch\\WebDriverTapAction' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Interactions/Touch/WebDriverTapAction.php'
+	),
+	'Facebook\\WebDriver\\Interactions\\Touch\\WebDriverTouchAction' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Interactions/Touch/WebDriverTouchAction.php'
+	),
+	'Facebook\\WebDriver\\Interactions\\Touch\\WebDriverTouchScreen' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Interactions/Touch/WebDriverTouchScreen.php'
+	),
+	'Facebook\\WebDriver\\Interactions\\WebDriverActions' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Interactions/WebDriverActions.php'
+	),
+	'Facebook\\WebDriver\\Interactions\\WebDriverCompositeAction' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Interactions/WebDriverCompositeAction.php'
+	),
+	'Facebook\\WebDriver\\Interactions\\WebDriverTouchActions' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Interactions/WebDriverTouchActions.php'
+	),
+	'Facebook\\WebDriver\\Internal\\WebDriverLocatable' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Internal/WebDriverLocatable.php'
+	),
+	'Facebook\\WebDriver\\JavaScriptExecutor' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/JavaScriptExecutor.php'
+	),
+	'Facebook\\WebDriver\\Net\\URLChecker' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Net/URLChecker.php'
+	),
+	'Facebook\\WebDriver\\Remote\\DesiredCapabilities' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Remote/DesiredCapabilities.php'
+	),
+	'Facebook\\WebDriver\\Remote\\DriverCommand' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Remote/DriverCommand.php'
+	),
+	'Facebook\\WebDriver\\Remote\\ExecuteMethod' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Remote/ExecuteMethod.php'
+	),
+	'Facebook\\WebDriver\\Remote\\FileDetector' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Remote/FileDetector.php'
+	),
+	'Facebook\\WebDriver\\Remote\\HttpCommandExecutor' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Remote/HttpCommandExecutor.php'
+	),
+	'Facebook\\WebDriver\\Remote\\LocalFileDetector' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Remote/LocalFileDetector.php'
+	),
+	'Facebook\\WebDriver\\Remote\\RemoteExecuteMethod' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Remote/RemoteExecuteMethod.php'
+	),
+	'Facebook\\WebDriver\\Remote\\RemoteKeyboard' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Remote/RemoteKeyboard.php'
+	),
+	'Facebook\\WebDriver\\Remote\\RemoteMouse' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Remote/RemoteMouse.php'
+	),
+	'Facebook\\WebDriver\\Remote\\RemoteTargetLocator' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Remote/RemoteTargetLocator.php'
+	),
+	'Facebook\\WebDriver\\Remote\\RemoteTouchScreen' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Remote/RemoteTouchScreen.php'
+	),
+	'Facebook\\WebDriver\\Remote\\RemoteWebDriver' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Remote/RemoteWebDriver.php'
+	),
+	'Facebook\\WebDriver\\Remote\\RemoteWebElement' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Remote/RemoteWebElement.php'
+	),
+	'Facebook\\WebDriver\\Remote\\Service\\DriverCommandExecutor' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Remote/Service/DriverCommandExecutor.php'
+	),
+	'Facebook\\WebDriver\\Remote\\Service\\DriverService' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Remote/Service/DriverService.php'
+	),
+	'Facebook\\WebDriver\\Remote\\UselessFileDetector' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Remote/UselessFileDetector.php'
+	),
+	'Facebook\\WebDriver\\Remote\\WebDriverBrowserType' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Remote/WebDriverBrowserType.php'
+	),
+	'Facebook\\WebDriver\\Remote\\WebDriverCapabilityType' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Remote/WebDriverCapabilityType.php'
+	),
+	'Facebook\\WebDriver\\Remote\\WebDriverCommand' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Remote/WebDriverCommand.php'
+	),
+	'Facebook\\WebDriver\\Remote\\WebDriverResponse' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Remote/WebDriverResponse.php'
+	),
+	'Facebook\\WebDriver\\Support\\Events\\EventFiringWebDriver' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Support/Events/EventFiringWebDriver.php'
+	),
+	'Facebook\\WebDriver\\Support\\Events\\EventFiringWebDriverNavigation' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Support/Events/EventFiringWebDriverNavigation.php'
+	),
+	'Facebook\\WebDriver\\Support\\Events\\EventFiringWebElement' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Support/Events/EventFiringWebElement.php'
+	),
+	'Facebook\\WebDriver\\Support\\XPathEscaper' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/Support/XPathEscaper.php'
+	),
+	'Facebook\\WebDriver\\WebDriver' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/WebDriver.php'
+	),
+	'Facebook\\WebDriver\\WebDriverAction' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/WebDriverAction.php'
+	),
+	'Facebook\\WebDriver\\WebDriverAlert' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/WebDriverAlert.php'
+	),
+	'Facebook\\WebDriver\\WebDriverBy' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/WebDriverBy.php'
+	),
+	'Facebook\\WebDriver\\WebDriverCapabilities' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/WebDriverCapabilities.php'
+	),
+	'Facebook\\WebDriver\\WebDriverCheckboxes' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/WebDriverCheckboxes.php'
+	),
+	'Facebook\\WebDriver\\WebDriverCommandExecutor' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/WebDriverCommandExecutor.php'
+	),
+	'Facebook\\WebDriver\\WebDriverDimension' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/WebDriverDimension.php'
+	),
+	'Facebook\\WebDriver\\WebDriverDispatcher' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/WebDriverDispatcher.php'
+	),
+	'Facebook\\WebDriver\\WebDriverElement' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/WebDriverElement.php'
+	),
+	'Facebook\\WebDriver\\WebDriverEventListener' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/WebDriverEventListener.php'
+	),
+	'Facebook\\WebDriver\\WebDriverExpectedCondition' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/WebDriverExpectedCondition.php'
+	),
+	'Facebook\\WebDriver\\WebDriverHasInputDevices' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/WebDriverHasInputDevices.php'
+	),
+	'Facebook\\WebDriver\\WebDriverKeyboard' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/WebDriverKeyboard.php'
+	),
+	'Facebook\\WebDriver\\WebDriverKeys' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/WebDriverKeys.php'
+	),
+	'Facebook\\WebDriver\\WebDriverMouse' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/WebDriverMouse.php'
+	),
+	'Facebook\\WebDriver\\WebDriverNavigation' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/WebDriverNavigation.php'
+	),
+	'Facebook\\WebDriver\\WebDriverOptions' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/WebDriverOptions.php'
+	),
+	'Facebook\\WebDriver\\WebDriverPlatform' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/WebDriverPlatform.php'
+	),
+	'Facebook\\WebDriver\\WebDriverPoint' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/WebDriverPoint.php'
+	),
+	'Facebook\\WebDriver\\WebDriverRadios' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/WebDriverRadios.php'
+	),
+	'Facebook\\WebDriver\\WebDriverSearchContext' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/WebDriverSearchContext.php'
+	),
+	'Facebook\\WebDriver\\WebDriverSelect' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/WebDriverSelect.php'
+	),
+	'Facebook\\WebDriver\\WebDriverSelectInterface' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/WebDriverSelectInterface.php'
+	),
+	'Facebook\\WebDriver\\WebDriverTargetLocator' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/WebDriverTargetLocator.php'
+	),
+	'Facebook\\WebDriver\\WebDriverTimeouts' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/WebDriverTimeouts.php'
+	),
+	'Facebook\\WebDriver\\WebDriverUpAction' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/WebDriverUpAction.php'
+	),
+	'Facebook\\WebDriver\\WebDriverWait' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/WebDriverWait.php'
+	),
+	'Facebook\\WebDriver\\WebDriverWindow' => array(
+		'version' => '1.7.1.0',
+		'path'    => $vendorDir . '/facebook/webdriver/lib/WebDriverWindow.php'
+	),
+	'Facebook\\WebDriver\\AbstractWebDriverCheckboxOrRadio' => array(
 		'version' => '1.8.2.0',
 		'path'    => $vendorDir . '/php-webdriver/webdriver/lib/AbstractWebDriverCheckboxOrRadio.php'
 	),
@@ -7495,135 +8023,135 @@ return array(
 		'path'    => $vendorDir . '/codeception/stub/src/Test/Feature/Stub.php'
 	),
 	'Codeception\\Command\\GenerateWPAjax' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/Codeception/Command/GenerateWPAjax.php'
 	),
 	'Codeception\\Command\\GenerateWPCanonical' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/Codeception/Command/GenerateWPCanonical.php'
 	),
 	'Codeception\\Command\\GenerateWPRestApi' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/Codeception/Command/GenerateWPRestApi.php'
 	),
 	'Codeception\\Command\\GenerateWPRestController' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/Codeception/Command/GenerateWPRestController.php'
 	),
 	'Codeception\\Command\\GenerateWPRestPostTypeController' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/Codeception/Command/GenerateWPRestPostTypeController.php'
 	),
 	'Codeception\\Command\\GenerateWPUnit' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/Codeception/Command/GenerateWPUnit.php'
 	),
 	'Codeception\\Command\\GenerateWPXMLRPC' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/Codeception/Command/GenerateWPXMLRPC.php'
 	),
 	'Codeception\\Lib\\Driver\\ExtendedDbDriver' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/Codeception/Lib/Driver/ExtendedDbDriver.php'
 	),
 	'Codeception\\Lib\\Driver\\ExtendedMySql' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/Codeception/Lib/Driver/ExtendedMySql.php'
 	),
 	'Codeception\\Lib\\Generator\\AbstractGenerator' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/Codeception/Lib/Generator/AbstractGenerator.php'
 	),
 	'Codeception\\Lib\\Generator\\AcceptanceSuiteConfig' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/Codeception/Lib/Generator/AcceptanceSuiteConfig.php'
 	),
 	'Codeception\\Lib\\Generator\\FunctionalSuiteConfig' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/Codeception/Lib/Generator/FunctionalSuiteConfig.php'
 	),
 	'Codeception\\Lib\\Generator\\GeneratorInterface' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/Codeception/Lib/Generator/GeneratorInterface.php'
 	),
 	'Codeception\\Lib\\Generator\\IntegrationSuiteConfig' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/Codeception/Lib/Generator/IntegrationSuiteConfig.php'
 	),
 	'Codeception\\Lib\\Generator\\IntegrationSuiteThemeConfig' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/Codeception/Lib/Generator/IntegrationSuiteThemeConfig.php'
 	),
 	'Codeception\\Lib\\Generator\\WPUnit' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/Codeception/Lib/Generator/WPUnit.php'
 	),
 	'Codeception\\Module\\WordPress' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/Codeception/Module/WordPress.php'
 	),
 	'Codeception\\Module\\WPBrowser' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/Codeception/Module/WPBrowser.php'
 	),
 	'Codeception\\Module\\WPBrowserMethods' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/Codeception/Module/WPBrowserMethods.php'
 	),
 	'Codeception\\Module\\WPCLI' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/Codeception/Module/WPCLI.php'
 	),
 	'Codeception\\Module\\WPDb' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/Codeception/Module/WPDb.php'
 	),
 	'Codeception\\Module\\WPFilesystem' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/Codeception/Module/WPFilesystem.php'
 	),
 	'Codeception\\Module\\WPLoader' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/Codeception/Module/WPLoader.php'
 	),
 	'Codeception\\Module\\WPQueries' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/Codeception/Module/WPQueries.php'
 	),
 	'Codeception\\Module\\WPWebDriver' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/Codeception/Module/WPWebDriver.php'
 	),
 	'Codeception\\Template\\Wpbrowser' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/Codeception/Template/Wpbrowser.php'
 	),
 	'Codeception\\TestCase\\WPAjaxTestCase' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/Codeception/TestCase/WPAjaxTestCase.php'
 	),
 	'Codeception\\TestCase\\WPCanonicalTestCase' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/Codeception/TestCase/WPCanonicalTestCase.php'
 	),
 	'Codeception\\TestCase\\WPRestApiTestCase' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/Codeception/TestCase/WPRestApiTestCase.php'
 	),
 	'Codeception\\TestCase\\WPRestControllerTestCase' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/Codeception/TestCase/WPRestControllerTestCase.php'
 	),
 	'Codeception\\TestCase\\WPRestPostTypeControllerTestCase' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/Codeception/TestCase/WPRestPostTypeControllerTestCase.php'
 	),
 	'Codeception\\TestCase\\WPTestCase' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/Codeception/TestCase/WPTestCase.php'
 	),
 	'Codeception\\TestCase\\WPXMLRPCTestCase' => array(
-		'version' => '2.6.0.0',
+		'version' => '2.6.1.0',
 		'path'    => $vendorDir . '/lucatume/wp-browser/src/Codeception/TestCase/WPXMLRPCTestCase.php'
 	),
 	'Carbon\\Carbon' => array(
@@ -10218,6 +10746,10 @@ return array(
 		'version' => '2.0.2.0',
 		'path'    => $vendorDir . '/phpunit/php-token-stream/src/Token.php'
 	),
+	'SebastianBergmann\\Exporter\\Exporter' => array(
+		'version' => '2.0.0.0',
+		'path'    => $vendorDir . '/sebastian/exporter/src/Exporter.php'
+	),
 	'SebastianBergmann\\Environment\\Console' => array(
 		'version' => '2.0.0.0',
 		'path'    => $vendorDir . '/sebastian/environment/src/Console.php'
@@ -10225,10 +10757,6 @@ return array(
 	'SebastianBergmann\\Environment\\Runtime' => array(
 		'version' => '2.0.0.0',
 		'path'    => $vendorDir . '/sebastian/environment/src/Runtime.php'
-	),
-	'SebastianBergmann\\Exporter\\Exporter' => array(
-		'version' => '2.0.0.0',
-		'path'    => $vendorDir . '/sebastian/exporter/src/Exporter.php'
 	),
 	'SebastianBergmann\\RecursionContext\\Context' => array(
 		'version' => '2.0.0.0',
