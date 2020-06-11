@@ -148,7 +148,7 @@ composer_and_wp_plugins_install_update() {
     # composer install #--prefer-source
     # composer update #--prefer-source
 
-    ls -l /tmp/wordpress/src/wp-content/
+    ls -l /tmp/wordpress/src/
 }
 
 # EOF
