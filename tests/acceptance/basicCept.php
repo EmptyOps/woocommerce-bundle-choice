@@ -11,5 +11,6 @@ $I = new AcceptanceTester( $scenario );
 $I->wantTo( 'Visit WordPress Dashboard' );
 $I->loginAsAdmin();
 // $I->see( 'Dashboard' );
+echo $I->grabPageSource();
 
 // EOF
