@@ -18,6 +18,10 @@ install-wordpress() {
 	sed -i "s/yourusernamehere/root/" wp-config.php
 	sed -i "s/yourpasswordhere//" wp-config.php
 
+	#set debug mode, temporarily,
+	sed -i -e "s/define('WP_DEBUG', false);/define('WP_DEBUG', true);/g" wp-config.php
+	sed -i -e 's/define("WP_DEBUG", false);/define("WP_DEBUG", true);/g' wp-config.php
+
 	# Set up database.
 	mysql -e 'CREATE DATABASE wordpress_test;' -uroot
 
