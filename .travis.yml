@@ -89,6 +89,7 @@ matrix:
         - cd selenium-installer
         - sudo bash selenium_install.sh
         - selenium start &
+        # - sleep 5s
         - cd ..
         
         # Install Codeception and WP Browser.
