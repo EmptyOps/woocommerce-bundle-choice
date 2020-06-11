@@ -109,7 +109,8 @@ matrix:
         - unzip -o -q chromedriver_linux64.zip
 
         - echo "Run selenium-server"
-        - nohup bash -c "java -jar selenium-server-standalone.jar &" && sleep 1; cat nohup.out
+        # - nohup bash -c "java -jar selenium-server-standalone.jar &" && sleep 1; cat nohup.out
+        - nohup bash -c "java -jar selenium-server-standalone.jar &" && sleep 1; 
 
         # Install Codeception and WP Browser.
         # Doing this last gives the webdriver and server time to start up.
