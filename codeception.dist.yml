@@ -20,7 +20,7 @@ settings:
 #             adminUrl: /wp-admin
 modules:
     config:
-        Selenium2:
+        selenium:
             url: 'http://127.0.0.1:8888'
             browser: phantomjs
             window_size: '1024x768'
