@@ -33,5 +33,5 @@ modules:
             browser: chrome
             capabilities:
                 "goog:chromeOptions":
-                    args: ["--headless", "--disable-gpu", "--window-size=1024,768"]
+                    args: ["--headless", "--disable-gpu", "--window-size=1024,768", "--enable-javascript"]
     step_decorators: ~    
