@@ -13,7 +13,7 @@
 #     step_decorators: ~        
 
 # # Codeception Acceptance Test Suite Configuration
-# class_name: AcceptanceTester
+class_name: AcceptanceTester
 # # modules:
 # #     enabled:
 # #         - WPWebDriver
@@ -22,7 +22,7 @@
 #     enabled:
 #         - Selenium2
 
-actor: AcceptanceTester
+# actor: AcceptanceTester
 modules:
     enabled:
         - WebDriver
