@@ -32,6 +32,10 @@ env:
     
 matrix:
   include:
+    - language: node_js
+      node_js:
+        - "10.21.0"
+
     - language: php
       php: 7.2
       env: WP_VERSION=latest
