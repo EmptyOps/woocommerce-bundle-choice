@@ -153,6 +153,7 @@ composer_and_wp_plugins_install_update() {
 
 	#move and activate woo choice plugin itself to wp dir
 	mkdir /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice
+	mkdir /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/
 	mv -R application/* /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/
 
     # #build root
