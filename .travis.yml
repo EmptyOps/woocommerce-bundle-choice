@@ -21,7 +21,7 @@ services:
 
 cache:
   directories:
-    - $HOME/.composer/cache
+    - $HOME/.composer/cache_switch
 
 env:
   global:
