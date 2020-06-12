@@ -13,10 +13,8 @@ class FirstCest
 
 	public function homePageWorks(AcceptanceTester $I)
     {
-    	echo "Running the test...";
-        $I->amOnPage('/');
-        echo "Fetched the page...";
-        echo $I->grabPageSource();
+    	$I->amOnPage('/');
+        // echo $I->grabPageSource();
         $I->see('Just another WordPress site');
     }
 

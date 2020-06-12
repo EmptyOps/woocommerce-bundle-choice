@@ -151,6 +151,10 @@ composer_and_wp_plugins_install_update() {
 
 	php /tmp/wordpress/wp plugin activate woocommerce
 
+	#move and activate woo choice plugin itself to wp dir
+	mkdir /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice
+	mv -R application/* /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/
+
     # #build root
     # composer require codeception/module-webdriver --dev
     # composer install #--prefer-source
@@ -158,8 +162,8 @@ composer_and_wp_plugins_install_update() {
 
     ls -l /tmp/wordpress/src/
     ls -l /tmp/wordpress/src/wp-content
-    ls -l /tmp/wordpress/src/wp-content/themes
-    ls -l /tmp/wordpress/src/wp-content/themes/twentyseventeen
+    ls -l /tmp/wordpress/src/wp-content/plugins
+    ls -l /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application
 }
 
 # EOF
