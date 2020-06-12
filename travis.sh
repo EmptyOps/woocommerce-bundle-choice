@@ -8,7 +8,7 @@ install-wordpress() {
 	mkdir -p "$WP_DEVELOP_DIR"
 
 	# Clone the WordPress develop repo.
-	# git clone --depth=1 --branch="$WP_VERSION" git://develop.git.wordpress.org/ "$WP_DEVELOP_DIR"
+	git clone --depth=1 --branch="$WP_VERSION" git://develop.git.wordpress.org/ "$WP_DEVELOP_DIR"
 
 	cd "$WP_DEVELOP_DIR"
 
@@ -46,7 +46,7 @@ install-wordpress() {
 	echo "require_once(ABSPATH . 'wp-settings.php');" >> wp-config.php
 
 	#
-	npm install
+	# npm install
 
 	cd -
 }

@@ -32,13 +32,13 @@ env:
     
 matrix:
   include:
-    - language: node_js
-      node_js:
-        - "10.21.0"
+    # - language: node_js
+    #   node_js:
+    #     - "10.21.0"
 
     - language: php
       php: 7.2
-      env: WP_VERSION=latest
+      # env: WP_VERSION=latest
       before_script:
         # - sudo apt-get update
         # - sudo apt-get install apache2 libapache2-mod-fastcgi
