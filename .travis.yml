@@ -131,7 +131,7 @@ matrix:
 
         #install normal wordpress
         - echo "curl based install..."
-        - curl --data "user_name=USERNAMEHERE&admin_password=PasswordHere&admin_password2=PasswordHere&admin_email=username@email.addr&blog_public=checked&Submit=submit" "$WP_CEPT_SERVER/wp-admin/install.php?step=2 
+        - curl --data "user_name=USERNAMEHERE&admin_password=PasswordHere&admin_password2=PasswordHere&admin_email=username@email.addr&blog_public=checked&Submit=submit" "$WP_CEPT_SERVER/wp-admin/install.php?step=2" 
 
       script:
         - |
