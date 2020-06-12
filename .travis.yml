@@ -129,6 +129,10 @@ matrix:
         # Doing this last gives the webdriver and server time to start up.
         - composer_and_wp_plugins_install_update
 
+        #install normal wordpress
+        - echo "curl based install..."
+        - curl --data "user_name=USERNAMEHERE&admin_password=PasswordHere&admin_password2=PasswordHere&admin_email=username@email.addr&blog_public=checked&Submit=submit" "$WP_CEPT_SERVER/wp-admin/install.php?step=2 
+
       script:
         - |
           if [[ ! -z "$WP_VERSION" ]] ; then
