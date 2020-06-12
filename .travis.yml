@@ -38,13 +38,13 @@ env:
     
 matrix:
   include:
-    - language: node_js
-      node_js:
-        - "10.21.0"
-      before_script:
-        - sleep 30s
-        - echo "cd to WP_DEVELOP_DIR..."
-        - cd $WP_DEVELOP_DIR
+    # - language: node_js
+    #   node_js:
+    #     - "10.21.0"
+    #   before_script:
+    #     - sleep 30s
+    #     - echo "cd to WP_DEVELOP_DIR..."
+    #     - cd $WP_DEVELOP_DIR
 
     - language: php
       php: 7.2

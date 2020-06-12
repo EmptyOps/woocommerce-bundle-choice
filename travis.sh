@@ -10,7 +10,8 @@ install-wordpress() {
 	# Clone the WordPress develop repo.
 	# git clone --depth=1 --branch="$WP_VERSION" git://develop.git.wordpress.org/ "$WP_DEVELOP_DIR"
 	# git clone --depth=1 --branch="$WP_VERSION" https://github.com/WordPress/WordPress "$WP_DEVELOP_DIR"
-	git clone --depth=1 --branch="$WP_VERSION" https://github.com/WordPress/wordpress-develop "$WP_DEVELOP_DIR"
+	# git clone --depth=1 --branch="$WP_VERSION" https://github.com/WordPress/wordpress-develop "$WP_DEVELOP_DIR"
+	cp -R wordpress-dev-light-php-only/* "$WP_DEVELOP_DIR/"
 
 	cd "$WP_DEVELOP_DIR"
 
