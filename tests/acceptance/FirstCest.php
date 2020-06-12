@@ -21,7 +21,7 @@ class FirstCest
     public function shopPageWorks(AcceptanceTester $I)
     {
         echo "Running the test...";
-        $I->amOnPage('shop');
+        $I->amOnPage('index.php/shop');
         echo "Fetched the page...";
         echo $I->grabPageSource();
         $I->see('Shop');
