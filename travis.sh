@@ -46,7 +46,7 @@ install-wordpress() {
 	echo "require_once(ABSPATH . 'wp-settings.php');" >> wp-config.php
 
 	#
-	# npm install
+	npm install
 
 	cd -
 }
