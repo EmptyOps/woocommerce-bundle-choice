@@ -8,15 +8,20 @@ install-wordpress() {
 	mkdir -p "$WP_DEVELOP_DIR"
 
 	# Clone the WordPress develop repo.
-	git clone --depth=1 --branch="$WP_VERSION" git://develop.git.wordpress.org/ "$WP_DEVELOP_DIR"
+	# git clone --depth=1 --branch="$WP_VERSION" git://develop.git.wordpress.org/ "$WP_DEVELOP_DIR"
+	git clone --depth=1 --branch="$WP_VERSION" https://github.com/WordPress/WordPress "$WP_DEVELOP_DIR"
 
 	cd "$WP_DEVELOP_DIR"
 
 	# Set up tests config.
-	cp wp-tests-config-sample.php wp-config.php
-	sed -i "s/youremptytestdbnamehere/wordpress_test/" wp-config.php
-	sed -i "s/yourusernamehere/root/" wp-config.php
-	sed -i "s/yourpasswordhere//" wp-config.php
+	# cp wp-tests-config-sample.php wp-config.php
+	cp wp-config-sample.php wp-config.php
+	# sed -i "s/youremptytestdbnamehere/wordpress_test/" wp-config.php
+	# sed -i "s/yourusernamehere/root/" wp-config.php
+	# sed -i "s/yourpasswordhere//" wp-config.php
+	sed -i "s/database_name_here/wordpress_test/" wp-config.php
+	sed -i "s/username_here/root/" wp-config.php
+	sed -i "s/password_here//" wp-config.php
 
 	#set debug mode, temporarily,
 	sed -i -e "s/define('WP_DEBUG', false);/define('WP_DEBUG', true);/g" wp-config.php
@@ -29,7 +34,8 @@ install-wordpress() {
 	sed -i "s/'example.org'/'$WP_CEPT_SERVER'/" wp-config.php
 
 	# Install.
-	php tests/phpunit/includes/install.php wp-config.php "$WP_MULTISITE"
+	# php tests/phpunit/includes/install.php wp-config.php "$WP_MULTISITE"
+	php wp-admin/install.php wp-config.php "$WP_MULTISITE"
 
 	# Support multisite.
 	if [[ $WP_MULTISITE = 1 ]]; then
@@ -45,8 +51,8 @@ install-wordpress() {
 	# Update the config to actually load WordPress.
 	echo "require_once(ABSPATH . 'wp-settings.php');" >> wp-config.php
 
-	#
-	npm install
+	# #
+	# npm install
 
 	cd -
 }
