@@ -11,7 +11,7 @@ class FirstCest
     // {
     // }
 
-	public function frontpageWorks(AcceptanceTester $I)
+	public function homePageWorks(AcceptanceTester $I)
     {
     	echo "Running the test...";
         $I->amOnPage('/');
@@ -19,4 +19,14 @@ class FirstCest
         echo $I->grabPageSource();
         $I->see('Just another WordPress site');
     }
+
+    public function shopPageWorks(AcceptanceTester $I)
+    {
+        echo "Running the test...";
+        $I->amOnPage('shop');
+        echo "Fetched the page...";
+        echo $I->grabPageSource();
+        $I->see('Shop');
+    }
+
 }
