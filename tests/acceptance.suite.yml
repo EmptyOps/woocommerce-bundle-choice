@@ -26,12 +26,12 @@ class_name: AcceptanceTester
 modules:
     enabled:
         - WebDriver
-        - \Helper\Acceptance
+        # - \Helper\Acceptance
     config:
         WebDriver:
             url: 'http://127.0.0.1:8888'
             browser: chrome
             capabilities:
                 "goog:chromeOptions":
-                    args: ["--headless", "--disable-gpu", "--window-size=1024,768", "--enable-javascript"]
-    step_decorators: ~    
+                    args: ["--disable-gpu", "--window-size=1024,768", "--enable-javascript"]
+    # step_decorators: ~    
