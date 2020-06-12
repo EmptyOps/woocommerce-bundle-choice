@@ -53,6 +53,9 @@ install-wordpress() {
 	echo "require_once(ABSPATH . 'wp-settings.php');" >> wp-config.php
 
 	#
+	nvm install 10.21.0
+	node --version
+	npm --version
 	npm install
 
 	cd -
