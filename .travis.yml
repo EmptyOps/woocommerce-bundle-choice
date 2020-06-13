@@ -19,6 +19,10 @@ services:
   - mysql 
   - xvfb
 
+before_install:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS wordpress_test;'  
+  - mysql -u root --default-character-set=utf8 wordpress_test < wordpress-from-wordpress.org-download/wordpress/db.sql
+
 cache:
   directories:
     - $HOME/.composer/cache_switch

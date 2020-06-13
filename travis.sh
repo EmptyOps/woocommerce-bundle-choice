@@ -32,16 +32,16 @@ install-wordpress() {
 	# sed -i -e "s/define('WP_DEBUG', false);/define('WP_DEBUG', true);/g" wp-config.php
 	# sed -i -e 's/define("WP_DEBUG", false);/define("WP_DEBUG", true);/g' wp-config.php
 
-	# Set up database.
-	mysql -e 'CREATE DATABASE wordpress_test;' -uroot
+	# # Set up database.
+	# mysql -e 'CREATE DATABASE wordpress_test;' -uroot
 
-	#populate db  when from local copy
-	echo "populating database"
-	mysql_config_editor set --login-path=local --host=localhost --user=root --password
-	echo "populating database 1"
-	# mysql -uroot --password='' -p wordpress_test < db.sql
-	mysql --login-path=local  -p wordpress_test < db.sql
-	echo "populating database done"
+	# #populate db  when from local copy
+	# echo "populating database"
+	# mysql_config_editor set --login-path=local --host=localhost --user=root --password
+	# echo "populating database 1"
+	# # mysql -uroot --password='' -p wordpress_test < db.sql
+	# mysql --login-path=local  -p wordpress_test < db.sql
+	# echo "populating database done"
 	
 
 	# # Configure WordPress for access through a web server.
