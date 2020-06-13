@@ -5,6 +5,7 @@ WP_CORE_DIR=${WP_CORE_DIR-$WP_DEVELOP_DIR/}
 # Install WordPress.
 install-wordpress() {
 
+	echo "installing wordpress"
 	mkdir -p "$WP_DEVELOP_DIR"
 
 	# Clone the WordPress develop repo.
@@ -36,6 +37,7 @@ install-wordpress() {
 	mysql -e 'CREATE DATABASE wordpress_test;' -uroot
 
 	#populate db  when from local copy
+	echo "populating database"
 	mysql -uroot -p'' -p wordpress_test < db.sql
 
 
