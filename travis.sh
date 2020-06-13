@@ -149,13 +149,12 @@ move_things() {
 
 composer_and_wp_plugins_install_update() {
 
-	#wp root
-	# composer install -d ${WP_CORE_DIR}
-	#composer require codeception/module-webdriver -d ${WP_CORE_DIR} --dev
-    composer install -d ${WP_CORE_DIR} #--prefer-source
-    #composer update -d ${WP_CORE_DIR} #--prefer-source
-
-	php /tmp/wordpress/wp plugin activate woocommerce
+	# #wp root
+	# # composer install -d ${WP_CORE_DIR}
+	# #composer require codeception/module-webdriver -d ${WP_CORE_DIR} --dev
+ #    composer install -d ${WP_CORE_DIR} #--prefer-source
+ #    #composer update -d ${WP_CORE_DIR} #--prefer-source
+	# php /tmp/wordpress/wp plugin activate woocommerce
 
 	#move and activate woo choice plugin itself to wp dir
 	mkdir /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice
