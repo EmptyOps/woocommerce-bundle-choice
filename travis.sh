@@ -37,7 +37,7 @@ install-wordpress() {
 
 	#populate db  when from local copy
 	echo "populating database"
-	mysql -uroot -p'' -p wordpress_test < db.sql
+	mysql -uroot -p'' < db.sql
 	echo "populating database done"
 	
 
