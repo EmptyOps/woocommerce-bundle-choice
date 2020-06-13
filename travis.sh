@@ -37,7 +37,7 @@ install-wordpress() {
 
 	#populate db  when from local copy
 	echo "populating database"
-	mysql_config_editor set --login-path=local --host=localhost --user=root --password=''
+	mysql_config_editor set --login-path=local --host=localhost --user=root --password
 	echo "populating database 1"
 	# mysql -uroot --password='' -p wordpress_test < db.sql
 	mysql --login-path=local  -p wordpress_test < db.sql
