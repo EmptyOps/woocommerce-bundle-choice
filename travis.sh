@@ -36,7 +36,7 @@ install-wordpress() {
 	mysql -e 'CREATE DATABASE wordpress_test;' -uroot
 
 	#populate db  when from local copy
-	echo -e "\n" | mysql -u root -p wordpress_test < db.sql
+	mysql -uroot -p'' -p wordpress_test < db.sql
 
 
 	# # Configure WordPress for access through a web server.
