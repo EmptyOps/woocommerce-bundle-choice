@@ -25,7 +25,7 @@ class_name: AcceptanceTester
 # actor: AcceptanceTester
 modules:
     enabled:
-        - WebDriver
+        - WPWebDriver
         # - \Helper\Acceptance
     config:
         WPWebDriver:
