@@ -6,10 +6,10 @@ class wordpressWooCommerceCest
     {
     }
 
-    // tests
-    public function tryToTest(AcceptanceTester $I)
-    {
-    }
+    // // tests
+    // public function tryToTest(AcceptanceTester $I)
+    // {
+    // }
 
     
 	public function homePageWorks(AcceptanceTester $I)
