@@ -13,7 +13,9 @@ class adminConfigurationCest
 
 	public function testSaveOptions(AcceptanceTester $I) {
 
+		//login to admin panel 
 		$I->loginAsAdmin();
+		$I->see( 'Dashboard' );
 
 		$I->amOnPage('/wp-admin/admin.php?page=eowbc');
 		// $I->fillField('username', 'davert');
