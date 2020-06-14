@@ -34,6 +34,9 @@ modules:
         WPWebDriver:
             url: 'http://127.0.0.1:8888'
             browser: chrome
+            adminUsername: admin
+            adminPassword: password
+            adminUrl: /wp-admin
             capabilities:
                 "goog:chromeOptions":
                     args: ["--disable-gpu", "--window-size=1024,768", "--enable-javascript"]
