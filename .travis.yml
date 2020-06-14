@@ -148,6 +148,7 @@ matrix:
         #     phpcs
         #   fi
 
+        - php vendor/bin/codecept clean
         - php vendor/bin/codecept build
         - php vendor/bin/codecept run --steps --debug
         # - vendor/bin/wpcept run
