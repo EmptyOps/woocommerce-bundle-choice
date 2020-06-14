@@ -13,8 +13,11 @@ if ( ! getenv( 'WP_MULTISITE' ) ) {
 
 $I = new AcceptanceTester( $scenario );
 // $I->wantTo( 'Visit WordPress network Dashboard' );
+
+//important: loginAsAdmin function will require wp-browser module enabled in codeception yml settings
 // $I->loginAsAdmin();
 // $I->see( 'Dashboard' );
+
 // $I->amOnPage( '/wp-admin/network/' );
 // $I->see( 'Network Admin' );
 // $I->see( 'Create a New Site' );

@@ -28,7 +28,7 @@ modules:
         - WebDriver
         # - \Helper\Acceptance
     config:
-        WebDriver:
+        WPWebDriver:
             url: 'http://127.0.0.1:8888'
             browser: chrome
             capabilities:

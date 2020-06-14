@@ -170,6 +170,9 @@ composer_and_wp_plugins_install_update() {
 	# git clone --depth=1 --branch=dev https://github.com/EmptyOps/woocommerce-bundle-choice /tmp/wordpress/src/wp-content/plugins
 	php /tmp/wordpress/wp plugin activate woocommerce-bundle-choice
 
+	#call sh function to adjust test files/folders
+	move_and_remove_tests
+
     # #build root
     # composer require codeception/module-webdriver --dev
     # composer install #--prefer-source
@@ -179,6 +182,22 @@ composer_and_wp_plugins_install_update() {
     ls -l /tmp/wordpress/src/wp-content
     ls -l /tmp/wordpress/src/wp-content/plugins
     ls -l /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application
+}
+
+#create sh function to remove unwanted test from site test folder and build root dir test folder
+move_and_remove_tests() {
+
+	##first adjust tests folder on site dir
+	#better than that is to run simple post form acceptance tests on the admin panel woo choice plugin pages directly  
+
+	#adjust test folder on build root dir
+	#if acceptance test is used for admin then remove below listed dir and files from the repo itself so that on travis no need to do below clean up
+	rm -rf "$TRAVIS_BUILD_DIR"/tests/library
+	rm -rf "$TRAVIS_BUILD_DIR"/tests/model
+	rm -rf "$TRAVIS_BUILD_DIR"/tests/view
+	rm -rf "$TRAVIS_BUILD_DIR"/tests/wc
+	rm -f "$TRAVIS_BUILD_DIR"/tests/bootstrap.php
+
 }
 
 # EOF
