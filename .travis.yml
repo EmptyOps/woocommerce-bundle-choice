@@ -150,7 +150,7 @@ matrix:
 
         - php vendor/bin/codecept clean
         - php vendor/bin/codecept build
-        - php vendor/bin/codecept run --steps --debug
+        - php vendor/bin/codecept run acceptance --steps --debug
         # - vendor/bin/wpcept run
 
     # - language: node_js
