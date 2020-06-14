@@ -163,10 +163,11 @@ composer_and_wp_plugins_install_update() {
 	# php /tmp/wordpress/wp plugin activate woocommerce
 
 	#clone/move and activate woo choice plugin itself to wp dir
-	# mkdir /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice
+	mkdir /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice
 	# mkdir /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/
 	# mv -R application/* /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/
-	git clone --depth=1 --branch=dev https://github.com/EmptyOps/woocommerce-bundle-choice /tmp/wordpress/src/wp-content/plugins
+	cp -R "$TRAVIS_BUILD_DIR"/* /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/
+	# git clone --depth=1 --branch=dev https://github.com/EmptyOps/woocommerce-bundle-choice /tmp/wordpress/src/wp-content/plugins
 	php /tmp/wordpress/wp plugin activate woocommerce-bundle-choice
 
     # #build root
