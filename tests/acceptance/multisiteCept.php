@@ -8,7 +8,7 @@
  */
 
 if ( ! getenv( 'WP_MULTISITE' ) ) {
-	$scenario->skip( 'Multisite must be enabled.' );
+	$scenario->skip( 'Multisite test skipped, kept the example here for future reference.' );
 }
 
 $I = new AcceptanceTester( $scenario );
