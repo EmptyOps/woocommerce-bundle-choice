@@ -11,22 +11,9 @@ class adminConfigurationCest
     // {
     // }
 
-    public function homePageWorks(AcceptanceTester $I)
-    {
-    	$I->amOnPage('/');
-        // echo $I->grabPageSource();
-        $I->see('Just another WordPress site');
-    }
-
-    public function shopPageWorks(AcceptanceTester $I)
-    {
-        $I->amOnPage('index.php/shop');
-        // echo $I->grabPageSource();
-        $I->see('Shop');
-    }
-
 	public function testSaveOptions(AcceptanceTester $I) {
 
+		$I->loginAsAdmin();
 
 		$I->amOnPage('/wp-admin/admin.php?page=eowbc');
 		// $I->fillField('username', 'davert');
