@@ -1,12 +1,17 @@
-<?php
+<?php 
 
-class  Admin_Configuration_Test {
-	
-	public function _before(AcceptanceTester $I)
+class adminConfigurationCest
+{
+    public function _before(AcceptanceTester $I)
     {
     }
 
-	public function homePageWorks(AcceptanceTester $I)
+    // // tests
+    // public function tryToTest(AcceptanceTester $I)
+    // {
+    // }
+
+    public function homePageWorks(AcceptanceTester $I)
     {
     	$I->amOnPage('/');
         // echo $I->grabPageSource();
@@ -20,7 +25,7 @@ class  Admin_Configuration_Test {
         $I->see('Shop');
     }
 
-	public function test_save_options(AcceptanceTester $I) {
+	public function testSaveOptions(AcceptanceTester $I) {
 
 
 		$I->amOnPage('/wp-admin/admin.php?page=eowbc');
@@ -66,5 +71,6 @@ class  Admin_Configuration_Test {
 		require_once constant('EOWBC_DIRECTORY').'application/controllers/ajax/'.sanitize_text_field($_POST['resolver']).'.php';
 		$result = get_option('eowbc_option_configuration',"a:0:{}");
 		$this->assertEquals($expected , $result);
-	}	
+	}
+
 }
