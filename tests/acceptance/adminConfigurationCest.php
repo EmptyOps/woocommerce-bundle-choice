@@ -20,8 +20,8 @@ class adminConfigurationCest
 		$I->amOnPage('/wp-admin/admin.php?page=eowbc');
 		// $I->fillField('username', 'davert');
 		// $I->fillField('password', 'qwerty');
-		$I->click('Configuration');
 		echo $I->grabPageSource();
+		$I->click('Configuration');
 		return;
 		$I->see('Welcome, Davert!');
 
