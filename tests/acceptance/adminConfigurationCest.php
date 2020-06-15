@@ -29,10 +29,11 @@ class adminConfigurationCest
 		$I->see('Choose where you want to display buttons on home page');
 
 		// select button position
-		// $I->selectOption('form select[name=config_buttons_page]', 'Premium');
-		// $I->fillField('config_buttons_page', '1');
-		$I->click('#config_buttons_page_dropdown_div');
-		$I->click('Home page only');	//('#config_buttons_page_dropdown_div > div.menu.transition.visible > div:nth-child(2)');
+		// // $I->selectOption('form select[name=config_buttons_page]', 'Premium');
+		// // $I->fillField('config_buttons_page', '1');	
+		// $I->click('#config_buttons_page_dropdown_div');
+		// $I->click('Home page only');	//('#config_buttons_page_dropdown_div > div.menu.transition.visible > div:nth-child(2)');
+		$I->executeJS("jQuery('#config_buttons_page_dropdown_div').dropdown('set selected', 1);");	//better than setting 1 directly is to select the nth element that has value 1 
 
 		// save 
 		$I->click('Save');
