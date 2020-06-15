@@ -35,7 +35,9 @@ jQuery(document).ready(function($){
     $('button.ui.button[data-action="save"]').on('click',function(e){
         e.preventDefault();
         e.stopPropagation();
-        var form = jQuery(document).find('form').has(this);
+        var $this = this;
+        //var form = jQuery(document).find('form').has(this);
+        var form = jQuery(this).closest('form');
         
         /*
         *   send Ajax request to save the configurations.
@@ -85,6 +87,9 @@ jQuery(document).ready(function($){
                     //     position: 'bottom right',
                     //     message: (typeof(resjson["msg"]) != undefined && resjson["msg"] != "" ? resjson["msg"] : `Saved!`)
                     // });
+                    if($($this).is('[data-callback]')){
+                        $($this).trigger($($this).data('callback'));
+                    }
                     $('body').toast({
                         class:'success',
                         position: 'bottom right',
@@ -147,14 +152,23 @@ jQuery(document).ready(function($){
                     cbs.push( cb );    
                 }
             });
-
-            eowbc_do_delete(cbs, jQuery(this).data("tab_key"));   
+            
+            if(cbs.length>0){
+                eowbc_do_delete(cbs, jQuery(this).data("tab_key"));       
+            }
         }
         else {
             eowbc_toast_common( "warning", "Please select bulk action to apply" );
         }
     });
 
+    jQuery(document).ready(function(){
+        jQuery(".question.circle.outline.eo_help.icon").popup({hoverable:true,onShow:function(){jQuery('.ui.popup').css('max-height', jQuery(window).height());}});
+    });
+
+    $(".ui.negative.message .close.icon").click(function(){
+        jQuery(".ui.negative.message").addClass('transition hidden');
+    });
 });
 
 function eowbc_toast_common( toast_type_class, msg ) {
@@ -173,7 +187,7 @@ function eowbc_do_delete( cbs, saved_tab_key ) {
         }
 
         var form = jQuery(cbs[0]).closest("form");
-
+        console.log(form);
         jQuery.ajax({
             url:eowbc_object.admin_url,
             type: 'POST',

@@ -22,6 +22,7 @@ if ( ! class_exists( 'Filters' ) ) {
 		public static function get_form_definition( $is_add_sample_values = false ) {
 			
 			wbc()->load->model('admin/form-builder');
+			wbc()->load->model('category-attribute');
 			$inventory_type = wbc()->options->get_option('setting_status_setting_status_setting','inventory_type','');			
 			//Diamond Page Filter Configuration's list
 			$table = array();
@@ -208,7 +209,33 @@ if ( ! class_exists( 'Filters' ) ) {
 									'class'=>array(),
 									'size_class'=>array('eight','wide'),
 									'inline'=>true,
-								),							
+								),
+							'filter_setting_price_filter_width'=>array(
+								'label'=>'Price filter\'s column width',
+								'type'=>'text',
+								'value'=>wbc()->options->get_option('filters_filter_setting','filter_setting_price_filter_width','50%'),
+								'class'=>array(),
+								'size_class'=>array('eight','wide'),
+								'inline'=>true,
+							),	
+							'filter_setting_alternate_mobile'=>array(
+								'label'=>'Alternate mobile filters view',
+								'type'=>'checkbox',
+								'value'=>array(wbc()->options->get_option('filters_filter_setting','filter_setting_alternate_mobile')),
+								'options'=>array('filter_setting_alternate_mobile'=>' Check here to enable alternate filter view for mobile.'),
+								'class'=>array(),
+								'size_class'=>array('eight','wide'),
+								'inline'=>true,
+							),
+							'filter_setting_alternate_slider_ui'=>array(
+								'label'=>'Alternate ticked slider UI',
+								'type'=>'checkbox',
+								'value'=>array(wbc()->options->get_option('filters_filter_setting','filter_setting_alternate_slider_ui')),
+								'options'=>array('filter_setting_alternate_slider_ui'=>' Check here to enable alternate UI for filter sliders.'),
+								'class'=>array(),
+								'size_class'=>array('eight','wide'),
+								'inline'=>true,
+							),						
 							'filter_setting_submit_btn'=>array(
 								'label'=>eowbc_lang('Save'),
 								'type'=>'button',
@@ -308,7 +335,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							'd_fconfig_filter'=>array(
 								'type'=>'select',
 								'value'=>'',
-								'options'=>array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
+								'options'=>array_replace(\eo\wbc\model\Category_Attribute::instance()->get_category(),\eo\wbc\model\Category_Attribute::instance()->get_attributs()),
 								'class'=>array('fluid'),
 								'size_class'=>array('three','wide'),
 								'attr'=>array("document.getElementById('d_fconfig_type').value=this.options[this.selectedIndex].getAttribute('data-type')")
@@ -402,7 +429,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							'd_fconfig_input_type'=>array(
 								'type'=>'select',
 								'value'=>'',
-								'options'=>array('0'=>'Icon Only'),
+								'options'=>array('icon'=>'Icon Only','icon_text'=>'Icon and Text','numeric_slider'=>'Numeric slider','text_slider'=>'Text slider','checkbox'=>'Checkbox'),
 								'class'=>array('fluid'),
 								'size_class'=>array('three','wide'),
 								// 'prev_inline'=>true,
@@ -453,7 +480,11 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'prev_inline'=>true,
 								// 'inline'=>true,
 							),
-
+							'd_fconfig_note_label'=>array(
+								'label'=>"<strong>Note:Since you want to use icons with attributes filter this plugin will enable icon option for attributes on woocommerce page, so please set icons from there.</strong>",
+								'type'=>"label",
+								'size_class'=>array('transition','hidden')
+							),
 							'd_fconfig_submit_btn'=>array(
 								'label'=>eowbc_lang('Save'),
 								'type'=>'button',
@@ -505,7 +536,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							's_fconfig_filter'=>array(
 								'type'=>'select',
 								'value'=>'',
-								'options'=>array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
+								'options'=>array_replace(\eo\wbc\model\Category_Attribute::instance()->get_category(),\eo\wbc\model\Category_Attribute::instance()->get_attributs()),
 								'class'=>array('fluid'),
 								'size_class'=>array('three','wide'),
 								'attr'=>array("document.getElementById('s_fconfig_type').value=this.options[this.selectedIndex].getAttribute('data-type')")
@@ -599,7 +630,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							's_fconfig_input_type'=>array(
 								'type'=>'select',
 								'value'=>'',
-								'options'=>array('0'=>'Icon Only'),
+								'options'=>array('icon'=>'Icon Only','icon_text'=>'Icon and Text','numeric_slider'=>'Numeric slider','text_slider'=>'Text slider','checkbox'=>'Checkbox'),
 								'class'=>array('fluid'),
 								'size_class'=>array('three','wide'),
 								// 'prev_inline'=>true,
@@ -650,7 +681,11 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'prev_inline'=>true,
 								// 'inline'=>true,
 							),
-
+							's_fconfig_note_label'=>array(
+								'label'=>"<strong>Note:Since you want to use icons with attributes filter this plugin will enable icon option for attributes on woocommerce page, so please set icons from there.</strong>",
+								'type'=>"label",
+								'size_class'=>array('transition','hidden')
+							),
 							's_fconfig_submit_btn'=>array(
 								'label'=>eowbc_lang('Save'),
 								'type'=>'button',
