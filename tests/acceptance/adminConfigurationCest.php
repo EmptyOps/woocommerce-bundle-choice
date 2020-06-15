@@ -21,7 +21,7 @@ class adminConfigurationCest
 		$I->amOnPage('/wp-admin/admin.php?page=eowbc');
 		// $I->fillField('username', 'davert');
 		// $I->fillField('password', 'qwerty');
-		echo $I->grabPageSource();
+		// echo $I->grabPageSource();
 		
 		// go to the tab
 		$I->click('General');
@@ -29,10 +29,11 @@ class adminConfigurationCest
 		$I->see('Choose where you want to display buttons on home page');
 
 		// select button position
-
+		// $I->selectOption('form select[name=config_buttons_page]', 'Premium');
+		$I->fillField('config_buttons_page', '1');
 
 		// save 
-
+		$I->click('Save');
 	}
 
 	// public function testSaveOptions(AcceptanceTester $I) {
