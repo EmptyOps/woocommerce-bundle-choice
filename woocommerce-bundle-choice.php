@@ -152,6 +152,8 @@ if(!class_exists('WooCommerce_Bundle_Choice')) {
 			do_action( 'after_eowbc_load' );			
 		}
 	}
+	wp_die("plugin seems to be called, means its active.");
+
 	add_action( 'plugins_loaded', function() {
 		wbc()->construct_init();
 	});
