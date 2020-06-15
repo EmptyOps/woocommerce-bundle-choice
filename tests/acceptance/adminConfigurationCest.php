@@ -11,16 +11,15 @@ class adminConfigurationCest
     // {
     // }
 
-    public function configureButtons(AcceptanceTester $I) {
+    public function configureButtonPosition(AcceptanceTester $I) {
 
 		//login to admin panel, should save and maintain cookies so that do not need to login on all admin test. but yeah however during the front end test should flush the admin cookie first.  
 		$I->loginAsAdmin();
 		$I->see( 'Dashboard' );
 
+		/* buttons tab */
 		// go to the page
 		$I->amOnPage('/wp-admin/admin.php?page=eowbc');
-		// $I->fillField('username', 'davert');
-		// $I->fillField('password', 'qwerty');
 		// echo $I->grabPageSource();
 		
 		// go to the tab
@@ -37,8 +36,37 @@ class adminConfigurationCest
 
 		// save 
 		$I->click('Save');
+
 	}
 
+	public function configureBreadcrumbNavigationsSteps(AcceptanceTester $I) {
+
+		//login to admin panel, should save and maintain cookies so that do not need to login on all admin test. but yeah however during the front end test should flush the admin cookie first.  
+		$I->loginAsAdmin();
+		$I->see( 'Dashboard' );
+
+		// go to the page
+		$I->amOnPage('/wp-admin/admin.php?page=eowbc');
+
+		/* Navigations Steps( Breadcrumb ) tab */
+		// go to the tab
+		$I->click('General');
+		$I->click('Navigations Steps( Breadcrumb )');
+		$I->see('First Category');
+
+		// select category
+		$I->executeJS("jQuery('#config_first_name_dropdown_div').dropdown('set selected', 15);");	//better than setting val directly is to select the nth element that has value val 
+		$I->executeJS("jQuery('#config_second_name_dropdown_div').dropdown('set selected', 15);");	//better than setting val directly is to select the nth element that has value val 
+
+		// set preview text
+		$I->fillField('config_preview_name', 'Preview');
+
+		// save 
+		$I->click('Save');
+
+	}
+
+	//HOLD FOR REMOVAL: but before removing below one first confirm that all the unit tests in the below function are covered in the new acceptance tests 
 	// public function testSaveOptions(AcceptanceTester $I) {
 
 	// 	//login to admin panel, should save and maintain cookies so that do not need to login on all admin test. but yeah however during the front end test should flush the admin cookie first.  
