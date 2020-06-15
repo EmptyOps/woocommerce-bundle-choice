@@ -48,6 +48,8 @@ class Eowbc_Appearance {
 	    $res["msg"] = "";
 		wbc()->load->model('admin\form-builder');
 
+		/*$res["post"] = $_POST;*/
+
 	    //loop through form tabs and save 
 
 	    foreach ($form_definition as $key => $tab) {

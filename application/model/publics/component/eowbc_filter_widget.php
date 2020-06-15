@@ -1,32 +1,136 @@
 <?php
 namespace eo\wbc\model\publics\component;
 
-class EO_WBC_Filter_Widget {
+class EOWBC_Filter_Widget {
+
+	private static $_instance = null;
+
+	public static function instance() {
+		if ( ! isset( self::$_instance ) ) {
+			self::$_instance = new self;
+		}
+
+		return self::$_instance;
+	}
 
 	function __construct()
 	{	        		
-		$this->_category=$this->eo_wbc_get_category();
-		if(!empty($this->_category)){
 		
-			if(get_option('eo_wbc_dropdown_filter',false) and !wp_is_mobile()) {
+	}
 
-				require_once 'includes/dropdown_filter.php';				
+	public function get_widget_standalone(array $filter) {
+		
+		$this->_category = '';
+		$current_category=$this->_category;
+		$this->eo_wbc_filter_enque_asset();
 
-			} else {
-				$this->get_widget();
-				$this->eo_wbc_filter_enque_asset();	
+		$prefix = "";
+		
+		//Hidden input filter lists.
+		$this->__filters=array();
+		//Advance filters count
+		$advance_count=0;		
+		//Category Filters
+		$this->___category=array();
+		//Attribute Filters
+		$_attr_list=array();
+
+		$non_adv_ordered_filter=array();
+		$adv_ordered_filter=array();
+
+		if(!(is_array($filter) xor is_object($filter)) or empty($filter)) return false;
+
+		//map fields to names as per older version, applies to this code block only. 
+		$field_to_old_fields = array(
+			$prefix.'_fconfig_filter'=>'name',
+            $prefix.'_fconfig_type'=>'type',
+            $prefix.'_fconfig_label'=>'label',
+            $prefix.'_fconfig_is_advanced'=>'advance',
+            $prefix.'_fconfig_dependent'=>'dependent',
+            $prefix.'_fconfig_input_type'=>'input',
+            $prefix.'_fconfig_column_width'=>'column_width',
+            $prefix.'_fconfig_ordering'=>'order',
+            $prefix.'_fconfig_icon_size'=>'icon_size',
+            $prefix.'_fconfig_icon_label_size'=>'font_size',
+            $prefix.'_fconfig_add_reset_link'=>'reset',
+		);
+		foreach ($filter as $key => $item) {
+			foreach ($item as $kitm => $vitm) {
+				if( array_key_exists($kitm, $field_to_old_fields) && !empty($field_to_old_fields[$kitm]) ) {
+					$filter[$key][$field_to_old_fields[$kitm]] = $vitm;
+				}
 			}
-			
-
-		} else {
-
-			//EO_WBC_Log_Message("Could not find current category in EO_WBC_Frontend\EO_WBC_Filter_Widget.php");
-			EOWBC_Error_Handler::log('Could not find current category in eo\wbc\model\publics\component\EO_WBC_Filter_Widget');
 		}
+
+		foreach ($filter as $key => $item) {
+
+			if($item['advance']==0){
+				$item['order']= ( empty($item['order'])?(-1*count($non_adv_ordered_filter)):$item['order']);
+				
+				$item['column_width']= ( empty($item['column_width']) ? '50' : $item['column_width'] );
+
+				$non_adv_ordered_filter[$item['order']]=$item;				
+			}
+			else{
+				$item['order']= ( empty($item['order'])?(-1*count($adv_ordered_filter)):$item['order']);
+
+				$item['column_width']= ( empty($item['column_width']) ? '50' : $item['column_width'] );
+
+				$adv_ordered_filter[$item['order']]=$item;
+			}
+		}		
+		ksort($non_adv_ordered_filter);
+		ksort($adv_ordered_filter);
+
+		?>
+		<!--Primary filter button that will only be visible on desktop/tablet-->
+		<!-- This widget is created with Wordpress plugin - WooCommerce Product bundle choice -->
+		<div id="loading"></div>
+		    							
+		<?php 
+			if(wp_is_mobile()) {
+
+				
+				if(!is_wp_error($non_adv_ordered_filter) and !empty($non_adv_ordered_filter)) {
+
+				?>
+					<div class="ui grid container centered" style="margin-left: 0 !important; margin-right: 0 !important">
+						<div class="row">
+							<div class="ui button primary fluid" id="primary_filter" style="border-radius: 0 0 0 0;margin-right: 0;">Filters&nbsp;&nbsp;<i class="ui icon angle up"></i></div>
+						</div>
+					</div>
+				<?php
+
+				}				
+				?>
+					<div class="eo-wbc-container filters container">
+						<div class="ui segments">    			
+				<?php
+				$this->load_mobile($non_adv_ordered_filter, $adv_ordered_filter);
+				?>		</div>
+					</div>
+				<?php
+
+				if( !empty($adv_ordered_filter) ) {
+					?>
+					<div class="ui grid centered">
+						<div class="row">
+							<div class="ui button primary" id="advance_filter" style="border-radius: 0 0 0 0;width: fit-content !important;">Advance Filter&nbsp;<i class="ui icon angle double up"></i></div>
+						</div>
+					</div>
+					<?php			
+				}
+
+			} else {				
+				$this->load_desktop($non_adv_ordered_filter, $adv_ordered_filter);				
+			}
+		
+		wbc()->load->template('publics/filters/form', array("thisObj"=>$this,"current_category"=>$current_category)); 				
 	}
 
 	public function eo_wbc_filter_enque_asset() {
-
+		wbc()->load->asset('css','fomantic/semantic.min');
+		wbc()->load->asset('js','fomantic/semantic.min');
 		$current_category=$this->_category;
 		$site_url=site_url();
 
@@ -186,7 +290,9 @@ class EO_WBC_Filter_Widget {
 	}		
 
 	public function product_url() {
-		$url='?EO_WBC=1'.
+		$url = '';
+		if(!empty($_GET['BEGIN']) and !empty($_GET['STEP']) and isset($_GET['FIRST']) and isset($_GET['SECOND'])){
+			$url='?EO_WBC=1'.
             '&BEGIN='.sanitize_text_field($_GET['BEGIN']).
             '&STEP='.sanitize_text_field($_GET['STEP']).                            
             '&FIRST='.
@@ -216,7 +322,8 @@ class EO_WBC_Filter_Widget {
                         :
                     ''
                 )
-            );
+            );	
+		} 
         return $url;
 	}
 
@@ -663,6 +770,24 @@ class EO_WBC_Filter_Widget {
 		}		
 	}
 
+	//Generate dropdown based filter option;
+	public function input_dropdown($slug,$items_name,$items_slug,$id,$type,$opt_title='All') {
+
+		$list_items = array_combine($items_name,$items_slug);
+
+		?>
+		<div>
+			<select style="width: 100%;" name="<?php echo $type==0?'cat_filter_'.$slug:'dropdown_'.$slug; ?>" id="dropdown_<?php echo $slug; ?>" data-slug="<?php echo $slug; ?>" data-role="dropdown" data-input="dropdown" data-filter-id="<?php echo $id; ?>" data-type="<?php echo $type; ?>" >
+
+				<option selected="selected" value=""><?php echo $opt_title; ?></option>
+				<?php foreach ($list_items as $name => $slug) : ?>
+					<option value="<?php echo $slug; ?>"><?php echo $name; ?></option>
+				<?php endforeach;?>
+			</select>						
+		</div>
+		<?php
+	}
+
 	public function load_collapsable_desktop($general_filters, $advance_filters) {
 		
 		$filters = array_merge($general_filters,$advance_filters);
@@ -759,6 +884,27 @@ class EO_WBC_Filter_Widget {
 			</script>
 		<?php
 		
+	}
+
+	public function init() {
+		$this->_category=$this->eo_wbc_get_category();
+		if(!empty($this->_category)){
+		
+			if(get_option('eo_wbc_dropdown_filter',false) and !wp_is_mobile()) {
+
+				require_once 'includes/dropdown_filter.php';				
+
+			} else {
+				$this->get_widget();
+				$this->eo_wbc_filter_enque_asset();	
+			}
+			
+
+		} else {
+
+			//EO_WBC_Log_Message("Could not find current category in EO_WBC_Frontend\EO_WBC_Filter_Widget.php");
+			\EOWBC_Error_Handler::log('Could not find current category in eo\wbc\model\publics\component\EO_WBC_Filter_Widget');
+		}
 	}
 
 	public function get_widget() {
@@ -1089,6 +1235,8 @@ class EO_WBC_Filter_Widget {
     public function eo_wbc_get_category() {        
         global $wp_query;        
         
+        if(empty($wp_query) or !empty($wp_query->get_queried_object()) or !empty($wp_query->get_queried_object()->term_id)) return '';
+
         //get list of slug which are ancestors of current page item's category
         $term_slug=array_map(array('self',"eo_wbc_id_2_slug"),get_ancestors($wp_query->get_queried_object()->term_id, 'product_cat'));
 

@@ -25,6 +25,10 @@ class Category_Attribute{
 		
 	}
 
+  public function get_single_category($id) {    
+    return get_term_by('term_taxonomy_id',$id,'product_cat');
+  }
+
 	public function get_category($parent_id = 0,$prefix = '') {
 		/*
 		*	Takes two parameter parent_id for marking the parent category and prefix to add extra string before the term_label
@@ -98,5 +102,13 @@ class Category_Attribute{
     } else {
       return false;
     }
+  }
+
+  public function get_attributs() {    
+    $attributes=array();
+    foreach (wc_get_attribute_taxonomies() as $item) {                     
+      $attributes[$item->attribute_name]= $item->attribute_label;            
+    }
+    return $attributes;    
   }
 }

@@ -51,11 +51,76 @@ if ( ! class_exists( 'Appearance' ) ) {
 				),
 				'breadcrumb'=>array(
 						'label'=>'Breadcrumb',
-						'form'=>\eo\wbc\model\admin\Form_Builder::instance()->ui_controls_collection( "breadcrumb", "Breadcrumb", $hide_defaults=array("hovercolor","bordercolor","text","font","textcolor"), $additional_fields=array( array("field_id"=>"breadcrumb_num_icon","field_label"=>"Breadcrumb Number Icon","type"=>"color"), array("field_id"=>"breadcrumb_title","field_label"=>"Breadcrumb Title","type"=>"color"), array("field_id"=>"breadcrumb_actions","field_label"=>"Breadcrumb Actions","type"=>"color"), array("field_id"=>"showhide_icons","field_label"=>"Breadcrumb Show/Hide Icons","type"=>"checkbox","options"=>array('1'=>' ')) ), $info_text_overrides=array("breadcrumb_showhide_icons"=>'You can upload icon from configuration page, <a href="wp-admin/admin.php?page=eo-wbc-setting">click here</a> to go to configuration'), "active_inactive" )
+						'form'=>array_merge(\eo\wbc\model\admin\Form_Builder::instance()->ui_controls_collection( "breadcrumb", "Breadcrumb", $hide_defaults=array("hovercolor","bordercolor","text","font","textcolor"), $additional_fields=array( array("field_id"=>"breadcrumb_num_icon","field_label"=>"Breadcrumb Number Icon","type"=>"color"), array("field_id"=>"breadcrumb_title","field_label"=>"Breadcrumb Title","type"=>"color"), array("field_id"=>"breadcrumb_actions","field_label"=>"Breadcrumb Actions","type"=>"color"), array("field_id"=>"showhide_icons","field_label"=>"Breadcrumb Show/Hide Icons","type"=>"checkbox","options"=>array('1'=>' ')) ), $info_text_overrides=array("breadcrumb_showhide_icons"=>'You can upload icon from configuration page, <a href="wp-admin/admin.php?page=eo-wbc-setting">click here</a> to go to configuration'), "active_inactive" ),
+							array(
+								'appearance_breadcrumb_alternate_breadcrumb'=>array(
+									'label'=>'Alternate Breadcrumb',
+									'type'=>'checkbox',
+									'value'=>array(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_alternate_breadcrumb')),
+									'options'=>array('appearance_breadcrumb_alternate_breadcrumb'=>' '),
+									'class'=>array(),
+									'visible_info'=>array( 'label'=>'( Switch to other look of breadcrumb. )',
+										'type'=>'visible_info',
+										'class'=>array('fluid', 'small'),
+										'size_class'=>array('sixteen','wide'),
+									),	
+								),
+								'appearance_breadcrumb_hide_border'=>array(
+									'label'=>'Hide border',
+									'type'=>'checkbox',
+									'value'=>array(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_hide_border')),
+									'options'=>array('appearance_breadcrumb_hide_border'=>' '),
+									'class'=>array(),
+									'visible_info'=>array( 'label'=>'( Show/Hide breadcrumb border. )',
+										'type'=>'visible_info',
+										'class'=>array('fluid', 'small'),
+										'size_class'=>array('sixteen','wide'),
+									),	
+								),
+								'appearance_breadcrumb_fixed_navigation'=>array(
+									'label'=>'Fixed navigation step',
+									'type'=>'checkbox',
+									'value'=>array(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_fixed_navigation')),
+									'options'=>array('appearance_breadcrumb_fixed_navigation'=>' '),
+									'class'=>array(),
+									'visible_info'=>array( 'label'=>'( check here if you wish to show steps as fixed layout. Example: \'Diamond\' stoods always first before \'Setting\' no matter if user begin with \'Setting\'. This setting applies to Step navigation only. )',
+										'type'=>'visible_info',
+										'class'=>array('fluid', 'small'),
+										'size_class'=>array('sixteen','wide'),
+									),	
+								),								 
+							)
+					)
 				),
 				'filters'=>array(
 						'label'=>'Filters',
-						'form'=>array_merge( \eo\wbc\model\admin\Form_Builder::instance()->ui_controls_collection( "header", "Header", $hide_defaults=array("text","backcolor","hovercolor","bordercolor","radius"), $additional_fields=array(), $info_text_overrides=array("font"=>"Font family to be used in filters", "textcolor"=>"Color for headers in filters widget") ), \eo\wbc\model\admin\Form_Builder::instance()->ui_controls_collection( "labels", "Labels", $hide_defaults=array("text","backcolor","hovercolor","bordercolor","radius","font"), $additional_fields=array(), $info_text_overrides=array("font"=>"Font family to be used in filters") ),  \eo\wbc\model\admin\Form_Builder::instance()->ui_controls_collection( "rest_filters", "rest_filters", $hide_defaults=array("text","textcolor","backcolor","hovercolor","bordercolor","radius","font"), $additional_fields=array( array("field_id"=>"slider_nodes","field_label"=>"Slider Nodes","type"=>"color"), array("field_id"=>"slider_track","field_label"=>"Slider Track","type"=>"color"), array("field_id"=>"icon_size","field_label"=>"Icon Size","type"=>"text"), array("field_id"=>"icon_label_size","field_label"=>"Icon Label Size","type"=>"text") ), $info_text_overrides=array("slider_track"=>"Sets the specified color to slider's tracks between nodes", "icon_size"=>"Define size of icon at filter in px", "icon_label_size"=>"Define size of icon label in rem"), $special_type=null, $default_values = array("icon_size"=>"50px", "icon_label_size"=>"0.78571429rem") )
+						'form'=>array_merge( \eo\wbc\model\admin\Form_Builder::instance()->ui_controls_collection( "header", "Header", $hide_defaults=array("text","backcolor","hovercolor","bordercolor","radius"), $additional_fields=array(), $info_text_overrides=array("font"=>"Font family to be used in filters", "textcolor"=>"Color for headers in filters widget") ), \eo\wbc\model\admin\Form_Builder::instance()->ui_controls_collection( "labels", "Labels", $hide_defaults=array("text","backcolor","hovercolor","bordercolor","radius","font"), $additional_fields=array(), $info_text_overrides=array("font"=>"Font family to be used in filters") ),  \eo\wbc\model\admin\Form_Builder::instance()->ui_controls_collection( "rest_filters", "rest_filters", $hide_defaults=array("text","textcolor","backcolor","hovercolor","bordercolor","radius","font"), $additional_fields=array( array("field_id"=>"slider_nodes","field_label"=>"Slider Nodes","type"=>"color"), array("field_id"=>"slider_track","field_label"=>"Slider Track","type"=>"color"), array("field_id"=>"icon_size","field_label"=>"Icon Size","type"=>"text"), array("field_id"=>"icon_label_size","field_label"=>"Icon Label Size","type"=>"text") ), $info_text_overrides=array("slider_track"=>"Sets the specified color to slider's tracks between nodes", "icon_size"=>"Define size of icon at filter in px", "icon_label_size"=>"Define size of icon label in rem"), $special_type=null, $default_values = array("icon_size"=>"50px", "icon_label_size"=>"0.78571429rem") ),
+							array(
+								'appearance_filters_alternate_price_filter_first'=>array(
+									'label'=>'Alternate price slider(First Category)',
+									'type'=>'checkbox',
+									'value'=>array(wbc()->options->get_option('appearance_filters','appearance_filters_alternate_price_filter_first')),
+									'options'=>array('appearance_filters_alternate_price_filter_first'=>' '),
+									'class'=>array(),
+									'visible_info'=>array( 'label'=>'( Alternate slider for price at first category. )',
+										'type'=>'visible_info',
+										'class'=>array('fluid', 'small'),
+										'size_class'=>array('sixteen','wide'),
+									),	
+								),
+								'appearance_filters_alternate_price_filter_second'=>array(
+									'label'=>'Alternate price slider(Second Category)',
+									'type'=>'checkbox',
+									'value'=>array(wbc()->options->get_option('appearance_filters','appearance_filters_alternate_price_filter_second')),
+									'options'=>array('appearance_filters_alternate_price_filter_second'=>' '),
+									'class'=>array(),
+									'visible_info'=>array( 'label'=>'( Alternate slider for price at second category. )',
+										'type'=>'visible_info',
+										'class'=>array('fluid', 'small'),
+										'size_class'=>array('sixteen','wide'),
+									),	
+								), 
+							)
 						)
 				),
 				'product_page'=>array(
@@ -89,12 +154,47 @@ if ( ! class_exists( 'Appearance' ) ) {
 									// 'size_class'=>array('sixteen','wide'),
 							),							
 						),
-						'appearence_product_page_devider_option_form'=>array(
+						'product_page_add_to_basket'=>array(
+							'label'=>'Add to Basket Text',
+							'type'=>'text',
+							'value'=>wbc()->options->get_option('product_page','product_page_add_to_basket'),							
+							'class'=>array(),
+							'visible_info'=>array( 'label'=>'( Text to be shown as replacement to `Add to basket` text in dropdown button of add to bundle button. )',
+								'type'=>'visible_info',
+								'class'=>array('fluid', 'small'),
+								'size_class'=>array('sixteen','wide'),
+							),	
+						),
+						'product_page_hide_first_variation_form'=>array(
+							'label'=>'Show/Hide first category\'s variation menu',
+							'type'=>'checkbox',
+							'value'=>array(wbc()->options->get_option('product_page','product_page_hide_first_variation_form')),
+							'options'=>array('product_page_hide_first_variation_form'=>' '),
+							'class'=>array(),
+							'visible_info'=>array( 'label'=>'( Hide variation selection table for first category\'s product. )',
+								'type'=>'visible_info',
+								'class'=>array('fluid', 'small'),
+								'size_class'=>array('sixteen','wide'),
+							),	
+						), 
+						'product_page_hide_second_variation_form'=>array(
+							'label'=>'Show/Hide second category\'s variation menu',
+							'type'=>'checkbox',
+							'value'=>array(wbc()->options->get_option('product_page','product_page_hide_second_variation_form')),
+							'options'=>array('product_page_hide_second_variation_form'=>' '),
+							'class'=>array(),
+							'visible_info'=>array( 'label'=>'( Hide variation selection table for second category\'s product. )',
+								'type'=>'visible_info',
+								'class'=>array('fluid', 'small'),
+								'size_class'=>array('sixteen','wide'),
+							),	
+						), 
+						/*'appearence_product_page_devider_option_form'=>array(
 										'label'=>'Option Form',
 										'type'=>'devider',
-									),
+									),*/
 
-						'appearence_product_page_toggle_status'=>array(
+/*						'appearence_product_page_toggle_status'=>array(
 							'label'=>eowbc_lang('Toggle Button Enabled?'),
 							'type'=>'checkbox',
 							'value'=>array(wbc()->options->get_option('appearance_product_page','appearence_product_page_toggle_status')),
@@ -277,7 +377,7 @@ if ( ! class_exists( 'Appearance' ) ) {
 								'class'=>array('small'),
 								// 'size_class'=>array('sixteen','wide'),
 							)
-						),
+						),*/
 					)
 				)
 				
