@@ -1,6 +1,6 @@
-2020-06-13T12:00:50+00:00 CRITICAL Uncaught InvalidArgumentException: RegexIterator::__construct(): JIT compilation failed: no more memory in /Users/hiren/Sites/wp-content/plugins/woocommerce/packages/woocommerce-admin/src/Features/Onboarding.php:395
+2020-06-13T12:00:50+00:00 CRITICAL Uncaught InvalidArgumentException: RegexIterator::__construct(): JIT compilation failed: no more memory in /Users/hiren/Sites/tmp/wordpress/wordpress-from-wordpress.org-download/wordpress/wp-content/plugins/woocommerce/packages/woocommerce-admin/src/Features/Onboarding.php:395
 Stack trace:
-#0 /Users/hiren/Sites/wp-content/plugins/woocommerce/packages/woocommerce-admin/src/Features/Onboarding.php(395): RegexIterator->__construct(Object(RecursiveIteratorIterator), '/^.+\\.php$/i', 1)
-#1 /Users/hiren/Sites/wp-content/plugins/woocommerce/packages/woocommerce-admin/src/Features/Onboarding.php(358): Automattic\WooCommerce\Admin\Features\Onboarding::has_woocommerce_support(Object(WP_Theme))
-#2 /Users/hiren/Sites/wp-content/plugins/woocommerce/packages/woocommerce-admin/src/Features/Onboarding.php(326): Automattic\WooCommerce\Admin\Fe in /Users/hiren/Sites/wp-content/plugins/woocommerce/packages/woocommerce-admin/src/Features/Onboarding.php on line 395
+#0 /Users/hiren/Sites/tmp/wordpress/wordpress-from-wordpress.org-download/wordpress/wp-content/plugins/woocommerce/packages/woocommerce-admin/src/Features/Onboarding.php(395): RegexIterator->__construct(Object(RecursiveIteratorIterator), '/^.+\\.php$/i', 1)
+#1 /Users/hiren/Sites/tmp/wordpress/wordpress-from-wordpress.org-download/wordpress/wp-content/plugins/woocommerce/packages/woocommerce-admin/src/Features/Onboarding.php(358): Automattic\WooCommerce\Admin\Features\Onboarding::has_woocommerce_support(Object(WP_Theme))
+#2 /Users/hiren/Sites/tmp/wordpress/wordpress-from-wordpress.org-download/wordpress/wp-content/plugins/woocommerce/packages/woocommerce-admin/src/Features/Onboarding.php(326): Automattic\WooCommerce\Admin\Fe in /Users/hiren/Sites/tmp/wordpress/wordpress-from-wordpress.org-download/wordpress/wp-content/plugins/woocommerce/packages/woocommerce-admin/src/Features/Onboarding.php on line 395
 
