@@ -32,7 +32,7 @@ class adminConfigurationCest
 		// $I->selectOption('form select[name=config_buttons_page]', 'Premium');
 		// $I->fillField('config_buttons_page', '1');
 		$I->click('#config_buttons_page_dropdown_div');
-		$I->click('#config_buttons_page_dropdown_div > div.menu.transition.visible > div:nth-child(2)');
+		$I->click('Home page only');	//('#config_buttons_page_dropdown_div > div.menu.transition.visible > div:nth-child(2)');
 
 		// save 
 		$I->click('Save');
