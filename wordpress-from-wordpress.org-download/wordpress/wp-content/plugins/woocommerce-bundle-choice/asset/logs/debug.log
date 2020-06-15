@@ -1,2 +1,2 @@
-[Jun 15 2020 10:33:23] WARNING in /Users/hiren/Sites/tmp/wordpress/wordpress-from-wordpress.org-download/wordpress/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+[Jun 15 2020 10:33:23] WARNING in /Users/hiren/Sites/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
 "unserialize() expects parameter 1 to be string, array given"
