@@ -19,6 +19,41 @@ if ( ! class_exists( 'Filters' ) ) {
 			// no implementation.
 		}
 
+		public static function eo_wbc_prime_category_($slug='',$prefix='',$opts_arr=array())
+	    {
+	        $map_base = get_categories(array(
+	            'hierarchical' => 1,
+	            'show_option_none' => '',
+	            'hide_empty' => 1,
+	            'parent' => (get_term_by('slug',$slug,'product_cat')?get_term_by('slug',$slug,'product_cat')->term_id:''),
+	            'taxonomy' => 'product_cat'
+	        ));
+	        
+	        // $category_option_list='';
+	        
+	        foreach ($map_base as $base) {
+
+	            // $category_option_list.= "<option data-type='0' data-slug='{$base->slug}' value='".$base->term_id."'>".$prefix.$base->name."</option>".eo_wbc_prime_category_($base->slug,' --');
+	            $opts_arr[$base->term_id] = array( 'label'=>$prefix.$base->name, 'attr'=>' data-type="0" data-slug="'.$base->slug.'" ' );
+		        $opts_arr = \eo\wbc\controllers\admin\menu\page\Filters::eo_wbc_prime_category_($base->slug,'--',$opts_arr);
+
+	        }
+
+	        // return $category_option_list;
+	        return $opts_arr;
+	    }
+
+		public static function eo_wbc_attributes_($opts_arr=array())
+	    {
+	        // $attributes="";        
+	        foreach (wc_get_attribute_taxonomies() as $item) {                     
+	        	// $attributes .= "<option data-type='1' data-slug='{$item->attribute_name}' value='{$item->attribute_id}'>{$item->attribute_label}</option>";  
+	        	$opts_arr[$item->attribute_id] = array( 'label'=>$item->attribute_label, 'attr'=>' data-type="1" data-slug="'.$item->attribute_name.'" ' );          
+	        }
+	        // return $attributes;
+	        return $opts_arr;
+	    }
+
 		public static function get_form_definition( $is_add_sample_values = false ) {
 			
 			wbc()->load->model('admin/form-builder');
@@ -335,10 +370,10 @@ if ( ! class_exists( 'Filters' ) ) {
 							'd_fconfig_filter'=>array(
 								'type'=>'select',
 								'value'=>'',
-								'options'=>array_replace(\eo\wbc\model\Category_Attribute::instance()->get_category(),\eo\wbc\model\Category_Attribute::instance()->get_attributs()),
+								'options'=>\eo\wbc\controllers\admin\menu\page\Filters::eo_wbc_attributes_( \eo\wbc\controllers\admin\menu\page\Filters::eo_wbc_prime_category_() ),	//array_replace(\eo\wbc\model\Category_Attribute::instance()->get_category(),\eo\wbc\model\Category_Attribute::instance()->get_attributs()),
 								'class'=>array('fluid'),
 								'size_class'=>array('three','wide'),
-								'attr'=>array("document.getElementById('d_fconfig_type').value=this.options[this.selectedIndex].getAttribute('data-type')")
+								// 'attr'=>array("onchange=\"document.getElementById('d_fconfig_type').value=this.options[this.selectedIndex].getAttribute('data-type')\"")
 								// 'prev_inline'=>true,
 								// 'next_inline'=>true,
 								// 'inline'=>true,
@@ -376,6 +411,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'type'=>'checkbox',
 								'value'=>array('1'),
 								'options'=>array('1'=>'Is it advanced filter?'),
+								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
 								'style'=>'normal',
 								// 'prev_inline'=>true,
@@ -475,6 +511,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'type'=>'checkbox',
 								'value'=>array('1'),
 								'options'=>array('1'=>'Add reset link?'),
+								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
 								'style'=>'normal',
 								// 'prev_inline'=>true,
@@ -536,10 +573,10 @@ if ( ! class_exists( 'Filters' ) ) {
 							's_fconfig_filter'=>array(
 								'type'=>'select',
 								'value'=>'',
-								'options'=>array_replace(\eo\wbc\model\Category_Attribute::instance()->get_category(),\eo\wbc\model\Category_Attribute::instance()->get_attributs()),
+								'options'=>\eo\wbc\controllers\admin\menu\page\Filters::eo_wbc_attributes_( \eo\wbc\controllers\admin\menu\page\Filters::eo_wbc_prime_category_() ),	//array_replace(\eo\wbc\model\Category_Attribute::instance()->get_category(),\eo\wbc\model\Category_Attribute::instance()->get_attributs()),
 								'class'=>array('fluid'),
 								'size_class'=>array('three','wide'),
-								'attr'=>array("document.getElementById('s_fconfig_type').value=this.options[this.selectedIndex].getAttribute('data-type')")
+								// 'attr'=>array("onchange=\"document.getElementById('s_fconfig_type').value=this.options[this.selectedIndex].getAttribute('data-type')\"")
 								// 'prev_inline'=>true,
 								// 'next_inline'=>true,
 								// 'inline'=>true,
@@ -575,8 +612,9 @@ if ( ! class_exists( 'Filters' ) ) {
 							),
 							's_fconfig_is_advanced'=>array(
 								'type'=>'checkbox',
-								'value'=>array('s_fconfig_is_advanced'),
-								'options'=>array('s_fconfig_is_advanced'=>'Is it advanced filter?'),
+								'value'=>array('1'),
+								'options'=>array('1'=>'Is it advanced filter?'),
+								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
 								'style'=>'normal',
 								// 'prev_inline'=>true,
@@ -674,8 +712,9 @@ if ( ! class_exists( 'Filters' ) ) {
 							),
 							's_fconfig_add_reset_link'=>array(
 								'type'=>'checkbox',
-								'value'=>array('s_fconfig_add_reset_link'),
-								'options'=>array('s_fconfig_add_reset_link'=>'Add reset link?'),
+								'value'=>array('1'),
+								'options'=>array('1'=>'Add reset link?'),
+								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
 								'style'=>'normal',
 								// 'prev_inline'=>true,

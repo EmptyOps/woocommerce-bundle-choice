@@ -173,8 +173,8 @@ class Product {
         //Adding Breadcrumb
         add_action( 'woocommerce_before_single_product',function(){
             if(!empty($_GET) && !empty($_GET['STEP']) && !empty($_GET['BEGIN'])){
-                wbc()->load->model('publics/component/EO_WBC_Breadcrumb'); 
-                echo \eo\wbc\model\publics\component\EO_WBC_Breadcrumb::eo_wbc_add_breadcrumb(
+                wbc()->load->model('publics/component/eowbc_breadcrumb'); 
+                echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_add_breadcrumb(
                                                 sanitize_text_field($_GET['STEP']),
                                                 sanitize_text_field($_GET['BEGIN'])
                                             ).'<br/><br/>';
@@ -657,6 +657,4 @@ class Product {
 
         return $__category;
     }
-
->>>>>>> 5c76664a0c81bcf336756e9c4743eb31e78f6eb5
 }

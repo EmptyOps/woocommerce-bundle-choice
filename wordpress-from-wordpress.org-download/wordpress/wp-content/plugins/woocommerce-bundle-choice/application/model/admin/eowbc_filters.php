@@ -54,7 +54,18 @@ class Eowbc_Filters {
 								continue;
 							}
 
-							$row[] = array( 'val' => $rvv );
+							if( $rvk == $key."_is_advanced" ) {
+								$row[] = array( 'val' => $rvv == 1 ? "Yes" : "No" );
+							}
+							else if( $rvk == $key."_add_reset_link" ) {
+								$row[] = array( 'val' => $rvv == 1 ? "Yes" : "No" );
+							}
+							else if( $rvk == $key."_input_type" || $rvk == $key."_filter" ) {
+								$row[] = array( 'val' => wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv) );
+							}
+							else {
+								$row[] = array( 'val' => $rvv );
+							}
 						}
 
 						$body[] = $row;

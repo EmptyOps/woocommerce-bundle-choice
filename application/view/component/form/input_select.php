@@ -25,8 +25,14 @@ if(!empty($id) /*and !empty($label)*/){
 		  				if( !is_array($item) ){ ?>
 			    			<div class="item" data-value="<?php echo $key; ?>"><?php echo $item; ?></div> <?php
 			    		}
-			    		else { ?>
+			    		else { 
+			    			if(isset($item["is_header"]) && $item["is_header"]) { ?>
+			    				<div class='divider'></div><div class='header'><?php echo $item["label"]; ?></div> <?php
+			    			}
+			    			else {
+			    		?>
 							<div class="item" <?php echo !empty($item["attr"]) ? $item["attr"] : ""; ?> data-value="<?php echo $key; ?>"><?php echo $item["label"]; ?></div> <?php
+			    			}
 			    		}
 			    		?>
 			    	<?php endforeach; ?>	

@@ -154,37 +154,34 @@ class Options {
 	public function run() {
 		
 		// Toggle Button
-		$toggle_status = wbc()->options->get_option('appearance_product_page','appearence_product_page_toggle_status',false);
+		$toggle_status = wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_status',false);
 		
-		$init_toggle = wbc()->options->get_option('appearance_product_page','appearence_product_page_toggle_init_status');
+		$init_toggle = wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_init_status');
 		
-		$toggle_text = wbc()->options->get_option('appearance_product_page','appearence_product_page_toggle_text',__('CUSTOMIZE THIS PRODUCT'));
-
+		$toggle_text = wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_text',__('CUSTOMIZE THIS PRODUCT'));
 
 		// Variation item non-hovered
-		$dimention = wbc()->options->get_option('appearance_product_page','appearence_product_page_option_dimention','2em');
+		$dimention = wbc()->options->get_option('tiny_features','tiny_features_option_ui_option_dimention','2em');
 
-		$border_color = wbc()->options->get_option('appearance_product_page','appearence_product_page_border_color','#ffffff');
+		$border_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_color','#ffffff');
 
-		$border_width = wbc()->options->get_option('appearance_product_page','appearence_product_page_border_width','1px');
+		$border_width = wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_width','1px');
 
-		$border_radius = wbc()->options->get_option('appearance_product_page','appearence_product_page_border_radius','1px');
+		$border_radius = wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_radius','1px');
 
 		// Variation item hovered
-		$border_hover_color = wbc()->options->get_option('appearance_product_page','appearence_product_page_border_color_hover','#ffffff');
+		$border_hover_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_color_hover','#ffffff');
 
-		$border_hover_width = wbc()->options->get_option('appearance_product_page','appearence_product_page_border_width_hover','1px');
-
-		
+		$border_hover_width = wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_width_hover','1px');
 
 		// button only
-		$font_color = wbc()->options->get_option('appearance_product_page','appearence_product_page_font_color','#ffffff');
+		$font_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_font_color','#ffffff');
 
-		$font_hover_color = wbc()->options->get_option('appearance_product_page','appearence_product_page_font_color_hover','#ffffff');
+		$font_hover_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_font_color_hover','#ffffff');
 
-		$bg_color = wbc()->options->get_option('appearance_product_page','appearence_product_page_bg_color','#ffffff');
+		$bg_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_bg_color','#ffffff');
 
-		$bg_hover_color = wbc()->options->get_option('appearance_product_page','appearence_product_page_bg_color_hover','#ffffff');
+		$bg_hover_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_bg_color_hover','#ffffff');
 
 		ob_start();
 		?>

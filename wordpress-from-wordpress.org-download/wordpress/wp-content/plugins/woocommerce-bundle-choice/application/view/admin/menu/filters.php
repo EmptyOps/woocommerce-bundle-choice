@@ -16,3 +16,4 @@ $form['attr']= array('data-is_per_tab_save="true"');
 
 // wbc()->load->model('admin\form-builder');
 \eo\wbc\model\admin\Form_Builder::instance()->build($form);
+wbc()->load->asset('js','admin/filter');

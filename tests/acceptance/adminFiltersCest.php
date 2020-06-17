@@ -18,77 +18,78 @@ class adminFiltersCest
 		$I->see( 'Dashboard' );
 
 		// go to the page
-		$I->amOnPage('/wp-admin/admin.php?page=eowbc');
+		$I->amOnPage('/wp-admin/admin.php?page=eowbc-filters');
 
 		/* Navigations Steps( Breadcrumb ) tab */
 		// go to the tab
-		$I->click('Filters');
+		// $I->click('Filters');
 		// $I->click('Configuration');
 		$I->see('Filter Configuration');
 
 		// select category
-		$I->executeJS("jQuery('#config_first_name_dropdown_div').dropdown('set selected', 15);");	//better than setting val directly is to select the nth element that has value val 
-		$I->executeJS("jQuery('#config_second_name_dropdown_div').dropdown('set selected', 15);");	//better than setting val directly is to select the nth element that has value val 
-
-		// set preview text
-		$I->fillField('config_preview_name', 'Preview');
+		$I->executeJS("jQuery('#config_filter_status').checkbox('set checked');");	
 
 		// save 
 		$I->click('Save');
 
+		// confirm if saved properly or not
+		$I->amOnPage('/wp-admin/admin.php?page=eowbc-filters');	//reload page
+		// $I->click('Navigations Steps( Breadcrumb )');
+		$I->see('Filter Configuration');	//TODO here should actually confirm is the switch is on, do it by fetching javascript value and comparing it but it will required javascript See etc function. 
 	}
 
-	public function firstCategoryFilterConfigurations(AcceptanceTester $I) {
+	public function firstAndSecondCategoryFilterConfigurations(AcceptanceTester $I) {
 
 		//login to admin panel, should save and maintain cookies so that do not need to login on all admin test. but yeah however during the front end test should flush the admin cookie first.  
 		$I->loginAsAdmin();
 		$I->see( 'Dashboard' );
 
 		// go to the page
-		$I->amOnPage('/wp-admin/admin.php?page=eowbc');
+		$I->amOnPage('/wp-admin/admin.php?page=eowbc-filters');
 
-		/* Navigations Steps( Breadcrumb ) tab */
-		// go to the tab
-		$I->click('Filters');
-		// $I->click('Configuration');
-		$I->see('Filter Configuration');
+		for($cat_index=0; $cat_index<=1; $cat_index++) {
 
-		// select category
-		$I->executeJS("jQuery('#config_first_name_dropdown_div').dropdown('set selected', 15);");	//better than setting val directly is to select the nth element that has value val 
-		$I->executeJS("jQuery('#config_second_name_dropdown_div').dropdown('set selected', 15);");	//better than setting val directly is to select the nth element that has value val 
+			$name = "";
+			$cat_name = "";
+			$prefix = "";
+			if( $cat_index == 0 ) {
+				$name = "Diamond";
+				$cat_name = "Diamond";
+				$prefix = "d";
+			}
+			else {
+				$name = "Settings";
+				$cat_name = "Setting";
+				$prefix = "s";
+			}
 
-		// set preview text
-		$I->fillField('config_preview_name', 'Preview');
+			/* Navigations Steps( Breadcrumb ) tab */
+			// go to the tab
+			// $I->click('Filters');
+			$I->click( $name.' Page Filter Configuration');
+			// $I->see("Add ".$cat_name." Shape's filter");	//use this test and comment below one once we have the label/titles fixed on this page 
+			$I->see('Is it advanced filter?');	
 
-		// save 
-		$I->click('Save');
+			// set fields 
+			$I->executeJS("jQuery('#".$prefix."_fconfig_filter').dropdown('set selected', 15);");	//better than setting val directly is to select the nth element that has value val 
+			$I->fillField("".$prefix."_fconfig_label", 'Test '.$prefix.' filter');
+			??? $I->executeJS("jQuery('#".$prefix."_fconfig_is_advanced_1').checkbox('set unchecked');");	
+			$I->fillField("".$prefix."_fconfig_column_width", '50');
+			$I->fillField("".$prefix."_fconfig_ordering", '5');
+			$I->executeJS("jQuery('#".$prefix."_fconfig_input_type').dropdown('set selected', 'text_slider');");	//better than setting val directly is to select the nth element that has value val 
+			$I->fillField("".$prefix."_fconfig_icon_size", '0');
+			$I->fillField("".$prefix."_fconfig_label", '0');
+			??? $I->executeJS("jQuery('#".$prefix."_fconfig_add_reset_link_1').checkbox('set unchecked');");	
 
-	}
+			// save 
+			$I->click('Save');
 
-	public function secondCategoryFilterConfigurations(AcceptanceTester $I) {
+			// confirm if saved properly or not
+			$I->amOnPage('/wp-admin/admin.php?page=eowbc-filters');	//reload page
+			$I->click( $name.' Page Filter Configuration');
+			$I->see('Test '.$prefix.' filter');	
 
-		//login to admin panel, should save and maintain cookies so that do not need to login on all admin test. but yeah however during the front end test should flush the admin cookie first.  
-		$I->loginAsAdmin();
-		$I->see( 'Dashboard' );
-
-		// go to the page
-		$I->amOnPage('/wp-admin/admin.php?page=eowbc');
-
-		/* Navigations Steps( Breadcrumb ) tab */
-		// go to the tab
-		$I->click('Filters');
-		// $I->click('Configuration');
-		$I->see('Filter Configuration');
-
-		// select category
-		$I->executeJS("jQuery('#config_first_name_dropdown_div').dropdown('set selected', 15);");	//better than setting val directly is to select the nth element that has value val 
-		$I->executeJS("jQuery('#config_second_name_dropdown_div').dropdown('set selected', 15);");	//better than setting val directly is to select the nth element that has value val 
-
-		// set preview text
-		$I->fillField('config_preview_name', 'Preview');
-
-		// save 
-		$I->click('Save');
+		}
 
 	}
 
