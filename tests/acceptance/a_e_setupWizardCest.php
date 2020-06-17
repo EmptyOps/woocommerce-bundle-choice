@@ -23,12 +23,14 @@ class a_e_setupWizardCest
 
 		// select inventory
 		$I->executeJS("jQuery('#eo_wbc_inventory_type_dropdown_div').dropdown('set selected', 'jewelry');");	//better than setting val directly is to select the nth element that has value val 
+		$I->wait(2);
+		echo $I->grabPageSource();
+		
 
 		// save 
 		$I->click('Submit');
 		// echo $I->grabPageSource();
 		$I->wait(5);
-		echo "current url...";
 		echo $I->getCurrentUrl();
 
 		// confirm if saved properly or not

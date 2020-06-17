@@ -17,7 +17,7 @@ class Acceptance extends \Codeception\Module
     {
         echo "called getCurrentUrl...";
         try {
-            return "current_url = ".$this->getModule('WPWebDriver')->_getUrl().$this->getModule('WPWebDriver')->_getCurrentUri();
+            return $this->getModule('WPWebDriver')->_getUrl().$this->getModule('WPWebDriver')->_getCurrentUri();
         }
         catch(Exception $e) {
             echo "caught message...";
