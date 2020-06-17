@@ -163,21 +163,21 @@ composer_and_wp_plugins_install_update() {
 	# php /tmp/wordpress/wp plugin activate woocommerce
 
 	#clone/move and activate woo choice plugin itself to wp dir
-	# mkdir /tmp/wordpress/src/wp-content/plugins/woocommerce-bundle-choice 	#commented temporarily since the plugin is activated on manually on local wordress site 
+	# mkdir /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice 	#commented temporarily since the plugin is activated on manually on local wordress site 
 	zzzsdfjgjsdjaghsd
-	ls -l /tmp/wordpress/src/wp-content/plugins/woocommerce-bundle-choice/
+	ls -l /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/
 	yyysdkjfhsdkjhff
-	rm -rf /tmp/wordpress/src/wp-content/plugins/woocommerce-bundle-choice/*
+	rm -rf /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/*
 	xxxxgsdjhfgjdsghf
-	ls -l /tmp/wordpress/src/wp-content/plugins/woocommerce-bundle-choice/
+	ls -l /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/
 	wwwkxdjhfjkf
 	ls -l ${TRAVIS_BUILD_DIR}
 	aaaaaaaaasdlfkjdlsfkjlkj
-	cp -Rf "$TRAVIS_BUILD_DIR"/* /tmp/wordpress/src/wp-content/plugins/woocommerce-bundle-choice/
+	cp -Rf "$TRAVIS_BUILD_DIR"/* /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/
 	bbbbbbbbdsfosdflkjsdlfk
-	ls -l /tmp/wordpress/src/wp-content/plugins/woocommerce-bundle-choice/
+	ls -l /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/
 	# git clone --depth=1 --branch=dev https://github.com/EmptyOps/woocommerce-bundle-choice /tmp/wordpress/src/wp-content/plugins #clone option no more used, since copy above is from clone already
-	# php /tmp/wordpress/wp plugin activate woocommerce-bundle-choice	#commented temporarily since the plugin is activated on manually on local wordress site
+	# php /tmp/wordpress/wp plugin activate woo-bundle-choice	#commented temporarily since the plugin is activated on manually on local wordress site
 
 	#call sh function to adjust test files/folders
 	move_and_remove_tests
