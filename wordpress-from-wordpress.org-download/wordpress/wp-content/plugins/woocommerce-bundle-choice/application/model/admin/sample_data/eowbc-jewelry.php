@@ -41,9 +41,14 @@ class Eowbc_Jewelry {
 	}
 
 	public function process_post(&$_step, $_category, $_atttriutes) {
-
-		if(!empty($_POST)) {
-
+		
+		if(!empty($_GET['type']) and !empty($_GET['eo_wbc_view_auto_jewel']) and $_GET['type']=='remove_filters_automation' and $_GET['eo_wbc_view_auto_jewel']==1){
+			wbc()->options->update_option('tiny_feature','filter_widget',serialize(array()));
+			header("Location: ".admin_url('admin.php?page=eowbc-tiny-features')); 
+			exit; 
+		}
+		if(!empty($_POST)) {			
+			
 			if(isset($_POST['_wpnonce']) && wp_verify_nonce($_POST['_wpnonce'],'eo_wbc_auto_jewel')) {
 			  $index=0;
 			  $category=array();
@@ -150,7 +155,10 @@ class Eowbc_Jewelry {
 			        $catat_attribute=$catat->create_attribute($attributes);            
 			        // update_option('eo_wbc_attr',serialize($catat_attribute));
 			        wbc()->options->set('eo_wbc_attr',serialize($catat_attribute));
-			        $catat->add_filters();     
+			        $catat->add_filters();
+			        if(!empty($_GET['type']) and $_GET['type']=='filters_automation'){
+			        	$catat->add_filters_custom_filter();	
+			        }			        
 			        // update_option('eo_wbc_filter_enable','1');     
 			        wbc()->options->update_option('configuration','filter_status','1');
 			      } 
@@ -10818,6 +10826,179 @@ class Eowbc_Jewelry {
 			} else {
 				return false;
 			}
+		}
+
+		function add_filters_custom_filter(){
+
+			$__cat = get_categories(array(
+	            'hierarchical' => 1,
+	            'show_option_none' => '',
+	            'hide_empty' => 0,
+	            'parent' => 0,
+	            'taxonomy' => 'product_cat'
+	        ));
+
+	        $__cat__=array();
+
+	        foreach ($__cat as $__cat_) {
+	        	$__cat__[$__cat_->slug]=array($__cat_->term_id,$__cat_->name);
+	        }
+
+	        $__att=wc_get_attribute_taxonomies();        
+	        
+	        $__att__=array();
+
+	        foreach ($__att as $__att_) {                     
+	        	$__att__[$__att_->attribute_name]=array($__att_->attribute_id,$__att_->attribute_label);
+	        }		        
+
+			$this->filter=array();
+
+			//Filters for diamond....						
+			if(!empty($__cat__['eo_diamond_shape_cat'])){
+				$this->filter['woo_custome_filter_widget'][]=array(
+										                        'name'=>$__cat__['eo_diamond_shape_cat'][0],
+										                        'type'=>"0",
+										                        'label'=>$__cat__['eo_diamond_shape_cat'][1],
+										                        'advance'=>"0",
+										                        'dependent'=>"0",
+										                        'input'=>"icon_text",
+										                        'column_width'=> "100",
+										                        'order'=>"0",
+										                    );
+			}
+			if(!empty($__att__['eo_carat_attr'])){
+				$this->filter['woo_custome_filter_widget'][]=array(
+										                        'name'=>$__att__['eo_carat_attr'][0],
+										                        'type'=>"1",
+										                        'label'=>$__att__['eo_carat_attr'][1],
+										                        'advance'=>"0",
+										                        'dependent'=>"0",
+										                        'input'=>"numeric_slider",
+										                        'column_width'=> "50",
+										                        'order'=>"1",
+										                    );
+			}			
+			if(!empty($__att__['eo_clarity_attr'])){
+				$this->filter['woo_custome_filter_widget'][]=array(
+										                        'name'=>$__att__['eo_clarity_attr'][0],
+										                        'type'=>"1",
+										                        'label'=>$__att__['eo_clarity_attr'][1],
+										                        'advance'=>"0",
+										                        'dependent'=>"0",
+										                        'input'=>"text_slider",
+										                        'column_width'=> "50",
+										                        'order'=>"2",
+										                    );
+			}
+			if(!empty($__att__['eo_colour_attr'])){
+				$this->filter['woo_custome_filter_widget'][]=array(
+										                        'name'=>$__att__['eo_colour_attr'][0],
+										                        'type'=>"1",
+										                        'label'=>$__att__['eo_colour_attr'][1],
+										                        'advance'=>"0",
+										                        'dependent'=>"0",
+										                        'input'=>"text_slider",
+										                        'column_width'=> "50",
+										                        'order'=>"3",
+										                    );
+			}
+			if(!empty($__att__['eo_polish_attr'])){
+				$this->filter['woo_custome_filter_widget'][]=array(
+										                        'name'=>$__att__['eo_polish_attr'][0],
+										                        'type'=>"1",
+										                        'label'=>$__att__['eo_polish_attr'][1],
+										                        'advance'=>"1",
+										                        'dependent'=>"0",
+										                        'input'=>"text_slider",
+										                        'column_width'=> "50",
+										                        'order'=>"4",
+										                    );
+			}
+			if(!empty($__att__['eo_symmertry_attr'])){
+				$this->filter['woo_custome_filter_widget'][]=array(
+										                        'name'=>$__att__['eo_symmertry_attr'][0],
+										                        'type'=>"1",
+										                        'label'=>$__att__['eo_symmertry_attr'][1],
+										                        'advance'=>"1",
+										                        'dependent'=>"0",
+										                        'input'=>"text_slider",
+										                        'column_width'=> "50",
+										                        'order'=>"5",
+										                    );
+			}
+			if(!empty($__att__['eo_fluorescence_attr'])){
+				$this->filter['woo_custome_filter_widget'][]=array(
+										                        'name'=>$__att__['eo_fluorescence_attr'][0],
+										                        'type'=>"1",
+										                        'label'=>$__att__['eo_fluorescence_attr'][1],
+										                        'advance'=>"1",
+										                        'dependent'=>"0",
+										                        'input'=>"text_slider",
+										                        'column_width'=> "50",
+										                        'order'=>"6",
+										                    );
+			}
+			if(!empty($__att__['eo_depth_attr'])){
+				$this->filter['woo_custome_filter_widget'][]=array(
+										                        'name'=>$__att__['eo_depth_attr'][0],
+										                        'type'=>"1",
+										                        'label'=>$__att__['eo_depth_attr'][1],
+										                        'advance'=>"1",
+										                        'dependent'=>"0",
+										                        'input'=>"numeric_slider",
+										                        'column_width'=> "50",
+										                        'order'=>"7",
+										                    );
+			}
+			if(!empty($__att__['eo_table_attr'])){
+				$this->filter['woo_custome_filter_widget'][]=array(
+										                        'name'=>$__att__['eo_table_attr'][0],
+										                        'type'=>"1",
+										                        'label'=>$__att__['eo_table_attr'][1],
+										                        'advance'=>"1",
+										                        'dependent'=>"0",
+										                        'input'=>"numeric_slider",
+										                        'column_width'=> "50",
+										                        'order'=>"8",
+										                    );
+			}
+			if(!empty($__att__['eo_grading_report_attr'])){
+				$this->filter['woo_custome_filter_widget'][]=array(
+										                        'name'=>$__att__['eo_grading_report_attr'][0],
+										                        'type'=>"1",
+										                        'label'=>$__att__['eo_grading_report_attr'][1],
+										                        'advance'=>"1",
+										                        'dependent'=>"0",
+										                        'input'=>"checkbox",
+										                        'column_width'=> "50",
+										                        'order'=>"9",
+										                    );
+			}
+
+			
+
+	        foreach ($this->filter as $filters) {
+					
+					  foreach($filters as $filter){        		
+
+		        		$_data=unserialize(wbc()->options->get_option('tiny_feature','filter_widget',"a:0:{}"));
+		        		$names=array_column($_data,'name');
+		        		if( !in_array($filter['name'], $names)){
+		        			$_data[]=array(
+			                        'name'=>$filter['name'],
+			                        'type'=>$filter['type'],
+			                        'label'=>$filter['label'],
+			                        'advance'=>$filter['advance'],
+			                        'dependent'=>$filter['dependent'],
+			                        'input'=>$filter['input'],
+			                        'column_width'=>$filter['column_width'],
+			                        'order'=>(int)$filter['order'],
+			                    );    	                
+		        			wbc()->options->update_option('tiny_feature','filter_widget',serialize($_data)); 
+		        	  }
+		        }
+	        }        	
 		}
 
 		function add_filters(){

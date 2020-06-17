@@ -64,7 +64,7 @@ class Setup_Wizard {
 
 		$position = empty($menu['position'])?66:$menu['position'];
 
-		add_menu_page( eowbc_lang('Woo Choice Plugin Setup'),eowbc_lang('Woo Choice Plugin Setup'),'manage_options','eo-wbc-init',$callback,$this->get_icon_url(),$position );   
+		/*add_menu_page( eowbc_lang('Woo Choice Plugin Setup'),eowbc_lang('Woo Choice Plugin Setup'),'manage_options','eo-wbc-init',$callback,$this->get_icon_url(),$position );*/   
 
 		return true;
 	}
@@ -183,7 +183,7 @@ class Setup_Wizard {
 						<?php $this->navigation(); ?>
 						<form method="GET">
 							<?php wp_nonce_field('eo_wbc_setup'); ?>
-							<input type="hidden" name="page" value="<?php echo 'eo-wbc-init'; ?>"/>
+							<input type="hidden" name="page" value="<?php echo 'eowbc'; ?>"/>
 							<input type="hidden" name="wbc_setup" value="<?php echo '1'; ?>"/>
 							<input type="hidden" name="step" value="<?php echo $this->step+1; ?>">
 		<?php
@@ -331,7 +331,7 @@ class Setup_Wizard {
 							<div class="ui inverted green button" id="create_product">Add sample and Finish</div>	
 						</div>
 						<div class="field">
-			  				<u><a href="<?php echo admin_url('admin.php?page=eo-wbc-home'); ?>">Skip and finish</a></u>
+			  				<u><a href="<?php echo admin_url('admin.php?page=eowbc'); ?>">Skip and finish</a></u>
 			  			</div>
 					</div>
 				</div>
@@ -357,7 +357,7 @@ class Setup_Wizard {
 								console.log('preventDefault');
 								e.preventDefault();
 								e.stopPropagation();
-								window.location.href = "<?php echo admin_url("admin.php?page=eo-wbc-home&eo_wbc_view_auto_jewel=1"); ?>";
+								window.location.href = "<?php echo admin_url("admin.php?page=eowbc&eo_wbc_view_auto_jewel=1"); ?>";
 							});
 						});
 					</script>

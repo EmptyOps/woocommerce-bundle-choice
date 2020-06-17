@@ -70,6 +70,15 @@ class WBC_Common {
 		return uniqid();
 	}
 
+	/**
+	 * @author Hiren
+	 * function will convert string to key compliant version, no fancy stuff just underscored version, imported from CI helper libs of he_
+	 */
+	function stringToKey( $str )
+	{
+		return strtoupper( str_replace(" ", "_", $str) );
+	}
+
 	public function createUniqueHashId(array $a, array $fields_to_use, string $prefix = "") {
 
 		$str = $prefix;

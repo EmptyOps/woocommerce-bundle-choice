@@ -12,7 +12,7 @@
 			    	<?php if(sanitize_text_field($_GET['eo_wbc_inventory_type']) == 'jewelry'): ?>	
 		      		<div class="field">
 					    <div class="ui toggle checkbox">
-					      	<input type="checkbox" tabindex="0" class="hidden" name="ring_builder" value="1" <?php echo in_array('ring_builder',$feature_option)?'checked="checked"':''; ?>>
+					      	<input type="checkbox" tabindex="0" class="hidden" name="ring_builder" id="ring_builder" value="1" <?php echo in_array('ring_builder',$feature_option)?'checked="checked"':''; ?>>
 					      	<label>Ring Builder</label>
 					    </div>
 					</div>

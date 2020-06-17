@@ -6,14 +6,14 @@ jQuery(document).ready(function(jQuery){
     jQuery('#eo_wbc_first_category_range').parent().transition('hide');
     jQuery('#eo_wbc_second_category_range').parent().transition('hide');
 
-    $('#range_first').on('change',function(e){
+    $('#range_first_1').on('change',function(e){
         e.preventDefault();
         e.stopPropagation();
 
         hide_show_range(this, true);                
     });
 
-    $('#range_second').on('change',function(e){
+    $('#range_second_1').on('change',function(e){
         e.preventDefault();
         e.stopPropagation();
 
@@ -32,7 +32,7 @@ jQuery(document).ready(function(jQuery){
             }
         }
         else {
-            if( ( is_first && !jQuery('#range_second').is(":checked") ) || ( !is_first && !jQuery('#range_first').is(":checked") ) ) {
+            if( ( is_first && !jQuery('#range_second_1').is(":checked") ) || ( !is_first && !jQuery('#range_first_1').is(":checked") ) ) {
                 console.log("remove all");
                 jQuery('.range_section').transition('hide'); 
                 jQuery('.range_section').css('display', 'none');

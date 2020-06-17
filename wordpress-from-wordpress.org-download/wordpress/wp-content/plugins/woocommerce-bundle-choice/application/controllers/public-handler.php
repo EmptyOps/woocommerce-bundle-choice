@@ -46,7 +46,10 @@ class Public_Handler {
         		if(is_front_page()) {
 				    \eo\wbc\controllers\publics\pages\Home::instance()->init();
 
-				} elseif (is_product_category()) {
+				} elseif(is_shop()) {
+			    	\eo\wbc\controllers\publics\pages\Shop::instance()->init();
+
+			    } elseif (is_product_category()) {
 			        \eo\wbc\controllers\publics\pages\Category::instance()->init();
 
 			    } elseif(is_product()) {
