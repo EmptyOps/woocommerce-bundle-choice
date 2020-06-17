@@ -63,7 +63,7 @@ box-shadow: none;">
 			console.log('preventDefault');
 			e.preventDefault();
 			e.stopPropagation();
-			window.location.href = "<?php echo admin_url("admin.php?page=eo-wbc-home&eo_wbc_view_auto_jewel=1"); ?>";
+			window.location.href = "<?php echo admin_url("admin.php?page=eowbc&eo_wbc_view_auto_jewel=1"); ?>";
 		});
 	});
 </script>

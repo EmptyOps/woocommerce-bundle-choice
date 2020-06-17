@@ -327,8 +327,8 @@ class Jewelry {
                       );
         
         $callback = $this->get_page( $_atttriutes, $_category );
-        $position = empty($position)?66:$position;
-        add_menu_page( constant('EOWBC_NAME').eowbc_lang(' Sample Data'),constant('EOWBC_NAME').eowbc_lang(' Sample Data'),'manage_options','eo-wbc-home',$callback,$this->get_icon_url(),$position );   
+        $position = empty($position)?66:$position;    
+        add_menu_page( eowbc_lang('WooCommerce Bundle Choice'),eowbc_lang('WooCommerce Bundle Choice'),'manage_options','eowbc',$callback,$this->get_icon_url(),$position );
     }
 
     public function get_icon_url() {

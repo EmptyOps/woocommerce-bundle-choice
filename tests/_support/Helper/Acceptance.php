@@ -7,4 +7,22 @@ namespace Helper;
 class Acceptance extends \Codeception\Module
 {
 
+	
+    /**
+     * Get current url from WebDriver
+     * @return mixed
+     * @throws \Codeception\Exception\ModuleException
+     */
+    public function getCurrentUrl()
+    {
+        echo "called getCurrentUrl...";
+        try {
+            return $this->getModule('WPWebDriver')->_getUrl().$this->getModule('WPWebDriver')->_getCurrentUri();
+        }
+        catch(Exception $e) {
+            echo "caught message...";
+            echo $e->getMessage()."";
+        }
+    }
+	
 }
