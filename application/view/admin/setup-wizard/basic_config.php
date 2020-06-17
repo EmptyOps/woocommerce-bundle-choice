@@ -8,8 +8,8 @@
 			  	<div class="inline fields">
 			    	<label><?php _e('Inventory Type','woo-bundle-choice'); ?></label>
 			    	<div class="three wide field">
-			      		<div class="ui selection dropdown fluid">
-						  	<input type="hidden" name="eo_wbc_inventory_type">
+			      		<div class="ui selection dropdown fluid" id="eo_wbc_inventory_type_dropdown_div">
+						  	<input type="hidden" name="eo_wbc_inventory_type" id="eo_wbc_inventory_type">
 						  	<i class="dropdown icon"></i>
 						  	<div class="default text"><?php _e('Inventory Type','woo-bundle-choice'); ?></div>
 						  	<div class="menu">
