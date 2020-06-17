@@ -1,6 +1,6 @@
 <?php 
 
-class adminConfigurationCest
+class a_g_adminConfigurationCest
 {
     public function _before(AcceptanceTester $I)
     {

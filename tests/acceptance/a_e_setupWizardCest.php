@@ -1,6 +1,6 @@
 <?php 
 
-class a_a_setupWizardCest
+class a_e_setupWizardCest
 {
     public function _before(AcceptanceTester $I)
     {
@@ -26,6 +26,8 @@ class a_a_setupWizardCest
 
 		// save 
 		$I->click('Submit');
+		echo $I->grabPageSource();
+		new sdfsdkfjh();
 
 		// confirm if saved properly or not
 		$I->see('Ring Builder');	//if we see Ring Builder on next step than it's properly saved
