@@ -10,6 +10,8 @@ if(wp_verify_nonce(sanitize_text_field($_POST['_wpnonce']),'eowbc_configuration'
 	
 	/*wbc()->options->update_option('configuration','business_type',sanitize_text_field($_POST['config_business_type']));*/
 	
+	wbc()->load->model('category-attribute');
+
 	wbc()->options->update_option('configuration','buttons_page',sanitize_text_field($_POST['config_buttons_page']));
 	
 	wbc()->options->update_option('configuration','enable_make_pair',(empty($_POST['config_enable_make_pair'])?'':sanitize_text_field($_POST['config_enable_make_pair'])));	
@@ -17,10 +19,14 @@ if(wp_verify_nonce(sanitize_text_field($_POST['_wpnonce']),'eowbc_configuration'
 	wbc()->options->update_option('configuration','label_make_pair',sanitize_text_field($_POST['config_label_make_pair']));
 	
 	wbc()->options->update_option('configuration','first_name',sanitize_text_field($_POST['config_first_name']));
+
+	wbc()->options->update_option('configuration','first_slug',@\eo\wbc\model\Category_Attribute::instance()->get_single_category(sanitize_text_field($_POST['config_first_name']))->slug );
 	
 	wbc()->options->update_option('configuration','first_icon',sanitize_text_field($_POST['config_first_icon']));
 	
 	wbc()->options->update_option('configuration','second_name',sanitize_text_field($_POST['config_second_name']));
+
+	wbc()->options->update_option('configuration','second_slug',@\eo\wbc\model\Category_Attribute::instance()->get_single_category(sanitize_text_field($_POST['config_second_name']))->slug);
 	
 	wbc()->options->update_option('configuration','second_icon',sanitize_text_field($_POST['config_second_icon']));
 	
