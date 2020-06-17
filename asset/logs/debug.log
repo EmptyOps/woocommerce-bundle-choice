@@ -1,18 +1,4 @@
-[Jun 14 2020 14:19:38] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_appearance.php at line number 37
-"Array to string conversion"
-[Jun 15 2020 08:46:30] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
-"Undefined variable: border_hover"
-[Jun 15 2020 08:52:10] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
-"Undefined variable: border_hover"
-[Jun 15 2020 08:52:13] WARNING in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/pages/product.php at line number 279
-"Cannot modify header information - headers already sent by (output started at \/var\/www\/html\/wps\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/controllers\/publics\/options.php:342)"
-[Jun 15 2020 08:52:19] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
-"Undefined variable: border_hover"
-[Jun 15 2020 08:54:24] Parse Error in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_breadcrumb.php at line number 228
-"syntax error, unexpected '?', expecting identifier (T_STRING) or variable (T_VARIABLE) or '{' or '$'"
-[Jun 15 2020 08:54:41] ERROR in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/helper/helper-WBC_Options.php at line number 31
-"Uncaught ArgumentCountError: Too few arguments to function WBC_Options::get_option(), 1 passed in \/var\/www\/html\/wps\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/model\/publics\/component\/eowbc_breadcrumb.php on line 228 and at least 2 expected in \/var\/www\/html\/wps\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/helper\/helper-WBC_Options.php:31\nStack trace:\n#0 \/var\/www\/html\/wps\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/model\/publics\/component\/eowbc_breadcrumb.php(228): WBC_Options->get_option('appearanceappea...')\n#1 \/var\/www\/html\/wps\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/model\/publics\/component\/eowbc_breadcrumb.php(140): eo\\wbc\\model\\publics\\component\\EOWBC_Breadcrumb::eo_wbc_breadcumb_second_html('1', 2)\n#2 \/var\/www\/html\/wps\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/model\/publics\/component\/eowbc_breadcrumb.php(61): eo\\wbc\\model\\publics\\component\\EOWBC_Breadcrumb::eo_wbc_breadcrumb_desktop('1', 'eo_diamond_shap...')\n#3 \/var\/www\/html\/wps\/wp-co"
-[Jun 15 2020 09:15:28] Parse Error in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/publics/breadcrumb/css.php at line number 122
-"syntax error, unexpected ')', expecting ',' or ';'"
-[Jun 15 2020 09:15:44] Parse Error in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/publics/breadcrumb/css.php at line number 122
-"syntax error, unexpected ')', expecting ',' or ';'"
+[Jun 17 2020 13:24:40] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/publics/filters/text_slider_mobile_alternate.php at line number 37
+"Undefined variable: prefix"
+[Jun 17 2020 13:24:43] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/publics/filters/text_slider_mobile_alternate.php at line number 37
+"Undefined variable: prefix"
