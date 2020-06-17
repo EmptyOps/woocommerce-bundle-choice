@@ -26,11 +26,13 @@ class a_e_setupWizardCest
 
 		// save 
 		$I->click('Submit');
-		echo $I->grabPageSource();
-		new sdfsdkfjh();
+		// echo $I->grabPageSource();
+		$I->wait(5);
+		echo "current url...";
+		echo $I->getCurrentUrl();
 
 		// confirm if saved properly or not
-		$I->see('Ring Builder');	//if we see Ring Builder on next step than it's properly saved
+		$I->waitForText('Ring Builder', 10); // secs	//if we see Ring Builder on next step than it's properly saved
 	}
 
 	public function step2(AcceptanceTester $I) {
