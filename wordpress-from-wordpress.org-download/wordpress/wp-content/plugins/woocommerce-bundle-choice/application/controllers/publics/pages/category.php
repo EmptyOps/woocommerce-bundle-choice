@@ -112,9 +112,9 @@ class Category {
         //Add product filter widget...
         
         add_action( 'woocommerce_archive_description',function(){     
-            wbc()->load->model('publics/component/EO_WBC_Filter_Widget');          
+            wbc()->load->model('publics/component/eowbc_filter_widget');          
             // if (class_exists('EO_WBC_Filter_Widget')) {
-                new \eo\wbc\model\publics\component\EO_WBC_Filter_Widget();                                
+                new \eo\wbc\model\publics\component\EOWBC_Filter_Widget();                                
             // }
         },130);         
         
@@ -124,8 +124,8 @@ class Category {
     {           
         //Add Breadcumb at top....      
         add_action( 'woocommerce_archive_description',function(){     
-            wbc()->load->model('publics/component/EO_WBC_Breadcrumb');       
-            echo \eo\wbc\model\publics\component\EO_WBC_Breadcrumb::eo_wbc_add_breadcrumb(sanitize_text_field($_GET['STEP']),sanitize_text_field($_GET['BEGIN'])).'<br/><br/>';
+            wbc()->load->model('publics/component/eowbc_breadcrumb');       
+            echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_add_breadcrumb(sanitize_text_field($_GET['STEP']),sanitize_text_field($_GET['BEGIN'])).'<br/><br/>';
         }, 120);
     }
 

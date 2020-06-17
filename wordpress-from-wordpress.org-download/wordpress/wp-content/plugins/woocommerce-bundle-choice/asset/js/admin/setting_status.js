@@ -6,16 +6,14 @@ jQuery(document).ready(function($){
 			jQuery('[for="features"]').parent().css('display','none');
 		} else {
 
-			if($(this).val().trim()=='jewelery'){
-				console.log('jewel');
+			if($(this).val().trim()=='jewelery'){				
 				$("#ring_builder").attr('checked','checked');
 				$("#ring_builder").parent().parent().css('display','block');
 				$("#rapnet_api").attr('checked','checked');
 				$("#rapnet_api").parent().parent().css('display','block');
 				$("#glowstar_api").attr('checked','checked');
 				$("#glowstar_api").parent().parent().css('display','block');
-			} else {
-				console.log('jewel reset');
+			} else {				
 				$("#ring_builder").removeAttr('checked');
 				$("#ring_builder").parent().parent().css('display','none');
 				$("#rapnet_api").removeAttr('checked');

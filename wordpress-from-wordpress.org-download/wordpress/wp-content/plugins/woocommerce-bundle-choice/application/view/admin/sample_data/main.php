@@ -79,7 +79,7 @@ box-shadow: none;">
 	                <input type="submit" name="save" value="<?php printf(__("Create sample %1s","woo-bundle-choice"),$_steps[$_step-1]); ?>"  class="button button-primary button-hero action">                
 	              </td>
 	              <td>
-	                <a href="#" class="button button-hero action" onclick="if(!jQuery(this).hasClass('disabled')){ window.location.href='<?php echo admin_url('admin.php?page=eo-wbc-home'); ?>'; }">Cancel</a>
+	                <a href="#" class="button button-hero action" onclick="if(!jQuery(this).hasClass('disabled')){ window.location.href='<?php echo admin_url('admin.php?page=eowbc'); ?>'; }">Cancel</a>
 	              </td>
 	            </tr>
 	          </tfoot>

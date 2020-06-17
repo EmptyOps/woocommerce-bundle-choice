@@ -19,6 +19,43 @@ if ( ! class_exists( 'Mapping' ) ) {
 			// no implementation.
 		}
 
+		public static function eo_wbc_prime_category($slug='',$prefix='',$opts_arr=array()) {        
+        
+	        $map_base = get_categories(array(
+	            'hierarchical' => 1,
+	            'show_option_none' => '',
+	            'hide_empty' => 0,
+	            'parent' => !empty(get_term_by('slug',$slug,'product_cat')) ?get_term_by('slug',$slug,'product_cat')->term_id : '',
+	            'taxonomy' => 'product_cat'
+	        ));
+	        
+	        // $category_option_list='';
+	        
+	        foreach ($map_base as $base) {            
+	            // $category_option_list.= "<div class='item' data-value='".$base->term_taxonomy_id."'>".$prefix.$base->name."</div>".eo_wbc_prime_category($base->slug, $prefix.'-');
+	            $opts_arr[$base->term_taxonomy_id] = array( 'label'=>$prefix.$base->name );
+		        $opts_arr = \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_prime_category($base->slug, $prefix.'-',$opts_arr);
+	        }
+
+	        // return $category_option_list;
+	        return $opts_arr;
+	    }   
+
+	    public static function eo_wbc_attributes($opts_arr=array())
+	    {        
+	        // $taxonomies="";
+	        foreach (wc_get_attribute_taxonomies() as $attribute) {                 
+	            // $taxonomies.="<div class='divider'></div><div class='header'>".($attribute->attribute_label?$attribute->attribute_label:$attribute->attribute_name)."</div>";
+	            $opts_arr[wbc()->common->stringToKey( ($attribute->attribute_label?$attribute->attribute_label:$attribute->attribute_name) )] = array( 'label'=>($attribute->attribute_label?$attribute->attribute_label:$attribute->attribute_name), 'is_header'=>true );                  
+	            foreach (get_terms(['taxonomy' => wc_attribute_taxonomy_name($attribute->attribute_name),'hide_empty' => false]) as $term) {
+	                // $taxonomies.="<div class='item' data-value='".$term->term_taxonomy_id."'>".$term->name."</div>";   
+	                $opts_arr[$term->term_taxonomy_id] = array( 'label'=>$term->name );  
+	            }
+	        }
+	        // return $taxonomies;
+	        return $opts_arr;
+	    }  
+
 		public static function get_form_definition( $is_add_sample_values = false ) {
 			
 			wbc()->load->model('admin/form-builder');
@@ -136,6 +173,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 								'type'=>'checkbox',
 								'value'=>array(''),
 								'options'=>array('1'=>eowbc_lang('Select range?')),
+								'is_id_as_name'=>true,
 								'inline_class'=>array('three'),
 								'style'=>'normal_without_parent_div',
 								'next_inline'=>true,
@@ -153,7 +191,8 @@ if ( ! class_exists( 'Mapping' ) ) {
 							'range_second'=>array(
 								'type'=>'checkbox',
 								'value'=>array(''),
-								'options'=>array('range_second'=>eowbc_lang('Select range?')),
+								'options'=>array('1'=>eowbc_lang('Select range?')),
+								'is_id_as_name'=>true,
 								'style'=>'normal_without_parent_div',
 								'prev_inline'=>true,
 								'inline'=>true,
@@ -162,7 +201,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 							'eo_wbc_first_category'=>array(
 								'type'=>'select',
 								'value'=>'',
-								'options'=>array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
+								'options'=>\eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_attributes( \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_prime_category() ),	//array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
 								'class'=>array('fluid'),
 								'inline_class'=>array('three'),
 								'next_inline'=>true,
@@ -180,7 +219,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 							'eo_wbc_second_category'=>array(
 								'type'=>'select',
 								'value'=>'',
-								'options'=>array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
+								'options'=>\eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_attributes( \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_prime_category() ),	//array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
 								'class'=>array('fluid'),
 								'prev_inline'=>true,
 								'inline'=>true,
@@ -189,7 +228,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 							'eo_wbc_first_category_range'=>array(
 								'type'=>'select',
 								'value'=>'',
-								'options'=>array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
+								'options'=>\eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_attributes( \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_prime_category() ),	//array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
 								'class'=>array('fluid'),
 								'inline_class'=>array('three', 'range_section'),
 								'next_inline'=>true,
@@ -207,7 +246,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 							'eo_wbc_second_category_range'=>array(
 								'type'=>'select',
 								'value'=>'',
-								'options'=>array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
+								'options'=>\eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_attributes( \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_prime_category() ),	//array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
 								'class'=>array('fluid'),
 								'prev_inline'=>true,
 								'inline'=>true,

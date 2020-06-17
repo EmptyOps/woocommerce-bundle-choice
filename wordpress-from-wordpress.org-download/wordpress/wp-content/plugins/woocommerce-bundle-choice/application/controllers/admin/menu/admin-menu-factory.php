@@ -82,7 +82,7 @@ class Admin_Menu_Factory {
 			$this->tabs = array();
 			if(!empty($this->menu['submenu']) and is_array($this->menu['submenu'])) {
 
-				$page = empty($_GET['page'])?$this->menu['slug']:sanitize_text_field($_GET['page']);
+				$page = (empty($_GET['page']) or $_GET['page']=='eowbc')?$this->menu['submenu'][1]['slug']:sanitize_text_field($_GET['page']);
 
 				ob_start();
 				wbc()->load->template($this->menu['template']);
@@ -91,11 +91,11 @@ class Admin_Menu_Factory {
 				$active = $this->menu['slug']==$page?1:0;
 
 				$this->tabs = array(
-						array(	'title'=>$this->menu['title'],
+						/*array(	'title'=>$this->menu['title'],
 								'slug'=>$this->menu['slug'],
 								'active'=>$active,
 								'content'=>$content
-							)
+							)*/
 					);
 
 				foreach ($this->menu['submenu'] as $submenu) {		

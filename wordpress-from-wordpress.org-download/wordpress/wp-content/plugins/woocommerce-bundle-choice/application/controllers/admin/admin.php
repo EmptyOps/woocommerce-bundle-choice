@@ -31,27 +31,24 @@ class Admin {
 		//	perform initial task
 		self::instance()->init();
 
-		if(!empty($_GET['page']) and $_GET['page']=='eo-wbc-init' and !empty($_GET['wbc_setup']) ){
-            //Setup_Wizard::instance()->init();    
-            // add_action('admin_init',function(){
-				//Setup_Wizard::instance()->init();
-				
-				Setup_Wizard::instance()->build_setup_page();
-			// }); 
-        }
-        elseif(!empty($_GET['page']) and $_GET['page']=='eo-wbc-home' and ( (!empty($_GET['eo_wbc_view_auto_jewel']) and $_GET['eo_wbc_view_auto_jewel'] == 1) or (!empty($_GET['eo_wbc_view_auto_textile']) and $_GET['eo_wbc_view_auto_textile'] == 1) ) ){
+		if(!empty($_GET['page']) and $_GET['page']=='eowbc' and ( (!empty($_GET['eo_wbc_view_auto_jewel']) and $_GET['eo_wbc_view_auto_jewel'] == 1) or (!empty($_GET['eo_wbc_view_auto_textile']) and $_GET['eo_wbc_view_auto_textile'] == 1) ) ){        	
         	if( isset($_GET['eo_wbc_view_auto_jewel']) && $_GET['eo_wbc_view_auto_jewel'] == 1 ) {
         		// apply_filters('eo_wbc_admin_sample_data_add_jewelry',array(\eo\wbc\controllers\admin\sample_data\Jewelry::instance(),'init'));	
         		\eo\wbc\controllers\admin\sample_data\Jewelry::instance()->init();
         	}
-        }
-        else {
-	    	
-	    	
-
-	    	//	show/render menu and pages
+        } else {
+        	//	show/render menu and pages
 			self::instance()->menu();
-        }
+
+			if(!empty($_GET['page']) and $_GET['page']=='eowbc' and !empty($_GET['wbc_setup']) ){
+	            //Setup_Wizard::instance()->init();    
+	            // add_action('admin_init',function(){
+					//Setup_Wizard::instance()->init();
+					
+					Setup_Wizard::instance()->build_setup_page();
+				// }); 
+	        }
+        }        
 
         //Initiate Orders Page
         \eo\wbc\controllers\admin\orders\Orders::instance()->init(); 

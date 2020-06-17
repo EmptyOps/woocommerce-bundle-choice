@@ -19,11 +19,11 @@ class adminConfigurationCest
 
 		/* buttons tab */
 		// go to the page
-		$I->amOnPage('/wp-admin/admin.php?page=eowbc');
+		$I->amOnPage('/wp-admin/admin.php?page=eowbc-configuration');
 		// echo $I->grabPageSource();
 		
 		// go to the tab
-		$I->click('General');
+		// $I->click('General');
 		$I->click('Buttons');
 		$I->see('Choose where you want to display buttons on home page');
 
@@ -37,6 +37,11 @@ class adminConfigurationCest
 		// save 
 		$I->click('Save');
 
+		// confirm if saved properly or not
+		$I->amOnPage('/wp-admin/admin.php?page=eowbc-configuration');	//reload page
+		$I->click('Buttons');
+		$I->see('Home page only');	//that is the position option selected
+
 	}
 
 	public function configureBreadcrumbNavigationsSteps(AcceptanceTester $I) {
@@ -46,11 +51,11 @@ class adminConfigurationCest
 		$I->see( 'Dashboard' );
 
 		// go to the page
-		$I->amOnPage('/wp-admin/admin.php?page=eowbc');
+		$I->amOnPage('/wp-admin/admin.php?page=eowbc-configuration');
 
 		/* Navigations Steps( Breadcrumb ) tab */
 		// go to the tab
-		$I->click('General');
+		// $I->click('General');
 		$I->click('Navigations Steps( Breadcrumb )');
 		$I->see('First Category');
 
@@ -63,6 +68,11 @@ class adminConfigurationCest
 
 		// save 
 		$I->click('Save');
+
+		// confirm if saved properly or not
+		$I->amOnPage('/wp-admin/admin.php?page=eowbc-configuration');	//reload page
+		$I->click('Navigations Steps( Breadcrumb )');
+		$I->see('Home page only ???');	//that is the position option selected
 
 	}
 
