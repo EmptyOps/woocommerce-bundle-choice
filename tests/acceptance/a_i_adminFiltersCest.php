@@ -1,6 +1,6 @@
 <?php 
 
-class adminFiltersCest
+class a_i_adminFiltersCest
 {
     public function _before(AcceptanceTester $I)
     {

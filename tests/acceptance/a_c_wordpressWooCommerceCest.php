@@ -1,6 +1,6 @@
 <?php 
 
-class wordpressWooCommerceCest
+class a_c_wordpressWooCommerceCest
 {
     public function _before(AcceptanceTester $I)
     {
