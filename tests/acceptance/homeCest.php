@@ -11,7 +11,7 @@ class homeCest
     // {
     // }
 
-    public function testChoiceButtons() {
+    public function testChoiceButtons(AcceptanceTester $I) {
 		
     	// go to the home page
 		$I->amOnPage('/');
