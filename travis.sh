@@ -166,6 +166,11 @@ composer_and_wp_plugins_install_update() {
 	# mkdir /tmp/wordpress/src/wp-content/plugins/woocommerce-bundle-choice 	#commented temporarily since the plugin is activated on manually on local wordress site 
 	zzzsdfjgjsdjaghsd
 	ls -l /tmp/wordpress/src/wp-content/plugins/woocommerce-bundle-choice/
+	yyysdkjfhsdkjhff
+	rm -rf /tmp/wordpress/src/wp-content/plugins/woocommerce-bundle-choice/*
+	xxxxgsdjhfgjdsghf
+	ls -l /tmp/wordpress/src/wp-content/plugins/woocommerce-bundle-choice/
+	wwwkxdjhfjkf
 	ls -l ${TRAVIS_BUILD_DIR}
 	aaaaaaaaasdlfkjdlsfkjlkj
 	cp -Rf "$TRAVIS_BUILD_DIR"/* /tmp/wordpress/src/wp-content/plugins/woocommerce-bundle-choice/
