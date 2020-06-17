@@ -23,4 +23,14 @@ class AcceptanceTester extends \Codeception\Actor
     /**
      * Define custom actions here
      */
+
+    /**
+     * Get current url from WebDriver
+     * @return mixed
+     * @throws \Codeception\Exception\ModuleException
+     */
+    public function getCurrentUrl()
+    {
+        return $this->getModule('WebDriver')->_getCurrentUri();
+    }
 }
