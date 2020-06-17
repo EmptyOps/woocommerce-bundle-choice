@@ -73,13 +73,13 @@ class adminFiltersCest
 			// set fields 
 			$I->executeJS("jQuery('#".$prefix."_fconfig_filter').dropdown('set selected', 15);");	//better than setting val directly is to select the nth element that has value val 
 			$I->fillField("".$prefix."_fconfig_label", 'Test '.$prefix.' filter');
-			??? $I->executeJS("jQuery('#".$prefix."_fconfig_is_advanced_1').checkbox('set unchecked');");	
+			$I->executeJS("jQuery('#".$prefix."_fconfig_is_advanced_1').checkbox('set unchecked');");	
 			$I->fillField("".$prefix."_fconfig_column_width", '50');
 			$I->fillField("".$prefix."_fconfig_ordering", '5');
 			$I->executeJS("jQuery('#".$prefix."_fconfig_input_type').dropdown('set selected', 'text_slider');");	//better than setting val directly is to select the nth element that has value val 
 			$I->fillField("".$prefix."_fconfig_icon_size", '0');
 			$I->fillField("".$prefix."_fconfig_label", '0');
-			??? $I->executeJS("jQuery('#".$prefix."_fconfig_add_reset_link_1').checkbox('set unchecked');");	
+			$I->executeJS("jQuery('#".$prefix."_fconfig_add_reset_link_1').checkbox('set unchecked');");	
 
 			// save 
 			$I->click('Save');
