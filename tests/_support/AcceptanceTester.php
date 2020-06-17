@@ -31,6 +31,12 @@ class AcceptanceTester extends \Codeception\Actor
      */
     public function getCurrentUrl()
     {
-        return $this->getModule('WebDriver')->_getCurrentUri();
+        try {
+            return $this->getModule('WebDriver')->_getCurrentUri();
+        }
+        catch(Exception $e) {
+            echo "caught message...";
+            echo $e->getMessage()."";
+        }
     }
 }
