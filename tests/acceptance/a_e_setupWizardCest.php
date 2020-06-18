@@ -19,9 +19,9 @@ class a_e_setupWizardCest
 
 		// go to the page
 		$I->amOnPage('/wp-admin/admin.php?page=eowbc&wbc_setup=1');
-		$I->see('Choose inventory');
 		$I->wait(2);
 		echo $I->grabPageSource();
+		$I->see('Choose inventory');
 
 		// select inventory
 		$I->executeJS("jQuery('[name=\"eo_wbc_inventory_type\"]').parent().dropdown('set selected','jewelry');");	//better than setting val directly is to select the nth element that has value val 
