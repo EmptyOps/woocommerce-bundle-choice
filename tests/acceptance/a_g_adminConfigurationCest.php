@@ -67,7 +67,7 @@ class a_g_adminConfigurationCest
 		$I->fillField('config_preview_name', 'Preview');
 
 		// save 
-		$I->scrollTo('#config_save_buttons_conf');
+		$I->scrollTo('Save');	//$I->scrollTo('#config_save_buttons_conf');
 		$I->click('Save');
 
 		// confirm if saved properly or not
