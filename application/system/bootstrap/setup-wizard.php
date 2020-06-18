@@ -26,7 +26,7 @@ class Setup_Wizard {
 	}
 
 	public function generate_page(){
-		
+
 
 		$this->step = 1;
 		$this->form = 'basic_config';
@@ -227,7 +227,7 @@ class Setup_Wizard {
 						  	<i class="dropdown icon"></i>
 						  	<div class="default text"><?php _e('Inventory Type','woo-bundle-choice'); ?></div>
 						  	<div class="menu">
-							    <div class="item" data-value="jewelry"><?php _e('Jewelry','woo-bundle-choice'); ?></div>
+							    <div class="item" data-value="jewelryfgdfgfg"><?php _e('Jewelry','woo-bundle-choice'); ?></div>
 							    <div class="item" data-value="clothing"><?php _e('Clothing','woo-bundle-choice'); ?></div>
 							    <div class="item" data-value="home_decor"><?php _e('Home Decor','woo-bundle-choice'); ?></div>
 							    <div class="item" data-value="others"><?php _e('Others','woo-bundle-choice'); ?></div>
