@@ -65,7 +65,7 @@ class Setup_Wizard {
 
 		$position = empty($menu['position'])?66:$menu['position'];
 
-		/*add_menu_page( eowbc_lang('Woo Choice Plugin Setup'),eowbc_lang('Woo Choice Plugin Setup'),'manage_options','eo-wbc-init',$callback,$this->get_icon_url(),$position );*/   
+		// add_menu_page( eowbc_lang('Woo Choice Plugin Setup'),eowbc_lang('Woo Choice Plugin Setup'),'manage_options','eo-wbc-init',$callback,$this->get_icon_url(),$position );   
 
 		return true;
 	}
@@ -86,10 +86,19 @@ class Setup_Wizard {
 		return $callback;
 	}
 
+	public function load_page(int $step, string $template, array $feature_option){
+		
+		wbc()->load->template('admin/menu/page/header-part',array( "mode"=>"setup_wizard" ));
+		wbc()->load->template('admin/setup-wizard/setup-wizard',array( "step"=>$step, "template"=>$template, "feature_option"=>$feature_option ) );			
+		wbc()->load->template('admin/menu/page/footer-part',array( "mode"=>"setup_wizard" ));
+		
+	}
+
 	public function init() {
 		
 		$this->step = 1;
 		$this->form = 'basic_config';
+		$feature_option = array();
 
 		if(!empty($_GET['_wpnonce']) and wp_verify_nonce(sanitize_text_field($_GET['_wpnonce']),'eo_wbc_setup')){
 			
@@ -102,6 +111,11 @@ class Setup_Wizard {
 				$this->form = empty($forms[$this->step])?$forms[1]:$forms[$this->step];
 			}
 			$this->action();
+
+		}
+
+		if( $this->step == 2 ) {
+			$feature_option = unserialize( wbc()->options->get_option('eo_wbc','feature_option',serialize(array())) );	//unserialize(get_option('eo_wbc_feature_option', serialize(array())) );
 		}
 
 		//06-04-2020: hiren turned off full screen mode enable in future when decided 
@@ -110,11 +124,12 @@ class Setup_Wizard {
 
         ob_start();        
 		
-		$this->enqueue_script();
-		$this->head();
-		//render form page 
-		call_user_func(array($this,$this->form));
-		$this->footer();
+		// $this->enqueue_script();
+		// $this->head();
+		// //render form page 
+		// call_user_func(array($this,$this->form));
+		// $this->footer();
+		$this->load_page( $this->step, $this->form, $feature_option );
 
 		echo ob_get_clean();
         exit();
@@ -163,6 +178,7 @@ class Setup_Wizard {
 	}
 
 	public function head() {
+		return false;	//this templates are no longer used
 		?>
 			<html>
 		        <head>
@@ -191,6 +207,7 @@ class Setup_Wizard {
 	} 
 
 	public function navigation() {
+		return false;	//this templates are no longer used
 		?>
 			<div class="ui ordered fluid steps">
 		      	<div class=" <?php echo $this->step == 1 ? 'active':( $this->step > 1 ? 'completed':''); ?> step">		        	
