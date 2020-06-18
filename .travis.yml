@@ -25,7 +25,7 @@ before_install:
 
 cache:
   directories:
-    - $HOME/.composer/cache_switch
+    - $HOME/.composer/cache
 
 env:
   global:
