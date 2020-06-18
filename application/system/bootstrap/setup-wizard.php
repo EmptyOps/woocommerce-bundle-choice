@@ -27,6 +27,8 @@ class Setup_Wizard {
 
 	public function generate_page(){
 		
+		wp_die('setup-wizard generate_page die....');
+
 		$this->step = 1;
 		$this->form = 'basic_config';
 		$feature_option = array();
