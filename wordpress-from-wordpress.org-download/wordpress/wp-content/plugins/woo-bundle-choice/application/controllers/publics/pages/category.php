@@ -26,14 +26,19 @@ class Category {
             $this->add2cart();            
         } 
 
-        //if Current-Category is either belongs to FIRST OR SECOND Category then initiate application        
+        //if Current-Category is either belongs to FIRST OR SECOND Category then initiate application                
         if(
             $this->eo_wbc_get_category()== wbc()->options->get_option('configuration','first_slug') //get_option('eo_wbc_first_slug') 
               OR
             $this->eo_wbc_get_category()== wbc()->options->get_option('configuration','second_slug') //get_option('eo_wbc_second_slug')
         ){
             //if( get_option('eo_wbc_filter_enable')=='1' ){
-            if( wbc()->options->get_option('configuration','filter_status')=='1' ){
+            /*wbc()->options->update_option('filters_filter_setting','config_filter_status','config_filter_status');*/
+
+            /*wbc()->options->update_option('filters_filter_setting','filter_setting_alternate_mobile','filter_setting_alternate_mobile');*/
+
+            
+            if(wbc()->options->get_option('filters_filter_setting','config_filter_status')){
                 if(
                      // ($this->eo_wbc_get_category()==get_option('eo_wbc_first_slug') && get_option('eo_wbc_add_filter_first',FALSE) )
                      // OR 
@@ -114,7 +119,7 @@ class Category {
         add_action( 'woocommerce_archive_description',function(){     
             wbc()->load->model('publics/component/eowbc_filter_widget');          
             // if (class_exists('EO_WBC_Filter_Widget')) {
-                new \eo\wbc\model\publics\component\EOWBC_Filter_Widget();                                
+                \eo\wbc\model\publics\component\EOWBC_Filter_Widget::instance()->init();                                
             // }
         },130);         
         
@@ -269,7 +274,7 @@ class Category {
 
 
         //append current page's slug so that create complete list of terms including current term even if it is parent.
-        $term_slug[]=$wp_query->get_queried_object()->slug;                 
+        $term_slug[]=$wp_query->get_queried_object()->slug;
 
         if(in_array(wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/,$term_slug))
         {
