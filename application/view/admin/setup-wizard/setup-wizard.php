@@ -35,7 +35,7 @@ box-shadow: none;">
 
 	<form method="GET">
 		<?php wp_nonce_field('eo_wbc_setup'); ?>
-		<input type="hidden" name="page" value="<?php echo 'eo-wbc-init'; ?>"/>
+		<input type="hidden" name="page" value="<?php echo 'eowbc'/*'eo-wbc-init'*/; ?>"/>
 		<input type="hidden" name="wbc_setup" value="<?php echo '1'; ?>"/>
 		<input type="hidden" name="step" value="<?php echo $step+1; ?>">
 

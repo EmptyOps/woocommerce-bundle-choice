@@ -19,35 +19,49 @@ if(!class_exists('WBC_Loader')) {
 			//	no implemetations 
 		}
 
-		public function asset($type,$path,$param = array(),$version="") {
+		public function asset($type,$path,$param = array(),$version="",$load_instantly=false) {
 
 			$_path = '';
 			$_handle = str_replace(' ','-',str_replace('/','-',$path));			
 			switch ($type) {
 				case 'css':
 					$_path = constant('EOWBC_ASSET_URL').'css'.'/'.$path.'.css';
-					if(empty($version)) {
-						wp_register_style($_handle, $_path);	
+					if($load_instantly) {
+						echo '<link rel="stylesheet" type="text/css" href="'.$_path.'">';
 					}
 					else {
-						wp_register_style($_handle, $_path, $version);	
+						if(empty($version)) {
+							wp_register_style($_handle, $_path);	
+						}
+						else {
+							wp_register_style($_handle, $_path, $version);	
+						}
+						wp_enqueue_style($_handle);
 					}
-					wp_enqueue_style($_handle);
 					break;
 				case 'js':
 					$_path = constant('EOWBC_ASSET_URL').'js'.'/'.$path.'.js';	
-					if(empty($param)){
-						$param = array('jquery');
 
-					}
-
-					if(empty($version)) {
-						wp_register_script($_handle, $_path, $param );
+					if($load_instantly) {
+						if(isset($param[0]) && ($param[0]=='jquery' || $param[0]=='jQuery')) {
+							echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>';
+						}
+						echo '<script src="'.$_path.'"></script>';
 					}
 					else {
-						wp_register_script($_handle, $_path, $param, $version );
-					}				
-					wp_enqueue_script($_handle);					
+						if(empty($param)){
+							$param = array('jquery');
+
+						}
+
+						if(empty($version)) {
+							wp_register_script($_handle, $_path, $param );
+						}
+						else {
+							wp_register_script($_handle, $_path, $param, $version );
+						}				
+						wp_enqueue_script($_handle);					
+					}
 					break;
 				case 'localize':
 					wp_localize_script($_handle,array_keys($param)[0],$param[array_keys($param)[0]]);
