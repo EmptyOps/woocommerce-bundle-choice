@@ -67,6 +67,7 @@ class a_g_adminConfigurationCest
 		$I->fillField('config_preview_name', 'Preview');
 
 		// save 
+		echo $I->grabPageSource();
 		$I->scrollTo('Save');	//$I->scrollTo('#config_save_buttons_conf');
 		$I->click('Save');
 
