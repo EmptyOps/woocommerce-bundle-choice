@@ -88,7 +88,8 @@ class a_e_setupWizardCest
 		$I->waitForText('Skip and finish', 10);	
 
 		// click sample data action. however, the sample data option should be used and tested from sample data's own test class here we just go to sample data page and see if its loaded or not
-		$I->click('Add sample and Finish');
+		// $I->click(['xpath' => '//span[@class="tab tab-selected tab-marked" and text()="Add sample and Finish"]']);	
+		$I->click('#create_product');
 		$I->waitForText('You are at step 1 of 3 steps.', 10);
 
 		//go back to the page
