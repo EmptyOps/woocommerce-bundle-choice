@@ -19,18 +19,13 @@ class a_e_setupWizardCest
 
 		// go to the page
 		$I->amOnPage('/wp-admin/admin.php?page=eowbc&wbc_setup=1');
-		$I->wait(2);
-		echo $I->grabPageSource();
 		$I->see('Choose inventory');
 
 		// select inventory
 		$I->executeJS("jQuery('[name=\"eo_wbc_inventory_type\"]').parent().dropdown('set selected','jewelry');");	//better than setting val directly is to select the nth element that has value val 
-		$I->wait(2);
-		echo $I->grabPageSource();
 		
-
 		// save 
-		$I->click('Submit');
+		$I->click('Next');
 		// echo $I->grabPageSource();
 		// $I->wait(5);
 		// echo $I->getCurrentUrl();
@@ -53,14 +48,14 @@ class a_e_setupWizardCest
 		$I->executeJS("jQuery('[name=\"eo_wbc_inventory_type\"]').parent().dropdown('set selected','jewelry');");	//better than setting val directly is to select the nth element that has value val 
 
 		// continue to next step  
-		$I->click('Submit');
+		$I->click('Next');
 		$I->waitForText('Back', 10);	
 
 		// select features
 		$I->executeJS("jQuery('#ring_builder').checkbox('set checked');");	
 
 		// save 
-		$I->click('Submit');
+		$I->click('Next');
 		$I->waitForText('Skip and finish', 10);	
 
 		// confirm if saved properly or not
@@ -82,14 +77,14 @@ class a_e_setupWizardCest
 		$I->executeJS("jQuery('[name=\"eo_wbc_inventory_type\"]').parent().dropdown('set selected','jewelry');");	//better than setting val directly is to select the nth element that has value val 
 
 		// continue to next step  
-		$I->click('Submit');
+		$I->click('Next');
 		$I->waitForText('Back', 10);	
 
 		// select features. TODO here there is a bug if feature is saved than it should repopulate here, so remove this step once the bug is fixed
 		$I->executeJS("jQuery('#ring_builder').checkbox('set checked');");	
 
 		// continue to next step 
-		$I->click('Submit');
+		$I->click('Next');
 		$I->waitForText('Skip and finish', 10);	
 
 		// click sample data action. however, the sample data option should be used and tested from sample data's own test class here we just go to sample data page and see if its loaded or not
