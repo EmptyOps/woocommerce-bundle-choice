@@ -67,10 +67,9 @@ class a_g_adminConfigurationCest
 		$I->fillField('config_preview_name', 'Preview');
 
 		// save 
-		echo $I->grabPageSource();
-		$I->executeJS('window.scrollTo( 0, jQuery(window).scrollTop() + 1000 );');		//$I->scrollTo('Save');	//$I->scrollTo('#config_save_buttons_conf');
+		$I->executeJS('window.scrollTo( 0, jQuery("#config_save_buttons_conf").scrollTop() + 100 );');		//$I->scrollTo('Save');	//$I->scrollTo('#config_save_buttons_conf');
 		$I->wait(5);
-		$I->click('Save');
+		$I->click('#config_save_buttons_conf'); 	//('Save');
 
 		// confirm if saved properly or not
 		$I->amOnPage('/wp-admin/admin.php?page=eowbc-configuration');	//reload page
