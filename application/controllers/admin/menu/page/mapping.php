@@ -293,7 +293,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 								),
 							),
 							
-							'submit_btn'=>array(
+							'map_creation_modification_save_btn'=>array(
 								'label'=>eowbc_lang('Save New Map'),
 								'type'=>'button',
 								'class'=>array('secondary'),
