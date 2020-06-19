@@ -67,12 +67,12 @@ class a_g_adminConfigurationCest
 		$I->fillField('config_preview_name', 'Preview');
 
 		// save 
-		$I->executeJS('window.scrollTo( 0, jQuery("#config_buttons_conf_save_btn").scrollTop() + 1000 );');		//$I->scrollTo('Save');	//$I->scrollTo('#config_buttons_conf_save_btn');
-		$I->executeJS('jQuery("#config_buttons_conf_save_btn").html("config_buttons_conf_save_btn");');
+		$I->executeJS('window.scrollTo( 0, jQuery("#config_navigation_conf_save_btn").scrollTop() + 1000 );');		//$I->scrollTo('Save');	//$I->scrollTo('#config_navigation_conf_save_btn');
+		$I->executeJS('jQuery("#config_navigation_conf_save_btn").html("config_navigation_conf_save_btn");');
 		$I->wait(3);
 		echo $I->grabPageSource();
-		print_r( $I->findElementsUsingXPath('#config_buttons_conf_save_btn') );
-		$I->click('config_buttons_conf_save_btn');		//it shouldn't be this way, but there seem some issue with selenium driver and thus when there is another Save button on the page even though on another page and is not visible but still selenium think it is visible and thus gives us error so need to use unique xPath like id etc. 
+		print_r( $I->findElementsUsingXPath('#config_navigation_conf_save_btn') );
+		$I->click('config_navigation_conf_save_btn');		//it shouldn't be this way, but there seem some issue with selenium driver and thus when there is another Save button on the page even though on another page and is not visible but still selenium think it is visible and thus gives us error so need to use unique xPath like id etc. 
 
 		// confirm if saved properly or not
 		$I->amOnPage('/wp-admin/admin.php?page=eowbc-configuration');	//reload page
