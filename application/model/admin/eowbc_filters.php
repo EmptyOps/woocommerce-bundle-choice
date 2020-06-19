@@ -61,7 +61,8 @@ class Eowbc_Filters {
 								$row[] = array( 'val' => $rvv == 1 ? "Yes" : "No" );
 							}
 							else if( $rvk == $key."_input_type" || $rvk == $key."_filter" ) {
-								$row[] = array( 'val' => wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv) );
+								$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv);
+								$row[] = array( 'val' => !is_array($val)?$val:$val["label"] );	
 							}
 							else {
 								$row[] = array( 'val' => $rvv );

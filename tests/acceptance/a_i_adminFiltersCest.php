@@ -78,7 +78,7 @@ class a_i_adminFiltersCest
 			$I->fillField("".$prefix."_fconfig_ordering", '5');
 			$I->executeJS("jQuery('#".$prefix."_fconfig_input_type').dropdown('set selected', 'text_slider');");	//better than setting val directly is to select the nth element that has value val 
 			$I->fillField("".$prefix."_fconfig_icon_size", '0');
-			$I->fillField("".$prefix."_fconfig_label", '0');
+			$I->fillField("".$prefix."_fconfig_icon_label_size", '0');
 			$I->executeJS("jQuery('#".$prefix."_fconfig_add_reset_link_1').checkbox('set unchecked');");	
 
 			$I->wait(3);
