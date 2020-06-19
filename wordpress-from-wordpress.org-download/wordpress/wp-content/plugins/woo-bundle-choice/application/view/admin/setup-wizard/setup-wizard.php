@@ -35,7 +35,7 @@ box-shadow: none;">
 
 	<form method="GET">
 		<?php wp_nonce_field('eo_wbc_setup'); ?>
-		<input type="hidden" name="page" value="<?php echo 'eo-wbc-init'; ?>"/>
+		<input type="hidden" name="page" value="<?php echo 'eowbc'/*'eo-wbc-init'*/; ?>"/>
 		<input type="hidden" name="wbc_setup" value="<?php echo '1'; ?>"/>
 		<input type="hidden" name="step" value="<?php echo $step+1; ?>">
 
@@ -56,7 +56,7 @@ box-shadow: none;">
 <script>
 	jQuery(document).ready(function(){
 		jQuery('.ui.dropdown').dropdown();
-		jQuery('[name="eo_wbc_inventory_type"]').parent().dropdown('set selected','<?php echo get_option('eo_wbc_inventory_type',''); ?>');    
+		jQuery('[name="eo_wbc_inventory_type"]').parent().dropdown('set selected','<?php echo wbc()->options->get_option('eo_wbc','inventory_type', ''); ?>');    
 		jQuery('.ui.checkbox').checkbox();
 
 		jQuery("#create_product").on('click',function(e){

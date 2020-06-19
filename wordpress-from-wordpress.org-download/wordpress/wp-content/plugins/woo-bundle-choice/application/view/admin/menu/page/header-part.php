@@ -31,4 +31,21 @@ if( empty($mode) || ( $mode != "setup_wizard" && $mode != "plain" ) ) {
 </h2>
 <?php 
 }
+else {
+    if( $mode == "setup_wizard" ) { ?>
+
+        <!-- header - comment it if its not full screen mode and setup wizard is loaded within wp admin page -->
+        <html>
+            <head>
+                <meta name="viewport" content="width=device-width" />
+                <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                <title><?php echo constant('EOWBC_NAME'); ?></title>
+            </head>
+            <body>
+        <!-- END header -->
+
+      <?php 
+      wbc()->load->asset('css','fomantic/semantic.min',array(),'2.8.1',true);
+    }
+}
 
