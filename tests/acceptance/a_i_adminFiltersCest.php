@@ -89,6 +89,7 @@ class a_i_adminFiltersCest
 
 			// confirm if saved properly or not
 			$I->amOnPage('/wp-admin/admin.php?page=eowbc-filters');	//reload page
+			echo $I->grabPageSource();
 			$I->click( $name.' Page Filter Configuration');
 			$I->see('Test '.$prefix.' filter');	
 
