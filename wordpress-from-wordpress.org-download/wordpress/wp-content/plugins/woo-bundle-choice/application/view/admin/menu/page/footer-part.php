@@ -13,3 +13,19 @@ if( empty($mode) || ( $mode != "setup_wizard" && $mode != "plain" ) ) {
 	});
 	
 }
+else {
+    if( $mode == "setup_wizard" ) { 
+
+		wbc()->load->asset('js','fomantic/semantic.min',array('jquery'),'2.8.1',true);
+      	wbc()->load->asset('js','admin-js',array(),'',true);
+    	?>
+
+        <!-- footer - comment it if its not full screen mode and setup wizard is loaded within wp admin page -->
+        	</body>
+        </html>
+        <!-- END footer -->
+
+      <?php 
+    }
+}
+
