@@ -71,7 +71,7 @@ class a_i_adminFiltersCest
 			$I->see('Is it advanced filter?');	
 
 			// set fields 
-			$I->executeJS("jQuery('#".$prefix."_fconfig_filter').dropdown('set selected', 15);");	//better than setting val directly is to select the nth element that has value val 
+			$I->executeJS("jQuery('#".$prefix."_fconfig_filter_dropdown_div').dropdown('set selected', 15);");	//better than setting val directly is to select the nth element that has value val 
 			$I->fillField("".$prefix."_fconfig_label", 'Test '.$prefix.' filter');
 			$I->executeJS("jQuery('#".$prefix."_fconfig_is_advanced_1').checkbox('set unchecked');");	
 			$I->fillField("".$prefix."_fconfig_column_width", '50');

@@ -6,8 +6,8 @@ class a_k_adminMappingCest
     {
     }
 
-    // tests
-    public function tryToTest(AcceptanceTester $I)
-    {
-    }
+    // // tests
+    // public function tryToTest(AcceptanceTester $I)
+    // {
+    // }
 }
