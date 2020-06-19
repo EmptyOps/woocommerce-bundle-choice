@@ -67,9 +67,8 @@ class a_g_adminConfigurationCest
 		$I->fillField('config_preview_name', 'Preview');
 
 		// save 
-		$I->executeJS('jQuery("#config_save_buttons_conf").show()');
-		$I->executeJS('window.scrollTo( 0, jQuery(window).scrollTop() + 1000 );');		//$I->scrollTo('Save');	//$I->scrollTo('#config_save_buttons_conf');
-		$I->wait(5);
+		$I->executeJS('window.scrollTo( 0, jQuery("#config_buttons_conf_save_btn").scrollTop() + 1000 );');		//$I->scrollTo('Save');	//$I->scrollTo('#config_buttons_conf_save_btn');
+		$I->wait(3);
 		echo $I->grabPageSource();
 		$I->click('Save');
 
