@@ -207,4 +207,17 @@ move_and_remove_tests() {
 
 }
 
+#echo the necessary output 
+echo_necessary_output() {
+
+	ls -l tests/_output/
+
+	# test="$(cat DSC_0251.JPG | base64)"
+	find tests/_output/ \( -iname \*.jpg -o -iname \*.jpeg -o -iname \*.png \) -print0 | while read -r -d $'\0' file; do
+	  # base="${file##*/}" $base is the file name with all the directory stuff stripped off
+	  # dir="${file%/*}    $dir is the directory with the file name stripped off
+	  echo "$file"
+	done
+}
+
 # EOF
