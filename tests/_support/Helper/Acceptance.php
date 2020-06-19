@@ -30,7 +30,7 @@ class Acceptance extends \Codeception\Module
      */
     public function findElementsUsingXPath($xpath)
     {
-        echo "called findElements...";
+        echo "called findElementsUsingXPath...";
         try {
             $module = $this->getModule('WPWebDriver');
             $page = $module->webDriver;
@@ -46,7 +46,7 @@ class Acceptance extends \Codeception\Module
             return $elements;
         }
         catch(Exception $e) {
-            echo "caught error at findElements, message...";
+            echo "caught error at findElementsUsingXPath, message...";
             echo $e->getMessage()."";
         }
     }
