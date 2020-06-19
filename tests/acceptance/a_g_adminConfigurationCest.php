@@ -68,7 +68,7 @@ class a_g_adminConfigurationCest
 
 		// save 
 		echo $I->grabPageSource();
-		$I->executeJS('window.scrollTo( 0, jQuery(window).scrollTop() + 500 );');		//$I->scrollTo('Save');	//$I->scrollTo('#config_save_buttons_conf');
+		$I->executeJS('window.scrollTo( 0, jQuery(window).scrollTop() + 1000 );');		//$I->scrollTo('Save');	//$I->scrollTo('#config_save_buttons_conf');
 		$I->wait(5);
 		$I->click('Save');
 
