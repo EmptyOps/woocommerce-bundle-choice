@@ -60,6 +60,9 @@ if ( ! class_exists( 'Mapping' ) ) {
 			
 			wbc()->load->model('admin/form-builder');
 
+			$dropdown_opts_first_cat = \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_attributes( \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_prime_category(wbc()->options->get_option('configuration','first_slug'),' -- ') );
+			$dropdown_opts_second_cat = \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_attributes( \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_prime_category(wbc()->options->get_option('configuration','second_slug'),' -- ') );
+
 			//map list
 			$table = array();
 			$table['id']='eowbc_price_control_methods_list';
@@ -201,7 +204,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 							'eo_wbc_first_category'=>array(
 								'type'=>'select',
 								'value'=>'',
-								'options'=>\eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_attributes( \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_prime_category() ),	//array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
+								'options'=>$dropdown_opts_first_cat,	//array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
 								'class'=>array('fluid'),
 								'inline_class'=>array('three'),
 								'next_inline'=>true,
@@ -219,7 +222,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 							'eo_wbc_second_category'=>array(
 								'type'=>'select',
 								'value'=>'',
-								'options'=>\eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_attributes( \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_prime_category() ),	//array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
+								'options'=>$dropdown_opts_second_cat,	//array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
 								'class'=>array('fluid'),
 								'prev_inline'=>true,
 								'inline'=>true,
@@ -228,7 +231,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 							'eo_wbc_first_category_range'=>array(
 								'type'=>'select',
 								'value'=>'',
-								'options'=>\eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_attributes( \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_prime_category() ),	//array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
+								'options'=>$dropdown_opts_first_cat,	//array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
 								'class'=>array('fluid'),
 								'inline_class'=>array('three', 'range_section'),
 								'next_inline'=>true,
@@ -246,7 +249,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 							'eo_wbc_second_category_range'=>array(
 								'type'=>'select',
 								'value'=>'',
-								'options'=>\eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_attributes( \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_prime_category() ),	//array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
+								'options'=>$dropdown_opts_second_cat,	//array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
 								'class'=>array('fluid'),
 								'prev_inline'=>true,
 								'inline'=>true,
