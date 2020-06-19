@@ -70,6 +70,7 @@ class a_g_adminConfigurationCest
 		$I->executeJS('jQuery("#config_save_buttons_conf").show()');
 		$I->executeJS('window.scrollTo( 0, jQuery(window).scrollTop() + 1000 );');		//$I->scrollTo('Save');	//$I->scrollTo('#config_save_buttons_conf');
 		$I->wait(5);
+		echo $I->grabPageSource();
 		$I->click('Save');
 
 		// confirm if saved properly or not
