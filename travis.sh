@@ -210,6 +210,7 @@ move_and_remove_tests() {
 #echo the necessary output 
 echo_necessary_output() {
 
+	#look into entire dir
 	ls -l tests/_output/
 
 	# test="$(cat DSC_0251.JPG | base64)"
@@ -217,6 +218,8 @@ echo_necessary_output() {
 	  # base="${file##*/}" $base is the file name with all the directory stuff stripped off
 	  # dir="${file%/*}    $dir is the directory with the file name stripped off
 	  echo "$file"
+	  test="$(cat $file | base64)"
+	  echo "$test"
 	done
 }
 
