@@ -325,8 +325,9 @@ class Form_Builder implements Builder {
 			for($fi=0; $fi<$ftot; $fi++)
 			{
 				$special_lbl = $ftot < 2 ? "" : ( $fi == 0 ? eowbc_lang("Active ") : eowbc_lang("Inactive ") );
+				$field_id_suffix = ($fi==0?"_active":"_inactive");
 
-				$collection[$field_id.'_backcolor_lbl'.($fi==0?"_active":"_inactive")] = array(
+				$collection[$field_id.'_backcolor_lbl'.$field_id_suffix] = array(
 					'label'=>$field_label.' '.$special_lbl.eowbc_lang('Background Color'),
 					'type'=>'label',
 					// 'class'=>array('fluid'),
@@ -338,7 +339,7 @@ class Form_Builder implements Builder {
 					),
 				);
 
-				$collection[$field_id.'_backcolor'.$fi] = array(
+				$collection[$field_id.'_backcolor'.$field_id_suffix] = array(
 					'type'=>'color',
 					'size_class'=>array('eight','wide'),
 					'inline'=>false,
@@ -423,8 +424,9 @@ class Form_Builder implements Builder {
 
 				for($fi=0; $fi<$ftot; $fi++) {
 					$special_lbl = $ftot < 2 ? "" : ( $fi == 0 ? eowbc_lang("Active ") : eowbc_lang("Inactive ") );
+					$field_id_suffix = ($fi==0?"_active":"_inactive");
 
-					$collection[$field_id.'_backcolor_lbl'.$fi] = array(
+					$collection[$field_id.'_backcolor_lbl'.$field_id_suffix] = array(
 						'label'=>$field_label.' '.$special_lbl.eowbc_lang('Color'),
 						'type'=>'label',
 						// 'class'=>array('fluid'),
@@ -436,7 +438,7 @@ class Form_Builder implements Builder {
 						),
 					);
 
-					$collection[$field_id.'_backcolor'.$fi] = array(
+					$collection[$field_id.'_backcolor'.$field_id_suffix] = array(
 						'type'=>'color',
 						'size_class'=>array('eight','wide'),
 						'inline'=>false,
@@ -459,6 +461,10 @@ class Form_Builder implements Builder {
 						// 'size_class'=>array('sixteen','wide'),
 					),
 				);
+
+				if( !empty($value["attrs"]) ) {
+					$collection[$field_id] = array_merge( $collection[$field_id], $value["attrs"] );
+				}
 			}
 			elseif ($value["type"] == "text") {
 				$collection[$field_id] = array(
@@ -475,6 +481,10 @@ class Form_Builder implements Builder {
 						// 'size_class'=>array('sixteen','wide'),
 					),
 				);
+
+				if( !empty($value["attrs"]) ) {
+					$collection[$field_id] = array_merge( $collection[$field_id], $value["attrs"] );
+				}
 			}
 		}
 

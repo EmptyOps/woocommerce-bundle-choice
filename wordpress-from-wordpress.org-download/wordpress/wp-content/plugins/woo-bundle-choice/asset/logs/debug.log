@@ -1,0 +1,20 @@
+[Jun 17 2020 13:24:40] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/publics/filters/text_slider_mobile_alternate.php at line number 37
+"Undefined variable: prefix"
+[Jun 17 2020 13:24:43] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/publics/filters/text_slider_mobile_alternate.php at line number 37
+"Undefined variable: prefix"
+[Jun 18 2020 05:35:16] WARNING in /Users/hiren/Sites/wp-content/plugins/woo-bundle-choice/application/system/bootstrap/setup-wizard.php at line number 178
+"constant(): Couldn't find constant EO_WBC_PLUGIN_ICO_BIG"
+[Jun 18 2020 06:02:02] WARNING in /Users/hiren/Sites/wp-content/plugins/woo-bundle-choice/application/system/bootstrap/setup-wizard.php at line number 178
+"constant(): Couldn't find constant EO_WBC_PLUGIN_ICO_BIG"
+[Jun 18 2020 06:02:05] WARNING in /Users/hiren/Sites/wp-content/plugins/woo-bundle-choice/application/system/bootstrap/setup-wizard.php at line number 178
+"constant(): Couldn't find constant EO_WBC_PLUGIN_ICO_BIG"
+[Jun 18 2020 09:55:55] WARNING in /Users/hiren/Sites/wp-content/plugins/woo-bundle-choice/application/system/bootstrap/setup-wizard.php at line number 178
+"constant(): Couldn't find constant EO_WBC_PLUGIN_ICO_BIG"
+[Jun 18 2020 10:24:54] WARNING in /Users/hiren/Sites/wp-content/plugins/woo-bundle-choice/application/system/bootstrap/setup-wizard.php at line number 178
+"constant(): Couldn't find constant EO_WBC_PLUGIN_ICO_BIG"
+[Jun 19 2020 12:52:58] Notice in /Users/hiren/Sites/wp-content/plugins/woo-bundle-choice/application/controllers/admin/term-meta.php at line number 411
+"Undefined variable: is_edit"
+[Jun 19 2020 12:53:27] Notice in /Users/hiren/Sites/wp-content/plugins/woo-bundle-choice/application/controllers/admin/term-meta.php at line number 411
+"Undefined variable: is_edit"
+[Jun 19 2020 12:53:42] Notice in /Users/hiren/Sites/wp-content/plugins/woo-bundle-choice/application/controllers/admin/term-meta.php at line number 411
+"Undefined variable: is_edit"

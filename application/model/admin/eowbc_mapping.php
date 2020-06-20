@@ -56,18 +56,24 @@ class Eowbc_Mapping {
 
 							if( $rvk == "eo_wbc_first_category" ) {
 								if( wbc()->common->nonZeroEmpty($rv["eo_wbc_first_category_range"]) || wbc()->common->nonZeroEmpty($rv["range_first"]) ) {
-									$row[] = array( 'val' => wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv) );
+									$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv);
+									$row[] = array( 'val' => !is_array($val)?$val:$val["label"] );	
 								}
 								else {
-									$row[] = array( 'val' =>  "Range from <strong>".wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv)."</strong> to <strong>".wbc()->common->dropdownSelectedvalueText($tab["form"]["eo_wbc_first_category_range"], $rv["eo_wbc_first_category_range"])."</strong>" );
+									$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv);
+									$val1 = wbc()->common->dropdownSelectedvalueText($tab["form"]["eo_wbc_first_category_range"], $rv["eo_wbc_first_category_range"]);
+									$row[] = array( 'val' =>  "Range from <strong>".(!is_array($val)?$val:$val["label"])."</strong> to <strong>".(!is_array($val1)?$val1:$val1["label"])."</strong>" );
 								}	
 							}
 							else if( $rvk == "eo_wbc_second_category" ) {
 								if( wbc()->common->nonZeroEmpty($rv["eo_wbc_second_category_range"]) || wbc()->common->nonZeroEmpty($rv["range_second"]) ) {
-									$row[] = array( 'val' => wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv) );
+									$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv);
+									$row[] = array( 'val' => !is_array($val)?$val:$val["label"] );
 								}
 								else {
-									$row[] = array( 'val' => "Range from <strong>".wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv)."</strong> to <strong>".wbc()->common->dropdownSelectedvalueText($tab["form"]["eo_wbc_second_category_range"], $rv["eo_wbc_second_category_range"])."</strong>" );
+									$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv);
+									$val1 = wbc()->common->dropdownSelectedvalueText($tab["form"]["eo_wbc_second_category_range"], $rv["eo_wbc_second_category_range"]);
+									$row[] = array( 'val' => "Range from <strong>".(!is_array($val)?$val:$val["label"])."</strong> to <strong>".(!is_array($val1)?$val1:$val1["label"])."</strong>" );
 								}	
 							}
 							else {

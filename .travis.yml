@@ -151,6 +151,10 @@ matrix:
         - php vendor/bin/codecept clean
         - php vendor/bin/codecept build
         - php vendor/bin/codecept run --steps --debug
+
+        #echo the output 
+        - echo_necessary_output
+
         # - vendor/bin/wpcept run
 
     # - language: node_js
