@@ -168,7 +168,7 @@ composer_and_wp_plugins_install_update() {
 		# zzzsdfjgjsdjaghsd
 		# ls -l /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/
 		# yyysdkjfhsdkjhff
-		rm -rf /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/*
+		rm -rf /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/*	#removing to ensure that no bug can occur in recursive copy where in some linux force overwrite fails
 		# xxxxgsdjhfgjdsghf
 		# ls -l /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/
 		# wwwkxdjhfjkf

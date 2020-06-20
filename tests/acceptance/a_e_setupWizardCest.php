@@ -60,7 +60,7 @@ class a_e_setupWizardCest
 
 		// confirm if saved properly or not
 		$I->click('Back');
-		$I->waitForText('Ring Builder', 10);	//TODO here should actually confirm if the switch is on, do it by fetching javascript value and comparing it but it will required javascript See etc function. 
+		$I->waitForText('Ring Builder', 10);	//TODO here should actually confirm if the switch is on, do it by fetching javascript value and comparing it but it will required javascript See etc function. And return statement from javascript actually returns result to php as per webdriver doc
 	}
 
 	public function step3(AcceptanceTester $I) {
