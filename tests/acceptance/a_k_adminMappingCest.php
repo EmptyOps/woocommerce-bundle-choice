@@ -27,7 +27,7 @@ class a_k_adminMappingCest
 
 		// set fields 
 		$I->executeJS("jQuery('#eo_wbc_first_category_dropdown_div').dropdown('set selected', 17);");	//better than setting val directly is to select the nth element that has value val 	
-		$I->executeJS("jQuery('#eo_wbc_first_category_dropdown_div').dropdown('set selected', 18);");	//better than setting val directly is to select the nth element that has value val 	
+		$I->executeJS("jQuery('#eo_wbc_second_category_dropdown_div').dropdown('set selected', 18);");	//better than setting val directly is to select the nth element that has value val 	
 
 
 		// save 
@@ -40,6 +40,6 @@ class a_k_adminMappingCest
 	}
 
 	public function mapModification(AcceptanceTester $I) {
-
+		//TODO write this test when the modification feature is implemented
 	}
 }
