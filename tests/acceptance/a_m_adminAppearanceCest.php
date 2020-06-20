@@ -71,9 +71,8 @@ class a_m_adminAppearanceCest
 		$I->fillField('breadcrumb_title_backcolor_active', 'red');
 		$I->fillField('breadcrumb_title_backcolor_inactive', 'green');
 		$I->executeJS("jQuery('#showhide_icons_1').checkbox('set unchecked');");
-		$I->executeJS("jQuery('#showhide_icons_1').checkbox('set checked');");	
-		$I->executeJS("jQuery('#showhide_icons_1').checkbox('set checked');");	
-		$I->executeJS("jQuery('#showhide_icons_1').checkbox('set checked');");	
+		$I->executeJS("jQuery('#appearance_breadcrumb_hide_border_1').checkbox('set checked');");	
+		$I->executeJS("jQuery('#appearance_breadcrumb_fixed_navigation_1').checkbox('set checked');");	
 
 
 		// save 
@@ -83,6 +82,71 @@ class a_m_adminAppearanceCest
 		$I->amOnPage('/wp-admin/admin.php?page=eowbc-appearance');	//reload page
 		$I->click('Breadcrumb');
 		$I->see('4px', 'input');	//I verify that I can see "button tagline..." inside input tag 
+
+	}
+
+	public function filterWidgetStyling(AcceptanceTester $I) {
+
+		//login to admin panel, should save and maintain cookies so that do not need to login on all admin test. but yeah however during the front end test should flush the admin cookie first.  
+		$I->loginAsAdmin();
+		$I->see( 'Dashboard' );
+
+		// go to the page
+		$I->amOnPage('/wp-admin/admin.php?page=eowbc-appearance');
+
+		/* Map creation and modification tab */
+		// go to the tab
+		$I->click('Filters');
+		$I->see('Font family to be used in filters');
+
+		// set fields 
+		$I->fillField('header_font', 'Sans...');
+		$I->fillField('header_textcolor', 'red');
+		$I->fillField('labels_textcolor', 'green');
+		$I->fillField('slider_nodes_backcolor_active', 'red');
+		$I->fillField('slider_track_backcolor_active', 'green');
+		$I->fillField('icon_size', '10');
+		$I->fillField('icon_label_size', '15');
+
+
+		// save 
+		$I->click('Save Appearance Settings'); 	
+
+		// confirm if saved properly or not. TODO actually we should connfirm all values of the form if saved and repopulated properly in edit mode or saved list or not. 
+		$I->amOnPage('/wp-admin/admin.php?page=eowbc-appearance');	//reload page
+		$I->click('Filters');
+		$I->see('Sans...', 'input');	//I verify that I can see "button tagline..." inside input tag 
+
+	}
+
+	public function filterWidgetStyling(AcceptanceTester $I) {
+
+		//login to admin panel, should save and maintain cookies so that do not need to login on all admin test. but yeah however during the front end test should flush the admin cookie first.  
+		$I->loginAsAdmin();
+		$I->see( 'Dashboard' );
+
+		// go to the page
+		$I->amOnPage('/wp-admin/admin.php?page=eowbc-appearance');
+
+		/* Map creation and modification tab */
+		// go to the tab
+		$I->click('Product Page');
+		$I->see('First Category Add to Cart Button Text');
+
+		// set fields 
+		$I->fillField('fc_atc_button_text', 'Add to bag...');
+		$I->fillField('sc_atc_button_text', 'Add to bagsc...');
+		$I->fillField('product_page_add_to_basket', 'Add to basket');
+		$I->executeJS("jQuery('#product_page_hide_first_variation_form_1').checkbox('set checked');");	
+		$I->executeJS("jQuery('#product_page_hide_second_variation_form_1').checkbox('set checked');");	
+
+		// save 
+		$I->click('Save Appearance Settings'); 	
+
+		// confirm if saved properly or not. TODO actually we should connfirm all values of the form if saved and repopulated properly in edit mode or saved list or not. 
+		$I->amOnPage('/wp-admin/admin.php?page=eowbc-appearance');	//reload page
+		$I->click('Product Page');
+		$I->see('Add to bag...', 'input');	//I verify that I can see "button tagline..." inside input tag 
 
 	}
 
