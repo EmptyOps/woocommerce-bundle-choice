@@ -27,7 +27,7 @@ class a_m_adminAppearanceCest
 		/* Map creation and modification tab */
 		// go to the tab
 		// $I->click('Map creation and modification');
-		$I->see('Add New Maps');
+		$I->see('Use default button styling or custom styling');
 
 		// set fields 
 		$I->fillF('tagline_text', 'button tagline...');
