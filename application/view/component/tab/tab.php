@@ -32,6 +32,7 @@ if(!empty($tab_data) and is_array($tab_data)){
 	?>
 		<script type="text/javascript">
 			jQuery('.menu .item').tab();
+			jQuery('.ui.menu .item').off('click');
 		</script>
 		<style>
 			.ui.bottom.attached.tab.segment.active{

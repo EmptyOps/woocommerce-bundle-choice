@@ -92,14 +92,14 @@
 	)
 
 	.
-	( !wp_is_mobile() ? " .eo-wbc-container>.ui.steps div{ cursor:pointer !important; } .ui.steps .step .column{ z-index:7;width: max-content !important; padding-left:0em !important;} .ui.steps .step .column:first-child{".(get_option('eo_wbc_alternate_breadcrumb',false)?"":"font-size:3.2em;")."line-height: 0.8em;text-align:right;padding-right: 0.125rem !important;} .ui.steps .step{ padding-right:0px !important;padding-left:3em !important; } 
+	( !wp_is_mobile() ? " .eo-wbc-container>.ui.steps div{ cursor:pointer !important; } .ui.steps .step .column{ z-index:7;width: max-content !important; padding-left:0em !important;} .ui.steps .step .column:first-child{".(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_1'?"":"font-size:3.2em;")."line-height: 0.8em;text-align:right;padding-right: 0.125rem !important;} .ui.steps .step{ padding-right:0px !important;padding-left:3em !important; } 
 
 		.eo-wbc-container>.ui.steps .step:first-child{ padding-left:1em !important; } 
 		.eo-wbc-container>.eo-wbc-container>.ui.steps .step:last-child{ padding-right:0px !important; }
 		.eo-wbc-container>.ui.steps .step .column:last-child{ padding-right:0px !important;text-align:center; }
 		.eo-wbc-container>.ui.steps .step .column.product_image_section img{ height: 4.5em !important;width: auto !important;margin-left:45%;}.eo-wbc-container .ui.steps{ text-transform: uppercase; }.eo-wbc-container.container .ui.steps{ width:100%; } .eo-wbc-container.container .ui.steps .step{ padding-top:1rem !important; padding-bottom:2rem !important;".(empty(get_option('eo_wbc_hide_breadcrumb_border',0))?'':'border:none !important;')." } .eo-wbc-container.container .ui.steps{".(empty(get_option('eo_wbc_hide_breadcrumb_border',0))?'':'border:none !important;')."}
 
-		".(get_option('eo_wbc_alternate_breadcrumb',false)?".eo-wbc-container>.ui.steps .step .column:first-child{ font-size:3.2em;text-align:center;line-height: 1.8rem;} 		
+		".(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_1'?".eo-wbc-container>.ui.steps .step .column:first-child{ font-size:3.2em;text-align:center;line-height: 1.8rem;} 		
 		.eo-wbc-container>.ui.steps .step .column{ padding:0.5rem }":".eo-wbc-container>.ui.steps .step:after{width:3.3em;height:3.3em;}")."
 		
 		.eo-wbc-container>.ui.steps div{ margin-top:0px !important; } 
@@ -117,8 +117,22 @@
 			width:0px !important;
 		}
 		"
-	).( !empty(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_alternate_breadcrumb'))?".eo-wbc-container.container .ui.steps .step{ padding-top:2rem !important;}.ui.steps .step:after {display: none !important;}":""
+	).(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_1'?".eo-wbc-container.container .ui.steps .step{ padding-top:2rem !important;}.ui.steps .step:after {display: none !important;}":" .eo-wbc-container.container .ui.steps .step {    padding-top: 0.5em !important;
+    padding-bottom: 1rem !important; }"
 		
+	).(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_2'?".eo-wbc-container>.ui.steps .step:after{
+			border-top: 3em solid white;
+		    border-left: 1em solid #00000000;
+		    border-bottom: 3em solid white;
+		    border-right: 1em solid white;
+		    height: 0px;
+		    width: 0px;
+		    top: 0;
+		    position: absolute;
+		    right: -1em;
+		    transition: none !important;
+		    transform: none !important;
+		}":""
 	)."</style>";
 
 ?>

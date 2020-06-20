@@ -43,8 +43,8 @@
         </div>
         <?php if(empty(self::$first)):?>
         <div class="column ">&nbsp;</div>
-        <div class="column" <?php echo empty(wp_get_attachment_url(get_option('eo_wbc_first_icon')))?'style="visibility: hidden;"':""; ?>>
-            <img src="<?php echo wp_get_attachment_url(get_option('eo_wbc_first_icon')); ?>">
+        <div class="column" <?php echo empty($first_icon)?'style="visibility: hidden;"':""; ?>>
+            <img src="<?php echo $first_icon; ?>" class="ui mini image">
         </div>
         <?php else: ?>
         <div class="column  product_image_section" style="padding-top: 0px;padding-bottom: 0px;">

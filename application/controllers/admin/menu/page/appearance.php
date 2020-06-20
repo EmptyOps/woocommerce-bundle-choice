@@ -3,7 +3,6 @@ namespace eo\wbc\controllers\admin\menu\page;
 
 defined( 'ABSPATH' ) || exit;
 
-
 if ( ! class_exists( 'Appearance' ) ) {
 	class Appearance {
 
@@ -52,19 +51,7 @@ if ( ! class_exists( 'Appearance' ) ) {
 				'breadcrumb'=>array(
 						'label'=>'Breadcrumb',
 						'form'=>array_merge(\eo\wbc\model\admin\Form_Builder::instance()->ui_controls_collection( "breadcrumb", "Breadcrumb", $hide_defaults=array("hovercolor","bordercolor","text","font","textcolor"), $additional_fields=array( array("field_id"=>"breadcrumb_num_icon","field_label"=>"Breadcrumb Number Icon","type"=>"color"), array("field_id"=>"breadcrumb_title","field_label"=>"Breadcrumb Title","type"=>"color"), array("field_id"=>"breadcrumb_actions","field_label"=>"Breadcrumb Actions","type"=>"color"), array("field_id"=>"showhide_icons","field_label"=>"Breadcrumb Show/Hide Icons","type"=>"checkbox","options"=>array('1'=>' ')) ), $info_text_overrides=array("breadcrumb_showhide_icons"=>'You can upload icon from configuration page, <a href="wp-admin/admin.php?page=eo-wbc-setting">click here</a> to go to configuration'), "active_inactive" ),
-							array(
-								'appearance_breadcrumb_alternate_breadcrumb'=>array(
-									'label'=>'Alternate Breadcrumb',
-									'type'=>'checkbox',
-									'value'=>array(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_alternate_breadcrumb')),
-									'options'=>array('appearance_breadcrumb_alternate_breadcrumb'=>' '),
-									'class'=>array(),
-									'visible_info'=>array( 'label'=>'( Switch to other look of breadcrumb. )',
-										'type'=>'visible_info',
-										'class'=>array('fluid', 'small'),
-										'size_class'=>array('sixteen','wide'),
-									),	
-								),
+							array(								
 								'appearance_breadcrumb_hide_border'=>array(
 									'label'=>'Hide border',
 									'type'=>'checkbox',

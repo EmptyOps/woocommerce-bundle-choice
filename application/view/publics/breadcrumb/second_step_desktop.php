@@ -37,13 +37,13 @@
             <div class="column"><?php echo $order; ?></div>
             <div class="column" style="text-align: left;">
                 <div class="description">Choose a</div>
-                <div class="title"><?php echo get_option('eo_wbc_second_name',''); ?></div>
+                <div class="title"><?php echo $second ?></div>
             </div>
         </div>
-        <?php if(empty(self::$second)):?>
+        <?php if(!empty($second)):?>
         <div class="column ">&nbsp;</div>
-        <div class="column" <?php echo empty(wp_get_attachment_url(get_option('eo_wbc_second_icon')))?'style="visibility: hidden;"':""; ?>>
-            <img src="<?php echo wp_get_attachment_url(get_option('eo_wbc_second_icon')); ?>">
+        <div class="column" <?php echo empty($second_icon)?'style="visibility: hidden;"':""; ?>>
+            <img src="<?php echo $second_icon; ?>">
         </div>
         <?php else: ?>                
             <div class="column  product_image_section" style="padding-top: 0px;padding-bottom: 0px;">

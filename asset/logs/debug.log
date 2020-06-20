@@ -1,4 +1,224 @@
-[Jun 17 2020 13:24:40] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/publics/filters/text_slider_mobile_alternate.php at line number 37
-"Undefined variable: prefix"
-[Jun 17 2020 13:24:43] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/publics/filters/text_slider_mobile_alternate.php at line number 37
-"Undefined variable: prefix"
+[Jun 18 2020 10:01:24] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 18 2020 10:01:44] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 18 2020 10:08:17] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 18 2020 10:09:05] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 18 2020 10:14:29] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 18 2020 10:24:24] Parse Error in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/admin/menu/configuration.php at line number 156
+"syntax error, unexpected ''devider_alternate_breadcrumb'' (T_CONSTANT_ENCAPSED_STRING), expecting ')'"
+[Jun 18 2020 10:24:39] Parse Error in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/admin/menu/configuration.php at line number 173
+"syntax error, unexpected ';', expecting ')'"
+[Jun 18 2020 10:24:54] Parse Error in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/admin/menu/configuration.php at line number 172
+"syntax error, unexpected ';', expecting ')'"
+[Jun 18 2020 10:25:12] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 18 2020 10:27:29] Parse Error in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/admin/menu/configuration.php at line number 166
+"syntax error, unexpected ''config_save_buttons_conf'' (T_CONSTANT_ENCAPSED_STRING), expecting ')'"
+[Jun 18 2020 10:29:13] Parse Error in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/admin/menu/configuration.php at line number 166
+"syntax error, unexpected ''config_save_buttons_conf'' (T_CONSTANT_ENCAPSED_STRING), expecting ')'"
+[Jun 18 2020 10:47:17] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 18 2020 10:49:20] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 18 2020 10:51:20] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 18 2020 10:52:12] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 18 2020 10:55:02] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 18 2020 11:01:15] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 18 2020 11:03:14] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 18 2020 11:17:27] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 18 2020 11:26:47] ERROR in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-load.php at line number 76
+"Uncaught Exception: template file '\/var\/www\/html\/wps\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/view\/publics\/breadcrumb\/second_step_alternate_desktop.php' is not found in \/var\/www\/html\/wps\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/library\/lib-load.php:76\nStack trace:\n#0 \/var\/www\/html\/wps\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/model\/publics\/component\/eowbc_breadcrumb.php(273): WBC_Loader->template('publics\/breadcr...', Array)\n#1 \/var\/www\/html\/wps\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/model\/publics\/component\/eowbc_breadcrumb.php(172): eo\\wbc\\model\\publics\\component\\EOWBC_Breadcrumb::eo_wbc_breadcumb_second_html('1', 2)\n#2 \/var\/www\/html\/wps\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/model\/publics\/component\/eowbc_breadcrumb.php(102): eo\\wbc\\model\\publics\\component\\EOWBC_Breadcrumb::eo_wbc_breadcrumb_desktop('1', 'eo_diamond_shap...')\n#3 \/var\/www\/html\/wps\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/controllers\/publics\/page"
+[Jun 18 2020 11:47:05] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 18 2020 11:47:08] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 18 2020 11:47:12] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 18 2020 13:46:42] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 18 2020 13:50:01] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 18 2020 14:10:23] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 18 2020 14:15:22] Parse Error in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/controllers/admin/menu/page/filters.php at line number 532
+"syntax error, unexpected '=', expecting ')'"
+[Jun 18 2020 14:15:37] Parse Error in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/controllers/admin/menu/page/filters.php at line number 532
+"syntax error, unexpected '=', expecting ')'"
+[Jun 18 2020 14:15:53] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 18 2020 14:18:15] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 18 2020 14:21:23] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 18 2020 14:42:10] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 18 2020 14:49:10] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 19 2020 05:02:34] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 19 2020 06:28:30] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/publics/breadcrumb/first_step_alternate_desktop_1.php at line number 14
+"Undefined variable: first_name"
+[Jun 19 2020 06:28:30] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/publics/breadcrumb/first_step_alternate_desktop_1.php at line number 14
+"Undefined variable: first_name"
+[Jun 19 2020 06:47:00] ERROR in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/publics/breadcrumb/second_step_desktop.php at line number 50
+"Uncaught Error: Access to undeclared static property: WBC_Loader::$second in \/var\/www\/html\/wps\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/view\/publics\/breadcrumb\/second_step_desktop.php:50\nStack trace:\n#0 \/var\/www\/html\/wps\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/library\/lib-load.php(69): require()\n#1 \/var\/www\/html\/wps\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/model\/publics\/component\/eowbc_breadcrumb.php(281): WBC_Loader->template('publics\/breadcr...', Array)\n#2 \/var\/www\/html\/wps\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/model\/publics\/component\/eowbc_breadcrumb.php(172): eo\\wbc\\model\\publics\\component\\EOWBC_Breadcrumb::eo_wbc_breadcumb_second_html('1', 2)\n#3 \/var\/www\/html\/wps\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/model\/publics\/component\/eowbc_breadcrumb.php(102): eo\\wbc\\model\\publics\\component\\EOWBC_Breadcrumb::eo_wbc_breadcrumb_desktop('1', 'eo_diamond_shap...')\n#4 \/var\/www\/html\/wps\/wp-content\/plugins\/woocommerce-bundle-choice\/app"
+[Jun 19 2020 12:25:20] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 19 2020 12:30:27] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 19 2020 12:32:49] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 19 2020 12:34:13] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 19 2020 12:34:26] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1326
+"Undefined index: advance"
+[Jun 19 2020 12:34:27] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1326
+"Undefined index: advance"
+[Jun 19 2020 12:39:45] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1329
+"Undefined index: advance"
+[Jun 19 2020 12:39:46] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1329
+"Undefined index: advance"
+[Jun 19 2020 12:41:16] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1331
+"Undefined index: advance"
+[Jun 19 2020 12:41:16] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1331
+"Undefined index: advance"
+[Jun 19 2020 12:41:44] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1335
+"Undefined index: advance"
+[Jun 19 2020 12:41:45] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1335
+"Undefined index: advance"
+[Jun 19 2020 12:44:52] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1335
+"Undefined index: advance"
+[Jun 19 2020 12:44:52] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1335
+"Undefined index: advance"
+[Jun 19 2020 12:45:42] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1335
+"Undefined index: advance"
+[Jun 19 2020 12:45:43] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1335
+"Undefined index: advance"
+[Jun 19 2020 12:48:26] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1336
+"Undefined index: advance"
+[Jun 19 2020 12:48:27] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1336
+"Undefined index: advance"
+[Jun 19 2020 12:54:24] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1326
+"Undefined index: advance"
+[Jun 19 2020 12:54:25] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1326
+"Undefined index: advance"
+[Jun 19 2020 13:05:11] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 19 2020 13:05:16] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 19 2020 13:05:22] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 19 2020 13:05:36] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_filters.php at line number 144
+"Undefined index: d_fconfig_filter"
+[Jun 19 2020 13:06:19] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 19 2020 13:06:38] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_filters.php at line number 144
+"Undefined index: d_fconfig_filter"
+[Jun 19 2020 13:08:05] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 19 2020 13:08:25] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_filters.php at line number 144
+"Undefined index: d_fconfig_filter"
+[Jun 19 2020 13:09:43] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_filters.php at line number 144
+"Undefined index: d_fconfig_filter"
+[Jun 19 2020 13:10:09] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_filters.php at line number 176
+"Undefined index: d_fconfig_filter"
+[Jun 19 2020 13:10:15] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_filters.php at line number 144
+"Undefined index: d_fconfig_filter"
+[Jun 19 2020 13:10:48] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 19 2020 13:11:08] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_filters.php at line number 144
+"Undefined index: d_fconfig_filter"
+[Jun 19 2020 13:11:13] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_filters.php at line number 176
+"Undefined index: d_fconfig_filter"
+[Jun 19 2020 13:11:20] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_filters.php at line number 144
+"Undefined index: d_fconfig_filter"
+[Jun 19 2020 13:11:23] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_filters.php at line number 144
+"Undefined index: d_fconfig_filter"
+[Jun 19 2020 13:28:08] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 19 2020 13:28:42] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_filters.php at line number 231
+"Undefined index: d_fconfig_filter"
+[Jun 19 2020 13:28:47] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_filters.php at line number 204
+"Undefined index: d_fconfig_filter"
+[Jun 19 2020 13:28:54] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 19 2020 13:30:54] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 19 2020 13:35:03] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 19 2020 13:35:30] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_filters.php at line number 179
+"Undefined index: d_fconfig_filter"
+[Jun 19 2020 13:35:33] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 19 2020 13:38:10] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 19 2020 15:11:13] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 19 2020 15:11:29] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 20 2020 10:10:50] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 20 2020 10:36:52] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 20 2020 10:37:37] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 20 2020 10:37:48] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 20 2020 10:38:00] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 20 2020 10:39:40] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 20 2020 10:39:52] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 20 2020 10:39:56] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 20 2020 10:40:02] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 20 2020 10:41:21] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 20 2020 10:41:27] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 20 2020 10:41:29] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 20 2020 10:41:29] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 20 2020 10:45:39] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 20 2020 10:45:52] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 20 2020 10:47:44] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 20 2020 10:47:48] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 20 2020 10:47:50] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 20 2020 10:47:53] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 20 2020 10:48:02] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 20 2020 10:48:55] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 20 2020 10:50:15] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 20 2020 10:50:17] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 20 2020 10:50:18] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 20 2020 10:50:19] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 20 2020 10:50:21] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 20 2020 10:50:27] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"
+[Jun 20 2020 10:50:30] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/component/table/row.php at line number 37
+"Array to string conversion"

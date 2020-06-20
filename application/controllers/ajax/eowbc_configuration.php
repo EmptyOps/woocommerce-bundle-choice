@@ -12,6 +12,8 @@ if(wp_verify_nonce(sanitize_text_field($_POST['_wpnonce']),'eowbc_configuration'
 	
 	wbc()->load->model('category-attribute');
 
+	wbc()->options->update_option('configuration','config_alternate_breadcrumb',sanitize_text_field($_POST['config_alternate_breadcrumb']));
+
 	wbc()->options->update_option('configuration','buttons_page',sanitize_text_field($_POST['config_buttons_page']));
 	
 	wbc()->options->update_option('configuration','enable_make_pair',(empty($_POST['config_enable_make_pair'])?'':sanitize_text_field($_POST['config_enable_make_pair'])));	

@@ -11,7 +11,7 @@
         <div class="column" style="text-align: left;">
             <?php if(empty(self::$second)):?>        
                 <div class="description">Choose a</div>
-                <div class="title"><?php echo get_option('eo_wbc_second_name',''); ?></div>
+                <div class="title"><?php echo $second; ?></div>
                 <div>&nbsp;</div>
             <?php else:?>
                 <?php 
@@ -36,7 +36,9 @@
             <?php } endif; ?>                    
         </div>                
         <div class="column">
-            <img src="<?php echo wp_get_attachment_url(get_option('eo_wbc_second_icon')); ?>" style="margin: auto;">
+            <?php if(!empty($second_icon)): ?>
+                <img src="<?php echo $second_icon; ?>" style="margin: auto;" class="ui mini image">
+            <?php endif;?>
         </div>
     </div>            
 </div>
