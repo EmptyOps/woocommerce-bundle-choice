@@ -1,0 +1,9 @@
+2020-06-18T05:20:42+00:00 CRITICAL Uncaught Error: Class 'WooCommerce_Bundle_Choice_Bootstrap' not found in /Users/hiren/Sites/wp-content/plugins/woocommerce-bundle-choice/uninstall.php:24
+Stack trace:
+#0 /Users/hiren/Sites/wp-content/plugins/woocommerce-bundle-choice/uninstall.php(27): uninstall_woocommerce_bundle_choice_plugin()
+#1 /Users/hiren/Sites/wp-admin/includes/plugin.php(1222): include('/Users/hiren/Si...')
+#2 /Users/hiren/Sites/wp-admin/includes/plugin.php(956): uninstall_plugin('woocommerce-bun...')
+#3 /Users/hiren/Sites/wp-admin/includes/ajax-actions.php(4545): delete_plugins(Array)
+#4 /Users/hiren/Sites/wp-includes/class-wp-hook.php(287): wp_ajax_delete_plugin('')
+ in /Users/hiren/Sites/wp-content/plugins/woocommerce-bundle-choice/uninstall.php on line 24
+

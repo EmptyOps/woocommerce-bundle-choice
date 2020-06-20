@@ -163,21 +163,23 @@ composer_and_wp_plugins_install_update() {
 	# php /tmp/wordpress/wp plugin activate woocommerce
 
 	#clone/move and activate woo choice plugin itself to wp dir
-	# mkdir /tmp/wordpress/src/wp-content/plugins/woocommerce-bundle-choice 	#commented temporarily since the plugin is activated on manually on local wordress site 
-	zzzsdfjgjsdjaghsd
-	ls -l /tmp/wordpress/src/wp-content/plugins/woocommerce-bundle-choice/
-	yyysdkjfhsdkjhff
-	rm -rf /tmp/wordpress/src/wp-content/plugins/woocommerce-bundle-choice/*
-	xxxxgsdjhfgjdsghf
-	ls -l /tmp/wordpress/src/wp-content/plugins/woocommerce-bundle-choice/
-	wwwkxdjhfjkf
-	ls -l ${TRAVIS_BUILD_DIR}
-	aaaaaaaaasdlfkjdlsfkjlkj
-	cp -Rf "$TRAVIS_BUILD_DIR"/* /tmp/wordpress/src/wp-content/plugins/woocommerce-bundle-choice/
-	bbbbbbbbdsfosdflkjsdlfk
-	ls -l /tmp/wordpress/src/wp-content/plugins/woocommerce-bundle-choice/
-	# git clone --depth=1 --branch=dev https://github.com/EmptyOps/woocommerce-bundle-choice /tmp/wordpress/src/wp-content/plugins #clone option no more used, since copy above is from clone already
-	# php /tmp/wordpress/wp plugin activate woocommerce-bundle-choice	#commented temporarily since the plugin is activated on manually on local wordress site
+		# mkdir /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice 	#commented temporarily since the plugin is activated on manually on local wordress site 
+		
+		# zzzsdfjgjsdjaghsd
+		# ls -l /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/
+		# yyysdkjfhsdkjhff
+		rm -rf /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/*	#removing to ensure that no bug can occur in recursive copy where in some linux force overwrite fails
+		# xxxxgsdjhfgjdsghf
+		# ls -l /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/
+		# wwwkxdjhfjkf
+		# ls -l ${TRAVIS_BUILD_DIR}
+		# aaaaaaaaasdlfkjdlsfkjlkj
+		cp -Rf "$TRAVIS_BUILD_DIR"/* /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/
+		# bbbbbbbbdsfosdflkjsdlfk
+		# ls -l /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/
+		
+		# git clone --depth=1 --branch=dev https://github.com/EmptyOps/woocommerce-bundle-choice /tmp/wordpress/src/wp-content/plugins #clone option no more used, since copy above is from clone already
+		# php /tmp/wordpress/wp plugin activate woo-bundle-choice	#commented temporarily since the plugin is activated on manually on local wordress site
 
 	#call sh function to adjust test files/folders
 	move_and_remove_tests
@@ -203,6 +205,22 @@ move_and_remove_tests() {
 	rm -rf "$TRAVIS_BUILD_DIR"/tests/wc
 	rm -f "$TRAVIS_BUILD_DIR"/tests/bootstrap.php
 
+}
+
+#echo the necessary output 
+echo_necessary_output() {
+
+	#look into entire dir
+	ls -l tests/_output/
+
+	# test="$(cat DSC_0251.JPG | base64)"
+	find tests/_output/ \( -iname \*.jpg -o -iname \*.jpeg -o -iname \*.png \) -print0 | while read -r -d $'\0' file; do
+	  # base="${file##*/}" $base is the file name with all the directory stuff stripped off
+	  # dir="${file%/*}    $dir is the directory with the file name stripped off
+	  echo "$file"
+	  test="$(cat $file | base64)"
+	  echo "$test"
+	done
 }
 
 # EOF

@@ -30,7 +30,7 @@ class a_i_adminFiltersCest
 		$I->executeJS("jQuery('#config_filter_status').checkbox('set checked');");	
 
 		// save 
-		$I->click('Save');
+		$I->click('#filter_setting_submit_btn'); 	//('Save');		//it shouldn't be this way, but there seem some issue with selenium driver and thus when there is another Save button on the page even though on another page and is not visible but still selenium think it is visible and thus gives us error so need to use unique xPath like id etc. 
 
 		// confirm if saved properly or not
 		$I->amOnPage('/wp-admin/admin.php?page=eowbc-filters');	//reload page
@@ -71,18 +71,21 @@ class a_i_adminFiltersCest
 			$I->see('Is it advanced filter?');	
 
 			// set fields 
-			$I->executeJS("jQuery('#".$prefix."_fconfig_filter').dropdown('set selected', 15);");	//better than setting val directly is to select the nth element that has value val 
+			$I->executeJS("jQuery('#".$prefix."_fconfig_filter_dropdown_div').dropdown('set selected', 15);");	//better than setting val directly is to select the nth element that has value val 
 			$I->fillField("".$prefix."_fconfig_label", 'Test '.$prefix.' filter');
 			$I->executeJS("jQuery('#".$prefix."_fconfig_is_advanced_1').checkbox('set unchecked');");	
 			$I->fillField("".$prefix."_fconfig_column_width", '50');
 			$I->fillField("".$prefix."_fconfig_ordering", '5');
 			$I->executeJS("jQuery('#".$prefix."_fconfig_input_type').dropdown('set selected', 'text_slider');");	//better than setting val directly is to select the nth element that has value val 
 			$I->fillField("".$prefix."_fconfig_icon_size", '0');
-			$I->fillField("".$prefix."_fconfig_label", '0');
+			$I->fillField("".$prefix."_fconfig_icon_label_size", '0');
 			$I->executeJS("jQuery('#".$prefix."_fconfig_add_reset_link_1').checkbox('set unchecked');");	
 
+			// $I->wait(3);
+			// echo $I->grabPageSource();
+
 			// save 
-			$I->click('Save');
+			$I->click("#".$prefix."_fconfig_submit_btn"); 	//('Save');		//it shouldn't be this way, but there seem some issue with selenium driver and thus when there is another Save button on the page even though on another page and is not visible but still selenium think it is visible and thus gives us error so need to use unique xPath like id etc. 
 
 			// confirm if saved properly or not
 			$I->amOnPage('/wp-admin/admin.php?page=eowbc-filters');	//reload page

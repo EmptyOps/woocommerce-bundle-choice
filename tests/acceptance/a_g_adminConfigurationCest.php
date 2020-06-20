@@ -67,12 +67,14 @@ class a_g_adminConfigurationCest
 		$I->fillField('config_preview_name', 'Preview');
 
 		// save 
-		$I->click('Save');
+		$I->executeJS('window.scrollTo( 0, jQuery("#config_navigation_conf_save_btn").scrollTop() + 1000 );');		//$I->scrollTo('Save');	//$I->scrollTo('#config_navigation_conf_save_btn');
+		$I->wait(3);
+		$I->click('#config_navigation_conf_save_btn'); 	//('Save');		//it shouldn't be this way, but there seem some issue with selenium driver and thus when there is another Save button on the page even though on another page and is not visible but still selenium think it is visible and thus gives us error so need to use unique xPath like id etc. 
 
 		// confirm if saved properly or not
 		$I->amOnPage('/wp-admin/admin.php?page=eowbc-configuration');	//reload page
 		$I->click('Navigations Steps( Breadcrumb )');
-		$I->see('Home page only ???');	//that is the position option selected
+		$I->see('Uncategorized');	//that is the position option selected
 
 	}
 

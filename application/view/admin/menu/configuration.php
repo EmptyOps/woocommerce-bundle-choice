@@ -74,7 +74,7 @@ $form['data'] = array(
 											'size_class'=>array('eight','wide'),
 											'inline'=>true,
 										),
-									'config_save_buttons_conf'=>array(
+									'config_buttons_conf_save_btn'=>array(
 												'label'=>'Save',
 												'type'=>'button',		
 												'class'=>array('primary'),
@@ -146,6 +146,7 @@ $form['data'] = array(
 											'class'=>array(),
 											'size_class'=>array('eight','wide'),
 											'inline'=>true,
+
 										),
 									'devider_alternate_breadcrumb'=>array(
 											'label'=>' ',
@@ -163,7 +164,7 @@ $form['data'] = array(
 											'size_class'=>array('sixteen','wide'),
 										),	
 									),								
-									'config_save_buttons_conf'=>array(
+									'config_navigation_conf_save_btn'=>array(
 												'label'=>'Save',
 												'type'=>'button',		
 												'class'=>array('primary'),
@@ -202,7 +203,7 @@ $form['data'] = array(
 												'size_class'=>array('eight','wide'),
 												'inline'=>true,
 											),								
-										'config_save_buttons_conf'=>array(
+										'config_extra_conf_save_btn'=>array(
 													'label'=>'Save',
 													'type'=>'button',		
 													'class'=>array('primary'),
