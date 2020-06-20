@@ -461,6 +461,10 @@ class Form_Builder implements Builder {
 						// 'size_class'=>array('sixteen','wide'),
 					),
 				);
+
+				if( !empty($value["attrs"]) ) {
+					$collection[$field_id] = array_merge( $collection[$field_id], $value["attrs"] );
+				}
 			}
 			elseif ($value["type"] == "text") {
 				$collection[$field_id] = array(
@@ -477,6 +481,10 @@ class Form_Builder implements Builder {
 						// 'size_class'=>array('sixteen','wide'),
 					),
 				);
+
+				if( !empty($value["attrs"]) ) {
+					$collection[$field_id] = array_merge( $collection[$field_id], $value["attrs"] );
+				}
 			}
 		}
 

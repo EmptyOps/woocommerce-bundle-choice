@@ -70,6 +70,11 @@ class a_m_adminAppearanceCest
 		$I->fillField('breadcrumb_num_icon_backcolor_inactive', 'green');
 		$I->fillField('breadcrumb_title_backcolor_active', 'red');
 		$I->fillField('breadcrumb_title_backcolor_inactive', 'green');
+		$I->executeJS("jQuery('#showhide_icons_1').checkbox('set unchecked');");
+		$I->executeJS("jQuery('#showhide_icons_1').checkbox('set checked');");	
+		$I->executeJS("jQuery('#showhide_icons_1').checkbox('set checked');");	
+		$I->executeJS("jQuery('#showhide_icons_1').checkbox('set checked');");	
+
 
 		// save 
 		$I->click('Save Appearance Settings'); 	
