@@ -38,6 +38,7 @@ class Eowbc_Filters {
 					// wbc()->common->pr($filter_data, false, false);
 
 					$body = array();
+
 					foreach ($filter_data as $rk => $rv) {
 						$row = array();
 
@@ -89,7 +90,7 @@ class Eowbc_Filters {
 		$res = array();
 		$res["type"] = "success";
 	    $res["msg"] = "";
-	    
+	    $res['post']=$_POST;
 		wbc()->load->model('admin\form-builder');
 
 		$saved_tab_key = !empty($_POST["saved_tab_key"]) ? $_POST["saved_tab_key"] : ""; 
@@ -122,7 +123,14 @@ class Eowbc_Filters {
 
 		    		//save
 			    	if( $is_table_save ) {
-			    		if( $fk == "d_fconfig_ordering" || $fk == "s_fconfig_ordering" ) {
+			    		if( $fk == "d_fconfig_ordering" || $fk == "s_fconfig_ordering" )  {
+			    			
+			    			if($fk=='d_fconfig_ordering'){
+			    				$table_data['filter_template'] = $_POST['second_category_altr_filt_widgts'];
+			    			} elseif ($fk == "s_fconfig_ordering") {
+			    				$table_data['filter_template'] = $_POST['second_category_altr_filt_widgts'];
+			    			}
+
 				    		$table_data[$fk] = (int)$_POST[$fk]; 	
 			    		}
 			    		else {
@@ -183,6 +191,59 @@ class Eowbc_Filters {
 
         wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data_updated) );
         $res["msg"] = $delete_cnt . " " . eowbc_lang('record(s) deleted'); 
+
+        return $res;
+	}
+
+	public function activate( $ids, $saved_tab_key ) {
+		
+		$res = array();
+		$res["type"] = "success";
+	    $res["msg"] = "";
+	    
+    	$key = $saved_tab_key;
+
+		$filter_data = unserialize(wbc()->options->get_option_group('filters_'.$key,"a:0:{}"));
+		$filter_data_updated = array();
+        
+        $delete_cnt = 0;
+        foreach ($filter_data as $fdkey=>$item) {
+            
+            if (in_array($item[$key."_filter"], $ids)) { 
+                //$filter_data_updated[] = $item; 
+                $filter_data[$fdkey][$key."_add_enabled"]=1;
+                $delete_cnt++;
+            }            
+        }
+
+        wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data) );
+        $res["msg"] = $delete_cnt . " " . eowbc_lang('record(s) activated'); 
+
+        return $res;
+	}
+
+	public function deactivate( $ids, $saved_tab_key ) {
+		
+		$res = array();
+		$res["type"] = "success";
+	    $res["msg"] = "";
+	    
+    	$key = $saved_tab_key;
+
+		$filter_data = unserialize(wbc()->options->get_option_group('filters_'.$key,"a:0:{}"));
+		$filter_data_updated = array();
+        
+        $delete_cnt = 0;
+        foreach ($filter_data as $fdkey=>$item) {
+            
+            if (in_array($item[$key."_filter"], $ids) ) { 
+                $filter_data[$fdkey][$key."_add_enabled"]=1;
+                $delete_cnt++;
+            }            
+        }
+
+        wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data) );
+        $res["msg"] = $delete_cnt . " " . eowbc_lang('record(s) deactivated'); 
 
         return $res;
 	}

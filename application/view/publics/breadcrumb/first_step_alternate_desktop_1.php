@@ -11,7 +11,7 @@
         <div class="column" style="text-align: left;">                       
             <?php if(empty(self::$first)):?>        
                 <div class="description">Choose a</div>
-                <div class="title"><?php echo get_option('eo_wbc_first_name',''); ?></div>
+                <div class="title"><?php echo $first; ?></div>
                 <div>&nbsp;</div>
             <?php else:?>
                 <?php 
@@ -23,7 +23,7 @@
                 if(empty($view_url) or $view_url=='#'){
                     ?>
                         <div class="description">Choose a</div>
-                        <div class="title"><?php echo get_option('eo_wbc_first_name',''); ?></div>
+                        <div class="title"><?php echo $first_name; ?></div>
                         <div>&nbsp;</div>
                     <?php
                 } else {
@@ -35,7 +35,9 @@
             <?php } endif; ?>                    
         </div>                
         <div class="column">
-            <img src="<?php echo wp_get_attachment_url(get_option('eo_wbc_first_icon')); ?>" style="margin: auto;">
+            <?php if(!empty($first_icon)): ?>
+                <img src="<?php echo $first_icon; ?>" style="margin: auto;" class="ui mini image">
+            <?php endif;?>
         </div>
     </div>            
 </div>

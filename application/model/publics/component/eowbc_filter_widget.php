@@ -320,6 +320,10 @@ class EOWBC_Filter_Widget {
 							jQuery('.bottom_filter_segment.active').transition('fade up');
 							jQuery('.bottom_filter_segment.active').toggleClass('active');
 						});
+						jQuery('#advance_filter_mob_alternate').on('click tap',function(){
+							jQuery(".toggle_sticky_mob_filter.advance_filter_mob").toggle();
+							jQuery('#advance_filter_mob_alternate .ui.icon').toggleClass('up down');
+						});
 					});
 				</script>
 				<?php
@@ -541,7 +545,7 @@ class EOWBC_Filter_Widget {
 			wbc()->load->template('publics/filters/text_slider_desktop', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset)); 
 		elseif(wbc()->options->get_option('filters_filter_setting','filter_setting_alternate_mobile')):
 			
-			wbc()->load->template('publics/filters/text_slider_mobile_alternate', array("filter"=>$filter,"reset"=>$reset,'advance'=>$advance)); 
+			wbc()->load->template('publics/filters/text_slider_mobile_alternate', array("filter"=>$filter,"reset"=>$reset,'advance'=>$advance,'prefix'=>$prefix)); 
 		else:
 			wbc()->load->template('publics/filters/text_slider_mobile', array("filter"=>$filter,"reset"=>$reset)); 
 		endif;
@@ -701,7 +705,7 @@ class EOWBC_Filter_Widget {
 	}
 	
 	public function load_mobile($general_filters, $advance_filters) {
-		if(get_option('eo_wbc_alternate_mobile_filters',false)){
+		if(wbc()->options->get_option('filters_filter_setting','filter_setting_alternate_mobile')) {
 			$this->load_grid_mobile($general_filters);
 			$this->slider_price(0);
 			if(!is_wp_error($advance_filters) and !empty($advance_filters)) {
@@ -1082,7 +1086,7 @@ class EOWBC_Filter_Widget {
 			wbc()->load->template('publics/filters/icon_desktop', array("width_class"=>$this->get_width_class($width),"term"=>$term,"title"=>$title,"list"=>$list,"icon_css"=>$icon_css,"reset"=>$reset,"input"=>$input,"type"=>$type,"non_edit"=>$non_edit)); 
 
 		elseif(wbc()->options->get_option('filters_filter_setting','filter_setting_alternate_mobile')):			
-			wbc()->load->template('publics/filters/icon_mobile_alternate', array("term"=>$term,"title"=>$title,"list"=>$list,"icon_css"=>$icon_css,"reset"=>$reset,"input"=>$input,"type"=>$type,"non_edit"=>$non_edit,'advance'=>$advance)); 
+			wbc()->load->template('publics/filters/icon_mobile_alternate', array("term"=>$term,"title"=>$title,"list"=>$list,"icon_css"=>$icon_css,"reset"=>$reset,"input"=>$input,"type"=>$type,"non_edit"=>$non_edit,'advance'=>$advance,'hidden'=>$hidden)); 
 		else:
 			wbc()->load->template('publics/filters/icon_mobile', array("term"=>$term,"title"=>$title,"list"=>$list,"icon_css"=>$icon_css,"reset"=>$reset,"input"=>$input,"type"=>$type,"non_edit"=>$non_edit)); 
 		endif;
@@ -1319,7 +1323,7 @@ class EOWBC_Filter_Widget {
 
 		foreach ($filter as $key => $item) {
 
-			if($item['advance']==0){
+			if(empty($item['advance'])) {
 				$item['order']= ( empty($item['order'])?(-1*count($non_adv_ordered_filter)):$item['order']);
 				
 				$item['column_width']= ( empty($item['column_width']) ? '50' : $item['column_width'] );
