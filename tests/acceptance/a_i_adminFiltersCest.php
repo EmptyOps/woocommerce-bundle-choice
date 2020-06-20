@@ -81,15 +81,14 @@ class a_i_adminFiltersCest
 			$I->fillField("".$prefix."_fconfig_icon_label_size", '0');
 			$I->executeJS("jQuery('#".$prefix."_fconfig_add_reset_link_1').checkbox('set unchecked');");	
 
-			$I->wait(3);
-			echo $I->grabPageSource();
+			// $I->wait(3);
+			// echo $I->grabPageSource();
 
 			// save 
 			$I->click("#".$prefix."_fconfig_submit_btn"); 	//('Save');		//it shouldn't be this way, but there seem some issue with selenium driver and thus when there is another Save button on the page even though on another page and is not visible but still selenium think it is visible and thus gives us error so need to use unique xPath like id etc. 
 
 			// confirm if saved properly or not
 			$I->amOnPage('/wp-admin/admin.php?page=eowbc-filters');	//reload page
-			echo $I->grabPageSource();
 			$I->click( $name.' Page Filter Configuration');
 			$I->see('Test '.$prefix.' filter');	
 
