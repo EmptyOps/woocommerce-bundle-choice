@@ -19,12 +19,6 @@ class Product {
 
     public function init() {
         //die();
-        do_action('wbc_pre_product_page');        
-        $this->specification_view();
-        $this->product_options_view();        
-        do_action('wbc_post_product_page');  
-
-
         $this->att_link =array();
 
         if (isset($_GET['EO_WBC'])) {
@@ -35,7 +29,11 @@ class Product {
         // } elseif (get_option('eo_wbc_pair_status',false)=='1') {
         } elseif (wbc()->options->get_option('configuration','pair_maker_status',false)=='1') {
             $this->eo_wbc_make_pair();
-        }          
+        }  
+        do_action('wbc_pre_product_page');        
+        $this->specification_view();
+        $this->product_options_view();        
+        do_action('wbc_post_product_page');         
     }    
 
     public function specification_view() {

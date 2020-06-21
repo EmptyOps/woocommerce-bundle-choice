@@ -38,22 +38,22 @@
             <div class="column"><?php echo $order; ?></div>
             <div class="column" style="text-align: left;">                        
                 <div class="description">Choose a</div>
-                <div class="title"><?php echo get_option('eo_wbc_first_name',''); ?></div>
+                <div class="title"><?php _e($first_name); ?></div>
             </div>
         </div>
-        <?php if(empty(self::$first)):?>
+        <?php if(empty($first)):?>
         <div class="column ">&nbsp;</div>
         <div class="column" <?php echo empty($first_icon)?'style="visibility: hidden;"':""; ?>>
             <img src="<?php echo $first_icon; ?>" class="ui mini image">
         </div>
         <?php else: ?>
         <div class="column  product_image_section" style="padding-top: 0px;padding-bottom: 0px;">
-            <?php echo self::$first->get_image(); ?>
+            <?php echo $first->get_image(); ?>
         </div>
         <div class="column " style="font-size: x-small;">
-            <?php _e(wc_price(self::$first->get_price())); ?>
+            <?php _e(wc_price($first->get_price())); ?>
             <br/>
-            <u><a href="<?php echo !empty($_GET['FIRST']) ? self::eo_wbc_breadcrumb_view_url(sanitize_text_field($_GET['FIRST']),$order):'#'; ?>">View</a></u>&nbsp;|&nbsp;<u><a href="<?php echo !empty($_GET['FIRST'])?self::eo_wbc_breadcrumb_change_url($order,sanitize_text_field($_GET['FIRST'])):'#'; ?>">Remove</a></u>
+            <u><a href="<?php echo !empty($_GET['FIRST']) ? eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url(sanitize_text_field($_GET['FIRST']),$order):'#'; ?>">View</a></u>&nbsp;|&nbsp;<u><a href="<?php echo !empty($_GET['FIRST'])?eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,sanitize_text_field($_GET['FIRST'])):'#'; ?>">Remove</a></u>
         </div>                        
         
     <?php endif; ?>
