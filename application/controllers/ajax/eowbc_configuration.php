@@ -19,22 +19,43 @@ if(wp_verify_nonce(sanitize_text_field($_POST['_wpnonce']),'eowbc_configuration'
 	wbc()->options->update_option('configuration','enable_make_pair',(empty($_POST['config_enable_make_pair'])?'':sanitize_text_field($_POST['config_enable_make_pair'])));	
 	
 	wbc()->options->update_option('configuration','label_make_pair',sanitize_text_field($_POST['config_label_make_pair']));
-	
-	wbc()->options->update_option('configuration','first_name',sanitize_text_field($_POST['config_first_name']));
+	if(!empty($_POST['config_first_name'])){
+		wbc()->options->update_option('configuration','first_name',sanitize_text_field($_POST['config_first_name']));
 
-	wbc()->options->update_option('configuration','first_slug',@\eo\wbc\model\Category_Attribute::instance()->get_single_category(sanitize_text_field($_POST['config_first_name']))->slug );
-	
-	wbc()->options->update_option('configuration','first_icon',sanitize_text_field($_POST['config_first_icon']));
-	
-	wbc()->options->update_option('configuration','second_name',sanitize_text_field($_POST['config_second_name']));
+		wbc()->options->update_option('configuration','first_slug',@\eo\wbc\model\Category_Attribute::instance()->get_single_category((int)sanitize_text_field($_POST['config_first_name']))->slug );				
+	} else {
+		echo json_encode(array( "type"=>"error", "msg"=>"First category is required!" ));
+		die();		
+	}
 
-	wbc()->options->update_option('configuration','second_slug',@\eo\wbc\model\Category_Attribute::instance()->get_single_category(sanitize_text_field($_POST['config_second_name']))->slug);
+	if(!empty($_POST['config_first_icon'])){
+		wbc()->options->update_option('configuration','first_icon',sanitize_text_field($_POST['config_first_icon']));
+	}	
 	
-	wbc()->options->update_option('configuration','second_icon',sanitize_text_field($_POST['config_second_icon']));
 	
-	wbc()->options->update_option('configuration','preview_name',sanitize_text_field($_POST['config_preview_name']));
+	if(!empty($_POST['config_second_name'])){
+		wbc()->options->update_option('configuration','second_name',sanitize_text_field($_POST['config_second_name']));
+
+		wbc()->options->update_option('configuration','second_slug',@\eo\wbc\model\Category_Attribute::instance()->get_single_category(sanitize_text_field($_POST['config_second_name']))->slug);
+	} else {
+		echo json_encode(array( "type"=>"error", "msg"=>"Second category is required!" ));
+		die();			
+	}
 	
-	wbc()->options->update_option('configuration','preview_icon',sanitize_text_field($_POST['config_preview_icon']));
+	if(!empty($_POST['config_second_icon'])){
+		wbc()->options->update_option('configuration','second_icon',sanitize_text_field($_POST['config_second_icon']));
+	}
+	
+	if(!empty($_POST['config_preview_name'])){
+		wbc()->options->update_option('configuration','preview_name',sanitize_text_field($_POST['config_preview_name']));	
+	} else {
+		echo json_encode(array( "type"=>"error", "msg"=>"Preview step name is required!" ));
+		die();			
+	}
+	
+	if(!empty($_POST['config_preview_icon'])){
+		wbc()->options->update_option('configuration','preview_icon',sanitize_text_field($_POST['config_preview_icon']));	
+	}	
 	
 	/*wbc()->options->update_option('configuration','filter_status',(empty($_POST['config_filter_status'])?'':sanitize_text_field($_POST['config_filter_status'])));*/
 

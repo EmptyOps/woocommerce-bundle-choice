@@ -65,7 +65,7 @@ class Category {
             if(is_array($cart) OR is_object($cart)) {
                    
                 //if product belongs to first target;
-                if (get_option('eo_wbc_first_slug')==$cart['eo_wbc_target']) {
+                if (wbc()->options->get_option('configuration','first_slug')==$cart['eo_wbc_target']) {
 
                     WC()->session->set('EO_WBC_SETS',
                         array(
@@ -79,7 +79,7 @@ class Category {
                     ));
                 }
                 //if product belongs to second target;
-                elseif (get_option('eo_wbc_second_slug')==$cart['eo_wbc_target']) {
+                elseif (wbc()->options->get_option('configuration','second_slug')==$cart['eo_wbc_target']) {
 
                     WC()->session->set('EO_WBC_SETS',
                         array(

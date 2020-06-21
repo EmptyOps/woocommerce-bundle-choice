@@ -121,10 +121,10 @@
     padding-bottom: 1rem !important; }"
 		
 	).(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_2'?".eo-wbc-container>.ui.steps .step:after{
-			border-top: 3em solid white;
+			border-top: 2.27em solid white;
 		    border-left: 1em solid #00000000;
-		    border-bottom: 3em solid white;
-		    border-right: 1em solid white;
+		    border-bottom: 2.27em solid white;
+		    border-right: 0em solid white;
 		    height: 0px;
 		    width: 0px;
 		    top: 0;
@@ -132,7 +132,21 @@
 		    right: -1em;
 		    transition: none !important;
 		    transform: none !important;
-		}":""
+		} .eo-wbc-container>.ui.steps .step .column.product_image_section img{ margin-left:0px; } .eo-wbc-container.container .ui.steps .step{ padding-top: 0em !important; }.eo-wbc-container.container .ui.steps .step { padding-top: 1em !important; padding-bottom: 1.5em !important; }
+		.eo-wbc-container>.ui.steps .step:after {
+		    border-top: 3em solid white;
+		    border-left: 1em solid #00000000;
+		    border-bottom: 3em solid white;
+		    border-right: 0em solid white;
+		    height: 0px;
+		    width: 0px;
+		    top: 0;
+		    position: absolute;
+		    right: -1em;
+		    transition: none !important;
+		    transform: none !important;
+		}
+		":""
 	)."</style>";
 
 ?>
