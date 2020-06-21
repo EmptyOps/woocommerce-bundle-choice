@@ -37,22 +37,22 @@
             <div class="column"><?php echo $order; ?></div>
             <div class="column" style="text-align: left;">
                 <div class="description">Choose a</div>
-                <div class="title"><?php echo $second ?></div>
+                <div class="title"><?php _e($second_name) ?></div>
             </div>
         </div>
-        <?php if(!empty($second)):?>
+        <?php if(empty($second)):?>
         <div class="column ">&nbsp;</div>
         <div class="column" <?php echo empty($second_icon)?'style="visibility: hidden;"':""; ?>>
             <img src="<?php echo $second_icon; ?>">
         </div>
         <?php else: ?>                
             <div class="column  product_image_section" style="padding-top: 0px;padding-bottom: 0px;">
-                <?php echo self::$second->get_image(); ?>
+                <?php echo $second->get_image(); ?>
             </div>
             <div class="column " style="font-size: x-small;">
-                <?php _e(wc_price(self::$second->get_price())); ?>
+                <?php _e(wc_price($second->get_price())); ?>
                 <br/>
-                <u><a href="<?php echo (!empty($_GET['SECOND'])?self::eo_wbc_breadcrumb_view_url(sanitize_text_field($_GET['SECOND']),$order):'#'); ?>">View</a></u>&nbsp;|&nbsp;<u><a href="<?php echo (!empty($_GET['SECOND'])?self::eo_wbc_breadcrumb_change_url($order,sanitize_text_field($_GET['SECOND'])):'#'); ?>">Remove</a></u>
+                <u><a href="<?php echo (!empty($_GET['SECOND'])?eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url(sanitize_text_field($_GET['SECOND']),$order):'#'); ?>">View</a></u>&nbsp;|&nbsp;<u><a href="<?php echo (!empty($_GET['SECOND'])?eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,sanitize_text_field($_GET['SECOND'])):'#'); ?>">Remove</a></u>
             </div>                
     <?php endif; ?>            
     </div>
