@@ -126,9 +126,9 @@ class Eowbc_Filters {
 			    	if( $is_table_save ) {
 			    		if( $fk == "d_fconfig_ordering" || $fk == "s_fconfig_ordering" )  {
 			    			
-			    			if($fk=='d_fconfig_ordering'){
-			    				$table_data['filter_template'] = $_POST['second_category_altr_filt_widgts'];
-			    			} elseif ($fk == "s_fconfig_ordering") {
+			    			if($fk=='d_fconfig_ordering' and !empty($_POST['first_category_altr_filt_widgts'])){
+			    				$table_data['filter_template'] = $_POST['first_category_altr_filt_widgts'];
+			    			} elseif ($fk == "s_fconfig_ordering" and !empty($_POST['second_category_altr_filt_widgts'])) {
 			    				$table_data['filter_template'] = $_POST['second_category_altr_filt_widgts'];
 			    			}
 
