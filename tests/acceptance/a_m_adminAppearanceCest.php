@@ -31,12 +31,12 @@ class a_m_adminAppearanceCest
 
 		// set fields 
 		$I->fillField('tagline_text', 'button tagline...');
-		$I->executeJS("jQuery('#config_filter_status').checkbox('set checked');");
+		$I->executeJS("jQuery('#def_button_1').checkbox('set checked');");
 		$I->fillField('button_text', 'button text...');
 		$I->fillField('button_radius', '3px');
-		$I->fillField('button_backcolor_active', 'red');
-		$I->fillField('button_hovercolor', 'green');
-		$I->fillField('button_textcolor', 'blue');
+		$I->executeJS('jQuery("#button_backcolor_active").val("#000000");'); 
+		$I->executeJS('jQuery("#button_hovercolor").val("#000111");'); 
+		$I->executeJS('jQuery("#button_textcolor").val("#ffffff");'); 
 
 		// save 
 		$I->click('Save Appearance Settings'); 	
@@ -44,7 +44,7 @@ class a_m_adminAppearanceCest
 		// confirm if saved properly or not. TODO actually we should connfirm all values of the form if saved and repopulated properly in edit mode or saved list or not. 
 		$I->amOnPage('/wp-admin/admin.php?page=eowbc-appearance');	//reload page
 		// $I->click('Map creation and modification');
-		$I->see('button tagline...', 'input');	//I verify that I can see "button tagline..." inside input tag 
+		$I->seeInField('input[tagline_text]', 'button tagline...');	//$I->see('button tagline...', 'input');	//I verify that I can see "button tagline..." inside input tag 
 
 	}
 
@@ -64,12 +64,12 @@ class a_m_adminAppearanceCest
 
 		// set fields 
 		$I->fillField('breadcrumb_radius', '4px');
-		$I->fillField('breadcrumb_backcolor_active', 'red');
-		$I->fillField('breadcrumb_backcolor_inactive', 'green');
-		$I->fillField('breadcrumb_num_icon_backcolor_active', 'red');
-		$I->fillField('breadcrumb_num_icon_backcolor_inactive', 'green');
-		$I->fillField('breadcrumb_title_backcolor_active', 'red');
-		$I->fillField('breadcrumb_title_backcolor_inactive', 'green');
+		$I->executeJS('jQuery("#breadcrumb_backcolor_active").val("#000000");'); 
+		$I->executeJS('jQuery("#breadcrumb_backcolor_inactive").val("#000111");');
+		$I->executeJS('jQuery("#breadcrumb_num_icon_backcolor_active").val("#000000");'); 
+		$I->executeJS('jQuery("#breadcrumb_num_icon_backcolor_inactive").val("#000111");');
+		$I->executeJS('jQuery("#breadcrumb_title_backcolor_active").val("#000000");'); 
+		$I->executeJS('jQuery("#breadcrumb_title_backcolor_inactive").val("#000111");');
 		$I->executeJS("jQuery('#showhide_icons_1').checkbox('set unchecked');");
 		$I->executeJS("jQuery('#appearance_breadcrumb_hide_border_1').checkbox('set checked');");	
 		$I->executeJS("jQuery('#appearance_breadcrumb_fixed_navigation_1').checkbox('set checked');");	
@@ -81,7 +81,7 @@ class a_m_adminAppearanceCest
 		// confirm if saved properly or not. TODO actually we should connfirm all values of the form if saved and repopulated properly in edit mode or saved list or not. 
 		$I->amOnPage('/wp-admin/admin.php?page=eowbc-appearance');	//reload page
 		$I->click('Breadcrumb');
-		$I->see('4px', 'input');	//I verify that I can see "button tagline..." inside input tag 
+		$I->seeInField('input[breadcrumb_radius]', '4px');	//$I->see('4px', 'input');	//I verify that I can see "button tagline..." inside input tag 
 
 	}
 
@@ -101,10 +101,10 @@ class a_m_adminAppearanceCest
 
 		// set fields 
 		$I->fillField('header_font', 'Sans...');
-		$I->fillField('header_textcolor', 'red');
-		$I->fillField('labels_textcolor', 'green');
-		$I->fillField('slider_nodes_backcolor_active', 'red');
-		$I->fillField('slider_track_backcolor_active', 'green');
+		$I->executeJS('jQuery("#header_textcolor").val("#000000");'); 
+		$I->executeJS('jQuery("#labels_textcolor").val("#000111");');
+		$I->executeJS('jQuery("#slider_nodes_backcolor_active").val("#000000");'); 
+		$I->executeJS('jQuery("#slider_track_backcolor_active").val("#000111");');
 		$I->fillField('icon_size', '10');
 		$I->fillField('icon_label_size', '15');
 
@@ -115,7 +115,7 @@ class a_m_adminAppearanceCest
 		// confirm if saved properly or not. TODO actually we should connfirm all values of the form if saved and repopulated properly in edit mode or saved list or not. 
 		$I->amOnPage('/wp-admin/admin.php?page=eowbc-appearance');	//reload page
 		$I->click('Filters');
-		$I->see('Sans...', 'input');	//I verify that I can see "button tagline..." inside input tag 
+		$I->seeInField('input[header_font]', 'Sans...');	//$I->see('Sans...', 'input');	//I verify that I can see "button tagline..." inside input tag 
 
 	}
 
@@ -148,7 +148,7 @@ class a_m_adminAppearanceCest
 		$I->wait(3);
 		$I->click('Product Page');
 		echo $I->grabPageSource();
-		$I->see('Add to bag...', 'input');	//I verify that I can see "button tagline..." inside input tag 
+		$I->seeInField('input[fc_atc_button_text]', 'Add to bag...');	//$I->see('Add to bag...', 'input');	//I verify that I can see "button tagline..." inside input tag 
 
 	}
 

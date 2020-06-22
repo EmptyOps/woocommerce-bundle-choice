@@ -108,6 +108,7 @@ class Admin_Menu_Factory {
 
 						array_push($this->tabs,array(
 												'title'=>$submenu['title'],
+												'menu_title'=>$submenu['menu_title'],
 												'slug'=>$submenu['slug'],
 												'active'=>($page==$submenu['slug']?1:0),
 												'content'=>$content,

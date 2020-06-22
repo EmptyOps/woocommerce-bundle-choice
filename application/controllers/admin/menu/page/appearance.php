@@ -34,6 +34,7 @@ if ( ! class_exists( 'Appearance' ) ) {
 										'type'=>'checkbox',
 										'value'=>array('1'),
 										'options'=>array('1'=>' '),
+										'is_id_as_name'=>true,
 										'class'=>array('fluid'),						
 										// 'size_class'=>array('eight','wide'),
 										'inline'=>false,
