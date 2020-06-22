@@ -22,8 +22,8 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 		public function get_menu_structure() {
 			
 			$menu = array(
-				'title'=>eowbc_lang('Home'),
-				'menu_title'=>eowbc_lang('WooCommerce Bundle Choice'),
+				'title'=>eowbc_lang('Home').' - '.constant('EOWBC_NAME'),
+				'menu_title'=>constant('EOWBC_NAME'),	//eowbc_lang('WooCommerce Bundle Choice'),
 				'capability'=>'manage_options',
 				'slug'=>'eowbc',
 				'template'=>'admin/menu/home',
@@ -35,7 +35,7 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 
 						array(
 							'parent_slug'=>null,
-							'title'=>eowbc_lang('Setup WooCommerce Product Bundle Choice'),
+							'title'=>eowbc_lang('Setup').' '.constant('EOWBC_NAME'),	//eowbc_lang('Setup WooCommerce Product Bundle Choice'),
 							'menu_title'=>eowbc_lang('Setup WooCommerce Product Bundle Choice'),
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-install',
@@ -44,8 +44,8 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 						),
 						array(
 							'parent_slug'=>'eowbc',
-							'title'=>eowbc_lang('General - Woo Choice Plugin'),
-							'menu_title'=>eowbc_lang('General - Woo Choice Plugin'),
+							'title'=>eowbc_lang('General').' - '.constant('EOWBC_NAME'),	//eowbc_lang('General - Woo Choice Plugin'),
+							'menu_title'=>eowbc_lang('General'),	//eowbc_lang('General - Woo Choice Plugin'),
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-configuration',
 							'template'=>'admin/menu/configuration',
@@ -53,7 +53,7 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 						),
 						array(
 							'parent_slug'=>'eowbc',
-							'title'=>eowbc_lang('Filters'),
+							'title'=>eowbc_lang('Filters').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Filters'),
 							'menu_title'=>eowbc_lang('Filters'),
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-filters',
@@ -62,7 +62,7 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 						),
 						array(
 							'parent_slug'=>'eowbc',
-							'title'=>eowbc_lang('Mapping'),
+							'title'=>eowbc_lang('Mapping').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Mapping'),
 							'menu_title'=>eowbc_lang('Mapping'),
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-mapping',
@@ -71,7 +71,7 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 						),						
 						array(
 							'parent_slug'=>'eowbc',
-							'title'=>eowbc_lang('Appearance'),
+							'title'=>eowbc_lang('Appearance').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Appearance'),
 							'menu_title'=>eowbc_lang('Appearance'),
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-appearance',
@@ -80,7 +80,7 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 						),
 						array(
 							'parent_slug'=>'eowbc',
-							'title'=>eowbc_lang('Tiny Features'),
+							'title'=>eowbc_lang('Tiny Features').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Tiny Features'),
 							'menu_title'=>eowbc_lang('Tiny Features'),
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-tiny-features',
@@ -89,7 +89,7 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 						),
 						array(
 							'parent_slug'=>'eowbc',
-							'title'=>eowbc_lang('Price Control(Beta)'),
+							'title'=>eowbc_lang('Price Control(Beta)').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Price Control(Beta)'),
 							'menu_title'=>eowbc_lang('Price Control(Beta)'),
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-price-control',
@@ -98,7 +98,7 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 						),
 						array(
 							'parent_slug'=>'eowbc',
-							'title'=>eowbc_lang('Settings & Status'),
+							'title'=>eowbc_lang('Settings & Status').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Settings & Status'),
 							'menu_title'=>eowbc_lang('Settings & Status'),
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-setting-status',
@@ -107,7 +107,7 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 						),
 						array(
 							'parent_slug'=>'eowbc',
-							'title'=>eowbc_lang('Extensions'),
+							'title'=>eowbc_lang('Extensions').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Extensions'),
 							'menu_title'=>eowbc_lang('Extensions'),
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-extensions',
