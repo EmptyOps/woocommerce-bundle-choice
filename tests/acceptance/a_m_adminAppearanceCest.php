@@ -97,7 +97,7 @@ class a_m_adminAppearanceCest
 		/* Map creation and modification tab */
 		// go to the tab
 		$I->click('//*[@id="eowbc_appearance"]/div[1]/a[3]');		//simple text based click wouldn'e work due to two filter named tabs 
-		$I->see('Font family to be used in filters');
+		$I->see('Header Text Font');
 
 		// set fields 
 		$I->fillField('header_font', 'Sans...');
