@@ -145,7 +145,9 @@ class a_m_adminAppearanceCest
 
 		// confirm if saved properly or not. TODO actually we should connfirm all values of the form if saved and repopulated properly in edit mode or saved list or not. 
 		$I->amOnPage('/wp-admin/admin.php?page=eowbc-appearance');	//reload page
+		$I->wait(3);
 		$I->click('Product Page');
+		echo $I->grabPageSource();
 		$I->see('Add to bag...', 'input');	//I verify that I can see "button tagline..." inside input tag 
 
 	}
