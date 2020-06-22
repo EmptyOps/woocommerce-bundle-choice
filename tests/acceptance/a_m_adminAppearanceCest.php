@@ -79,7 +79,7 @@ class a_m_adminAppearanceCest
 		$I->click('Save Appearance Settings'); 	
 
 		// confirm if saved properly or not. TODO actually we should connfirm all values of the form if saved and repopulated properly in edit mode or saved list or not. 
-		$I->amOnPage('/wp-admin/admin.php?page=eowbc-appearance');	//reload page
+		$I->reloadPage();	//reload page
 		$I->click('Breadcrumb');
 		$I->seeInField('breadcrumb_radius', '4px');	//$I->see('4px', 'input');	//I verify that I can see "button tagline..." inside input tag 
 
@@ -115,7 +115,7 @@ class a_m_adminAppearanceCest
 		// confirm if saved properly or not. TODO actually we should connfirm all values of the form if saved and repopulated properly in edit mode or saved list or not. 
 		$I->amOnPage('/wp-admin/admin.php?page=eowbc-appearance');	//reload page
 		$I->click('Filters');
-		$I->seeInField('header_font', 'Sans...');	//$I->see('Sans...', 'input');	//I verify that I can see "button tagline..." inside input tag 
+		$I->seeInField('#header_font', 'Sans...');	//$I->see('Sans...', 'input');	//I verify that I can see "button tagline..." inside input tag 
 
 	}
 
