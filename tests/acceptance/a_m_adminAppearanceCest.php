@@ -148,7 +148,7 @@ class a_m_adminAppearanceCest
 		$I->wait(3);
 		$I->click('Product Page');
 		echo $I->grabPageSource();
-		$I->seeInField('input[fc_atc_button_text]', 'Add to bag...');	//$I->see('Add to bag...', 'input');	//I verify that I can see "button tagline..." inside input tag 
+		$I->seeInField('fc_atc_button_text', 'Add to bag...');	//$I->see('Add to bag...', 'input');	//I verify that I can see "button tagline..." inside input tag 
 
 	}
 
