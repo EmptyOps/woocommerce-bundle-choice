@@ -42,7 +42,7 @@ class a_m_adminAppearanceCest
 		$I->click('Save Appearance Settings'); 	
 
 		// confirm if saved properly or not. TODO actually we should connfirm all values of the form if saved and repopulated properly in edit mode or saved list or not. 
-		$I->amOnPage('/wp-admin/admin.php?page=eowbc-appearance');	//reload page
+		$I->reloadPage();	//reload page
 		// $I->click('Map creation and modification');
 		$I->seeInField('tagline_text', 'button tagline...');	//$I->see('button tagline...', 'input');	//I verify that I can see "button tagline..." inside input tag 
 
@@ -113,9 +113,9 @@ class a_m_adminAppearanceCest
 		$I->click('Save Appearance Settings'); 	
 
 		// confirm if saved properly or not. TODO actually we should connfirm all values of the form if saved and repopulated properly in edit mode or saved list or not. 
-		$I->amOnPage('/wp-admin/admin.php?page=eowbc-appearance');	//reload page
-		$I->click('Filters');
-		$I->seeInField('#header_font', 'Sans...');	//$I->see('Sans...', 'input');	//I verify that I can see "button tagline..." inside input tag 
+		$I->reloadPage();	//reload page
+		$I->click('//*[@id="eowbc_appearance"]/div[1]/a[3]');
+		$I->seeInField('header_font', 'Sans...');	//$I->see('Sans...', 'input');	//I verify that I can see "button tagline..." inside input tag 
 
 	}
 
@@ -144,7 +144,7 @@ class a_m_adminAppearanceCest
 		$I->click('Save Appearance Settings'); 	
 
 		// confirm if saved properly or not. TODO actually we should connfirm all values of the form if saved and repopulated properly in edit mode or saved list or not. 
-		$I->amOnPage('/wp-admin/admin.php?page=eowbc-appearance');	//reload page
+		$I->reloadPage();	//reload page
 		$I->wait(3);
 		$I->click('Product Page');
 		echo $I->grabPageSource();
