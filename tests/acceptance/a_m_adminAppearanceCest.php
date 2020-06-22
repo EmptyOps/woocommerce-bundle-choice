@@ -80,6 +80,8 @@ class a_m_adminAppearanceCest
 
 		// confirm if saved properly or not. TODO actually we should connfirm all values of the form if saved and repopulated properly in edit mode or saved list or not. 
 		$I->reloadPage();	//reload page
+		$I->executeJS('window.scrollTo( 0, 10 );');
+		$I->wait(3);
 		$I->click('Breadcrumb');
 		$I->seeInField('breadcrumb_radius', '4px');	//$I->see('4px', 'input');	//I verify that I can see "button tagline..." inside input tag 
 
@@ -114,6 +116,8 @@ class a_m_adminAppearanceCest
 
 		// confirm if saved properly or not. TODO actually we should connfirm all values of the form if saved and repopulated properly in edit mode or saved list or not. 
 		$I->reloadPage();	//reload page
+		$I->executeJS('window.scrollTo( 0, 10 );');
+		$I->wait(3);
 		$I->click('//*[@id="eowbc_appearance"]/div[1]/a[3]');
 		$I->seeInField('header_font', 'Sans...');	//$I->see('Sans...', 'input');	//I verify that I can see "button tagline..." inside input tag 
 
@@ -145,9 +149,9 @@ class a_m_adminAppearanceCest
 
 		// confirm if saved properly or not. TODO actually we should connfirm all values of the form if saved and repopulated properly in edit mode or saved list or not. 
 		$I->reloadPage();	//reload page
-		$I->wait(3);
+		// $I->wait(3);
 		$I->click('Product Page');
-		echo $I->grabPageSource();
+		// echo $I->grabPageSource();
 		$I->seeInField('fc_atc_button_text', 'Add to bag...');	//$I->see('Add to bag...', 'input');	//I verify that I can see "button tagline..." inside input tag 
 
 	}
