@@ -228,7 +228,7 @@ class Eowbc_Jewelry {
 	}
 	
 	public function CatAtData__construct(){
-			$_img_url=constant('EOWBC_ASSET_URL').'icon/sample_data/jewelry/';	//EO_WBC_PLUGIN_DIR.'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/';
+			$_img_url=constant('EOWBC_ASSET_URL').'img/sample_data/jewelry/';	//EO_WBC_PLUGIN_DIR.'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/';
 			$this->gallay_img = $_img_url. 'Products/';
 			$this->product= array(
             array(

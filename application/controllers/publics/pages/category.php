@@ -38,7 +38,8 @@ class Category {
             /*wbc()->options->update_option('filters_filter_setting','filter_setting_alternate_mobile','filter_setting_alternate_mobile');*/
 
             
-            if(wbc()->options->get_option('filters_filter_setting','config_filter_status')){
+            if(wbc()->options->get_option('filters_filter_setting','filter_setting_status')) {
+
                 if(
                      // ($this->eo_wbc_get_category()==get_option('eo_wbc_first_slug') && get_option('eo_wbc_add_filter_first',FALSE) )
                      // OR 

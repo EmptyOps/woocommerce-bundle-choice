@@ -25,7 +25,11 @@ class Images{
 		
 	}
 
-  public function id2url(int $id){
+  public function id2url($id){
+  	if (empty($id)) {
+  		return '';
+  	}
+  	
     $url = wp_get_attachment_url($id);
     if(is_wp_error($url) or empty($url)) {
       return '';
