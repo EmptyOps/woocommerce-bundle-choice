@@ -7,7 +7,7 @@ if( empty($mode) || ( $mode != "setup_wizard" && $mode != "plain" ) ) {
 ?>
 <h2 class="ui header left aligned">   
 	<img class="ui avatar image" src="https://www.emptyops.com/demo/zokri-shop/wp-content/uploads/2020/02/bundle_site_logo_2-1.svg" /> 
-    <div class="content"><?php echo constant('EOWBC_NAME'); ?><?php echo constant('EOWBC_VERSION'); ?>
+    <div class="content"><?php echo constant('EOWBC_NAME'); ?>
         <div class="sub header" style="font-style: italic;">Thank you for installing <?php echo constant('EOWBC_NAME'); ?>! <?php echo eowbc_lang("Product bundling based on user's choice."); ?></div>
         <i style="font-size: xxx-large;right: 0.5em;position: absolute;" class="question circle outline eo_help icon" data-html="
         <div class='ui basic segments'>
