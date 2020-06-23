@@ -17,6 +17,8 @@ class f_g_sampleLandingPageCest
 		$I->amOnPage('/design-your-own-ring');
 
 		// Check if buttons with text x are visible 
+		$I->wait(3);
+		echo $I->grabPageSource();
         $I->see('Start with Diamond');
 
 		// I click on button one and I see in next page text like 1 {button text}
