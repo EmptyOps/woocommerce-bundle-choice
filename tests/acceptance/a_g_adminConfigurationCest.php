@@ -32,7 +32,7 @@ class a_g_adminConfigurationCest
 		// // $I->fillField('config_buttons_page', '1');	
 		// $I->click('#config_buttons_page_dropdown_div');
 		// $I->click('Home page only');	//('#config_buttons_page_dropdown_div > div.menu.transition.visible > div:nth-child(2)');
-		$I->executeJS("jQuery('#config_buttons_page_dropdown_div').dropdown('set selected', 1);");	//better than setting 1 directly is to select the nth element that has value 1 
+		$I->executeJS("jQuery('#config_buttons_page_dropdown_div').dropdown('set selected', 0);");	//better than setting 1 directly is to select the nth element that has value 1 
 
 		// save 
 		$I->click('Save');
@@ -40,7 +40,7 @@ class a_g_adminConfigurationCest
 		// confirm if saved properly or not
 		$I->reloadPage();	//reload page
 		$I->click('Buttons');
-		$I->see('Home page only');	//that is the position option selected
+		$I->see('Custom landing page');	//that is the position option selected
 
 	}
 
