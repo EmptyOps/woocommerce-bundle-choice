@@ -298,7 +298,7 @@ class EO_WBC_Choice{
     //Frontend sercive method, to add shortcode functinality and save FG_COLOR to session.
     private function eo_wbc_front_service(){ 
         //Perform shortcode routine if required.
-        if( get_option('eo_wbc_btn_setting')==='1' || get_option('eo_wbc_btn_setting')==='0' ){
+        if( get_option('eo_wbc_btn_setting')=='0' || get_option('eo_wbc_btn_setting')=='2' || get_option('eo_wbc_btn_setting')=='3'){
             add_shortcode('woo-bundle-choice-btn',function(){
                 require_once apply_filters('eo_wbc_front_home','EO_WBC_Frontend/EO_WBC_Home.php');               
                 if(!class_exists('EO_WBC_Home'))
