@@ -32,7 +32,7 @@ class a_m_adminAppearanceCest
 		// set fields 
 		$I->fillField('tagline_text', 'button tagline...');
 		$I->executeJS("jQuery('#def_button_1').checkbox('set checked');");
-		$I->fillField('button_text', 'button text...');
+		$I->fillField('button_text', 'Start with ');
 		$I->fillField('button_radius', '3px');
 		$I->executeJS('jQuery("#button_backcolor_active").val("#000000");'); 
 		$I->executeJS('jQuery("#button_hovercolor").val("#000111");'); 
