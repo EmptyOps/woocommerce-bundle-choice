@@ -32,6 +32,8 @@ if(empty($button_text)) {
 	$button_text = __('Start with ','woo-bundle-choice');
 }
 
+WC()->session->set('EO_WBC_SETS',FALSE);            
+
 // Load assets first to avoid zaping effect
 wbc()->load->asset('css','fomantic/semantic.min');
 wbc()->load->asset('css','publics/buttons');

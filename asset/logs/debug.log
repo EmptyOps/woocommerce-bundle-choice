@@ -428,3 +428,279 @@
 "Uncaught Error: Class 'eo\\wbc\\model\\publics\\component\\EO_WBC_Breadcrumb' not found in \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/controllers\/publics\/pages\/preview.php:271\nStack trace:\n#0 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/controllers\/publics\/pages\/preview.php(34): eo\\wbc\\controllers\\publics\\pages\\Preview->eo_wbc_render()\n#1 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/controllers\/public-handler.php(60): eo\\wbc\\controllers\\publics\\pages\\Preview->init()\n#2 \/var\/www\/html\/fresh\/wp-includes\/class-wp-hook.php(287): eo\\wbc\\controllers\\Public_Handler::eo\\wbc\\controllers\\{closure}('')\n#3 \/var\/www\/html\/fresh\/wp-includes\/class-wp-hook.php(311): WP_Hook->apply_filters(NULL, Array)\n#4 \/var\/www\/html\/fresh\/wp-includes\/plugin.php(478): WP_Hook->do_action(Array)\n#5 \/var\/www\/html\/fresh\/wp-includes\/template-loader.php(13): do_action('template_redire...')\n#6 \/var\/www\/html\/fresh\/wp-blog-header.php(19): require_once('\/var\/ww"
 [Jun 21 2020 10:33:16] ERROR in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/pages/preview.php at line number 292
 "Uncaught Error: Class 'eo\\wbc\\model\\publics\\component\\EO_WBC_Breadcrumb' not found in \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/controllers\/publics\/pages\/preview.php:292\nStack trace:\n#0 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/controllers\/publics\/pages\/preview.php(34): eo\\wbc\\controllers\\publics\\pages\\Preview->eo_wbc_render()\n#1 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/controllers\/public-handler.php(60): eo\\wbc\\controllers\\publics\\pages\\Preview->init()\n#2 \/var\/www\/html\/fresh\/wp-includes\/class-wp-hook.php(287): eo\\wbc\\controllers\\Public_Handler::eo\\wbc\\controllers\\{closure}('')\n#3 \/var\/www\/html\/fresh\/wp-includes\/class-wp-hook.php(311): WP_Hook->apply_filters(NULL, Array)\n#4 \/var\/www\/html\/fresh\/wp-includes\/plugin.php(478): WP_Hook->do_action(Array)\n#5 \/var\/www\/html\/fresh\/wp-includes\/template-loader.php(13): do_action('template_redire...')\n#6 \/var\/www\/html\/fresh\/wp-blog-header.php(19): require_once('\/var\/ww"
+[Jun 22 2020 04:16:15] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/pages/view_order.php at line number 53
+"count(): Parameter must be an array or an object that implements Countable"
+[Jun 22 2020 04:28:30] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 04:28:32] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 04:28:34] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 04:30:36] ERROR in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/public-handler.php at line number 78
+"Uncaught Error: Class 'eo\\wbc\\controllers\\publics\\pages\\View_Order' not found in \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/controllers\/public-handler.php:78\nStack trace:\n#0 \/var\/www\/html\/fresh\/wp-includes\/class-wp-hook.php(287): eo\\wbc\\controllers\\Public_Handler::eo\\wbc\\controllers\\{closure}('')\n#1 \/var\/www\/html\/fresh\/wp-includes\/class-wp-hook.php(311): WP_Hook->apply_filters(NULL, Array)\n#2 \/var\/www\/html\/fresh\/wp-includes\/plugin.php(478): WP_Hook->do_action(Array)\n#3 \/var\/www\/html\/fresh\/wp-includes\/template-loader.php(13): do_action('template_redire...')\n#4 \/var\/www\/html\/fresh\/wp-blog-header.php(19): require_once('\/var\/www\/html\/f...')\n#5 \/var\/www\/html\/fresh\/index.php(17): require('\/var\/www\/html\/f...')\n#6 {main}\n  thrown"
+[Jun 22 2020 04:31:31] ERROR in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/public-handler.php at line number 78
+"Uncaught Error: Class 'eo\\wbc\\controllers\\publics\\pages\\View_Order' not found in \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/controllers\/public-handler.php:78\nStack trace:\n#0 \/var\/www\/html\/fresh\/wp-includes\/class-wp-hook.php(287): eo\\wbc\\controllers\\Public_Handler::eo\\wbc\\controllers\\{closure}('')\n#1 \/var\/www\/html\/fresh\/wp-includes\/class-wp-hook.php(311): WP_Hook->apply_filters(NULL, Array)\n#2 \/var\/www\/html\/fresh\/wp-includes\/plugin.php(478): WP_Hook->do_action(Array)\n#3 \/var\/www\/html\/fresh\/wp-includes\/template-loader.php(13): do_action('template_redire...')\n#4 \/var\/www\/html\/fresh\/wp-blog-header.php(19): require_once('\/var\/www\/html\/f...')\n#5 \/var\/www\/html\/fresh\/index.php(17): require('\/var\/www\/html\/f...')\n#6 {main}\n  thrown"
+[Jun 22 2020 04:44:04] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 22 2020 04:44:34] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/view/publics/buttons.php at line number 17
+"Trying to get property 'name' of non-object"
+[Jun 22 2020 04:44:38] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/view/publics/buttons.php at line number 17
+"Trying to get property 'name' of non-object"
+[Jun 22 2020 04:45:00] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 22 2020 04:45:04] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 22 2020 04:45:05] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 22 2020 04:46:41] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 22 2020 04:51:47] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/view/publics/buttons.php at line number 17
+"Trying to get property 'name' of non-object"
+[Jun 22 2020 04:51:52] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 22 2020 04:51:54] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 22 2020 04:51:56] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 22 2020 04:52:18] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 04:52:20] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 04:52:23] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 07:05:07] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 22 2020 07:05:24] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 07:36:10] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 22 2020 07:37:35] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 08:48:32] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 08:48:35] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 08:52:16] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/view/publics/breadcrumb/second_step_alternate_desktop_1.php at line number 14
+"Undefined variable: second_namme"
+[Jun 22 2020 08:52:35] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 08:52:58] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/view/publics/breadcrumb/second_step_alternate_desktop_1.php at line number 27
+"Undefined variable: second_namme"
+[Jun 22 2020 08:56:22] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/view/publics/breadcrumb/first_step_alternate_desktop_1.php at line number 9
+"Undefined variable: first_slug"
+[Jun 22 2020 09:18:39] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 09:43:22] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 22 2020 09:43:32] ERROR in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/view/publics/breadcrumb/first_step_alternate_desktop_2.php at line number 19
+"Uncaught Error: Call to undefined method WBC_Loader::eo_wbc_breadcrumb_view_url() in \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/view\/publics\/breadcrumb\/first_step_alternate_desktop_2.php:19\nStack trace:\n#0 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/library\/lib-load.php(83): require()\n#1 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/model\/publics\/component\/eowbc_breadcrumb.php(281): WBC_Loader->template('publics\/breadcr...', Array)\n#2 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/model\/publics\/component\/eowbc_breadcrumb.php(183): eo\\wbc\\model\\publics\\component\\EOWBC_Breadcrumb::eo_wbc_breadcumb_first_html('3', 1)\n#3 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/model\/publics\/component\/eowbc_breadcrumb.php(104): eo\\wbc\\model\\publics\\component\\EOWBC_Breadcrumb::eo_wbc_breadcrumb_desktop('3', 'eo_diamond_shap...')\n#4 \/var\/www\/html\/fresh\/wp-content\/plugins"
+[Jun 22 2020 09:44:00] ERROR in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/view/publics/breadcrumb/first_step_alternate_desktop_2.php at line number 19
+"Uncaught Error: Call to undefined method WBC_Loader::eo_wbc_breadcrumb_view_url() in \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/view\/publics\/breadcrumb\/first_step_alternate_desktop_2.php:19\nStack trace:\n#0 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/library\/lib-load.php(83): require()\n#1 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/model\/publics\/component\/eowbc_breadcrumb.php(281): WBC_Loader->template('publics\/breadcr...', Array)\n#2 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/model\/publics\/component\/eowbc_breadcrumb.php(183): eo\\wbc\\model\\publics\\component\\EOWBC_Breadcrumb::eo_wbc_breadcumb_first_html('2', 1)\n#3 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/model\/publics\/component\/eowbc_breadcrumb.php(104): eo\\wbc\\model\\publics\\component\\EOWBC_Breadcrumb::eo_wbc_breadcrumb_desktop('2', 'eo_diamond_shap...')\n#4 \/var\/www\/html\/fresh\/wp-content\/plugins"
+[Jun 22 2020 09:44:24] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 09:44:29] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 09:44:29] ERROR in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/view/publics/breadcrumb/first_step_alternate_desktop_2.php at line number 19
+"Uncaught Error: Call to undefined method WBC_Loader::eo_wbc_breadcrumb_view_url() in \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/view\/publics\/breadcrumb\/first_step_alternate_desktop_2.php:19\nStack trace:\n#0 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/library\/lib-load.php(83): require()\n#1 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/model\/publics\/component\/eowbc_breadcrumb.php(281): WBC_Loader->template('publics\/breadcr...', Array)\n#2 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/model\/publics\/component\/eowbc_breadcrumb.php(183): eo\\wbc\\model\\publics\\component\\EOWBC_Breadcrumb::eo_wbc_breadcumb_first_html('2', 1)\n#3 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/model\/publics\/component\/eowbc_breadcrumb.php(104): eo\\wbc\\model\\publics\\component\\EOWBC_Breadcrumb::eo_wbc_breadcrumb_desktop('2', 'eo_diamond_shap...')\n#4 \/var\/www\/html\/fresh\/wp-content\/plugins"
+[Jun 22 2020 09:45:02] ERROR in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/view/publics/breadcrumb/first_step_alternate_desktop_2.php at line number 19
+"Uncaught Error: Call to undefined method WBC_Loader::eo_wbc_breadcrumb_view_url() in \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/view\/publics\/breadcrumb\/first_step_alternate_desktop_2.php:19\nStack trace:\n#0 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/library\/lib-load.php(83): require()\n#1 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/model\/publics\/component\/eowbc_breadcrumb.php(281): WBC_Loader->template('publics\/breadcr...', Array)\n#2 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/model\/publics\/component\/eowbc_breadcrumb.php(183): eo\\wbc\\model\\publics\\component\\EOWBC_Breadcrumb::eo_wbc_breadcumb_first_html('2', 1)\n#3 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/model\/publics\/component\/eowbc_breadcrumb.php(104): eo\\wbc\\model\\publics\\component\\EOWBC_Breadcrumb::eo_wbc_breadcrumb_desktop('2', 'eo_diamond_shap...')\n#4 \/var\/www\/html\/fresh\/wp-content\/plugins"
+[Jun 22 2020 09:46:31] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 09:48:04] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 09:48:17] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 09:48:20] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 09:48:23] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 09:52:31] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 09:52:49] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 22 2020 09:57:52] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 22 2020 10:09:18] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 10:11:00] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 10:11:21] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 10:11:40] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 10:13:05] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 22 2020 10:13:24] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 10:13:58] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 10:14:35] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 10:15:09] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 10:18:23] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 10:18:50] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 10:19:38] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 10:20:41] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 10:27:58] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 10:32:47] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 10:33:07] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 10:33:24] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 10:34:11] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 10:34:28] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 10:39:46] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 10:41:28] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 10:42:18] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 10:44:03] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 10:49:30] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 22 2020 10:50:05] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 10:51:14] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 10:53:32] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 10:54:22] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 11:48:10] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 11:48:36] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 11:52:04] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 11:52:57] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 11:53:34] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 11:53:58] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 12:11:31] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 12:12:14] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 12:12:50] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 12:24:24] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 12:24:29] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 12:24:36] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 12:24:39] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 12:38:10] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 12:38:12] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 12:38:15] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 13:52:30] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 22 2020 14:10:04] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 22 2020 14:10:09] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 23 2020 09:26:53] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 23 2020 09:27:10] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 23 2020 09:27:13] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 23 2020 09:27:14] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 23 2020 09:27:16] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 23 2020 09:27:17] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 23 2020 09:27:23] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 23 2020 09:27:32] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 23 2020 09:27:52] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 23 2020 09:28:01] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 23 2020 09:28:13] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 23 2020 09:28:23] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 23 2020 09:28:41] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 23 2020 09:28:47] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 23 2020 09:32:47] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 23 2020 10:06:15] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 23 2020 10:06:21] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 23 2020 10:12:06] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 23 2020 10:12:08] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 23 2020 10:12:10] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 23 2020 10:12:28] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 23 2020 10:12:30] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 23 2020 11:29:22] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 23 2020 11:29:44] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 23 2020 11:47:31] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 23 2020 11:59:40] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_filters.php at line number 147
+"Undefined variable: filter_data"
+[Jun 23 2020 12:06:09] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_filters.php at line number 155
+"Undefined index: altr_filt_widgts_filter"
+[Jun 23 2020 12:06:34] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 23 2020 12:07:49] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_filters.php at line number 155
+"Undefined index: filter_setting_filter"
+[Jun 23 2020 12:08:35] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 23 2020 12:12:04] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_filters.php at line number 116
+"Undefined index: filter_setting_submit_btn"
+[Jun 23 2020 12:14:26] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 23 2020 12:19:45] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 23 2020 12:20:43] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 23 2020 12:20:53] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 23 2020 12:51:34] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 23 2020 12:53:08] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 23 2020 12:53:12] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 23 2020 12:53:18] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 23 2020 12:53:26] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 23 2020 12:53:58] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 23 2020 12:54:02] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 23 2020 12:54:06] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 23 2020 12:55:57] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 23 2020 12:56:01] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"

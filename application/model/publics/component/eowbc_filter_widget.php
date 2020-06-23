@@ -1408,6 +1408,7 @@ class EOWBC_Filter_Widget {
 
 	public function init() {
 		$this->_category=$this->eo_wbc_get_category();
+		
 		if(!empty($this->_category)){
 		
 			if(get_option('eo_wbc_dropdown_filter',false) and !wp_is_mobile()) {

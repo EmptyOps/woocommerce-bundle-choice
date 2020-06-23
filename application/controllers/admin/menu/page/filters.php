@@ -239,8 +239,8 @@ if ( ! class_exists( 'Filters' ) ) {
 							'filter_setting_status'=>array(
 									'label'=>'Filter Status',
 									'type'=>'checkbox',
-									'value'=>array(wbc()->options->get_option('filters_filter_setting','config_filter_status')),
-									'options'=>array('config_filter_status'=>' Check here to enable horizontal filter bar at category page.'),
+									'value'=>array(wbc()->options->get_option('filters_filter_setting','filter_setting_status')),
+									'options'=>array('filter_setting_status'=>' Check here to enable horizontal filter bar at category page.'),
 									'class'=>array(),
 									'size_class'=>array('eight','wide'),
 									'inline'=>true,
@@ -268,7 +268,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'class'=>array('secondary'),
 								//'size_class'=>array('eight','wide'),
 								'inline'=>false,
-								'attr'=>array('data-tab_key="altr_filt_widgts"', 'data-action="save"'),
+								'attr'=>array('data-tab_key="filter_setting"', 'data-action="save"'),
 							)							
 						)
 					),
