@@ -25,7 +25,7 @@ class a_g_adminConfigurationCest
 		// go to the tab
 		// $I->click('General');
 		$I->click('Buttons');
-		$I->see('Choose where you want to display buttons on home page');
+		$I->see('Choose where you want to display');
 
 		// select button position
 		// // $I->selectOption('form select[name=config_buttons_page]', 'Premium');
