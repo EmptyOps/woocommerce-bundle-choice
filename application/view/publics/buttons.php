@@ -26,6 +26,8 @@ $heading = wbc()->options->get_option('appearance_wid_btns','tagline_text',__('M
 
 $button_text = wbc()->options->get_option('appearance_wid_btns','button_text',__('Start with ','woo-bundle-choice'));
 
+WC()->session->set('EO_WBC_SETS',FALSE);            
+
 // Load assets first to avoid zaping effect
 wbc()->load->asset('css','fomantic/semantic.min');
 wbc()->load->asset('css','publics/buttons');

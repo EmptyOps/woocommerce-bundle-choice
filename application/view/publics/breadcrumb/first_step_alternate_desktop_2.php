@@ -16,7 +16,7 @@
                 <div class="title"><?php _e($first_name); ?></div>
                 <div class="description"><?php _e($first->get_name()); ?> - <?php _e(wc_price($first->get_price())); ?></div>
                 <div class="ui small blue text">                
-                    <u><a href="<?php echo !empty($_GET['FIRST']) ? self::eo_wbc_breadcrumb_view_url(sanitize_text_field($_GET['FIRST']),$order):'#'; ?>">View</a></u>&nbsp;|&nbsp;<u><a href="<?php echo !empty($_GET['FIRST'])?self::eo_wbc_breadcrumb_change_url($order,sanitize_text_field($_GET['FIRST'])):'#'; ?>">Remove</a></u>
+                    <u><a href="<?php echo !empty($_GET['FIRST']) ? eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url(sanitize_text_field($_GET['FIRST']),$order):'#'; ?>">View</a></u>&nbsp;|&nbsp;<u><a href="<?php echo !empty($_GET['FIRST'])?eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,sanitize_text_field($_GET['FIRST'])):'#'; ?>">Remove</a></u>
                 </div>    
                 
             <?php } ?>
@@ -25,7 +25,7 @@
             <?php if(empty($first)){ ?>
                 <img src = '<?php echo $first_icon; ?>' class='ui mini image'/>
             <?php } else { ?>
-                <img src = '<?php echo $first->get_image(); ?>' class='ui mini image'/>
+                <img src = '<?php _e(wp_get_attachment_url($first->get_image_id())); ?>' class='ui mini image'/>
             <?php } ?>
         </div>
     </div>        

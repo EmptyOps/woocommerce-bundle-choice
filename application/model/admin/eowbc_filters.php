@@ -91,19 +91,20 @@ class Eowbc_Filters {
 		$res = array();
 		$res["type"] = "success";
 	    $res["msg"] = "";
-	    $res['post']=$_POST;
+	    //$res['post']=$_POST;
 		wbc()->load->model('admin\form-builder');
 
 		$saved_tab_key = !empty($_POST["saved_tab_key"]) ? $_POST["saved_tab_key"] : ""; 
 		$skip_fileds = array('saved_tab_key');
 		
 	    //loop through form tabs and save 
+	    
 	    foreach ($form_definition as $key => $tab) {
 	    	if( $key != $saved_tab_key ) {
 	    		continue;
 	    	}
-
-			$is_table_save = $key != "altr_filt_widgts" ? true : false;
+	    	//$res['data_form'][]= $tab;
+			$is_table_save = ($key != "altr_filt_widgts" and $key != "filter_setting") ? true : false;
 			$table_data = array();
 			$tab_specific_skip_fileds = $is_table_save ? array('eowbc_price_control_methods_list_bulk','eowbc_price_control_sett_methods_list_bulk') : array();
 
@@ -112,6 +113,7 @@ class Eowbc_Filters {
 			    //loop through form fields, read from POST/GET and save
 			    //may need to check field type here and read accordingly only
 			    //only for those for which POST is set
+
 			    if( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) && isset($_POST[$fk]) ) {
 			    	//skip fields where applicable
 					if( in_array($fk, $skip_fileds) ) {
@@ -121,7 +123,6 @@ class Eowbc_Filters {
 		    		if( in_array($fk, $tab_specific_skip_fileds) ) {
 		    			continue;
 		    		}
-
 		    		//save
 			    	if( $is_table_save ) {
 			    		if( $fk == "d_fconfig_ordering" || $fk == "s_fconfig_ordering" )  {
@@ -138,7 +139,7 @@ class Eowbc_Filters {
 			    			$table_data[$fk] = (empty($_POST[$fk])? $_POST[$fk]: sanitize_text_field( $_POST[$fk] ) ); 
 			    		}
 			    	}
-			    	else {
+			    	else {			    		
 			    		wbc()->options->update_option('filters_'.$key,$fk,(empty($_POST[$fk])? $_POST[$fk]: sanitize_text_field( $_POST[$fk] ) ) );
 			    	}
 			    }
@@ -160,6 +161,7 @@ class Eowbc_Filters {
 		        $filter_data[] = $table_data;
 
 		        wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data) );
+		        
 		        $res["msg"] = eowbc_lang('New Filter Added Successfully'); 
 			}
 
