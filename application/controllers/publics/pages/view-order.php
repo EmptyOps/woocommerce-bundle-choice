@@ -37,7 +37,7 @@ class View_Order {
             global $wpdb,$sets;
             $query='select * from `'.$wpdb->prefix.'eo_wbc_order_maps` where order_id='.$order_id;
             $sets=$wpdb->get_row($query,'ARRAY_A');
-            $sets=(json_decode($sets['order_map']));
+            $sets=(json_decode($sets['order_map']));            
             ?>
                 <script type="text/javascript">
                 jQuery(document).ready(function(){

@@ -64,7 +64,7 @@ if(wp_verify_nonce(sanitize_text_field($_POST['_wpnonce']),'eowbc_configuration'
 	wbc()->options->update_option('configuration','pair_maker_upper_card',(empty($_POST['config_pair_maker_upper_card'])?'':sanitize_text_field($_POST['config_pair_maker_upper_card'])));
 		
 	//$res['msg'] = "Updated successfully!";
-	//wbc()->options->update_option('configuration','config_category',1);
+	wbc()->options->update_option('configuration','config_category',1);
 	//wbc()->options->update_option('configuration','config_map',1);
 }
 else {
