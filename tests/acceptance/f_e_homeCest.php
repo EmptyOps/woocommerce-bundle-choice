@@ -32,12 +32,6 @@ class f_e_homeCest
 
 	}
 
-    public function testChoiceButtonWidgetOnLandingPage(AcceptanceTester $I) {
-        
-        // TODO
-
-    }
-
     public function testChoiceButtonWidgetBasedOnShortcode(AcceptanceTester $I) {
         
         // TODO

@@ -34,7 +34,7 @@ class a_k_adminMappingCest
 		$I->click('#map_creation_modification_save_btn'); 	//used id since button label is supposed be changed
 
 		// confirm if saved properly or not
-		$I->amOnPage('/wp-admin/admin.php?page=eowbc-mapping');	//reload page
+		$I->reloadPage();	//reload page
 		$I->click('Map creation and modification');
 		$I->see('Round', 'td');
 	}

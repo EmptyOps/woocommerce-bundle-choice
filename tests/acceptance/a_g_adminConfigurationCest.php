@@ -25,22 +25,22 @@ class a_g_adminConfigurationCest
 		// go to the tab
 		// $I->click('General');
 		$I->click('Buttons');
-		$I->see('Choose where you want to display buttons on home page');
+		$I->see('Choose where you want to display');
 
 		// select button position
 		// // $I->selectOption('form select[name=config_buttons_page]', 'Premium');
 		// // $I->fillField('config_buttons_page', '1');	
 		// $I->click('#config_buttons_page_dropdown_div');
 		// $I->click('Home page only');	//('#config_buttons_page_dropdown_div > div.menu.transition.visible > div:nth-child(2)');
-		$I->executeJS("jQuery('#config_buttons_page_dropdown_div').dropdown('set selected', 1);");	//better than setting 1 directly is to select the nth element that has value 1 
+		$I->executeJS("jQuery('#config_buttons_page_dropdown_div').dropdown('set selected', 0);");	//better than setting 1 directly is to select the nth element that has value 1 
 
 		// save 
 		$I->click('Save');
 
 		// confirm if saved properly or not
-		$I->amOnPage('/wp-admin/admin.php?page=eowbc-configuration');	//reload page
+		$I->reloadPage();	//reload page
 		$I->click('Buttons');
-		$I->see('Home page only');	//that is the position option selected
+		$I->see('Custom landing page');	//that is the position option selected
 
 	}
 
@@ -72,7 +72,7 @@ class a_g_adminConfigurationCest
 		$I->click('#config_navigation_conf_save_btn'); 	//('Save');		//it shouldn't be this way, but there seem some issue with selenium driver and thus when there is another Save button on the page even though on another page and is not visible but still selenium think it is visible and thus gives us error so need to use unique xPath like id etc. 
 
 		// confirm if saved properly or not
-		$I->amOnPage('/wp-admin/admin.php?page=eowbc-configuration');	//reload page
+		$I->reloadPage();	//reload page
 		$I->click('Navigations Steps( Breadcrumb )');
 		$I->see('Uncategorized');	//that is the position option selected
 

@@ -63,9 +63,10 @@ if(wp_verify_nonce(sanitize_text_field($_POST['_wpnonce']),'eowbc_configuration'
 
 	wbc()->options->update_option('configuration','pair_maker_upper_card',(empty($_POST['config_pair_maker_upper_card'])?'':sanitize_text_field($_POST['config_pair_maker_upper_card'])));
 		
-	//$res['msg'] = "Updated successfully!";
+	// TODO here it is better if we set it to 1 only if both category are set and otherwise set to 0 if user removes any categories 
 	wbc()->options->update_option('configuration','config_category',1);
-	//wbc()->options->update_option('configuration','config_map',1);
+
+	//$res['msg'] = "Updated successfully!";
 }
 else {
 	$res["type"] = "error";
