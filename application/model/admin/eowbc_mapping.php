@@ -185,6 +185,10 @@ class Eowbc_Mapping {
 		        $mapping_data[] = $table_data;
 
 		        wbc()->options->update_option_group( 'mapping_'.$key, serialize($mapping_data) );
+
+		        // TODO here it is better if we set it to 1 only if length of mapping_data is greater than zero and otherwise set to 0 if user removes maps and so on 
+				wbc()->options->update_option('configuration','config_map',1);
+
 		        $res["msg"] = eowbc_lang('New Mapping Added Successfully'); 
 			}
 
