@@ -74,7 +74,7 @@ class a_g_adminConfigurationCest
 		// confirm if saved properly or not
 		$I->reloadPage();	//reload page
 		$I->click('Navigations Steps( Breadcrumb )');
-		$I->see('Uncategorized');	//that is the position option selected
+		$I->see('Diamond');	//that is the position option selected
 
 	}
 
