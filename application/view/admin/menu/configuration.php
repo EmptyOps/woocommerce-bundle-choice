@@ -49,12 +49,23 @@ $form['data'] = array(
 											'size_class'=>array('eight','wide'),
 											'inline'=>true,
 										),
+									'visible_info'=>array( 'label'=>'Choose where you want to display the Two Start with Action buttons. If you choose custom landing page a sample landing page will be provided.',
+											'type'=>'visible_info',
+											'class'=>array('fluid', 'small'),
+											'size_class'=>array('sixteen','wide'),
+										),
 									'config_buttons_position'=>array(
-												'label'=>'Choose where you want to display buttons on home page',
-												'type'=>'link',
-												'attr'=>array("href='".admin_url('customize.php?autofocus[control]=btn_position_setting_selector_btn')."'"),
-												'class'=>array('secondary'/*,'hidden'*/)	
-											),
+											'label'=>'Choose where you want to display buttons on home page',
+											'type'=>'link',
+											'attr'=>array("href='".admin_url('customize.php?autofocus[control]=btn_position_setting_selector_btn')."'"),
+											'class'=>array('secondary'/*,'hidden'*/)	
+										),
+									'config_view_custom_landing_link'=>array(
+											'label'=>'View how landing page will look like',
+											'type'=>'link',
+											'attr'=>array("href='".get_permalink(get_page_by_path('design-your-own-ring'))."'"),
+											'class'=>array('secondary'/*,'hidden'*/)	
+										),
 									'config_devider_make_pair'=>array(
 											'label'=>'Make Pair Button',
 											'type'=>'devider',
@@ -283,7 +294,6 @@ $form['data'] = array(
 						'class'=>array('fluid'),						
 						)
 				);*/
-
 
 wbc()->load->model('admin\form-builder');
 eo\wbc\model\admin\Form_Builder::instance()->build($form);

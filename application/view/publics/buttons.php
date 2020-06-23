@@ -9,12 +9,12 @@ $second_term = wbc()->options->get_option('configuration','second_name');
 
 $first_slug = get_term_by( 'term_taxonomy_id', $first_term, 'product_cat')->slug;
 
-$second_slug = get_term_by( 'term_taxonomy_id', $first_term, 'product_cat')->slug;
+$second_slug = get_term_by( 'term_taxonomy_id', $second_term, 'product_cat')->slug;
 
 $first_name = get_term_by( 'term_taxonomy_id', $first_term, 'product_cat')->name;
 $first_name = !empty($first_name)?$first_name:'FIRST';
 
-$second_name = get_term_by( 'term_taxonomy_id', $first_term, 'product_cat')->name;
+$second_name = get_term_by( 'term_taxonomy_id', $second_term, 'product_cat')->name;
 $second_name = !empty($second_name)?$second_name:'SECOND';
 
 
@@ -22,9 +22,15 @@ $first_url = \eo\wbc\model\Category_Attribute::instance()->get_category_link($fi
 
 $second_url = \eo\wbc\model\Category_Attribute::instance()->get_category_link($second_slug);
 
-$heading = wbc()->options->get_option('appearance_wid_btns','tagline_text',__('Make your own pair from recommendation','woo-bundle-choice'));
+$heading = wbc()->options->get_option('appearance_wid_btns','tagline_text','');
+if(empty($heading)) {
+	$heading = __('Make your own pair from recommendation','woo-bundle-choice');
+}
 
-$button_text = wbc()->options->get_option('appearance_wid_btns','button_text',__('Start with ','woo-bundle-choice'));
+$button_text = wbc()->options->get_option('appearance_wid_btns','button_text','');
+if(empty($button_text)) {
+	$button_text = __('Start with ','woo-bundle-choice');
+}
 
 WC()->session->set('EO_WBC_SETS',FALSE);            
 

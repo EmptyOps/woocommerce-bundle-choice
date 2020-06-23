@@ -144,9 +144,9 @@ class Eowbc_Jewelry {
 			        // update_option('eo_wbc_config_map',1);    
 			        wbc()->options->update_option('configuration','config_map',1);
 			        // update_option('eo_wbc_btn_setting','0');
-			        wbc()->options->set('eo_wbc_btn_setting','0');
+			        wbc()->options->update_option('configuration','buttons_page','0');	//set('eo_wbc_btn_setting','0');
 			        // update_option('eo_wbc_btn_position','begining');
-			        wbc()->options->set('eo_wbc_btn_position','begining');
+			        wbc()->options->set('eo_wbc_btn_position','begining');				//TODO I think its DEPRECATED starting from DP update. remove it if its no loger used. 
 
 			      }
 
