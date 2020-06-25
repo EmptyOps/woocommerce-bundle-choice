@@ -36,13 +36,46 @@ else {
 	$button_text = trim($button_text)." ";
 }
 
-WC()->session->set('EO_WBC_SETS',FALSE);            
+//clear the session
+if(function_exists('wc') && !empty(wc()->session)){
+	wc()->session->set('EO_WBC_SETS',NULL);
+}    
 
 // Load assets first to avoid zaping effect
 wbc()->load->asset('css','fomantic/semantic.min');
 wbc()->load->asset('css','publics/buttons');
 wbc()->load->asset('js','fomantic/semantic.min');
 wbc()->load->asset('js','publics/buttons');
+
+//moved from the home class of older version 
+function eo_wbc_code() //script to get color code from buttons
+{
+    return '<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><script>'.
+            'jQuery(document).ready(function($){'.
+              '$(".eo_button_container .button").each(function(i,e){'.
+                '$(e).attr("href",$(e).attr("href")+"&EO_WBC_CODE="+window.btoa($(".woocommerce a.button").css("background-color")+"/"+$(".woocommerce a.button").css("color")));'.
+              '});'.
+              '$("#wbc_").find("button").on("click",function(){ document.location.href=$(this).attr("href"); })'.
+            '});'.
+           '</script>';
+}
+
+//moved from the home class of older version 
+function eo_wbc_buttons_css(){
+
+	$button_backcolor_active = wbc()->options->get_option('appearance_wid_btns','button_backcolor_active','');
+	$button_textcolor = wbc()->options->get_option('appearance_wid_btns','button_textcolor','#ffffff');
+	$eo_wbc_home_btn_border_color = false;	//dropped this field. wbc()->options->get_option('appearance_wid_btns','button_backcolor_active','');
+	$button_radius = wbc()->options->get_option('appearance_wid_btns','button_radius','');
+	$button_hovercolor = wbc()->options->get_option('appearance_wid_btns','button_hovercolor','');
+  	return '<style>.eo-wbc-container .ui.buttons .button{'.
+		($button_backcolor_active?'background-color:'.$button_backcolor_active.' !important;':'').
+		($button_textcolor?'color:'.$button_textcolor.' !important;':'').
+		($eo_wbc_home_btn_border_color?'border-color:'.$eo_wbc_home_btn_border_color.' !important;':'').
+		($button_radius?'border-radius:'.$button_radius.'px !important;':'').'}'.
+		($button_hovercolor?'.eo-wbc-container .ui.buttons .button:hover{ background-color:'.$button_hovercolor.' !important; }</style>':'');
+        
+}
 
 ?>
 <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
@@ -63,6 +96,9 @@ wbc()->load->asset('js','publics/buttons');
 			</button>
 		</div>
 	</div>
-	<style>.ui.grid{margin-left: auto;margin-right: auto;}  '/*.$this->eo_wbc_buttons_css().*/' @media only screen and (max-width: 768px){ .eo-wbc-container .ui.buttons .button{ border-radius: 0 !important; } }</style><br/><br/>
+	<style>.ui.grid{margin-left: auto;margin-right: auto;}  '/*.$this->eo_wbc_buttons_css().*/' @media only screen and (max-width: 768px){ .eo-wbc-container .ui.buttons .button{ border-radius: 0 !important; } }</style>
+	<?php echo eo_wbc_buttons_css(); ?>
+	<br/><br/>
+	<?php echo eo_wbc_code(); ?>
 </div>
 <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
