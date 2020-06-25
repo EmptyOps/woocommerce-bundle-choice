@@ -25,6 +25,10 @@ class Setting_status {
 					'setting_status_setting'=>array(
 						'label'=>'Settings',
 						'form'=>array(
+							'saved_tab_key'=>array(
+							'type'=>'hidden',
+							'value'=>'',
+							),
 							'inventory_type'=>array(
 								'label'=>'Inventory Type',
 								'type'=>'select',
@@ -62,7 +66,75 @@ class Setting_status {
 					'setting_status_log'=>array(
 						'label'=>'Logs',
 						'form'=>array(
+							'visible_info'=>array( 
+								'label'=>'Following error details will be sent to '.constant('EOWBC_NAME').'\'s Support Team',
+								'type'=>'devider',
+								// 'class'=>array('fluid', 'small'),
+								// 'size_class'=>array('sixteen','wide'),
+							),
+							'send_error_log_subject_label'=>array(
+								'label'=>eowbc_lang('Subject'),
+								'type'=>'label',
+								//'class'=>array('fluid'),
+								'size_class'=>array('three','wide'),
+								// 'next_inline'=>true,
+								// 'inline'=>true,
+							),
+							'send_error_log_subject'=>array(
+								'type'=>'text',
+								'value'=>'',
+								'class'=>array('fluid'),
+								'size_class'=>array('sixteen','wide'),
+								// 'inline'=>true,
+							),
+							'eo_wbc_view_error_label'=>array(
+								'label'=>eowbc_lang('Error logs & installed plugins details'),
+								'type'=>'label',
+								//'class'=>array('fluid'),
+								'size_class'=>array('three','wide')
+							),
+							'eo_wbc_view_error'=>array(
+								'type'=>'textarea',
+								'value'=>'',
+								'attr'=>array('style="width:100%; border: 1px solid #ddd;"','data-init="1"'),
+								'class'=>array('fluid','eo_wbc_view_error'),
+								'size_class'=>array('sixteen','wide')
+							),
+							'send_error_log_agree_terms'=>array(
+								'type'=>'checkbox',
+								'value'=>array(),
+								'options'=>array('1'=>'I agree with SpherePlugins\' <a href="https://sphereplugins.com/terms-conditions/">Terms</a> & <a href="https://sphereplugins.com/privacy-policy/">Privacy Policy</a>'),
+								'options_attrs'=>array('1'=>"onchange=\"if(jQuery(this)[0].checked){ jQuery('#btn_send_error_report').removeClass('disabled'); } else { jQuery('#btn_send_error_report').addClass('disabled'); }\""),
+								'is_id_as_name'=>true,
+								'class'=>array('fluid'),
+								'style'=>'normal',
+								// 'prev_inline'=>true,
+								// 'inline'=>true,
+							),
+							'btn_cancel'=>array(
+								'label'=>eowbc_lang('Cancel'),
+								'type'=>'button',				
+								'class'=>array('secondary'),
+								'attr'=>array('onclick="window.location.href=document.referrer"'),
+								'next_inline'=>true,
+								'inline'=>true,
+							),
+							'btn_send_error_report'=>array(
+								'label'=>eowbc_lang('Send error report'),
+								'type'=>'button',				
+								'class'=>array('primary','disabled'),
+								'attr'=>array("data-action='save'"),
+								'prev_inline'=>true,
+								'inline'=>true,
+							),
+							'clear_log_and_return'=>array(
+								'label'=>eowbc_lang('Clear Log and Return'),
+								'type'=>'link',
+								'attr'=>array("href='".admin_url('admin.php?page=eowbc-setting-status&action=clear&ref='.
+		(empty($_SERVER['HTTP_REFERER'])? admin_url('admin.php?page=eowbc-setting-status'):$_SERVER['HTTP_REFERER']))."'"),
+								'class'=>array(/*'secondary','hidden'*/)	
 							)
+						)
 					),
 				);
 	    

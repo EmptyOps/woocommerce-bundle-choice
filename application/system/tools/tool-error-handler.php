@@ -94,6 +94,94 @@ if(!class_exists('EOWBC_Error_Handler')){
 
 		   	return true;
 		}
+
+		function eo_wbc_get_system_details(){
+
+			$user_data=wp_get_current_user();
+
+			$wp_version=get_bloginfo('version');	
+			$name=$user_data->data->display_name;
+			$email=$user_data->data->user_email;
+
+			include_once( ABSPATH.'wp-admin/includes/plugin.php' );
+
+			$plugins='';
+			$available_plugins='';
+			if(function_exists('get_plugins')){		
+
+				$plugins=get_plugins();		
+				$available_plugins=json_encode(
+										array_combine(
+											array_column($plugins,'Name'),
+											array_column($plugins,'Version')
+										)
+									);
+			}
+			$active_plugins=get_option('active_plugins');
+			
+			if(!empty($plugins)){
+				array_walk($active_plugins,function(&$val,$index,$plugins){
+					$val=$plugins[$val]['Name'];
+				},$plugins);
+			}			
+
+			$active_plugins=implode(', ', $active_plugins);
+
+			$theme=FALSE;
+			if(function_exists('wp_get_theme')){
+				$theme=wp_get_theme();
+			} else{
+				$theme=get_current_theme();
+			}		
+
+			$details='-------------------------------------------------------';
+
+			$nl='
+	';
+			$details.=$nl.'-------------------------------------------------------'.$nl;
+			$details.='Name: '.$name.$nl;
+			$details.='Email: '.$email.$nl;
+			$details.='WP version: '.$wp_version.$nl;
+			$details.='Plugins: '.$available_plugins.$nl;
+			$details.='Active Plugins: '.$active_plugins.$nl;
+			$details.='Active theme: '.$theme->get('Name').$nl;
+			$details.='Theme Version: '.$theme->get('Version').$nl;
+
+			return $details;
+		}
+		
+		function clean_send(){
+			file_put_contents(constant('EOWBC_LOG_DIR').'debug.log', '');
+			update_option('eowbc_warning_count',0);
+			update_option('eowbc_error_count',0);
+		}
+		
+		function get_subject(){
+			return 'Error log from the '.home_url();
+		}
+
+		function get_logs(){
+			$errors=file_get_contents(constant('EOWBC_LOG_DIR').'debug.log');
+
+			if(!empty($errors)){
+				$errors=$errors.$this->eo_wbc_get_system_details();
+			}
+
+			return $errors;
+		}
+
+		function eo_wbc_send_error_report(){
+			if( isset($_POST["is_sent_from_front_end"]) && $_POST["is_sent_from_front_end"] == 1 ) {
+				if(wp_mail('emptyopssphere@gmail.com,mahesh@emptyops.com', $this->get_subject(), $this->get_logs())) {
+					$this->clean_send();
+				}	
+			}
+			else {
+				if(wp_mail('emptyopssphere@gmail.com,mahesh@emptyops.com',$_POST["send_error_log_subject"],$_POST["eo_wbc_view_error"])){
+					$this->clean_send();
+				}
+			}
+		}
 	}	
 	call_user_func(array('EOWBC_Error_Handler','instance'));
 }
