@@ -55,14 +55,16 @@ if(function_exists('wc') && !empty(wc()->session)){
 //moved from the home class of older version 
 function eo_wbc_code() //script to get color code from buttons
 {
-    return '<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><script>'.
-            'jQuery(document).ready(function($){'.
-              '$(".eo_button_container .button").each(function(i,e){'.
-                '$(e).attr("href",$(e).attr("href")+"&EO_WBC_CODE="+window.btoa($(".woocommerce a.button").css("background-color")+"/"+$(".woocommerce a.button").css("color")));'.
-              '});'.
-              '$("#wbc_").find("button").on("click",function(){ document.location.href=$(this).attr("href"); })'.
-            '});'.
-           '</script>';
+	//commented since set in buttons.js
+    // return '<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><script>'.
+    //         'jQuery(document).ready(function($){'.
+    //           '$(".eo_button_container .button").each(function(i,e){'.
+    //             '$(e).attr("href",$(e).attr("href")+"&EO_WBC_CODE="+window.btoa($(".woocommerce a.button").css("background-color")+"/"+$(".woocommerce a.button").css("color")));'.
+    //           '});'.
+    //           '$("#wbc_").find("button").on("click",function(){ document.location.href=$(this).attr("href"); })'.
+    //         '});'.
+    //        '</script>';
+    return '';
 }
 
 //moved from the home class of older version 
@@ -90,13 +92,13 @@ function eo_wbc_buttons_css(){
 	</h2>
 	<div class="ui grid center aligned container">
 		<div class="ui buttons large row stackable">
-			<button class="ui button primary column" href="<?php echo $first_url .'EO_WBC=1&BEGIN='.$first_slug.'&STEP=1'; ?>" >
+			<button class="ui button primary column" href="<?php echo $first_url .'EO_WBC=1&BEGIN='.$first_slug.'&STEP=1'; ?>" onclick="window.location.href=jQuery(this).attr('href');">
 				<?php echo $button_text.$first_name; ?>
 			</button>
 
 			<div class="or"></div>
 
-			<button class="ui button primary column" href="<?php echo $second_url .'EO_WBC=1&BEGIN='.$second_slug.'&STEP=1'; ?>">
+			<button class="ui button primary column" href="<?php echo $second_url .'EO_WBC=1&BEGIN='.$second_slug.'&STEP=1'; ?>" onclick="window.location.href=jQuery(this).attr('href');">
 				<?php echo $button_text.$second_name; ?>
 			</button>
 		</div>
