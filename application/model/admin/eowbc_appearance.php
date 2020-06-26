@@ -49,9 +49,7 @@ class Eowbc_Appearance {
 
 	    $res["msg"] = "";
 
-	    wbc()->sanitize->clean($form_definition);
-
-	    $res["msg"] = $_POST;
+	    wbc()->sanitize->clean($form_definition);	    
 
 		wbc()->load->model('admin\form-builder');
 
@@ -65,9 +63,7 @@ class Eowbc_Appearance {
 			    //may need to check field type here and read accordingly only
 			    //only for those for which POST is set
 			    if( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) && isset($_POST[$fk]) ) {
-			    	error_log('appearance_'.$key);
-			    	error_log($fk);
-			    	wbc()->options->update_option('appearance_'.$key,$fk,(empty($_POST[$fk])? '': sanitize_text_field( $_POST[$fk] ) ) );	
+			    	wbc()->options->update_option('appearance_'.$key,$fk,(empty($_POST[$fk])? $_POST[$fk]: sanitize_text_field( $_POST[$fk] ) ) );	
 			    }
 			}
 	    }

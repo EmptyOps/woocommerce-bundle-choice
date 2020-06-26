@@ -4,6 +4,8 @@
 *	Template to show choice buttons
 */
 
+
+
 $first_term = wbc()->options->get_option('configuration','first_name');
 $second_term = wbc()->options->get_option('configuration','second_name');
 
@@ -31,34 +33,80 @@ $button_text = wbc()->options->get_option('appearance_wid_btns','button_text',''
 if(empty($button_text)) {
 	$button_text = __('Start with ','woo-bundle-choice');
 }
+else {
+	//add ending space if missing 
+	$button_text = trim($button_text)." ";
+}
 
-WC()->session->set('EO_WBC_SETS',FALSE);            
+//clear the session
+if(function_exists('wc') && !empty(wc()->session)){
+	wc()->session->set('EO_WBC_SETS',NULL);
+}    
 
-// Load assets first to avoid zaping effect
-wbc()->load->asset('css','fomantic/semantic.min');
-wbc()->load->asset('css','publics/buttons');
-wbc()->load->asset('js','fomantic/semantic.min');
-wbc()->load->asset('js','publics/buttons');
+// Load assets first to avoid zaping effect. 
+// TODO here should not load instantly and follow the wp standard by using hook as well as setting last param to false to our load asset function. 
+// add_action( 'wp_enqueue_scripts',function(){ 
+	wbc()->load->asset('css','fomantic/semantic.min', array(), "", true);
+	wbc()->load->asset('css','publics/buttons', array(), "", true);
+	wbc()->load->asset('js','fomantic/semantic.min', array(), "", true);
+	wbc()->load->asset('js','publics/buttons', array(), "", true);
+// },50);
+
+//moved from the home class of older version 
+function eo_wbc_code() //script to get color code from buttons
+{
+	//commented since set in buttons.js
+    // return '<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><script>'.
+    //         'jQuery(document).ready(function($){'.
+    //           '$(".eo_button_container .button").each(function(i,e){'.
+    //             '$(e).attr("href",$(e).attr("href")+"&EO_WBC_CODE="+window.btoa($(".woocommerce a.button").css("background-color")+"/"+$(".woocommerce a.button").css("color")));'.
+    //           '});'.
+    //           '$("#wbc_").find("button").on("click",function(){ document.location.href=$(this).attr("href"); })'.
+    //         '});'.
+    //        '</script>';
+    return '';
+}
+
+//moved from the home class of older version 
+function eo_wbc_buttons_css(){
+
+	$button_backcolor_active = wbc()->options->get_option('appearance_wid_btns','button_backcolor_active','');
+	$button_textcolor = wbc()->options->get_option('appearance_wid_btns','button_textcolor','#ffffff');
+	$eo_wbc_home_btn_border_color = false;	//dropped this field. wbc()->options->get_option('appearance_wid_btns','button_backcolor_active','');
+	$button_radius = wbc()->options->get_option('appearance_wid_btns','button_radius','');
+	$button_hovercolor = wbc()->options->get_option('appearance_wid_btns','button_hovercolor','');
+  	return '<style>.eo-wbc-container .ui.buttons .button{'.
+		($button_backcolor_active?'background-color:'.$button_backcolor_active.' !important;':'').
+		($button_textcolor?'color:'.$button_textcolor.' !important;':'').
+		($eo_wbc_home_btn_border_color?'border-color:'.$eo_wbc_home_btn_border_color.' !important;':'').
+		($button_radius?'border-radius:'.$button_radius.'px !important;':'').'}'.
+		($button_hovercolor?'.eo-wbc-container .ui.buttons .button:hover{ background-color:'.$button_hovercolor.' !important; }</style>':'');
+        
+}
 
 ?>
 <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
-<div id="wbc_" class="eo_wbc_container">
+<div id="wbc_" class="eo_wbc_container" <?php echo (isset($is_embed_using_js) && $is_embed_using_js) ? 'style="display: none !important;"' : '';?>>
 	<h2 class="ui center aligned header" style="text-align: center !important;">
 		<?php _e($heading); ?>
 	</h2>
 	<div class="ui grid center aligned container">
 		<div class="ui buttons large row stackable">
-			<button class="ui button primary column" href="<?php echo $first_url .'EO_WBC=1&BEGIN='.$first_slug.'&STEP=1&FIRST=&SECOND='; ?>" >
+			<button class="ui button primary column" href="<?php echo $first_url .'EO_WBC=1&BEGIN='.$first_slug.'&STEP=1&FIRST=&SECOND='; ?>" onclick="window.location.href=jQuery(this).attr('href');">
 				<?php echo $button_text.$first_name; ?>
 			</button>
 
 			<div class="or"></div>
 
-			<button class="ui button primary column" href="<?php echo $second_url .'EO_WBC=1&BEGIN='.$second_slug.'&STEP=1&FIRST=&SECOND='; ?>">
+
+			<button class="ui button primary column" href="<?php echo $second_url .'EO_WBC=1&BEGIN='.$second_slug.'&STEP=1&FIRST=&SECOND='; ?>" onclick="window.location.href=jQuery(this).attr('href');">
 				<?php echo $button_text.$second_name; ?>
 			</button>
 		</div>
 	</div>
-	<style>.ui.grid{margin-left: auto;margin-right: auto;}  '/*.$this->eo_wbc_buttons_css().*/' @media only screen and (max-width: 768px){ .eo-wbc-container .ui.buttons .button{ border-radius: 0 !important; } }</style><br/><br/>
+	<style>.ui.grid{margin-left: auto;margin-right: auto;}  '/*.$this->eo_wbc_buttons_css().*/' @media only screen and (max-width: 768px){ .eo-wbc-container .ui.buttons .button{ border-radius: 0 !important; } }</style>
+	<?php echo eo_wbc_buttons_css(); ?>
+	<br/><br/>
+	<?php echo eo_wbc_code(); ?>
 </div>
 <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->

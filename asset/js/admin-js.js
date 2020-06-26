@@ -32,6 +32,14 @@ jQuery(document).ready(function($){
         file_frame.open();
     }); 
 
+    $('button.ui.button[data-action="cancel"]').on('click',function(e){
+        e.preventDefault();
+        e.stopPropagation();
+
+        window.history.back();
+        // window.location.href=document.referrer;
+    });
+
     $('button.ui.button[data-action="save"]').on('click',function(e){
         e.preventDefault();
         e.stopPropagation();

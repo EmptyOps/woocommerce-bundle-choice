@@ -60,8 +60,8 @@ class a_g_adminConfigurationCest
 		$I->see('First Category');
 
 		// select category
-		$I->executeJS("jQuery('#config_first_name_dropdown_div').dropdown('set selected', 15);");	//better than setting val directly is to select the nth element that has value val 
-		$I->executeJS("jQuery('#config_second_name_dropdown_div').dropdown('set selected', 15);");	//better than setting val directly is to select the nth element that has value val 
+		$I->executeJS("jQuery('#config_first_name_dropdown_div').dropdown('set selected', 19);");	//better than setting val directly is to select the nth element that has value val 
+		$I->executeJS("jQuery('#config_second_name_dropdown_div').dropdown('set selected', 20);");	//better than setting val directly is to select the nth element that has value val 
 
 		// set preview text
 		$I->fillField('config_preview_name', 'Preview');
@@ -74,7 +74,7 @@ class a_g_adminConfigurationCest
 		// confirm if saved properly or not
 		$I->reloadPage();	//reload page
 		$I->click('Navigations Steps( Breadcrumb )');
-		$I->see('Uncategorized');	//that is the position option selected
+		$I->see('Diamond');	//that is the position option selected
 
 	}
 
