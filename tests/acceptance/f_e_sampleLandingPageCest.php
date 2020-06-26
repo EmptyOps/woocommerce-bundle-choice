@@ -1,6 +1,6 @@
 <?php 
 
-class f_g_sampleLandingPageCest
+class f_e_sampleLandingPageCest
 {
     public function _before(AcceptanceTester $I)
     {

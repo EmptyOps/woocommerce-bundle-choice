@@ -1,6 +1,6 @@
 <?php 
 
-class f_e_homeCest
+class f_g_homeCest
 {
     public function _before(AcceptanceTester $I)
     {
