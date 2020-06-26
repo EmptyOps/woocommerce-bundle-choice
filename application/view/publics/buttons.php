@@ -92,13 +92,14 @@ function eo_wbc_buttons_css(){
 	</h2>
 	<div class="ui grid center aligned container">
 		<div class="ui buttons large row stackable">
-			<button class="ui button primary column" href="<?php echo $first_url .'EO_WBC=1&BEGIN='.$first_slug.'&STEP=1'; ?>" onclick="window.location.href=jQuery(this).attr('href');">
+			<button class="ui button primary column" href="<?php echo $first_url .'EO_WBC=1&BEGIN='.$first_slug.'&STEP=1&FIRST=&SECOND='; ?>" onclick="window.location.href=jQuery(this).attr('href');">
 				<?php echo $button_text.$first_name; ?>
 			</button>
 
 			<div class="or"></div>
 
-			<button class="ui button primary column" href="<?php echo $second_url .'EO_WBC=1&BEGIN='.$second_slug.'&STEP=1'; ?>" onclick="window.location.href=jQuery(this).attr('href');">
+
+			<button class="ui button primary column" href="<?php echo $second_url .'EO_WBC=1&BEGIN='.$second_slug.'&STEP=1&FIRST=&SECOND='; ?>" onclick="window.location.href=jQuery(this).attr('href');">
 				<?php echo $button_text.$second_name; ?>
 			</button>
 		</div>

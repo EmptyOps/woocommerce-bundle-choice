@@ -67,6 +67,7 @@ if ( ! class_exists( 'Filters' ) ) {
 					0=>array(
 						'is_header' => 1, 
 						'val' => '',
+						'sanitize'=>'sanitize_text_field',
 						'is_checkbox' => true, 
 						'checkbox'=> array('id'=>'dummy','value'=>array(),'options'=>array('row0_col0_chk'=>''), 'options_attrs'=>array('row0_col0_chk'=>array('data-action="bulk_select_all"', 'data-bulk_table_id="'.$table["id"].'"')),'class'=>'','where'=>'in_table')
 					),
@@ -88,21 +89,25 @@ if ( ! class_exists( 'Filters' ) ) {
 					),
 					5=>array(
 						'is_header' => 1, 
-						'val' => 'Ordering'
+						'val' => 'Template'
 					),
 					6=>array(
 						'is_header' => 1, 
-						'val' => 'Input Type'
+						'val' => 'Ordering'
 					),
 					7=>array(
 						'is_header' => 1, 
-						'val' => 'Icon Size'
+						'val' => 'Input Type'
 					),
 					8=>array(
 						'is_header' => 1, 
-						'val' => 'Icon Label Size'
+						'val' => 'Icon Size'
 					),
 					9=>array(
+						'is_header' => 1, 
+						'val' => 'Icon Label Size'
+					),
+					10=>array(
 						'is_header' => 1, 
 						'val' => 'Add reset link?'
 					),
@@ -152,6 +157,7 @@ if ( ! class_exists( 'Filters' ) ) {
 						'is_header' => 1, 
 						'val' => '',
 						'is_checkbox' => true, 
+						'sanitize'=>'sanitize_text_field',
 						'checkbox'=> array('id'=>'dummy','value'=>array(),'options'=>array('row0_col0_chk'=>''), 'options_attrs'=>array('row0_col0_chk'=>array('data-action="bulk_select_all"', 'data-bulk_table_id="'.$sett_table["id"].'"')),'class'=>'','where'=>'in_table')
 					),
 					1=>array(
@@ -239,6 +245,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							'filter_setting_status'=>array(
 									'label'=>'Filter Status',
 									'type'=>'checkbox',
+									'sanitize'=>'sanitize_text_field',
 									'value'=>array(wbc()->options->get_option('filters_filter_setting','filter_setting_status')),
 									'options'=>array('filter_setting_status'=>' Check here to enable horizontal filter bar at category page.'),
 									'class'=>array(),
@@ -248,6 +255,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							'filter_setting_price_filter_width'=>array(
 								'label'=>'Price filter\'s column width',
 								'type'=>'text',
+								'sanitize'=>'sanitize_text_field',
 								'value'=>wbc()->options->get_option('filters_filter_setting','filter_setting_price_filter_width','50%'),
 								'class'=>array(),
 								'size_class'=>array('eight','wide'),
@@ -256,6 +264,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							'filter_setting_alternate_slider_ui'=>array(
 								'label'=>'Alternate ticked slider UI',
 								'type'=>'checkbox',
+								'sanitize'=>'sanitize_text_field',
 								'value'=>array(wbc()->options->get_option('filters_filter_setting','filter_setting_alternate_slider_ui')),
 								'options'=>array('filter_setting_alternate_slider_ui'=>' Check here to enable alternate UI for filter sliders.'),
 								'class'=>array(),
@@ -264,7 +273,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							),						
 							'filter_setting_submit_btn'=>array(
 								'label'=>eowbc_lang('Save'),
-								'type'=>'button',
+								'type'=>'button',								
 								'class'=>array('secondary'),
 								//'size_class'=>array('eight','wide'),
 								'inline'=>false,
@@ -284,6 +293,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							'label'=>eowbc_lang('First Category'),
 							'type'=>'radio',
 							'value'=>'fc1',
+							'sanitize'=>'sanitize_text_field',
 							'options'=>array('fc1'=>'Default(Grid View)','fc2'=>'Template 1 (Expand/Collapse)','fc3'=>'Template 2','fc4'=>'Template 3'),
 							'class'=>array('fluid'),						
 							// 'size_class'=>array('eight','wide'),
@@ -300,7 +310,8 @@ if ( ! class_exists( 'Filters' ) ) {
 							'label'=>eowbc_lang('Second Category'),
 							'type'=>'radio',
 							'value'=>'sc1',
-							'options'=>array('fc1'=>'Default(Grid View)','fc2'=>'Template 1 (Expand/Collapse)','fc3'=>'Template 2','fc4'=>'Template 3'),
+							'sanitize'=>'sanitize_text_field',
+							'options'=>array('sc1'=>'Default(Grid View)','sc2'=>'Template 1 (Expand/Collapse)','sc3'=>'Template 2','sc4'=>'Template 3'),
 							'class'=>array('fluid'),						
 							// 'size_class'=>array('eight','wide'),
 							'inline'=>false,
@@ -314,6 +325,7 @@ if ( ! class_exists( 'Filters' ) ) {
 						'filter_setting_alternate_mobile'=>array(
 								'label'=>'Alternate mobile filters view',
 								'type'=>'checkbox',
+								'sanitize'=>'sanitize_text_field',
 								'value'=>array(wbc()->options->get_option('filters_filter_setting','filter_setting_alternate_mobile')),
 								'options'=>array('filter_setting_alternate_mobile'=>' Check here to enable alternate filter view for mobile.'),
 								'class'=>array(),
@@ -336,6 +348,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'label'=>'Bulk Actions',
 								'type'=>'select',
 								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
 								'options'=>array(''=>eowbc_lang('Bulk Actions'), 'delete'=>'Delete','activate'=>'Activate','deactivate'=>'Deactivate'),
 								'class'=>array('fluid'),
 								'size_class'=>array('two','wide'),
@@ -344,7 +357,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							),
 							'd_fconfig_submit_btn_bulk'=>array(
 								'label'=>'Apply',
-								'type'=>'button',
+								'type'=>'button',								
 								'class'=>array('secondary'),
 								// 'size_class'=>array('eight','wide'),
 								'prev_inline'=>true,
@@ -370,6 +383,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							'd_fconfig_filter'=>array(
 								'type'=>'select',
 								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
 								'options'=>\eo\wbc\controllers\admin\menu\page\Filters::eo_wbc_attributes_( \eo\wbc\controllers\admin\menu\page\Filters::eo_wbc_prime_category_() ),	//array_replace(\eo\wbc\model\Category_Attribute::instance()->get_category(),\eo\wbc\model\Category_Attribute::instance()->get_attributs()),
 								'class'=>array('fluid'),
 								'size_class'=>array('three','wide'),
@@ -381,10 +395,12 @@ if ( ! class_exists( 'Filters' ) ) {
 							'd_fconfig_type'=>array(
 							'type'=>'hidden',
 							'value'=>'',
+							'sanitize'=>'sanitize_text_field',
 							),
 							'd_fconfig_dependent'=>array(
 							'type'=>'hidden',
 							'value'=>'',
+							'sanitize'=>'sanitize_text_field',
 							),
 							'd_fconfig_label_label'=>array(
 								'label'=>eowbc_lang('Label'),
@@ -400,6 +416,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								//'placeholder'=>eowbc_lang('Sales Price'),
 								'type'=>'text',
 								'value'=>'0',
+								'sanitize'=>'sanitize_text_field',
 								//'options'=>array(),
 								//'class'=>array('fluid'),
 								'size_class'=>array('three','wide'),
@@ -410,6 +427,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							'd_fconfig_is_advanced'=>array(
 								'type'=>'checkbox',
 								'value'=>array('1'),
+								'sanitize'=>'sanitize_text_field',
 								'options'=>array('1'=>'Is it advanced filter?'),
 								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
@@ -430,6 +448,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'no_label' => true,
 								'type'=>'text',
 								'value'=>'0',
+								'sanitize'=>'sanitize_text_field',
 								'size_class'=>array('three','wide'),
 								// 'prev_inline'=>true,
 								// 'next_inline'=>true,
@@ -448,6 +467,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'no_label' => true,
 								'type'=>'text',
 								'value'=>'0',
+								'sanitize'=>'sanitize_text_field',
 								'size_class'=>array('three','wide'),
 								// 'prev_inline'=>true,
 								// 'next_inline'=>true,
@@ -465,6 +485,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							'd_fconfig_input_type'=>array(
 								'type'=>'select',
 								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
 								'options'=>array('icon'=>'Icon Only','icon_text'=>'Icon and Text','numeric_slider'=>'Numeric slider','text_slider'=>'Text slider','checkbox'=>'Checkbox'),
 								'class'=>array('fluid'),
 								'size_class'=>array('three','wide'),
@@ -484,6 +505,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'no_label' => true,
 								'type'=>'text',
 								'value'=>'0',
+								'sanitize'=>'sanitize_text_field',
 								'size_class'=>array('three','wide'),
 								// 'prev_inline'=>true,
 								// 'next_inline'=>true,
@@ -502,6 +524,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'no_label' => true,
 								'type'=>'text',
 								'value'=>'0',
+								'sanitize'=>'sanitize_text_field',
 								'size_class'=>array('three','wide'),
 								// 'prev_inline'=>true,
 								// 'next_inline'=>true,
@@ -510,6 +533,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							'd_fconfig_add_reset_link'=>array(
 								'type'=>'checkbox',
 								'value'=>array('1'),
+								'sanitize'=>'sanitize_text_field',
 								'options'=>array('1'=>'Add reset link?'),
 								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
@@ -520,6 +544,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							'd_fconfig_add_help'=>array(
 								'type'=>'checkbox',
 								'value'=>array(),
+								'sanitize'=>'sanitize_text_field',
 								'options'=>array('1'=>'Add help text?'),
 								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
@@ -531,6 +556,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'label'=>'Help Text',
 								'type'=>'textarea',
 								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
 								'attr'=>array('style="width:100%;"'),
 								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
@@ -542,6 +568,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							'd_fconfig_add_enabled'=>array(
 								'type'=>'checkbox',
 								'value'=>array('1'),
+								'sanitize'=>'sanitize_text_field',
 								'options'=>array('1'=>'Enabled?'),
 								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
@@ -570,6 +597,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'label'=>'Bulk Actions',
 								'type'=>'select',
 								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
 								'options'=>array(''=>eowbc_lang('Bulk Actions'), 'delete'=>'Delete','activate'=>'Activate','deactivate'=>'Deactivate'),
 								'class'=>array('fluid'),
 								'size_class'=>array('two','wide'),
@@ -605,6 +633,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							's_fconfig_filter'=>array(
 								'type'=>'select',
 								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
 								'options'=>\eo\wbc\controllers\admin\menu\page\Filters::eo_wbc_attributes_( \eo\wbc\controllers\admin\menu\page\Filters::eo_wbc_prime_category_() ),	//array_replace(\eo\wbc\model\Category_Attribute::instance()->get_category(),\eo\wbc\model\Category_Attribute::instance()->get_attributs()),
 								'class'=>array('fluid'),
 								'size_class'=>array('three','wide'),
@@ -616,10 +645,12 @@ if ( ! class_exists( 'Filters' ) ) {
 							's_fconfig_type'=>array(
 							'type'=>'hidden',
 							'value'=>'',
+							'sanitize'=>'sanitize_text_field',
 							),
 							's_fconfig_dependent'=>array(
 							'type'=>'hidden',
 							'value'=>'',
+							'sanitize'=>'sanitize_text_field',
 							),
 							's_fconfig_label_label'=>array(
 								'label'=>eowbc_lang('Label'),
@@ -635,6 +666,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								//'placeholder'=>eowbc_lang('Sales Price'),
 								'type'=>'text',
 								'value'=>'0',
+								'sanitize'=>'sanitize_text_field',
 								//'options'=>array(),
 								//'class'=>array('fluid'),
 								'size_class'=>array('three','wide'),
@@ -645,6 +677,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							's_fconfig_is_advanced'=>array(
 								'type'=>'checkbox',
 								'value'=>array('1'),
+								'sanitize'=>'sanitize_text_field',
 								'options'=>array('1'=>'Is it advanced filter?'),
 								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
@@ -665,6 +698,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'no_label' => true,
 								'type'=>'text',
 								'value'=>'0',
+								'sanitize'=>'sanitize_text_field',
 								'size_class'=>array('three','wide'),
 								// 'prev_inline'=>true,
 								// 'next_inline'=>true,
@@ -683,6 +717,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'no_label' => true,
 								'type'=>'text',
 								'value'=>'0',
+								'sanitize'=>'sanitize_text_field',
 								'size_class'=>array('three','wide'),
 								// 'prev_inline'=>true,
 								// 'next_inline'=>true,
@@ -700,6 +735,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							's_fconfig_input_type'=>array(
 								'type'=>'select',
 								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
 								'options'=>array('icon'=>'Icon Only','icon_text'=>'Icon and Text','numeric_slider'=>'Numeric slider','text_slider'=>'Text slider','checkbox'=>'Checkbox'),
 								'class'=>array('fluid'),
 								'size_class'=>array('three','wide'),
@@ -719,6 +755,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'no_label' => true,
 								'type'=>'text',
 								'value'=>'0',
+								'sanitize'=>'sanitize_text_field',
 								'size_class'=>array('three','wide'),
 								// 'prev_inline'=>true,
 								// 'next_inline'=>true,
@@ -737,6 +774,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'no_label' => true,
 								'type'=>'text',
 								'value'=>'0',
+								'sanitize'=>'sanitize_text_field',
 								'size_class'=>array('three','wide'),
 								// 'prev_inline'=>true,
 								// 'next_inline'=>true,
@@ -745,6 +783,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							's_fconfig_add_reset_link'=>array(
 								'type'=>'checkbox',
 								'value'=>array('1'),
+								'sanitize'=>'sanitize_text_field',
 								'options'=>array('1'=>'Add reset link?'),
 								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
@@ -755,6 +794,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							's_fconfig_add_help'=>array(
 								'type'=>'checkbox',
 								'value'=>array(),
+								'sanitize'=>'sanitize_text_field',
 								'options'=>array('1'=>'Add help text?'),
 								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
@@ -766,6 +806,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'label'=>'Help Text',
 								'type'=>'textarea',
 								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
 								'attr'=>array('style="width:100%;"'),
 								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
@@ -777,6 +818,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							's_fconfig_add_enabled'=>array(
 								'type'=>'checkbox',
 								'value'=>array('1'),
+								'sanitize'=>'sanitize_text_field',
 								'options'=>array('1'=>'Enabled?'),
 								'is_id_as_name'=>true,
 								'class'=>array('fluid'),

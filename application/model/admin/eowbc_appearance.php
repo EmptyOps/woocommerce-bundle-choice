@@ -42,10 +42,15 @@ class Eowbc_Appearance {
 
 	public function save( $form_definition ) {
 		
+		
+
 		$res = array();
 		$res["type"] = "success";
 
 	    $res["msg"] = "";
+
+	    wbc()->sanitize->clean($form_definition);	    
+
 		wbc()->load->model('admin\form-builder');
 
 		/*$res["post"] = $_POST;*/

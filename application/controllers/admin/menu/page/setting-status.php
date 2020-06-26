@@ -33,6 +33,7 @@ class Setting_status {
 								'label'=>'Inventory Type',
 								'type'=>'select',
 								'value'=>wbc()->options->get_option('setting_staus','inventory_type'),
+								'sanitize'=>'sanitize_text_field',
 								'options'=>array('jewelery'=>'Jewelery','clothing'=>'Clothing','home_decor'=>'Home Decor','others'=>'Others'),
 								'class'=>array('fluid'),
 								'size_class'=>array('eight','wide'),
@@ -41,6 +42,7 @@ class Setting_status {
 							'features'=>array(
 								'label'=>'Choose features',
 								'type'=>'checkbox',
+								'sanitize'=>'sanitize_text_field',
 								'value'=>unserialize(wbc()->options->get_option('setting_staus','features',serialize(array()))),
 								'options'=>array(
 									'ring_builder'=>'Ring Builder',
@@ -83,6 +85,7 @@ class Setting_status {
 							'send_error_log_subject'=>array(
 								'type'=>'text',
 								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
 								'class'=>array('fluid'),
 								'size_class'=>array('sixteen','wide'),
 								// 'inline'=>true,
@@ -96,6 +99,7 @@ class Setting_status {
 							'eo_wbc_view_error'=>array(
 								'type'=>'textarea',
 								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
 								'attr'=>array('style="width:100%; border: 1px solid #ddd;"','data-init="1"'),
 								'class'=>array('fluid','eo_wbc_view_error'),
 								'size_class'=>array('sixteen','wide')
@@ -103,6 +107,7 @@ class Setting_status {
 							'send_error_log_agree_terms'=>array(
 								'type'=>'checkbox',
 								'value'=>array(),
+								'sanitize'=>'sanitize_text_field',
 								'options'=>array('1'=>'I agree with SpherePlugins\' <a href="https://sphereplugins.com/terms-conditions/" target="_blank">Terms</a> & <a href="https://sphereplugins.com/privacy-policy/" target="_blank">Privacy Policy</a>'),
 								'options_attrs'=>array('1'=>array("onchange=\"if(jQuery(this)[0].checked){ jQuery('#btn_send_error_report').removeClass('disabled'); } else { jQuery('#btn_send_error_report').addClass('disabled'); }\"")),
 								'is_id_as_name'=>true,
