@@ -4,6 +4,8 @@
 *	Template to show choice buttons
 */
 
+
+
 $first_term = wbc()->options->get_option('configuration','first_name');
 $second_term = wbc()->options->get_option('configuration','second_name');
 
@@ -41,11 +43,14 @@ if(function_exists('wc') && !empty(wc()->session)){
 	wc()->session->set('EO_WBC_SETS',NULL);
 }    
 
-// Load assets first to avoid zaping effect
-wbc()->load->asset('css','fomantic/semantic.min');
-wbc()->load->asset('css','publics/buttons');
-wbc()->load->asset('js','fomantic/semantic.min');
-wbc()->load->asset('js','publics/buttons');
+// Load assets first to avoid zaping effect. 
+// TODO here should not load instantly and follow the wp standard by using hook as well as setting last param to false to our load asset function. 
+// add_action( 'wp_enqueue_scripts',function(){ 
+	wbc()->load->asset('css','fomantic/semantic.min', array(), "", true);
+	wbc()->load->asset('css','publics/buttons', array(), "", true);
+	wbc()->load->asset('js','fomantic/semantic.min', array(), "", true);
+	wbc()->load->asset('js','publics/buttons', array(), "", true);
+// },50);
 
 //moved from the home class of older version 
 function eo_wbc_code() //script to get color code from buttons
@@ -79,7 +84,7 @@ function eo_wbc_buttons_css(){
 
 ?>
 <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
-<div id="wbc_" class="eo_wbc_container">
+<div id="wbc_" class="eo_wbc_container" <?php echo (isset($is_embed_using_js) && $is_embed_using_js) ? 'style="display: none !important;"' : '';?>>
 	<h2 class="ui center aligned header" style="text-align: center !important;">
 		<?php _e($heading); ?>
 	</h2>

@@ -95,7 +95,7 @@ if(!class_exists('EOWBC_Error_Handler')){
 		   	return true;
 		}
 
-		function eo_wbc_get_system_details(){
+		public static function eo_wbc_get_system_details(){
 
 			$user_data=wp_get_current_user();
 
@@ -150,35 +150,35 @@ if(!class_exists('EOWBC_Error_Handler')){
 			return $details;
 		}
 		
-		function clean_send(){
+		public static function clean_send(){
 			file_put_contents(constant('EOWBC_LOG_DIR').'debug.log', '');
 			update_option('eowbc_warning_count',0);
 			update_option('eowbc_error_count',0);
 		}
 		
-		function get_subject(){
+		public static function get_subject(){
 			return 'Error log from the '.home_url();
 		}
 
-		function get_logs(){
+		public static function get_logs(){
 			$errors=file_get_contents(constant('EOWBC_LOG_DIR').'debug.log');
 
 			if(!empty($errors)){
-				$errors=$errors.$this->eo_wbc_get_system_details();
+				$errors=$errors.self::eo_wbc_get_system_details();
 			}
 
 			return $errors;
 		}
 
-		function eo_wbc_send_error_report(){
+		public static function eo_wbc_send_error_report(){
 			if( isset($_POST["is_sent_from_front_end"]) && $_POST["is_sent_from_front_end"] == 1 ) {
-				if(wp_mail('emptyopssphere@gmail.com,mahesh@emptyops.com', $this->get_subject(), $this->get_logs())) {
-					$this->clean_send();
+				if(wp_mail('emptyopssphere@gmail.com,mahesh@emptyops.com', self::get_subject(), self::get_logs())) {
+					self::clean_send();
 				}	
 			}
 			else {
 				if(wp_mail('emptyopssphere@gmail.com,mahesh@emptyops.com',$_POST["send_error_log_subject"],$_POST["eo_wbc_view_error"])){
-					$this->clean_send();
+					self::clean_send();
 				}
 			}
 		}

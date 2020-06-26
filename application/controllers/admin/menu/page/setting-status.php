@@ -59,7 +59,7 @@ class Setting_status {
 								'label'=>'Save',
 								'type'=>'button',				
 								'class'=>array('primary'),
-								'attr'=>array("data-action='save'")
+								'attr'=>array('data-tab_key="setting_status_setting"', "data-action='save'")
 							)
 						)							
 					),
@@ -88,10 +88,10 @@ class Setting_status {
 								// 'inline'=>true,
 							),
 							'eo_wbc_view_error_label'=>array(
-								'label'=>eowbc_lang('Error logs & installed plugins details'),
+								'label'=>eowbc_lang('Error logs & installed plugins etc. details'),
 								'type'=>'label',
 								//'class'=>array('fluid'),
-								'size_class'=>array('three','wide')
+								'size_class'=>array('sixteen','wide')
 							),
 							'eo_wbc_view_error'=>array(
 								'type'=>'textarea',
@@ -103,8 +103,8 @@ class Setting_status {
 							'send_error_log_agree_terms'=>array(
 								'type'=>'checkbox',
 								'value'=>array(),
-								'options'=>array('1'=>'I agree with SpherePlugins\' <a href="https://sphereplugins.com/terms-conditions/">Terms</a> & <a href="https://sphereplugins.com/privacy-policy/">Privacy Policy</a>'),
-								'options_attrs'=>array('1'=>"onchange=\"if(jQuery(this)[0].checked){ jQuery('#btn_send_error_report').removeClass('disabled'); } else { jQuery('#btn_send_error_report').addClass('disabled'); }\""),
+								'options'=>array('1'=>'I agree with SpherePlugins\' <a href="https://sphereplugins.com/terms-conditions/" target="_blank">Terms</a> & <a href="https://sphereplugins.com/privacy-policy/" target="_blank">Privacy Policy</a>'),
+								'options_attrs'=>array('1'=>array("onchange=\"if(jQuery(this)[0].checked){ jQuery('#btn_send_error_report').removeClass('disabled'); } else { jQuery('#btn_send_error_report').addClass('disabled'); }\"")),
 								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
 								'style'=>'normal',
@@ -115,7 +115,7 @@ class Setting_status {
 								'label'=>eowbc_lang('Cancel'),
 								'type'=>'button',				
 								'class'=>array('secondary'),
-								'attr'=>array('onclick="window.location.href=document.referrer"'),
+								'attr'=>array("data-action='cancel'"/*'onclick="window.location.href=document.referrer"'*/),
 								'next_inline'=>true,
 								'inline'=>true,
 							),
@@ -123,7 +123,7 @@ class Setting_status {
 								'label'=>eowbc_lang('Send error report'),
 								'type'=>'button',				
 								'class'=>array('primary','disabled'),
-								'attr'=>array("data-action='save'"),
+								'attr'=>array('data-tab_key="setting_status_log"', "data-action='save'"),
 								'prev_inline'=>true,
 								'inline'=>true,
 							),

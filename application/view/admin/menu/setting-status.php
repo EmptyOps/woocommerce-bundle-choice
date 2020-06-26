@@ -3,7 +3,7 @@ defined( 'ABSPATH' ) || exit;
 
 //related to log module
 if(isset($_GET) && isset($_GET['action']) && $_GET['action']=='clear' && !empty($_GET['ref']) ){
-	EOWBC_Error_Handler::instance()->clean_send();
+	\EOWBC_Error_Handler::clean_send();
 	?>
 		<script>
 			window.location.href='<?php echo $_GET['ref']; ?>';
@@ -12,7 +12,7 @@ if(isset($_GET) && isset($_GET['action']) && $_GET['action']=='clear' && !empty(
 }
 
 // if(isset($_GET) && isset($_GET['action']) && $_GET['action']=='report'){
-// 	EOWBC_Error_Handler::instance()->eo_wbc_send_error_report();		
+// 	\EOWBC_Error_Handler::eo_wbc_send_error_report();		
 // 	add_action('admin_notices',function (){
 // 		/* translators: %1s: <strong> tag */
 // 		/* translators: %2s: </strong> tag */                
@@ -32,6 +32,7 @@ $form['method']='POST';
 $form['tabs'] = true;
 $form['data'] = \eo\wbc\model\admin\Eowbc_Setting_Status::instance()->get( eo\wbc\controllers\admin\menu\page\Setting_Status::get_form_definition());
 $form['attr']= array('data-is_per_tab_save="true"');
+$form["active_tab_onload"] = !empty($_GET["atol"]) ? $_GET["atol"] : "";
 
 //for error log form which displays code etc. 
 wp_enqueue_script('wp-theme-plugin-editor');
@@ -42,18 +43,23 @@ eo\wbc\model\admin\Form_Builder::instance()->build($form);
 wbc()->load->asset('js','admin/setting_status');	
 
 //for error log form which displays code etc. 
-if (function_exists('wp_enqueue_code_editor')): ?>
+	//set false to not use it because textarea text are not visible until user do not click on it once however if it is inside the first loading tab it becomes visible but now its in secnd tab. enable it when there a fix available. 
+if (false && function_exists('wp_enqueue_code_editor')): ?>
 	<script>                                 
         jQuery(document).ready(function($) {     
             var errors=<?php echo json_encode(array('codeEditor' =>wp_enqueue_code_editor(array('type' => 'text')))); ?>                              
             wp.codeEditor.initialize($('#eo_wbc_view_error'), errors); 
+
+            setTimeout(function() {
+            	$('#eo_wbc_view_error').trigger('click');
+            }, 3000);
         });
     </script>   
 <?php else: ?>
 	<style type="text/css">
 		.eo_wbc_view_error{
 			width: 100%;
-			min-height: 30em;
+			min-height: 60em;
 		}
 	</style>
 <?php endif;

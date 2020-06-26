@@ -3,6 +3,14 @@
  *	Template to show error popup when anything fails to render or something of that sort 
  */
 
+// Load assets first to avoid zaping effect. 
+// TODO here should not load instantly and follow the wp standard by using hook as well as setting last param to false to our load asset function. 
+// add_action( 'wp_enqueue_scripts',function(){ 
+  wbc()->load->asset('css','fomantic/semantic.min', array(), "", true);
+  wbc()->load->asset('css','publics/buttons', array(), "", true);
+  wbc()->load->asset('js','fomantic/semantic.min', array(), "", true);
+  wbc()->load->asset('js','publics/buttons', array(), "", true);
+// },50);
 ?>
 <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
 <div class="ui modal align center tiny centered">
@@ -11,14 +19,14 @@
 </div>
 <div class="content">
   <h5 id="error_popup_title"></h5>
+  <?php wp_nonce_field('eowbc_send_error_report', 'eowbc_send_error_report_wpnonce'); ?>
+  <?php wp_nonce_field('eo_wbc_throw_error', 'eo_wbc_throw_error_wpnonce'); ?>
   <br>
-  <h1>When you send error report, you agree to SpherePlugins\' <a href="https://sphereplugins.com/terms-conditions/">Terms</a> & <a href="https://sphereplugins.com/privacy-policy/">Privacy Policy</a></h1>
+  <h5>When you send error report, you agree to SpherePlugins' <a href="https://sphereplugins.com/terms-conditions/" target="_blank">Terms</a> & <a href="https://sphereplugins.com/privacy-policy/" target="_blank">Privacy Policy</a></h5>
 </div>
 <div class="actions">
-	<?php wp_nonce_field('eowbc_send_error_report', 'eowbc_send_error_report_wpnonce'); ?>
-	<?php wp_nonce_field('eo_wbc_throw_error', 'eo_wbc_throw_error_wpnonce'); ?>
   	<div class="ui large red cancel button">Close</div>
-  	<div class="ui large primary view_log button" href="<?php echo admin_url('admin.php?page=eowbc-setting-status') ?>">View and Send error report</div>              
+  	<div class="ui large primary view_log button" href="<?php echo admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log') ?>">View and Send error report</div>              
   	<div class="ui large secondary approve ok button" style="margin-top: 1em !important;">Send an error report now!</div>
 </div>
 </div>
@@ -45,7 +53,8 @@ jQuery(document).ready(function($){
     if(!jQuery.send_error){
       jQuery.send_error=1;
       $(this).text("Sending error report...");
-      jQuery.post('<?php echo site_url('/wp-admin/admin-ajax.php');?>',{resolver:'eowbc_send_error_report', _wpnonce:jQuery( jQuery(form).find('input[name="eowbc_send_error_report_wpnonce"]')[0] ).val(), action: 'eowbc_ajax', is_sent_from_front_end: 1},function(data){                   
+      
+      jQuery.post('<?php echo site_url('/wp-admin/admin-ajax.php');?>',{resolver:'eowbc_send_error_report', _wpnonce:jQuery( jQuery('input[name="eowbc_send_error_report_wpnonce"]')[0] ).val(), action: 'eowbc_ajax', saved_tab_key: 'setting_status_log',is_sent_from_front_end: 1},function(data){                   
         if(data){ 
           jQuery(".ui.modal").find(".actions").html('<div class="ui large green inverted button error_sent">Ok</div>');                    
           jQuery(".ui.modal .content").html("<h5>Thank you for sending error report, Sphere Plugins Support Team will soon get in touch with you. It generally takes 12 hours.</h5>");
@@ -71,6 +80,8 @@ jQuery(document).ready(function($){
 });
 
 function eo_wbc_error_popup(type,msg) {
+  console.log("eo_wbc_error_popup called...");
+
 	eo_wbc_outer_containers=undefined;
 
 	//here we shall show some kind of popup for non-admin users as well, since some users might be testing frontend on diff browser or in incognito etc.
@@ -79,10 +90,16 @@ function eo_wbc_error_popup(type,msg) {
 	  jQuery('#error_popup_title').html(msg);
 
 	  //log the error in background
-	  jQuery.post('<?php echo site_url('/wp-admin/admin-ajax.php');?>',{resolver:'eo_wbc_throw_error', _wpnonce:jQuery( jQuery(form).find('input[name="eo_wbc_throw_error_wpnonce"]')[0] ).val(), action: 'eowbc_ajax',page:document.location.href,type:type,msg:msg});
+	  jQuery.post('<?php echo site_url('/wp-admin/admin-ajax.php');?>',{resolver:'eo_wbc_throw_error', _wpnonce:jQuery( jQuery('input[name="eo_wbc_throw_error_wpnonce"]')[0] ).val(), action: 'eowbc_ajax',page:document.location.href,type:type,msg:msg});
 
 	  //show user popup with options to send error report or cancel 
-	  jQuery('.ui.modal').modal('show');
+	  // jQuery('.ui.modal').modal('show');
+    jQuery('.ui.modal').modal({
+      onApprove : function() {
+        // ... //Validate here, or pass validation to somewhere else
+        return false; //Return false as to not close modal dialog on approve click when we have to show something else after that.
+      }
+    }).modal('show');
 	<?php endif; ?>                  
 
 

@@ -34,17 +34,18 @@ class Eowbc_Setting_Status {
 			    //loop through form fields and read values from options and store in the form_definition 
 
 	    		if( $fk == "send_error_log_subject" ) {
-	    			$form_definition[$key]["form"][$fk]["value"] = EOWBC_Error_Handler::instance()->get_subject();
+	    			$form_definition[$key]["form"][$fk]["value"] = \EOWBC_Error_Handler::get_subject();
 	    			continue;
 	    		}
 	    		elseif( $fk == "eo_wbc_view_error" ) {
-	    			$form_definition[$key]["form"][$fk]["value"] = EOWBC_Error_Handler::instance()->get_logs();
+	    			$form_definition[$key]["form"][$fk]["value"] = \EOWBC_Error_Handler::get_logs();
+	    			// wbc()->common->pr($form_definition[$key]["form"], false, false);
 	    			continue;
 	    		}
 
 				$form_definition[$key]["form"][$fk]["value"] = wbc()->options->get_option('setting_status_'.$key,$fk, isset($form_definition[$key]["form"][$fk]["value"]) ? $form_definition[$key]["form"][$fk]["value"] : '');
 
-    			if($fv["type"]=='checkbox' and is_array($fv["options"]) and !empty($fv["options"])) {
+    			if($fv["type"]=='checkbox' and isset($fv["grouped"]) and $fv["grouped"] and is_array($fv["options"]) and !empty($fv["options"])) {
 
     				$checbox_status = unserialize($form_definition[$key]["form"][$fk]["value"]);
     				if(is_array($checbox_status)){
@@ -108,7 +109,7 @@ class Eowbc_Setting_Status {
 		    }
 		}
 		else {
-			EOWBC_Error_Handler::instance()->eo_wbc_send_error_report();	
+			\EOWBC_Error_Handler::eo_wbc_send_error_report();	
 			$res["msg"] = "Thank you for sending error report, Sphere Plugins Support Team will soon get in touch with you. It generally takes 12 hours.";
 		}	    
         return $res;
