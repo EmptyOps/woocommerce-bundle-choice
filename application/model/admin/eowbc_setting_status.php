@@ -47,7 +47,8 @@ class Eowbc_Setting_Status {
 
     			if($fv["type"]=='checkbox' and isset($fv["grouped"]) and $fv["grouped"] and is_array($fv["options"]) and !empty($fv["options"])) {
 
-    				$checbox_status = unserialize($form_definition[$key]["form"][$fk]["value"]);
+    				/*$checbox_status = unserialize($form_definition[$key]["form"][$fk]["value"]);*/
+    				$checbox_status = ($form_definition[$key]["form"][$fk]["value"]);
     				if(is_array($checbox_status)){
     					$form_definition[$key]["form"][$fk]["value"] = array_values($checbox_status);
     				}
