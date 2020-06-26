@@ -4,7 +4,7 @@
 *	template to show select as input method.
 */
 
-if(!empty($id) and !empty($label)){
+if(!empty($id) /*and !empty($label)*/){
 	?>
 	<div class="<?php echo !empty($size_class)?$size_class:''; ?> field">
 		<?php 

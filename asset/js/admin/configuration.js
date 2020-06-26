@@ -6,7 +6,7 @@ jQuery(document).ready(function($){
             // $(".eo_wbc_position_toggle").show();                
             $('#config_buttons_position').show();
             $('#config_view_custom_landing_link').hide();
-            toggle_btn_position();
+            // toggle_btn_position();
         }
         else{ //Shortcode setting routine is selected
             if($(this).val()==0){

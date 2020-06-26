@@ -41,6 +41,15 @@ class Form_Builder implements Builder {
 					$active = false;
 					foreach ($form['data'] as $tab_slug => $tab_data) {
 
+						if( !empty($form["active_tab_onload"]) ) {
+							if( $form["active_tab_onload"] == $tab_slug ) {
+								$active = false;	//set false so that it is set active! that is how below code's logic to set the active tab is :-(
+							}
+							else {
+								$active = true;
+							}
+						}
+
 						$tab_menu.='<a class="item '.(!$active?'active':'').'" data-tab="'.$tab_slug.'">'.$tab_data['label'].'</a>';
 						$tab_segment.='<div class="ui tab '.(!$active?'active':'').'" data-tab="'.$tab_slug.'">';
 						if(!$active){ $active = true; }

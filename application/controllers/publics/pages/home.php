@@ -168,28 +168,36 @@ class Home {
       		$button_render_error_msg = constant('EOWBC_NAME')." failed to display buttons on your current theme, you may send an error log or create a support ticket on the support forum.";
 
 			ob_start();
-			wbc()->load->template('publics/buttons');
+			wbc()->load->template('publics/buttons', array('is_embed_using_js'=>true));
 			$buttons = ob_get_clean(); 
-			$script = "<script>jQuery(document).ready(function(){";
+			$script = $buttons."<script>jQuery(document).ready(function(){";
 
 			$btn_position_setting_text = wbc()->options->get('btn_position_setting_text','');
 			if(!empty($btn_position_setting_text)) {
 				$script.='if(jQuery("'.$btn_position_setting_text.'").length!=0){'.
-              				'jQuery("'.$btn_position_setting_text.'").append("'.$buttons.'");'.
+              				'jQuery("'.$btn_position_setting_text.'").append( cut_and_move_div() );'.
               				'} else if(jQuery("#container,#primary,.entry-content,.main,#main,.post-content,#content,.content,.container").length!=0){'.
-              					'jQuery(jQuery("#container,#primary,.entry-content,.main,#main,.post-content,#content,.content,.container")[0]).append("'.$buttons.'");'.
+              					'jQuery(jQuery("#container,#primary,.entry-content,.main,#main,.post-content,#content,.content,.container")[0]).append( cut_and_move_div() );'.
               				'} else {'
               					.'eo_wbc_error_popup("fatal_error","'.$button_render_error_msg.'");'/*'jQuery("body").append("'.$buttons.'");'*/.
               				'}';
               			
             } else {
             	$script.='if(jQuery("#container,#primary,.entry-content,.main,#main,.post-content,#content,.content,.container").length!=0){'.
-      					'jQuery(jQuery("#container,#primary,.entry-content,.main,#main,.post-content,#content,.content,.container")[0]).append("'.$buttons.'");'.
+      					'jQuery(jQuery("#container,#primary,.entry-content,.main,#main,.post-content,#content,.content,.container")[0]).append( cut_and_move_div() );'.
       				'} else {'
       					.'eo_wbc_error_popup("fatal_error","'.$button_render_error_msg.'");'/*'jQuery("body").append("'.$buttons.'");'*/.
       				'}';
             }
-            $script.='});<script>")';
+
+            $script.='function cut_and_move_div() {
+            	var buttons_div = $("#wbc_").clone(); 
+            	buttons_div.show();
+            	$("#wbc_").remove();
+            	return buttons_div;
+            }';
+
+            $script.='});</script>';
 			// echo $script;
 			return $script;
 		}
