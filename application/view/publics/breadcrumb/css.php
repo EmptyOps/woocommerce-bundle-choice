@@ -91,7 +91,7 @@
 	(
 		!empty(wbc()->options->get_option('appearance_breadcrumb','breadcrumb_radius','2'))
 		?
-		" .eo-wbc-container>.ui.steps{ border-radius: ".wbc()->options->get_option('appearance_breadcrumb','breadcrumb_radius','2')."px; overflow: hidden; }":''
+		" .eo-wbc-container>.ui.steps{ border-radius: ".wbc()->options->get_option('appearance_breadcrumb','breadcrumb_radius','0')."px; overflow: hidden; }.eo-wbc-container>.ui.steps .step{border-radius:0px !important;}":''
 	)
 	.
 	( !wp_is_mobile() ? " .eo-wbc-container>.ui.steps div{ cursor:pointer !important; } .ui.steps .step .column{ z-index:7;width: max-content !important; padding-left:0em !important;} .ui.steps .step .column:first-child{".(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_1'?"":"font-size:3.2em;")."line-height: 0.8em;text-align:right;padding-right: 0.125rem !important;} .ui.steps .step{ padding-right:0px !important;padding-left:3em !important; } 
@@ -119,7 +119,7 @@
 			width:0px !important;
 		}
 		"
-	).(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_1'?".eo-wbc-container.container .ui.steps .step{ padding-top:2rem !important;}.ui.steps .step:after {display: none !important;}":" .eo-wbc-container.container .ui.steps .step {    padding-top: 0.5em !important;
+	).(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_1'?".eo-wbc-container.container .ui.steps .step{ padding-top:3rem !important;}.ui.steps .step:after {display: none !important;}":" .eo-wbc-container.container .ui.steps .step {    padding-top: 1em !important;
     padding-bottom: 1rem !important; }"
 		
 	).(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_2'?
@@ -155,6 +155,9 @@
 			height:7em;			
 		}
 		":""
+	).(
+		in_array(wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts'),array('fc4','sc4'))?".eo-wbc-container.filters.container.ui.form,.eo-wbc-container.filters.container.ui.form .ui.header{font-family: 'ZapfHumanist601BT-Roman' !important; }.eo-wbc-container.filters.container.ui.form .ui.header{font-size:1em;}.ui.labeled.ticked.range.slider .labels{height:0px; top:unset;bottom:-10%;font-size:12px}.ui.labeled.ticked.range.slider .labels .label::after{top:unset;bottom:100%;}.eo_wbc_filter_icon:hover:not(.none_editable){ border-bottom: 0px !important; }":""
+		
 	)."</style>";
 
 ?>

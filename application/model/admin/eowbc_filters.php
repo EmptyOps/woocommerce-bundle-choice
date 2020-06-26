@@ -35,38 +35,39 @@ class Eowbc_Filters {
 				if( $fv["type"] == "table" ) {
 					// wbc()->options->update_option_group( 'filters_'.$key, serialize(array()) );
 					$filter_data = unserialize(wbc()->options->get_option_group('filters_'.$key,"a:0:{}"));
-					// wbc()->common->pr($filter_data, false, false);
+					//wbc()->common->pr($filter_data, false, false);
 
 					$body = array();
 
 					foreach ($filter_data as $rk => $rv) {
 						$row = array();
 
-						//
 						$row[] =array(
 								'val' => '',
 								'is_checkbox' => true, 
-								'checkbox'=> array('id'=>$key.$rv[$key.'_filter'],'value'=>array(),'options'=>array($rv[$key.'_filter']=>''),'class'=>'','where'=>'in_table')
+								'checkbox'=> array('id'=>$key.$rv[$key.'_filter'],'value'=>array(),'options'=>array(/*$rv[$key.'_filter']*/$rk=>''),'class'=>'','where'=>'in_table')
 							);
-
+						$disabled = empty($rv[$key.'_add_enabled'])?true:false;
+						
 						foreach ($rv as $rvk => $rvv) {
+
 							//skip the id
-							if( $rvk == $key."_dependent" || $rvk == $key."_type" ) {
+							if( in_array($rvk,array($key."_dependent",$key."_type",$key."_add_help",$key."_add_help_text",$key."_add_enabled")) ) {
 								continue;
 							}
 
 							if( $rvk == $key."_is_advanced" ) {
-								$row[] = array( 'val' => $rvv == 1 ? "Yes" : "No" );
+								$row[] = array( 'val' => $rvv == 1 ? "Yes" : "No" ,'disabled'=>$disabled);
 							}
 							else if( $rvk == $key."_add_reset_link" ) {
-								$row[] = array( 'val' => $rvv == 1 ? "Yes" : "No" );
+								$row[] = array( 'val' => $rvv == 1 ? "Yes" : "No" ,'disabled'=>$disabled);
 							}
 							else if( $rvk == $key."_input_type" || $rvk == $key."_filter" ) {
 								$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv);
-								$row[] = array( 'val' => !is_array($val)?$val:$val["label"] );	
+								$row[] = array( 'val' => !is_array($val)?$val:$val["label"] ,'disabled'=>$disabled);	
 							}
 							else {
-								$row[] = array( 'val' => $rvv );
+								$row[] = array( 'val' => $rvv ,'disabled'=>$disabled);
 							}
 						}
 
@@ -88,6 +89,8 @@ class Eowbc_Filters {
 
 	public function save( $form_definition ) {
 		
+		wbc()->sanitize->clean($form_definition);
+
 		$res = array();
 		$res["type"] = "success";
 	    $res["msg"] = "";
@@ -96,6 +99,75 @@ class Eowbc_Filters {
 
 		$saved_tab_key = !empty($_POST["saved_tab_key"]) ? $_POST["saved_tab_key"] : ""; 
 		$skip_fileds = array('saved_tab_key');
+		
+		if($saved_tab_key == 'altr_filt_widgts') {
+						
+			if(!empty($_POST['first_category_altr_filt_widgts']) and $_POST['first_category_altr_filt_widgts']!=wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts') ) {
+
+				$filter_data = unserialize(wbc()->options->get_option_group('filters_d_fconfig',"a:0:{}"));				
+				if(!empty($filter_data)){
+					$ids = array_keys($filter_data);
+					$this->deactivate( $ids,'d_fconfig',1 );
+					$ids = array();
+					foreach ($filter_data as $filter_key=>$filter) {
+						if($_POST['first_category_altr_filt_widgts']==$filter['filter_template']){
+							//$ids[] = $filter['d_fconfig_filter'];
+							$ids[] = $filter_key;
+						}
+					}
+					if(empty($ids)) {
+						wbc()->load->model('admin/sample_data/eowbc_filter_samples');
+						$sample = \eo\wbc\model\admin\sample_data\Filter_Samples::instance();
+						if(method_exists($sample,$_POST['first_category_altr_filt_widgts'])) {
+							$sample->save(call_user_func(array($sample,$_POST['first_category_altr_filt_widgts'])));
+						}
+						
+					} else {
+						$this->activate( $ids,'d_fconfig',1);	
+					}
+					
+				} else {
+					wbc()->load->model('admin/sample_data/eowbc_filter_samples');
+					$sample = \eo\wbc\model\admin\sample_data\Filter_Samples::instance();
+					if(method_exists($sample,$_POST['first_category_altr_filt_widgts'])) {
+						$sample->save(call_user_func(array($sample,$_POST['first_category_altr_filt_widgts'])));	
+					}
+				}
+			}
+
+			if(!empty($_POST['second_category_altr_filt_widgts']) and $_POST['second_category_altr_filt_widgts']!=wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts') ) {
+
+				$filter_data = unserialize(wbc()->options->get_option_group('filters_s_fconfig',"a:0:{}"));
+				if(!empty($filter_data)){
+					$ids =array_keys($filter_data);
+					$this->deactivate( $ids,'s_fconfig',1);
+					$ids = array();
+					foreach ($filter_data as $filter_key=>$filter) {
+						if($_POST['second_category_altr_filt_widgts']==$filter['filter_template']){
+							//$ids[] = $filter['s_fconfig_filter'];
+							$ids[] = $filter_key;							
+						}
+					}
+					if(empty($ids)){
+						wbc()->load->model('admin/sample_data/eowbc_filter_samples');
+						$sample = \eo\wbc\model\admin\sample_data\Filter_Samples::instance();
+						if(method_exists($sample,$_POST['second_category_altr_filt_widgts'])){
+							$res['meta'] = call_user_func(array($sample,$_POST['second_category_altr_filt_widgts']));
+							$sample->save(call_user_func(array($sample,$_POST['second_category_altr_filt_widgts'])));	
+						}
+						
+					} else {
+						$this->activate( $ids,'s_fconfig',1);
+					}					
+				} else {
+					wbc()->load->model('admin/sample_data/eowbc_filter_samples');
+						$sample = \eo\wbc\model\admin\sample_data\Filter_Samples::instance();
+					if(method_exists($sample,$_POST['second_category_altr_filt_widgts'])){							
+						$sample->save(call_user_func(array($sample,$_POST['second_category_altr_filt_widgts'])));	
+					}
+				}				
+			}
+		}
 		
 	    //loop through form tabs and save 
 	    
@@ -151,16 +223,18 @@ class Eowbc_Filters {
 		        
 		        foreach ($filter_data as $fdkey=>$item) {
 		            
-		            if ($item[$key.'_filter']==$table_data[$key."_filter"]) { 
+		            if ($item[$key.'_filter']==$table_data[$key."_filter"] and $item['filter_template']==$table_data['filter_template']) { 
+		            	$filter_data[$fdkey][$key.'_add_enabled'] = 1;
 		                $res["type"] = "error";
-		    			$res["msg"] = eowbc_lang('Filter Already Exists');
+		    			$res["msg"] = eowbc_lang('Filter Already Exists and active');
+		    			wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data) );
 		                return $res;
 		            }
 		        }
 
-		        $filter_data[] = $table_data;
+		        $filter_data[wbc()->common->createUniqueId()] = $table_data;
 
-		        wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data) );
+		        wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data));
 		        
 		        $res["msg"] = eowbc_lang('New Filter Added Successfully'); 
 			}
@@ -170,7 +244,7 @@ class Eowbc_Filters {
         return $res;
 	}
 
-	public function delete( $ids, $saved_tab_key ) {
+	public function delete( $ids, $saved_tab_key ,$by_key=false) {
 		
 		$res = array();
 		$res["type"] = "success";
@@ -182,10 +256,14 @@ class Eowbc_Filters {
 		$filter_data_updated = array();
         
         $delete_cnt = 0;
+        $res["ids"] = $ids;
+        $res['filters'] = $filter_data;
         foreach ($filter_data as $fdkey=>$item) {
             
-            if ( !in_array($item[$key."_filter"], $ids) ) { 
-                $filter_data_updated[] = $item; 
+            if($by_key and !in_array($fdkey, $ids)) {
+            	$filter_data_updated[wbc()->common->createUniqueId()] = $item; 
+            } elseif ( !$by_key and !in_array($item[$key."_filter"], $ids) ) { 
+                $filter_data_updated[wbc()->common->createUniqueId()] = $item; 
             }
             else {
             	$delete_cnt++;
@@ -198,7 +276,7 @@ class Eowbc_Filters {
         return $res;
 	}
 
-	public function activate( $ids, $saved_tab_key ) {
+	public function activate( $ids, $saved_tab_key ,$by_key=false) {
 		
 		$res = array();
 		$res["type"] = "success";
@@ -211,8 +289,10 @@ class Eowbc_Filters {
         
         $delete_cnt = 0;
         foreach ($filter_data as $fdkey=>$item) {
-            
-            if (in_array($item[$key."_filter"], $ids)) { 
+            if($by_key and in_array($fdkey, $ids)){
+            	$filter_data[$fdkey][$key."_add_enabled"]=1;
+                $delete_cnt++;
+            } elseif (in_array($item[$key."_filter"], $ids)) { 
                 //$filter_data_updated[] = $item; 
                 $filter_data[$fdkey][$key."_add_enabled"]=1;
                 $delete_cnt++;
@@ -225,7 +305,7 @@ class Eowbc_Filters {
         return $res;
 	}
 
-	public function deactivate( $ids, $saved_tab_key ) {
+	public function deactivate( $ids, $saved_tab_key ,$by_key=false) {
 		
 		$res = array();
 		$res["type"] = "success";
@@ -239,8 +319,11 @@ class Eowbc_Filters {
         $delete_cnt = 0;
         foreach ($filter_data as $fdkey=>$item) {
             
-            if (in_array($item[$key."_filter"], $ids) ) { 
-                $filter_data[$fdkey][$key."_add_enabled"]=1;
+            if($by_key and in_array($fdkey, $ids)){
+            	$filter_data[$fdkey][$key."_add_enabled"]=0;
+                $delete_cnt++;
+            } elseif (in_array($item[$key."_filter"], $ids) ) { 
+                $filter_data[$fdkey][$key."_add_enabled"]=0;
                 $delete_cnt++;
             }            
         }

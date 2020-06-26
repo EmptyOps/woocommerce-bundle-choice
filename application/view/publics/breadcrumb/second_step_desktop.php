@@ -6,7 +6,7 @@
 
 ?>
 <div class="<?php echo (($step==$order)?'active ':(($step>$order)?'completed ':'disabled')); ?> step">
-    <div class="ui equal width grid" style="width: 100%;margin-top: -1em !important;">
+    <div class="ui equal width grid" style="width: 100%;margin-top: -2em !important;">
         <div class="ui grid">
             <div class="column"><?php echo $order; ?></div>
             <div class="column" style="text-align: left;">
@@ -17,7 +17,7 @@
         <?php if(empty($second)):?>
         <div class="column ">&nbsp;</div>
         <div class="column" <?php echo empty($second_icon)?'style="visibility: hidden;"':""; ?>>
-            <img src="<?php echo $second_icon; ?>">
+            <img src="<?php echo $second_icon; ?>" class="ui mini image">
         </div>
         <?php else: ?>                
             <div class="column  product_image_section" style="padding-top: 0px;padding-bottom: 0px;">

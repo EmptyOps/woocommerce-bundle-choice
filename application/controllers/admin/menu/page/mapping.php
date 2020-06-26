@@ -72,6 +72,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 										'is_header' => 1, 
 										'val' => '',
 										'is_checkbox' => true, 
+										'sanitize'=>'sanitize_text_field',
 										'checkbox'=> array('id'=>'dummy','value'=>array(),'options'=>array('row0_col0_chk'=>''),'class'=>'','where'=>'in_table')
 									),
 									1=>array(
@@ -105,6 +106,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 						'saved_tab_key'=>array(
 							'type'=>'hidden',
 							'value'=>'',
+							'sanitize'=>'sanitize_text_field',
 							),
 						'mapping_preference_tab_visible_info'=>array(
 							'label'=>eowbc_lang('(Determine how the product mapping should behave. For example AND means product belongs to both category/attribute A and B, OR means product belongs to either of category/attribute A or B)'),
@@ -116,6 +118,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 						'prod_mapping_pref_category'=>array(
 							'label'=>eowbc_lang('Category'),
 							'type'=>'radio',
+							'sanitize'=>'sanitize_text_field',
 							'value'=>'and',
 							'options'=>array( 'and'=> eowbc_lang('AND'),'or'=>eowbc_lang('OR') ),
 							'class'=>array('fluid'),						
@@ -126,6 +129,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 							'label'=>eowbc_lang('Attribute'),
 							'type'=>'radio',
 							'value'=>'or',
+							'sanitize'=>'sanitize_text_field',
 							'options'=>array( 'and'=> eowbc_lang('AND'),'or'=>eowbc_lang('OR') ),
 							'class'=>array('fluid'),						
 							// 'size_class'=>array('eight','wide'),
@@ -148,6 +152,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 								// 'label'=>'Bulk Actions',
 								'type'=>'select',
 								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
 								'options'=>array(''=>eowbc_lang('Bulk Actions'), 'delete'=>'Delete'),
 								'class'=>array('fluid'),
 								'size_class'=>array('two','wide'),
@@ -175,6 +180,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 							'range_first'=>array(
 								'type'=>'checkbox',
 								'value'=>array(''),
+								'sanitize'=>'sanitize_text_field',
 								'options'=>array('1'=>eowbc_lang('Select range?')),
 								'is_id_as_name'=>true,
 								'inline_class'=>array('three'),
@@ -194,6 +200,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 							'range_second'=>array(
 								'type'=>'checkbox',
 								'value'=>array(''),
+								'sanitize'=>'sanitize_text_field',
 								'options'=>array('1'=>eowbc_lang('Select range?')),
 								'is_id_as_name'=>true,
 								'style'=>'normal_without_parent_div',
@@ -204,6 +211,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 							'eo_wbc_first_category'=>array(
 								'type'=>'select',
 								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
 								'options'=>$dropdown_opts_first_cat,	//array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
 								'class'=>array('fluid'),
 								'inline_class'=>array('three'),
@@ -222,6 +230,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 							'eo_wbc_second_category'=>array(
 								'type'=>'select',
 								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
 								'options'=>$dropdown_opts_second_cat,	//array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
 								'class'=>array('fluid'),
 								'prev_inline'=>true,
@@ -231,6 +240,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 							'eo_wbc_first_category_range'=>array(
 								'type'=>'select',
 								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
 								'options'=>$dropdown_opts_first_cat,	//array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
 								'class'=>array('fluid'),
 								'inline_class'=>array('three', 'range_section'),
@@ -249,6 +259,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 							'eo_wbc_second_category_range'=>array(
 								'type'=>'select',
 								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
 								'options'=>$dropdown_opts_second_cat,	//array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
 								'class'=>array('fluid'),
 								'prev_inline'=>true,
@@ -284,6 +295,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 								'no_label' => true,
 								'type'=>'text',
 								'value'=>'0',
+								'sanitize'=>'sanitize_text_field',
 								'size_class'=>array('one','wide'),
 								// 'prev_inline'=>true,
 								// 'next_inline'=>true,

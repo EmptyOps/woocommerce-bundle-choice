@@ -25,7 +25,8 @@ if(!class_exists('WBC_Sanitize')) {
 												'sanitize_user',
 												'esc_url_raw',
 												'wp_filter_post_kses',
-												'wp_filter_nohtml_kses'
+												'wp_filter_nohtml_kses',
+												'sanitize_hex_color'
 											);
 			}
 
@@ -36,17 +37,16 @@ if(!class_exists('WBC_Sanitize')) {
 			
 		}
 
-		public function clean($form) {
-
+		public function clean($form) {			
 			foreach ($form as $key => $tab) {
 		    	foreach ($tab["form"] as $fk => $fv) {		    
 				    if(!empty($fv['sanitize'])) {
 				    	if(is_string($fv['sanitize']) and in_array($fv['sanitize'],$this->methods)){
-				    		$_POST[$fk] = call_user_func_array($fv['sanitize'],$_POST[$fk]);
+				    		$_POST[$fk] = call_user_func_array($fv['sanitize'],array($_POST[$fk]));
 				    	} elseif(is_array($fv['sanitize'])) {
 				    		foreach ($fv['sanitize'] as $sanitize_method) {
 				    			if(in_array($sanitize_method,$this->methods)) {
-				    				$_POST[$fk] = call_user_func_array($sanitize_method,$_POST[$fk]);
+				    				$_POST[$fk] = call_user_func_array($sanitize_method,array($_POST[$fk]));
 				    			}				    			
 				    		}
 				    	}
