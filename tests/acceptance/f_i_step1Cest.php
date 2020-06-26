@@ -11,16 +11,11 @@ class f_i_step1Cest
     // {
     // }
 
-    public function categoryPage(AcceptanceTester $I) {
+    function categoryPage(AcceptanceTester $I) {
 		
-    	// go to the home page
-		$I->amOnPage('/');
-
-		// Check if buttons with text x are visible 
-        $I->see('Start with Diamond');
-
-		// I click on button one and I see in next page text like 1 {button text}
-        $I->click('Start with Diamond');
+    	// go to the category page page
+		$I->amOnPage('/');	
+		$I->click('Start with Diamond');
 
 		// - I choose filter options and then I check if x  products are found
 
