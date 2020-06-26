@@ -1006,3 +1006,13 @@
 "Undefined index: product_page_hide_second_variation_form"
 [Jun 26 2020 10:33:24] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 46
 "Undefined index: product_page_hide_second_variation_form"
+[Jun 26 2020 10:56:03] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 50
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 26 2020 10:56:52] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_filters.php at line number 113
+"Undefined index: filter_template"
+[Jun 26 2020 10:57:01] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_filters.php at line number 113
+"Undefined index: filter_template"
+[Jun 26 2020 10:57:54] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 50
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 26 2020 11:00:10] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 50
+"unserialize() expects parameter 1 to be string, array given"
