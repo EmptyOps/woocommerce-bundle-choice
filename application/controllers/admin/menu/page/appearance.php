@@ -57,6 +57,7 @@ if ( ! class_exists( 'Appearance' ) ) {
 								'appearance_breadcrumb_hide_border'=>array(
 									'label'=>'Hide border',
 									'type'=>'checkbox',
+									'sanitize'=>'sanitize_text_field',
 									'value'=>'',	//hiren commented the population from database here since it is meant to specify default only here. array(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_hide_border')),
 									'options'=>array('1'=>' '),
 									'is_id_as_name'=>true,
@@ -70,6 +71,7 @@ if ( ! class_exists( 'Appearance' ) ) {
 								'appearance_breadcrumb_fixed_navigation'=>array(
 									'label'=>'Fixed navigation step',
 									'type'=>'checkbox',
+									'sanitize'=>'sanitize_text_field',
 									'value'=>'',	//hiren commented the population from database here since it is meant to specify default only here. array(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_fixed_navigation')),
 									'options'=>array('1'=>' '),
 									'is_id_as_name'=>true,
@@ -90,6 +92,7 @@ if ( ! class_exists( 'Appearance' ) ) {
 								'appearance_filters_alternate_price_filter_first'=>array(
 									'label'=>'Alternate price slider(First Category)',
 									'type'=>'checkbox',
+									'sanitize'=>'sanitize_text_field',
 									'value'=>array(wbc()->options->get_option('appearance_filters','appearance_filters_alternate_price_filter_first')),
 									'options'=>array('1'=>' '),
 									'is_id_as_name'=>true,
@@ -103,6 +106,7 @@ if ( ! class_exists( 'Appearance' ) ) {
 								'appearance_filters_alternate_price_filter_second'=>array(
 									'label'=>'Alternate price slider(Second Category)',
 									'type'=>'checkbox',
+									'sanitize'=>'sanitize_text_field',
 									'value'=>array(wbc()->options->get_option('appearance_filters','appearance_filters_alternate_price_filter_second')),
 									'options'=>array('1'=>' '),
 									'is_id_as_name'=>true,
@@ -122,6 +126,7 @@ if ( ! class_exists( 'Appearance' ) ) {
 							'fc_atc_button_text'=>array(
 								'label'=>eowbc_lang('First Category Add to Cart Button Text'),
 								'type'=>'text',
+								'sanitize'=>'sanitize_text_field',
 								'value'=>'',
 								'class'=>array('fluid'),						
 								'size_class'=>array('eight','wide'),
@@ -136,6 +141,7 @@ if ( ! class_exists( 'Appearance' ) ) {
 							'sc_atc_button_text'=>array(
 								'label'=>eowbc_lang('Second Category Add to Cart Button Text'),
 								'type'=>'text',
+								'sanitize'=>'sanitize_text_field',
 								'value'=>'',
 								'class'=>array('fluid'),						
 								'size_class'=>array('eight','wide'),
@@ -150,6 +156,7 @@ if ( ! class_exists( 'Appearance' ) ) {
 						'product_page_add_to_basket'=>array(
 							'label'=>'Add to Basket Text',
 							'type'=>'text',
+							'sanitize'=>'sanitize_text_field',
 							'value'=>wbc()->options->get_option('product_page','product_page_add_to_basket'),							
 							'class'=>array(),
 							'visible_info'=>array( 'label'=>'( Text to be shown as replacement to `Add to basket` text in dropdown button of add to bundle button. )',
@@ -161,6 +168,7 @@ if ( ! class_exists( 'Appearance' ) ) {
 						'product_page_hide_first_variation_form'=>array(
 							'label'=>'Show/Hide first category\'s variation menu',
 							'type'=>'checkbox',
+							'sanitize'=>'sanitize_text_field',
 							'value'=>array(wbc()->options->get_option('product_page','product_page_hide_first_variation_form')),
 							'options'=>array('1'=>' '),
 							'is_id_as_name'=>true,
@@ -174,6 +182,7 @@ if ( ! class_exists( 'Appearance' ) ) {
 						'product_page_hide_second_variation_form'=>array(
 							'label'=>'Show/Hide second category\'s variation menu',
 							'type'=>'checkbox',
+							'sanitize'=>'sanitize_text_field',
 							'value'=>array(wbc()->options->get_option('product_page','product_page_hide_second_variation_form')),
 							'options'=>array('1'=>' '),
 							'is_id_as_name'=>true,

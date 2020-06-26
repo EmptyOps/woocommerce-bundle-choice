@@ -47,6 +47,14 @@ jQuery(document).ready(function($){
         if(form_type == "") {
             form_type = 'POST';
         }
+        var temp_fcf='';
+        var temp_scf='';
+        if($(this).attr('id')=='d_fconfig_submit_btn' || $(this).attr('id')=='s_fconfig_submit_btn'){
+            temp_fcf = $('[name="first_category_altr_filt_widgts"]').val();
+            $('[name="first_category_altr_filt_widgts"]').val('user');
+            temp_scf = $('[name="second_category_altr_filt_widgts"]').val();
+            $('[name="second_category_altr_filt_widgts"]').val('user');
+        }
 
         console.log( "is_per_tab_save " + jQuery(form).data("is_per_tab_save") );
         if( jQuery(form).data("is_per_tab_save") != undefined && jQuery(form).data("is_per_tab_save") == true ) {
@@ -102,7 +110,7 @@ jQuery(document).ready(function($){
                         position: 'bottom right',
                         message: (typeof(resjson["msg"]) != undefined && resjson["msg"] != "" ? resjson["msg"] : `Failed! Please check Logs page for for more details.`)
                     });
-                }                
+                }                   
             },
             error:function(xhr,status,error){
                 /*console.log(xhr);*/
@@ -110,10 +118,14 @@ jQuery(document).ready(function($){
                     class:'error',
                     position: 'bottom right',
                     message: `Network Error!`
-                });
+                });                
             },
             complete:function(xhr,status){
                 /*console.log(xhr);*/
+                if($(this).attr('id')=='d_fconfig_submit_btn' || $(this).attr('id')=='s_fconfig_submit_btn'){            
+                    $('[name="first_category_altr_filt_widgts"]').val(temp_fcf);             
+                    $('[name="second_category_altr_filt_widgts"]').val(temp_scf);
+                }                
             }
         });
     });  

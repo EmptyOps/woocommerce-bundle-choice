@@ -222,7 +222,7 @@ class EOWBC_Breadcrumb
                             <?php
                         } else {
                             ?>                        
-                            <div class="ui equal width grid" style="width: 100%;margin-top: -1em !important;">
+                            <div class="ui equal width grid" style="width: 100%;margin-top: -2em !important;">
                                 <div class="ui grid">
                                     <div class="column">3</div>
                                     <div class="column" style="text-align: left;">

@@ -268,6 +268,7 @@ class Form_Builder implements Builder {
 			$collection[$field_id.'_text'] = array(
 				'label'=>$field_label.' '.eowbc_lang('Text'),
 				'type'=>'text',
+				'sanitize'=>'sanitize_text_field',
 				// 'class'=>array('fluid'),
 				'size_class'=>array('eight','wide'),
 				'inline'=>false,
@@ -286,6 +287,7 @@ class Form_Builder implements Builder {
 				'label'=>$field_label.' '.eowbc_lang('Text Font'),
 				'type'=>'text',
 				// 'class'=>array('fluid'),
+				'sanitize'=>'sanitize_text_field',
 				'size_class'=>array('four','wide'),
 				'inline'=>false,
 
@@ -302,6 +304,7 @@ class Form_Builder implements Builder {
 			$collection[$field_id.'_radius'] = array(
 				'label'=>$field_label.' '.eowbc_lang('Radius (px)'),
 				'type'=>'text',
+				'sanitize'=>'sanitize_text_field',
 				// 'class'=>array('fluid'),
 				'size_class'=>array('four','wide'),
 				'inline'=>false,
@@ -331,6 +334,7 @@ class Form_Builder implements Builder {
 					'label'=>$field_label.' '.$special_lbl.eowbc_lang('Background Color'),
 					'type'=>'label',
 					// 'class'=>array('fluid'),
+					'sanitize'=>'sanitize_hex_color',
 					'size_class'=>array('eight','wide'),
 					'inline'=>true,
 
@@ -353,6 +357,7 @@ class Form_Builder implements Builder {
 				'label'=>$field_label.' '.eowbc_lang('Hover Color'),
 				'type'=>'label',
 				// 'class'=>array('fluid'),
+				'sanitize'=>'sanitize_hex_color',
 				'size_class'=>array('eight','wide'),
 				'inline'=>true,
 
@@ -374,6 +379,7 @@ class Form_Builder implements Builder {
 				'label'=>$field_label.' '.eowbc_lang('Text Color'),
 				'type'=>'label',
 				// 'class'=>array('fluid'),
+				'sanitize'=>'sanitize_hex_color',
 				'size_class'=>array('eight','wide'),
 				'inline'=>true,
 
@@ -395,6 +401,7 @@ class Form_Builder implements Builder {
 				'label'=>$field_label.' '.eowbc_lang('Border Color'),
 				'type'=>'label',
 				// 'class'=>array('fluid'),
+				'sanitize'=>'sanitize_hex_color',
 				'size_class'=>array('eight','wide'),
 				'inline'=>true,
 
@@ -429,6 +436,7 @@ class Form_Builder implements Builder {
 					$collection[$field_id.'_backcolor_lbl'.$field_id_suffix] = array(
 						'label'=>$field_label.' '.$special_lbl.eowbc_lang('Color'),
 						'type'=>'label',
+						'sanitize'=>'sanitize_text_field',
 						// 'class'=>array('fluid'),
 						'size_class'=>array('eight','wide'),
 						'inline'=>true,
@@ -451,6 +459,7 @@ class Form_Builder implements Builder {
 					'type'=>'checkbox',
 					'value'=>array('1'),
 					'options'=>(isset($value["options"]) ? $value["options"] : array('1'=>' ')),
+					'sanitize'=>'sanitize_text_field',
 					'class'=>array('fluid'),						
 					// 'size_class'=>array('eight','wide'),
 					'inline'=>false,
@@ -472,6 +481,7 @@ class Form_Builder implements Builder {
 					'type'=>'text',
 					'value'=>(array_key_exists($field_id, $default_values) ? $default_values[$field_id] : ""),
 					// 'class'=>array('fluid'),
+					'sanitize'=>'sanitize_text_field',
 					'size_class'=>array('four','wide'),
 					'inline'=>false,
 
