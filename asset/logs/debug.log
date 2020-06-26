@@ -704,3 +704,305 @@
 "Undefined variable: border_hover"
 [Jun 23 2020 12:56:01] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
 "Undefined variable: border_hover"
+[Jun 23 2020 13:29:54] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 24 2020 10:47:38] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 24 2020 10:50:50] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 24 2020 10:51:28] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 24 2020 10:52:47] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 24 2020 11:27:27] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 24 2020 11:27:54] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 24 2020 11:27:58] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 24 2020 11:31:58] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 24 2020 12:17:39] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1192
+"syntax error, unexpected 'public' (T_PUBLIC)"
+[Jun 24 2020 12:19:39] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1192
+"syntax error, unexpected 'public' (T_PUBLIC)"
+[Jun 24 2020 12:28:38] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1205
+"syntax error, unexpected 'public' (T_PUBLIC)"
+[Jun 24 2020 12:29:35] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1205
+"syntax error, unexpected 'public' (T_PUBLIC)"
+[Jun 24 2020 12:29:37] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1205
+"syntax error, unexpected 'public' (T_PUBLIC)"
+[Jun 24 2020 12:29:53] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1205
+"syntax error, unexpected 'public' (T_PUBLIC)"
+[Jun 24 2020 12:29:53] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1205
+"syntax error, unexpected 'public' (T_PUBLIC)"
+[Jun 24 2020 12:29:53] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1205
+"syntax error, unexpected 'public' (T_PUBLIC)"
+[Jun 24 2020 12:29:53] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1205
+"syntax error, unexpected 'public' (T_PUBLIC)"
+[Jun 24 2020 12:29:53] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1205
+"syntax error, unexpected 'public' (T_PUBLIC)"
+[Jun 24 2020 12:29:56] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1205
+"syntax error, unexpected 'public' (T_PUBLIC)"
+[Jun 24 2020 12:29:56] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1205
+"syntax error, unexpected 'public' (T_PUBLIC)"
+[Jun 24 2020 12:29:56] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1205
+"syntax error, unexpected 'public' (T_PUBLIC)"
+[Jun 24 2020 12:29:56] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1205
+"syntax error, unexpected 'public' (T_PUBLIC)"
+[Jun 24 2020 12:29:57] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1205
+"syntax error, unexpected 'public' (T_PUBLIC)"
+[Jun 24 2020 12:29:58] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1205
+"syntax error, unexpected 'public' (T_PUBLIC)"
+[Jun 24 2020 12:30:02] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1205
+"syntax error, unexpected 'public' (T_PUBLIC)"
+[Jun 24 2020 12:30:02] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1205
+"syntax error, unexpected 'public' (T_PUBLIC)"
+[Jun 24 2020 12:30:02] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1205
+"syntax error, unexpected 'public' (T_PUBLIC)"
+[Jun 24 2020 12:30:02] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1205
+"syntax error, unexpected 'public' (T_PUBLIC)"
+[Jun 24 2020 12:30:02] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1205
+"syntax error, unexpected 'public' (T_PUBLIC)"
+[Jun 24 2020 12:30:22] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1205
+"syntax error, unexpected 'public' (T_PUBLIC)"
+[Jun 24 2020 12:30:22] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1205
+"syntax error, unexpected 'public' (T_PUBLIC)"
+[Jun 24 2020 12:30:22] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1205
+"syntax error, unexpected 'public' (T_PUBLIC)"
+[Jun 24 2020 12:30:22] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1205
+"syntax error, unexpected 'public' (T_PUBLIC)"
+[Jun 24 2020 12:30:22] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1205
+"syntax error, unexpected 'public' (T_PUBLIC)"
+[Jun 24 2020 12:30:42] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1205
+"syntax error, unexpected 'public' (T_PUBLIC)"
+[Jun 24 2020 12:30:42] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1205
+"syntax error, unexpected 'public' (T_PUBLIC)"
+[Jun 24 2020 12:30:42] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1205
+"syntax error, unexpected 'public' (T_PUBLIC)"
+[Jun 24 2020 12:30:42] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1205
+"syntax error, unexpected 'public' (T_PUBLIC)"
+[Jun 24 2020 12:30:42] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1205
+"syntax error, unexpected 'public' (T_PUBLIC)"
+[Jun 24 2020 12:31:01] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1205
+"syntax error, unexpected 'public' (T_PUBLIC)"
+[Jun 24 2020 12:31:02] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1205
+"syntax error, unexpected 'public' (T_PUBLIC)"
+[Jun 24 2020 12:31:02] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1205
+"syntax error, unexpected 'public' (T_PUBLIC)"
+[Jun 24 2020 12:31:02] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1205
+"syntax error, unexpected 'public' (T_PUBLIC)"
+[Jun 24 2020 12:31:02] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1205
+"syntax error, unexpected 'public' (T_PUBLIC)"
+[Jun 24 2020 12:31:02] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1205
+"syntax error, unexpected 'public' (T_PUBLIC)"
+[Jun 24 2020 12:34:08] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 24 2020 12:45:51] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 24 2020 12:47:40] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 24 2020 14:05:08] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 24 2020 14:05:10] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 25 2020 10:03:33] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 25 2020 10:03:43] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 25 2020 10:04:01] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 25 2020 10:04:07] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 25 2020 10:04:32] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 25 2020 10:04:34] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 25 2020 10:04:37] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 25 2020 10:04:56] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 25 2020 10:05:03] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 25 2020 10:05:11] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 25 2020 10:05:33] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 25 2020 10:05:54] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 25 2020 10:09:14] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 25 2020 10:15:02] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 25 2020 10:21:31] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_filters.php at line number 55
+"syntax error, unexpected 'continue' (T_CONTINUE)"
+[Jun 25 2020 10:21:53] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 25 2020 10:34:01] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 25 2020 10:36:27] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 25 2020 10:37:08] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 25 2020 10:38:09] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 25 2020 10:40:12] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 25 2020 10:40:43] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 25 2020 10:57:14] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 25 2020 11:02:03] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 25 2020 11:02:23] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_filters.php at line number 99
+"Undefined variable: key"
+[Jun 25 2020 11:02:24] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 25 2020 11:05:02] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_filters.php at line number 99
+"Undefined variable: key"
+[Jun 25 2020 11:05:51] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_filters.php at line number 99
+"Undefined variable: key"
+[Jun 25 2020 11:05:55] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_filters.php at line number 99
+"Undefined variable: key"
+[Jun 25 2020 11:06:05] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_filters.php at line number 99
+"Undefined variable: key"
+[Jun 25 2020 11:07:01] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_filters.php at line number 99
+"Undefined variable: key"
+[Jun 25 2020 11:07:46] ERROR in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_filters.php at line number 107
+"Uncaught Error: Call to undefined function eo\\wbc\\model\\admin\\deactivate() in \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/model\/admin\/eowbc_filters.php:107\nStack trace:\n#0 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/controllers\/ajax\/eowbc_filters.php(22): eo\\wbc\\model\\admin\\Eowbc_Filters->save(Array)\n#1 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/woocommerce-bundle-choice-bootstrap.php(71): require_once('\/var\/www\/html\/f...')\n#2 \/var\/www\/html\/fresh\/wp-includes\/class-wp-hook.php(287): eo\\wbc\\WooCommerce_Bundle_Choice_Bootstrap->ajax('')\n#3 \/var\/www\/html\/fresh\/wp-includes\/class-wp-hook.php(311): WP_Hook->apply_filters('', Array)\n#4 \/var\/www\/html\/fresh\/wp-includes\/plugin.php(478): WP_Hook->do_action(Array)\n#5 \/var\/www\/html\/fresh\/wp-admin\/admin-ajax.php(175): do_action('wp_ajax_eowbc_a...')\n#6 {main}\n  thrown"
+[Jun 25 2020 11:08:54] ERROR in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_filters.php at line number 107
+"Uncaught Error: Call to undefined function eo\\wbc\\model\\admin\\deactivate() in \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/model\/admin\/eowbc_filters.php:107\nStack trace:\n#0 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/controllers\/ajax\/eowbc_filters.php(22): eo\\wbc\\model\\admin\\Eowbc_Filters->save(Array)\n#1 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/woocommerce-bundle-choice-bootstrap.php(71): require_once('\/var\/www\/html\/f...')\n#2 \/var\/www\/html\/fresh\/wp-includes\/class-wp-hook.php(287): eo\\wbc\\WooCommerce_Bundle_Choice_Bootstrap->ajax('')\n#3 \/var\/www\/html\/fresh\/wp-includes\/class-wp-hook.php(311): WP_Hook->apply_filters('', Array)\n#4 \/var\/www\/html\/fresh\/wp-includes\/plugin.php(478): WP_Hook->do_action(Array)\n#5 \/var\/www\/html\/fresh\/wp-admin\/admin-ajax.php(175): do_action('wp_ajax_eowbc_a...')\n#6 {main}\n  thrown"
+[Jun 25 2020 11:09:41] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 25 2020 11:10:24] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 25 2020 11:10:38] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 25 2020 11:15:58] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 25 2020 11:16:17] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 40
+"unserialize() expects parameter 1 to be string, array given"
+[Jun 25 2020 12:33:41] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/sample_data/eowbc_filter_samples.php at line number 112
+"syntax error, unexpected '=', expecting :: (T_PAAMAYIM_NEKUDOTAYIM)"
+[Jun 25 2020 12:34:44] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/sample_data/eowbc_filter_samples.php at line number 138
+"syntax error, unexpected '=', expecting ')'"
+[Jun 25 2020 12:53:37] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_filters.php at line number 142
+"function_exists() expects parameter 1 to be string, array given"
+[Jun 25 2020 12:54:35] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_filters.php at line number 142
+"function_exists() expects parameter 1 to be string, array given"
+[Jun 25 2020 12:58:55] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_filters.php at line number 142
+"function_exists() expects parameter 1 to be string, array given"
+[Jun 25 2020 12:59:45] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_filters.php at line number 116
+"function_exists() expects parameter 1 to be string, array given"
+[Jun 26 2020 06:09:42] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 884
+"syntax error, unexpected ')'"
+[Jun 26 2020 06:11:42] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 884
+"syntax error, unexpected ')'"
+[Jun 26 2020 06:13:43] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 884
+"syntax error, unexpected ';'"
+[Jun 26 2020 06:14:00] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 884
+"syntax error, unexpected ';'"
+[Jun 26 2020 06:14:13] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 882
+"Undefined index: _fconfig_add_help_text"
+[Jun 26 2020 06:14:14] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 882
+"Undefined index: _fconfig_add_help_text"
+[Jun 26 2020 06:16:42] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 882
+"Undefined index: _fconfig_add_help_text"
+[Jun 26 2020 06:16:43] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 882
+"Undefined index: _fconfig_add_help_text"
+[Jun 26 2020 06:58:17] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_filters.php at line number 111
+"Undefined index: filter_template"
+[Jun 26 2020 06:58:35] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_filters.php at line number 111
+"Undefined index: filter_template"
+[Jun 26 2020 06:59:08] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_filters.php at line number 111
+"Undefined index: filter_template"
+[Jun 26 2020 06:59:24] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/admin/eowbc_filters.php at line number 111
+"Undefined index: filter_template"
+[Jun 26 2020 07:20:11] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 26 2020 07:20:15] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 285
+"Undefined variable: border_hover"
+[Jun 26 2020 08:46:07] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 46
+"call_user_func_array() expects parameter 2 to be array, string given"
+[Jun 26 2020 09:11:03] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 46
+"call_user_func_array() expects parameter 2 to be array, null given"
+[Jun 26 2020 09:11:08] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 46
+"call_user_func_array() expects parameter 2 to be array, null given"
+[Jun 26 2020 09:11:23] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 46
+"call_user_func_array() expects parameter 2 to be array, null given"
+[Jun 26 2020 09:11:40] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 46
+"call_user_func_array() expects parameter 2 to be array, null given"
+[Jun 26 2020 09:11:55] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 46
+"call_user_func_array() expects parameter 2 to be array, null given"
+[Jun 26 2020 09:14:20] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 46
+"call_user_func_array() expects parameter 2 to be array, string given"
+[Jun 26 2020 09:14:30] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 46
+"call_user_func_array() expects parameter 2 to be array, string given"
+[Jun 26 2020 09:23:16] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 46
+"call_user_func_array() expects parameter 2 to be array, null given"
+[Jun 26 2020 09:23:16] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 46
+"call_user_func_array() expects parameter 2 to be array, null given"
+[Jun 26 2020 09:23:16] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 46
+"call_user_func_array() expects parameter 2 to be array, null given"
+[Jun 26 2020 09:24:02] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 46
+"call_user_func_array() expects parameter 2 to be array, null given"
+[Jun 26 2020 09:24:02] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 46
+"call_user_func_array() expects parameter 2 to be array, null given"
+[Jun 26 2020 09:24:06] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 46
+"call_user_func_array() expects parameter 2 to be array, null given"
+[Jun 26 2020 09:29:30] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 46
+"call_user_func_array() expects parameter 2 to be array, null given"
+[Jun 26 2020 09:30:54] WARNING in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 46
+"call_user_func_array() expects parameter 2 to be array, null given"
+[Jun 26 2020 09:36:08] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 46
+"Undefined index: product_page_hide_second_variation_form"
+[Jun 26 2020 09:36:55] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 45
+"Undefined index: product_page_hide_second_variation_form"
+[Jun 26 2020 10:22:34] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 60
+"syntax error, unexpected ')', expecting ';'"
+[Jun 26 2020 10:22:39] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 60
+"syntax error, unexpected ')', expecting ';'"
+[Jun 26 2020 10:22:47] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 60
+"syntax error, unexpected ')', expecting ';'"
+[Jun 26 2020 10:23:34] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 60
+"syntax error, unexpected ')', expecting ';'"
+[Jun 26 2020 10:24:01] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 45
+"Undefined index: product_page_hide_second_variation_form"
+[Jun 26 2020 10:24:07] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 45
+"Undefined index: product_page_hide_second_variation_form"
+[Jun 26 2020 10:26:19] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 45
+"Undefined index: product_page_hide_second_variation_form"
+[Jun 26 2020 10:26:41] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 45
+"Undefined index: product_page_hide_second_variation_form"
+[Jun 26 2020 10:28:10] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 45
+"Undefined index: product_page_hide_second_variation_form"
+[Jun 26 2020 10:28:28] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 45
+"Undefined index: product_page_hide_second_variation_form"
+[Jun 26 2020 10:28:59] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 45
+"Undefined index: product_page_hide_second_variation_form"
+[Jun 26 2020 10:30:17] ERROR in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 41
+"Uncaught Error: Call to a member function sanitize_text_field() on null in \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/library\/lib-sanitize.php:41\nStack trace:\n#0 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/model\/admin\/eowbc_appearance.php(52): WBC_Sanitize->clean(Array)\n#1 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/controllers\/ajax\/eowbc_appearance.php(13): eo\\wbc\\model\\admin\\Eowbc_Appearance->save(Array)\n#2 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/woocommerce-bundle-choice-bootstrap.php(71): require_once('\/var\/www\/html\/f...')\n#3 \/var\/www\/html\/fresh\/wp-includes\/class-wp-hook.php(287): eo\\wbc\\WooCommerce_Bundle_Choice_Bootstrap->ajax('')\n#4 \/var\/www\/html\/fresh\/wp-includes\/class-wp-hook.php(311): WP_Hook->apply_filters('', Array)\n#5 \/var\/www\/html\/fresh\/wp-includes\/plugin.php(478): WP_Hook->do_action(Array)\n#6 \/var\/www\/html\/fresh\/wp-admin\/admin-ajax.php(175): do_action('wp_ajax"
+[Jun 26 2020 10:31:36] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 46
+"Undefined index: product_page_hide_second_variation_form"
+[Jun 26 2020 10:31:59] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 46
+"Undefined index: product_page_hide_second_variation_form"
+[Jun 26 2020 10:32:35] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 46
+"Undefined index: product_page_hide_second_variation_form"
+[Jun 26 2020 10:32:38] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 46
+"Undefined index: product_page_hide_second_variation_form"
+[Jun 26 2020 10:32:39] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 46
+"Undefined index: product_page_hide_second_variation_form"
+[Jun 26 2020 10:32:39] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 46
+"Undefined index: product_page_hide_second_variation_form"
+[Jun 26 2020 10:32:39] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 46
+"Undefined index: product_page_hide_second_variation_form"
+[Jun 26 2020 10:32:39] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 46
+"Undefined index: product_page_hide_second_variation_form"
+[Jun 26 2020 10:32:39] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 46
+"Undefined index: product_page_hide_second_variation_form"
+[Jun 26 2020 10:32:39] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 46
+"Undefined index: product_page_hide_second_variation_form"
+[Jun 26 2020 10:33:02] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 46
+"Undefined index: product_page_hide_second_variation_form"
+[Jun 26 2020 10:33:24] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-sanitize.php at line number 46
+"Undefined index: product_page_hide_second_variation_form"

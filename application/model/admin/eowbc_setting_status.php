@@ -27,7 +27,7 @@ class Eowbc_Setting_Status {
 
 
 	public function get( $form_definition ) {
-
+		wbc()->sanitize->clean($form_definition);
 		//loop through form tabs and save 
 	    foreach ($form_definition as $key => $tab) {
 	    	foreach ($tab["form"] as $fk => $fv) {
@@ -62,6 +62,8 @@ class Eowbc_Setting_Status {
 
 	public function save( $form_definition ) {
 		
+		wbc()->sanitize->clean($form_definition);
+
 		$res = array();
 		$res["type"] = "success";
 

@@ -75,6 +75,7 @@ $form['data'] = array(
 						'label'=>eowbc_lang('Field'),
 						'type'=>'select',
 						'value'=>'0',
+						'sanitize'=>'sanitize_text_field',
 						'options'=>eo_wbc_jpc_list_attributes( eo_wbc_jpc_list_categories() ),
 						'class'=>array('fluid'),
 						'size_class'=>array('eight','wide'),
@@ -90,6 +91,7 @@ $form['data'] = array(
 						'no_label'=>true,
 						'type'=>'select',
 						'value'=>'0',
+						'sanitize'=>'sanitize_text_field',
 						'options'=>array( 'between'=>'Between', 'in'=>'In' ),
 						'class'=>array('fluid'),
 						'size_class'=>array('four','wide','jpc_rule_fields'),
@@ -106,6 +108,7 @@ $form['data'] = array(
 		'no_label'=>true,
 		'type'=>'select',
 		'value'=>'0',
+		'sanitize'=>'sanitize_text_field',
 		'options'=> array(),	// $value,
 		'class'=>array('fluid','jpc_attribute_vals'),
 		'size_class'=>array('four','wide'),
@@ -121,6 +124,7 @@ $form['data'] = array(
 		'no_label'=>true,
 		'type'=>'select',
 		'value'=>'0',
+		'sanitize'=>'sanitize_text_field',
 		'options'=> array(),	//$value,
 		'class'=>array('fluid','jpc_attribute_vals'),
 		'size_class'=>array('four','wide'),
@@ -223,6 +227,7 @@ $form['data'] = array_merge( $form['data'], array(
 							'placeholder'=>eowbc_lang('Regular Price'),
 							'type'=>'text',
 							'value'=>'0',
+							'sanitize'=>'sanitize_text_field',
 							'options'=>array(),
 							//'class'=>array('fluid'),
 							'size_class'=>array('three','wide','jpc_rules_table'),
@@ -245,6 +250,7 @@ $form['data'] = array_merge( $form['data'], array(
 							'placeholder'=>eowbc_lang('Sales Price'),
 							'type'=>'text',
 							'value'=>'0',
+							'sanitize'=>'sanitize_text_field',
 							'options'=>array(),
 							//'class'=>array('fluid'),
 							'size_class'=>array('three','wide','jpc_rules_table'),
@@ -261,38 +267,47 @@ $form['data'] = array_merge( $form['data'], array(
 						'jpc_field_name'=>array(
 							'type'=>'hidden',
 							'value'=>'',
+							'sanitize'=>'sanitize_text_field',
 							),
 						'jpc_field_value'=>array(
 							'type'=>'hidden',
 							'value'=>'',
+							'sanitize'=>'sanitize_text_field',
 							),
 						'jpc_field_type'=>array(
 							'type'=>'hidden',
 							'value'=>'',
+							'sanitize'=>'sanitize_text_field',
 							),
 						'jpc_compare_name'=>array(
 							'type'=>'hidden',
 							'value'=>'',
+							'sanitize'=>'sanitize_text_field',
 							),
 						'jpc_compare_value'=>array(
 							'type'=>'hidden',
 							'value'=>'',
+							'sanitize'=>'sanitize_text_field',
 							),
 						'jpc_values_name_1'=>array(
 							'type'=>'hidden',
 							'value'=>'',
+							'sanitize'=>'sanitize_text_field',
 							),
 						'jpc_values_value_1'=>array(
 							'type'=>'hidden',
 							'value'=>'',
+							'sanitize'=>'sanitize_text_field',
 							),
 						'jpc_values_name_2'=>array(
 							'type'=>'hidden',
 							'value'=>'',
+							'sanitize'=>'sanitize_text_field',
 							),
 						'jpc_values_value_2'=>array(
 							'type'=>'hidden',
 							'value'=>'',
+							'sanitize'=>'sanitize_text_field',
 							),
 					)
 				);
@@ -359,10 +374,12 @@ $form['data'] = array(
 					'eo_wbc_action'=>array(
 						'type'=>'hidden',
 						'value'=>'save_jpc_data',
+						'sanitize'=>'sanitize_text_field',
 						),
 					'eo_wbc_jpc_form_data'=>array(
 						'type'=>'hidden',
 						'value'=>'',
+						'sanitize'=>'sanitize_text_field',
 						),
 					'jpc_save_price_ctl'=>array(
 						'label'=>eowbc_lang('Save and Update Prices'),
