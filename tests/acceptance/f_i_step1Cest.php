@@ -18,7 +18,7 @@ class f_i_step1Cest
 		$I->click('Start with Diamond');
 
 		// - I choose filter options and then I check if x  products are found 
-		$('#text_slider_price').slider('set rangeValue', 14, 15);
+		$I->executeJS("$('#text_slider_price').slider('set rangeValue', 14, 15);");	
 		$I->waitForText('No products were found', 10);
 
 		// - I click on product image of first product from the search results
