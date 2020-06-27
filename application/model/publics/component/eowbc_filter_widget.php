@@ -957,8 +957,25 @@ class EOWBC_Filter_Widget {
 									$this->___category[] = $term->slug;
 								}
 						} elseif ($item['type']==0 ) {
-
-							$this->input_step_slider($item['name'],$item['label'],$item['type'],1,100,$reset=!empty($item['reset']));		
+							//on 27-06-2020 now added support for all missing input types. as discussed between hiren and mahesh. 
+							// $this->input_step_slider($item['name'],$item['label'],$item['type'],1,100,$reset=!empty($item['reset']));		
+							switch ($item['input']) {
+								case 'numeric_slider':
+									$this->input_text_slider($item['name'],$item['label'],$item['type'],1,100,$reset=!empty($item['reset']));
+									break;
+								case 'text_slider':
+									$this->input_step_slider($item['name'],$item['label'],$item['type'],1,100,$reset=!empty($item['reset']));
+									break;
+								case 'checkbox':
+									$this->input_checkbox($item['name'],$item['label'],$item['type'],1,100,$reset=!empty($item['reset']));
+									break;						
+								default:
+									$this->input_step_slider($item['name'],$item['label'],$item['type'],1,100,$reset=!empty($item['reset']));
+							}		
+							$term = wbc()->wc->eo_wbc_get_attribute($item['name']);		
+							if(!empty($term) and !is_wp_error($term) ){
+								$_attr_list[]=$term->slug;	
+							}	
 						}
 						elseif($item['type']==1 ) {
 							switch ($item['input']) {
@@ -1334,7 +1351,8 @@ class EOWBC_Filter_Widget {
 		elseif($current_category==wbc()->options->get_option('configuration','second_slug')/*get_option('eo_wbc_second_slug')*/){
 			$filter=$filter_second;	
 			$prefix = "s";
-		}			
+		}	
+
 		//Hidden input filter lists.
 		$this->__filters=array();
 		$this->__prefix = $prefix;

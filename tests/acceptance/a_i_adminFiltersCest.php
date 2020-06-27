@@ -51,16 +51,15 @@ class a_i_adminFiltersCest
 		$I->see('Default(Grid View)');
 
 		// select category
-		$I->executeJS("jQuery('#config_filter_status').checkbox('set checked');");	
+		$I->executeJS("jQuery('#sc3').checkbox('set checked');");	
 
 		// save 
-		$I->click('#filter_setting_submit_btn'); 	//('Save');		//it shouldn't be this way, but there seem some issue with selenium driver and thus when there is another Save button on the page even though on another page and is not visible but still selenium think it is visible and thus gives us error so need to use unique xPath like id etc. 
+		$I->('Save');		//click('#filter_setting_submit_btn'); 	//('Save');		//it shouldn't be this way, but there seem some issue with selenium driver and thus when there is another Save button on the page even though on another page and is not visible but still selenium think it is visible and thus gives us error so need to use unique xPath like id etc. 
 
 		// confirm if saved properly or not
 		$I->reloadPage();	//reload page
-		// $I->click('Navigations Steps( Breadcrumb )');
-		$I->see('Filter Configuration');	//TODO here should actually confirm is the switch is on, do it by fetching javascript value and comparing it but it will required javascript See etc function. 
-
+		$I->click('Alternate Filter Widgets');
+		$I->seeInField('second_category_altr_filt_widgts', 'sc3');
 	}
 
 	public function firstAndSecondCategoryFilterConfigurations(AcceptanceTester $I) {

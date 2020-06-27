@@ -7,8 +7,38 @@ class n_j_frontendChecksAndReviewCest
     {
     }
 
-    // tests
-    public function tryToTest(AcceptanceTester $I)
+    // // tests
+    // public function tryToTest(AcceptanceTester $I)
+    // {
+    // }
+
+    function startWithHomePageButtons(AcceptanceTester $I) {
+		
+    	// use the existing cept classes for test 
+    	require_once 'f_o_cartPageCest.php';
+    	$f_o_cartPageCestObj = new f_o_cartPageCest();
+    	$f_o_cartPageCestObj->continueToCheckout($I,true);
+
+	}
+
+	function testStep1(AcceptanceTester $I) {
+		
+    	// use the existing cept classes for test 
+    	require_once 'f_o_cartPageCest.php';
+    	$f_o_cartPageCestObj = new f_o_cartPageCest();
+    	$f_o_cartPageCestObj->continueToCheckout($I,true);
+
+	}
+
+	// test from entire process from starting with buttons to order details page on account panel and on admin panel 
+    public function tryToTestChoiceMakerProcess(AcceptanceTester $I)
     {
+    	return;	//TODO run this test only if sample data env flag is set 
+
+    	$this->startWithHomePageButtons($I);
+
+    	$this->testStep1($I);
+
     }
+
 }

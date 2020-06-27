@@ -26,9 +26,6 @@ class f_k_step2Cest
 		// - I choose filter options and then I check if x  products are found
 
 
-		// also do here the product not found test here and check if that Oooops error message and error reporting options shows or not
-
-
 		// - I click on product image of first product from the search results
 		$price_of_product = "15.00";	//TODO make it dynamic 
 		$I->click('//*[@id="main"]/ul/li/a/img');

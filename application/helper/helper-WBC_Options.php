@@ -77,4 +77,9 @@ class WBC_Options {
 		return true;
 	}
 
+	//interacts with core wp api directly
+	public function delete(string $option) {
+		return delete_option($option);
+	}
+
 }
