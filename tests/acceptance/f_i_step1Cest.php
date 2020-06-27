@@ -17,11 +17,9 @@ class f_i_step1Cest
 		$I->amOnPage('/');	
 		$I->click('Start with Diamond');
 
-		// - I choose filter options and then I check if x  products are found
-
-
-		// also do here the product not found test here and check if that Oooops error message and error reporting options shows or not
-
+		// - I choose filter options and then I check if x  products are found 
+		$('#text_slider_price').slider('set rangeValue', 14, 15);
+		$I->waitForText('No products were found', 10);
 
 		// - I click on product image of first product from the search results
 		$price_of_product = "12.00";	//TODO make it dynamic 
@@ -40,8 +38,10 @@ class f_i_step1Cest
 		// - I see continue button
 		$I->see('Add to bag...');
 
-		// with text x ???
+		// with text x 
+		$I->see('150.00', 'span');	//market price
 		$I->see($price_of_product, 'span');
+		$I->see('Additional information', 'a');
 
 		// - I click on continue button
 		$I->click('Add to bag...');
@@ -51,10 +51,19 @@ class f_i_step1Cest
 		$I->waitForText('VIEW', 10, 'a');
 		$I->waitForText('REMOVE', 10, 'a');
 
+		// also do here the product not found test here and check if that Oooops error message and error reporting options shows or not
+		$this->checkProductNotFoundDueToMissingMapping($I);
+
 		// check remove action 
 		$this->checkBackRemoveAction($I);
 
 		return $price_of_product;
+	}
+
+	function checkProductNotFoundDueToMissingMapping(AcceptanceTester $I) {
+		
+		return;	//TODO implement it later. for now the manual testing is done and given priority to other test automations so do this later as soon as we get the chance. 
+
 	}
 
 	function checkBackRemoveAction(AcceptanceTester $I) {

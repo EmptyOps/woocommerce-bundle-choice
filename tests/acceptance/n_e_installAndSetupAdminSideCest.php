@@ -40,11 +40,13 @@ class n_e_installAndSetupAdminSideCest
     // try alternate widgets 
     public function tryToTestAlternateBreadcrumbWidgets(AcceptanceTester $I)
     {
+    	return;	//TODO run this test only if sample data env flag is set 
     }
 
 	// try alternate widgets 
     public function tryToTestAlternateFilterWidgets(AcceptanceTester $I)
     {
+    	return;	//TODO run this test only if sample data env flag is set 
     }
 
 }
