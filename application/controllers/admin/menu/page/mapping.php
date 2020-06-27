@@ -77,15 +77,18 @@ if ( ! class_exists( 'Mapping' ) ) {
 									),
 									1=>array(
 										'is_header' => 1, 
-										'val' => 'First Term'
+										'val' => 'First Term',
+										'field_id'=>'eo_wbc_first_category'
 									),
 									2=>array(
 										'is_header' => 1, 
-										'val' => 'Second Term'
+										'val' => 'Second Term',
+										'field_id'=>'eo_wbc_second_category'
 									),
 									3=>array(
 										'is_header' => 1, 
-										'val' => 'Discount'
+										'val' => 'Discount',
+										'field_id'=>'eo_wbc_add_discount'
 									),
 								),
 							);

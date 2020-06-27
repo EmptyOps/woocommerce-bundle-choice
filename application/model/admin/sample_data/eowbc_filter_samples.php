@@ -92,7 +92,7 @@ class Filter_Samples {
         			// update_option($index,serialize($_data)); 
         			// wbc()->options->update_option_group( 'filters_'.$index, serialize($_data) );
         			
-					$res = \eo\wbc\model\admin\Eowbc_Filters::instance()->save( \eo\wbc\controllers\admin\menu\page\Filters::get_form_definition() );
+					$res = \eo\wbc\model\admin\Eowbc_Filters::instance()->save( \eo\wbc\controllers\admin\menu\page\Filters::get_form_definition(), true );
 
 					unset($_POST[$prefix.'_fconfig_filter']);
 	                unset($_POST[$prefix.'_fconfig_type']);

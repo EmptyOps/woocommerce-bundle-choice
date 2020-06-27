@@ -35,7 +35,8 @@ class Eowbc_Filters {
 				if( $fv["type"] == "table" ) {
 					// wbc()->options->update_option_group( 'filters_'.$key, serialize(array()) );
 					$filter_data = unserialize(wbc()->options->get_option_group('filters_'.$key,"a:0:{}"));
-					//wbc()->common->pr($filter_data, false, false);
+					// wbc()->common->pr($form_definition, false, false);
+					// wbc()->common->pr($filter_data, false, false);
 
 					$body = array();
 
@@ -49,7 +50,11 @@ class Eowbc_Filters {
 							);
 						$disabled = empty($rv[$key.'_add_enabled'])?true:false;
 						
-						foreach ($rv as $rvk => $rvv) {
+						// foreach ($rv as $rvk => $rvv) {
+						foreach ($form_definition[$key]["form"][$fk]["head"][0] as $ck => $cv) {
+							if(empty($cv["field_id"])) { continue; }
+							$rvk = $cv["field_id"];
+							$rvv = ( !isset($rv[$rvk]) || wbc()->common->nonZeroEmpty($rv[$rvk]) ) ?  "" : $rv[$rvk];
 
 							//skip the id
 							if( in_array($rvk,array($key."_dependent",$key."_type",$key."_add_help",$key."_add_help_text",$key."_add_enabled")) ) {
@@ -87,7 +92,7 @@ class Eowbc_Filters {
 	}
 
 
-	public function save( $form_definition ) {
+	public function save( $form_definition, $is_auto_insert_for_template=false ) {
 		
 		wbc()->sanitize->clean($form_definition);
 
@@ -224,11 +229,18 @@ class Eowbc_Filters {
 		        foreach ($filter_data as $fdkey=>$item) {
 		            
 		            if ($item[$key.'_filter']==$table_data[$key."_filter"] and $item['filter_template']==$table_data['filter_template']) { 
-		            	$filter_data[$fdkey][$key.'_add_enabled'] = 1;
-		                $res["type"] = "error";
-		    			$res["msg"] = eowbc_lang('Filter Already Exists and active');
-		    			wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data) );
-		                return $res;
+		            	if( $is_auto_insert_for_template ) {
+			            	$filter_data[$fdkey][$key.'_add_enabled'] = 1;
+			                $res["type"] = "error";
+			    			$res["msg"] = eowbc_lang('Filter Already Exists and activated');
+			    			wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data) );
+			                return $res;
+		            	}
+		            	else {
+			                $res["type"] = "error";
+			    			$res["msg"] = eowbc_lang('Filter already exists '.(($filter_data[$fdkey][$key.'_add_enabled']==1) ? 'and enabled' : 'but is disabled, you should enable it.'));
+			                return $res;
+		            	}
 		            }
 		        }
 

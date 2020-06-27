@@ -59,9 +59,9 @@ jQuery(document).ready(function($){
         var temp_scf='';
         if($(this).attr('id')=='d_fconfig_submit_btn' || $(this).attr('id')=='s_fconfig_submit_btn'){
             temp_fcf = $('[name="first_category_altr_filt_widgts"]').val();
-            $('[name="first_category_altr_filt_widgts"]').val('user');
+            $('[name="first_category_altr_filt_widgts"]').val('user_manually_added');
             temp_scf = $('[name="second_category_altr_filt_widgts"]').val();
-            $('[name="second_category_altr_filt_widgts"]').val('user');
+            $('[name="second_category_altr_filt_widgts"]').val('user_manually_added');
         }
 
         console.log( "is_per_tab_save " + jQuery(form).data("is_per_tab_save") );
