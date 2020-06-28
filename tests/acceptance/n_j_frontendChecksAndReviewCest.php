@@ -15,7 +15,7 @@ class n_j_frontendChecksAndReviewCest
     function startWithHomePageButtons(AcceptanceTester $I) {
 		
     	// use the existing cept classes for test 
-    	require_once 'f_o_cartPageCest.php';
+    	require_once dirname(__FILE__).'f_o_cartPageCest.php';
     	$f_o_cartPageCestObj = new f_o_cartPageCest();
     	$f_o_cartPageCestObj->continueToCheckout($I,true);
 

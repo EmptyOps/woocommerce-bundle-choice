@@ -17,7 +17,7 @@ class f_m_previewPageCest
     function previewPage(AcceptanceTester $I) {
 		
     	// go to the preview page of step 3
-    	require_once 'f_i_step2Cest.php';
+    	require_once dirname(__FILE__).'f_i_step2Cest.php';
     	$f_i_step2CestObj = new f_i_step2Cest();
     	$this->price_of_product_step2 = $f_i_step2CestObj->itemPage($I);
     	$this->price_of_product_step1 = $f_i_step2CestObj->price_of_product_step1;

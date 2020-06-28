@@ -14,7 +14,7 @@ class f_o_cartPageCest
 	function cartPage(AcceptanceTester $I) {
 		
     	// go to the preview page of step 3
-    	require_once 'f_m_previewPageCest.php';
+    	require_once dirname(__FILE__).'f_m_previewPageCest.php';
     	$f_m_previewPageCestObj = new f_m_previewPageCest();
     	$f_m_previewPageCestObj->addToCart($I);
 

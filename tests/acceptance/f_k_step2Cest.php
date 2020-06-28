@@ -16,7 +16,7 @@ class f_k_step2Cest
     function categoryPage(AcceptanceTester $I) {
 		
     	// go to the category page of step 2
-    	require_once 'f_i_step1Cest.php';
+    	require_once dirname(__FILE__).'f_i_step1Cest.php';
     	$f_i_step1CestObj = new f_i_step1Cest();
     	$this->price_of_product_step1 = $f_i_step1CestObj->itemPage($I);
 

@@ -14,7 +14,7 @@ class f_q_checkoutPageCest
 	function checkoutPage(AcceptanceTester $I) {
 		
     	// go to the preview page of step 3
-    	require_once 'f_o_cartPageCest.php';
+    	require_once dirname(__FILE__).'f_o_cartPageCest.php';
     	$f_o_cartPageCestObj = new f_o_cartPageCest();
     	$f_o_cartPageCestObj->continueToCheckout($I,true);
 

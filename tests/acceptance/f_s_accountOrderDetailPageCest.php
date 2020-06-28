@@ -16,7 +16,7 @@ class f_s_accountOrderDetailPageCest
 		//here it is better if we can simply go to my account page via login or even better if WebDriver can keep the previous session alive 
 		if( false ) {
 	    	// go to the preview page of step 3
-	    	require_once 'f_q_checkoutPageCest.php';
+	    	require_once dirname(__FILE__).'f_q_checkoutPageCest.php';
 	    	$f_q_checkoutPageCestObj = new f_q_checkoutPageCest();
 	    	$f_q_checkoutPageCestObj->continueToCheckout($I,true);
 
