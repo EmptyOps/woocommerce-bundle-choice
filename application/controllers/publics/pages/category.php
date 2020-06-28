@@ -196,11 +196,11 @@ class Category {
                         if(current_user_can('manage_options')){
                             //Manage the mapping section
                             $html.="<div class='ui row' style='padding-bottom:0rem !important'>";
-                                $html.='<a href="'.admin_url('admin.php?page=eo-wbc-map').'"><span class="ui text primary">As admin of the site please create a product mapping to fix this problem.</span></a>';
+                                $html.='<a href="'.admin_url('admin.php?page=eowbc-mapping').'"><span class="ui text primary">As admin of the site please create a product mapping to fix this problem.</span></a>';
                             $html.="</div>";                                                    
                         } else {                            
                             $html.="<div class='ui row' style='padding-bottom:0rem !important'>";
-                                $html.='<a href="'.site_url('/?report=1').'">Report to admin to help them fix this problem.</a>&nbsp;&nbsp;';
+                                $html.='<a href="'.site_url('/?wbc_report=1').'">Report to admin to help them fix this problem.</a>&nbsp;&nbsp;';
                             $html.="</div>";                                                    
                         }
                         

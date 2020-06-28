@@ -73,43 +73,53 @@ if ( ! class_exists( 'Filters' ) ) {
 					),
 					1=>array(
 						'is_header' => 1, 
-						'val' => 'Filter'
+						'val' => 'Filter',
+						'field_id'=>'d_fconfig_filter'
 					),
 					2=>array(
 						'is_header' => 1, 
-						'val' => 'Label'
+						'val' => 'Label',
+						'field_id'=>'d_fconfig_label'
 					),
 					3=>array(
 						'is_header' => 1, 
-						'val' => 'Advance Filter'
+						'val' => 'Advance Filter',
+						'field_id'=>'d_fconfig_is_advanced'
 					),
 					4=>array(
 						'is_header' => 1, 
-						'val' => 'Column Width'
+						'val' => 'Column Width',
+						'field_id'=>'d_fconfig_column_width'
 					),
 					5=>array(
 						'is_header' => 1, 
-						'val' => 'Template'
+						'val' => 'Template',
+						'field_id'=>'filter_template'
 					),
 					6=>array(
 						'is_header' => 1, 
-						'val' => 'Ordering'
+						'val' => 'Ordering',
+						'field_id'=>'d_fconfig_ordering'
 					),
 					7=>array(
 						'is_header' => 1, 
-						'val' => 'Input Type'
+						'val' => 'Input Type',
+						'field_id'=>'d_fconfig_input_type'
 					),
 					8=>array(
 						'is_header' => 1, 
-						'val' => 'Icon Size'
+						'val' => 'Icon Size',
+						'field_id'=>'d_fconfig_icon_size'
 					),
 					9=>array(
 						'is_header' => 1, 
-						'val' => 'Icon Label Size'
+						'val' => 'Icon Label Size',
+						'field_id'=>'d_fconfig_icon_label_size'
 					),
 					10=>array(
 						'is_header' => 1, 
-						'val' => 'Add reset link?'
+						'val' => 'Add reset link?',
+						'field_id'=>'d_fconfig_add_reset_link'
 					),
 				),
 			);
@@ -162,40 +172,53 @@ if ( ! class_exists( 'Filters' ) ) {
 					),
 					1=>array(
 						'is_header' => 1, 
-						'val' => 'Filter'
+						'val' => 'Filter',
+						'field_id'=>'s_fconfig_filter'
 					),
 					2=>array(
 						'is_header' => 1, 
-						'val' => 'Label'
+						'val' => 'Label',
+						'field_id'=>'s_fconfig_label'
 					),
 					3=>array(
 						'is_header' => 1, 
-						'val' => 'Advance Filter'
+						'val' => 'Advance Filter',
+						'field_id'=>'s_fconfig_is_advanced'
 					),
 					4=>array(
 						'is_header' => 1, 
-
-						'val' => 'Column Width'
+						'val' => 'Column Width',
+						'field_id'=>'s_fconfig_column_width'
 					),
 					5=>array(
 						'is_header' => 1, 
-						'val' => 'Ordering'
+						'val' => 'Template',
+						'field_id'=>'filter_template'
 					),
 					6=>array(
 						'is_header' => 1, 
-						'val' => 'Input Type'
+						'val' => 'Ordering',
+						'field_id'=>'s_fconfig_ordering'
 					),
 					7=>array(
 						'is_header' => 1, 
-						'val' => 'Icon Size'
+						'val' => 'Input Type',
+						'field_id'=>'s_fconfig_input_type'
 					),
 					8=>array(
 						'is_header' => 1, 
-						'val' => 'Icon Label Size'
+						'val' => 'Icon Size',
+						'field_id'=>'s_fconfig_icon_size'
 					),
 					9=>array(
 						'is_header' => 1, 
-						'val' => 'Add reset link?'
+						'val' => 'Icon Label Size',
+						'field_id'=>'s_fconfig_icon_label_size'
+					),
+					10=>array(
+						'is_header' => 1, 
+						'val' => 'Add reset link?',
+						'field_id'=>'s_fconfig_add_reset_link'
 					),
 				),
 			);
@@ -426,7 +449,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							),
 							'd_fconfig_is_advanced'=>array(
 								'type'=>'checkbox',
-								'value'=>array('1'),
+								'value'=>array(),
 								'sanitize'=>'sanitize_text_field',
 								'options'=>array('1'=>'Is it advanced filter?'),
 								'is_id_as_name'=>true,
@@ -676,7 +699,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							),
 							's_fconfig_is_advanced'=>array(
 								'type'=>'checkbox',
-								'value'=>array('1'),
+								'value'=>array(),
 								'sanitize'=>'sanitize_text_field',
 								'options'=>array('1'=>'Is it advanced filter?'),
 								'is_id_as_name'=>true,

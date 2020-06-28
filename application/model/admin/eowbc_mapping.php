@@ -48,7 +48,12 @@ class Eowbc_Mapping {
 								'checkbox'=> array('id'=>$rv["id"],'value'=>array(),'options'=>array($rv["id"]=>''),'class'=>'','where'=>'in_table')
 							);
 
-						foreach ($rv as $rvk => $rvv) {
+						// foreach ($rv as $rvk => $rvv) {
+						foreach ($form_definition[$key]["form"][$fk]["head"][0] as $ck => $cv) {
+							if(empty($cv["field_id"])) { continue; }
+							$rvk = $cv["field_id"];
+							$rvv = ( !isset($rv[$rvk]) || wbc()->common->nonZeroEmpty($rv[$rvk]) ) ?  "" : $rv[$rvk];
+
 							//skip the id and other applicable fields 
 							if( $rvk == "id" || $rvk == "range_first" || $rvk == "range_second" || $rvk == "eo_wbc_first_category_range" || $rvk == "eo_wbc_second_category_range" ) {
 								continue;
