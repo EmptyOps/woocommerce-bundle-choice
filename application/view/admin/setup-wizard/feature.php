@@ -9,7 +9,7 @@
 
 			    	<label class="ui large text"><?php _e('Choose features','woo-bundle-choice'); ?> <span class="ui medium grey text"><?php echo eowbc_lang( "(You can later change these options from Settings page)" ); ?></span></label>
 
-			    	<?php if(sanitize_text_field($_GET['eo_wbc_inventory_type']) == 'jewelry'): ?>	
+			    	<?php if(wbc()->sanitize->get('eo_wbc_inventory_type') == 'jewelry'): ?>	
 		      		<div class="field">
 					    <div class="ui toggle checkbox">
 					      	<input type="checkbox" tabindex="0" class="hidden" name="ring_builder" id="ring_builder" value="1" <?php echo in_array('ring_builder',$feature_option)?'checked="checked"':''; ?>>
@@ -18,7 +18,7 @@
 					</div>
 					<?php endif; ?>
 
-					<?php if(sanitize_text_field($_GET['eo_wbc_inventory_type']) == 'clothing'): ?>	
+					<?php if(wbc()->sanitize->get('eo_wbc_inventory_type') == 'clothing'): ?>	
 		      		<div class=" field">
 					    <div class="ui toggle checkbox">
 					      	<input type="checkbox" tabindex="0" class="hidden" name="pair_maker" value="1" <?php echo in_array('pair_maker',$feature_option)?'checked="checked"':''; ?>>
@@ -29,7 +29,7 @@
 		    		
 		    		<?php 
 					//hiren disabled this on 08-05-2020 since now the single diamond API integration option is added 
-		    		if(false && sanitize_text_field($_GET['eo_wbc_inventory_type']) == 'jewelry'): 
+		    		if(false && wbc()->sanitize->get('eo_wbc_inventory_type') == 'jewelry'): 
 		    		?>
 			      		<div class=" field">
 						    <div class="ui toggle checkbox">
@@ -48,7 +48,7 @@
 					endif; 
 					?>
 
-					<?php if(sanitize_text_field($_GET['eo_wbc_inventory_type']) == 'others' or sanitize_text_field($_GET['eo_wbc_inventory_type']) == 'home_decor'): ?>
+					<?php if(wbc()->sanitize->get('eo_wbc_inventory_type') == 'others' or wbc()->sanitize->get('eo_wbc_inventory_type') == 'home_decor'): ?>
 					<div class=" field">
 					    <div class="ui toggle checkbox">
 					      	<input type="checkbox" tabindex="0" class="hidden" name="guidance_tool" value="1" <?php echo in_array('guidance_tool',$feature_option)?'checked="checked"':''; ?>>
@@ -64,7 +64,7 @@
 					    </div>
 					</div>		  
 
-					<?php if(sanitize_text_field($_GET['eo_wbc_inventory_type']) == 'jewelry'): ?>	
+					<?php if(wbc()->sanitize->get('eo_wbc_inventory_type') == 'jewelry'): ?>	
 		      		<div class="field">
 					    <div class="ui toggle checkbox">
 					      	<input type="checkbox" tabindex="0" class="hidden" name="filters_on_home" value="1" <?php echo in_array('filters_on_home',$feature_option)?'checked="checked"':''; ?>>
@@ -106,7 +106,7 @@
 					</div>
 
 					<?php 
-		    		if(sanitize_text_field($_GET['eo_wbc_inventory_type']) == 'jewelry'): 
+		    		if(wbc()->sanitize->get('eo_wbc_inventory_type') == 'jewelry'): 
 		    		?>
 						<div class=" field">
 						    <div class="ui toggle checkbox">

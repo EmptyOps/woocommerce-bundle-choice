@@ -16,11 +16,11 @@
                 <div>&nbsp;</div>
             <?php else:?>
                 <?php 
-                    $view_url = !empty($_GET['SECOND']) ? eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url(sanitize_text_field($_GET['SECOND']),$order):'#';
-                    $remove_url = !empty($_GET['SECOND'])?eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,sanitize_text_field($_GET['SECOND'])):'#';
+                    $view_url = !empty(wbc()->sanitize->get('SECOND')) ? eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('SECOND'),$order):'#';
+                    $remove_url = !empty(wbc()->sanitize->get('SECOND'))?eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('SECOND')):'#';
 
                     if(empty($remove_url) or $remove_url=='#'){
-                        $remove_url = !empty($_GET['SECOND'])?eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,sanitize_text_field($second)):'#';
+                        $remove_url = !empty(wbc()->sanitize->get('SECOND'))?eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,sanitize_text_field($second)):'#';
                     }                                            
                 if(empty($view_url) or $view_url=='#'){
                     ?>

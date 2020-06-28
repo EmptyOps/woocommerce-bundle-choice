@@ -232,7 +232,7 @@ class EOWBC_Filter_Widget {
 						background-color:".wbc()->options->get_option('appearance_filter','slider_nodes_backcolor_active','')/*get_option('eo_wbc_filter_config_slidernode_color','')*/." !important;
 					}
 					.eo-wbc-container.filters{
-						font-family:".wbc()->options->get_option('appearance_filter','header_font','')/*get_option('eo_wbc_filter_config_font_family','')*/." !important;
+						font-family:".wbc()->options->get_option('appearance_filter','header_font','ZapfHumanist601BT-Roman')/*get_option('eo_wbc_filter_config_font_family','')*/." !important;
 					}
 					.eo-wbc-container.filters .ui.styled.accordion .title,.eo-wbc-container.filters .ui.header{
 						color:".wbc()->options->get_option('appearance_filter','header_textcolor','')/*get_option('eo_wbc_filter_config_header_color','')*/." !important;
@@ -342,7 +342,13 @@ class EOWBC_Filter_Widget {
 				<?php
 				echo ob_get_clean();
 			}
-		
+			
+			if(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_1' and wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active','#dde5ed')=='#dde5ed'){
+				echo "<style>.ui.slider .inner .track-fill, .ui.slider .inner .thumb,#advance_filter{background-color: #9bb8d3 !important }</style>";	
+			} elseif (wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_2' and wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active','#f7f7f7')=='#f7f7f7') {
+				echo "<style>.ui.slider .inner .track-fill, .ui.slider .inner .thumb,#advance_filter{background-color: #3e9f8e !important }</style>";
+			}
+
         }, 10 );
 
         // wp_register_script('eo_wbc_filter_js',plugins_url('asset/js/eo_wbc_filter.js',__FILE__),array('jquery'));
@@ -373,7 +379,7 @@ class EOWBC_Filter_Widget {
         					'eo_part_site_url'=>get_site_url().'/index.php',
         					'eo_part_end_url'=>'/'.$this->product_url(),
         					'eo_cat_site_url'=>$site_url,
-        					'eo_cat_query'=>'/?'.http_build_query($_GET)
+        					'eo_cat_query'=>http_build_query($_GET)
         				)));
 
         /*wp_enqueue_script('eo_wbc_filter_js');*/
@@ -382,10 +388,10 @@ class EOWBC_Filter_Widget {
 
 	public function product_url() {
 		$url = '';
-		if(!empty($_GET['BEGIN']) and !empty($_GET['STEP']) and isset($_GET['FIRST']) and isset($_GET['SECOND'])){
+		if(!empty(wbc()->sanitize->get('BEGIN')) and !empty(wbc()->sanitize->get('STEP')) and isset($_GET['FIRST']) and isset($_GET['SECOND'])) {
 			$url='?EO_WBC=1'.
-            '&BEGIN='.sanitize_text_field($_GET['BEGIN']).
-            '&STEP='.sanitize_text_field($_GET['STEP']).                            
+            '&BEGIN='.sanitize_text_field(wbc()->sanitize->get('BEGIN')).
+            '&STEP='.sanitize_text_field(wbc()->sanitize->get('STEP')).                            
             '&FIRST='.
             (
                 $this->_category==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/ 
@@ -393,9 +399,9 @@ class EOWBC_Filter_Widget {
                 ''
                     :
                 (
-                    !empty($_GET['FIRST'])
+                    !empty(wbc()->sanitize->get('FIRST'))
                         ? 
-                    sanitize_text_field( $_GET['FIRST'])
+                    sanitize_text_field(wbc()->sanitize->get('FIRST'))
                         :
                     ''
                 )
@@ -407,9 +413,9 @@ class EOWBC_Filter_Widget {
                 ''
                     :
                 (
-                    !empty($_GET['SECOND'])
+                    !empty(wbc()->sanitize->get('SECOND'))
                         ?
-                    sanitize_text_field($_GET['SECOND'])
+                    sanitize_text_field(wbc()->sanitize->get('SECOND'))
                         :
                     ''
                 )
@@ -1069,8 +1075,8 @@ class EOWBC_Filter_Widget {
 					$icon = $woocommerce->plugin_url() . '/assets/images/placeholder.png';
 				}
 
-				if(!empty($_GET['ATT_LINK'])){
-					$query_list = explode(' ',$_GET['ATT_LINK']);
+				if(!empty(wbc()->sanitize->get('ATT_LINK'))){
+					$query_list = explode(' ',wbc()->sanitize->get('ATT_LINK'));
 				}
 
 				$mark = in_array($term_item->id,$query_list);				
@@ -1081,8 +1087,8 @@ class EOWBC_Filter_Widget {
 			} else {
 				$icon = wp_get_attachment_url( @get_term_meta( $term_item->term_id, 'thumbnail_id', true ));
 				
-				if(!empty($_GET['CAT_LINK'])){
-					$query_list = explode(' ',$_GET['CAT_LINK']);
+				if(!empty(wbc()->sanitize->get('CAT_LINK'))) {
+					$query_list = explode(' ',wbc()->sanitize->get('CAT_LINK'));
 				}
 
 				$mark = in_array($term_item->slug,$query_list);

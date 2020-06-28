@@ -85,7 +85,7 @@ function eo_wbc_error_popup(type,msg) {
 	eo_wbc_outer_containers=undefined;
 
 	//here we shall show some kind of popup for non-admin users as well, since some users might be testing frontend on diff browser or in incognito etc.
-	<?php if(current_user_can('manage_options') && empty($_GET['eo_wbc_button_testing'])): ?>
+	<?php if(current_user_can('manage_options') && empty(wbc()->sanitize->get('eo_wbc_button_testing'))): ?>
 	  //set the title/message in error popup
 	  jQuery('#error_popup_title').html(msg);
 
@@ -104,7 +104,7 @@ function eo_wbc_error_popup(type,msg) {
 
 
 	//below testing service is not implemented yet for buttons and not implemented in general as well  
-  	if(<?php echo empty($_GET['eo_wbc_button_testing'])?0:1 ?> && <?php echo current_user_can('manage_options')?1:0 ?>){
+  	if(<?php echo empty(wbc()->sanitize->get('eo_wbc_button_testing'))?0:1 ?> && <?php echo current_user_can('manage_options')?1:0 ?>){
 
       var btn_test_service_status=0;
 
