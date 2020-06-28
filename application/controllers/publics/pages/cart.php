@@ -27,7 +27,7 @@ class Cart {
             WC()->session->set('EO_WBC_SETS',NULL);
         }
 
-        if(isset($_GET['empty_cart']) && sanitize_text_field($_GET['empty_cart'])==1){
+        if(isset($_GET['empty_cart']) && wbc()->sanitize->get('empty_cart')==1){
             $this->eo_wbc_empty_cart();
         }        
         
@@ -39,8 +39,8 @@ class Cart {
     public function eo_wbc_remove(){
     
         $eo_wbc_maps=WC()->session->get('EO_WBC_MAPS',array());   
-        if(isset($eo_wbc_maps[$_GET['EO_WBC_REMOVE']])){
-            unset($eo_wbc_maps[sanitize_text_field($_GET['EO_WBC_REMOVE'])]);
+        if(isset($eo_wbc_maps[wbc()->sanitize->get('EO_WBC_REMOVE')])) {
+            unset($eo_wbc_maps[wbc()->sanitize->get('EO_WBC_REMOVE')]);
             WC()->session->set('EO_WBC_MAPS',$eo_wbc_maps);
                         
             //Reload cart data

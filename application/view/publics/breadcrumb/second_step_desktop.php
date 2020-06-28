@@ -26,7 +26,7 @@
             <div class="column " style="font-size: x-small;">
                 <?php _e(wc_price($second->get_price())); ?>
                 <br/>
-                <u><a href="<?php echo (!empty($_GET['SECOND'])?eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url(sanitize_text_field($_GET['SECOND']),$order):'#'); ?>">View</a></u>&nbsp;|&nbsp;<u><a href="<?php echo (!empty($_GET['SECOND'])?eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,sanitize_text_field($_GET['SECOND'])):'#'); ?>">Remove</a></u>
+                <u><a href="<?php echo (!empty(wbc()->sanitize->get('SECOND'))?eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('SECOND'),$order):'#'); ?>">View</a></u>&nbsp;|&nbsp;<u><a href="<?php echo (!empty(wbc()->sanitize->get('SECOND'))?eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('SECOND')):'#'); ?>">Remove</a></u>
             </div>                
     <?php endif; ?>            
     </div>

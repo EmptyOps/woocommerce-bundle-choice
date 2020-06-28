@@ -2,11 +2,11 @@
 defined( 'ABSPATH' ) || exit;
 
 //related to log module
-if(isset($_GET) && isset($_GET['action']) && $_GET['action']=='clear' && !empty($_GET['ref']) ){
+if(isset($_GET) && isset($_GET['action']) && wbc()->sanitize->get('action')=='clear' && !empty(wbc()->sanitize->get('ref')) ) {
 	\EOWBC_Error_Handler::clean_send();
 	?>
 		<script>
-			window.location.href='<?php echo $_GET['ref']; ?>';
+			window.location.href='<?php echo wbc()->sanitize->get('ref'); ?>';
 		</script>
 	<?php
 }
@@ -32,7 +32,7 @@ $form['method']='POST';
 $form['tabs'] = true;
 $form['data'] = \eo\wbc\model\admin\Eowbc_Setting_Status::instance()->get( eo\wbc\controllers\admin\menu\page\Setting_Status::get_form_definition());
 $form['attr']= array('data-is_per_tab_save="true"');
-$form["active_tab_onload"] = !empty($_GET["atol"]) ? $_GET["atol"] : "";
+$form["active_tab_onload"] = !empty(wbc()->sanitize->get("atol")) ? wbc()->sanitize->get("atol") : "";
 
 //for error log form which displays code etc. 
 wp_enqueue_script('wp-theme-plugin-editor');

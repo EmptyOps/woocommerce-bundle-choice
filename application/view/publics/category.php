@@ -58,7 +58,7 @@
 
             if( is_array($_posts) && !empty($_posts) ){
 
-                $prev_product_id=$_GET['FIRST'] | $_GET['SECOND'];
+                $prev_product_id = wbc()->sanitize->get('FIRST') | wbc()->sanitize->get('SECOND');
                 $prev_product=EO_WBC_Support::eo_wbc_get_product($prev_product_id);
 
                 foreach ($_posts as $_post) {                                        

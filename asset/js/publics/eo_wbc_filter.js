@@ -64,15 +64,16 @@ if(eo_wbc_object.disp_regular){
 			var form=jQuery("form#eo_wbc_filter");	
 			var site_url=eo_wbc_object.eo_cat_site_url;
 			var ajax_url=site_url+eo_wbc_object.eo_cat_query;	
-			console.log(ajax_url);				
+			//console.log(ajax_url);				
 			jQuery.ajax({
 				url: ajax_url,//form.attr('action'),
 				data:form.serialize(), // form data
-				type:form.attr('method'), // POST
+				type:'GET'/*form.attr('method')*/, // POST
 				beforeSend:function(xhr){
 					//jQuery("body").fadeTo('slow','0.3')	
 					jQuery("#loading").addClass('loading');							
-					//console.log(this.url);
+					console.log(this.url);
+					console.log(this.data);
 				},
 				complete : function(){
 					//console.log(this.url);

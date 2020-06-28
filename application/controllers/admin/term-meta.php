@@ -21,7 +21,7 @@ class Term_Meta {
 
 	public function add_attrubute_term_form($attribute) {
 
-		$this->taxonomy = $_GET['taxonomy'];
+		$this->taxonomy = wbc()->sanitize->get('taxonomy');
 		$this->attribute_slug = substr($attribute,3);
 		wbc()->load->model('category-attribute');
 		$this->attribute = \eo\wbc\model\Category_Attribute::instance()->get_attribute($this->attribute_slug);
@@ -187,11 +187,11 @@ class Term_Meta {
 		//var_dump($_REQUEST);		
 		if(isset($_POST['wbc_attachment'])) {			
 
-			function_exists( 'update_term_meta' ) ? update_term_meta( $term_id,'wbc_attachment',$_POST['wbc_attachment']) : update_metadata( 'woocommerce_term', $term_id,'wbc_attachment',$_POST['wbc_attachment'] );
+			function_exists( 'update_term_meta' ) ? update_term_meta( $term_id,'wbc_attachment',wbc()->sanitize->post('wbc_attachment')) : update_metadata( 'woocommerce_term', $term_id,'wbc_attachment',wbc()->sanitize->post('wbc_attachment') );
 
 		} elseif(isset($_POST['wbc_color'])) {			
 
-			function_exists( 'update_term_meta' ) ? update_term_meta( $term_id,'wbc_color',$_POST['wbc_color'] ) : update_metadata( 'woocommerce_term', $term_id,'wbc_color',$_POST['wbc_color'] );
+			function_exists( 'update_term_meta' ) ? update_term_meta( $term_id,'wbc_color',wbc()->sanitize->post('wbc_color') ) : update_metadata( 'woocommerce_term', $term_id,'wbc_color',wbc()->sanitize->post('wbc_color') );
 		}		
 	}
 
@@ -417,9 +417,9 @@ class Term_Meta {
 
 	public function edit_taxonomy_form() {	
 		
-		if(empty($_GET['edit'])) return;
+		if(empty(wbc()->sanitize->get('edit'))) return;
 		
-		$taxonomy_id = $_GET['edit'];
+		$taxonomy_id = wbc()->sanitize->get('edit');
 		/*wbc()->load->model('category-attribute');
 		eo\wbc\model\Category_Attribute::instance()->get_attribute($taxonomy_id);*/
 		
@@ -439,8 +439,8 @@ class Term_Meta {
 	}
 
 	public function save_taxonomy_form($id, $data) {
-		if(!empty($_POST['wbc_color'])){
-			update_term_meta($id,'wbc_ribbon_color',$_POST['wbc_color']);	
+		if(!empty(wbc()->sanitize->post('wbc_color'))) {
+			update_term_meta($id,'wbc_ribbon_color',wbc()->sanitize->post('wbc_color'));
 		}		
 	}
 }

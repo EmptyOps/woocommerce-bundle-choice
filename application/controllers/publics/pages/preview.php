@@ -18,13 +18,13 @@ class Preview {
     }
 
     public function init() {
-        if(empty($_GET['FIRST']) || empty($_GET['SECOND']))
+        if(empty(wbc()->sanitize->get('FIRST')) || empty(wbc()->sanitize->get('SECOND')))
         {            
             exit(wp_redirect(wbc()->wc->eo_wbc_get_cart_url()));
             return;
         } 
 
-        if( !empty($_POST['add_to_cart']) && sanitize_text_field($_POST['add_to_cart'])==1)
+        if( !empty(wbc()->sanitize->post('add_to_cart')) && wbc()->sanitize->post('add_to_cart')==1)
         {
             $this->eo_wbc_add_this_to_cart();
             //Redirect to cart page.       
@@ -184,7 +184,7 @@ class Preview {
     
     private function eo_wbc_add_to_cart()
     {
-        $cart=base64_decode(sanitize_text_field($_GET['CART']),TRUE);        
+        $cart=base64_decode(sanitize_text_field(wbc()->sanitize->get('CART')),TRUE);        
         if (!empty($cart)){
             
             $cart=str_replace("\\",'',$cart);
@@ -238,7 +238,7 @@ class Preview {
         /*add_filter('the_content',function(){*/
            
             
-            if( !empty($_GET['FIRST']) && !empty($_GET['SECOND']) && !empty($_GET['CART']) )
+            if( !empty(wbc()->sanitize->get('FIRST')) && !empty(wbc()->sanitize->get('SECOND')) && !empty(wbc()->sanitize->get('CART')) )
             {                
                 //if data available at _GET then add to out custom cart
                 $this->eo_wbc_add_to_cart();
@@ -260,7 +260,7 @@ class Preview {
                 $second=wbc()->wc->eo_wbc_get_product((int)($set['SECOND'][2]?$set['SECOND'][2]:$set['SECOND'][0]));
 
                 wbc()->load->model('publics/component/eowbc_breadcrumb');
-                $content= \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_add_breadcrumb(sanitize_text_field($_GET['STEP']),sanitize_text_field($_GET['BEGIN'])).'<br/>';
+                $content= \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_add_breadcrumb(sanitize_text_field(wbc()->sanitize->get('STEP')),sanitize_text_field(wbc()->sanitize->get('BEGIN'))).'<br/>';
                 
                 $content.='<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><div class="ui special cards centered">'.
                     '<div class="card">'.
@@ -268,7 +268,7 @@ class Preview {
                           '<div class="ui dimmer inverted transition hidden">'.
                             '<div class="content">'.
                                 '<div class="center">'.
-                                    '<a class="ui button primary" href="'.\eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url((!empty($_GET['BEGIN']) && $_GET['BEGIN']==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/ ? 1 : 2),(empty($set['FIRST'][2])?$set['FIRST'][0]:$set['FIRST'][2])).'" >Change</a>'.
+                                    '<a class="ui button primary" href="'.\eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url((!empty(wbc()->sanitize->get('BEGIN')) && wbc()->sanitize->get('BEGIN')==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/ ? 1 : 2),(empty($set['FIRST'][2])?$set['FIRST'][0]:$set['FIRST'][2])).'" >Change</a>'.
                                 '</div>'.
                             '</div>'.
                           '</div>'.$first->get_image('full').
@@ -289,7 +289,7 @@ class Preview {
                           '<div class="ui dimmer inverted transition hidden">'.
                             '<div class="content">'.
                                 '<div class="center">'.
-                                    '<a class="ui button primary" href="'.\eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url((!empty($_GET['BEGIN']) && $_GET['BEGIN']==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/ ? 2 : 1),(empty($set['SECOND'][2])?$set['SECOND'][0]:$set['SECOND'][2])).'">Change</a>'.        
+                                    '<a class="ui button primary" href="'.\eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url((!empty(wbc()->sanitize->get('BEGIN')) && wbc()->sanitize->get('BEGIN')==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/ ? 2 : 1),(empty($set['SECOND'][2])?$set['SECOND'][0]:$set['SECOND'][2])).'">Change</a>'.        
                                 '</div>'.
                             '</div>'.
                           '</div>'.

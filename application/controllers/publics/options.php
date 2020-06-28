@@ -362,7 +362,7 @@ class Options {
             }
             
             // WooCommerce Product Bundle Fixing
-            if ( isset( $_POST[ 'action' ] ) && $_POST[ 'action' ] === 'woocommerce_configure_bundle_order_item' ) {
+            if ( isset( $_POST[ 'action' ] ) && wbc()->sanitize->post('action') === 'woocommerce_configure_bundle_order_item' ) {
                 return $html;
             }
             

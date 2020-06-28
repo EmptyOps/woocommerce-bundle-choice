@@ -21,7 +21,7 @@ class Home {
 	public function init() {
 
 		//confirm if this one requires any additional thing like detecting from ajax and then calling this or other particular function 
-		if(isset($_GET['report']) && !empty($_GET['report'])){
+		if(isset($_GET['report']) && !empty(wbc()->sanitize->get('report'))) {
         	if(isset($_SERVER['HTTP_REFERER'])){
           		update_option('eo_wbc_mapping_error_report',$_SERVER['HTTP_REFERER']);
         	}

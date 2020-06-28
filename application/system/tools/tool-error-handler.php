@@ -171,13 +171,13 @@ if(!class_exists('EOWBC_Error_Handler')){
 		}
 
 		public static function eo_wbc_send_error_report(){
-			if( isset($_POST["is_sent_from_front_end"]) && $_POST["is_sent_from_front_end"] == 1 ) {
+			if( isset($_POST["is_sent_from_front_end"]) && wbc()->sanitize->post("is_sent_from_front_end") == 1 ) {
 				if(wp_mail('emptyopssphere@gmail.com,mahesh@emptyops.com', self::get_subject(), self::get_logs())) {
 					self::clean_send();
 				}	
 			}
 			else {
-				if(wp_mail('emptyopssphere@gmail.com,mahesh@emptyops.com',$_POST["send_error_log_subject"],$_POST["eo_wbc_view_error"])){
+				if(wp_mail('emptyopssphere@gmail.com,mahesh@emptyops.com',wbc()->sanitize->post("send_error_log_subject"),wbc()->sanitize->post("eo_wbc_view_error"))) {
 					self::clean_send();
 				}
 			}
