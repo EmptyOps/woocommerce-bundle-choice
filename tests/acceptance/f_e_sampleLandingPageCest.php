@@ -24,7 +24,7 @@ class f_e_sampleLandingPageCest
             $I->wait(5);
             echo $I->grabPageSource();
         // $I->waitForText('1', 10, 'div');
-        $I->seeInSource('Choose a', 'div');    //TODO much better to rely on see function instead of the seeInSource, but since due to some reason see is not working for now used seeInSource for this case
+        $I->see('CHOOSE A');    //TODO much better to rely on see function instead of the seeInSource, but since due to some reason see is not working for now used seeInSource for this case
         $I->waitForText('DIAMOND', 10, 'div');
         // $I->waitForText('2', 10, 'div');
         $I->waitForText('PREVIEW', 10, 'div');
