@@ -51,8 +51,8 @@ class f_g_homeCest
     	// go to the home page
 		$I->amOnPage('/');
 
-        $I->executeJS('window.scrollTo( 0, 300 );');      
-        $I->wait(3);
+        // $I->executeJS('window.scrollTo( 0, 300 );');      
+        // $I->wait(3);
 
 		// Check if buttons with text x are visible 
         $I->see('Start with Diamond');
