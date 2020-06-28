@@ -13,9 +13,10 @@ class f_g_homeCest
 
     function configureButtonPositionForHome(AcceptanceTester $I) {
 
-        //login to admin panel, should save and maintain cookies so that do not need to login on all admin test. but yeah however during the front end test should flush the admin cookie first.  
-        $I->loginAsAdmin();
-        $I->see( 'Dashboard' );
+        // webdriver maintains previous login session, let's see
+        // //login to admin panel, should save and maintain cookies so that do not need to login on all admin test. but yeah however during the front end test should flush the admin cookie first.  
+        // $I->loginAsAdmin();
+        // $I->see( 'Dashboard' );
 
         /* buttons tab */
         // go to the page
