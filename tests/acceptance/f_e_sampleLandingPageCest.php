@@ -21,24 +21,24 @@ class f_e_sampleLandingPageCest
 
 		// I click on button one and I see in next page text like 1 {button text}
         $I->click('Start with Diamond');
-            $I->wait(5);
-            echo $I->grabPageSource();
-        // $I->waitForText('1', 10, 'div');
-        $I->see('CHOOSE A');    //TODO much better to rely on see function instead of the seeInSource, but since due to some reason see is not working for now used seeInSource for this case
-        $I->waitForText('DIAMOND', 10, 'div');
-        // $I->waitForText('2', 10, 'div');
-        $I->waitForText('PREVIEW', 10, 'div');
+            // $I->wait(5);
+            // echo $I->grabPageSource();
+        $I->waitForText('CHOOSE A', 10);    
+        $I->see('1');
+        $I->see('DIAMOND');
+        $I->see('2');
+        $I->see('PREVIEW');
 
         //go back to the home page
         $I->moveBack();
 
 		// I click on button two  and I see in next page text like 1 {button text} of second Button
         $I->click('Start with Setting');
-        $I->waitForText('1', 10, 'div');
-        $I->waitForText('CHOOSE A', 10, 'div');
-        $I->waitForText('SETTING', 10, 'div');
-        $I->waitForText('2', 10, 'div');
-        $I->waitForText('PREVIEW', 10, 'div');
+        $I->waitForText('CHOOSE A', 10);    
+        $I->see('1');
+        $I->see('SETTING');
+        $I->see('2');
+        $I->see('PREVIEW');
 
     }
 
