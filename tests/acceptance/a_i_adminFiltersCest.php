@@ -59,7 +59,13 @@ class a_i_adminFiltersCest
 		// confirm if saved properly or not
 		$I->reloadPage();	//reload page
 		$I->click('Alternate Filter Widgets');
-		$I->seeInField('second_category_altr_filt_widgts', 'sc3');
+		$sc = $I->executeJS(" return jQuery('[name=\"second_category_altr_filt_widgts\"]').val();");
+		if( $sc == 'sc3' ) {
+			echo "PASSED...";
+		} 
+		else {
+			echo "FAILED. val ".$sc;
+		}
 	}
 
 	public function firstAndSecondCategoryFilterConfigurations(AcceptanceTester $I) {
