@@ -48,7 +48,7 @@ class a_i_adminFiltersCest
 
 		// go to the tab
 		$I->click('Alternate Filter Widgets');
-		$I->see('Default(Grid View)');
+		$I->see('First Category');
 
 		// select category
 		$I->executeJS("jQuery('#sc3').checkbox('set checked');");	
