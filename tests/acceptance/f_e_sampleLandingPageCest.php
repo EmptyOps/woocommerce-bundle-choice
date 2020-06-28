@@ -23,10 +23,10 @@ class f_e_sampleLandingPageCest
 
 		// I click on button one and I see in next page text like 1 {button text}
         $I->click('Start with Diamond');
-        $I->waitForText('1', 10, 'div');
+        // $I->waitForText('1', 10, 'div');
         $I->waitForText('CHOOSE A', 10, 'div');
         $I->waitForText('DIAMOND', 10, 'div');
-        $I->waitForText('2', 10, 'div');
+        // $I->waitForText('2', 10, 'div');
         $I->waitForText('PREVIEW', 10, 'div');
 
         //go back to the home page
