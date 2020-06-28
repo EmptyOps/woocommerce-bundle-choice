@@ -26,7 +26,7 @@ class f_e_sampleLandingPageCest
             $I->wait(5);
             echo $I->grabPageSource();
         // $I->waitForText('1', 10, 'div');
-        $I->see('CHOOSE A');
+        $I->see('Choose a');
         $I->waitForText('DIAMOND', 10, 'div');
         // $I->waitForText('2', 10, 'div');
         $I->waitForText('PREVIEW', 10, 'div');
