@@ -23,6 +23,8 @@ class f_e_sampleLandingPageCest
 
 		// I click on button one and I see in next page text like 1 {button text}
         $I->click('Start with Diamond');
+            $I->wait(5);
+            echo $I->grabPageSource();
         // $I->waitForText('1', 10, 'div');
         $I->waitForText('CHOOSE A', 10, 'div');
         $I->waitForText('DIAMOND', 10, 'div');
