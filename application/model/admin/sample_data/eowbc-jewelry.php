@@ -42,7 +42,7 @@ class Eowbc_Jewelry {
 
 	public function process_post(&$_step, $_category, $_atttriutes) {
 		
-		if(!empty($_GET['type']) and !empty($_GET['eo_wbc_view_auto_jewel']) and $_GET['type']=='remove_filters_automation' and $_GET['eo_wbc_view_auto_jewel']==1){
+		if(!empty(wbc()->sanitize->get('type')) and !empty(wbc()->sanitize->get('eo_wbc_view_auto_jewel')) and wbc()->sanitize->get('type')=='remove_filters_automation' and wbc()->sanitize->get('eo_wbc_view_auto_jewel')==1){
 			wbc()->options->update_option('tiny_feature','filter_widget',serialize(array()));
 			header("Location: ".admin_url('admin.php?page=eowbc-tiny-features')); 
 			exit; 
@@ -156,11 +156,11 @@ class Eowbc_Jewelry {
 			        // update_option('eo_wbc_attr',serialize($catat_attribute));
 			        wbc()->options->set('eo_wbc_attr',serialize($catat_attribute));
 			        $catat->add_filters();
-			        if(!empty($_GET['type']) and $_GET['type']=='filters_automation'){
+			        if(!empty(wbc()->sanitize->get('type')) and wbc()->sanitize->get('type')=='filters_automation'){
 			        	$catat->add_filters_custom_filter();	
 			        }			        
 			        // update_option('eo_wbc_filter_enable','1');     
-			        wbc()->options->update_option('configuration','filter_status','1');
+			        wbc()->options->update_option('filters_filter_setting','filter_setting_status','1');
 			      } 
 			  
 			  ///////////////////////////////////////////////////////////////////////

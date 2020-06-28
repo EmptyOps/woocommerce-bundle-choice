@@ -218,11 +218,17 @@ jQuery(document).ready(function($){
     });
 });
 
-function eowbc_toast_common( toast_type_class, msg ) {
+function eowbc_toast_common( toast_type_class, msg, timeout) {
+
+    if(typeof(timeout)==typeof(undefined)){
+        timeout=3000;
+    }
+
     jQuery('body').toast({
         class:toast_type_class,
         position: 'bottom right',
-        message: msg
+        message: msg,
+        displayTime:timeout,
     });
 }
 

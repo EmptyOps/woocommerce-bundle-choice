@@ -12,6 +12,21 @@ if(wp_verify_nonce(sanitize_text_field($_POST['_wpnonce']),'eowbc_configuration'
 	
 	wbc()->load->model('category-attribute');
 
+	if(wbc()->options->get_option('configuration','config_alternate_breadcrumb') !== $_POST['config_alternate_breadcrumb']) {
+		
+		if($_POST['config_alternate_breadcrumb'] =='template_1'){
+			wbc()->options->update_option('appearance_filter','header_font','Avenir');
+			wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_active','#dde5ed');
+			wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_inactive','#ffffff');
+
+		} elseif ($_POST['config_alternate_breadcrumb'] =='template_2') {
+			wbc()->options->update_option('appearance_filter','header_font','ZapfHumanist601BT-Roman');
+			wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_active','#f7f7f7');	
+			wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_inactive','#ffffff');
+		}
+		
+	}
+
 	wbc()->options->update_option('configuration','config_alternate_breadcrumb',sanitize_text_field($_POST['config_alternate_breadcrumb']));
 
 	wbc()->options->update_option('configuration','buttons_page',sanitize_text_field($_POST['config_buttons_page']));
