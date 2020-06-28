@@ -11,7 +11,7 @@ class f_i_step1Cest
     // {
     // }
 
-    function categoryPage(AcceptanceTester $I) {
+    protected function categoryPage(AcceptanceTester $I) {
 		
     	// go to the category page page
 		$I->amOnPage('/');	
@@ -20,6 +20,9 @@ class f_i_step1Cest
 		// - I choose filter options and then I check if x  products are found 
 		$I->executeJS("$('#text_slider_price').slider('set rangeValue', 14, 15);");	
 		$I->waitForText('No products were found', 10);
+
+		$I->executeJS("$('#text_slider_price').slider('set rangeValue', 12, 15);");	
+		$I->wait(3);
 
 		// - I click on product image of first product from the search results
 		$price_of_product = "12.00";	//TODO make it dynamic 
@@ -47,12 +50,9 @@ class f_i_step1Cest
 		$I->click('Add to bag...');
 
 		// - I see in next page the text "${price of Step 1 item's price}"
-		$I->waitForText($price_of_product, 10, 'span');
-		$I->waitForText('VIEW', 10, 'a');
-		$I->waitForText('REMOVE', 10, 'a');
-
-		// also do here the product not found test here and check if that Oooops error message and error reporting options shows or not
-		$this->checkProductNotFoundDueToMissingMapping($I);
+		$I->waitForText($price_of_product, 10);
+		$I->see('VIEW', 'a');
+		$I->see('REMOVE', 'a');
 
 		// check remove action 
 		$this->checkBackRemoveAction($I);
@@ -60,13 +60,7 @@ class f_i_step1Cest
 		return $price_of_product;
 	}
 
-	function checkProductNotFoundDueToMissingMapping(AcceptanceTester $I) {
-		
-		return;	//TODO implement it later. for now the manual testing is done and given priority to other test automations so do this later as soon as we get the chance. 
-
-	}
-
-	function checkBackRemoveAction(AcceptanceTester $I) {
+	protected function checkBackRemoveAction(AcceptanceTester $I) {
 		
 		// // - I choose filter options and then I check if x  products are found
 		// // - I click on product image of first product from the search results
@@ -85,6 +79,13 @@ class f_i_step1Cest
 		// $I->waitForText($price_of_product, 10, 'span');
 		// $I->waitForText('VIEW', 10, 'a');
 		// $I->waitForText('REMOVE', 10, 'a');
+
+	}
+
+	// also do here the product not found test here and check if that Oooops error message and error reporting options shows or not
+	function checkProductNotFoundDueToMissingMapping(AcceptanceTester $I) {
+		
+		return;	//TODO implement it later. for now the manual testing is done and given priority to other test automations so do this later as soon as we get the chance. 
 
 	}
 
