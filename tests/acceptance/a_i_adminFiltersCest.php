@@ -51,8 +51,7 @@ class a_i_adminFiltersCest
 		$I->see('Default(Grid View)');
 
 		// select category
-		// $I->executeJS("jQuery('#sc3').checkbox('set checked', 'sc3');");	
-		$I->executeJS("jQuery('#second_category_altr_filt_widgts').val('sc3');");	
+		$I->executeJS("jQuery('#sc3').checkbox('set checked', 'sc3');");	
 
 		// save 
 		$I->click('#submit_btn'); 	//('Save');		//it shouldn't be this way, but there seem some issue with selenium driver and thus when there is another Save button on the page even though on another page and is not visible but still selenium think it is visible and thus gives us error so need to use unique xPath like id etc. 
@@ -60,13 +59,7 @@ class a_i_adminFiltersCest
 		// confirm if saved properly or not
 		$I->reloadPage();	//reload page
 		$I->click('Alternate Filter Widgets');
-		$sc = $I->executeJS(" return jQuery('[name=\"second_category_altr_filt_widgts\"]').val();");
-		if( $sc == 'sc3' ) {
-			echo "PASSED...";
-		} 
-		else {
-			echo "FAILED. val ".$sc;
-		}
+		$I->seeInField('second_category_altr_filt_widgts', 'sc3');
 	}
 
 	public function firstAndSecondCategoryFilterConfigurations(AcceptanceTester $I) {
