@@ -25,10 +25,10 @@ class WBC_Common {
 
 	}
 
-	public function var_dump(array $ar,$force_debug = false,$die = false) {
+	public function var_dump($v,$force_debug = false,$die = false) {
 		//TODO yet to implement optional arg force_debug
 
-		var_dump($ar); 
+		var_dump($v); 
 
 		if( $die )
 		{
