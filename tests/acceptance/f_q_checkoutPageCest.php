@@ -19,9 +19,9 @@ class f_q_checkoutPageCest
     	$f_o_cartPageCestObj->continueToCheckout($I,true);
 
     	// verify 
-    	$I->waitForText('Billing details', 10, 'h3');
-		$I->waitForText('Have a coupon?', 10, 'div');
-		$I->waitForText('Place order', 10, 'button');
+    	$I->see('Billing details', 10, 'h3');
+		$I->see('Have a coupon?', 10, 'div');
+		$I->see('Place order', 10, 'button');
 
 	}
 

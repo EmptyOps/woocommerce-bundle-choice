@@ -14,7 +14,7 @@ class f_m_previewPageCest
     // {
     // }
 
-    function previewPage(AcceptanceTester $I) {
+    public function previewPage(AcceptanceTester $I) {
 		
     	//TODO make it dynamic by saving this in session in previous steps and then here get it from session 
     	$this->price_of_product_step1 = "12.00";
@@ -44,10 +44,12 @@ class f_m_previewPageCest
 		$I->click('Add This To Cart');
 
 		// - I see in next page the text "CART", "Quantity", "Subtotal" etc.
-		$I->waitForText('Cart', 10, 'h1');
-		$I->waitForText('Quantity', 10, 'th');
-		$I->waitForText('Subtotal', 10, 'th');
-		$I->see($this->price_of_product_step1+$this->price_of_product_step2, 'span');	//TODO check here if merged row appears properly or not
+		$I->waitForText('Cart', 10);
+		$I->see('Quantity');
+		$I->see('Subtotal');
+		$I->see($this->price_of_product_step1+$this->price_of_product_step2);	
+
+		//TODO check here if merged row appears properly or not
 
 	}
 
