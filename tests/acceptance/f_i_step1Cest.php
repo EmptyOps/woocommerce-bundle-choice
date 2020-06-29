@@ -43,17 +43,17 @@ class f_i_step1Cest
 		$I->see('Add to bag...');
 
 		// with text x 
-		$I->see('150.00', 'span');	//market price
-		$I->see($price_of_product, 'span');
-		$I->see('Additional information', 'a');
+		$I->see('150.00');	//market price
+		$I->see($price_of_product);
+		$I->see('Additional information');
 
 		// - I click on continue button
 		$I->click('Add to bag...');
 
 		// - I see in next page the text "${price of Step 1 item's price}"
 		$I->waitForText($price_of_product, 10);
-		$I->see('VIEW', 'a');
-		$I->see('REMOVE', 'a');
+		$I->see('VIEW');
+		$I->see('REMOVE');
 
 		// check remove action 
 		$this->checkBackRemoveAction($I);
