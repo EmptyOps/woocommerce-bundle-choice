@@ -44,6 +44,9 @@ class f_q_checkoutPageCest
 		$I->fillField("billing_phone", '8347408752');
 		$I->fillField("billing_email", 'sales@sphereplugins.com');
 
+		$I->executeJS('window.scrollTo( 0, 300 );');		
+		$I->wait(3);
+
 		// place order
 		$I->click('PLACE ORDER');
 
