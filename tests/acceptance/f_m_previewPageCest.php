@@ -14,7 +14,7 @@ class f_m_previewPageCest
     // {
     // }
 
-    protected function previewPage(AcceptanceTester $I) {
+    function previewPage(AcceptanceTester $I) {
 		
     	//TODO make it dynamic by saving this in session in previous steps and then here get it from session 
     	$this->price_of_product_step1 = "12.00";
@@ -24,11 +24,6 @@ class f_m_previewPageCest
     	$I->see($this->price_of_product_step1+$this->price_of_product_step2);
     	$I->see('Add This To Cart');
 
-	}
-
-	public function addToCart(AcceptanceTester $I) {
-
-		$this->previewPage($I);
 
 		// check view action 
 		$this->checkViewActionStep2($I);
@@ -38,6 +33,12 @@ class f_m_previewPageCest
 
 		// check change(same as remove though but at different place) action 
 		$this->checkChangeActionPreviewPage($I);
+
+	}
+
+	public function addToCart(AcceptanceTester $I) {
+
+		// $this->previewPage($I);
 
 		// - I click on add this to cart button
 		$I->click('Add This To Cart');
@@ -50,7 +51,7 @@ class f_m_previewPageCest
 
 	}
 
-	function checkViewActionStep2(AcceptanceTester $I) {
+	protected function checkViewActionStep2(AcceptanceTester $I) {
 		
 		// // - I choose filter options and then I check if x  products are found
 		// // - I click on product image of first product from the search results
@@ -72,7 +73,7 @@ class f_m_previewPageCest
 
 	}
 
-	function checkBackRemoveAction(AcceptanceTester $I) {
+	protected function checkBackRemoveAction(AcceptanceTester $I) {
 		
 		// // - I choose filter options and then I check if x  products are found
 		// // - I click on product image of first product from the search results
@@ -94,7 +95,7 @@ class f_m_previewPageCest
 
 	}
 
-	function checkChangeActionPreviewPage(AcceptanceTester $I) {
+	protected function checkChangeActionPreviewPage(AcceptanceTester $I) {
 		
 		// // - I choose filter options and then I check if x  products are found
 		// // - I click on product image of first product from the search results
