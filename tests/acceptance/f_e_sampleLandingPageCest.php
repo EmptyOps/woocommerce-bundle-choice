@@ -13,7 +13,7 @@ class f_e_sampleLandingPageCest
 
     public function testChoiceButtonWidgetOnLandingPage(AcceptanceTester $I) {
         
-        if( !$I->test_allowed_in_this_environment("a_") ) {
+        if( !$I->test_allowed_in_this_environment("f_") ) {
             return;
         }
         

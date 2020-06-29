@@ -13,7 +13,7 @@ class f_g_homeCest
 
     protected function configureButtonPositionForHome(AcceptanceTester $I) {
 
-        if( !$I->test_allowed_in_this_environment("a_") ) {
+        if( !$I->test_allowed_in_this_environment("f_") ) {
             return;
         }
 
@@ -47,7 +47,7 @@ class f_g_homeCest
 
     public function testChoiceButtonWidgetOnHome(AcceptanceTester $I) {
 		
-        if( !$I->test_allowed_in_this_environment("a_") ) {
+        if( !$I->test_allowed_in_this_environment("f_") ) {
             return;
         }
 
@@ -85,7 +85,7 @@ class f_g_homeCest
 
     public function testChoiceButtonWidgetBasedOnShortcode(AcceptanceTester $I) {
         
-        if( !$I->test_allowed_in_this_environment("a_") ) {
+        if( !$I->test_allowed_in_this_environment("f_") ) {
             return;
         }
         

@@ -43,7 +43,7 @@ class f_k_step2Cest
 
 	public function itemPage(AcceptanceTester $I) {
 		
-		if( !$I->test_allowed_in_this_environment("a_") ) {
+		if( !$I->test_allowed_in_this_environment("f_") ) {
             return;
         }
         

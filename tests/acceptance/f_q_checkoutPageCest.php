@@ -13,6 +13,10 @@ class f_q_checkoutPageCest
 
 	public function checkoutPage(AcceptanceTester $I, $is_inner_call=false) {
 		
+		if( !$I->test_allowed_in_this_environment("f_") ) {
+            return;
+        }
+
 		//TODO make it dynamic by saving this in session in previous steps and then here get it from session 
     	$this->price_of_product_step1 = "12.00";
     	$this->price_of_product_step2 = "15.00";
@@ -31,6 +35,10 @@ class f_q_checkoutPageCest
 
 	public function placeOrder(AcceptanceTester $I, $is_inner_call=false) {
 
+		if( !$I->test_allowed_in_this_environment("f_") ) {
+            return;
+        }
+        
 		// setup fields 
 		$I->fillField("billing_first_name", 'hi000');
 		$I->fillField("billing_last_name", 'last');

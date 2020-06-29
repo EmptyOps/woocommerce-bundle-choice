@@ -13,10 +13,10 @@ class f_o_cartPageCest
 
 	public function cartPage(AcceptanceTester $I, $is_inner_call=false) {
 		
-		if( !$I->test_allowed_in_this_environment("a_") ) {
+		if( !$I->test_allowed_in_this_environment("f_") ) {
             return;
         }
-        
+
     	//TODO make it dynamic by saving this in session in previous steps and then here get it from session 
     	$this->price_of_product_step1 = "12.00";
     	$this->price_of_product_step2 = "15.00";
@@ -40,6 +40,10 @@ class f_o_cartPageCest
 
 	public function continueToCheckout(AcceptanceTester $I, $is_inner_call=false) {
 
+		if( !$I->test_allowed_in_this_environment("f_") ) {
+            return;
+        }
+        
 		// $this->cartPage($I);
 
 		// - I click on Proceed to checkout button

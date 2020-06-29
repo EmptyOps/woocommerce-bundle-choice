@@ -13,7 +13,7 @@ class f_i_step1Cest
 
     protected function categoryPage(AcceptanceTester $I) {
 		
-		if( !$I->test_allowed_in_this_environment("a_") ) {
+		if( !$I->test_allowed_in_this_environment("f_") ) {
             return;
         }
 
@@ -39,7 +39,7 @@ class f_i_step1Cest
 
 	public function itemPage(AcceptanceTester $I) {
 		
-		if( !$I->test_allowed_in_this_environment("a_") ) {
+		if( !$I->test_allowed_in_this_environment("f_") ) {
             return;
         }
 
@@ -96,9 +96,9 @@ class f_i_step1Cest
 	}
 
 	// also do here the product not found test here and check if that Oooops error message and error reporting options shows or not
-	function checkProductNotFoundDueToMissingMapping(AcceptanceTester $I) {
+	public function checkProductNotFoundDueToMissingMapping(AcceptanceTester $I) {
 		
-		if( !$I->test_allowed_in_this_environment("a_") ) {
+		if( !$I->test_allowed_in_this_environment("f_") ) {
             return;
         }
         

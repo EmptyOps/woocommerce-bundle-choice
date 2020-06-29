@@ -16,6 +16,10 @@ class n_e_installAndSetupAdminSideCest
     // TODO here important to note that to run test with sample data on fresh install this test either needs to be run first or coditionally in duplicate environment where the other tests which sets data manually are just skipped  
     public function tryToTestSetupUsingSampleData(AcceptanceTester $I)
     {
+    	if( !$I->test_allowed_in_this_environment("n_") ) {
+            return;
+        }
+
     	return;	//TODO run this test only if sample data env flag is set 
 
     	//login to admin panel, should save and maintain cookies so that do not need to login on all admin test. but yeah however during the front end test should flush the admin cookie first.  
@@ -40,12 +44,20 @@ class n_e_installAndSetupAdminSideCest
     // try alternate widgets 
     public function tryToTestAlternateBreadcrumbWidgets(AcceptanceTester $I)
     {
+    	if( !$I->test_allowed_in_this_environment("n_") ) {
+            return;
+        }
+
     	return;	//TODO run this test only if sample data env flag is set 
     }
 
 	// try alternate widgets 
     public function tryToTestAlternateFilterWidgets(AcceptanceTester $I)
     {
+    	if( !$I->test_allowed_in_this_environment("n_") ) {
+            return;
+        }
+
     	return;	//TODO run this test only if sample data env flag is set 
     }
 

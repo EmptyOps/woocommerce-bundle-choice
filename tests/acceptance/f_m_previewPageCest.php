@@ -16,7 +16,7 @@ class f_m_previewPageCest
 
     public function previewPage(AcceptanceTester $I) {
 
-    	if( !$I->test_allowed_in_this_environment("a_") ) {
+    	if( !$I->test_allowed_in_this_environment("f_") ) {
             return;
         }
 		
@@ -42,7 +42,7 @@ class f_m_previewPageCest
 
 	public function addToCart(AcceptanceTester $I) {
 
-		if( !$I->test_allowed_in_this_environment("a_") ) {
+		if( !$I->test_allowed_in_this_environment("f_") ) {
             return;
         }
 

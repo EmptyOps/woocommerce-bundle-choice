@@ -13,6 +13,10 @@ class fz_a_o_adminOrderDetailPageCest
 
 	public function gotoAdminOrderDetailPage(AcceptanceTester $I) {
 
+		if( !$I->test_allowed_in_this_environment("a_") ) {
+            return;
+        }
+
     	//TODO make it dynamic by saving this in session in previous steps and then here get it from session 
     	$this->price_of_product_step1 = "12.00";
     	$this->price_of_product_step2 = "15.00";
@@ -28,6 +32,10 @@ class fz_a_o_adminOrderDetailPageCest
 	}
 
 	public function adminOrderDetailPage(AcceptanceTester $I, $is_inner_call=false) {
+
+		if( !$I->test_allowed_in_this_environment("a_") ) {
+            return;
+        }
 
 		// verify order details 
 		$I->see('Edit order', 'h1');

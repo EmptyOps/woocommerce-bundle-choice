@@ -33,6 +33,10 @@ class n_j_frontendChecksAndReviewCest
 	// test from entire process from starting with buttons to order details page on account panel and on admin panel 
     public function tryToTestChoiceMakerProcess(AcceptanceTester $I)
     {
+        if( !$I->test_allowed_in_this_environment("n_") ) {
+            return;
+        }
+
     	return;	//TODO run this test only if sample data env flag is set 
 
     	$this->startWithHomePageButtons($I);
