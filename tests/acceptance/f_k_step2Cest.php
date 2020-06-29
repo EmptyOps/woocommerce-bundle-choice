@@ -56,7 +56,7 @@ class f_k_step2Cest
 		$I->see('Additional information');
 
 		// - I click on continue button
-		$I->click('Add to bagsc...');
+		$I->click('Add to bagsc...'); 
 
 		// - I see in next page the text "${price of Step 2 item's price}"
 		$I->waitForText($price_of_product, 10);
