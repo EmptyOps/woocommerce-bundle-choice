@@ -13,7 +13,7 @@ class n_e_installAndSetupAdminSideCest
     	if( !$I->test_allowed_in_this_environment("n_") ) {
             return;
         }
-        
+
     }
 
     // setup using setup wizard and sample data. 
@@ -23,12 +23,6 @@ class n_e_installAndSetupAdminSideCest
     	if( !$I->test_allowed_in_this_environment("n_") ) {
             return;
         }
-
-    	return;	//TODO run this test only if sample data env flag is set 
-
-    	//login to admin panel, should save and maintain cookies so that do not need to login on all admin test. but yeah however during the front end test should flush the admin cookie first.  
-		$I->loginAsAdmin();
-		$I->see( 'Dashboard' );
 
 		// go to the page
 		$I->amOnPage('/wp-admin/admin.php?page=eowbc-configuration');

@@ -14,7 +14,7 @@ class a_c_wordpressWooCommerceCest
     
 	public function homePageWorks(AcceptanceTester $I)
     {
-        if( !$I->test_allowed_in_this_environment("a_") ) {
+        if( !$I->test_allowed_in_this_environment("a_") && !$I->test_allowed_in_this_environment("n_") ) {
             return;
         }
 
@@ -25,7 +25,7 @@ class a_c_wordpressWooCommerceCest
 
     public function wpAdminLoginWorks(AcceptanceTester $I)
     {
-        if( !$I->test_allowed_in_this_environment("a_") ) {
+        if( !$I->test_allowed_in_this_environment("a_") && !$I->test_allowed_in_this_environment("n_") ) {
             return;
         }
 
@@ -41,7 +41,7 @@ class a_c_wordpressWooCommerceCest
 
     public function shopPageWorks(AcceptanceTester $I)
     {
-        if( !$I->test_allowed_in_this_environment("a_") ) {
+        if( !$I->test_allowed_in_this_environment("a_") && !$I->test_allowed_in_this_environment("n_") ) {
             return;
         }
         
