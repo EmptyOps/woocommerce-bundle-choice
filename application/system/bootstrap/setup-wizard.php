@@ -36,7 +36,7 @@ class Setup_Wizard {
 			
 			if(!empty(wbc()->sanitize->get('step'))){
 				
-				if(sanitize_text_field(wbc()->sanitize->get('step'))>3 or sanitize_text_field(wbc()->sanitize->get('step'))<1){ wbc()->sanitize->get('step')=1; }
+				if(sanitize_text_field(wbc()->sanitize->get('step'))>3 or sanitize_text_field(wbc()->sanitize->get('step'))<1){ $_GET["step"]/*wbc()->sanitize->get('step')*/=1; }
 
 				$forms = array('1' =>'basic_config', '2'=>'feature', '3'=>'finalize');
 				$this->step = wbc()->sanitize->get('step');
@@ -104,7 +104,7 @@ class Setup_Wizard {
 			
 			if(!empty(wbc()->sanitize->get('step'))) {
 				
-				if(sanitize_text_field(wbc()->sanitize->get('step'))>3 or sanitize_text_field(wbc()->sanitize->get('step'))<1){ wbc()->sanitize->get('step')=1; }
+				if(sanitize_text_field(wbc()->sanitize->get('step'))>3 or sanitize_text_field(wbc()->sanitize->get('step'))<1){ $_GET["step"]/*wbc()->sanitize->get('step')*/=1; }
 
 				$forms = array('1' =>'basic_config', '2'=>'feature', '3'=>'finalize');
 				$this->step = sanitize_text_field(wbc()->sanitize->get('step'));

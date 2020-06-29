@@ -10,6 +10,10 @@ class n_e_installAndSetupAdminSideCest
     // install
     public function tryToTestInstall(AcceptanceTester $I)
     {
+    	if( !$I->test_allowed_in_this_environment("n_") ) {
+            return;
+        }
+        
     }
 
     // setup using setup wizard and sample data. 
