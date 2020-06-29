@@ -20,12 +20,12 @@ class f_i_step1Cest
 
 		// - I choose filter options and then I check if x  products are found 
 		$I->wait(3);    
-		$I->executeJS("$('#text_slider_price').slider('set rangeValue', 14, 15);");	
+		$I->executeJS("jQuery('#text_slider_price').slider('set rangeValue', 14, 15);");	
 		$I->waitForText('No products were found', 10);
 
-		$I->executeJS("$('#text_slider_price').slider('set rangeValue', 12, 15);");	
-		$I->wait(3);
-
+		$I->executeJS("jQuery('#text_slider_price').slider('set rangeValue', 12, 15);");
+		$I->waitForText('Test diamond 1', 10);  	
+		
 		// - I click on product image of first product from the search results
 		$price_of_product = "12.00";	//TODO make it dynamic 
 		$I->click('//*[@id="main"]/ul/li/a/img');
