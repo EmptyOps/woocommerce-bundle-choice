@@ -33,6 +33,10 @@ class fz_a_o_adminOrderDetailPageCest
 		$I->see('Edit order', 'h1');
 		$I->see('hi000');
 		$I->see('Payment via Direct bank transfer. Customer IP:');
+
+		$I->executeJS('window.scrollTo( 0, 300 );');		
+		$I->wait(3);
+		
 		$I->see('08347408752');
 
 		//TODO check here if merged row appears properly or not 

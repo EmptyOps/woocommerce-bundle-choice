@@ -13,6 +13,10 @@ class a_e_setupWizardCest
 
     public function step1(AcceptanceTester $I) {
 
+    	if( !$I->test_allowed_in_this_environment("a_") ) {
+            return;
+        }
+
 		//login to admin panel, should save and maintain cookies so that do not need to login on all admin test. but yeah however during the front end test should flush the admin cookie first.  
 		$I->loginAsAdmin();
 		$I->see( 'Dashboard' );
@@ -35,6 +39,10 @@ class a_e_setupWizardCest
 	}
 
 	public function step2(AcceptanceTester $I) {
+
+		if( !$I->test_allowed_in_this_environment("a_") ) {
+            return;
+        }
 
 		//login to admin panel, should save and maintain cookies so that do not need to login on all admin test. but yeah however during the front end test should flush the admin cookie first.  
 		$I->loginAsAdmin();
@@ -65,6 +73,10 @@ class a_e_setupWizardCest
 
 	public function step3(AcceptanceTester $I) {
 
+		if( !$I->test_allowed_in_this_environment("a_") ) {
+            return;
+        }
+        
 		//login to admin panel, should save and maintain cookies so that do not need to login on all admin test. but yeah however during the front end test should flush the admin cookie first.  
 		$I->loginAsAdmin();
 		$I->see( 'Dashboard' );

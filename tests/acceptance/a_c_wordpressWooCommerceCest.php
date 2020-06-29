@@ -14,6 +14,10 @@ class a_c_wordpressWooCommerceCest
     
 	public function homePageWorks(AcceptanceTester $I)
     {
+        if( !$I->test_allowed_in_this_environment("a_") ) {
+            return;
+        }
+
     	$I->amOnPage('/');
         // echo $I->grabPageSource();
         $I->see('Just another WordPress site');
@@ -21,6 +25,10 @@ class a_c_wordpressWooCommerceCest
 
     public function wpAdminLoginWorks(AcceptanceTester $I)
     {
+        if( !$I->test_allowed_in_this_environment("a_") ) {
+            return;
+        }
+
         // $I = new AcceptanceTester( $scenario );
         $I->wantTo( 'Check WordPress Admin Login' );
 
@@ -33,6 +41,10 @@ class a_c_wordpressWooCommerceCest
 
     public function shopPageWorks(AcceptanceTester $I)
     {
+        if( !$I->test_allowed_in_this_environment("a_") ) {
+            return;
+        }
+        
         $I->amOnPage('index.php/shop');
         // echo $I->grabPageSource();
         $I->see('Shop');
