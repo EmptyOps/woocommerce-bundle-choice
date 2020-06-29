@@ -22,7 +22,7 @@ class fz_a_o_adminOrderDetailPageCest
 		$I->click('//*[@id="the-list"]/tr[1]/td[1]');	
 
 		// verify 
-		$I->waitForText('Edit order', 10, 'h1');
+		$I->waitForText('Edit order', 10);
 		$I->see($this->price_of_product_step1+$this->price_of_product_step2);
 
 	}

@@ -37,24 +37,31 @@ class Acceptance extends \Codeception\Module
      */
     public function test_allowed_in_this_environment( $test_name_perfix )
     {
-        // echo "called get_test_environment... ";
+        // echo "called test_allowed_in_this_environment... ";
         try {
-            $version_nums = explode(".", PHP_VERSION);
+            $test_environment = $this->get_test_environment();
 
-            if( !isset($version_nums[0]) || $version_nums[0] >= 6 ) {
-                return "WBC_TEST_ENV_default";
+            if( $test_environment == "WBC_TEST_ENV_default" ) {
+                if( $test_name_perfix != "n_" ) {
+                    return true;
+                }
+            } 
+            else if( $test_environment == "WBC_TEST_ENV_with_sample_data" ) {
+                if( $test_name_perfix == "n_" ) {
+                    return true;
+                }
             } 
             else {
-                return "WBC_TEST_ENV_with_sample_data";
+                return false;
             }
         }
         catch(Exception $e) {
             echo "caught message...";
             echo $e->getMessage()."";
-            return null;
+            return false;
         }
 
-        return null;
+        return false;
     }
 
     /**
