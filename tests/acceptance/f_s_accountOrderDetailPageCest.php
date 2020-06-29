@@ -21,16 +21,17 @@ class f_s_accountOrderDetailPageCest
 		$I->amOnPage('/my-account/orders/');	
 		
 		// verify 
-    	$I->see('Billing details');
-		$I->see('Have a coupon?');
-		$I->see('Place order');
+    	$I->see('Orders','h1');
+		$I->see('Status');
+		$I->see('Total');
+		$I->see($this->price_of_product_step1+$this->price_of_product_step2);
 		
 	}
 
 	public function verifyOrderDetails(AcceptanceTester $I, $is_inner_call=false) {
 
 		// go to detail page 
-		$I->click('VIEW', 'a');	
+		$I->click('//*[@id="post-9"]/div[1]/div/div/div/table/tbody/tr[1]/td[5]/a');	//click on latest order link using xPath
 
 		// verify order details 
 		$I->waitForText('Order details', 10, 'h2');
@@ -45,7 +46,7 @@ class f_s_accountOrderDetailPageCest
 
 	}
 
-	function confirmMergedRow(AcceptanceTester $I) {
+	protected function confirmMergedRow(AcceptanceTester $I) {
 		
 		// TODO implement complete check which ensures in single row UI widget the entire item pair is displayed and not in two 
 

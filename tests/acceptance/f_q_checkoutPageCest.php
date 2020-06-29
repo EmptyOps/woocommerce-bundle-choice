@@ -35,11 +35,11 @@ class f_q_checkoutPageCest
 		$I->fillField("billing_first_name", 'hi000');
 		$I->fillField("billing_last_name", 'last');
 		$I->fillField("billing_company", 'Sphere Plugins');
-		$I->fillField("billing_country", 'IN');
+		// $I->fillField("billing_country", 'IN');
 		$I->fillField("billing_address_1", '410');
 		$I->fillField("billing_address_2", 'Utran');
 		$I->fillField("billing_city", 'Surat');
-		$I->fillField("billing_state", 'GJ');
+		// $I->fillField("billing_state", 'GJ');
 		$I->fillField("billing_postcode", '394105');
 		$I->fillField("billing_phone", '8347408752');
 		$I->fillField("billing_email", 'sales@sphereplugins.com');
