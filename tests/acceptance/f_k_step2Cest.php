@@ -15,6 +15,10 @@ class f_k_step2Cest
 
     function categoryPage(AcceptanceTester $I) {
 		
+		//set current url in the session so that this step can continue from there, the current url would be the one that is reached to in last test. 
+		$wbc_main_process_test_curr_url = $I->get_session('wbc_main_process_test_curr_url');
+		echo $I->getCurrentUrl();
+
     	// go to the category page of step 2
     	require_once dirname(__FILE__).'f_i_step1Cest.php';
     	$f_i_step1CestObj = new f_i_step1Cest();

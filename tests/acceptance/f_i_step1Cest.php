@@ -58,6 +58,10 @@ class f_i_step1Cest
 		// check remove action 
 		$this->checkBackRemoveAction($I);
 
+		//set current url in the session so that next step can continue from there. 
+			//TODO note that we need to clean session from the very first test. 
+		$I->set_session('wbc_main_process_test_curr_url', $I->getCurrentUrl());
+
 		return $price_of_product;
 	}
 

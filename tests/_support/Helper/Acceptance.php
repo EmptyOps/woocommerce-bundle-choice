@@ -50,5 +50,50 @@ class Acceptance extends \Codeception\Module
             echo $e->getMessage()."";
         }
     }
+
+    /**
+     * 
+     */
+    public function set_session($key,$val)
+    {
+        echo "called set_session... ".$key." ".$val;
+        try {
+            //we should use standard practice like php session that comes with phpbrowser or something of that sort. but now as a quick resort we are saving it just in the txt file. 
+            $myfile = fopen($key.".txt", "w") or die("Unable to open file!");
+            fwrite($myfile, $val);
+            fclose($myfile);
+        }
+        catch(Exception $e) {
+            echo "caught message...";
+            echo $e->getMessage()."";
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * 
+     */
+    public function get_session($key)
+    {
+        echo "called get_session... ".$key;
+        try {
+            //we should use standard practice like php session that comes with phpbrowser or something of that sort. but now as a quick resort we are saving it just in the txt file. 
+            $myfile = fopen($key.".txt", "r") or die("Unable to open file!");
+            $val = fread($myfile,filesize($key.".txt"));
+            fclose($myfile);
+
+            echo " ".$val;
+            return $val;
+        }
+        catch(Exception $e) {
+            echo "caught message...";
+            echo $e->getMessage()."";
+            return null;
+        }
+
+        return null;
+    }
 	
 }
