@@ -7,7 +7,56 @@ namespace Helper;
 class Acceptance extends \Codeception\Module
 {
 
-	
+	/**
+     * 
+     */
+    public function get_test_environment()
+    {
+        // echo "called get_test_environment... ";
+        try {
+            $version_nums = explode(".", PHP_VERSION);
+
+            if( !isset($version_nums[0]) || $version_nums[0] >= 6 ) {
+                return "WBC_TEST_ENV_default";
+            } 
+            else {
+                return "WBC_TEST_ENV_with_sample_data";
+            }
+        }
+        catch(Exception $e) {
+            echo "caught message...";
+            echo $e->getMessage()."";
+            return null;
+        }
+
+        return null;
+    }
+
+    /**
+     * 
+     */
+    public function test_allowed_in_this_environment( $test_name_perfix )
+    {
+        // echo "called get_test_environment... ";
+        try {
+            $version_nums = explode(".", PHP_VERSION);
+
+            if( !isset($version_nums[0]) || $version_nums[0] >= 6 ) {
+                return "WBC_TEST_ENV_default";
+            } 
+            else {
+                return "WBC_TEST_ENV_with_sample_data";
+            }
+        }
+        catch(Exception $e) {
+            echo "caught message...";
+            echo $e->getMessage()."";
+            return null;
+        }
+
+        return null;
+    }
+
     /**
      * Get current url from WebDriver
      * @return mixed

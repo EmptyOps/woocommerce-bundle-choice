@@ -25,7 +25,7 @@ class f_s_accountOrderDetailPageCest
 		$I->see('Status');
 		$I->see('Total');
 		$I->see($this->price_of_product_step1+$this->price_of_product_step2);
-		
+
 	}
 
 	public function verifyOrderDetails(AcceptanceTester $I, $is_inner_call=false) {
@@ -35,6 +35,11 @@ class f_s_accountOrderDetailPageCest
 
 		// verify order details 
 		$I->waitForText('Order details', 10, 'h2');
+
+		$I->executeJS('window.scrollTo( 0, 300 );');		
+		$I->wait(3);
+
+		$I->see($this->price_of_product_step1+$this->price_of_product_step2);
 		$I->see('hi000');
 		$I->see('Direct bank transfer');
 		$I->see('08347408752');
