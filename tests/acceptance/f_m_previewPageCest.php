@@ -14,16 +14,14 @@ class f_m_previewPageCest
     // {
     // }
 
-    function previewPage(AcceptanceTester $I) {
+    protected function previewPage(AcceptanceTester $I) {
 		
-    	// go to the preview page of step 3
-    	require_once dirname(__FILE__).'f_i_step2Cest.php';
-    	$f_i_step2CestObj = new f_i_step2Cest();
-    	$this->price_of_product_step2 = $f_i_step2CestObj->itemPage($I);
-    	$this->price_of_product_step1 = $f_i_step2CestObj->price_of_product_step1;
+    	//TODO make it dynamic by saving this in session in previous steps and then here get it from session 
+    	$this->price_of_product_step1 = "12.00";
+    	$this->price_of_product_step2 = "15.00";
 
     	// verify 
-    	$I->see($this->price_of_product_step1+$this->price_of_product_step2, 'span');
+    	$I->see($this->price_of_product_step1+$this->price_of_product_step2);
     	$I->see('Add This To Cart');
 
 	}
