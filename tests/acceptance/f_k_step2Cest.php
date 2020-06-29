@@ -36,7 +36,7 @@ class f_k_step2Cest
 		// - I click on product image of first product from the search results
 		$price_of_product = "15.00";	//TODO make it dynamic 
 		$I->click('Test ring 1');	// ('//*[@id="main"]/ul/li/a/img');
-		$I->see('Add to bagsc...');	//Add to bagsc... is the text set on appearance module during admin test
+		$I->waitForText('Add to bag...',10);	//Add to bag... is the text set on appearance module during admin test
 
 		return $price_of_product;
 	}
@@ -48,7 +48,7 @@ class f_k_step2Cest
 		$price_of_product = $this->categoryPage($I);
 
 		// - I see continue button
-		$I->see('Add to bagsc...');
+		$I->see('Add to bag...');
 
 		// with text x 
 		$I->see('150.00');	//market price
@@ -56,7 +56,7 @@ class f_k_step2Cest
 		$I->see('Additional information');
 
 		// - I click on continue button
-		$I->click('Add to bagsc...'); 
+		$I->click('Add to bag...');
 
 		// - I see in next page the text "${price of Step 2 item's price}"
 		$I->waitForText($price_of_product, 10);
