@@ -19,6 +19,7 @@ class f_i_step1Cest
 		$I->waitForText('CHOOSE A', 10);    
 
 		// - I choose filter options and then I check if x  products are found 
+		$I->wait(3);    
 		$I->executeJS("$('#text_slider_price').slider('set rangeValue', 14, 15);");	
 		$I->waitForText('No products were found', 10);
 
