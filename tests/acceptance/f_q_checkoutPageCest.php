@@ -48,7 +48,7 @@ class f_q_checkoutPageCest
 		$I->wait(3);
 
 		// place order
-		$I->click('PLACE ORDER');
+		$I->click('//*[@id="place_order"]');	//('PLACE ORDER');
 
 		// verify if order placed properly on the thank you page
 		$I->waitForText('Order received', 10, 'h1');

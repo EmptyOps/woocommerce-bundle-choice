@@ -12,7 +12,7 @@ class n_j_frontendChecksAndReviewCest
     // {
     // }
 
-    function startWithHomePageButtons(AcceptanceTester $I) {
+    protected function startWithHomePageButtons(AcceptanceTester $I) {
 		
     	// use the existing cept classes for test 
     	require_once dirname(__FILE__).'f_o_cartPageCest.php';
@@ -21,7 +21,7 @@ class n_j_frontendChecksAndReviewCest
 
 	}
 
-	function testStep1(AcceptanceTester $I) {
+	protected function testStep1(AcceptanceTester $I) {
 		
     	// use the existing cept classes for test 
     	require_once 'f_o_cartPageCest.php';
