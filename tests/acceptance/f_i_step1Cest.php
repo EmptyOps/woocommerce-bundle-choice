@@ -29,6 +29,7 @@ class f_i_step1Cest
 		$price_of_product = "12.00";	//TODO make it dynamic 
 		$I->click('//*[@id="main"]/ul/li/a/img');
 		echo $I->grabPageSource();
+		$I->see('Add to bag...');
 		$I->waitForText('Add to bag...', 10);	//Add to bag... is the text set on appearance module during admin test
 
 		return $price_of_product;
