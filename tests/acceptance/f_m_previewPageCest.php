@@ -15,6 +15,10 @@ class f_m_previewPageCest
     // }
 
     public function previewPage(AcceptanceTester $I) {
+
+    	if( !$I->test_allowed_in_this_environment("a_") ) {
+            return;
+        }
 		
     	//TODO make it dynamic by saving this in session in previous steps and then here get it from session 
     	$this->price_of_product_step1 = "12.00";
@@ -37,6 +41,10 @@ class f_m_previewPageCest
 	}
 
 	public function addToCart(AcceptanceTester $I) {
+
+		if( !$I->test_allowed_in_this_environment("a_") ) {
+            return;
+        }
 
 		// $this->previewPage($I);
 

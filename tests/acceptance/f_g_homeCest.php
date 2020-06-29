@@ -13,6 +13,10 @@ class f_g_homeCest
 
     protected function configureButtonPositionForHome(AcceptanceTester $I) {
 
+        if( !$I->test_allowed_in_this_environment("a_") ) {
+            return;
+        }
+
         //login to admin panel, assumed from the last tests since the webdriver maintains previous session. 
 
         /* buttons tab */
@@ -43,6 +47,10 @@ class f_g_homeCest
 
     public function testChoiceButtonWidgetOnHome(AcceptanceTester $I) {
 		
+        if( !$I->test_allowed_in_this_environment("a_") ) {
+            return;
+        }
+
         $this->configureButtonPositionForHome($I);
 
     	// go to the home page
@@ -76,6 +84,10 @@ class f_g_homeCest
 	}
 
     public function testChoiceButtonWidgetBasedOnShortcode(AcceptanceTester $I) {
+        
+        if( !$I->test_allowed_in_this_environment("a_") ) {
+            return;
+        }
         
         // TODO
 

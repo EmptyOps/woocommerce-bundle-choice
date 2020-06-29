@@ -13,6 +13,10 @@ class f_i_step1Cest
 
     protected function categoryPage(AcceptanceTester $I) {
 		
+		if( !$I->test_allowed_in_this_environment("a_") ) {
+            return;
+        }
+
     	// go to the category page page
 		$I->amOnPage('/');	
 		$I->click('Start with Diamond');
@@ -35,6 +39,10 @@ class f_i_step1Cest
 
 	public function itemPage(AcceptanceTester $I) {
 		
+		if( !$I->test_allowed_in_this_environment("a_") ) {
+            return;
+        }
+
 		// - I choose filter options and then I check if x  products are found
 		// - I click on product image of first product from the search results
 		$price_of_product = $this->categoryPage($I);
@@ -90,6 +98,10 @@ class f_i_step1Cest
 	// also do here the product not found test here and check if that Oooops error message and error reporting options shows or not
 	function checkProductNotFoundDueToMissingMapping(AcceptanceTester $I) {
 		
+		if( !$I->test_allowed_in_this_environment("a_") ) {
+            return;
+        }
+        
 		return;	//TODO implement it later. for now the manual testing is done and given priority to other test automations so do this later as soon as we get the chance. 
 
 	}

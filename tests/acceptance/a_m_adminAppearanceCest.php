@@ -12,10 +12,19 @@ class a_m_adminAppearanceCest
     // }
 
     public function sampleLandingPageStyling(AcceptanceTester $I) {
+
+    	if( !$I->test_allowed_in_this_environment("a_") ) {
+            return;
+        }
+
 		//TODO write this test when the styling feature is implemented for sample landing page
 	}
 
     public function buttonsWidgetStyling(AcceptanceTester $I) {
+
+    	if( !$I->test_allowed_in_this_environment("a_") ) {
+            return;
+        }
 
 		//login to admin panel, should save and maintain cookies so that do not need to login on all admin test. but yeah however during the front end test should flush the admin cookie first.  
 		$I->loginAsAdmin();
@@ -49,6 +58,10 @@ class a_m_adminAppearanceCest
 	}
 
 	public function breadcrumbWidgetStyling(AcceptanceTester $I) {
+
+		if( !$I->test_allowed_in_this_environment("a_") ) {
+            return;
+        }
 
 		//login to admin panel, should save and maintain cookies so that do not need to login on all admin test. but yeah however during the front end test should flush the admin cookie first.  
 		$I->loginAsAdmin();
@@ -90,6 +103,10 @@ class a_m_adminAppearanceCest
 
 	public function filterWidgetStyling(AcceptanceTester $I) {
 
+		if( !$I->test_allowed_in_this_environment("a_") ) {
+            return;
+        }
+
 		//login to admin panel, should save and maintain cookies so that do not need to login on all admin test. but yeah however during the front end test should flush the admin cookie first.  
 		$I->loginAsAdmin();
 		$I->see( 'Dashboard' );
@@ -126,6 +143,10 @@ class a_m_adminAppearanceCest
 
 	public function productPageStyling(AcceptanceTester $I) {
 
+		if( !$I->test_allowed_in_this_environment("a_") ) {
+            return;
+        }
+        
 		//login to admin panel, should save and maintain cookies so that do not need to login on all admin test. but yeah however during the front end test should flush the admin cookie first.  
 		$I->loginAsAdmin();
 		$I->see( 'Dashboard' );

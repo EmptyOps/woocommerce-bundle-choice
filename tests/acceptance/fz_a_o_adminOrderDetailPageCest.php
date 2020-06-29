@@ -36,8 +36,8 @@ class fz_a_o_adminOrderDetailPageCest
 
 		$I->executeJS('window.scrollTo( 0, 300 );');		
 		$I->wait(3);
-		
-		$I->see('08347408752');
+
+		$I->see('8347408752');
 
 		//TODO check here if merged row appears properly or not 
 		if( !$is_inner_call ) { 

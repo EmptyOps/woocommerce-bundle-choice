@@ -43,6 +43,10 @@ class f_k_step2Cest
 
 	public function itemPage(AcceptanceTester $I) {
 		
+		if( !$I->test_allowed_in_this_environment("a_") ) {
+            return;
+        }
+        
 		// - I choose filter options and then I check if x  products are found
 		// - I click on product image of first product from the search results
 		$price_of_product = $this->categoryPage($I);

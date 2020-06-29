@@ -13,6 +13,10 @@ class a_i_adminFiltersCest
 
 	public function filterGeneralConfigurations(AcceptanceTester $I) {
 
+		if( !$I->test_allowed_in_this_environment("a_") ) {
+            return;
+        }
+
 		//login to admin panel, should save and maintain cookies so that do not need to login on all admin test. but yeah however during the front end test should flush the admin cookie first.  
 		$I->loginAsAdmin();
 		$I->see( 'Dashboard' );
@@ -39,6 +43,10 @@ class a_i_adminFiltersCest
 
 	public function alternateFilterWidgets(AcceptanceTester $I) {
 
+		if( !$I->test_allowed_in_this_environment("a_") ) {
+            return;
+        }
+
 		//login to admin panel, should save and maintain cookies so that do not need to login on all admin test. but yeah however during the front end test should flush the admin cookie first.  
 		$I->loginAsAdmin();
 		$I->see( 'Dashboard' );
@@ -63,6 +71,10 @@ class a_i_adminFiltersCest
 	}
 
 	public function firstAndSecondCategoryFilterConfigurations(AcceptanceTester $I) {
+
+		if( !$I->test_allowed_in_this_environment("a_") ) {
+            return;
+        }
 
 		//login to admin panel, should save and maintain cookies so that do not need to login on all admin test. but yeah however during the front end test should flush the admin cookie first.  
 		$I->loginAsAdmin();
@@ -122,6 +134,10 @@ class a_i_adminFiltersCest
 
 	public function deleteFirstAndSecondCategoryFilterConfigurations(AcceptanceTester $I) {
 
+		if( !$I->test_allowed_in_this_environment("a_") ) {
+            return;
+        }
+        
 		// //login to admin panel, should save and maintain cookies so that do not need to login on all admin test. but yeah however during the front end test should flush the admin cookie first.  
 		// $I->loginAsAdmin();
 		// $I->see( 'Dashboard' );
