@@ -19,7 +19,6 @@ class f_i_step1Cest
 		$I->waitForText('CHOOSE A', 10);    
 
 		// - I choose filter options and then I check if x  products are found 
-		$I->wait(3);    
 		$I->executeJS("jQuery('#text_slider_price').slider('set rangeValue', 14, 15);");	
 		$I->waitForText('No products were found', 10);
 
@@ -29,6 +28,7 @@ class f_i_step1Cest
 		// - I click on product image of first product from the search results
 		$price_of_product = "12.00";	//TODO make it dynamic 
 		$I->click('//*[@id="main"]/ul/li/a/img');
+		echo $I->grabPageSource();
 		$I->waitForText('Add to bag...', 10);	//Add to bag... is the text set on appearance module during admin test
 
 		return $price_of_product;
