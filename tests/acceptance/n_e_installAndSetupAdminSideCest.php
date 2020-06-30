@@ -24,6 +24,8 @@ class n_e_installAndSetupAdminSideCest
             return;
         }
 
+        instead here add/prepare the sample data test class and call that from here  
+
 		// go to the page
 		$I->amOnPage('/wp-admin/admin.php?page=eowbc-configuration');
 		
@@ -33,27 +35,42 @@ class n_e_installAndSetupAdminSideCest
 		// start sample data insert process  
 		$I->click('Click here for automated configuration and setup');
 
-		// confirm if saved properly or not
+		// step 1
 		$I->reloadPage();	//reload page
 		$I->click('Buttons');
 		$I->see('Custom landing page');	//that is the position option selected
+
+		// step 2
+
+		// step 3
+
     }
 
     // try alternate widgets 
-    public function tryToTestAlternateBreadcrumbWidgets(AcceptanceTester $I)
+    public function tryToTestAlternateBreadcrumbWidgets(AcceptanceTester $I, $is_inner_call=false)
     {
     	if( !$I->test_allowed_in_this_environment("n_") ) {
             return;
+        }
+
+        // intended to call this function from front checks classes only
+        if( !$is_inner_call ) {
+        	return;
         }
 
     	return;	//TODO run this test only if sample data env flag is set 
     }
 
 	// try alternate widgets 
-    public function tryToTestAlternateFilterWidgets(AcceptanceTester $I)
+    public function tryToTestAlternateFilterWidgets(AcceptanceTester $I, $is_inner_call=false)
     {
     	if( !$I->test_allowed_in_this_environment("n_") ) {
             return;
+        }
+
+		// intended to call this function from front checks classes only
+        if( !$is_inner_call ) {
+        	return;
         }
 
     	return;	//TODO run this test only if sample data env flag is set 

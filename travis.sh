@@ -13,7 +13,10 @@ install-wordpress() {
 	# git clone --depth=1 --branch="$WP_VERSION" https://github.com/WordPress/wordpress-develop "$WP_DEVELOP_DIR"
 	# cp -R wordpress-dev-light-php-only-0.1/* "$WP_DEVELOP_DIR/"
 
-	#from local copy
+	#
+	# copy wordpress from local copy. 
+	#
+	# here based on different testing environments defined for WBC we may need to copy different wordpress which are configured specifically for the test environment's requirement 
 	cp -R wordpress-from-wordpress.org-download/wordpress/* "$WP_DEVELOP_DIR/"
 
 	cd "$WP_DEVELOP_DIR"
