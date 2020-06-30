@@ -128,7 +128,7 @@ class a_i_adminFiltersCest
 
 			// confirm if saved properly or not
 			$I->reloadPage();	//reload page
-			$I->click( $name.' Page Filter Configuration');
+			$I->click('//*[@id="eowbc_filters"]/div[1]/a['.$xpath_part.']');	// ( $name.' Page Filter Configuration');
 			$I->see('Test '.$prefix.' filter');	
 
 		}
