@@ -366,7 +366,7 @@ if ( ! class_exists( 'Filters' ) ) {
 					)
 				),							
 				'd_fconfig'=>array(
-						'label'=>($inventory_type==='jewelery'?"Diamond":"First")." Page Filter Configuration",
+						'label'=>($inventory_type==='jewelry'?"Diamond":"First")." Page Filter Configuration",
 						'form'=>array( $table["id"].'_bulk'=>array(
 								// 'label'=>'Bulk Actions',
 								'type'=>'select',
@@ -615,7 +615,7 @@ if ( ! class_exists( 'Filters' ) ) {
 						)
 					),
 				's_fconfig'=>array(
-						'label'=>($inventory_type==='jewelery'?"Settings":"Second")." Page Filter Configuration",
+						'label'=>($inventory_type==='jewelry'?"Settings":"Second")." Page Filter Configuration",
 						'form'=>array( $sett_table["id"].'_bulk'=>array(
 								// 'label'=>'Bulk Actions',
 								'type'=>'select',

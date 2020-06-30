@@ -323,7 +323,7 @@ Yes, it is.
 = 0.5.6 (Sep 26, 2019) =
   ** Error-Log with system info ** adding error log feature to send log with contact details and plugin details.
 = 0.5.5 (Sep 26, 2019) =
-  ** Pre-intalled inventory **  adding pre-install jewelery inventory to click and run for testing.
+  ** Pre-intalled inventory **  adding pre-install jewelry inventory to click and run for testing.
 = 0.5.3 (Sep 6, 2019) =
   ** Adding language packages ** adding chinees , spenish and arabic language packages to the plugin's directory
 = 0.5.2 (Sep 5, 2019)=

@@ -29,7 +29,7 @@ class Setting_status {
 								'label'=>'Inventory Type',
 								'type'=>'select',
 								'value'=>wbc()->options->get_option('setting_staus','inventory_type'),
-								'options'=>array('jewelery'=>'Jewelery','clothing'=>'Clothing','home_decor'=>'Home Decor','others'=>'Others'),
+								'options'=>array('jewelry'=>'Jewelery','clothing'=>'Clothing','home_decor'=>'Home Decor','others'=>'Others'),
 								'class'=>array('fluid'),
 								'size_class'=>array('eight','wide'),
 								'inline'=>true,

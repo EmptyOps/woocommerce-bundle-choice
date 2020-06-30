@@ -82,30 +82,28 @@ class a_i_adminFiltersCest
 
 		// go to the page
 		$I->amOnPage('/wp-admin/admin.php?page=eowbc-filters');
+		echo $I->grabPageSource();
 
 		for($cat_index=0; $cat_index<=1; $cat_index++) {
 
 			$name = "";
 			$cat_name = "";
 			$prefix = "";
-			$xpath_part = "";
 			if( $cat_index == 0 ) {
 				$name = "Diamond";
 				$cat_name = "Diamond";
 				$prefix = "d";
-				$xpath_part = "3";
 			}
 			else {
 				$name = "Settings";
 				$cat_name = "Setting";
 				$prefix = "s";
-				$xpath_part = "4";
 			}
 
 			/* Navigations Steps( Breadcrumb ) tab */
 			// go to the tab
 			// $I->click('Filters');
-			$I->click('//*[@id="eowbc_filters"]/div[1]/a['.$xpath_part.']');	// ( $name.' Page Filter Configuration');
+			$I->click( $name.' Page Filter Configuration');
 			// $I->see("Add ".$cat_name." Shape's filter");	//use this test and comment below one once we have the label/titles fixed on this page 
 			$I->see('Is it advanced filter?');	
 
@@ -128,8 +126,7 @@ class a_i_adminFiltersCest
 
 			// confirm if saved properly or not
 			$I->reloadPage();	//reload page
-			$I->click('//*[@id="eowbc_filters"]/div[1]/a['.$xpath_part.']');	// ( $name.' Page Filter Configuration');
-			echo $I->grabPageSource();
+			$I->click( $name.' Page Filter Configuration');
 			$I->see('Test '.$prefix.' filter');	
 
 		}

@@ -105,7 +105,7 @@ class a_g_adminConfigurationCest
 
 	// 	$_POST['_wpnonce'] = wp_create_nonce('eowbc_configuration');
 	// 	$_POST['resolver'] = 'eowbc_configuration';
-	// 	$_POST['config_business_type'] = 'jewelery';
+	// 	$_POST['config_business_type'] = 'jewelry';
 	// 	$_POST['config_buttons_page'] = '1';
 	// 	$_POST['config_enable_make_pair'] = 'enable_make_pair';
 	// 	$_POST['config_label_make_pair'] = 'Make Pair';
@@ -120,7 +120,7 @@ class a_g_adminConfigurationCest
 	// 	$_POST['config_pair_maker_upper_card'] = 'pair_maker_upper_card';
 
 	// 	$expected = serialize(array(
-	// 		"business_type"=>"jewelery",
+	// 		"business_type"=>"jewelry",
 	// 		"buttons_page"=>"1",
 	// 		"enable_make_pair"=>"enable_make_pair",
 	// 		"label_make_pair"=>"Make Pair",

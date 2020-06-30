@@ -34,7 +34,7 @@ class Setting_status {
 								'type'=>'select',
 								'value'=>wbc()->options->get_option('setting_staus','inventory_type'),
 								'sanitize'=>'sanitize_text_field',
-								'options'=>array('jewelery'=>'Jewelery','clothing'=>'Clothing','home_decor'=>'Home Decor','others'=>'Others'),
+								'options'=>array('jewelry'=>'Jewelery','clothing'=>'Clothing','home_decor'=>'Home Decor','others'=>'Others'),
 								'class'=>array('fluid'),
 								'size_class'=>array('eight','wide'),
 								'inline'=>true,
