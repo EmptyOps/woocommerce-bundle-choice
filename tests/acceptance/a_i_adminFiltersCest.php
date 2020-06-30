@@ -129,6 +129,7 @@ class a_i_adminFiltersCest
 			// confirm if saved properly or not
 			$I->reloadPage();	//reload page
 			$I->click('//*[@id="eowbc_filters"]/div[1]/a['.$xpath_part.']');	// ( $name.' Page Filter Configuration');
+			echo $I->grabPageSource();
 			$I->see('Test '.$prefix.' filter');	
 
 		}
