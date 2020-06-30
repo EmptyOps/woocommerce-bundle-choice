@@ -56,7 +56,7 @@ box-shadow: none;">
 <script>
 	jQuery(document).ready(function(){
 		jQuery('.ui.dropdown').dropdown();
-		jQuery('[name="eo_wbc_inventory_type"]').parent().dropdown('set selected','<?php echo wbc()->options->get_option('eo_wbc','inventory_type', ''); ?>');    
+		jQuery('[name="eo_wbc_inventory_type"]').parent().dropdown('set selected','<?php echo wbc()->options->get_option('setting_status_setting_status_setting','inventory_type', ''); ?>');    
 		jQuery('.ui.checkbox').checkbox();
 
 		jQuery("#create_product").on('click',function(e){

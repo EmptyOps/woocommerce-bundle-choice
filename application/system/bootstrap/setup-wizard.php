@@ -47,7 +47,7 @@ class Setup_Wizard {
 		}
 
 		if( $this->step == 2 ) {
-			$feature_option = unserialize( wbc()->options->get_option('eo_wbc','feature_option',serialize(array())) );	//unserialize(get_option('eo_wbc_feature_option', serialize(array())) );
+			$feature_option = unserialize( wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())) );	//unserialize(get_option('eo_wbc_feature_option', serialize(array())) );
 		}
 
   //       ob_start();        
@@ -115,7 +115,7 @@ class Setup_Wizard {
 		}
 
 		if( $this->step == 2 ) {
-			$feature_option = unserialize( wbc()->options->get_option('eo_wbc','feature_option',serialize(array())) );	//unserialize(get_option('eo_wbc_feature_option', serialize(array())) );
+			$feature_option = unserialize( wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())) );	//unserialize(get_option('eo_wbc_feature_option', serialize(array())) );
 		}
 
 		//06-04-2020: hiren turned off full screen mode enable in future when decided 
@@ -153,7 +153,7 @@ class Setup_Wizard {
 
 					if(!empty($feature_option)){
 						//update_option('eo_wbc_feature_option', serialize($feature_option));
-						wbc()->options->update_option('eo_wbc','feature_option', serialize($feature_option));
+						wbc()->options->update_option('setting_status_setting_status_setting','features', serialize($feature_option));
 					}
 
 					break;
@@ -164,7 +164,7 @@ class Setup_Wizard {
 					//basic_config					
 					if(!empty(wbc()->sanitize->get('eo_wbc_inventory_type'))) {
 						//update_option( 'eo_wbc_inventory_type',sanitize_text_field($_GET['eo_wbc_inventory_type']));
-						wbc()->options->update_option('eo_wbc','inventory_type',wbc()->sanitize->get('eo_wbc_inventory_type'));
+						wbc()->options->update_option('setting_status_setting_status_setting','inventory_type',wbc()->sanitize->get('eo_wbc_inventory_type'));
 					}					
 			}
 		}

@@ -32,7 +32,7 @@ class Setting_status {
 							'inventory_type'=>array(
 								'label'=>'Inventory Type',
 								'type'=>'select',
-								'value'=>wbc()->options->get_option('setting_staus','inventory_type'),
+								'value'=> '',	// wbc()->options->get_option('setting_staus','inventory_type'),
 								'sanitize'=>'sanitize_text_field',
 								'options'=>array('jewelry'=>'Jewelery','clothing'=>'Clothing','home_decor'=>'Home Decor','others'=>'Others'),
 								'class'=>array('fluid'),
@@ -43,7 +43,7 @@ class Setting_status {
 								'label'=>'Choose features',
 								'type'=>'checkbox',
 								'sanitize'=>'sanitize_text_field',
-								'value'=>unserialize(wbc()->options->get_option('setting_staus','features',serialize(array()))),
+								'value'=>unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array()))),
 								'options'=>array(
 									'ring_builder'=>'Ring Builder',
 									'pair_maker'=>'Pair Maker',
