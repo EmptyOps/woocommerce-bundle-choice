@@ -22,6 +22,8 @@ services:
 before_install:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS wordpress_test;'  
   - mysql -u root --default-character-set=utf8 wordpress_test < wordpress-from-wordpress.org-download/wordpress/db.sql
+  # - mysql -e 'CREATE DATABASE IF NOT EXISTS WBC_TEST_ENV_with_sample_data;'  
+  # - mysql -u root --default-character-set=utf8 WBC_TEST_ENV_with_sample_data < wordpress-from-wordpress.org-download/WBC_TEST_ENV_with_sample_data/wordpress/db.sql
 
 cache:
   directories:

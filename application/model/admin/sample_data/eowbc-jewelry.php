@@ -11038,10 +11038,10 @@ class Eowbc_Jewelry {
                         'input'=>"icon_text",
                         'column_width'=> "100",
                         'order'=>"0",
-                        'template'='fc1',
-	                    'help'=0,
-	                    'help_text'='',
-	                    'enabled'=1
+                        'template'=>'fc1',
+	                    'help'=>0,
+	                    'help_text'=>'',
+	                    'enabled'=>1
                     );
 			}
 			if(!empty($__att__['eo_carat_attr'])){
@@ -11054,10 +11054,10 @@ class Eowbc_Jewelry {
                         'input'=>"numeric_slider",
                         'column_width'=> "50",
                         'order'=>"1",
-                        'template'='fc1',
-	                    'help'=0,
-	                    'help_text'='',
-	                    'enabled'=1
+                        'template'=>'fc1',
+	                    'help'=>0,
+	                    'help_text'=>'',
+	                    'enabled'=>1
                     );
 			}			
 			if(!empty($__att__['eo_clarity_attr'])){
@@ -11070,10 +11070,10 @@ class Eowbc_Jewelry {
                     'input'=>"text_slider",
                     'column_width'=> "50",
                     'order'=>"2",
-                    'template'='fc1',
-                    'help'=0,
-                    'help_text'='',
-                    'enabled'=1
+                    'template'=>'fc1',
+                    'help'=>0,
+                    'help_text'=>'',
+                    'enabled'=>1
 
                 );
 			}
@@ -11087,10 +11087,10 @@ class Eowbc_Jewelry {
                     'input'=>"text_slider",
                     'column_width'=> "50",
                     'order'=>"3",
-                    'template'='fc1',
-                    'help'=0,
-                    'help_text'='',
-                    'enabled'=1
+                    'template'=>'fc1',
+                    'help'=>0,
+                    'help_text'=>'',
+                    'enabled'=>1
                 );
 			}
 			if(!empty($__att__['eo_polish_attr'])){
@@ -11103,10 +11103,10 @@ class Eowbc_Jewelry {
 	                'input'=>"text_slider",
 	                'column_width'=> "50",
 	                'order'=>"4",
-	                'template'='fc1',
-                    'help'=0,
-                    'help_text'='',
-                    'enabled'=1
+	                'template'=>'fc1',
+                    'help'=>0,
+                    'help_text'=>'',
+                    'enabled'=>1
 	            );
 			}
 			if(!empty($__att__['eo_symmertry_attr'])){
@@ -11119,10 +11119,10 @@ class Eowbc_Jewelry {
                     'input'=>"text_slider",
                     'column_width'=> "50",
                     'order'=>"5",
-                    'template'='fc1',
-                    'help'=0,
-                    'help_text'='',
-                    'enabled'=1
+                    'template'=>'fc1',
+                    'help'=>0,
+                    'help_text'=>'',
+                    'enabled'=>1
                 );
 			}
 			if(!empty($__att__['eo_fluorescence_attr'])){
@@ -11135,10 +11135,10 @@ class Eowbc_Jewelry {
                     'input'=>"text_slider",
                     'column_width'=> "50",
                     'order'=>"6",
-                    'template'='fc1',
-                    'help'=0,
-                    'help_text'='',
-                    'enabled'=1
+                    'template'=>'fc1',
+                    'help'=>0,
+                    'help_text'=>'',
+                    'enabled'=>1
                 );
 			}
 			if(!empty($__att__['eo_depth_attr'])){
@@ -11151,10 +11151,10 @@ class Eowbc_Jewelry {
                     'input'=>"numeric_slider",
                     'column_width'=> "50",
                     'order'=>"7",
-                    'template'='fc1',
-                    'help'=0,
-                    'help_text'='',
-                    'enabled'=1
+                    'template'=>'fc1',
+                    'help'=>0,
+                    'help_text'=>'',
+                    'enabled'=>1
                 );
 			}
 			if(!empty($__att__['eo_table_attr'])){
@@ -11167,10 +11167,10 @@ class Eowbc_Jewelry {
                     'input'=>"numeric_slider",
                     'column_width'=> "50",
                     'order'=>"8",
-                    'template'='fc1',
-                    'help'=0,
-                    'help_text'='',
-                    'enabled'=1
+                    'template'=>'fc1',
+                    'help'=>0,
+                    'help_text'=>'',
+                    'enabled'=>1
                 );
 			}
 			if(!empty($__att__['eo_grading_report_attr'])){
@@ -11183,10 +11183,10 @@ class Eowbc_Jewelry {
                     'input'=>"checkbox",
                     'column_width'=> "50",
                     'order'=>"9",
-                    'template'='fc1',
-                    'help'=0,
-                    'help_text'='',
-                    'enabled'=1
+                    'template'=>'fc1',
+                    'help'=>0,
+                    'help_text'=>'',
+                    'enabled'=>1
                 );
 			}
 
@@ -11201,10 +11201,10 @@ class Eowbc_Jewelry {
                     'input'=>"icon_text",
                     'column_width'=> "100",
                     'order'=>"0",
-                    'template'='sc1',
-                    'help'=0,
-                    'help_text'='',
-                    'enabled'=1
+                    'template'=>'sc1',
+                    'help'=>0,
+                    'help_text'=>'',
+                    'enabled'=>1
                 );
 			}
 			if(!empty($__cat__['eo_ring_style_cat'])){
@@ -11217,10 +11217,10 @@ class Eowbc_Jewelry {
                     'input'=>"icon_text",
                     'column_width'=> "50",
                     'order'=>"1",
-                    'template'='sc1',
-                    'help'=0,
-                    'help_text'='',
-                    'enabled'=1
+                    'template'=>'sc1',
+                    'help'=>0,
+                    'help_text'=>'',
+                    'enabled'=>1
                 );
 			}
 			if(!empty($__cat__['eo_metal_cat'])){
@@ -11233,10 +11233,10 @@ class Eowbc_Jewelry {
                     'input'=>"icon",
                     'column_width'=> "50",
                     'order'=>"2",
-                    'template'='sc1',
-                    'help'=0,
-                    'help_text'='',
-                    'enabled'=1
+                    'template'=>'sc1',
+                    'help'=>0,
+                    'help_text'=>'',
+                    'enabled'=>1
                 );
 			}
 
@@ -11297,9 +11297,9 @@ class Eowbc_Jewelry {
 
 		                unset($_POST['filter_template']);
 
-		                unset($_POST[$prefix.'_add_help']=$filter['help']);
-		                unset($_POST[$prefix.'_add_help_text']=$filter['help_text']);
-		                unset($_POST[$prefix.'_add_enabled']=$filter['enabled']);
+		                unset($_POST[$prefix.'_add_help']);
+		                unset($_POST[$prefix.'_add_help_text']);
+		                unset($_POST[$prefix.'_add_enabled']);
 
 	        		// }
 	        	}
