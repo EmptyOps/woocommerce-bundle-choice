@@ -24,8 +24,9 @@ class n_e_installAndSetupAdminSideCest
             return;
         }
 
-        instead here add/prepare the sample data test class and call that from here  
+        // TODO instead here add/prepare the sample data cest class and call that from here  
 
+        // HOLD FOR REMOVAL
 		// go to the page
 		$I->amOnPage('/wp-admin/admin.php?page=eowbc-configuration');
 		
@@ -43,6 +44,8 @@ class n_e_installAndSetupAdminSideCest
 		// step 2
 
 		// step 3
+
+		// END HOLD FOR REMOVAL
 
     }
 
