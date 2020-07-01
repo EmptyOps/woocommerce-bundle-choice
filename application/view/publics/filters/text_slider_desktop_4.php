@@ -14,12 +14,12 @@
 			</span>
 		</div>
 
-		<div style="display: inline-block;" class="field twelve ui wide">
+		<div style="display: inline-block;" class="ui twelve wide field">
 			<div class="ui range slider text_slider" id="text_slider_<?php echo $filter['slug'] ?>" data-min="<?php echo $filter['min_value']['name']; ?>" data-max="<?php echo $filter['max_value']['name']; ?>" data-slug="<?php echo $filter['slug'] ?>" data-sep="<?php echo $filter['seprator']; ?>" style="padding-bottom: 0px !important"></div>
 			<div class="ui tiny form" style="padding:0px 6%;">
 			  <div class="three fields">
 			    <div class="field">	      
-			      <input style="font-size: 13px; height: 24px; width: 60px; -webkit-appearance: none;" value="<?php echo ($filter['seprator']=='.'?$filter['min_value']['name']:str_replace('.',',',$filter['min_value']['name'])); ?>" type="text" class="text_slider_<?php echo $filter['slug'] ?> aligned left" name="text_min_<?php echo $filter['slug'] ?>">
+			      <input style="font-size: 13px; height: 24px; width: 60px; -webkit-appearance: none;" value="<?php echo ($filter['seprator']=='.'?$filter['min_value']['name']:str_replace('.',',',$filter['min_value']['name'])); ?>" type="text" class="text_slider_<?php echo $filter['slug'] ?> aligned left" name="text_min_<?php echo $filter['slug'] ?>" data-reset="reset_slider(new Event('click'),'<?php echo $filter['slug'] ?>','<?php echo $filter['min_value']['name']; ?>','<?php echo $filter['max_value']['name']; ?>')">
 			    </div>
 			    <div class="field"></div>
 			    <div class="field">	      

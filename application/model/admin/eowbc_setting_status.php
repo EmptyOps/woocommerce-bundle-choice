@@ -64,7 +64,7 @@ class Eowbc_Setting_Status {
 	public function save( $form_definition ) {
 		
 		wbc()->sanitize->clean($form_definition);
-
+		wbc()->validate->check($form_definition);
 		$res = array();
 		$res["type"] = "success";
 
@@ -99,9 +99,9 @@ class Eowbc_Setting_Status {
 			    		$_POST[$fk] = serialize($checbox_status);		    		
 			    	}
 
-				    if( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) && isset($_POST[$fk]) ) {
+				    if( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) && (isset($_POST[$fk]) || $fv["type"]=='checkbox') ) {
 				    	
-				    	wbc()->options->update_option('setting_status_'.$key,$fk,(empty($_POST[$fk])? $_POST[$fk]: sanitize_text_field( $_POST[$fk] ) ) );	
+				    	wbc()->options->update_option('setting_status_'.$key,$fk,(isset($_POST[$fk])? sanitize_text_field( $_POST[$fk] ):'' ));	
 				    }
 				}
 		    }

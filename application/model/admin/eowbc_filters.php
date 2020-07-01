@@ -91,11 +91,28 @@ class Eowbc_Filters {
 	    return $form_definition;
 	}
 
+	public function switch_template_4(){
+		wbc()->options->update_option('appearance_filter','header_font','ZapfHumanist601BT-Roman');
+		//wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_active','#f7f7f7');	
+		//wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_inactive','#ffffff');
+		wbc()->options->update_option('appearance_filters','slider_track_backcolor_active',sanitize_hex_color('#3e9f8e'));
+		wbc()->options->update_option('appearance_filters','slider_nodes_backcolor_active',sanitize_hex_color('#3e9f8e'));
+	}
+
+	public function switch_template_3(){
+
+		wbc()->options->update_option('appearance_filter','header_font','Avenir');
+		//wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_active','#dde5ed');
+		//wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_inactive','#ffffff');
+		wbc()->options->update_option('appearance_filters','slider_track_backcolor_active',sanitize_hex_color('#9bb8d3'));
+		wbc()->options->update_option('appearance_filters','slider_nodes_backcolor_active',sanitize_hex_color('#9bb8d3'));		
+	}
+
 
 	public function save( $form_definition, $is_auto_insert_for_template=false ) {
 		
 		wbc()->sanitize->clean($form_definition);
-
+		wbc()->validate->check($form_definition);
 		$res = array();
 		$res["type"] = "success";
 	    $res["msg"] = "";
@@ -108,6 +125,11 @@ class Eowbc_Filters {
 		if($saved_tab_key == 'altr_filt_widgts') {
 						
 			if(!empty($_POST['first_category_altr_filt_widgts']) and $_POST['first_category_altr_filt_widgts']!=wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts') ) {
+				if($_POST['first_category_altr_filt_widgts']=='fc4'){
+					$this->switch_template_4();
+				} elseif ($_POST['first_category_altr_filt_widgts']=='fc3') {
+					$this->switch_template_3();
+				}
 
 				$filter_data = unserialize(wbc()->options->get_option_group('filters_d_fconfig',"a:0:{}"));				
 				if(!empty($filter_data)){
@@ -141,6 +163,12 @@ class Eowbc_Filters {
 			}
 
 			if(!empty($_POST['second_category_altr_filt_widgts']) and $_POST['second_category_altr_filt_widgts']!=wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts') ) {
+
+				if($_POST['second_category_altr_filt_widgts']=='sc4'){
+					$this->switch_template_4();
+				} elseif ($_POST['second_category_altr_filt_widgts']=='sc3') {
+					$this->switch_template_3();
+				}
 
 				$filter_data = unserialize(wbc()->options->get_option_group('filters_s_fconfig',"a:0:{}"));
 				if(!empty($filter_data)){
@@ -191,7 +219,7 @@ class Eowbc_Filters {
 			    //may need to check field type here and read accordingly only
 			    //only for those for which POST is set
 
-			    if( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) && isset($_POST[$fk]) ) {
+			    if( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) && ( isset($_POST[$fk]) || $fv["type"]=='checkbox'  ) ) {
 			    	//skip fields where applicable
 					if( in_array($fk, $skip_fileds) ) {
 		    			continue;
@@ -217,7 +245,8 @@ class Eowbc_Filters {
 			    		}
 			    	}
 			    	else {			    		
-			    		wbc()->options->update_option('filters_'.$key,$fk,(empty($_POST[$fk])? $_POST[$fk]: sanitize_text_field( $_POST[$fk] ) ) );
+			    		
+			    		wbc()->options->update_option('filters_'.$key,$fk,(isset($_POST[$fk])? sanitize_text_field( $_POST[$fk] ):'' ) );
 			    	}
 			    }
 			}
@@ -225,24 +254,27 @@ class Eowbc_Filters {
 			if( $is_table_save ) {
 
 				$filter_data = unserialize(wbc()->options->get_option_group('filters_'.$key,"a:0:{}"));
-		        
-		        foreach ($filter_data as $fdkey=>$item) {
-		            
-		            if ($item[$key.'_filter']==$table_data[$key."_filter"] and $item['filter_template']==$table_data['filter_template']) { 
-		            	if( $is_auto_insert_for_template ) {
-			            	$filter_data[$fdkey][$key.'_add_enabled'] = 1;
-			                $res["type"] = "error";
-			    			$res["msg"] = eowbc_lang('Filter Already Exists and activated');
-			    			wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data) );
-			                return $res;
-		            	}
-		            	else {
-			                $res["type"] = "error";
-			    			$res["msg"] = eowbc_lang('Filter already exists '.(($filter_data[$fdkey][$key.'_add_enabled']==1) ? 'and enabled' : 'but is disabled, you should enable it.'));
-			                return $res;
-		            	}
-		            }
-		        }
+		        if(is_array($filter_data) and !empty($filter_data)){
+
+
+			        foreach ($filter_data as $fdkey=>$item) {
+			            
+			            if ($item[$key.'_filter']==$table_data[$key."_filter"] and !empty($item['filter_template']) and !empty($table_data['filter_template']) and $item['filter_template']==$table_data['filter_template']) { 
+			            	if( $is_auto_insert_for_template ) {
+				            	$filter_data[$fdkey][$key.'_add_enabled'] = 1;
+				                $res["type"] = "error";
+				    			$res["msg"] = eowbc_lang('Filter Already Exists and activated');
+				    			wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data) );
+				                return $res;
+			            	}
+			            	else {
+				                $res["type"] = "error";
+				    			$res["msg"] = eowbc_lang('Filter already exists '.(($filter_data[$fdkey][$key.'_add_enabled']==1) ? 'and enabled' : 'but is disabled, you should enable it.'));
+				                return $res;
+			            	}
+			            }
+			        }
+			    }
 
 		        $filter_data[wbc()->common->createUniqueId()] = $table_data;
 
@@ -352,7 +384,7 @@ class Eowbc_Filters {
 $diamond_category = get_term_by( 'slug','eo_diamond_shape_cat','product_cat');
 $setting_category = get_term_by( 'slug','eo_setting_shape_cat','product_cat');
 
-if(is_wp_error($diamond_category) or is_wp_error($setting_category) or empty($diamond_category) or empty($setting_category)){
+if(is_wp_error($diamond_category) or is_wp_error($setting_category) or empty($diamond_category) or empty($setting_category) and !is_ajax()){
 	ob_start();
 	?>
 		<script>

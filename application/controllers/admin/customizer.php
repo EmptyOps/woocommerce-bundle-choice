@@ -21,7 +21,7 @@ class Customizer {
 
 	public static function run() {
 		global $wp_customize;
-	    if( ! defined( 'DOING_AJAX' ) && (!function_exists('is_ajax') || !is_ajax()) && empty(wbc()->sanitize->get("wc-ajax")) ) {
+	    if( ! defined( 'DOING_AJAX' ) && (!function_exists('is_ajax') || !is_ajax()) && empty(wbc()->sanitize->get("wc-ajax")) and !empty($wp_customize)) {
 	    	//wbc()->load->asset('js','customizer');
 	        ob_start();
 	        ?>        

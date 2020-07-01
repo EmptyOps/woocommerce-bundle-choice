@@ -178,7 +178,7 @@ $form['data'] = array(
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_text',__('CUSTOMIZE THIS PRODUCT')),
 					'sanitize'=>'sanitize_text_field',
 					'class'=>array('fluid'),						
-					'size_class'=>array('eight','wide'),
+					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
 					'visible_info'=>array( 'label'=>eowbc_lang('Text to be shown on the toggle button.'),
@@ -193,7 +193,7 @@ $form['data'] = array(
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_option_dimention','2em'),
 					'sanitize'=>'sanitize_text_field',
 					'class'=>array('fluid'),						
-					'size_class'=>array('eight','wide'),
+					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
 					'visible_info'=>array( 'label'=>eowbc_lang('The height and width of the option\'s box.<strong>(prepend px,em,rem as measurement)</strong>'),
@@ -208,7 +208,7 @@ $form['data'] = array(
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_color','#ffffff'),
 					'sanitize'=>'sanitize_hex_color',
 					'class'=>array('fluid'),						
-					'size_class'=>array('eight','wide'),
+					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
 					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s border'),
@@ -223,7 +223,7 @@ $form['data'] = array(
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_width','1px'),
 					'sanitize'=>'sanitize_text_field',
 					'class'=>array('fluid'),						
-					'size_class'=>array('eight','wide'),
+					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
 					'visible_info'=>array( 'label'=>eowbc_lang('The border width of the option\'s border.<strong>(prepend px,em,rem as measurement)</strong>'),
@@ -238,7 +238,7 @@ $form['data'] = array(
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_color_hover','#ffffff'),
 					'sanitize'=>'sanitize_hex_color',
 					'class'=>array('fluid'),						
-					'size_class'=>array('eight','wide'),
+					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
 					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s border on hover.'),
@@ -253,7 +253,7 @@ $form['data'] = array(
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_width_hover','1px'),
 					'sanitize'=>'sanitize_text_field',
 					'class'=>array('fluid'),						
-					'size_class'=>array('eight','wide'),
+					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
 					'visible_info'=>array( 'label'=>eowbc_lang('The border width of the option\'s border on hover.<strong>(prepend px,em,rem as measurement)</strong>'),
@@ -268,7 +268,7 @@ $form['data'] = array(
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_radius','1px'),
 					'sanitize'=>'sanitize_text_field',
 					'class'=>array('fluid'),						
-					'size_class'=>array('eight','wide'),
+					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
 					'visible_info'=>array( 'label'=>eowbc_lang('The border radius of the option\'s border.<strong>(prepend px,em,rem as measurement)</strong>'),
@@ -283,7 +283,7 @@ $form['data'] = array(
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_font_color','#ffffff'),
 					'sanitize'=>'sanitize_hex_color',
 					'class'=>array('fluid'),						
-					'size_class'=>array('eight','wide'),
+					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
 					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s text.'),
@@ -298,7 +298,7 @@ $form['data'] = array(
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_font_color_hover','#ffffff'),
 					'sanitize'=>'sanitize_hex_color',
 					'class'=>array('fluid'),						
-					'size_class'=>array('eight','wide'),
+					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
 					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s text on hover.'),
@@ -313,7 +313,7 @@ $form['data'] = array(
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_bg_color','#ffffff'),
 					'sanitize'=>'sanitize_hex_color',
 					'class'=>array('fluid'),						
-					'size_class'=>array('eight','wide'),
+					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
 					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s background.'),
@@ -328,7 +328,7 @@ $form['data'] = array(
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_bg_color_hover','#ffffff'),
 					'sanitize'=>'sanitize_hex_color',
 					'class'=>array('fluid'),						
-					'size_class'=>array('eight','wide'),
+					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
 					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s background on hover.'),
@@ -399,7 +399,7 @@ $form['data'] = array(
 						'sanitize'=>'sanitize_text_field',
 						'options'=>array('default'=>'Default Style','template_1'=>'Template 1','template_2'=>'Template 2'),
 						'class'=>array(),
-						'size_class'=>array('eight','wide'),
+						'size_class'=>array('eight','wide','required'),
 						'inline'=>true,
 					),
 				'tiny_features_save_specification_view'=>array(
@@ -430,6 +430,7 @@ $form['data'] = array(
 						'type'=>'visible_info',
 						'class'=>array('small'),
 					),
+					'size_class'=>array('eight','wide','required'),
 					/*'size_class'=>array('transition','hidden')*/
 				),
 				'shop_cat_shortcode_label'=>array(
@@ -443,7 +444,7 @@ $form['data'] = array(
 						'type'=>'visible_info',
 						'class'=>array('small'),
 					),
-					/*'size_class'=>array('transition','hidden')*/
+					'size_class'=>array('required')
 				),
 				'shop_cat_shortcode_unique_id'=>array(
 					'label'=>eowbc_lang('Unique ID'),
@@ -456,7 +457,7 @@ $form['data'] = array(
 						'type'=>'visible_info',
 						'class'=>array('small'),
 					),
-					/*'size_class'=>array('transition','hidden')*/
+					'size_class'=>array('required')
 				),
 				'shop_cat_shortcode_add'=>array(
 						'label'=>'Add Filter',
@@ -520,7 +521,7 @@ $form['data'] = array(
 						'type'=>'visible_info',
 						'class'=>array('small'),
 					),
-					'size_class'=>array('transition','hidden')
+					'size_class'=>array('transition','hidden','required')
 				),
 				'shop_cat_filter_two_filter'=>array(
 					'label'=>eowbc_lang('Two Filters?'),
@@ -547,7 +548,7 @@ $form['data'] = array(
 						'type'=>'visible_info',
 						'class'=>array('small'),
 					),
-					'size_class'=>array('transition','hidden')
+					'size_class'=>array('transition','hidden','required')
 				),
 				'shop_cat_filter_two_filter_first_title'=>array(
 					'label'=>eowbc_lang('First Filter Title'),
@@ -560,7 +561,7 @@ $form['data'] = array(
 						'type'=>'visible_info',
 						'class'=>array('small'),
 					),
-					'size_class'=>array('transition','hidden')
+					'size_class'=>array('transition','hidden','required')
 				),
 				'shop_cat_filter_two_filter_second'=>array(
 					'label'=>eowbc_lang('Second Category'),
@@ -574,7 +575,7 @@ $form['data'] = array(
 						'type'=>'visible_info',
 						'class'=>array('small'),
 					),
-					'size_class'=>array('transition','hidden')
+					'size_class'=>array('transition','hidden','required')
 				),
 				'shop_cat_filter_two_filter_second_title'=>array(
 					'label'=>eowbc_lang('Second Filter Title'),
@@ -587,7 +588,7 @@ $form['data'] = array(
 						'type'=>'visible_info',
 						'class'=>array('small'),
 					),
-					'size_class'=>array('transition','hidden')
+					'size_class'=>array('transition','hidden','required')
 				),
 				'shop_cat_filter_alternate_view'=>array(
 					'label'=>eowbc_lang('Alternate Mobile View?'),
@@ -684,7 +685,7 @@ $form['data'] = array(
 					'sanitize'=>'sanitize_text_field',
 					'options'=>array_replace(eo\wbc\model\Category_Attribute::instance()->get_category(),eo\wbc\model\Category_Attribute::instance()->get_attributs()),
 					'class'=>array('fluid'),
-					'size_class'=>array('three','wide'),
+					'size_class'=>array('three','wide','required'),
 					'attr'=>array("onchange='document.getElementById(\"shop_cat_filter_add_type\").value=isNaN(document.getElementById(\"shop_cat_filter_add_category\").value)'")
 				),
 				'shop_cat_filter_add_type'=>array(
@@ -716,7 +717,7 @@ $form['data'] = array(
 					'type'=>'text',
 					'value'=>'50',
 					'sanitize'=>'sanitize_text_field',
-					'size_class'=>array('three','wide'),					
+					'size_class'=>array('three','wide','required'),					
 					'attr'=>array('type="number"','step="6.25"','min="6.25"','max="100"')
 				),
 				'shop_cat_filter_add_order'=>array(
@@ -724,7 +725,7 @@ $form['data'] = array(
 					'type'=>'text',
 					'value'=>'0',
 					'sanitize'=>'sanitize_text_field',
-					'size_class'=>array('three','wide'),					
+					'size_class'=>array('three','wide','required'),					
 				),
 				'shop_cat_filter_add_input_type'=>array(
 					'label'=>eowbc_lang('Input Type'),					
@@ -733,7 +734,7 @@ $form['data'] = array(
 					'sanitize'=>'sanitize_text_field',
 					'options'=>array('icon'=>'Icon Only','icon_text'=>'Icon and Text','numeric_slider'=>'Numeric slider','text_slider'=>'Text slider','checkbox'=>'Checkbox'),
 					'class'=>array('fluid'),
-					'size_class'=>array('three','wide'),					
+					'size_class'=>array('three','wide','required'),					
 				),				
 				'shop_cat_filter_add_icon_size'=>array(
 					'label' => eowbc_lang('Icon Size'),

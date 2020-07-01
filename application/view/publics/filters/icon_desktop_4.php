@@ -13,8 +13,8 @@
 		<?php endif; ?>
 		</span>
 	</div>	
-	<div style="display: inline-block;" class="field twelve ui wide">
-		<div class="ui equal width center aligned grid" style="text-align: center;display: inline-block;width: 100% !important;">				
+	<div style="display: inline-block;" class="field twelve ui wide" data-reset="reset_icon(new Event('click'),'<?php echo $term->slug; ?>')">
+		<div class="ui equal width center aligned grid" style="text-align: center;">				
 			<?php foreach ($list as $filter_icon): ?>
 				<div style="padding: 0px;" title="<?php $filter_icon["name"]; ?>"
 					class="eo_wbc_filter_icon column <?php echo $non_edit ? 'none_editable':'' ?> 
@@ -23,7 +23,7 @@
 					data-filter="<?php echo $term->slug; ?>" style="border-bottom: 2px solid transparent;padding-top: 0rem;padding-bottom: 0rem;"
 					data-type="<?php echo $type; ?>">
 					<div>
-						<img src='<?php echo $filter_icon['icon']; ?>' class="ui mini image" style="width:35px !important"/>
+						<img src='<?php echo $filter_icon['icon']; ?>' class="ui mini image" style="width:30px !important"/>
 					</div>
 					<?php if($input=='icon_text'): ?>
 						<div style="visibility: hidden;"><?php echo($filter_icon['name']); ?></div>

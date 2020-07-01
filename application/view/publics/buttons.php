@@ -5,7 +5,6 @@
 */
 
 
-
 $first_term = wbc()->options->get_option('configuration','first_name');
 $second_term = wbc()->options->get_option('configuration','second_name');
 

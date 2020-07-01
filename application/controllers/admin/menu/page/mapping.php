@@ -123,19 +123,21 @@ if ( ! class_exists( 'Mapping' ) ) {
 							'type'=>'radio',
 							'sanitize'=>'sanitize_text_field',
 							'value'=>'and',
+							'validate'=>array('required'=>''),
 							'options'=>array( 'and'=> eowbc_lang('AND'),'or'=>eowbc_lang('OR') ),
 							'class'=>array('fluid'),						
-							// 'size_class'=>array('eight','wide'),
+							'size_class'=>array('eight','wide','required'),
 							'inline'=>false,
 						),
 						'prod_mapping_pref_attribute'=>array(
 							'label'=>eowbc_lang('Attribute'),
 							'type'=>'radio',
 							'value'=>'or',
+							'validate'=>array('required'=>''),
 							'sanitize'=>'sanitize_text_field',
 							'options'=>array( 'and'=> eowbc_lang('AND'),'or'=>eowbc_lang('OR') ),
 							'class'=>array('fluid'),						
-							// 'size_class'=>array('eight','wide'),
+							'size_class'=>array('eight','wide','required'),
 							'inline'=>false,
 						),
 						'submit_btn'=>array(
@@ -189,7 +191,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 								'inline_class'=>array('three'),
 								'style'=>'normal_without_parent_div',
 								'next_inline'=>true,
-								'inline'=>true,
+								'inline'=>true,								
 							),
 							'emptylabel'=>array(
 								'label'=>'<------------->',
@@ -220,6 +222,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 								'inline_class'=>array('three'),
 								'next_inline'=>true,
 								'inline'=>true,
+								'size_class'=>array('required'),
 							),
 							'emptylabel1'=>array(
 								'label'=>'<------------->',
@@ -238,6 +241,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 								'class'=>array('fluid'),
 								'prev_inline'=>true,
 								'inline'=>true,
+								'size_class'=>array('required'),
 							),
 
 							'eo_wbc_first_category_range'=>array(
@@ -249,6 +253,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 								'inline_class'=>array('three', 'range_section'),
 								'next_inline'=>true,
 								'inline'=>true,
+								'size_class'=>array('required'),
 							),
 							'emptylabel2'=>array(
 								'label'=>'<------------->',
@@ -267,6 +272,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 								'class'=>array('fluid'),
 								'prev_inline'=>true,
 								'inline'=>true,
+								'size_class'=>array('required'),
 							),
 
 							'eo_wbc_first_category_vis_info'=>array( 
@@ -307,7 +313,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 								'visible_info'=>array( 'label'=>'Discount rate in %',
 									'type'=>'visible_info',
 									'class'=>array('fluid', 'small'),
-									'size_class'=>array('eight','wide'),
+									'size_class'=>array('eight','wide','required'),
 								),
 							),
 							

@@ -126,6 +126,7 @@ if ( ! class_exists( 'Appearance' ) ) {
 							'fc_atc_button_text'=>array(
 								'label'=>eowbc_lang('First Category Add to Cart Button Text'),
 								'type'=>'text',
+								'validate'=>array('required'=>''),
 								'sanitize'=>'sanitize_text_field',
 								'value'=>'',
 								'class'=>array('fluid'),						
@@ -141,6 +142,7 @@ if ( ! class_exists( 'Appearance' ) ) {
 							'sc_atc_button_text'=>array(
 								'label'=>eowbc_lang('Second Category Add to Cart Button Text'),
 								'type'=>'text',
+								'validate'=>array('required'=>''),
 								'sanitize'=>'sanitize_text_field',
 								'value'=>'',
 								'class'=>array('fluid'),						
@@ -156,6 +158,7 @@ if ( ! class_exists( 'Appearance' ) ) {
 						'product_page_add_to_basket'=>array(
 							'label'=>'Add to Basket Text',
 							'type'=>'text',
+							'validate'=>array('required'=>''),
 							'sanitize'=>'sanitize_text_field',
 							'value'=>wbc()->options->get_option('product_page','product_page_add_to_basket'),							
 							'class'=>array(),

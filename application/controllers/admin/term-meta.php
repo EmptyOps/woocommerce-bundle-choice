@@ -408,7 +408,7 @@ class Term_Meta {
 		?>
 			<div class="form-field term-slug-wrap">				
 				<label for="tag-slug">Ribbon Color</label>
-				<input name="wbc_color" id="wbc_color" type="color" class="wbc_color"  style="width: 94%;" value='<?php echo ($is_edit?get_term_meta( $term->term_id,'wbc_color',true):''); ?>'>	
+				<input name="wbc_color" id="wbc_color" type="color" class="wbc_color"  style="width: 94%;" value=''>	
 				<p>Choose a color for the ribbon on variation form.</p>
 			</div>			
 		<?php

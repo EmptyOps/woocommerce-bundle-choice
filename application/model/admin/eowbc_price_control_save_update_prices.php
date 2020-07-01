@@ -27,6 +27,7 @@ class Eowbc_Price_Control_Save_Update_Prices {
 
 	public function save($eo_wbc_jpc_form_data) {
 		wbc()->sanitize->clean($eo_wbc_jpc_form_data);
+		wbc()->validate->check($eo_wbc_jpc_form_data);
 		$res = array();
 		$res["type"] = "success";
 	    $res["msg"] = "";

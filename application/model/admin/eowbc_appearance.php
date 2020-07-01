@@ -50,7 +50,7 @@ class Eowbc_Appearance {
 	    $res["msg"] = "";
 
 	    wbc()->sanitize->clean($form_definition);	    
-
+	    wbc()->validate->check($form_definition);
 		wbc()->load->model('admin\form-builder');
 
 		/*$res["post"] = $_POST;*/
@@ -62,8 +62,8 @@ class Eowbc_Appearance {
 			    //loop through form fields, read from POST/GET and save
 			    //may need to check field type here and read accordingly only
 			    //only for those for which POST is set
-			    if( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) && isset($_POST[$fk]) ) {
-			    	wbc()->options->update_option('appearance_'.$key,$fk,(empty($_POST[$fk])? $_POST[$fk]: sanitize_text_field( $_POST[$fk] ) ) );	
+			    if( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) && (isset($_POST[$fk]) || $fv["type"]=='checkbox')) {
+			    	wbc()->options->update_option('appearance_'.$key,$fk,(isset($_POST[$fk])? sanitize_text_field( $_POST[$fk] ):'' ));	
 			    }
 			}
 	    }

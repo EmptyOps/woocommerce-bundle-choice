@@ -192,13 +192,13 @@ class EOWBC_Filter_Widget {
 					}
 					
 					/*Modifications............................*/
-					#eo_wbc_filter_table th{
-						background-color: {$active_color} !important;
+					#eo_wbc_filter_table th,#eo_wbc_recent_table th,#eo_wbc_compare_table th{
+						background-color: ".get_option('eo_wbc_extension_table_header_color',$active_color)." !important;
 					}
 
-					.ui.slider .inner .track-fill,.ui.slider .inner .thumb{
-						background-color: {$active_color} !important;	
-					}								
+					#products_table{
+						font-family:".wbc()->options->get_option('appearance_filter','header_font','ZapfHumanist601BT-Roman')." !important;
+					}
 
 					.ui-widget-header{
 						border: 1px solid {$active_color} !important;
@@ -219,34 +219,34 @@ class EOWBC_Filter_Widget {
 						border-bottom:2px solid {$active_color} !important;
 					}				
 					.eo_wbc_filter_icon:hover:not(.none_editable){
-						border-bottom:2px solid ".wbc()->options->get_option('appearance_filter','slider_nodes_backcolor_active',$active_color)/*get_option('eo_wbc_filter_config_slidernode_color',$active_color)*/." !important;						
+						border-bottom:2px solid ".wbc()->options->get_option('appearance_filters','slider_nodes_backcolor_active',$active_color)/*get_option('eo_wbc_filter_config_slidernode_color',$active_color)*/." !important;						
 					}
 					.ui.button.primary{
 						background-color:{$active_color} !important;
 					}								
 
 					.ui.slider .inner .track-fill{
-						background-color:".wbc()->options->get_option('appearance_filter','slider_track_backcolor_active','')/*get_option('eo_wbc_filter_config_slidertrack_color','')*/." !important;
+						background-color:".wbc()->options->get_option('appearance_filters','slider_track_backcolor_active',$active_color)/*get_option('eo_wbc_filter_config_slidertrack_color','')*/." !important;
 					}				
-					.ui.slider .inner .thumb {
-						background-color:".wbc()->options->get_option('appearance_filter','slider_nodes_backcolor_active','')/*get_option('eo_wbc_filter_config_slidernode_color','')*/." !important;
+					.ui.slider .inner .thumb,#advance_filter{
+						background-color:".wbc()->options->get_option('appearance_filters','slider_nodes_backcolor_active',$active_color)/*get_option('eo_wbc_filter_config_slidernode_color','')*/." !important;
 					}
 					.eo-wbc-container.filters{
-						font-family:".wbc()->options->get_option('appearance_filter','header_font','ZapfHumanist601BT-Roman')/*get_option('eo_wbc_filter_config_font_family','')*/." !important;
+						font-family:".wbc()->options->get_option('appearance_filters','header_font','ZapfHumanist601BT-Roman')/*get_option('eo_wbc_filter_config_font_family','')*/." !important;
 					}
 					.eo-wbc-container.filters .ui.styled.accordion .title,.eo-wbc-container.filters .ui.header{
-						color:".wbc()->options->get_option('appearance_filter','header_textcolor','')/*get_option('eo_wbc_filter_config_header_color','')*/." !important;
+						color:".wbc()->options->get_option('appearance_filters','header_textcolor','')/*get_option('eo_wbc_filter_config_header_color','')*/." !important;
 					}
 					.eo-wbc-container.filters .eo_wbc_filter_icon,.eo-wbc-container.filters .slider .label,.eo-wbc-container.filters input{
-						color:".wbc()->options->get_option('appearance_filter','labels_textcolor','')/*get_option('eo_wbc_filter_config_label_color','')*/." !important;
+						color:".wbc()->options->get_option('appearance_filters','labels_textcolor','')/*get_option('eo_wbc_filter_config_label_color','')*/." !important;
 					}
 					.eo_wbc_filter_icon.ui.image{
 						width:fit-content"./*get_option('eo_wbc_filter_config_icon_size','min-content').*/" !important;
-						font-size:".wbc()->options->get_option('appearance_filter','icon_label_size','0.78571429rem')/*get_option('eo_wbc_filter_config_icon_label_size','0.78571429rem')*/." !important;
+						font-size:".wbc()->options->get_option('appearance_filters','icon_label_size','0.78571429rem')/*get_option('eo_wbc_filter_config_icon_label_size','0.78571429rem')*/." !important;
 						cursor:pointer;
 					}
 					.eo_wbc_filter_icon.ui.image img{
-						width:".wbc()->options->get_option('appearance_filter','icon_size','min-content')/*get_option('eo_wbc_filter_config_icon_size','min-content')*/." !important;
+						width:".wbc()->options->get_option('appearance_filters','icon_size','min-content')/*get_option('eo_wbc_filter_config_icon_size','min-content')*/." !important;
 						margin:auto auto;
 					}
 									
@@ -335,6 +335,9 @@ class EOWBC_Filter_Widget {
 				?>
 					<style type="text/css">
 						.eo_wbc_filter_icon_select,.eo_wbc_filter_icon:hover:not(.none_editable){ border-bottom: 0px !important; }
+						.eo-wbc-container.filters.container.ui.form .field:last-child{
+							margin-bottom: -1.4em;
+						}
 
 						.eo_wbc_filter_icon_select div,.eo_wbc_filter_icon:hover:not(.none_editable) div{ visibility: unset !important; }
 
@@ -342,12 +345,21 @@ class EOWBC_Filter_Widget {
 				<?php
 				echo ob_get_clean();
 			}
-			
-			if(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_1' and wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active','#dde5ed')=='#dde5ed'){
+			/*if(array_intersect(array(wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts'),wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts')),array('fc4','sc4'))){*/
+				ob_start();
+				?>
+					<style type="text/css">
+						<?php echo wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_additional_css',''); ?>
+					</style>
+				<?php
+				echo ob_get_clean();
+				/*
+			}  */
+			/*if(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_1' and wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active','#dde5ed')=='#dde5ed'){
 				echo "<style>.ui.slider .inner .track-fill, .ui.slider .inner .thumb,#advance_filter{background-color: #9bb8d3 !important }</style>";	
 			} elseif (wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_2' and wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active','#f7f7f7')=='#f7f7f7') {
 				echo "<style>.ui.slider .inner .track-fill, .ui.slider .inner .thumb,#advance_filter{background-color: #3e9f8e !important }</style>";
-			}
+			}*/
 
         }, 10 );
 

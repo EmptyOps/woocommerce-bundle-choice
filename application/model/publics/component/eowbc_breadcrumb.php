@@ -357,7 +357,7 @@ class EOWBC_Breadcrumb
             }
             elseif (self::eo_wbc_breadcrumb_get_category($chage_product_id)==self::$second_slug/*get_option('eo_wbc_second_slug')*/) {
 
-                $second_url = \eo\wbc\model\Category_Attribute::instance()->get_category_link(self::$second_sug);
+                $second_url = \eo\wbc\model\Category_Attribute::instance()->get_category_link(self::$second_slug);
                 // $url=get_bloginfo('url').'/index.php'.$second_url/*get_option('eo_wbc_second_url')*/.
                 // '?EO_WBC=1&BEGIN='.wbc()->options->get_option('configuration','second_slug')/*get_option('eo_wbc_second_slug')*/.
                 // '&STEP=1'.

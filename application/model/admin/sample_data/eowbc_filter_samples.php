@@ -989,7 +989,7 @@ class Filter_Samples {
                 'advance'=>"0",
                 'dependent'=>"0",
                 'input'=>"icon_text",
-                'column_width'=> "100",
+                'column_width'=> "50",
                 'order'=>"0",
                 'template'=>'sc4',
                 'help'=>1,

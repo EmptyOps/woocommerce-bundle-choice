@@ -101,7 +101,7 @@ if(!class_exists('WooCommerce_Bundle_Choice')) {
 			*	where the lib_name should only be added to the list.
 			*/
 
-			$library = array('load'=>'WBC_Loader','migration'=>'WBC_Migration','sanitize'=>'WBC_Sanitize');
+			$library = array('load'=>'WBC_Loader','migration'=>'WBC_Migration','sanitize'=>'WBC_Sanitize','validate'=>'WBC_Validate');
 
 			if(!empty($library)){
 
