@@ -3,11 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
-<<<<<<< HEAD
--- Generation Time: Jun 23, 2020 at 02:48 PM
-=======
--- Generation Time: Jul 01, 2020 at 05:15 AM
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
+-- Generation Time: Jul 01, 2020 at 12:55 PM
 -- Server version: 5.7.25
 -- PHP Version: 7.3.1
 
@@ -52,16 +48,12 @@ INSERT INTO `wp_actionscheduler_actions` (`action_id`, `hook`, `status`, `schedu
 (10, 'action_scheduler/migration_hook', 'complete', '2020-06-17 09:50:20', '2020-06-17 09:50:20', '[]', 'O:30:\"ActionScheduler_SimpleSchedule\":2:{s:22:\"\0*\0scheduled_timestamp\";i:1592387420;s:41:\"\0ActionScheduler_SimpleSchedule\0timestamp\";i:1592387420;}', 1, 1, '2020-06-17 09:52:19', '2020-06-17 09:52:19', 0, NULL),
 (11, 'action_scheduler/migration_hook', 'complete', '2020-06-18 05:21:37', '2020-06-18 05:21:37', '[]', 'O:30:\"ActionScheduler_SimpleSchedule\":2:{s:22:\"\0*\0scheduled_timestamp\";i:1592457697;s:41:\"\0ActionScheduler_SimpleSchedule\0timestamp\";i:1592457697;}', 1, 1, '2020-06-18 05:21:40', '2020-06-18 05:21:40', 0, NULL),
 (12, 'action_scheduler/migration_hook', 'complete', '2020-06-18 05:22:40', '2020-06-18 05:22:40', '[]', 'O:30:\"ActionScheduler_SimpleSchedule\":2:{s:22:\"\0*\0scheduled_timestamp\";i:1592457760;s:41:\"\0ActionScheduler_SimpleSchedule\0timestamp\";i:1592457760;}', 1, 1, '2020-06-18 05:23:40', '2020-06-18 05:23:40', 0, NULL),
-<<<<<<< HEAD
-(13, 'woocommerce_update_marketplace_suggestions', 'complete', '2020-06-19 12:49:33', '2020-06-19 12:49:33', '[]', 'O:30:\"ActionScheduler_SimpleSchedule\":2:{s:22:\"\0*\0scheduled_timestamp\";i:1592570973;s:41:\"\0ActionScheduler_SimpleSchedule\0timestamp\";i:1592570973;}', 0, 1, '2020-06-19 12:50:14', '2020-06-19 12:50:14', 0, NULL);
-=======
 (13, 'woocommerce_update_marketplace_suggestions', 'complete', '2020-06-19 12:49:33', '2020-06-19 12:49:33', '[]', 'O:30:\"ActionScheduler_SimpleSchedule\":2:{s:22:\"\0*\0scheduled_timestamp\";i:1592570973;s:41:\"\0ActionScheduler_SimpleSchedule\0timestamp\";i:1592570973;}', 0, 1, '2020-06-19 12:50:14', '2020-06-19 12:50:14', 0, NULL),
 (14, 'woocommerce_update_marketplace_suggestions', 'complete', '2020-06-26 15:35:42', '2020-06-26 15:35:42', '[]', 'O:30:\"ActionScheduler_SimpleSchedule\":2:{s:22:\"\0*\0scheduled_timestamp\";i:1593185742;s:41:\"\0ActionScheduler_SimpleSchedule\0timestamp\";i:1593185742;}', 0, 1, '2020-06-26 15:35:49', '2020-06-26 15:35:49', 0, NULL),
 (15, 'wc-admin_import_customers', 'complete', '2020-06-27 06:46:46', '2020-06-27 06:46:46', '[1]', 'O:30:\"ActionScheduler_SimpleSchedule\":2:{s:22:\"\0*\0scheduled_timestamp\";i:1593240406;s:41:\"\0ActionScheduler_SimpleSchedule\0timestamp\";i:1593240406;}', 2, 1, '2020-06-27 06:47:52', '2020-06-27 06:47:52', 0, NULL),
 (16, 'wc-admin_import_orders', 'complete', '2020-06-27 06:46:47', '2020-06-27 06:46:47', '[19]', 'O:30:\"ActionScheduler_SimpleSchedule\":2:{s:22:\"\0*\0scheduled_timestamp\";i:1593240407;s:41:\"\0ActionScheduler_SimpleSchedule\0timestamp\";i:1593240407;}', 2, 1, '2020-06-27 06:47:53', '2020-06-27 06:47:53', 0, NULL),
 (17, 'wc-admin_import_customers', 'complete', '2020-06-29 13:08:44', '2020-06-29 13:08:44', '[1]', 'O:30:\"ActionScheduler_SimpleSchedule\":2:{s:22:\"\0*\0scheduled_timestamp\";i:1593436124;s:41:\"\0ActionScheduler_SimpleSchedule\0timestamp\";i:1593436124;}', 2, 1, '2020-06-29 13:09:24', '2020-06-29 13:09:24', 0, NULL),
 (18, 'wc-admin_import_orders', 'complete', '2020-06-29 13:08:45', '2020-06-29 13:08:45', '[21]', 'O:30:\"ActionScheduler_SimpleSchedule\":2:{s:22:\"\0*\0scheduled_timestamp\";i:1593436125;s:41:\"\0ActionScheduler_SimpleSchedule\0timestamp\";i:1593436125;}', 2, 1, '2020-06-29 13:09:24', '2020-06-29 13:09:24', 0, NULL);
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 
 -- --------------------------------------------------------
 
@@ -90,12 +82,8 @@ CREATE TABLE `wp_actionscheduler_groups` (
 --
 
 INSERT INTO `wp_actionscheduler_groups` (`group_id`, `slug`) VALUES
-<<<<<<< HEAD
-(1, 'action-scheduler-migration');
-=======
 (1, 'action-scheduler-migration'),
 (2, 'wc-admin-data');
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 
 -- --------------------------------------------------------
 
@@ -139,9 +127,6 @@ INSERT INTO `wp_actionscheduler_logs` (`log_id`, `action_id`, `message`, `log_da
 (21, 12, 'action complete via WP Cron', '2020-06-18 05:23:40', '2020-06-18 05:23:40'),
 (22, 13, 'action created', '2020-06-19 12:49:33', '2020-06-19 12:49:33'),
 (23, 13, 'action started via Async Request', '2020-06-19 12:50:14', '2020-06-19 12:50:14'),
-<<<<<<< HEAD
-(24, 13, 'action complete via Async Request', '2020-06-19 12:50:14', '2020-06-19 12:50:14');
-=======
 (24, 13, 'action complete via Async Request', '2020-06-19 12:50:14', '2020-06-19 12:50:14'),
 (25, 14, 'action created', '2020-06-26 15:35:42', '2020-06-26 15:35:42'),
 (26, 14, 'action started via Async Request', '2020-06-26 15:35:46', '2020-06-26 15:35:46'),
@@ -158,7 +143,6 @@ INSERT INTO `wp_actionscheduler_logs` (`log_id`, `action_id`, `message`, `log_da
 (37, 17, 'action complete via WP Cron', '2020-06-29 13:09:24', '2020-06-29 13:09:24'),
 (38, 18, 'action started via WP Cron', '2020-06-29 13:09:24', '2020-06-29 13:09:24'),
 (39, 18, 'action complete via WP Cron', '2020-06-29 13:09:24', '2020-06-29 13:09:24');
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 
 -- --------------------------------------------------------
 
@@ -202,13 +186,9 @@ CREATE TABLE `wp_comments` (
 --
 
 INSERT INTO `wp_comments` (`comment_ID`, `comment_post_ID`, `comment_author`, `comment_author_email`, `comment_author_url`, `comment_author_IP`, `comment_date`, `comment_date_gmt`, `comment_content`, `comment_karma`, `comment_approved`, `comment_agent`, `comment_type`, `comment_parent`, `user_id`) VALUES
-<<<<<<< HEAD
-(1, 1, 'A WordPress Commenter', 'wapuu@wordpress.example', 'https://wordpress.org/', '', '2020-06-13 08:13:29', '2020-06-13 08:13:29', 'Hi, this is a comment.\nTo get started with moderating, editing, and deleting comments, please visit the Comments screen in the dashboard.\nCommenter avatars come from <a href=\"https://gravatar.com\">Gravatar</a>.', 0, '1', '', '', 0, 0);
-=======
 (1, 1, 'A WordPress Commenter', 'wapuu@wordpress.example', 'https://wordpress.org/', '', '2020-06-13 08:13:29', '2020-06-13 08:13:29', 'Hi, this is a comment.\nTo get started with moderating, editing, and deleting comments, please visit the Comments screen in the dashboard.\nCommenter avatars come from <a href=\"https://gravatar.com\">Gravatar</a>.', 0, '1', '', '', 0, 0),
 (2, 19, 'WooCommerce', 'woocommerce@127.0.0.1', '', '', '2020-06-27 06:46:42', '2020-06-27 06:46:42', 'Awaiting BACS payment Order status changed from Pending payment to On hold.', 0, '1', 'WooCommerce', 'order_note', 0, 0),
 (3, 21, 'WooCommerce', 'woocommerce@127.0.0.1', '', '', '2020-06-29 13:08:41', '2020-06-29 13:08:41', 'Awaiting BACS payment Order status changed from Pending payment to On hold.', 0, '1', 'WooCommerce', 'order_note', 0, 0);
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 
 -- --------------------------------------------------------
 
@@ -328,13 +308,8 @@ INSERT INTO `wp_options` (`option_id`, `option_name`, `option_value`, `autoload`
 (76, 'comment_order', 'asc', 'yes'),
 (77, 'sticky_posts', 'a:0:{}', 'yes'),
 (78, 'widget_categories', 'a:2:{i:2;a:4:{s:5:\"title\";s:0:\"\";s:5:\"count\";i:0;s:12:\"hierarchical\";i:0;s:8:\"dropdown\";i:0;}s:12:\"_multiwidget\";i:1;}', 'yes'),
-<<<<<<< HEAD
-(79, 'widget_text', 'a:0:{}', 'yes'),
-(80, 'widget_rss', 'a:0:{}', 'yes'),
-=======
 (79, 'widget_text', 'a:2:{i:1;a:0:{}s:12:\"_multiwidget\";i:1;}', 'yes'),
 (80, 'widget_rss', 'a:2:{i:1;a:0:{}s:12:\"_multiwidget\";i:1;}', 'yes'),
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 (81, 'uninstall_plugins', 'a:2:{s:37:\"error-log-viewer/error-log-viewer.php\";s:18:\"rrrlgvwr_uninstall\";s:47:\"woo-bundle-choice/woocommerce-bundle-choice.php\";s:53:\"eo\\wbc\\WooCommerce_Bundle_Choice_Bootstrap::uninstall\";}', 'no'),
 (82, 'timezone_string', '', 'yes'),
 (83, 'page_for_posts', '0', 'yes'),
@@ -357,11 +332,7 @@ INSERT INTO `wp_options` (`option_id`, `option_name`, `option_value`, `autoload`
 (100, 'widget_archives', 'a:2:{i:2;a:3:{s:5:\"title\";s:0:\"\";s:5:\"count\";i:0;s:8:\"dropdown\";i:0;}s:12:\"_multiwidget\";i:1;}', 'yes'),
 (101, 'widget_meta', 'a:2:{i:2;a:1:{s:5:\"title\";s:0:\"\";}s:12:\"_multiwidget\";i:1;}', 'yes'),
 (102, 'sidebars_widgets', 'a:4:{s:19:\"wp_inactive_widgets\";a:0:{}s:9:\"sidebar-1\";a:3:{i:0;s:8:\"search-2\";i:1;s:14:\"recent-posts-2\";i:2;s:17:\"recent-comments-2\";}s:9:\"sidebar-2\";a:3:{i:0;s:10:\"archives-2\";i:1;s:12:\"categories-2\";i:2;s:6:\"meta-2\";}s:13:\"array_version\";i:3;}', 'yes'),
-<<<<<<< HEAD
-(103, 'cron', 'a:17:{i:1592923099;a:1:{s:26:\"action_scheduler_run_queue\";a:1:{s:32:\"0d04ed39571b55704c122d726248bbac\";a:3:{s:8:\"schedule\";s:12:\"every_minute\";s:4:\"args\";a:1:{i:0;s:7:\"WP Cron\";}s:8:\"interval\";i:60;}}}i:1592924935;a:1:{s:32:\"woocommerce_cancel_unpaid_orders\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:2:{s:8:\"schedule\";b:0;s:4:\"args\";a:0:{}}}}i:1592925210;a:1:{s:34:\"wp_privacy_delete_old_export_files\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:6:\"hourly\";s:4:\"args\";a:0:{}s:8:\"interval\";i:3600;}}}i:1592925388;a:1:{s:33:\"wc_admin_process_orders_milestone\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:6:\"hourly\";s:4:\"args\";a:0:{}s:8:\"interval\";i:3600;}}}i:1592925396;a:1:{s:29:\"wc_admin_unsnooze_admin_notes\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:6:\"hourly\";s:4:\"args\";a:0:{}s:8:\"interval\";i:3600;}}}i:1592943210;a:3:{s:16:\"wp_version_check\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:10:\"twicedaily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:43200;}}s:17:\"wp_update_plugins\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:10:\"twicedaily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:43200;}}s:16:\"wp_update_themes\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:10:\"twicedaily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:43200;}}}i:1592956800;a:1:{s:27:\"woocommerce_scheduled_sales\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:5:\"daily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:86400;}}}i:1592964985;a:1:{s:28:\"woocommerce_cleanup_sessions\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:10:\"twicedaily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:43200;}}}i:1592986410;a:1:{s:32:\"recovery_mode_clean_expired_keys\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:5:\"daily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:86400;}}}i:1592986446;a:2:{s:19:\"wp_scheduled_delete\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:5:\"daily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:86400;}}s:25:\"delete_expired_transients\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:5:\"daily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:86400;}}}i:1592986449;a:1:{s:30:\"wp_scheduled_auto_draft_delete\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:5:\"daily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:86400;}}}i:1592986589;a:1:{s:14:\"wc_admin_daily\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:5:\"daily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:86400;}}}i:1592986595;a:2:{s:33:\"woocommerce_cleanup_personal_data\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:5:\"daily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:86400;}}s:30:\"woocommerce_tracker_send_event\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:5:\"daily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:86400;}}}i:1592997385;a:1:{s:24:\"woocommerce_cleanup_logs\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:5:\"daily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:86400;}}}i:1593332010;a:1:{s:30:\"wp_site_health_scheduled_check\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:6:\"weekly\";s:4:\"args\";a:0:{}s:8:\"interval\";i:604800;}}}i:1593332245;a:1:{s:25:\"woocommerce_geoip_updater\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:11:\"fifteendays\";s:4:\"args\";a:0:{}s:8:\"interval\";i:1296000;}}}s:7:\"version\";i:2;}', 'yes'),
-=======
-(103, 'cron', 'a:16:{i:1593580536;a:1:{s:26:\"action_scheduler_run_queue\";a:1:{s:32:\"0d04ed39571b55704c122d726248bbac\";a:3:{s:8:\"schedule\";s:12:\"every_minute\";s:4:\"args\";a:1:{i:0;s:7:\"WP Cron\";}s:8:\"interval\";i:60;}}}i:1593580588;a:1:{s:33:\"wc_admin_process_orders_milestone\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:6:\"hourly\";s:4:\"args\";a:0:{}s:8:\"interval\";i:3600;}}}i:1593580596;a:1:{s:29:\"wc_admin_unsnooze_admin_notes\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:6:\"hourly\";s:4:\"args\";a:0:{}s:8:\"interval\";i:3600;}}}i:1593581171;a:1:{s:32:\"woocommerce_cancel_unpaid_orders\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:2:{s:8:\"schedule\";b:0;s:4:\"args\";a:0:{}}}}i:1593584010;a:1:{s:34:\"wp_privacy_delete_old_export_files\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:6:\"hourly\";s:4:\"args\";a:0:{}s:8:\"interval\";i:3600;}}}i:1593591210;a:4:{s:32:\"recovery_mode_clean_expired_keys\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:5:\"daily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:86400;}}s:16:\"wp_version_check\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:10:\"twicedaily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:43200;}}s:17:\"wp_update_plugins\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:10:\"twicedaily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:43200;}}s:16:\"wp_update_themes\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:10:\"twicedaily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:43200;}}}i:1593591246;a:2:{s:19:\"wp_scheduled_delete\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:5:\"daily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:86400;}}s:25:\"delete_expired_transients\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:5:\"daily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:86400;}}}i:1593591249;a:1:{s:30:\"wp_scheduled_auto_draft_delete\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:5:\"daily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:86400;}}}i:1593591389;a:1:{s:14:\"wc_admin_daily\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:5:\"daily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:86400;}}}i:1593591395;a:2:{s:33:\"woocommerce_cleanup_personal_data\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:5:\"daily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:86400;}}s:30:\"woocommerce_tracker_send_event\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:5:\"daily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:86400;}}}i:1593602185;a:1:{s:24:\"woocommerce_cleanup_logs\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:5:\"daily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:86400;}}}i:1593612985;a:1:{s:28:\"woocommerce_cleanup_sessions\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:10:\"twicedaily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:43200;}}}i:1593648000;a:1:{s:27:\"woocommerce_scheduled_sales\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:5:\"daily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:86400;}}}i:1593936810;a:1:{s:30:\"wp_site_health_scheduled_check\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:6:\"weekly\";s:4:\"args\";a:0:{}s:8:\"interval\";i:604800;}}}i:1594628245;a:1:{s:25:\"woocommerce_geoip_updater\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:11:\"fifteendays\";s:4:\"args\";a:0:{}s:8:\"interval\";i:1296000;}}}s:7:\"version\";i:2;}', 'yes'),
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
+(103, 'cron', 'a:17:{i:1593608113;a:1:{s:32:\"woocommerce_cancel_unpaid_orders\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:2:{s:8:\"schedule\";b:0;s:4:\"args\";a:0:{}}}}i:1593608136;a:1:{s:26:\"action_scheduler_run_queue\";a:1:{s:32:\"0d04ed39571b55704c122d726248bbac\";a:3:{s:8:\"schedule\";s:12:\"every_minute\";s:4:\"args\";a:1:{i:0;s:7:\"WP Cron\";}s:8:\"interval\";i:60;}}}i:1593609210;a:1:{s:34:\"wp_privacy_delete_old_export_files\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:6:\"hourly\";s:4:\"args\";a:0:{}s:8:\"interval\";i:3600;}}}i:1593609388;a:1:{s:33:\"wc_admin_process_orders_milestone\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:6:\"hourly\";s:4:\"args\";a:0:{}s:8:\"interval\";i:3600;}}}i:1593609396;a:1:{s:29:\"wc_admin_unsnooze_admin_notes\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:6:\"hourly\";s:4:\"args\";a:0:{}s:8:\"interval\";i:3600;}}}i:1593612985;a:1:{s:28:\"woocommerce_cleanup_sessions\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:10:\"twicedaily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:43200;}}}i:1593634410;a:3:{s:16:\"wp_version_check\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:10:\"twicedaily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:43200;}}s:17:\"wp_update_plugins\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:10:\"twicedaily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:43200;}}s:16:\"wp_update_themes\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:10:\"twicedaily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:43200;}}}i:1593648000;a:1:{s:27:\"woocommerce_scheduled_sales\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:5:\"daily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:86400;}}}i:1593677610;a:1:{s:32:\"recovery_mode_clean_expired_keys\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:5:\"daily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:86400;}}}i:1593677646;a:2:{s:19:\"wp_scheduled_delete\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:5:\"daily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:86400;}}s:25:\"delete_expired_transients\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:5:\"daily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:86400;}}}i:1593677649;a:1:{s:30:\"wp_scheduled_auto_draft_delete\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:5:\"daily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:86400;}}}i:1593677789;a:1:{s:14:\"wc_admin_daily\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:5:\"daily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:86400;}}}i:1593677795;a:2:{s:33:\"woocommerce_cleanup_personal_data\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:5:\"daily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:86400;}}s:30:\"woocommerce_tracker_send_event\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:5:\"daily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:86400;}}}i:1593688585;a:1:{s:24:\"woocommerce_cleanup_logs\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:5:\"daily\";s:4:\"args\";a:0:{}s:8:\"interval\";i:86400;}}}i:1593936810;a:1:{s:30:\"wp_site_health_scheduled_check\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:6:\"weekly\";s:4:\"args\";a:0:{}s:8:\"interval\";i:604800;}}}i:1594628245;a:1:{s:25:\"woocommerce_geoip_updater\";a:1:{s:32:\"40cd750bba9870f18aada2478b24840a\";a:3:{s:8:\"schedule\";s:11:\"fifteendays\";s:4:\"args\";a:0:{}s:8:\"interval\";i:1296000;}}}s:7:\"version\";i:2;}', 'yes'),
 (104, 'widget_pages', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'yes'),
 (105, 'widget_calendar', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'yes'),
 (106, 'widget_media_audio', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'yes'),
@@ -371,13 +342,8 @@ INSERT INTO `wp_options` (`option_id`, `option_name`, `option_value`, `autoload`
 (110, 'widget_tag_cloud', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'yes'),
 (111, 'widget_nav_menu', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'yes'),
 (112, 'widget_custom_html', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'yes'),
-<<<<<<< HEAD
 (114, 'recovery_keys', 'a:0:{}', 'yes'),
-(115, '_site_transient_update_core', 'O:8:\"stdClass\":4:{s:7:\"updates\";a:1:{i:0;O:8:\"stdClass\":10:{s:8:\"response\";s:6:\"latest\";s:8:\"download\";s:59:\"https://downloads.wordpress.org/release/wordpress-5.4.2.zip\";s:6:\"locale\";s:5:\"en_US\";s:8:\"packages\";O:8:\"stdClass\":5:{s:4:\"full\";s:59:\"https://downloads.wordpress.org/release/wordpress-5.4.2.zip\";s:10:\"no_content\";s:70:\"https://downloads.wordpress.org/release/wordpress-5.4.2-no-content.zip\";s:11:\"new_bundled\";s:71:\"https://downloads.wordpress.org/release/wordpress-5.4.2-new-bundled.zip\";s:7:\"partial\";b:0;s:8:\"rollback\";b:0;}s:7:\"current\";s:5:\"5.4.2\";s:7:\"version\";s:5:\"5.4.2\";s:11:\"php_version\";s:6:\"5.6.20\";s:13:\"mysql_version\";s:3:\"5.0\";s:11:\"new_bundled\";s:3:\"5.3\";s:15:\"partial_version\";s:0:\"\";}}s:12:\"last_checked\";i:1592908807;s:15:\"version_checked\";s:5:\"5.4.2\";s:12:\"translations\";a:0:{}}', 'no'),
-=======
-(114, 'recovery_keys', 'a:1:{s:22:\"rAf3Wnoy5UUDfDl8QjZh1Q\";a:2:{s:10:\"hashed_key\";s:34:\"$P$BYmXUcayQ9SP7GwBTxYJJXewAqzaIb.\";s:10:\"created_at\";i:1593453781;}}', 'yes'),
-(115, '_site_transient_update_core', 'O:8:\"stdClass\":4:{s:7:\"updates\";a:1:{i:0;O:8:\"stdClass\":10:{s:8:\"response\";s:6:\"latest\";s:8:\"download\";s:59:\"https://downloads.wordpress.org/release/wordpress-5.4.2.zip\";s:6:\"locale\";s:5:\"en_US\";s:8:\"packages\";O:8:\"stdClass\":5:{s:4:\"full\";s:59:\"https://downloads.wordpress.org/release/wordpress-5.4.2.zip\";s:10:\"no_content\";s:70:\"https://downloads.wordpress.org/release/wordpress-5.4.2-no-content.zip\";s:11:\"new_bundled\";s:71:\"https://downloads.wordpress.org/release/wordpress-5.4.2-new-bundled.zip\";s:7:\"partial\";b:0;s:8:\"rollback\";b:0;}s:7:\"current\";s:5:\"5.4.2\";s:7:\"version\";s:5:\"5.4.2\";s:11:\"php_version\";s:6:\"5.6.20\";s:13:\"mysql_version\";s:3:\"5.0\";s:11:\"new_bundled\";s:3:\"5.3\";s:15:\"partial_version\";s:0:\"\";}}s:12:\"last_checked\";i:1593548066;s:15:\"version_checked\";s:5:\"5.4.2\";s:12:\"translations\";a:0:{}}', 'no'),
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
+(115, '_site_transient_update_core', 'O:8:\"stdClass\":4:{s:7:\"updates\";a:1:{i:0;O:8:\"stdClass\":10:{s:8:\"response\";s:6:\"latest\";s:8:\"download\";s:59:\"https://downloads.wordpress.org/release/wordpress-5.4.2.zip\";s:6:\"locale\";s:5:\"en_US\";s:8:\"packages\";O:8:\"stdClass\":5:{s:4:\"full\";s:59:\"https://downloads.wordpress.org/release/wordpress-5.4.2.zip\";s:10:\"no_content\";s:70:\"https://downloads.wordpress.org/release/wordpress-5.4.2-no-content.zip\";s:11:\"new_bundled\";s:71:\"https://downloads.wordpress.org/release/wordpress-5.4.2-new-bundled.zip\";s:7:\"partial\";b:0;s:8:\"rollback\";b:0;}s:7:\"current\";s:5:\"5.4.2\";s:7:\"version\";s:5:\"5.4.2\";s:11:\"php_version\";s:6:\"5.6.20\";s:13:\"mysql_version\";s:3:\"5.0\";s:11:\"new_bundled\";s:3:\"5.3\";s:15:\"partial_version\";s:0:\"\";}}s:12:\"last_checked\";i:1593591650;s:15:\"version_checked\";s:5:\"5.4.2\";s:12:\"translations\";a:0:{}}', 'no'),
 (116, 'theme_mods_twentytwenty', 'a:2:{s:18:\"custom_css_post_id\";i:-1;s:16:\"background_color\";s:3:\"fff\";}', 'yes'),
 (129, 'can_compress_scripts', '1', 'no'),
 (146, 'action_scheduler_hybrid_store_demarkation', '5', 'yes'),
@@ -497,11 +463,7 @@ INSERT INTO `wp_options` (`option_id`, `option_name`, `option_value`, `autoload`
 (266, 'woocommerce_version', '4.2.0', 'yes'),
 (267, 'woocommerce_db_version', '4.2.0', 'yes'),
 (270, 'recently_activated', 'a:1:{s:55:\"woocommerce-bundle-choice/woocommerce-bundle-choice.php\";i:1592457636;}', 'yes'),
-<<<<<<< HEAD
-(271, 'action_scheduler_lock_async-request-runner', '1592923119', 'yes'),
-=======
-(271, 'action_scheduler_lock_async-request-runner', '1593580487', 'yes'),
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
+(271, 'action_scheduler_lock_async-request-runner', '1593608169', 'yes'),
 (272, 'woocommerce_maxmind_geolocation_settings', 'a:1:{s:15:\"database_prefix\";s:32:\"SwbkJz7pYnrHpCYgv351PJlERgpBa0aG\";}', 'yes'),
 (273, '_transient_woocommerce_webhook_ids_status_active', 'a:0:{}', 'yes'),
 (274, 'widget_woocommerce_widget_cart', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'yes'),
@@ -518,67 +480,24 @@ INSERT INTO `wp_options` (`option_id`, `option_name`, `option_value`, `autoload`
 (285, 'widget_woocommerce_rating_filter', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'yes'),
 (288, 'woocommerce_admin_version', '1.2.3', 'yes'),
 (289, 'woocommerce_admin_install_timestamp', '1592036189', 'yes'),
-<<<<<<< HEAD
-(293, '_transient_wc_count_comments', 'O:8:\"stdClass\":7:{s:14:\"total_comments\";i:1;s:3:\"all\";i:1;s:8:\"approved\";s:1:\"1\";s:9:\"moderated\";i:0;s:4:\"spam\";i:0;s:5:\"trash\";i:0;s:12:\"post-trashed\";i:0;}', 'yes'),
-(294, 'woocommerce_meta_box_errors', 'a:0:{}', 'yes'),
-(297, 'woocommerce_onboarding_profile', 'a:9:{s:9:\"completed\";b:1;s:12:\"setup_client\";b:0;s:8:\"industry\";a:1:{i:0;a:1:{s:4:\"slug\";s:27:\"fashion-apparel-accessories\";}}s:13:\"product_types\";a:1:{i:0;s:8:\"physical\";}s:13:\"product_count\";s:8:\"101-1000\";s:14:\"selling_venues\";s:2:\"no\";s:19:\"business_extensions\";a:0:{}s:5:\"theme\";s:12:\"twentytwenty\";s:7:\"plugins\";s:7:\"skipped\";}', 'yes'),
-(300, 'woocommerce_onboarding_opt_in', 'yes', 'yes'),
-(303, '_transient_woocommerce_reports-transient-version', '1592052015', 'yes'),
-(308, 'recovery_mode_email_last_sent', '1592308343', 'yes'),
-=======
 (294, 'woocommerce_meta_box_errors', 'a:0:{}', 'yes'),
 (297, 'woocommerce_onboarding_profile', 'a:9:{s:9:\"completed\";b:1;s:12:\"setup_client\";b:0;s:8:\"industry\";a:1:{i:0;a:1:{s:4:\"slug\";s:27:\"fashion-apparel-accessories\";}}s:13:\"product_types\";a:1:{i:0;s:8:\"physical\";}s:13:\"product_count\";s:8:\"101-1000\";s:14:\"selling_venues\";s:2:\"no\";s:19:\"business_extensions\";a:0:{}s:5:\"theme\";s:12:\"twentytwenty\";s:7:\"plugins\";s:7:\"skipped\";}', 'yes'),
 (300, 'woocommerce_onboarding_opt_in', 'yes', 'yes'),
 (303, '_transient_woocommerce_reports-transient-version', '1593577571', 'yes'),
 (308, 'recovery_mode_email_last_sent', '1593453780', 'yes'),
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 (318, 'bstwbsftwppdtplgns_options', 'a:1:{s:8:\"bws_menu\";a:1:{s:7:\"version\";a:1:{s:37:\"error-log-viewer/error-log-viewer.php\";s:5:\"2.2.9\";}}}', 'yes'),
 (319, 'rrrlgvwr_options', 'a:21:{s:21:\"plugin_option_version\";s:5:\"1.1.1\";s:21:\"php_error_log_visible\";i:1;s:11:\"lines_count\";i:10;s:16:\"confirm_filesize\";i:1243;s:14:\"error_log_path\";s:168:\"/Users/hiren/Sites//wp-content/uploads/wc-logs/fatal-errors-2020-06-13-152a4d3ccf444db8a57f59abaf6c3cf2.log\";s:17:\"count_visible_log\";i:2;s:14:\"frequency_send\";i:1;s:10:\"send_email\";i:0;s:8:\"to_email\";s:6:\"custom\";s:10:\"email_user\";s:5:\"admin\";s:5:\"email\";s:19:\"wordpress@127.0.0.1\";s:8:\"hour_day\";i:3600;s:23:\"display_settings_notice\";i:1;s:22:\"suggest_feature_banner\";i:1;s:14:\"display_method\";s:5:\"lines\";s:9:\"date_from\";s:0:\"\";s:7:\"date_to\";s:0:\"\";s:13:\"first_install\";i:1592036434;s:19:\"go_settings_counter\";i:2;s:9:\"file_path\";a:2:{i:0;s:37:\"/Applications/MAMP/logs/php_error.log\";i:1;s:168:\"/Users/hiren/Sites//wp-content/uploads/wc-logs/fatal-errors-2020-06-13-152a4d3ccf444db8a57f59abaf6c3cf2.log\";}s:66:\"0_fatal-errors-2020-06-13-152a4d3ccf444db8a57f59abaf6c3cf2_visible\";i:1;}', 'yes'),
 (337, 'woocommerce_task_list_tracked_completed_tasks', 'a:2:{i:0;s:8:\"purchase\";i:1;s:8:\"products\";}', 'yes'),
 (338, 'woocommerce_task_list_welcome_modal_dismissed', '1', 'yes'),
 (359, '_transient_health-check-site-status-result', '{\"good\":6,\"recommended\":10,\"critical\":1}', 'yes'),
-<<<<<<< HEAD
-(385, 'eowbc_option_configuration', 's:669:\"a:21:{s:14:\"category_count\";i:2;s:10:\"first_name\";s:2:\"15\";s:10:\"first_slug\";s:13:\"uncategorized\";s:9:\"first_url\";s:0:\"\";s:11:\"second_name\";s:2:\"15\";s:11:\"second_slug\";s:13:\"uncategorized\";s:10:\"second_url\";s:0:\"\";s:15:\"collection_name\";s:7:\"Preview\";s:11:\"review_page\";s:23:\"/eo-wbc-product-review/\";s:15:\"config_category\";i:1;s:10:\"config_map\";i:1;s:17:\"pair_maker_status\";s:0:\"\";s:27:\"config_alternate_breadcrumb\";s:7:\"default\";s:12:\"buttons_page\";s:1:\"1\";s:16:\"enable_make_pair\";s:0:\"\";s:15:\"label_make_pair\";s:0:\"\";s:10:\"first_icon\";s:0:\"\";s:11:\"second_icon\";s:0:\"\";s:12:\"preview_name\";s:7:\"Preview\";s:12:\"preview_icon\";s:0:\"\";s:21:\"pair_maker_upper_card\";s:0:\"\";}\";', 'yes'),
+(385, 'eowbc_option_configuration', 's:655:\"a:21:{s:14:\"category_count\";i:2;s:10:\"first_name\";s:2:\"19\";s:10:\"first_slug\";s:7:\"diamond\";s:9:\"first_url\";s:0:\"\";s:11:\"second_name\";s:2:\"20\";s:11:\"second_slug\";s:7:\"setting\";s:10:\"second_url\";s:0:\"\";s:15:\"collection_name\";s:7:\"Preview\";s:11:\"review_page\";s:23:\"/eo-wbc-product-review/\";s:15:\"config_category\";i:1;s:10:\"config_map\";i:1;s:17:\"pair_maker_status\";s:0:\"\";s:27:\"config_alternate_breadcrumb\";s:7:\"default\";s:12:\"buttons_page\";s:1:\"1\";s:16:\"enable_make_pair\";s:0:\"\";s:15:\"label_make_pair\";s:0:\"\";s:10:\"first_icon\";s:0:\"\";s:11:\"second_icon\";s:0:\"\";s:12:\"preview_name\";s:7:\"Preview\";s:12:\"preview_icon\";s:0:\"\";s:21:\"pair_maker_upper_card\";s:0:\"\";}\";', 'yes'),
 (386, 'eowbc_option__system', 's:32:\"a:1:{s:7:\"version\";s:5:\"1.0.0\";}\";', 'yes'),
-(387, 'eowbc_warning_count', '54', 'yes'),
-(556, 'eowbc_option_eo_wbc', 's:102:\"a:2:{s:14:\"inventory_type\";s:7:\"jewelry\";s:14:\"feature_option\";s:30:\"a:1:{i:0;s:12:\"ring_builder\";}\";}\";', 'yes'),
-(573, 'eowbc_option_setting_status_setting_status_setting', 's:246:\"a:2:{s:14:\"inventory_type\";s:8:\"jewelery\";s:8:\"features\";s:179:\"a:6:{s:12:\"ring_builder\";s:12:\"ring_builder\";s:10:\"pair_maker\";s:0:\"\";s:10:\"rapnet_api\";s:0:\"\";s:12:\"glowstar_api\";s:0:\"\";s:13:\"guidance_tool\";s:0:\"\";s:13:\"price_control\";s:0:\"\";}\";}\";', 'yes'),
-(846, 'eowbc_option_filters_d_fconfig', 's:6:\"a:0:{}\";', 'yes'),
-(858, 'eowbc_option_filters_s_fconfig', 's:6:\"a:0:{}\";', 'yes'),
-(995, 'eowbc_error_count', '4', 'yes'),
-(1117, '_site_transient_timeout_browser_6e772c1b307c3b779646761b5a5731d2', '1593062387', 'no'),
-(1118, '_site_transient_browser_6e772c1b307c3b779646761b5a5731d2', 'a:10:{s:4:\"name\";s:6:\"Chrome\";s:7:\"version\";s:13:\"83.0.4103.106\";s:8:\"platform\";s:9:\"Macintosh\";s:10:\"update_url\";s:29:\"https://www.google.com/chrome\";s:7:\"img_src\";s:43:\"http://s.w.org/images/browsers/chrome.png?1\";s:11:\"img_src_ssl\";s:44:\"https://s.w.org/images/browsers/chrome.png?1\";s:15:\"current_version\";s:2:\"18\";s:7:\"upgrade\";b:0;s:8:\"insecure\";b:0;s:6:\"mobile\";b:0;}', 'no'),
-(1137, 'action_scheduler_migration_status', 'complete', 'yes');
-INSERT INTO `wp_options` (`option_id`, `option_name`, `option_value`, `autoload`) VALUES
-(1404, 'woocommerce_marketplace_suggestions', 'a:2:{s:11:\"suggestions\";a:26:{i:0;a:4:{s:4:\"slug\";s:28:\"product-edit-meta-tab-header\";s:7:\"context\";s:28:\"product-edit-meta-tab-header\";s:5:\"title\";s:22:\"Recommended extensions\";s:13:\"allow-dismiss\";b:0;}i:1;a:6:{s:4:\"slug\";s:39:\"product-edit-meta-tab-footer-browse-all\";s:7:\"context\";s:28:\"product-edit-meta-tab-footer\";s:9:\"link-text\";s:21:\"Browse all extensions\";s:3:\"url\";s:64:\"https://woocommerce.com/product-category/woocommerce-extensions/\";s:8:\"promoted\";s:31:\"category-woocommerce-extensions\";s:13:\"allow-dismiss\";b:0;}i:2;a:9:{s:4:\"slug\";s:46:\"product-edit-mailchimp-woocommerce-memberships\";s:7:\"product\";s:33:\"woocommerce-memberships-mailchimp\";s:14:\"show-if-active\";a:1:{i:0;s:23:\"woocommerce-memberships\";}s:7:\"context\";a:1:{i:0;s:26:\"product-edit-meta-tab-body\";}s:4:\"icon\";s:116:\"https://woocommerce.com/wp-content/plugins/wccom-plugins/marketplace-suggestions/icons/mailchimp-for-memberships.svg\";s:5:\"title\";s:25:\"Mailchimp for Memberships\";s:4:\"copy\";s:79:\"Completely automate your email lists by syncing membership changes to Mailchimp\";s:11:\"button-text\";s:10:\"Learn More\";s:3:\"url\";s:67:\"https://woocommerce.com/products/mailchimp-woocommerce-memberships/\";}i:3;a:9:{s:4:\"slug\";s:19:\"product-edit-addons\";s:7:\"product\";s:26:\"woocommerce-product-addons\";s:14:\"show-if-active\";a:2:{i:0;s:25:\"woocommerce-subscriptions\";i:1;s:20:\"woocommerce-bookings\";}s:7:\"context\";a:1:{i:0;s:26:\"product-edit-meta-tab-body\";}s:4:\"icon\";s:106:\"https://woocommerce.com/wp-content/plugins/wccom-plugins/marketplace-suggestions/icons/product-add-ons.svg\";s:5:\"title\";s:15:\"Product Add-Ons\";s:4:\"copy\";s:93:\"Offer add-ons like gift wrapping, special messages or other special options for your products\";s:11:\"button-text\";s:10:\"Learn More\";s:3:\"url\";s:49:\"https://woocommerce.com/products/product-add-ons/\";}i:4;a:9:{s:4:\"slug\";s:46:\"product-edit-woocommerce-subscriptions-gifting\";s:7:\"product\";s:33:\"woocommerce-subscriptions-gifting\";s:14:\"show-if-active\";a:1:{i:0;s:25:\"woocommerce-subscriptions\";}s:7:\"context\";a:1:{i:0;s:26:\"product-edit-meta-tab-body\";}s:4:\"icon\";s:116:\"https://woocommerce.com/wp-content/plugins/wccom-plugins/marketplace-suggestions/icons/gifting-for-subscriptions.svg\";s:5:\"title\";s:25:\"Gifting for Subscriptions\";s:4:\"copy\";s:70:\"Let customers buy subscriptions for others - they\'re the ultimate gift\";s:11:\"button-text\";s:10:\"Learn More\";s:3:\"url\";s:67:\"https://woocommerce.com/products/woocommerce-subscriptions-gifting/\";}i:5;a:9:{s:4:\"slug\";s:42:\"product-edit-teams-woocommerce-memberships\";s:7:\"product\";s:33:\"woocommerce-memberships-for-teams\";s:14:\"show-if-active\";a:1:{i:0;s:23:\"woocommerce-memberships\";}s:7:\"context\";a:1:{i:0;s:26:\"product-edit-meta-tab-body\";}s:4:\"icon\";s:112:\"https://woocommerce.com/wp-content/plugins/wccom-plugins/marketplace-suggestions/icons/teams-for-memberships.svg\";s:5:\"title\";s:21:\"Teams for Memberships\";s:4:\"copy\";s:123:\"Adds B2B functionality to WooCommerce Memberships, allowing sites to sell team, group, corporate, or family member accounts\";s:11:\"button-text\";s:10:\"Learn More\";s:3:\"url\";s:63:\"https://woocommerce.com/products/teams-woocommerce-memberships/\";}i:6;a:8:{s:4:\"slug\";s:29:\"product-edit-variation-images\";s:7:\"product\";s:39:\"woocommerce-additional-variation-images\";s:7:\"context\";a:1:{i:0;s:26:\"product-edit-meta-tab-body\";}s:4:\"icon\";s:118:\"https://woocommerce.com/wp-content/plugins/wccom-plugins/marketplace-suggestions/icons/additional-variation-images.svg\";s:5:\"title\";s:27:\"Additional Variation Images\";s:4:\"copy\";s:72:\"Showcase your products in the best light with a image for each variation\";s:11:\"button-text\";s:10:\"Learn More\";s:3:\"url\";s:73:\"https://woocommerce.com/products/woocommerce-additional-variation-images/\";}i:7;a:9:{s:4:\"slug\";s:47:\"product-edit-woocommerce-subscription-downloads\";s:7:\"product\";s:34:\"woocommerce-subscription-downloads\";s:14:\"show-if-active\";a:1:{i:0;s:25:\"woocommerce-subscriptions\";}s:7:\"context\";a:1:{i:0;s:26:\"product-edit-meta-tab-body\";}s:4:\"icon\";s:113:\"https://woocommerce.com/wp-content/plugins/wccom-plugins/marketplace-suggestions/icons/subscription-downloads.svg\";s:5:\"title\";s:22:\"Subscription Downloads\";s:4:\"copy\";s:57:\"Give customers special downloads with their subscriptions\";s:11:\"button-text\";s:10:\"Learn More\";s:3:\"url\";s:68:\"https://woocommerce.com/products/woocommerce-subscription-downloads/\";}i:8;a:8:{s:4:\"slug\";s:31:\"product-edit-min-max-quantities\";s:7:\"product\";s:30:\"woocommerce-min-max-quantities\";s:7:\"context\";a:1:{i:0;s:26:\"product-edit-meta-tab-body\";}s:4:\"icon\";s:109:\"https://woocommerce.com/wp-content/plugins/wccom-plugins/marketplace-suggestions/icons/min-max-quantities.svg\";s:5:\"title\";s:18:\"Min/Max Quantities\";s:4:\"copy\";s:81:\"Specify minimum and maximum allowed product quantities for orders to be completed\";s:11:\"button-text\";s:10:\"Learn More\";s:3:\"url\";s:52:\"https://woocommerce.com/products/min-max-quantities/\";}i:9;a:8:{s:4:\"slug\";s:28:\"product-edit-name-your-price\";s:7:\"product\";s:27:\"woocommerce-name-your-price\";s:7:\"context\";a:1:{i:0;s:26:\"product-edit-meta-tab-body\";}s:4:\"icon\";s:106:\"https://woocommerce.com/wp-content/plugins/wccom-plugins/marketplace-suggestions/icons/name-your-price.svg\";s:5:\"title\";s:15:\"Name Your Price\";s:4:\"copy\";s:70:\"Let customers pay what they want - useful for donations, tips and more\";s:11:\"button-text\";s:10:\"Learn More\";s:3:\"url\";s:49:\"https://woocommerce.com/products/name-your-price/\";}i:10;a:8:{s:4:\"slug\";s:42:\"product-edit-woocommerce-one-page-checkout\";s:7:\"product\";s:29:\"woocommerce-one-page-checkout\";s:7:\"context\";a:1:{i:0;s:26:\"product-edit-meta-tab-body\";}s:4:\"icon\";s:108:\"https://woocommerce.com/wp-content/plugins/wccom-plugins/marketplace-suggestions/icons/one-page-checkout.svg\";s:5:\"title\";s:17:\"One Page Checkout\";s:4:\"copy\";s:92:\"Don\'t make customers click around - let them choose products, checkout & pay all on one page\";s:11:\"button-text\";s:10:\"Learn More\";s:3:\"url\";s:63:\"https://woocommerce.com/products/woocommerce-one-page-checkout/\";}i:11;a:4:{s:4:\"slug\";s:19:\"orders-empty-header\";s:7:\"context\";s:24:\"orders-list-empty-header\";s:5:\"title\";s:20:\"Tools for your store\";s:13:\"allow-dismiss\";b:0;}i:12;a:6:{s:4:\"slug\";s:30:\"orders-empty-footer-browse-all\";s:7:\"context\";s:24:\"orders-list-empty-footer\";s:9:\"link-text\";s:21:\"Browse all extensions\";s:3:\"url\";s:64:\"https://woocommerce.com/product-category/woocommerce-extensions/\";s:8:\"promoted\";s:31:\"category-woocommerce-extensions\";s:13:\"allow-dismiss\";b:0;}i:13;a:8:{s:4:\"slug\";s:19:\"orders-empty-zapier\";s:7:\"context\";s:22:\"orders-list-empty-body\";s:7:\"product\";s:18:\"woocommerce-zapier\";s:4:\"icon\";s:97:\"https://woocommerce.com/wp-content/plugins/wccom-plugins/marketplace-suggestions/icons/zapier.svg\";s:5:\"title\";s:6:\"Zapier\";s:4:\"copy\";s:88:\"Save time and increase productivity by connecting your store to more than 1000+ services\";s:11:\"button-text\";s:10:\"Learn More\";s:3:\"url\";s:52:\"https://woocommerce.com/products/woocommerce-zapier/\";}i:14;a:8:{s:4:\"slug\";s:30:\"orders-empty-shipment-tracking\";s:7:\"context\";s:22:\"orders-list-empty-body\";s:7:\"product\";s:29:\"woocommerce-shipment-tracking\";s:4:\"icon\";s:108:\"https://woocommerce.com/wp-content/plugins/wccom-plugins/marketplace-suggestions/icons/shipment-tracking.svg\";s:5:\"title\";s:17:\"Shipment Tracking\";s:4:\"copy\";s:86:\"Let customers know when their orders will arrive by adding shipment tracking to emails\";s:11:\"button-text\";s:10:\"Learn More\";s:3:\"url\";s:51:\"https://woocommerce.com/products/shipment-tracking/\";}i:15;a:8:{s:4:\"slug\";s:32:\"orders-empty-table-rate-shipping\";s:7:\"context\";s:22:\"orders-list-empty-body\";s:7:\"product\";s:31:\"woocommerce-table-rate-shipping\";s:4:\"icon\";s:110:\"https://woocommerce.com/wp-content/plugins/wccom-plugins/marketplace-suggestions/icons/table-rate-shipping.svg\";s:5:\"title\";s:19:\"Table Rate Shipping\";s:4:\"copy\";s:122:\"Advanced, flexible shipping. Define multiple shipping rates based on location, price, weight, shipping class or item count\";s:11:\"button-text\";s:10:\"Learn More\";s:3:\"url\";s:53:\"https://woocommerce.com/products/table-rate-shipping/\";}i:16;a:8:{s:4:\"slug\";s:40:\"orders-empty-shipping-carrier-extensions\";s:7:\"context\";s:22:\"orders-list-empty-body\";s:4:\"icon\";s:118:\"https://woocommerce.com/wp-content/plugins/wccom-plugins/marketplace-suggestions/icons/shipping-carrier-extensions.svg\";s:5:\"title\";s:27:\"Shipping Carrier Extensions\";s:4:\"copy\";s:116:\"Show live rates from FedEx, UPS, USPS and more directly on your store - never under or overcharge for shipping again\";s:11:\"button-text\";s:13:\"Find Carriers\";s:8:\"promoted\";s:26:\"category-shipping-carriers\";s:3:\"url\";s:99:\"https://woocommerce.com/product-category/woocommerce-extensions/shipping-methods/shipping-carriers/\";}i:17;a:8:{s:4:\"slug\";s:32:\"orders-empty-google-product-feed\";s:7:\"context\";s:22:\"orders-list-empty-body\";s:7:\"product\";s:25:\"woocommerce-product-feeds\";s:4:\"icon\";s:110:\"https://woocommerce.com/wp-content/plugins/wccom-plugins/marketplace-suggestions/icons/google-product-feed.svg\";s:5:\"title\";s:19:\"Google Product Feed\";s:4:\"copy\";s:76:\"Increase sales by letting customers find you when they\'re shopping on Google\";s:11:\"button-text\";s:10:\"Learn More\";s:3:\"url\";s:53:\"https://woocommerce.com/products/google-product-feed/\";}i:18;a:4:{s:4:\"slug\";s:35:\"products-empty-header-product-types\";s:7:\"context\";s:26:\"products-list-empty-header\";s:5:\"title\";s:23:\"Other types of products\";s:13:\"allow-dismiss\";b:0;}i:19;a:6:{s:4:\"slug\";s:32:\"products-empty-footer-browse-all\";s:7:\"context\";s:26:\"products-list-empty-footer\";s:9:\"link-text\";s:21:\"Browse all extensions\";s:3:\"url\";s:64:\"https://woocommerce.com/product-category/woocommerce-extensions/\";s:8:\"promoted\";s:31:\"category-woocommerce-extensions\";s:13:\"allow-dismiss\";b:0;}i:20;a:8:{s:4:\"slug\";s:30:\"products-empty-product-vendors\";s:7:\"context\";s:24:\"products-list-empty-body\";s:7:\"product\";s:27:\"woocommerce-product-vendors\";s:4:\"icon\";s:106:\"https://woocommerce.com/wp-content/plugins/wccom-plugins/marketplace-suggestions/icons/product-vendors.svg\";s:5:\"title\";s:15:\"Product Vendors\";s:4:\"copy\";s:47:\"Turn your store into a multi-vendor marketplace\";s:11:\"button-text\";s:10:\"Learn More\";s:3:\"url\";s:49:\"https://woocommerce.com/products/product-vendors/\";}i:21;a:8:{s:4:\"slug\";s:26:\"products-empty-memberships\";s:7:\"context\";s:24:\"products-list-empty-body\";s:7:\"product\";s:23:\"woocommerce-memberships\";s:4:\"icon\";s:102:\"https://woocommerce.com/wp-content/plugins/wccom-plugins/marketplace-suggestions/icons/memberships.svg\";s:5:\"title\";s:11:\"Memberships\";s:4:\"copy\";s:76:\"Give members access to restricted content or products, for a fee or for free\";s:11:\"button-text\";s:10:\"Learn More\";s:3:\"url\";s:57:\"https://woocommerce.com/products/woocommerce-memberships/\";}i:22;a:9:{s:4:\"slug\";s:35:\"products-empty-woocommerce-deposits\";s:7:\"context\";s:24:\"products-list-empty-body\";s:7:\"product\";s:20:\"woocommerce-deposits\";s:14:\"show-if-active\";a:1:{i:0;s:20:\"woocommerce-bookings\";}s:4:\"icon\";s:99:\"https://woocommerce.com/wp-content/plugins/wccom-plugins/marketplace-suggestions/icons/deposits.svg\";s:5:\"title\";s:8:\"Deposits\";s:4:\"copy\";s:75:\"Make it easier for customers to pay by offering a deposit or a payment plan\";s:11:\"button-text\";s:10:\"Learn More\";s:3:\"url\";s:54:\"https://woocommerce.com/products/woocommerce-deposits/\";}i:23;a:8:{s:4:\"slug\";s:40:\"products-empty-woocommerce-subscriptions\";s:7:\"context\";s:24:\"products-list-empty-body\";s:7:\"product\";s:25:\"woocommerce-subscriptions\";s:4:\"icon\";s:104:\"https://woocommerce.com/wp-content/plugins/wccom-plugins/marketplace-suggestions/icons/subscriptions.svg\";s:5:\"title\";s:13:\"Subscriptions\";s:4:\"copy\";s:97:\"Let customers subscribe to your products or services and pay on a weekly, monthly or annual basis\";s:11:\"button-text\";s:10:\"Learn More\";s:3:\"url\";s:59:\"https://woocommerce.com/products/woocommerce-subscriptions/\";}i:24;a:8:{s:4:\"slug\";s:35:\"products-empty-woocommerce-bookings\";s:7:\"context\";s:24:\"products-list-empty-body\";s:7:\"product\";s:20:\"woocommerce-bookings\";s:4:\"icon\";s:99:\"https://woocommerce.com/wp-content/plugins/wccom-plugins/marketplace-suggestions/icons/bookings.svg\";s:5:\"title\";s:8:\"Bookings\";s:4:\"copy\";s:99:\"Allow customers to book appointments, make reservations or rent equipment without leaving your site\";s:11:\"button-text\";s:10:\"Learn More\";s:3:\"url\";s:54:\"https://woocommerce.com/products/woocommerce-bookings/\";}i:25;a:8:{s:4:\"slug\";s:30:\"products-empty-product-bundles\";s:7:\"context\";s:24:\"products-list-empty-body\";s:7:\"product\";s:27:\"woocommerce-product-bundles\";s:4:\"icon\";s:106:\"https://woocommerce.com/wp-content/plugins/wccom-plugins/marketplace-suggestions/icons/product-bundles.svg\";s:5:\"title\";s:15:\"Product Bundles\";s:4:\"copy\";s:49:\"Offer customizable bundles and assembled products\";s:11:\"button-text\";s:10:\"Learn More\";s:3:\"url\";s:49:\"https://woocommerce.com/products/product-bundles/\";}}s:7:\"updated\";i:1592571014;}', 'no'),
-(1406, '_transient_product_query-transient-version', '1592824735', 'yes'),
-(1407, '_transient_product-transient-version', '1592824735', 'yes'),
-(1423, '_transient_wc_attribute_taxonomies', 'a:4:{i:0;O:8:\"stdClass\":6:{s:12:\"attribute_id\";s:1:\"4\";s:14:\"attribute_name\";s:13:\"diamond-shape\";s:15:\"attribute_label\";s:13:\"Diamond Shape\";s:14:\"attribute_type\";s:6:\"select\";s:17:\"attribute_orderby\";s:10:\"menu_order\";s:16:\"attribute_public\";s:1:\"0\";}i:1;O:8:\"stdClass\":6:{s:12:\"attribute_id\";s:1:\"1\";s:14:\"attribute_name\";s:11:\"metal-color\";s:15:\"attribute_label\";s:11:\"Metal Color\";s:14:\"attribute_type\";s:5:\"image\";s:17:\"attribute_orderby\";s:4:\"name\";s:16:\"attribute_public\";s:1:\"0\";}i:2;O:8:\"stdClass\":6:{s:12:\"attribute_id\";s:1:\"2\";s:14:\"attribute_name\";s:11:\"metal-color\";s:15:\"attribute_label\";s:11:\"Metal Color\";s:14:\"attribute_type\";s:5:\"image\";s:17:\"attribute_orderby\";s:4:\"name\";s:16:\"attribute_public\";s:1:\"0\";}i:3;O:8:\"stdClass\":6:{s:12:\"attribute_id\";s:1:\"3\";s:14:\"attribute_name\";s:13:\"setting-shape\";s:15:\"attribute_label\";s:13:\"Setting Shape\";s:14:\"attribute_type\";s:6:\"select\";s:17:\"attribute_orderby\";s:10:\"menu_order\";s:16:\"attribute_public\";s:1:\"0\";}}', 'yes'),
-(1455, 'eowbc_option_mapping_map_creation_modification', 's:243:\"a:1:{i:0;a:6:{s:21:\"eo_wbc_first_category\";s:2:\"17\";s:22:\"eo_wbc_second_category\";s:2:\"18\";s:27:\"eo_wbc_first_category_range\";s:0:\"\";s:28:\"eo_wbc_second_category_range\";s:0:\"\";s:19:\"eo_wbc_add_discount\";s:1:\"0\";s:2:\"id\";s:13:\"5ef1f4c941571\";}}\";', 'yes'),
-(1724, 'eowbc_option_appearance_wid_btns', 's:209:\"a:6:{s:12:\"tagline_text\";s:0:\"\";s:11:\"button_text\";s:0:\"\";s:13:\"button_radius\";s:0:\"\";s:23:\"button_backcolor_active\";s:7:\"#000000\";s:17:\"button_hovercolor\";s:7:\"#000000\";s:16:\"button_textcolor\";s:7:\"#000000\";}\";', 'yes'),
-(1725, 'eowbc_option_appearance_breadcrumb', 's:515:\"a:10:{s:17:\"breadcrumb_radius\";s:0:\"\";s:27:\"breadcrumb_backcolor_active\";s:7:\"#000000\";s:29:\"breadcrumb_backcolor_inactive\";s:7:\"#000000\";s:36:\"breadcrumb_num_icon_backcolor_active\";s:7:\"#000000\";s:38:\"breadcrumb_num_icon_backcolor_inactive\";s:7:\"#000000\";s:33:\"breadcrumb_title_backcolor_active\";s:7:\"#000000\";s:35:\"breadcrumb_title_backcolor_inactive\";s:7:\"#000000\";s:35:\"breadcrumb_actions_backcolor_active\";s:7:\"#000000\";s:37:\"breadcrumb_actions_backcolor_inactive\";s:7:\"#000000\";s:14:\"showhide_icons\";s:1:\"1\";}\";', 'yes'),
-(1726, 'eowbc_option_appearance_filters', 's:281:\"a:7:{s:11:\"header_font\";s:0:\"\";s:16:\"header_textcolor\";s:7:\"#000000\";s:16:\"labels_textcolor\";s:7:\"#000000\";s:29:\"slider_nodes_backcolor_active\";s:7:\"#000000\";s:29:\"slider_track_backcolor_active\";s:7:\"#000000\";s:9:\"icon_size\";s:4:\"50px\";s:15:\"icon_label_size\";s:13:\"0.78571429rem\";}\";', 'yes'),
-(1727, 'eowbc_option_appearance_product_page', 's:127:\"a:3:{s:18:\"fc_atc_button_text\";s:13:\"Add to bag...\";s:18:\"sc_atc_button_text\";s:0:\"\";s:26:\"product_page_add_to_basket\";s:0:\"\";}\";', 'yes'),
-(1777, '_site_transient_timeout_php_check_90e738eca301c4d89366b1a4d15fe37f', '1593410725', 'no'),
-(1779, '_site_transient_php_check_90e738eca301c4d89366b1a4d15fe37f', 'a:5:{s:19:\"recommended_version\";s:3:\"7.4\";s:15:\"minimum_version\";s:6:\"5.6.20\";s:12:\"is_supported\";b:1;s:9:\"is_secure\";b:1;s:13:\"is_acceptable\";b:1;}', 'no'),
-(1940, '_transient_timeout_wc_onboarding_themes', '1592910975', 'no'),
-(1941, '_transient_wc_onboarding_themes', 'a:22:{s:12:\"twentytwenty\";a:6:{s:4:\"slug\";s:12:\"twentytwenty\";s:5:\"title\";s:13:\"Twenty Twenty\";s:5:\"price\";s:4:\"0.00\";s:12:\"is_installed\";b:1;s:5:\"image\";s:124:\"http://127.0.0.1:8888/wp-content/themes/twentytwenty/screenshot.png\";s:23:\"has_woocommerce_support\";b:1;}s:10:\"storefront\";a:11:{s:5:\"title\";s:10:\"Storefront\";s:5:\"image\";s:77:\"https://woocommerce.com/wp-content/themes/woo/images/storefront/feature-1.jpg\";s:7:\"excerpt\";s:161:\"Storefront is an intuitive &amp; flexible, free theme offering deep integration with WooCommerce.\r\n\r\nIt\'s the perfect platform for your next WooCommerce project.\";s:4:\"link\";s:103:\"https://woocommerce.com/products/storefront/?utm_source=product&utm_medium=upsell&utm_campaign=wcaddons\";s:8:\"demo_url\";s:42:\"https://themes.woocommerce.com/storefront/\";s:5:\"price\";s:9:\"&#36;0.00\";s:4:\"hash\";s:32:\"5714dad8f8d0b930bd6cc9c99657b930\";s:4:\"slug\";s:10:\"storefront\";s:2:\"id\";i:565154;s:12:\"is_installed\";b:0;s:23:\"has_woocommerce_support\";b:1;}s:11:\"fifthavenue\";a:11:{s:5:\"title\";s:12:\"Fifth Avenue\";s:5:\"image\";s:59:\"https://woocommerce.com/wp-content/uploads/2020/06/ss01.jpg\";s:7:\"excerpt\";s:103:\"Beautiful Gutenberg powered WooCommerce theme designed to be easily customized for all types of stores.\";s:4:\"link\";s:105:\"https://woocommerce.com/products/fifth-avenue/?utm_source=product&utm_medium=upsell&utm_campaign=wcaddons\";s:8:\"demo_url\";s:35:\"https://fifthavenue.fuelthemes.net/\";s:5:\"price\";s:10:\"&#36;79.00\";s:4:\"hash\";s:36:\"9e093a9f-3d49-4fcd-bec7-c87b097d9df8\";s:4:\"slug\";s:11:\"fifthavenue\";s:2:\"id\";i:5989481;s:12:\"is_installed\";b:0;s:23:\"has_woocommerce_support\";b:1;}s:7:\"artisan\";a:11:{s:5:\"title\";s:7:\"Artisan\";s:5:\"image\";s:67:\"https://woocommerce.com/wp-content/uploads/2020/03/artisan-home.jpg\";s:7:\"excerpt\";s:79:\"Sell your hand-crafted products online using the Artisan Theme for WooCommerce.\";s:4:\"link\";s:100:\"https://woocommerce.com/products/artisan/?utm_source=product&utm_medium=upsell&utm_campaign=wcaddons\";s:8:\"demo_url\";s:39:\"https://organicthemes.com/demo/artisan/\";s:5:\"price\";s:10:\"&#36;79.00\";s:4:\"hash\";s:36:\"64529812-81f6-4efd-9686-ecb34e527421\";s:4:\"slug\";s:7:\"artisan\";s:2:\"id\";i:5576887;s:12:\"is_installed\";b:0;s:23:\"has_woocommerce_support\";b:1;}s:7:\"threads\";a:11:{s:5:\"title\";s:7:\"Threads\";s:5:\"image\";s:67:\"https://woocommerce.com/wp-content/uploads/2019/07/threads-home.jpg\";s:7:\"excerpt\";s:79:\"Create a stunning website for your apparel brand using Threads for WooCommerce.\";s:4:\"link\";s:100:\"https://woocommerce.com/products/threads/?utm_source=product&utm_medium=upsell&utm_campaign=wcaddons\";s:8:\"demo_url\";s:39:\"https://organicthemes.com/demo/threads/\";s:5:\"price\";s:10:\"&#36;79.00\";s:4:\"hash\";s:36:\"7ca579a6-6aaf-498c-9ee7-e15280ace9e9\";s:4:\"slug\";s:7:\"threads\";s:2:\"id\";i:4663191;s:12:\"is_installed\";b:0;s:23:\"has_woocommerce_support\";b:1;}s:10:\"block-shop\";a:11:{s:5:\"title\";s:10:\"Block Shop\";s:5:\"image\";s:79:\"https://woocommerce.com/wp-content/uploads/2019/08/block-shop-theme-preview.jpg\";s:7:\"excerpt\";s:154:\"A hassle-free Block-Editor-Era theme for your next WooCommerce project.\r\n\r\n&nbsp;\r\n\r\nPre-sale questions? Ask Get Bowtied: http://m.me/getbowtied\r\n\r\n&nbsp;\";s:4:\"link\";s:103:\"https://woocommerce.com/products/block-shop/?utm_source=product&utm_medium=upsell&utm_campaign=wcaddons\";s:8:\"demo_url\";s:34:\"https://blockshop.wp-theme.design/\";s:5:\"price\";s:10:\"&#36;59.00\";s:4:\"hash\";s:36:\"21fa433c-6c31-4be7-83ab-8d2cc8986130\";s:4:\"slug\";s:10:\"block-shop\";s:2:\"id\";i:4660093;s:12:\"is_installed\";b:0;s:23:\"has_woocommerce_support\";b:1;}s:6:\"bistro\";a:11:{s:5:\"title\";s:6:\"Bistro\";s:5:\"image\";s:61:\"https://woocommerce.com/wp-content/uploads/2016/07/bistro.png\";s:7:\"excerpt\";s:174:\"Bistro is a Storefront child theme designed for stores selling organic goods and other consumables. It features a friendly and warm design that lends itself to this industry.\";s:4:\"link\";s:99:\"https://woocommerce.com/products/bistro/?utm_source=product&utm_medium=upsell&utm_campaign=wcaddons\";s:8:\"demo_url\";s:37:\"https://themes.woocommerce.com/bistro\";s:5:\"price\";s:10:\"&#36;39.00\";s:4:\"hash\";s:32:\"58e753f91fddf40abe8ebe4486f8c378\";s:4:\"slug\";s:6:\"bistro\";s:2:\"id\";i:1822936;s:12:\"is_installed\";b:0;s:23:\"has_woocommerce_support\";b:1;}s:10:\"stationery\";a:11:{s:5:\"title\";s:10:\"Stationery\";s:5:\"image\";s:65:\"https://woocommerce.com/wp-content/uploads/2016/04/stationery.jpg\";s:7:\"excerpt\";s:186:\"Stationery is a Storefront child theme designed for stores selling office supplies and/or arts &amp; crafts. The design has subtle tactile decorations while also being clean and elegant.\";s:4:\"link\";s:103:\"https://woocommerce.com/products/stationery/?utm_source=product&utm_medium=upsell&utm_campaign=wcaddons\";s:8:\"demo_url\";s:42:\"https://themes.woocommerce.com/stationery/\";s:5:\"price\";s:10:\"&#36;39.00\";s:4:\"hash\";s:32:\"b939225b8b8ccdc7b14ffb6d7eab2ac2\";s:4:\"slug\";s:10:\"stationery\";s:2:\"id\";i:1629126;s:12:\"is_installed\";b:0;s:23:\"has_woocommerce_support\";b:1;}s:7:\"petshop\";a:11:{s:5:\"title\";s:7:\"Petshop\";s:5:\"image\";s:62:\"https://woocommerce.com/wp-content/uploads/2016/03/petshop.png\";s:7:\"excerpt\";s:181:\"Petshop is a Storefront child theme designed for stores selling products in the pet industry. The design is organic and friendly, featuring many details that point to pet ownership.\";s:4:\"link\";s:100:\"https://woocommerce.com/products/petshop/?utm_source=product&utm_medium=upsell&utm_campaign=wcaddons\";s:8:\"demo_url\";s:39:\"https://themes.woocommerce.com/petshop/\";s:5:\"price\";s:10:\"&#36;39.00\";s:4:\"hash\";s:32:\"8060743c9031974326850f539aba5196\";s:4:\"slug\";s:7:\"petshop\";s:2:\"id\";i:1587689;s:12:\"is_installed\";b:0;s:23:\"has_woocommerce_support\";b:1;}s:5:\"hotel\";a:11:{s:5:\"title\";s:5:\"Hotel\";s:5:\"image\";s:69:\"https://woocommerce.com/wp-content/uploads/2016/03/hotel-featured.jpg\";s:7:\"excerpt\";s:246:\"Hotel is designed for businesses selling time, services and accommodation, offering unique integration with WooCommerce Bookings and Accommodation Bookings. The design is bold yet simple, allowing your content and imagery to do all the talking.\";s:4:\"link\";s:98:\"https://woocommerce.com/products/hotel/?utm_source=product&utm_medium=upsell&utm_campaign=wcaddons\";s:8:\"demo_url\";s:37:\"https://themes.woocommerce.com/hotel/\";s:5:\"price\";s:10:\"&#36;39.00\";s:4:\"hash\";s:32:\"0b0df891aa46f289f4e49bae2389bb04\";s:4:\"slug\";s:5:\"hotel\";s:2:\"id\";i:1554532;s:12:\"is_installed\";b:0;s:23:\"has_woocommerce_support\";b:1;}s:8:\"bookshop\";a:11:{s:5:\"title\";s:8:\"Bookshop\";s:5:\"image\";s:63:\"https://woocommerce.com/wp-content/uploads/2016/02/featured.png\";s:7:\"excerpt\";s:183:\"Bookshop comes with a unique homepage layout that prominently displays product categories and a variety of products in an arrangement that is popular with bookstores and collectibles.\";s:4:\"link\";s:101:\"https://woocommerce.com/products/bookshop/?utm_source=product&utm_medium=upsell&utm_campaign=wcaddons\";s:8:\"demo_url\";s:40:\"https://themes.woocommerce.com/bookshop/\";s:5:\"price\";s:10:\"&#36;39.00\";s:4:\"hash\";s:32:\"9fe861227e3e82fde8fe5d7e8cc3340e\";s:4:\"slug\";s:8:\"bookshop\";s:2:\"id\";i:1508713;s:12:\"is_installed\";b:0;s:23:\"has_woocommerce_support\";b:1;}s:6:\"arcade\";a:11:{s:5:\"title\";s:6:\"Arcade\";s:5:\"image\";s:61:\"https://woocommerce.com/wp-content/uploads/2016/01/arcade.png\";s:7:\"excerpt\";s:216:\"Upgrade your video game shops look and feel with Arcade. It\'s bold and modern design will engage visitors and the unique homepage layout will present them with a variety of products as soon as they hit your homepage.\";s:4:\"link\";s:99:\"https://woocommerce.com/products/arcade/?utm_source=product&utm_medium=upsell&utm_campaign=wcaddons\";s:8:\"demo_url\";s:38:\"https://themes.woocommerce.com/arcade/\";s:5:\"price\";s:10:\"&#36;39.00\";s:4:\"hash\";s:32:\"5af09d4e590eec977c6b9519b517f479\";s:4:\"slug\";s:6:\"arcade\";s:2:\"id\";i:1418260;s:12:\"is_installed\";b:0;s:23:\"has_woocommerce_support\";b:1;}s:9:\"homestore\";a:11:{s:5:\"title\";s:9:\"Homestore\";s:5:\"image\";s:64:\"https://woocommerce.com/wp-content/uploads/2015/12/homestore.jpg\";s:7:\"excerpt\";s:166:\"Give your Department Store a classic look with Homestore. Its clean and efficient design will work well whether you\'re a boutique independent or a high street giant.\";s:4:\"link\";s:102:\"https://woocommerce.com/products/homestore/?utm_source=product&utm_medium=upsell&utm_campaign=wcaddons\";s:8:\"demo_url\";s:41:\"https://themes.woocommerce.com/homestore/\";s:5:\"price\";s:10:\"&#36;39.00\";s:4:\"hash\";s:32:\"d79fe7a1beba26523aafa6ce6d3e1e85\";s:4:\"slug\";s:9:\"homestore\";s:2:\"id\";i:1365559;s:12:\"is_installed\";b:0;s:23:\"has_woocommerce_support\";b:1;}s:8:\"pharmacy\";a:11:{s:5:\"title\";s:8:\"Pharmacy\";s:5:\"image\";s:63:\"https://woocommerce.com/wp-content/uploads/2015/12/pharmacy.jpg\";s:7:\"excerpt\";s:235:\"Give your health store a professional, trust-worthy design with the Pharmacy Storefront Child Theme. Built upon our rock solid Storefront Parent theme you\'ll also enjoy reliable integration with current and future WooCommerce releases.\";s:4:\"link\";s:101:\"https://woocommerce.com/products/pharmacy/?utm_source=product&utm_medium=upsell&utm_campaign=wcaddons\";s:8:\"demo_url\";s:40:\"https://themes.woocommerce.com/pharmacy/\";s:5:\"price\";s:10:\"&#36;39.00\";s:4:\"hash\";s:32:\"ebeff3c0f89cd3169fb6b3e7e137e513\";s:4:\"slug\";s:8:\"pharmacy\";s:2:\"id\";i:1365557;s:12:\"is_installed\";b:0;s:23:\"has_woocommerce_support\";b:1;}s:7:\"toyshop\";a:11:{s:5:\"title\";s:7:\"ToyShop\";s:5:\"image\";s:62:\"https://woocommerce.com/wp-content/uploads/2015/09/toyshop.jpg\";s:7:\"excerpt\";s:269:\"Add some fun to your store with ToyShop. The engaging and colorful design of ToyShop makes it a perfect child theme or any store that sells exciting products that are aimed at customers that like to have fun. The outdoorsy style would even be perfect for a flower shop.\";s:4:\"link\";s:100:\"https://woocommerce.com/products/toyshop/?utm_source=product&utm_medium=upsell&utm_campaign=wcaddons\";s:8:\"demo_url\";s:39:\"https://themes.woocommerce.com/toyshop/\";s:5:\"price\";s:10:\"&#36;39.00\";s:4:\"hash\";s:32:\"3e2520021b41ee49a55b93362aaced98\";s:4:\"slug\";s:7:\"toyshop\";s:2:\"id\";i:1230716;s:12:\"is_installed\";b:0;s:23:\"has_woocommerce_support\";b:1;}s:6:\"outlet\";a:11:{s:5:\"title\";s:6:\"Outlet\";s:5:\"image\";s:61:\"https://woocommerce.com/wp-content/uploads/2015/09/outlet.jpg\";s:7:\"excerpt\";s:221:\"Overclock your tech store with Outlet! Whether you sell boutique iPad jewellery or the nuts and bolts of hardware itself, Outlet will give your shop a stylish look and feel while enjoying the stability of Storefront core.\";s:4:\"link\";s:99:\"https://woocommerce.com/products/outlet/?utm_source=product&utm_medium=upsell&utm_campaign=wcaddons\";s:8:\"demo_url\";s:38:\"https://themes.woocommerce.com/outlet/\";s:5:\"price\";s:10:\"&#36;39.00\";s:4:\"hash\";s:32:\"4c311cb3a3131570946b8799715a0991\";s:4:\"slug\";s:6:\"outlet\";s:2:\"id\";i:1212805;s:12:\"is_installed\";b:0;s:23:\"has_woocommerce_support\";b:1;}s:7:\"proshop\";a:11:{s:5:\"title\";s:7:\"ProShop\";s:5:\"image\";s:62:\"https://woocommerce.com/wp-content/uploads/2015/06/proshop.jpg\";s:7:\"excerpt\";s:176:\"Unlock the true potential of your sports clothing and equipment store with ProShop! It\'s metropolitan design provides an active aesthetic giving your store oodles of character.\";s:4:\"link\";s:100:\"https://woocommerce.com/products/proshop/?utm_source=product&utm_medium=upsell&utm_campaign=wcaddons\";s:8:\"demo_url\";s:39:\"https://themes.woocommerce.com/proshop/\";s:5:\"price\";s:10:\"&#36;39.00\";s:4:\"hash\";s:32:\"1d51b8633bbd1782dc17fce15f8bd2af\";s:4:\"slug\";s:7:\"proshop\";s:2:\"id\";i:1000757;s:12:\"is_installed\";b:0;s:23:\"has_woocommerce_support\";b:1;}s:8:\"galleria\";a:11:{s:5:\"title\";s:8:\"Galleria\";s:5:\"image\";s:68:\"https://woocommerce.com/wp-content/uploads/2015/05/galleria-hero.png\";s:7:\"excerpt\";s:162:\"Galleria is a Storefront child theme perfect for fashion and design stores. Stylish and minimalist, it gives sites a classy look and keeps products center stage.\";s:4:\"link\";s:101:\"https://woocommerce.com/products/galleria/?utm_source=product&utm_medium=upsell&utm_campaign=wcaddons\";s:8:\"demo_url\";s:40:\"https://themes.woocommerce.com/galleria/\";s:5:\"price\";s:10:\"&#36;39.00\";s:4:\"hash\";s:32:\"2429c1dde521031cd053886b15844bbf\";s:4:\"slug\";s:8:\"galleria\";s:2:\"id\";i:887931;s:12:\"is_installed\";b:0;s:23:\"has_woocommerce_support\";b:1;}s:4:\"deli\";a:11:{s:5:\"title\";s:4:\"Deli\";s:5:\"image\";s:59:\"https://woocommerce.com/wp-content/uploads/2015/03/deli.jpg\";s:7:\"excerpt\";s:135:\"Deli is a Storefront child theme featuring a texturised, earthy design, perfect for stores selling natural, organic or hand made goods.\";s:4:\"link\";s:97:\"https://woocommerce.com/products/deli/?utm_source=product&utm_medium=upsell&utm_campaign=wcaddons\";s:8:\"demo_url\";s:36:\"https://themes.woocommerce.com/deli/\";s:5:\"price\";s:9:\"&#36;0.00\";s:4:\"hash\";s:32:\"83c6db94c8ebf9da56b59fb97f724e88\";s:4:\"slug\";s:4:\"deli\";s:2:\"id\";i:784823;s:12:\"is_installed\";b:0;s:23:\"has_woocommerce_support\";b:1;}s:8:\"boutique\";a:11:{s:5:\"title\";s:8:\"Boutique\";s:5:\"image\";s:63:\"https://woocommerce.com/wp-content/uploads/2015/01/boutique.png\";s:7:\"excerpt\";s:168:\"Boutique is a simple, traditionally designed Storefront child theme, ideal for small stores or boutiques. Add your logo, create a unique color scheme and start selling!\";s:4:\"link\";s:101:\"https://woocommerce.com/products/boutique/?utm_source=product&utm_medium=upsell&utm_campaign=wcaddons\";s:8:\"demo_url\";s:40:\"https://themes.woocommerce.com/boutique/\";s:5:\"price\";s:9:\"&#36;0.00\";s:4:\"hash\";s:32:\"71815288e266d58031727d48d6deee25\";s:4:\"slug\";s:8:\"boutique\";s:2:\"id\";i:605777;s:12:\"is_installed\";b:0;s:23:\"has_woocommerce_support\";b:1;}s:14:\"twentynineteen\";a:6:{s:4:\"slug\";s:14:\"twentynineteen\";s:5:\"title\";s:15:\"Twenty Nineteen\";s:5:\"price\";s:4:\"0.00\";s:12:\"is_installed\";b:1;s:5:\"image\";s:126:\"http://127.0.0.1:8888/wp-content/themes/twentynineteen/screenshot.png\";s:23:\"has_woocommerce_support\";b:0;}s:15:\"twentyseventeen\";a:6:{s:4:\"slug\";s:15:\"twentyseventeen\";s:5:\"title\";s:16:\"Twenty Seventeen\";s:5:\"price\";s:4:\"0.00\";s:12:\"is_installed\";b:1;s:5:\"image\";s:127:\"http://127.0.0.1:8888/wp-content/themes/twentyseventeen/screenshot.png\";s:23:\"has_woocommerce_support\";b:0;}}', 'no'),
-(1950, 'product_cat_children', 'a:0:{}', 'yes'),
-(2068, '_transient_timeout__woocommerce_helper_updates', '1592952006', 'no'),
-(2069, '_transient__woocommerce_helper_updates', 'a:4:{s:4:\"hash\";s:32:\"d751713988987e9331980363e24189ce\";s:7:\"updated\";i:1592908806;s:8:\"products\";a:0:{}s:6:\"errors\";a:1:{i:0;s:10:\"http-error\";}}', 'no'),
-(2071, '_site_transient_update_themes', 'O:8:\"stdClass\":4:{s:12:\"last_checked\";i:1592908810;s:7:\"checked\";a:3:{s:14:\"twentynineteen\";s:3:\"1.5\";s:15:\"twentyseventeen\";s:3:\"2.3\";s:12:\"twentytwenty\";s:3:\"1.2\";}s:8:\"response\";a:2:{s:14:\"twentynineteen\";a:6:{s:5:\"theme\";s:14:\"twentynineteen\";s:11:\"new_version\";s:3:\"1.6\";s:3:\"url\";s:44:\"https://wordpress.org/themes/twentynineteen/\";s:7:\"package\";s:60:\"https://downloads.wordpress.org/theme/twentynineteen.1.6.zip\";s:8:\"requires\";s:5:\"4.9.6\";s:12:\"requires_php\";s:5:\"5.2.4\";}s:12:\"twentytwenty\";a:6:{s:5:\"theme\";s:12:\"twentytwenty\";s:11:\"new_version\";s:3:\"1.4\";s:3:\"url\";s:42:\"https://wordpress.org/themes/twentytwenty/\";s:7:\"package\";s:58:\"https://downloads.wordpress.org/theme/twentytwenty.1.4.zip\";s:8:\"requires\";s:3:\"4.7\";s:12:\"requires_php\";s:5:\"5.2.4\";}}s:12:\"translations\";a:0:{}}', 'no'),
-(2072, '_site_transient_update_plugins', 'O:8:\"stdClass\":5:{s:12:\"last_checked\";i:1592908816;s:7:\"checked\";a:5:{s:19:\"akismet/akismet.php\";s:5:\"4.1.5\";s:37:\"error-log-viewer/error-log-viewer.php\";s:5:\"1.1.1\";s:9:\"hello.php\";s:5:\"1.7.2\";s:47:\"woo-bundle-choice/woocommerce-bundle-choice.php\";s:5:\"1.0.0\";s:27:\"woocommerce/woocommerce.php\";s:5:\"4.2.0\";}s:8:\"response\";a:2:{s:19:\"akismet/akismet.php\";O:8:\"stdClass\":12:{s:2:\"id\";s:21:\"w.org/plugins/akismet\";s:4:\"slug\";s:7:\"akismet\";s:6:\"plugin\";s:19:\"akismet/akismet.php\";s:11:\"new_version\";s:5:\"4.1.6\";s:3:\"url\";s:38:\"https://wordpress.org/plugins/akismet/\";s:7:\"package\";s:56:\"https://downloads.wordpress.org/plugin/akismet.4.1.6.zip\";s:5:\"icons\";a:2:{s:2:\"2x\";s:59:\"https://ps.w.org/akismet/assets/icon-256x256.png?rev=969272\";s:2:\"1x\";s:59:\"https://ps.w.org/akismet/assets/icon-128x128.png?rev=969272\";}s:7:\"banners\";a:1:{s:2:\"1x\";s:61:\"https://ps.w.org/akismet/assets/banner-772x250.jpg?rev=479904\";}s:11:\"banners_rtl\";a:0:{}s:6:\"tested\";s:5:\"5.4.2\";s:12:\"requires_php\";b:0;s:13:\"compatibility\";O:8:\"stdClass\":0:{}}s:27:\"woocommerce/woocommerce.php\";O:8:\"stdClass\":12:{s:2:\"id\";s:25:\"w.org/plugins/woocommerce\";s:4:\"slug\";s:11:\"woocommerce\";s:6:\"plugin\";s:27:\"woocommerce/woocommerce.php\";s:11:\"new_version\";s:5:\"4.2.1\";s:3:\"url\";s:42:\"https://wordpress.org/plugins/woocommerce/\";s:7:\"package\";s:60:\"https://downloads.wordpress.org/plugin/woocommerce.4.2.1.zip\";s:5:\"icons\";a:2:{s:2:\"2x\";s:64:\"https://ps.w.org/woocommerce/assets/icon-256x256.png?rev=2075035\";s:2:\"1x\";s:64:\"https://ps.w.org/woocommerce/assets/icon-128x128.png?rev=2075035\";}s:7:\"banners\";a:2:{s:2:\"2x\";s:67:\"https://ps.w.org/woocommerce/assets/banner-1544x500.png?rev=2075035\";s:2:\"1x\";s:66:\"https://ps.w.org/woocommerce/assets/banner-772x250.png?rev=2075035\";}s:11:\"banners_rtl\";a:0:{}s:6:\"tested\";s:5:\"5.4.2\";s:12:\"requires_php\";s:3:\"7.0\";s:13:\"compatibility\";O:8:\"stdClass\":0:{}}}s:12:\"translations\";a:0:{}s:9:\"no_update\";a:3:{s:37:\"error-log-viewer/error-log-viewer.php\";O:8:\"stdClass\":9:{s:2:\"id\";s:30:\"w.org/plugins/error-log-viewer\";s:4:\"slug\";s:16:\"error-log-viewer\";s:6:\"plugin\";s:37:\"error-log-viewer/error-log-viewer.php\";s:11:\"new_version\";s:5:\"1.1.1\";s:3:\"url\";s:47:\"https://wordpress.org/plugins/error-log-viewer/\";s:7:\"package\";s:65:\"https://downloads.wordpress.org/plugin/error-log-viewer.1.1.1.zip\";s:5:\"icons\";a:2:{s:2:\"2x\";s:69:\"https://ps.w.org/error-log-viewer/assets/icon-256x256.png?rev=2274039\";s:2:\"1x\";s:69:\"https://ps.w.org/error-log-viewer/assets/icon-128x128.png?rev=2274039\";}s:7:\"banners\";a:2:{s:2:\"2x\";s:72:\"https://ps.w.org/error-log-viewer/assets/banner-1544x500.jpg?rev=2274039\";s:2:\"1x\";s:71:\"https://ps.w.org/error-log-viewer/assets/banner-772x250.jpg?rev=2274039\";}s:11:\"banners_rtl\";a:0:{}}s:9:\"hello.php\";O:8:\"stdClass\":9:{s:2:\"id\";s:25:\"w.org/plugins/hello-dolly\";s:4:\"slug\";s:11:\"hello-dolly\";s:6:\"plugin\";s:9:\"hello.php\";s:11:\"new_version\";s:5:\"1.7.2\";s:3:\"url\";s:42:\"https://wordpress.org/plugins/hello-dolly/\";s:7:\"package\";s:60:\"https://downloads.wordpress.org/plugin/hello-dolly.1.7.2.zip\";s:5:\"icons\";a:2:{s:2:\"2x\";s:64:\"https://ps.w.org/hello-dolly/assets/icon-256x256.jpg?rev=2052855\";s:2:\"1x\";s:64:\"https://ps.w.org/hello-dolly/assets/icon-128x128.jpg?rev=2052855\";}s:7:\"banners\";a:1:{s:2:\"1x\";s:66:\"https://ps.w.org/hello-dolly/assets/banner-772x250.jpg?rev=2052855\";}s:11:\"banners_rtl\";a:0:{}}s:47:\"woo-bundle-choice/woocommerce-bundle-choice.php\";O:8:\"stdClass\":9:{s:2:\"id\";s:31:\"w.org/plugins/woo-bundle-choice\";s:4:\"slug\";s:17:\"woo-bundle-choice\";s:6:\"plugin\";s:47:\"woo-bundle-choice/woocommerce-bundle-choice.php\";s:11:\"new_version\";s:6:\"0.5.70\";s:3:\"url\";s:48:\"https://wordpress.org/plugins/woo-bundle-choice/\";s:7:\"package\";s:67:\"https://downloads.wordpress.org/plugin/woo-bundle-choice.0.5.70.zip\";s:5:\"icons\";a:2:{s:2:\"2x\";s:70:\"https://ps.w.org/woo-bundle-choice/assets/icon-256x256.png?rev=2209139\";s:2:\"1x\";s:70:\"https://ps.w.org/woo-bundle-choice/assets/icon-256x256.png?rev=2209139\";}s:7:\"banners\";a:1:{s:2:\"1x\";s:72:\"https://ps.w.org/woo-bundle-choice/assets/banner-772x250.png?rev=2270415\";}s:11:\"banners_rtl\";a:0:{}}}}', 'no'),
-(2177, '_site_transient_timeout_theme_roots', '1592923135', 'no'),
-(2178, '_site_transient_theme_roots', 'a:3:{s:14:\"twentynineteen\";s:7:\"/themes\";s:15:\"twentyseventeen\";s:7:\"/themes\";s:12:\"twentytwenty\";s:7:\"/themes\";}', 'no');
-=======
-(385, 'eowbc_option_configuration', 's:666:\"a:21:{s:14:\"category_count\";i:2;s:10:\"first_name\";s:2:\"19\";s:10:\"first_slug\";s:7:\"diamond\";s:9:\"first_url\";s:0:\"\";s:11:\"second_name\";s:2:\"20\";s:11:\"second_slug\";s:7:\"setting\";s:10:\"second_url\";s:0:\"\";s:15:\"collection_name\";s:7:\"Preview\";s:11:\"review_page\";s:23:\"/eo-wbc-product-review/\";s:15:\"config_category\";i:1;s:10:\"config_map\";i:1;s:17:\"pair_maker_status\";s:10:\"pair_maker\";s:27:\"config_alternate_breadcrumb\";s:7:\"default\";s:12:\"buttons_page\";s:1:\"1\";s:16:\"enable_make_pair\";s:0:\"\";s:15:\"label_make_pair\";s:0:\"\";s:10:\"first_icon\";s:0:\"\";s:11:\"second_icon\";s:0:\"\";s:12:\"preview_name\";s:7:\"Preview\";s:12:\"preview_icon\";s:0:\"\";s:21:\"pair_maker_upper_card\";s:0:\"\";}\";', 'yes'),
-(386, 'eowbc_option__system', 's:32:\"a:1:{s:7:\"version\";s:5:\"1.0.0\";}\";', 'yes'),
-(387, 'eowbc_warning_count', '36', 'yes'),
+(387, 'eowbc_warning_count', '0', 'yes'),
 (556, 'eowbc_option_eo_wbc', 's:102:\"a:2:{s:14:\"inventory_type\";s:7:\"jewelry\";s:14:\"feature_option\";s:30:\"a:1:{i:0;s:12:\"ring_builder\";}\";}\";', 'yes'),
 (573, 'eowbc_option_setting_status_setting_status_setting', 's:146:\"a:3:{s:14:\"inventory_type\";s:7:\"jewelry\";s:8:\"features\";s:30:\"a:1:{i:0;s:12:\"ring_builder\";}\";s:13:\"saved_tab_key\";s:22:\"setting_status_setting\";}\";', 'yes'),
 (846, 'eowbc_option_filters_d_fconfig', 's:6:\"a:0:{}\";', 'yes'),
 (858, 'eowbc_option_filters_s_fconfig', 's:6:\"a:0:{}\";', 'yes'),
-(995, 'eowbc_error_count', '9', 'yes'),
+(995, 'eowbc_error_count', '0', 'yes'),
 (1137, 'action_scheduler_migration_status', 'complete', 'yes');
 INSERT INTO `wp_options` (`option_id`, `option_name`, `option_value`, `autoload`) VALUES
 (1404, 'woocommerce_marketplace_suggestions', 'a:2:{s:11:\"suggestions\";a:26:{i:0;a:4:{s:4:\"slug\";s:28:\"product-edit-meta-tab-header\";s:7:\"context\";s:28:\"product-edit-meta-tab-header\";s:5:\"title\";s:22:\"Recommended extensions\";s:13:\"allow-dismiss\";b:0;}i:1;a:6:{s:4:\"slug\";s:39:\"product-edit-meta-tab-footer-browse-all\";s:7:\"context\";s:28:\"product-edit-meta-tab-footer\";s:9:\"link-text\";s:21:\"Browse all extensions\";s:3:\"url\";s:64:\"https://woocommerce.com/product-category/woocommerce-extensions/\";s:8:\"promoted\";s:31:\"category-woocommerce-extensions\";s:13:\"allow-dismiss\";b:0;}i:2;a:9:{s:4:\"slug\";s:46:\"product-edit-mailchimp-woocommerce-memberships\";s:7:\"product\";s:33:\"woocommerce-memberships-mailchimp\";s:14:\"show-if-active\";a:1:{i:0;s:23:\"woocommerce-memberships\";}s:7:\"context\";a:1:{i:0;s:26:\"product-edit-meta-tab-body\";}s:4:\"icon\";s:116:\"https://woocommerce.com/wp-content/plugins/wccom-plugins/marketplace-suggestions/icons/mailchimp-for-memberships.svg\";s:5:\"title\";s:25:\"Mailchimp for Memberships\";s:4:\"copy\";s:79:\"Completely automate your email lists by syncing membership changes to Mailchimp\";s:11:\"button-text\";s:10:\"Learn More\";s:3:\"url\";s:67:\"https://woocommerce.com/products/mailchimp-woocommerce-memberships/\";}i:3;a:9:{s:4:\"slug\";s:19:\"product-edit-addons\";s:7:\"product\";s:26:\"woocommerce-product-addons\";s:14:\"show-if-active\";a:2:{i:0;s:25:\"woocommerce-subscriptions\";i:1;s:20:\"woocommerce-bookings\";}s:7:\"context\";a:1:{i:0;s:26:\"product-edit-meta-tab-body\";}s:4:\"icon\";s:106:\"https://woocommerce.com/wp-content/plugins/wccom-plugins/marketplace-suggestions/icons/product-add-ons.svg\";s:5:\"title\";s:15:\"Product Add-Ons\";s:4:\"copy\";s:93:\"Offer add-ons like gift wrapping, special messages or other special options for your products\";s:11:\"button-text\";s:10:\"Learn More\";s:3:\"url\";s:49:\"https://woocommerce.com/products/product-add-ons/\";}i:4;a:9:{s:4:\"slug\";s:46:\"product-edit-woocommerce-subscriptions-gifting\";s:7:\"product\";s:33:\"woocommerce-subscriptions-gifting\";s:14:\"show-if-active\";a:1:{i:0;s:25:\"woocommerce-subscriptions\";}s:7:\"context\";a:1:{i:0;s:26:\"product-edit-meta-tab-body\";}s:4:\"icon\";s:116:\"https://woocommerce.com/wp-content/plugins/wccom-plugins/marketplace-suggestions/icons/gifting-for-subscriptions.svg\";s:5:\"title\";s:25:\"Gifting for Subscriptions\";s:4:\"copy\";s:70:\"Let customers buy subscriptions for others - they\'re the ultimate gift\";s:11:\"button-text\";s:10:\"Learn More\";s:3:\"url\";s:67:\"https://woocommerce.com/products/woocommerce-subscriptions-gifting/\";}i:5;a:9:{s:4:\"slug\";s:42:\"product-edit-teams-woocommerce-memberships\";s:7:\"product\";s:33:\"woocommerce-memberships-for-teams\";s:14:\"show-if-active\";a:1:{i:0;s:23:\"woocommerce-memberships\";}s:7:\"context\";a:1:{i:0;s:26:\"product-edit-meta-tab-body\";}s:4:\"icon\";s:112:\"https://woocommerce.com/wp-content/plugins/wccom-plugins/marketplace-suggestions/icons/teams-for-memberships.svg\";s:5:\"title\";s:21:\"Teams for Memberships\";s:4:\"copy\";s:123:\"Adds B2B functionality to WooCommerce Memberships, allowing sites to sell team, group, corporate, or family member accounts\";s:11:\"button-text\";s:10:\"Learn More\";s:3:\"url\";s:63:\"https://woocommerce.com/products/teams-woocommerce-memberships/\";}i:6;a:8:{s:4:\"slug\";s:29:\"product-edit-variation-images\";s:7:\"product\";s:39:\"woocommerce-additional-variation-images\";s:7:\"context\";a:1:{i:0;s:26:\"product-edit-meta-tab-body\";}s:4:\"icon\";s:118:\"https://woocommerce.com/wp-content/plugins/wccom-plugins/marketplace-suggestions/icons/additional-variation-images.svg\";s:5:\"title\";s:27:\"Additional Variation Images\";s:4:\"copy\";s:72:\"Showcase your products in the best light with a image for each variation\";s:11:\"button-text\";s:10:\"Learn More\";s:3:\"url\";s:73:\"https://woocommerce.com/products/woocommerce-additional-variation-images/\";}i:7;a:9:{s:4:\"slug\";s:47:\"product-edit-woocommerce-subscription-downloads\";s:7:\"product\";s:34:\"woocommerce-subscription-downloads\";s:14:\"show-if-active\";a:1:{i:0;s:25:\"woocommerce-subscriptions\";}s:7:\"context\";a:1:{i:0;s:26:\"product-edit-meta-tab-body\";}s:4:\"icon\";s:113:\"https://woocommerce.com/wp-content/plugins/wccom-plugins/marketplace-suggestions/icons/subscription-downloads.svg\";s:5:\"title\";s:22:\"Subscription Downloads\";s:4:\"copy\";s:57:\"Give customers special downloads with their subscriptions\";s:11:\"button-text\";s:10:\"Learn More\";s:3:\"url\";s:68:\"https://woocommerce.com/products/woocommerce-subscription-downloads/\";}i:8;a:8:{s:4:\"slug\";s:31:\"product-edit-min-max-quantities\";s:7:\"product\";s:30:\"woocommerce-min-max-quantities\";s:7:\"context\";a:1:{i:0;s:26:\"product-edit-meta-tab-body\";}s:4:\"icon\";s:109:\"https://woocommerce.com/wp-content/plugins/wccom-plugins/marketplace-suggestions/icons/min-max-quantities.svg\";s:5:\"title\";s:18:\"Min/Max Quantities\";s:4:\"copy\";s:81:\"Specify minimum and maximum allowed product quantities for orders to be completed\";s:11:\"button-text\";s:10:\"Learn More\";s:3:\"url\";s:52:\"https://woocommerce.com/products/min-max-quantities/\";}i:9;a:8:{s:4:\"slug\";s:28:\"product-edit-name-your-price\";s:7:\"product\";s:27:\"woocommerce-name-your-price\";s:7:\"context\";a:1:{i:0;s:26:\"product-edit-meta-tab-body\";}s:4:\"icon\";s:106:\"https://woocommerce.com/wp-content/plugins/wccom-plugins/marketplace-suggestions/icons/name-your-price.svg\";s:5:\"title\";s:15:\"Name Your Price\";s:4:\"copy\";s:70:\"Let customers pay what they want - useful for donations, tips and more\";s:11:\"button-text\";s:10:\"Learn More\";s:3:\"url\";s:49:\"https://woocommerce.com/products/name-your-price/\";}i:10;a:8:{s:4:\"slug\";s:42:\"product-edit-woocommerce-one-page-checkout\";s:7:\"product\";s:29:\"woocommerce-one-page-checkout\";s:7:\"context\";a:1:{i:0;s:26:\"product-edit-meta-tab-body\";}s:4:\"icon\";s:108:\"https://woocommerce.com/wp-content/plugins/wccom-plugins/marketplace-suggestions/icons/one-page-checkout.svg\";s:5:\"title\";s:17:\"One Page Checkout\";s:4:\"copy\";s:92:\"Don\'t make customers click around - let them choose products, checkout & pay all on one page\";s:11:\"button-text\";s:10:\"Learn More\";s:3:\"url\";s:63:\"https://woocommerce.com/products/woocommerce-one-page-checkout/\";}i:11;a:4:{s:4:\"slug\";s:19:\"orders-empty-header\";s:7:\"context\";s:24:\"orders-list-empty-header\";s:5:\"title\";s:20:\"Tools for your store\";s:13:\"allow-dismiss\";b:0;}i:12;a:6:{s:4:\"slug\";s:30:\"orders-empty-footer-browse-all\";s:7:\"context\";s:24:\"orders-list-empty-footer\";s:9:\"link-text\";s:21:\"Browse all extensions\";s:3:\"url\";s:64:\"https://woocommerce.com/product-category/woocommerce-extensions/\";s:8:\"promoted\";s:31:\"category-woocommerce-extensions\";s:13:\"allow-dismiss\";b:0;}i:13;a:8:{s:4:\"slug\";s:19:\"orders-empty-zapier\";s:7:\"context\";s:22:\"orders-list-empty-body\";s:7:\"product\";s:18:\"woocommerce-zapier\";s:4:\"icon\";s:97:\"https://woocommerce.com/wp-content/plugins/wccom-plugins/marketplace-suggestions/icons/zapier.svg\";s:5:\"title\";s:6:\"Zapier\";s:4:\"copy\";s:88:\"Save time and increase productivity by connecting your store to more than 1000+ services\";s:11:\"button-text\";s:10:\"Learn More\";s:3:\"url\";s:52:\"https://woocommerce.com/products/woocommerce-zapier/\";}i:14;a:8:{s:4:\"slug\";s:30:\"orders-empty-shipment-tracking\";s:7:\"context\";s:22:\"orders-list-empty-body\";s:7:\"product\";s:29:\"woocommerce-shipment-tracking\";s:4:\"icon\";s:108:\"https://woocommerce.com/wp-content/plugins/wccom-plugins/marketplace-suggestions/icons/shipment-tracking.svg\";s:5:\"title\";s:17:\"Shipment Tracking\";s:4:\"copy\";s:86:\"Let customers know when their orders will arrive by adding shipment tracking to emails\";s:11:\"button-text\";s:10:\"Learn More\";s:3:\"url\";s:51:\"https://woocommerce.com/products/shipment-tracking/\";}i:15;a:8:{s:4:\"slug\";s:32:\"orders-empty-table-rate-shipping\";s:7:\"context\";s:22:\"orders-list-empty-body\";s:7:\"product\";s:31:\"woocommerce-table-rate-shipping\";s:4:\"icon\";s:110:\"https://woocommerce.com/wp-content/plugins/wccom-plugins/marketplace-suggestions/icons/table-rate-shipping.svg\";s:5:\"title\";s:19:\"Table Rate Shipping\";s:4:\"copy\";s:122:\"Advanced, flexible shipping. Define multiple shipping rates based on location, price, weight, shipping class or item count\";s:11:\"button-text\";s:10:\"Learn More\";s:3:\"url\";s:53:\"https://woocommerce.com/products/table-rate-shipping/\";}i:16;a:8:{s:4:\"slug\";s:40:\"orders-empty-shipping-carrier-extensions\";s:7:\"context\";s:22:\"orders-list-empty-body\";s:4:\"icon\";s:118:\"https://woocommerce.com/wp-content/plugins/wccom-plugins/marketplace-suggestions/icons/shipping-carrier-extensions.svg\";s:5:\"title\";s:27:\"Shipping Carrier Extensions\";s:4:\"copy\";s:116:\"Show live rates from FedEx, UPS, USPS and more directly on your store - never under or overcharge for shipping again\";s:11:\"button-text\";s:13:\"Find Carriers\";s:8:\"promoted\";s:26:\"category-shipping-carriers\";s:3:\"url\";s:99:\"https://woocommerce.com/product-category/woocommerce-extensions/shipping-methods/shipping-carriers/\";}i:17;a:8:{s:4:\"slug\";s:32:\"orders-empty-google-product-feed\";s:7:\"context\";s:22:\"orders-list-empty-body\";s:7:\"product\";s:25:\"woocommerce-product-feeds\";s:4:\"icon\";s:110:\"https://woocommerce.com/wp-content/plugins/wccom-plugins/marketplace-suggestions/icons/google-product-feed.svg\";s:5:\"title\";s:19:\"Google Product Feed\";s:4:\"copy\";s:76:\"Increase sales by letting customers find you when they\'re shopping on Google\";s:11:\"button-text\";s:10:\"Learn More\";s:3:\"url\";s:53:\"https://woocommerce.com/products/google-product-feed/\";}i:18;a:4:{s:4:\"slug\";s:35:\"products-empty-header-product-types\";s:7:\"context\";s:26:\"products-list-empty-header\";s:5:\"title\";s:23:\"Other types of products\";s:13:\"allow-dismiss\";b:0;}i:19;a:6:{s:4:\"slug\";s:32:\"products-empty-footer-browse-all\";s:7:\"context\";s:26:\"products-list-empty-footer\";s:9:\"link-text\";s:21:\"Browse all extensions\";s:3:\"url\";s:64:\"https://woocommerce.com/product-category/woocommerce-extensions/\";s:8:\"promoted\";s:31:\"category-woocommerce-extensions\";s:13:\"allow-dismiss\";b:0;}i:20;a:8:{s:4:\"slug\";s:30:\"products-empty-product-vendors\";s:7:\"context\";s:24:\"products-list-empty-body\";s:7:\"product\";s:27:\"woocommerce-product-vendors\";s:4:\"icon\";s:106:\"https://woocommerce.com/wp-content/plugins/wccom-plugins/marketplace-suggestions/icons/product-vendors.svg\";s:5:\"title\";s:15:\"Product Vendors\";s:4:\"copy\";s:47:\"Turn your store into a multi-vendor marketplace\";s:11:\"button-text\";s:10:\"Learn More\";s:3:\"url\";s:49:\"https://woocommerce.com/products/product-vendors/\";}i:21;a:8:{s:4:\"slug\";s:26:\"products-empty-memberships\";s:7:\"context\";s:24:\"products-list-empty-body\";s:7:\"product\";s:23:\"woocommerce-memberships\";s:4:\"icon\";s:102:\"https://woocommerce.com/wp-content/plugins/wccom-plugins/marketplace-suggestions/icons/memberships.svg\";s:5:\"title\";s:11:\"Memberships\";s:4:\"copy\";s:76:\"Give members access to restricted content or products, for a fee or for free\";s:11:\"button-text\";s:10:\"Learn More\";s:3:\"url\";s:57:\"https://woocommerce.com/products/woocommerce-memberships/\";}i:22;a:9:{s:4:\"slug\";s:35:\"products-empty-woocommerce-deposits\";s:7:\"context\";s:24:\"products-list-empty-body\";s:7:\"product\";s:20:\"woocommerce-deposits\";s:14:\"show-if-active\";a:1:{i:0;s:20:\"woocommerce-bookings\";}s:4:\"icon\";s:99:\"https://woocommerce.com/wp-content/plugins/wccom-plugins/marketplace-suggestions/icons/deposits.svg\";s:5:\"title\";s:8:\"Deposits\";s:4:\"copy\";s:75:\"Make it easier for customers to pay by offering a deposit or a payment plan\";s:11:\"button-text\";s:10:\"Learn More\";s:3:\"url\";s:54:\"https://woocommerce.com/products/woocommerce-deposits/\";}i:23;a:8:{s:4:\"slug\";s:40:\"products-empty-woocommerce-subscriptions\";s:7:\"context\";s:24:\"products-list-empty-body\";s:7:\"product\";s:25:\"woocommerce-subscriptions\";s:4:\"icon\";s:104:\"https://woocommerce.com/wp-content/plugins/wccom-plugins/marketplace-suggestions/icons/subscriptions.svg\";s:5:\"title\";s:13:\"Subscriptions\";s:4:\"copy\";s:97:\"Let customers subscribe to your products or services and pay on a weekly, monthly or annual basis\";s:11:\"button-text\";s:10:\"Learn More\";s:3:\"url\";s:59:\"https://woocommerce.com/products/woocommerce-subscriptions/\";}i:24;a:8:{s:4:\"slug\";s:35:\"products-empty-woocommerce-bookings\";s:7:\"context\";s:24:\"products-list-empty-body\";s:7:\"product\";s:20:\"woocommerce-bookings\";s:4:\"icon\";s:99:\"https://woocommerce.com/wp-content/plugins/wccom-plugins/marketplace-suggestions/icons/bookings.svg\";s:5:\"title\";s:8:\"Bookings\";s:4:\"copy\";s:99:\"Allow customers to book appointments, make reservations or rent equipment without leaving your site\";s:11:\"button-text\";s:10:\"Learn More\";s:3:\"url\";s:54:\"https://woocommerce.com/products/woocommerce-bookings/\";}i:25;a:8:{s:4:\"slug\";s:30:\"products-empty-product-bundles\";s:7:\"context\";s:24:\"products-list-empty-body\";s:7:\"product\";s:27:\"woocommerce-product-bundles\";s:4:\"icon\";s:106:\"https://woocommerce.com/wp-content/plugins/wccom-plugins/marketplace-suggestions/icons/product-bundles.svg\";s:5:\"title\";s:15:\"Product Bundles\";s:4:\"copy\";s:49:\"Offer customizable bundles and assembled products\";s:11:\"button-text\";s:10:\"Learn More\";s:3:\"url\";s:49:\"https://woocommerce.com/products/product-bundles/\";}}s:7:\"updated\";i:1593185748;}', 'no'),
@@ -592,7 +511,7 @@ INSERT INTO `wp_options` (`option_id`, `option_name`, `option_value`, `autoload`
 (1727, 'eowbc_option_appearance_product_page', 's:127:\"a:3:{s:18:\"fc_atc_button_text\";s:13:\"Add to bag...\";s:18:\"sc_atc_button_text\";s:0:\"\";s:26:\"product_page_add_to_basket\";s:0:\"\";}\";', 'yes'),
 (2657, 'btn_position_setting_text', '', 'yes'),
 (2658, 'woocommerce_maybe_regenerate_images_hash', '91b4c9009722c706e00dfc584c4f8626', 'yes'),
-(2742, 'eowbc_option_filters_altr_filt_widgts', 's:105:\"a:2:{s:31:\"first_category_altr_filt_widgts\";s:3:\"fc1\";s:32:\"second_category_altr_filt_widgts\";s:3:\"sc1\";}\";', 'yes'),
+(2742, 'eowbc_option_filters_altr_filt_widgts', 's:195:\"a:4:{s:31:\"first_category_altr_filt_widgts\";s:3:\"fc1\";s:32:\"second_category_altr_filt_widgts\";s:3:\"sc1\";s:29:\"filter_setting_additional_css\";s:0:\"\";s:31:\"filter_setting_alternate_mobile\";s:0:\"\";}\";', 'yes'),
 (2979, '_transient_timeout_orders-all-statuses', '1594053611', 'no'),
 (2980, '_transient_orders-all-statuses', 'a:2:{s:7:\"version\";s:10:\"1593436164\";s:5:\"value\";a:1:{i:0;s:10:\"wc-on-hold\";}}', 'no'),
 (2985, 'product_cat_children', 'a:1:{i:19;a:1:{i:0;i:21;}}', 'yes'),
@@ -609,15 +528,15 @@ INSERT INTO `wp_options` (`option_id`, `option_name`, `option_value`, `autoload`
 (3418, 'woocommerce_sales_record_date', '2020-06-27', 'yes'),
 (3419, 'woocommerce_sales_record_amount', '27', 'yes'),
 (3683, '_transient_wc_count_comments', 'O:8:\"stdClass\":7:{s:14:\"total_comments\";i:1;s:3:\"all\";i:1;s:8:\"approved\";s:1:\"1\";s:9:\"moderated\";i:0;s:4:\"spam\";i:0;s:5:\"trash\";i:0;s:12:\"post-trashed\";i:0;}', 'yes'),
-(3831, '_transient_timeout__woocommerce_helper_updates', '1593591266', 'no'),
-(3832, '_transient__woocommerce_helper_updates', 'a:4:{s:4:\"hash\";s:32:\"d751713988987e9331980363e24189ce\";s:7:\"updated\";i:1593548066;s:8:\"products\";a:0:{}s:6:\"errors\";a:1:{i:0;s:10:\"http-error\";}}', 'no'),
-(3833, '_site_transient_update_themes', 'O:8:\"stdClass\":4:{s:12:\"last_checked\";i:1593548071;s:7:\"checked\";a:3:{s:14:\"twentynineteen\";s:3:\"1.5\";s:15:\"twentyseventeen\";s:3:\"2.3\";s:12:\"twentytwenty\";s:3:\"1.2\";}s:8:\"response\";a:2:{s:14:\"twentynineteen\";a:6:{s:5:\"theme\";s:14:\"twentynineteen\";s:11:\"new_version\";s:3:\"1.6\";s:3:\"url\";s:44:\"https://wordpress.org/themes/twentynineteen/\";s:7:\"package\";s:60:\"https://downloads.wordpress.org/theme/twentynineteen.1.6.zip\";s:8:\"requires\";s:5:\"4.9.6\";s:12:\"requires_php\";s:5:\"5.2.4\";}s:12:\"twentytwenty\";a:6:{s:5:\"theme\";s:12:\"twentytwenty\";s:11:\"new_version\";s:3:\"1.4\";s:3:\"url\";s:42:\"https://wordpress.org/themes/twentytwenty/\";s:7:\"package\";s:58:\"https://downloads.wordpress.org/theme/twentytwenty.1.4.zip\";s:8:\"requires\";s:3:\"4.7\";s:12:\"requires_php\";s:5:\"5.2.4\";}}s:12:\"translations\";a:0:{}}', 'no'),
-(3834, '_site_transient_update_plugins', 'O:8:\"stdClass\":5:{s:12:\"last_checked\";i:1593548073;s:7:\"checked\";a:5:{s:19:\"akismet/akismet.php\";s:5:\"4.1.5\";s:37:\"error-log-viewer/error-log-viewer.php\";s:5:\"1.1.1\";s:9:\"hello.php\";s:5:\"1.7.2\";s:47:\"woo-bundle-choice/woocommerce-bundle-choice.php\";s:5:\"1.0.0\";s:27:\"woocommerce/woocommerce.php\";s:5:\"4.2.0\";}s:8:\"response\";a:2:{s:19:\"akismet/akismet.php\";O:8:\"stdClass\":12:{s:2:\"id\";s:21:\"w.org/plugins/akismet\";s:4:\"slug\";s:7:\"akismet\";s:6:\"plugin\";s:19:\"akismet/akismet.php\";s:11:\"new_version\";s:5:\"4.1.6\";s:3:\"url\";s:38:\"https://wordpress.org/plugins/akismet/\";s:7:\"package\";s:56:\"https://downloads.wordpress.org/plugin/akismet.4.1.6.zip\";s:5:\"icons\";a:2:{s:2:\"2x\";s:59:\"https://ps.w.org/akismet/assets/icon-256x256.png?rev=969272\";s:2:\"1x\";s:59:\"https://ps.w.org/akismet/assets/icon-128x128.png?rev=969272\";}s:7:\"banners\";a:1:{s:2:\"1x\";s:61:\"https://ps.w.org/akismet/assets/banner-772x250.jpg?rev=479904\";}s:11:\"banners_rtl\";a:0:{}s:6:\"tested\";s:5:\"5.4.2\";s:12:\"requires_php\";b:0;s:13:\"compatibility\";O:8:\"stdClass\":0:{}}s:27:\"woocommerce/woocommerce.php\";O:8:\"stdClass\":12:{s:2:\"id\";s:25:\"w.org/plugins/woocommerce\";s:4:\"slug\";s:11:\"woocommerce\";s:6:\"plugin\";s:27:\"woocommerce/woocommerce.php\";s:11:\"new_version\";s:5:\"4.2.2\";s:3:\"url\";s:42:\"https://wordpress.org/plugins/woocommerce/\";s:7:\"package\";s:60:\"https://downloads.wordpress.org/plugin/woocommerce.4.2.2.zip\";s:5:\"icons\";a:2:{s:2:\"2x\";s:64:\"https://ps.w.org/woocommerce/assets/icon-256x256.png?rev=2075035\";s:2:\"1x\";s:64:\"https://ps.w.org/woocommerce/assets/icon-128x128.png?rev=2075035\";}s:7:\"banners\";a:2:{s:2:\"2x\";s:67:\"https://ps.w.org/woocommerce/assets/banner-1544x500.png?rev=2075035\";s:2:\"1x\";s:66:\"https://ps.w.org/woocommerce/assets/banner-772x250.png?rev=2075035\";}s:11:\"banners_rtl\";a:0:{}s:6:\"tested\";s:5:\"5.4.2\";s:12:\"requires_php\";s:3:\"7.0\";s:13:\"compatibility\";O:8:\"stdClass\":0:{}}}s:12:\"translations\";a:0:{}s:9:\"no_update\";a:3:{s:37:\"error-log-viewer/error-log-viewer.php\";O:8:\"stdClass\":9:{s:2:\"id\";s:30:\"w.org/plugins/error-log-viewer\";s:4:\"slug\";s:16:\"error-log-viewer\";s:6:\"plugin\";s:37:\"error-log-viewer/error-log-viewer.php\";s:11:\"new_version\";s:5:\"1.1.1\";s:3:\"url\";s:47:\"https://wordpress.org/plugins/error-log-viewer/\";s:7:\"package\";s:65:\"https://downloads.wordpress.org/plugin/error-log-viewer.1.1.1.zip\";s:5:\"icons\";a:2:{s:2:\"2x\";s:69:\"https://ps.w.org/error-log-viewer/assets/icon-256x256.png?rev=2274039\";s:2:\"1x\";s:69:\"https://ps.w.org/error-log-viewer/assets/icon-128x128.png?rev=2274039\";}s:7:\"banners\";a:2:{s:2:\"2x\";s:72:\"https://ps.w.org/error-log-viewer/assets/banner-1544x500.jpg?rev=2274039\";s:2:\"1x\";s:71:\"https://ps.w.org/error-log-viewer/assets/banner-772x250.jpg?rev=2274039\";}s:11:\"banners_rtl\";a:0:{}}s:9:\"hello.php\";O:8:\"stdClass\":9:{s:2:\"id\";s:25:\"w.org/plugins/hello-dolly\";s:4:\"slug\";s:11:\"hello-dolly\";s:6:\"plugin\";s:9:\"hello.php\";s:11:\"new_version\";s:5:\"1.7.2\";s:3:\"url\";s:42:\"https://wordpress.org/plugins/hello-dolly/\";s:7:\"package\";s:60:\"https://downloads.wordpress.org/plugin/hello-dolly.1.7.2.zip\";s:5:\"icons\";a:2:{s:2:\"2x\";s:64:\"https://ps.w.org/hello-dolly/assets/icon-256x256.jpg?rev=2052855\";s:2:\"1x\";s:64:\"https://ps.w.org/hello-dolly/assets/icon-128x128.jpg?rev=2052855\";}s:7:\"banners\";a:1:{s:2:\"1x\";s:66:\"https://ps.w.org/hello-dolly/assets/banner-772x250.jpg?rev=2052855\";}s:11:\"banners_rtl\";a:0:{}}s:47:\"woo-bundle-choice/woocommerce-bundle-choice.php\";O:8:\"stdClass\":9:{s:2:\"id\";s:31:\"w.org/plugins/woo-bundle-choice\";s:4:\"slug\";s:17:\"woo-bundle-choice\";s:6:\"plugin\";s:47:\"woo-bundle-choice/woocommerce-bundle-choice.php\";s:11:\"new_version\";s:6:\"0.5.70\";s:3:\"url\";s:48:\"https://wordpress.org/plugins/woo-bundle-choice/\";s:7:\"package\";s:67:\"https://downloads.wordpress.org/plugin/woo-bundle-choice.0.5.70.zip\";s:5:\"icons\";a:2:{s:2:\"2x\";s:70:\"https://ps.w.org/woo-bundle-choice/assets/icon-256x256.png?rev=2209139\";s:2:\"1x\";s:70:\"https://ps.w.org/woo-bundle-choice/assets/icon-256x256.png?rev=2209139\";}s:7:\"banners\";a:1:{s:2:\"1x\";s:72:\"https://ps.w.org/woo-bundle-choice/assets/banner-772x250.png?rev=2270415\";}s:11:\"banners_rtl\";a:0:{}}}}', 'no'),
-(3850, '_transient_timeout_wc_related_13', '1593664129', 'no'),
+(3850, '_transient_timeout_wc_related_13', '1593688645', 'no'),
 (3851, '_transient_wc_related_13', 'a:1:{s:50:\"limit=4&exclude_ids%5B0%5D=0&exclude_ids%5B1%5D=13\";a:1:{i:0;s:2:\"14\";}}', 'no'),
-(3884, '_site_transient_timeout_theme_roots', '1593581263', 'no'),
-(3885, '_site_transient_theme_roots', 'a:3:{s:14:\"twentynineteen\";s:7:\"/themes\";s:15:\"twentyseventeen\";s:7:\"/themes\";s:12:\"twentytwenty\";s:7:\"/themes\";}', 'no');
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
+(3960, '_transient_timeout__woocommerce_helper_updates', '1593634850', 'no'),
+(3961, '_transient__woocommerce_helper_updates', 'a:4:{s:4:\"hash\";s:32:\"d751713988987e9331980363e24189ce\";s:7:\"updated\";i:1593591650;s:8:\"products\";a:0:{}s:6:\"errors\";a:1:{i:0;s:10:\"http-error\";}}', 'no'),
+(3962, '_site_transient_update_themes', 'O:8:\"stdClass\":4:{s:12:\"last_checked\";i:1593591655;s:7:\"checked\";a:3:{s:14:\"twentynineteen\";s:3:\"1.5\";s:15:\"twentyseventeen\";s:3:\"2.3\";s:12:\"twentytwenty\";s:3:\"1.2\";}s:8:\"response\";a:2:{s:14:\"twentynineteen\";a:6:{s:5:\"theme\";s:14:\"twentynineteen\";s:11:\"new_version\";s:3:\"1.6\";s:3:\"url\";s:44:\"https://wordpress.org/themes/twentynineteen/\";s:7:\"package\";s:60:\"https://downloads.wordpress.org/theme/twentynineteen.1.6.zip\";s:8:\"requires\";s:5:\"4.9.6\";s:12:\"requires_php\";s:5:\"5.2.4\";}s:12:\"twentytwenty\";a:6:{s:5:\"theme\";s:12:\"twentytwenty\";s:11:\"new_version\";s:3:\"1.4\";s:3:\"url\";s:42:\"https://wordpress.org/themes/twentytwenty/\";s:7:\"package\";s:58:\"https://downloads.wordpress.org/theme/twentytwenty.1.4.zip\";s:8:\"requires\";s:3:\"4.7\";s:12:\"requires_php\";s:5:\"5.2.4\";}}s:12:\"translations\";a:0:{}}', 'no'),
+(3963, '_site_transient_update_plugins', 'O:8:\"stdClass\":5:{s:12:\"last_checked\";i:1593591656;s:7:\"checked\";a:5:{s:19:\"akismet/akismet.php\";s:5:\"4.1.5\";s:37:\"error-log-viewer/error-log-viewer.php\";s:5:\"1.1.1\";s:9:\"hello.php\";s:5:\"1.7.2\";s:47:\"woo-bundle-choice/woocommerce-bundle-choice.php\";s:5:\"1.0.0\";s:27:\"woocommerce/woocommerce.php\";s:5:\"4.2.0\";}s:8:\"response\";a:2:{s:19:\"akismet/akismet.php\";O:8:\"stdClass\":12:{s:2:\"id\";s:21:\"w.org/plugins/akismet\";s:4:\"slug\";s:7:\"akismet\";s:6:\"plugin\";s:19:\"akismet/akismet.php\";s:11:\"new_version\";s:5:\"4.1.6\";s:3:\"url\";s:38:\"https://wordpress.org/plugins/akismet/\";s:7:\"package\";s:56:\"https://downloads.wordpress.org/plugin/akismet.4.1.6.zip\";s:5:\"icons\";a:2:{s:2:\"2x\";s:59:\"https://ps.w.org/akismet/assets/icon-256x256.png?rev=969272\";s:2:\"1x\";s:59:\"https://ps.w.org/akismet/assets/icon-128x128.png?rev=969272\";}s:7:\"banners\";a:1:{s:2:\"1x\";s:61:\"https://ps.w.org/akismet/assets/banner-772x250.jpg?rev=479904\";}s:11:\"banners_rtl\";a:0:{}s:6:\"tested\";s:5:\"5.4.2\";s:12:\"requires_php\";b:0;s:13:\"compatibility\";O:8:\"stdClass\":0:{}}s:27:\"woocommerce/woocommerce.php\";O:8:\"stdClass\":12:{s:2:\"id\";s:25:\"w.org/plugins/woocommerce\";s:4:\"slug\";s:11:\"woocommerce\";s:6:\"plugin\";s:27:\"woocommerce/woocommerce.php\";s:11:\"new_version\";s:5:\"4.2.2\";s:3:\"url\";s:42:\"https://wordpress.org/plugins/woocommerce/\";s:7:\"package\";s:60:\"https://downloads.wordpress.org/plugin/woocommerce.4.2.2.zip\";s:5:\"icons\";a:2:{s:2:\"2x\";s:64:\"https://ps.w.org/woocommerce/assets/icon-256x256.png?rev=2075035\";s:2:\"1x\";s:64:\"https://ps.w.org/woocommerce/assets/icon-128x128.png?rev=2075035\";}s:7:\"banners\";a:2:{s:2:\"2x\";s:67:\"https://ps.w.org/woocommerce/assets/banner-1544x500.png?rev=2075035\";s:2:\"1x\";s:66:\"https://ps.w.org/woocommerce/assets/banner-772x250.png?rev=2075035\";}s:11:\"banners_rtl\";a:0:{}s:6:\"tested\";s:5:\"5.4.2\";s:12:\"requires_php\";s:3:\"7.0\";s:13:\"compatibility\";O:8:\"stdClass\":0:{}}}s:12:\"translations\";a:0:{}s:9:\"no_update\";a:3:{s:37:\"error-log-viewer/error-log-viewer.php\";O:8:\"stdClass\":9:{s:2:\"id\";s:30:\"w.org/plugins/error-log-viewer\";s:4:\"slug\";s:16:\"error-log-viewer\";s:6:\"plugin\";s:37:\"error-log-viewer/error-log-viewer.php\";s:11:\"new_version\";s:5:\"1.1.1\";s:3:\"url\";s:47:\"https://wordpress.org/plugins/error-log-viewer/\";s:7:\"package\";s:65:\"https://downloads.wordpress.org/plugin/error-log-viewer.1.1.1.zip\";s:5:\"icons\";a:2:{s:2:\"2x\";s:69:\"https://ps.w.org/error-log-viewer/assets/icon-256x256.png?rev=2274039\";s:2:\"1x\";s:69:\"https://ps.w.org/error-log-viewer/assets/icon-128x128.png?rev=2274039\";}s:7:\"banners\";a:2:{s:2:\"2x\";s:72:\"https://ps.w.org/error-log-viewer/assets/banner-1544x500.jpg?rev=2274039\";s:2:\"1x\";s:71:\"https://ps.w.org/error-log-viewer/assets/banner-772x250.jpg?rev=2274039\";}s:11:\"banners_rtl\";a:0:{}}s:9:\"hello.php\";O:8:\"stdClass\":9:{s:2:\"id\";s:25:\"w.org/plugins/hello-dolly\";s:4:\"slug\";s:11:\"hello-dolly\";s:6:\"plugin\";s:9:\"hello.php\";s:11:\"new_version\";s:5:\"1.7.2\";s:3:\"url\";s:42:\"https://wordpress.org/plugins/hello-dolly/\";s:7:\"package\";s:60:\"https://downloads.wordpress.org/plugin/hello-dolly.1.7.2.zip\";s:5:\"icons\";a:2:{s:2:\"2x\";s:64:\"https://ps.w.org/hello-dolly/assets/icon-256x256.jpg?rev=2052855\";s:2:\"1x\";s:64:\"https://ps.w.org/hello-dolly/assets/icon-128x128.jpg?rev=2052855\";}s:7:\"banners\";a:1:{s:2:\"1x\";s:66:\"https://ps.w.org/hello-dolly/assets/banner-772x250.jpg?rev=2052855\";}s:11:\"banners_rtl\";a:0:{}}s:47:\"woo-bundle-choice/woocommerce-bundle-choice.php\";O:8:\"stdClass\":9:{s:2:\"id\";s:31:\"w.org/plugins/woo-bundle-choice\";s:4:\"slug\";s:17:\"woo-bundle-choice\";s:6:\"plugin\";s:47:\"woo-bundle-choice/woocommerce-bundle-choice.php\";s:11:\"new_version\";s:6:\"0.5.70\";s:3:\"url\";s:48:\"https://wordpress.org/plugins/woo-bundle-choice/\";s:7:\"package\";s:67:\"https://downloads.wordpress.org/plugin/woo-bundle-choice.0.5.70.zip\";s:5:\"icons\";a:2:{s:2:\"2x\";s:70:\"https://ps.w.org/woo-bundle-choice/assets/icon-256x256.png?rev=2209139\";s:2:\"1x\";s:70:\"https://ps.w.org/woo-bundle-choice/assets/icon-256x256.png?rev=2209139\";}s:7:\"banners\";a:1:{s:2:\"1x\";s:72:\"https://ps.w.org/woo-bundle-choice/assets/banner-772x250.png?rev=2270415\";}s:11:\"banners_rtl\";a:0:{}}}}', 'no'),
+(4096, '_site_transient_timeout_theme_roots', '1593608148', 'no'),
+(4097, '_site_transient_theme_roots', 'a:3:{s:14:\"twentynineteen\";s:7:\"/themes\";s:15:\"twentyseventeen\";s:7:\"/themes\";s:12:\"twentytwenty\";s:7:\"/themes\";}', 'no'),
+(4117, 'eowbc_option_tiny_features', 's:1448:\"a:28:{s:29:\"shop_cat_filter_location_shop\";s:0:\"\";s:28:\"shop_cat_filter_location_cat\";s:0:\"\";s:24:\"shop_cat_filter_category\";s:0:\"\";s:26:\"shop_cat_filter_two_filter\";s:0:\"\";s:32:\"shop_cat_filter_two_filter_first\";s:0:\"\";s:38:\"shop_cat_filter_two_filter_first_title\";s:0:\"\";s:33:\"shop_cat_filter_two_filter_second\";s:0:\"\";s:39:\"shop_cat_filter_two_filter_second_title\";s:0:\"\";s:30:\"shop_cat_filter_alternate_view\";s:0:\"\";s:31:\"shop_cat_filter_selected_filter\";s:0:\"\";s:19:\"shop_cat_filter_css\";s:0:\"\";s:25:\"specification_view_status\";s:0:\"\";s:35:\"specification_view_shortcode_status\";s:0:\"\";s:33:\"specification_view_default_status\";s:0:\"\";s:24:\"specification_view_style\";s:7:\"default\";s:37:\"tiny_features_option_ui_toggle_status\";s:0:\"\";s:42:\"tiny_features_option_ui_toggle_init_status\";s:0:\"\";s:35:\"tiny_features_option_ui_toggle_text\";s:22:\"CUSTOMIZE THIS PRODUCT\";s:40:\"tiny_features_option_ui_option_dimention\";s:3:\"2em\";s:36:\"tiny_features_option_ui_border_color\";s:7:\"#ffffff\";s:36:\"tiny_features_option_ui_border_width\";s:3:\"1px\";s:42:\"tiny_features_option_ui_border_color_hover\";s:7:\"#ffffff\";s:42:\"tiny_features_option_ui_border_width_hover\";s:3:\"1px\";s:37:\"tiny_features_option_ui_border_radius\";s:3:\"1px\";s:34:\"tiny_features_option_ui_font_color\";s:7:\"#ffffff\";s:40:\"tiny_features_option_ui_font_color_hover\";s:7:\"#ffffff\";s:32:\"tiny_features_option_ui_bg_color\";s:7:\"#ffffff\";s:38:\"tiny_features_option_ui_bg_color_hover\";s:7:\"#ffffff\";}\";', 'yes');
 
 -- --------------------------------------------------------
 
@@ -640,21 +559,12 @@ INSERT INTO `wp_postmeta` (`meta_id`, `post_id`, `meta_key`, `meta_value`) VALUE
 (1, 2, '_wp_page_template', 'default'),
 (2, 3, '_wp_page_template', 'default'),
 (3, 5, '_wp_attached_file', 'woocommerce-placeholder.png'),
-<<<<<<< HEAD
-(4, 5, '_wp_attachment_metadata', 'a:5:{s:5:\"width\";i:1200;s:6:\"height\";i:1200;s:4:\"file\";s:27:\"woocommerce-placeholder.png\";s:5:\"sizes\";a:4:{s:6:\"medium\";a:4:{s:4:\"file\";s:35:\"woocommerce-placeholder-300x300.png\";s:5:\"width\";i:300;s:6:\"height\";i:300;s:9:\"mime-type\";s:9:\"image/png\";}s:5:\"large\";a:4:{s:4:\"file\";s:37:\"woocommerce-placeholder-1024x1024.png\";s:5:\"width\";i:1024;s:6:\"height\";i:1024;s:9:\"mime-type\";s:9:\"image/png\";}s:9:\"thumbnail\";a:4:{s:4:\"file\";s:35:\"woocommerce-placeholder-150x150.png\";s:5:\"width\";i:150;s:6:\"height\";i:150;s:9:\"mime-type\";s:9:\"image/png\";}s:12:\"medium_large\";a:4:{s:4:\"file\";s:35:\"woocommerce-placeholder-768x768.png\";s:5:\"width\";i:768;s:6:\"height\";i:768;s:9:\"mime-type\";s:9:\"image/png\";}}s:10:\"image_meta\";a:12:{s:8:\"aperture\";s:1:\"0\";s:6:\"credit\";s:0:\"\";s:6:\"camera\";s:0:\"\";s:7:\"caption\";s:0:\"\";s:17:\"created_timestamp\";s:1:\"0\";s:9:\"copyright\";s:0:\"\";s:12:\"focal_length\";s:1:\"0\";s:3:\"iso\";s:1:\"0\";s:13:\"shutter_speed\";s:1:\"0\";s:5:\"title\";s:0:\"\";s:11:\"orientation\";s:1:\"0\";s:8:\"keywords\";a:0:{}}}'),
-(7, 11, '_wp_page_template', ''),
-(8, 12, '_wp_page_template', ''),
-(9, 13, '_edit_last', '1'),
-(10, 13, '_edit_lock', '1592824561:1'),
-(11, 13, 'total_sales', '0'),
-=======
 (4, 5, '_wp_attachment_metadata', 'a:5:{s:5:\"width\";i:1200;s:6:\"height\";i:1200;s:4:\"file\";s:27:\"woocommerce-placeholder.png\";s:5:\"sizes\";a:7:{s:21:\"woocommerce_thumbnail\";a:5:{s:4:\"file\";s:35:\"woocommerce-placeholder-450x450.png\";s:5:\"width\";i:450;s:6:\"height\";i:450;s:9:\"mime-type\";s:9:\"image/png\";s:9:\"uncropped\";b:0;}s:29:\"woocommerce_gallery_thumbnail\";a:4:{s:4:\"file\";s:35:\"woocommerce-placeholder-100x100.png\";s:5:\"width\";i:100;s:6:\"height\";i:100;s:9:\"mime-type\";s:9:\"image/png\";}s:18:\"woocommerce_single\";a:4:{s:4:\"file\";s:35:\"woocommerce-placeholder-600x600.png\";s:5:\"width\";i:600;s:6:\"height\";i:600;s:9:\"mime-type\";s:9:\"image/png\";}s:6:\"medium\";a:4:{s:4:\"file\";s:35:\"woocommerce-placeholder-300x300.png\";s:5:\"width\";i:300;s:6:\"height\";i:300;s:9:\"mime-type\";s:9:\"image/png\";}s:5:\"large\";a:4:{s:4:\"file\";s:37:\"woocommerce-placeholder-1024x1024.png\";s:5:\"width\";i:1024;s:6:\"height\";i:1024;s:9:\"mime-type\";s:9:\"image/png\";}s:9:\"thumbnail\";a:4:{s:4:\"file\";s:35:\"woocommerce-placeholder-150x150.png\";s:5:\"width\";i:150;s:6:\"height\";i:150;s:9:\"mime-type\";s:9:\"image/png\";}s:12:\"medium_large\";a:4:{s:4:\"file\";s:35:\"woocommerce-placeholder-768x768.png\";s:5:\"width\";i:768;s:6:\"height\";i:768;s:9:\"mime-type\";s:9:\"image/png\";}}s:10:\"image_meta\";a:12:{s:8:\"aperture\";s:1:\"0\";s:6:\"credit\";s:0:\"\";s:6:\"camera\";s:0:\"\";s:7:\"caption\";s:0:\"\";s:17:\"created_timestamp\";s:1:\"0\";s:9:\"copyright\";s:0:\"\";s:12:\"focal_length\";s:1:\"0\";s:3:\"iso\";s:1:\"0\";s:13:\"shutter_speed\";s:1:\"0\";s:5:\"title\";s:0:\"\";s:11:\"orientation\";s:1:\"0\";s:8:\"keywords\";a:0:{}}}'),
 (7, 11, '_wp_page_template', ''),
 (8, 12, '_wp_page_template', ''),
 (9, 13, '_edit_last', '1'),
 (10, 13, '_edit_lock', '1593264341:1'),
 (11, 13, 'total_sales', '2'),
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 (12, 13, '_tax_status', 'taxable'),
 (13, 13, '_tax_class', ''),
 (14, 13, '_manage_stock', 'no'),
@@ -674,13 +584,8 @@ INSERT INTO `wp_postmeta` (`meta_id`, `post_id`, `meta_key`, `meta_value`) VALUE
 (28, 13, '_sale_price', '12'),
 (29, 13, '_price', '12'),
 (30, 14, '_edit_last', '1'),
-<<<<<<< HEAD
-(31, 14, '_edit_lock', '1592824606:1'),
-(32, 14, 'total_sales', '0'),
-=======
 (31, 14, '_edit_lock', '1593264382:1'),
 (32, 14, 'total_sales', '2'),
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 (33, 14, '_tax_status', 'taxable'),
 (34, 14, '_tax_class', ''),
 (35, 14, '_manage_stock', 'no'),
@@ -698,9 +603,6 @@ INSERT INTO `wp_postmeta` (`meta_id`, `post_id`, `meta_key`, `meta_value`) VALUE
 (47, 14, '_product_version', '4.2.0'),
 (48, 14, '_regular_price', '89'),
 (49, 14, '_sale_price', '15'),
-<<<<<<< HEAD
-(50, 14, '_price', '15');
-=======
 (50, 14, '_price', '15'),
 (51, 15, '_wp_trash_meta_status', 'publish'),
 (52, 15, '_wp_trash_meta_time', '1593158962'),
@@ -782,7 +684,6 @@ INSERT INTO `wp_postmeta` (`meta_id`, `post_id`, `meta_key`, `meta_value`) VALUE
 (128, 21, '_recorded_coupon_usage_counts', 'yes'),
 (129, 21, '_order_stock_reduced', 'yes'),
 (130, 21, '_edit_lock', '1593453638:1');
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 
 -- --------------------------------------------------------
 
@@ -831,10 +732,6 @@ INSERT INTO `wp_posts` (`ID`, `post_author`, `post_date`, `post_date_gmt`, `post
 (9, 1, '2020-06-13 12:40:26', '2020-06-13 12:40:26', '<!-- wp:shortcode -->[woocommerce_my_account]<!-- /wp:shortcode -->', 'My account', '', 'publish', 'closed', 'closed', '', 'my-account', '', '', '2020-06-13 12:40:26', '2020-06-13 12:40:26', '', 0, 'http://127.0.0.1:8888/my-account/', 0, 'page', '', 0),
 (11, 1, '2020-06-15 10:33:21', '2020-06-15 10:33:21', '', 'Product Review', '', 'publish', 'closed', 'closed', '', 'eo-wbc-product-review', '', '', '2020-06-15 10:33:21', '2020-06-15 10:33:21', '', 0, 'http://127.0.0.1:8888/eo-wbc-product-review/', 0, 'page', '', 0),
 (12, 1, '2020-06-15 10:33:21', '2020-06-15 10:33:21', '<div class=\"ui inverted segment\">\n                              <div class=\"ui active inverted fluid placeholder\">\n                                   <div class=\"rectangular\">\n                                      <img src=\"http://127.0.0.1:8888/wp-content/plugins/woocommerce-bundle-choice/asset//img/banner.jpg\"/>\n                                   </div>\n                             </div>\n                          </div>\n                          <br/><br/>\n                          <!-- wp:shortcode -->\n                             [woo-bundle-choice-btn]\n                         <!-- /wp:shortcode -->\n                          <div class=\"ui segment fluid\">\n                              <div class=\"ui three cards\">\n                                <div class=\"ui inverted card\">\n                                  <div class=\"content\">\n                                   <div class=\"ui inverted placeholder\">\n                                     <div class=\"rectangular\"><img src=\"http://127.0.0.1:8888/wp-content/plugins/woocommerce-bundle-choice/asset//img/diamond-sample.png\"/></div>\n                                   </div>\n                                  </div>\n                                </div>\n                                <div class=\"ui inverted card\">\n                                  <div class=\"content\">\n                                   <div class=\"ui inverted placeholder\">\n                                     <div class=\"rectangular\" style=\"padding-bottom: 25%;\"><img class=\"ui small image\" style=\"height: 50%;width: 50%;margin-left: 25%;margin-top: 25%;\"  src=\"http://127.0.0.1:8888/wp-content/plugins/woocommerce-bundle-choice/asset//img/right-arrow-sample.png\"/></div>\n                                   </div>\n                                  </div>\n                                </div>\n                                <div class=\"ui inverted card\">\n                                  <div class=\"content\">\n                                   <div class=\"ui inverted placeholder\">\n                                     <div class=\"rectangular\"><img src=\"http://127.0.0.1:8888/wp-content/plugins/woocommerce-bundle-choice/asset//img/ring-sample.png\"/></div>\n                                    </div>\n                                  </div>\n                                </div>\n                              </div>\n                          </div>', 'Design your own ring', '', 'publish', 'closed', 'closed', '', 'design-your-own-ring', '', '', '2020-06-15 10:33:21', '2020-06-15 10:33:21', '', 0, 'http://127.0.0.1:8888/design-your-own-ring/', 0, 'page', '', 0),
-<<<<<<< HEAD
-(13, 1, '2020-06-19 12:51:00', '2020-06-19 12:51:00', 'Test diamond 1', 'Test diamond 1', 'Test diamond 1', 'publish', 'open', 'closed', '', 'test-diamond-1', '', '', '2020-06-22 11:18:05', '2020-06-22 11:18:05', '', 0, 'http://127.0.0.1:8888/?post_type=product&#038;p=13', 0, 'product', '', 0),
-(14, 1, '2020-06-19 12:52:38', '2020-06-19 12:52:38', 'Test ring 1', 'Test ring 1', 'Test ring 1', 'publish', 'open', 'closed', '', 'test-ring-1', '', '', '2020-06-22 11:18:55', '2020-06-22 11:18:55', '', 0, 'http://127.0.0.1:8888/?post_type=product&#038;p=14', 0, 'product', '', 0);
-=======
 (13, 1, '2020-06-19 12:51:00', '2020-06-19 12:51:00', 'Test diamond 1', 'Test diamond 1', 'Test diamond 1', 'publish', 'open', 'closed', '', 'test-diamond-1', '', '', '2020-06-26 15:36:08', '2020-06-26 15:36:08', '', 0, 'http://127.0.0.1:8888/?post_type=product&#038;p=13', 0, 'product', '', 0),
 (14, 1, '2020-06-19 12:52:38', '2020-06-19 12:52:38', 'Test ring 1', 'Test ring 1', 'Test ring 1', 'publish', 'open', 'closed', '', 'test-ring-1', '', '', '2020-06-22 11:18:55', '2020-06-22 11:18:55', '', 0, 'http://127.0.0.1:8888/?post_type=product&#038;p=14', 0, 'product', '', 0),
 (15, 1, '2020-06-26 08:09:21', '2020-06-26 08:09:21', '{\n    \"btn_position_setting_text\": {\n        \"value\": \":nth-child(1) > :nth-child(1)\",\n        \"type\": \"option\",\n        \"user_id\": 1,\n        \"date_modified_gmt\": \"2020-06-26 08:09:21\"\n    }\n}', '', '', 'trash', 'closed', 'closed', '', 'b4baabdc-dfca-4be1-b32f-5b7c2271bab5', '', '', '2020-06-26 08:09:21', '2020-06-26 08:09:21', '', 0, 'http://127.0.0.1:8888/2020/06/26/b4baabdc-dfca-4be1-b32f-5b7c2271bab5/', 0, 'customize_changeset', '', 0),
@@ -844,7 +741,6 @@ INSERT INTO `wp_posts` (`ID`, `post_author`, `post_date`, `post_date_gmt`, `post
 (19, 1, '2020-06-27 06:46:42', '2020-06-27 06:46:42', '', 'Order &ndash; June 27, 2020 @ 06:46 AM', '', 'wc-on-hold', 'open', 'closed', 'wc_order_tJcW2LKgvO8lD', 'order-jun-27-2020-0646-am', '', '', '2020-06-27 06:46:42', '2020-06-27 06:46:42', '', 0, 'http://127.0.0.1:8888/?post_type=shop_order&#038;p=19', 0, 'shop_order', '', 1),
 (20, 1, '2020-06-28 18:34:03', '2020-06-28 18:34:03', '{\n    \"btn_position_setting_text\": {\n        \"value\": \"\",\n        \"type\": \"option\",\n        \"user_id\": 1,\n        \"date_modified_gmt\": \"2020-06-28 18:34:03\"\n    }\n}', '', '', 'trash', 'closed', 'closed', '', 'dee94c25-8953-4de9-b317-fc9c2307f449', '', '', '2020-06-28 18:34:03', '2020-06-28 18:34:03', '', 0, 'http://127.0.0.1:8888/2020/06/28/dee94c25-8953-4de9-b317-fc9c2307f449/', 0, 'customize_changeset', '', 0),
 (21, 1, '2020-06-29 13:08:40', '2020-06-29 13:08:40', '', 'Order &ndash; June 29, 2020 @ 01:08 PM', '', 'wc-on-hold', 'open', 'closed', 'wc_order_ors5IQQZjGwpO', 'order-jun-29-2020-0108-pm', '', '', '2020-06-29 13:08:40', '2020-06-29 13:08:40', '', 0, 'http://127.0.0.1:8888/?post_type=shop_order&#038;p=21', 0, 'shop_order', '', 1);
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 
 -- --------------------------------------------------------
 
@@ -876,15 +772,11 @@ INSERT INTO `wp_termmeta` (`meta_id`, `term_id`, `meta_key`, `meta_value`) VALUE
 (10, 19, 'order', '0'),
 (11, 19, 'product_count_product_cat', '1'),
 (12, 20, 'order', '0'),
-<<<<<<< HEAD
-(13, 20, 'product_count_product_cat', '1');
-=======
 (13, 20, 'product_count_product_cat', '1'),
 (14, 21, 'order', '0'),
 (15, 21, 'display_type', ''),
 (16, 21, 'thumbnail_id', '0'),
 (17, 21, 'product_count_product_cat', '1');
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 
 -- --------------------------------------------------------
 
@@ -923,12 +815,8 @@ INSERT INTO `wp_terms` (`term_id`, `name`, `slug`, `term_group`) VALUES
 (17, 'Round', 'round', 0),
 (18, 'Round', 'round', 0),
 (19, 'Diamond', 'diamond', 0),
-<<<<<<< HEAD
-(20, 'Setting', 'setting', 0);
-=======
 (20, 'Setting', 'setting', 0),
 (21, 'Round', 'round', 0);
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 
 -- --------------------------------------------------------
 
@@ -952,10 +840,7 @@ INSERT INTO `wp_term_relationships` (`object_id`, `term_taxonomy_id`, `term_orde
 (13, 15, 0),
 (13, 17, 0),
 (13, 19, 0),
-<<<<<<< HEAD
-=======
 (13, 21, 0),
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 (14, 2, 0),
 (14, 15, 0),
 (14, 16, 0),
@@ -1001,12 +886,8 @@ INSERT INTO `wp_term_taxonomy` (`term_taxonomy_id`, `term_id`, `taxonomy`, `desc
 (17, 17, 'pa_diamond-shape', '', 0, 1),
 (18, 18, 'pa_setting-shape', '', 0, 1),
 (19, 19, 'product_cat', '', 0, 1),
-<<<<<<< HEAD
-(20, 20, 'product_cat', '', 0, 1);
-=======
 (20, 20, 'product_cat', '', 0, 1),
 (21, 21, 'product_cat', '', 19, 1);
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 
 -- --------------------------------------------------------
 
@@ -1027,13 +908,8 @@ CREATE TABLE `wp_usermeta` (
 
 INSERT INTO `wp_usermeta` (`umeta_id`, `user_id`, `meta_key`, `meta_value`) VALUES
 (1, 1, 'nickname', 'admin'),
-<<<<<<< HEAD
-(2, 1, 'first_name', ''),
-(3, 1, 'last_name', ''),
-=======
 (2, 1, 'first_name', 'Hiren'),
 (3, 1, 'last_name', 'Donda'),
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 (4, 1, 'description', ''),
 (5, 1, 'rich_editing', 'true'),
 (6, 1, 'syntax_highlighting', 'true'),
@@ -1046,18 +922,7 @@ INSERT INTO `wp_usermeta` (`umeta_id`, `user_id`, `meta_key`, `meta_value`) VALU
 (13, 1, 'wp_user_level', '10'),
 (14, 1, 'dismissed_wp_pointers', ''),
 (15, 1, 'show_welcome_panel', '1'),
-<<<<<<< HEAD
-(16, 1, 'session_tokens', 'a:1:{s:64:\"6a35b973b65741e82e5b10e6b3283f83ee449f68c0fb69ccf4ffec275db4dd95\";a:4:{s:10:\"expiration\";i:1593245646;s:2:\"ip\";s:9:\"127.0.0.1\";s:2:\"ua\";s:120:\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36\";s:5:\"login\";i:1592036046;}}'),
-(17, 1, 'wp_dashboard_quick_press_last_post_id', '4'),
-(18, 1, 'community-events-location', 'a:1:{s:2:\"ip\";s:9:\"127.0.0.0\";}'),
-(19, 1, '_woocommerce_tracks_anon_id', 'woo:d9o/ciWD9O+xxzRnv+bD2VQc'),
-(20, 1, 'wc_last_active', '1592870400'),
-(21, 1, '_order_count', '0'),
-(22, 1, 'dismissed_no_secure_connection_notice', '1'),
-(23, 1, 'closedpostboxes_product', 'a:0:{}'),
-(24, 1, 'metaboxhidden_product', 'a:2:{i:0;s:10:\"postcustom\";i:1;s:7:\"slugdiv\";}');
-=======
-(16, 1, 'session_tokens', 'a:2:{s:64:\"bd805dbc5a66c6bbdaf3f9208f9b5f033324b7d233db0697a713857d8320a99f\";a:4:{s:10:\"expiration\";i:1593593828;s:2:\"ip\";s:9:\"127.0.0.1\";s:2:\"ua\";s:121:\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36\";s:5:\"login\";i:1593421028;}s:64:\"b7c7a9c7c10bde5bb1e7e455b68345c17c2f3745c71e7320068865f81422bcbe\";a:4:{s:10:\"expiration\";i:1593593829;s:2:\"ip\";s:9:\"127.0.0.1\";s:2:\"ua\";s:121:\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36\";s:5:\"login\";i:1593421029;}}'),
+(16, 1, 'session_tokens', 'a:1:{s:64:\"863225b42505b1cb9aa4ce72c591b41c175945be878d2f6e7676d9d7d667bcea\";a:4:{s:10:\"expiration\";i:1594805554;s:2:\"ip\";s:9:\"127.0.0.1\";s:2:\"ua\";s:121:\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36\";s:5:\"login\";i:1593595954;}}'),
 (17, 1, 'wp_dashboard_quick_press_last_post_id', '4'),
 (18, 1, 'community-events-location', 'a:1:{s:2:\"ip\";s:9:\"127.0.0.0\";}'),
 (19, 1, '_woocommerce_tracks_anon_id', 'woo:d9o/ciWD9O+xxzRnv+bD2VQc'),
@@ -1080,7 +945,6 @@ INSERT INTO `wp_usermeta` (`umeta_id`, `user_id`, `meta_key`, `meta_value`) VALU
 (38, 1, 'shipping_method', ''),
 (41, 1, '_order_count', '2'),
 (42, 1, '_woocommerce_persistent_cart_1', 'a:1:{s:4:\"cart\";a:2:{s:32:\"c51ce410c124a10e0db5e4b97fc2af39\";a:11:{s:3:\"key\";s:32:\"c51ce410c124a10e0db5e4b97fc2af39\";s:10:\"product_id\";i:13;s:12:\"variation_id\";i:0;s:9:\"variation\";N;s:8:\"quantity\";s:1:\"1\";s:9:\"data_hash\";s:32:\"b5c1d5ca8bae6d4896cf1807cdf763f0\";s:13:\"line_tax_data\";a:2:{s:8:\"subtotal\";a:0:{}s:5:\"total\";a:0:{}}s:13:\"line_subtotal\";d:12;s:17:\"line_subtotal_tax\";i:0;s:10:\"line_total\";d:12;s:8:\"line_tax\";i:0;}s:32:\"aab3238922bcc25a6f606eb525ffdc56\";a:6:{s:3:\"key\";s:32:\"aab3238922bcc25a6f606eb525ffdc56\";s:10:\"product_id\";i:14;s:12:\"variation_id\";i:0;s:9:\"variation\";N;s:8:\"quantity\";s:1:\"1\";s:9:\"data_hash\";s:32:\"b5c1d5ca8bae6d4896cf1807cdf763f0\";}}}');
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 
 -- --------------------------------------------------------
 
@@ -1211,8 +1075,6 @@ CREATE TABLE `wp_wc_customer_lookup` (
   `state` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
-<<<<<<< HEAD
-=======
 --
 -- Dumping data for table `wp_wc_customer_lookup`
 --
@@ -1220,7 +1082,6 @@ CREATE TABLE `wp_wc_customer_lookup` (
 INSERT INTO `wp_wc_customer_lookup` (`customer_id`, `user_id`, `username`, `first_name`, `last_name`, `email`, `date_last_active`, `date_registered`, `country`, `postcode`, `city`, `state`) VALUES
 (1, 1, 'admin', 'Hiren', 'Donda', 'hiren@emptyops.com', '2020-06-30 18:30:00', '2020-06-13 02:43:29', 'AX', '395006', 'Varachha', '');
 
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 -- --------------------------------------------------------
 
 --
@@ -1270,8 +1131,6 @@ CREATE TABLE `wp_wc_order_product_lookup` (
   `shipping_tax_amount` double NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
-<<<<<<< HEAD
-=======
 --
 -- Dumping data for table `wp_wc_order_product_lookup`
 --
@@ -1282,7 +1141,6 @@ INSERT INTO `wp_wc_order_product_lookup` (`order_item_id`, `order_id`, `product_
 (3, 21, 13, 0, 1, '2020-06-29 13:08:40', 1, 12, 12, 0, 0, 0, 0),
 (4, 21, 14, 0, 1, '2020-06-29 13:08:40', 1, 15, 15, 0, 0, 0, 0);
 
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 -- --------------------------------------------------------
 
 --
@@ -1304,8 +1162,6 @@ CREATE TABLE `wp_wc_order_stats` (
   `customer_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
-<<<<<<< HEAD
-=======
 --
 -- Dumping data for table `wp_wc_order_stats`
 --
@@ -1314,7 +1170,6 @@ INSERT INTO `wp_wc_order_stats` (`order_id`, `parent_id`, `date_created`, `date_
 (19, 0, '2020-06-27 06:46:42', '2020-06-27 06:46:42', 2, 27, 0, 0, 27, 0, 'wc-on-hold', 1),
 (21, 0, '2020-06-29 13:08:40', '2020-06-29 13:08:40', 2, 27, 0, 0, 27, 1, 'wc-on-hold', 1);
 
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 -- --------------------------------------------------------
 
 --
@@ -1358,13 +1213,8 @@ CREATE TABLE `wp_wc_product_meta_lookup` (
 --
 
 INSERT INTO `wp_wc_product_meta_lookup` (`product_id`, `sku`, `virtual`, `downloadable`, `min_price`, `max_price`, `onsale`, `stock_quantity`, `stock_status`, `rating_count`, `average_rating`, `total_sales`, `tax_status`, `tax_class`) VALUES
-<<<<<<< HEAD
-(13, '', 0, 0, '12.0000', '12.0000', 1, NULL, 'instock', 0, '0.00', 0, 'taxable', ''),
-(14, '', 0, 0, '15.0000', '15.0000', 1, NULL, 'instock', 0, '0.00', 0, 'taxable', '');
-=======
 (13, '', 0, 0, '12.0000', '12.0000', 1, NULL, 'instock', 0, '0.00', 2, 'taxable', ''),
 (14, '', 0, 0, '15.0000', '15.0000', 1, NULL, 'instock', 0, '0.00', 2, 'taxable', '');
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 
 -- --------------------------------------------------------
 
@@ -1500,8 +1350,6 @@ CREATE TABLE `wp_woocommerce_order_itemmeta` (
   `meta_value` longtext COLLATE utf8mb4_unicode_520_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
-<<<<<<< HEAD
-=======
 --
 -- Dumping data for table `wp_woocommerce_order_itemmeta`
 --
@@ -1544,7 +1392,6 @@ INSERT INTO `wp_woocommerce_order_itemmeta` (`meta_id`, `order_item_id`, `meta_k
 (35, 4, '_line_tax', '0'),
 (36, 4, '_line_tax_data', 'a:2:{s:5:\"total\";a:0:{}s:8:\"subtotal\";a:0:{}}');
 
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 -- --------------------------------------------------------
 
 --
@@ -1558,8 +1405,6 @@ CREATE TABLE `wp_woocommerce_order_items` (
   `order_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
-<<<<<<< HEAD
-=======
 --
 -- Dumping data for table `wp_woocommerce_order_items`
 --
@@ -1570,7 +1415,6 @@ INSERT INTO `wp_woocommerce_order_items` (`order_item_id`, `order_item_name`, `o
 (3, 'Test diamond 1', 'line_item', 21),
 (4, 'Test ring 1', 'line_item', 21);
 
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 -- --------------------------------------------------------
 
 --
@@ -1617,11 +1461,7 @@ CREATE TABLE `wp_woocommerce_sessions` (
 --
 
 INSERT INTO `wp_woocommerce_sessions` (`session_id`, `session_key`, `session_value`, `session_expiry`) VALUES
-<<<<<<< HEAD
-(5, '1', 'a:7:{s:4:\"cart\";s:6:\"a:0:{}\";s:11:\"cart_totals\";s:367:\"a:15:{s:8:\"subtotal\";i:0;s:12:\"subtotal_tax\";i:0;s:14:\"shipping_total\";i:0;s:12:\"shipping_tax\";i:0;s:14:\"shipping_taxes\";a:0:{}s:14:\"discount_total\";i:0;s:12:\"discount_tax\";i:0;s:19:\"cart_contents_total\";i:0;s:17:\"cart_contents_tax\";i:0;s:19:\"cart_contents_taxes\";a:0:{}s:9:\"fee_total\";i:0;s:7:\"fee_tax\";i:0;s:9:\"fee_taxes\";a:0:{}s:5:\"total\";i:0;s:9:\"total_tax\";i:0;}\";s:15:\"applied_coupons\";s:6:\"a:0:{}\";s:22:\"coupon_discount_totals\";s:6:\"a:0:{}\";s:26:\"coupon_discount_tax_totals\";s:6:\"a:0:{}\";s:21:\"removed_cart_contents\";s:6:\"a:0:{}\";s:8:\"customer\";s:706:\"a:26:{s:2:\"id\";s:1:\"1\";s:13:\"date_modified\";s:0:\"\";s:8:\"postcode\";s:0:\"\";s:4:\"city\";s:0:\"\";s:9:\"address_1\";s:0:\"\";s:7:\"address\";s:0:\"\";s:9:\"address_2\";s:0:\"\";s:5:\"state\";s:0:\"\";s:7:\"country\";s:2:\"AX\";s:17:\"shipping_postcode\";s:0:\"\";s:13:\"shipping_city\";s:0:\"\";s:18:\"shipping_address_1\";s:0:\"\";s:16:\"shipping_address\";s:0:\"\";s:18:\"shipping_address_2\";s:0:\"\";s:14:\"shipping_state\";s:0:\"\";s:16:\"shipping_country\";s:2:\"AX\";s:13:\"is_vat_exempt\";s:0:\"\";s:19:\"calculated_shipping\";s:0:\"\";s:10:\"first_name\";s:0:\"\";s:9:\"last_name\";s:0:\"\";s:7:\"company\";s:0:\"\";s:5:\"phone\";s:0:\"\";s:5:\"email\";s:18:\"hiren@emptyops.com\";s:19:\"shipping_first_name\";s:0:\"\";s:18:\"shipping_last_name\";s:0:\"\";s:16:\"shipping_company\";s:0:\"\";}\";}', 1592978803);
-=======
-(8, '1', 'a:13:{s:4:\"cart\";s:814:\"a:2:{s:32:\"c51ce410c124a10e0db5e4b97fc2af39\";a:11:{s:3:\"key\";s:32:\"c51ce410c124a10e0db5e4b97fc2af39\";s:10:\"product_id\";i:13;s:12:\"variation_id\";i:0;s:9:\"variation\";N;s:8:\"quantity\";s:1:\"1\";s:9:\"data_hash\";s:32:\"b5c1d5ca8bae6d4896cf1807cdf763f0\";s:13:\"line_tax_data\";a:2:{s:8:\"subtotal\";a:0:{}s:5:\"total\";a:0:{}}s:13:\"line_subtotal\";d:12;s:17:\"line_subtotal_tax\";i:0;s:10:\"line_total\";d:12;s:8:\"line_tax\";i:0;}s:32:\"aab3238922bcc25a6f606eb525ffdc56\";a:11:{s:3:\"key\";s:32:\"aab3238922bcc25a6f606eb525ffdc56\";s:10:\"product_id\";i:14;s:12:\"variation_id\";i:0;s:9:\"variation\";N;s:8:\"quantity\";s:1:\"1\";s:9:\"data_hash\";s:32:\"b5c1d5ca8bae6d4896cf1807cdf763f0\";s:13:\"line_tax_data\";a:2:{s:8:\"subtotal\";a:0:{}s:5:\"total\";a:0:{}}s:13:\"line_subtotal\";d:15;s:17:\"line_subtotal_tax\";i:0;s:10:\"line_total\";d:15;s:8:\"line_tax\";i:0;}}\";s:11:\"cart_totals\";s:405:\"a:15:{s:8:\"subtotal\";s:5:\"27.00\";s:12:\"subtotal_tax\";d:0;s:14:\"shipping_total\";s:4:\"0.00\";s:12:\"shipping_tax\";i:0;s:14:\"shipping_taxes\";a:0:{}s:14:\"discount_total\";i:0;s:12:\"discount_tax\";i:0;s:19:\"cart_contents_total\";s:5:\"27.00\";s:17:\"cart_contents_tax\";i:0;s:19:\"cart_contents_taxes\";a:0:{}s:9:\"fee_total\";s:4:\"0.00\";s:7:\"fee_tax\";i:0;s:9:\"fee_taxes\";a:0:{}s:5:\"total\";s:5:\"27.00\";s:9:\"total_tax\";d:0;}\";s:15:\"applied_coupons\";s:6:\"a:0:{}\";s:22:\"coupon_discount_totals\";s:6:\"a:0:{}\";s:26:\"coupon_discount_tax_totals\";s:6:\"a:0:{}\";s:21:\"removed_cart_contents\";s:6:\"a:0:{}\";s:8:\"customer\";s:944:\"a:26:{s:2:\"id\";s:1:\"1\";s:13:\"date_modified\";s:25:\"2020-06-29T13:08:39+00:00\";s:8:\"postcode\";s:6:\"395006\";s:4:\"city\";s:8:\"Varachha\";s:9:\"address_1\";s:32:\"114, Royal Square Nr. VIP Circle\";s:7:\"address\";s:32:\"114, Royal Square Nr. VIP Circle\";s:9:\"address_2\";s:6:\"Utran,\";s:5:\"state\";s:0:\"\";s:7:\"country\";s:2:\"AX\";s:17:\"shipping_postcode\";s:6:\"395006\";s:13:\"shipping_city\";s:8:\"Varachha\";s:18:\"shipping_address_1\";s:32:\"114, Royal Square Nr. VIP Circle\";s:16:\"shipping_address\";s:32:\"114, Royal Square Nr. VIP Circle\";s:18:\"shipping_address_2\";s:6:\"Utran,\";s:14:\"shipping_state\";s:0:\"\";s:16:\"shipping_country\";s:2:\"AX\";s:13:\"is_vat_exempt\";s:0:\"\";s:19:\"calculated_shipping\";s:1:\"1\";s:10:\"first_name\";s:5:\"Hiren\";s:9:\"last_name\";s:5:\"Donda\";s:7:\"company\";s:14:\"Sphere Plugins\";s:5:\"phone\";s:11:\"08866526465\";s:5:\"email\";s:20:\"hi0001234d@gmail.com\";s:19:\"shipping_first_name\";s:0:\"\";s:18:\"shipping_last_name\";s:0:\"\";s:16:\"shipping_company\";s:0:\"\";}\";s:11:\"eo_wbc_sets\";s:70:\"a:2:{s:5:\"FIRST\";a:3:{i:0;s:2:\"13\";i:1;s:1:\"1\";i:2;N;}s:6:\"SECOND\";N;}\";s:15:\"tmp_eo_wbc_sets\";s:105:\"a:2:{s:5:\"FIRST\";a:3:{i:0;s:2:\"13\";i:1;s:1:\"1\";i:2;N;}s:6:\"SECOND\";a:3:{i:0;s:2:\"14\";i:1;s:1:\"1\";i:2;N;}}\";s:11:\"eo_wbc_maps\";s:115:\"a:1:{i:0;a:2:{s:5:\"FIRST\";a:3:{i:0;s:2:\"13\";i:1;s:1:\"1\";i:2;N;}s:6:\"SECOND\";a:3:{i:0;s:2:\"14\";i:1;s:1:\"1\";i:2;N;}}}\";s:21:\"chosen_payment_method\";s:4:\"bacs\";s:22:\"order_awaiting_payment\";N;s:10:\"wc_notices\";N;}', 1593608555);
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
+(8, '1', 'a:13:{s:4:\"cart\";s:814:\"a:2:{s:32:\"c51ce410c124a10e0db5e4b97fc2af39\";a:11:{s:3:\"key\";s:32:\"c51ce410c124a10e0db5e4b97fc2af39\";s:10:\"product_id\";i:13;s:12:\"variation_id\";i:0;s:9:\"variation\";N;s:8:\"quantity\";s:1:\"1\";s:9:\"data_hash\";s:32:\"b5c1d5ca8bae6d4896cf1807cdf763f0\";s:13:\"line_tax_data\";a:2:{s:8:\"subtotal\";a:0:{}s:5:\"total\";a:0:{}}s:13:\"line_subtotal\";d:12;s:17:\"line_subtotal_tax\";i:0;s:10:\"line_total\";d:12;s:8:\"line_tax\";i:0;}s:32:\"aab3238922bcc25a6f606eb525ffdc56\";a:11:{s:3:\"key\";s:32:\"aab3238922bcc25a6f606eb525ffdc56\";s:10:\"product_id\";i:14;s:12:\"variation_id\";i:0;s:9:\"variation\";N;s:8:\"quantity\";s:1:\"1\";s:9:\"data_hash\";s:32:\"b5c1d5ca8bae6d4896cf1807cdf763f0\";s:13:\"line_tax_data\";a:2:{s:8:\"subtotal\";a:0:{}s:5:\"total\";a:0:{}}s:13:\"line_subtotal\";d:15;s:17:\"line_subtotal_tax\";i:0;s:10:\"line_total\";d:15;s:8:\"line_tax\";i:0;}}\";s:11:\"cart_totals\";s:405:\"a:15:{s:8:\"subtotal\";s:5:\"27.00\";s:12:\"subtotal_tax\";d:0;s:14:\"shipping_total\";s:4:\"0.00\";s:12:\"shipping_tax\";i:0;s:14:\"shipping_taxes\";a:0:{}s:14:\"discount_total\";i:0;s:12:\"discount_tax\";i:0;s:19:\"cart_contents_total\";s:5:\"27.00\";s:17:\"cart_contents_tax\";i:0;s:19:\"cart_contents_taxes\";a:0:{}s:9:\"fee_total\";s:4:\"0.00\";s:7:\"fee_tax\";i:0;s:9:\"fee_taxes\";a:0:{}s:5:\"total\";s:5:\"27.00\";s:9:\"total_tax\";d:0;}\";s:15:\"applied_coupons\";s:6:\"a:0:{}\";s:22:\"coupon_discount_totals\";s:6:\"a:0:{}\";s:26:\"coupon_discount_tax_totals\";s:6:\"a:0:{}\";s:21:\"removed_cart_contents\";s:6:\"a:0:{}\";s:8:\"customer\";s:857:\"a:26:{s:2:\"id\";s:1:\"1\";s:13:\"date_modified\";s:25:\"2020-06-29T13:08:39+00:00\";s:8:\"postcode\";s:6:\"395006\";s:4:\"city\";s:8:\"Varachha\";s:9:\"address_1\";s:32:\"114, Royal Square Nr. VIP Circle\";s:7:\"address\";s:32:\"114, Royal Square Nr. VIP Circle\";s:9:\"address_2\";s:6:\"Utran,\";s:5:\"state\";s:0:\"\";s:7:\"country\";s:2:\"AX\";s:17:\"shipping_postcode\";s:0:\"\";s:13:\"shipping_city\";s:0:\"\";s:18:\"shipping_address_1\";s:0:\"\";s:16:\"shipping_address\";s:0:\"\";s:18:\"shipping_address_2\";s:0:\"\";s:14:\"shipping_state\";s:0:\"\";s:16:\"shipping_country\";s:2:\"AX\";s:13:\"is_vat_exempt\";s:0:\"\";s:19:\"calculated_shipping\";s:0:\"\";s:10:\"first_name\";s:5:\"Hiren\";s:9:\"last_name\";s:5:\"Donda\";s:7:\"company\";s:14:\"Sphere Plugins\";s:5:\"phone\";s:11:\"08866526465\";s:5:\"email\";s:20:\"hi0001234d@gmail.com\";s:19:\"shipping_first_name\";s:0:\"\";s:18:\"shipping_last_name\";s:0:\"\";s:16:\"shipping_company\";s:0:\"\";}\";s:11:\"eo_wbc_sets\";s:70:\"a:2:{s:5:\"FIRST\";a:3:{i:0;s:2:\"13\";i:1;s:1:\"1\";i:2;N;}s:6:\"SECOND\";N;}\";s:15:\"tmp_eo_wbc_sets\";s:105:\"a:2:{s:5:\"FIRST\";a:3:{i:0;s:2:\"13\";i:1;s:1:\"1\";i:2;N;}s:6:\"SECOND\";a:3:{i:0;s:2:\"14\";i:1;s:1:\"1\";i:2;N;}}\";s:11:\"eo_wbc_maps\";s:115:\"a:1:{i:0;a:2:{s:5:\"FIRST\";a:3:{i:0;s:2:\"13\";i:1;s:1:\"1\";i:2;N;}s:6:\"SECOND\";a:3:{i:0;s:2:\"14\";i:1;s:1:\"1\";i:2;N;}}}\";s:21:\"chosen_payment_method\";s:4:\"bacs\";s:22:\"order_awaiting_payment\";N;s:10:\"wc_notices\";N;}', 1593777760);
 
 -- --------------------------------------------------------
 
@@ -2045,41 +1885,25 @@ ALTER TABLE `wp_woocommerce_tax_rate_locations`
 -- AUTO_INCREMENT for table `wp_actionscheduler_actions`
 --
 ALTER TABLE `wp_actionscheduler_actions`
-<<<<<<< HEAD
-  MODIFY `action_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-=======
   MODIFY `action_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 
 --
 -- AUTO_INCREMENT for table `wp_actionscheduler_claims`
 --
 ALTER TABLE `wp_actionscheduler_claims`
-<<<<<<< HEAD
-  MODIFY `claim_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=409;
-=======
-  MODIFY `claim_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=147;
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
+  MODIFY `claim_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=341;
 
 --
 -- AUTO_INCREMENT for table `wp_actionscheduler_groups`
 --
 ALTER TABLE `wp_actionscheduler_groups`
-<<<<<<< HEAD
-  MODIFY `group_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-=======
   MODIFY `group_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 
 --
 -- AUTO_INCREMENT for table `wp_actionscheduler_logs`
 --
 ALTER TABLE `wp_actionscheduler_logs`
-<<<<<<< HEAD
-  MODIFY `log_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
-=======
   MODIFY `log_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 
 --
 -- AUTO_INCREMENT for table `wp_commentmeta`
@@ -2091,11 +1915,7 @@ ALTER TABLE `wp_commentmeta`
 -- AUTO_INCREMENT for table `wp_comments`
 --
 ALTER TABLE `wp_comments`
-<<<<<<< HEAD
-  MODIFY `comment_ID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-=======
   MODIFY `comment_ID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 
 --
 -- AUTO_INCREMENT for table `wp_links`
@@ -2107,71 +1927,43 @@ ALTER TABLE `wp_links`
 -- AUTO_INCREMENT for table `wp_options`
 --
 ALTER TABLE `wp_options`
-<<<<<<< HEAD
-  MODIFY `option_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2191;
-=======
-  MODIFY `option_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3895;
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
+  MODIFY `option_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4127;
 
 --
 -- AUTO_INCREMENT for table `wp_postmeta`
 --
 ALTER TABLE `wp_postmeta`
-<<<<<<< HEAD
-  MODIFY `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
-=======
   MODIFY `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 
 --
 -- AUTO_INCREMENT for table `wp_posts`
 --
 ALTER TABLE `wp_posts`
-<<<<<<< HEAD
-  MODIFY `ID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-=======
   MODIFY `ID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 
 --
 -- AUTO_INCREMENT for table `wp_termmeta`
 --
 ALTER TABLE `wp_termmeta`
-<<<<<<< HEAD
-  MODIFY `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-=======
   MODIFY `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 
 --
 -- AUTO_INCREMENT for table `wp_terms`
 --
 ALTER TABLE `wp_terms`
-<<<<<<< HEAD
-  MODIFY `term_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-=======
   MODIFY `term_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 
 --
 -- AUTO_INCREMENT for table `wp_term_taxonomy`
 --
 ALTER TABLE `wp_term_taxonomy`
-<<<<<<< HEAD
-  MODIFY `term_taxonomy_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-=======
   MODIFY `term_taxonomy_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 
 --
 -- AUTO_INCREMENT for table `wp_usermeta`
 --
 ALTER TABLE `wp_usermeta`
-<<<<<<< HEAD
-  MODIFY `umeta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
-=======
-  MODIFY `umeta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
+  MODIFY `umeta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `wp_users`
@@ -2195,11 +1987,7 @@ ALTER TABLE `wp_wc_admin_note_actions`
 -- AUTO_INCREMENT for table `wp_wc_customer_lookup`
 --
 ALTER TABLE `wp_wc_customer_lookup`
-<<<<<<< HEAD
-  MODIFY `customer_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-=======
   MODIFY `customer_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 
 --
 -- AUTO_INCREMENT for table `wp_wc_download_log`
@@ -2247,21 +2035,13 @@ ALTER TABLE `wp_woocommerce_log`
 -- AUTO_INCREMENT for table `wp_woocommerce_order_itemmeta`
 --
 ALTER TABLE `wp_woocommerce_order_itemmeta`
-<<<<<<< HEAD
-  MODIFY `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-=======
   MODIFY `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 
 --
 -- AUTO_INCREMENT for table `wp_woocommerce_order_items`
 --
 ALTER TABLE `wp_woocommerce_order_items`
-<<<<<<< HEAD
-  MODIFY `order_item_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-=======
   MODIFY `order_item_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 
 --
 -- AUTO_INCREMENT for table `wp_woocommerce_payment_tokenmeta`
@@ -2279,11 +2059,7 @@ ALTER TABLE `wp_woocommerce_payment_tokens`
 -- AUTO_INCREMENT for table `wp_woocommerce_sessions`
 --
 ALTER TABLE `wp_woocommerce_sessions`
-<<<<<<< HEAD
-  MODIFY `session_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-=======
-  MODIFY `session_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
+  MODIFY `session_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `wp_woocommerce_shipping_zones`
