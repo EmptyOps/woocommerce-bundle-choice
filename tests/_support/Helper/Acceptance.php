@@ -106,8 +106,6 @@ class Acceptance extends \Codeception\Module
             echo $e->getMessage()."";
         }
     }
-<<<<<<< HEAD
-=======
 
     /**
      * 
@@ -153,6 +151,5 @@ class Acceptance extends \Codeception\Module
 
         return null;
     }
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 	
 }
