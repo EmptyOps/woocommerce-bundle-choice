@@ -282,7 +282,7 @@ class Options {
         		}	
         		.variable-items-wrapper .variable-item:hover,.variable-items-wrapper .selected{
         			box-shadow:0px 0px <?php _e($border_hover_width) ?> <?php _e($border_hover_color) ?>;        			
-        			border: <?php _e($border_hover) ?> solid transparent;
+        			border: <?php _e($border_hover_color) ?> solid transparent;
         		}
         		ul.variable-items-wrapper{
         			margin: 0px;

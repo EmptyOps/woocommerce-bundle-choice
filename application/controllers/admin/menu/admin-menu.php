@@ -68,16 +68,7 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 							'slug'=>'eowbc-mapping',
 							'template'=>'admin/menu/mapping',
 							'position'=>3
-						),						
-						array(
-							'parent_slug'=>'eowbc',
-							'title'=>eowbc_lang('Mapping').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Mapping'),
-							'menu_title'=>eowbc_lang('Mapping'),
-							'capability'=>'manage_options',
-							'slug'=>'eowbc-mapping',
-							'template'=>'admin/menu/mapping',
-							'position'=>2
-						),						
+						),																
 						array(
 							'parent_slug'=>'eowbc',
 							'title'=>eowbc_lang('Appearance').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Appearance'),

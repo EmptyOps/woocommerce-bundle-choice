@@ -22,7 +22,7 @@ if(!class_exists('WBC_Validate')) {
 		}
 
 		public function check($form){
-			$res["type"] = "Error";
+			$res["type"] = "error";
 		    $res["msg"] = "";
 
 			foreach ($form as $key => $tab) {

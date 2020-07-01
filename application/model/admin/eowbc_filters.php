@@ -386,7 +386,7 @@ $diamond_category = get_term_by( 'slug','eo_diamond_shape_cat','product_cat');
 $setting_category = get_term_by( 'slug','eo_setting_shape_cat','product_cat');
 
 
-if(is_wp_error($diamond_category) or is_wp_error($setting_category) or empty($diamond_category) or empty($setting_category) and !is_ajax()){
+if((is_wp_error($diamond_category) or is_wp_error($setting_category) or empty($diamond_category) or empty($setting_category)) and !is_ajax()) {
 	ob_start();
 	?>
 		<script>
