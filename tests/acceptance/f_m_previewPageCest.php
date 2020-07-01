@@ -14,25 +14,6 @@ class f_m_previewPageCest
     // {
     // }
 
-<<<<<<< HEAD
-    function previewPage(AcceptanceTester $I) {
-		
-    	// go to the preview page of step 3
-    	require_once 'f_i_step2Cest.php';
-    	$f_i_step2CestObj = new f_i_step2Cest();
-    	$this->price_of_product_step2 = $f_i_step2CestObj->itemPage($I);
-    	$this->price_of_product_step1 = $f_i_step2CestObj->price_of_product_step1;
-
-    	// verify 
-    	$I->see($this->price_of_product_step1+$this->price_of_product_step2, 'span');
-    	$I->see('Add This To Cart');
-
-	}
-
-	public function addToCart(AcceptanceTester $I) {
-
-		$this->previewPage($I);
-=======
     public function previewPage(AcceptanceTester $I) {
 
     	if( !$I->test_allowed_in_this_environment("f_") ) {
@@ -47,7 +28,6 @@ class f_m_previewPageCest
     	$I->see($this->price_of_product_step1+$this->price_of_product_step2);
     	$I->see('Add This To Cart');
 
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 
 		// check view action 
 		$this->checkViewActionStep2($I);
@@ -58,8 +38,6 @@ class f_m_previewPageCest
 		// check change(same as remove though but at different place) action 
 		$this->checkChangeActionPreviewPage($I);
 
-<<<<<<< HEAD
-=======
 	}
 
 	public function addToCart(AcceptanceTester $I) {
@@ -70,21 +48,10 @@ class f_m_previewPageCest
 
 		// $this->previewPage($I);
 
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 		// - I click on add this to cart button
 		$I->click('Add This To Cart');
 
 		// - I see in next page the text "CART", "Quantity", "Subtotal" etc.
-<<<<<<< HEAD
-		$I->waitForText('Cart', 10, 'h1');
-		$I->waitForText('Quantity', 10, 'th');
-		$I->waitForText('Subtotal', 10, 'th');
-		$I->see($this->price_of_product_step1+$this->price_of_product_step2, 'span');	//TODO check here if merged row appears properly or not
-
-	}
-
-	function checkViewActionStep2(AcceptanceTester $I) {
-=======
 		$I->waitForText('Cart', 10);
 		$I->see('Quantity');
 		$I->see('Subtotal');
@@ -95,7 +62,6 @@ class f_m_previewPageCest
 	}
 
 	protected function checkViewActionStep2(AcceptanceTester $I) {
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 		
 		// // - I choose filter options and then I check if x  products are found
 		// // - I click on product image of first product from the search results
@@ -117,11 +83,7 @@ class f_m_previewPageCest
 
 	}
 
-<<<<<<< HEAD
-	function checkBackRemoveAction(AcceptanceTester $I) {
-=======
 	protected function checkBackRemoveAction(AcceptanceTester $I) {
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 		
 		// // - I choose filter options and then I check if x  products are found
 		// // - I click on product image of first product from the search results
@@ -143,11 +105,7 @@ class f_m_previewPageCest
 
 	}
 
-<<<<<<< HEAD
-	function checkChangeActionPreviewPage(AcceptanceTester $I) {
-=======
 	protected function checkChangeActionPreviewPage(AcceptanceTester $I) {
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 		
 		// // - I choose filter options and then I check if x  products are found
 		// // - I click on product image of first product from the search results

@@ -7,9 +7,6 @@ namespace Helper;
 class Acceptance extends \Codeception\Module
 {
 
-<<<<<<< HEAD
-	
-=======
 	/**
      * 
      */
@@ -67,7 +64,6 @@ class Acceptance extends \Codeception\Module
         return false;
     }
 
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
     /**
      * Get current url from WebDriver
      * @return mixed

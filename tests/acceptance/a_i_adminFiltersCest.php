@@ -13,13 +13,10 @@ class a_i_adminFiltersCest
 
 	public function filterGeneralConfigurations(AcceptanceTester $I) {
 
-<<<<<<< HEAD
-=======
 		if( !$I->test_allowed_in_this_environment("a_") ) {
             return;
         }
 
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 		//login to admin panel, should save and maintain cookies so that do not need to login on all admin test. but yeah however during the front end test should flush the admin cookie first.  
 		$I->loginAsAdmin();
 		$I->see( 'Dashboard' );
@@ -46,13 +43,10 @@ class a_i_adminFiltersCest
 
 	public function alternateFilterWidgets(AcceptanceTester $I) {
 
-<<<<<<< HEAD
-=======
 		if( !$I->test_allowed_in_this_environment("a_") ) {
             return;
         }
 
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 		//login to admin panel, should save and maintain cookies so that do not need to login on all admin test. but yeah however during the front end test should flush the admin cookie first.  
 		$I->loginAsAdmin();
 		$I->see( 'Dashboard' );
@@ -65,17 +59,10 @@ class a_i_adminFiltersCest
 		$I->see('Default(Grid View)');
 
 		// select category
-<<<<<<< HEAD
-		$I->executeJS("jQuery('#sc3').checkbox('set checked');");	
-
-		// save 
-		$I->click('Save');		//click('#filter_setting_submit_btn'); 	//('Save');		//it shouldn't be this way, but there seem some issue with selenium driver and thus when there is another Save button on the page even though on another page and is not visible but still selenium think it is visible and thus gives us error so need to use unique xPath like id etc. 
-=======
 		$I->executeJS("jQuery('#sc3').checkbox('set checked', 'sc3');");	
 
 		// save 
 		$I->click('#submit_btn'); 	//('Save');		//it shouldn't be this way, but there seem some issue with selenium driver and thus when there is another Save button on the page even though on another page and is not visible but still selenium think it is visible and thus gives us error so need to use unique xPath like id etc. 
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 
 		// confirm if saved properly or not
 		$I->reloadPage();	//reload page
@@ -85,23 +72,17 @@ class a_i_adminFiltersCest
 
 	public function firstAndSecondCategoryFilterConfigurations(AcceptanceTester $I) {
 
-<<<<<<< HEAD
-=======
 		if( !$I->test_allowed_in_this_environment("a_") ) {
             return;
         }
 
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 		//login to admin panel, should save and maintain cookies so that do not need to login on all admin test. but yeah however during the front end test should flush the admin cookie first.  
 		$I->loginAsAdmin();
 		$I->see( 'Dashboard' );
 
 		// go to the page
 		$I->amOnPage('/wp-admin/admin.php?page=eowbc-filters');
-<<<<<<< HEAD
-=======
 		echo $I->grabPageSource();
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 
 		for($cat_index=0; $cat_index<=1; $cat_index++) {
 
@@ -154,11 +135,6 @@ class a_i_adminFiltersCest
 
 	public function deleteFirstAndSecondCategoryFilterConfigurations(AcceptanceTester $I) {
 
-<<<<<<< HEAD
-		// //login to admin panel, should save and maintain cookies so that do not need to login on all admin test. but yeah however during the front end test should flush the admin cookie first.  
-		// $I->loginAsAdmin();
-		// $I->see( 'Dashboard' );
-=======
 		if( !$I->test_allowed_in_this_environment("a_") ) {
             return;
         }
@@ -166,7 +142,6 @@ class a_i_adminFiltersCest
 		//login to admin panel, should save and maintain cookies so that do not need to login on all admin test. but yeah however during the front end test should flush the admin cookie first.  
 		$I->loginAsAdmin();
 		$I->see( 'Dashboard' );
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 
 		// // go to the page
 		// $I->amOnPage('/wp-admin/admin.php?page=eowbc-filters');
