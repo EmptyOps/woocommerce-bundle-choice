@@ -32,10 +32,10 @@ class Setting_status {
 							'inventory_type'=>array(
 								'label'=>'Inventory Type',
 								'type'=>'select',
-								'value'=>wbc()->options->get_option('setting_staus','inventory_type'),
+								'value'=>'',	//wbc()->options->get_option('setting_staus','inventory_type'),
 								'validate'=>array('required'=>''),
 								'sanitize'=>'sanitize_text_field',
-								'options'=>array('jewelery'=>'Jewelery','clothing'=>'Clothing','home_decor'=>'Home Decor','others'=>'Others'),
+								'options'=>array('jewelry'=>'Jewelry','clothing'=>'Clothing','home_decor'=>'Home Decor','others'=>'Others'),
 								'class'=>array('fluid'),
 								'size_class'=>array('eight','wide','required'),
 								'inline'=>true,
