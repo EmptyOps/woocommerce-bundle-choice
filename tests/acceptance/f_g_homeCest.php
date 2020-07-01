@@ -59,8 +59,8 @@ class f_g_homeCest
     	// go to the home page
 		$I->amOnPage('/');
 
-        // $I->executeJS('window.scrollTo( 0, 300 );');      
-        // $I->wait(3);
+        $I->executeJS('window.scrollTo( 0, 300 );');      
+        $I->wait(3);
 
 		// Check if buttons with text x are visible 
         $I->see('Start with Diamond');
@@ -75,6 +75,9 @@ class f_g_homeCest
 
         //go back to the home page
         $I->moveBack();
+
+        $I->executeJS('window.scrollTo( 0, 300 );');        //$I->scrollTo('Save'); 
+        $I->wait(3);
 
 		// I click on button two  and I see in next page text like 1 {button text} of second Button
         $I->click('Start with Setting');

@@ -19,6 +19,10 @@ class f_i_step1Cest
 
     	// go to the category page page
 		$I->amOnPage('/');	
+
+		$I->executeJS('window.scrollTo( 0, 300 );');        //$I->scrollTo('Save'); 
+        $I->wait(3);
+        
 		$I->click('Start with Diamond');
 		$I->waitForText('CHOOSE A', 10);    
 
