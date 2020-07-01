@@ -15,6 +15,7 @@
 		</p>
 		<div style="display: inline-block;" class="ui twelve wide field">
 			<div class="ui tiny form" data-reset="reset_checkbox(new Event('click'),'.checklist_<?php echo $filter['slug'] ?>')">
+
 				<?php foreach ($filter['list'] as $term) : ?>
 					<div class="ui checkbox checked">
 						<input type="checkbox" checked="checked" tabindex="0" class="hidden checklist_<?php echo $filter['slug'] ?>" id='check_<?php echo $term['slug']; ?>' data-slug="<?php echo $term['slug']; ?>" data-filter-slug="<?php echo $filter['slug']; ?>">

@@ -11,6 +11,7 @@ class f_s_accountOrderDetailPageCest
     // {
     // }
 
+<<<<<<< HEAD
     function myAccountPage(AcceptanceTester $I) {
 		
 		//here it is better if we can simply go to my account page via login or even better if WebDriver can keep the previous session alive 
@@ -32,11 +33,32 @@ class f_s_accountOrderDetailPageCest
 			$I->click('VIEW', 'a');	
 
 		}
+=======
+    public function myAccountPage(AcceptanceTester $I) {
+
+    	if( !$I->test_allowed_in_this_environment("f_") ) {
+            return;
+        }
+
+    	//TODO make it dynamic by saving this in session in previous steps and then here get it from session 
+    	$this->price_of_product_step1 = "12.00";
+    	$this->price_of_product_step2 = "15.00";
+		
+		//here if session is not detected than try to keep the previous session alive and it must be possible in WebDriver 
+		$I->amOnPage('/my-account/orders/');	
+		
+		// verify 
+    	$I->see('Orders','h1');
+		$I->see('Status');
+		$I->see('Total');
+		$I->see($this->price_of_product_step1+$this->price_of_product_step2);
+>>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 
 	}
 
 	public function verifyOrderDetails(AcceptanceTester $I, $is_inner_call=false) {
 
+<<<<<<< HEAD
 		$this->myAccountPage($I);
 
 		// verify order details 
@@ -44,6 +66,25 @@ class f_s_accountOrderDetailPageCest
 		$I->waitForText('hi000', 10, 'address');
 		$I->waitForText('Direct bank transfer', 10, 'td');
 		$I->waitForText('08347408752', 10, 'p');
+=======
+		if( !$I->test_allowed_in_this_environment("f_") ) {
+            return;
+        }
+        
+		// go to detail page 
+		$I->click('//*[@id="post-9"]/div[1]/div/div/div/table/tbody/tr[1]/td[5]/a');	//click on latest order link using xPath
+
+		// verify order details 
+		$I->waitForText('Order details', 10, 'h2');
+
+		$I->executeJS('window.scrollTo( 0, 300 );');		
+		$I->wait(3);
+
+		$I->see($this->price_of_product_step1+$this->price_of_product_step2);
+		$I->see('hi000');
+		$I->see('Direct bank transfer');
+		$I->see('8347408752');
+>>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 
 		//TODO check here if merged row appears properly or not 
 		if( !$is_inner_call ) { 
@@ -52,6 +93,7 @@ class f_s_accountOrderDetailPageCest
 
 	}
 
+<<<<<<< HEAD
 	function confirmMergedRow(AcceptanceTester $I) {
 		
 		// // - I choose filter options and then I check if x  products are found
@@ -71,6 +113,14 @@ class f_s_accountOrderDetailPageCest
 		// $I->waitForText($price_of_product, 10, 'span');
 		// $I->waitForText('VIEW', 10, 'a');
 		// $I->waitForText('REMOVE', 10, 'a');
+=======
+	protected function confirmMergedRow(AcceptanceTester $I) {
+		
+		// TODO implement complete check which ensures in single row UI widget the entire item pair is displayed and not in two 
+
+		// at least price check is done but however even for this it needs to confirm that it is checking the row price and not of any subtotal or total. 
+		$I->see($this->price_of_product_step1+$this->price_of_product_step2);
+>>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 
 	}
 

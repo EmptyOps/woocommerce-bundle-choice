@@ -64,6 +64,7 @@ class Eowbc_Setting_Status {
 	public function save( $form_definition ) {
 		
 		wbc()->sanitize->clean($form_definition);
+
 		wbc()->validate->check($form_definition);
 		$res = array();
 		$res["type"] = "success";

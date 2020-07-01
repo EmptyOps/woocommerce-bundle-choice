@@ -58,8 +58,17 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-filters',
 							'template'=>'admin/menu/filters',
-							'position'=>3
+							'position'=>2
 						),
+						array(
+							'parent_slug'=>'eowbc',
+							'title'=>eowbc_lang('Mapping').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Mapping'),
+							'menu_title'=>eowbc_lang('Mapping'),
+							'capability'=>'manage_options',
+							'slug'=>'eowbc-mapping',
+							'template'=>'admin/menu/mapping',
+							'position'=>3
+						),						
 						array(
 							'parent_slug'=>'eowbc',
 							'title'=>eowbc_lang('Mapping').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Mapping'),
@@ -85,7 +94,7 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-tiny-features',
 							'template'=>'admin/menu/tiny_features',
-							'position'=>4
+							'position'=>5
 						),
 						array(
 							'parent_slug'=>'eowbc',
@@ -94,7 +103,7 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-price-control',
 							'template'=>'admin/menu/price_control',
-							'position'=>4
+							'position'=>6
 						),
 						array(
 							'parent_slug'=>'eowbc',
@@ -103,7 +112,7 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-setting-status',
 							'template'=>'admin/menu/setting-status',
-							'position'=>6
+							'position'=>7
 						),
 						array(
 							'parent_slug'=>'eowbc',
@@ -112,7 +121,7 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-extensions',
 							'template'=>'admin/menu/extensions',
-							'position'=>5
+							'position'=>8
 						),
 					);
 			$features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())));

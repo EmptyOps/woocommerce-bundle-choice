@@ -162,6 +162,7 @@ jQuery(document).ready(function($){
         e.stopPropagation();
 
         //delete
+
         if( jQuery( "#" + jQuery(this).data("bulk_table_id") + "_bulk" ).val() == "delete") {
             if(confirm('Are you sure want to delete?')){
                 var cbs = [];
@@ -180,7 +181,7 @@ jQuery(document).ready(function($){
             } else {
                 return false
             }
-            
+
         } else if( jQuery( "#" + jQuery(this).data("bulk_table_id") + "_bulk" ).val() == "activate" ) {
             var cbs = [];
 
@@ -221,7 +222,6 @@ jQuery(document).ready(function($){
     $(".ui.negative.message .close.icon").click(function(){
         jQuery(".ui.negative.message").addClass('transition hidden');
     });
-    
 });
 
 function eowbc_toast_common( toast_type_class, msg, timeout) {
@@ -388,5 +388,5 @@ function eowbc_do_deactivate( cbs, saved_tab_key ) {
             /*console.log(xhr);*/
         }
     });
-}
 
+}

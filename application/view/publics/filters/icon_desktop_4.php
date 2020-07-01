@@ -13,6 +13,7 @@
 		<?php endif; ?>
 		</span>
 	</div>	
+
 	<div style="display: inline-block;" class="field twelve ui wide" data-reset="reset_icon(new Event('click'),'<?php echo $term->slug; ?>')">
 		<div class="ui equal width center aligned grid" style="text-align: center;">				
 			<?php foreach ($list as $filter_icon): ?>

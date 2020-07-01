@@ -12,11 +12,26 @@ class a_m_adminAppearanceCest
     // }
 
     public function sampleLandingPageStyling(AcceptanceTester $I) {
+<<<<<<< HEAD
+=======
+
+    	if( !$I->test_allowed_in_this_environment("a_") ) {
+            return;
+        }
+
+>>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 		//TODO write this test when the styling feature is implemented for sample landing page
 	}
 
     public function buttonsWidgetStyling(AcceptanceTester $I) {
 
+<<<<<<< HEAD
+=======
+    	if( !$I->test_allowed_in_this_environment("a_") ) {
+            return;
+        }
+
+>>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 		//login to admin panel, should save and maintain cookies so that do not need to login on all admin test. but yeah however during the front end test should flush the admin cookie first.  
 		$I->loginAsAdmin();
 		$I->see( 'Dashboard' );
@@ -50,6 +65,13 @@ class a_m_adminAppearanceCest
 
 	public function breadcrumbWidgetStyling(AcceptanceTester $I) {
 
+<<<<<<< HEAD
+=======
+		if( !$I->test_allowed_in_this_environment("a_") ) {
+            return;
+        }
+
+>>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 		//login to admin panel, should save and maintain cookies so that do not need to login on all admin test. but yeah however during the front end test should flush the admin cookie first.  
 		$I->loginAsAdmin();
 		$I->see( 'Dashboard' );
@@ -64,12 +86,22 @@ class a_m_adminAppearanceCest
 
 		// set fields 
 		$I->fillField('breadcrumb_radius', '4px');
+<<<<<<< HEAD
 		$I->executeJS('jQuery("#breadcrumb_backcolor_active").val("#000000");'); 
 		$I->executeJS('jQuery("#breadcrumb_backcolor_inactive").val("#000111");');
 		$I->executeJS('jQuery("#breadcrumb_num_icon_backcolor_active").val("#000000");'); 
 		$I->executeJS('jQuery("#breadcrumb_num_icon_backcolor_inactive").val("#000111");');
 		$I->executeJS('jQuery("#breadcrumb_title_backcolor_active").val("#000000");'); 
 		$I->executeJS('jQuery("#breadcrumb_title_backcolor_inactive").val("#000111");');
+=======
+		//TODO commented to see proper visuals during debug. uncomment when the entire form is validated after the save.
+		// $I->executeJS('jQuery("#breadcrumb_backcolor_active").val("#000000");'); 
+		// $I->executeJS('jQuery("#breadcrumb_backcolor_inactive").val("#000111");');
+		// $I->executeJS('jQuery("#breadcrumb_num_icon_backcolor_active").val("#000000");'); 
+		// $I->executeJS('jQuery("#breadcrumb_num_icon_backcolor_inactive").val("#000111");');
+		// $I->executeJS('jQuery("#breadcrumb_title_backcolor_active").val("#000000");'); 
+		// $I->executeJS('jQuery("#breadcrumb_title_backcolor_inactive").val("#000111");');
+>>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 		$I->executeJS("jQuery('#showhide_icons_1').checkbox('set unchecked');");
 		$I->executeJS("jQuery('#appearance_breadcrumb_hide_border_1').checkbox('set checked');");	
 		$I->executeJS("jQuery('#appearance_breadcrumb_fixed_navigation_1').checkbox('set checked');");	
@@ -89,6 +121,13 @@ class a_m_adminAppearanceCest
 
 	public function filterWidgetStyling(AcceptanceTester $I) {
 
+<<<<<<< HEAD
+=======
+		if( !$I->test_allowed_in_this_environment("a_") ) {
+            return;
+        }
+
+>>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 		//login to admin panel, should save and maintain cookies so that do not need to login on all admin test. but yeah however during the front end test should flush the admin cookie first.  
 		$I->loginAsAdmin();
 		$I->see( 'Dashboard' );
@@ -125,6 +164,13 @@ class a_m_adminAppearanceCest
 
 	public function productPageStyling(AcceptanceTester $I) {
 
+<<<<<<< HEAD
+=======
+		if( !$I->test_allowed_in_this_environment("a_") ) {
+            return;
+        }
+        
+>>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 		//login to admin panel, should save and maintain cookies so that do not need to login on all admin test. but yeah however during the front end test should flush the admin cookie first.  
 		$I->loginAsAdmin();
 		$I->see( 'Dashboard' );

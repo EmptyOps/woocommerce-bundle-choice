@@ -108,7 +108,6 @@ class Eowbc_Filters {
 		wbc()->options->update_option('appearance_filters','slider_nodes_backcolor_active',sanitize_hex_color('#9bb8d3'));		
 	}
 
-
 	public function save( $form_definition, $is_auto_insert_for_template=false ) {
 		
 		wbc()->sanitize->clean($form_definition);
@@ -220,6 +219,7 @@ class Eowbc_Filters {
 			    //only for those for which POST is set
 
 			    if( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) && ( isset($_POST[$fk]) || $fv["type"]=='checkbox'  ) ) {
+
 			    	//skip fields where applicable
 					if( in_array($fk, $skip_fileds) ) {
 		    			continue;
@@ -254,6 +254,7 @@ class Eowbc_Filters {
 			if( $is_table_save ) {
 
 				$filter_data = unserialize(wbc()->options->get_option_group('filters_'.$key,"a:0:{}"));
+
 		        if(is_array($filter_data) and !empty($filter_data)){
 
 
@@ -383,6 +384,7 @@ class Eowbc_Filters {
 
 $diamond_category = get_term_by( 'slug','eo_diamond_shape_cat','product_cat');
 $setting_category = get_term_by( 'slug','eo_setting_shape_cat','product_cat');
+
 
 if(is_wp_error($diamond_category) or is_wp_error($setting_category) or empty($diamond_category) or empty($setting_category) and !is_ajax()){
 	ob_start();

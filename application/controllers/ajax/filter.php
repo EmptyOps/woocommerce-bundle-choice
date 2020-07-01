@@ -136,7 +136,6 @@ class Filter
 		                }
 		            }
 	                $query->add('tax_query',$tax_query);
-	                //$query->set('tax_query',$tax_query);		              
 	            }		            
 	        }		       
 	    });		   

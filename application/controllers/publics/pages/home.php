@@ -24,7 +24,7 @@ class Home {
 		if(isset($_GET['wbc_report']) && !empty(wbc()->sanitize->get('wbc_report'))) {
         	if(isset($_SERVER['HTTP_REFERER'])){
         		wbc()->options->set('eo_wbc_mapping_error_report',$_SERVER['HTTP_REFERER']);
-        		throw new Exception('One user has reported mapping issue at this <a href="'.$_SERVER['HTTP_REFERER'].'" target="_blank">link</a>, please ensure you have added mapping to connect products from first to second step.',1);
+        		throw new Exception('One user has reported mapping issue at this <a href="'.$_SERVER['HTTP_REFERER'].'" target="_blank">link</a>, please ensure you have added mapping to connect products from first to second step.',2);
         	}
       	} 
 

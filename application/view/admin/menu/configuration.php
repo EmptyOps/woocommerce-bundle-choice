@@ -8,7 +8,10 @@ $form['id']='eowbc_configuration';
 $form['title']='General';
 $form['method']='POST';
 $form['tabs'] = true;
+
 $form['data'] = \eo\wbc\model\admin\Eowbc_Configuration::instance()->get( \eo\wbc\controllers\admin\menu\page\Configuration::get_form_definition() );
+
+
 
 wbc()->load->model('admin\form-builder');
 eo\wbc\model\admin\Form_Builder::instance()->build($form);

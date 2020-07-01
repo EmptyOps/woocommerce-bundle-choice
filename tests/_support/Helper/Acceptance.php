@@ -7,7 +7,67 @@ namespace Helper;
 class Acceptance extends \Codeception\Module
 {
 
+<<<<<<< HEAD
 	
+=======
+	/**
+     * 
+     */
+    public function get_test_environment()
+    {
+        // echo "called get_test_environment... ";
+        try {
+            $version_nums = explode(".", PHP_VERSION);
+
+            if( !isset($version_nums[0]) || $version_nums[0] >= 6 ) {
+                return "WBC_TEST_ENV_default";
+            } 
+            else {
+                return "WBC_TEST_ENV_with_sample_data";
+            }
+        }
+        catch(Exception $e) {
+            echo "caught message...";
+            echo $e->getMessage()."";
+            return null;
+        }
+
+        return null;
+    }
+
+    /**
+     * 
+     */
+    public function test_allowed_in_this_environment( $test_name_perfix )
+    {
+        // echo "called test_allowed_in_this_environment... ";
+        try {
+            $test_environment = $this->get_test_environment();
+
+            if( $test_environment == "WBC_TEST_ENV_default" ) {
+                if( $test_name_perfix != "n_" ) {
+                    return true;
+                }
+            } 
+            else if( $test_environment == "WBC_TEST_ENV_with_sample_data" ) {
+                if( $test_name_perfix == "n_" ) {
+                    return true;
+                }
+            } 
+            else {
+                return false;
+            }
+        }
+        catch(Exception $e) {
+            echo "caught message...";
+            echo $e->getMessage()."";
+            return false;
+        }
+
+        return false;
+    }
+
+>>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
     /**
      * Get current url from WebDriver
      * @return mixed
@@ -50,5 +110,53 @@ class Acceptance extends \Codeception\Module
             echo $e->getMessage()."";
         }
     }
+<<<<<<< HEAD
+=======
+
+    /**
+     * 
+     */
+    public function set_session($key,$val)
+    {
+        echo "called set_session... ".$key." ".$val;
+        try {
+            //we should use standard practice like php session that comes with phpbrowser or something of that sort. but now as a quick resort we are saving it just in the txt file. 
+            $myfile = fopen($key.".txt", "w") or die("Unable to open file!");
+            fwrite($myfile, $val);
+            fclose($myfile);
+        }
+        catch(Exception $e) {
+            echo "caught message...";
+            echo $e->getMessage()."";
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * 
+     */
+    public function get_session($key)
+    {
+        echo "called get_session... ".$key;
+        try {
+            //we should use standard practice like php session that comes with phpbrowser or something of that sort. but now as a quick resort we are saving it just in the txt file. 
+            $myfile = fopen($key.".txt", "r") or die("Unable to open file!");
+            $val = fread($myfile,filesize($key.".txt"));
+            fclose($myfile);
+
+            echo " ".$val;
+            return $val;
+        }
+        catch(Exception $e) {
+            echo "caught message...";
+            echo $e->getMessage()."";
+            return null;
+        }
+
+        return null;
+    }
+>>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 	
 }

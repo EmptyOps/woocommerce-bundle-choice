@@ -129,6 +129,7 @@ class Eowbc_Mapping {
 			    //loop through form fields, read from POST/GET and save
 			    //may need to check field type here and read accordingly only
 			    //only for those for which POST is set
+
 			    if( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) && (isset($_POST[$fk]) || $fv["type"]=='checkbox')) {
 			    	//skip fields where applicable
 					if( in_array($fk, $skip_fileds) ) {
@@ -144,6 +145,7 @@ class Eowbc_Mapping {
 			    		$table_data[$fk] = (empty($_POST[$fk])? $_POST[$fk]: sanitize_text_field( $_POST[$fk] ) ); 
 			    	}
 			    	else {
+
 			    		wbc()->options->update_option('mapping_'.$key,$fk,(isset($_POST[$fk])? sanitize_text_field( $_POST[$fk] ):'' ));
 			    	}
 			    }

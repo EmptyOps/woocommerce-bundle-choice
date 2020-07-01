@@ -331,7 +331,11 @@ if ( ! class_exists( 'Filters' ) ) {
 					)
 				),							
 				'd_fconfig'=>array(
+<<<<<<< HEAD
 						'label'=>($inventory_type==='jewelery'?"Diamond":"First")." Page Filter Configuration",
+=======
+						'label'=>($inventory_type==='jewelry'?"Diamond":"First")." Page Filter Configuration",
+>>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 						'form'=>array( $table["id"].'_bulk'=>array(
 								// 'label'=>'Bulk Actions',
 								'type'=>'select',
@@ -533,7 +537,11 @@ if ( ! class_exists( 'Filters' ) ) {
 						)
 					),
 				's_fconfig'=>array(
+<<<<<<< HEAD
 						'label'=>($inventory_type==='jewelery'?"Settings":"Second")." Page Filter Configuration",
+=======
+						'label'=>($inventory_type==='jewelry'?"Settings":"Second")." Page Filter Configuration",
+>>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 						'form'=>array( $sett_table["id"].'_bulk'=>array(
 								// 'label'=>'Bulk Actions',
 								'type'=>'select',

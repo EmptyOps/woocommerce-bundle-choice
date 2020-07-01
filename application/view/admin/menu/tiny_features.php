@@ -192,7 +192,7 @@ $form['data'] = array(
 					'type'=>'text',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_option_dimention','2em'),
 					'sanitize'=>'sanitize_text_field',
-					'class'=>array('fluid'),						
+					'class'=>array('fluid'),	
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
@@ -207,7 +207,7 @@ $form['data'] = array(
 					'type'=>'color',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_color','#ffffff'),
 					'sanitize'=>'sanitize_hex_color',
-					'class'=>array('fluid'),						
+					'class'=>array('fluid'),				
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
@@ -222,7 +222,7 @@ $form['data'] = array(
 					'type'=>'text',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_width','1px'),
 					'sanitize'=>'sanitize_text_field',
-					'class'=>array('fluid'),						
+					'class'=>array('fluid'),			
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
@@ -237,7 +237,7 @@ $form['data'] = array(
 					'type'=>'color',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_color_hover','#ffffff'),
 					'sanitize'=>'sanitize_hex_color',
-					'class'=>array('fluid'),						
+					'class'=>array('fluid'),				
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
@@ -252,7 +252,7 @@ $form['data'] = array(
 					'type'=>'text',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_width_hover','1px'),
 					'sanitize'=>'sanitize_text_field',
-					'class'=>array('fluid'),						
+					'class'=>array('fluid'),
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
@@ -267,7 +267,7 @@ $form['data'] = array(
 					'type'=>'text',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_radius','1px'),
 					'sanitize'=>'sanitize_text_field',
-					'class'=>array('fluid'),						
+					'class'=>array('fluid'),	
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
@@ -282,7 +282,7 @@ $form['data'] = array(
 					'type'=>'color',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_font_color','#ffffff'),
 					'sanitize'=>'sanitize_hex_color',
-					'class'=>array('fluid'),						
+					'class'=>array('fluid'),
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
@@ -297,7 +297,7 @@ $form['data'] = array(
 					'type'=>'color',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_font_color_hover','#ffffff'),
 					'sanitize'=>'sanitize_hex_color',
-					'class'=>array('fluid'),						
+					'class'=>array('fluid'),
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
@@ -312,7 +312,7 @@ $form['data'] = array(
 					'type'=>'color',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_bg_color','#ffffff'),
 					'sanitize'=>'sanitize_hex_color',
-					'class'=>array('fluid'),						
+					'class'=>array('fluid'),
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
@@ -327,7 +327,7 @@ $form['data'] = array(
 					'type'=>'color',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_bg_color_hover','#ffffff'),
 					'sanitize'=>'sanitize_hex_color',
-					'class'=>array('fluid'),						
+					'class'=>array('fluid'),
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
@@ -734,7 +734,7 @@ $form['data'] = array(
 					'sanitize'=>'sanitize_text_field',
 					'options'=>array('icon'=>'Icon Only','icon_text'=>'Icon and Text','numeric_slider'=>'Numeric slider','text_slider'=>'Text slider','checkbox'=>'Checkbox'),
 					'class'=>array('fluid'),
-					'size_class'=>array('three','wide','required'),					
+					'size_class'=>array('three','wide','required'),
 				),				
 				'shop_cat_filter_add_icon_size'=>array(
 					'label' => eowbc_lang('Icon Size'),

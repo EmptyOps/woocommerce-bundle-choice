@@ -44,7 +44,7 @@ class Setting_status {
 								'label'=>'Choose features',
 								'type'=>'checkbox',
 								'sanitize'=>'sanitize_text_field',
-								'value'=>unserialize(wbc()->options->get_option('setting_staus','features',serialize(array()))),
+								'value'=>unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array()))),
 								'options'=>array(
 									'ring_builder'=>'Ring Builder',
 									'pair_maker'=>'Pair Maker',

@@ -4,6 +4,7 @@
 *
 */
 
+
 // $res = array( "type"=>"success", "msg"=>"" );
 
 // if(wp_verify_nonce(sanitize_text_field($_POST['_wpnonce']),'eowbc_configuration')){                
@@ -20,6 +21,7 @@
 
 // echo json_encode($res);
 
+
 $res = array( "type"=>"success", "msg"=>"Updated successfully!" );
 
 if(wp_verify_nonce(sanitize_text_field($_POST['_wpnonce']),'eowbc_configuration')){
@@ -33,12 +35,15 @@ if(wp_verify_nonce(sanitize_text_field($_POST['_wpnonce']),'eowbc_configuration'
 		if($_POST['config_alternate_breadcrumb'] =='template_1'){
 			wbc()->options->update_option('appearance_filter','header_font','Avenir');
 			wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_active','#dde5ed');
+
 			wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_inactive','#ffffff');			
 
 		} elseif ($_POST['config_alternate_breadcrumb'] =='template_2') {
 			wbc()->options->update_option('appearance_filter','header_font','ZapfHumanist601BT-Roman');
 			wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_active','#f7f7f7');	
+
 			wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_inactive','#ffffff');			
+
 		}
 		
 	}
@@ -103,6 +108,5 @@ else {
 	$res["type"] = "error";
 	$res["msg"] = "Nonce validation failed";
 }
-
  
 echo json_encode($res);

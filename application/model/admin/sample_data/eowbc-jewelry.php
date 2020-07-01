@@ -11273,7 +11273,6 @@ class Eowbc_Jewelry {
 		                $_POST[$prefix.'_fconfig_icon_size']='';
 		                $_POST[$prefix.'_fconfig_icon_label_size']='';
 		                $_POST[$prefix.'_fconfig_add_reset_link']='';
-
 		                $_POST[$prefix.'_fconfig_add_help']=$filter['help'];
 		                $_POST[$prefix.'_fconfig_add_help_text']=$filter['help_text'];
 		                $_POST[$prefix.'_fconfig_add_enabled']=$filter['enabled'];
@@ -11296,7 +11295,6 @@ class Eowbc_Jewelry {
 		                unset($_POST[$prefix.'_fconfig_add_reset_link']);
 
 		                unset($_POST['filter_template']);
-
 		                unset($_POST[$prefix.'_fconfig_add_help']);
 		                unset($_POST[$prefix.'_fconfig_add_help_text']);
 		                unset($_POST[$prefix.'_fconfig_add_enabled']);
