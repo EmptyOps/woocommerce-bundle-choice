@@ -26,6 +26,9 @@ class f_i_step1Cest
 		$I->click('Start with Diamond');
 		$I->waitForText('CHOOSE A', 10);    
 
+		$I->executeJS('window.scrollTo( 0, 300 );');        //$I->scrollTo('Save'); 
+        $I->wait(3);
+
 		// - I choose filter options and then I check if x  products are found 
 		$I->executeJS("jQuery('#text_slider_price').slider('set rangeValue', 14, 15);");	
 		$I->waitForText('No products were found', 10);
@@ -51,6 +54,9 @@ class f_i_step1Cest
 		// - I click on product image of first product from the search results
 		$price_of_product = $this->categoryPage($I);
 
+		$I->executeJS('window.scrollTo( 0, 300 );');        //$I->scrollTo('Save'); 
+        $I->wait(3);
+        
 		// - I see continue button
 		$I->see('Add to bag...');
 

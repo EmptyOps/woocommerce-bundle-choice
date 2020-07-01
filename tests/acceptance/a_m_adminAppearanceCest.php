@@ -163,7 +163,7 @@ class a_m_adminAppearanceCest
 
 		/* Map creation and modification tab */
 		// go to the tab
-		$I->click('Product Page');
+		$I->click('//*[@id="eowbc_appearance"]/div[1]/a[4]');	//('Product Page');
 		$I->see('First Category Add to Cart Button Text');
 
 		// set fields 
@@ -182,7 +182,7 @@ class a_m_adminAppearanceCest
 		// confirm if saved properly or not. TODO actually we should connfirm all values of the form if saved and repopulated properly in edit mode or saved list or not. 
 		$I->reloadPage();	//reload page
 		$I->wait(3);
-		$I->click('Product Page');
+		$I->click('//*[@id="eowbc_appearance"]/div[1]/a[4]');	//('Product Page');
 		// echo $I->grabPageSource();
 		$I->seeInField('fc_atc_button_text', 'Add to bag...');	//$I->see('Add to bag...', 'input');	//I verify that I can see "button tagline..." inside input tag 
 
