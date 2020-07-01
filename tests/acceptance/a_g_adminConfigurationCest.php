@@ -13,13 +13,10 @@ class a_g_adminConfigurationCest
 
     public function configureButtonPosition(AcceptanceTester $I) {
 
-<<<<<<< HEAD
-=======
     	if( !$I->test_allowed_in_this_environment("a_") ) {
             return;
         }
 
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 		//login to admin panel, should save and maintain cookies so that do not need to login on all admin test. but yeah however during the front end test should flush the admin cookie first.  
 		$I->loginAsAdmin();
 		$I->see( 'Dashboard' );
@@ -53,13 +50,10 @@ class a_g_adminConfigurationCest
 
 	public function configureBreadcrumbNavigationsSteps(AcceptanceTester $I) {
 
-<<<<<<< HEAD
-=======
 		if( !$I->test_allowed_in_this_environment("a_") ) {
             return;
         }
 
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 		//login to admin panel, should save and maintain cookies so that do not need to login on all admin test. but yeah however during the front end test should flush the admin cookie first.  
 		$I->loginAsAdmin();
 		$I->see( 'Dashboard' );
@@ -111,11 +105,7 @@ class a_g_adminConfigurationCest
 
 	// 	$_POST['_wpnonce'] = wp_create_nonce('eowbc_configuration');
 	// 	$_POST['resolver'] = 'eowbc_configuration';
-<<<<<<< HEAD
-	// 	$_POST['config_business_type'] = 'jewelery';
-=======
 	// 	$_POST['config_business_type'] = 'jewelry';
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 	// 	$_POST['config_buttons_page'] = '1';
 	// 	$_POST['config_enable_make_pair'] = 'enable_make_pair';
 	// 	$_POST['config_label_make_pair'] = 'Make Pair';
@@ -130,11 +120,7 @@ class a_g_adminConfigurationCest
 	// 	$_POST['config_pair_maker_upper_card'] = 'pair_maker_upper_card';
 
 	// 	$expected = serialize(array(
-<<<<<<< HEAD
-	// 		"business_type"=>"jewelery",
-=======
 	// 		"business_type"=>"jewelry",
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 	// 		"buttons_page"=>"1",
 	// 		"enable_make_pair"=>"enable_make_pair",
 	// 		"label_make_pair"=>"Make Pair",

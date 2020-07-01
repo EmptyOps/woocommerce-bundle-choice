@@ -13,13 +13,10 @@ class a_k_adminMappingCest
 
     public function mapCreation(AcceptanceTester $I) {
 
-<<<<<<< HEAD
-=======
     	if( !$I->test_allowed_in_this_environment("a_") ) {
             return;
         }
 
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 		//login to admin panel, should save and maintain cookies so that do not need to login on all admin test. but yeah however during the front end test should flush the admin cookie first.  
 		$I->loginAsAdmin();
 		$I->see( 'Dashboard' );
@@ -47,14 +44,11 @@ class a_k_adminMappingCest
 	}
 
 	public function mapModification(AcceptanceTester $I) {
-<<<<<<< HEAD
-=======
 
 		if( !$I->test_allowed_in_this_environment("a_") ) {
             return;
         }
         
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
 		//TODO write this test when the modification feature is implemented
 	}
 }
