@@ -47,6 +47,9 @@ class a_m_adminAppearanceCest
 		$I->executeJS('jQuery("#button_hovercolor").val("#000111");'); 
 		$I->executeJS('jQuery("#button_textcolor").val("#ffffff");'); 
 
+		$I->executeJS('window.scrollTo( 0, 1000 );');		//$I->scrollTo('Save');	
+		$I->wait(3);
+
 		// save 
 		$I->click('Save Appearance Settings'); 	
 
@@ -88,6 +91,8 @@ class a_m_adminAppearanceCest
 		$I->executeJS("jQuery('#appearance_breadcrumb_hide_border_1').checkbox('set checked');");	
 		$I->executeJS("jQuery('#appearance_breadcrumb_fixed_navigation_1').checkbox('set checked');");	
 
+		$I->executeJS('window.scrollTo( 0, 1000 );');		//$I->scrollTo('Save');	
+		$I->wait(3);
 
 		// save 
 		$I->click('Save Appearance Settings'); 	
@@ -128,6 +133,8 @@ class a_m_adminAppearanceCest
 		$I->fillField('icon_size', '10');
 		$I->fillField('icon_label_size', '15');
 
+		$I->executeJS('window.scrollTo( 0, 1000 );');		//$I->scrollTo('Save');	
+		$I->wait(3);
 
 		// save 
 		$I->click('Save Appearance Settings'); 	
@@ -166,6 +173,9 @@ class a_m_adminAppearanceCest
 		$I->executeJS("jQuery('#product_page_hide_first_variation_form_1').checkbox('set checked');");	
 		$I->executeJS("jQuery('#product_page_hide_second_variation_form_1').checkbox('set checked');");	
 
+		$I->executeJS('window.scrollTo( 0, 1000 );');		//$I->scrollTo('Save');	
+		$I->wait(3);
+		
 		// save 
 		$I->click('Save Appearance Settings'); 	
 

@@ -33,6 +33,8 @@ class a_k_adminMappingCest
 		$I->executeJS("jQuery('#eo_wbc_first_category_dropdown_div').dropdown('set selected', 17);");	//better than setting val directly is to select the nth element that has value val 	
 		$I->executeJS("jQuery('#eo_wbc_second_category_dropdown_div').dropdown('set selected', 18);");	//better than setting val directly is to select the nth element that has value val 	
 
+		$I->executeJS('window.scrollTo( 0, 1000 );');		//$I->scrollTo('Save');	
+		$I->wait(3);
 
 		// save 
 		$I->click('#map_creation_modification_save_btn'); 	//used id since button label is supposed be changed
