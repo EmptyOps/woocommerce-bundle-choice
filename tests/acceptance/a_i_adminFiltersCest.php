@@ -121,7 +121,7 @@ class a_i_adminFiltersCest
 			$I->fillField("".$prefix."_fconfig_icon_label_size", '0');
 			$I->executeJS("jQuery('#".$prefix."_fconfig_add_reset_link_1').checkbox('set unchecked');");	
 
-			$I->executeJS('window.scrollTo( 0, 1000 );');		//$I->scrollTo('Save');	
+			$I->executeJS('window.scrollTo( 0, 1500 );');		//$I->scrollTo('Save');	
 			$I->wait(3);
 
 			// save 
