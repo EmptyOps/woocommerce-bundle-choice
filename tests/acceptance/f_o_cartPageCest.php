@@ -61,7 +61,7 @@ class f_o_cartPageCest
                 break;
             }
             catch(Exception $e) {
-                echo "caught at error '".$e->getMessage()."' at scrollToAndClick on attempt number ".$i." after the delay of ".1." seconds";
+                echo "caught at error '".$e->getMessage()."' at scrollToAndClick on attempt number ".$i." after the delay of 1 seconds";
                 $I->wait(1);
             }
         }
