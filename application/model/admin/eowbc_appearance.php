@@ -55,9 +55,16 @@ class Eowbc_Appearance {
 
 		/*$res["post"] = $_POST;*/
 
+		$saved_tab_key = !empty($_POST["saved_tab_key"]) ? $_POST["saved_tab_key"] : ""; 
+		$skip_fileds = array('saved_tab_key');
+		
 	    //loop through form tabs and save 
 
 	    foreach ($form_definition as $key => $tab) {
+	    	if( $key != $saved_tab_key ) {
+	    		continue;
+	    	}
+	    	
 	    	foreach ($tab["form"] as $fk => $fv) {
 			    //loop through form fields, read from POST/GET and save
 			    //may need to check field type here and read accordingly only

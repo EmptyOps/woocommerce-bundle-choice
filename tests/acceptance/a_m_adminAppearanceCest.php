@@ -51,7 +51,7 @@ class a_m_adminAppearanceCest
 		$I->wait(3);
 
 		// save 
-		$I->click('Save Appearance Settings'); 	
+		$I->click('#wid_btns_submit_btn');	//('Save Appearance Settings'); 	
 
 		// confirm if saved properly or not. TODO actually we should connfirm all values of the form if saved and repopulated properly in edit mode or saved list or not. 
 		$I->reloadPage();	//reload page
@@ -95,7 +95,7 @@ class a_m_adminAppearanceCest
 		$I->wait(3);
 
 		// save 
-		$I->click('Save Appearance Settings'); 	
+		$I->click('#breadcrumb_submit_btn');	//('Save Appearance Settings'); 	
 
 		// confirm if saved properly or not. TODO actually we should connfirm all values of the form if saved and repopulated properly in edit mode or saved list or not. 
 		$I->reloadPage();	//reload page
@@ -137,7 +137,7 @@ class a_m_adminAppearanceCest
 		$I->wait(3);
 
 		// save 
-		$I->click('Save Appearance Settings'); 	
+		$I->click('#filters_submit_btn');	//('Save Appearance Settings'); 	
 
 		// confirm if saved properly or not. TODO actually we should connfirm all values of the form if saved and repopulated properly in edit mode or saved list or not. 
 		$I->reloadPage();	//reload page
@@ -163,7 +163,7 @@ class a_m_adminAppearanceCest
 
 		/* Map creation and modification tab */
 		// go to the tab
-		$I->click('//*[@id="eowbc_appearance"]/div[1]/a[4]');	//('Product Page');
+		$I->click('Product Page');
 		$I->see('First Category Add to Cart Button Text');
 
 		// set fields 
@@ -177,12 +177,15 @@ class a_m_adminAppearanceCest
 		$I->wait(3);
 		
 		// save 
-		$I->click('Save Appearance Settings'); 	
+		$I->click('#product_page_submit_btn');	//('Save Appearance Settings'); 	
 
 		// confirm if saved properly or not. TODO actually we should connfirm all values of the form if saved and repopulated properly in edit mode or saved list or not. 
 		$I->reloadPage();	//reload page
+		
+		$I->executeJS('window.scrollTo( 0, 0 );');		//$I->scrollTo('Save');	
 		$I->wait(3);
-		$I->click('//*[@id="eowbc_appearance"]/div[1]/a[4]');	//('Product Page');
+
+		$I->click('Product Page');
 		// echo $I->grabPageSource();
 		$I->seeInField('fc_atc_button_text', 'Add to bag...');	//$I->see('Add to bag...', 'input');	//I verify that I can see "button tagline..." inside input tag 
 

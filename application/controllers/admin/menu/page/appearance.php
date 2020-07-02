@@ -46,14 +46,27 @@ if ( ! class_exists( 'Appearance' ) ) {
 										),
 									),
 
-								), \eo\wbc\model\admin\Form_Builder::instance()->ui_controls_collection( "button", "Button", $hide_defaults=array("font","bordercolor"), $additional_fields=array(), $info_text_overrides=array() )
+								), \eo\wbc\model\admin\Form_Builder::instance()->ui_controls_collection( "button", "Button", $hide_defaults=array("font","bordercolor"), $additional_fields=array(), $info_text_overrides=array() ), 
+								array( 
+									'wid_btns_submit_btn'=>array(
+										'label'=>eowbc_lang('Save'),
+										'type'=>'button',								
+										'class'=>array('secondary'),
+										//'size_class'=>array('eight','wide'),
+										'inline'=>false,
+										'attr'=>array('data-tab_key="wid_btns"', 'data-action="save"'),
+									)	
+								)
 							)							
 				),
 				'breadcrumb'=>array(
 						'label'=>'Breadcrumb',
 						'form'=>array_merge(\eo\wbc\model\admin\Form_Builder::instance()->ui_controls_collection( "breadcrumb", "Breadcrumb", $hide_defaults=array("hovercolor","bordercolor","text","font","textcolor"), $additional_fields=array( array("field_id"=>"breadcrumb_num_icon","field_label"=>"Breadcrumb Number Icon","type"=>"color"), array("field_id"=>"breadcrumb_title","field_label"=>"Breadcrumb Title","type"=>"color"), array("field_id"=>"breadcrumb_actions","field_label"=>"Breadcrumb Actions","type"=>"color"), array("field_id"=>"showhide_icons","field_label"=>"Breadcrumb Show/Hide Icons","type"=>"checkbox","options"=>array('1'=>' '),'attrs'=>array('is_id_as_name'=>true)) ), $info_text_overrides=array("breadcrumb_showhide_icons"=>'You can upload icon from configuration page, <a href="wp-admin/admin.php?page=eo-wbc-setting">click here</a> to go to configuration'), "active_inactive" ),
 							array(
-								
+								'saved_tab_key'=>array(
+									'type'=>'hidden',
+									'value'=>'',
+								),
 								'appearance_breadcrumb_hide_border'=>array(
 									'label'=>'Hide border',
 									'type'=>'checkbox',
@@ -82,6 +95,16 @@ if ( ! class_exists( 'Appearance' ) ) {
 										'size_class'=>array('sixteen','wide'),
 									),	
 								),								 
+							), 
+							array( 
+								'breadcrumb_submit_btn'=>array(
+									'label'=>eowbc_lang('Save'),
+									'type'=>'button',								
+									'class'=>array('secondary'),
+									//'size_class'=>array('eight','wide'),
+									'inline'=>false,
+									'attr'=>array('data-tab_key="breadcrumb"', 'data-action="save"'),
+								)	
 							)
 					)
 				),
@@ -117,6 +140,16 @@ if ( ! class_exists( 'Appearance' ) ) {
 										'size_class'=>array('sixteen','wide'),
 									),	
 								), 
+							),
+							array( 
+								'filters_submit_btn'=>array(
+									'label'=>eowbc_lang('Save'),
+									'type'=>'button',								
+									'class'=>array('secondary'),
+									//'size_class'=>array('eight','wide'),
+									'inline'=>false,
+									'attr'=>array('data-tab_key="filters"', 'data-action="save"'),
+								)	
 							)
 						)
 				),
@@ -196,6 +229,14 @@ if ( ! class_exists( 'Appearance' ) ) {
 								'size_class'=>array('sixteen','wide'),
 							),	
 						), 
+						'product_page_submit_btn'=>array(
+							'label'=>eowbc_lang('Save'),
+							'type'=>'button',								
+							'class'=>array('secondary'),
+							//'size_class'=>array('eight','wide'),
+							'inline'=>false,
+							'attr'=>array('data-tab_key="product_page"', 'data-action="save"'),
+						)
 						/*'appearence_product_page_devider_option_form'=>array(
 										'label'=>'Option Form',
 										'type'=>'devider',
