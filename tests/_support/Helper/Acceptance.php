@@ -171,4 +171,25 @@ class Acceptance extends \Codeception\Module
         return null;
     }
 	
+    /**
+     * 
+     */
+    public function scrollToAndClick($I,$text_or_xpath, $xpath_for_scroll, $attempts=10, $delay=1) 
+    {
+        echo "called scrollToAndClick...";
+        $I->scrollTo($xpath_for_scroll);
+        $I->wait(3);
+            
+        for($i=1; $i<=$attempts; $i++) {
+            try { 
+                $I->click($text_or_xpath);
+                break;
+            }
+            catch(Exception $e) {
+                echo "caught at error '".$e->getMessage()."' at scrollToAndClick on attempt number ".$i." after the delay of ".$delay." seconds";
+                $I->wait($delay);
+            }
+        }
+    }
+
 }

@@ -50,13 +50,7 @@ class f_o_cartPageCest
         // $I->wait(3);
 
 		// - I click on Proceed to checkout button
-        try { 
-			$I->click('Proceed to checkout');
-		}
-		catch(Exception $e) {
-			$I->scrollTo('//*[@id="post-7"]/div[1]/div/div/div[2]/div/div/a');
-			$I->click('Proceed to checkout');
-		}
+		$I->scrollToAndClick($I, 'Proceed to checkout', '//*[@id="post-7"]/div[1]/div/div/div[2]/div/div/a', $attempts=10, $delay=1); 
 		
 		// - I see in next page the text x etc.
 		$I->waitForText('Billing details', 10);
