@@ -54,7 +54,7 @@ class f_o_cartPageCest
 			$I->click('Proceed to checkout');
 		}
 		catch(Exception $e) {
-			$I->scrollTo('Proceed to checkout');
+			$I->scrollTo('//*[@id="post-7"]/div[1]/div/div/div[2]/div/div/a');
 			$I->click('Proceed to checkout');
 		}
 		
