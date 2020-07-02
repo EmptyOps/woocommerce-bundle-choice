@@ -52,7 +52,7 @@ class f_s_accountOrderDetailPageCest
 		$I->see('Direct bank transfer');
 
 		$I->executeJS('window.scrollTo( 0, 500 );');        //$I->scrollTo('Save'); 
-        $I->wait(3);
+        $I->wait(10);
 
 		$I->see('8347408752');
 

@@ -110,6 +110,25 @@ class Acceptance extends \Codeception\Module
     /**
      * 
      */
+    public function findClickableElements($text_or_xpath)
+    {
+        echo "called findClickableElementsUsingXPath...";
+        try {
+            $module = $this->getModule('WPWebDriver');
+            $page = $module->webDriver;
+
+            // search a link or button on a page
+            return $module->_findClickable($page, $text_or_xpath);
+        }
+        catch(Exception $e) {
+            echo "caught error at findClickableElementsUsingXPath, message...";
+            echo $e->getMessage()."";
+        }
+    }
+
+    /**
+     * 
+     */
     public function set_session($key,$val)
     {
         echo "called set_session... ".$key." ".$val;
