@@ -35,11 +35,14 @@ class sunob_a_u_bonusFeaturesSpecificationsViewCest
 		$I->executeJS("jQuery('#specification_view_shortcode_status').checkbox('set checked');");
 		$I->executeJS("jQuery('#specification_view_default_status').checkbox('set checked');");
 
-		$I->executeJS("jQuery('[name=\"tiny_features_specification_view_style\"]').checkbox('set checked', 'template_1');");
+		// $I->executeJS("jQuery('[name=\"tiny_features_specification_view_style\"]').checkbox('set checked', 'template_1');");
+		$I->executeJS("jQuery('[name=\"tiny_features_specification_view_style\"]').val('template_1');");	
 		
 		$I->executeJS('window.scrollTo( 0, 500 );');		//$I->scrollTo('Save');	
 		$I->wait(3);
 
+		echo "the valie of tiny_features_specification_view_style ".$I->executeJS("return jQuery('[name=\"tiny_features_specification_view_style\"]').val();");
+		
 		// save 
 		$I->click('#tiny_features_save_specification_view'); 	//('Save'); 	
 

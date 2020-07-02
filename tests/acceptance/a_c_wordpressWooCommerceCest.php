@@ -18,6 +18,9 @@ class a_c_wordpressWooCommerceCest
             return;
         }
 
+        //reset session only from the first test so that all tests are ran on fresh empty session.
+        $I->resetSession();
+
     	$I->amOnPage('/');
         // echo $I->grabPageSource();
         $I->see('Just another WordPress site');

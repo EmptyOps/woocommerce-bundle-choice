@@ -192,4 +192,26 @@ class Acceptance extends \Codeception\Module
         }
     }
 
+    /**
+     * 
+     */
+    public function resetSession() 
+    {
+        // echo "called resetSession...";
+            
+        try { 
+            $this->getModule('WPWebDriver')->_closeSession();
+            
+            $this->getModule('WPWebDriver')->_initializeSession();
+
+            return true;
+        }
+        catch(Exception $e) {
+            echo "caught message...";
+            echo $e->getMessage()."";
+        }
+
+        return false;
+    }
+
 }
