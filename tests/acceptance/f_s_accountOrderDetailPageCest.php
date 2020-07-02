@@ -51,8 +51,8 @@ class f_s_accountOrderDetailPageCest
 		$I->see('hi000');
 		$I->see('Direct bank transfer');
 
-		$I->executeJS('window.scrollTo( 0, 500 );');        //$I->scrollTo('Save'); 
-        $I->wait(10);
+		$I->scrollTo('//*[@id="post-9"]/div[1]/div/div/div/section[2]/address/p[1]', 0, -100); 
+        $I->wait(3);
 
 		$I->see('8347408752');
 

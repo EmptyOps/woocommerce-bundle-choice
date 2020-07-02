@@ -57,7 +57,18 @@ class f_q_checkoutPageCest
 		$I->wait(3);
 
 		// place order
-		$I->click('//*[@id="place_order"]');	//('PLACE ORDER');
+		$I->scrollTo('//*[@id="place_order"]', 0, -100);
+        $I->wait(3);
+        for($i=1; $i<=10; $i++) {
+            try { 
+                $I->click('//*[@id="place_order"]');
+                break;
+            }
+            catch(Exception $e) {
+                echo "caught at error '".$e->getMessage()."' at scrollToAndClick on attempt number ".$i.", trying again after the delay of 1 seconds";
+                $I->wait(1);
+            }
+        }
 
 		// verify if order placed properly on the thank you page
 		$I->waitForText('Order received', 10, 'h1');

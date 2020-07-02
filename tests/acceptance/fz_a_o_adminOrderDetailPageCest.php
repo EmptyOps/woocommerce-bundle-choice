@@ -42,8 +42,8 @@ class fz_a_o_adminOrderDetailPageCest
 		$I->see('hi000');
 		$I->see('Payment via Direct bank transfer. Customer IP:');
 
-		$I->executeJS('window.scrollTo( 0, 500 );');		
-		$I->wait(10);
+		$I->scrollTo('//*[@id="order_data"]/div[1]/div[2]/div[1]/p[3]/a', 0, -100); 		
+		$I->wait(3);
 
 		$I->see('8347408752');
 
