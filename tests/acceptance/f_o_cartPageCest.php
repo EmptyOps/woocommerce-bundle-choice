@@ -46,18 +46,18 @@ class f_o_cartPageCest
         
 		// $this->cartPage($I);
 
-        $I->executeJS('window.scrollTo( 0, 300 );');        //$I->scrollTo('Save'); 
-        $I->wait(3);
-
-        $el = $I->findClickableElements('Proceed to checkout');
-        if( $el == null || !is_object($el) ) {
-        	$I->executeJS('window.scrollTo( 0, 500 );');        //$I->scrollTo('Save'); 
-        	$I->wait(3);
-        }
+        // $I->executeJS('window.scrollTo( 0, 300 );');        //$I->scrollTo('Save'); 
+        // $I->wait(3);
 
 		// - I click on Proceed to checkout button
-		$I->click('Proceed to checkout');
-
+        try { 
+			$I->click('Proceed to checkout');
+		}
+		catch(Exception $e) {
+			$I->scrollTo('Proceed to checkout');
+			$I->click('Proceed to checkout');
+		}
+		
 		// - I see in next page the text x etc.
 		$I->waitForText('Billing details', 10);
 		$I->see('Have a coupon?');
