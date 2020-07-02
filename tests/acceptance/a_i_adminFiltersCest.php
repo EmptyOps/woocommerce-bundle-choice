@@ -59,7 +59,8 @@ class a_i_adminFiltersCest
 		$I->see('Default(Grid View)');
 
 		// select category
-		$I->executeJS("jQuery('[name=\"second_category_altr_filt_widgts\"]').checkbox('set checked', 'sc3');");	
+		$I->executeJS("jQuery('[name=\"second_category_altr_filt_widgts\"]').val('sc3');");	
+		// $I->executeJS("jQuery('[name=\"second_category_altr_filt_widgts\"]').checkbox('set checked', 'sc3');");	
 
 		$I->executeJS('window.scrollTo( 0, 1000 );');		//$I->scrollTo('Save');	
 		$I->wait(3);
