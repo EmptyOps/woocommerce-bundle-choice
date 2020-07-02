@@ -40,8 +40,6 @@ class sunob_a_u_bonusFeaturesSpecificationsViewCest
 		
 		$I->executeJS('window.scrollTo( 0, 500 );');		//$I->scrollTo('Save');	
 		$I->wait(3);
-
-		echo "the valie of tiny_features_specification_view_style ".$I->executeJS("return jQuery('[name=\"tiny_features_specification_view_style\"]').val();");
 		
 		// save 
 		$I->click('#tiny_features_save_specification_view'); 	//('Save'); 	
