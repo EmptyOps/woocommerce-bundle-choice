@@ -50,24 +50,24 @@ class f_o_cartPageCest
         // $I->wait(3);
 
 		// - I click on Proceed to checkout button
-		// $I->scrollToAndClick($I, 'Proceed to checkout', '//*[@id="post-7"]/div[1]/div/div/div[2]/div/div/a', $attempts=10, $delay=1); 
-		$text_or_xpath = 'Proceed to checkout';
-		$xpath_for_scroll = '//*[@id="post-7"]/div[1]/div/div/div[2]/div/div/a';
+		$I->scrollToAndClick($I, 'Proceed to checkout', '//*[@id="post-7"]/div[1]/div/div/div[2]/div/div/a', $attempts=10, $delay=1); 
+		// $text_or_xpath = 'Proceed to checkout';
+		// $xpath_for_scroll = '//*[@id="post-7"]/div[1]/div/div/div[2]/div/div/a';
 		
-		echo "called scrollToAndClick...";
-        $I->scrollTo($xpath_for_scroll);
-        $I->wait(3);
+		// echo "called scrollToAndClick...";
+  //       $I->scrollTo($xpath_for_scroll);
+  //       $I->wait(3);
             
-        for($i=1; $i<=10; $i++) {
-            try { 
-                $I->click($text_or_xpath);
-                break;
-            }
-            catch(Exception $e) {
-                echo "caught at error '".$e->getMessage()."' at scrollToAndClick on attempt number ".$i." after the delay of 1 seconds";
-                $I->wait(1);
-            }
-        }
+  //       for($i=1; $i<=10; $i++) {
+  //           try { 
+  //               $I->click($text_or_xpath);
+  //               break;
+  //           }
+  //           catch(Exception $e) {
+  //               echo "caught at error '".$e->getMessage()."' at scrollToAndClick on attempt number ".$i." after the delay of 1 seconds";
+  //               $I->wait(1);
+  //           }
+  //       }
 		
 		// - I see in next page the text x etc.
 		$I->waitForText('Billing details', 10);
