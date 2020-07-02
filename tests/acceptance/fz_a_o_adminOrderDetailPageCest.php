@@ -42,7 +42,7 @@ class fz_a_o_adminOrderDetailPageCest
 		$I->see('hi000');
 		$I->see('Payment via Direct bank transfer. Customer IP:');
 
-		$I->executeJS('window.scrollTo( 0, 300 );');		
+		$I->executeJS('window.scrollTo( 0, 500 );');		
 		$I->wait(3);
 
 		$I->see('8347408752');

@@ -50,6 +50,10 @@ class f_s_accountOrderDetailPageCest
 		$I->see($this->price_of_product_step1+$this->price_of_product_step2);
 		$I->see('hi000');
 		$I->see('Direct bank transfer');
+
+		$I->executeJS('window.scrollTo( 0, 500 );');        //$I->scrollTo('Save'); 
+        $I->wait(3);
+
 		$I->see('8347408752');
 
 		//TODO check here if merged row appears properly or not 

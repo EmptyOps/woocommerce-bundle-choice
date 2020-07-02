@@ -53,7 +53,7 @@ class f_q_checkoutPageCest
 		$I->fillField("billing_email", 'sales@sphereplugins.com');
 
 
-		$I->executeJS('window.scrollTo( 0, 300 );');		
+		$I->executeJS('window.scrollTo( 0, 600 );');		
 		$I->wait(3);
 
 		// place order

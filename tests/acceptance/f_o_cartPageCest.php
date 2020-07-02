@@ -46,6 +46,9 @@ class f_o_cartPageCest
         
 		// $this->cartPage($I);
 
+        $I->executeJS('window.scrollTo( 0, 500 );');        //$I->scrollTo('Save'); 
+        $I->wait(3);
+
 		// - I click on Proceed to checkout button
 		$I->click('Proceed to checkout');
 
