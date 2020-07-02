@@ -51,8 +51,8 @@ class f_o_cartPageCest
 
 		// - I click on Proceed to checkout button
 		// $I->scrollToAndClick($I, 'Proceed to checkout', '//*[@id="post-7"]/div[1]/div/div/div[2]/div/div/a', $attempts=10, $delay=1); 
-		$xpath_for_scroll = 'Proceed to checkout';
-		$text_or_xpath = '//*[@id="post-7"]/div[1]/div/div/div[2]/div/div/a';
+		$text_or_xpath = 'Proceed to checkout';
+		$xpath_for_scroll = '//*[@id="post-7"]/div[1]/div/div/div[2]/div/div/a';
 		
 		echo "called scrollToAndClick...";
         $I->scrollTo($xpath_for_scroll);
