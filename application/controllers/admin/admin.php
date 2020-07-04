@@ -28,22 +28,28 @@ class Admin {
 
 		do_action( 'wbc_before_admin_process_request' );		
 		
-		//	perform initial task
-		self::instance()->init();
-
+		
 		if(!empty(wbc()->sanitize->get('page')) and wbc()->sanitize->get('page')=='eowbc' and ( (!empty(wbc()->sanitize->get('eo_wbc_view_auto_jewel')) and wbc()->sanitize->get('eo_wbc_view_auto_jewel') == 1) or (!empty(wbc()->sanitize->get('eo_wbc_view_auto_textile')) and wbc()->sanitize->get('eo_wbc_view_auto_textile') == 1) ) ){        	
         	if( isset($_GET['eo_wbc_view_auto_jewel']) && wbc()->sanitize->get('eo_wbc_view_auto_jewel') == 1 ) {
+
+        		//	perform initial task
+				self::instance()->init();
+
         		// apply_filters('eo_wbc_admin_sample_data_add_jewelry',array(\eo\wbc\controllers\admin\sample_data\Jewelry::instance(),'init'));	
         		\eo\wbc\controllers\admin\sample_data\Jewelry::instance()->init();
         	}
         } else {
-        	//	show/render menu and pages
+
+        	        	//	show/render menu and pages
 			self::instance()->menu();
 
 			if(!empty(wbc()->sanitize->get('page')) and wbc()->sanitize->get('page')=='eowbc' and !empty(wbc()->sanitize->get('wbc_setup')) ) {
 	            //Setup_Wizard::instance()->init();    
 	            // add_action('admin_init',function(){
 					//Setup_Wizard::instance()->init();
+					
+					//	perform initial task 
+					self::instance()->init();
 					
 					Setup_Wizard::instance()->build_setup_page();
 				// }); 
@@ -59,6 +65,20 @@ class Admin {
 	public function menu() {
 		//	pass the instence of admin menu to menu factory to build it.
 		$menu = Admin_Menu::instance();
+
+		$menu_items = $menu->get_menu();
+		$menu_slugs = array();
+		if(!empty($menu_items['submenu']) and is_array($menu_items['submenu'])){
+
+			$menu_slugs = array_column($menu_items['submenu'],'slug');			
+		}
+		$menu_slugs[]=$menu_items['slug'];
+		if(!empty($_GET['page']) and in_array($_GET['page'],$menu_slugs)){
+
+			//	perform initial task 
+			self::instance()->init();
+		}
+
 		Admin_Menu_Factory::instance()->build_menu($menu);
 	}
 

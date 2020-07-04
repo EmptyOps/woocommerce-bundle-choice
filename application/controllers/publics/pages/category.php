@@ -21,16 +21,16 @@ class Category {
         //If add to cart triggred
         // Detection : only one category item get length > 0 
         //   i.e. using XOR check if only one of two have been set.
-        if( !empty(wbc()->sanitize->get('CART')) && empty(wbc()->sanitize->get('EO_CHANGE')) && ( empty(wbc()->sanitize->get('FIRST')) XOR empty(wbc()->sanitize->get('SECOND')) ) ) {
+        if( !empty(wbc()->sanitize->get('CART')) && empty(wbc()->sanitize->get('EO_CHANGE')) && ( empty(wbc()->sanitize->get('FIRST')) XOR empty(wbc()->sanitize->get('SECOND')) ) and !empty(wbc()->sanitize->get('EO_WBC')) ) {
             //Iff condition is mutual exclusive, store it to  the session.
             $this->add2cart();            
         } 
 
         //if Current-Category is either belongs to FIRST OR SECOND Category then initiate application                
         if(
-            ($this->eo_wbc_get_category()== wbc()->options->get_option('configuration','first_slug') //get_option('eo_wbc_first_slug') 
+            (($this->eo_wbc_get_category()== wbc()->options->get_option('configuration','first_slug') //get_option('eo_wbc_first_slug') 
               OR
-            $this->eo_wbc_get_category()== wbc()->options->get_option('configuration','second_slug')) and !empty($_GET['EO_WBC']) //get_option('eo_wbc_second_slug')
+            $this->eo_wbc_get_category()== wbc()->options->get_option('configuration','second_slug'))) and !empty(wbc()->sanitize->get('EO_WBC')) //get_option('eo_wbc_second_slug')
         ){
             //if( get_option('eo_wbc_filter_enable')=='1' ){
             /*wbc()->options->update_option('filters_filter_setting','config_filter_status','config_filter_status');*/

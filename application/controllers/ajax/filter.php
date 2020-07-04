@@ -60,84 +60,107 @@ class Filter
 	//////////////////////////////////////////////////////////////////////////////////////////////////
 	public function filter() {			
 		//die();
-	    add_filter('pre_get_posts',function($query ) {		    		
+		if(!empty($_GET['eo_wbc_filter'])){
+			
+		    add_filter('pre_get_posts',function($query ) {		    		
 
-	        if( $query->is_main_query() ) {
+		        if( $query->is_main_query() ) {
 
-	        	if(isset($_GET['products_in']) AND !empty($_GET['products_in']) ){
-	        		$query->set('post__in',explode(',',$_GET['products_in']));			        	
-		        }
+		        	if(isset($_GET['products_in']) AND !empty($_GET['products_in']) ){
+		        		$query->set('post__in',explode(',',$_GET['products_in']));			        	
+			        }
 
-	        
-	        	if( isset($_GET['_category']) OR isset($_GET['_current_category']) ){
+		        
+		        	if( isset($_GET['_category']) OR isset($_GET['_current_category']) ){
 
-	        		$tax_query=array('relation' => 'AND');
-	                if(!empty($_GET['_category'])) {
+		        		$tax_query=array('relation' => 'AND');
+		                if(!empty($_GET['_category'])) {
 
-	                    foreach( array_unique(array_filter(explode(',', $_GET['_category']))) as $_category){
-	                    	
-	                        if(isset($_GET['cat_filter_'.$_category]) && (!empty($_GET['cat_filter_'.$_category])) ) {                           
-	                            $tax_query[]=array(
-	                                'taxonomy' => 'product_cat',
-	                                'field' => 'slug',
-	                                'terms' =>array_filter(explode(',',$_GET['cat_filter_'.$_category])),
-	                                'compare'=>'EXISTS IN'
-	                            );                    
-	                        }
-	                    }  
-	                }
-	                elseif(!empty($_GET['_current_category'])) {
-
-	                    $tax_query[]=array(
-	                        'taxonomy' => 'product_cat',
-	                        'field' => 'slug',
-	                        'terms' => explode(',',$_GET['_current_category']),
-	                        'compare'=>'EXISTS IN'
-	                    );
-	                }		                
-	                /*$query->set('tax_query',$tax_query);*/
-
-	                ///////////////////////////////////////////////
-                    //Filter section for attributes
-                    ///////////////////////////////////////////////  
-	                if(!empty($_GET['_attribute'])) {
-
-		                foreach (array_filter(explode(',', $_GET['_attribute'])) as $attr) {
-
-		                    if(isset($_GET['min_'.$attr]) && isset($_GET['max_'.$attr])){
-		                        
-		                        if ( is_numeric($_GET['min_'.$attr]) && is_numeric($_GET['max_'.$attr]) ) {
-
+		                    foreach( array_unique(array_filter(explode(',', $_GET['_category']))) as $_category){
+		                    	
+		                        if(isset($_GET['cat_filter_'.$_category]) && (!empty($_GET['cat_filter_'.$_category])) ) {                           
 		                            $tax_query[]=array(
-		                                'taxonomy' => $attr,
-		                                'field' => 'term_id',
-		                                'terms' => $this->range($attr,$_GET['min_'.$attr],$_GET['max_'.$attr],true),
+		                                'taxonomy' => 'product_cat',
+		                                'field' => 'slug',
+		                                'terms' =>array_filter(explode(',',$_GET['cat_filter_'.$_category])),
 		                                'compare'=>'EXISTS IN'
-		                            );
+		                            );                    
 		                        }
-		                        else {
-
-		                            $tax_query[]=array(
-		                                'taxonomy' => $attr,
-		                                'field' => 'term_id',
-		                                'terms' => $this->range($attr,$_GET['min_'.$attr],$_GET['max_'.$attr]),
-		                                'compare'=>'EXISTS IN'
-		                            );
-		                        }                   
-		                    }
-		                    elseif (isset($_GET['checklist_'.$attr]) && !empty($_GET['checklist_'.$attr])) {
-		                        $tax_query[]=array(
-		                            'taxonomy' => $attr,
-		                            'field' => 'slug',
-		                            'terms' => array_filter(explode(',',$_GET['checklist_'.$attr])),
-		                            'compare'=>'EXISTS IN'
-		                        );     
-		                    } 
+		                    }  
 		                }
-		            }
-	                $query->add('tax_query',$tax_query);
-	            }		            
-	        }		       
-	    });		   
+		                elseif(!empty($_GET['_current_category'])) {
+
+		                    $tax_query[]=array(
+		                        'taxonomy' => 'product_cat',
+		                        'field' => 'slug',
+		                        'terms' => explode(',',$_GET['_current_category']),
+		                        'compare'=>'EXISTS IN'
+		                    );
+		                }	
+		                //$query->set('tax_query',$tax_query);	                
+		                /*$query->set('tax_query',$tax_query);*/
+
+		                ///////////////////////////////////////////////
+	                    //Filter section for attributes
+	                    ///////////////////////////////////////////////  
+		                if(!empty($_GET['_attribute'])) {
+
+			                foreach (array_filter(explode(',', $_GET['_attribute'])) as $attr) {
+
+			                    if(isset($_GET['min_'.$attr]) && isset($_GET['max_'.$attr])){
+			                        
+			                        if ( is_numeric($_GET['min_'.$attr]) && is_numeric($_GET['max_'.$attr]) ) {
+
+			                            $tax_query[]=array(
+			                                'taxonomy' => $attr,
+			                                'field' => 'term_id',
+			                                'terms' => $this->range($attr,$_GET['min_'.$attr],$_GET['max_'.$attr],true),
+			                                'compare'=>'EXISTS IN'
+			                            );
+			                        }
+			                        else {
+
+			                            $tax_query[]=array(
+			                                'taxonomy' => $attr,
+			                                'field' => 'term_id',
+			                                'terms' => $this->range($attr,$_GET['min_'.$attr],$_GET['max_'.$attr]),
+			                                'compare'=>'EXISTS IN'
+			                            );
+			                        }                   
+			                    }
+			                    elseif (isset($_GET['checklist_'.$attr]) && !empty($_GET['checklist_'.$attr])) {
+			                        $tax_query[]=array(
+			                            'taxonomy' => $attr,
+			                            'field' => 'slug',
+			                            'terms' => array_filter(explode(',',$_GET['checklist_'.$attr])),
+			                            'compare'=>'EXISTS IN'
+			                        );     
+			                    } 
+			                }
+			                
+			            }
+
+			            //$query->set('tax_query',$tax_query);
+			            $old_tax_query = $query->get('tax_query');
+			            $old_tax_query_taxonomy = array_column($old_tax_query,'taxonomy');
+			            if(is_array($old_tax_query_taxonomy) AND !empty($old_tax_query_taxonomy)){
+			            	if(in_array('product_visibility',$old_tax_query_taxonomy) and count($old_tax_query_taxonomy)==1) {
+			            		$query->set('tax_query',$tax_query);
+				            } else {
+				            	$query->add('tax_query',$tax_query);
+				            }	
+			            } else {
+			            	$query->add('tax_query',$tax_query);
+			            }
+			            
+			            //if(is_array($old_tax_query))
+			            /*echo "<pre>";			            
+			            print_r($query->get('tax_query'));
+		                echo "</pre>";
+		                die();*/
+		            }		            
+		        }		       
+		    });		   
+		}
 	}	
 }

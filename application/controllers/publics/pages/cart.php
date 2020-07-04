@@ -31,7 +31,7 @@ class Cart {
             $this->eo_wbc_empty_cart();
         }        
         
-        $this->eo_wbc_cart_service();
+        
         $this->eo_wbc_add_css();
         $this->eo_wbc_render();    
     }    
@@ -157,7 +157,7 @@ class Cart {
                 );
             }
         }
-        WC()->session->set('EO_WBC_MAPS',$eo_wbc_maps);      
+        WC()->session->set('EO_WBC_MAPS',apply_filters('eowbc_cart_render_maps',$eo_wbc_maps));      
 
     }
     
@@ -166,6 +166,7 @@ class Cart {
         //Removing Cart Table data.....
         //Adding Custome Cart Table Data.......        
         add_action('woocommerce_before_cart_contents',function(){
+            $this->eo_wbc_cart_service();
             ?>
                 <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
                 <style>
@@ -215,7 +216,7 @@ class Cart {
                     }                    
                 </style>
             <?php 
-            $maps=(WC()->session->get('EO_WBC_MAPS'));            
+            $maps=WC()->session->get('EO_WBC_MAPS');
             foreach ($maps as $index=>$map){
                 
                 $this->eo_wbc_cart_ui($index,$map);               

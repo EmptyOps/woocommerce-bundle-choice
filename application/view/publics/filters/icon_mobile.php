@@ -13,7 +13,7 @@
 	<?php endif; ?>
 </div>
 	<div class="content">	
-		<div class="ui tiny images" style="text-align: center;">
+		<div class="ui tiny images" style="text-align: center;" data-reset="reset_icon(new Event('click'),'<?php echo $term->slug; ?>')">
 		<?php foreach ($list as $filter_icon): ?>
 			<div title="<?php $filter_icon["name"]; ?>"
 				class="eo_wbc_filter_icon <?php echo $non_edit ? 'none_editable':'' ?> 

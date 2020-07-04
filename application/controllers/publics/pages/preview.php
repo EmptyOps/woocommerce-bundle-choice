@@ -18,13 +18,15 @@ class Preview {
     }
 
     public function init() {
+        if (empty(wbc()->sanitize->get('EO_WBC'))) return true;
+
         if(empty(wbc()->sanitize->get('FIRST')) || empty(wbc()->sanitize->get('SECOND')))
         {            
             exit(wp_redirect(wbc()->wc->eo_wbc_get_cart_url()));
             return;
         } 
 
-        if( !empty(wbc()->sanitize->post('add_to_cart')) && wbc()->sanitize->post('add_to_cart')==1)
+        if( !empty(wbc()->sanitize->post('add_to_cart')) && wbc()->sanitize->post('add_to_cart')==1 && !empty(wbc()->sanitize->get('EO_WBC')))
         {
             $this->eo_wbc_add_this_to_cart();
             //Redirect to cart page.       
@@ -238,7 +240,7 @@ class Preview {
         /*add_filter('the_content',function(){*/
            
             
-            if( !empty(wbc()->sanitize->get('FIRST')) && !empty(wbc()->sanitize->get('SECOND')) && !empty(wbc()->sanitize->get('CART')) )
+            if( !empty(wbc()->sanitize->get('FIRST')) && !empty(wbc()->sanitize->get('SECOND')) && !empty(wbc()->sanitize->get('CART')) and !empty($_GET['EO_WBC']))
             {                
                 //if data available at _GET then add to out custom cart
                 $this->eo_wbc_add_to_cart();

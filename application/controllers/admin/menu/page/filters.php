@@ -889,7 +889,7 @@ if ( ! class_exists( 'Filters' ) ) {
 			);
 
 
-
+			$form_definition=apply_filters('eowbc_admin_form_filters',$form_definition);
 
 			if($is_add_sample_values) {
 				//loop through form tabs and set (random) sample values for each field  
@@ -908,9 +908,7 @@ if ( ! class_exists( 'Filters' ) ) {
 					}
 			    }
 			}
-
 			return $form_definition;
-
 		}
 
 	}

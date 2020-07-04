@@ -19,8 +19,7 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 			// no implementation.
 		}
 
-		public function get_menu_structure() {
-			
+		public function get_menu(){
 			$menu = array(
 				'title'=>eowbc_lang('Home').' - '.constant('EOWBC_NAME'),
 				'menu_title'=>constant('EOWBC_NAME'),	//eowbc_lang('WooCommerce Bundle Choice'),
@@ -121,7 +120,13 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 				unset($submenu[6]);
 			}
 			$menu['submenu'] = $submenu;
-			$menu = apply_filters( 'eowbc_menu', $menu );
+			return $menu;
+		}
+
+		public function get_menu_structure() {			
+			
+			$menu = apply_filters( 'eowbc_menu', $this->get_menu());
+			$features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())));
 
 			$this->add_message($features,$menu);
 

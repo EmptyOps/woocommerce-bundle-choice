@@ -42,7 +42,7 @@ class Eowbc_Configuration {
 
 	public function save( $form_definition ) {
 		$res = array( "type"=>"success", "msg"=>"Updated successfully!" );		
-			
+		
 		wbc()->sanitize->clean($form_definition);	    
     	wbc()->validate->check($form_definition);
 		/*wbc()->options->update_option('configuration','business_type',sanitize_text_field($_POST['config_business_type']));*/
@@ -63,6 +63,14 @@ class Eowbc_Configuration {
 				wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_inactive','#ffffff');			
 			}
 			
+		}
+
+		if(!empty($_POST['first_name'])){
+			wbc()->options->update_option('configuration','first_slug',@\eo\wbc\model\Category_Attribute::instance()->get_single_category((int)sanitize_text_field($_POST['first_name']))->slug );
+		}
+
+		if(!empty($_POST['second_name'])){
+			wbc()->options->update_option('configuration','second_slug',@\eo\wbc\model\Category_Attribute::instance()->get_single_category(sanitize_text_field($_POST['second_name']))->slug);
 		}
 
 		//loop through form tabs and save

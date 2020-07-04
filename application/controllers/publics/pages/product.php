@@ -396,9 +396,9 @@ class Product {
                     $terms = array_merge($terms,$non_var_terms);
                 }                                
             } else {
-                $terms = array_walk($terms,function($term,$index){
-                    $terms[$index] = $term->term_taxonomy_id;
-                });    
+                array_walk($terms,function($term,$index) use(&$terms){
+                    $terms[$index] = $term->term_taxonomy_id;                    
+                });   
             } 
 
             // Gather all target of the maps           
