@@ -35,7 +35,7 @@ class sunob_a_w_bonusFeaturesShortcodeFiltersCest
 		$I->fillField('shop_cat_shortcode_label', 'test label');
 		$I->fillField('shop_cat_shortcode_unique_id', 'testuniqueid');
 
-		$I->scrollTo('//*[@id="shop_cat_shortcode_add"]', 0, -100);
+		$I->scrollTo('//*[@id="shop_cat_shortcode_add"]', -300, -100);
 		$I->wait(3);
 		
 		// save 

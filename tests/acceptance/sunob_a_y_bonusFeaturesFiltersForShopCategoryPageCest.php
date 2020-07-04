@@ -31,19 +31,24 @@ class sunob_a_y_bonusFeaturesFiltersForShopCategoryPageCest
 
 		// set fields 
 		$I->executeJS("jQuery('#shop_cat_filter_location_shop').checkbox('set checked');");	//better than setting 1 directly is to select the nth element that has value 1 
+		
+		$I->executeJS("jQuery('#shop_cat_filter_two_filter_first_dropdown_div').dropdown('set selected', 19);");	//better than setting 1 directly is to select the nth element that has value 1 
+		$I->fillField('shop_cat_filter_two_filter_first_title', 'Diamond Filter');
+		$I->executeJS("jQuery('#shop_cat_filter_two_filter_first_dropdown_div').dropdown('set selected', 20);");	//better than setting 1 directly is to select the nth element that has value 1 
+		$I->fillField('shop_cat_filter_two_filter_second_title', 'Setting Filter');
+		
+		$I->executeJS("jQuery('#shop_cat_filter_alternate_view').checkbox('set checked');");	//better than setting 1 directly is to select the nth element that has value 1 
+		$I->executeJS("jQuery('#shop_cat_filter_selected_filter').checkbox('set checked');");	//better than setting 1 directly is to select the nth element that has value 1 
 
-		$I->fillField('shop_cat_shortcode_label', 'test label');
-		$I->fillField('shop_cat_shortcode_unique_id', 'testuniqueid');
-
-		$I->scrollTo('//*[@id="shop_cat_shortcode_add"]', 0, -100);
+		$I->scrollTo('//*[@id="shop_cat_filter_save"]', -300, -100);
 		$I->wait(3);
 		
 		// save 
-		$I->click('Add Filter'); 	
+		$I->click('//*[@id="shop_cat_filter_save"]'); 	
 
-		$I->wait(3);
+		$I->reloadPage();
 
-		$I->see('testuniqueid', 'td');	//$I->see('4px', 'input');	//I verify that I can see "button tagline..." inside input tag 
+		$I->seeInField('shop_cat_filter_two_filter_first_title', 'Diamond Filter');	//$I->see('4px', 'input');	//I verify that I can see "button tagline..." inside input tag 
 
 	}
 
