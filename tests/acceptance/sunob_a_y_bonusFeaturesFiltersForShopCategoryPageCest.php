@@ -33,6 +33,10 @@ class sunob_a_y_bonusFeaturesFiltersForShopCategoryPageCest
 		$I->executeJS("jQuery('#shop_cat_filter_location_shop').checkbox('set checked');");	//better than setting 1 directly is to select the nth element that has value 1 
 		
 		$I->executeJS("jQuery('#shop_cat_filter_two_filter_first_dropdown_div').dropdown('set selected', 19);");	//better than setting 1 directly is to select the nth element that has value 1 
+
+		$I->scrollTo('//*[@id="shop_cat_filter_two_filter_first_title"]', -300, -100);
+		$I->wait(3);
+		
 		$I->fillField('shop_cat_filter_two_filter_first_title', 'Diamond Filter');
 		$I->executeJS("jQuery('#shop_cat_filter_two_filter_first_dropdown_div').dropdown('set selected', 20);");	//better than setting 1 directly is to select the nth element that has value 1 
 		$I->fillField('shop_cat_filter_two_filter_second_title', 'Setting Filter');
