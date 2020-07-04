@@ -30,6 +30,10 @@ if ( ! class_exists( 'Configuration' ) ) {
 							
 								'label'=>'Sample Data',
 								'form'=>array(
+											'saved_tab_key'=>array(
+												'type'=>'hidden',
+												'value'=>'',
+											),
 											'config_automation_visible_info'=>array(
 												'label'=>eowbc_lang('This section will help you add sample data and configurations automatically so that you can preview how it would like after complete setup.'),
 												'type'=>'visible_info',
@@ -112,7 +116,7 @@ if ( ! class_exists( 'Configuration' ) ) {
 												'label'=>'Save',
 												'type'=>'button',		
 												'class'=>array('primary'),
-												'attr'=>array("data-action='save'")	
+												'attr'=>array("data-action='save'",'data-tab_key="config_buttons_conf"')	
 											)
 									)
 							),
@@ -217,7 +221,7 @@ if ( ! class_exists( 'Configuration' ) ) {
 												'label'=>'Save',
 												'type'=>'button',		
 												'class'=>array('primary'),
-												'attr'=>array("data-action='save'")	
+												'attr'=>array("data-action='save'",'data-tab_key="config_navigation_conf"')	
 											)
 									)
 							),						
@@ -257,7 +261,7 @@ if ( ! class_exists( 'Configuration' ) ) {
 											'label'=>'Save',
 											'type'=>'button',		
 											'class'=>array('primary'),
-											'attr'=>array("data-action='save'")
+											'attr'=>array("data-action='save'",'data-tab_key="config_extra_conf"')
 										)
 								)
 						);

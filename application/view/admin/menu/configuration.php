@@ -10,7 +10,7 @@ $form['method']='POST';
 $form['tabs'] = true;
 
 $form['data'] = \eo\wbc\model\admin\Eowbc_Configuration::instance()->get( \eo\wbc\controllers\admin\menu\page\Configuration::get_form_definition() );
-
+$form['attr']= array('data-is_per_tab_save="true"');
 
 
 wbc()->load->model('admin\form-builder');

@@ -47,6 +47,7 @@ else {
 
       <?php 
       wbc()->load->asset('css','fomantic/semantic.min',array(),'2.8.1',true);
+      wbc()->load->asset('js','fomantic/semantic.min',array('jquery'),'2.8.1',true);
     }
 }
 

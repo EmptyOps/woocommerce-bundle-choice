@@ -16,7 +16,6 @@ if( empty($mode) || ( $mode != "setup_wizard" && $mode != "plain" ) ) {
 else {
     if( $mode == "setup_wizard" ) { 
 
-		wbc()->load->asset('js','fomantic/semantic.min',array('jquery'),'2.8.1',true);
       	wbc()->load->asset('js','admin-js',array(),'',true);
     	?>
 

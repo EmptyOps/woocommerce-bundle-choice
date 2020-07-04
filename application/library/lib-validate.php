@@ -21,16 +21,34 @@ if(!class_exists('WBC_Validate')) {
 			
 		}
 
-		public function check($form){
+		public function check($form, $tab_specific_skip_fileds=array()){
 			$res["type"] = "error";
 		    $res["msg"] = "";
 
+		    $saved_tab_key = !empty($_POST["saved_tab_key"]) ? $_POST["saved_tab_key"] : ""; 
+			$skip_fileds = array('saved_tab_key');
+
 			foreach ($form as $key => $tab) {
+				if( !empty($saved_tab_key) && $key != $saved_tab_key ) {
+		    		continue;
+		    	}
+
 		    	foreach ($tab["form"] as $fk => $fv) {		    
-				    if(!empty($fv['validate']) and array_key_exists($fk,$_POST)) {
+				    // if(!empty($fv['validate']) and array_key_exists($fk,$_POST)) {
+		    		if( !empty($fv['validate']) and ( isset($_POST[$fk]) || $fv["type"]=='checkbox'  ) ) {
+
+				    	//skip fields where applicable
+						if( in_array($fk, $skip_fileds) ) {
+			    			continue;
+			    		}
+
+			    		if( in_array($fk, $tab_specific_skip_fileds) ) {
+			    			continue;
+			    		}
+
 				    	if(is_string($fv['validate']) and in_array($fv['validate'],$this->methods)) {
 
-				    		$validation_state=call_user_func_array(array($this,$fv['validate']),array($fv['label'],$_POST[$fk]));
+				    		$validation_state = call_user_func_array( array( $this,$fv['validate']),array($fv['label'], isset($_POST[$fk]) ? $_POST[$fk] : '' ) );
 				    		if($validation_state!==true) {
 				    			$res["msg"] = $validation_state;
 				    			echo json_encode($res);
@@ -39,7 +57,7 @@ if(!class_exists('WBC_Validate')) {
 				    	} elseif(is_array($fv['validate'])) {
 				    		foreach ($fv['validate'] as $sanitize_method=>$sanitize_params) {
 				    			if(in_array($sanitize_method,$this->methods)) {
-				    				$validation_state = call_user_func_array(array($this,$sanitize_method),array($fv['label'],$_POST[$fk],$sanitize_params));
+				    				$validation_state = call_user_func_array( array( $this,$sanitize_method),array($fv['label'], isset($_POST[$fk]) ? $_POST[$fk] : '',$sanitize_params));
 				    				if($validation_state!==true) {
 						    			$res["msg"] = $validation_state;
 						    			echo json_encode($res);

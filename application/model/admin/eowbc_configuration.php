@@ -42,7 +42,7 @@ class Eowbc_Configuration {
 
 	public function save( $form_definition ) {
 		$res = array( "type"=>"success", "msg"=>"Updated successfully!" );		
-			
+		
 		wbc()->sanitize->clean($form_definition);	    
     	wbc()->validate->check($form_definition);
 		/*wbc()->options->update_option('configuration','business_type',sanitize_text_field($_POST['config_business_type']));*/

@@ -171,7 +171,7 @@ class Home {
 			ob_start();
 			wbc()->load->template('publics/buttons', array('is_embed_using_js'=>true));
 			$buttons = ob_get_clean(); 
-			$script = $buttons."<script>jQuery(document).ready(function(){";
+			$script = $buttons."<script>jQuery(document).ready(function($){";
 
 			$btn_position_setting_text = wbc()->options->get('btn_position_setting_text','');
 			if(!empty($btn_position_setting_text)) {

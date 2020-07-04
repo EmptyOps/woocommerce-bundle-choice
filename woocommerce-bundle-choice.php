@@ -64,7 +64,7 @@ if(!class_exists('WooCommerce_Bundle_Choice')) {
 			*	where the tool_name should only be added to the list.
 			*/
 
-			$tools = array('error-handler','autoload');
+			$tools = array('error-handler','autoload','cache-manager');
 
 			if(!empty($tools)){
 

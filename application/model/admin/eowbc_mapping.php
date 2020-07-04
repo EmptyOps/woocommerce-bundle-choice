@@ -142,7 +142,7 @@ class Eowbc_Mapping {
 
 		    		//save
 			    	if( $is_table_save ) {
-			    		$table_data[$fk] = (empty($_POST[$fk])? $_POST[$fk]: sanitize_text_field( $_POST[$fk] ) ); 
+			    		$table_data[$fk] = ( isset($_POST[$fk]) ? $_POST[$fk] : '' ); 
 			    	}
 			    	else {
 
@@ -194,6 +194,9 @@ class Eowbc_Mapping {
 		        $mapping_data[] = $table_data;
 
 		        wbc()->options->update_option_group( 'mapping_'.$key, serialize($mapping_data) );
+
+		        //update cache
+		        \Cache_Manager::getInstance()->update_map_caches();
 
 		        // TODO here it is better if we set it to 1 only if length of mapping_data is greater than zero and otherwise set to 0 if user removes maps and so on 
 				wbc()->options->update_option('configuration','config_map',1);

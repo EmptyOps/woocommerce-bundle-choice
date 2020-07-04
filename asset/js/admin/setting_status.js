@@ -7,7 +7,7 @@ jQuery(document).ready(function($){
 		} else {
 
 
-			if($(this).val().trim()=='jewelery'){				
+			if($(this).val().trim()=='jewelry'){				
 
 				$("#ring_builder").attr('checked','checked');
 				$("#ring_builder").parent().parent().css('display','block');
