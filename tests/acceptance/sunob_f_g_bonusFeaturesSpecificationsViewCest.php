@@ -30,6 +30,14 @@ class sunob_f_g_bonusFeaturesSpecificationsViewCest
         
 	}
 
+    public function confirmAllExpectedValuesAreDisplayed(AcceptanceTester $I) {
+
+        if( !$I->test_allowed_in_this_environment("sunob_f_") ) {
+            return;
+        }
+
+    }
+
 	public function usingShortcode(AcceptanceTester $I) {
 
 		if( !$I->test_allowed_in_this_environment("sunob_f_") ) {
