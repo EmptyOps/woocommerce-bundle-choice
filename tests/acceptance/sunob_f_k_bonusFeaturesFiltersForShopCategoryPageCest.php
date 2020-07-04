@@ -17,6 +17,18 @@ class sunob_f_k_bonusFeaturesFiltersForShopCategoryPageCest
             return;
         }
 
+        // go to the page
+        $I->amOnPage('/shop/');
+        
+        // Note: here it is assumed that shortcode is added on /sample-page manually, so skipping that part here.
+
+        // check if filter is visible 
+        $I->see('OK', 'button');
+
+        // TODO apply filters
+        
+        // TODO check if expected results shows up
+
 	}
 
 	public function categoryPage(AcceptanceTester $I) {
