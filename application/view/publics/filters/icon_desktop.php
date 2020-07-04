@@ -12,7 +12,7 @@
 		&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_icon(event,'<?php echo $term->slug; ?>')">&nbsp;<u>reset</u></span>
 		<?php endif; ?>
 		</p>
-		<div class="ui tiny images ui equal width center aligned grid" style="text-align: center;">				
+		<div class="ui tiny images ui equal width center aligned grid" style="text-align: center;" data-reset="reset_icon(new Event('click'),'<?php echo $term->slug; ?>')">				
 			<?php foreach ($list as $filter_icon): ?>
 				<div title="<?php $filter_icon["name"]; ?>"
 					class="eo_wbc_filter_icon column <?php echo $non_edit ? 'none_editable':'' ?> 

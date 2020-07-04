@@ -65,6 +65,14 @@ class Eowbc_Configuration {
 			
 		}
 
+		if(!empty($_POST['first_name'])){
+			wbc()->options->update_option('configuration','first_slug',@\eo\wbc\model\Category_Attribute::instance()->get_single_category((int)sanitize_text_field($_POST['first_name']))->slug );
+		}
+
+		if(!empty($_POST['second_name'])){
+			wbc()->options->update_option('configuration','second_slug',@\eo\wbc\model\Category_Attribute::instance()->get_single_category(sanitize_text_field($_POST['second_name']))->slug);
+		}
+
 		//loop through form tabs and save
 	    foreach ($form_definition as $key => $tab) {
 	    	foreach ($tab["form"] as $fk => $fv) {				    

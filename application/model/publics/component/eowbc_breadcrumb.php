@@ -34,31 +34,31 @@ class EOWBC_Breadcrumb
 
         $first_name = $model_category_attribute->get_single_category(wbc()->options->get_option('configuration','first_name'));
         if(!is_wp_error($first_name) and !empty($first_name)){
-            self::$first_name = $first_name->name;
-            self::$first_slug = $first_name->slug;
+            self::$first_name = apply_filters('eowbc_breadcrumb_first_name',$first_name->name);
+            self::$first_slug = apply_filters('eowbc_breadcrumb_first_slug',$first_name->slug);
         }
 
         $second_name = $model_category_attribute->get_single_category(wbc()->options->get_option('configuration','second_name'));
         if(!is_wp_error($second_name) and !empty($second_name)){
-            self::$second_name = $second_name->name;
-            self::$second_slug = $second_name->slug;
+            self::$second_name = apply_filters('eowbc_breadcrumb_second_name',$second_name->name);
+            self::$second_slug = apply_filters('eowbc_breadcrumb_second_slug',$second_name->slug);
         }
 
         $preview_name = wbc()->options->get_option('configuration','preview_name');
         if(is_wp_error($preview_name) or empty($preview_name)){
-            self::$preview_name = 'Preview';
+            self::$preview_name = apply_filters('eowbc_breadcrumb_preview_name','Preview');
         } else {
-            self::$preview_name = $preview_name;
+            self::$preview_name = apply_filters('eowbc_breadcrumb_preview_name',$preview_name);
         }
         
-        self::$first_icon = $model_images->id2url(wbc()->options->get_option('configuration','first_icon'));
+        self::$first_icon = apply_filters('eowbc_breadcrumb_first_icon',$model_images->id2url(wbc()->options->get_option('configuration','first_icon')));
         
-        self::$second_icon = $model_images->id2url(wbc()->options->get_option('configuration','second_icon'));
+        self::$second_icon = apply_filters('eowbc_breadcrumb_second_icon',$model_images->id2url(wbc()->options->get_option('configuration','second_icon')));
         
-        self::$preview_icon = $model_images->id2url(wbc()->options->get_option('configuration','preview_icon'));
+        self::$preview_icon = apply_filters('eowbc_breadcrumb_preview_icon',$model_images->id2url(wbc()->options->get_option('configuration','preview_icon')));
 
-        $set=WC()->session->get('EO_WBC_SETS',FALSE);            
-        $tmp_set=WC()->session->get('TMP_EO_WBC_SETS',FALSE);
+        $set=apply_filters('eowbc_breadcrumb_set',WC()->session->get('EO_WBC_SETS',FALSE));
+        $tmp_set=apply_filters('eowbc_breadcrumb_tmp_set',WC()->session->get('TMP_EO_WBC_SETS',FALSE));
 
         if(!empty($set) and !is_wp_error($set)){
 
@@ -200,7 +200,7 @@ class EOWBC_Breadcrumb
                                 <div class="ui column left aligned">
                                     <div class="title">Complete <?php _e(self::$preview_name); ?></div>
                                 </div>
-                                <div class="ui column mini image left aligned" style="padding-top: 0px;padding-bottom: 0px;">
+                                <div class="ui column mini image left aligned" style="padding-top: 0px;padding-bottom: 0px;<?php echo empty(self::$preview_icon)?'visibility: hidden;':''; ?>">
                                     <img src = '<?php _e(self::$preview_icon); ?>' class='ui mini image'/>
                                 </div>
                             </div>        
@@ -216,7 +216,7 @@ class EOWBC_Breadcrumb
                                     <div class="title"><?php echo self::$preview_name; ?></div>
                                     <div>&nbsp;</div>
                                 </div>                                                                     
-                                <div class="column "><img src="<?php echo self::$preview_icon; ?>" style="margin: auto auto;"/></div>                            
+                                <div class="column " style="<?php echo empty(self::$preview_icon)?'visibility: hidden;':''; ?>"><img src="<?php echo self::$preview_icon; ?>" style="margin: auto auto;"/></div>                            
                             </div>
                             <?php
                         } else {
@@ -243,7 +243,7 @@ class EOWBC_Breadcrumb
                                 ?>
                                 </div>
                             </div>
-                            <div class="column" <?php echo empty(wp_get_attachment_url(wbc()->options->get_option('configuration','preview_icon')/*get_option('eo_wbc_collection_icon')*/))?'style="visibility: hidden;"':""; ?>><img src="<?php echo self::$preview_icon/*get_option('eo_wbc_collection_icon')*/; ?>" style="margin: auto auto;"/></div>                            
+                            <div class="column" <?php echo empty(wp_get_attachment_url(wbc()->options->get_option('configuration','preview_icon')/*get_option('eo_wbc_collection_icon')*/))?'style="visibility: hidden;"':""; ?>><img src="<?php echo self::$preview_icon/*get_option('eo_wbc_collection_icon')*/; ?>" style="margin: auto auto;<?php echo empty(self::$preview_icon)?'visibility: hidden;':''; ?>"/></div>                            
                         </div>                        
                         <?php
                         }

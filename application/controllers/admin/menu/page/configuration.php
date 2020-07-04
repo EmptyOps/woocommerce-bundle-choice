@@ -54,10 +54,11 @@ if ( ! class_exists( 'Configuration' ) ) {
 						'config_buttons_conf'=>array(
 								'label'=>'Buttons',
 								'form'=>array(
-									'config_buttons_page'=>array(
+									'buttons_page'=>array(
 											'label'=>'Choice button position',
 											'type'=>'select',
 											'value'=>wbc()->options->get_option('configuration','buttons_page'),
+											'validate'=>array('required'=>''),
 											'sanitize'=>'sanitize_text_field',
 											'options'=>array(
 													'0'=>'Custom landing page',
@@ -90,17 +91,18 @@ if ( ! class_exists( 'Configuration' ) ) {
 											'label'=>'Make Pair Button',
 											'type'=>'devider',
 										),
-									'config_enable_make_pair'=>array(
+									'enable_make_pair'=>array(
 											'label'=>'Enabled?',
 											'type'=>'checkbox',
 											'value'=>array(wbc()->options->get_option('configuration','enable_make_pair')),
 											'sanitize'=>'sanitize_text_field',
-											'options'=>array('config_enable_make_pair'=>'Make pair button status.'),
+											'options'=>array('enable_make_pair'=>'Make pair button status.'),
 											'class'=>array()
 										),
-									'config_label_make_pair'=>array(
+									'label_make_pair'=>array(
 											'label'=>'Button label',
 											'type'=>'text',
+											'validate'=>array('required'=>''),
 											'value'=>wbc()->options->get_option('configuration','label_make_pair'),
 											'class'=>array(),
 											'size_class'=>array('eight','wide','required'),
@@ -121,20 +123,22 @@ if ( ! class_exists( 'Configuration' ) ) {
 											'label'=>'First Category',
 											'type'=>'devider',
 										),
-									'config_first_name'=>array(
+									'first_name'=>array(
 											'label'=>'Name',
 											'type'=>'select',
 											'value'=>wbc()->options->get_option('configuration','first_name'),
+											'validate'=>array('required'=>''),
 											'sanitize'=>'sanitize_text_field',
 											'options'=>\eo\wbc\model\Category_Attribute::instance()->get_category(),
 											'class'=>array('fluid'),
 											'size_class'=>array('eight','wide','required'),
 											'inline'=>true,
 										),
-									'config_first_icon'=>array(
+									'first_icon'=>array(
 											'label'=>'Icon',
 											'type'=>'icon',
 											'value'=>wbc()->options->get_option('configuration','first_icon'),
+											'validate'=>array('required'=>''),
 											'sanitize'=>'sanitize_text_field',
 											'class'=>array(),
 											'size_class'=>array('eight','wide','required'),
@@ -144,20 +148,22 @@ if ( ! class_exists( 'Configuration' ) ) {
 											'label'=>'Second Category',
 											'type'=>'devider',
 										),
-									'config_second_name'=>array(
+									'second_name'=>array(
 											'label'=>'Name',
 											'type'=>'select',
 											'value'=>wbc()->options->get_option('configuration','second_name'),
+											'validate'=>array('required'=>''),
 											'sanitize'=>'sanitize_text_field',
 											'options'=>\eo\wbc\model\Category_Attribute::instance()->get_category(),
 											'class'=>array('fluid'),
 											'size_class'=>array('eight','wide','required'),
 											'inline'=>true,
 										),
-									'config_second_icon'=>array(
+									'second_icon'=>array(
 											'label'=>'Icon',
 											'type'=>'icon',
 											'value'=>wbc()->options->get_option('configuration','second_icon'),
+											'validate'=>array('required'=>''),
 											'sanitize'=>'sanitize_text_field',
 											'class'=>array(),
 											'size_class'=>array('eight','wide','required'),
@@ -167,19 +173,21 @@ if ( ! class_exists( 'Configuration' ) ) {
 											'label'=>'Preview',
 											'type'=>'devider',
 										),
-									'config_preview_name'=>array(
+									'preview_name'=>array(
 											'label'=>'Name',
 											'type'=>'text',
 											'value'=>wbc()->options->get_option('configuration','preview_name'),
+											'validate'=>array('required'=>''),
 											'sanitize'=>'sanitize_text_field',
 											'class'=>array('fluid'),
 											'size_class'=>array('eight','wide','required'),
 											'inline'=>true,
 										),
-									'config_preview_icon'=>array(
+									'preview_icon'=>array(
 											'label'=>'Icon',
 											'type'=>'icon',
-											'value'=>wbc()->options->get_option('configuration','preview_icon'),	
+											'value'=>wbc()->options->get_option('configuration','preview_icon'),
+											'validate'=>array('required'=>''),
 											'sanitize'=>'sanitize_text_field',
 											'class'=>array(),
 											'size_class'=>array('eight','wide','required'),
@@ -194,9 +202,10 @@ if ( ! class_exists( 'Configuration' ) ) {
 										'label'=>'Alternate Breadcrumb',
 										'type'=>'radio',
 										'value'=>wbc()->options->get_option('configuration','config_alternate_breadcrumb','default'),
+										'validate'=>array('required'=>''),
 										'sanitize'=>'sanitize_text_field',
 										'options'=>array('default'=>'Default','template_1'=>'Template 1','template_2'=>'Template 2'),
-										'class'=>array(),
+										'class'=>array(),										
 										'size_class'=>array('required'),
 										'visible_info'=>array( 'label'=>'( Switch to other look of breadcrumb. )',
 											'type'=>'visible_info',
@@ -234,7 +243,7 @@ if ( ! class_exists( 'Configuration' ) ) {
 										'size_class'=>array('eight','wide'),
 										'inline'=>true,
 									),*/
-								'config_pair_maker_upper_card'=>array(
+								'pair_maker_upper_card'=>array(
 										'label'=>'Icon',
 										'type'=>'radio',
 										'value'=>wbc()->options->get_option('configuration','pair_maker_upper_card'),
@@ -271,7 +280,7 @@ if ( ! class_exists( 'Configuration' ) ) {
 					}
 			    }
 			}
-
+			$form_definition = apply_filters('eowbc_admin_form_configuration', $form_definition );
 			return $form_definition;
 
 		}
