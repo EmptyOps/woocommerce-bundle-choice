@@ -85,8 +85,8 @@ class sunob_a_w_bonusFeaturesShortcodeFiltersCest
         $I->wait(1);
 
         //verify if created
-        $I->seeInSource('[woo_custome_filter_begin][');
-        $I->seeInSource('][woo_custome_filter_end');
+        $I->seeInPageSource('[woo_custome_filter_begin][');
+        $I->seeInPageSource('][woo_custome_filter_end');
 
 	}
 

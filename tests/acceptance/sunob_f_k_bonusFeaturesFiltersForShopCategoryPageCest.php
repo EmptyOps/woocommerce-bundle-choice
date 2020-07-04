@@ -20,8 +20,6 @@ class sunob_f_k_bonusFeaturesFiltersForShopCategoryPageCest
         // go to the page
         $I->amOnPage('/shop/');
         
-        // Note: here it is assumed that shortcode is added on /sample-page manually, so skipping that part here.
-
         // check if filter is visible 
         $I->see('OK', 'button');
 
