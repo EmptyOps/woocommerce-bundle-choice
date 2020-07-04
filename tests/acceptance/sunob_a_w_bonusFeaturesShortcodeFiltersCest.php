@@ -27,7 +27,7 @@ class sunob_a_w_bonusFeaturesShortcodeFiltersCest
 		/* Map creation and modification tab */
 		// go to the tab
 		$I->click('Shortcode Filters for Home');
-		$I->see('Enable Specifications View?');
+		$I->see('Add Filter Field');
 
 		// set fields 
 		$I->executeJS("jQuery('#shop_cat_shortcode_filter_dropdown_div').dropdown('set selected', 15);");	//better than setting 1 directly is to select the nth element that has value 1 

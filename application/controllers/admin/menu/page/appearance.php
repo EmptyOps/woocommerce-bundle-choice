@@ -163,7 +163,7 @@ if ( ! class_exists( 'Appearance' ) ) {
 								'sanitize'=>'sanitize_text_field',
 								'value'=>'',
 								'class'=>array('fluid'),						
-								'size_class'=>array('eight','wide'),
+								'size_class'=>array('eight','wide','required'),
 								'inline'=>false,
 
 								'visible_info'=>array( 'label'=>eowbc_lang('Text to be shown on add to cart button on product page for the first category'),
@@ -179,7 +179,7 @@ if ( ! class_exists( 'Appearance' ) ) {
 								'sanitize'=>'sanitize_text_field',
 								'value'=>'',
 								'class'=>array('fluid'),						
-								'size_class'=>array('eight','wide'),
+								'size_class'=>array('eight','wide','required'),
 								'inline'=>false,
 
 								'visible_info'=>array( 'label'=>eowbc_lang('Text to be shown on add to cart button on product page for the second category'),
@@ -195,6 +195,7 @@ if ( ! class_exists( 'Appearance' ) ) {
 							'sanitize'=>'sanitize_text_field',
 							'value'=>wbc()->options->get_option('product_page','product_page_add_to_basket'),							
 							'class'=>array(),
+							'size_class'=>array('required'),
 							'visible_info'=>array( 'label'=>'( Text to be shown as replacement to `Add to basket` text in dropdown button of add to bundle button. )',
 								'type'=>'visible_info',
 								'class'=>array('fluid', 'small'),

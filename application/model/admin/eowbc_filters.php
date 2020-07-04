@@ -241,12 +241,12 @@ class Eowbc_Filters {
 				    		$table_data[$fk] = (int)$_POST[$fk]; 	
 			    		}
 			    		else {
-			    			$table_data[$fk] = (empty($_POST[$fk])? $_POST[$fk]: sanitize_text_field( $_POST[$fk] ) ); 
+			    			$table_data[$fk] = ( isset($_POST[$fk]) ? $_POST[$fk] : '' ); 
 			    		}
 			    	}
 			    	else {			    		
 			    		
-			    		wbc()->options->update_option('filters_'.$key,$fk,(isset($_POST[$fk])? sanitize_text_field( $_POST[$fk] ):'' ) );
+			    		wbc()->options->update_option('filters_'.$key,$fk,(isset($_POST[$fk])? ( $_POST[$fk] ):'' ) );
 			    	}
 			    }
 			}
