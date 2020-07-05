@@ -38,6 +38,8 @@ class a_g_adminConfigurationCest
 		// $I->click('Home page only');	//('#config_buttons_page_dropdown_div > div.menu.transition.visible > div:nth-child(2)');
 		$I->executeJS("jQuery('#buttons_page_dropdown_div').dropdown('set selected', 0);");	//better than setting 1 directly is to select the nth element that has value 1 
 
+		$I->fillField('label_make_pair', 'dummy_text');
+
 		$I->executeJS('window.scrollTo( 0, 300 );');		//$I->scrollTo('Save');	
 		$I->wait(3);
 
