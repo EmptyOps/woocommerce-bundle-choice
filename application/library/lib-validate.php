@@ -72,7 +72,8 @@ if(!class_exists('WBC_Validate')) {
 		}
 
 		public function required($label,$value,$param){
-			return (!empty($value)?true:"`${label}` field is required!");
+			// return (!empty($value)?true:"`${label}` field is required!");
+			return (!( $value!==0 && $value!=="0" && empty($value) )?true:"`${label}` field is required!");
 		}
 
 		public function postfix($label,$value,$param){
