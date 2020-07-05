@@ -85,9 +85,16 @@ class sunob_a_w_bonusFeaturesShortcodeFiltersCest
         $I->wait(1);
 
         //verify if created
-        $I->seeInSource('woo_custome_filter_begin');
-        $I->seeInSource('][woo_custome_filter_end');
-
+        $textarea_text = $I->executeJS("return jQuery('#shop_cat_shortcode_text').val();");
+        if( strpos($textarea_text, "[woo_custome_filter_begin][") !== FALSE && strpos($textarea_text, "][woo_custome_filter_end") !== FALSE ) {
+            //assume passed with below dummy assert
+            $I->dontSee('No filter(s) exists');
+        }
+        else {
+            //assume not passed with below dummy assert with random text so that it fails
+            $I->see('zgkvmxbn86nhgf5kmxzvfvns53kdfysfk');
+        }
+        
 	}
 
 }
