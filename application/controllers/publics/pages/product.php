@@ -427,6 +427,7 @@ class Product {
                         return false;
                     }                
                 },$maps));
+
             }
         }         
 
