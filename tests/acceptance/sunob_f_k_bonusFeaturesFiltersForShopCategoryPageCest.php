@@ -21,13 +21,38 @@ class sunob_f_k_bonusFeaturesFiltersForShopCategoryPageCest
         $I->amOnPage('/shop/');
         
         // check if filter is visible 
-        $I->see('OK', 'button');
+        $I->see('Diamond Filter');    //first filter tab
+        $I->see('Setting Filter');    //second filter tab
 
-        // TODO apply filters
+        // TODO apply filters basic check
         
         // TODO check if expected results shows up
 
 	}
+
+    public function leftBarFilterNotDisplayedOnShopPage(AcceptanceTester $I) {
+
+        if( !$I->test_allowed_in_this_environment("sunob_f_") ) {
+            return;
+        }
+
+    }
+
+    public function allFilterFieldsAreDisplayedOnShopPage(AcceptanceTester $I) {
+
+        if( !$I->test_allowed_in_this_environment("sunob_f_") ) {
+            return;
+        }
+
+    }
+
+    public function allFilterFieldsAreWorkingOnShopPage(AcceptanceTester $I) {
+
+        if( !$I->test_allowed_in_this_environment("sunob_f_") ) {
+            return;
+        }
+
+    }
 
 	public function categoryPage(AcceptanceTester $I) {
 
@@ -37,6 +62,40 @@ class sunob_f_k_bonusFeaturesFiltersForShopCategoryPageCest
 
         //First enable the filter for category page from admin panel
 
+
+        // go to the page
+        $I->amOnPage('/selected-category-page/');
+        
+        // TODO check if filter is visible 
+
+        // TODO apply filters basic check
+        
+        // TODO check if expected results shows up
+
 	}
+
+    public function leftBarFilterNotDisplayedOnCategoryPage(AcceptanceTester $I) {
+
+        if( !$I->test_allowed_in_this_environment("sunob_f_") ) {
+            return;
+        }
+
+    }
+
+    public function allFilterFieldsAreDisplayedOnCategoryPage(AcceptanceTester $I) {
+
+        if( !$I->test_allowed_in_this_environment("sunob_f_") ) {
+            return;
+        }
+
+    }
+
+    public function allFilterFieldsAreWorkingOnCategoryPage(AcceptanceTester $I) {
+
+        if( !$I->test_allowed_in_this_environment("sunob_f_") ) {
+            return;
+        }
+
+    }
 
 }

@@ -188,7 +188,8 @@ class Category {
                         $html.="<div class='ui row' style='padding-bottom:0px'>";
                             $html.='<span class="ui inverted text">' . __( 'No products were found matching your selection.', 'woocommerce' ) .'<span>';
                         $html.="</div>";    
-                        $html.="<div class='ui row'  style='padding-bottom:3rem !important'>";                            
+                        $html.="<div class='ui row'  style='padding-bottom:3rem !important'>";   
+                            // TODO here isn't it better if i's simple javascript back in history - hiren                         
                             $html.='<button href="'.$this->eo_wbc_prev_url().'" class="ui inverted secondary single_add_to_cart_button button alt">Go back</button>&nbsp;&nbsp;';
                             $html.='<button href="'.((empty(wbc()->sanitize->get('FIRST')) XOR empty(wbc()->sanitize->get('SECOND')))?strtok(get_permalink((empty(wbc()->sanitize->get('FIRST'))?wbc()->sanitize->get('SECOND'):wbc()->sanitize->get('FIRST'))),'?'):'').'" class="ui grey button single_add_to_cart_button alt">Continue buying single item</button>&nbsp;&nbsp;';
                         $html.="</div>";    
@@ -196,7 +197,11 @@ class Category {
                         if(current_user_can('manage_options')){
                             //Manage the mapping section
                             $html.="<div class='ui row' style='padding-bottom:0rem !important'>";
-                                $html.='<a href="'.admin_url('admin.php?page=eowbc-mapping').'"><span class="ui text primary">As admin of the site please create a product mapping to fix this problem.</span></a>';
+                                $html.='<a href="'.admin_url('admin.php?page=eowbc-mapping').'"><span class="ui text primary">As admin of this site please create a product mapping to fix this problem.</span></a>';
+                            $html.="</div>";    
+
+                            $html.="<div class='ui row' style='padding-bottom:0rem !important'>";
+                                $html.='Adequate mapping(s) needs to be added in the '.constant('EOWBC_NAME').' for Pair Builder to work properly.';
                             $html.="</div>";                                                    
                         } else {                            
                             $html.="<div class='ui row' style='padding-bottom:0rem !important'>";

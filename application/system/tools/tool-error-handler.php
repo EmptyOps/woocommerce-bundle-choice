@@ -63,34 +63,51 @@ if(!class_exists('EOWBC_Error_Handler')){
 
 		     	   	error_log(implode($log),3,constant('EOWBC_LOG_DIR').'debug.log');
 		     	   	$error_code = (int)$error['type'];
-		     	   	if($error_code==1 or $error_code==4){
-		     	   		update_option('eowbc_error_count',get_option('eowbc_error_count',0)+1);	
-		     	   	} elseif ($error_code == 2 or $error_code == 8) {
-						update_option('eowbc_warning_count',get_option('eowbc_warning_count',0)+1);     	   		
-		     	   	}	     	   	
+     	   			EOWBC_Error_Handler::update_counts($error_code);	     	   	
 	     	    }
 	    	}
 	    }
 	    
+	    public static function update_counts($error_code=-1) { 
+	    	if($error_code==1 or $error_code==4){
+     	   		update_option('eowbc_error_count',get_option('eowbc_error_count',0)+1);	
+     	   	} elseif ($error_code == -1 or $error_code == 2 or $error_code == 8) {
+				update_option('eowbc_warning_count',get_option('eowbc_warning_count',0)+1);     	   		
+     	   	}
+	    }
 
-		public static function log($message) {
+		public static function log($message, $error_code=-1) {
 
 			//	Just create log file if not exists.
 			if (!file_exists(constant('EOWBC_LOG_DIR').'debug.log')) {
 				fclose(fopen(constant('EOWBC_LOG_DIR').'debug.log', 'w'));
 			}         
 			
-			$log=array();
-			$log[]='['.date( 'M d Y H:i:s' ).'] ';
-			$log[]='User Error';
-			$log[]='---';
-			$log[]='---';
-			$log[]=PHP_EOL;
-			$log[]=$message;
-			$log[]=PHP_EOL;
+			if( $error_code == -1 ) {
+				$log=array();
+				$log[]='['.date( 'M d Y H:i:s' ).'] ';
+				$log[]='User Error';
+				$log[]='---';
+				$log[]='---';
+				$log[]=PHP_EOL;
+				$log[]=$message;
+				$log[]=PHP_EOL;
+			}
+			else {
+				$log=array();
+				$log[]='['.date( 'M d Y H:i:s' ).'] ';
+				$log[]=$error_code;
+				$log[]='---';
+				$log[]='---';
+				$log[]=PHP_EOL;
+				$log[]=$message;
+				$log[]=PHP_EOL;
+			}
 
 		   	error_log(implode($log),3,constant('EOWBC_LOG_DIR').'debug.log');
-		   	update_option('eowbc_warning_count',get_option('eowbc_warning_count',0)+1);
+
+		   	// update_option('eowbc_warning_count',get_option('eowbc_warning_count',0)+1);
+		   	EOWBC_Error_Handler::update_counts($error_code);	
 
 		   	return true;
 		}

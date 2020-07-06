@@ -23,14 +23,22 @@ class sunob_f_g_bonusFeaturesSpecificationsViewCest
         // check if main title is visible 
         $I->see('Specifications', 'td');
 
-        // TODO check if values are visible 
+        // check if value(s) are visible 
         $I->see('Round', 'td');   
 
         // TODO check if values/column-cells have the desired colors and border radius etc. that are set in admin
         
 	}
 
-    public function confirmAllExpectedValuesAreDisplayed(AcceptanceTester $I) {
+    public function allExpectedValuesAreDisplayed(AcceptanceTester $I) {
+
+        if( !$I->test_allowed_in_this_environment("sunob_f_") ) {
+            return;
+        }
+
+    }
+
+    public function allAlternateWidgetsAreWorking(AcceptanceTester $I) {
 
         if( !$I->test_allowed_in_this_environment("sunob_f_") ) {
             return;

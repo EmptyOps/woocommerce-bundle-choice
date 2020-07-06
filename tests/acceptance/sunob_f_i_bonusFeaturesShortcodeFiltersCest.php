@@ -26,10 +26,38 @@ class sunob_f_i_bonusFeaturesShortcodeFiltersCest
         // check if filter is visible 
         $I->see('OK', 'button');
 
-        // TODO apply filters
+        // TODO apply filters basic check
         
         // TODO check if expected results shows up
         
 	}
+
+	public function filterWidgetRenderStyle(AcceptanceTester $I) {
+
+        if( !$I->test_allowed_in_this_environment("sunob_f_") ) {
+            return;
+        }
+
+        // TODO before doing this test first confirm if its normal standard to do acceptance tests for this kind of test cases 
+
+        // TODO check things like widget is set using adequate width, area placement is good, other styling is good
+
+    }
+
+	public function allFilterFieldsAreDisplayed(AcceptanceTester $I) {
+
+        if( !$I->test_allowed_in_this_environment("sunob_f_") ) {
+            return;
+        }
+
+    }
+
+    public function allFilterFieldsAreWorking(AcceptanceTester $I) {
+
+        if( !$I->test_allowed_in_this_environment("sunob_f_") ) {
+            return;
+        }
+
+    }
 
 }
