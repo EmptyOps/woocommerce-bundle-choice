@@ -48,10 +48,6 @@ class Category {
                      OR 
                      ($this->eo_wbc_get_category()==wbc()->options->get_option('configuration','second_slug') && wbc()->options->get_option_group('filters_s_fconfig',FALSE) )
                 ){
-                    if( ($this->eo_wbc_get_category()==wbc()->options->get_option('configuration','second_slug') && wbc()->options->get_option_group('filters_s_fconfig',FALSE) ) ) {
-                        wp_die('loading second category filter');
-                    }
-
                     $this->eo_wbc_add_filters();          
                 }
             }            
