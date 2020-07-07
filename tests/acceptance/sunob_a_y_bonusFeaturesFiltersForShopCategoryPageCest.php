@@ -113,11 +113,11 @@ class sunob_a_y_bonusFeaturesFiltersForShopCategoryPageCest
 			$I->executeJS("jQuery('#shop_cat_filter_add_child_filter').trigger('change');");	//we need to trigger change event because without that our own JS code is not recieving the change event
 			$I->fillField('shop_cat_filter_add_child_label', $field_vals["shop_cat_filter_add_child_label"]);
 			
-			$I->scrollTo('//*[@id="shop_cat_filter_save"]', -300, -100);
+			$I->scrollTo('//*[@id="shop_cat_filter_add_submit_btn"]', -300, -100);
 			$I->wait(3);
 			
 			// save 
-			$I->click('//*[@id="shop_cat_filter_save"]'); 	
+			$I->click('//*[@id="shop_cat_filter_add_submit_btn"]'); 	
 
 			$I->see($field_vals["shop_cat_filter_add_label"], 'td');	//$I->see('4px', 'input');	//I verify that I can see "button tagline..." inside input tag 
 
