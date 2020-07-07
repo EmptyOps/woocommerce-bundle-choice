@@ -27,7 +27,7 @@ class a_k_adminMappingCest
 		/* Map creation and modification tab */
 		// go to the tab
 		$I->click('Map creation and modification');
-		$I->see('Add New Mapsdfgjdfkjhgkjdfhg');
+		$I->see('Add New Maps');
 
 		// set fields 
 		$I->executeJS("jQuery('#eo_wbc_first_category_dropdown_div').dropdown('set selected', 17);");	//better than setting val directly is to select the nth element that has value val 	
