@@ -32,7 +32,8 @@ class sunob_a_y_bonusFeaturesFiltersForShopCategoryPageCest
 		// set fields 
 		$I->executeJS("jQuery('#shop_cat_filter_location_shop').parent().checkbox('set checked', 'shop_cat_filter_location_shop');");	
 
-		$I->executeJS("jQuery('#shop_cat_filter_two_filter').parent().checkbox('set checked', 'shop_cat_filter_two_filter');");			
+		$I->executeJS("jQuery('#shop_cat_filter_two_filter').parent().checkbox('set checked', 'shop_cat_filter_two_filter');");		
+		$I->executeJS("jQuery('#shop_cat_filter_two_filter').trigger('change');");	//we need to trigger change event because without that our own JS code is not recieving the change event
 		$I->executeJS("jQuery('#shop_cat_filter_two_filter_first_dropdown_div').dropdown('set selected', 19);");	//better than setting 1 directly is to select the nth element that has value 1 
 
 		$I->scrollTo('//*[@id="add-sample-filter-data"]', -300, -500);
