@@ -119,6 +119,10 @@ class sunob_a_y_bonusFeaturesFiltersForShopCategoryPageCest
 			// save 
 			$I->click('//*[@id="shop_cat_filter_add_submit_btn"]'); 	
 
+			// scroll back upper side to see saved filters list
+			$I->scrollTo('//*[@id="shop_cat_filter_save"]', -300, -100);
+			$I->wait(3);
+
 			$I->see($field_vals["shop_cat_filter_add_label"], 'td');	//$I->see('4px', 'input');	//I verify that I can see "button tagline..." inside input tag 
 
 		}
