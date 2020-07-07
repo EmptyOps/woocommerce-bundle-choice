@@ -108,8 +108,9 @@ class sunob_a_y_bonusFeaturesFiltersForShopCategoryPageCest
 			$I->fillField('shop_cat_filter_add_column_width', $field_vals["shop_cat_filter_add_column_width"]);
 			$I->fillField('shop_cat_filter_add_order', $field_vals["shop_cat_filter_add_order"]);
 			$I->executeJS("jQuery('#shop_cat_filter_add_input_type_dropdown_div').dropdown('set selected', '".$field_vals["shop_cat_filter_add_input_type_dropdown_div"]."');");	//better than setting 1 directly is to select the nth element that has value 1 
-			$I->executeJS("jQuery('#shop_cat_filter_add_reset_link').checkbox('set checked');");	//better than setting 1 directly is to select the nth element that has value 1 
-			$I->executeJS("jQuery('#shop_cat_filter_add_child_filter').checkbox('set checked');");	//better than setting 1 directly is to select the nth element that has value 1 
+			$I->executeJS("jQuery('#shop_cat_filter_add_reset_link').parent().checkbox('set checked', 'shop_cat_filter_add_reset_link');");	//better than setting 1 directly is to select the nth element that has value 1 
+			$I->executeJS("jQuery('#shop_cat_filter_add_child_filter').parent().checkbox('set checked', 'shop_cat_filter_add_child_filter');");	//better than setting 1 directly is to select the nth element that has value 1 
+			$I->executeJS("jQuery('#shop_cat_filter_add_child_filter').trigger('change');");	//we need to trigger change event because without that our own JS code is not recieving the change event
 			$I->fillField('shop_cat_filter_add_child_label', $field_vals["shop_cat_filter_add_child_label"]);
 			
 			$I->scrollTo('//*[@id="shop_cat_filter_save"]', -300, -100);
