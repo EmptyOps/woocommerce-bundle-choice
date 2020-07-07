@@ -55,7 +55,8 @@ class sunob_a_yc_bonusFeaturesPriceControlCest
 		$I->wait(3);
 
 		// save 
-		$I->click('Save Pricing Method'); 	
+		$I->click('Save Pricing Method'); 
+		$I->wait(1);	
 
 		// verify save
 		$I->see('Metal Color: Yellow', 'td');	//$I->see('4px', 'input');	//I verify that I can see "button tagline..." inside input tag 
