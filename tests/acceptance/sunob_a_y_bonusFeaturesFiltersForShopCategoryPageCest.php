@@ -102,12 +102,12 @@ class sunob_a_y_bonusFeaturesFiltersForShopCategoryPageCest
 			}
 
 			// set fields 
-			$I->executeJS("jQuery('#shop_cat_filter_add_category_dropdown_div').dropdown('set selected', ".$field_vals["shop_cat_filter_add_category_dropdown_div"].");");	//better than setting 1 directly is to select the nth element that has value 1 
+			$I->executeJS("jQuery('#shop_cat_filter_add_category_dropdown_div').dropdown('set selected', '".$field_vals["shop_cat_filter_add_category_dropdown_div"]."');");	//better than setting 1 directly is to select the nth element that has value 1 
 			$I->fillField('shop_cat_filter_add_label', $field_vals["shop_cat_filter_add_label"]);
 			
 			$I->fillField('shop_cat_filter_add_column_width', $field_vals["shop_cat_filter_add_column_width"]);
 			$I->fillField('shop_cat_filter_add_order', $field_vals["shop_cat_filter_add_order"]);
-			$I->executeJS("jQuery('#shop_cat_filter_add_input_type_dropdown_div').dropdown('set selected', ".$field_vals["shop_cat_filter_add_input_type_dropdown_div"].");");	//better than setting 1 directly is to select the nth element that has value 1 
+			$I->executeJS("jQuery('#shop_cat_filter_add_input_type_dropdown_div').dropdown('set selected', '".$field_vals["shop_cat_filter_add_input_type_dropdown_div"]."');");	//better than setting 1 directly is to select the nth element that has value 1 
 			$I->executeJS("jQuery('#shop_cat_filter_add_reset_link').checkbox('set checked');");	//better than setting 1 directly is to select the nth element that has value 1 
 			$I->executeJS("jQuery('#shop_cat_filter_add_child_filter').checkbox('set checked');");	//better than setting 1 directly is to select the nth element that has value 1 
 			$I->fillField('shop_cat_filter_add_child_label', $field_vals["shop_cat_filter_add_child_label"]);

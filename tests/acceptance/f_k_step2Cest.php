@@ -29,6 +29,9 @@ class f_k_step2Cest
     	$I->executeJS('window.scrollTo( 0, 300 );');        //$I->scrollTo('Save'); 
         $I->wait(3);
 
+        echo $I->grabPageSource();
+        $I->see('dskfjhksjdhfkhsdkfhkdjhf');
+
     	// - I choose filter options and then I check if x  products are found 
 		$I->executeJS("jQuery('#text_slider_price').slider('set rangeValue', 12, 14);");	
 		$I->waitForText('No products were found', 10);
