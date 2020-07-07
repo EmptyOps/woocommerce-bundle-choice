@@ -27,7 +27,7 @@ class sunob_a_yc_bonusFeaturesPriceControlCest
 		$I->see('Set pricing method to update price in bulk');
 
 		// 
-		$I->executeJS("jQuery('#jpc_field_dropdown_div').dropdown('set selected', 19);");	//better than setting 1 directly is to select the nth element that has value 1 
+		$I->executeJS("jQuery('#jpc_field_dropdown_div').dropdown('set selected', 'metal-color');");	//better than setting 1 directly is to select the nth element that has value 1 
 		$I->executeJS("jQuery('#jpc_compare_dropdown_div').dropdown('set selected', 'in');");	//better than setting 1 directly is to select the nth element that has value 1 
 		$I->executeJS("jQuery('#jpc_values_drop_1__dropdown_div').dropdown('set selected', 'yellow');");	//better than setting 1 directly is to select the nth element that has value 1 
 		
