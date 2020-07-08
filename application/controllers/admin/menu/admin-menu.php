@@ -139,6 +139,7 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 
 		public function add_message($features,$menu) {	
 		
+			//supposed to be shown on any page of admin panel
 			if(!empty($features) and is_array($features)){
 				$active_feature = '';
 				if(!empty($features['ring_builder'])) {
@@ -159,6 +160,7 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 				}
 			}
 
+			//supposed to be shown on any page of admin panel
 			if( !empty(get_option('eowbc_error_count',0)) or !empty(get_option('eowbc_warning_count',0)) ){
 				$message_type = 'warning'; /*negative*/
 				$message_title = 'Warning';
@@ -181,11 +183,14 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 
 			}
 			
+			//supposed to be shown on any page of admin panel
 			if( wbc()->options->get('eo_wbc_mapping_error_report',false) ) {
+				$message_type = 'warning';
+				$message_title = "Warning";
 
 				$referrer = wbc()->options->get('eo_wbc_mapping_error_report',false);
-				add_action( 'admin_notices',function() use($referrer){
-					printf('<div class="ui %s message"><i class="close icon"></i><div class="header">%s</div><p>One user has reported mapping issue at this <a href="%s" target="_blank">link</a>, please ensure you have added mapping to connect products from first to second step. If you like assistance on this <a href="%s">you can contact support</a></p></div>',$referrer,admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'));
+				add_action( 'admin_notices',function() use($referrer,$message_type,$message_title){
+					printf('<div class="ui %s message"><i class="close icon"></i><div class="header">%s</div><p>One user has reported mapping issue at this <a href="%s" target="_blank">link</a>, please ensure you have added mapping to connect products from first to second step. If you like assistance on this <a href="%s">you can contact support</a></p></div>',$message_type,$message_title,$referrer,admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'));
 				});
 
 				wbc()->options->delete('eo_wbc_mapping_error_report');

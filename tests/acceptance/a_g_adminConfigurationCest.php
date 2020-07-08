@@ -36,7 +36,9 @@ class a_g_adminConfigurationCest
 		// // $I->fillField('config_buttons_page', '1');	
 		// $I->click('#config_buttons_page_dropdown_div');
 		// $I->click('Home page only');	//('#config_buttons_page_dropdown_div > div.menu.transition.visible > div:nth-child(2)');
-		$I->executeJS("jQuery('#config_buttons_page_dropdown_div').dropdown('set selected', 0);");	//better than setting 1 directly is to select the nth element that has value 1 
+		$I->executeJS("jQuery('#buttons_page_dropdown_div').dropdown('set selected', 0);");	//better than setting 1 directly is to select the nth element that has value 1 
+
+		$I->fillField('label_make_pair', 'dummy_text');
 
 		$I->executeJS('window.scrollTo( 0, 300 );');		//$I->scrollTo('Save');	
 		$I->wait(3);
@@ -71,11 +73,11 @@ class a_g_adminConfigurationCest
 		$I->see('First Category');
 
 		// select category
-		$I->executeJS("jQuery('#config_first_name_dropdown_div').dropdown('set selected', 19);");	//better than setting val directly is to select the nth element that has value val 
-		$I->executeJS("jQuery('#config_second_name_dropdown_div').dropdown('set selected', 20);");	//better than setting val directly is to select the nth element that has value val 
+		$I->executeJS("jQuery('#first_name_dropdown_div').dropdown('set selected', 19);");	//better than setting val directly is to select the nth element that has value val 
+		$I->executeJS("jQuery('#second_name_dropdown_div').dropdown('set selected', 20);");	//better than setting val directly is to select the nth element that has value val 
 
 		// set preview text
-		$I->fillField('config_preview_name', 'Preview');
+		$I->fillField('preview_name', 'Preview');
 
 		// save 
 		$I->executeJS('window.scrollTo( 0, jQuery("#config_navigation_conf_save_btn").scrollTop() + 1000 );');		//$I->scrollTo('Save');	//$I->scrollTo('#config_navigation_conf_save_btn');

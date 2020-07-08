@@ -30,15 +30,21 @@ class sunob_a_y_bonusFeaturesFiltersForShopCategoryPageCest
 		$I->see('Filter Location');
 
 		// set fields 
-		$I->executeJS("jQuery('#shop_cat_filter_location_shop').checkbox('set checked');");	//better than setting 1 directly is to select the nth element that has value 1 
-		
+		$I->executeJS("jQuery('#shop_cat_filter_location_shop').parent().checkbox('set checked', 'shop_cat_filter_location_shop');");	
+
+		$I->executeJS("jQuery('#shop_cat_filter_two_filter').parent().checkbox('set checked', 'shop_cat_filter_two_filter');");		
+		$I->executeJS("jQuery('#shop_cat_filter_two_filter').trigger('change');");	//we need to trigger change event because without that our own JS code is not recieving the change event
 		$I->executeJS("jQuery('#shop_cat_filter_two_filter_first_dropdown_div').dropdown('set selected', 19);");	//better than setting 1 directly is to select the nth element that has value 1 
+
+		$I->scrollTo('//*[@id="add-sample-filter-data"]', -300, -500);
+		$I->wait(3);
+		
 		$I->fillField('shop_cat_filter_two_filter_first_title', 'Diamond Filter');
 		$I->executeJS("jQuery('#shop_cat_filter_two_filter_first_dropdown_div').dropdown('set selected', 20);");	//better than setting 1 directly is to select the nth element that has value 1 
 		$I->fillField('shop_cat_filter_two_filter_second_title', 'Setting Filter');
 		
-		$I->executeJS("jQuery('#shop_cat_filter_alternate_view').checkbox('set checked');");	//better than setting 1 directly is to select the nth element that has value 1 
-		$I->executeJS("jQuery('#shop_cat_filter_selected_filter').checkbox('set checked');");	//better than setting 1 directly is to select the nth element that has value 1 
+		$I->executeJS("jQuery('#shop_cat_filter_alternate_view').parent().checkbox('set checked', 'shop_cat_filter_alternate_view');");	//better than setting 1 directly is to select the nth element that has value 1 
+		$I->executeJS("jQuery('#shop_cat_filter_selected_filter').parent().checkbox('set checked', 'shop_cat_filter_selected_filter');");	//better than setting 1 directly is to select the nth element that has value 1 
 
 		$I->scrollTo('//*[@id="shop_cat_filter_save"]', -300, -100);
 		$I->wait(3);
@@ -67,24 +73,59 @@ class sunob_a_y_bonusFeaturesFiltersForShopCategoryPageCest
 
 		/* Map creation and modification tab */
 		// go to the tab
-		$I->click('Shortcode Filters for Home');
-		$I->see('Enable Specifications View?');
+		$I->click('Filters for Shop/Category Page');
+		$I->see('Filter Location');
 
-		// set fields 
-		$I->executeJS("jQuery('#shop_cat_shortcode_filter_dropdown_div').dropdown('set selected', 15);");	//better than setting 1 directly is to select the nth element that has value 1 
+		$num_filters = 2;
+		for($i=0; $i<= $num_filters; $i++) {
 
-		$I->fillField('shop_cat_shortcode_label', 'test label');
-		$I->fillField('shop_cat_shortcode_unique_id', 'testuniqueid');
+			$field_vals = array();
+			if($i == 0) {
+				$field_vals["shop_cat_filter_add_category_dropdown_div"] = "19";
+				$field_vals["shop_cat_filter_add_label"] = "Diamond Filter";
 
-		$I->scrollTo('//*[@id="shop_cat_shortcode_add"]', 0, -100);
-		$I->wait(3);
-		
-		// save 
-		$I->click('Add Filter'); 	
+				$field_vals["shop_cat_filter_add_column_width"] = "99";
+				$field_vals["shop_cat_filter_add_order"] = "55";
+				$field_vals["shop_cat_filter_add_input_type_dropdown_div"] = "checkbox";
 
-		$I->wait(3);
+				$field_vals["shop_cat_filter_add_child_label"] = "Child Filter";
+			}
+			else {
+				$field_vals["shop_cat_filter_add_category_dropdown_div"] = "20";
+				$field_vals["shop_cat_filter_add_label"] = "Setting Filter";
 
-		$I->see('testuniqueid', 'td');	//$I->see('4px', 'input');	//I verify that I can see "button tagline..." inside input tag 
+				$field_vals["shop_cat_filter_add_column_width"] = "88";
+				$field_vals["shop_cat_filter_add_order"] = "44";
+				$field_vals["shop_cat_filter_add_input_type_dropdown_div"] = "icon";
+
+				$field_vals["shop_cat_filter_add_child_label"] = "Child Filter";
+			}
+
+			// set fields 
+			$I->executeJS("jQuery('#shop_cat_filter_add_category_dropdown_div').dropdown('set selected', '".$field_vals["shop_cat_filter_add_category_dropdown_div"]."');");	//better than setting 1 directly is to select the nth element that has value 1 
+			$I->fillField('shop_cat_filter_add_label', $field_vals["shop_cat_filter_add_label"]);
+			
+			$I->fillField('shop_cat_filter_add_column_width', $field_vals["shop_cat_filter_add_column_width"]);
+			$I->fillField('shop_cat_filter_add_order', $field_vals["shop_cat_filter_add_order"]);
+			$I->executeJS("jQuery('#shop_cat_filter_add_input_type_dropdown_div').dropdown('set selected', '".$field_vals["shop_cat_filter_add_input_type_dropdown_div"]."');");	//better than setting 1 directly is to select the nth element that has value 1 
+			$I->executeJS("jQuery('#shop_cat_filter_add_reset_link').parent().checkbox('set checked', 'shop_cat_filter_add_reset_link');");	//better than setting 1 directly is to select the nth element that has value 1 
+			$I->executeJS("jQuery('#shop_cat_filter_add_child_filter').parent().checkbox('set checked', 'shop_cat_filter_add_child_filter');");	//better than setting 1 directly is to select the nth element that has value 1 
+			$I->executeJS("jQuery('#shop_cat_filter_add_child_filter').trigger('change');");	//we need to trigger change event because without that our own JS code is not recieving the change event
+			$I->fillField('shop_cat_filter_add_child_label', $field_vals["shop_cat_filter_add_child_label"]);
+			
+			$I->scrollTo('//*[@id="shop_cat_filter_add_submit_btn"]', -300, -100);
+			$I->wait(3);
+			
+			// save 
+			$I->click('//*[@id="shop_cat_filter_add_submit_btn"]'); 	
+
+			// scroll back upper side to see saved filters list
+			$I->scrollTo('//*[@id="shop_cat_filter_save"]', -300, -100);
+			$I->wait(3);
+
+			$I->see($field_vals["shop_cat_filter_add_label"], 'td');	//$I->see('4px', 'input');	//I verify that I can see "button tagline..." inside input tag 
+
+		}
 
 	}
 

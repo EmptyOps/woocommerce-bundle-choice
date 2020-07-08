@@ -132,6 +132,7 @@ class EOWBC_Filter_Widget {
 		wbc()->load->asset('css','fomantic/semantic.min');
 		wbc()->load->asset('js','fomantic/semantic.min');
 		wbc()->load->asset('js','publics/eo_wbc_filter');
+            
 		$current_category=$this->_category;
 		$site_url=site_url();
 
@@ -861,11 +862,11 @@ class EOWBC_Filter_Widget {
 					$this->___category[]=$term->slug;	
 				}				
 			}
-			elseif ($item['type']==0 ) {
+			// elseif ($item['type']==0 ) {
 
-				$this->input_step_slider($this->__prefix,$item/*$item['name'],$item['label'],$item['type'],0,$item['column_width'],0,(isset($item['popup'])?$item['popup']:false),$advance*/);		
-			}
-			elseif($item['type']==1 ) {				
+			// 	$this->input_step_slider($this->__prefix,$item/*$item['name'],$item['label'],$item['type'],0,$item['column_width'],0,(isset($item['popup'])?$item['popup']:false),$advance*/);		
+			// }
+			elseif($item['type']==0 || $item['type']==1 ) {				
 				switch ($item['input']) {
 					case 'icon':
 					case 'icon_text':												
@@ -957,11 +958,12 @@ class EOWBC_Filter_Widget {
 						if( !empty( $term ) and !is_wp_error( $term ) ) {
 							$this->___category[] = $term->slug;
 						}
-				} elseif ($item['type']==0 ) {
+				} 
+				//elseif ($item['type']==0 ) {
 
-					$this->input_step_slider($this->__prefix,$item/*$item['name'],$item['label'],$item['type'],1,$item['column_width'],$reset=!empty($item['reset'])*/);		
-				}
-				elseif($item['type']==1 ) {
+					//$this->input_step_slider($this->__prefix,$item/*$item['name'],$item['label'],$item['type'],1,$item['column_width'],$reset=!empty($item['reset'])*/);		
+				//}
+				elseif($item['type']==0 || $item['type']==1 ) {
 					switch ($item['input']) {
 						case 'icon':
 						case 'icon_text':												
