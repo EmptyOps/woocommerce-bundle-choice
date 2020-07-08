@@ -48,7 +48,7 @@ class sunob_a_yc_bonusFeaturesPriceControlCest
         }
 
 		// TODO here first need to ensure that % works and its related help text or the label text is visible for required user experience. 
-		$I->fillField('regular_price', '');		//TODO here when its blank it fires required error, but let's see we may need it to work with none specified for regular price. However, one thing noted that 0 works in regular price field. 
+		$I->fillField('regular_price', '0');		//TODO here when its blank it fires required error, but let's see we may need it to work with none specified for regular price. However, one thing noted that 0 works in regular price field. 
 		$I->fillField('sales_price', '-1');		//value is in percent
 		
 		$I->scrollTo('//*[@id="jpc_add_price_ctl"]', -300, -100);
@@ -94,11 +94,11 @@ class sunob_a_yc_bonusFeaturesPriceControlCest
 
 		// TODO we need to give edit exiting rules option so that user can actually reuse the rule
 
-		// save and update prices 
-		$I->click('Save and Update Prices'); 	
+		// // save and update prices 
+		// $I->click('Save and Update Prices'); 	
 
-		// verify save
-		$I->waitForText('product(s) prices updated', 10);	//$I->see('4px', 'input');	//I verify that I can see "button tagline..." inside input tag 
+		// // verify save
+		// $I->waitForText('product(s) prices updated', 10);	//$I->see('4px', 'input');	//I verify that I can see "button tagline..." inside input tag 
 
 	}
 
