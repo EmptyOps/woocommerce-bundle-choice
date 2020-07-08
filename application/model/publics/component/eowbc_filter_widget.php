@@ -132,6 +132,8 @@ class EOWBC_Filter_Widget {
 		wbc()->load->asset('css','fomantic/semantic.min');
 		wbc()->load->asset('js','fomantic/semantic.min');
 		wbc()->load->asset('js','publics/eo_wbc_filter');
+		wp_die('eo_wbc_filter_enque_asset called...'); 
+            
 		$current_category=$this->_category;
 		$site_url=site_url();
 

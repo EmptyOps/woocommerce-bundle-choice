@@ -19,11 +19,15 @@ class sunob_f_e_bonusFeaturesOptionsUIItemPageCest
 
         // go to the page
         $I->amOnPage('/product/test-diamond-1/');
+
+        // check if options are visible and they have the desired colors and border radius etc. that are set in admin
+            // TODO still need to configure test to check all kind of option types like button, icon, color etc. 
+        $I->see('Diamond Shape', 'span');   //attribute title
+        $I->see('Emerald', 'div');   
+        $I->see('Round', 'div');   
         
         // check if main customize title is visible 
         $I->see('CUSTOMIZE AS PER YOUR WISH');
-
-        // TODO check if options are visible and they have the desired colors and border radius etc. that are set in admin
         
 	}
 
