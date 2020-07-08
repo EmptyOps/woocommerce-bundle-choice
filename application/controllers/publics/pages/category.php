@@ -117,7 +117,8 @@ class Category {
     public function eo_wbc_add_filters() {
         //Add product filter widget...
         
-        add_action( 'woocommerce_archive_description',function(){     
+        add_action( 'woocommerce_archive_description',function(){    
+            wp_die('eo_wbc_add_filters called...'); 
             wbc()->load->model('publics/component/eowbc_filter_widget');          
             // if (class_exists('EO_WBC_Filter_Widget')) {
                 \eo\wbc\model\publics\component\EOWBC_Filter_Widget::instance()->init();                                
