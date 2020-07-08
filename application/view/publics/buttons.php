@@ -38,7 +38,7 @@ else {
 
 //clear the session
 if(function_exists('wc') && !empty(wc()->session)){
-	wc()->session->set('EO_WBC_SETS',NULL);
+	wbc()->session->set('EO_WBC_SETS',NULL);
 }    
 
 // Load assets first to avoid zaping effect. 

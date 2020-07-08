@@ -4,19 +4,19 @@
 
 		if(strpos(str_replace(' ','',$color[0]),'rgb(0,0,0')===0)
 		{	
-			wc()->session->set('EO_WBC_BG_COLOR','rgba(128,128,128,0.5)');	
-			wc()->session->set('EO_WBC_FG_COLOR','rgba(0,0,0,1.0)');
+			wbc()->session->set('EO_WBC_BG_COLOR','rgba(128,128,128,0.5)');	
+			wbc()->session->set('EO_WBC_FG_COLOR','rgba(0,0,0,1.0)');
 		}
 		else
 		{
-			wc()->session->set('EO_WBC_BG_COLOR',$color[0]);
-			wc()->session->set('EO_WBC_FG_COLOR',$color[1]);
+			wbc()->session->set('EO_WBC_BG_COLOR',$color[0]);
+			wbc()->session->set('EO_WBC_FG_COLOR',$color[1]);
 		}   
     }   
 
 
 
-	$fg_color=wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active',wc()->session->get('EO_WBC_BG_COLOR',FALSE));
+	$fg_color=wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active',wbc()->session->get('EO_WBC_BG_COLOR',FALSE));
 
 
 /*breadcrumb_backcolor_inactive*/
@@ -37,9 +37,9 @@
 	)
 	.		
 	(
-		!empty(wc()->session->get('EO_WBC_FG_COLOR'))
+		!empty(wbc()->session->get('EO_WBC_FG_COLOR'))
 		?
-		" .eo-wbc-container>.ui.steps .step.active .title, .eo-wbc-container>.ui.steps .step.active a{ color: ".wc()->session->get('EO_WBC_FG_COLOR','#fff')." }":''
+		" .eo-wbc-container>.ui.steps .step.active .title, .eo-wbc-container>.ui.steps .step.active a{ color: ".wbc()->session->get('EO_WBC_FG_COLOR','#fff')." }":''
 	)
 	
 	.

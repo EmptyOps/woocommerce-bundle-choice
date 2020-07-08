@@ -19,8 +19,94 @@ class Service {
 	}
 
 	public function run() {		
+
 		$this->add_shortcode();
+
+        $this->discount_service();
 	}
+
+    public function discount_service() {
+        /**
+        *   --------------------------------------------------------------
+        *   adding action hook to fees calculation so that we can apply 
+        *   discount on specific combinations only.
+        *   --------------------------------------------------------------
+        */
+        add_action( 'woocommerce_cart_calculate_fees',function($cart) {      
+               
+            if ( is_admin() && ! defined( 'DOING_AJAX' ) ) return;
+
+            $total_discount=0;
+
+            foreach (wbc()->session->get('EO_WBC_MAPS',array()) as $set) {
+
+                if(count($set)==2){
+                    $this->set_discount($set,$total_discount);                                
+                }
+            }
+
+            $cart->add_fee( __('Discount','woo-bundle-choice'), -$total_discount, true, 'standard' );     
+        });
+    }
+
+    public function set_discount($set,&$discount) {           
+        //wbc()->common->pr($set);
+        if(empty($set['FIRST']) || empty($set['SECOND'])) return $discount;
+
+        global $wpdb; 
+        
+        $first_cat_tax=(wp_get_post_terms($set['FIRST'][0],get_taxonomies()));
+        foreach ($first_cat_tax as $key => $cat_tax) {                    
+            $first_cat_tax[$key]=$cat_tax->term_taxonomy_id;
+        }
+        $first_cat_tax=implode(',',$first_cat_tax);
+
+        $second_cat_tax=(wp_get_post_terms($set['SECOND'][0],get_taxonomies()));
+        foreach ($second_cat_tax as $key => $cat_tax) {                    
+            $second_cat_tax[$key]=$cat_tax->term_taxonomy_id;
+        }
+        $second_cat_tax=implode(',',$second_cat_tax);
+
+        if(empty($first_cat_tax) or empty($second_cat_tax)) return 0;
+
+        //$query="SELECT `discount` FROM `".$wpdb->prefix."eo_wbc_cat_maps` WHERE  `first_cat_id` in({$first_cat_tax}) and `second_cat_id` in({$second_cat_tax}) or `first_cat_id` in({$second_cat_tax}) and `second_cat_id` in({$first_cat_tax})";                
+        $query = apply_filters('eowbc_product_maps',wp_cache_get( 'cache_maps', 'eo_wbc'));
+        echo $first_cat_tax.'<br/>';
+        echo $second_cat_tax.'<br/>';
+        wbc()->common->pr($query);
+        $query = array_filter($query,function($_map_) use($first_cat_tax,$second_cat_tax) {
+            return ((in_array($_map_['eo_wbc_first_category'],explode(',',$first_cat_tax)) and in_array($_map_['eo_wbc_second_category'],explode(',',$second_cat_tax))) or (in_array($_map_['eo_wbc_first_category'],explode(',',$second_cat_tax)) and in_array($_map_['eo_wbc_second_category'],explode(',',$first_cat_tax))))?true:false;
+        });
+
+        
+        //$discount_rates=$wpdb->get_results($query,'ARRAY_N');
+        $discount_rates = array_column($query,'eo_wbc_add_discount');
+
+        $_first_product = wbc()->wc->eo_wbc_get_product(empty($set['FIRST'][2])?$set['FIRST'][0]:$set['FIRST'][2]);
+        $_second_product = wbc()->wc->eo_wbc_get_product(empty($set['SECOND'][2])?$set['SECOND'][0]:$set['SECOND'][2]);
+
+        $discount = 0;
+
+        if(!empty($_first_product) and !empty($_second_product) and !is_wp_error($_first_product) and !is_wp_error($_second_product)){
+
+            $set_total= $_first_product->get_price() *  $set['FIRST'][1]
+                            +
+                        $_second_product->get_price() * $set['SECOND'][1];
+
+            if(!empty($discount_rates)){
+
+                foreach ($discount_rates as $rate) {
+                    
+                    $discount_value=($set_total * str_replace('%','',$rate[0]))/100;
+
+                    $set_total-=$discount_value;
+                    $discount+=$discount_value;
+                }         
+            }
+        }
+
+        return $discount;
+    }        
 
 	function add_shortcode() {	
 		$this->enque_asset();

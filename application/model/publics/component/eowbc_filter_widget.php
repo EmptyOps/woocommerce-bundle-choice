@@ -141,7 +141,7 @@ class EOWBC_Filter_Widget {
 
 		add_action( 'wp_footer',function(){
 
-			$fg_color=wc()->session->get('EO_WBC_BG_COLOR','#357DFD');
+			$fg_color=wbc()->session->get('EO_WBC_BG_COLOR','#357DFD');
 
 			$active_color=wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active',$fg_color); //get_option('eo_wbc_active_breadcrumb_color',$fg_color);
 			//wp-head here....
@@ -410,37 +410,40 @@ class EOWBC_Filter_Widget {
 	public function product_url() {
 		$url = '';
 		if(!empty(wbc()->sanitize->get('BEGIN')) and !empty(wbc()->sanitize->get('STEP')) and isset($_GET['FIRST']) and isset($_GET['SECOND'])) {
-			$url='?EO_WBC=1'.
-            '&BEGIN='.sanitize_text_field(wbc()->sanitize->get('BEGIN')).
-            '&STEP='.sanitize_text_field(wbc()->sanitize->get('STEP')).                            
-            '&FIRST='.
-            (
-                $this->_category==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/ 
-                    ?
-                ''
-                    :
-                (
-                    !empty(wbc()->sanitize->get('FIRST'))
-                        ? 
-                    sanitize_text_field(wbc()->sanitize->get('FIRST'))
-                        :
-                    ''
-                )
-            ).
-            '&SECOND='.
-            (
-                $this->_category==wbc()->options->get_option('configuration','second_slug')/*get_option('eo_wbc_second_slug')*/
-                    ?
-                ''
-                    :
-                (
-                    !empty(wbc()->sanitize->get('SECOND'))
-                        ?
-                    sanitize_text_field(wbc()->sanitize->get('SECOND'))
-                        :
-                    ''
-                )
-            );	
+
+			$url = '?'.wbc()->common->http_query(
+				array(
+					'EO_WBC'=>1,
+					'BEGIN'=>wbc()->sanitize->get('BEGIN'),
+					'STEP'=>wbc()->sanitize->get('STEP'),
+					'FIRST'=>(
+	                	$this->_category==wbc()->options->get_option('configuration','first_slug')
+			                    ?
+			                ''
+			                    :
+			                (
+			                    !empty(wbc()->sanitize->get('FIRST'))
+			                        ? 
+			                    sanitize_text_field(wbc()->sanitize->get('FIRST'))
+			                        :
+			                    ''
+			                )
+			            ),
+					'SECOND'=>(
+		                $this->_category==wbc()->options->get_option('configuration','second_slug')
+			                    ?
+			                ''
+			                    :
+			                (
+			                    !empty(wbc()->sanitize->get('SECOND'))
+			                        ?
+			                    sanitize_text_field(wbc()->sanitize->get('SECOND'))
+			                        :
+			                    ''
+			                )
+			            ),
+				)
+			);
 		} 
         return $url;
 	}
@@ -1129,7 +1132,7 @@ class EOWBC_Filter_Widget {
 		$label_size = (isset($font_size)?$font_size:false);
 		$reset = !empty($empty);
 		$child_label = (isset($child_label)?$child_label:false);		
-		$help=(empty(${$__prefix.'_fconfig_add_help'})?${$__prefix.'_fconfig_add_help_text'}:'');		
+		$help=(!empty(${$__prefix.'_fconfig_add_help'})?${$__prefix.'_fconfig_add_help_text'}:'');		
 		$hidden = !empty($hidden);
 		
 		global $woocommerce;
@@ -1445,6 +1448,22 @@ class EOWBC_Filter_Widget {
 			$prefix = "s";
 		}	
 
+		$filter =  apply_filters( 'eowbc_filter_widget_filters',$filter,$prefix);
+		$is_cleanup = apply_filters( 'eowbc_filter_widget_is_reset_cleanup',1);
+		
+
+		if($is_cleanup and !empty($filter) and is_array($filter)) {
+			$new_filters = array();
+			foreach ($filter as $filter_key => $filter_value) {				
+				if(empty($filter_value[$prefix.'_fconfig_builder'])) {
+					
+					$new_filters[$filter_key] = $filter_value;			
+				}		
+			}			
+
+			$filter = $new_filters;
+		}
+
 		//Hidden input filter lists.
 		$this->__filters=array();
 		$this->__prefix = $prefix;
@@ -1478,7 +1497,7 @@ class EOWBC_Filter_Widget {
 			return !empty($filter_element[$prefix.'_fconfig_add_enabled']);
 		});
 
-		$filter =  apply_filters( 'eowbc_filter_widget_filters',$filter);
+		//$filter =  apply_filters( 'eowbc_filter_widget_filters',$filter);
 
 		foreach ($filter as $key => $item) {
 			/*if(empty($item[$prefix.'_fconfig_add_enabled'])){

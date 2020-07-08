@@ -22,9 +22,9 @@ class Cart {
             $this->eo_wbc_remove();
         }     
 
-        if(WC()->session->get('EO_WBC_SETS'))//Destroy EO_WBC_SETS data if session is available
+        if(wbc()->session->get('EO_WBC_SETS'))//Destroy EO_WBC_SETS data if session is available
         {
-            WC()->session->set('EO_WBC_SETS',NULL);
+            wbc()->session->set('EO_WBC_SETS',NULL);
         }
 
         if(isset($_GET['empty_cart']) && wbc()->sanitize->get('empty_cart')==1){
@@ -38,10 +38,10 @@ class Cart {
    
     public function eo_wbc_remove(){
     
-        $eo_wbc_maps=WC()->session->get('EO_WBC_MAPS',array());   
+        $eo_wbc_maps=wbc()->session->get('EO_WBC_MAPS',array());   
         if(isset($eo_wbc_maps[wbc()->sanitize->get('EO_WBC_REMOVE')])) {
             unset($eo_wbc_maps[wbc()->sanitize->get('EO_WBC_REMOVE')]);
-            WC()->session->set('EO_WBC_MAPS',$eo_wbc_maps);
+            wbc()->session->set('EO_WBC_MAPS',$eo_wbc_maps);
                         
             //Reload cart data
             WC()->cart->empty_cart();           
@@ -71,9 +71,9 @@ class Cart {
     
     public function eo_wbc_empty_cart(){
         //empty cart on user request
-        WC()->session->set('EO_WBC_SETS',NULL);
-        WC()->session->set('EO_WBC_MAPS',NULL);
-        WC()->session->set('EO_WBC_CART',NULL);
+        wbc()->session->set('EO_WBC_SETS',NULL);
+        wbc()->session->set('EO_WBC_MAPS',NULL);
+        wbc()->session->set('EO_WBC_CART',NULL);
         WC()->cart->empty_cart();
         exit(wp_redirect(wbc()->wc->eo_wbc_get_cart_url()));
     }
@@ -91,7 +91,7 @@ class Cart {
     
     public function eo_wbc_cart_service()
     {       
-        $eo_wbc_maps=WC()->session->get('EO_WBC_MAPS',array());
+        $eo_wbc_maps=wbc()->session->get('EO_WBC_MAPS',array());
         foreach (wc()->cart->cart_contents as $cart_key=>$cart_item)
         {
             $product_count=0;
@@ -157,7 +157,7 @@ class Cart {
                 );
             }
         }
-        WC()->session->set('EO_WBC_MAPS',apply_filters('eowbc_cart_render_maps',$eo_wbc_maps));      
+        wbc()->session->set('EO_WBC_MAPS',apply_filters('eowbc_cart_render_maps',$eo_wbc_maps));      
 
     }
     
@@ -216,7 +216,7 @@ class Cart {
                     }                    
                 </style>
             <?php 
-            $maps=WC()->session->get('EO_WBC_MAPS');
+            $maps=wbc()->session->get('EO_WBC_MAPS');
             foreach ($maps as $index=>$map){
                 
                 $this->eo_wbc_cart_ui($index,$map);               

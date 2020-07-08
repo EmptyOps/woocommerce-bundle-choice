@@ -106,13 +106,13 @@ class Cache_Manager {
 			 	}
 			 	
 			 	if(count($first_part)>1) {			 		
-					$map[0] = $this->terms_between(EO_WBC_Support::get_term_by_term_taxonomy_id($first_part[0])->taxonomy,$first_part[0],$first_part[1]);			 		
+					$map[0] = $this->terms_between(wbc()->wc->get_term_by_term_taxonomy_id($first_part[0])->taxonomy,$first_part[0],$first_part[1]);			 		
 			 	} else {
 			 		$map[0] = $first_part;
 			 	}
 
 			 	if(count($second_part)>1) {			 		
-					$map[1] = $this->terms_between(EO_WBC_Support::get_term_by_term_taxonomy_id($second_part[0])->taxonomy,$second_part[0],$second_part[1]);			 		
+					$map[1] = $this->terms_between(wbc()->wc->get_term_by_term_taxonomy_id($second_part[0])->taxonomy,$second_part[0],$second_part[1]);			 		
 			 	} else {
 			 		$map[1] = $second_part;
 			 	}

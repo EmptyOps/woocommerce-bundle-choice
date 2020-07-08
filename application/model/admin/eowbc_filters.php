@@ -35,6 +35,7 @@ class Eowbc_Filters {
 				if( $fv["type"] == "table" ) {
 					// wbc()->options->update_option_group( 'filters_'.$key, serialize(array()) );
 					$filter_data = unserialize(wbc()->options->get_option_group('filters_'.$key,"a:0:{}"));
+					
 					// wbc()->common->pr($form_definition, false, false);
 					// wbc()->common->pr($filter_data, false, false);
 
@@ -141,6 +142,9 @@ class Eowbc_Filters {
 							$ids[] = $filter_key;
 						}
 					}
+					
+					$ids = apply_filters('eowbc_admin_form_filters_save_changable_ids', $ids, $filter_data,$_POST['first_category_altr_filt_widgts']);
+
 					if(empty($ids)) {
 						wbc()->load->model('admin/sample_data/eowbc_filter_samples');
 						$sample = \eo\wbc\model\admin\sample_data\Filter_Samples::instance();
@@ -180,6 +184,7 @@ class Eowbc_Filters {
 							$ids[] = $filter_key;							
 						}
 					}
+					$ids = apply_filters('eowbc_admin_form_filters_save_changable_ids', $ids, $filter_data,$_POST['second_category_altr_filt_widgts']);
 					if(empty($ids)){
 						wbc()->load->model('admin/sample_data/eowbc_filter_samples');
 						$sample = \eo\wbc\model\admin\sample_data\Filter_Samples::instance();
@@ -233,9 +238,9 @@ class Eowbc_Filters {
 			    		if( $fk == "d_fconfig_ordering" || $fk == "s_fconfig_ordering" )  {
 			    			
 			    			if($fk=='d_fconfig_ordering' and !empty($_POST['first_category_altr_filt_widgts'])){
-			    				$table_data['filter_template'] = $_POST['first_category_altr_filt_widgts'];
+			    				$table_data['filter_template'] = apply_filters('eowbc_admin_form_filters_save_d_filter_template',$_POST['first_category_altr_filt_widgts']);
 			    			} elseif ($fk == "s_fconfig_ordering" and !empty($_POST['second_category_altr_filt_widgts'])) {
-			    				$table_data['filter_template'] = $_POST['second_category_altr_filt_widgts'];
+			    				$table_data['filter_template'] = apply_filters('eowbc_admin_form_filters_save_s_filter_template',$_POST['second_category_altr_filt_widgts']);
 			    			}
 
 				    		$table_data[$fk] = (int)$_POST[$fk]; 	

@@ -73,7 +73,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 										'val' => '',
 										'is_checkbox' => true, 
 										'sanitize'=>'sanitize_text_field',
-										'checkbox'=> array('id'=>'dummy','value'=>array(),'options'=>array('row0_col0_chk'=>''),'class'=>'','where'=>'in_table')
+										'checkbox'=> array('id'=>'dummy','value'=>array(),'options'=>array('row0_col0_chk'=>''),'options_attrs'=>array('row0_col0_chk'=>array('data-action="bulk_select_all"', 'data-bulk_table_id="'.$table["id"].'"')),'class'=>'','where'=>'in_table')
 									),
 									1=>array(
 										'is_header' => 1, 
@@ -329,6 +329,8 @@ if ( ! class_exists( 'Mapping' ) ) {
 					),
 				
 			);
+			
+			$form_definition = apply_filters('eowbc_admin_form_mapping',$form_definition);
 
 			if($is_add_sample_values) {
 				//loop through form tabs and set (random) sample values for each field  

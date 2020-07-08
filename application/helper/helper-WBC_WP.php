@@ -125,4 +125,12 @@ class WBC_WP {
     public function sanitize_hex_color($param){
         return sanitize_hex_color($param);
     }
+
+    public function cat_id2slug($id) {
+        if(term_exists($id,'product_cat')) {
+            return get_term_by('id',$id,'product_cat')->slug;
+        } else {
+            return false;
+        }         
+    }
 }

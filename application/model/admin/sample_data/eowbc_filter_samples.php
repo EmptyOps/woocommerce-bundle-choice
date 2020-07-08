@@ -89,6 +89,8 @@ class Filter_Samples {
 	                $_POST[$prefix.'_fconfig_add_help_text']=$filter['help_text'];
 	                $_POST[$prefix.'_fconfig_add_enabled']=$filter['enabled'];
 
+                    do_action('eowbc_filter_sample_data_pre',$prefix);
+
         			// update_option($index,serialize($_data)); 
         			// wbc()->options->update_option_group( 'filters_'.$index, serialize($_data) );
         			
@@ -111,6 +113,8 @@ class Filter_Samples {
 	                unset($_POST[$prefix.'_fconfig_add_help']);
 	                unset($_POST[$prefix.'_fconfig_add_help_text']);
 	                unset($_POST[$prefix.'_fconfig_add_enabled']);
+
+                    do_action('eowbc_filter_sample_data_post',$prefix);
 
         		// }
         	}

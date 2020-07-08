@@ -45,6 +45,7 @@ class EOWBC_Breadcrumb
         }
 
         $preview_name = wbc()->options->get_option('configuration','preview_name');
+        
         if(is_wp_error($preview_name) or empty($preview_name)){
             self::$preview_name = apply_filters('eowbc_breadcrumb_preview_name','Preview');
         } else {
@@ -57,8 +58,8 @@ class EOWBC_Breadcrumb
         
         self::$preview_icon = apply_filters('eowbc_breadcrumb_preview_icon',$model_images->id2url(wbc()->options->get_option('configuration','preview_icon')));
 
-        $set=apply_filters('eowbc_breadcrumb_set',WC()->session->get('EO_WBC_SETS',FALSE));
-        $tmp_set=apply_filters('eowbc_breadcrumb_tmp_set',WC()->session->get('TMP_EO_WBC_SETS',FALSE));
+        $set=apply_filters('eowbc_breadcrumb_set',wbc()->session->get('EO_WBC_SETS',FALSE));
+        $tmp_set=apply_filters('eowbc_breadcrumb_tmp_set',wbc()->session->get('TMP_EO_WBC_SETS',FALSE));
 
         if(!empty($set) and !is_wp_error($set)){
 
@@ -144,8 +145,7 @@ class EOWBC_Breadcrumb
             ?>          
             <div 
                 data-href="<?php echo (  (empty(wbc()->sanitize->get('EO_CHANGE')) XOR empty(wbc()->sanitize->get('EO_VIEW'))) &&  !empty( wbc()->sanitize->get('FIRST')) && !empty(wbc()->sanitize->get('SECOND')) ? get_bloginfo('url').'/index.php'.wbc()->options->get_option('configuration','review_page')
-                    .'?EO_WBC=1&BEGIN='.wbc()->sanitize->get('BEGIN')
-                    .'&STEP=3&FIRST='.wbc()->sanitize->get('FIRST').'&SECOND='.wbc()->sanitize->get('SECOND'):'#' ); ?>" 
+                    .'?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>3,'FIRST'=>wbc()->sanitize->get('FIRST'),'SECOND'=>wbc()->sanitize->get('SECOND'))):'#' ); ?>" 
                 class="<?php echo (($step==3)?'active ':(($step>3)?'completed ':'disabled')); ?> step">
                 <div class="content"><?php echo self::$preview_name/*get_option('eo_wbc_collection_title','Preview')*/; ?></div>
             </div>
@@ -185,69 +185,25 @@ class EOWBC_Breadcrumb
                 {
                     $html.=self::eo_wbc_breadcumb_second_html($step,1).self::eo_wbc_breadcumb_first_html($step,2);
                 }
-	       }
+	        }
+           
                 $html.='<div data-href="'.( (empty(wbc()->sanitize->get('EO_CHANGE')) XOR empty(wbc()->sanitize->get('EO_VIEW')) ) && !empty(wbc()->sanitize->get('FIRST')) && !empty(wbc()->sanitize->get('SECOND'))?get_bloginfo('url').'/index.php'
                     .wbc()->options->get_option('configuration','review_page')/*get_option('eo_wbc_review_page')*/
-                    .'?EO_WBC=1&BEGIN='.sanitize_text_field(wbc()->sanitize->get('BEGIN'))
-                    .'&STEP=3&FIRST='.sanitize_text_field(wbc()->sanitize->get('FIRST')).'&SECOND='.sanitize_text_field(wbc()->sanitize->get('SECOND')):'#' ).'" class="'.(($step==3)?'active ':((!(empty(self::$first) and empty(self::$second)))?'completed ':'disabled')).' step" onclick="window.location.href=jQuery(this).data(\'href\');">';
+                    .'?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>3,'FIRST'=>wbc()->sanitize->get('FIRST'),'SECOND'=>wbc()->sanitize->get('SECOND'))):'#' ).'" class="'.(($step==3)?'active ':((!(empty(self::$first) and empty(self::$second)))?'completed ':'disabled')).' step" onclick="window.location.href=jQuery(this).data(\'href\');">';
                         ob_start();
-                        if(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_2') {
-                            ?>
+                        if(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_2') {                            
                             
-                            <div class="ui equal width middle aligned grid" style="width: 100%;padding-top: 0px;text-transform:none;font-family: 'ZapfHumanist601BT-Roman';">        
+                            wbc()->load->template('publics/breadcrumb/final_step_alternate_desktop_2',array('preview_name'=>self::$preview_name,'preview_icon'=>self::$preview_icon));
 
-                                <div class="ui column left aligned">3</div>
-                                <div class="ui column left aligned">
-                                    <div class="title">Complete <?php _e(self::$preview_name); ?></div>
-                                </div>
-                                <div class="ui column mini image left aligned" style="padding-top: 0px;padding-bottom: 0px;<?php echo empty(self::$preview_icon)?'visibility: hidden;':''; ?>">
-                                    <img src = '<?php _e(self::$preview_icon); ?>' class='ui mini image'/>
-                                </div>
-                            </div>        
                             
-                            <?php
                         } elseif(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_1') {
-                            ?>
-                            <div class="ui equal width grid" style="width: 100%;margin-top: -1em !important;">
+
+                            wbc()->load->template('publics/breadcrumb/final_step_alternate_desktop_1',array('preview_name'=>self::$preview_name,'preview_icon'=>self::$preview_icon));
                             
-                                <div class="column">3</div>
-                                <div class="column" style="text-align: left;">
-                                    <div class="description">Complete</div>
-                                    <div class="title"><?php echo self::$preview_name; ?></div>
-                                    <div>&nbsp;</div>
-                                </div>                                                                     
-                                <div class="column " style="<?php echo empty(self::$preview_icon)?'visibility: hidden;':''; ?>"><img src="<?php echo self::$preview_icon; ?>" style="margin: auto auto;"/></div>                            
-                            </div>
-                            <?php
-                        } else {
-                            ?>                        
-                            <div class="ui equal width grid" style="width: 100%;margin-top: -2em !important;">
-                                <div class="ui grid">
-                                    <div class="column">3</div>
-                                    <div class="column" style="text-align: left;">
-                                        <div class="description">Complete</div>
-                                        <div class="title"><?php echo self::$preview_name; ?></div>
-                                    </div>             
-                                </div>               
-                                <div class="column ">
-                                    <div class="title" style="text-align: center;">
-                                    <?php 
-                                        if(!empty(self::$first) and !empty(self::$second)){
-                                            $first_price = self::$first->get_price() * ( !empty(self::$set['FIRST'][1]) ? self::$set['FIRST'][1]:self::$tmp_set['FIRST'][1] );
-
-                                        $second_price = self::$second->get_price() * ( !empty(self::$set['SECOND'][1]) ? self::$set['SECOND'][1]:self::$tmp_set['SECOND'][1] );
-
-                                            _e(wc_price($first_price + $second_price));
-                                        
-                                    }
-                                ?>
-                                </div>
-                            </div>
-                            <div class="column" <?php echo empty(wp_get_attachment_url(wbc()->options->get_option('configuration','preview_icon')/*get_option('eo_wbc_collection_icon')*/))?'style="visibility: hidden;"':""; ?>><img src="<?php echo self::$preview_icon/*get_option('eo_wbc_collection_icon')*/; ?>" style="margin: auto auto;<?php echo empty(self::$preview_icon)?'visibility: hidden;':''; ?>"/></div>                            
-                        </div>                        
-                        <?php
+                        } else {                            
+                           wbc()->load->template('publics/breadcrumb/final_step_desktop',array('preview_name'=>self::$preview_name,'preview_icon'=>self::$preview_icon,'first'=>self::$first,'second'=>self::$second,'set'=>self::$set,'tmp_set'=>self::$tmp_set));
                         }
-                        $html.=ob_get_clean();
+                $html.=ob_get_clean();
                 $html.='</div>';
             $html.='</div>';
         $html.='</div>';
@@ -306,20 +262,12 @@ class EOWBC_Breadcrumb
         if(self::eo_wbc_breadcrumb_get_category($product_id)==self::$first_slug/*get_option('eo_wbc_first_slug')*/){
 
             return get_permalink($product_id).
-                '?EO_WBC=1&BEGIN='.sanitize_text_field(wbc()->sanitize->get('BEGIN')).
-                '&STEP='.sanitize_text_field($order).
-                '&FIRST='.sanitize_text_field(empty(wbc()->sanitize->get('FIRST'))?'':wbc()->sanitize->get('FIRST')).
-                '&SECOND='.sanitize_text_field(empty(wbc()->sanitize->get('SECOND'))?'':wbc()->sanitize->get('SECOND')).
-                '&EO_VIEW=1';
+                '?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>sanitize_text_field($order),'FIRST'=>sanitize_text_field(empty(wbc()->sanitize->get('FIRST'))?'':wbc()->sanitize->get('FIRST')),'SECOND'=>sanitize_text_field(empty(wbc()->sanitize->get('SECOND'))?'':wbc()->sanitize->get('SECOND')),'EO_VIEW'=>1));
         }
         elseif (self::eo_wbc_breadcrumb_get_category($product_id)==self::$second_slug/*get_option('eo_wbc_second_slug')*/) {
 
             return get_permalink($product_id).
-                '?EO_WBC=1&BEGIN='.sanitize_text_field(wbc()->sanitize->get('BEGIN')).
-                '&STEP='.sanitize_text_field($order).
-                '&FIRST='.sanitize_text_field(empty(wbc()->sanitize->get('FIRST'))?'':wbc()->sanitize->get('FIRST')).
-                '&SECOND='.sanitize_text_field(empty(wbc()->sanitize->get('SECOND'))?'':wbc()->sanitize->get('SECOND')).
-                '&EO_VIEW=1';
+                '?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>sanitize_text_field($order),'FIRST'=>sanitize_text_field(empty(wbc()->sanitize->get('FIRST'))?'':wbc()->sanitize->get('FIRST')),'SECOND'=>sanitize_text_field(empty(wbc()->sanitize->get('SECOND'))?'':wbc()->sanitize->get('SECOND')),'EO_VIEW'=>1));
         } 
     } 
 
@@ -327,8 +275,8 @@ class EOWBC_Breadcrumb
         $url='';
 
         $chage_product_id=$product_id;
-        if(WC()->session->get('TMP_EO_WBC_SETS',FALSE)) {            
-            $_session_set=WC()->session->get('TMP_EO_WBC_SETS',FALSE);
+        if(wbc()->session->get('TMP_EO_WBC_SETS',FALSE)) {            
+            $_session_set=wbc()->session->get('TMP_EO_WBC_SETS',FALSE);
             if(!($_session_set['FIRST'][0]==$chage_product_id && $_session_set['SECOND'][0]==$chage_product_id)){
                 if($_session_set['FIRST'][2]==$chage_product_id){
                     $chage_product_id=$_session_set['FIRST'][0];
@@ -349,11 +297,7 @@ class EOWBC_Breadcrumb
                 // /*'&FIRST='.sanitize_text_field(empty($_GET['FIRST'])?'':$_GET['FIRST']).
                 // '&SECOND='.sanitize_text_field(empty($_GET['SECOND'])?'':$_GET['SECOND']).*/
                 // '&EO_CHANGE=1';
-                $url=$first_url.'EO_WBC=1&BEGIN='.self::$first_slug/*get_option('eo_wbc_first_slug')*/.
-                '&STEP=1'.
-                /*'&FIRST='.sanitize_text_field(empty($_GET['FIRST'])?'':$_GET['FIRST']).
-                '&SECOND='.sanitize_text_field(empty($_GET['SECOND'])?'':$_GET['SECOND']).*/
-                '&EO_CHANGE=1';
+                $url=$first_url.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>self::$first_slug,'STEP'=>1,'EO_CHANGE'=>1));
             }
             elseif (self::eo_wbc_breadcrumb_get_category($chage_product_id)==self::$second_slug/*get_option('eo_wbc_second_slug')*/) {
 
@@ -364,11 +308,7 @@ class EOWBC_Breadcrumb
                 // /*'&FIRST='.sanitize_text_field(empty($_GET['FIRST'])?'':$_GET['FIRST']).
                 // '&SECOND='.sanitize_text_field(empty($_GET['SECOND'])?'':$_GET['SECOND']).*/
                 // '&EO_CHANGE=1';
-                $url=$second_url.'EO_WBC=1&BEGIN='.self::$second_slug/*get_option('eo_wbc_second_slug')*/.
-                '&STEP=1'.
-                /*'&FIRST='.sanitize_text_field(empty($_GET['FIRST'])?'':$_GET['FIRST']).
-                '&SECOND='.sanitize_text_field(empty($_GET['SECOND'])?'':$_GET['SECOND']).*/
-                '&EO_CHANGE=1';
+                $url=$second_url.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>self::$second_slug,'STEP'=>1,'EO_CHANGE'=>1));
             }            
         }
         elseif ($order==2) {
@@ -535,8 +475,7 @@ class EOWBC_Breadcrumb
             }        
 
             $url=get_bloginfo('url').'/index.php'.'/product-category/'.$link
-                        .'EO_WBC=1&BEGIN='.sanitize_text_field(@wbc()->sanitize->get('BEGIN'))
-                        .'&STEP=2&FIRST='.(wbc()->sanitize->get('BEGIN')==self::$first_slug/*get_option('eo_wbc_first_slug')*/? sanitize_text_field(wbc()->sanitize->get('FIRST')):'').'&SECOND='.(wbc()->sanitize->get('BEGIN')==self::$second_slug/*get_option('eo_wbc_second_slug')*/?sanitize_text_field(wbc()->sanitize->get('SECOND')):'').'&EO_CHANGE=1'.'&CAT_LINK='.$cat_link;            
+                        .wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>(@wbc()->sanitize->get('BEGIN')),'STEP'=>2,'FIRST'=>(wbc()->sanitize->get('BEGIN')==self::$first_slug? sanitize_text_field(wbc()->sanitize->get('FIRST')):''),'SECOND'=>(wbc()->sanitize->get('BEGIN')==self::$second_slug?sanitize_text_field(wbc()->sanitize->get('SECOND')):''),'EO_CHANGE'=>1,'CAT_LINK'=>$cat_link));            
                         
             if(!empty($category) && is_array($category)) {
                 $category = array_filter($category);
@@ -550,8 +489,10 @@ class EOWBC_Breadcrumb
 
     private static function eo_wbc_breadcrumb_get_category($product_id)
     {   
-        $terms = get_the_terms( $product_id, 'product_cat' );
+        return wbc()->common->get_category('product',$product_id,array(self::$first_slug,self::$second_slug));
 
+
+        $terms = get_the_terms( $product_id, 'product_cat' );
        
         $term_slug=[];
         if(!empty($terms)){

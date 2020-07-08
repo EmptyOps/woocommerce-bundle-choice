@@ -10779,7 +10779,7 @@ class Eowbc_Jewelry {
 						    'post_status'  => 'publish',
 						    'post_parent'  => $parent_id,
 						    'post_type'    => 'product_variation',
-						    'guid'        => EO_WBC_Support::eo_wbc_get_product($parent_id)->get_permalink()
+						    'guid'        => wbc()->wc->eo_wbc_get_product($parent_id)->get_permalink()
 						);						
 
 						$variation_id = wp_insert_post( $variation_data );

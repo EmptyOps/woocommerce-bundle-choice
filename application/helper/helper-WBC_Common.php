@@ -13,6 +13,62 @@ class WBC_Common {
 		return self::$_instance;
 	}
 
+	public function get_category($page='product',int $post_id = null,array $in_category=array()){
+		$in_category = apply_filters('eoowbc_helper_common_get_category_in_category',$in_category);		
+		$page = apply_filters('eoowbc_helper_common_get_category_page',$page);
+		$post_id = apply_filters('eoowbc_helper_common_get_category_post_id',$post_id);
+		$return_category = '';
+		if($page == 'category' ) {
+			global $wp_query;
+			if(!empty($in_category) and is_array($in_category)) {
+				$term_slug=array_map(array(wbc()->wp,"cat_id2slug"),get_ancestors($wp_query->get_queried_object()->term_id, 'product_cat'));				
+				$term_slug[]=$wp_query->get_queried_object()->slug;					
+				$matches = array_intersect($in_category,$term_slug);				
+				if(!empty($matches) and is_array($matches)){
+					$matches = array_values($matches);					
+					$return_category = $matches[0];
+				} else {
+					$return_category = '';
+				}
+			} else {
+				$return_category = $wp_query->get_queried_object()->slug;	
+			}			
+		} elseif( $page == 'product' and !empty($post_id) and !empty($in_category) and is_array($in_category) ) {
+			$post = wbc()->wc->eo_wbc_get_product($post_id);
+			$return_category = $this->get_product_category($post, $in_category);
+		} else {
+			$return_category = false;
+		}		
+
+		$return_category = apply_filters('eoowbc_helper_common_get_category_return_category',$return_category);
+		return $return_category;
+	}
+
+	public function get_product_category($post,$in_category) {
+		if(!empty($post) and !empty($in_category) and is_array($in_category)){
+
+			$ancestors = array();
+			$ids = $post->get_category_ids();
+			if(!empty($ids) and is_array($ids)){
+				foreach ($ids as $id) {
+					$ancestors = array_merge($ancestors,get_ancestors($id,'product_cat'));	
+				}				
+			}
+
+			$term_slug=array_map(array(wbc()->wp,"cat_id2slug"),$ancestors);				
+
+			$matches = array_intersect($in_category,$term_slug);				
+			if(!empty($matches) and is_array($matches)){					
+				$matches = array_values($matches);
+				return $matches[0];
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+
 	public function pr(array $ar,$force_debug = false,$die = false) {
 		//TODO yet to implement optional arg force_debug
 
@@ -181,6 +237,11 @@ class WBC_Common {
         }
         
         return $resultArray;
+    }
+
+    public function http_query($param){
+    	$param = apply_filters('eowbc_helper_http_query',$param);
+    	return http_build_query($param);
     }
 
 }

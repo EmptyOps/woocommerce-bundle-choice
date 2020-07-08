@@ -34,7 +34,7 @@ class Eowbc_Mapping {
 				if( $fv["type"] == "table" ) {
 					// wbc()->options->update_option_group( 'mapping_'.$key, serialize(array()) );
 					$mapping_data = unserialize(wbc()->options->get_option_group('mapping_'.$key,"a:0:{}"));
-					// wbc()->common->pr($mapping_data, false, false);
+					//wbc()->common->pr($mapping_data, false, false);
 
 					$body = array();
 					foreach ($mapping_data as $rk => $rv) {

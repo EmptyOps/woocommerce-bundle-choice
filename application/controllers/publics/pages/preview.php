@@ -65,8 +65,8 @@ class Preview {
     
     public function eo_wbc_add_this_to_cart()
     {
-        $eo_wbc_sets=WC()->session->get('EO_WBC_SETS',NULL);
-        $eo_wbc_maps=WC()->session->get('EO_WBC_MAPS',array());
+        $eo_wbc_sets=wbc()->session->get('EO_WBC_SETS',NULL);
+        $eo_wbc_maps=wbc()->session->get('EO_WBC_MAPS',array());
         
         if(!is_null($eo_wbc_sets)){
             
@@ -140,7 +140,7 @@ class Preview {
                 }
             } 
             //adding set to the woocommerce cart
-            $cart_details=WC()->session->get('EO_WBC_SETS');
+            $cart_details=wbc()->session->get('EO_WBC_SETS');
             if(!empty($cart_details['FIRST']) && !empty($cart_details['SECOND'])){
                 $FIRT_CART_ID=wc()->cart->add_to_cart(
                                 $cart_details['FIRST'][0],
@@ -159,8 +159,8 @@ class Preview {
                     if($SECOND_CART_ID)
                     {
                         //All is good so we saved mapps to session.
-                        $eo_wbc_maps[]=WC()->session->get('EO_WBC_SETS');                            
-                        WC()->session->set('EO_WBC_MAPS',$eo_wbc_maps);
+                        $eo_wbc_maps[]=wbc()->session->get('EO_WBC_SETS');                            
+                        wbc()->session->set('EO_WBC_MAPS',$eo_wbc_maps);
                     }
                     else
                     {
@@ -194,7 +194,7 @@ class Preview {
             if(is_array($cart) OR is_object($cart)){
 
                 //if product belongs to first target;
-                $eo_wbc_sets=WC()->session->get('EO_WBC_SETS',array());                
+                $eo_wbc_sets=wbc()->session->get('EO_WBC_SETS',array());                
                 // if (get_option('eo_wbc_first_slug')==$cart['eo_wbc_target']) {
                 if (wbc()->options->get_option('configuration','first_slug')==$cart['eo_wbc_target']) {
 
@@ -214,7 +214,7 @@ class Preview {
                                         (isset($cart['variation_id'])?$cart['variation_id']:NULL)                                            
                                     );
                 }
-                WC()->session->set('EO_WBC_SETS',$eo_wbc_sets);
+                wbc()->session->set('EO_WBC_SETS',$eo_wbc_sets);
             }
         }
         
@@ -247,15 +247,15 @@ class Preview {
             }                        
             
             //Add session set data to temporary iff the set data is not empty.
-            if(WC()->session->get('EO_WBC_SETS',FALSE)) {
+            if(wbc()->session->get('EO_WBC_SETS',FALSE)) {
                 
-                $_session_set=WC()->session->get('EO_WBC_SETS',FALSE);
+                $_session_set=wbc()->session->get('EO_WBC_SETS',FALSE);
                 if(!empty($_session_set['FIRST']) && !empty($_session_set['SECOND']) ){
-                    WC()->session->set('TMP_EO_WBC_SETS',WC()->session->get('EO_WBC_SETS'));
+                    wbc()->session->set('TMP_EO_WBC_SETS',wbc()->session->get('EO_WBC_SETS'));
                 }
             }
             
-            $set=WC()->session->get('TMP_EO_WBC_SETS',FALSE);                        
+            $set=wbc()->session->get('TMP_EO_WBC_SETS',FALSE);                        
             if(!empty($set)){
 
                 $first=wbc()->wc->eo_wbc_get_product((int)($set['FIRST'][2]?$set['FIRST'][2]:$set['FIRST'][0]));
@@ -311,7 +311,7 @@ class Preview {
                 '</div>'.
                 '<div class="ui row" style="display:grid !important;"><form action="" method="post" class="woocommerce" style="float:right;margin-top: 1.5em;display:grid !important;">'.
                     '<input type="hidden" name="add_to_cart" value=1>'.
-                    '<button class="ui button right floated aligned" style="background-color:'.wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active',wc()->session->get('EO_WBC_BG_COLOR',FALSE))/*get_option('eo_wbc_active_breadcrumb_color',wc()->session->get('EO_WBC_BG_COLOR',FALSE))*/.'">'.__('Add This To Cart','woo-bundle-choice').
+                    '<button class="ui button right floated aligned" style="background-color:'.wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active',wbc()->session->get('EO_WBC_BG_COLOR',FALSE))/*get_option('eo_wbc_active_breadcrumb_color',wbc()->session->get('EO_WBC_BG_COLOR',FALSE))*/.'">'.__('Add This To Cart','woo-bundle-choice').
                     '</button>'.
                 '</form></div>';                
                 add_filter('the_content',function() use($content){

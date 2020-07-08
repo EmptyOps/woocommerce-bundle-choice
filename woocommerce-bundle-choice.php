@@ -172,4 +172,13 @@ if(!class_exists('WooCommerce_Bundle_Choice')) {
 	register_activation_hook( __FILE__, 'eo\wbc\WooCommerce_Bundle_Choice_Bootstrap::activate');
 	register_deactivation_hook( __FILE__, 'eo\wbc\WooCommerce_Bundle_Choice_Bootstrap::deactivate');
 	register_uninstall_hook( __FILE__,'eo\wbc\WooCommerce_Bundle_Choice_Bootstrap::uninstall');
+
+	//Add Setting Link adjecent to Plugin Name in Admin's Plugin Panel
+	add_filter('plugin_action_links_'.plugin_basename(__FILE__),function($links){
+	    
+	    $links[] = '<a href="' .
+	        admin_url( 'admin.php?page=eowbc' ) .
+	        '">' . __('Settings','woocommerce-bundle-choice') . '</a>';
+	        return $links;
+	},30);
 }

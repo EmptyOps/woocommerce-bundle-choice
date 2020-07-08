@@ -207,7 +207,7 @@ class Home {
     //moved inside buttons template 
     // public function eo_wbc_clean() { //terminate session bundle set data as use is on home page and rejects all changes.       
     //   if(function_exists('wc') && !empty(wc()->session)){
-    //     wc()->session->set('EO_WBC_SETS',NULL);               
+    //     wbc()->session->set('EO_WBC_SETS',NULL);               
     //   }
     // }
 

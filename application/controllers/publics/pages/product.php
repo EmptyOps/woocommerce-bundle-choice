@@ -59,14 +59,12 @@ class Product {
 
         // if ($category==get_option('eo_wbc_first_slug')) {
         if ($category==wbc()->options->get_option('configuration','first_slug')) {
-            $url=get_permalink($post->ID)
-                .'?EO_WBC=1&BEGIN='.sanitize_text_field($category)
-                .'&STEP=1&FIRST='.$post->ID."&SECOND=&REDIRECT=1";
+            $url=get_permalink($post->ID)                
+                .'?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>sanitize_text_field($category),'STEP'=>1,'FIRST'=>$post->ID,'SECOND'=>'','REDIRECT'=>1));
         // } elseif ($category==get_option('eo_wbc_second_slug')) {
         } elseif ($category==wbc()->options->get_option('configuration','second_slug')) {
             $url=get_permalink($post->ID)
-                .'?EO_WBC=1&BEGIN='.sanitize_text_field($category)
-                .'&STEP=1&FIRST=&SECOND='.$post->ID."&REDIRECT=1";
+                .'?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>sanitize_text_field($category),'STEP'=>1,'FIRST'=>'','SECOND'=>$post->ID,'REDIRECT'=>1));
         } 
         return $url;
     }
@@ -259,19 +257,15 @@ class Product {
                 if($category==wbc()->options->get_option('configuration','first_slug')) {
 
                     $category_link=$this->eo_wbc_category_link();
-                    $url=get_bloginfo('url').'/index.php/product-category/'.$category_link
-                        .'EO_WBC=1&BEGIN='.wbc()->sanitize->get('BEGIN')
-                        .'&STEP=2&FIRST='.$post->ID.'&SECOND='.wbc()->sanitize->get('SECOND')
-                        ."&CART=".wbc()->sanitize->get('CART').'&ATT_LINK='.implode(' ',$this->att_link).'&CAT_LINK='.substr($category_link,0,strpos($category_link,'/'));
+                    $url=get_bloginfo('url').'/index.php/product-category/'.$category_link.
+                    wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>2,'FIRST'=>$post->ID,'SECOND'=>wbc()->sanitize->get('SECOND'),'CART'=>wbc()->sanitize->get('CART'),'ATT_LINK'=>implode(' ',$this->att_link),'CAT_LINK'=>substr($category_link,0,strpos($category_link,'/'))));
 
                 // } elseif($category==get_option('eo_wbc_second_slug')) {
                 } elseif($category==wbc()->options->get_option('configuration','second_slug')) {
 
                     $category_link=$this->eo_wbc_category_link();
                     $url=get_bloginfo('url').'/index.php/product-category/'.$category_link
-                        .'EO_WBC=1&BEGIN='.wbc()->sanitize->get('BEGIN')
-                        .'&STEP=2&FIRST='.wbc()->sanitize->get('FIRST').'&SECOND='.$post->ID
-                        ."&CART=".wbc()->sanitize->get('CART').'&ATT_LINK='.implode(' ',$this->att_link).'&CAT_LINK='.substr($category_link,0,strpos($category_link,'/'));
+                    .wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>2,'FIRST'=>wbc()->sanitize->get('FIRST'),'SECOND'=>$post->ID,'CART'=>wbc()->sanitize->get('CART'),'ATT_LINK'=>implode(' ',$this->att_link),'CAT_LINK'=>substr($category_link,0,strpos($category_link,'/'))));
                 } 
                 
                 return header("Location: {$url}");
@@ -283,15 +277,13 @@ class Product {
                 if($category==wbc()->options->get_option('configuration','first_slug')) {
 
                     $url=get_permalink($post->ID)
-                        .'?EO_WBC=1&BEGIN='.wbc()->sanitize->get('BEGIN')
-                        .'&STEP=1&FIRST='.$post->ID.'&SECOND='.(empty(wbc()->sanitize->get('SECOND'))?'':wbc()->sanitize->get('SECOND'))."&REDIRECT=1";
+                        .'?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>1,'FIRST'=>$post->ID,'SECOND'=>(empty(wbc()->sanitize->get('SECOND'))?'':wbc()->sanitize->get('SECOND')),'REDIRECT'=>1));
 
                 // } elseif($category==get_option('eo_wbc_second_slug')) {
                 } elseif($category==wbc()->options->get_option('configuration','second_slug')) {
 
                     $url=get_permalink($post->ID)
-                        .'?EO_WBC=1&BEGIN='.wbc()->sanitize->get('BEGIN')
-                        .'&STEP=1&FIRST='.(empty(wbc()->sanitize->get('FIRST'))?'':wbc()->sanitize->get('FIRST')).'&SECOND='.$post->ID."&REDIRECT=1";
+                        .'?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>1,'FIRST'=>(empty(wbc()->sanitize->get('FIRST'))?'':wbc()->sanitize->get('FIRST')),'SECOND'=>$post->ID,'REDIRECT'=>1));
                 } else {
                     // well due to some reason could not determine category properly so working based on begin offset recived via _GET.
                     $begin = wbc()->sanitize->get('BEGIN');
@@ -299,14 +291,12 @@ class Product {
                     // if($begin==get_option('eo_wbc_first_slug')){
                     if($begin==wbc()->options->get_option('configuration','first_slug')){
 
-                        $url.= '?EO_WBC=1&BEGIN='.wbc()->sanitize->get('BEGIN')
-                        .'&STEP=1&FIRST='.$post->ID.'&SECOND='.(empty(wbc()->sanitize->get('SECOND'))?'':wbc()->sanitize->get('SECOND'))."&REDIRECT=1";
+                        $url.= '?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>1,'FIRST'=>$post->ID,'SECOND'=>(empty(wbc()->sanitize->get('SECOND'))?'':wbc()->sanitize->get('SECOND')),'REDIRECT'=>1));
 
                     // } elseif($begin==get_option('eo_wbc_second_slug')) {
                     } elseif($begin==wbc()->options->get_option('configuration','second_slug')) {
 
-                        $url.= '?EO_WBC=1&BEGIN='.wbc()->sanitize->get('BEGIN')
-                        .'&STEP=1&FIRST='.(empty(wbc()->sanitize->get('FIRST'))?'':wbc()->sanitize->get('FIRST')).'&SECOND='.$post->ID."&REDIRECT=1";
+                        $url.= '?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>1,'FIRST'=>(empty(wbc()->sanitize->get('FIRST'))?'':wbc()->sanitize->get('FIRST')),'SECOND'=>$post->ID,'REDIRECT'=>1));
                     }                    
                 }
             }            
@@ -327,14 +317,12 @@ class Product {
             if(wbc()->sanitize->get('FIRST')==='' OR $category==wbc()->options->get_option('configuration','first_slug'))
             {
                 $url=$review_page_url
-                    .'?EO_WBC=1&BEGIN='.wbc()->sanitize->get('BEGIN')
-                    .'&STEP=3&FIRST='.$post->ID.'&SECOND='.wbc()->sanitize->get('SECOND');
+                    .'?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>3,'FIRST'=>$post->ID,'SECOND'=>wbc()->sanitize->get('SECOND')));
             }
             elseif (wbc()->sanitize->get('SECOND')==='' OR $category==wbc()->options->get_option('configuration','second_slug'))
             {
                 $url=$review_page_url
-                    .'?EO_WBC=1&BEGIN='.wbc()->sanitize->get('BEGIN')
-                    .'&STEP=3&FIRST='.wbc()->sanitize->get('FIRST').'&SECOND='.$post->ID;
+                    .'?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>3,'FIRST'=>wbc()->sanitize->get('FIRST'),'SECOND'=>$post->ID));
             }
             else
             {
@@ -378,7 +366,21 @@ class Product {
         }
                 
         $terms=wp_get_post_terms($post->ID,get_taxonomies());        
-        $maps = wp_cache_get( 'cache_maps', 'eo_wbc');        
+        $maps = apply_filters('eowbc_product_maps',wp_cache_get( 'cache_maps', 'eo_wbc'));
+
+        $is_cleanup = apply_filters( 'eowbc_product_maps_is_reset_cleanup',1);    
+
+        if($is_cleanup and !empty($maps) and is_array($maps)) {
+            
+            $new_maps = array();            
+            foreach ($maps as $key => $map) {
+                if(empty($map['save_builder'])){
+                    $new_maps[$key] = $map;
+                }                
+            }            
+            $maps = $new_maps;
+        }
+
         $product_in = array();        
         // Gathering all terms for the product that is added to the cart.
         if(!is_wp_error($terms) and !empty($terms) and is_array($terms) and is_array($maps) ){
@@ -538,6 +540,9 @@ class Product {
      * @return string
      */    
     public function eo_wbc_get_category() {
+
+        global $post;
+        return wbc()->common->get_category('product',$post->ID,array(wbc()->options->get_option('configuration','first_slug'),wbc()->options->get_option('configuration','second_slug')));
 
         global $post;
         $__category = false;
