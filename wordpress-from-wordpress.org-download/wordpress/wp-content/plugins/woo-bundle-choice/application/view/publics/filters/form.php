@@ -15,15 +15,15 @@
 		<input type="hidden" name="last_paged" value="1" />
 		<input type="hidden" name="action" value="eo_wbc_filter"/>
 		
-		<input type="hidden" name="_current_category" value="<?php echo (!empty($_GET['CAT_LINK'])?','.sanitize_text_field($_GET['CAT_LINK']):$current_category); ?>" />
+		<input type="hidden" name="_current_category" value="<?php echo (!empty(wbc()->sanitize->get('CAT_LINK'))?','.wbc()->sanitize->get('CAT_LINK'):$current_category); ?>" />
 
 		<input type="hidden" name="_category_query" id="eo_wbc_cat_query" 
-			value="<?php echo (!empty($_GET['CAT_LINK'])?','.sanitize_text_field($_GET['CAT_LINK']):'')?>" />
+			value="<?php echo (!empty(wbc()->sanitize->get('CAT_LINK'))?','.wbc()->sanitize->get('CAT_LINK'):'')?>" />
 
 		<input type="hidden" name="_category" value="<?php echo implode(',',$thisObj->___category) ?>"/>
 		<input type="hidden" name="_attribute" id="eo_wbc_attr_query" value="" />			
-		<?php if(isset($_GET['products_in']) AND !empty($_GET['products_in']) ): ?>
-			<input type="hidden" name="products_in" value="<?php echo $_GET['products_in'] ?>" />			
+		<?php if(isset($_GET['products_in']) AND !empty(wbc()->sanitize->get('products_in')) ): ?>
+			<input type="hidden" name="products_in" value="<?php echo wbc()->sanitize->get('products_in') ?>" />			
 		<?php endif; ?>
 
 		<?php		

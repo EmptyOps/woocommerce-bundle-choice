@@ -30,8 +30,8 @@ class sunob_a_s_bonusFeaturesOptionsUICest
 		$I->see('Toggle Button Enabled?');
 
 		// set fields 
-		$I->executeJS("jQuery('#tiny_features_option_ui_toggle_status').checkbox('set checked');");
-		$I->executeJS("jQuery('#tiny_features_option_ui_toggle_init_status').checkbox('set checked');");
+		$I->executeJS("jQuery('#tiny_features_option_ui_toggle_status').parent().checkbox('set checked', 'tiny_features_option_ui_toggle_status');");
+		$I->executeJS("jQuery('#tiny_features_option_ui_toggle_init_status').parent().checkbox('set checked', 'tiny_features_option_ui_toggle_init_status');");
 		$I->fillField('tiny_features_option_ui_toggle_text', 'CUSTOMIZE AS PER YOUR WISH');
 		$I->fillField('tiny_features_option_ui_option_dimention', '2em');
 

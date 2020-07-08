@@ -32,14 +32,15 @@ class Setup_Wizard {
 		$this->form = 'basic_config';
 		$feature_option = array();
 
-		if(!empty($_GET['_wpnonce']) and wp_verify_nonce(sanitize_text_field($_GET['_wpnonce']),'eo_wbc_setup')){
+		if(!empty(wbc()->sanitize->get('_wpnonce')) and wp_verify_nonce(sanitize_text_field(wbc()->sanitize->get('_wpnonce')),'eo_wbc_setup')){
 			
-			if(!empty($_GET['step'])){
+			if(!empty(wbc()->sanitize->get('step'))){
 				
-				if(sanitize_text_field($_GET['step'])>3 or sanitize_text_field($_GET['step'])<1){ $_GET['step']=1; }
+
+				if(sanitize_text_field(wbc()->sanitize->get('step'))>3 or sanitize_text_field(wbc()->sanitize->get('step'))<1){ $_GET["step"]/*wbc()->sanitize->get('step')*/=1; }
 
 				$forms = array('1' =>'basic_config', '2'=>'feature', '3'=>'finalize');
-				$this->step = sanitize_text_field($_GET['step']);
+				$this->step = wbc()->sanitize->get('step');
 				$this->form = empty($forms[$this->step])?$forms[1]:$forms[$this->step];
 			}
 			$this->action();
@@ -47,7 +48,9 @@ class Setup_Wizard {
 		}
 
 		if( $this->step == 2 ) {
-			$feature_option = unserialize( wbc()->options->get_option('eo_wbc','feature_option',serialize(array())) );	//unserialize(get_option('eo_wbc_feature_option', serialize(array())) );
+
+			$feature_option = unserialize( wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())) );	//unserialize(get_option('eo_wbc_feature_option', serialize(array())) );
+
 		}
 
   //       ob_start();        
@@ -100,14 +103,15 @@ class Setup_Wizard {
 		$this->form = 'basic_config';
 		$feature_option = array();
 
-		if(!empty($_GET['_wpnonce']) and wp_verify_nonce(sanitize_text_field($_GET['_wpnonce']),'eo_wbc_setup')){
+		if(!empty(wbc()->sanitize->get('_wpnonce')) and wp_verify_nonce(wbc()->sanitize->get('_wpnonce'),'eo_wbc_setup')){
 			
-			if(!empty($_GET['step'])){
+			if(!empty(wbc()->sanitize->get('step'))) {
 				
-				if(sanitize_text_field($_GET['step'])>3 or sanitize_text_field($_GET['step'])<1){ $_GET['step']=1; }
+
+				if(sanitize_text_field(wbc()->sanitize->get('step'))>3 or sanitize_text_field(wbc()->sanitize->get('step'))<1){ $_GET["step"]/*wbc()->sanitize->get('step')*/=1; }
 
 				$forms = array('1' =>'basic_config', '2'=>'feature', '3'=>'finalize');
-				$this->step = sanitize_text_field($_GET['step']);
+				$this->step = sanitize_text_field(wbc()->sanitize->get('step'));
 				$this->form = empty($forms[$this->step])?$forms[1]:$forms[$this->step];
 			}
 			$this->action();
@@ -115,7 +119,8 @@ class Setup_Wizard {
 		}
 
 		if( $this->step == 2 ) {
-			$feature_option = unserialize( wbc()->options->get_option('eo_wbc','feature_option',serialize(array())) );	//unserialize(get_option('eo_wbc_feature_option', serialize(array())) );
+
+			$feature_option = unserialize( wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())) );	//unserialize(get_option('eo_wbc_feature_option', serialize(array())) );
 		}
 
 		//06-04-2020: hiren turned off full screen mode enable in future when decided 
@@ -136,9 +141,9 @@ class Setup_Wizard {
 	}
 
 	public function action() {
-		if(!empty($_GET) and !empty($_GET['action'])){
+		if(!empty($_GET) and !empty(wbc()->sanitize->get('action'))) {
 
-			switch(sanitize_text_field($_GET['action'])) {
+			switch(wbc()->sanitize->get('action')) {
 				case 'feature':
 					
 					//on 08-05-2020: hiren changed the feature options that are presented during installation  
@@ -146,14 +151,15 @@ class Setup_Wizard {
 					$options = ['ring_builder','pair_maker','guidance_tool','price_control','filters_on_home','filters_on_shop_cat','opts_uis_on_item_page','spec_view_on_item_page','shortcodes','api_integrations','rapnet_api','glowstar_api'];
 					$feature_option= array();
 					foreach ($options as $option) {
-						if(!empty($_GET[$option])){
+						if(!empty(wbc()->sanitize->get($option))) {
 							array_push($feature_option,$option);							
 						}						
 					}											
 
 					if(!empty($feature_option)){
 						//update_option('eo_wbc_feature_option', serialize($feature_option));
-						wbc()->options->update_option('eo_wbc','feature_option', serialize($feature_option));
+
+						wbc()->options->update_option('setting_status_setting_status_setting','features', serialize($feature_option));
 					}
 
 					break;
@@ -162,9 +168,10 @@ class Setup_Wizard {
 					break;
 				default:
 					//basic_config					
-					if(!empty($_GET['eo_wbc_inventory_type'])){
+					if(!empty(wbc()->sanitize->get('eo_wbc_inventory_type'))) {
 						//update_option( 'eo_wbc_inventory_type',sanitize_text_field($_GET['eo_wbc_inventory_type']));
-						wbc()->options->update_option('eo_wbc','inventory_type', sanitize_text_field($_GET['eo_wbc_inventory_type']));
+
+						wbc()->options->update_option('setting_status_setting_status_setting','inventory_type',wbc()->sanitize->get('eo_wbc_inventory_type'));
 					}					
 			}
 		}
@@ -272,7 +279,7 @@ class Setup_Wizard {
 
 			    	<label><?php _e('Choose features','woo-bundle-choice'); ?></label>
 
-			    	<?php if(sanitize_text_field($_GET['eo_wbc_inventory_type']) == 'jewelry'): ?>	
+			    	<?php if(wbc()->sanitize->get('eo_wbc_inventory_type') == 'jewelry'): ?>	
 		      		<div class="field">
 					    <div class="ui toggle checkbox">
 					      	<input type="checkbox" tabindex="0" class="hidden" name="ring_builder" value="1" <?php echo in_array('ring_builder',$feature_option)?'checked="checked"':''; ?>>
@@ -281,7 +288,7 @@ class Setup_Wizard {
 					</div>
 					<?php endif; ?>
 
-					<?php if(sanitize_text_field($_GET['eo_wbc_inventory_type']) == 'clothing'): ?>	
+					<?php if(wbc()->sanitize->get('eo_wbc_inventory_type') == 'clothing'): ?>	
 		      		<div class=" field">
 					    <div class="ui toggle checkbox">
 					      	<input type="checkbox" tabindex="0" class="hidden" name="pair_maker" value="1" <?php echo in_array('pair_maker',$feature_option)?'checked="checked"':''; ?>>
@@ -290,7 +297,7 @@ class Setup_Wizard {
 					</div>
 					<?php endif; ?>
 		    		
-		    		<?php if(sanitize_text_field($_GET['eo_wbc_inventory_type']) == 'jewelry'): ?>	
+		    		<?php if(wbc()->sanitize->get('eo_wbc_inventory_type') == 'jewelry'): ?>	
 		      		<div class=" field">
 					    <div class="ui toggle checkbox">
 					      	<input type="checkbox" tabindex="0" class="hidden" name="rapnet_api" value="1" <?php echo in_array('rapnet_api',$feature_option)?'checked="checked"':''; ?>>
@@ -306,7 +313,7 @@ class Setup_Wizard {
 					</div>
 					<?php endif; ?>
 
-					<?php if(sanitize_text_field($_GET['eo_wbc_inventory_type']) == 'others' or sanitize_text_field($_GET['eo_wbc_inventory_type']) == 'home_decore'): ?>	
+					<?php if(wbc()->sanitize->get('eo_wbc_inventory_type') == 'others' or wbc()->sanitize->get('eo_wbc_inventory_type') == 'home_decore'): ?>	
 					<div class=" field">
 					    <div class="ui toggle checkbox">
 					      	<input type="checkbox" tabindex="0" class="hidden" name="guidance_tool" value="1" <?php echo in_array('guidance_tool',$feature_option)?'checked="checked"':''; ?>>

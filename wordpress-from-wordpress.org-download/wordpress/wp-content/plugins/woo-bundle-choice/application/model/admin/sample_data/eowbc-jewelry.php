@@ -42,7 +42,7 @@ class Eowbc_Jewelry {
 
 	public function process_post(&$_step, $_category, $_atttriutes) {
 		
-		if(!empty($_GET['type']) and !empty($_GET['eo_wbc_view_auto_jewel']) and $_GET['type']=='remove_filters_automation' and $_GET['eo_wbc_view_auto_jewel']==1){
+		if(!empty(wbc()->sanitize->get('type')) and !empty(wbc()->sanitize->get('eo_wbc_view_auto_jewel')) and wbc()->sanitize->get('type')=='remove_filters_automation' and wbc()->sanitize->get('eo_wbc_view_auto_jewel')==1){
 			wbc()->options->update_option('tiny_feature','filter_widget',serialize(array()));
 			header("Location: ".admin_url('admin.php?page=eowbc-tiny-features')); 
 			exit; 
@@ -144,9 +144,9 @@ class Eowbc_Jewelry {
 			        // update_option('eo_wbc_config_map',1);    
 			        wbc()->options->update_option('configuration','config_map',1);
 			        // update_option('eo_wbc_btn_setting','0');
-			        wbc()->options->set('eo_wbc_btn_setting','0');
+			        wbc()->options->update_option('configuration','buttons_page','0');	//set('eo_wbc_btn_setting','0');
 			        // update_option('eo_wbc_btn_position','begining');
-			        wbc()->options->set('eo_wbc_btn_position','begining');
+			        wbc()->options->set('eo_wbc_btn_position','begining');				//TODO I think its DEPRECATED starting from DP update. remove it if its no loger used. 
 
 			      }
 
@@ -156,11 +156,11 @@ class Eowbc_Jewelry {
 			        // update_option('eo_wbc_attr',serialize($catat_attribute));
 			        wbc()->options->set('eo_wbc_attr',serialize($catat_attribute));
 			        $catat->add_filters();
-			        if(!empty($_GET['type']) and $_GET['type']=='filters_automation'){
+			        if(!empty(wbc()->sanitize->get('type')) and wbc()->sanitize->get('type')=='filters_automation'){
 			        	$catat->add_filters_custom_filter();	
 			        }			        
 			        // update_option('eo_wbc_filter_enable','1');     
-			        wbc()->options->update_option('configuration','filter_status','1');
+			        wbc()->options->update_option('filters_filter_setting','filter_setting_status','1');
 			      } 
 			  
 			  ///////////////////////////////////////////////////////////////////////
@@ -228,7 +228,7 @@ class Eowbc_Jewelry {
 	}
 	
 	public function CatAtData__construct(){
-			$_img_url=constant('EOWBC_ASSET_URL').'icon/sample_data/jewelry/';	//EO_WBC_PLUGIN_DIR.'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/';
+			$_img_url=constant('EOWBC_ASSET_URL').'img/sample_data/jewelry/';	//EO_WBC_PLUGIN_DIR.'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/';
 			$this->gallay_img = $_img_url. 'Products/';
 			$this->product= array(
             array(
@@ -10779,7 +10779,7 @@ class Eowbc_Jewelry {
 						    'post_status'  => 'publish',
 						    'post_parent'  => $parent_id,
 						    'post_type'    => 'product_variation',
-						    'guid'        => EO_WBC_Support::eo_wbc_get_product($parent_id)->get_permalink()
+						    'guid'        => wbc()->wc->eo_wbc_get_product($parent_id)->get_permalink()
 						);						
 
 						$variation_id = wp_insert_post( $variation_data );
@@ -11030,165 +11030,218 @@ class Eowbc_Jewelry {
 			//Filters for diamond....						
 			if(!empty($__cat__['eo_diamond_shape_cat'])){
 				$this->filter['d_fconfig'][]=array(
-										                        'name'=>$__cat__['eo_diamond_shape_cat'][0],
-										                        'type'=>"0",
-										                        'label'=>$__cat__['eo_diamond_shape_cat'][1],
-										                        'advance'=>"0",
-										                        'dependent'=>"0",
-										                        'input'=>"icon_text",
-										                        'column_width'=> "100",
-										                        'order'=>"0",
-										                    );
+                        'name'=>$__cat__['eo_diamond_shape_cat'][0],
+                        'type'=>"0",
+                        'label'=>$__cat__['eo_diamond_shape_cat'][1],
+                        'advance'=>"0",
+                        'dependent'=>"0",
+                        'input'=>"icon_text",
+                        'column_width'=> "100",
+                        'order'=>"0",
+                        'template'=>'fc1',
+	                    'help'=>0,
+	                    'help_text'=>'',
+	                    'enabled'=>1
+                    );
 			}
 			if(!empty($__att__['eo_carat_attr'])){
 				$this->filter['d_fconfig'][]=array(
-										                        'name'=>$__att__['eo_carat_attr'][0],
-										                        'type'=>"1",
-										                        'label'=>$__att__['eo_carat_attr'][1],
-										                        'advance'=>"0",
-										                        'dependent'=>"0",
-										                        'input'=>"numeric_slider",
-										                        'column_width'=> "50",
-										                        'order'=>"1",
-										                    );
+                        'name'=>$__att__['eo_carat_attr'][0],
+                        'type'=>"1",
+                        'label'=>$__att__['eo_carat_attr'][1],
+                        'advance'=>"0",
+                        'dependent'=>"0",
+                        'input'=>"numeric_slider",
+                        'column_width'=> "50",
+                        'order'=>"1",
+                        'template'=>'fc1',
+	                    'help'=>0,
+	                    'help_text'=>'',
+	                    'enabled'=>1
+                    );
 			}			
 			if(!empty($__att__['eo_clarity_attr'])){
 				$this->filter['d_fconfig'][]=array(
-										                        'name'=>$__att__['eo_clarity_attr'][0],
-										                        'type'=>"1",
-										                        'label'=>$__att__['eo_clarity_attr'][1],
-										                        'advance'=>"0",
-										                        'dependent'=>"0",
-										                        'input'=>"text_slider",
-										                        'column_width'=> "50",
-										                        'order'=>"2",
-										                    );
+                    'name'=>$__att__['eo_clarity_attr'][0],
+                    'type'=>"1",
+                    'label'=>$__att__['eo_clarity_attr'][1],
+                    'advance'=>"0",
+                    'dependent'=>"0",
+                    'input'=>"text_slider",
+                    'column_width'=> "50",
+                    'order'=>"2",
+                    'template'=>'fc1',
+                    'help'=>0,
+                    'help_text'=>'',
+                    'enabled'=>1
+
+                );
 			}
 			if(!empty($__att__['eo_colour_attr'])){
 				$this->filter['d_fconfig'][]=array(
-										                        'name'=>$__att__['eo_colour_attr'][0],
-										                        'type'=>"1",
-										                        'label'=>$__att__['eo_colour_attr'][1],
-										                        'advance'=>"0",
-										                        'dependent'=>"0",
-										                        'input'=>"text_slider",
-										                        'column_width'=> "50",
-										                        'order'=>"3",
-										                    );
+                    'name'=>$__att__['eo_colour_attr'][0],
+                    'type'=>"1",
+                    'label'=>$__att__['eo_colour_attr'][1],
+                    'advance'=>"0",
+                    'dependent'=>"0",
+                    'input'=>"text_slider",
+                    'column_width'=> "50",
+                    'order'=>"3",
+                    'template'=>'fc1',
+                    'help'=>0,
+                    'help_text'=>'',
+                    'enabled'=>1
+                );
 			}
 			if(!empty($__att__['eo_polish_attr'])){
 				$this->filter['d_fconfig'][]=array(
-										                        'name'=>$__att__['eo_polish_attr'][0],
-										                        'type'=>"1",
-										                        'label'=>$__att__['eo_polish_attr'][1],
-										                        'advance'=>"1",
-										                        'dependent'=>"0",
-										                        'input'=>"text_slider",
-										                        'column_width'=> "50",
-										                        'order'=>"4",
-										                    );
+	                'name'=>$__att__['eo_polish_attr'][0],
+	                'type'=>"1",
+	                'label'=>$__att__['eo_polish_attr'][1],
+	                'advance'=>"1",
+	                'dependent'=>"0",
+	                'input'=>"text_slider",
+	                'column_width'=> "50",
+	                'order'=>"4",
+	                'template'=>'fc1',
+                    'help'=>0,
+                    'help_text'=>'',
+                    'enabled'=>1
+	            );
 			}
 			if(!empty($__att__['eo_symmertry_attr'])){
 				$this->filter['d_fconfig'][]=array(
-										                        'name'=>$__att__['eo_symmertry_attr'][0],
-										                        'type'=>"1",
-										                        'label'=>$__att__['eo_symmertry_attr'][1],
-										                        'advance'=>"1",
-										                        'dependent'=>"0",
-										                        'input'=>"text_slider",
-										                        'column_width'=> "50",
-										                        'order'=>"5",
-										                    );
+                    'name'=>$__att__['eo_symmertry_attr'][0],
+                    'type'=>"1",
+                    'label'=>$__att__['eo_symmertry_attr'][1],
+                    'advance'=>"1",
+                    'dependent'=>"0",
+                    'input'=>"text_slider",
+                    'column_width'=> "50",
+                    'order'=>"5",
+                    'template'=>'fc1',
+                    'help'=>0,
+                    'help_text'=>'',
+                    'enabled'=>1
+                );
 			}
 			if(!empty($__att__['eo_fluorescence_attr'])){
 				$this->filter['d_fconfig'][]=array(
-										                        'name'=>$__att__['eo_fluorescence_attr'][0],
-										                        'type'=>"1",
-										                        'label'=>$__att__['eo_fluorescence_attr'][1],
-										                        'advance'=>"1",
-										                        'dependent'=>"0",
-										                        'input'=>"text_slider",
-										                        'column_width'=> "50",
-										                        'order'=>"6",
-										                    );
+                    'name'=>$__att__['eo_fluorescence_attr'][0],
+                    'type'=>"1",
+                    'label'=>$__att__['eo_fluorescence_attr'][1],
+                    'advance'=>"1",
+                    'dependent'=>"0",
+                    'input'=>"text_slider",
+                    'column_width'=> "50",
+                    'order'=>"6",
+                    'template'=>'fc1',
+                    'help'=>0,
+                    'help_text'=>'',
+                    'enabled'=>1
+                );
 			}
 			if(!empty($__att__['eo_depth_attr'])){
 				$this->filter['d_fconfig'][]=array(
-										                        'name'=>$__att__['eo_depth_attr'][0],
-										                        'type'=>"1",
-										                        'label'=>$__att__['eo_depth_attr'][1],
-										                        'advance'=>"1",
-										                        'dependent'=>"0",
-										                        'input'=>"numeric_slider",
-										                        'column_width'=> "50",
-										                        'order'=>"7",
-										                    );
+                    'name'=>$__att__['eo_depth_attr'][0],
+                    'type'=>"1",
+                    'label'=>$__att__['eo_depth_attr'][1],
+                    'advance'=>"1",
+                    'dependent'=>"0",
+                    'input'=>"numeric_slider",
+                    'column_width'=> "50",
+                    'order'=>"7",
+                    'template'=>'fc1',
+                    'help'=>0,
+                    'help_text'=>'',
+                    'enabled'=>1
+                );
 			}
 			if(!empty($__att__['eo_table_attr'])){
 				$this->filter['d_fconfig'][]=array(
-										                        'name'=>$__att__['eo_table_attr'][0],
-										                        'type'=>"1",
-										                        'label'=>$__att__['eo_table_attr'][1],
-										                        'advance'=>"1",
-										                        'dependent'=>"0",
-										                        'input'=>"numeric_slider",
-										                        'column_width'=> "50",
-										                        'order'=>"8",
-										                    );
+                    'name'=>$__att__['eo_table_attr'][0],
+                    'type'=>"1",
+                    'label'=>$__att__['eo_table_attr'][1],
+                    'advance'=>"1",
+                    'dependent'=>"0",
+                    'input'=>"numeric_slider",
+                    'column_width'=> "50",
+                    'order'=>"8",
+                    'template'=>'fc1',
+                    'help'=>0,
+                    'help_text'=>'',
+                    'enabled'=>1
+                );
 			}
 			if(!empty($__att__['eo_grading_report_attr'])){
 				$this->filter['d_fconfig'][]=array(
-										                        'name'=>$__att__['eo_grading_report_attr'][0],
-										                        'type'=>"1",
-										                        'label'=>$__att__['eo_grading_report_attr'][1],
-										                        'advance'=>"1",
-										                        'dependent'=>"0",
-										                        'input'=>"checkbox",
-										                        'column_width'=> "50",
-										                        'order'=>"9",
-										                    );
+                    'name'=>$__att__['eo_grading_report_attr'][0],
+                    'type'=>"1",
+                    'label'=>$__att__['eo_grading_report_attr'][1],
+                    'advance'=>"1",
+                    'dependent'=>"0",
+                    'input'=>"checkbox",
+                    'column_width'=> "50",
+                    'order'=>"9",
+                    'template'=>'fc1',
+                    'help'=>0,
+                    'help_text'=>'',
+                    'enabled'=>1
+                );
 			}
 
 			//Filters for settings....
 			if(!empty($__cat__['eo_setting_shape_cat'])){
 				$this->filter['s_fconfig'][]=array(
-										                        'name'=>$__cat__['eo_setting_shape_cat'][0],
-										                        'type'=>"0",
-										                        'label'=>$__cat__['eo_setting_shape_cat'][1],
-										                        'advance'=>"0",
-										                        'dependent'=>"0",
-										                        'input'=>"icon_text",
-										                        'column_width'=> "100",
-										                        'order'=>"0",
-										                    );
+                    'name'=>$__cat__['eo_setting_shape_cat'][0],
+                    'type'=>"0",
+                    'label'=>$__cat__['eo_setting_shape_cat'][1],
+                    'advance'=>"0",
+                    'dependent'=>"0",
+                    'input'=>"icon_text",
+                    'column_width'=> "100",
+                    'order'=>"0",
+                    'template'=>'sc1',
+                    'help'=>0,
+                    'help_text'=>'',
+                    'enabled'=>1
+                );
 			}
 			if(!empty($__cat__['eo_ring_style_cat'])){
 				$this->filter['s_fconfig'][]=array(
-										                        'name'=>$__cat__['eo_ring_style_cat'][0],
-										                        'type'=>"0",
-										                        'label'=>$__cat__['eo_ring_style_cat'][1],
-										                        'advance'=>"0",
-										                        'dependent'=>"0",
-										                        'input'=>"icon_text",
-										                        'column_width'=> "50",
-										                        'order'=>"1",
-										                    );
+                    'name'=>$__cat__['eo_ring_style_cat'][0],
+                    'type'=>"0",
+                    'label'=>$__cat__['eo_ring_style_cat'][1],
+                    'advance'=>"0",
+                    'dependent'=>"0",
+                    'input'=>"icon_text",
+                    'column_width'=> "50",
+                    'order'=>"1",
+                    'template'=>'sc1',
+                    'help'=>0,
+                    'help_text'=>'',
+                    'enabled'=>1
+                );
 			}
 			if(!empty($__cat__['eo_metal_cat'])){
 				$this->filter['s_fconfig'][]=array(
-										                        'name'=>$__cat__['eo_metal_cat'][0],
-										                        'type'=>"0",
-										                        'label'=>$__cat__['eo_metal_cat'][1],
-										                        'advance'=>"0",
-										                        'dependent'=>"0",
-										                        'input'=>"icon",
-										                        'column_width'=> "50",
-										                        'order'=>"2",
-										                    );
+                    'name'=>$__cat__['eo_metal_cat'][0],
+                    'type'=>"0",
+                    'label'=>$__cat__['eo_metal_cat'][1],
+                    'advance'=>"0",
+                    'dependent'=>"0",
+                    'input'=>"icon",
+                    'column_width'=> "50",
+                    'order'=>"2",
+                    'template'=>'sc1',
+                    'help'=>0,
+                    'help_text'=>'',
+                    'enabled'=>1
+                );
 			}
 
 			wbc()->load->model('admin/eowbc_filters');
-			wbc()->load->model('admin\form-builder');
+			wbc()->load->model('admin/form-builder');
 
         	foreach ($this->filter as $index => $filters) {
 				
@@ -11215,10 +11268,14 @@ class Eowbc_Jewelry {
 		                $_POST[$prefix.'_fconfig_dependent']=$filter['dependent'];
 		                $_POST[$prefix.'_fconfig_input_type']=$filter['input'];
 		                $_POST[$prefix.'_fconfig_column_width']=$filter['column_width'];
+		                $_POST['filter_template'] = $filter['template'];
 		                $_POST[$prefix.'_fconfig_ordering']=$filter['order'];
 		                $_POST[$prefix.'_fconfig_icon_size']='';
 		                $_POST[$prefix.'_fconfig_icon_label_size']='';
 		                $_POST[$prefix.'_fconfig_add_reset_link']='';
+		                $_POST[$prefix.'_fconfig_add_help']=$filter['help'];
+		                $_POST[$prefix.'_fconfig_add_help_text']=$filter['help_text'];
+		                $_POST[$prefix.'_fconfig_add_enabled']=$filter['enabled'];
 
 	        			// update_option($index,serialize($_data)); 
 	        			// wbc()->options->update_option_group( 'filters_'.$index, serialize($_data) );
@@ -11236,6 +11293,11 @@ class Eowbc_Jewelry {
 		                unset($_POST[$prefix.'_fconfig_icon_size']);
 		                unset($_POST[$prefix.'_fconfig_icon_label_size']);
 		                unset($_POST[$prefix.'_fconfig_add_reset_link']);
+
+		                unset($_POST['filter_template']);
+		                unset($_POST[$prefix.'_fconfig_add_help']);
+		                unset($_POST[$prefix.'_fconfig_add_help_text']);
+		                unset($_POST[$prefix.'_fconfig_add_enabled']);
 
 	        		// }
 	        	}

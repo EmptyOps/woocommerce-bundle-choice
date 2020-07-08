@@ -1,0 +1,16 @@
+2020-06-25T08:03:37+00:00 CRITICAL Uncaught Error: Class 'eo\wbc\model\admin\EOWBC_Error_Handler' not found in /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/model/admin/eowbc_setting_status.php:37
+Stack trace:
+#0 /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/view/admin/menu/setting-status.php(33): eo\wbc\model\admin\Eowbc_Setting_Status->get(Array)
+#1 /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/library/lib-load.php(83): require('/Users/hiren/Si...')
+#2 /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/controllers/admin/menu/admin-menu-factory.php(106): WBC_Loader->template('admin/menu/sett...')
+#3 /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/ap in /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/model/admin/eowbc_setting_status.php on line 37
+
+2020-06-25T12:33:22+00:00 CRITICAL Uncaught Error: Class 'eo\wbc\model\admin\EOWBC_Error_Handler' not found in /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/model/admin/eowbc_setting_status.php:37
+Stack trace:
+#0 /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/view/admin/menu/setting-status.php(33): eo\wbc\model\admin\Eowbc_Setting_Status->get(Array)
+#1 /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/library/lib-load.php(83): require('/Users/hiren/Si...')
+#2 /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/controllers/admin/menu/admin-menu-factory.php(106): WBC_Loader->template('admin/menu/sett...')
+#3 /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/ap in /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/model/admin/eowbc_setting_status.php on line 37
+
+2020-06-25T17:41:41+00:00 CRITICAL syntax error, unexpected '?' in /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/view/component/form/input_checkbox.php on line 49
+

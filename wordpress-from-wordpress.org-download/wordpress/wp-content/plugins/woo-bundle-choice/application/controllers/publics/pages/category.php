@@ -21,16 +21,16 @@ class Category {
         //If add to cart triggred
         // Detection : only one category item get length > 0 
         //   i.e. using XOR check if only one of two have been set.
-        if( !empty($_GET['CART']) && empty($_GET['EO_CHANGE']) && ( empty($_GET['FIRST']) XOR empty($_GET['SECOND']) ) ) {
+        if( !empty(wbc()->sanitize->get('CART')) && empty(wbc()->sanitize->get('EO_CHANGE')) && ( empty(wbc()->sanitize->get('FIRST')) XOR empty(wbc()->sanitize->get('SECOND')) ) and !empty(wbc()->sanitize->get('EO_WBC')) ) {
             //Iff condition is mutual exclusive, store it to  the session.
             $this->add2cart();            
         } 
 
         //if Current-Category is either belongs to FIRST OR SECOND Category then initiate application                
         if(
-            $this->eo_wbc_get_category()== wbc()->options->get_option('configuration','first_slug') //get_option('eo_wbc_first_slug') 
+            (($this->eo_wbc_get_category()== wbc()->options->get_option('configuration','first_slug') //get_option('eo_wbc_first_slug') 
               OR
-            $this->eo_wbc_get_category()== wbc()->options->get_option('configuration','second_slug') //get_option('eo_wbc_second_slug')
+            $this->eo_wbc_get_category()== wbc()->options->get_option('configuration','second_slug'))) and !empty(wbc()->sanitize->get('EO_WBC')) //get_option('eo_wbc_second_slug')
         ){
             //if( get_option('eo_wbc_filter_enable')=='1' ){
             /*wbc()->options->update_option('filters_filter_setting','config_filter_status','config_filter_status');*/
@@ -38,7 +38,8 @@ class Category {
             /*wbc()->options->update_option('filters_filter_setting','filter_setting_alternate_mobile','filter_setting_alternate_mobile');*/
 
             
-            if(wbc()->options->get_option('filters_filter_setting','config_filter_status')){
+            if(wbc()->options->get_option('filters_filter_setting','filter_setting_status','1')) {
+
                 if(
                      // ($this->eo_wbc_get_category()==get_option('eo_wbc_first_slug') && get_option('eo_wbc_add_filter_first',FALSE) )
                      // OR 
@@ -56,7 +57,7 @@ class Category {
     }
 
     public function add2cart() {
-        $cart=base64_decode(sanitize_text_field($_GET['CART']),TRUE);        
+        $cart=base64_decode(wbc()->sanitize->get('CART'),TRUE);
         if(!empty($cart)){
 
             $cart=str_replace("\\",'',$cart);
@@ -65,9 +66,9 @@ class Category {
             if(is_array($cart) OR is_object($cart)) {
                    
                 //if product belongs to first target;
-                if (get_option('eo_wbc_first_slug')==$cart['eo_wbc_target']) {
+                if (wbc()->options->get_option('configuration','first_slug')==$cart['eo_wbc_target']) {
 
-                    WC()->session->set('EO_WBC_SETS',
+                    wbc()->session->set('EO_WBC_SETS',
                         array(
                             'FIRST'=>array(
                                             $cart['eo_wbc_product_id'],
@@ -79,9 +80,9 @@ class Category {
                     ));
                 }
                 //if product belongs to second target;
-                elseif (get_option('eo_wbc_second_slug')==$cart['eo_wbc_target']) {
+                elseif (wbc()->options->get_option('configuration','second_slug')==$cart['eo_wbc_target']) {
 
-                    WC()->session->set('EO_WBC_SETS',
+                    wbc()->session->set('EO_WBC_SETS',
                         array(
                             'FIRST'=>NULL,
                             'SECOND'=>array(
@@ -97,7 +98,7 @@ class Category {
 
     public function eo_wbc_add_to_cart_link() {
         
-        $cart=base64_decode(sanitize_text_field($_GET['CART']),TRUE);
+        $cart=base64_decode(wbc()->sanitize->get('CART'),TRUE);
         
         if(!empty($cart)){
 
@@ -106,9 +107,9 @@ class Category {
             
             if(is_array($cart) OR is_object($cart)) {
                    
-                return EO_WBC_Support::eo_wbc_get_cart_url()."?add-to-cart=".(isset($cart['variation_id'])?$cart['variation_id']:$cart['eo_wbc_product_id'])."&quantity=".$cart['quantity'];                
+                return wbc()->wc->eo_wbc_get_cart_url()."?add-to-cart=".(isset($cart['variation_id'])?$cart['variation_id']:$cart['eo_wbc_product_id'])."&quantity=".$cart['quantity'];                
             } else {
-                return EO_WBC_Support::eo_wbc_get_cart_url();
+                return wbc()->wc->eo_wbc_get_cart_url();
             }
         }
     }
@@ -116,7 +117,7 @@ class Category {
     public function eo_wbc_add_filters() {
         //Add product filter widget...
         
-        add_action( 'woocommerce_archive_description',function(){     
+        add_action( 'woocommerce_archive_description',function(){    
             wbc()->load->model('publics/component/eowbc_filter_widget');          
             // if (class_exists('EO_WBC_Filter_Widget')) {
                 \eo\wbc\model\publics\component\EOWBC_Filter_Widget::instance()->init();                                
@@ -130,13 +131,13 @@ class Category {
         //Add Breadcumb at top....      
         add_action( 'woocommerce_archive_description',function(){     
             wbc()->load->model('publics/component/eowbc_breadcrumb');       
-            echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_add_breadcrumb(sanitize_text_field($_GET['STEP']),sanitize_text_field($_GET['BEGIN'])).'<br/><br/>';
+            echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_add_breadcrumb(wbc()->sanitize->get('STEP'),wbc()->sanitize->get('BEGIN')).'<br/><br/>';
         }, 120);
     }
 
     public function eo_wbc_render()
     {   
-        if(wbc()->options->get_option('configuration','pair_maker_status',FALSE)/*get_option('eo_wbc_pair_maker_status',FALSE)*/ && isset($_GET) && !empty($_GET['STEP']) && $_GET['STEP']==2 && (empty($_GET['FIRST']) XOR empty($_GET['SECOND']))){
+        if( wbc()->options->get_option('configuration','pair_maker_status',FALSE)/*get_option('eo_wbc_pair_maker_status',FALSE)*/ && isset($_GET) && !empty(wbc()->sanitize->get('STEP')) && wbc()->sanitize->get('STEP')==2 && (empty(wbc()->sanitize->get('FIRST')) XOR empty(wbc()->sanitize->get('SECOND'))) ) {
 
             add_action( 'wp_enqueue_scripts',function(){ 
                 // wp_register_style('eo_wbc_ui_css',plugin_dir_url(EO_WBC_PLUGIN_FILE).'asset/css/fomantic/semantic.min.css');
@@ -187,19 +188,24 @@ class Category {
                         $html.="<div class='ui row' style='padding-bottom:0px'>";
                             $html.='<span class="ui inverted text">' . __( 'No products were found matching your selection.', 'woocommerce' ) .'<span>';
                         $html.="</div>";    
-                        $html.="<div class='ui row'  style='padding-bottom:3rem !important'>";                            
+                        $html.="<div class='ui row'  style='padding-bottom:3rem !important'>";   
+                            // TODO here isn't it better if i's simple javascript back in history - hiren                         
                             $html.='<button href="'.$this->eo_wbc_prev_url().'" class="ui inverted secondary single_add_to_cart_button button alt">Go back</button>&nbsp;&nbsp;';
-                            $html.='<button href="'.((empty($_GET['FIRST']) XOR empty($_GET['SECOND']))?strtok(get_permalink((empty($_GET['FIRST'])?$_GET['SECOND']:$_GET['FIRST'])),'?'):'').'" class="ui grey button single_add_to_cart_button alt">Continue buying single item</button>&nbsp;&nbsp;';
+                            $html.='<button href="'.((empty(wbc()->sanitize->get('FIRST')) XOR empty(wbc()->sanitize->get('SECOND')))?strtok(get_permalink((empty(wbc()->sanitize->get('FIRST'))?wbc()->sanitize->get('SECOND'):wbc()->sanitize->get('FIRST'))),'?'):'').'" class="ui grey button single_add_to_cart_button alt">Continue buying single item</button>&nbsp;&nbsp;';
                         $html.="</div>";    
                                                     
                         if(current_user_can('manage_options')){
                             //Manage the mapping section
                             $html.="<div class='ui row' style='padding-bottom:0rem !important'>";
-                                $html.='<a href="'.admin_url('admin.php?page=eo-wbc-map').'"><span class="ui text primary">As admin of the site please create a product mapping to fix this problem.</span></a>';
+                                $html.='<a href="'.admin_url('admin.php?page=eowbc-mapping').'"><span class="ui text primary">As admin of this site please create a product mapping to fix this problem.</span></a>';
+                            $html.="</div>";    
+
+                            $html.="<div class='ui row' style='padding-bottom:0rem !important'>";
+                                $html.='Adequate mapping(s) needs to be added in the '.constant('EOWBC_NAME').' for Pair Builder to work properly.';
                             $html.="</div>";                                                    
                         } else {                            
                             $html.="<div class='ui row' style='padding-bottom:0rem !important'>";
-                                $html.='<a href="'.site_url('/?report=1').'">Report to admin to help them fix this problem.</a>&nbsp;&nbsp;';
+                                $html.='<a href="'.site_url('/?wbc_report=1').'">Report to admin to help them fix this problem.</a>&nbsp;&nbsp;';
                             $html.="</div>";                                                    
                         }
                         
@@ -223,37 +229,40 @@ class Category {
         return $site_."/product-category/{$_cat}/?EO_WBC=1&BEGIN={$_cat}&STEP=1&FIRST=&SECOND=";
     }
     public function eo_wbc_product_url($url){
-        return  $url.'?EO_WBC=1'.
-                        '&BEGIN='.sanitize_text_field($_GET['BEGIN']).
-                        '&STEP='.sanitize_text_field($_GET['STEP']).                            
-                        '&FIRST='.
-                        (
-                            $this->eo_wbc_get_category()==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/ 
+
+          return  $url.'?'.wbc()->common->http_query(
+                array(
+                    'EO_WBC'=>1,
+                    'BEGIN'=>wbc()->sanitize->get('BEGIN'),
+                    'STEP'=>wbc()->sanitize->get('STEP'),
+                    'FIRST'=>(
+                        $this->eo_wbc_get_category()==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/ 
                                 ?
                             ''
                                 :
                             (
-                                !empty($_GET['FIRST'])
+                                !empty(wbc()->sanitize->get('FIRST'))
                                     ? 
-                                sanitize_text_field( $_GET['FIRST'])
+                                sanitize_text_field(wbc()->sanitize->get('FIRST'))
                                     :
                                 ''
                             )
-                        ).
-                        '&SECOND='.
-                        (
-                            $this->eo_wbc_get_category()==wbc()->options->get_option('configuration','second_slug')/*get_option('eo_wbc_second_slug')*/
+                        ),
+                    'SECOND'=>(
+                        $this->eo_wbc_get_category()==wbc()->options->get_option('configuration','second_slug')/*get_option('eo_wbc_second_slug')*/
                                 ?
                             ''
                                 :
                             (
-                                !empty($_GET['SECOND'])
+                                !empty(wbc()->sanitize->get('SECOND'))
                                     ?
-                                sanitize_text_field($_GET['SECOND'])
+                                sanitize_text_field(wbc()->sanitize->get('SECOND'))
                                     :
                                 ''
                             )
-                        );
+                        )
+                )
+            );        
     }
 
     public function eo_wbc_id_2_slug($id){
@@ -266,7 +275,9 @@ class Category {
      * @return string
      */
     public function eo_wbc_get_category()
-    {        
+    {   
+        
+        return wbc()->common->get_category('category',null,array(wbc()->options->get_option('configuration','first_slug'),wbc()->options->get_option('configuration','second_slug')));
         global $wp_query;        
         
         //get list of slug which are ancestors of current page item's category

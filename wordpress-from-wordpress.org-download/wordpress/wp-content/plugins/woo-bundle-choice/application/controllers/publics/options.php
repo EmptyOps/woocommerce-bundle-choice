@@ -152,209 +152,209 @@ class Options {
 	}
 
 	public function run() {
-		
-		// Toggle Button
-		$toggle_status = wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_status',false);
-		
-		$init_toggle = wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_init_status');
-		
-		$toggle_text = wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_text',__('CUSTOMIZE THIS PRODUCT'));
+		add_action('wp_footer',function(){
+			// Toggle Button
+			$toggle_status = wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_status',false);
+			
+			$init_toggle = wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_init_status');
+			
+			$toggle_text = wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_text',__('CUSTOMIZE THIS PRODUCT'));
 
-		// Variation item non-hovered
-		$dimention = wbc()->options->get_option('tiny_features','tiny_features_option_ui_option_dimention','2em');
+			// Variation item non-hovered
+			$dimention = wbc()->options->get_option('tiny_features','tiny_features_option_ui_option_dimention','2em');
 
-		$border_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_color','#ffffff');
+			$border_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_color','#ffffff');
 
-		$border_width = wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_width','1px');
+			$border_width = wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_width','1px');
 
-		$border_radius = wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_radius','1px');
+			$border_radius = wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_radius','1px');
 
-		// Variation item hovered
-		$border_hover_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_color_hover','#ffffff');
+			// Variation item hovered
+			$border_hover_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_color_hover','#ffffff');
 
-		$border_hover_width = wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_width_hover','1px');
+			$border_hover_width = wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_width_hover','1px');
 
-		// button only
-		$font_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_font_color','#ffffff');
+			// button only
+			$font_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_font_color','#ffffff');
 
-		$font_hover_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_font_color_hover','#ffffff');
+			$font_hover_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_font_color_hover','#ffffff');
 
-		$bg_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_bg_color','#ffffff');
+			$bg_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_bg_color','#ffffff');
 
-		$bg_hover_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_bg_color_hover','#ffffff');
+			$bg_hover_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_bg_color_hover','#ffffff');
 
-		ob_start();
-		?>
-			<style type="text/css">
-				.rotate-up{
-					-webkit-animation:spin-up 0.3s linear ;
-				    -moz-animation:spin-up 0.3s linear ;
-				    animation:spin-up 0.3s linear ;
-				    animation-fill-mode: forwards;
-				}
-				@-moz-keyframes spin-up { 100% { -moz-transform: rotate(-180deg); } }
-				@-webkit-keyframes spin-up { 100% { -webkit-transform: rotate(-180deg); } }
-				@keyframes spin-up { 100% { -webkit-transform: rotate(-180deg); transform:rotate(-180deg); } }
+			ob_start();
+			?>
+				<style type="text/css">
+					.rotate-up{
+						-webkit-animation:spin-up 0.3s linear ;
+					    -moz-animation:spin-up 0.3s linear ;
+					    animation:spin-up 0.3s linear ;
+					    animation-fill-mode: forwards;
+					}
+					@-moz-keyframes spin-up { 100% { -moz-transform: rotate(-180deg); } }
+					@-webkit-keyframes spin-up { 100% { -webkit-transform: rotate(-180deg); } }
+					@keyframes spin-up { 100% { -webkit-transform: rotate(-180deg); transform:rotate(-180deg); } }
 
-				.rotate-down{
-					-webkit-animation:spin-down 0.3s linear;
-				    -moz-animation:spin-down 0.3s linear;
-				    animation:spin-down 0.3s linear;
-				    animation-fill-mode: forwards;
-				}
-
-				@-moz-keyframes spin-down { 
-					0% { -moz-transform: rotate(180deg); } 
-					100% { -moz-transform: rotate(360deg); } 
-				}
-				@-webkit-keyframes spin-down { 
-					0% { -webkit-transform: rotate(180deg); } 
-					100% { -webkit-transform: rotate(360deg); } 
-				}
-				@keyframes spin-down { 
-					0% { 
-						-webkit-transform: rotate(180deg); 
-						transform:rotate(180deg); 
-					} 					
-					100% { 
-						-webkit-transform: rotate(360deg); 
-						transform:rotate(360deg); } 
+					.rotate-down{
+						-webkit-animation:spin-down 0.3s linear;
+					    -moz-animation:spin-down 0.3s linear;
+					    animation:spin-down 0.3s linear;
+					    animation-fill-mode: forwards;
 					}
 
-				#wbc_variation_toggle
-				{
-					padding: 0.7em;
-					margin-bottom: 0.7em;
-					border:1px solid #5e5c5b;
-					display: inline-block;
-					color: #2d2d2d;
-					font-size:1rem;
-					cursor: pointer;
-					border-radius: 1px !important;
-				} 
-				table.variations{
-					padding: 5px;
-					border: 1px solid #5e5c5b;
-				}
-				table.variations td{
-					/*display: table-cell !important;*/
-					border: none !important;
-				}
-				table.variations td:first-child{
-					/*border-right: 1px solid #5e5c5b !important;*/
-					/*text-align: center;*/
-				}
-				
-				.ui.images {
-						width: 100% !important;
-						margin: auto !important;
-						float: none !important;
+					@-moz-keyframes spin-down { 
+						0% { -moz-transform: rotate(180deg); } 
+						100% { -moz-transform: rotate(360deg); } 
 					}
-				}
-				table.variations {
-				    table-layout: auto !important;
-				    margin: inherit !important;
-				}
-				table.variations td.label{
-					display: none !important;
-				}
-				table.variations .value{
-					padding-left: 1rem !important;
-				}
-        		.variable-items-wrapper{
-        			list-style: none;
-        			display: table-cell !important;	        			
-        		}
-        		.ui.red.ribbon.label{
-        			margin-bottom: 5px !important;
-        		}
-        		.variable-items-wrapper .variable-item{        			
-        			/*display: inline-table;*/
-        			height: <?php _e($dimention); ?>;
-        			width: <?php _e($dimention); ?>;
-        			line-height: <?php _e($dimention); ?>;
-        			cursor: pointer;
-        			margin: 0.25rem;
-        			text-align: center;
-        			border: <?php _e($border_width) ?> solid <?php _e($border_color) ?>;
-        			border-radius: <?php _e($border_radius); ?>;
-        			overflow: hidden;
-        		}	
-        		.variable-items-wrapper .variable-item:hover,.variable-items-wrapper .selected{
-        			box-shadow:0px 0px <?php _e($border_hover_width) ?> <?php _e($border_hover_color) ?>;        			
-        			border: <?php _e($border_hover) ?> solid transparent;
-        		}
-        		ul.variable-items-wrapper{
-        			margin: 0px;
-        		}
-        		.variable-item-color-fill,.variable-item-span{        			
-        			height: <?php _e($dimention); ?>;
-        			width: 100%;
-        			line-height: <?php _e($dimention); ?>;
-        		}
-        		.select2,.select3-selection{
-        			display: none !important;
-        		}
-        		.button-variable-item{
-        			background-color: <?php _e($bg_color); ?>;
-        			color: <?php _e($font_color); ?>;
-        		}
-        		.button-variable-item:hover{
-        			background-color: <?php _e($bg_hover_color); ?>;
-        			color: <?php _e($font_hover_color); ?>;	
-        		}
-        	</style>
-        	<script>
-        		jQuery(document).ready(function($){
-        			$('table.variations').addClass('ui raised segment');
-        			$('#wbc_variation_toggle').on('click',function(){
-        				if($(this).find('.icon').hasClass('rotate-up')) {
-        					$(this).find('.icon').removeClass('rotate-up');
-        					$(this).find('.icon').addClass('rotate-down');
-        					$('table.variations').slideToggle("slow");
-        				} else {
-        					$(this).find('.icon').removeClass('rotate-down');
-        					$(this).find('.icon').addClass('rotate-up');
-        					$('table.variations').slideToggle("slow");
-        				}        				
-        			});
+					@-webkit-keyframes spin-down { 
+						0% { -webkit-transform: rotate(180deg); } 
+						100% { -webkit-transform: rotate(360deg); } 
+					}
+					@keyframes spin-down { 
+						0% { 
+							-webkit-transform: rotate(180deg); 
+							transform:rotate(180deg); 
+						} 					
+						100% { 
+							-webkit-transform: rotate(360deg); 
+							transform:rotate(360deg); } 
+						}
 
-        			<?php if(empty($init_toggle)): ?>
-        				$('#wbc_variation_toggle').trigger('click');
-        			<?php endif; ?>
+					#wbc_variation_toggle
+					{
+						padding: 0.7em;
+						margin-bottom: 0.7em;
+						border:1px solid #5e5c5b;
+						display: inline-block;
+						color: #2d2d2d;
+						font-size:1rem;
+						cursor: pointer;
+						border-radius: 1px !important;
+					} 
+					table.variations{
+						padding: 5px;
+						border: 1px solid #5e5c5b;
+					}
+					table.variations td{
+						/*display: table-cell !important;*/
+						border: none !important;
+					}
+					table.variations td:first-child{
+						/*border-right: 1px solid #5e5c5b !important;*/
+						/*text-align: center;*/
+					}
+					
+					.ui.images {
+							width: 100% !important;
+							margin: auto !important;
+							float: none !important;
+						}
+					}
+					table.variations {
+					    table-layout: auto !important;
+					    margin: inherit !important;
+					}
+					table.variations td.label{
+						display: none !important;
+					}
+					table.variations .value{
+						padding-left: 1rem !important;
+					}
+	        		.variable-items-wrapper{
+	        			list-style: none;
+	        			display: table-cell !important;	        			
+	        		}
+	        		.ui.red.ribbon.label{
+	        			margin-bottom: 5px !important;
+	        		}
+	        		.variable-items-wrapper .variable-item{        			
+	        			/*display: inline-table;*/
+	        			height: <?php _e($dimention); ?>;
+	        			width: <?php _e($dimention); ?>;
+	        			line-height: <?php _e($dimention); ?>;
+	        			cursor: pointer;
+	        			margin: 0.25rem;
+	        			text-align: center;
+	        			border: <?php _e($border_width) ?> solid <?php _e($border_color) ?>;
+	        			border-radius: <?php _e($border_radius); ?>;
+	        			overflow: hidden;
+	        		}	
+	        		.variable-items-wrapper .variable-item:hover,.variable-items-wrapper .selected{
+	        			box-shadow:0px 0px <?php _e($border_hover_width) ?> <?php _e($border_hover_color) ?>;        			
+	        			border: <?php _e($border_hover_color) ?> solid transparent;
+	        		}
+	        		ul.variable-items-wrapper{
+	        			margin: 0px;
+	        		}
+	        		.variable-item-color-fill,.variable-item-span{        			
+	        			height: <?php _e($dimention); ?>;
+	        			width: 100%;
+	        			line-height: <?php _e($dimention); ?>;
+	        		}
+	        		.select2,.select3-selection{
+	        			display: none !important;
+	        		}
+	        		.button-variable-item{
+	        			background-color: <?php _e($bg_color); ?>;
+	        			color: <?php _e($font_color); ?>;
+	        		}
+	        		.button-variable-item:hover{
+	        			background-color: <?php _e($bg_hover_color); ?>;
+	        			color: <?php _e($font_hover_color); ?>;	
+	        		}
+	        	</style>
+	        	<script>
+	        		jQuery(document).ready(function($){
+	        			$('table.variations').addClass('ui raised segment');
+	        			$('#wbc_variation_toggle').on('click',function(){
+	        				if($(this).find('.icon').hasClass('rotate-up')) {
+	        					$(this).find('.icon').removeClass('rotate-up');
+	        					$(this).find('.icon').addClass('rotate-down');
+	        					$('table.variations').slideToggle("slow");
+	        				} else {
+	        					$(this).find('.icon').removeClass('rotate-down');
+	        					$(this).find('.icon').addClass('rotate-up');
+	        					$('table.variations').slideToggle("slow");
+	        				}        				
+	        			});
 
-        			$('.variable-item').on('click',function(){
-        				var target_selector = $('#'+$(this).data('id'));
-        				target_selector.val($(this).data('value'));
-        				$(this).parent().find('.selected').removeClass('selected');
-        				$(this).addClass('selected');
-        				jQuery(".variations_form" ).trigger('check_variations');
-        				$(target_selector).trigger('change');
-        			});
+	        			<?php if(empty($init_toggle)): ?>
+	        				$('#wbc_variation_toggle').trigger('click');
+	        			<?php endif; ?>
 
-        			jQuery(".variations_form").on('woocommerce_variation_select_change',function(){
-        				jQuery('.variable-items-wrapper .selected').removeClass('selected');
-        			});
-        			
-        		});
-        	</script>
-		<?php
-		echo ob_get_clean();
-		
-		if(!empty($toggle_status)){
-			add_action( 'woocommerce_before_variations_form',function( ) use($toggle_text){
-				wbc()->load->asset('css','fomantic/semantic.min');
-				wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
-				ob_start();
-				?>
-					<span id="wbc_variation_toggle" class="ui raised segment">
-						<?php _e($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i>						
-					</span>
-				<?php
-				echo ob_get_clean();
-			}, 10, 1 );
-		}
+	        			$('.variable-item').on('click',function(){
+	        				var target_selector = $('#'+$(this).data('id'));
+	        				target_selector.val($(this).data('value'));
+	        				$(this).parent().find('.selected').removeClass('selected');
+	        				$(this).addClass('selected');
+	        				jQuery(".variations_form" ).trigger('check_variations');
+	        				$(target_selector).trigger('change');
+	        			});
 
+	        			jQuery(".variations_form").on('woocommerce_variation_select_change',function(){
+	        				jQuery('.variable-items-wrapper .selected').removeClass('selected');
+	        			});
+	        			
+	        		});
+	        	</script>
+			<?php
+			echo ob_get_clean();
+			
+			if(!empty($toggle_status)){
+				add_action( 'woocommerce_before_variations_form',function( ) use($toggle_text){
+					wbc()->load->asset('css','fomantic/semantic.min');
+					wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
+					ob_start();
+					?>
+						<span id="wbc_variation_toggle" class="ui raised segment">
+							<?php _e($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i>						
+						</span>
+					<?php
+					echo ob_get_clean();
+				}, 10, 1 );
+			}
+		});
 		add_filter( 'woocommerce_dropdown_variation_attribute_options_html',function($html, $args){
                               
             if ( apply_filters( 'default_wbc_variation_attribute_options_html', false, $args, $html ) ) {
@@ -362,7 +362,7 @@ class Options {
             }
             
             // WooCommerce Product Bundle Fixing
-            if ( isset( $_POST[ 'action' ] ) && $_POST[ 'action' ] === 'woocommerce_configure_bundle_order_item' ) {
+            if ( isset( $_POST[ 'action' ] ) && wbc()->sanitize->post('action') === 'woocommerce_configure_bundle_order_item' ) {
                 return $html;
             }
             

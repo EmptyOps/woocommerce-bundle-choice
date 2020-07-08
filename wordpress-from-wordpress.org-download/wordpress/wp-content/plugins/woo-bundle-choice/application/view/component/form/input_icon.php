@@ -8,7 +8,7 @@
 if(!empty($id) and !empty($label)){
 
 ?>
-<div class="field upload_image">
+<div class="<?php echo !empty($size_class)?$size_class:''; ?> field upload_image">
 	<?php wbc()->load->template('component/form/input_label',array('id'=>$id,'label'=>$label)); ?>
 	<div class="ui tiny image">
 	  <img src="<?php echo empty($value)?wc_placeholder_img_src():wp_get_attachment_url($value); ?>">	  

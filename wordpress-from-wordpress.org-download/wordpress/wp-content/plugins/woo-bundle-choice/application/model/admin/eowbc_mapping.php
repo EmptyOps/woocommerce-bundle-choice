@@ -34,7 +34,7 @@ class Eowbc_Mapping {
 				if( $fv["type"] == "table" ) {
 					// wbc()->options->update_option_group( 'mapping_'.$key, serialize(array()) );
 					$mapping_data = unserialize(wbc()->options->get_option_group('mapping_'.$key,"a:0:{}"));
-					// wbc()->common->pr($mapping_data, false, false);
+					//wbc()->common->pr($mapping_data, false, false);
 
 					$body = array();
 					foreach ($mapping_data as $rk => $rv) {
@@ -48,7 +48,12 @@ class Eowbc_Mapping {
 								'checkbox'=> array('id'=>$rv["id"],'value'=>array(),'options'=>array($rv["id"]=>''),'class'=>'','where'=>'in_table')
 							);
 
-						foreach ($rv as $rvk => $rvv) {
+						// foreach ($rv as $rvk => $rvv) {
+						foreach ($form_definition[$key]["form"][$fk]["head"][0] as $ck => $cv) {
+							if(empty($cv["field_id"])) { continue; }
+							$rvk = $cv["field_id"];
+							$rvv = ( !isset($rv[$rvk]) || wbc()->common->nonZeroEmpty($rv[$rvk]) ) ?  "" : $rv[$rvk];
+
 							//skip the id and other applicable fields 
 							if( $rvk == "id" || $rvk == "range_first" || $rvk == "range_second" || $rvk == "eo_wbc_first_category_range" || $rvk == "eo_wbc_second_category_range" ) {
 								continue;
@@ -56,18 +61,24 @@ class Eowbc_Mapping {
 
 							if( $rvk == "eo_wbc_first_category" ) {
 								if( wbc()->common->nonZeroEmpty($rv["eo_wbc_first_category_range"]) || wbc()->common->nonZeroEmpty($rv["range_first"]) ) {
-									$row[] = array( 'val' => wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv) );
+									$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv);
+									$row[] = array( 'val' => !is_array($val)?$val:$val["label"] );	
 								}
 								else {
-									$row[] = array( 'val' =>  "Range from <strong>".wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv)."</strong> to <strong>".wbc()->common->dropdownSelectedvalueText($tab["form"]["eo_wbc_first_category_range"], $rv["eo_wbc_first_category_range"])."</strong>" );
+									$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv);
+									$val1 = wbc()->common->dropdownSelectedvalueText($tab["form"]["eo_wbc_first_category_range"], $rv["eo_wbc_first_category_range"]);
+									$row[] = array( 'val' =>  "Range from <strong>".(!is_array($val)?$val:$val["label"])."</strong> to <strong>".(!is_array($val1)?$val1:$val1["label"])."</strong>" );
 								}	
 							}
 							else if( $rvk == "eo_wbc_second_category" ) {
 								if( wbc()->common->nonZeroEmpty($rv["eo_wbc_second_category_range"]) || wbc()->common->nonZeroEmpty($rv["range_second"]) ) {
-									$row[] = array( 'val' => wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv) );
+									$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv);
+									$row[] = array( 'val' => !is_array($val)?$val:$val["label"] );
 								}
 								else {
-									$row[] = array( 'val' => "Range from <strong>".wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv)."</strong> to <strong>".wbc()->common->dropdownSelectedvalueText($tab["form"]["eo_wbc_second_category_range"], $rv["eo_wbc_second_category_range"])."</strong>" );
+									$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv);
+									$val1 = wbc()->common->dropdownSelectedvalueText($tab["form"]["eo_wbc_second_category_range"], $rv["eo_wbc_second_category_range"]);
+									$row[] = array( 'val' => "Range from <strong>".(!is_array($val)?$val:$val["label"])."</strong> to <strong>".(!is_array($val1)?$val1:$val1["label"])."</strong>" );
 								}	
 							}
 							else {
@@ -92,6 +103,8 @@ class Eowbc_Mapping {
 
 	public function save( $form_definition ) {
 		
+		wbc()->sanitize->clean($form_definition);
+		wbc()->validate->check($form_definition);
 		$res = array();
 		$res["type"] = "success";
 	    $res["msg"] = "";
@@ -116,7 +129,8 @@ class Eowbc_Mapping {
 			    //loop through form fields, read from POST/GET and save
 			    //may need to check field type here and read accordingly only
 			    //only for those for which POST is set
-			    if( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) && isset($_POST[$fk]) ) {
+
+			    if( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) && (isset($_POST[$fk]) || $fv["type"]=='checkbox')) {
 			    	//skip fields where applicable
 					if( in_array($fk, $skip_fileds) ) {
 		    			continue;
@@ -128,10 +142,11 @@ class Eowbc_Mapping {
 
 		    		//save
 			    	if( $is_table_save ) {
-			    		$table_data[$fk] = (empty($_POST[$fk])? $_POST[$fk]: sanitize_text_field( $_POST[$fk] ) ); 
+			    		$table_data[$fk] = ( isset($_POST[$fk]) ? $_POST[$fk] : '' ); 
 			    	}
 			    	else {
-			    		wbc()->options->update_option('mapping_'.$key,$fk,(empty($_POST[$fk])? $_POST[$fk]: sanitize_text_field( $_POST[$fk] ) ) );
+
+			    		wbc()->options->update_option('mapping_'.$key,$fk,(isset($_POST[$fk])? sanitize_text_field( $_POST[$fk] ):'' ));
 			    	}
 			    }
 			}
@@ -179,6 +194,13 @@ class Eowbc_Mapping {
 		        $mapping_data[] = $table_data;
 
 		        wbc()->options->update_option_group( 'mapping_'.$key, serialize($mapping_data) );
+
+		        //update cache
+		        \Cache_Manager::getInstance()->update_map_caches();
+
+		        // TODO here it is better if we set it to 1 only if length of mapping_data is greater than zero and otherwise set to 0 if user removes maps and so on 
+				wbc()->options->update_option('configuration','config_map',1);
+
 		        $res["msg"] = eowbc_lang('New Mapping Added Successfully'); 
 			}
 

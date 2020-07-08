@@ -47,9 +47,9 @@ class Checkout {
     public function eo_wbc_render()
     {        
         $res="";
-        if(WC()->session->get('EO_WBC_MAPS')){
+        if(wbc()->session->get('EO_WBC_MAPS')){
             
-            foreach (WC()->session->get('EO_WBC_MAPS') as $map){
+            foreach (wbc()->session->get('EO_WBC_MAPS') as $map){
                 
                 $res.=$this->checkout_rows($map);
             }

@@ -18,6 +18,7 @@ class WBC_Session {
 	}
 
 	public function get(string $key,$default = false) {
+		$key = apply_filters('eowbc_session_get_key', $key );
 		if(function_exists('wc') and !empty(wc()->session) and !empty($key)) {
 	        $session_data = wc()->session->get('EO_WBC',array());
 	        if(!empty($session_data[$key])){
@@ -28,6 +29,8 @@ class WBC_Session {
 	}
 
 	public function set(string $key,$value) {		
+		$key = apply_filters('eowbc_session_set_key', $key );
+		$value = apply_filters('eowbc_session_set_value', $value );
 		if(function_exists('wc') and !empty(wc()->session) and !empty($key)) {
 	        $session_data = wc()->session->get('EO_WBC',array());
 	        $session_data[$key] = $value;
@@ -38,6 +41,7 @@ class WBC_Session {
 	}
 
 	public function remove(string $key) {
+		$key = apply_filters('eowbc_session_remove_key', $key );
 		if(function_exists('wc') and !empty(wc()->session) and !empty($key)) {
 	        $session_data = wc()->session->get('EO_WBC',array());
 	        if(!empty($session_data[$key])){

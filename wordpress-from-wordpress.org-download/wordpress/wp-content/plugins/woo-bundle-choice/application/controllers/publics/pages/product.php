@@ -19,12 +19,6 @@ class Product {
 
     public function init() {
         //die();
-        do_action('wbc_pre_product_page');        
-        $this->specification_view();
-        $this->product_options_view();        
-        do_action('wbc_post_product_page');  
-
-
         $this->att_link =array();
 
         if (isset($_GET['EO_WBC'])) {
@@ -35,7 +29,11 @@ class Product {
         // } elseif (get_option('eo_wbc_pair_status',false)=='1') {
         } elseif (wbc()->options->get_option('configuration','pair_maker_status',false)=='1') {
             $this->eo_wbc_make_pair();
-        }          
+        }  
+        do_action('wbc_pre_product_page');        
+        $this->specification_view();
+        $this->product_options_view();        
+        do_action('wbc_post_product_page');         
     }    
 
     public function specification_view() {
@@ -61,14 +59,12 @@ class Product {
 
         // if ($category==get_option('eo_wbc_first_slug')) {
         if ($category==wbc()->options->get_option('configuration','first_slug')) {
-            $url=get_permalink($post->ID)
-                .'?EO_WBC=1&BEGIN='.sanitize_text_field($category)
-                .'&STEP=1&FIRST='.$post->ID."&SECOND=&REDIRECT=1";
+            $url=get_permalink($post->ID)                
+                .'?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>sanitize_text_field($category),'STEP'=>1,'FIRST'=>$post->ID,'SECOND'=>'','REDIRECT'=>1));
         // } elseif ($category==get_option('eo_wbc_second_slug')) {
         } elseif ($category==wbc()->options->get_option('configuration','second_slug')) {
             $url=get_permalink($post->ID)
-                .'?EO_WBC=1&BEGIN='.sanitize_text_field($category)
-                .'&STEP=1&FIRST=&SECOND='.$post->ID."&REDIRECT=1";
+                .'?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>sanitize_text_field($category),'STEP'=>1,'FIRST'=>'','SECOND'=>$post->ID,'REDIRECT'=>1));
         } 
         return $url;
     }
@@ -172,11 +168,11 @@ class Product {
     {   
         //Adding Breadcrumb
         add_action( 'woocommerce_before_single_product',function(){
-            if(!empty($_GET) && !empty($_GET['STEP']) && !empty($_GET['BEGIN'])){
+            if(!empty($_GET) && !empty(wbc()->sanitize->get('STEP')) && !empty(wbc()->sanitize->get('BEGIN'))) {
                 wbc()->load->model('publics/component/eowbc_breadcrumb'); 
                 echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_add_breadcrumb(
-                                                sanitize_text_field($_GET['STEP']),
-                                                sanitize_text_field($_GET['BEGIN'])
+                                                wbc()->sanitize->get('STEP'),
+                                                wbc()->sanitize->get('BEGIN')
                                             ).'<br/><br/>';
             }
         }, 15 );
@@ -251,9 +247,9 @@ class Product {
         $url=null;        
         $category=$this->eo_wbc_get_category();    
 
-        if(sanitize_text_field($_GET['STEP'])==1) {   
+        if(wbc()->sanitize->get('STEP')==1) {   
 
-            if(!empty($_GET['CART']) && !empty($_GET['REDIRECT']) && sanitize_text_field($_GET['REDIRECT'])==1) {
+            if(!empty(wbc()->sanitize->get('CART')) && !empty(wbc()->sanitize->get('REDIRECT')) && wbc()->sanitize->get('REDIRECT')==1) {
                 //if redirec signal is set and cart data are ready then
                 //relocate user to target path.                
       
@@ -261,19 +257,15 @@ class Product {
                 if($category==wbc()->options->get_option('configuration','first_slug')) {
 
                     $category_link=$this->eo_wbc_category_link();
-                    $url=get_bloginfo('url').'/index.php/product-category/'.$category_link
-                        .'EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
-                        .'&STEP=2&FIRST='.$post->ID.'&SECOND='.sanitize_text_field($_GET['SECOND'])
-                        ."&CART=".sanitize_text_field($_GET['CART']).'&ATT_LINK='.implode(' ',$this->att_link).'&CAT_LINK='.substr($category_link,0,strpos($category_link,'/'));
+                    $url=get_bloginfo('url').'/index.php/product-category/'.$category_link.
+                    wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>2,'FIRST'=>$post->ID,'SECOND'=>wbc()->sanitize->get('SECOND'),'CART'=>wbc()->sanitize->get('CART'),'ATT_LINK'=>implode(' ',$this->att_link),'CAT_LINK'=>substr($category_link,0,strpos($category_link,'/'))));
 
                 // } elseif($category==get_option('eo_wbc_second_slug')) {
                 } elseif($category==wbc()->options->get_option('configuration','second_slug')) {
 
                     $category_link=$this->eo_wbc_category_link();
                     $url=get_bloginfo('url').'/index.php/product-category/'.$category_link
-                        .'EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
-                        .'&STEP=2&FIRST='.sanitize_text_field($_GET['FIRST']).'&SECOND='.$post->ID
-                        ."&CART=".sanitize_text_field($_GET['CART']).'&ATT_LINK='.implode(' ',$this->att_link).'&CAT_LINK='.substr($category_link,0,strpos($category_link,'/'));
+                    .wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>2,'FIRST'=>wbc()->sanitize->get('FIRST'),'SECOND'=>$post->ID,'CART'=>wbc()->sanitize->get('CART'),'ATT_LINK'=>implode(' ',$this->att_link),'CAT_LINK'=>substr($category_link,0,strpos($category_link,'/'))));
                 } 
                 
                 return header("Location: {$url}");
@@ -285,36 +277,32 @@ class Product {
                 if($category==wbc()->options->get_option('configuration','first_slug')) {
 
                     $url=get_permalink($post->ID)
-                        .'?EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
-                        .'&STEP=1&FIRST='.$post->ID.'&SECOND='.sanitize_text_field(empty($_GET['SECOND'])?'':$_GET['SECOND'])."&REDIRECT=1";
+                        .'?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>1,'FIRST'=>$post->ID,'SECOND'=>(empty(wbc()->sanitize->get('SECOND'))?'':wbc()->sanitize->get('SECOND')),'REDIRECT'=>1));
 
                 // } elseif($category==get_option('eo_wbc_second_slug')) {
                 } elseif($category==wbc()->options->get_option('configuration','second_slug')) {
 
                     $url=get_permalink($post->ID)
-                        .'?EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
-                        .'&STEP=1&FIRST='.sanitize_text_field(empty($_GET['FIRST'])?'':$_GET['FIRST']).'&SECOND='.$post->ID."&REDIRECT=1";
+                        .'?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>1,'FIRST'=>(empty(wbc()->sanitize->get('FIRST'))?'':wbc()->sanitize->get('FIRST')),'SECOND'=>$post->ID,'REDIRECT'=>1));
                 } else {
                     // well due to some reason could not determine category properly so working based on begin offset recived via _GET.
-                    $begin = sanitize_text_field($_GET['BEGIN']);
+                    $begin = wbc()->sanitize->get('BEGIN');
                     $url = get_permalink($post->ID);
                     // if($begin==get_option('eo_wbc_first_slug')){
                     if($begin==wbc()->options->get_option('configuration','first_slug')){
 
-                        $url.= '?EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
-                        .'&STEP=1&FIRST='.$post->ID.'&SECOND='.sanitize_text_field(empty($_GET['SECOND'])?'':$_GET['SECOND'])."&REDIRECT=1";
+                        $url.= '?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>1,'FIRST'=>$post->ID,'SECOND'=>(empty(wbc()->sanitize->get('SECOND'))?'':wbc()->sanitize->get('SECOND')),'REDIRECT'=>1));
 
                     // } elseif($begin==get_option('eo_wbc_second_slug')) {
                     } elseif($begin==wbc()->options->get_option('configuration','second_slug')) {
 
-                        $url.= '?EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
-                        .'&STEP=1&FIRST='.sanitize_text_field(empty($_GET['FIRST'])?'':$_GET['FIRST']).'&SECOND='.$post->ID."&REDIRECT=1";
+                        $url.= '?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>1,'FIRST'=>(empty(wbc()->sanitize->get('FIRST'))?'':wbc()->sanitize->get('FIRST')),'SECOND'=>$post->ID,'REDIRECT'=>1));
                     }                    
                 }
             }            
         }
         
-        elseif(sanitize_text_field($_GET['STEP'])==2) {   
+        elseif(wbc()->sanitize->get('STEP')==2) {   
             
             $review_page_url = '';
 
@@ -325,20 +313,16 @@ class Product {
             } else {
                 $review_page_url = get_permalink($review_page);
             }           
-
-            // if(sanitize_text_field($_GET['FIRST'])==='' OR $category==get_option('eo_wbc_first_slug'))
-            if(sanitize_text_field($_GET['FIRST'])==='' OR $category==wbc()->options->get_option('configuration','first_slug'))
+        
+            if(wbc()->sanitize->get('FIRST')==='' OR $category==wbc()->options->get_option('configuration','first_slug'))
             {
                 $url=$review_page_url
-                    .'?EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
-                    .'&STEP=3&FIRST='.$post->ID.'&SECOND='.sanitize_text_field($_GET['SECOND']);
+                    .'?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>3,'FIRST'=>$post->ID,'SECOND'=>wbc()->sanitize->get('SECOND')));
             }
-            // elseif (sanitize_text_field($_GET['SECOND'])==='' OR $category==get_option('eo_wbc_second_slug'))
-            elseif (sanitize_text_field($_GET['SECOND'])==='' OR $category==wbc()->options->get_option('configuration','second_slug'))
+            elseif (wbc()->sanitize->get('SECOND')==='' OR $category==wbc()->options->get_option('configuration','second_slug'))
             {
                 $url=$review_page_url
-                    .'?EO_WBC=1&BEGIN='.sanitize_text_field($_GET['BEGIN'])
-                    .'&STEP=3&FIRST='.sanitize_text_field($_GET['FIRST']).'&SECOND='.$post->ID;
+                    .'?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>3,'FIRST'=>wbc()->sanitize->get('FIRST'),'SECOND'=>$post->ID));
             }
             else
             {
@@ -359,7 +343,7 @@ class Product {
         $cart=NULL;//storage variable for cart data if redirected from 'Add to cart' action.
         if(isset($_GET['CART']))
         {
-            $cart=str_replace("\\",'',base64_decode(sanitize_text_field($_GET['CART']),TRUE));
+            $cart=str_replace("\\",'',base64_decode(wbc()->sanitize->get('CART'),TRUE));
             $cart=(array)json_decode($cart);
                         
             if(!empty($cart['variation_id']))
@@ -382,7 +366,21 @@ class Product {
         }
                 
         $terms=wp_get_post_terms($post->ID,get_taxonomies());        
-        $maps = wp_cache_get( 'cache_maps', 'eo_wbc');        
+        $maps = apply_filters('eowbc_product_maps',wp_cache_get( 'cache_maps', 'eo_wbc'));
+
+        $is_cleanup = apply_filters( 'eowbc_product_maps_is_reset_cleanup',1);    
+
+        if($is_cleanup and !empty($maps) and is_array($maps)) {
+            
+            $new_maps = array();            
+            foreach ($maps as $key => $map) {
+                if(empty($map['save_builder'])){
+                    $new_maps[$key] = $map;
+                }                
+            }            
+            $maps = $new_maps;
+        }
+
         $product_in = array();        
         // Gathering all terms for the product that is added to the cart.
         if(!is_wp_error($terms) and !empty($terms) and is_array($terms) and is_array($maps) ){
@@ -400,9 +398,9 @@ class Product {
                     $terms = array_merge($terms,$non_var_terms);
                 }                                
             } else {
-                $terms = array_walk($terms,function($term,$index){
-                    $terms[$index] = $term->term_taxonomy_id;
-                });    
+                array_walk($terms,function($term,$index) use(&$terms){
+                    $terms[$index] = $term->term_taxonomy_id;                    
+                });   
             } 
 
             // Gather all target of the maps           
@@ -431,6 +429,7 @@ class Product {
                         return false;
                     }                
                 },$maps));
+
             }
         }         
 
@@ -544,6 +543,9 @@ class Product {
     public function eo_wbc_get_category() {
 
         global $post;
+        return wbc()->common->get_category('product',$post->ID,array(wbc()->options->get_option('configuration','first_slug'),wbc()->options->get_option('configuration','second_slug')));
+
+        global $post;
         $__category = false;
 
         $terms=wc_get_product_terms( $post->ID, 'product_cat', array( 'fields' => 'slugs' ));
@@ -560,13 +562,13 @@ class Product {
         
         if(@count(array_intersect($terms,$first_cat_list))>0)
         {      
-            if(!empty($_GET['BEGIN']) && $_GET['BEGIN']==$first_cat){
+            if(!empty(wbc()->sanitize->get('BEGIN')) && wbc()->sanitize->get('BEGIN')==$first_cat){
 
-                if(!empty($_GET['STEP']) && $_GET['STEP']==1){
+                if(!empty(wbc()->sanitize->get('STEP')) && wbc()->sanitize->get('STEP')==1){
 
                     $__category = $first_cat;
 
-                } elseif(!empty($_GET['STEP']) && $_GET['STEP']==2){
+                } elseif(!empty(wbc()->sanitize->get('STEP')) && wbc()->sanitize->get('STEP')==2){
 
                     $__category = $second_cat;
 
@@ -575,13 +577,13 @@ class Product {
                     $__category = FALSE;
                 }
 
-            } elseif(!empty($_GET['BEGIN']) && $_GET['BEGIN']==$second_cat) {
+            } elseif(!empty(wbc()->sanitize->get('BEGIN')) && wbc()->sanitize->get('BEGIN')==$second_cat) {
 
-                if(!empty($_GET['STEP']) && $_GET['STEP']==1){
+                if(!empty(wbc()->sanitize->get('STEP')) && wbc()->sanitize->get('STEP')==1){
 
                     $__category = $second_cat;
 
-                } elseif(!empty($_GET['STEP']) && $_GET['STEP']==2){
+                } elseif(!empty(wbc()->sanitize->get('STEP')) && wbc()->sanitize->get('STEP')==2){
 
                     $__category = $first_cat;
                 } else{
@@ -592,13 +594,13 @@ class Product {
 
         } elseif(count(array_intersect($terms,$second_cat_list))>0) {
 
-            if(!empty($_GET['BEGIN']) && $_GET['BEGIN']==$first_cat){
+            if(!empty(wbc()->sanitize->get('BEGIN')) && wbc()->sanitize->get('BEGIN')==$first_cat){
 
-                if(!empty($_GET['STEP']) && $_GET['STEP']==1){
+                if(!empty(wbc()->sanitize->get('STEP')) && wbc()->sanitize->get('STEP')==1){
 
                     $__category = $first_cat;
 
-                } elseif(!empty($_GET['STEP']) && $_GET['STEP']==2){
+                } elseif(!empty(wbc()->sanitize->get('STEP')) && wbc()->sanitize->get('STEP')==2){
 
                     $__category = $second_cat;
 
@@ -607,13 +609,13 @@ class Product {
                     $__category = FALSE;
                 }
 
-            } elseif(!empty($_GET['BEGIN']) && $_GET['BEGIN']==$second_cat) {
+            } elseif(!empty(wbc()->sanitize->get('BEGIN')) && wbc()->sanitize->get('BEGIN')==$second_cat) {
 
-                if(!empty($_GET['STEP']) && $_GET['STEP']==1){
+                if(!empty(wbc()->sanitize->get('STEP')) && wbc()->sanitize->get('STEP')==1){
 
                     $__category = $second_cat;
 
-                } elseif(!empty($_GET['STEP']) && $_GET['STEP']==2){
+                } elseif(!empty(wbc()->sanitize->get('STEP')) && wbc()->sanitize->get('STEP')==2){
 
                     $__category = $first_cat;
                 } else{
@@ -625,10 +627,10 @@ class Product {
 
         //if(empty($__category) or ($__category!=get_option('eo_wbc_first_slug') and $__category!=get_option('eo_wbc_second_slug'))) {
         if(empty($__category) or ($__category!=wbc()->options->get_option('configuration','first_slug') and $__category!=wbc()->options->get_option('configuration','second_slug'))) {
-            if(!empty($_GET['BEGIN']) and !empty($_GET['STEP'])){
+            if(!empty(wbc()->sanitize->get('BEGIN')) and !empty(wbc()->sanitize->get('STEP'))) {
                 
-                $__begin = sanitize_text_field($_GET['BEGIN']);
-                $__step = sanitize_text_field($_GET['STEP']);
+                $__begin = wbc()->sanitize->get('BEGIN');
+                $__step = wbc()->sanitize->get('STEP');
 
                 //if($__begin == get_option('eo_wbc_first_slug')) {
                 if($__begin == wbc()->options->get_option('configuration','first_slug')) {

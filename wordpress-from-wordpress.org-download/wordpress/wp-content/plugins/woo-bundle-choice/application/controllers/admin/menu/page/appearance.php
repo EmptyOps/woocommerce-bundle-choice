@@ -3,7 +3,6 @@ namespace eo\wbc\controllers\admin\menu\page;
 
 defined( 'ABSPATH' ) || exit;
 
-
 if ( ! class_exists( 'Appearance' ) ) {
 	class Appearance {
 
@@ -35,6 +34,7 @@ if ( ! class_exists( 'Appearance' ) ) {
 										'type'=>'checkbox',
 										'value'=>array('1'),
 										'options'=>array('1'=>' '),
+										'is_id_as_name'=>true,
 										'class'=>array('fluid'),						
 										// 'size_class'=>array('eight','wide'),
 										'inline'=>false,
@@ -46,30 +46,34 @@ if ( ! class_exists( 'Appearance' ) ) {
 										),
 									),
 
-								), \eo\wbc\model\admin\Form_Builder::instance()->ui_controls_collection( "button", "Button", $hide_defaults=array("font","bordercolor"), $additional_fields=array(), $info_text_overrides=array() )
+								), \eo\wbc\model\admin\Form_Builder::instance()->ui_controls_collection( "button", "Button", $hide_defaults=array("font","bordercolor"), $additional_fields=array(), $info_text_overrides=array() ), 
+								array( 
+									'wid_btns_submit_btn'=>array(
+										'label'=>eowbc_lang('Save'),
+										'type'=>'button',								
+										'class'=>array('secondary'),
+										//'size_class'=>array('eight','wide'),
+										'inline'=>false,
+										'attr'=>array('data-tab_key="wid_btns"', 'data-action="save"'),
+									)	
+								)
 							)							
 				),
 				'breadcrumb'=>array(
 						'label'=>'Breadcrumb',
-						'form'=>array_merge(\eo\wbc\model\admin\Form_Builder::instance()->ui_controls_collection( "breadcrumb", "Breadcrumb", $hide_defaults=array("hovercolor","bordercolor","text","font","textcolor"), $additional_fields=array( array("field_id"=>"breadcrumb_num_icon","field_label"=>"Breadcrumb Number Icon","type"=>"color"), array("field_id"=>"breadcrumb_title","field_label"=>"Breadcrumb Title","type"=>"color"), array("field_id"=>"breadcrumb_actions","field_label"=>"Breadcrumb Actions","type"=>"color"), array("field_id"=>"showhide_icons","field_label"=>"Breadcrumb Show/Hide Icons","type"=>"checkbox","options"=>array('1'=>' ')) ), $info_text_overrides=array("breadcrumb_showhide_icons"=>'You can upload icon from configuration page, <a href="wp-admin/admin.php?page=eo-wbc-setting">click here</a> to go to configuration'), "active_inactive" ),
+						'form'=>array_merge(\eo\wbc\model\admin\Form_Builder::instance()->ui_controls_collection( "breadcrumb", "Breadcrumb", $hide_defaults=array("hovercolor","bordercolor","text","font","textcolor"), $additional_fields=array( array("field_id"=>"breadcrumb_num_icon","field_label"=>"Breadcrumb Number Icon","type"=>"color"), array("field_id"=>"breadcrumb_title","field_label"=>"Breadcrumb Title","type"=>"color"), array("field_id"=>"breadcrumb_actions","field_label"=>"Breadcrumb Actions","type"=>"color"), array("field_id"=>"showhide_icons","field_label"=>"Breadcrumb Show/Hide Icons","type"=>"checkbox","options"=>array('1'=>' '),'attrs'=>array('is_id_as_name'=>true)) ), $info_text_overrides=array("breadcrumb_showhide_icons"=>'You can upload icon from configuration page, <a href="wp-admin/admin.php?page=eo-wbc-setting">click here</a> to go to configuration'), "active_inactive" ),
 							array(
-								'appearance_breadcrumb_alternate_breadcrumb'=>array(
-									'label'=>'Alternate Breadcrumb',
-									'type'=>'checkbox',
-									'value'=>array(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_alternate_breadcrumb')),
-									'options'=>array('appearance_breadcrumb_alternate_breadcrumb'=>' '),
-									'class'=>array(),
-									'visible_info'=>array( 'label'=>'( Switch to other look of breadcrumb. )',
-										'type'=>'visible_info',
-										'class'=>array('fluid', 'small'),
-										'size_class'=>array('sixteen','wide'),
-									),	
+								'saved_tab_key'=>array(
+									'type'=>'hidden',
+									'value'=>'',
 								),
 								'appearance_breadcrumb_hide_border'=>array(
 									'label'=>'Hide border',
 									'type'=>'checkbox',
-									'value'=>array(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_hide_border')),
-									'options'=>array('appearance_breadcrumb_hide_border'=>' '),
+									'sanitize'=>'sanitize_text_field',
+									'value'=>'',	//hiren commented the population from database here since it is meant to specify default only here. array(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_hide_border')),
+									'options'=>array('1'=>' '),
+									'is_id_as_name'=>true,
 									'class'=>array(),
 									'visible_info'=>array( 'label'=>'( Show/Hide breadcrumb border. )',
 										'type'=>'visible_info',
@@ -80,8 +84,10 @@ if ( ! class_exists( 'Appearance' ) ) {
 								'appearance_breadcrumb_fixed_navigation'=>array(
 									'label'=>'Fixed navigation step',
 									'type'=>'checkbox',
-									'value'=>array(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_fixed_navigation')),
-									'options'=>array('appearance_breadcrumb_fixed_navigation'=>' '),
+									'sanitize'=>'sanitize_text_field',
+									'value'=>'',	//hiren commented the population from database here since it is meant to specify default only here. array(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_fixed_navigation')),
+									'options'=>array('1'=>' '),
+									'is_id_as_name'=>true,
 									'class'=>array(),
 									'visible_info'=>array( 'label'=>'( check here if you wish to show steps as fixed layout. Example: \'Diamond\' stoods always first before \'Setting\' no matter if user begin with \'Setting\'. This setting applies to Step navigation only. )',
 										'type'=>'visible_info',
@@ -89,6 +95,16 @@ if ( ! class_exists( 'Appearance' ) ) {
 										'size_class'=>array('sixteen','wide'),
 									),	
 								),								 
+							), 
+							array( 
+								'breadcrumb_submit_btn'=>array(
+									'label'=>eowbc_lang('Save'),
+									'type'=>'button',								
+									'class'=>array('secondary'),
+									//'size_class'=>array('eight','wide'),
+									'inline'=>false,
+									'attr'=>array('data-tab_key="breadcrumb"', 'data-action="save"'),
+								)	
 							)
 					)
 				),
@@ -99,8 +115,10 @@ if ( ! class_exists( 'Appearance' ) ) {
 								'appearance_filters_alternate_price_filter_first'=>array(
 									'label'=>'Alternate price slider(First Category)',
 									'type'=>'checkbox',
+									'sanitize'=>'sanitize_text_field',
 									'value'=>array(wbc()->options->get_option('appearance_filters','appearance_filters_alternate_price_filter_first')),
-									'options'=>array('appearance_filters_alternate_price_filter_first'=>' '),
+									'options'=>array('1'=>' '),
+									'is_id_as_name'=>true,
 									'class'=>array(),
 									'visible_info'=>array( 'label'=>'( Alternate slider for price at first category. )',
 										'type'=>'visible_info',
@@ -111,8 +129,10 @@ if ( ! class_exists( 'Appearance' ) ) {
 								'appearance_filters_alternate_price_filter_second'=>array(
 									'label'=>'Alternate price slider(Second Category)',
 									'type'=>'checkbox',
+									'sanitize'=>'sanitize_text_field',
 									'value'=>array(wbc()->options->get_option('appearance_filters','appearance_filters_alternate_price_filter_second')),
-									'options'=>array('appearance_filters_alternate_price_filter_second'=>' '),
+									'options'=>array('1'=>' '),
+									'is_id_as_name'=>true,
 									'class'=>array(),
 									'visible_info'=>array( 'label'=>'( Alternate slider for price at second category. )',
 										'type'=>'visible_info',
@@ -120,6 +140,16 @@ if ( ! class_exists( 'Appearance' ) ) {
 										'size_class'=>array('sixteen','wide'),
 									),	
 								), 
+							),
+							array( 
+								'filters_submit_btn'=>array(
+									'label'=>eowbc_lang('Save'),
+									'type'=>'button',								
+									'class'=>array('secondary'),
+									//'size_class'=>array('eight','wide'),
+									'inline'=>false,
+									'attr'=>array('data-tab_key="filters"', 'data-action="save"'),
+								)	
 							)
 						)
 				),
@@ -129,9 +159,11 @@ if ( ! class_exists( 'Appearance' ) ) {
 							'fc_atc_button_text'=>array(
 								'label'=>eowbc_lang('First Category Add to Cart Button Text'),
 								'type'=>'text',
+								'validate'=>array('required'=>''),
+								'sanitize'=>'sanitize_text_field',
 								'value'=>'',
 								'class'=>array('fluid'),						
-								'size_class'=>array('eight','wide'),
+								'size_class'=>array('eight','wide','required'),
 								'inline'=>false,
 
 								'visible_info'=>array( 'label'=>eowbc_lang('Text to be shown on add to cart button on product page for the first category'),
@@ -143,9 +175,11 @@ if ( ! class_exists( 'Appearance' ) ) {
 							'sc_atc_button_text'=>array(
 								'label'=>eowbc_lang('Second Category Add to Cart Button Text'),
 								'type'=>'text',
+								'validate'=>array('required'=>''),
+								'sanitize'=>'sanitize_text_field',
 								'value'=>'',
 								'class'=>array('fluid'),						
-								'size_class'=>array('eight','wide'),
+								'size_class'=>array('eight','wide','required'),
 								'inline'=>false,
 
 								'visible_info'=>array( 'label'=>eowbc_lang('Text to be shown on add to cart button on product page for the second category'),
@@ -157,8 +191,11 @@ if ( ! class_exists( 'Appearance' ) ) {
 						'product_page_add_to_basket'=>array(
 							'label'=>'Add to Basket Text',
 							'type'=>'text',
+							'validate'=>array('required'=>''),
+							'sanitize'=>'sanitize_text_field',
 							'value'=>wbc()->options->get_option('product_page','product_page_add_to_basket'),							
 							'class'=>array(),
+							'size_class'=>array('required'),
 							'visible_info'=>array( 'label'=>'( Text to be shown as replacement to `Add to basket` text in dropdown button of add to bundle button. )',
 								'type'=>'visible_info',
 								'class'=>array('fluid', 'small'),
@@ -168,8 +205,10 @@ if ( ! class_exists( 'Appearance' ) ) {
 						'product_page_hide_first_variation_form'=>array(
 							'label'=>'Show/Hide first category\'s variation menu',
 							'type'=>'checkbox',
+							'sanitize'=>'sanitize_text_field',
 							'value'=>array(wbc()->options->get_option('product_page','product_page_hide_first_variation_form')),
-							'options'=>array('product_page_hide_first_variation_form'=>' '),
+							'options'=>array('1'=>' '),
+							'is_id_as_name'=>true,
 							'class'=>array(),
 							'visible_info'=>array( 'label'=>'( Hide variation selection table for first category\'s product. )',
 								'type'=>'visible_info',
@@ -180,8 +219,10 @@ if ( ! class_exists( 'Appearance' ) ) {
 						'product_page_hide_second_variation_form'=>array(
 							'label'=>'Show/Hide second category\'s variation menu',
 							'type'=>'checkbox',
+							'sanitize'=>'sanitize_text_field',
 							'value'=>array(wbc()->options->get_option('product_page','product_page_hide_second_variation_form')),
-							'options'=>array('product_page_hide_second_variation_form'=>' '),
+							'options'=>array('1'=>' '),
+							'is_id_as_name'=>true,
 							'class'=>array(),
 							'visible_info'=>array( 'label'=>'( Hide variation selection table for second category\'s product. )',
 								'type'=>'visible_info',
@@ -189,6 +230,14 @@ if ( ! class_exists( 'Appearance' ) ) {
 								'size_class'=>array('sixteen','wide'),
 							),	
 						), 
+						'product_page_submit_btn'=>array(
+							'label'=>eowbc_lang('Save'),
+							'type'=>'button',								
+							'class'=>array('secondary'),
+							//'size_class'=>array('eight','wide'),
+							'inline'=>false,
+							'attr'=>array('data-tab_key="product_page"', 'data-action="save"'),
+						)
 						/*'appearence_product_page_devider_option_form'=>array(
 										'label'=>'Option Form',
 										'type'=>'devider',

@@ -67,6 +67,9 @@ class f_i_step1Cest
 		$I->see($price_of_product);
 		$I->see('Additional information');
 
+		//first select required options for variable product, otherwise it won't let us add into cart. 
+		$I->click('//*[@id="product-13"]/div[2]/form/table/tbody/tr/td[2]/div/span[2]/ul/li[1]/div');
+
 		// - I click on continue button
 		$I->click('Add to bag...');
 

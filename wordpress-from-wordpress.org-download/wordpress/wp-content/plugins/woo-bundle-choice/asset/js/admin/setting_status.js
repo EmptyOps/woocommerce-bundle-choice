@@ -6,11 +6,9 @@ jQuery(document).ready(function($){
 			jQuery('[for="features"]').parent().css('display','none');
 		} else {
 
-<<<<<<< HEAD
-			if($(this).val().trim()=='jewelery'){				
-=======
+
 			if($(this).val().trim()=='jewelry'){				
->>>>>>> 85b6309ea16a13e290aa6d79c6fc2d053408c6e3
+
 				$("#ring_builder").attr('checked','checked');
 				$("#ring_builder").parent().parent().css('display','block');
 				$("#rapnet_api").attr('checked','checked');

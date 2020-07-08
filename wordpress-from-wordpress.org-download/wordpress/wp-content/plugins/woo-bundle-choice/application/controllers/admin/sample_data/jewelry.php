@@ -24,7 +24,7 @@ class Jewelry {
                             array(
                                 'label' => 'Carat',
                                 'range'=>true,
-                                'terms' => array('min'=>'0.2','max'=>'25'),
+                                'terms' => array('min'=>'0.2','max'=>'3'),
                                 'description' => 'Carat attributes for diamond shape',
                                 'slug' => 'eo_carat_attr'
                             ),
@@ -61,7 +61,7 @@ class Jewelry {
                             array(
                                 'label' => 'Depth',
                                 'range'=>true,
-                                'terms' => array('min'=>'45','max'=>'85'),        
+                                'terms' => array('min'=>'45','max'=>'55'),        
                                 'description' => 'Depth attributes for diamond shape',
                                 'slug' => 'eo_depth_attr'
                             ),
@@ -75,7 +75,7 @@ class Jewelry {
                             array(
                                 'label' => 'Table',
                                 'range'=>true,
-                                'terms' => array('min'=>'45','max'=>'85'),
+                                'terms' => array('min'=>'45','max'=>'55'),
                                 'description' => 'Table attributes for diamond shape',
                                 'slug' => 'eo_table_attr'
                             ),

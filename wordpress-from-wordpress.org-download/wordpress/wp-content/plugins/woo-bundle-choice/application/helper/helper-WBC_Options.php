@@ -29,8 +29,13 @@ class WBC_Options {
 	}
 
 	public function get_option(string $option,$key,$default = false) {
+
+		$option = apply_filters('eowbc_helper_options_get_option_option',$option,$key,$default);
+		$key = apply_filters('eowbc_helper_options_get_option_key',$key,$option,$default);
+		$default = apply_filters('eowbc_helper_options_get_option_default',$default,$option,$key);
+
 		$options = unserialize(get_option('eowbc_option_'.$option,"a:0:{}"));
-		if(!empty($options) and is_array($options) and !empty($options[$key]))  {		
+		if(!empty($options) and is_array($options) and isset($options[$key])/*!empty($options[$key])*/)  {		
 			return $options[$key];
 		} else {
 			return $default;
@@ -75,6 +80,11 @@ class WBC_Options {
 	public function set(string $option,$value) {
 		update_option( $option, $value );
 		return true;
+	}
+
+	//interacts with core wp api directly
+	public function delete(string $option) {
+		return delete_option($option);
 	}
 
 }

@@ -19,7 +19,7 @@ class Order_Received {
 
     public function init() {
          add_action('woocommerce_thankyou',function($order_id){      
-            $sets=WC()->session->get('EO_WBC_MAPS');
+            $sets=wbc()->session->get('EO_WBC_MAPS');
             $maps=array();
             if(!is_null($sets))
             {
@@ -42,8 +42,8 @@ class Order_Received {
                 $wpdb->insert($wpdb->prefix.'eo_wbc_order_maps',array('order_id'=>$order_id,'order_map'=>json_encode($maps)),array("%s","%s"));                
                 
                 //Clearing Plugin Session data                
-                WC()->session->set('EO_WBC_SETS',NULL);
-                WC()->session->set('EO_WBC_MAPS',NULL);
+                wbc()->session->set('EO_WBC_SETS',NULL);
+                wbc()->session->set('EO_WBC_MAPS',NULL);
                 WC()->cart->empty_cart();                 
             }
         });

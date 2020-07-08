@@ -42,25 +42,35 @@ class Eowbc_Appearance {
 
 	public function save( $form_definition ) {
 		
+		
+
 		$res = array();
 		$res["type"] = "success";
 
 	    $res["msg"] = "";
+
+	    wbc()->sanitize->clean($form_definition);	    
+	    wbc()->validate->check($form_definition);
 		wbc()->load->model('admin\form-builder');
 
 		/*$res["post"] = $_POST;*/
 
+		$saved_tab_key = !empty($_POST["saved_tab_key"]) ? $_POST["saved_tab_key"] : ""; 
+		$skip_fileds = array('saved_tab_key');
+		
 	    //loop through form tabs and save 
 
 	    foreach ($form_definition as $key => $tab) {
+	    	if( $key != $saved_tab_key ) {
+	    		continue;
+	    	}
+	    	
 	    	foreach ($tab["form"] as $fk => $fv) {
 			    //loop through form fields, read from POST/GET and save
 			    //may need to check field type here and read accordingly only
 			    //only for those for which POST is set
-			    if( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) && isset($_POST[$fk]) ) {
-			    	error_log('appearance_'.$key);
-			    	error_log($fk);
-			    	wbc()->options->update_option('appearance_'.$key,$fk,(empty($_POST[$fk])? '': sanitize_text_field( $_POST[$fk] ) ) );	
+			    if( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) && (isset($_POST[$fk]) || $fv["type"]=='checkbox')) {
+			    	wbc()->options->update_option('appearance_'.$key,$fk,(isset($_POST[$fk])? sanitize_text_field( $_POST[$fk] ):'' ));	
 			    }
 			}
 	    }

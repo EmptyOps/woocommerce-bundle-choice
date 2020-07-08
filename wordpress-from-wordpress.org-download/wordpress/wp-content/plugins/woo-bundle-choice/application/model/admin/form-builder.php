@@ -41,6 +41,15 @@ class Form_Builder implements Builder {
 					$active = false;
 					foreach ($form['data'] as $tab_slug => $tab_data) {
 
+						if( !empty($form["active_tab_onload"]) ) {
+							if( $form["active_tab_onload"] == $tab_slug ) {
+								$active = false;	//set false so that it is set active! that is how below code's logic to set the active tab is :-(
+							}
+							else {
+								$active = true;
+							}
+						}
+
 						$tab_menu.='<a class="item '.(!$active?'active':'').'" data-tab="'.$tab_slug.'">'.$tab_data['label'].'</a>';
 						$tab_segment.='<div class="ui tab '.(!$active?'active':'').'" data-tab="'.$tab_slug.'">';
 						if(!$active){ $active = true; }
@@ -268,6 +277,8 @@ class Form_Builder implements Builder {
 			$collection[$field_id.'_text'] = array(
 				'label'=>$field_label.' '.eowbc_lang('Text'),
 				'type'=>'text',
+				'sanitize'=>'sanitize_text_field',
+				'validate'=>array('required'=>''),
 				// 'class'=>array('fluid'),
 				'size_class'=>array('eight','wide'),
 				'inline'=>false,
@@ -286,6 +297,7 @@ class Form_Builder implements Builder {
 				'label'=>$field_label.' '.eowbc_lang('Text Font'),
 				'type'=>'text',
 				// 'class'=>array('fluid'),
+				'sanitize'=>'sanitize_text_field',
 				'size_class'=>array('four','wide'),
 				'inline'=>false,
 
@@ -302,6 +314,8 @@ class Form_Builder implements Builder {
 			$collection[$field_id.'_radius'] = array(
 				'label'=>$field_label.' '.eowbc_lang('Radius (px)'),
 				'type'=>'text',
+				'sanitize'=>'sanitize_text_field',
+				'validate'=>array('required'=>'','postfix'=>['px']),
 				// 'class'=>array('fluid'),
 				'size_class'=>array('four','wide'),
 				'inline'=>false,
@@ -325,11 +339,14 @@ class Form_Builder implements Builder {
 			for($fi=0; $fi<$ftot; $fi++)
 			{
 				$special_lbl = $ftot < 2 ? "" : ( $fi == 0 ? eowbc_lang("Active ") : eowbc_lang("Inactive ") );
+				$field_id_suffix = ($fi==0?"_active":"_inactive");
 
-				$collection[$field_id.'_backcolor_lbl'.($fi==0?"_active":"_inactive")] = array(
+				$collection[$field_id.'_backcolor_lbl'.$field_id_suffix] = array(
 					'label'=>$field_label.' '.$special_lbl.eowbc_lang('Background Color'),
 					'type'=>'label',
+					'validate'=>array('required'=>''),
 					// 'class'=>array('fluid'),
+					'sanitize'=>'sanitize_hex_color',
 					'size_class'=>array('eight','wide'),
 					'inline'=>true,
 
@@ -338,7 +355,7 @@ class Form_Builder implements Builder {
 					),
 				);
 
-				$collection[$field_id.'_backcolor'.$fi] = array(
+				$collection[$field_id.'_backcolor'.$field_id_suffix] = array(
 					'type'=>'color',
 					'size_class'=>array('eight','wide'),
 					'inline'=>false,
@@ -352,6 +369,8 @@ class Form_Builder implements Builder {
 				'label'=>$field_label.' '.eowbc_lang('Hover Color'),
 				'type'=>'label',
 				// 'class'=>array('fluid'),
+				'validate'=>array('required'=>''),
+				'sanitize'=>'sanitize_hex_color',
 				'size_class'=>array('eight','wide'),
 				'inline'=>true,
 
@@ -373,9 +392,10 @@ class Form_Builder implements Builder {
 				'label'=>$field_label.' '.eowbc_lang('Text Color'),
 				'type'=>'label',
 				// 'class'=>array('fluid'),
+				'validate'=>array('required'=>''),
+				'sanitize'=>'sanitize_hex_color',
 				'size_class'=>array('eight','wide'),
 				'inline'=>true,
-
 				'info_icon'=>array( 'text'=>( array_key_exists("textcolor", $info_text_overrides) ? $info_text_overrides["textcolor"] : eowbc_lang('Sets specified color as text color on '.$field_label) ),
 					'type'=>'info_icon',
 				),
@@ -394,6 +414,8 @@ class Form_Builder implements Builder {
 				'label'=>$field_label.' '.eowbc_lang('Border Color'),
 				'type'=>'label',
 				// 'class'=>array('fluid'),
+				'validate'=>array('required'=>''),
+				'sanitize'=>'sanitize_hex_color',
 				'size_class'=>array('eight','wide'),
 				'inline'=>true,
 
@@ -423,10 +445,12 @@ class Form_Builder implements Builder {
 
 				for($fi=0; $fi<$ftot; $fi++) {
 					$special_lbl = $ftot < 2 ? "" : ( $fi == 0 ? eowbc_lang("Active ") : eowbc_lang("Inactive ") );
+					$field_id_suffix = ($fi==0?"_active":"_inactive");
 
-					$collection[$field_id.'_backcolor_lbl'.$fi] = array(
+					$collection[$field_id.'_backcolor_lbl'.$field_id_suffix] = array(
 						'label'=>$field_label.' '.$special_lbl.eowbc_lang('Color'),
 						'type'=>'label',
+						'sanitize'=>'sanitize_text_field',
 						// 'class'=>array('fluid'),
 						'size_class'=>array('eight','wide'),
 						'inline'=>true,
@@ -436,7 +460,7 @@ class Form_Builder implements Builder {
 						),
 					);
 
-					$collection[$field_id.'_backcolor'.$fi] = array(
+					$collection[$field_id.'_backcolor'.$field_id_suffix] = array(
 						'type'=>'color',
 						'size_class'=>array('eight','wide'),
 						'inline'=>false,
@@ -449,6 +473,7 @@ class Form_Builder implements Builder {
 					'type'=>'checkbox',
 					'value'=>array('1'),
 					'options'=>(isset($value["options"]) ? $value["options"] : array('1'=>' ')),
+					'sanitize'=>'sanitize_text_field',
 					'class'=>array('fluid'),						
 					// 'size_class'=>array('eight','wide'),
 					'inline'=>false,
@@ -459,6 +484,10 @@ class Form_Builder implements Builder {
 						// 'size_class'=>array('sixteen','wide'),
 					),
 				);
+
+				if( !empty($value["attrs"]) ) {
+					$collection[$field_id] = array_merge( $collection[$field_id], $value["attrs"] );
+				}
 			}
 			elseif ($value["type"] == "text") {
 				$collection[$field_id] = array(
@@ -466,6 +495,7 @@ class Form_Builder implements Builder {
 					'type'=>'text',
 					'value'=>(array_key_exists($field_id, $default_values) ? $default_values[$field_id] : ""),
 					// 'class'=>array('fluid'),
+					'sanitize'=>'sanitize_text_field',
 					'size_class'=>array('four','wide'),
 					'inline'=>false,
 
@@ -475,6 +505,10 @@ class Form_Builder implements Builder {
 						// 'size_class'=>array('sixteen','wide'),
 					),
 				);
+
+				if( !empty($value["attrs"]) ) {
+					$collection[$field_id] = array_merge( $collection[$field_id], $value["attrs"] );
+				}
 			}
 		}
 
@@ -483,7 +517,7 @@ class Form_Builder implements Builder {
 	}
 
 	public static function savable_types() {
-		return array("text","checkbox","color","hidden","radio","select","textarea");
+		return array("text","checkbox","color","hidden","radio","select","textarea","icon");
 	}
 
 }

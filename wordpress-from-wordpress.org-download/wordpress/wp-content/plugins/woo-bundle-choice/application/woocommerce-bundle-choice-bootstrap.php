@@ -33,6 +33,7 @@ class WooCommerce_Bundle_Choice_Bootstrap {
 	}
 
 	public function run() {
+		add_filter( 'widget_text', 'do_shortcode' );
 		add_action('created_term', array(\eo\wbc\controllers\admin\Term_Meta::instance(),'save_terms'), 10, 3);
 		add_action('edit_term', array(\eo\wbc\controllers\admin\Term_Meta::instance(),'save_terms'), 10, 3);
 
@@ -42,13 +43,13 @@ class WooCommerce_Bundle_Choice_Bootstrap {
 		
 		
 		//Add form to the attribute page
-    	if(!empty($_GET['post_type']) and $_GET['post_type']=='product' and !empty($_GET['page']) and $_GET['page']=='product_attributes'){
+    	if(!empty(wbc()->sanitize->get('post_type')) and wbc()->sanitize->get('post_type')=='product' and !empty(wbc()->sanitize->get('page')) and wbc()->sanitize->get('page')=='product_attributes'){
 
     		\eo\wbc\controllers\admin\Term_Meta::instance()->add_taxonomy_type();
     		
-    	} elseif ( !empty($_GET['post_type']) and $_GET['post_type']=='product' and !empty($_GET['taxonomy']) and strpos($_GET['taxonomy'], 'pa_')!==false ) {
+    	} elseif ( !empty(wbc()->sanitize->get('post_type')) and wbc()->sanitize->get('post_type')=='product' and !empty(wbc()->sanitize->get('taxonomy')) and strpos(wbc()->sanitize->get('taxonomy'), 'pa_')!==false ) {
     		
-    		\eo\wbc\controllers\admin\Term_Meta::instance()->add_attrubute_term_form($_GET['taxonomy']);
+    		\eo\wbc\controllers\admin\Term_Meta::instance()->add_attrubute_term_form(wbc()->sanitize->get('taxonomy'));
 
     	}
 
@@ -61,12 +62,16 @@ class WooCommerce_Bundle_Choice_Bootstrap {
 			/*if(class_exists('Http_Handler')){*/
 				Http_Handler::process();				
 			/*}*/
+
+			if(!empty(wbc()->sanitize->get('eo_wbc_filter'))) {
+				\eo\wbc\controllers\ajax\Filter::instance()->filter();				
+			}
 		}	
 	}
 
 	public function ajax(){
-		if(!empty($_POST['_wpnonce']) and !empty($_POST['resolver'])) {	
-			$resolver_path = constant('EOWBC_DIRECTORY').'application/controllers/ajax/'.sanitize_text_field($_POST['resolver']).'.php';						
+		if(!empty(wbc()->sanitize->post('_wpnonce')) and !empty(wbc()->sanitize->post('resolver'))) {	
+			$resolver_path = constant('EOWBC_DIRECTORY').'application/controllers/ajax/'.sanitize_text_field(wbc()->sanitize->post('resolver')).'.php';						
 			if(file_exists($resolver_path)){
 				require_once $resolver_path;
 			} else {
