@@ -423,6 +423,11 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'next_inline'=>true,
 								// 'inline'=>true,
 							),
+							'd_fconfig_id'=>array(
+								'type'=>'hidden',
+								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
+							),
 							'd_fconfig_filter'=>array(
 								'type'=>'select',
 								'value'=>'',
@@ -436,14 +441,14 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'inline'=>true,
 							),
 							'd_fconfig_type'=>array(
-							'type'=>'hidden',
-							'value'=>'',
-							'sanitize'=>'sanitize_text_field',
+								'type'=>'hidden',
+								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
 							),
 							'd_fconfig_dependent'=>array(
-							'type'=>'hidden',
-							'value'=>'',
-							'sanitize'=>'sanitize_text_field',
+								'type'=>'hidden',
+								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
 							),
 							'd_fconfig_label_label'=>array(
 								'label'=>eowbc_lang('Label'),
@@ -673,6 +678,11 @@ if ( ! class_exists( 'Filters' ) ) {
 								'size_class'=>array('three','wide','required'),
 								// 'next_inline'=>true,
 								// 'inline'=>true,
+							),
+							's_fconfig_id'=>array(
+								'type'=>'hidden',
+								'value'=>'',								
+								'sanitize'=>'sanitize_text_field',
 							),
 							's_fconfig_filter'=>array(
 								'type'=>'select',

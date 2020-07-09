@@ -383,6 +383,20 @@ class Eowbc_Filters {
 
         return $res;
 	}
+
+	public function fetch_filter(&$res) {
+		$first = unserialize(wbc()->options->get_option_group('filters_d_fconfig'));
+		if(!empty($first[$_POST['id']])){
+			$res['msg'] = json_encode($first[$_POST['id']]);
+		} elseif (!empty($second[$_POST['id']])) {
+			$res['msg'] = json_encode($second[$_POST['id']]);
+		} else {
+			$res['msg'] = 'error';
+			$res['msg'] = 'Selected filter does not exists!';
+		}		
+		return $res;
+	}
+
 	
 }
 

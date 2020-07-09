@@ -254,7 +254,7 @@ class EOWBC_Filter_Widget {
 									
 					/*Modifications............................*/
 				</style>";	
-			if(wbc()->options->get_option('filters_filter_setting','filter_setting_alternate_mobile')){
+			if(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')){
 				ob_start();
 				?>
 				<style type="text/css">
@@ -611,7 +611,7 @@ class EOWBC_Filter_Widget {
 			} else {
 				wbc()->load->template('publics/filters/text_slider_desktop', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset)); 
 			}			
-		elseif(wbc()->options->get_option('filters_filter_setting','filter_setting_alternate_mobile')):
+		elseif(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')):
 			
 			wbc()->load->template('publics/filters/text_slider_mobile_alternate', array("filter"=>$filter,"reset"=>$reset,'advance'=>$advance,'prefix'=>$prefix)); 
 		else:
@@ -736,7 +736,7 @@ class EOWBC_Filter_Widget {
 			} else {
 				wbc()->load->template('publics/filters/step_slider_desktop', array("width_class"=>$this->get_width_class($width),"reset"=>$reset,"filter"=>$filter,"items_slug"=>$items_slug,"items_name"=>$items_name)); 
 			}			
-		elseif(wbc()->options->get_option('filters_filter_setting','filter_setting_alternate_mobile')):			
+		elseif(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')):			
 			wbc()->load->template('publics/filters/step_slider_mobile_alternate', array("width_class"=>$this->get_width_class($width),"reset"=>$reset,"filter"=>$filter,"items_slug"=>$items_slug,"items_name"=>$items_name,'advance'=>$advance)); 
 		else:
 			wbc()->load->template('publics/filters/step_slider_mobile', array("width_class"=>$this->get_width_class($width),"reset"=>$reset,"filter"=>$filter,"items_slug"=>$items_slug,"items_name"=>$items_name)); 
@@ -781,7 +781,7 @@ class EOWBC_Filter_Widget {
 				wbc()->load->template('publics/filters/checkbox_desktop', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset));
 			}						
 			
-		elseif(wbc()->options->get_option('filters_filter_setting','filter_setting_alternate_mobile')):			 
+		elseif(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')):			 
 			wbc()->load->template('publics/filters/checkbox_mobile_alternate', array("filter"=>$filter,"reset"=>$reset,'advance'=>$advance)); 
 		else:
 			wbc()->load->template('publics/filters/checkbox_mobile', array("filter"=>$filter,"reset"=>$reset)); 
@@ -819,7 +819,7 @@ class EOWBC_Filter_Widget {
 			}  else {
 				wbc()->load->template('publics/filters/slider_price_desktop', array("width_class"=>$this->get_width_class($width),"min"=>$min,"max"=>$max,"reset"=>$reset)); 
 			}
-		elseif(wbc()->options->get_option('filters_filter_setting','filter_setting_alternate_mobile')):			
+		elseif(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')):			
 			wbc()->load->template('publics/filters/slider_price_mobile_alternate', array("min"=>$min,"max"=>$max,"reset"=>$reset,'advance'=>$advance));
 		else:
 			wbc()->load->template('publics/filters/slider_price_mobile', array("min"=>$min,"max"=>$max,"reset"=>$reset));
@@ -827,7 +827,7 @@ class EOWBC_Filter_Widget {
 	}
 	
 	public function load_mobile($general_filters, $advance_filters) {
-		if(wbc()->options->get_option('filters_filter_setting','filter_setting_alternate_mobile')) {
+		if(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')) {
 			$this->load_grid_mobile($general_filters);
 			$this->slider_price(0);
 			if(!is_wp_error($advance_filters) and !empty($advance_filters)) {
@@ -1248,7 +1248,7 @@ class EOWBC_Filter_Widget {
 				wbc()->load->template('publics/filters/icon_desktop', array("width_class"=>$this->get_width_class($width),"term"=>$term,"title"=>$title,"list"=>$list,"icon_css"=>$icon_css,"reset"=>$reset,"input"=>$input,"type"=>$type,"non_edit"=>$non_edit,'hidden'=>$hidden));
 			}
 
-		elseif(wbc()->options->get_option('filters_filter_setting','filter_setting_alternate_mobile')):			
+		elseif(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')):			
 			wbc()->load->template('publics/filters/icon_mobile_alternate', array("term"=>$term,"title"=>$title,"list"=>$list,"icon_css"=>$icon_css,"reset"=>$reset,"input"=>$input,"type"=>$type,"non_edit"=>$non_edit,'advance'=>$advance,'hidden'=>$hidden)); 
 		else:
 			wbc()->load->template('publics/filters/icon_mobile', array("term"=>$term,"title"=>$title,"list"=>$list,"icon_css"=>$icon_css,"reset"=>$reset,"input"=>$input,"type"=>$type,"non_edit"=>$non_edit,'hidden'=>$hidden)); 
@@ -1551,7 +1551,7 @@ class EOWBC_Filter_Widget {
 		<?php 
 			if(wp_is_mobile()) {
 
-				if(wbc()->options->get_option('filters_filter_setting','filter_setting_alternate_mobile')){
+				if(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')){
 
 					?>
 						<div class="eo-wbc-container filters ui grid container">							

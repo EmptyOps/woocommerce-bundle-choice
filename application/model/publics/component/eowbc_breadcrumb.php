@@ -297,7 +297,7 @@ class EOWBC_Breadcrumb
                 // /*'&FIRST='.sanitize_text_field(empty($_GET['FIRST'])?'':$_GET['FIRST']).
                 // '&SECOND='.sanitize_text_field(empty($_GET['SECOND'])?'':$_GET['SECOND']).*/
                 // '&EO_CHANGE=1';
-                $url=$first_url.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>self::$first_slug,'STEP'=>1,'EO_CHANGE'=>1));
+                $url=$first_url.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>self::$first_slug,'STEP'=>1,'FIRST'=>'','SECOND'=>'','EO_CHANGE'=>1));
             }
             elseif (self::eo_wbc_breadcrumb_get_category($chage_product_id)==self::$second_slug/*get_option('eo_wbc_second_slug')*/) {
 

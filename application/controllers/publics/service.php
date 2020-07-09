@@ -70,10 +70,7 @@ class Service {
         if(empty($first_cat_tax) or empty($second_cat_tax)) return 0;
 
         //$query="SELECT `discount` FROM `".$wpdb->prefix."eo_wbc_cat_maps` WHERE  `first_cat_id` in({$first_cat_tax}) and `second_cat_id` in({$second_cat_tax}) or `first_cat_id` in({$second_cat_tax}) and `second_cat_id` in({$first_cat_tax})";                
-        $query = apply_filters('eowbc_product_maps',wp_cache_get( 'cache_maps', 'eo_wbc'));
-        echo $first_cat_tax.'<br/>';
-        echo $second_cat_tax.'<br/>';
-        wbc()->common->pr($query);
+        $query = apply_filters('eowbc_product_maps',wp_cache_get( 'cache_maps', 'eo_wbc'));        
         $query = array_filter($query,function($_map_) use($first_cat_tax,$second_cat_tax) {
             return ((in_array($_map_['eo_wbc_first_category'],explode(',',$first_cat_tax)) and in_array($_map_['eo_wbc_second_category'],explode(',',$second_cat_tax))) or (in_array($_map_['eo_wbc_first_category'],explode(',',$second_cat_tax)) and in_array($_map_['eo_wbc_second_category'],explode(',',$first_cat_tax))))?true:false;
         });

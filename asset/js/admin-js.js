@@ -222,6 +222,51 @@ jQuery(document).ready(function($){
     $(".ui.negative.message .close.icon").click(function(){
         jQuery(".ui.negative.message").addClass('transition hidden');
     });
+
+    jQuery("#eowbc_price_control_methods_list,#eowbc_price_control_methods_list,#eowbc_price_control_sett_methods_list").find(' tbody tr').find('td:eq(0)') .on('click',function(e){
+        
+        let $this = $(this);
+        var form = jQuery($this).closest("form");
+        let saved_tab_key = jQuery(".ui.pointing.secondary.menu>.item.active").data('tab');
+        let id = $(this).find(':checkbox').val();
+        /*console.log($(this).find(':checkbox').val());*/
+        
+        console.log(e.srcElement.nodeName);
+        if(e.srcElement.nodeName!='INPUT'){
+            console.log('in');
+            jQuery.ajax({
+                url:eowbc_object.admin_url,
+                type: 'POST',
+                data: { _wpnonce: jQuery( jQuery(form).find('input[name="_wpnonce"]')[0] ).val(),_wp_http_referer: jQuery( jQuery(form).find('input[name="_wp_http_referer"]')[0] ).val(), action: jQuery( jQuery(form).find('input[name="action"]')[0] ).val(), resolver: jQuery( jQuery(form).find('input[name="resolver"]')[0] ).val(), saved_tab_key: saved_tab_key, id: id, sub_action: "fetch" },
+                beforeSend:function(xhr){
+
+                },
+                success:function(result,status,xhr){
+                    var resjson = jQuery.parseJSON(result);
+                    if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
+                        console.log(resjson["msg"]);
+                    } else {
+                        $('body').toast({
+                            class: (typeof(resjson["type"]) != undefined ? resjson["type"] : 'error'),
+                            position: 'bottom right',
+                            message: (typeof(resjson["msg"]) != undefined && resjson["msg"] != "" ? resjson["msg"] : `Failed! Please check Logs page for for more details.`)
+                        });
+                    }                
+                },
+                error:function(xhr,status,error){
+                    /*console.log(xhr);*/
+                    $('body').toast({
+                        class:'error',
+                        position: 'bottom right',
+                        message: `Network Error!`
+                    });
+                },
+                complete:function(xhr,status){
+                    /*console.log(xhr);*/
+                }
+            });
+        }
+    });
 });
 
 function eowbc_toast_common( toast_type_class, msg, timeout) {
