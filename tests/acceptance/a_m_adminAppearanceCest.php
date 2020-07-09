@@ -81,7 +81,7 @@ class a_m_adminAppearanceCest
 		// set fields 
 		$I->fillField('breadcrumb_radius', '4px');
 		//TODO commented to see proper visuals during debug. uncomment when the entire form is validated after the save.
-		// $I->executeJS('jQuery("#breadcrumb_backcolor_active").val("#000000");'); 
+		$I->executeJS('jQuery("#breadcrumb_backcolor_active").val("#ffffff");'); 
 		// $I->executeJS('jQuery("#breadcrumb_backcolor_inactive").val("#000111");');
 		// $I->executeJS('jQuery("#breadcrumb_num_icon_backcolor_active").val("#000000");'); 
 		// $I->executeJS('jQuery("#breadcrumb_num_icon_backcolor_inactive").val("#000111");');

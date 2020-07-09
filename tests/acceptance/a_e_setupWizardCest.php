@@ -11,14 +11,14 @@ class a_e_setupWizardCest
     // {
     // }
 
-    protected function step1(AcceptanceTester $I, $is_inner_call=false) {
+    protected function step1(AcceptanceTester $I, $suite_name_prefix=false) {
 
-    	if( !$I->test_allowed_in_this_environment("a_") && !$is_inner_call ) {
+    	if( !$I->test_allowed_in_this_environment("a_") && !$suite_name_prefix ) {
             return;
         }
 
-        if($is_inner_call) {
-        	$I->see("is_inner_call detected from n_ class");
+        if($suite_name_prefix) {
+        	$I->see("suite_name_prefix detected from n_ class");
         }
 
 		//login to admin panel, should save and maintain cookies so that do not need to login on all admin test. but yeah however during the front end test should flush the admin cookie first.  
@@ -42,9 +42,9 @@ class a_e_setupWizardCest
 		$I->waitForText('Ring Builder', 10); // secs	//if we see Ring Builder on next step than it's properly saved
 	}
 
-	protected function step2(AcceptanceTester $I, $is_inner_call=false) {
+	protected function step2(AcceptanceTester $I, $suite_name_prefix=false) {
 
-		if( !$I->test_allowed_in_this_environment("a_") && !$is_inner_call ) {
+		if( !$I->test_allowed_in_this_environment("a_") && !$suite_name_prefix ) {
             return;
         }
 
@@ -75,9 +75,9 @@ class a_e_setupWizardCest
 		$I->waitForText('Ring Builder', 10);	//TODO here should actually confirm if the switch is on, do it by fetching javascript value and comparing it but it will required javascript See etc function. And return statement from javascript actually returns result to php as per webdriver doc
 	}
 
-	protected function step3(AcceptanceTester $I, $is_inner_call=false) {
+	protected function step3(AcceptanceTester $I, $suite_name_prefix=false) {
 
-		if( !$I->test_allowed_in_this_environment("a_") && !$is_inner_call ) {
+		if( !$I->test_allowed_in_this_environment("a_") && !$suite_name_prefix ) {
             return;
         }
         
