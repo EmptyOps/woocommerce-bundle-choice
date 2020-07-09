@@ -34,7 +34,7 @@ class n_e_installAndSetupAdminSideCest
         $this->setupWizard($I);
 
         // sample data
-        $addSampleDataProcessCest = new 
+        // $addSampleDataProcessCest = new 
 
 		// step 1
         
