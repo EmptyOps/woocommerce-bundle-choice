@@ -52,9 +52,9 @@ class WBC_Common {
 			if(!empty($ids) and is_array($ids)){
 				foreach ($ids as $id) {
 					$ancestors = array_merge($ancestors,get_ancestors($id,'product_cat'));	
+					$ancestors[] = $id;
 				}				
 			}
-
 			$term_slug=array_map(array(wbc()->wp,"cat_id2slug"),$ancestors);				
 
 			$matches = array_intersect($in_category,$term_slug);				

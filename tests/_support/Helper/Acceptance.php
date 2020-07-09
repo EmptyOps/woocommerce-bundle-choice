@@ -33,7 +33,7 @@ class Acceptance extends \Codeception\Module
     }
 
     /**
-     * 
+     * @param $test_name_perfix consider it as test suite, however it is not following the complete definition of suite flow available in codeception but just an internal way to handle different test categories as suites using name prefix. 
      */
     public function test_allowed_in_this_environment( $test_name_perfix )
     {

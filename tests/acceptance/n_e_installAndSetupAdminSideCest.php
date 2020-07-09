@@ -16,12 +16,6 @@ class n_e_installAndSetupAdminSideCest
 
     }
 
-    protected function setupWizard(AcceptanceTester $I) {
-        
-        
-
-    }
-
     // setup using setup wizard and sample data. 
     // TODO here important to note that to run test with sample data on fresh install this test either needs to be run first or coditionally in duplicate environment where the other tests which sets data manually are just skipped  
     public function tryToTestSetupUsingSampleData(AcceptanceTester $I)
@@ -31,17 +25,12 @@ class n_e_installAndSetupAdminSideCest
         }
 
         // setup wizard process
-        $this->setupWizard($I);
+            // now setup wizard process is called from its own class designed for "n_" suite of methods  
 
-        // sample data
-        // $addSampleDataProcessCest = new 
+        // sample data process 
+            // now sample data process is called from its own class designed for "n_" suite of methods 
 
-		// step 1
-        
-
-		// step 2
-
-		// step 3
+		// TODO anything else can go here?
 
     }
 
