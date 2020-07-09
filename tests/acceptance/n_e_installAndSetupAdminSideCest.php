@@ -31,6 +31,9 @@ class n_e_installAndSetupAdminSideCest
             // now sample data process is called from its own class designed for "n_" suite of methods 
 
 		// TODO anything else can go here?
+            // admin side checks? No... since the user would simply want to check the front end. 
+
+            // should test the link to sample page that should be available on admin General -> Sample Data tab  
 
     }
 

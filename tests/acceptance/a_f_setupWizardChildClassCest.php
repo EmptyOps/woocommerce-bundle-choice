@@ -17,7 +17,7 @@ class a_f_setupWizardChildClassCest extends a_e_setupWizardCest
             return;
         }
 
-        parent::step1();
+        parent::step1($I);
 
 	}
 
@@ -27,7 +27,7 @@ class a_f_setupWizardChildClassCest extends a_e_setupWizardCest
             return;
         }
 
-        parent::step2();
+        parent::step2($I);
 
 	}
 
@@ -37,7 +37,7 @@ class a_f_setupWizardChildClassCest extends a_e_setupWizardCest
             return;
         }
 
-        parent::step3();
+        parent::step3($I);
 
 	}
 
