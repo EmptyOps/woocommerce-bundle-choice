@@ -1,7 +1,7 @@
 <?php 
 
 //class intended to do a normal scenario test in a way in which normally users would try the plugin
-class n_e_installAndSetupAdminSideCest
+class n_g_installAndSetupAdminSideCest
 {
     public function _before(AcceptanceTester $I)
     {

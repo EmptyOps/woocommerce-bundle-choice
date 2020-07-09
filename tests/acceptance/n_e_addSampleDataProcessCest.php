@@ -1,6 +1,6 @@
 <?php 
 
-class n_g_addSampleDataProcessCest
+class n_e_addSampleDataProcessCest
 {
     public function _before(AcceptanceTester $I)
     {

@@ -14,7 +14,7 @@ class n_c_setupWizardCest extends a_e_setupWizardCest
 
     public function step1(AcceptanceTester $I)
     {
-    	if( !$I->test_allowed_in_this_environment("n_") || true ) {
+    	if( !$I->test_allowed_in_this_environment("n_") && false ) {
             return;
         }
 
