@@ -29,15 +29,16 @@ class f_k_step2Cest
     	$I->executeJS('window.scrollTo( 0, 300 );');        //$I->scrollTo('Save'); 
         $I->wait(3);
 
-        echo $I->grabPageSource();
-
     	// - I choose filter options and then I check if x  products are found 
 		$I->executeJS("jQuery('#text_slider_price').slider('set rangeValue', 12, 14);");	
 		$I->waitForText('No products were found', 10);
 
 		$I->executeJS("jQuery('#text_slider_price').slider('set rangeValue', 12, 15);");
 		$I->waitForText('Test ring 1', 10);  	
-		
+
+		$I->scrollTo('//*[@id="main"]/ul/li/a/img', -300, -100);
+		$I->wait(3);
+
 		// - I click on product image of first product from the search results
 		$price_of_product = "15.00";	//TODO make it dynamic 
 		$I->click('Test ring 1');	// ('//*[@id="main"]/ul/li/a/img');

@@ -31,7 +31,7 @@ box-shadow: none;">
 	          <tbody>
 	            <tr valign="top">
 	              <!-- Sample Product Installation -->
-	              <?php if( !empty($_POST['step']) && $_POST['step']==3):?>
+	              <?php if( !empty(wbc()->sanitize->post('step')) && wbc()->sanitize->post('step')==3):?>
 	                <th>
 	                  <h3>Sample Products</h3>
 	                </th>

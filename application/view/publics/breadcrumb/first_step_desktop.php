@@ -6,7 +6,6 @@
 
 ?>
 <style type="text/css">
-    
     .ui.grid>* {
      padding-left: 5px; 
      padding-right: 0px !important;
@@ -17,7 +16,7 @@
 }
 
 .eo-wbc-container>.ui.steps .step.active:after {
-    background: linear-gradient(to bottom left, rgb(255, 255, 255) 50%, rgb(239, 239, 239) 50%);
+    background: linear-gradient(to bottom left, rgb(255, 255, 255) 50%, rgba(247, 247, 247, 0.98) 50%);
 }
 
 .eo-wbc-container>.ui.steps .step:after {
@@ -31,7 +30,7 @@
     box-shadow: 2px 2px 0 #efefef !important; 
 }
 .eo-wbc-container>.ui.steps .step.active {
-    background: linear-gradient(to bottom, rgb(255, 255, 255) 50%, rgb(239, 239, 239) 50%);
+    background: linear-gradient(to bottom, rgb(255, 255, 255) 50%, rgba(247, 247, 247, 0.98) 50%);
 }
 
 </style>

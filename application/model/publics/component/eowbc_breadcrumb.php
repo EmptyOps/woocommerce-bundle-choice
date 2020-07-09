@@ -191,6 +191,7 @@ class EOWBC_Breadcrumb
                     .wbc()->options->get_option('configuration','review_page')/*get_option('eo_wbc_review_page')*/
                     .'?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>3,'FIRST'=>wbc()->sanitize->get('FIRST'),'SECOND'=>wbc()->sanitize->get('SECOND'))):'#' ).'" class="'.(($step==3)?'active ':((!(empty(self::$first) and empty(self::$second)))?'completed ':'disabled')).' step" onclick="window.location.href=jQuery(this).data(\'href\');">';
                         ob_start();
+                        $template = wbc()->options->get_option('configuration','config_alternate_breadcrumb','default');
                         if(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_2') {                            
                             
                             wbc()->load->template('publics/breadcrumb/final_step_alternate_desktop_2',array('preview_name'=>self::$preview_name,'preview_icon'=>self::$preview_icon));
@@ -199,6 +200,10 @@ class EOWBC_Breadcrumb
                         } elseif(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_1') {
 
                             wbc()->load->template('publics/breadcrumb/final_step_alternate_desktop_1',array('preview_name'=>self::$preview_name,'preview_icon'=>self::$preview_icon));
+                            
+                        } elseif($template!='default') {
+
+                            wbc()->load->template('publics/breadcrumb/final_step_alternate_desktop_'.$template,array('preview_name'=>self::$preview_name,'preview_icon'=>self::$preview_icon));
                             
                         } else {                            
                            wbc()->load->template('publics/breadcrumb/final_step_desktop',array('preview_name'=>self::$preview_name,'preview_icon'=>self::$preview_icon,'first'=>self::$first,'second'=>self::$second,'set'=>self::$set,'tmp_set'=>self::$tmp_set));
@@ -229,11 +234,15 @@ class EOWBC_Breadcrumb
 
     private static function eo_wbc_breadcumb_first_html($step,$order){
         ob_start();
+        $template = wbc()->options->get_option('configuration','config_alternate_breadcrumb','default');
     	if(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_1') {
             wbc()->load->template('publics/breadcrumb/first_step_alternate_desktop_1', array("step"=>$step,"order"=>$order,"first"=>self::$first,"view_url"=>(!empty(wbc()->sanitize->get('FIRST')) ? self::eo_wbc_breadcrumb_view_url(sanitize_text_field(wbc()->sanitize->get('FIRST')),$order):'#'),"change_url"=>(!empty(wbc()->sanitize->get('FIRST'))?self::eo_wbc_breadcrumb_change_url($order,sanitize_text_field(wbc()->sanitize->get('FIRST'))):'#'),'first_icon'=>self::$first_icon,"first_name"=>self::$first_name,'first_slug'=>self::$first_slug)); 
             	
     	} elseif(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_2') {
             wbc()->load->template('publics/breadcrumb/first_step_alternate_desktop_2', array("step"=>$step,"order"=>$order,"first"=>self::$first,"view_url"=>(!empty(wbc()->sanitize->get('FIRST')) ? self::eo_wbc_breadcrumb_view_url(sanitize_text_field(wbc()->sanitize->get('FIRST')),$order):'#'),"change_url"=>(!empty(wbc()->sanitize->get('FIRST'))?self::eo_wbc_breadcrumb_change_url($order,sanitize_text_field(wbc()->sanitize->get('FIRST'))):'#'),'first_icon'=>self::$first_icon,"first_name"=>self::$first_name,'first_slug'=>self::$first_slug)); 
+                
+        } elseif($template!='default') {
+            wbc()->load->template('publics/breadcrumb/first_step_alternate_desktop_'.$template, array("step"=>$step,"order"=>$order,"first"=>self::$first,"view_url"=>(!empty(wbc()->sanitize->get('FIRST')) ? self::eo_wbc_breadcrumb_view_url(sanitize_text_field(wbc()->sanitize->get('FIRST')),$order):'#'),"change_url"=>(!empty(wbc()->sanitize->get('FIRST'))?self::eo_wbc_breadcrumb_change_url($order,sanitize_text_field(wbc()->sanitize->get('FIRST'))):'#'),'first_icon'=>self::$first_icon,"first_name"=>self::$first_name,'first_slug'=>self::$first_slug)); 
                 
         } else {
             wbc()->load->template('publics/breadcrumb/first_step_desktop', array("step"=>$step,"order"=>$order,"first"=>self::$first,"view_url"=>(!empty(wbc()->sanitize->get('FIRST')) ? self::eo_wbc_breadcrumb_view_url(sanitize_text_field(wbc()->sanitize->get('FIRST')),$order):'#'),"change_url"=>(!empty(wbc()->sanitize->get('FIRST'))?self::eo_wbc_breadcrumb_change_url($order,sanitize_text_field(wbc()->sanitize->get('FIRST'))):'#'),'first_icon'=>self::$first_icon,"first_name"=>self::$first_name,'first_slug'=>self::$first_slug)); 
@@ -244,11 +253,15 @@ class EOWBC_Breadcrumb
 
     private static function eo_wbc_breadcumb_second_html($step,$order){        
         ob_start();
-    	if(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_1') {
+    	$template = wbc()->options->get_option('configuration','config_alternate_breadcrumb','default');
+        if(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_1') {
             wbc()->load->template('publics/breadcrumb/second_step_alternate_desktop_1', array("step"=>$step,"order"=>$order,"second"=>self::$second,"view_url"=>(!empty(wbc()->sanitize->get('SECOND'))?self::eo_wbc_breadcrumb_view_url(sanitize_text_field(wbc()->sanitize->get('SECOND')),$order):'#'),"change_url"=>(!empty(wbc()->sanitize->get('SECOND'))?self::eo_wbc_breadcrumb_change_url($order,sanitize_text_field(wbc()->sanitize->get('SECOND'))):'#'),'second_icon'=>self::$second_icon,"second_name"=>self::$second_name,'second_slug'=>self::$second_slug));
 
     	} elseif(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_2') {
             wbc()->load->template('publics/breadcrumb/second_step_alternate_desktop_2', array("step"=>$step,"order"=>$order,"second"=>self::$second,"view_url"=>(!empty(wbc()->sanitize->get('SECOND'))?self::eo_wbc_breadcrumb_view_url(sanitize_text_field(wbc()->sanitize->get('SECOND')),$order):'#'),"change_url"=>(!empty(wbc()->sanitize->get('SECOND'))?self::eo_wbc_breadcrumb_change_url($order,sanitize_text_field(wbc()->sanitize->get('SECOND'))):'#'),'second_icon'=>self::$second_icon,"second_name"=>self::$second_name,'second_slug'=>self::$second_slug));
+
+        } elseif($template!='default') {
+            wbc()->load->template('publics/breadcrumb/second_step_alternate_desktop_'.$template, array("step"=>$step,"order"=>$order,"second"=>self::$second,"view_url"=>(!empty(wbc()->sanitize->get('SECOND'))?self::eo_wbc_breadcrumb_view_url(sanitize_text_field(wbc()->sanitize->get('SECOND')),$order):'#'),"change_url"=>(!empty(wbc()->sanitize->get('SECOND'))?self::eo_wbc_breadcrumb_change_url($order,sanitize_text_field(wbc()->sanitize->get('SECOND'))):'#'),'second_icon'=>self::$second_icon,"second_name"=>self::$second_name,'second_slug'=>self::$second_slug));
 
         } else {
             

@@ -31,9 +31,9 @@ class sunob_a_u_bonusFeaturesSpecificationsViewCest
 		$I->see('Enable Specifications View?');
 
 		// set fields 
-		$I->executeJS("jQuery('#specification_view_status').checkbox('set checked');");
-		$I->executeJS("jQuery('#specification_view_shortcode_status').checkbox('set checked');");
-		$I->executeJS("jQuery('#specification_view_default_status').checkbox('set checked');");
+		$I->executeJS("jQuery('#specification_view_status').parent().checkbox('set checked', 'specification_view_status');");
+		$I->executeJS("jQuery('#specification_view_shortcode_status').parent().checkbox('set checked', 'specification_view_shortcode_status');");
+		$I->executeJS("jQuery('#specification_view_default_status').parent().checkbox('set checked', 'specification_view_default_status');");
 
 		// $I->executeJS("jQuery('[name=\"tiny_features_specification_view_style\"]').checkbox('set checked', 'template_1');");
 		$I->executeJS("jQuery('[name=\"tiny_features_specification_view_style\"]').val('template_1');");	

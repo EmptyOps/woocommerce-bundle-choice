@@ -7,7 +7,7 @@
  * @package woocommerce-bundle-choice
  *
  * @wordpress-plugin
- * Plugin Name: WooCommerce Product Bundle Choice -Design Pattern
+ * Plugin Name: Woo Choice Plugin
  * Plugin URI: https://wordpress.org/plugins/woocommerce-bundle-choice/
  * Description: Product bundling as ring builder for jewelry, pair maker for clothing and guidance tool for home decor, cosmetics etc. Product bundling as per user's choice.
  * Version: 1.0.0
@@ -64,7 +64,7 @@ if(!class_exists('WooCommerce_Bundle_Choice')) {
 			*	where the tool_name should only be added to the list.
 			*/
 
-			$tools = array('error-handler','autoload');
+			$tools = array('error-handler','autoload','cache-manager');
 
 			if(!empty($tools)){
 
@@ -101,7 +101,8 @@ if(!class_exists('WooCommerce_Bundle_Choice')) {
 			*	where the lib_name should only be added to the list.
 			*/
 
-			$library = array('load'=>'WBC_Loader','migration'=>'WBC_Migration','sanitize'=>'WBC_Sanitize');
+
+			$library = array('load'=>'WBC_Loader','migration'=>'WBC_Migration','sanitize'=>'WBC_Sanitize','validate'=>'WBC_Validate');
 
 			if(!empty($library)){
 

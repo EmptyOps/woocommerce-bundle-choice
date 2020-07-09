@@ -60,6 +60,9 @@ if ( ! class_exists( 'Mapping' ) ) {
 			
 			wbc()->load->model('admin/form-builder');
 
+			$dropdown_opts_first_cat = \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_attributes( \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_prime_category(wbc()->options->get_option('configuration','first_slug'),' -- ') );
+			$dropdown_opts_second_cat = \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_attributes( \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_prime_category(wbc()->options->get_option('configuration','second_slug'),' -- ') );
+
 			//map list
 			$table = array();
 			$table['id']='eowbc_price_control_methods_list';
@@ -69,19 +72,23 @@ if ( ! class_exists( 'Mapping' ) ) {
 										'is_header' => 1, 
 										'val' => '',
 										'is_checkbox' => true, 
-										'checkbox'=> array('id'=>'dummy','value'=>array(),'options'=>array('row0_col0_chk'=>''),'class'=>'','where'=>'in_table')
+										'sanitize'=>'sanitize_text_field',
+										'checkbox'=> array('id'=>'dummy','value'=>array(),'options'=>array('row0_col0_chk'=>''),'options_attrs'=>array('row0_col0_chk'=>array('data-action="bulk_select_all"', 'data-bulk_table_id="'.$table["id"].'"')),'class'=>'','where'=>'in_table')
 									),
 									1=>array(
 										'is_header' => 1, 
-										'val' => 'First Term'
+										'val' => 'First Term',
+										'field_id'=>'eo_wbc_first_category'
 									),
 									2=>array(
 										'is_header' => 1, 
-										'val' => 'Second Term'
+										'val' => 'Second Term',
+										'field_id'=>'eo_wbc_second_category'
 									),
 									3=>array(
 										'is_header' => 1, 
-										'val' => 'Discount'
+										'val' => 'Discount',
+										'field_id'=>'eo_wbc_add_discount'
 									),
 								),
 							);
@@ -102,6 +109,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 						'saved_tab_key'=>array(
 							'type'=>'hidden',
 							'value'=>'',
+							'sanitize'=>'sanitize_text_field',
 							),
 						'mapping_preference_tab_visible_info'=>array(
 							'label'=>eowbc_lang('(Determine how the product mapping should behave. For example AND means product belongs to both category/attribute A and B, OR means product belongs to either of category/attribute A or B)'),
@@ -113,19 +121,23 @@ if ( ! class_exists( 'Mapping' ) ) {
 						'prod_mapping_pref_category'=>array(
 							'label'=>eowbc_lang('Category'),
 							'type'=>'radio',
+							'sanitize'=>'sanitize_text_field',
 							'value'=>'and',
+							'validate'=>array('required'=>''),
 							'options'=>array( 'and'=> eowbc_lang('AND'),'or'=>eowbc_lang('OR') ),
 							'class'=>array('fluid'),						
-							// 'size_class'=>array('eight','wide'),
+							'size_class'=>array('eight','wide','required'),
 							'inline'=>false,
 						),
 						'prod_mapping_pref_attribute'=>array(
 							'label'=>eowbc_lang('Attribute'),
 							'type'=>'radio',
 							'value'=>'or',
+							'validate'=>array('required'=>''),
+							'sanitize'=>'sanitize_text_field',
 							'options'=>array( 'and'=> eowbc_lang('AND'),'or'=>eowbc_lang('OR') ),
 							'class'=>array('fluid'),						
-							// 'size_class'=>array('eight','wide'),
+							'size_class'=>array('eight','wide','required'),
 							'inline'=>false,
 						),
 						'submit_btn'=>array(
@@ -145,6 +157,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 								// 'label'=>'Bulk Actions',
 								'type'=>'select',
 								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
 								'options'=>array(''=>eowbc_lang('Bulk Actions'), 'delete'=>'Delete'),
 								'class'=>array('fluid'),
 								'size_class'=>array('two','wide'),
@@ -172,12 +185,13 @@ if ( ! class_exists( 'Mapping' ) ) {
 							'range_first'=>array(
 								'type'=>'checkbox',
 								'value'=>array(''),
+								'sanitize'=>'sanitize_text_field',
 								'options'=>array('1'=>eowbc_lang('Select range?')),
 								'is_id_as_name'=>true,
 								'inline_class'=>array('three'),
 								'style'=>'normal_without_parent_div',
 								'next_inline'=>true,
-								'inline'=>true,
+								'inline'=>true,								
 							),
 							'emptylabel'=>array(
 								'label'=>'<------------->',
@@ -191,6 +205,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 							'range_second'=>array(
 								'type'=>'checkbox',
 								'value'=>array(''),
+								'sanitize'=>'sanitize_text_field',
 								'options'=>array('1'=>eowbc_lang('Select range?')),
 								'is_id_as_name'=>true,
 								'style'=>'normal_without_parent_div',
@@ -201,11 +216,13 @@ if ( ! class_exists( 'Mapping' ) ) {
 							'eo_wbc_first_category'=>array(
 								'type'=>'select',
 								'value'=>'',
-								'options'=>\eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_attributes( \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_prime_category() ),	//array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
+								'sanitize'=>'sanitize_text_field',
+								'options'=>$dropdown_opts_first_cat,	//array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
 								'class'=>array('fluid'),
 								'inline_class'=>array('three'),
 								'next_inline'=>true,
 								'inline'=>true,
+								'size_class'=>array('required'),
 							),
 							'emptylabel1'=>array(
 								'label'=>'<------------->',
@@ -219,20 +236,24 @@ if ( ! class_exists( 'Mapping' ) ) {
 							'eo_wbc_second_category'=>array(
 								'type'=>'select',
 								'value'=>'',
-								'options'=>\eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_attributes( \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_prime_category() ),	//array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
+								'sanitize'=>'sanitize_text_field',
+								'options'=>$dropdown_opts_second_cat,	//array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
 								'class'=>array('fluid'),
 								'prev_inline'=>true,
 								'inline'=>true,
+								'size_class'=>array('required'),
 							),
 
 							'eo_wbc_first_category_range'=>array(
 								'type'=>'select',
 								'value'=>'',
-								'options'=>\eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_attributes( \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_prime_category() ),	//array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
+								'sanitize'=>'sanitize_text_field',
+								'options'=>$dropdown_opts_first_cat,	//array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
 								'class'=>array('fluid'),
 								'inline_class'=>array('three', 'range_section'),
 								'next_inline'=>true,
 								'inline'=>true,
+								'size_class'=>array('required'),
 							),
 							'emptylabel2'=>array(
 								'label'=>'<------------->',
@@ -246,10 +267,12 @@ if ( ! class_exists( 'Mapping' ) ) {
 							'eo_wbc_second_category_range'=>array(
 								'type'=>'select',
 								'value'=>'',
-								'options'=>\eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_attributes( \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_prime_category() ),	//array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
+								'sanitize'=>'sanitize_text_field',
+								'options'=>$dropdown_opts_second_cat,	//array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
 								'class'=>array('fluid'),
 								'prev_inline'=>true,
 								'inline'=>true,
+								'size_class'=>array('required'),
 							),
 
 							'eo_wbc_first_category_vis_info'=>array( 
@@ -281,6 +304,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 								'no_label' => true,
 								'type'=>'text',
 								'value'=>'0',
+								'sanitize'=>'sanitize_text_field',
 								'size_class'=>array('one','wide'),
 								// 'prev_inline'=>true,
 								// 'next_inline'=>true,
@@ -289,11 +313,11 @@ if ( ! class_exists( 'Mapping' ) ) {
 								'visible_info'=>array( 'label'=>'Discount rate in %',
 									'type'=>'visible_info',
 									'class'=>array('fluid', 'small'),
-									'size_class'=>array('eight','wide'),
+									'size_class'=>array('eight','wide','required'),
 								),
 							),
 							
-							'submit_btn'=>array(
+							'map_creation_modification_save_btn'=>array(
 								'label'=>eowbc_lang('Save New Map'),
 								'type'=>'button',
 								'class'=>array('secondary'),
@@ -305,6 +329,8 @@ if ( ! class_exists( 'Mapping' ) ) {
 					),
 				
 			);
+			
+			$form_definition = apply_filters('eowbc_admin_form_mapping',$form_definition);
 
 			if($is_add_sample_values) {
 				//loop through form tabs and set (random) sample values for each field  

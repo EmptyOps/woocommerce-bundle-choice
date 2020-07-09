@@ -29,8 +29,6 @@ class f_i_step1Cest
 		$I->executeJS('window.scrollTo( 0, 300 );');        //$I->scrollTo('Save'); 
         $I->wait(3);
 
-        echo $I->grabPageSource();
-
 		// - I choose filter options and then I check if x  products are found 
 		$I->executeJS("jQuery('#text_slider_price').slider('set rangeValue', 14, 15);");	
 		$I->waitForText('No products were found', 10);
@@ -66,6 +64,9 @@ class f_i_step1Cest
 		$I->see('150.00');	//market price
 		$I->see($price_of_product);
 		$I->see('Additional information');
+
+		//first select required options for variable product, otherwise it won't let us add into cart. 
+		$I->click('//*[@id="product-13"]/div[2]/form/table/tbody/tr/td[2]/div/span[2]/ul/li[1]/div');
 
 		// - I click on continue button
 		$I->click('Add to bag...');

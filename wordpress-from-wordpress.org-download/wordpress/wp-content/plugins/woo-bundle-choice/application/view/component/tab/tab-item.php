@@ -8,11 +8,11 @@
 * $status @integer : indicate wether the tab is active or not
 *
 */
-if(!empty($title) || !empty($slug) || !empty($active))
+if(!empty($menu_title)/*($title)*/ || !empty($slug) || !empty($active))
 {
 	?>
 	
-		<a class="<?php if($active) echo 'active'; ?> item" data-tab="<?php echo $slug; ?>"> <?php echo $title; ?></a>
+		<a class="<?php if($active) echo 'active'; ?> item" data-tab="<?php echo $slug; ?>" href="<?php _e(admin_url('admin.php?page='.$slug)); ?>"> <?php echo $menu_title/*$title*/; ?></a>
 
 	<?php
  }

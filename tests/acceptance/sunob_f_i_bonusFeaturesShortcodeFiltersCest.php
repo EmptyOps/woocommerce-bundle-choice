@@ -24,7 +24,7 @@ class sunob_f_i_bonusFeaturesShortcodeFiltersCest
         // Note: here it is assumed that shortcode is added on /sample-page manually, so skipping that part here.
 
         // check if filter is visible 
-        $I->see('OK', 'button');
+        $I->see('OK', 'a');
 
         // TODO apply filters basic check
         

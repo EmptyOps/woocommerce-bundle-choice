@@ -18,25 +18,46 @@ class Preview {
     }
 
     public function init() {
-        if(empty($_GET['FIRST']) || empty($_GET['SECOND']))
+        if (empty(wbc()->sanitize->get('EO_WBC'))) return true;
+
+        if(empty(wbc()->sanitize->get('FIRST')) || empty(wbc()->sanitize->get('SECOND')))
         {            
             exit(wp_redirect(wbc()->wc->eo_wbc_get_cart_url()));
             return;
         } 
 
-        $this->eo_wbc_add_css();    //images style
-        $this->eo_wbc_render();    //Page Review cart data
-        
-        if( !empty($_POST['add_to_cart']) && sanitize_text_field($_POST['add_to_cart'])==1)
+        if( !empty(wbc()->sanitize->post('add_to_cart')) && wbc()->sanitize->post('add_to_cart')==1 && !empty(wbc()->sanitize->get('EO_WBC')))
         {
             $this->eo_wbc_add_this_to_cart();
             //Redirect to cart page.       
             exit(wp_redirect(wbc()->wc->eo_wbc_get_cart_url()));
         }     
+        
+        $this->eo_wbc_render();    //Page Review cart data
+        $this->eo_wbc_add_css();    //images style
     }    
     
     private function eo_wbc_add_css()
     {
+        add_action( 'wp_enqueue_scripts',function(){ 
+            // wp_register_style('eo_wbc_ui_css',EOWBC_ASSET_URL.'css/fomantic/semantic.min.css');
+            // wp_enqueue_style( 'eo_wbc_ui_css');
+            wbc()->load->asset('css','fomantic/semantic.min');
+            // wp_register_script('eo_wbc_ui_js',EOWBC_ASSET_URL.'js/fomantic/semantic.min.js');
+            // wp_enqueue_script( 'eo_wbc_ui_js');
+            wbc()->load->asset('js','fomantic/semantic.min');
+        },100);
+
+        add_action('wp_footer',function(){
+            ?>
+                <script>
+                    jQuery(document).ready(function($){
+                        jQuery('.special.cards .image').dimmer({ on: 'hover' });
+                    });
+                </script>
+            <?php
+        },100);  
+
         add_action( 'wp_head',function(){           
            
         });            
@@ -44,8 +65,8 @@ class Preview {
     
     public function eo_wbc_add_this_to_cart()
     {
-        $eo_wbc_sets=WC()->session->get('EO_WBC_SETS',NULL);
-        $eo_wbc_maps=WC()->session->get('EO_WBC_MAPS',array());
+        $eo_wbc_sets=wbc()->session->get('EO_WBC_SETS',NULL);
+        $eo_wbc_maps=wbc()->session->get('EO_WBC_MAPS',array());
         
         if(!is_null($eo_wbc_sets)){
             
@@ -119,7 +140,7 @@ class Preview {
                 }
             } 
             //adding set to the woocommerce cart
-            $cart_details=WC()->session->get('EO_WBC_SETS');
+            $cart_details=wbc()->session->get('EO_WBC_SETS');
             if(!empty($cart_details['FIRST']) && !empty($cart_details['SECOND'])){
                 $FIRT_CART_ID=wc()->cart->add_to_cart(
                                 $cart_details['FIRST'][0],
@@ -138,8 +159,8 @@ class Preview {
                     if($SECOND_CART_ID)
                     {
                         //All is good so we saved mapps to session.
-                        $eo_wbc_maps[]=WC()->session->get('EO_WBC_SETS');                            
-                        WC()->session->set('EO_WBC_MAPS',$eo_wbc_maps);
+                        $eo_wbc_maps[]=wbc()->session->get('EO_WBC_SETS');                            
+                        wbc()->session->set('EO_WBC_MAPS',$eo_wbc_maps);
                     }
                     else
                     {
@@ -165,7 +186,7 @@ class Preview {
     
     private function eo_wbc_add_to_cart()
     {
-        $cart=base64_decode(sanitize_text_field($_GET['CART']),TRUE);        
+        $cart=base64_decode(sanitize_text_field(wbc()->sanitize->get('CART')),TRUE);        
         if (!empty($cart)){
             
             $cart=str_replace("\\",'',$cart);
@@ -173,7 +194,7 @@ class Preview {
             if(is_array($cart) OR is_object($cart)){
 
                 //if product belongs to first target;
-                $eo_wbc_sets=WC()->session->get('EO_WBC_SETS',array());                
+                $eo_wbc_sets=wbc()->session->get('EO_WBC_SETS',array());                
                 // if (get_option('eo_wbc_first_slug')==$cart['eo_wbc_target']) {
                 if (wbc()->options->get_option('configuration','first_slug')==$cart['eo_wbc_target']) {
 
@@ -193,7 +214,7 @@ class Preview {
                                         (isset($cart['variation_id'])?$cart['variation_id']:NULL)                                            
                                     );
                 }
-                WC()->session->set('EO_WBC_SETS',$eo_wbc_sets);
+                wbc()->session->set('EO_WBC_SETS',$eo_wbc_sets);
             }
         }
         
@@ -215,53 +236,33 @@ class Preview {
     }
     
     private function eo_wbc_render()
-    {   
-        add_action( 'wp_enqueue_scripts',function(){ 
-            // wp_register_style('eo_wbc_ui_css',EOWBC_ASSET_URL.'css/fomantic/semantic.min.css');
-            // wp_enqueue_style( 'eo_wbc_ui_css');
-            wbc()->load->asset('css','fomantic/semantic.min');
-            // wp_register_script('eo_wbc_ui_js',EOWBC_ASSET_URL.'js/fomantic/semantic.min.js');
-            // wp_enqueue_script( 'eo_wbc_ui_js');
-            wbc()->load->asset('js','fomantic/semantic.min');
-        },100);
-
-        add_action('wp_footer',function(){
-            ?>
-                <script>
-                    jQuery(document).ready(function($){
-                        jQuery('.special.cards .image').dimmer({ on: 'hover' });
-                    });
-                </script>
-            <?php
-        },100);
-
-        add_filter('the_content',function(){
-
-            if(!in_the_loop() || !is_singular() || !is_main_query() ) return '';
+    {           
+        /*add_filter('the_content',function(){*/
+           
             
-            if( !empty($_GET['FIRST']) && !empty($_GET['SECOND']) && !empty($_GET['CART']) )
+            if( !empty(wbc()->sanitize->get('FIRST')) && !empty(wbc()->sanitize->get('SECOND')) && !empty(wbc()->sanitize->get('CART')) and !empty($_GET['EO_WBC']))
             {                
                 //if data available at _GET then add to out custom cart
                 $this->eo_wbc_add_to_cart();
             }                        
             
             //Add session set data to temporary iff the set data is not empty.
-            if(WC()->session->get('EO_WBC_SETS',FALSE)) {
+            if(wbc()->session->get('EO_WBC_SETS',FALSE)) {
                 
-                $_session_set=WC()->session->get('EO_WBC_SETS',FALSE);
+                $_session_set=wbc()->session->get('EO_WBC_SETS',FALSE);
                 if(!empty($_session_set['FIRST']) && !empty($_session_set['SECOND']) ){
-                    WC()->session->set('TMP_EO_WBC_SETS',WC()->session->get('EO_WBC_SETS'));
+                    wbc()->session->set('TMP_EO_WBC_SETS',wbc()->session->get('EO_WBC_SETS'));
                 }
             }
             
-            $set=WC()->session->get('TMP_EO_WBC_SETS',FALSE);            
+            $set=wbc()->session->get('TMP_EO_WBC_SETS',FALSE);                        
             if(!empty($set)){
 
                 $first=wbc()->wc->eo_wbc_get_product((int)($set['FIRST'][2]?$set['FIRST'][2]:$set['FIRST'][0]));
                 $second=wbc()->wc->eo_wbc_get_product((int)($set['SECOND'][2]?$set['SECOND'][2]:$set['SECOND'][0]));
 
-                wbc()->load->model('publics/component/EO_WBC_Breadcrumb');
-                $content= \eo\wbc\model\publics\component\EO_WBC_Breadcrumb::eo_wbc_add_breadcrumb(sanitize_text_field($_GET['STEP']),sanitize_text_field($_GET['BEGIN'])).'<br/>';
+                wbc()->load->model('publics/component/eowbc_breadcrumb');
+                $content= \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_add_breadcrumb(sanitize_text_field(wbc()->sanitize->get('STEP')),sanitize_text_field(wbc()->sanitize->get('BEGIN'))).'<br/>';
                 
                 $content.='<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><div class="ui special cards centered">'.
                     '<div class="card">'.
@@ -269,7 +270,7 @@ class Preview {
                           '<div class="ui dimmer inverted transition hidden">'.
                             '<div class="content">'.
                                 '<div class="center">'.
-                                    '<a class="ui button primary" href="'.\eo\wbc\model\publics\component\EO_WBC_Breadcrumb::eo_wbc_breadcrumb_change_url((!empty($_GET['BEGIN']) && $_GET['BEGIN']==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/ ? 1 : 2),(empty($set['FIRST'][2])?$set['FIRST'][0]:$set['FIRST'][2])).'" >Change</a>'.
+                                    '<a class="ui button primary" href="'.\eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url((!empty(wbc()->sanitize->get('BEGIN')) && wbc()->sanitize->get('BEGIN')==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/ ? 1 : 2),(empty($set['FIRST'][2])?$set['FIRST'][0]:$set['FIRST'][2])).'" >Change</a>'.
                                 '</div>'.
                             '</div>'.
                           '</div>'.$first->get_image('full').
@@ -290,7 +291,7 @@ class Preview {
                           '<div class="ui dimmer inverted transition hidden">'.
                             '<div class="content">'.
                                 '<div class="center">'.
-                                    '<a class="ui button primary" href="'.\eo\wbc\model\publics\component\EO_WBC_Breadcrumb::eo_wbc_breadcrumb_change_url((!empty($_GET['BEGIN']) && $_GET['BEGIN']==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/ ? 2 : 1),(empty($set['SECOND'][2])?$set['SECOND'][0]:$set['SECOND'][2])).'">Change</a>'.        
+                                    '<a class="ui button primary" href="'.\eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url((!empty(wbc()->sanitize->get('BEGIN')) && wbc()->sanitize->get('BEGIN')==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/ ? 2 : 1),(empty($set['SECOND'][2])?$set['SECOND'][0]:$set['SECOND'][2])).'">Change</a>'.        
                                 '</div>'.
                             '</div>'.
                           '</div>'.
@@ -310,16 +311,23 @@ class Preview {
                 '</div>'.
                 '<div class="ui row" style="display:grid !important;"><form action="" method="post" class="woocommerce" style="float:right;margin-top: 1.5em;display:grid !important;">'.
                     '<input type="hidden" name="add_to_cart" value=1>'.
-                    '<button class="ui button right floated aligned" style="background-color:'.wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active',wc()->session->get('EO_WBC_BG_COLOR',FALSE))/*get_option('eo_wbc_active_breadcrumb_color',wc()->session->get('EO_WBC_BG_COLOR',FALSE))*/.'">'.__('Add This To Cart','woo-bundle-choice').
+                    '<button class="ui button right floated aligned" style="background-color:'.wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active',wbc()->session->get('EO_WBC_BG_COLOR',FALSE))/*get_option('eo_wbc_active_breadcrumb_color',wbc()->session->get('EO_WBC_BG_COLOR',FALSE))*/.'">'.__('Add This To Cart','woo-bundle-choice').
                     '</button>'.
                 '</form></div>';                
-                return $content;
-            } else {
-                
-                exit(wp_redirect(wbc()->wc->eo_wbc_get_cart_url()));                
-            }            
-           
-        });    
+                add_filter('the_content',function() use($content){
+                    if(!in_the_loop() || !is_singular() || !is_main_query() ) return '';
+                    return $content;
+                });
+                //return $content;
+            } else {                
+                //ob_flush();
+                //ob_end_clean();
+                //exit(var_dump(wbc()->wc->eo_wbc_get_cart_url()));
+                exit(wp_redirect(wbc()->wc->eo_wbc_get_cart_url()));
+            }
+        /*});          */
+
+
     }
 
 }

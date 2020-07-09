@@ -7,7 +7,7 @@
 if(!empty($id) and !empty($label)){	
 	?>	
 
-		<div class="field">
+		<div class="<?php echo !empty($size_class)?$size_class:''; ?> field">
 	    	<?php wbc()->load->template('component/form/input_label',array('id'=>$id,'label'=>$label)); ?>	    	
 	    	<?php if(!empty($options) and is_array($options)): ?>
 	    		<div class="fields">

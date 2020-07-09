@@ -1,29 +1,32 @@
 <?php		
-	if(isset($_GET['EO_WBC_CODE']) && $_GET['EO_WBC_CODE']){                   
-		$color=explode('/',base64_decode(sanitize_text_field($_GET['EO_WBC_CODE'])));
+	if(isset($_GET['EO_WBC_CODE']) && wbc()->sanitize->get('EO_WBC_CODE')) {                   
+		$color=explode('/',base64_decode(wbc()->sanitize->get('EO_WBC_CODE')));
 
 		if(strpos(str_replace(' ','',$color[0]),'rgb(0,0,0')===0)
 		{	
-			wc()->session->set('EO_WBC_BG_COLOR','rgba(128,128,128,0.5)');	
-			wc()->session->set('EO_WBC_FG_COLOR','rgba(0,0,0,1.0)');
+			wbc()->session->set('EO_WBC_BG_COLOR','rgba(128,128,128,0.5)');	
+			wbc()->session->set('EO_WBC_FG_COLOR','rgba(0,0,0,1.0)');
 		}
 		else
 		{
-			wc()->session->set('EO_WBC_BG_COLOR',$color[0]);
-			wc()->session->set('EO_WBC_FG_COLOR',$color[1]);
+			wbc()->session->set('EO_WBC_BG_COLOR',$color[0]);
+			wbc()->session->set('EO_WBC_FG_COLOR',$color[1]);
 		}   
     }   
 
 
 
-	$fg_color=get_option('eo_wbc_active_breadcrumb_color',wc()->session->get('EO_WBC_BG_COLOR',FALSE));
+	$fg_color=wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active',wbc()->session->get('EO_WBC_BG_COLOR',FALSE));
+
+
+/*breadcrumb_backcolor_inactive*/
 
 	echo "<style>".
 	(
-		get_option('eo_wbc_non_active_breadcrumb_color')
+		wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_inactive','#ffffff')
 		?
 		".eo-wbc-container>.ui.steps .step:not(.active),.eo-wbc-container>.ui.steps .step:not(.active):after{ background: "
-			.get_option('eo_wbc_non_active_breadcrumb_color').
+			.wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_inactive','#ffffff').
 			" }":''
 	)
 	.
@@ -34,72 +37,71 @@
 	)
 	.		
 	(
-		!empty(wc()->session->get('EO_WBC_FG_COLOR'))
+		!empty(wbc()->session->get('EO_WBC_FG_COLOR'))
 		?
-		" .eo-wbc-container>.ui.steps .step.active .title, .eo-wbc-container>.ui.steps .step.active a{ color: ".wc()->session->get('EO_WBC_FG_COLOR','#fff')." }":''
+		" .eo-wbc-container>.ui.steps .step.active .title, .eo-wbc-container>.ui.steps .step.active a{ color: ".wbc()->session->get('EO_WBC_FG_COLOR','#fff')." }":''
 	)
 	
 	.
 	(   #Breadcrumb icon section font color - non active
-		!empty(get_option('eo_wbc_breadcrumb_icon_color_inactive','#ffffff'))
+		!empty(wbc()->options->get_option('appearance_breadcrumb','breadcrumb_num_icon_backcolor_inactive','#ffffff'))
 		?
 		
-		" .eo-wbc-container > .ui.ordered.steps .step::before, .eo-wbc-container > .ui.steps .step .icon{ color: ".get_option('eo_wbc_breadcrumb_icon_color_inactive','#ffffff')."  !important; }":''
+		" .eo-wbc-container > .ui.ordered.steps .step::before, .eo-wbc-container > .ui.steps .step .icon{ color: ".wbc()->options->get_option('appearance_breadcrumb','breadcrumb_num_icon_backcolor_inactive','#ffffff')."  !important; }":''
 	)
 	.
 	(   #Breadcrumb icon section font color - active
-		!empty(get_option('eo_wbc_breadcrumb_icon_color_active','#ffffff'))
+		!empty(wbc()->options->get_option('appearance_breadcrumb','breadcrumb_num_icon_backcolor_active','#ffffff'))
 		?
 		
-		" .eo-wbc-container > .ui.ordered.steps .step.active::before, .eo-wbc-container > .ui.steps .active.step .icon{ color: ".get_option('eo_wbc_breadcrumb_icon_color_active','#ffffff')."  !important; }":''
+		" .eo-wbc-container > .ui.ordered.steps .step.active::before, .eo-wbc-container > .ui.steps .active.step .icon{ color: ".wbc()->options->get_option('appearance_breadcrumb','breadcrumb_num_icon_backcolor_active','#ffffff')."  !important; }":''
 	)
 	
 	.
 	(   #Breadcrumb action section - non active
-		!empty(get_option('eo_wbc_breadcrumb_action_color_inactive','#ffffff'))
+		!empty(wbc()->options->get_option('appearance_breadcrumb','breadcrumb_actions_backcolor_inactive','#ffffff'))
 		?
 		
-		" .eo-wbc-container > .ui.ordered.steps .step .description > a{ color: ".get_option('eo_wbc_breadcrumb_action_color_inactive','#ffffff')."  !important; }":''
+		" .eo-wbc-container > .ui.ordered.steps .step .description > a{ color: ".wbc()->options->get_option('appearance_breadcrumb','breadcrumb_actions_backcolor_inactive','#ffffff')."  !important; }":''
 	)
 	.
 	(   #Breadcrumb action section - active
-		!empty(get_option('eo_wbc_breadcrumb_action_color_active','#ffffff'))
+		!empty(wbc()->options->get_option('appearance_breadcrumb','breadcrumb_actions_backcolor_active','#ffffff'))
 		?
 		
-		" .eo-wbc-container > .ui.ordered.steps .step.active .description > a{ color: ".get_option('eo_wbc_breadcrumb_action_color_active','#ffffff')."  !important; }":''
+		" .eo-wbc-container > .ui.ordered.steps .step.active .description > a{ color: ".wbc()->options->get_option('appearance_breadcrumb','breadcrumb_actions_backcolor_active','#ffffff')."  !important; }":''
 	)		
 	
 	.
 	(    #Breadcrumb title section - non active
-		!empty(get_option('eo_wbc_breadcrumb_title_color_inactive','#ffffff'))
+		!empty(wbc()->options->get_option('appearance_breadcrumb','breadcrumb_title_backcolor_inactive','#ffffff'))
 		?
 		
-		" .eo-wbc-container > .ui.ordered.steps .step .title{ color: ".get_option('eo_wbc_breadcrumb_title_color_inactive','#ffffff')."  !important; }":''
+		" .eo-wbc-container > .ui.ordered.steps .step .title{ color: ".wbc()->options->get_option('appearance_breadcrumb','breadcrumb_title_backcolor_inactive','#ffffff')."  !important; }":''
 	)
 	.
 	(   #Breadcrumb title section - active
-		!empty(get_option('eo_wbc_breadcrumb_title_color_active','#ffffff'))
+		!empty(wbc()->options->get_option('appearance_breadcrumb','breadcrumb_title_backcolor_active','#ffffff'))
 		?
 		
-		" .eo-wbc-container > .ui.ordered.steps .step.active .title{ color: ".get_option('eo_wbc_breadcrumb_title_color_active','#ffffff')."  !important; }":''
+		" .eo-wbc-container > .ui.ordered.steps .step.active .title{ color: ".wbc()->options->get_option('appearance_breadcrumb','breadcrumb_title_backcolor_active','#ffffff')."  !important; }":''
 	)
 
 	.				
 	(
-		!empty(get_option('eo_wbc_breadcrumb_radius'))
+		!empty(wbc()->options->get_option('appearance_breadcrumb','breadcrumb_radius','2'))
 		?
-		" .eo-wbc-container>.ui.steps{ border-radius: ".get_option('eo_wbc_breadcrumb_radius',5)."px; overflow: hidden; }":''
+		" .eo-wbc-container>.ui.steps{ border-radius: ".wbc()->options->get_option('appearance_breadcrumb','breadcrumb_radius','0')."px; overflow: hidden; }.eo-wbc-container>.ui.steps .step{border-radius:0px !important;}":''
 	)
-
 	.
-	( !wp_is_mobile() ? " .eo-wbc-container>.ui.steps div{ cursor:pointer !important; } .ui.steps .step .column{ z-index:7;width: max-content !important; padding-left:0em !important;} .ui.steps .step .column:first-child{".(get_option('eo_wbc_alternate_breadcrumb',false)?"":"font-size:3.2em;")."line-height: 0.8em;text-align:right;padding-right: 0.125rem !important;} .ui.steps .step{ padding-right:0px !important;padding-left:3em !important; } 
+	( !wp_is_mobile() ? " .eo-wbc-container>.ui.steps div{ cursor:pointer !important; } .ui.steps .step .column{ z-index:7;width: max-content !important; padding-left:0em !important;} .ui.steps .step .column:first-child{".(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_1'?"":"font-size:3.2em;")."line-height: 0.8em;text-align:right;padding-right: 0.125rem !important;} .ui.steps .step{ padding-right:0px !important;padding-left:3em !important; } 
 
 		.eo-wbc-container>.ui.steps .step:first-child{ padding-left:1em !important; } 
 		.eo-wbc-container>.eo-wbc-container>.ui.steps .step:last-child{ padding-right:0px !important; }
 		.eo-wbc-container>.ui.steps .step .column:last-child{ padding-right:0px !important;text-align:center; }
-		.eo-wbc-container>.ui.steps .step .column.product_image_section img{ height: 4.5em !important;width: auto !important;margin-left:45%;}.eo-wbc-container .ui.steps{ text-transform: uppercase; }.eo-wbc-container.container .ui.steps{ width:100%; } .eo-wbc-container.container .ui.steps .step{ padding-top:1rem !important; padding-bottom:2rem !important;".(empty(get_option('eo_wbc_hide_breadcrumb_border',0))?'':'border:none !important;')." } .eo-wbc-container.container .ui.steps{".(empty(get_option('eo_wbc_hide_breadcrumb_border',0))?'':'border:none !important;')."}
+		.eo-wbc-container>.ui.steps .step .column.product_image_section img{ height: 4.5em !important;width: auto !important;margin-left:45%;}.eo-wbc-container .ui.steps{ text-transform: uppercase; }.eo-wbc-container.container .ui.steps{ width:100%; } .eo-wbc-container.container .ui.steps .step{ padding-top:1rem !important; padding-bottom:2rem !important;".(empty(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_hide_border'))?'':'border:none !important;')." } .eo-wbc-container.container .ui.steps{".(empty(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_hide_border'))?'':'border:none !important;')."}
 
-		".(get_option('eo_wbc_alternate_breadcrumb',false)?".eo-wbc-container>.ui.steps .step .column:first-child{ font-size:3.2em;text-align:center;line-height: 1.8rem;} 		
+		".(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_1'?".eo-wbc-container>.ui.steps .step .column:first-child{ font-size:3.2em;text-align:center;line-height: 1.8rem;} 		
 		.eo-wbc-container>.ui.steps .step .column{ padding:0.5rem }":".eo-wbc-container>.ui.steps .step:after{width:3.3em;height:3.3em;}")."
 		
 		.eo-wbc-container>.ui.steps div{ margin-top:0px !important; } 
@@ -117,7 +119,44 @@
 			width:0px !important;
 		}
 		"
-	).( !empty(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_alternate_breadcrumb'))?".eo-wbc-container.container .ui.steps .step{ padding-top:2rem !important;}.ui.steps .step:after {display: none !important;}":""
+	).(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_1'?".eo-wbc-container.container .ui.steps .step{ padding-top:3rem !important;}.ui.steps .step:after {display: none !important;}":" .eo-wbc-container.container .ui.steps .step {    padding-top: 1em !important;
+    padding-bottom: 1rem !important; }"
+		
+	).(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_2'?
+		".eo-wbc-container>.ui.steps .step:not(:first-child):before{
+			content: '';
+			border-top: 3.6em solid transparent;		    
+		    border-bottom: 3.6em solid transparent;
+		    border-left: 1em solid white;
+		    height: 0px;
+		    width: 0px;
+		    left:-1px;
+		    top: -0.1em;
+		    position: absolute;		    
+		} .eo-wbc-container>.ui.steps .step .column.product_image_section img{ margin-left:0px; } .eo-wbc-container.container .ui.steps .step{ padding-top: 0em !important; }.eo-wbc-container.container .ui.steps .step { padding-top: 1em !important; padding-bottom: 1.5em !important; }
+		.eo-wbc-container>.ui.steps .step::after {
+		    border-top: 3.5em solid transparent;
+		    border-bottom: 3.5em solid transparent;
+		    border-left: 1em solid ".wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_inactive','#ffffff').";		    
+		    height: 0px;
+		    width: 0px;
+		    top: 0;
+		    position: absolute;
+		    right: -1em;
+		    transition: none !important;
+		    transform: none !important;
+		    background-color:transparent !important;
+		    border-right: 1px solid transparent;
+		}
+		.eo-wbc-container>.ui.steps .step.active::after {
+			border-left: 1em solid ".$fg_color." !important;
+		}
+		.eo-wbc-container>.ui.steps{
+			height:7em;			
+		}
+		":""
+	).(
+		array_intersect(array(wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts'),wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts')),array('fc4','sc4'))?".eo-wbc-container.filters.container.ui.form,.eo-wbc-container.filters.container.ui.form .ui.header{font-family: ".wbc()->options->get_option('appearance_filter','header_font','ZapfHumanist601BT-Roman')." !important; }.eo-wbc-container.filters.container.ui.form .ui.header{font-size:1em;}.ui.labeled.ticked.range.slider .labels{height:0px; top:unset;bottom:-10%;font-size:12px}.ui.labeled.ticked.range.slider .labels .label::after{top:unset;bottom:100%;}.eo_wbc_filter_icon:hover:not(.none_editable){ border-bottom: 0px !important; } .eo-wbc-container.filters.container.ui.form .ui.segments{ border:none !important;}":""
 		
 	)."</style>";
 

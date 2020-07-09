@@ -1,20 +1,6 @@
-[Jun 17 2020 13:24:40] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/publics/filters/text_slider_mobile_alternate.php at line number 37
-"Undefined variable: prefix"
-[Jun 17 2020 13:24:43] Notice in /var/www/html/wps/wp-content/plugins/woocommerce-bundle-choice/application/view/publics/filters/text_slider_mobile_alternate.php at line number 37
-"Undefined variable: prefix"
-[Jun 18 2020 05:35:16] WARNING in /Users/hiren/Sites/wp-content/plugins/woo-bundle-choice/application/system/bootstrap/setup-wizard.php at line number 178
-"constant(): Couldn't find constant EO_WBC_PLUGIN_ICO_BIG"
-[Jun 18 2020 06:02:02] WARNING in /Users/hiren/Sites/wp-content/plugins/woo-bundle-choice/application/system/bootstrap/setup-wizard.php at line number 178
-"constant(): Couldn't find constant EO_WBC_PLUGIN_ICO_BIG"
-[Jun 18 2020 06:02:05] WARNING in /Users/hiren/Sites/wp-content/plugins/woo-bundle-choice/application/system/bootstrap/setup-wizard.php at line number 178
-"constant(): Couldn't find constant EO_WBC_PLUGIN_ICO_BIG"
-[Jun 18 2020 09:55:55] WARNING in /Users/hiren/Sites/wp-content/plugins/woo-bundle-choice/application/system/bootstrap/setup-wizard.php at line number 178
-"constant(): Couldn't find constant EO_WBC_PLUGIN_ICO_BIG"
-[Jun 18 2020 10:24:54] WARNING in /Users/hiren/Sites/wp-content/plugins/woo-bundle-choice/application/system/bootstrap/setup-wizard.php at line number 178
-"constant(): Couldn't find constant EO_WBC_PLUGIN_ICO_BIG"
-[Jun 19 2020 12:52:58] Notice in /Users/hiren/Sites/wp-content/plugins/woo-bundle-choice/application/controllers/admin/term-meta.php at line number 411
-"Undefined variable: is_edit"
-[Jun 19 2020 12:53:27] Notice in /Users/hiren/Sites/wp-content/plugins/woo-bundle-choice/application/controllers/admin/term-meta.php at line number 411
-"Undefined variable: is_edit"
-[Jun 19 2020 12:53:42] Notice in /Users/hiren/Sites/wp-content/plugins/woo-bundle-choice/application/controllers/admin/term-meta.php at line number 411
-"Undefined variable: is_edit"
+[Jul 06 2020 18:55:14] ERROR in /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/helper/helper-WBC_Common.php at line number 16
+"Uncaught TypeError: Argument 1 passed to WBC_Common::pr() must be of the type array, string given, called in \/Users\/hiren\/Sites\/tmp\/wordpress\/wordpress-from-wordpress.org-download\/wordpress\/wp-content\/plugins\/woo-bundle-choice\/application\/controllers\/publics\/pages\/product.php on line 414 and defined in \/Users\/hiren\/Sites\/tmp\/wordpress\/wordpress-from-wordpress.org-download\/wordpress\/wp-content\/plugins\/woo-bundle-choice\/application\/helper\/helper-WBC_Common.php:16\nStack trace:\n#0 \/Users\/hiren\/Sites\/tmp\/wordpress\/wordpress-from-wordpress.org-download\/wordpress\/wp-content\/plugins\/woo-bundle-choice\/application\/controllers\/publics\/pages\/product.php(414): WBC_Common->pr('pid_13', false, false)\n#1 \/Users\/hiren\/Sites\/tmp\/wordpress\/wordpress-from-wordpress.org-download\/wordpress\/wp-content\/plugins\/woo-bundle-choice\/application\/controllers\/publics\/pages\/product.php(261): eo\\wbc\\controllers\\publics\\pages\\Product->eo_wbc_category_link()\n#2 \/Users\/hiren\/Sites\/tmp\/wordpress\/wordpress-from-wordpress.org-download\/wordpress\/wp-"
+[Jul 06 2020 18:56:11] ERROR in /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/helper/helper-WBC_Common.php at line number 16
+"Uncaught TypeError: Argument 1 passed to WBC_Common::pr() must be of the type array, null given, called in \/Users\/hiren\/Sites\/tmp\/wordpress\/wordpress-from-wordpress.org-download\/wordpress\/wp-content\/plugins\/woo-bundle-choice\/application\/controllers\/publics\/pages\/product.php on line 415 and defined in \/Users\/hiren\/Sites\/tmp\/wordpress\/wordpress-from-wordpress.org-download\/wordpress\/wp-content\/plugins\/woo-bundle-choice\/application\/helper\/helper-WBC_Common.php:16\nStack trace:\n#0 \/Users\/hiren\/Sites\/tmp\/wordpress\/wordpress-from-wordpress.org-download\/wordpress\/wp-content\/plugins\/woo-bundle-choice\/application\/controllers\/publics\/pages\/product.php(415): WBC_Common->pr(NULL, false, true)\n#1 \/Users\/hiren\/Sites\/tmp\/wordpress\/wordpress-from-wordpress.org-download\/wordpress\/wp-content\/plugins\/woo-bundle-choice\/application\/controllers\/publics\/pages\/product.php(261): eo\\wbc\\controllers\\publics\\pages\\Product->eo_wbc_category_link()\n#2 \/Users\/hiren\/Sites\/tmp\/wordpress\/wordpress-from-wordpress.org-download\/wordpress\/wp-content"
+[Jul 08 2020 06:18:52] Notice in /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/model/admin/eowbc_price_control_save_update_prices.php at line number 248
+"Trying to get property 'post_id' of non-object"

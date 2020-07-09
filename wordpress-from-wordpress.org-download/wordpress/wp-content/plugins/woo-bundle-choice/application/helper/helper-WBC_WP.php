@@ -28,7 +28,7 @@ class WBC_WP {
                     return false;
             }
     
-        if ( self::eo_wbc_wp_shortcode_exists( $tag ) ) {
+            if ( self::eo_wbc_wp_shortcode_exists( $tag ) ) {
                     preg_match_all( '/' . get_shortcode_regex() . '/', $content, $matches, PREG_SET_ORDER );
                     if ( empty( $matches ) )
                             return false;
@@ -68,4 +68,69 @@ class WBC_WP {
         }            
     }     
 
+    public function sanitize_email($param){
+        return sanitize_email($param);
+    }
+
+    public function sanitize_file_name($param){
+        return sanitize_file_name($param);
+    }
+
+    public function sanitize_html_class($param){
+        return sanitize_html_class($param);
+    }
+
+    public function sanitize_key($param){
+        return sanitize_key($param);
+    }
+
+    public function sanitize_mime_type($param){
+        return sanitize_mime_type($param);
+    }
+
+    public function sanitize_option($param){
+        return sanitize_option($param);
+    }
+
+    public function sanitize_sql_orderby($param){
+        return sanitize_sql_orderby($param);
+    }
+
+    public function sanitize_text_field($param){
+        return sanitize_text_field($param);
+    }
+
+    public function sanitize_title($param){
+        return sanitize_title($param);
+    }
+
+    public function sanitize_title_for_query($param){
+        return sanitize_title_for_query($param);
+    }
+    public function sanitize_title_with_dashes($param){
+        return sanitize_title_with_dashes($param);
+    }
+    public function sanitize_user($param){
+        return sanitize_user($param);
+    }
+    public function esc_url_raw($param){
+        return esc_url_raw($param);
+    }
+    public function wp_filter_post_kses($param){
+        return wp_filter_post_kses($param);
+    }
+    public function wp_filter_nohtml_kses($param){
+        return wp_filter_nohtml_kses($param);
+    }
+    public function sanitize_hex_color($param){
+        return sanitize_hex_color($param);
+    }
+
+    public function cat_id2slug($id) {
+        if(term_exists($id,'product_cat')) {
+            return get_term_by('id',$id,'product_cat')->slug;
+        } else {
+            return false;
+        }         
+    }
 }
