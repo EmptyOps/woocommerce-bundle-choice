@@ -269,7 +269,7 @@ if ( ! class_exists( 'Filters' ) ) {
 									'label'=>'Filter Status',
 									'type'=>'checkbox',
 									'sanitize'=>'sanitize_text_field',
-									'value'=>array(wbc()->options->get_option('filters_filter_setting','filter_setting_status')),
+									'value'=>array('filter_setting_status'),
 									'options'=>array('filter_setting_status'=>' Check here to enable horizontal filter bar at category page.'),
 									'class'=>array(),
 									'size_class'=>array('eight','wide'),

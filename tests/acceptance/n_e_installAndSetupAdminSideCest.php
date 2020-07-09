@@ -16,6 +16,12 @@ class n_e_installAndSetupAdminSideCest
 
     }
 
+    protected function setupWizard(AcceptanceTester $I) {
+        
+        
+
+    }
+
     // setup using setup wizard and sample data. 
     // TODO here important to note that to run test with sample data on fresh install this test either needs to be run first or coditionally in duplicate environment where the other tests which sets data manually are just skipped  
     public function tryToTestSetupUsingSampleData(AcceptanceTester $I)
@@ -24,28 +30,18 @@ class n_e_installAndSetupAdminSideCest
             return;
         }
 
-        // TODO instead here add/prepare the sample data cest class and call that from here  
+        // setup wizard process
+        $this->setupWizard($I);
 
-        // HOLD FOR REMOVAL
-		// go to the page
-		$I->amOnPage('/wp-admin/admin.php?page=eowbc-configuration');
-		
-		// verify the tab
-		$I->see('This section will help you add sample data and configurations');
-
-		// start sample data insert process  
-		$I->click('Click here for automated configuration and setup');
+        // sample data
+        $addSampleDataProcessCest = new 
 
 		// step 1
-		$I->reloadPage();	//reload page
-		$I->click('Buttons');
-		$I->see('Custom landing page');	//that is the position option selected
+        
 
 		// step 2
 
 		// step 3
-
-		// END HOLD FOR REMOVAL
 
     }
 

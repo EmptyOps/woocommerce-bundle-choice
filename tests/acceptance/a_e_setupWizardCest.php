@@ -11,7 +11,7 @@ class a_e_setupWizardCest
     // {
     // }
 
-    public function step1(AcceptanceTester $I) {
+    public function step1(AcceptanceTester $I, $is_inner_call=false) {
 
     	if( !$I->test_allowed_in_this_environment("a_") ) {
             return;
