@@ -7,6 +7,22 @@ namespace Helper;
 class Acceptance extends \Codeception\Module
 {
 
+    /**
+     * prefix a_-f_ => test suite 1 for manual test of pair builder process, sunob_ => test suite 2 for manual test of bonus/tiny features, n_ => test suite 3 for tests using sample data, '' => empty prefix means use specified key without prefix check 
+     */
+    public function get_configs($key, $prefix="")
+    {
+        if( $key == "first_button_text" && ($prefix=="n_" || empty($prefix)) ) {
+            return "Start with Diamond Shape";
+        }
+        else if( $key == "second_button_text" && ($prefix=="n_" || empty($prefix)) ) {
+            return "Start with Setting Shape";
+        }
+
+
+        return null;
+    }
+
 	/**
      * 
      */
@@ -62,6 +78,23 @@ class Acceptance extends \Codeception\Module
         }
 
         return false;
+    }
+
+    /**
+     * Get current uri from WebDriver
+     * @return mixed
+     * @throws \Codeception\Exception\ModuleException
+     */
+    public function getCurrentUri()
+    {
+        echo "called getCurrentUri...";
+        try {
+            return $this->getModule('WPWebDriver')->_getCurrentUri();
+        }
+        catch(Exception $e) {
+            echo "caught message...";
+            echo $e->getMessage()."";
+        }
     }
 
     /**

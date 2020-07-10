@@ -1,0 +1,13 @@
+<?php 
+
+class n_ke_accountOrderDetailPageCest
+{
+    public function _before(AcceptanceTester $I)
+    {
+    }
+
+    // tests
+    public function tryToTest(AcceptanceTester $I)
+    {
+    }
+}

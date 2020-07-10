@@ -58,6 +58,10 @@ class Form_Builder implements Builder {
 
 								if(!empty($form_element['type'])) {
 
+									if( $form_element['type'] == "skip" ){
+										continue;
+									}
+
 									if( $form_element['type'] == "table" ){
 										wbc()->load->model('admin\table-builder');
 										ob_start();
@@ -104,6 +108,10 @@ class Form_Builder implements Builder {
 				} else {
 					foreach ($form['data'] as $id => $form_element) {
 						if(!empty($form_element['type'])) {
+
+							if( $form_element['type'] == "skip" ){
+								continue;
+							}
 
 							if( $form_element['type'] == "table" ){
 								wbc()->load->model('admin\table-builder');

@@ -137,27 +137,58 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 			return esc_url(apply_filters( 'eowbc_icon_url',constant('EOWBC_ICON')));
 		}
 
-		public function add_message($features,$menu) {	
-		
-			//supposed to be shown on any page of admin panel
+		public static function active_pair_builder_feature() {			
+			
+			$features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())));
+
 			if(!empty($features) and is_array($features)){
 				$active_feature = '';
 				if(!empty($features['ring_builder'])) {
 					$active_feature = 'ring_builder';
-				} elseif (!empty($features['rapnet_api'])) {
-					$active_feature = 'rapnet_api';
-				} elseif (!empty($features['glowstar_api'])) {
-					$active_feature = 'glowstar_api';
+				} elseif (!empty($features['pair_maker'])) {
+					$active_feature = 'pair_maker';
+				} elseif (!empty($features['guidance_tool'])) {
+					$active_feature = 'guidance_tool';
 				}
-				$primary_features = array('ring_builder'=>'Ring Builder','rapnet_api'=>'Pair Maker','glowstar_api'=>'Guidance Tool');
-				if(!empty($active_feature) and array_key_exists($active_feature,$primary_features)) {
+				
+				return $active_feature;
+			}
 
-					if(wbc()->options->get_option('configuration','config_category',0) != 1 or wbc()->options->get_option('configuration','config_map',0) != 1){						
-						add_action( 'admin_notices',function() use($primary_features,$active_feature){
-							printf('<div class="ui negative message"><i class="close icon"></i><div class="header">Required</div><p>Since you enabled <strong>%s</strong> you need to complete setup to make it work on your website, either add sample data from General -> Sample Data tab or add Filters and Mapping in respective Tabs as well as finish the required settings in the General -> Buttons and General -> Navigations Steps( Breadcrumb ) Tabs</p></div>',$primary_features[$active_feature]);
-						});
-					}
+			return null;
+		}
+
+		public static function pair_builder_features_list() {		
+			// TODO we must create a config class or folder and put all configs there. When implemented instead of returning array from here call that function from here	
+			return array('ring_builder'=>'Ring Builder','pair_maker'=>'Pair Maker','guidance_tool'=>'Guidance Tool');
+		}
+
+		public static function is_pair_builder_feature_all_setup() {			
+			
+			$active_feature = Admin_Menu::active_pair_builder_feature();
+			$primary_features = Admin_Menu::pair_builder_features_list();
+			if(!empty($active_feature) and array_key_exists($active_feature,$primary_features)) {
+
+				if(wbc()->options->get_option('configuration','config_category',0) != 1 or wbc()->options->get_option('configuration','config_map',0) != 1){
+					return false;
 				}
+
+			}
+
+			return true;
+		}
+
+
+		public function add_message($features,$menu) {	
+		
+			//supposed to be shown on any page of admin panel
+			if( !Admin_Menu::is_pair_builder_feature_all_setup() ) {
+
+				$active_feature = Admin_Menu::active_pair_builder_feature();
+				$primary_features = Admin_Menu::pair_builder_features_list();
+
+				add_action( 'admin_notices',function() use($primary_features,$active_feature){
+					printf('<div class="ui negative message"><i class="close icon"></i><div class="header">Required</div><p>Since you enabled <strong>%s</strong> you need to complete setup to make it work on your website, either add sample data from General -> Sample Data tab or add Filters and Mapping in respective Tabs as well as finish the required settings in the General -> Buttons and General -> Navigations Steps( Breadcrumb ) Tabs</p></div>',$primary_features[$active_feature]);
+				});
 			}
 
 			//supposed to be shown on any page of admin panel

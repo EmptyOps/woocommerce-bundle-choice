@@ -109,7 +109,8 @@ class Service {
 		$this->enque_asset();
 		wbc()->load->model('publics/component/eowbc_filter_widget');
 		$widget = \eo\wbc\model\publics\component\EOWBC_Filter_Widget::instance();
-		// The two buttons shortcode.
+		
+        // The two buttons shortcode.
         $configuration_buttons_page = wbc()->options->get_option('configuration','buttons_page',false);
 		if( $configuration_buttons_page===0 or $configuration_buttons_page==='0' or $configuration_buttons_page==2 or $configuration_buttons_page==3 ) {			
             add_shortcode('woo-bundle-choice-btn',function(){

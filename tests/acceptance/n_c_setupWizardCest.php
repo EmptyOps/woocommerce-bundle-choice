@@ -14,11 +14,11 @@ class n_c_setupWizardCest extends a_e_setupWizardCest
 
     public function step1(AcceptanceTester $I)
     {
-    	if( !$I->test_allowed_in_this_environment("n_") && false ) {
+    	if( !$I->test_allowed_in_this_environment("n_") ) {
             return;
         }
 
-    	parent::step1($I,true);
+    	parent::step1($I,"n_");
     }
 
     public function step2(AcceptanceTester $I)
@@ -27,7 +27,7 @@ class n_c_setupWizardCest extends a_e_setupWizardCest
             return;
         }
 
-    	parent::step2($I,true);
+    	parent::step2($I,"n_");
     }
 
     public function step3(AcceptanceTester $I)
@@ -36,7 +36,7 @@ class n_c_setupWizardCest extends a_e_setupWizardCest
             return;
         }
 
-    	parent::step3($I,true);
+    	parent::step3($I,"n_");
     }
 
 }

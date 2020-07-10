@@ -17,10 +17,6 @@ class a_e_setupWizardCest
             return;
         }
 
-        if($suite_name_prefix) {
-        	$I->see("suite_name_prefix detected from n_ class");
-        }
-
 		//login to admin panel, should save and maintain cookies so that do not need to login on all admin test. but yeah however during the front end test should flush the admin cookie first.  
 		$I->loginAsAdmin();
 		$I->see( 'Dashboard' );

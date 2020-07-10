@@ -24,6 +24,28 @@ if ( ! class_exists( 'Configuration' ) ) {
 			wbc()->load->model('admin/form-builder');
 			wbc()->load->model('category-attribute');
 
+			// check it out link
+			$check_it_out_link_type = 'skip';
+			$check_it_out_link_label = 'Check it out!';
+			$check_it_out_link = '';
+			$active_feature = \eo\wbc\controllers\admin\menu\Admin_Menu::active_pair_builder_feature();
+			if( !empty($active_feature) && \eo\wbc\controllers\admin\menu\Admin_Menu::is_pair_builder_feature_all_setup() ) {
+			
+				$configuration_buttons_page = wbc()->options->get_option('configuration','buttons_page',false);
+				if( $configuration_buttons_page===0 or $configuration_buttons_page==='0' ) {			
+					$check_it_out_link_type = 'link';
+					$check_it_out_link = site_url('design-your-own-ring');
+		        }
+		        elseif( $configuration_buttons_page==1 or $configuration_buttons_page==3 ) {			
+					$check_it_out_link_type = 'link';
+					$check_it_out_link = site_url();
+		        }
+		        elseif( $configuration_buttons_page==2 ) {			
+					$check_it_out_link_type = 'label';
+					$check_it_out_link_label = 'You have choose to display buttons using Shortcode only, so please go to the page in which you put the Shortcode to check it.';
+		        }
+			}
+
 			$form_definition = 	
 					array(
 						'config_automation'=>array(
@@ -53,6 +75,18 @@ if ( ! class_exists( 'Configuration' ) ) {
 												'class'=>array('primary'),
 												'attr'=>array("data-action='save'")
 											)*/
+											'check_it_out_label'=>array(
+												'label'=>'Setup Done',
+												'type'=>($check_it_out_link_type != 'skip' ?'devider':$check_it_out_link_type),
+												// 'class'=>array('fluid'),
+												// 'size_class'=>array('eight','wide')
+											),
+											'check_it_out_link'=>array(
+												'label'=>$check_it_out_link_label,
+												'type'=>$check_it_out_link_type,
+												'attr'=>array("href='".$check_it_out_link."'"),
+												'class'=>array('secondary')	
+											)
 										)							
 							),
 						'config_buttons_conf'=>array(
