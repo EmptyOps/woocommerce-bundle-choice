@@ -47,11 +47,11 @@ class f_k_step2Cest
 		return $price_of_product;
 	}
 
-	public function itemPage(AcceptanceTester $I) {
+	protected function itemPage(AcceptanceTester $I, $suite_name_prefix=false) {
 		
-		if( !$I->test_allowed_in_this_environment("f_") ) {
-            return;
-        }
+		// if( !$I->test_allowed_in_this_environment("f_") ) {
+  //           return;
+  //       }
         
 		// - I choose filter options and then I check if x  products are found
 		// - I click on product image of first product from the search results

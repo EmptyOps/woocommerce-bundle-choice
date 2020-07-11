@@ -14,11 +14,11 @@ class f_m_previewPageCest
     // {
     // }
 
-    public function previewPage(AcceptanceTester $I) {
+    protected function previewPage(AcceptanceTester $I, $suite_name_prefix=false) {
 
-    	if( !$I->test_allowed_in_this_environment("f_") ) {
-            return;
-        }
+    	// if( !$I->test_allowed_in_this_environment("f_") ) {
+     //        return;
+     //    }
 		
     	//TODO make it dynamic by saving this in session in previous steps and then here get it from session 
     	$this->price_of_product_step1 = "12.00";
@@ -40,11 +40,11 @@ class f_m_previewPageCest
 
 	}
 
-	public function addToCart(AcceptanceTester $I) {
+	protected function addToCart(AcceptanceTester $I, $suite_name_prefix=false) {
 
-		if( !$I->test_allowed_in_this_environment("f_") ) {
-            return;
-        }
+		// if( !$I->test_allowed_in_this_environment("f_") ) {
+  //           return;
+  //       }
 
 		// $this->previewPage($I);
 

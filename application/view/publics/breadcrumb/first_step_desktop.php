@@ -5,6 +5,7 @@
 */
 
 ?>
+
 <style type="text/css">
     .ui.grid>* {
      padding-left: 5px; 
@@ -15,25 +16,19 @@
     margin-left: 30% !important;
 }
 
-.eo-wbc-container>.ui.steps .step.active:after {
-    background: linear-gradient(to bottom left, rgb(255, 255, 255) 50%, rgba(247, 247, 247, 0.98) 50%);
-}
-
 .eo-wbc-container>.ui.steps .step:after {
     width: 3.2em;
     height: 3.2em;
     border-radius: 0 0 5px 0;
-    box-shadow: 0 2px 0 #efefef;
+    /*box-shadow: 0 2px 0 #efefef;*/
 }
 
 .ui.steps {
     box-shadow: 2px 2px 0 #efefef !important; 
 }
-.eo-wbc-container>.ui.steps .step.active {
-    background: linear-gradient(to bottom, rgb(255, 255, 255) 50%, rgba(247, 247, 247, 0.98) 50%);
-}
 
 </style>
+
 <div class="step <?php echo (($step==$order)?'active ':(($step>$order)?'completed ':'disabled')); ?>" style="">            
     <div class="ui equal width grid" style="width: 100%;margin-top: -1em !important;">
         <div class="ui grid">

@@ -21,6 +21,7 @@
 
 /*breadcrumb_backcolor_inactive*/
 
+
 	echo "<style>".
 	(
 		wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_inactive','#ffffff')
@@ -29,12 +30,16 @@
 			.wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_inactive','#ffffff').
 			" }":''
 	)
-	.
-	(
-		$fg_color
-		?
-		" .eo-wbc-container>.ui.steps .step.active,.eo-wbc-container>.ui.steps .step.active:after{ background: ".$fg_color." }":''
-	)
+	.(
+	 	wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='default'
+		? 
+		" .eo-wbc-container>.ui.steps .step.active{
+		    background: linear-gradient(to bottom, ".$fg_color." 50%, rgba(247, 247, 247, 0.98) 50%);
+		} 
+		.eo-wbc-container>.ui.steps .step.active:after {
+		    background: linear-gradient(to bottom left, ".$fg_color." 50%, rgba(247, 247, 247, 0.98) 50%);
+		}":".eo-wbc-container>.ui.steps .step.active,.eo-wbc-container>.ui.steps .step.active:after{ background: ".$fg_color." }"
+	)		
 	.		
 	(
 		!empty(wbc()->session->get('EO_WBC_FG_COLOR'))

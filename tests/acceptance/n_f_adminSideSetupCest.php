@@ -66,7 +66,38 @@ class n_f_adminSideSetupCest
         $I->seeInField($cat == 0 ? 'first_category_altr_filt_widgts' : 'second_category_altr_filt_widgts', $widget_key);
     }
 
-    protected function modifyAppearance($tab, $field_id, $field_type, $val)
+    protected function gotoStep(AcceptanceTester $I, $cat=0)
+    {
+        $I->amOnPage('/design-your-own-ring/');
+
+        $I->see($I->get_configs('first_button_text', 'n_'));
+        $I->see($I->get_configs('second_button_text', 'n_'));
+
+        $I->click($I->get_configs('first_button_text', 'n_'));
+
+        $I->waitForText('CHOOSE A', 10);  
+        
+        if($cat > 0) {
+            // go to second category filter
+            $I->scrollTo('//*[@id="main"]/ul/li/a/img');
+            $I->wait(3);
+
+            $I->click('//*[@id="main"]/ul/li/a/img');
+            $I->see('Continue');
+
+            //first select required options for variable product, otherwise it won't let us add into cart. 
+            $I->click('//*[@id="product-13"]/div[2]/form/table/tbody/tr/td[2]/div/span[2]/ul/li[1]/div');
+
+            // click on continue button
+            $I->click('Continue');
+
+            // verify 
+            $price_of_product = $I->get_configs('first_product_price', 'n_');    //TODO make it dynamic if its random in sample data
+            $I->waitForText($price_of_product, 10);
+        }
+    }
+
+    protected function modifyAppearance($tab, $field_id, $field_name, $field_type, $val, $save_button_xpath, $field_dropdown_div_id='')
     {
         // if( !$I->test_allowed_in_this_environment("n_") ) {
         //     return;
@@ -80,18 +111,66 @@ class n_f_adminSideSetupCest
         // $I->see('First Category');
 
         // set field
-        $I->executeJS("jQuery('#".$widget_key."').parent().checkbox('set checked', '".$widget_key."');");  
+        for($i=0; $i<sizeof($field_id); $i++) {
 
-        // $I->scrollTo('//*[@id="submit_btn"]');
-        // $I->wait(3);
+            if( $field_type[$i] == "text" ) {
+                $I->fillField($field_name[$i], $val[$i]);
+            }
+            elseif( $field_type[$i] == "checkbox" || $field_type[$i] == "radio" ) {
+                $I->executeJS("jQuery('#".$field_id[$i]."').parent().checkbox('set checked', '".$val[$i]."');");  
+            }
+            elseif( $field_type[$i] == "color" ) {
+                $I->executeJS('jQuery("#'.$field_id[$i].'").val("'.$val[$i].'");');  
+            }
+            elseif( $field_type[$i] == "select" ) {
+                $I->executeJS("jQuery('#".$field_dropdown_div_id[$i]."').dropdown('set selected', '".$val[$i]."');");
+            }
+        }
+        
+        $I->scrollTo($save_button_xpath);
+        $I->wait(3);
         
         // save 
-        $I->click('#submit_btn');  //('Save');     //it shouldn't be this way, but there seem some issue with selenium driver and thus when there is another Save button on the page even though on another page and is not visible but still selenium think it is visible and thus gives us error so need to use unique xPath like id etc. 
+        $I->click($save_button_xpath);  
 
         // confirm if saved properly or not
         $I->reloadPage();   //reload page
-        $I->click('Alternate Filter Widgets');
-        $I->seeInField($cat == 0 ? 'first_category_altr_filt_widgts' : 'second_category_altr_filt_widgts', $widget_key);
+        $I->click($tab);
+        for($i=0; $i<sizeof($field_id); $i++) {
+            $I->seeInField($field_name[$i], $val[$i]);
+        }
+    }
+
+    protected function verifyAppearance($field_id, $field_name, $field_type, $val, $should_see_text=array(), $selector_of_targets=array(), $css_property_of_targets=array())
+    {
+        // if( !$I->test_allowed_in_this_environment("n_") ) {
+        //     return;
+        // }
+
+        // this function assumes that browser session is currently at desired page where the appearance needs to be tested
+
+        // verify
+        for($i=0; $i<sizeof($field_id); $i++) {
+            if( $field_type[$i] == "text" ) {
+                $I->see($val[$i]);
+            }
+            elseif( $field_type[$i] == "checkbox" || $field_type[$i] == "radio" ) {
+                $I->see($should_see_text[$i]);
+            }
+            elseif( $field_type[$i] == "color" ) {
+                $colorcode = $I->executeJS('return jQuery("'.$selector_of_targets[$i].'").css("'.$css_property_of_targets[$i].'");');  
+                echo "colorcode found... ".$colorcode;
+                if( $colorcode == $val[$i] ) {
+                    $I->dontSee('sd8324hs65gkjv73h');   // assume passed with dummy assert
+                }
+                else {
+                    $I->see('sd8324hs65gkjv73h');   // assume failed with dummy assert
+                }
+            }
+            elseif( $field_type[$i] == "select" ) {
+                $I->see($should_see_text[$i]);
+            }
+        }
     }
 
 }

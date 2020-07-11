@@ -18,7 +18,9 @@ class Acceptance extends \Codeception\Module
         else if( $key == "second_button_text" && ($prefix=="n_" || empty($prefix)) ) {
             return "Start with Setting Shape";
         }
-
+        else if( $key == "first_product_price" && ($prefix=="n_" || empty($prefix)) ) {
+            return "12.00";
+        }
 
         return null;
     }

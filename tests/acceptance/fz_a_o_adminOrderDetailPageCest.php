@@ -11,11 +11,11 @@ class fz_a_o_adminOrderDetailPageCest
     // {
     // }
 
-	public function gotoAdminOrderDetailPage(AcceptanceTester $I) {
+	protected function gotoAdminOrderDetailPage(AcceptanceTester $I, $suite_name_prefix=false) {
 
-		if( !$I->test_allowed_in_this_environment("a_") ) {
-            return;
-        }
+		// if( !$I->test_allowed_in_this_environment("a_") ) {
+  //           return;
+  //       }
 
     	//TODO make it dynamic by saving this in session in previous steps and then here get it from session 
     	$this->price_of_product_step1 = "12.00";
@@ -31,11 +31,11 @@ class fz_a_o_adminOrderDetailPageCest
 
 	}
 
-	public function adminOrderDetailPage(AcceptanceTester $I, $is_inner_call=false) {
+	protected function adminOrderDetailPage(AcceptanceTester $I, $suite_name_prefix=false) {
 
-		if( !$I->test_allowed_in_this_environment("a_") ) {
-            return;
-        }
+		// if( !$I->test_allowed_in_this_environment("a_") ) {
+  //           return;
+  //       }
 
 		// verify order details 
 		$I->see('Edit order', 'h1');
@@ -48,7 +48,7 @@ class fz_a_o_adminOrderDetailPageCest
 		$I->see('8347408752');
 
 		//TODO check here if merged row appears properly or not 
-		if( !$is_inner_call ) { 
+		if( !$suite_name_prefix ) { 
 			$this->confirmMergedRow($I);	
 		}
 

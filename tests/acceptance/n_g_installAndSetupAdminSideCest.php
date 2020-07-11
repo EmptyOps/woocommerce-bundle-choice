@@ -84,12 +84,7 @@ class n_g_installAndSetupAdminSideCest extends n_f_adminSideSetupCest
             if( $current_uri == "" ) {
 
                 // go to the page
-                $I->amOnPage('/design-your-own-ring/');
-
-                $I->see($I->get_configs('first_button_text', 'n_'));
-                $I->see($I->get_configs('second_button_text', 'n_'));
-
-                $I->click($I->get_configs('first_button_text', 'n_'));
+                $this->gotoStep($I);
 
                 // keep current uri so that we can go there directly next time
                 $current_uri = $I->getCurrentUri();
@@ -152,31 +147,7 @@ class n_g_installAndSetupAdminSideCest extends n_f_adminSideSetupCest
                 if( $current_uri == "" ) {
 
                     // go to the page
-                    $I->amOnPage('/design-your-own-ring/');
-
-                    $I->see($I->get_configs('first_button_text', 'n_'));
-                    $I->see($I->get_configs('second_button_text', 'n_'));
-
-                    $I->click($I->get_configs('first_button_text', 'n_'));
-
-                    if( $cat > 0 ) {
-                        // go to second category filter
-                        $I->scrollTo('//*[@id="main"]/ul/li/a/img');
-                        $I->wait(3);
-
-                        $I->click('//*[@id="main"]/ul/li/a/img');
-                        $I->see('Continue');
-
-                        //first select required options for variable product, otherwise it won't let us add into cart. 
-                        $I->click('//*[@id="product-13"]/div[2]/form/table/tbody/tr/td[2]/div/span[2]/ul/li[1]/div');
-
-                        // click on continue button
-                        $I->click('Continue');
-
-                        // verify 
-                        $price_of_product = "12.00";    //TODO make it dynamic if its random in sample data or simply set it in config if the price is static in sample data. 
-                        $I->waitForText($price_of_product, 10);
-                    }
+                    $this->gotoStep($I, $cat);  
 
                     // keep current uri so that we can go there directly next time
                     $current_uri = $I->getCurrentUri();

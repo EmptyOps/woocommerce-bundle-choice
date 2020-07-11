@@ -11,11 +11,11 @@ class f_q_checkoutPageCest
     // {
     // }
 
-	public function checkoutPage(AcceptanceTester $I, $is_inner_call=false) {
+	protected function checkoutPage(AcceptanceTester $I, $suite_name_prefix=false) {
 		
-		if( !$I->test_allowed_in_this_environment("f_") ) {
-            return;
-        }
+		// if( !$I->test_allowed_in_this_environment("f_") ) {
+  //           return;
+  //       }
 
 		//TODO make it dynamic by saving this in session in previous steps and then here get it from session 
     	$this->price_of_product_step1 = "12.00";
@@ -27,17 +27,17 @@ class f_q_checkoutPageCest
 		$I->see('Place order');
 		
 		//TODO check here if merged row appears properly or not
-		if( !$is_inner_call ) { 
+		if( !$suite_name_prefix ) { 
 			$this->confirmOrderSummary($I);	
 		}
 
 	}
 
-	public function placeOrder(AcceptanceTester $I, $is_inner_call=false) {
+	protected function placeOrder(AcceptanceTester $I, $suite_name_prefix=false) {
 
-		if( !$I->test_allowed_in_this_environment("f_") ) {
-            return;
-        }
+		// if( !$I->test_allowed_in_this_environment("f_") ) {
+  //           return;
+  //       }
         
 		// setup fields 
 		$I->fillField("billing_first_name", 'hi000');

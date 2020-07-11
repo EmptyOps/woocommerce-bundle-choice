@@ -44,11 +44,11 @@ class f_i_step1Cest
 		return $price_of_product;
 	}
 
-	public function itemPage(AcceptanceTester $I) {
+	protected function itemPage(AcceptanceTester $I, $suite_name_prefix=false) {
 		
-		if( !$I->test_allowed_in_this_environment("f_") ) {
-            return;
-        }
+		// if( !$I->test_allowed_in_this_environment("f_") ) {
+  //           return;
+  //       }
 
 		// - I choose filter options and then I check if x  products are found
 		// - I click on product image of first product from the search results
@@ -109,11 +109,11 @@ class f_i_step1Cest
 	}
 
 	// also do here the product not found test here and check if that Oooops error message and error reporting options shows or not
-	public function checkProductNotFoundDueToMissingMapping(AcceptanceTester $I) {
+	protected function checkProductNotFoundDueToMissingMapping(AcceptanceTester $I, $suite_name_prefix=false) {
 		
-		if( !$I->test_allowed_in_this_environment("f_") ) {
-            return;
-        }
+		// if( !$I->test_allowed_in_this_environment("f_") ) {
+  //           return;
+  //       }
         
 		return;	//TODO implement it later. for now the manual testing is done and given priority to other test automations so do this later as soon as we get the chance. 
 
