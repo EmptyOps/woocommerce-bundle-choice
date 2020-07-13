@@ -39,7 +39,7 @@ class Acceptance extends \Codeception\Module
             return "/wordpress/src";
         }
         elseif( $suite_name == "a_-f_" ) {
-            return "/wordpress/src";
+            return "/WBC_TEST_ENV_with_sample_data/wordpress-latest-1/";
         } 
 
         return null;

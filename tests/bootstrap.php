@@ -33,3 +33,8 @@
 
 // // Start up the WP testing environment.
 // require $_tests_dir . '/includes/bootstrap.php';
+
+echo "bootstrap outer called...";
+throw new Exception("bootstrap outer called...", 1);
+
+self::$config['modules']['config']['WebDriver']['url'] = '';
