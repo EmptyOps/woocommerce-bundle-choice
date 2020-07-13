@@ -126,16 +126,16 @@ class Eowbc_Jewelry {
 			        ));
 
 			        // update_option('eo_wbc_first_name','Diamond Shape');//FIRST : NAME
-			        wbc()->options->update_option('configuration','first_name','Diamond Shape');
+			        wbc()->options->update_option('configuration','first_name',$catat_category[0]['id']/*'Diamond Shape'*/);
 			        // update_option('eo_wbc_first_slug','eo_diamond_shape_cat');//FIRST : SLUG
-			        wbc()->options->update_option('configuration','first_slug','eo_diamond_shape_cat');
+			        wbc()->options->update_option('configuration','first_slug',$catat_category[0]['slug']/*'eo_diamond_shape_cat'*/);
 			        // update_option('eo_wbc_first_url','/product-category/eo_diamond_shape_cat/');//FIRST : NAME
 			        wbc()->options->update_option('configuration','first_url','/product-category/eo_diamond_shape_cat/');
 			        
 			        // update_option('eo_wbc_second_name','Setting Shape');//SECOND : NAME
-			        wbc()->options->update_option('configuration','second_name','Setting Shape');
+			        wbc()->options->update_option('configuration','second_name',$catat_category[1]['id']/*'Setting Shape'*/);
 			        // update_option('eo_wbc_second_slug','eo_setting_shape_cat');//SECOND : SLUG
-			        wbc()->options->update_option('configuration','second_slug','eo_setting_shape_cat');
+			        wbc()->options->update_option('configuration','second_slug',$catat_category[1]['slug']/*'eo_setting_shape_cat'*/);
 			        // update_option('eo_wbc_second_url','/product-category/eo_setting_shape_cat/');//SECOND : URL   
 			        wbc()->options->update_option('configuration','second_url','/product-category/eo_setting_shape_cat/');
 

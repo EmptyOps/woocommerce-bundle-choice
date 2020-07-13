@@ -17,10 +17,7 @@
 }
 
 .eo-wbc-container>.ui.steps .step:after {
-    width: 3.2em;
-    height: 3.2em;
     border-radius: 0 0 5px 0;
-    /*box-shadow: 0 2px 0 #efefef;*/
 }
 
 .ui.steps {

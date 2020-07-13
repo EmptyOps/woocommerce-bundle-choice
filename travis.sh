@@ -25,6 +25,10 @@ install-wordpress() {
 
 	cd "$WP_DEVELOP_DIR"
 
+	# copy other environment sites 
+	mkdir -p "$SERVER_ROOT_DIR/WBC_TEST_ENV_with_sample_data/wordpress-latest-1"
+	cp -R wordpress-from-wordpress.org-download/WBC_TEST_ENV_with_sample_data/wordpress-latest-1/* "$SERVER_ROOT_DIR/WBC_TEST_ENV_with_sample_data/wordpress-latest-1/"
+
 	# # Set up tests config.
 	# # cp wp-tests-config-sample.php wp-config.php
 	# cp wp-config-sample.php wp-config.php
@@ -171,19 +175,19 @@ composer_and_wp_plugins_install_update() {
 
 	#clone/move and activate woo choice plugin itself to wp dir
 		# mkdir /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice 	#commented temporarily since the plugin is activated on manually on local wordress site 
-		
-		# zzzsdfjgjsdjaghsd
-		# ls -l /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/
-		# yyysdkjfhsdkjhff
+
+		# remove # 		
 		rm -rf /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/*	#removing to ensure that no bug can occur in recursive copy where in some linux force overwrite fails
-		# xxxxgsdjhfgjdsghf
-		# ls -l /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/
-		# wwwkxdjhfjkf
-		# ls -l ${TRAVIS_BUILD_DIR}
-		# aaaaaaaaasdlfkjdlsfkjlkj
+		
+		# for other environment sites
+		rm -rf "$SERVER_ROOT_DIR"/WBC_TEST_ENV_with_sample_data/wordpress-latest-1/wp-content/plugins/woo-bundle-choice/* 
+
+
+		# copy #
 		cp -Rf "$TRAVIS_BUILD_DIR"/* /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/
-		# bbbbbbbbdsfosdflkjsdlfk
-		# ls -l /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/
+
+		# for other environment sites
+		cp -Rf "$TRAVIS_BUILD_DIR"/* "$SERVER_ROOT_DIR"/WBC_TEST_ENV_with_sample_data/wordpress-latest-1/wp-content/plugins/woo-bundle-choice/* 
 		
 		# git clone --depth=1 --branch=dev https://github.com/EmptyOps/woocommerce-bundle-choice /tmp/wordpress/src/wp-content/plugins #clone option no more used, since copy above is from clone already
 		# php /tmp/wordpress/wp plugin activate woo-bundle-choice	#commented temporarily since the plugin is activated on manually on local wordress site

@@ -152,15 +152,18 @@ class Setup_Wizard {
 					$feature_option= array();
 					foreach ($options as $option) {
 						if(!empty(wbc()->sanitize->get($option))) {
-							array_push($feature_option,$option);							
+							// instead of push set the option as key and in val 1 since at every other place in plugin it is assumed like that
+							// array_push($feature_option,$option);							
+							$feature_option[$option] = 1;
 						}						
 					}											
 
-					if(!empty($feature_option)){
+					// removed this condition so that if user select nothing then in that case the empty array is saved
+					// if(!empty($feature_option)){
 						//update_option('eo_wbc_feature_option', serialize($feature_option));
 
 						wbc()->options->update_option('setting_status_setting_status_setting','features', serialize($feature_option));
-					}
+					// }
 
 					break;
 				case 'final':

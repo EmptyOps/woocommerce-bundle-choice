@@ -8,7 +8,12 @@ class Acceptance extends \Codeception\Module
 {
 
     /**
-     * prefix a_-f_ => test suite 1 for manual test of pair builder process, sunob_ => test suite 2 for manual test of bonus/tiny features, n_ => test suite 3 for tests using sample data, '' => empty prefix means use specified key without prefix check 
+     * test suites 
+     * prefix a_-f_ => test suite 1 for manual test of pair builder process, sunob_ => test suite 2 for manual test of bonus/tiny features, n_ => test suite 3 for tests using sample data
+     */
+
+    /**
+     * prefix: test suites(see above), '' => empty prefix means use specified key without prefix check 
      */
     public function get_configs($key, $prefix="")
     {
@@ -25,8 +30,23 @@ class Acceptance extends \Codeception\Module
         return null;
     }
 
-	/**
+    /**
      * 
+     */
+    public function site_path_by_test_suit($suite_name)
+    {
+        if( $suite_name == "a_-f_" ) {
+            return "/wordpress/src";
+        }
+        elseif( $suite_name == "a_-f_" ) {
+            return "/wordpress/src";
+        } 
+
+        return null;
+    }
+
+	/**
+     * we assume different test environment based on php and other applicable versions
      */
     public function get_test_environment()
     {
@@ -34,7 +54,7 @@ class Acceptance extends \Codeception\Module
         try {
             $version_nums = explode(".", PHP_VERSION);
 
-            if( !isset($version_nums[0]) || $version_nums[0] >= 6 ) {
+            if( !isset($version_nums[0]) || /*$version_nums[0] >= 6*/($version_nums[0] >= 7 && $version_nums[1] >= 2) ) {
                 return "WBC_TEST_ENV_default";
             } 
             else {

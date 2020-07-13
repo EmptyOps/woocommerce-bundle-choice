@@ -34,7 +34,7 @@ if ( ! class_exists( 'Configuration' ) ) {
 				$configuration_buttons_page = wbc()->options->get_option('configuration','buttons_page',false);
 				if( $configuration_buttons_page===0 or $configuration_buttons_page==='0' ) {			
 					$check_it_out_link_type = 'link';
-					$check_it_out_link = site_url('design-your-own-ring');
+					$check_it_out_link = site_url('index.php/design-your-own-ring');
 		        }
 		        elseif( $configuration_buttons_page==1 or $configuration_buttons_page==3 ) {			
 					$check_it_out_link_type = 'link';

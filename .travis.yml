@@ -23,8 +23,8 @@ before_install:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS wordpress_test;'  
   - mysql -u root --default-character-set=utf8 wordpress_test < wordpress-from-wordpress.org-download/wordpress/db.sql
 
-  # - mysql -e 'CREATE DATABASE IF NOT EXISTS WBC_TEST_ENV_with_sample_data;'  
-  # - mysql -u root --default-character-set=utf8 WBC_TEST_ENV_with_sample_data < wordpress-from-wordpress.org-download/WBC_TEST_ENV_with_sample_data/wordpress/db.sql
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS WBC_TEST_ENV_with_sample_data_wp_latest_1;'  
+  - mysql -u root --default-character-set=utf8 WBC_TEST_ENV_with_sample_data_wp_latest_1 < wordpress-from-wordpress.org-download/WBC_TEST_ENV_with_sample_data/wordpress-latest-1/db.sql
 
 cache:
   directories:
@@ -40,6 +40,7 @@ env:
     # Define vars.
     - export WP_VERSION=master
     - export WP_DEVELOP_DIR=/tmp/wordpress/src
+    - export SERVER_ROOT_DIR=/tmp
     - export WP_CORE_DIR=/tmp/wordpress/src
     - export WP_CEPT_SERVER='127.0.0.1:8888'
     
@@ -54,11 +55,12 @@ matrix:
     #     - cd $WP_DEVELOP_DIR
 
     - language: php
-      php: 7.2
+      # php: 7.2
 
-    # - php:
-    #   - 7.2 
-    #   - 5.3
+    - php:
+      - 7.2 
+      - 7.1 
+      # - 5.3
 
       # env: WP_VERSION=latest
       before_script:
@@ -103,7 +105,8 @@ matrix:
         - move_things
         
         # Start up a web server.
-        - php -S "$WP_CEPT_SERVER" -t "$WP_CORE_DIR" >/dev/null 2>&1 &
+        # - php -S "$WP_CEPT_SERVER" -t "$WP_CORE_DIR" >/dev/null 2>&1 &
+        - php -S "$WP_CEPT_SERVER" -t "$SERVER_ROOT_DIR" >/dev/null 2>&1 &
         # Start up the webdriver.
         #- phantomjs --webdriver=4444 >/dev/null 2>&1 &
         # - phantomjs --webdriver=4444 >/dev/null 2>&1 &
