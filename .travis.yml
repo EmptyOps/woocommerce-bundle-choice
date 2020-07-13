@@ -55,14 +55,12 @@ matrix:
     #     - cd $WP_DEVELOP_DIR
 
     - language: php
-      php: 7.2
+      # php: 7.2
 
-      php: 7.1
-
-    # - php:
-    #   - 7.2 
-    #   - 7.1 
-    #   # - 5.3
+      php:
+        - 7.2 
+        - 7.1 
+      # - 5.3
 
       # env: WP_VERSION=latest
       before_script:
