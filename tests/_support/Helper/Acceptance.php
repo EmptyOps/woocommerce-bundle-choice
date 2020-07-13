@@ -38,7 +38,7 @@ class Acceptance extends \Codeception\Module
         if( $suite_name == "a_-f_" ) {
             return "/wordpress/src";
         }
-        elseif( $suite_name == "a_-f_" ) {
+        elseif( $suite_name == "n_" ) {
             return "/WBC_TEST_ENV_with_sample_data/wordpress-latest-1/";
         } 
 
@@ -54,7 +54,7 @@ class Acceptance extends \Codeception\Module
         try {
             $version_nums = explode(".", PHP_VERSION);
 
-            if( !isset($version_nums[0]) || /*$version_nums[0] >= 6*/($version_nums[0] >= 7 && $version_nums[1] >= 2) ) {
+            if( !isset($version_nums[0]) || $version_nums[0] >= 6/*($version_nums[0] >= 7 && $version_nums[1] >= 2)*/ ) {
                 return "WBC_TEST_ENV_default";
             } 
             else {
