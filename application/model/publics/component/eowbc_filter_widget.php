@@ -146,7 +146,10 @@ class EOWBC_Filter_Widget {
 
 			$active_color=wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active',$fg_color); //get_option('eo_wbc_active_breadcrumb_color',$fg_color);
 			//wp-head here....
-			echo "<style>		
+			echo "<style>	
+					.term-description{
+						display:none;
+					}	
 					.loading{												
 						background-image:url(".constant('EOWBC_ASSET_URL')."icon/spinner.gif);
 						background-color: rgba(255,255,255, 0.6);				    	
@@ -340,7 +343,12 @@ class EOWBC_Filter_Widget {
 						.eo-wbc-container.filters.container.ui.form .field:last-child{
 							margin-bottom: -1.4em;
 						}
-						.eo_wbc_filter_icon_select div,.eo_wbc_filter_icon:hover:not(.none_editable) div{ visibility: unset !important; }
+						.eo_wbc_filter_icon_select div,.eo_wbc_filter_icon:hover:not(.none_editable) div{ visibility: unset !important; 
+						}
+						.eo-wbc-container.filters.container.ui.form .ui.header{
+							font-size: 0.8em;
+    						text-transform: uppercase;
+						}
 
 					</style>
 				<?php
@@ -935,7 +943,7 @@ class EOWBC_Filter_Widget {
 			<?php if( !empty($advance_filters) ) { ?>
 				<div class="ui grid centered">
 					<div class="row">
-						<div class="ui button primary" id="advance_filter" style="border-radius: 0 0 0 0;width: fit-content !important;">Advance Filter&nbsp;<i class="ui icon angle double up"></i></div>
+						<div class="ui button primary" id="advance_filter" style="border-radius: 0 0 0 0;width: fit-content !important;">Advanced Filters&nbsp;<i class="ui icon angle double up"></i></div>
 					</div>
 				</div>
 			<?php			

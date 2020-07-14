@@ -176,7 +176,11 @@ if ( ! class_exists( 'Mapping' ) ) {
 							'list'=>array_merge( $table , array(
 								'type'=>'table' )
 							), 
-
+							'map_creation_modification_id'=>array(
+								'type'=>'hidden',
+								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
+							),
 							'save_sec_title'=>array(
 								'label'=>"Add New Maps",
 								'type'=>'label',

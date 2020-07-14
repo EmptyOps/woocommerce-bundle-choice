@@ -70,7 +70,12 @@ class Eowbc_Filters {
 							}
 							else if( $rvk == $key."_input_type" || $rvk == $key."_filter" ) {
 								$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv);
-								$row[] = array( 'val' => !is_array($val)?$val:$val["label"] ,'disabled'=>$disabled);	
+								if($rvk == $key."_filter"){
+									$row[] = array( 'val' => !is_array($val)?$val:$val["label"] ,'disabled'=>$disabled, 'link'=>($rvk == $key."_filter"),'edit_id'=>$rk);	
+								} else {
+									$row[] = array( 'val' => !is_array($val)?$val:$val["label"] ,'disabled'=>$disabled);	
+								}
+								
 							}
 							else {
 								$row[] = array( 'val' => $rvv ,'disabled'=>$disabled);
@@ -262,24 +267,32 @@ class Eowbc_Filters {
 
 		        if(is_array($filter_data) and !empty($filter_data)){
 
+		        	if(!empty($_POST[$key.'_id']) and !empty($filter_data[$_POST[$key.'_id']])){
+		        		$filter_data[$_POST[$key.'_id']] = $table_data;
+		        		$res["type"] = "success";
+		    			$res["msg"] = eowbc_lang('Filter updated successfuly');
+		    			wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data) );
+		                return $res;
+		        	} else {
+				        foreach ($filter_data as $fdkey=>$item) {
+				            
+				            if ($item[$key.'_filter']==$table_data[$key."_filter"] and !empty($item['filter_template']) and !empty($table_data['filter_template']) and $item['filter_template']==$table_data['filter_template']) { 
+				            	if( $is_auto_insert_for_template ) {
+					            	$filter_data[$fdkey][$key.'_add_enabled'] = 1;
+					                $res["type"] = "error";
+					    			$res["msg"] = eowbc_lang('Filter Already Exists and activated');
+					    			wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data) );
+					                return $res;
+				            	}
+				            	else {
+					                $res["type"] = "error";
+					    			$res["msg"] = eowbc_lang('Filter already exists '.(($filter_data[$fdkey][$key.'_add_enabled']==1) ? 'and enabled' : 'but is disabled, you should enable it.'));
+					                return $res;
+				            	}
+				            }
 
-			        foreach ($filter_data as $fdkey=>$item) {
-			            
-			            if ($item[$key.'_filter']==$table_data[$key."_filter"] and !empty($item['filter_template']) and !empty($table_data['filter_template']) and $item['filter_template']==$table_data['filter_template']) { 
-			            	if( $is_auto_insert_for_template ) {
-				            	$filter_data[$fdkey][$key.'_add_enabled'] = 1;
-				                $res["type"] = "error";
-				    			$res["msg"] = eowbc_lang('Filter Already Exists and activated');
-				    			wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data) );
-				                return $res;
-			            	}
-			            	else {
-				                $res["type"] = "error";
-				    			$res["msg"] = eowbc_lang('Filter already exists '.(($filter_data[$fdkey][$key.'_add_enabled']==1) ? 'and enabled' : 'but is disabled, you should enable it.'));
-				                return $res;
-			            	}
-			            }
-			        }
+				        }
+				    }
 			    }
 
 		        $filter_data[wbc()->common->createUniqueId()] = $table_data;
@@ -386,18 +399,17 @@ class Eowbc_Filters {
 
 	public function fetch_filter(&$res) {
 		$first = unserialize(wbc()->options->get_option_group('filters_d_fconfig'));
+		$second = unserialize(wbc()->options->get_option_group('filters_s_fconfig'));
 		if(!empty($first[$_POST['id']])){
 			$res['msg'] = json_encode($first[$_POST['id']]);
 		} elseif (!empty($second[$_POST['id']])) {
 			$res['msg'] = json_encode($second[$_POST['id']]);
 		} else {
-			$res['msg'] = 'error';
-			$res['msg'] = 'Selected filter does not exists!';
+			$res['type'] = 'error';
+			$res['msg'] = 'Selected item does not exists!';
 		}		
 		return $res;
-	}
-
-	
+	}	
 }
 
 

@@ -52,6 +52,7 @@ class WBC_Common {
 			if(!empty($ids) and is_array($ids)){
 				foreach ($ids as $id) {
 					$ancestors = array_merge($ancestors,get_ancestors($id,'product_cat'));	
+					$ancestors[] = $id;
 				}				
 			}
 

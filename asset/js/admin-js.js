@@ -223,12 +223,13 @@ jQuery(document).ready(function($){
         jQuery(".ui.negative.message").addClass('transition hidden');
     });
 
-    jQuery("#eowbc_price_control_methods_list,#eowbc_price_control_methods_list,#eowbc_price_control_sett_methods_list").find(' tbody tr').find('td:eq(0)') .on('click',function(e){
-        
+    jQuery(document).on('click',"[data-wbc-editid]",function(e){
+        e.preventDefault();
+        e.stopPropagation();
         let $this = $(this);
         var form = jQuery($this).closest("form");
         let saved_tab_key = jQuery(".ui.pointing.secondary.menu>.item.active").data('tab');
-        let id = $(this).find(':checkbox').val();
+        let id = $(this).data('wbc-editid');
         /*console.log($(this).find(':checkbox').val());*/
         
         console.log(e.srcElement.nodeName);
@@ -244,14 +245,30 @@ jQuery(document).ready(function($){
                 success:function(result,status,xhr){
                     var resjson = jQuery.parseJSON(result);
                     if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
-                        console.log(resjson["msg"]);
+                        let list = JSON.parse(resjson["msg"]);
+                        for(let property in list){
+                            if (list.hasOwnProperty(property) && $('#'+property)!==undefined) {
+                                
+                                
+                                if($('.ui.checkbox [name="'+property+'"]').length>0 && list[property] !== ''){
+                                    console.log(list[property]);
+                                    $('.ui.checkbox [name="'+property+'"]').parent().checkbox('set checked');
+                                } else if($('.ui.dropdown #'+property).length>0) {
+                                    $('#'+property).parent().dropdown('set selected',list[property]);
+                                } else {
+                                    $('#'+property).val(list[property]);    
+                                }                                
+                                //console.log(list[property]);
+                            }
+                        }   
+                        jQuery("#"+ saved_tab_key+"_id").val(id);
                     } else {
                         $('body').toast({
                             class: (typeof(resjson["type"]) != undefined ? resjson["type"] : 'error'),
                             position: 'bottom right',
                             message: (typeof(resjson["msg"]) != undefined && resjson["msg"] != "" ? resjson["msg"] : `Failed! Please check Logs page for for more details.`)
                         });
-                    }                
+                    }                        
                 },
                 error:function(xhr,status,error){
                     /*console.log(xhr);*/
@@ -266,6 +283,7 @@ jQuery(document).ready(function($){
                 }
             });
         }
+        return false;
     });
 });
 
