@@ -223,11 +223,11 @@ move_and_remove_tests() {
 #edit codeception yml file as per test environment 
 edit_codeception_yml_file() {
 
-	PHP_VERSION=$(php -v | tail -r | tail -n 1 | cut -d " " -f 2 | cut -c 1-3)
+	PHP_VERSION=$(php -v | head -n 1 | cut -d " " -f 2)
 	echo "PHP_VERSION..."
 	echo "$PHP_VERSION"
 
-	PHP_VERSION=$(php -v | tail -r | tail -n 1 | cut -d " " -f 3 | cut -c 1-4)
+	PHP_VERSION=$(php -v | head -n 1 | cut -d " " -f 2 | cut -f1-2 -d".")
 	echo "PHP_VERSION..."
 	echo "$PHP_VERSION"
 
