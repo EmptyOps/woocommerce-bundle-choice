@@ -6,9 +6,10 @@ paths:
     data: tests/_data
     helpers: tests/_support
 settings:
-    bootstrap: bootstrap.php
+    # bootstrap: bootstrap.php
     colors: true
     memory_limit: 1024M
+bootstrap: bootstrap.php
 # modules:
 #     config:
 #         WPWebDriver:
