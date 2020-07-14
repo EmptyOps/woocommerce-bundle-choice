@@ -227,7 +227,7 @@ edit_codeception_yml_file() {
 	echo "PHP_VERSION..."
 	echo "$PHP_VERSION"
 
-	if [[ PHP_VERSION == "7.2.3" ]]; then
+	if [[ "7.2.3" == *"$PHP_VERSION"* ]]; then
 	  echo "setting url for default environment"
 	  sed $ioption "s|http://127.0.0.1:8888|http://127.0.0.1:8888/tmp/wordpress/src|" "$TRAVIS_BUILD_DIR"/tests/acceptance.suite.yml
 	  sed $ioption "s|http://127.0.0.1:8888|http://127.0.0.1:8888/tmp/wordpress/src|" "$TRAVIS_BUILD_DIR"/codeception.dist.yml
