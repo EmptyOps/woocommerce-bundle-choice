@@ -57,9 +57,9 @@ matrix:
     - language: php
       # php: 7.2
 
-      php:
-        - 7.2 
-        - 7.1 
+    php:
+      - 7.2 
+      - 7.1 
       # - 5.3
 
       # env: WP_VERSION=latest
