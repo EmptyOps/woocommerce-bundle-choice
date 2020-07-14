@@ -227,6 +227,13 @@ edit_codeception_yml_file() {
 	echo "PHP_VERSION..."
 	echo "$PHP_VERSION"
 
+	# portable in-place argument for both GNU sed and Mac OSX sed
+	if [[ $(uname -s) == 'Darwin' ]]; then
+		local ioption='-i.bak'
+	else
+		local ioption='-i'
+	fi
+	
 	if [[ "7.2.3" == *"$PHP_VERSION"* ]]; then
 	  echo "setting url for default environment"
 	  sed $ioption "s|http://127.0.0.1:8888|http://127.0.0.1:8888/tmp/wordpress/src|" "$TRAVIS_BUILD_DIR"/tests/acceptance.suite.yml
