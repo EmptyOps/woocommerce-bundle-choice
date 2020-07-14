@@ -28,7 +28,7 @@ before_install:
 
 cache:
   directories:
-    - $HOME/.composer/cache_switch
+    - $HOME/.composer/cache #_switch
 
 env:
   global:
@@ -166,7 +166,10 @@ script:
 
   # set the url in yml file(s) as per the test environment, we can use different yml files also but this is easy to setup and faster if we need to maintain single var 
   - edit_codeception_yml_file
-  
+  - echo "checking yml files..."
+  - cat "$TRAVIS_BUILD_DIR"/tests/acceptance.suite.yml
+  - cat "$TRAVIS_BUILD_DIR"/codeception.dist.yml
+
   - php vendor/bin/codecept clean
   - php vendor/bin/codecept build
   - php vendor/bin/codecept run --steps --debug
