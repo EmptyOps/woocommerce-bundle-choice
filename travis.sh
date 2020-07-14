@@ -227,15 +227,15 @@ edit_codeception_yml_file() {
 	echo "PHP_VERSION..."
 	echo "$PHP_VERSION"
 
-	PHP_VERSION=$(php -v | head -n 1 | cut -d " " -f 2 | cut -f1-2 -d".")
-	echo "PHP_VERSION..."
-	echo "$PHP_VERSION"
-
-	# if [[ $(uname -s) == 'Darwin' ]]; then
-	# 	local ioption='-i.bak'
-	# else
-	# 	local ioption='-i'
-	# fi
+	if [[ "7.2.3" == *PHP_VERSION* ]]; then
+	  echo "setting url for default environment"
+	  sed $ioption "s|http://127.0.0.1:8888|http://127.0.0.1:8888/tmp/wordpress/src|" "$TRAVIS_BUILD_DIR"/tests/acceptance.suite.yml
+	  sed $ioption "s|http://127.0.0.1:8888|http://127.0.0.1:8888/tmp/wordpress/src|" "$TRAVIS_BUILD_DIR"/codeception.dist.yml
+	else 
+	  echo "setting url for other environment"
+	  sed $ioption "s|http://127.0.0.1:8888|http://127.0.0.1:8888/tmp/WBC_TEST_ENV_with_sample_data/wordpress-latest-1|" "$TRAVIS_BUILD_DIR"/tests/acceptance.suite.yml
+	  sed $ioption "s|http://127.0.0.1:8888|http://127.0.0.1:8888/tmp/WBC_TEST_ENV_with_sample_data/wordpress-latest-1|" "$TRAVIS_BUILD_DIR"/codeception.dist.yml
+	fi
 }
 
 #echo the necessary output 
