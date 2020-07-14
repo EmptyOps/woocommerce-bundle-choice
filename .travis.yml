@@ -64,8 +64,14 @@ env:
 language: php
 
 php:
-  - 7.1 
-  - 7.0 
+  - 7.2
+    env:
+      global:
+        - export WBC_TEST_ENV=default
+  - 7.2 
+    env:
+      global:
+        - export WBC_TEST_ENV=WBC_TEST_ENV_with_sample_data_wp_latest_1
 
 # env: WP_VERSION=latest
 before_script:
