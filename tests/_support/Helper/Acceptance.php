@@ -103,6 +103,31 @@ class Acceptance extends \Codeception\Module
     }
 
     /**
+     * Get current url from WebDriver
+     * @return mixed
+     * @throws \Codeception\Exception\ModuleException
+     */
+    public function setUrl()
+    {
+        echo "called setUrl...";
+        try {
+            $version_nums = explode(".", PHP_VERSION);
+            if( $this->get_test_environment() == "WBC_TEST_ENV_default" ) {
+                echo 'setting url for default environment';
+                $this->getModule('WPWebDriver')->config['url'] = 'http://127.0.0.1:8888/tmp/wordpress/src';
+            } 
+            else {
+                echo 'setting url for other environment';
+                $this->getModule('WPWebDriver')->config['url'] = 'http://127.0.0.1:8888/tmp/WBC_TEST_ENV_with_sample_data/wordpress-latest-1';
+            }
+        }
+        catch(Exception $e) {
+            echo "caught message...";
+            echo $e->getMessage()."";
+        }
+    }
+
+    /**
      * Get current uri from WebDriver
      * @return mixed
      * @throws \Codeception\Exception\ModuleException
