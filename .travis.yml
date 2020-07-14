@@ -164,6 +164,9 @@ script:
   #     phpcs
   #   fi
 
+  # set the url in yml file(s) as per the test environment, we can use different yml files also but this is easy to setup and faster if we need to maintain single var 
+  - edit_codeception_yml_file
+  - skdjhfkdhjsfkjh
   - php vendor/bin/codecept clean
   - php vendor/bin/codecept build
   - php vendor/bin/codecept run --steps --debug

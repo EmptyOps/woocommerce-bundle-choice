@@ -220,6 +220,24 @@ move_and_remove_tests() {
 
 }
 
+#edit codeception yml file as per test environment 
+edit_codeception_yml_file() {
+
+	PHP_VERSION=$(php -v | tail -r | tail -n 1 | cut -d " " -f 2 | cut -c 1-3)
+	echo "PHP_VERSION..."
+	echo "$PHP_VERSION"
+
+	PHP_VERSION=$(php -v | tail -r | tail -n 1 | cut -d " " -f 3 | cut -c 1-4)
+	echo "PHP_VERSION..."
+	echo "$PHP_VERSION"
+
+	# if [[ $(uname -s) == 'Darwin' ]]; then
+	# 	local ioption='-i.bak'
+	# else
+	# 	local ioption='-i'
+	# fi
+}
+
 #echo the necessary output 
 echo_necessary_output() {
 

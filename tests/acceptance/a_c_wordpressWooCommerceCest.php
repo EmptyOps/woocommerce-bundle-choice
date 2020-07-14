@@ -18,9 +18,6 @@ class a_c_wordpressWooCommerceCest
             return;
         }
 
-        // setUrl: this is needed since the site path may differ for different environment 
-        $I->setUrl();
-
         //reset session only from the first test so that all tests are ran on fresh empty session.
         $I->resetSession();
 
