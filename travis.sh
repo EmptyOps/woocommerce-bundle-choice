@@ -169,6 +169,19 @@ move_things() {
 	# php /tmp/wordpress/wp plugin activate woocommerce
 }
 
+copy_wbc() {
+
+	cp -Rf "$1"application "$2"
+	cp -Rf "$1"asset "$2"
+	cp -Rf "$1"index.php "$2"
+	cp -Rf "$1"languages "$2"
+	cp -Rf "$1"uninstall.php "$2"
+	cp -Rf "$1"woocommerce-bundle-choice.php "$2"
+
+	ls -l "$2"
+	sdkfjdskjfhkdhjsfkjhdf
+}
+
 composer_and_wp_plugins_install_update() {
 
 	# #wp root
@@ -191,10 +204,10 @@ composer_and_wp_plugins_install_update() {
 
 		# copy #
 		if [[ $(test_environment) == "WBC_TEST_ENV_default" ]]; then
-			cp -Rf "$TRAVIS_BUILD_DIR"/* /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/
+			copy_wbc "$TRAVIS_BUILD_DIR"/ /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/
 		else 
 			# for other environment sites
-			cp -Rf "$TRAVIS_BUILD_DIR"/* "$SERVER_ROOT_DIR"tmp/WBC_TEST_ENV_with_sample_data/wordpress-latest-1/wp-content/plugins/woo-bundle-choice/* 
+			copy_wbc "$TRAVIS_BUILD_DIR"/ "$SERVER_ROOT_DIR"tmp/WBC_TEST_ENV_with_sample_data/wordpress-latest-1/wp-content/plugins/woo-bundle-choice/ 
 		fi
 		
 		# git clone --depth=1 --branch=dev https://github.com/EmptyOps/woocommerce-bundle-choice /tmp/wordpress/src/wp-content/plugins #clone option no more used, since copy above is from clone already
