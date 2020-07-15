@@ -19,7 +19,7 @@ class n_n_frontendAppearanceModificationsCest extends n_f_adminSideSetupCest
         }
 
         // change random appearance
-        $this->modifyAppearance('Buttons Widget', array( 'tagline_text', 'button_text', 'button_backcolor_active' ), array( 'tagline_text', 'button_text', 'button_backcolor_active' ), array( 'text', 'text', 'color' ), array( 'My custom tagline', 'Continue With', '#000000' ), '//*[@id="wid_btns_submit_btn"]', array( '' ));
+        $this->modifyAppearance($I, 'Buttons Widget', array( 'tagline_text', 'button_text', 'button_backcolor_active' ), array( 'tagline_text', 'button_text', 'button_backcolor_active' ), array( 'text', 'text', 'color' ), array( 'My custom tagline', 'Continue With', '#000000' ), '//*[@id="wid_btns_submit_btn"]', array( '' ));
 
         // TODO still all the appearance are not tested 
 
@@ -27,7 +27,7 @@ class n_n_frontendAppearanceModificationsCest extends n_f_adminSideSetupCest
         $I->amOnPage('/design-your-own-ring/');
 
         // verify changed appearance
-        $this->verifyAppearance( array( 'tagline_text', 'button_text', 'button_backcolor_active' ), array( 'tagline_text', 'button_text', 'button_backcolor_active' ), array( 'text', 'text', 'color' ), array( 'My custom tagline', 'Continue With', '#000000' ), array(), array('','','#wbc_ > div > div > button:nth-child(1)'), array('','','backgroundColor'));
+        $this->verifyAppearance($I, array( 'tagline_text', 'button_text', 'button_backcolor_active' ), array( 'tagline_text', 'button_text', 'button_backcolor_active' ), array( 'text', 'text', 'color' ), array( 'My custom tagline', 'Continue With', '#000000' ), array(), array('','','#wbc_ > div > div > button:nth-child(1)'), array('','','backgroundColor'));
     }
 
     // test if editing the appearance of breadcrumb works or not  
@@ -38,7 +38,7 @@ class n_n_frontendAppearanceModificationsCest extends n_f_adminSideSetupCest
         }
 
         // change random appearance
-        $this->modifyAppearance('Breadcrumb', 
+        $this->modifyAppearance($I,'Breadcrumb', 
             array( 'breadcrumb_radius', 'breadcrumb_backcolor_active', 'breadcrumb_backcolor_inactive', 'breadcrumb_num_icon_backcolor_active', 'breadcrumb_title_backcolor_inactive', 'breadcrumb_actions_backcolor_inactive' ), 
             array( 'breadcrumb_radius', 'breadcrumb_backcolor_active', 'breadcrumb_backcolor_inactive', 'breadcrumb_num_icon_backcolor_active', 'breadcrumb_title_backcolor_inactive', 'breadcrumb_actions_backcolor_inactive' ), 
             array( 'text', 'color', 'color', 'color', 'color', 'color' ), 
@@ -50,7 +50,7 @@ class n_n_frontendAppearanceModificationsCest extends n_f_adminSideSetupCest
         $this->gotoStep($I, $cat); 
 
         // verify changed appearance
-        $this->verifyAppearance( array( 'breadcrumb_radius', 'breadcrumb_backcolor_active', 'breadcrumb_backcolor_inactive', 'breadcrumb_num_icon_backcolor_active', 'breadcrumb_title_backcolor_inactive', 'breadcrumb_actions_backcolor_inactive' ), 
+        $this->verifyAppearance($I, array( 'breadcrumb_radius', 'breadcrumb_backcolor_active', 'breadcrumb_backcolor_inactive', 'breadcrumb_num_icon_backcolor_active', 'breadcrumb_title_backcolor_inactive', 'breadcrumb_actions_backcolor_inactive' ), 
             array( 'breadcrumb_radius', 'breadcrumb_backcolor_active', 'breadcrumb_backcolor_inactive', 'breadcrumb_num_icon_backcolor_active', 'breadcrumb_title_backcolor_inactive', 'breadcrumb_actions_backcolor_inactive' ), 
             array( 'text', 'color', 'color', 'color', 'color', 'color' ), 
             array( '5px', '#f1f1f1', '#ffffff', '#000000', '#00ff00', '#d100ff' ), array(), 
@@ -82,7 +82,7 @@ class n_n_frontendAppearanceModificationsCest extends n_f_adminSideSetupCest
             } 
 
             // change random appearance
-            $this->modifyAppearance('Filters', $field_id, $field_name, $field_type, $val, '//*[@id="filters_submit_btn"]', array( '' ));
+            $this->modifyAppearance($I, 'Filters', $field_id, $field_name, $field_type, $val, '//*[@id="filters_submit_btn"]', array( '' ));
 
             // TODO still all the appearance are not tested like the header text font, icon label size etc. 
 
@@ -90,7 +90,7 @@ class n_n_frontendAppearanceModificationsCest extends n_f_adminSideSetupCest
             $this->gotoStep($I, $cat); 
 
             // verify changed appearance
-            $this->verifyAppearance( $field_id, $field_name, $field_type, $val, array(), $selector_of_targets, $css_property_of_targets );
+            $this->verifyAppearance($I, $field_id, $field_name, $field_type, $val, array(), $selector_of_targets, $css_property_of_targets );
         }
 
     }
@@ -111,7 +111,7 @@ class n_n_frontendAppearanceModificationsCest extends n_f_adminSideSetupCest
         $css_property_of_targets = array();
 
         // change random appearance
-        $this->modifyAppearance('Product Page', $field_id, $field_name, $field_type, $val, '//*[@id="product_page_submit_btn"]', array( '' ));
+        $this->modifyAppearance($I, 'Product Page', $field_id, $field_name, $field_type, $val, '//*[@id="product_page_submit_btn"]', array( '' ));
 
         // TODO still all the appearance are not tested like sc_atc_button_text, product_page_add_to_basket etc. 
 
@@ -124,7 +124,7 @@ class n_n_frontendAppearanceModificationsCest extends n_f_adminSideSetupCest
         unset($val[1]); unset($val[2]);
 
         // verify changed appearance
-        $this->verifyAppearance( $field_id, $field_name, $field_type, $val, array(), $selector_of_targets, $css_property_of_targets );
+        $this->verifyAppearance($I, $field_id, $field_name, $field_type, $val, array(), $selector_of_targets, $css_property_of_targets );
 
     }
     
