@@ -1,6 +1,6 @@
-2020-06-23T12:39:35+00:00 CRITICAL Uncaught TypeError: Argument 1 passed to eo\wbc\model\Images::id2url() must be of the type int, string given, called in /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/model/publics/component/eowbc_breadcrumb.php on line 52 and defined in /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/model/images.php:28
+2020-06-23T12:39:35+00:00 CRITICAL Uncaught TypeError: Argument 1 passed to eo\wbc\model\Images::id2url() must be of the type int, string given, called in /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/model/publics/component/eowbc_breadcrumb.php on line 52 and defined in /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/model/images.php:28
 Stack trace:
-#0 /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/model/publics/component/eowbc_breadcrumb.php(52): eo\wbc\model\Images->id2url('')
-#1 /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/controllers/publics/pages/category.php(133): eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_add_breadcrumb('1', 'diamond')
-#2 /Users/hiren/Sites/tmp/wordpress/wordpress-from-wordpress in /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/model/images.php on line 28
+#0 /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/model/publics/component/eowbc_breadcrumb.php(52): eo\wbc\model\Images->id2url('')
+#1 /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/controllers/publics/pages/category.php(133): eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_add_breadcrumb('1', 'diamond')
+#2 /Users/hiren/Sites/tmp/wordpress/wordpress-from-wordpress in /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/model/images.php on line 28
 

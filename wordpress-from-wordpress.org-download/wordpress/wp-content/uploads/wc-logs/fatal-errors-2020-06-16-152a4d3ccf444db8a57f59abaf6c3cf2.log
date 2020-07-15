@@ -1,2 +1,2 @@
-2020-06-16T11:52:27+00:00 CRITICAL require_once(): Failed opening required '/Users/hiren/Sites//wp-content/plugins/woocommerce-bundle-choice/application/system/tools/tool-error-handler.php' (include_path='.:/Applications/MAMP/bin/php/php7.3.1/lib/php') in /Users/hiren/Sites//wp-content/plugins/woocommerce-bundle-choice/woocommerce-bundle-choice.php on line 72
+2020-06-16T11:52:27+00:00 CRITICAL require_once(): Failed opening required '/Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woocommerce-bundle-choice/application/system/tools/tool-error-handler.php' (include_path='.:/Applications/MAMP/bin/php/php7.3.1/lib/php') in /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woocommerce-bundle-choice/woocommerce-bundle-choice.php on line 72
 

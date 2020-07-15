@@ -1,12 +1,12 @@
-2020-07-06T18:55:14+00:00 CRITICAL Uncaught TypeError: Argument 1 passed to WBC_Common::pr() must be of the type array, string given, called in /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/controllers/publics/pages/product.php on line 414 and defined in /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/helper/helper-WBC_Common.php:16
+2020-07-06T18:55:14+00:00 CRITICAL Uncaught TypeError: Argument 1 passed to WBC_Common::pr() must be of the type array, string given, called in /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/controllers/publics/pages/product.php on line 414 and defined in /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/helper/helper-WBC_Common.php:16
 Stack trace:
-#0 /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/controllers/publics/pages/product.php(414): WBC_Common->pr('pid_13', false, false)
-#1 /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/controllers/publics/pages/product.php(261): eo\wbc\controllers\publics\pages\Product->eo_wbc_category_link()
-#2 /Users/hiren/Sites//wp- in /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/helper/helper-WBC_Common.php on line 16
+#0 /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/controllers/publics/pages/product.php(414): WBC_Common->pr('pid_13', false, false)
+#1 /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/controllers/publics/pages/product.php(261): eo\wbc\controllers\publics\pages\Product->eo_wbc_category_link()
+#2 /Users/hiren/Sites/tmp/wordpress/src/wp- in /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/helper/helper-WBC_Common.php on line 16
 
-2020-07-06T18:56:11+00:00 CRITICAL Uncaught TypeError: Argument 1 passed to WBC_Common::pr() must be of the type array, null given, called in /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/controllers/publics/pages/product.php on line 415 and defined in /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/helper/helper-WBC_Common.php:16
+2020-07-06T18:56:11+00:00 CRITICAL Uncaught TypeError: Argument 1 passed to WBC_Common::pr() must be of the type array, null given, called in /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/controllers/publics/pages/product.php on line 415 and defined in /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/helper/helper-WBC_Common.php:16
 Stack trace:
-#0 /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/controllers/publics/pages/product.php(415): WBC_Common->pr(NULL, false, true)
-#1 /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/controllers/publics/pages/product.php(261): eo\wbc\controllers\publics\pages\Product->eo_wbc_category_link()
-#2 /Users/hiren/Sites//wp-content in /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/helper/helper-WBC_Common.php on line 16
+#0 /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/controllers/publics/pages/product.php(415): WBC_Common->pr(NULL, false, true)
+#1 /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/controllers/publics/pages/product.php(261): eo\wbc\controllers\publics\pages\Product->eo_wbc_category_link()
+#2 /Users/hiren/Sites/tmp/wordpress/src/wp-content in /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/helper/helper-WBC_Common.php on line 16
 
