@@ -233,7 +233,8 @@ edit_codeception_yml_file() {
 	else
 		local ioption='-i'
 	fi
-	
+
+	# set here the latest version that we are using for testing in default environment 
 	if [[ "7.2.3" == *"$PHP_VERSION"* ]]; then
 	  echo "setting url for default environment"
 	  sed $ioption "s|http://127.0.0.1:8888|http://127.0.0.1:8888/tmp/wordpress/src|" "$TRAVIS_BUILD_DIR"/tests/acceptance.suite.yml
