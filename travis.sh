@@ -247,8 +247,8 @@ move_and_remove_tests() {
 test_environment() {
 
 	PHP_VERSION=$(php -v | head -n 1 | cut -d " " -f 2)
-	echo "PHP_VERSION..."
-	echo "$PHP_VERSION"
+	# echo "PHP_VERSION..."
+	# echo "$PHP_VERSION"
 
 	# set here the latest version that we are using for testing in default environment 
 	if [[ "7.2.3" == *"$PHP_VERSION"* ]]; then
