@@ -21,6 +21,7 @@ install-wordpress() {
 	#
 	# here based on different testing environments defined for WBC we may need to copy different wordpress which are configured specifically for the test environment's requirement 
 
+	echo $(test_environment)
 	if [[ $(test_environment) == "WBC_TEST_ENV_default" ]]; then
 		echo "default if condition"
 
