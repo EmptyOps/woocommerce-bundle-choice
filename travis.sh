@@ -22,12 +22,16 @@ install-wordpress() {
 	# here based on different testing environments defined for WBC we may need to copy different wordpress which are configured specifically for the test environment's requirement 
 
 	if [[ $(test_environment) == "WBC_TEST_ENV_default" ]]; then
+		echo "default if condition"
+
 		mkdir -p "$WP_DEVELOP_DIR"
 
 		cp -R wordpress-from-wordpress.org-download/wordpress/* "$WP_DEVELOP_DIR/"
 
 		cd "$WP_DEVELOP_DIR"
 	else 
+		echo "other else condition"
+
 		# copy other environment sites 
 		mkdir -p "$SERVER_ROOT_DIR"tmp/WBC_TEST_ENV_with_sample_data/wordpress-latest-1
 		cp -R wordpress-from-wordpress.org-download/WBC_TEST_ENV_with_sample_data/wordpress-latest-1/* "$SERVER_ROOT_DIR"tmp/WBC_TEST_ENV_with_sample_data/wordpress-latest-1/
@@ -82,6 +86,9 @@ install-wordpress() {
 	# echo "require_once(ABSPATH . 'wp-settings.php');" >> wp-config.php
 
 	cd -
+
+	pwd
+	ls -l ./
 }
 
 download() {
@@ -177,9 +184,6 @@ copy_wbc() {
 	cp -Rf "$1"languages "$2"
 	cp -Rf "$1"uninstall.php "$2"
 	cp -Rf "$1"woocommerce-bundle-choice.php "$2"
-
-	ls -l "$2"
-	sdkfjdskjfhkdhjsfkjhdf
 }
 
 composer_and_wp_plugins_install_update() {
