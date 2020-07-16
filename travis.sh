@@ -29,15 +29,17 @@ install-wordpress() {
 
 		cp -R wordpress-from-wordpress.org-download/wordpress/* "$WP_DEVELOP_DIR/"
 
+		cd "$WP_DEVELOP_DIR"
 	else 
 		echo "other else condition"
 
 		# copy other environment sites 
 		mkdir -p "$SERVER_ROOT_DIR"tmp/WBC_TEST_ENV_with_sample_data/wordpress-latest-1
 		cp -R wordpress-from-wordpress.org-download/WBC_TEST_ENV_with_sample_data/wordpress-latest-1/* "$SERVER_ROOT_DIR"tmp/WBC_TEST_ENV_with_sample_data/wordpress-latest-1/
+
+		cd "$SERVER_ROOT_DIR"tmp/WBC_TEST_ENV_with_sample_data/wordpress-latest-1/
 	fi
 
-	cd "$WP_DEVELOP_DIR"
 
 	# # Set up tests config.
 	# # cp wp-tests-config-sample.php wp-config.php
