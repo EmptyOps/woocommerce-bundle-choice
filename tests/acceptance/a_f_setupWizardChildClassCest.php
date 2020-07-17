@@ -11,7 +11,7 @@ class a_f_setupWizardChildClassCest extends a_e_setupWizardCest
     // {
     // }
 
-    public function step1(AcceptanceTester $I) {
+    public function step1(AcceptanceTester $I, $suite_name_prefix=false) {
 
     	if( !$I->test_allowed_in_this_environment("a_") ) {
             return;
@@ -21,7 +21,7 @@ class a_f_setupWizardChildClassCest extends a_e_setupWizardCest
 
 	}
 
-	public function step2(AcceptanceTester $I) {
+	public function step2(AcceptanceTester $I, $suite_name_prefix=false) {
 
     	if( !$I->test_allowed_in_this_environment("a_") ) {
             return;
@@ -31,7 +31,7 @@ class a_f_setupWizardChildClassCest extends a_e_setupWizardCest
 
 	}
 
-	public function step3(AcceptanceTester $I) {
+	public function step3(AcceptanceTester $I, $suite_name_prefix=false) {
 
     	if( !$I->test_allowed_in_this_environment("a_") ) {
             return;

@@ -50,7 +50,7 @@ class n_p_frontendFunctionalityModificationsCest extends n_f_adminSideSetupCest
 
             // change random functionalities
                 // modify things like filter input type, ordering, move to advanced/non-advanced, reset link, help text etc.
-            $this->modifyFilters($cat == 0 ? 'Diamond Page Filter Configuration' : 'Settings Page Filter Configuration', $filter_id, $field_id, $field_name, $field_type, $val, '//*[@id="d_fconfig_submit_btn"]', $field_dropdown_div_id);
+            $this->modifyFilters($I, $cat == 0 ? 'Diamond Page Filter Configuration' : 'Settings Page Filter Configuration', $filter_id, $field_id, $field_name, $field_type, $val, '//*[@id="d_fconfig_submit_btn"]', $field_dropdown_div_id);
 
             // TODO still all the functionality modification are not tested like all input types are not tested, order/reset-link/help-text not tested in advanced section, width functionality not tested etc. 
 
@@ -58,7 +58,7 @@ class n_p_frontendFunctionalityModificationsCest extends n_f_adminSideSetupCest
             $this->gotoStep($I, $cat); 
 
             // verify functionality modifications
-            $this->verifyFilters( $filter_id, $field_id, $field_name, $field_type, $val, array(), $selector_of_targets, $css_property_of_targets );
+            $this->verifyFilters($I, $filter_id, $field_id, $field_name, $field_type, $val, array(), $selector_of_targets, $css_property_of_targets );
         }
 
     }
@@ -109,7 +109,7 @@ class n_p_frontendFunctionalityModificationsCest extends n_f_adminSideSetupCest
 
         // change random functionalities
             // try things like carat based mapping range, discounts on certain mapping, any custom mapping etc.
-        $this->modifyMappings( 'Map creation and modification', $operation, $filter_id, $field_id, $field_name, $field_type, $val, '//*[@id="d_fconfig_submit_btn"]', $field_dropdown_div_id);
+        $this->modifyMappings($I, 'Map creation and modification', $operation, $filter_id, $field_id, $field_name, $field_type, $val, '//*[@id="d_fconfig_submit_btn"]', $field_dropdown_div_id);
 
         // TODO still all the functionality modification are not tested like more real life examples, real life discount requirements, etc. 
 
@@ -117,7 +117,7 @@ class n_p_frontendFunctionalityModificationsCest extends n_f_adminSideSetupCest
         $this->gotoStep($I, 0); 
 
         // verify functionality modifications
-        $this->verifyMappings( $filter_before_verification, $verifications );
+        $this->verifyMappings($I, $filter_before_verification, $verifications );
 
     }
 
