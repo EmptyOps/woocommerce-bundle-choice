@@ -23,8 +23,6 @@ class n_p_frontendFunctionalityModificationsCest extends n_f_adminSideSetupCest
 
             // TODO wait for the edit feature
 
-            return;
-
             if( $cat == 0 ) {
                 $filter_id = array('text_slider_pa_eo_clarity_attr', 'text_slider_pa_eo_colour_attr', 'text_slider_pa_eo_carat_attr','text_slider_pa_eo_clarity_attr', 'text_slider_pa_eo_colour_attr');
                 $field_id = array( '', 'd_fconfig_ordering', 'd_fconfig_is_advanced_1', 'd_fconfig_add_reset_link_1', 'd_fconfig_add_help_1' );
@@ -73,8 +71,6 @@ class n_p_frontendFunctionalityModificationsCest extends n_f_adminSideSetupCest
         }
 
         // TODO wait for the edit featur
-
-        return;
 
         $operation = array('add_new', 'edit', 'add_new');
         $filter_id = array( 
