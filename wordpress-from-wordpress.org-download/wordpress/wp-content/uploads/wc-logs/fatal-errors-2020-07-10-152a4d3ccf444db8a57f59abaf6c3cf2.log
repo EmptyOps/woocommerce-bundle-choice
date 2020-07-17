@@ -1,35 +1,35 @@
-2020-07-10T08:21:10+00:00 CRITICAL Uncaught Error: Class 'eo\wbc\controllers\admin\menu\page\Admin_Menu' not found in /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/controllers/admin/menu/page/configuration.php:31
+2020-07-10T08:21:10+00:00 CRITICAL Uncaught Error: Class 'eo\wbc\controllers\admin\menu\page\Admin_Menu' not found in /Users/hiren/Sites/tmp/wordpress/wordpress-from-wordpress.org-download/wordpress/wp-content/plugins/woo-bundle-choice/application/controllers/admin/menu/page/configuration.php:31
 Stack trace:
-#0 /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/view/admin/menu/configuration.php(12): eo\wbc\controllers\admin\menu\page\Configuration::get_form_definition()
-#1 /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/library/lib-load.php(83): require('/Users/hiren/Si...')
-#2 /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/controllers/admin/menu/admin-menu-factory.php(106): WBC_Loader->template('admin/menu/conf...')
-#3 /Users/hiren/Sites/tmp/wp-c in /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/controllers/admin/menu/page/configuration.php on line 31
+#0 /Users/hiren/Sites/tmp/wordpress/wordpress-from-wordpress.org-download/wordpress/wp-content/plugins/woo-bundle-choice/application/view/admin/menu/configuration.php(12): eo\wbc\controllers\admin\menu\page\Configuration::get_form_definition()
+#1 /Users/hiren/Sites/tmp/wordpress/wordpress-from-wordpress.org-download/wordpress/wp-content/plugins/woo-bundle-choice/application/library/lib-load.php(83): require('/Users/hiren/Si...')
+#2 /Users/hiren/Sites/tmp/wordpress/wordpress-from-wordpress.org-download/wordpress/wp-content/plugins/woo-bundle-choice/application/controllers/admin/menu/admin-menu-factory.php(106): WBC_Loader->template('admin/menu/conf...')
+#3 /Users/hiren/Sites/tmp/wordpress/wordpress-from-wordpress.org-download/wordpress/wp-c in /Users/hiren/Sites/tmp/wordpress/wordpress-from-wordpress.org-download/wordpress/wp-content/plugins/woo-bundle-choice/application/controllers/admin/menu/page/configuration.php on line 31
 
-2020-07-10T08:22:32+00:00 CRITICAL Uncaught Error: Class 'eo\wbc\controllers\admin\menu\page\Admin_Menu' not found in /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/controllers/admin/menu/page/configuration.php:31
+2020-07-10T08:22:32+00:00 CRITICAL Uncaught Error: Class 'eo\wbc\controllers\admin\menu\page\Admin_Menu' not found in /Users/hiren/Sites/tmp/wordpress/wordpress-from-wordpress.org-download/wordpress/wp-content/plugins/woo-bundle-choice/application/controllers/admin/menu/page/configuration.php:31
 Stack trace:
-#0 /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/view/admin/menu/configuration.php(12): eo\wbc\controllers\admin\menu\page\Configuration::get_form_definition()
-#1 /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/library/lib-load.php(83): require('/Users/hiren/Si...')
-#2 /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/controllers/admin/menu/admin-menu-factory.php(106): WBC_Loader->template('admin/menu/conf...')
-#3 /Users/hiren/Sites/tmp/wp-c in /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/controllers/admin/menu/page/configuration.php on line 31
+#0 /Users/hiren/Sites/tmp/wordpress/wordpress-from-wordpress.org-download/wordpress/wp-content/plugins/woo-bundle-choice/application/view/admin/menu/configuration.php(12): eo\wbc\controllers\admin\menu\page\Configuration::get_form_definition()
+#1 /Users/hiren/Sites/tmp/wordpress/wordpress-from-wordpress.org-download/wordpress/wp-content/plugins/woo-bundle-choice/application/library/lib-load.php(83): require('/Users/hiren/Si...')
+#2 /Users/hiren/Sites/tmp/wordpress/wordpress-from-wordpress.org-download/wordpress/wp-content/plugins/woo-bundle-choice/application/controllers/admin/menu/admin-menu-factory.php(106): WBC_Loader->template('admin/menu/conf...')
+#3 /Users/hiren/Sites/tmp/wordpress/wordpress-from-wordpress.org-download/wordpress/wp-c in /Users/hiren/Sites/tmp/wordpress/wordpress-from-wordpress.org-download/wordpress/wp-content/plugins/woo-bundle-choice/application/controllers/admin/menu/page/configuration.php on line 31
 
-2020-07-10T08:22:43+00:00 CRITICAL Uncaught Error: Class 'eo\wbc\controllers\admin\menu\page\Admin_Menu' not found in /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/controllers/admin/menu/page/configuration.php:31
+2020-07-10T08:22:43+00:00 CRITICAL Uncaught Error: Class 'eo\wbc\controllers\admin\menu\page\Admin_Menu' not found in /Users/hiren/Sites/tmp/wordpress/wordpress-from-wordpress.org-download/wordpress/wp-content/plugins/woo-bundle-choice/application/controllers/admin/menu/page/configuration.php:31
 Stack trace:
-#0 /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/view/admin/menu/configuration.php(12): eo\wbc\controllers\admin\menu\page\Configuration::get_form_definition()
-#1 /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/library/lib-load.php(83): require('/Users/hiren/Si...')
-#2 /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/controllers/admin/menu/admin-menu-factory.php(106): WBC_Loader->template('admin/menu/conf...')
-#3 /Users/hiren/Sites/tmp/wp-c in /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/controllers/admin/menu/page/configuration.php on line 31
+#0 /Users/hiren/Sites/tmp/wordpress/wordpress-from-wordpress.org-download/wordpress/wp-content/plugins/woo-bundle-choice/application/view/admin/menu/configuration.php(12): eo\wbc\controllers\admin\menu\page\Configuration::get_form_definition()
+#1 /Users/hiren/Sites/tmp/wordpress/wordpress-from-wordpress.org-download/wordpress/wp-content/plugins/woo-bundle-choice/application/library/lib-load.php(83): require('/Users/hiren/Si...')
+#2 /Users/hiren/Sites/tmp/wordpress/wordpress-from-wordpress.org-download/wordpress/wp-content/plugins/woo-bundle-choice/application/controllers/admin/menu/admin-menu-factory.php(106): WBC_Loader->template('admin/menu/conf...')
+#3 /Users/hiren/Sites/tmp/wordpress/wordpress-from-wordpress.org-download/wordpress/wp-c in /Users/hiren/Sites/tmp/wordpress/wordpress-from-wordpress.org-download/wordpress/wp-content/plugins/woo-bundle-choice/application/controllers/admin/menu/page/configuration.php on line 31
 
-2020-07-10T08:24:15+00:00 CRITICAL Uncaught Error: Call to undefined function site_link() in /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/controllers/admin/menu/page/configuration.php:41
+2020-07-10T08:24:15+00:00 CRITICAL Uncaught Error: Call to undefined function site_link() in /Users/hiren/Sites/tmp/wordpress/wordpress-from-wordpress.org-download/wordpress/wp-content/plugins/woo-bundle-choice/application/controllers/admin/menu/page/configuration.php:41
 Stack trace:
-#0 /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/view/admin/menu/configuration.php(12): eo\wbc\controllers\admin\menu\page\Configuration::get_form_definition()
-#1 /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/library/lib-load.php(83): require('/Users/hiren/Si...')
-#2 /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/controllers/admin/menu/admin-menu-factory.php(106): WBC_Loader->template('admin/menu/conf...')
-#3 /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle in /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/controllers/admin/menu/page/configuration.php on line 41
+#0 /Users/hiren/Sites/tmp/wordpress/wordpress-from-wordpress.org-download/wordpress/wp-content/plugins/woo-bundle-choice/application/view/admin/menu/configuration.php(12): eo\wbc\controllers\admin\menu\page\Configuration::get_form_definition()
+#1 /Users/hiren/Sites/tmp/wordpress/wordpress-from-wordpress.org-download/wordpress/wp-content/plugins/woo-bundle-choice/application/library/lib-load.php(83): require('/Users/hiren/Si...')
+#2 /Users/hiren/Sites/tmp/wordpress/wordpress-from-wordpress.org-download/wordpress/wp-content/plugins/woo-bundle-choice/application/controllers/admin/menu/admin-menu-factory.php(106): WBC_Loader->template('admin/menu/conf...')
+#3 /Users/hiren/Sites/tmp/wordpress/wordpress-from-wordpress.org-download/wordpress/wp-content/plugins/woo-bundle in /Users/hiren/Sites/tmp/wordpress/wordpress-from-wordpress.org-download/wordpress/wp-content/plugins/woo-bundle-choice/application/controllers/admin/menu/page/configuration.php on line 41
 
-2020-07-10T09:51:49+00:00 CRITICAL Uncaught Error: Call to undefined function site_link() in /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/controllers/admin/menu/page/configuration.php:41
+2020-07-10T09:51:49+00:00 CRITICAL Uncaught Error: Call to undefined function site_link() in /Users/hiren/Sites/tmp/wordpress/wordpress-from-wordpress.org-download/wordpress/wp-content/plugins/woo-bundle-choice/application/controllers/admin/menu/page/configuration.php:41
 Stack trace:
-#0 /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/view/admin/menu/configuration.php(12): eo\wbc\controllers\admin\menu\page\Configuration::get_form_definition()
-#1 /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/library/lib-load.php(83): require('/Users/hiren/Si...')
-#2 /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/controllers/admin/menu/admin-menu-factory.php(106): WBC_Loader->template('admin/menu/conf...')
-#3 /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle in /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/controllers/admin/menu/page/configuration.php on line 41
+#0 /Users/hiren/Sites/tmp/wordpress/wordpress-from-wordpress.org-download/wordpress/wp-content/plugins/woo-bundle-choice/application/view/admin/menu/configuration.php(12): eo\wbc\controllers\admin\menu\page\Configuration::get_form_definition()
+#1 /Users/hiren/Sites/tmp/wordpress/wordpress-from-wordpress.org-download/wordpress/wp-content/plugins/woo-bundle-choice/application/library/lib-load.php(83): require('/Users/hiren/Si...')
+#2 /Users/hiren/Sites/tmp/wordpress/wordpress-from-wordpress.org-download/wordpress/wp-content/plugins/woo-bundle-choice/application/controllers/admin/menu/admin-menu-factory.php(106): WBC_Loader->template('admin/menu/conf...')
+#3 /Users/hiren/Sites/tmp/wordpress/wordpress-from-wordpress.org-download/wordpress/wp-content/plugins/woo-bundle in /Users/hiren/Sites/tmp/wordpress/wordpress-from-wordpress.org-download/wordpress/wp-content/plugins/woo-bundle-choice/application/controllers/admin/menu/page/configuration.php on line 41
 

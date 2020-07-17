@@ -40,7 +40,7 @@ env:
     # Define vars.
     - export WP_VERSION=master
     - export WP_DEVELOP_DIR=/tmp/wordpress/src
-    - export SERVER_ROOT_DIR=/tmp
+    - export SERVER_ROOT_DIR=/tmp/wordpress/src
     - export WP_CORE_DIR=/tmp/wordpress/src
     - export WP_CEPT_SERVER='127.0.0.1:8888'
     

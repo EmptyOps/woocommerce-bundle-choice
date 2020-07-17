@@ -1,32 +1,32 @@
-2020-07-01T04:28:54+00:00 CRITICAL Uncaught Error: Class 'EO_WBC_Support' not found in /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/view/publics/category.php:62
+2020-07-01T04:28:54+00:00 CRITICAL Uncaught Error: Class 'EO_WBC_Support' not found in /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/view/publics/category.php:62
 Stack trace:
-#0 /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/library/lib-load.php(83): require()
-#1 /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/controllers/publics/pages/category.php(165): WBC_Loader->template('publics/categor...', Array)
-#2 /Users/hiren/Sites/tmp/wp-includes/class-wp-hook.php(287): eo\wbc\controllers\publics\pages\Category->eo\wbc\controllers\publics\pages\{closure}('')
-#3 /Users/hiren/Sites/tmp/wp-includes/class-wp-hook.php(311): WP_Hook->apply_filters(NULL, Array)
-#4 /Users/hiren/Sites/tmp/wordpress/w in /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/view/publics/category.php on line 62
+#0 /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/library/lib-load.php(83): require()
+#1 /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/controllers/publics/pages/category.php(165): WBC_Loader->template('publics/categor...', Array)
+#2 /Users/hiren/Sites//wp-includes/class-wp-hook.php(287): eo\wbc\controllers\publics\pages\Category->eo\wbc\controllers\publics\pages\{closure}('')
+#3 /Users/hiren/Sites//wp-includes/class-wp-hook.php(311): WP_Hook->apply_filters(NULL, Array)
+#4 /Users/hiren/Sites/tmp/wordpress/w in /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/view/publics/category.php on line 62
 
-2020-07-01T10:05:52+00:00 CRITICAL Uncaught Error: Class 'EO_WBC_Support' not found in /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/view/publics/category.php:62
+2020-07-01T10:05:52+00:00 CRITICAL Uncaught Error: Class 'EO_WBC_Support' not found in /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/view/publics/category.php:62
 Stack trace:
-#0 /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/library/lib-load.php(83): require()
-#1 /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/controllers/publics/pages/category.php(165): WBC_Loader->template('publics/categor...', Array)
-#2 /Users/hiren/Sites/tmp/wp-includes/class-wp-hook.php(287): eo\wbc\controllers\publics\pages\Category->eo\wbc\controllers\publics\pages\{closure}('')
-#3 /Users/hiren/Sites/tmp/wp-includes/class-wp-hook.php(311): WP_Hook->apply_filters(NULL, Array)
-#4 /Users/hiren/Sites/tmp/wordpress/w in /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/view/publics/category.php on line 62
+#0 /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/library/lib-load.php(83): require()
+#1 /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/controllers/publics/pages/category.php(165): WBC_Loader->template('publics/categor...', Array)
+#2 /Users/hiren/Sites//wp-includes/class-wp-hook.php(287): eo\wbc\controllers\publics\pages\Category->eo\wbc\controllers\publics\pages\{closure}('')
+#3 /Users/hiren/Sites//wp-includes/class-wp-hook.php(311): WP_Hook->apply_filters(NULL, Array)
+#4 /Users/hiren/Sites/tmp/wordpress/w in /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/view/publics/category.php on line 62
 
-2020-07-01T10:06:57+00:00 CRITICAL Uncaught Error: Class 'EO_WBC_Support' not found in /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/view/publics/category.php:62
+2020-07-01T10:06:57+00:00 CRITICAL Uncaught Error: Class 'EO_WBC_Support' not found in /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/view/publics/category.php:62
 Stack trace:
-#0 /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/library/lib-load.php(83): require()
-#1 /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/controllers/publics/pages/category.php(165): WBC_Loader->template('publics/categor...', Array)
-#2 /Users/hiren/Sites/tmp/wp-includes/class-wp-hook.php(287): eo\wbc\controllers\publics\pages\Category->eo\wbc\controllers\publics\pages\{closure}('')
-#3 /Users/hiren/Sites/tmp/wp-includes/class-wp-hook.php(311): WP_Hook->apply_filters(NULL, Array)
-#4 /Users/hiren/Sites/tmp/wordpress/w in /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/view/publics/category.php on line 62
+#0 /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/library/lib-load.php(83): require()
+#1 /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/controllers/publics/pages/category.php(165): WBC_Loader->template('publics/categor...', Array)
+#2 /Users/hiren/Sites//wp-includes/class-wp-hook.php(287): eo\wbc\controllers\publics\pages\Category->eo\wbc\controllers\publics\pages\{closure}('')
+#3 /Users/hiren/Sites//wp-includes/class-wp-hook.php(311): WP_Hook->apply_filters(NULL, Array)
+#4 /Users/hiren/Sites/tmp/wordpress/w in /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/view/publics/category.php on line 62
 
-2020-07-01T10:16:32+00:00 CRITICAL Uncaught Error: Class 'EO_WBC_Support' not found in /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/view/publics/category.php:62
+2020-07-01T10:16:32+00:00 CRITICAL Uncaught Error: Class 'EO_WBC_Support' not found in /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/view/publics/category.php:62
 Stack trace:
-#0 /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/library/lib-load.php(83): require()
-#1 /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/controllers/publics/pages/category.php(165): WBC_Loader->template('publics/categor...', Array)
-#2 /Users/hiren/Sites/tmp/wp-includes/class-wp-hook.php(287): eo\wbc\controllers\publics\pages\Category->eo\wbc\controllers\publics\pages\{closure}('')
-#3 /Users/hiren/Sites/tmp/wp-includes/class-wp-hook.php(311): WP_Hook->apply_filters(NULL, Array)
-#4 /Users/hiren/Sites/tmp/wordpress/w in /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/view/publics/category.php on line 62
+#0 /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/library/lib-load.php(83): require()
+#1 /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/controllers/publics/pages/category.php(165): WBC_Loader->template('publics/categor...', Array)
+#2 /Users/hiren/Sites//wp-includes/class-wp-hook.php(287): eo\wbc\controllers\publics\pages\Category->eo\wbc\controllers\publics\pages\{closure}('')
+#3 /Users/hiren/Sites//wp-includes/class-wp-hook.php(311): WP_Hook->apply_filters(NULL, Array)
+#4 /Users/hiren/Sites/tmp/wordpress/w in /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/view/publics/category.php on line 62
 

@@ -1,4 +1,4 @@
-2020-06-29T18:03:02+00:00 CRITICAL Can't use method return value in write context in /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/system/bootstrap/setup-wizard.php on line 39
+2020-06-29T18:03:02+00:00 CRITICAL Can't use method return value in write context in /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/system/bootstrap/setup-wizard.php on line 39
 
-2020-06-29T18:05:30+00:00 CRITICAL Can't use method return value in write context in /Users/hiren/Sites/tmp/wp-content/plugins/woo-bundle-choice/application/system/bootstrap/setup-wizard.php on line 107
+2020-06-29T18:05:30+00:00 CRITICAL Can't use method return value in write context in /Users/hiren/Sites//wp-content/plugins/woo-bundle-choice/application/system/bootstrap/setup-wizard.php on line 107
 
