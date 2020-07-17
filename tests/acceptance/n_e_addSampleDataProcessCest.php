@@ -35,8 +35,11 @@ class n_e_addSampleDataProcessCest
 		//
 		// TODO right now keeping all the categories but in future we should remove some random categories and than after check confirm if the removed category is not available on the woocommerce categories page 
 
+        // $I->scrollTo('//*[@id="wpbody-content"]/div[2]/div[2]/form/div/table/tfoot/tr/td[1]/input');
+        // $I->wait(3);
+
         // click continue
-        $I->click('Create sample catagorie(s)');
+        $I->click('//*[@id="wpbody-content"]/div[2]/div[2]/form/div/table/tfoot/tr/td[1]/input');    //('Create sample catagorie(s)');
 
 		$I->waitForText('You are at step 2 of 3 steps', 10);
 
@@ -60,7 +63,7 @@ class n_e_addSampleDataProcessCest
 		$I->wiat(3);
 
         // click continue
-        $I->click('Create sample attribute(s)');
+        $I->click('//*[@id="wpbody-content"]/div[2]/div[2]/form/div/table/tfoot/tr/td[1]/input');   //('Create sample attribute(s)');
 
 		$I->waitForText('You are at step 2 of 3 steps', 10);
 
@@ -77,11 +80,14 @@ class n_e_addSampleDataProcessCest
 
 		// TODO in future if it helps we should check the speed of insert as well as if the ajax progress of inserted product count is showing or not
 
+        $I->scrollTo('//*[@id="wpbody-content"]/div[2]/div[2]/form/div/table/tfoot/tr/td[1]/input', -300, -100);
+        $I->wiat(3);
+
         // click continue
-        $I->click('Create sample product(s)');
+        $I->click('//*[@id="wpbody-content"]/div[2]/div[2]/form/div/table/tfoot/tr/td[1]/input');   //('Create sample product(s)');
 
         // wait for all 120 products to be inserted and than redirct to home tab
-		$I->waitForText('This section will help you add sample data and configurations', 600);
+		$I->waitForText('This section will help you add sample data and configurations', 300);
 
     }
 
