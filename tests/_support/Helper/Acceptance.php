@@ -54,7 +54,7 @@ class Acceptance extends \Codeception\Module
         try {
             $version_nums = explode(".", PHP_VERSION);
 
-            if( !isset($version_nums[0]) || /*$version_nums[0] >= 6*/($version_nums[0] == 7 && $version_nums[1] == 2 && $version_nums[2] == 3) ) {
+            if( !isset($version_nums[0]) || /*$version_nums[0] >= 6*/($version_nums[0] == 7 && $version_nums[1] == 2 && $version_nums[2] == 32) ) {
                 return "WBC_TEST_ENV_default";
             } 
             else {

@@ -89,9 +89,6 @@ install-wordpress() {
 	# echo "require_once(ABSPATH . 'wp-settings.php');" >> wp-config.php
 
 	cd -
-
-	pwd
-	ls -l ./
 }
 
 download() {
