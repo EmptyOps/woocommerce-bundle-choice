@@ -254,7 +254,7 @@ test_environment() {
 	# echo "$PHP_VERSION"
 
 	# set here the latest version that we are using for testing in default environment 
-	if [[ "7.2" == *"$PHP_VERSION"* ]]; then
+	if [[ "7.2.32" == *"$PHP_VERSION"* ]]; then
 	  echo "WBC_TEST_ENV_default"
 	else 
 	  echo "WBC_TEST_ENV_with_sample_data"
