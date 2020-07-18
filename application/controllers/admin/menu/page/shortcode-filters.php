@@ -3,8 +3,8 @@ namespace eo\wbc\controllers\admin\menu\page;
 
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'Shop_Category_Filter' ) ) {
-	class Shop_Category_Filter extends Filters {
+if ( ! class_exists( 'Shortcode_Filters' ) ) {
+	class Shortcode_Filters extends Filters {
 
 		private static $_instance;
 		public static function instance() {
@@ -34,37 +34,29 @@ if ( ! class_exists( 'Shop_Category_Filter' ) ) {
 				unset($form_definition['altr_filt_widgts']['form']['builder_altr_filt_widgts']);
 			}
 			
+			$form_definition['filter_setting']['label'] = 'Shortcode';
 			$form_definition['d_fconfig']['label'] = 'Filter Configuration';
 
 			$sh_filter_setting = array(
-				'sh_shop_cat_filter_location'=>array(
-					'label'=>eowbc_lang('Filter Location'),
-					'type'=>'checkbox',
-					'value'=>array(wbc()->options->get_option('filters_sc_filter_setting','sc_shop_cat_filter_location_shop'),wbc()->options->get_option('filters_sc_filter_setting','sc_shop_cat_filter_location_cat')),
-					'force_value'=>1,
-					'sanitize'=>'sanitize_text_field',
-					'options'=>array('sc_shop_cat_filter_location_shop'=>'Shope Page','sc_shop_cat_filter_location_cat'=>'Category Page'),
+				'shortcode_label'=>array(
+					'label'=>eowbc_lang('Shortcode'),
+					'type'=>'label',
 					'class'=>array('fluid'),
-					'inline'=>false,
-					'visible_info'=>array( 'label'=>eowbc_lang('( Specify on which page you want to display filter, if you select category then you will be asked to select category on which you want to display the filter. )'),
-						'type'=>'visible_info',
-						'class'=>array('small'),
-					),
 				),
-				'shop_cat_filter_category'=>array(
-					'label'=>eowbc_lang('Category'),
-					'type'=>'select',
-					'value'=>wbc()->options->get_option('filters_sc_filter_setting','shop_cat_filter_category'),
-					'force_value'=>1,
-					'sanitize'=>'sanitize_text_field',
-					'options'=>\eo\wbc\model\Category_Attribute::instance()->get_category(),
+				'shortcode'=>array(
+					'label'=>'<strong>[wbc-shortcode-filter]</strong>',
+					'type'=>'label',
 					'class'=>array('fluid'),
-					'inline'=>false,
-					'visible_info'=>array( 'label'=>eowbc_lang('( Select category on which to show filter widget. )'),
-						'type'=>'visible_info',
-						'class'=>array('small'),
-					),
-					'size_class'=>array('transition','hidden','required')
+				),
+				'shortcode_help'=>array(
+					'label'=>eowbc_lang('Put above shortcode anywhere where you want to display filters, it is recommended to use the Elementor Shortcode widget if you are using Elementor on particular page'),
+					'type'=>'visible_info',
+					'class'=>array('small'),
+				),
+				'shortcode_multiple'=>array(
+					'label'=>'If you want to use more than one shortcode based filters then please <a href="http://sphereplugins.com/contact-us" target="_blank">contact us</a>',
+					'type'=>'visible_info',
+					'class'=>array('fluid'),
 				),
 			);
 
