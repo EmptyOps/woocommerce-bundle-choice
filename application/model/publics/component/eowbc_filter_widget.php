@@ -5,6 +5,9 @@ class EOWBC_Filter_Widget {
 
 	private static $_instance = null;
 
+	protected $is_shop_cat_filter = false;
+	protected $filter_prefix = '';
+
 	public static function instance() {
 		if ( ! isset( self::$_instance ) ) {
 			self::$_instance = new self;
@@ -1443,20 +1446,27 @@ class EOWBC_Filter_Widget {
 		$current_category=$this->_category;
 
 		$prefix = "";
-
-		$filter_first=unserialize(wbc()->options->get_option_group('filters_d_fconfig')/*get_option('eo_wbc_add_filter_first')*/);
 		
-		$filter_second=unserialize(wbc()->options->get_option_group('filters_s_fconfig')/*get_option('eo_wbc_add_filter_second')*/);
-				
 		$filter= array();
-		if($current_category==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/){
-			$filter=$filter_first;
+		if($this->is_shop_cat_filter===true){
+			
+			$filter=$filter_first=unserialize(wbc()->options->get_option_group('filters_'.$this->filter_prefix.'d_fconfig'));
 			$prefix = "d";			
+			
+		} else {
+			$filter_first=unserialize(wbc()->options->get_option_group('filters_d_fconfig')/*get_option('eo_wbc_add_filter_first')*/);
+			
+			$filter_second=unserialize(wbc()->options->get_option_group('filters_s_fconfig')/*get_option('eo_wbc_add_filter_second')*/);
+
+			if($current_category==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/){
+				$filter=$filter_first;
+				$prefix = "d";			
+			}
+			elseif($current_category==wbc()->options->get_option('configuration','second_slug')/*get_option('eo_wbc_second_slug')*/){
+				$filter=$filter_second;	
+				$prefix = "s";
+			}	
 		}
-		elseif($current_category==wbc()->options->get_option('configuration','second_slug')/*get_option('eo_wbc_second_slug')*/){
-			$filter=$filter_second;	
-			$prefix = "s";
-		}	
 
 		$filter =  apply_filters( 'eowbc_filter_widget_filters',$filter,$prefix);
 		$is_cleanup = apply_filters( 'eowbc_filter_widget_is_reset_cleanup',1);
@@ -1616,10 +1626,13 @@ class EOWBC_Filter_Widget {
 		wbc()->load->template('publics/filters/form', array("thisObj"=>$this,"current_category"=>$current_category)); 		
 	}
 
-	public function init() {
+	public function init($is_shop_cat_filter=false,$filter_prefix='') {
+		
+		$this->is_shop_cat_filter = $is_shop_cat_filter;
+		$this->filter_prefix = $filter_prefix;
 		$this->_category=$this->eo_wbc_get_category();
 		
-		if(!empty($this->_category)){
+		if(!empty($this->_category) or $this->is_shop_cat_filter){
 		
 			if(get_option('eo_wbc_dropdown_filter',false) and !wp_is_mobile()) {
 

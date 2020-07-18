@@ -28,7 +28,7 @@ class WBC_Common {
 					$matches = array_values($matches);					
 					$return_category = $matches[0];
 				} else {
-					$return_category = '';
+					$return_category = $wp_query->get_queried_object()->slug;
 				}
 			} else {
 				$return_category = $wp_query->get_queried_object()->slug;	
