@@ -11,11 +11,11 @@ class f_s_accountOrderDetailPageCest
     // {
     // }
 
-    public function myAccountPage(AcceptanceTester $I) {
+    protected function myAccountPage(AcceptanceTester $I, $suite_name_prefix=false) {
 
-    	if( !$I->test_allowed_in_this_environment("f_") ) {
-            return;
-        }
+    	// if( !$I->test_allowed_in_this_environment("f_") ) {
+     //        return;
+     //    }
 
     	//TODO make it dynamic by saving this in session in previous steps and then here get it from session 
     	$this->price_of_product_step1 = "12.00";
@@ -32,11 +32,11 @@ class f_s_accountOrderDetailPageCest
 
 	}
 
-	public function verifyOrderDetails(AcceptanceTester $I, $is_inner_call=false) {
+	protected function verifyOrderDetails(AcceptanceTester $I, $suite_name_prefix=false) {
 
-		if( !$I->test_allowed_in_this_environment("f_") ) {
-            return;
-        }
+		// if( !$I->test_allowed_in_this_environment("f_") ) {
+  //           return;
+  //       }
         
 		// go to detail page 
 		$I->click('//*[@id="post-9"]/div[1]/div/div/div/table/tbody/tr[1]/td[5]/a');	//click on latest order link using xPath
@@ -57,7 +57,7 @@ class f_s_accountOrderDetailPageCest
 		$I->see('8347408752');
 
 		//TODO check here if merged row appears properly or not 
-		if( !$is_inner_call ) { 
+		if( !$suite_name_prefix ) { 
 			$this->confirmMergedRow($I);	
 		}
 

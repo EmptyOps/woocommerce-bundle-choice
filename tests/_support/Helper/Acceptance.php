@@ -7,8 +7,46 @@ namespace Helper;
 class Acceptance extends \Codeception\Module
 {
 
-	/**
+    /**
+     * test suites 
+     * prefix a_-f_ => test suite 1 for manual test of pair builder process, sunob_ => test suite 2 for manual test of bonus/tiny features, n_ => test suite 3 for tests using sample data
+     */
+
+    /**
+     * prefix: test suites(see above), '' => empty prefix means use specified key without prefix check 
+     */
+    public function get_configs($key, $prefix="")
+    {
+        if( $key == "first_button_text" && ($prefix=="n_" || empty($prefix)) ) {
+            return "Start with Diamond Shape";
+        }
+        else if( $key == "second_button_text" && ($prefix=="n_" || empty($prefix)) ) {
+            return "Start with Setting Shape";
+        }
+        else if( $key == "first_product_price" && ($prefix=="n_" || empty($prefix)) ) {
+            return "12.00";
+        }
+
+        return null;
+    }
+
+    /**
      * 
+     */
+    public function site_path_by_test_suit($suite_name)
+    {
+        if( $suite_name == "a_-f_" ) {
+            return "/wordpress/src";
+        }
+        elseif( $suite_name == "n_" ) {
+            return "/WBC_TEST_ENV_with_sample_data/wordpress-latest-1/";
+        } 
+
+        return null;
+    }
+
+	/**
+     * we assume different test environment based on php and other applicable versions
      */
     public function get_test_environment()
     {
@@ -16,7 +54,8 @@ class Acceptance extends \Codeception\Module
         try {
             $version_nums = explode(".", PHP_VERSION);
 
-            if( !isset($version_nums[0]) || $version_nums[0] >= 6 ) {
+            // if( !isset($version_nums[0]) || /*$version_nums[0] >= 6*/($version_nums[0] == 7 && $version_nums[1] == 2 && $version_nums[2] == 32) ) {
+            if( !isset($version_nums[0]) || /*$version_nums[0] >= 6*/($version_nums[0] == 7 && $version_nums[1] == 3) ) {
                 return "WBC_TEST_ENV_default";
             } 
             else {
@@ -33,7 +72,7 @@ class Acceptance extends \Codeception\Module
     }
 
     /**
-     * 
+     * @param $test_name_perfix consider it as test suite, however it is not following the complete definition of suite flow available in codeception but just an internal way to handle different test categories as suites using name prefix. 
      */
     public function test_allowed_in_this_environment( $test_name_perfix )
     {
@@ -62,6 +101,48 @@ class Acceptance extends \Codeception\Module
         }
 
         return false;
+    }
+
+    /**
+     * Get current url from WebDriver
+     * @return mixed
+     * @throws \Codeception\Exception\ModuleException
+     */
+    public function setUrl()
+    {
+        echo "called setUrl...";
+        try {
+            $version_nums = explode(".", PHP_VERSION);
+            if( $this->get_test_environment() == "WBC_TEST_ENV_default" ) {
+                echo 'setting url for default environment';
+                $this->getModule('WPWebDriver')->config['url'] = 'http://127.0.0.1:8888/tmp/wordpress/src';
+            } 
+            else {
+                echo 'setting url for other environment';
+                $this->getModule('WPWebDriver')->config['url'] = 'http://127.0.0.1:8888/tmp/WBC_TEST_ENV_with_sample_data/wordpress-latest-1';
+            }
+        }
+        catch(Exception $e) {
+            echo "caught message...";
+            echo $e->getMessage()."";
+        }
+    }
+
+    /**
+     * Get current uri from WebDriver
+     * @return mixed
+     * @throws \Codeception\Exception\ModuleException
+     */
+    public function getCurrentUri()
+    {
+        echo "called getCurrentUri...";
+        try {
+            return $this->getModule('WPWebDriver')->_getCurrentUri();
+        }
+        catch(Exception $e) {
+            echo "caught message...";
+            echo $e->getMessage()."";
+        }
     }
 
     /**

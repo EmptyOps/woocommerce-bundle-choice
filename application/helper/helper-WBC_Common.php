@@ -55,7 +55,6 @@ class WBC_Common {
 					$ancestors[] = $id;
 				}				
 			}
-
 			$term_slug=array_map(array(wbc()->wp,"cat_id2slug"),$ancestors);				
 
 			$matches = array_intersect($in_category,$term_slug);				

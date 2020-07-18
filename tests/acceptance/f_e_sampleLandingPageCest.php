@@ -11,11 +11,11 @@ class f_e_sampleLandingPageCest
     // {
     // }
 
-    public function testChoiceButtonWidgetOnLandingPage(AcceptanceTester $I) {
+    protected function testChoiceButtonWidgetOnLandingPage(AcceptanceTester $I, $suite_name_prefix=false) {
         
-        if( !$I->test_allowed_in_this_environment("f_") ) {
-            return;
-        }
+        // if( !$I->test_allowed_in_this_environment("f_") ) {
+        //     return;
+        // }
         
         // go to the page
 		$I->amOnPage('/design-your-own-ring');

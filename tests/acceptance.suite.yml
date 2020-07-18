@@ -17,6 +17,8 @@ class_name: AcceptanceTester
 # # modules:
 # #     enabled:
 # #         - WPWebDriver
+bootstrap: bootstrap.php
+
 
 # modules:
 #     enabled:

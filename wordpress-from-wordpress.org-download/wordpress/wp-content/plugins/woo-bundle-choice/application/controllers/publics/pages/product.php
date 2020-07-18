@@ -55,6 +55,7 @@ class Product {
     {
         global $post;
         $url='';
+
         $category=$this->eo_wbc_get_category();
 
         // if ($category==get_option('eo_wbc_first_slug')) {
@@ -144,7 +145,8 @@ class Product {
     }
 
     public function eo_wbc_config()
-    {        
+    {
+
         //Remove add to cart button
         remove_action( 
             'woocommerce_after_shop_loop_item',
@@ -625,7 +627,7 @@ class Product {
             }
         }
 
-        //if(empty($__category) or ($__category!=get_option('eo_wbc_first_slug') and $__category!=get_option('eo_wbc_second_slug'))) {
+        //if(empty($__category) or ($__categozzry!=get_option('eo_wbc_first_slug') and $__category!=get_option('eo_wbc_second_slug'))) {
         if(empty($__category) or ($__category!=wbc()->options->get_option('configuration','first_slug') and $__category!=wbc()->options->get_option('configuration','second_slug'))) {
             if(!empty(wbc()->sanitize->get('BEGIN')) and !empty(wbc()->sanitize->get('STEP'))) {
                 

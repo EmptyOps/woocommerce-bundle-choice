@@ -13,5 +13,5 @@
         <div class="title"><?php echo $preview_name; ?></div>
         <div>&nbsp;</div>
     </div>                                                                     
-    <div class="column " style="<?php echo empty($preview_icon)?'visibility: hidden;':''; ?>"><img src="<?php echo $preview_icon; ?>" style="margin: auto auto;"/></div>                            
+    <div class="column " style="<?php echo empty($preview_icon)?'visibility: hidden;':''; ?>"><img src="<?php echo $preview_icon; ?>" class="ui mini image" style="margin: auto auto;"/></div>                            
 </div>

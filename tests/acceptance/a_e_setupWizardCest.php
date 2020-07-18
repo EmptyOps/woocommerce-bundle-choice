@@ -11,9 +11,9 @@ class a_e_setupWizardCest
     // {
     // }
 
-    public function step1(AcceptanceTester $I, $is_inner_call=false) {
+    protected function step1(AcceptanceTester $I, $suite_name_prefix=false) {
 
-    	if( !$I->test_allowed_in_this_environment("a_") ) {
+    	if( !$I->test_allowed_in_this_environment("a_") && !$suite_name_prefix ) {
             return;
         }
 
@@ -38,9 +38,9 @@ class a_e_setupWizardCest
 		$I->waitForText('Ring Builder', 10); // secs	//if we see Ring Builder on next step than it's properly saved
 	}
 
-	public function step2(AcceptanceTester $I) {
+	protected function step2(AcceptanceTester $I, $suite_name_prefix=false) {
 
-		if( !$I->test_allowed_in_this_environment("a_") ) {
+		if( !$I->test_allowed_in_this_environment("a_") && !$suite_name_prefix ) {
             return;
         }
 
@@ -71,9 +71,9 @@ class a_e_setupWizardCest
 		$I->waitForText('Ring Builder', 10);	//TODO here should actually confirm if the switch is on, do it by fetching javascript value and comparing it but it will required javascript See etc function. And return statement from javascript actually returns result to php as per webdriver doc
 	}
 
-	public function step3(AcceptanceTester $I) {
+	protected function step3(AcceptanceTester $I, $suite_name_prefix=false) {
 
-		if( !$I->test_allowed_in_this_environment("a_") ) {
+		if( !$I->test_allowed_in_this_environment("a_") && !$suite_name_prefix ) {
             return;
         }
         

@@ -11,18 +11,18 @@ class f_o_cartPageCest
     // {
     // }
 
-	public function cartPage(AcceptanceTester $I, $is_inner_call=false) {
+	protected function cartPage(AcceptanceTester $I, $suite_name_prefix=false) {
 		
-		if( !$I->test_allowed_in_this_environment("f_") ) {
-            return;
-        }
+		// if( !$I->test_allowed_in_this_environment("f_") ) {
+  //           return;
+  //       }
 
     	//TODO make it dynamic by saving this in session in previous steps and then here get it from session 
     	$this->price_of_product_step1 = "12.00";
     	$this->price_of_product_step2 = "15.00";
 
 		// test remove action 
-		if( !$is_inner_call ) { 
+		if( !$suite_name_prefix ) { 
 			$this->removeItemPairFromCart($I);
 		}
 
@@ -32,17 +32,17 @@ class f_o_cartPageCest
 		$I->see('Subtotal');
 		
 		//TODO check here if merged row appears properly or not
-		if( true || !$is_inner_call ) { 
+		if( true || !$suite_name_prefix ) { 
 			$I->see($this->price_of_product_step1+$this->price_of_product_step2);	
 		}
 
 	}
 
-	public function continueToCheckout(AcceptanceTester $I, $is_inner_call=false) {
+	protected function continueToCheckout(AcceptanceTester $I, $suite_name_prefix=false) {
 
-		if( !$I->test_allowed_in_this_environment("f_") ) {
-            return;
-        }
+		// if( !$I->test_allowed_in_this_environment("f_") ) {
+  //           return;
+  //       }
         
 		// $this->cartPage($I);
 

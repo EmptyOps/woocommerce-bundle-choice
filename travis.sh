@@ -5,7 +5,7 @@ WP_CORE_DIR=${WP_CORE_DIR-$WP_DEVELOP_DIR/}
 # Install WordPress.
 install-wordpress() {
 
-	mkdir -p "$WP_DEVELOP_DIR"
+	# mkdir -p "$WP_DEVELOP_DIR"
 
 	# Clone the WordPress develop repo.
 	# git clone --depth=1 --branch="$WP_VERSION" git://develop.git.wordpress.org/ "$WP_DEVELOP_DIR"
@@ -21,9 +21,25 @@ install-wordpress() {
 	#
 	# here based on different testing environments defined for WBC we may need to copy different wordpress which are configured specifically for the test environment's requirement 
 
-	cp -R wordpress-from-wordpress.org-download/wordpress/* "$WP_DEVELOP_DIR/"
+	echo $(test_environment)
+	if [[ $(test_environment) == "WBC_TEST_ENV_default" ]]; then
+		echo "default if condition"
 
-	cd "$WP_DEVELOP_DIR"
+		mkdir -p "$WP_DEVELOP_DIR"
+
+		cp -R wordpress-from-wordpress.org-download/wordpress/* "$WP_DEVELOP_DIR/"
+
+		cd "$WP_DEVELOP_DIR"
+	else 
+		echo "other else condition"
+
+		# copy other environment sites 
+		mkdir -p "$SERVER_ROOT_DIR"tmp/WBC_TEST_ENV_with_sample_data/wordpress-latest-1
+		cp -R wordpress-from-wordpress.org-download/WBC_TEST_ENV_with_sample_data/wordpress-latest-1/* "$SERVER_ROOT_DIR"tmp/WBC_TEST_ENV_with_sample_data/wordpress-latest-1/
+
+		cd "$SERVER_ROOT_DIR"tmp/WBC_TEST_ENV_with_sample_data/wordpress-latest-1/
+	fi
+
 
 	# # Set up tests config.
 	# # cp wp-tests-config-sample.php wp-config.php
@@ -160,6 +176,16 @@ move_things() {
 	# php /tmp/wordpress/wp plugin activate woocommerce
 }
 
+copy_wbc() {
+
+	cp -Rf "$1"application "$2"
+	cp -Rf "$1"asset "$2"
+	cp -Rf "$1"index.php "$2"
+	cp -Rf "$1"languages "$2"
+	cp -Rf "$1"uninstall.php "$2"
+	cp -Rf "$1"woocommerce-bundle-choice.php "$2"
+}
+
 composer_and_wp_plugins_install_update() {
 
 	# #wp root
@@ -171,19 +197,22 @@ composer_and_wp_plugins_install_update() {
 
 	#clone/move and activate woo choice plugin itself to wp dir
 		# mkdir /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice 	#commented temporarily since the plugin is activated on manually on local wordress site 
-		
-		# zzzsdfjgjsdjaghsd
-		# ls -l /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/
-		# yyysdkjfhsdkjhff
-		rm -rf /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/*	#removing to ensure that no bug can occur in recursive copy where in some linux force overwrite fails
-		# xxxxgsdjhfgjdsghf
-		# ls -l /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/
-		# wwwkxdjhfjkf
-		# ls -l ${TRAVIS_BUILD_DIR}
-		# aaaaaaaaasdlfkjdlsfkjlkj
-		cp -Rf "$TRAVIS_BUILD_DIR"/* /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/
-		# bbbbbbbbdsfosdflkjsdlfk
-		# ls -l /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/
+
+		# remove # 		
+		if [[ $(test_environment) == "WBC_TEST_ENV_default" ]]; then
+			rm -rf /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/*	#removing to ensure that no bug can occur in recursive copy where in some linux force overwrite fails
+		else 
+			# for other environment sites
+			rm -rf "$SERVER_ROOT_DIR"tmp/WBC_TEST_ENV_with_sample_data/wordpress-latest-1/wp-content/plugins/woo-bundle-choice/* 
+		fi
+
+		# copy #
+		if [[ $(test_environment) == "WBC_TEST_ENV_default" ]]; then
+			copy_wbc "$TRAVIS_BUILD_DIR"/ /tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/
+		else 
+			# for other environment sites
+			copy_wbc "$TRAVIS_BUILD_DIR"/ "$SERVER_ROOT_DIR"tmp/WBC_TEST_ENV_with_sample_data/wordpress-latest-1/wp-content/plugins/woo-bundle-choice/ 
+		fi
 		
 		# git clone --depth=1 --branch=dev https://github.com/EmptyOps/woocommerce-bundle-choice /tmp/wordpress/src/wp-content/plugins #clone option no more used, since copy above is from clone already
 		# php /tmp/wordpress/wp plugin activate woo-bundle-choice	#commented temporarily since the plugin is activated on manually on local wordress site
@@ -212,6 +241,44 @@ move_and_remove_tests() {
 	rm -rf "$TRAVIS_BUILD_DIR"/tests/wc
 	rm -f "$TRAVIS_BUILD_DIR"/tests/bootstrap.php
 
+}
+
+#test environment 
+test_environment() {
+
+	PHP_VERSION=$(php -v | head -n 1 | cut -d " " -f 2)
+	# echo "PHP_VERSION..."
+	# echo "$PHP_VERSION"
+
+	# set here the latest version that we are using for testing in default environment 
+	# if [[ "7.2.32" == *"$PHP_VERSION"* ]]; then
+	if [[ "7.3.20" == *"$PHP_VERSION"* ]]; then
+	  echo "WBC_TEST_ENV_default"
+	else 
+	  echo "WBC_TEST_ENV_with_sample_data"
+	fi
+}
+
+#edit codeception yml file as per test environment 
+edit_codeception_yml_file() {
+
+	# portable in-place argument for both GNU sed and Mac OSX sed
+	if [[ $(uname -s) == 'Darwin' ]]; then
+		local ioption='-i.bak'
+	else
+		local ioption='-i'
+	fi
+
+	# set here the latest version that we are using for testing in default environment 
+	if [[ $(test_environment) == "WBC_TEST_ENV_default" ]]; then
+	  echo "setting url for default environment"
+	  sed $ioption "s|http://127.0.0.1:8888|http://127.0.0.1:8888/tmp/wordpress/src|" "$TRAVIS_BUILD_DIR"/tests/acceptance.suite.yml
+	  sed $ioption "s|http://127.0.0.1:8888|http://127.0.0.1:8888/tmp/wordpress/src|" "$TRAVIS_BUILD_DIR"/codeception.dist.yml
+	else 
+	  echo "setting url for other environment"
+	  sed $ioption "s|http://127.0.0.1:8888|http://127.0.0.1:8888/tmp/WBC_TEST_ENV_with_sample_data/wordpress-latest-1|" "$TRAVIS_BUILD_DIR"/tests/acceptance.suite.yml
+	  sed $ioption "s|http://127.0.0.1:8888|http://127.0.0.1:8888/tmp/WBC_TEST_ENV_with_sample_data/wordpress-latest-1|" "$TRAVIS_BUILD_DIR"/codeception.dist.yml
+	fi
 }
 
 #echo the necessary output 
