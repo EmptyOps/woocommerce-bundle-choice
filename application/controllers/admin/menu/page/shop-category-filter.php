@@ -72,6 +72,7 @@ if ( ! class_exists( 'Shop_Category_Filter' ) ) {
 				foreach ($form_definition as $form_key => $form_value) {
 					
 					$form_definition['sc_'.$form_key] = $form_value;
+					$form_definition['sc_'.$form_key]['attr'] = array('data-clean_tab_key="'.$form_key.'"');
 
 					if(!empty($form_value['form']) and is_array($form_value)){
 						foreach ($form_value['form'] as $frm_key => $frm_value) {
@@ -109,6 +110,3 @@ if ( ! class_exists( 'Shop_Category_Filter' ) ) {
 
 	}
 }		
-
-wbc()->load->asset('js','admin/tiny-feature/shortcode-filter');
-wbc()->load->asset('js','admin/tiny-feature/shop-cat');

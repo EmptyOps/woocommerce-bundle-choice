@@ -6,6 +6,7 @@ class Category {
 
     private static $_instance = null;
     protected $is_shop_cat_filter = false;
+    protected $is_shortcode_filter = false;
     protected $filter_prefix = '';
     public static function instance() {
         if ( ! isset( self::$_instance ) ) {
@@ -19,6 +20,7 @@ class Category {
     }
 
     public function init() {        
+
         //If add to cart triggred
         // Detection : only one category item get length > 0 
         //   i.e. using XOR check if only one of two have been set.
@@ -31,15 +33,14 @@ class Category {
         if(
             ((($this->eo_wbc_get_category()== wbc()->options->get_option('configuration','first_slug') //get_option('eo_wbc_first_slug') 
               OR
-            $this->eo_wbc_get_category()== wbc()->options->get_option('configuration','second_slug'))) and !empty(wbc()->sanitize->get('EO_WBC')) ) or $this->is_shop_cat_filter===true//get_option('eo_wbc_second_slug')
+            $this->eo_wbc_get_category()== wbc()->options->get_option('configuration','second_slug'))) and !empty(wbc()->sanitize->get('EO_WBC')) ) or $this->is_shop_cat_filter===true or $this->is_shortcode_filter //get_option('eo_wbc_second_slug')
         ){
             //if( get_option('eo_wbc_filter_enable')=='1' ){
             /*wbc()->options->update_option('filters_filter_setting','config_filter_status','config_filter_status');*/
 
             /*wbc()->options->update_option('filters_filter_setting','filter_setting_alternate_mobile','filter_setting_alternate_mobile');*/
 
-            
-            if(wbc()->options->get_option('filters_filter_setting','filter_setting_status','1')) {
+            if(wbc()->options->get_option('filters_filter_setting','filter_setting_status','1') or $this->is_shop_cat_filter===true or $this->is_shortcode_filter) {
 
                 if(
                      // ($this->eo_wbc_get_category()==get_option('eo_wbc_first_slug') && get_option('eo_wbc_add_filter_first',FALSE) )
@@ -48,12 +49,12 @@ class Category {
                      (($this->eo_wbc_get_category()==wbc()->options->get_option('configuration','first_slug') && wbc()->options->get_option_group('filters_d_fconfig',FALSE) )
                      OR 
                      ($this->eo_wbc_get_category()==wbc()->options->get_option('configuration','second_slug') && wbc()->options->get_option_group('filters_s_fconfig',FALSE) ))
-                     or $this->is_shop_cat_filter===true
+                     or $this->is_shop_cat_filter===true or $this->is_shortcode_filter
                 ){
                     $this->eo_wbc_add_filters();          
                 }
             }        
-            if($this->is_shop_cat_filter!==true){
+            if($this->is_shop_cat_filter!==true && !$this->is_shortcode_filter){
                 $this->eo_wbc_add_breadcrumb();                         
             }    
             
@@ -125,10 +126,14 @@ class Category {
         add_action( 'woocommerce_archive_description',function(){    
             wbc()->load->model('publics/component/eowbc_filter_widget');          
             // if (class_exists('EO_WBC_Filter_Widget')) {
-                \eo\wbc\model\publics\component\EOWBC_Filter_Widget::instance()->init($this->is_shop_cat_filter,$this->filter_prefix);                                
+                \eo\wbc\model\publics\component\EOWBC_Filter_Widget::instance()->init($this->is_shop_cat_filter,$this->filter_prefix,false);                                
             // }
         },130);         
         
+        if( $this->is_shortcode_filter ) {
+            \eo\wbc\model\publics\component\EOWBC_Filter_Widget::instance()->init(false,$this->filter_prefix,$this->is_shortcode_filter);
+        }
+
     }
 
     public function eo_wbc_add_breadcrumb()
@@ -180,7 +185,7 @@ class Category {
             add_filter( 'post_type_link',array($this,'eo_wbc_product_url'));   
         } 
 
-        if($this->is_shop_cat_filter!==true){
+        if($this->is_shop_cat_filter!==true && !$this->is_shortcode_filter){
             add_action( 'woocommerce_no_products_found', function(){
 
                 remove_action( 'woocommerce_no_products_found', 'wc_no_products_found', 10 );

@@ -36,25 +36,84 @@ class sunob_a_y_bonusFeaturesFiltersForShopCategoryPageCest
 		$I->executeJS("jQuery('#shop_cat_filter_two_filter').trigger('change');");	//we need to trigger change event because without that our own JS code is not recieving the change event
 		$I->executeJS("jQuery('#shop_cat_filter_two_filter_first_dropdown_div').dropdown('set selected', 19);");	//better than setting 1 directly is to select the nth element that has value 1 
 
-		$I->scrollTo('//*[@id="add-sample-filter-data"]', -300, -500);
-		$I->wait(3);
+		// $I->scrollTo('//*[@id="add-sample-filter-data"]', -300, -500);
+		// $I->wait(3);
 		
-		$I->fillField('shop_cat_filter_two_filter_first_title', 'Diamond Filter');
-		$I->executeJS("jQuery('#shop_cat_filter_two_filter_first_dropdown_div').dropdown('set selected', 20);");	//better than setting 1 directly is to select the nth element that has value 1 
-		$I->fillField('shop_cat_filter_two_filter_second_title', 'Setting Filter');
+		// $I->fillField('shop_cat_filter_two_filter_first_title', 'Diamond Filter');
+		// $I->executeJS("jQuery('#shop_cat_filter_two_filter_first_dropdown_div').dropdown('set selected', 20);");	//better than setting 1 directly is to select the nth element that has value 1 
+		// $I->fillField('shop_cat_filter_two_filter_second_title', 'Setting Filter');
 		
-		$I->executeJS("jQuery('#shop_cat_filter_alternate_view').parent().checkbox('set checked', 'shop_cat_filter_alternate_view');");	//better than setting 1 directly is to select the nth element that has value 1 
-		$I->executeJS("jQuery('#shop_cat_filter_selected_filter').parent().checkbox('set checked', 'shop_cat_filter_selected_filter');");	//better than setting 1 directly is to select the nth element that has value 1 
+		// $I->executeJS("jQuery('#shop_cat_filter_alternate_view').parent().checkbox('set checked', 'shop_cat_filter_alternate_view');");	//better than setting 1 directly is to select the nth element that has value 1 
+		// $I->executeJS("jQuery('#shop_cat_filter_selected_filter').parent().checkbox('set checked', 'shop_cat_filter_selected_filter');");	//better than setting 1 directly is to select the nth element that has value 1 
 
-		$I->scrollTo('//*[@id="shop_cat_filter_save"]', -300, -100);
-		$I->wait(3);
+		// TODO we should test on shop page as well for that (maybe) need to write additional tests for front end
+
+        // TODO cover configuration fields that are supposed to be moved to this tab from older version
+
+		// $I->scrollTo('//*[@id="filter_setting_submit_btn"]', -300, -100);
+		// $I->wait(3);
 		
 		// save 
-		$I->click('//*[@id="shop_cat_filter_save"]'); 	
+		$I->click('//*[@id="filter_setting_submit_btn"]'); 		//click('Save'); 	
 
 		$I->reloadPage();
 
 		$I->seeInField('shop_cat_filter_two_filter_first_title', 'Diamond Filter');	//$I->see('4px', 'input');	//I verify that I can see "button tagline..." inside input tag 
+
+	}
+
+
+    public function setAlternateFilterWidget(AcceptanceTester $I) {
+
+        if( !$I->test_allowed_in_this_environment("sunob_a_") ) {
+            return;
+        }
+
+        // TODO simply set a random alternate widget here and we shall assume that rest of the process on backend and fronend works as it is with the alternate widget  
+
+        // TODO randomly try additional css as well but of course we will need an additional test on frontend to verify that
+
+    }
+
+    public function addEditFilters(AcceptanceTester $I, $is_edit_mode=false, $edit_fields=array()) {
+
+        if( !$I->test_allowed_in_this_environment("sunob_a_") ) {
+            return;
+        }
+
+        // I assume that browser is already on the shortcode page due to previous test function in this class 
+
+        // add filter 
+        // TODO even though we are using a common method of setup class to add filter but we should try preparing add data in most effective to test every aspect, so prepare such data and extend parent method and pass data for detailed testing 
+        parent::addEditFilters( $I, 'd', $is_edit_mode, '', 'Filter Configuration', 'Bulk Actions', $edit_fields);
+
+        // TODO are there any other things that are not covered in common add method of parent class that we should cover? We must think of anything that is missed especially when we are saving time of dev & maintainance by using common test method of parent class. 
+
+    }
+
+	public function manageShortcodeFiltersList(AcceptanceTester $I) {
+
+		if( !$I->test_allowed_in_this_environment("sunob_a_") ) {
+            return;
+        }
+
+        // try to disable a filter 
+        $I->bulkEnableDisableDelete( $I, '', 'deactivate' );
+
+        // try to enable a filter 
+        $I->bulkEnableDisableDelete( $I, '', 'activate' );
+
+        // try to edit any one filter from here 
+        $I->click('Test d filter', 'a');
+        $this->addEditFilters( $I, true, array('label'=>'Shortcode filter'));
+
+        // TODO try to delete a filter 
+        $I->bulkEnableDisableDelete( $I, '', 'delete' );
+
+        //now since its deleted create again
+        $this->addEditFilters( $I );
+
+        // TODO are there any other things that are not covered in managing list especially since we used the common methods of parent class so are there any additional thing left that we should cover? We must think of anything that is missed especially when we are saving time of dev & maintainance by using common test method of parent class. 
 
 	}
 

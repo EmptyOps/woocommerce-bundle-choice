@@ -11,7 +11,7 @@ class sunob_a_w_bonusFeaturesShortcodeFiltersCest
     // {
     // }
 
-    public function addShortcodeFilters(AcceptanceTester $I) {
+    public function configuration(AcceptanceTester $I) {
 
 		if( !$I->test_allowed_in_this_environment("sunob_a_") ) {
             return;
@@ -22,30 +22,47 @@ class sunob_a_w_bonusFeaturesShortcodeFiltersCest
 		$I->see( 'Dashboard' );
 
 		// go to the page
-		$I->amOnPage('/wp-admin/admin.php?page=eowbc-tiny-features');
+		$I->amOnPage('/wp-admin/admin.php?page=eowbc-shortcode-filters');
 
 		/* Map creation and modification tab */
 		// go to the tab
-		$I->click('Shortcode Filters for Home');
-		$I->see('Add Filter Field');
+		// $I->click('Shortcode Filters for Home');
+		$I->see('Display Filters using Shortcode');
 
 		// set fields 
-		$I->executeJS("jQuery('#shop_cat_shortcode_filter_dropdown_div').dropdown('set selected', 15);");	//better than setting 1 directly is to select the nth element that has value 1 
+		// TODO we can set here the custom redirect url and check if it works with the remaining tests that are dependent on this and where it is supposed to work  
 
-		$I->fillField('shop_cat_shortcode_label', 'test label');
-		$I->fillField('shop_cat_shortcode_unique_id', 'testuniqueid');
-
-		$I->scrollTo('//*[@id="shop_cat_shortcode_add"]', -300, -100);
-		$I->wait(3);
-		
-		// save 
-		$I->click('Add Filter'); 	
-
-		$I->wait(3);
-
-		$I->see('testuniqueid', 'td');	//$I->see('4px', 'input');	//I verify that I can see "button tagline..." inside input tag 
+        // TODO cover configuration fields that are supposed to be moved to this tab from older version
 
 	}
+
+    public function setAlternateFilterWidget(AcceptanceTester $I) {
+
+        if( !$I->test_allowed_in_this_environment("sunob_a_") ) {
+            return;
+        }
+
+        // TODO simply set a random alternate widget here and we shall assume that rest of the process on backend and fronend works as it is with the alternate widget  
+
+        // TODO randomly try additional css as well but of course we will need an additional test on frontend to verify that
+
+    }
+
+    public function addEditFilters(AcceptanceTester $I, $is_edit_mode=false, $edit_fields=array()) {
+
+        if( !$I->test_allowed_in_this_environment("sunob_a_") ) {
+            return;
+        }
+
+        // I assume that browser is already on the shortcode page due to previous test function in this class 
+
+        // add filter 
+        // TODO even though we are using a common method of setup class to add filter but we should try preparing add data in most effective to test every aspect, so prepare such data and extend parent method and pass data for detailed testing 
+        parent::addEditFilters( $I, 'd', $is_edit_mode, '', 'Filter Configuration', 'Bulk Actions', $edit_fields);
+
+        // TODO are there any other things that are not covered in common add method of parent class that we should cover? We must think of anything that is missed especially when we are saving time of dev & maintainance by using common test method of parent class. 
+
+    }
 
 	public function manageShortcodeFiltersList(AcceptanceTester $I) {
 
@@ -53,48 +70,24 @@ class sunob_a_w_bonusFeaturesShortcodeFiltersCest
             return;
         }
 
-        //verify that filter exists
-        $I->dontSee('No filter(s) exists');
+        // try to disable a filter 
+        $I->bulkEnableDisableDelete( $I, '', 'deactivate' );
 
-        //delete the filter 
-        $I->click('//*[@id="eowbc_shortcode_table"]/tbody/tr/td[5]/span');
+        // try to enable a filter 
+        $I->bulkEnableDisableDelete( $I, '', 'activate' );
 
-        //verify if deleted
-        $I->waitForText('No filter(s) exists', 10);
+        // try to edit any one filter from here 
+        $I->click('Test d filter', 'a');
+        $this->addEditFilters( $I, true, array('label'=>'Shortcode filter'));
+
+        // TODO try to delete a filter 
+        $I->bulkEnableDisableDelete( $I, '', 'delete' );
 
         //now since its deleted create again
-        $this->addShortcodeFilters($I);
+        $this->addEditFilters( $I );
 
-        //verify that filter created
-        $I->dontSee('No filter(s) exists');
+        // TODO are there any other things that are not covered in managing list especially since we used the common methods of parent class so are there any additional thing left that we should cover? We must think of anything that is missed especially when we are saving time of dev & maintainance by using common test method of parent class. 
 
-	}
-
-	public function generateShortcode(AcceptanceTester $I) {
-
-		if( !$I->test_allowed_in_this_environment("sunob_a_") ) {
-            return;
-        }
-
-        //before we create the shortcode verify that filter exists 
-        $I->dontSee('No filter(s) exists');
-
-        //generate 
-        $I->click('Generate Shortcode');
-
-        $I->wait(1);
-
-        //verify if created
-        $textarea_text = $I->executeJS("return jQuery('#shop_cat_shortcode_text').val();");
-        if( strpos($textarea_text, "[woo_custome_filter_begin][") !== FALSE && strpos($textarea_text, "][woo_custome_filter_end") !== FALSE ) {
-            //assume passed with below dummy assert
-            $I->dontSee('No filter(s) exists');
-        }
-        else {
-            //assume not passed with below dummy assert with random text so that it fails
-            $I->see('zgkvmxbn86nhgf5kmxzvfvns53kdfysfk');
-        }
-        
 	}
 
 }

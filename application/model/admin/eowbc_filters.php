@@ -412,8 +412,8 @@ class Eowbc_Filters {
 	}
 
 	public function fetch_filter(&$res) {
-		$first = unserialize(wbc()->options->get_option_group('filters_d_fconfig'));
-		$second = unserialize(wbc()->options->get_option_group('filters_s_fconfig'));
+		$first = unserialize(wbc()->options->get_option_group('filters_'.$this->tab_key_prefix.'d_fconfig'));
+		$second = unserialize(wbc()->options->get_option_group('filters_'.$this->tab_key_prefix.'s_fconfig'));
 		if(!empty($first[$_POST['id']])){
 			$res['msg'] = json_encode($first[$_POST['id']]);
 		} elseif (!empty($second[$_POST['id']])) {
@@ -437,7 +437,7 @@ if((is_wp_error($diamond_category) or is_wp_error($setting_category) or empty($d
 		<script>
 			jQuery(document).ready(function($){
 				$("[name='first_category_altr_filt_widgts'],[name='second_category_altr_filt_widgts']").on('change',function(){
-					eowbc_toast_common('warning','For alternate widget templates to setup preview filters and make your work easy to set up them, it is recommended that you add sample data and then select and save your desired template. If the sample is not available no preview filters can be set and you will need to add filters manually.',15000);
+					eowbc_toast_common('warning','Warning: For alternate widget templates to setup preview filters and make your work easy to set up them, it is recommended that you add sample data and then select and save your desired template. If the sample is not available no preview filters can be set and you will need to add filters manually.',15000);
                     
 				});
 			});

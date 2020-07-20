@@ -18,3 +18,5 @@ $form['attr']= array('data-is_per_tab_save="true"');
 \eo\wbc\model\admin\Form_Builder::instance()->build($form);
 wbc()->load->asset('js','admin/filter');
 
+wbc()->load->asset('js','admin/tiny-feature/shortcode-filter');
+wbc()->load->asset('js','admin/tiny-feature/shop-cat');

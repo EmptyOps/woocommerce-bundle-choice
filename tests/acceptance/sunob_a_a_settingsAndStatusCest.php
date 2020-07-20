@@ -1,6 +1,6 @@
 <?php 
 
-class sunob_a_a_settingsAndStatusCest
+class sunob_a_a_settingsAndStatusCest extends n_f_adminSideSetupCest
 {
     public function _before(AcceptanceTester $I)
     {
@@ -17,26 +17,9 @@ class sunob_a_a_settingsAndStatusCest
             return;
         }
 
-		//login to admin panel, should save and maintain cookies so that do not need to login on all admin test. but yeah however during the front end test should flush the admin cookie first.  
-		$I->loginAsAdmin();
-		$I->see( 'Dashboard' );
+		$this->enablingBonusFeature($I, 'price_control', 'eowbc-price-control', 'Set pricing method to update price in bulk');
 
-		// go to the page
-		$I->amOnPage('/wp-admin/admin.php?page=eowbc-setting-status');
-
-		$I->see('Choose features');
-
-		// 
-		$I->executeJS("jQuery('#price_control').parent().checkbox('set checked', 'price_control');");	
-		
-		// save 
-		$I->click('Save'); 	
-		$I->wait(2);
-
-		// verify
-		$I->amOnPage('/wp-admin/admin.php?page=eowbc-price-control');
-
-		$I->see('Set pricing method to update price in bulk');
+		// TODO do other additional testing and verification here 
 
 	}
 
@@ -46,6 +29,10 @@ class sunob_a_a_settingsAndStatusCest
             return;
         }
 
+        $this->enablingBonusFeature($I, '', '', '');
+
+		// TODO do other additional testing and verification here 
+
 	}
 
 	public function enablingBonusFeatureSpecificationView(AcceptanceTester $I) {
@@ -53,6 +40,10 @@ class sunob_a_a_settingsAndStatusCest
 		if( !$I->test_allowed_in_this_environment("sunob_a_") ) {
             return;
         }
+
+        $this->enablingBonusFeature($I, '', '', '');
+
+		// TODO do other additional testing and verification here 
 
 	}
 
@@ -62,6 +53,10 @@ class sunob_a_a_settingsAndStatusCest
             return;
         }
 
+        $this->enablingBonusFeature($I, '', '', '');
+
+		// TODO do other additional testing and verification here 
+
 	}
 
 	public function enablingBonusFeatureShopCategoryPageFilters(AcceptanceTester $I) {
@@ -69,6 +64,10 @@ class sunob_a_a_settingsAndStatusCest
 		if( !$I->test_allowed_in_this_environment("sunob_a_") ) {
             return;
         }
+
+        $this->enablingBonusFeature($I, '', '', '');
+
+		// TODO do other additional testing and verification here 
 
 	}	
 

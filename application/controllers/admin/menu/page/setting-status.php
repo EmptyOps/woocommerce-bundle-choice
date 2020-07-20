@@ -109,7 +109,7 @@ class Setting_status {
 								'type'=>'checkbox',
 								'value'=>array(),
 								'sanitize'=>'sanitize_text_field',
-								'options'=>array('1'=>'I agree with SpherePlugins\' <a href="https://sphereplugins.com/terms-conditions/" target="_blank">Terms</a> & <a href="https://sphereplugins.com/privacy-policy/" target="_blank">Privacy Policy</a>'),
+								'options'=>array('1'=>'I agree with Sphere Plugins <a href="https://sphereplugins.com/terms-conditions/" target="_blank">Terms</a> & <a href="https://sphereplugins.com/privacy-policy/" target="_blank">Privacy Policy</a>'),
 								'options_attrs'=>array('1'=>array("onchange=\"if(jQuery(this)[0].checked){ jQuery('#btn_send_error_report').removeClass('disabled'); } else { jQuery('#btn_send_error_report').addClass('disabled'); }\"")),
 								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
