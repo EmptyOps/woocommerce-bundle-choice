@@ -20,4 +20,4 @@ modules:
             adminUrl: /wp-admin
             capabilities:
                 "goog:chromeOptions":
-                    args: ["--no-sandbox", "--disable-gpu", "--window-size=1024,768", "--enable-javascript"]
+                    args: ["--disable-dev-shm-usage", "--disable-gpu", "--window-size=1024,768", "--enable-javascript"]
