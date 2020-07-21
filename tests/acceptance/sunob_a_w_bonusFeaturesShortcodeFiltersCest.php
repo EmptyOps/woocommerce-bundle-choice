@@ -42,9 +42,9 @@ class sunob_a_w_bonusFeaturesShortcodeFiltersCest
             return;
         }
 
-        // TODO simply set a random alternate widget here and we shall assume that rest of the process on backend and fronend works as it is with the alternate widget  
+        // TODO simply set a random alternate widget here and we shall assume that rest of the process on backend and fronend works as it is with the newly changed alternate widget  
 
-        // TODO randomly try additional css as well but of course we will need an additional test on frontend to verify that
+        // TODO try additional css field as well but of course we will need an additional test on frontend to verify that
 
     }
 
@@ -61,6 +61,8 @@ class sunob_a_w_bonusFeaturesShortcodeFiltersCest
         parent::addEditFilters( $I, 'd', $is_edit_mode, '', 'Filter Configuration', 'Bulk Actions', $edit_fields);
 
         // TODO are there any other things that are not covered in common add method of parent class that we should cover? We must think of anything that is missed especially when we are saving time of dev & maintainance by using common test method of parent class. 
+
+            // when the child filter etc fields added from the old version than add them in common method and the related front end tests in this module's front end tests
 
     }
 
@@ -87,6 +89,8 @@ class sunob_a_w_bonusFeaturesShortcodeFiltersCest
         $this->addEditFilters( $I );
 
         // TODO are there any other things that are not covered in managing list especially since we used the common methods of parent class so are there any additional thing left that we should cover? We must think of anything that is missed especially when we are saving time of dev & maintainance by using common test method of parent class. 
+
+            // when in future we add add actions like search, sort etc. for the list, we should cover them here
 
 	}
 

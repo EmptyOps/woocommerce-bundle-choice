@@ -22,12 +22,12 @@ class sunob_a_y_bonusFeaturesFiltersForShopCategoryPageCest
 		$I->see( 'Dashboard' );
 
 		// go to the page
-		$I->amOnPage('/wp-admin/admin.php?page=eowbc-tiny-features');
+		$I->amOnPage('/wp-admin/admin.php?page=eowbc-shop-cat-filter');
 
 		/* Map creation and modification tab */
 		// go to the tab
-		$I->click('Filters for Shop/Category Page');
-		$I->see('Filter Location');
+		// $I->click('Filters for Shop/Category Page');
+		$I->see('Filters for Shop/Category Page');
 
 		// set fields 
 		$I->executeJS("jQuery('#shop_cat_filter_location_shop').parent().checkbox('set checked', 'shop_cat_filter_location_shop');");	
@@ -58,7 +58,8 @@ class sunob_a_y_bonusFeaturesFiltersForShopCategoryPageCest
 
 		$I->reloadPage();
 
-		$I->seeInField('shop_cat_filter_two_filter_first_title', 'Diamond Filter');	//$I->see('4px', 'input');	//I verify that I can see "button tagline..." inside input tag 
+		// $I->seeInField('shop_cat_filter_two_filter_first_title', 'Diamond Filter');	//$I->see('4px', 'input');	//I verify that I can see "button tagline..." inside input tag 
+		$I->see('Diamond');	//I verify that I can see "Diamond" category inside dropdown's div tag 
 
 	}
 
@@ -69,9 +70,9 @@ class sunob_a_y_bonusFeaturesFiltersForShopCategoryPageCest
             return;
         }
 
-        // TODO simply set a random alternate widget here and we shall assume that rest of the process on backend and fronend works as it is with the alternate widget  
+        // TODO simply set a random alternate widget here and we shall assume that rest of the process on backend and fronend works as it is with the newly changed alternate widget  
 
-        // TODO randomly try additional css as well but of course we will need an additional test on frontend to verify that
+        // TODO try additional css field as well but of course we will need an additional test on frontend to verify that
 
     }
 
@@ -81,13 +82,15 @@ class sunob_a_y_bonusFeaturesFiltersForShopCategoryPageCest
             return;
         }
 
-        // I assume that browser is already on the shortcode page due to previous test function in this class 
+        // I assume that browser is already on the shop/cat filter page due to previous test function in this class 
 
         // add filter 
         // TODO even though we are using a common method of setup class to add filter but we should try preparing add data in most effective to test every aspect, so prepare such data and extend parent method and pass data for detailed testing 
         parent::addEditFilters( $I, 'd', $is_edit_mode, '', 'Filter Configuration', 'Bulk Actions', $edit_fields);
 
         // TODO are there any other things that are not covered in common add method of parent class that we should cover? We must think of anything that is missed especially when we are saving time of dev & maintainance by using common test method of parent class. 
+
+        	// when the child filter etc fields added from the old version than add them in common method and the related front end tests in this module's front end tests
 
     }
 
@@ -105,7 +108,7 @@ class sunob_a_y_bonusFeaturesFiltersForShopCategoryPageCest
 
         // try to edit any one filter from here 
         $I->click('Test d filter', 'a');
-        $this->addEditFilters( $I, true, array('label'=>'Shortcode filter'));
+        $this->addEditFilters( $I, true, array('label'=>'Category page filter'));
 
         // TODO try to delete a filter 
         $I->bulkEnableDisableDelete( $I, '', 'delete' );
@@ -115,13 +118,17 @@ class sunob_a_y_bonusFeaturesFiltersForShopCategoryPageCest
 
         // TODO are there any other things that are not covered in managing list especially since we used the common methods of parent class so are there any additional thing left that we should cover? We must think of anything that is missed especially when we are saving time of dev & maintainance by using common test method of parent class. 
 
+        	// when in future we add add actions like search, sort etc. for the list, we should cover them here
+
 	}
 
-	public function addFilters(AcceptanceTester $I) {
+	protected function addFilters(AcceptanceTester $I) {
 
 		if( !$I->test_allowed_in_this_environment("sunob_a_") ) {
             return;
         }
+
+        // TODO this function is supposed to be removed, but there are some useful things below like unique content for testing  different kind of filters and add child filter logic etc.
 
 		//login to admin panel, should save and maintain cookies so that do not need to login on all admin test. but yeah however during the front end test should flush the admin cookie first.  
 		$I->loginAsAdmin();
