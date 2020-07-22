@@ -1,11 +1,11 @@
 === Woo Choice Plugin | Ring Builder | Pair Maker | Guidance Tool ===
 Contributors: emptyopssphere
 Tags: woocommerce,product bundle,product bundles,woocommerce product bundles,bundles,bundle,woo,woocommerce product bundle,design your own,buy in pair
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=hi0001234d1gmail.com&item_name=+Favorite+WooCommerce+Product+Bundle+Choice++Download+WooCommerce+Product+Bundle+Choice+Plugin+Donation¤cy_code=USD&source=url
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=hi0001234d1gmail.com&item_name=+Favorite+Woo+Choice+Plugin++Download+Woo+Choice+Plugin+Donation¤cy_code=USD&source=url
 Requires at least: 3.5
 Tested up to: 5.4
 Requires PHP: 5.3
-Stable tag: 0.5.70
+Stable tag: 1.0.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
