@@ -38,5 +38,5 @@ modules:
             adminUrl: /wp-admin
             capabilities:
                 "goog:chromeOptions":
-                    args: ["--disable-dev-shm-usage", "--disable-gpu", "--window-size=1024,768", "--enable-javascript"]
+                    args: ["--disable-gpu", "--window-size=1024,768", "--enable-javascript"]
     # step_decorators: ~    
