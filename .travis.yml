@@ -158,7 +158,7 @@ before_script:
   # # # - nohup bash -c "java -jar selenium-server-standalone.jar &" && sleep 1; cat nohup.out
   # # - nohup bash -c "java -jar selenium-server-standalone.jar &" && sleep 1; 
   # - nohup bash -c "java -jar selenium-server-standalone.jar -Dwebdriver.chrome.driver=\"chromedriver\" -Dwebdriver.chrome.whitelistedIps=\"localhost\" &" && sleep 1; 
-- |
+  - |
     if [[ $(test_environment) == "WBC_TEST_ENV_default" ]]; then
       nohup bash -c "java -jar selenium-server-standalone.jar -Dwebdriver.chrome.driver=\"chromedriver\" -Dwebdriver.chrome.whitelistedIps=\"localhost\" &" && sleep 1;    
     else
