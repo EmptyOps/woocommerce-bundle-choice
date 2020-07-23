@@ -18,11 +18,15 @@ class sunob_f_k_bonusFeaturesFiltersForShopCategoryPageCest
         }
 
         // go to the page
-        $I->amOnPage('/shop/');
+        // $I->amOnPage('/shop/');
+        $I->amOnPage('/product-category/diamond/');
         
         // check if filter is visible 
-        $I->see('Diamond Filter');    //first filter tab
-        $I->see('Setting Filter');    //second filter tab
+        // $I->see('Diamond Filter');    //first filter tab
+        // $I->see('Setting Filter');    //second filter tab
+        $I->waitForText('Test d filter');    
+        $I->see('Search', 'button');    
+
 
         // TODO apply filters basic check
         

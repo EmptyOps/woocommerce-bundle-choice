@@ -25,12 +25,26 @@ if ( ! class_exists( 'Shop_Category_Filter' ) ) {
 
 			$form_definition = parent::get_form_definition();
 
+			// update labels, remove unnecessary tabs
 			unset($form_definition['s_fconfig']);
 			
-			unset($form_definition['d_fconfig']['form']['d_fconfig_builder']);
-			unset($form_definition['altr_filt_widgts']['form']['builder_altr_filt_widgts']);
-			$form_definition['d_fconfig']['label'] = 'Filter Configuration';
+			if(isset($form_definition['d_fconfig']['form']['d_fconfig_builder'])) {
+				unset($form_definition['d_fconfig']['form']['d_fconfig_builder']);
+			}
+			if(isset($form_definition['altr_filt_widgts']['form']['builder_altr_filt_widgts'])){
+				unset($form_definition['altr_filt_widgts']['form']['builder_altr_filt_widgts']);
+			}
 
+			$form_definition["filter_setting"]["form"]["price_filter_first_cat"]["label"] = "Price Filter";
+			$form_definition["filter_setting"]["form"]["hide_price_filter_first_cat"]["options"]["1"] = "Hide Price Filter?";
+
+			$form_definition['altr_filt_widgts']['form']['first_category_altr_filt_widgts']['label'] = 'Widgets';
+			unset($form_definition['altr_filt_widgts']['form']['second_category_altr_filt_widgts']);
+			
+			$form_definition['d_fconfig']['label'] = 'Filter Configuration';
+			$form_definition['d_fconfig']['form']['d_fconfig_save_sec_title']['label'] = 'Add Filter Field';
+
+			// add new fields 
 			$sh_filter_setting = array(
 				'sh_shop_cat_filter_location'=>array(
 					'label'=>eowbc_lang('Filter Location'),
@@ -45,6 +59,7 @@ if ( ! class_exists( 'Shop_Category_Filter' ) ) {
 						'type'=>'visible_info',
 						'class'=>array('small'),
 					),
+					'inject_at'=>1,
 				),
 				'shop_cat_filter_category'=>array(
 					'label'=>eowbc_lang('Category'),
@@ -59,14 +74,17 @@ if ( ! class_exists( 'Shop_Category_Filter' ) ) {
 						'type'=>'visible_info',
 						'class'=>array('small'),
 					),
-					'size_class'=>array('transition','hidden','required')
+					'size_class'=>array('transition','hidden','required'),
+					'inject_at'=>2,
 				),
 			);
 
+			// add prefix
 			if(!empty($form_definition) and is_array($form_definition)){				
 				foreach ($form_definition as $form_key => $form_value) {
 					
 					$form_definition['sc_'.$form_key] = $form_value;
+					$form_definition['sc_'.$form_key]['attr'] = array('data-clean_tab_key="'.$form_key.'"');
 
 					if(!empty($form_value['form']) and is_array($form_value)){
 						foreach ($form_value['form'] as $frm_key => $frm_value) {
@@ -86,17 +104,33 @@ if ( ! class_exists( 'Shop_Category_Filter' ) ) {
 				}
 			}
 
-			unset($form_definition['sc_filter_setting']['form']['filter_setting_status']);
-			unset($form_definition['sc_filter_setting']['form']['filter_setting_price_filter_width']);
-			unset($form_definition['sc_filter_setting']['form']['filter_setting_alternate_slider_ui']);			
+			// remove unnecessary fields
+			$fields_to_keep = array('filter_setting_filter','filter_setting_submit_btn','price_filter_first_cat','hide_price_filter_first_cat','price_filter_order_first_cat');
+			foreach ($form_definition['sc_filter_setting']['form'] as $key => $value) {
+				if( !in_array($key, $fields_to_keep)) {
+					unset($form_definition['sc_filter_setting']['form'][$key]);
+				}
+			}		
 
-			$form_definition['sc_filter_setting']['form'] = array_merge($sh_filter_setting,$form_definition['sc_filter_setting']['form']);
+			// merge new fields
+			// $form_definition['sc_filter_setting']['form'] = array_merge($sh_filter_setting,$form_definition['sc_filter_setting']['form']);
+			$indat = 0;
+			$tmp = $form_definition['sc_filter_setting']['form'];
+			$form_definition['sc_filter_setting']['form'] = array();
+			foreach ($tmp as $key => $value) {
+				foreach ($sh_filter_setting as $kinner => $vinner) {
+					if( isset($vinner["inject_at"]) && $vinner["inject_at"] == $indat ) {
+						$form_definition['sc_filter_setting']['form'][$kinner] = $vinner;
+						$indat++;
+					}
+				}
+
+				$form_definition['sc_filter_setting']['form'][$key] = $value;
+				$indat++;
+			}	
 
 			return $form_definition;
 		}
 
 	}
 }		
-
-wbc()->load->asset('js','admin/tiny-feature/shortcode-filter');
-wbc()->load->asset('js','admin/tiny-feature/shop-cat');

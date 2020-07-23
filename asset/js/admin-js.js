@@ -229,9 +229,14 @@ jQuery(document).ready(function($){
         let $this = $(this);
         var form = jQuery($this).closest("form");
         let saved_tab_key = jQuery(".ui.pointing.secondary.menu>.item.active").data('tab');
+        let clean_tab_key = jQuery(".ui.pointing.secondary.menu>.item.active").data('clean_tab_key');
         let id = $(this).data('wbc-editid');
         /*console.log($(this).find(':checkbox').val());*/
         
+        if( typeof(clean_tab_key) == undefined || typeof(clean_tab_key) == 'undefined' || clean_tab_key == '' ) {
+            clean_tab_key = saved_tab_key;
+        }
+
         console.log(e.srcElement.nodeName);
         if(e.srcElement.nodeName!='INPUT'){
             console.log('in');
@@ -261,7 +266,7 @@ jQuery(document).ready(function($){
                                 //console.log(list[property]);
                             }
                         }   
-                        jQuery("#"+ saved_tab_key+"_id").val(id);
+                        jQuery("#"+ clean_tab_key+"_id").val(id);
                     } else {
                         $('body').toast({
                             class: (typeof(resjson["type"]) != undefined ? resjson["type"] : 'error'),

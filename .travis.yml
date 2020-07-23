@@ -85,6 +85,11 @@ before_script:
   # - sudo sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-available/000-default.conf
   # - sudo service apache2 restart
 
+  # # Increase the shared memory mountpoint. Chrome or something in the tests is
+  # # taking up more shared memory than is available which causes tests to fail.
+  # # See https://github.com/SeleniumHQ/docker-selenium/issues/431
+  # - sudo mount -o remount,size=32G /run/shm
+
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
   - |
     if [ -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ]; then
@@ -137,14 +142,28 @@ before_script:
   - wget -c -nc --retry-connrefused --tries=0 http://selenium-release.storage.googleapis.com/2.53/selenium-server-standalone-2.53.1.jar -O selenium-server-standalone.jar
   
   - echo "Download chromedriver"
-  # - wget https://chromedriver.storage.googleapis.com/74.0.3729.6/chromedriver_linux64.zip
-  - wget https://chromedriver.storage.googleapis.com/2.27/chromedriver_linux64.zip
-  - unzip -o -q chromedriver_linux64.zip
+  # # - wget https://chromedriver.storage.googleapis.com/74.0.3729.6/chromedriver_linux64.zip
+  # - wget https://chromedriver.storage.googleapis.com/2.27/chromedriver_linux64.zip
+  # - unzip -o -q chromedriver_linux64.zip
+  - |
+    if [[ $(test_environment) == "WBC_TEST_ENV_default" ]]; then
+      wget https://chromedriver.storage.googleapis.com/2.27/chromedriver_linux64.zip
+      unzip -o -q chromedriver_linux64.zip
+    else
+      wget https://github.com/mozilla/geckodriver/releases/download/v0.21.0/geckodriver-v0.21.0-linux32.tar.gz
+      tar -xzf geckodriver-v0.21.0-linux32.tar.gz
+    fi
 
   - echo "Run selenium-server"
-  # # - nohup bash -c "java -jar selenium-server-standalone.jar &" && sleep 1; cat nohup.out
-  # - nohup bash -c "java -jar selenium-server-standalone.jar &" && sleep 1; 
-  - nohup bash -c "java -jar selenium-server-standalone.jar -Dwebdriver.chrome.driver=\"chromedriver\" -Dwebdriver.chrome.whitelistedIps=\"localhost\" &" && sleep 1; 
+  # # # - nohup bash -c "java -jar selenium-server-standalone.jar &" && sleep 1; cat nohup.out
+  # # - nohup bash -c "java -jar selenium-server-standalone.jar &" && sleep 1; 
+  # - nohup bash -c "java -jar selenium-server-standalone.jar -Dwebdriver.chrome.driver=\"chromedriver\" -Dwebdriver.chrome.whitelistedIps=\"localhost\" &" && sleep 1; 
+  - |
+    if [[ $(test_environment) == "WBC_TEST_ENV_default" ]]; then
+      nohup bash -c "java -jar selenium-server-standalone.jar -Dwebdriver.chrome.driver=\"chromedriver\" -Dwebdriver.chrome.whitelistedIps=\"localhost\" &" && sleep 1;    
+    else
+      nohup bash -c "java -jar selenium-server-standalone.jar -Dwebdriver.gecko.driver=\"geckodriver\" -Dwebdriver.gecko.whitelistedIps=\"localhost\" &" && sleep 1;
+    fi
 
 
   # Install Codeception and WP Browser.

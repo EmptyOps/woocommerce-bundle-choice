@@ -88,12 +88,21 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 						),
 						array(
 							'parent_slug'=>'eowbc',
+							'title'=>eowbc_lang('Shortcode Filters').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Tiny Features'),
+							'menu_title'=>eowbc_lang('Shortcode Filters'),
+							'capability'=>'manage_options',
+							'slug'=>'eowbc-shortcode-filters',
+							'template'=>'admin/menu/shortcode_filters',
+							'position'=>6
+						),	
+						array(
+							'parent_slug'=>'eowbc',
 							'title'=>eowbc_lang('Filters for Shop/Category Page').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Tiny Features'),
 							'menu_title'=>eowbc_lang('Filters for Shop/Category Page'),
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-shop-cat-filter',
 							'template'=>'admin/menu/shop_cat_filter',
-							'position'=>6
+							'position'=>7
 						),						
 						array(
 							'parent_slug'=>'eowbc',
@@ -102,7 +111,7 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-price-control',
 							'template'=>'admin/menu/price_control',
-							'position'=>7
+							'position'=>8
 						),
 						array(
 							'parent_slug'=>'eowbc',
@@ -111,7 +120,7 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-setting-status',
 							'template'=>'admin/menu/setting-status',
-							'position'=>8
+							'position'=>9
 						),
 						array(
 							'parent_slug'=>'eowbc',
@@ -120,13 +129,13 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-extensions',
 							'template'=>'admin/menu/extensions',
-							'position'=>9
+							'position'=>10
 						),
 					);
 			$features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())));
 					
 			if(empty($features['price_control'])) {
-				unset($submenu[7]);
+				unset($submenu[8]);
 			}
 			$menu['submenu'] = $submenu;
 			return $menu;

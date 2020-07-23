@@ -98,7 +98,15 @@ class Filter_Samples {
 
     					$res = \eo\wbc\model\admin\Eowbc_Filters::instance()->save( \eo\wbc\controllers\admin\menu\page\Filters::get_form_definition(), true );
                     } else {
-                        $res = \eo\wbc\model\admin\Eowbc_Shop_Category_Filter::instance()->save( \eo\wbc\controllers\admin\menu\page\Shop_Category_Filter::get_form_definition(), true );
+                        if( $tprefix == "sc_" ) {
+                            $res = \eo\wbc\model\admin\Eowbc_Shop_Category_Filter::instance()->save( \eo\wbc\controllers\admin\menu\page\Shop_Category_Filter::get_form_definition(), true );
+                        }
+                        elseif( $tprefix == "shortflt_" ) {
+                            $res = \eo\wbc\model\admin\Eowbc_Shortcode_Filters::instance()->save( \eo\wbc\controllers\admin\menu\page\Shortcode_Filters::get_form_definition(), true );
+                        }
+                        else {
+                            throw new Exception("Sample data process not implemented for the provided prefix ".$tprefix, 1);
+                        }
                     }
 
 					unset($_POST[$prefix.'_fconfig_filter']);

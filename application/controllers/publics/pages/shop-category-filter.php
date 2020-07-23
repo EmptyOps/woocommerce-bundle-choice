@@ -15,7 +15,8 @@ class Shop_Category_Filter extends Category {
     }
 
     private function __construct() {        
-        
+        $this->is_shop_cat_filter = true;
+        $this->filter_prefix ='sc_';
     }
 
     public function init() {
@@ -25,8 +26,8 @@ class Shop_Category_Filter extends Category {
         
         if(empty($category_page_status) or $this->eo_wbc_get_category() !== get_term_by('id',$category_id,'product_cat')->slug) return false;
 
-        parent::instance()->is_shop_cat_filter = true;
-        parent::instance()->filter_prefix ='sc_';
+        // parent::instance()->is_shop_cat_filter = true;
+        // parent::instance()->filter_prefix ='sc_';
 
         add_filter('eowbc_table_view_forced',function(){
             return true;
@@ -37,13 +38,7 @@ class Shop_Category_Filter extends Category {
             $table_object = new EO_WBC_E_TabView();
             $table_object->load_asset();
         }*/
-        if(
 
-            !( wbc()->options->get_option('configuration','config_category',0) == 1
-                and
-            wbc()->options->get_option('configuration','config_map',0) == 1 )
-        ){
-            parent::instance()->init();                    
-        }
+        parent::init();                    
     }    
 }

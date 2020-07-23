@@ -364,4 +364,110 @@ class n_f_adminSideSetupCest
         
     }
 
+    protected function enablingBonusFeature(AcceptanceTester $I, $feature_id, $target_page, $text_verification) {
+
+        if( !$I->test_allowed_in_this_environment("sunob_a_") ) {
+            return;
+        }
+
+        if( empty($feature_id) ) return;
+
+        //login to admin panel, should save and maintain cookies so that do not need to login on all admin test. but yeah however during the front end test should flush the admin cookie first.  
+        $I->loginAsAdmin();
+        $I->see( 'Dashboard' );
+
+        // go to the page
+        $I->amOnPage('/wp-admin/admin.php?page=eowbc-setting-status');
+
+        $I->see('Choose features');
+
+        // 
+        $I->executeJS("jQuery('#".$feature_id."').parent().checkbox('set checked', '".$feature_id."');");   
+        
+        // save 
+        $I->click('Save');  
+        $I->wait(2);
+
+        // verify
+        $I->amOnPage('/wp-admin/admin.php?page='.$target_page);
+
+        $I->see($text_verification);
+
+    }
+
+    protected function addEditFilters(AcceptanceTester $I, $prefix, $is_edit_mode, $goto_page='', $goto_tab='', $tab_verification_text='', $edit_fields=array()) {
+
+        if( !$I->test_allowed_in_this_environment("sunob_a_") ) {
+            return;
+        }
+
+        // go to page
+        if( !empty($goto_page) ) {
+
+        }
+
+        // go to the tab
+        $I->click($goto_tab);
+        $I->see($tab_verification_text);
+
+        // field values 
+        $label = !$is_edit_mode || !isset($edit_fields['label']) ? 'Test '.$prefix.' filter' : $edit_fields['label'];
+
+        // set fields 
+        $I->executeJS("jQuery('#".$prefix."_fconfig_filter_dropdown_div').dropdown('set selected', 15);");  //better than setting val directly is to select the nth element that has value val 
+        $I->fillField("".$prefix."_fconfig_label", $label);
+        $I->executeJS("jQuery('#".$prefix."_fconfig_is_advanced_1').checkbox('set unchecked');");   
+        $I->fillField("".$prefix."_fconfig_column_width", '50');
+        $I->fillField("".$prefix."_fconfig_ordering", '5');
+        $I->executeJS("jQuery('#".$prefix."_fconfig_input_type').dropdown('set selected', 'text_slider');");    //better than setting val directly is to select the nth element that has value val 
+        $I->fillField("".$prefix."_fconfig_icon_size", '0');
+        $I->fillField("".$prefix."_fconfig_icon_label_size", '0');
+        $I->executeJS("jQuery('#".$prefix."_fconfig_add_reset_link_1').checkbox('set unchecked');");    
+
+        $I->executeJS('window.scrollTo( 0, 1500 );');       //$I->scrollTo('Save'); 
+        $I->wait(3);
+
+        // save 
+        $I->click("#".$prefix."_fconfig_submit_btn");   //('Save');     //it shouldn't be this way, but there seem some issue with selenium driver and thus when there is another Save button on the page even though on another page and is not visible but still selenium think it is visible and thus gives us error so need to use unique xPath like id etc. 
+
+        // confirm if saved properly or not
+        $I->reloadPage();   //reload page
+        $I->click($goto_tab);
+        $I->see($label); // see in table list row's td
+
+    }
+
+
+    protected function bulkEnableDisableDelete(AcceptanceTester $I, $entity_id, $bulk_action ) {
+
+        if( !$I->test_allowed_in_this_environment("sunob_a_") ) {
+            return;
+        }
+
+        // select specified checkbox 
+        $I->executeJS("jQuery('##eowbc_price_control_methods_list > tbody > tr > td:nth-child(1) > div > input[type=checkbox]').checkbox('set checked');");      //here should use entity_id to check the checkbox 
+
+        // select specfied bulk action 
+        $I->executeJS("jQuery('#eowbc_price_control_methods_list_bulk_dropdown_div').dropdown('set selected', '".$bulk_action."');");  //better than setting val directly is to select the nth element that has value val
+
+        // click action button 
+        $I->click('Apply');
+
+        if( $bulk_action == 'delete' ) {
+            // TODO need to click here on javascript confirmation alert
+        }
+
+        // verify 
+        if( $bulk_action == 'deactivate' ) {
+            $I->waitForText('1 record(s) deactivated', 10);
+        }
+        elseif( $bulk_action == 'activate' ) {
+            $I->waitForText('1 record(s) activated', 10);
+        }
+        elseif( $bulk_action == 'delete' ) {
+            $I->waitForText('1 record(s) deleted', 10);
+        }
+
+    }
+
 }

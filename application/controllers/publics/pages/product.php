@@ -37,7 +37,7 @@ class Product {
     }    
 
     public function specification_view() {
-        if(wbc()->options->get_option('tiny_features','specification_view_status',false) and wbc()->options->get_option('tiny_features','specification_view_default_status',false)){
+        if( (!isset($_GET['EO_WBC']) and wbc()->options->get_option('tiny_features','specification_view_status',false) and wbc()->options->get_option('tiny_features','specification_view_default_status',false)) or ( isset($_GET['EO_WBC']) and wbc()->options->get_option('appearance_product_page','show_spec_view_in_pair_builder','1') ) ){
 
             add_action('woocommerce_after_single_product_summary',function(){
                 wbc()->load->template('publics/features/specification_view');            
@@ -47,7 +47,10 @@ class Product {
     }
 
     public function product_options_view() {
-        \eo\wbc\controllers\publics\Options::instance()->run();        
+        if( (!isset($_GET['EO_WBC']) and wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_status',false)) or ( isset($_GET['EO_WBC']) and wbc()->options->get_option('appearance_product_page','show_options_ui_in_pair_builder','1') ) ){
+
+            \eo\wbc\controllers\publics\Options::instance()->run();        
+        }
     }
     
     //It's just temporary fix so we need strong model to handle this changes.
