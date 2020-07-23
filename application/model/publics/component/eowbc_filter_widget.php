@@ -851,8 +851,8 @@ class EOWBC_Filter_Widget {
 	public function load_mobile($general_filters, $advance_filters) {
 		if(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')) {
 			$this->load_grid_mobile($general_filters);
-			$order = wbc()->options->get_option($this->filter_prefix.'filter_setting','price_filter_order_'.$this->cat_name_part.'_cat','');
-			if( !$this->is_shortcode_filter && !wbc()->options->get_option($this->filter_prefix.'filter_setting','hide_price_filter_'.$this->cat_name_part.'_cat',false) && wbc()->common->nonZeroEmpty($order) ) {
+			$order = wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','price_filter_order_'.$this->cat_name_part.'_cat','');
+			if( !$this->is_shortcode_filter && !wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','hide_price_filter_'.$this->cat_name_part.'_cat',false) && wbc()->common->nonZeroEmpty($order) ) {
 				$this->slider_price(0);
 			}
 			if(!is_wp_error($advance_filters) and !empty($advance_filters)) {
@@ -862,8 +862,8 @@ class EOWBC_Filter_Widget {
 			?><div class="ui segment"><?php
 				?><div class="ui styled fluid accordion" style="border-top-left-radius: 0px !important; border-top-right-radius: 0px !important;"><?php
 					$this->load_grid_mobile($general_filters);
-					$order = wbc()->options->get_option($this->filter_prefix.'filter_setting','price_filter_order_'.$this->cat_name_part.'_cat','');
-					if( !$this->is_shortcode_filter && !wbc()->options->get_option($this->filter_prefix.'filter_setting','hide_price_filter_'.$this->cat_name_part.'_cat',false) && wbc()->common->nonZeroEmpty($order) ) {
+					$order = wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','price_filter_order_'.$this->cat_name_part.'_cat','');
+					if( !$this->is_shortcode_filter && !wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','hide_price_filter_'.$this->cat_name_part.'_cat',false) && wbc()->common->nonZeroEmpty($order) ) {
 						$this->slider_price(0);
 					}
 				?></div><?php
@@ -953,8 +953,8 @@ class EOWBC_Filter_Widget {
 					<div class="ui segment"><?php
 					?><div class="ui grid container align middle relaxed"><?php
 						$this->load_grid_desktop($general_filters,0);
-						$order = wbc()->options->get_option($this->filter_prefix.'filter_setting','price_filter_order_'.$this->cat_name_part.'_cat','');
-						if( !$this->is_shortcode_filter && !wbc()->options->get_option($this->filter_prefix.'filter_setting','hide_price_filter_'.$this->cat_name_part.'_cat',false) && wbc()->common->nonZeroEmpty($order) ) {
+						$order = wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','price_filter_order_'.$this->cat_name_part.'_cat','');
+						if( !$this->is_shortcode_filter && !wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','hide_price_filter_'.$this->cat_name_part.'_cat',false) && wbc()->common->nonZeroEmpty($order) ) {
 							$this->slider_price();
 						}
 					?></div><?php
@@ -1141,8 +1141,8 @@ class EOWBC_Filter_Widget {
 				<?php				
 			}
 
-			$order = wbc()->options->get_option($this->filter_prefix.'filter_setting','price_filter_order_'.$this->cat_name_part.'_cat','');
-			if( !$this->is_shortcode_filter && !wbc()->options->get_option($this->filter_prefix.'filter_setting','hide_price_filter_'.$this->cat_name_part.'_cat',false) && wbc()->common->nonZeroEmpty($order) ) {
+			$order = wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','price_filter_order_'.$this->cat_name_part.'_cat','');
+			if( !$this->is_shortcode_filter && !wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','hide_price_filter_'.$this->cat_name_part.'_cat',false) && wbc()->common->nonZeroEmpty($order) ) {
 				$this->load_collapsable_desktop_price_filter();
 			}
 			?></div><?php			
@@ -1601,9 +1601,9 @@ class EOWBC_Filter_Widget {
 			}
 		}		
 
-		$order = wbc()->options->get_option($this->filter_prefix.'filter_setting','price_filter_order_'.$this->cat_name_part.'_cat',false);
-		if( !wbc()->options->get_option($this->filter_prefix.'filter_setting','hide_price_filter_'.$this->cat_name_part.'_cat',false) && !wbc()->common->nonZeroEmpty($order) ) {
-			$item = array('order'=>(int)wbc()->options->get_option($this->filter_prefix.'filter_setting','price_filter_order_'.$this->cat_name_part.'_cat',false), 'type'=>'price_filter');
+		$order = wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','price_filter_order_'.$this->cat_name_part.'_cat',false);
+		if( !wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','hide_price_filter_'.$this->cat_name_part.'_cat',false) && !wbc()->common->nonZeroEmpty($order) ) {
+			$item = array('order'=>(int)wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','price_filter_order_'.$this->cat_name_part.'_cat',false), 'type'=>'price_filter');
 			$non_adv_ordered_filter[$item['order']]=$item;
 		}
 

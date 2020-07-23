@@ -233,7 +233,7 @@ jQuery(document).ready(function($){
         let id = $(this).data('wbc-editid');
         /*console.log($(this).find(':checkbox').val());*/
         
-        if( typeof(clean_tab_key) == undefined || clean_tab_key == '' ) {
+        if( typeof(clean_tab_key) == undefined || typeof(clean_tab_key) == 'undefined' || clean_tab_key == '' ) {
             clean_tab_key = saved_tab_key;
         }
 

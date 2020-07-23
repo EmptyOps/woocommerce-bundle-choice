@@ -12,20 +12,32 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Product bundling as ring builder for jewelry, pair maker for clothing and guidance tool for home decor, cosmetics etc.
 
 == Description ==
-WooCommerce Product Bundle Choice – also known as WBC -- helps you to create exciting functionalities and experience on your website with the help of any one of the following modules:
+Woo Choice Plugin helps you to create exciting functionalities and experience on your website. Add features to your site that can attract users and drive sales. Try something more than just conventional product bundling.
 
-1. Ring Builder
-2. Pair Maker
-3. Jewelry Customization
-4. Bulk update Price (Any type of Inventory)
+In this plugin we provide the following features, at the time of installation you can select the features you want and the plugin will enable only that feature: 
 
-We also have `Rapnet Extension`, we also support other `Diamond APIs` please read more about it below in the Extensions section. This is a extension which means this one is not free.
+1. Ring Builder (for WooCommerce Jewellery sites)
+1. Pair Maker (for Clothing sites)
+1. Bonus Features 
+1.1 Options UI for Item Page(Swatches)
+1.1 Specifications View for Item Page
+1.1 Shortcode Filters for Home
+1.1 Filters for Shop/Category Page (e.g. Independent Diamond Page)
+1.1 Price Control(Beta)
 
-It does not matter to which category your website belongs to if you are selling anything that you think can be sold in a pair/bundle then this plugin is absolutely for you. Our philosophy is to provide technology that enables users to make bundles of their choice that is why the name product bundle (of) choice and this becomes truly exciting for users when they have preset recommendation set by website admins.
+(Look at the demo section below for demos on features listed above)
 
-We provide both the features in a single plugin, ring builder feature will be useful for you if you have a jewelry/diamond website. It is also useful to create efficient diamond [filters](https://www.emptyops.com/demo/jewelry-demo/design-your-own-ring/) for real diamonds as well as lab grown or CVD diamonds and pair maker feature will be useful for you if you have anything that you think can be sold in a pair like fashion, apparel, household items – anything etc.
+== For Jewellery/Diamond Websites ==
+Diamond API integration extension helps you to integrate Rapnet API into your WordPress/WooCommerce site. We support many other popular diamond APIs in this same extension, click here for more details or read more about it below in the extensions section. 
+Browse the complete list of features here for the jewellery/diamond category. 
 
-In short, it supports every kind of inventory where it is possible to create bundles based on users choice/need.
+== For any Inventory ==
+Diamond API integration extension helps you to integrate Rapnet API into your WordPress/WooCommerce site. We support many other popular diamond APIs in this same extension, click here for more details or read more about it below in the extensions section. 
+Browse the complete list of features here for the jewellery/diamond category. 
+
+== For Jewellery/Diamond Websites ==
+Diamond API integration extension helps you to integrate Rapnet API into your WordPress/WooCommerce site. We support many other popular diamond APIs in this same extension, click here for more details or read more about it below in the extensions section. 
+Browse the complete list of features here for the jewellery/diamond category. 
 
 == UNDERSTANDING FEATURES ==
 

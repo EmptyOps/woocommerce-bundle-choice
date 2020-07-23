@@ -35,10 +35,12 @@ if ( ! class_exists( 'Shortcode_Filters' ) ) {
 			}
 			
 			$form_definition['filter_setting']['label'] = 'Configuration & Shortcode';
-			$form_definition['d_fconfig']['label'] = 'Filter Configuration';
 
 			$form_definition['altr_filt_widgts']['form']['first_category_altr_filt_widgts']['label'] = 'Widgets';
 			unset($form_definition['altr_filt_widgts']['form']['second_category_altr_filt_widgts']);
+
+			$form_definition['d_fconfig']['label'] = 'Filter Configuration';
+			$form_definition['d_fconfig']['form']['d_fconfig_save_sec_title']['label'] = 'Add Filter Field';
 
 			$sh_filter_setting = array(
 

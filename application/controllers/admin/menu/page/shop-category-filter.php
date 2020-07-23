@@ -34,14 +34,15 @@ if ( ! class_exists( 'Shop_Category_Filter' ) ) {
 			if(isset($form_definition['altr_filt_widgts']['form']['builder_altr_filt_widgts'])){
 				unset($form_definition['altr_filt_widgts']['form']['builder_altr_filt_widgts']);
 			}
-			
-			$form_definition['d_fconfig']['label'] = 'Filter Configuration';
-
-			$form_definition['altr_filt_widgts']['form']['first_category_altr_filt_widgts']['label'] = 'Widgets';
-			unset($form_definition['altr_filt_widgts']['form']['second_category_altr_filt_widgts']);
 
 			$form_definition["filter_setting"]["form"]["price_filter_first_cat"]["label"] = "Price Filter";
 			$form_definition["filter_setting"]["form"]["hide_price_filter_first_cat"]["options"]["1"] = "Hide Price Filter?";
+
+			$form_definition['altr_filt_widgts']['form']['first_category_altr_filt_widgts']['label'] = 'Widgets';
+			unset($form_definition['altr_filt_widgts']['form']['second_category_altr_filt_widgts']);
+			
+			$form_definition['d_fconfig']['label'] = 'Filter Configuration';
+			$form_definition['d_fconfig']['form']['d_fconfig_save_sec_title']['label'] = 'Add Filter Field';
 
 			// add new fields 
 			$sh_filter_setting = array(
