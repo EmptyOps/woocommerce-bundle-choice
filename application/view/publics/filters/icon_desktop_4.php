@@ -7,11 +7,11 @@
 ?>
 <div class="<?php echo $width_class; ?>">
 	<div style="display: inline-block;"class="ui three wide field">
-		<spna class="ui header"><?php echo($title); ?></spna>
-		<span><?php if($help): ?>
+		<spna class="ui header"><?php echo($title); ?><span><?php if($help): ?>
 		&nbsp; <span class="ui grey text" style="cursor: pointer;">&nbsp;<i class="question circle outline icon" data-help="<?php _e($help); ?>"></i></span>
 		<?php endif; ?>
-		</span>
+		</span></spna>
+		
 	</div>	
 
 	<div style="display: inline-block;" class="field twelve ui wide" data-reset="reset_icon(new Event('click'),'<?php echo $term->slug; ?>')">
@@ -24,7 +24,7 @@
 					data-filter="<?php echo $term->slug; ?>" style="border-bottom: 2px solid transparent;padding-top: 0rem;padding-bottom: 0rem;"
 					data-type="<?php echo $type; ?>">
 					<div>
-						<img src='<?php echo $filter_icon['icon']; ?>' class="ui mini image" style="width:30px !important"/>
+						<img src='<?php echo $filter_icon['icon']; ?>' class="ui mini image" style="width:30px !important" data-imgsrc="<?php echo $filter_icon['icon']; ?>" data-toggleimgsrc="<?php echo $filter_icon['select_icon']; ?>"/>
 					</div>
 					<?php if($input=='icon_text'): ?>
 						<div style="visibility: hidden;"><?php echo($filter_icon['name']); ?></div>

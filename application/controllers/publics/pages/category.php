@@ -172,7 +172,7 @@ class Category {
             });
 
             add_action('wp_footer',function(){
-                wbc()->load->template('publics/category', array()); 
+                wbc()->load->template('publics/category', array('category_object'=>$this)); 
             });
 
         } else {

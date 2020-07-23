@@ -213,7 +213,7 @@ class Product {
         });
           
         //Adding own ADD_TO_CART_BUTTON
-        add_action('wp_footer',function(){   
+        add_action('wp_footer',function(){               
             echo "<style>.double-gutter .tmb{ width: 50%;display: inline-flex; }</style>";         
             $category = $this->eo_wbc_get_category();
             $btn_text = '';
@@ -230,19 +230,33 @@ class Product {
             if(empty($btn_text)){
                 $btn_text = 'Continue';
             }
-        ?>
-        <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
-        <script type="text/javascript">
-            jQuery(".single_add_to_cart_button.button.alt").ready(function(){
-                jQuery('form.cart').prepend("<input type='hidden' name='eo_wbc_target' value='<?php echo $this->eo_wbc_get_category(); ?>'/><input type='hidden' name='eo_wbc_product_id' value='<?php global $post; echo $post->ID; ?>'/>");
-                jQuery(".single_add_to_cart_button.button.alt:not(.disabled)").replaceWith(
-                     "<button href='#' id='eo_wbc_add_to_cart' class='single_add_to_cart_button button alt'>"
-                     +"<?php echo $btn_text; ?>"
-                     +"</button>"
-                    );
-                });
-        </script>
-       <?php    
+            ?>
+            <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
+            <script type="text/javascript">
+                jQuery(".single_add_to_cart_button.button.alt").ready(function(){
+                    jQuery('form.cart').prepend("<input type='hidden' name='eo_wbc_target' value='<?php echo $this->eo_wbc_get_category(); ?>'/><input type='hidden' name='eo_wbc_product_id' value='<?php global $post; echo $post->ID; ?>'/>");
+                    jQuery(".single_add_to_cart_button.button.alt:not(.disabled)").replaceWith(
+                         "<button href='#' id='eo_wbc_add_to_cart' class='single_add_to_cart_button button alt'>"
+                         +"<?php echo $btn_text; ?>"
+                         +"</button>"
+                        );
+                    });
+            </script>
+            
+            <?php 
+            
+            if(
+                (wbc()->options->get_option('appearance_product_page','product_page_hide_first_variation_form',false) and $category == wbc()->options->get_option('configuration','first_slug')) or wbc()->options->get_option('appearance_product_page','product_page_hide_second_variation_form',false) and $category == wbc()->options->get_option('configuration','second_slug')
+            ): ?>
+            <style>
+                .variations_form table.variations{
+                    display:none !important;
+                }
+            </style>
+            <?php endif ?>
+
+            
+           <?php    
        });
     }
     

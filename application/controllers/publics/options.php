@@ -306,7 +306,10 @@ class Options {
 	        	</style>
 	        	<script>
 	        		jQuery(document).ready(function($){
-	        			$('table.variations').addClass('ui raised segment');
+	        			if($('table.variations tbody>tr').length>0){
+	        				$('table.variations').addClass('ui raised segment');	
+	        			}
+	        			
 	        			$('#wbc_variation_toggle').on('click',function(){
 	        				if($(this).find('.icon').hasClass('rotate-up')) {
 	        					$(this).find('.icon').removeClass('rotate-up');

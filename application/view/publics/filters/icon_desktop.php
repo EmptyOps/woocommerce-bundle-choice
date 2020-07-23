@@ -21,7 +21,7 @@
 					data-filter="<?php echo $term->slug; ?>" style="border-bottom: 2px solid transparent;<?php echo $icon_css; ?>"
 					data-type="<?php echo $type; ?>">
 					<div>
-						<img src='<?php echo $filter_icon['icon']; ?>'/>
+						<img src='<?php echo $filter_icon['icon']; ?>' data-imgsrc="<?php echo $filter_icon['icon']; ?>" data-toggleimgsrc="<?php echo $filter_icon['select_icon']; ?>"/>
 					</div>
 					<?php if($input=='icon_text'): ?>
 						<div><?php echo($filter_icon['name']); ?></div>
