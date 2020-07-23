@@ -26,7 +26,11 @@ class Admin {
 
 	public static function process(){
 
-		do_action( 'wbc_before_admin_process_request' );		
+		do_action( 'wbc_before_admin_process_request' );
+
+		//Hook to update product prices as per the price control feature on the product update feature.
+		wbc()->load->model('admin/eowbc_price_control_save_update_prices');
+		add_action( 'save_post',array(\eo\wbc\model\admin\Eowbc_Price_Control_Save_Update_Prices::instance(),'update_prices'),10,3); 		
 		
 		
 		if(!empty(wbc()->sanitize->get('page')) and wbc()->sanitize->get('page')=='eowbc' and ( (!empty(wbc()->sanitize->get('eo_wbc_view_auto_jewel')) and wbc()->sanitize->get('eo_wbc_view_auto_jewel') == 1) or (!empty(wbc()->sanitize->get('eo_wbc_view_auto_textile')) and wbc()->sanitize->get('eo_wbc_view_auto_textile') == 1) ) ){        	
@@ -40,7 +44,7 @@ class Admin {
         	}
         } else {
 
-        	        	//	show/render menu and pages
+        	//	show/render menu and pages
 			self::instance()->menu();
 
 			if(!empty(wbc()->sanitize->get('page')) and wbc()->sanitize->get('page')=='eowbc' and !empty(wbc()->sanitize->get('wbc_setup')) ) {

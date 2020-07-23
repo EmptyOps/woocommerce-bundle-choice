@@ -142,14 +142,27 @@ class EOWBC_Filter_Widget {
 		wp_enqueue_script('jquery');	
 		wp_dequeue_script('jquery-ui-core');
 		wp_deregister_script('jquery-ui-core');
-
+		
 		add_action( 'wp_footer',function(){
 
 			$fg_color=wbc()->session->get('EO_WBC_BG_COLOR','#357DFD');
 
 			$active_color=wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active',$fg_color); //get_option('eo_wbc_active_breadcrumb_color',$fg_color);
 			//wp-head here....
-			echo "<style>	
+			echo "<style>
+					.ui.images {
+						font-size: 1em !important; 
+					}					
+					.products{
+						visibility: hidden;
+					}
+					.product-listing{
+						visibility: hidden;
+					}
+					.row-inner>.col-lg-9:eq(0){
+						visibility: hidden;
+					}
+
 					.term-description{
 						display:none;
 					}	
@@ -602,6 +615,7 @@ class EOWBC_Filter_Widget {
 		    	return false;
 		    }
 		}		
+		$seprator = wbc()->options->get_option('filters_filter_setting','filter_setting_numeric_slider_seperator',$seprator);
 		return array('min_value'=>$min_value,'max_value'=>$max_value,'title'=>$field_title,'slug'=>$field_slug,'seprator'=>$seprator);
 	}
 	

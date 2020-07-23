@@ -29,7 +29,7 @@ function eo_wbc_filter_render_html(data) {
 	}
 	else {
 		jQuery(".products,.product-listing,.row-inner>.col-lg-9:eq(0)").html('<p class="woocommerce-info" style="width: 100%;">No products were found matching your selection.</p>');	
-	}
+	}	
 	//Replacing Pagination details.....
 	if(jQuery('.woocommerce-pagination,.pagination',jQuery(data)).html()!==undefined) {
 		
@@ -52,6 +52,7 @@ function eo_wbc_filter_render_html(data) {
 		jQuery(".double-gutter .tmb").css('width','50%');
 		jQuery(".double-gutter .tmb").css('display','inline-flex');
 	}
+	jQuery(".products,.product-listing,.row-inner>.col-lg-9:eq(0)").css('visibility','visible');
 }
 
 if(eo_wbc_object.disp_regular){

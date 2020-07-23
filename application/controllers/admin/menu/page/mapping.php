@@ -60,8 +60,8 @@ if ( ! class_exists( 'Mapping' ) ) {
 			
 			wbc()->load->model('admin/form-builder');
 
-			$dropdown_opts_first_cat = \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_attributes( \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_prime_category(wbc()->options->get_option('configuration','first_slug'),' -- ') );
-			$dropdown_opts_second_cat = \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_attributes( \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_prime_category(wbc()->options->get_option('configuration','second_slug'),' -- ') );
+			$dropdown_opts_first_cat = apply_filters('eowbc_admin_form_mapping_first_cat',\eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_attributes( \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_prime_category(wbc()->options->get_option('configuration','first_slug'),' -- ') ));
+			$dropdown_opts_second_cat = apply_filters('eowbc_admin_form_mapping_second_cat',\eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_attributes( \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_prime_category(wbc()->options->get_option('configuration','second_slug'),' -- ') ));
 
 			//map list
 			$table = array();

@@ -23,6 +23,6 @@
 		    </div>
 		  </div>	  
 		</div>				    
-  		<div class="ui range slider text_slider" id="text_slider_price" data-min="<?php echo $min; ?>" data-max="<?php echo $max; ?>" data-slug="price"></div>
+  		<div class="ui range slider text_slider" id="text_slider_price" data-min="<?php echo $min; ?>" data-max="<?php echo $max; ?>" data-slug="price" data-sep="<?php _e(wbc()->options->get_option('filters_filter_setting','filter_setting_numeric_slider_seperator','.')); ?>"></div>
   	</div>		
 	

@@ -294,6 +294,15 @@ if ( ! class_exists( 'Filters' ) ) {
 								'class'=>array(),
 								'size_class'=>array('eight','wide'),
 								'inline'=>true,
+							),
+							'filter_setting_numeric_slider_seperator'=>array(
+								'label'=>'Alternate ticked slider UI',
+								'type'=>'text',
+								'sanitize'=>'sanitize_text_field',
+								'value'=>'.',
+								'class'=>array(),
+								'size_class'=>array('eight','wide'),
+								'inline'=>true,
 							),						
 							'filter_setting_submit_btn'=>array(
 								'label'=>eowbc_lang('Save'),
