@@ -5,7 +5,7 @@ dist: trusty
 
 addons:
   chrome: stable
-  firefox: stable
+  firefox: latest
 
 notifications:
   email:
