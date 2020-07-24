@@ -31,7 +31,7 @@ class Public_Handler {
 		/*wbc()->options->update_option('configuration','config_category',1);
 		wbc()->options->update_option('configuration','config_map',1);*/
 		add_action('template_redirect',function(){
-			if(is_product_category() and empty(wbc()->sanitize->get('EO_WBC'))) {
+			if( ( is_shop() || is_product_category()) and empty(wbc()->sanitize->get('EO_WBC')) ) {
 
 			    \eo\wbc\controllers\publics\pages\Shop_Category_Filter::instance()->init();
 			}
