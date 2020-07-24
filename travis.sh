@@ -276,8 +276,8 @@ edit_codeception_yml_file() {
 	  sed $ioption "s|http://127.0.0.1:8888|http://127.0.0.1:8888/tmp/wordpress/src|" "$TRAVIS_BUILD_DIR"/codeception.dist.yml
 	else 
 	  echo "setting url for other environment"
-	  sed $ioption "s|http://127.0.0.1:8888|http://127.0.0.1:8888/tmp/WBC_TEST_ENV_with_sample_data/wordpress-latest-1|" "$TRAVIS_BUILD_DIR"/tests/acceptance.suite.yml
-	  sed $ioption "s|http://127.0.0.1:8888|http://127.0.0.1:8888/tmp/WBC_TEST_ENV_with_sample_data/wordpress-latest-1|" "$TRAVIS_BUILD_DIR"/codeception.dist.yml
+	  sed $ioption "s|http://127.0.0.1:8888|http://127.0.0.1:4444/tmp/WBC_TEST_ENV_with_sample_data/wordpress-latest-1|" "$TRAVIS_BUILD_DIR"/tests/acceptance.suite.yml
+	  sed $ioption "s|http://127.0.0.1:8888|http://127.0.0.1:4444/tmp/WBC_TEST_ENV_with_sample_data/wordpress-latest-1|" "$TRAVIS_BUILD_DIR"/codeception.dist.yml
 
 	  sed $ioption "s|chrome|firefox|" "$TRAVIS_BUILD_DIR"/tests/acceptance.suite.yml
 	  sed $ioption "s|chrome|firefox|" "$TRAVIS_BUILD_DIR"/codeception.dist.yml
