@@ -4,8 +4,8 @@ dist: trusty
 # language: php
 
 addons:
-  # chrome: stable
-  firefox: latest
+  chrome: stable
+  firefox: "47.0"
 
 notifications:
   email:
