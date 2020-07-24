@@ -262,6 +262,22 @@ test_environment() {
 #edit codeception yml file as per test environment 
 edit_codeception_yml_file() {
 
+	# just rename the files as per environment
+	if [[ $(test_environment) == "WBC_TEST_ENV_default" ]]; then
+	  echo "setting yml file for default environment"
+	  # nothing to do default is set by default 
+	else 
+	  echo "setting yml file for other environment"
+	  mv "$TRAVIS_BUILD_DIR"/tests/acceptance.suite.yml "$TRAVIS_BUILD_DIR"/tests/acceptance.suite.default.env.yml
+	  mv "$TRAVIS_BUILD_DIR"/codeception.dist.yml "$TRAVIS_BUILD_DIR"/codeception.dist.default.env.yml
+
+	  mv "$TRAVIS_BUILD_DIR"/tests/acceptance.suite.php.7.2.yml "$TRAVIS_BUILD_DIR"/tests/acceptance.suite.yml
+	  mv "$TRAVIS_BUILD_DIR"/codeception.dist.php.7.2.yml "$TRAVIS_BUILD_DIR"/codeception.dist.yml
+	fi
+
+	# not used as of now since now the environment file is separately created for each environment
+	return
+
 	# portable in-place argument for both GNU sed and Mac OSX sed
 	if [[ $(uname -s) == 'Darwin' ]]; then
 		local ioption='-i.bak'
