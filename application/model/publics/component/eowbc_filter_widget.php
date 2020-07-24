@@ -453,7 +453,7 @@ class EOWBC_Filter_Widget {
 		global $wp_query;
 		$site_url = '';
 		$product_url = '';
-		if( !$this->is_shortcode_filter ) {
+		if( !$this->is_shortcode_filter && !$this->is_shop_cat_filter ) {
 
 			$current_category = $wp_query->get_queried_object();
 			if(!empty($current_category) and !is_wp_error($current_category)){
