@@ -393,7 +393,7 @@ $form['data'] = array(
 						'inline'=>true,
 					),
 				'tiny_features_specification_view_style'=>array(
-						'label'=>'Widget Template',
+						'label'=>'Alternate Widgets',
 						'type'=>'radio',
 						'value'=>wbc()->options->get_option('tiny_features','specification_view_style','default'),
 						'sanitize'=>'sanitize_text_field',
@@ -591,7 +591,7 @@ $form['data'] = array(
 					'size_class'=>array('transition','hidden','required')
 				),
 				'shop_cat_filter_alternate_view'=>array(
-					'label'=>eowbc_lang('Alternate Mobile View?'),
+					'label'=>eowbc_lang('Alternate Mobile View Widget?'),
 					'type'=>'checkbox',
 					'value'=>array(wbc()->options->get_option('tiny_features','shop_cat_filter_alternate_view')),
 					'sanitize'=>'sanitize_text_field',

@@ -237,7 +237,7 @@ if ( ! class_exists( 'Configuration' ) ) {
 											'type'=>'devider',
 										),	
 									'config_alternate_breadcrumb'=>array(
-										'label'=>'Alternate Breadcrumb',
+										'label'=>'Alternate Breadcrumb Widgets',
 										'type'=>'radio',
 										'value'=>wbc()->options->get_option('configuration','config_alternate_breadcrumb','default'),
 										'validate'=>array('required'=>''),
