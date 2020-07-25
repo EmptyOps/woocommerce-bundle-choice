@@ -147,7 +147,7 @@ class Category {
 
     public function eo_wbc_render()
     {   
-        if( wbc()->options->get_option('configuration','pair_maker_status',FALSE)/*get_option('eo_wbc_pair_maker_status',FALSE)*/ && isset($_GET) && !empty(wbc()->sanitize->get('STEP')) && wbc()->sanitize->get('STEP')==2 && (empty(wbc()->sanitize->get('FIRST')) XOR empty(wbc()->sanitize->get('SECOND'))) ) {
+        if( wbc()->options->get_option('configuration','pair_maker_status-this-is-differnt-thing',FALSE)/*get_option('eo_wbc_pair_maker_status',FALSE)*/ && isset($_GET) && !empty(wbc()->sanitize->get('STEP')) && wbc()->sanitize->get('STEP')==2 && (empty(wbc()->sanitize->get('FIRST')) XOR empty(wbc()->sanitize->get('SECOND'))) ) {
 
             add_action( 'wp_enqueue_scripts',function(){ 
                 // wp_register_style('eo_wbc_ui_css',plugin_dir_url(EO_WBC_PLUGIN_FILE).'asset/css/fomantic/semantic.min.css');
