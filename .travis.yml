@@ -121,7 +121,7 @@ before_script:
     if [[ $(test_environment) == "WBC_TEST_ENV_default" ]]; then
       export WP_CEPT_SERVER='127.0.0.1:8888'
     else
-      export WP_CEPT_SERVER='127.0.0.1:4444'
+      export WP_CEPT_SERVER='127.0.0.1:8888'
     fi
 
   # Start up a web server.

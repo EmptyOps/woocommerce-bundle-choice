@@ -31,7 +31,7 @@ modules:
         - \Helper\Acceptance
     config:
         WPWebDriver:
-            url: 'http://127.0.0.1:4444'
+            url: 'http://127.0.0.1:8888'
             browser: firefox
             adminUsername: admin
             adminPassword: password
