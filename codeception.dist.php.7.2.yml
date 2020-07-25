@@ -22,3 +22,4 @@ modules:
             capabilities:
                 unexpectedAlertBehaviour: 'accept'
                 # firefox_profile: '~/firefox-profiles/codeception-profile.zip.b64'
+                acceptInsecureCerts: true
