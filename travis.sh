@@ -274,7 +274,7 @@ edit_codeception_yml_file() {
 	  mv "$TRAVIS_BUILD_DIR"/tests/acceptance.suite.php.7.2.yml "$TRAVIS_BUILD_DIR"/tests/acceptance.suite.yml
 	  mv "$TRAVIS_BUILD_DIR"/codeception.dist.php.7.2.yml "$TRAVIS_BUILD_DIR"/codeception.dist.yml
 
-	  zip -r "$TRAVIS_BUILD_DIR"/tests/firefox-profiles/taken-from-mac/xdfltxm9.default "$TRAVIS_BUILD_DIR"/tests/firefox-profiles/taken-from-mac/xdfltxm9.default.zip
+	  # zip -r "$TRAVIS_BUILD_DIR"/tests/firefox-profiles/taken-from-mac/xdfltxm9.default "$TRAVIS_BUILD_DIR"/tests/firefox-profiles/taken-from-mac/xdfltxm9.default.zip
 	  base64 "$TRAVIS_BUILD_DIR"/tests/firefox-profiles/taken-from-mac/xdfltxm9.default.zip > "$TRAVIS_BUILD_DIR"/tests/firefox-profiles/taken-from-mac/xdfltxm9.default.zip.b64
 	fi
 
