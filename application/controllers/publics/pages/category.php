@@ -289,7 +289,12 @@ class Category {
     public function eo_wbc_get_category()
     {   
         
-        return wbc()->common->get_category('category',null,array(wbc()->options->get_option('configuration','first_slug'),wbc()->options->get_option('configuration','second_slug')));
+        if( !($this->is_shop_cat_filter && is_shop())/*when the is_shop_cat_filter flag is on and it is shop page then it generates warnings on below statement so excluded that as category is unnecessary by any means in that case.*/ ) {
+            return wbc()->common->get_category('category',null,array(wbc()->options->get_option('configuration','first_slug'),wbc()->options->get_option('configuration','second_slug')));
+        }
+        else {
+            return null;
+        }
         global $wp_query;        
         
         //get list of slug which are ancestors of current page item's category
