@@ -13,7 +13,7 @@ settings:
 modules:
     config:
         WPWebDriver:
-            url: 'http://127.0.0.1:8888'
+            url: 'http://127.0.0.1:8888/tmp/WBC_TEST_ENV_with_sample_data/wordpress-latest-1'
             browser: firefox
             adminUsername: admin
             adminPassword: password
