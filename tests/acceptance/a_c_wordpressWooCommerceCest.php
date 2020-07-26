@@ -23,7 +23,8 @@ class a_c_wordpressWooCommerceCest
 
     	$I->amOnPage('/');
         // echo $I->grabPageSource();
-        $I->see('Just another WordPress site');
+        // $I->see('Just another WordPress site');
+        $I->waitForText('Just another WordPress site');
     }
 
     public function wpAdminLoginWorks(AcceptanceTester $I)
