@@ -41,4 +41,4 @@ modules:
                 unexpectedAlertBehaviour: 'accept'
                 # firefox_profile: '/home/travis/build/EmptyOps/woocommerce-bundle-choice/tests/firefox-profiles/taken-from-mac/xdfltxm9.default.zip.b64'
                 acceptInsecureCerts: true
-                w3c: true
+                w3c: false
