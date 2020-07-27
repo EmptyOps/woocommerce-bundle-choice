@@ -25,7 +25,9 @@ In this plugin we provide the following features, at the time of installation yo
 1.1 Filters for Shop/Category Page (e.g. Independent Diamond Page)
 1.1 Price Control(Beta)
 
-(Look at the demo section below for demos on features listed above)
+(You can read more about each features in the section below named “UNDERSTANDING FEATURES”, as well as look at the demo section below for demos on features listed above)
+
+With this major update many things changed in UI experience and we hope it will help our users, please be noted that we are working on a documentation update that comply with this update and it will be available very soon. Our apologies to keep you waiting for the updated documentation. 
 
 == For Jewellery/Diamond Websites ==
 Diamond API integration extension helps you to integrate Rapnet API into your WordPress/WooCommerce site. We support many other popular diamond APIs in this same extension, [click here for more details](https://sphereplugins.com/product/rapnet-integration-extension/) or read more about it below in the extensions section. 
