@@ -152,7 +152,7 @@ before_script:
     if [[ $(test_environment) == "WBC_TEST_ENV_default" ]]; then
       wget -c -nc --retry-connrefused --tries=0 http://selenium-release.storage.googleapis.com/2.53/selenium-server-standalone-2.53.1.jar -O selenium-server-standalone.jar
     else
-      wget -c -nc --retry-connrefused --tries=0 https://repo1.maven.org/maven2/org/seleniumhq/selenium/selenium-server/3.4.0/selenium-server-3.4.0.jar -O selenium-server-standalone.jar
+      wget -c -nc --retry-connrefused --tries=0 https://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.59.jar -O selenium-server-standalone.jar
     fi
   
 
@@ -177,7 +177,7 @@ before_script:
     if [[ $(test_environment) == "WBC_TEST_ENV_default" ]]; then
       nohup bash -c "java -jar selenium-server-standalone.jar -Dwebdriver.chrome.driver=\"chromedriver\" -Dwebdriver.chrome.whitelistedIps=\"localhost\" &" && sleep 1;    
     else
-      nohup bash -c "java -jar -Dwebdriver.gecko.driver=\"geckodriver\" selenium-server-standalone.jar &" && sleep 1;
+      nohup bash -c "java -jar -Dwebdriver.gecko.driver=\"geckodriver\" -enablePassThrough false selenium-server-standalone.jar &" && sleep 1;
     fi
 
 
