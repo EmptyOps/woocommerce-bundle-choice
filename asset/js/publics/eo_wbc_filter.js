@@ -11,9 +11,14 @@ function eo_wbc_filter_render_html(data) {
 	}
 
 	//Replacing Product listings....
-	if(jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0)',jQuery(data)).html()!==undefined){								
-		jQuery(".products,.product-listing,.row-inner>.col-lg-9:eq(0)").html(jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0)',jQuery(data)).html());
-		
+	if(jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0)',jQuery(data)).html()!==undefined){	
+		if( typeof(is_card_view_rendered) == undefined || typeof(is_card_view_rendered) == 'undefined' || is_card_view_rendered == false ) {
+			jQuery(".products,.product-listing,.row-inner>.col-lg-9:eq(0)").html(jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0)',jQuery(data)).html());
+		}						
+		else {
+			wbc_attach_card_views();
+		}
+
 		var links=jQuery(".products a,.product-listing a");
 		jQuery.each(links,function(index,element) {
 
