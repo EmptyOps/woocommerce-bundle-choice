@@ -25,8 +25,8 @@ box-shadow: none;">
 	    <?php wp_nonce_field('eo_wbc_auto_jewel'); ?>
 	    <input type="hidden" name="step" value="<?php echo $_step+1; ?>">
 	    <div>
-	      <h1><strong>Jewellary Setup</strong></h1>
-	      <p>You are at step <?php echo $_step; ?> of 3 steps.</p>
+	      <h1><strong>Sample Data for <?php echo $feature_title;?></strong></h1>
+	      <p>You are at step <?php echo $_step; ?> of <?php echo $number_of_step; ?> steps.</p>
 	        <table class="form-table">
 	          <tbody>
 	            <tr valign="top">

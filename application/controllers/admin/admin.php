@@ -39,8 +39,10 @@ class Admin {
         		//	perform initial task
 				self::instance()->init();
 
-        		// apply_filters('eo_wbc_admin_sample_data_add_jewelry',array(\eo\wbc\controllers\admin\sample_data\Jewelry::instance(),'init'));	
-        		\eo\wbc\controllers\admin\sample_data\Jewelry::instance()->init();
+        		// // apply_filters('eo_wbc_admin_sample_data_add_jewelry',array(\eo\wbc\controllers\admin\sample_data\Jewelry::instance(),'init'));	
+        		// \eo\wbc\controllers\admin\sample_data\Jewelry::instance()->init();
+        		// TODO here loop through enabled features and then check if its sample data is available and the particular class is available then call it 
+        		\eo\wbc\controllers\admin\sample_data\Ring_Builder::instance()->init();
         	}
         } else {
 
