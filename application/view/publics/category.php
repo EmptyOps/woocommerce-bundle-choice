@@ -70,7 +70,7 @@
                         ?>         
                         <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->                             
                         <div class="cat_products seven wide column">
-                            <?php if( (wbc()->options->get_option('configuration','pair_maker_upper_card',1)/*get_option('eo_wbc_pair_upper_card',1)*/==1 && $category_object->eo_wbc_get_category()==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/) OR wbc()->options->get_option('configuration','pair_maker_upper_card',1)/*get_option('eo_wbc_pair_upper_card',1)*/==2 && $category_object->eo_wbc_get_category()==wbc()->options->get_option('configuration','second_slug')/*get_option('eo_wbc_second_slug')*/): ?>  
+                            <?php if( (wbc()->options->get_option('configuration','pair_maker_upper_card',1)/*get_option('eo_wbc_pair_upper_card',1)*/==1 && $category_object->eo_wbc_get_category()==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/) OR (wbc()->options->get_option('configuration','pair_maker_upper_card',1)/*get_option('eo_wbc_pair_upper_card',1)*/==2 && $category_object->eo_wbc_get_category()==wbc()->options->get_option('configuration','second_slug')/*get_option('eo_wbc_second_slug')*/)): ?>  
                                 <div class="ui special cards centered">
                                     <div class="card">
                                         <div class="blurring dimmable image">
@@ -155,18 +155,36 @@
 </div>
 <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
 <script>
-    jQuery(document).ready(function($){                            
-        jQuery(".products").html(jQuery(".eo_wbc_hidden_data").html());
+
+    // supposed to be used inside wo_wbc_filter.js
+    var is_card_view_rendered = true;
+
+    /**
+     * 
+     */
+    function wbc_attach_card_views() { 
+        jQuery(".products,.product-listing,.row-inner>.col-lg-9:eq(0)").html(jQuery(".eo_wbc_hidden_data").html());
         jQuery('.special.cards .image').dimmer({on:'hover'});
         jQuery('.button[data-link]').on('click',function(e){
             e.preventDefault();
             e.stopPropagation();
             window.location.href=$(this).attr('data-link');
         });
+    }
+
+    jQuery(document).ready(function($){
+        //code moved to a function wbc_attach_card_views above so that it can be called after ajax search
+
+        // 
+        wbc_attach_card_views();
     });
 </script>                    
 <style type="text/css">
     .products{
+        display: block !important;
+    }
+
+    .product-listing{
         display: block !important;
     }                                                
 </style> 

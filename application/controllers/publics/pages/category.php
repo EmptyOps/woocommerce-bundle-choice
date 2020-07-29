@@ -166,7 +166,8 @@ class Category {
 
     public function eo_wbc_render()
     {   
-        if( wbc()->options->get_option('configuration','pair_maker_status',FALSE)/*get_option('eo_wbc_pair_maker_status',FALSE)*/ && isset($_GET) && !empty(wbc()->sanitize->get('STEP')) && wbc()->sanitize->get('STEP')==2 && (empty(wbc()->sanitize->get('FIRST')) XOR empty(wbc()->sanitize->get('SECOND'))) ) {
+        $features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())));
+        if( !empty($features['pair_maker'])/*get_option('eo_wbc_pair_maker_status',FALSE)*/ && isset($_GET) && !empty(wbc()->sanitize->get('STEP')) && wbc()->sanitize->get('STEP')==2 && (empty(wbc()->sanitize->get('FIRST')) XOR empty(wbc()->sanitize->get('SECOND'))) ) {
 
             add_action( 'wp_enqueue_scripts',function(){ 
                 // wp_register_style('eo_wbc_ui_css',plugin_dir_url(EO_WBC_PLUGIN_FILE).'asset/css/fomantic/semantic.min.css');
@@ -308,7 +309,12 @@ class Category {
     public function eo_wbc_get_category()
     {   
         
-        return wbc()->common->get_category('category',null,array(wbc()->options->get_option('configuration','first_slug'),wbc()->options->get_option('configuration','second_slug')));
+        if( !($this->is_shop_cat_filter && is_shop())/*when the is_shop_cat_filter flag is on and it is shop page then it generates warnings on below statement so excluded that as category is unnecessary by any means in that case.*/ ) {
+            return wbc()->common->get_category('category',null,array(wbc()->options->get_option('configuration','first_slug'),wbc()->options->get_option('configuration','second_slug')));
+        }
+        else {
+            return null;
+        }
         global $wp_query;        
         
         //get list of slug which are ancestors of current page item's category

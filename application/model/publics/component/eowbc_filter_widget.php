@@ -458,7 +458,7 @@ class EOWBC_Filter_Widget {
 		global $wp_query;
 		$site_url = '';
 		$product_url = '';
-		if( !$this->is_shortcode_filter ) {
+		if( !$this->is_shortcode_filter && !$this->is_shop_cat_filter ) {
 
 			$current_category = $wp_query->get_queried_object();
 			if(!empty($current_category) and !is_wp_error($current_category)){
@@ -1771,7 +1771,7 @@ class EOWBC_Filter_Widget {
 		$this->is_shop_cat_filter = $is_shop_cat_filter;
 		$this->is_shortcode_filter = $is_shortcode_filter;
 		$this->filter_prefix = $filter_prefix;
-		$this->_category= !$this->is_shortcode_filter ? $this->eo_wbc_get_category() : '';
+		$this->_category= !$this->is_shortcode_filter && !$this->is_shop_cat_filter ? $this->eo_wbc_get_category() : '';
 		
 		if(!empty($this->_category) or $this->is_shop_cat_filter or $this->is_shortcode_filter){
 		

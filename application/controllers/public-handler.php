@@ -31,8 +31,10 @@ class Public_Handler {
 		/*wbc()->options->update_option('configuration','config_category',1);
 		wbc()->options->update_option('configuration','config_map',1);*/
 		add_action('template_redirect',function(){
+
 			$bonus_features = array_filter(unserialize(wbc()->options->get_option('setting_status_setting_status_setting','bonus_features',serialize(array()))));
-			if(!empty($bonus_features['filters_shop_cat']) and is_product_category() and empty(wbc()->sanitize->get('EO_WBC'))) {
+			if(!empty($bonus_features['filters_shop_cat']) and ( is_shop() || is_product_category()) and empty(wbc()->sanitize->get('EO_WBC'))) {
+
 
 			    \eo\wbc\controllers\publics\pages\Shop_Category_Filter::instance()->init();
 			}

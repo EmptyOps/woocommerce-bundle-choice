@@ -31,12 +31,14 @@ modules:
         - \Helper\Acceptance
     config:
         WPWebDriver:
-            url: 'http://127.0.0.1:8888/tmp/wordpress/src'
-            browser: chrome
+            url: 'http://127.0.0.1:8888/tmp/WBC_TEST_ENV_with_sample_data/wordpress-latest-1'
+            browser: firefox
             adminUsername: admin
             adminPassword: password
             adminUrl: /wp-admin
+            window_size: 1024x768
             capabilities:
-                "goog:chromeOptions":
-                    args: ["--disable-gpu", "--window-size=1024,768", "--enable-javascript"]
-    # step_decorators: ~    
+                unexpectedAlertBehaviour: 'accept'
+                # firefox_profile: '/home/travis/build/EmptyOps/woocommerce-bundle-choice/tests/firefox-profiles/taken-from-mac/xdfltxm9.default.zip.b64'
+                acceptInsecureCerts: true
+                w3c: false

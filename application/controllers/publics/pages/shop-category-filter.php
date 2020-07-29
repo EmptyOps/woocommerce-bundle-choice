@@ -21,11 +21,28 @@ class Shop_Category_Filter extends Category {
 
     public function init() {
 
+        $shop_page_status = wbc()->options->get_option('filters_sc_filter_setting','sc_shop_cat_filter_location_shop');
+
         $category_id = wbc()->options->get_option('filters_sc_filter_setting','shop_cat_filter_category');
         $category_page_status = wbc()->options->get_option('filters_sc_filter_setting','sc_shop_cat_filter_location_cat');
+<<<<<<< HEAD
 
        
         if(empty($category_page_status) or $this->eo_wbc_get_category() !== get_term_by('id',$category_id,'product_cat')->slug) return false;
+=======
+        
+        $is_shop = is_shop();
+        $is_product_category = is_product_category();
+        if( 
+            ( $is_shop && empty($shop_page_status) )
+            || 
+            ( $is_product_category && ( empty($category_page_status) or $this->eo_wbc_get_category() !== get_term_by('id',$category_id,'product_cat')->slug ) )
+            ||
+            ( !$is_shop && !$is_product_category )
+        ) {
+            return false;
+        }
+>>>>>>> 9a2e8f5987db2ad764a95c66b3a3fa022980b1d3
 
         // parent::instance()->is_shop_cat_filter = true;
         // parent::instance()->filter_prefix ='sc_';

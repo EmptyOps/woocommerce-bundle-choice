@@ -290,11 +290,11 @@ if ( ! class_exists( 'Filters' ) ) {
 								'inline'=>true,
 							),								
 							'filter_setting_alternate_slider_ui'=>array(
-								'label'=>'Alternate ticked slider UI',
+								'label'=>'Alternate Ticked Slider Widget',
 								'type'=>'checkbox',
 								'sanitize'=>'sanitize_text_field',
 								'value'=>array(wbc()->options->get_option('filters_filter_setting','filter_setting_alternate_slider_ui')),
-								'options'=>array('filter_setting_alternate_slider_ui'=>' Check here to enable alternate UI for filter sliders.'),
+								'options'=>array('filter_setting_alternate_slider_ui'=>' Check here to enable alternate UI view for filter sliders.'),
 								'class'=>array(),
 								'size_class'=>array('eight','wide'),
 								'inline'=>true,
@@ -427,7 +427,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							),
 						),
 						'filter_setting_alternate_mobile'=>array(
-								'label'=>'Alternate mobile filters view',
+								'label'=>'Alternate Mobile Filter Widget',
 								'type'=>'checkbox',
 								'sanitize'=>'sanitize_text_field',
 								'value'=>array(wbc()->options->get_option('filters_filter_setting','filter_setting_alternate_mobile')),

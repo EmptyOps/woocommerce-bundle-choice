@@ -25,19 +25,20 @@ In this plugin we provide the following features, at the time of installation yo
 1.1 Filters for Shop/Category Page (e.g. Independent Diamond Page)
 1.1 Price Control(Beta)
 
-(Look at the demo section below for demos on features listed above)
+(You can read more about each features in the section below named “UNDERSTANDING FEATURES”, as well as look at the demo section below for demos on features listed above)
+
+With this major update many things changed in UI experience and we hope it will help our users, please be noted that we are working on a documentation update that comply with this update and it will be available very soon. Our apologies to keep you waiting for the updated documentation. 
 
 == For Jewellery/Diamond Websites ==
-Diamond API integration extension helps you to integrate Rapnet API into your WordPress/WooCommerce site. We support many other popular diamond APIs in this same extension, click here for more details or read more about it below in the extensions section. 
-Browse the complete list of features here for the jewellery/diamond category. 
+Diamond API integration extension helps you to integrate Rapnet API into your WordPress/WooCommerce site. We support many other popular diamond APIs in this same extension, [click here for more details](https://sphereplugins.com/product/rapnet-integration-extension/) or read more about it below in the extensions section. 
+Browse the complete list of features [here](https://woochoiceplugin.com/jewelry-diamonds-website-package/) for the jewellery/diamond category. 
 
 == For any Inventory ==
-Diamond API integration extension helps you to integrate Rapnet API into your WordPress/WooCommerce site. We support many other popular diamond APIs in this same extension, click here for more details or read more about it below in the extensions section. 
-Browse the complete list of features here for the jewellery/diamond category. 
+It does not matter to which category your website belongs to if you are selling anything that you think can be sold in a pair/bundle then this plugin is absolutely for you. Our philosophy is to provide technology that enables users to make bundles of their choice that is why the name product bundle (of) choice and this becomes truly exciting for users when they have a preset recommendation set by website admins.
 
-== For Jewellery/Diamond Websites ==
-Diamond API integration extension helps you to integrate Rapnet API into your WordPress/WooCommerce site. We support many other popular diamond APIs in this same extension, click here for more details or read more about it below in the extensions section. 
-Browse the complete list of features here for the jewellery/diamond category. 
+We provide both the features in a single plugin, the ring builder feature will be useful for you if you have a WordPress jewelry/diamond website. It is also useful to create efficient diamond [filters](https://www.emptyops.com/demo/jewelry-demo/design-your-own-ring/) for real diamonds as well as lab-grown or CVD diamonds and the pair maker feature will be useful for you if you have anything that you think can be sold in a pair like fashion, apparel, household items – anything, etc.
+
+In short, Woo Choice Plugin – also known as WBC — supports every kind of inventory where it is possible to create pair or bundles based on users’ choices/needs and the use cases are immense from fashion to help the user assembling fashion accessories to assembling gift boxes, helping the user choose right pair of home decor items to cosmetics, automobile accessories to pharmaceuticals and the list may go on. 
 
 == UNDERSTANDING FEATURES ==
 
