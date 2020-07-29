@@ -23,7 +23,8 @@ class Shop_Category_Filter extends Category {
 
         $category_id = wbc()->options->get_option('filters_sc_filter_setting','shop_cat_filter_category');
         $category_page_status = wbc()->options->get_option('filters_sc_filter_setting','sc_shop_cat_filter_location_cat');
-        
+
+       
         if(empty($category_page_status) or $this->eo_wbc_get_category() !== get_term_by('id',$category_id,'product_cat')->slug) return false;
 
         // parent::instance()->is_shop_cat_filter = true;

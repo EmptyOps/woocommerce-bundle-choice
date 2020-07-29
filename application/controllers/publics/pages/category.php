@@ -20,7 +20,7 @@ class Category {
     }
 
     public function init() {        
-
+       
         //If add to cart triggred
         // Detection : only one category item get length > 0 
         //   i.e. using XOR check if only one of two have been set.
@@ -35,6 +35,25 @@ class Category {
               OR
             $this->eo_wbc_get_category()== wbc()->options->get_option('configuration','second_slug'))) and !empty(wbc()->sanitize->get('EO_WBC')) ) or $this->is_shop_cat_filter===true or $this->is_shortcode_filter //get_option('eo_wbc_second_slug')
         ){
+            
+            /*Hide sidebar and make content area full width.*/
+            add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
+                return array( false );
+            });
+            ob_start();        
+            ?>
+            <style type="text/css">
+                .woocommerce .content-area ,#content,#primary,#main,.content,.primary,.main{
+                      width: 100% !important;
+                 }
+                 .woocommerce .widget-area {
+                      display: none !important;
+                 }
+            </style>
+            <?php
+            echo ob_get_clean();
+            /*End --Hide sidebar and make content area full width.*/
+
             //if( get_option('eo_wbc_filter_enable')=='1' ){
             /*wbc()->options->update_option('filters_filter_setting','config_filter_status','config_filter_status');*/
 

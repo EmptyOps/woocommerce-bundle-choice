@@ -26,6 +26,16 @@ class Service {
 	}
 
     public function discount_service() {
+        $features = array_filter(unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array()))));
+        
+        if( empty(array_intersect(array_values($features),array_keys(wbc()->config->get_builders())))
+                or          
+            wbc()->options->get_option('configuration','config_category',0) != 1
+                or
+            wbc()->options->get_option('configuration','config_map',0) != 1
+        ){
+            return false;
+        }
         /**
         *   --------------------------------------------------------------
         *   adding action hook to fees calculation so that we can apply 
@@ -110,16 +120,22 @@ class Service {
 		wbc()->load->model('publics/component/eowbc_filter_widget');
 		$widget = \eo\wbc\model\publics\component\EOWBC_Filter_Widget::instance();
 		
+        $features = array_filter(unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array()))));
+
+        $bonus_features = array_filter(unserialize(wbc()->options->get_option('setting_status_setting_status_setting','bonus_features',serialize(array()))));
+
         // The two buttons shortcode.
         $configuration_buttons_page = wbc()->options->get_option('configuration','buttons_page',false);
-		if( $configuration_buttons_page===0 or $configuration_buttons_page==='0' or $configuration_buttons_page==2 or $configuration_buttons_page==3 ) {			
+
+		if( !empty(array_intersect(array_values($features),array_keys(wbc()->config->get_builders()))) and ($configuration_buttons_page===0 or $configuration_buttons_page==='0' or $configuration_buttons_page==2 or $configuration_buttons_page==3) ) {			
             add_shortcode('woo-bundle-choice-btn',function(){
             	echo wbc()->load->template('publics/buttons');
             });                              
         }
 
         // The specification view shortcode
-        if(wbc()->options->get_option('tiny_features','specification_view_status',false) and wbc()->options->get_option('tiny_features','specification_view_shortcode_status',false)){
+        if(
+            /*wbc()->options->get_option('tiny_features','specification_view_status',false)*/!empty($bonus_features['spec_view_item_page']) and wbc()->options->get_option('tiny_features','specification_view_shortcode_status',false)){
 
         	add_shortcode('woo-bundle-choice-specification-view',function(){
         		ob_start();
@@ -127,12 +143,13 @@ class Service {
             	echo ob_get_clean();
             });	
         }
-        $_category=array();
-        $_attribute=array();
 
-        add_shortcode('wbc-shortcode-filters',function(){
-            \eo\wbc\controllers\publics\pages\Shortcode_Filters::instance()->init();
-        },10);
+        if(!empty($bonus_features['filters_shortcode'])){
+            add_shortcode('wbc-shortcode-filters',function(){
+                \eo\wbc\controllers\publics\pages\Shortcode_Filters::instance()->init();
+            },10);
+        }
+        
 
 	}
 

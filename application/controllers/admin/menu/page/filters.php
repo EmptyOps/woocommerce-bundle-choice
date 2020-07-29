@@ -59,6 +59,10 @@ if ( ! class_exists( 'Filters' ) ) {
 			wbc()->load->model('admin/form-builder');
 			wbc()->load->model('category-attribute');
 			$inventory_type = wbc()->options->get_option('setting_status_setting_status_setting','inventory_type','');			
+			
+			$features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())));
+
+			$is_ring_builder = (!empty($features['ring_builder']));
 			//Diamond Page Filter Configuration's list
 			$table = array();
 			$table['id']='eowbc_price_control_methods_list';
@@ -296,7 +300,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'inline'=>true,
 							),
 							'filter_setting_numeric_slider_seperator'=>array(
-								'label'=>'Alternate ticked slider UI',
+								'label'=>'Numeric Filter Separator',
 								'type'=>'text',
 								'sanitize'=>'sanitize_text_field',
 								'value'=>'.',
@@ -444,7 +448,7 @@ if ( ! class_exists( 'Filters' ) ) {
 				),							
 				'd_fconfig'=>array(
 
-						'label'=>($inventory_type==='jewelry'?"Diamond":"First")." Page Filter Configuration",
+						'label'=>(($inventory_type==='jewelry' and $is_ring_builder)?"Diamond":"First")." Page Filter Configuration",
 						'form'=>array( $table["id"].'_bulk'=>array(
 								// 'label'=>'Bulk Actions',
 								'type'=>'select',
@@ -469,7 +473,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'type'=>'table' )
 							), 
 							'd_fconfig_save_sec_title'=>array(
-								'label'=>"Add Diamond Shape's filter",
+								'label'=>"Add Filter Field",
 								'type'=>'label',
 								'size_class'=>array('eight','wide')
 							),
@@ -725,7 +729,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							), 
 
 							's_fconfig_save_sec_title'=>array(
-								'label'=>"Add Setting Shape's filter",
+								'label'=>"Add Filter Field",
 								'type'=>'label',
 								'size_class'=>array('eight','wide')
 							),

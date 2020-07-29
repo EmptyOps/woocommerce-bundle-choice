@@ -79,8 +79,8 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 						),
 						array(
 							'parent_slug'=>'eowbc',
-							'title'=>eowbc_lang('Tiny Features').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Tiny Features'),
-							'menu_title'=>eowbc_lang('Tiny Features'),
+							'title'=>eowbc_lang('Bonus Features').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Tiny Features'),
+							'menu_title'=>eowbc_lang('Bonus Features'),
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-tiny-features',
 							'template'=>'admin/menu/tiny_features',
@@ -132,11 +132,36 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 							'position'=>10
 						),
 					);
-			$features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())));
-					
-			if(empty($features['price_control'])) {
+			$features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())));			
+			if(empty($features['ring_builder']) and empty($features['pair_maker']) and empty($features['guidance_tool'])) {
+				unset($submenu[1]);
+				unset($submenu[2]);
+				unset($submenu[3]);
+				unset($submenu[4]);
+			}
+
+			/*if(empty($features['price_control'])) {
+				unset($submenu[8]);			
+			}*/
+
+			$bonus_features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','bonus_features',serialize(array())));			
+
+			if(empty($bonus_features['price_control'])) {
 				unset($submenu[8]);
 			}
+
+			if(empty($bonus_features['opts_uis_item_page']) and empty($bonus_features['spec_view_item_page'])){
+				unset($submenu[5]);
+			}
+
+			if(empty($bonus_features['filters_shortcode'])) {
+				unset($submenu[6]);
+			}
+
+			if(empty($bonus_features['filters_shop_cat'])) {
+				unset($submenu[7]);
+			}
+
 			$menu['submenu'] = $submenu;
 			return $menu;
 		}
@@ -178,7 +203,8 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 
 		public static function pair_builder_features_list() {		
 			// TODO we must create a config class or folder and put all configs there. When implemented instead of returning array from here call that function from here	
-			return array('ring_builder'=>'Ring Builder','pair_maker'=>'Pair Maker','guidance_tool'=>'Guidance Tool');
+			return wbc()->config->get_builders();
+			//return array('ring_builder'=>'Ring Builder','pair_maker'=>'Pair Maker','guidance_tool'=>'Guidance Tool');
 		}
 
 		public static function is_pair_builder_feature_all_setup() {			

@@ -73,7 +73,10 @@ class WooCommerce_Bundle_Choice_Bootstrap {
 
 	public function ajax(){
 		if(!empty(wbc()->sanitize->post('_wpnonce')) and !empty(wbc()->sanitize->post('resolver'))) {	
-			$resolver_path = constant('EOWBC_DIRECTORY').'application/controllers/ajax/'.sanitize_text_field(wbc()->sanitize->post('resolver')).'.php';						
+			$resolver_path = constant('EOWBC_DIRECTORY').'application/controllers/ajax/'.sanitize_text_field(wbc()->sanitize->post('resolver')).'.php';				
+			if(!empty(wbc()->sanitize->post('resolver_path'))){
+				$resolver_path =wbc()->sanitize->post('resolver_path');
+			}		
 			if(file_exists($resolver_path)){
 				require_once $resolver_path;
 			} else {
