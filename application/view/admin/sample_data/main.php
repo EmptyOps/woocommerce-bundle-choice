@@ -27,6 +27,12 @@ box-shadow: none;">
 	    <div>
 	      <h1><strong>Sample Data for <?php echo $feature_title;?></strong></h1>
 	      <p>You are at step <?php echo $_step; ?> of <?php echo $number_of_step; ?> steps.</p>
+	      <?php if(!empty($help_info[$_step])) {
+	      	?>
+	      		<p><strong><?php echo $help_info[$_step]; ?></strong></p>
+	      	<?php 
+	      }
+	      ?>
 	        <table class="form-table">
 	          <tbody>
 	            <tr valign="top">

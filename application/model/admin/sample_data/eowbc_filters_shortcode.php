@@ -2,14 +2,14 @@
 
 
 /*
-*	Sample data pair maker Model.
+*	Sample data filters shortcode Model.
 */
 
 namespace eo\wbc\model\admin\sample_data;
 
 defined( 'ABSPATH' ) || exit;
 
-class Eowbc_Pair_Maker extends Eowbc_Sample_Data {
+class Eowbc_Filters_Shortcode extends Eowbc_Sample_Data {
 
 	private static $_instance = null;
 
@@ -22,8 +22,8 @@ class Eowbc_Pair_Maker extends Eowbc_Sample_Data {
 	}
 
 	private function __construct() {
-		$this->number_of_step = 3;
-		$this->data_template = \eo\wbc\model\admin\sample_data\data_templates\Pair_Maker_Data_Template::instance();
+		$this->number_of_step = 2;
+		$this->data_template = \eo\wbc\model\admin\sample_data\data_templates\Filters_Shortcode_Data_Template::instance();
 	}
 
 }

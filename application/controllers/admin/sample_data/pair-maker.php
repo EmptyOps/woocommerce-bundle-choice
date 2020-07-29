@@ -15,10 +15,10 @@ class Pair_Maker extends Sample_Data {
         return self::$_instance;
     }
 
-    private $feature_key = 'pair_maker';  // TODO set the right key here
+    private $feature_key = 'pair_maker';  
 
     private function __construct() {        
-        $this->feature_title = $this->feature_key;    // TODO get it dynamically from config file using feature key
+        $this->feature_title = wbc()->config->get_builders()[$this->feature_key];    
 
         wbc()->load->model('admin/sample_data/eowbc_sample_data');
         wbc()->load->model('admin/sample_data/eowbc_pair_maker');
