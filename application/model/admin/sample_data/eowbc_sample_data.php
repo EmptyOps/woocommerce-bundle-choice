@@ -2,7 +2,7 @@
 
 
 /*
-*	Sample data jewelry Model.
+*	Sample data Model.
 */
 
 namespace eo\wbc\model\admin\sample_data;
@@ -28,6 +28,13 @@ class Eowbc_Sample_Data {
 		
 	}
 
+	public function number_of_step() {
+		return $this->number_of_step;
+	}
+
+	public function data_template() {
+		return $this->data_template;
+	}
 
 	public function get( $form_definition ) {
 		return $form_definition;
@@ -43,7 +50,7 @@ class Eowbc_Sample_Data {
         return $res;
 	}
 
-	public function process_post(&$_step, $_category, $_atttriutes) {
+	public function process_post(&$_step, $_category, $_atttriutes, $_maps) {
 		
 		if(!empty(wbc()->sanitize->get('type')) and !empty(wbc()->sanitize->get('eo_wbc_view_auto_jewel')) and wbc()->sanitize->get('type')=='remove_filters_automation' and wbc()->sanitize->get('eo_wbc_view_auto_jewel')==1){
 			wbc()->options->update_option('tiny_feature','filter_widget',serialize(array()));
@@ -82,89 +89,29 @@ class Eowbc_Sample_Data {
 
 			      if(!empty($category)){
 			        //Send for creation and update returned array.
-			        $catat_category=$catat->create_category($category);            
+			        $catat_category=$this->create_category($category);            
 			        // update_option('eo_wbc_cats',serialize($catat_category)); 
 			        wbc()->options->set('eo_wbc_cats',serialize($catat_category)); 
+			      
+			      	if(!empty($_maps)){
+			        	$this->add_maps($_maps);
+			      	}
 
-			        $catat->add_maps(array(
-			            array(
-			                ['slug','eo_diamond_round_shape_cat','product_cat'],
-			                ['slug','eo_setting_round_shape_cat','product_cat']
-			            ),
-			            array(
-			                ['slug','eo_diamond_princess_shape_cat','product_cat'],
-			                ['slug','eo_setting_pear_shape_cat','product_cat']
-			            ),
-			            array(
-			                ['slug','eo_diamond_emerald_shape_cat','product_cat'],
-			                ['slug','eo_setting_emerald_shape_cat','product_cat']
-			            ),
-			            array(
-			                ['slug','eo_diamond_asscher_shape_cat','product_cat'],
-			                ['slug','eo_setting_asscher_shape_cat','product_cat']
-			            ),
-			            array(
-			                ['slug','eo_diamond_marquise_shape_cat','product_cat'],
-			                ['slug','eo_setting_marquise_shape_cat','product_cat']
-			            ),
-			            array(
-			                ['slug','eo_diamond_oval_shape_cat','product_cat'],
-			                ['slug','eo_setting_oval_shape_cat','product_cat']
-			            ),
-			            array(
-			                ['slug','eo_diamond_radiant_shape_cat','product_cat'],
-			                ['slug','eo_setting_radiant_shape_cat','product_cat']
-			            ),
-			            array(
-			                ['slug','eo_diamond_pear_shape_cat','product_cat'],
-			                ['slug','eo_setting_pear_shape_cat','product_cat']
-			            ),
-			            array(
-			                ['slug','eo_diamond_heart_shape_cat','product_cat'],
-			                ['slug','eo_setting_heart_shape_cat','product_cat']
-			            ),
-			            array(
-			                ['slug','eo_diamond_cushion_shape_cat','product_cat'],
-			                ['slug','eo_setting_cushion_shape_cat','product_cat']
-			            )
-			        ));
-
-			        // update_option('eo_wbc_first_name','Diamond Shape');//FIRST : NAME
-			        wbc()->options->update_option('configuration','first_name',$catat_category[0]['id']/*'Diamond Shape'*/);
-			        // update_option('eo_wbc_first_slug','eo_diamond_shape_cat');//FIRST : SLUG
-			        wbc()->options->update_option('configuration','first_slug',$catat_category[0]['slug']/*'eo_diamond_shape_cat'*/);
-			        // update_option('eo_wbc_first_url','/product-category/eo_diamond_shape_cat/');//FIRST : NAME
-			        wbc()->options->update_option('configuration','first_url','/product-category/eo_diamond_shape_cat/');
-			        
-			        // update_option('eo_wbc_second_name','Setting Shape');//SECOND : NAME
-			        wbc()->options->update_option('configuration','second_name',$catat_category[1]['id']/*'Setting Shape'*/);
-			        // update_option('eo_wbc_second_slug','eo_setting_shape_cat');//SECOND : SLUG
-			        wbc()->options->update_option('configuration','second_slug',$catat_category[1]['slug']/*'eo_setting_shape_cat'*/);
-			        // update_option('eo_wbc_second_url','/product-category/eo_setting_shape_cat/');//SECOND : URL   
-			        wbc()->options->update_option('configuration','second_url','/product-category/eo_setting_shape_cat/');
-
-			        // update_option('eo_wbc_config_category',1);
-			        wbc()->options->update_option('configuration','config_category',1);
-			        // update_option('eo_wbc_config_map',1);    
-			        wbc()->options->update_option('configuration','config_map',1);
-			        // update_option('eo_wbc_btn_setting','0');
-			        wbc()->options->update_option('configuration','buttons_page','0');	//set('eo_wbc_btn_setting','0');
-			        // update_option('eo_wbc_btn_position','begining');
-			        wbc()->options->set('eo_wbc_btn_position','begining');				//TODO I think its DEPRECATED starting from DP update. remove it if its no loger used. 
-
+			        $this->data_template->set_configs_after_categories($catat_category);
 			      }
 
 			      if(!empty($attributes)){
 			        //Send for creation and update returned array.
-			        $catat_attribute=$catat->create_attribute($attributes);            
+			        $catat_attribute=$this->create_attribute($attributes);            
 			        // update_option('eo_wbc_attr',serialize($catat_attribute));
 			        wbc()->options->set('eo_wbc_attr',serialize($catat_attribute));
-			        $catat->add_filters();
+			        $this->add_filters();
 			        if(!empty(wbc()->sanitize->get('type')) and wbc()->sanitize->get('type')=='filters_automation'){
-			        	$catat->add_filters_custom_filter();	
+			        	$this->add_filters_custom_filter();	
 			        }			        
-			        // update_option('eo_wbc_filter_enable','1');     
-			        wbc()->options->update_option('filters_filter_setting','filter_setting_status','1');
+
+			        // update_option('eo_wbc_filter_enable','1');    
+			        $this->data_template->set_configs_after_attributes();
 			      } 
 			  
 			  ///////////////////////////////////////////////////////////////////////
@@ -178,7 +125,7 @@ class Eowbc_Sample_Data {
 			    <script type="text/javascript" >
 			    jQuery(document).ready(function($) {            
 
-			        var eo_wbc_max_products=<?php echo($catat->get_product_size()); ?>;            
+			        var eo_wbc_max_products=<?php echo($this->get_product_size()); ?>;            
 			        function eo_wbc_add_products(index){
 
 			            if(index>=eo_wbc_max_products){
@@ -254,11 +201,11 @@ class Eowbc_Sample_Data {
 
 		global $wpdb;
 
-		if(!isset($this->product[$index])) {
+		if(!isset($this->data_template->get_products()[$index])) {
 			return array( "type"=>"error", "msg"=>"No product found at index ".$index );	//FALSE;
 		}
 	
-		$product=$this->product[$index];
+		$product=$this->data_template->get_products()[$index];
 
 		$product_id= wp_insert_post( array(
 		    'post_author' => get_current_user_id(),
@@ -314,7 +261,7 @@ class Eowbc_Sample_Data {
 
 			$imgs = array();
 			foreach ($product['images'] as $img) {
-				$imgid = $this->add_image_gallary($this->gallay_img.$img);
+				$imgid = $this->add_image_gallary($this->data_template->gallay_img.$img);
 				if(!empty($imgid)){
 					array_push( $imgs, $imgid);	
 				}					
@@ -1232,7 +1179,7 @@ class Eowbc_Sample_Data {
 	*/
 	function get_product_size() {
 
-		return count($this->product);
+		return count($this->data_template->get_products());
 	}
 
 }

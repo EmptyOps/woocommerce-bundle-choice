@@ -2,14 +2,14 @@
 
 
 /*
-*	base template for Sample data.
+*	ring builder template for Sample data.
 */
 
 namespace eo\wbc\model\admin\sample_data\data_templates;
 
 defined( 'ABSPATH' ) || exit;
 
-class Ring_Builder_Data_Template extends Sample_Data_Template {
+class Ring_Builder_Data_Template extends Pair_Builder_Data_Template {
 
 	private static $_instance = null;
 
@@ -26,7 +26,7 @@ class Ring_Builder_Data_Template extends Sample_Data_Template {
     	$this->asset_folder = 'jewelry';
 	}
 
-	protected function get_attributes() {
+	public function get_attributes() {
     	return array(
 	                array(
 	                    'label' => 'Carat',
@@ -107,7 +107,7 @@ class Ring_Builder_Data_Template extends Sample_Data_Template {
 	              ); 
 	}
 
-	protected function get_categories() {
+	public function get_categories() {
 		$_img_url= constant('EOWBC_ASSET_URL').'img/sample_data/'.$this->asset_folder.'/';    // EO_WBC_PLUGIN_DIR.'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/';
           
       	return array(
@@ -335,5 +335,50 @@ class Ring_Builder_Data_Template extends Sample_Data_Template {
                      )
                   );
 	}
+
+    public function get_maps() {
+        return array(
+                        array(
+                            ['slug','eo_diamond_round_shape_cat','product_cat'],
+                            ['slug','eo_setting_round_shape_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','eo_diamond_princess_shape_cat','product_cat'],
+                            ['slug','eo_setting_pear_shape_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','eo_diamond_emerald_shape_cat','product_cat'],
+                            ['slug','eo_setting_emerald_shape_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','eo_diamond_asscher_shape_cat','product_cat'],
+                            ['slug','eo_setting_asscher_shape_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','eo_diamond_marquise_shape_cat','product_cat'],
+                            ['slug','eo_setting_marquise_shape_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','eo_diamond_oval_shape_cat','product_cat'],
+                            ['slug','eo_setting_oval_shape_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','eo_diamond_radiant_shape_cat','product_cat'],
+                            ['slug','eo_setting_radiant_shape_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','eo_diamond_pear_shape_cat','product_cat'],
+                            ['slug','eo_setting_pear_shape_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','eo_diamond_heart_shape_cat','product_cat'],
+                            ['slug','eo_setting_heart_shape_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','eo_diamond_cushion_shape_cat','product_cat'],
+                            ['slug','eo_setting_cushion_shape_cat','product_cat']
+                        )
+                    );
+    }
 
 }

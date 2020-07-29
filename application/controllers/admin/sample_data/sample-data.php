@@ -23,7 +23,7 @@ class Sample_Data {
 
     public function init() {
         
-        $callback = $this->get_page( $this->model->data_template->get_attributes(), $this->model->data_template->get_categories() );
+        $callback = $this->get_page( $this->model->data_template()->get_attributes(), $this->model->data_template()->get_categories(), $this->model->data_template()->get_maps() );
         $position = empty($position)?66:$position;    
         add_menu_page( eowbc_lang('WooCommerce Bundle Choice'),eowbc_lang('WooCommerce Bundle Choice'),'manage_options','eowbc',$callback,$this->get_icon_url(),$position );
     }
@@ -32,18 +32,18 @@ class Sample_Data {
         return esc_url(apply_filters( 'eowbc_icon_url',constant('EOWBC_ICON')));
     }
 
-    public function get_page(array $_atttriutes, array $_category){
+    public function get_page(array $_atttriutes, array $_category, array $_maps){
 
-        $callback = function() use(&$_atttriutes, &$_category){
+        $callback = function() use(&$_atttriutes, &$_category, &$_maps){
 
             wbc()->load->template('admin/menu/page/header-part',array( "mode"=>"plain" ));
             
             $_step=1;
-            wbc()->load->model('admin/sample_data/eowbc_jewelry');
+            // wbc()->load->model('admin/sample_data/eowbc_jewelry');
             // $res = \eo\wbc\model\admin\sample_data\Eowbc_Sample_Data::instance()->process_post( $_step, $_category, $_atttriutes ); 
-            $res = $this->model->process_post( $_step, $_category, $_atttriutes ); 
+            $res = $this->model->process_post( $_step, $_category, $_atttriutes, $_maps ); 
 
-            wbc()->load->template('admin/sample_data/main', array("feature_title"=>$feature_title,"_step"=>$_step,"number_of_step"=>$this->model->number_of_step,"_atttriutes"=>$_atttriutes,"_category"=>$_category)); 
+            wbc()->load->template('admin/sample_data/main', array("feature_title"=>$this->feature_title,"_step"=>$_step,"number_of_step"=>$this->model->number_of_step(),"_atttriutes"=>$_atttriutes,"_category"=>$_category)); 
 
             wbc()->load->template('admin/menu/page/footer-part',array( "mode"=>"plain" ));
         };

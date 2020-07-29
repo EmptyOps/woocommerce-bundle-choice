@@ -37,7 +37,7 @@ box-shadow: none;">
 	                </th>
 	              </tr>
 	              <tr>
-	                <td> Sample products of rings and diamond will be added.</td>
+	                <td> Sample products will be added for <?php echo $feature_title;?>.</td>
 	              <!-- Attributes Installation -->
 	              <?php elseif($_step==2):?>
 	                <th>

@@ -2,7 +2,7 @@
 
 
 /*
-*	Sample data jewelry Model.
+*	Sample data ring builder Model.
 */
 
 namespace eo\wbc\model\admin\sample_data;
