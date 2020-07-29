@@ -48,7 +48,7 @@ class Eowbc_Setting_Status {
     			if($fv["type"]=='checkbox' and isset($fv["grouped"]) and $fv["grouped"] and is_array($fv["options"]) and !empty($fv["options"])) {
 
     				/*$checbox_status = unserialize($form_definition[$key]["form"][$fk]["value"]);*/
-    				$checbox_status = ($form_definition[$key]["form"][$fk]["value"]);
+    				$checbox_status = unserialize($form_definition[$key]["form"][$fk]["value"]);
     				if(is_array($checbox_status)){
     					$form_definition[$key]["form"][$fk]["value"] = array_values($checbox_status);
     				}
@@ -73,6 +73,43 @@ class Eowbc_Setting_Status {
 		wbc()->load->model('admin\form-builder');
 
 		$saved_tab_key = !empty($_POST["saved_tab_key"]) ? $_POST["saved_tab_key"] : ""; 
+					
+		if(!empty($_POST['inventory_type'])){
+			switch ($_POST['inventory_type']) {
+				case 'jewelry':
+					$_POST['pair_maker'] = '';
+					$_POST['guidance_tool'] = '';
+					break;
+				case 'clothing':
+					$_POST['guidance_tool'] = '';
+					$_POST['ring_builder'] = '';					
+					$_POST['rapnet_api'] = '';
+					$_POST['glowstar_api'] = '';
+					$_POST['jbdiamond_api'] = '';
+					$_POST['srk_api'] = '';
+					break;
+				case 'home_decor':
+					$_POST['pair_maker'] = '';
+					$_POST['ring_builder'] = '';					
+					$_POST['rapnet_api'] = '';
+					$_POST['glowstar_api'] = '';
+					$_POST['jbdiamond_api'] = '';
+					$_POST['srk_api'] = '';					
+
+					break;
+				case 'others':
+					$_POST['pair_maker'] = '';
+					$_POST['ring_builder'] = '';					
+					$_POST['rapnet_api'] = '';
+					$_POST['glowstar_api'] = '';
+					$_POST['jbdiamond_api'] = '';
+					$_POST['srk_api'] = '';
+					# code...
+					break;				
+				default:					
+					break;
+			}			
+		}
 
 	    //loop through form tabs and save 
 		if( $saved_tab_key != "setting_status_log" ) {

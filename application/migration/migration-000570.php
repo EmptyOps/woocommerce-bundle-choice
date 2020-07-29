@@ -71,7 +71,7 @@ class Migration_000570 {
 					'id'=>wbc()->common->createUniqueId(),
 				);             
 			}			
-			wbc()->options->set('seteowbc_option_mapping_map_creation_modification',serialize($new_mapping));
+			wbc()->options->set('eowbc_option_mapping_map_creation_modification',serialize($new_mapping));
 			
 		}
 
@@ -103,7 +103,7 @@ class Migration_000570 {
 									'features'=>serialize($features),
 								),
 							'filters_filter_setting'=>array(
-									'filter_setting_status'=>get_option('eo_wbc_filter_enable','filter_setting_status'),
+									'filter_setting_status'=>(get_option('eo_wbc_filter_enable','filter_setting_status')?'filter_setting_status':''),
 								),
 							'mapping_prod_mapping_pref'=>array(
 									'prod_mapping_pref_category'=>get_option('eo_wbc_map_cat_pref','or'),

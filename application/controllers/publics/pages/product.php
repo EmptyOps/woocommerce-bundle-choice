@@ -37,7 +37,9 @@ class Product {
     }    
 
     public function specification_view() {
-        if( (!isset($_GET['EO_WBC']) and wbc()->options->get_option('tiny_features','specification_view_status',false) and wbc()->options->get_option('tiny_features','specification_view_default_status',false)) or ( isset($_GET['EO_WBC']) and wbc()->options->get_option('appearance_product_page','show_spec_view_in_pair_builder','1') ) ){
+        $bonus_features = array_filter(unserialize(wbc()->options->get_option('setting_status_setting_status_setting','bonus_features',serialize(array()))));
+
+        if( ( !isset($_GET['EO_WBC']) and !empty($bonus_features['spec_view_item_page']) ) /*(!isset($_GET['EO_WBC']) and wbc()->options->get_option('tiny_features','specification_view_status',false) and wbc()->options->get_option('tiny_features','specification_view_default_status',false))*/ or ( isset($_GET['EO_WBC']) and wbc()->options->get_option('appearance_product_page','show_spec_view_in_pair_builder','1') ) ){
 
             add_action('woocommerce_after_single_product_summary',function(){
                 wbc()->load->template('publics/features/specification_view');            
@@ -47,7 +49,10 @@ class Product {
     }
 
     public function product_options_view() {
-        if( (!isset($_GET['EO_WBC']) and wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_status',false)) or ( isset($_GET['EO_WBC']) and wbc()->options->get_option('appearance_product_page','show_options_ui_in_pair_builder','1') ) ){
+
+        $bonus_features = array_filter(unserialize(wbc()->options->get_option('setting_status_setting_status_setting','bonus_features',serialize(array()))));
+
+        if( ( !isset($_GET['EO_WBC']) and !empty($bonus_features['opts_uis_item_page']) )/*(!isset($_GET['EO_WBC']) and wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_status',false))*/ or ( isset($_GET['EO_WBC']) and wbc()->options->get_option('appearance_product_page','show_options_ui_in_pair_builder','1') ) ){
 
             \eo\wbc\controllers\publics\Options::instance()->run();        
         }

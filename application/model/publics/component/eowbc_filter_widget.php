@@ -154,6 +154,11 @@ class EOWBC_Filter_Widget {
 			$active_color=wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active',$fg_color); //get_option('eo_wbc_active_breadcrumb_color',$fg_color);
 			//wp-head here....
 			echo "<style>
+					.ui.labeled.slider>.labels .label {
+    					margin: 0 !important;
+    					word-break: keep-all;
+    				}    				
+    				
 					.ui.images {
 						font-size: 1em !important; 
 					}					
@@ -899,20 +904,21 @@ class EOWBC_Filter_Widget {
 									"class"=>"text_slider_price",
 									"value"=>$max,
 								));
+		$seprator = wbc()->options->get_option('filters_filter_setting','filter_setting_numeric_slider_seperator','.');
 		
 		if($desktop):
 			
 			if((wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts')=='sc4' and $this->_category==wbc()->options->get_option('configuration','second_slug')) or (wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts')=='fc4' and $this->_category==wbc()->options->get_option('configuration','first_slug'))) {
-				wbc()->load->template('publics/filters/slider_price_desktop_4', array("width_class"=>$this->get_width_class($width),"min"=>$min,"max"=>$max,"reset"=>$reset,'help'=>$help)); 
+				wbc()->load->template('publics/filters/slider_price_desktop_4', array("width_class"=>$this->get_width_class($width),"min"=>$min,"max"=>$max,"reset"=>$reset,'help'=>$help,'seprator'=>$seprator)); 
 			} elseif ((wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts')=='sc3' and $this->_category==wbc()->options->get_option('configuration','second_slug')) or (wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts')=='fc3' and $this->_category==wbc()->options->get_option('configuration','first_slug'))) {
-				wbc()->load->template('publics/filters/slider_price_desktop_3', array("width_class"=>$this->get_width_class($width),"min"=>$min,"max"=>$max,"reset"=>$reset,'help'=>$help)); 
+				wbc()->load->template('publics/filters/slider_price_desktop_3', array("width_class"=>$this->get_width_class($width),"min"=>$min,"max"=>$max,"reset"=>$reset,'help'=>$help,'seprator'=>$seprator)); 
 			}  else {
-				wbc()->load->template('publics/filters/slider_price_desktop', array("width_class"=>$this->get_width_class($width),"min"=>$min,"max"=>$max,"reset"=>$reset)); 
+				wbc()->load->template('publics/filters/slider_price_desktop', array("width_class"=>$this->get_width_class($width),"min"=>$min,"max"=>$max,"reset"=>$reset,'seprator'=>$seprator)); 
 			}
 		elseif(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')):			
-			wbc()->load->template('publics/filters/slider_price_mobile_alternate', array("min"=>$min,"max"=>$max,"reset"=>$reset,'advance'=>$advance));
+			wbc()->load->template('publics/filters/slider_price_mobile_alternate', array("min"=>$min,"max"=>$max,"reset"=>$reset,'advance'=>$advance,'seprator'=>$seprator));
 		else:
-			wbc()->load->template('publics/filters/slider_price_mobile', array("min"=>$min,"max"=>$max,"reset"=>$reset));
+			wbc()->load->template('publics/filters/slider_price_mobile', array("min"=>$min,"max"=>$max,"reset"=>$reset,'seprator'=>$seprator));
 		endif;			
 	}
 	
@@ -1019,7 +1025,7 @@ class EOWBC_Filter_Widget {
 			<div class="eo-wbc-container filters container ui form">
 				<div class="ui segments">
 					<div class="ui segment"><?php
-					?><div class="ui grid container align middle relaxed"><?php
+					?><div class="ui grid container align middle relaxed" style="margin-bottom: 0px;"><?php
 						$this->load_grid_desktop($general_filters,0);
 						$order = wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','price_filter_order_'.$this->cat_name_part.'_cat','');
 						if( !$this->is_shortcode_filter && !wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','hide_price_filter_'.$this->cat_name_part.'_cat',false) && wbc()->common->nonZeroEmpty($order) ) {
@@ -1029,7 +1035,7 @@ class EOWBC_Filter_Widget {
 				?></div><?php
 				if(!is_wp_error($advance_filters) and !empty($advance_filters)){
 					?><div class="ui segment secondary"><?php
-						?><div class="ui grid container align middle relaxed"><?php					
+						?><div class="ui grid container align middle relaxed" style="margin-bottom: 0px;"><?php					
 							$this->load_grid_desktop($advance_filters,1);					
 						?></div><?php
 					?></div><?php
