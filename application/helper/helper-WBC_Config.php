@@ -37,7 +37,7 @@ class WBC_Config {
 	}
 
 	public function get_available_samples() {
-		return array('ring_builder','pair_maker','filters_shortcode');
+		return array('ring_builder','pair_maker');
 	}
 
 	public function get_inventory_types() {
