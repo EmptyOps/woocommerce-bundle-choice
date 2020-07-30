@@ -60,7 +60,7 @@ class a_e_setupWizardCest
 		$I->waitForText('Back', 10);	
 
 		// select features
-		$I->executeJS("jQuery('#ring_builder').checkbox('set checked');");	
+		$I->executeJS("jQuery('#ring_builder').parent().checkbox('set checked', 1);");	
 
 		// save 
 		$I->click('Next');
