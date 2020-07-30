@@ -2,6 +2,21 @@
 /*
 *	Displays the page for adding sample data
 */
+
+function curPageURL() {
+            $pageURL = 'http';
+            if(isset($_SERVER["HTTPS"]))
+            if ($_SERVER["HTTPS"] == "on") {
+                $pageURL .= "s";
+            }
+            $pageURL .= "://";
+            if ($_SERVER["SERVER_PORT"] != "80") {
+                $pageURL .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . $_SERVER["REQUEST_URI"];
+            } else {
+                $pageURL .= $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
+            }
+            return $pageURL;
+        }
 ?>
 <div class="ui segment container" style="height: 100%;margin-bottom: 0px; border: none !important;
 box-shadow: none;">
@@ -21,7 +36,7 @@ box-shadow: none;">
 	  <hr/>
 	  <div style="clear:both;"></div>
 	  
-	  <form method="post">
+	  <form method="post" action="<?php echo curPageURL();?>">
 	    <?php wp_nonce_field('eo_wbc_auto_jewel'); ?>
 	    <input type="hidden" name="step" value="<?php echo $_step+1; ?>">
 	    <div>
