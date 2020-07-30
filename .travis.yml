@@ -160,13 +160,20 @@ before_script:
   # # - wget https://chromedriver.storage.googleapis.com/74.0.3729.6/chromedriver_linux64.zip
   # - wget https://chromedriver.storage.googleapis.com/2.27/chromedriver_linux64.zip
   # - unzip -o -q chromedriver_linux64.zip
+
+  # - |
+  #   if [[ $(test_environment) == "WBC_TEST_ENV_default" ]]; then
+  #     wget https://chromedriver.storage.googleapis.com/2.27/chromedriver_linux64.zip
+  #     unzip -o -q chromedriver_linux64.zip
+  #   else
+  #     wget https://github.com/mozilla/geckodriver/releases/download/v0.26.0/geckodriver-v0.26.0-linux64.tar.gz
+  #     tar -xzf geckodriver-v0.26.0-linux64.tar.gz
+  #   fi
+
   - |
     if [[ $(test_environment) == "WBC_TEST_ENV_default" ]]; then
       wget https://chromedriver.storage.googleapis.com/2.27/chromedriver_linux64.zip
       unzip -o -q chromedriver_linux64.zip
-    else
-      wget https://github.com/mozilla/geckodriver/releases/download/v0.26.0/geckodriver-v0.26.0-linux64.tar.gz
-      tar -xzf geckodriver-v0.26.0-linux64.tar.gz
     fi
 
   - echo "Run selenium-server"
@@ -177,7 +184,7 @@ before_script:
     if [[ $(test_environment) == "WBC_TEST_ENV_default" ]]; then
       nohup bash -c "java -jar selenium-server-standalone.jar -Dwebdriver.chrome.driver=\"chromedriver\" -Dwebdriver.chrome.whitelistedIps=\"localhost\" &" && sleep 1;    
     else
-      nohup bash -c "java -jar selenium-server-standalone.jar standalone --host 127.0.0.1 --port 4444 &" && sleep 1;
+      nohup bash -c "java -jar selenium-server-standalone.jar standalone --host 127.0.0.1 --port 4444 -enablePassThrough=\"false\" &" && sleep 1;
     fi
 
 
