@@ -21,7 +21,7 @@ box-shadow: none;">
 	  <hr/>
 	  <div style="clear:both;"></div>
 	  
-	  <form method="post">
+	  <form method="post" action="/" >
 	    <?php wp_nonce_field('eo_wbc_auto_jewel'); ?>
 	    <input type="hidden" name="step" value="<?php echo $_step+1; ?>">
 	    <div>

@@ -39,14 +39,14 @@ class n_e_addSampleDataProcessCest
         $I->wait(3);
 
         // click continue
-        $I->click('Create sample catagorie(s)');
- //        // $I->click('//*[@id="wpbody-content"]/div[2]/div[2]/form/div/table/tfoot/tr/td[1]/input');    //('Create sample catagorie(s)');
+        // $I->click('Create sample catagorie(s)');
+        $I->click('//*[@id="wpbody-content"]/div[2]/div[2]/form/div/table/tfoot/tr/td[1]/input');    //('Create sample catagorie(s)');
  //        $I->executeJS('jQuery("#wpbody-content > div.ui.segment.container > div.wrap.woocommerce > form > div > table > tfoot > tr > td:nth-child(1) > input").trigger("click");');
  // //don't know why but the codeception click is not working here so now trying with JS
 
 		$I->waitForText('You are at step 2 of 3 steps', 10);
 
-    }
+    // }
 
     public function step2(AcceptanceTester $I)
     {
