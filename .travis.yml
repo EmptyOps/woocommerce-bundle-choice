@@ -5,7 +5,7 @@ dist: trusty
 
 addons:
 
-  # note: instead of using firefox latest we are using a bit older version due to configuration issues of w3c protocol for remote webdriver. But now it is also a wise combination to use one browser(right now chrome) with latest version and one browser with a bit older version( right now firefox). Anyway in future we will need full coverage of everything as per standards ranging from devices, browsers and their versions, language(php)/DB(mysql) version, wp versions, woo versions etc. 
+  # note: instead of using firefox latest we are using a bit older version due to configuration issues of w3c protocol for remote webdriver. But now it is also a wise combination to use one browser(right now chrome) with latest version and one browser with a bit older version( right now firefox). Anyway in future we will need full coverage of everything as per standards ranging from devices, browsers and their versions, language(php)/DB(mysql) version, wp versions, woo versions etc. Except third party services the selenimu server and its dockers are providing featurs to use all browser, devices(MAC etc. environment) and versions combinations. 
   chrome: stable
   # firefox: latest   #TODO here in future we should setup just the required browser for environment for e.g. we use only one browser per php version so this thing should be conditioned based on php version and load only one browser by moving below if possible or otherwise using some other condition 
   firefox: "55"
@@ -180,7 +180,7 @@ before_script:
     if [[ $(test_environment) == "WBC_TEST_ENV_default" ]]; then
       nohup bash -c "java -jar selenium-server-standalone.jar -Dwebdriver.chrome.driver=\"chromedriver\" -Dwebdriver.chrome.whitelistedIps=\"localhost\" &" && sleep 1;    
     else
-      nohup bash -c "java -jar selenium-server-standalone.jar -Dwebdriver.gecko.driver=\"geckodriver\" -enablePassThrough false &" && sleep 1;
+      nohup bash -c "java -jar selenium-server-standalone.jar -Dwebdriver.gecko.driver geckodriver -enablePassThrough false &" && sleep 1;
     fi
 
 
