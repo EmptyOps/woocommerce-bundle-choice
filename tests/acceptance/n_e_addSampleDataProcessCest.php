@@ -46,7 +46,7 @@ class n_e_addSampleDataProcessCest
 
 		$I->waitForText('You are at step 2 of 3 steps', 10);
 
-    // }
+    }
 
     public function step2(AcceptanceTester $I)
     {
