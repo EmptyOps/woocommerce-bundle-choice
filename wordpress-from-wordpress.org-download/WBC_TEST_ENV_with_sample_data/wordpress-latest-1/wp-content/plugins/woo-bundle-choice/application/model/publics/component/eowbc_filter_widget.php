@@ -5,6 +5,10 @@ class EOWBC_Filter_Widget {
 
 	private static $_instance = null;
 
+	protected $is_shop_cat_filter = false;
+	protected $is_shortcode_filter = false;
+	protected $filter_prefix = '';
+
 	public static function instance() {
 		if ( ! isset( self::$_instance ) ) {
 			self::$_instance = new self;
@@ -146,7 +150,10 @@ class EOWBC_Filter_Widget {
 
 			$active_color=wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active',$fg_color); //get_option('eo_wbc_active_breadcrumb_color',$fg_color);
 			//wp-head here....
-			echo "<style>		
+			echo "<style>	
+					.term-description{
+						display:none;
+					}	
 					.loading{												
 						background-image:url(".constant('EOWBC_ASSET_URL')."icon/spinner.gif);
 						background-color: rgba(255,255,255, 0.6);				    	
@@ -340,7 +347,12 @@ class EOWBC_Filter_Widget {
 						.eo-wbc-container.filters.container.ui.form .field:last-child{
 							margin-bottom: -1.4em;
 						}
-						.eo_wbc_filter_icon_select div,.eo_wbc_filter_icon:hover:not(.none_editable) div{ visibility: unset !important; }
+						.eo_wbc_filter_icon_select div,.eo_wbc_filter_icon:hover:not(.none_editable) div{ visibility: unset !important; 
+						}
+						.eo-wbc-container.filters.container.ui.form .ui.header{
+							font-size: 0.8em;
+    						text-transform: uppercase;
+						}
 
 					</style>
 				<?php
@@ -369,19 +381,26 @@ class EOWBC_Filter_Widget {
 		wbc()->load->asset('js','publics/eo_wbc_filter',array('jquery'));
 
 		global $wp_query;
-		$current_category = $wp_query->get_queried_object();
-		if(!empty($current_category) and !is_wp_error($current_category)){
-			$current_category = $current_category->slug;
-		} else{
-			$current_category=$this->_category;
-		}
+		$site_url = '';
+		$product_url = '';
+		if( !$this->is_shortcode_filter ) {
 
-        $site_url = esc_url(get_term_link( $current_category,'product_cat'));
-      	if(strpos($site_url, '?')!==false){
-          	$site_url.='&';
-      	} else {
-          	$site_url.='?';
-      	}
+			$current_category = $wp_query->get_queried_object();
+			if(!empty($current_category) and !is_wp_error($current_category)){
+				$current_category = $current_category->slug;
+			} else{
+				$current_category=$this->_category;
+			}
+
+	        $site_url = esc_url(get_term_link( $current_category,'product_cat'));
+	      	if(strpos($site_url, '?')!==false){
+	          	$site_url.='&';
+	      	} else {
+	          	$site_url.='?';
+	      	}
+
+	      	$product_url = $this->product_url();
+		}
         
         // wp_localize_script('eo_wbc_filter_js','eo_wbc_object',array(
         // 					'eo_product_url'=>$this->product_url(),
@@ -394,12 +413,12 @@ class EOWBC_Filter_Widget {
         // 					'eo_cat_query'=>'/?'.http_build_query($_GET)
         // 				));            
         wbc()->load->asset('localize','publics/eo_wbc_filter',array( 'eo_wbc_object' => array(
-        					'eo_product_url'=>$this->product_url(),
+        					'eo_product_url'=>$product_url,
         					//'eo_view_tabular'=>($current_category=='solitaire'?1:0),
         					'disp_regular'=>wbc()->options->get('eo_wbc_e_tabview_status',false)/*get_option('eo_wbc_e_tabview_status',false)*/?1:0,
         					'eo_admin_ajax_url'=>admin_url( 'admin-ajax.php'),
         					'eo_part_site_url'=>get_site_url().'/index.php',
-        					'eo_part_end_url'=>'/'.$this->product_url(),
+        					'eo_part_end_url'=>'/'.$product_url,
         					'eo_cat_site_url'=>$site_url,
         					'eo_cat_query'=>http_build_query($_GET)
         				)));
@@ -829,7 +848,9 @@ class EOWBC_Filter_Widget {
 	public function load_mobile($general_filters, $advance_filters) {
 		if(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')) {
 			$this->load_grid_mobile($general_filters);
-			$this->slider_price(0);
+			if( !$this->is_shortcode_filter ) {
+				$this->slider_price(0);
+			}
 			if(!is_wp_error($advance_filters) and !empty($advance_filters)) {
 				$this->load_grid_mobile($advance_filters,1);
 			}
@@ -837,7 +858,9 @@ class EOWBC_Filter_Widget {
 			?><div class="ui segment"><?php
 				?><div class="ui styled fluid accordion" style="border-top-left-radius: 0px !important; border-top-right-radius: 0px !important;"><?php
 					$this->load_grid_mobile($general_filters);
-					$this->slider_price(0);
+					if( !$this->is_shortcode_filter ) {
+						$this->slider_price(0);
+					}
 				?></div><?php
 			?></div><?php
 			if(!is_wp_error($advance_filters) and !empty($advance_filters)) {
@@ -919,7 +942,9 @@ class EOWBC_Filter_Widget {
 					<div class="ui segment"><?php
 					?><div class="ui grid container align middle relaxed"><?php
 						$this->load_grid_desktop($general_filters,0);
-						$this->slider_price();
+						if( !$this->is_shortcode_filter ) {
+							$this->slider_price();
+						}
 					?></div><?php
 				?></div><?php
 				if(!is_wp_error($advance_filters) and !empty($advance_filters)){
@@ -935,7 +960,7 @@ class EOWBC_Filter_Widget {
 			<?php if( !empty($advance_filters) ) { ?>
 				<div class="ui grid centered">
 					<div class="row">
-						<div class="ui button primary" id="advance_filter" style="border-radius: 0 0 0 0;width: fit-content !important;">Advance Filter&nbsp;<i class="ui icon angle double up"></i></div>
+						<div class="ui button primary" id="advance_filter" style="border-radius: 0 0 0 0;width: fit-content !important;">Advanced Filters&nbsp;<i class="ui icon angle double up"></i></div>
 					</div>
 				</div>
 			<?php			
@@ -1091,14 +1116,17 @@ class EOWBC_Filter_Widget {
 				</a>	
 				<?php				
 			}
-			?><a class="ui dropdown item">Price&nbsp;<i class="chevron down icon"></i>
-				<div class="menu">
-					<div class="item" style="width: max-content !important;min-width: 33vw;max-width: 33vw;display: table-cell;">				
-						<?php $this->slider_price(); ?>
+
+			if( !$this->is_shortcode_filter ) {
+				?><a class="ui dropdown item">Price&nbsp;<i class="chevron down icon"></i>
+					<div class="menu">
+						<div class="item" style="width: max-content !important;min-width: 33vw;max-width: 33vw;display: table-cell;">				
+							<?php $this->slider_price(); ?>
+						</div>
 					</div>
-				</div>
-			</a>
-			<?php
+				</a>
+				<?php
+			}
 			?></div><?php			
 		}
 		?>
@@ -1435,20 +1463,27 @@ class EOWBC_Filter_Widget {
 		$current_category=$this->_category;
 
 		$prefix = "";
-
-		$filter_first=unserialize(wbc()->options->get_option_group('filters_d_fconfig')/*get_option('eo_wbc_add_filter_first')*/);
 		
-		$filter_second=unserialize(wbc()->options->get_option_group('filters_s_fconfig')/*get_option('eo_wbc_add_filter_second')*/);
-				
 		$filter= array();
-		if($current_category==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/){
-			$filter=$filter_first;
+		if($this->is_shop_cat_filter===true or $this->is_shortcode_filter){
+			
+			$filter=$filter_first=unserialize(wbc()->options->get_option_group('filters_'.$this->filter_prefix.'d_fconfig'));
 			$prefix = "d";			
+			
+		} else {
+			$filter_first=unserialize(wbc()->options->get_option_group('filters_d_fconfig')/*get_option('eo_wbc_add_filter_first')*/);
+			
+			$filter_second=unserialize(wbc()->options->get_option_group('filters_s_fconfig')/*get_option('eo_wbc_add_filter_second')*/);
+
+			if($current_category==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/){
+				$filter=$filter_first;
+				$prefix = "d";			
+			}
+			elseif($current_category==wbc()->options->get_option('configuration','second_slug')/*get_option('eo_wbc_second_slug')*/){
+				$filter=$filter_second;	
+				$prefix = "s";
+			}	
 		}
-		elseif($current_category==wbc()->options->get_option('configuration','second_slug')/*get_option('eo_wbc_second_slug')*/){
-			$filter=$filter_second;	
-			$prefix = "s";
-		}	
 
 		$filter =  apply_filters( 'eowbc_filter_widget_filters',$filter,$prefix);
 		$is_cleanup = apply_filters( 'eowbc_filter_widget_is_reset_cleanup',1);
@@ -1605,13 +1640,21 @@ class EOWBC_Filter_Widget {
 				$this->load_desktop($non_adv_ordered_filter, $adv_ordered_filter);				
 			}
 		
+		if( $this->is_shortcode_filter ) {
+			wbc()->load->template('publics/filters/shortcode_flt_search_btn', array("is_shortcode_filter"=>$this->is_shortcode_filter)); 	
+		}
+
 		wbc()->load->template('publics/filters/form', array("thisObj"=>$this,"current_category"=>$current_category)); 		
 	}
 
-	public function init() {
-		$this->_category=$this->eo_wbc_get_category();
+	public function init($is_shop_cat_filter=false,$filter_prefix='',$is_shortcode_filter=false) {
 		
-		if(!empty($this->_category)){
+		$this->is_shop_cat_filter = $is_shop_cat_filter;
+		$this->is_shortcode_filter = $is_shortcode_filter;
+		$this->filter_prefix = $filter_prefix;
+		$this->_category= !$this->is_shortcode_filter ? $this->eo_wbc_get_category() : '';
+		
+		if(!empty($this->_category) or $this->is_shop_cat_filter or $this->is_shortcode_filter){
 		
 			if(get_option('eo_wbc_dropdown_filter',false) and !wp_is_mobile()) {
 

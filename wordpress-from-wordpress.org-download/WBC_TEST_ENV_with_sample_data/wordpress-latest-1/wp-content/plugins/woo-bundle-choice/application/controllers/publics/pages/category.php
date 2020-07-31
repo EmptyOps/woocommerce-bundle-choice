@@ -5,7 +5,9 @@ defined( 'ABSPATH' ) || exit;
 class Category {
 
     private static $_instance = null;
-
+    protected $is_shop_cat_filter = false;
+    protected $is_shortcode_filter = false;
+    protected $filter_prefix = '';
     public static function instance() {
         if ( ! isset( self::$_instance ) ) {
             self::$_instance = new self;
@@ -17,7 +19,8 @@ class Category {
     private function __construct() {        
     }
 
-    public function init() {
+    public function init() {        
+
         //If add to cart triggred
         // Detection : only one category item get length > 0 
         //   i.e. using XOR check if only one of two have been set.
@@ -28,30 +31,33 @@ class Category {
 
         //if Current-Category is either belongs to FIRST OR SECOND Category then initiate application                
         if(
-            (($this->eo_wbc_get_category()== wbc()->options->get_option('configuration','first_slug') //get_option('eo_wbc_first_slug') 
+            ((($this->eo_wbc_get_category()== wbc()->options->get_option('configuration','first_slug') //get_option('eo_wbc_first_slug') 
               OR
-            $this->eo_wbc_get_category()== wbc()->options->get_option('configuration','second_slug'))) and !empty(wbc()->sanitize->get('EO_WBC')) //get_option('eo_wbc_second_slug')
+            $this->eo_wbc_get_category()== wbc()->options->get_option('configuration','second_slug'))) and !empty(wbc()->sanitize->get('EO_WBC')) ) or $this->is_shop_cat_filter===true or $this->is_shortcode_filter //get_option('eo_wbc_second_slug')
         ){
             //if( get_option('eo_wbc_filter_enable')=='1' ){
             /*wbc()->options->update_option('filters_filter_setting','config_filter_status','config_filter_status');*/
 
             /*wbc()->options->update_option('filters_filter_setting','filter_setting_alternate_mobile','filter_setting_alternate_mobile');*/
 
-            
-            if(wbc()->options->get_option('filters_filter_setting','filter_setting_status','1')) {
+            if(wbc()->options->get_option('filters_filter_setting','filter_setting_status','1') or $this->is_shop_cat_filter===true or $this->is_shortcode_filter) {
 
                 if(
                      // ($this->eo_wbc_get_category()==get_option('eo_wbc_first_slug') && get_option('eo_wbc_add_filter_first',FALSE) )
                      // OR 
                      // ($this->eo_wbc_get_category()==get_option('eo_wbc_second_slug') && get_option('eo_wbc_add_filter_second',FALSE) )
-                     ($this->eo_wbc_get_category()==wbc()->options->get_option('configuration','first_slug') && wbc()->options->get_option_group('filters_d_fconfig',FALSE) )
+                     (($this->eo_wbc_get_category()==wbc()->options->get_option('configuration','first_slug') && wbc()->options->get_option_group('filters_d_fconfig',FALSE) )
                      OR 
-                     ($this->eo_wbc_get_category()==wbc()->options->get_option('configuration','second_slug') && wbc()->options->get_option_group('filters_s_fconfig',FALSE) )
+                     ($this->eo_wbc_get_category()==wbc()->options->get_option('configuration','second_slug') && wbc()->options->get_option_group('filters_s_fconfig',FALSE) ))
+                     or $this->is_shop_cat_filter===true or $this->is_shortcode_filter
                 ){
                     $this->eo_wbc_add_filters();          
                 }
-            }            
-            $this->eo_wbc_add_breadcrumb();                     
+            }        
+            if($this->is_shop_cat_filter!==true && !$this->is_shortcode_filter){
+                $this->eo_wbc_add_breadcrumb();                         
+            }    
+            
             $this->eo_wbc_render(); 
         }    
     }
@@ -120,10 +126,14 @@ class Category {
         add_action( 'woocommerce_archive_description',function(){    
             wbc()->load->model('publics/component/eowbc_filter_widget');          
             // if (class_exists('EO_WBC_Filter_Widget')) {
-                \eo\wbc\model\publics\component\EOWBC_Filter_Widget::instance()->init();                                
+                \eo\wbc\model\publics\component\EOWBC_Filter_Widget::instance()->init($this->is_shop_cat_filter,$this->filter_prefix,false);                                
             // }
         },130);         
         
+        if( $this->is_shortcode_filter ) {
+            \eo\wbc\model\publics\component\EOWBC_Filter_Widget::instance()->init(false,$this->filter_prefix,$this->is_shortcode_filter);
+        }
+
     }
 
     public function eo_wbc_add_breadcrumb()
@@ -175,48 +185,50 @@ class Category {
             add_filter( 'post_type_link',array($this,'eo_wbc_product_url'));   
         } 
 
-        add_action( 'woocommerce_no_products_found', function(){
+        if($this->is_shop_cat_filter!==true && !$this->is_shortcode_filter){
+            add_action( 'woocommerce_no_products_found', function(){
 
-            remove_action( 'woocommerce_no_products_found', 'wc_no_products_found', 10 );
-            $html='<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><br/><br/>';
-            $html.='<div class="woocommerce ui grid centered">';
-                $html.='<div class="ui row" style="height:max-content;">';                    
-                    $html.="<div class='ui grid centered'>";
-                        $html.="<div class='ui row' style='padding-bottom:3rem !important'>";
-                            $html.="<h1 style='font-size:10vw;color:#767676;'>Ooops!</h1>";
-                        $html.="</div>";
-                        $html.="<div class='ui row' style='padding-bottom:0px'>";
-                            $html.='<span class="ui inverted text">' . __( 'No products were found matching your selection.', 'woocommerce' ) .'<span>';
-                        $html.="</div>";    
-                        $html.="<div class='ui row'  style='padding-bottom:3rem !important'>";   
-                            // TODO here isn't it better if i's simple javascript back in history - hiren                         
-                            $html.='<button href="'.$this->eo_wbc_prev_url().'" class="ui inverted secondary single_add_to_cart_button button alt">Go back</button>&nbsp;&nbsp;';
-                            $html.='<button href="'.((empty(wbc()->sanitize->get('FIRST')) XOR empty(wbc()->sanitize->get('SECOND')))?strtok(get_permalink((empty(wbc()->sanitize->get('FIRST'))?wbc()->sanitize->get('SECOND'):wbc()->sanitize->get('FIRST'))),'?'):'').'" class="ui grey button single_add_to_cart_button alt">Continue buying single item</button>&nbsp;&nbsp;';
-                        $html.="</div>";    
-                                                    
-                        if(current_user_can('manage_options')){
-                            //Manage the mapping section
-                            $html.="<div class='ui row' style='padding-bottom:0rem !important'>";
-                                $html.='<a href="'.admin_url('admin.php?page=eowbc-mapping').'"><span class="ui text primary">As admin of this site please create a product mapping to fix this problem.</span></a>';
+                remove_action( 'woocommerce_no_products_found', 'wc_no_products_found', 10 );
+                $html='<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><br/><br/>';
+                $html.='<div class="woocommerce ui grid centered">';
+                    $html.='<div class="ui row" style="height:max-content;">';                    
+                        $html.="<div class='ui grid centered'>";
+                            $html.="<div class='ui row' style='padding-bottom:3rem !important'>";
+                                $html.="<h1 style='font-size:10vw;color:#767676;'>Ooops!</h1>";
+                            $html.="</div>";
+                            $html.="<div class='ui row' style='padding-bottom:0px'>";
+                                $html.='<span class="ui inverted text">' . __( 'No products were found matching your selection.', 'woocommerce' ) .'<span>';
                             $html.="</div>";    
+                            $html.="<div class='ui row'  style='padding-bottom:3rem !important'>";   
+                                // TODO here isn't it better if i's simple javascript back in history - hiren                         
+                                $html.='<button href="'.$this->eo_wbc_prev_url().'" class="ui inverted secondary single_add_to_cart_button button alt">Go back</button>&nbsp;&nbsp;';
+                                $html.='<button href="'.((empty(wbc()->sanitize->get('FIRST')) XOR empty(wbc()->sanitize->get('SECOND')))?strtok(get_permalink((empty(wbc()->sanitize->get('FIRST'))?wbc()->sanitize->get('SECOND'):wbc()->sanitize->get('FIRST'))),'?'):'').'" class="ui grey button single_add_to_cart_button alt">Continue buying single item</button>&nbsp;&nbsp;';
+                            $html.="</div>";    
+                                                        
+                            if(current_user_can('manage_options')){
+                                //Manage the mapping section
+                                $html.="<div class='ui row' style='padding-bottom:0rem !important'>";
+                                    $html.='<a href="'.admin_url('admin.php?page=eowbc-mapping').'"><span class="ui text primary">As admin of this site please create a product mapping to fix this problem.</span></a>';
+                                $html.="</div>";    
 
-                            $html.="<div class='ui row' style='padding-bottom:0rem !important'>";
-                                $html.='Adequate mapping(s) needs to be added in the '.constant('EOWBC_NAME').' for Pair Builder to work properly.';
-                            $html.="</div>";                                                    
-                        } else {                            
-                            $html.="<div class='ui row' style='padding-bottom:0rem !important'>";
-                                $html.='<a href="'.site_url('/?wbc_report=1').'">Report to admin to help them fix this problem.</a>&nbsp;&nbsp;';
-                            $html.="</div>";                                                    
-                        }
-                        
-                        $html.="<div class='ui row' style='padding-bottom:5rem !important'>";    
-                            $html.="<span class='ui header'></span>";                        
-                        $html.="</div>";    
-                    $html.="</div>";                
-                $html.='</div>';                                    
-            $html.='</div><script> jQuery(document).ready(function($){ $(".ui.button").on("click",function(){ window.location.href=$(this).attr("href"); }); }); </script>';
-            echo($html);            
-        }, 9 );
+                                $html.="<div class='ui row' style='padding-bottom:0rem !important'>";
+                                    $html.='Adequate mapping(s) needs to be added in the '.constant('EOWBC_NAME').' for Pair Builder to work properly.';
+                                $html.="</div>";                                                    
+                            } else {                            
+                                $html.="<div class='ui row' style='padding-bottom:0rem !important'>";
+                                    $html.='<a href="'.site_url('/?wbc_report=1').'">Report to admin to help them fix this problem.</a>&nbsp;&nbsp;';
+                                $html.="</div>";                                                    
+                            }
+                            
+                            $html.="<div class='ui row' style='padding-bottom:5rem !important'>";    
+                                $html.="<span class='ui header'></span>";                        
+                            $html.="</div>";    
+                        $html.="</div>";                
+                    $html.='</div>';                                    
+                $html.='</div><script> jQuery(document).ready(function($){ $(".ui.button").on("click",function(){ window.location.href=$(this).attr("href"); }); }); </script>';
+                echo($html);            
+            }, 9 );
+        }
     }
         
     public function eo_wbc_prev_url(){
@@ -294,6 +306,8 @@ class Category {
         elseif(in_array(wbc()->options->get_option('configuration','second_slug')/*get_option('eo_wbc_second_slug')*/,$term_slug))
         {
             return wbc()->options->get_option('configuration','second_slug')/*get_option('eo_wbc_second_slug')*/;
+        } else{
+            return $wp_query->get_queried_object()->slug;            
         }
     }
 }

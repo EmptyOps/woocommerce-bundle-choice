@@ -48,7 +48,7 @@ class Filter_Samples {
         return $__att__;
 	}
 
-	public function save($filter) {
+	public function save($filter,$tprefix='') {
 
 		$this->filter = $filter;		
 
@@ -64,11 +64,11 @@ class Filter_Samples {
         		// if( !in_array($filter['name'], $names)){
         			$prefix = "";
         			if( $index == "d_fconfig" ) {
-						$_POST["saved_tab_key"] = "d_fconfig";
+						$_POST["saved_tab_key"] = $tprefix."d_fconfig";
 						$prefix = "d";
         			}
         			else {
-        				$_POST["saved_tab_key"] = "s_fconfig";
+        				$_POST["saved_tab_key"] = $tprefix."s_fconfig";
 						$prefix = "s";
         			}
         			 	
@@ -94,7 +94,20 @@ class Filter_Samples {
         			// update_option($index,serialize($_data)); 
         			// wbc()->options->update_option_group( 'filters_'.$index, serialize($_data) );
         			
-					$res = \eo\wbc\model\admin\Eowbc_Filters::instance()->save( \eo\wbc\controllers\admin\menu\page\Filters::get_form_definition(), true );
+                    if(empty($tprefix)){
+
+    					$res = \eo\wbc\model\admin\Eowbc_Filters::instance()->save( \eo\wbc\controllers\admin\menu\page\Filters::get_form_definition(), true );
+                    } else {
+                        if( $tprefix == "sc_" ) {
+                            $res = \eo\wbc\model\admin\Eowbc_Shop_Category_Filter::instance()->save( \eo\wbc\controllers\admin\menu\page\Shop_Category_Filter::get_form_definition(), true );
+                        }
+                        elseif( $tprefix == "shortflt_" ) {
+                            $res = \eo\wbc\model\admin\Eowbc_Shortcode_Filters::instance()->save( \eo\wbc\controllers\admin\menu\page\Shortcode_Filters::get_form_definition(), true );
+                        }
+                        else {
+                            throw new Exception("Sample data process not implemented for the provided prefix ".$tprefix, 1);
+                        }
+                    }
 
 					unset($_POST[$prefix.'_fconfig_filter']);
 	                unset($_POST[$prefix.'_fconfig_type']);

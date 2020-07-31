@@ -88,12 +88,30 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 						),
 						array(
 							'parent_slug'=>'eowbc',
+							'title'=>eowbc_lang('Shortcode Filters').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Tiny Features'),
+							'menu_title'=>eowbc_lang('Shortcode Filters'),
+							'capability'=>'manage_options',
+							'slug'=>'eowbc-shortcode-filters',
+							'template'=>'admin/menu/shortcode_filters',
+							'position'=>6
+						),	
+						array(
+							'parent_slug'=>'eowbc',
+							'title'=>eowbc_lang('Filters for Shop/Category Page').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Tiny Features'),
+							'menu_title'=>eowbc_lang('Filters for Shop/Category Page'),
+							'capability'=>'manage_options',
+							'slug'=>'eowbc-shop-cat-filter',
+							'template'=>'admin/menu/shop_cat_filter',
+							'position'=>7
+						),						
+						array(
+							'parent_slug'=>'eowbc',
 							'title'=>eowbc_lang('Price Control(Beta)').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Price Control(Beta)'),
 							'menu_title'=>eowbc_lang('Price Control(Beta)'),
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-price-control',
 							'template'=>'admin/menu/price_control',
-							'position'=>6
+							'position'=>8
 						),
 						array(
 							'parent_slug'=>'eowbc',
@@ -102,7 +120,7 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-setting-status',
 							'template'=>'admin/menu/setting-status',
-							'position'=>7
+							'position'=>9
 						),
 						array(
 							'parent_slug'=>'eowbc',
@@ -111,13 +129,13 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-extensions',
 							'template'=>'admin/menu/extensions',
-							'position'=>8
+							'position'=>10
 						),
 					);
 			$features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())));
 					
 			if(empty($features['price_control'])) {
-				unset($submenu[6]);
+				unset($submenu[8]);
 			}
 			$menu['submenu'] = $submenu;
 			return $menu;
@@ -126,6 +144,7 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 		public function get_menu_structure() {			
 			
 			$menu = apply_filters( 'eowbc_menu', $this->get_menu());
+	
 			$features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())));
 
 			$this->add_message($features,$menu);

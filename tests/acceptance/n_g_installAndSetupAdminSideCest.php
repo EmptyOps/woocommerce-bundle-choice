@@ -41,7 +41,22 @@ class n_g_installAndSetupAdminSideCest extends n_f_adminSideSetupCest
             $I->waitForText($I->get_configs('first_button_text', 'n_'),10);
             $I->see($I->get_configs('second_button_text', 'n_'));
 
-            // are there any other checks ??? think of what user would be thinking after adding the sample data. 
+            // TODO are there any other checks ??? think of what user would be thinking regarding admin side after adding the sample data. 
+
+                // what are all the admin side functionality are for? 
+                    // to answer this kind of question links to doc, help icon based popu, walk though guides etc. can help. Should start with links to doc or help icon
+
+                // what the x module do?     
+                    // to answer this kind of question links to doc, help icon based popu, walk though guides etc. can help. Should start with links to doc or help icon
+
+                // how to control/manage/operate the plugin? how to actually configure the plugin for their own use? how to customize it if required? 
+
+                // how to customize styling as per their need? 
+
+                // will this plugin work with some other xyz plugins and in abc scenarios/environments like multisite, mutlivendor, multi language, multi currency etc. 
+
+                // any other ?
+
     }
 
     // try alternate widgets 
@@ -54,24 +69,31 @@ class n_g_installAndSetupAdminSideCest extends n_f_adminSideSetupCest
         $templates = array();
         // check default template
         $templates[] = 'default';
+        $selected_templts = array(0);
 
-        // check two random template from 3 alternate templates available 
+        $templates_verification_content = array();
+        $templates_verification_content[0]['html_source'] = '<div class="column">1</div>';
+        $templates_verification_content[1]['html_source'] = '<div class="column">1</div>';  // TODO need to find something unique here since default template also has similar source, we can always place ids in container and use to confirm the test but anything that is loaded outside of the widget template is not valid for tests.  
+        $templates_verification_content[2]['html_source'] = '<div class="ui column left aligned">1</div>';
+
+        // check one random template from 2 alternate templates available 
         $attempts = 0;
         while($attempts <= 100 /*keep a check, while loops can be horrible :-( */) {
             $attempts++;
 
-            $rnd = rand(1, 3);
+            $rnd = rand(1, 2);
             if( !in_array('template_'.$rnd, $templates) ) {
                 $templates[] = 'template_'.$rnd;
+                $selected_templts[] = $rnd;
 
-                if( sizeof($templates) >= 3) { // break when two random are selected
+                if( sizeof($templates) >= 2) { // break when one random are selected
                     break;
                 } 
             }
         }
 
-        if( sizeof($templates) > 3) { // break when two random are selected
-            throw new Exception("More than two random templates are selected", 1);
+        if( sizeof($templates) > 2) { // break when one random are selected
+            throw new Exception("More than one random templates are selected", 1);
         }
 
         $current_uri = "";
@@ -94,7 +116,7 @@ class n_g_installAndSetupAdminSideCest extends n_f_adminSideSetupCest
             }
             
             //verify breadcrumb by its html source
-            $I->seeInSource('look for some unique source code of '.$templates[$i].' template');   // we need some unique way to indentify that the right template is loaded, if we ask dev team to add some unique id it etc. for mere identification than that is not quite effect for testing the development
+            $I->seeInSource($templates_verification_content[$selected_templts[$i]]['html_source']);   // we need some unique way to indentify that the right template is loaded, if we ask dev team to add some unique id it etc. for mere identification than that is not quite effect for testing the development
         }
 
         // set back to default or let the random being tested

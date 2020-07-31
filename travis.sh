@@ -306,6 +306,8 @@ edit_codeception_yml_file() {
 #echo the necessary output 
 echo_necessary_output() {
 
+	# echo error logs related to php from server logs and site logs 
+
 	#look into entire dir
 	ls -l tests/_output/
 
