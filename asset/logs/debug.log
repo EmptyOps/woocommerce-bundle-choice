@@ -124,3 +124,11 @@
 "syntax error, unexpected '{'"
 [Jul 29 2020 09:07:04] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/service.php at line number 130
 "syntax error, unexpected ')'"
+[Jul 30 2020 13:26:10] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/system/tools/tool-error-handler.php at line number 141
+"Undefined index: tableview-extension\/index.php"
+[Jul 30 2020 14:46:15] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 1378
+"syntax error, unexpected ')'"
+[Jul 31 2020 05:17:35] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/admin/menu/page/filters.php at line number 869
+"Undefined variable: prefix"
+[Jul 31 2020 05:18:14] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/admin/menu/page/filters.php at line number 869
+"Undefined variable: prefix"

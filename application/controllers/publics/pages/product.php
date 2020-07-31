@@ -240,7 +240,7 @@ class Product {
             <script type="text/javascript">
                 jQuery(".single_add_to_cart_button.button.alt").ready(function(){
                     jQuery('form.cart').prepend("<input type='hidden' name='eo_wbc_target' value='<?php echo $this->eo_wbc_get_category(); ?>'/><input type='hidden' name='eo_wbc_product_id' value='<?php global $post; echo $post->ID; ?>'/>");
-                    jQuery(".single_add_to_cart_button.button.alt:not(.disabled)").replaceWith(
+                    jQuery(".single_add_to_cart_button.button.alt:not(.disabled):eq(0)").replaceWith(
                          "<button href='#' id='eo_wbc_add_to_cart' class='single_add_to_cart_button button alt'>"
                          +"<?php echo $btn_text; ?>"
                          +"</button>"

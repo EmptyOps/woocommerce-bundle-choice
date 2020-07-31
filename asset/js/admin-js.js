@@ -6,6 +6,42 @@ jQuery(document).ready(function($){
 	$(".ui.pointing.secondary.menu>.item").tab();
     $(".exclamation.circle.icon").popup({position:'bottom left',hoverable:true});
 
+    jQuery("#d_fconfig_input_type_dropdown_div,#s_fconfig_input_type_dropdown_div").on('change',function(){
+        let value = jQuery(this).dropdown('get value')
+        let prefix = (jQuery(this).attr('id')=='d_fconfig_input_type_dropdown_div'?'d':'s');
+        let tab = jQuery(this).closest('[data-tab]');
+        if(value === 'icon' || value === 'icon_text') {            
+            $(tab).children('.fields').has('[for="'+prefix+'_fconfig_is_single_select"]').show();
+            $(tab).children('.fields').has('#'+prefix+'_fconfig_icon_size_label_label_div').show();
+            $(tab).children('.fields').has('#'+prefix+'_fconfig_icon_size').show();
+            $(tab).children('.fields').has('#'+prefix+'_fconfig_icon_label_size_label_label_div').show();
+            $(tab).children('.fields').has('#'+prefix+'_fconfig_icon_label_size').show();
+            
+        } else {
+            $(tab).children('.fields').has('[for="'+prefix+'_fconfig_is_single_select"]').hide();
+            $(tab).children('.fields').has('#'+prefix+'_fconfig_icon_size_label_label_div').hide();
+            $(tab).children('.fields').has('#'+prefix+'_fconfig_icon_size').hide();
+            $(tab).children('.fields').has('#'+prefix+'_fconfig_icon_label_size_label_label_div').hide();
+            $(tab).children('.fields').has('#'+prefix+'_fconfig_icon_label_size').hide();            
+        }
+    }).trigger('change');
+
+    jQuery("[name='d_fconfig_add_help'],[name='s_fconfig_add_help']").on('change',function(){
+
+        let prefix = (jQuery(this).attr('name')=='d_fconfig_add_help'?'d':'s');
+        let tab = jQuery(this).closest('[data-tab]');
+        if(jQuery(this).is(':checked')){
+            $(tab).children('.fields').has('#'+prefix+'_fconfig_add_help_text').show();
+        } else {
+            $(tab).children('.fields').has('#'+prefix+'_fconfig_add_help_text').hide();
+        }
+    }).trigger('change');
+
+    jQuery("#s_fconfig_input_type_dropdown_div").on('change',function(){
+        let ids = jQuery(this).parent().data('toggle');
+        jQuery(ids).toggle();
+    });
+
 	//Open wordpress media manager on button click
     jQuery('.field.upload_image>.ui.button').on('click',function(event){
         event.preventDefault();
