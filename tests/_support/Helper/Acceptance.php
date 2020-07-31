@@ -104,6 +104,31 @@ class Acceptance extends \Codeception\Module
     }
 
     /**
+     * Get dir path of site starting from document root only so not full absolute path
+     * @return mixed
+     * @throws \Codeception\Exception\ModuleException
+     */
+    public function getDirPath()
+    {
+        echo "called getDirPath...";
+        try {
+            $version_nums = explode(".", PHP_VERSION);
+            if( $this->get_test_environment() == "WBC_TEST_ENV_default" ) {
+                echo 'getDirPath for default environment';
+                return 'tmp/wordpress/src';
+            } 
+            else {
+                echo 'getDirPath for other environment';
+                return 'tmp/WBC_TEST_ENV_with_sample_data/wordpress-latest-1';
+            }
+        }
+        catch(Exception $e) {
+            echo "caught message...";
+            echo $e->getMessage()."";
+        }
+    }
+
+    /**
      * Get current url from WebDriver
      * @return mixed
      * @throws \Codeception\Exception\ModuleException
@@ -133,11 +158,14 @@ class Acceptance extends \Codeception\Module
      * @return mixed
      * @throws \Codeception\Exception\ModuleException
      */
-    public function getCurrentUri()
+    public function getCurrentUri($remove_site_dir_path=false)
     {
         echo "called getCurrentUri...";
         try {
-            return $this->getModule('WPWebDriver')->_getCurrentUri();
+            if( $remove_site_dir_path )
+                return str_replace($this->getDirPath(), "", $this->getModule('WPWebDriver')->_getCurrentUri());
+            else 
+                return $this->getModule('WPWebDriver')->_getCurrentUri();
         }
         catch(Exception $e) {
             echo "caught message...";

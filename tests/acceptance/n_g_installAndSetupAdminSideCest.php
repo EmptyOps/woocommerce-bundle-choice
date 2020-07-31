@@ -109,7 +109,7 @@ class n_g_installAndSetupAdminSideCest extends n_f_adminSideSetupCest
                 $this->gotoStep($I);
 
                 // keep current uri so that we can go there directly next time
-                $current_uri = $I->getCurrentUri();
+                $current_uri = $I->getCurrentUri(true);
             }
             else {
                 $I->amOnPage($current_uri);
@@ -172,7 +172,7 @@ class n_g_installAndSetupAdminSideCest extends n_f_adminSideSetupCest
                     $this->gotoStep($I, $cat);  
 
                     // keep current uri so that we can go there directly next time
-                    $current_uri = $I->getCurrentUri();
+                    $current_uri = $I->getCurrentUri(true);
                 }
                 else {
                     $I->amOnPage($current_uri);
