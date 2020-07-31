@@ -35,6 +35,7 @@ class n_f_adminSideSetupCest
         // confirm if saved properly or not
         $I->reloadPage();   //reload page
         $I->click('Navigations Steps( Breadcrumb )');
+        echo "config_alternate_breadcrumb value is=".$I->executeJS("jQuery('input[name=\"config_alternate_breadcrumb\"]').val();"); 
         $I->seeInField('config_alternate_breadcrumb', $widget_key);
     }
 
