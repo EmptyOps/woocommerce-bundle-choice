@@ -68,7 +68,7 @@ class n_f_adminSideSetupCest
 
     protected function gotoStep(AcceptanceTester $I, $cat=0)
     {
-        $I->amOnPage('/design-your-own-ring/');
+        $I->amOnPage('/index.php/design-your-own-ring/');
 
         $I->see($I->get_configs('first_button_text', 'n_'));
         $I->see($I->get_configs('second_button_text', 'n_'));
