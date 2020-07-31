@@ -44,10 +44,25 @@ class Admin {
         		//	perform initial task
 				self::instance()->init();
 
-        		// // apply_filters('eo_wbc_admin_sample_data_add_jewelry',array(\eo\wbc\controllers\admin\sample_data\Jewelry::instance(),'init'));	
-        		// \eo\wbc\controllers\admin\sample_data\Jewelry::instance()->init();
-        		// TODO here loop through enabled features and then check if its sample data is available and the particular class is available then call it 
-        		\eo\wbc\controllers\admin\sample_data\Ring_Builder::instance()->init();
+				if( !empty(wbc()->sanitize->get('f')) ) {
+
+					$enabled_features = explode(",", wbc()->sanitize->get('f'));
+
+	        		// // apply_filters('eo_wbc_admin_sample_data_add_jewelry',array(\eo\wbc\controllers\admin\sample_data\Jewelry::instance(),'init'));	
+	        		// \eo\wbc\controllers\admin\sample_data\Jewelry::instance()->init();
+	        		// TODO here we need to clean and accurate session management to call the second feature's sample data process after the first is done in case there are more than one feature enabled or simply we can do url management to pass the remaining features in a get param. -- We must do this when add sample data for features that can be enabled together.  
+	        		foreach ($enabled_features as $efk => $efv) {
+	        			if( in_array($efv, wbc()->config->get_available_samples()) ) {
+		        			$class = str_replace(" ", "_", ucwords( str_replace("_", " ", $efv) ) );
+		        			$class = '\\eo\\wbc\\controllers\\admin\\sample_data\\' . $class;
+	        				if( class_exists($class) ) {
+		        				$class::instance()->init();	
+		        				break;
+	        				}
+	        			}
+	        		}
+				}
+        		
         	}
         } else {
 

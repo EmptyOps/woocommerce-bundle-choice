@@ -4,8 +4,11 @@ dist: trusty
 # language: php
 
 addons:
+
+  # note: instead of using firefox latest we are using a bit older version due to configuration issues of w3c protocol for remote webdriver. But now it is also a wise combination to use one browser(right now chrome) with latest version and one browser with a bit older version( right now firefox). Anyway in future we will need full coverage of everything as per standards ranging from devices, browsers and their versions, language(php)/DB(mysql) version, wp versions, woo versions etc. Except third party services the selenimu server and its dockers are providing featurs to use all browser, devices(MAC etc. environment) and versions combinations. 
   chrome: stable
-  firefox: latest   #TODO here in future we should setup just the required browser for environment for e.g. we use only one browser per php version so this thing should be conditioned based on php version and load only one browser by moving below if possible or otherwise using some other condition 
+  # firefox: latest   #TODO here in future we should setup just the required browser for environment for e.g. we use only one browser per php version so this thing should be conditioned based on php version and load only one browser by moving below if possible or otherwise using some other condition 
+  firefox: "55"
 
 notifications:
   email:
@@ -152,7 +155,7 @@ before_script:
     if [[ $(test_environment) == "WBC_TEST_ENV_default" ]]; then
       wget -c -nc --retry-connrefused --tries=0 http://selenium-release.storage.googleapis.com/2.53/selenium-server-standalone-2.53.1.jar -O selenium-server-standalone.jar
     else
-      wget -c -nc --retry-connrefused --tries=0 https://selenium-release.storage.googleapis.com/4.0-alpha-6/selenium-server-4.0.0-alpha-6.jar -O selenium-server-standalone.jar
+      wget -c -nc --retry-connrefused --tries=0 http://selenium-release.storage.googleapis.com/3.7/selenium-server-standalone-3.7.1.jar -O selenium-server-standalone.jar
     fi
   
 
@@ -165,8 +168,8 @@ before_script:
       wget https://chromedriver.storage.googleapis.com/2.27/chromedriver_linux64.zip
       unzip -o -q chromedriver_linux64.zip
     else
-      wget https://github.com/mozilla/geckodriver/releases/download/v0.26.0/geckodriver-v0.26.0-linux64.tar.gz
-      tar -xzf geckodriver-v0.26.0-linux64.tar.gz
+      wget https://github.com/mozilla/geckodriver/releases/download/v0.20.1/geckodriver-v0.20.1-linux64.tar.gz
+      tar -xzf geckodriver-v0.20.1-linux64.tar.gz
     fi
 
   - echo "Run selenium-server"
@@ -177,7 +180,7 @@ before_script:
     if [[ $(test_environment) == "WBC_TEST_ENV_default" ]]; then
       nohup bash -c "java -jar selenium-server-standalone.jar -Dwebdriver.chrome.driver=\"chromedriver\" -Dwebdriver.chrome.whitelistedIps=\"localhost\" &" && sleep 1;    
     else
-      nohup bash -c "java -jar -Dwebdriver.gecko.driver=\"geckodriver\" -enablePassThrough false selenium-server-standalone.jar &" && sleep 1;
+      nohup bash -c "java -jar -Dwebdriver.gecko.driver=\"geckodriver\" selenium-server-standalone.jar -enablePassThrough false &" && sleep 1;
     fi
 
 

@@ -3,7 +3,7 @@ namespace eo\wbc\controllers\admin\sample_data;
 
 defined( 'ABSPATH' ) || exit;
 
-class Ring_Builder extends Sample_Data {
+class Pair_Maker extends Sample_Data {
 
     private static $_instance = null;
 
@@ -15,14 +15,14 @@ class Ring_Builder extends Sample_Data {
         return self::$_instance;
     }
 
-    private $feature_key = 'ring_builder';  
+    private $feature_key = 'pair_maker';  
 
     private function __construct() {        
         $this->feature_title = wbc()->config->get_builders()[$this->feature_key];    
 
         wbc()->load->model('admin/sample_data/eowbc_sample_data');
-        wbc()->load->model('admin/sample_data/eowbc_ring_builder');
-        $this->model = \eo\wbc\model\admin\sample_data\Eowbc_Ring_Builder::instance();
+        wbc()->load->model('admin/sample_data/eowbc_pair_maker');
+        $this->model = \eo\wbc\model\admin\sample_data\Eowbc_Pair_Maker::instance();
     }
 
     public function init() {
