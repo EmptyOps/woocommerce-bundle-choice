@@ -48,6 +48,22 @@ class n_e_addSampleDataProcessCest
 
     }
 
+    public function check_categories(AcceptanceTester $I)
+    {
+        if( !$I->test_allowed_in_this_environment("n_") ) {
+            return;
+        }
+
+        //
+        // Go to step1   
+        //
+        $I->amOnPage('/wp-admin/edit-tags.php?taxonomy=product_cat&post_type=product');
+        
+        // take snap by failing
+        $I->see('dsfsfsdfdsfdf');
+
+    }
+
     public function step2(AcceptanceTester $I)
     {
     	if( !$I->test_allowed_in_this_environment("n_") ) {
