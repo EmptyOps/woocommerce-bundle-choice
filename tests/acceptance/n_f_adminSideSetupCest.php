@@ -25,15 +25,15 @@ class n_f_adminSideSetupCest
         $I->see('First Category');
 
         // select template
-        $I->executeJS("jQuery('[name=\"config_alternate_breadcrumb\"]').val('".$widget_key."');"); 
+        $I->executeJS("jQuery('input[name=\"config_alternate_breadcrumb\"]').val('".$widget_key."');"); 
         // $I->executeJS("jQuery('#".$widget_key."').parent().checkbox('set checked', '".$widget_key."');");  
 
         // save 
-        $I->scrollTo('//*[@id="config_navigation_conf_save_btn"]');
+        $I->scrollTo('//*[@id="config_navigation_conf_save_btn"]', -300, -100);
         $I->wait(3);
         $I->click('#config_navigation_conf_save_btn');  //('Save');     //it shouldn't be this way, but there seem some issue with selenium driver and thus when there is another Save button on the page even though on another page and is not visible but still selenium think it is visible and thus gives us error so need to use unique xPath like id etc. 
 
-        $I->waitForText('sdfjjj sdkfjhsdkfhj', 1);
+        // $I->waitForText('sdfjjj sdkfjhsdkfhj', 1);
 
         // confirm if saved properly or not
         $I->reloadPage();   //reload page
