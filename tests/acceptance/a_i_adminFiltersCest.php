@@ -73,7 +73,9 @@ class a_i_adminFiltersCest
 		// confirm if saved properly or not
 		$I->reloadPage();	//reload page
 		$I->click('Alternate Filter Widgets');
-		$I->seeInField('second_category_altr_filt_widgts', 'sc3');
+		// $I->seeInField('second_category_altr_filt_widgts', 'sc3');
+		$I->radioAssertion($I, "second_category_altr_filt_widgts", 'sc3'); 
+
 	}
 
 	public function firstAndSecondCategoryFilterConfigurations(AcceptanceTester $I) {

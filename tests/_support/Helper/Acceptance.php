@@ -302,6 +302,30 @@ class Acceptance extends \Codeception\Module
     }
 
     /**
+     * since we don't know any method yet that for radio assrtion from webdriver, seeInField is not reliable 
+     * @param $dummy_positive html source text to run a dummy positive assertion 
+     * @param $dummy_negative html source text to run a dummy negative assertion so that in test report user can see that one of the test is actually failed
+     */
+    public function radioAssertion($I,$field_name, $expected_value, $dummy_positive='<body>', $dummy_negative='dummy text to fail assertion') {
+        echo "called radioAssertion...";
+        
+        try { 
+            $val = $I->grabValueFrom('input[name='.$field_name.']');
+            echo "grabValueFrom value is=".$val."=expected=".$expected_value; 
+            if( $val == $expected_value ) {
+                $I->seeInSource($dummy_positive);
+            }
+            else {
+                $I->seeInSource($dummy_negative);
+            }
+        }
+        catch(Exception $e) {
+            echo "caught error...";
+            echo $e->getMessage();
+        }
+    }
+
+    /**
      * 
      */
     public function resetSession() 

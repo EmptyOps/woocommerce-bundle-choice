@@ -38,15 +38,8 @@ class n_f_adminSideSetupCest
         // confirm if saved properly or not
         $I->reloadPage();   //reload page
         $I->click('Navigations Steps( Breadcrumb )');
-        $val = $I->grabValueFrom('input[name=config_alternate_breadcrumb]');
-        echo "config_alternate_breadcrumb value is=".$I->executeJS("return jQuery('input[name=\"config_alternate_breadcrumb\"]').val();")."=".$val; 
-        if( $val == $widget_key )  // since we don't know any method yet that for radio assrtion from webdriver, seeInField is not reliable 
-        {
-            $I->see('First Category');
-        }
-        else {
-            $I->see('dummy text to fail assertion');
-        }
+        echo "config_alternate_breadcrumb value is=".$I->executeJS("return jQuery('input[name=\"config_alternate_breadcrumb\"]').val();"); 
+        $I->radioAssertion($I, "config_alternate_breadcrumb", $widget_key); 
     }
 
     protected function setAlternateFilterWidget(AcceptanceTester $I, $widget_key, $cat)
