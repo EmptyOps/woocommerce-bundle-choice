@@ -103,7 +103,7 @@ class n_g_installAndSetupAdminSideCest extends n_f_adminSideSetupCest
         for($i=0; $i<sizeof($templates); $i++) {
             if( $i > 0 ) {
                 // change the template 
-                $this->setAlternateBreadcrumbWidget($I, $templates[$i]);
+                $this->setAlternateBreadcrumbWidget($I, $templates[$i], $templates_name[$i]);
             }
         
             if( $current_uri == "" ) {
