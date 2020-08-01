@@ -67,8 +67,10 @@ class n_g_installAndSetupAdminSideCest extends n_f_adminSideSetupCest
         }
 
         $templates = array();
+        $templates_name = array();
         // check default template
         $templates[] = 'default';
+        $templates_name[] = 'Default';
         $selected_templts = array(0);
 
         $templates_verification_content = array();
@@ -84,6 +86,7 @@ class n_g_installAndSetupAdminSideCest extends n_f_adminSideSetupCest
             $rnd = rand(1, 2);
             if( !in_array('template_'.$rnd, $templates) ) {
                 $templates[] = 'template_'.$rnd;
+                $templates_name[] = 'Template '.$rnd;
                 $selected_templts[] = $rnd;
 
                 if( sizeof($templates) >= 2) { // break when one random are selected
@@ -121,7 +124,7 @@ class n_g_installAndSetupAdminSideCest extends n_f_adminSideSetupCest
 
         // set back to default or let the random being tested
         if( rand(1, 100) > 50 ) {
-            $this->setAlternateBreadcrumbWidget($I, $templates[0]);
+            $this->setAlternateBreadcrumbWidget($I, $templates[0], $templates_name);
         }
 
     }

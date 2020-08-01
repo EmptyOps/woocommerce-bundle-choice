@@ -11,7 +11,7 @@ class n_f_adminSideSetupCest
     // {
     // }
     
-    protected function setAlternateBreadcrumbWidget(AcceptanceTester $I, $widget_key)
+    protected function setAlternateBreadcrumbWidget(AcceptanceTester $I, $widget_key, $widget_option)
     {
         // if( !$I->test_allowed_in_this_environment("n_") ) {
         //     return;
@@ -26,14 +26,18 @@ class n_f_adminSideSetupCest
 
         // select template
         // $I->executeJS("jQuery('input[name=\"config_alternate_breadcrumb\"]').val('".$widget_key."');"); 
-        $I->selectOption('form input[name=config_alternate_breadcrumb]', $widget_key);
+        $I->selectOption('form input[name=config_alternate_breadcrumb]', $widget_option);
         // $I->executeJS("jQuery('#".$widget_key."').parent().checkbox('set checked', '".$widget_key."');");  
+
+        echo "config_alternate_breadcrumb value is=".$I->executeJS("return jQuery('input[name=\"config_alternate_breadcrumb\"]').val();"); 
+        $I->radioAssertion($I, "config_alternate_breadcrumb", $widget_key); 
 
         // save 
         $I->scrollTo('//*[@id="config_navigation_conf_save_btn"]', -300, -100);
         $I->wait(3);
         $I->click('#config_navigation_conf_save_btn');  //('Save');     //it shouldn't be this way, but there seem some issue with selenium driver and thus when there is another Save button on the page even though on another page and is not visible but still selenium think it is visible and thus gives us error so need to use unique xPath like id etc. 
 
+        // since due to sample data is there it may take time to install alternate widget's sample filters 
         $I->waitForText('Updated successfully', 10);
 
         // confirm if saved properly or not
