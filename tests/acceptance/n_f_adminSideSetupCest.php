@@ -39,7 +39,7 @@ class n_f_adminSideSetupCest
         $I->reloadPage();   //reload page
         $I->click('Navigations Steps( Breadcrumb )');
         echo "config_alternate_breadcrumb value is=".$I->executeJS("return jQuery('input[name=\"config_alternate_breadcrumb\"]').val();"); 
-        $I->seeInField('config_alternate_breadcrumb', $widget_key);
+        $I->seeInField('config_alternate_breadcrumb', $widget_key."this is not reliable for radio");
     }
 
     protected function setAlternateFilterWidget(AcceptanceTester $I, $widget_key, $cat)
