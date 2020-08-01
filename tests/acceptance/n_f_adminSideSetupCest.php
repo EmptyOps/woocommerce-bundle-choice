@@ -33,14 +33,19 @@ class n_f_adminSideSetupCest
         $I->wait(3);
         $I->click('#config_navigation_conf_save_btn');  //('Save');     //it shouldn't be this way, but there seem some issue with selenium driver and thus when there is another Save button on the page even though on another page and is not visible but still selenium think it is visible and thus gives us error so need to use unique xPath like id etc. 
 
-        // $I->waitForText('sdfjjj sdkfjhsdkfhj', 1);
+        $I->waitForText('Updated successfully', 10);
 
         // confirm if saved properly or not
         $I->reloadPage();   //reload page
         $I->click('Navigations Steps( Breadcrumb )');
         $val = $I->grabValueFrom('input[name=config_alternate_breadcrumb]');
         echo "config_alternate_breadcrumb value is=".$I->executeJS("return jQuery('input[name=\"config_alternate_breadcrumb\"]').val();")."=".$val; 
-        $I->seeInField('config_alternate_breadcrumb', $widget_key."this is not reliable for radio");
+        if( $val == $widget_key )  // since we don't know any method yet that for radio assrtion from webdriver, seeInField is not reliable {
+            $I->see('First Category');
+        }
+        else {
+            $I->see('dummy text to fail assertion');
+        }
     }
 
     protected function setAlternateFilterWidget(AcceptanceTester $I, $widget_key, $cat)
