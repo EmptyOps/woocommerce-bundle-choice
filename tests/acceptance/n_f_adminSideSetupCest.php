@@ -40,7 +40,8 @@ class n_f_adminSideSetupCest
         $I->click('Navigations Steps( Breadcrumb )');
         $val = $I->grabValueFrom('input[name=config_alternate_breadcrumb]');
         echo "config_alternate_breadcrumb value is=".$I->executeJS("return jQuery('input[name=\"config_alternate_breadcrumb\"]').val();")."=".$val; 
-        if( $val == $widget_key )  // since we don't know any method yet that for radio assrtion from webdriver, seeInField is not reliable {
+        if( $val == $widget_key )  // since we don't know any method yet that for radio assrtion from webdriver, seeInField is not reliable 
+        {
             $I->see('First Category');
         }
         else {
