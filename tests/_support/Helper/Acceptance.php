@@ -32,8 +32,20 @@ class Acceptance extends \Codeception\Module
         else if( $key == "cat_name_1" && ($prefix=="n_" || empty($prefix)) ) {
             return $second_cat_name_for_suite_n_;
         }
+        else if( $key == "first_product_name" && ($prefix=="n_" || empty($prefix)) ) {
+            return "Asscher Diamond #10000052";
+        }
+        else if( $key == "first_product_market_price" && ($prefix=="n_" || empty($prefix)) ) {
+            return "12,500.00";
+        }
         else if( $key == "first_product_price" && ($prefix=="n_" || empty($prefix)) ) {
-            return "12.00";
+            return "11,390.00";
+        }
+        else if( $key == "first_product_page_button_text" && ($prefix=="n_" || empty($prefix)) ) {
+            return "CONTINUE";
+        }
+        else if( $key == "second_product_page_button_text" && ($prefix=="n_" || empty($prefix)) ) {
+            return "CONTINUE";
         }
 
         return null;
