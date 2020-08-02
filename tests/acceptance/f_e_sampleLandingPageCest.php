@@ -18,13 +18,13 @@ class f_e_sampleLandingPageCest
         // }
         
         // go to the page
-		$I->amOnPage('/design-your-own-ring');
+		$I->amOnPage( ($suite_name_prefix == "n_" ? '/index.php' : '' ) . '/design-your-own-ring');
 
 		// Check if buttons with text x are visible 
-		$I->see('Start with Diamond');
+		$I->see( $suite_name_prefix == "n_" ? $I->get_configs('first_button_text',$suite_name_prefix) : 'Start with Diamond' );
 
 		// I click on button one and I see in next page text like 1 {button text}
-        $I->click('Start with Diamond');
+        $I->click( $suite_name_prefix == "n_" ? $I->get_configs('first_button_text',$suite_name_prefix) : 'Start with Diamond' );
             // $I->wait(5);
             // echo $I->grabPageSource();
         $I->waitForText('CHOOSE A', 10);    
@@ -37,7 +37,7 @@ class f_e_sampleLandingPageCest
         $I->moveBack();
 
 		// I click on button two  and I see in next page text like 1 {button text} of second Button
-        $I->click('Start with Setting');
+        $I->click( $suite_name_prefix == "n_" ? $I->get_configs('second_button_text',$suite_name_prefix) : 'Start with Setting' );
         $I->waitForText('CHOOSE A', 10);    
         $I->see('1');
         $I->see('SETTING');
