@@ -305,7 +305,7 @@ class Acceptance extends \Codeception\Module
      * since we don't know any method yet that for radio assrtion from webdriver, seeInField is not reliable 
      * @param $dummy text to run a dummy positive/negative assertion so that in test report user can see that one of the test is actually failed
      */
-    public function radioAssertion($I, $field_id, $field_name, $expected_value, $dummy='dummy text to fail assertion') {
+    public function radioAssertion($I, $field_id, $field_name, $expected_value, $dummy='dummy text to do positve or negative assertion') {
         echo "called radioAssertion...";
         
         try { 

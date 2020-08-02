@@ -29,26 +29,17 @@ class n_f_adminSideSetupCest
         $I->selectOption('form input[name=config_alternate_breadcrumb]', $widget_option);
         // $I->executeJS("jQuery('#".$widget_key."').parent().checkbox('set checked', '".$widget_key."');");  
 
-        echo "config_alternate_breadcrumb value is=".$I->executeJS("return jQuery('input[name=\"config_alternate_breadcrumb\"]').val();"); 
-        // $I->radioAssertion($I, "config_alternate_breadcrumb", $widget_key); 
-
         // save 
         $I->scrollTo('//*[@id="config_navigation_conf_save_btn"]', -300, -100);
         $I->wait(3);
         $I->click('#config_navigation_conf_save_btn');  //('Save');     //it shouldn't be this way, but there seem some issue with selenium driver and thus when there is another Save button on the page even though on another page and is not visible but still selenium think it is visible and thus gives us error so need to use unique xPath like id etc. 
 
-        // since due to sample data is there it may take time to install alternate widget's sample filters 
+        // since due to sample data is there it may take time to install alternate widget's sample data 
         $I->waitForText('Updated successfully', 10);
-
-        // tmp
-        $I->wait(2);
-        echo "result is=".$I->executeJS("return jQuery('#saveactionresultsjkkjh').html();")."\\n"; 
-        echo "result is=".$I->executeJS("return jQuery('#saveactionserformsjkkjh').html();")."\\n"; 
 
         // confirm if saved properly or not
         $I->reloadPage();   //reload page
         $I->click('Navigations Steps( Breadcrumb )');
-        echo "config_alternate_breadcrumb value is=".$I->executeJS("return jQuery('input[name=\"config_alternate_breadcrumb\"]').val();"); 
         $I->radioAssertion($I, $widget_key, "config_alternate_breadcrumb", $widget_key); 
     }
 
@@ -66,7 +57,8 @@ class n_f_adminSideSetupCest
         $I->see('First Category');
 
         // select template
-        $I->executeJS("jQuery('#".$widget_key."').parent().checkbox('set checked', '".$widget_key."');");  
+        $I->executeJS("jQuery('#".$widget_key."').prop('checked',true);"); 
+        // $I->executeJS("jQuery('#".$widget_key."').parent().checkbox('set checked', '".$widget_key."');");  
 
         // $I->scrollTo('//*[@id="submit_btn"]');
         // $I->wait(3);
@@ -74,10 +66,14 @@ class n_f_adminSideSetupCest
         // save 
         $I->click('#submit_btn');  //('Save');     //it shouldn't be this way, but there seem some issue with selenium driver and thus when there is another Save button on the page even though on another page and is not visible but still selenium think it is visible and thus gives us error so need to use unique xPath like id etc. 
 
+        // since due to sample data is there it may take time to install alternate widget's sample data 
+        $I->waitForText('Saved!', 10);
+
         // confirm if saved properly or not
         $I->reloadPage();   //reload page
         $I->click('Alternate Filter Widgets');
-        $I->seeInField($cat == 0 ? 'first_category_altr_filt_widgts' : 'second_category_altr_filt_widgts', $widget_key);
+        // $I->seeInField($cat == 0 ? 'first_category_altr_filt_widgts' : 'second_category_altr_filt_widgts', $widget_key);
+        $I->radioAssertion($I, $widget_key, $cat == 0 ? 'first_category_altr_filt_widgts' : 'second_category_altr_filt_widgts', $widget_key); 
     }
 
     protected function gotoStep(AcceptanceTester $I, $cat=0)

@@ -143,6 +143,15 @@ class n_g_installAndSetupAdminSideCest extends n_f_adminSideSetupCest
             // check default template
             $templates[] = $cat == 0 ? 'fc1' : 'sc1';
 
+            $selected_templts = array(1);
+
+            $templates_verification_content = array();
+            $templates_verification_content[1] = array( 'html_source' => '<div class="sixteen wide column">', 'not_html_source' => '<i class="question circle outline icon" data-help="' /*since template 2 also has above trait we need to negate*/ );
+            $templates_verification_content[2] = array( 'html_source' => '<div class="ui text menu">' );  
+            $templates_verification_content[3] = array( 'html_source' => '<div class="sixteen wide column">', 'html_source_1' => '<i class="question circle outline icon" data-help="' );
+            $templates_verification_content[4] = array( 'html_source' => '<div style="visibility: hidden;">Asscher</div>' );
+
+
             // check two random template from 3 alternate templates available 
             $attempts = 0;
             while($attempts <= 100 /*keep a check, while loops can be horrible :-( */) {
@@ -151,6 +160,7 @@ class n_g_installAndSetupAdminSideCest extends n_f_adminSideSetupCest
                 $rnd = rand(2, 4);
                 if( !in_array( ($cat == 0 ? 'fc'.$rnd : 'sc'.$rnd), $templates ) ) {
                     $templates[] = $cat == 0 ? 'fc'.$rnd : 'sc'.$rnd;
+                    $selected_templts[] = $rnd;
 
                     if( sizeof($templates) >= 3 ) { // break when two random are selected
                         break;
@@ -182,7 +192,14 @@ class n_g_installAndSetupAdminSideCest extends n_f_adminSideSetupCest
                 }
                 
                 //verify breadcrumb by its html source
-                $I->seeInSource('look for some unique source code of '.$templates[$i].' template');   // we need some unique way to indentify that the right template is loaded, if we ask dev team to add some unique id etc. for mere identification than that is not quite effect for testing the development
+                foreach ($templates_verification_content[$selected_templts[$i]] as $vk => $vv) {
+                    if( strpos($vk, "html_source") !== false ) {
+                        $I->seeInSource($vv);   // we need some unique way to indentify that the right template is loaded, if we ask dev team to add some unique id etc. for mere identification than that is not quite effective for testing the development
+                    }
+                    elseif( strpos($vk, "not_html_source") !== false ) {
+                        $I->dontSeeInSource($vv);   
+                    }
+                }
             }
         }
 
