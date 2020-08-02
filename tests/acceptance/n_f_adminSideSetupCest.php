@@ -85,7 +85,7 @@ class n_f_adminSideSetupCest
 
         $I->click($I->get_configs('first_button_text', 'n_'));
 
-        $I->waitForText( $I->get_configs('cat_name_'.$cat), 10);  
+        $I->waitForText( $I->get_configs('cat_name_0'), 10);  
         $I->see('CHOOSE A');  
         
         if($cat > 0) {
@@ -94,7 +94,7 @@ class n_f_adminSideSetupCest
             $I->wait(3);
 
             $I->click('//*[@id="main"]/ul/li/a/img');
-            $I->see('Continue');
+            $I->waitForText('Continue');
 
             //first select required options for variable product, otherwise it won't let us add into cart. 
             $I->click('//*[@id="product-13"]/div[2]/form/table/tbody/tr/td[2]/div/span[2]/ul/li[1]/div');
