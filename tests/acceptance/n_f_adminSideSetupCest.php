@@ -25,9 +25,9 @@ class n_f_adminSideSetupCest
         $I->see('First Category');
 
         // select template
-        // $I->executeJS("jQuery('input[name=\"config_alternate_breadcrumb\"]').val('".$widget_key."');"); 
-        $I->selectOption('form input[name=config_alternate_breadcrumb]', $widget_option);
-        // $I->executeJS("jQuery('#".$widget_key."').parent().checkbox('set checked', '".$widget_key."');");  
+        $I->executeJS("jQuery('#".$widget_key."').prop('checked',true);"); 
+        // $I->selectOption('form input[name=config_alternate_breadcrumb]', $widget_option);
+        $I->executeJS("jQuery('#".$widget_key."').parent().checkbox('set checked', '".$widget_key."');");  
 
         echo "config_alternate_breadcrumb value is=".$I->executeJS("return jQuery('input[name=\"config_alternate_breadcrumb\"]').val();"); 
         // $I->radioAssertion($I, "config_alternate_breadcrumb", $widget_key); 
