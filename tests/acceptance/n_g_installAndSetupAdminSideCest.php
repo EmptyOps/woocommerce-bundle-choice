@@ -174,7 +174,7 @@ class n_g_installAndSetupAdminSideCest extends n_f_adminSideSetupCest
 
             $current_uri = "";
             for($i=0; $i<sizeof($templates); $i++) {
-                if( $i > 0 ) {
+                if( /* tmp. let it set widget till the installation is not changed to actual empty box until that sample data is not solved */true ||  $i > 0 ) {
                     // change the template 
                     $this->setAlternateFilterWidget($I, $templates[$i], $cat);
                 }
