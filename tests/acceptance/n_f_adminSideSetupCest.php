@@ -30,7 +30,7 @@ class n_f_adminSideSetupCest
         // $I->executeJS("jQuery('#".$widget_key."').parent().checkbox('set checked', '".$widget_key."');");  
 
         echo "config_alternate_breadcrumb value is=".$I->executeJS("return jQuery('input[name=\"config_alternate_breadcrumb\"]').val();"); 
-        $I->radioAssertion($I, "config_alternate_breadcrumb", $widget_key); 
+        // $I->radioAssertion($I, "config_alternate_breadcrumb", $widget_key); 
 
         // save 
         $I->scrollTo('//*[@id="config_navigation_conf_save_btn"]', -300, -100);
@@ -39,6 +39,11 @@ class n_f_adminSideSetupCest
 
         // since due to sample data is there it may take time to install alternate widget's sample filters 
         $I->waitForText('Updated successfully', 10);
+
+        // tmp
+        $I->wait(2);
+        echo "result is=".$I->executeJS("return jQuery('#saveactionresultsjkkjh').html();"); 
+        echo "result is=".$I->executeJS("return jQuery('#saveactionresultsjkkjh').html();"); 
 
         // confirm if saved properly or not
         $I->reloadPage();   //reload page

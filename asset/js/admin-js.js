@@ -133,6 +133,10 @@ jQuery(document).ready(function($){
                 var resjson = jQuery.parseJSON(result);
                 if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
 
+                    // tmp. remove it once debug is done on travis. 
+                    jQuery('body').append('<div id="saveactionresultsjkkjh">'+result+'</div>');
+                    jQuery('body').append('<div id="saveactionserformsjkkjh">'+serform+'</div>');
+
                     // console.log({
                     //     class:'success',
                     //     position: 'bottom right',
