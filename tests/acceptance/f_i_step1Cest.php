@@ -37,8 +37,8 @@ class f_i_step1Cest
 		$range_min = "12";
 		$range_max = "15";
 		if( $suite_name_prefix == "n_" ) {
-			$range_min = ( (str_replace(",", "", $price_of_product)) - 10 );
-			$range_max = ( (str_replace(",", "", $price_of_product)) + 100 );
+			$range_min = ( ( str_replace(",", "", $price_of_product) ) - 10 );
+			$range_max = ( ( str_replace(",", "", $price_of_product) ) + 100 );
 		}
 		
 		$I->executeJS("jQuery('#text_slider_price').slider('set rangeValue', ".$range_min.", ".$range_max.");");
