@@ -184,7 +184,7 @@ class n_g_installAndSetupAdminSideCest extends n_f_adminSideSetupCest
                 if( $current_uri == "" ) {
 
                     // go to the page
-                    $this->gotoStep($I, $cat);  
+                    $this->gotoStep($I, $cat, true);  
 
                     // keep current uri so that we can go there directly next time
                     $current_uri = $I->getCurrentUri(true);

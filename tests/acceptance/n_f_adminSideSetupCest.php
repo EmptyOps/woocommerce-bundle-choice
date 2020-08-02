@@ -76,19 +76,19 @@ class n_f_adminSideSetupCest
         $I->radioAssertion($I, $widget_key, $cat == 0 ? 'first_category_altr_filt_widgts' : 'second_category_altr_filt_widgts', $widget_key); 
     }
 
-    protected function gotoStep(AcceptanceTester $I, $cat=0)
+    protected function gotoStep(AcceptanceTester $I, $cat=0, $go_directly=false)
     {
         $I->amOnPage('/index.php/design-your-own-ring/');
 
         $I->see($I->get_configs('first_button_text', 'n_'));
         $I->see($I->get_configs('second_button_text', 'n_'));
 
-        $I->click($I->get_configs('first_button_text', 'n_'));
+        $I->click($I->get_configs( (!$go_directly || $cat == 0) ? 'first_button_text' : 'second_button_text', 'n_'));
 
-        $I->waitForText( $I->get_configs('cat_name_0'), 10);  
+        $I->waitForText( $I->get_configs('cat_name_'.( !$go_directly ? '0' : $cat ) ), 10);  
         $I->see('CHOOSE A');  
         
-        if($cat > 0) {
+        if(!$go_directly && $cat > 0) {
             // go to second category filter
             $I->scrollTo('//*[@id="main"]/ul/li/a/img');
             $I->wait(3);
