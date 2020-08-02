@@ -146,7 +146,7 @@ class n_g_installAndSetupAdminSideCest extends n_f_adminSideSetupCest
             $selected_templts = array(1);
 
             $templates_verification_content = array();
-            $templates_verification_content[1] = array( 'html_source' => '<div class="sixteen wide column">', 'not_html_source' => '<i class="question circle outline icon" data-help="' /*since template 2 also has above trait we need to negate*/ );
+            $templates_verification_content[1] = array( 'html_source' => '<div class="sixteen wide column">', 'not_in_html__source' => '<i class="question circle outline icon" data-help="' /*since template 2 also has above trait we need to negate*/ );
             $templates_verification_content[2] = array( 'html_source' => '<div class="ui text menu">' );  
             $templates_verification_content[3] = array( 'html_source' => '<div class="sixteen wide column">', 'html_source_1' => '<i class="question circle outline icon" data-help="' );
             $templates_verification_content[4] = array( 'html_source' => '<div style="visibility: hidden;">Asscher</div>' );
@@ -196,7 +196,7 @@ class n_g_installAndSetupAdminSideCest extends n_f_adminSideSetupCest
                     if( strpos($vk, "html_source") !== false ) {
                         $I->seeInSource($vv);   // we need some unique way to indentify that the right template is loaded, if we ask dev team to add some unique id etc. for mere identification than that is not quite effective for testing the development
                     }
-                    elseif( strpos($vk, "not_html_source") !== false ) {
+                    elseif( strpos($vk, "not_in_html__source") !== false ) {
                         $I->dontSeeInSource($vv);   
                     }
                 }
