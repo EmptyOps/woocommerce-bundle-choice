@@ -85,7 +85,8 @@ class n_f_adminSideSetupCest
 
         $I->click($I->get_configs('first_button_text', 'n_'));
 
-        $I->waitForText('CHOOSE A', 10);  
+        $I->waitForText( $I->get_configs('cat_name_'.$cat), 10);  
+        $I->see('CHOOSE A');  
         
         if($cat > 0) {
             // go to second category filter
