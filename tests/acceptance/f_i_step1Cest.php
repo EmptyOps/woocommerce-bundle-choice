@@ -33,11 +33,18 @@ class f_i_step1Cest
 		$I->executeJS("jQuery('#text_slider_price').slider('set rangeValue', 14, 15);");	
 		$I->waitForText('No products were found', 10);
 
-		$I->executeJS("jQuery('#text_slider_price').slider('set rangeValue', 12, 15);");
+		$price_of_product = $suite_name_prefix == "n_" ? $I->get_configs('first_product_price',$suite_name_prefix) : "12.00";	//TODO make it dynamic 
+		$range_min = "12";
+		$range_max = "15";
+		if( $suite_name_prefix == "n_" ) {
+			$range_min = ( (str_replace(",", "", $price_of_product)) - 10 );
+			$range_max = ( (str_replace(",", "", $price_of_product)) + 100 );
+		}
+		
+		$I->executeJS("jQuery('#text_slider_price').slider('set rangeValue', ".$range_min.", ".$range_max.");");
 		$I->waitForText( $suite_name_prefix == "n_" ? $I->get_configs('first_product_name',$suite_name_prefix) : 'Test diamond 1', 10);  	
 		
 		// - I click on product image of first product from the search results
-		$price_of_product = $suite_name_prefix == "n_" ? $I->get_configs('first_product_price',$suite_name_prefix) : "12.00";	//TODO make it dynamic 
 		$I->click('//*[@id="main"]/ul/li/a/img');
 		$I->see( $suite_name_prefix == "n_" ? $I->get_configs('first_product_page_button_text',$suite_name_prefix) : 'Add to bag...' );	//Add to bag... is the text set on appearance module during admin test
 		
