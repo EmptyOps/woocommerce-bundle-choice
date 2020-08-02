@@ -74,7 +74,7 @@ class a_i_adminFiltersCest
 		$I->reloadPage();	//reload page
 		$I->click('Alternate Filter Widgets');
 		// $I->seeInField('second_category_altr_filt_widgts', 'sc3');
-		$I->radioAssertion($I, "second_category_altr_filt_widgts", 'sc3'); 
+		$I->radioAssertion($I, 'sc3', "second_category_altr_filt_widgts", 'sc3'); 
 
 	}
 
