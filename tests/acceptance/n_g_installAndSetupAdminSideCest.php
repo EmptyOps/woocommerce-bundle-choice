@@ -139,6 +139,8 @@ class n_g_installAndSetupAdminSideCest extends n_f_adminSideSetupCest
         // for first category and second category. loop.
         for($cat=0; $cat<2; $cat++) {
 
+            echo "tryToTestAlternateFilterWidgets of category ".$cat;
+
             $templates = array();
             // check default template
             $templates[] = $cat == 0 ? 'fc1' : 'sc1';

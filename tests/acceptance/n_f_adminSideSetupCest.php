@@ -94,6 +94,10 @@ class n_f_adminSideSetupCest
             $I->wait(3);
 
             $I->click('//*[@id="main"]/ul/li/a/img');
+
+            $I->executeJS("window.scrollTo( 0, 300 );");
+            $I->wait(3);
+
             $I->waitForText('Continue');
 
             //first select required options for variable product, otherwise it won't let us add into cart. 
