@@ -42,8 +42,8 @@ class n_f_adminSideSetupCest
 
         // tmp
         $I->wait(2);
-        echo "result is=".$I->executeJS("return jQuery('#saveactionresultsjkkjh').html();"); 
-        echo "result is=".$I->executeJS("return jQuery('#saveactionresultsjkkjh').html();"); 
+        echo "result is=".$I->executeJS("return jQuery('#saveactionresultsjkkjh').html();")."\\n"; 
+        echo "result is=".$I->executeJS("return jQuery('#saveactionserformsjkkjh').html();")."\\n"; 
 
         // confirm if saved properly or not
         $I->reloadPage();   //reload page
