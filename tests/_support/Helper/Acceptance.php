@@ -306,13 +306,14 @@ class Acceptance extends \Codeception\Module
      * @param $dummy_positive html source text to run a dummy positive assertion 
      * @param $dummy_negative html source text to run a dummy negative assertion so that in test report user can see that one of the test is actually failed
      */
-    public function radioAssertion($I,$field_name, $expected_value, $dummy_positive='<body>', $dummy_negative='dummy text to fail assertion') {
+    public function radioAssertion($I, $field_id, $field_name, $expected_value, $dummy_positive='<body>', $dummy_negative='dummy text to fail assertion') {
         echo "called radioAssertion...";
         
         try { 
-            $val = $I->grabValueFrom('input[name='.$field_name.']');
-            echo "grabValueFrom value is=".$val."=expected=".$expected_value; 
-            if( $val == $expected_value ) {
+            $val = $I->executeJS("if(jQuery('#".$field_id."').is(':checked')) { return 1; } else { return 0; }"); //$I->grabValueFrom('input[name='.$field_name.']');
+            // echo "grabValueFrom value is=".$val."=expected=".$expected_value; 
+            // if( $val == $expected_value ) {
+            if( $val == 1 ) {
                 $I->seeInSource($dummy_positive);
             }
             else {
