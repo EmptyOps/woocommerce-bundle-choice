@@ -41,6 +41,15 @@ class Acceptance extends \Codeception\Module
         else if( $key == "first_product_price" && ($prefix=="n_" || empty($prefix)) ) {
             return "11,390.00";
         }
+        else if( $key == "second_product_name" && ($prefix=="n_" || empty($prefix)) ) {
+            return "Setting #10000004";
+        }
+        else if( $key == "second_product_market_price" && ($prefix=="n_" || empty($prefix)) ) {
+            return "450.00";
+        }
+        else if( $key == "second_product_price" && ($prefix=="n_" || empty($prefix)) ) {
+            return "445.00";
+        }
         else if( $key == "first_product_page_button_text" && ($prefix=="n_" || empty($prefix)) ) {
             return "CONTINUE";
         }

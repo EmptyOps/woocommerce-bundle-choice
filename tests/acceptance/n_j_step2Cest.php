@@ -17,7 +17,7 @@ class n_j_step2Cest extends f_k_step2Cest
             return;
         }
 
-        parent::itemPage($I, $suite_name_prefix);
+        parent::itemPage($I, "n_");
 	}
 
 }

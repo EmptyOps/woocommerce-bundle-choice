@@ -13,7 +13,7 @@ class f_k_step2Cest
     // {
     // }
 
-    protected function categoryPage(AcceptanceTester $I) {
+    protected function categoryPage(AcceptanceTester $I, $suite_name_prefix=false) {
 		
 		//no need to do anything of below as webdriver is properly maintaing session and remaing at same page on the subsequent test
 		// //set current url in the session so that this step can continue from there, the current url would be the one that is reached to in last test. 
@@ -24,7 +24,7 @@ class f_k_step2Cest
   //   	require_once dirname(__FILE__).'f_i_step1Cest.php';
   //   	$f_i_step1CestObj = new f_i_step1Cest();
   //   	$this->price_of_product_step1 = $f_i_step1CestObj->itemPage($I);
-    	$this->price_of_product_step1 = "12.00";
+    	$this->price_of_product_step1 = $suite_name_prefix == "n_" ? $I->get_configs('first_product_price',$suite_name_prefix) : "12.00";
 
     	$I->executeJS('window.scrollTo( 0, 300 );');        //$I->scrollTo('Save'); 
         $I->wait(3);
@@ -33,16 +33,23 @@ class f_k_step2Cest
 		$I->executeJS("jQuery('#text_slider_price').slider('set rangeValue', 12, 14);");	
 		$I->waitForText('No products were found', 10);
 
-		$I->executeJS("jQuery('#text_slider_price').slider('set rangeValue', 12, 15);");
-		$I->waitForText('Test ring 1', 10);  	
+		$price_of_product = $suite_name_prefix == "n_" ? $I->get_configs('second_product_price',$suite_name_prefix) : "15.00";	//TODO make it dynamic 
+		$range_min = "12";
+		$range_max = "15";
+		if( $suite_name_prefix == "n_" ) {
+			$range_min = ( ( str_replace(",", "", $price_of_product) ) - 10 );
+			$range_max = ( ( str_replace(",", "", $price_of_product) ) + 100 );
+		}
+
+		$I->executeJS("jQuery('#text_slider_price').slider('set rangeValue', ".$range_min.", ".$range_max.");");
+		$I->waitForText( $suite_name_prefix == "n_" ? $I->get_configs('second_product_name',$suite_name_prefix) : 'Test ring 1', 10);  	
 
 		$I->scrollTo('//*[@id="main"]/ul/li/a/img', -300, -100);
 		$I->wait(3);
 
 		// - I click on product image of first product from the search results
-		$price_of_product = "15.00";	//TODO make it dynamic 
-		$I->click('Test ring 1');	// ('//*[@id="main"]/ul/li/a/img');
-		$I->see('Add to bagsc...');	//Add to bagsc... is the text set on appearance module during admin test
+		$I->click( $suite_name_prefix == "n_" ? $I->get_configs('second_product_name',$suite_name_prefix) : 'Test ring 1' );	// ('//*[@id="main"]/ul/li/a/img');
+		$I->see( $suite_name_prefix == "n_" ? $I->get_configs('second_product_page_button_text',$suite_name_prefix) : 'Add to bagsc...');	//Add to bagsc... is the text set on appearance module during admin test
 
 		return $price_of_product;
 	}
@@ -55,21 +62,21 @@ class f_k_step2Cest
         
 		// - I choose filter options and then I check if x  products are found
 		// - I click on product image of first product from the search results
-		$price_of_product = $this->categoryPage($I);
+		$price_of_product = $this->categoryPage($I, $suite_name_prefix);
 
 		$I->executeJS('window.scrollTo( 0, 300 );');        //$I->scrollTo('Save'); 
         $I->wait(3);
         
 		// - I see continue button
-		$I->see('Add to bagsc...');
+		$I->see( $suite_name_prefix == "n_" ? $I->get_configs('second_product_page_button_text',$suite_name_prefix) : 'Add to bagsc...');
 
 		// with text x 
-		$I->see('150.00');	//market price
+		$I->see( $suite_name_prefix == "n_" ? $I->get_configs('second_product_market_price',$suite_name_prefix) : '150.00' );	//market price
 		$I->see($price_of_product);
-		$I->see('Additional information');
+		$I->see( $suite_name_prefix == "n_" ? 'Specifications' : 'Additional information' );
 
 		// - I click on continue button
-		$I->click('Add to bagsc...');
+		$I->click( $suite_name_prefix == "n_" ? $I->get_configs('second_product_page_button_text',$suite_name_prefix) : 'Add to bagsc...');
 
 		// - I see in next page the text "${price of Step 2 item's price}"
 		$I->waitForText($price_of_product, 10);
