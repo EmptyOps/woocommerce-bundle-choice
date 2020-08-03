@@ -17,7 +17,7 @@ class fz_a_q_adminOrderDetailPageChildClassCest extends fz_a_o_adminOrderDetailP
             return;
         }
 
-        parent::gotoAdminOrderDetailPage($I, $suite_name_prefix);
+        parent::gotoAdminOrderDetailPage($I, "f_");
 	}
 
 	public function adminOrderDetailPage(AcceptanceTester $I, $suite_name_prefix=false) {
@@ -26,7 +26,7 @@ class fz_a_q_adminOrderDetailPageChildClassCest extends fz_a_o_adminOrderDetailP
             return;
         }
 
-        parent::adminOrderDetailPage($I, $suite_name_prefix);
+        parent::adminOrderDetailPage($I, "f_");
 	}
 	    
 }

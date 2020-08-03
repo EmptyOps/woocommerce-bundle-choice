@@ -17,7 +17,7 @@ class f_u_accountOrderDetailPageChildClassCest extends f_s_accountOrderDetailPag
             return;
         }
 
-        parent::myAccountPage($I, $suite_name_prefix);
+        parent::myAccountPage($I, "f_");
 	}
 
 	public function verifyOrderDetails(AcceptanceTester $I, $suite_name_prefix=false) {
@@ -26,7 +26,7 @@ class f_u_accountOrderDetailPageChildClassCest extends f_s_accountOrderDetailPag
             return;
         }
 
-        parent::verifyOrderDetails($I, $suite_name_prefix);
+        parent::verifyOrderDetails($I, "f_");
 	}
     
 }

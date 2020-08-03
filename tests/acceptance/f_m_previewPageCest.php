@@ -21,8 +21,8 @@ class f_m_previewPageCest
      //    }
 		
     	//TODO make it dynamic by saving this in session in previous steps and then here get it from session 
-    	$this->price_of_product_step1 = "12.00";
-    	$this->price_of_product_step2 = "15.00";
+    	$this->price_of_product_step1 = $suite_name_prefix == "n_" ? $I->get_configs('first_product_price',$suite_name_prefix) : "12.00";
+    	$this->price_of_product_step2 = $suite_name_prefix == "n_" ? $I->get_configs('second_product_price',$suite_name_prefix) : "15.00";
 
     	// verify 
     	$I->see($this->price_of_product_step1+$this->price_of_product_step2);

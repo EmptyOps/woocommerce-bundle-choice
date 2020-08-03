@@ -17,7 +17,7 @@ class f_n_previewPageChildClassCest extends f_m_previewPageCest
             return;
         }
 
-        parent::previewPage($I, $suite_name_prefix);
+        parent::previewPage($I, "f_");
 	}
 
 	public function addToCart(AcceptanceTester $I, $suite_name_prefix=false) {
@@ -26,7 +26,7 @@ class f_n_previewPageChildClassCest extends f_m_previewPageCest
             return;
         }
 
-        parent::addToCart($I, $suite_name_prefix);
+        parent::addToCart($I, "f_");
 	}
     
 }

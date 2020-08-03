@@ -78,11 +78,12 @@ class f_i_step1Cest
 			$I->click('//*[@id="product-13"]/div[2]/form/table/tbody/tr/td[2]/div/span[2]/ul/li[1]/div');
 		}
 
-		$I->scrollTo('//*[@id="eo_wbc_add_to_cart"]', -632, -100);
+		$I->executeJS('window.scrollTo( 0, 1100 );');
+		// $I->scrollTo('//*[@id="eo_wbc_add_to_cart"]', -632, -100);
 		$I->wait(10);
 
 		// - I click on continue button
-		$I->click( $suite_name_prefix == "n_" ? $I->get_configs('first_product_page_button_text',$suite_name_prefix) : 'Add to bag...' );
+		$I->click('//*[@id="eo_wbc_add_to_cart"]');	// click( $suite_name_prefix == "n_" ? $I->get_configs('first_product_page_button_text',$suite_name_prefix) : 'Add to bag...' );
 
 		// - I see in next page the text "${price of Step 1 item's price}"
 		$I->waitForText($price_of_product, 10);

@@ -18,11 +18,11 @@ class fz_a_o_adminOrderDetailPageCest
   //       }
 
     	//TODO make it dynamic by saving this in session in previous steps and then here get it from session 
-    	$this->price_of_product_step1 = "12.00";
-    	$this->price_of_product_step2 = "15.00";
+    	$this->price_of_product_step1 = $suite_name_prefix == "n_" ? $I->get_configs('first_product_price',$suite_name_prefix) : "12.00";
+    	$this->price_of_product_step2 = $suite_name_prefix == "n_" ? $I->get_configs('second_product_price',$suite_name_prefix) : "15.00";
 
 		// go to particular order detail page
-		$I->amOnPage('/wp-admin/edit.php?post_type=shop_order');	
+		$I->amOnPage( ( $suite_name_prefix == "n_" ? '/index.php' : '' ) . '/wp-admin/edit.php?post_type=shop_order' );	
 		$I->click('//*[@id="the-list"]/tr[1]/td[1]');	
 
 		// verify 
@@ -48,7 +48,7 @@ class fz_a_o_adminOrderDetailPageCest
 		$I->see('8347408752');
 
 		//TODO check here if merged row appears properly or not 
-		if( !$suite_name_prefix ) { 
+		if( true || !$suite_name_prefix ) { 
 			$this->confirmMergedRow($I);	
 		}
 

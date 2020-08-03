@@ -17,7 +17,7 @@ class f_p_cartPageChildClassCest extends f_o_cartPageCest
             return;
         }
 
-        parent::cartPage($I, $suite_name_prefix);
+        parent::cartPage($I, "f_");
 	}
 
 	public function continueToCheckout(AcceptanceTester $I, $suite_name_prefix=false) {
@@ -26,7 +26,7 @@ class f_p_cartPageChildClassCest extends f_o_cartPageCest
             return;
         }
 
-        parent::continueToCheckout($I, $suite_name_prefix);
+        parent::continueToCheckout($I, "f_");
 	}
 	    
 }
