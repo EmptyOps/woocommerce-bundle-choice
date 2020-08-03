@@ -151,8 +151,12 @@ class n_g_installAndSetupAdminSideCest extends n_f_adminSideSetupCest
             $templates_verification_content[1] = array( 'html_source' => '<div class="sixteen wide column">', 'not_in_html__source' => '<i class="question circle outline icon" data-help="' /*since template 2 also has above trait we need to negate*/ );
             $templates_verification_content[2] = array( 'html_source' => '<div class="ui text menu">' );  
             $templates_verification_content[3] = array( 'html_source' => '<div class="sixteen wide column">', 'html_source_1' => '<i class="question circle outline icon" data-help="' );
-            $templates_verification_content[4] = array( 'html_source' => '<div style="visibility: hidden;">Asscher</div>' );
-
+            if( $cat == 0 ) {
+                $templates_verification_content[4] = array( 'html_source' => '<div style="visibility: hidden;">Asscher</div>' );    
+            }
+            else {
+                $templates_verification_content[4] = array( 'html_source' => '<div style="visibility: hidden;">Asscher Setting</div>' );
+            }
 
             // check two random template from 3 alternate templates available 
             $attempts = 0;
