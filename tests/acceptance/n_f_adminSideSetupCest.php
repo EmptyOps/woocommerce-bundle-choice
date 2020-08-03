@@ -85,7 +85,7 @@ class n_f_adminSideSetupCest
 
         $I->click($I->get_configs( (!$go_directly || $cat == 0) ? 'first_button_text' : 'second_button_text', 'n_'));
 
-        $I->waitForText( $I->get_configs('cat_name_'.( !$go_directly ? '0' : $cat ) ), 10);  
+        $I->waitForText( $I->get_configs('cat_name_'.( !$go_directly ? '0' : $cat ), 'n_'), 10);  
         $I->see('CHOOSE A');  
         
         if(!$go_directly && $cat > 0) {

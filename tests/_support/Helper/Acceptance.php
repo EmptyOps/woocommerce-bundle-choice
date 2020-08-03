@@ -17,8 +17,16 @@ class Acceptance extends \Codeception\Module
      */
     public function get_configs($key, $prefix="")
     {
-        $first_cat_name_for_suite_n_ = "Diamond Shape";
-        $second_cat_name_for_suite_n_ = "Setting Shape";
+        $first_cat_name_for_suite_x = "";
+        $second_cat_name_for_suite_x = "";
+        if( $prefix == "a_-f_" || $prefix == "f_" ) {
+            $first_cat_name_for_suite_x = "Diamond";
+            $second_cat_name_for_suite_x = "Setting";
+        }
+        elseif( $prefix == "n_" ) {
+            $first_cat_name_for_suite_x = "Diamond Shape";
+            $second_cat_name_for_suite_x = "Setting Shape";
+        }
 
         if( $key == "first_button_text" && ($prefix=="n_" || empty($prefix)) ) {
             return "Start with Diamond Shape";
@@ -26,11 +34,11 @@ class Acceptance extends \Codeception\Module
         else if( $key == "second_button_text" && ($prefix=="n_" || empty($prefix)) ) {
             return "Start with Setting Shape";
         }
-        else if( $key == "cat_name_0" && ($prefix=="n_" || empty($prefix)) ) {
-            return $first_cat_name_for_suite_n_;
+        else if( $key == "cat_name_0" ) {
+            return $first_cat_name_for_suite_x;
         }
-        else if( $key == "cat_name_1" && ($prefix=="n_" || empty($prefix)) ) {
-            return $second_cat_name_for_suite_n_;
+        else if( $key == "cat_name_1" ) {
+            return $second_cat_name_for_suite_x;
         }
         else if( $key == "first_product_name" && ($prefix=="n_" || empty($prefix)) ) {
             return "Asscher Diamond #10000052";
