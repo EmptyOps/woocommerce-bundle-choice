@@ -124,7 +124,7 @@ class n_g_installAndSetupAdminSideCest extends n_f_adminSideSetupCest
 
         // set back to default or let the random being tested
         if( rand(1, 100) > 50 ) {
-            $this->setAlternateBreadcrumbWidget($I, $templates[0], $templates_name[$i]);
+            $this->setAlternateBreadcrumbWidget($I, $templates[0], $templates_name[0]);
         }
 
     }
