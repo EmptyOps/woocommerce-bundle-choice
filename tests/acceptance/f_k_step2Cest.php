@@ -75,8 +75,14 @@ class f_k_step2Cest
 		$I->see($price_of_product);
 		$I->see( $suite_name_prefix == "n_" ? 'Specifications' : 'Additional information' );
 
+		if( $suite_name_prefix == "n_" ) {
+			$I->executeJS('window.scrollTo( 0, 1100 );');
+			// $I->scrollTo('//*[@id="eo_wbc_add_to_cart"]', -632, -100);
+			$I->wait(10);
+		}
+
 		// - I click on continue button
-		$I->click( $suite_name_prefix == "n_" ? $I->get_configs('second_product_page_button_text',$suite_name_prefix) : 'Add to bagsc...');
+		$I->click( $suite_name_prefix == "n_" ? '//*[@id="eo_wbc_add_to_cart"]' : 'Add to bagsc...' );	// click( $suite_name_prefix == "n_" ? $I->get_configs('second_product_page_button_text',$suite_name_prefix) : 'Add to bagsc...');
 
 		// - I see in next page the text "${price of Step 2 item's price}"
 		$I->waitForText($price_of_product, 10);

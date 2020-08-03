@@ -20,6 +20,8 @@ class f_o_cartPageCest
     	//TODO make it dynamic by saving this in session in previous steps and then here get it from session 
     	$this->price_of_product_step1 = $suite_name_prefix == "n_" ? $I->get_configs('first_product_price',$suite_name_prefix) : "12.00";
     	$this->price_of_product_step2 = $suite_name_prefix == "n_" ? $I->get_configs('second_product_price',$suite_name_prefix) : "15.00";
+    	$this->price_of_product_step1_without_comma = str_replace(",", "", $this->price_of_product_step1);
+    	$this->price_of_product_step2_without_comma = str_replace(",", "", $this->price_of_product_step2);
 
 		// test remove action 
 		if( $suite_name_prefix == "f_" ) { 
@@ -33,7 +35,7 @@ class f_o_cartPageCest
 		
 		//TODO check here if merged row appears properly or not
 		if( true || $suite_name_prefix == "f_" ) { 
-			$I->see($this->price_of_product_step1+$this->price_of_product_step2);	
+			$I->see($this->price_of_product_step1_without_comma+$this->price_of_product_step2_without_comma);	
 		}
 
 	}

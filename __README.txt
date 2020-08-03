@@ -79,7 +79,7 @@ Order emails sent to customers from your shop will be customized based on what u
   * GEMFIND Diamond Link Api
   * VDB (Virtual Diamond Boutique Api)
   * JewelCloud Api
-1. You can also send us [Request](https://sphereplugins.com/contact-us/") to have us support missing API
+1. You can also send us [Request](https://sphereplugins.com/contact-us/) to have us support missing API
 
 Rapnet Instant Inventory Integration Extension is for Diamond/Jewelry websites. Instantly pull the diamonds' feed into your store and ready to go for selling.
 Rapnet integration requires rapnet instant inventory account however as an alternative we are providing other API integrations as well please visit above link to know more about it.
