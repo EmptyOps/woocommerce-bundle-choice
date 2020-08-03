@@ -77,6 +77,9 @@ class f_i_step1Cest
 			$I->click('//*[@id="product-13"]/div[2]/form/table/tbody/tr/td[2]/div/span[2]/ul/li[1]/div');
 		}
 
+		$I->scrollTo('//*[@id="eo_wbc_add_to_cart"]', 0, -100);
+		$I->wait(3);
+
 		// - I click on continue button
 		$I->click( $suite_name_prefix == "n_" ? $I->get_configs('first_product_page_button_text',$suite_name_prefix) : 'Add to bag...' );
 
