@@ -28,7 +28,7 @@ class f_e_sampleLandingPageCest
             // $I->wait(5);
             // echo $I->grabPageSource();
         $I->waitForText( $I->get_configs('cat_name_0', $suite_name_prefix), 10);  
-        $I->see('CHOOSE A', 10);    
+        $I->see('CHOOSE A');    
         $I->see('1');
         $I->see('DIAMOND');
         $I->see('2');
@@ -40,7 +40,7 @@ class f_e_sampleLandingPageCest
 		// I click on button two  and I see in next page text like 1 {button text} of second Button
         $I->click( $suite_name_prefix == "n_" ? $I->get_configs('second_button_text',$suite_name_prefix) : 'Start with Setting' );
         $I->waitForText( $I->get_configs('cat_name_1', $suite_name_prefix), 10);
-        $I->see('CHOOSE A', 10);    
+        $I->see('CHOOSE A');    
         $I->see('1');
         $I->see('SETTING');
         $I->see('2');

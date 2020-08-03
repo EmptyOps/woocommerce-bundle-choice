@@ -25,7 +25,7 @@ class f_i_step1Cest
         
 		$I->click( $suite_name_prefix == "n_" ? $I->get_configs('first_button_text',$suite_name_prefix) : 'Start with Diamond' );
 		$I->waitForText( $I->get_configs('cat_name_0', $suite_name_prefix), 10);
-		$I->see('CHOOSE A', 10);    
+		$I->see('CHOOSE A');    
 
 		$I->executeJS('window.scrollTo( 0, 300 );');        //$I->scrollTo('Save'); 
         $I->wait(3);
