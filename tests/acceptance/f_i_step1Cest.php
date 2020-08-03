@@ -79,7 +79,7 @@ class f_i_step1Cest
 		}
 
 		$I->scrollTo('//*[@id="eo_wbc_add_to_cart"]', -632, -100);
-		$I->wait(3);
+		$I->wait(10);
 
 		// - I click on continue button
 		$I->click( $suite_name_prefix == "n_" ? $I->get_configs('first_product_page_button_text',$suite_name_prefix) : 'Add to bag...' );
