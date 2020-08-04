@@ -439,7 +439,7 @@ class Acceptance extends \Codeception\Module
     /**
      * 
      */
-    public function getElementColorHexCode($selector_of_targets, $css_property_of_targets) 
+    public function getElementColorHexCode($I,$selector_of_targets, $css_property_of_targets) 
     {
         // echo "called resetSession...";
             

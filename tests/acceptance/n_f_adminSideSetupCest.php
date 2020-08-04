@@ -190,7 +190,7 @@ class n_f_adminSideSetupCest
                 $I->see($should_see_text[$i]);
             }
             elseif( $field_type[$i] == "color" ) {
-                $colorcode = $I->getElementColorHexCode( $selector_of_targets[$i], $css_property_of_targets[$i] );  
+                $colorcode = $I->getElementColorHexCode($I, $selector_of_targets[$i], $css_property_of_targets[$i] );  
                 echo "colorcode found... ".$colorcode;
                 if( $colorcode == $val[$i] ) {
                     $I->dontSee('sd8324hs65gkjv73h');   // assume passed with dummy assert
