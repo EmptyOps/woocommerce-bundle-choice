@@ -19,12 +19,12 @@ class n_n_frontendAppearanceModificationsCest extends n_f_adminSideSetupCest
         }
 
         // change random appearance
-        $this->modifyAppearance($I, 'Buttons Widget', array( 'tagline_text', 'button_text', 'button_backcolor_active' ), array( 'tagline_text', 'button_text', 'button_backcolor_active' ), array( 'text', 'text', 'color' ), array( 'My custom tagline', 'Continue With', '#000000' ), '//*[@id="wid_btns_submit_btn"]', array( '' ));
+        $this->modifyAppearance($I, 'Buttons Widget', array( 'tagline_text', 'button_text', 'button_backcolor_active', 'button_radius' ), array( 'tagline_text', 'button_text', 'button_backcolor_active', 'button_radius' ), array( 'text', 'text', 'color', 'text' ), array( 'My custom tagline', 'Continue With', '#000000', '1px' ), '//*[@id="wid_btns_submit_btn"]', array( '' ));
 
         // TODO still all the appearance are not tested 
 
         // go to target page
-        $I->amOnPage('/design-your-own-ring/');
+        $I->amOnPage('/index.php/design-your-own-ring/');
 
         // verify changed appearance
         $this->verifyAppearance($I, array( 'tagline_text', 'button_text', 'button_backcolor_active' ), array( 'tagline_text', 'button_text', 'button_backcolor_active' ), array( 'text', 'text', 'color' ), array( 'My custom tagline', 'Continue With', '#000000' ), array(), array('','','#wbc_ > div > div > button:nth-child(1)'), array('','','backgroundColor'));
