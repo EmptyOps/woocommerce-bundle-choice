@@ -27,7 +27,7 @@ class f_m_previewPageCest
     	$this->price_of_product_step2_without_comma = str_replace(",", "", $this->price_of_product_step2);
 
     	// verify 
-    	$I->see($this->price_of_product_step1_without_comma+$this->price_of_product_step2_without_comma);
+    	$I->see( $I->price_format($this->price_of_product_step1_without_comma+$this->price_of_product_step2_without_comma) ;
     	$I->see('Add This To Cart');
 
 
@@ -57,7 +57,7 @@ class f_m_previewPageCest
 		$I->waitForText('Cart', 10);
 		$I->see('Quantity');
 		$I->see('Subtotal');
-		$I->see($this->price_of_product_step1_without_comma+$this->price_of_product_step2_without_comma);	
+		$I->see( $I->price_format($this->price_of_product_step1_without_comma+$this->price_of_product_step2_without_comma) );	
 
 		//TODO check here if merged row appears properly or not
 

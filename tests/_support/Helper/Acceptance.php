@@ -385,4 +385,22 @@ class Acceptance extends \Codeception\Module
         return false;
     }
 
+    /**
+     * 
+     */
+    public function price_format($price) 
+    {
+        // echo "called resetSession...";
+            
+        try { 
+            return number_format($price);
+        }
+        catch(Exception $e) {
+            echo "caught message...";
+            echo $e->getMessage()."";
+        }
+
+        return $price;
+    }
+
 }
