@@ -42,7 +42,7 @@ class n_n_frontendAppearanceModificationsCest extends n_f_adminSideSetupCest
             array( 'breadcrumb_radius', 'breadcrumb_backcolor_active', 'breadcrumb_backcolor_inactive', 'breadcrumb_num_icon_backcolor_active', 'breadcrumb_title_backcolor_inactive', 'breadcrumb_actions_backcolor_inactive' ), 
             array( 'breadcrumb_radius', 'breadcrumb_backcolor_active', 'breadcrumb_backcolor_inactive', 'breadcrumb_num_icon_backcolor_active', 'breadcrumb_title_backcolor_inactive', 'breadcrumb_actions_backcolor_inactive' ), 
             array( 'text', 'color', 'color', 'color', 'color', 'color' ), 
-            array( '5px', '#f1f1f1', '#ffffff', '#000000', '#00ff00', '#d100ff' ), '//*[@id="breadcrumb_submit_btn"]', array( '' ));
+            array( '5px', '#f1f1f1', '#ffffff', '#000000', '#00ff00', '#49bf50' ), '//*[@id="breadcrumb_submit_btn"]', array( '' ));
 
         // TODO still all the appearance are not tested like the last 3 switches are not modifies yet
 
@@ -53,7 +53,7 @@ class n_n_frontendAppearanceModificationsCest extends n_f_adminSideSetupCest
         $this->verifyAppearance($I, array( 'breadcrumb_radius', 'breadcrumb_backcolor_active', 'breadcrumb_backcolor_inactive', 'breadcrumb_num_icon_backcolor_active', 'breadcrumb_title_backcolor_inactive', 'breadcrumb_actions_backcolor_inactive' ), 
             array( 'breadcrumb_radius', 'breadcrumb_backcolor_active', 'breadcrumb_backcolor_inactive', 'breadcrumb_num_icon_backcolor_active', 'breadcrumb_title_backcolor_inactive', 'breadcrumb_actions_backcolor_inactive' ), 
             array( 'text', 'color', 'color', 'color', 'color', 'color' ), 
-            array( '5px', '#f1f1f1', '#ffffff', '#000000', '#00ff00', '#d100ff' ), array(), 
+            array( '5px', '#f1f1f1', '#ffffff', '#000000', '#00ff00', '#49bf50' ), array(), 
             array('#main > header > div:nth-child(4) > div > div:nth-child(2)','#main > header > div:nth-child(4) > div > div.active.step','#main > header > div:nth-child(4) > div > div:nth-child(2)', '#main > header > div:nth-child(4) > div > div.active.step > div > div.ui.grid > div:nth-child(1)', '#main > header > div:nth-child(4) > div > div:nth-child(2) > div > div.ui.grid > div:nth-child(2) > div.title', '#main > header > div:nth-child(4) > div > div:nth-child(2) > div > div:nth-child(3) > u:nth-child(3) > a'), 
             array('border-radius','backgroundColor','backgroundColor', 'color','color','color'));
     }
