@@ -37,13 +37,11 @@ class f_k_step2Cest
 		$range_min = "12";
 		$range_max = "15";
 		if( $suite_name_prefix == "n_" ) {
-			$range_min = ( ( str_replace(",", "", $price_of_product) ) - 10 );
+			$range_min = ( ( str_replace(",", "", $price_of_product) ) - 100 );
 			$range_max = ( ( str_replace(",", "", $price_of_product) ) + 100 );
 		}
 
 		$I->executeJS("jQuery('#text_slider_price').slider('set rangeValue', ".$range_min.", ".$range_max.");");
-		$I->wait(10);
-		echo $I->grabPageSource();
 		$I->waitForText( $suite_name_prefix == "n_" ? $I->get_configs('second_product_name',$suite_name_prefix) : 'Test ring 1', 10);  	
 
 		$I->scrollTo('//*[@id="main"]/ul/li/a/img', -300, -100);
