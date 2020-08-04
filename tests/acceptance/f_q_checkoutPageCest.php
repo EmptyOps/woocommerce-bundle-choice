@@ -72,8 +72,8 @@ class f_q_checkoutPageCest
             }
         }
 
-        $I->wait(10);
-        echo $I->grabPageSource();
+        // $I->wait(10);
+        // echo $I->grabPageSource();
 
 		// verify if order placed properly on the thank you page
 		$I->waitForText('Order received', 10, 'h1');

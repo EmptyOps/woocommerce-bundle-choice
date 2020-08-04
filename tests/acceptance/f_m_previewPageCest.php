@@ -30,7 +30,10 @@ class f_m_previewPageCest
     	echo $I->grabPageSource();
 
     	// verify 
-    	$I->see( $I->price_format($this->price_of_product_step1_without_comma+$this->price_of_product_step2_without_comma) );
+    	$current_breadcrumb_template = $I->get_session('wbc_suite_n__process_current_breadcrumb_template');
+    	if( $suite_name_prefix != "n_" || $current_breadcrumb_template != "template_1" /*since preview step total price is not available in this breadcrumb*/ ) {
+	    	$I->see( $I->price_format($this->price_of_product_step1_without_comma+$this->price_of_product_step2_without_comma) );
+	    }
     	$I->see('Add This To Cart');
 
 

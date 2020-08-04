@@ -24,7 +24,7 @@ class fz_a_o_adminOrderDetailPageCest
     	$this->price_of_product_step2_without_comma = str_replace(",", "", $this->price_of_product_step2);
 
 		// go to particular order detail page
-		$I->amOnPage( ( $suite_name_prefix == "n_" ? '/index.php' : '' ) . '/wp-admin/edit.php?post_type=shop_order' );	
+		$I->amOnPage( '/wp-admin/edit.php?post_type=shop_order' );	
 		$I->click('//*[@id="the-list"]/tr[1]/td[1]');	
 
 		// verify 
