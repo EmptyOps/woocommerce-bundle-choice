@@ -35,7 +35,7 @@ class f_o_cartPageCest
 		
 		//TODO check here if merged row appears properly or not
 		if( true || $suite_name_prefix == "f_" ) { 
-			$I->see($this->price_of_product_step1_without_comma+$this->price_of_product_step2_without_comma);	
+			$I->see( $I->price_format($this->price_of_product_step1_without_comma+$this->price_of_product_step2_without_comma) );	
 		}
 
 	}

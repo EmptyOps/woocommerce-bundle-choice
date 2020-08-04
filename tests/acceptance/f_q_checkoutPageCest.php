@@ -72,6 +72,9 @@ class f_q_checkoutPageCest
             }
         }
 
+        $I->wait(10);
+        echo $I->grabPageSource();
+
 		// verify if order placed properly on the thank you page
 		$I->waitForText('Order received', 10, 'h1');
 		$I->see('sales@sphereplugins.com');
@@ -85,7 +88,7 @@ class f_q_checkoutPageCest
 		// TODO implement complete check which ensures in single row UI widget the entire item pair is displayed and not in two 
 
 		// at least price check is done but however even for this it needs to confirm that it check the order summary row price and not of any subtotal or total. 
-		$I->see($this->price_of_product_step1_without_comma+$this->price_of_product_step2_without_comma);	
+		$I->see( $I->price_format($this->price_of_product_step1_without_comma+$this->price_of_product_step2_without_comma) );	
 
 	}
 
