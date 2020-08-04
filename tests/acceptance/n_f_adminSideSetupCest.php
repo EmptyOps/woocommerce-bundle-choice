@@ -153,10 +153,8 @@ class n_f_adminSideSetupCest
             }
         }
         
-        $I->scrollTo($save_button_xpath);
+        $I->scrollTo($save_button_xpath, -300, -100);
         $I->wait(3);
-        
-        $I->see('dfg df fglk dfgkj gdf gkdf');
 
         // save 
         $I->click($save_button_xpath);  
