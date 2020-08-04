@@ -178,6 +178,9 @@ class n_f_adminSideSetupCest
 
         // this function assumes that browser session is currently at desired page where the appearance needs to be tested
 
+        // load common js, needed for the color code retrieval 
+        $I->loadCommonJs();
+
         // verify
         for($i=0; $i<sizeof($field_id); $i++) {
             if( $field_type[$i] == "text" ) {
@@ -187,7 +190,7 @@ class n_f_adminSideSetupCest
                 $I->see($should_see_text[$i]);
             }
             elseif( $field_type[$i] == "color" ) {
-                $colorcode = $I->executeJS('return jQuery("'.$selector_of_targets[$i].'").css("'.$css_property_of_targets[$i].'");');  
+                $colorcode = $I->getElementColorHexCode( $selector_of_targets[$i], $css_property_of_targets[$i] );  
                 echo "colorcode found... ".$colorcode;
                 if( $colorcode == $val[$i] ) {
                     $I->dontSee('sd8324hs65gkjv73h');   // assume passed with dummy assert
