@@ -37,8 +37,7 @@ modules:
             adminPassword: password
             adminUrl: /wp-admin
             window_size: 1024x768
-            # clear_cookies: false
-            restart: true
+            clear_cookies: false
             capabilities:
                 unexpectedAlertBehaviour: 'accept'
                 # firefox_profile: '/home/travis/build/EmptyOps/woocommerce-bundle-choice/tests/firefox-profiles/taken-from-mac/xdfltxm9.default.zip.b64'

@@ -26,6 +26,9 @@ class f_m_previewPageCest
     	$this->price_of_product_step1_without_comma = str_replace(",", "", $this->price_of_product_step1);
     	$this->price_of_product_step2_without_comma = str_replace(",", "", $this->price_of_product_step2);
 
+    	$I->wait(10);
+    	echo $I->grabPageSource();
+
     	// verify 
     	$I->see( $I->price_format($this->price_of_product_step1_without_comma+$this->price_of_product_step2_without_comma) );
     	$I->see('Add This To Cart');
