@@ -30,7 +30,7 @@ class f_s_accountOrderDetailPageCest
     	$I->see('Orders','h1');
 		$I->see('Status');
 		$I->see('Total');
-		$I->see($this->price_of_product_step1_without_comma+$this->price_of_product_step2_without_comma);
+		$I->see( $I->price_format($this->price_of_product_step1_without_comma+$this->price_of_product_step2_without_comma) );
 
 	}
 
@@ -49,7 +49,7 @@ class f_s_accountOrderDetailPageCest
 		$I->executeJS('window.scrollTo( 0, 300 );');		
 		$I->wait(3);
 
-		$I->see($this->price_of_product_step1_without_comma+$this->price_of_product_step2_without_comma);
+		$I->see( $I->price_format($this->price_of_product_step1_without_comma+$this->price_of_product_step2_without_comma) );
 		$I->see('hi000');
 		$I->see('Direct bank transfer');
 
@@ -70,7 +70,7 @@ class f_s_accountOrderDetailPageCest
 		// TODO implement complete check which ensures in single row UI widget the entire item pair is displayed and not in two 
 
 		// at least price check is done but however even for this it needs to confirm that it is checking the row price and not of any subtotal or total. 
-		$I->see($this->price_of_product_step1_without_comma+$this->price_of_product_step2_without_comma);
+		$I->see( $I->price_format($this->price_of_product_step1_without_comma+$this->price_of_product_step2_without_comma) );
 
 	}
 

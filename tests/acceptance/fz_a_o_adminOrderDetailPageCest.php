@@ -29,7 +29,7 @@ class fz_a_o_adminOrderDetailPageCest
 
 		// verify 
 		$I->waitForText('Edit order', 10);
-		$I->see($this->price_of_product_step1_without_comma+$this->price_of_product_step2_without_comma);
+		$I->see( $I->price_format($this->price_of_product_step1_without_comma+$this->price_of_product_step2_without_comma) );
 
 	}
 
@@ -61,7 +61,7 @@ class fz_a_o_adminOrderDetailPageCest
 		// TODO implement complete check which ensures in single row UI widget the entire item pair is displayed and not in two 
 
 		// at least price check is done but however even for this it needs to confirm that it is checking the row price and not of any subtotal or total. 
-		$I->see($this->price_of_product_step1_without_comma+$this->price_of_product_step2_without_comma);
+		$I->see( $I->price_format($this->price_of_product_step1_without_comma+$this->price_of_product_step2_without_comma) );
 
 	}
 
