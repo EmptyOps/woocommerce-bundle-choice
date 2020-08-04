@@ -73,12 +73,14 @@ function eo_wbc_buttons_css(){
 	$eo_wbc_home_btn_border_color = false;	//dropped this field. wbc()->options->get_option('appearance_wid_btns','button_backcolor_active','');
 	$button_radius = wbc()->options->get_option('appearance_wid_btns','button_radius','');
 	$button_hovercolor = wbc()->options->get_option('appearance_wid_btns','button_hovercolor','');
-  	return '<style>.eo-wbc-container .ui.buttons .button{'.
+  	
+  	// return '<style>.eo-wbc-container .ui.buttons .button{'.
+  	return '<style>.wbc_wid_btns{'.
 		($button_backcolor_active?'background-color:'.$button_backcolor_active.' !important;':'').
 		($button_textcolor?'color:'.$button_textcolor.' !important;':'').
 		($eo_wbc_home_btn_border_color?'border-color:'.$eo_wbc_home_btn_border_color.' !important;':'').
-		($button_radius?'border-radius:'.$button_radius.'px !important;':'').'}'.
-		($button_hovercolor?'.eo-wbc-container .ui.buttons .button:hover{ background-color:'.$button_hovercolor.' !important; }</style>':'');
+		($button_radius?'border-radius:'.$button_radius.' !important;':'').'}'.
+		($button_hovercolor?'.wbc_wid_btns:hover{ background-color:'.$button_hovercolor.' !important; }</style>':'');
         
 }
 
@@ -90,14 +92,14 @@ function eo_wbc_buttons_css(){
 	</h2>
 	<div class="ui grid center aligned container">
 		<div class="ui buttons large row stackable">
-			<button class="ui button primary column" href="<?php echo $first_url .'EO_WBC=1&BEGIN='.$first_slug.'&STEP=1&FIRST=&SECOND='; ?>" onclick="window.location.href=jQuery(this).attr('href');">
+			<button class="ui button primary column wbc_wid_btns" href="<?php echo $first_url .'EO_WBC=1&BEGIN='.$first_slug.'&STEP=1&FIRST=&SECOND='; ?>" onclick="window.location.href=jQuery(this).attr('href');">
 				<?php echo $button_text.$first_name; ?>
 			</button>
 
 			<div class="or"></div>
 
 
-			<button class="ui button primary column" href="<?php echo $second_url .'EO_WBC=1&BEGIN='.$second_slug.'&STEP=1&FIRST=&SECOND='; ?>" onclick="window.location.href=jQuery(this).attr('href');">
+			<button class="ui button primary column wbc_wid_btns" href="<?php echo $second_url .'EO_WBC=1&BEGIN='.$second_slug.'&STEP=1&FIRST=&SECOND='; ?>" onclick="window.location.href=jQuery(this).attr('href');">
 				<?php echo $button_text.$second_name; ?>
 			</button>
 		</div>
