@@ -42,6 +42,8 @@ class f_k_step2Cest
 		}
 
 		$I->executeJS("jQuery('#text_slider_price').slider('set rangeValue', ".$range_min.", ".$range_max.");");
+		$I->wait(10);
+		echo $I->grabPageSource();
 		$I->waitForText( $suite_name_prefix == "n_" ? $I->get_configs('second_product_name',$suite_name_prefix) : 'Test ring 1', 10);  	
 
 		$I->scrollTo('//*[@id="main"]/ul/li/a/img', -300, -100);
@@ -49,7 +51,7 @@ class f_k_step2Cest
 
 		// - I click on product image of first product from the search results
 		$I->click( $suite_name_prefix == "n_" ? $I->get_configs('second_product_name',$suite_name_prefix) : 'Test ring 1' );	// ('//*[@id="main"]/ul/li/a/img');
-		$I->see( $suite_name_prefix == "n_" ? $I->get_configs('second_product_page_button_text',$suite_name_prefix) : 'Add to bagsc...');	//Add to bagsc... is the text set on appearance module during admin test
+		$I->see( $suite_name_prefix == "n_" ? $I->get_configs('second_product_page_button_text',$suite_name_prefix) : 'Add to bagsc...' );	//Add to bagsc... is the text set on appearance module during admin test
 
 		return $price_of_product;
 	}
