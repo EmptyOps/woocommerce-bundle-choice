@@ -179,7 +179,7 @@ class n_f_adminSideSetupCest
         // this function assumes that browser session is currently at desired page where the appearance needs to be tested
 
         // load common js, needed for the color code retrieval 
-        $I->loadCommonJs();
+        $I->loadCommonJs($I);
 
         // verify
         for($i=0; $i<sizeof($field_id); $i++) {

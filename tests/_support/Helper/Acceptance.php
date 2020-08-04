@@ -406,7 +406,7 @@ class Acceptance extends \Codeception\Module
     /**
      * @param $page if passed only that page's js will be loaded 
      */
-    public function loadCommonJs($page='') 
+    public function loadCommonJs($I,$page='') 
     {
         // echo "called resetSession...";
             
