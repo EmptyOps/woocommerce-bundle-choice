@@ -166,6 +166,10 @@ class n_f_adminSideSetupCest
         $I->reloadPage();   //reload page
         $I->click($tab);
         for($i=0; $i<sizeof($field_id); $i++) {
+            if( $field_id[$i] == "breadcrumb_actions_backcolor_inactive" /*scroll to there when the fields are far away*/ )  {
+                $I->scrollTo( '//*[@id="'.$field_id[$i].'"]', -300, -100 );
+            }
+
             echo "val of ".$field_id[$i]."=".$field_name[$i]." is=".$I->executeJS('return jQuery("#'.$field_id[$i].'").val();');   
             $I->seeInField($field_name[$i], $val[$i]);
         }
