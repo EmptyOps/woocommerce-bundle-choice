@@ -77,6 +77,8 @@ class n_n_frontendAppearanceModificationsCest extends n_f_adminSideSetupCest
         // for first category and second category. loop.
         for($cat=0; $cat<2; $cat++) {
 
+            echo "modifyFiltersAppearance of category ".$cat;
+
             $field_id = array( 'header_textcolor', 'labels_textcolor', 'slider_nodes_backcolor_active', 'slider_track_backcolor_active', 'icon_size' );
             $field_name = array( 'header_textcolor', 'labels_textcolor', 'slider_nodes_backcolor_active', 'slider_track_backcolor_active', 'icon_size' );
             $field_type = array( 'color', 'color', 'color', 'color', 'text' );
@@ -85,16 +87,17 @@ class n_n_frontendAppearanceModificationsCest extends n_f_adminSideSetupCest
             if( $cat == 0 ) {
 
                 //need to set selector according to template 
-                if( $I->get_session('wbc_suite_n__process_current_filter_template') == "fc1" ) {
+                $curr_tmplt = $I->get_session('wbc_suite_n__process_current_filter_template_'.$cat);
+                if( $curr_tmplt == "fc1" ) {
                     $selector_of_targets = array('#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > p > spna', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(2)', '#text_slider_pa_eo_carat_attr > div > div:nth-child(3)', '/html/body/section/main/header/div[5]/div/div[1]/div/div[2]/div[2]/div/div[1]', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(1) > img');
                 }
-                elseif( $I->get_session('wbc_suite_n__process_current_filter_template') == "fc2" ) {
+                elseif( $curr_tmplt == "fc2" ) {
                     $selector_of_targets = array('/html/body/section/main/header/div[5]/div/div[1]/div/div[1]/p/spna', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(2)', '#text_slider_pa_eo_carat_attr > div > div:nth-child(3)', '/html/body/section/main/header/div[5]/div/div[1]/div/div[2]/div[2]/div/div[1]', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(1) > img');
                 }
-                elseif( $I->get_session('wbc_suite_n__process_current_filter_template') == "fc3" ) {
+                elseif( $curr_tmplt == "fc3" ) {
                     $selector_of_targets = array('/html/body/section/main/header/div[5]/div/div[1]/div/div[1]/p/spna', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(2)', '#text_slider_pa_eo_carat_attr > div > div:nth-child(3)', '/html/body/section/main/header/div[5]/div/div[1]/div/div[2]/div[2]/div/div[1]', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(1) > img');
                 }
-                elseif( $I->get_session('wbc_suite_n__process_current_filter_template') == "fc4" ) {
+                elseif( $curr_tmplt == "fc4" ) {
                     $selector_of_targets = array('/html/body/section/main/header/div[5]/div/div[1]/div/div[1]/p/spna', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(2)', '#text_slider_pa_eo_carat_attr > div > div:nth-child(3)', '/html/body/section/main/header/div[5]/div/div[1]/div/div[2]/div[2]/div/div[1]', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(1) > img');
                 }
                 

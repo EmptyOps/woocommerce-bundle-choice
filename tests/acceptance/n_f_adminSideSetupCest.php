@@ -224,7 +224,7 @@ class n_f_adminSideSetupCest
         // }
 
         // go to the page
-        $I->amOnPage('/wp-admin/admin.php?page=eowbc-appearance');
+        $I->amOnPage('/wp-admin/admin.php?page=eowbc-filters');
 
         // go to the tab
         $I->click($tab);
@@ -308,7 +308,7 @@ class n_f_adminSideSetupCest
         // }
 
         // go to the page
-        $I->amOnPage('/wp-admin/admin.php?page=eowbc-appearance');
+        $I->amOnPage('/wp-admin/admin.php?page=eowbc-mapping');
 
         // go to the tab
         $I->click($tab);

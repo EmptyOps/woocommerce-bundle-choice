@@ -227,7 +227,7 @@ class n_g_installAndSetupAdminSideCest extends n_f_adminSideSetupCest
             }
 
             //set in the session so that can be used in preview page where its needed.
-            $I->set_session('wbc_suite_n__process_current_filter_template', $templates[$current_template[$cat]]);
+            $I->set_session('wbc_suite_n__process_current_filter_template_'.$cat, $templates[$current_template[$cat]]);
         }
 
     }

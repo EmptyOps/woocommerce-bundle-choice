@@ -21,6 +21,8 @@ class n_p_frontendFunctionalityModificationsCest extends n_f_adminSideSetupCest
         // for first category and second category. loop.
         for($cat=0; $cat<2; $cat++) {
 
+            echo "modifyFilterFunctionality of category ".$cat;
+
             if( $cat == 0 ) {
                 $filter = array('Clarity', 'text_slider_pa_eo_colour_attr', 'text_slider_pa_eo_carat_attr','text_slider_pa_eo_clarity_attr', 'text_slider_pa_eo_colour_attr');
                 $filter_id = array('text_slider_pa_eo_clarity_attr', 'text_slider_pa_eo_colour_attr', 'text_slider_pa_eo_carat_attr','text_slider_pa_eo_clarity_attr', 'text_slider_pa_eo_colour_attr');
@@ -54,7 +56,7 @@ class n_p_frontendFunctionalityModificationsCest extends n_f_adminSideSetupCest
             // TODO still all the functionality modification are not tested like all input types are not tested, order/reset-link/help-text not tested in advanced section, width functionality not tested etc. 
 
             // go to target page
-            $this->gotoStep($I, $cat, false, "n_"); 
+            $this->gotoStep($I, $cat, true, "n_"); 
 
             // verify functionality modifications
             $this->verifyFilters($I, $filter_id, $field_id, $field_name, $field_type, $val, array(), $selector_of_targets, $css_property_of_targets );
