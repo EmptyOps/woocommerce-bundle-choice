@@ -95,16 +95,18 @@ class n_f_adminSideSetupCest
 
             $I->click('//*[@id="main"]/ul/li/a/img');
 
+            // $I->waitForText('Continue');
+
             $I->executeJS("window.scrollTo( 0, 300 );");
             $I->wait(3);
 
-            $I->waitForText('Continue');
-
             //first select required options for variable product, otherwise it won't let us add into cart. 
-            $I->click('//*[@id="product-13"]/div[2]/form/table/tbody/tr/td[2]/div/span[2]/ul/li[1]/div');
+            if( $suite_name_prefix != "n_" ) { 
+                $I->click('//*[@id="product-13"]/div[2]/form/table/tbody/tr/td[2]/div/span[2]/ul/li[1]/div');
+            }
 
             // click on continue button
-            $I->click('Continue');
+            $I->click( '//*[@id="eo_wbc_add_to_cart"]' );
 
             // verify 
             $price_of_product = $I->get_configs('first_product_price', 'n_');    //TODO make it dynamic if its random in sample data
@@ -166,11 +168,6 @@ class n_f_adminSideSetupCest
         $I->reloadPage();   //reload page
         $I->click($tab);
         for($i=0; $i<sizeof($field_id); $i++) {
-            if( $field_id[$i] == "breadcrumb_actions_backcolor_inactive" /*scroll to there when the fields are far away*/ )  {
-                $I->scrollTo( '//*[@id="'.$field_id[$i].'"]', -300, -100 );
-            }
-
-            echo "val of ".$field_id[$i]."=".$field_name[$i]." is=".$I->executeJS('return jQuery("#'.$field_id[$i].'").val();');   
             $I->seeInField($field_name[$i], $val[$i]);
         }
     }

@@ -47,7 +47,7 @@ class n_n_frontendAppearanceModificationsCest extends n_f_adminSideSetupCest
         // TODO still all the appearance are not tested like the last 3 switches are not modifies yet
 
         // go to target page
-        $this->gotoStep($I, $cat); 
+        $this->gotoStep($I, 1); 
 
         // verify changed appearance
         $this->verifyAppearance($I, array( 'breadcrumb_radius', 'breadcrumb_backcolor_active', 'breadcrumb_backcolor_inactive', 'breadcrumb_num_icon_backcolor_active', 'breadcrumb_title_backcolor_inactive', 'breadcrumb_actions_backcolor_inactive' ), 
