@@ -458,4 +458,24 @@ class Acceptance extends \Codeception\Module
         return false;
     }
 
+    /**
+     * 
+     */
+    public function getElementCss($I,$selector_of_targets, $css_property_of_targets) 
+    {
+        // echo "called resetSession...";
+            
+        try { 
+            return $I->executeJS('
+                                return jQuery("'.$selector_of_targets.'").css("'.$css_property_of_targets.'");
+                                ');  
+        }
+        catch(Exception $e) {
+            echo "caught message...";
+            echo $e->getMessage()."";
+        }
+
+        return false;
+    }
+
 }

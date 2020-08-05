@@ -201,6 +201,16 @@ class n_f_adminSideSetupCest
                     $I->see('sd8324hs65gkjv73h');   // assume failed with dummy assert
                 }
             }
+            elseif( $field_type[$i] == "css" ) {
+                $cssval = $I->getElementCss($I, $selector_of_targets[$i], $css_property_of_targets[$i] );  
+                echo "cssval found... ".$cssval;
+                if( $cssval == $val[$i] ) {
+                    $I->dontSee('sd8324hs65gkjv73h');   // assume passed with dummy assert
+                }
+                else {
+                    $I->see('sd8324hs65gkjv73h');   // assume failed with dummy assert
+                }
+            }
             elseif( $field_type[$i] == "select" ) {
                 $I->see($should_see_text[$i]);
             }
