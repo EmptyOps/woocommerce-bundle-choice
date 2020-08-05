@@ -28,6 +28,9 @@ class n_n_frontendAppearanceModificationsCest extends n_f_adminSideSetupCest
 
         // verify changed appearance
         $this->verifyAppearance($I, array( 'tagline_text', 'button_text', 'button_backcolor_active' ), array( 'tagline_text', 'button_text', 'button_backcolor_active' ), array( 'text', 'text', 'color' ), array( 'My custom tagline', 'Continue With', '#000000' ), array(), array('','','#wbc_ > div > div > button:nth-child(1)'), array('','','backgroundColor'));
+
+        // change button texts back so that tests to follow are not affected
+        $this->modifyAppearance($I, 'Buttons Widget', array( 'button_text' ), array( 'button_text' ), array( 'text' ), array( 'Start with' ), '//*[@id="wid_btns_submit_btn"]', array( '' ));
     }
 
     // test if editing the appearance of breadcrumb works or not  
@@ -44,7 +47,7 @@ class n_n_frontendAppearanceModificationsCest extends n_f_adminSideSetupCest
             array( 'text', 'color', 'color', 'color', 'color', 'color' ), 
             array( '5px', '#f1f1f1', '#ffffff', '#000000', '#00ff00', '#49bf50' ), '//*[@id="breadcrumb_submit_btn"]', array( '' ));
 
-        // TODO still all the appearance are not tested like the last 3 switches are not modifies yet
+        // TODO still all the appearance are not tested like the last 3 switches are not modified yet
 
         // go to target page
         $this->gotoStep($I, 1); 
@@ -78,7 +81,8 @@ class n_n_frontendAppearanceModificationsCest extends n_f_adminSideSetupCest
                 $css_property_of_targets = array('color','color','backgroundColor', 'backgroundColor','width');
             }
             else {
-                // TODO set selectors and css property for second category
+                $selector_of_targets = array('#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > p > spna', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(2)', '#text_slider_pa_eo_carat_attr > div > div:nth-child(3)', '#text_slider_pa_eo_carat_attr > div', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(1) > img');
+                $css_property_of_targets = array('color','color','backgroundColor', 'backgroundColor','width');
             } 
 
             // change random appearance
