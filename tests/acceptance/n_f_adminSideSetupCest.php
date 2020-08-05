@@ -76,7 +76,7 @@ class n_f_adminSideSetupCest
         $I->radioAssertion($I, $widget_key, $cat == 0 ? 'first_category_altr_filt_widgts' : 'second_category_altr_filt_widgts', $widget_key); 
     }
 
-    protected function gotoStep(AcceptanceTester $I, $cat=0, $go_directly=false, $suite_name_prefix == "n_")
+    protected function gotoStep(AcceptanceTester $I, $cat=0, $go_directly=false, $suite_name_prefix = "n_")
     {
         $I->amOnPage('/index.php/design-your-own-ring/');
 
