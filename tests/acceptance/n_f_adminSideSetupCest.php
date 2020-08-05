@@ -217,7 +217,7 @@ class n_f_adminSideSetupCest
         }
     }
 
-    protected function modifyFilters(AcceptanceTester $I, $tab, $filter_id, $field_id, $field_name, $field_type, $val, $save_button_xpath, $field_dropdown_div_id=array())
+    protected function modifyFilters(AcceptanceTester $I, $tab, $filter, $filter_id, $field_id, $field_name, $field_type, $val, $save_button_xpath, $field_dropdown_div_id=array())
     {
         // if( !$I->test_allowed_in_this_environment("n_") ) {
         //     return;
@@ -235,8 +235,8 @@ class n_f_adminSideSetupCest
 
             // simulate edit click is yet to be done 
                 // find target row based on filter_id 
-
-                // find and click edit action within the row 
+                // find and click edit action within the row
+                $I_>executeJS('jQuery("td:contains('.$filter[$i].'):not(.disabled) > a").trigger("click");'); 
         
             if( $field_type[$i] == "text" ) {
                 $I->fillField($field_name[$i], $val[$i]);

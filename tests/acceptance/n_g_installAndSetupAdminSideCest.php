@@ -143,6 +143,7 @@ class n_g_installAndSetupAdminSideCest extends n_f_adminSideSetupCest
             return;
         }
 
+        $current_template = array();
         // for first category and second category. loop.
         for($cat=0; $cat<2; $cat++) {
 
@@ -187,6 +188,8 @@ class n_g_installAndSetupAdminSideCest extends n_f_adminSideSetupCest
 
             $current_uri = "";
             for($i=0; $i<sizeof($templates); $i++) {
+                $current_template[$cat] = $i;
+
                 if( /* tmp. let it set widget till the installation is not changed to actual empty box until that sample data is not solved */true ||  $i > 0 ) {
                     // change the template 
                     $this->setAlternateFilterWidget($I, $templates[$i], $cat);
@@ -219,8 +222,12 @@ class n_g_installAndSetupAdminSideCest extends n_f_adminSideSetupCest
         // set back to default or let the random being tested
         for($cat=0; $cat<2; $cat++) {
             if( rand(1, 100) > 50 ) {
+                $current_template[$cat] = 0;
                 $this->setAlternateFilterWidget($I, $templates[0], $cat);
             }
+
+            //set in the session so that can be used in preview page where its needed.
+            $I->set_session('wbc_suite_n__process_current_filter_template', $templates[$current_template[$cat]]);
         }
 
     }

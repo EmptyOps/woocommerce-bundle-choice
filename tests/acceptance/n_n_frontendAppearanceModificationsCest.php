@@ -18,6 +18,8 @@ class n_n_frontendAppearanceModificationsCest extends n_f_adminSideSetupCest
             return;
         }
 
+        // TODO At least in one environment, in future we should test all(including default) alternate button widgets by simply looping here 
+
         // change random appearance
         $this->modifyAppearance($I, 'Buttons Widget', array( 'tagline_text', 'button_text', 'button_backcolor_active', 'button_radius' ), array( 'tagline_text', 'button_text', 'button_backcolor_active', 'button_radius' ), array( 'text', 'text', 'color', 'text' ), array( 'My custom tagline', 'Continue With', '#000000', '1px' ), '//*[@id="wid_btns_submit_btn"]', array( '' ));
 
@@ -39,6 +41,8 @@ class n_n_frontendAppearanceModificationsCest extends n_f_adminSideSetupCest
         if( !$I->test_allowed_in_this_environment("n_") ) {
             return;
         }
+
+        // TODO At least in one environment, in future we should test all(including default) alternate breadcrumb widgets by simply looping here 
 
         // change random appearance
         $this->modifyAppearance($I,'Breadcrumb', 
@@ -68,6 +72,8 @@ class n_n_frontendAppearanceModificationsCest extends n_f_adminSideSetupCest
             return;
         }
 
+        // TODO At least in one environment, in future, we should test all(including default) alternate filter widgets by simply looping here
+
         // for first category and second category. loop.
         for($cat=0; $cat<2; $cat++) {
 
@@ -77,7 +83,21 @@ class n_n_frontendAppearanceModificationsCest extends n_f_adminSideSetupCest
             $val = array( '#000000', '#00ff00', '#000000', '#00ff00', '64px' );
 
             if( $cat == 0 ) {
-                $selector_of_targets = array('#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > p > spna', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(2)', '#text_slider_pa_eo_carat_attr > div > div:nth-child(3)', '/html/body/section/main/header/div[5]/div/div[1]/div/div[2]/div[2]/div/div[1]', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(1) > img');
+
+                //need to set selector according to template 
+                if( $I->get_session('wbc_suite_n__process_current_filter_template') == "fc1" ) {
+                    $selector_of_targets = array('#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > p > spna', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(2)', '#text_slider_pa_eo_carat_attr > div > div:nth-child(3)', '/html/body/section/main/header/div[5]/div/div[1]/div/div[2]/div[2]/div/div[1]', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(1) > img');
+                }
+                elseif( $I->get_session('wbc_suite_n__process_current_filter_template') == "fc2" ) {
+                    $selector_of_targets = array('/html/body/section/main/header/div[5]/div/div[1]/div/div[1]/p/spna', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(2)', '#text_slider_pa_eo_carat_attr > div > div:nth-child(3)', '/html/body/section/main/header/div[5]/div/div[1]/div/div[2]/div[2]/div/div[1]', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(1) > img');
+                }
+                elseif( $I->get_session('wbc_suite_n__process_current_filter_template') == "fc3" ) {
+                    $selector_of_targets = array('/html/body/section/main/header/div[5]/div/div[1]/div/div[1]/p/spna', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(2)', '#text_slider_pa_eo_carat_attr > div > div:nth-child(3)', '/html/body/section/main/header/div[5]/div/div[1]/div/div[2]/div[2]/div/div[1]', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(1) > img');
+                }
+                elseif( $I->get_session('wbc_suite_n__process_current_filter_template') == "fc4" ) {
+                    $selector_of_targets = array('/html/body/section/main/header/div[5]/div/div[1]/div/div[1]/p/spna', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(2)', '#text_slider_pa_eo_carat_attr > div > div:nth-child(3)', '/html/body/section/main/header/div[5]/div/div[1]/div/div[2]/div[2]/div/div[1]', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(1) > img');
+                }
+                
                 $css_property_of_targets = array('color','color','backgroundColor', 'backgroundColor','width');
             }
             else {
@@ -108,6 +128,8 @@ class n_n_frontendAppearanceModificationsCest extends n_f_adminSideSetupCest
         if( !$I->test_allowed_in_this_environment("n_") ) {
             return;
         }
+
+        // TODO At least in one environment, in future, we should test all(including default) alternate item page button widgets by simply looping here
 
         $field_id = array( 'fc_atc_button_text', 'sc_atc_button_text', 'product_page_add_to_basket' );
         $field_name = array( 'fc_atc_button_text', 'sc_atc_button_text', 'product_page_add_to_basket' );

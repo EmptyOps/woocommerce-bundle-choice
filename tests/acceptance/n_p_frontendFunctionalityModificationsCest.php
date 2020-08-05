@@ -21,9 +21,8 @@ class n_p_frontendFunctionalityModificationsCest extends n_f_adminSideSetupCest
         // for first category and second category. loop.
         for($cat=0; $cat<2; $cat++) {
 
-            // TODO wait for the edit feature
-
             if( $cat == 0 ) {
+                $filter = array('Clarity', 'text_slider_pa_eo_colour_attr', 'text_slider_pa_eo_carat_attr','text_slider_pa_eo_clarity_attr', 'text_slider_pa_eo_colour_attr');
                 $filter_id = array('text_slider_pa_eo_clarity_attr', 'text_slider_pa_eo_colour_attr', 'text_slider_pa_eo_carat_attr','text_slider_pa_eo_clarity_attr', 'text_slider_pa_eo_colour_attr');
                 $field_id = array( '', 'd_fconfig_ordering', 'd_fconfig_is_advanced_1', 'd_fconfig_add_reset_link_1', 'd_fconfig_add_help_1' );
                 $field_name = array( '', 'd_fconfig_ordering', '', '', '' );
@@ -50,12 +49,12 @@ class n_p_frontendFunctionalityModificationsCest extends n_f_adminSideSetupCest
 
             // change random functionalities
                 // modify things like filter input type, ordering, move to advanced/non-advanced, reset link, help text etc.
-            $this->modifyFilters($I, $cat == 0 ? 'Diamond Page Filter Configuration' : 'Settings Page Filter Configuration', $filter_id, $field_id, $field_name, $field_type, $val, '//*[@id="d_fconfig_submit_btn"]', $field_dropdown_div_id);
+            $this->modifyFilters($I, $cat == 0 ? 'Diamond Page Filter Configuration' : 'Settings Page Filter Configuration', $filter, $filter_id, $field_id, $field_name, $field_type, $val, '//*[@id="d_fconfig_submit_btn"]', $field_dropdown_div_id);
 
             // TODO still all the functionality modification are not tested like all input types are not tested, order/reset-link/help-text not tested in advanced section, width functionality not tested etc. 
 
             // go to target page
-            $this->gotoStep($I, $cat); 
+            $this->gotoStep($I, $cat, false, "n_"); 
 
             // verify functionality modifications
             $this->verifyFilters($I, $filter_id, $field_id, $field_name, $field_type, $val, array(), $selector_of_targets, $css_property_of_targets );
@@ -114,7 +113,7 @@ class n_p_frontendFunctionalityModificationsCest extends n_f_adminSideSetupCest
         // TODO still all the functionality modification are not tested like more real life examples, real life discount requirements, etc. 
 
         // go to target page
-        $this->gotoStep($I, 0); 
+        $this->gotoStep($I, 0, false, "n_"); 
 
         // verify functionality modifications
         $this->verifyMappings($I, $filter_before_verification, $verifications );
