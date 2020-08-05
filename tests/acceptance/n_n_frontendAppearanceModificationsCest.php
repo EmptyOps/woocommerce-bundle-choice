@@ -77,11 +77,11 @@ class n_n_frontendAppearanceModificationsCest extends n_f_adminSideSetupCest
             $val = array( '#000000', '#00ff00', '#000000', '#00ff00', '64px' );
 
             if( $cat == 0 ) {
-                $selector_of_targets = array('#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > p > spna', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(2)', '#text_slider_pa_eo_carat_attr > div > div:nth-child(3)', '#text_slider_pa_eo_carat_attr > div', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(1) > img');
+                $selector_of_targets = array('#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > p > spna', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(2)', '#text_slider_pa_eo_carat_attr > div > div:nth-child(3)', '/html/body/section/main/header/div[5]/div/div[1]/div/div[2]/div[2]/div/div[1]', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(1) > img');
                 $css_property_of_targets = array('color','color','backgroundColor', 'backgroundColor','width');
             }
             else {
-                $selector_of_targets = array('#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > p > spna', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(2)', '#text_slider_pa_eo_carat_attr > div > div:nth-child(3)', '#text_slider_pa_eo_carat_attr > div', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(1) > img');
+                $selector_of_targets = array('#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > p > spna', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(2)', '#text_slider_pa_eo_carat_attr > div > div:nth-child(3)', '/html/body/section/main/header/div[5]/div/div[1]/div/div[2]/div[2]/div/div[1]', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(1) > img');
                 $css_property_of_targets = array('color','color','backgroundColor', 'backgroundColor','width');
             } 
 
@@ -91,7 +91,7 @@ class n_n_frontendAppearanceModificationsCest extends n_f_adminSideSetupCest
             // TODO still all the appearance are not tested like the header text font, icon label size etc. 
 
             // go to target page
-            $this->gotoStep($I, $cat); 
+            $this->gotoStep($I, $cat, false, "n_"); 
 
             // since icon size will require checking css property
             $field_type[4] = "css";
