@@ -166,7 +166,7 @@ class n_f_adminSideSetupCest
         $I->reloadPage();   //reload page
         $I->click($tab);
         for($i=0; $i<sizeof($field_id); $i++) {
-            echo "val of ".$field_id[$i]."=".$field_name[$i]." is=".$I->executeJS('jQuery("#'.$field_id[$i].'").val();');   
+            echo "val of ".$field_id[$i]."=".$field_name[$i]." is=".$I->executeJS('return jQuery("#'.$field_id[$i].'").val();');   
             $I->seeInField($field_name[$i], $val[$i]);
         }
     }
