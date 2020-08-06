@@ -122,7 +122,8 @@ class n_f_adminSideSetupCest
         $I->wait(3);
 
         $I->click('//*[@id="main"]/ul/li/a/img');
-        $I->waitForText('Continue', 10);
+        $I->waitForText('Specifications', 10);    //remember that waitForText is case sensitive.
+        $I->see('Continue', 10);    
     }
 
     protected function modifyAppearance(AcceptanceTester $I, $tab, $field_id, $field_name, $field_type, $val, $save_button_xpath, $field_dropdown_div_id=array())
@@ -236,7 +237,7 @@ class n_f_adminSideSetupCest
             // simulate edit click is yet to be done 
                 // find target row based on filter_id 
                 // find and click edit action within the row
-                $I_>executeJS('jQuery("td:contains('.$filter[$i].'):not(.disabled) > a").trigger("click");'); 
+                $I->executeJS('jQuery("td:contains('.$filter[$i].'):not(.disabled) > a").trigger("click");'); 
         
             if( $field_type[$i] == "text" ) {
                 $I->fillField($field_name[$i], $val[$i]);

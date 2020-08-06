@@ -217,10 +217,8 @@ class n_g_installAndSetupAdminSideCest extends n_f_adminSideSetupCest
                     }
                 }
             }
-        }
 
-        // set back to default or let the random being tested
-        for($cat=0; $cat<2; $cat++) {
+            // set back to default or let the random being tested
             if( rand(1, 100) > 50 ) {
                 $current_template[$cat] = 0;
                 $this->setAlternateFilterWidget($I, $templates[0], $cat);

@@ -260,4 +260,8 @@ class WBC_Common {
     	return http_build_query($param);
     }
 
+    public function is_object($obj){
+    	return !empty($obj) && is_object($obj);
+    }
+
 }
