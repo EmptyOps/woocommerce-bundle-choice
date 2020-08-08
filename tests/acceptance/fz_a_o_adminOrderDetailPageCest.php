@@ -18,16 +18,18 @@ class fz_a_o_adminOrderDetailPageCest
   //       }
 
     	//TODO make it dynamic by saving this in session in previous steps and then here get it from session 
-    	$this->price_of_product_step1 = "12.00";
-    	$this->price_of_product_step2 = "15.00";
+    	$this->price_of_product_step1 = $suite_name_prefix == "n_" ? $I->get_configs('first_product_price',$suite_name_prefix) : "12.00";
+    	$this->price_of_product_step2 = $suite_name_prefix == "n_" ? $I->get_configs('second_product_price',$suite_name_prefix) : "15.00";
+    	$this->price_of_product_step1_without_comma = str_replace(",", "", $this->price_of_product_step1);
+    	$this->price_of_product_step2_without_comma = str_replace(",", "", $this->price_of_product_step2);
 
 		// go to particular order detail page
-		$I->amOnPage('/wp-admin/edit.php?post_type=shop_order');	
+		$I->amOnPage( '/wp-admin/edit.php?post_type=shop_order' );	
 		$I->click('//*[@id="the-list"]/tr[1]/td[1]');	
 
 		// verify 
 		$I->waitForText('Edit order', 10);
-		$I->see($this->price_of_product_step1+$this->price_of_product_step2);
+		$I->see( $I->price_format($this->price_of_product_step1_without_comma+$this->price_of_product_step2_without_comma) );
 
 	}
 
@@ -48,7 +50,7 @@ class fz_a_o_adminOrderDetailPageCest
 		$I->see('8347408752');
 
 		//TODO check here if merged row appears properly or not 
-		if( !$suite_name_prefix ) { 
+		if( true || !$suite_name_prefix ) { 
 			$this->confirmMergedRow($I);	
 		}
 
@@ -59,7 +61,7 @@ class fz_a_o_adminOrderDetailPageCest
 		// TODO implement complete check which ensures in single row UI widget the entire item pair is displayed and not in two 
 
 		// at least price check is done but however even for this it needs to confirm that it is checking the row price and not of any subtotal or total. 
-		$I->see($this->price_of_product_step1+$this->price_of_product_step2);
+		$I->see( $I->price_format($this->price_of_product_step1_without_comma+$this->price_of_product_step2_without_comma) );
 
 	}
 

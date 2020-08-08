@@ -11,7 +11,7 @@ class n_f_adminSideSetupCest
     // {
     // }
     
-    protected function setAlternateBreadcrumbWidget(AcceptanceTester $I, $widget_key)
+    protected function setAlternateBreadcrumbWidget(AcceptanceTester $I, $widget_key, $widget_option)
     {
         // if( !$I->test_allowed_in_this_environment("n_") ) {
         //     return;
@@ -25,17 +25,22 @@ class n_f_adminSideSetupCest
         $I->see('First Category');
 
         // select template
-        $I->executeJS("jQuery('#".$widget_key."').parent().checkbox('set checked', '".$widget_key."');");  
+        // $I->executeJS("jQuery('#".$widget_key."').prop('checked',true);"); 
+        $I->selectOption('form input[name=config_alternate_breadcrumb]', $widget_option);
+        // $I->executeJS("jQuery('#".$widget_key."').parent().checkbox('set checked', '".$widget_key."');");  
 
         // save 
-        $I->scrollTo('//*[@id="config_navigation_conf_save_btn"]');
+        $I->scrollTo('//*[@id="config_navigation_conf_save_btn"]', -300, -100);
         $I->wait(3);
         $I->click('#config_navigation_conf_save_btn');  //('Save');     //it shouldn't be this way, but there seem some issue with selenium driver and thus when there is another Save button on the page even though on another page and is not visible but still selenium think it is visible and thus gives us error so need to use unique xPath like id etc. 
+
+        // since due to sample data is there it may take time to install alternate widget's sample data 
+        $I->waitForText('Updated successfully', 10);
 
         // confirm if saved properly or not
         $I->reloadPage();   //reload page
         $I->click('Navigations Steps( Breadcrumb )');
-        $I->seeInField('config_alternate_breadcrumb', $widget_key);
+        $I->radioAssertion($I, $widget_key, "config_alternate_breadcrumb", $widget_key); 
     }
 
     protected function setAlternateFilterWidget(AcceptanceTester $I, $widget_key, $cat)
@@ -52,7 +57,8 @@ class n_f_adminSideSetupCest
         $I->see('First Category');
 
         // select template
-        $I->executeJS("jQuery('#".$widget_key."').parent().checkbox('set checked', '".$widget_key."');");  
+        $I->executeJS("jQuery('#".$widget_key."').prop('checked',true);"); 
+        // $I->executeJS("jQuery('#".$widget_key."').parent().checkbox('set checked', '".$widget_key."');");  
 
         // $I->scrollTo('//*[@id="submit_btn"]');
         // $I->wait(3);
@@ -60,36 +66,47 @@ class n_f_adminSideSetupCest
         // save 
         $I->click('#submit_btn');  //('Save');     //it shouldn't be this way, but there seem some issue with selenium driver and thus when there is another Save button on the page even though on another page and is not visible but still selenium think it is visible and thus gives us error so need to use unique xPath like id etc. 
 
+        // since due to sample data is there it may take time to install alternate widget's sample data 
+        $I->waitForText('Saved!', 10);
+
         // confirm if saved properly or not
         $I->reloadPage();   //reload page
         $I->click('Alternate Filter Widgets');
-        $I->seeInField($cat == 0 ? 'first_category_altr_filt_widgts' : 'second_category_altr_filt_widgts', $widget_key);
+        // $I->seeInField($cat == 0 ? 'first_category_altr_filt_widgts' : 'second_category_altr_filt_widgts', $widget_key);
+        $I->radioAssertion($I, $widget_key, $cat == 0 ? 'first_category_altr_filt_widgts' : 'second_category_altr_filt_widgts', $widget_key); 
     }
 
-    protected function gotoStep(AcceptanceTester $I, $cat=0)
+    protected function gotoStep(AcceptanceTester $I, $cat=0, $go_directly=false, $suite_name_prefix = "n_")
     {
-        $I->amOnPage('/design-your-own-ring/');
+        $I->amOnPage('/index.php/design-your-own-ring/');
 
         $I->see($I->get_configs('first_button_text', 'n_'));
         $I->see($I->get_configs('second_button_text', 'n_'));
 
-        $I->click($I->get_configs('first_button_text', 'n_'));
+        $I->click($I->get_configs( (!$go_directly || $cat == 0) ? 'first_button_text' : 'second_button_text', 'n_'));
 
-        $I->waitForText('CHOOSE A', 10);  
+        $I->waitForText( $I->get_configs('cat_name_'.( !$go_directly ? '0' : $cat ), 'n_'), 10);  
+        $I->see('CHOOSE A');  
         
-        if($cat > 0) {
+        if(!$go_directly && $cat > 0) {
             // go to second category filter
             $I->scrollTo('//*[@id="main"]/ul/li/a/img');
             $I->wait(3);
 
             $I->click('//*[@id="main"]/ul/li/a/img');
-            $I->see('Continue');
+
+            // $I->waitForText('Continue');
+
+            $I->executeJS("window.scrollTo( 0, 300 );");
+            $I->wait(3);
 
             //first select required options for variable product, otherwise it won't let us add into cart. 
-            $I->click('//*[@id="product-13"]/div[2]/form/table/tbody/tr/td[2]/div/span[2]/ul/li[1]/div');
+            if( $suite_name_prefix != "n_" ) { 
+                $I->click('//*[@id="product-13"]/div[2]/form/table/tbody/tr/td[2]/div/span[2]/ul/li[1]/div');
+            }
 
             // click on continue button
-            $I->click('Continue');
+            $I->click( '//*[@id="eo_wbc_add_to_cart"]' );
 
             // verify 
             $price_of_product = $I->get_configs('first_product_price', 'n_');    //TODO make it dynamic if its random in sample data
@@ -105,7 +122,8 @@ class n_f_adminSideSetupCest
         $I->wait(3);
 
         $I->click('//*[@id="main"]/ul/li/a/img');
-        $I->waitForText('Continue', 10);
+        $I->waitForText('Specifications', 10);    //remember that waitForText is case sensitive.
+        $I->see('Continue');    
     }
 
     protected function modifyAppearance(AcceptanceTester $I, $tab, $field_id, $field_name, $field_type, $val, $save_button_xpath, $field_dropdown_div_id=array())
@@ -138,11 +156,14 @@ class n_f_adminSideSetupCest
             }
         }
         
-        $I->scrollTo($save_button_xpath);
+        $I->scrollTo($save_button_xpath, -300, -100);
         $I->wait(3);
-        
+
         // save 
         $I->click($save_button_xpath);  
+
+        // in case server is hanged and it takes time!
+        $I->waitForText('Saved!', 10);
 
         // confirm if saved properly or not
         $I->reloadPage();   //reload page
@@ -160,6 +181,9 @@ class n_f_adminSideSetupCest
 
         // this function assumes that browser session is currently at desired page where the appearance needs to be tested
 
+        // load common js, needed for the color code retrieval 
+        $I->loadCommonJs($I);
+
         // verify
         for($i=0; $i<sizeof($field_id); $i++) {
             if( $field_type[$i] == "text" ) {
@@ -169,9 +193,19 @@ class n_f_adminSideSetupCest
                 $I->see($should_see_text[$i]);
             }
             elseif( $field_type[$i] == "color" ) {
-                $colorcode = $I->executeJS('return jQuery("'.$selector_of_targets[$i].'").css("'.$css_property_of_targets[$i].'");');  
+                $colorcode = $I->getElementColorHexCode($I, $selector_of_targets[$i], $css_property_of_targets[$i] );  
                 echo "colorcode found... ".$colorcode;
                 if( $colorcode == $val[$i] ) {
+                    $I->dontSee('sd8324hs65gkjv73h');   // assume passed with dummy assert
+                }
+                else {
+                    $I->see('sd8324hs65gkjv73h');   // assume failed with dummy assert
+                }
+            }
+            elseif( $field_type[$i] == "css" ) {
+                $cssval = $I->getElementCss($I, $selector_of_targets[$i], $css_property_of_targets[$i] );  
+                echo "cssval found... ".$cssval;
+                if( $cssval == $val[$i] ) {
                     $I->dontSee('sd8324hs65gkjv73h');   // assume passed with dummy assert
                 }
                 else {
@@ -184,14 +218,14 @@ class n_f_adminSideSetupCest
         }
     }
 
-    protected function modifyFilters(AcceptanceTester $I, $tab, $filter_id, $field_id, $field_name, $field_type, $val, $save_button_xpath, $field_dropdown_div_id=array())
+    protected function modifyFilters(AcceptanceTester $I, $tab, $filter, $filter_id, $field_id, $field_name, $field_type, $val, $save_button_xpath, $field_dropdown_div_id=array())
     {
         // if( !$I->test_allowed_in_this_environment("n_") ) {
         //     return;
         // }
 
         // go to the page
-        $I->amOnPage('/wp-admin/admin.php?page=eowbc-appearance');
+        $I->amOnPage('/wp-admin/admin.php?page=eowbc-filters');
 
         // go to the tab
         $I->click($tab);
@@ -202,21 +236,10 @@ class n_f_adminSideSetupCest
 
             // simulate edit click is yet to be done 
                 // find target row based on filter_id 
-
-                // find and click edit action within the row 
+                // find and click edit action within the row
+                $I->editActionClick( $filter[$i] ); 
         
-            if( $field_type[$i] == "text" ) {
-                $I->fillField($field_name[$i], $val[$i]);
-            }
-            elseif( $field_type[$i] == "checkbox" || $field_type[$i] == "radio" ) {
-                $I->executeJS("jQuery('#".$field_id[$i]."').parent().checkbox('set checked', '".$val[$i]."');");  
-            }
-            elseif( $field_type[$i] == "color" ) {
-                $I->executeJS('jQuery("#'.$field_id[$i].'").val("'.$val[$i].'");');  
-            }
-            elseif( $field_type[$i] == "select" ) {
-                $I->executeJS("jQuery('#".$field_dropdown_div_id[$i]."').dropdown('set selected', '".$val[$i]."');");
-            }
+            $I->fillField($I,$i,$field_id,$field_type,$field_name,$val,$field_dropdown_div_id); 
         }
         
         $I->scrollTo($save_button_xpath);
@@ -224,6 +247,9 @@ class n_f_adminSideSetupCest
         
         // save 
         $I->click($save_button_xpath);  
+
+        // in case server is hanged and it takes time!
+        $I->waitForText('Saved!', 10);
 
         // confirm if saved properly or not
         $I->reloadPage();   //reload page
@@ -265,55 +291,46 @@ class n_f_adminSideSetupCest
         }
     }
 
-    protected function modifyMappings(AcceptanceTester $I, $tab, $operation, $filter_id, $field_id, $field_name, $field_type, $val, $save_button_xpath, $field_dropdown_div_id=array())
+    protected function modifyMappings(AcceptanceTester $I, $tab, $operation, $mapping, $field_id, $field_name, $field_type, $val, $save_button_xpath, $field_dropdown_div_id=array())
     {
         // if( !$I->test_allowed_in_this_environment("n_") ) {
         //     return;
         // }
 
-        // go to the page
-        $I->amOnPage('/wp-admin/admin.php?page=eowbc-appearance');
+        for($i=0; $i<sizeof($operation); $i++) {
+            // go to the page
+            $I->amOnPage('/wp-admin/admin.php?page=eowbc-mapping');
 
-        // go to the tab
-        $I->click($tab);
-        // $I->see('First Category');
+            // go to the tab
+            $I->click($tab);
+            // $I->see('First Category');
 
-        // set field
-        for($i=0; $i<sizeof($field_id); $i++) {
 
             // here check operation type first and than do add or edit
+            if( $operation[$i] == "edit" ) {
+                // find target row based on mapping, find and click edit action within the row 
+                $I->editActionClick( $mapping[$i] ); 
+            }
 
-            // simulate edit click is yet to be done 
-                // find target row based on filter_id 
+            // set field
+            for ($j=0; $j < sizeof($field_id[$i]); $j++) { 
+                $I->fillField($I,$j,$field_id[$i],$field_type[$i],$field_name[$i],$val[$i],isset($field_dropdown_div_id[$i]) ? $field_dropdown_div_id[$i] : array()); 
+            }
 
-                // find and click edit action within the row 
-        
-            if( $field_type[$i] == "text" ) {
-                $I->fillField($field_name[$i], $val[$i]);
-            }
-            elseif( $field_type[$i] == "checkbox" || $field_type[$i] == "radio" ) {
-                $I->executeJS("jQuery('#".$field_id[$i]."').parent().checkbox('set checked', '".$val[$i]."');");  
-            }
-            elseif( $field_type[$i] == "color" ) {
-                $I->executeJS('jQuery("#'.$field_id[$i].'").val("'.$val[$i].'");');  
-            }
-            elseif( $field_type[$i] == "select" ) {
-                $I->executeJS("jQuery('#".$field_dropdown_div_id[$i]."').dropdown('set selected', '".$val[$i]."');");
+            $I->scrollTo($save_button_xpath);
+            $I->wait(3);
+            
+            // save 
+            $I->click($save_button_xpath);  
+
+            // confirm if saved properly or not
+            $I->reloadPage();   //reload page
+            $I->click($tab);
+            for($i=0; $i<sizeof($field_id); $i++) {
+                // TODO find target row based on filter_id and than look/see into that
             }
         }
         
-        $I->scrollTo($save_button_xpath);
-        $I->wait(3);
-        
-        // save 
-        $I->click($save_button_xpath);  
-
-        // confirm if saved properly or not
-        $I->reloadPage();   //reload page
-        $I->click($tab);
-        for($i=0; $i<sizeof($field_id); $i++) {
-            // TODO find target row based on filter_id and than look/see into that
-        }
     }
 
     protected function verifyMappings(AcceptanceTester $I, $filter_before_verification, $verifications )

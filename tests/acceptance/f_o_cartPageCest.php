@@ -18,11 +18,13 @@ class f_o_cartPageCest
   //       }
 
     	//TODO make it dynamic by saving this in session in previous steps and then here get it from session 
-    	$this->price_of_product_step1 = "12.00";
-    	$this->price_of_product_step2 = "15.00";
+    	$this->price_of_product_step1 = $suite_name_prefix == "n_" ? $I->get_configs('first_product_price',$suite_name_prefix) : "12.00";
+    	$this->price_of_product_step2 = $suite_name_prefix == "n_" ? $I->get_configs('second_product_price',$suite_name_prefix) : "15.00";
+    	$this->price_of_product_step1_without_comma = str_replace(",", "", $this->price_of_product_step1);
+    	$this->price_of_product_step2_without_comma = str_replace(",", "", $this->price_of_product_step2);
 
 		// test remove action 
-		if( !$suite_name_prefix ) { 
+		if( $suite_name_prefix == "f_" ) { 
 			$this->removeItemPairFromCart($I);
 		}
 
@@ -32,8 +34,8 @@ class f_o_cartPageCest
 		$I->see('Subtotal');
 		
 		//TODO check here if merged row appears properly or not
-		if( true || !$suite_name_prefix ) { 
-			$I->see($this->price_of_product_step1+$this->price_of_product_step2);	
+		if( true || $suite_name_prefix == "f_" ) { 
+			$I->see( $I->price_format($this->price_of_product_step1_without_comma+$this->price_of_product_step2_without_comma) );	
 		}
 
 	}
@@ -50,7 +52,7 @@ class f_o_cartPageCest
         // $I->wait(3);
 
 		// - I click on Proceed to checkout button
-        $I->scrollTo('//*[@id="post-7"]/div[1]/div/div/div[2]/div/div/a', 0, -100);
+        $I->scrollTo( $suite_name_prefix == "f_" ? '//*[@id="post-7"]/div[1]/div/div/div[2]/div/div/a' : '/html/body/main/article/div[1]/div/div/div[2]/div/div/a', 0, -100);
         $I->wait(3);
         for($i=1; $i<=10; $i++) {
             try { 

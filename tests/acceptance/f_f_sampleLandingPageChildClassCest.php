@@ -17,6 +17,6 @@ class f_f_sampleLandingPageChildClassCest extends f_e_sampleLandingPageCest
             return;
         }
 
-        parent::testChoiceButtonWidgetOnLandingPage($I, $suite_name_prefix);
+        parent::testChoiceButtonWidgetOnLandingPage($I, "f_");
     }
 }

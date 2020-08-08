@@ -17,14 +17,52 @@ class Acceptance extends \Codeception\Module
      */
     public function get_configs($key, $prefix="")
     {
+        $first_cat_name_for_suite_x = "";
+        $second_cat_name_for_suite_x = "";
+        if( $prefix == "a_-f_" || $prefix == "f_" ) {
+            $first_cat_name_for_suite_x = "Diamond";
+            $second_cat_name_for_suite_x = "Setting";
+        }
+        elseif( $prefix == "n_" ) {
+            $first_cat_name_for_suite_x = "Diamond Shape";
+            $second_cat_name_for_suite_x = "Setting Shape";
+        }
+
         if( $key == "first_button_text" && ($prefix=="n_" || empty($prefix)) ) {
             return "Start with Diamond Shape";
         }
         else if( $key == "second_button_text" && ($prefix=="n_" || empty($prefix)) ) {
             return "Start with Setting Shape";
         }
+        else if( $key == "cat_name_0" ) {
+            return $first_cat_name_for_suite_x;
+        }
+        else if( $key == "cat_name_1" ) {
+            return $second_cat_name_for_suite_x;
+        }
+        else if( $key == "first_product_name" && ($prefix=="n_" || empty($prefix)) ) {
+            return "Asscher Diamond #10000052";
+        }
+        else if( $key == "first_product_market_price" && ($prefix=="n_" || empty($prefix)) ) {
+            return "12,500.00";
+        }
         else if( $key == "first_product_price" && ($prefix=="n_" || empty($prefix)) ) {
-            return "12.00";
+            return "11,390.00";
+        }
+        else if( $key == "second_product_name" && ($prefix=="n_" || empty($prefix)) ) {
+            return "Setting #10000004";
+        }
+        else if( $key == "second_product_market_price" && ($prefix=="n_" || empty($prefix)) ) {
+            return "450.00";
+        }
+        else if( $key == "second_product_price" && ($prefix=="n_" || empty($prefix)) ) {
+            return "445.00";
+        }
+        else if( $key == "first_product_page_button_text" && ($prefix=="n_" || empty($prefix)) ) {
+            return "CONTINUE";
+        }
+        else if( $key == "second_product_page_button_text" && ($prefix=="n_" || empty($prefix)) ) {
+            return "CONTINUE";
         }
 
         return null;
@@ -104,6 +142,31 @@ class Acceptance extends \Codeception\Module
     }
 
     /**
+     * Get dir path of site starting from document root only so not full absolute path
+     * @return mixed
+     * @throws \Codeception\Exception\ModuleException
+     */
+    public function getDirPath()
+    {
+        echo "called getDirPath...";
+        try {
+            $version_nums = explode(".", PHP_VERSION);
+            if( $this->get_test_environment() == "WBC_TEST_ENV_default" ) {
+                echo 'getDirPath for default environment';
+                return 'tmp/wordpress/src';
+            } 
+            else {
+                echo 'getDirPath for other environment';
+                return 'tmp/WBC_TEST_ENV_with_sample_data/wordpress-latest-1';
+            }
+        }
+        catch(Exception $e) {
+            echo "caught message...";
+            echo $e->getMessage()."";
+        }
+    }
+
+    /**
      * Get current url from WebDriver
      * @return mixed
      * @throws \Codeception\Exception\ModuleException
@@ -133,11 +196,14 @@ class Acceptance extends \Codeception\Module
      * @return mixed
      * @throws \Codeception\Exception\ModuleException
      */
-    public function getCurrentUri()
+    public function getCurrentUri($remove_site_dir_path=false)
     {
         echo "called getCurrentUri...";
         try {
-            return $this->getModule('WPWebDriver')->_getCurrentUri();
+            if( $remove_site_dir_path )
+                return str_replace($this->getDirPath(), "", $this->getModule('WPWebDriver')->_getCurrentUri());
+            else 
+                return $this->getModule('WPWebDriver')->_getCurrentUri();
         }
         catch(Exception $e) {
             echo "caught message...";
@@ -274,6 +340,30 @@ class Acceptance extends \Codeception\Module
     }
 
     /**
+     * since we don't know any method yet that for radio assrtion from webdriver, seeInField is not reliable 
+     * @param $dummy text to run a dummy positive/negative assertion so that in test report user can see that one of the test is actually failed
+     */
+    public function radioAssertion($I, $field_id, $field_name, $expected_value, $dummy='dummy text to do positve or negative assertion') {
+        echo "called radioAssertion...";
+        
+        try { 
+            $val = $I->executeJS("if(jQuery('#".$field_id."').is(':checked')) { return 1; } else { return 0; }"); //$I->grabValueFrom('input[name='.$field_name.']');
+            // echo "grabValueFrom value is=".$val."=expected=".$expected_value; 
+            // if( $val == $expected_value ) {
+            if( $val == 1 ) {
+                $I->dontSee($dummy);
+            }
+            else {
+                $I->see($dummy);
+            }
+        }
+        catch(Exception $e) {
+            echo "caught error...";
+            echo $e->getMessage();
+        }
+    }
+
+    /**
      * 
      */
     public function resetSession() 
@@ -285,6 +375,148 @@ class Acceptance extends \Codeception\Module
             
             $this->getModule('WPWebDriver')->_initializeSession();
 
+            return true;
+        }
+        catch(Exception $e) {
+            echo "caught message...";
+            echo $e->getMessage()."";
+        }
+
+        return false;
+    }
+
+    /**
+     * 
+     */
+    public function price_format($price) 
+    {
+        // echo "called resetSession...";
+            
+        try { 
+            return number_format($price);
+        }
+        catch(Exception $e) {
+            echo "caught message...";
+            echo $e->getMessage()."";
+        }
+
+        return $price;
+    }
+
+    /**
+     * @param $page if passed only that page's js will be loaded 
+     */
+    public function loadCommonJs($I,$page='') 
+    {
+        // echo "called resetSession...";
+            
+        try { 
+            // $I->executeJS('
+                
+
+            //     ');
+            return true;
+        }
+        catch(Exception $e) {
+            echo "caught message...";
+            echo $e->getMessage()."";
+        }
+
+        return false;
+    }
+
+    /**
+     * 
+     */
+    public function getElementColorHexCode($I,$selector_of_targets, $css_property_of_targets) 
+    {
+        // echo "called resetSession...";
+            
+        try { 
+            return $I->executeJS('
+                                var hexDigits = new Array
+                                        ("0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f"); 
+
+                                //Function to convert rgb color to hex format
+                                function rgb2hex(rgb) {
+                                 rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+                                 return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+                                }
+
+                                function hex(x) {
+                                  return isNaN(x) ? "00" : hexDigits[(x - x % 16) / 16] + hexDigits[x % 16];
+                                 }
+
+                                return rgb2hex( jQuery("'.$selector_of_targets.'").css("'.$css_property_of_targets.'") );
+                                ');  
+        }
+        catch(Exception $e) {
+            echo "caught message...";
+            echo $e->getMessage()."";
+        }
+
+        return false;
+    }
+
+    /**
+     * 
+     */
+    public function getElementCss($I,$selector_of_targets, $css_property_of_targets) 
+    {
+        // echo "called resetSession...";
+            
+        try { 
+            return $I->executeJS('
+                                return jQuery("'.$selector_of_targets.'").css("'.$css_property_of_targets.'");
+                                ');  
+        }
+        catch(Exception $e) {
+            echo "caught message...";
+            echo $e->getMessage()."";
+        }
+
+        return false;
+    }
+
+    /**
+     * 
+     */
+    public function editActionClick($I,$entity_title) 
+    {
+        // echo "called resetSession...";
+            
+        try { 
+            $I->executeJS('jQuery("td:contains('.$entity_title.'):not(.disabled) > a")[0].trigger("click");');  
+            return true;
+        }
+        catch(Exception $e) {
+            echo "caught message...";
+            echo $e->getMessage()."";
+        }
+
+        return false;
+    }
+
+    /**
+     * 
+     */
+    public function fillField($I,$i,$field_id,$field_type,$field_name,$val,$field_dropdown_div_id) 
+    {
+        // echo "called resetSession...";
+            
+        try { 
+            if( $field_type[$i] == "text" ) {
+                $I->fillField($field_name[$i], $val[$i]);
+            }
+            elseif( $field_type[$i] == "checkbox" || $field_type[$i] == "radio" ) {
+                $I->executeJS("jQuery('#".$field_id[$i]."').parent().checkbox('set checked', '".$val[$i]."');");  
+            }
+            elseif( $field_type[$i] == "color" ) {
+                $I->executeJS('jQuery("#'.$field_id[$i].'").val("'.$val[$i].'");');  
+            }
+            elseif( $field_type[$i] == "select" ) {
+                $I->executeJS("jQuery('#".$field_dropdown_div_id[$i]."').dropdown('set selected', '".$val[$i]."');");
+            }
             return true;
         }
         catch(Exception $e) {

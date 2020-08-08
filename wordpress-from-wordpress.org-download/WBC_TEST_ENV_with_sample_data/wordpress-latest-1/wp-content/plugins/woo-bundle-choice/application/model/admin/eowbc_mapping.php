@@ -58,16 +58,16 @@ class Eowbc_Mapping {
 							if( $rvk == "id" || $rvk == "range_first" || $rvk == "range_second" || $rvk == "eo_wbc_first_category_range" || $rvk == "eo_wbc_second_category_range" ) {
 								continue;
 							}
-
+							
 							if( $rvk == "eo_wbc_first_category" ) {
 								if( wbc()->common->nonZeroEmpty($rv["eo_wbc_first_category_range"]) || wbc()->common->nonZeroEmpty($rv["range_first"]) ) {
 									$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv);
-									$row[] = array( 'val' => !is_array($val)?$val:$val["label"] );	
+									$row[] = array( 'val' => !is_array($val)?$val:$val["label"] ,'link'=>1,'edit_id'=>$rk);	
 								}
 								else {
 									$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv);
 									$val1 = wbc()->common->dropdownSelectedvalueText($tab["form"]["eo_wbc_first_category_range"], $rv["eo_wbc_first_category_range"]);
-									$row[] = array( 'val' =>  "Range from <strong>".(!is_array($val)?$val:$val["label"])."</strong> to <strong>".(!is_array($val1)?$val1:$val1["label"])."</strong>" );
+									$row[] = array( 'val' =>  "Range from <strong>".(!is_array($val)?$val:$val["label"])."</strong> to <strong>".(!is_array($val1)?$val1:$val1["label"])."</strong>" ,'link'=>1,'edit_id'=>$rk);
 								}	
 							}
 							else if( $rvk == "eo_wbc_second_category" ) {
@@ -168,27 +168,37 @@ class Eowbc_Mapping {
 		  //       $eo_wbc_add_discount=$_POST['eo_wbc_add_discount']?$_POST['eo_wbc_add_discount']:0;
 
 				$mapping_data = unserialize(wbc()->options->get_option_group('mapping_'.$key,"a:0:{}"));
-		        
-		        foreach ($mapping_data as $fdkey=>$value) {
-		            
-		            $match_found = false;
-		            // foreach ($item as $key=>$value) {    
+		        if(!empty($_POST['map_creation_modification_id']) and !empty($mapping_data[$_POST['map_creation_modification_id']])) {
+		        	$table_data["id"] = wbc()->common->createUniqueId();
+		        	$mapping_data[$_POST['map_creation_modification_id']] = $table_data;
+		        	wbc()->options->update_option_group( 'mapping_'.$key, serialize($mapping_data) );
+		        	//update cache
+			        \Cache_Manager::getInstance()->update_map_caches();
+		        	$res["msg"] = eowbc_lang('Mapping Updated Successfully'); 
+		        	return $res;
+			        
+		        } else{
+			        foreach ($mapping_data as $fdkey=>$value) {
+			            
+			            $match_found = false;
+			            // foreach ($item as $key=>$value) {    
 
-		                if(($value["eo_wbc_first_category"]==$table_data["eo_wbc_first_category"] and $value["eo_wbc_first_category_range"]==$table_data["eo_wbc_first_category_range"]) and ($value["eo_wbc_second_category"]==$table_data["eo_wbc_second_category"] and $value["eo_wbc_second_category_range"]==$table_data["eo_wbc_second_category_range"])) {                 
-		                    $match_found = true;
-		                    break;
-		                } elseif(($value["eo_wbc_second_category"]==$table_data["eo_wbc_first_category"] and $value["eo_wbc_second_category_range"]==$table_data["eo_wbc_first_category_range"]) and ($value["eo_wbc_first_category"]==$table_data["eo_wbc_second_category"] and $value["eo_wbc_first_category_range"]==$table_data["eo_wbc_second_category_range"])) {
-		                    $match_found = true;
-		                    break;
-		                }
-		            // }
+			                if(($value["eo_wbc_first_category"]==$table_data["eo_wbc_first_category"] and $value["eo_wbc_first_category_range"]==$table_data["eo_wbc_first_category_range"]) and ($value["eo_wbc_second_category"]==$table_data["eo_wbc_second_category"] and $value["eo_wbc_second_category_range"]==$table_data["eo_wbc_second_category_range"])) {                 
+			                    $match_found = true;
+			                    break;
+			                } elseif(($value["eo_wbc_second_category"]==$table_data["eo_wbc_first_category"] and $value["eo_wbc_second_category_range"]==$table_data["eo_wbc_first_category_range"]) and ($value["eo_wbc_first_category"]==$table_data["eo_wbc_second_category"] and $value["eo_wbc_first_category_range"]==$table_data["eo_wbc_second_category_range"])) {
+			                    $match_found = true;
+			                    break;
+			                }
+			            // }
 
-		            if ($match_found) { 
-		                $res["type"] = "error";
-		    			$res["msg"] = eowbc_lang('Mapping Already Exists');
-		                return $res;
-		            }
-		        }
+			            if ($match_found) { 
+			                $res["type"] = "error";
+			    			$res["msg"] = eowbc_lang('Mapping Already Exists');
+			                return $res;
+			            }
+			        }
+			    }
 
 				$table_data["id"] = wbc()->common->createUniqueId();
 		        $mapping_data[] = $table_data;
@@ -236,5 +246,17 @@ class Eowbc_Mapping {
 
         return $res;
 	}
+
+	public function fetch_map(&$res) {
+		$map = unserialize(wbc()->options->get_option_group('mapping_map_creation_modification'));		
+		
+		if(!empty($map[$_POST['id']])){
+			$res['msg'] = json_encode($map[$_POST['id']]);
+		} else {
+			$res['type'] = 'error';
+			$res['msg'] = 'Selected item does not exists!';
+		}		
+		return $res;
+	}	
 
 }

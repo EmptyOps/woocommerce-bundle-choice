@@ -47,9 +47,9 @@ class Jewelry {
                                 'slug' => 'eo_polish_attr'
                             ),
                             array(
-                                'label' => 'Symmertry',
+                                'label' => 'Symmetry',
                                 'terms' => array('Excellent','Very Good','Good','Fair'),
-                                'description' => 'Symmertry attributes for diamond shape',
+                                'description' => 'Symmetry attributes for diamond shape',
                                 'slug' => 'eo_symmertry_attr'
                             ),
                             array(

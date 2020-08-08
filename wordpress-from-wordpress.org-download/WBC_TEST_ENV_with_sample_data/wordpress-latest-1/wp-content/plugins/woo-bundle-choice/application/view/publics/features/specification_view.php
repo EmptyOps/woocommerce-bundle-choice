@@ -44,10 +44,13 @@
     if(!empty($product_data)){
         $display_style = wbc()->options->get_option('tiny_features','specification_view_style','default');
         if('default'===$display_style){
-            list($product_data_1, $product_data_2) = array_chunk($product_data, ceil(count($product_data) / 2));
-            
-            wbc()->load->template('publics/features/default',compact('product_data','product_data_1','product_data_2'));
-
+            if(sizeof($product_data) > 1) {
+                list($product_data_1, $product_data_2) = array_chunk($product_data, ceil(count($product_data) / 2));
+                wbc()->load->template('publics/features/default',compact('product_data','product_data_1','product_data_2'));
+            }
+            else {
+                wbc()->load->template('publics/features/default',compact('product_data'));
+            }
         } elseif ('template_1'===$display_style) {            
             wbc()->load->template('publics/features/template_1',compact('product_data'));
             

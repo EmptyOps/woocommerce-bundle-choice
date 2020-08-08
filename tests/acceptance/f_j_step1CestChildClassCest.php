@@ -17,7 +17,7 @@ class f_j_step1CestChildClassCest extends f_i_step1Cest
             return;
         }
 
-        parent::itemPage($I, $suite_name_prefix);
+        parent::itemPage($I, "f_");
 	}
 
 	public function checkProductNotFoundDueToMissingMapping(AcceptanceTester $I, $suite_name_prefix=false) {
@@ -26,7 +26,7 @@ class f_j_step1CestChildClassCest extends f_i_step1Cest
             return;
         }
 
-        parent::checkProductNotFoundDueToMissingMapping($I, $suite_name_prefix);
+        parent::checkProductNotFoundDueToMissingMapping($I, "f_");
 	}
 
 }

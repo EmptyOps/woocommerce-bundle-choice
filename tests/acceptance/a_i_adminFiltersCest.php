@@ -73,7 +73,24 @@ class a_i_adminFiltersCest
 		// confirm if saved properly or not
 		$I->reloadPage();	//reload page
 		$I->click('Alternate Filter Widgets');
-		$I->seeInField('second_category_altr_filt_widgts', 'sc3');
+		// $I->seeInField('second_category_altr_filt_widgts', 'sc3');
+		$I->radioAssertion($I, 'sc3', "second_category_altr_filt_widgts", 'sc3'); 
+
+		// roll back to default
+		// in this default like manual test like suite, we should always test the default widgets since others are being tested randomly by other suits but default must be tested here 
+		$I->executeJS("jQuery('[name=\"second_category_altr_filt_widgts\"]').val('sc1');");	
+		
+		$I->executeJS('window.scrollTo( 0, 1000 );');		//$I->scrollTo('Save');	
+		$I->wait(3);
+
+		// save 
+		$I->click('#submit_btn'); 	//('Save');		//it shouldn't be this way, but there seem some issue with selenium driver and thus when there is another Save button on the page even though on another page and is not visible but still selenium think it is visible and thus gives us error so need to use unique xPath like id etc. 
+
+		// confirm if saved properly or not
+		$I->reloadPage();	//reload page
+		$I->click('Alternate Filter Widgets');
+		$I->radioAssertion($I, 'sc1', "second_category_altr_filt_widgts", 'sc1'); 
+
 	}
 
 	public function firstAndSecondCategoryFilterConfigurations(AcceptanceTester $I) {

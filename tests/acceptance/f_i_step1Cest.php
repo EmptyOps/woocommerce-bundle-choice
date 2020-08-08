@@ -11,20 +11,21 @@ class f_i_step1Cest
     // {
     // }
 
-    protected function categoryPage(AcceptanceTester $I) {
+    protected function categoryPage(AcceptanceTester $I, $suite_name_prefix=false) {
 		
-		if( !$I->test_allowed_in_this_environment("f_") ) {
-            return;
-        }
+		// if( !$I->test_allowed_in_this_environment("f_") ) {
+  //           return;
+  //       }
 
     	// go to the category page page
-		$I->amOnPage('/');	
+		$I->amOnPage( ( $suite_name_prefix == "n_" ? '/index.php/design-your-own-ring' : '/' ) );	
 
 		$I->executeJS('window.scrollTo( 0, 300 );');        //$I->scrollTo('Save'); 
         $I->wait(3);
         
-		$I->click('Start with Diamond');
-		$I->waitForText('CHOOSE A', 10);    
+		$I->click( $suite_name_prefix == "n_" ? $I->get_configs('first_button_text',$suite_name_prefix) : 'Start with Diamond' );
+		$I->waitForText( $I->get_configs('cat_name_0', $suite_name_prefix), 10);
+		$I->see('CHOOSE A');    
 
 		$I->executeJS('window.scrollTo( 0, 300 );');        //$I->scrollTo('Save'); 
         $I->wait(3);
@@ -33,13 +34,20 @@ class f_i_step1Cest
 		$I->executeJS("jQuery('#text_slider_price').slider('set rangeValue', 14, 15);");	
 		$I->waitForText('No products were found', 10);
 
-		$I->executeJS("jQuery('#text_slider_price').slider('set rangeValue', 12, 15);");
-		$I->waitForText('Test diamond 1', 10);  	
+		$price_of_product = $suite_name_prefix == "n_" ? $I->get_configs('first_product_price',$suite_name_prefix) : "12.00";	//TODO make it dynamic 
+		$range_min = "12";
+		$range_max = "15";
+		if( $suite_name_prefix == "n_" ) {
+			$range_min = ( ( str_replace(",", "", $price_of_product) ) - 10 );
+			$range_max = ( ( str_replace(",", "", $price_of_product) ) + 100 );
+		}
+		
+		$I->executeJS("jQuery('#text_slider_price').slider('set rangeValue', ".$range_min.", ".$range_max.");");
+		$I->waitForText( $suite_name_prefix == "n_" ? $I->get_configs('first_product_name',$suite_name_prefix) : 'Test diamond 1', 10);  	
 		
 		// - I click on product image of first product from the search results
-		$price_of_product = "12.00";	//TODO make it dynamic 
 		$I->click('//*[@id="main"]/ul/li/a/img');
-		$I->see('Add to bag...');	//Add to bag... is the text set on appearance module during admin test
+		$I->see( $suite_name_prefix == "n_" ? $I->get_configs('first_product_page_button_text',$suite_name_prefix) : 'Add to bag...' );	//Add to bag... is the text set on appearance module during admin test
 		
 		return $price_of_product;
 	}
@@ -52,24 +60,32 @@ class f_i_step1Cest
 
 		// - I choose filter options and then I check if x  products are found
 		// - I click on product image of first product from the search results
-		$price_of_product = $this->categoryPage($I);
+		$price_of_product = $this->categoryPage($I, $suite_name_prefix);
 
 		$I->executeJS('window.scrollTo( 0, 300 );');        //$I->scrollTo('Save'); 
         $I->wait(3);
         
 		// - I see continue button
-		$I->see('Add to bag...');
+		$I->see( $suite_name_prefix == "n_" ? $I->get_configs('first_product_page_button_text',$suite_name_prefix) : 'Add to bag...' );
 
 		// with text x 
-		$I->see('150.00');	//market price
+		$I->see( $suite_name_prefix == "n_" ? $I->get_configs('first_product_market_price',$suite_name_prefix) : '150.00' );	//market price
 		$I->see($price_of_product);
-		$I->see('Additional information');
+		$I->see( $suite_name_prefix == "n_" ? 'Specifications' : 'Additional information' );
 
 		//first select required options for variable product, otherwise it won't let us add into cart. 
-		$I->click('//*[@id="product-13"]/div[2]/form/table/tbody/tr/td[2]/div/span[2]/ul/li[1]/div');
+		if( $suite_name_prefix != "n_" ) {
+			$I->click('//*[@id="product-13"]/div[2]/form/table/tbody/tr/td[2]/div/span[2]/ul/li[1]/div');
+		}
+
+		if( $suite_name_prefix == "n_" ) {
+			$I->executeJS('window.scrollTo( 0, 1100 );');
+			// $I->scrollTo('//*[@id="eo_wbc_add_to_cart"]', -632, -100);
+			$I->wait(10);
+		}
 
 		// - I click on continue button
-		$I->click('Add to bag...');
+		$I->click( $suite_name_prefix == "n_" ? '//*[@id="eo_wbc_add_to_cart"]' : 'Add to bag...' );	// click( $suite_name_prefix == "n_" ? $I->get_configs('first_product_page_button_text',$suite_name_prefix) : 'Add to bag...' );
 
 		// - I see in next page the text "${price of Step 1 item's price}"
 		$I->waitForText($price_of_product, 10);

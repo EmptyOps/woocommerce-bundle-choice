@@ -13,8 +13,9 @@ if(wp_verify_nonce(sanitize_text_field($_POST['_wpnonce']),'eowbc_mapping')){
 	    
 	if( isset($_POST["sub_action"]) && $_POST["sub_action"] == "bulk_delete" ) {
 		$res = eo\wbc\model\admin\Eowbc_Mapping::instance()->delete( $_POST["ids"], $_POST["saved_tab_key"] );
-	}
-	else {
+	} elseif(isset($_POST['sub_action']) and $_POST['sub_action'] == 'fetch') {
+		$res = eo\wbc\model\admin\Eowbc_Mapping::instance()->fetch_map($res);
+	} else {
 		$res = eo\wbc\model\admin\Eowbc_Mapping::instance()->save( eo\wbc\controllers\admin\menu\page\Mapping::get_form_definition() );
     }
 	

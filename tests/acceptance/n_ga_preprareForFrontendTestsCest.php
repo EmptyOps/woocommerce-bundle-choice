@@ -17,12 +17,20 @@ class n_ga_preprareForFrontendTestsCest extends n_f_adminSideSetupCest
             return;
         }
 
+        //
         // set specific breadcrumb template if debuggin any issue
-        $this->setAlternateBreadcrumbWidget($I, 'template_1');
-
+        //
+        if(false) {
+            $this->setAlternateBreadcrumbWidget($I, 'template_1');
+        }
+        
+        //
         // set specific filter template if debuggin any issue
-        $this->setAlternateFilterWidget($I, 'fc2', 0);	// first category
-        $this->setAlternateFilterWidget($I, 'sc4', 1);	// second category
+        //
+        if( false ) {
+            $this->setAlternateFilterWidget($I, 'fc2', 0);  // first category
+            $this->setAlternateFilterWidget($I, 'sc4', 1);  // second category
+        }
         
     }
 

@@ -30,7 +30,7 @@ In this plugin we provide the following features, at the time of installation yo
 With this major update many things changed in UI experience and we hope it will help our users, please be noted that we are working on a documentation update that comply with this update and it will be available very soon. Our apologies to keep you waiting for the updated documentation. 
 
 == For Jewellery/Diamond Websites ==
-Diamond API integration extension helps you to integrate Rapnet API into your WordPress/WooCommerce site. We support many other popular diamond APIs in this same extension, [click here for more details](https://sphereplugins.com/product/rapnet-integration-extension/) or read more about it below in the extensions section. 
+Diamond API integration extension helps you to integrate Rapnet API into your WordPress/WooCommerce site. We support many other popular diamond APIs in this same extension, [click here for more details](https://sphereplugins.com/product/woocommerce-diamond-api-integration/) or read more about it below in the extensions section. 
 Browse the complete list of features [here](https://woochoiceplugin.com/jewelry-diamonds-website-package/) for the jewellery/diamond category. 
 
 == For any Inventory ==
@@ -79,7 +79,7 @@ Order emails sent to customers from your shop will be customized based on what u
   * GEMFIND Diamond Link Api
   * VDB (Virtual Diamond Boutique Api)
   * JewelCloud Api
-1. You can also send us [Request](https://sphereplugins.com/contact-us/") to have us support missing API
+1. You can also send us [Request](https://sphereplugins.com/contact-us/) to have us support missing API
 
 Rapnet Instant Inventory Integration Extension is for Diamond/Jewelry websites. Instantly pull the diamonds' feed into your store and ready to go for selling.
 Rapnet integration requires rapnet instant inventory account however as an alternative we are providing other API integrations as well please visit above link to know more about it.

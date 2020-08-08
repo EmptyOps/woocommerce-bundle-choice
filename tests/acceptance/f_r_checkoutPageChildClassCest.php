@@ -17,7 +17,7 @@ class f_r_checkoutPageChildClassCest extends f_q_checkoutPageCest
             return;
         }
 
-        parent::checkoutPage($I, $suite_name_prefix);
+        parent::checkoutPage($I, "f_");
 	}
 
 	public function placeOrder(AcceptanceTester $I, $suite_name_prefix=false) {
@@ -26,7 +26,7 @@ class f_r_checkoutPageChildClassCest extends f_q_checkoutPageCest
             return;
         }
 
-        parent::placeOrder($I, $suite_name_prefix);
+        parent::placeOrder($I, "f_");
 	}
 	
 }

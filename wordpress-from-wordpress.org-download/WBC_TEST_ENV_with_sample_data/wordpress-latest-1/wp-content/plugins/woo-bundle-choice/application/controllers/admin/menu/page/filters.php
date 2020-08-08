@@ -171,7 +171,7 @@ if ( ! class_exists( 'Filters' ) ) {
 						'checkbox'=> array('id'=>'dummy','value'=>array(),'options'=>array('row0_col0_chk'=>''), 'options_attrs'=>array('row0_col0_chk'=>array('data-action="bulk_select_all"', 'data-bulk_table_id="'.$sett_table["id"].'"')),'class'=>'','where'=>'in_table')
 					),
 					1=>array(
-						'is_header' => 1, 
+						'is_header' => 1,
 						'val' => 'Filter',
 						'field_id'=>'s_fconfig_filter'
 					),
