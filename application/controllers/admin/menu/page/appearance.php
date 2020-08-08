@@ -140,6 +140,15 @@ if ( ! class_exists( 'Appearance' ) ) {
 										'size_class'=>array('sixteen','wide'),
 									),	
 								), 
+								'appearance_filters_loader'=>array(
+									'label'=>'Hide filter\'s loaded',
+									'type'=>'checkbox',
+									'sanitize'=>'sanitize_text_field',
+									'value'=>array(wbc()->options->get_option('appearance_filters','appearance_filters_loader')),
+									'options'=>array('1'=>' '),
+									'is_id_as_name'=>true,
+									'class'=>array(),
+								), 
 							),
 							array( 
 								'filters_submit_btn'=>array(

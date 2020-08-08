@@ -15,9 +15,12 @@ class Ring_Builder extends Sample_Data {
         return self::$_instance;
     }
 
-    private $feature_key = 'ring_builder';  
+    private function __construct() {  
 
-    private function __construct() {        
+
+        $this->feature_key = 'ring_builder';  
+
+
         $this->feature_title = wbc()->config->get_builders()[$this->feature_key];    
 
         wbc()->load->model('admin/sample_data/eowbc_sample_data');

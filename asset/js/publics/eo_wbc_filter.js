@@ -95,14 +95,23 @@ if(eo_wbc_object.disp_regular){
 
 jQuery(document).ready(function($){
 
+	jQuery(document).on('click',".reset_all_filters",function(){
+        jQuery("[data-reset]").each(function(e){
+            eval(jQuery(this).data('reset'));
+        })
+        jQuery.fn.eo_wbc_filter_change();
+        return false;
+    })  
+
 	if(eo_wbc_object.disp_regular){
 	
 		jQuery(".woocommerce-pagination,.pagination").html('');		
-
-		$("#eo_wbc_filter").on('change',"input:not(:checkbox)",function(){
-			$('[name="paged"]').val('1');
-			jQuery.fn.eo_wbc_filter_change();										
-		});
+		if(!eo_wbc_object.btnfilter_now){			
+			$("#eo_wbc_filter").on('change',"input:not(:checkbox)",function(){
+				$('[name="paged"]').val('1');
+				jQuery.fn.eo_wbc_filter_change();										
+			});
+		}
 
 		jQuery.fn.eo_wbc_filter_change(true);
 

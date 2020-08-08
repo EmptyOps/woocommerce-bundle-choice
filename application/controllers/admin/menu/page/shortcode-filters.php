@@ -110,7 +110,7 @@ if ( ! class_exists( 'Shortcode_Filters' ) ) {
 			// unset($form_definition['shortflt_filter_setting']['form']['filter_setting_price_filter_width']);
 			// unset($form_definition['shortflt_filter_setting']['form']['filter_setting_alternate_slider_ui']);	
 
-			$fields_to_keep = array('filter_setting_submit_btn');
+			$fields_to_keep = array('filter_setting_submit_btn','filter_setting_slider_max_lblsize');
 			foreach ($form_definition['shortflt_filter_setting']['form'] as $key => $value) {
 				if( !in_array($key, $fields_to_keep)) {
 					unset($form_definition['shortflt_filter_setting']['form'][$key]);

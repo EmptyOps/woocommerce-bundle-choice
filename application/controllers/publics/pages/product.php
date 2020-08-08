@@ -191,6 +191,24 @@ class Product {
     public function eo_wbc_render()
     {   
         $redirect_url = $this->eo_wbc_product_route();
+        wbc()->theme->load('css','product');
+        wbc()->theme->load('js','product');
+        /*Hide sidebar and make content area full width.*/
+        add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
+            return array( false );
+        });
+        ob_start();        
+        ?>
+        <style type="text/css">
+            .woocommerce .content-area ,#content,#primary,#main,.content,.primary,.main{
+                  width: 100% !important;
+             }
+             .woocommerce .widget-area {
+                  display: none !important;
+             }
+        </style>
+        <?php
+        echo ob_get_clean();
         
         //Registering Scripts : JavaScript
         add_action( 'wp_enqueue_scripts',function() use(&$redirect_url){

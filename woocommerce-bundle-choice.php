@@ -82,7 +82,7 @@ if(!class_exists('WooCommerce_Bundle_Choice')) {
 			*	where the tool_name should only be added to the list.
 			*/
 
-			$helpers = array('options'=>'WBC_Options','lang'=>'WBC_language','wc'=>'WBC_WC','common'=>'WBC_Common','session'=>'WBC_Session','wp'=>'WBC_WP','config'=>'WBC_Config');
+			$helpers = array('options'=>'WBC_Options','lang'=>'WBC_language','wc'=>'WBC_WC','common'=>'WBC_Common','session'=>'WBC_Session','wp'=>'WBC_WP','config'=>'WBC_Config','theme'=>'WBC_Theme');
 
 			if(!empty($helpers)){
 

@@ -50,7 +50,7 @@ class Eowbc_Sample_Data {
         return $res;
 	}
 
-	public function process_post(&$_step, $_category, $_atttriutes, $_maps) {
+	public function process_post(&$_step, $_category, $_atttriutes, $_maps, $feature_key) {
 		
 		if(!empty(wbc()->sanitize->get('type')) and !empty(wbc()->sanitize->get('eo_wbc_view_auto_jewel')) and wbc()->sanitize->get('type')=='remove_filters_automation' and wbc()->sanitize->get('eo_wbc_view_auto_jewel')==1){
 			wbc()->options->update_option('tiny_feature','filter_widget',serialize(array()));
@@ -140,7 +140,7 @@ class Eowbc_Sample_Data {
 			                //'action': 'eo_wbc_add_products',
 			                '_wpnonce': '<?php echo wp_create_nonce('sample_data_jewelry');?>',
 			                'action':'eowbc_ajax',
-			                'resolver':'sample_data/jewelry',
+			                'resolver':'sample_data/<?php _e($feature_key); ?>',
 			                'product_index':index 
 			            };
 

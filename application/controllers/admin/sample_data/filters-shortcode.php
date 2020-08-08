@@ -15,9 +15,10 @@ class Filters_Shortcode extends Sample_Data {
         return self::$_instance;
     }
 
-    private $feature_key = 'filters_shortcode';  
-
     private function __construct() {        
+
+        $this->feature_key = 'filters_shortcode';  
+
         $this->feature_title = wbc()->config->get_bonus_features()[$this->feature_key];    
         $this->help_info[2] = "After this step is done, you should add the shortcode [...] to the page where you want to display filters";   //add help info for step 2
 

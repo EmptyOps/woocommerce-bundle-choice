@@ -6,7 +6,7 @@
 
 ?>
 <div class="<?php echo $width_class; ?>">
-	<div style="display: inline-block;"class="ui three wide field">
+	<div style="display: inline-block;"class="ui three wide field icon_header">
 		<spna class="ui header"><?php echo($title); ?><span><?php if($help): ?>
 		&nbsp; <span class="ui grey text" style="cursor: pointer;">&nbsp;<i class="question circle outline icon" data-help="<?php _e($help); ?>"></i></span>
 		<?php endif; ?>
@@ -15,7 +15,7 @@
 	</div>	
 
 	<div style="display: inline-block;" class="field twelve ui wide" data-reset="reset_icon(new Event('click'),'<?php echo $term->slug; ?>')">
-		<div class="ui equal width center aligned grid" style="text-align: center;">				
+		<div class="ui equal width center aligned grid" style="text-align: center;margin-top: 0px">				
 			<?php foreach ($list as $filter_icon): ?>
 				<div style="padding: 0px;" title="<?php $filter_icon["name"]; ?>"
 					class="eo_wbc_filter_icon column <?php echo $non_edit ? 'none_editable':'' ?> 

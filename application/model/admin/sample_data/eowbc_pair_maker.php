@@ -9,6 +9,8 @@ namespace eo\wbc\model\admin\sample_data;
 
 defined( 'ABSPATH' ) || exit;
 
+wbc()->load->model('admin/sample_data/eowbc_sample_data');
+
 class Eowbc_Pair_Maker extends Eowbc_Sample_Data {
 
 	private static $_instance = null;

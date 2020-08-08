@@ -105,7 +105,7 @@ if ( ! class_exists( 'Shop_Category_Filter' ) ) {
 			}
 
 			// remove unnecessary fields
-			$fields_to_keep = array('filter_setting_filter','filter_setting_submit_btn','price_filter_first_cat','hide_price_filter_first_cat','price_filter_order_first_cat');
+			$fields_to_keep = array('filter_setting_btnfilter_now','filter_setting_filter','filter_setting_slider_max_lblsize','filter_setting_submit_btn','price_filter_first_cat','hide_price_filter_first_cat','price_filter_order_first_cat','price_filter_prefix_postfix_devider','price_filter_prefix','price_filter_postfix');
 			foreach ($form_definition['sc_filter_setting']['form'] as $key => $value) {
 				if( !in_array($key, $fields_to_keep)) {
 					unset($form_definition['sc_filter_setting']['form'][$key]);
