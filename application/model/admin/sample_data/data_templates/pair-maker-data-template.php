@@ -292,7 +292,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
         return array(
         array(
           'title'=>'Top_wear #20000001',
-          'thumb'=>$_img_url.'Products/men_white_shirt.jpg',
+          'thumb'=>$_img_url.'men_white_shirt.jpg',
           'images'=>array('men_white_shirt_1.jpg','men_white_shirt_2.jpg'),
           'content'=>'',
           'regular_price'=>'',
@@ -315,7 +315,6 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                               'is_visible'=>1,
                               'is_variation'=>1,
                               'is_taxonomy'=>1
-                            )
                     ),
                     'pa_wbc_cloth_fabric_attr'=>array(
                               'name'=>'pa_wbc_cloth_fabric_attr',
@@ -324,7 +323,6 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                               'is_visible'=>1,
                               'is_variation'=>1,
                               'is_taxonomy'=>1
-                            )
                     ),
           'variation'=>array(
                           array(
@@ -391,7 +389,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
         ),
         array(
           'title'=>'Top_wear #20000002',
-          'thumb'=>$_img_url.'Products/men_shirts.jpg',
+          'thumb'=>$_img_url.'men_shirts.jpg',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -489,7 +487,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
         ),
         array(
           'title'=>'Top_wear #20000003',
-          'thumb'=>$_img_url.'Products/black_tops.jpg',
+          'thumb'=>$_img_url.'black_tops.jpg',
           'images'=>array('black_tops_1.jpg'),
           'content'=>'',
           'regular_price'=>'',
@@ -588,7 +586,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
         ),
         array(
           'title'=>'Top_wear #20000004',
-          'thumb'=>$_img_url.'Products/women_pink_tops.jpg',
+          'thumb'=>$_img_url.'women_pink_tops.jpg',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -686,7 +684,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
         ),
         array(
           'title'=>'Top_wear #20000005',
-          'thumb'=>$_img_url.'Products/women_tshirt.jpg',
+          'thumb'=>$_img_url.'women_tshirt.jpg',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -784,7 +782,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
         ),
         array(
           'title'=>'Top_wear #20000006',
-          'thumb'=>$_img_url.'Products/women_white_shirt.jpg',
+          'thumb'=>$_img_url.'women_white_shirt.jpg',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -882,7 +880,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
         ),
         array(
           'title'=>'Top_wear #20000007',
-          'thumb'=>$_img_url.'Products/men_skyblue_shirt.jpg',
+          'thumb'=>$_img_url.'men_skyblue_shirt.jpg',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -980,7 +978,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
         ),                            
         array(
           'title'=>'Top_wear #20000008',
-          'thumb'=>$_img_url.'Products/men_shirts.jpg',
+          'thumb'=>$_img_url.'men_shirts.jpg',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -1078,7 +1076,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
         ),
         array(
           'title'=>'Top_wear #20000009',
-          'thumb'=>$_img_url.'Products/women_white_tshirt.jpg',
+          'thumb'=>$_img_url.'women_white_tshirt.jpg',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -1176,7 +1174,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
         ),
         array(
           'title'=>'Top_wear #20000010',
-          'thumb'=>$_img_url.'Products/women_white_shirt',
+          'thumb'=>$_img_url.'women_white_shirt',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -1277,7 +1275,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
 
         array(
           'title'=>'Bottom_wear #20000011',
-          'thumb'=>$_img_url.'Products/black_jeans.jpg',
+          'thumb'=>$_img_url.'black_jeans.jpg',
           'images'=>array('jeans.jpg'),
           'content'=>'',
           'regular_price'=>'',
@@ -1386,7 +1384,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
         ),
         array(
           'title'=>'Bottom_wear #20000012',
-          'thumb'=>$_img_url.'Products/formal_black_pant.jpg',
+          'thumb'=>$_img_url.'formal_black_pant.jpg',
           'images'=>array('formal_black_pant_1.jpg'),
           'content'=>'',
           'regular_price'=>'',
@@ -1495,7 +1493,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
         ),
         array(
           'title'=>'Bottom_wear #20000013',
-          'thumb'=>$_img_url.'Products/formal_pant.jpg',
+          'thumb'=>$_img_url.'formal_pant.jpg',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -1603,7 +1601,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
         ),
         array(
           'title'=>'Bottom_wear #20000014',
-          'thumb'=>$_img_url.'Products/leggings.jpg',
+          'thumb'=>$_img_url.'leggings.jpg',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -1711,7 +1709,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
         ),
         array(
           'title'=>'Bottom_wear #20000014',
-          'thumb'=>$_img_url.'Products/men_track.jpg',
+          'thumb'=>$_img_url.'men_track.jpg',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -1819,7 +1817,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
         ),
         array(
           'title'=>'Bottom_wear #20000015',
-          'thumb'=>$_img_url.'Products/palazzos.jpg',
+          'thumb'=>$_img_url.'palazzos.jpg',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -1927,7 +1925,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
         ),
         array(
           'title'=>'Bottom_wear #20000016',
-          'thumb'=>$_img_url.'Products/pant.jpg',
+          'thumb'=>$_img_url.'pant.jpg',
           'images'=>array('palazzos.jpg'),
           'content'=>'',
           'regular_price'=>'',
@@ -2036,7 +2034,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
         ),
         array(
           'title'=>'Bottom_wear #20000017',
-          'thumb'=>$_img_url.'Products/women_palazzos.jpg',
+          'thumb'=>$_img_url.'women_palazzos.jpg',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -2144,7 +2142,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
         ),
         array(
           'title'=>'Bottom_wear #20000018',
-          'thumb'=>$_img_url.'Products/women_blue_jens.jpg',
+          'thumb'=>$_img_url.'women_blue_jens.jpg',
           'images'=>array('Ring-round-2.jpg','Ring-round-3.jpg'),
           'content'=>'',
           'regular_price'=>'',
@@ -2253,7 +2251,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
         ),
         array(
           'title'=>'Bottom_wear #20000019',
-          'thumb'=>$_img_url.'Products/women_black_pant',
+          'thumb'=>$_img_url.'women_black_pant',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -2361,7 +2359,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
         ),
         array(
           'title'=>'Bottom_wear #20000020',
-          'thumb'=>$_img_url.'Products/women_white_pant.jpg',
+          'thumb'=>$_img_url.'women_white_pant.jpg',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',

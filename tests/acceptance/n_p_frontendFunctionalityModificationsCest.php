@@ -74,30 +74,30 @@ class n_p_frontendFunctionalityModificationsCest extends n_f_adminSideSetupCest
         // TODO wait for the edit featur
 
         $operation = array('add_new', 'edit', 'add_new');
-        $filter_id = array( 
+        $mapping = array( 
                             '', 
                             '5f061d4fa67cf', 
                             '', );
         $field_id = array( 
                             array('range_first_1','','',''), 
-                            'eo_wbc_add_discount', 
+                            array( 'eo_wbc_add_discount' ), 
                             array('','') /*here try to add a custom mapping which covers some unique real life scenario like previous item identified by attibute option to be mapped to only precious category of items*/ 
                         );
         $field_name = array( 
                             array('', '', '', ''), 
-                            'eo_wbc_add_discount', 
+                            array( 'eo_wbc_add_discount' ), 
                             array('', ''), );
         $field_type = array( 
                             array('checkbox', 'select', 'select', 'select'), 
-                            'text', 
+                            array( 'text' ), 
                             array('select', 'select'), );
         $val = array( 
                             array('1','51','69','34'/*here we set the radiant setting but in reality there should be category of ring that belongs to diamond in carata range for example from 0.75 to 1.25 carat */), 
-                            '15', 
+                            array( '15' ), 
                             array('96','36') );
         $field_dropdown_div_id=array( 
                                         array('','eo_wbc_first_category_dropdown_div','eo_wbc_first_category_range_dropdown_div','eo_wbc_second_category_dropdown_div'), 
-                                        '', 
+                                        array( '' ), 
                                         array('eo_wbc_first_category_dropdown_div','eo_wbc_second_category_dropdown_div') );
 
         //TODO set xpath and other params for verification
@@ -110,7 +110,7 @@ class n_p_frontendFunctionalityModificationsCest extends n_f_adminSideSetupCest
 
         // change random functionalities
             // try things like carat based mapping range, discounts on certain mapping, any custom mapping etc.
-        $this->modifyMappings($I, 'Map creation and modification', $operation, $filter_id, $field_id, $field_name, $field_type, $val, '//*[@id="map_creation_modification_save_btn"]', $field_dropdown_div_id);
+        $this->modifyMappings($I, 'Map creation and modification', $operation, $mapping, $field_id, $field_name, $field_type, $val, '//*[@id="map_creation_modification_save_btn"]', $field_dropdown_div_id);
 
         // TODO still all the functionality modification are not tested like more real life examples, real life discount requirements, etc. 
 

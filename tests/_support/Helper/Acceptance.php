@@ -478,4 +478,53 @@ class Acceptance extends \Codeception\Module
         return false;
     }
 
+    /**
+     * 
+     */
+    public function editActionClick($I,$entity_title) 
+    {
+        // echo "called resetSession...";
+            
+        try { 
+            $I->executeJS('jQuery("td:contains('.$entity_title.'):not(.disabled) > a")[0].trigger("click");');  
+            return true;
+        }
+        catch(Exception $e) {
+            echo "caught message...";
+            echo $e->getMessage()."";
+        }
+
+        return false;
+    }
+
+    /**
+     * 
+     */
+    public function fillField($I,$i,$field_id,$field_type,$field_name,$val,$field_dropdown_div_id) 
+    {
+        // echo "called resetSession...";
+            
+        try { 
+            if( $field_type[$i] == "text" ) {
+                $I->fillField($field_name[$i], $val[$i]);
+            }
+            elseif( $field_type[$i] == "checkbox" || $field_type[$i] == "radio" ) {
+                $I->executeJS("jQuery('#".$field_id[$i]."').parent().checkbox('set checked', '".$val[$i]."');");  
+            }
+            elseif( $field_type[$i] == "color" ) {
+                $I->executeJS('jQuery("#'.$field_id[$i].'").val("'.$val[$i].'");');  
+            }
+            elseif( $field_type[$i] == "select" ) {
+                $I->executeJS("jQuery('#".$field_dropdown_div_id[$i]."').dropdown('set selected', '".$val[$i]."');");
+            }
+            return true;
+        }
+        catch(Exception $e) {
+            echo "caught message...";
+            echo $e->getMessage()."";
+        }
+
+        return false;
+    }
+
 }

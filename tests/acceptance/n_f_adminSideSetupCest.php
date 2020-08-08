@@ -123,7 +123,7 @@ class n_f_adminSideSetupCest
 
         $I->click('//*[@id="main"]/ul/li/a/img');
         $I->waitForText('Specifications', 10);    //remember that waitForText is case sensitive.
-        $I->see('Continue', 10);    
+        $I->see('Continue');    
     }
 
     protected function modifyAppearance(AcceptanceTester $I, $tab, $field_id, $field_name, $field_type, $val, $save_button_xpath, $field_dropdown_div_id=array())
@@ -237,20 +237,9 @@ class n_f_adminSideSetupCest
             // simulate edit click is yet to be done 
                 // find target row based on filter_id 
                 // find and click edit action within the row
-                $I->executeJS('jQuery("td:contains('.$filter[$i].'):not(.disabled) > a").trigger("click");'); 
+                $I->editActionClick( $filter[$i] ); 
         
-            if( $field_type[$i] == "text" ) {
-                $I->fillField($field_name[$i], $val[$i]);
-            }
-            elseif( $field_type[$i] == "checkbox" || $field_type[$i] == "radio" ) {
-                $I->executeJS("jQuery('#".$field_id[$i]."').parent().checkbox('set checked', '".$val[$i]."');");  
-            }
-            elseif( $field_type[$i] == "color" ) {
-                $I->executeJS('jQuery("#'.$field_id[$i].'").val("'.$val[$i].'");');  
-            }
-            elseif( $field_type[$i] == "select" ) {
-                $I->executeJS("jQuery('#".$field_dropdown_div_id[$i]."').dropdown('set selected', '".$val[$i]."');");
-            }
+            $I->fillField($I,$i,$field_id,$field_type,$field_name,$val,$field_dropdown_div_id); 
         }
         
         $I->scrollTo($save_button_xpath);
@@ -302,55 +291,46 @@ class n_f_adminSideSetupCest
         }
     }
 
-    protected function modifyMappings(AcceptanceTester $I, $tab, $operation, $filter_id, $field_id, $field_name, $field_type, $val, $save_button_xpath, $field_dropdown_div_id=array())
+    protected function modifyMappings(AcceptanceTester $I, $tab, $operation, $mapping, $field_id, $field_name, $field_type, $val, $save_button_xpath, $field_dropdown_div_id=array())
     {
         // if( !$I->test_allowed_in_this_environment("n_") ) {
         //     return;
         // }
 
-        // go to the page
-        $I->amOnPage('/wp-admin/admin.php?page=eowbc-mapping');
+        for($i=0; $i<sizeof($operation); $i++) {
+            // go to the page
+            $I->amOnPage('/wp-admin/admin.php?page=eowbc-mapping');
 
-        // go to the tab
-        $I->click($tab);
-        // $I->see('First Category');
+            // go to the tab
+            $I->click($tab);
+            // $I->see('First Category');
 
-        // set field
-        for($i=0; $i<sizeof($field_id); $i++) {
 
             // here check operation type first and than do add or edit
+            if( $operation[$i] == "edit" ) {
+                // find target row based on mapping, find and click edit action within the row 
+                $I->editActionClick( $mapping[$i] ); 
+            }
 
-            // simulate edit click is yet to be done 
-                // find target row based on filter_id 
+            // set field
+            for ($j=0; $j < sizeof($field_id[$i]); $j++) { 
+                $I->fillField($I,$j,$field_id[$i],$field_type[$i],$field_name[$i],$val[$i],isset($field_dropdown_div_id[$i]) ? $field_dropdown_div_id[$i] : array()); 
+            }
 
-                // find and click edit action within the row 
-        
-            if( $field_type[$i] == "text" ) {
-                $I->fillField($field_name[$i], $val[$i]);
-            }
-            elseif( $field_type[$i] == "checkbox" || $field_type[$i] == "radio" ) {
-                $I->executeJS("jQuery('#".$field_id[$i]."').parent().checkbox('set checked', '".$val[$i]."');");  
-            }
-            elseif( $field_type[$i] == "color" ) {
-                $I->executeJS('jQuery("#'.$field_id[$i].'").val("'.$val[$i].'");');  
-            }
-            elseif( $field_type[$i] == "select" ) {
-                $I->executeJS("jQuery('#".$field_dropdown_div_id[$i]."').dropdown('set selected', '".$val[$i]."');");
+            $I->scrollTo($save_button_xpath);
+            $I->wait(3);
+            
+            // save 
+            $I->click($save_button_xpath);  
+
+            // confirm if saved properly or not
+            $I->reloadPage();   //reload page
+            $I->click($tab);
+            for($i=0; $i<sizeof($field_id); $i++) {
+                // TODO find target row based on filter_id and than look/see into that
             }
         }
         
-        $I->scrollTo($save_button_xpath);
-        $I->wait(3);
-        
-        // save 
-        $I->click($save_button_xpath);  
-
-        // confirm if saved properly or not
-        $I->reloadPage();   //reload page
-        $I->click($tab);
-        for($i=0; $i<sizeof($field_id); $i++) {
-            // TODO find target row based on filter_id and than look/see into that
-        }
     }
 
     protected function verifyMappings(AcceptanceTester $I, $filter_before_verification, $verifications )
