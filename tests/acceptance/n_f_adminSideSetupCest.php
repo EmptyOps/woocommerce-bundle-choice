@@ -142,18 +142,21 @@ class n_f_adminSideSetupCest
         // set field
         for($i=0; $i<sizeof($field_id); $i++) {
 
-            if( $field_type[$i] == "text" ) {
-                $I->fillField($field_name[$i], $val[$i]);
-            }
-            elseif( $field_type[$i] == "checkbox" || $field_type[$i] == "radio" ) {
-                $I->executeJS("jQuery('#".$field_id[$i]."').parent().checkbox('set checked', '".$val[$i]."');");  
-            }
-            elseif( $field_type[$i] == "color" ) {
-                $I->executeJS('jQuery("#'.$field_id[$i].'").val("'.$val[$i].'");');  
-            }
-            elseif( $field_type[$i] == "select" ) {
-                $I->executeJS("jQuery('#".$field_dropdown_div_id[$i]."').dropdown('set selected', '".$val[$i]."');");
-            }
+
+            // if( $field_type[$i] == "text" ) {
+            //     $I->fillField($field_name[$i], $val[$i]);
+            // }
+            // elseif( $field_type[$i] == "checkbox" || $field_type[$i] == "radio" ) {
+            //     $I->executeJS("jQuery('#".$field_id[$i]."').parent().checkbox('set checked', '".$val[$i]."');");  
+            // }
+            // elseif( $field_type[$i] == "color" ) {
+            //     $I->executeJS('jQuery("#'.$field_id[$i].'").val("'.$val[$i].'");');  
+            // }
+            // elseif( $field_type[$i] == "select" ) {
+            //     $I->executeJS("jQuery('#".$field_dropdown_div_id[$i]."').dropdown('set selected', '".$val[$i]."');");
+            // }
+
+            $I->wbc_fillField($I,$field_id[$i],$field_type[$i],$field_name[$i],$val[$i], isset($field_dropdown_div_id[$i]) ? $field_dropdown_div_id[$i] : "" ); 
         }
         
         $I->scrollTo($save_button_xpath, -300, -100);
@@ -237,9 +240,9 @@ class n_f_adminSideSetupCest
             // simulate edit click is yet to be done 
                 // find target row based on filter_id 
                 // find and click edit action within the row
-                $I->editActionClick( $filter[$i] ); 
+                $I->editActionClick( $I, $filter[$i] ); 
         
-            $I->fillField($I,$i,$field_id,$field_type,$field_name,$val,$field_dropdown_div_id); 
+            $I->wbc_fillField($I,$field_id[$i],$field_type[$i],$field_name[$i],$val[$i], isset($field_dropdown_div_id[$i]) ? $field_dropdown_div_id[$i] : "" ; 
         }
         
         $I->scrollTo($save_button_xpath);
@@ -314,7 +317,7 @@ class n_f_adminSideSetupCest
 
             // set field
             for ($j=0; $j < sizeof($field_id[$i]); $j++) { 
-                $I->fillField($I,$j,$field_id[$i],$field_type[$i],$field_name[$i],$val[$i],isset($field_dropdown_div_id[$i]) ? $field_dropdown_div_id[$i] : array()); 
+                $I->wbc_fillField($I,$field_id[$i][$j],$field_type[$i][$j],$field_name[$i][$j],$val[$i][$j], isset($field_dropdown_div_id[$i][$j]) ? $field_dropdown_div_id[$i][$j] : "" ); 
             }
 
             $I->scrollTo($save_button_xpath);
@@ -326,7 +329,7 @@ class n_f_adminSideSetupCest
             // confirm if saved properly or not
             $I->reloadPage();   //reload page
             $I->click($tab);
-            for($i=0; $i<sizeof($field_id); $i++) {
+            for($j=0; $j < sizeof($field_id[$i]); $j++) {
                 // TODO find target row based on filter_id and than look/see into that
             }
         }

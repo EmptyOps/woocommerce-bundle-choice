@@ -500,22 +500,22 @@ class Acceptance extends \Codeception\Module
     /**
      * 
      */
-    public function fillField($I,$i,$field_id,$field_type,$field_name,$val,$field_dropdown_div_id) 
+    public function wbc_fillField($I,$field_id,$field_type,$field_name,$val,$field_dropdown_div_id) 
     {
         // echo "called resetSession...";
             
         try { 
-            if( $field_type[$i] == "text" ) {
-                $I->fillField($field_name[$i], $val[$i]);
+            if( $field_type == "text" ) {
+                $I->fillField($field_name, $val);
             }
-            elseif( $field_type[$i] == "checkbox" || $field_type[$i] == "radio" ) {
-                $I->executeJS("jQuery('#".$field_id[$i]."').parent().checkbox('set checked', '".$val[$i]."');");  
+            elseif( $field_type == "checkbox" || $field_type == "radio" ) {
+                $I->executeJS("jQuery('#".$field_id."').parent().checkbox('set checked', '".$val."');");  
             }
-            elseif( $field_type[$i] == "color" ) {
-                $I->executeJS('jQuery("#'.$field_id[$i].'").val("'.$val[$i].'");');  
+            elseif( $field_type == "color" ) {
+                $I->executeJS('jQuery("#'.$field_id.'").val("'.$val.'");');  
             }
-            elseif( $field_type[$i] == "select" ) {
-                $I->executeJS("jQuery('#".$field_dropdown_div_id[$i]."').dropdown('set selected', '".$val[$i]."');");
+            elseif( $field_type == "select" ) {
+                $I->executeJS("jQuery('#".$field_dropdown_div_id."').dropdown('set selected', '".$val."');");
             }
             return true;
         }

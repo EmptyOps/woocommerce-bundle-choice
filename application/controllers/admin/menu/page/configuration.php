@@ -28,6 +28,7 @@ if ( ! class_exists( 'Configuration' ) ) {
 			$check_it_out_link_type = 'skip';
 			$check_it_out_link_label = 'Check it out!';
 			$check_it_out_link = '';
+			$lbl_txt = 'Congratulations! It seems that you have completed the setup process, click below link to check it out in working on your website.';
 			$active_feature = \eo\wbc\controllers\admin\menu\Admin_Menu::active_pair_builder_feature();
 			if( !empty($active_feature) && \eo\wbc\controllers\admin\menu\Admin_Menu::is_pair_builder_feature_all_setup() ) {
 			
@@ -43,6 +44,7 @@ if ( ! class_exists( 'Configuration' ) ) {
 		        elseif( $configuration_buttons_page==2 ) {			
 					$check_it_out_link_type = 'label';
 					$check_it_out_link_label = 'You have choose to display buttons using Shortcode only, so please go to the page in which you put the Shortcode to check it.';
+					$lbl_txt = 'Congratulations! It seems that you have completed the setup process.';
 		        }
 			}
 
@@ -56,30 +58,40 @@ if ( ! class_exists( 'Configuration' ) ) {
 												'type'=>'hidden',
 												'value'=>'',
 											),
-											'config_automation_visible_info'=>array(
-												'label'=>eowbc_lang('This section will help you add sample data and configurations automatically so that you can preview how it would like after complete setup.'),
-												'type'=>'visible_info',
-												'class'=>array('fluid', 'medium'),
-												'size_class'=>array('sixteen','wide'),
-												'inline'=>false,
-											),		
+											'add_sample_data'=>array(
+												'label'=>'Add Sample Data',
+												'type'=>'devider',
+												// 'class'=>array('fluid'),
+												// 'size_class'=>array('eight','wide')
+											),
 											'config_automation_link'=>array(
 												'label'=>'Click here for automated configuration and setup',
 												'type'=>'link',
 												'attr'=>array("href='".admin_url('admin.php?page=eowbc&eo_wbc_view_auto_jewel=1&f='.$active_feature)."'"),
 												'class'=>array('secondary')	
 											),
+											'config_automation_visible_info'=>array(
+												'label'=>eowbc_lang('We recommend that you try sample data if you have not yet, in addition to providing the preview of how plugin look like on frontend of your website, sample data & configurations will also serve as boilerplate template for configuring the plugin.'),
+												'type'=>'visible_info',
+												'class'=>array('fluid', 'medium'),
+												'size_class'=>array('sixteen','wide'),
+												'inline'=>false,
+											),		
 											/*'config_save_automation'=>array(
 												'label'=>'Save',
 												'type'=>'button',				
 												'class'=>array('primary'),
 												'attr'=>array("data-action='save'")
 											)*/
-											'check_it_out_label'=>array(
-												'label'=>'Setup Done',
+											'check_it_out_status'=>array(
+												'label'=>'Setup Status',
 												'type'=>($check_it_out_link_type != 'skip' ?'devider':$check_it_out_link_type),
 												// 'class'=>array('fluid'),
 												// 'size_class'=>array('eight','wide')
+											),
+											'check_it_out_msg'=>array(
+												'label'=>$lbl_txt,
+												'type'=>($check_it_out_link_type != 'skip' ?'label':$check_it_out_link_type)
 											),
 											'check_it_out_link'=>array(
 												'label'=>$check_it_out_link_label,
