@@ -39,7 +39,7 @@ if ( ! class_exists( 'Configuration' ) ) {
 		        }
 		        elseif( $configuration_buttons_page==1 or $configuration_buttons_page==3 ) {			
 					$check_it_out_link_type = 'link';
-					$check_it_out_link = site_url();
+					$check_it_out_link = site_url( /*'?#wbc_' only add hashtag to url if required since the user is not setting position on home page they will find our where it is displayed so unnecessarily putting #wbc_ is not good and annoying.*/);
 		        }
 		        elseif( $configuration_buttons_page==2 ) {			
 					$check_it_out_link_type = 'label';
@@ -139,14 +139,20 @@ if ( ! class_exists( 'Configuration' ) ) {
 										),
 									'config_devider_make_pair'=>array(
 											'label'=>'Make Pair Button',
-											'type'=>'devider',
+											'type'=>'devider'
 										),
+									'config_make_pair_visible_info'=>array( 'label'=>'Make Pair button is a interesting feature for ring builder, pair maker for clothing(be sure to not confuse pair maker with make pair button), etc. If you enable this feature the Make Pair button will appear on item page even if the user is not on the builder process e.g. on diamond page user would see "Add To Ring" button.',
+												'type'=>'visible_info',
+												'class'=>array('fluid', 'medium'),
+												'size_class'=>array('sixteen','wide'),
+											),
 									'enable_make_pair'=>array(
 											'label'=>'Enabled?',
 											'type'=>'checkbox',
-											'value'=>array(wbc()->options->get_option('configuration','enable_make_pair')),
+											'value'=>'',
 											'sanitize'=>'sanitize_text_field',
-											'options'=>array('enable_make_pair'=>'Make pair button status.'),
+											'options'=>array('1'=>'Make pair button status.'),
+											'is_id_as_name'=>true,
 											'class'=>array()
 										),
 									'label_make_pair'=>array(
@@ -158,6 +164,11 @@ if ( ! class_exists( 'Configuration' ) ) {
 											'size_class'=>array('eight','wide','required'),
 											'inline'=>true,
 										),
+									'label_make_pair_visible_info'=>array( 'label'=>'Set applicable text for button e.g. "Add to Ring" if its for jewelry site',
+												'type'=>'visible_info',
+												'class'=>array('fluid', 'small'),
+												'size_class'=>array('sixteen','wide'),
+											),
 									'config_buttons_conf_save_btn'=>array(
 												'label'=>'Save',
 												'type'=>'button',		
@@ -311,7 +322,7 @@ if ( ! class_exists( 'Configuration' ) ) {
 									'options'=>array('1'=>'First Category','2'=>'Second Category'),
 									'class'=>array(),										
 									'size_class'=>array(),
-									'visible_info'=>array( 'label'=>'Mark the category\'s card to be always shown at top of other, for e.g. in clothing should be a top wear category so you should select either first or second category here based on where set top wear category i.e. if it is first category setting in navigation or second.',
+									'visible_info'=>array( 'label'=>'Mark the category\'s card to be always shown at top of other. For example, in clothing should be a top wear category, so you should select either first or second category here based on where you set top wear category i.e. if it is first category setting in navigation or second.',
 										'type'=>'visible_info',
 										'class'=>array('fluid', 'small'),
 										'size_class'=>array('sixteen','wide'),

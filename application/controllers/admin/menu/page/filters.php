@@ -274,7 +274,7 @@ if ( ! class_exists( 'Filters' ) ) {
 									'type'=>'checkbox',
 									'sanitize'=>'sanitize_text_field',
 									'value'=>array('filter_setting_status'),
-									'options'=>array('filter_setting_status'=>' Check here to enable horizontal filter bar at category page.'),
+									'options'=>array('filter_setting_status'=>' Check here to enable horizontal filter bar'),
 									'class'=>array(),
 									'size_class'=>array('eight','wide'),
 									'inline'=>true,

@@ -177,7 +177,7 @@ if(!class_exists('WooCommerce_Bundle_Choice')) {
 	add_filter('plugin_action_links_'.plugin_basename(__FILE__),function($links){
 	    
 	    $links[] = '<a href="' .
-	        admin_url( 'admin.php?page=eowbc' ) .
+	        admin_url( 'admin.php?page=eowbc-setting-status' ) .
 	        '">' . __('Settings','woocommerce-bundle-choice') . '</a>';
 	        return $links;
 	},30);

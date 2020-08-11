@@ -28,8 +28,7 @@ class Admin {
 
 		do_action( 'wbc_before_admin_process_request' );
 
-		//Hook to update product prices as per the price control feature on the product update feature.
-		
+		//Hook to update product prices as per the price control feature on the product update feature.		
 		$bonus_features = array_filter(unserialize(wbc()->options->get_option('setting_status_setting_status_setting','bonus_features',serialize(array()))));
         if(!empty($bonus_features['price_control'])){
             wbc()->load->model('admin/eowbc_price_control_save_update_prices');
