@@ -49,7 +49,7 @@ if(!class_exists('EOWBC_Error_Handler')){
 
 		        	//	Just create log file if not exists.
 					if (!file_exists(constant('EOWBC_LOG_DIR').'debug.log')) {
-						fclose(constant('EOWBC_LOG_DIR').'debug.log', 'w');
+						fclose(fopen(constant('EOWBC_LOG_DIR').'debug.log', 'w'));
 					}
 					
 					$log=array();

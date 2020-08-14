@@ -31,7 +31,10 @@ class Public_Handler {
 		/*wbc()->options->update_option('configuration','config_category',1);
 		wbc()->options->update_option('configuration','config_map',1);*/
 		add_action('template_redirect',function(){
-			if(is_product_category() and empty(wbc()->sanitize->get('EO_WBC'))) {
+
+			$bonus_features = array_filter(unserialize(wbc()->options->get_option('setting_status_setting_status_setting','bonus_features',serialize(array()))));
+			if(!empty($bonus_features['filters_shop_cat']) and ( is_shop() || is_product_category()) and empty(wbc()->sanitize->get('EO_WBC'))) {
+
 
 			    \eo\wbc\controllers\publics\pages\Shop_Category_Filter::instance()->init();
 			}
@@ -42,14 +45,19 @@ class Public_Handler {
 			}
 		});
 
-        if(
+		//	Strart frontend seervices
+		\eo\wbc\controllers\publics\Service::instance()->run();
+
+		
+		$features = array_filter(unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array()))));
+		
+        if(	!empty(array_intersect(array_values($features),array_keys(wbc()->config->get_builders())))
+        		and        	
         	wbc()->options->get_option('configuration','config_category',0) == 1
              	and
             wbc()->options->get_option('configuration','config_map',0) == 1
         ){
-        	//	Strart frontend seervices
-
-        	\eo\wbc\controllers\publics\Service::instance()->run();
+        	
 
         	add_action('template_redirect',function(){
         		

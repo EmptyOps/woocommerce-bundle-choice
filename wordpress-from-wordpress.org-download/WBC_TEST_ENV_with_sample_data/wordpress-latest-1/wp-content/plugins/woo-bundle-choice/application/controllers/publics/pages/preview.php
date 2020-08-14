@@ -39,6 +39,24 @@ class Preview {
     
     private function eo_wbc_add_css()
     {
+        wbc()->theme->load('css','review');
+        wbc()->theme->load('js','review');
+        /*Hide sidebar and make content area full width.*/
+        add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
+            return array( false );
+        });
+        ob_start();        
+        ?>
+        <style type="text/css">
+            .woocommerce .content-area ,#content,#primary,#main,.content,.primary,.main{
+                  width: 100% !important;
+             }
+             .woocommerce .widget-area {
+                  display: none !important;
+             }
+        </style>
+        <?php
+        echo ob_get_clean();
         add_action( 'wp_enqueue_scripts',function(){ 
             // wp_register_style('eo_wbc_ui_css',EOWBC_ASSET_URL.'css/fomantic/semantic.min.css');
             // wp_enqueue_style( 'eo_wbc_ui_css');

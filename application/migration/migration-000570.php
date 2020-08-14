@@ -178,8 +178,8 @@ class Migration_000570 {
 		$filter_first=unserialize(get_option('eo_wbc_add_filter_first'));
 		$filter_second=unserialize(get_option('eo_wbc_add_filter_second'));
 		
+		$new_filter_first = array();
 		if(!empty($filter_first) and is_array($filter_first)){
-			$new_filter_first = array();
 			foreach ($filter_first as $filter_key => $filter_value) {
 				$new_filter_first[wbc()->common->createUniqueId()]=
 					array(
@@ -204,8 +204,8 @@ class Migration_000570 {
 		
 		wbc()->options->set('eowbc_option_filters_d_fconfig',serialize($new_filter_first));
 				
+		$new_filter_second = array();
 		if(!empty($filter_second) and is_array($filter_second)){
-			$new_filter_second = array();
 			foreach ($filter_second as $filter_key => $filter_value) {
 				$new_filter_second[wbc()->common->createUniqueId()]=
 					array(

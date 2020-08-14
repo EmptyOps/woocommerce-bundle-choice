@@ -31,7 +31,7 @@ services:
       WP_CORE_DIR: /var/www/html
       WP_TESTS_DIR: /tmp/wordpress-tests-lib
     volumes:
-      - './:/var/www/html/wp-content/plugins/woocommerce-gutenberg-products-block'
+      - './:/wp-content/plugins/woocommerce-gutenberg-products-block'
       - wordpress:/var/www/html
 
   wordpress-www:
@@ -50,7 +50,7 @@ services:
       WORDPRESS_TABLE_PREFIX: wp_
       WORDPRESS_DEBUG: 1
     volumes:
-      - "./:/var/www/html/wp-content/plugins/woocommerce-gutenberg-products-block"
+      - "./:/wp-content/plugins/woocommerce-gutenberg-products-block"
       - wordpress:/var/www/html
 
   wordpress-cli:
@@ -69,7 +69,7 @@ services:
         WORDPRESS_EMAIL:
         DOMAIN_NAME:
     volumes:
-      - ./:/var/www/html/wp-content/plugins/woocommerce-gutenberg-products-block
+      - ./:/wp-content/plugins/woocommerce-gutenberg-products-block
       - wordpress:/var/www/html
 
 volumes:

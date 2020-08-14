@@ -20,7 +20,7 @@ class Shortcode_Filters extends Category {
     }
 
     public function init() {
-
+        
         // parent::instance()->is_shortcode_filter = true;
         // parent::instance()->filter_prefix ='shortflt_';
 

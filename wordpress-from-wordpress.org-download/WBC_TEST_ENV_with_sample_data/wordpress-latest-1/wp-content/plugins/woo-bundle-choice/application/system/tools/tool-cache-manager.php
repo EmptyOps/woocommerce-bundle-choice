@@ -105,14 +105,16 @@ class Cache_Manager {
 			 		$second_part[1] = $map["eo_wbc_second_category_range"]; 
 			 	}
 			 	
-			 	if(count($first_part)>1) {			 		
-					$map[0] = $this->terms_between(wbc()->wp->get_term_by_term_taxonomy_id($first_part[0])->taxonomy,$first_part[0],$first_part[1]);			 		
+			 	$first_part_term = wbc()->wp->get_term_by_term_taxonomy_id($first_part[0]);
+			 	if(count($first_part)>1 and !empty($first_part_term) and !is_wp_error( $first_part_term)) {			 		
+					$map[0] = $this->terms_between($first_part_term->taxonomy,$first_part[0],$first_part[1]);			 		
 			 	} else {
 			 		$map[0] = $first_part;
 			 	}
 
-			 	if(count($second_part)>1) {			 		
-					$map[1] = $this->terms_between(wbc()->wp->get_term_by_term_taxonomy_id($second_part[0])->taxonomy,$second_part[0],$second_part[1]);			 		
+			 	$second_part_term = wbc()->wp->get_term_by_term_taxonomy_id($second_part[0]);
+			 	if(count($second_part)>1 and !empty($second_part_term) and !is_wp_error( $second_part_term)) {			 		
+					$map[1] = $this->terms_between($second_part_term->taxonomy,$second_part[0],$second_part[1]);			 		
 			 	} else {
 			 		$map[1] = $second_part;
 			 	}
@@ -128,6 +130,9 @@ class Cache_Manager {
 	private function terms_between($taxonomy, $begining_term, $end_term) { 
 
 		$terms = wp_cache_get('cache_taxonomy','eo_wbc');
+		if(empty($terms[$taxonomy])){
+			return array();
+		}
 		$terms = $terms[$taxonomy];
 
 		/*array_walk($terms,function($term,$index) use(&$terms){

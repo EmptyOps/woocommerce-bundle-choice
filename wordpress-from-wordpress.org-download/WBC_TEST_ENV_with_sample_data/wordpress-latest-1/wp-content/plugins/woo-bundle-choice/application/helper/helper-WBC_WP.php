@@ -133,4 +133,7 @@ class WBC_WP {
             return false;
         }         
     }
+    public function get_template() {
+        return get_template();
+    }
 }

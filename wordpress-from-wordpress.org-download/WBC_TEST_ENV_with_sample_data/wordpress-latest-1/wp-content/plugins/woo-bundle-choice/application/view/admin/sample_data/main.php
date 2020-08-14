@@ -25,8 +25,14 @@ box-shadow: none;">
 	    <?php wp_nonce_field('eo_wbc_auto_jewel'); ?>
 	    <input type="hidden" name="step" value="<?php echo $_step+1; ?>">
 	    <div>
-	      <h1><strong>Jewellary Setup</strong></h1>
-	      <p>You are at step <?php echo $_step; ?> of 3 steps.</p>
+	      <h1><strong>Sample Data for <?php echo $feature_title;?></strong></h1>
+	      <p>You are at step <?php echo $_step; ?> of <?php echo $number_of_step; ?> steps.</p>
+	      <?php if(!empty($help_info[$_step])) {
+	      	?>
+	      		<p><strong><?php echo $help_info[$_step]; ?></strong></p>
+	      	<?php 
+	      }
+	      ?>
 	        <table class="form-table">
 	          <tbody>
 	            <tr valign="top">
@@ -37,7 +43,7 @@ box-shadow: none;">
 	                </th>
 	              </tr>
 	              <tr>
-	                <td> Sample products of rings and diamond will be added.</td>
+	                <td> Sample products will be added for <?php echo $feature_title;?>.</td>
 	              <!-- Attributes Installation -->
 	              <?php elseif($_step==2):?>
 	                <th>

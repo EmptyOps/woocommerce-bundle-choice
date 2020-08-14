@@ -9,6 +9,9 @@ class EOWBC_Filter_Widget {
 	protected $is_shortcode_filter = false;
 	protected $filter_prefix = '';
 
+	private $cat_number = -1;
+	private $cat_name_part = "";
+
 	public static function instance() {
 		if ( ! isset( self::$_instance ) ) {
 			self::$_instance = new self;
@@ -89,7 +92,7 @@ class EOWBC_Filter_Widget {
 		?>
 		<!--Primary filter button that will only be visible on desktop/tablet-->
 		<!-- This widget is created with Wordpress plugin - WooCommerce Product bundle choice -->
-		<div id="loading"></div>	
+		<div id="loading" <?php wbc()->options->get_option('appearance_filters','appearance_filters_loader')?_e('style="display:none !important;"'):'';?>></div>	
 		    							
 		<?php 
 			if(wp_is_mobile()) {
@@ -143,14 +146,33 @@ class EOWBC_Filter_Widget {
 		wp_enqueue_script('jquery');	
 		wp_dequeue_script('jquery-ui-core');
 		wp_deregister_script('jquery-ui-core');
-
+		
 		add_action( 'wp_footer',function(){
 
 			$fg_color=wbc()->session->get('EO_WBC_BG_COLOR','#357DFD');
 
 			$active_color=wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active',$fg_color); //get_option('eo_wbc_active_breadcrumb_color',$fg_color);
 			//wp-head here....
-			echo "<style>	
+			echo "<style>
+					.ui.labeled.slider>.labels .label {
+    					margin: 0 !important;
+    					word-break: keep-all;
+    					white-space: nowrap;
+    				}    				
+    				
+					.ui.images {
+						font-size: 1em !important; 
+					}					
+					.products{
+						visibility: hidden;
+					}
+					.product-listing{
+						visibility: hidden;
+					}
+					.row-inner>.col-lg-9:eq(0){
+						visibility: hidden;
+					}
+
 					.term-description{
 						display:none;
 					}	
@@ -237,7 +259,7 @@ class EOWBC_Filter_Widget {
 
 						background-color:".wbc()->options->get_option('appearance_filters','slider_track_backcolor_active',$active_color)/*get_option('eo_wbc_filter_config_slidertrack_color','')*/." !important;
 					}				
-					.ui.slider .inner .thumb,#advance_filter{
+					.ui.slider .inner .thumb,#advance_filter,#apply_filter{
 						background-color:".wbc()->options->get_option('appearance_filters','slider_nodes_backcolor_active',$active_color)/*get_option('eo_wbc_filter_config_slidernode_color','')*/." !important;
 					}
 					.eo-wbc-container.filters{
@@ -258,9 +280,47 @@ class EOWBC_Filter_Widget {
 						width:".wbc()->options->get_option('appearance_filters','icon_size','min-content')/*get_option('eo_wbc_filter_config_icon_size','min-content')*/." !important;
 						margin:auto auto;
 					}
+					#help_modal{
+						max-height: 80vh;
+						margin-left: auto;
+						margin-right: auto;					    
+					    margin-top: 10vh;
+					    height: fit-content;
+					}
 									
 					/*Modifications............................*/
 				</style>";	
+
+				ob_start();
+				?>
+				<script type="text/javascript">
+					jQuery.fn.wbc_flip_toggle_image=function(element){
+						let img = jQuery(element).find('img');
+						console.log(img);
+						if(jQuery(element).hasClass('eo_wbc_filter_icon_select')) {
+							let toggle_src = jQuery(img).attr('data-toggleimgsrc');
+							if((typeof(toggle_src)!==typeof(undefined)) && toggle_src.trim()!==''){
+								console.log(toggle_src);
+								jQuery(element).addClass('toggled_image');
+								jQuery(img).attr('src',toggle_src);
+							}			
+						} else {
+							let img_src = jQuery(img).attr('data-imgsrc');
+							if((typeof(img_src)!==typeof(undefined)) && img_src.trim()!==''){
+								console.log(img_src);
+								jQuery(element).removeClass('toggled_image');
+								jQuery(img).attr('src',img_src); 
+							}
+						}
+					}
+					jQuery(document).ready(function($){						
+
+						$('.eo_wbc_filter_icon').click(function(){					
+							jQuery.fn.wbc_flip_toggle_image(this);
+						});
+					})
+				</script>
+				<?php
 			if(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')){
 				ob_start();
 				?>
@@ -338,11 +398,27 @@ class EOWBC_Filter_Widget {
 				<?php
 				echo ob_get_clean();
 			}
+			$sc_cat = wbc()->options->get_option('filters_sc_filter_setting','shop_cat_filter_category');
+			if(!empty($sc_cat)){
+				$sc_cat = get_term_by('term_id',$sc_cat,'product_cat');	
+				if(!is_wp_error($sc_cat) and !empty($sc_cat)){
+					$sc_cat = $sc_cat->slug;	
+				}
+			}
+			
 
-			if((wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts')=='sc4' and $this->_category==wbc()->options->get_option('configuration','second_slug')) or (wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts')=='fc4' and $this->_category==wbc()->options->get_option('configuration','first_slug'))){
+			if((wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts')=='sc4' and $this->_category==wbc()->options->get_option('configuration','second_slug')) or (wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts')=='fc4' and $this->_category==wbc()->options->get_option('configuration','first_slug')) or ( wbc()->options->get_option('filters_sc_altr_filt_widgts','first_category_altr_filt_widgts')=='sc4' 
+					and $this->_category==$sc_cat) )
+
+					 {
 				ob_start();
 				?>
 					<style type="text/css">
+						.eo-wbc-container>.ui.steps .step:not(:first-child):before{
+							    border-left: 1em solid #d2d2d2 !important;
+						}
+						.eo-wbc-container.filters.container.ui.form,.eo-wbc-container.filters.container.ui.form .ui.header{font-family: ".wbc()->options->get_option('appearance_filter','header_font','ZapfHumanist601BT-Roman')." !important; }.eo-wbc-container.filters.container.ui.form .ui.header{font-size:1em;}.ui.labeled.ticked.range.slider .labels{height:0px; top:unset;bottom:-10%;font-size:12px}.ui.labeled.ticked.range.slider .labels .label::after{top:unset;bottom:100%;}.eo_wbc_filter_icon:hover:not(.none_editable){ border-bottom: 0px !important; } .eo-wbc-container.filters.container.ui.form .ui.segments{ border:none !important;}
+
 						.eo_wbc_filter_icon_select,.eo_wbc_filter_icon:hover:not(.none_editable){ border-bottom: 0px !important; }
 						.eo-wbc-container.filters.container.ui.form .field:last-child{
 							margin-bottom: -1.4em;
@@ -351,7 +427,24 @@ class EOWBC_Filter_Widget {
 						}
 						.eo-wbc-container.filters.container.ui.form .ui.header{
 							font-size: 0.8em;
-    						text-transform: uppercase;
+    						text-transform: uppercase;    						
+						}
+						.eo-wbc-container .wide.column{
+							display: inline-flex !important;
+						}
+						.ui.labeled.ticked.range.slider{
+							padding-top: 0px !important;	
+						}						
+						.eo-wbc-container .wide.column>.wide.field.text_slider{
+							margin-top: 0.7em;
+    						margin-bottom: auto;
+						}
+						.eo_wbc_filter_icon{
+							margin-top: 0px !important;
+						}
+						.icon_header{
+							margin-top: 0.5em !important;
+							margin-bottom: auto !important;
 						}
 
 					</style>
@@ -383,7 +476,7 @@ class EOWBC_Filter_Widget {
 		global $wp_query;
 		$site_url = '';
 		$product_url = '';
-		if( !$this->is_shortcode_filter ) {
+		if( !$this->is_shortcode_filter && !$this->is_shop_cat_filter ) {
 
 			$current_category = $wp_query->get_queried_object();
 			if(!empty($current_category) and !is_wp_error($current_category)){
@@ -420,7 +513,8 @@ class EOWBC_Filter_Widget {
         					'eo_part_site_url'=>get_site_url().'/index.php',
         					'eo_part_end_url'=>'/'.$product_url,
         					'eo_cat_site_url'=>$site_url,
-        					'eo_cat_query'=>http_build_query($_GET)
+        					'eo_cat_query'=>http_build_query($_GET),
+        					'btnfilter_now'=>(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))?false:true),
         				)));
 
         /*wp_enqueue_script('eo_wbc_filter_js');*/
@@ -556,6 +650,7 @@ class EOWBC_Filter_Widget {
 		    	return false;
 		    }
 		}		
+		$seprator = wbc()->options->get_option('filters_filter_setting','filter_setting_numeric_slider_seperator',$seprator);
 		return array('min_value'=>$min_value,'max_value'=>$max_value,'title'=>$field_title,'slug'=>$field_slug,'seprator'=>$seprator);
 	}
 	
@@ -813,6 +908,18 @@ class EOWBC_Filter_Widget {
 		$min    = floor( $prices->min_price );
 		$max    = ceil( $prices->max_price );
 
+		
+		$curr_prefix = wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','price_filter_prefix');
+		$curr_postfix = '';
+		if(!empty($curr_prefix)){
+			$curr_prefix = wbc()->wc->get_currency_symbol();
+		} elseif(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','price_filter_postfix')) {
+			$curr_postfix = wbc()->wc->get_currency_symbol();
+		}		
+		
+		/*$min = $curr_prefix.$min.$curr_postfix;
+		$max = $curr_prefix.$max.$curr_postfix;
+*/
 		array_push($this->__filters,array(
 										"type"=>"hidden",
 										"name"=>"min_price",
@@ -828,27 +935,29 @@ class EOWBC_Filter_Widget {
 									"class"=>"text_slider_price",
 									"value"=>$max,
 								));
+		$seprator = wbc()->options->get_option('filters_filter_setting','filter_setting_numeric_slider_seperator','.');
 		
 		if($desktop):
 			
 			if((wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts')=='sc4' and $this->_category==wbc()->options->get_option('configuration','second_slug')) or (wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts')=='fc4' and $this->_category==wbc()->options->get_option('configuration','first_slug'))) {
-				wbc()->load->template('publics/filters/slider_price_desktop_4', array("width_class"=>$this->get_width_class($width),"min"=>$min,"max"=>$max,"reset"=>$reset,'help'=>$help)); 
+				wbc()->load->template('publics/filters/slider_price_desktop_4', array("width_class"=>$this->get_width_class($width),"min"=>$min,"max"=>$max,"reset"=>$reset,'help'=>$help,'seprator'=>$seprator,'prefix'=>$curr_prefix,'postfix'=>$curr_postfix)); 
 			} elseif ((wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts')=='sc3' and $this->_category==wbc()->options->get_option('configuration','second_slug')) or (wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts')=='fc3' and $this->_category==wbc()->options->get_option('configuration','first_slug'))) {
-				wbc()->load->template('publics/filters/slider_price_desktop_3', array("width_class"=>$this->get_width_class($width),"min"=>$min,"max"=>$max,"reset"=>$reset,'help'=>$help)); 
+				wbc()->load->template('publics/filters/slider_price_desktop_3', array("width_class"=>$this->get_width_class($width),"min"=>$min,"max"=>$max,"reset"=>$reset,'help'=>$help,'seprator'=>$seprator,'prefix'=>$curr_prefix,'postfix'=>$curr_postfix)); 
 			}  else {
-				wbc()->load->template('publics/filters/slider_price_desktop', array("width_class"=>$this->get_width_class($width),"min"=>$min,"max"=>$max,"reset"=>$reset)); 
+				wbc()->load->template('publics/filters/slider_price_desktop', array("width_class"=>$this->get_width_class($width),"min"=>$min,"max"=>$max,"reset"=>$reset,'seprator'=>$seprator,'prefix'=>$curr_prefix,'postfix'=>$curr_postfix)); 
 			}
 		elseif(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')):			
-			wbc()->load->template('publics/filters/slider_price_mobile_alternate', array("min"=>$min,"max"=>$max,"reset"=>$reset,'advance'=>$advance));
+			wbc()->load->template('publics/filters/slider_price_mobile_alternate', array("min"=>$min,"max"=>$max,"reset"=>$reset,'advance'=>$advance,'seprator'=>$seprator,'prefix'=>$curr_prefix,'postfix'=>$curr_postfix));
 		else:
-			wbc()->load->template('publics/filters/slider_price_mobile', array("min"=>$min,"max"=>$max,"reset"=>$reset));
+			wbc()->load->template('publics/filters/slider_price_mobile', array("min"=>$min,"max"=>$max,"reset"=>$reset,'seprator'=>$seprator,'prefix'=>$curr_prefix,'postfix'=>$curr_postfix));
 		endif;			
 	}
 	
 	public function load_mobile($general_filters, $advance_filters) {
 		if(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')) {
 			$this->load_grid_mobile($general_filters);
-			if( !$this->is_shortcode_filter ) {
+			$order = wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','price_filter_order_'.$this->cat_name_part.'_cat','');
+			if( !$this->is_shortcode_filter && !wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','hide_price_filter_'.$this->cat_name_part.'_cat',false) && wbc()->common->nonZeroEmpty($order) ) {
 				$this->slider_price(0);
 			}
 			if(!is_wp_error($advance_filters) and !empty($advance_filters)) {
@@ -858,7 +967,8 @@ class EOWBC_Filter_Widget {
 			?><div class="ui segment"><?php
 				?><div class="ui styled fluid accordion" style="border-top-left-radius: 0px !important; border-top-right-radius: 0px !important;"><?php
 					$this->load_grid_mobile($general_filters);
-					if( !$this->is_shortcode_filter ) {
+					$order = wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','price_filter_order_'.$this->cat_name_part.'_cat','');
+					if( !$this->is_shortcode_filter && !wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','hide_price_filter_'.$this->cat_name_part.'_cat',false) && wbc()->common->nonZeroEmpty($order) ) {
 						$this->slider_price(0);
 					}
 				?></div><?php
@@ -875,6 +985,12 @@ class EOWBC_Filter_Widget {
 
 	public function load_grid_mobile($filter,$advance=0) {
 		foreach ($filter as $key => $item) {
+
+			if($item["type"] == "price_filter") {
+				$this->slider_price(0);
+				continue;
+			}
+
 			$item['advance']=$advance;
 			$item['desktop']=0;
 			if($item['type']==0 && ($item['input']=='icon' OR $item['input']=='icon_text')) {
@@ -940,27 +1056,38 @@ class EOWBC_Filter_Widget {
 			<div class="eo-wbc-container filters container ui form">
 				<div class="ui segments">
 					<div class="ui segment"><?php
-					?><div class="ui grid container align middle relaxed"><?php
+					?><div class="ui grid container align middle relaxed" style="margin-bottom: 0px;"><?php
 						$this->load_grid_desktop($general_filters,0);
-						if( !$this->is_shortcode_filter ) {
+						$order = wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','price_filter_order_'.$this->cat_name_part.'_cat','');
+						if( !$this->is_shortcode_filter && !wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','hide_price_filter_'.$this->cat_name_part.'_cat',false) && wbc()->common->nonZeroEmpty($order) ) {
 							$this->slider_price();
 						}
 					?></div><?php
 				?></div><?php
-				if(!is_wp_error($advance_filters) and !empty($advance_filters)){
+				if(!is_wp_error($advance_filters) and !empty($advance_filters)) {
 					?><div class="ui segment secondary"><?php
-						?><div class="ui grid container align middle relaxed"><?php					
+						?><div class="ui grid container align middle relaxed" style="margin-bottom: 0px;"><?php					
 							$this->load_grid_desktop($advance_filters,1);					
 						?></div><?php
 					?></div><?php
 				}			
-			?>
+			?>				
 				</div>
 			</div>
-			<?php if( !empty($advance_filters) ) { ?>
+			<?php if( (!empty($advance_filters)) or (!empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))) ) { ?>
 				<div class="ui grid centered">
 					<div class="row">
-						<div class="ui button primary" id="advance_filter" style="border-radius: 0 0 0 0;width: fit-content !important;">Advanced Filters&nbsp;<i class="ui icon angle double up"></i></div>
+						<?php if(!empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
+							<div class="ui button reset_all_filters" style="position: absolute;left:1em;top: 1em;border-radius: 0;" >Reset Filters</div>
+						<?php endif; ?>
+
+						<?php if(!empty($advance_filters)): ?>
+							<div class="ui button primary" id="advance_filter" style="border-radius: 0 0 0 0;width: fit-content !important;">ADVANCED FILTERS &nbsp;<i class="ui icon angle double up"></i></div>
+						<?php endif; ?>
+
+						<?php if(!empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
+							<div class="ui button" id="apply_filter" style="position: absolute;right: 1em;top:1em;border-radius: 0;" onclick="jQuery.fn.eo_wbc_filter_change();">Apply Filters</div>
+						<?php endif; ?>
 					</div>
 				</div>
 			<?php			
@@ -972,6 +1099,12 @@ class EOWBC_Filter_Widget {
 
 		if(!empty($filters) && (is_array($filters) or is_object($filters) ) ){
 			foreach ($filters as $key => $item) {	
+
+				if( $item["type"] == "price_filter" ) {
+					$this->slider_price();
+					continue;
+				}
+
 				$item['advance']=$advance;
 				$item['desktop']=1;			
 				if($item['type']==0 && ($item['input']=='icon' OR $item['input']=='icon_text')) {					 
@@ -1040,6 +1173,12 @@ class EOWBC_Filter_Widget {
 		if(!is_wp_error($filters) and !empty($filters)){
 			?><div class="ui text menu"><?php	
 			foreach ($filters as $item_index=>$item) {
+
+				if( $item["type"] == "price_filter" ) {
+					$this->load_collapsable_desktop_price_filter();
+					continue;
+				}
+
 				$item['advance']=0;
 				$item['desktop']=1;
  				$term = null;
@@ -1117,15 +1256,9 @@ class EOWBC_Filter_Widget {
 				<?php				
 			}
 
-			if( !$this->is_shortcode_filter ) {
-				?><a class="ui dropdown item">Price&nbsp;<i class="chevron down icon"></i>
-					<div class="menu">
-						<div class="item" style="width: max-content !important;min-width: 33vw;max-width: 33vw;display: table-cell;">				
-							<?php $this->slider_price(); ?>
-						</div>
-					</div>
-				</a>
-				<?php
+			$order = wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','price_filter_order_'.$this->cat_name_part.'_cat','');
+			if( !$this->is_shortcode_filter && !wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','hide_price_filter_'.$this->cat_name_part.'_cat',false) && wbc()->common->nonZeroEmpty($order) ) {
+				$this->load_collapsable_desktop_price_filter();
 			}
 			?></div><?php			
 		}
@@ -1152,6 +1285,17 @@ class EOWBC_Filter_Widget {
 		
 	}
 	
+	public function load_collapsable_desktop_price_filter() {
+		?><a class="ui dropdown item">Price&nbsp;<i class="chevron down icon"></i>
+			<div class="menu">
+				<div class="item" style="width: max-content !important;min-width: 33vw;max-width: 33vw;display: table-cell;">				
+					<?php $this->slider_price(); ?>
+				</div>
+			</div>
+		</a>
+		<?php
+	}
+
 	public function eo_wbc_filter_ui_icon($__prefix,$item/*$id,$title='',$type=0,$input='icon',$desktop=1,$width='50',$icon_width=FALSE,$label_size=FALSE,$reset = 0,$child_label=false,$hidden = false,$help='',$advance=0*/) {
 		
 		extract($item);
@@ -1164,6 +1308,7 @@ class EOWBC_Filter_Widget {
 		$child_label = (isset($child_label)?$child_label:false);		
 		$help=(!empty(${$__prefix.'_fconfig_add_help'})?${$__prefix.'_fconfig_add_help_text'}:'');		
 		$hidden = !empty($hidden);
+		$is_single_select = (!empty(${$__prefix.'_fconfig_is_single_select'})?1:0);
 		
 		global $woocommerce;
 		$icon_css = '';
@@ -1197,6 +1342,7 @@ class EOWBC_Filter_Widget {
 			$term_item = (object)$term_item;
 			if(!empty($term_item) and is_object($term_item))
 			$icon = '';
+			$select_icon = '';
 			$mark = false;
 
 			$query_list = array();
@@ -1218,7 +1364,7 @@ class EOWBC_Filter_Widget {
 				if($non_edit==false && in_array($term_item->id,$query_list)) {
 					$non_edit=true;						
 				}
-
+				$select_icon = get_term_meta($term_item->id, 'wbc_attachment',true);
 			} else {
 				$icon = wp_get_attachment_url( @get_term_meta( $term_item->term_id, 'thumbnail_id', true ));
 				
@@ -1230,14 +1376,16 @@ class EOWBC_Filter_Widget {
 				if($non_edit==false && in_array($term_item->slug,$query_list)) {
 					$non_edit=true;						
 				}
+				$select_icon = get_term_meta($term_item->term_id, 'wbc_attachment',true);
 			}
 
 			$list[]=array("icon" => $icon ,
+							'select_icon'=>$select_icon,
 							"name" => $term_item->name,
 							"slug"=> $term_item->slug,
 							"mark"=> $mark
 						);					
-			
+
 			if(in_array($term_item->slug,$query_list)) {
 				$cat_filter_list[]=$term_item->slug;
 			}
@@ -1269,17 +1417,17 @@ class EOWBC_Filter_Widget {
 
 		if($desktop):
 			if((wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts')=='sc4' and $this->_category==wbc()->options->get_option('configuration','second_slug')) or (wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts')=='fc4' and $this->_category==wbc()->options->get_option('configuration','first_slug'))) {
-				wbc()->load->template('publics/filters/icon_desktop_4', array("width_class"=>$this->get_width_class($width),"term"=>$term,"title"=>$title,"list"=>$list,"icon_css"=>$icon_css,"reset"=>$reset,"input"=>$input,"type"=>$type,"non_edit"=>$non_edit,'help'=>$help,'hidden'=>$hidden));
+				wbc()->load->template('publics/filters/icon_desktop_4', array("width_class"=>$this->get_width_class($width),"term"=>$term,"title"=>$title,"list"=>$list,"icon_css"=>$icon_css,"reset"=>$reset,"input"=>$input,"type"=>$type,"non_edit"=>$non_edit,'help'=>$help,'hidden'=>$hidden,'is_single_select'=>$is_single_select));
 			} elseif ((wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts')=='sc3' and $this->_category==wbc()->options->get_option('configuration','second_slug')) or (wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts')=='fc3' and $this->_category==wbc()->options->get_option('configuration','first_slug'))) {
-				wbc()->load->template('publics/filters/icon_desktop_3', array("width_class"=>$this->get_width_class($width),"term"=>$term,"title"=>$title,"list"=>$list,"icon_css"=>$icon_css,"reset"=>$reset,"input"=>$input,"type"=>$type,"non_edit"=>$non_edit,'help'=>$help,'hidden'=>$hidden));
+				wbc()->load->template('publics/filters/icon_desktop_3', array("width_class"=>$this->get_width_class($width),"term"=>$term,"title"=>$title,"list"=>$list,"icon_css"=>$icon_css,"reset"=>$reset,"input"=>$input,"type"=>$type,"non_edit"=>$non_edit,'help'=>$help,'hidden'=>$hidden,'is_single_select'=>$is_single_select));
 			} else {
-				wbc()->load->template('publics/filters/icon_desktop', array("width_class"=>$this->get_width_class($width),"term"=>$term,"title"=>$title,"list"=>$list,"icon_css"=>$icon_css,"reset"=>$reset,"input"=>$input,"type"=>$type,"non_edit"=>$non_edit,'hidden'=>$hidden));
+				wbc()->load->template('publics/filters/icon_desktop', array("width_class"=>$this->get_width_class($width),"term"=>$term,"title"=>$title,"list"=>$list,"icon_css"=>$icon_css,"reset"=>$reset,"input"=>$input,"type"=>$type,"non_edit"=>$non_edit,'hidden'=>$hidden,'is_single_select'=>$is_single_select));
 			}
 
 		elseif(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')):			
-			wbc()->load->template('publics/filters/icon_mobile_alternate', array("term"=>$term,"title"=>$title,"list"=>$list,"icon_css"=>$icon_css,"reset"=>$reset,"input"=>$input,"type"=>$type,"non_edit"=>$non_edit,'advance'=>$advance,'hidden'=>$hidden)); 
+			wbc()->load->template('publics/filters/icon_mobile_alternate', array("term"=>$term,"title"=>$title,"list"=>$list,"icon_css"=>$icon_css,"reset"=>$reset,"input"=>$input,"type"=>$type,"non_edit"=>$non_edit,'advance'=>$advance,'hidden'=>$hidden,'is_single_select'=>$is_single_select)); 
 		else:
-			wbc()->load->template('publics/filters/icon_mobile', array("term"=>$term,"title"=>$title,"list"=>$list,"icon_css"=>$icon_css,"reset"=>$reset,"input"=>$input,"type"=>$type,"non_edit"=>$non_edit,'hidden'=>$hidden)); 
+			wbc()->load->template('publics/filters/icon_mobile', array("term"=>$term,"title"=>$title,"list"=>$list,"icon_css"=>$icon_css,"reset"=>$reset,"input"=>$input,"type"=>$type,"non_edit"=>$non_edit,'hidden'=>$hidden,'is_single_select'=>$is_single_select)); 
 		endif;
 		?>					
 		<script type="text/javascript">
@@ -1294,7 +1442,6 @@ class EOWBC_Filter_Widget {
 
 					jQuery('[data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)').off();
 					jQuery('[data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)').on('click',function(e){
-
 						
 						
 						e.stopPropagation();
@@ -1321,13 +1468,26 @@ class EOWBC_Filter_Widget {
 							filter_list = jQuery('[name="cat_filter_'+"<?php echo $term->slug; ?>"+'"]');
 							filter_target = jQuery('[name="_category"]');
 						}						
+						let is_single_select = jQuery(this).data('single_select');
+						if(typeof(is_single_select) !== typeof(undefined) && is_single_select==1){
+							jQuery('[data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)').removeClass('eo_wbc_filter_icon_select');
+							let toggleable_selections = jQuery('.toggled_image[data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)');
+							console.log(toggleable_selections);
+							if(typeof(toggleable_selections)!==typeof(undefined) && toggleable_selections.length>0){
+								
+								jQuery.fn.wbc_flip_toggle_image(toggleable_selections[0]);
+							}							
+							filter_list.val(jQuery(this).attr("data-slug"));
+						} else {
+							if(filter_list.val().includes( jQuery(this).attr('data-slug'))){
+								filter_list.val(filter_list.val().replace(','+jQuery(this).attr('data-slug'),''));
+							}
+							else {
+								filter_list.val(filter_list.val()+','+jQuery(this).attr("data-slug"));
+							}	
+						}
+
 						
-						if(filter_list.val().includes( jQuery(this).attr('data-slug'))){
-							filter_list.val(filter_list.val().replace(','+jQuery(this).attr('data-slug'),''));
-						}
-						else {
-							filter_list.val(filter_list.val()+','+jQuery(this).attr("data-slug"));
-						}
 
 						if(filter_target.val().includes(filter_name) && filter_list.val().length==0) {
 							filter_target.val(filter_target.val().replace(','+filter_name,''));
@@ -1340,7 +1500,9 @@ class EOWBC_Filter_Widget {
 						
 						jQuery(this).toggleClass('eo_wbc_filter_icon_select');
 						$('[name="paged"]').val('1');
+						<?php if(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
 						jQuery.fn.eo_wbc_filter_change();
+						<?php endif; ?>
 					});
 
 					jQuery(".eo_wbc_srch_btn:eq(2)").on('reset',function(){	
@@ -1469,6 +1631,8 @@ class EOWBC_Filter_Widget {
 			
 			$filter=$filter_first=unserialize(wbc()->options->get_option_group('filters_'.$this->filter_prefix.'d_fconfig'));
 			$prefix = "d";			
+			$this->cat_number = 0;
+			$this->cat_name_part = "first";
 			
 		} else {
 			$filter_first=unserialize(wbc()->options->get_option_group('filters_d_fconfig')/*get_option('eo_wbc_add_filter_first')*/);
@@ -1478,10 +1642,14 @@ class EOWBC_Filter_Widget {
 			if($current_category==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/){
 				$filter=$filter_first;
 				$prefix = "d";			
+				$this->cat_number = 0;
+				$this->cat_name_part = "first";
 			}
 			elseif($current_category==wbc()->options->get_option('configuration','second_slug')/*get_option('eo_wbc_second_slug')*/){
 				$filter=$filter_second;	
 				$prefix = "s";
+				$this->cat_number = 1;
+				$this->cat_name_part = "second";
 			}	
 		}
 
@@ -1565,13 +1733,20 @@ class EOWBC_Filter_Widget {
 				$adv_ordered_filter[$item['order']]=$item;
 			}
 		}		
+
+		$order = wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','price_filter_order_'.$this->cat_name_part.'_cat',false);
+		if( !wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','hide_price_filter_'.$this->cat_name_part.'_cat',false) && !wbc()->common->nonZeroEmpty($order) ) {
+			$item = array('order'=>(int)wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','price_filter_order_'.$this->cat_name_part.'_cat',false), 'type'=>'price_filter');
+			$non_adv_ordered_filter[$item['order']]=$item;
+		}
+
 		ksort($non_adv_ordered_filter);
 		ksort($adv_ordered_filter);
 
 		?>
 		<!--Primary filter button that will only be visible on desktop/tablet-->
 		<!-- This widget is created with Wordpress plugin - WooCommerce Product bundle choice -->
-		<div id="loading"></div>
+		<div id="loading" <?php wbc()->options->get_option('appearance_filters','appearance_filters_loader')?_e('style="display:none !important;"'):'';?>></div>	
 		<script type="text/javascript">
 			jQuery(document).ready(function(){
 				jQuery(document).on('click',".question.circle.outline.icon",function(){
@@ -1644,7 +1819,7 @@ class EOWBC_Filter_Widget {
 			wbc()->load->template('publics/filters/shortcode_flt_search_btn', array("is_shortcode_filter"=>$this->is_shortcode_filter)); 	
 		}
 
-		wbc()->load->template('publics/filters/form', array("thisObj"=>$this,"current_category"=>$current_category)); 		
+		wbc()->load->template('publics/filters/form', array("thisObj"=>$this,"current_category"=>$current_category,'filter_prefix'=>$this->filter_prefix)); 		
 	}
 
 	public function init($is_shop_cat_filter=false,$filter_prefix='',$is_shortcode_filter=false) {
@@ -1652,7 +1827,7 @@ class EOWBC_Filter_Widget {
 		$this->is_shop_cat_filter = $is_shop_cat_filter;
 		$this->is_shortcode_filter = $is_shortcode_filter;
 		$this->filter_prefix = $filter_prefix;
-		$this->_category= !$this->is_shortcode_filter ? $this->eo_wbc_get_category() : '';
+		$this->_category= !$this->is_shortcode_filter && !$this->is_shop_cat_filter ? $this->eo_wbc_get_category() : '';
 		
 		if(!empty($this->_category) or $this->is_shop_cat_filter or $this->is_shortcode_filter){
 		

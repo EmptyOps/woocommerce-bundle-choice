@@ -2,20 +2,20 @@
 
 /**
  *
- * @link https://wordpress.org/plugins/woocommerce-bundle-choice/
+ * @link https://wordpress.org/plugins/woo-bundle-choice/
  * @since 1.0.0
- * @package woocommerce-bundle-choice
+ * @package woo-bundle-choice
  *
  * @wordpress-plugin
- * Plugin Name: Woo Choice Plugin
- * Plugin URI: https://wordpress.org/plugins/woocommerce-bundle-choice/
+ * Plugin Name: Woo Choice Plugin | Ring Builder | Pair Maker | Guidance Tool
+ * Plugin URI: https://wordpress.org/plugins/woo-bundle-choice/
  * Description: Product bundling as ring builder for jewelry, pair maker for clothing and guidance tool for home decor, cosmetics etc. Product bundling as per user's choice.
  * Version: 1.0.0
  * Author: emptyopssphere
  * Author URI: https://profiles.wordpress.org/emptyopssphere
  * License: GPLv3+
  * License URI: http://www.gnu.org/licenses/gpl-3.0.txt
- * Text Domain: woocommerce-bundle-choice
+ * Text Domain: woo-bundle-choice
  * Domain Path: /languages
  */
 
@@ -25,9 +25,9 @@ if (!defined('ABSPATH')) exit;
 //load autoloader file
 //load error detection and handler class
 
-if(!class_exists('WooCommerce_Bundle_Choice')) {
+if(!class_exists('Woo_Bundle_Choice')) {
 
-	class WooCommerce_Bundle_Choice {
+	class Woo_Bundle_Choice {
 
 		private static $_instance = null;
 
@@ -122,7 +122,7 @@ if(!class_exists('WooCommerce_Bundle_Choice')) {
 			defined('EOWBC_DIRECTORY') || define('EOWBC_DIRECTORY', plugin_dir_path( __FILE__ ));
 			defined('EOWBC_BASE_DIRECTORY') || define('EOWBC_BASE_DIRECTORY', basename(__DIR__));
 			
-			defined('EOWBC_NAME') || define('EOWBC_NAME', $plugin_data['Name']);
+			defined('EOWBC_NAME') || define('EOWBC_NAME', 'Woo Choice Plugin' /*$plugin_data['Name']*/);
 			defined('EOWBC_FILE') || define('EOWBC_FILE', __FILE__);
 			defined('EOWBC_VERSION') || define('EOWBC_VERSION', $plugin_data['Version']);
 
@@ -161,7 +161,7 @@ if(!class_exists('WooCommerce_Bundle_Choice')) {
 	if(!function_exists('wbc')){
 
 		function wbc(){
-			return WooCommerce_Bundle_Choice::instance();
+			return Woo_Bundle_Choice::instance();
 		}	
 	}
 	
@@ -178,7 +178,7 @@ if(!class_exists('WooCommerce_Bundle_Choice')) {
 	    
 	    $links[] = '<a href="' .
 	        admin_url( 'admin.php?page=eowbc-setting-status' ) .
-	        '">' . __('Settings','woocommerce-bundle-choice') . '</a>';
+	        '">' . __('Settings','woo-bundle-choice') . '</a>';
 	        return $links;
 	},30);
 }

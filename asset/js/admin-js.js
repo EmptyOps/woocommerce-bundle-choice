@@ -1,3 +1,10 @@
+// a shared namespace among plugins and extensions of the sphere plugins
+jQuery.splugins = {};
+
+jQuery.splugins.hasAttr = function(name) {  
+   return jQuery(this).attr(name) !== undefined;
+};
+
 $ = jQuery;
 
 jQuery(document).ready(function($){
@@ -81,6 +88,14 @@ jQuery(document).ready(function($){
         e.preventDefault();
         e.stopPropagation();
         var $this = this;
+
+        var original_txt = jQuery($this).text();
+        var original_cursor = jQuery($this).css('cursor');
+        var processing_txt = jQuery.splugins.hasAttr('data-loading_text') ? jQuery($this).attr('data-loading_text') : 'Processing...';
+        if( original_txt == processing_txt ) { return; }
+        jQuery($this).text(processing_txt);
+        jQuery($this).css('cursor', 'default');
+
         //var form = jQuery(document).find('form').has(this);
         var form = jQuery(this).closest('form');
         
@@ -169,6 +184,9 @@ jQuery(document).ready(function($){
                     $('[name="first_category_altr_filt_widgts"]').val(temp_fcf);             
                     $('[name="second_category_altr_filt_widgts"]').val(temp_scf);
                 }                
+
+                jQuery($this).css('cursor', original_cursor);
+                jQuery($this).text(original_txt);
             }
         });
     });  
@@ -195,28 +213,46 @@ jQuery(document).ready(function($){
     $('button.ui.button[data-action="bulk"]').on('click',function(e){
         e.preventDefault();
         e.stopPropagation();
+        var $this = this;
+
+        var original_txt = jQuery($this).text();
+        var original_cursor = jQuery($this).css('cursor');
+        var processing_txt = jQuery.splugins.hasAttr('data-loading_text') ? jQuery($this).attr('data-loading_text') : 'Processing...';
+        if( original_txt == processing_txt ) { return; }
+        jQuery($this).text(processing_txt);
+        jQuery($this).css('cursor', 'default');
+
+        var complete_callback = function() {
+            jQuery($this).css('cursor', original_cursor);
+            jQuery($this).text(original_txt);
+        }
 
         //delete
 
         if( jQuery( "#" + jQuery(this).data("bulk_table_id") + "_bulk" ).val() == "delete") {
-            if(confirm('Are you sure want to delete?')){
-                var cbs = [];
+            var cbs = [];
 
-                //find table and loop through rows and prepare checked checkboxes
-                jQuery( "#" + jQuery(this).data("bulk_table_id") + " > tbody  > tr" ).each(function(i, row) {
-                    var cb = jQuery(row).find('input[type=checkbox]')[0];
-                    if( jQuery(cb).is(':checked') ) {
-                        cbs.push( cb );    
-                    }
-                });
-                
-                if(cbs.length>0){
-                    eowbc_do_delete(cbs, jQuery(this).data("tab_key"));       
+            //find table and loop through rows and prepare checked checkboxes
+            jQuery( "#" + jQuery(this).data("bulk_table_id") + " > tbody  > tr" ).each(function(i, row) {
+                var cb = jQuery(row).find('input[type=checkbox]')[0];
+                if( jQuery(cb).is(':checked') ) {
+                    cbs.push( cb );    
                 }
-            } else {
-                return false
+            });
+            
+            if(cbs.length>0){
+                if(confirm('Are you sure want to delete?')){
+                    eowbc_do_delete(cbs, jQuery(this).data("tab_key"), complete_callback);   
+                } else {
+                    complete_callback();
+                    return false;
+                }    
+            } 
+            else {
+                eowbc_toast_common( "warning", 'Please select record(s) to proceed');
+                complete_callback();
             }
-
+            
         } else if( jQuery( "#" + jQuery(this).data("bulk_table_id") + "_bulk" ).val() == "activate" ) {
             var cbs = [];
 
@@ -229,7 +265,11 @@ jQuery(document).ready(function($){
             });
             
             if(cbs.length>0){
-                eowbc_do_activate(cbs, jQuery(this).data("tab_key"));       
+                eowbc_do_activate(cbs, jQuery(this).data("tab_key"), complete_callback);       
+            }
+            else {
+                eowbc_toast_common( "warning", 'Please select record(s) to proceed');
+                complete_callback();
             }
         } else if( jQuery( "#" + jQuery(this).data("bulk_table_id") + "_bulk" ).val() == "deactivate" ) {
             var cbs = [];
@@ -243,10 +283,15 @@ jQuery(document).ready(function($){
             });
             
             if(cbs.length>0){
-                eowbc_do_deactivate(cbs, jQuery(this).data("tab_key"));       
+                eowbc_do_deactivate(cbs, jQuery(this).data("tab_key"), complete_callback);       
+            }
+            else {
+                eowbc_toast_common( "warning", 'Please select record(s) to proceed');
+                complete_callback();
             }
         } else {
             eowbc_toast_common( "warning", "Please select bulk action to apply" );
+            complete_callback();
         }
     });
 
@@ -262,6 +307,23 @@ jQuery(document).ready(function($){
         e.preventDefault();
         e.stopPropagation();
         let $this = $(this);
+
+        var original_txt = jQuery($this).text();
+        var original_cursor = jQuery($this).css('cursor');
+        var processing_txt = jQuery.splugins.hasAttr('data-loading_text') ? jQuery($this).attr('data-loading_text') : 'Loading...';
+        if( original_txt == processing_txt ) { return; }
+        jQuery($this).text(processing_txt);
+        jQuery($this).css('cursor', 'default');
+
+        var complete_callback = function( is_success ) {
+            jQuery($this).css('cursor', original_cursor);
+            jQuery($this).text(original_txt);
+
+            if( is_success ) {
+                $("html, body").animate({ scrollTop: $(document).height()-$(window).height()-100 }, 1500);
+            }
+        }
+
         var form = jQuery($this).closest("form");
         let saved_tab_key = jQuery(".ui.pointing.secondary.menu>.item.active").data('tab');
         let clean_tab_key = jQuery(".ui.pointing.secondary.menu>.item.active").data('clean_tab_key');
@@ -309,12 +371,16 @@ jQuery(document).ready(function($){
                             }
                         }   
                         jQuery("#"+ clean_tab_key+"_id").val(id);
+
+                        complete_callback(true);
                     } else {
                         $('body').toast({
                             class: (typeof(resjson["type"]) != undefined ? resjson["type"] : 'error'),
                             position: 'bottom right',
                             message: (typeof(resjson["msg"]) != undefined && resjson["msg"] != "" ? resjson["msg"] : `Failed! Please check Logs page for for more details.`)
                         });
+
+                        complete_callback(false);
                     }                        
                 },
                 error:function(xhr,status,error){
@@ -324,6 +390,8 @@ jQuery(document).ready(function($){
                         position: 'bottom right',
                         message: `Network Error!`
                     });
+
+                    complete_callback(false);
                 },
                 complete:function(xhr,status){
                     /*console.log(xhr);*/
@@ -348,7 +416,7 @@ function eowbc_toast_common( toast_type_class, msg, timeout) {
     });
 }
 
-function eowbc_do_delete( cbs, saved_tab_key ) {
+function eowbc_do_delete( cbs, saved_tab_key, complete_callback ) {
 
     ids = [];
     for(var i=0; i<cbs.length; i++) {
@@ -394,11 +462,13 @@ function eowbc_do_delete( cbs, saved_tab_key ) {
         },
         complete:function(xhr,status){
             /*console.log(xhr);*/
+
+            complete_callback();
         }
     });
 }
 
-function eowbc_do_activate( cbs, saved_tab_key ) {
+function eowbc_do_activate( cbs, saved_tab_key, complete_callback ) {
 
     ids = [];
     for(var i=0; i<cbs.length; i++) {
@@ -444,11 +514,13 @@ function eowbc_do_activate( cbs, saved_tab_key ) {
         },
         complete:function(xhr,status){
             /*console.log(xhr);*/
+
+            complete_callback();
         }
     });
 }
 
-function eowbc_do_deactivate( cbs, saved_tab_key ) {
+function eowbc_do_deactivate( cbs, saved_tab_key, complete_callback ) {
     ids = [];
     for(var i=0; i<cbs.length; i++) {
         ids.push( jQuery(cbs[i]).val() );
@@ -493,6 +565,8 @@ function eowbc_do_deactivate( cbs, saved_tab_key ) {
         },
         complete:function(xhr,status){
             /*console.log(xhr);*/
+
+            complete_callback();
         }
     });
 
