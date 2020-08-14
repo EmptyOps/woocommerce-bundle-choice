@@ -27,7 +27,7 @@ class Product {
             $this->eo_wbc_add_breadcrumb();    //Add Breadcrumb
                         
         // } elseif (get_option('eo_wbc_pair_status',false)=='1') {
-        } elseif (wbc()->options->get_option('configuration','pair_maker_status',false)=='1') {
+        } elseif (wbc()->options->get_option('configuration','enable_make_pair',false)=='1') {
             $this->eo_wbc_make_pair();
         }  
         do_action('wbc_pre_product_page');        
@@ -37,7 +37,9 @@ class Product {
     }    
 
     public function specification_view() {
-        if( (!isset($_GET['EO_WBC']) and wbc()->options->get_option('tiny_features','specification_view_status',false) and wbc()->options->get_option('tiny_features','specification_view_default_status',false)) or ( isset($_GET['EO_WBC']) and wbc()->options->get_option('appearance_product_page','show_spec_view_in_pair_builder','1') ) ){
+        $bonus_features = array_filter(unserialize(wbc()->options->get_option('setting_status_setting_status_setting','bonus_features',serialize(array()))));
+
+        if( ( !isset($_GET['EO_WBC']) and !empty($bonus_features['spec_view_item_page']) ) /*(!isset($_GET['EO_WBC']) and wbc()->options->get_option('tiny_features','specification_view_status',false) and wbc()->options->get_option('tiny_features','specification_view_default_status',false))*/ or ( isset($_GET['EO_WBC']) and wbc()->options->get_option('appearance_product_page','show_spec_view_in_pair_builder','1') ) ){
 
             add_action('woocommerce_after_single_product_summary',function(){
                 wbc()->load->template('publics/features/specification_view');            
@@ -47,7 +49,13 @@ class Product {
     }
 
     public function product_options_view() {
-        \eo\wbc\controllers\publics\Options::instance()->run();        
+
+        $bonus_features = array_filter(unserialize(wbc()->options->get_option('setting_status_setting_status_setting','bonus_features',serialize(array()))));
+
+        if( ( !isset($_GET['EO_WBC']) and !empty($bonus_features['opts_uis_item_page']) )/*(!isset($_GET['EO_WBC']) and wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_status',false))*/ or ( isset($_GET['EO_WBC']) and wbc()->options->get_option('appearance_product_page','show_options_ui_in_pair_builder','1') ) ){
+
+            \eo\wbc\controllers\publics\Options::instance()->run();        
+        }
     }
     
     //It's just temporary fix so we need strong model to handle this changes.
@@ -183,6 +191,24 @@ class Product {
     public function eo_wbc_render()
     {   
         $redirect_url = $this->eo_wbc_product_route();
+        wbc()->theme->load('css','product');
+        wbc()->theme->load('js','product');
+        /*Hide sidebar and make content area full width.*/
+        add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
+            return array( false );
+        });
+        ob_start();        
+        ?>
+        <style type="text/css">
+            .woocommerce .content-area ,#content,#primary,#main,.content,.primary,.main{
+                  width: 100% !important;
+             }
+             .woocommerce .widget-area {
+                  display: none !important;
+             }
+        </style>
+        <?php
+        echo ob_get_clean();
         
         //Registering Scripts : JavaScript
         add_action( 'wp_enqueue_scripts',function() use(&$redirect_url){
@@ -210,7 +236,7 @@ class Product {
         });
           
         //Adding own ADD_TO_CART_BUTTON
-        add_action('wp_footer',function(){   
+        add_action('wp_footer',function(){               
             echo "<style>.double-gutter .tmb{ width: 50%;display: inline-flex; }</style>";         
             $category = $this->eo_wbc_get_category();
             $btn_text = '';
@@ -227,19 +253,33 @@ class Product {
             if(empty($btn_text)){
                 $btn_text = 'Continue';
             }
-        ?>
-        <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
-        <script type="text/javascript">
-            jQuery(".single_add_to_cart_button.button.alt").ready(function(){
-                jQuery('form.cart').prepend("<input type='hidden' name='eo_wbc_target' value='<?php echo $this->eo_wbc_get_category(); ?>'/><input type='hidden' name='eo_wbc_product_id' value='<?php global $post; echo $post->ID; ?>'/>");
-                jQuery(".single_add_to_cart_button.button.alt:not(.disabled)").replaceWith(
-                     "<button href='#' id='eo_wbc_add_to_cart' class='single_add_to_cart_button button alt'>"
-                     +"<?php echo $btn_text; ?>"
-                     +"</button>"
-                    );
-                });
-        </script>
-       <?php    
+            ?>
+            <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
+            <script type="text/javascript">
+                jQuery(".single_add_to_cart_button.button.alt").ready(function(){
+                    jQuery('form.cart').prepend("<input type='hidden' name='eo_wbc_target' value='<?php echo $this->eo_wbc_get_category(); ?>'/><input type='hidden' name='eo_wbc_product_id' value='<?php global $post; echo $post->ID; ?>'/>");
+                    jQuery(".single_add_to_cart_button.button.alt:not(.disabled):eq(0)").replaceWith(
+                         "<button href='#' id='eo_wbc_add_to_cart' class='single_add_to_cart_button button alt'>"
+                         +"<?php echo $btn_text; ?>"
+                         +"</button>"
+                        );
+                    });
+            </script>
+            
+            <?php 
+            
+            if(
+                (wbc()->options->get_option('appearance_product_page','product_page_hide_first_variation_form',false) and $category == wbc()->options->get_option('configuration','first_slug')) or wbc()->options->get_option('appearance_product_page','product_page_hide_second_variation_form',false) and $category == wbc()->options->get_option('configuration','second_slug')
+            ): ?>
+            <style>
+                .variations_form table.variations{
+                    display:none !important;
+                }
+            </style>
+            <?php endif ?>
+
+            
+           <?php    
        });
     }
     

@@ -20,7 +20,7 @@ class Category {
     }
 
     public function init() {        
-
+       
         //If add to cart triggred
         // Detection : only one category item get length > 0 
         //   i.e. using XOR check if only one of two have been set.
@@ -35,6 +35,34 @@ class Category {
               OR
             $this->eo_wbc_get_category()== wbc()->options->get_option('configuration','second_slug'))) and !empty(wbc()->sanitize->get('EO_WBC')) ) or $this->is_shop_cat_filter===true or $this->is_shortcode_filter //get_option('eo_wbc_second_slug')
         ){
+            
+            /*Hide the category Title*/
+            add_filter( 'woocommerce_page_title','__return_false');
+
+            /*Hide sidebar and make content area full width.*/            
+            add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
+                return array( false );
+            });
+            ob_start();        
+            ?>
+            <style type="text/css">
+                .woocommerce-products-header__title page-title{
+                    display: none;
+                }
+                .woocommerce .content-area ,#content,#primary,#main,.content,.primary,.main{
+                      width: 100% !important;
+                 }
+                 .woocommerce .widget-area {
+                      display: none !important;
+                 }
+                 .tax-product_cat .thb-shop-title {
+                  display: none;
+                }
+            </style>
+            <?php
+            echo ob_get_clean();
+            /*End --Hide sidebar and make content area full width.*/
+
             //if( get_option('eo_wbc_filter_enable')=='1' ){
             /*wbc()->options->update_option('filters_filter_setting','config_filter_status','config_filter_status');*/
 
@@ -147,7 +175,14 @@ class Category {
 
     public function eo_wbc_render()
     {   
-        if( wbc()->options->get_option('configuration','pair_maker_status',FALSE)/*get_option('eo_wbc_pair_maker_status',FALSE)*/ && isset($_GET) && !empty(wbc()->sanitize->get('STEP')) && wbc()->sanitize->get('STEP')==2 && (empty(wbc()->sanitize->get('FIRST')) XOR empty(wbc()->sanitize->get('SECOND'))) ) {
+        $features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())));
+        
+        wbc()->theme->load('css','category');
+        wbc()->theme->load('js','category');
+
+        if( !empty($features['pair_maker'])/*get_option('eo_wbc_pair_maker_status',FALSE)*/ && isset($_GET) && !empty(wbc()->sanitize->get('STEP')) && wbc()->sanitize->get('STEP')==2 && (empty(wbc()->sanitize->get('FIRST')) XOR empty(wbc()->sanitize->get('SECOND'))) ) {
+
+            
 
             add_action( 'wp_enqueue_scripts',function(){ 
                 // wp_register_style('eo_wbc_ui_css',plugin_dir_url(EO_WBC_PLUGIN_FILE).'asset/css/fomantic/semantic.min.css');
@@ -172,7 +207,7 @@ class Category {
             });
 
             add_action('wp_footer',function(){
-                wbc()->load->template('publics/category', array()); 
+                wbc()->load->template('publics/category', array('category_object'=>$this)); 
             });
 
         } else {
@@ -289,7 +324,12 @@ class Category {
     public function eo_wbc_get_category()
     {   
         
-        return wbc()->common->get_category('category',null,array(wbc()->options->get_option('configuration','first_slug'),wbc()->options->get_option('configuration','second_slug')));
+        if( !($this->is_shop_cat_filter && is_shop())/*when the is_shop_cat_filter flag is on and it is shop page then it generates warnings on below statement so excluded that as category is unnecessary by any means in that case.*/ ) {
+            return wbc()->common->get_category('category',null,array(wbc()->options->get_option('configuration','first_slug'),wbc()->options->get_option('configuration','second_slug')));
+        }
+        else {
+            return null;
+        }
         global $wp_query;        
         
         //get list of slug which are ancestors of current page item's category

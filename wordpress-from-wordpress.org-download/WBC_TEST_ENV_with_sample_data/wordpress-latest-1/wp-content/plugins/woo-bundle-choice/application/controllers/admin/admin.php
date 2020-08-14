@@ -26,7 +26,16 @@ class Admin {
 
 	public static function process(){
 
-		do_action( 'wbc_before_admin_process_request' );		
+		do_action( 'wbc_before_admin_process_request' );
+
+		//Hook to update product prices as per the price control feature on the product update feature.
+		
+		$bonus_features = array_filter(unserialize(wbc()->options->get_option('setting_status_setting_status_setting','bonus_features',serialize(array()))));
+        if(!empty($bonus_features['price_control'])){
+            wbc()->load->model('admin/eowbc_price_control_save_update_prices');
+			add_action( 'save_post',array(\eo\wbc\model\admin\Eowbc_Price_Control_Save_Update_Prices::instance(),'update_prices'),10,3);
+        }
+		 		
 		
 		
 		if(!empty(wbc()->sanitize->get('page')) and wbc()->sanitize->get('page')=='eowbc' and ( (!empty(wbc()->sanitize->get('eo_wbc_view_auto_jewel')) and wbc()->sanitize->get('eo_wbc_view_auto_jewel') == 1) or (!empty(wbc()->sanitize->get('eo_wbc_view_auto_textile')) and wbc()->sanitize->get('eo_wbc_view_auto_textile') == 1) ) ){        	
@@ -35,12 +44,29 @@ class Admin {
         		//	perform initial task
 				self::instance()->init();
 
-        		// apply_filters('eo_wbc_admin_sample_data_add_jewelry',array(\eo\wbc\controllers\admin\sample_data\Jewelry::instance(),'init'));	
-        		\eo\wbc\controllers\admin\sample_data\Jewelry::instance()->init();
+				if( !empty(wbc()->sanitize->get('f')) ) {
+
+					$enabled_features = explode(",", wbc()->sanitize->get('f'));
+
+	        		// // apply_filters('eo_wbc_admin_sample_data_add_jewelry',array(\eo\wbc\controllers\admin\sample_data\Jewelry::instance(),'init'));	
+	        		// \eo\wbc\controllers\admin\sample_data\Jewelry::instance()->init();
+	        		// TODO here we need to clean and accurate session management to call the second feature's sample data process after the first is done in case there are more than one feature enabled or simply we can do url management to pass the remaining features in a get param. -- We must do this when add sample data for features that can be enabled together.  
+	        		foreach ($enabled_features as $efk => $efv) {
+	        			if( in_array($efv, wbc()->config->get_available_samples()) ) {
+		        			$class = str_replace(" ", "_", ucwords( str_replace("_", " ", $efv) ) );
+		        			$class = '\\eo\\wbc\\controllers\\admin\\sample_data\\' . $class;
+	        				if( class_exists($class) ) {
+		        				$class::instance()->init();	
+		        				break;
+	        				}
+	        			}
+	        		}
+				}
+        		
         	}
         } else {
 
-        	        	//	show/render menu and pages
+        	//	show/render menu and pages
 			self::instance()->menu();
 
 			if(!empty(wbc()->sanitize->get('page')) and wbc()->sanitize->get('page')=='eowbc' and !empty(wbc()->sanitize->get('wbc_setup')) ) {

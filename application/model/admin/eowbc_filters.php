@@ -9,7 +9,9 @@ namespace eo\wbc\model\admin;
 
 defined( 'ABSPATH' ) || exit;
 
-class Eowbc_Filters {
+wbc()->load->model('admin/eowbc_model');
+
+class Eowbc_Filters extends Eowbc_Model {
 
 	private static $_instance = null;
 
@@ -319,36 +321,38 @@ class Eowbc_Filters {
         return $res;
 	}
 
-	public function delete( $ids, $saved_tab_key ,$by_key=false) {
+	public function delete( $ids, $saved_tab_key /*,$by_key=false*/, $check_by_id=false ) {
 		
-		$res = array();
-		$res["type"] = "success";
-	    $res["msg"] = "";
+		// $res = array();
+		// $res["type"] = "success";
+	 //    $res["msg"] = "";
 	    
-    	$key = $saved_tab_key;
+  //   	$key = $saved_tab_key;
    	
-		$filter_data = unserialize(wbc()->options->get_option_group('filters_'.$key,"a:0:{}"));
-		$filter_data_updated = array();
+		// $filter_data = unserialize(wbc()->options->get_option_group('filters_'.$key,"a:0:{}"));
+		// $filter_data_updated = array();
         
-        $delete_cnt = 0;
-        $res["ids"] = $ids;
-        $res['filters'] = $filter_data;
-        foreach ($filter_data as $fdkey=>$item) {
+  //       $delete_cnt = 0;
+  //       $res["ids"] = $ids;
+  //       $res['filters'] = $filter_data;
+  //       foreach ($filter_data as $fdkey=>$item) {
             
-            if($by_key and !in_array($fdkey, $ids)) {
-            	$filter_data_updated[wbc()->common->createUniqueId()] = $item; 
-            } elseif ( !$by_key and !in_array($item[$key."_filter"], $ids) ) { 
-                $filter_data_updated[wbc()->common->createUniqueId()] = $item; 
-            }
-            else {
-            	$delete_cnt++;
-            }
-        }
+  //           if($by_key and !in_array($fdkey, $ids)) {
+  //           	$filter_data_updated[wbc()->common->createUniqueId()] = $item; 
+  //           } elseif ( !$by_key and !in_array($item[$key."_filter"], $ids) ) { 
+  //               $filter_data_updated[wbc()->common->createUniqueId()] = $item; 
+  //           }
+  //           else {
+  //           	$delete_cnt++;
+  //           }
+  //       }
 
-        wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data_updated) );
-        $res["msg"] = $delete_cnt . " " . eowbc_lang('record(s) deleted'); 
+  //       wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data_updated) );
+  //       $res["msg"] = $delete_cnt . " " . eowbc_lang('record(s) deleted'); 
 
-        return $res;
+  //       return $res;
+
+		return parent::delete( $ids, 'filters_'.$saved_tab_key/*, $by_key*/, $check_by_id );
 	}
 
 	public function activate( $ids, $saved_tab_key ,$by_key=false) {
@@ -414,6 +418,7 @@ class Eowbc_Filters {
 	public function fetch_filter(&$res) {
 		$first = unserialize(wbc()->options->get_option_group('filters_'.$this->tab_key_prefix.'d_fconfig'));
 		$second = unserialize(wbc()->options->get_option_group('filters_'.$this->tab_key_prefix.'s_fconfig'));
+
 		if(!empty($first[$_POST['id']])){
 			$res['msg'] = json_encode($first[$_POST['id']]);
 		} elseif (!empty($second[$_POST['id']])) {

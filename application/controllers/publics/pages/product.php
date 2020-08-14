@@ -27,7 +27,7 @@ class Product {
             $this->eo_wbc_add_breadcrumb();    //Add Breadcrumb
                         
         // } elseif (get_option('eo_wbc_pair_status',false)=='1') {
-        } elseif (wbc()->options->get_option('configuration','pair_maker_status',false)=='1') {
+        } elseif (wbc()->options->get_option('configuration','enable_make_pair',false)=='1') {
             $this->eo_wbc_make_pair();
         }  
         do_action('wbc_pre_product_page');        

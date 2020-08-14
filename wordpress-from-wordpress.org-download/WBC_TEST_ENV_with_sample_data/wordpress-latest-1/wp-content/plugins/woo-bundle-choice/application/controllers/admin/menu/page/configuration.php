@@ -28,6 +28,7 @@ if ( ! class_exists( 'Configuration' ) ) {
 			$check_it_out_link_type = 'skip';
 			$check_it_out_link_label = 'Check it out!';
 			$check_it_out_link = '';
+			$lbl_txt = 'Congratulations! It seems that you have completed the setup process, click below link to check it out in working on your website.';
 			$active_feature = \eo\wbc\controllers\admin\menu\Admin_Menu::active_pair_builder_feature();
 			if( !empty($active_feature) && \eo\wbc\controllers\admin\menu\Admin_Menu::is_pair_builder_feature_all_setup() ) {
 			
@@ -38,11 +39,12 @@ if ( ! class_exists( 'Configuration' ) ) {
 		        }
 		        elseif( $configuration_buttons_page==1 or $configuration_buttons_page==3 ) {			
 					$check_it_out_link_type = 'link';
-					$check_it_out_link = site_url();
+					$check_it_out_link = site_url( /*'?#wbc_' only add hashtag to url if required since the user is not setting position on home page they will find our where it is displayed so unnecessarily putting #wbc_ is not good and annoying.*/);
 		        }
 		        elseif( $configuration_buttons_page==2 ) {			
 					$check_it_out_link_type = 'label';
 					$check_it_out_link_label = 'You have choose to display buttons using Shortcode only, so please go to the page in which you put the Shortcode to check it.';
+					$lbl_txt = 'Congratulations! It seems that you have completed the setup process.';
 		        }
 			}
 
@@ -56,30 +58,40 @@ if ( ! class_exists( 'Configuration' ) ) {
 												'type'=>'hidden',
 												'value'=>'',
 											),
+											'add_sample_data'=>array(
+												'label'=>'Add Sample Data',
+												'type'=>'devider',
+												// 'class'=>array('fluid'),
+												// 'size_class'=>array('eight','wide')
+											),
+											'config_automation_link'=>array(
+												'label'=>'Click here for automated configuration and setup',
+												'type'=>'link',
+												'attr'=>array("href='".admin_url('admin.php?page=eowbc&eo_wbc_view_auto_jewel=1&f='.$active_feature)."'"),
+												'class'=>array('secondary')	
+											),
 											'config_automation_visible_info'=>array(
-												'label'=>eowbc_lang('This section will help you add sample data and configurations automatically so that you can preview how it would like after complete setup.'),
+												'label'=>eowbc_lang('We recommend that you try sample data if you have not yet, in addition to providing the preview of how plugin look like on frontend of your website, sample data & configurations will also serve as boilerplate template for configuring the plugin.'),
 												'type'=>'visible_info',
 												'class'=>array('fluid', 'medium'),
 												'size_class'=>array('sixteen','wide'),
 												'inline'=>false,
 											),		
-											'config_automation_link'=>array(
-												'label'=>'Click here for automated configuration and setup',
-												'type'=>'link',
-												'attr'=>array("href='".admin_url('admin.php?page=eowbc&eo_wbc_view_auto_jewel=1')."'"),
-												'class'=>array('secondary')	
-											),
 											/*'config_save_automation'=>array(
 												'label'=>'Save',
 												'type'=>'button',				
 												'class'=>array('primary'),
 												'attr'=>array("data-action='save'")
 											)*/
-											'check_it_out_label'=>array(
-												'label'=>'Setup Done',
+											'check_it_out_status'=>array(
+												'label'=>'Setup Status',
 												'type'=>($check_it_out_link_type != 'skip' ?'devider':$check_it_out_link_type),
 												// 'class'=>array('fluid'),
 												// 'size_class'=>array('eight','wide')
+											),
+											'check_it_out_msg'=>array(
+												'label'=>$lbl_txt,
+												'type'=>($check_it_out_link_type != 'skip' ?'label':$check_it_out_link_type)
 											),
 											'check_it_out_link'=>array(
 												'label'=>$check_it_out_link_label,
@@ -127,14 +139,20 @@ if ( ! class_exists( 'Configuration' ) ) {
 										),
 									'config_devider_make_pair'=>array(
 											'label'=>'Make Pair Button',
-											'type'=>'devider',
+											'type'=>'devider'
 										),
+									'config_make_pair_visible_info'=>array( 'label'=>'Make Pair button is a interesting feature for ring builder, pair maker for clothing(be sure to not confuse pair maker with make pair button), etc. If you enable this feature the Make Pair button will appear on item page even if the user is not on the builder process e.g. on diamond page user would see "Add To Ring" button.',
+												'type'=>'visible_info',
+												'class'=>array('fluid', 'medium'),
+												'size_class'=>array('sixteen','wide'),
+											),
 									'enable_make_pair'=>array(
 											'label'=>'Enabled?',
 											'type'=>'checkbox',
-											'value'=>array(wbc()->options->get_option('configuration','enable_make_pair')),
+											'value'=>'',
 											'sanitize'=>'sanitize_text_field',
-											'options'=>array('enable_make_pair'=>'Make pair button status.'),
+											'options'=>array('1'=>'Make pair button status.'),
+											'is_id_as_name'=>true,
 											'class'=>array()
 										),
 									'label_make_pair'=>array(
@@ -146,6 +164,11 @@ if ( ! class_exists( 'Configuration' ) ) {
 											'size_class'=>array('eight','wide','required'),
 											'inline'=>true,
 										),
+									'label_make_pair_visible_info'=>array( 'label'=>'Set applicable text for button e.g. "Add to Ring" if its for jewelry site',
+												'type'=>'visible_info',
+												'class'=>array('fluid', 'small'),
+												'size_class'=>array('sixteen','wide'),
+											),
 									'config_buttons_conf_save_btn'=>array(
 												'label'=>'Save',
 												'type'=>'button',		
@@ -237,7 +260,7 @@ if ( ! class_exists( 'Configuration' ) ) {
 											'type'=>'devider',
 										),	
 									'config_alternate_breadcrumb'=>array(
-										'label'=>'Alternate Breadcrumb',
+										'label'=>'Alternate Breadcrumb Widgets',
 										'type'=>'radio',
 										'value'=>wbc()->options->get_option('configuration','config_alternate_breadcrumb','default'),
 										'validate'=>array('required'=>''),
@@ -281,16 +304,30 @@ if ( ! class_exists( 'Configuration' ) ) {
 										'size_class'=>array('eight','wide'),
 										'inline'=>true,
 									),*/
+								// 'pair_maker_upper_card'=>array(
+								// 		'label'=>'Upper card',
+								// 		'type'=>'radio',
+								// 		'value'=>wbc()->options->get_option('configuration','pair_maker_upper_card'),
+								// 		'sanitize'=>'sanitize_text_field',
+								// 		'options'=>array('first'=>'First Category','second'=>'Second Category'),
+								// 		'class'=>array(),
+								// 		'size_class'=>array('eight','wide'),
+								// 		'inline'=>true,
+								// 	),					
 								'pair_maker_upper_card'=>array(
-										'label'=>'Icon',
-										'type'=>'radio',
-										'value'=>wbc()->options->get_option('configuration','pair_maker_upper_card'),
-										'sanitize'=>'sanitize_text_field',
-										'options'=>array('first'=>'First Category','second'=>'Second Category'),
-										'class'=>array(),
-										'size_class'=>array('eight','wide'),
-										'inline'=>true,
-									),								
+									'label'=>'Upper Card',
+									'type'=>'radio',
+									'value'=>'1',
+									'sanitize'=>'sanitize_text_field',
+									'options'=>array('1'=>'First Category','2'=>'Second Category'),
+									'class'=>array(),										
+									'size_class'=>array(),
+									'visible_info'=>array( 'label'=>'Mark the category\'s card to be always shown at top of other. For example, in clothing should be a top wear category, so you should select either first or second category here based on where you set top wear category i.e. if it is first category setting in navigation or second.',
+										'type'=>'visible_info',
+										'class'=>array('fluid', 'small'),
+										'size_class'=>array('sixteen','wide'),
+									),	
+								),				
 								'config_extra_conf_save_btn'=>array(
 											'label'=>'Save',
 											'type'=>'button',		

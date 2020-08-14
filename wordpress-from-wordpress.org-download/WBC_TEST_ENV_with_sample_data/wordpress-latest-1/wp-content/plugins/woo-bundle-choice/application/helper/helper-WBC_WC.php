@@ -231,4 +231,7 @@ class WBC_WC {
         }
     } 
 
+    public function get_currency_symbol() {
+        return get_woocommerce_currency_symbol();
+    }
 }

@@ -92,7 +92,7 @@ class n_p_frontendFunctionalityModificationsCest extends n_f_adminSideSetupCest
                             array( 'text' ), 
                             array('select', 'select'), );
         $val = array( 
-                            array('1','51','69','34'/*here we set the radiant setting but in reality there should be category of ring that belongs to diamond in carata range for example from 0.75 to 1.25 carat */), 
+                            array('1','51','69','34'/*here we set the radiant setting but in reality there should be category of ring that belongs to diamond in carat range for example from 0.75 to 1.25 carat */), 
                             array( '15' ), 
                             array('96','36') );
         $field_dropdown_div_id=array( 
@@ -103,9 +103,14 @@ class n_p_frontendFunctionalityModificationsCest extends n_f_adminSideSetupCest
         //TODO set xpath and other params for verification
             // verify new carat based mapping works or not by filtering based on carat on first step and than verifying matching results on second step
             // verify discount works or not by filtering based on discounted mapping on first step and than verifying matching results on second step
+                // ask mahesh if discount feature is implemented yet or not, I think its not. 
             // verify any specific custom mapping works or not by filtering based on custom mapping on first step and than verifying matching results on second step
-        $filter_before_verification = array( array( array('type'=>'click', 'xpath_or_text_or_css'=>''), array('type'=>'executeJS', 'js'=>'') ) );
-        $verifications = array( array( array('type'=>'see', 'text'=>''), array('type'=>'see_in_js', 'text'=>'') ) );
+        $filter_before_verification = array( 
+                                            array( array('type'=>'click--', 'xpath_or_text_or_css'=>''), array('type'=>'executeJS', 'js'=>"jQuery('#text_slider_pa_eo_carat_attr').slider('set rangeValue', 0.2, 2);") ) 
+                                        );
+        $verifications = array( 
+                                array( array('type'=>'see', 'text'=>'Setting #0412854474'), array('type'=>'see_in_js--', 'text'=>'') ) 
+                            );
 
 
         // change random functionalities

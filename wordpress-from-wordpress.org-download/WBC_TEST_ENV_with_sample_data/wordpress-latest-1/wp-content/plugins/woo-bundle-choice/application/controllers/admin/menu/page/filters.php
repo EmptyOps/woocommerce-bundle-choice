@@ -59,6 +59,10 @@ if ( ! class_exists( 'Filters' ) ) {
 			wbc()->load->model('admin/form-builder');
 			wbc()->load->model('category-attribute');
 			$inventory_type = wbc()->options->get_option('setting_status_setting_status_setting','inventory_type','');			
+			
+			$features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())));
+
+			$is_ring_builder = (!empty($features['ring_builder']));
 			//Diamond Page Filter Configuration's list
 			$table = array();
 			$table['id']='eowbc_price_control_methods_list';
@@ -270,7 +274,7 @@ if ( ! class_exists( 'Filters' ) ) {
 									'type'=>'checkbox',
 									'sanitize'=>'sanitize_text_field',
 									'value'=>array('filter_setting_status'),
-									'options'=>array('filter_setting_status'=>' Check here to enable horizontal filter bar at category page.'),
+									'options'=>array('filter_setting_status'=>' Check here to enable horizontal filter bar'),
 									'class'=>array(),
 									'size_class'=>array('eight','wide'),
 									'inline'=>true,
@@ -286,15 +290,128 @@ if ( ! class_exists( 'Filters' ) ) {
 								'inline'=>true,
 							),								
 							'filter_setting_alternate_slider_ui'=>array(
-								'label'=>'Alternate ticked slider UI',
+								'label'=>'Alternate Ticked Slider Widget',
 								'type'=>'checkbox',
 								'sanitize'=>'sanitize_text_field',
 								'value'=>array(wbc()->options->get_option('filters_filter_setting','filter_setting_alternate_slider_ui')),
-								'options'=>array('filter_setting_alternate_slider_ui'=>' Check here to enable alternate UI for filter sliders.'),
+								'options'=>array('filter_setting_alternate_slider_ui'=>' Check here to enable alternate UI view for filter sliders.'),
 								'class'=>array(),
 								'size_class'=>array('eight','wide'),
 								'inline'=>true,
-							),						
+							),
+							'filter_setting_numeric_slider_seperator'=>array(
+								'label'=>'Numeric Filter Separator',
+								'type'=>'text',
+								'sanitize'=>'sanitize_text_field',
+								'value'=>'.',
+								'class'=>array(),
+								'size_class'=>array('eight','wide'),
+								'inline'=>true,
+							),
+							'filter_setting_slider_max_lblsize'=>array(
+								'label'=>'Slider Options Text Limit',
+								'type'=>'text',
+								'sanitize'=>'sanitize_text_field',
+								'value'=>'6',
+								'class'=>array(),
+								'size_class'=>array('eight','wide'),
+								'inline'=>false,
+								'visible_info'=>array( 
+									'label'=>eowbc_lang('You can truncate longer option texts that are displayed for filters of input type slider. The maximum number characters that will be displayed on your website filters depend on the integer value you set here. '),
+									'type'=>'visible_info',
+									'class'=>array('small'),
+									// 'size_class'=>array('sixteen','wide'),
+								),
+							),
+							'filter_setting_btnfilter_now'=>array(
+								'label'=>'Show Apply & Reset Filters Button',
+								'type'=>'checkbox',
+								'sanitize'=>'sanitize_text_field',
+								'value'=>array(),
+								'options'=>array('filter_setting_btnfilter_now'=>' '),
+								'class'=>array(),
+								'size_class'=>array('eight','wide'),
+								'inline'=>true,
+								'visible_info'=>array( 
+									'label'=>eowbc_lang('If enabled the ajax search on each change of filter will not fire but the Apply Filters and Reset Filters buttons will be displayed. This is useful if your website has many filters and user would normally filter on many of them.'),
+									'type'=>'visible_info',
+									'class'=>array('small'),
+									'size_class'=>array('eight','wide'),
+								),
+							),								
+							
+							'price_filter_first_cat'=>array(
+								'label'=>'First Category',
+								'type'=>'devider',
+							),
+							'hide_price_filter_first_cat'=>array(
+								'label'=>'Hide Price Filter',
+								'type'=>'checkbox',
+								'sanitize'=>'sanitize_text_field',
+								'value'=>'',
+								'options'=>array('1'=>' Hide Price Filter for First Category?'),
+								'is_id_as_name'=>true,
+								'class'=>array(),
+								'size_class'=>array('eight','wide'),
+								'inline'=>true,
+							),	
+							'price_filter_order_first_cat'=>array(
+								'label'=>'Display Order',
+								'type'=>'text',
+								'sanitize'=>'sanitize_text_field',
+								'value'=>'',
+								'class'=>array(),
+								'size_class'=>array('two','wide'),
+								'inline'=>true,
+							),		
+							'price_filter_second_cat'=>array(
+								'label'=>'Second Category',
+								'type'=>'devider',
+							),
+							'hide_price_filter_second_cat'=>array(
+								'label'=>'Hide Price Filter',
+								'type'=>'checkbox',
+								'sanitize'=>'sanitize_text_field',
+								'value'=>'',
+								'options'=>array('1'=>' Hide Price Filter for Second Category?'),
+								'is_id_as_name'=>true,
+								'class'=>array(),
+								'size_class'=>array('eight','wide'),
+								'inline'=>true,
+							),	
+							'price_filter_order_second_cat'=>array(
+								'label'=>'Display Order',
+								'type'=>'text',
+								'sanitize'=>'sanitize_text_field',
+								'value'=>'',
+								'class'=>array(),
+								'size_class'=>array('two','wide'),
+								'inline'=>true,
+							),
+							'price_filter_prefix_postfix_devider'=>array(
+								'label'=>' ',
+								'type'=>'devider',
+							),		
+							'price_filter_prefix'=>array(
+								'label'=>'Prefix currency symbol for price filter',
+								'type'=>'checkbox',
+								'sanitize'=>'sanitize_text_field',
+								'value'=>array(),
+								'options'=>array('price_filter_prefix'=>'Add Prefix'),
+								'class'=>array(),
+								'size_class'=>array('eight','wide'),
+								'inline'=>true,								
+							),
+							'price_filter_postfix'=>array(
+								'label'=>'Postfix currency symbol for price filter',
+								'type'=>'checkbox',
+								'sanitize'=>'sanitize_text_field',
+								'value'=>array(),
+								'options'=>array('price_filter_postfix'=>'Add Postfix'),
+								'class'=>array(),
+								'size_class'=>array('eight','wide'),
+								'inline'=>true,								
+							),
 							'filter_setting_submit_btn'=>array(
 								'label'=>eowbc_lang('Save'),
 								'type'=>'button',								
@@ -365,7 +482,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							),
 						),
 						'filter_setting_alternate_mobile'=>array(
-								'label'=>'Alternate mobile filters view',
+								'label'=>'Alternate Mobile Filter Widget',
 								'type'=>'checkbox',
 								'sanitize'=>'sanitize_text_field',
 								'value'=>array(wbc()->options->get_option('filters_filter_setting','filter_setting_alternate_mobile')),
@@ -386,7 +503,7 @@ if ( ! class_exists( 'Filters' ) ) {
 				),							
 				'd_fconfig'=>array(
 
-						'label'=>($inventory_type==='jewelry'?"Diamond":"First")." Page Filter Configuration",
+						'label'=>(($inventory_type==='jewelry' and $is_ring_builder)?"Diamond":"First")." Page Filter Configuration",
 						'form'=>array( $table["id"].'_bulk'=>array(
 								// 'label'=>'Bulk Actions',
 								'type'=>'select',
@@ -411,7 +528,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'type'=>'table' )
 							), 
 							'd_fconfig_save_sec_title'=>array(
-								'label'=>"Add Diamond Shape's filter",
+								'label'=>"Add Filter Field",
 								'type'=>'label',
 								'size_class'=>array('eight','wide')
 							),
@@ -439,7 +556,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'prev_inline'=>true,
 								// 'next_inline'=>true,
 								// 'inline'=>true,
-							),
+							),							
 							'd_fconfig_type'=>array(
 								'type'=>'hidden',
 								'value'=>'',
@@ -540,12 +657,23 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'prev_inline'=>true,
 								// 'inline'=>true,
 							),
-							
+							'd_fconfig_is_single_select'=>array(
+								'label'=>' ',
+								'type'=>'checkbox',
+								'value'=>array(),
+								'sanitize'=>'sanitize_text_field',
+								'options'=>array('1'=>'Allow only single selection.'),
+								'is_id_as_name'=>true,
+								'class'=>array('fluid'),
+								'style'=>'normal',	
+								'attr'=>array('data-toggle="d_fconfig_is_single_select"'),							
+							),
 							'd_fconfig_icon_size_label'=>array(
 								'label'=>eowbc_lang('Icon Size'),
 								'type'=>'label',
 								//'class'=>array('fluid'),
 								'size_class'=>array('three','wide','required'),
+								'attr'=>array('data-toggle="d_fconfig_icon_size_label"'),
 								// 'next_inline'=>true,
 								// 'inline'=>true,
 							),
@@ -555,6 +683,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'value'=>'0',
 								'sanitize'=>'sanitize_text_field',
 								'size_class'=>array('three','wide'),
+								'attr'=>array('data-toggle="d_fconfig_icon_size"'),
 								// 'prev_inline'=>true,
 								// 'next_inline'=>true,
 								// 'inline'=>true,
@@ -564,6 +693,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'type'=>'label',
 								//'class'=>array('fluid'),
 								'size_class'=>array('three','wide','required'),
+								'attr'=>array('data-toggle="d_fconfig_icon_label_size_label"'),
 								// 'prev_inline'=>true,
 								// 'next_inline'=>true,
 								// 'inline'=>true,
@@ -574,6 +704,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'value'=>'0',
 								'sanitize'=>'sanitize_text_field',
 								'size_class'=>array('three','wide'),
+								'attr'=>array('data-toggle="d_fconfig_icon_label_size"'),
 								// 'prev_inline'=>true,
 								// 'next_inline'=>true,
 								// 'inline'=>true,
@@ -667,7 +798,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							), 
 
 							's_fconfig_save_sec_title'=>array(
-								'label'=>"Add Setting Shape's filter",
+								'label'=>"Add Filter Field",
 								'type'=>'label',
 								'size_class'=>array('eight','wide')
 							),
@@ -696,6 +827,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'next_inline'=>true,
 								// 'inline'=>true,
 							),
+							
 							's_fconfig_type'=>array(
 							'type'=>'hidden',
 							'value'=>'',
@@ -796,12 +928,23 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'prev_inline'=>true,
 								// 'inline'=>true,
 							),
-							
+							's_fconfig_is_single_select'=>array(
+								'label'=>' ',
+								'type'=>'checkbox',
+								'value'=>array(),
+								'sanitize'=>'sanitize_text_field',
+								'options'=>array('1'=>'Allow only single selection.'),
+								'is_id_as_name'=>true,
+								'class'=>array('fluid'),
+								'style'=>'normal',								
+								'attr'=>array('data-toggle="s_fconfig_is_single_select"'),
+							),
 							's_fconfig_icon_size_label'=>array(
 								'label'=>eowbc_lang('Icon Size'),
 								'type'=>'label',
 								//'class'=>array('fluid'),
 								'size_class'=>array('three','wide','required'),
+								'attr'=>array('data-toggle="s_fconfig_icon_size_label"'),
 								// 'next_inline'=>true,
 								// 'inline'=>true,
 							),
@@ -811,6 +954,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'value'=>'0',
 								'sanitize'=>'sanitize_text_field',
 								'size_class'=>array('three','wide'),
+								'attr'=>array('data-toggle="s_fconfig_icon_size"'),
 								// 'prev_inline'=>true,
 								// 'next_inline'=>true,
 								// 'inline'=>true,
@@ -820,6 +964,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'type'=>'label',
 								//'class'=>array('fluid'),
 								'size_class'=>array('three','wide','required'),
+								'attr'=>array('data-toggle="s_fconfig_icon_label_size_label"'),
 								// 'prev_inline'=>true,
 								// 'next_inline'=>true,
 								// 'inline'=>true,
@@ -830,6 +975,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'value'=>'0',
 								'sanitize'=>'sanitize_text_field',
 								'size_class'=>array('three','wide'),
+								'attr'=>array('data-toggle="s_fconfig_icon_label_size"')
 								// 'prev_inline'=>true,
 								// 'next_inline'=>true,
 								// 'inline'=>true,

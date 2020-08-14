@@ -430,18 +430,33 @@ class Eowbc_Filters {
 $diamond_category = get_term_by( 'slug','eo_diamond_shape_cat','product_cat');
 $setting_category = get_term_by( 'slug','eo_setting_shape_cat','product_cat');
 
-
-if((is_wp_error($diamond_category) or is_wp_error($setting_category) or empty($diamond_category) or empty($setting_category)) and !is_ajax()) {
-	ob_start();
-	?>
-		<script>
-			jQuery(document).ready(function($){
-				$("[name='first_category_altr_filt_widgts'],[name='second_category_altr_filt_widgts']").on('change',function(){
-					eowbc_toast_common('warning','For alternate widget templates to setup preview filters and make your work easy to set up them, it is recommended that you add sample data and then select and save your desired template. If the sample is not available no preview filters can be set and you will need to add filters manually.',15000);
-                    
+if( !is_ajax() ) {
+	if((is_wp_error($diamond_category) or is_wp_error($setting_category) or empty($diamond_category) or empty($setting_category))) {
+		ob_start();
+		?>
+			<script>
+				jQuery(document).ready(function($){
+					$("[name='first_category_altr_filt_widgts'],[name='second_category_altr_filt_widgts']").on('change',function(){
+						eowbc_toast_common('warning','Warning: It is recommended that you add sample data and then select and save your desired template. So that alternate widget templates can setup preview filters and make your work easy to set up them later. If the sample data is not available no preview filters can be set and you will need to add filters manually.<br><br>Also note that your existing filters will be disabled, you can enable them later at anytime by using bulk activate action.',20000);
+	                    
+					});
 				});
-			});
-		</script>
-	<?php
-	echo ob_get_clean();
+			</script>
+		<?php
+		echo ob_get_clean();
+	}
+	else {
+		ob_start();
+		?>
+			<script>
+				jQuery(document).ready(function($){
+					$("[name='first_category_altr_filt_widgts'],[name='second_category_altr_filt_widgts']").on('change',function(){
+						eowbc_toast_common('warning','Note that your existing filters will be disabled, and the new sample filters will be added. You can enable your existing filters later at anytime by using bulk activate action.',10000);
+	                    
+					});
+				});
+			</script>
+		<?php
+		echo ob_get_clean();
+	}
 }

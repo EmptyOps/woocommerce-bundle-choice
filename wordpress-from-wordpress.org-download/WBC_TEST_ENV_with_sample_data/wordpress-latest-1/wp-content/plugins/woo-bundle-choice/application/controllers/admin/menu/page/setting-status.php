@@ -19,7 +19,8 @@ class Setting_status {
 	}
 
 	public static function get_form_definition( $is_add_sample_values = false ) {
-		
+		$__features = wbc()->config->get_features();
+		unset($__features['api_integrations']);
 
 		$form_definition = array(
 					'setting_status_setting'=>array(
@@ -44,15 +45,28 @@ class Setting_status {
 								'label'=>'Choose features',
 								'type'=>'checkbox',
 								'sanitize'=>'sanitize_text_field',
-								'value'=>unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array()))),
-								'options'=>array(
-									'ring_builder'=>'Ring Builder',
-									'pair_maker'=>'Pair Maker',
+								'value'=>array(),
+								'options'=>array_replace($__features,array(									
 									'rapnet_api'=>'Rapnet (You will need paid <a href="https://sphereplugins.com/product/woocommerce-rapnet-integration-extension/" target="_blank">extension</a>)',
-									'glowstar_api'=>'GlowStart Diamond API (API service is free, but you will need paid <a href="https://sphereplugins.com/product/diamond-api-integration/" target="_blank">extension</a>)',
-									'guidance_tool'=>'Guidance Tool',
-									'price_control'=>'Price Control'
-									),
+									'glowstar_api'=>'GlowStar Diamond API (API service is free, but you will need paid <a href="https://sphereplugins.com/product/diamond-api-integration/" target="_blank">extension</a>)',
+									'jbdiamond_api'=>'JB Diamond API (API service is free, but you will need paid <a href="https://sphereplugins.com/product/diamond-api-integration/" target="_blank">extension</a>)',
+									'srk_api'=>'SRK Diamond API (API service is free, but you will need paid <a href="https://sphereplugins.com/product/diamond-api-integration/" target="_blank">extension</a>)',		
+									)),
+								'class'=>array('fluid'),
+								'size_class'=>array('eight','wide'),
+								'inline'=>true,
+								'grouped'=>true
+							),
+							'bonus_feature_devider'=>array(
+								'label'=>eowbc_lang('Bonus Features'),
+								'type'=>'devider',
+							),
+							'bonus_features'=>array(
+								'label'=>'Choose Bonus features',
+								'type'=>'checkbox',
+								'sanitize'=>'sanitize_text_field',
+								'value'=>array(),
+								'options'=>wbc()->config->get_bonus_features(),
 								'class'=>array('fluid'),
 								'size_class'=>array('eight','wide'),
 								'inline'=>true,

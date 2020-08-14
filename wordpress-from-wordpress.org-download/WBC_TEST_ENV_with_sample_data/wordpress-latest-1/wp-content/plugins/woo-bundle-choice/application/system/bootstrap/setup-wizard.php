@@ -14,6 +14,10 @@ class Setup_Wizard {
 		if ( ! isset( self::$_instance ) ) {
 			self::$_instance = new self;
 		}
+
+		self::$_instance->available_sample = wbc()->config->get_available_samples();
+		self::$_instance->available_feature = wbc()->config->get_all_feature();
+
 		return self::$_instance;
 	}
 
@@ -31,6 +35,7 @@ class Setup_Wizard {
 		$this->step = 1;
 		$this->form = 'basic_config';
 		$feature_option = array();
+		$bonus_features = array();
 
 		if(!empty(wbc()->sanitize->get('_wpnonce')) and wp_verify_nonce(sanitize_text_field(wbc()->sanitize->get('_wpnonce')),'eo_wbc_setup')){
 			
@@ -47,9 +52,11 @@ class Setup_Wizard {
 
 		}
 
-		if( $this->step == 2 ) {
+		if( $this->step == 2 or $this->step == 3 ) {
 
-			$feature_option = unserialize( wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())) );	//unserialize(get_option('eo_wbc_feature_option', serialize(array())) );
+			$bonus_features = array_filter(unserialize(wbc()->options->get_option('setting_status_setting_status_setting','bonus_features',serialize(array()))));	
+
+			$feature_option = (unserialize( wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())) ));	//unserialize(get_option('eo_wbc_feature_option', serialize(array())) );
 
 		}
 
@@ -64,7 +71,7 @@ class Setup_Wizard {
 		// echo ob_get_clean();
   //       exit();
 
-		$callback = $this->get_page( $this->step, $this->form, $feature_option );
+		$callback = $this->get_page( $this->step, $this->form, $feature_option,$bonus_features );
 
 		$position = empty($menu['position'])?66:$menu['position'];
 
@@ -77,22 +84,27 @@ class Setup_Wizard {
 		return esc_url(apply_filters( 'eowbc_icon_url',constant('EOWBC_ICON')));
 	}
 
-	public function get_page(int $step, string $template, array $feature_option){
+	public function get_page(int $step, string $template, array $feature_option, array $bonus_features){
 
 		$template = empty($template)?'':$template;
 		$callback = (empty($template)?'':function() use(&$step, &$template, &$feature_option){
 
+
+
+
+
+
 			wbc()->load->template('admin/menu/page/header-part',array( "mode"=>"setup_wizard" ));
-			wbc()->load->template('admin/setup-wizard/setup-wizard',array( "step"=>$step, "template"=>$template, "feature_option"=>$feature_option ) );			
+			wbc()->load->template('admin/setup-wizard/setup-wizard',array( "step"=>$step, "template"=>$template, "feature_option"=>$feature_option,'bonus_features'=>$bonus_features,'available_sample'=>$this->available_sample,'available_feature'=>$this->available_feature ) );			
 			wbc()->load->template('admin/menu/page/footer-part',array( "mode"=>"setup_wizard" ));
 		});
 		return $callback;
 	}
 
-	public function load_page(int $step, string $template, array $feature_option){
-		
+	public function load_page(int $step, string $template, array $feature_option, array $bonus_features){
+
 		wbc()->load->template('admin/menu/page/header-part',array( "mode"=>"setup_wizard" ));
-		wbc()->load->template('admin/setup-wizard/setup-wizard',array( "step"=>$step, "template"=>$template, "feature_option"=>$feature_option ) );			
+		wbc()->load->template('admin/setup-wizard/setup-wizard',array( "step"=>$step, "template"=>$template, "feature_option"=>$feature_option,"bonus_features"=>$bonus_features,'available_sample'=>$this->available_sample,'available_feature'=>$this->available_feature ) );			
 		wbc()->load->template('admin/menu/page/footer-part',array( "mode"=>"setup_wizard" ));
 		
 	}
@@ -102,6 +114,7 @@ class Setup_Wizard {
 		$this->step = 1;
 		$this->form = 'basic_config';
 		$feature_option = array();
+		$bonus_features = array();
 
 		if(!empty(wbc()->sanitize->get('_wpnonce')) and wp_verify_nonce(wbc()->sanitize->get('_wpnonce'),'eo_wbc_setup')){
 			
@@ -118,9 +131,11 @@ class Setup_Wizard {
 
 		}
 
-		if( $this->step == 2 ) {
+		if( $this->step == 2 or $this->step == 3 ) {
 
-			$feature_option = unserialize( wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())) );	//unserialize(get_option('eo_wbc_feature_option', serialize(array())) );
+			$bonus_features = array_filter(unserialize(wbc()->options->get_option('setting_status_setting_status_setting','bonus_features',serialize(array()))));	
+
+			$feature_option = (unserialize( wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())) ));	//unserialize(get_option('eo_wbc_feature_option', serialize(array())) );
 		}
 
 		//06-04-2020: hiren turned off full screen mode enable in future when decided 
@@ -134,7 +149,7 @@ class Setup_Wizard {
 		// //render form page 
 		// call_user_func(array($this,$this->form));
 		// $this->footer();
-		$this->load_page( $this->step, $this->form, $feature_option );
+		$this->load_page( $this->step, $this->form, $feature_option ,$bonus_features);
 
 		echo ob_get_clean();
         exit();
@@ -154,7 +169,7 @@ class Setup_Wizard {
 						if(!empty(wbc()->sanitize->get($option))) {
 							// instead of push set the option as key and in val 1 since at every other place in plugin it is assumed like that
 							// array_push($feature_option,$option);							
-							$feature_option[$option] = 1;
+							$feature_option[$option] = $option;
 						}						
 					}											
 
@@ -164,6 +179,18 @@ class Setup_Wizard {
 
 						wbc()->options->update_option('setting_status_setting_status_setting','features', serialize($feature_option));
 					// }
+
+					$bonus_options = ['filters_shortcode','filters_shop_cat','opts_uis_item_page','spec_view_item_page','price_control'];
+					$bonus_feature_option= array();
+					foreach ($bonus_options as $option) {
+						if(!empty(wbc()->sanitize->get($option))) {
+							// instead of push set the option as key and in val 1 since at every other place in plugin it is assumed like that
+							// array_push($feature_option,$option);							
+							$bonus_feature_option[$option] = $option;
+						}						
+					}
+
+					wbc()->options->update_option('setting_status_setting_status_setting','bonus_features', serialize($bonus_feature_option));
 
 					break;
 				case 'final':
