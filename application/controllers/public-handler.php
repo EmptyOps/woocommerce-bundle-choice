@@ -43,6 +43,13 @@ class Public_Handler {
 
 			    \eo\wbc\controllers\publics\pages\Product_Question::instance()->init();
 			}
+			
+			if(is_product() and wbc()->options->get_option('tiny_features','tiny_features_hide_sku_category_product_page',false)) {
+				
+				remove_action( 'woocommerce_single_product_summary',
+'woocommerce_template_single_meta', 40 );
+				add_filter( 'wc_product_sku_enabled', '__return_false' );
+			}
 		});
 
 		//	Strart frontend seervices

@@ -22,4 +22,8 @@
 	.eo_wbc_filter_icon{
 		font-size: x-small !important;
 	}
+	
+	.top-ticker{
+		display:none;
+	}
 </style>

@@ -70,7 +70,11 @@
 					if(_labels != undefined && _labels != false){
 
 						_labels=_labels.split(',');
-						_params.interpretLabel=function(value){ 							
+						_params.interpretLabel=function(value){ 						
+							_labels = $(e).attr('data-labels');
+							_labels=_labels.split(',');
+							/*console.log(value);
+							console.log(_labels);*/
 							if(_labels!=undefined){
 								let _label_value = _labels[value];
 								if(_label_value.length><?php _e((int)wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_slider_max_lblsize',6)) ?>){

@@ -6,4 +6,7 @@
 	#main-content .container{
 		padding-top: 1em !important;
 	}
+	.top-ticker{
+		display:none;
+	}
 </style>
