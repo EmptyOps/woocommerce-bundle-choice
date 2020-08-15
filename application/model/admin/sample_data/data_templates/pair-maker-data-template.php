@@ -428,7 +428,56 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                         array(
                             ['slug','wbc_diamond_cushion_shape_cat','product_cat'],
                             ['slug','wbc_setting_cushion_shape_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_top_wear_shirts_cat','product_cat'],
+                            ['slug','wbc_bottom_wear_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_top_wear_tshirts_cat','product_cat'],
+                            ['slug','wbc_bottom_wear_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_top_wear_sweaters_cat','product_cat'],
+                            ['slug','wbc_bottom_wear_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_top_wear_jackets_cat','product_cat'],
+                            ['slug','wbc_bottom_wear_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_top_wear_blazers_coats_cat','product_cat'],
+                            ['slug','wbc_bottom_wear_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_top_wear_tshirts_cat','product_cat'],
+                            ['slug','wbc_bottom_wear_track_pants_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_top_wear_hoodies_cat','product_cat'],
+                            ['slug','wbc_bottom_wear_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_top_wear_tops_cat','product_cat'],
+                            ['slug','wbc_bottom_wear_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_top_wear_tunics_cat','product_cat'],
+                            ['slug','wbc_bottom_wear_plazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_top_wear_tunics_cat','product_cat'],
+                            ['slug','wbc_bottom_wear_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_top_wear_tops_cat','product_cat'],
+                            ['slug','wbc_bottom_wear_skirts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_top_wear_tops_cat','product_cat'],
+                            ['slug','wbc_bottom_wear_leggings_cat','product_cat']
                         )
+
                     );
     }
 
@@ -640,6 +689,216 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                 'input'=>"icon",
                 'column_width'=> "50",
                 'order'=>"2",
+                'template'=>'sc1',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1
+            );
+        }
+        // Filter for top wear
+        if(!empty($__cat__['wbc_top_wear_cat'])){
+            $filter['s_fconfig'][]=array(
+                'name'=>$__cat__['wbc_top_wear_cat'][0],
+                'type'=>"0",
+                'label'=>$__cat__['wbc_top_wear_cat'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"icon_text",
+                'column_width'=> "100",
+                'order'=>"0",
+                'template'=>'sc1',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1
+            );
+        }
+        if(!empty($__cat__['wbc_cloth_size_attr'])){
+            $filter['s_fconfig'][]=array(
+                'name'=>$__cat__['wbc_cloth_size_attr'][0],
+                'type'=>"0",
+                'label'=>$__cat__['wbc_cloth_size_attr'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"text_slider",
+                'column_width'=> "50",
+                'order'=>"1",
+                'template'=>'sc1',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1
+            );
+        }
+        if(!empty($__cat__['wbc_cloth_fit_attr'])){
+            $filter['s_fconfig'][]=array(
+                'name'=>$__cat__['wbc_cloth_fit_attr'][0],
+                'type'=>"0",
+                'label'=>$__cat__['wbc_cloth_fit_attr'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"checkbox",
+                'column_width'=> "50",
+                'order'=>"2",
+                'template'=>'sc1',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1
+            );
+        }
+        if(!empty($__cat__['wbc_cloth_neck_attr'])){
+            $filter['s_fconfig'][]=array(
+                'name'=>$__cat__['wbc_cloth_neck_attr'][0],
+                'type'=>"0",
+                'label'=>$__cat__['wbc_cloth_neck_attr'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"checkbox",
+                'column_width'=> "50",
+                'order'=>"3",
+                'template'=>'sc1',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1
+            );
+        }
+        if(!empty($__cat__['wbc_cloth_occasion_attr'])){
+            $filter['s_fconfig'][]=array(
+                'name'=>$__cat__['wbc_cloth_occasion_attr'][0],
+                'type'=>"0",
+                'label'=>$__cat__['wbc_cloth_occasion_attr'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"checkbox",
+                'column_width'=> "50",
+                'order'=>"3",
+                'template'=>'sc1',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1
+            );
+        }
+        if(!empty($__cat__['wbc_cloth_sleeve_attr'])){
+            $filter['s_fconfig'][]=array(
+                'name'=>$__cat__['wbc_cloth_sleeve_attr'][0],
+                'type'=>"0",
+                'label'=>$__cat__['wbc_cloth_sleeve_attr'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"checkbox",
+                'column_width'=> "50",
+                'order'=>"5",
+                'template'=>'sc1',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1
+            );
+        }
+        if(!empty($__cat__['wbc_cloth_collar_attr'])){
+            $filter['s_fconfig'][]=array(
+                'name'=>$__cat__['wbc_cloth_sleeve_attr'][0],
+                'type'=>"0",
+                'label'=>$__cat__['wbc_cloth_sleeve_attr'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"checkbox",
+                'column_width'=> "50",
+                'order'=>"6",
+                'template'=>'sc1',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1
+            );
+        }
+        //filter for bottom wear
+        if(!empty($__cat__['wbc_bottom_wear_cat'])){
+            $filter['s_fconfig'][]=array(
+                'name'=>$__cat__['wbc_bottom_wear_cat'][0],
+                'type'=>"0",
+                'label'=>$__cat__['wbc_bottom_wear_cat'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"icon_text",
+                'column_width'=> "100",
+                'order'=>"7",
+                'template'=>'sc1',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1
+            );
+        }
+        if(!empty($__cat__['wbc_cloth_closure_type_attr'])){
+            $filter['s_fconfig'][]=array(
+                'name'=>$__cat__['wbc_cloth_closure_type_attr'][0],
+                'type'=>"0",
+                'label'=>$__cat__['wbc_cloth_closure_type_attr'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"checkbox",
+                'column_width'=> "50",
+                'order'=>"8",
+                'template'=>'sc1',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1
+            );
+        }
+        if(!empty($__cat__['wbc_cloth_length_attr'])){
+            $filter['s_fconfig'][]=array(
+                'name'=>$__cat__['wbc_cloth_length_attr'][0],
+                'type'=>"0",
+                'label'=>$__cat__['wbc_cloth_length_attr'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"checkbox",
+                'column_width'=> "50",
+                'order'=>"4",
+                'template'=>'sc1',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1
+            );
+        }
+        if(!empty($__cat__['wbc_cloth_bottom_type_attr'])){
+            $filter['s_fconfig'][]=array(
+                'name'=>$__cat__['wbc_cloth_bottom_type_attr'][0],
+                'type'=>"0",
+                'label'=>$__cat__['wbc_cloth_bottom_type_attr'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"checkbox",
+                'column_width'=> "50",
+                'order'=>"9",
+                'template'=>'sc1',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1
+            );
+        }
+        if(!empty($__cat__['wbc_pattern_cat'])){
+            $filter['s_fconfig'][]=array(
+                'name'=>$__cat__['wbc_pattern_cat'][0],
+                'type'=>"0",
+                'label'=>$__cat__['wbc_pattern_cat'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"checkbox",
+                'column_width'=> "50",
+                'order'=>"0",
+                'template'=>'sc1',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1
+            );
+        }
+        if(!empty($__cat__['wbc_fabric_cat'])){
+            $filter['s_fconfig'][]=array(
+                'name'=>$__cat__['wbc_fabric_cat'][0],
+                'type'=>"0",
+                'label'=>$__cat__['wbc_fabric_cat'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"checkbox",
+                'column_width'=> "50",
+                'order'=>"1",
                 'template'=>'sc1',
                 'help'=>0,
                 'help_text'=>'',
