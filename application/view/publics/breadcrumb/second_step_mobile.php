@@ -22,10 +22,10 @@
                 </div>
                 <br/>
                 <div class="ui equal width grid">                            
-                    <u><a href="<?php echo !empty(wbc()->sanitize->get('SECOND')) ? self::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('SECOND'),$order):'#'; ?>">View</a>
+                    <u><a href="<?php echo !empty(wbc()->sanitize->get('SECOND')) ? \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('SECOND'),$order):'#'; ?>">View</a>
                     </u>
                     <u>
-                        <a href="<?php echo !empty(wbc()->sanitize->get('SECOND'))?self::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('SECOND')):'#'; ?>">Remove</a>
+                        <a href="<?php echo !empty(wbc()->sanitize->get('SECOND'))?\eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('SECOND')):'#'; ?>">Remove</a>
                     </u>
                 </div>  
             </div>                

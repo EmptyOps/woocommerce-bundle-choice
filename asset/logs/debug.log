@@ -1,0 +1,288 @@
+[Aug 11 2020 14:13:35] 1------
+Failed to get an image, Details:{"errors":{"http_request_failed":["A valid URL was not provided."]},"error_data":[]}
+[Aug 12 2020 07:12:39] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/admin/term-meta.php at line number 71
+"syntax error, unexpected ','"
+[Aug 12 2020 07:12:40] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/admin/term-meta.php at line number 71
+"syntax error, unexpected ','"
+[Aug 12 2020 07:44:32] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 52
+"Trying to get property 'slug' of non-object"
+[Aug 12 2020 07:47:56] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 53
+"Trying to get property 'slug' of non-object"
+[Aug 12 2020 09:53:34] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 53
+"Trying to get property 'name' of non-object"
+[Aug 12 2020 09:54:13] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/options.php at line number 53
+"Trying to get property 'term_id' of non-object"
+[Aug 12 2020 10:17:58] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/view/publics/swatches/button.php at line number 2
+"Undefined variable: type"
+[Aug 12 2020 12:03:23] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/admin/term-meta.php at line number 405
+"syntax error, unexpected '--' (T_DEC)"
+[Aug 12 2020 12:04:50] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/admin/term-meta.php at line number 405
+"syntax error, unexpected '--' (T_DEC)"
+[Aug 12 2020 12:06:50] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/admin/term-meta.php at line number 405
+"syntax error, unexpected '--' (T_DEC)"
+[Aug 12 2020 12:08:51] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/admin/term-meta.php at line number 405
+"syntax error, unexpected '--' (T_DEC)"
+[Aug 12 2020 12:10:51] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/admin/term-meta.php at line number 405
+"syntax error, unexpected '--' (T_DEC)"
+[Aug 12 2020 12:12:51] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/admin/term-meta.php at line number 405
+"syntax error, unexpected '--' (T_DEC)"
+[Aug 12 2020 12:14:52] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/admin/term-meta.php at line number 405
+"syntax error, unexpected '--' (T_DEC)"
+[Aug 12 2020 12:16:52] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/admin/term-meta.php at line number 405
+"syntax error, unexpected '--' (T_DEC)"
+[Aug 12 2020 12:24:53] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/admin/term-meta.php at line number 81
+"syntax error, unexpected '$type' (T_VARIABLE), expecting function (T_FUNCTION) or const (T_CONST)"
+[Aug 12 2020 12:40:17] ERROR in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-load.php at line number 90
+"Uncaught Exception: template file '\/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/view\/publics\/swatches\/image_text.php' is not found in \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/library\/lib-load.php:90\nStack trace:\n#0 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/controllers\/publics\/options.php(83): WBC_Loader->template('publics\/swatche...', Array)\n#1 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/controllers\/publics\/options.php(164): eo\\wbc\\controllers\\publics\\Options->variable_item('image_text', Array, Array)\n#2 [internal function]: eo\\wbc\\controllers\\publics\\Options->variation_options(Array)\n#3 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/controllers\/publics\/options.php(441): call_user_func_array(Array, Array)\n#4 \/var\/www\/html\/fresh\/wp-includes\/class-wp-hook.php(287): eo\\wbc\\controllers\\publics\\Options->eo\\wbc\\controllers\\publics\\{closure}('<select id"
+[Aug 12 2020 13:15:52] ERROR in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-load.php at line number 90
+"Uncaught Exception: template file '\/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/view\/publics\/swatches\/dropdown_image.php' is not found in \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/library\/lib-load.php:90\nStack trace:\n#0 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/controllers\/publics\/options.php(83): WBC_Loader->template('publics\/swatche...', Array)\n#1 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/controllers\/publics\/options.php(164): eo\\wbc\\controllers\\publics\\Options->variable_item('dropdown_image', Array, Array)\n#2 [internal function]: eo\\wbc\\controllers\\publics\\Options->variation_options(Array)\n#3 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/controllers\/publics\/options.php(441): call_user_func_array(Array, Array)\n#4 \/var\/www\/html\/fresh\/wp-includes\/class-wp-hook.php(287): eo\\wbc\\controllers\\publics\\Options->eo\\wbc\\controllers\\publics\\{closure}('<s"
+[Aug 12 2020 13:20:41] ERROR in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-load.php at line number 90
+"Uncaught Exception: template file '\/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/view\/publics\/swatches\/dropdown_image_only.php' is not found in \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/library\/lib-load.php:90\nStack trace:\n#0 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/controllers\/publics\/options.php(83): WBC_Loader->template('publics\/swatche...', Array)\n#1 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/controllers\/publics\/options.php(164): eo\\wbc\\controllers\\publics\\Options->variable_item('dropdown_image_...', Array, Array)\n#2 [internal function]: eo\\wbc\\controllers\\publics\\Options->variation_options(Array)\n#3 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/controllers\/publics\/options.php(441): call_user_func_array(Array, Array)\n#4 \/var\/www\/html\/fresh\/wp-includes\/class-wp-hook.php(287): eo\\wbc\\controllers\\publics\\Options->eo\\wbc\\controllers\\publics\\{clo"
+[Aug 12 2020 13:22:16] ERROR in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-load.php at line number 90
+"Uncaught Exception: template file '\/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/view\/publics\/swatches\/dropdown.php' is not found in \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/library\/lib-load.php:90\nStack trace:\n#0 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/controllers\/publics\/options.php(83): WBC_Loader->template('publics\/swatche...', Array)\n#1 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/controllers\/publics\/options.php(164): eo\\wbc\\controllers\\publics\\Options->variable_item('dropdown', Array, Array)\n#2 [internal function]: eo\\wbc\\controllers\\publics\\Options->variation_options(Array)\n#3 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/controllers\/publics\/options.php(441): call_user_func_array(Array, Array)\n#4 \/var\/www\/html\/fresh\/wp-includes\/class-wp-hook.php(287): eo\\wbc\\controllers\\publics\\Options->eo\\wbc\\controllers\\publics\\{closure}('<select id=\"pa"
+[Aug 14 2020 13:14:12] User Error------
+Call recived: 13:14
+[Aug 14 2020 13:14:12] User Error------
+Call recived: 13:14
+[Aug 14 2020 13:14:21] User Error------
+Call recived: 13:14
+[Aug 14 2020 13:27:26] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:27:26] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:27:26] User Error------
+Inside WBC
+[Aug 14 2020 13:27:26] User Error------
+Inside WBC
+[Aug 14 2020 13:27:30] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:27:30] User Error------
+Inside WBC
+[Aug 14 2020 13:27:42] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:27:43] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:27:43] User Error------
+Inside WBC
+[Aug 14 2020 13:27:43] User Error------
+Inside WBC
+[Aug 14 2020 13:27:44] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:27:44] User Error------
+Inside WBC
+[Aug 14 2020 13:27:46] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:27:46] User Error------
+Inside WBC
+[Aug 14 2020 13:27:47] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:27:47] User Error------
+Inside WBC
+[Aug 14 2020 13:28:14] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:28:14] User Error------
+Inside WBC
+[Aug 14 2020 13:28:24] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:28:24] User Error------
+Inside WBC
+[Aug 14 2020 13:30:15] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:30:15] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:30:15] User Error------
+Inside WBC
+[Aug 14 2020 13:30:15] User Error------
+Inside WBC
+[Aug 14 2020 13:30:24] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:30:24] User Error------
+Inside WBC
+[Aug 14 2020 13:32:15] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:32:15] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:32:15] User Error------
+Inside WBC
+[Aug 14 2020 13:32:15] User Error------
+Inside WBC
+[Aug 14 2020 13:32:24] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:32:24] User Error------
+Inside WBC
+[Aug 14 2020 13:33:59] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:33:59] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:33:59] User Error------
+Inside WBC
+[Aug 14 2020 13:33:59] User Error------
+Inside WBC
+[Aug 14 2020 13:34:00] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:34:00] User Error------
+Inside WBC
+[Aug 14 2020 13:34:14] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:34:14] User Error------
+Inside WBC
+[Aug 14 2020 13:35:15] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:35:15] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:35:15] User Error------
+Inside WBC
+[Aug 14 2020 13:35:15] User Error------
+Inside WBC
+[Aug 14 2020 13:37:15] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:37:15] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:37:15] User Error------
+Inside WBC
+[Aug 14 2020 13:37:15] User Error------
+Inside WBC
+[Aug 14 2020 13:39:15] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:39:15] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:39:15] User Error------
+Inside WBC
+[Aug 14 2020 13:39:15] User Error------
+Inside WBC
+[Aug 14 2020 13:41:15] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:41:15] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:41:15] User Error------
+Inside WBC
+[Aug 14 2020 13:41:15] User Error------
+Inside WBC
+[Aug 14 2020 13:42:15] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:42:15] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:42:15] User Error------
+Inside WBC
+[Aug 14 2020 13:42:15] User Error------
+Inside WBC
+[Aug 14 2020 13:43:23] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:43:23] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:43:23] User Error------
+Inside WBC
+[Aug 14 2020 13:43:23] User Error------
+Inside WBC
+[Aug 14 2020 13:43:24] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:43:24] User Error------
+Inside WBC
+[Aug 14 2020 13:43:30] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:43:30] User Error------
+Inside WBC
+[Aug 14 2020 13:43:30] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:43:30] User Error------
+Inside WBC
+[Aug 14 2020 13:43:31] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:43:31] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:43:31] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:43:31] User Error------
+Inside WBC
+[Aug 14 2020 13:43:31] User Error------
+Inside WBC
+[Aug 14 2020 13:43:31] User Error------
+Inside WBC
+[Aug 14 2020 13:43:36] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:43:36] User Error------
+Inside WBC
+[Aug 14 2020 13:43:39] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:43:39] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:43:39] User Error------
+Inside WBC
+[Aug 14 2020 13:43:40] User Error------
+Inside WBC
+[Aug 14 2020 13:44:15] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:44:15] User Error------
+Inside WBC
+[Aug 14 2020 13:44:37] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:44:37] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:44:37] User Error------
+Inside WBC
+[Aug 14 2020 13:44:37] User Error------
+Inside WBC
+[Aug 14 2020 13:45:37] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:45:37] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:45:37] User Error------
+Inside WBC
+[Aug 14 2020 13:45:37] User Error------
+Inside WBC
+[Aug 14 2020 13:46:15] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:46:15] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:46:15] User Error------
+Inside WBC
+[Aug 14 2020 13:46:15] User Error------
+Inside WBC
+[Aug 14 2020 13:47:37] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:47:37] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:47:37] User Error------
+Inside WBC
+[Aug 14 2020 13:47:37] User Error------
+Inside WBC
+[Aug 14 2020 13:48:15] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:48:15] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:48:15] User Error------
+Inside WBC
+[Aug 14 2020 13:48:15] User Error------
+Inside WBC
+[Aug 14 2020 13:49:22] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:49:23] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:49:23] User Error------
+Inside WBC
+[Aug 14 2020 13:49:23] User Error------
+Inside WBC
+[Aug 14 2020 13:50:15] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:50:15] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:50:15] User Error------
+Inside WBC
+[Aug 14 2020 13:50:15] User Error------
+Inside WBC
+[Aug 14 2020 13:50:23] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:50:23] User Error------
+Inside WBC
+[Aug 14 2020 13:50:32] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:50:32] User Error------
+Inside WBC
+[Aug 14 2020 13:50:36] User Error------
+Inside Plugins Loaded
+[Aug 14 2020 13:50:36] User Error------
+Inside WBC
+[Aug 15 2020 13:46:22] ERROR in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/pages/checkout.php at line number 70
+"Uncaught Error: Call to a member function get_title() on boolean in \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/controllers\/publics\/pages\/checkout.php:70\nStack trace:\n#0 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/controllers\/publics\/pages\/checkout.php(54): eo\\wbc\\controllers\\publics\\pages\\Checkout->checkout_rows(Array)\n#1 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/controllers\/publics\/pages\/checkout.php(36): eo\\wbc\\controllers\\publics\\pages\\Checkout->eo_wbc_render()\n#2 \/var\/www\/html\/fresh\/wp-includes\/class-wp-hook.php(287): eo\\wbc\\controllers\\publics\\pages\\Checkout->eo\\wbc\\controllers\\publics\\pages\\{closure}('')\n#3 \/var\/www\/html\/fresh\/wp-includes\/class-wp-hook.php(311): WP_Hook->apply_filters(NULL, Array)\n#4 \/var\/www\/html\/fresh\/wp-includes\/plugin.php(478): WP_Hook->do_action(Array)\n#5 \/var\/www\/html\/fresh\/wp-includes\/general-template.php(2900): do_action('wp_footer')\n#6 \/var\/www\/html\/fresh\/wp-content\/themes\/stor"
+[Aug 15 2020 13:46:55] ERROR in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/publics/pages/checkout.php at line number 70
+"Uncaught Error: Call to a member function get_title() on boolean in \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/controllers\/publics\/pages\/checkout.php:70\nStack trace:\n#0 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/controllers\/publics\/pages\/checkout.php(54): eo\\wbc\\controllers\\publics\\pages\\Checkout->checkout_rows(Array)\n#1 \/var\/www\/html\/fresh\/wp-content\/plugins\/woocommerce-bundle-choice\/application\/controllers\/publics\/pages\/checkout.php(36): eo\\wbc\\controllers\\publics\\pages\\Checkout->eo_wbc_render()\n#2 \/var\/www\/html\/fresh\/wp-includes\/class-wp-hook.php(287): eo\\wbc\\controllers\\publics\\pages\\Checkout->eo\\wbc\\controllers\\publics\\pages\\{closure}('')\n#3 \/var\/www\/html\/fresh\/wp-includes\/class-wp-hook.php(311): WP_Hook->apply_filters(NULL, Array)\n#4 \/var\/www\/html\/fresh\/wp-includes\/plugin.php(478): WP_Hook->do_action(Array)\n#5 \/var\/www\/html\/fresh\/wp-includes\/general-template.php(2900): do_action('wp_footer')\n#6 \/var\/www\/html\/fresh\/wp-content\/themes\/stor"

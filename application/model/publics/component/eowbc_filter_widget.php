@@ -149,11 +149,15 @@ class EOWBC_Filter_Widget {
 		
 		add_action( 'wp_footer',function(){
 
-			$fg_color=wbc()->session->get('EO_WBC_BG_COLOR','#357DFD');
+			$fg_color=wbc()->session->get('EO_WBC_BG_COLOR','#dbdbdb');
 
 			$active_color=wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active',$fg_color); //get_option('eo_wbc_active_breadcrumb_color',$fg_color);
 			//wp-head here....
 			echo "<style>
+					.toggle_sticky_mob_filter  .title {
+						width:100%;
+						height:100%;
+					}
 					.ui.labeled.slider>.labels .label {
     					margin: 0 !important;
     					word-break: keep-all;
@@ -259,6 +263,9 @@ class EOWBC_Filter_Widget {
 
 						background-color:".wbc()->options->get_option('appearance_filters','slider_track_backcolor_active',$active_color)/*get_option('eo_wbc_filter_config_slidertrack_color','')*/." !important;
 					}				
+					#advance_filter,#apply_filter,#reset_filter{
+						width: auto !important;
+					}
 					.ui.slider .inner .thumb,#advance_filter,#apply_filter{
 						background-color:".wbc()->options->get_option('appearance_filters','slider_nodes_backcolor_active',$active_color)/*get_option('eo_wbc_filter_config_slidernode_color','')*/." !important;
 					}
@@ -273,7 +280,7 @@ class EOWBC_Filter_Widget {
 					}
 					.eo_wbc_filter_icon.ui.image{
 						width:fit-content"./*get_option('eo_wbc_filter_config_icon_size','min-content').*/" !important;
-						font-size:".wbc()->options->get_option('appearance_filters','icon_label_size','0.78571429rem')/*get_option('eo_wbc_filter_config_icon_label_size','0.78571429rem')*/." !important;
+						font-size:".wbc()->options->get_option('appearance_filters','icon_label_size','0.78571429rem')." !important;
 						cursor:pointer;
 					}
 					.eo_wbc_filter_icon.ui.image img{
@@ -429,7 +436,7 @@ class EOWBC_Filter_Widget {
 							font-size: 0.8em;
     						text-transform: uppercase;    						
 						}
-						.eo-wbc-container .wide.column{
+						.eo-wbc-container .wide.column:not(.toggle_sticky_mob_filter){
 							display: inline-flex !important;
 						}
 						.ui.labeled.ticked.range.slider{
@@ -693,6 +700,7 @@ class EOWBC_Filter_Widget {
 		$reset =  !empty($empty);		
 		$help=(!empty(${$__prefix.'_fconfig_add_help'})?${$__prefix.'_fconfig_add_help_text'}:'');		
 		
+		$prefix='';
 		if(!empty($text_slider_prefix)){
 			$prefix = $text_slider_prefix;
 		} elseif (!empty(${$__prefix.'_fconfig_prefix'})) {
@@ -1078,7 +1086,7 @@ class EOWBC_Filter_Widget {
 				<div class="ui grid centered">
 					<div class="row">
 						<?php if(!empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
-							<div class="ui button reset_all_filters" style="position: absolute;left:1em;top: 1em;border-radius: 0;" >Reset Filters</div>
+							<div class="ui button reset_all_filters" id="reset_filter" style="position: absolute;left:1em;top: 1em;border-radius: 0;" >Reset Filters</div>
 						<?php endif; ?>
 
 						<?php if(!empty($advance_filters)): ?>
