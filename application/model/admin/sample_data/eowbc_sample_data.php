@@ -786,7 +786,7 @@ class Eowbc_Sample_Data {
 			    		update_term_meta( $cat_id, 'thumbnail_id', absint( $thumb_id ) );	
 
 			    		if( !empty($cat["thumb_selected"]) ) {
-			    			update_term_meta( $cat_id, 'wbc_attachment', absint($this->add_image_gallary($cat["thumb_selected"])) );	
+			    			update_term_meta( $cat_id, 'wbc_attachment', wp_get_attachment_url(absint($this->add_image_gallary($cat["thumb_selected"])) ));	
 			    		}
 			    	}
 
