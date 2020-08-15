@@ -18,13 +18,6 @@ class Cart {
     }
 
     public function init() {
-        var_dump(has_filter('woocommerce_get_item_data', false ));
-        add_filter('woocommerce_get_item_data',function($item){
-            var_dump($item);
-            wbc()->common->pr($item);
-            return $item;
-        });
-
         if(isset($_GET['EO_WBC_REMOVE'])){
             $this->eo_wbc_remove();
         }     
