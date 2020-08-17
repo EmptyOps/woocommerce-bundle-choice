@@ -154,6 +154,9 @@ class EOWBC_Filter_Widget {
 			$active_color=wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active',$fg_color); //get_option('eo_wbc_active_breadcrumb_color',$fg_color);
 			//wp-head here....
 			echo "<style>
+					.ui.slider .inner .thumb{
+						cursor:default !important;
+					}
 					.toggle_sticky_mob_filter  .title {
 						width:100%;
 						height:100%;
@@ -286,7 +289,7 @@ class EOWBC_Filter_Widget {
 					.eo_wbc_filter_icon.ui.image img{
 						width:".wbc()->options->get_option('appearance_filters','icon_size','min-content')/*get_option('eo_wbc_filter_config_icon_size','min-content')*/." !important;
 						margin:auto auto;
-					}
+					}".(wbc()->options->get_option('filters_filter_setting','filter_icon_wrap_label',false)?".eo_wbc_filter_icon div{ word-break: break-word !important; word-wrap: break-word !important; }":"")."
 					#help_modal{
 						max-height: 80vh;
 						margin-left: auto;

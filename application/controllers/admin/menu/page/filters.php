@@ -323,6 +323,16 @@ if ( ! class_exists( 'Filters' ) ) {
 									// 'size_class'=>array('sixteen','wide'),
 								),
 							),
+							'filter_icon_wrap_label'=>array(
+									'label'=>'Wrap icon filter label',
+									'type'=>'checkbox',
+									'sanitize'=>'sanitize_text_field',
+									'value'=>array(),
+									'options'=>array('filter_icon_wrap_label'=>' '),
+									'class'=>array(),
+									'size_class'=>array('eight','wide'),
+									'inline'=>true,
+								),
 							'filter_setting_btnfilter_now'=>array(
 								'label'=>'Show Apply & Reset Filters Button',
 								'type'=>'checkbox',
@@ -657,6 +667,11 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'prev_inline'=>true,
 								// 'inline'=>true,
 							),
+							'd_fconfig_note_label'=>array(
+								'label'=>"<strong>Note:Since you want to use icons with attributes filter this plugin will enable icon option for attributes on woocommerce page, so please set icons from there.</strong>",
+								'type'=>"label",
+								'size_class'=>array('transition','hidden')
+							),
 							'd_fconfig_is_single_select'=>array(
 								'label'=>' ',
 								'type'=>'checkbox',
@@ -754,12 +769,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'style'=>'normal',
 								// 'prev_inline'=>true,
 								// 'inline'=>true,
-							),
-							'd_fconfig_note_label'=>array(
-								'label'=>"<strong>Note:Since you want to use icons with attributes filter this plugin will enable icon option for attributes on woocommerce page, so please set icons from there.</strong>",
-								'type'=>"label",
-								'size_class'=>array('transition','hidden')
-							),
+							),							
 							'd_fconfig_submit_btn'=>array(
 								'label'=>eowbc_lang('Save'),
 								'type'=>'button',
@@ -928,6 +938,11 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'prev_inline'=>true,
 								// 'inline'=>true,
 							),
+							's_fconfig_note_label'=>array(
+								'label'=>"<strong>Note:Since you want to use icons with attributes filter this plugin will enable icon option for attributes on woocommerce page, so please set icons from there.</strong>",
+								'type'=>"label",
+								'size_class'=>array('transition','hidden')
+							),
 							's_fconfig_is_single_select'=>array(
 								'label'=>' ',
 								'type'=>'checkbox',
@@ -1025,12 +1040,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'style'=>'normal',
 								// 'prev_inline'=>true,
 								// 'inline'=>true,
-							),
-							's_fconfig_note_label'=>array(
-								'label'=>"<strong>Note:Since you want to use icons with attributes filter this plugin will enable icon option for attributes on woocommerce page, so please set icons from there.</strong>",
-								'type'=>"label",
-								'size_class'=>array('transition','hidden')
-							),
+							),							
 							's_fconfig_submit_btn'=>array(
 								'label'=>eowbc_lang('Save'),
 								'type'=>'button',

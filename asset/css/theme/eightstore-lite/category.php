@@ -1,6 +1,8 @@
 <style type="text/css">
-	.container{
+
+	.container,.eo-wbc-container.filters.container{
 		width: 100% !important;
+		margin: 0 !important;
 	}
 
 	#main-content .container{
@@ -25,5 +27,16 @@
 	
 	.top-ticker{
 		display:none;
+	}
+	.eo-wbc-container .field>.ui.header .question.circle.outline.icon{
+		font-size: 1em;
+		margin-top:1px;
+	}
+	.store-wrapper{
+		padding: 1em !important;
+		width: 100% !important;
+	}
+	.woocommerce-products-header__title.page-title{
+		display: none;
 	}
 </style>
