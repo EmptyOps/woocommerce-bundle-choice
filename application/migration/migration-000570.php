@@ -52,6 +52,11 @@ class Migration_000570 {
 			$features = array();
 		}
 
+		// set default: set default to ring_builder since all old users prior to 0570 where (mostly) using that only if they have not ran the setup wizard
+		if( sizeof($features) <= 0 ) {
+			$features['ring_builder'] = 'ring_builder';
+		}
+
 		$mapping = unserialize(get_option('eo_wbc_cat_maps',"a:0:{}"));
 		if(!empty($mapping) and is_array($mapping)){
 			$new_mapping =array();
@@ -99,7 +104,7 @@ class Migration_000570 {
 									'config_alternate_breadcrumb'=>'default',
 								),
 							'setting_status_setting_status_setting'=>array(
-									'inventory_type'=>get_option('eo_wbc_inventory_type'),
+									'inventory_type'=>get_option('eo_wbc_inventory_type','jewelry'),	//set default to jewelry since all old users prior to 0570 where (mostly) using that only if they have not ran the setup wizard
 									'features'=>serialize($features),
 								),
 							'filters_filter_setting'=>array(
@@ -231,6 +236,8 @@ class Migration_000570 {
 	    
 	    wbc()->options->update_option('configuration','config_category',get_option('eo_wbc_config_category','0'));
         wbc()->options->update_option('configuration','config_map',get_option('eo_wbc_config_map','0'));
-        wbc()->options->set('eo_wbc_version','1.0.0');
+
+        // commented since isn't necessary anymore and isn't right either 
+        // wbc()->options->set('eo_wbc_version','1.0.0');
 	}
 }

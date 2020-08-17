@@ -24,7 +24,7 @@ if(!class_exists('WBC_Migration')) {
 			//$version = wbc()->options->get_option('_system','version', false);
 
 			//added extra check for version on 10-07-2020
-			// older versions 
+			// older versions prior to 1.0.0 was using this option 
 			/*if(empty($version)){*/
 			$version = get_option('eo_wbc_version');
 			/*}*/
@@ -47,11 +47,13 @@ if(!class_exists('WBC_Migration')) {
 			/*if(empty($version)) {
 				wbc()->options->update_option('_system','version', constant('EOWBC_VERSION'));
 			} else*/
+			// below if condition is not necessary since we have the necessary if condition inside for loop, but its fine to keep it here as its just doing extra check
 			if(version_compare(constant('EOWBC_VERSION'),$version)>0 and !empty($versions)) {
 
 				foreach ($versions as $version_number => $migration_class) {				
 
-					if(version_compare(constant('EOWBC_VERSION'),$version_number)>0) {
+					// if(version_compare(constant('EOWBC_VERSION'),$version_number)>0) {
+					if(version_compare($version_number,$version)>0) {
 
 						$migration_file = str_replace('_', '-',strtolower($migration_class)).'.php';	
 						
@@ -61,6 +63,9 @@ if(!class_exists('WBC_Migration')) {
 								call_user_func("${migration_class}::run");	
 							}							
 						}
+
+						// mark the point of last version till which migration run, this inner setting can help when the migration is stopped in between after when some of the version migration ran successfully
+						wbc()->options->update_option('_system','version', $version_number);
 					}
 				}
 			} 

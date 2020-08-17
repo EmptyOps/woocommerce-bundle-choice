@@ -390,219 +390,65 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
     public function get_maps() {
         return array(
                         array(
-                            ['slug','wbc_diamond_round_shape_cat','product_cat'],
-                            ['slug','wbc_setting_round_shape_cat','product_cat']
+                            ['slug','wbc_top_wear_shirts_cat','product_cat'],
+                            ['slug','wbc_bottom_wear_trousers_cat','product_cat']
                         ),
                         array(
-                            ['slug','wbc_diamond_princess_shape_cat','product_cat'],
-                            ['slug','wbc_setting_pear_shape_cat','product_cat']
+                            ['slug','wbc_top_wear_tshirts_cat','product_cat'],
+                            ['slug','wbc_bottom_wear_jeans_cat','product_cat']
                         ),
                         array(
-                            ['slug','wbc_diamond_emerald_shape_cat','product_cat'],
-                            ['slug','wbc_setting_emerald_shape_cat','product_cat']
+                            ['slug','wbc_top_wear_sweaters_cat','product_cat'],
+                            ['slug','wbc_bottom_wear_jeans_cat','product_cat']
                         ),
                         array(
-                            ['slug','wbc_diamond_asscher_shape_cat','product_cat'],
-                            ['slug','wbc_setting_asscher_shape_cat','product_cat']
+                            ['slug','wbc_top_wear_jackets_cat','product_cat'],
+                            ['slug','wbc_bottom_wear_jeans_cat','product_cat']
                         ),
                         array(
-                            ['slug','wbc_diamond_marquise_shape_cat','product_cat'],
-                            ['slug','wbc_setting_marquise_shape_cat','product_cat']
+                            ['slug','wbc_top_wear_blazers_coats_cat','product_cat'],
+                            ['slug','wbc_bottom_wear_trousers_cat','product_cat']
                         ),
                         array(
-                            ['slug','wbc_diamond_oval_shape_cat','product_cat'],
-                            ['slug','wbc_setting_oval_shape_cat','product_cat']
+                            ['slug','wbc_top_wear_tshirts_cat','product_cat'],
+                            ['slug','wbc_bottom_wear_track_pants_cat','product_cat']
                         ),
                         array(
-                            ['slug','wbc_diamond_radiant_shape_cat','product_cat'],
-                            ['slug','wbc_setting_radiant_shape_cat','product_cat']
+                            ['slug','wbc_top_wear_hoodies_cat','product_cat'],
+                            ['slug','wbc_bottom_wear_jeans_cat','product_cat']
                         ),
                         array(
-                            ['slug','wbc_diamond_pear_shape_cat','product_cat'],
-                            ['slug','wbc_setting_pear_shape_cat','product_cat']
+                            ['slug','wbc_top_wear_tops_cat','product_cat'],
+                            ['slug','wbc_bottom_wear_shorts_cat','product_cat']
                         ),
                         array(
-                            ['slug','wbc_diamond_heart_shape_cat','product_cat'],
-                            ['slug','wbc_setting_heart_shape_cat','product_cat']
+                            ['slug','wbc_top_wear_tunics_cat','product_cat'],
+                            ['slug','wbc_bottom_wear_plazzos_cat','product_cat']
                         ),
                         array(
-                            ['slug','wbc_diamond_cushion_shape_cat','product_cat'],
-                            ['slug','wbc_setting_cushion_shape_cat','product_cat']
+                            ['slug','wbc_top_wear_tunics_cat','product_cat'],
+                            ['slug','wbc_bottom_wear_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_top_wear_tops_cat','product_cat'],
+                            ['slug','wbc_bottom_wear_skirts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_top_wear_tops_cat','product_cat'],
+                            ['slug','wbc_bottom_wear_leggings_cat','product_cat']
                         )
+
                     );
     }
 
     public function get_filters($__cat__, $__att__) {
         $filter = array();
-
-        if(!empty($__cat__['eo_diamond_shape_cat'])){
-            $filter['d_fconfig'][]=array(
-                    'name'=>$__cat__['eo_diamond_shape_cat'][0],
-                    'type'=>"0",
-                    'label'=>$__cat__['eo_diamond_shape_cat'][1],
-                    'advance'=>"0",
-                    'dependent'=>"0",
-                    'input'=>"icon_text",
-                    'column_width'=> "100",
-                    'order'=>"0",
-                    'template'=>'fc1',
-                    'help'=>0,
-                    'help_text'=>'',
-                    'enabled'=>1
-                );
-        }
-        if(!empty($__att__['eo_carat_attr'])){
-            $filter['d_fconfig'][]=array(
-                    'name'=>$__att__['eo_carat_attr'][0],
-                    'type'=>"1",
-                    'label'=>$__att__['eo_carat_attr'][1],
-                    'advance'=>"0",
-                    'dependent'=>"0",
-                    'input'=>"numeric_slider",
-                    'column_width'=> "50",
-                    'order'=>"1",
-                    'template'=>'fc1',
-                    'help'=>0,
-                    'help_text'=>'',
-                    'enabled'=>1
-                );
-        }           
-        if(!empty($__att__['eo_clarity_attr'])){
-            $filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_clarity_attr'][0],
-                'type'=>"1",
-                'label'=>$__att__['eo_clarity_attr'][1],
-                'advance'=>"0",
-                'dependent'=>"0",
-                'input'=>"text_slider",
-                'column_width'=> "50",
-                'order'=>"2",
-                'template'=>'fc1',
-                'help'=>0,
-                'help_text'=>'',
-                'enabled'=>1
-
-            );
-        }
-        if(!empty($__att__['eo_colour_attr'])){
-            $filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_colour_attr'][0],
-                'type'=>"1",
-                'label'=>$__att__['eo_colour_attr'][1],
-                'advance'=>"0",
-                'dependent'=>"0",
-                'input'=>"text_slider",
-                'column_width'=> "50",
-                'order'=>"3",
-                'template'=>'fc1',
-                'help'=>0,
-                'help_text'=>'',
-                'enabled'=>1
-            );
-        }
-        if(!empty($__att__['eo_polish_attr'])){
-            $filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_polish_attr'][0],
-                'type'=>"1",
-                'label'=>$__att__['eo_polish_attr'][1],
-                'advance'=>"1",
-                'dependent'=>"0",
-                'input'=>"text_slider",
-                'column_width'=> "50",
-                'order'=>"4",
-                'template'=>'fc1',
-                'help'=>0,
-                'help_text'=>'',
-                'enabled'=>1
-            );
-        }
-        if(!empty($__att__['eo_symmertry_attr'])){
-            $filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_symmertry_attr'][0],
-                'type'=>"1",
-                'label'=>$__att__['eo_symmertry_attr'][1],
-                'advance'=>"1",
-                'dependent'=>"0",
-                'input'=>"text_slider",
-                'column_width'=> "50",
-                'order'=>"5",
-                'template'=>'fc1',
-                'help'=>0,
-                'help_text'=>'',
-                'enabled'=>1
-            );
-        }
-        if(!empty($__att__['eo_fluorescence_attr'])){
-            $filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_fluorescence_attr'][0],
-                'type'=>"1",
-                'label'=>$__att__['eo_fluorescence_attr'][1],
-                'advance'=>"1",
-                'dependent'=>"0",
-                'input'=>"text_slider",
-                'column_width'=> "50",
-                'order'=>"6",
-                'template'=>'fc1',
-                'help'=>0,
-                'help_text'=>'',
-                'enabled'=>1
-            );
-        }
-        if(!empty($__att__['eo_depth_attr'])){
-            $filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_depth_attr'][0],
-                'type'=>"1",
-                'label'=>$__att__['eo_depth_attr'][1],
-                'advance'=>"1",
-                'dependent'=>"0",
-                'input'=>"numeric_slider",
-                'column_width'=> "50",
-                'order'=>"7",
-                'template'=>'fc1',
-                'help'=>0,
-                'help_text'=>'',
-                'enabled'=>1
-            );
-        }
-        if(!empty($__att__['eo_table_attr'])){
-            $filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_table_attr'][0],
-                'type'=>"1",
-                'label'=>$__att__['eo_table_attr'][1],
-                'advance'=>"1",
-                'dependent'=>"0",
-                'input'=>"numeric_slider",
-                'column_width'=> "50",
-                'order'=>"8",
-                'template'=>'fc1',
-                'help'=>0,
-                'help_text'=>'',
-                'enabled'=>1
-            );
-        }
-        if(!empty($__att__['eo_grading_report_attr'])){
-            $filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_grading_report_attr'][0],
-                'type'=>"1",
-                'label'=>$__att__['eo_grading_report_attr'][1],
-                'advance'=>"1",
-                'dependent'=>"0",
-                'input'=>"checkbox",
-                'column_width'=> "50",
-                'order'=>"9",
-                'template'=>'fc1',
-                'help'=>0,
-                'help_text'=>'',
-                'enabled'=>1
-            );
-        }
-
-        //Filters for settings....
-        if(!empty($__cat__['eo_setting_shape_cat'])){
+        
+        if(!empty($__cat__['wbc_top_wear_cat'])){
             $filter['s_fconfig'][]=array(
-                'name'=>$__cat__['eo_setting_shape_cat'][0],
+                'name'=>$__cat__['wbc_top_wear_cat'][0],
                 'type'=>"0",
-                'label'=>$__cat__['eo_setting_shape_cat'][1],
+                'label'=>$__cat__['wbc_top_wear_cat'][1],
                 'advance'=>"0",
                 'dependent'=>"0",
                 'input'=>"icon_text",
@@ -614,14 +460,14 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                 'enabled'=>1
             );
         }
-        if(!empty($__cat__['eo_ring_style_cat'])){
+        if(!empty($__cat__['wbc_cloth_size_attr'])){
             $filter['s_fconfig'][]=array(
-                'name'=>$__cat__['eo_ring_style_cat'][0],
+                'name'=>$__cat__['wbc_cloth_size_attr'][0],
                 'type'=>"0",
-                'label'=>$__cat__['eo_ring_style_cat'][1],
+                'label'=>$__cat__['wbc_cloth_size_attr'][1],
                 'advance'=>"0",
                 'dependent'=>"0",
-                'input'=>"icon_text",
+                'input'=>"text_slider",
                 'column_width'=> "50",
                 'order'=>"1",
                 'template'=>'sc1',
@@ -630,16 +476,177 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                 'enabled'=>1
             );
         }
-        if(!empty($__cat__['eo_metal_cat'])){
+        if(!empty($__cat__['wbc_cloth_fit_attr'])){
             $filter['s_fconfig'][]=array(
-                'name'=>$__cat__['eo_metal_cat'][0],
+                'name'=>$__cat__['wbc_cloth_fit_attr'][0],
                 'type'=>"0",
-                'label'=>$__cat__['eo_metal_cat'][1],
+                'label'=>$__cat__['wbc_cloth_fit_attr'][1],
                 'advance'=>"0",
                 'dependent'=>"0",
-                'input'=>"icon",
+                'input'=>"checkbox",
                 'column_width'=> "50",
                 'order'=>"2",
+                'template'=>'sc1',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1
+            );
+        }
+        if(!empty($__cat__['wbc_cloth_neck_attr'])){
+            $filter['s_fconfig'][]=array(
+                'name'=>$__cat__['wbc_cloth_neck_attr'][0],
+                'type'=>"0",
+                'label'=>$__cat__['wbc_cloth_neck_attr'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"checkbox",
+                'column_width'=> "50",
+                'order'=>"3",
+                'template'=>'sc1',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1
+            );
+        }
+        if(!empty($__cat__['wbc_cloth_occasion_attr'])){
+            $filter['s_fconfig'][]=array(
+                'name'=>$__cat__['wbc_cloth_occasion_attr'][0],
+                'type'=>"0",
+                'label'=>$__cat__['wbc_cloth_occasion_attr'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"checkbox",
+                'column_width'=> "50",
+                'order'=>"3",
+                'template'=>'sc1',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1
+            );
+        }
+        if(!empty($__cat__['wbc_cloth_sleeve_attr'])){
+            $filter['s_fconfig'][]=array(
+                'name'=>$__cat__['wbc_cloth_sleeve_attr'][0],
+                'type'=>"0",
+                'label'=>$__cat__['wbc_cloth_sleeve_attr'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"checkbox",
+                'column_width'=> "50",
+                'order'=>"5",
+                'template'=>'sc1',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1
+            );
+        }
+        if(!empty($__cat__['wbc_cloth_collar_attr'])){
+            $filter['s_fconfig'][]=array(
+                'name'=>$__cat__['wbc_cloth_sleeve_attr'][0],
+                'type'=>"0",
+                'label'=>$__cat__['wbc_cloth_sleeve_attr'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"checkbox",
+                'column_width'=> "50",
+                'order'=>"6",
+                'template'=>'sc1',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1
+            );
+        }
+        //filter for bottom wear
+        if(!empty($__cat__['wbc_bottom_wear_cat'])){
+            $filter['s_fconfig'][]=array(
+                'name'=>$__cat__['wbc_bottom_wear_cat'][0],
+                'type'=>"0",
+                'label'=>$__cat__['wbc_bottom_wear_cat'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"icon_text",
+                'column_width'=> "100",
+                'order'=>"7",
+                'template'=>'sc1',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1
+            );
+        }
+        if(!empty($__cat__['wbc_cloth_closure_type_attr'])){
+            $filter['s_fconfig'][]=array(
+                'name'=>$__cat__['wbc_cloth_closure_type_attr'][0],
+                'type'=>"0",
+                'label'=>$__cat__['wbc_cloth_closure_type_attr'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"checkbox",
+                'column_width'=> "50",
+                'order'=>"8",
+                'template'=>'sc1',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1
+            );
+        }
+        if(!empty($__cat__['wbc_cloth_length_attr'])){
+            $filter['s_fconfig'][]=array(
+                'name'=>$__cat__['wbc_cloth_length_attr'][0],
+                'type'=>"0",
+                'label'=>$__cat__['wbc_cloth_length_attr'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"checkbox",
+                'column_width'=> "50",
+                'order'=>"4",
+                'template'=>'sc1',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1
+            );
+        }
+        if(!empty($__cat__['wbc_cloth_bottom_type_attr'])){
+            $filter['s_fconfig'][]=array(
+                'name'=>$__cat__['wbc_cloth_bottom_type_attr'][0],
+                'type'=>"0",
+                'label'=>$__cat__['wbc_cloth_bottom_type_attr'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"checkbox",
+                'column_width'=> "50",
+                'order'=>"9",
+                'template'=>'sc1',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1
+            );
+        }
+        if(!empty($__cat__['wbc_pattern_cat'])){
+            $filter['s_fconfig'][]=array(
+                'name'=>$__cat__['wbc_pattern_cat'][0],
+                'type'=>"0",
+                'label'=>$__cat__['wbc_pattern_cat'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"checkbox",
+                'column_width'=> "50",
+                'order'=>"0",
+                'template'=>'sc1',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1
+            );
+        }
+        if(!empty($__cat__['wbc_fabric_cat'])){
+            $filter['s_fconfig'][]=array(
+                'name'=>$__cat__['wbc_fabric_cat'][0],
+                'type'=>"0",
+                'label'=>$__cat__['wbc_fabric_cat'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"checkbox",
+                'column_width'=> "50",
+                'order'=>"1",
                 'template'=>'sc1',
                 'help'=>0,
                 'help_text'=>'',
