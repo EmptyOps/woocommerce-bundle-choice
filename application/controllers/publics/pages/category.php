@@ -68,7 +68,7 @@ class Category {
 
             /*wbc()->options->update_option('filters_filter_setting','filter_setting_alternate_mobile','filter_setting_alternate_mobile');*/
 
-            if(wbc()->options->get_option('filters_filter_setting','filter_setting_status','1') or $this->is_shop_cat_filter===true or $this->is_shortcode_filter) {
+            if(wbc()->options->get_option('filters_filter_setting','filter_setting_status','filter_setting_status') or $this->is_shop_cat_filter===true or $this->is_shortcode_filter) {
 
                 if(
                      // ($this->eo_wbc_get_category()==get_option('eo_wbc_first_slug') && get_option('eo_wbc_add_filter_first',FALSE) )

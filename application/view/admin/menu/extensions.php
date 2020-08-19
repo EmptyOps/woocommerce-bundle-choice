@@ -188,8 +188,15 @@ $this_plugin = '';
 							<div class="addons-banner-block-item-content">
 								<h3 style="align-self: center;"><?php echo $product->name; ?></h3>
 								<div style="overflow: hidden;text-overflow: ellipsis;">
-								<?php $findSome = get_string_between($product->short_description, '<span>', '</span>');
-									echo $findSome; 
+								<?php 
+									// if( strpos($product->short_description, '<span>') !== FALSE ) {
+										$findSome = get_string_between($product->short_description, '<span>', '</span>');
+										echo $findSome; 
+									// }
+									// else {
+									// 	$my_string = $product->short_description;
+									// 	echo implode(' ', array_slice(explode(' ', $my_string), 0, 25))."\n";
+									// }
 								?>
 								</div>
 								<div>

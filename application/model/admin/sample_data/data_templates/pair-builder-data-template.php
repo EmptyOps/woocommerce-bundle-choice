@@ -54,7 +54,7 @@ class Pair_Builder_Data_Template extends Sample_Data_Template {
 
     public function set_configs_after_attributes() {
 
-        wbc()->options->update_option('filters_filter_setting','filter_setting_status','1');
+        wbc()->options->update_option('filters_filter_setting','filter_setting_status','filter_setting_status');
     }
 
 }
