@@ -243,7 +243,7 @@ $this_plugin = '';
 					} 
 					?>
 
-					<?php if(in_array("wordpress-plugins", $product_category) || in_array("opencart-plugins", $product_category)): ?>						
+					<?php if(/*in_array("wordpress-plugins", $product_category) ||*/ in_array("popular-plugins", $product_category)): ?>						
 					  	<?php if($count % 3 == 0): ?>	
 						  <div class='addons-banner-block-items'>
 						<?php endif; ?>
