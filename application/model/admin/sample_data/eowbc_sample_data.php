@@ -765,6 +765,7 @@ class Eowbc_Sample_Data {
 				$param['parent'] = $cat['parent'];
 			}
 			
+			// TODO I think we should use WC API for managing categories if that is available and I believe that must be available. 
 		    $id = wp_insert_term(
 		        $cat['name'], // the term 
 		        'product_cat', // the taxonomy

@@ -155,6 +155,7 @@
 </div>
 <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
 <script>
+    $ = jQuery;
 
     // supposed to be used inside wo_wbc_filter.js
     var is_card_view_rendered = true;

@@ -7,7 +7,7 @@
 ?>
 	<div class="<?php echo $width_class; ?>">
 		<p>
-			<spna class="ui header"><?php echo($title); ?></spna>
+			<span class="ui header"><?php echo($title); ?></span>
 			<?php if($reset): ?>
 		&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_icon(event,'<?php echo $term->slug; ?>')">&nbsp;<u>reset</u></span>
 		<?php endif; ?>

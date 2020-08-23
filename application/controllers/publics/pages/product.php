@@ -258,11 +258,34 @@ class Product {
             <script type="text/javascript">
                 jQuery(".single_add_to_cart_button.button.alt").ready(function(){
                     jQuery('form.cart').prepend("<input type='hidden' name='eo_wbc_target' value='<?php echo $this->eo_wbc_get_category(); ?>'/><input type='hidden' name='eo_wbc_product_id' value='<?php global $post; echo $post->ID; ?>'/>");
-                    jQuery(".single_add_to_cart_button.button.alt:not(.disabled):eq(0)").replaceWith(
+                    
+                    <?php if(!empty(wbc()->options->get_option('appearance_product_page','product_page_add_to_basket',''))) :?>
+                        
+                        window.wbc_atb_submin_form = function(){
+                            jQuery('form.cart').attr('action',document.location.href);
+                            jQuery('form.cart').submit();
+                        }
+
+                        jQuery(".single_add_to_cart_button.button.alt:not(.disabled)").replaceWith('<div class=\"ui buttons\">'+
+                                '<div class=\"ui button\" href=\"#\" id=\"eo_wbc_add_to_cart\"><?php echo $btn_text; ?></div>'+
+                                    '<div class=\"ui floating dropdown icon button\" style=\"width: fit-content;\">'+
+                                        '<i class=\"dropdown icon\"></i>'+
+                                        '<div class=\"menu\">'+
+                                            '<div class=\"item\" onClick=\"window.wbc_atb_submin_form();\"><?php echo wbc()->options->get_option('appearance_product_page','product_page_add_to_basket','');?></div>'+                                    
+                                        '</div>'+
+                                    '</div>'+
+                                '</div>'+
+                            '</div>');
+                        jQuery(".dropdown").dropdown();
+
+                    <?php else: ?>
+
+                        jQuery(".single_add_to_cart_button.button.alt:not(.disabled):eq(0)").replaceWith(
                          "<button href='#' id='eo_wbc_add_to_cart' class='single_add_to_cart_button button alt'>"
                          +"<?php echo $btn_text; ?>"
                          +"</button>"
                         );
+                    <?php endif; ?>
                     });
             </script>
             

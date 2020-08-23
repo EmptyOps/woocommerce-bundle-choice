@@ -166,6 +166,8 @@ class Migration_000570 {
 										get_option('eo_wbc_add_to_cart_text_first',''),
 									'sc_atc_button_text'=>
 										get_option('eo_wbc_add_to_cart_text_second',''),
+									'product_page_add_to_basket'=>
+										get_option('eo_wbc_add_to_basket',''),	
 								),
 						);
 
