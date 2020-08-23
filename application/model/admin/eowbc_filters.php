@@ -373,7 +373,9 @@ class Eowbc_Filters extends Eowbc_Model {
             if($by_key and in_array($fdkey, $ids)){
             	$filter_data[$fdkey][$key_clean."_add_enabled"]=1;
                 $delete_cnt++;
-            } elseif (in_array($item[$key."_filter"], $ids)) { 
+            } 
+            // since it was generating undefined index warning, added isset at first in below condition, but I believe this condition has no use and should be removed. 
+            elseif (isset($item[$key."_filter"]) && in_array($item[$key."_filter"], $ids)) { 
                 //$filter_data_updated[] = $item; 
                 $filter_data[$fdkey][$key_clean."_add_enabled"]=1;
                 $delete_cnt++;
@@ -403,7 +405,9 @@ class Eowbc_Filters extends Eowbc_Model {
             if($by_key and in_array($fdkey, $ids)){
             	$filter_data[$fdkey][$key_clean."_add_enabled"]=0;
                 $delete_cnt++;
-            } elseif (in_array($item[$key."_filter"], $ids) ) { 
+            } 
+			// since it was generating undefined index warning, added isset at first in below condition, but I believe this condition has no use and should be removed. 
+            elseif (isset($item[$key."_filter"]) && in_array($item[$key."_filter"], $ids) ) { 
                 $filter_data[$fdkey][$key_clean."_add_enabled"]=0;
                 $delete_cnt++;
             }            
