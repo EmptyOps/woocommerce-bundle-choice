@@ -27,12 +27,23 @@ class Pair_Builder_Data_Template extends Sample_Data_Template {
 
     public function set_configs_after_categories($catat_category) {
 
+        $_img_url= constant('EOWBC_ASSET_URL').'img/sample_data/'.$this->asset_folder.'/';
+        $sample_data_instance = \eo\wbc\model\admin\sample_data\Eowbc_Sample_Data::instance();
+
+
         // update_option('eo_wbc_first_name','Diamond Shape');//FIRST : NAME
         wbc()->options->update_option('configuration','first_name',$catat_category[0]['id']/*'Diamond Shape'*/);
         // update_option('eo_wbc_first_slug','eo_diamond_shape_cat');//FIRST : SLUG
         wbc()->options->update_option('configuration','first_slug',$catat_category[0]['slug']/*'eo_diamond_shape_cat'*/);
         // update_option('eo_wbc_first_url','/product-category/eo_diamond_shape_cat/');//FIRST : NAME
         wbc()->options->update_option('configuration','first_url','/product-category/eo_diamond_shape_cat/');
+
+        $first_icon = $sample_data_instance->add_image_gallary($_img_url.'first_icon.png');
+
+        if(!empty($first_icon)){
+            wbc()->options->update_option('configuration','first_icon',$first_icon);
+        }
+
         
         // update_option('eo_wbc_second_name','Setting Shape');//SECOND : NAME
         wbc()->options->update_option('configuration','second_name',$catat_category[1]['id']/*'Setting Shape'*/);
@@ -40,6 +51,19 @@ class Pair_Builder_Data_Template extends Sample_Data_Template {
         wbc()->options->update_option('configuration','second_slug',$catat_category[1]['slug']/*'eo_setting_shape_cat'*/);
         // update_option('eo_wbc_second_url','/product-category/eo_setting_shape_cat/');//SECOND : URL   
         wbc()->options->update_option('configuration','second_url','/product-category/eo_setting_shape_cat/');
+
+        $second_icon = $sample_data_instance->add_image_gallary($_img_url.'second_icon.png');
+
+        if(!empty($first_icon)){
+            wbc()->options->update_option('configuration','second_icon',$first_icon);
+        }
+
+
+        wbc()->options->update_option('configuration','preview_name','Preview');    
+        $preview_icon = $sample_data_instance->add_image_gallary($_img_url.'preview_icon.png');
+        if(!empty($preview_icon)){
+            wbc()->options->update_option('configuration','preview_icon',$preview_icon);
+        }
 
         // update_option('eo_wbc_config_category',1);
         wbc()->options->update_option('configuration','config_category',1);
@@ -49,7 +73,6 @@ class Pair_Builder_Data_Template extends Sample_Data_Template {
         wbc()->options->update_option('configuration','buttons_page','0');  //set('eo_wbc_btn_setting','0');
         // update_option('eo_wbc_btn_position','begining');
         wbc()->options->set('eo_wbc_btn_position','begining');              //TODO I think its DEPRECATED starting from DP update. remove it if its no loger used. 
-
     }
 
     public function set_configs_after_attributes() {

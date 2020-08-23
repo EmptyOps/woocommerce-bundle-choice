@@ -28,13 +28,14 @@ function eo_wbc_filter_render_html(data) {
 		jQuery.each(links,function(index,element) {
 
 			var href=jQuery(element).attr('href');
-			if(href.indexOf('?')==-1) {
-				jQuery(element).attr('href',jQuery(element).attr('href')+eo_wbc_object.eo_product_url);
+			if(typeof(href)!==typeof(undefined) && href.hasOwnProperty('indexOf')){
+				if(href.indexOf('?')==-1) {
+					jQuery(element).attr('href',jQuery(element).attr('href')+eo_wbc_object.eo_product_url);
+				} else {
+					jQuery(element).attr('href',href.substring(0,href.indexOf('?'))+eo_wbc_object.eo_product_url);
+				}
 			}
-			else {
-
-				jQuery(element).attr('href',href.substring(0,href.indexOf('?'))+eo_wbc_object.eo_product_url);
-			}									
+			
 		});
 	}
 	else {
@@ -149,7 +150,7 @@ jQuery(document).ready(function($){
 	/////////////////////////
 	////////////////////////
 
-	$( ".eo_wbc_advance_filter" ).accordion({
+	jQuery( ".eo_wbc_advance_filter" ).accordion({
 	  collapsible: true,
 	  active:false
 	});

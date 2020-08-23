@@ -179,25 +179,25 @@ class Options {
 			// Variation item non-hovered
 			$dimention = wbc()->options->get_option('tiny_features','tiny_features_option_ui_option_dimention','2em');
 
-			$border_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_color','#ffffff');
+			$border_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_color','#ECECEC');
 
-			$border_width = wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_width','1px');
+			$border_width = wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_width','2px');
 
 			$border_radius = wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_radius','1px');
 
 			// Variation item hovered
-			$border_hover_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_color_hover','#ffffff');
+			$border_hover_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_color_hover','#3D3D3D');
 
-			$border_hover_width = wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_width_hover','1px');
+			$border_hover_width = wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_width_hover','2px');
 
 			// button only
-			$font_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_font_color','#ffffff');
+			$font_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_font_color','#000000');
 
-			$font_hover_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_font_color_hover','#ffffff');
+			$font_hover_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_font_color_hover','#AA7D7D');
 
 			$bg_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_bg_color','#ffffff');
 
-			$bg_hover_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_bg_color_hover','#ffffff');
+			$bg_hover_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_bg_color_hover','#DCC7C7');
 
 			ob_start();
 			?>

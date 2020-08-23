@@ -283,11 +283,22 @@ class Product {
        });
     }
     
-    public function eo_wbc_product_route(){
+    public function eo_wbc_product_route($return_link = false){
 
         global $post;
         $url=null;        
         $category=$this->eo_wbc_get_category();    
+        $remove_index = wbc()->options->get_option('setting_status_advanced_config','remove_index_php');
+        if(!empty($remove_index)){
+            $remove_index = unserialize($remove_index);
+            if(!empty($remove_index['remove_index_php'])){
+                $remove_index = true;
+            } else {
+                $remove_index = false;
+            }
+        } else {
+            $remove_index = false;
+        }
 
         if(wbc()->sanitize->get('STEP')==1) {   
 
@@ -299,17 +310,20 @@ class Product {
                 if($category==wbc()->options->get_option('configuration','first_slug')) {
 
                     $category_link=$this->eo_wbc_category_link();
-                    $url=get_bloginfo('url').'/index.php/product-category/'.$category_link.
+
+                    $url=get_bloginfo('url').($remove_index?'':'/index.php').'/product-category/'.$category_link.
                     wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>2,'FIRST'=>$post->ID,'SECOND'=>wbc()->sanitize->get('SECOND'),'CART'=>wbc()->sanitize->get('CART'),'ATT_LINK'=>implode(' ',$this->att_link),'CAT_LINK'=>substr($category_link,0,strpos($category_link,'/'))));
 
                 // } elseif($category==get_option('eo_wbc_second_slug')) {
                 } elseif($category==wbc()->options->get_option('configuration','second_slug')) {
 
                     $category_link=$this->eo_wbc_category_link();
-                    $url=get_bloginfo('url').'/index.php/product-category/'.$category_link
+                    $url=get_bloginfo('url').($remove_index?'':'/index.php').'/product-category/'.$category_link
                     .wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>2,'FIRST'=>wbc()->sanitize->get('FIRST'),'SECOND'=>$post->ID,'CART'=>wbc()->sanitize->get('CART'),'ATT_LINK'=>implode(' ',$this->att_link),'CAT_LINK'=>substr($category_link,0,strpos($category_link,'/'))));
                 } 
-                
+                if($return_link) {
+                    return $url;
+                }
                 return header("Location: {$url}");
                 wp_die();
                 //wp_safe_redirect($url ,301 );               

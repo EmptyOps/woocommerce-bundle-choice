@@ -34,8 +34,11 @@ class Admin {
             wbc()->load->model('admin/eowbc_price_control_save_update_prices');
 			add_action( 'save_post',array(\eo\wbc\model\admin\Eowbc_Price_Control_Save_Update_Prices::instance(),'update_prices'),10,3);
         }
-		 		
 		
+		// If the setup wizard is ran then save the status.
+		if(!empty($_GET['setup_wizard_run'])){
+			wbc()->options->update_option('_system','setup_wizard_run', 1);
+		}
 		
 		if(!empty(wbc()->sanitize->get('page')) and wbc()->sanitize->get('page')=='eowbc' and ( (!empty(wbc()->sanitize->get('eo_wbc_view_auto_jewel')) and wbc()->sanitize->get('eo_wbc_view_auto_jewel') == 1) or (!empty(wbc()->sanitize->get('eo_wbc_view_auto_textile')) and wbc()->sanitize->get('eo_wbc_view_auto_textile') == 1) ) ){        	
         	if( isset($_GET['eo_wbc_view_auto_jewel']) && wbc()->sanitize->get('eo_wbc_view_auto_jewel') == 1 ) {

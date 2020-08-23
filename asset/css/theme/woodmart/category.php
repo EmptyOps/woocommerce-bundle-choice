@@ -20,4 +20,10 @@
 	.eo-wbc-container > .ui.steps .step.active .title {
 	    color: black !important;
 	}
+	/*.woodmart-shop-tools{
+		display: none !important;
+	}*/
+	.page-title.page-title-default{
+		display: none !important;
+	}
 </style>

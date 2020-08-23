@@ -108,6 +108,15 @@ class Eowbc_Filters extends Eowbc_Model {
 	    return $form_definition;
 	}
 
+	public function switch_template_5(){
+		wbc()->options->update_option('filters_filter_setting','filter_setting_price_filter_width','37.5%');
+		wbc()->options->update_option('appearance_filter','header_font','Avenir');
+		//wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_active','#dde5ed');
+		//wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_inactive','#ffffff');
+		wbc()->options->update_option('appearance_filters','slider_track_backcolor_active',sanitize_hex_color('#9bb8d3'));
+		wbc()->options->update_option('appearance_filters','slider_nodes_backcolor_active',sanitize_hex_color('#9bb8d3'));		
+	}
+
 	public function switch_template_4(){
 		wbc()->options->update_option('appearance_filter','header_font','ZapfHumanist601BT-Roman');
 		//wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_active','#f7f7f7');	
@@ -142,7 +151,10 @@ class Eowbc_Filters extends Eowbc_Model {
 			$res['ef'] = $_POST['first_category_altr_filt_widgts'];
 			$res['tf'] = wbc()->options->get_option('filters_'.$this->tab_key_prefix.'altr_filt_widgts','first_category_altr_filt_widgts');
 			if(!empty($_POST['first_category_altr_filt_widgts']) and $_POST['first_category_altr_filt_widgts']!=wbc()->options->get_option('filters_'.$this->tab_key_prefix.'altr_filt_widgts','first_category_altr_filt_widgts') ) {
-				if($_POST['first_category_altr_filt_widgts']=='fc4'){
+				
+				if($_POST['first_category_altr_filt_widgts']=='fc5'){
+					$this->switch_template_5();
+				} elseif($_POST['first_category_altr_filt_widgts']=='fc4'){
 					$this->switch_template_4();
 				} elseif ($_POST['first_category_altr_filt_widgts']=='fc3') {
 					$this->switch_template_3();
@@ -183,9 +195,11 @@ class Eowbc_Filters extends Eowbc_Model {
 				}
 			}
 
-			if(!empty($_POST['second_category_altr_filt_widgts']) and $_POST['second_category_altr_filt_widgts']!=wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts') ) {
+			if(!empty($_POST['second_category_altr_filt_widgts']) and $_POST['second_category_altr_filt_widgts']!=wbc()->options->get_option('	filters_altr_filt_widgts','second_category_altr_filt_widgts') ) {
 
-				if($_POST['second_category_altr_filt_widgts']=='sc4'){
+				if($_POST['second_category_altr_filt_widgts']=='sc5'){
+					$this->switch_template_5();
+				}elseif($_POST['second_category_altr_filt_widgts']=='sc4'){
 					$this->switch_template_4();
 				} elseif ($_POST['second_category_altr_filt_widgts']=='sc3') {
 					$this->switch_template_3();
