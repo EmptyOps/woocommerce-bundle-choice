@@ -6,24 +6,25 @@
 
 ?>
 <style type="text/css">
-    .ui.grid>* {
-     padding-left: 5px; 
-     padding-right: 0px !important;
-}
+    .eo-wbc-container.container .ui.grid>* {
+         padding-left: 5px; 
+         padding-right: 0px !important;
+    }
 
-.eo-wbc-container>.ui.steps .step .column.product_image_section img{
-    margin-left: 30% !important;
-}
+    .eo-wbc-container>.ui.steps .step .column.product_image_section img{
+        margin-left: 30% !important;
+    }
 
-.eo-wbc-container>.ui.steps .step:after {
-    height: 3.5em !important;
-    width: 3.5em !important;
-}
+    .eo-wbc-container>.ui.steps .step:after {
+        height: 3.5em !important;
+        width: 3.5em !important;
+    }
 
-.eo-wbc-container.container .ui.steps {
-    border: 1px solid lightgray;
-    box-shadow: 2px 2px 0 #efefef;
-    padding: 4px;
+    /*.eo-wbc-container.container .ui.steps {
+        border: 1px solid lightgray;
+        box-shadow: 2px 2px 0 #efefef;
+        padding: 4px;
+    }*/
 </style>
 <div class="step <?php echo (($step==$order)?'active ':(($step>$order)?'completed ':'disabled')); ?>" style="">            
     <div class="ui equal width grid" style="width: 100%;margin-top: -1em !important;">
@@ -46,7 +47,7 @@
         <div class="column " style="font-size: x-small;">
             <?php _e(wc_price($first->get_price())); ?>
             <br/>
-            <u><a href="<?php echo !empty(wbc()->sanitize->get('FIRST')) ? eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('FIRST'),$order):'#'; ?>">View</a></u>&nbsp;|&nbsp;<u><a href="<?php echo !empty(wbc()->sanitize->get('FIRST'))?eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('FIRST')):'#'; ?>">Remove</a></u>
+            <u><a href="<?php echo !empty(wbc()->sanitize->get('FIRST')) ? eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('FIRST'),$order):'#'; ?>">View</a></u>&nbsp;|&nbsp;<u><a href="<?php echo !empty(wbc()->sanitize->get('FIRST'))?eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('FIRST')):'#'; ?>"><?php _e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_change_action_text','Change',true,true)); ?></a></u>
         </div>                        
         
     <?php endif; ?>

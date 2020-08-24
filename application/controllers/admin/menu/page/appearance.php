@@ -94,7 +94,21 @@ if ( ! class_exists( 'Appearance' ) ) {
 										'class'=>array('fluid', 'small'),
 										'size_class'=>array('sixteen','wide'),
 									),	
-								),								 
+								),	
+								'appearance_breadcrumb_change_action_text'=>array(
+									'label'=>'Text for Change Action',
+									'type'=>'text',
+									'sanitize'=>'sanitize_text_field',
+									'value'=>'Change',
+									'validate'=>array('required'=>''),
+									'class'=>array(),
+									'visible_info'=>array( 'label'=>'Specify the text that you want to show for change action of the breadcrumb step\'s item, default value is \'Change\'',
+										'type'=>'visible_info',
+										'class'=>array('fluid', 'small'),
+										'size_class'=>array('sixteen','wide'),
+									),	
+								),
+								
 							), 
 							array( 
 								'breadcrumb_submit_btn'=>array(

@@ -25,7 +25,7 @@
                     <u><a href="<?php echo !empty(wbc()->sanitize->get('FIRST')) ? \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('FIRST'),$order):'#'; ?>">View</a>
                     </u>
                     <u>
-                        <a href="<?php echo !empty(wbc()->sanitize->get('FIRST'))?\eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('FIRST')):'#'; ?>">Remove</a>
+                        <a href="<?php echo !empty(wbc()->sanitize->get('FIRST'))?\eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('FIRST')):'#'; ?>"><?php _e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_change_action_text','Change',true,true)); ?></a>
                     </u>
                 </div>  
             </div>                

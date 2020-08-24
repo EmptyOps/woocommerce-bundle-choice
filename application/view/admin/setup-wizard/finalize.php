@@ -35,10 +35,10 @@ var_dump($available_feature);*/
 				  			<button class="ui inverted red button" type="submit" onclick="window.history.go(-1); return false;">Back</button>
 				  		</div>
 						<div class="field">
-							<div class="ui inverted green button <?php (empty(array_intersect(array_keys($features),$available_sample)))?_e('disabled'):''; ?>" id="create_product" data-link="<?php echo admin_url("admin.php?page=eowbc&eo_wbc_view_auto_jewel=1&f=".implode(',',$features)); ?>">Add sample and Finish</div>	
+							<div class="ui inverted green button <?php (empty(array_intersect(array_keys($features),$available_sample)))?_e('disabled'):''; ?>" id="create_product" data-link="<?php echo admin_url("admin.php?setup_wizard_run=1&page=eowbc&eo_wbc_view_auto_jewel=1&f=".implode(',',$features)); ?>">Add sample and Finish</div>	
 						</div>
 						<div class="field">
-			  				<u><a href="<?php echo admin_url('admin.php?page=eowbc'); ?>">Skip and finish</a></u>
+			  				<u><a href="<?php echo admin_url('admin.php?setup_wizard_run=1&page=eowbc'); ?>">Skip and finish</a></u>
 			  			</div>
 					</div>
 				</div>

@@ -825,7 +825,7 @@ class Eowbc_Sample_Data {
 	}
 
 	/* Add image to the wordpress image media gallary */
-	private function add_image_gallary($path) {
+	public function add_image_gallary($path) {
 
 		if(!$path) return FALSE;
 
