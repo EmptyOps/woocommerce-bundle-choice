@@ -42,9 +42,11 @@ class Preview {
         wbc()->theme->load('css','review');
         wbc()->theme->load('js','review');
         /*Hide sidebar and make content area full width.*/
-        add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
-            return array( false );
-        });
+        if(apply_filters('eowbc_filter_sidebars_widgets',true)){
+            add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
+                return array( false );
+            });
+        }
         ob_start();        
         ?>
         <style type="text/css">
@@ -329,7 +331,7 @@ class Preview {
                 '</div>'.
                 '<div class="ui row" style="display:grid !important;"><form action="" method="post" class="woocommerce" style="float:right;margin-top: 1.5em;display:grid !important;">'.
                     '<input type="hidden" name="add_to_cart" value=1>'.
-                    '<button class="ui button right floated aligned" style="background-color:'.wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active',wbc()->session->get('EO_WBC_BG_COLOR',FALSE))/*get_option('eo_wbc_active_breadcrumb_color',wbc()->session->get('EO_WBC_BG_COLOR',FALSE))*/.'">'.__('Add This To Cart','woo-bundle-choice').
+                    '<button class="ui button right floated aligned" style="width: fit-content;margin: auto;background-color:'.wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active',wbc()->session->get('EO_WBC_BG_COLOR',FALSE))/*get_option('eo_wbc_active_breadcrumb_color',wbc()->session->get('EO_WBC_BG_COLOR',FALSE))*/.'">'.__('Add This To Cart','woo-bundle-choice').
                     '</button>'.
                 '</form></div>';                
                 add_filter('the_content',function() use($content){

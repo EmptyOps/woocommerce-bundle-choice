@@ -11,7 +11,8 @@ if(!class_exists('WBC_Validate')) {
 				self::$_instance = new self;				
 				self::$_instance->methods = array(
 					'required',
-					'postfix',									
+					'postfix',
+					'validate_if',									
 				);
 			}
 			return self::$_instance;
@@ -74,6 +75,28 @@ if(!class_exists('WBC_Validate')) {
 		public function required($label,$value,$param){
 			// return (!empty($value)?true:"`${label}` field is required!");
 			return (!( $value!==0 && $value!=="0" && empty($value) )?true:"`${label}` field is required!");
+		}
+
+		public function validate_if($label,$value,$param){			
+			if(empty($param)) return true;
+			foreach ($param as $key => $validations) {
+				if (isset($_POST[$key]) and is_array($validations)) {
+					foreach ($validations as $sanitize_method=>$sanitize_params) 
+					{
+		    			if(in_array($sanitize_method,$this->methods)) {
+		    				$validation_state = call_user_func_array( array( $this,$sanitize_method),array($label,$value,$sanitize_params));
+		    				if($validation_state!==true) {
+				    			$res["msg"] = $validation_state;
+				    			echo json_encode($res);
+				    			die();
+				    		}
+		    			}				    			
+		    		}
+		    		return true;
+				} else {
+					return true;
+				}
+			}			
 		}
 
 		public function postfix($label,$value,$param){

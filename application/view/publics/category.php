@@ -10,7 +10,7 @@
     .cat_products{
         border:1.3px solid #80808059;
         border-radius: 1.5px;
-        margin:3.125% !important;
+        margin:auto !important;
         margin-bottom: 2em !important;                            
     }
     @media only screen and (max-width: 768px) {

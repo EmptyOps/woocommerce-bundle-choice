@@ -68,17 +68,18 @@ if ( ! class_exists( 'Shop_Category_Filter' ) ) {
 					'force_value'=>1,
 					'sanitize'=>'sanitize_text_field',
 					'options'=>\eo\wbc\model\Category_Attribute::instance()->get_category(),
-					'class'=>array('fluid'),
+					'class'=>array('fluid','multiple'),
+					'field_attr'=>array('multiple=""'),
 					'inline'=>false,
 					'visible_info'=>array( 'label'=>eowbc_lang('( Select category on which to show filter widget. )'),
 						'type'=>'visible_info',
 						'class'=>array('small'),
 					),
 					'size_class'=>array('transition','hidden','required'),
-					'inject_at'=>2,
+					'inject_at'=>2,					
 				),
 			);
-
+			
 			// add prefix
 			if(!empty($form_definition) and is_array($form_definition)){				
 				foreach ($form_definition as $form_key => $form_value) {
@@ -129,6 +130,28 @@ if ( ! class_exists( 'Shop_Category_Filter' ) ) {
 				$indat++;
 			}	
 
+			//wbc()->common->pr($form_definition['sc_d_fconfig']['form']);
+
+			$form_definition['sc_d_fconfig']['form'] = wbc()->common->array_insert_before($form_definition['sc_d_fconfig']['form'],'d_fconfig_filter_label','filter_category',array(
+					'label'=>eowbc_lang('Category'),
+					'type'=>'select',
+					'value'=>'',					
+					'sanitize'=>'sanitize_text_field',
+					'options'=>\eo\wbc\model\Category_Attribute::instance()->get_category(),
+					'class'=>array('fluid'/*,'multiple'*/),
+					/*'field_attr'=>array('multiple=""'),*/
+					'inline'=>false,
+					'visible_info'=>array( 'label'=>eowbc_lang('If you leave it empty the filter field will be added to all categories if you enabled and selected categories from configuration, and on shop page if you enabled shop page from configuration.'),
+						'type'=>'visible_info',
+						'class'=>array('small'),
+					),
+					/*'size_class'=>array('transition','hidden','required'),*/
+				));
+			$form_definition['sc_d_fconfig']['form']['list']['head'][0][]= array('is_header' => 1,
+                      'val' => 'Category Page',
+                      'field_id' => 'filter_category',
+                    );
+			//wbc()->common->pr($form_definition['sc_d_fconfig']['form']);
 			return $form_definition;
 		}
 

@@ -88,6 +88,7 @@ class Eowbc_Sample_Data {
 			  $catat = $this->data_template;
 
 			      if(!empty($category)){
+			      	set_time_limit(300);
 			        //Send for creation and update returned array.
 			        $catat_category=$this->create_category($category);            
 			        // update_option('eo_wbc_cats',serialize($catat_category)); 
@@ -101,6 +102,7 @@ class Eowbc_Sample_Data {
 			      }
 
 			      if(!empty($attributes)){
+			      	set_time_limit(300);
 			        //Send for creation and update returned array.
 			        $catat_attribute=$this->create_attribute($attributes);            
 			        // update_option('eo_wbc_attr',serialize($catat_attribute));

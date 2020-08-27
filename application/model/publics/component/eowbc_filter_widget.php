@@ -139,6 +139,8 @@ class EOWBC_Filter_Widget {
 		wbc()->load->asset('css','fomantic/semantic.min');
 		wbc()->load->asset('js','fomantic/semantic.min');
 		wbc()->load->asset('js','publics/eo_wbc_filter');
+		wbc()->theme->load('css','filter');
+        wbc()->theme->load('js','filter');
             
 		$current_category=$this->_category;
 		$site_url=site_url();
@@ -298,6 +300,14 @@ class EOWBC_Filter_Widget {
 					    margin-top: 10vh;
 					    height: fit-content;
 					}
+
+					#help_modal .close{
+						width:auto;
+					}
+
+					#help_modal .close:before{
+						content: 'Close  \\f00d';
+					}
 									
 					/*Modifications............................*/
 				</style>";	
@@ -330,7 +340,7 @@ class EOWBC_Filter_Widget {
 							jQuery.fn.wbc_flip_toggle_image(this);
 						});
 					})
-				</script>
+				</script>				
 				<?php
 			if(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')){
 				ob_start();
@@ -1066,7 +1076,7 @@ class EOWBC_Filter_Widget {
 			<?php
 		} else {
 			?>
-			<div id="help_modal" class="ui small modal"><div class="content"></div></div>
+			<div id="help_modal" class="ui small modal"><i class="close icon" style="top: 0;right: 0;color: #000;"></i><div class="header"></div><div class="content"></div></div>
 			<div class="eo-wbc-container filters container ui form">
 				<div class="ui segments">
 					<div class="ui segment"><?php
@@ -1557,8 +1567,11 @@ class EOWBC_Filter_Widget {
     }
     
     public function eo_wbc_get_category() {        
-        global $wp_query;        
         
+        
+        return wbc()->common->get_category('category',null,array(wbc()->options->get_option('configuration','first_slug'),wbc()->options->get_option('configuration','second_slug')));
+
+        global $wp_query;
 
         if(empty($wp_query) or empty($wp_query->get_queried_object()) or empty($wp_query->get_queried_object()->term_id)) return '';
 

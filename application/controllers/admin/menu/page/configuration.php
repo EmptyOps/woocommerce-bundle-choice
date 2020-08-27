@@ -158,7 +158,7 @@ if ( ! class_exists( 'Configuration' ) ) {
 									'label_make_pair'=>array(
 											'label'=>'Button label',
 											'type'=>'text',
-											'validate'=>array('required'=>''),
+											'validate'=>/*( !empty($_POST['enable_make_pair'])?array('required'=>''):array())*/array('validate_if'=>array('enable_make_pair'=>array('required'=>''))),
 											'value'=>wbc()->options->get_option('configuration','label_make_pair'),
 											'class'=>array(),
 											'size_class'=>array('eight','wide','required'),

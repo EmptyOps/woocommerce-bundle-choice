@@ -118,7 +118,7 @@ class EOWBC_Breadcrumb
     private static function eo_wbc_breadcrumb_mobile($step=1,$begin){
         ob_start();
         ?>
-        <div class="ui container unstackable steps">
+        <div class="ui container unstackable steps" style="width: 100% !important; min-width: unset; max-width: unset; margin: auto; margin-bottom: 1em;">
             <?php 
             if(!empty(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_fixed_navigation'))) {
                 $_step = 1;

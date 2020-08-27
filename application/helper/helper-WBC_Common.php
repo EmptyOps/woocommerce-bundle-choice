@@ -20,6 +20,9 @@ class WBC_Common {
 		$return_category = '';
 		if($page == 'category' ) {
 			global $wp_query;
+			if(!property_exists($wp_query->get_queried_object(),'term_id')){
+				return false;
+			}
 			if(!empty($in_category) and is_array($in_category)) {
 				$term_slug=array_map(array(wbc()->wp,"cat_id2slug"),get_ancestors($wp_query->get_queried_object()->term_id, 'product_cat'));				
 				$term_slug[]=$wp_query->get_queried_object()->slug;					
@@ -66,6 +69,21 @@ class WBC_Common {
 			}
 		} else {
 			return false;
+		}
+	}
+
+	public function array_insert_before( $array,$before_key,$key,$value ){
+		if(is_array($array) and !empty($array)){
+			$new_array = array();
+			foreach ($array as $array_key => $array_value) {
+				if($array_key==$before_key){
+					$new_array[$key] = $value;
+				}
+				$new_array[$array_key] = $array_value;
+			}
+			return $new_array;
+		} else {
+			return array($key=>$value);
 		}
 	}
 
