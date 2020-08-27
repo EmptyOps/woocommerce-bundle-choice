@@ -1,5 +1,5 @@
 // a shared namespace among plugins and extensions of the sphere plugins
-jQuery.splugins = {};
+jQuery.splugins = jQuery.splugins || {};
 
 jQuery.splugins.hasAttr = function(obj,name) {  
    return jQuery(obj).attr(name) !== undefined;
