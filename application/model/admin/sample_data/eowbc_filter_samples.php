@@ -658,7 +658,7 @@ class Filter_Samples {
 			$this->filter['d_fconfig'][]=array(
                     'name'=>$__cat__['eo_diamond_shape_cat'][0],
                     'type'=>"0",
-                    'label'=>$__cat__['eo_diamond_shape_cat'][1],
+                    'label'=>"Shape",    //$__cat__['eo_diamond_shape_cat'][1],
                     'advance'=>"0",
                     'dependent'=>"0",
                     'input'=>"icon_text",
@@ -1173,7 +1173,7 @@ class Filter_Samples {
 			$this->filter['s_fconfig'][]=array(
                 'name'=>$__cat__['eo_setting_shape_cat'][0],
                 'type'=>"0",
-                'label'=>$__cat__['eo_setting_shape_cat'][1],
+                'label'=>"Shape",    //$__cat__['eo_setting_shape_cat'][1],
                 'advance'=>"0",
                 'dependent'=>"0",
                 'input'=>"icon_text",

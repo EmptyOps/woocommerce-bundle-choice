@@ -35,37 +35,6 @@ class Category {
               OR
             $this->eo_wbc_get_category()== wbc()->options->get_option('configuration','second_slug'))) and !empty(wbc()->sanitize->get('EO_WBC')) ) or $this->is_shop_cat_filter===true or $this->is_shortcode_filter //get_option('eo_wbc_second_slug')
         ){
-            wbc()->theme->load('css','category');
-            wbc()->theme->load('js','category');
-            
-            /*Hide the category Title*/
-            add_filter( 'woocommerce_page_title','__return_false');
-
-            /*Hide sidebar and make content area full width.*/
-            if(apply_filters('eowbc_filter_sidebars_widgets',true)){
-                add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
-                    return array( false );
-                });
-            }
-            ob_start();        
-            ?>
-            <style type="text/css">
-                .woocommerce-products-header__title page-title{
-                    display: none;
-                }
-                .woocommerce .content-area ,#content,#primary,#main,.content,.primary,.main{
-                      width: 100% !important;
-                 }
-                 .woocommerce .widget-area {
-                      display: none !important;
-                 }
-                 .tax-product_cat .thb-shop-title {
-                  display: none;
-                }
-            </style>
-            <?php
-            echo ob_get_clean();
-            /*End --Hide sidebar and make content area full width.*/
 
             //if( get_option('eo_wbc_filter_enable')=='1' ){
             /*wbc()->options->update_option('filters_filter_setting','config_filter_status','config_filter_status');*/
@@ -73,6 +42,38 @@ class Category {
             /*wbc()->options->update_option('filters_filter_setting','filter_setting_alternate_mobile','filter_setting_alternate_mobile');*/
 
             if(wbc()->options->get_option('filters_filter_setting','filter_setting_status','filter_setting_status') or $this->is_shop_cat_filter===true or $this->is_shortcode_filter) {
+
+                wbc()->theme->load('css','category');
+                wbc()->theme->load('js','category');
+            
+                /*Hide the category Title*/
+                add_filter( 'woocommerce_page_title','__return_false');
+
+                /*Hide sidebar and make content area full width.*/
+                if(apply_filters('eowbc_filter_sidebars_widgets',true)){
+                    add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
+                        return array( false );
+                    });
+                }
+                ob_start();        
+                ?>
+                <style type="text/css">
+                    .woocommerce-products-header__title page-title{
+                        display: none;
+                    }
+                    .woocommerce .content-area ,#content,#primary,#main,.content,.primary,.main{
+                          width: 100% !important;
+                     }
+                     .woocommerce .widget-area {
+                          display: none !important;
+                     }
+                     .tax-product_cat .thb-shop-title {
+                      display: none;
+                    }
+                </style>
+                <?php
+                echo ob_get_clean();
+                /*End --Hide sidebar and make content area full width.*/
 
                 if(
                      // ($this->eo_wbc_get_category()==get_option('eo_wbc_first_slug') && get_option('eo_wbc_add_filter_first',FALSE) )

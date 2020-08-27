@@ -43,6 +43,7 @@ class Eowbc_Filters extends Eowbc_Model {
 					$filter_data = unserialize(wbc()->options->get_option_group('filters_'.$key,"a:0:{}"));
 					
 					//wbc()->common->pr($form_definition, false, false);
+					// wbc()->common->var_dump('table data for key '.$key);
 					// wbc()->common->pr($filter_data, false, false);
 
 					$body = array();

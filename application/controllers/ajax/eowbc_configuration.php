@@ -19,4 +19,5 @@ else {
 	$res["msg"] = "Nonce validation failed";
 }
 
-echo json_encode($res);
+// echo json_encode($res);
+wbc()->rest->response($res);
