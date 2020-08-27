@@ -194,9 +194,12 @@ class Product {
         wbc()->theme->load('css','product');
         wbc()->theme->load('js','product');
         /*Hide sidebar and make content area full width.*/
-        add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
-            return array( false );
-        });
+        if(apply_filters('eowbc_filter_sidebars_widgets',true)){
+            add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
+                return array( false );
+            });    
+        }
+        
         ob_start();        
         ?>
         <style type="text/css">
@@ -268,7 +271,7 @@ class Product {
 
                         jQuery(".single_add_to_cart_button.button.alt:not(.disabled)").replaceWith('<div class=\"ui buttons\">'+
                                 '<div class=\"ui button\" href=\"#\" id=\"eo_wbc_add_to_cart\"><?php echo $btn_text; ?></div>'+
-                                    '<div class=\"ui floating dropdown icon button\" style=\"width: fit-content;\">'+
+                                    '<div class=\"ui floating dropdown icon button\" style=\"width: fit-content;min-width: unset; max-width: unset;\">'+
                                         '<i class=\"dropdown icon\"></i>'+
                                         '<div class=\"menu\">'+
                                             '<div class=\"item\" onClick=\"window.wbc_atb_submin_form();\"><?php echo wbc()->options->get_option('appearance_product_page','product_page_add_to_basket','');?></div>'+                                    
@@ -291,18 +294,22 @@ class Product {
             
             <?php 
             
-            if(
-                (wbc()->options->get_option('appearance_product_page','product_page_hide_first_variation_form',false) and $category == wbc()->options->get_option('configuration','first_slug')) or wbc()->options->get_option('appearance_product_page','product_page_hide_second_variation_form',false) and $category == wbc()->options->get_option('configuration','second_slug')
-            ): ?>
-            <style>
-                .variations_form table.variations{
-                    display:none !important;
-                }
-            </style>
-            <?php endif ?>
-
+            global $post;            
+            $product = wbc()->wc->eo_wbc_get_product($post->ID);
+            if( $product->is_type('variable') and !empty($product->get_default_attributes())) {
+                    
+                if(
+                    (wbc()->options->get_option('tiny_features','product_page_hide_first_variation_form',false) and $category == wbc()->options->get_option('configuration','first_slug')) or wbc()->options->get_option('tiny_features','product_page_hide_second_variation_form',false) and $category == wbc()->options->get_option('configuration','second_slug')
+                ): ?>
+                <style>
+                    .variations_form table.variations{
+                        display:none !important;
+                    }
+                </style>
+                <?php endif ?>
+               <?php    
+            }
             
-           <?php    
        });
     }
     

@@ -20,7 +20,7 @@ if ( ! class_exists( 'Appearance' ) ) {
 		}
 
 		public static function get_form_definition( $is_add_sample_values = false ) {
-			
+			//wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_wrap_mobile');
 			wbc()->load->model('admin/form-builder');
 
 			$form_definition = array(
@@ -108,7 +108,20 @@ if ( ! class_exists( 'Appearance' ) ) {
 										'size_class'=>array('sixteen','wide'),
 									),	
 								),
-								
+								'appearance_breadcrumb_wrap_mobile'=>array(
+									'label'=>'Wrap title on mobile',
+									'type'=>'checkbox',
+									'sanitize'=>'sanitize_text_field',
+									'value'=>'',	//hiren commented the population from database here since it is meant to specify default only here. array(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_hide_border')),
+									'options'=>array('1'=>' '),
+									'is_id_as_name'=>true,
+									'class'=>array(),
+									'visible_info'=>array( 'label'=>'( Wrap mobile breadcrumb title. )',
+										'type'=>'visible_info',
+										'class'=>array('fluid', 'small'),
+										'size_class'=>array('sixteen','wide'),
+									),	
+								),
 							), 
 							array( 
 								'breadcrumb_submit_btn'=>array(
@@ -238,35 +251,7 @@ if ( ! class_exists( 'Appearance' ) ) {
 								'class'=>array('fluid', 'small'),
 								'size_class'=>array('sixteen','wide'),
 							),	
-						), 
-						'product_page_hide_first_variation_form'=>array(
-							'label'=>'Hide first category\'s variation menu',
-							'type'=>'checkbox',
-							'sanitize'=>'sanitize_text_field',
-							'value'=>array(wbc()->options->get_option('product_page','product_page_hide_first_variation_form')),
-							'options'=>array('1'=>' '),
-							'is_id_as_name'=>true,
-							'class'=>array(),
-							'visible_info'=>array( 'label'=>'If enabled the variation selection table for first category\'s products will be hidden if default variations are set',
-								'type'=>'visible_info',
-								'class'=>array('fluid', 'small'),
-								'size_class'=>array('sixteen','wide'),
-							),	
-						), 
-						'product_page_hide_second_variation_form'=>array(
-							'label'=>'Hide second category\'s variation menu',
-							'type'=>'checkbox',
-							'sanitize'=>'sanitize_text_field',
-							'value'=>array(wbc()->options->get_option('product_page','product_page_hide_second_variation_form')),
-							'options'=>array('1'=>' '),
-							'is_id_as_name'=>true,
-							'class'=>array(),
-							'visible_info'=>array( 'label'=>'If enabled the variation selection table for second category\'s products will be hidden if default variations are set',
-								'type'=>'visible_info',
-								'class'=>array('fluid', 'small'),
-								'size_class'=>array('sixteen','wide'),
-							),	
-						), 
+						), 						
 						'show_spec_view_in_pair_builder'=>array(
 							'label'=>'Show Specification View',
 							'type'=>'checkbox',

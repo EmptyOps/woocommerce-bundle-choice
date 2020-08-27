@@ -6,18 +6,18 @@
 
 ?>
 <div class="step <?php echo (($step==$order)?'active ':(($step>$order)?'completed ':'disabled')); ?> second_mobile">
-    <div class="content"><?php echo get_option('eo_wbc_second_name',''); ?></div>
+    <div class="content"><?php echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second_name; ?></div>
     <div class="ui flowing popup bottom right transition hidden second_mobile" style="width: 80%;">
         <div class="ui grid">
             <div class="six wide column" style="width: 80px;height: auto;margin: auto;">
-                <?php if(!empty(self::$second)) : ?>
-                <?php echo self::$second->get_image(); ?>
+                <?php if(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second)) : ?>
+                <?php echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second->get_image(); ?>
                 <?php endif; ?>
             </div>
             <div class="ten wide column">
                 <div class="ui header">
-                    <?php if(!empty(self::$second)) : ?>
-                    <?php _e(wc_price(self::$second->get_price())); ?>
+                    <?php if(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second)) : ?>
+                    <?php _e(wc_price(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second->get_price())); ?>
                     <?php endif; ?>
                 </div>
                 <br/>

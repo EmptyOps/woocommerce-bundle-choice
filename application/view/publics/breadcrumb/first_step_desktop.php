@@ -7,7 +7,7 @@
 ?>
 
 <style type="text/css">
-    .eo-wbc-container.container .ui.grid>* {
+    .eo-wbc-container.container .ui.grid:not(.eo_wbc_filter_icon)>* {
         padding-left: 5px; 
         padding-right: 0px !important;
     }

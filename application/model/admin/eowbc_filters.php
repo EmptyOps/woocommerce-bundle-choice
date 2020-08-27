@@ -65,7 +65,7 @@ class Eowbc_Filters extends Eowbc_Model {
 							if(empty($cv["field_id"])) { continue; }
 							$rvk = $cv["field_id"];
 							$rvv = ( !isset($rv[$rvk]) || wbc()->common->nonZeroEmpty($rv[$rvk]) ) ?  "" : $rv[$rvk];
-
+							
 							//skip the id
 							if( in_array($rvk,array($key_clean."_dependent",$key_clean."_type",$key_clean."_add_help",$key_clean."_add_help_text",$key_clean."_add_enabled")) ) {
 								continue;
@@ -76,7 +76,7 @@ class Eowbc_Filters extends Eowbc_Model {
 							}
 							else if( $rvk == $key_clean."_add_reset_link" ) {
 								$row[] = array( 'val' => $rvv == 1 ? "Yes" : "No" ,'disabled'=>$disabled);
-							}
+							}							
 							else if( $rvk == $key_clean."_input_type" || $rvk == $key_clean."_filter" ) {
 								$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv);
 								if($rvk == $key_clean."_filter"){
@@ -85,6 +85,9 @@ class Eowbc_Filters extends Eowbc_Model {
 									$row[] = array( 'val' => !is_array($val)?$val:$val["label"] ,'disabled'=>$disabled);	
 								}
 								
+							}elseif(!empty($form_definition[$key]["form"][$cv['field_id']]) and $form_definition[$key]["form"][$cv['field_id']]['type']=='select') {
+								$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv);
+								$row[] = array( 'val' => $val ,'disabled'=>$disabled);
 							}
 							else {
 								$row[] = array( 'val' => $rvv ,'disabled'=>$disabled);

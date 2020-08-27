@@ -135,7 +135,7 @@ $this_plugin = '';
 	    		break;
 	    	}
 	    	else {
-	    		$response = get_extensions_data( $url);
+	    		$response = get_extensions_data();
 	    	}
 	    }
 
