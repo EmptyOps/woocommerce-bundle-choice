@@ -701,7 +701,7 @@ class EOWBC_Filter_Widget {
 		$title = $label;
 		$filter_type = $type;
 		$width = $column_width;
-		$reset =  !empty($empty);		
+		$reset =  !empty($reset);		
 		$help=(!empty(${$__prefix.'_fconfig_add_help'})?${$__prefix.'_fconfig_add_help_text'}:'');		
 		
 		$prefix='';
@@ -823,7 +823,7 @@ class EOWBC_Filter_Widget {
 		$title = $label;
 		$filter_type = $type;
 		$width = $column_width;
-		$reset =  !empty($empty);		
+		$reset =  !empty($reset);		
 		$help=(!empty(${$__prefix.'_fconfig_add_help'})?${$__prefix.'_fconfig_add_help_text'}:'');		
 		
 		if(!empty($text_slider_prefix)){
@@ -878,8 +878,8 @@ class EOWBC_Filter_Widget {
 		$title = $label;
 		$filter_type = $type;
 		$width = $column_width;
-		$reset =  !empty($empty);		
-		$help=(!empty(${$__prefix.'_fconfig_add_help'})?${$__prefix.'_fconfig_add_help_text'}:'');		
+		$reset =  !empty($reset);	
+		$help=(!empty(${$__prefix.'_fconfig_add_help'})?${$__prefix.'_fconfig_add_help_text'}:'');	
 		
 		if(!empty($text_slider_prefix)){
 			$prefix = $text_slider_prefix;
@@ -1318,7 +1318,7 @@ class EOWBC_Filter_Widget {
 		$width=$column_width;
 		$icon_width = (isset($icon_size)?$icon_size:false);
 		$label_size = (isset($font_size)?$font_size:false);
-		$reset = !empty($empty);
+		$reset = !empty($reset);
 		$child_label = (isset($child_label)?$child_label:false);		
 		$help=(!empty(${$__prefix.'_fconfig_add_help'})?${$__prefix.'_fconfig_add_help_text'}:'');		
 		$hidden = !empty($hidden);

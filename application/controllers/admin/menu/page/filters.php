@@ -734,6 +734,12 @@ if ( ! class_exists( 'Filters' ) ) {
 								'style'=>'normal',
 								// 'prev_inline'=>true,
 								// 'inline'=>true,
+								'visible_info'=>array( 
+									'label'=>eowbc_lang('Reset action is not suported yet with the Template 3.'),
+									'type'=>'visible_info',
+									'class'=>array('small'),
+									// 'size_class'=>array('sixteen','wide'),
+								),
 							),
 							'd_fconfig_add_help'=>array(
 								'type'=>'checkbox',
@@ -1005,6 +1011,12 @@ if ( ! class_exists( 'Filters' ) ) {
 								'style'=>'normal',
 								// 'prev_inline'=>true,
 								// 'inline'=>true,
+								'visible_info'=>array( 
+									'label'=>eowbc_lang('Reset action is not suported yet with the Template 3.'),
+									'type'=>'visible_info',
+									'class'=>array('small'),
+									// 'size_class'=>array('sixteen','wide'),
+								),
 							),
 							's_fconfig_add_help'=>array(
 								'type'=>'checkbox',

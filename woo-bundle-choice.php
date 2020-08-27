@@ -102,7 +102,7 @@ if(!class_exists('Woo_Bundle_Choice')) {
 			*/
 
 
-			$library = array('load'=>'WBC_Loader','migration'=>'WBC_Migration','sanitize'=>'WBC_Sanitize','validate'=>'WBC_Validate');
+			$library = array('load'=>'WBC_Loader','migration'=>'WBC_Migration','sanitize'=>'WBC_Sanitize','validate'=>'WBC_Validate','rest'=>'WBC_REST');
 
 			if(!empty($library)){
 
