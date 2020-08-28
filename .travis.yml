@@ -119,6 +119,7 @@ before_script:
   - install-wordpress
   # - install_test_suite
   # - move_things
+  - echo test_environment
   
   - |
     if [[ $(test_environment) == "WBC_TEST_ENV_default" ]]; then
