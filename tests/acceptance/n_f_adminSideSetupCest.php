@@ -242,7 +242,7 @@ class n_f_adminSideSetupCest
                 // find and click edit action within the row
                 $I->editActionClick( $I, $filter[$i] ); 
         
-            $I->wbc_fillField($I,$field_id[$i],$field_type[$i],$field_name[$i],$val[$i], isset($field_dropdown_div_id[$i]) ? $field_dropdown_div_id[$i] : "" ; 
+            $I->wbc_fillField($I,$field_id[$i],$field_type[$i],$field_name[$i],$val[$i], isset($field_dropdown_div_id[$i]) ? $field_dropdown_div_id[$i] : ""); 
         }
         
         $I->scrollTo($save_button_xpath);

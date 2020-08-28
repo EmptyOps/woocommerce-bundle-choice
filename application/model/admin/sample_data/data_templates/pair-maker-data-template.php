@@ -36,7 +36,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                     ),
                     array(
                         'label' => 'Colour',
-                        'terms' => array('White','Black','Red','Purpal', 'Blue', 'Green','Yellow','Orange','Gray','Pink'),
+                        'terms' => array('White','Black','Red','Purpal', 'Blue', 'Green','Yellow','Orange','Gray','Pink','Maroon','Lime','Aqua'),
                         'description' => 'Colour attributes for clothing wear',
                         'slug' => 'wbc_cloth_colour_attr'
                     ),
@@ -107,262 +107,262 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
         $_img_url= constant('EOWBC_ASSET_URL').'img/sample_data/'.$this->asset_folder.'/category/';    // EO_WBC_PLUGIN_DIR.'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/';
           
         return array(
-                    array(
-                        'thumb' => '',
-                        'name' => 'Top wear',
-                        'description' => 'Top wear category',
-                        'slug' => 'wbc_top_wear_cat',
-                        'child'=> 
-                        array(
-                                array(
-                                    'thumb' => $_img_url.'shirts.png',
-                                    'thumb_selected' => $_img_url.'shirts_selected.png',
-                                    'name' => 'Shirts',
-                                    'description' => 'Top wear shirts',
-                                    'slug' => 'wbc_top_wear_shirts_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'shirts.png',
-                                    'thumb_selected' => $_img_url.'shirts_selected.png',
-                                    'name'=> 'Men Shirts',
-                                    'description' => 'Top wear men shirts',
-                                    'slug' => 'wbc_top_wear_men_shirts_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'shirts.png',
-                                    'thumb_selected' => $_img_url.'shirts_selected.png',
-                                    'name'=> 'Women Shirts',
-                                    'description' => 'Top wear women shirts',
-                                    'slug' => 'wbc_top_wear_women_shirts_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'tshirt.png',
-                                    'thumb_selected' => $_img_url.'tshirt_selected.png',
-                                    'name' => 'T-shirts',
-                                    'description' => 'Top wear t-shirts',
-                                    'slug' => 'wbc_top_wear_tshirts_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'tshirt.png',
-                                    'thumb_selected' => $_img_url.'tshirt_selected.png',
-                                    'name' => 'Men T-shirts',
-                                    'description' => 'Top wear men t-shirts',
-                                    'slug' => 'wbc_top_wear_men_tshirts_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'tshirt.png',
-                                    'thumb_selected' => $_img_url.'tshirt_selected.png',
-                                    'name' => 'Women T-shirts',
-                                    'description' => 'Top wear women t-shirts',
-                                    'slug' => 'wbc_top_wear_women_tshirts_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'sweater.png',
-                                    'thumb_selected' => $_img_url.'sweater_selected.png',
-                                    'name' => 'Sweaters',
-                                    'description' => 'Top wear sweaters',
-                                    'slug' => 'wbc_top_wear_sweaters_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'sweater.png',
-                                    'thumb_selected' => $_img_url.'sweater_selected.png',
-                                    'name' => 'Men Sweaters',
-                                    'description' => 'Top wear men sweaters',
-                                    'slug' => 'wbc_top_wear_men_sweaters_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'sweater.png',
-                                    'thumb_selected' => $_img_url.'sweater_selected.png',
-                                    'name' => 'Women Sweaters',
-                                    'description' => 'Top wear women sweaters',
-                                    'slug' => 'wbc_top_wear_women_sweaters_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'jacket.png',
-                                    'thumb_selected' => $_img_url.'jacket_selected.png',
-                                    'name' => 'Jackets',
-                                    'description' => 'Top wear Jackets',
-                                    'slug' => 'wbc_top_wear_jackets_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'jacket.png',
-                                    'thumb_selected' => $_img_url.'jacket_selected.png',
-                                    'name' => 'Men Jackets',
-                                    'description' => 'Top wear men jackets',
-                                    'slug' => 'wbc_top_wear_men_jackets_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'jacket.png',
-                                    'thumb_selected' => $_img_url.'jacket_selected.png',
-                                    'name' => 'Women Jackets',
-                                    'description' => 'Top wear women jackets',
-                                    'slug' => 'wbc_top_wear_women_jackets_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'blazers.png',
-                                    'thumb_selected' => $_img_url.'blazers_selected.png',
-                                    'name' => 'Blazers & Coats',
-                                    'description' => 'Top wear blazers and coats',
-                                    'slug' => 'wbc_top_wear_blazers_coats_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'suit.png',
-                                    'thumb_selected' => $_img_url.'suit_selected.png',
-                                    'name' => 'Suits',
-                                    'description' => 'Top wear suits',
-                                    'slug' => 'wbc_top_wear_suits_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'hoodie.png',
-                                    'thumb_selected' => $_img_url.'hoodie_selected.png',
-                                    'name' => 'Hoodies',
-                                    'description' => 'Top wear hoodies',
-                                    'slug' => 'wbc_top_wear_hoodies_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'hoodie.png',
-                                    'thumb_selected' => $_img_url.'hoodie_selected.png',
-                                    'name' => 'Men Hoodies',
-                                    'description' => 'Top wear men hoodies',
-                                    'slug' => 'wbc_top_wear_men_hoodies_cat'
-                                ),array(
-                                    'thumb' => $_img_url.'hoodie.png',
-                                    'thumb_selected' => $_img_url.'hoodie_selected.png',
-                                    'name' => 'Women Hoodies',
-                                    'description' => 'Top wear women hoodies',
-                                    'slug' => 'wbc_top_wear_women_hoodies_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'tops.png',
-                                    'thumb_selected' => $_img_url.'tops_selected.png',
-                                    'name' => 'Tops',
-                                    'description' => 'Top wear tops',
-                                    'slug' => 'wbc_top_wear_tops_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'tunic.png',
-                                    'thumb_selected' => $_img_url.'tunic_selected.png',
-                                    'name' => 'Tunics',
-                                    'description' => 'Top wear tunics',
-                                    'slug' => 'wbc_top_wear_tunics_cat'
-                                )
+                    // array(
+                    //     'thumb' => '',
+                    //     'name' => 'Top wear',
+                    //     'description' => 'Top wear category',
+                    //     'slug' => 'wbc_top_wear_cat',
+                    //     'child'=> 
+                    //     array(
+                    //             array(
+                    //                 'thumb' => $_img_url.'shirts.png',
+                    //                 'thumb_selected' => $_img_url.'shirts_selected.png',
+                    //                 'name' => 'Shirts',
+                    //                 'description' => 'Top wear shirts',
+                    //                 'slug' => 'wbc_top_wear_shirts_cat'
+                    //             ),
+                    //             array(
+                    //                 'thumb' => $_img_url.'shirts.png',
+                    //                 'thumb_selected' => $_img_url.'shirts_selected.png',
+                    //                 'name'=> 'Men Shirts',
+                    //                 'description' => 'Top wear men shirts',
+                    //                 'slug' => 'wbc_top_wear_men_shirts_cat'
+                    //             ),
+                    //             array(
+                    //                 'thumb' => $_img_url.'shirts.png',
+                    //                 'thumb_selected' => $_img_url.'shirts_selected.png',
+                    //                 'name'=> 'Women Shirts',
+                    //                 'description' => 'Top wear women shirts',
+                    //                 'slug' => 'wbc_top_wear_women_shirts_cat'
+                    //             ),
+                    //             array(
+                    //                 'thumb' => $_img_url.'tshirt.png',
+                    //                 'thumb_selected' => $_img_url.'tshirt_selected.png',
+                    //                 'name' => 'T-shirts',
+                    //                 'description' => 'Top wear t-shirts',
+                    //                 'slug' => 'wbc_top_wear_tshirts_cat'
+                    //             ),
+                    //             array(
+                    //                 'thumb' => $_img_url.'tshirt.png',
+                    //                 'thumb_selected' => $_img_url.'tshirt_selected.png',
+                    //                 'name' => 'Men T-shirts',
+                    //                 'description' => 'Top wear men t-shirts',
+                    //                 'slug' => 'wbc_top_wear_men_tshirts_cat'
+                    //             ),
+                    //             array(
+                    //                 'thumb' => $_img_url.'tshirt.png',
+                    //                 'thumb_selected' => $_img_url.'tshirt_selected.png',
+                    //                 'name' => 'Women T-shirts',
+                    //                 'description' => 'Top wear women t-shirts',
+                    //                 'slug' => 'wbc_top_wear_women_tshirts_cat'
+                    //             ),
+                    //             array(
+                    //                 'thumb' => $_img_url.'sweater.png',
+                    //                 'thumb_selected' => $_img_url.'sweater_selected.png',
+                    //                 'name' => 'Sweaters',
+                    //                 'description' => 'Top wear sweaters',
+                    //                 'slug' => 'wbc_top_wear_sweaters_cat'
+                    //             ),
+                    //             array(
+                    //                 'thumb' => $_img_url.'sweater.png',
+                    //                 'thumb_selected' => $_img_url.'sweater_selected.png',
+                    //                 'name' => 'Men Sweaters',
+                    //                 'description' => 'Top wear men sweaters',
+                    //                 'slug' => 'wbc_top_wear_men_sweaters_cat'
+                    //             ),
+                    //             array(
+                    //                 'thumb' => $_img_url.'sweater.png',
+                    //                 'thumb_selected' => $_img_url.'sweater_selected.png',
+                    //                 'name' => 'Women Sweaters',
+                    //                 'description' => 'Top wear women sweaters',
+                    //                 'slug' => 'wbc_top_wear_women_sweaters_cat'
+                    //             ),
+                    //             array(
+                    //                 'thumb' => $_img_url.'jacket.png',
+                    //                 'thumb_selected' => $_img_url.'jacket_selected.png',
+                    //                 'name' => 'Jackets',
+                    //                 'description' => 'Top wear Jackets',
+                    //                 'slug' => 'wbc_top_wear_jackets_cat'
+                    //             ),
+                    //             array(
+                    //                 'thumb' => $_img_url.'jacket.png',
+                    //                 'thumb_selected' => $_img_url.'jacket_selected.png',
+                    //                 'name' => 'Men Jackets',
+                    //                 'description' => 'Top wear men jackets',
+                    //                 'slug' => 'wbc_top_wear_men_jackets_cat'
+                    //             ),
+                    //             array(
+                    //                 'thumb' => $_img_url.'jacket.png',
+                    //                 'thumb_selected' => $_img_url.'jacket_selected.png',
+                    //                 'name' => 'Women Jackets',
+                    //                 'description' => 'Top wear women jackets',
+                    //                 'slug' => 'wbc_top_wear_women_jackets_cat'
+                    //             ),
+                    //             array(
+                    //                 'thumb' => $_img_url.'blazers.png',
+                    //                 'thumb_selected' => $_img_url.'blazers_selected.png',
+                    //                 'name' => 'Blazers & Coats',
+                    //                 'description' => 'Top wear blazers and coats',
+                    //                 'slug' => 'wbc_top_wear_blazers_coats_cat'
+                    //             ),
+                    //             array(
+                    //                 'thumb' => $_img_url.'suit.png',
+                    //                 'thumb_selected' => $_img_url.'suit_selected.png',
+                    //                 'name' => 'Suits',
+                    //                 'description' => 'Top wear suits',
+                    //                 'slug' => 'wbc_top_wear_suits_cat'
+                    //             ),
+                    //             array(
+                    //                 'thumb' => $_img_url.'hoodie.png',
+                    //                 'thumb_selected' => $_img_url.'hoodie_selected.png',
+                    //                 'name' => 'Hoodies',
+                    //                 'description' => 'Top wear hoodies',
+                    //                 'slug' => 'wbc_top_wear_hoodies_cat'
+                    //             ),
+                    //             array(
+                    //                 'thumb' => $_img_url.'hoodie.png',
+                    //                 'thumb_selected' => $_img_url.'hoodie_selected.png',
+                    //                 'name' => 'Men Hoodies',
+                    //                 'description' => 'Top wear men hoodies',
+                    //                 'slug' => 'wbc_top_wear_men_hoodies_cat'
+                    //             ),array(
+                    //                 'thumb' => $_img_url.'hoodie.png',
+                    //                 'thumb_selected' => $_img_url.'hoodie_selected.png',
+                    //                 'name' => 'Women Hoodies',
+                    //                 'description' => 'Top wear women hoodies',
+                    //                 'slug' => 'wbc_top_wear_women_hoodies_cat'
+                    //             ),
+                    //             array(
+                    //                 'thumb' => $_img_url.'tops.png',
+                    //                 'thumb_selected' => $_img_url.'tops_selected.png',
+                    //                 'name' => 'Tops',
+                    //                 'description' => 'Top wear tops',
+                    //                 'slug' => 'wbc_top_wear_tops_cat'
+                    //             ),
+                    //             array(
+                    //                 'thumb' => $_img_url.'tunic.png',
+                    //                 'thumb_selected' => $_img_url.'tunic_selected.png',
+                    //                 'name' => 'Tunics',
+                    //                 'description' => 'Top wear tunics',
+                    //                 'slug' => 'wbc_top_wear_tunics_cat'
+                    //             )
                                 
-                        )
-                    ),
-                    array(
-                        'thumb' => '',
-                        'name' => 'Bottom wear',
-                        'description' => 'Bottom wear category',
-                        'slug' => 'wbc_bottom_wear_cat',
-                        'child'=> 
-                        array(
-                                array(
-                                    'thumb' => $_img_url.'trousers.png',
-                                    'thumb_selected' => $_img_url.'trousers_selected.png',
-                                    'name' => 'Trousers',
-                                    'description' => 'Bottom wear trousers',
-                                    'slug' => 'wbc_bottom_wear_trousers_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'trousers.png',
-                                    'thumb_selected' => $_img_url.'trousers_selected.png',
-                                    'name' => 'Men Trousers',
-                                    'description' => 'Bottom wear men trousers',
-                                    'slug' => 'wbc_bottom_wear_men_trousers_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'trousers.png',
-                                    'thumb_selected' => $_img_url.'trousers_selected.png',
-                                    'name' => 'Women Trousers',
-                                    'description' => 'Bottom wear women trousers',
-                                    'slug' => 'wbc_bottom_wear_women_trousers_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'jeans.png',
-                                    'thumb_selected' => $_img_url.'jeans_selected.png',
-                                    'name' => 'Jeans',
-                                    'description' => 'Bottom wear jeans',
-                                    'slug' => 'wbc_bottom_wear_jeans_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'jeans.png',
-                                    'thumb_selected' => $_img_url.'jeans_selected.png',
-                                    'name' => 'Men Jeans',
-                                    'description' => 'Bottom wear men jeans',
-                                    'slug' => 'wbc_bottom_wear_men_jeans_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'jeans.png',
-                                    'thumb_selected' => $_img_url.'jeans_selected.png',
-                                    'name' => 'Women Jeans',
-                                    'description' => 'Bottom wear women jeans',
-                                    'slug' => 'wbc_bottom_wear_women_jeans_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'shorts.png',
-                                    'thumb_selected' => $_img_url.'shorts_selected.png',
-                                    'name' => 'Shorts',
-                                    'description' => 'Bottom wear shorts',
-                                    'slug' => 'wbc_bottom_wear_shorts_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'shorts.png',
-                                    'thumb_selected' => $_img_url.'shorts_selected.png',
-                                    'name' => 'Men Shorts',
-                                    'description' => 'Bottom wear men shorts',
-                                    'slug' => 'wbc_bottom_wear_men_shorts_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'shorts.png',
-                                    'thumb_selected' => $_img_url.'shorts_selected.png',
-                                    'name' => 'Women Shorts',
-                                    'description' => 'Bottom wear women shorts',
-                                    'slug' => 'wbc_bottom_wear_women_shorts_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'track.png',
-                                    'thumb_selected' => $_img_url.'track_selected.png',
-                                    'name' => 'Track pants',
-                                    'description' => 'Bottom wear track pants',
-                                    'slug' => 'wbc_bottom_wear_track_pants_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'track.png',
-                                    'thumb_selected' => $_img_url.'track_selected.png',
-                                    'name' => 'Men track pants',
-                                    'description' => 'Bottom wear men track pants',
-                                    'slug' => 'wbc_bottom_wear_men_track_pants_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'track.png',
-                                    'thumb_selected' => $_img_url.'track_selected.png',
-                                    'name' => 'Women track pants',
-                                    'description' => 'Bottom wear women track pants',
-                                    'slug' => 'wbc_bottom_wear_women_track_pants_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'palazzos.png',
-                                    'thumb_selected' => $_img_url.'palazzos_selected.png',
-                                    'name' => 'Palazzos',
-                                    'description' => 'Bottom wear palazzos',
-                                    'slug' => 'wbc_bottom_wear_plazzos_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'skirt.png',
-                                    'thumb_selected' => $_img_url.'skirt_selected.png',
-                                    'name' => 'Skirts',
-                                    'description' => 'Bottom wear skirts',
-                                    'slug' => 'wbc_bottom_wear_skirts_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'leggings.png',
-                                    'thumb_selected' => $_img_url.'leggings_selected.png',
-                                    'name' => 'Leggings',
-                                    'description' => 'Bottom wear leggings',
-                                    'slug' => 'wbc_bottom_wear_leggings_cat'
-                                )
-                        )
-                    ),
+                    //     )
+                    // ),
+                    // array(
+                    //     'thumb' => '',
+                    //     'name' => 'Bottom wear',
+                    //     'description' => 'Bottom wear category',
+                    //     'slug' => 'wbc_bottom_wear_cat',
+                    //     'child'=> 
+                    //     array(
+                    //             array(
+                    //                 'thumb' => $_img_url.'trousers.png',
+                    //                 'thumb_selected' => $_img_url.'trousers_selected.png',
+                    //                 'name' => 'Trousers',
+                    //                 'description' => 'Bottom wear trousers',
+                    //                 'slug' => 'wbc_bottom_wear_trousers_cat'
+                    //             ),
+                    //             array(
+                    //                 'thumb' => $_img_url.'trousers.png',
+                    //                 'thumb_selected' => $_img_url.'trousers_selected.png',
+                    //                 'name' => 'Men Trousers',
+                    //                 'description' => 'Bottom wear men trousers',
+                    //                 'slug' => 'wbc_bottom_wear_men_trousers_cat'
+                    //             ),
+                    //             array(
+                    //                 'thumb' => $_img_url.'trousers.png',
+                    //                 'thumb_selected' => $_img_url.'trousers_selected.png',
+                    //                 'name' => 'Women Trousers',
+                    //                 'description' => 'Bottom wear women trousers',
+                    //                 'slug' => 'wbc_bottom_wear_women_trousers_cat'
+                    //             ),
+                    //             array(
+                    //                 'thumb' => $_img_url.'jeans.png',
+                    //                 'thumb_selected' => $_img_url.'jeans_selected.png',
+                    //                 'name' => 'Jeans',
+                    //                 'description' => 'Bottom wear jeans',
+                    //                 'slug' => 'wbc_bottom_wear_jeans_cat'
+                    //             ),
+                    //             array(
+                    //                 'thumb' => $_img_url.'jeans.png',
+                    //                 'thumb_selected' => $_img_url.'jeans_selected.png',
+                    //                 'name' => 'Men Jeans',
+                    //                 'description' => 'Bottom wear men jeans',
+                    //                 'slug' => 'wbc_bottom_wear_men_jeans_cat'
+                    //             ),
+                    //             array(
+                    //                 'thumb' => $_img_url.'jeans.png',
+                    //                 'thumb_selected' => $_img_url.'jeans_selected.png',
+                    //                 'name' => 'Women Jeans',
+                    //                 'description' => 'Bottom wear women jeans',
+                    //                 'slug' => 'wbc_bottom_wear_women_jeans_cat'
+                    //             ),
+                    //             array(
+                    //                 'thumb' => $_img_url.'shorts.png',
+                    //                 'thumb_selected' => $_img_url.'shorts_selected.png',
+                    //                 'name' => 'Shorts',
+                    //                 'description' => 'Bottom wear shorts',
+                    //                 'slug' => 'wbc_bottom_wear_shorts_cat'
+                    //             ),
+                    //             array(
+                    //                 'thumb' => $_img_url.'shorts.png',
+                    //                 'thumb_selected' => $_img_url.'shorts_selected.png',
+                    //                 'name' => 'Men Shorts',
+                    //                 'description' => 'Bottom wear men shorts',
+                    //                 'slug' => 'wbc_bottom_wear_men_shorts_cat'
+                    //             ),
+                    //             array(
+                    //                 'thumb' => $_img_url.'shorts.png',
+                    //                 'thumb_selected' => $_img_url.'shorts_selected.png',
+                    //                 'name' => 'Women Shorts',
+                    //                 'description' => 'Bottom wear women shorts',
+                    //                 'slug' => 'wbc_bottom_wear_women_shorts_cat'
+                    //             ),
+                    //             array(
+                    //                 'thumb' => $_img_url.'track.png',
+                    //                 'thumb_selected' => $_img_url.'track_selected.png',
+                    //                 'name' => 'Track pants',
+                    //                 'description' => 'Bottom wear track pants',
+                    //                 'slug' => 'wbc_bottom_wear_track_pants_cat'
+                    //             ),
+                    //             array(
+                    //                 'thumb' => $_img_url.'track.png',
+                    //                 'thumb_selected' => $_img_url.'track_selected.png',
+                    //                 'name' => 'Men track pants',
+                    //                 'description' => 'Bottom wear men track pants',
+                    //                 'slug' => 'wbc_bottom_wear_men_track_pants_cat'
+                    //             ),
+                    //             array(
+                    //                 'thumb' => $_img_url.'track.png',
+                    //                 'thumb_selected' => $_img_url.'track_selected.png',
+                    //                 'name' => 'Women track pants',
+                    //                 'description' => 'Bottom wear women track pants',
+                    //                 'slug' => 'wbc_bottom_wear_women_track_pants_cat'
+                    //             ),
+                    //             array(
+                    //                 'thumb' => $_img_url.'palazzos.png',
+                    //                 'thumb_selected' => $_img_url.'palazzos_selected.png',
+                    //                 'name' => 'Palazzos',
+                    //                 'description' => 'Bottom wear palazzos',
+                    //                 'slug' => 'wbc_bottom_wear_plazzos_cat'
+                    //             ),
+                    //             array(
+                    //                 'thumb' => $_img_url.'skirt.png',
+                    //                 'thumb_selected' => $_img_url.'skirt_selected.png',
+                    //                 'name' => 'Skirts',
+                    //                 'description' => 'Bottom wear skirts',
+                    //                 'slug' => 'wbc_bottom_wear_skirts_cat'
+                    //             ),
+                    //             array(
+                    //                 'thumb' => $_img_url.'leggings.png',
+                    //                 'thumb_selected' => $_img_url.'leggings_selected.png',
+                    //                 'name' => 'Leggings',
+                    //                 'description' => 'Bottom wear leggings',
+                    //                 'slug' => 'wbc_bottom_wear_leggings_cat'
+                    //             )
+                    //     )
+                    // ),
                     array(
                         'thumb' => '',
                         'name' => 'Fabric',
@@ -507,177 +507,11807 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                                 )
 
                         )
-                    )
+                    ),
+                    array(
+                        'thumb' => '',
+                        'name' => 'Top wear',
+                        'description' => 'Top-wear category',
+                        'slug' => 'wbc_topwear_cat',
+                        'child'=> 
+                        array(
+                                array(
+                                    'thumb' => $_img_url.'shirts.png',
+                                    'thumb_selected' => $_img_url.'shirts_selected.png',
+                                    'name' => 'Men white shirts',
+                                    'description' => 'Men white shirts',
+                                    'slug' => 'wbc_men_white_shirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shirts.png',
+                                    'thumb_selected' => $_img_url.'shirts_selected.png',
+                                    'name' => 'Men black shirts',
+                                    'description' => 'Men balck shirts',
+                                    'slug' => 'wbc_men_black_shirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shirts.png',
+                                    'thumb_selected' => $_img_url.'shirts_selected.png',
+                                    'name' => 'Men blue shirts',
+                                    'description' => 'Men blue shirts',
+                                    'slug' => 'wbc_men_blue_shirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shirts.png',
+                                    'thumb_selected' => $_img_url.'shirts_selected.png',
+                                    'name' => 'Men green shirts',
+                                    'description' => 'Men green shirts',
+                                    'slug' => 'wbc_men_green_shirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shirts.png',
+                                    'thumb_selected' => $_img_url.'shirts_selected.png',
+                                    'name' => 'Men orange shirts',
+                                    'description' => 'Men orange shirts',
+                                    'slug' => 'wbc_men_orange_shirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shirts.png',
+                                    'thumb_selected' => $_img_url.'shirts_selected.png',
+                                    'name' => 'Men red shirts',
+                                    'description' => 'Men red shirts',
+                                    'slug' => 'wbc_men_red_shirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shirts.png',
+                                    'thumb_selected' => $_img_url.'shirts_selected.png',
+                                    'name' => 'Men yellow shirts',
+                                    'description' => 'Men yellow shirts',
+                                    'slug' => 'wbc_men_yellow_shirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shirts.png',
+                                    'thumb_selected' => $_img_url.'shirts_selected.png',
+                                    'name' => 'Men purple shirts',
+                                    'description' => 'Men purple shirts',
+                                    'slug' => 'wbc_men_purple_shirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shirts.png',
+                                    'thumb_selected' => $_img_url.'shirts_selected.png',
+                                    'name' => 'Men gray shirts',
+                                    'description' => 'Men gray shirts',
+                                    'slug' => 'wbc_men_gray_shirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shirts.png',
+                                    'thumb_selected' => $_img_url.'shirts_selected.png',
+                                    'name' => 'Men pink shirts',
+                                    'description' => 'Men pink shirts',
+                                    'slug' => 'wbc_men_pink_shirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shirts.png',
+                                    'thumb_selected' => $_img_url.'shirts_selected.png',
+                                    'name' => 'Men maroon shirts',
+                                    'description' => 'Men maroon shirts',
+                                    'slug' => 'wbc_men_maroon_shirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shirts.png',
+                                    'thumb_selected' => $_img_url.'shirts_selected.png',
+                                    'name' => 'Men aqua shirts',
+                                    'description' => 'Men aqua shirts',
+                                    'slug' => 'wbc_men_aqua_shirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shirts.png',
+                                    'thumb_selected' => $_img_url.'shirts_selected.png',
+                                    'name' => 'Men lime shirts',
+                                    'description' => 'Men lime shirts',
+                                    'slug' => 'wbc_men_lime_shirts_cat'
+                                ),
+                                //women
+                                array(
+                                    'thumb' => $_img_url.'shirts.png',
+                                    'thumb_selected' => $_img_url.'shirts_selected.png',
+                                    'name' => 'Women white shirts',
+                                    'description' => 'Women white shirts',
+                                    'slug' => 'wbc_women_white_shirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shirts.png',
+                                    'thumb_selected' => $_img_url.'shirts_selected.png',
+                                    'name' => 'Women black shirts',
+                                    'description' => 'Women balck shirts',
+                                    'slug' => 'wbc_women_black_shirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shirts.png',
+                                    'thumb_selected' => $_img_url.'shirts_selected.png',
+                                    'name' => 'Women blue shirts',
+                                    'description' => 'Women blue shirts',
+                                    'slug' => 'wbc_women_blue_shirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shirts.png',
+                                    'thumb_selected' => $_img_url.'shirts_selected.png',
+                                    'name' => 'Women green shirts',
+                                    'description' => 'Women green shirts',
+                                    'slug' => 'wbc_women_green_shirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shirts.png',
+                                    'thumb_selected' => $_img_url.'shirts_selected.png',
+                                    'name' => 'Women orange shirts',
+                                    'description' => 'Women orange shirts',
+                                    'slug' => 'wbc_women_orange_shirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shirts.png',
+                                    'thumb_selected' => $_img_url.'shirts_selected.png',
+                                    'name' => 'Women red shirts',
+                                    'description' => 'Women red shirts',
+                                    'slug' => 'wbc_women_red_shirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shirts.png',
+                                    'thumb_selected' => $_img_url.'shirts_selected.png',
+                                    'name' => 'Women yellow shirts',
+                                    'description' => 'Women yellow shirts',
+                                    'slug' => 'wbc_women_yellow_shirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shirts.png',
+                                    'thumb_selected' => $_img_url.'shirts_selected.png',
+                                    'name' => 'Woen purple shirts',
+                                    'description' => 'Woen purple shirts',
+                                    'slug' => 'wbc_women_purple_shirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shirts.png',
+                                    'thumb_selected' => $_img_url.'shirts_selected.png',
+                                    'name' => 'Women gray shirts',
+                                    'description' => 'Women gray shirts',
+                                    'slug' => 'wbc_women_gray_shirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shirts.png',
+                                    'thumb_selected' => $_img_url.'shirts_selected.png',
+                                    'name' => 'Women pink shirts',
+                                    'description' => 'Women pink shirts',
+                                    'slug' => 'wbc_women_pink_shirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shirts.png',
+                                    'thumb_selected' => $_img_url.'shirts_selected.png',
+                                    'name' => 'Women maroon shirts',
+                                    'description' => 'Women maroon shirts',
+                                    'slug' => 'wbc_women_maroon_shirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shirts.png',
+                                    'thumb_selected' => $_img_url.'shirts_selected.png',
+                                    'name' => 'Women aqua shirts',
+                                    'description' => 'Women aqua shirts',
+                                    'slug' => 'wbc_women_aqua_shirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shirts.png',
+                                    'thumb_selected' => $_img_url.'shirts_selected.png',
+                                    'name' => 'Women lime shirts',
+                                    'description' => 'Women lime shirts',
+                                    'slug' => 'wbc_women_lime_shirts_cat'
+                                ),
+                                //men -tshirt
+                                array(
+                                    'thumb' => $_img_url.'tshirt.png',
+                                    'thumb_selected' => $_img_url.'tshirt_selected.png',
+                                    'name' => 'Men white tshirts',
+                                    'description' => 'Men white tshirts',
+                                    'slug' => 'wbc_men_white_tshirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tshirt.png',
+                                    'thumb_selected' => $_img_url.'tshirt_selected.png',
+                                    'name' => 'Men black tshirts',
+                                    'description' => 'Men balck tshirts',
+                                    'slug' => 'wbc_men_black_tshirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tshirt.png',
+                                    'thumb_selected' => $_img_url.'tshirt_selected.png',
+                                    'name' => 'Men blue tshirts',
+                                    'description' => 'Men blue tshirts',
+                                    'slug' => 'wbc_men_blue_tshirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tshirt.png',
+                                    'thumb_selected' => $_img_url.'tshirt_selected.png',
+                                    'name' => 'Men green tshirts',
+                                    'description' => 'Men green tshirts',
+                                    'slug' => 'wbc_men_green_tshirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tshirt.png',
+                                    'thumb_selected' => $_img_url.'tshirt_selected.png',
+                                    'name' => 'Men orange tshirts',
+                                    'description' => 'Men orange tshirts',
+                                    'slug' => 'wbc_men_orange_tshirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tshirt.png',
+                                    'thumb_selected' => $_img_url.'tshirt_selected.png',
+                                    'name' => 'Men red tshirts',
+                                    'description' => 'Men red tshirts',
+                                    'slug' => 'wbc_men_red_tshirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tshirt.png',
+                                    'thumb_selected' => $_img_url.'tshirt_selected.png',
+                                    'name' => 'Men yellow tshirts',
+                                    'description' => 'Men yellow tshirts',
+                                    'slug' => 'wbc_men_yellow_tshirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tshirt.png',
+                                    'thumb_selected' => $_img_url.'tshirt_selected.png',
+                                    'name' => 'Men purple tshirts',
+                                    'description' => 'Men purple tshirts',
+                                    'slug' => 'wbc_men_purple_tshirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tshirt.png',
+                                    'thumb_selected' => $_img_url.'tshirt_selected.png',
+                                    'name' => 'Men gray tshirts',
+                                    'description' => 'Men gray tshirts',
+                                    'slug' => 'wbc_men_gray_tshirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tshirt.png',
+                                    'thumb_selected' => $_img_url.'tshirt_selected.png',
+                                    'name' => 'Men pink tshirts',
+                                    'description' => 'Men pink tshirts',
+                                    'slug' => 'wbc_men_pink_tshirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tshirt.png',
+                                    'thumb_selected' => $_img_url.'tshirt_selected.png',
+                                    'name' => 'Men maroon tshirts',
+                                    'description' => 'Men maroon tshirts',
+                                    'slug' => 'wbc_men_maroon_tshirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tshirt.png',
+                                    'thumb_selected' => $_img_url.'tshirt_selected.png',
+                                    'name' => 'Men aqua tshirts',
+                                    'description' => 'Men aqua tshirts',
+                                    'slug' => 'wbc_men_aqua_tshirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tshirt.png',
+                                    'thumb_selected' => $_img_url.'tshirt_selected.png',
+                                    'name' => 'Men lime tshirts',
+                                    'description' => 'Men lime tshirts',
+                                    'slug' => 'wbc_men_lime_tshirts_cat'
+                                ),
+                                //women-tshirt
+                                array(
+                                    'thumb' => $_img_url.'tshirt.png',
+                                    'thumb_selected' => $_img_url.'tshirt_selected.png',
+                                    'name' => 'Women white tshirts',
+                                    'description' => 'Women white tshirts',
+                                    'slug' => 'wbc_women_white_tshirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tshirt.png',
+                                    'thumb_selected' => $_img_url.'tshirt_selected.png',
+                                    'name' => 'Women black tshirts',
+                                    'description' => 'Women balck tshirts',
+                                    'slug' => 'wbc_women_black_tshirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tshirt.png',
+                                    'thumb_selected' => $_img_url.'tshirt_selected.png',
+                                    'name' => 'Women blue tshirts',
+                                    'description' => 'Women blue tshirts',
+                                    'slug' => 'wbc_women_blue_tshirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tshirt.png',
+                                    'thumb_selected' => $_img_url.'tshirt_selected.png',
+                                    'name' => 'Women green tshirts',
+                                    'description' => 'Women green tshirts',
+                                    'slug' => 'wbc_women_green_tshirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tshirt.png',
+                                    'thumb_selected' => $_img_url.'tshirt_selected.png',
+                                    'name' => 'Women orange tshirts',
+                                    'description' => 'Women orange tshirts',
+                                    'slug' => 'wbc_women_orange_tshirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tshirt.png',
+                                    'thumb_selected' => $_img_url.'tshirt_selected.png',
+                                    'name' => 'Women red tshirts',
+                                    'description' => 'Women red tshirts',
+                                    'slug' => 'wbc_women_red_tshirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tshirt.png',
+                                    'thumb_selected' => $_img_url.'tshirt_selected.png',
+                                    'name' => 'Women yellow tshirts',
+                                    'description' => 'Women yellow tshirts',
+                                    'slug' => 'wbc_women_yellow_tshirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tshirt.png',
+                                    'thumb_selected' => $_img_url.'tshirt_selected.png',
+                                    'name' => 'Women purple tshirts',
+                                    'description' => 'Women purple tshirts',
+                                    'slug' => 'wbc_women_purple_tshirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tshirt.png',
+                                    'thumb_selected' => $_img_url.'tshirt_selected.png',
+                                    'name' => 'Women gray tshirts',
+                                    'description' => 'Women gray tshirts',
+                                    'slug' => 'wbc_women_gray_tshirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tshirt.png',
+                                    'thumb_selected' => $_img_url.'tshirt_selected.png',
+                                    'name' => 'Women pink tshirts',
+                                    'description' => 'Women pink tshirts',
+                                    'slug' => 'wbc_women_pink_tshirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tshirt.png',
+                                    'thumb_selected' => $_img_url.'tshirt_selected.png',
+                                    'name' => 'Women maroon tshirts',
+                                    'description' => 'Women maroon tshirts',
+                                    'slug' => 'wbc_Women_maroon_tshirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tshirt.png',
+                                    'thumb_selected' => $_img_url.'tshirt_selected.png',
+                                    'name' => 'Women aqua tshirts',
+                                    'description' => 'Women aqua tshirts',
+                                    'slug' => 'wbc_women_aqua_tshirts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tshirt.png',
+                                    'thumb_selected' => $_img_url.'tshirt_selected.png',
+                                    'name' => 'Women lime tshirts',
+                                    'description' => 'Women lime tshirts',
+                                    'slug' => 'wbc_women_lime_tshirts_cat'
+                                ),
+                                //sweater-men
+                                array(
+                                    'thumb' => $_img_url.'sweater.png',
+                                    'thumb_selected' => $_img_url.'sweater_selected.png',
+                                    'name' => 'Men white sweater',
+                                    'description' => 'Men white sweater',
+                                    'slug' => 'wbc_men_white_sweater_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'sweater.png',
+                                    'thumb_selected' => $_img_url.'sweater_selected.png',
+                                    'name' => 'Men black sweater',
+                                    'description' => 'Men balck sweater',
+                                    'slug' => 'wbc_men_black_sweater_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'sweater.png',
+                                    'thumb_selected' => $_img_url.'sweater_selected.png',
+                                    'name' => 'Men blue sweater',
+                                    'description' => 'Men blue sweater',
+                                    'slug' => 'wbc_men_blue_sweater_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'sweater.png',
+                                    'thumb_selected' => $_img_url.'sweater_selected.png',
+                                    'name' => 'Men green sweater',
+                                    'description' => 'Men green sweater',
+                                    'slug' => 'wbc_men_green_sweater_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'sweater.png',
+                                    'thumb_selected' => $_img_url.'sweater_selected.png',
+                                    'name' => 'Men orange sweater',
+                                    'description' => 'Men orange sweater',
+                                    'slug' => 'wbc_men_orange_sweater_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'sweater.png',
+                                    'thumb_selected' => $_img_url.'sweater_selected.png',
+                                    'name' => 'Men red sweater',
+                                    'description' => 'Men red sweater',
+                                    'slug' => 'wbc_men_red_sweater_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'sweater.png',
+                                    'thumb_selected' => $_img_url.'sweater_selected.png',
+                                    'name' => 'Men yellow sweater',
+                                    'description' => 'Men yellow sweater',
+                                    'slug' => 'wbc_men_yellow_sweater_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'sweater.png',
+                                    'thumb_selected' => $_img_url.'sweater_selected.png',
+                                    'name' => 'Men purple sweater',
+                                    'description' => 'Men purple sweater',
+                                    'slug' => 'wbc_men_purple_sweater_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'sweater.png',
+                                    'thumb_selected' => $_img_url.'sweater_selected.png',
+                                    'name' => 'Men gray sweater',
+                                    'description' => 'Men gray sweater',
+                                    'slug' => 'wbc_men_gray_sweater_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'sweater.png',
+                                    'thumb_selected' => $_img_url.'sweater_selected.png',
+                                    'name' => 'Men pink sweater',
+                                    'description' => 'Men pink sweater',
+                                    'slug' => 'wbc_men_pink_sweater_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'sweater.png',
+                                    'thumb_selected' => $_img_url.'sweater_selected.png',
+                                    'name' => 'Men maroon sweater',
+                                    'description' => 'Men maroon sweater',
+                                    'slug' => 'wbc_men_maroon_sweater_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'sweater.png',
+                                    'thumb_selected' => $_img_url.'sweater_selected.png',
+                                    'name' => 'Men aqua sweater',
+                                    'description' => 'Men aqua sweater',
+                                    'slug' => 'wbc_men_aqua_sweater_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'sweater.png',
+                                    'thumb_selected' => $_img_url.'sweater_selected.png',
+                                    'name' => 'Men lime sweater',
+                                    'description' => 'Men lime sweater',
+                                    'slug' => 'wbc_men_lime_sweater_cat'
+                                ),
+                                //women-sweater
+                                array(
+                                    'thumb' => $_img_url.'sweater.png',
+                                    'thumb_selected' => $_img_url.'sweater_selected.png',
+                                    'name' => 'Women white sweater',
+                                    'description' => 'Women white sweater',
+                                    'slug' => 'wbc_women_white_sweater_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'sweater.png',
+                                    'thumb_selected' => $_img_url.'sweater_selected.png',
+                                    'name' => 'Women black sweater',
+                                    'description' => 'Women balck sweater',
+                                    'slug' => 'wbc_women_black_sweater_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'sweater.png',
+                                    'thumb_selected' => $_img_url.'sweater_selected.png',
+                                    'name' => 'Women blue sweater',
+                                    'description' => 'Women blue sweater',
+                                    'slug' => 'wbc_women_blue_sweater_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'sweater.png',
+                                    'thumb_selected' => $_img_url.'sweater_selected.png',
+                                    'name' => 'Women green sweater',
+                                    'description' => 'Women green sweater',
+                                    'slug' => 'wbc_women_green_sweater_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'sweater.png',
+                                    'thumb_selected' => $_img_url.'sweater_selected.png',
+                                    'name' => 'Women orange sweater',
+                                    'description' => 'Women orange sweater',
+                                    'slug' => 'wbc_women_orange_sweater_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'sweater.png',
+                                    'thumb_selected' => $_img_url.'sweater_selected.png',
+                                    'name' => 'Women red sweater',
+                                    'description' => 'Women red sweater',
+                                    'slug' => 'wbc_women_red_sweater_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'sweater.png',
+                                    'thumb_selected' => $_img_url.'sweater_selected.png',
+                                    'name' => 'Women yellow sweater',
+                                    'description' => 'Women yellow sweater',
+                                    'slug' => 'wbc_women_yellow_sweater_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'sweater.png',
+                                    'thumb_selected' => $_img_url.'sweater_selected.png',
+                                    'name' => 'Women purple sweater',
+                                    'description' => 'Women purple sweater',
+                                    'slug' => 'wbc_women_purple_sweater_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'sweater.png',
+                                    'thumb_selected' => $_img_url.'sweater_selected.png',
+                                    'name' => 'Women gray sweater',
+                                    'description' => 'Women gray sweater',
+                                    'slug' => 'wbc_women_gray_sweater_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'sweater.png',
+                                    'thumb_selected' => $_img_url.'sweater_selected.png',
+                                    'name' => 'Women pink sweater',
+                                    'description' => 'Women pink sweater',
+                                    'slug' => 'wbc_women_pink_sweater_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'sweater.png',
+                                    'thumb_selected' => $_img_url.'sweater_selected.png',
+                                    'name' => 'Women maroon sweater',
+                                    'description' => 'Women maroon sweater',
+                                    'slug' => 'wbc_women_maroon_sweater_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'sweater.png',
+                                    'thumb_selected' => $_img_url.'sweater_selected.png',
+                                    'name' => 'Women aqua sweater',
+                                    'description' => 'Women aqua sweater',
+                                    'slug' => 'wbc_women_aqua_sweater_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'sweater.png',
+                                    'thumb_selected' => $_img_url.'sweater_selected.png',
+                                    'name' => 'Women lime sweater',
+                                    'description' => 'Women lime sweater',
+                                    'slug' => 'wbc_women_lime_sweater_cat'
+                                ),
+                                //men-jacket
+                                array(
+                                    'thumb' => $_img_url.'jacket.png',
+                                    'thumb_selected' => $_img_url.'jacket_selected.png',
+                                    'name' => 'Men white jacket',
+                                    'description' => 'Men white jacket',
+                                    'slug' => 'wbc_men_white_jacket_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jacket.png',
+                                    'thumb_selected' => $_img_url.'jacket_selected.png',
+                                    'name' => 'Men black jacket',
+                                    'description' => 'Men balck jacket',
+                                    'slug' => 'wbc_men_black_jacket_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jacket.png',
+                                    'thumb_selected' => $_img_url.'jacket_selected.png',
+                                    'name' => 'Men blue jacket',
+                                    'description' => 'Men blue jacket',
+                                    'slug' => 'wbc_men_blue_jacket_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jacket.png',
+                                    'thumb_selected' => $_img_url.'jacket_selected.png',
+                                    'name' => 'Men green jacket',
+                                    'description' => 'Men green jacket',
+                                    'slug' => 'wbc_men_green_jacket_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jacket.png',
+                                    'thumb_selected' => $_img_url.'jacket_selected.png',
+                                    'name' => 'Men orange jacket',
+                                    'description' => 'Men orange jacket',
+                                    'slug' => 'wbc_men_orange_jacket_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jacket.png',
+                                    'thumb_selected' => $_img_url.'jacket_selected.png',
+                                    'name' => 'Men red jacket',
+                                    'description' => 'Men red jacket',
+                                    'slug' => 'wbc_men_red_jacket_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jacket.png',
+                                    'thumb_selected' => $_img_url.'jacket_selected.png',
+                                    'name' => 'Men yellow jacket',
+                                    'description' => 'Men yellow jacket',
+                                    'slug' => 'wbc_men_yellow_jacket_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jacket.png',
+                                    'thumb_selected' => $_img_url.'jacket_selected.png',
+                                    'name' => 'Men purple jacket',
+                                    'description' => 'Men purple jacket',
+                                    'slug' => 'wbc_men_purple_jacket_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jacket.png',
+                                    'thumb_selected' => $_img_url.'jacket_selected.png',
+                                    'name' => 'Men gray jacket',
+                                    'description' => 'Men gray jacket',
+                                    'slug' => 'wbc_men_gray_jacket_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jacket.png',
+                                    'thumb_selected' => $_img_url.'jacket_selected.png',
+                                    'name' => 'Men pink jacket',
+                                    'description' => 'Men pink jacket',
+                                    'slug' => 'wbc_men_pink_jacket_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jacket.png',
+                                    'thumb_selected' => $_img_url.'jacket_selected.png',
+                                    'name' => 'Men maroon jacket',
+                                    'description' => 'Men maroon jacket',
+                                    'slug' => 'wbc_men_maroon_jacket_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jacket.png',
+                                    'thumb_selected' => $_img_url.'jacket_selected.png',
+                                    'name' => 'Men aqua jacket',
+                                    'description' => 'Men aqua jacket',
+                                    'slug' => 'wbc_men_aqua_jacket_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jacket.png',
+                                    'thumb_selected' => $_img_url.'jacket_selected.png',
+                                    'name' => 'Men lime jacket',
+                                    'description' => 'Men lime jacket',
+                                    'slug' => 'wbc_men_lime_jacket_cat'
+                                ),
+                                //women-jacket
+                                array(
+                                    'thumb' => $_img_url.'jacket.png',
+                                    'thumb_selected' => $_img_url.'jacket_selected.png',
+                                    'name' => 'Women white jacket',
+                                    'description' => 'Women white jacket',
+                                    'slug' => 'wbc_women_white_jacket_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jacket.png',
+                                    'thumb_selected' => $_img_url.'jacket_selected.png',
+                                    'name' => 'Women black jacket',
+                                    'description' => 'Women balck jacket',
+                                    'slug' => 'wbc_women_black_jacket_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jacket.png',
+                                    'thumb_selected' => $_img_url.'jacket_selected.png',
+                                    'name' => 'Women blue jacket',
+                                    'description' => 'Women blue jacket',
+                                    'slug' => 'wbc_women_blue_jacket_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jacket.png',
+                                    'thumb_selected' => $_img_url.'jacket_selected.png',
+                                    'name' => 'Women green jacket',
+                                    'description' => 'Women green jacket',
+                                    'slug' => 'wbc_women_green_jacket_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jacket.png',
+                                    'thumb_selected' => $_img_url.'jacket_selected.png',
+                                    'name' => 'Women orange jacket',
+                                    'description' => 'Women orange jacket',
+                                    'slug' => 'wbc_women_orange_jacket_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jacket.png',
+                                    'thumb_selected' => $_img_url.'jacket_selected.png',
+                                    'name' => 'Women red jacket',
+                                    'description' => 'Women red jacket',
+                                    'slug' => 'wbc_women_red_jacket_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jacket.png',
+                                    'thumb_selected' => $_img_url.'jacket_selected.png',
+                                    'name' => 'Women yellow jacket',
+                                    'description' => 'Women yellow jacket',
+                                    'slug' => 'wbc_women_yellow_jacket_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jacket.png',
+                                    'thumb_selected' => $_img_url.'jacket_selected.png',
+                                    'name' => 'Women purple jacket',
+                                    'description' => 'Women purple jacket',
+                                    'slug' => 'wbc_women_purple_jacket_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jacket.png',
+                                    'thumb_selected' => $_img_url.'jacket_selected.png',
+                                    'name' => 'Women gray jacket',
+                                    'description' => 'Women gray jacket',
+                                    'slug' => 'wbc_women_gray_jacket_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jacket.png',
+                                    'thumb_selected' => $_img_url.'jacket_selected.png',
+                                    'name' => 'Women pink jacket',
+                                    'description' => 'Women pink jacket',
+                                    'slug' => 'wbc_women_pink_jacket_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jacket.png',
+                                    'thumb_selected' => $_img_url.'jacket_selected.png',
+                                    'name' => 'Women maroon jacket',
+                                    'description' => 'Women maroon jacket',
+                                    'slug' => 'wbc_women_maroon_jacket_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jacket.png',
+                                    'thumb_selected' => $_img_url.'jacket_selected.png',
+                                    'name' => 'Women aqua jacket',
+                                    'description' => 'Women aqua jacket',
+                                    'slug' => 'wbc_women_aqua_jacket_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jacket.png',
+                                    'thumb_selected' => $_img_url.'jacket_selected.png',
+                                    'name' => 'Women lime jacket',
+                                    'description' => 'Women lime jacket',
+                                    'slug' => 'wbc_women_lime_jacket_cat'
+                                ),
+                                //men-blazer
+                                array(
+                                    'thumb' => $_img_url.'blazers.png',
+                                    'thumb_selected' => $_img_url.'blazers_selected.png',
+                                    'name' => 'Men white blazers',
+                                    'description' => 'Men white blazers',
+                                    'slug' => 'wbc_men_white_blazers_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'blazers.png',
+                                    'thumb_selected' => $_img_url.'blazers_selected.png',
+                                    'name' => 'Men black blazers',
+                                    'description' => 'Men balck blazers',
+                                    'slug' => 'wbc_men_black_blazers_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'blazers.png',
+                                    'thumb_selected' => $_img_url.'blazers_selected.png',
+                                    'name' => 'Men blue blazers',
+                                    'description' => 'Men blue blazers',
+                                    'slug' => 'wbc_men_blue_blazers_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'blazers.png',
+                                    'thumb_selected' => $_img_url.'blazers_selected.png',
+                                    'name' => 'Men green blazers',
+                                    'description' => 'Men green blazers',
+                                    'slug' => 'wbc_men_green_blazers_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'blazers.png',
+                                    'thumb_selected' => $_img_url.'blazers_selected.png',
+                                    'name' => 'Men orange blazers',
+                                    'description' => 'Men orange blazers',
+                                    'slug' => 'wbc_men_orange_blazers_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'blazers.png',
+                                    'thumb_selected' => $_img_url.'blazers_selected.png',
+                                    'name' => 'Men red blazers',
+                                    'description' => 'Men red blazers',
+                                    'slug' => 'wbc_men_red_blazers_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'blazers.png',
+                                    'thumb_selected' => $_img_url.'blazers_selected.png',
+                                    'name' => 'Men yellow blazers',
+                                    'description' => 'Men yellow blazers',
+                                    'slug' => 'wbc_men_yellow_blazers_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'blazers.png',
+                                    'thumb_selected' => $_img_url.'blazers_selected.png',
+                                    'name' => 'Men purple blazers',
+                                    'description' => 'Men purple blazers',
+                                    'slug' => 'wbc_men_purple_blazers_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'blazers.png',
+                                    'thumb_selected' => $_img_url.'blazers_selected.png',
+                                    'name' => 'Men gray blazers',
+                                    'description' => 'Men gray blazers',
+                                    'slug' => 'wbc_men_gray_blazers_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'blazers.png',
+                                    'thumb_selected' => $_img_url.'blazers_selected.png',
+                                    'name' => 'Men pink blazers',
+                                    'description' => 'Men pink blazers',
+                                    'slug' => 'wbc_men_pink_blazers_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'blazers.png',
+                                    'thumb_selected' => $_img_url.'blazers_selected.png',
+                                    'name' => 'Men maroon blazers',
+                                    'description' => 'Men maroon blazers',
+                                    'slug' => 'wbc_men_maroon_blazers_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'blazers.png',
+                                    'thumb_selected' => $_img_url.'blazers_selected.png',
+                                    'name' => 'Men aqua blazers',
+                                    'description' => 'Men aqua blazers',
+                                    'slug' => 'wbc_men_aqua_blazers_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'blazers.png',
+                                    'thumb_selected' => $_img_url.'blazers_selected.png',
+                                    'name' => 'Men lime blazers',
+                                    'description' => 'Men lime blazers',
+                                    'slug' => 'wbc_men_lime_blazers_cat'
+                                ),
+                                //men-suit
+                                array(
+                                    'thumb' => $_img_url.'suit.png',
+                                    'thumb_selected' => $_img_url.'suit_selected.png',
+                                    'name' => 'Men white suit',
+                                    'description' => 'Men white suit',
+                                    'slug' => 'wbc_men_white_suit_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'suit.png',
+                                    'thumb_selected' => $_img_url.'suit_selected.png',
+                                    'name' => 'Men black suit',
+                                    'description' => 'Men balck suit',
+                                    'slug' => 'wbc_men_black_suit_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'suit.png',
+                                    'thumb_selected' => $_img_url.'suit_selected.png',
+                                    'name' => 'Men blue suit',
+                                    'description' => 'Men blue suit',
+                                    'slug' => 'wbc_men_blue_suit_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'suit.png',
+                                    'thumb_selected' => $_img_url.'suit_selected.png',
+                                    'name' => 'Men green suit',
+                                    'description' => 'Men green suit',
+                                    'slug' => 'wbc_men_green_suit_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'suit.png',
+                                    'thumb_selected' => $_img_url.'suit_selected.png',
+                                    'name' => 'Men orange suit',
+                                    'description' => 'Men orange suit',
+                                    'slug' => 'wbc_men_orange_suit_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'suit.png',
+                                    'thumb_selected' => $_img_url.'suit_selected.png',
+                                    'name' => 'Men red suit',
+                                    'description' => 'Men red suit',
+                                    'slug' => 'wbc_men_red_suit_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'suit.png',
+                                    'thumb_selected' => $_img_url.'suit_selected.png',
+                                    'name' => 'Men yellow suit',
+                                    'description' => 'Men yellow suit',
+                                    'slug' => 'wbc_men_yellow_suit_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'suit.png',
+                                    'thumb_selected' => $_img_url.'suit_selected.png',
+                                    'name' => 'Men purple suit',
+                                    'description' => 'Men purple suit',
+                                    'slug' => 'wbc_men_purple_suit_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'suit.png',
+                                    'thumb_selected' => $_img_url.'suit_selected.png',
+                                    'name' => 'Men gray suit',
+                                    'description' => 'Men gray suit',
+                                    'slug' => 'wbc_men_gray_suit_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'suit.png',
+                                    'thumb_selected' => $_img_url.'suit_selected.png',
+                                    'name' => 'Men pink suit',
+                                    'description' => 'Men pink suit',
+                                    'slug' => 'wbc_men_pink_suit_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'suit.png',
+                                    'thumb_selected' => $_img_url.'suit_selected.png',
+                                    'name' => 'Men maroon suit',
+                                    'description' => 'Men maroon suit',
+                                    'slug' => 'wbc_men_maroon_suit_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'suit.png',
+                                    'thumb_selected' => $_img_url.'suit_selected.png',
+                                    'name' => 'Men aqua suit',
+                                    'description' => 'Men aqua suit',
+                                    'slug' => 'wbc_men_aqua_suit_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'suit.png',
+                                    'thumb_selected' => $_img_url.'suit_selected.png',
+                                    'name' => 'Men lime suit',
+                                    'description' => 'Men lime suit',
+                                    'slug' => 'wbc_men_lime_suit_cat'
+                                ),
+                                //men-hoodie
+                                array(
+                                    'thumb' => $_img_url.'hoodie.png',
+                                    'thumb_selected' => $_img_url.'hoodie_selected.png',
+                                    'name' => 'Men white hoodie',
+                                    'description' => 'Men white hoodie',
+                                    'slug' => 'wbc_men_white_hoodie_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'hoodie.png',
+                                    'thumb_selected' => $_img_url.'hoodie_selected.png',
+                                    'name' => 'Men black hoodie',
+                                    'description' => 'Men balck hoodie',
+                                    'slug' => 'wbc_men_black_hoodie_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'hoodie.png',
+                                    'thumb_selected' => $_img_url.'hoodie_selected.png',
+                                    'name' => 'Men blue hoodie',
+                                    'description' => 'Men blue hoodie',
+                                    'slug' => 'wbc_men_blue_hoodie_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'hoodie.png',
+                                    'thumb_selected' => $_img_url.'hoodie_selected.png',
+                                    'name' => 'Men green hoodie',
+                                    'description' => 'Men green hoodie',
+                                    'slug' => 'wbc_men_green_hoodie_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'hoodie.png',
+                                    'thumb_selected' => $_img_url.'hoodie_selected.png',
+                                    'name' => 'Men orange hoodie',
+                                    'description' => 'Men orange hoodie',
+                                    'slug' => 'wbc_men_orange_hoodie_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'hoodie.png',
+                                    'thumb_selected' => $_img_url.'hoodie_selected.png',
+                                    'name' => 'Men red hoodie',
+                                    'description' => 'Men red hoodie',
+                                    'slug' => 'wbc_men_red_hoodie_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'hoodie.png',
+                                    'thumb_selected' => $_img_url.'hoodie_selected.png',
+                                    'name' => 'Men yellow hoodie',
+                                    'description' => 'Men yellow hoodie',
+                                    'slug' => 'wbc_men_yellow_hoodie_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'hoodie.png',
+                                    'thumb_selected' => $_img_url.'hoodie_selected.png',
+                                    'name' => 'Men purple hoodie',
+                                    'description' => 'Men purple hoodie',
+                                    'slug' => 'wbc_men_purple_hoodie_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'hoodie.png',
+                                    'thumb_selected' => $_img_url.'hoodie_selected.png',
+                                    'name' => 'Men gray hoodie',
+                                    'description' => 'Men gray hoodie',
+                                    'slug' => 'wbc_men_gray_hoodie_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'hoodie.png',
+                                    'thumb_selected' => $_img_url.'hoodie_selected.png',
+                                    'name' => 'Men pink hoodie',
+                                    'description' => 'Men pink hoodie',
+                                    'slug' => 'wbc_men_pink_hoodie_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'hoodie.png',
+                                    'thumb_selected' => $_img_url.'hoodie_selected.png',
+                                    'name' => 'Men maroon hoodie',
+                                    'description' => 'Men maroon hoodie',
+                                    'slug' => 'wbc_men_maroon_hoodie_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'hoodie.png',
+                                    'thumb_selected' => $_img_url.'hoodie_selected.png',
+                                    'name' => 'Men aqua hoodie',
+                                    'description' => 'Men aqua hoodie',
+                                    'slug' => 'wbc_men_aqua_hoodie_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'hoodie.png',
+                                    'thumb_selected' => $_img_url.'hoodie_selected.png',
+                                    'name' => 'Men lime hoodie',
+                                    'description' => 'Men lime hoodie',
+                                    'slug' => 'wbc_men_lime_hoodie_cat'
+                                ),
+                                //women-hoodies 
+                                array(
+                                    'thumb' => $_img_url.'hoodie.png',
+                                    'thumb_selected' => $_img_url.'hoodie_selected.png',
+                                    'name' => 'Women white hoodie',
+                                    'description' => 'Women white hoodie',
+                                    'slug' => 'wbc_women_white_hoodie_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'hoodie.png',
+                                    'thumb_selected' => $_img_url.'hoodie_selected.png',
+                                    'name' => 'Women black hoodie',
+                                    'description' => 'Women balck hoodie',
+                                    'slug' => 'wbc_Women_black_hoodie_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'hoodie.png',
+                                    'thumb_selected' => $_img_url.'hoodie_selected.png',
+                                    'name' => 'Women blue hoodie',
+                                    'description' => 'Women blue hoodie',
+                                    'slug' => 'wbc_women_blue_hoodie_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'hoodie.png',
+                                    'thumb_selected' => $_img_url.'hoodie_selected.png',
+                                    'name' => 'Women green hoodie',
+                                    'description' => 'Women green hoodie',
+                                    'slug' => 'wbc_women_green_hoodie_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'hoodie.png',
+                                    'thumb_selected' => $_img_url.'hoodie_selected.png',
+                                    'name' => 'Women orange hoodie',
+                                    'description' => 'Women orange hoodie',
+                                    'slug' => 'wbc_women_orange_hoodie_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'hoodie.png',
+                                    'thumb_selected' => $_img_url.'hoodie_selected.png',
+                                    'name' => 'Women red hoodie',
+                                    'description' => 'Women red hoodie',
+                                    'slug' => 'wbc_women_red_hoodie_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'hoodie.png',
+                                    'thumb_selected' => $_img_url.'hoodie_selected.png',
+                                    'name' => 'Women yellow hoodie',
+                                    'description' => 'Women yellow hoodie',
+                                    'slug' => 'wbc_women_yellow_hoodie_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'hoodie.png',
+                                    'thumb_selected' => $_img_url.'hoodie_selected.png',
+                                    'name' => 'Women purple hoodie',
+                                    'description' => 'Women purple hoodie',
+                                    'slug' => 'wbc_women_purple_hoodie_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'hoodie.png',
+                                    'thumb_selected' => $_img_url.'hoodie_selected.png',
+                                    'name' => 'Women gray hoodie',
+                                    'description' => 'Woen gray hoodie',
+                                    'slug' => 'wbc_women_gray_hoodie_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'hoodie.png',
+                                    'thumb_selected' => $_img_url.'hoodie_selected.png',
+                                    'name' => 'Women pink hoodie',
+                                    'description' => 'Women pink hoodie',
+                                    'slug' => 'wbc_women_pink_hoodie_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'hoodie.png',
+                                    'thumb_selected' => $_img_url.'hoodie_selected.png',
+                                    'name' => 'Women maroon hoodie',
+                                    'description' => 'Women maroon hoodie',
+                                    'slug' => 'wbc_women_maroon_hoodie_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'hoodie.png',
+                                    'thumb_selected' => $_img_url.'hoodie_selected.png',
+                                    'name' => 'Women aqua hoodie',
+                                    'description' => 'Women aqua hoodie',
+                                    'slug' => 'wbc_women_aqua_hoodie_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'hoodie.png',
+                                    'thumb_selected' => $_img_url.'hoodie_selected.png',
+                                    'name' => 'Women lime hoodie',
+                                    'description' => 'Women lime hoodie',
+                                    'slug' => 'wbc_women_lime_hoodie_cat'
+                                ),
+                                // women-tops 
+                                array(
+                                    'thumb' => $_img_url.'tops.png',
+                                    'thumb_selected' => $_img_url.'tops_selected.png',
+                                    'name' => 'Women white tops',
+                                    'description' => 'Women white tops',
+                                    'slug' => 'wbc_women_white_tops_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tops.png',
+                                    'thumb_selected' => $_img_url.'tops_selected.png',
+                                    'name' => 'Women black tops',
+                                    'description' => 'Women balck tops',
+                                    'slug' => 'wbc_Women_black_tops_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tops.png',
+                                    'thumb_selected' => $_img_url.'tops_selected.png',
+                                    'name' => 'Women blue tops',
+                                    'description' => 'Women blue tops',
+                                    'slug' => 'wbc_women_blue_tops_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tops.png',
+                                    'thumb_selected' => $_img_url.'tops_selected.png',
+                                    'name' => 'Women green tops',
+                                    'description' => 'Women green tops',
+                                    'slug' => 'wbc_women_green_tops_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tops.png',
+                                    'thumb_selected' => $_img_url.'tops_selected.png',
+                                    'name' => 'Women orange tops',
+                                    'description' => 'Women orange tops',
+                                    'slug' => 'wbc_women_orange_tops_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tops.png',
+                                    'thumb_selected' => $_img_url.'tops_selected.png',
+                                    'name' => 'Women red tops',
+                                    'description' => 'Women red tops',
+                                    'slug' => 'wbc_women_red_tops_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tops.png',
+                                    'thumb_selected' => $_img_url.'tops_selected.png',
+                                    'name' => 'Women yellow tops',
+                                    'description' => 'Women yellow tops',
+                                    'slug' => 'wbc_women_yellow_tops_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tops.png',
+                                    'thumb_selected' => $_img_url.'tops_selected.png',
+                                    'name' => 'Women purple tops',
+                                    'description' => 'Women purple tops',
+                                    'slug' => 'wbc_women_purple_tops_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tops.png',
+                                    'thumb_selected' => $_img_url.'tops_selected.png',
+                                    'name' => 'Women gray tops',
+                                    'description' => 'Woen gray tops',
+                                    'slug' => 'wbc_women_gray_tops_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tops.png',
+                                    'thumb_selected' => $_img_url.'tops_selected.png',
+                                    'name' => 'Women pink tops',
+                                    'description' => 'Women pink tops',
+                                    'slug' => 'wbc_women_pink_tops_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tops.png',
+                                    'thumb_selected' => $_img_url.'tops_selected.png',
+                                    'name' => 'Women maroon tops',
+                                    'description' => 'Women maroon tops',
+                                    'slug' => 'wbc_women_maroon_tops_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tops.png',
+                                    'thumb_selected' => $_img_url.'tops_selected.png',
+                                    'name' => 'Women aqua tops',
+                                    'description' => 'Women aqua tops',
+                                    'slug' => 'wbc_women_aqua_tops_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tops.png',
+                                    'thumb_selected' => $_img_url.'tops_selected.png',
+                                    'name' => 'Women lime tops',
+                                    'description' => 'Women lime tops',
+                                    'slug' => 'wbc_women_lime_tops_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tops.png',
+                                    'thumb_selected' => $_img_url.'tops_selected.png',
+                                    'name' => 'Tops',
+                                    'description' => 'Top wear tops',
+                                    'slug' => 'wbc_top_wear_tops_cat'
+                                ),
+                                //tunic
+                                array(
+                                    'thumb' => $_img_url.'tunic.png',
+                                    'thumb_selected' => $_img_url.'tunic_selected.png',
+                                    'name' => 'Women white tunic',
+                                    'description' => 'Women white tunic',
+                                    'slug' => 'wbc_women_white_tunic_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tunic.png',
+                                    'thumb_selected' => $_img_url.'tunic_selected.png',
+                                    'name' => 'Women black tunic',
+                                    'description' => 'Women balck tunic',
+                                    'slug' => 'wbc_Women_black_tunic_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tunic.png',
+                                    'thumb_selected' => $_img_url.'tunic_selected.png',
+                                    'name' => 'Women blue tunic',
+                                    'description' => 'Women blue tunic',
+                                    'slug' => 'wbc_women_blue_tunic_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tunic.png',
+                                    'thumb_selected' => $_img_url.'tunic_selected.png',
+                                    'name' => 'Women green tunic',
+                                    'description' => 'Women green tunic',
+                                    'slug' => 'wbc_women_green_tunic_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tunic.png',
+                                    'thumb_selected' => $_img_url.'tunic_selected.png',
+                                    'name' => 'Women orange tunic',
+                                    'description' => 'Women orange tunic',
+                                    'slug' => 'wbc_women_orange_tunic_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tunic.png',
+                                    'thumb_selected' => $_img_url.'tunic_selected.png',
+                                    'name' => 'Women red tunic',
+                                    'description' => 'Women red tunic',
+                                    'slug' => 'wbc_women_red_tunic_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tunic.png',
+                                    'thumb_selected' => $_img_url.'tunic_selected.png',
+                                    'name' => 'Women yellow tunic',
+                                    'description' => 'Women yellow tunic',
+                                    'slug' => 'wbc_women_yellow_tunic_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tunic.png',
+                                    'thumb_selected' => $_img_url.'tunic_selected.png',
+                                    'name' => 'Women purple tunic',
+                                    'description' => 'Women purple tunic',
+                                    'slug' => 'wbc_women_purple_tunic_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tunic.png',
+                                    'thumb_selected' => $_img_url.'tunic_selected.png',
+                                    'name' => 'Women gray tunic',
+                                    'description' => 'Woen gray tunic',
+                                    'slug' => 'wbc_women_gray_tunic_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tunic.png',
+                                    'thumb_selected' => $_img_url.'tunic_selected.png',
+                                    'name' => 'Women pink tunic',
+                                    'description' => 'Women pink tunic',
+                                    'slug' => 'wbc_women_pink_tunic_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tunic.png',
+                                    'thumb_selected' => $_img_url.'tunic_selected.png',
+                                    'name' => 'Women maroon tunic',
+                                    'description' => 'Women maroon tunic',
+                                    'slug' => 'wbc_women_maroon_tunic_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tunic.png',
+                                    'thumb_selected' => $_img_url.'tunic_selected.png',
+                                    'name' => 'Women aqua tunic',
+                                    'description' => 'Women aqua tunic',
+                                    'slug' => 'wbc_women_aqua_tunic_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'tunic.png',
+                                    'thumb_selected' => $_img_url.'tunic_selected.png',
+                                    'name' => 'Women lime tunic',
+                                    'description' => 'Women lime tunic',
+                                    'slug' => 'wbc_women_lime_tunic_cat'
+                                )
+
+                        )
+                    ),
+                    array(
+                        'thumb' => '',
+                        'name' => 'Bottom wear',
+                        'description' => 'Bottom-wear category',
+                        'slug' => 'wbc_bottomwear_cat',
+                        'child'=> 
+                        array(
+                                array(
+                                    'thumb' => $_img_url.'trousers.png',
+                                    'thumb_selected' => $_img_url.'trousers_selected.png',
+                                    'name' => 'Men white trouser',
+                                    'description' => 'Men white trousers',
+                                    'slug' => 'wbc_men_white_trousers_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'trousers.png',
+                                    'thumb_selected' => $_img_url.'trousers_selected.png',
+                                    'name' => 'Men black trouser',
+                                    'description' => 'Men black trousers',
+                                    'slug' => 'wbc_men_black_trousers_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'trousers.png',
+                                    'thumb_selected' => $_img_url.'trousers_selected.png',
+                                    'name' => 'Men red trouser',
+                                    'description' => 'Men red trousers',
+                                    'slug' => 'wbc_men_red_trousers_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'trousers.png',
+                                    'thumb_selected' => $_img_url.'trousers_selected.png',
+                                    'name' => 'Men green trouser',
+                                    'description' => 'Men green trousers',
+                                    'slug' => 'wbc_men_green_trousers_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'trousers.png',
+                                    'thumb_selected' => $_img_url.'trousers_selected.png',
+                                    'name' => 'Men blue trouser',
+                                    'description' => 'Men blue trousers',
+                                    'slug' => 'wbc_men_blue_trousers_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'trousers.png',
+                                    'thumb_selected' => $_img_url.'trousers_selected.png',
+                                    'name' => 'Men aqua trouser',
+                                    'description' => 'Men aqua trousers',
+                                    'slug' => 'wbc_men_aqua_trousers_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'trousers.png',
+                                    'thumb_selected' => $_img_url.'trousers_selected.png',
+                                    'name' => 'Men orange trouser',
+                                    'description' => 'Men orange trousers',
+                                    'slug' => 'wbc_men_orange_trousers_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'trousers.png',
+                                    'thumb_selected' => $_img_url.'trousers_selected.png',
+                                    'name' => 'Men lime trouser',
+                                    'description' => 'Men lime trousers',
+                                    'slug' => 'wbc_men_lime_trousers_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'trousers.png',
+                                    'thumb_selected' => $_img_url.'trousers_selected.png',
+                                    'name' => 'Men yellow trouser',
+                                    'description' => 'Men yellow trousers',
+                                    'slug' => 'wbc_men_yellow_trousers_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'trousers.png',
+                                    'thumb_selected' => $_img_url.'trousers_selected.png',
+                                    'name' => 'Men pink trouser',
+                                    'description' => 'Men pink trousers',
+                                    'slug' => 'wbc_men_pink_trousers_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'trousers.png',
+                                    'thumb_selected' => $_img_url.'trousers_selected.png',
+                                    'name' => 'Men maroon trouser',
+                                    'description' => 'Men maroon trousers',
+                                    'slug' => 'wbc_men_maroon_trousers_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'trousers.png',
+                                    'thumb_selected' => $_img_url.'trousers_selected.png',
+                                    'name' => 'Men gray trouser',
+                                    'description' => 'Men gray trousers',
+                                    'slug' => 'wbc_men_gray_trousers_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'trousers.png',
+                                    'thumb_selected' => $_img_url.'trousers_selected.png',
+                                    'name' => 'Men purple trouser',
+                                    'description' => 'Men purple trousers',
+                                    'slug' => 'wbc_men_purple_trousers_cat'
+                                ),
+                                //women-trousers
+                                array(
+                                    'thumb' => $_img_url.'trousers.png',
+                                    'thumb_selected' => $_img_url.'trousers_selected.png',
+                                    'name' => 'Women white trouser',
+                                    'description' => 'Women white trousers',
+                                    'slug' => 'wbc_women_white_trousers_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'trousers.png',
+                                    'thumb_selected' => $_img_url.'trousers_selected.png',
+                                    'name' => 'Women black trouser',
+                                    'description' => 'Women black trousers',
+                                    'slug' => 'wbc_women_black_trousers_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'trousers.png',
+                                    'thumb_selected' => $_img_url.'trousers_selected.png',
+                                    'name' => 'Women red trouser',
+                                    'description' => 'Women red trousers',
+                                    'slug' => 'wbc_women_red_trousers_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'trousers.png',
+                                    'thumb_selected' => $_img_url.'trousers_selected.png',
+                                    'name' => 'Women green trouser',
+                                    'description' => 'Women green trousers',
+                                    'slug' => 'wbc_women_green_trousers_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'trousers.png',
+                                    'thumb_selected' => $_img_url.'trousers_selected.png',
+                                    'name' => 'Women blue trouser',
+                                    'description' => 'Women blue trousers',
+                                    'slug' => 'wbc_women_blue_trousers_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'trousers.png',
+                                    'thumb_selected' => $_img_url.'trousers_selected.png',
+                                    'name' => 'Women aqua trouser',
+                                    'description' => 'Women aqua trousers',
+                                    'slug' => 'wbc_women_aqua_trousers_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'trousers.png',
+                                    'thumb_selected' => $_img_url.'trousers_selected.png',
+                                    'name' => 'Women orange trouser',
+                                    'description' => 'Women orange trousers',
+                                    'slug' => 'wbc_women_orange_trousers_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'trousers.png',
+                                    'thumb_selected' => $_img_url.'trousers_selected.png',
+                                    'name' => 'Women lime trouser',
+                                    'description' => 'Women lime trousers',
+                                    'slug' => 'wbc_women_lime_trousers_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'trousers.png',
+                                    'thumb_selected' => $_img_url.'trousers_selected.png',
+                                    'name' => 'Women yellow trouser',
+                                    'description' => 'Women yellow trousers',
+                                    'slug' => 'wbc_women_yellow_trousers_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'trousers.png',
+                                    'thumb_selected' => $_img_url.'trousers_selected.png',
+                                    'name' => 'Women pink trouser',
+                                    'description' => 'Women pink trousers',
+                                    'slug' => 'wbc_women_pink_trousers_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'trousers.png',
+                                    'thumb_selected' => $_img_url.'trousers_selected.png',
+                                    'name' => 'Women maroon trouser',
+                                    'description' => 'Women maroon trousers',
+                                    'slug' => 'wbc_women_maroon_trousers_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'trousers.png',
+                                    'thumb_selected' => $_img_url.'trousers_selected.png',
+                                    'name' => 'Women gray trouser',
+                                    'description' => 'Women gray trousers',
+                                    'slug' => 'wbc_Women_gray_trousers_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'trousers.png',
+                                    'thumb_selected' => $_img_url.'trousers_selected.png',
+                                    'name' => 'Women purple trouser',
+                                    'description' => 'Women purple trousers',
+                                    'slug' => 'wbc_women_purple_trousers_cat'
+                                ),
+                                //men-jeans
+                                array(
+                                    'thumb' => $_img_url.'jeans.png',
+                                    'thumb_selected' => $_img_url.'jeans_selected.png',
+                                    'name' => 'Men white jeans',
+                                    'description' => 'Men white jeans',
+                                    'slug' => 'wbc_men_white_jeans_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jeans.png',
+                                    'thumb_selected' => $_img_url.'jeans_selected.png',
+                                    'name' => 'Men black jeans',
+                                    'description' => 'Men black jeans',
+                                    'slug' => 'wbc_men_black_jeans_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jeans.png',
+                                    'thumb_selected' => $_img_url.'jeans_selected.png',
+                                    'name' => 'Men red jeans',
+                                    'description' => 'Men red jeans',
+                                    'slug' => 'wbc_men_red_jeans_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jeans.png',
+                                    'thumb_selected' => $_img_url.'jeans_selected.png',
+                                    'name' => 'Men green jeans',
+                                    'description' => 'Men green jeans',
+                                    'slug' => 'wbc_men_green_jeans_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jeans.png',
+                                    'thumb_selected' => $_img_url.'jeans_selected.png',
+                                    'name' => 'Men blue jeans',
+                                    'description' => 'Men blue jeans',
+                                    'slug' => 'wbc_men_blue_jeans_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jeans.png',
+                                    'thumb_selected' => $_img_url.'jeans_selected.png',
+                                    'name' => 'Men aqua jeans',
+                                    'description' => 'Men aqua jeans',
+                                    'slug' => 'wbc_men_aqua_jeans_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jeans.png',
+                                    'thumb_selected' => $_img_url.'jeans_selected.png',
+                                    'name' => 'Men orange jeans',
+                                    'description' => 'Men orange jeans',
+                                    'slug' => 'wbc_men_orange_jeans_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jeans.png',
+                                    'thumb_selected' => $_img_url.'jeans_selected.png',
+                                    'name' => 'Men lime jeans',
+                                    'description' => 'Men lime jeans',
+                                    'slug' => 'wbc_men_lime_jeans_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jeans.png',
+                                    'thumb_selected' => $_img_url.'jeans_selected.png',
+                                    'name' => 'Men yellow jeans',
+                                    'description' => 'Men yellow jeans',
+                                    'slug' => 'wbc_men_yellow_jeans_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jeans.png',
+                                    'thumb_selected' => $_img_url.'jeans_selected.png',
+                                    'name' => 'Men pink jeans',
+                                    'description' => 'Men pink jeans',
+                                    'slug' => 'wbc_men_pink_jeans_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jeans.png',
+                                    'thumb_selected' => $_img_url.'jeans_selected.png',
+                                    'name' => 'Men maroon jeans',
+                                    'description' => 'Men maroon jeans',
+                                    'slug' => 'wbc_men_maroon_jeans_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jeans.png',
+                                    'thumb_selected' => $_img_url.'jeans_selected.png',
+                                    'name' => 'Men gray jeans',
+                                    'description' => 'Men gray jeans',
+                                    'slug' => 'wbc_men_gray_jeans_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jeans.png',
+                                    'thumb_selected' => $_img_url.'jeans_selected.png',
+                                    'name' => 'Men purple jeans',
+                                    'description' => 'Men purple jeans',
+                                    'slug' => 'wbc_men_purple_jeans_cat'
+                                ),
+                                //women-jeans
+                                array(
+                                    'thumb' => $_img_url.'jeans.png',
+                                    'thumb_selected' => $_img_url.'jeans_selected.png',
+                                    'name' => 'Women white jeans',
+                                    'description' => 'Women white jeans',
+                                    'slug' => 'wbc_women_white_jeans_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jeans.png',
+                                    'thumb_selected' => $_img_url.'jeans_selected.png',
+                                    'name' => 'Women black jeans',
+                                    'description' => 'Women black jeans',
+                                    'slug' => 'wbc_women_black_jeans_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jeans.png',
+                                    'thumb_selected' => $_img_url.'jeans_selected.png',
+                                    'name' => 'Women red jeans',
+                                    'description' => 'Women red jeans',
+                                    'slug' => 'wbc_women_red_jeans_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jeans.png',
+                                    'thumb_selected' => $_img_url.'jeans_selected.png',
+                                    'name' => 'Women green jeans',
+                                    'description' => 'Women green jeans',
+                                    'slug' => 'wbc_women_green_jeans_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jeans.png',
+                                    'thumb_selected' => $_img_url.'jeans_selected.png',
+                                    'name' => 'Women blue jeans',
+                                    'description' => 'Women blue jeans',
+                                    'slug' => 'wbc_women_blue_jeans_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jeans.png',
+                                    'thumb_selected' => $_img_url.'jeans_selected.png',
+                                    'name' => 'Women aqua jeans',
+                                    'description' => 'Women aqua jeans',
+                                    'slug' => 'wbc_women_aqua_jeans_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jeans.png',
+                                    'thumb_selected' => $_img_url.'jeans_selected.png',
+                                    'name' => 'Women orange jeans',
+                                    'description' => 'Women orange jeans',
+                                    'slug' => 'wbc_women_orange_jeans_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jeans.png',
+                                    'thumb_selected' => $_img_url.'jeans_selected.png',
+                                    'name' => 'Women lime jeans',
+                                    'description' => 'Women lime jeans',
+                                    'slug' => 'wbc_women_lime_jeans_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jeans.png',
+                                    'thumb_selected' => $_img_url.'jeans_selected.png',
+                                    'name' => 'Women yellow jeans',
+                                    'description' => 'Women yellow jeans',
+                                    'slug' => 'wbc_women_yellow_jeans_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jeans.png',
+                                    'thumb_selected' => $_img_url.'jeans_selected.png',
+                                    'name' => 'Women pink jeans',
+                                    'description' => 'Women pink jeans',
+                                    'slug' => 'wbc_women_pink_jeans_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jeans.png',
+                                    'thumb_selected' => $_img_url.'jeans_selected.png',
+                                    'name' => 'Women maroon jeans',
+                                    'description' => 'Women maroon jeans',
+                                    'slug' => 'wbc_women_maroon_jeans_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jeans.png',
+                                    'thumb_selected' => $_img_url.'jeans_selected.png',
+                                    'name' => 'Women gray jeans',
+                                    'description' => 'Women gray jeans',
+                                    'slug' => 'wbc_women_gray_jeans_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'jeans.png',
+                                    'thumb_selected' => $_img_url.'jeans_selected.png',
+                                    'name' => 'Women purple jeans',
+                                    'description' => 'Women purple jeans',
+                                    'slug' => 'wbc_women_purple_jeans_cat'
+                                ),
+                                //men-shorts
+                                array(
+                                    'thumb' => $_img_url.'shorts.png',
+                                    'thumb_selected' => $_img_url.'shorts_selected.png',
+                                    'name' => 'Men white shorts',
+                                    'description' => 'Men white shorts',
+                                    'slug' => 'wbc_men_white_shorts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shorts.png',
+                                    'thumb_selected' => $_img_url.'shorts_selected.png',
+                                    'name' => 'Men black shorts',
+                                    'description' => 'Men black shorts',
+                                    'slug' => 'wbc_men_black_shorts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shorts.png',
+                                    'thumb_selected' => $_img_url.'shorts_selected.png',
+                                    'name' => 'Men red shorts',
+                                    'description' => 'Men red shorts',
+                                    'slug' => 'wbc_men_red_shorts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shorts.png',
+                                    'thumb_selected' => $_img_url.'shorts_selected.png',
+                                    'name' => 'Men green shorts',
+                                    'description' => 'Men green shorts',
+                                    'slug' => 'wbc_men_green_shorts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shorts.png',
+                                    'thumb_selected' => $_img_url.'shorts_selected.png',
+                                    'name' => 'Men blue shorts',
+                                    'description' => 'Men blue shorts',
+                                    'slug' => 'wbc_men_blue_shorts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shorts.png',
+                                    'thumb_selected' => $_img_url.'shorts_selected.png',
+                                    'name' => 'Men aqua shorts',
+                                    'description' => 'Men aqua shorts',
+                                    'slug' => 'wbc_men_aqua_shorts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shorts.png',
+                                    'thumb_selected' => $_img_url.'shorts_selected.png',
+                                    'name' => 'Men orange shorts',
+                                    'description' => 'Men orange shorts',
+                                    'slug' => 'wbc_men_orange_shorts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shorts.png',
+                                    'thumb_selected' => $_img_url.'shorts.png',
+                                    'name' => 'Men lime shorts',
+                                    'description' => 'Men lime shorts',
+                                    'slug' => 'wbc_men_lime_shorts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shorts.png',
+                                    'thumb_selected' => $_img_url.'shorts_selected.png',
+                                    'name' => 'Men yellow shorts',
+                                    'description' => 'Men yellow shorts',
+                                    'slug' => 'wbc_men_yellow_shorts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shorts.png',
+                                    'thumb_selected' => $_img_url.'shorts_selected.png',
+                                    'name' => 'Men pink shorts',
+                                    'description' => 'Men pink shorts',
+                                    'slug' => 'wbc_men_pink_shorts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shorts.png',
+                                    'thumb_selected' => $_img_url.'shorts_selected.png',
+                                    'name' => 'Men maroon shorts',
+                                    'description' => 'Men maroon shorts',
+                                    'slug' => 'wbc_men_maroon_shorts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shorts.png',
+                                    'thumb_selected' => $_img_url.'shorts_selected.png',
+                                    'name' => 'Men gray shorts',
+                                    'description' => 'Men gray shorts',
+                                    'slug' => 'wbc_men_gray_shorts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shorts.png',
+                                    'thumb_selected' => $_img_url.'shorts_selected.png',
+                                    'name' => 'Men purple shorts',
+                                    'description' => 'Men purple shorts',
+                                    'slug' => 'wbc_men_purple_shorts_cat'
+                                ),
+                                //women-shorts
+                                array(
+                                    'thumb' => $_img_url.'shorts.png',
+                                    'thumb_selected' => $_img_url.'shorts_selected.png',
+                                    'name' => 'Women white shorts',
+                                    'description' => 'Women white shorts',
+                                    'slug' => 'wbc_women_white_shorts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shorts.png',
+                                    'thumb_selected' => $_img_url.'shorts_selected.png',
+                                    'name' => 'Women black shorts',
+                                    'description' => 'Women black shorts',
+                                    'slug' => 'wbc_women_black_shorts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shorts.png',
+                                    'thumb_selected' => $_img_url.'shorts_selected.png',
+                                    'name' => 'Women red shorts',
+                                    'description' => 'Women red shorts',
+                                    'slug' => 'wbc_women_red_shorts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shorts.png',
+                                    'thumb_selected' => $_img_url.'shorts_selected.png',
+                                    'name' => 'Women green shorts',
+                                    'description' => 'Women green shorts',
+                                    'slug' => 'wbc_women_green_shorts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shorts.png',
+                                    'thumb_selected' => $_img_url.'jeans_selected.png',
+                                    'name' => 'Women blue shorts',
+                                    'description' => 'Women blue shorts',
+                                    'slug' => 'wbc_women_blue_shorts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shorts.png',
+                                    'thumb_selected' => $_img_url.'shorts_selected.png',
+                                    'name' => 'Women aqua shorts',
+                                    'description' => 'Women aqua shorts',
+                                    'slug' => 'wbc_women_aqua_shorts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shorts.png',
+                                    'thumb_selected' => $_img_url.'shorts_selected.png',
+                                    'name' => 'Women orange shorts',
+                                    'description' => 'Women orange shorts',
+                                    'slug' => 'wbc_women_orange_shorts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shorts.png',
+                                    'thumb_selected' => $_img_url.'shorts.png',
+                                    'name' => 'Women lime shorts',
+                                    'description' => 'Women lime shorts',
+                                    'slug' => 'wbc_women_lime_shorts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shorts.png',
+                                    'thumb_selected' => $_img_url.'shorts_selected.png',
+                                    'name' => 'Women yellow shorts',
+                                    'description' => 'Women yellow shorts',
+                                    'slug' => 'wbc_women_yellow_shorts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shorts.png',
+                                    'thumb_selected' => $_img_url.'shorts_selected.png',
+                                    'name' => 'Women pink shorts',
+                                    'description' => 'Women pink shorts',
+                                    'slug' => 'wbc_women_pink_shorts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shorts.png',
+                                    'thumb_selected' => $_img_url.'shorts_selected.png',
+                                    'name' => 'Women maroon shorts',
+                                    'description' => 'Women maroon shorts',
+                                    'slug' => 'wbc_women_maroon_shorts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shorts.png',
+                                    'thumb_selected' => $_img_url.'shorts_selected.png',
+                                    'name' => 'Women gray shorts',
+                                    'description' => 'Women gray shorts',
+                                    'slug' => 'wbc_women_gray_shorts_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'shorts.png',
+                                    'thumb_selected' => $_img_url.'shorts_selected.png',
+                                    'name' => 'Women purple shorts',
+                                    'description' => 'Women purple shorts',
+                                    'slug' => 'wbc_women_purple_shorts_cat'
+                                ),
+                                //men-track
+                                array(
+                                    'thumb' => $_img_url.'track.png',
+                                    'thumb_selected' => $_img_url.'track_selected.png',
+                                    'name' => 'Men white track',
+                                    'description' => 'Men white track',
+                                    'slug' => 'wbc_men_white_track_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'track.png',
+                                    'thumb_selected' => $_img_url.'track_selected.png',
+                                    'name' => 'Men black track',
+                                    'description' => 'Men black track',
+                                    'slug' => 'wbc_men_black_track_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'track.png',
+                                    'thumb_selected' => $_img_url.'track_selected.png',
+                                    'name' => 'Men red track',
+                                    'description' => 'Men red track',
+                                    'slug' => 'wbc_men_red_track_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'track.png',
+                                    'thumb_selected' => $_img_url.'track_selected.png',
+                                    'name' => 'Men green track',
+                                    'description' => 'Men green track',
+                                    'slug' => 'wbc_men_green_track_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'track.png',
+                                    'thumb_selected' => $_img_url.'track_selected.png',
+                                    'name' => 'Men blue track',
+                                    'description' => 'Men blue track',
+                                    'slug' => 'wbc_men_blue_track_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'track.png',
+                                    'thumb_selected' => $_img_url.'track_selected.png',
+                                    'name' => 'Men aqua track',
+                                    'description' => 'Men aqua track',
+                                    'slug' => 'wbc_men_aqua_track_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'track.png',
+                                    'thumb_selected' => $_img_url.'track_selected.png',
+                                    'name' => 'Men orange track',
+                                    'description' => 'Men orange track',
+                                    'slug' => 'wbc_men_orange_track_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'track.png',
+                                    'thumb_selected' => $_img_url.'track_selected.png',
+                                    'name' => 'Men lime track',
+                                    'description' => 'Men lime track',
+                                    'slug' => 'wbc_men_lime_track_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'track.png',
+                                    'thumb_selected' => $_img_url.'track_selected.png',
+                                    'name' => 'Men yellow track',
+                                    'description' => 'Men yellow track',
+                                    'slug' => 'wbc_men_yellow_track_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'track.png',
+                                    'thumb_selected' => $_img_url.'track_selected.png',
+                                    'name' => 'Men pink track',
+                                    'description' => 'Men pink track',
+                                    'slug' => 'wbc_men_pink_track_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'track.png',
+                                    'thumb_selected' => $_img_url.'track_selected.png',
+                                    'name' => 'Men maroon track',
+                                    'description' => 'Men maroon track',
+                                    'slug' => 'wbc_men_maroon_track_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'track.png',
+                                    'thumb_selected' => $_img_url.'track_selected.png',
+                                    'name' => 'Men gray track',
+                                    'description' => 'Men gray track',
+                                    'slug' => 'wbc_men_gray_track_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'track.png',
+                                    'thumb_selected' => $_img_url.'track_selected.png',
+                                    'name' => 'Men purple track',
+                                    'description' => 'Men purple track',
+                                    'slug' => 'wbc_men_purple_track_cat'
+                                ),
+                                //women-track
+                                array(
+                                    'thumb' => $_img_url.'track.png',
+                                    'thumb_selected' => $_img_url.'track_selected.png',
+                                    'name' => 'Women white track',
+                                    'description' => 'Women white track',
+                                    'slug' => 'wbc_women_white_track_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'track.png',
+                                    'thumb_selected' => $_img_url.'track_selected.png',
+                                    'name' => 'Women black track',
+                                    'description' => 'Women black track',
+                                    'slug' => 'wbc_women_black_track_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'track.png',
+                                    'thumb_selected' => $_img_url.'track_selected.png',
+                                    'name' => 'Women red track',
+                                    'description' => 'Women red track',
+                                    'slug' => 'wbc_women_red_track_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'track.png',
+                                    'thumb_selected' => $_img_url.'track_selected.png',
+                                    'name' => 'Women green track',
+                                    'description' => 'Women green track',
+                                    'slug' => 'wbc_women_green_track_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'track.png',
+                                    'thumb_selected' => $_img_url.'track_selected.png',
+                                    'name' => 'Women blue track',
+                                    'description' => 'Women blue track',
+                                    'slug' => 'wbc_women_blue_track_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'track.png',
+                                    'thumb_selected' => $_img_url.'track_selected.png',
+                                    'name' => 'Women aqua track',
+                                    'description' => 'Women aqua track',
+                                    'slug' => 'wbc_women_aqua_track_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'track.png',
+                                    'thumb_selected' => $_img_url.'track_selected.png',
+                                    'name' => 'Women orange track',
+                                    'description' => 'Women orange track',
+                                    'slug' => 'wbc_women_orange_track_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'track.png',
+                                    'thumb_selected' => $_img_url.'track.png',
+                                    'name' => 'Women lime track',
+                                    'description' => 'Women lime track',
+                                    'slug' => 'wbc_women_lime_track_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'track.png',
+                                    'thumb_selected' => $_img_url.'track_selected.png',
+                                    'name' => 'Women yellow track',
+                                    'description' => 'Women yellow track',
+                                    'slug' => 'wbc_women_yellow_track_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'track.png',
+                                    'thumb_selected' => $_img_url.'track_selected.png',
+                                    'name' => 'Women pink track',
+                                    'description' => 'Women pink track',
+                                    'slug' => 'wbc_women_pink_track_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'track.png',
+                                    'thumb_selected' => $_img_url.'track_selected.png',
+                                    'name' => 'Women maroon track',
+                                    'description' => 'Women maroon track',
+                                    'slug' => 'wbc_women_maroon_track_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'track.png',
+                                    'thumb_selected' => $_img_url.'track_selected.png',
+                                    'name' => 'Women gray track',
+                                    'description' => 'Women gray track',
+                                    'slug' => 'wbc_women_gray_track_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'track.png',
+                                    'thumb_selected' => $_img_url.'track_selected.png',
+                                    'name' => 'Women purple track',
+                                    'description' => 'Women purple track',
+                                    'slug' => 'wbc_women_purple_track_cat'
+                                ),
+                                //women-plazzo
+                                array(
+                                    'thumb' => $_img_url.'palazzos.png',
+                                    'thumb_selected' => $_img_url.'palazzos_selected.png',
+                                    'name' => 'Women white palazzos',
+                                    'description' => 'Women white palazzos',
+                                    'slug' => 'wbc_women_white_palazzos_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'palazzos.png',
+                                    'thumb_selected' => $_img_url.'palazzos_selected.png',
+                                    'name' => 'Women black palazzos',
+                                    'description' => 'Women palazzos palazzos',
+                                    'slug' => 'wbc_women_black_palazzos_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'palazzos.png',
+                                    'thumb_selected' => $_img_url.'palazzos_selected.png',
+                                    'name' => 'Women red palazzos',
+                                    'description' => 'Women red palazzos',
+                                    'slug' => 'wbc_women_red_palazzos_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'palazzos.png',
+                                    'thumb_selected' => $_img_url.'palazzos_selected.png',
+                                    'name' => 'Women green palazzos',
+                                    'description' => 'Women green palazzos',
+                                    'slug' => 'wbc_women_green_palazzos_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'palazzos.png',
+                                    'thumb_selected' => $_img_url.'palazzos_selected.png',
+                                    'name' => 'Women blue palazzos',
+                                    'description' => 'Women blue palazzos',
+                                    'slug' => 'wbc_women_blue_palazzos_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'palazzos.png',
+                                    'thumb_selected' => $_img_url.'palazzos_selected.png',
+                                    'name' => 'Women aqua palazzos',
+                                    'description' => 'Women aqua palazzos',
+                                    'slug' => 'wbc_women_aqua_palazzos_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'palazzos.png',
+                                    'thumb_selected' => $_img_url.'palazzos_selected.png',
+                                    'name' => 'Women orange palazzos',
+                                    'description' => 'Women orange palazzos',
+                                    'slug' => 'wbc_women_orange_palazzos_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'palazzos.png',
+                                    'thumb_selected' => $_img_url.'palazzos.png',
+                                    'name' => 'Women lime palazzos',
+                                    'description' => 'Women lime palazzos',
+                                    'slug' => 'wbc_women_lime_palazzos_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'palazzos.png',
+                                    'thumb_selected' => $_img_url.'palazzos_selected.png',
+                                    'name' => 'Women yellow palazzos',
+                                    'description' => 'Women yellow palazzos',
+                                    'slug' => 'wbc_women_yellow_palazzos_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'palazzos.png',
+                                    'thumb_selected' => $_img_url.'palazzos_selected.png',
+                                    'name' => 'Women pink palazzos',
+                                    'description' => 'Women pink palazzos',
+                                    'slug' => 'wbc_women_pink_palazzos_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'palazzos.png',
+                                    'thumb_selected' => $_img_url.'palazzos_selected.png',
+                                    'name' => 'Women maroon palazzos',
+                                    'description' => 'Women maroon palazzos',
+                                    'slug' => 'wbc_women_maroon_palazzos_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'palazzos.png',
+                                    'thumb_selected' => $_img_url.'palazzos_selected.png',
+                                    'name' => 'Women gray palazzos',
+                                    'description' => 'Women gray palazzos',
+                                    'slug' => 'wbc_women_gray_palazzos_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'palazzos.png',
+                                    'thumb_selected' => $_img_url.'palazzos_selected.png',
+                                    'name' => 'Women purple palazzos',
+                                    'description' => 'Women purple palazzos',
+                                    'slug' => 'wbc_women_purple_palazzos_cat'
+                                ),
+                                //skirt
+                                array(
+                                    'thumb' => $_img_url.'skirt.png',
+                                    'thumb_selected' => $_img_url.'skirt_selected.png',
+                                    'name' => 'Women white skirt',
+                                    'description' => 'Women white skirt',
+                                    'slug' => 'wbc_women_white_skirt_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'skirt.png',
+                                    'thumb_selected' => $_img_url.'skirt_selected.png',
+                                    'name' => 'Women black skirt',
+                                    'description' => 'Women palazzos skirt',
+                                    'slug' => 'wbc_women_black_skirt_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'skirt.png',
+                                    'thumb_selected' => $_img_url.'skirt_selected.png',
+                                    'name' => 'Women red skirt',
+                                    'description' => 'Women red skirt',
+                                    'slug' => 'wbc_women_red_skirt_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'skirt.png',
+                                    'thumb_selected' => $_img_url.'skirt_selected.png',
+                                    'name' => 'Women green skirt',
+                                    'description' => 'Women green skirt',
+                                    'slug' => 'wbc_women_green_skirt_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'skirt.png',
+                                    'thumb_selected' => $_img_url.'skirt_selected.png',
+                                    'name' => 'Women blue skirt',
+                                    'description' => 'Women blue skirt',
+                                    'slug' => 'wbc_women_blue_skirt_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'skirt.png',
+                                    'thumb_selected' => $_img_url.'skirt_selected.png',
+                                    'name' => 'Women aqua skirt',
+                                    'description' => 'Women aqua skirt',
+                                    'slug' => 'wbc_women_aqua_skirt_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'skirt.png',
+                                    'thumb_selected' => $_img_url.'skirt_selected.png',
+                                    'name' => 'Women orange skirt',
+                                    'description' => 'Women orange skirt',
+                                    'slug' => 'wbc_women_orange_skirt_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'skirt.png',
+                                    'thumb_selected' => $_img_url.'skirt.png',
+                                    'name' => 'Women lime skirt',
+                                    'description' => 'Women lime skirt',
+                                    'slug' => 'wbc_women_lime_skirt_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'skirt.png',
+                                    'thumb_selected' => $_img_url.'skirt_selected.png',
+                                    'name' => 'Women yellow skirt',
+                                    'description' => 'Women yellow skirt',
+                                    'slug' => 'wbc_women_yellow_skirt_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'skirt.png',
+                                    'thumb_selected' => $_img_url.'skirt_selected.png',
+                                    'name' => 'Women pink skirt',
+                                    'description' => 'Women pink skirt',
+                                    'slug' => 'wbc_women_pink_skirt_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'skirt.png',
+                                    'thumb_selected' => $_img_url.'skirt_selected.png',
+                                    'name' => 'Women maroon skirt',
+                                    'description' => 'Women maroon skirt',
+                                    'slug' => 'wbc_women_maroon_skirt_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'skirt.png',
+                                    'thumb_selected' => $_img_url.'skirt_selected.png',
+                                    'name' => 'Women gray skirt',
+                                    'description' => 'Women gray skirt',
+                                    'slug' => 'wbc_women_gray_skirt_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'skirt.png',
+                                    'thumb_selected' => $_img_url.'skirt_selected.png',
+                                    'name' => 'Women purple skirt',
+                                    'description' => 'Women purple skirt',
+                                    'slug' => 'wbc_women_purple_skirt_cat'
+                                ),
+                                //women-leggings
+                                array(
+                                    'thumb' => $_img_url.'leggings.png',
+                                    'thumb_selected' => $_img_url.'leggings_selected.png',
+                                    'name' => 'Women white leggings',
+                                    'description' => 'Women white leggings',
+                                    'slug' => 'wbc_women_white_leggings_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'leggings.png',
+                                    'thumb_selected' => $_img_url.'leggings_selected.png',
+                                    'name' => 'Women black leggings',
+                                    'description' => 'Women palazzos leggings',
+                                    'slug' => 'wbc_women_black_leggings_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'leggings.png',
+                                    'thumb_selected' => $_img_url.'leggings_selected.png',
+                                    'name' => 'Women red leggings',
+                                    'description' => 'Women red leggings',
+                                    'slug' => 'wbc_women_red_leggings_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'leggings.png',
+                                    'thumb_selected' => $_img_url.'leggings_selected.png',
+                                    'name' => 'Women green leggings',
+                                    'description' => 'Women green leggings',
+                                    'slug' => 'wbc_women_green_leggings_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'leggings.png',
+                                    'thumb_selected' => $_img_url.'leggings_selected.png',
+                                    'name' => 'Women blue leggings',
+                                    'description' => 'Women blue leggings',
+                                    'slug' => 'wbc_women_blue_leggings_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'leggings.png',
+                                    'thumb_selected' => $_img_url.'leggings_selected.png',
+                                    'name' => 'Women aqua leggings',
+                                    'description' => 'Women aqua leggings',
+                                    'slug' => 'wbc_women_aqua_leggings_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'leggings.png',
+                                    'thumb_selected' => $_img_url.'leggings_selected.png',
+                                    'name' => 'Women orange leggings',
+                                    'description' => 'Women orange leggings',
+                                    'slug' => 'wbc_women_orange_leggings_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'leggings.png',
+                                    'thumb_selected' => $_img_url.'leggings.png',
+                                    'name' => 'Women lime leggings',
+                                    'description' => 'Women lime leggings',
+                                    'slug' => 'wbc_women_lime_leggings_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'leggings.png',
+                                    'thumb_selected' => $_img_url.'leggings_selected.png',
+                                    'name' => 'Women yellow leggings',
+                                    'description' => 'Women yellow leggings',
+                                    'slug' => 'wbc_women_yellow_leggings_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'leggings.png',
+                                    'thumb_selected' => $_img_url.'leggings_selected.png',
+                                    'name' => 'Women pink leggings',
+                                    'description' => 'Women pink leggings',
+                                    'slug' => 'wbc_women_pink_leggings_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'leggings.png',
+                                    'thumb_selected' => $_img_url.'leggings_selected.png',
+                                    'name' => 'Women maroon leggings',
+                                    'description' => 'Women maroon leggings',
+                                    'slug' => 'wbc_women_maroon_leggings_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'leggings.png',
+                                    'thumb_selected' => $_img_url.'leggings_selected.png',
+                                    'name' => 'Women gray leggings',
+                                    'description' => 'Women gray leggings',
+                                    'slug' => 'wbc_women_gray_leggings_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'leggings.png',
+                                    'thumb_selected' => $_img_url.'leggings_selected.png',
+                                    'name' => 'Women purple leggings',
+                                    'description' => 'Women purple leggings',
+                                    'slug' => 'wbc_women_purple_leggings_cat'
+                                )
+                        )
+                    )    
                     
                 );
     }
 
     public function get_maps() {
         return array(
-                        array(
-                            ['slug','wbc_top_wear_men_shirts_cat','product_cat'],
-                            ['slug','wbc_bottom_wear_men_trousers_cat','product_cat']
-                        ),
-                        array(
-                            ['slug','wbc_top_wear_men_shirts_cat','product_cat'],
-                            ['slug','wbc_bottom_wear_men_jeans_cat','product_cat']
-                        ),
-                        array(
-                            ['slug','wbc_top_wear_women_shirts_cat','product_cat'],
-                            ['slug','wbc_bottom_wear_women_trousers_cat','product_cat']
-                        ),
+                        // array(
+                        //     ['slug','wbc_top_wear_men_shirts_cat','product_cat'],
+                        //     ['slug','wbc_bottom_wear_men_trousers_cat','product_cat']
+                        // ),
+                        // array(
+                        //     ['slug','wbc_top_wear_men_shirts_cat','product_cat'],
+                        //     ['slug','wbc_bottom_wear_men_jeans_cat','product_cat']
+                        // ),
+                        // array(
+                        //     ['slug','wbc_top_wear_women_shirts_cat','product_cat'],
+                        //     ['slug','wbc_bottom_wear_women_trousers_cat','product_cat']
+                        // ),
                         // array(
                         //     ['slug','wbc_top_wear_tshirts_cat','product_cat'],
                         //     ['slug','wbc_bottom_wear_jeans_cat','product_cat']
                         // ),
-                        array(
-                            ['slug','wbc_top_wear_men_tshirts_cat','product_cat'],
-                            ['slug','wbc_bottom_wear_men_jeans_cat','product_cat']
-                        ),
-                        array(
-                            ['slug','wbc_top_wear_women_tshirts_cat','product_cat'],
-                            ['slug','wbc_bottom_wear_women_jeans_cat','product_cat']
-                        ),
+                        // array(
+                        //     ['slug','wbc_top_wear_men_tshirts_cat','product_cat'],
+                        //     ['slug','wbc_bottom_wear_men_jeans_cat','product_cat']
+                        // ),
+                        // array(
+                        //     ['slug','wbc_top_wear_women_tshirts_cat','product_cat'],
+                        //     ['slug','wbc_bottom_wear_women_jeans_cat','product_cat']
+                        // ),
                         // array(
                         //     ['slug','wbc_top_wear_sweaters_cat','product_cat'],
                         //     ['slug','wbc_bottom_wear_jeans_cat','product_cat']
                         // ),
-                        array(
-                            ['slug','wbc_top_wear_men_sweaters_cat','product_cat'],
-                            ['slug','wbc_bottom_wear_men_jeans_cat','product_cat']
-                        ),
-                        array(
-                            ['slug','wbc_top_wear_men_sweaters_cat','product_cat'],
-                            ['slug','wbc_bottom_wear_men_trousers_cat','product_cat']
-                        ),
-                        array(
-                            ['slug','wbc_top_wear_women_sweaters_cat','product_cat'],
-                            ['slug','wbc_bottom_wear_women_jeans_cat','product_cat']
-                        ),
-                        array(
-                            ['slug','wbc_top_wear_women_sweaters_cat','product_cat'],
-                            ['slug','wbc_bottom_wear_women_trousers_cat','product_cat']
-                        ),
+                        // array(
+                        //     ['slug','wbc_top_wear_men_sweaters_cat','product_cat'],
+                        //     ['slug','wbc_bottom_wear_men_jeans_cat','product_cat']
+                        // ),
+                        // array(
+                        //     ['slug','wbc_top_wear_men_sweaters_cat','product_cat'],
+                        //     ['slug','wbc_bottom_wear_men_trousers_cat','product_cat']
+                        // ),
+                        // array(
+                        //     ['slug','wbc_top_wear_women_sweaters_cat','product_cat'],
+                        //     ['slug','wbc_bottom_wear_women_jeans_cat','product_cat']
+                        // ),
+                        // array(
+                        //     ['slug','wbc_top_wear_women_sweaters_cat','product_cat'],
+                        //     ['slug','wbc_bottom_wear_women_trousers_cat','product_cat']
+                        // ),
                         // array(
                         //     ['slug','wbc_top_wear_jackets_cat','product_cat'],
                         //     ['slug','wbc_bottom_wear_jeans_cat','product_cat']
                         // ),
-                        array(
-                            ['slug','wbc_top_wear_men_jackets_cat','product_cat'],
-                            ['slug','wbc_bottom_wear_men_jeans_cat','product_cat']
-                        ),
-                        array(
-                            ['slug','wbc_top_wear_women_jackets_cat','product_cat'],
-                            ['slug','wbc_bottom_wear_women_jeans_cat','product_cat']
-                        ),
-                        array(
-                            ['slug','wbc_top_wear_blazers_coats_cat','product_cat'],
-                            ['slug','wbc_bottom_wear_men_trousers_cat','product_cat']
-                        ),
+                        // array(
+                        //     ['slug','wbc_top_wear_men_jackets_cat','product_cat'],
+                        //     ['slug','wbc_bottom_wear_men_jeans_cat','product_cat']
+                        // ),
+                        // array(
+                        //     ['slug','wbc_top_wear_women_jackets_cat','product_cat'],
+                        //     ['slug','wbc_bottom_wear_women_jeans_cat','product_cat']
+                        // ),
+                        // array(
+                        //     ['slug','wbc_top_wear_blazers_coats_cat','product_cat'],
+                        //     ['slug','wbc_bottom_wear_men_trousers_cat','product_cat']
+                        // ),
                         // array(
                         //     ['slug','wbc_top_wear_tshirts_cat','product_cat'],
                         //     ['slug','wbc_bottom_wear_track_pants_cat','product_cat']
                         // ),
-                        array(
-                            ['slug','wbc_top_wear_men_tshirts_cat','product_cat'],
-                            ['slug','wbc_bottom_wear_men_track_pants_cat','product_cat']
-                        ),
-                        array(
-                            ['slug','wbc_top_wear_women_tshirts_cat','product_cat'],
-                            ['slug','wbc_bottom_wear_women_track_pants_cat','product_cat']
-                        ),
+                        // array(
+                        //     ['slug','wbc_top_wear_men_tshirts_cat','product_cat'],
+                        //     ['slug','wbc_bottom_wear_men_track_pants_cat','product_cat']
+                        // ),
+                        // array(
+                        //     ['slug','wbc_top_wear_women_tshirts_cat','product_cat'],
+                        //     ['slug','wbc_bottom_wear_women_track_pants_cat','product_cat']
+                        // ),
                         // array(
                         //     ['slug','wbc_top_wear_hoodies_cat','product_cat'],
                         //     ['slug','wbc_bottom_wear_jeans_cat','product_cat']
                         // ),
-                        array(
-                            ['slug','wbc_top_wear_men_hoodies_cat','product_cat'],
-                            ['slug','wbc_bottom_wear_men_jeans_cat','product_cat']
-                        ),
-                        array(
-                            ['slug','wbc_top_wear_women_hoodies_cat','product_cat'],
-                            ['slug','wbc_bottom_wear_women_jeans_cat','product_cat']
-                        ),
-                        array(
-                            ['slug','wbc_top_wear_tops_cat','product_cat'],
-                            ['slug','wbc_bottom_wear_women_shorts_cat','product_cat']
-                        ),
-                        array(
-                            ['slug','wbc_top_wear_men_tshirts_cat','product_cat'],
-                            ['slug','wbc_bottom_wear_men_shorts_cat','product_cat']
-                        ),
-                         array(
-                            ['slug','wbc_top_wear_women_tshirts_cat','product_cat'],
-                            ['slug','wbc_bottom_wear_women_shorts_cat','product_cat']
-                        ),
-                        array(
-                            ['slug','wbc_top_wear_tunics_cat','product_cat'],
-                            ['slug','wbc_bottom_wear_plazzos_cat','product_cat']
-                        ),
-                        array(
-                            ['slug','wbc_top_wear_women_tshirts_cat','product_cat'],
-                            ['slug','wbc_bottom_wear_plazzos_cat','product_cat']
-                        ),
-                        array(
-                            ['slug','wbc_top_wear_women_shirts_cat','product_cat'],
-                            ['slug','wbc_bottom_wear_plazzos_cat','product_cat']
-                        ),
-                        array(
-                            ['slug','wbc_top_wear_women_shirts_cat','product_cat'],
-                            ['slug','wbc_bottom_wear_women_jeans_cat','product_cat']
-                        ),
-                        array(
-                            ['slug','wbc_top_wear_tops_cat','product_cat'],
-                            ['slug','wbc_bottom_wear_plazzos_cat','product_cat']
-                        ),
-                        array(
-                            ['slug','wbc_top_wear_tunics_cat','product_cat'],
-                            ['slug','wbc_bottom_wear_leggings_cat','product_cat']
-                        ),
-                        array(
-                            ['slug','wbc_top_wear_tunics_cat','product_cat'],
-                            ['slug','wbc_bottom_wear_women_jeans_cat','product_cat']
-                        ),
-                        array(
-                            ['slug','wbc_top_wear_women_shirts_cat','product_cat'],
-                            ['slug','wbc_bottom_wear_leggings_cat','product_cat']
-                        ),
-                        array(
-                            ['slug','wbc_top_wear_women_tshirts_cat','product_cat'],
-                            ['slug','wbc_bottom_wear_leggings_cat','product_cat']
-                        ),
-                        array(
-                            ['slug','wbc_top_wear_tops_cat','product_cat'],
-                            ['slug','wbc_bottom_wear_women_jeans_cat','product_cat']
-                        ),
-                        array(
-                            ['slug','wbc_top_wear_women_shirts_cat','product_cat'],
-                            ['slug','wbc_bottom_wear_skirts_cat','product_cat']
-                        ),
-                        array(
-                            ['slug','wbc_top_wear_women_tshirts_cat','product_cat'],
-                            ['slug','wbc_bottom_wear_skirts_cat','product_cat']
-                        ),
-                        array(
-                            ['slug','wbc_top_wear_tops_cat','product_cat'],
-                            ['slug','wbc_bottom_wear_skirts_cat','product_cat']
-                        ),
-                        array(
-                            ['slug','wbc_top_wear_tops_cat','product_cat'],
-                            ['slug','wbc_bottom_wear_leggings_cat','product_cat']
-                        )
+                        // array(
+                        //     ['slug','wbc_top_wear_men_hoodies_cat','product_cat'],
+                        //     ['slug','wbc_bottom_wear_men_jeans_cat','product_cat']
+                        // ),
+                        // array(
+                        //     ['slug','wbc_top_wear_women_hoodies_cat','product_cat'],
+                        //     ['slug','wbc_bottom_wear_women_jeans_cat','product_cat']
+                        // ),
+                        // array(
+                        //     ['slug','wbc_top_wear_tops_cat','product_cat'],
+                        //     ['slug','wbc_bottom_wear_women_shorts_cat','product_cat']
+                        // ),
+                        // array(
+                        //     ['slug','wbc_top_wear_men_tshirts_cat','product_cat'],
+                        //     ['slug','wbc_bottom_wear_men_shorts_cat','product_cat']
+                        // ),
+                        //  array(
+                        //     ['slug','wbc_top_wear_women_tshirts_cat','product_cat'],
+                        //     ['slug','wbc_bottom_wear_women_shorts_cat','product_cat']
+                        // ),
+                        // array(
+                        //     ['slug','wbc_top_wear_tunics_cat','product_cat'],
+                        //     ['slug','wbc_bottom_wear_plazzos_cat','product_cat']
+                        // ),
+                        // array(
+                        //     ['slug','wbc_top_wear_women_tshirts_cat','product_cat'],
+                        //     ['slug','wbc_bottom_wear_plazzos_cat','product_cat']
+                        // ),
+                        // array(
+                        //     ['slug','wbc_top_wear_women_shirts_cat','product_cat'],
+                        //     ['slug','wbc_bottom_wear_plazzos_cat','product_cat']
+                        // ),
+                        // array(
+                        //     ['slug','wbc_top_wear_women_shirts_cat','product_cat'],
+                        //     ['slug','wbc_bottom_wear_women_jeans_cat','product_cat']
+                        // ),
+                        // array(
+                        //     ['slug','wbc_top_wear_tops_cat','product_cat'],
+                        //     ['slug','wbc_bottom_wear_plazzos_cat','product_cat']
+                        // ),
+                        // array(
+                        //     ['slug','wbc_top_wear_tunics_cat','product_cat'],
+                        //     ['slug','wbc_bottom_wear_leggings_cat','product_cat']
+                        // ),
+                        // array(
+                        //     ['slug','wbc_top_wear_tunics_cat','product_cat'],
+                        //     ['slug','wbc_bottom_wear_women_jeans_cat','product_cat']
+                        // ),
+                        // array(
+                        //     ['slug','wbc_top_wear_women_shirts_cat','product_cat'],
+                        //     ['slug','wbc_bottom_wear_leggings_cat','product_cat']
+                        // ),
+                        // array(
+                        //     ['slug','wbc_top_wear_women_tshirts_cat','product_cat'],
+                        //     ['slug','wbc_bottom_wear_leggings_cat','product_cat']
+                        // ),
+                        // array(
+                        //     ['slug','wbc_top_wear_tops_cat','product_cat'],
+                        //     ['slug','wbc_bottom_wear_women_jeans_cat','product_cat']
+                        // ),
+                        // array(
+                        //     ['slug','wbc_top_wear_women_shirts_cat','product_cat'],
+                        //     ['slug','wbc_bottom_wear_skirts_cat','product_cat']
+                        // ),
+                        // array(
+                        //     ['slug','wbc_top_wear_women_tshirts_cat','product_cat'],
+                        //     ['slug','wbc_bottom_wear_skirts_cat','product_cat']
+                        // ),
+                        // array(
+                        //     ['slug','wbc_top_wear_tops_cat','product_cat'],
+                        //     ['slug','wbc_bottom_wear_skirts_cat','product_cat']
+                        // ),
+                        // array(
+                        //     ['slug','wbc_top_wear_tops_cat','product_cat'],
+                        //     ['slug','wbc_bottom_wear_leggings_cat','product_cat']
+                        // ),
 
+
+                        array(
+                            ['slug','wbc_men_white_shirts_cat','product_cat'],
+                            ['slug','wbc_men_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_shirts_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_suit_cat','product_cat'],
+                            ['slug','wbc_men_white_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_blazers_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_blazers_cat','product_cat'],
+                            ['slug','wbc_men_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_jacket_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_black_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_black_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_shirts_cat','product_cat'],
+                            ['slug','wbc_women_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_shirts_cat','product_cat'],
+                            ['slug','wbc_women_black_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_shirts_cat','product_cat'],
+                            ['slug','wbc_women_black_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_jacket_cat','product_cat'],
+                            ['slug','wbc_women_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_shirts_cat','product_cat'],
+                            ['slug','wbc_men_red_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_shirts_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_red_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_red_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_blazers_cat','product_cat'],
+                            ['slug','wbc_men_red_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_blazers_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_jacket_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_shirts_cat','product_cat'],
+                            ['slug','wbc_women_red_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_shirts_cat','product_cat'],
+                            ['slug','wbc_women_red_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_shirts_cat','product_cat'],
+                            ['slug','wbc_women_red_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_jacket_cat','product_cat'],
+                            ['slug','wbc_women_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_shirts_cat','product_cat'],
+                            ['slug','wbc_men_green_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_shirts_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_green_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_green_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_blazers_cat','product_cat'],
+                            ['slug','wbc_men_green_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_blazers_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_jacket_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_shirts_cat','product_cat'],
+                            ['slug','wbc_women_green_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_shirts_cat','product_cat'],
+                            ['slug','wbc_women_green_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_shirts_cat','product_cat'],
+                            ['slug','wbc_women_green_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_jacket_cat','product_cat'],
+                            ['slug','wbc_women_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_shirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_shirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_blazers_cat','product_cat'],
+                            ['slug','wbc_men_orange_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_blazers_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_jacket_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_shirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_shirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_shirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_jacket_cat','product_cat'],
+                            ['slug','wbc_women_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_white_shirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_shirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_blazers_cat','product_cat'],
+                            ['slug','wbc_men_purple_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_blazers_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_jacket_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_shirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_shirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_shirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_jacket_cat','product_cat'],
+                            ['slug','wbc_women_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_shirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_shirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_blazers_cat','product_cat'],
+                            ['slug','wbc_men_blue_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_blazers_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_jacket_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_shirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_shirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_shirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_jacket_cat','product_cat'],
+                            ['slug','wbc_women_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_shirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_shirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_blazers_cat','product_cat'],
+                            ['slug','wbc_men_yellow_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_blazers_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_jacket_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_shirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_shirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_shirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_jacket_cat','product_cat'],
+                            ['slug','wbc_women_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_shirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_shirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_blazers_cat','product_cat'],
+                            ['slug','wbc_men_pink_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_blazers_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_jacket_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_shirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_shirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_shirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_jacket_cat','product_cat'],
+                            ['slug','wbc_women_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_shirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_shirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_blazers_cat','product_cat'],
+                            ['slug','wbc_men_aqua_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_blazers_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_jacket_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_shirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_shirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_shirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_jacket_cat','product_cat'],
+                            ['slug','wbc_women_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_shirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_shirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_blazers_cat','product_cat'],
+                            ['slug','wbc_men_maroon_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_blazers_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_jacket_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_shirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_shirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_shirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_jacket_cat','product_cat'],
+                            ['slug','wbc_women_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_shirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_shirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_blazers_cat','product_cat'],
+                            ['slug','wbc_men_gray_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_blazers_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_jacket_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_shirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_shirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_shirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_jacket_cat','product_cat'],
+                            ['slug','wbc_women_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_shirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_shirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_blazers_cat','product_cat'],
+                            ['slug','wbc_men_lime_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_blazers_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_white_jacket_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_shirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_shirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_shirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_jacket_cat','product_cat'],
+                            ['slug','wbc_women_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_suit_cat','product_cat'],
+                            ['slug','wbc_men_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_shirts_cat','product_cat'],
+                            ['slug','wbc_men_red_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_shirts_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_red_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_red_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_blazers_cat','product_cat'],
+                            ['slug','wbc_men_red_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_blazers_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_jacket_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_shirts_cat','product_cat'],
+                            ['slug','wbc_women_red_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_shirts_cat','product_cat'],
+                            ['slug','wbc_women_red_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_shirts_cat','product_cat'],
+                            ['slug','wbc_women_red_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_jacket_cat','product_cat'],
+                            ['slug','wbc_women_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_black_shirts_cat','product_cat'],
+                            ['slug','wbc_men_green_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_shirts_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_green_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_green_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_blazers_cat','product_cat'],
+                            ['slug','wbc_men_green_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_blazers_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_jacket_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_shirts_cat','product_cat'],
+                            ['slug','wbc_women_green_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_shirts_cat','product_cat'],
+                            ['slug','wbc_women_green_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_shirts_cat','product_cat'],
+                            ['slug','wbc_women_green_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_jacket_cat','product_cat'],
+                            ['slug','wbc_women_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_shirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_shirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_blazers_cat','product_cat'],
+                            ['slug','wbc_men_orange_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_blazers_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_jacket_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_shirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_shirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_shirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_jacket_cat','product_cat'],
+                            ['slug','wbc_women_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_shirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_shirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_blazers_cat','product_cat'],
+                            ['slug','wbc_men_purple_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_blazers_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_jacket_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_shirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_shirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_shirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_jacket_cat','product_cat'],
+                            ['slug','wbc_women_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_shirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_shirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_blazers_cat','product_cat'],
+                            ['slug','wbc_men_blue_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_blazers_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_jacket_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_shirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_shirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_shirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_jacket_cat','product_cat'],
+                            ['slug','wbc_women_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_shirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_shirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_blazers_cat','product_cat'],
+                            ['slug','wbc_men_yellow_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_blazers_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_jacket_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_shirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_shirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_shirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_jacket_cat','product_cat'],
+                            ['slug','wbc_women_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_shirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_shirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_blazers_cat','product_cat'],
+                            ['slug','wbc_men_pink_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_blazers_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_jacket_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_shirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_shirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_shirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_jacket_cat','product_cat'],
+                            ['slug','wbc_women_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_shirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_shirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_blazers_cat','product_cat'],
+                            ['slug','wbc_men_aqua_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_blazers_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_jacket_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_shirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_shirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_shirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_jacket_cat','product_cat'],
+                            ['slug','wbc_women_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_shirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_shirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_blazers_cat','product_cat'],
+                            ['slug','wbc_men_maroon_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_blazers_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_jacket_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_shirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_shirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_shirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_jacket_cat','product_cat'],
+                            ['slug','wbc_women_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_shirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_shirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_blazers_cat','product_cat'],
+                            ['slug','wbc_men_gray_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_blazers_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_jacket_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_shirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_shirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_shirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_jacket_cat','product_cat'],
+                            ['slug','wbc_women_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_shirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_shirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_blazers_cat','product_cat'],
+                            ['slug','wbc_men_lime_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_blazers_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_black_jacket_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_shirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_shirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_shirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_jacket_cat','product_cat'],
+                            ['slug','wbc_women_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_black_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_suit_cat','product_cat'],
+                            ['slug','wbc_men_blue_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_men_red_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_red_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_red_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_blazers_cat','product_cat'],
+                            ['slug','wbc_men_red_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_blazers_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_jacket_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_women_red_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_women_red_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_women_red_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_jacket_cat','product_cat'],
+                            ['slug','wbc_women_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_men_green_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_green_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_green_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_blazers_cat','product_cat'],
+                            ['slug','wbc_men_green_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_blazers_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_jacket_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_women_green_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_women_green_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_women_green_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_jacket_cat','product_cat'],
+                            ['slug','wbc_women_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_blazers_cat','product_cat'],
+                            ['slug','wbc_men_orange_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_blazers_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_jacket_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_jacket_cat','product_cat'],
+                            ['slug','wbc_women_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_blazers_cat','product_cat'],
+                            ['slug','wbc_men_purple_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_blazers_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_jacket_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_jacket_cat','product_cat'],
+                            ['slug','wbc_women_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_men_white_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_men_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_white_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_white_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_blazers_cat','product_cat'],
+                            ['slug','wbc_men_white_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_blazers_cat','product_cat'],
+                            ['slug','wbc_men_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_jacket_cat','product_cat'],
+                            ['slug','wbc_men_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_women_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_women_white_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_women_white_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_white_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_white_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_jacket_cat','product_cat'],
+                            ['slug','wbc_women_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_white_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_men_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_black_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_black_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_blazers_cat','product_cat'],
+                            ['slug','wbc_men_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_blazers_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_jacket_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_women_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_women_black_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_jacket_cat','product_cat'],
+                            ['slug','wbc_women_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_blazers_cat','product_cat'],
+                            ['slug','wbc_men_yellow_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_blazers_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_jacket_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_jacket_cat','product_cat'],
+                            ['slug','wbc_women_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_blazers_cat','product_cat'],
+                            ['slug','wbc_men_pink_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_blazers_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_jacket_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_jacket_cat','product_cat'],
+                            ['slug','wbc_women_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_blazers_cat','product_cat'],
+                            ['slug','wbc_men_aqua_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_blazers_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_jacket_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_jacket_cat','product_cat'],
+                            ['slug','wbc_women_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_blazers_cat','product_cat'],
+                            ['slug','wbc_men_maroon_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_blazers_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_jacket_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_jacket_cat','product_cat'],
+                            ['slug','wbc_women_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_blazers_cat','product_cat'],
+                            ['slug','wbc_men_gray_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_blazers_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_jacket_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_jacket_cat','product_cat'],
+                            ['slug','wbc_women_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_blazers_cat','product_cat'],
+                            ['slug','wbc_men_lime_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_blazers_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_blue_jacket_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_shirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_jacket_cat','product_cat'],
+                            ['slug','wbc_women_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_blue_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_suit_cat','product_cat'],
+                            ['slug','wbc_men_green_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_shirts_cat','product_cat'],
+                            ['slug','wbc_men_red_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_shirts_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_red_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_red_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_blazers_cat','product_cat'],
+                            ['slug','wbc_men_red_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_blazers_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_jacket_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_shirts_cat','product_cat'],
+                            ['slug','wbc_women_red_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_shirts_cat','product_cat'],
+                            ['slug','wbc_women_red_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_shirts_cat','product_cat'],
+                            ['slug','wbc_women_red_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_jacket_cat','product_cat'],
+                            ['slug','wbc_women_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_shirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_shirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_blazers_cat','product_cat'],
+                            ['slug','wbc_men_blue_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_blazers_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_jacket_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_shirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_shirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_shirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_jacket_cat','product_cat'],
+                            ['slug','wbc_women_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_shirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_shirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_blazers_cat','product_cat'],
+                            ['slug','wbc_men_orange_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_blazers_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_jacket_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_shirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_shirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_shirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_jacket_cat','product_cat'],
+                            ['slug','wbc_women_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_shirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_shirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_blazers_cat','product_cat'],
+                            ['slug','wbc_men_purple_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_blazers_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_jacket_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_shirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_shirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_shirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_jacket_cat','product_cat'],
+                            ['slug','wbc_women_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_shirts_cat','product_cat'],
+                            ['slug','wbc_men_white_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_shirts_cat','product_cat'],
+                            ['slug','wbc_men_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_white_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_white_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_blazers_cat','product_cat'],
+                            ['slug','wbc_men_white_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_blazers_cat','product_cat'],
+                            ['slug','wbc_men_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_jacket_cat','product_cat'],
+                            ['slug','wbc_men_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_shirts_cat','product_cat'],
+                            ['slug','wbc_women_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_shirts_cat','product_cat'],
+                            ['slug','wbc_women_white_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_shirts_cat','product_cat'],
+                            ['slug','wbc_women_white_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_white_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_white_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_jacket_cat','product_cat'],
+                            ['slug','wbc_women_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_white_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_shirts_cat','product_cat'],
+                            ['slug','wbc_men_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_shirts_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_black_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_black_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_blazers_cat','product_cat'],
+                            ['slug','wbc_men_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_blazers_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_jacket_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_shirts_cat','product_cat'],
+                            ['slug','wbc_women_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_shirts_cat','product_cat'],
+                            ['slug','wbc_women_green_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_shirts_cat','product_cat'],
+                            ['slug','wbc_women_black_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_jacket_cat','product_cat'],
+                            ['slug','wbc_women_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_shirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_shirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_blazers_cat','product_cat'],
+                            ['slug','wbc_men_yellow_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_blazers_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_jacket_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_shirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_shirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_shirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_jacket_cat','product_cat'],
+                            ['slug','wbc_women_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_shirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_shirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_blazers_cat','product_cat'],
+                            ['slug','wbc_men_pink_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_blazers_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_jacket_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_shirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_shirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_shirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_jacket_cat','product_cat'],
+                            ['slug','wbc_women_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_shirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_shirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_blazers_cat','product_cat'],
+                            ['slug','wbc_men_aqua_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_blazers_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_jacket_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_shirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_shirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_shirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_jacket_cat','product_cat'],
+                            ['slug','wbc_women_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_shirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_shirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_blazers_cat','product_cat'],
+                            ['slug','wbc_men_maroon_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_blazers_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_jacket_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_shirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_shirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_shirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_jacket_cat','product_cat'],
+                            ['slug','wbc_women_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_shirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_shirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_blazers_cat','product_cat'],
+                            ['slug','wbc_men_gray_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_blazers_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_jacket_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_shirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_shirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_shirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_jacket_cat','product_cat'],
+                            ['slug','wbc_women_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_shirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_shirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_blazers_cat','product_cat'],
+                            ['slug','wbc_men_lime_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_blazers_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_green_jacket_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_shirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_shirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_shirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_jacket_cat','product_cat'],
+                            ['slug','wbc_women_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_green_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_suit_cat','product_cat'],
+                            ['slug','wbc_men_orange_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_men_red_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_red_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_red_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_blazers_cat','product_cat'],
+                            ['slug','wbc_men_red_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_blazers_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_jacket_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_women_red_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_women_red_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_women_red_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_jacket_cat','product_cat'],
+                            ['slug','wbc_women_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_blazers_cat','product_cat'],
+                            ['slug','wbc_men_blue_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_blazers_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_jacket_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_jacket_cat','product_cat'],
+                            ['slug','wbc_women_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_men_green_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_green_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_green_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_blazers_cat','product_cat'],
+                            ['slug','wbc_men_green_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_blazers_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_jacket_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_women_green_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_women_green_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_women_green_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_jacket_cat','product_cat'],
+                            ['slug','wbc_women_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_blazers_cat','product_cat'],
+                            ['slug','wbc_men_purple_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_blazers_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_jacket_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_jacket_cat','product_cat'],
+                            ['slug','wbc_women_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_men_white_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_men_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_white_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_white_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_blazers_cat','product_cat'],
+                            ['slug','wbc_men_white_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_blazers_cat','product_cat'],
+                            ['slug','wbc_men_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_jacket_cat','product_cat'],
+                            ['slug','wbc_men_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_women_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_women_white_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_women_white_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_white_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_white_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_jacket_cat','product_cat'],
+                            ['slug','wbc_women_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_white_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_men_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_black_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_black_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_blazers_cat','product_cat'],
+                            ['slug','wbc_men_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_blazers_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_jacket_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_women_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_women_black_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_jacket_cat','product_cat'],
+                            ['slug','wbc_women_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_blazers_cat','product_cat'],
+                            ['slug','wbc_men_yellow_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_blazers_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_jacket_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_jacket_cat','product_cat'],
+                            ['slug','wbc_women_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_blazers_cat','product_cat'],
+                            ['slug','wbc_men_pink_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_blazers_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_jacket_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_jacket_cat','product_cat'],
+                            ['slug','wbc_women_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_blazers_cat','product_cat'],
+                            ['slug','wbc_men_aqua_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_blazers_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_jacket_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_jacket_cat','product_cat'],
+                            ['slug','wbc_women_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_blazers_cat','product_cat'],
+                            ['slug','wbc_men_maroon_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_blazers_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_jacket_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_jacket_cat','product_cat'],
+                            ['slug','wbc_women_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_blazers_cat','product_cat'],
+                            ['slug','wbc_men_gray_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_blazers_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_jacket_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_jacket_cat','product_cat'],
+                            ['slug','wbc_women_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_blazers_cat','product_cat'],
+                            ['slug','wbc_men_lime_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_blazers_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_orange_jacket_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_shirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_jacket_cat','product_cat'],
+                            ['slug','wbc_women_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_orange_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_suit_cat','product_cat'],
+                            ['slug','wbc_men_yellow_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_men_red_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_red_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_red_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_blazers_cat','product_cat'],
+                            ['slug','wbc_men_red_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_blazers_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_jacket_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_women_red_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_women_red_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_women_red_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_jacket_cat','product_cat'],
+                            ['slug','wbc_women_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_blazers_cat','product_cat'],
+                            ['slug','wbc_men_blue_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_blazers_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_jacket_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_jacket_cat','product_cat'],
+                            ['slug','wbc_women_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_leggings_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_men_green_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_green_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_green_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_blazers_cat','product_cat'],
+                            ['slug','wbc_men_green_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_blazers_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_jacket_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_women_green_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_women_green_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_women_green_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_jacket_cat','product_cat'],
+                            ['slug','wbc_women_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_leggings_cat','product_cat']
+                        ),
+                        
+                        array(
+                            ['slug','wbc_men_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_blazers_cat','product_cat'],
+                            ['slug','wbc_men_purple_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_blazers_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_jacket_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_jacket_cat','product_cat'],
+                            ['slug','wbc_women_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_leggings_cat','product_cat']
+                        ),
+                        
+                        array(
+                            ['slug','wbc_men_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_men_white_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_men_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_white_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_white_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_blazers_cat','product_cat'],
+                            ['slug','wbc_men_white_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_blazers_cat','product_cat'],
+                            ['slug','wbc_men_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_jacket_cat','product_cat'],
+                            ['slug','wbc_men_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_women_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_women_white_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_women_white_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_white_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_white_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_jacket_cat','product_cat'],
+                            ['slug','wbc_women_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_white_leggings_cat','product_cat']
+                        ),
+                        
+                        array(
+                            ['slug','wbc_men_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_men_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_black_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_black_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_blazers_cat','product_cat'],
+                            ['slug','wbc_men_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_blazers_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_jacket_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_women_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_women_black_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_jacket_cat','product_cat'],
+                            ['slug','wbc_women_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_leggings_cat','product_cat']
+                        ),
+                        
+                        array(
+                            ['slug','wbc_men_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_blazers_cat','product_cat'],
+                            ['slug','wbc_men_orange_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_blazers_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_jacket_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_jacket_cat','product_cat'],
+                            ['slug','wbc_women_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_leggings_cat','product_cat']
+                        ),
+                        
+                        array(
+                            ['slug','wbc_men_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_blazers_cat','product_cat'],
+                            ['slug','wbc_men_pink_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_blazers_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_jacket_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_jacket_cat','product_cat'],
+                            ['slug','wbc_women_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_leggings_cat','product_cat']
+                        ),
+                        
+                        array(
+                            ['slug','wbc_men_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_blazers_cat','product_cat'],
+                            ['slug','wbc_men_aqua_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_blazers_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_jacket_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_jacket_cat','product_cat'],
+                            ['slug','wbc_women_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_leggings_cat','product_cat']
+                        ),
+                        
+                        array(
+                            ['slug','wbc_men_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_blazers_cat','product_cat'],
+                            ['slug','wbc_men_maroon_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_blazers_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_jacket_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_jacket_cat','product_cat'],
+                            ['slug','wbc_women_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_leggings_cat','product_cat']
+                        ),
+                        
+                        array(
+                            ['slug','wbc_men_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_blazers_cat','product_cat'],
+                            ['slug','wbc_men_gray_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_blazers_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_jacket_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_jacket_cat','product_cat'],
+                            ['slug','wbc_women_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_blazers_cat','product_cat'],
+                            ['slug','wbc_men_lime_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_blazers_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_yellow_jacket_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_shirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_jacket_cat','product_cat'],
+                            ['slug','wbc_women_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_yellow_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_leggings_cat','product_cat']
+                        ),
+                        
+                        array(
+                            ['slug','wbc_men_red_suit_cat','product_cat'],
+                            ['slug','wbc_men_red_trousers_cat','product_cat']
+                        ),
+                        
+                        array(
+                            ['slug','wbc_men_red_shirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_shirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_blazers_cat','product_cat'],
+                            ['slug','wbc_men_yellow_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_blazers_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_jacket_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_shirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_shirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_shirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_jacket_cat','product_cat'],
+                            ['slug','wbc_women_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_red_shirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_shirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_blazers_cat','product_cat'],
+                            ['slug','wbc_men_blue_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_blazers_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_jacket_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_shirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_shirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_shirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_jacket_cat','product_cat'],
+                            ['slug','wbc_women_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_red_shirts_cat','product_cat'],
+                            ['slug','wbc_men_green_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_shirts_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_green_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_green_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_blazers_cat','product_cat'],
+                            ['slug','wbc_men_green_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_blazers_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_jacket_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_shirts_cat','product_cat'],
+                            ['slug','wbc_women_green_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_shirts_cat','product_cat'],
+                            ['slug','wbc_women_green_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_shirts_cat','product_cat'],
+                            ['slug','wbc_women_green_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_jacket_cat','product_cat'],
+                            ['slug','wbc_women_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_red_shirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_shirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_blazers_cat','product_cat'],
+                            ['slug','wbc_men_purple_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_blazers_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_jacket_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_shirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_shirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_shirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_jacket_cat','product_cat'],
+                            ['slug','wbc_women_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_red_shirts_cat','product_cat'],
+                            ['slug','wbc_men_white_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_shirts_cat','product_cat'],
+                            ['slug','wbc_men_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_white_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_white_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_blazers_cat','product_cat'],
+                            ['slug','wbc_men_white_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_blazers_cat','product_cat'],
+                            ['slug','wbc_men_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_jacket_cat','product_cat'],
+                            ['slug','wbc_men_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_shirts_cat','product_cat'],
+                            ['slug','wbc_women_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_shirts_cat','product_cat'],
+                            ['slug','wbc_women_white_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_shirts_cat','product_cat'],
+                            ['slug','wbc_women_white_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_white_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_white_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_jacket_cat','product_cat'],
+                            ['slug','wbc_women_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_white_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_red_shirts_cat','product_cat'],
+                            ['slug','wbc_men_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_shirts_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_black_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_black_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_blazers_cat','product_cat'],
+                            ['slug','wbc_men_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_blazers_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_jacket_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_shirts_cat','product_cat'],
+                            ['slug','wbc_women_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_shirts_cat','product_cat'],
+                            ['slug','wbc_women_red_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_shirts_cat','product_cat'],
+                            ['slug','wbc_women_black_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_jacket_cat','product_cat'],
+                            ['slug','wbc_women_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_red_shirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_shirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_blazers_cat','product_cat'],
+                            ['slug','wbc_men_orange_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_blazers_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_jacket_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_shirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_shirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_shirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_jacket_cat','product_cat'],
+                            ['slug','wbc_women_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_red_shirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_shirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_blazers_cat','product_cat'],
+                            ['slug','wbc_men_pink_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_blazers_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_jacket_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_shirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_shirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_shirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_jacket_cat','product_cat'],
+                            ['slug','wbc_women_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_red_shirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_shirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_blazers_cat','product_cat'],
+                            ['slug','wbc_men_aqua_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_blazers_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_jacket_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_shirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_shirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_shirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_jacket_cat','product_cat'],
+                            ['slug','wbc_women_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_red_shirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_shirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_blazers_cat','product_cat'],
+                            ['slug','wbc_men_maroon_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_blazers_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_jacket_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_shirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_shirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_shirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_jacket_cat','product_cat'],
+                            ['slug','wbc_women_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_red_shirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_shirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_blazers_cat','product_cat'],
+                            ['slug','wbc_men_gray_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_blazers_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_jacket_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_shirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_shirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_shirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_jacket_cat','product_cat'],
+                            ['slug','wbc_women_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_red_shirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_shirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_blazers_cat','product_cat'],
+                            ['slug','wbc_men_lime_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_blazers_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_red_jacket_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_shirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_shirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_shirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_jacket_cat','product_cat'],
+                            ['slug','wbc_women_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_leggings_cat','product_cat']
+                        ),
+                        
+                        array(
+                            ['slug','wbc_men_purple_suit_cat','product_cat'],
+                            ['slug','wbc_men_purple_trousers_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_blazers_cat','product_cat'],
+                            ['slug','wbc_men_yellow_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_blazers_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_jacket_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_jacket_cat','product_cat'],
+                            ['slug','wbc_women_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_blazers_cat','product_cat'],
+                            ['slug','wbc_men_blue_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_blazers_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_jacket_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_jacket_cat','product_cat'],
+                            ['slug','wbc_women_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_men_green_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_green_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_green_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_blazers_cat','product_cat'],
+                            ['slug','wbc_men_green_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_blazers_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_jacket_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_women_green_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_women_green_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_women_green_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_jacket_cat','product_cat'],
+                            ['slug','wbc_women_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_men_red_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_red_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_red_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_blazers_cat','product_cat'],
+                            ['slug','wbc_men_red_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_blazers_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_jacket_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_women_red_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_women_red_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_women_red_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_jacket_cat','product_cat'],
+                            ['slug','wbc_women_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_men_white_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_men_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_white_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_white_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_blazers_cat','product_cat'],
+                            ['slug','wbc_men_white_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_blazers_cat','product_cat'],
+                            ['slug','wbc_men_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_jacket_cat','product_cat'],
+                            ['slug','wbc_men_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_women_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_women_white_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_women_white_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_white_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_white_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_jacket_cat','product_cat'],
+                            ['slug','wbc_women_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_white_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_men_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_black_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_black_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_blazers_cat','product_cat'],
+                            ['slug','wbc_men_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_blazers_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_jacket_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_women_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_women_black_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_jacket_cat','product_cat'],
+                            ['slug','wbc_women_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_blazers_cat','product_cat'],
+                            ['slug','wbc_men_orange_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_blazers_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_jacket_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_jacket_cat','product_cat'],
+                            ['slug','wbc_women_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_blazers_cat','product_cat'],
+                            ['slug','wbc_men_pink_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_blazers_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_jacket_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_jacket_cat','product_cat'],
+                            ['slug','wbc_women_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_blazers_cat','product_cat'],
+                            ['slug','wbc_men_aqua_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_blazers_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_jacket_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_jacket_cat','product_cat'],
+                            ['slug','wbc_women_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_blazers_cat','product_cat'],
+                            ['slug','wbc_men_maroon_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_blazers_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_jacket_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_jacket_cat','product_cat'],
+                            ['slug','wbc_women_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_blazers_cat','product_cat'],
+                            ['slug','wbc_men_gray_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_blazers_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_jacket_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_jacket_cat','product_cat'],
+                            ['slug','wbc_women_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_blazers_cat','product_cat'],
+                            ['slug','wbc_men_lime_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_blazers_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_purple_jacket_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_shirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_jacket_cat','product_cat'],
+                            ['slug','wbc_women_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_purple_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_leggings_cat','product_cat']
+                        ),
+                        //---
+                        array(
+                            ['slug','wbc_men_gray_suit_cat','product_cat'],
+                            ['slug','wbc_men_gray_trousers_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_blazers_cat','product_cat'],
+                            ['slug','wbc_men_yellow_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_blazers_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_jacket_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_jacket_cat','product_cat'],
+                            ['slug','wbc_women_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_blazers_cat','product_cat'],
+                            ['slug','wbc_men_blue_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_blazers_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_jacket_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_jacket_cat','product_cat'],
+                            ['slug','wbc_women_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_men_green_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_green_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_green_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_blazers_cat','product_cat'],
+                            ['slug','wbc_men_green_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_blazers_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_jacket_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_women_green_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_women_green_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_women_green_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_jacket_cat','product_cat'],
+                            ['slug','wbc_women_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_men_red_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_red_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_red_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_blazers_cat','product_cat'],
+                            ['slug','wbc_men_red_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_blazers_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_jacket_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_women_red_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_women_red_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_women_red_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_jacket_cat','product_cat'],
+                            ['slug','wbc_women_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_men_white_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_men_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_white_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_white_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_blazers_cat','product_cat'],
+                            ['slug','wbc_men_white_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_blazers_cat','product_cat'],
+                            ['slug','wbc_men_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_jacket_cat','product_cat'],
+                            ['slug','wbc_men_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_women_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_women_white_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_women_white_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_white_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_white_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_jacket_cat','product_cat'],
+                            ['slug','wbc_women_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_white_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_men_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_black_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_black_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_blazers_cat','product_cat'],
+                            ['slug','wbc_men_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_blazers_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_jacket_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_women_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_women_black_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_jacket_cat','product_cat'],
+                            ['slug','wbc_women_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_blazers_cat','product_cat'],
+                            ['slug','wbc_men_orange_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_blazers_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_jacket_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_jacket_cat','product_cat'],
+                            ['slug','wbc_women_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_blazers_cat','product_cat'],
+                            ['slug','wbc_men_pink_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_blazers_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_jacket_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_jacket_cat','product_cat'],
+                            ['slug','wbc_women_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_blazers_cat','product_cat'],
+                            ['slug','wbc_men_aqua_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_blazers_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_jacket_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_jacket_cat','product_cat'],
+                            ['slug','wbc_women_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_blazers_cat','product_cat'],
+                            ['slug','wbc_men_maroon_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_blazers_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_jacket_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_jacket_cat','product_cat'],
+                            ['slug','wbc_women_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_leggings_cat','product_cat']
+                        ),
+                        //---
+                        array(
+                            ['slug','wbc_men_aqua_suit_cat','product_cat'],
+                            ['slug','wbc_men_aqua_trousers_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_blazers_cat','product_cat'],
+                            ['slug','wbc_men_yellow_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_blazers_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_jacket_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_jacket_cat','product_cat'],
+                            ['slug','wbc_women_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_blazers_cat','product_cat'],
+                            ['slug','wbc_men_blue_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_blazers_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_jacket_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_jacket_cat','product_cat'],
+                            ['slug','wbc_women_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_men_green_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_green_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_green_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_blazers_cat','product_cat'],
+                            ['slug','wbc_men_green_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_blazers_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_jacket_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_women_green_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_women_green_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_women_green_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_jacket_cat','product_cat'],
+                            ['slug','wbc_women_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_men_red_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_red_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_red_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_blazers_cat','product_cat'],
+                            ['slug','wbc_men_red_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_blazers_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_jacket_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_women_red_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_women_red_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_women_red_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_jacket_cat','product_cat'],
+                            ['slug','wbc_women_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_men_white_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_men_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_white_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_white_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_blazers_cat','product_cat'],
+                            ['slug','wbc_men_white_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_blazers_cat','product_cat'],
+                            ['slug','wbc_men_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_jacket_cat','product_cat'],
+                            ['slug','wbc_men_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_women_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_women_white_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_women_white_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_white_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_white_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_jacket_cat','product_cat'],
+                            ['slug','wbc_women_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_white_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_men_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_black_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_black_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_blazers_cat','product_cat'],
+                            ['slug','wbc_men_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_blazers_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_jacket_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_women_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_women_black_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_jacket_cat','product_cat'],
+                            ['slug','wbc_women_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_blazers_cat','product_cat'],
+                            ['slug','wbc_men_orange_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_blazers_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_jacket_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_jacket_cat','product_cat'],
+                            ['slug','wbc_women_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_blazers_cat','product_cat'],
+                            ['slug','wbc_men_gray_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_blazers_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_jacket_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_jacket_cat','product_cat'],
+                            ['slug','wbc_women_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_blazers_cat','product_cat'],
+                            ['slug','wbc_men_maroon_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_blazers_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_jacket_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_jacket_cat','product_cat'],
+                            ['slug','wbc_women_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_blazers_cat','product_cat'],
+                            ['slug','wbc_men_pink_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_blazers_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_jacket_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_jacket_cat','product_cat'],
+                            ['slug','wbc_women_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_blazers_cat','product_cat'],
+                            ['slug','wbc_men_purple_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_blazers_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_jacket_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_jacket_cat','product_cat'],
+                            ['slug','wbc_women_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_blazers_cat','product_cat'],
+                            ['slug','wbc_men_lime_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_blazers_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_aqua_jacket_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_shirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_jacket_cat','product_cat'],
+                            ['slug','wbc_women_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_aqua_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_blazers_cat','product_cat'],
+                            ['slug','wbc_men_purple_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_blazers_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_jacket_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_jacket_cat','product_cat'],
+                            ['slug','wbc_women_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_blazers_cat','product_cat'],
+                            ['slug','wbc_men_lime_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_blazers_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_gray_jacket_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_shirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_jacket_cat','product_cat'],
+                            ['slug','wbc_women_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_gray_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_leggings_cat','product_cat']
+                        ),
+                        //---
+                        array(
+                            ['slug','wbc_men_pink_suit_cat','product_cat'],
+                            ['slug','wbc_men_pink_trousers_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_blazers_cat','product_cat'],
+                            ['slug','wbc_men_yellow_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_blazers_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_jacket_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_jacket_cat','product_cat'],
+                            ['slug','wbc_women_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_blazers_cat','product_cat'],
+                            ['slug','wbc_men_blue_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_blazers_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_jacket_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_jacket_cat','product_cat'],
+                            ['slug','wbc_women_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_men_green_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_green_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_green_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_blazers_cat','product_cat'],
+                            ['slug','wbc_men_green_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_blazers_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_jacket_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_women_green_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_women_green_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_women_green_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_jacket_cat','product_cat'],
+                            ['slug','wbc_women_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_men_red_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_red_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_red_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_blazers_cat','product_cat'],
+                            ['slug','wbc_men_red_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_blazers_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_jacket_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_women_red_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_women_red_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_women_red_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_jacket_cat','product_cat'],
+                            ['slug','wbc_women_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_men_white_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_men_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_white_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_white_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_blazers_cat','product_cat'],
+                            ['slug','wbc_men_white_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_blazers_cat','product_cat'],
+                            ['slug','wbc_men_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_jacket_cat','product_cat'],
+                            ['slug','wbc_men_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_women_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_women_white_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_women_white_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_white_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_white_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_jacket_cat','product_cat'],
+                            ['slug','wbc_women_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_white_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_men_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_black_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_black_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_blazers_cat','product_cat'],
+                            ['slug','wbc_men_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_blazers_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_jacket_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_women_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_women_black_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_jacket_cat','product_cat'],
+                            ['slug','wbc_women_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_blazers_cat','product_cat'],
+                            ['slug','wbc_men_orange_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_blazers_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_jacket_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_jacket_cat','product_cat'],
+                            ['slug','wbc_women_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_blazers_cat','product_cat'],
+                            ['slug','wbc_men_gray_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_blazers_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_jacket_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_jacket_cat','product_cat'],
+                            ['slug','wbc_women_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_blazers_cat','product_cat'],
+                            ['slug','wbc_men_aqua_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_blazers_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_jacket_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_jacket_cat','product_cat'],
+                            ['slug','wbc_women_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_maroon_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_blazers_cat','product_cat'],
+                            ['slug','wbc_men_maroon_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_blazers_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_jacket_cat','product_cat'],
+                            ['slug','wbc_men_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_jacket_cat','product_cat'],
+                            ['slug','wbc_women_maroon_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_blazers_cat','product_cat'],
+                            ['slug','wbc_men_purple_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_blazers_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_jacket_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_jacket_cat','product_cat'],
+                            ['slug','wbc_women_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_blazers_cat','product_cat'],
+                            ['slug','wbc_men_lime_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_blazers_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_pink_jacket_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_shirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_jacket_cat','product_cat'],
+                            ['slug','wbc_women_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_pink_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_leggings_cat','product_cat']
+                        ),
+                        //---
+                        array(
+                            ['slug','wbc_men_maroon_suit_cat','product_cat'],
+                            ['slug','wbc_men_maroon_trousers_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_yellow_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_blazers_cat','product_cat'],
+                            ['slug','wbc_men_yellow_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_blazers_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_jacket_cat','product_cat'],
+                            ['slug','wbc_men_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_jacket_cat','product_cat'],
+                            ['slug','wbc_women_yellow_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_yellow_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_blue_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_blazers_cat','product_cat'],
+                            ['slug','wbc_men_blue_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_blazers_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_jacket_cat','product_cat'],
+                            ['slug','wbc_men_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_jacket_cat','product_cat'],
+                            ['slug','wbc_women_blue_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_blue_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_men_green_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_green_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_green_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_blazers_cat','product_cat'],
+                            ['slug','wbc_men_green_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_blazers_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_jacket_cat','product_cat'],
+                            ['slug','wbc_men_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_women_green_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_women_green_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_women_green_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_jacket_cat','product_cat'],
+                            ['slug','wbc_women_green_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_green_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_men_red_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_red_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_red_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_blazers_cat','product_cat'],
+                            ['slug','wbc_men_red_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_blazers_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_jacket_cat','product_cat'],
+                            ['slug','wbc_men_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_women_red_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_women_red_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_women_red_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_jacket_cat','product_cat'],
+                            ['slug','wbc_women_red_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_red_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_men_white_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_men_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_white_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_white_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_blazers_cat','product_cat'],
+                            ['slug','wbc_men_white_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_blazers_cat','product_cat'],
+                            ['slug','wbc_men_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_jacket_cat','product_cat'],
+                            ['slug','wbc_men_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_women_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_women_white_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_women_white_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_white_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_white_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_jacket_cat','product_cat'],
+                            ['slug','wbc_women_white_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_white_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_men_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_black_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_black_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_blazers_cat','product_cat'],
+                            ['slug','wbc_men_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_blazers_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_jacket_cat','product_cat'],
+                            ['slug','wbc_men_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_women_black_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_women_maroon_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_women_black_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_jacket_cat','product_cat'],
+                            ['slug','wbc_women_black_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_black_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_orange_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_blazers_cat','product_cat'],
+                            ['slug','wbc_men_orange_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_blazers_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_jacket_cat','product_cat'],
+                            ['slug','wbc_men_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_jacket_cat','product_cat'],
+                            ['slug','wbc_women_orange_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_orange_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_gray_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_blazers_cat','product_cat'],
+                            ['slug','wbc_men_gray_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_blazers_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_jacket_cat','product_cat'],
+                            ['slug','wbc_men_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_jacket_cat','product_cat'],
+                            ['slug','wbc_women_gray_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_gray_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_aqua_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_blazers_cat','product_cat'],
+                            ['slug','wbc_men_aqua_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_blazers_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_jacket_cat','product_cat'],
+                            ['slug','wbc_men_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_jacket_cat','product_cat'],
+                            ['slug','wbc_women_aqua_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_aqua_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_pink_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_blazers_cat','product_cat'],
+                            ['slug','wbc_men_pink_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_blazers_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_jacket_cat','product_cat'],
+                            ['slug','wbc_men_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_jacket_cat','product_cat'],
+                            ['slug','wbc_women_pink_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_pink_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_purple_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_blazers_cat','product_cat'],
+                            ['slug','wbc_men_purple_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_blazers_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_jacket_cat','product_cat'],
+                            ['slug','wbc_men_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_jacket_cat','product_cat'],
+                            ['slug','wbc_women_purple_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_purple_leggings_cat','product_cat']
+                        ),
+                        //
+                        array(
+                            ['slug','wbc_men_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_men_lime_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_blazers_cat','product_cat'],
+                            ['slug','wbc_men_lime_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_blazers_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_men_maroon_jacket_cat','product_cat'],
+                            ['slug','wbc_men_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_trousers_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_palazzos_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_shirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_skirt_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_shorts_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_track_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_jacket_cat','product_cat'],
+                            ['slug','wbc_women_lime_jeans_cat','product_cat']
+                        ),
+                        array(
+                            ['slug','wbc_women_maroon_tshirts_cat','product_cat'],
+                            ['slug','wbc_women_lime_leggings_cat','product_cat']
+                        )
                     );
     }
 
     public function get_filters($__cat__, $__att__) {
         $filter = array();
         
-        if(!empty($__cat__['wbc_top_wear_cat'])){
+        // if(!empty($__cat__['wbc_top_wear_cat'])){
+        //     $filter['d_fconfig'][]=array(
+        //         'name'=>$__cat__['wbc_top_wear_cat'][0],
+        //         'type'=>"0",
+        //         'label'=>$__cat__['wbc_top_wear_cat'][1],
+        //         'advance'=>"0",
+        //         'dependent'=>"0",
+        //         'input'=>"icon_text",
+        //         'column_width'=> "100",
+        //         'order'=>"0",
+        //         'template'=>'fc1',
+        //         'help'=>0,
+        //         'help_text'=>'',
+        //         'enabled'=>1
+        //     );
+        // }
+        if(!empty($__cat__['wbc_topwear_cat'])){
             $filter['d_fconfig'][]=array(
-                'name'=>$__cat__['wbc_top_wear_cat'][0],
+                'name'=>$__cat__['wbc_topwear_cat'][0],
                 'type'=>"0",
-                'label'=>$__cat__['wbc_top_wear_cat'][1],
+                'label'=>$__cat__['wbc_topwear_cat'][1],
                 'advance'=>"0",
                 'dependent'=>"0",
                 'input'=>"icon_text",
@@ -802,11 +12432,27 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
             );
         }
         //filter for bottom wear
-        if(!empty($__cat__['wbc_bottom_wear_cat'])){
+        // if(!empty($__cat__['wbc_bottom_wear_cat'])){
+        //     $filter['s_fconfig'][]=array(
+        //         'name'=>$__cat__['wbc_bottom_wear_cat'][0],
+        //         'type'=>"0",
+        //         'label'=>$__cat__['wbc_bottom_wear_cat'][1],
+        //         'advance'=>"0",
+        //         'dependent'=>"0",
+        //         'input'=>"icon_text",
+        //         'column_width'=> "100",
+        //         'order'=>"0",
+        //         'template'=>'sc1',
+        //         'help'=>0,
+        //         'help_text'=>'',
+        //         'enabled'=>1
+        //     );
+        // }
+        if(!empty($__cat__['wbc_bottomwear_cat'])){
             $filter['s_fconfig'][]=array(
-                'name'=>$__cat__['wbc_bottom_wear_cat'][0],
+                'name'=>$__cat__['wbc_bottomwear_cat'][0],
                 'type'=>"0",
-                'label'=>$__cat__['wbc_bottom_wear_cat'][1],
+                'label'=>$__cat__['wbc_bottomwear_cat'][1],
                 'advance'=>"0",
                 'dependent'=>"0",
                 'input'=>"icon_text",
@@ -898,6 +12544,22 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                 'enabled'=>1
             );
         }
+        if(!empty($__cat__['wbc_colours_cat'])){
+            $filter['d_fconfig'][]=array(
+                'name'=>$__cat__['wbc_colours_cat'][0],
+                'type'=>"0",
+                'label'=>$__cat__['wbc_colours_cat'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"text_slider",
+                'column_width'=> "43.75",
+                'order'=>"10",
+                'template'=>'fc1',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1
+            );
+        }
 
         return $filter;
     }
@@ -920,7 +12582,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable', //simple | variable
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_men_shirts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_men_white_shirts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -988,7 +12650,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_men_tshirts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_men_white_tshirts_cat','wbc_fabric_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -1056,7 +12718,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_men_shirts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_chiffon_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_men_gray_shirts_cat','wbc_fabric_cat','wbc_fabric_chiffon_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -1124,7 +12786,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_men_tshirts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_silk_cat','wbc_pattern_printed_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_men_white_tshirts_cat','wbc_fabric_cat','wbc_fabric_silk_cat','wbc_pattern_printed_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -1192,7 +12854,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_tops_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_canvas_cat','wbc_pattern_plaid_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_women_black_tops_cat','wbc_fabric_cat','wbc_fabric_canvas_cat','wbc_pattern_plaid_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -1260,7 +12922,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_women_tshirt_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_silk_cat','wbc_pattern_checks_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_women_white_tshirts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_silk_cat','wbc_pattern_checks_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -1328,7 +12990,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_women_shirts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_women_white_shirts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -1396,7 +13058,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_tops_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_polyester_cat','wbc_pattern_polkadots_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_women_pink_tops_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_polyester_cat','wbc_pattern_polkadots_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -1464,7 +13126,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_women_tshirts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_polyester_cat','wbc_pattern_stripes_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_women_red_tshirts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_polyester_cat','wbc_pattern_stripes_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -1532,7 +13194,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_men_shirts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_linen_cat','wbc_pattern_floral_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_men_blue_shirts_cat','wbc_fabric_cat','wbc_fabric_linen_cat','wbc_pattern_floral_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -1601,7 +13263,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable', //simple | variable
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_men_hoodies_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_printed_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_men_white_hoddies_cat','wbc_fabric_cat','wbc_fabric_cotton_cat','wbc_pattern_printed_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -1669,7 +13331,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_men_tshirts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_polyester_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_men_white_tshirts_cat','wbc_fabric_cat','wbc_fabric_polyester_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -1737,7 +13399,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_men_shirts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_checks_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_men_white_shirts_cat','wbc_fabric_cat','wbc_fabric_cotton_cat','wbc_pattern_checks_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -1805,7 +13467,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_men_tshirts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_silk_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_top_wear_cat','wbc_men_white_tshirts_cat','wbc_fabric_cat','wbc_fabric_silk_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -1873,7 +13535,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_men_jackets_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_wool_cat','wbc_pattern_plaid_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_men_white_jacket_cat','wbc_fabric_cat','wbc_fabric_wool_cat','wbc_pattern_plaid_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -1941,7 +13603,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_blazers_coats_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_damask_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_men_blue_blazers_cat','wbc_fabric_cat','wbc_fabric_damask_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -2009,7 +13671,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_men_hoodies_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_jersey_cat','wbc_pattern_printed_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_men_black_hoodie_cat','wbc_fabric_cat','wbc_fabric_jersey_cat','wbc_pattern_printed_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -2077,7 +13739,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_men_hoodies_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_men_black_hoodie_cat','wbc_fabric_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -2145,7 +13807,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_blazers_coats_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_men_black_blazers_cat','wbc_fabric_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -2213,7 +13875,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_blazers_coats_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_linen_cat','wbc_pattern_plaid_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_men_black_blazers_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_linen_cat','wbc_pattern_plaid_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -2282,7 +13944,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable', //simple | variable
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_blazers_coats_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_linen_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_men_black_blazers_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_linen_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -2350,7 +14012,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_blazers_coats_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_polyester_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_men_purple_blazers_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_polyester_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -2418,7 +14080,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_blazers_coats_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plaid_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_men_green_blazers_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plaid_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -2486,7 +14148,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_blazers_coats_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_silk_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_men_blue_blazers_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_silk_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -2554,7 +14216,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_blazers_coats_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_velvet_cat','wbc_pattern_plaid_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_men_blue_blazers_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_velvet_cat','wbc_pattern_plaid_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -2622,7 +14284,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_men_jackets_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_polyester_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_men_black_jacket_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_polyester_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -2690,7 +14352,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_men_jackets_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_pain_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_men_black_jacket_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_pain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -2758,7 +14420,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_men_jackets_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_polyester_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_men_orange_jacket_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_polyester_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -2826,7 +14488,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_hoodies_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_men_red_hoodie_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -2894,7 +14556,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_women_tshirts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_linen_cat','wbc_pattern_printed_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_women_white_tshirts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_linen_cat','wbc_pattern_printed_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -2963,7 +14625,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable', //simple | variable
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_men_shirts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_checks_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_men_blue_shirts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_checks_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -3031,7 +14693,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_men_shirts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_stripes_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_men_black_shirts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_stripes_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -3099,7 +14761,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_men_shirts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_chiffon_cat','wbc_pattern_floral_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_men_green_shirts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_chiffon_cat','wbc_pattern_floral_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -3167,7 +14829,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_men_shirts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_men_red_shirts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -3235,7 +14897,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_suits_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_wool_cat','wbc_pattern_plaid_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_men_blue_suit_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_wool_cat','wbc_pattern_plaid_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -3303,7 +14965,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_suits_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_men_gray_suit_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -3371,7 +15033,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_suits_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_jersey_cat','wbc_pattern_stripes_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_men_gray_suit_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_jersey_cat','wbc_pattern_stripes_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -3439,7 +15101,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_suits_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_chiffon_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_men_blue_suit_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_chiffon_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -3507,7 +15169,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_men_sweaters_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_jersey_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_top_wear_cat','wbc_men_white_sweater_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_jersey_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -3575,7 +15237,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_men_sweaters_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_wool_cat','wbc_pattern_stripes_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_men_green_sweater_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_wool_cat','wbc_pattern_stripes_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -3644,7 +15306,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable', //simple | variable
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_men_sweaters_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_wool_cat','wbc_pattern_detailing_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_men_black_sweater_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_wool_cat','wbc_pattern_detailing_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -3712,7 +15374,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_men_tshirts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_silk_cat','wbc_pattern_polkadots_cat'),
+          'category'=>array('wbc_top_wear_cat','wbc_men_white_shirts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_silk_cat','wbc_pattern_polkadots_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -3780,7 +15442,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_men_hoodies_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_checks_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_women_blue_hoodie_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_checks_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -3848,7 +15510,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_men_hoodies_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_women_yellow_hoodie_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -3916,7 +15578,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_men_hoodies_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plaid_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_women_red_hoodie_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plaid_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -3984,7 +15646,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_women_jackets_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_damask_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_women_blue_jacket_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_damask_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -4052,7 +15714,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_women_jackets_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_women_blue_jacket_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -4120,7 +15782,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_tops_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_silk_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_women_purple_tops_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_silk_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -4132,7 +15794,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                             ),
                     'pa_wbc_cloth_colour_attr'=>array(
                               'name'=>'pa_wbc_cloth_colour_attr',
-                              'value'=>'Red',
+                              'value'=>'Purpal',
                               'position'=>1,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -4176,7 +15838,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                           array(
                             'regular_price'=>'1200',
                             'price'=>'1180',
-                            'terms'=>array('pa_wbc_cloth_size_attr'=>'M','pa_wbc_cloth_colour_attr'=>'Red','pa_wbc_cloth_neck_attr'=>'Crew','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_sleeve_attr'=>'Long sleeve','pa_wbc_cloth_collar_attr'=>'Spread')
+                            'terms'=>array('pa_wbc_cloth_size_attr'=>'M','pa_wbc_cloth_colour_attr'=>'Purpal','pa_wbc_cloth_neck_attr'=>'Crew','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_sleeve_attr'=>'Long sleeve','pa_wbc_cloth_collar_attr'=>'Spread')
                           )
                    ) 
         ),
@@ -4188,7 +15850,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_women_shirts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_women_green_shirts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -4256,7 +15918,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_women_shirts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_checks_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_women_white_shirts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_checks_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -4325,7 +15987,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable', //simple | variable
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_women_sweaters_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_jersey_cat','wbc_pattern_plaid_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_women_green_sweater_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_jersey_cat','wbc_pattern_plaid_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -4393,7 +16055,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_women_sweaters_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_jersey_cat','wbc_pattern_stripes_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_women_gray_sweater_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_jersey_cat','wbc_pattern_stripes_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -4461,7 +16123,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_women_sweaters_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_wool_cat','wbc_pattern_stripes_cat'),
+          'category'=>array('wbc_top_wear_cat','wbc_women_purple_sweater_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_wool_cat','wbc_pattern_stripes_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -4473,7 +16135,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                             ),
                     'pa_wbc_cloth_colour_attr'=>array(
                               'name'=>'pa_wbc_cloth_colour_attr',
-                              'value'=>'Pink',
+                              'value'=>'Purpal',
                               'position'=>1,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -4517,7 +16179,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                           array(
                             'regular_price'=>'450',
                             'price'=>'440',
-                            'terms'=>array('pa_wbc_cloth_size_attr'=>'M','pa_wbc_cloth_colour_attr'=>'Pink','pa_wbc_cloth_neck_attr'=>'Collared neckline','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_sleeve_attr'=>'Long sleeve','pa_wbc_cloth_collar_attr'=>'Regular')
+                            'terms'=>array('pa_wbc_cloth_size_attr'=>'M','pa_wbc_cloth_colour_attr'=>'Purpal','pa_wbc_cloth_neck_attr'=>'Collared neckline','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_sleeve_attr'=>'Long sleeve','pa_wbc_cloth_collar_attr'=>'Regular')
                           )
                    ) 
         ),
@@ -4529,7 +16191,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_women_tops_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_silk_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_women_red_tops_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_silk_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -4597,7 +16259,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_women_tops_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plaid_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_women_green_tops_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plaid_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -4659,13 +16321,13 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
         ),
         array(
           'title'=>'Women top #20000066',
-          'thumb'=>$_img_url.'women_tops_004.jpeg',
+          'thumb'=>$_img_url.'women_tops_004.jpg',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_women_tops_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_damask_cat','wbc_pattern_detailing_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_women_purple_tops_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_damask_cat','wbc_pattern_detailing_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -4677,7 +16339,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                             ),
                     'pa_wbc_cloth_colour_attr'=>array(
                               'name'=>'pa_wbc_cloth_colour_attr',
-                              'value'=>'Red',
+                              'value'=>'Purpal',
                               'position'=>1,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -4721,7 +16383,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                           array(
                             'regular_price'=>'1550',
                             'price'=>'1545',
-                            'terms'=>array('pa_wbc_cloth_size_attr'=>'L','pa_wbc_cloth_colour_attr'=>'Red','pa_wbc_cloth_neck_attr'=>'Crew','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_sleeve_attr'=>'Long sleeve','pa_wbc_cloth_collar_attr'=>'Spread')
+                            'terms'=>array('pa_wbc_cloth_size_attr'=>'L','pa_wbc_cloth_colour_attr'=>'Purpal','pa_wbc_cloth_neck_attr'=>'Crew','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_sleeve_attr'=>'Long sleeve','pa_wbc_cloth_collar_attr'=>'Spread')
                           )
                    ) 
         ),
@@ -4733,7 +16395,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_tunics_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_linen_cat','wbc_pattern_printed_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_women_white_tunic_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_linen_cat','wbc_pattern_printed_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -4801,7 +16463,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_tunics_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_women_orange_tunic_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -4869,7 +16531,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_tunics_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_detailing_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_women_white_tunic_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_detailing_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -4937,7 +16599,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_women_shirts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_linen_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_topwear_cat','wbc_women_white_shirts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_linen_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -5006,7 +16668,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_men_trousers_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_men_white_trousers_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -5082,7 +16744,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_men_trousers_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_men_black_trousers_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -5157,7 +16819,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_men_jeans_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_men_black_jeans_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -5233,7 +16895,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_men_track_pants_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_silk_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_men_blue_track_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_silk_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -5308,7 +16970,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_women_trousers_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_men_black_trousers_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -5383,7 +17045,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_women_jeans_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_damask_cat','wbc_pattern_stripes_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_women_blue_jeans_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_damask_cat','wbc_pattern_stripes_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -5458,7 +17120,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_leggings_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_silk_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_women_black_leggings_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_silk_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -5533,7 +17195,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_plazzos_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_printed_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_women_white_palazzos_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_printed_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -5608,7 +17270,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_women_jeans_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_women_black_jeans_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -5683,7 +17345,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_palazzos_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_canvas_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_women_black_palazzos_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_canvas_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -5758,7 +17420,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_women_pants_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_women_white_palazzos_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -5834,7 +17496,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_men_jeans_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_men_blue_jeans_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -5909,7 +17571,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_men_jeans_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_men_blue_jeans_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -5984,7 +17646,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_men_trouser_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_checks_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_men_blue_trousers_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_checks_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -6059,7 +17721,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_men_jeans_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_men_blue_jeans_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -6134,7 +17796,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_men_jeans_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_men_black_jeans_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -6209,7 +17871,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_men_jeans_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plaid_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_men_blck_jeans_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plaid_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -6278,13 +17940,13 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           ),
          array(
           'title'=>'Men jeans #20000077',
-          'thumb'=>$_img_url.'men_jeans_007.jpg',
+          'thumb'=>$_img_url.'men_jeans_007.jpeg',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_men_jeans_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_men_orange_jeans_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -6359,7 +18021,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_men_shorts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_men_gray_shorts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -6434,7 +18096,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_men_shorts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_silk_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_men_black_shorts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_silk_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -6509,7 +18171,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_men_shorts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_printed_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_men_white_shorts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_printed_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -6585,7 +18247,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_men_shorts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_men_blue_shorts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -6660,7 +18322,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_plazzos_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_silk_cat','wbc_pattern_printed_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_women_blue_palazzos_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_silk_cat','wbc_pattern_printed_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -6735,7 +18397,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_men_track_pants_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_men_black_track_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -6810,7 +18472,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_men_track_pants_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_printed_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_men_white_track_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_printed_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -6885,7 +18547,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_men_track_pants_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_silk_cat','wbc_pattern_printed_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_men_black_track_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_silk_cat','wbc_pattern_printed_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -6960,7 +18622,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_men_trousers_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_men_yellow_trousers_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -7029,13 +18691,13 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           ),
          array(
           'title'=>'Men trouser #20000087',
-          'thumb'=>$_img_url.'men_trouser_002.jpg',
+          'thumb'=>$_img_url.'men_trouser_002.jpeg',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_men_trousers_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_men_red_trousers_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -7110,7 +18772,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_men_trousers_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_men_black_trousers_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -7185,7 +18847,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_men_trousers_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_men_green_trousers_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -7260,7 +18922,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_men_trousers_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_canvas_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_men_blue_trousers_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_canvas_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -7336,7 +18998,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_men_trousers_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_checks_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_men_white_trousers_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_checks_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -7411,7 +19073,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_men_trousers_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_men_green_trousers_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -7486,7 +19148,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_women_jeans_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_canvas_cat','wbc_pattern_printed_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_women_blue_jeans_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_canvas_cat','wbc_pattern_printed_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -7561,7 +19223,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_women_jeans_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_polyester_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_women_black_jeans_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_polyester_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -7636,7 +19298,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_women_jeans_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_printed_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_women_blue_jeans_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_printed_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -7711,7 +19373,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_leggings_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_damask_cat','wbc_pattern_plaid_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_women_red_leggings_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_damask_cat','wbc_pattern_plaid_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -7786,7 +19448,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_leggings_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_women_gray_leggings_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -7861,7 +19523,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_leggings_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_women_green_leggings_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -7936,7 +19598,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_leggings_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_women_blue_leggings_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -8011,7 +19673,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_plazzos_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_canvas_cat','wbc_pattern_printed_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_women_white_palazzos_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_canvas_cat','wbc_pattern_printed_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -8087,7 +19749,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_skirts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_linen_cat','wbc_pattern_plaid_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_women_maroon_skirt_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_linen_cat','wbc_pattern_plaid_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -8099,7 +19761,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                             ),
                     'pa_wbc_cloth_colour_attr'=>array(
                               'name'=>'pa_wbc_cloth_colour_attr',
-                              'value'=>'Red',
+                              'value'=>'Maroon',
                               'position'=>1,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -8150,7 +19812,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                           array(
                             'regular_price'=>'1020',
                             'price'=>'1010',
-                            'terms'=>array('pa_wbc_cloth_size_attr'=>'30','pa_wbc_cloth_colour_attr'=>'Red','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_bottom_type_attr'=>'Sharara','pa_wbc_cloth_fit_attr'=>'Flared','pa_wbc_cloth_closure_type_attr'=>'Frog & toggle','pa_wbc_cloth_length_attr'=>'Regular')
+                            'terms'=>array('pa_wbc_cloth_size_attr'=>'30','pa_wbc_cloth_colour_attr'=>'Maroon','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_bottom_type_attr'=>'Sharara','pa_wbc_cloth_fit_attr'=>'Flared','pa_wbc_cloth_closure_type_attr'=>'Frog & toggle','pa_wbc_cloth_length_attr'=>'Regular')
                           )
                    )
           ),
@@ -8162,7 +19824,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_women_track_pants_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_women_black_track_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -8237,7 +19899,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_women_track_pants_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_women_pink_track_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -8312,7 +19974,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_women_track_pants_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_silk_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_women_green_track_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_silk_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -8387,7 +20049,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_women_trousers_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_women_pink_trousers_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -8462,7 +20124,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_women_trousers_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_damask_cat','wbc_pattern_checks_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_women_blue_trousers_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_damask_cat','wbc_pattern_checks_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -8531,13 +20193,13 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           ),
          array(
           'title'=>'Women trouser #20000107',
-          'thumb'=>$_img_url.'women_trouser_003.jpeg',
+          'thumb'=>$_img_url.'women_trouser_003.jpg',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_women_trousers_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_silk_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_women_green_trousers_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_silk_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -8606,13 +20268,13 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           ),
          array(
           'title'=>'Women Trouser #20000108',
-          'thumb'=>$_img_url.'women_trouser_004.jpeg',
+          'thumb'=>$_img_url.'women_trouser_004.jpg',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_women_trousers_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_women_white_trousers_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -8687,7 +20349,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_women_trousers_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_women_black_trousers_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -8762,7 +20424,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_men_tracks_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_canvas_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_men_white_track_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_canvas_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -8838,7 +20500,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_leggings_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_women_white_leggings_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -8913,7 +20575,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_plazzos_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_women_white_palazzos_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -8988,7 +20650,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_plazzos_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_checks_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_women_red_palazzos_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_checks_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -9063,7 +20725,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_plazzos_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_silk_cat','wbc_pattern_checks_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_women_white_palazzos_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_silk_cat','wbc_pattern_checks_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -9138,7 +20800,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_plazzos_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_women_orange_palazzos_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -9213,7 +20875,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_women_shorts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_printed_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_women_blue_shorts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_printed_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -9288,7 +20950,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_women_shorts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_women_blue_shorts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -9363,7 +21025,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_women_shorts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_printed_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_women_black_shorts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_printed_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -9438,7 +21100,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_women_shorts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_women_orange_shorts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -9513,7 +21175,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_skirts_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_fabric_canvas_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottomwear_cat','wbc_women_black_skirt_cat','wbc_fabric_cat','wbc_fabric_canvas_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
