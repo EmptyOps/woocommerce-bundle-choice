@@ -35,6 +35,10 @@ class Sample_Data {
         return esc_url(apply_filters( 'eowbc_icon_url',constant('EOWBC_ICON')));
     }
 
+    public function get_model(){
+        return $this->model;
+    }
+
     public function get_page(array $_atttriutes, array $_category, array $_maps){
 
         $callback = function() use(&$_atttriutes, &$_category, &$_maps){
@@ -42,11 +46,12 @@ class Sample_Data {
             wbc()->load->template('admin/menu/page/header-part',array( "mode"=>"plain" ));
             
             $_step=1;
+
             // wbc()->load->model('admin/sample_data/eowbc_jewelry');
             // $res = \eo\wbc\model\admin\sample_data\Eowbc_Sample_Data::instance()->process_post( $_step, $_category, $_atttriutes ); 
-            $res = $this->model->process_post( $_step, $_category, $_atttriutes, $_maps, $this->feature_key ); 
+            $res = $this->model->process_post( $_step, $_category, $_atttriutes, $_maps, $this->feature_key );
 
-            wbc()->load->template('admin/sample_data/main', array("feature_title"=>$this->feature_title,"_step"=>$_step,"number_of_step"=>$this->model->number_of_step(),"_atttriutes"=>$_atttriutes,"_category"=>$_category,"help_info"=>$this->help_info)); 
+            wbc()->load->template('admin/sample_data/main', array("feature_title"=>$this->feature_title,'feature_key'=>$this->feature_key,"_step"=>$_step,"number_of_step"=>$this->model->number_of_step(),"_atttriutes"=>$_atttriutes,"_category"=>$_category,"help_info"=>$this->help_info,'sample_data_obj'=>$this)); 
 
             wbc()->load->template('admin/menu/page/footer-part',array( "mode"=>"plain" ));
         };

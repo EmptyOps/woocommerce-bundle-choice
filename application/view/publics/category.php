@@ -77,8 +77,13 @@
                                           <div class="ui dimmer">
                                             <div class="content">
                                               <div class="bottom">
+                                                <?php if($curr_product->is_in_stock()){ ?>
 
                                                 <div data-link="<?php echo $category_object->eo_wbc_product_url(get_permalink($_post->ID)); ?>" class="ui inverted button"><?php echo  (empty(get_option('eo_wbc_add_to_cart_text'))?__('View and Continue','woo-bundle-choice'):get_option('eo_wbc_add_to_cart_text'));?></div>
+                                                <?php } else { ?>
+                                                    <div class="ui inverted button"><?php _e('Out of stock','woo-bundle-choice'); ?>
+                                                    </div>
+                                                <?php } ?>
 
                                                 <h5><?php echo $curr_product->get_title(); ?></h5><br/>
                                                 <div style="text-align: center !important;">&nbsp;<?php echo $curr_product->get_price_html(); ?></div>
@@ -130,9 +135,13 @@
                                           <div class="ui dimmer">
                                             <div class="content">
                                               <div class="aligned align bottom">
-                                                
-                                                <div data-link="<?php echo $category_object->eo_wbc_product_url(get_permalink($_post->ID)); ?>" class="ui inverted button"><?php echo (empty(get_option('eo_wbc_add_to_cart_text'))?__('View and Continue','woo-bundle-choice'):get_option('eo_wbc_add_to_cart_text')) ;?></div>
+                                                <?php if($curr_product->is_in_stock()){ ?>
 
+                                                <div data-link="<?php echo $category_object->eo_wbc_product_url(get_permalink($_post->ID)); ?>" class="ui inverted button"><?php echo (empty(get_option('eo_wbc_add_to_cart_text'))?__('View and Continue','woo-bundle-choice'):get_option('eo_wbc_add_to_cart_text')) ;?></div>
+                                                 <?php } else { ?>
+                                                    <div class="ui inverted button"><?php _e('Out of stock','woo-bundle-choice'); ?>
+                                                    </div>
+                                                <?php } ?>
                                                 <h5><?php echo $curr_product->get_title();?></h5><br/>
                                                 <div style="text-align: center !important;">&nbsp;<?php echo $curr_product->get_price_html(); ?></div>
                                               </div>
