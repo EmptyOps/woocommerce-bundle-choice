@@ -2,6 +2,12 @@
 /*
 *	Displays the page for adding sample data
 */
+
+$_step = 1; 
+if(!empty($_GET['step'])){
+	$_step = $_GET['step'];
+}
+
 ?>
 <div class="ui segment container" style="height: 100%;margin-bottom: 0px; border: none !important;
 box-shadow: none;">
@@ -37,7 +43,7 @@ box-shadow: none;">
 	          <tbody>
 	            <tr valign="top">
 	              <!-- Sample Product Installation -->
-	              <?php if( !empty(wbc()->sanitize->post('step')) && wbc()->sanitize->post('step')==3):?>
+	              <?php if( /*!empty(wbc()->sanitize->post('step')) && wbc()->sanitize->post('step')*/$_step==3):?>
 	                <th>
 	                  <h3>Sample Products</h3>
 	                </th>
@@ -96,4 +102,212 @@ box-shadow: none;">
 
 </div>
 
-	<?php //EO_WBC_Head_Banner::get_footer_line(); ?>
+<?php if(empty($_GET['step']) or (!empty($_GET['step']) and $_GET['step']!=3 )) { 
+	if(empty($_GET['step'])){
+		$_GET['step']=1;
+	}
+
+	$_GET['step'] = $_GET['step']+1;
+	$next_url = admin_url('admin.php?'.http_build_query($_GET));
+	
+	?>
+	<script type="text/javascript" >
+	    jQuery(document).ready(function($) {            
+
+	    	
+	    	let cat_value = 0;
+	    	let attr_value = 0;
+	    	let process_flag = '';
+
+	    	let btn_label = '';
+	    	let btn_total = 0;
+
+	        function eowbc_add_catat(index){
+
+	            if(process_flag=='cat' && index>=cat_value){
+	                //step 2 redirect;
+	                //window.location.href="<?php echo($next_url); ?>";
+	                var data = {	                
+		                '_wpnonce': '<?php echo wp_create_nonce('sample_data_jewelry');?>',
+		                'action':'eowbc_ajax',
+		                'resolver':'sample_data/catattr',
+		                'feature_key':'<?php _e($feature_key); ?>',
+		                'type':'save_map',
+		            };
+	            	jQuery.ajax({
+			            url:eowbc_object.admin_url,
+			            type: 'POST',
+			            data: data,
+			            beforeSend:function(xhr){
+
+			            },
+			            success:function(result,status,xhr){
+			                window.location.href="<?php echo($next_url); ?>";
+	                		return false;
+			            },
+			            error:function(xhr,status,error){
+			                /*console.log(xhr);*/			                
+			                window.location.href="<?php echo($next_url); ?>";
+	                		return false;
+			            },
+			            complete:function(xhr,status){
+			           		window.location.href="<?php echo($next_url); ?>";
+	                		return false;     
+			            }
+			        });	
+	                return false;
+	            } else if(process_flag=='attr' && index>=attr_value) {
+	            	//step 3 redirect;
+	            	var data = {	                
+		                '_wpnonce': '<?php echo wp_create_nonce('sample_data_jewelry');?>',
+		                'action':'eowbc_ajax',
+		                'resolver':'sample_data/catattr',
+		                'feature_key':'<?php _e($feature_key); ?>',
+		                'type':'save_filter',
+		            };
+	            	jQuery.ajax({
+			            url:eowbc_object.admin_url,
+			            type: 'POST',
+			            data: data,
+			            beforeSend:function(xhr){
+
+			            },
+			            success:function(result,status,xhr){
+			                window.location.href="<?php echo($next_url); ?>";
+	                		return false;
+			            },
+			            error:function(xhr,status,error){
+			                /*console.log(xhr);*/			                
+			                window.location.href="<?php echo($next_url); ?>";
+	                		return false;
+			            },
+			            complete:function(xhr,status){
+			           		window.location.href="<?php echo($next_url); ?>";
+	                		return false;     
+			            }
+			        });	
+			        return false;            	
+	            }
+
+
+
+	            jQuery(".button.button-primary.button-hero.action.disabled").val("Adding "+(index+1)+" of "+btn_total+" "+btn_label);
+
+	            let label = '';
+	            let value = '';
+	            let field_name = jQuery("[name^='"+process_flag+"_"+index+"']:checkbox:checked");
+	            let field_label = jQuery("[name^='"+process_flag+"_value_"+index+"']:not([value=''])");
+
+	            if(field_name.length>0 && field_label.length>0 && jQuery(field_label[0]).val().trim()!=''){
+	            	value = jQuery(field_name[0]).val();
+	            	label = jQuery(field_label[0]).val();
+	            } else {
+	            	eowbc_add_catat(index+1);
+	            }
+
+	            var data = {	                
+	                '_wpnonce': '<?php echo wp_create_nonce('sample_data_jewelry');?>',
+	                'action':'eowbc_ajax',
+	                'resolver':'sample_data/catattr',
+	                'feature_key':'<?php _e($feature_key); ?>',
+	                'label':label,
+	                'value':value,
+	                'index':index,
+	                'type':process_flag,	                
+	            };
+
+	            jQuery.post('<?php echo admin_url( 'admin-ajax.php' ); ?>', data, function(response) {
+	            	var resjson = jQuery.parseJSON(response);
+	                if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
+		                eowbc_add_catat(++index);                    
+	                } else {
+	                	var type = (typeof(resjson["type"]) != undefined ? resjson["type"] : 'error');
+	                	var msg = (typeof(resjson["msg"]) != undefined && resjson["msg"] != "" ? resjson["msg"] : `Failed! Please check Logs page for for more details.`);
+	                    eowbc_toast_common( type, msg );
+	                }  
+	            });                
+	        }   
+	        
+	        $(".button.button-primary.button-hero.action").on('click',function(e){
+	            e.stopPropagation();
+	            e.preventDefault();
+	            if(!$(this).hasClass('disabled')) {
+	                $(".button.button-hero.action:not(.disabled)").toggleClass('disabled');
+
+	                cat_value = jQuery("[name^='cat_']:checkbox:checked").length;
+	                attr_value = jQuery("[name^='attr_']:checkbox:checked").length;
+
+	                if(cat_value>0){
+	                	process_flag = 'cat';
+	                	btn_label = 'Category';
+	                	btn_total = cat_value;
+	                } else if(attr_value>0){
+	                	process_flag = 'attr';
+	                	btn_label = 'Attributes';
+	                	btn_total = attr_value;
+	                }
+
+	                //let cat_value = jQuery("[name^='cat_value_']:not([value=''])");
+			    	//let cat = jQuery("[name^='cat_']:checkbox:checked");
+
+					//let attr_value = jQuery("[name^='attr_value_']:not([value=''])");
+			    	//let attr = jQuery("[name^='attr_']:checkbox:checked");
+
+			    	eowbc_add_catat(0);
+	                //eo_wbc_add_products(119);
+	            }                
+	            return false;
+	        });
+
+	    });
+	</script> <?php 
+} elseif($_step==3) { ?>
+    <script type="text/javascript" >
+	    jQuery(document).ready(function($) {            
+
+	        var eo_wbc_max_products=<?php /*_e(0)*/echo($sample_data_obj->get_model()->get_product_size()); ?>;            
+	        function eo_wbc_add_products(index){
+
+	            if(index>=eo_wbc_max_products){
+	                
+	                window.location.href="<?php echo(admin_url('admin.php?page=eowbc')); ?>";
+	                return false;
+	            }
+
+	            jQuery(".button.button-primary.button-hero.action.disabled").val("Adding "+(index+1)+" of "+eo_wbc_max_products+" products");
+
+	            var data = {
+	                //'action': 'eo_wbc_add_products',
+	                '_wpnonce': '<?php echo wp_create_nonce('sample_data_jewelry');?>',
+	                'action':'eowbc_ajax',
+	                'resolver':'sample_data/<?php _e($feature_key); ?>',
+	                'product_index':index 
+	            };
+
+	            jQuery.post('<?php echo admin_url( 'admin-ajax.php' ); ?>', data, function(response) {
+	            	var resjson = jQuery.parseJSON(response);
+	                if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
+		                eo_wbc_add_products(++index);                    
+	                } else {
+	                	var type = (typeof(resjson["type"]) != undefined ? resjson["type"] : 'error');
+	                	var msg = (typeof(resjson["msg"]) != undefined && resjson["msg"] != "" ? resjson["msg"] : `Failed! Please check Logs page for for more details.`);
+	                    eowbc_toast_common( type, msg );
+	                }  
+	            });                
+	        }   
+	        
+	        $(".button.button-primary.button-hero.action").on('click',function(e){
+	            e.stopPropagation();
+	            e.preventDefault();
+	            if(!$(this).hasClass('disabled')) {
+	                $(".button.button-hero.action:not(.disabled)").toggleClass('disabled');
+	                eo_wbc_add_products(0);
+	                //eo_wbc_add_products(119);
+	            }                
+	            return false;
+	        });
+
+	    });
+	</script>
+<?php } ?>
+<?php //EO_WBC_Head_Banner::get_footer_line(); ?>

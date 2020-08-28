@@ -118,10 +118,16 @@ class Product {
                 // wp_enqueue_script('eo_wbc_add_to_cart_js');
             });
 
-            add_action('woocommerce_after_add_to_cart_button',function(){                
-                // echo "<button href='#' id='eo_wbc_add_to_cart' class='single_add_to_cart_button button alt make_pair btn btn-default'>".get_option('eo_wbc_pair_text',__('Add to pair','woo-bundle-choice'))."</button>";
-                echo "<button href='#' id='eo_wbc_add_to_cart' class='single_add_to_cart_button button alt make_pair btn btn-default'>".wbc()->options->get_option('configuration','label_make_pair',__('Add to pair','woo-bundle-choice'))."</button>";
-            });
+            global $post;            
+            $product = wbc()->wc->eo_wbc_get_product($post->ID);
+               
+            if($product->is_in_stock()){
+
+                add_action('woocommerce_after_add_to_cart_button',function(){                
+                    // echo "<button href='#' id='eo_wbc_add_to_cart' class='single_add_to_cart_button button alt make_pair btn btn-default'>".get_option('eo_wbc_pair_text',__('Add to pair','woo-bundle-choice'))."</button>";
+                    echo "<button href='#' id='eo_wbc_add_to_cart' class='single_add_to_cart_button button alt make_pair btn btn-default'>".wbc()->options->get_option('configuration','label_make_pair',__('Add to pair','woo-bundle-choice'))."</button>";
+                });
+            }
             //Add css to the head
             add_Action('wp_head',function(){
                 ?>
@@ -256,6 +262,11 @@ class Product {
             if(empty($btn_text)){
                 $btn_text = 'Continue';
             }
+            
+            global $post;            
+            $product = wbc()->wc->eo_wbc_get_product($post->ID);
+            if($product->is_in_stock()){
+
             ?>
             <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
             <script type="text/javascript">
@@ -269,7 +280,7 @@ class Product {
                             jQuery('form.cart').submit();
                         }
 
-                        jQuery(".single_add_to_cart_button.button.alt:not(.disabled)").replaceWith('<div class=\"ui buttons\">'+
+                        jQuery(".single_add_to_cart_button.button.alt:not(.disabled):eq(0)").replaceWith('<div class=\"ui buttons\">'+
                                 '<div class=\"ui button\" href=\"#\" id=\"eo_wbc_add_to_cart\"><?php echo $btn_text; ?></div>'+
                                     '<div class=\"ui floating dropdown icon button\" style=\"width: fit-content;min-width: unset; max-width: unset;\">'+
                                         '<i class=\"dropdown icon\"></i>'+
@@ -293,6 +304,7 @@ class Product {
             </script>
             
             <?php 
+            }
             
             global $post;            
             $product = wbc()->wc->eo_wbc_get_product($post->ID);

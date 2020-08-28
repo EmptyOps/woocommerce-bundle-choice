@@ -438,13 +438,14 @@ class EOWBC_Filter_Widget {
 						.eo-wbc-container>.ui.steps .step:not(:first-child):before{
 							    border-left: 1em solid #d2d2d2 !important;
 						}
-						.eo-wbc-container.filters.container.ui.form,.eo-wbc-container.filters.container.ui.form .ui.header{font-family: ".wbc()->options->get_option('appearance_filter','header_font','ZapfHumanist601BT-Roman')." !important; }.eo-wbc-container.filters.container.ui.form .ui.header{font-size:1em;}.ui.labeled.ticked.range.slider .labels{height:0px; top:unset;bottom:-10%;font-size:12px}.ui.labeled.ticked.range.slider .labels .label::after{top:unset;bottom:100%;}.eo_wbc_filter_icon:hover:not(.none_editable){ border-bottom: 0px !important; } .eo-wbc-container.filters.container.ui.form .ui.segments{ border:none !important;}
+						.eo-wbc-container.filters.container.ui.form,.eo-wbc-container.filters.container.ui.form .ui.header{font-family: ".wbc()->options->get_option('appearance_filter','header_font','ZapfHumanist601BT-Roman')." !important; }.eo-wbc-container.filters.container.ui.form .ui.header{font-size:1em;}.ui.labeled.ticked.range.slider .labels{height:0px; top:unset;bottom:-10%;font-size:12px}.ui.labeled.ticked.range.slider .labels .label::after{top:unset;bottom:100%;}
+						.ui.segment:not(.bottom_filter_segment) .eo_wbc_filter_icon:hover:not(.none_editable){ border-bottom: 0px !important; } .eo-wbc-container.filters.container.ui.form .ui.segments{ border:none !important;}
 
-						.eo_wbc_filter_icon_select,.eo_wbc_filter_icon:hover:not(.none_editable){ border-bottom: 0px !important; }
+						.ui.segment:not(.bottom_filter_segment) .eo_wbc_filter_icon_select,.ui.segment:not(.bottom_filter_segment) .eo_wbc_filter_icon:hover:not(.none_editable){ border-bottom: 0px !important; }
 						.eo-wbc-container.filters.container.ui.form .field:last-child{
 							margin-bottom: -1.4em;
 						}
-						.eo_wbc_filter_icon_select div,.eo_wbc_filter_icon:hover:not(.none_editable) div{ visibility: unset !important; 
+						.eo_wbc_filter_icon_select div,.ui.segment:not(.bottom_filter_segment) .eo_wbc_filter_icon:hover:not(.none_editable) div{ visibility: unset !important; 
 						}
 						.eo-wbc-container.filters.container.ui.form .ui.header{
 							font-size: 0.8em;
