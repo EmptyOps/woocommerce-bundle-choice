@@ -250,7 +250,7 @@ test_environment() {
 	echo "PHP_VERSION..."
 	echo "$PHP_VERSION"
 
-	PHP_VERSION=$(php -v | head -n 1 | cut -d " " -f 1)
+	PHP_VERSION=$(php -v | head -n 1 | cut -d " " -f 1 | cut -f1-2 -d".")
 	echo "PHP_VERSION..."
 	echo "$PHP_VERSION"
 
