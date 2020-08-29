@@ -22,7 +22,7 @@
 /*breadcrumb_backcolor_inactive*/
 
 
-	echo "<style>".
+	echo "<style>.eo-wbc-container.container{max-width:100% !important;min-width:100% !important; margin: auto !important;width:100% !important;} ".
 	(
 		wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_inactive','#ffffff')
 		?
@@ -125,7 +125,7 @@
 		}
 		"
 	).(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_1'?".eo-wbc-container.container .ui.steps .step{ padding-top:3rem !important;}.ui.steps .step:after {display: none !important;}":" .eo-wbc-container.container .ui.steps .step {    padding-top: 1em !important;
-    padding-bottom: 1rem !important; }"
+    padding-bottom: 0rem !important; }"
 		
 	).(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_2'?
 		".eo-wbc-container>.ui.steps .step:not(:first-child):before{

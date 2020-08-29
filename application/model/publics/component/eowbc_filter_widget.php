@@ -151,7 +151,14 @@ class EOWBC_Filter_Widget {
 		
 		add_action( 'wp_footer',function(){
 
-			$fg_color=wbc()->session->get('EO_WBC_BG_COLOR','#dbdbdb');
+			$default_color = '#dbdbdb';
+			if(
+				(wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts')=='sc1' and $this->_category==wbc()->options->get_option('configuration','second_slug')) or (wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts')=='fc1' and $this->_category==wbc()->options->get_option('configuration','first_slug')) 
+			){
+				$default_color = '#000';
+			}
+
+			$fg_color=wbc()->session->get('EO_WBC_BG_COLOR',$default_color);			
 
 			$active_color=wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active',$fg_color); //get_option('eo_wbc_active_breadcrumb_color',$fg_color);
 			//wp-head here....
@@ -229,6 +236,10 @@ class EOWBC_Filter_Widget {
 					}				
 					.eo-wbc-container.filters{
 						text-align:left;
+						min-width:100% !important;
+						max-width:100% !important;
+						margin: 0 !important;
+						width:100% !important;
 					}
 					
 					/*Modifications............................*/
@@ -292,7 +303,8 @@ class EOWBC_Filter_Widget {
 					.eo_wbc_filter_icon.ui.image img{
 						width:".wbc()->options->get_option('appearance_filters','icon_size','min-content')/*get_option('eo_wbc_filter_config_icon_size','min-content')*/." !important;
 						margin:auto auto;
-					}".(wbc()->options->get_option('filters_filter_setting','filter_icon_wrap_label',false)?".eo_wbc_filter_icon div{ word-break: break-word !important; word-wrap: break-word !important; }":"")."
+					}".(wbc()->options->get_option('filters_filter_setting','filter_icon_wrap_label',false)?".eo_wbc_filter_icon div{ word-break: break-word !important;max-width: fit-content;margin:auto !important; }":"")."
+
 					#help_modal{
 						max-height: 80vh;
 						margin-left: auto;
@@ -364,10 +376,10 @@ class EOWBC_Filter_Widget {
 						width: 96% !important;
 						border-top: 0px solid grey !important;
 					}
-					.eo-wbc-container .ui.steps .ui.equal.width.grid{
+					/*.eo-wbc-container .ui.steps .ui.equal.width.grid{
 						padding-top:1rem;
 						padding-bottom:1rem;
-					}
+					}*/
 
 					@media only screen and (max-width: 767.98px){
 						.ui.container:not(.fluid){
@@ -1404,9 +1416,11 @@ class EOWBC_Filter_Widget {
 				$select_icon = get_term_meta($term_item->term_id, 'wbc_attachment',true);
 			}
 
+			$truncate_words = wbc()->options->get_option('filters_filter_setting','filter_icon_wrap_filter_label',0,true,true);
+
 			$list[]=array("icon" => $icon ,
 							'select_icon'=>$select_icon,
-							"name" => $term_item->name,
+							"name" => (empty($truncate_words)?$term_item->name:implode(' ',array_slice(explode(' ',$term_item->name),0,$truncate_words))),
 							"slug"=> $term_item->slug,
 							"mark"=> $mark
 						);					
