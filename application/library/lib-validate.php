@@ -12,7 +12,8 @@ if(!class_exists('WBC_Validate')) {
 				self::$_instance->methods = array(
 					'required',
 					'postfix',
-					'validate_if',									
+					'validate_if',
+					'url'									
 				);
 			}
 			return self::$_instance;
@@ -103,7 +104,7 @@ if(!class_exists('WBC_Validate')) {
 			if(!empty($param)){
 
 				foreach ($param as $post_fix) {
-					if((substr($value,-(strlen($post_fix)))==$post_fix)){
+					if((substr($value,-(strlen($post_fix)))==$post_fix) and strlen($post_fix)<strlen($value)){
 						return true;
 					}
 				}
@@ -113,7 +114,7 @@ if(!class_exists('WBC_Validate')) {
 		}
 
 		public function url($label, $value, $param) {
-			return filter_var($value, FILTER_VALIDATE_URL) ? true : "`${label} field does not have valid URL.`";
+			return (empty($value) xor filter_var($value, FILTER_VALIDATE_URL)) ? true : "`${label} field does not have valid URL.`";
 		}
 	}
 }
