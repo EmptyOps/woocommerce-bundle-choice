@@ -134,7 +134,7 @@ box-shadow: none;">
 
 	        function eowbc_add_catat(index){
 
-	            if(process_flag=='cat' && index>=1 /*cat_value*/){
+	            if(process_flag=='cat' && index>=cat_value){
 	            	var msg = 'There is some error while finishing the category creation process, please contact Sphere Plugins Support for a quick fix on this if the problem persist.';
 
 	                //step 2 redirect;
