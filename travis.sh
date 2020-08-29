@@ -246,19 +246,13 @@ move_and_remove_tests() {
 #test environment 
 test_environment() {
 
-	PHP_VERSION=$(php -v | head -n 1 | cut -d " " -f 2)
-	echo "PHP_VERSION..."
-	echo "$PHP_VERSION"
+	# # with minor version like 7.3.20
+	# PHP_VERSION=$(php -v | head -n 1 | cut -d " " -f 2)
+	# echo "PHP_VERSION..."
+	# echo "$PHP_VERSION"
 
+	# without minor version like 7.3
 	PHP_VERSION=$(php -v | head -n 1 | cut -d " " -f 2 | cut -f1-2 -d".")
-	echo "PHP_VERSION..."
-	echo "$PHP_VERSION"
-
-	if [[ "7.3" == *"$PHP_VERSION"* ]]; then
-	  echo "inside if"
-	else 
-	  echo "inside else"
-	fi
 
 	# set here the latest version that we are using for testing in default environment 
 	# if [[ "7.2.32" == *"$PHP_VERSION"* ]]; then
