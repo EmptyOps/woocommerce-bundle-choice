@@ -20,15 +20,19 @@
         border-radius: 0 0 5px 0;
     }
 
-    .ui.steps {
-        box-shadow: 2px 2px 0 #efefef !important; 
+    .eo-wbc-container>.ui.steps {
+        box-shadow: 2px 2px 0 #efefef !important;        
     }
+    
+    .eo-wbc-container>.ui.steps *{
+        margin: auto !important;
+    }    
 
 </style>
 
 <div class="step <?php echo (($step==$order)?'active ':(($step>$order)?'completed ':'disabled')); ?>" style="">            
     <div class="ui equal width grid" style="width: 100%;margin-top: -1em !important;">
-        <div class="ui grid">
+        <div class="ui grid" style="width: fit-content !important;">
             <div class="column"><?php echo $order; ?></div>
             <div class="column" style="text-align: left;">                        
                 <div class="description">Choose a</div>

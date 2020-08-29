@@ -89,8 +89,7 @@ class Category {
             }        
             if($this->is_shop_cat_filter!==true && !$this->is_shortcode_filter){
                 $this->eo_wbc_add_breadcrumb();                         
-            }    
-            
+            }
             $this->eo_wbc_render(); 
         }    
     }

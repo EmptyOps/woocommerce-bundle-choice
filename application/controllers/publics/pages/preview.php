@@ -47,6 +47,13 @@ class Preview {
                 return array( false );
             });
         }
+        $button_backcolor_active = wbc()->options->get_option('appearance_wid_btns','button_backcolor_active','');
+        $button_textcolor = wbc()->options->get_option('appearance_wid_btns','button_textcolor','#ffffff');
+        $eo_wbc_home_btn_border_color = false;  //dropped this field. wbc()->options->get_option('appearance_wid_btns','button_backcolor_active','');
+        $button_radius = wbc()->options->get_option('appearance_wid_btns','button_radius','');
+        $button_hovercolor = wbc()->options->get_option('appearance_wid_btns','button_hovercolor','');
+    
+       
         ob_start();        
         ?>
         <style type="text/css">
@@ -56,6 +63,13 @@ class Preview {
              .woocommerce .widget-area {
                   display: none !important;
              }
+             .ui.button{
+                <?php _e($button_backcolor_active?'background-color:'.$button_backcolor_active.' !important;':''); ?>
+                <?php _e($button_textcolor?'color:'.$button_textcolor.' !important;':''); ?>
+                <?php _e($eo_wbc_home_btn_border_color?'border-color:'.$eo_wbc_home_btn_border_color.' !important;':''); ?>
+                <?php _e($button_radius?'border-radius:'.$button_radius.' !important;':''); ?>
+            }
+
         </style>
         <?php
         echo ob_get_clean();
@@ -284,7 +298,8 @@ class Preview {
                 wbc()->load->model('publics/component/eowbc_breadcrumb');
                 $content= \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_add_breadcrumb(sanitize_text_field(wbc()->sanitize->get('STEP')),sanitize_text_field(wbc()->sanitize->get('BEGIN'))).'<br/>';
                 
-                $content.='<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><div class="ui special cards centered">'.
+                $content.='<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><div class="ui special cards centered" style="margin: auto !important;
+    min-width: fit-content !important;max-width: fit-content !important;">'.
                     '<div class="card">'.
                         '<div class="blurring dimmable image">'.
                           '<div class="ui dimmer inverted transition hidden">'.
