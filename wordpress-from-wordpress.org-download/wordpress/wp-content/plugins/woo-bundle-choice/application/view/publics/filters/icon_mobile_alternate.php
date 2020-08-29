@@ -27,13 +27,13 @@
 		<?php foreach ($list as $filter_icon): ?>
 			<div title="<?php $filter_icon["name"]; ?>"
 				class="eo_wbc_filter_icon <?php echo $non_edit ? 'none_editable':'' ?> 
-					<?php echo $filter_icon['mark'] ? 'eo_wbc_filter_icon_select':''?> ui image" 
+					<?php echo $filter_icon['mark'] ? 'eo_wbc_filter_icon_select':''?> ui image" data-single_select="<?php _e($is_single_select); ?>"
 				data-slug="<?php echo $filter_icon['slug']; ?>" data-label="<?php echo($filter_icon['name']); ?>" 
 				data-filter="<?php echo $term->slug; ?>" style="<?php echo get_option('eo_wbc_alternate_breadcrumb',false)?"border":"border-bottom"?>: 2px solid transparent;"
 				data-siblings="<?php echo implode(',',array_column($list,'slug')); ?>" 
 				data-type="<?php echo $type; ?>" data-reset="reset_single_icon(new Event(''),'[data-slug=\'<?php echo $filter_icon['slug']; ?>\']')">
 				<div>
-					<img src='<?php echo $filter_icon['icon']; ?>'/>
+					<img src='<?php echo $filter_icon['icon']; ?>' data-imgsrc="<?php echo $filter_icon['icon']; ?>" data-toggleimgsrc="<?php echo $filter_icon['select_icon']; ?>"/>
 				</div>
 				<?php if($input=='icon_text'): ?>
 					<div><?php echo($filter_icon['name']); ?></div>

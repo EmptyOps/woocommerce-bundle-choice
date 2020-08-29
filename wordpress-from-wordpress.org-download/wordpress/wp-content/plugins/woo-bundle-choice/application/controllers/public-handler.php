@@ -30,15 +30,41 @@ class Public_Handler {
 		
 		/*wbc()->options->update_option('configuration','config_category',1);
 		wbc()->options->update_option('configuration','config_map',1);*/
+		add_action('template_redirect',function(){
 
-        if(
+			$bonus_features = array_filter(unserialize(wbc()->options->get_option('setting_status_setting_status_setting','bonus_features',serialize(array()))));
+			if(!empty($bonus_features['filters_shop_cat']) and ( is_shop() || is_product_category()) and empty(wbc()->sanitize->get('EO_WBC'))) {
+
+
+			    \eo\wbc\controllers\publics\pages\Shop_Category_Filter::instance()->init();
+			}
+
+			if(is_product() and !empty(wbc()->sanitize->get('eowbc_askq'))) {
+
+			    \eo\wbc\controllers\publics\pages\Product_Question::instance()->init();
+			}
+			
+			if(is_product() and wbc()->options->get_option('tiny_features','tiny_features_hide_sku_category_product_page',false)) {
+				
+				remove_action( 'woocommerce_single_product_summary',
+'woocommerce_template_single_meta', 40 );
+				add_filter( 'wc_product_sku_enabled', '__return_false' );
+			}
+		});
+
+		//	Strart frontend seervices
+		\eo\wbc\controllers\publics\Service::instance()->run();
+
+		
+		$features = array_filter(unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array()))));
+		
+        if(	!empty(array_intersect(array_values($features),array_keys(wbc()->config->get_builders())))
+        		and        	
         	wbc()->options->get_option('configuration','config_category',0) == 1
              	and
             wbc()->options->get_option('configuration','config_map',0) == 1
         ){
-        	//	Strart frontend seervices
-
-        	\eo\wbc\controllers\publics\Service::instance()->run();
+        	
 
         	add_action('template_redirect',function(){
         		

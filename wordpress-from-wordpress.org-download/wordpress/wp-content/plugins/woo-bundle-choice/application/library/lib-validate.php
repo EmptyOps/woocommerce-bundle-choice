@@ -88,5 +88,9 @@ if(!class_exists('WBC_Validate')) {
 			}
 			return true;
 		}
+
+		public function url($label, $value, $param) {
+			return filter_var($value, FILTER_VALIDATE_URL) ? true : "`${label} field does not have valid URL.`";
+		}
 	}
 }

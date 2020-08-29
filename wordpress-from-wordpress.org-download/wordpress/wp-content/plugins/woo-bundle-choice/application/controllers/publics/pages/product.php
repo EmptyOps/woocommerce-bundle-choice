@@ -27,7 +27,7 @@ class Product {
             $this->eo_wbc_add_breadcrumb();    //Add Breadcrumb
                         
         // } elseif (get_option('eo_wbc_pair_status',false)=='1') {
-        } elseif (wbc()->options->get_option('configuration','pair_maker_status',false)=='1') {
+        } elseif (wbc()->options->get_option('configuration','enable_make_pair',false)=='1') {
             $this->eo_wbc_make_pair();
         }  
         do_action('wbc_pre_product_page');        
@@ -37,7 +37,9 @@ class Product {
     }    
 
     public function specification_view() {
-        if(wbc()->options->get_option('tiny_features','specification_view_status',false) and wbc()->options->get_option('tiny_features','specification_view_default_status',false)){
+        $bonus_features = array_filter(unserialize(wbc()->options->get_option('setting_status_setting_status_setting','bonus_features',serialize(array()))));
+
+        if( ( !isset($_GET['EO_WBC']) and !empty($bonus_features['spec_view_item_page']) ) /*(!isset($_GET['EO_WBC']) and wbc()->options->get_option('tiny_features','specification_view_status',false) and wbc()->options->get_option('tiny_features','specification_view_default_status',false))*/ or ( isset($_GET['EO_WBC']) and wbc()->options->get_option('appearance_product_page','show_spec_view_in_pair_builder','1') ) ){
 
             add_action('woocommerce_after_single_product_summary',function(){
                 wbc()->load->template('publics/features/specification_view');            
@@ -47,7 +49,13 @@ class Product {
     }
 
     public function product_options_view() {
-        \eo\wbc\controllers\publics\Options::instance()->run();        
+
+        $bonus_features = array_filter(unserialize(wbc()->options->get_option('setting_status_setting_status_setting','bonus_features',serialize(array()))));
+
+        if( ( !isset($_GET['EO_WBC']) and !empty($bonus_features['opts_uis_item_page']) )/*(!isset($_GET['EO_WBC']) and wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_status',false))*/ or ( isset($_GET['EO_WBC']) and wbc()->options->get_option('appearance_product_page','show_options_ui_in_pair_builder','1') ) ){
+
+            \eo\wbc\controllers\publics\Options::instance()->run();        
+        }
     }
     
     //It's just temporary fix so we need strong model to handle this changes.
@@ -183,6 +191,24 @@ class Product {
     public function eo_wbc_render()
     {   
         $redirect_url = $this->eo_wbc_product_route();
+        wbc()->theme->load('css','product');
+        wbc()->theme->load('js','product');
+        /*Hide sidebar and make content area full width.*/
+        add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
+            return array( false );
+        });
+        ob_start();        
+        ?>
+        <style type="text/css">
+            .woocommerce .content-area ,#content,#primary,#main,.content,.primary,.main{
+                  width: 100% !important;
+             }
+             .woocommerce .widget-area {
+                  display: none !important;
+             }
+        </style>
+        <?php
+        echo ob_get_clean();
         
         //Registering Scripts : JavaScript
         add_action( 'wp_enqueue_scripts',function() use(&$redirect_url){
@@ -210,7 +236,7 @@ class Product {
         });
           
         //Adding own ADD_TO_CART_BUTTON
-        add_action('wp_footer',function(){   
+        add_action('wp_footer',function(){               
             echo "<style>.double-gutter .tmb{ width: 50%;display: inline-flex; }</style>";         
             $category = $this->eo_wbc_get_category();
             $btn_text = '';
@@ -227,27 +253,75 @@ class Product {
             if(empty($btn_text)){
                 $btn_text = 'Continue';
             }
-        ?>
-        <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
-        <script type="text/javascript">
-            jQuery(".single_add_to_cart_button.button.alt").ready(function(){
-                jQuery('form.cart').prepend("<input type='hidden' name='eo_wbc_target' value='<?php echo $this->eo_wbc_get_category(); ?>'/><input type='hidden' name='eo_wbc_product_id' value='<?php global $post; echo $post->ID; ?>'/>");
-                jQuery(".single_add_to_cart_button.button.alt:not(.disabled)").replaceWith(
-                     "<button href='#' id='eo_wbc_add_to_cart' class='single_add_to_cart_button button alt'>"
-                     +"<?php echo $btn_text; ?>"
-                     +"</button>"
-                    );
-                });
-        </script>
-       <?php    
+            ?>
+            <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
+            <script type="text/javascript">
+                jQuery(".single_add_to_cart_button.button.alt").ready(function(){
+                    jQuery('form.cart').prepend("<input type='hidden' name='eo_wbc_target' value='<?php echo $this->eo_wbc_get_category(); ?>'/><input type='hidden' name='eo_wbc_product_id' value='<?php global $post; echo $post->ID; ?>'/>");
+                    
+                    <?php if(!empty(wbc()->options->get_option('appearance_product_page','product_page_add_to_basket',''))) :?>
+                        
+                        window.wbc_atb_submin_form = function(){
+                            jQuery('form.cart').attr('action',document.location.href);
+                            jQuery('form.cart').submit();
+                        }
+
+                        jQuery(".single_add_to_cart_button.button.alt:not(.disabled)").replaceWith('<div class=\"ui buttons\">'+
+                                '<div class=\"ui button\" href=\"#\" id=\"eo_wbc_add_to_cart\"><?php echo $btn_text; ?></div>'+
+                                    '<div class=\"ui floating dropdown icon button\" style=\"width: fit-content;\">'+
+                                        '<i class=\"dropdown icon\"></i>'+
+                                        '<div class=\"menu\">'+
+                                            '<div class=\"item\" onClick=\"window.wbc_atb_submin_form();\"><?php echo wbc()->options->get_option('appearance_product_page','product_page_add_to_basket','');?></div>'+                                    
+                                        '</div>'+
+                                    '</div>'+
+                                '</div>'+
+                            '</div>');
+                        jQuery(".dropdown").dropdown();
+
+                    <?php else: ?>
+
+                        jQuery(".single_add_to_cart_button.button.alt:not(.disabled):eq(0)").replaceWith(
+                         "<button href='#' id='eo_wbc_add_to_cart' class='single_add_to_cart_button button alt'>"
+                         +"<?php echo $btn_text; ?>"
+                         +"</button>"
+                        );
+                    <?php endif; ?>
+                    });
+            </script>
+            
+            <?php 
+            
+            if(
+                (wbc()->options->get_option('appearance_product_page','product_page_hide_first_variation_form',false) and $category == wbc()->options->get_option('configuration','first_slug')) or wbc()->options->get_option('appearance_product_page','product_page_hide_second_variation_form',false) and $category == wbc()->options->get_option('configuration','second_slug')
+            ): ?>
+            <style>
+                .variations_form table.variations{
+                    display:none !important;
+                }
+            </style>
+            <?php endif ?>
+
+            
+           <?php    
        });
     }
     
-    public function eo_wbc_product_route(){
+    public function eo_wbc_product_route($return_link = false){
 
         global $post;
         $url=null;        
         $category=$this->eo_wbc_get_category();    
+        $remove_index = wbc()->options->get_option('setting_status_advanced_config','remove_index_php');
+        if(!empty($remove_index)){
+            $remove_index = unserialize($remove_index);
+            if(!empty($remove_index['remove_index_php'])){
+                $remove_index = true;
+            } else {
+                $remove_index = false;
+            }
+        } else {
+            $remove_index = false;
+        }
 
         if(wbc()->sanitize->get('STEP')==1) {   
 
@@ -259,17 +333,20 @@ class Product {
                 if($category==wbc()->options->get_option('configuration','first_slug')) {
 
                     $category_link=$this->eo_wbc_category_link();
-                    $url=get_bloginfo('url').'/index.php/product-category/'.$category_link.
+
+                    $url=get_bloginfo('url').($remove_index?'':'/index.php').'/product-category/'.$category_link.
                     wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>2,'FIRST'=>$post->ID,'SECOND'=>wbc()->sanitize->get('SECOND'),'CART'=>wbc()->sanitize->get('CART'),'ATT_LINK'=>implode(' ',$this->att_link),'CAT_LINK'=>substr($category_link,0,strpos($category_link,'/'))));
 
                 // } elseif($category==get_option('eo_wbc_second_slug')) {
                 } elseif($category==wbc()->options->get_option('configuration','second_slug')) {
 
                     $category_link=$this->eo_wbc_category_link();
-                    $url=get_bloginfo('url').'/index.php/product-category/'.$category_link
+                    $url=get_bloginfo('url').($remove_index?'':'/index.php').'/product-category/'.$category_link
                     .wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>2,'FIRST'=>wbc()->sanitize->get('FIRST'),'SECOND'=>$post->ID,'CART'=>wbc()->sanitize->get('CART'),'ATT_LINK'=>implode(' ',$this->att_link),'CAT_LINK'=>substr($category_link,0,strpos($category_link,'/'))));
                 } 
-                
+                if($return_link) {
+                    return $url;
+                }
                 return header("Location: {$url}");
                 wp_die();
                 //wp_safe_redirect($url ,301 );               

@@ -39,6 +39,23 @@ class Eowbc_Configuration {
 	    return $form_definition;
 	}
 
+	private function set_icons_for_breadcrumb_template($icon_paths) {
+
+		$icon_keys = array('first_icon','second_icon','preview_icon');
+
+		for ($i=0; $i < sizeof($icon_paths); $i++) { 
+
+			$_img_url= constant('EOWBC_ASSET_URL').'icon/breadcrumb/'.$icon_paths[$i];    
+			
+			$thumb_id = wbc()->wp->add_image_gallary($_img_url);
+
+	    	wbc()->options->update_option( 'configuration', $icon_keys[$i], absint( $thumb_id ) );
+	    	
+	    	//this is tricky, since the form is also updated on same save we need to override it's icon fields and set this thumb_ids
+	    	$_POST[$icon_keys[$i]] = $thumb_id; 
+		}
+
+	}	
 
 	public function save( $form_definition ) {
 		$res = array( "type"=>"success", "msg"=>"Updated successfully!" );		
@@ -57,15 +74,25 @@ class Eowbc_Configuration {
 				wbc()->options->remove_option('appearance_breadcrumb','breadcrumb_backcolor_active');	//delete and allow our default theme adaption setting to catch up	
 				wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_inactive','#ffffff');			
 
+				//set icon for this template 
+				$this->set_icons_for_breadcrumb_template( array('default/wbc_breadcrumb_default_step_1.png','default/wbc_breadcrumb_default_step_2.png','default/wbc_breadcrumb_default_step_3.png') );
+
 			} elseif($_POST['config_alternate_breadcrumb'] =='template_1'){
 				wbc()->options->update_option('appearance_filter','header_font','Avenir');
 				wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_active','#dde5ed');
 				wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_inactive','#ffffff');			
 
+				//set icon for this template 
+				$this->set_icons_for_breadcrumb_template( array('template_1/wbc_breadcrumb_template_1_step_1.png','template_1/wbc_breadcrumb_template_1_step_2.png','template_1/wbc_breadcrumb_template_1_step_3.png') );
+
 			} elseif ($_POST['config_alternate_breadcrumb'] =='template_2') {
 				wbc()->options->update_option('appearance_filter','header_font','ZapfHumanist601BT-Roman');
 				wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_active','#f7f7f7');	
-				wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_inactive','#ffffff');			
+				wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_inactive','#ffffff');
+
+				//set icon for this template 
+				$this->set_icons_for_breadcrumb_template( array('template_2/wbc_breadcrumb_template_2_step_1.png','template_2/wbc_breadcrumb_template_2_step_2.png','template_2/wbc_breadcrumb_template_2_step_3.png') );
+
 			} elseif ($_POST['config_alternate_breadcrumb'] =='template_3') {
 				wbc()->options->remove_option('appearance_filter','header_font');	//delete and allow our default theme adaption setting to catch up
 				wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_active','#9bb9f4');	

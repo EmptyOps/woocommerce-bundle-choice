@@ -70,9 +70,21 @@
 					if(_labels != undefined && _labels != false){
 
 						_labels=_labels.split(',');
-						_params.interpretLabel=function(value){ 							
+						_params.interpretLabel=function(value){ 						
+							_labels = $(e).attr('data-labels');
+							_labels=_labels.split(',');
+							/*console.log(value);
+							console.log(_labels);*/
 							if(_labels!=undefined){
-								return _labels[value];
+								let _label_value = _labels[value];
+								if(_label_value.length><?php _e((int)wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_slider_max_lblsize',6)) ?>){
+									_label_value = _label_value.split(' ');
+									_label_value = _label_value.map(function(_label_value_ele){
+										return _label_value_ele[0];
+									});
+									_label_value = _label_value.join('');
+								}
+								return '<span title="'+_labels[value]+'" alt="'+_labels[value]+'">'+_label_value+'</span>';								
 							} else {
 								return value;
 							}
@@ -106,8 +118,18 @@
 							//PASS
 						} else {
 							_sep = $(e).attr('data-sep');
-				        	$("input[name='text_min_"+$(e).attr('data-slug')+"']").val(_sep=='.'?Number(min).toFixed(2):(Number(min).toFixed(2)).toString().replace('.',','));
-				        	$("input[name='text_max_"+$(e).attr('data-slug')+"']").val(_sep=='.'?Number(max).toFixed(2):(Number(max).toFixed(2)).toString().replace('.',','));
+							_prefix = $(this).data('prefix');
+							if(typeof(_prefix) == typeof(undefined) || _prefix=='undefined'){
+								_prefix = '';
+							}
+
+							_postfix = $(this).data('postfix');
+							if(typeof(_postfix) == typeof(undefined) || _postfix=='undefined'){
+								_postfix = '';
+							}
+
+				        	$("input[name='text_min_"+$(e).attr('data-slug')+"']").val( _prefix+(_sep=='.'?Number(min).toFixed(2):(Number(min).toFixed(2)).toString().replace('.',','))+_postfix );
+				        	$("input[name='text_max_"+$(e).attr('data-slug')+"']").val( _prefix+(_sep=='.'?Number(max).toFixed(2):(Number(max).toFixed(2)).toString().replace('.',','))+_postfix);
 				        }					      	
 					}
 
@@ -166,7 +188,9 @@
 						    	}
 					    	}
 					    	$('[name="paged"]').val('1');
+					    	<?php if(empty(wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
 					    	jQuery.fn.eo_wbc_filter_change();
+					    	<?php endif; ?>
 					    }
 					    
 					    $(this).data('prev_val_min',min);						    
@@ -261,7 +285,9 @@
 		    		}
 		    	}
 		    	$('[name="paged"]').val('1');
+		    	<?php if(empty(wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
 		    	jQuery.fn.eo_wbc_filter_change();
+		    	<?php endif; ?>
 			}});				
 			/*----------------------------------------------------*/
 			/*----------------------------------------------------*/
