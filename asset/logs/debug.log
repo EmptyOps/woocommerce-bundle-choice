@@ -156,3 +156,5 @@ Failed to get an image, Details:{"errors":{"http_request_failed":["A valid URL w
 "Undefined index: id"
 [Aug 29 2020 11:52:53] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-validate.php at line number 61
 "Undefined index: label"
+[Aug 29 2020 12:06:08] Notice in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/library/lib-validate.php at line number 61
+"Undefined index: label"
