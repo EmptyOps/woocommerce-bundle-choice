@@ -352,7 +352,21 @@ class EOWBC_Filter_Widget {
 							jQuery.fn.wbc_flip_toggle_image(this);
 						});
 					})
-				</script>				
+				</script>
+				<style type="text/css">
+					<?php if(wbc()->options->get_option('appearance_filters','appearance_filters_table_head_border')){ ?>
+						#products_table table th {
+							border: none;
+						}
+					<?php } ?>
+
+					<?php if(wbc()->options->get_option('appearance_filters','appearance_filters_header_size',false,true,true)){ ?>
+						.ui.header:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6) {
+							font-size: <?php _e(wbc()->options->get_option('appearance_filters','appearance_filters_header_size',false,true,true)); ?> !important;
+						}
+					<?php } ?>
+
+				</style>
 				<?php
 			if(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')){
 				ob_start();
