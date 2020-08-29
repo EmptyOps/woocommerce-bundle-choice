@@ -46,10 +46,11 @@ box-shadow: none;">
 	              <?php if( /*!empty(wbc()->sanitize->post('step')) && wbc()->sanitize->post('step')*/$_step==3):?>
 	                <th>
 	                  <h3>Sample Products</h3>
+	                  <p>Sample products will be added for <?php echo $feature_title;?>.</p>
 	                </th>
 	              </tr>
 	              <tr>
-	                <td> Sample products will be added for <?php echo $feature_title;?>.</td>
+	                <td>Total <?php echo $sample_data_obj->get_model()->get_product_size();?> products will be created.</td>
 	              <!-- Attributes Installation -->
 	              <?php elseif($_step==2):?>
 	                <th>
@@ -57,10 +58,13 @@ box-shadow: none;">
 	                </th>
 	              </tr>
 	              <tr>
+	                <td>Total <?php echo $sample_data_obj->get_model()->get_attributes_size();?> attributes will be created.</td>
+	              </tr>
+	              <tr>
 	                <td>                    
 	                  <?php foreach ($_atttriutes as $index=>$_attr): ?>             <tr>                                            
 	                    <span>                                                     
-	                    <input type="checkbox" name="attr_<?php echo $index; ?>" id="<?php _e($_attr['slug']); ?>" value="<?php _e($_attr['slug']) ?>" checked="checked"></span>
+	                    <input type="checkbox" name="attr_<?php echo $index; ?>" id="<?php _e($_attr['slug']); ?>" value="<?php _e($_attr['slug']) ?>" checked="checked" disabled="disabled"></span>
 	                    <span><input type="text" name="attr_value_<?php echo $index; ?>" placeholder="<?php _e($_attr['label']) ?>" value="<?php _e($_attr['label']); ?>"></span></tr>
 	                    <!--<label for="<?php _e($_attr['slug']); ?>"><?php _e($_attr['label']); ?></label>-->
 	                    <br/><br/>                        
@@ -73,9 +77,12 @@ box-shadow: none;">
 	                </th>
 	              </tr>
 	              <tr>
+	                <td>Total <?php echo $sample_data_obj->get_model()->get_categories_size();?> categories will be created. (Note: Since there are sub categories to above main categories the actual count is higher.<?php echo ($feature_key == 'pair_maker' ? ' Later you can simply remove these categories but right now its neccessary to accurately present the sample data demo.' : '');?>)</td>
+	              </tr>
+	              <tr>
 	                <td>                    
 	                  <?php foreach ($_category as $index=>$_cat): ?>  <tr>                                            
-	                    <span><input type="checkbox" name="cat_<?php echo $index; ?>" id="<?php _e($_cat['name']); ?>" value="<?php _e($_cat['slug']) ?>" checked="checked"></span>
+	                    <span><input type="checkbox" name="cat_<?php echo $index; ?>" id="<?php _e($_cat['name']); ?>" value="<?php _e($_cat['slug']) ?>" checked="checked" disabled="disabled"></span>
 	                    <!--<label for="<?php //_e($_cat['name']); ?>"><?php //_e($_cat['name']); ?></label> -->    
 	                    <span><input type="text" name="cat_value_<?php echo $index; ?>" placeholder="<?php _e($_cat['name']) ?>" value="<?php _e($_cat['name']); ?>"></span></tr>
 	                    <br/></br>
@@ -122,17 +129,21 @@ box-shadow: none;">
 	    	let btn_label = '';
 	    	let btn_total = 0;
 
+	    	let main_categories_size = 0;
+
+
 	        function eowbc_add_catat(index){
 
-	            if(process_flag=='cat' && index>=cat_value){
+	            if(process_flag=='cat' && index>=1 /*cat_value*/){
+	            	var msg = 'There is some error while finishing the category creation process, please contact Sphere Plugins Support for a quick fix on this if the problem persist.';
+
 	                //step 2 redirect;
-	                //window.location.href="<?php echo($next_url); ?>";
 	                var data = {	                
 		                '_wpnonce': '<?php echo wp_create_nonce('sample_data_jewelry');?>',
 		                'action':'eowbc_ajax',
 		                'resolver':'sample_data/catattr',
 		                'feature_key':'<?php _e($feature_key); ?>',
-		                'type':'save_map',
+		                'type':'after_cat_created',
 		            };
 	            	jQuery.ajax({
 			            url:eowbc_object.admin_url,
@@ -147,23 +158,25 @@ box-shadow: none;">
 			            },
 			            error:function(xhr,status,error){
 			                /*console.log(xhr);*/			                
-			                window.location.href="<?php echo($next_url); ?>";
+			                eowbc_toast_common( 'error', msg );
 	                		return false;
 			            },
 			            complete:function(xhr,status){
-			           		window.location.href="<?php echo($next_url); ?>";
+			           		//window.location.href="<?php echo($next_url); ?>";
 	                		return false;     
 			            }
 			        });	
 	                return false;
 	            } else if(process_flag=='attr' && index>=attr_value) {
+	            	var msg = 'There is some error while finishing the attribute creation process, please contact Sphere Plugins Support for a quick fix on this if the problem persist.';
+
 	            	//step 3 redirect;
 	            	var data = {	                
 		                '_wpnonce': '<?php echo wp_create_nonce('sample_data_jewelry');?>',
 		                'action':'eowbc_ajax',
 		                'resolver':'sample_data/catattr',
 		                'feature_key':'<?php _e($feature_key); ?>',
-		                'type':'save_filter',
+		                'type':'after_attr_created',
 		            };
 	            	jQuery.ajax({
 			            url:eowbc_object.admin_url,
@@ -178,11 +191,11 @@ box-shadow: none;">
 			            },
 			            error:function(xhr,status,error){
 			                /*console.log(xhr);*/			                
-			                window.location.href="<?php echo($next_url); ?>";
-	                		return false;
+			                eowbc_toast_common( 'error', msg );
+			                return false;
 			            },
 			            complete:function(xhr,status){
-			           		window.location.href="<?php echo($next_url); ?>";
+			           		//window.location.href="<?php echo($next_url); ?>";
 	                		return false;     
 			            }
 			        });	
@@ -201,8 +214,10 @@ box-shadow: none;">
 	            if(field_name.length>0 && field_label.length>0 && jQuery(field_label[0]).val().trim()!=''){
 	            	value = jQuery(field_name[0]).val();
 	            	label = jQuery(field_label[0]).val();
-	            } else {
-	            	eowbc_add_catat(index+1);
+	            } 
+	            else {
+	            	// do not skip. If the name is not provided default will be used since we are going to disable checkboxes which means we will add all the cats and attributes presented.
+	            	//eowbc_add_catat(index+1);
 	            }
 
 	            var data = {	                
@@ -215,6 +230,13 @@ box-shadow: none;">
 	                'index':index,
 	                'type':process_flag,	                
 	            };
+
+	            if( process_flag == 'cat' ) {
+	            	// pass all main categories so that name can be read, since there are child also involved its hard to maintain index otherwise
+	            	for (var mci = 0; mci < main_categories_size; mci++) {
+	            		data['cat_value_'+mci] = jQuery("[name='cat_value_"+mci+"']").val();
+	            	}
+	            }
 
 	            jQuery.post('<?php echo admin_url( 'admin-ajax.php' ); ?>', data, function(response) {
 	            	var resjson = jQuery.parseJSON(response);
@@ -239,11 +261,14 @@ box-shadow: none;">
 
 	                if(cat_value>0){
 	                	process_flag = 'cat';
-	                	btn_label = 'Category';
+	                	btn_label = 'Categories';
+	                	main_categories_size = <?php echo sizeof($_category);?>;
+	                	cat_value = <?php echo $sample_data_obj->get_model()->get_categories_size();?>;
 	                	btn_total = cat_value;
 	                } else if(attr_value>0){
 	                	process_flag = 'attr';
 	                	btn_label = 'Attributes';
+	                	attr_value = <?php echo $sample_data_obj->get_model()->get_attributes_size();?>;
 	                	btn_total = attr_value;
 	                }
 

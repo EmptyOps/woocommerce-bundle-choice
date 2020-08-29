@@ -44,7 +44,6 @@ class Eowbc_Sample_Data {
 		return $form_definition;
 	}
 
-
 	public function save( $form_definition ) {
 		
 		$res = array();
@@ -52,6 +51,49 @@ class Eowbc_Sample_Data {
 	    $res["msg"] = "";
 	    
         return $res;
+	}
+
+	public function after_cat_created($feature_key) {
+		
+		$category = $this->data_template->get_categories();
+		$_maps = $this->data_template->get_maps();
+
+		if(!empty($category)){
+			      	
+	        //Send for creation and update returned array.
+	        $catat_category=$this->create_category($category);            
+	        // update_option('eo_wbc_cats',serialize($catat_category)); 
+	        wbc()->options->set('eo_wbc_cats',serialize($catat_category)); 
+	      
+	      	if(!empty($_maps)){
+	        	$this->add_maps($_maps);
+	      	}
+
+	        $this->data_template->set_configs_after_categories($catat_category);
+	    }
+	}
+
+	public function after_attr_created($feature_key) {
+		
+		$attributes = $this->data_template->get_attributes();
+
+		if(!empty($attributes)){
+	    
+	        //Send for creation and update returned array.
+	        $catat_attribute = unserialize( wbc()->options->get($feature_key.'_created_attribute'), serialize(array()) ); 	//$this->create_attribute($attributes);            
+	        
+	        // update_option('eo_wbc_attr',serialize($catat_attribute));
+	        wbc()->options->set('eo_wbc_attr',serialize($catat_attribute));
+	        $this->add_filters();
+	        if(!empty(wbc()->sanitize->get('type')) and wbc()->sanitize->get('type')=='filters_automation'){
+	        	$this->add_filters_custom_filter();	
+	        }			        
+
+	        // update_option('eo_wbc_filter_enable','1');    
+	        $this->data_template->set_configs_after_attributes();
+
+	        wbc()->options->delete($feature_key.'_created_attribute');
+	    } 
 	}
 
 	public function process_post(&$_step, $_category, $_atttriutes, $_maps, $feature_key) {
@@ -64,25 +106,27 @@ class Eowbc_Sample_Data {
 		if(!empty($_POST)) {			
 			
 			if(isset($_POST['_wpnonce']) && wp_verify_nonce($_POST['_wpnonce'],'eo_wbc_auto_jewel')) {
-			  $index=0;
-			  $category=array();
-			  while(!empty($_POST['cat_value_'.$index])){
-			    if(!empty($_POST['cat_'.$index])){
-			      $_category[$index]['name']=$_POST['cat_value_'.$index];
-			      $category[]=$_category[$index];
-			    }
-			    $index++;
-			  }      
+			  
+			  // commented since moved it to batch based processing
+			  // $index=0;
+			  // $category=array();
+			  // while(!empty($_POST['cat_value_'.$index])){
+			  //   if(!empty($_POST['cat_'.$index])){
+			  //     $_category[$index]['name']=$_POST['cat_value_'.$index];
+			  //     $category[]=$_category[$index];
+			  //   }
+			  //   $index++;
+			  // }      
 
-			  $index=0;
-			  $attributes=array();
-			  while(!empty($_POST['attr_value_'.$index])){
-			    if(!empty($_POST['attr_'.$index])){
-			      $_atttriutes[$index]['name']=$_POST['attr_value_'.$index];
-			      $attributes[]=$_atttriutes[$index]; 
-			    }
-			    $index++;
-			  }
+			  // $index=0;
+			  // $attributes=array();
+			  // while(!empty($_POST['attr_value_'.$index])){
+			  //   if(!empty($_POST['attr_'.$index])){
+			  //     $_atttriutes[$index]['name']=$_POST['attr_value_'.$index];
+			  //     $attributes[]=$_atttriutes[$index]; 
+			  //   }
+			  //   $index++;
+			  // }
 
 			  ////////////////////////////////////////////////////////////////////////
 			  //require_once ('library/EO_WBC_CatAt.php');
@@ -91,34 +135,35 @@ class Eowbc_Sample_Data {
 			  // $catat = $this;
 			  $catat = $this->data_template;
 
-			      if(!empty($category)){
+			  		// commented since moved it to batch based processing
+			      // if(!empty($category)){
 			      	
-			        //Send for creation and update returned array.
-			        $catat_category=$this->create_category($category);            
-			        // update_option('eo_wbc_cats',serialize($catat_category)); 
-			        wbc()->options->set('eo_wbc_cats',serialize($catat_category)); 
+			      //   //Send for creation and update returned array.
+			      //   $catat_category=$this->create_category($category);            
+			      //   // update_option('eo_wbc_cats',serialize($catat_category)); 
+			      //   wbc()->options->set('eo_wbc_cats',serialize($catat_category)); 
 			      
-			      	if(!empty($_maps)){
-			        	$this->add_maps($_maps);
-			      	}
+			      // 	if(!empty($_maps)){
+			      //   	$this->add_maps($_maps);
+			      // 	}
 
-			        $this->data_template->set_configs_after_categories($catat_category);
-			      }
+			      //   $this->data_template->set_configs_after_categories($catat_category);
+			      // }
 
-			      if(!empty($attributes)){
+			      // if(!empty($attributes)){
 			    
-			        //Send for creation and update returned array.
-			        $catat_attribute=$this->create_attribute($attributes);            
-			        // update_option('eo_wbc_attr',serialize($catat_attribute));
-			        wbc()->options->set('eo_wbc_attr',serialize($catat_attribute));
-			        $this->add_filters();
-			        if(!empty(wbc()->sanitize->get('type')) and wbc()->sanitize->get('type')=='filters_automation'){
-			        	$this->add_filters_custom_filter();	
-			        }			        
+			      //   //Send for creation and update returned array.
+			      //   $catat_attribute=$this->create_attribute($attributes);            
+			      //   // update_option('eo_wbc_attr',serialize($catat_attribute));
+			      //   wbc()->options->set('eo_wbc_attr',serialize($catat_attribute));
+			      //   $this->add_filters();
+			      //   if(!empty(wbc()->sanitize->get('type')) and wbc()->sanitize->get('type')=='filters_automation'){
+			      //   	$this->add_filters_custom_filter();	
+			      //   }			        
 
-			        // update_option('eo_wbc_filter_enable','1');    
-			        $this->data_template->set_configs_after_attributes();
-			      } 
+			      //   // update_option('eo_wbc_filter_enable','1');    
+			      //   $this->data_template->set_configs_after_attributes();
+			      // } 
 			  
 			  ///////////////////////////////////////////////////////////////////////
 			  
@@ -187,7 +232,7 @@ class Eowbc_Sample_Data {
 	public function create_category($args) {
 		if(!empty($args) AND is_array($args)) {
 			foreach($args as $index=>$cat) {					
-				//to be removed
+				//to be removed. No more can remove this check as since now due to batch processing we are retrieving all ids later on.
 			   	if(term_exists( $cat['slug'] , 'product_cat' )){
 			   		$args[$index]['id']=get_term_by('slug',$cat['slug'] , 'product_cat')->term_id;
 			   	} else {
@@ -981,6 +1026,37 @@ class Eowbc_Sample_Data {
 	function get_product_size() {
 
 		return count($this->data_template->get_products());
+	}
+
+	/**
+	* @return number of attributes in data template
+	*/
+	function get_attributes_size() {
+
+		return count($this->data_template->get_attributes());
+	}
+
+	/**
+	* @return number of categories in data template
+	*/
+	function get_categories_size() {
+
+		$template = $this->data_template->get_categories();
+
+		$index = 0;
+		foreach ($template as $catind => $cat) {
+			
+			$index++;
+
+			if( isset($cat['child']) ) {
+				foreach ($cat['child'] as $childcatind => $childcat) {
+
+					$index++;
+				}
+			}
+		}
+
+		return $index;
 	}
 
 }

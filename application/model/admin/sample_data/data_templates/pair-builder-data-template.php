@@ -21,8 +21,14 @@ class Pair_Builder_Data_Template extends Sample_Data_Template {
 		return self::$_instance;
 	}
 
+    public $first_icon = '';
+    public $second_icon = '';
+    public $preview_icon = '';
+
 	private function __construct() {
-		
+        $this->first_icon = 'first_icon.png';
+        $this->second_icon = 'second_icon.png';
+		$this->preview_icon = 'preview_icon.png';
 	}
 
     public function set_configs_after_categories($catat_category) {
@@ -36,9 +42,9 @@ class Pair_Builder_Data_Template extends Sample_Data_Template {
         // update_option('eo_wbc_first_slug','eo_diamond_shape_cat');//FIRST : SLUG
         wbc()->options->update_option('configuration','first_slug',$catat_category[0]['slug']/*'eo_diamond_shape_cat'*/);
         // update_option('eo_wbc_first_url','/product-category/eo_diamond_shape_cat/');//FIRST : NAME
-        wbc()->options->update_option('configuration','first_url','/product-category/eo_diamond_shape_cat/');
+        wbc()->options->update_option('configuration','first_url','/product-category/'.$catat_category[0]['slug'].'/');
 
-        $first_icon = $sample_data_instance->add_image_gallary($_img_url.'first_icon.png');
+        $first_icon = $sample_data_instance->add_image_gallary($_img_url.$this->first_icon);
 
         if(!empty($first_icon)){
             wbc()->options->update_option('configuration','first_icon',$first_icon);
@@ -50,17 +56,17 @@ class Pair_Builder_Data_Template extends Sample_Data_Template {
         // update_option('eo_wbc_second_slug','eo_setting_shape_cat');//SECOND : SLUG
         wbc()->options->update_option('configuration','second_slug',$catat_category[1]['slug']/*'eo_setting_shape_cat'*/);
         // update_option('eo_wbc_second_url','/product-category/eo_setting_shape_cat/');//SECOND : URL   
-        wbc()->options->update_option('configuration','second_url','/product-category/eo_setting_shape_cat/');
+        wbc()->options->update_option('configuration','second_url','/product-category/'.$catat_category[1]['slug'].'/');
 
-        $second_icon = $sample_data_instance->add_image_gallary($_img_url.'second_icon.png');
+        $second_icon = $sample_data_instance->add_image_gallary($_img_url.$this->second_icon);
 
-        if(!empty($first_icon)){
-            wbc()->options->update_option('configuration','second_icon',$first_icon);
+        if(!empty($second_icon)){
+            wbc()->options->update_option('configuration','second_icon',$second_icon);
         }
 
 
         wbc()->options->update_option('configuration','preview_name','Preview');    
-        $preview_icon = $sample_data_instance->add_image_gallary($_img_url.'preview_icon.png');
+        $preview_icon = $sample_data_instance->add_image_gallary($_img_url.$this->preview_icon);
         if(!empty($preview_icon)){
             wbc()->options->update_option('configuration','preview_icon',$preview_icon);
         }
