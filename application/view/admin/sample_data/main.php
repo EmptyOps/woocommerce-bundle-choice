@@ -162,7 +162,7 @@ box-shadow: none;">
 	                		return false;
 			            },
 			            complete:function(xhr,status){
-			           		//window.location.href="<?php echo($next_url); ?>";
+			           		//window.location.href="<?php echo($next_url); ?>";	//commented since can't allow redirect on error etc.
 	                		return false;     
 			            }
 			        });	
@@ -195,7 +195,7 @@ box-shadow: none;">
 			                return false;
 			            },
 			            complete:function(xhr,status){
-			           		//window.location.href="<?php echo($next_url); ?>";
+			           		//window.location.href="<?php echo($next_url); ?>";	//commented since can't allow redirect on error etc.
 	                		return false;     
 			            }
 			        });	
