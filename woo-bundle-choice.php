@@ -139,7 +139,7 @@ if(!class_exists('Woo_Bundle_Choice')) {
 
 			defined('EOWBC_ICON') || define('EOWBC_ICON', constant('EOWBC_ASSET_URL').'icon/mini.png');
 			defined('EOWBC_JUMBO_ICON') || define('EOWBC_JUMBO_ICON', constant('EOWBC_ASSET_URL').'/icon/jumbo.png');
-			defined('EOWBC_ICON_SVG') || define('EOWBC_ICON_SVG', 'https://www.emptyops.com/demo/zokri-shop/wp-content/uploads/2020/02/bundle_site_logo_2-1.svg');
+			defined('EOWBC_ICON_SVG') || define('EOWBC_ICON_SVG', constant('EOWBC_ASSET_URL').'/icon/logo.svg');
 		}
 
 		public function init() {
