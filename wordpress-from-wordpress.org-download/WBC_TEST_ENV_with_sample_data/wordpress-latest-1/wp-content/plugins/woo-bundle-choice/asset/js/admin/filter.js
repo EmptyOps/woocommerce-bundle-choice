@@ -34,8 +34,9 @@
 
 jQuery(document).ready(function($){
 	$("#d_fconfig_input_type,#d_fconfig_filter").on('change',function(){		
-		var _val = $('#d_fconfig_input_type').val();				
-		if((_val == 'icon' || _val == 'icon_text') && isNaN($('#d_fconfig_filter').val())) {
+		var _val = $('#d_fconfig_input_type').val();	
+		console.log(_val);			
+		if((_val == 'icon' || _val == 'icon_text') && $('#d_fconfig_filter').parent().find('[data-value="'+$('#d_fconfig_filter').val()+'"]').data('type')==1 ) {
 			$('#d_fconfig_note_label_label_div').removeClass('hidden');
 		} else {
 			$('#d_fconfig_note_label_label_div').addClass('hidden');
@@ -46,7 +47,7 @@ jQuery(document).ready(function($){
 
 	$("#s_fconfig_input_type,#s_fconfig_filter").on('change',function(){		
 		var _val = $('#s_fconfig_input_type').val();		
-		if((_val == 'icon' || _val == 'icon_text') && isNaN($('#s_fconfig_filter').val())) {
+		if((_val == 'icon' || _val == 'icon_text') && $('#s_fconfig_filter').parent().find('[data-value="'+$('#s_fconfig_filter').val()+'"]').data('type')==1) {
 			$('#s_fconfig_note_label_label_div').removeClass('hidden');
 		} else {
 			$('#s_fconfig_note_label_label_div').addClass('hidden');

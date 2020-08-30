@@ -136,4 +136,57 @@ class WBC_WP {
     public function get_template() {
         return get_template();
     }
+
+
+    /* Add image to the wordpress image media gallary */
+    public function add_image_gallary($path) {
+
+        if(!$path) return FALSE;
+
+        $name = basename($path);
+
+        $attachment_check=new \Wp_Query( array(
+            'posts_per_page' => 1,
+            'post_type'      => 'attachment',
+            'name'           => implode('-',explode(' ',strtolower($name))).'-image'
+        ));
+
+        if ( $attachment_check->have_posts() ) {
+          $posts=$attachment_check->get_posts();
+          return $posts[0]->ID;
+        }
+
+        $file = wp_upload_bits($name, null, file_get_contents($path));
+
+        if (!$file['error']) {
+
+            $type = wp_check_filetype($name, null );
+
+            $attachment = array(
+                'post_mime_type' => $type['type'],
+                'post_parent' => null,
+                'post_title' => preg_replace('/\.[^.]+$/', '', $name),
+                'post_content' => '',
+                'post_status' => 'inherit'
+            );
+
+            $id = wp_insert_attachment( $attachment, $file['file'], null );
+
+            if (!is_wp_error($id)) {
+
+                require_once(ABSPATH . "wp-admin" . '/includes/image.php');
+
+                $data = wp_generate_attachment_metadata( $id, $file['file'] );
+                wp_update_attachment_metadata( $id, $data );
+
+                return $id;
+
+            } else {
+                return FALSE;
+            }
+        } else {
+            return FALSE;
+        }
+    }
+
 }

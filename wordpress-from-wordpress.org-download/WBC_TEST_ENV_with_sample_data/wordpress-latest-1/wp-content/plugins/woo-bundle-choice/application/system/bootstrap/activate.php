@@ -25,11 +25,13 @@ class Activate {
 		$this->add_pages();
 		$this->add_table();
 		$this->migrate();
-		//setup wizard: check here if it's first time activate and setup wizard not ran yet then only run it		
-		//wbc()->options->update_option('eo_wbc','inventory_type','');
+
 		add_action( 'activated_plugin',function($plugin){
-			if($plugin=='woocommerce-bundle-choice/woocommerce-bundle-choice.php' or $plugin=='woo-bundle-choice/woocommerce-bundle-choice.php'){
-				$eo_wbc_inventory_type = wbc()->options->get_option('setting_status_setting_status_setting','inventory_type', '');
+			if( in_array($plugin,array('woocommerce-bundle-choice/woocommerce-bundle-choice.php','woocommerce-bundle-choice/woo-bundle-choice.php','woo-bundle-choice/woocommerce-bundle-choice.php','woo-bundle-choice/woo-bundle-choice.php') ) ) {
+		
+				//setup wizard: check here if it's first time activate and setup wizard not ran yet then only run it		
+				//wbc()->options->update_option('eo_wbc','inventory_type','');
+				$eo_wbc_inventory_type = wbc()->options->get_option('_system','setup_wizard_run', false);
 				if( empty($eo_wbc_inventory_type) ) {
 					//add admin page
 		           exit(wp_redirect( admin_url('admin.php?page=eowbc&wbc_setup=1')));            

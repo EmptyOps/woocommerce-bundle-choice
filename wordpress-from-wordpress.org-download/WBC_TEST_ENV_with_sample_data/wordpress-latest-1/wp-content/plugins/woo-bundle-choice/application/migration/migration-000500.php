@@ -60,6 +60,7 @@ class Migration_000500 {
 	}
 
 	public function option() {
-		update_option('eo_wbc_version','0.5.70');
+        // commented since isn't necessary anymore and isn't right either 
+		// update_option('eo_wbc_version','0.5.70');
 	}
 }

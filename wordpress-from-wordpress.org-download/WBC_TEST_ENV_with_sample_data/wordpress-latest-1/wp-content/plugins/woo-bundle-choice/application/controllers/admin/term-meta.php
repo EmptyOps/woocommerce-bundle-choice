@@ -68,7 +68,7 @@ class Term_Meta {
 					$this->color_chooser();
 					break;
 
-				case 'image':
+				case 'image' or 'image_text' or 'dropdown_image' or 'dropdown_image_only':
 					$this->image_chooser();
 					break;
 
@@ -78,7 +78,7 @@ class Term_Meta {
 
 		}
 	}
-
+	
 
 	public function edit_attributre_field($term, $taxonomy) {
 		if(!empty($this->attribute)) {			
@@ -87,7 +87,7 @@ class Term_Meta {
 					$this->color_chooser(true,$term, $taxonomy);
 					break;
 
-				case 'image':
+				case 'image' or 'image_text' or 'dropdown_image' or 'dropdown_image_only':
 					$this->image_chooser(true,$term, $taxonomy);
 					break;
 
@@ -126,6 +126,9 @@ class Term_Meta {
 		$image_src = '';
 		if ($is_edit) {
 			$image_src = get_term_meta( $term->term_id,'wbc_attachment',true);
+			if(empty($image_src)){
+				$image_src = $woocommerce->plugin_url() . '/assets/images/placeholder.png';
+			}
 		} else {
 			$image_src = $woocommerce->plugin_url() . '/assets/images/placeholder.png';
 		}
@@ -205,7 +208,7 @@ class Term_Meta {
 					$column_key = 'color';
 					break;
 
-				case 'image':
+				case 'image' or 'image_text' or 'dropdown_image' or 'dropdown_image_only':
 					$column_title = 'Image';
 					$column_key = 'image';
 					break;				
@@ -236,7 +239,7 @@ class Term_Meta {
 	        }			
 			$columns .= '<div style="height:48px;width:48px;background-color: '.$color.';"></div>';
 
-		} elseif ($column == 'image') {
+		} elseif (in_array($column,array('image','image_text','dropdown_image','dropdown_image_only'))) {
 			$src='';
 			if (get_term_meta( $id, 'wbc_attachment')) {
 
@@ -395,7 +398,12 @@ class Term_Meta {
 		add_filter( 'product_attributes_type_selector',function($type){
 			$type['button']='Button';
 			$type['color']='Color';
-			$type['image']='Image';
+			$type['image']='Icon';
+			$type['image_text']='Icons with Text';
+			$type['dropdown_image']='Dropdown with Icons';
+			$type['dropdown_image_only']='Dropdown with Icons Only';
+			$type['dropdown']='Dropdown';
+
 			return $type;
 		}, 10, 1 );
 

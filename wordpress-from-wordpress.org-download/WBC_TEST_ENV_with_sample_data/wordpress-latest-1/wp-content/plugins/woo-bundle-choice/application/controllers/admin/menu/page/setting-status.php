@@ -157,11 +157,47 @@ class Setting_status {
 							)
 						)
 					),
+					'advanced_config'=>array(
+						'label'=>'Advanced Configuration',
+						'form'=> array(							
+							'internal_url'=>array(
+								'label'=>eowbc_lang('Internal Routing URL'),
+								'type'=>'text',								
+								'class'=>array('fluid'),		
+								'validate'=>array('url'=>''),
+								'sanitize'=>'esc_url_raw',
+								'inline'=>false,
+								'visible_info'=>array( 
+									'label'=>eowbc_lang('This setting is needed in exceptional scenarios where site setup or structure requires setting a specific URL for some operations.'),
+									'type'=>'visible_info',
+									'class'=>array('small'),
+									'size_class'=>array('eight','wide'),
+								),		
+							),
+							'remove_index_php'=>array(
+								'label'=>eowbc_lang('Remove index.php from link?'),
+								'type'=>'checkbox',
+								'sanitize'=>'sanitize_text_field',
+								'value'=>array(),
+								'options'=>array('remove_index_php'=>'Remove index.php'),
+								'class'=>array(),
+								'size_class'=>array('eight','wide'),
+								'inline'=>true,
+							),							
+							'submit_button'=>array(
+								'label'=>eowbc_lang('Save'),
+								'type'=>'button',
+								'class'=>array('primary'),
+								//'size_class'=>array('eight','wide'),
+								'attr'=>array("data-action='save'",'data-tab_key="advanced_config"'),
+								'inline'=>false
+							),
+						)						
+					),
+
 				);
 	    
-
 	    return $form_definition;
-
 	}
 
 }	

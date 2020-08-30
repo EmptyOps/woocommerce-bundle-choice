@@ -20,4 +20,7 @@
 	.eo-wbc-container > .ui.steps .step.active .title {
 	    color: black !important;
 	}
+	.page-title.page-title-default{
+		display: none !important;
+	}
 </style>

@@ -10,8 +10,8 @@
 		display: none !important;
 	}
 	div.site-content{
-		max-width: unset !important;
-	    min-width: unset !important;
+		max-width: 100% !important;
+    	min-width: 100% !important;
 	    width: 100% !important;
 	}
 	.ui.steps .step .title{
@@ -20,4 +20,12 @@
 	.eo-wbc-container > .ui.steps .step.active .title {
 	    color: black !important;
 	}
+	.eo-wbc-container .active.step .column:first-child{
+		margin-top: -0.125em !important;
+	} 
+
+	.page-title.page-title-default{
+		display: none !important;
+	}
+
 </style>

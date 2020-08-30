@@ -1,3 +1,77 @@
+// a shared namespace among plugins and extensions of the sphere plugins
+jQuery.splugins = {};
+
+jQuery.splugins.hasAttr = function(obj,name) {  
+   return jQuery(obj).attr(name) !== undefined;
+};
+
+jQuery.splugins.extractJSON = function(str) {
+    var firstOpen, firstClose, candidate;
+    firstOpen = str.indexOf('{', firstOpen + 1);
+    do {
+        firstClose = str.lastIndexOf('}');
+        console.log('firstOpen: ' + firstOpen, 'firstClose: ' + firstClose);
+        if(firstClose <= firstOpen) {
+            return null;
+        }
+        do {
+            candidate = str.substring(firstOpen, firstClose + 1);
+            console.log('candidate: ' + candidate);
+            try {
+                var res = JSON.parse(candidate);
+                console.log('...found');
+                return [res, firstOpen, firstClose + 1];
+            }
+            catch(e) {
+                console.log('...failed');
+            }
+            firstClose = str.substr(0, firstClose).lastIndexOf('}');
+        } while(firstClose > firstOpen);
+        firstOpen = str.indexOf('{', firstOpen + 1);
+    } while(firstOpen != -1);
+}
+
+jQuery.splugins.parseJSON = function(result) {
+    var resjson = null;
+    try{
+        console.log('called splugins parseJSON');
+        resjson = jQuery.parseJSON(result);
+    }
+    catch(e) {
+        try{
+            console.log('Normal jQuery parseJSON failed. Trying extract.');
+            jsonobjs = jQuery.splugins.extractJSON(result);
+            // TODO here it is possible that in some rare cases more than one json result object is return in that case we need to find all json string object from response and identify our response only by putting some unique key/identifier like wbc_ajax_response maybe in our response
+            if( typeof(jsonobjs[0]) != undefined && typeof(jsonobjs[0]) != 'undefined' ) {
+                console.log('splugins parseJSON extracted the json string from response');
+                result = JSON.stringify(jsonobjs[0]);   //since we want to use jQuery.parseJSON
+                resjson = jQuery.parseJSON(result); 
+            }
+        }
+        catch(e) {
+            console.log('Exception handling of splugins parseJSON failed.');
+        }
+    }
+
+    if( resjson ){
+
+        if( typeof(resjson["type"]) == undefined || typeof(resjson["type"]) == 'undefined' ) {
+            console.log('splugins parseJSON undefined type detected in the json response');
+            resjson["type"] = "error";
+        }
+
+        if( typeof(resjson["msg"]) == undefined || typeof(resjson["msg"]) == 'undefined' ) {
+            console.log('splugins parseJSON undefined msg detected in the json response');
+            resjson["msg"] = "";
+        }
+        
+        return resjson;
+    }
+    else {
+        return {"type":"error","msg":"Unable to parse result json object, please contact Sphere Plugins Support for a quick fix on this issue."};
+    }
+}
+
 $ = jQuery;
 
 jQuery(document).ready(function($){
@@ -81,6 +155,27 @@ jQuery(document).ready(function($){
         e.preventDefault();
         e.stopPropagation();
         var $this = this;
+
+        var original_txt = jQuery($this).text();
+        var original_cursor = jQuery($this).css('cursor');
+        var processing_txt = jQuery.splugins.hasAttr(this,'data-loading_text') ? jQuery($this).attr('data-loading_text') : 'Processing...';
+        if( original_txt == processing_txt ) { return; }
+        jQuery($this).text(processing_txt);
+        jQuery($this).css('cursor', 'default');
+
+        // var is_update_post_values = false;
+        // var temp_fcf='';
+        // var temp_scf='';
+        // if($($this).attr('id')=='d_fconfig_submit_btn' || $($this).attr('id')=='s_fconfig_submit_btn'){
+        //     console.log('is_update_post_values here 1');
+        //     is_update_post_values = true;
+        //     temp_fcf = $('[name="first_category_altr_filt_widgts"]').val();
+        //     $('[name="first_category_altr_filt_widgts"]').val('user_manually_added');
+        //     console.log('is_update_post_values here 1.1 '+$('[name="first_category_altr_filt_widgts"]').val());
+        //     temp_scf = $('[name="second_category_altr_filt_widgts"]').val();
+        //     $('[name="second_category_altr_filt_widgts"]').val('user_manually_added');
+        // }
+
         //var form = jQuery(document).find('form').has(this);
         var form = jQuery(this).closest('form');
         
@@ -92,15 +187,7 @@ jQuery(document).ready(function($){
         if(form_type == "") {
             form_type = 'POST';
         }
-        var temp_fcf='';
-        var temp_scf='';
-        if($(this).attr('id')=='d_fconfig_submit_btn' || $(this).attr('id')=='s_fconfig_submit_btn'){
-            temp_fcf = $('[name="first_category_altr_filt_widgts"]').val();
-            $('[name="first_category_altr_filt_widgts"]').val('user_manually_added');
-            temp_scf = $('[name="second_category_altr_filt_widgts"]').val();
-            $('[name="second_category_altr_filt_widgts"]').val('user_manually_added');
-        }
-        
+
         if( jQuery(form).data("is_per_tab_save") != undefined && jQuery(form).data("is_per_tab_save") == true ) {
             
             var formid = jQuery(form).attr("id");
@@ -122,6 +209,12 @@ jQuery(document).ready(function($){
             );            
         }
 
+        // if(is_update_post_values){            
+        //     console.log('is_update_post_values here 2');
+        //     $('[name="first_category_altr_filt_widgts"]').val(temp_fcf);             
+        //     $('[name="second_category_altr_filt_widgts"]').val(temp_scf);
+        // } 
+
         jQuery.ajax({
             url:eowbc_object.admin_url,
             type: form_type,
@@ -130,7 +223,7 @@ jQuery(document).ready(function($){
 
             },
             success:function(result,status,xhr){
-                var resjson = jQuery.parseJSON(result);
+                var resjson = jQuery.splugins.parseJSON(result);     //jQuery.parseJSON(result);
                 if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
 
                     // console.log({
@@ -165,10 +258,13 @@ jQuery(document).ready(function($){
             },
             complete:function(xhr,status){
                 /*console.log(xhr);*/
-                if($(this).attr('id')=='d_fconfig_submit_btn' || $(this).attr('id')=='s_fconfig_submit_btn'){            
-                    $('[name="first_category_altr_filt_widgts"]').val(temp_fcf);             
-                    $('[name="second_category_altr_filt_widgts"]').val(temp_scf);
-                }                
+                // if($(this).attr('id')=='d_fconfig_submit_btn' || $(this).attr('id')=='s_fconfig_submit_btn'){            
+                //     $('[name="first_category_altr_filt_widgts"]').val(temp_fcf);             
+                //     $('[name="second_category_altr_filt_widgts"]').val(temp_scf);
+                // }                
+
+                jQuery($this).css('cursor', original_cursor);
+                jQuery($this).text(original_txt);
             }
         });
     });  
@@ -195,28 +291,46 @@ jQuery(document).ready(function($){
     $('button.ui.button[data-action="bulk"]').on('click',function(e){
         e.preventDefault();
         e.stopPropagation();
+        var $this = this;
+
+        var original_txt = jQuery($this).text();
+        var original_cursor = jQuery($this).css('cursor');
+        var processing_txt = jQuery.splugins.hasAttr(this,'data-loading_text') ? jQuery($this).attr('data-loading_text') : 'Processing...';
+        if( original_txt == processing_txt ) { return; }
+        jQuery($this).text(processing_txt);
+        jQuery($this).css('cursor', 'default');
+
+        var complete_callback = function() {
+            jQuery($this).css('cursor', original_cursor);
+            jQuery($this).text(original_txt);
+        }
 
         //delete
 
         if( jQuery( "#" + jQuery(this).data("bulk_table_id") + "_bulk" ).val() == "delete") {
-            if(confirm('Are you sure want to delete?')){
-                var cbs = [];
+            var cbs = [];
 
-                //find table and loop through rows and prepare checked checkboxes
-                jQuery( "#" + jQuery(this).data("bulk_table_id") + " > tbody  > tr" ).each(function(i, row) {
-                    var cb = jQuery(row).find('input[type=checkbox]')[0];
-                    if( jQuery(cb).is(':checked') ) {
-                        cbs.push( cb );    
-                    }
-                });
-                
-                if(cbs.length>0){
-                    eowbc_do_delete(cbs, jQuery(this).data("tab_key"));       
+            //find table and loop through rows and prepare checked checkboxes
+            jQuery( "#" + jQuery(this).data("bulk_table_id") + " > tbody  > tr" ).each(function(i, row) {
+                var cb = jQuery(row).find('input[type=checkbox]')[0];
+                if( jQuery(cb).is(':checked') ) {
+                    cbs.push( cb );    
                 }
-            } else {
-                return false
+            });
+            
+            if(cbs.length>0){
+                if(confirm('Are you sure want to delete?')){
+                    eowbc_do_delete(cbs, jQuery(this).data("tab_key"), complete_callback);   
+                } else {
+                    complete_callback();
+                    return false;
+                }    
+            } 
+            else {
+                eowbc_toast_common( "warning", 'Please select record(s) to proceed');
+                complete_callback();
             }
-
+            
         } else if( jQuery( "#" + jQuery(this).data("bulk_table_id") + "_bulk" ).val() == "activate" ) {
             var cbs = [];
 
@@ -229,7 +343,11 @@ jQuery(document).ready(function($){
             });
             
             if(cbs.length>0){
-                eowbc_do_activate(cbs, jQuery(this).data("tab_key"));       
+                eowbc_do_activate(cbs, jQuery(this).data("tab_key"), complete_callback);       
+            }
+            else {
+                eowbc_toast_common( "warning", 'Please select record(s) to proceed');
+                complete_callback();
             }
         } else if( jQuery( "#" + jQuery(this).data("bulk_table_id") + "_bulk" ).val() == "deactivate" ) {
             var cbs = [];
@@ -243,10 +361,15 @@ jQuery(document).ready(function($){
             });
             
             if(cbs.length>0){
-                eowbc_do_deactivate(cbs, jQuery(this).data("tab_key"));       
+                eowbc_do_deactivate(cbs, jQuery(this).data("tab_key"), complete_callback);       
+            }
+            else {
+                eowbc_toast_common( "warning", 'Please select record(s) to proceed');
+                complete_callback();
             }
         } else {
             eowbc_toast_common( "warning", "Please select bulk action to apply" );
+            complete_callback();
         }
     });
 
@@ -262,6 +385,23 @@ jQuery(document).ready(function($){
         e.preventDefault();
         e.stopPropagation();
         let $this = $(this);
+
+        var original_txt = jQuery($this).text();
+        var original_cursor = jQuery($this).css('cursor');
+        var processing_txt = jQuery.splugins.hasAttr(this,'data-loading_text') ? jQuery($this).attr('data-loading_text') : 'Loading...';
+        if( original_txt == processing_txt ) { return; }
+        jQuery($this).text(processing_txt);
+        jQuery($this).css('cursor', 'default');
+
+        var complete_callback = function( is_success ) {
+            jQuery($this).css('cursor', original_cursor);
+            jQuery($this).text(original_txt);
+
+            if( is_success ) {
+                $("html, body").animate({ scrollTop: $(document).height()-$(window).height()-100 }, 1500);
+            }
+        }
+
         var form = jQuery($this).closest("form");
         let saved_tab_key = jQuery(".ui.pointing.secondary.menu>.item.active").data('tab');
         let clean_tab_key = jQuery(".ui.pointing.secondary.menu>.item.active").data('clean_tab_key');
@@ -272,7 +412,8 @@ jQuery(document).ready(function($){
             clean_tab_key = saved_tab_key;
         }
 
-        if(e.srcElement.nodeName!='INPUT'){
+        // if(e.hasOwnProperty('srcElement') && e.srcElement.hasOwnProperty('nodeName') && e.srcElement.nodeName!='INPUT'){
+        if( jQuery.splugins.hasAttr(this,'data-wbc-editid') ) {
 
             jQuery.ajax({
                 url:eowbc_object.admin_url,
@@ -282,7 +423,7 @@ jQuery(document).ready(function($){
 
                 },
                 success:function(result,status,xhr){
-                    var resjson = jQuery.parseJSON(result);
+                    var resjson = jQuery.splugins.parseJSON(result);    //jQuery.parseJSON(result);
                     if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
                         let list = JSON.parse(resjson["msg"]);
                         for(let property in list){
@@ -290,7 +431,7 @@ jQuery(document).ready(function($){
                                 
                                 
                                 if($('.ui.checkbox [name="'+property+'"]').length>0){
-                                    if(list[property] !== ''){
+                                    if(list[property] !== '' && list[property] != 0){
                                         $('.ui.checkbox [name="'+property+'"]').parent().checkbox('set checked');    
                                     } else {
                                         $('.ui.checkbox [name="'+property+'"]').parent().checkbox('set unchecked');
@@ -309,12 +450,16 @@ jQuery(document).ready(function($){
                             }
                         }   
                         jQuery("#"+ clean_tab_key+"_id").val(id);
+
+                        complete_callback(true);
                     } else {
                         $('body').toast({
                             class: (typeof(resjson["type"]) != undefined ? resjson["type"] : 'error'),
                             position: 'bottom right',
                             message: (typeof(resjson["msg"]) != undefined && resjson["msg"] != "" ? resjson["msg"] : `Failed! Please check Logs page for for more details.`)
                         });
+
+                        complete_callback(false);
                     }                        
                 },
                 error:function(xhr,status,error){
@@ -324,6 +469,8 @@ jQuery(document).ready(function($){
                         position: 'bottom right',
                         message: `Network Error!`
                     });
+
+                    complete_callback(false);
                 },
                 complete:function(xhr,status){
                     /*console.log(xhr);*/
@@ -348,7 +495,7 @@ function eowbc_toast_common( toast_type_class, msg, timeout) {
     });
 }
 
-function eowbc_do_delete( cbs, saved_tab_key ) {
+function eowbc_do_delete( cbs, saved_tab_key, complete_callback ) {
 
     ids = [];
     for(var i=0; i<cbs.length; i++) {
@@ -364,7 +511,7 @@ function eowbc_do_delete( cbs, saved_tab_key ) {
 
         },
         success:function(result,status,xhr){
-            var resjson = jQuery.parseJSON(result);
+            var resjson = jQuery.splugins.parseJSON(result);    //jQuery.parseJSON(result);
             if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
                 //remove rows 
                 for(var i=0; i<cbs.length; i++) {
@@ -394,11 +541,13 @@ function eowbc_do_delete( cbs, saved_tab_key ) {
         },
         complete:function(xhr,status){
             /*console.log(xhr);*/
+
+            complete_callback();
         }
     });
 }
 
-function eowbc_do_activate( cbs, saved_tab_key ) {
+function eowbc_do_activate( cbs, saved_tab_key, complete_callback ) {
 
     ids = [];
     for(var i=0; i<cbs.length; i++) {
@@ -414,7 +563,7 @@ function eowbc_do_activate( cbs, saved_tab_key ) {
 
         },
         success:function(result,status,xhr){
-            var resjson = jQuery.parseJSON(result);
+            var resjson = jQuery.splugins.parseJSON(result);    //jQuery.parseJSON(result);
             if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
                 //remove rows 
                 for(var i=0; i<cbs.length; i++) {
@@ -444,11 +593,13 @@ function eowbc_do_activate( cbs, saved_tab_key ) {
         },
         complete:function(xhr,status){
             /*console.log(xhr);*/
+
+            complete_callback();
         }
     });
 }
 
-function eowbc_do_deactivate( cbs, saved_tab_key ) {
+function eowbc_do_deactivate( cbs, saved_tab_key, complete_callback ) {
     ids = [];
     for(var i=0; i<cbs.length; i++) {
         ids.push( jQuery(cbs[i]).val() );
@@ -463,7 +614,7 @@ function eowbc_do_deactivate( cbs, saved_tab_key ) {
 
         },
         success:function(result,status,xhr){
-            var resjson = jQuery.parseJSON(result);
+            var resjson = jQuery.splugins.parseJSON(result);    //jQuery.parseJSON(result);
             if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
                 //remove rows 
                 for(var i=0; i<cbs.length; i++) {                    
@@ -493,6 +644,8 @@ function eowbc_do_deactivate( cbs, saved_tab_key ) {
         },
         complete:function(xhr,status){
             /*console.log(xhr);*/
+
+            complete_callback();
         }
     });
 

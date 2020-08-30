@@ -10400,6 +10400,10 @@ class Sample_Data_Template {
     return array();
   }
 
+  public function get_filters($__cat__, $__att__) {
+    return array();
+  }
+
   public function set_configs_after_categories($catat_category) {
     
   }
