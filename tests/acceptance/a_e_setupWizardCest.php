@@ -24,7 +24,7 @@ class a_e_setupWizardCest
 		$I->amOnPage('/wp-admin/admin.php?page=eowbc-configuration');
 		$I->click('Buttons');
 		$I->see('Choose where you want to display');
-		$I->see('lkjsdkfghkdjsfhgksjdfbvmxn bvkskd');
+		$I->see('lkjsdkfghkdjsfhgksjdfbvmxn');
 
 
 		// go to the page
