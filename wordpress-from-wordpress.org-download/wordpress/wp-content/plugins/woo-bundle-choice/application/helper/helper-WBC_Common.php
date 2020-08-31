@@ -28,7 +28,7 @@ class WBC_Common {
 					$matches = array_values($matches);					
 					$return_category = $matches[0];
 				} else {
-					$return_category = '';
+					$return_category = $wp_query->get_queried_object()->slug;
 				}
 			} else {
 				$return_category = $wp_query->get_queried_object()->slug;	
@@ -154,18 +154,34 @@ class WBC_Common {
 	}
 
 	public function dropdownSelectedvalueText($field, $selectedkey) {
+		if(!is_array($selectedkey)){
+			$__selectedkey = "";
+			if( !wbc()->common->nonZeroEmpty($selectedkey) ) {
+				$__selectedkey = $selectedkey;
+			}
 
-		$__selectedkey = "";
-		if( !wbc()->common->nonZeroEmpty($selectedkey) ) {
-			$__selectedkey = $selectedkey;
-		}
+			if( isset($field["options"][$__selectedkey]) ) {
+				return $field["options"][$__selectedkey];
+			}
+			else {
+				return "";
+			}	
+		} elseif(!empty($selectedkey)) {
+			$__selectedkeys = array();
+			foreach ($selectedkey as $key => $value) {
+				$__selectedkey = "";	
+				if( !wbc()->common->nonZeroEmpty($value) ) {
+					$__selectedkey = $value;
+				}
 
-		if( isset($field["options"][$__selectedkey]) ) {
-			return $field["options"][$__selectedkey];
-		}
-		else {
+				if( isset($field["options"][$__selectedkey]) ) {
+					$__selectedkeys[] = $field["options"][$__selectedkey];
+				}
+			}			
+			return $__selectedkeys;			
+		} else{
 			return "";
-		}	
+		}
 	}
 
 	
@@ -242,6 +258,10 @@ class WBC_Common {
     public function http_query($param){
     	$param = apply_filters('eowbc_helper_http_query',$param);
     	return http_build_query($param);
+    }
+
+    public function is_object($obj){
+    	return !empty($obj) && is_object($obj);
     }
 
 }

@@ -19,7 +19,8 @@ class Setting_status {
 	}
 
 	public static function get_form_definition( $is_add_sample_values = false ) {
-		
+		$__features = wbc()->config->get_features();
+		unset($__features['api_integrations']);
 
 		$form_definition = array(
 					'setting_status_setting'=>array(
@@ -44,15 +45,28 @@ class Setting_status {
 								'label'=>'Choose features',
 								'type'=>'checkbox',
 								'sanitize'=>'sanitize_text_field',
-								'value'=>unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array()))),
-								'options'=>array(
-									'ring_builder'=>'Ring Builder',
-									'pair_maker'=>'Pair Maker',
+								'value'=>array(),
+								'options'=>array_replace($__features,array(									
 									'rapnet_api'=>'Rapnet (You will need paid <a href="https://sphereplugins.com/product/woocommerce-rapnet-integration-extension/" target="_blank">extension</a>)',
-									'glowstar_api'=>'GlowStart Diamond API (API service is free, but you will need paid <a href="https://sphereplugins.com/product/diamond-api-integration/" target="_blank">extension</a>)',
-									'guidance_tool'=>'Guidance Tool',
-									'price_control'=>'Price Control'
-									),
+									'glowstar_api'=>'GlowStar Diamond API (API service is free, but you will need paid <a href="https://sphereplugins.com/product/diamond-api-integration/" target="_blank">extension</a>)',
+									'jbdiamond_api'=>'JB Diamond API (API service is free, but you will need paid <a href="https://sphereplugins.com/product/diamond-api-integration/" target="_blank">extension</a>)',
+									'srk_api'=>'SRK Diamond API (API service is free, but you will need paid <a href="https://sphereplugins.com/product/diamond-api-integration/" target="_blank">extension</a>)',		
+									)),
+								'class'=>array('fluid'),
+								'size_class'=>array('eight','wide'),
+								'inline'=>true,
+								'grouped'=>true
+							),
+							'bonus_feature_devider'=>array(
+								'label'=>eowbc_lang('Bonus Features'),
+								'type'=>'devider',
+							),
+							'bonus_features'=>array(
+								'label'=>'Choose Bonus features',
+								'type'=>'checkbox',
+								'sanitize'=>'sanitize_text_field',
+								'value'=>array(),
+								'options'=>wbc()->config->get_bonus_features(),
 								'class'=>array('fluid'),
 								'size_class'=>array('eight','wide'),
 								'inline'=>true,
@@ -109,7 +123,7 @@ class Setting_status {
 								'type'=>'checkbox',
 								'value'=>array(),
 								'sanitize'=>'sanitize_text_field',
-								'options'=>array('1'=>'I agree with SpherePlugins\' <a href="https://sphereplugins.com/terms-conditions/" target="_blank">Terms</a> & <a href="https://sphereplugins.com/privacy-policy/" target="_blank">Privacy Policy</a>'),
+								'options'=>array('1'=>'I agree with Sphere Plugins <a href="https://sphereplugins.com/terms-conditions/" target="_blank">Terms</a> & <a href="https://sphereplugins.com/privacy-policy/" target="_blank">Privacy Policy</a>'),
 								'options_attrs'=>array('1'=>array("onchange=\"if(jQuery(this)[0].checked){ jQuery('#btn_send_error_report').removeClass('disabled'); } else { jQuery('#btn_send_error_report').addClass('disabled'); }\"")),
 								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
@@ -143,11 +157,47 @@ class Setting_status {
 							)
 						)
 					),
+					'advanced_config'=>array(
+						'label'=>'Advanced Configuration',
+						'form'=> array(							
+							'internal_url'=>array(
+								'label'=>eowbc_lang('Internal Routing URL'),
+								'type'=>'text',								
+								'class'=>array('fluid'),		
+								'validate'=>array('url'=>''),
+								'sanitize'=>'esc_url_raw',
+								'inline'=>false,
+								'visible_info'=>array( 
+									'label'=>eowbc_lang('This setting is needed in exceptional scenarios where site setup or structure requires setting a specific URL for some operations.'),
+									'type'=>'visible_info',
+									'class'=>array('small'),
+									'size_class'=>array('eight','wide'),
+								),		
+							),
+							'remove_index_php'=>array(
+								'label'=>eowbc_lang('Remove index.php from link?'),
+								'type'=>'checkbox',
+								'sanitize'=>'sanitize_text_field',
+								'value'=>array(),
+								'options'=>array('remove_index_php'=>'Remove index.php'),
+								'class'=>array(),
+								'size_class'=>array('eight','wide'),
+								'inline'=>true,
+							),							
+							'submit_button'=>array(
+								'label'=>eowbc_lang('Save'),
+								'type'=>'button',
+								'class'=>array('primary'),
+								//'size_class'=>array('eight','wide'),
+								'attr'=>array("data-action='save'",'data-tab_key="advanced_config"'),
+								'inline'=>false
+							),
+						)						
+					),
+
 				);
 	    
-
 	    return $form_definition;
-
 	}
 
 }	

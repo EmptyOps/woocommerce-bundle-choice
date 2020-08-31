@@ -10,7 +10,7 @@
     .cat_products{
         border:1.3px solid #80808059;
         border-radius: 1.5px;
-        margin:3.125% !important;
+        margin:auto !important;
         margin-bottom: 2em !important;                            
     }
     @media only screen and (max-width: 768px) {
@@ -155,6 +155,7 @@
 </div>
 <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
 <script>
+    $ = jQuery;
 
     // supposed to be used inside wo_wbc_filter.js
     var is_card_view_rendered = true;

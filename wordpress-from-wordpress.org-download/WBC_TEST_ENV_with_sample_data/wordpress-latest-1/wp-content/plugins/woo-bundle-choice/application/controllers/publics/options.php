@@ -44,40 +44,55 @@ class Options {
 			if ( $product && taxonomy_exists( $attribute ) ) {
 				$terms = wc_get_product_terms( $product->get_id(), $attribute, array( 'fields' => 'all' ) );
 				$name  = uniqid( wc_variation_attribute_name( $attribute ) );
+
+				if(in_array($type,array('dropdown_image','dropdown_image_only','dropdown'))) {
+					$selected_item = sanitize_title( $args[ 'selected' ] );
+					if(!empty($selected_item)){
+						$selected_item = get_term_by( 'slug',$selected_item,$attribute);
+						if(!is_wp_error($selected_item) and !empty($selected_item) ){
+							$image_url = get_term_meta( $selected_item->term_id, 'wbc_attachment', true );
+							
+							if($type=='dropdown_image' and !empty($image_url)) {
+								$selected_item =  sprintf( '<img class="ui mini avatar image" src="%s">%s', esc_url( $image_url ),esc_attr( $selected_item->name ));
+								
+							} elseif ($type=='dropdown_image_only' and !empty($image_url)) {
+								$selected_item =  sprintf( '<img class="ui mini avatar image" src="%s">', esc_url( $image_url ));
+							} else {
+								$selected_item =  sprintf( '%s',esc_attr( $selected_item->name ));
+							}
+						} else {
+							$selected_item ='Choose an option';	
+						}
+					} else{
+						$selected_item ='Choose an option';
+					}
+					$data.=sprintf( '<div class="ui fluid selection dropdown" style="min-height: auto;">
+							  <input type="hidden" name="attribute_%s" data-attribute_name="attribute_%s" data-id="%s">
+							  <i class="dropdown icon"></i>
+							  <div class="default text">%s</div>
+							  <div class="menu">',esc_attr( $attribute ),esc_attr( $attribute ),esc_attr( $attribute ),$selected_item);
+				}
 				foreach ( $terms as $term ) {
 					if ( in_array( $term->slug, $options ) ) {
 						$selected_class = ( sanitize_title( $args[ 'selected' ] ) == $term->slug ) ? 'selected' : '';
 						
-						$data .= sprintf( '<li class="ui image variable-item %1$s-variable-item %1$s-variable-item-%2$s %3$s" title="%4$s" data-value="%2$s" role="button" tabindex="0" data-id="%5$s">', esc_attr( $type ), esc_attr( $term->slug ), esc_attr( $selected_class ), esc_html( $term->name ),$id);
-						
-						switch ( $type ):
-							case 'color':
-								$color = sanitize_hex_color( get_term_meta( $term->term_id, 'wbc_color', true ) );
-								$data  .= sprintf( '<div class="variable-item-color-fill variable-item-span-%s" style="background-color:%s;"></div>', esc_attr( $type ), esc_attr( $color ));
-								break;
-							
-							case 'image':
-								$image_url = get_term_meta( $term->term_id, 'wbc_attachment', true );								
-								$data .= sprintf( '<img alt="%s" src="%s" width="%d" height="%d" />', esc_attr( $term->name ), esc_url( $image_url ), 40, 40);
-								
-								break;
-							
-							
-							case 'button':
-								$data .= sprintf( '<div class="variable-item-span variable-item-span-%s">%s</div>', esc_attr( $type ), esc_html( $term->name ) );
-								break;
-							
-							case 'radio':
-								$id   = uniqid( $term->slug );
-								$data .= sprintf( '<input name="%1$s" id="%2$s" class="wvs-radio-variable-item" %3$s  type="radio" value="%4$s" data-value="%4$s" /><label for="%2$s">%5$s</label>', $name, $id, checked( sanitize_title( $args[ 'selected' ] ), $term->slug, false ), esc_attr( $term->slug ), esc_html( $term->name ) );
-								break;
-							
-							default:
-								$data .= apply_filters( 'wvs_variable_default_item_content', '', $term, $args, $saved_attribute );
-								break;
-						endswitch;
+						if(!in_array($type,array('dropdown_image','dropdown_image_only','dropdown'))) {
+							$data .= sprintf( '<li class="ui image middle aligned variable-item %1$s-variable-item %1$s-variable-item-%2$s %3$s" title="%4$s" data-value="%2$s" role="button" tabindex="0" data-id="%5$s">', esc_attr( $type ), esc_attr( $term->slug ), esc_attr( $selected_class ), esc_html( $term->name ),$id);
+						}						
+						ob_start();
+						wbc()->load->template("publics/swatches/${type}", array('args'=>$args,'term'=>$term,'type'=>$type));
+						$ui_data = ob_get_clean();
+						if(empty($ui_data)){
+							$data .= apply_filters( 'wvs_variable_default_item_content', '', $term, $args, $saved_attribute );
+						} else {
+							$data .= $ui_data;	
+						}						
 						$data .= '</li>';
 					}
+				}
+
+				if(in_array($type,array('dropdown_image','dropdown_image_only','dropdown'))) {
+					$data.=sprintf('</div></div>');
 				}
 			}
 		}
@@ -145,7 +160,7 @@ class Options {
 		}
 			
 		echo '</select>';
-			
+
 		$content = $this->variable_item( $type, $options, $args );
 		
 		echo $this->variable_items_wrapper( $content, $type, $args );
@@ -154,38 +169,67 @@ class Options {
 	public function run() {
 		add_action('wp_footer',function(){
 			// Toggle Button
-			$toggle_status = wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_status',false);
-			
-			$init_toggle = wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_init_status');
+			$toggle_status = true/*wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_status',true)*/;
+
+
+			$init_toggle = wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_init_status');			
 			
 			$toggle_text = wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_text',__('CUSTOMIZE THIS PRODUCT'));
 
 			// Variation item non-hovered
 			$dimention = wbc()->options->get_option('tiny_features','tiny_features_option_ui_option_dimention','2em');
 
-			$border_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_color','#ffffff');
+			$border_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_color','#ECECEC');
 
-			$border_width = wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_width','1px');
+			$border_width = wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_width','2px');
 
 			$border_radius = wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_radius','1px');
 
 			// Variation item hovered
-			$border_hover_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_color_hover','#ffffff');
+			$border_hover_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_color_hover','#3D3D3D');
 
-			$border_hover_width = wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_width_hover','1px');
+			$border_hover_width = wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_width_hover','2px');
 
 			// button only
-			$font_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_font_color','#ffffff');
+			$font_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_font_color','#000000');
 
-			$font_hover_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_font_color_hover','#ffffff');
+			$font_hover_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_font_color_hover','#AA7D7D');
 
 			$bg_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_bg_color','#ffffff');
 
-			$bg_hover_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_bg_color_hover','#ffffff');
+			$bg_hover_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_bg_color_hover','#DCC7C7');
 
 			ob_start();
 			?>
 				<style type="text/css">
+					.ui.mini.images .variable-item.image{
+						width: auto;						
+					}					
+					.image-variable-item{
+						border: none !important;
+						border-bottom: 2px solid transparent !important;
+					}
+					.image-variable-item.selected,.image-variable-item:hover{	        			
+						box-shadow: none !important;        			
+	        			border-bottom: 2px <?php _e($border_hover_color) ?> solid !important;
+	        		}
+					.image_text-variable-item{
+						border: none !important;
+					}
+					.image_text-variable-item:not(.selected) div{
+						visibility: hidden;
+					}
+
+					.image_text-variable-item:hover div{
+						visibility: visible;
+					}
+
+					.image_text-variable-item.selected,.image_text-variable-item:hover{	        			
+						box-shadow: none !important;
+	        		}
+					.woocommerce .summary.entry-summary table.variations tr{
+						width: auto !important;
+					}
 					.rotate-up{
 						-webkit-animation:spin-up 0.3s linear ;
 					    -moz-animation:spin-up 0.3s linear ;
@@ -268,11 +312,17 @@ class Options {
 	        		.ui.red.ribbon.label{
 	        			margin-bottom: 5px !important;
 	        		}
+	        		.variable-items-wrapper .variable-item div{
+	        			margin: auto;
+	        			display: block;
+	        		}
 	        		.variable-items-wrapper .variable-item{        			
 	        			/*display: inline-table;*/
 	        			height: <?php _e($dimention); ?>;
 	        			width: <?php _e($dimention); ?>;
-	        			line-height: <?php _e($dimention); ?>;
+	        			min-width: 35px;						
+						text-align: center;						
+	        			line-height: <?php _e($dimention); ?>;	        			
 	        			cursor: pointer;
 	        			margin: 0.25rem;
 	        			text-align: center;
@@ -282,7 +332,7 @@ class Options {
 	        		}	
 	        		.variable-items-wrapper .variable-item:hover,.variable-items-wrapper .selected{
 	        			box-shadow:0px 0px <?php _e($border_hover_width) ?> <?php _e($border_hover_color) ?>;        			
-	        			border: <?php _e($border_hover_color) ?> solid transparent;
+	        			border: 1px <?php _e($border_hover_color) ?> solid;
 	        		}
 	        		ul.variable-items-wrapper{
 	        			margin: 0px;
@@ -306,6 +356,14 @@ class Options {
 	        	</style>
 	        	<script>
 	        		jQuery(document).ready(function($){
+	        			jQuery(".dropdown").dropdown().on('change',function(){
+	        				var target_selector =  $('#'+$(this).find('input[type="hidden"]').data('id'));
+	        				target_selector.val($(this).find('input[type="hidden"]').val());
+	        				/*$(this).parent().find('.selected').removeClass('selected');
+	        				$(this).addClass('selected');*/
+	        				jQuery(".variations_form" ).trigger('check_variations');
+	        				$(target_selector).trigger('change');
+	        			});
 	        			if($('table.variations tbody>tr').length>0){
 	        				$('table.variations').addClass('ui raised segment');	
 	        			}
@@ -335,8 +393,9 @@ class Options {
 	        				$(target_selector).trigger('change');
 	        			});
 
-	        			jQuery(".variations_form").on('woocommerce_variation_select_change',function(){
+	        			jQuery(".variations_form").on('click', '.reset_variations'/*'woocommerce_variation_select_change'*//*'reset'*/,function(){
 	        				jQuery('.variable-items-wrapper .selected').removeClass('selected');
+	        				jQuery('.variable-items-wrapper .dropdown').dropdown('restore defaults');
 	        			});
 	        			
 	        		});
@@ -344,18 +403,30 @@ class Options {
 			<?php
 			echo ob_get_clean();
 			
-			if(!empty($toggle_status)){
-				add_action( 'woocommerce_before_variations_form',function( ) use($toggle_text){
+			if(!empty($toggle_status)){	
+				if(has_action('woocommerce_before_variations_form')){
+					add_action( 'woocommerce_before_variations_form',function( ) use($toggle_text){
+						wbc()->load->asset('css','fomantic/semantic.min');
+						wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
+						ob_start();
+						?>
+							<span id="wbc_variation_toggle" class="ui raised segment">
+								<?php _e($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i>						
+							</span>
+						<?php
+						echo ob_get_clean();
+					}, 10, 1 );	
+				} else {
 					wbc()->load->asset('css','fomantic/semantic.min');
 					wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
 					ob_start();
-					?>
-						<span id="wbc_variation_toggle" class="ui raised segment">
-							<?php _e($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i>						
-						</span>
+					?>	
+						<script>
+							jQuery(".variations_form").before('<span id="wbc_variation_toggle" class="ui raised segment"><?php _e($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i></span>');	
+						</script>
 					<?php
 					echo ob_get_clean();
-				}, 10, 1 );
+				}				
 			}
 		});
 		add_filter( 'woocommerce_dropdown_variation_attribute_options_html',function($html, $args){
@@ -388,7 +459,7 @@ class Options {
             	$type = 'select';
             }
 
-            if(in_array($type,array('color','image','button'))) {
+            if(in_array($type,array('color','image','image_text','dropdown_image','dropdown_image_only','dropdown','button'))) {
             	$html = call_user_func_array(
             		array($this,'variation_options'),array(
             		array(

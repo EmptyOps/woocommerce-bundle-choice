@@ -49,8 +49,10 @@ class WooCommerce_Bundle_Choice_Bootstrap {
     		
     	} elseif ( !empty(wbc()->sanitize->get('post_type')) and wbc()->sanitize->get('post_type')=='product' and !empty(wbc()->sanitize->get('taxonomy')) and strpos(wbc()->sanitize->get('taxonomy'), 'pa_')!==false ) {
     		
-    		\eo\wbc\controllers\admin\Term_Meta::instance()->add_attrubute_term_form(wbc()->sanitize->get('taxonomy'));
+    		\eo\wbc\controllers\admin\Term_Meta::instance()->add_attrubute_term_form(wbc()->sanitize->get('taxonomy'));    		
 
+    	} elseif (!empty(wbc()->sanitize->get('post_type')) and wbc()->sanitize->get('post_type')=='product' and !empty(wbc()->sanitize->get('taxonomy'))) {
+    		\eo\wbc\controllers\admin\Category_Meta::instance()->add_category_term_form(wbc()->sanitize->get('taxonomy'));
     	}
 
 		if((function_exists('is_ajax') and is_ajax()) or defined('WP_AJAX')) {
@@ -71,7 +73,10 @@ class WooCommerce_Bundle_Choice_Bootstrap {
 
 	public function ajax(){
 		if(!empty(wbc()->sanitize->post('_wpnonce')) and !empty(wbc()->sanitize->post('resolver'))) {	
-			$resolver_path = constant('EOWBC_DIRECTORY').'application/controllers/ajax/'.sanitize_text_field(wbc()->sanitize->post('resolver')).'.php';						
+			$resolver_path = constant('EOWBC_DIRECTORY').'application/controllers/ajax/'.sanitize_text_field(wbc()->sanitize->post('resolver')).'.php';				
+			if(!empty(wbc()->sanitize->post('resolver_path'))){
+				$resolver_path =wbc()->sanitize->post('resolver_path');
+			}		
 			if(file_exists($resolver_path)){
 				require_once $resolver_path;
 			} else {

@@ -138,7 +138,11 @@ class WBC_WC {
         }        
     }
     
-    private static function eo_wbc_support_get_product_variation_attributes( $variation_id ) {
+    public static function eo_wbc_support_get_product_variation_attributes( $variation_id ) {
+        if(function_exists('wc_get_product_variation_attributes')){
+            return wc_get_product_variation_attributes($variation_id);
+        }
+
         // Build variation data from meta.        
         $all_meta                = get_post_meta( $variation_id );
         $parent_id               = wp_get_post_parent_id( $variation_id );
@@ -231,4 +235,7 @@ class WBC_WC {
         }
     } 
 
+    public function get_currency_symbol() {
+        return get_woocommerce_currency_symbol();
+    }
 }

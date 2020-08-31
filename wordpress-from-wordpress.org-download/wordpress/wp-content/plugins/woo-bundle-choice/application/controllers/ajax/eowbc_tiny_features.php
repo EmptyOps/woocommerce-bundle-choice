@@ -9,6 +9,10 @@ $res = array( "type"=>"success", "msg"=>"Updated successfully!" );
 if(wp_verify_nonce(sanitize_text_field($_POST['_wpnonce']),'eowbc_tiny_features')){
 
 	wbc()->options->update_option('tiny_features','shop_cat_filter_location_shop',(empty($_POST['shop_cat_filter_location_shop'])?'':sanitize_text_field($_POST['shop_cat_filter_location_shop'])));
+	
+	wbc()->options->update_option('tiny_features','tiny_features_dropdown_icon_only',(empty($_POST['tiny_features_dropdown_icon_only'])?'':sanitize_text_field($_POST['tiny_features_dropdown_icon_only'])));
+
+	wbc()->options->update_option('tiny_features','tiny_features_hide_sku_category_product_page',(empty($_POST['tiny_features_hide_sku_category_product_page'])?'':sanitize_text_field($_POST['tiny_features_hide_sku_category_product_page'])));
 
 	wbc()->options->update_option('tiny_features','shop_cat_filter_location_cat',(empty($_POST['shop_cat_filter_location_cat'])?'':sanitize_text_field($_POST['shop_cat_filter_location_cat'])));
 

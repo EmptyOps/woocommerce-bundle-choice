@@ -21,6 +21,12 @@ class a_e_setupWizardCest
 		$I->loginAsAdmin();
 		$I->see( 'Dashboard' );
 
+		$I->amOnPage('/wp-admin/admin.php?page=eowbc-configuration');
+		$I->click('Buttons');
+		$I->see('Choose where you want to display');
+		$I->see('lkjsdkfghkdjsfhgksjdfbvmxn');
+
+
 		// go to the page
 		$I->amOnPage('/wp-admin/admin.php?page=eowbc&wbc_setup=1');
 		$I->see('Choose inventory');

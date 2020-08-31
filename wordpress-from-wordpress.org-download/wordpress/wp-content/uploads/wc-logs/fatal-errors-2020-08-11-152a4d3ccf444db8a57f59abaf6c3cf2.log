@@ -1,0 +1,7 @@
+2020-08-11T14:22:29+00:00 CRITICAL Uncaught Error: Call to a member function load() on null in /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/controllers/publics/pages/category.php:180
+Stack trace:
+#0 /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/controllers/publics/pages/category.php(89): eo\wbc\controllers\publics\pages\Category->eo_wbc_render()
+#1 /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/controllers/public-handler.php(72): eo\wbc\controllers\publics\pages\Category->init()
+#2 /Users/hiren/Sites/tmp/wordpress/src/wp-includes/class-wp-hook.php(287): eo\wbc\controllers\Public_Handler::eo\wbc\controllers\{closure}('')
+#3 /Users/hiren/Sites/tmp/wordpress/src/wp-includes/class-wp-hook.php(311): WP_Hook->apply_ in /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/controllers/publics/pages/category.php on line 180
+

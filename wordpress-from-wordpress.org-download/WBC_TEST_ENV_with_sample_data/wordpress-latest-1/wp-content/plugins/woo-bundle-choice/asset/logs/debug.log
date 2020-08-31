@@ -1,4 +1,0 @@
-[Aug 09 2020 14:47:10] WARNING in /tmp/WBC_TEST_ENV_with_sample_data/wordpress-latest-1/wp-content/plugins/woo-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 51
-"unserialize() expects parameter 1 to be string, array given"
-[Aug 10 2020 13:52:58] WARNING in /tmp/WBC_TEST_ENV_with_sample_data/wordpress-latest-1/wp-content/plugins/woo-bundle-choice/application/model/admin/eowbc_setting_status.php at line number 51
-"unserialize() expects parameter 1 to be string, array given"

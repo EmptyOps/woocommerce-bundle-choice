@@ -358,7 +358,7 @@ class EOWBC_Breadcrumb
             } 
 
             $terms=wp_get_post_terms($post_id,get_taxonomies(),array('fields'=>'ids'));
-            $maps = wp_cache_get( 'cache_maps', 'eo_wbc');  
+            $maps = apply_filters('eowbc_product_maps',wp_cache_get( 'cache_maps', 'eo_wbc'));  
 
             $category=array();        
             

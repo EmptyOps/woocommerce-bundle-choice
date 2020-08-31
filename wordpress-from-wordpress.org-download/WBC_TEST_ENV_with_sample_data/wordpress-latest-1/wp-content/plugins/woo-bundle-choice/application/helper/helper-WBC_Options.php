@@ -28,7 +28,9 @@ class WBC_Options {
 		return true;
 	}
 
-	public function get_option(string $option,$key,$default = false,$override=true) {
+	public function get_option(string $option,$key,$default = false,$override=true,$not_empty = false) {
+
+		$return = $default;
 
 		if($override){
 			$option = apply_filters('eowbc_helper_options_get_option_option',$option,$key,$default);
@@ -38,10 +40,16 @@ class WBC_Options {
 
 		$options = unserialize(get_option('eowbc_option_'.$option,"a:0:{}"));
 		if(!empty($options) and is_array($options) and isset($options[$key])/*!empty($options[$key])*/)  {		
-			return $options[$key];
+			$return = $options[$key];
 		} else {
-			return $default;
+			$return = $default;
 		}		
+
+		if($not_empty and empty($return)) {
+			return $default;
+		} else {
+			return $return;
+		}
 	}
 
 	public function set_option(string $option,$key,$value) {

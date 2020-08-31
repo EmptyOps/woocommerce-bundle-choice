@@ -79,8 +79,8 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 						),
 						array(
 							'parent_slug'=>'eowbc',
-							'title'=>eowbc_lang('Tiny Features').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Tiny Features'),
-							'menu_title'=>eowbc_lang('Tiny Features'),
+							'title'=>eowbc_lang('Bonus Features').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Tiny Features'),
+							'menu_title'=>eowbc_lang('Bonus Features'),
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-tiny-features',
 							'template'=>'admin/menu/tiny_features',
@@ -88,12 +88,30 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 						),
 						array(
 							'parent_slug'=>'eowbc',
+							'title'=>eowbc_lang('Shortcode Filters').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Tiny Features'),
+							'menu_title'=>eowbc_lang('Shortcode Filters'),
+							'capability'=>'manage_options',
+							'slug'=>'eowbc-shortcode-filters',
+							'template'=>'admin/menu/shortcode_filters',
+							'position'=>6
+						),	
+						array(
+							'parent_slug'=>'eowbc',
+							'title'=>eowbc_lang('Filters for Shop/Category Page').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Tiny Features'),
+							'menu_title'=>eowbc_lang('Filters for Shop/Category Page'),
+							'capability'=>'manage_options',
+							'slug'=>'eowbc-shop-cat-filter',
+							'template'=>'admin/menu/shop_cat_filter',
+							'position'=>7
+						),						
+						array(
+							'parent_slug'=>'eowbc',
 							'title'=>eowbc_lang('Price Control(Beta)').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Price Control(Beta)'),
 							'menu_title'=>eowbc_lang('Price Control(Beta)'),
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-price-control',
 							'template'=>'admin/menu/price_control',
-							'position'=>6
+							'position'=>8
 						),
 						array(
 							'parent_slug'=>'eowbc',
@@ -102,7 +120,7 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-setting-status',
 							'template'=>'admin/menu/setting-status',
-							'position'=>7
+							'position'=>9
 						),
 						array(
 							'parent_slug'=>'eowbc',
@@ -111,14 +129,39 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-extensions',
 							'template'=>'admin/menu/extensions',
-							'position'=>8
+							'position'=>10
 						),
 					);
-			$features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())));
-					
-			if(empty($features['price_control'])) {
+			$features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())));			
+			if(empty($features['ring_builder']) and empty($features['pair_maker']) and empty($features['guidance_tool'])) {
+				unset($submenu[1]);
+				unset($submenu[2]);
+				unset($submenu[3]);
+				unset($submenu[4]);
+			}
+
+			/*if(empty($features['price_control'])) {
+				unset($submenu[8]);			
+			}*/
+
+			$bonus_features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','bonus_features',serialize(array())));			
+
+			if(empty($bonus_features['price_control'])) {
+				unset($submenu[8]);
+			}
+
+			if(empty($bonus_features['opts_uis_item_page']) and empty($bonus_features['spec_view_item_page'])){
+				unset($submenu[5]);
+			}
+
+			if(empty($bonus_features['filters_shortcode'])) {
 				unset($submenu[6]);
 			}
+
+			if(empty($bonus_features['filters_shop_cat'])) {
+				unset($submenu[7]);
+			}
+
 			$menu['submenu'] = $submenu;
 			return $menu;
 		}
@@ -126,6 +169,7 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 		public function get_menu_structure() {			
 			
 			$menu = apply_filters( 'eowbc_menu', $this->get_menu());
+	
 			$features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())));
 
 			$this->add_message($features,$menu);
@@ -159,7 +203,8 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 
 		public static function pair_builder_features_list() {		
 			// TODO we must create a config class or folder and put all configs there. When implemented instead of returning array from here call that function from here	
-			return array('ring_builder'=>'Ring Builder','pair_maker'=>'Pair Maker','guidance_tool'=>'Guidance Tool');
+			return wbc()->config->get_builders();
+			//return array('ring_builder'=>'Ring Builder','pair_maker'=>'Pair Maker','guidance_tool'=>'Guidance Tool');
 		}
 
 		public static function is_pair_builder_feature_all_setup() {			

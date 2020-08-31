@@ -7,11 +7,10 @@
 ?>
 	<div class="<?php echo $width_class; ?>">
 		<p style="display: inline-block;"class="ui three wide field">
-			<span class="ui header"><?php echo($filter['title']); ?></span> 
-			<span><?php if($help): ?>
+			<span class="ui header"><?php echo($filter['title']); ?><span><?php if($help): ?>
 			&nbsp; <span class="ui grey text" style="cursor: pointer;">&nbsp;<i class="question circle outline icon" data-help="<?php _e($help); ?>"></i></span>
 			<?php endif; ?>
-			</span>
+			</span></span> 			
 		</p>
 		<div style="display: inline-block;" class="ui twelve wide field">
 			<div class="ui tiny form" data-reset="reset_checkbox(new Event('click'),'.checklist_<?php echo $filter['slug'] ?>')">
