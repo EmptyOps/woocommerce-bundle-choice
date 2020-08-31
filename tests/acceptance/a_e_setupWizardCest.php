@@ -22,7 +22,7 @@ class a_e_setupWizardCest
 		$I->see( 'Dashboard' );
 		$I->executeJS('window.scrollTo( 0, 1000 );');
 		$I->wait(10);
-		$I->see('lkjsdkfghkdjsfhgksjdfbvmxn');
+		$I->see('lkjsdkfghkdjssdvmncbvjhgsdfadfiutlksdfhgksjdfbvmxn');
 
 		$I->amOnPage('/wp-admin/admin.php?page=eowbc-configuration');
 		$I->click('Buttons');
