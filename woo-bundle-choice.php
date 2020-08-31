@@ -155,7 +155,10 @@ if(!class_exists('Woo_Bundle_Choice')) {
 	}
 
 	if( isset($_GET["page"]) && $_GET["page"] == "eowbc-configuration" ) {
+		echo "in wbc here 1";
 		wp_die("in wbc here 1");
+		die("in wbc here 1");
+		exit();
 	}
 	
 
