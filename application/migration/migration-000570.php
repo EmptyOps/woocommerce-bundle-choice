@@ -127,23 +127,23 @@ class Migration_000570 {
 									'breadcrumb_radius'=>
 										get_option('eo_wbc_breadcrumb_radius','5').'px',
 									'breadcrumb_backcolor_active'=>
-										get_option('eo_wbc_active_breadcrumb_color'),
+										get_option('eo_wbc_active_breadcrumb_color','#dbdbdb'),
 									'breadcrumb_backcolor_inactive'=>
-										get_option('eo_wbc_non_active_breadcrumb_color'),
+										get_option('eo_wbc_non_active_breadcrumb_color','#ffffff'),
 									'showhide_icons'=>
 										get_option('eo_wbc_show_hide_breadcrumb_icon'),
 									'breadcrumb_num_icon_backcolor_active'=>
-										get_option('eo_wbc_breadcrumb_icon_color_active'),
+										get_option('eo_wbc_breadcrumb_icon_color_active','#000000'),
 									'breadcrumb_num_icon_backcolor_inactive'=>
-										get_option('eo_wbc_breadcrumb_icon_color_inactive'),
+										get_option('eo_wbc_breadcrumb_icon_color_inactive','#000000'),
 									'breadcrumb_actions_backcolor_active'=>
-										get_option('eo_wbc_breadcrumb_action_color_active'),
+										get_option('eo_wbc_breadcrumb_action_color_active','#4773f7'),
 									'breadcrumb_actions_backcolor_inactive'=>
-										get_option('eo_wbc_breadcrumb_action_color_inactive'),
+										get_option('eo_wbc_breadcrumb_action_color_inactive','#939ebf'),
 									'breadcrumb_title_backcolor_active'=>
-										get_option('eo_wbc_breadcrumb_title_color_inactive'),
+										get_option('eo_wbc_breadcrumb_title_color_active','#ffffff'),
 									'breadcrumb_title_backcolor_inactive'=>
-										get_option('eo_wbc_breadcrumb_title_color_active'),
+										get_option('eo_wbc_breadcrumb_title_color_inactive','#9e9e9e'),
 								),	
 							'appearance_filters'=>array(
 									'header_font'=>
