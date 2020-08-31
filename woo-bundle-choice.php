@@ -153,7 +153,12 @@ if(!class_exists('Woo_Bundle_Choice')) {
 			do_action( 'after_eowbc_load' );			
 		}
 	}
+
+	if( isset($_GET["page"]) && $_GET["page"] == "eowbc-configuration" ) {
+		wp_die("in wbc here 1");
+	}
 	
+
 	add_action( 'plugins_loaded', function() {
 		wbc()->construct_init();
 	});

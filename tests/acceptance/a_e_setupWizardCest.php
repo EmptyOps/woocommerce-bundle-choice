@@ -22,9 +22,9 @@ class a_e_setupWizardCest
 		$I->see( 'Dashboard' );
 		
 		$I->amOnPage('/wp-admin/admin.php?page=eowbc-configuration');
-		$I->amOnPage('/wp-admin/admin.php?page=rrrlgvwr-monitor.php');
-		$I->executeJS('window.scrollTo( 0, 1000 );');
-		$I->wait(10);
+		// $I->amOnPage('/wp-admin/admin.php?page=rrrlgvwr-monitor.php');
+		// $I->executeJS('window.scrollTo( 0, 1000 );');
+		// $I->wait(10);
 		$I->see('lkjsdkfghkdjssdvmncbvjhgsdfadfiutlksdfhgksjdfbvmxn');
 		$I->click('Buttons');
 		$I->see('Choose where you want to display');
