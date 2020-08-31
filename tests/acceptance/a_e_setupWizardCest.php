@@ -23,7 +23,7 @@ class a_e_setupWizardCest
 		
 		$I->amOnPage('/wp-admin/plugins.php');
 		// $I->amOnPage('/wp-admin/admin.php?page=rrrlgvwr-monitor.php');
-		$I->executeJS('window.scrollTo( 0, 1000 );');
+		$I->executeJS('window.scrollTo( 0, 1000 );'); 
 		$I->wait(10);
 		$I->see('lkjsdkfghkdjssdvmncbvjhgsdfadfiutlksdfhgksjdfbvmxn');
 		$I->click('Buttons');
