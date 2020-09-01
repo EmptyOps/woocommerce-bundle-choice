@@ -183,7 +183,7 @@ copy_wbc() {
 	cp -Rf "$1"index.php "$2"
 	cp -Rf "$1"languages "$2"
 	cp -Rf "$1"uninstall.php "$2"
-	cp -Rf "$1"woocommerce-bundle-choice.php "$2"
+	cp -Rf "$1"woo-bundle-choice.php "$2"
 }
 
 composer_and_wp_plugins_install_update() {
