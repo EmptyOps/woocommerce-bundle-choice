@@ -91,6 +91,10 @@ class a_i_adminFiltersCest
 
 		// confirm if saved properly or not
 		$I->reloadPage();	//reload page
+
+		$I->executeJS('window.scrollTo( 0, 0 );');		
+		$I->wait(3);
+
 		$I->click('Alternate Filter Widgets');
 		$I->radioAssertion($I, 'sc1', "second_category_altr_filt_widgts", 'sc1'); 
 
@@ -140,8 +144,12 @@ class a_i_adminFiltersCest
 			$I->fillField("".$prefix."_fconfig_column_width", '50');
 			$I->fillField("".$prefix."_fconfig_ordering", '5');
 			$I->executeJS("jQuery('#".$prefix."_fconfig_input_type').dropdown('set selected', 'text_slider');");	//better than setting val directly is to select the nth element that has value val 
-			$I->fillField("".$prefix."_fconfig_icon_size", '0');
-			$I->fillField("".$prefix."_fconfig_icon_label_size", '0');
+
+			if( false ) {	// icon fields are applicable only when the filters with input type with icon is set, so set to false for now
+				$I->fillField("".$prefix."_fconfig_icon_size", '0');
+				$I->fillField("".$prefix."_fconfig_icon_label_size", '0');
+			}
+			
 			$I->executeJS("jQuery('#".$prefix."_fconfig_add_reset_link_1').checkbox('set unchecked');");	
 
 			$I->executeJS('window.scrollTo( 0, 1500 );');		//$I->scrollTo('Save');	
