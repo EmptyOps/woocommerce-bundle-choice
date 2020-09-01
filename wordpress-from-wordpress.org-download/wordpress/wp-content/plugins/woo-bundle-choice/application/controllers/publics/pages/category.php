@@ -19,7 +19,7 @@ class Category {
     private function __construct() {        
     }
 
-    public function init() {        
+    public function init() {
        
         //If add to cart triggred
         // Detection : only one category item get length > 0 
@@ -27,7 +27,7 @@ class Category {
         if( !empty(wbc()->sanitize->get('CART')) && empty(wbc()->sanitize->get('EO_CHANGE')) && ( empty(wbc()->sanitize->get('FIRST')) XOR empty(wbc()->sanitize->get('SECOND')) ) and !empty(wbc()->sanitize->get('EO_WBC')) ) {
             //Iff condition is mutual exclusive, store it to  the session.
             $this->add2cart();            
-        } 
+        }
 
         //if Current-Category is either belongs to FIRST OR SECOND Category then initiate application                
         if(
@@ -43,13 +43,18 @@ class Category {
 
             if(wbc()->options->get_option('filters_filter_setting','filter_setting_status','filter_setting_status') or $this->is_shop_cat_filter===true or $this->is_shortcode_filter) {
 
+                wbc()->theme->load('css','category');
+                wbc()->theme->load('js','category');
+            
                 /*Hide the category Title*/
                 add_filter( 'woocommerce_page_title','__return_false');
 
-                /*Hide sidebar and make content area full width.*/            
-                add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
-                    return array( false );
-                });
+                /*Hide sidebar and make content area full width.*/
+                if(apply_filters('eowbc_filter_sidebars_widgets',true)){
+                    add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
+                        return array( false );
+                    });
+                }
                 ob_start();        
                 ?>
                 <style type="text/css">
@@ -84,8 +89,7 @@ class Category {
             }        
             if($this->is_shop_cat_filter!==true && !$this->is_shortcode_filter){
                 $this->eo_wbc_add_breadcrumb();                         
-            }    
-            
+            }
             $this->eo_wbc_render(); 
         }    
     }
@@ -177,9 +181,6 @@ class Category {
     {   
         $features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())));
         
-        wbc()->theme->load('css','category');
-        wbc()->theme->load('js','category');
-
         if( !empty($features['pair_maker'])/*get_option('eo_wbc_pair_maker_status',FALSE)*/ && isset($_GET) && !empty(wbc()->sanitize->get('STEP')) && wbc()->sanitize->get('STEP')==2 && (empty(wbc()->sanitize->get('FIRST')) XOR empty(wbc()->sanitize->get('SECOND'))) ) {
 
             
@@ -276,40 +277,43 @@ class Category {
         return $site_."/product-category/{$_cat}/?EO_WBC=1&BEGIN={$_cat}&STEP=1&FIRST=&SECOND=";
     }
     public function eo_wbc_product_url($url){
+        if(empty($_GET['EO_WBC'])){
+            return $url;
+        }
 
-          return  $url.'?'.wbc()->common->http_query(
-                array(
-                    'EO_WBC'=>1,
-                    'BEGIN'=>wbc()->sanitize->get('BEGIN'),
-                    'STEP'=>wbc()->sanitize->get('STEP'),
-                    'FIRST'=>(
-                        $this->eo_wbc_get_category()==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/ 
-                                ?
-                            ''
+        return  $url.'?'.wbc()->common->http_query(
+            array(
+                'EO_WBC'=>1,
+                'BEGIN'=>wbc()->sanitize->get('BEGIN'),
+                'STEP'=>wbc()->sanitize->get('STEP'),
+                'FIRST'=>(
+                    $this->eo_wbc_get_category()==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/ 
+                            ?
+                        ''
+                            :
+                        (
+                            !empty(wbc()->sanitize->get('FIRST'))
+                                ? 
+                            sanitize_text_field(wbc()->sanitize->get('FIRST'))
                                 :
-                            (
-                                !empty(wbc()->sanitize->get('FIRST'))
-                                    ? 
-                                sanitize_text_field(wbc()->sanitize->get('FIRST'))
-                                    :
-                                ''
-                            )
-                        ),
-                    'SECOND'=>(
-                        $this->eo_wbc_get_category()==wbc()->options->get_option('configuration','second_slug')/*get_option('eo_wbc_second_slug')*/
-                                ?
                             ''
-                                :
-                            (
-                                !empty(wbc()->sanitize->get('SECOND'))
-                                    ?
-                                sanitize_text_field(wbc()->sanitize->get('SECOND'))
-                                    :
-                                ''
-                            )
                         )
-                )
-            );        
+                    ),
+                'SECOND'=>(
+                    $this->eo_wbc_get_category()==wbc()->options->get_option('configuration','second_slug')/*get_option('eo_wbc_second_slug')*/
+                            ?
+                        ''
+                            :
+                        (
+                            !empty(wbc()->sanitize->get('SECOND'))
+                                ?
+                            sanitize_text_field(wbc()->sanitize->get('SECOND'))
+                                :
+                            ''
+                        )
+                    )
+            )
+        );        
     }
 
     public function eo_wbc_id_2_slug($id){

@@ -6,7 +6,7 @@
 if(!empty($product_data)):
   ob_start();
  ?>
-<table class="ui striped single line unstackable table">
+<table class="ui striped single line unstackable table" style="clear:both;">
     <tbody>    
         <tr>
           <td rowspan="2" class="center aligned" style="font-weight: bold;    text-align: center;vertical-align: middle;">Specifications</td>

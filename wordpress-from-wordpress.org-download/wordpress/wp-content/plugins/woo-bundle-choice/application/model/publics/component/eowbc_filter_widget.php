@@ -139,6 +139,8 @@ class EOWBC_Filter_Widget {
 		wbc()->load->asset('css','fomantic/semantic.min');
 		wbc()->load->asset('js','fomantic/semantic.min');
 		wbc()->load->asset('js','publics/eo_wbc_filter');
+		wbc()->theme->load('css','filter');
+        wbc()->theme->load('js','filter');
             
 		$current_category=$this->_category;
 		$site_url=site_url();
@@ -149,7 +151,14 @@ class EOWBC_Filter_Widget {
 		
 		add_action( 'wp_footer',function(){
 
-			$fg_color=wbc()->session->get('EO_WBC_BG_COLOR','#dbdbdb');
+			$default_color = '#dbdbdb';
+			if(
+				(wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts')=='sc1' and $this->_category==wbc()->options->get_option('configuration','second_slug')) or (wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts')=='fc1' and $this->_category==wbc()->options->get_option('configuration','first_slug')) 
+			){
+				$default_color = '#000';
+			}
+
+			$fg_color=wbc()->session->get('EO_WBC_BG_COLOR',$default_color);			
 
 			$active_color=wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active',$fg_color); //get_option('eo_wbc_active_breadcrumb_color',$fg_color);
 			//wp-head here....
@@ -227,6 +236,10 @@ class EOWBC_Filter_Widget {
 					}				
 					.eo-wbc-container.filters{
 						text-align:left;
+						min-width:100% !important;
+						max-width:100% !important;
+						margin: 0 !important;
+						width:100% !important;
 					}
 					
 					/*Modifications............................*/
@@ -290,13 +303,22 @@ class EOWBC_Filter_Widget {
 					.eo_wbc_filter_icon.ui.image img{
 						width:".wbc()->options->get_option('appearance_filters','icon_size','min-content')/*get_option('eo_wbc_filter_config_icon_size','min-content')*/." !important;
 						margin:auto auto;
-					}".(wbc()->options->get_option('filters_filter_setting','filter_icon_wrap_label',false)?".eo_wbc_filter_icon div{ word-break: break-word !important; word-wrap: break-word !important; }":"")."
+					}".(wbc()->options->get_option('filters_filter_setting','filter_icon_wrap_label',false)?".eo_wbc_filter_icon div{ word-break: break-word !important;max-width: fit-content;margin:auto !important; }":"")."
+
 					#help_modal{
 						max-height: 80vh;
 						margin-left: auto;
 						margin-right: auto;					    
 					    margin-top: 10vh;
 					    height: fit-content;
+					}
+
+					#help_modal .close{
+						width:auto;
+					}
+
+					#help_modal .close:before{
+						content: 'Close  \\f00d';
 					}
 									
 					/*Modifications............................*/
@@ -330,7 +352,7 @@ class EOWBC_Filter_Widget {
 							jQuery.fn.wbc_flip_toggle_image(this);
 						});
 					})
-				</script>
+				</script>				
 				<?php
 			if(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')){
 				ob_start();
@@ -354,10 +376,10 @@ class EOWBC_Filter_Widget {
 						width: 96% !important;
 						border-top: 0px solid grey !important;
 					}
-					.eo-wbc-container .ui.steps .ui.equal.width.grid{
+					/*.eo-wbc-container .ui.steps .ui.equal.width.grid{
 						padding-top:1rem;
 						padding-bottom:1rem;
-					}
+					}*/
 
 					@media only screen and (max-width: 767.98px){
 						.ui.container:not(.fluid){
@@ -428,13 +450,14 @@ class EOWBC_Filter_Widget {
 						.eo-wbc-container>.ui.steps .step:not(:first-child):before{
 							    border-left: 1em solid #d2d2d2 !important;
 						}
-						.eo-wbc-container.filters.container.ui.form,.eo-wbc-container.filters.container.ui.form .ui.header{font-family: ".wbc()->options->get_option('appearance_filter','header_font','ZapfHumanist601BT-Roman')." !important; }.eo-wbc-container.filters.container.ui.form .ui.header{font-size:1em;}.ui.labeled.ticked.range.slider .labels{height:0px; top:unset;bottom:-10%;font-size:12px}.ui.labeled.ticked.range.slider .labels .label::after{top:unset;bottom:100%;}.eo_wbc_filter_icon:hover:not(.none_editable){ border-bottom: 0px !important; } .eo-wbc-container.filters.container.ui.form .ui.segments{ border:none !important;}
+						.eo-wbc-container.filters.container.ui.form,.eo-wbc-container.filters.container.ui.form .ui.header{font-family: ".wbc()->options->get_option('appearance_filter','header_font','ZapfHumanist601BT-Roman')." !important; }.eo-wbc-container.filters.container.ui.form .ui.header{font-size:1em;}.ui.labeled.ticked.range.slider .labels{height:0px; top:unset;bottom:-10%;font-size:12px}.ui.labeled.ticked.range.slider .labels .label::after{top:unset;bottom:100%;}
+						.ui.segment:not(.bottom_filter_segment) .eo_wbc_filter_icon:hover:not(.none_editable){ border-bottom: 0px !important; } .eo-wbc-container.filters.container.ui.form .ui.segments{ border:none !important;}
 
-						.eo_wbc_filter_icon_select,.eo_wbc_filter_icon:hover:not(.none_editable){ border-bottom: 0px !important; }
+						.ui.segment:not(.bottom_filter_segment) .eo_wbc_filter_icon_select,.ui.segment:not(.bottom_filter_segment) .eo_wbc_filter_icon:hover:not(.none_editable){ border-bottom: 0px !important; }
 						.eo-wbc-container.filters.container.ui.form .field:last-child{
 							margin-bottom: -1.4em;
 						}
-						.eo_wbc_filter_icon_select div,.eo_wbc_filter_icon:hover:not(.none_editable) div{ visibility: unset !important; 
+						.eo_wbc_filter_icon_select div,.ui.segment:not(.bottom_filter_segment) .eo_wbc_filter_icon:hover:not(.none_editable) div{ visibility: unset !important; 
 						}
 						.eo-wbc-container.filters.container.ui.form .ui.header{
 							font-size: 0.8em;
@@ -1066,7 +1089,7 @@ class EOWBC_Filter_Widget {
 			<?php
 		} else {
 			?>
-			<div id="help_modal" class="ui small modal"><div class="content"></div></div>
+			<div id="help_modal" class="ui small modal"><i class="close icon" style="top: 0;right: 0;color: #000;"></i><div class="header"></div><div class="content"></div></div>
 			<div class="eo-wbc-container filters container ui form">
 				<div class="ui segments">
 					<div class="ui segment"><?php
@@ -1393,9 +1416,11 @@ class EOWBC_Filter_Widget {
 				$select_icon = get_term_meta($term_item->term_id, 'wbc_attachment',true);
 			}
 
+			$truncate_words = wbc()->options->get_option('filters_filter_setting','filter_icon_wrap_filter_label',0,true,true);
+
 			$list[]=array("icon" => $icon ,
 							'select_icon'=>$select_icon,
-							"name" => $term_item->name,
+							"name" => (empty($truncate_words)?$term_item->name:implode(' ',array_slice(explode(' ',$term_item->name),0,$truncate_words))),
 							"slug"=> $term_item->slug,
 							"mark"=> $mark
 						);					
@@ -1557,8 +1582,11 @@ class EOWBC_Filter_Widget {
     }
     
     public function eo_wbc_get_category() {        
-        global $wp_query;        
         
+        
+        return wbc()->common->get_category('category',null,array(wbc()->options->get_option('configuration','first_slug'),wbc()->options->get_option('configuration','second_slug')));
+
+        global $wp_query;
 
         if(empty($wp_query) or empty($wp_query->get_queried_object()) or empty($wp_query->get_queried_object()->term_id)) return '';
 

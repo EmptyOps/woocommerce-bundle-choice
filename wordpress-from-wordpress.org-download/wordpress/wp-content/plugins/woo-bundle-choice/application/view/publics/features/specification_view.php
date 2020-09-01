@@ -33,7 +33,7 @@
                     $_term_list_ = array();
                     foreach ($terms as $term_id) {
                         $_term_ = get_term_by( 'id',$term_id,$attribute['name']); 
-                        if( !empty($_term_) && !is_wp_error($_term_) && is_object($_term_) ) {
+                        if( !empty($_term_) && !is_wp_error($_term_) && is_object($_term_) && property_exists($_term_,'name')) {
                             $_term_list_[] = $_term_->name;   
                         }
                     }

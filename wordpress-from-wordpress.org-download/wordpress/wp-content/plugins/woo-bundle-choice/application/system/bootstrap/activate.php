@@ -122,7 +122,7 @@ class Activate {
             
             if( !isset(get_page_by_path('design-your-own-ring')->ID) ) {
 
-            	$post_content='<div class="ui inverted segment">
+            	$post_content='<div class="ui inverted segment" style="margin: auto; !important">
 	                            <div class="ui active inverted fluid placeholder">
 	                                 <div class="rectangular">
 	                                    <img src="'./*plugins_url(basename(constant('EO_WBC_PLUGIN_DIR'))*/constant('EOWBC_ASSET_URL').'/img/banner.jpg'.'"/>
@@ -133,7 +133,7 @@ class Activate {
 	                        <!-- wp:shortcode -->
 	                            [woo-bundle-choice-btn]
 	                        <!-- /wp:shortcode -->
-	                        <div class="ui segment fluid">
+	                        <div class="ui segment fluid" style="margin: auto; !important">
 	                            <div class="ui three cards">
 	                              <div class="ui inverted card">
 	                                <div class="content">

@@ -43,10 +43,12 @@ class Eowbc_Model {
 		$res = array();
 		$res["type"] = "success";
 	    $res["msg"] = "";
-	    
+	    $res["key"] = $key;
     	// $key = $saved_tab_key;
+
    	
 		$list_data = unserialize(wbc()->options->get_option_group($key,"a:0:{}"));
+		$res["keydata"] = array_keys($list_data);
 		$list_data_updated = array();
         
         $delete_cnt = 0;

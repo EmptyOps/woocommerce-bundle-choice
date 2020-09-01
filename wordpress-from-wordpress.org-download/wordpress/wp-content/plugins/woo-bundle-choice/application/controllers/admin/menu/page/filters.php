@@ -333,6 +333,20 @@ if ( ! class_exists( 'Filters' ) ) {
 									'size_class'=>array('eight','wide'),
 									'inline'=>true,
 								),
+							'filter_icon_wrap_filter_label'=>array(
+									'label'=>'Word Wrap Icon Filter Labels',
+									'type'=>'text',
+									'sanitize'=>'sanitize_text_field',
+									'value'=>'0',									
+									'class'=>array(),
+									'size_class'=>array('eight','wide'),
+									'visible_info'=>array( 
+									'label'=>eowbc_lang('Specify here to limit the number of word that is displayed on icon filters, it is sometime useful to keep it visually appealing.'),
+									'type'=>'visible_info',
+									'class'=>array('small'),
+									'size_class'=>array('eight','wide'),
+									),
+								),
 							'filter_setting_btnfilter_now'=>array(
 								'label'=>'Show Apply & Reset Filters Button',
 								'type'=>'checkbox',
@@ -542,26 +556,28 @@ if ( ! class_exists( 'Filters' ) ) {
 								'type'=>'label',
 								'size_class'=>array('eight','wide')
 							),
-							'd_fconfig_filter_label'=>array(
+							/*'d_fconfig_filter_label'=>array(
 								'label'=>eowbc_lang('Filter'),
 								'type'=>'label',
 								//'class'=>array('fluid'),
 								'size_class'=>array('three','wide','required'),
 								// 'next_inline'=>true,
 								// 'inline'=>true,
-							),
+							),*/
 							'd_fconfig_id'=>array(
 								'type'=>'hidden',
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
 							),
 							'd_fconfig_filter'=>array(
+								'label'=>'Filter',
 								'type'=>'select',
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
+								'validate'=>array('required'=>''),
 								'options'=>\eo\wbc\controllers\admin\menu\page\Filters::eo_wbc_attributes_( \eo\wbc\controllers\admin\menu\page\Filters::eo_wbc_prime_category_() ),	//array_replace(\eo\wbc\model\Category_Attribute::instance()->get_category(),\eo\wbc\model\Category_Attribute::instance()->get_attributs()),
 								'class'=>array('fluid'),
-								'size_class'=>array('three','wide'),
+								'size_class'=>array('three','wide','required'),
 								// 'attr'=>array("onchange=\"document.getElementById('d_fconfig_type').value=this.options[this.selectedIndex].getAttribute('data-type')\"")
 								// 'prev_inline'=>true,
 								// 'next_inline'=>true,
@@ -648,7 +664,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'next_inline'=>true,
 								// 'inline'=>true,
 							),
-							'd_fconfig_input_type_label'=>array(
+							/*'d_fconfig_input_type_label'=>array(
 								'label'=>eowbc_lang('Input Type'),
 								'type'=>'label',
 								//'class'=>array('fluid'),
@@ -656,14 +672,16 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'prev_inline'=>true,
 								// 'next_inline'=>true,
 								// 'inline'=>true,
-							),
+							),*/
 							'd_fconfig_input_type'=>array(
+								'label'=>eowbc_lang('Input Type'),
 								'type'=>'select',
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
+								'validate'=>array('required'=>''),
 								'options'=>array('icon'=>'Icon Only','icon_text'=>'Icon and Text','numeric_slider'=>'Numeric slider','text_slider'=>'Text slider','checkbox'=>'Checkbox'),
 								'class'=>array('fluid'),
-								'size_class'=>array('three','wide'),
+								'size_class'=>array('three','wide','required'),
 								// 'prev_inline'=>true,
 								// 'inline'=>true,
 							),
@@ -734,6 +752,12 @@ if ( ! class_exists( 'Filters' ) ) {
 								'style'=>'normal',
 								// 'prev_inline'=>true,
 								// 'inline'=>true,
+								'visible_info'=>array( 
+									'label'=>eowbc_lang('Reset action is not suported yet with the Template 3.'),
+									'type'=>'visible_info',
+									'class'=>array('small'),
+									// 'size_class'=>array('sixteen','wide'),
+								),
 							),
 							'd_fconfig_add_help'=>array(
 								'type'=>'checkbox',
@@ -812,26 +836,28 @@ if ( ! class_exists( 'Filters' ) ) {
 								'type'=>'label',
 								'size_class'=>array('eight','wide')
 							),
-							's_fconfig_filter_label'=>array(
+							/*'s_fconfig_filter_label'=>array(
 								'label'=>eowbc_lang('Filter'),
 								'type'=>'label',
 								//'class'=>array('fluid'),
 								'size_class'=>array('three','wide','required'),
 								// 'next_inline'=>true,
 								// 'inline'=>true,
-							),
+							),*/
 							's_fconfig_id'=>array(
 								'type'=>'hidden',
 								'value'=>'',								
 								'sanitize'=>'sanitize_text_field',
 							),
 							's_fconfig_filter'=>array(
+								'label'=>eowbc_lang('Filter'),
 								'type'=>'select',
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
+								'validate'=>array('required'=>''),
 								'options'=>\eo\wbc\controllers\admin\menu\page\Filters::eo_wbc_attributes_( \eo\wbc\controllers\admin\menu\page\Filters::eo_wbc_prime_category_() ),	//array_replace(\eo\wbc\model\Category_Attribute::instance()->get_category(),\eo\wbc\model\Category_Attribute::instance()->get_attributs()),
 								'class'=>array('fluid'),
-								'size_class'=>array('three','wide'),
+								'size_class'=>array('three','wide','required'),
 								// 'attr'=>array("onchange=\"document.getElementById('s_fconfig_type').value=this.options[this.selectedIndex].getAttribute('data-type')\"")
 								// 'prev_inline'=>true,
 								// 'next_inline'=>true,
@@ -919,7 +945,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'next_inline'=>true,
 								// 'inline'=>true,
 							),
-							's_fconfig_input_type_label'=>array(
+							/*'s_fconfig_input_type_label'=>array(
 								'label'=>eowbc_lang('Input Type'),
 								'type'=>'label',
 								//'class'=>array('fluid'),
@@ -927,14 +953,16 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'prev_inline'=>true,
 								// 'next_inline'=>true,
 								// 'inline'=>true,
-							),
+							),*/
 							's_fconfig_input_type'=>array(
+								'label'=>eowbc_lang('Input Type'),
 								'type'=>'select',
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
+								'validate'=>array('required'=>''),
 								'options'=>array('icon'=>'Icon Only','icon_text'=>'Icon and Text','numeric_slider'=>'Numeric slider','text_slider'=>'Text slider','checkbox'=>'Checkbox'),
 								'class'=>array('fluid'),
-								'size_class'=>array('three','wide'),
+								'size_class'=>array('three','wide','required'),
 								// 'prev_inline'=>true,
 								// 'inline'=>true,
 							),
@@ -1005,6 +1033,12 @@ if ( ! class_exists( 'Filters' ) ) {
 								'style'=>'normal',
 								// 'prev_inline'=>true,
 								// 'inline'=>true,
+								'visible_info'=>array( 
+									'label'=>eowbc_lang('Reset action is not suported yet with the Template 3.'),
+									'type'=>'visible_info',
+									'class'=>array('small'),
+									// 'size_class'=>array('sixteen','wide'),
+								),
 							),
 							's_fconfig_add_help'=>array(
 								'type'=>'checkbox',
