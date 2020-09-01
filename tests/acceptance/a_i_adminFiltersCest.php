@@ -32,6 +32,9 @@ class a_i_adminFiltersCest
 		// select category
 		$I->executeJS("jQuery('#config_filter_status').checkbox('set checked');");	
 
+		$I->scrollTo('#filter_setting_submit_btn', -300, -300);
+		$I->wait(3);
+
 		// save 
 		$I->click('#filter_setting_submit_btn'); 	//('Save');		//it shouldn't be this way, but there seem some issue with selenium driver and thus when there is another Save button on the page even though on another page and is not visible but still selenium think it is visible and thus gives us error so need to use unique xPath like id etc. 
 

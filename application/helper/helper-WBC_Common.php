@@ -282,4 +282,9 @@ class WBC_Common {
     	return !empty($obj) && is_object($obj);
     }
 
+    // should move all other such array functions from code igniter helper libs for productivity
+    public function isEmptyArr($arr){
+    	return empty($arr) || !is_array($arr);
+    }
+
 }

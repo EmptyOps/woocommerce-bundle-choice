@@ -20,16 +20,6 @@ class a_e_setupWizardCest
 		//login to admin panel, should save and maintain cookies so that do not need to login on all admin test. but yeah however during the front end test should flush the admin cookie first.  
 		$I->loginAsAdmin();
 		$I->see( 'Dashboard' );
-		
-		$I->amOnPage('/wp-admin/plugins.php');
-		// $I->amOnPage('/wp-admin/admin.php?page=rrrlgvwr-monitor.php');
-		// $I->executeJS('window.scrollTo( 0, 1000 );');
-		// $I->wait(10);
-		$I->see('lkjsdkfghkdjssdvmncbvjhgsdfadfiutlksdfhgksjdfbvmxn');
-		$I->click('Buttons');
-		$I->see('Choose where you want to display');
-		$I->see('lkjsdkfghkdjsfhgksjdfbvmxn');
-
 
 		// go to the page
 		$I->amOnPage('/wp-admin/admin.php?page=eowbc&wbc_setup=1');

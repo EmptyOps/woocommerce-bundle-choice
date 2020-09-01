@@ -48,54 +48,57 @@ class Eowbc_Filters extends Eowbc_Model {
 
 					$body = array();
 
+					// TODO had just put the empty array check but we should found in what cases the option is set to empty/null etc. which is not expected and possible behaviour
+					if( !wbc()->common->isEmptyArr($filter_data) ) {
 
+						foreach ($filter_data as $rk => $rv) {
+							$row = array();
 
-					foreach ($filter_data as $rk => $rv) {
-						$row = array();
-
-						$row[] =array(
-								'val' => '',
-								'is_checkbox' => true, 
-								'checkbox'=> array('id'=>$key.$rv[$key_clean.'_filter'],'value'=>array(),'options'=>array(/*$rv[$key.'_filter']*/$rk=>''),'class'=>'','where'=>'in_table')
-							);
-						
-						$disabled = empty($rv[$key_clean.'_add_enabled'])?true:false;
-						
-						// foreach ($rv as $rvk => $rvv) {
-						foreach ($form_definition[$key]["form"][$fk]["head"][0] as $ck => $cv) {
-							if(empty($cv["field_id"])) { continue; }
-							$rvk = $cv["field_id"];
-							$rvv = ( !isset($rv[$rvk]) || wbc()->common->nonZeroEmpty($rv[$rvk]) ) ?  "" : $rv[$rvk];
+							$row[] =array(
+									'val' => '',
+									'is_checkbox' => true, 
+									'checkbox'=> array('id'=>$key.$rv[$key_clean.'_filter'],'value'=>array(),'options'=>array(/*$rv[$key.'_filter']*/$rk=>''),'class'=>'','where'=>'in_table')
+								);
 							
-							//skip the id
-							if( in_array($rvk,array($key_clean."_dependent",$key_clean."_type",$key_clean."_add_help",$key_clean."_add_help_text",$key_clean."_add_enabled")) ) {
-								continue;
+							$disabled = empty($rv[$key_clean.'_add_enabled'])?true:false;
+							
+							// foreach ($rv as $rvk => $rvv) {
+							foreach ($form_definition[$key]["form"][$fk]["head"][0] as $ck => $cv) {
+								if(empty($cv["field_id"])) { continue; }
+								$rvk = $cv["field_id"];
+								$rvv = ( !isset($rv[$rvk]) || wbc()->common->nonZeroEmpty($rv[$rvk]) ) ?  "" : $rv[$rvk];
+								
+								//skip the id
+								if( in_array($rvk,array($key_clean."_dependent",$key_clean."_type",$key_clean."_add_help",$key_clean."_add_help_text",$key_clean."_add_enabled")) ) {
+									continue;
+								}
+
+								if( $rvk == $key_clean."_is_advanced" ) {
+									$row[] = array( 'val' => $rvv == 1 ? "Yes" : "No" ,'disabled'=>$disabled);
+								}
+								else if( $rvk == $key_clean."_add_reset_link" ) {
+									$row[] = array( 'val' => $rvv == 1 ? "Yes" : "No" ,'disabled'=>$disabled);
+								}							
+								else if( $rvk == $key_clean."_input_type" || $rvk == $key_clean."_filter" ) {
+									$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv);
+									if($rvk == $key_clean."_filter"){
+										$row[] = array( 'val' => !is_array($val)?$val:$val["label"] ,'disabled'=>$disabled, 'link'=>($rvk == $key_clean."_filter"),'edit_id'=>$rk);	
+									} else {
+										$row[] = array( 'val' => !is_array($val)?$val:$val["label"] ,'disabled'=>$disabled);	
+									}
+									
+								}elseif(!empty($form_definition[$key]["form"][$cv['field_id']]) and $form_definition[$key]["form"][$cv['field_id']]['type']=='select') {
+									$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv);
+									$row[] = array( 'val' => $val ,'disabled'=>$disabled);
+								}
+								else {
+									$row[] = array( 'val' => $rvv ,'disabled'=>$disabled);
+								}
 							}
 
-							if( $rvk == $key_clean."_is_advanced" ) {
-								$row[] = array( 'val' => $rvv == 1 ? "Yes" : "No" ,'disabled'=>$disabled);
-							}
-							else if( $rvk == $key_clean."_add_reset_link" ) {
-								$row[] = array( 'val' => $rvv == 1 ? "Yes" : "No" ,'disabled'=>$disabled);
-							}							
-							else if( $rvk == $key_clean."_input_type" || $rvk == $key_clean."_filter" ) {
-								$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv);
-								if($rvk == $key_clean."_filter"){
-									$row[] = array( 'val' => !is_array($val)?$val:$val["label"] ,'disabled'=>$disabled, 'link'=>($rvk == $key_clean."_filter"),'edit_id'=>$rk);	
-								} else {
-									$row[] = array( 'val' => !is_array($val)?$val:$val["label"] ,'disabled'=>$disabled);	
-								}
-								
-							}elseif(!empty($form_definition[$key]["form"][$cv['field_id']]) and $form_definition[$key]["form"][$cv['field_id']]['type']=='select') {
-								$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv);
-								$row[] = array( 'val' => $val ,'disabled'=>$disabled);
-							}
-							else {
-								$row[] = array( 'val' => $rvv ,'disabled'=>$disabled);
-							}
+							$body[] = $row;
 						}
 
-						$body[] = $row;
 					}
 
 					$form_definition[$key]["form"][$fk]["body"] = $body;
