@@ -252,7 +252,7 @@ class n_f_adminSideSetupCest
         $I->click($save_button_xpath);  
 
         // in case server is hanged and it takes time!
-        $I->waitForText('Saved!', 10);
+        $I->waitForText('Filter updated successfuly', 10);
 
         // confirm if saved properly or not
         $I->reloadPage();   //reload page
