@@ -1,11 +1,4 @@
 <style type="text/css">
-	.container{
-		width: 100% !important;
-	}
-
-	#main-content .container{
-		padding-top: 1em !important;
-	}
 	#main-content>.container{
 		margin-left: 5% !important;
 		margin-right:5% !important;

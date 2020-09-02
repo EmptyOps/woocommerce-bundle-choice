@@ -61,6 +61,8 @@ if(wp_verify_nonce(sanitize_text_field($_POST['_wpnonce']),'eowbc_tiny_features'
 
 	wbc()->options->update_option('tiny_features','product_page_hide_second_variation_form',(empty($_POST['product_page_hide_second_variation_form'])?'':1));
 
+	wbc()->options->update_option('tiny_features','tiny_features_specification_meta_keys',(empty($_POST['tiny_features_specification_meta_keys'])?'':$_POST['tiny_features_specification_meta_keys']));
+
 	//$res['msg'] = "Updated successfully!";
 	//wbc()->options->update_option('configuration','config_category',1);
 	//wbc()->options->update_option('configuration','config_map',1);

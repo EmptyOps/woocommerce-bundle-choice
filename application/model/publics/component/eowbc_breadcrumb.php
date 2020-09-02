@@ -502,6 +502,10 @@ class EOWBC_Breadcrumb
 
     private static function eo_wbc_breadcrumb_get_category($product_id)
     {   
+        if(is_object($product_id) and property_exists($product_id,'get_id')) {
+            $product_id = $product_id->get_id();
+        }
+        
         return wbc()->common->get_category('product',$product_id,array(self::$first_slug,self::$second_slug));
 
 
