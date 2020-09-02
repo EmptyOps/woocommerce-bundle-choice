@@ -29,10 +29,10 @@ class Acceptance extends \Codeception\Module
         }
 
         if( $key == "first_button_text" && ($prefix=="n_" || empty($prefix)) ) {
-            return "Start with Diamond Shape";
+            return "sdfdsfdsfhdghfdgf Diamond Shape";   //"Start with Diamond Shape";
         }
         else if( $key == "second_button_text" && ($prefix=="n_" || empty($prefix)) ) {
-            return "Start with Setting Shape";
+            return "sdfdsfdsfhdghfdgf Setting Shape";      //"Start with Setting Shape";
         }
         else if( $key == "cat_name_0" ) {
             return $first_cat_name_for_suite_x;

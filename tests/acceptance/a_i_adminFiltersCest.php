@@ -75,6 +75,10 @@ class a_i_adminFiltersCest
 
 		// confirm if saved properly or not
 		$I->reloadPage();	//reload page
+		
+		$I->executeJS('window.scrollTo( 0, 0 );');		
+		$I->wait(3);
+
 		$I->click('Alternate Filter Widgets');
 		// $I->seeInField('second_category_altr_filt_widgts', 'sc3');
 		$I->radioAssertion($I, 'sc3', "second_category_altr_filt_widgts", 'sc3'); 
@@ -160,6 +164,10 @@ class a_i_adminFiltersCest
 
 			// confirm if saved properly or not
 			$I->reloadPage();	//reload page
+
+			$I->executeJS('window.scrollTo( 0, 0 );');		
+			$I->wait(3);
+
 			$I->click( $name.' Page Filter Configuration');
 			$I->see('Test '.$prefix.' filter');	
 

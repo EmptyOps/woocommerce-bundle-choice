@@ -468,7 +468,8 @@ class n_f_adminSideSetupCest
         }
 
         // select specified checkbox 
-        $I->executeJS("jQuery('##eowbc_price_control_methods_list > tbody > tr > td:nth-child(1) > div > input[type=checkbox]').checkbox('set checked');");      //here should use entity_id to check the checkbox 
+        $I->executeJS('jQuery = $;');   //since wasn't defined on some pages
+        $I->executeJS("jQuery('#eowbc_price_control_methods_list > tbody > tr > td:nth-child(1) > div > input[type=checkbox]').checkbox('set checked');");      //here should use entity_id to check the checkbox 
 
         // select specfied bulk action 
         $I->executeJS("jQuery('#eowbc_price_control_methods_list_bulk_dropdown_div').dropdown('set selected', '".$bulk_action."');");  //better than setting val directly is to select the nth element that has value val
