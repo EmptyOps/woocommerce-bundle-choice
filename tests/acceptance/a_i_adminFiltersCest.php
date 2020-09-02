@@ -32,6 +32,9 @@ class a_i_adminFiltersCest
 		// select category
 		$I->executeJS("jQuery('#config_filter_status').checkbox('set checked');");	
 
+		$I->scrollTo('#filter_setting_submit_btn', -300, -300);
+		$I->wait(3);
+
 		// save 
 		$I->click('#filter_setting_submit_btn'); 	//('Save');		//it shouldn't be this way, but there seem some issue with selenium driver and thus when there is another Save button on the page even though on another page and is not visible but still selenium think it is visible and thus gives us error so need to use unique xPath like id etc. 
 
@@ -88,6 +91,10 @@ class a_i_adminFiltersCest
 
 		// confirm if saved properly or not
 		$I->reloadPage();	//reload page
+
+		$I->executeJS('window.scrollTo( 0, 0 );');		
+		$I->wait(3);
+
 		$I->click('Alternate Filter Widgets');
 		$I->radioAssertion($I, 'sc1', "second_category_altr_filt_widgts", 'sc1'); 
 
@@ -137,8 +144,12 @@ class a_i_adminFiltersCest
 			$I->fillField("".$prefix."_fconfig_column_width", '50');
 			$I->fillField("".$prefix."_fconfig_ordering", '5');
 			$I->executeJS("jQuery('#".$prefix."_fconfig_input_type').dropdown('set selected', 'text_slider');");	//better than setting val directly is to select the nth element that has value val 
-			$I->fillField("".$prefix."_fconfig_icon_size", '0');
-			$I->fillField("".$prefix."_fconfig_icon_label_size", '0');
+
+			if( false ) {	// icon fields are applicable only when the filters with input type with icon is set, so set to false for now
+				$I->fillField("".$prefix."_fconfig_icon_size", '0');
+				$I->fillField("".$prefix."_fconfig_icon_label_size", '0');
+			}
+			
 			$I->executeJS("jQuery('#".$prefix."_fconfig_add_reset_link_1').checkbox('set unchecked');");	
 
 			$I->executeJS('window.scrollTo( 0, 1500 );');		//$I->scrollTo('Save');	

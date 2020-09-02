@@ -43,6 +43,7 @@ class Eowbc_Filters extends Eowbc_Model {
 					$filter_data = unserialize(wbc()->options->get_option_group('filters_'.$key,"a:0:{}"));
 					
 					//wbc()->common->pr($form_definition, false, false);
+					// wbc()->common->var_dump('table data for key '.$key);
 					// wbc()->common->pr($filter_data, false, false);
 
 					$body = array();
@@ -65,7 +66,7 @@ class Eowbc_Filters extends Eowbc_Model {
 							if(empty($cv["field_id"])) { continue; }
 							$rvk = $cv["field_id"];
 							$rvv = ( !isset($rv[$rvk]) || wbc()->common->nonZeroEmpty($rv[$rvk]) ) ?  "" : $rv[$rvk];
-
+							
 							//skip the id
 							if( in_array($rvk,array($key_clean."_dependent",$key_clean."_type",$key_clean."_add_help",$key_clean."_add_help_text",$key_clean."_add_enabled")) ) {
 								continue;
@@ -76,7 +77,7 @@ class Eowbc_Filters extends Eowbc_Model {
 							}
 							else if( $rvk == $key_clean."_add_reset_link" ) {
 								$row[] = array( 'val' => $rvv == 1 ? "Yes" : "No" ,'disabled'=>$disabled);
-							}
+							}							
 							else if( $rvk == $key_clean."_input_type" || $rvk == $key_clean."_filter" ) {
 								$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv);
 								if($rvk == $key_clean."_filter"){
@@ -85,6 +86,9 @@ class Eowbc_Filters extends Eowbc_Model {
 									$row[] = array( 'val' => !is_array($val)?$val:$val["label"] ,'disabled'=>$disabled);	
 								}
 								
+							}elseif(!empty($form_definition[$key]["form"][$cv['field_id']]) and $form_definition[$key]["form"][$cv['field_id']]['type']=='select') {
+								$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv);
+								$row[] = array( 'val' => $val ,'disabled'=>$disabled);
 							}
 							else {
 								$row[] = array( 'val' => $rvv ,'disabled'=>$disabled);
@@ -118,6 +122,7 @@ class Eowbc_Filters extends Eowbc_Model {
 	}
 
 	public function switch_template_4(){
+		wbc()->options->update_option('filters_filter_setting','filter_setting_price_filter_width','50%');
 		wbc()->options->update_option('appearance_filter','header_font','ZapfHumanist601BT-Roman');
 		//wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_active','#f7f7f7');	
 		//wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_inactive','#ffffff');
@@ -126,12 +131,25 @@ class Eowbc_Filters extends Eowbc_Model {
 	}
 
 	public function switch_template_3(){
-
+		wbc()->options->update_option('filters_filter_setting','filter_setting_price_filter_width','50%');
 		wbc()->options->update_option('appearance_filter','header_font','Avenir');
 		//wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_active','#dde5ed');
 		//wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_inactive','#ffffff');
 		wbc()->options->update_option('appearance_filters','slider_track_backcolor_active',sanitize_hex_color('#9bb8d3'));
 		wbc()->options->update_option('appearance_filters','slider_nodes_backcolor_active',sanitize_hex_color('#9bb8d3'));		
+	}
+
+	public function switch_template_2(){
+		$this->switch_template_1();
+	}
+
+	public function switch_template_1(){
+		wbc()->options->update_option('filters_filter_setting','filter_setting_price_filter_width','50%');
+		wbc()->options->update_option('appearance_filter','header_font','ZapfHumanist601BT-Roman');
+		//wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_active','#dde5ed');
+		//wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_inactive','#ffffff');
+		wbc()->options->update_option('appearance_filters','slider_track_backcolor_active',sanitize_hex_color('#000000'));
+		wbc()->options->update_option('appearance_filters','slider_nodes_backcolor_active',sanitize_hex_color('#000000'));		
 	}
 
 	public function save( $form_definition, $is_auto_insert_for_template=false ) {
@@ -158,6 +176,10 @@ class Eowbc_Filters extends Eowbc_Model {
 					$this->switch_template_4();
 				} elseif ($_POST['first_category_altr_filt_widgts']=='fc3') {
 					$this->switch_template_3();
+				} elseif ($_POST['first_category_altr_filt_widgts']=='fc2') {
+					$this->switch_template_2();
+				} elseif ($_POST['first_category_altr_filt_widgts']=='fc1') {
+					$this->switch_template_1();
 				}
 
 				$filter_data = unserialize(wbc()->options->get_option_group('filters_'.$this->tab_key_prefix.'d_fconfig',"a:0:{}"));
@@ -203,6 +225,10 @@ class Eowbc_Filters extends Eowbc_Model {
 					$this->switch_template_4();
 				} elseif ($_POST['second_category_altr_filt_widgts']=='sc3') {
 					$this->switch_template_3();
+				} elseif ($_POST['second_category_altr_filt_widgts']=='sc2') {
+					$this->switch_template_2();
+				} elseif ($_POST['second_category_altr_filt_widgts']=='sc1') {
+					$this->switch_template_1();
 				}
 
 				$filter_data = unserialize(wbc()->options->get_option_group('filters_'.$this->tab_key_prefix.'s_fconfig',"a:0:{}"));

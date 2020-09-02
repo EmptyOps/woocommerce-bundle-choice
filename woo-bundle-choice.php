@@ -1,5 +1,4 @@
 <?php
-
 /**
  *
  * @link https://wordpress.org/plugins/woo-bundle-choice/
@@ -153,7 +152,7 @@ if(!class_exists('Woo_Bundle_Choice')) {
 			do_action( 'after_eowbc_load' );			
 		}
 	}
-	
+
 	add_action( 'plugins_loaded', function() {
 		wbc()->construct_init();
 	});

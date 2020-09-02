@@ -404,6 +404,9 @@ class n_f_adminSideSetupCest
         // 
         $I->executeJS("jQuery('#".$feature_id."').parent().checkbox('set checked', '".$feature_id."');");   
         
+        $I->scrollTo('/html/body/div[1]/div[2]/div[2]/div[1]/div[10]/div[2]/div/form/div[4]/div[3]/button', -300, -300);
+        $I->wait(3);
+
         // save 
         $I->click('Save');  
         $I->wait(2);

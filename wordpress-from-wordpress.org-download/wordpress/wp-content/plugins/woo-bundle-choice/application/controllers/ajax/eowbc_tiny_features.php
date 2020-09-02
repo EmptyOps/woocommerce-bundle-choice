@@ -56,7 +56,10 @@ if(wp_verify_nonce(sanitize_text_field($_POST['_wpnonce']),'eowbc_tiny_features'
 	wbc()->options->update_option('tiny_features','tiny_features_option_ui_font_color_hover',(empty($_POST['tiny_features_option_ui_font_color_hover'])?'#ffffff':sanitize_text_field($_POST['tiny_features_option_ui_font_color_hover'])));
 	wbc()->options->update_option('tiny_features','tiny_features_option_ui_bg_color',(empty($_POST['tiny_features_option_ui_bg_color'])?'#ffffff':sanitize_text_field($_POST['tiny_features_option_ui_bg_color'])));
 	wbc()->options->update_option('tiny_features','tiny_features_option_ui_bg_color_hover',(empty($_POST['tiny_features_option_ui_bg_color_hover'])?'#ffffff':sanitize_text_field($_POST['tiny_features_option_ui_bg_color_hover'])));
-	wbc()->options->update_option('tiny_features','tiny_features_option_ui_bg_color_hover',(empty($_POST['tiny_features_option_ui_bg_color_hover'])?'#ffffff':sanitize_text_field($_POST['tiny_features_option_ui_bg_color_hover'])));
+
+	wbc()->options->update_option('tiny_features','product_page_hide_first_variation_form',(empty($_POST['product_page_hide_first_variation_form'])?'':1));
+
+	wbc()->options->update_option('tiny_features','product_page_hide_second_variation_form',(empty($_POST['product_page_hide_second_variation_form'])?'':1));
 
 	//$res['msg'] = "Updated successfully!";
 	//wbc()->options->update_option('configuration','config_category',1);
@@ -68,4 +71,5 @@ else {
 }
 
  
-echo json_encode($res);
+// echo json_encode($res);
+wbc()->rest->response($res);

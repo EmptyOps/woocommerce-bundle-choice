@@ -1,6 +1,6 @@
 <?php 
 
-class sunob_a_y_bonusFeaturesFiltersForShopCategoryPageCest
+class sunob_a_y_bonusFeaturesFiltersForShopCategoryPageCest extends n_f_adminSideSetupCest
 {
     public function _before(AcceptanceTester $I)
     {
@@ -101,17 +101,17 @@ class sunob_a_y_bonusFeaturesFiltersForShopCategoryPageCest
         }
 
         // try to disable a filter 
-        $I->bulkEnableDisableDelete( $I, '', 'deactivate' );
+        parent::bulkEnableDisableDelete( $I, '', 'deactivate' );
 
         // try to enable a filter 
-        $I->bulkEnableDisableDelete( $I, '', 'activate' );
+        parent::bulkEnableDisableDelete( $I, '', 'activate' );
 
         // try to edit any one filter from here 
         $I->click('Test d filter', 'a');
         $this->addEditFilters( $I, true, array('label'=>'Category page filter'));
 
         // TODO try to delete a filter 
-        $I->bulkEnableDisableDelete( $I, '', 'delete' );
+        parent::bulkEnableDisableDelete( $I, '', 'delete' );
 
         //now since its deleted create again
         $this->addEditFilters( $I );

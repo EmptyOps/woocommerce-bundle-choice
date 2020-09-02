@@ -161,9 +161,13 @@ class Cart {
     
     public function eo_wbc_render()
     {   
-        add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
-            return array( false );
-        });
+        wbc()->theme->load('css','cart');
+        wbc()->theme->load('js','cart');
+        if(apply_filters('eowbc_filter_sidebars_widgets',true)){
+            add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
+                return array( false );
+            });
+        }
 
         
         // if our car is empty then return.
