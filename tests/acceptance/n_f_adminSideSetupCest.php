@@ -312,7 +312,7 @@ class n_f_adminSideSetupCest
             // here check operation type first and than do add or edit
             if( $operation[$i] == "edit" ) {
                 // find target row based on mapping, find and click edit action within the row 
-                $I->editActionClick( $mapping[$i] ); 
+                $I->editActionClick( $I, $mapping[$i] ); 
             }
 
             // set field

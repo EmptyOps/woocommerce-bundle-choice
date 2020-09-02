@@ -302,12 +302,14 @@ class Acceptance extends \Codeception\Module
         echo "called get_session... ".$key;
         try {
             //we should use standard practice like php session that comes with phpbrowser or something of that sort. but now as a quick resort we are saving it just in the txt file. 
-            $myfile = fopen($key.".txt", "r") or die("Unable to open file!");
-            $val = fread($myfile,filesize($key.".txt"));
-            fclose($myfile);
+            if( file_exists($key.".txt") ) {
+                $myfile = fopen($key.".txt", "r") or die("Unable to open file!");
+                $val = fread($myfile,filesize($key.".txt"));
+                fclose($myfile);
 
-            echo " ".$val;
-            return $val;
+                echo " ".$val;
+                return $val;
+            }
         }
         catch(Exception $e) {
             echo "caught message...";
@@ -486,7 +488,7 @@ class Acceptance extends \Codeception\Module
         // echo "called resetSession...";
             
         try { 
-            $I->executeJS('jQuery("td:contains('.$entity_title.'):not(.disabled) > a")[0].trigger("click");');  
+            $I->executeJS('jQuery(jQuery("td:contains('.$entity_title.'):not(.disabled) > a")[0]).trigger("click");');  
             return true;
         }
         catch(Exception $e) {
