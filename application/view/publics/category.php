@@ -47,6 +47,13 @@
     .cat_products.seven.wide.column{
         height: max-content;
     }
+    .ui.card>.image:not(.ui)>img, .ui.cards>.card>.image:not(.ui)>img{
+        height: 250px !important;
+    }
+    .woocommerce-Price-amount.amount,ins,del{
+        color: white !important;
+        background-color: transparent !important;
+    }
 </style>                    
 <div class="eo_wbc_hidden_data" style="display: none;">                                                
     <div class="ui grid stackable container padded">
@@ -69,7 +76,7 @@
                         //create a card layout within containers
                         ?>         
                         <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->                             
-                        <div class="cat_products seven wide column">
+                        <div class="cat_products five wide column">
                             <?php if( (wbc()->options->get_option('configuration','pair_maker_upper_card',1)/*get_option('eo_wbc_pair_upper_card',1)*/==1 && $category_object->eo_wbc_get_category()==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/) OR (wbc()->options->get_option('configuration','pair_maker_upper_card',1)/*get_option('eo_wbc_pair_upper_card',1)*/==2 && $category_object->eo_wbc_get_category()==wbc()->options->get_option('configuration','second_slug')/*get_option('eo_wbc_second_slug')*/)): ?>  
                                 <div class="ui special cards centered">
                                     <div class="card">

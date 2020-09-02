@@ -450,6 +450,23 @@ $form['data'] = array(
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>true,
 				),
+			'tiny_features_specification_meta_keys'=>array(
+					'label'=>'Additional Meta',
+					'type'=>'select',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_specification_meta_keys',''),
+					'sanitize'=>'sanitize_text_field',		
+					//'options'=>\eo\wbc\model\Category_Attribute::instance()->get_category(),			
+					'class'=>array('fluid','multiple','allow_addition','search'),
+					'field_attr'=>array('multiple=""'),
+					'inline'=>false,					
+					'size_class'=>array(),
+					'visible_info'=>array( 'label'=>eowbc_lang('Add Keys of your Additional WooCommerce Product Meta here, if you want to display them with specification view. If the meta is not found for your specified key then it will be ignored.'),
+						'type'=>'visible_info',
+						'class'=>array('small'),
+						// 'size_class'=>array('sixteen','wide'),
+					),
+					
+				),
 			'tiny_features_save_specification_view'=>array(
 						'label'=>'Save',
 						'type'=>'button',		
@@ -847,3 +864,4 @@ wbc()->load->model('admin\form-builder');
 eo\wbc\model\admin\Form_Builder::instance()->build($form);
 wbc()->load->asset('js','admin/tiny-feature/shortcode-filter');
 wbc()->load->asset('js','admin/tiny-feature/shop-cat');
+wbc()->load->asset('js','admin/tiny-feature/specification');
