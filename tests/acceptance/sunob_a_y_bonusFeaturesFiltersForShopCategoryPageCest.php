@@ -50,6 +50,8 @@ class sunob_a_y_bonusFeaturesFiltersForShopCategoryPageCest extends n_f_adminSid
 
         // TODO cover configuration fields that are supposed to be moved to this tab from older version
 
+        // TODO as well as cover configuration fields of the new fields that are being added from time to time 
+
 		// $I->scrollTo('//*[@id="filter_setting_submit_btn"]', -300, -100);
 		// $I->wait(3);
 		
@@ -94,7 +96,7 @@ class sunob_a_y_bonusFeaturesFiltersForShopCategoryPageCest extends n_f_adminSid
 
     }
 
-	public function manageShortcodeFiltersList(AcceptanceTester $I) {
+	public function manageShopCategoryFiltersList(AcceptanceTester $I) {
 
 		if( !$I->test_allowed_in_this_environment("sunob_a_") ) {
             return;
