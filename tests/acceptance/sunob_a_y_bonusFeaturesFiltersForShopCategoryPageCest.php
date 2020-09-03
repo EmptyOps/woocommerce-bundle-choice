@@ -21,9 +21,8 @@ class sunob_a_y_bonusFeaturesFiltersForShopCategoryPageCest extends n_f_adminSid
 		$I->loginAsAdmin();
 		$I->see( 'Dashboard' );
 
-		// enable and go to the page
-		$this->enablingBonusFeature($I, 'filters_shop_cat', 'eowbc-shop-cat-filter', 'Filters for Shop/Category Page');
-        // $I->amOnPage('/wp-admin/admin.php?page=eowbc-shortcode-filters');    // no need of it as above function call also do that
+		// go to the page
+		$I->amOnPage('/wp-admin/admin.php?page=eowbc-shop-cat-filter');
 
 		/* Map creation and modification tab */
 		// go to the tab

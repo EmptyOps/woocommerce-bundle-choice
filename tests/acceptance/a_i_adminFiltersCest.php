@@ -162,6 +162,8 @@ class a_i_adminFiltersCest
 			// save 
 			$I->click("#".$prefix."_fconfig_submit_btn"); 	//('Save');		//it shouldn't be this way, but there seem some issue with selenium driver and thus when there is another Save button on the page even though on another page and is not visible but still selenium think it is visible and thus gives us error so need to use unique xPath like id etc. 
 
+			$I->waitForText("New Filter Added Successfully");
+
 			// confirm if saved properly or not
 			$I->reloadPage();	//reload page
 

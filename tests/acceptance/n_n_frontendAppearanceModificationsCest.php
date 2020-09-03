@@ -32,7 +32,7 @@ class n_n_frontendAppearanceModificationsCest extends n_f_adminSideSetupCest
         $this->verifyAppearance($I, array( 'tagline_text', 'button_text', 'button_backcolor_active' ), array( 'tagline_text', 'button_text', 'button_backcolor_active' ), array( 'text', 'text', 'color' ), array( 'My custom tagline', 'Continue With', '#000000' ), array(), array('','','#wbc_ > div > div > button:nth-child(1)'), array('','','backgroundColor'));
 
         // change button texts back so that tests to follow are not affected
-        $this->modifyAppearance($I, 'Buttons Widget', array( 'button_text' ), array( 'button_text' ), array( 'text' ), array( 'Start with' ), '//*[@id="wid_btns_submit_btn"]', array( '' ));
+        $this->modifyAppearance($I, 'Buttons Widget', array( 'button_text' ), array( 'button_text' ), array( 'text' ), array( 'sdfdsfdsfhdghfdgf' /*'Start with'*/ ), '//*[@id="wid_btns_submit_btn"]', array( '' ));
     }
 
     // test if editing the appearance of breadcrumb works or not  

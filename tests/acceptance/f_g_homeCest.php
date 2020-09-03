@@ -95,7 +95,7 @@ class f_g_homeCest
             return;
         }
         
-        // TODO
+        // TODO - HIGH PRIORITY Since more users of our plugin are using going to use and rely on shortcode
 
     }
 

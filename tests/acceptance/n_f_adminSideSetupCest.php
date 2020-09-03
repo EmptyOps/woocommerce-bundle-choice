@@ -32,6 +32,7 @@ class n_f_adminSideSetupCest
         // save 
         $I->scrollTo('//*[@id="config_navigation_conf_save_btn"]', -300, -100);
         $I->wait(3);
+        $I->executeJS(' jQuery("#config_navigation_conf_save_btn").trigger("click"); ');
         $I->click('#config_navigation_conf_save_btn');  //('Save');     //it shouldn't be this way, but there seem some issue with selenium driver and thus when there is another Save button on the page even though on another page and is not visible but still selenium think it is visible and thus gives us error so need to use unique xPath like id etc. 
 
         // since due to sample data is there it may take time to install alternate widget's sample data 
@@ -384,7 +385,7 @@ class n_f_adminSideSetupCest
         
     }
 
-    protected function enablingBonusFeature(AcceptanceTester $I, $feature_id, $target_page, $text_verification) {
+    protected function enablingBonusFeature(AcceptanceTester $I, $feature_id, $target_page, $text_verification, $target_tab='') {
 
         if( !$I->test_allowed_in_this_environment("sunob_a_") ) {
             return;
@@ -404,7 +405,7 @@ class n_f_adminSideSetupCest
         // 
         $I->executeJS("jQuery('#".$feature_id."').parent().checkbox('set checked', '".$feature_id."');");   
         
-        $I->scrollTo('/html/body/div[1]/div[2]/div[2]/div[1]/div[10]/div[2]/div/form/div[4]/div[3]/button', -300, -300);
+        $I->scrollTo('//*[@id="save"]', -300, -300);
         $I->wait(3);
 
         // save 
@@ -413,6 +414,10 @@ class n_f_adminSideSetupCest
 
         // verify
         $I->amOnPage('/wp-admin/admin.php?page='.$target_page);
+
+        if( !empty($target_tab) ) {
+            $I->click($target_tab);
+        }
 
         $I->see($text_verification);
 

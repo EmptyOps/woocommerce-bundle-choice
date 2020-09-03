@@ -21,9 +21,8 @@ class sunob_a_w_bonusFeaturesShortcodeFiltersCest extends n_f_adminSideSetupCest
 		$I->loginAsAdmin();
 		$I->see( 'Dashboard' );
 
-        // enable and go to the page
-		$this->enablingBonusFeature($I, 'filters_shortcode', 'eowbc-shortcode-filters', 'Display Filters using Shortcode');
-        // $I->amOnPage('/wp-admin/admin.php?page=eowbc-shortcode-filters');    // no need of it as above function call also do that
+        // go to the page
+		$I->amOnPage('/wp-admin/admin.php?page=eowbc-shortcode-filters');    
 
 		/* Map creation and modification tab */
 		// go to the tab
