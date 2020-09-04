@@ -28,7 +28,7 @@ class sunob_a_u_bonusFeaturesSpecificationsViewCest
 		/* Map creation and modification tab */
 		// go to the tab
 		$I->click('Specifications View for Item Page');
-		$I->see('Enable Specifications View?');
+		$I->see('Specification View Configuration');
 
 		// set fields 
 		$I->executeJS("jQuery('#specification_view_status').parent().checkbox('set checked', 'specification_view_status');");

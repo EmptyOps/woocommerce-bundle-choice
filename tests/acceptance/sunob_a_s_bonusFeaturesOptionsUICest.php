@@ -27,7 +27,7 @@ class sunob_a_s_bonusFeaturesOptionsUICest
 		/* Map creation and modification tab */
 		// go to the tab
 		// $I->click('Breadcrumb');
-		$I->see('Toggle Button Enabled?');
+		$I->see('Hide SKU,Categories sections?');
 
 		// set fields 
 		$I->executeJS("jQuery('#tiny_features_option_ui_toggle_status').parent().checkbox('set checked', 'tiny_features_option_ui_toggle_status');");

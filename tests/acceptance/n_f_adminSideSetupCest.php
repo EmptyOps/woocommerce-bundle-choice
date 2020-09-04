@@ -448,8 +448,12 @@ class n_f_adminSideSetupCest
         $I->fillField("".$prefix."_fconfig_column_width", '50');
         $I->fillField("".$prefix."_fconfig_ordering", '5');
         $I->executeJS("jQuery('#".$prefix."_fconfig_input_type').dropdown('set selected', 'text_slider');");    //better than setting val directly is to select the nth element that has value val 
-        $I->fillField("".$prefix."_fconfig_icon_size", '0');
-        $I->fillField("".$prefix."_fconfig_icon_label_size", '0');
+
+        if( false ) {   // icon fields are applicable only when the filters with input type with icon is set, so set to false for now
+            $I->fillField("".$prefix."_fconfig_icon_size", '0');
+            $I->fillField("".$prefix."_fconfig_icon_label_size", '0');
+        }
+        
         $I->executeJS("jQuery('#".$prefix."_fconfig_add_reset_link_1').checkbox('set unchecked');");    
 
         $I->executeJS('window.scrollTo( 0, 1500 );');       //$I->scrollTo('Save'); 
@@ -466,7 +470,7 @@ class n_f_adminSideSetupCest
     }
 
 
-    protected function bulkEnableDisableDelete(AcceptanceTester $I, $entity_id, $bulk_action ) {
+    protected function bulkEnableDisableDelete(AcceptanceTester $I, $entity_id, $bulk_action, $apply_button_selector ) {
 
         if( !$I->test_allowed_in_this_environment("sunob_a_") ) {
             return;
@@ -478,6 +482,9 @@ class n_f_adminSideSetupCest
 
         // select specfied bulk action 
         $I->executeJS("jQuery('#eowbc_price_control_methods_list_bulk_dropdown_div').dropdown('set selected', '".$bulk_action."');");  //better than setting val directly is to select the nth element that has value val
+
+        $I->scrollTo($apply_button_selector, -300, -300);
+        $I->wait(3);
 
         // click action button 
         $I->click('Apply');
