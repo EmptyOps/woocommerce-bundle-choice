@@ -32,8 +32,9 @@ class n_f_adminSideSetupCest
         // save 
         $I->scrollTo('//*[@id="config_navigation_conf_save_btn"]', -300, -100);
         $I->wait(3);
-        $I->executeJS(' jQuery("#config_navigation_conf_save_btn").trigger("click"); ');
         $I->click('#config_navigation_conf_save_btn');  //('Save');     //it shouldn't be this way, but there seem some issue with selenium driver and thus when there is another Save button on the page even though on another page and is not visible but still selenium think it is visible and thus gives us error so need to use unique xPath like id etc. 
+
+        $I->wbc_debug_log($I, '#config_navigation_conf_save_btn');
 
         // since due to sample data is there it may take time to install alternate widget's sample data 
         $I->waitForText('Updated successfully', 10);
@@ -42,6 +43,22 @@ class n_f_adminSideSetupCest
         $I->reloadPage();   //reload page
         $I->click('Navigations Steps( Breadcrumb )');
         $I->radioAssertion($I, $widget_key, "config_alternate_breadcrumb", $widget_key); 
+    }
+
+    protected function getCurrentBreadcrumbWidget(AcceptanceTester $I)
+    {
+        // if( !$I->test_allowed_in_this_environment("n_") ) {
+        //     return;
+        // }
+
+        // go to the page
+        $I->amOnPage('/wp-admin/admin.php?page=eowbc-configuration');
+
+        // go to the tab
+        $I->click('Navigations Steps( Breadcrumb )');
+        $I->see('First Category');
+
+        $I->getRadioValue($I, "config_alternate_breadcrumb"); 
     }
 
     protected function setAlternateFilterWidget(AcceptanceTester $I, $widget_key, $cat)
@@ -115,7 +132,7 @@ class n_f_adminSideSetupCest
         }
     }
 
-    protected function gotoProductFromCategoryPage(AcceptanceTester $I, $cat=0)
+    protected function gotoProductFromCategoryPage(AcceptanceTester $I, $cat=0, $button_title="Continue")
     {
         $this->gotoStep( $I, $cat );
 
@@ -124,7 +141,7 @@ class n_f_adminSideSetupCest
 
         $I->click('//*[@id="main"]/ul/li/a/img');
         $I->waitForText('Specifications', 10);    //remember that waitForText is case sensitive.
-        $I->see('Continue');    
+        $I->see($button_title);    
     }
 
     protected function modifyAppearance(AcceptanceTester $I, $tab, $field_id, $field_name, $field_type, $val, $save_button_xpath, $field_dropdown_div_id=array())
@@ -251,6 +268,8 @@ class n_f_adminSideSetupCest
         
         // save 
         $I->click($save_button_xpath);  
+
+        $I->wbc_debug_log($I, '#d_fconfig_submit_btn');
 
         // in case server is hanged and it takes time!
         $I->waitForText('Filter updated successfuly', 10);
@@ -433,6 +452,10 @@ class n_f_adminSideSetupCest
         if( !empty($goto_page) ) {
 
         }
+        else {
+            $I->executeJS('window.scrollTo( 0, 0 );');       //$I->scrollTo('Save'); 
+            $I->wait(3);
+        }
 
         // go to the tab
         $I->click($goto_tab);
@@ -478,7 +501,7 @@ class n_f_adminSideSetupCest
 
         // select specified checkbox 
         $I->executeJS('jQuery = $;');   //since wasn't defined on some pages
-        $I->executeJS("jQuery('#eowbc_price_control_methods_list > tbody > tr > td:nth-child(1) > div > input[type=checkbox]').checkbox('set checked');");      //here should use entity_id to check the checkbox 
+        $I->executeJS("jQuery( jQuery('#eowbc_price_control_methods_list > tbody > tr > td:nth-child(1) > div > input[type=checkbox]')[0] ).prop('checked', true);");      //here should use entity_id to check the checkbox 
 
         // select specfied bulk action 
         $I->executeJS("jQuery('#eowbc_price_control_methods_list_bulk_dropdown_div').dropdown('set selected', '".$bulk_action."');");  //better than setting val directly is to select the nth element that has value val

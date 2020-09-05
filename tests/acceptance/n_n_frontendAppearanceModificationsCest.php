@@ -53,6 +53,11 @@ class n_n_frontendAppearanceModificationsCest extends n_f_adminSideSetupCest
 
         // TODO still all the appearance are not tested like the last 3 switches are not modified yet
 
+
+        // get current template 
+        $curr_tmplt = $this->getCurrentBreadcrumbWidget($I);
+        echo "verifying appearance for template ".$curr_tmplt;
+
         // go to target page
         $this->gotoStep($I, 1, false, "n_" ); 
 
@@ -61,7 +66,13 @@ class n_n_frontendAppearanceModificationsCest extends n_f_adminSideSetupCest
             array( 'breadcrumb_radius', 'breadcrumb_backcolor_active', 'breadcrumb_backcolor_inactive', 'breadcrumb_num_icon_backcolor_active', 'breadcrumb_title_backcolor_inactive', 'breadcrumb_actions_backcolor_inactive' ), 
             array( 'css', 'color', 'color', 'color', 'color', 'color' ), 
             array( '5px', '#f1f1f1', '#ffffff', '#000000', '#00ff00', '#49bf50' ), array(), 
-            array('#main > header > div:nth-child(4) > div > div:nth-child(2)','#main > header > div:nth-child(4) > div > div.active.step','#main > header > div:nth-child(4) > div > div:nth-child(2)', '#main > header > div:nth-child(4) > div > div.active.step > div > div.ui.grid > div:nth-child(1)', '#main > header > div:nth-child(4) > div > div:nth-child(2) > div > div.ui.grid > div:nth-child(2) > div.title', '#main > header > div:nth-child(4) > div > div:nth-child(2) > div > div:nth-child(3) > u:nth-child(3) > a'), 
+            array( 
+                $I->get_configs('breadcrumb_radius', "n_", $curr_tmplt, "selector"),
+                '#main > header > div:nth-child(4) > div > div.active.step','#main > header > div:nth-child(4) > div > div:nth-child(2)', 
+                '#main > header > div:nth-child(4) > div > div.active.step > div > div.ui.grid > div:nth-child(1)', 
+                '#main > header > div:nth-child(4) > div > div:nth-child(2) > div > div.ui.grid > div:nth-child(2) > div.title', 
+                '#main > header > div:nth-child(4) > div > div:nth-child(2) > div > div:nth-child(3) > u:nth-child(3) > a' 
+            ), 
             array('border-radius','backgroundColor','backgroundColor', 'color','color','color'));
     }
 
@@ -84,12 +95,18 @@ class n_n_frontendAppearanceModificationsCest extends n_f_adminSideSetupCest
             $field_type = array( 'color', 'color', 'color', 'color', 'text' );
             $val = array( '#000000', '#00ff00', '#000000', '#00ff00', '64px' );
 
+            $curr_tmplt = "";
             if( $cat == 0 ) {
 
                 //need to set selector according to template 
                 $curr_tmplt = $I->get_session('wbc_suite_n__process_current_filter_template_'.$cat);
                 if( $curr_tmplt == "fc1" ) {
-                    $selector_of_targets = array('#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > p > span', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(2)', '#text_slider_pa_eo_carat_attr > div > div:nth-child(3)', '/html/body/section/main/header/div[5]/div/div[1]/div/div[2]/div[2]/div/div[2]', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(1) > img' );
+                    $selector_of_targets = array(
+                        '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > p > span', 
+                        '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(2)', 
+                        '#text_slider_pa_eo_carat_attr > div > div:nth-child(3)', 
+                        '#text_slider_price > div > div.track-fill', 
+                        '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(1) > img' );
                 }
                 elseif( $curr_tmplt == "fc2" ) {
                     $selector_of_targets = array('/html/body/section/main/header/div[5]/div/div[1]/div/div[1]/p/span', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(2)', '#text_slider_pa_eo_carat_attr > div > div:nth-child(3)', '/html/body/section/main/header/div[5]/div/div[1]/div/div[2]/div[2]/div/div[1]', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(1) > img');
@@ -118,6 +135,8 @@ class n_n_frontendAppearanceModificationsCest extends n_f_adminSideSetupCest
 
             // since icon size will require checking css property
             $field_type[4] = "css";
+
+            $I->dontSee("verifying template ".$curr_tmplt." for category ".$cat);   // for debugging purpose only
 
             // verify changed appearance
             $this->verifyAppearance($I, $field_id, $field_name, $field_type, $val, array(), $selector_of_targets, $css_property_of_targets );
@@ -148,7 +167,7 @@ class n_n_frontendAppearanceModificationsCest extends n_f_adminSideSetupCest
         // TODO still all the appearance are not tested like sc_atc_button_text, product_page_add_to_basket etc. 
 
         // go to target page
-        $this->gotoProductFromCategoryPage($I, 0); 
+        $this->gotoProductFromCategoryPage($I, 0, "Next..."); 
 
         unset($field_id[1]); unset($field_id[2]);
         unset($field_name[1]); unset($field_name[2]);
@@ -158,6 +177,9 @@ class n_n_frontendAppearanceModificationsCest extends n_f_adminSideSetupCest
         // verify changed appearance
         $this->verifyAppearance($I, $field_id, $field_name, $field_type, $val, array(), $selector_of_targets, $css_property_of_targets );
 
+        // change values back so that tests to follow are not affected
+        $val = array( 'Continue', 'Continue', 'Add This To Cart' );
+        $this->modifyAppearance($I, 'Product Page', $field_id, $field_name, $field_type, $val, '//*[@id="product_page_submit_btn"]', array( '' ));
     }
     
 }

@@ -49,7 +49,7 @@ class sunob_a_u_bonusFeaturesSpecificationsViewCest
 		// $I->executeJS('window.scrollTo( 0, 10 );');
 		// $I->wait(3);
 		$I->click('Specifications View for Item Page');
-		$I->seeInField('tiny_features_specification_view_style', 'template_1');	//$I->see('4px', 'input');	//I verify that I can see "button tagline..." inside input tag 
+		$I->radioAssertion($I, 'template_1', "tiny_features_specification_view_style", 'template_1'); 	//$I->seeInField('tiny_features_specification_view_style', 'template_1');	
 
 	}
 

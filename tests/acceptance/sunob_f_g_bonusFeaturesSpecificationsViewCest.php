@@ -84,8 +84,7 @@ class sunob_f_g_bonusFeaturesSpecificationsViewCest
         // confirm if saved properly or not. TODO actually we should connfirm all values of the form if saved and repopulated properly in edit mode or saved list or not. 
         $I->reloadPage();   //reload page
         $I->click('Specifications View for Item Page');
-        $I->seeInField('tiny_features_specification_view_style', 'template_3'); //$I->see('4px', 'input');  //I verify that I can see "button tagline..." inside input tag 
-
+        $I->radioAssertion($I, 'template_3', "tiny_features_specification_view_style", 'template_3');   //$I->seeInField('tiny_features_specification_view_style', 'template_3'); 
 
         //
         //  Put shortcode somewhere. I think to test shortcode putting manually on some external page is fine, like in the sample page which is there and available default wp/woo. 
