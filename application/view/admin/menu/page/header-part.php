@@ -30,7 +30,13 @@ if( empty($mode) || ( $mode != "setup_wizard" && $mode != "plain" ) ) {
   </div> 
 </h2>
 
+
 <?php 
+        $setup_wizard_status = wbc()->options->get_option('_system','setup_wizard_run', false);
+        if( empty($setup_wizard_status) ) {
+          
+          echo ('<p><strong>It seems that you have not completed the setup wizard, <a class="ui link" href="'.admin_url('admin.php?page=eowbc&wbc_setup=1').'">we recommend that you visit it.</a></strong></p>');            
+        }
 }
 else {
     if( $mode == "setup_wizard" ) { ?>

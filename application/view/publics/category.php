@@ -64,6 +64,40 @@
             $_posts=$wp_query->posts;
 
             if( is_array($_posts) && !empty($_posts) ){
+                
+                if ( wc_get_loop_prop( 'is_paginated' ) ||  woocommerce_products_will_display() ) {
+                    
+                
+
+                    $args = array(
+                        'total'    => wc_get_loop_prop( 'total' ),
+                        'per_page' => wc_get_loop_prop( 'per_page' ),
+                        'current'  => wc_get_loop_prop( 'current_page' ),
+                    );
+
+                    $total_text = '';
+                    // phpcs:disable WordPress.Security
+                    if ( 1 === intval( $args['total'] ) ) {
+                        _e( 'Showing the single result', 'woocommerce' );
+                    } elseif ( $args['total'] <= $args['per_page'] || -1 === $args['per_page'] ) {
+                        /* translators: %d: total results */
+                        $total_text = sprintf( _n( 'Showing all %d result', 'Showing all %d results', $args['total'], 'woocommerce' ), $args['total'] );
+                    } else {
+                        $first = ( $args['per_page'] * $args['current'] ) - $args['per_page'] + 1;
+                        $last  = min( $args['total'], $args['per_page'] * $args['current'] );
+                        /* translators: 1: first result 2: last result 3: total results */
+                        $total_text = sprintf( _nx( 'Showing %1$d&ndash;%2$d of %3$d result', 'Showing %1$d&ndash;%2$d of %3$d results', $args['total'], 'with first and last result', 'woocommerce' ), $first, $last, $args['total'] );
+                    }
+                    // phpcs:enable WordPress.Security
+                    
+                    ?>
+                    <script type="text/javascript">
+                        jQuery(document).ready(function($){
+                            $('.woocommerce-result-count').html('<?php _e($total_text); ?>')
+                        });
+                    </script>
+                    <?php
+                }
 
                 $prev_product_id = wbc()->sanitize->get('FIRST') | wbc()->sanitize->get('SECOND');
                 $prev_product=wbc()->wc->eo_wbc_get_product($prev_product_id);
