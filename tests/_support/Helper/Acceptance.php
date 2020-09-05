@@ -325,7 +325,7 @@ class Acceptance extends \Codeception\Module
                 $val = fread($myfile,filesize($key.".txt"));
                 fclose($myfile);
 
-                echo "session value for key ".$key." is ".$val".";
+                echo "session value for key ".$key." is ".$val.".";
                 return $val;
             }
         }
