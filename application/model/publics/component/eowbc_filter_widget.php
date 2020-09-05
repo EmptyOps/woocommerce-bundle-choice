@@ -266,8 +266,12 @@ class EOWBC_Filter_Widget {
 						 border: 1px solid {$active_color} !important;
 						 background: {$active_color} !important;
 					}
+					.eo_wbc_filter_icon{
+						padding-left: 2px !important;
+						padding-right: 2px !important;
+					}
 					.eo_wbc_filter_icon_select{
-						border-bottom:2px solid {$active_color} !important;
+						border-bottom:2px solid ".wbc()->options->get_option('appearance_filters','slider_nodes_backcolor_active',$active_color)." !important;
 					}				
 					.eo_wbc_filter_icon:hover:not(.none_editable){
 						border-bottom:2px solid ".wbc()->options->get_option('appearance_filters','slider_nodes_backcolor_active',$active_color)/*get_option('eo_wbc_filter_config_slidernode_color',$active_color)*/." !important;						

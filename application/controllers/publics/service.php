@@ -26,6 +26,27 @@ class Service {
 	}
 
     public function discount_service() {
+
+
+        add_action( 'woocommerce_update_cart_action_cart_updated',function() {
+           if(!empty($_POST['cart'])){
+                $cart = wbc()->session->get('EO_WBC_MAPS');
+                foreach ($_POST['cart'] as $key => $value) {                    
+                    if(array_key_exists($key,$cart) and !empty($value['qty'])){
+                        foreach (wc()->cart->cart_contents as $cart_key=>$cart_item)
+                        {
+                            if($cart[$key]["FIRST"][0]==$cart_item["product_id"] && $cart[$key]["FIRST"][2]==$cart_item["variation_id"]){
+                                
+                                wc()->cart->set_quantity($cart_key,$cart_item['quantity']+($value['qty']-$cart[$key]['FIRST'][1]));
+                                $cart[$key]['FIRST'][1] = $value['qty'];
+                            }
+                        }               
+                    }
+                }
+                wbc()->session->set('EO_WBC_MAPS',$cart);                   
+           }
+        },10);
+        
         $features = array_filter(unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array()))));
         
         if( empty(array_intersect(array_values($features),array_keys(wbc()->config->get_builders())))

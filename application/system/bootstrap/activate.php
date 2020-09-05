@@ -123,7 +123,7 @@ class Activate {
             if( !isset(get_page_by_path('design-your-own-ring')->ID) ) {
 
             	$post_content='<div class="ui inverted segment" style="margin: auto; !important">
-	                            <div class="ui active inverted fluid placeholder">
+	                            <div class="ui active inverted fluid placeholder" style="margin: auto; !important">
 	                                 <div class="rectangular">
 	                                    <img src="'./*plugins_url(basename(constant('EO_WBC_PLUGIN_DIR'))*/constant('EOWBC_ASSET_URL').'/img/banner.jpg'.'"/>
 	                                 </div>
@@ -137,21 +137,21 @@ class Activate {
 	                            <div class="ui three cards">
 	                              <div class="ui inverted card">
 	                                <div class="content">
-	                                  <div class="ui inverted placeholder">
+	                                  <div class="ui inverted placeholder" style="margin: auto; !important">
 	                                    <div class="rectangular"><img src="'./*plugins_url(basename(constant('EO_WBC_PLUGIN_DIR'))*/constant('EOWBC_ASSET_URL').'/img/diamond-sample.png'.'"/></div>
 	                                  </div>
 	                                </div>
 	                              </div>
 	                              <div class="ui inverted card">
 	                                <div class="content">
-	                                  <div class="ui inverted placeholder">
+	                                  <div class="ui inverted placeholder" style="margin: auto; !important">
 	                                    <div class="rectangular" style="padding-bottom: 25%;"><img class="ui small image" style="height: 50%;width: 50%;margin-left: 25%;margin-top: 25%;"  src="'./*plugins_url(basename(constant('EO_WBC_PLUGIN_DIR'))*/constant('EOWBC_ASSET_URL').'/img/right-arrow-sample.png'.'"/></div>
 	                                  </div>
 	                                </div>
 	                              </div>
 	                              <div class="ui inverted card">
 	                                <div class="content">
-	                                  <div class="ui inverted placeholder">
+	                                  <div class="ui inverted placeholder" style="margin: auto; !important">
 	                                    <div class="rectangular"><img src="'./*plugins_url(basename(constant('EO_WBC_PLUGIN_DIR'))*/constant('EOWBC_ASSET_URL').'/img/ring-sample.png'.'"/></div>
 	                                  </div>
 	                                </div>

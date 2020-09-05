@@ -193,7 +193,7 @@ class Eowbc_Filters extends Eowbc_Model {
 					$this->deactivate( $ids,$this->tab_key_prefix.'d_fconfig',1 );
 					$ids = array();
 					foreach ($filter_data as $filter_key=>$filter) {
-						if($_POST['first_category_altr_filt_widgts']==$filter['filter_template']){
+						if(isset($filter['filter_template']) and $_POST['first_category_altr_filt_widgts']==$filter['filter_template']) {
 							//$ids[] = $filter['d_fconfig_filter'];
 							$ids[] = $filter_key;
 						}
@@ -240,7 +240,7 @@ class Eowbc_Filters extends Eowbc_Model {
 					$this->deactivate( $ids,$this->tab_key_prefix.'s_fconfig',1);
 					$ids = array();
 					foreach ($filter_data as $filter_key=>$filter) {
-						if($_POST['second_category_altr_filt_widgts']==$filter['filter_template']){
+						if( isset($filter['filter_template']) and $_POST['second_category_altr_filt_widgts']==$filter['filter_template']) {
 							//$ids[] = $filter['s_fconfig_filter'];
 							$ids[] = $filter_key;							
 						}
