@@ -87,7 +87,7 @@ class f_k_step2Cest
 		// - I see in next page the text "${price of Step 2 item's price}"
 		$I->waitForText($price_of_product, 10);
 		$I->see('VIEW');
-		$I->see('REMOVE');
+		$I->see('CHANGE');
 		$I->see('Add This To Cart');
 
 		// check remove action 
@@ -117,7 +117,7 @@ class f_k_step2Cest
 		// // - I see in next page the text "${price of Step 1 item's price}"
 		// $I->waitForText($price_of_product, 10, 'span');
 		// $I->waitForText('VIEW', 10, 'a');
-		// $I->waitForText('REMOVE', 10, 'a');
+		// $I->waitForText('CHANGE', 10, 'a');
 
 	}
 
@@ -139,7 +139,7 @@ class f_k_step2Cest
 		// // - I see in next page the text "${price of Step 1 item's price}"
 		// $I->waitForText($price_of_product, 10, 'span');
 		// $I->waitForText('VIEW', 10, 'a');
-		// $I->waitForText('REMOVE', 10, 'a');
+		// $I->waitForText('CHANGE', 10, 'a');
 
 	}
 

@@ -1,6 +1,9 @@
 // a shared namespace among plugins and extensions of the sphere plugins
 jQuery.splugins = jQuery.splugins || {};
 
+jQuery.splugins.is_debug = true; 
+jQuery.splugins.is_test_script_debug = true;    
+
 jQuery.splugins.hasAttr = function(obj,name) {  
    return jQuery(obj).attr(name) !== undefined;
 };
@@ -223,6 +226,10 @@ jQuery(document).ready(function($){
 
             },
             success:function(result,status,xhr){
+                if( jQuery.splugins.is_test_script_debug ) {
+                    jQuery($this).attr('data-debug_log', "success result " + result);
+                }
+
                 var resjson = jQuery.splugins.parseJSON(result);     //jQuery.parseJSON(result);
                 if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
 
@@ -249,6 +256,10 @@ jQuery(document).ready(function($){
                 }                   
             },
             error:function(xhr,status,error){
+                if( jQuery.splugins.is_test_script_debug ) {
+                    jQuery($this).attr('data-debug_log', "caught error " + error);
+                }
+
                 /*console.log(xhr);*/
                 $('body').toast({
                     class:'error',

@@ -21,8 +21,8 @@ class sunob_a_w_bonusFeaturesShortcodeFiltersCest extends n_f_adminSideSetupCest
 		$I->loginAsAdmin();
 		$I->see( 'Dashboard' );
 
-		// go to the page
-		$I->amOnPage('/wp-admin/admin.php?page=eowbc-shortcode-filters');
+        // go to the page
+		$I->amOnPage('/wp-admin/admin.php?page=eowbc-shortcode-filters');    
 
 		/* Map creation and modification tab */
 		// go to the tab
@@ -73,17 +73,17 @@ class sunob_a_w_bonusFeaturesShortcodeFiltersCest extends n_f_adminSideSetupCest
         }
 
         // try to disable a filter 
-        parent::bulkEnableDisableDelete( $I, '', 'deactivate' );
+        parent::bulkEnableDisableDelete( $I, '', 'deactivate', '//*[@id="d_fconfig_submit_btn_bulk"]' );
 
         // try to enable a filter 
-        parent::bulkEnableDisableDelete( $I, '', 'activate' );
+        parent::bulkEnableDisableDelete( $I, '', 'activate', '//*[@id="d_fconfig_submit_btn_bulk"]' );
 
         // try to edit any one filter from here 
         $I->click('Test d filter', 'a');
         $this->addEditFilters( $I, true, array('label'=>'Shortcode filter'));
 
         // TODO try to delete a filter 
-        parent::bulkEnableDisableDelete( $I, '', 'delete' );
+        parent::bulkEnableDisableDelete( $I, '', 'delete', '//*[@id="d_fconfig_submit_btn_bulk"]' );
 
         //now since its deleted create again
         $this->addEditFilters( $I );
