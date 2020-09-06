@@ -1,8 +1,14 @@
 // a shared namespace among plugins and extensions of the sphere plugins
 jQuery.splugins = jQuery.splugins || {};
 
-jQuery.splugins.is_debug = true; 
+jQuery.splugins.is_debug = false; 
 jQuery.splugins.is_test_script_debug = true;    
+
+jQuery.splugins.process_debug_log = function(obj,debug_log) {  
+   if( jQuery.splugins.is_test_script_debug ) {
+        jQuery(obj).attr('data-debug_log', jQuery(obj).attr('data-debug_log') + debug_log);
+    }
+};
 
 jQuery.splugins.hasAttr = function(obj,name) {  
    return jQuery(obj).attr(name) !== undefined;
@@ -162,7 +168,13 @@ jQuery(document).ready(function($){
         var original_txt = jQuery($this).text();
         var original_cursor = jQuery($this).css('cursor');
         var processing_txt = jQuery.splugins.hasAttr(this,'data-loading_text') ? jQuery($this).attr('data-loading_text') : 'Processing...';
-        if( original_txt == processing_txt ) { return; }
+        if( original_txt == processing_txt ) { 
+            jQuery.splugins.process_debug_log( $this, "In progress processing detected..." );
+            return; 
+        }
+        else {
+            jQuery.splugins.process_debug_log( $this, "Starting save process..." );
+        }
         jQuery($this).text(processing_txt);
         jQuery($this).css('cursor', 'default');
 
@@ -226,9 +238,7 @@ jQuery(document).ready(function($){
 
             },
             success:function(result,status,xhr){
-                if( jQuery.splugins.is_test_script_debug ) {
-                    jQuery($this).attr('data-debug_log', "success result " + result);
-                }
+                jQuery.splugins.process_debug_log( $this, " success result " + result );
 
                 var resjson = jQuery.splugins.parseJSON(result);     //jQuery.parseJSON(result);
                 if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
@@ -256,9 +266,7 @@ jQuery(document).ready(function($){
                 }                   
             },
             error:function(xhr,status,error){
-                if( jQuery.splugins.is_test_script_debug ) {
-                    jQuery($this).attr('data-debug_log', "caught error " + error);
-                }
+                jQuery.splugins.process_debug_log( $this, " caught error " + error );
 
                 /*console.log(xhr);*/
                 $('body').toast({

@@ -382,6 +382,8 @@ class n_f_adminSideSetupCest
         $I->click('//*[@id="main"]/ul/li/a/img');
         $I->waitForText('Continue', 10);
 
+        $I->click('Continue');
+
         // verify 
         for($i=0; $i<sizeof($verifications); $i++) {
             for($j=0; $j<sizeof($verifications[$i]); $j++) {
@@ -487,6 +489,10 @@ class n_f_adminSideSetupCest
 
         // confirm if saved properly or not
         $I->reloadPage();   //reload page
+
+        $I->executeJS('window.scrollTo( 0, 0 );');       //$I->scrollTo('Save'); 
+        $I->wait(3);
+
         $I->click($goto_tab);
         $I->see($label); // see in table list row's td
 

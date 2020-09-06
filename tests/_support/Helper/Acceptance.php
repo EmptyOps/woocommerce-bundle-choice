@@ -83,6 +83,24 @@ class Acceptance extends \Codeception\Module
             }
         }
 
+        // filters  
+        else if( $key == "header_textcolor" && ($prefix=="n_" || empty($prefix)) ) {
+            
+            if( $type == "selector" ) {
+                if( $widget_template == "fc1" ) {
+                    throw new Exception("Selector not set for template ".$widget_template." for key ".$key, 1);
+                }
+                else if( $widget_template == "fc2" ) {
+                    return '#main > header > div.eo-wbc-container.filters.container > div > div > a:nth-child(1) > div > div > div > p > span';
+                }
+                else {
+                    throw new Exception("Selector not set for template ".$widget_template." for key ".$key, 1);
+                    
+                }
+                
+            }
+        }
+
         return null;
     }
 
@@ -367,7 +385,22 @@ class Acceptance extends \Codeception\Module
         echo "called radioAssertion...";
         
         try { 
-            return $I->executeJS(' return var selected = $("input[type=\'radio\'][name=\''.$field_name.'\']:checked"); if (selected.length > 0) { jQuery( selected[0] ).val(); } else { return ""; } '); 
+            return $I->executeJS(' var selected = $("input[type=\'radio\'][name=\''.$field_name.'\']:checked"); if (selected.length > 0) { return jQuery( selected[0] ).val(); } else { return ""; } '); 
+        }
+        catch(Exception $e) {
+            echo "caught error...";
+            echo $e->getMessage();
+        }
+    }
+
+    /**
+     * since we don't know any method yet that for radio assrtion from webdriver, seeInField is not reliable 
+     * @param $radio_option_id 
+     */
+    public function wbc_setRadio($I, $radio_option_id) {
+        
+        try { 
+            $I->executeJS("jQuery('#".$radio_option_id."').prop('checked',true);"); 
         }
         catch(Exception $e) {
             echo "caught error...";

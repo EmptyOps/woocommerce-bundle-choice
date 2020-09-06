@@ -73,7 +73,8 @@ class sunob_f_g_bonusFeaturesSpecificationsViewCest
         $I->executeJS("jQuery('#specification_view_default_status').checkbox('set unchecked');");
 
         // $I->executeJS("jQuery('[name=\"tiny_features_specification_view_style\"]').checkbox('set checked', 'template_1');");
-        $I->executeJS("jQuery('[name=\"tiny_features_specification_view_style\"]').val('template_3');");    
+        // $I->executeJS("jQuery('[name=\"tiny_features_specification_view_style\"]').val('template_3');"); 
+        $I->wbc_setRadio($I, 'template_3');   
         
         $I->executeJS('window.scrollTo( 0, 500 );');        //$I->scrollTo('Save'); 
         $I->wait(3);
