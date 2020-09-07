@@ -6,7 +6,8 @@ jQuery.splugins.is_test_script_debug = true;
 
 jQuery.splugins.process_debug_log = function(obj,debug_log) {  
    if( jQuery.splugins.is_test_script_debug ) {
-        jQuery(obj).attr('data-debug_log', jQuery(obj).attr('data-debug_log') + debug_log);
+        var __debug_log = jQuery(obj).attr('data-debug_log');
+        jQuery(obj).attr('data-debug_log', (typeof(__debug_log) != "undefined" && typeof(__debug_log) != undefined ? __debug_log : "" ) + debug_log);
     }
 };
 
@@ -178,6 +179,8 @@ jQuery(document).ready(function($){
         jQuery($this).text(processing_txt);
         jQuery($this).css('cursor', 'default');
 
+        jQuery.splugins.process_debug_log( $this, "tmp at here 1" );
+
         // var is_update_post_values = false;
         // var temp_fcf='';
         // var temp_scf='';
@@ -194,6 +197,8 @@ jQuery(document).ready(function($){
         //var form = jQuery(document).find('form').has(this);
         var form = jQuery(this).closest('form');
         
+        jQuery.splugins.process_debug_log( $this, "tmp at here 2" );
+
         /*
         *   send Ajax request to save the configurations.
         *   get response and alert as needed.
@@ -203,11 +208,15 @@ jQuery(document).ready(function($){
             form_type = 'POST';
         }
 
+        jQuery.splugins.process_debug_log( $this, "tmp at here 3" );
+
         if( jQuery(form).data("is_per_tab_save") != undefined && jQuery(form).data("is_per_tab_save") == true ) {
             
             var formid = jQuery(form).attr("id");
             jQuery('#'+formid+' #saved_tab_key').val( jQuery(this).data("tab_key") );
         }
+
+        jQuery.splugins.process_debug_log( $this, "tmp at here 4" );
 
         var serform = null;
         if( jQuery(form).data("is_serialize") == undefined || jQuery(form).data("is_serialize") == "true" ) {
@@ -229,6 +238,8 @@ jQuery(document).ready(function($){
         //     $('[name="first_category_altr_filt_widgts"]').val(temp_fcf);             
         //     $('[name="second_category_altr_filt_widgts"]').val(temp_scf);
         // } 
+
+        jQuery.splugins.process_debug_log( $this, "tmp at here 5" );
 
         jQuery.ajax({
             url:eowbc_object.admin_url,

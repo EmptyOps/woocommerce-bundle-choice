@@ -82,6 +82,10 @@ class sunob_f_g_bonusFeaturesSpecificationsViewCest
         // save 
         $I->click('#tiny_features_save_specification_view');    //('Save');     
 
+        $I->wbc_debug_log($I, "#".$prefix."_fconfig_submit_btn");
+
+        $I->waitForText("Updated successfully");
+
         // confirm if saved properly or not. TODO actually we should connfirm all values of the form if saved and repopulated properly in edit mode or saved list or not. 
         $I->reloadPage();   //reload page
         $I->click('Specifications View for Item Page');

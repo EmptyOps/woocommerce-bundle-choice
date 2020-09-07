@@ -56,7 +56,7 @@ class n_n_frontendAppearanceModificationsCest extends n_f_adminSideSetupCest
 
         // get current template 
         $curr_tmplt = $this->getCurrentBreadcrumbWidget($I);
-        echo "verifying appearance for template ".$curr_tmplt;
+        $I->dontSee("verifying appearance for template ".$curr_tmplt);
 
         // go to target page
         $this->gotoStep($I, 1, false, "n_" ); 

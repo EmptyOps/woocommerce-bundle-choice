@@ -76,7 +76,7 @@ class Acceptance extends \Codeception\Module
                     return '#main > div.eo-wbc-container.container > div';
                 }
                 else {
-                    throw new Exception("Selector not set for template ".$widget_template." for key ".$key, 1);
+                    throw new \Exception("Selector not set for template ".$widget_template." for key ".$key, 1);
                     
                 }
                 
@@ -88,13 +88,13 @@ class Acceptance extends \Codeception\Module
             
             if( $type == "selector" ) {
                 if( $widget_template == "fc1" ) {
-                    throw new Exception("Selector not set for template ".$widget_template." for key ".$key, 1);
+                    throw new \Exception("Selector not set for template ".$widget_template." for key ".$key, 1);
                 }
                 else if( $widget_template == "fc2" ) {
                     return '#main > header > div.eo-wbc-container.filters.container > div > div > a:nth-child(1) > div > div > div > p > span';
                 }
                 else {
-                    throw new Exception("Selector not set for template ".$widget_template." for key ".$key, 1);
+                    throw new \Exception("Selector not set for template ".$widget_template." for key ".$key, 1);
                     
                 }
                 
