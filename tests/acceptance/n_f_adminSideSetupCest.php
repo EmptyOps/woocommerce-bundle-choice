@@ -391,8 +391,10 @@ class n_f_adminSideSetupCest
 
         $I->click('//*[@id="eo_wbc_add_to_cart"]');
 
-        $I->executeJS('window.scrollTo( 0, 500 );');       //$I->scrollTo('Save'); 
-        $I->wait(3);
+        $I->wait(5);
+
+        $I->executeJS(' window.scrollTo( 0, 500 ); ');       //$I->scrollTo('Save'); 
+        $I->wait(5);
 
         // verify 
         for($i=0; $i<sizeof($verifications); $i++) {
@@ -477,7 +479,7 @@ class n_f_adminSideSetupCest
         $label = !$is_edit_mode || !isset($edit_fields['label']) ? 'Test '.$prefix.' filter' : $edit_fields['label'];
 
         // set fields 
-        $I->executeJS("jQuery('#".$prefix."_fconfig_filter_dropdown_div').dropdown('set selected', 15);");  //better than setting val directly is to select the nth element that has value val 
+        $I->executeJS("jQuery('#".$prefix."_fconfig_filter_dropdown_div').dropdown('set selected', 19);");  //15);");  //better than setting val directly is to select the nth element that has value val 
         $I->fillField("".$prefix."_fconfig_label", $label);
         $I->executeJS("jQuery('#".$prefix."_fconfig_is_advanced_1').checkbox('set unchecked');");   
         $I->fillField("".$prefix."_fconfig_column_width", '50');

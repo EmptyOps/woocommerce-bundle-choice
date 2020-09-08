@@ -30,10 +30,10 @@ class sunob_a_y_bonusFeaturesFiltersForShopCategoryPageCest extends n_f_adminSid
 		$I->see('Filters for Shop/Category Page');
 
 		// set fields 
-		$I->executeJS("jQuery('#shop_cat_filter_location_shop').parent().checkbox('set checked', 'shop_cat_filter_location_shop');");	
+		$I->executeJS("jQuery('#sc_shop_cat_filter_location_shop').parent().checkbox('set checked', 'sc_shop_cat_filter_location_shop');");	
 
-		$I->executeJS("jQuery('#shop_cat_filter_two_filter').parent().checkbox('set checked', 'shop_cat_filter_two_filter');");		
-		$I->executeJS("jQuery('#shop_cat_filter_two_filter').trigger('change');");	//we need to trigger change event because without that our own JS code is not recieving the change event
+		$I->executeJS("jQuery('#sc_shop_cat_filter_location_cat').parent().checkbox('set checked', 'sc_shop_cat_filter_location_cat');");		
+		$I->executeJS("jQuery('#sc_shop_cat_filter_location_cat').trigger('change');");	//we need to trigger change event because without that our own JS code is not recieving the change event
 		$I->executeJS("jQuery('#shop_cat_filter_two_filter_first_dropdown_div').dropdown('set selected', 19);");	//better than setting 1 directly is to select the nth element that has value 1 
 
 		// $I->scrollTo('//*[@id="add-sample-filter-data"]', -300, -500);
@@ -57,6 +57,8 @@ class sunob_a_y_bonusFeaturesFiltersForShopCategoryPageCest extends n_f_adminSid
 		
 		// save 
 		$I->click('//*[@id="filter_setting_submit_btn"]'); 		//click('Save'); 	
+
+		$I->waitForText('Saved!');
 
 		$I->reloadPage();
 
@@ -109,7 +111,7 @@ class sunob_a_y_bonusFeaturesFiltersForShopCategoryPageCest extends n_f_adminSid
         parent::bulkEnableDisableDelete( $I, '', 'activate', '//*[@id="d_fconfig_submit_btn_bulk"]' );
 
         // try to edit any one filter from here 
-        $I->click('Uncategorized', 'a');
+        $I->click('Diamond');
         $this->addEditFilters( $I, true, array('label'=>'Category page filter'));
 
         // TODO try to delete a filter 
