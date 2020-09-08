@@ -395,6 +395,22 @@ class Acceptance extends \Codeception\Module
 
     /**
      * since we don't know any method yet that for radio assrtion from webdriver, seeInField is not reliable 
+     * @param $dummy text to run a dummy positive/negative assertion so that in test report user can see that one of the test is actually failed
+     */
+    public function getTextAreaValue($I, $field_id) {
+        echo "called getTextAreaValue...";
+        
+        try { 
+            return $I->executeJS(' return jQuery("#'.$field_id.'").val(); '); 
+        }
+        catch(Exception $e) {
+            echo "caught error...";
+            echo $e->getMessage();
+        }
+    }
+
+    /**
+     * since we don't know any method yet that for radio assrtion from webdriver, seeInField is not reliable 
      * @param $radio_option_id 
      */
     public function wbc_setRadio($I, $radio_option_id) {
@@ -616,6 +632,22 @@ class Acceptance extends \Codeception\Module
         }
 
         return false;
+    }
+
+    public function lookIntoWBCErrorLog($I)
+    {
+        // if( !$I->test_allowed_in_this_environment("n_") ) {
+        //     return;
+        // }
+
+        // go to the page
+        $I->amOnPage('/wp-admin/admin.php?page=eowbc-setting-status');
+
+        // go to the tab
+        $I->click('Logs');
+        $I->see('Following error details will be sent to Woo Choice Plugin\'s Support Team');
+
+        echo "WBC Error Log " . $I->getTextAreaValue($I, "eo_wbc_view_error"); 
     }
 
 }

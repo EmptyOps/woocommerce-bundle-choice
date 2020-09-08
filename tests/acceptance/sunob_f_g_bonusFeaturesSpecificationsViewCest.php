@@ -82,7 +82,7 @@ class sunob_f_g_bonusFeaturesSpecificationsViewCest
         // save 
         $I->click('#tiny_features_save_specification_view');    //('Save');     
 
-        $I->wbc_debug_log($I, "#".$prefix."_fconfig_submit_btn");
+        $I->wbc_debug_log($I, "#tiny_features_save_specification_view");
 
         $I->waitForText("Updated successfully");
 

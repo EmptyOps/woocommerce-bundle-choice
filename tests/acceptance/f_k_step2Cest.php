@@ -73,7 +73,7 @@ class f_k_step2Cest
 		// with text x 
 		$I->see( $suite_name_prefix == "n_" ? $I->get_configs('second_product_market_price',$suite_name_prefix) : '150.00' );	//market price
 		$I->see($price_of_product);
-		$I->see( $suite_name_prefix == "n_" ? 'Specifications' : 'Additional information' );
+		$I->see( $suite_name_prefix == "n_" ? 'Specifications' : 'Specifications'/*'Additional information'*/ );
 
 		if( $suite_name_prefix == "n_" ) {
 			$I->executeJS('window.scrollTo( 0, 1100 );');

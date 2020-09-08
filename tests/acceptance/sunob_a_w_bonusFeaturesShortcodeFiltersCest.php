@@ -79,7 +79,7 @@ class sunob_a_w_bonusFeaturesShortcodeFiltersCest extends n_f_adminSideSetupCest
         parent::bulkEnableDisableDelete( $I, '', 'activate', '//*[@id="d_fconfig_submit_btn_bulk"]' );
 
         // try to edit any one filter from here 
-        $I->click('Test d filter', 'a');
+        $I->click('Uncategorized', 'a');
         $this->addEditFilters( $I, true, array('label'=>'Shortcode filter'));
 
         // TODO try to delete a filter 
