@@ -1,8 +1,15 @@
 // a shared namespace among plugins and extensions of the sphere plugins
 jQuery.splugins = jQuery.splugins || {};
 
-jQuery.splugins.is_debug = true; 
+jQuery.splugins.is_debug = false; 
 jQuery.splugins.is_test_script_debug = true;    
+
+jQuery.splugins.process_debug_log = function(obj,debug_log) {  
+   if( jQuery.splugins.is_test_script_debug ) {
+        var __debug_log = jQuery(obj).attr('data-debug_log');
+        jQuery(obj).attr('data-debug_log', (typeof(__debug_log) != "undefined" && typeof(__debug_log) != undefined ? __debug_log : "" ) + debug_log);
+    }
+};
 
 jQuery.splugins.hasAttr = function(obj,name) {  
    return jQuery(obj).attr(name) !== undefined;
@@ -162,9 +169,17 @@ jQuery(document).ready(function($){
         var original_txt = jQuery($this).text();
         var original_cursor = jQuery($this).css('cursor');
         var processing_txt = jQuery.splugins.hasAttr(this,'data-loading_text') ? jQuery($this).attr('data-loading_text') : 'Processing...';
-        if( original_txt == processing_txt ) { return; }
+        if( original_txt == processing_txt ) { 
+            jQuery.splugins.process_debug_log( $this, "In progress processing detected..." );
+            return; 
+        }
+        else {
+            jQuery.splugins.process_debug_log( $this, "Starting save process..." );
+        }
         jQuery($this).text(processing_txt);
         jQuery($this).css('cursor', 'default');
+
+        jQuery.splugins.process_debug_log( $this, "tmp at here 1" );
 
         // var is_update_post_values = false;
         // var temp_fcf='';
@@ -182,6 +197,8 @@ jQuery(document).ready(function($){
         //var form = jQuery(document).find('form').has(this);
         var form = jQuery(this).closest('form');
         
+        jQuery.splugins.process_debug_log( $this, "tmp at here 2" );
+
         /*
         *   send Ajax request to save the configurations.
         *   get response and alert as needed.
@@ -191,11 +208,15 @@ jQuery(document).ready(function($){
             form_type = 'POST';
         }
 
+        jQuery.splugins.process_debug_log( $this, "tmp at here 3" );
+
         if( jQuery(form).data("is_per_tab_save") != undefined && jQuery(form).data("is_per_tab_save") == true ) {
             
             var formid = jQuery(form).attr("id");
             jQuery('#'+formid+' #saved_tab_key').val( jQuery(this).data("tab_key") );
         }
+
+        jQuery.splugins.process_debug_log( $this, "tmp at here 4" );
 
         var serform = null;
         if( jQuery(form).data("is_serialize") == undefined || jQuery(form).data("is_serialize") == "true" ) {
@@ -218,6 +239,8 @@ jQuery(document).ready(function($){
         //     $('[name="second_category_altr_filt_widgts"]').val(temp_scf);
         // } 
 
+        jQuery.splugins.process_debug_log( $this, "tmp at here 5" );
+
         jQuery.ajax({
             url:eowbc_object.admin_url,
             type: form_type,
@@ -226,9 +249,7 @@ jQuery(document).ready(function($){
 
             },
             success:function(result,status,xhr){
-                if( jQuery.splugins.is_test_script_debug ) {
-                    jQuery($this).attr('data-debug_log', "success result " + result);
-                }
+                jQuery.splugins.process_debug_log( $this, " success result " + result );
 
                 var resjson = jQuery.splugins.parseJSON(result);     //jQuery.parseJSON(result);
                 if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
@@ -256,9 +277,7 @@ jQuery(document).ready(function($){
                 }                   
             },
             error:function(xhr,status,error){
-                if( jQuery.splugins.is_test_script_debug ) {
-                    jQuery($this).attr('data-debug_log', "caught error " + error);
-                }
+                jQuery.splugins.process_debug_log( $this, " caught error " + error );
 
                 /*console.log(xhr);*/
                 $('body').toast({

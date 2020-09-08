@@ -116,7 +116,7 @@ class a_i_adminFiltersCest
 
 		// go to the page
 		$I->amOnPage('/wp-admin/admin.php?page=eowbc-filters');
-		echo $I->grabPageSource();
+		// echo $I->grabPageSource();
 
 		for($cat_index=0; $cat_index<=1; $cat_index++) {
 
@@ -147,7 +147,7 @@ class a_i_adminFiltersCest
 			$I->executeJS("jQuery('#".$prefix."_fconfig_is_advanced_1').checkbox('set unchecked');");	
 			$I->fillField("".$prefix."_fconfig_column_width", '50');
 			$I->fillField("".$prefix."_fconfig_ordering", '5');
-			$I->executeJS("jQuery('#".$prefix."_fconfig_input_type').dropdown('set selected', 'text_slider');");	//better than setting val directly is to select the nth element that has value val 
+			$I->executeJS("jQuery('#".$prefix."_fconfig_input_type_dropdown_div').dropdown('set selected', 'text_slider');");	//better than setting val directly is to select the nth element that has value val 
 
 			if( false ) {	// icon fields are applicable only when the filters with input type with icon is set, so set to false for now
 				$I->fillField("".$prefix."_fconfig_icon_size", '0');
@@ -161,6 +161,8 @@ class a_i_adminFiltersCest
 
 			// save 
 			$I->click("#".$prefix."_fconfig_submit_btn"); 	//('Save');		//it shouldn't be this way, but there seem some issue with selenium driver and thus when there is another Save button on the page even though on another page and is not visible but still selenium think it is visible and thus gives us error so need to use unique xPath like id etc. 
+
+			$I->wbc_debug_log($I, "#".$prefix."_fconfig_submit_btn");
 
 			$I->waitForText("New Filter Added Successfully");
 

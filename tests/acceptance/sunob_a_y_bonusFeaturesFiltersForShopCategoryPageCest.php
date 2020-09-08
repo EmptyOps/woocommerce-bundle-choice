@@ -109,7 +109,7 @@ class sunob_a_y_bonusFeaturesFiltersForShopCategoryPageCest extends n_f_adminSid
         parent::bulkEnableDisableDelete( $I, '', 'activate', '//*[@id="d_fconfig_submit_btn_bulk"]' );
 
         // try to edit any one filter from here 
-        $I->click('Test d filter', 'a');
+        $I->click('Uncategorized', 'a');
         $this->addEditFilters( $I, true, array('label'=>'Category page filter'));
 
         // TODO try to delete a filter 

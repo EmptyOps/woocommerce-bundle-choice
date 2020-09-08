@@ -34,7 +34,9 @@ class n_f_adminSideSetupCest
         $I->wait(3);
         $I->click('#config_navigation_conf_save_btn');  //('Save');     //it shouldn't be this way, but there seem some issue with selenium driver and thus when there is another Save button on the page even though on another page and is not visible but still selenium think it is visible and thus gives us error so need to use unique xPath like id etc. 
 
+        $I->wait(60);
         $I->wbc_debug_log($I, '#config_navigation_conf_save_btn');
+        $I->lookIntoWBCErrorLog($I);
 
         // since due to sample data is there it may take time to install alternate widget's sample data 
         $I->waitForText('Updated successfully', 10);
@@ -58,7 +60,7 @@ class n_f_adminSideSetupCest
         $I->click('Navigations Steps( Breadcrumb )');
         $I->see('First Category');
 
-        $I->getRadioValue($I, "config_alternate_breadcrumb"); 
+        return $I->getRadioValue($I, "config_alternate_breadcrumb"); 
     }
 
     protected function setAlternateFilterWidget(AcceptanceTester $I, $widget_key, $cat)
@@ -239,7 +241,7 @@ class n_f_adminSideSetupCest
         }
     }
 
-    protected function modifyFilters(AcceptanceTester $I, $tab, $filter, $filter_id, $field_id, $field_name, $field_type, $val, $save_button_xpath, $field_dropdown_div_id=array())
+    protected function modifyFilters(AcceptanceTester $I, $tab, $filter, $filter_id, $field_id, $field_name, $field_type, $val, $save_button_xpath, $field_dropdown_div_id=array(), $save_button_selector='')
     {
         // if( !$I->test_allowed_in_this_environment("n_") ) {
         //     return;
@@ -269,7 +271,9 @@ class n_f_adminSideSetupCest
         // save 
         $I->click($save_button_xpath);  
 
-        $I->wbc_debug_log($I, '#d_fconfig_submit_btn');
+        $I->wait(60);
+        $I->wbc_debug_log($I, $save_button_selector);
+        $I->lookIntoWBCErrorLog($I);
 
         // in case server is hanged and it takes time!
         $I->waitForText('Filter updated successfuly', 10);
@@ -382,6 +386,14 @@ class n_f_adminSideSetupCest
         $I->click('//*[@id="main"]/ul/li/a/img');
         $I->waitForText('Continue', 10);
 
+        $I->scrollTo('//*[@id="eo_wbc_add_to_cart"]');
+        $I->wait(3);
+
+        $I->click('//*[@id="eo_wbc_add_to_cart"]');
+
+        $I->executeJS('window.scrollTo( 0, 500 );');       //$I->scrollTo('Save'); 
+        $I->wait(3);
+
         // verify 
         for($i=0; $i<sizeof($verifications); $i++) {
             for($j=0; $j<sizeof($verifications[$i]); $j++) {
@@ -470,7 +482,7 @@ class n_f_adminSideSetupCest
         $I->executeJS("jQuery('#".$prefix."_fconfig_is_advanced_1').checkbox('set unchecked');");   
         $I->fillField("".$prefix."_fconfig_column_width", '50');
         $I->fillField("".$prefix."_fconfig_ordering", '5');
-        $I->executeJS("jQuery('#".$prefix."_fconfig_input_type').dropdown('set selected', 'text_slider');");    //better than setting val directly is to select the nth element that has value val 
+        $I->executeJS("jQuery('#".$prefix."_fconfig_input_type_dropdown_div').dropdown('set selected', 'text_slider');");    //better than setting val directly is to select the nth element that has value val 
 
         if( false ) {   // icon fields are applicable only when the filters with input type with icon is set, so set to false for now
             $I->fillField("".$prefix."_fconfig_icon_size", '0');
@@ -485,8 +497,14 @@ class n_f_adminSideSetupCest
         // save 
         $I->click("#".$prefix."_fconfig_submit_btn");   //('Save');     //it shouldn't be this way, but there seem some issue with selenium driver and thus when there is another Save button on the page even though on another page and is not visible but still selenium think it is visible and thus gives us error so need to use unique xPath like id etc. 
 
+        $I->waitForText("New Filter Added Successfully");
+
         // confirm if saved properly or not
         $I->reloadPage();   //reload page
+
+        $I->executeJS('window.scrollTo( 0, 0 );');       //$I->scrollTo('Save'); 
+        $I->wait(3);
+
         $I->click($goto_tab);
         $I->see($label); // see in table list row's td
 

@@ -76,7 +76,25 @@ class Acceptance extends \Codeception\Module
                     return '#main > div.eo-wbc-container.container > div';
                 }
                 else {
-                    throw new Exception("Selector not set for template ".$widget_template." for key ".$key, 1);
+                    throw new \Exception("Selector not set for template ".$widget_template." for key ".$key, 1);
+                    
+                }
+                
+            }
+        }
+
+        // filters  
+        else if( $key == "header_textcolor" && ($prefix=="n_" || empty($prefix)) ) {
+            
+            if( $type == "selector" ) {
+                if( $widget_template == "fc1" ) {
+                    throw new \Exception("Selector not set for template ".$widget_template." for key ".$key, 1);
+                }
+                else if( $widget_template == "fc2" ) {
+                    return '#main > header > div.eo-wbc-container.filters.container > div > div > a:nth-child(1) > div > div > div > p > span';
+                }
+                else {
+                    throw new \Exception("Selector not set for template ".$widget_template." for key ".$key, 1);
                     
                 }
                 
@@ -325,7 +343,7 @@ class Acceptance extends \Codeception\Module
                 $val = fread($myfile,filesize($key.".txt"));
                 fclose($myfile);
 
-                echo "session value for key ".$key." is ".$val".";
+                echo "session value for key ".$key." is ".$val.".";
                 return $val;
             }
         }
@@ -367,7 +385,38 @@ class Acceptance extends \Codeception\Module
         echo "called radioAssertion...";
         
         try { 
-            return $I->executeJS(' return var selected = $("input[type=\'radio\'][name=\''.$field_name.'\']:checked"); if (selected.length > 0) { jQuery( selected[0] ).val(); } else { return ""; } '); 
+            return $I->executeJS(' var selected = $("input[type=\'radio\'][name=\''.$field_name.'\']:checked"); if (selected.length > 0) { return jQuery( selected[0] ).val(); } else { return ""; } '); 
+        }
+        catch(Exception $e) {
+            echo "caught error...";
+            echo $e->getMessage();
+        }
+    }
+
+    /**
+     * since we don't know any method yet that for radio assrtion from webdriver, seeInField is not reliable 
+     * @param $dummy text to run a dummy positive/negative assertion so that in test report user can see that one of the test is actually failed
+     */
+    public function getTextAreaValue($I, $field_id) {
+        echo "called getTextAreaValue...";
+        
+        try { 
+            return $I->executeJS(' return jQuery("#'.$field_id.'").val(); '); 
+        }
+        catch(Exception $e) {
+            echo "caught error...";
+            echo $e->getMessage();
+        }
+    }
+
+    /**
+     * since we don't know any method yet that for radio assrtion from webdriver, seeInField is not reliable 
+     * @param $radio_option_id 
+     */
+    public function wbc_setRadio($I, $radio_option_id) {
+        
+        try { 
+            $I->executeJS("jQuery('#".$radio_option_id."').prop('checked',true);"); 
         }
         catch(Exception $e) {
             echo "caught error...";
@@ -583,6 +632,22 @@ class Acceptance extends \Codeception\Module
         }
 
         return false;
+    }
+
+    public function lookIntoWBCErrorLog($I)
+    {
+        // if( !$I->test_allowed_in_this_environment("n_") ) {
+        //     return;
+        // }
+
+        // go to the page
+        $I->amOnPage('/wp-admin/admin.php?page=eowbc-setting-status');
+
+        // go to the tab
+        $I->click('Logs');
+        $I->see('Following error details will be sent to Woo Choice Plugin\'s Support Team');
+
+        echo "WBC Error Log " . $I->getTextAreaValue($I, "eo_wbc_view_error"); 
     }
 
 }

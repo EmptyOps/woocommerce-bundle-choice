@@ -27,7 +27,9 @@ class f_m_previewPageCest
     	$this->price_of_product_step2_without_comma = str_replace(",", "", $this->price_of_product_step2);
 
     	// verify 
-    	if( $suite_name_prefix != "n_" || ($I->get_session('wbc_suite_n__process_current_breadcrumb_template') != "template_1" && $I->get_session('wbc_suite_n__process_current_breadcrumb_template') != "template_2" /*since preview step total price is not available in these breadcrumbs*/) ) {
+    	$wbc_suite_n__process_current_breadcrumb_template = $I->get_session('wbc_suite_n__process_current_breadcrumb_template'); 
+    	$I->dontSee("current breadcrumb template is ".$wbc_suite_n__process_current_breadcrumb_template." and test suite is ".$suite_name_prefix.".");
+    	if( $suite_name_prefix != "n_" || ($wbc_suite_n__process_current_breadcrumb_template != "template_1" && $wbc_suite_n__process_current_breadcrumb_template != "template_2" /*since preview step total price is not available in these breadcrumbs*/) ) {
 	    	$I->see( $I->price_format($this->price_of_product_step1_without_comma+$this->price_of_product_step2_without_comma) );
 	    }
     	$I->see('Add This To Cart');

@@ -23,7 +23,10 @@ class n_p_frontendFunctionalityModificationsCest extends n_f_adminSideSetupCest
 
             echo "modifyFilterFunctionality of category ".$cat;
 
+            $prefix = "";
             if( $cat == 0 ) {
+                $prefix = "d";
+
                 $filter = array('Clarity', 'text_slider_pa_eo_colour_attr', 'text_slider_pa_eo_carat_attr','text_slider_pa_eo_clarity_attr', 'text_slider_pa_eo_colour_attr');
                 $filter_id = array('text_slider_pa_eo_clarity_attr', 'text_slider_pa_eo_colour_attr', 'text_slider_pa_eo_carat_attr','text_slider_pa_eo_clarity_attr', 'text_slider_pa_eo_colour_attr');
                 $field_id = array( '', 'd_fconfig_ordering', 'd_fconfig_is_advanced_1', 'd_fconfig_add_reset_link_1', 'd_fconfig_add_help_1' );
@@ -37,6 +40,8 @@ class n_p_frontendFunctionalityModificationsCest extends n_f_adminSideSetupCest
                 $css_property_of_targets = array('color','color','backgroundColor', 'backgroundColor','width');
             }
             else {
+                $prefix = "s";
+
                 $filter_id = array('eo_ring_style_cat', 'eo_ring_style_cat', 'eo_metal_cat','eo_setting_shape_cat', 'eo_ring_style_cat');
                 $field_id = array( '', 's_fconfig_ordering', 's_fconfig_is_advanced_1', 's_fconfig_add_reset_link_1', 's_fconfig_add_help_1' );
                 $field_name = array( '', 's_fconfig_ordering', '', '', '' );
@@ -51,7 +56,7 @@ class n_p_frontendFunctionalityModificationsCest extends n_f_adminSideSetupCest
 
             // change random functionalities
                 // modify things like filter input type, ordering, move to advanced/non-advanced, reset link, help text etc.
-            $this->modifyFilters($I, $cat == 0 ? 'Diamond Page Filter Configuration' : 'Settings Page Filter Configuration', $filter, $filter_id, $field_id, $field_name, $field_type, $val, '//*[@id="d_fconfig_submit_btn"]', $field_dropdown_div_id);
+            $this->modifyFilters($I, $cat == 0 ? 'Diamond Page Filter Configuration' : 'Settings Page Filter Configuration', $filter, $filter_id, $field_id, $field_name, $field_type, $val, '//*[@id="'.$prefix.'_fconfig_submit_btn"]', $field_dropdown_div_id, '#'.$prefix.'_fconfig_submit_btn');
 
             // TODO still all the functionality modification are not tested like all input types are not tested, order/reset-link/help-text not tested in advanced section, width functionality not tested etc. 
 

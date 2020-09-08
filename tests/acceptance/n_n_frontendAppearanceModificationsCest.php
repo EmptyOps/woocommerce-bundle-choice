@@ -56,7 +56,7 @@ class n_n_frontendAppearanceModificationsCest extends n_f_adminSideSetupCest
 
         // get current template 
         $curr_tmplt = $this->getCurrentBreadcrumbWidget($I);
-        echo "verifying appearance for template ".$curr_tmplt;
+        $I->dontSee("verifying appearance for template ".$curr_tmplt);
 
         // go to target page
         $this->gotoStep($I, 1, false, "n_" ); 
@@ -109,7 +109,7 @@ class n_n_frontendAppearanceModificationsCest extends n_f_adminSideSetupCest
                         '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(1) > img' );
                 }
                 elseif( $curr_tmplt == "fc2" ) {
-                    $selector_of_targets = array('/html/body/section/main/header/div[5]/div/div[1]/div/div[1]/p/span', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(2)', '#text_slider_pa_eo_carat_attr > div > div:nth-child(3)', '/html/body/section/main/header/div[5]/div/div[1]/div/div[2]/div[2]/div/div[1]', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(1) > img');
+                    $selector_of_targets = array( $I->get_configs('header_textcolor', "n_", $curr_tmplt, "selector"), '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(2)', '#text_slider_pa_eo_carat_attr > div > div:nth-child(3)', '/html/body/section/main/header/div[5]/div/div[1]/div/div[2]/div[2]/div/div[1]', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(1) > img');
                 }
                 elseif( $curr_tmplt == "fc3" ) {
                     $selector_of_targets = array('/html/body/section/main/header/div[5]/div/div[1]/div/div[1]/p/span', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(2)', '#text_slider_pa_eo_carat_attr > div > div:nth-child(3)', '/html/body/section/main/header/div[5]/div/div[1]/div/div[2]/div[2]/div/div[1]', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(1) > img');
