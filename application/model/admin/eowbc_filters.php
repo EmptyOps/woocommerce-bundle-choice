@@ -165,23 +165,23 @@ class Eowbc_Filters extends Eowbc_Model {
 	    //$res['post']=$_POST;
 		wbc()->load->model('admin\form-builder');
 
-		$saved_tab_key = !empty($_POST["saved_tab_key"]) ? $_POST["saved_tab_key"] : ""; 
+		$saved_tab_key = !empty(wbc()->sanitize->post("saved_tab_key")) ? wbc()->sanitize->post("saved_tab_key") : ""; 
 		$skip_fileds = array('saved_tab_key');
 		
 		if($saved_tab_key == $this->tab_key_prefix.'altr_filt_widgts') {
-			$res['ef'] = $_POST['first_category_altr_filt_widgts'];
+			$res['ef'] = wbc()->sanitize->post('first_category_altr_filt_widgts');
 			$res['tf'] = wbc()->options->get_option('filters_'.$this->tab_key_prefix.'altr_filt_widgts','first_category_altr_filt_widgts');
-			if(!empty($_POST['first_category_altr_filt_widgts']) and $_POST['first_category_altr_filt_widgts']!=wbc()->options->get_option('filters_'.$this->tab_key_prefix.'altr_filt_widgts','first_category_altr_filt_widgts') ) {
+			if(!empty(wbc()->sanitize->post('first_category_altr_filt_widgts')) and wbc()->sanitize->post('first_category_altr_filt_widgts')!=wbc()->options->get_option('filters_'.$this->tab_key_prefix.'altr_filt_widgts','first_category_altr_filt_widgts') ) {
 				
-				if($_POST['first_category_altr_filt_widgts']=='fc5'){
+				if(wbc()->sanitize->post('first_category_altr_filt_widgts')=='fc5'){
 					$this->switch_template_5();
-				} elseif($_POST['first_category_altr_filt_widgts']=='fc4'){
+				} elseif(wbc()->sanitize->post('first_category_altr_filt_widgts')=='fc4'){
 					$this->switch_template_4();
-				} elseif ($_POST['first_category_altr_filt_widgts']=='fc3') {
+				} elseif (wbc()->sanitize->post('first_category_altr_filt_widgts')=='fc3') {
 					$this->switch_template_3();
-				} elseif ($_POST['first_category_altr_filt_widgts']=='fc2') {
+				} elseif (wbc()->sanitize->post('first_category_altr_filt_widgts')=='fc2') {
 					$this->switch_template_2();
-				} elseif ($_POST['first_category_altr_filt_widgts']=='fc1') {
+				} elseif (wbc()->sanitize->post('first_category_altr_filt_widgts')=='fc1') {
 					$this->switch_template_1();
 				}
 
@@ -193,18 +193,18 @@ class Eowbc_Filters extends Eowbc_Model {
 					$this->deactivate( $ids,$this->tab_key_prefix.'d_fconfig',1 );
 					$ids = array();
 					foreach ($filter_data as $filter_key=>$filter) {
-						if(isset($filter['filter_template']) and $_POST['first_category_altr_filt_widgts']==$filter['filter_template']) {
+						if(isset($filter['filter_template']) and wbc()->sanitize->post('first_category_altr_filt_widgts')==$filter['filter_template']) {
 							//$ids[] = $filter['d_fconfig_filter'];
 							$ids[] = $filter_key;
 						}
 					}					
-					$ids = apply_filters('eowbc_admin_form_filters_save_changable_ids', $ids, $filter_data,$_POST['first_category_altr_filt_widgts']);
+					$ids = apply_filters('eowbc_admin_form_filters_save_changable_ids', $ids, $filter_data,wbc()->sanitize->post('first_category_altr_filt_widgts'));
 
 					if(empty($ids)) {
 						wbc()->load->model('admin/sample_data/eowbc_filter_samples');
 						$sample = \eo\wbc\model\admin\sample_data\Filter_Samples::instance();
-						if(method_exists($sample,$_POST['first_category_altr_filt_widgts'])) {
-							$sample->save(call_user_func(array($sample,$_POST['first_category_altr_filt_widgts'])),$this->tab_key_prefix);
+						if(method_exists($sample,wbc()->sanitize->post('first_category_altr_filt_widgts'))) {
+							$sample->save(call_user_func(array($sample,wbc()->sanitize->post('first_category_altr_filt_widgts'))),$this->tab_key_prefix);
 						}
 						
 					} else {
@@ -214,23 +214,23 @@ class Eowbc_Filters extends Eowbc_Model {
 				} else {
 					wbc()->load->model('admin/sample_data/eowbc_filter_samples');
 					$sample = \eo\wbc\model\admin\sample_data\Filter_Samples::instance();
-					if(method_exists($sample,$_POST['first_category_altr_filt_widgts'])) {
-						$sample->save(call_user_func(array($sample,$_POST['first_category_altr_filt_widgts'])),$this->tab_key_prefix);	
+					if(method_exists($sample,wbc()->sanitize->post('first_category_altr_filt_widgts'))) {
+						$sample->save(call_user_func(array($sample,wbc()->sanitize->post('first_category_altr_filt_widgts'))),$this->tab_key_prefix);	
 					}
 				}
 			}
 
-			if(!empty($_POST['second_category_altr_filt_widgts']) and $_POST['second_category_altr_filt_widgts']!=wbc()->options->get_option('	filters_altr_filt_widgts','second_category_altr_filt_widgts') ) {
+			if(!empty(wbc()->sanitize->post('second_category_altr_filt_widgts')) and wbc()->sanitize->post('second_category_altr_filt_widgts')!=wbc()->options->get_option('	filters_altr_filt_widgts','second_category_altr_filt_widgts') ) {
 
-				if($_POST['second_category_altr_filt_widgts']=='sc5'){
+				if(wbc()->sanitize->post('second_category_altr_filt_widgts')=='sc5'){
 					$this->switch_template_5();
-				}elseif($_POST['second_category_altr_filt_widgts']=='sc4'){
+				}elseif(wbc()->sanitize->post('second_category_altr_filt_widgts')=='sc4'){
 					$this->switch_template_4();
-				} elseif ($_POST['second_category_altr_filt_widgts']=='sc3') {
+				} elseif (wbc()->sanitize->post('second_category_altr_filt_widgts')=='sc3') {
 					$this->switch_template_3();
-				} elseif ($_POST['second_category_altr_filt_widgts']=='sc2') {
+				} elseif (wbc()->sanitize->post('second_category_altr_filt_widgts')=='sc2') {
 					$this->switch_template_2();
-				} elseif ($_POST['second_category_altr_filt_widgts']=='sc1') {
+				} elseif (wbc()->sanitize->post('second_category_altr_filt_widgts')=='sc1') {
 					$this->switch_template_1();
 				}
 
@@ -240,18 +240,20 @@ class Eowbc_Filters extends Eowbc_Model {
 					$this->deactivate( $ids,$this->tab_key_prefix.'s_fconfig',1);
 					$ids = array();
 					foreach ($filter_data as $filter_key=>$filter) {
-						if( isset($filter['filter_template']) and $_POST['second_category_altr_filt_widgts']==$filter['filter_template']) {
+						if( isset($filter['filter_template']) and wbc()->sanitize->post('second_category_altr_filt_widgts')==$filter['filter_template']) {
 							//$ids[] = $filter['s_fconfig_filter'];
 							$ids[] = $filter_key;							
 						}
 					}
-					$ids = apply_filters('eowbc_admin_form_filters_save_changable_ids', $ids, $filter_data,$_POST['second_category_altr_filt_widgts']);
+					$ids = apply_filters('eowbc_admin_form_filters_save_changable_ids', $ids, $filter_data,wbc()->sanitize->post('second_category_altr_filt_widgts'));
+
 					if(empty($ids)){
 						wbc()->load->model('admin/sample_data/eowbc_filter_samples');
 						$sample = \eo\wbc\model\admin\sample_data\Filter_Samples::instance();
-						if(method_exists($sample,$_POST['second_category_altr_filt_widgts'])){
-							$res['meta'] = call_user_func(array($sample,$_POST['second_category_altr_filt_widgts']));
-							$sample->save(call_user_func(array($sample,$_POST['second_category_altr_filt_widgts'])));	
+						if(method_exists($sample,wbc()->sanitize->post('second_category_altr_filt_widgts'))) {
+							$res['meta'] = call_user_func(array($sample,wbc()->sanitize->post('second_category_altr_filt_widgts')));
+
+							$sample->save(call_user_func(array($sample,wbc()->sanitize->post('second_category_altr_filt_widgts'))));	
 						}
 						
 					} else {
@@ -260,8 +262,8 @@ class Eowbc_Filters extends Eowbc_Model {
 				} else {
 					wbc()->load->model('admin/sample_data/eowbc_filter_samples');
 						$sample = \eo\wbc\model\admin\sample_data\Filter_Samples::instance();
-					if(method_exists($sample,$_POST['second_category_altr_filt_widgts'])){							
-						$sample->save(call_user_func(array($sample,$_POST['second_category_altr_filt_widgts'])));	
+					if(method_exists($sample,wbc()->sanitize->post('second_category_altr_filt_widgts'))){							
+						$sample->save(call_user_func(array($sample,wbc()->sanitize->post('second_category_altr_filt_widgts'))));	
 					}
 				}				
 			}
@@ -299,21 +301,21 @@ class Eowbc_Filters extends Eowbc_Model {
 			    	if( $is_table_save ) {
 			    		if( $fk == "d_fconfig_ordering" || $fk == "s_fconfig_ordering" )  {
 			    			
-			    			if($fk=='d_fconfig_ordering' and !empty($_POST['first_category_altr_filt_widgts'])){
-			    				$table_data['filter_template'] = apply_filters('eowbc_admin_form_filters_save_d_filter_template',$_POST['first_category_altr_filt_widgts']);
-			    			} elseif ($fk == "s_fconfig_ordering" and !empty($_POST['second_category_altr_filt_widgts'])) {
-			    				$table_data['filter_template'] = apply_filters('eowbc_admin_form_filters_save_s_filter_template',$_POST['second_category_altr_filt_widgts']);
+			    			if($fk=='d_fconfig_ordering' and !empty(wbc()->sanitize->post('first_category_altr_filt_widgts'))){
+			    				$table_data['filter_template'] = apply_filters('eowbc_admin_form_filters_save_d_filter_template',wbc()->sanitize->post('first_category_altr_filt_widgts'));
+			    			} elseif ($fk == "s_fconfig_ordering" and !empty(wbc()->sanitize->post('second_category_altr_filt_widgts'))) {
+			    				$table_data['filter_template'] = apply_filters('eowbc_admin_form_filters_save_s_filter_template',wbc()->sanitize->post('second_category_altr_filt_widgts'));
 			    			}
 
-				    		$table_data[$fk] = (int)$_POST[$fk]; 	
+				    		$table_data[$fk] = (int)wbc()->sanitize->post($fk); 	
 			    		}
 			    		else {
-			    			$table_data[$fk] = ( isset($_POST[$fk]) ? $_POST[$fk] : '' ); 
+			    			$table_data[$fk] = ( isset($_POST[$fk]) ? wbc()->sanitize->post($fk) : '' ); 
 			    		}
 			    	}
 			    	else {			    		
 			    		
-			    		wbc()->options->update_option('filters_'.$key,$fk,(isset($_POST[$fk])? ( $_POST[$fk] ):'' ) );
+			    		wbc()->options->update_option('filters_'.$key,$fk,(isset($_POST[$fk])? ( wbc()->sanitize->post($fk) ):'' ) );
 			    	}
 			    }
 			}
@@ -324,8 +326,8 @@ class Eowbc_Filters extends Eowbc_Model {
 
 		        if(is_array($filter_data) and !empty($filter_data)){
 
-		        	if(!empty($_POST[$key_clean.'_id']) and !empty($filter_data[$_POST[$key_clean.'_id']])){
-		        		$filter_data[$_POST[$key_clean.'_id']] = $table_data;
+		        	if(!empty(wbc()->sanitize->post($key_clean.'_id')) and !empty($filter_data[wbc()->sanitize->post($key_clean.'_id')])) {
+		        		$filter_data[wbc()->sanitize->post($key_clean.'_id')] = $table_data;
 		        		$res["type"] = "success";
 		    			$res["msg"] = eowbc_lang('Filter updated successfuly');
 		    			wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data) );
@@ -466,10 +468,10 @@ class Eowbc_Filters extends Eowbc_Model {
 		$first = unserialize(wbc()->options->get_option_group('filters_'.$this->tab_key_prefix.'d_fconfig'));
 		$second = unserialize(wbc()->options->get_option_group('filters_'.$this->tab_key_prefix.'s_fconfig'));
 
-		if(!empty($first[$_POST['id']])){
-			$res['msg'] = json_encode($first[$_POST['id']]);
-		} elseif (!empty($second[$_POST['id']])) {
-			$res['msg'] = json_encode($second[$_POST['id']]);
+		if(!empty($first[wbc()->sanitize->post('id')])){
+			$res['msg'] = json_encode($first[wbc()->sanitize->post('id')]);
+		} elseif (!empty($second[wbc()->sanitize->post('id')])) {
+			$res['msg'] = json_encode($second[wbc()->sanitize->post('id')]);
 		} else {
 			$res['type'] = 'error';
 			$res['msg'] = 'Selected item does not exists!';

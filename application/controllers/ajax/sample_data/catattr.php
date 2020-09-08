@@ -6,13 +6,12 @@
 
 $res = array( "type"=>"success", "msg"=>"" );
 
-if(wp_verify_nonce(sanitize_text_field($_POST['_wpnonce']),'sample_data_jewelry')){                
-	wbc()->load->model('admin/sample_data/eowbc_'.sanitize_text_field($_POST['feature_key']));
+if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'sample_data_jewelry')){                
+	wbc()->load->model('admin/sample_data/eowbc_'.wbc()->sanitize->post('feature_key'));
 	$class_name = '\eo\wbc\model\admin\sample_data\Eowbc_'.
 		str_replace(' ','_',ucwords(
 			implode(' ',
-				explode('_',
-					sanitize_text_field($_POST['feature_key'])
+				explode('_',wbc()->sanitize->post('feature_key')
 				)
 			)
 		)
@@ -24,7 +23,7 @@ if(wp_verify_nonce(sanitize_text_field($_POST['_wpnonce']),'sample_data_jewelry'
 
 
 	$template = array();
-	if(sanitize_text_field($_POST['type'])=='cat'){
+	if(wbc()->sanitize->post('type')=='cat') {
 		$template = $data_template_obj->get_categories();
 
 		$post_index = wbc()->sanitize->post('index');
@@ -34,8 +33,8 @@ if(wp_verify_nonce(sanitize_text_field($_POST['_wpnonce']),'sample_data_jewelry'
 			if( $index == $post_index ) {
 				$template = $template[$catind];
 
-				if(isset($_POST['cat_value_'.$catind]) && !empty(sanitize_text_field($_POST['cat_value_'.$catind]))){
-					$template['name'] = sanitize_text_field($_POST['cat_value_'.$catind]);
+				if(isset($_POST['cat_value_'.$catind]) && !empty(wbc()->sanitize->post('cat_value_'.$catind))) {
+					$template['name'] = wbc()->sanitize->post('cat_value_'.$catind);
 				}
 				break;
 			}
@@ -58,25 +57,25 @@ if(wp_verify_nonce(sanitize_text_field($_POST['_wpnonce']),'sample_data_jewelry'
 				
 		call_user_func(array($class_name,'instance'))->create_category(array($template));		
 
-	} elseif(sanitize_text_field($_POST['type'])=='attr'){
+	} elseif(wbc()->sanitize->post('type')=='attr'){
 		$template = $data_template_obj->get_attributes();
 		
 		$catat_attribute = unserialize( wbc()->options->get($feature_key.'_created_attribute'), serialize($template) );
 
-		$template = $template[sanitize_text_field($_POST['index'])];
-		if(!empty(sanitize_text_field($_POST['label']))){
-			$template['name'] = sanitize_text_field($_POST['label']);
+		$template = $template[wbc()->sanitize->post('index')];
+		if(!empty(wbc()->sanitize->post('label'))) {
+			$template['name'] = wbc()->sanitize->post('label');
 		}
 
-		$catat_attribute[sanitize_text_field($_POST['index'])] = call_user_func(array($class_name,'instance'))->create_attribute(array($template))[0];	
+		$catat_attribute[wbc()->sanitize->post('index')] = call_user_func(array($class_name,'instance'))->create_attribute(array($template))[0];	
 
 		wbc()->options->set($feature_key.'_created_attribute', serialize($catat_attribute));	
 	} 
-	elseif(sanitize_text_field($_POST['type'])=='after_cat_created'){
-        call_user_func(array($class_name,'instance'))->after_cat_created($_POST['feature_key']);
+	elseif(wbc()->sanitize->post('type')=='after_cat_created') {
+        call_user_func(array($class_name,'instance'))->after_cat_created(wbc()->sanitize->post('feature_key'));
 	} 
-	elseif(sanitize_text_field($_POST['type'])=='after_attr_created'){
-		call_user_func(array($class_name,'instance'))->after_attr_created($_POST['feature_key']);
+	elseif(wbc()->sanitize->post('type')=='after_attr_created') {
+		call_user_func(array($class_name,'instance'))->after_attr_created(wbc()->sanitize->post('feature_key'));
 	} 
 	// elseif(sanitize_text_field($_POST['type'])=='save_map'){
 	// 	$_maps = $data_template_obj->get_maps();

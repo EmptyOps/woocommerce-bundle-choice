@@ -29,16 +29,16 @@ class Service {
 
 
         add_action( 'woocommerce_update_cart_action_cart_updated',function() {
-           if(!empty($_POST['cart'])){
+           if(is_array($_POST['cart']) and !empty($_POST['cart'])) {
                 $cart = wbc()->session->get('EO_WBC_MAPS');
                 foreach ($_POST['cart'] as $key => $value) {                    
-                    if(array_key_exists($key,$cart) and !empty($value['qty'])){
+                    if(array_key_exists($key,$cart) and !empty(sanitize_text_field($value['qty']))) {
                         foreach (wc()->cart->cart_contents as $cart_key=>$cart_item)
                         {
                             if($cart[$key]["FIRST"][0]==$cart_item["product_id"] && $cart[$key]["FIRST"][2]==$cart_item["variation_id"]){
                                 
-                                wc()->cart->set_quantity($cart_key,$cart_item['quantity']+($value['qty']-$cart[$key]['FIRST'][1]));
-                                $cart[$key]['FIRST'][1] = $value['qty'];
+                                wc()->cart->set_quantity($cart_key,$cart_item['quantity']+( sanitize_text_field($value['qty'])-$cart[$key]['FIRST'][1]));
+                                $cart[$key]['FIRST'][1] = sanitize_text_field($value['qty']);
                             }
                         }               
                     }

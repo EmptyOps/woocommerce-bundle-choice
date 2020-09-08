@@ -105,7 +105,7 @@ class Eowbc_Sample_Data {
 		}
 		if(!empty($_POST)) {			
 			
-			if(isset($_POST['_wpnonce']) && wp_verify_nonce($_POST['_wpnonce'],'eo_wbc_auto_jewel')) {
+			if(isset($_POST['_wpnonce']) && wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eo_wbc_auto_jewel')) {
 			  
 			  // commented since moved it to batch based processing
 			  // $index=0;
@@ -169,8 +169,8 @@ class Eowbc_Sample_Data {
 			  
 			}
 
-			if(!empty($_POST['step'])){
-			  if($_POST['step']==3) {
+			if(!empty(wbc()->sanitize->post('step'))){
+			  if(wbc()->sanitize->post('step')==3) {
 
 			    ?>
 			    <script type="text/javascript" >
@@ -221,7 +221,7 @@ class Eowbc_Sample_Data {
 			    });
 			    </script> <?php
 			  }      
-			    $_step=$_POST['step'];
+			    $_step=wbc()->sanitize->post('step');
 			} else {
 			    $_step=1;
 			}

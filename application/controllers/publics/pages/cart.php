@@ -186,9 +186,14 @@ class Cart {
 
         foreach ($maps as $key => $map) {
             
-            $maps[$key]['quantity'] = $map['FIRST'][1];
+            
             $maps[$key]['data'] = wbc()->wc->eo_wbc_get_product((empty($map['FIRST'][2]))?$map['FIRST'][0]:$map['FIRST'][2]);
-
+            if(empty($maps[$key]['data'])){
+                unset($maps[$key]);
+                continue;
+            }
+            
+            $maps[$key]['quantity'] = $map['FIRST'][1];
             $maps[$key]['name'] = $maps[$key]['data']->get_name();
 
             $maps[$key]['product_id'] = ((empty($map['FIRST'][2]))?$map['FIRST'][0]:$map['FIRST'][2]);

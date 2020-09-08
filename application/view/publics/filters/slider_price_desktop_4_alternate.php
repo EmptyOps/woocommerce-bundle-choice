@@ -11,7 +11,7 @@
 	</p>
 	<div style="display: inline-block;" class="field twelve ui wide">
 
-		<div class="ui range slider text_slider" id="text_slider_price" data-min="<?php echo $min; ?>" data-max="<?php echo $max; ?>" data-slug="price" style="padding-bottom: 0px !important" data-reset="reset_price(new Event('click'),'<?php echo $min; ?>','<?php echo $max; ?>')" data-sep="<?php _e($seprator); ?>" data-prefix="<?php _e($prefix); ?>" data-postfix="<?php _e($postfix); ?>"></div>
+		
 		<div class="ui tiny form" style="padding:0px 6%;">
 		  <div class="three fields">
 		    <div class="field">	      
@@ -23,6 +23,8 @@
 		    </div>
 		  </div>	  
 		</div>				
+		<div class="ui range slider text_slider" id="text_slider_price" data-min="<?php echo $min; ?>" data-max="<?php echo $max; ?>" data-slug="price" style="padding-bottom: 0px !important" data-reset="reset_price(new Event('click'),'<?php echo $min; ?>','<?php echo $max; ?>')" data-sep="<?php _e($seprator); ?>" data-prefix="<?php _e($prefix); ?>" data-postfix="<?php _e($postfix); ?>"></div>
+		
 	</div>
 </div>
 	

@@ -240,6 +240,9 @@ class EOWBC_Filter_Widget {
 						max-width:100% !important;
 						margin: 0 !important;
 						width:100% !important;
+						height: fit-content !important;
+						min-height: fit-content !important
+						max-height: fit-content !important
 					}
 					
 					/*Modifications............................*/
@@ -290,13 +293,13 @@ class EOWBC_Filter_Widget {
 					.ui.slider .inner .thumb,#advance_filter,#apply_filter{
 						background-color:".wbc()->options->get_option('appearance_filters','slider_nodes_backcolor_active',$active_color)/*get_option('eo_wbc_filter_config_slidernode_color','')*/." !important;
 					}
-					.eo-wbc-container.filters{
+					.eo-wbc-container.filters, .eo-wbc-container.filters .ui.header{
 						font-family:".wbc()->options->get_option('appearance_filters','header_font','ZapfHumanist601BT-Roman')/*get_option('eo_wbc_filter_config_font_family','')*/." !important;
 					}
 					.eo-wbc-container.filters .ui.styled.accordion .title,.eo-wbc-container.filters .ui.header{
 						color:".wbc()->options->get_option('appearance_filters','header_textcolor','')/*get_option('eo_wbc_filter_config_header_color','')*/." !important;
 					}
-					.eo-wbc-container.filters .eo_wbc_filter_icon,.eo-wbc-container.filters .slider .label,.eo-wbc-container.filters input{
+					.eo-wbc-container.filters .eo_wbc_filter_icon,.eo-wbc-container.filters .slider .label,.eo-wbc-container.filters input,.eo-wbc-container.filters .ui.checkbox label{
 						color:".wbc()->options->get_option('appearance_filters','labels_textcolor','')/*get_option('eo_wbc_filter_config_label_color','')*/." !important;
 					}
 					.eo_wbc_filter_icon.ui.image{
@@ -366,7 +369,8 @@ class EOWBC_Filter_Widget {
 						margin: 0px;					
 						text-align: center;
 						padding: 1px !important;
-	    				cursor: pointer;					
+	    				cursor: pointer;
+	    				max-height: 6em;
 					}
 					.eo-wbc-container .toggle_sticky_mob_filter .segment{
 						border: 1px solid grey !important;
@@ -576,7 +580,7 @@ class EOWBC_Filter_Widget {
 			                (
 			                    !empty(wbc()->sanitize->get('FIRST'))
 			                        ? 
-			                    sanitize_text_field(wbc()->sanitize->get('FIRST'))
+			                    wbc()->sanitize->get('FIRST')
 			                        :
 			                    ''
 			                )
@@ -589,7 +593,7 @@ class EOWBC_Filter_Widget {
 			                (
 			                    !empty(wbc()->sanitize->get('SECOND'))
 			                        ?
-			                    sanitize_text_field(wbc()->sanitize->get('SECOND'))
+			                    wbc()->sanitize->get('SECOND')
 			                        :
 			                    ''
 			                )
@@ -951,6 +955,19 @@ class EOWBC_Filter_Widget {
 
 		
 		$curr_prefix = wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','price_filter_prefix');
+
+		$alternet_slider = '';
+
+		$category = $this->_category;
+		
+		if(
+			(wbc()->options->get_option('configuration','first_slug') === $category and wbc()->options->get_option('appearance_filters','appearance_filters_alternate_price_filter_first',false)) 
+			or 
+			(wbc()->options->get_option('configuration','second_slug') === $category and wbc()->options->get_option('appearance_filters','appearance_filters_alternate_price_filter_second',false)) 
+		){
+			$alternet_slider = '_alternate';			
+		}
+
 		$curr_postfix = '';
 		if(!empty($curr_prefix)){
 			$curr_prefix = wbc()->wc->get_currency_symbol();
@@ -981,11 +998,11 @@ class EOWBC_Filter_Widget {
 		if($desktop):
 			
 			if((wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts')=='sc4' and $this->_category==wbc()->options->get_option('configuration','second_slug')) or (wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts')=='fc4' and $this->_category==wbc()->options->get_option('configuration','first_slug'))) {
-				wbc()->load->template('publics/filters/slider_price_desktop_4', array("width_class"=>$this->get_width_class($width),"min"=>$min,"max"=>$max,"reset"=>$reset,'help'=>$help,'seprator'=>$seprator,'prefix'=>$curr_prefix,'postfix'=>$curr_postfix)); 
+				wbc()->load->template('publics/filters/slider_price_desktop_4'.$alternet_slider, array("width_class"=>$this->get_width_class($width),"min"=>$min,"max"=>$max,"reset"=>$reset,'help'=>$help,'seprator'=>$seprator,'prefix'=>$curr_prefix,'postfix'=>$curr_postfix)); 
 			} elseif ((in_array(wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts'),array('sc3','sc5')) and $this->_category==wbc()->options->get_option('configuration','second_slug')) or (in_array(wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts'),array('fc3','fc5')) and $this->_category==wbc()->options->get_option('configuration','first_slug'))) {
-				wbc()->load->template('publics/filters/slider_price_desktop_3', array("width_class"=>$this->get_width_class($width),"min"=>$min,"max"=>$max,"reset"=>$reset,'help'=>$help,'seprator'=>$seprator,'prefix'=>$curr_prefix,'postfix'=>$curr_postfix)); 
+				wbc()->load->template('publics/filters/slider_price_desktop_3'.$alternet_slider, array("width_class"=>$this->get_width_class($width),"min"=>$min,"max"=>$max,"reset"=>$reset,'help'=>$help,'seprator'=>$seprator,'prefix'=>$curr_prefix,'postfix'=>$curr_postfix)); 
 			}  else {
-				wbc()->load->template('publics/filters/slider_price_desktop', array("width_class"=>$this->get_width_class($width),"min"=>$min,"max"=>$max,"reset"=>$reset,'seprator'=>$seprator,'prefix'=>$curr_prefix,'postfix'=>$curr_postfix)); 
+				wbc()->load->template('publics/filters/slider_price_desktop'.$alternet_slider, array("width_class"=>$this->get_width_class($width),"min"=>$min,"max"=>$max,"reset"=>$reset,'seprator'=>$seprator,'prefix'=>$curr_prefix,'postfix'=>$curr_postfix)); 
 			}
 		elseif(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')):			
 			wbc()->load->template('publics/filters/slider_price_mobile_alternate', array("min"=>$min,"max"=>$max,"reset"=>$reset,'advance'=>$advance,'seprator'=>$seprator,'prefix'=>$curr_prefix,'postfix'=>$curr_postfix));

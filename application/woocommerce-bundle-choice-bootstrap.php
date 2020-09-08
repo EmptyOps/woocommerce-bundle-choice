@@ -98,7 +98,7 @@ class WooCommerce_Bundle_Choice_Bootstrap {
 
 		if ( ! current_user_can( 'activate_plugins' ) ) return;
 		self::safe_load();
-		$plugin = isset( $_REQUEST['plugin'] ) ? $_REQUEST['plugin'] : '';
+		$plugin = isset( $_REQUEST['plugin'] ) ? sanitize_text_field($_REQUEST['plugin']) : '';
 		check_admin_referer( "activate-plugin_{$plugin}" );
 		Activate::instance()->run();
 	}
@@ -109,7 +109,7 @@ class WooCommerce_Bundle_Choice_Bootstrap {
 		}
 		if ( ! current_user_can( 'activate_plugins' ) ) return;
 		self::safe_load();
-		$plugin = isset( $_REQUEST['plugin'] ) ? $_REQUEST['plugin'] : '';
+		$plugin = isset( $_REQUEST['plugin'] ) ? sanitize_text_field($_REQUEST['plugin']) : '';
 		check_admin_referer( "deactivate-plugin_{$plugin}" );
 		Deactivate::instance()->run();
 	}
