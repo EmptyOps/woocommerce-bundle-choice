@@ -73,7 +73,7 @@ class Acceptance extends \Codeception\Module
                     return '#main > header > div:nth-child(4) > div > div:nth-child(2)';
                 }
                 else if( $widget_template == "template_1" ) {
-                    return '#main > div.eo-wbc-container.container > div';
+                    return '#main > header > div:nth-child(4) > div';
                 }
                 else {
                     throw new \Exception("Selector not set for template ".$widget_template." for key ".$key, 1);
@@ -546,11 +546,17 @@ class Acceptance extends \Codeception\Module
     /**
      * 
      */
-    public function getElementCss($I,$selector_of_targets, $css_property_of_targets) 
+    public function getElementCss($I,$selector_of_targets, $css_property_of_targets, $suite_name_prefix="") 
     {
         // echo "called resetSession...";
             
         try { 
+
+            // since mozila behaves differently for retrieving the css of border. see here https://stackoverflow.com/a/28897973/1480088
+            if( $suite_name_prefix == "n_" /*firefox mozilla used for this suite right now*/ && $css_property_of_targets == "border-radius" ) {
+                $css_property_of_targets = "borderTopLeftRadius";
+            }
+
             return $I->executeJS('
                                 return jQuery("'.$selector_of_targets.'").css("'.$css_property_of_targets.'");
                                 ');  

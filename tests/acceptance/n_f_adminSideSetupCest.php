@@ -32,14 +32,15 @@ class n_f_adminSideSetupCest
         // save 
         $I->scrollTo('//*[@id="config_navigation_conf_save_btn"]', -300, -100);
         $I->wait(3);
+
         $I->click('#config_navigation_conf_save_btn');  //('Save');     //it shouldn't be this way, but there seem some issue with selenium driver and thus when there is another Save button on the page even though on another page and is not visible but still selenium think it is visible and thus gives us error so need to use unique xPath like id etc. 
 
-        $I->wait(60);
-        $I->wbc_debug_log($I, '#config_navigation_conf_save_btn');
-        $I->lookIntoWBCErrorLog($I);
+        // $I->wait(60);
+        // $I->wbc_debug_log($I, '#config_navigation_conf_save_btn');
+        // $I->lookIntoWBCErrorLog($I);
 
         // since due to sample data is there it may take time to install alternate widget's sample data 
-        $I->waitForText('Updated successfully', 10);
+        $I->waitForText('Updated successfully');
 
         // confirm if saved properly or not
         $I->reloadPage();   //reload page
@@ -196,7 +197,7 @@ class n_f_adminSideSetupCest
         }
     }
 
-    protected function verifyAppearance(AcceptanceTester $I, $field_id, $field_name, $field_type, $val, $should_see_text=array(), $selector_of_targets=array(), $css_property_of_targets=array())
+    protected function verifyAppearance(AcceptanceTester $I, $field_id, $field_name, $field_type, $val, $should_see_text=array(), $selector_of_targets=array(), $css_property_of_targets=array(), $suite_name_prefix="")
     {
         // if( !$I->test_allowed_in_this_environment("n_") ) {
         //     return;
@@ -226,7 +227,7 @@ class n_f_adminSideSetupCest
                 }
             }
             elseif( $field_type[$i] == "css" ) {
-                $cssval = $I->getElementCss($I, $selector_of_targets[$i], $css_property_of_targets[$i] );  
+                $cssval = $I->getElementCss($I, $selector_of_targets[$i], $css_property_of_targets[$i], $suite_name_prefix );  
                 echo "cssval found... ".$cssval;
                 if( $cssval == $val[$i] ) {
                     $I->dontSee('sd8324hs65gkjv73h');   // assume passed with dummy assert
@@ -271,12 +272,12 @@ class n_f_adminSideSetupCest
         // save 
         $I->click($save_button_xpath);  
 
-        $I->wait(60);
-        $I->wbc_debug_log($I, $save_button_selector);
-        $I->lookIntoWBCErrorLog($I);
+        // $I->wait(60);
+        // $I->wbc_debug_log($I, $save_button_selector);
+        // $I->lookIntoWBCErrorLog($I);
 
         // in case server is hanged and it takes time!
-        $I->waitForText('Filter updated successfuly', 10);
+        $I->waitForText('Filter updated successfuly');
 
         // confirm if saved properly or not
         $I->reloadPage();   //reload page
@@ -393,8 +394,10 @@ class n_f_adminSideSetupCest
 
         $I->wait(5);
 
-        $I->executeJS(' window.scrollTo( 0, 500 ); ');       //$I->scrollTo('Save'); 
-        $I->wait(5);
+        $I->executeJS(' window.scrollTo( 0, 1000 ); ');       //$I->scrollTo('Save'); 
+        $I->wait(60);
+
+        echo $I->grabPageSource();
 
         // verify 
         for($i=0; $i<sizeof($verifications); $i++) {
@@ -504,7 +507,7 @@ class n_f_adminSideSetupCest
         // confirm if saved properly or not
         $I->reloadPage();   //reload page
 
-        $I->executeJS('window.scrollTo( 0, 0 );');       //$I->scrollTo('Save'); 
+        $I->executeJS('window.scrollTo( 0, 100 );');       //$I->scrollTo('Save'); 
         $I->wait(3);
 
         $I->click($goto_tab);

@@ -73,7 +73,7 @@ class n_n_frontendAppearanceModificationsCest extends n_f_adminSideSetupCest
                 '#main > header > div:nth-child(4) > div > div:nth-child(2) > div > div.ui.grid > div:nth-child(2) > div.title', 
                 '#main > header > div:nth-child(4) > div > div:nth-child(2) > div > div:nth-child(3) > u:nth-child(3) > a' 
             ), 
-            array('border-radius','backgroundColor','backgroundColor', 'color','color','color'));
+            array('border-radius','backgroundColor','backgroundColor', 'color','color','color'), "n_");
     }
 
     // test if editing the appearance of filters works or not  

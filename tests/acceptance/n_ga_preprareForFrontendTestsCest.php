@@ -23,8 +23,8 @@ class n_ga_preprareForFrontendTestsCest extends n_f_adminSideSetupCest
         // set specific breadcrumb template if debuggin any issue
         //
         if( true ) {
-            $I->set_session('wbc_suite_n__process_current_breadcrumb_template', 'default', 'Default');
-            $this->setAlternateBreadcrumbWidget($I, 'default');
+            $I->set_session('wbc_suite_n__process_current_breadcrumb_template', 'default');
+            $this->setAlternateBreadcrumbWidget($I, 'default', 'Default');
         }
         
         //
