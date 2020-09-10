@@ -1,6 +1,6 @@
 
 jQuery(document).ready(function($){
-	$('#shop_cat_filter_location_cat').on('change',function(){				
+	$('#shop_cat_filter_location_cat,#sc_shop_cat_filter_location_cat').on('change',function(){				
 		if(typeof($(this).attr('checked'))!=typeof(undefined)){
 			$("#shop_cat_filter_category").parent().parent().removeClass('hidden');	
 		} else {

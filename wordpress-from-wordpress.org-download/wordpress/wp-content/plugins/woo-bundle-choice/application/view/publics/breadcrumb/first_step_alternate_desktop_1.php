@@ -32,7 +32,7 @@
                 <div class="description"><?php _e($first_name); ?></div>
                 <div><?php _e(get_woocommerce_currency().wc_price($first->get_price())); ?></div>
                 
-                <div><u><a href="<?php echo $view_url; ?>">View</a></u>&nbsp;|&nbsp;<u><a href="<?php echo $remove_url; ?>" data-remove-url="<?php echo $remove_url; ?>">Remove</a></u></div>
+                <div><u><a href="<?php echo $view_url; ?>">View</a></u>&nbsp;|&nbsp;<u><a href="<?php echo $remove_url; ?>" data-remove-url="<?php echo $remove_url; ?>"><?php _e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_change_action_text','Change',true,true)); ?></a></u></div>
             <?php } endif; ?>                    
         </div>                
         <div class="column">

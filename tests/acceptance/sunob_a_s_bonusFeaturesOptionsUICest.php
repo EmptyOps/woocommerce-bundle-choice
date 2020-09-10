@@ -27,7 +27,7 @@ class sunob_a_s_bonusFeaturesOptionsUICest
 		/* Map creation and modification tab */
 		// go to the tab
 		// $I->click('Breadcrumb');
-		$I->see('Toggle Button Enabled?');
+		$I->see('Hide SKU,Categories sections?');
 
 		// set fields 
 		$I->executeJS("jQuery('#tiny_features_option_ui_toggle_status').parent().checkbox('set checked', 'tiny_features_option_ui_toggle_status');");
@@ -46,7 +46,7 @@ class sunob_a_s_bonusFeaturesOptionsUICest
 		$I->executeJS('jQuery("#tiny_features_option_ui_bg_color").val("#ffffff");'); 
 		$I->executeJS('jQuery("#tiny_features_option_ui_bg_color_hover").val("#ffffff");');
 
-		$I->executeJS('window.scrollTo( 0, 1000 );');		//$I->scrollTo('Save');	
+		$I->scrollTo('#tiny_features_option_ui_save', -300, -300);	//executeJS('window.scrollTo( 0, 1000 );');		//$I->scrollTo('Save');	
 		$I->wait(3);
 
 		// save 

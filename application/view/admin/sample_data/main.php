@@ -4,8 +4,8 @@
 */
 
 $_step = 1; 
-if(!empty($_GET['step'])){
-	$_step = $_GET['step'];
+if(!empty(wbc()->sanitize->get('step'))){
+	$_step = wbc()->sanitize->get('step');
 }
 
 ?>
@@ -109,12 +109,12 @@ box-shadow: none;">
 
 </div>
 
-<?php if(empty($_GET['step']) or (!empty($_GET['step']) and $_GET['step']!=3 )) { 
-	if(empty($_GET['step'])){
+<?php if(empty(wbc()->sanitize->get('step')) or (!empty(wbc()->sanitize->get('step')) and wbc()->sanitize->get('step')!=3 )) { 
+	if(empty(wbc()->sanitize->get('step'))){
 		$_GET['step']=1;
 	}
 
-	$_GET['step'] = $_GET['step']+1;
+	$_GET['step'] = wbc()->sanitize->get('step')+1;
 	$next_url = admin_url('admin.php?'.http_build_query($_GET));
 	
 	?>

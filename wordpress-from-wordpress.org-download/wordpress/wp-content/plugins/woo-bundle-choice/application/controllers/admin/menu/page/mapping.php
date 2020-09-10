@@ -60,8 +60,8 @@ if ( ! class_exists( 'Mapping' ) ) {
 			
 			wbc()->load->model('admin/form-builder');
 
-			$dropdown_opts_first_cat = \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_attributes( \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_prime_category(wbc()->options->get_option('configuration','first_slug'),' -- ') );
-			$dropdown_opts_second_cat = \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_attributes( \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_prime_category(wbc()->options->get_option('configuration','second_slug'),' -- ') );
+			$dropdown_opts_first_cat = apply_filters('eowbc_admin_form_mapping_first_cat',\eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_attributes( \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_prime_category(wbc()->options->get_option('configuration','first_slug'),' -- ') ));
+			$dropdown_opts_second_cat = apply_filters('eowbc_admin_form_mapping_second_cat',\eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_attributes( \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_prime_category(wbc()->options->get_option('configuration','second_slug'),' -- ') ));
 
 			//map list
 			$table = array();
@@ -176,7 +176,11 @@ if ( ! class_exists( 'Mapping' ) ) {
 							'list'=>array_merge( $table , array(
 								'type'=>'table' )
 							), 
-
+							'map_creation_modification_id'=>array(
+								'type'=>'hidden',
+								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
+							),
 							'save_sec_title'=>array(
 								'label'=>"Add New Maps",
 								'type'=>'label',
@@ -214,9 +218,11 @@ if ( ! class_exists( 'Mapping' ) ) {
 							),
 
 							'eo_wbc_first_category'=>array(
+								'label'=>'First field',
 								'type'=>'select',
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
+								'validate'=>array('required'=>''),
 								'options'=>$dropdown_opts_first_cat,	//array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
 								'class'=>array('fluid'),
 								'inline_class'=>array('three'),
@@ -234,9 +240,11 @@ if ( ! class_exists( 'Mapping' ) ) {
 								'inline'=>true,
 							),
 							'eo_wbc_second_category'=>array(
+								'label'=>'Second field',
 								'type'=>'select',
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
+								'validate'=>array('required'=>''),
 								'options'=>$dropdown_opts_second_cat,	//array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
 								'class'=>array('fluid'),
 								'prev_inline'=>true,

@@ -120,7 +120,7 @@ if ( ! class_exists( 'Configuration' ) ) {
 											'size_class'=>array('eight','wide','required'),
 											'inline'=>true,
 										),
-									'visible_info'=>array( 'label'=>'Choose where you want to display the Two Start with Action buttons. If you choose custom landing page a sample landing page will be provided.',
+									'visible_info'=>array( 'label'=>'Choose where you want to display the two Start With with Action buttons. If you choose custom landing page a sample landing page will be provided. The Shortcode for the buttons widget is <strong>[woo-bundle-choice-btn]</strong>.',
 											'type'=>'visible_info',
 											'class'=>array('fluid', 'small'),
 											'size_class'=>array('sixteen','wide'),
@@ -158,7 +158,7 @@ if ( ! class_exists( 'Configuration' ) ) {
 									'label_make_pair'=>array(
 											'label'=>'Button label',
 											'type'=>'text',
-											'validate'=>array('required'=>''),
+											'validate'=>/*( !empty($_POST['enable_make_pair'])?array('required'=>''):array())*/array('validate_if'=>array('enable_make_pair'=>array('required'=>''))),
 											'value'=>wbc()->options->get_option('configuration','label_make_pair'),
 											'class'=>array(),
 											'size_class'=>array('eight','wide','required'),

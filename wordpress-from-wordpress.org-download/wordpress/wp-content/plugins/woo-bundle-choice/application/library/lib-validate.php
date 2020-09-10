@@ -11,7 +11,9 @@ if(!class_exists('WBC_Validate')) {
 				self::$_instance = new self;				
 				self::$_instance->methods = array(
 					'required',
-					'postfix',									
+					'postfix',
+					'validate_if',
+					'url'									
 				);
 			}
 			return self::$_instance;
@@ -76,17 +78,43 @@ if(!class_exists('WBC_Validate')) {
 			return (!( $value!==0 && $value!=="0" && empty($value) )?true:"`${label}` field is required!");
 		}
 
+		public function validate_if($label,$value,$param){			
+			if(empty($param)) return true;
+			foreach ($param as $key => $validations) {
+				if (isset($_POST[$key]) and is_array($validations)) {
+					foreach ($validations as $sanitize_method=>$sanitize_params) 
+					{
+		    			if(in_array($sanitize_method,$this->methods)) {
+		    				$validation_state = call_user_func_array( array( $this,$sanitize_method),array($label,$value,$sanitize_params));
+		    				if($validation_state!==true) {
+				    			$res["msg"] = $validation_state;
+				    			echo json_encode($res);
+				    			die();
+				    		}
+		    			}				    			
+		    		}
+		    		return true;
+				} else {
+					return true;
+				}
+			}			
+		}
+
 		public function postfix($label,$value,$param){
 			if(!empty($param)){
 
 				foreach ($param as $post_fix) {
-					if((substr($value,-(strlen($post_fix)))==$post_fix)){
+					if((substr($value,-(strlen($post_fix)))==$post_fix) and strlen($post_fix)<strlen($value)){
 						return true;
 					}
 				}
 				return "`${label}` has invalid formate!";
 			}
 			return true;
+		}
+
+		public function url($label, $value, $param) {
+			return (empty($value) xor filter_var($value, FILTER_VALIDATE_URL)) ? true : "`${label} field does not have valid URL.`";
 		}
 	}
 }

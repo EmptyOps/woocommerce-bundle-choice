@@ -1,7 +1,0 @@
-2020-07-20T10:18:02+00:00 CRITICAL Uncaught Error: Class 'eo\wbc\model\admin\Eowbc_Shop_Category_Filter' not found in /tmp/WBC_TEST_ENV_with_sample_data/wordpress-latest-1/wp-content/plugins/woo-bundle-choice/application/model/admin/sample_data/eowbc_filter_samples.php:101
-Stack trace:
-#0 /tmp/WBC_TEST_ENV_with_sample_data/wordpress-latest-1/wp-content/plugins/woo-bundle-choice/application/model/admin/eowbc_filters.php(179): eo\wbc\model\admin\sample_data\Filter_Samples->save(Array, 'shortflt_')
-#1 /tmp/WBC_TEST_ENV_with_sample_data/wordpress-latest-1/wp-content/plugins/woo-bundle-choice/application/controllers/ajax/eowbc_shortcode_filters.php(23): eo\wbc\model\admin\Eowbc_Filters->save(Array)
-#2 /tmp/WBC_TEST_ENV_with_sample_data/wordpress-latest-1/wp-content/plugins/woo-bundle-choice/application/woocommerce-bundle-choice-bootstrap.php(78): require_once('/W...')
-#3 /tmp/WBC_TEST_ENV_with_sample_data/wordpress-latest-1/wp-includes/class-wp-hook.php(287): eo\wbc\WooCommerce_Bundle_Choice_Bootstrap in /tmp/WBC_TEST_ENV_with_sample_data/wordpress-latest-1/wp-content/plugins/woo-bundle-choice/application/model/admin/sample_data/eowbc_filter_samples.php on line 101
-

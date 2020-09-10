@@ -22,7 +22,11 @@
 	     	}
 	     	else { ?>
 	     		<td <?php echo !empty($column['colspan']) ? 'colspan="'.$column['colspan'].'"' : '';?> class="<?php echo !empty($column['align']) ? $column['align'] : 'center';?> aligned <?php echo !empty($column['class']) ? $column['class'] : '';?> <?php echo !empty($column['disabled']) ? 'disabled' : '';?>">
+
 	     			<?php 
+	     			if(!empty($column['link']) and isset($column['edit_id'])){
+	     				?> <a href="#" data-wbc-editid="<?php _e($column['edit_id']); ?>"> <?php
+	     			}
 			}
  			
  			//val
@@ -41,7 +45,12 @@
 				</th>
 	     	<?php 
 	     	}
-	     	else { ?>
+	     	else { 
+
+	     			if(!empty($column['link']) and isset($column['edit_id'])){
+	     				?> </a> <?php
+	     			}
+	     			?>
 	     		</td>
 	     	<?php 
 	     	}

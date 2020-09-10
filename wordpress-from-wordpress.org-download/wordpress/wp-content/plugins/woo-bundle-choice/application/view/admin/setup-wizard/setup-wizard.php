@@ -44,6 +44,9 @@ box-shadow: none;">
 		$vars = array();
 		if(isset($feature_option)) {
 			$vars["feature_option"] = $feature_option;
+			$vars["bonus_features"] = $bonus_features;
+			$vars["available_sample"] = $available_sample;
+			$vars["available_feature"] = $available_feature;
 		}
 
 		wbc()->load->template('admin/setup-wizard/'.$template, $vars );	
@@ -65,7 +68,7 @@ box-shadow: none;">
 			console.log('preventDefault');
 			e.preventDefault();
 			e.stopPropagation();
-			window.location.href = "<?php echo admin_url("admin.php?page=eowbc&eo_wbc_view_auto_jewel=1"); ?>";
+			window.location.href = jQuery(this).data('link');/*"<?php //echo admin_url("admin.php?page=eowbc&eo_wbc_view_auto_jewel=1&f="); ?>"*/;
 		});
 	});
 </script>

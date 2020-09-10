@@ -20,6 +20,9 @@ class WBC_Common {
 		$return_category = '';
 		if($page == 'category' ) {
 			global $wp_query;
+			if(!property_exists($wp_query->get_queried_object(),'term_id')){
+				return false;
+			}
 			if(!empty($in_category) and is_array($in_category)) {
 				$term_slug=array_map(array(wbc()->wp,"cat_id2slug"),get_ancestors($wp_query->get_queried_object()->term_id, 'product_cat'));				
 				$term_slug[]=$wp_query->get_queried_object()->slug;					
@@ -28,7 +31,7 @@ class WBC_Common {
 					$matches = array_values($matches);					
 					$return_category = $matches[0];
 				} else {
-					$return_category = '';
+					$return_category = $wp_query->get_queried_object()->slug;
 				}
 			} else {
 				$return_category = $wp_query->get_queried_object()->slug;	
@@ -66,6 +69,21 @@ class WBC_Common {
 			}
 		} else {
 			return false;
+		}
+	}
+
+	public function array_insert_before( $array,$before_key,$key,$value ){
+		if(is_array($array) and !empty($array)){
+			$new_array = array();
+			foreach ($array as $array_key => $array_value) {
+				if($array_key==$before_key){
+					$new_array[$key] = $value;
+				}
+				$new_array[$array_key] = $array_value;
+			}
+			return $new_array;
+		} else {
+			return array($key=>$value);
 		}
 	}
 
@@ -154,18 +172,34 @@ class WBC_Common {
 	}
 
 	public function dropdownSelectedvalueText($field, $selectedkey) {
+		if(!is_array($selectedkey)){
+			$__selectedkey = "";
+			if( !wbc()->common->nonZeroEmpty($selectedkey) ) {
+				$__selectedkey = $selectedkey;
+			}
 
-		$__selectedkey = "";
-		if( !wbc()->common->nonZeroEmpty($selectedkey) ) {
-			$__selectedkey = $selectedkey;
-		}
+			if( isset($field["options"][$__selectedkey]) ) {
+				return $field["options"][$__selectedkey];
+			}
+			else {
+				return "";
+			}	
+		} elseif(!empty($selectedkey)) {
+			$__selectedkeys = array();
+			foreach ($selectedkey as $key => $value) {
+				$__selectedkey = "";	
+				if( !wbc()->common->nonZeroEmpty($value) ) {
+					$__selectedkey = $value;
+				}
 
-		if( isset($field["options"][$__selectedkey]) ) {
-			return $field["options"][$__selectedkey];
-		}
-		else {
+				if( isset($field["options"][$__selectedkey]) ) {
+					$__selectedkeys[] = $field["options"][$__selectedkey];
+				}
+			}			
+			return $__selectedkeys;			
+		} else{
 			return "";
-		}	
+		}
 	}
 
 	
@@ -242,6 +276,10 @@ class WBC_Common {
     public function http_query($param){
     	$param = apply_filters('eowbc_helper_http_query',$param);
     	return http_build_query($param);
+    }
+
+    public function is_object($obj){
+    	return !empty($obj) && is_object($obj);
     }
 
 }

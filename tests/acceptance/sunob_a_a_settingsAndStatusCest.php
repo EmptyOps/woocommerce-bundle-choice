@@ -29,7 +29,7 @@ class sunob_a_a_settingsAndStatusCest extends n_f_adminSideSetupCest
             return;
         }
 
-        $this->enablingBonusFeature($I, '', '', '');
+        $this->enablingBonusFeature($I, 'opts_uis_item_page', 'eowbc-tiny-features', 'Hide SKU,Categories sections?');
 
 		// TODO do other additional testing and verification here 
 
@@ -41,7 +41,7 @@ class sunob_a_a_settingsAndStatusCest extends n_f_adminSideSetupCest
             return;
         }
 
-        $this->enablingBonusFeature($I, '', '', '');
+        $this->enablingBonusFeature($I, 'spec_view_item_page', 'eowbc-tiny-features', 'Specification View Configuration', 'Specifications View for Item Page');
 
 		// TODO do other additional testing and verification here 
 
@@ -53,7 +53,7 @@ class sunob_a_a_settingsAndStatusCest extends n_f_adminSideSetupCest
             return;
         }
 
-        $this->enablingBonusFeature($I, '', '', '');
+        $this->enablingBonusFeature($I, 'filters_shortcode', 'eowbc-shortcode-filters', 'Display Filters using Shortcode');
 
 		// TODO do other additional testing and verification here 
 
@@ -65,7 +65,7 @@ class sunob_a_a_settingsAndStatusCest extends n_f_adminSideSetupCest
             return;
         }
 
-        $this->enablingBonusFeature($I, '', '', '');
+        $this->enablingBonusFeature($I, 'filters_shop_cat', 'eowbc-shop-cat-filter', 'Filters for Shop/Category Page');
 
 		// TODO do other additional testing and verification here 
 

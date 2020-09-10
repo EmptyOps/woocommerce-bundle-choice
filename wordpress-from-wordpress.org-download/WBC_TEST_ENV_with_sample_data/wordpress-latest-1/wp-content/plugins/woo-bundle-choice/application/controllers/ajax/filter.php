@@ -142,7 +142,12 @@ class Filter
 
 			            //$query->set('tax_query',$tax_query);
 			            $old_tax_query = $query->get('tax_query');
-			            $old_tax_query_taxonomy = array_column($old_tax_query,'taxonomy');
+			            $old_tax_query_taxonomy = array();
+			            
+			            if(is_array($old_tax_query) and !empty($old_tax_query)){
+			            	$old_tax_query_taxonomy = array_column($old_tax_query,'taxonomy');
+			            }
+			            
 			            if(is_array($old_tax_query_taxonomy) AND !empty($old_tax_query_taxonomy)){
 			            	if(in_array('product_visibility',$old_tax_query_taxonomy) and count($old_tax_query_taxonomy)==1) {
 			            		$query->set('tax_query',$tax_query);

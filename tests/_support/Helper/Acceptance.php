@@ -15,7 +15,7 @@ class Acceptance extends \Codeception\Module
     /**
      * prefix: test suites(see above), '' => empty prefix means use specified key without prefix check 
      */
-    public function get_configs($key, $prefix="")
+    public function get_configs($key, $prefix="", $widget_template="", $type="")
     {
         $first_cat_name_for_suite_x = "";
         $second_cat_name_for_suite_x = "";
@@ -29,10 +29,10 @@ class Acceptance extends \Codeception\Module
         }
 
         if( $key == "first_button_text" && ($prefix=="n_" || empty($prefix)) ) {
-            return "Start with Diamond Shape";
+            return "sdfdsfdsfhdghfdgf Diamond Shape";   //"Start with Diamond Shape";
         }
         else if( $key == "second_button_text" && ($prefix=="n_" || empty($prefix)) ) {
-            return "Start with Setting Shape";
+            return "sdfdsfdsfhdghfdgf Setting Shape";      //"Start with Setting Shape";
         }
         else if( $key == "cat_name_0" ) {
             return $first_cat_name_for_suite_x;
@@ -63,6 +63,42 @@ class Acceptance extends \Codeception\Module
         }
         else if( $key == "second_product_page_button_text" && ($prefix=="n_" || empty($prefix)) ) {
             return "CONTINUE";
+        }
+
+        // breadcrumb  
+        else if( $key == "breadcrumb_radius" && ($prefix=="n_" || empty($prefix)) ) {
+            
+            if( $type == "selector" ) {
+                if( $widget_template == "default" ) {
+                    return '#main > header > div:nth-child(4) > div > div:nth-child(2)';
+                }
+                else if( $widget_template == "template_1" ) {
+                    return '#main > div.eo-wbc-container.container > div';
+                }
+                else {
+                    throw new \Exception("Selector not set for template ".$widget_template." for key ".$key, 1);
+                    
+                }
+                
+            }
+        }
+
+        // filters  
+        else if( $key == "header_textcolor" && ($prefix=="n_" || empty($prefix)) ) {
+            
+            if( $type == "selector" ) {
+                if( $widget_template == "fc1" ) {
+                    throw new \Exception("Selector not set for template ".$widget_template." for key ".$key, 1);
+                }
+                else if( $widget_template == "fc2" ) {
+                    return '#main > header > div.eo-wbc-container.filters.container > div > div > a:nth-child(1) > div > div > div > p > span';
+                }
+                else {
+                    throw new \Exception("Selector not set for template ".$widget_template." for key ".$key, 1);
+                    
+                }
+                
+            }
         }
 
         return null;
@@ -302,12 +338,14 @@ class Acceptance extends \Codeception\Module
         echo "called get_session... ".$key;
         try {
             //we should use standard practice like php session that comes with phpbrowser or something of that sort. but now as a quick resort we are saving it just in the txt file. 
-            $myfile = fopen($key.".txt", "r") or die("Unable to open file!");
-            $val = fread($myfile,filesize($key.".txt"));
-            fclose($myfile);
+            if( file_exists($key.".txt") ) {
+                $myfile = fopen($key.".txt", "r") or die("Unable to open file!");
+                $val = fread($myfile,filesize($key.".txt"));
+                fclose($myfile);
 
-            echo " ".$val;
-            return $val;
+                echo "session value for key ".$key." is ".$val.".";
+                return $val;
+            }
         }
         catch(Exception $e) {
             echo "caught message...";
@@ -336,6 +374,53 @@ class Acceptance extends \Codeception\Module
                 echo "caught at error '".$e->getMessage()."' at scrollToAndClick on attempt number ".$i." after the delay of ".$delay." seconds";
                 $this->wait($delay);
             }
+        }
+    }
+
+    /**
+     * since we don't know any method yet that for radio assrtion from webdriver, seeInField is not reliable 
+     * @param $dummy text to run a dummy positive/negative assertion so that in test report user can see that one of the test is actually failed
+     */
+    public function getRadioValue($I, $field_name) {
+        echo "called radioAssertion...";
+        
+        try { 
+            return $I->executeJS(' var selected = $("input[type=\'radio\'][name=\''.$field_name.'\']:checked"); if (selected.length > 0) { return jQuery( selected[0] ).val(); } else { return ""; } '); 
+        }
+        catch(Exception $e) {
+            echo "caught error...";
+            echo $e->getMessage();
+        }
+    }
+
+    /**
+     * since we don't know any method yet that for radio assrtion from webdriver, seeInField is not reliable 
+     * @param $dummy text to run a dummy positive/negative assertion so that in test report user can see that one of the test is actually failed
+     */
+    public function getTextAreaValue($I, $field_id) {
+        echo "called getTextAreaValue...";
+        
+        try { 
+            return $I->executeJS(' return jQuery("#'.$field_id.'").val(); '); 
+        }
+        catch(Exception $e) {
+            echo "caught error...";
+            echo $e->getMessage();
+        }
+    }
+
+    /**
+     * since we don't know any method yet that for radio assrtion from webdriver, seeInField is not reliable 
+     * @param $radio_option_id 
+     */
+    public function wbc_setRadio($I, $radio_option_id) {
+        
+        try { 
+            $I->executeJS("jQuery('#".$radio_option_id."').prop('checked',true);"); 
+        }
+        catch(Exception $e) {
+            echo "caught error...";
+            echo $e->getMessage();
         }
     }
 
@@ -486,7 +571,7 @@ class Acceptance extends \Codeception\Module
         // echo "called resetSession...";
             
         try { 
-            $I->executeJS('jQuery("td:contains('.$entity_title.'):not(.disabled) > a")[0].trigger("click");');  
+            $I->executeJS('jQuery(jQuery("td:contains('.$entity_title.'):not(.disabled) > a")[0]).trigger("click");');  
             return true;
         }
         catch(Exception $e) {
@@ -525,6 +610,44 @@ class Acceptance extends \Codeception\Module
         }
 
         return false;
+    }
+
+    /**
+     * 
+     */
+    public function wbc_debug_log($I,$action_button_selector,$wait=3) 
+    {
+        // echo "called resetSession...";
+            
+        try { 
+
+            $I->wait($wait);
+            echo "debug_log ".$I->executeJS(' return jQuery("'.$action_button_selector.'").data("debug_log"); ');
+
+            return true;
+        }
+        catch(Exception $e) {
+            echo "caught message...";
+            echo $e->getMessage()."";
+        }
+
+        return false;
+    }
+
+    public function lookIntoWBCErrorLog($I)
+    {
+        // if( !$I->test_allowed_in_this_environment("n_") ) {
+        //     return;
+        // }
+
+        // go to the page
+        $I->amOnPage('/wp-admin/admin.php?page=eowbc-setting-status');
+
+        // go to the tab
+        $I->click('Logs');
+        $I->see('Following error details will be sent to Woo Choice Plugin\'s Support Team');
+
+        echo "WBC Error Log " . $I->getTextAreaValue($I, "eo_wbc_view_error"); 
     }
 
 }

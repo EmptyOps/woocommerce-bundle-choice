@@ -154,9 +154,14 @@ class Eowbc_Price_Control_Save_Update_Prices {
 	    if( $jpc_str ) {
 	    	// $jpc_data = json_decode( stripslashes( unserialize( wbc()->options->get_option('price_control','rules_data',serialize(array())) ) ), true );
 	    	$jpc_data = json_decode( stripslashes( unserialize( $jpc_str ) ), true );
+	    	if(empty($jpc_data)){
+	    		return false;
+	    	}
 	    }
 	    
 	    if( !is_null($post_ID) ) {
+
+	    	return false;
 	    	//here we need smarter way to keep only those rules in jpc_data of which category or attribute condition/criteria/range have the post_ID in its range, is is important for performance/effciency also 
 		    $jpc_data = array( $todo_keep_applicable_rules_only );
 		}

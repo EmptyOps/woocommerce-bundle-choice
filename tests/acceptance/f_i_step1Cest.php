@@ -71,7 +71,7 @@ class f_i_step1Cest
 		// with text x 
 		$I->see( $suite_name_prefix == "n_" ? $I->get_configs('first_product_market_price',$suite_name_prefix) : '150.00' );	//market price
 		$I->see($price_of_product);
-		$I->see( $suite_name_prefix == "n_" ? 'Specifications' : 'Additional information' );
+		$I->see( $suite_name_prefix == "n_" ? 'Specifications' : 'Specifications' /*'Additional information'*/ );
 
 		//first select required options for variable product, otherwise it won't let us add into cart. 
 		if( $suite_name_prefix != "n_" ) {
@@ -90,7 +90,7 @@ class f_i_step1Cest
 		// - I see in next page the text "${price of Step 1 item's price}"
 		$I->waitForText($price_of_product, 10);
 		$I->see('VIEW');
-		$I->see('REMOVE');
+		$I->see('CHANGE');
 
 		// check remove action 
 		$this->checkBackRemoveAction($I);
@@ -120,7 +120,7 @@ class f_i_step1Cest
 		// // - I see in next page the text "${price of Step 1 item's price}"
 		// $I->waitForText($price_of_product, 10, 'span');
 		// $I->waitForText('VIEW', 10, 'a');
-		// $I->waitForText('REMOVE', 10, 'a');
+		// $I->waitForText('CHANGE', 10, 'a');
 
 	}
 

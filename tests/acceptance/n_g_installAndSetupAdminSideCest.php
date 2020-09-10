@@ -34,7 +34,7 @@ class n_g_installAndSetupAdminSideCest extends n_f_adminSideSetupCest
             // admin side checks? No... since the user would simply want to check the front end. 
 
             // should test the link to sample page that should be available on admin General -> Sample Data tab  
-            $I->see('Setup Done');
+            $I->see('Congratulations!');  //see('Setup Done');
 
             $I->click('Check it out!');
 

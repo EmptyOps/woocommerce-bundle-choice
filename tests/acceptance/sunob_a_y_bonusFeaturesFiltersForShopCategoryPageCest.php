@@ -1,6 +1,6 @@
 <?php 
 
-class sunob_a_y_bonusFeaturesFiltersForShopCategoryPageCest
+class sunob_a_y_bonusFeaturesFiltersForShopCategoryPageCest extends n_f_adminSideSetupCest
 {
     public function _before(AcceptanceTester $I)
     {
@@ -50,8 +50,10 @@ class sunob_a_y_bonusFeaturesFiltersForShopCategoryPageCest
 
         // TODO cover configuration fields that are supposed to be moved to this tab from older version
 
-		// $I->scrollTo('//*[@id="filter_setting_submit_btn"]', -300, -100);
-		// $I->wait(3);
+        // TODO as well as cover configuration fields of the new fields that are being added from time to time 
+
+		$I->scrollTo('//*[@id="filter_setting_submit_btn"]', -300, -300);
+		$I->wait(3);
 		
 		// save 
 		$I->click('//*[@id="filter_setting_submit_btn"]'); 		//click('Save'); 	
@@ -94,24 +96,24 @@ class sunob_a_y_bonusFeaturesFiltersForShopCategoryPageCest
 
     }
 
-	public function manageShortcodeFiltersList(AcceptanceTester $I) {
+	public function manageShopCategoryFiltersList(AcceptanceTester $I) {
 
 		if( !$I->test_allowed_in_this_environment("sunob_a_") ) {
             return;
         }
 
         // try to disable a filter 
-        $I->bulkEnableDisableDelete( $I, '', 'deactivate' );
+        parent::bulkEnableDisableDelete( $I, '', 'deactivate', '//*[@id="d_fconfig_submit_btn_bulk"]' );
 
         // try to enable a filter 
-        $I->bulkEnableDisableDelete( $I, '', 'activate' );
+        parent::bulkEnableDisableDelete( $I, '', 'activate', '//*[@id="d_fconfig_submit_btn_bulk"]' );
 
         // try to edit any one filter from here 
-        $I->click('Test d filter', 'a');
+        $I->click('Uncategorized', 'a');
         $this->addEditFilters( $I, true, array('label'=>'Category page filter'));
 
         // TODO try to delete a filter 
-        $I->bulkEnableDisableDelete( $I, '', 'delete' );
+        parent::bulkEnableDisableDelete( $I, '', 'delete', '//*[@id="d_fconfig_submit_btn_bulk"]' );
 
         //now since its deleted create again
         $this->addEditFilters( $I );

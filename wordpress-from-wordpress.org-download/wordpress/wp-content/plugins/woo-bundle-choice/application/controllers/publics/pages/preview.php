@@ -39,6 +39,40 @@ class Preview {
     
     private function eo_wbc_add_css()
     {
+        wbc()->theme->load('css','review');
+        wbc()->theme->load('js','review');
+        /*Hide sidebar and make content area full width.*/
+        if(apply_filters('eowbc_filter_sidebars_widgets',true)){
+            add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
+                return array( false );
+            });
+        }
+        $button_backcolor_active = wbc()->options->get_option('appearance_wid_btns','button_backcolor_active','');
+        $button_textcolor = wbc()->options->get_option('appearance_wid_btns','button_textcolor','#ffffff');
+        $eo_wbc_home_btn_border_color = false;  //dropped this field. wbc()->options->get_option('appearance_wid_btns','button_backcolor_active','');
+        $button_radius = wbc()->options->get_option('appearance_wid_btns','button_radius','');
+        $button_hovercolor = wbc()->options->get_option('appearance_wid_btns','button_hovercolor','');
+    
+       
+        ob_start();        
+        ?>
+        <style type="text/css">
+            .woocommerce .content-area ,#content,#primary,#main,.content,.primary,.main{
+                  width: 100% !important;
+             }
+             .woocommerce .widget-area {
+                  display: none !important;
+             }
+             .ui.button{
+                <?php _e($button_backcolor_active?'background-color:'.$button_backcolor_active.' !important;':''); ?>
+                <?php _e($button_textcolor?'color:'.$button_textcolor.' !important;':''); ?>
+                <?php _e($eo_wbc_home_btn_border_color?'border-color:'.$eo_wbc_home_btn_border_color.' !important;':''); ?>
+                <?php _e($button_radius?'border-radius:'.$button_radius.' !important;':''); ?>
+            }
+
+        </style>
+        <?php
+        echo ob_get_clean();
         add_action( 'wp_enqueue_scripts',function(){ 
             // wp_register_style('eo_wbc_ui_css',EOWBC_ASSET_URL.'css/fomantic/semantic.min.css');
             // wp_enqueue_style( 'eo_wbc_ui_css');
@@ -264,7 +298,8 @@ class Preview {
                 wbc()->load->model('publics/component/eowbc_breadcrumb');
                 $content= \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_add_breadcrumb(sanitize_text_field(wbc()->sanitize->get('STEP')),sanitize_text_field(wbc()->sanitize->get('BEGIN'))).'<br/>';
                 
-                $content.='<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><div class="ui special cards centered">'.
+                $content.='<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><div class="ui special cards centered" style="margin: auto !important;
+    min-width: fit-content !important;max-width: fit-content !important;">'.
                     '<div class="card">'.
                         '<div class="blurring dimmable image">'.
                           '<div class="ui dimmer inverted transition hidden">'.
@@ -311,7 +346,7 @@ class Preview {
                 '</div>'.
                 '<div class="ui row" style="display:grid !important;"><form action="" method="post" class="woocommerce" style="float:right;margin-top: 1.5em;display:grid !important;">'.
                     '<input type="hidden" name="add_to_cart" value=1>'.
-                    '<button class="ui button right floated aligned" style="background-color:'.wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active',wbc()->session->get('EO_WBC_BG_COLOR',FALSE))/*get_option('eo_wbc_active_breadcrumb_color',wbc()->session->get('EO_WBC_BG_COLOR',FALSE))*/.'">'.__('Add This To Cart','woo-bundle-choice').
+                    '<button class="ui button right floated aligned" style="width: fit-content;margin: auto;background-color:'.wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active',wbc()->session->get('EO_WBC_BG_COLOR',FALSE))/*get_option('eo_wbc_active_breadcrumb_color',wbc()->session->get('EO_WBC_BG_COLOR',FALSE))*/.'">'.__('Add This To Cart','woo-bundle-choice').
                     '</button>'.
                 '</form></div>';                
                 add_filter('the_content',function() use($content){

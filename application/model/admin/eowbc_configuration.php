@@ -67,17 +67,32 @@ class Eowbc_Configuration {
 		wbc()->load->model('category-attribute');
 		wbc()->load->model('admin\form-builder');
 
-		if(wbc()->options->get_option('configuration','config_alternate_breadcrumb') !== $_POST['config_alternate_breadcrumb']) {
+		if(wbc()->options->get_option('configuration','config_alternate_breadcrumb') !== wbc()->sanitize->post('config_alternate_breadcrumb')) {
 			
-			if($_POST['config_alternate_breadcrumb'] =='default'){
-				wbc()->options->remove_option('appearance_filter','header_font');	//delete and allow our default theme adaption setting to catch up
-				wbc()->options->remove_option('appearance_breadcrumb','breadcrumb_backcolor_active');	//delete and allow our default theme adaption setting to catch up	
-				wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_inactive','#ffffff');			
+			if(wbc()->sanitize->post('config_alternate_breadcrumb') =='default') {
+				wbc()->options->remove_option('appearance_filter','header_font');	
+
+				wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_active','#dbdbdb');
+				wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_inactive','#ffffff');
+				
+				wbc()->options->update_option('appearance_breadcrumb','breadcrumb_title_backcolor_active','#000000');
+
+				wbc()->options->update_option('appearance_breadcrumb','breadcrumb_num_icon_backcolor_active','#000000');
+
+				wbc()->options->update_option('appearance_breadcrumb','breadcrumb_actions_backcolor_active','#000000');
+
+				wbc()->options->update_option('appearance_breadcrumb','breadcrumb_num_icon_backcolor_inactive','#dbdbdb');
+				wbc()->options->update_option('appearance_breadcrumb','breadcrumb_title_backcolor_inactive','#dbdbdb');
+				wbc()->options->update_option('appearance_breadcrumb','breadcrumb_actions_backcolor_inactive','#dbdbdb');
+
+				//delete and allow our default theme adaption setting to catch up
+				//wbc()->options->remove_option('appearance_breadcrumb','breadcrumb_backcolor_active');	//delete and allow our default theme adaption setting to catch up	
+				//wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_inactive','#ffffff');			
 
 				//set icon for this template 
 				$this->set_icons_for_breadcrumb_template( array('default/wbc_breadcrumb_default_step_1.png','default/wbc_breadcrumb_default_step_2.png','default/wbc_breadcrumb_default_step_3.png') );
 
-			} elseif($_POST['config_alternate_breadcrumb'] =='template_1'){
+			} elseif(wbc()->sanitize->post('config_alternate_breadcrumb') =='template_1'){
 				wbc()->options->update_option('appearance_filter','header_font','Avenir');
 				wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_active','#dde5ed');
 				wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_inactive','#ffffff');			
@@ -85,7 +100,7 @@ class Eowbc_Configuration {
 				//set icon for this template 
 				$this->set_icons_for_breadcrumb_template( array('template_1/wbc_breadcrumb_template_1_step_1.png','template_1/wbc_breadcrumb_template_1_step_2.png','template_1/wbc_breadcrumb_template_1_step_3.png') );
 
-			} elseif ($_POST['config_alternate_breadcrumb'] =='template_2') {
+			} elseif (wbc()->sanitize->post('config_alternate_breadcrumb') =='template_2') {
 				wbc()->options->update_option('appearance_filter','header_font','ZapfHumanist601BT-Roman');
 				wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_active','#f7f7f7');	
 				wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_inactive','#ffffff');
@@ -93,7 +108,7 @@ class Eowbc_Configuration {
 				//set icon for this template 
 				$this->set_icons_for_breadcrumb_template( array('template_2/wbc_breadcrumb_template_2_step_1.png','template_2/wbc_breadcrumb_template_2_step_2.png','template_2/wbc_breadcrumb_template_2_step_3.png') );
 
-			} elseif ($_POST['config_alternate_breadcrumb'] =='template_3') {
+			} elseif (wbc()->sanitize->post('config_alternate_breadcrumb') =='template_3') {
 				wbc()->options->remove_option('appearance_filter','header_font');	//delete and allow our default theme adaption setting to catch up
 				wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_active','#9bb9f4');	
 				wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_inactive','#ffffff');			
@@ -101,12 +116,12 @@ class Eowbc_Configuration {
 			
 		}		
 
-		if(!empty($_POST['first_name'])){
-			wbc()->options->update_option('configuration','first_slug',@\eo\wbc\model\Category_Attribute::instance()->get_single_category((int)sanitize_text_field($_POST['first_name']))->slug );
+		if(!empty(wbc()->sanitize->post('first_name'))) {
+			wbc()->options->update_option('configuration','first_slug',@\eo\wbc\model\Category_Attribute::instance()->get_single_category((int)wbc()->sanitize->post('first_name'))->slug );
 		}
 
-		if(!empty($_POST['second_name'])){
-			wbc()->options->update_option('configuration','second_slug',@\eo\wbc\model\Category_Attribute::instance()->get_single_category(sanitize_text_field($_POST['second_name']))->slug);
+		if(!empty(wbc()->sanitize->post('second_name'))) {
+			wbc()->options->update_option('configuration','second_slug',@\eo\wbc\model\Category_Attribute::instance()->get_single_category(wbc()->sanitize->post('second_name'))->slug);
 		}
 
 		do_action('eowbc_admin_form_configuration_save');
@@ -115,7 +130,7 @@ class Eowbc_Configuration {
 	    foreach ($form_definition as $key => $tab) {
 	    	foreach ($tab["form"] as $fk => $fv) {				    
 			    if( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) && (isset($_POST[$fk]) || $fv["type"]=='checkbox')) {
-			    	wbc()->options->update_option('configuration',$fk,(isset($_POST[$fk])? sanitize_text_field( $_POST[$fk] ):'' ));	
+			    	wbc()->options->update_option('configuration',$fk,(isset($_POST[$fk])? wbc()->sanitize->post($fk):'' ));	
 			    }
 			}
 	    }

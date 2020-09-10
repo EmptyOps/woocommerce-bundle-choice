@@ -1,0 +1,12 @@
+2020-08-13T14:27:57+00:00 CRITICAL Uncaught TypeError: Argument 1 passed to WBC_Common::pr() must be of the type array, null given, called in /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/model/admin/eowbc_filters.php on line 46 and defined in /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/helper/helper-WBC_Common.php:72
+Stack trace:
+#0 /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/model/admin/eowbc_filters.php(46): WBC_Common->pr(NULL, false, false)
+#1 /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/view/admin/menu/filters.php(14): eo\wbc\model\admin\Eowbc_Filters->get(Array)
+#2 /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/library/l in /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/helper/helper-WBC_Common.php on line 72
+
+2020-08-13T17:24:47+00:00 CRITICAL Uncaught TypeError: Argument 1 passed to WBC_Common::pr() must be of the type array, null given, called in /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/model/admin/eowbc_filters.php on line 46 and defined in /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/helper/helper-WBC_Common.php:72
+Stack trace:
+#0 /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/model/admin/eowbc_filters.php(46): WBC_Common->pr(NULL, false, false)
+#1 /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/view/admin/menu/filters.php(14): eo\wbc\model\admin\Eowbc_Filters->get(Array)
+#2 /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/library/l in /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/helper/helper-WBC_Common.php on line 72
+

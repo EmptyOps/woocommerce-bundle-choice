@@ -10,7 +10,7 @@
     .cat_products{
         border:1.3px solid #80808059;
         border-radius: 1.5px;
-        margin:3.125% !important;
+        margin:auto !important;
         margin-bottom: 2em !important;                            
     }
     @media only screen and (max-width: 768px) {
@@ -70,15 +70,20 @@
                         ?>         
                         <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->                             
                         <div class="cat_products seven wide column">
-                            <?php if( (wbc()->options->get_option('configuration','pair_maker_upper_card',1)/*get_option('eo_wbc_pair_upper_card',1)*/==1 && $this->eo_wbc_get_category()==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/) OR wbc()->options->get_option('configuration','pair_maker_upper_card',1)/*get_option('eo_wbc_pair_upper_card',1)*/==2 && $this->eo_wbc_get_category()==wbc()->options->get_option('configuration','second_slug')/*get_option('eo_wbc_second_slug')*/): ?>  
+                            <?php if( (wbc()->options->get_option('configuration','pair_maker_upper_card',1)/*get_option('eo_wbc_pair_upper_card',1)*/==1 && $category_object->eo_wbc_get_category()==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/) OR (wbc()->options->get_option('configuration','pair_maker_upper_card',1)/*get_option('eo_wbc_pair_upper_card',1)*/==2 && $category_object->eo_wbc_get_category()==wbc()->options->get_option('configuration','second_slug')/*get_option('eo_wbc_second_slug')*/)): ?>  
                                 <div class="ui special cards centered">
                                     <div class="card">
                                         <div class="blurring dimmable image">
                                           <div class="ui dimmer">
                                             <div class="content">
                                               <div class="bottom">
+                                                <?php if($curr_product->is_in_stock()){ ?>
 
-                                                <div data-link="<?php echo $this->eo_wbc_product_url(get_permalink($_post->ID)); ?>" class="ui inverted button"><?php echo  (empty(get_option('eo_wbc_add_to_cart_text'))?__('View and Continue','woo-bundle-choice'):get_option('eo_wbc_add_to_cart_text'));?></div>
+                                                <div data-link="<?php echo $category_object->eo_wbc_product_url(get_permalink($_post->ID)); ?>" class="ui inverted button"><?php echo  (empty(get_option('eo_wbc_add_to_cart_text'))?__('View and Continue','woo-bundle-choice'):get_option('eo_wbc_add_to_cart_text'));?></div>
+                                                <?php } else { ?>
+                                                    <div class="ui inverted button"><?php _e('Out of stock','woo-bundle-choice'); ?>
+                                                    </div>
+                                                <?php } ?>
 
                                                 <h5><?php echo $curr_product->get_title(); ?></h5><br/>
                                                 <div style="text-align: center !important;">&nbsp;<?php echo $curr_product->get_price_html(); ?></div>
@@ -94,7 +99,7 @@
                                             <div class="content">
                                               <div class="bottom">
                                               
-                                              <div data-link="<?php echo $this->eo_wbc_prev_url(); ?>" class="ui inverted button">Change</div>
+                                              <div data-link="<?php echo $category_object->eo_wbc_prev_url(); ?>" class="ui inverted button">Change</div>
 
                                                 <h5><?php echo $prev_product->get_title();?></h5><br/>
                                                 <div style="text-align: center !important;">&nbsp;<?php echo $prev_product->get_price_html(); ?></div>
@@ -115,7 +120,7 @@
                                             <div class="content">
                                               <div class="aligned align bottom">
                                                 
-                                                <div data-link="<?php echo $this->eo_wbc_prev_url(); ?>" class="ui inverted button">Change</div>
+                                                <div data-link="<?php echo $category_object->eo_wbc_prev_url(); ?>" class="ui inverted button">Change</div>
 
                                                 <h5><?php echo $prev_product->get_title(); ?></h5><br/>
                                                 <div style="text-align: center !important;">&nbsp;<?php echo $prev_product->get_price_html(); ?></div>
@@ -130,9 +135,13 @@
                                           <div class="ui dimmer">
                                             <div class="content">
                                               <div class="aligned align bottom">
-                                                
-                                                <div data-link="<?php echo $this->eo_wbc_product_url(get_permalink($_post->ID)); ?>" class="ui inverted button"><?php echo (empty(get_option('eo_wbc_add_to_cart_text'))?__('View and Continue','woo-bundle-choice'):get_option('eo_wbc_add_to_cart_text')) ;?></div>
+                                                <?php if($curr_product->is_in_stock()){ ?>
 
+                                                <div data-link="<?php echo $category_object->eo_wbc_product_url(get_permalink($_post->ID)); ?>" class="ui inverted button"><?php echo (empty(get_option('eo_wbc_add_to_cart_text'))?__('View and Continue','woo-bundle-choice'):get_option('eo_wbc_add_to_cart_text')) ;?></div>
+                                                 <?php } else { ?>
+                                                    <div class="ui inverted button"><?php _e('Out of stock','woo-bundle-choice'); ?>
+                                                    </div>
+                                                <?php } ?>
                                                 <h5><?php echo $curr_product->get_title();?></h5><br/>
                                                 <div style="text-align: center !important;">&nbsp;<?php echo $curr_product->get_price_html(); ?></div>
                                               </div>
@@ -155,18 +164,37 @@
 </div>
 <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
 <script>
-    jQuery(document).ready(function($){                            
-        jQuery(".products").html(jQuery(".eo_wbc_hidden_data").html());
+    $ = jQuery;
+
+    // supposed to be used inside wo_wbc_filter.js
+    var is_card_view_rendered = true;
+
+    /**
+     * 
+     */
+    function wbc_attach_card_views() { 
+        jQuery(".products,.product-listing,.row-inner>.col-lg-9:eq(0)").html(jQuery(".eo_wbc_hidden_data").html());
         jQuery('.special.cards .image').dimmer({on:'hover'});
         jQuery('.button[data-link]').on('click',function(e){
             e.preventDefault();
             e.stopPropagation();
             window.location.href=$(this).attr('data-link');
         });
+    }
+
+    jQuery(document).ready(function($){
+        //code moved to a function wbc_attach_card_views above so that it can be called after ajax search
+
+        // 
+        wbc_attach_card_views();
     });
 </script>                    
 <style type="text/css">
     .products{
+        display: block !important;
+    }
+
+    .product-listing{
         display: block !important;
     }                                                
 </style> 

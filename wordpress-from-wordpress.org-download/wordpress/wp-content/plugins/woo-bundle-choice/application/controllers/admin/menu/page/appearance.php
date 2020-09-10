@@ -20,7 +20,7 @@ if ( ! class_exists( 'Appearance' ) ) {
 		}
 
 		public static function get_form_definition( $is_add_sample_values = false ) {
-			
+			//wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_wrap_mobile');
 			wbc()->load->model('admin/form-builder');
 
 			$form_definition = array(
@@ -61,7 +61,7 @@ if ( ! class_exists( 'Appearance' ) ) {
 				),
 				'breadcrumb'=>array(
 						'label'=>'Breadcrumb',
-						'form'=>array_merge(\eo\wbc\model\admin\Form_Builder::instance()->ui_controls_collection( "breadcrumb", "Breadcrumb", $hide_defaults=array("hovercolor","bordercolor","text","font","textcolor"), $additional_fields=array( array("field_id"=>"breadcrumb_num_icon","field_label"=>"Breadcrumb Number Icon","type"=>"color"), array("field_id"=>"breadcrumb_title","field_label"=>"Breadcrumb Title","type"=>"color"), array("field_id"=>"breadcrumb_actions","field_label"=>"Breadcrumb Actions","type"=>"color"), array("field_id"=>"showhide_icons","field_label"=>"Breadcrumb Show/Hide Icons","type"=>"checkbox","options"=>array('1'=>' '),'attrs'=>array('is_id_as_name'=>true)) ), $info_text_overrides=array("breadcrumb_showhide_icons"=>'You can upload icon from configuration page, <a href="wp-admin/admin.php?page=eo-wbc-setting">click here</a> to go to configuration'), "active_inactive" ),
+						'form'=>array_merge(\eo\wbc\model\admin\Form_Builder::instance()->ui_controls_collection( "breadcrumb", "Breadcrumb", $hide_defaults=array("hovercolor","bordercolor","text","font","textcolor"), $additional_fields=array( array("field_id"=>"breadcrumb_num_icon","field_label"=>"Breadcrumb Number Icon","type"=>"color"), array("field_id"=>"breadcrumb_title","field_label"=>"Breadcrumb Title","type"=>"color"), array("field_id"=>"breadcrumb_actions","field_label"=>"Breadcrumb Actions","type"=>"color"), array("field_id"=>"showhide_icons","field_label"=>"Breadcrumb Show/Hide Icons","type"=>"checkbox","options"=>array('1'=>' '),'attrs'=>array('is_id_as_name'=>true)) ), $info_text_overrides=array("showhide_icons"=>'You can upload icon from configuration page, <a href="wp-admin/admin.php?page=eo-wbc-setting">click here</a> to go to configuration'), "active_inactive" ),
 							array(
 								'saved_tab_key'=>array(
 									'type'=>'hidden',
@@ -94,7 +94,34 @@ if ( ! class_exists( 'Appearance' ) ) {
 										'class'=>array('fluid', 'small'),
 										'size_class'=>array('sixteen','wide'),
 									),	
-								),								 
+								),	
+								'appearance_breadcrumb_change_action_text'=>array(
+									'label'=>'Text for Change Action',
+									'type'=>'text',
+									'sanitize'=>'sanitize_text_field',
+									'value'=>'Change',
+									'validate'=>array('required'=>''),
+									'class'=>array(),
+									'visible_info'=>array( 'label'=>'Specify the text that you want to show for change action of the breadcrumb step\'s item, default value is \'Change\'',
+										'type'=>'visible_info',
+										'class'=>array('fluid', 'small'),
+										'size_class'=>array('sixteen','wide'),
+									),	
+								),
+								'appearance_breadcrumb_wrap_mobile'=>array(
+									'label'=>'Wrap title on mobile',
+									'type'=>'checkbox',
+									'sanitize'=>'sanitize_text_field',
+									'value'=>'',	//hiren commented the population from database here since it is meant to specify default only here. array(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_hide_border')),
+									'options'=>array('1'=>' '),
+									'is_id_as_name'=>true,
+									'class'=>array(),
+									'visible_info'=>array( 'label'=>'( Wrap mobile breadcrumb title. )',
+										'type'=>'visible_info',
+										'class'=>array('fluid', 'small'),
+										'size_class'=>array('sixteen','wide'),
+									),	
+								),
 							), 
 							array( 
 								'breadcrumb_submit_btn'=>array(
@@ -139,6 +166,15 @@ if ( ! class_exists( 'Appearance' ) ) {
 										'class'=>array('fluid', 'small'),
 										'size_class'=>array('sixteen','wide'),
 									),	
+								), 
+								'appearance_filters_loader'=>array(
+									'label'=>'Hide filter\'s loaded',
+									'type'=>'checkbox',
+									'sanitize'=>'sanitize_text_field',
+									'value'=>array(wbc()->options->get_option('appearance_filters','appearance_filters_loader')),
+									'options'=>array('1'=>' '),
+									'is_id_as_name'=>true,
+									'class'=>array(),
 								), 
 							),
 							array( 
@@ -202,29 +238,29 @@ if ( ! class_exists( 'Appearance' ) ) {
 								'size_class'=>array('sixteen','wide'),
 							),	
 						),
-						'product_page_hide_first_variation_form'=>array(
-							'label'=>'Show/Hide first category\'s variation menu',
+						'show_options_ui_in_pair_builder'=>array(
+							'label'=>'Show Option UI(swatches)',
 							'type'=>'checkbox',
 							'sanitize'=>'sanitize_text_field',
-							'value'=>array(wbc()->options->get_option('product_page','product_page_hide_first_variation_form')),
+							'value'=>array('1'),
 							'options'=>array('1'=>' '),
 							'is_id_as_name'=>true,
 							'class'=>array(),
-							'visible_info'=>array( 'label'=>'( Hide variation selection table for first category\'s product. )',
+							'visible_info'=>array( 'label'=>'If enabled options ui(swatches) will be displayed on item pages during builder process',
 								'type'=>'visible_info',
 								'class'=>array('fluid', 'small'),
 								'size_class'=>array('sixteen','wide'),
 							),	
-						), 
-						'product_page_hide_second_variation_form'=>array(
-							'label'=>'Show/Hide second category\'s variation menu',
+						), 						
+						'show_spec_view_in_pair_builder'=>array(
+							'label'=>'Show Specification View',
 							'type'=>'checkbox',
 							'sanitize'=>'sanitize_text_field',
-							'value'=>array(wbc()->options->get_option('product_page','product_page_hide_second_variation_form')),
+							'value'=>array('1'),
 							'options'=>array('1'=>' '),
 							'is_id_as_name'=>true,
 							'class'=>array(),
-							'visible_info'=>array( 'label'=>'( Hide variation selection table for second category\'s product. )',
+							'visible_info'=>array( 'label'=>'If enabled specification view will be displayed on item pages during builder process',
 								'type'=>'visible_info',
 								'class'=>array('fluid', 'small'),
 								'size_class'=>array('sixteen','wide'),

@@ -16,13 +16,13 @@
 
 
 
-	$fg_color=wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active',wbc()->session->get('EO_WBC_BG_COLOR',FALSE));
-
+	$fg_color=wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active',wbc()->session->get('EO_WBC_BG_COLOR','#dbdbdb
+'));
 
 /*breadcrumb_backcolor_inactive*/
 
 
-	echo "<style>".
+	echo "<style>.eo-wbc-container.container{max-width:100% !important;min-width:100% !important; margin: auto !important;width:100% !important;} ".
 	(
 		wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_inactive','#ffffff')
 		?
@@ -31,14 +31,9 @@
 			" }":''
 	)
 	.(
-	 	wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='default'
+	 	$fg_color
 		? 
-		" .eo-wbc-container>.ui.steps .step.active{
-		    background: linear-gradient(to bottom, ".$fg_color." 50%, rgba(247, 247, 247, 0.98) 50%);
-		} 
-		.eo-wbc-container>.ui.steps .step.active:after {
-		    background: linear-gradient(to bottom left, ".$fg_color." 50%, rgba(247, 247, 247, 0.98) 50%);
-		}":".eo-wbc-container>.ui.steps .step.active,.eo-wbc-container>.ui.steps .step.active:after{ background: ".$fg_color." }"
+		".eo-wbc-container>.ui.steps .step.active,.eo-wbc-container>.ui.steps .step.active:after{ background: ".$fg_color." }":''
 	)		
 	.		
 	(
@@ -52,14 +47,14 @@
 		!empty(wbc()->options->get_option('appearance_breadcrumb','breadcrumb_num_icon_backcolor_inactive','#ffffff'))
 		?
 		
-		" .eo-wbc-container > .ui.ordered.steps .step::before, .eo-wbc-container > .ui.steps .step .icon{ color: ".wbc()->options->get_option('appearance_breadcrumb','breadcrumb_num_icon_backcolor_inactive','#ffffff')."  !important; }":''
+		" .eo-wbc-container .step:not(.active) .column:first-of-type{ color: ".wbc()->options->get_option('appearance_breadcrumb','breadcrumb_num_icon_backcolor_inactive','#ffffff')."  !important; }":''
 	)
 	.
 	(   #Breadcrumb icon section font color - active
 		!empty(wbc()->options->get_option('appearance_breadcrumb','breadcrumb_num_icon_backcolor_active','#ffffff'))
 		?
 		
-		" .eo-wbc-container > .ui.ordered.steps .step.active::before, .eo-wbc-container > .ui.steps .active.step .icon{ color: ".wbc()->options->get_option('appearance_breadcrumb','breadcrumb_num_icon_backcolor_active','#ffffff')."  !important; }":''
+		" .eo-wbc-container .step.active .column:first-of-type{ color: ".wbc()->options->get_option('appearance_breadcrumb','breadcrumb_num_icon_backcolor_active','#ffffff')."  !important; }":''
 	)
 	
 	.
@@ -67,14 +62,14 @@
 		!empty(wbc()->options->get_option('appearance_breadcrumb','breadcrumb_actions_backcolor_inactive','#ffffff'))
 		?
 		
-		" .eo-wbc-container > .ui.ordered.steps .step .description > a{ color: ".wbc()->options->get_option('appearance_breadcrumb','breadcrumb_actions_backcolor_inactive','#ffffff')."  !important; }":''
+		" .eo-wbc-container .step:not(.active) a{ color: ".wbc()->options->get_option('appearance_breadcrumb','breadcrumb_actions_backcolor_inactive','#ffffff')."  !important; }":''
 	)
 	.
 	(   #Breadcrumb action section - active
 		!empty(wbc()->options->get_option('appearance_breadcrumb','breadcrumb_actions_backcolor_active','#ffffff'))
 		?
 		
-		" .eo-wbc-container > .ui.ordered.steps .step.active .description > a{ color: ".wbc()->options->get_option('appearance_breadcrumb','breadcrumb_actions_backcolor_active','#ffffff')."  !important; }":''
+		" .eo-wbc-container .step.active a{ color: ".wbc()->options->get_option('appearance_breadcrumb','breadcrumb_actions_backcolor_active','#ffffff')."  !important; }":''
 	)		
 	
 	.
@@ -82,31 +77,36 @@
 		!empty(wbc()->options->get_option('appearance_breadcrumb','breadcrumb_title_backcolor_inactive','#ffffff'))
 		?
 		
-		" .eo-wbc-container > .ui.ordered.steps .step .title{ color: ".wbc()->options->get_option('appearance_breadcrumb','breadcrumb_title_backcolor_inactive','#ffffff')."  !important; }":''
+		" .eo-wbc-container .step:not(.active) .title{ color: ".wbc()->options->get_option('appearance_breadcrumb','breadcrumb_title_backcolor_inactive','#ffffff')."  !important; }":''
 	)
 	.
 	(   #Breadcrumb title section - active
 		!empty(wbc()->options->get_option('appearance_breadcrumb','breadcrumb_title_backcolor_active','#ffffff'))
 		?
 		
-		" .eo-wbc-container > .ui.ordered.steps .step.active .title{ color: ".wbc()->options->get_option('appearance_breadcrumb','breadcrumb_title_backcolor_active','#ffffff')."  !important; }":''
+		" .eo-wbc-container .step.active .title{ color: ".wbc()->options->get_option('appearance_breadcrumb','breadcrumb_title_backcolor_active','#ffffff')."  !important; }":''
 	)
 
 	.				
 	(
+		!empty(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_wrap_mobile'))
+		?
+		" .ui.container.unstackable.steps .step{ max-width: 33.33%; }":''
+	).
+	(
 		!empty(wbc()->options->get_option('appearance_breadcrumb','breadcrumb_radius','2'))
 		?
-		" .eo-wbc-container>.ui.steps{ border-radius: ".wbc()->options->get_option('appearance_breadcrumb','breadcrumb_radius','0')."px; overflow: hidden; }.eo-wbc-container>.ui.steps .step{border-radius:0px !important;}":''
+		" .eo-wbc-container>.ui.steps{ border-radius: ".wbc()->options->get_option('appearance_breadcrumb','breadcrumb_radius','0px')."; overflow: hidden; }.eo-wbc-container>.ui.steps .step{border-radius:0px !important;}":''
 	)
 	.
-	( !wp_is_mobile() ? " .eo-wbc-container>.ui.steps div{ cursor:pointer !important; } .ui.steps .step .column{ z-index:7;width: max-content !important; padding-left:0em !important;} .ui.steps .step .column:first-child{".(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_1'?"":"font-size:3.2em;")."line-height: 0.8em;text-align:right;padding-right: 0.125rem !important;} .ui.steps .step{ padding-right:0px !important;padding-left:3em !important; } 
+	( !wp_is_mobile() ? " .eo-wbc-container>.ui.steps div{ cursor:pointer !important; } .ui.steps .step .column{ z-index:7;width: max-content !important; padding-left:0em !important;} .ui.steps .step .column:first-child{".(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_1'?"":"font-size:3.2em !important;")."line-height: 0.8em;text-align:right;padding-right: 0.125rem !important;} .ui.steps .step{ padding-right:0px !important;padding-left:3em !important; } 
 
 		.eo-wbc-container>.ui.steps .step:first-child{ padding-left:1em !important; } 
 		.eo-wbc-container>.eo-wbc-container>.ui.steps .step:last-child{ padding-right:0px !important; }
 		.eo-wbc-container>.ui.steps .step .column:last-child{ padding-right:0px !important;text-align:center; }
 		.eo-wbc-container>.ui.steps .step .column.product_image_section img{ height: 4.5em !important;width: auto !important;margin-left:45%;}.eo-wbc-container .ui.steps{ text-transform: uppercase; }.eo-wbc-container.container .ui.steps{ width:100%; } .eo-wbc-container.container .ui.steps .step{ padding-top:1rem !important; padding-bottom:2rem !important;".(empty(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_hide_border'))?'':'border:none !important;')." } .eo-wbc-container.container .ui.steps{".(empty(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_hide_border'))?'':'border:none !important;')."}
 
-		".(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_1'?".eo-wbc-container>.ui.steps .step .column:first-child{ font-size:3.2em;text-align:center;line-height: 1.8rem;} 		
+		".(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_1'?".eo-wbc-container>.ui.steps .step .column:first-child{ font-size:3.2em !important;text-align:center;line-height: 1.8rem;} 		
 		.eo-wbc-container>.ui.steps .step .column{ padding:0.5rem }":".eo-wbc-container>.ui.steps .step:after{width:3.3em;height:3.3em;}")."
 		
 		.eo-wbc-container>.ui.steps div{ margin-top:0px !important; } 
@@ -125,7 +125,7 @@
 		}
 		"
 	).(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_1'?".eo-wbc-container.container .ui.steps .step{ padding-top:3rem !important;}.ui.steps .step:after {display: none !important;}":" .eo-wbc-container.container .ui.steps .step {    padding-top: 1em !important;
-    padding-bottom: 1rem !important; }"
+    padding-bottom: 0rem !important; }"
 		
 	).(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_2'?
 		".eo-wbc-container>.ui.steps .step:not(:first-child):before{

@@ -82,7 +82,18 @@ class Admin_Menu_Factory {
 			$this->tabs = array();
 			if(!empty($this->menu['submenu']) and is_array($this->menu['submenu'])) {
 
-				$page = (empty(wbc()->sanitize->get('page')) or wbc()->sanitize->get('page')=='eowbc')?$this->menu['submenu'][1]['slug']:wbc()->sanitize->get('page');
+				// $page = (empty(wbc()->sanitize->get('page')) or wbc()->sanitize->get('page')=='eowbc') ? $this->menu['submenu'][1]['slug']:wbc()->sanitize->get('page');
+				$page = (empty(wbc()->sanitize->get('page')) or wbc()->sanitize->get('page')=='eowbc') ? "":wbc()->sanitize->get('page');
+				if(empty($page)) {
+					// get the page available after default first menu link 
+					$cnt = 0;
+					foreach ($this->menu['submenu'] as $sm => $smv) {
+						$cnt++;
+						if($cnt <= 1) { continue; }
+						$page = $smv['slug'];
+						break;
+					}
+				}
 
 				/*ob_start();
 				wbc()->load->template($this->menu['template']);

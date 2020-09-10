@@ -34,6 +34,10 @@ class n_f_adminSideSetupCest
         $I->wait(3);
         $I->click('#config_navigation_conf_save_btn');  //('Save');     //it shouldn't be this way, but there seem some issue with selenium driver and thus when there is another Save button on the page even though on another page and is not visible but still selenium think it is visible and thus gives us error so need to use unique xPath like id etc. 
 
+        $I->wait(60);
+        $I->wbc_debug_log($I, '#config_navigation_conf_save_btn');
+        $I->lookIntoWBCErrorLog($I);
+
         // since due to sample data is there it may take time to install alternate widget's sample data 
         $I->waitForText('Updated successfully', 10);
 
@@ -41,6 +45,22 @@ class n_f_adminSideSetupCest
         $I->reloadPage();   //reload page
         $I->click('Navigations Steps( Breadcrumb )');
         $I->radioAssertion($I, $widget_key, "config_alternate_breadcrumb", $widget_key); 
+    }
+
+    protected function getCurrentBreadcrumbWidget(AcceptanceTester $I)
+    {
+        // if( !$I->test_allowed_in_this_environment("n_") ) {
+        //     return;
+        // }
+
+        // go to the page
+        $I->amOnPage('/wp-admin/admin.php?page=eowbc-configuration');
+
+        // go to the tab
+        $I->click('Navigations Steps( Breadcrumb )');
+        $I->see('First Category');
+
+        return $I->getRadioValue($I, "config_alternate_breadcrumb"); 
     }
 
     protected function setAlternateFilterWidget(AcceptanceTester $I, $widget_key, $cat)
@@ -114,7 +134,7 @@ class n_f_adminSideSetupCest
         }
     }
 
-    protected function gotoProductFromCategoryPage(AcceptanceTester $I, $cat=0)
+    protected function gotoProductFromCategoryPage(AcceptanceTester $I, $cat=0, $button_title="Continue")
     {
         $this->gotoStep( $I, $cat );
 
@@ -123,7 +143,7 @@ class n_f_adminSideSetupCest
 
         $I->click('//*[@id="main"]/ul/li/a/img');
         $I->waitForText('Specifications', 10);    //remember that waitForText is case sensitive.
-        $I->see('Continue');    
+        $I->see($button_title);    
     }
 
     protected function modifyAppearance(AcceptanceTester $I, $tab, $field_id, $field_name, $field_type, $val, $save_button_xpath, $field_dropdown_div_id=array())
@@ -221,7 +241,7 @@ class n_f_adminSideSetupCest
         }
     }
 
-    protected function modifyFilters(AcceptanceTester $I, $tab, $filter, $filter_id, $field_id, $field_name, $field_type, $val, $save_button_xpath, $field_dropdown_div_id=array())
+    protected function modifyFilters(AcceptanceTester $I, $tab, $filter, $filter_id, $field_id, $field_name, $field_type, $val, $save_button_xpath, $field_dropdown_div_id=array(), $save_button_selector='')
     {
         // if( !$I->test_allowed_in_this_environment("n_") ) {
         //     return;
@@ -251,8 +271,12 @@ class n_f_adminSideSetupCest
         // save 
         $I->click($save_button_xpath);  
 
+        $I->wait(60);
+        $I->wbc_debug_log($I, $save_button_selector);
+        $I->lookIntoWBCErrorLog($I);
+
         // in case server is hanged and it takes time!
-        $I->waitForText('Saved!', 10);
+        $I->waitForText('Filter updated successfuly', 10);
 
         // confirm if saved properly or not
         $I->reloadPage();   //reload page
@@ -312,7 +336,7 @@ class n_f_adminSideSetupCest
             // here check operation type first and than do add or edit
             if( $operation[$i] == "edit" ) {
                 // find target row based on mapping, find and click edit action within the row 
-                $I->editActionClick( $mapping[$i] ); 
+                $I->editActionClick( $I, $mapping[$i] ); 
             }
 
             // set field
@@ -362,6 +386,14 @@ class n_f_adminSideSetupCest
         $I->click('//*[@id="main"]/ul/li/a/img');
         $I->waitForText('Continue', 10);
 
+        $I->scrollTo('//*[@id="eo_wbc_add_to_cart"]');
+        $I->wait(3);
+
+        $I->click('//*[@id="eo_wbc_add_to_cart"]');
+
+        $I->executeJS('window.scrollTo( 0, 500 );');       //$I->scrollTo('Save'); 
+        $I->wait(3);
+
         // verify 
         for($i=0; $i<sizeof($verifications); $i++) {
             for($j=0; $j<sizeof($verifications[$i]); $j++) {
@@ -384,7 +416,7 @@ class n_f_adminSideSetupCest
         
     }
 
-    protected function enablingBonusFeature(AcceptanceTester $I, $feature_id, $target_page, $text_verification) {
+    protected function enablingBonusFeature(AcceptanceTester $I, $feature_id, $target_page, $text_verification, $target_tab='') {
 
         if( !$I->test_allowed_in_this_environment("sunob_a_") ) {
             return;
@@ -404,12 +436,19 @@ class n_f_adminSideSetupCest
         // 
         $I->executeJS("jQuery('#".$feature_id."').parent().checkbox('set checked', '".$feature_id."');");   
         
+        $I->scrollTo('//*[@id="save"]', -300, -300);
+        $I->wait(3);
+
         // save 
         $I->click('Save');  
         $I->wait(2);
 
         // verify
         $I->amOnPage('/wp-admin/admin.php?page='.$target_page);
+
+        if( !empty($target_tab) ) {
+            $I->click($target_tab);
+        }
 
         $I->see($text_verification);
 
@@ -425,6 +464,10 @@ class n_f_adminSideSetupCest
         if( !empty($goto_page) ) {
 
         }
+        else {
+            $I->executeJS('window.scrollTo( 0, 0 );');       //$I->scrollTo('Save'); 
+            $I->wait(3);
+        }
 
         // go to the tab
         $I->click($goto_tab);
@@ -439,9 +482,13 @@ class n_f_adminSideSetupCest
         $I->executeJS("jQuery('#".$prefix."_fconfig_is_advanced_1').checkbox('set unchecked');");   
         $I->fillField("".$prefix."_fconfig_column_width", '50');
         $I->fillField("".$prefix."_fconfig_ordering", '5');
-        $I->executeJS("jQuery('#".$prefix."_fconfig_input_type').dropdown('set selected', 'text_slider');");    //better than setting val directly is to select the nth element that has value val 
-        $I->fillField("".$prefix."_fconfig_icon_size", '0');
-        $I->fillField("".$prefix."_fconfig_icon_label_size", '0');
+        $I->executeJS("jQuery('#".$prefix."_fconfig_input_type_dropdown_div').dropdown('set selected', 'text_slider');");    //better than setting val directly is to select the nth element that has value val 
+
+        if( false ) {   // icon fields are applicable only when the filters with input type with icon is set, so set to false for now
+            $I->fillField("".$prefix."_fconfig_icon_size", '0');
+            $I->fillField("".$prefix."_fconfig_icon_label_size", '0');
+        }
+        
         $I->executeJS("jQuery('#".$prefix."_fconfig_add_reset_link_1').checkbox('set unchecked');");    
 
         $I->executeJS('window.scrollTo( 0, 1500 );');       //$I->scrollTo('Save'); 
@@ -450,25 +497,35 @@ class n_f_adminSideSetupCest
         // save 
         $I->click("#".$prefix."_fconfig_submit_btn");   //('Save');     //it shouldn't be this way, but there seem some issue with selenium driver and thus when there is another Save button on the page even though on another page and is not visible but still selenium think it is visible and thus gives us error so need to use unique xPath like id etc. 
 
+        $I->waitForText("New Filter Added Successfully");
+
         // confirm if saved properly or not
         $I->reloadPage();   //reload page
+
+        $I->executeJS('window.scrollTo( 0, 0 );');       //$I->scrollTo('Save'); 
+        $I->wait(3);
+
         $I->click($goto_tab);
         $I->see($label); // see in table list row's td
 
     }
 
 
-    protected function bulkEnableDisableDelete(AcceptanceTester $I, $entity_id, $bulk_action ) {
+    protected function bulkEnableDisableDelete(AcceptanceTester $I, $entity_id, $bulk_action, $apply_button_selector ) {
 
         if( !$I->test_allowed_in_this_environment("sunob_a_") ) {
             return;
         }
 
         // select specified checkbox 
-        $I->executeJS("jQuery('##eowbc_price_control_methods_list > tbody > tr > td:nth-child(1) > div > input[type=checkbox]').checkbox('set checked');");      //here should use entity_id to check the checkbox 
+        $I->executeJS('jQuery = $;');   //since wasn't defined on some pages
+        $I->executeJS("jQuery( jQuery('#eowbc_price_control_methods_list > tbody > tr > td:nth-child(1) > div > input[type=checkbox]')[0] ).prop('checked', true);");      //here should use entity_id to check the checkbox 
 
         // select specfied bulk action 
         $I->executeJS("jQuery('#eowbc_price_control_methods_list_bulk_dropdown_div').dropdown('set selected', '".$bulk_action."');");  //better than setting val directly is to select the nth element that has value val
+
+        $I->scrollTo($apply_button_selector, -300, -300);
+        $I->wait(3);
 
         // click action button 
         $I->click('Apply');

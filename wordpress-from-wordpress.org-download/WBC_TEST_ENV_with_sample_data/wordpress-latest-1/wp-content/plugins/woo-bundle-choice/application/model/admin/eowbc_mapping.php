@@ -9,7 +9,9 @@ namespace eo\wbc\model\admin;
 
 defined( 'ABSPATH' ) || exit;
 
-class Eowbc_Mapping {
+wbc()->load->model('admin/eowbc_model');
+
+class Eowbc_Mapping extends Eowbc_Model {
 
 	private static $_instance = null;
 
@@ -101,7 +103,7 @@ class Eowbc_Mapping {
 	    return $form_definition;
 	}
 
-	public function save( $form_definition ) {
+	public function save( $form_definition, $is_auto_insert_for_template=false ) {
 		
 		wbc()->sanitize->clean($form_definition);
 		wbc()->validate->check($form_definition);
@@ -219,32 +221,35 @@ class Eowbc_Mapping {
         return $res;
 	}
 
-	public function delete( $ids, $saved_tab_key ) {
+	public function delete( $ids, $saved_tab_key, $check_by_id=false ) {
 		
-		$res = array();
-		$res["type"] = "success";
-	    $res["msg"] = "";
+		// $res = array();
+		// $res["type"] = "success";
+	 //    $res["msg"] = "";
 	    
-    	$key = $saved_tab_key;
+  //   	$key = $saved_tab_key;
 
-		$mapping_data = unserialize(wbc()->options->get_option_group('mapping_'.$key,"a:0:{}"));
-		$mapping_data_updated = array();
+		// $mapping_data = unserialize(wbc()->options->get_option_group('mapping_'.$key,"a:0:{}"));
+		// $mapping_data_updated = array();
         
-        $delete_cnt = 0;
-        foreach ($mapping_data as $fdkey=>$item) {
+  //       $delete_cnt = 0;
+  //       foreach ($mapping_data as $fdkey=>$item) {
             
-            if ( !in_array($item["id"], $ids) ) { 
-                $mapping_data_updated[] = $item; 
-            }
-            else {
-            	$delete_cnt++;
-            }
-        }
+  //           if ( !in_array($item["id"], $ids) ) { 
+  //               $mapping_data_updated[] = $item; 
+  //           }
+  //           else {
+  //           	$delete_cnt++;
+  //           }
+  //       }
 
-        wbc()->options->update_option_group( 'mapping_'.$key, serialize($mapping_data_updated) );
-        $res["msg"] = $delete_cnt . " " . eowbc_lang('record(s) deleted'); 
+  //       wbc()->options->update_option_group( 'mapping_'.$key, serialize($mapping_data_updated) );
+  //       $res["msg"] = $delete_cnt . " " . eowbc_lang('record(s) deleted'); 
 
-        return $res;
+        // return $res;
+
+		$check_by_id=true;
+        return parent::delete( $ids, 'mapping_'.$saved_tab_key, $check_by_id );
 	}
 
 	public function fetch_map(&$res) {

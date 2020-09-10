@@ -25,11 +25,13 @@ class Activate {
 		$this->add_pages();
 		$this->add_table();
 		$this->migrate();
-		//setup wizard: check here if it's first time activate and setup wizard not ran yet then only run it		
-		//wbc()->options->update_option('eo_wbc','inventory_type','');
+
 		add_action( 'activated_plugin',function($plugin){
-			if($plugin=='woocommerce-bundle-choice/woocommerce-bundle-choice.php'){
-				$eo_wbc_inventory_type = wbc()->options->get_option('eo_wbc','inventory_type','');
+			if( in_array($plugin,array('woocommerce-bundle-choice/woocommerce-bundle-choice.php','woocommerce-bundle-choice/woo-bundle-choice.php','woo-bundle-choice/woocommerce-bundle-choice.php','woo-bundle-choice/woo-bundle-choice.php') ) ) {
+		
+				//setup wizard: check here if it's first time activate and setup wizard not ran yet then only run it		
+				//wbc()->options->update_option('eo_wbc','inventory_type','');
+				$eo_wbc_inventory_type = wbc()->options->get_option('_system','setup_wizard_run', false);
 				if( empty($eo_wbc_inventory_type) ) {
 					//add admin page
 		           exit(wp_redirect( admin_url('admin.php?page=eowbc&wbc_setup=1')));            
@@ -120,7 +122,7 @@ class Activate {
             
             if( !isset(get_page_by_path('design-your-own-ring')->ID) ) {
 
-            	$post_content='<div class="ui inverted segment">
+            	$post_content='<div class="ui inverted segment" style="margin: auto; !important">
 	                            <div class="ui active inverted fluid placeholder">
 	                                 <div class="rectangular">
 	                                    <img src="'./*plugins_url(basename(constant('EO_WBC_PLUGIN_DIR'))*/constant('EOWBC_ASSET_URL').'/img/banner.jpg'.'"/>
@@ -131,7 +133,7 @@ class Activate {
 	                        <!-- wp:shortcode -->
 	                            [woo-bundle-choice-btn]
 	                        <!-- /wp:shortcode -->
-	                        <div class="ui segment fluid">
+	                        <div class="ui segment fluid" style="margin: auto; !important">
 	                            <div class="ui three cards">
 	                              <div class="ui inverted card">
 	                                <div class="content">
