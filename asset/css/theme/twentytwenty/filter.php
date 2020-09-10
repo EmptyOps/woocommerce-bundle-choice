@@ -8,4 +8,9 @@
 	.ui.grid.centered>.row{
 		padding-top: 0px;
 	}	
+	@media only screen and (max-width: 768px) {
+		#main{
+			margin-left: 0px !important; 
+		}
+	}
 </style>
