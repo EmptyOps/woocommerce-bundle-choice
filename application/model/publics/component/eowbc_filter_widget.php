@@ -1832,6 +1832,10 @@ class EOWBC_Filter_Widget {
 					jQuery("#help_modal").find(".content").html(_help_text);
 					jQuery("#help_modal").modal('show');
 				});
+
+				jQuery(document).on('click',"#help_modal .close.icon",function(){
+					jQuery("#help_modal").modal('hide')
+				});
 			});
 		</script>
 		    							
