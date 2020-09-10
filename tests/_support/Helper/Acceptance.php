@@ -70,7 +70,7 @@ class Acceptance extends \Codeception\Module
             
             if( $type == "selector" ) {
                 if( $widget_template == "default" ) {
-                    return '#main > header > div:nth-child(4) > div > div:nth-child(2)';
+                    return '#main > header > div:nth-child(4) > div';
                 }
                 else if( $widget_template == "template_1" ) {
                     return '#main > header > div:nth-child(4) > div';

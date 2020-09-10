@@ -35,9 +35,9 @@ class n_f_adminSideSetupCest
 
         $I->click('#config_navigation_conf_save_btn');  //('Save');     //it shouldn't be this way, but there seem some issue with selenium driver and thus when there is another Save button on the page even though on another page and is not visible but still selenium think it is visible and thus gives us error so need to use unique xPath like id etc. 
 
-        // $I->wait(60);
-        // $I->wbc_debug_log($I, '#config_navigation_conf_save_btn');
-        // $I->lookIntoWBCErrorLog($I);
+        $I->wait(60);
+        $I->wbc_debug_log($I, '#config_navigation_conf_save_btn');
+        $I->lookIntoWBCErrorLog($I);
 
         // since due to sample data is there it may take time to install alternate widget's sample data 
         $I->waitForText('Updated successfully');
@@ -272,9 +272,9 @@ class n_f_adminSideSetupCest
         // save 
         $I->click($save_button_xpath);  
 
-        // $I->wait(60);
-        // $I->wbc_debug_log($I, $save_button_selector);
-        // $I->lookIntoWBCErrorLog($I);
+        $I->wait(60);
+        $I->wbc_debug_log($I, $save_button_selector);
+        $I->lookIntoWBCErrorLog($I);
 
         // in case server is hanged and it takes time!
         $I->waitForText('Filter updated successfuly');
@@ -384,6 +384,9 @@ class n_f_adminSideSetupCest
         $I->scrollTo('//*[@id="main"]/ul/li/a/img');
         $I->wait(3);
 
+        $I->see("sdjfdskf skdjfhksdhjfd");
+
+
         $I->click('//*[@id="main"]/ul/li/a/img');
         $I->waitForText('Continue', 10);
 
@@ -471,7 +474,7 @@ class n_f_adminSideSetupCest
         }
         else {
             $I->executeJS('window.scrollTo( 0, 0 );');       //$I->scrollTo('Save'); 
-            $I->wait(3);
+            $I->wait(30);
         }
 
         // go to the tab

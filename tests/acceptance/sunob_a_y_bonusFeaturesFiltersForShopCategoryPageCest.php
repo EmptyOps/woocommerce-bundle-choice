@@ -63,7 +63,7 @@ class sunob_a_y_bonusFeaturesFiltersForShopCategoryPageCest extends n_f_adminSid
 		$I->reloadPage();
 
 		// $I->seeInField('shop_cat_filter_two_filter_first_title', 'Diamond Filter');	//$I->see('4px', 'input');	//I verify that I can see "button tagline..." inside input tag 
-		$I->see('Diamond');	//I verify that I can see "Diamond" category inside dropdown's div tag 
+		$I->see('Diamond-fsfgjsdhgfj');	//I verify that I can see "Diamond" category inside dropdown's div tag 
 
 	}
 

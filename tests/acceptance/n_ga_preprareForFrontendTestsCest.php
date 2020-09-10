@@ -17,12 +17,13 @@ class n_ga_preprareForFrontendTestsCest extends n_f_adminSideSetupCest
             return;
         }
 
-        // TODO right after the related modifications tests are stable with default widgets, comment below widgets that are statically set to default
-
         //
         // set specific breadcrumb template if debuggin any issue
         //
         if( true ) {
+        
+            // TODO right after the related modifications tests are stable with default widgets, comment below widgets that are statically set to default
+
             $I->set_session('wbc_suite_n__process_current_breadcrumb_template', 'default');
             $this->setAlternateBreadcrumbWidget($I, 'default', 'Default');
         }
@@ -31,6 +32,9 @@ class n_ga_preprareForFrontendTestsCest extends n_f_adminSideSetupCest
         // set specific filter template if debuggin any issue
         //
         if( true ) {
+
+            // TODO right after the related modifications tests are stable with default widgets, comment below widgets that are statically set to default
+
             $I->set_session('wbc_suite_n__process_current_filter_template_0', 'fc1');
             $I->get_session('wbc_suite_n__process_current_filter_template_1', 'sc1');
             $this->setAlternateFilterWidget($I, 'fc1', 0);  // first category
