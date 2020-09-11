@@ -84,10 +84,11 @@ jQuery.splugins.parseJSON = function(result) {
 
 $ = jQuery;
 
-jQuery(document).ready(function($){
-	$(".ui.selection.dropdown:not(.additions)").dropdown();
-    $(".ui.selection.dropdown.additions").dropdown({ allowAdditions: true });	
-	$(".ui.pointing.secondary.menu>.item").tab();
+function eowbc_ready($){
+
+    $(".ui.selection.dropdown:not(.additions)").dropdown();
+    $(".ui.selection.dropdown.additions").dropdown({ allowAdditions: true });   
+    $(".ui.pointing.secondary.menu>.item").tab();
     $(".exclamation.circle.icon").popup({position:'bottom left',hoverable:true});
 
     jQuery("#d_fconfig_input_type_dropdown_div,#s_fconfig_input_type_dropdown_div").on('change',function(){
@@ -126,7 +127,7 @@ jQuery(document).ready(function($){
         jQuery(ids).toggle();
     });
 
-	//Open wordpress media manager on button click
+    //Open wordpress media manager on button click
     jQuery('.field.upload_image>.ui.button').on('click',function(event){
         event.preventDefault();
         action_root=$(this).parent();
@@ -510,7 +511,13 @@ jQuery(document).ready(function($){
         }
         return false;
     });
+}
+
+jQuery(document).ready(function($){
+	eowbc_ready($);
 });
+
+window.onerror = eowbc_ready(jQuery);
 
 function eowbc_toast_common( toast_type_class, msg, timeout) {
 

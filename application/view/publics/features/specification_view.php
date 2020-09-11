@@ -65,21 +65,25 @@
         $product_data[] = array(__('Certificate','woo-bundle-choice'),"<a href='${certificate_link}' target='_blank'>".__('Click here','woo-bundle-choice')."</a>");
     }
 
-    if(!empty($product_data)){
-        $display_style = wbc()->options->get_option('tiny_features','specification_view_style','default');
-        if('default'===$display_style){
-            if(sizeof($product_data) > 1) {
-                list($product_data_1, $product_data_2) = array_chunk($product_data, ceil(count($product_data) / 2));
-                wbc()->load->template('publics/features/default',compact('product_data','product_data_1','product_data_2'));
+    if(!empty($product_data) and is_array($product_data)) {
+        if(wp_is_mobile()) {
+            wbc()->load->template('publics/features/default_mobile',compact('product_data'));
+        } else {
+            $display_style = wbc()->options->get_option('tiny_features','specification_view_style','default');
+            if('default'===$display_style){
+                if(sizeof($product_data) > 1) {
+                    list($product_data_1, $product_data_2) = array_chunk($product_data, ceil(count($product_data) / 2));
+                    wbc()->load->template('publics/features/default',compact('product_data','product_data_1','product_data_2'));
+                }
+                else {
+                    wbc()->load->template('publics/features/default',compact('product_data'));
+                }
+            } elseif ('template_1'===$display_style) {            
+                wbc()->load->template('publics/features/template_1',compact('product_data'));
+                
+            } elseif ('template_2'===$display_style) {
+                wbc()->load->template('publics/features/template_2',compact('product_data'));
             }
-            else {
-                wbc()->load->template('publics/features/default',compact('product_data'));
-            }
-        } elseif ('template_1'===$display_style) {            
-            wbc()->load->template('publics/features/template_1',compact('product_data'));
-            
-        } elseif ('template_2'===$display_style) {
-            wbc()->load->template('publics/features/template_2',compact('product_data'));
         }
     }
    

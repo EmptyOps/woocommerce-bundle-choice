@@ -163,6 +163,9 @@ class EOWBC_Filter_Widget {
 			$active_color=wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active',$fg_color); //get_option('eo_wbc_active_breadcrumb_color',$fg_color);
 			//wp-head here....
 			echo "<style>
+					.bottom_filter_segment .ui.equal.width.grid .column{
+						display:block;
+					}
 					.ui.slider .inner .thumb{
 						cursor:default !important;
 					}
@@ -303,7 +306,7 @@ class EOWBC_Filter_Widget {
 						color:".wbc()->options->get_option('appearance_filters','labels_textcolor','')/*get_option('eo_wbc_filter_config_label_color','')*/." !important;
 					}
 					.eo_wbc_filter_icon.ui.image{
-						width:fit-content"./*get_option('eo_wbc_filter_config_icon_size','min-content').*/" !important;
+						"./*width:fit-content !important;"./*get_option('eo_wbc_filter_config_icon_size','min-content').*/" 
 						font-size:".wbc()->options->get_option('appearance_filters','icon_label_size','0.78571429rem')." !important;
 						cursor:pointer;
 					}
@@ -1817,6 +1820,9 @@ class EOWBC_Filter_Widget {
 					_help_text = jQuery(this).data('help');
 					jQuery("#help_modal").find(".content").html(_help_text);
 					jQuery("#help_modal").modal('show');
+				});
+				jQuery(document).on('click',"#help_modal .close.icon",function(){
+					jQuery("#help_modal").modal('hide');
 				});
 			});
 		</script>

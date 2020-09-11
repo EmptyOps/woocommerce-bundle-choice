@@ -132,14 +132,16 @@ class Product {
             add_Action('wp_head',function(){
                 ?>
                     <style>
+                        
+                        @media only screen and (max-width: 678px){
+                            .make_pair{
+                                margin: auto !important;
+                            }
+                        }
+
                         .make_pair{
                             margin-left: 5px !important;
                         }
-                        @media only screen and (max-width: 600px){
-                            .make_pair{
-                                margin-top: 1em !important;
-                            }
-                        }                        
                     </style>
                 <?php
             });
