@@ -11,8 +11,7 @@
      }
 
     .ui.container.unstackable.steps .step{
-        padding: 2vw;
-        margin: auto !important;
+        padding: 2vw;        
         text-align: center !important;
     }
 

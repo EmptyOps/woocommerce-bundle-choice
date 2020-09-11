@@ -1,2 +1,10 @@
 [Sep 08 2020 15:03:07] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/model/publics/component/eowbc_filter_widget.php at line number 960
 "syntax error, unexpected ')'"
+[Sep 11 2020 11:07:24] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/admin/menu/page/configuration.php at line number 281
+"syntax error, unexpected ''config_advance_panel_begin'' (T_CONSTANT_ENCAPSED_STRING), expecting ')'"
+[Sep 11 2020 11:44:26] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/admin/menu/page/configuration.php at line number 281
+"syntax error, unexpected '=', expecting ')'"
+[Sep 11 2020 11:44:46] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/admin/menu/page/configuration.php at line number 307
+"syntax error, unexpected ''prev_inline'' (T_CONSTANT_ENCAPSED_STRING), expecting ')'"
+[Sep 11 2020 12:13:59] Parse Error in /var/www/html/fresh/wp-content/plugins/woocommerce-bundle-choice/application/controllers/admin/menu/page/configuration.php at line number 281
+"syntax error, unexpected ''label'' (T_CONSTANT_ENCAPSED_STRING), expecting ')'"

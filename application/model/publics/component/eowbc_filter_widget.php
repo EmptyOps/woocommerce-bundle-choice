@@ -163,6 +163,9 @@ class EOWBC_Filter_Widget {
 			$active_color=wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active',$fg_color); //get_option('eo_wbc_active_breadcrumb_color',$fg_color);
 			//wp-head here....
 			echo "<style>
+					.bottom_filter_segment .ui.equal.width.grid .column{
+						display:block;
+					}
 					.ui.slider .inner .thumb{
 						cursor:default !important;
 					}
@@ -1832,9 +1835,8 @@ class EOWBC_Filter_Widget {
 					jQuery("#help_modal").find(".content").html(_help_text);
 					jQuery("#help_modal").modal('show');
 				});
-
 				jQuery(document).on('click',"#help_modal .close.icon",function(){
-					jQuery("#help_modal").modal('hide')
+					jQuery("#help_modal").modal('hide');
 				});
 			});
 		</script>

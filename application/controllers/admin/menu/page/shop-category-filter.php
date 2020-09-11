@@ -72,11 +72,11 @@ if ( ! class_exists( 'Shop_Category_Filter' ) ) {
 					'class'=>array('fluid','multiple','clearable'),
 					'field_attr'=>array('multiple=""'),
 					'inline'=>false,
-					'visible_info'=>array( 'label'=>eowbc_lang('( Select category on which to show filter widget. )'),
+					'visible_info'=>array( 'label'=>eowbc_lang('( Select category on which to show filter widget. Applicable only when category page option is enabled from above. )'),
 						'type'=>'visible_info',
 						'class'=>array('small'),
 					),
-					'size_class'=>array('transition','hidden','required'),
+					'size_class'=>array('required'),
 					'inject_at'=>2,					
 				),
 			);
@@ -133,7 +133,7 @@ if ( ! class_exists( 'Shop_Category_Filter' ) ) {
 
 			//wbc()->common->pr($form_definition['sc_d_fconfig']['form']);
 
-			$form_definition['sc_d_fconfig']['form'] = wbc()->common->array_insert_before($form_definition['sc_d_fconfig']['form'],'d_fconfig_filter_label','filter_category',array(
+			$form_definition['sc_d_fconfig']['form'] = wbc()->common->array_insert_before($form_definition['sc_d_fconfig']['form'],'d_fconfig_filter','filter_category',array(
 					'label'=>eowbc_lang('Category'),
 					'type'=>'select',
 					'value'=>'',					
