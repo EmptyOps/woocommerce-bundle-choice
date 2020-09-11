@@ -91,7 +91,7 @@
 	(
 		!empty(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_wrap_mobile'))
 		?
-		" .ui.container.unstackable.steps .step{ max-width: 33.33%; }":''
+		" .ui.container.unstackable.steps .step{ max-width: 33.33%;margin: auto !important;margin:0px !important; }":''
 	).
 	(
 		!empty(wbc()->options->get_option('appearance_breadcrumb','breadcrumb_radius','2'))
