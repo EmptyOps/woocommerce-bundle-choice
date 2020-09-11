@@ -63,7 +63,7 @@ class sunob_a_y_bonusFeaturesFiltersForShopCategoryPageCest extends n_f_adminSid
 		$I->reloadPage();
 
 		// tmp
-		$I->scrollTo( $I->get_configs("wbc_admin_general_tab", "", "", "selector") );  // simply scroll to tab area
+		$I->scrollTo( $I->get_configs("wbc_admin_general_tab", "", "", "selector"), -300, -300 );  // simply scroll to tab area
         $I->wait(30);
 
 		// $I->seeInField('shop_cat_filter_two_filter_first_title', 'Diamond Filter');	//$I->see('4px', 'input');	//I verify that I can see "button tagline..." inside input tag 
@@ -84,7 +84,7 @@ class sunob_a_y_bonusFeaturesFiltersForShopCategoryPageCest extends n_f_adminSid
 
     }
 
-    public function addEditFilters(AcceptanceTester $I, $is_edit_mode=false, $edit_fields=array()) {
+    public function addEditFilters(AcceptanceTester $I, $is_edit_mode=false, $edit_fields=array(), $edit_action_xpath="") {
 
         if( !$I->test_allowed_in_this_environment("sunob_a_") ) {
             return;
@@ -94,7 +94,7 @@ class sunob_a_y_bonusFeaturesFiltersForShopCategoryPageCest extends n_f_adminSid
 
         // add filter 
         // TODO even though we are using a common method of setup class to add filter but we should try preparing add data in most effective to test every aspect, so prepare such data and extend parent method and pass data for detailed testing 
-        parent::addEditFilters( $I, 'd', $is_edit_mode, '', 'Filter Configuration', 'Bulk Actions', $edit_fields);
+        parent::addEditFilters( $I, 'd', $is_edit_mode, '/wp-admin/admin.php?page=eowbc-shop-cat-filter', 'Filter Configuration', 'Bulk Actions', $edit_fields, $edit_action_xpath);
 
         // TODO are there any other things that are not covered in common add method of parent class that we should cover? We must think of anything that is missed especially when we are saving time of dev & maintainance by using common test method of parent class. 
 
@@ -115,8 +115,8 @@ class sunob_a_y_bonusFeaturesFiltersForShopCategoryPageCest extends n_f_adminSid
         parent::bulkEnableDisableDelete( $I, '', 'activate', '//*[@id="d_fconfig_submit_btn_bulk"]' );
 
         // try to edit any one filter from here 
-        $I->click('//*[@id="eowbc_price_control_methods_list"]/tbody/tr/td[2]/a');
-        $this->addEditFilters( $I, true, array('label'=>'Category page filter'));
+        // $I->click('//*[@id="eowbc_price_control_methods_list"]/tbody/tr/td[2]/a');
+        $this->addEditFilters( $I, true, array('label'=>'Category page filter'), '//*[@id="eowbc_price_control_methods_list"]/tbody/tr/td[2]/a');
 
         // TODO try to delete a filter 
         parent::bulkEnableDisableDelete( $I, '', 'delete', '//*[@id="d_fconfig_submit_btn_bulk"]' );
