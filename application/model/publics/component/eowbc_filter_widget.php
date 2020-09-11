@@ -306,7 +306,7 @@ class EOWBC_Filter_Widget {
 						color:".wbc()->options->get_option('appearance_filters','labels_textcolor','')/*get_option('eo_wbc_filter_config_label_color','')*/." !important;
 					}
 					.eo_wbc_filter_icon.ui.image{
-						width:fit-content"./*get_option('eo_wbc_filter_config_icon_size','min-content').*/" !important;
+						"./*width:fit-content !important;"./*get_option('eo_wbc_filter_config_icon_size','min-content').*/" 
 						font-size:".wbc()->options->get_option('appearance_filters','icon_label_size','0.78571429rem')." !important;
 						cursor:pointer;
 					}

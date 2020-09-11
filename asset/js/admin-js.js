@@ -90,7 +90,8 @@ function eowbc_ready($){
     $(".ui.selection.dropdown.additions").dropdown({ allowAdditions: true });   
     $(".ui.pointing.secondary.menu>.item").tab();
     $(".exclamation.circle.icon").popup({position:'bottom left',hoverable:true});
-
+    $('.ui.accordion').accordion({selector: {trigger: '.title'}});
+    
     jQuery("#d_fconfig_input_type_dropdown_div,#s_fconfig_input_type_dropdown_div").on('change',function(){
         let value = jQuery(this).dropdown('get value')
         let prefix = (jQuery(this).attr('id')=='d_fconfig_input_type_dropdown_div'?'d':'s');
