@@ -65,6 +65,16 @@ class Acceptance extends \Codeception\Module
             return "CONTINUE";
         }
 
+        // admin  
+        else if( $key == "wbc_admin_general_tab" && ($prefix=="n_" || empty($prefix)) ) { 
+            if( $type == "selector" ) {
+                return '//*[@id="wpbody-content"]/div[4]/a[1]';
+            }
+            else {
+                throw new \Exception("Selector not set for template ".$widget_template." for key ".$key, 1);
+            }
+        }
+
         // breadcrumb  
         else if( $key == "breadcrumb_radius" && ($prefix=="n_" || empty($prefix)) ) {
             
