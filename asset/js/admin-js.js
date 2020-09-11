@@ -240,6 +240,8 @@ function eowbc_ready($){
         //     $('[name="second_category_altr_filt_widgts"]').val(temp_scf);
         // } 
 
+        jQuery.splugins.process_debug_log( $this, "serform " + serform );
+
         jQuery.splugins.process_debug_log( $this, "tmp at here 5" );
 
         jQuery.ajax({
