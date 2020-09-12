@@ -494,7 +494,7 @@ class n_f_adminSideSetupCest
             // $I->scrollTo( $I->get_configs("wbc_admin_general_tab", "", "", "selector") );  // simply scroll to tab area, since the javascript scroll above is not reliable
             // $I->wait(30);
 
-            throw new Exception("Page uri(goto_page) is now mandatory.", 1);
+            throw new Exception("Page uri(goto_page) is now mandatory.", 1); 
             
         }
 
