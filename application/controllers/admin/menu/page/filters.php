@@ -348,7 +348,7 @@ if ( ! class_exists( 'Filters' ) ) {
 									),
 								),
 							'filter_setting_btnfilter_now'=>array(
-								'label'=>'Show Apply & Reset Filters Button',
+								'label'=>'Show Apply Filters Button',
 								'type'=>'checkbox',
 								'sanitize'=>'sanitize_text_field',
 								'value'=>array(),
@@ -357,13 +357,28 @@ if ( ! class_exists( 'Filters' ) ) {
 								'size_class'=>array('eight','wide'),
 								'inline'=>true,
 								'visible_info'=>array( 
-									'label'=>eowbc_lang('If enabled the ajax search on each change of filter will not fire but the Apply Filters and Reset Filters buttons will be displayed. This is useful if your website has many filters and user would normally filter on many of them.'),
+									'label'=>eowbc_lang('If enabled the ajax search on each change of filter will not fire but the Apply Filters. This is useful if your website has many filters and user would normally filter on many of them.'),
 									'type'=>'visible_info',
 									'class'=>array('small'),
 									'size_class'=>array('eight','wide'),
 								),
-							),								
-							
+							),
+							'filter_setting_reset_now'=>array(
+								'label'=>'Show Reset Filters Button',
+								'type'=>'checkbox',
+								'sanitize'=>'sanitize_text_field',
+								'value'=>array(),
+								'options'=>array('filter_setting_reset_now'=>' '),
+								'class'=>array(),
+								'size_class'=>array('eight','wide'),
+								'inline'=>true,
+								'visible_info'=>array( 
+									'label'=>eowbc_lang('If enabled the Reset Filters buttons will be displayed.'),
+									'type'=>'visible_info',
+									'class'=>array('small'),
+									'size_class'=>array('eight','wide'),
+								),
+							),
 							'price_filter_first_cat'=>array(
 								'label'=>'First Category',
 								'type'=>'devider',

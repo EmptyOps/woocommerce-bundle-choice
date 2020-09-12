@@ -574,6 +574,7 @@ class EOWBC_Filter_Widget {
         					'eo_cat_site_url'=>$site_url,
         					'eo_cat_query'=>http_build_query($_GET),
         					'btnfilter_now'=>(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))?false:true),
+        					'btnreset_now'=>(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_reset_now'))?false:true),
         				)));
 
         /*wp_enqueue_script('eo_wbc_filter_js');*/
@@ -1155,7 +1156,7 @@ class EOWBC_Filter_Widget {
 			<?php if( (!empty($advance_filters)) or (!empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))) ) { ?>
 				<div class="ui grid centered">
 					<div class="row">
-						<?php if(!empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
+						<?php if(!empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_reset_now'))): ?>
 							<div class="ui button reset_all_filters" id="reset_filter" style="position: absolute;left:1em;top: 1em;border-radius: 0;" >Reset Filters</div>
 						<?php endif; ?>
 
