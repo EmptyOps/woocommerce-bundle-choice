@@ -280,7 +280,7 @@ class n_f_adminSideSetupCest
                 $I->wbc_fillField($I,$field_id[$i][$j],$field_type[$i][$j],$field_name[$i][$j],$val[$i][$j], isset($field_dropdown_div_id[$i][$j]) ? $field_dropdown_div_id[$i][$j] : ""); 
             }
             
-            $I->scrollTo($save_button_xpath);
+            $I->scrollTo($save_button_xpath, -300, -300);
             $I->wait(3);
             
             // save 
@@ -291,7 +291,12 @@ class n_f_adminSideSetupCest
             // // $I->lookIntoWBCErrorLog($I);
 
             // in case server is hanged and it takes time!
-            $I->waitForText('Filter updated successfuly');
+            if( $operation[$i] == "edit" ) { 
+                $I->waitForText('Filter updated successfully');
+            }
+            else {
+                $I->waitForText("New Filter Added Successfully");
+            }
 
             // confirm if saved properly or not
             $I->amOnPage('/wp-admin/admin.php?page=eowbc-filters');     //$I->reloadPage();   //reload page
@@ -366,6 +371,13 @@ class n_f_adminSideSetupCest
             // save 
             $I->click($save_button_xpath);  
 
+            if( $operation[$i] == "edit" ) {
+                $I->waitForText("Mapping Updated Successfully");
+            }
+            else {
+                $I->waitForText("New Mapping Added Successfully");
+            }
+            
             // confirm if saved properly or not
             $I->amOnPage('/wp-admin/admin.php?page=eowbc-mapping');     //$I->reloadPage();   //reload page
             $I->click($tab);
@@ -538,7 +550,7 @@ class n_f_adminSideSetupCest
         }
         else 
         {
-            $I->waitForText("Filter updated successfuly");
+            $I->waitForText("Filter updated successfully");
         }
 
         // confirm if saved properly or not
@@ -573,7 +585,8 @@ class n_f_adminSideSetupCest
         $I->click('Apply');
 
         if( $bulk_action == 'delete' ) {
-            // TODO need to click here on javascript confirmation alert
+            // need to accept here javascript confirmation alert
+            $I->acceptPopup();
         }
 
         // verify 

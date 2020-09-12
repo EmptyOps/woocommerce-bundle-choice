@@ -58,6 +58,9 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'sample_data_jewelry')){
 		call_user_func(array($class_name,'instance'))->create_category(array($template));		
 
 	} elseif(wbc()->sanitize->post('type')=='attr'){
+
+		$feature_key = wbc()->sanitize->post('feature_key');
+
 		$template = $data_template_obj->get_attributes();
 		
 		$catat_attribute = unserialize( wbc()->options->get($feature_key.'_created_attribute'), serialize($template) );

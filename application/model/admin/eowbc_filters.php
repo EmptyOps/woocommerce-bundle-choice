@@ -329,7 +329,7 @@ class Eowbc_Filters extends Eowbc_Model {
 		        	if(!empty(wbc()->sanitize->post($key_clean.'_id')) and !empty($filter_data[wbc()->sanitize->post($key_clean.'_id')])) {
 		        		$filter_data[wbc()->sanitize->post($key_clean.'_id')] = $table_data;
 		        		$res["type"] = "success";
-		    			$res["msg"] = eowbc_lang('Filter updated successfuly');
+		    			$res["msg"] = eowbc_lang('Filter updated successfully');
 		    			wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data) );
 		                return $res;
 		        	} else {
