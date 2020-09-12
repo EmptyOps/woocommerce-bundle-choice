@@ -679,7 +679,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
 								'validate'=>array('required'=>''),
-								'options'=>array('icon'=>'Icon Only','icon_text'=>'Icon and Text','numeric_slider'=>'Numeric slider','text_slider'=>'Text slider','checkbox'=>'Checkbox'),
+								'options'=>array('icon'=>'Icon Only','icon_text'=>'Icon and Text','numeric_slider'=>'Numeric slider','text_slider'=>'Text slider','checkbox'=>'Checkbox','toggle_column'=>'Toggle Column'),
 								'class'=>array('fluid'),
 								'size_class'=>array('three','wide','required'),
 								// 'prev_inline'=>true,

@@ -2,7 +2,7 @@
 /**
  *
  * @link https://wordpress.org/plugins/woo-bundle-choice/
- * @since 1.0.0
+ * @since 1.1.0
  * @package woo-bundle-choice
  *
  * @wordpress-plugin
