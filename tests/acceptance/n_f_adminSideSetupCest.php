@@ -29,11 +29,9 @@ class n_f_adminSideSetupCest
         $tmp_mute_switch_operation = true;
 
         // select template
-        if( !$tmp_mute_switch_operation ) {
-            // $I->executeJS("jQuery('#".$widget_key."').prop('checked',true);"); 
-            $I->selectOption('form input[name=config_alternate_breadcrumb]', $widget_option);
-            // $I->executeJS("jQuery('#".$widget_key."').parent().checkbox('set checked', '".$widget_key."');");  
-        }
+        // $I->executeJS("jQuery('#".$widget_key."').prop('checked',true);"); 
+        $I->selectOption('form input[name=config_alternate_breadcrumb]', $widget_option);
+        // $I->executeJS("jQuery('#".$widget_key."').parent().checkbox('set checked', '".$widget_key."');");  
 
         // save 
         $I->scrollTo('//*[@id="config_navigation_conf_save_btn"]', -300, -100);
@@ -41,19 +39,23 @@ class n_f_adminSideSetupCest
 
         $I->click('#config_navigation_conf_save_btn');  //('Save');     //it shouldn't be this way, but there seem some issue with selenium driver and thus when there is another Save button on the page even though on another page and is not visible but still selenium think it is visible and thus gives us error so need to use unique xPath like id etc. 
 
+        if( $tmp_mute_switch_operation ) { 
+            $I->wait(10);
+        }
+
         // $I->wait(10);
         // $I->wbc_debug_log($I, '#config_navigation_conf_save_btn');
         // $I->lookIntoWBCErrorLog($I);
 
         // since due to sample data is there it may take time to install alternate widget's sample data 
-        $I->waitForText('Updated successfully');
+        if( !$tmp_mute_switch_operation ) {
+            $I->waitForText('Updated successfully');
+        }
 
         // confirm if saved properly or not
         $I->reloadPage();   //reload page
         $I->click('Navigations Steps( Breadcrumb )');
-        if( !$tmp_mute_switch_operation ) {
-            $I->radioAssertion($I, $widget_key, "config_alternate_breadcrumb", $widget_key); 
-        }
+        $I->radioAssertion($I, $widget_key, "config_alternate_breadcrumb", $widget_key); 
     }
 
     protected function getCurrentBreadcrumbWidget(AcceptanceTester $I)
@@ -273,9 +275,9 @@ class n_f_adminSideSetupCest
             }
 
             // set field
-            for($j=0; $j<sizeof($field_id); $j++) {
+            for ($j=0; $j < sizeof($field_id[$i]); $j++) { 
             
-                $I->wbc_fillField($I,$field_id[$j],$field_type[$j],$field_name[$j],$val[$j], isset($field_dropdown_div_id[$j]) ? $field_dropdown_div_id[$j] : ""); 
+                $I->wbc_fillField($I,$field_id[$i][$j],$field_type[$i][$j],$field_name[$i][$j],$val[$i][$j], isset($field_dropdown_div_id[$i][$j]) ? $field_dropdown_div_id[$i][$j] : ""); 
             }
             
             $I->scrollTo($save_button_xpath);
@@ -372,7 +374,7 @@ class n_f_adminSideSetupCest
             }
         }
 
-        $I->executeJS(" window.scrollTo( 0, 1000 ); ");
+        $I->executeJS(" window.scrollTo( 0, 500 ); ");
         $I->see("sdjfhgdjfgjjjk");
         
     }
@@ -531,7 +533,13 @@ class n_f_adminSideSetupCest
         // save 
         $I->click("#".$prefix."_fconfig_submit_btn");   //('Save');     //it shouldn't be this way, but there seem some issue with selenium driver and thus when there is another Save button on the page even though on another page and is not visible but still selenium think it is visible and thus gives us error so need to use unique xPath like id etc. 
 
-        $I->waitForText("New Filter Added Successfully");
+        if( empty($edit_action_xpath) ) {
+            $I->waitForText("New Filter Added Successfully");
+        }
+        else 
+        {
+            $I->waitForText("Filter updated successfuly");
+        }
 
         // confirm if saved properly or not
         $I->amOnPage($goto_page);       //$I->reloadPage();   //reload page
