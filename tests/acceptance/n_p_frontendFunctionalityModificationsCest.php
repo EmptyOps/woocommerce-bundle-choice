@@ -27,13 +27,15 @@ class n_p_frontendFunctionalityModificationsCest extends n_f_adminSideSetupCest
             if( $cat == 0 ) {
                 $prefix = "d";
 
+                $operation = array('edit');
                 $filter = array('Clarity', 'text_slider_pa_eo_colour_attr', 'text_slider_pa_eo_carat_attr','text_slider_pa_eo_clarity_attr', 'text_slider_pa_eo_colour_attr');
-                $filter_id = array('text_slider_pa_eo_clarity_attr', 'text_slider_pa_eo_colour_attr', 'text_slider_pa_eo_carat_attr','text_slider_pa_eo_clarity_attr', 'text_slider_pa_eo_colour_attr');
-                $field_id = array( '', 'd_fconfig_ordering', 'd_fconfig_is_advanced_1', 'd_fconfig_add_reset_link_1', 'd_fconfig_add_help_1' );
-                $field_name = array( '', 'd_fconfig_ordering', '', '', '' );
-                $field_type = array( 'select', 'text', 'checkbox', 'checkbox', 'checkbox' );
-                $val = array( 'checkbox', '1', '1', '1', '1' );
-                $field_dropdown_div_id=array('d_fconfig_input_type_dropdown_div');
+                $filter_id = array(  'text_slider_pa_eo_clarity_attr', 'text_slider_pa_eo_colour_attr', 'text_slider_pa_eo_carat_attr','text_slider_pa_eo_clarity_attr', 'text_slider_pa_eo_colour_attr');
+
+                $field_id = array( array( '' ), 'd_fconfig_ordering', 'd_fconfig_is_advanced_1', 'd_fconfig_add_reset_link_1', 'd_fconfig_add_help_1' );
+                $field_name = array( array( '' ), 'd_fconfig_ordering', '', '', '' );
+                $field_type = array( array( 'select' ), 'text', 'checkbox', 'checkbox', 'checkbox' );
+                $val = array( array( 'checkbox' ), '1', '1', '1', '1' );
+                $field_dropdown_div_id=array( array( 'd_fconfig_input_type_dropdown_div' ) );
 
                 //TODO
                 $selector_of_targets = array('#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > p > span', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(2)', '#text_slider_pa_eo_carat_attr > div > div:nth-child(3)', '#text_slider_pa_eo_carat_attr > div', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(1) > img');
@@ -42,7 +44,10 @@ class n_p_frontendFunctionalityModificationsCest extends n_f_adminSideSetupCest
             else {
                 $prefix = "s";
 
+                $operation = array();
+                $filter = array('Clarity', 'text_slider_pa_eo_colour_attr', 'text_slider_pa_eo_carat_attr','text_slider_pa_eo_clarity_attr', 'text_slider_pa_eo_colour_attr');
                 $filter_id = array('eo_ring_style_cat', 'eo_ring_style_cat', 'eo_metal_cat','eo_setting_shape_cat', 'eo_ring_style_cat');
+
                 $field_id = array( '', 's_fconfig_ordering', 's_fconfig_is_advanced_1', 's_fconfig_add_reset_link_1', 's_fconfig_add_help_1' );
                 $field_name = array( '', 's_fconfig_ordering', '', '', '' );
                 $field_type = array( 'select', 'text', 'checkbox', 'checkbox', 'checkbox' );
@@ -56,7 +61,7 @@ class n_p_frontendFunctionalityModificationsCest extends n_f_adminSideSetupCest
 
             // change random functionalities
                 // modify things like filter input type, ordering, move to advanced/non-advanced, reset link, help text etc.
-            $this->modifyFilters($I, $cat == 0 ? 'Diamond Page Filter Configuration' : 'Settings Page Filter Configuration', $filter, $filter_id, $field_id, $field_name, $field_type, $val, '//*[@id="'.$prefix.'_fconfig_submit_btn"]', $field_dropdown_div_id, '#'.$prefix.'_fconfig_submit_btn');
+            $this->modifyFilters($I, $cat == 0 ? 'Diamond Page Filter Configuration' : 'Settings Page Filter Configuration', $operation, $filter, $filter_id, $field_id, $field_name, $field_type, $val, '//*[@id="'.$prefix.'_fconfig_submit_btn"]', $field_dropdown_div_id, '#'.$prefix.'_fconfig_submit_btn');
 
             // TODO still all the functionality modification are not tested like all input types are not tested, order/reset-link/help-text not tested in advanced section, width functionality not tested etc. 
 
