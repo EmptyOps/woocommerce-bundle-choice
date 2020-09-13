@@ -127,7 +127,7 @@ class n_n_frontendAppearanceModificationsCest extends n_f_adminSideSetupCest
             } 
 
             // change random appearance
-            $this->modifyAppearance($I, '/html/body/div[1]/div[2]/div[2]/div[1]/div[4]/div[2]/div/form/div[1]/a[3]', $field_id, $field_name, $field_type, $val, '//*[@id="filters_submit_btn"]', array( '' ));
+            $this->modifyAppearance($I, '//a[@data-tab=filters]' /*'/html/body/div[1]/div[2]/div[2]/div[1]/div[4]/div[2]/div/form/div[1]/a[3]'*/, $field_id, $field_name, $field_type, $val, '//*[@id="filters_submit_btn"]', array( '' ));
 
             // TODO still all the appearance are not tested like the header text font, icon label size etc. 
 

@@ -315,28 +315,33 @@ class n_f_adminSideSetupCest
 
         // this function assumes that browser session is currently at desired page where the appearance needs to be tested
 
-        // verify
-        for($i=0; $i<sizeof($field_id); $i++) {
-            if( $field_type[$i] == "text" ) {
-                $I->see($val[$i]);
-            }
-            elseif( $field_type[$i] == "checkbox" || $field_type[$i] == "radio" ) {
-                $I->see($should_see_text[$i]);
-            }
-            elseif( $field_type[$i] == "color" ) {
-                $colorcode = $I->executeJS('return jQuery("'.$selector_of_targets[$i].'").css("'.$css_property_of_targets[$i].'");');  
-                echo "colorcode found... ".$colorcode;
-                if( $colorcode == $val[$i] ) {
-                    $I->dontSee('sd8324hs65gkjv73h');   // assume passed with dummy assert
+        for($i=0; $i<sizeof($operation); $i++) {
+
+            // verify
+            for($j=0; $j<sizeof($field_id[$i]); $j++) {
+                if( $field_type[$i][$j] == "text" ) {
+                    $I->see($val[$i][$j]);
                 }
-                else {
-                    $I->see('sd8324hs65gkjv73h');   // assume failed with dummy assert
+                elseif( $field_type[$i][$j] == "checkbox" || $field_type[$i][$j] == "radio" ) {
+                    $I->see($should_see_text[$i][$j]);
+                }
+                elseif( $field_type[$i][$j] == "color" ) {
+                    $colorcode = $I->executeJS('return jQuery("'.$selector_of_targets[$i][$j].'").css("'.$css_property_of_targets[$i][$j].'");');  
+                    echo "colorcode found... ".$colorcode;
+                    if( $colorcode == $val[$i][$j] ) {
+                        $I->dontSee('sd8324hs65gkjv73h');   // assume passed with dummy assert
+                    }
+                    else {
+                        $I->see('sd8324hs65gkjv73h');   // assume failed with dummy assert
+                    }
+                }
+                elseif( $field_type[$i][$j] == "select" ) {
+                    $I->see($should_see_text[$i][$j]);
                 }
             }
-            elseif( $field_type[$i] == "select" ) {
-                $I->see($should_see_text[$i]);
-            }
+
         }
+
     }
 
     protected function modifyMappings(AcceptanceTester $I, $tab, $operation, $mapping, $field_id, $field_name, $field_type, $val, $save_button_xpath, $field_dropdown_div_id=array())
@@ -502,10 +507,13 @@ class n_f_adminSideSetupCest
         // go to page
         if( !empty($goto_page) ) {
             $I->amOnPage($goto_page);
+
+            // scroll to top in case its already on this page then scroll to top is necessary 
+            $I->scrollTo( $I->get_configs("wp_toolbar", "", "", "selector") );
         }
         else {
             // // $I->executeJS('window.scrollTo( 0, 0 );');       //$I->scrollTo('Save'); 
-            // $I->scrollTo( $I->get_configs("wbc_admin_general_tab", "", "", "selector") );  // simply scroll to tab area, since the javascript scroll above is not reliable
+            // $I->scrollTo( $I->get_configs("wp_toolbar", "", "", "selector") );  // simply scroll to tab area, since the javascript scroll above is not reliable
             // $I->wait(30);
 
             throw new Exception("Page uri(goto_page) is now mandatory.", 1); 

@@ -74,6 +74,15 @@ class Acceptance extends \Codeception\Module
                 throw new \Exception("Selector not set for template ".$widget_template." for key ".$key, 1);
             }
         }
+        else if( $key == "wp_toolbar" && ($prefix=="n_" || empty($prefix)) ) { 
+            if( $type == "selector" ) {
+                return '//*[@id="wp-toolbar"]';
+            }
+            else {
+                throw new \Exception("Selector not set for template ".$widget_template." for key ".$key, 1);
+            }
+        }
+        
 
         // breadcrumb  
         else if( $key == "breadcrumb_radius" && ($prefix=="n_" || empty($prefix)) ) {
