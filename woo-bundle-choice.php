@@ -153,6 +153,7 @@ if(!class_exists('Woo_Bundle_Choice')) {
 		}
 	}
 
+
 	add_action( 'plugins_loaded', function() {
 		wbc()->construct_init();
 	});
