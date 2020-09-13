@@ -1,0 +1,8 @@
+.tab-wrapped{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;  
+}
+.ui.tab .fields{
+	margin:0 0 1em !important;
+}

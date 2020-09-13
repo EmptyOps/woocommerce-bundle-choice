@@ -1,0 +1,23 @@
+2020-08-17T13:22:02+00:00 CRITICAL require_once(): Failed opening required '/Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/system/tools/tool-error-handler.php' (include_path='.:/Applications/MAMP/bin/php/php7.3.1/lib/php') in /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/woo-bundle-choice.php on line 72
+
+2020-08-17T13:43:35+00:00 CRITICAL Uncaught Exception: There is an error at page http://127.0.0.1:8888/tmp/wordpress/src/. Type: fatal_error Message: Woo Choice Plugin failed to display buttons on your current theme, you may send an error log or create a support ticket on the support forum. in /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/controllers/ajax/eo_wbc_throw_error.php:10
+Stack trace:
+#0 /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/woocommerce-bundle-choice-bootstrap.php(81): require_once()
+#1 /Users/hiren/Sites/tmp/wordpress/src/wp-includes/class-wp-hook.php(287): eo\wbc\WooCommerce_Bundle_Choice_Bootstrap->ajax('')
+#2 /Users/hiren/Sites/tmp/wordpress/src/wp-includes/class-wp-hook.php(311): WP_Hook->apply_filters('', Array)
+#3 /Users/hiren/Sit in /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/controllers/ajax/eo_wbc_throw_error.php on line 10
+
+2020-08-17T14:02:29+00:00 CRITICAL Uncaught Exception: There is an error at page http://127.0.0.1:8888/tmp/wordpress/src/. Type: fatal_error Message: Woo Choice Plugin failed to display buttons on your current theme, you may send an error log or create a support ticket on the support forum. in /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/controllers/ajax/eo_wbc_throw_error.php:10
+Stack trace:
+#0 /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/woocommerce-bundle-choice-bootstrap.php(81): require_once()
+#1 /Users/hiren/Sites/tmp/wordpress/src/wp-includes/class-wp-hook.php(287): eo\wbc\WooCommerce_Bundle_Choice_Bootstrap->ajax('')
+#2 /Users/hiren/Sites/tmp/wordpress/src/wp-includes/class-wp-hook.php(311): WP_Hook->apply_filters('', Array)
+#3 /Users/hiren/Sit in /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/controllers/ajax/eo_wbc_throw_error.php on line 10
+
+2020-08-17T20:26:09+00:00 CRITICAL Uncaught Exception: There is an error at page http://127.0.0.1:8888/tmp/wordpress/src/. Type: fatal_error Message: Woo Choice Plugin failed to display buttons on your current theme, you may send an error log or create a support ticket on the support forum. in /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/controllers/ajax/eo_wbc_throw_error.php:10
+Stack trace:
+#0 /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/woocommerce-bundle-choice-bootstrap.php(81): require_once()
+#1 /Users/hiren/Sites/tmp/wordpress/src/wp-includes/class-wp-hook.php(287): eo\wbc\WooCommerce_Bundle_Choice_Bootstrap->ajax('')
+#2 /Users/hiren/Sites/tmp/wordpress/src/wp-includes/class-wp-hook.php(311): WP_Hook->apply_filters('', Array)
+#3 /Users/hiren/Sit in /Users/hiren/Sites/tmp/wordpress/src/wp-content/plugins/woo-bundle-choice/application/controllers/ajax/eo_wbc_throw_error.php on line 10
+
