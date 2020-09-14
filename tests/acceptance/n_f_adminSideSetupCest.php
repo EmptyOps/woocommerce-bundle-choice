@@ -307,7 +307,7 @@ class n_f_adminSideSetupCest
         }
     }
 
-    protected function verifyFilters(AcceptanceTester $I,  $filter_id, $field_id, $field_name, $field_type, $val, $should_see_text=array(), $selector_of_targets=array(), $css_property_of_targets=array())
+    protected function verifyFilters(AcceptanceTester $I, $operation,  $filter_id, $field_id, $field_name, $field_type, $val, $should_see_text=array(), $selector_of_targets=array(), $css_property_of_targets=array())
     {
         // if( !$I->test_allowed_in_this_environment("n_") ) {
         //     return;
@@ -510,6 +510,7 @@ class n_f_adminSideSetupCest
 
             // scroll to top in case its already on this page then scroll to top is necessary 
             $I->scrollTo( $I->get_configs("wp_toolbar", "", "", "selector") );
+            $I->wait(10);
         }
         else {
             // // $I->executeJS('window.scrollTo( 0, 0 );');       //$I->scrollTo('Save'); 

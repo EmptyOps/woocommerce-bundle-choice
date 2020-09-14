@@ -63,7 +63,7 @@ class sunob_a_y_bonusFeaturesFiltersForShopCategoryPageCest extends n_f_adminSid
 		$I->reloadPage();
 
 		// tmp
-		$I->scrollTo( $I->get_configs("wp_toolbar", "", "", "selector"), -300, -300 );  // simply scroll to tab area
+		$I->scrollTo( $I->get_configs("wp_toolbar", "", "", "selector") );  // simply scroll to tab area
         $I->wait(30);
 
 		// $I->seeInField('shop_cat_filter_two_filter_first_title', 'Diamond Filter');	//$I->see('4px', 'input');	//I verify that I can see "button tagline..." inside input tag 
