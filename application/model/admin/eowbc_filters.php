@@ -220,7 +220,7 @@ class Eowbc_Filters extends Eowbc_Model {
 				}
 			}
 
-			if(!empty(wbc()->sanitize->post('second_category_altr_filt_widgts')) and wbc()->sanitize->post('second_category_altr_filt_widgts')!=wbc()->options->get_option('	filters_altr_filt_widgts','second_category_altr_filt_widgts') ) {
+			if(!empty(wbc()->sanitize->post('second_category_altr_filt_widgts')) and wbc()->sanitize->post('second_category_altr_filt_widgts')!=wbc()->options->get_option('filters_'.$this->tab_key_prefix.'altr_filt_widgts','second_category_altr_filt_widgts') ) {
 
 				if(wbc()->sanitize->post('second_category_altr_filt_widgts')=='sc5'){
 					$this->switch_template_5();

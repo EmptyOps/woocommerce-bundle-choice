@@ -6,7 +6,7 @@
 
 ?>
 
-<div class="onclick_redirect step <?php echo ($step==$order)?'active ':' '; ?>" data-begin="<?php echo get_term_link(get_term_by('slug', $first_slug, 'product_cat')->term_id,'product_cat').'EO_WBC=1&BEGIN='.$first_slug.'&STEP=1'; ?>">            
+<div class="onclick_redirect step <?php echo ($step==$order)?'active ':' '; ?>" data-begin="<?php echo get_term_link(get_term_by('slug', $first_slug, 'product_cat')->term_id,'product_cat').'?EO_WBC=1&BEGIN='.$first_slug.'&STEP=1'; ?>">            
     <div class="ui equal width grid" style="width: 100%;margin-top: -1em !important;">
         <div class="column">1</div>
         <div class="column" style="text-align: left;">                       

@@ -170,6 +170,8 @@ class Eowbc_Mapping extends Eowbc_Model {
 		  //       $eo_wbc_add_discount=$_POST['eo_wbc_add_discount']?$_POST['eo_wbc_add_discount']:0;
 
 				$mapping_data = unserialize(wbc()->options->get_option_group('mapping_'.$key,"a:0:{}"));
+				//print_r($mapping_data);
+				//die();
 		        if(!empty(wbc()->sanitize->post('map_creation_modification_id')) and !empty($mapping_data[wbc()->sanitize->post('map_creation_modification_id')])) {
 		        	$table_data["id"] = wbc()->common->createUniqueId();
 		        	$mapping_data[wbc()->sanitize->post('map_creation_modification_id')] = $table_data;
@@ -203,7 +205,7 @@ class Eowbc_Mapping extends Eowbc_Model {
 			    }
 
 				$table_data["id"] = wbc()->common->createUniqueId();
-		        $mapping_data[] = $table_data;
+		        $mapping_data[$table_data["id"]] = $table_data;
 
 		        wbc()->options->update_option_group( 'mapping_'.$key, serialize($mapping_data) );
 

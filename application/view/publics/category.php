@@ -50,7 +50,7 @@
     .ui.card>.image:not(.ui)>img, .ui.cards>.card>.image:not(.ui)>img{
         height: 250px !important;
     }
-    .woocommerce-Price-amount.amount,ins,del{
+    .ui.dimmer .woocommerce-Price-amount.amount,.ui.dimmer  ins,.ui.dimmer  del{
         color: white !important;
         background-color: transparent !important;
     }
@@ -215,7 +215,7 @@
      */
     function wbc_attach_card_views() { 
         jQuery(".products,.product-listing,.row-inner>.col-lg-9:eq(0)").html(jQuery(".eo_wbc_hidden_data").html());
-        jQuery('.special.cards .image').dimmer({on:'hover'});
+        jQuery('.special.cards .image').dimmer({on:'hover',duration:{ show : 0, hide : 0 }});
         jQuery('.button[data-link]').on('click',function(e){
             e.preventDefault();
             e.stopPropagation();
