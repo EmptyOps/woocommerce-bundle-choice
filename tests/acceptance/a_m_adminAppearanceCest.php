@@ -169,7 +169,7 @@ class a_m_adminAppearanceCest
 		// set fields 
 		$I->fillField('fc_atc_button_text', 'Add to bag...');
 		$I->fillField('sc_atc_button_text', 'Add to bagsc...');
-		$I->fillField('product_page_add_to_basket', 'Add to basket');
+		// $I->fillField('product_page_add_to_basket', 'Add to basket');	// if we uncomment this the acceptance tests as frontend item page need to be extended accordingly
 		$I->executeJS("jQuery('#product_page_hide_first_variation_form_1').checkbox('set checked');");	
 		$I->executeJS("jQuery('#product_page_hide_second_variation_form_1').checkbox('set checked');");	
 

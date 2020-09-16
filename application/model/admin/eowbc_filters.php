@@ -220,7 +220,7 @@ class Eowbc_Filters extends Eowbc_Model {
 				}
 			}
 
-			if(!empty(wbc()->sanitize->post('second_category_altr_filt_widgts')) and wbc()->sanitize->post('second_category_altr_filt_widgts')!=wbc()->options->get_option('	filters_altr_filt_widgts','second_category_altr_filt_widgts') ) {
+			if(!empty(wbc()->sanitize->post('second_category_altr_filt_widgts')) and wbc()->sanitize->post('second_category_altr_filt_widgts')!=wbc()->options->get_option('filters_'.$this->tab_key_prefix.'altr_filt_widgts','second_category_altr_filt_widgts') ) {
 
 				if(wbc()->sanitize->post('second_category_altr_filt_widgts')=='sc5'){
 					$this->switch_template_5();
@@ -329,7 +329,7 @@ class Eowbc_Filters extends Eowbc_Model {
 		        	if(!empty(wbc()->sanitize->post($key_clean.'_id')) and !empty($filter_data[wbc()->sanitize->post($key_clean.'_id')])) {
 		        		$filter_data[wbc()->sanitize->post($key_clean.'_id')] = $table_data;
 		        		$res["type"] = "success";
-		    			$res["msg"] = eowbc_lang('Filter updated successfuly');
+		    			$res["msg"] = eowbc_lang('Filter updated successfully');
 		    			wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data) );
 		                return $res;
 		        	} else {

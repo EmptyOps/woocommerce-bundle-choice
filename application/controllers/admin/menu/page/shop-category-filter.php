@@ -65,7 +65,8 @@ if ( ! class_exists( 'Shop_Category_Filter' ) ) {
 					'label'=>eowbc_lang('Category'),
 					'type'=>'select',
 					'value'=>wbc()->options->get_option('filters_sc_filter_setting','shop_cat_filter_category'),
-					'force_value'=>1,
+					/*'force_value'=>1,*/
+					'validate'=>array('validate_if'=>array('sc_shop_cat_filter_location_cat'=>array('required'=>''))),
 					'sanitize'=>'sanitize_text_field',
 					'validate'=>array('validate_if'=>array('sc_shop_cat_filter_location_cat'=>array('required'=>''))),
 					'options'=>\eo\wbc\model\Category_Attribute::instance()->get_category(),

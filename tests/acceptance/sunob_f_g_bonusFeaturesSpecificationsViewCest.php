@@ -73,8 +73,8 @@ class sunob_f_g_bonusFeaturesSpecificationsViewCest
         $I->executeJS("jQuery('#specification_view_default_status').checkbox('set unchecked');");
 
         // $I->executeJS("jQuery('[name=\"tiny_features_specification_view_style\"]').checkbox('set checked', 'template_1');");
-        // $I->executeJS("jQuery('[name=\"tiny_features_specification_view_style\"]').val('template_3');"); 
-        $I->wbc_setRadio($I, 'template_3');   
+        // $I->executeJS("jQuery('[name=\"tiny_features_specification_view_style\"]').val('template_2');"); 
+        $I->wbc_setRadio($I, 'template_2');   
         
         $I->executeJS('window.scrollTo( 0, 500 );');        //$I->scrollTo('Save'); 
         $I->wait(3);
@@ -89,7 +89,7 @@ class sunob_f_g_bonusFeaturesSpecificationsViewCest
         // confirm if saved properly or not. TODO actually we should connfirm all values of the form if saved and repopulated properly in edit mode or saved list or not. 
         $I->reloadPage();   //reload page
         $I->click('Specifications View for Item Page');
-        $I->radioAssertion($I, 'template_3', "tiny_features_specification_view_style", 'template_3');   //$I->seeInField('tiny_features_specification_view_style', 'template_3'); 
+        $I->radioAssertion($I, 'template_2', "tiny_features_specification_view_style", 'template_2');   //$I->seeInField('tiny_features_specification_view_style', 'template_2'); 
 
         //
         //  Put shortcode somewhere. I think to test shortcode putting manually on some external page is fine, like in the sample page which is there and available default wp/woo. 

@@ -65,15 +65,34 @@ class Acceptance extends \Codeception\Module
             return "CONTINUE";
         }
 
+        // admin  
+        else if( $key == "wbc_admin_general_tab" && ($prefix=="n_" || empty($prefix)) ) { 
+            if( $type == "selector" ) {
+                return '//*[@id="wpbody-content"]/div[4]/a[1]';
+            }
+            else {
+                throw new \Exception("Selector not set for template ".$widget_template." for key ".$key, 1);
+            }
+        }
+        else if( $key == "wp_toolbar" && ($prefix=="n_" || empty($prefix)) ) { 
+            if( $type == "selector" ) {
+                return '//*[@id="wp-toolbar"]';
+            }
+            else {
+                throw new \Exception("Selector not set for template ".$widget_template." for key ".$key, 1);
+            }
+        }
+        
+
         // breadcrumb  
         else if( $key == "breadcrumb_radius" && ($prefix=="n_" || empty($prefix)) ) {
             
             if( $type == "selector" ) {
                 if( $widget_template == "default" ) {
-                    return '#main > header > div:nth-child(4) > div > div:nth-child(2)';
+                    return '#main > header > div:nth-child(4) > div';
                 }
                 else if( $widget_template == "template_1" ) {
-                    return '#main > div.eo-wbc-container.container > div';
+                    return '#main > header > div:nth-child(4) > div';
                 }
                 else {
                     throw new \Exception("Selector not set for template ".$widget_template." for key ".$key, 1);
@@ -546,11 +565,17 @@ class Acceptance extends \Codeception\Module
     /**
      * 
      */
-    public function getElementCss($I,$selector_of_targets, $css_property_of_targets) 
+    public function getElementCss($I,$selector_of_targets, $css_property_of_targets, $suite_name_prefix="") 
     {
         // echo "called resetSession...";
             
         try { 
+
+            // since mozila behaves differently for retrieving the css of border. see here https://stackoverflow.com/a/28897973/1480088
+            if( $suite_name_prefix == "n_" /*firefox mozilla used for this suite right now*/ && $css_property_of_targets == "border-radius" ) {
+                $css_property_of_targets = "borderTopLeftRadius";
+            }
+
             return $I->executeJS('
                                 return jQuery("'.$selector_of_targets.'").css("'.$css_property_of_targets.'");
                                 ');  

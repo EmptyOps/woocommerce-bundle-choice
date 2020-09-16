@@ -378,7 +378,21 @@ class EOWBC_Breadcrumb
             } 
 
             $terms=wp_get_post_terms($post_id,get_taxonomies(),array('fields'=>'ids'));
-            $maps = apply_filters('eowbc_product_maps',wp_cache_get( 'cache_maps', 'eo_wbc'));  
+            $maps = apply_filters('eowbc_product_maps',wp_cache_get( 'cache_maps', 'eo_wbc')); 
+
+            $is_cleanup = apply_filters( 'eowbc_product_maps_is_reset_cleanup',1);
+
+            if($is_cleanup and !empty($maps) and is_array($maps)) {
+                
+                $new_maps = array();            
+                foreach ($maps as $key => $map) {
+                    if(empty($map['save_builder'])){
+                        $new_maps[$key] = $map;
+                    }                
+                }            
+                $maps = $new_maps;
+            }
+ 
 
             $category=array();        
             

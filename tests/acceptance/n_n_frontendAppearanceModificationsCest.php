@@ -73,7 +73,7 @@ class n_n_frontendAppearanceModificationsCest extends n_f_adminSideSetupCest
                 '#main > header > div:nth-child(4) > div > div:nth-child(2) > div > div.ui.grid > div:nth-child(2) > div.title', 
                 '#main > header > div:nth-child(4) > div > div:nth-child(2) > div > div:nth-child(3) > u:nth-child(3) > a' 
             ), 
-            array('border-radius','backgroundColor','backgroundColor', 'color','color','color'));
+            array('border-radius','backgroundColor','backgroundColor', 'color','color','color'), "n_");
     }
 
     // test if editing the appearance of filters works or not  
@@ -95,11 +95,10 @@ class n_n_frontendAppearanceModificationsCest extends n_f_adminSideSetupCest
             $field_type = array( 'color', 'color', 'color', 'color', 'text' );
             $val = array( '#000000', '#00ff00', '#000000', '#00ff00', '64px' );
 
-            $curr_tmplt = "";
+            $curr_tmplt = $I->get_session('wbc_suite_n__process_current_filter_template_'.$cat);
             if( $cat == 0 ) {
 
                 //need to set selector according to template 
-                $curr_tmplt = $I->get_session('wbc_suite_n__process_current_filter_template_'.$cat);
                 if( $curr_tmplt == "fc1" ) {
                     $selector_of_targets = array(
                         '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > p > span', 
@@ -121,12 +120,14 @@ class n_n_frontendAppearanceModificationsCest extends n_f_adminSideSetupCest
                 $css_property_of_targets = array('color','color','backgroundColor', 'backgroundColor','width');
             }
             else {
-                $selector_of_targets = array('#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > p > span', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(2)', '#text_slider_pa_eo_carat_attr > div > div:nth-child(3)', '/html/body/section/main/header/div[5]/div/div[1]/div/div[2]/div[2]/div/div[1]', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(1) > img');
+
+                //need to set selector according to template 
+                $selector_of_targets = array( $I->get_configs('header_textcolor', "n_", $curr_tmplt, "selector"), '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(2)', '#text_slider_pa_eo_carat_attr > div > div:nth-child(3)', '/html/body/section/main/header/div[5]/div/div[1]/div/div[2]/div[2]/div/div[1]', '#main > header > div.eo-wbc-container.filters.container.ui.form > div > div:nth-child(1) > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(1) > img');
                 $css_property_of_targets = array('color','color','backgroundColor', 'backgroundColor','width');
             } 
 
             // change random appearance
-            $this->modifyAppearance($I, '/html/body/div[1]/div[2]/div[2]/div[1]/div[4]/div[2]/div/form/div[1]/a[3]', $field_id, $field_name, $field_type, $val, '//*[@id="filters_submit_btn"]', array( '' ));
+            $this->modifyAppearance($I, '//a[@data-tab="filters"]' /*'//*[@id="main"]/ul/li/a/img'*/ /*'/html/body/div[1]/div[2]/div[2]/div[1]/div[4]/div[2]/div/form/div[1]/a[3]'*/, $field_id, $field_name, $field_type, $val, '//*[@id="filters_submit_btn"]', array( '' ));
 
             // TODO still all the appearance are not tested like the header text font, icon label size etc. 
 

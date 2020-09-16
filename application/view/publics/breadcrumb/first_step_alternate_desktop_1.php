@@ -6,8 +6,10 @@
 
 ?>
 
+
 <div class="onclick_redirect step <?php echo ($step==$order)?'active ':' '; ?>" data-begin="<?php echo get_term_link(get_term_by('slug', $first_slug, 'product_cat')->term_id,'product_cat').'EO_WBC=1&BEGIN='.$first_slug.'&STEP=1'; ?>" <?php _e((!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb) and !empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$first_url))?'data-clickable_breadcrumb="'.\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$first_url.'"':''); ?>>            
     <div class="ui equal width grid" style="width: 100%;margin-top: -1em !important;" >
+
         <div class="column">1</div>
         <div class="column" style="text-align: left;">                       
             <?php if(empty($first)):?>        

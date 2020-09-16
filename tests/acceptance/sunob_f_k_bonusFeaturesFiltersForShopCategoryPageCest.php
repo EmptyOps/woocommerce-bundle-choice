@@ -25,7 +25,7 @@ class sunob_f_k_bonusFeaturesFiltersForShopCategoryPageCest
         // $I->see('Diamond Filter');    //first filter tab
         // $I->see('Setting Filter');    //second filter tab
         $I->waitForText('Test d filter');    
-        $I->see('Search', 'button');    
+        // $I->see('Search', 'button');    
 
 
         // TODO apply filters basic check
