@@ -647,7 +647,7 @@ class Acceptance extends \Codeception\Module
         try { 
 
             $I->wait($wait);
-            echo "debug_log ".$I->executeJS(' return jQuery("'.$action_button_selector.'").data("debug_log"); ');
+            echo "debug_log ".$I->executeJS(' return jQuery("'.str_replace('"', "'", $action_button_selector).'").data("debug_log"); ');
 
             return true;
         }
