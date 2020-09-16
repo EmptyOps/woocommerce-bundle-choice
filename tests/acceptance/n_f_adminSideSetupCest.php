@@ -376,6 +376,8 @@ class n_f_adminSideSetupCest
             // save 
             $I->click($save_button_xpath);  
 
+            $I->wbc_debug_log($I, $save_button_xpath, 10);
+
             if( $operation[$i] == "edit" ) {
                 $I->waitForText("Mapping Updated Successfully");
             }
@@ -522,7 +524,7 @@ class n_f_adminSideSetupCest
         }
 
         // go to the tab
-        $I->click($goto_tab);
+        $I->clickWithLeftButton ($goto_tab); //click($goto_tab);
         $I->see($tab_verification_text);
 
         if( !empty($edit_action_xpath) ) {
