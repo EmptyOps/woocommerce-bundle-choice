@@ -58,7 +58,7 @@ class sunob_a_w_bonusFeaturesShortcodeFiltersCest extends n_f_adminSideSetupCest
 
         // add filter 
         // TODO even though we are using a common method of setup class to add filter but we should try preparing add data in most effective to test every aspect, so prepare such data and extend parent method and pass data for detailed testing 
-        parent::addEditFilters( $I, 'd', $is_edit_mode, '/wp-admin/admin.php?page=eowbc-shortcode-filters', '//*[@id="eowbc_shop_category_filter"]/div[1]/a[3]' /*'Filter Configuration'*/, 'Bulk Actions', $edit_fields, $edit_action_xpath);
+        parent::addEditFilters( $I, 'd', $is_edit_mode, '/wp-admin/admin.php?page=eowbc-shortcode-filters', /*'//*[@id="eowbc_shop_category_filter"]/div[1]/a[3]'*/ 'Filter Configuration', 'Bulk Actions', $edit_fields, $edit_action_xpath);
 
         // TODO are there any other things that are not covered in common add method of parent class that we should cover? We must think of anything that is missed especially when we are saving time of dev & maintainance by using common test method of parent class. 
 

@@ -376,9 +376,8 @@ class n_f_adminSideSetupCest
             // save 
             $I->click($save_button_xpath);  
 
-            $I->wbc_debug_log($I, $save_button_selector, 10);
-
             if( $operation[$i] == "edit" ) {
+                $I->wbc_debug_log($I, $save_button_selector, 10);
                 $I->waitForText("Mapping Updated Successfully");
             }
             else {
