@@ -121,16 +121,11 @@ class EOWBC_Breadcrumb
         <div class="ui container unstackable steps" style="width: 100% !important; min-width: unset; max-width: unset; margin: auto; margin-bottom: 1em;">
             <?php 
             if(!empty(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_fixed_navigation'))) {
-                $_step = 1;
-                if(self::eo_wbc_breadcrumb_get_category(self::$first)==self::$first_slug){
-                    $_step = 1;
-                } elseif(self::eo_wbc_breadcrumb_get_category(self::$second)==self::$second_slug) {
-                    $_step = 2;
-                } else {
-                    $_step = 3;
+                 if(!empty(wbc()->sanitize->get('BEGIN')) and wbc()->sanitize->get('BEGIN')==self::$first_slug){                    
+                    self::eo_wbc_breadcumb_first_html_mobile($step,1).self::eo_wbc_breadcumb_second_html_mobile($step,2);
+                } elseif(!empty(wbc()->sanitize->get('BEGIN')) and wbc()->sanitize->get('BEGIN')==self::$second_slug) {
+                    self::eo_wbc_breadcumb_first_html_mobile($step,2).self::eo_wbc_breadcumb_second_html_mobile($step,1);
                 }
-
-                self::eo_wbc_breadcumb_first_html_mobile($_step,1).self::eo_wbc_breadcumb_second_html_mobile($_step,2);
 
             }  else {
                 if($begin==self::$first_slug/*get_option('eo_wbc_first_slug')*/) {

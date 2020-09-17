@@ -246,3 +246,13 @@ script:
 #     - env: WBC_TEST_ENV=with_sample_data
 
 #  dist: precise
+deploy:
+  #
+  # Auto-deploys the built plugin to WordPress.org on push to master branch
+  #
+  provider: script
+  skip_cleanup: true
+  script: ./deploy/deploy.sh
+  on:
+    branch: master
+    php: 7.2
