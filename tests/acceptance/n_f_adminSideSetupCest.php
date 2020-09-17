@@ -344,7 +344,7 @@ class n_f_adminSideSetupCest
 
     }
 
-    protected function modifyMappings(AcceptanceTester $I, $tab, $operation, $mapping, $field_id, $field_name, $field_type, $val, $save_button_xpath, $field_dropdown_div_id=array())
+    protected function modifyMappings(AcceptanceTester $I, $tab, $operation, $mapping, $field_id, $field_name, $field_type, $val, $save_button_xpath, $field_dropdown_div_id=array(), $save_button_selector="")
     {
         // if( !$I->test_allowed_in_this_environment("n_") ) {
         //     return;
@@ -376,7 +376,7 @@ class n_f_adminSideSetupCest
             // save 
             $I->click($save_button_xpath);  
 
-            $I->wbc_debug_log($I, $save_button_xpath, 10);
+            $I->wbc_debug_log($I, $save_button_selector, 10);
 
             if( $operation[$i] == "edit" ) {
                 $I->waitForText("Mapping Updated Successfully");
@@ -524,7 +524,7 @@ class n_f_adminSideSetupCest
         }
 
         // go to the tab
-        $I->clickWithLeftButton ($goto_tab); //click($goto_tab);
+        $I->click($goto_tab);   //clickWithLeftButton ($goto_tab); //click($goto_tab);
         $I->see($tab_verification_text);
 
         if( !empty($edit_action_xpath) ) {
