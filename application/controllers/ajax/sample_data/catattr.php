@@ -63,7 +63,7 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'sample_data_jewelry')){
 
 		$template = $data_template_obj->get_attributes();
 		
-		$catat_attribute = unserialize( wbc()->options->get($feature_key.'_created_attribute'), serialize($template) );
+		$catat_attribute = unserialize( wbc()->options->get( $feature_key.'_created_attribute', serialize($template) ) );
 
 		$template = $template[wbc()->sanitize->post('index')];
 		if(!empty(wbc()->sanitize->post('label'))) {

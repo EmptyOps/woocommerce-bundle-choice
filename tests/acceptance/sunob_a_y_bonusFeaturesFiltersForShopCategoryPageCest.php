@@ -62,12 +62,12 @@ class sunob_a_y_bonusFeaturesFiltersForShopCategoryPageCest extends n_f_adminSid
 
 		$I->reloadPage();
 
-		// tmp
-		$I->scrollTo( $I->get_configs("wp_toolbar", "", "", "selector") );  // simply scroll to tab area
-        $I->wait(30);
+		// // tmp
+		// $I->scrollTo( $I->get_configs("wp_toolbar", "", "", "selector") );  // simply scroll to tab area
+  //       $I->wait(30);
 
 		// $I->seeInField('shop_cat_filter_two_filter_first_title', 'Diamond Filter');	//$I->see('4px', 'input');	//I verify that I can see "button tagline..." inside input tag 
-		$I->see('Diamond-fsfgjsdhgfj');	//I verify that I can see "Diamond" category inside dropdown's div tag 
+		$I->see('Diamond');	//I verify that I can see "Diamond" category inside dropdown's div tag 
 
 	}
 
@@ -94,7 +94,7 @@ class sunob_a_y_bonusFeaturesFiltersForShopCategoryPageCest extends n_f_adminSid
 
         // add filter 
         // TODO even though we are using a common method of setup class to add filter but we should try preparing add data in most effective to test every aspect, so prepare such data and extend parent method and pass data for detailed testing 
-        parent::addEditFilters( $I, 'd', $is_edit_mode, '/wp-admin/admin.php?page=eowbc-shop-cat-filter', 'Filter Configuration', 'Bulk Actions', $edit_fields, $edit_action_xpath);
+        parent::addEditFilters( $I, 'd', $is_edit_mode, '/wp-admin/admin.php?page=eowbc-shop-cat-filter', /*'//*[@id="eowbc_shop_category_filter"]/div[1]/a[3]'*/ 'Filter Configuration', 'Bulk Actions', $edit_fields, $edit_action_xpath);
 
         // TODO are there any other things that are not covered in common add method of parent class that we should cover? We must think of anything that is missed especially when we are saving time of dev & maintainance by using common test method of parent class. 
 
