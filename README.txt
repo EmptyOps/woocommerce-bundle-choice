@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=hi000
 Requires at least: 3.5
 Tested up to: 5.5
 Requires PHP: 5.3
-Stable tag: 1.0.1
+Stable tag: 1.0.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -36,17 +36,17 @@ Browse the complete list of features [here](https://woochoiceplugin.com/jewelry-
 == For any Inventory ==
 It does not matter to which category your website belongs to if you are selling anything that you think can be sold in a pair/bundle then this plugin is absolutely for you. Our philosophy is to provide technology that enables users to make bundles of their choice that is why the name product bundle (of) choice and this becomes truly exciting for users when they have a preset recommendation set by website admins.
 
-We provide both the features in a single plugin, the ring builder feature will be useful for you if you have a WordPress jewelry/diamond website. It is also useful to create efficient diamond [filters](https://www.emptyops.com/demo/jewelry-demo/design-your-own-ring/) for real diamonds as well as lab-grown or CVD diamonds and the pair maker feature will be useful for you if you have anything that you think can be sold in a pair like fashion, apparel, household items – anything, etc.
+We provide both the features in a single plugin, the ring builder feature will be useful for you if you have a WordPress jewelry/diamond website. It is also useful to create efficient diamond [filters](https://demo.woochoiceplugin.com/zokri-shop/product-category/eo_diamond_shape_cat/) for real diamonds as well as lab-grown or CVD diamonds and the pair maker feature will be useful for you if you have anything that you think can be sold in a pair like fashion, apparel, household items – anything, etc.
 
 In short, Woo Choice Plugin – also known as WBC — supports every kind of inventory where it is possible to create pair or bundles based on users’ choices/needs and the use cases are immense from fashion to help the user assembling fashion accessories to assembling gift boxes, helping the user choose right pair of home decor items to cosmetics, automobile accessories to pharmaceuticals and the list may go on. 
 
 == UNDERSTANDING FEATURES ==
 
 = 1. RING BUILDER =
-This ring builder feature developed with the objectives to fill the gap of lack of such plugin on wordpress.org. While developing the ring builder feature we have kept in mind all the complexity and challenges that website admins go through like setting up the module which is a tiresome task if the backend operations are not developed keeping in mind the ease of use. The other challenge any website/admin face is the efficiency given that the complexity of jewelry inventory it is a bit challenging to achieve both efficiency and ease of use at both backend and frontend sides. We are happy to say that we have solved this problem very well and excited to avail this plugin to the WooCommerce community. Needless to say, you can have earings/necklace builders as well together with the ring builder. This is only a part of our offering for jewelry website besides ring builder you can benefit from bulk price update(read in detail below), built-in variable products which make it easier to create jewelry website with only a few clicks yeah believe us as long as you have WordPress installed and them setup all you need is installing this plugin and you will have your jewelry store setup which was not possible so far this easily. Still, this is not it in addition to that we have nice views and setups if you want to sell real diamonds or CVD diamond/lab-grown diamond. [See a Demo](https://www.emptyops.com/demo/jewelry-demo/design-your-own-ring/)
+This ring builder feature developed with the objectives to fill the gap of lack of such plugin on wordpress.org. While developing the ring builder feature we have kept in mind all the complexity and challenges that website admins go through like setting up the module which is a tiresome task if the backend operations are not developed keeping in mind the ease of use. The other challenge any website/admin face is the efficiency given that the complexity of jewelry inventory it is a bit challenging to achieve both efficiency and ease of use at both backend and frontend sides. We are happy to say that we have solved this problem very well and excited to avail this plugin to the WooCommerce community. Needless to say, you can have earings/necklace builders as well together with the ring builder. This is only a part of our offering for jewelry website besides ring builder you can benefit from bulk price update(read in detail below), built-in variable products which make it easier to create jewelry website with only a few clicks yeah believe us as long as you have WordPress installed and them setup all you need is installing this plugin and you will have your jewelry store setup which was not possible so far this easily. Still, this is not it in addition to that we have nice views and setups if you want to sell real diamonds or CVD diamond/lab-grown diamond. [See a Demo](https://demo.woochoiceplugin.com/jewelry-demo/design-your-own-ring/)
 
 = 2. PAIR MAKER =
-For example, assume you are selling clothes online then the customer after selecting top-wear is guided for the bottom wear automatically. So if by chance, the user is confused then the plugin guides by mixing and matching different alternatives from the stock and thus pair of clothing are created for the customer. This is the only plugin on wordpress.org as of writing this providing pair maker feature for the clothing industry. [See a Demo](http://101.53.136.134/demo/yc_textile/)
+For example, assume you are selling clothes online then the customer after selecting top-wear is guided for the bottom wear automatically. So if by chance, the user is confused then the plugin guides by mixing and matching different alternatives from the stock and thus pair of clothing are created for the customer. This is the only plugin on wordpress.org as of writing this providing pair maker feature for the clothing industry. [See a Demo](https://demo.woochoiceplugin.com/yc_textile/)
 
 = 3. JEWELRY CUSTOMIZATION =
 We offer fully customizable options with a industry standard experience. Here, fully customization means when the user selects any particular jewelry item then he gets a ton of customization options available in front of him/her like how many carats of gold would they prefer? What exact color of jewelry do they want? and the list goes on…
@@ -60,7 +60,7 @@ With different add-ons from our collection of extensions, you can make your stor
 
 [WooCommerce Table View](https://sphereplugins.com/product/woocommerce-product-bundle-table-view/)
 
-You can show products in a tabular view for its easy navigation. It is built for the users' comfort, much needed for a perfect diamond inventory experience. This extension is useful to create the tabular view that you can [see in the demo](https://www.emptyops.com/demo/jewelry-demo/design-your-own-ring/) below filters. 
+You can show products in a tabular view for its easy navigation. It is built for the users' comfort, much needed for a perfect diamond inventory experience. This extension is useful to create the tabular view that you can [see in the demo](https://demo.woochoiceplugin.com/zokri-shop/design-your-own-ring/) below filters. 
 Note: However, please note that filters are completely free and available in this plugin.
 
 [WooCommerce Product Bundle in E-mail](https://sphereplugins.com/product/woocommerce-product-bundle-e-mail-view/)
@@ -155,8 +155,8 @@ Now that you know how this plugin works, is there any reason to not use it? Do y
 
 Below you can check demos for different inventories:
 
-1. Demo with [Jewelry & Diamonds](https://www.emptyops.com/demo/jewelry-demo/design-your-own-ring/)
-1. Demo with [Clothing](http://101.53.136.134/demo/yc_textile/)
+1. Demo with [Jewelry & Diamonds](https://demo.woochoiceplugin.com/jewelry-demo/design-your-own-ring/)
+1. Demo with [Clothing](https://demo.woochoiceplugin.com/yc_textile/)
 
 = Documentation =
 

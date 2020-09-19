@@ -100,7 +100,7 @@ class Eowbc_Mapping extends Eowbc_Model {
 			}
 	    }
 
-	    return $form_definition;
+	    return $form_definition; 
 	}
 
 	public function save( $form_definition, $is_auto_insert_for_template=false ) {
