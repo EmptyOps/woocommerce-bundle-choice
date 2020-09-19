@@ -388,7 +388,7 @@ class EOWBC_Filter_Widget {
 
 					<?php if(wbc()->options->get_option('appearance_filters','appearance_filters_header_size',false,true,true)){ ?>
 						.ui.header:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6) {
-							font-size: <?php _e(wbc()->options->get_option('appearance_filters','appearance_filters_header_size',false,true,true)); ?> !important;
+							font-size: <?php _e(wbc()->options->get_option('appearance_filters','appearance_filters_header_size','',true,true)); ?> !important;
 						}
 					<?php } ?>
 
@@ -1958,7 +1958,8 @@ class EOWBC_Filter_Widget {
 			wbc()->load->template('publics/filters/shortcode_flt_search_btn', array("is_shortcode_filter"=>$this->is_shortcode_filter)); 	
 		}
 
-		wbc()->load->template('publics/filters/form', array("thisObj"=>$this,"current_category"=>$current_category,'filter_prefix'=>$this->filter_prefix)); 		
+		wbc()->load->template('publics/filters/form', array("thisObj"=>$this,"current_category"=>$current_category,'filter_prefix'=>$this->filter_prefix)); 
+		do_action('eowbc_after_filter_widget');
 	}
 
 	public function init($is_shop_cat_filter=false,$filter_prefix='',$is_shortcode_filter=false) {
