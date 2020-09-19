@@ -781,17 +781,16 @@ class Eowbc_Sample_Data {
 	    				if( ! term_exists( $term, 'pa_'.$data['slug']) ) {
 
 							$attr_term_id = wp_insert_term( $term,'pa_'.$data['slug'],array('slug' => sanitize_title($term)) ); 
-							$attr_term_id = wp_insert_term( $term,'pa_'.$data['slug'],array('slug' => sanitize_title($term)) ); 
 							
-							if(!empty($attr_term_id) and !is_wp_error($attr_term_id) and !empty($attribute['terms_thumb'][$term_index])) {
+							if(!empty($attr_term_id) and !is_wp_error($attr_term_id) and !empty($attribute['thumb'][$term_index])) {
 								
 								$thumb_id=0;
-		    					$thumb_id=$this->add_image_gallary($attribute['terms_thumb'][$term_index]);
+		    					$thumb_id=$this->add_image_gallary($attribute['thumb'][$term_index]);
 		    					$_attr_term_id = null;
 		    					if(is_array($attr_term_id)) {
 		    						$_attr_term_id=isset($attr_term_id['term_id']) ? $attr_term_id['term_id'] : null;
 		    						if(!empty($_attr_term_id)) {
-		    							update_term_meta( $_attr_term_id, 'wbc_attachment', absint( $thumb_id ) );	
+		    							update_term_meta( $_attr_term_id, 'wbc_attachment', wp_get_attachment_url( $thumb_id ) );	
 		    						}		    						
 		    					}
 							}		    								    			
