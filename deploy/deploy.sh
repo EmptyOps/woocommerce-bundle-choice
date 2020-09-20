@@ -18,7 +18,7 @@ fi
 WP_ORG_USERNAME="emptyopssphere"
 PLUGIN="woo-bundle-choice"
 PROJECT_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
-PLUGIN_BUILDS_PATH="$PROJECT_ROOT/builds"
+PLUGIN_BUILDS_PATH="$PROJECT_ROOT/build"
 PLUGIN_BUILD_CONFIG_PATH="$PROJECT_ROOT/build-cfg"
 VERSION=$(php -f "$PLUGIN_BUILD_CONFIG_PATH/utils/version.php")
 
