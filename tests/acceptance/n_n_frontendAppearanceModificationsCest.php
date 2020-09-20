@@ -83,6 +83,9 @@ class n_n_frontendAppearanceModificationsCest extends n_f_adminSideSetupCest
             return;
         }
 
+        //TODO temp till merge with master
+        return;
+
         // TODO At least in one environment, in future, we should test all(including default) alternate filter widgets by simply looping here
 
         // for first category and second category. loop.
