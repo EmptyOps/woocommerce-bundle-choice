@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=hi000
 Requires at least: 3.5
 Tested up to: 5.5
 Requires PHP: 5.3
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -148,7 +148,7 @@ If you are interested in our plugin, click [here](https://www.woo-product-bundle
 
 = Compatibility with other plugins/Officially tested plugins =
 
-We have tested WooCommerce Product Bundle Choice with Wordpress 3.5 to 5.4 and WooCommerce 2.0 to 4.0.1 and our plugin is technically compatible with all the other plugins.
+We have tested WooCommerce Product Bundle Choice with Wordpress 3.5 to 5.5 and WooCommerce 2.0 to 4.2.0 and our plugin is technically compatible with all the other plugins.
 
 = Live Demo  =
 Now that you know how this plugin works, is there any reason to not use it? Do you want to see the live demo?
