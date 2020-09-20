@@ -4,7 +4,7 @@ Tags: woocommerce,product bundle,product bundles,woocommerce product bundles,bun
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=hi0001234d1gmail.com&item_name=+Favorite+Woo+Choice+Plugin++Download+Woo+Choice+Plugin+Donation¤cy_code=USD&source=url
 Requires at least: 3.5
 Tested up to: 5.5
-Requires PHP: 5.3
+Requires PHP: 5.6
 Stable tag: 1.0.1
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html

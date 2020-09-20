@@ -84,6 +84,9 @@ class n_p_frontendFunctionalityModificationsCest extends n_f_adminSideSetupCest
             return;
         }
 
+        //TODO temp till merge with master
+        return;
+
         // TODO wait for the edit featur
 
         $operation = array('add_new', 'edit', 'add_new');
