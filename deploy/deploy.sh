@@ -51,9 +51,9 @@ for f in "$PROJECT_ROOT/"; do
     else 
         if [ "$exclude_list" == "{" ];
         then
-            exclude_list = "${exclude_list} '${f}'"
+            exclude_list="${exclude_list} '${f}'"
         else
-            exclude_list = "${exclude_list}, '${f}'"
+            exclude_list="${exclude_list}, '${f}'"
         fi
     fi
 done
