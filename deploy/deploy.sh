@@ -49,11 +49,13 @@ for f in "$PROJECT_ROOT"/*; do
     then
         tmp="nothing to do"
     else 
+
+        bname=$(basename "$f")
         if [ "$exclude_list" == "{" ];
         then
-            exclude_list="${exclude_list} '${f}'"
+            exclude_list="${exclude_list} '${bname}'"
         else
-            exclude_list="${exclude_list}, '${f}'"
+            exclude_list="${exclude_list}, '${bname}'"
         fi
     fi
 done
