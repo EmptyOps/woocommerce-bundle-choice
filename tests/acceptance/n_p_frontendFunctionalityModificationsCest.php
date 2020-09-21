@@ -18,9 +18,6 @@ class n_p_frontendFunctionalityModificationsCest extends n_f_adminSideSetupCest
             return;
         }
 
-        //TODO temp till merge with master
-        return;
-
         // for first category and second category. loop.
         for($cat=0; $cat<2; $cat++) {
 
@@ -84,9 +81,6 @@ class n_p_frontendFunctionalityModificationsCest extends n_f_adminSideSetupCest
             return;
         }
 
-        //TODO temp till merge with master
-        return;
-
         // TODO wait for the edit featur
 
         $operation = array('add_new', 'edit', 'add_new');
@@ -131,7 +125,7 @@ class n_p_frontendFunctionalityModificationsCest extends n_f_adminSideSetupCest
 
         // change random functionalities
             // try things like carat based mapping range, discounts on certain mapping, any custom mapping etc.
-        $this->modifyMappings($I, 'Map creation and modification', $operation, $mapping, $field_id, $field_name, $field_type, $val, '//*[@id="map_creation_modification_save_btn"]', $field_dropdown_div_id, "#map_creation_modification_save_btn");
+        $this->modifyMappings($I, 'Map creation and modification', $operation, $mapping, $field_id, $field_name, $field_type, $val, '//*[@id="map_creation_modification_save_btn"]', $field_dropdown_div_id);
 
         // TODO still all the functionality modification are not tested like more real life examples, real life discount requirements, etc. 
 
