@@ -251,9 +251,10 @@ deploy:
   #
   # Auto-deploys the built plugin to WordPress.org on push to master branch
   #
-  skip_cleanup: true
   provider: script
-  script: "$TRAVIS_BUILD_DIR"/deploy/deploy.sh
+  skip_cleanup: true
+  - pwd
+  script: ./deploy/deploy.sh
   on:
     branch: master
     php: 7.2
