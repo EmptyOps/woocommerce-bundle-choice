@@ -215,7 +215,7 @@ script:
   - echo_necessary_output
 
   - pwd
-  - ls -l
+  - ls -l /home/travis/build/EmptyOps/woocommerce-bundle-choice/deploy/
 
   # - vendor/bin/wpcept run
 
