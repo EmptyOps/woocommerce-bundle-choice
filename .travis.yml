@@ -214,6 +214,8 @@ script:
   #echo the output 
   - echo_necessary_output
 
+  - pwd
+
   # - vendor/bin/wpcept run
 
 # - language: node_js
