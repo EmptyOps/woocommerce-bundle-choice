@@ -63,59 +63,58 @@ done
 exclude_list="${exclude_list} }"
 
 echo "exclude_list... ${exclude_list}"
-dsfjhsdjkhfkds 
 
-# # rsync -avr --exclude={'LICENSE','node_modules','package.json','bin','.phpcs.xml.dist','build','.phpintel','build-cfg','phpunit.xml.dist','codeception.dist.php.7.2.yml','codeception.dist.yml','tests','codeception.yml','travis.sh','composer.json','__.travis.yml','composer.lock','.travis.yml','deploy','__dev_readme.txt','vendor','.DS_Store','.git','wordpress-dev-light-php-only-0.1','.gitignore','wordpress-from-wordpress.org-download','wp-cli.phar','karma.conf.js','wp-content'} "$PROJECT_ROOT/" "$PLUGIN_BUILDS_PATH/$PLUGIN"
-# rsync -avr --exclude="$exclude_list" "$PROJECT_ROOT/" "$PLUGIN_BUILDS_PATH/$PLUGIN"
+# rsync -avr --exclude={'LICENSE','node_modules','package.json','bin','.phpcs.xml.dist','build','.phpintel','build-cfg','phpunit.xml.dist','codeception.dist.php.7.2.yml','codeception.dist.yml','tests','codeception.yml','travis.sh','composer.json','__.travis.yml','composer.lock','.travis.yml','deploy','__dev_readme.txt','vendor','.DS_Store','.git','wordpress-dev-light-php-only-0.1','.gitignore','wordpress-from-wordpress.org-download','wp-cli.phar','karma.conf.js','wp-content'} "$PROJECT_ROOT/" "$PLUGIN_BUILDS_PATH/$PLUGIN"
+rsync -avr --exclude="$exclude_list" "$PROJECT_ROOT/" "$PLUGIN_BUILDS_PATH/$PLUGIN"
 
-# # Checkout the SVN repo
-# svn co -q "http://svn.wp-plugins.org/$PLUGIN" svn
+# Checkout the SVN repo
+svn co -q "http://svn.wp-plugins.org/$PLUGIN" svn
 
-# # Move out the trunk directory to a temp location
-# mv svn/trunk ./svn-trunk
-# # Create trunk directory
-# mkdir svn/trunk
-# # Copy our new version of the plugin into trunk
-# rsync -r -p $PLUGIN/* svn/trunk
+# Move out the trunk directory to a temp location
+mv svn/trunk ./svn-trunk
+# Create trunk directory
+mkdir svn/trunk
+# Copy our new version of the plugin into trunk
+rsync -r -p $PLUGIN/* svn/trunk
 
-# # Copy all the .svn folders from the checked out copy of trunk to the new trunk.
+# Copy all the .svn folders from the checked out copy of trunk to the new trunk.
 
-# # This is necessary as the Travis container runs Subversion 1.6 which has .svn dirs in every sub dir
-# cd svn/trunk/
-# TARGET=$(pwd)
-# cd ../../svn-trunk/
+# This is necessary as the Travis container runs Subversion 1.6 which has .svn dirs in every sub dir
+cd svn/trunk/
+TARGET=$(pwd)
+cd ../../svn-trunk/
 
-# # Find all .svn dirs in sub dirs
-# SVN_DIRS=`find . -type d -iname .svn`
+# Find all .svn dirs in sub dirs
+SVN_DIRS=`find . -type d -iname .svn`
 
-# for SVN_DIR in $SVN_DIRS; do
-#     SOURCE_DIR=${SVN_DIR/.}
-#     TARGET_DIR=$TARGET${SOURCE_DIR/.svn}
-#     TARGET_SVN_DIR=$TARGET${SVN_DIR/.}
-#     if [ -d "$TARGET_DIR" ]; then
-#         # Copy the .svn directory to trunk dir
-#         cp -r $SVN_DIR $TARGET_SVN_DIR
-#     fi
-# done
+for SVN_DIR in $SVN_DIRS; do
+    SOURCE_DIR=${SVN_DIR/.}
+    TARGET_DIR=$TARGET${SOURCE_DIR/.svn}
+    TARGET_SVN_DIR=$TARGET${SVN_DIR/.}
+    if [ -d "$TARGET_DIR" ]; then
+        # Copy the .svn directory to trunk dir
+        cp -r $SVN_DIR $TARGET_SVN_DIR
+    fi
+done
 
-# # Back to builds dir
-# cd ../
+# Back to builds dir
+cd ../
 
-# # Remove checked out dir
-# rm -fR svn-trunk
+# Remove checked out dir
+rm -fR svn-trunk
 
-# # Add new version tag
-# mkdir svn/tags/$VERSION
-# rsync -r -p $PLUGIN/* svn/tags/$VERSION
+# Add new version tag
+mkdir svn/tags/$VERSION
+rsync -r -p $PLUGIN/* svn/tags/$VERSION
 
-# # Add new files to SVN
-# svn stat svn | grep '^?' | awk '{print $2}' | xargs -I x svn add x@
-# # Remove deleted files from SVN
-# svn stat svn | grep '^!' | awk '{print $2}' | xargs -I x svn rm --force x@
-# svn stat svn
+# Add new files to SVN
+svn stat svn | grep '^?' | awk '{print $2}' | xargs -I x svn add x@
+# Remove deleted files from SVN
+svn stat svn | grep '^!' | awk '{print $2}' | xargs -I x svn rm --force x@
+svn stat svn
 
-# # Commit to SVN
-# svn ci --no-auth-cache --username $WP_ORG_USERNAME --password $WP_ORG_PASSWORD svn -m "Deploy version $VERSION"
+# Commit to SVN
+svn ci --no-auth-cache --username $WP_ORG_USERNAME --password $WP_ORG_PASSWORD svn -m "Deploy version $VERSION"
 
-# # Remove SVN temp dir
-# rm -fR svn
+# Remove SVN temp dir
+rm -fR svn
