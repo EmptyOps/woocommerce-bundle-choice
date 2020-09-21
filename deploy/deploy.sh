@@ -40,9 +40,30 @@ rm -fR "*"
 
 # Copy all but testing and deployment files.
 
-# include option is simple but risky since when if we add some new plugin files/folders we may forget to include that, so should better keep in mind and take care of it. 
+## include option is simple but risky since when if we add some new plugin files/folders we may forget to include that, so should better keep in mind and take care of it. 
+# create list of exclude based on include definition so include list is still needed 
+    # {'application','asset','languages','index.php','README.txt','uninstall.php','woo-bundle-choice.php'}
+exclude_list="{"
+for f in "$PROJECT_ROOT/"; do
+    if [ "$f" == "application" ] || [ "$f" == "asset" ] || [ "$f" == "languages" ] || [ "$f" == "index.php" ] || [ "$f" == "README.txt" ] || [ "$f" == "uninstall.php" ] || [ "$f" == "woo-bundle-choice.php" ]; 
+    then
+        tmp="nothing to do"
+    else 
+        if [ "$exclude_list" == "{" ];
+        then
+            exclude_list = "${exclude_list} '${f}'"
+        else
+            exclude_list = "${exclude_list}, '${f}'"
+        fi
+    fi
+done
+exclude_list="${exclude_list} }"
+
+echo "exclude_list... ${exclude_list}"
+dsfjhsdjkhfkds 
+
 # rsync -avr --exclude={'LICENSE','node_modules','package.json','bin','.phpcs.xml.dist','build','.phpintel','build-cfg','phpunit.xml.dist','codeception.dist.php.7.2.yml','codeception.dist.yml','tests','codeception.yml','travis.sh','composer.json','__.travis.yml','composer.lock','.travis.yml','deploy','__dev_readme.txt','vendor','.DS_Store','.git','wordpress-dev-light-php-only-0.1','.gitignore','wordpress-from-wordpress.org-download','wp-cli.phar','karma.conf.js','wp-content'} "$PROJECT_ROOT/" "$PLUGIN_BUILDS_PATH/$PLUGIN"
-rsync -avr --include={'application','asset','languages','index.php','README.txt','uninstall.php','woo-bundle-choice.php'} "$PROJECT_ROOT/" "$PLUGIN_BUILDS_PATH/$PLUGIN"
+rsync -avr --exclude="$exclude_list" "$PROJECT_ROOT/" "$PLUGIN_BUILDS_PATH/$PLUGIN"
 
 # Checkout the SVN repo
 svn co -q "http://svn.wp-plugins.org/$PLUGIN" svn
