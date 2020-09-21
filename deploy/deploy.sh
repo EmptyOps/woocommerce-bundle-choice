@@ -40,7 +40,9 @@ rm -fR "*"
 
 # Copy all but testing and deployment files.
 
-rsync -avr --exclude={'LICENSE','node_modules','package.json','bin','.phpcs.xml.dist','build','.phpintel','build-cfg','phpunit.xml.dist','codeception.dist.php.7.2.yml','codeception.dist.yml','tests','codeception.yml','travis.sh','composer.json','__.travis.yml','composer.lock','.travis.yml','deploy','__dev_readme.txt','vendor','.DS_Store','.git','wordpress-dev-light-php-only-0.1','.gitignore','wordpress-from-wordpress.org-download','wp-cli.phar','karma.conf.js','wp-content'} "$PROJECT_ROOT/" "$PLUGIN_BUILDS_PATH/$PLUGIN"
+# include option is simple but risky since when if we add some new plugin files/folders we may forget to include that, so should better keep in mind and take care of it. 
+# rsync -avr --exclude={'LICENSE','node_modules','package.json','bin','.phpcs.xml.dist','build','.phpintel','build-cfg','phpunit.xml.dist','codeception.dist.php.7.2.yml','codeception.dist.yml','tests','codeception.yml','travis.sh','composer.json','__.travis.yml','composer.lock','.travis.yml','deploy','__dev_readme.txt','vendor','.DS_Store','.git','wordpress-dev-light-php-only-0.1','.gitignore','wordpress-from-wordpress.org-download','wp-cli.phar','karma.conf.js','wp-content'} "$PROJECT_ROOT/" "$PLUGIN_BUILDS_PATH/$PLUGIN"
+rsync -avr --include={'application','asset','languages','index.php','README.txt','uninstall.php','woo-bundle-choice.php'} "$PROJECT_ROOT/" "$PLUGIN_BUILDS_PATH/$PLUGIN"
 
 # Checkout the SVN repo
 svn co -q "http://svn.wp-plugins.org/$PLUGIN" svn
