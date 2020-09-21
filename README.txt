@@ -233,6 +233,12 @@ Yes, it is.
 5. Home page after plugin fully configured.
 
 == Changelog ==
+= 1.0.2 (Sep 21,2020) =
+  ** New Features ** Being a major update release it contains many exciting features, improvements in user experience, etc.
+  ** UI Widgets ** There are a number of alternate UI widgets added and numerous improvements in UI widgets for non-mobile as well as mobile devices. 
+  ** Fixes ** Some critical fixes to better adhere to wp plugin development standards
+  ** Feel Free to Contact us for Support ** Due to some critical fixes we recommend that you must upgrade to this version, and feel free to contact us as soon as possible if you face any issue during the upgrade. 
+  ** Take Backup ** Since this is a major release we recommend that you take the backup of your site before upgrading. Thanks. 
 = 0.5.70 (Jun 23,2020) =
   ** Fixed critical errors ** Fixes for the button widget not shown at shortcode area. 
 = 0.5.69 (Jun 04,2020) =
