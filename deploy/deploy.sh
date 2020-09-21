@@ -44,7 +44,7 @@ rm -fR "*"
 # create list of exclude based on include definition so include list is still needed 
     # {'application','asset','languages','index.php','README.txt','uninstall.php','woo-bundle-choice.php'}
 exclude_list="{"
-for f in "$PROJECT_ROOT/*"; do
+for f in "$PROJECT_ROOT"/*; do
     if [ "$f" == "application" ] || [ "$f" == "asset" ] || [ "$f" == "languages" ] || [ "$f" == "index.php" ] || [ "$f" == "README.txt" ] || [ "$f" == "uninstall.php" ] || [ "$f" == "woo-bundle-choice.php" ]; 
     then
         tmp="nothing to do"
