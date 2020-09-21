@@ -253,7 +253,6 @@ deploy:
   #
   provider: script
   skip_cleanup: true
-  - pwd
   script: ./deploy/deploy.sh
   on:
     branch: master
