@@ -45,12 +45,13 @@ rm -fR "*"
     # {'application','asset','languages','index.php','README.txt','uninstall.php','woo-bundle-choice.php'}
 exclude_list="{"
 for f in "$PROJECT_ROOT"/*; do
-    if [ "$f" == "application" ] || [ "$f" == "asset" ] || [ "$f" == "languages" ] || [ "$f" == "index.php" ] || [ "$f" == "README.txt" ] || [ "$f" == "uninstall.php" ] || [ "$f" == "woo-bundle-choice.php" ]; 
+    bname=$(basename "$f")
+        
+    if [ "$bname" == "application" ] || [ "$bname" == "asset" ] || [ "$bname" == "languages" ] || [ "$bname" == "index.php" ] || [ "$bname" == "README.txt" ] || [ "$bname" == "uninstall.php" ] || [ "$bname" == "woo-bundle-choice.php" ]; 
     then
         tmp="nothing to do"
     else 
 
-        bname=$(basename "$f")
         if [ "$exclude_list" == "{" ];
         then
             exclude_list="${exclude_list} '${bname}'"
