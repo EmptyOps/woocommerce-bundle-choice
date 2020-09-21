@@ -215,6 +215,7 @@ script:
   - echo_necessary_output
 
   - pwd
+  - ls -l
 
   # - vendor/bin/wpcept run
 
@@ -255,7 +256,7 @@ deploy:
   #
   provider: script
   skip_cleanup: true
-  script: ./deploy/deploy.sh
+  script: /home/travis/build/EmptyOps/woocommerce-bundle-choice/deploy/deploy.sh
   on:
     branch: master
     php: 7.2
