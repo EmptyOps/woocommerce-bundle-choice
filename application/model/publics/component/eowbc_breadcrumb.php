@@ -14,11 +14,16 @@ class EOWBC_Breadcrumb
     public static $first_slug = '';
     public static $second_slug = '';
 
+    public static $first_url = '';
+    public static $second_url = '';
+
     public static $preview_name = '';
 
     public static $first_icon = '';
     public static $second_icon = '';
     public static $preview_icon = '';
+
+    public static $clickable_breadcrumb = false;
 
     public static function eo_wbc_add_css(){        
         wp_die("eo_wbc_add_css called, upgrade the function as per new version DP branch ");
@@ -60,6 +65,18 @@ class EOWBC_Breadcrumb
 
         $set=apply_filters('eowbc_breadcrumb_set',wbc()->session->get('EO_WBC_SETS',FALSE));
         $tmp_set=apply_filters('eowbc_breadcrumb_tmp_set',wbc()->session->get('TMP_EO_WBC_SETS',FALSE));
+
+        self::$first_url = \eo\wbc\model\Category_Attribute::instance()->get_category_link(self::$first_slug);
+        if(!empty(self::$first_url)){
+            self::$first_url=self::$first_url.'EO_WBC=1&BEGIN='.self::$first_slug.'&STEP=1&FIRST=&SECOND=';
+        }
+
+        self::$second_url = \eo\wbc\model\Category_Attribute::instance()->get_category_link(self::$second_slug);
+        if(!empty(self::$second_url)){
+            self::$second_url=self::$second_url.'EO_WBC=1&BEGIN='.self::$second_slug.'&STEP=1&FIRST=&SECOND=';
+        }
+        
+        self::$clickable_breadcrumb = (wbc()->sanitize->get('STEP')==1 && !empty(wbc()->options->get_option('configuration','config_clickable_breadcrumb')));
 
         if(!empty($set) and !is_wp_error($set)){
 
@@ -141,7 +158,7 @@ class EOWBC_Breadcrumb
             <div 
                 data-href="<?php echo (  (empty(wbc()->sanitize->get('EO_CHANGE')) XOR empty(wbc()->sanitize->get('EO_VIEW'))) &&  !empty( wbc()->sanitize->get('FIRST')) && !empty(wbc()->sanitize->get('SECOND')) ? get_bloginfo('url').'/index.php'.wbc()->options->get_option('configuration','review_page')
                     .'?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>3,'FIRST'=>wbc()->sanitize->get('FIRST'),'SECOND'=>wbc()->sanitize->get('SECOND'))):'#' ); ?>" 
-                class="<?php echo (($step==3)?'active ':(($step>3)?'completed ':'disabled')); ?> step">
+                class="<?php echo (($step==3)?'active ':(($step>3)?'completed ':(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb)?'':'disabled'))); ?> step">
                 <div class="content"><?php echo self::$preview_name/*get_option('eo_wbc_collection_title','Preview')*/; ?></div>
             </div>
         </div>
@@ -184,7 +201,7 @@ class EOWBC_Breadcrumb
            
                 $html.='<div data-href="'.( (empty(wbc()->sanitize->get('EO_CHANGE')) XOR empty(wbc()->sanitize->get('EO_VIEW')) ) && !empty(wbc()->sanitize->get('FIRST')) && !empty(wbc()->sanitize->get('SECOND'))?get_bloginfo('url').'/index.php'
                     .wbc()->options->get_option('configuration','review_page')/*get_option('eo_wbc_review_page')*/
-                    .'?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>3,'FIRST'=>wbc()->sanitize->get('FIRST'),'SECOND'=>wbc()->sanitize->get('SECOND'))):'#' ).'" class="'.(($step==3)?'active ':((!(empty(self::$first) and empty(self::$second)))?'completed ':'disabled')).' step" onclick="window.location.href=jQuery(this).data(\'href\');">';
+                    .'?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>3,'FIRST'=>wbc()->sanitize->get('FIRST'),'SECOND'=>wbc()->sanitize->get('SECOND'))):'#' ).'" class="'.(($step==3)?'active ':((!(empty(self::$first) and empty(self::$second)))?'completed ':(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb)?'':'disabled'))).' step" onclick="window.location.href=jQuery(this).data(\'href\');">';
                         ob_start();
                         $template = wbc()->options->get_option('configuration','config_alternate_breadcrumb','default');
                         if(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_2') {                            
@@ -220,7 +237,10 @@ class EOWBC_Breadcrumb
                             } else { 
                                 window.location.href = jQuery(_step).data('begin'); 
                             }
-                        });                    
+                        });
+                        jQuery('[data-clickable_breadcrumb]').on('click',function(){
+                            window.location.href = jQuery(this).data('clickable_breadcrumb'); 
+                        });
                     }); 
                 </script>";               
 

@@ -17,7 +17,7 @@
 
 		<div style="display: inline-block;" class="ui twelve wide field">
 
-			<div class="ui range slider text_slider" id="text_slider_<?php echo $filter['slug'] ?>" data-min="<?php echo $filter['min_value']['name']; ?>" data-max="<?php echo $filter['max_value']['name']; ?>" data-slug="<?php echo $filter['slug'] ?>" data-sep="<?php echo $filter['seprator']; ?>" style="padding-bottom: 0px !important"></div>
+			<div class="ui range slider text_slider wbc" id="text_slider_<?php echo $filter['slug'] ?>" data-min="<?php echo $filter['min_value']['name']; ?>" data-max="<?php echo $filter['max_value']['name']; ?>" data-slug="<?php echo $filter['slug'] ?>" data-sep="<?php echo $filter['seprator']; ?>" style="padding-bottom: 0px !important"></div>
 			<div class="ui tiny form" style="padding:0px 6%;">
 			  <div class="three fields">
 			    <div class="field">	      

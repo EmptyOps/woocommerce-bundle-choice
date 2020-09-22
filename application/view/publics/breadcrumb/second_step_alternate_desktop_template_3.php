@@ -5,7 +5,7 @@
 */
 
 ?>
-<div class="<?php echo (($step==$order)?'active ':(($step>$order)?'completed ':'disabled')); ?> step">
+<div class="<?php echo (($step==$order)?'active ':(($step>$order)?'completed ':(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb)?'':'disabled'))); ?> step" <?php _e((!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb) and !empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second_url))?'data-clickable_breadcrumb="'.\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second_url.'"':''); ?>>
     <div class="ui equal width grid" style="width: 100%;margin-top: -1em !important;">
         <div class="ui grid">
             <div class="column"><?php echo $order; ?></div>
