@@ -286,14 +286,14 @@ class EOWBC_Filter_Widget {
 						background-color:{$active_color} !important;
 					}								
 
-					.ui.slider .inner .track-fill{
+					.ui.slider.wbc .inner .track-fill{
 
 						background-color:".wbc()->options->get_option('appearance_filters','slider_track_backcolor_active',$active_color)/*get_option('eo_wbc_filter_config_slidertrack_color','')*/." !important;
 					}				
 					#advance_filter,#apply_filter,#reset_filter{
 						width: auto !important;
 					}
-					.ui.slider .inner .thumb,#advance_filter,#apply_filter{
+					.ui.slider.wbc .inner .thumb,#advance_filter,#apply_filter{
 						background-color:".wbc()->options->get_option('appearance_filters','slider_nodes_backcolor_active',$active_color)/*get_option('eo_wbc_filter_config_slidernode_color','')*/." !important;
 					}
 					.eo-wbc-container.filters, .eo-wbc-container.filters .ui.header{
