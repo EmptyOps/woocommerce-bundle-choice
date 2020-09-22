@@ -41,20 +41,26 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'sample_data_jewelry')){
 
 			$index++;
 
+			$is_break = false;
 			if( isset($cat['child']) ) {
 				foreach ($cat['child'] as $childcatind => $childcat) {
 
 					if( $index == $post_index ) {
 						$template = $childcat;
 						$template['parent'] = get_term_by('slug',$cat['slug'] , 'product_cat')->term_id;
+						$is_break = true;
 						break;
 					}
 
 					$index++;
 				}
 			}
+
+			if( $is_break ) {
+				break;
+			}
 		}
-				
+
 		call_user_func(array($class_name,'instance'))->create_category(array($template));		
 
 	} elseif(wbc()->sanitize->post('type')=='attr'){

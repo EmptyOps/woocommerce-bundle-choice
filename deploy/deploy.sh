@@ -18,7 +18,7 @@ fi
 WP_ORG_USERNAME="emptyopssphere"
 PLUGIN="woo-bundle-choice"
 PROJECT_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
-PLUGIN_BUILDS_PATH="$PROJECT_ROOT/builds"
+PLUGIN_BUILDS_PATH="$PROJECT_ROOT/build"
 PLUGIN_BUILD_CONFIG_PATH="$PROJECT_ROOT/build-cfg"
 VERSION=$(php -f "$PLUGIN_BUILD_CONFIG_PATH/utils/version.php")
 
@@ -40,7 +40,37 @@ rm -fR "*"
 
 # Copy all but testing and deployment files.
 
-rsync -avr --exclude={'LICENSE','node_modules','package.json','bin','.phpcs.xml.dist','build','.phpintel','build-cfg','phpunit.xml.dist','codeception.dist.php.7.2.yml','codeception.dist.yml','tests','codeception.yml','travis.sh','composer.json','__.travis.yml','composer.lock','.travis.yml','deploy','__dev_readme.txt','vendor','.DS_Store','.git','wordpress-dev-light-php-only-0.1','.gitignore','wordpress-from-wordpress.org-download','wp-cli.phar','karma.conf.js','wp-content'} "$PROJECT_ROOT/" "$PLUGIN_BUILDS_PATH/$PLUGIN"
+## include option is simple but risky since when if we add some new plugin files/folders we may forget to include that, so should better keep in mind and take care of it. 
+# create list of exclude based on include definition so include list is still needed 
+    # {'application','asset','languages','index.php','README.txt','uninstall.php','woo-bundle-choice.php'}
+# exclude_list="{"
+exclude_list=()
+for f in "$PROJECT_ROOT"/*; do
+    bname=$(basename "$f")
+        
+    if [ "$bname" == "application" ] || [ "$bname" == "asset" ] || [ "$bname" == "languages" ] || [ "$bname" == "index.php" ] || [ "$bname" == "README.txt" ] || [ "$bname" == "uninstall.php" ] || [ "$bname" == "woo-bundle-choice.php" ]; 
+    then
+        tmp="nothing to do"
+    else 
+
+        # if [ "$exclude_list" == "{" ];
+        # then
+            # exclude_list="${exclude_list} '${bname}'"
+            exclude_list+=("${bname}")
+        # else
+        #     # exclude_list="${exclude_list}, '${bname}'"
+        #     exclude_list+=("${bname}")
+        # fi
+    fi
+done
+# exclude_list="${exclude_list} }"
+
+# echo "exclude_list... ${exclude_list}"
+echo "exclude_list... ${exclude_list[@]/#/--exclude=}"
+
+# # rsync -avr --exclude={'LICENSE','node_modules','package.json','bin','.phpcs.xml.dist','build','.phpintel','build-cfg','phpunit.xml.dist','codeception.dist.php.7.2.yml','codeception.dist.yml','tests','codeception.yml','travis.sh','composer.json','__.travis.yml','composer.lock','.travis.yml','deploy','__dev_readme.txt','vendor','.DS_Store','.git','wordpress-dev-light-php-only-0.1','.gitignore','wordpress-from-wordpress.org-download','wp-cli.phar','karma.conf.js','wp-content'} "$PROJECT_ROOT/" "$PLUGIN_BUILDS_PATH/$PLUGIN"
+# rsync -avr --exclude=$exclude_list "$PROJECT_ROOT/" "$PLUGIN_BUILDS_PATH/$PLUGIN"
+rsync -avr "${exclude_list[@]/#/--exclude=}" "$PROJECT_ROOT/" "$PLUGIN_BUILDS_PATH/$PLUGIN"
 
 # Checkout the SVN repo
 svn co -q "http://svn.wp-plugins.org/$PLUGIN" svn

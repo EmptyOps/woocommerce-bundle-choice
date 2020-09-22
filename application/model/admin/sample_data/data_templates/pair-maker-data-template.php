@@ -28,6 +28,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
 
     public function get_attributes() {
         $_img_url= constant('EOWBC_ASSET_URL').'img/sample_data/'.$this->asset_folder.'/attributes/'; 
+        $_alphabets_img_url= constant('EOWBC_ASSET_URL').'img/sample_data/'.$this->asset_folder.'/alphabets/'; 
         return array(
                     array(
                         'label' => 'Size',
@@ -37,7 +38,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                     ),
                     array(
                         'label' => 'Colour',
-                        'terms' => array('White','Black','Red','Purpal', 'Blue', 'Green','Yellow','Orange','Gray','Pink','Maroon','Lime','Aqua'),
+                        'terms' => array('White','Black','Red','Purple', 'Blue', 'Green','Yellow','Orange','Gray','Pink','Maroon','Lime','Aqua'),
                         'description' => 'Colour attributes for clothing wear',
                         'slug' => 'wbc_cloth_colour_attr',
                         'thumb' => array($_img_url.'colours/white.png',$_img_url.'colours/black.png',$_img_url.'colours/red.png', $_img_url.'colours/purple.png',$_img_url.'colours/blue.png',$_img_url.'colours/green.png',$_img_url.'colours/yellow.png',$_img_url.'colours/orange.png',$_img_url.'colours/gray.png',$_img_url.'colours/pink.png',$_img_url.'colours/maroon.png',$_img_url.'colours/lime.png',$_img_url.'colours/aqua.png')
@@ -66,12 +67,12 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                         'description' => 'Occasion attributes for clothings wear',
                         'slug' => 'wbc_cloth_occasion_attr'
                     ),
-                    array(
-                        'label' => 'Pattern',
-                        'terms' => array('Plain','Stripes','Checks', 'Plaid', 'Floral','Polka Dots','Printed','Detailing'),        
-                        'description' => 'Pattern attributes for clothings wear',
-                        'slug' => 'wbc_cloth_pattern_attr'
-                    ),
+                    // array(
+                    //     'label' => 'Pattern',
+                    //     'terms' => array('Plain','Stripes','Checks', 'Plaid', 'Floral','Polka Dots','Printed','Detailing'),        
+                    //     'description' => 'Pattern attributes for clothings wear',
+                    //     'slug' => 'wbc_cloth_pattern_attr'
+                    // ),
                     array(
                         'label' => 'Sleeve',
                         'terms' => array('Long sleeve', 'Short sleeve', 'Roll-up sleeve','Sleeveless'),        
@@ -83,7 +84,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                         'terms' => array('Mandrin', 'Band', 'Polo','Funnel','Slim','Spread','Regular','Mao','Notch Lapels'),
                         'description' => 'Collar attributes for clothings wear',
                         'slug' => 'wbc_cloth_collar_attr',
-                        'thumb' => array($_img_url.'collar/Mandrin.svg', $_img_url.'collar/Band.svg', $_img_url.'collar/Polo.svg',$_img_url.'collar/Funnel.svg',$_img_url.'collar/Slim.svg',$_img_url.'collar/Spread.svg',$_img_url.'collar/Regular.svg',$_img_url.'collar/Mao.svg',$_img_url.'collar/Notch Lapels.svg')
+                        'thumb' => array($_alphabets_img_url.'icons8-circled-m-100.png', $_alphabets_img_url.'icons8-circled-b-100.png', $_alphabets_img_url.'icons8-circled-p-100.png',$_alphabets_img_url.'icons8-circled-f-100.png',$_alphabets_img_url.'icons8-circled-s-100.png',$_alphabets_img_url.'icons8-circled-s-100.png',$_alphabets_img_url.'icons8-circled-r-100.png',$_alphabets_img_url.'icons8-circled-m-100.png',$_alphabets_img_url.'icons8-circled-n-100.png')
                     ),
                     array(
                         'label' => 'Closure Type',
@@ -108,7 +109,8 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
 
     public function get_categories() {
         $_img_url= constant('EOWBC_ASSET_URL').'img/sample_data/'.$this->asset_folder.'/category/';    // EO_WBC_PLUGIN_DIR.'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/';
-          
+        $_alphabets_img_url= constant('EOWBC_ASSET_URL').'img/sample_data/'.$this->asset_folder.'/alphabets/';
+
         return array(
                     array(
                         'thumb' => '',
@@ -1210,50 +1212,50 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                         'child'=> 
                         array(
                                 array(
-                                    'thumb' => $_img_url.'Plain.svg',
+                                    'thumb' => $_alphabets_img_url.'icons8-circled-p-100.png',
                                     'name' => 'Plain',
                                     'description' => 'Pattern type plain',
                                     'slug' => 'wbc_pattern_plain_cat'
                                 ),
                                 array(
-                                    'thumb' => $_img_url.'Stripes.svg',
+                                    'thumb' => $_alphabets_img_url.'icons8-circled-s-100.png',
                                     'name' => 'Stripes',
                                     'description' => 'Pattern type stripes',
                                     'slug' => 'wbc_pattern_stripes_cat'
                                 ),
                                 array(
-                                    'thumb' => $_img_url.'Checks.svg',
-                                    'thumb_selected' => $_img_url.'pattern_selected.png',
+                                    'thumb' => $_alphabets_img_url.'icons8-circled-c-100.png',
+                                    // 'thumb_selected' => $_alphabets_img_url.'pattern_selected.png',
                                     'name' => 'Checks',
                                     'description' => 'Pattern type checks',
                                     'slug' => 'wbc_pattern_checks_cat'
                                 ),
                                 array(
-                                    'thumb' => $_img_url.'Plaid.svg',
+                                    'thumb' => $_alphabets_img_url.'icons8-circled-p-100.png',
                                     'name' => 'Plaid',
                                     'description' => 'Pattern type plaid',
                                     'slug' => 'wbc_pattern_plaid_cat'
                                 ),
                                 array(
-                                    'thumb' => $_img_url.'Floral.svg',
+                                    'thumb' => $_alphabets_img_url.'icons8-circled-f-100.png',
                                     'name' => 'Floral',
                                     'description' => 'Pattern type floral',
                                     'slug' => 'wbc_pattern_floral_cat'
                                 ),
                                 array(
-                                    'thumb' => $_img_url.'Polka Dots.svg',
+                                    'thumb' => $_alphabets_img_url.'icons8-circled-p-100.png',
                                     'name' => 'Polka Dots',
                                     'description' => 'Pattern type polka dots',
                                     'slug' => 'wbc_pattern_polkadots_cat'
                                 ),
                                 array(
-                                    'thumb' => $_img_url.'Printed.svg',
+                                    'thumb' => $_alphabets_img_url.'icons8-circled-p-100.png',
                                     'name' => 'Printed',
                                     'description' => 'Pattern type printed',
                                     'slug' => 'wbc_pattern_printed_cat'
                                 ),
                                 array(
-                                    'thumb' => $_img_url.'Detailing.svg',
+                                    'thumb' => $_alphabets_img_url.'icons8-circled-d-100.png',
                                     'name' => 'Detailing',
                                     'description' => 'Pattern type detailing',
                                     'slug' => 'wbc_pattern_detailing_cat'
@@ -1889,7 +1891,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                 'advance'=>"0",
                 'dependent'=>"0",
                 'input'=>"icon_text",
-                'column_width'=> "43.75",
+                'column_width'=> "100",    // "43.75",
                 'order'=>"1",
                 'template'=>'fc1',
                 'help'=>0,
@@ -1905,7 +1907,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                 'advance'=>"1",
                 'dependent'=>"0",
                 'input'=>"text_slider",
-                'column_width'=> "43.75",
+                'column_width'=> "50",
                 'order'=>"2",
                 'template'=>'fc1',
                 'help'=>0,
@@ -1921,8 +1923,24 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                 'advance'=>"0",
                 'dependent'=>"0",
                 'input'=>"text_slider",
-                'column_width'=> "43.75",
+                'column_width'=> "50",
                 'order'=>"3",
+                'template'=>'fc1',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1
+            );
+        }
+        if(!empty($__att__['wbc_cloth_sleeve_attr'])){
+            $filter['d_fconfig'][]=array(
+                'name'=>$__att__['wbc_cloth_sleeve_attr'][0],
+                'type'=>"1",
+                'label'=>$__att__['wbc_cloth_sleeve_attr'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"text_slider",
+                'column_width'=> "50",
+                'order'=>"4",
                 'template'=>'fc1',
                 'help'=>0,
                 'help_text'=>'',
@@ -1937,8 +1955,8 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                 'advance'=>"1",
                 'dependent'=>"0",
                 'input'=>"text_slider",
-                'column_width'=> "43.75",
-                'order'=>"4",
+                'column_width'=> "50",
+                'order'=>"5",
                 'template'=>'fc1',
                 'help'=>0,
                 'help_text'=>'',
@@ -1954,22 +1972,6 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                 'dependent'=>"0",
                 'input'=>"text_slider",
                 'column_width'=> "100",
-                'order'=>"5",
-                'template'=>'fc1',
-                'help'=>0,
-                'help_text'=>'',
-                'enabled'=>1
-            );
-        }
-        if(!empty($__att__['wbc_cloth_sleeve_attr'])){
-            $filter['d_fconfig'][]=array(
-                'name'=>$__att__['wbc_cloth_sleeve_attr'][0],
-                'type'=>"1",
-                'label'=>$__att__['wbc_cloth_sleeve_attr'][1],
-                'advance'=>"1",
-                'dependent'=>"0",
-                'input'=>"text_slider",
-                'column_width'=> "43.75",
                 'order'=>"6",
                 'template'=>'fc1',
                 'help'=>0,
@@ -1985,7 +1987,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                 'advance'=>"1",
                 'dependent'=>"0",
                 'input'=>"icon_text",
-                'column_width'=> "43.75",
+                'column_width'=> "100",
                 'order'=>"7",
                 'template'=>'fc1',
                 'help'=>0,
@@ -2017,7 +2019,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                 'advance'=>"0",
                 'dependent'=>"0",
                 'input'=>"text_slider",
-                'column_width'=> "43.75",
+                'column_width'=> "50",
                 'order'=>"1",
                 'template'=>'sc1',
                 'help'=>0,
@@ -2033,7 +2035,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                 'advance'=>"0",
                 'dependent'=>"0",
                 'input'=>"text_slider",
-                'column_width'=> "43.75",
+                'column_width'=> "50",
                 'order'=>"2",
                 'template'=>'sc1',
                 'help'=>0,
@@ -2065,7 +2067,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                 'advance'=>"0",
                 'dependent'=>"0",
                 'input'=>"text_slider",
-                'column_width'=> "43.75",
+                'column_width'=> "50",
                 'order'=>"9",
                 'template'=>'fc1',
                 'help'=>0,
@@ -3434,7 +3436,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
 
                     'pa_wbc_cloth_collar_attr'=>array(
                               'name'=>'pa_wbc_cloth_collar_attr',
-                              'value'=>'Notch',
+                              'value'=>'Notch Lapels',
                               'position'=>5,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -3445,7 +3447,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                           array(
                             'regular_price'=>'1550',
                             'price'=>'1545',
-                            'terms'=>array('pa_wbc_cloth_size_attr'=>'L','pa_wbc_cloth_colour_attr'=>'Blue','pa_wbc_cloth_neck_attr'=>'Collared neckline','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_sleeve_attr'=>'Long sleeve','pa_wbc_cloth_collar_attr'=>'Notch')
+                            'terms'=>array('pa_wbc_cloth_size_attr'=>'L','pa_wbc_cloth_colour_attr'=>'Blue','pa_wbc_cloth_neck_attr'=>'Collared neckline','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_sleeve_attr'=>'Long sleeve','pa_wbc_cloth_collar_attr'=>'Notch Lapels')
                           )
                    ) 
         ),
@@ -3706,7 +3708,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
 
                     'pa_wbc_cloth_collar_attr'=>array(
                               'name'=>'pa_wbc_cloth_collar_attr',
-                              'value'=>'Notch',
+                              'value'=>'Notch Lapels',
                               'position'=>5,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -3717,7 +3719,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                           array(
                             'regular_price'=>'1850',
                             'price'=>'1745',
-                            'terms'=>array('pa_wbc_cloth_size_attr'=>'L','pa_wbc_cloth_colour_attr'=>'Black','pa_wbc_cloth_neck_attr'=>'Collared neckline','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_sleeve_attr'=>'Long sleeve','pa_wbc_cloth_collar_attr'=>'Notch')
+                            'terms'=>array('pa_wbc_cloth_size_attr'=>'L','pa_wbc_cloth_colour_attr'=>'Black','pa_wbc_cloth_neck_attr'=>'Collared neckline','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_sleeve_attr'=>'Long sleeve','pa_wbc_cloth_collar_attr'=>'Notch Lapels')
                           )
                    )
           ),
@@ -3775,7 +3777,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
 
                     'pa_wbc_cloth_collar_attr'=>array(
                               'name'=>'pa_wbc_cloth_collar_attr',
-                              'value'=>'Notch',
+                              'value'=>'Notch Lapels',
                               'position'=>5,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -3786,7 +3788,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                           array(
                             'regular_price'=>'750',
                             'price'=>'730',
-                            'terms'=>array('pa_wbc_cloth_size_attr'=>'XL','pa_wbc_cloth_colour_attr'=>'Gray','pa_wbc_cloth_neck_attr'=>'Collared neckline','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_sleeve_attr'=>'Long sleeve','pa_wbc_cloth_collar_attr'=>'notes_search(database_name, keywords)')
+                            'terms'=>array('pa_wbc_cloth_size_attr'=>'XL','pa_wbc_cloth_colour_attr'=>'Gray','pa_wbc_cloth_neck_attr'=>'Collared neckline','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_sleeve_attr'=>'Long sleeve','pa_wbc_cloth_collar_attr'=>'Notch Lapels')
                           )
                    ) 
         ),
@@ -3810,7 +3812,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                             ),
                     'pa_wbc_cloth_colour_attr'=>array(
                               'name'=>'pa_wbc_cloth_colour_attr',
-                              'value'=>'Purpal',
+                              'value'=>'Purple',
                               'position'=>1,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -3843,7 +3845,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
 
                     'pa_wbc_cloth_collar_attr'=>array(
                               'name'=>'pa_wbc_cloth_collar_attr',
-                              'value'=>'Notch',
+                              'value'=>'Notch Lapels',
                               'position'=>5,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -3854,7 +3856,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                           array(
                             'regular_price'=>'850',
                             'price'=>'840',
-                            'terms'=>array('pa_wbc_cloth_size_attr'=>'L','pa_wbc_cloth_colour_attr'=>'Purpal','pa_wbc_cloth_neck_attr'=>'Collared neckline','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_sleeve_attr'=>'Long sleeve','pa_wbc_cloth_collar_attr'=>'Notch')
+                            'terms'=>array('pa_wbc_cloth_size_attr'=>'L','pa_wbc_cloth_colour_attr'=>'Purple','pa_wbc_cloth_neck_attr'=>'Collared neckline','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_sleeve_attr'=>'Long sleeve','pa_wbc_cloth_collar_attr'=>'Notch Lapels')
                           )
                    ) 
         ),
@@ -4728,7 +4730,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
 
                     'pa_wbc_cloth_collar_attr'=>array(
                               'name'=>'pa_wbc_cloth_collar_attr',
-                              'value'=>'Notch',
+                              'value'=>'Notch Lapels',
                               'position'=>5,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -4739,7 +4741,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                           array(
                             'regular_price'=>'950',
                             'price'=>'945',
-                            'terms'=>array('pa_wbc_cloth_size_attr'=>'XL','pa_wbc_cloth_colour_attr'=>'Blue','pa_wbc_cloth_neck_attr'=>'Collared neckline','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_sleeve_attr'=>'Long sleeve','pa_wbc_cloth_collar_attr'=>'Notch')
+                            'terms'=>array('pa_wbc_cloth_size_attr'=>'XL','pa_wbc_cloth_colour_attr'=>'Blue','pa_wbc_cloth_neck_attr'=>'Collared neckline','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_sleeve_attr'=>'Long sleeve','pa_wbc_cloth_collar_attr'=>'Notch Lapels')
                           )
                    ) 
         ),
@@ -4796,7 +4798,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
 
                     'pa_wbc_cloth_collar_attr'=>array(
                               'name'=>'pa_wbc_cloth_collar_attr',
-                              'value'=>'Notch',
+                              'value'=>'Notch Lapels',
                               'position'=>5,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -4807,7 +4809,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                           array(
                             'regular_price'=>'1550',
                             'price'=>'1545',
-                            'terms'=>array('pa_wbc_cloth_size_attr'=>'L','pa_wbc_cloth_colour_attr'=>'Purple','pa_wbc_cloth_neck_attr'=>'Collared neckline','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_sleeve_attr'=>'Long sleeve','pa_wbc_cloth_collar_attr'=>'Notch')
+                            'terms'=>array('pa_wbc_cloth_size_attr'=>'L','pa_wbc_cloth_colour_attr'=>'Purple','pa_wbc_cloth_neck_attr'=>'Collared neckline','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_sleeve_attr'=>'Long sleeve','pa_wbc_cloth_collar_attr'=>'Notch Lapels')
                           )
                    ) 
         ),
@@ -4864,7 +4866,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
 
                     'pa_wbc_cloth_collar_attr'=>array(
                               'name'=>'pa_wbc_cloth_collar_attr',
-                              'value'=>'Notch',
+                              'value'=>'Notch Lapels',
                               'position'=>5,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -4875,7 +4877,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                           array(
                             'regular_price'=>'1250',
                             'price'=>'1245',
-                            'terms'=>array('pa_wbc_cloth_size_attr'=>'M','pa_wbc_cloth_colour_attr'=>'Gray','pa_wbc_cloth_neck_attr'=>'Collared neckline','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_sleeve_attr'=>'Long sleeve','pa_wbc_cloth_collar_attr'=>'Notch')
+                            'terms'=>array('pa_wbc_cloth_size_attr'=>'M','pa_wbc_cloth_colour_attr'=>'Gray','pa_wbc_cloth_neck_attr'=>'Collared neckline','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_sleeve_attr'=>'Long sleeve','pa_wbc_cloth_collar_attr'=>'Notch Lapels')
                           )
                    ) 
         ),
@@ -4932,7 +4934,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
 
                     'pa_wbc_cloth_collar_attr'=>array(
                               'name'=>'pa_wbc_cloth_collar_attr',
-                              'value'=>'Notch',
+                              'value'=>'Notch Lapels',
                               'position'=>5,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -4943,7 +4945,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                           array(
                             'regular_price'=>'1200',
                             'price'=>'1180',
-                            'terms'=>array('pa_wbc_cloth_size_attr'=>'XL','pa_wbc_cloth_colour_attr'=>'Orange','pa_wbc_cloth_neck_attr'=>'V neckline','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_sleeve_attr'=>'Long sleeve','pa_wbc_cloth_collar_attr'=>'Notch')
+                            'terms'=>array('pa_wbc_cloth_size_attr'=>'XL','pa_wbc_cloth_colour_attr'=>'Orange','pa_wbc_cloth_neck_attr'=>'V neckline','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_sleeve_attr'=>'Long sleeve','pa_wbc_cloth_collar_attr'=>'Notch Lapels')
                           )
                    ) 
         ),
@@ -5580,7 +5582,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                             ),
                     'pa_wbc_cloth_colour_attr'=>array(
                               'name'=>'pa_wbc_cloth_colour_attr',
-                              'value'=>'Purpal',
+                              'value'=>'Purple',
                               'position'=>1,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -5624,7 +5626,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                           array(
                             'regular_price'=>'1200',
                             'price'=>'1180',
-                            'terms'=>array('pa_wbc_cloth_size_attr'=>'M','pa_wbc_cloth_colour_attr'=>'Purpal','pa_wbc_cloth_neck_attr'=>'Crew','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_sleeve_attr'=>'Long sleeve','pa_wbc_cloth_collar_attr'=>'Spread')
+                            'terms'=>array('pa_wbc_cloth_size_attr'=>'M','pa_wbc_cloth_colour_attr'=>'Purple','pa_wbc_cloth_neck_attr'=>'Crew','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_sleeve_attr'=>'Long sleeve','pa_wbc_cloth_collar_attr'=>'Spread')
                           )
                    ) 
         ),
@@ -5921,7 +5923,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                             ),
                     'pa_wbc_cloth_colour_attr'=>array(
                               'name'=>'pa_wbc_cloth_colour_attr',
-                              'value'=>'Purpal',
+                              'value'=>'Purple',
                               'position'=>1,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -5965,7 +5967,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                           array(
                             'regular_price'=>'450',
                             'price'=>'440',
-                            'terms'=>array('pa_wbc_cloth_size_attr'=>'M','pa_wbc_cloth_colour_attr'=>'Purpal','pa_wbc_cloth_neck_attr'=>'Collared neckline','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_sleeve_attr'=>'Long sleeve','pa_wbc_cloth_collar_attr'=>'Regular')
+                            'terms'=>array('pa_wbc_cloth_size_attr'=>'M','pa_wbc_cloth_colour_attr'=>'Purple','pa_wbc_cloth_neck_attr'=>'Collared neckline','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_sleeve_attr'=>'Long sleeve','pa_wbc_cloth_collar_attr'=>'Regular')
                           )
                    ) 
         ),
@@ -6125,7 +6127,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                             ),
                     'pa_wbc_cloth_colour_attr'=>array(
                               'name'=>'pa_wbc_cloth_colour_attr',
-                              'value'=>'Purpal',
+                              'value'=>'Purple',
                               'position'=>1,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -6169,7 +6171,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                           array(
                             'regular_price'=>'1550',
                             'price'=>'1545',
-                            'terms'=>array('pa_wbc_cloth_size_attr'=>'L','pa_wbc_cloth_colour_attr'=>'Purpal','pa_wbc_cloth_neck_attr'=>'Crew','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_sleeve_attr'=>'Long sleeve','pa_wbc_cloth_collar_attr'=>'Spread')
+                            'terms'=>array('pa_wbc_cloth_size_attr'=>'L','pa_wbc_cloth_colour_attr'=>'Purple','pa_wbc_cloth_neck_attr'=>'Crew','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_sleeve_attr'=>'Long sleeve','pa_wbc_cloth_collar_attr'=>'Spread')
                           )
                    ) 
         ),
@@ -11108,8 +11110,13 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
 
         // set dynamic variables here for the parent class 
 
+        // override since the category structure is unique for mapping specific requirements 
+        $catat_category_new = $catat_category;
+        $catat_category_new[0] = $catat_category_new[2];
+        $catat_category_new[1] = $catat_category_new[3];
+
         // and then call parent function 
-        parent::set_configs_after_categories($catat_category);
+        parent::set_configs_after_categories($catat_category_new);
     }
 
     public function set_configs_after_attributes() {

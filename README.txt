@@ -4,8 +4,8 @@ Tags: woocommerce,product bundle,product bundles,woocommerce product bundles,bun
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=hi0001234d1gmail.com&item_name=+Favorite+Woo+Choice+Plugin++Download+Woo+Choice+Plugin+Donation¤cy_code=USD&source=url
 Requires at least: 3.5
 Tested up to: 5.5
-Requires PHP: 5.3
-Stable tag: 1.0.0
+Requires PHP: 5.6
+Stable tag: 1.0.2
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -148,7 +148,7 @@ If you are interested in our plugin, click [here](https://www.woo-product-bundle
 
 = Compatibility with other plugins/Officially tested plugins =
 
-We have tested WooCommerce Product Bundle Choice with Wordpress 3.5 to 5.4 and WooCommerce 2.0 to 4.0.1 and our plugin is technically compatible with all the other plugins.
+We have tested WooCommerce Product Bundle Choice with Wordpress 3.5 to 5.5 and WooCommerce 2.0 to 4.2.0 and our plugin is technically compatible with all the other plugins.
 
 = Live Demo  =
 Now that you know how this plugin works, is there any reason to not use it? Do you want to see the live demo?
@@ -233,6 +233,12 @@ Yes, it is.
 5. Home page after plugin fully configured.
 
 == Changelog ==
+= 1.0.2 (Sep 21,2020) =
+  ** New Features ** Being a major update release it contains many exciting features, improvements in user experience, etc.
+  ** UI Widgets ** There are a number of alternate UI widgets added and numerous improvements in UI widgets for non-mobile as well as mobile devices. 
+  ** Fixes ** Some critical fixes to better adhere to wp plugin development standards
+  ** Feel Free to Contact us for Support ** Due to some critical fixes we recommend that you must upgrade to this version, and feel free to contact us as soon as possible if you face any issue during the upgrade. 
+  ** Take Backup ** Since this is a major release we recommend that you take the backup of your site before upgrading. Thanks. 
 = 0.5.70 (Jun 23,2020) =
   ** Fixed critical errors ** Fixes for the button widget not shown at shortcode area. 
 = 0.5.69 (Jun 04,2020) =

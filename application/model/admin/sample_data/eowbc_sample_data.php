@@ -790,7 +790,9 @@ class Eowbc_Sample_Data {
 		    					if(is_array($attr_term_id)) {
 		    						$_attr_term_id=isset($attr_term_id['term_id']) ? $attr_term_id['term_id'] : null;
 		    						if(!empty($_attr_term_id)) {
-		    							update_term_meta( $_attr_term_id, '_attachment', wp_get_attachment_url( $thumb_id ) );	
+
+		    							update_term_meta( $_attr_term_id, 'pa_'.$data['slug'].'_attachment', wp_get_attachment_url( $thumb_id ) );
+		    							update_term_meta( $_attr_term_id, sanitize_title($term).'_attachment', wp_get_attachment_url( $thumb_id ) );
 		    						}		    						
 		    					}
 							}		    								    			
@@ -839,7 +841,9 @@ class Eowbc_Sample_Data {
 		    if(!is_wp_error($id) || isset($id->error_data['term_exists'])) {
 
 		    	$thumb_id=0;
-		    	$thumb_id=$this->add_image_gallary($cat['thumb']);
+		    	if( isset($cat['thumb']) ) {
+			    	$thumb_id=$this->add_image_gallary($cat['thumb']);
+			    }
 
 		    	$cat_id = null;
 		    	if(is_array($id)) {
