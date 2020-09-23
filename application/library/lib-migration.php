@@ -21,6 +21,8 @@ if(!class_exists('WBC_Migration')) {
 
 		public function run() {
 			
+			// wp_die('migration run called...');
+
 			//$version = wbc()->options->get_option('_system','version', false);
 
 			//added extra check for version on 10-07-2020

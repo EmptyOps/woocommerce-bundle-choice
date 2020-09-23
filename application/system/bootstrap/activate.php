@@ -20,11 +20,13 @@ class Activate {
 	}	
 
 	public function run() {
-		//die();
+		// wp_die('activate run called...');
 		$this->init_options();
 		$this->add_pages();
 		$this->add_table();
-		$this->migrate();
+
+		// commented since now being called on each page load, from admin class
+		// $this->migrate();
 
 		add_action( 'activated_plugin',function($plugin){
 			if( in_array($plugin,array('woocommerce-bundle-choice/woocommerce-bundle-choice.php','woocommerce-bundle-choice/woo-bundle-choice.php','woo-bundle-choice/woocommerce-bundle-choice.php','woo-bundle-choice/woo-bundle-choice.php') ) ) {
