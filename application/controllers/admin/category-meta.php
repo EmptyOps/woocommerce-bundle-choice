@@ -84,7 +84,7 @@ class Category_Meta {
 				<br/>				
 				<div>					
 					<button class="ui button wbc_thumb_button button" style="padding: 0.6em;">
-						<?php _e('Choose Image', 'woo-bundle-choice'); ?>						
+						<?php _e(eowbc_lang('Choose Image'), 'woo-bundle-choice'); ?>						
 					</button>					
 				</div>
 				
@@ -92,9 +92,9 @@ class Category_Meta {
 
 					jQuery(document).on("click",".wbc_thumb_button",function(){
 						wp_media = wp.media({
-							title: 'Filter Selected Image',
+							title: eowbc_lang('Filter Selected Image'),
 							button: {
-								text: 'Choose Image'
+								text: eowbc_lang('Choose Image')
 							},
 							multiple: false
 						})
@@ -159,7 +159,7 @@ class Category_Meta {
 	        } else {
 	            $src = $woocommerce->plugin_url() . '/assets/images/placeholder.png';
 	        }			
-			$columns .= '<img src="' . esc_url( $src ) . '" alt="' . esc_attr__( 'Thumbnail', 'woo-bundle-choice' ) . '" class="wp-post-image" height="48" width="48" />';
+			$columns .= '<img src="' . esc_url( $src ) . '" alt="' . esc_attr__( eowbc_lang('Thumbnail'), 'woo-bundle-choice' ) . '" class="wp-post-image" height="48" width="48" />';
 		}
 		//die($columns);
 		return $columns;

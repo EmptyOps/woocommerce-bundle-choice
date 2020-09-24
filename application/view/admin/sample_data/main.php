@@ -135,7 +135,7 @@ box-shadow: none;">
 	        function eowbc_add_catat(index){
 
 	            if(process_flag=='cat' && index>=cat_value){
-	            	var msg = 'There is some error while finishing the category creation process, please contact Sphere Plugins Support for a quick fix on this if the problem persist.';
+	            	var msg = eowbc_lang('There is some error while finishing the category creation process, please contact Sphere Plugins Support for a quick fix on this if the problem persist.');
 
 	                //step 2 redirect;
 	                var data = {	                
@@ -168,7 +168,7 @@ box-shadow: none;">
 			        });	
 	                return false;
 	            } else if(process_flag=='attr' && index>=attr_value) {
-	            	var msg = 'There is some error while finishing the attribute creation process, please contact Sphere Plugins Support for a quick fix on this if the problem persist.';
+	            	var msg = eowbc_lang('There is some error while finishing the attribute creation process, please contact Sphere Plugins Support for a quick fix on this if the problem persist.');
 
 	            	//step 3 redirect;
 	            	var data = {	                
@@ -261,13 +261,13 @@ box-shadow: none;">
 
 	                if(cat_value>0){
 	                	process_flag = 'cat';
-	                	btn_label = 'Categories';
+	                	btn_label = eowbc_lang('Categories');
 	                	main_categories_size = <?php echo sizeof($_category);?>;
 	                	cat_value = <?php echo $sample_data_obj->get_model()->get_categories_size();?>;
 	                	btn_total = cat_value;
 	                } else if(attr_value>0){
 	                	process_flag = 'attr';
-	                	btn_label = 'Attributes';
+	                	btn_label = eowbc_lang('Attributes');
 	                	attr_value = <?php echo $sample_data_obj->get_model()->get_attributes_size();?>;
 	                	btn_total = attr_value;
 	                }

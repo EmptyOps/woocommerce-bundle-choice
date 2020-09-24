@@ -61,7 +61,7 @@ class Options {
 								$selected_item =  sprintf( '%s',esc_attr( $selected_item->name ));
 							}
 						} else {
-							$selected_item ='Choose an option';	
+							$selected_item =eowbc_lang('Choose an option');	
 						}
 					} else{
 						$selected_item ='Choose an option';
@@ -122,7 +122,7 @@ class Options {
 		$id                    = $args[ 'id' ] ? $args[ 'id' ] : sanitize_title( $attribute );
 		$class                 = $args[ 'class' ];
 		$show_option_none      = $args[ 'show_option_none' ] ? true : false;
-		$show_option_none_text = $args[ 'show_option_none' ] ? $args[ 'show_option_none' ] : esc_html__('Choose an option'); // We'll do our best to hide the placeholder, but we'll need to show something when resetting options.
+		$show_option_none_text = $args[ 'show_option_none' ] ? $args[ 'show_option_none' ] : esc_html__(eowbc_lang('Choose an option')); // We'll do our best to hide the placeholder, but we'll need to show something when resetting options.
 		
 		if ( empty( $options ) && ! empty( $product ) && ! empty( $attribute ) ) {
 			$attributes = $product->get_variation_attributes();

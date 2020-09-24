@@ -92,7 +92,7 @@ $form['data'] = array(
 						'type'=>'select',
 						'value'=>'0',
 						'sanitize'=>'sanitize_text_field',
-						'options'=>array( 'between'=>'Between', 'in'=>'In' ),
+						'options'=>array( 'between'=>eowbc_lang('Between'), 'in'=>eowbc_lang('In') ),
 						'class'=>array('fluid'),
 						'size_class'=>array('four','wide','jpc_rule_fields'),
 						'next_inline'=>true,
@@ -389,7 +389,7 @@ $form['data'] = array(
 						'attr'=>array("data-action='save'"),
 						'inline'=>false,
 
-						'visible_info'=>array( 'label'=>'(Upon clicking the \'Save and Update Prices\' button, it may take some time to update product prices in bulk.)',
+						'visible_info'=>array( 'label'=>eowbc_lang('(Upon clicking the \'Save and Update Prices\' button, it may take some time to update product prices in bulk.)'),
 								'type'=>'visible_info',
 								'class'=>array('fluid', 'small'),
 								'size_class'=>array('sixteen','wide'),

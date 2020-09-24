@@ -58,7 +58,7 @@ class Eowbc_Configuration {
 	}	
 
 	public function save( $form_definition ) {
-		$res = array( "type"=>"success", "msg"=>"Updated successfully!" );		
+		$res = array( "type"=>"success", "msg"=>eowbc_lang("Updated successfully!") );		
 		
 		wbc()->sanitize->clean($form_definition);	    
     	wbc()->validate->check($form_definition);

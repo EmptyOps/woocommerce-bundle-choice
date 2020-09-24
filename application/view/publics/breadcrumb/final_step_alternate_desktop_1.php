@@ -9,7 +9,7 @@
 
     <div class="column">3</div>
     <div class="column" style="text-align: left;">
-        <div class="description">Complete</div>
+        <div class="description"><?php echo eowbc_lang('Complete'); ?></div>
         <div class="title"><?php echo $preview_name; ?></div>
         <div>&nbsp;</div>
     </div>                                                                     

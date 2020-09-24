@@ -9,7 +9,7 @@ if(!empty($product_data)):
 <table class="ui compact celled definition table" style="clear:both;">
     <thead style="text-align:center;">
       <tr>
-        <th style="border-top:1px solid rgba(34,36,38,.1); border-left:1px solid rgba(34,36,38,.1);">Specifications</th>
+        <th style="border-top:1px solid rgba(34,36,38,.1); border-left:1px solid rgba(34,36,38,.1);"><?php echo eowbc_lang('Specifications'); ?></th>
         <?php foreach ($product_data as $spec):?>
             <th><?php _e($spec[0]); ?></th>                         
         <?php endforeach; ?>                    

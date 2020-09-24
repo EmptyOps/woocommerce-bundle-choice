@@ -40,7 +40,7 @@ class Customizer {
 		add_action('customize_register', function($wp_customize) {
 	        //adding section in wordpress customizer   
 	        $wp_customize->add_section('woo_bundle_choice', array(
-	            'title'          => 'Woo Bundle Choice',
+	            'title'          => eowbc_lang('Woo Bundle Choice'),
 	            'active_callback' => 'is_front_page'
 	        ));
 
@@ -51,7 +51,7 @@ class Customizer {
 	        ));
 
 	        $wp_customize->add_control('btn_position_setting_selector_text', array(
-	            'label'   => "Click below to enable section and select area on the home page and then buttons will appear in this area.",
+	            'label'   => eowbc_lang("Click below to enable section and select area on the home page and then buttons will appear in this area."),
 	            'section' => 'woo_bundle_choice',
 	            'settings'   => 'btn_position_setting_text',
 	            'type'    => 'text',            
@@ -59,7 +59,7 @@ class Customizer {
 
 	        
 	        $wp_customize->add_setting('btn_position_setting_btn', array(
-	            'default'        => 'Enable Selection',
+	            'default'        => eowbc_lang('Enable Selection'),
 	            'type' => 'option',
 	        ));
 

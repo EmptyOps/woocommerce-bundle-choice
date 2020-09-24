@@ -20,7 +20,7 @@ class Filters_Shortcode extends Sample_Data {
         $this->feature_key = 'filters_shortcode';  
 
         $this->feature_title = wbc()->config->get_bonus_features()[$this->feature_key];    
-        $this->help_info[2] = "After this step is done, you should add the shortcode [...] to the page where you want to display filters";   //add help info for step 2
+        $this->help_info[2] = eowbc_lang("After this step is done, you should add the shortcode [...] to the page where you want to display filters");   //add help info for step 2
 
         wbc()->load->model('admin/sample_data/eowbc_sample_data');
         wbc()->load->model('admin/sample_data/eowbc_filters_shortcode');

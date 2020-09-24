@@ -9,7 +9,7 @@
 		<p>
 			<span class="ui header">Price</span>				
 			<?php if($reset): ?>
-			&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_price(event,'<?php echo $min; ?>','<?php echo $max; ?>')">&nbsp;<u>reset</u></span>
+			&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_price(event,'<?php echo $min; ?>','<?php echo $max; ?>')">&nbsp;<u><?php echo eowbc_lang('reset'); ?></u></span>
 			<?php endif; ?>
 		</p>			
 		<div class="ui tiny form">

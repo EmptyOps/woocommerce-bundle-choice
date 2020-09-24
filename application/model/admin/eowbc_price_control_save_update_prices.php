@@ -259,7 +259,7 @@ class Eowbc_Price_Control_Save_Update_Prices {
 	    }
 	    else {
 	    	$res["type"] = "error";
-	    	$res["msg"] = "No input data provided";
+	    	$res["msg"] = eowbc_lang("No input data provided");
 	    }
 
         return $res;

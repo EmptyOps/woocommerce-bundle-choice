@@ -125,7 +125,7 @@ class Product {
 
                 add_action('woocommerce_after_add_to_cart_button',function(){                
                     // echo "<button href='#' id='eo_wbc_add_to_cart' class='single_add_to_cart_button button alt make_pair btn btn-default'>".get_option('eo_wbc_pair_text',__('Add to pair','woo-bundle-choice'))."</button>";
-                    echo "<button href='#' id='eo_wbc_add_to_cart' class='single_add_to_cart_button button alt make_pair btn btn-default'>".wbc()->options->get_option('configuration','label_make_pair',__('Add to pair','woo-bundle-choice'))."</button>";
+                    echo "<button href='#' id='eo_wbc_add_to_cart' class='single_add_to_cart_button button alt make_pair btn btn-default'>".wbc()->options->get_option('configuration','label_make_pair',__(eowbc_lang('Add to pair'),'woo-bundle-choice'))."</button>";
                 });
             }
             //Add css to the head
@@ -173,11 +173,11 @@ class Product {
             // if($category == get_option('eo_wbc_first_slug')){
             if($category == wbc()->options->get_option('configuration','first_slug')){
                 // return get_option('eo_wbc_add_to_cart_text_first', __('Continue', 'woo-bundle-choice'));
-                return wbc()->options->get_option('appearance_product_page','fc_atc_button_text',__('Continue', 'woo-bundle-choice'));
+                return wbc()->options->get_option('appearance_product_page','fc_atc_button_text',__(eowbc_lang('Continue'), 'woo-bundle-choice'));
             // } elseif( $category == get_option('eo_wbc_second_slug') ) {
             } elseif( $category == wbc()->options->get_option('configuration','second_slug')) {
                 // return get_option('eo_wbc_add_to_cart_text_second', __('Continue', 'woo-bundle-choice'));
-                return wbc()->options->get_option('appearance_product_page','sc_atc_button_text',__('Continue', 'woo-bundle-choice'));
+                return wbc()->options->get_option('appearance_product_page','sc_atc_button_text',__(eowbc_lang('Continue'), 'woo-bundle-choice'));
             }            
         });
     }
@@ -254,15 +254,15 @@ class Product {
             // if($category == get_option('eo_wbc_first_slug')){
             if($category == wbc()->options->get_option('configuration','first_slug')){
                 // $btn_text = get_option('eo_wbc_add_to_cart_text_first', __('Continue', 'woo-bundle-choice'));
-                $btn_text = wbc()->options->get_option('appearance_product_page','fc_atc_button_text',__('Continue', 'woo-bundle-choice'));
+                $btn_text = wbc()->options->get_option('appearance_product_page','fc_atc_button_text',__(eowbc_lang('Continue'), 'woo-bundle-choice'));
             // } elseif( $category == get_option('eo_wbc_second_slug') ) {
             } elseif( $category == wbc()->options->get_option('configuration','second_slug') ) {
                 // $btn_text = get_option('eo_wbc_add_to_cart_text_second', __('Continue', 'woo-bundle-choice'));
-                $btn_text = wbc()->options->get_option('appearance_product_page','sc_atc_button_text',__('Continue', 'woo-bundle-choice'));
+                $btn_text = wbc()->options->get_option('appearance_product_page','sc_atc_button_text',__(eowbc_lang('Continue'), 'woo-bundle-choice'));
             }
 
             if(empty($btn_text)){
-                $btn_text = 'Continue';
+                $btn_text = eowbc_lang('Continue');
             }
             
             global $post;            

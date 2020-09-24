@@ -75,7 +75,7 @@ if(!class_exists('WBC_Validate')) {
 
 		public function required($label,$value,$param){
 			// return (!empty($value)?true:"`${label}` field is required!");
-			return (!( $value!==0 && $value!=="0" && empty($value) )?true:"`${label}` field is required!");
+			return (!( $value!==0 && $value!=="0" && empty($value) )?true:eowbc_lang("`${label}` field is required!"));
 		}
 
 		public function validate_if($label,$value,$param){						
@@ -108,13 +108,13 @@ if(!class_exists('WBC_Validate')) {
 						return true;
 					}
 				}
-				return "`${label}` has invalid formate!";
+				return eowbc_lang("`${label}` has invalid formate!");
 			}
 			return true;
 		}
 
 		public function url($label, $value, $param) {
-			return (empty($value) xor filter_var($value, FILTER_VALIDATE_URL)) ? true : "`${label} field does not have valid URL.`";
+			return (empty($value) xor filter_var($value, FILTER_VALIDATE_URL)) ? true : eowbc_lang("`${label} field does not have valid URL.`");
 		}
 	}
 }

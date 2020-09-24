@@ -19,20 +19,20 @@ class WBC_Config {
 
 	public function get_features() {
 		return array(
-			'ring_builder'=>'Ring Builder',
-			'api_integrations'=>'Diamond APIs Integrations',
-			'pair_maker'=>'Pair Maker',
-			'guidance_tool'=>'Guidance Tool',
+			'ring_builder'=>eowbc_lang('Ring Builder'),
+			'api_integrations'=>eowbc_lang('Diamond APIs Integrations'),
+			'pair_maker'=>eowbc_lang('Pair Maker'),
+			'guidance_tool'=>eowbc_lang('Guidance Tool'),
 		);
 	}
 
 	public function get_bonus_features() {
 		return array(			
-			'filters_shortcode'=>'Shortcode Filters',
-			'filters_shop_cat'=>'Filters for Shop/Category Page',
-			'opts_uis_item_page'=>'Options UI for Item Page',
-			'spec_view_item_page'=>'Specifications View for Item Page',
-			'price_control'=>'Price Control',
+			'filters_shortcode'=>eowbc_lang('Shortcode Filters'),
+			'filters_shop_cat'=>eowbc_lang('Filters for Shop/Category Page'),
+			'opts_uis_item_page'=>eowbc_lang('Options UI for Item Page'),
+			'spec_view_item_page'=>eowbc_lang('Specifications View for Item Page'),
+			'price_control'=>eowbc_lang('Price Control'),
 		);
 	}
 
@@ -42,18 +42,18 @@ class WBC_Config {
 
 	public function get_inventory_types() {
 		return array(
-			'jewelry'=>'Jewelry',
-			'clothing'=>'Clothing',
-			'home_decor'=>'Home Decor',
-			'others'=>'Others'
+			'jewelry'=>eowbc_lang('Jewelry'),
+			'clothing'=>eowbc_lang('Clothing'),
+			'home_decor'=>eowbc_lang('Home Decor'),
+			'others'=>eowbc_lang('Others')
 		);
 	} 
 
 	public function get_builders() {
 		return array(
-			'ring_builder'=>'Ring Builder',
-			'pair_maker'=>'Pair Maker',
-			'guidance_tool'=>'Guidance Tool'
+			'ring_builder'=>eowbc_lang('Ring Builder'),
+			'pair_maker'=>eowbc_lang('Pair Maker'),
+			'guidance_tool'=>eowbc_lang('Guidance Tool')
 		);
 	}
 }

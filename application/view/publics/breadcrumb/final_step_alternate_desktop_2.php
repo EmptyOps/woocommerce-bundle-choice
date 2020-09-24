@@ -9,7 +9,7 @@
 
     <div class="ui column left aligned">3</div>
     <div class="ui column left aligned">
-        <div class="title">Complete <?php _e($preview_name); ?></div>
+        <div class="title"><?php echo eowbc_lang('Complete '._e($preview_name)); ?></div>
     </div>
     <div class="ui column mini image left aligned" style="padding-top: 0px;padding-bottom: 0px;<?php echo empty($preview_icon)?'visibility: hidden;':''; ?>">
         <img src = '<?php _e($preview_icon); ?>' class='ui mini image'/>

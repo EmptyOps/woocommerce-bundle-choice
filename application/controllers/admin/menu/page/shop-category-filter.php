@@ -52,7 +52,7 @@ if ( ! class_exists( 'Shop_Category_Filter' ) ) {
 					'value'=>array(wbc()->options->get_option('filters_sc_filter_setting','sc_shop_cat_filter_location_shop'),wbc()->options->get_option('filters_sc_filter_setting','sc_shop_cat_filter_location_cat')),
 					'force_value'=>1,
 					'sanitize'=>'sanitize_text_field',
-					'options'=>array('sc_shop_cat_filter_location_shop'=>'Shope Page','sc_shop_cat_filter_location_cat'=>'Category Page'),
+					'options'=>array('sc_shop_cat_filter_location_shop'=>eowbc_lang('Shope Page'),'sc_shop_cat_filter_location_cat'=>eowbc_lang('Category Page')),
 					'class'=>array('fluid'),
 					'inline'=>false,
 					'visible_info'=>array( 'label'=>eowbc_lang('( Specify on which page you want to display filter, if you select category then you will be asked to select category on which you want to display the filter. )'),

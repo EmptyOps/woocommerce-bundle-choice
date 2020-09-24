@@ -78,15 +78,15 @@
                     $total_text = '';
                     // phpcs:disable WordPress.Security
                     if ( 1 === intval( $args['total'] ) ) {
-                        _e( 'Showing the single result', 'woocommerce' );
+                        _e( eowbc_lang('Showing the single result'), 'woocommerce' );
                     } elseif ( $args['total'] <= $args['per_page'] || -1 === $args['per_page'] ) {
                         /* translators: %d: total results */
-                        $total_text = sprintf( _n( 'Showing all %d result', 'Showing all %d results', $args['total'], 'woocommerce' ), $args['total'] );
+                        $total_text = sprintf( _n( eowbc_lang('Showing all %d result'), eowbc_lang('Showing all %d results'), $args['total'], 'woocommerce' ), $args['total'] );
                     } else {
                         $first = ( $args['per_page'] * $args['current'] ) - $args['per_page'] + 1;
                         $last  = min( $args['total'], $args['per_page'] * $args['current'] );
                         /* translators: 1: first result 2: last result 3: total results */
-                        $total_text = sprintf( _nx( 'Showing %1$d&ndash;%2$d of %3$d result', 'Showing %1$d&ndash;%2$d of %3$d results', $args['total'], 'with first and last result', 'woocommerce' ), $first, $last, $args['total'] );
+                        $total_text = sprintf( _nx( eowbc_lang('Showing %1$d&ndash;%2$d of %3$d result'), eowbc_lang('Showing %1$d&ndash;%2$d of %3$d results'), $args['total'], eowbc_lang('with first and last result'), 'woocommerce' ), $first, $last, $args['total'] );
                     }
                     // phpcs:enable WordPress.Security
                     
@@ -140,7 +140,7 @@
                                             <div class="content">
                                               <div class="bottom">
                                               
-                                              <div data-link="<?php echo $category_object->eo_wbc_prev_url(); ?>" class="ui inverted button">Change</div>
+                                              <div data-link="<?php echo $category_object->eo_wbc_prev_url(); ?>" class="ui inverted button"><?php echo eowbc_lang('Change'); ?></div>
 
                                                 <h5><?php echo $prev_product->get_title();?></h5><br/>
                                                 <div style="text-align: center !important;">&nbsp;<?php echo $prev_product->get_price_html(); ?></div>
@@ -161,7 +161,7 @@
                                             <div class="content">
                                               <div class="aligned align bottom">
                                                 
-                                                <div data-link="<?php echo $category_object->eo_wbc_prev_url(); ?>" class="ui inverted button">Change</div>
+                                                <div data-link="<?php echo $category_object->eo_wbc_prev_url(); ?>" class="ui inverted button"><?php echo eowbc_lang('Change'); ?></div>
 
                                                 <h5><?php echo $prev_product->get_title(); ?></h5><br/>
                                                 <div style="text-align: center !important;">&nbsp;<?php echo $prev_product->get_price_html(); ?></div>

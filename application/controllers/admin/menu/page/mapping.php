@@ -77,17 +77,17 @@ if ( ! class_exists( 'Mapping' ) ) {
 									),
 									1=>array(
 										'is_header' => 1, 
-										'val' => 'First Term',
+										'val' => eowbc_lang('First Term'),
 										'field_id'=>'eo_wbc_first_category'
 									),
 									2=>array(
 										'is_header' => 1, 
-										'val' => 'Second Term',
+										'val' => eowbc_lang('Second Term'),
 										'field_id'=>'eo_wbc_second_category'
 									),
 									3=>array(
 										'is_header' => 1, 
-										'val' => 'Discount',
+										'val' => eowbc_lang('Discount'),
 										'field_id'=>'eo_wbc_add_discount'
 									),
 								),
@@ -104,7 +104,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 
 			$form_definition = array(
 				'prod_mapping_pref'=>array(
-					'label'=>'Product mapping preference',
+					'label'=>eowbc_lang('Product mapping preference'),
 					'form'=> array(
 						'saved_tab_key'=>array(
 							'type'=>'hidden',
@@ -151,21 +151,21 @@ if ( ! class_exists( 'Mapping' ) ) {
 					)
 				),							
 				'map_creation_modification'=>array(
-						'label'=>"Map creation and modification",
+						'label'=>eowbc_lang("Map creation and modification"),
 						'form'=>array( 
 							$table["id"].'_bulk'=>array(
 								// 'label'=>'Bulk Actions',
 								'type'=>'select',
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
-								'options'=>array(''=>eowbc_lang('Bulk Actions'), 'delete'=>'Delete'),
+								'options'=>array(''=>eowbc_lang('Bulk Actions'), 'delete'=>eowbc_lang('Delete')),
 								'class'=>array('fluid'),
 								'size_class'=>array('two','wide'),
 								'next_inline'=>true,
 								'inline'=>true,
 							),
 							'd_fconfig_submit_btn_bulk'=>array(
-								'label'=>'Apply',
+								'label'=>eowbc_lang('Apply'),
 								'type'=>'button',
 								'class'=>array('secondary'),
 								// 'size_class'=>array('eight','wide'),
@@ -182,7 +182,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 								'sanitize'=>'sanitize_text_field',
 							),
 							'save_sec_title'=>array(
-								'label'=>"Add New Maps",
+								'label'=>eowbc_lang("Add New Maps"),
 								'type'=>'label',
 								'size_class'=>array('eight','wide')
 							),
@@ -218,7 +218,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 							),
 
 							'eo_wbc_first_category'=>array(
-								'label'=>'First field',
+								'label'=>eowbc_lang('First field'),
 								'type'=>'select',
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
@@ -240,7 +240,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 								'inline'=>true,
 							),
 							'eo_wbc_second_category'=>array(
-								'label'=>'Second field',
+								'label'=>eowbc_lang('Second field'),
 								'type'=>'select',
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
@@ -253,7 +253,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 							),
 
 							'eo_wbc_first_category_range'=>array(
-								'type'=>'select',
+								'type'=>eowbc_lang('select'),
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
 								'options'=>$dropdown_opts_first_cat,	//array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
@@ -273,7 +273,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 								'inline'=>true,
 							),
 							'eo_wbc_second_category_range'=>array(
-								'type'=>'select',
+								'type'=>eowbc_lang('select'),
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
 								'options'=>$dropdown_opts_second_cat,	//array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
@@ -284,7 +284,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 							),
 
 							'eo_wbc_first_category_vis_info'=>array( 
-								'label'=>'Select sub-category or attribute from first category.',
+								'label'=>eowbc_lang('Select sub-category or attribute from first category.'),
 								'type'=>'visible_info',
 								'class'=>array('fluid', 'small'),
 								'inline_class'=>array('three'),
@@ -301,7 +301,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 								'inline'=>true,
 							),
 							'eo_wbc_second_category_vis_info'=>array(
-								'label'=>'Select sub-category or attribute from second category.',
+								'label'=>eowbc_lang('Select sub-category or attribute from second category.'),
 								'type'=>'visible_info',
 								'class'=>array('fluid', 'small'),
 								'prev_inline'=>true,
@@ -318,7 +318,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 								// 'next_inline'=>true,
 								// 'inline'=>true,
 
-								'visible_info'=>array( 'label'=>'Discount rate in %',
+								'visible_info'=>array( 'label'=>eowbc_lang('Discount rate in %'),
 									'type'=>'visible_info',
 									'class'=>array('fluid', 'small'),
 									'size_class'=>array('eight','wide','required'),

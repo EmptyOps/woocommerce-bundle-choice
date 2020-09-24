@@ -15,20 +15,20 @@ box-shadow: none;">
 	<div class="ui ordered fluid steps">
       	<div class=" <?php echo $step == 1 ? 'active':( $step > 1 ? 'completed':''); ?> step">		        	
         	<div class="content">
-          		<div class="title">Inventory</div>
-          		<div class="description">Choose inventory</div>
+          		<div class="title"><?php echo eowbc_lang('Inventory'); ?></div>
+          		<div class="description"><?php echo eowbc_lang('Choose inventory'); ?></div>
         	</div>
       	</div>
       	<div class="<?php echo $step == 2 ? 'active':( $step > 2 ? 'completed':''); ?> step">
 	        <div class="content">
-		        <div class="title">Features</div>
-          		<div class="description">Choose Features to be enabled</div>
+		        <div class="title"><?php echo eowbc_lang('Features'); ?></div>
+          		<div class="description"><?php echo eowbc_lang('Choose Features to be enabled'); ?></div>
         	</div>
       	</div>
       	<div class="<?php echo $step == 3 ? 'active':( $step > 3 ? 'completed':''); ?> step">			        
 	        <div class="content">
-		        <div class="title">Sample Data</div>
-          		<div class="description">Add sample products and Complete</div>
+		        <div class="title"><?php echo eowbc_lang('Sample Data'); ?></div>
+          		<div class="description"><?php echo eowbc_lang('Add sample products and Complete'); ?></div>
         	</div>
       	</div>
     </div>

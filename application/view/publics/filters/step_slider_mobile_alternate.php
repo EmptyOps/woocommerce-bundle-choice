@@ -11,12 +11,12 @@
 <div class="bottom_filter_segment hidden ui segment" id="sticky_mob_filter_<?php echo $filter['slug'] ?>">
 	<div class="ui equal width grid">
 		<div class="column close_sticky_mob_filter" data-target="#sticky_mob_filter_<?php echo $filter['slug'] ?>">
-			<i class="ui icon times" style="cursor: pointer;"></i>&nbsp;Close
+			<i class="ui icon times" style="cursor: pointer;"></i>&nbsp;<?php echo eowbc_lang('Close'); ?>
 		</div>
 		<div class="column"></div>
 		<div class="column"></div>
 		<div class="column" style="text-align: right;" onclick="reset_slider(event,'<?php echo $filter['slug'] ?>',0,<?php echo count(array_filter($items_slug)); ?>)">						
-			<i class="ui icon redo" style="cursor: pointer;"></i>&nbsp;Reset
+			<i class="ui icon redo" style="cursor: pointer;"></i>&nbsp;<?php echo eowbc_lang('Reset'); ?>
 		</div>
 	</div>					
 	<br/>

@@ -9,7 +9,7 @@
 	    <i class="dropdown icon"></i>		    
 	    <?php echo($filter['title']); ?>
 	    <?php if($reset): ?>
-		&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_checkbox(event,'.checklist_<?php echo $filter['slug'] ?>')">&nbsp;<u>reset</u></span>	
+		&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_checkbox(event,'.checklist_<?php echo $filter['slug'] ?>')">&nbsp;<u><?php echo eowbc_lang('reset'); ?></u></span>	
 		<?php endif; ?>
 	</div>
   	<div class="content">	

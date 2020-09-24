@@ -147,7 +147,7 @@ $this_plugin = '';
 			$response = json_decode(wp_remote_retrieve_body($response));			
 		} else {
 			$response = "";
-			$error_message = "Ooops! Something went wrong please try reloading the page.";
+			$error_message = eowbc_lang("Ooops! Something went wrong please try reloading the page.");
 		}
 		if(!empty($response) and !is_wp_error($response) and is_array($response)) {
 			$data = $response;
@@ -202,9 +202,9 @@ $this_plugin = '';
 								<div>
 									<a class="addons-button addons-button-solid" target="_blank" href="<?php echo $product->permalink; ?>" style="margin-left:0 !important;">
 										<?php if(!empty($product->price)){
-										    echo "Buy Now ($".$product->price.")";
+										    echo eowbc_lang("Buy Now ($".$product->price.")");
 										  }else {
-										  	 echo "Get free access";
+										  	 echo eowbc_lang("Get free access");
 										  }
 										?>	
 									</a>							
@@ -264,7 +264,7 @@ $this_plugin = '';
 								?>
 								</div>
 								<div>
-									<a class="addons-button addons-button-solid" target="_blank" href="<?php echo $product->permalink; ?>" style="margin-left:0 !important;">Download Now</a>							
+									<a class="addons-button addons-button-solid" target="_blank" href="<?php echo $product->permalink; ?>" style="margin-left:0 !important;"><?php echo eowbc_lang("Download Now"); ?></a>							
 								</div>
 							</div>
 					      </div>

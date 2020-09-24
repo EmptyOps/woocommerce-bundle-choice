@@ -4,7 +4,7 @@
 *
 */
 
-$res = array( "type"=>"success", "msg"=>"Added successfully!" );
+$res = array( "type"=>"success", "msg"=>eowbc_lang("Added successfully!") );
 
 if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_tiny_features_filter_add')) {
 	if(
@@ -37,7 +37,7 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_tiny_features_filter
         if(!empty($filter_data)){
             foreach ($filter_data as $key=>$item) {
                 if ($item['name']==$filter_name) {
-                    $res = array( "type"=>"warning", "msg"=>"Filter Already Exists." );                    
+                    $res = array( "type"=>"warning", "msg"=>eowbc_lang("Filter Already Exists.") );                    
                     echo json_encode($res);
                     wp_die();
                 }
@@ -68,7 +68,7 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_tiny_features_filter
         
         wbc()->options->update_option('tiny_feature','filter_widget',serialize($filter_data));
 
-        $res = array( "type"=>"success", "msg"=>"Added successfully!");
+        $res = array( "type"=>"success", "msg"=>eowbc_lang("Added successfully!"));
 
 	} elseif(!empty(wbc()->sanitize->post('sub_action')) and !empty(wbc()->sanitize->post_array('ids'))) {
 		$ids = wbc()->sanitize->post_array('ids');
@@ -79,9 +79,9 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_tiny_features_filter
 			}
 		}
 		wbc()->options->update_option('tiny_feature','filter_widget',serialize($filter_data));
-		$res = array( "type"=>"success", "msg"=>"Filters Removed.");
+		$res = array( "type"=>"success", "msg"=>eowbc_lang("Filters Removed.") );
 	} else {
-		$res = array( "type"=>"warning", "msg"=>"All required fields are must.",);
+		$res = array( "type"=>"warning", "msg"=>eowbc_lang("All required fields are must."));
 	}
 	
 }

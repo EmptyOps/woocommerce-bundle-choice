@@ -13,7 +13,7 @@
         <div class="column" style="text-align: left;">
 
             <?php if(empty($second)):?>        
-                <div class="description">Choose a</div>
+                <div class="description"><?php echo eowbc_lang('Choose a'); ?></div>
                 <div class="title"><?php _e($second_name); ?></div>
                 <div>&nbsp;</div>
             <?php else:?>
@@ -26,7 +26,7 @@
                     }                                            
                 if(empty($view_url) or $view_url=='#'){
                     ?>
-                        <div class="description">Choose a</div>
+                        <div class="description"><?php echo eowbc_lang('Choose a'); ?></div>
                         <div class="title"><?php _e($second_name) ?></div>
                         <div>&nbsp;</div>
                     <?php

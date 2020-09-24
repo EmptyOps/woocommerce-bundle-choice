@@ -274,17 +274,17 @@ class Setup_Wizard {
 			<input type="hidden" name="action" value="basic_config">
 			<div class="ui form segment">
 			  	<div class="inline fields">
-			    	<label><?php _e('Inventory Type','woo-bundle-choice'); ?></label>
+			    	<label><?php _e(eowbc_lang('Inventory Type'),'woo-bundle-choice'); ?></label>
 			    	<div class="field">
 			      		<div class="ui selection dropdown">
 						  	<input type="hidden" name="eo_wbc_inventory_type">
 						  	<i class="dropdown icon"></i>
-						  	<div class="default text"><?php _e('Inventory Type','woo-bundle-choice'); ?></div>
+						  	<div class="default text"><?php _e(eowbc_lang('Inventory Type'),'woo-bundle-choice'); ?></div>
 						  	<div class="menu">
-							    <div class="item" data-value="jewelryfgdfgfg"><?php _e('Jewelry','woo-bundle-choice'); ?></div>
-							    <div class="item" data-value="clothing"><?php _e('Clothing','woo-bundle-choice'); ?></div>
-							    <div class="item" data-value="home_decor"><?php _e('Home Decor','woo-bundle-choice'); ?></div>
-							    <div class="item" data-value="others"><?php _e('Others','woo-bundle-choice'); ?></div>
+							    <div class="item" data-value="jewelryfgdfgfg"><?php _e(eowbc_lang('Jewelry'),'woo-bundle-choice'); ?></div>
+							    <div class="item" data-value="clothing"><?php _e(eowbc_lang('Clothing'),'woo-bundle-choice'); ?></div>
+							    <div class="item" data-value="home_decor"><?php _e(eowbc_lang('Home Decor'),'woo-bundle-choice'); ?></div>
+							    <div class="item" data-value="others"><?php _e(eowbc_lang('Others'),'woo-bundle-choice'); ?></div>
 						  	</div>
 						</div>
 			    	</div>			    			    	
@@ -307,7 +307,7 @@ class Setup_Wizard {
 			<div class="ui form segment">
 			  	<div class="grouped fields">
 
-			    	<label><?php _e('Choose features','woo-bundle-choice'); ?></label>
+			    	<label><?php _e(eowbc_lang('Choose features'),'woo-bundle-choice'); ?></label>
 
 			    	<?php if(wbc()->sanitize->get('eo_wbc_inventory_type') == 'jewelry'): ?>	
 		      		<div class="field">

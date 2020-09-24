@@ -24,33 +24,33 @@ class Setting_status {
 
 		$form_definition = array(
 					'setting_status_setting'=>array(
-						'label'=>'Settings',
+						'label'=>eowbc_lang('Settings'),
 						'form'=>array(
 							'saved_tab_key'=>array(
 							'type'=>'hidden',
 							'value'=>'',
 							),
 							'inventory_type'=>array(
-								'label'=>'Inventory Type',
+								'label'=>eowbc_lang('Inventory Type'),
 								'type'=>'select',
 								'value'=>'',	//wbc()->options->get_option('setting_staus','inventory_type'),
 								'validate'=>array('required'=>''),
 								'sanitize'=>'sanitize_text_field',
-								'options'=>array('jewelry'=>'Jewelry','clothing'=>'Clothing','home_decor'=>'Home Decor','others'=>'Others'),
+								'options'=>array('jewelry'=>eowbc_lang('Jewelry'),'clothing'=>eowbc_lang('Clothing'),'home_decor'=>eowbc_lang('Home Decor'),'others'=>eowbc_lang('Others')),
 								'class'=>array('fluid'),
 								'size_class'=>array('eight','wide','required'),
 								'inline'=>true,
 							),
 							'features'=>array(
-								'label'=>'Choose features',
+								'label'=>eowbc_lang('Choose features'),
 								'type'=>'checkbox',
 								'sanitize'=>'sanitize_text_field',
 								'value'=>array(),
 								'options'=>array_replace($__features,array(									
-									'rapnet_api'=>'Rapnet (You will need paid <a href="https://sphereplugins.com/product/woocommerce-rapnet-integration-extension/" target="_blank">extension</a>)',
-									'glowstar_api'=>'GlowStar Diamond API (API service is free, but you will need paid <a href="https://sphereplugins.com/product/diamond-api-integration/" target="_blank">extension</a>)',
-									'jbdiamond_api'=>'JB Diamond API (API service is free, but you will need paid <a href="https://sphereplugins.com/product/diamond-api-integration/" target="_blank">extension</a>)',
-									'srk_api'=>'SRK Diamond API (API service is free, but you will need paid <a href="https://sphereplugins.com/product/diamond-api-integration/" target="_blank">extension</a>)',		
+									'rapnet_api'=>eowbc_lang('Rapnet (You will need paid <a href="https://sphereplugins.com/product/woocommerce-rapnet-integration-extension/" target="_blank">extension</a>)'),
+									'glowstar_api'=>eowbc_lang('GlowStar Diamond API (API service is free, but you will need paid <a href="https://sphereplugins.com/product/diamond-api-integration/" target="_blank">extension</a>)'),
+									'jbdiamond_api'=>eowbc_lang('JB Diamond API (API service is free, but you will need paid <a href="https://sphereplugins.com/product/diamond-api-integration/" target="_blank">extension</a>)'),
+									'srk_api'=>eowbc_lang('SRK Diamond API (API service is free, but you will need paid <a href="https://sphereplugins.com/product/diamond-api-integration/" target="_blank">extension</a>)'),		
 									)),
 								'class'=>array('fluid'),
 								'size_class'=>array('eight','wide'),
@@ -62,7 +62,7 @@ class Setting_status {
 								'type'=>'devider',
 							),
 							'bonus_features'=>array(
-								'label'=>'Choose Bonus features',
+								'label'=>eowbc_lang('Choose Bonus features'),
 								'type'=>'checkbox',
 								'sanitize'=>'sanitize_text_field',
 								'value'=>array(),
@@ -73,7 +73,7 @@ class Setting_status {
 								'grouped'=>true
 							),
 							'save'=>array(
-								'label'=>'Save',
+								'label'=>eowbc_lang('Save'),
 								'type'=>'button',				
 								'class'=>array('primary'),
 								'attr'=>array('data-tab_key="setting_status_setting"', "data-action='save'")
@@ -81,10 +81,10 @@ class Setting_status {
 						)							
 					),
 					'setting_status_log'=>array(
-						'label'=>'Logs',
+						'label'=>eowbc_lang('Logs'),
 						'form'=>array(
 							'visible_info'=>array( 
-								'label'=>'Following error details will be sent to '.constant('EOWBC_NAME').'\'s Support Team',
+								'label'=>eowbc_lang('Following error details will be sent to '.constant('EOWBC_NAME').'\'s Support Team'),
 								'type'=>'devider',
 								// 'class'=>array('fluid', 'small'),
 								// 'size_class'=>array('sixteen','wide'),
@@ -123,7 +123,7 @@ class Setting_status {
 								'type'=>'checkbox',
 								'value'=>array(),
 								'sanitize'=>'sanitize_text_field',
-								'options'=>array('1'=>'I agree with Sphere Plugins <a href="https://sphereplugins.com/terms-conditions/" target="_blank">Terms</a> & <a href="https://sphereplugins.com/privacy-policy/" target="_blank">Privacy Policy</a>'),
+								'options'=>array('1'=>eowbc_lang('I agree with Sphere Plugins <a href="https://sphereplugins.com/terms-conditions/" target="_blank">Terms</a> & <a href="https://sphereplugins.com/privacy-policy/" target="_blank">Privacy Policy</a>')),
 								'options_attrs'=>array('1'=>array("onchange=\"if(jQuery(this)[0].checked){ jQuery('#btn_send_error_report').removeClass('disabled'); } else { jQuery('#btn_send_error_report').addClass('disabled'); }\"")),
 								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
@@ -158,7 +158,7 @@ class Setting_status {
 						)
 					),
 					'advanced_config'=>array(
-						'label'=>'Advanced Configuration',
+						'label'=>eowbc_lang('Advanced Configuration'),
 						'form'=> array(							
 							'internal_url'=>array(
 								'label'=>eowbc_lang('Internal Routing URL'),
@@ -178,7 +178,7 @@ class Setting_status {
 								'type'=>'checkbox',
 								'sanitize'=>'sanitize_text_field',
 								'value'=>array(),
-								'options'=>array('remove_index_php'=>'Remove index.php'),
+								'options'=>array('remove_index_php'=>eowbc_lang('Remove index.php')),
 								'class'=>array(),
 								'size_class'=>array('eight','wide'),
 								'inline'=>true,

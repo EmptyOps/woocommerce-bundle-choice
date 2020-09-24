@@ -24,7 +24,7 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'sample_data_jewelry')) {
 }
 else {
 	$res["type"] = "error";
-	$res["msg"] = "Nonce validation failed";
+	$res["msg"] = eowbc_lang("Nonce validation failed");
 }
 
 

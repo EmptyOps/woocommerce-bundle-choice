@@ -33,7 +33,7 @@ class Sample_Data_Template {
 		$this->gallay_img = $_img_url. 'Products/';
 		return array(
         array(
-          'title'=>'Setting #8800950587',
+          'title'=>eowbc_lang('Setting #8800950587'),
           'thumb'=>$_img_url.'Products/Ring-round-1.jpg',
           'images'=>array('Ring-round-2.jpg','Ring-round-3.jpg'),
           'content'=>'',
@@ -123,7 +123,7 @@ class Sample_Data_Template {
                         )            
         ),
         array(
-          'title'=>'Setting #6461855726',
+          'title'=>eowbc_lang('Setting #6461855726'),
           'thumb'=>$_img_url.'Products/Ring-princess-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -213,7 +213,7 @@ class Sample_Data_Template {
                         )            
         ),
         array(
-          'title'=>'Setting #2871986691',
+          'title'=>eowbc_lang('Setting #2871986691'),
           'thumb'=>$_img_url.'Products/Ring-emerald-3.jpg',
           'images'=>array('Ring-emerald-4.jpg','Ring-emerald-5.jpg'),
           'content'=>'',
@@ -303,7 +303,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #1318544274',
+          'title'=>eowbc_lang('Setting #1318544274'),
           'thumb'=>$_img_url.'Products/Ring-asscher-1.jpg',
           'images'=>array('Ring-asscher-2.jpg'),
           'content'=>'',
@@ -393,7 +393,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #7707154336',
+          'title'=>eowbc_lang('Setting #7707154336'),
           'thumb'=>$_img_url.'Products/Ring-marquise.jpg',
           'images'=>array(),
           'content'=>'',
@@ -483,7 +483,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #1388912063',
+          'title'=>eowbc_lang('Setting #1388912063'),
           'thumb'=>$_img_url.'Products/Ring-oval-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -573,7 +573,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #0412854474',
+          'title'=>eowbc_lang('Setting #0412854474'),
           'thumb'=>$_img_url.'Products/Ring-radiant-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -623,7 +623,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #4270635040',
+          'title'=>eowbc_lang('Setting #4270635040'),
           'thumb'=>$_img_url.'Products/Ring-pear-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -713,7 +713,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #4927991215',
+          'title'=>eowbc_lang('Setting #4927991215'),
           'thumb'=>$_img_url.'Products/Ring-hert-1.jpg',
           'images'=>array('Ring-hert-2.jpg','Ring-hert-3.jpg'),
           'content'=>'',
@@ -803,7 +803,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #2375118707',
+          'title'=>eowbc_lang('Setting #2375118707'),
           'thumb'=>$_img_url.'Products/Ring-cusion-1.jpg',
           'images'=>array('Ring-cusion-2.jpg'),
           'content'=>'',
@@ -896,7 +896,7 @@ class Sample_Data_Template {
         //s-copy-1
 
         array(
-          'title'=>'Setting #10000001',
+          'title'=>eowbc_lang('Setting #10000001'),
           'thumb'=>$_img_url.'Products/Ring-round-1.jpg',
           'images'=>array('Ring-round-2.jpg','Ring-round-3.jpg'),
           'content'=>'',
@@ -986,7 +986,7 @@ class Sample_Data_Template {
                         )            
         ),
         array(
-          'title'=>'Setting #10000002',
+          'title'=>eowbc_lang('Setting #10000002'),
           'thumb'=>$_img_url.'Products/Ring-princess-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -1076,7 +1076,7 @@ class Sample_Data_Template {
                         )            
         ),
         array(
-          'title'=>'Setting #10000003',
+          'title'=>eowbc_lang('Setting #10000003'),
           'thumb'=>$_img_url.'Products/Ring-emerald-3.jpg',
           'images'=>array('Ring-emerald-4.jpg','Ring-emerald-5.jpg'),
           'content'=>'',
@@ -1166,7 +1166,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000004',
+          'title'=>eowbc_lang('Setting #10000004'),
           'thumb'=>$_img_url.'Products/Ring-asscher-1.jpg',
           'images'=>array('Ring-asscher-2.jpg'),
           'content'=>'',
@@ -1256,7 +1256,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000005',
+          'title'=>eowbc_lang('Setting #10000005'),
           'thumb'=>$_img_url.'Products/Ring-marquise.jpg',
           'images'=>array(),
           'content'=>'',
@@ -1346,7 +1346,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000006',
+          'title'=>eowbc_lang('Setting #10000006'),
           'thumb'=>$_img_url.'Products/Ring-oval-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -1436,7 +1436,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000007',
+          'title'=>eowbc_lang('Setting #10000007'),
           'thumb'=>$_img_url.'Products/Ring-radiant-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -1486,7 +1486,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000008',
+          'title'=>eowbc_lang('Setting #10000008'),
           'thumb'=>$_img_url.'Products/Ring-pear-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -1576,7 +1576,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000009',
+          'title'=>eowbc_lang('Setting #10000009'),
           'thumb'=>$_img_url.'Products/Ring-hert-1.jpg',
           'images'=>array('Ring-hert-2.jpg','Ring-hert-3.jpg'),
           'content'=>'',
@@ -1666,7 +1666,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000010',
+          'title'=>eowbc_lang('Setting #10000010'),
           'thumb'=>$_img_url.'Products/Ring-cusion-1.jpg',
           'images'=>array('Ring-cusion-2.jpg'),
           'content'=>'',
@@ -1759,7 +1759,7 @@ class Sample_Data_Template {
         //s-copy-2
 
         array(
-          'title'=>'Setting #10000011',
+          'title'=>eowbc_lang('Setting #10000011'),
           'thumb'=>$_img_url.'Products/Ring-round-1.jpg',
           'images'=>array('Ring-round-2.jpg','Ring-round-3.jpg'),
           'content'=>'',
@@ -1809,7 +1809,7 @@ class Sample_Data_Template {
                         )            
         ),
         array(
-          'title'=>'Setting #10000012',
+          'title'=>eowbc_lang('Setting #10000012'),
           'thumb'=>$_img_url.'Products/Ring-princess-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -1859,7 +1859,7 @@ class Sample_Data_Template {
                         )            
         ),
         array(
-          'title'=>'Setting #10000012',
+          'title'=>eowbc_lang('Setting #10000012'),
           'thumb'=>$_img_url.'Products/Ring-emerald-3.jpg',
           'images'=>array('Ring-emerald-4.jpg','Ring-emerald-5.jpg'),
           'content'=>'',
@@ -1909,7 +1909,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000013',
+          'title'=>eowbc_lang('Setting #10000013'),
           'thumb'=>$_img_url.'Products/Ring-asscher-1.jpg',
           'images'=>array('Ring-asscher-2.jpg'),
           'content'=>'',
@@ -1959,7 +1959,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000014',
+          'title'=>eowbc_lang('Setting #10000014'),
           'thumb'=>$_img_url.'Products/Ring-marquise.jpg',
           'images'=>array(),
           'content'=>'',
@@ -2009,7 +2009,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000015',
+          'title'=>eowbc_lang('Setting #10000015'),
           'thumb'=>$_img_url.'Products/Ring-oval-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -2059,7 +2059,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000016',
+          'title'=>eowbc_lang('Setting #10000016'),
           'thumb'=>$_img_url.'Products/Ring-radiant-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -2109,7 +2109,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000017',
+          'title'=>eowbc_lang('Setting #10000017'),
           'thumb'=>$_img_url.'Products/Ring-pear-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -2159,7 +2159,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000018',
+          'title'=>eowbc_lang('Setting #10000018'),
           'thumb'=>$_img_url.'Products/Ring-hert-1.jpg',
           'images'=>array('Ring-hert-2.jpg','Ring-hert-3.jpg'),
           'content'=>'',
@@ -2209,7 +2209,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000019',
+          'title'=>eowbc_lang('Setting #10000019'),
           'thumb'=>$_img_url.'Products/Ring-cusion-1.jpg',
           'images'=>array('Ring-cusion-2.jpg'),
           'content'=>'',
@@ -2262,7 +2262,7 @@ class Sample_Data_Template {
         //s-copy-3
         
         array(
-          'title'=>'Setting #10000020',
+          'title'=>eowbc_lang('Setting #10000020'),
           'thumb'=>$_img_url.'Products/Ring-round-1.jpg',
           'images'=>array('Ring-round-2.jpg','Ring-round-3.jpg'),
           'content'=>'',
@@ -2352,7 +2352,7 @@ class Sample_Data_Template {
                         )            
         ),
         array(
-          'title'=>'Setting #10000021',
+          'title'=>eowbc_lang('Setting #10000021'),
           'thumb'=>$_img_url.'Products/Ring-princess-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -2442,7 +2442,7 @@ class Sample_Data_Template {
                         )            
         ),
         array(
-          'title'=>'Setting #10000022',
+          'title'=>eowbc_lang('Setting #10000022'),
           'thumb'=>$_img_url.'Products/Ring-emerald-3.jpg',
           'images'=>array('Ring-emerald-4.jpg','Ring-emerald-5.jpg'),
           'content'=>'',
@@ -2532,7 +2532,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000023',
+          'title'=>eowbc_lang('Setting #10000023'),
           'thumb'=>$_img_url.'Products/Ring-asscher-1.jpg',
           'images'=>array('Ring-asscher-2.jpg'),
           'content'=>'',
@@ -2622,7 +2622,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000024',
+          'title'=>eowbc_lang('Setting #10000024'),
           'thumb'=>$_img_url.'Products/Ring-marquise.jpg',
           'images'=>array(),
           'content'=>'',
@@ -2712,7 +2712,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000025',
+          'title'=>eowbc_lang('Setting #10000025'),
           'thumb'=>$_img_url.'Products/Ring-oval-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -2802,7 +2802,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000026',
+          'title'=>eowbc_lang('Setting #10000026'),
           'thumb'=>$_img_url.'Products/Ring-radiant-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -2852,7 +2852,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000027',
+          'title'=>eowbc_lang('Setting #10000027'),
           'thumb'=>$_img_url.'Products/Ring-pear-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -2942,7 +2942,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000028',
+          'title'=>eowbc_lang('Setting #10000028'),
           'thumb'=>$_img_url.'Products/Ring-hert-1.jpg',
           'images'=>array('Ring-hert-2.jpg','Ring-hert-3.jpg'),
           'content'=>'',
@@ -3032,7 +3032,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000029',
+          'title'=>eowbc_lang('Setting #10000029'),
           'thumb'=>$_img_url.'Products/Ring-cusion-1.jpg',
           'images'=>array('Ring-cusion-2.jpg'),
           'content'=>'',
@@ -3125,7 +3125,7 @@ class Sample_Data_Template {
         //s-copy-4
 
         array(
-          'title'=>'Setting #10000030',
+          'title'=>eowbc_lang('Setting #10000030'),
           'thumb'=>$_img_url.'Products/Ring-round-1.jpg',
           'images'=>array('Ring-round-2.jpg','Ring-round-3.jpg'),
           'content'=>'',
@@ -3215,7 +3215,7 @@ class Sample_Data_Template {
                         )            
         ),
         array(
-          'title'=>'Setting #10000031',
+          'title'=>eowbc_lang('Setting #10000031'),
           'thumb'=>$_img_url.'Products/Ring-princess-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -3305,7 +3305,7 @@ class Sample_Data_Template {
                         )            
         ),
         array(
-          'title'=>'Setting #10000032',
+          'title'=>eowbc_lang('Setting #10000032'),
           'thumb'=>$_img_url.'Products/Ring-emerald-3.jpg',
           'images'=>array('Ring-emerald-4.jpg','Ring-emerald-5.jpg'),
           'content'=>'',
@@ -3395,7 +3395,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000033',
+          'title'=>eowbc_lang('Setting #10000033'),
           'thumb'=>$_img_url.'Products/Ring-asscher-1.jpg',
           'images'=>array('Ring-asscher-2.jpg'),
           'content'=>'',
@@ -3485,7 +3485,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000034',
+          'title'=>eowbc_lang('Setting #10000034'),
           'thumb'=>$_img_url.'Products/Ring-marquise.jpg',
           'images'=>array(),
           'content'=>'',
@@ -3575,7 +3575,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000035',
+          'title'=>eowbc_lang('Setting #10000035'),
           'thumb'=>$_img_url.'Products/Ring-oval-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -3665,7 +3665,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000036',
+          'title'=>eowbc_lang('Setting #10000036'),
           'thumb'=>$_img_url.'Products/Ring-radiant-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -3715,7 +3715,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000037',
+          'title'=>eowbc_lang('Setting #10000037'),
           'thumb'=>$_img_url.'Products/Ring-pear-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -3805,7 +3805,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000038',
+          'title'=>eowbc_lang('Setting #10000038'),
           'thumb'=>$_img_url.'Products/Ring-hert-1.jpg',
           'images'=>array('Ring-hert-2.jpg','Ring-hert-3.jpg'),
           'content'=>'',
@@ -3895,7 +3895,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000039',
+          'title'=>eowbc_lang('Setting #10000039'),
           'thumb'=>$_img_url.'Products/Ring-cusion-1.jpg',
           'images'=>array('Ring-cusion-2.jpg'),
           'content'=>'',
@@ -3988,7 +3988,7 @@ class Sample_Data_Template {
         //s-copy-5
 
         array(
-          'title'=>'Setting #10000040',
+          'title'=>eowbc_lang('Setting #10000040'),
           'thumb'=>$_img_url.'Products/Ring-round-1.jpg',
           'images'=>array('Ring-round-2.jpg','Ring-round-3.jpg'),
           'content'=>'',
@@ -4078,7 +4078,7 @@ class Sample_Data_Template {
                         )            
         ),
         array(
-          'title'=>'Setting #10000041',
+          'title'=>eowbc_lang('Setting #10000041'),
           'thumb'=>$_img_url.'Products/Ring-princess-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -4168,7 +4168,7 @@ class Sample_Data_Template {
                         )            
         ),
         array(
-          'title'=>'Setting #10000042',
+          'title'=>eowbc_lang('Setting #10000042'),
           'thumb'=>$_img_url.'Products/Ring-emerald-3.jpg',
           'images'=>array('Ring-emerald-4.jpg','Ring-emerald-5.jpg'),
           'content'=>'',
@@ -4258,7 +4258,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000043',
+          'title'=>eowbc_lang('Setting #10000043'),
           'thumb'=>$_img_url.'Products/Ring-asscher-1.jpg',
           'images'=>array('Ring-asscher-2.jpg'),
           'content'=>'',
@@ -4348,7 +4348,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000044',
+          'title'=>eowbc_lang('Setting #10000044'),
           'thumb'=>$_img_url.'Products/Ring-marquise.jpg',
           'images'=>array(),
           'content'=>'',
@@ -4438,7 +4438,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000045',
+          'title'=>eowbc_lang('Setting #10000045'),
           'thumb'=>$_img_url.'Products/Ring-oval-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -4528,7 +4528,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000046',
+          'title'=>eowbc_lang('Setting #10000046'),
           'thumb'=>$_img_url.'Products/Ring-radiant-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -4578,7 +4578,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000047',
+          'title'=>eowbc_lang('Setting #10000047'),
           'thumb'=>$_img_url.'Products/Ring-pear-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -4668,7 +4668,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000048',
+          'title'=>eowbc_lang('Setting #10000048'),
           'thumb'=>$_img_url.'Products/Ring-hert-1.jpg',
           'images'=>array('Ring-hert-2.jpg','Ring-hert-3.jpg'),
           'content'=>'',
@@ -4758,7 +4758,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000049',
+          'title'=>eowbc_lang('Setting #10000049'),
           'thumb'=>$_img_url.'Products/Ring-cusion-1.jpg',
           'images'=>array('Ring-cusion-2.jpg'),
           'content'=>'',
@@ -4851,7 +4851,7 @@ class Sample_Data_Template {
         //Diamonds__
         
         array(
-          'title'=>'Round Diamond #89302496',
+          'title'=>eowbc_lang('Round Diamond #89302496'),
           'thumb'=>$_img_url.'Products/Round-4.jpg',
           'images'=>array('Round-5.jpg','Round-1.jpg'),
           'content'=>'',
@@ -4943,7 +4943,7 @@ class Sample_Data_Template {
                    )       
         ),
         array(
-          'title'=>'Emerald Diamond #66984597',
+          'title'=>eowbc_lang('Emerald Diamond #66984597'),
           'thumb'=>$_img_url.'Products/Emerald-1.jpg',
           'images'=>array('Emerald-2.jpg','Emerald-3.jpg'),
           'content'=>'',
@@ -5035,7 +5035,7 @@ class Sample_Data_Template {
                    )        
         ),
         array(
-          'title'=>'Asscher Diamond #99649028',
+          'title'=>eowbc_lang('Asscher Diamond #99649028'),
           'thumb'=>$_img_url.'Products/asscher-1.jpg',
           'images'=>array('asscher-2.jpg'),
           'content'=>'',
@@ -5127,7 +5127,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'PRINCESS DIAMOND #39398077',
+          'title'=>eowbc_lang('PRINCESS DIAMOND #39398077'),
           'thumb'=>$_img_url.'Products/Princess-3.jpg',
           'images'=>array('Princess-1.jpg','Princess-2.jpg'),
           'content'=>'',
@@ -5219,7 +5219,7 @@ class Sample_Data_Template {
                    ) 
         ),
         array(
-          'title'=>'Cusion Diamond #87671292',
+          'title'=>eowbc_lang('Cusion Diamond #87671292'),
           'thumb'=>$_img_url.'Products/Cusion-1.jpg',
           'images'=>array('Cusion-2.jpg'),
           'content'=>'',
@@ -5311,7 +5311,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Heart Diamond #95296856',
+          'title'=>eowbc_lang('Heart Diamond #95296856'),
           'thumb'=>$_img_url.'Products/Heart-1.jpg',
           'images'=>array('Heart-2.jpg','Heart-3.jpg'),
           'content'=>'',
@@ -5403,7 +5403,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Marquise Diamond #16931364',
+          'title'=>eowbc_lang('Marquise Diamond #16931364'),
           'thumb'=>$_img_url.'Products/Marquise-1.jpg',
           'images'=>array('Marquise-2.jpg'),
           'content'=>'',
@@ -5495,7 +5495,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Oval Diamond #75138961',
+          'title'=>eowbc_lang('Oval Diamond #75138961'),
           'thumb'=>$_img_url.'Products/Oval-1.jpg',
           'images'=>array('Oval-2.jpg'),
           'content'=>'',
@@ -5587,7 +5587,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Radiant Solitaire Diamond #59218358',
+          'title'=>eowbc_lang('Radiant Solitaire Diamond #59218358'),
           'thumb'=>$_img_url.'Products/Radiant-1.jpg',
           'images'=>array('Radiant-2.jpg'),
           'content'=>'',
@@ -5679,7 +5679,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Pear Diamond #95299666',
+          'title'=>eowbc_lang('Pear Diamond #95299666'),
           'thumb'=>$_img_url.'Products/Pear-1.jpg',
           'images'=>array('Pear-2.jpg','Pear-3.jpg'),
           'content'=>'',
@@ -5774,7 +5774,7 @@ class Sample_Data_Template {
         //d-copy-1
 
         array(
-          'title'=>'Round Diamond #10000050',
+          'title'=>eowbc_lang('Round Diamond #10000050'),
           'thumb'=>$_img_url.'Products/Round-4.jpg',
           'images'=>array('Round-5.jpg','Round-1.jpg'),
           'content'=>'',
@@ -5866,7 +5866,7 @@ class Sample_Data_Template {
                    )       
         ),
         array(
-          'title'=>'Emerald Diamond #10000051',
+          'title'=>eowbc_lang('Emerald Diamond #10000051'),
           'thumb'=>$_img_url.'Products/Emerald-1.jpg',
           'images'=>array('Emerald-2.jpg','Emerald-3.jpg'),
           'content'=>'',
@@ -5958,7 +5958,7 @@ class Sample_Data_Template {
                    )        
         ),
         array(
-          'title'=>'Asscher Diamond #10000052',
+          'title'=>eowbc_lang('Asscher Diamond #10000052'),
           'thumb'=>$_img_url.'Products/asscher-1.jpg',
           'images'=>array('asscher-2.jpg'),
           'content'=>'',
@@ -6050,7 +6050,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'PRINCESS DIAMOND #10000053',
+          'title'=>eowbc_lang('PRINCESS DIAMOND #10000053'),
           'thumb'=>$_img_url.'Products/Princess-3.jpg',
           'images'=>array('Princess-1.jpg','Princess-2.jpg'),
           'content'=>'',
@@ -6142,7 +6142,7 @@ class Sample_Data_Template {
                    ) 
         ),
         array(
-          'title'=>'Cusion Diamond #10000054',
+          'title'=>eowbc_lang('Cusion Diamond #10000054'),
           'thumb'=>$_img_url.'Products/Cusion-1.jpg',
           'images'=>array('Cusion-2.jpg'),
           'content'=>'',
@@ -6234,7 +6234,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Heart Diamond #10000055',
+          'title'=>eowbc_lang('Heart Diamond #10000055'),
           'thumb'=>$_img_url.'Products/Heart-1.jpg',
           'images'=>array('Heart-2.jpg','Heart-3.jpg'),
           'content'=>'',
@@ -6326,7 +6326,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Marquise Diamond #10000056',
+          'title'=>eowbc_lang('Marquise Diamond #10000056'),
           'thumb'=>$_img_url.'Products/Marquise-1.jpg',
           'images'=>array('Marquise-2.jpg'),
           'content'=>'',
@@ -6418,7 +6418,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Oval Diamond #10000057',
+          'title'=>eowbc_lang('Oval Diamond #10000057'),
           'thumb'=>$_img_url.'Products/Oval-1.jpg',
           'images'=>array('Oval-2.jpg'),
           'content'=>'',
@@ -6510,7 +6510,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Radiant Solitaire Diamond #10000058',
+          'title'=>eowbc_lang('Radiant Solitaire Diamond #10000058'),
           'thumb'=>$_img_url.'Products/Radiant-1.jpg',
           'images'=>array('Radiant-2.jpg'),
           'content'=>'',
@@ -6602,7 +6602,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Pear Diamond #10000059',
+          'title'=>eowbc_lang('Pear Diamond #10000059'),
           'thumb'=>$_img_url.'Products/Pear-1.jpg',
           'images'=>array('Pear-2.jpg','Pear-3.jpg'),
           'content'=>'',
@@ -6697,7 +6697,7 @@ class Sample_Data_Template {
         //d-copy-2
 
         array(
-          'title'=>'Round Diamond #10000060',
+          'title'=>eowbc_lang('Round Diamond #10000060'),
           'thumb'=>$_img_url.'Products/Round-4.jpg',
           'images'=>array('Round-5.jpg','Round-1.jpg'),
           'content'=>'',
@@ -6789,7 +6789,7 @@ class Sample_Data_Template {
                    )       
         ),
         array(
-          'title'=>'Emerald Diamond #10000061',
+          'title'=>eowbc_lang('Emerald Diamond #10000061'),
           'thumb'=>$_img_url.'Products/Emerald-1.jpg',
           'images'=>array('Emerald-2.jpg','Emerald-3.jpg'),
           'content'=>'',
@@ -6881,7 +6881,7 @@ class Sample_Data_Template {
                    )        
         ),
         array(
-          'title'=>'Asscher Diamond #10000062',
+          'title'=>eowbc_lang('Asscher Diamond #10000062'),
           'thumb'=>$_img_url.'Products/asscher-1.jpg',
           'images'=>array('asscher-2.jpg'),
           'content'=>'',
@@ -6973,7 +6973,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'PRINCESS DIAMOND #10000063',
+          'title'=>eowbc_lang('PRINCESS DIAMOND #10000063'),
           'thumb'=>$_img_url.'Products/Princess-3.jpg',
           'images'=>array('Princess-1.jpg','Princess-2.jpg'),
           'content'=>'',
@@ -7065,7 +7065,7 @@ class Sample_Data_Template {
                    ) 
         ),
         array(
-          'title'=>'Cusion Diamond #10000064',
+          'title'=>eowbc_lang('Cusion Diamond #10000064'),
           'thumb'=>$_img_url.'Products/Cusion-1.jpg',
           'images'=>array('Cusion-2.jpg'),
           'content'=>'',
@@ -7157,7 +7157,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Heart Diamond #10000065',
+          'title'=>eowbc_lang('Heart Diamond #10000065'),
           'thumb'=>$_img_url.'Products/Heart-1.jpg',
           'images'=>array('Heart-2.jpg','Heart-3.jpg'),
           'content'=>'',
@@ -7249,7 +7249,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Marquise Diamond #10000066',
+          'title'=>eowbc_lang('Marquise Diamond #10000066'),
           'thumb'=>$_img_url.'Products/Marquise-1.jpg',
           'images'=>array('Marquise-2.jpg'),
           'content'=>'',
@@ -7341,7 +7341,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Oval Diamond #10000067',
+          'title'=>eowbc_lang('Oval Diamond #10000067'),
           'thumb'=>$_img_url.'Products/Oval-1.jpg',
           'images'=>array('Oval-2.jpg'),
           'content'=>'',
@@ -7433,7 +7433,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Radiant Solitaire Diamond #10000068',
+          'title'=>eowbc_lang('Radiant Solitaire Diamond #10000068'),
           'thumb'=>$_img_url.'Products/Radiant-1.jpg',
           'images'=>array('Radiant-2.jpg'),
           'content'=>'',
@@ -7525,7 +7525,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Pear Diamond #10000069',
+          'title'=>eowbc_lang('Pear Diamond #10000069'),
           'thumb'=>$_img_url.'Products/Pear-1.jpg',
           'images'=>array('Pear-2.jpg','Pear-3.jpg'),
           'content'=>'',
@@ -7620,7 +7620,7 @@ class Sample_Data_Template {
         //d-copy-3
 
         array(
-          'title'=>'Round Diamond #10000070',
+          'title'=>eowbc_lang('Round Diamond #10000070'),
           'thumb'=>$_img_url.'Products/Round-4.jpg',
           'images'=>array('Round-5.jpg','Round-1.jpg'),
           'content'=>'',
@@ -7712,7 +7712,7 @@ class Sample_Data_Template {
                    )       
         ),
         array(
-          'title'=>'Emerald Diamond #10000071',
+          'title'=>eowbc_lang('Emerald Diamond #10000071'),
           'thumb'=>$_img_url.'Products/Emerald-1.jpg',
           'images'=>array('Emerald-2.jpg','Emerald-3.jpg'),
           'content'=>'',
@@ -7804,7 +7804,7 @@ class Sample_Data_Template {
                    )        
         ),
         array(
-          'title'=>'Asscher Diamond #10000072',
+          'title'=>eowbc_lang('Asscher Diamond #10000072'),
           'thumb'=>$_img_url.'Products/asscher-1.jpg',
           'images'=>array('asscher-2.jpg'),
           'content'=>'',
@@ -7896,7 +7896,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'PRINCESS DIAMOND #10000073',
+          'title'=>eowbc_lang('PRINCESS DIAMOND #10000073'),
           'thumb'=>$_img_url.'Products/Princess-3.jpg',
           'images'=>array('Princess-1.jpg','Princess-2.jpg'),
           'content'=>'',
@@ -7988,7 +7988,7 @@ class Sample_Data_Template {
                    ) 
         ),
         array(
-          'title'=>'Cusion Diamond #10000074',
+          'title'=>eowbc_lang('Cusion Diamond #10000074'),
           'thumb'=>$_img_url.'Products/Cusion-1.jpg',
           'images'=>array('Cusion-2.jpg'),
           'content'=>'',
@@ -8080,7 +8080,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Heart Diamond #10000075',
+          'title'=>eowbc_lang('Heart Diamond #10000075'),
           'thumb'=>$_img_url.'Products/Heart-1.jpg',
           'images'=>array('Heart-2.jpg','Heart-3.jpg'),
           'content'=>'',
@@ -8172,7 +8172,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Marquise Diamond #10000076',
+          'title'=>eowbc_lang('Marquise Diamond #10000076'),
           'thumb'=>$_img_url.'Products/Marquise-1.jpg',
           'images'=>array('Marquise-2.jpg'),
           'content'=>'',
@@ -8264,7 +8264,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Oval Diamond #10000077',
+          'title'=>eowbc_lang('Oval Diamond #10000077'),
           'thumb'=>$_img_url.'Products/Oval-1.jpg',
           'images'=>array('Oval-2.jpg'),
           'content'=>'',
@@ -8356,7 +8356,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Radiant Solitaire Diamond #10000078',
+          'title'=>eowbc_lang('Radiant Solitaire Diamond #10000078'),
           'thumb'=>$_img_url.'Products/Radiant-1.jpg',
           'images'=>array('Radiant-2.jpg'),
           'content'=>'',
@@ -8448,7 +8448,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Pear Diamond #10000079',
+          'title'=>eowbc_lang('Pear Diamond #10000079'),
           'thumb'=>$_img_url.'Products/Pear-1.jpg',
           'images'=>array('Pear-2.jpg','Pear-3.jpg'),
           'content'=>'',
@@ -8543,7 +8543,7 @@ class Sample_Data_Template {
         //d-copy-4
 
         array(
-          'title'=>'Round Diamond #10000080',
+          'title'=>eowbc_lang('Round Diamond #10000080'),
           'thumb'=>$_img_url.'Products/Round-4.jpg',
           'images'=>array('Round-5.jpg','Round-1.jpg'),
           'content'=>'',
@@ -8635,7 +8635,7 @@ class Sample_Data_Template {
                    )       
         ),
         array(
-          'title'=>'Emerald Diamond #10000081',
+          'title'=>eowbc_lang('Emerald Diamond #10000081'),
           'thumb'=>$_img_url.'Products/Emerald-1.jpg',
           'images'=>array('Emerald-2.jpg','Emerald-3.jpg'),
           'content'=>'',
@@ -8727,7 +8727,7 @@ class Sample_Data_Template {
                    )        
         ),
         array(
-          'title'=>'Asscher Diamond #10000082',
+          'title'=>eowbc_lang('Asscher Diamond #10000082'),
           'thumb'=>$_img_url.'Products/asscher-1.jpg',
           'images'=>array('asscher-2.jpg'),
           'content'=>'',
@@ -8819,7 +8819,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'PRINCESS DIAMOND #10000083',
+          'title'=>eowbc_lang('PRINCESS DIAMOND #10000083'),
           'thumb'=>$_img_url.'Products/Princess-3.jpg',
           'images'=>array('Princess-1.jpg','Princess-2.jpg'),
           'content'=>'',
@@ -8911,7 +8911,7 @@ class Sample_Data_Template {
                    ) 
         ),
         array(
-          'title'=>'Cusion Diamond #10000084',
+          'title'=>eowbc_lang('Cusion Diamond #10000084'),
           'thumb'=>$_img_url.'Products/Cusion-1.jpg',
           'images'=>array('Cusion-2.jpg'),
           'content'=>'',
@@ -9003,7 +9003,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Heart Diamond #10000085',
+          'title'=>eowbc_lang('Heart Diamond #10000085'),
           'thumb'=>$_img_url.'Products/Heart-1.jpg',
           'images'=>array('Heart-2.jpg','Heart-3.jpg'),
           'content'=>'',
@@ -9095,7 +9095,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Marquise Diamond #10000086',
+          'title'=>eowbc_lang('Marquise Diamond #10000086'),
           'thumb'=>$_img_url.'Products/Marquise-1.jpg',
           'images'=>array('Marquise-2.jpg'),
           'content'=>'',
@@ -9187,7 +9187,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Oval Diamond #10000087',
+          'title'=>eowbc_lang('Oval Diamond #10000087'),
           'thumb'=>$_img_url.'Products/Oval-1.jpg',
           'images'=>array('Oval-2.jpg'),
           'content'=>'',
@@ -9279,7 +9279,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Radiant Solitaire Diamond #10000088',
+          'title'=>eowbc_lang('Radiant Solitaire Diamond #10000088'),
           'thumb'=>$_img_url.'Products/Radiant-1.jpg',
           'images'=>array('Radiant-2.jpg'),
           'content'=>'',
@@ -9371,7 +9371,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Pear Diamond #10000089',
+          'title'=>eowbc_lang('Pear Diamond #10000089'),
           'thumb'=>$_img_url.'Products/Pear-1.jpg',
           'images'=>array('Pear-2.jpg','Pear-3.jpg'),
           'content'=>'',
@@ -9466,7 +9466,7 @@ class Sample_Data_Template {
         //d-copy-5
 
         array(
-          'title'=>'Round Diamond #10000090',
+          'title'=>eowbc_lang('Round Diamond #10000090'),
           'thumb'=>$_img_url.'Products/Round-4.jpg',
           'images'=>array('Round-5.jpg','Round-1.jpg'),
           'content'=>'',
@@ -9558,7 +9558,7 @@ class Sample_Data_Template {
                    )       
         ),
         array(
-          'title'=>'Emerald Diamond #10000091',
+          'title'=>eowbc_lang('Emerald Diamond #10000091'),
           'thumb'=>$_img_url.'Products/Emerald-1.jpg',
           'images'=>array('Emerald-2.jpg','Emerald-3.jpg'),
           'content'=>'',
@@ -9650,7 +9650,7 @@ class Sample_Data_Template {
                    )        
         ),
         array(
-          'title'=>'Asscher Diamond #10000092',
+          'title'=>eowbc_lang('Asscher Diamond #10000092'),
           'thumb'=>$_img_url.'Products/asscher-1.jpg',
           'images'=>array('asscher-2.jpg'),
           'content'=>'',
@@ -9742,7 +9742,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'PRINCESS DIAMOND #10000093',
+          'title'=>eowbc_lang('PRINCESS DIAMOND #10000093'),
           'thumb'=>$_img_url.'Products/Princess-3.jpg',
           'images'=>array('Princess-1.jpg','Princess-2.jpg'),
           'content'=>'',
@@ -9834,7 +9834,7 @@ class Sample_Data_Template {
                    ) 
         ),
         array(
-          'title'=>'Cusion Diamond #10000094',
+          'title'=>eowbc_lang('Cusion Diamond #10000094'),
           'thumb'=>$_img_url.'Products/Cusion-1.jpg',
           'images'=>array('Cusion-2.jpg'),
           'content'=>'',
@@ -9926,7 +9926,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Heart Diamond #10000095',
+          'title'=>eowbc_lang('Heart Diamond #10000095'),
           'thumb'=>$_img_url.'Products/Heart-1.jpg',
           'images'=>array('Heart-2.jpg','Heart-3.jpg'),
           'content'=>'',
@@ -10018,7 +10018,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Marquise Diamond #10000096',
+          'title'=>eowbc_lang('Marquise Diamond #10000096'),
           'thumb'=>$_img_url.'Products/Marquise-1.jpg',
           'images'=>array('Marquise-2.jpg'),
           'content'=>'',
@@ -10110,7 +10110,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Oval Diamond #10000097',
+          'title'=>eowbc_lang('Oval Diamond #10000097'),
           'thumb'=>$_img_url.'Products/Oval-1.jpg',
           'images'=>array('Oval-2.jpg'),
           'content'=>'',
@@ -10202,7 +10202,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Radiant Solitaire Diamond #10000098',
+          'title'=>eowbc_lang('Radiant Solitaire Diamond #10000098'),
           'thumb'=>$_img_url.'Products/Radiant-1.jpg',
           'images'=>array('Radiant-2.jpg'),
           'content'=>'',
@@ -10294,7 +10294,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Pear Diamond #10000099',
+          'title'=>eowbc_lang('Pear Diamond #10000099'),
           'thumb'=>$_img_url.'Products/Pear-1.jpg',
           'images'=>array('Pear-2.jpg','Pear-3.jpg'),
           'content'=>'',

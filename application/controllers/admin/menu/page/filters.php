@@ -77,52 +77,52 @@ if ( ! class_exists( 'Filters' ) ) {
 					),
 					1=>array(
 						'is_header' => 1, 
-						'val' => 'Filter',
+						'val' => eowbc_lang('Filter'),
 						'field_id'=>'d_fconfig_filter'
 					),
 					2=>array(
 						'is_header' => 1, 
-						'val' => 'Label',
+						'val' => eowbc_lang('Label'),
 						'field_id'=>'d_fconfig_label'
 					),
 					3=>array(
 						'is_header' => 1, 
-						'val' => 'Advance Filter',
+						'val' => eowbc_lang('Advance Filter'),
 						'field_id'=>'d_fconfig_is_advanced'
 					),
 					4=>array(
 						'is_header' => 1, 
-						'val' => 'Column Width',
+						'val' => eowbc_lang('Column Width'),
 						'field_id'=>'d_fconfig_column_width'
 					),
 					5=>array(
 						'is_header' => 1, 
-						'val' => 'Template',
+						'val' => eowbc_lang('Template'),
 						'field_id'=>'filter_template'
 					),
 					6=>array(
 						'is_header' => 1, 
-						'val' => 'Ordering',
+						'val' => eowbc_lang('Ordering'),
 						'field_id'=>'d_fconfig_ordering'
 					),
 					7=>array(
 						'is_header' => 1, 
-						'val' => 'Input Type',
+						'val' => ('Input Type'),
 						'field_id'=>'d_fconfig_input_type'
 					),
 					8=>array(
 						'is_header' => 1, 
-						'val' => 'Icon Size',
+						'val' => ('Icon Size'),
 						'field_id'=>'d_fconfig_icon_size'
 					),
 					9=>array(
 						'is_header' => 1, 
-						'val' => 'Icon Label Size',
+						'val' => eowbc_lang('Icon Label Size'),
 						'field_id'=>'d_fconfig_icon_label_size'
 					),
 					10=>array(
 						'is_header' => 1, 
-						'val' => 'Add reset link?',
+						'val' => eowbc_lang('Add reset link?'),
 						'field_id'=>'d_fconfig_add_reset_link'
 					),
 				),
@@ -263,24 +263,24 @@ if ( ! class_exists( 'Filters' ) ) {
 
 			$form_definition = array(
 				'filter_setting'=>array(
-						'label'=>"Configuration",
+						'label'=>eowbc_lang("Configuration"),
 						'form'=>array( 
 							'filter_setting_filter'=>array(
-									'label'=>'Filter Configuration',
+									'label'=>eowbc_lang('Filter Configuration'),
 									'type'=>'devider',
 								),
 							'filter_setting_status'=>array(
-									'label'=>'Filter Status',
+									'label'=>eowbc_lang('Filter Status'),
 									'type'=>'checkbox',
 									'sanitize'=>'sanitize_text_field',
 									'value'=>array('filter_setting_status'),
-									'options'=>array('filter_setting_status'=>' Check here to enable horizontal filter bar'),
+									'options'=>array('filter_setting_status'=>eowbc_lang(' Check here to enable horizontal filter bar')),
 									'class'=>array(),
 									'size_class'=>array('eight','wide'),
 									'inline'=>true,
 								),
 							'filter_setting_price_filter_width'=>array(
-								'label'=>'Price filter\'s column width',
+								'label'=>eowbc_lang('Price filter\'s column width'),
 								'type'=>'text',
 								'validate'=>array('required'=>'','postfix'=>['%']),
 								'sanitize'=>'sanitize_text_field',
@@ -290,17 +290,17 @@ if ( ! class_exists( 'Filters' ) ) {
 								'inline'=>true,
 							),								
 							'filter_setting_alternate_slider_ui'=>array(
-								'label'=>'Alternate Ticked Slider Widget',
+								'label'=>eowbc_lang('Alternate Ticked Slider Widget'),
 								'type'=>'checkbox',
 								'sanitize'=>'sanitize_text_field',
 								'value'=>array(wbc()->options->get_option('filters_filter_setting','filter_setting_alternate_slider_ui')),
-								'options'=>array('filter_setting_alternate_slider_ui'=>' Check here to enable alternate UI view for filter sliders.'),
+								'options'=>array('filter_setting_alternate_slider_ui'=>eowbc_lang(' Check here to enable alternate UI view for filter sliders.')),
 								'class'=>array(),
 								'size_class'=>array('eight','wide'),
 								'inline'=>true,
 							),
 							'filter_setting_numeric_slider_seperator'=>array(
-								'label'=>'Numeric Filter Separator',
+								'label'=>eowbc_lang('Numeric Filter Separator'),
 								'type'=>'text',
 								'sanitize'=>'sanitize_text_field',
 								'value'=>'.',
@@ -309,7 +309,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'inline'=>true,
 							),
 							'filter_setting_slider_max_lblsize'=>array(
-								'label'=>'Slider Options Text Limit',
+								'label'=>eowbc_lang('Slider Options Text Limit'),
 								'type'=>'text',
 								'sanitize'=>'sanitize_text_field',
 								'value'=>'6',
@@ -324,7 +324,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								),
 							),
 							'filter_icon_wrap_label'=>array(
-									'label'=>'Wrap icon filter label',
+									'label'=>eowbc_lang('Wrap icon filter label'),
 									'type'=>'checkbox',
 									'sanitize'=>'sanitize_text_field',
 									'value'=>array(),
@@ -334,7 +334,7 @@ if ( ! class_exists( 'Filters' ) ) {
 									'inline'=>true,
 								),
 							'filter_icon_wrap_filter_label'=>array(
-									'label'=>'Word Wrap Icon Filter Labels',
+									'label'=>eowbc_lang('Word Wrap Icon Filter Labels'),
 									'type'=>'text',
 									'sanitize'=>'sanitize_text_field',
 									'value'=>'0',									
@@ -348,7 +348,7 @@ if ( ! class_exists( 'Filters' ) ) {
 									),
 								),
 							'filter_setting_btnfilter_now'=>array(
-								'label'=>'Show Apply Filters Button',
+								'label'=>eowbc_lang('Show Apply Filters Button'),
 								'type'=>'checkbox',
 								'sanitize'=>'sanitize_text_field',
 								'value'=>array(),
@@ -364,7 +364,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								),
 							),
 							'filter_setting_reset_now'=>array(
-								'label'=>'Show Reset Filters Button',
+								'label'=>eowbc_lang('Show Reset Filters Button'),
 								'type'=>'checkbox',
 								'sanitize'=>'sanitize_text_field',
 								'value'=>array(),
@@ -380,22 +380,22 @@ if ( ! class_exists( 'Filters' ) ) {
 								),
 							),
 							'price_filter_first_cat'=>array(
-								'label'=>'First Category',
+								'label'=>eowbc_lang('First Category'),
 								'type'=>'devider',
 							),
 							'hide_price_filter_first_cat'=>array(
-								'label'=>'Hide Price Filter',
+								'label'=>eowbc_lang('Hide Price Filter'),
 								'type'=>'checkbox',
 								'sanitize'=>'sanitize_text_field',
 								'value'=>'',
-								'options'=>array('1'=>' Hide Price Filter for First Category?'),
+								'options'=>array('1'=>eowbc_lang(' Hide Price Filter for First Category?')),
 								'is_id_as_name'=>true,
 								'class'=>array(),
 								'size_class'=>array('eight','wide'),
 								'inline'=>true,
 							),	
 							'price_filter_order_first_cat'=>array(
-								'label'=>'Display Order',
+								'label'=>eowbc_lang('Display Order'),
 								'type'=>'text',
 								'sanitize'=>'sanitize_text_field',
 								'value'=>'',
@@ -404,22 +404,22 @@ if ( ! class_exists( 'Filters' ) ) {
 								'inline'=>true,
 							),		
 							'price_filter_second_cat'=>array(
-								'label'=>'Second Category',
+								'label'=>eowbc_lang('Second Category'),
 								'type'=>'devider',
 							),
 							'hide_price_filter_second_cat'=>array(
-								'label'=>'Hide Price Filter',
+								'label'=>eowbc_lang('Hide Price Filter'),
 								'type'=>'checkbox',
 								'sanitize'=>'sanitize_text_field',
 								'value'=>'',
-								'options'=>array('1'=>' Hide Price Filter for Second Category?'),
+								'options'=>array('1'=>eowbc_lang(' Hide Price Filter for Second Category?')),
 								'is_id_as_name'=>true,
 								'class'=>array(),
 								'size_class'=>array('eight','wide'),
 								'inline'=>true,
 							),	
 							'price_filter_order_second_cat'=>array(
-								'label'=>'Display Order',
+								'label'=>eowbc_lang('Display Order'),
 								'type'=>'text',
 								'sanitize'=>'sanitize_text_field',
 								'value'=>'',
@@ -432,21 +432,21 @@ if ( ! class_exists( 'Filters' ) ) {
 								'type'=>'devider',
 							),		
 							'price_filter_prefix'=>array(
-								'label'=>'Prefix currency symbol for price filter',
+								'label'=>eowbc_lang('Prefix currency symbol for price filter'),
 								'type'=>'checkbox',
 								'sanitize'=>'sanitize_text_field',
 								'value'=>array(),
-								'options'=>array('price_filter_prefix'=>'Add Prefix'),
+								'options'=>array('price_filter_prefix'=>eowbc_lang('Add Prefix')),
 								'class'=>array(),
 								'size_class'=>array('eight','wide'),
 								'inline'=>true,								
 							),
 							'price_filter_postfix'=>array(
-								'label'=>'Postfix currency symbol for price filter',
+								'label'=>eowbc_lang('Postfix currency symbol for price filter'),
 								'type'=>'checkbox',
 								'sanitize'=>'sanitize_text_field',
 								'value'=>array(),
-								'options'=>array('price_filter_postfix'=>'Add Postfix'),
+								'options'=>array('price_filter_postfix'=>eowbc_lang('Add Postfix')),
 								'class'=>array(),
 								'size_class'=>array('eight','wide'),
 								'inline'=>true,								
@@ -462,7 +462,7 @@ if ( ! class_exists( 'Filters' ) ) {
 						)
 					),
 				'altr_filt_widgts'=>array(
-					'label'=>'Alternate Filter Widgets',
+					'label'=>eowbc_lang('Alternate Filter Widgets'),
 					'form'=> array(
 						'saved_tab_key'=>array(
 							'type'=>'hidden',
@@ -475,7 +475,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							'value'=>'fc1',
 							'validate'=>array('required'=>''),
 							'sanitize'=>'sanitize_text_field',
-							'options'=>array('fc1'=>'Default(Grid View)','fc2'=>'Template 1 (Expand/Collapse)','fc3'=>'Template 2','fc4'=>'Template 3','fc5'=>'Template 4'),
+							'options'=>array('fc1'=>eowbc_lang('Default(Grid View)'),'fc2'=>eowbc_lang('Template 1 (Expand/Collapse)'),'fc3'=>eowbc_lang('Template 2'),'fc4'=>eowbc_lang('Template 3'),'fc5'=>eowbc_lang('Template 4')),
 							'class'=>array('fluid'),						
 							'size_class'=>array('required'),
 							'inline'=>false,
@@ -493,7 +493,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							'value'=>'sc1',
 							'validate'=>array('required'=>''),
 							'sanitize'=>'sanitize_text_field',
-							'options'=>array('sc1'=>'Default(Grid View)','sc2'=>'Template 1 (Expand/Collapse)','sc3'=>'Template 2','sc4'=>'Template 3','sc5'=>'Template 4'),
+							'options'=>array('sc1'=>eowbc_lang('Default(Grid View)'),'sc2'=>eowbc_lang('Template 1 (Expand/Collapse)'),'sc3'=>eowbc_lang('Template 2'),'sc4'=>eowbc_lang('Template 3'),'sc5'=>eowbc_lang('Template 4')),
 							'class'=>array('fluid'),						
 							'size_class'=>array('required'),
 							'inline'=>false,
@@ -521,11 +521,11 @@ if ( ! class_exists( 'Filters' ) ) {
 							),
 						),
 						'filter_setting_alternate_mobile'=>array(
-								'label'=>'Alternate Mobile Filter Widget',
+								'label'=>eowbc_lang('Alternate Mobile Filter Widget'),
 								'type'=>'checkbox',
 								'sanitize'=>'sanitize_text_field',
 								'value'=>array(wbc()->options->get_option('filters_filter_setting','filter_setting_alternate_mobile')),
-								'options'=>array('filter_setting_alternate_mobile'=>' Check here to enable alternate filter view for mobile.'),
+								'options'=>array('filter_setting_alternate_mobile'=>eowbc_lang(' Check here to enable alternate filter view for mobile.')),
 								'class'=>array(),
 								'size_class'=>array('eight','wide'),
 								'inline'=>true,
@@ -542,20 +542,20 @@ if ( ! class_exists( 'Filters' ) ) {
 				),							
 				'd_fconfig'=>array(
 
-						'label'=>(($inventory_type==='jewelry' and $is_ring_builder)?"Diamond":"First")." Page Filter Configuration",
+						'label'=>(($inventory_type==='jewelry' and $is_ring_builder)?"Diamond":eowbc_lang("First")).eowbc_lang(" Page Filter Configuration"),
 						'form'=>array( $table["id"].'_bulk'=>array(
 								// 'label'=>'Bulk Actions',
-								'type'=>'select',
+								'type'=>eowbc_lang('select'),
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
-								'options'=>array(''=>eowbc_lang('Bulk Actions'), 'delete'=>'Delete','activate'=>'Activate','deactivate'=>'Deactivate'),
+								'options'=>array(''=>eowbc_lang('Bulk Actions'), 'delete'=>eowbc_lang('Delete'),'activate'=>eowbc_lang('Activate'),'deactivate'=>eowbc_lang('Deactivate')),
 								'class'=>array('fluid'),
 								'size_class'=>array('two','wide'),
 								'next_inline'=>true,
 								'inline'=>true,
 							),
 							'd_fconfig_submit_btn_bulk'=>array(
-								'label'=>'Apply',
+								'label'=>eowbc_lang('Apply'),
 								'type'=>'button',								
 								'class'=>array('secondary'),
 								// 'size_class'=>array('eight','wide'),
@@ -567,7 +567,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'type'=>'table' )
 							), 
 							'd_fconfig_save_sec_title'=>array(
-								'label'=>"Add Filter Field",
+								'label'=>eowbc_lang("Add Filter Field"),
 								'type'=>'label',
 								'size_class'=>array('eight','wide')
 							),
@@ -585,7 +585,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'sanitize'=>'sanitize_text_field',
 							),
 							'd_fconfig_filter'=>array(
-								'label'=>'Filter',
+								'label'=>eowbc_lang('Filter'),
 								'type'=>'select',
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
@@ -634,7 +634,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'type'=>'checkbox',
 								'value'=>array(),
 								'sanitize'=>'sanitize_text_field',
-								'options'=>array('1'=>'Is it advanced filter?'),
+								'options'=>array('1'=>eowbc_lang('Is it advanced filter?')),
 								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
 								'style'=>'normal',
@@ -694,14 +694,14 @@ if ( ! class_exists( 'Filters' ) ) {
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
 								'validate'=>array('required'=>''),
-								'options'=>array('icon'=>'Icon Only','icon_text'=>'Icon and Text','numeric_slider'=>'Numeric slider','text_slider'=>'Text slider','checkbox'=>'Checkbox','toggle_column'=>'Toggle Column'),
+								'options'=>array('icon'=>eowbc_lang('Icon Only'),'icon_text'=>eowbc_lang('Icon and Text'),'numeric_slider'=>eowbc_lang('Numeric slider'),'text_slider'=>eowbc_lang('Text slider'),'checkbox'=>eowbc_lang('Checkbox'),'toggle_column'=>eowbc_lang('Toggle Column')),
 								'class'=>array('fluid'),
 								'size_class'=>array('three','wide','required'),
 								// 'prev_inline'=>true,
 								// 'inline'=>true,
 							),
 							'd_fconfig_note_label'=>array(
-								'label'=>"<strong>Note:Since you want to use icons with attributes filter this plugin will enable icon option for attributes on woocommerce page, so please set icons from there.</strong>",
+								'label'=>eowbc_lang("<strong>Note:Since you want to use icons with attributes filter this plugin will enable icon option for attributes on woocommerce page, so please set icons from there.</strong>"),
 								'type'=>"label",
 								'size_class'=>array('transition','hidden')
 							),
@@ -710,7 +710,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'type'=>'checkbox',
 								'value'=>array(),
 								'sanitize'=>'sanitize_text_field',
-								'options'=>array('1'=>'Allow only single selection.'),
+								'options'=>array('1'=>eowbc_lang('Allow only single selection.')),
 								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
 								'style'=>'normal',	
@@ -761,7 +761,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'type'=>'checkbox',
 								'value'=>array('1'),
 								'sanitize'=>'sanitize_text_field',
-								'options'=>array('1'=>'Add reset link?'),
+								'options'=>array('1'=>eowbc_lang('Add reset link?')),
 								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
 								'style'=>'normal',
@@ -775,10 +775,10 @@ if ( ! class_exists( 'Filters' ) ) {
 								),
 							),
 							'd_fconfig_add_help'=>array(
-								'type'=>'checkbox',
+								'type'=>eowbc_lang('checkbox'),
 								'value'=>array(),
 								'sanitize'=>'sanitize_text_field',
-								'options'=>array('1'=>'Add help text?'),
+								'options'=>array('1'=>eowbc_lang('Add help text?')),
 								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
 								'style'=>'normal',
@@ -786,7 +786,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'inline'=>true,
 							),
 							'd_fconfig_add_help_text'=>array(
-								'label'=>'Help Text',
+								'label'=>eowbc_lang('Help Text'),
 								'type'=>'textarea',
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
@@ -799,10 +799,10 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'inline'=>true,
 							),
 							'd_fconfig_add_enabled'=>array(
-								'type'=>'checkbox',
+								'type'=>eowbc_lang('checkbox'),
 								'value'=>array('1'),
 								'sanitize'=>'sanitize_text_field',
-								'options'=>array('1'=>'Enabled?'),
+								'options'=>array('1'=>eowbc_lang('Enabled?')),
 								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
 								'style'=>'normal',
@@ -821,20 +821,20 @@ if ( ! class_exists( 'Filters' ) ) {
 					),
 				's_fconfig'=>array(
 
-						'label'=>($inventory_type==='jewelry'?"Settings":"Second")." Page Filter Configuration",
+						'label'=>($inventory_type==='jewelry'?"Settings":eowbc_lang("Second")).eowbc_lang(" Page Filter Configuration"),
 						'form'=>array( $sett_table["id"].'_bulk'=>array(
 								// 'label'=>'Bulk Actions',
 								'type'=>'select',
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
-								'options'=>array(''=>eowbc_lang('Bulk Actions'), 'delete'=>'Delete','activate'=>'Activate','deactivate'=>'Deactivate'),
+								'options'=>array(''=>eowbc_lang('Bulk Actions'), 'delete'=>eowbc_lang('Delete'),'activate'=>eowbc_lang('Activate'),'deactivate'=>eowbc_lang('Deactivate')),
 								'class'=>array('fluid'),
 								'size_class'=>array('two','wide'),
 								'next_inline'=>true,
 								'inline'=>true,
 							),
 							's_fconfig_submit_btn_bulk'=>array(
-								'label'=>'Apply',
+								'label'=>eowbc_lang('Apply'),
 								'type'=>'button',
 								'class'=>array('secondary'),
 								// 'size_class'=>array('eight','wide'),
@@ -847,7 +847,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							), 
 
 							's_fconfig_save_sec_title'=>array(
-								'label'=>"Add Filter Field",
+								'label'=>eowbc_lang("Add Filter Field"),
 								'type'=>'label',
 								'size_class'=>array('eight','wide')
 							),
@@ -912,10 +912,10 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'inline'=>true,
 							),
 							's_fconfig_is_advanced'=>array(
-								'type'=>'checkbox',
+								'type'=>eowbc_lang('checkbox'),
 								'value'=>array(),
 								'sanitize'=>'sanitize_text_field',
-								'options'=>array('1'=>'Is it advanced filter?'),
+								'options'=>array('1'=>eowbc_lang('Is it advanced filter?')),
 								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
 								'style'=>'normal',
@@ -975,14 +975,14 @@ if ( ! class_exists( 'Filters' ) ) {
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
 								'validate'=>array('required'=>''),
-								'options'=>array('icon'=>'Icon Only','icon_text'=>'Icon and Text','numeric_slider'=>'Numeric slider','text_slider'=>'Text slider','checkbox'=>'Checkbox'),
+								'options'=>array('icon'=>eowbc_lang('Icon Only'),'icon_text'=>eowbc_lang('Icon and Text'),'numeric_slider'=>eowbc_lang('Numeric slider'),'text_slider'=>eowbc_lang('Text slider'),'checkbox'=>eowbc_lang('Checkbox')),
 								'class'=>array('fluid'),
 								'size_class'=>array('three','wide','required'),
 								// 'prev_inline'=>true,
 								// 'inline'=>true,
 							),
 							's_fconfig_note_label'=>array(
-								'label'=>"<strong>Note:Since you want to use icons with attributes filter this plugin will enable icon option for attributes on woocommerce page, so please set icons from there.</strong>",
+								'label'=>eowbc_lang("<strong>Note:Since you want to use icons with attributes filter this plugin will enable icon option for attributes on woocommerce page, so please set icons from there.</strong>"),
 								'type'=>"label",
 								'size_class'=>array('transition','hidden')
 							),
@@ -991,7 +991,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'type'=>'checkbox',
 								'value'=>array(),
 								'sanitize'=>'sanitize_text_field',
-								'options'=>array('1'=>'Allow only single selection.'),
+								'options'=>array('1'=>eowbc_lang('Allow only single selection.')),
 								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
 								'style'=>'normal',								
@@ -1039,10 +1039,10 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'inline'=>true,
 							),
 							's_fconfig_add_reset_link'=>array(
-								'type'=>'checkbox',
+								'type'=>eowbc_lang('checkbox'),
 								'value'=>array('1'),
 								'sanitize'=>'sanitize_text_field',
-								'options'=>array('1'=>'Add reset link?'),
+								'options'=>array('1'=>eowbc_lang('Add reset link?')),
 								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
 								'style'=>'normal',
@@ -1056,10 +1056,10 @@ if ( ! class_exists( 'Filters' ) ) {
 								),
 							),
 							's_fconfig_add_help'=>array(
-								'type'=>'checkbox',
+								'type'=>eowbc_lang('checkbox'),
 								'value'=>array(),
 								'sanitize'=>'sanitize_text_field',
-								'options'=>array('1'=>'Add help text?'),
+								'options'=>array('1'=>eowbc_lang('Add help text?')),
 								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
 								'style'=>'normal',
@@ -1067,7 +1067,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'inline'=>true,
 							),
 							's_fconfig_add_help_text'=>array(
-								'label'=>'Help Text',
+								'label'=>eowbc_lang('Help Text'),
 								'type'=>'textarea',
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
@@ -1080,10 +1080,10 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'inline'=>true,
 							),
 							's_fconfig_add_enabled'=>array(
-								'type'=>'checkbox',
+								'type'=>eowbc_lang('checkbox'),
 								'value'=>array('1'),
 								'sanitize'=>'sanitize_text_field',
-								'options'=>array('1'=>'Enabled?'),
+								'options'=>array('1'=>eowbc_lang('Enabled?')),
 								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
 								'style'=>'normal',

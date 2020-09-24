@@ -261,7 +261,7 @@ class Eowbc_Mapping extends Eowbc_Model {
 			$res['msg'] = json_encode($map[wbc()->sanitize->post('id')]);
 		} else {
 			$res['type'] = 'error';
-			$res['msg'] = 'Selected item does not exists!';
+			$res['msg'] = eowbc_lang('Selected item does not exists!');
 		}		
 		return $res;
 	}	

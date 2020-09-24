@@ -76,7 +76,7 @@ if ( ! class_exists( 'Shortcode_Filters' ) ) {
 					'class'=>array('small'),
 				),
 				'shortcode_multiple'=>array(
-					'label'=>'If you want to use more than one shortcode based filters then please <a href="http://sphereplugins.com/contact-us" target="_blank">contact us</a>',
+					'label'=>eowbc_lang('If you want to use more than one shortcode based filters then please <a href="http://sphereplugins.com/contact-us" target="_blank">contact us</a>'),
 					'type'=>'visible_info',
 					'class'=>array('fluid'),
 				),

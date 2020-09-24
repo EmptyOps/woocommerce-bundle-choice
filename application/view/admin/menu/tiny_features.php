@@ -138,7 +138,7 @@ $form['tabs'] = true;
 $form['data'] = array(
 	
 	'tiny_features_item_page_option'=>array(
-			'label'=>'Options UI for Item Page',
+			'label'=>eowbc_lang('Options UI for Item Page'),
 			'form'=>array(
 				/*'tiny_features_option_ui_toggle_status'=>array(
 					'label'=>eowbc_lang('Toggle Button Enabled?'),
@@ -161,7 +161,7 @@ $form['data'] = array(
 					'type'=>'checkbox',
 					'value'=>array(wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_init_status')),
 					'sanitize'=>'sanitize_text_field',
-					'options'=>array('tiny_features_option_ui_toggle_init_status'=>'Variation Form Visiblity'),
+					'options'=>array('tiny_features_option_ui_toggle_init_status'=>eowbc_lang('Variation Form Visiblity')),
 					'class'=>array('fluid'),						
 					// 'size_class'=>array('eight','wide'),
 					'inline'=>false,
@@ -358,14 +358,14 @@ $form['data'] = array(
 					)
 				),
 				'product_page_hide_first_variation_form'=>array(
-					'label'=>'Hide first category\'s variation menu',
+					'label'=>eowbc_lang('Hide first category\'s variation menu'),
 					'type'=>'checkbox',
 					'sanitize'=>'sanitize_text_field',
 					'value'=>array(wbc()->options->get_option('tiny_features','product_page_hide_first_variation_form')),
 					'options'=>array('1'=>' '),
 					'is_id_as_name'=>true,
 					'class'=>array(),
-					'visible_info'=>array( 'label'=>'If enabled the variation selection table for first category\'s products will be hidden if default variations are set',
+					'visible_info'=>array( 'label'=>eowbc_lang('If enabled the variation selection table for first category\'s products will be hidden if default variations are set'),
 						'type'=>'visible_info',
 						'class'=>array('fluid', 'small'),
 						'size_class'=>array('sixteen','wide'),
@@ -379,14 +379,14 @@ $form['data'] = array(
 					'options'=>array('1'=>' '),
 					'is_id_as_name'=>true,
 					'class'=>array(),
-					'visible_info'=>array( 'label'=>'If enabled the variation selection table for second category\'s products will be hidden if default variations are set',
+					'visible_info'=>array( 'label'=>eowbc_lang('If enabled the variation selection table for second category\'s products will be hidden if default variations are set'),
 						'type'=>'visible_info',
 						'class'=>array('fluid', 'small'),
 						'size_class'=>array('sixteen','wide'),
 					),	
 				), 
 				'tiny_features_option_ui_save'=>array(
-							'label'=>'Save',
+							'label'=>eowbc_lang('Save'),
 							'type'=>'button',		
 							'class'=>array('primary'),
 							'attr'=>array("data-action='save'")				
@@ -394,10 +394,10 @@ $form['data'] = array(
 			)
 		),
 	'tiny_features_specification_view'=>array(
-		'label'=>'Specifications View for Item Page',
+		'label'=>eowbc_lang('Specifications View for Item Page'),
 		'form'=>array(
 			'tiny_features_devider_specification_view'=>array(
-					'label'=>'Specification View Configuration',
+					'label'=>eowbc_lang('Specification View Configuration'),
 					'type'=>'devider',
 				),
 			/*'tiny_features_specification_view_status'=>array(
@@ -416,11 +416,11 @@ $form['data'] = array(
 					'type'=>'devider',
 				),
 			'tiny_features_specification_view_shortcode_status'=>array(
-					'label'=>'Shortcode Status',
+					'label'=>eowbc_lang('Shortcode Status'),
 					'type'=>'checkbox',
 					'value'=>array(wbc()->options->get_option('tiny_features','specification_view_shortcode_status')),
 					'sanitize'=>'sanitize_text_field',
-					'options'=>array('specification_view_shortcode_status'=>' Check here to enable shortcode feature of specification view at product page (Use <strong>[woo-bundle-choice-specification-view] </strong> as Shortcode).'),
+					'options'=>array('specification_view_shortcode_status'=>eowbc_lang(' Check here to enable shortcode feature of specification view at product page (Use <strong>[woo-bundle-choice-specification-view] </strong> as Shortcode).')),
 					'class'=>array(),
 					'size_class'=>array('eight','wide'),
 					'inline'=>true,
@@ -431,27 +431,27 @@ $form['data'] = array(
 					),											
 				),
 			'tiny_features_specification_view_default_status'=>array(
-					'label'=>'At Default Position - Item/Product Page',
+					'label'=>eowbc_lang('At Default Position - Item/Product Page'),
 					'type'=>'checkbox',
 					'value'=>array(wbc()->options->get_option('tiny_features','specification_view_default_status')),
 					'sanitize'=>'sanitize_text_field',
-					'options'=>array('specification_view_default_status'=>'Check here to enable shortcode feature of specification view at specification section on product page.'),
+					'options'=>array('specification_view_default_status'=>eowbc_lang('Check here to enable shortcode feature of specification view at specification section on product page.')),
 					'class'=>array(),
 					'size_class'=>array('eight','wide'),
 					'inline'=>true,
 				),
 			'tiny_features_specification_view_style'=>array(
-					'label'=>'Alternate Widgets',
+					'label'=>eowbc_lang('Alternate Widgets'),
 					'type'=>'radio',
 					'value'=>wbc()->options->get_option('tiny_features','specification_view_style','default'),
 					'sanitize'=>'sanitize_text_field',
-					'options'=>array('default'=>'Default Style','template_1'=>'Template 1','template_2'=>'Template 2'),
+					'options'=>array('default'=>eowbc_lang('Default Style'),'template_1'=>eowbc_lang('Template 1'),'template_2'=>eowbc_lang('Template 2')),
 					'class'=>array(),
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>true,
 				),
 			'tiny_features_specification_meta_keys'=>array(
-					'label'=>'Additional Meta',
+					'label'=>eowbc_lang('Additional Meta'),
 					'type'=>'select',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_specification_meta_keys',''),
 					'sanitize'=>'sanitize_text_field',		
@@ -468,7 +468,7 @@ $form['data'] = array(
 					
 				),
 			'tiny_features_save_specification_view'=>array(
-						'label'=>'Save',
+						'label'=>eowbc_lang('Save'),
 						'type'=>'button',		
 						'class'=>array('primary'),
 						'attr'=>array("data-action='save'")	

@@ -357,7 +357,7 @@ class Cart {
                                 ){
             return sprintf(
                             '<a href="?EO_WBC=1&amp;EO_WBC_REMOVE=%s" class="remove" aria-label="%s">&times;</a>',$cart_item_key,
-                            esc_html__( 'Remove this item', 'woocommerce' ));
+                            esc_html__( eowbc_lang('Remove this item'), 'woocommerce' ));
 
         },10,2);
 

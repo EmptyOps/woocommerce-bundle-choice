@@ -13,7 +13,7 @@
         <div class="column">1</div>
         <div class="column" style="text-align: left;">                       
             <?php if(empty($first)):?>        
-                <div class="description">Choose a</div>
+                <div class="description"><?php echo eowbc_lang('Choose a'); ?></div>
                 <div class="title"><?php echo $first_name; ?></div>
                 <div>&nbsp;</div>
             <?php else:?>
@@ -25,7 +25,7 @@
                     }                            
                 if(empty($view_url) or $view_url=='#'){
                     ?>
-                        <div class="description">Choose a</div>
+                        <div class="description"><?php echo eowbc_lang('Choose a'); ?></div>
                         <div class="title"><?php echo $first_name; ?></div>
                         <div>&nbsp;</div>
                     <?php
@@ -34,7 +34,7 @@
                 <div class="description"><?php _e($first_name); ?></div>
                 <div><?php _e(get_woocommerce_currency().wc_price($first->get_price())); ?></div>
                 
-                <div><u><a href="<?php echo $view_url; ?>">View</a></u>&nbsp;|&nbsp;<u><a href="<?php echo $remove_url; ?>" data-remove-url="<?php echo $remove_url; ?>"><?php _e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_change_action_text','Change',true,true)); ?></a></u></div>
+                <div><u><a href="<?php echo $view_url; ?>"><?php echo eowbc_lang('View'); ?></a></u>&nbsp;|&nbsp;<u><a href="<?php echo $remove_url; ?>" data-remove-url="<?php echo $remove_url; ?>"><?php _e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_change_action_text','Change',true,true)); ?></a></u></div>
             <?php } endif; ?>                    
         </div>                
         <div class="column">

@@ -9,7 +9,7 @@
 		    <i class="dropdown icon"></i>		    
 		    <?php echo $filter['title']; ?>
 		    <?php if($reset): ?>
-			&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_slider(event,'<?php echo $filter['slug'] ?>',0,<?php echo count(array_filter($items_slug)); ?>)">&nbsp;<u>reset</u></span>
+			&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_slider(event,'<?php echo $filter['slug'] ?>',0,<?php echo count(array_filter($items_slug)); ?>)">&nbsp;<u><?php echo eowbc_lang('reset'); ?></u></span>
 			<?php endif; ?>
 		</div>
 	  	<div class="content">		    

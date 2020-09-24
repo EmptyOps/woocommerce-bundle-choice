@@ -152,7 +152,7 @@ class Term_Meta {
 				<br/>				
 				<div>					
 					<button class="ui button wbc_thumb_button button" style="padding: 0.6em;">
-						<?php _e('Choose Image', 'woo-bundle-choice'); ?>						
+						<?php _e(eowbc_lang('Choose Image'), 'woo-bundle-choice'); ?>						
 					</button>					
 				</div>
 				
@@ -160,7 +160,7 @@ class Term_Meta {
 
 					jQuery(document).on("click",".wbc_thumb_button",function(){
 						wp_media = wp.media({
-							title: 'Term Image',
+							title: eowbc_lang('Term Image'),
 							button: {
 								text: 'Choose Image'
 							},
@@ -213,12 +213,12 @@ class Term_Meta {
 		if(!empty($this->attribute)) {			
 			switch ($this->attribute->attribute_type) {
 				case 'color':					
-					$column_title = 'Color';
+					$column_title = eowbc_lang('Color');
 					$column_key = 'color';
 					break;
 
 				case 'image' or 'image_text' or 'dropdown_image' or 'dropdown_image_only':
-					$column_title = 'Image';
+					$column_title = eowbc_lang('Image');
 					$column_key = 'image';
 					break;				
 			}
@@ -259,7 +259,7 @@ class Term_Meta {
 	        } else {
 	            $src = $woocommerce->plugin_url() . '/assets/images/placeholder.png';
 	        }			
-			$columns .= '<img src="' . esc_url( $src ) . '" alt="' . esc_attr__( 'Thumbnail', 'woo-bundle-choice' ) . '" class="wp-post-image" height="48" width="48" />';
+			$columns .= '<img src="' . esc_url( $src ) . '" alt="' . esc_attr__( eowbc_lang('Thumbnail'), 'woo-bundle-choice' ) . '" class="wp-post-image" height="48" width="48" />';
 		}
 		//die($columns);
 		return $columns;
@@ -272,7 +272,7 @@ class Term_Meta {
 		<div class="form-field" style="overflow:visible;">
 			
 			<div id="swatch-photo">
-				<label><?php _e('Thumb Image', 'woo-bundle-choice'); ?></label>
+				<label><?php _e(eowbc_lang('Thumb Image'), 'woo-bundle-choice'); ?></label>
 				
 				<div>
 					<input type="hidden" name="wbc_attachment_thumb" id="wbc_attachment_thumb">
@@ -280,7 +280,7 @@ class Term_Meta {
 				</div>				
 				<div>					
 					<button type="submit" class="wbc_attachment_thumb_button button">
-						<?php _e('Add/Edit image', 'woo-bundle-choice'); ?>						
+						<?php _e(eowbc_lang('Add/Edit image'), 'woo-bundle-choice'); ?>						
 					</button>					
 				</div>
 				
@@ -288,9 +288,9 @@ class Term_Meta {
 
 					jQuery(document).on("click",".wbc_attachment_thumb_button",function(){
 						wp_media = wp.media({
-							title: 'Term Thumb Image',
+							title: eowbc_lang('Term Thumb Image'),
 							button: {
-								text: 'Choose Image'
+								text: eowbc_lang('Choose Image')
 							},
 							multiple: false
 						})
@@ -326,7 +326,7 @@ class Term_Meta {
 		?>		
 		<tr class="form-field" style="overflow:visible;">			
 			<th scope="row" valign="top">
-				<label><?php _e('Image', 'woo-bundle-choice'); ?></label>
+				<label><?php _e(eowbc_lang('Image'), 'woo-bundle-choice'); ?></label>
 			</th>			
 			<td>
 				<div>
@@ -336,16 +336,16 @@ class Term_Meta {
 					
 				<div>					
 					<button type="submit" class="wbc_attachment_thumb_button button">
-						<?php _e('Add/Edit image', 'woo-bundle-choice'); ?>						
+						<?php _e(eowbc_lang('Add/Edit image'), 'woo-bundle-choice'); ?>						
 					</button>				
 				</div>
 				
 				<script type="text/javascript">	
 					jQuery(document).on("click",".wbc_attachment_thumb_button",function(){
 						wp_media = wp.media({
-							title: 'Term Thumb Image',
+							title: eowbc_lang('Term Thumb Image'),
 							button: {
-								text: 'Choose Image'
+								text: eowbc_lang('Choose Image')
 							},
 							multiple: false
 						})
@@ -370,7 +370,7 @@ class Term_Meta {
 		if(is_array($columns) and !empty($columns)){
 			$__columns = array();		
 			$__columns['cb'] = $columns['cb'];			
-			$__columns['thumbnail'] = __('Thumbnail', 'woo-bundle-choice');			
+			$__columns['thumbnail'] = __(eowbc_lang('Thumbnail'), 'woo-bundle-choice');			
 			unset($columns['cb']);			
 			$columns = array_merge($__columns, $columns);	
 		}
@@ -390,7 +390,7 @@ class Term_Meta {
 	        } else {
 	            $src = $woocommerce->plugin_url() . '/assets/images/placeholder.png';
 	        }			
-			$columns .= '<img src="' . esc_url( $src ) . '" alt="' . esc_attr__( 'Thumbnail', 'woo-bundle-choice' ) . '" class="wp-post-image" height="48" width="48" />';
+			$columns .= '<img src="' . esc_url( $src ) . '" alt="' . esc_attr__( eowbc_lang('Thumbnail'), 'woo-bundle-choice' ) . '" class="wp-post-image" height="48" width="48" />';
 		endif;		
 		return $columns;
 	}

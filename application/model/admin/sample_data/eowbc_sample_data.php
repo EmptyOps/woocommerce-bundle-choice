@@ -253,7 +253,7 @@ class Eowbc_Sample_Data {
 		global $wpdb;
 
 		if(!isset($this->data_template->get_products()[$index])) {
-			return array( "type"=>"error", "msg"=>"No product found at index ".$index );	//FALSE;
+			return array( "type"=>"error", "msg"=>eowbc_lang("No product found at index ").$index );	//FALSE;
 		}
 	
 		$product=$this->data_template->get_products()[$index];

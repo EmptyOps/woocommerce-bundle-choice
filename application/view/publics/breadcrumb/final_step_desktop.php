@@ -9,7 +9,7 @@
         <div class="ui grid" style="width: fit-content !important;">
             <div class="column">3</div>
             <div class="column" style="text-align: left;">
-                <div class="description">Complete</div>
+                <div class="description"><?php echo eowbc_lang('Complete'); ?></div>
                 <div class="title"><?php _e($preview_name); ?></div>
             </div>             
         </div>               
