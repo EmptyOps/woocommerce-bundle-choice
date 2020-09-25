@@ -1,0 +1,133 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2020-09-24T19:35:42+05:30\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.4.0\n"
+"X-Domain: woo-bundle-choice\n"
+
+#: controllers/admin/category-meta.php:75
+msgid "Filter Selected Image"
+msgstr ""
+
+#: controllers/admin/category-meta.php:87
+#: controllers/admin/term-meta.php:155
+msgid "Choose Image"
+msgstr ""
+
+#: controllers/admin/category-meta.php:162
+#: controllers/admin/term-meta.php:262
+#: controllers/admin/term-meta.php:373
+#: controllers/admin/term-meta.php:393
+msgid "Thumbnail"
+msgstr ""
+
+#: controllers/admin/term-meta.php:143
+#: controllers/admin/term-meta.php:329
+msgid "Image"
+msgstr ""
+
+#: controllers/admin/term-meta.php:275
+msgid "Thumb Image"
+msgstr ""
+
+#: controllers/admin/term-meta.php:283
+#: controllers/admin/term-meta.php:339
+msgid "Add/Edit image"
+msgstr ""
+
+#: controllers/publics/pages/preview.php:216
+msgid "Unexpected error has occured"
+msgstr ""
+
+#: controllers/publics/pages/preview.php:349
+msgid "Add This To Cart"
+msgstr ""
+
+#: controllers/publics/pages/product.php:128
+msgid "Add to pair"
+msgstr ""
+
+#: controllers/publics/pages/product.php:176
+#: controllers/publics/pages/product.php:180
+#: controllers/publics/pages/product.php:257
+#: controllers/publics/pages/product.php:261
+msgid "Continue"
+msgstr ""
+
+#: controllers/publics/service.php:79
+msgid "Discount"
+msgstr ""
+
+#: helper/helper-WBC_Common.php:224
+#: helper/helper-WBC_Common.php:229
+msgid "The index key should be either a string or an integer"
+msgstr ""
+
+#: system/bootstrap/setup-wizard.php:277
+#: system/bootstrap/setup-wizard.php:282
+#: view/admin/setup-wizard/basic_config.php:9
+#: view/admin/setup-wizard/basic_config.php:14
+msgid "Inventory Type"
+msgstr ""
+
+#: system/bootstrap/setup-wizard.php:284
+#: view/admin/setup-wizard/basic_config.php:16
+msgid "Jewelry"
+msgstr ""
+
+#: system/bootstrap/setup-wizard.php:285
+#: view/admin/setup-wizard/basic_config.php:17
+msgid "Clothing"
+msgstr ""
+
+#: system/bootstrap/setup-wizard.php:286
+#: view/admin/setup-wizard/basic_config.php:18
+msgid "Home Decor"
+msgstr ""
+
+#: system/bootstrap/setup-wizard.php:287
+#: view/admin/setup-wizard/basic_config.php:19
+msgid "Others"
+msgstr ""
+
+#: system/bootstrap/setup-wizard.php:310
+#: view/admin/setup-wizard/feature.php:11
+msgid "Choose features"
+msgstr ""
+
+#: view/admin/sample_data/main.php:98
+msgid "Create sample %1s"
+msgstr ""
+
+#: view/publics/buttons.php:27
+msgid "Make your own pair from recommendation"
+msgstr ""
+
+#: view/publics/buttons.php:32
+msgid "Start with "
+msgstr ""
+
+#: view/publics/category.php:123
+#: view/publics/category.php:181
+msgid "View and Continue"
+msgstr ""
+
+#: view/publics/category.php:125
+#: view/publics/category.php:183
+msgid "Out of stock"
+msgstr ""
+
+#: view/publics/features/specification_view.php:65
+msgid "Certificate"
+msgstr ""
+
+#: view/publics/features/specification_view.php:65
+msgid "Click here"
+msgstr ""
