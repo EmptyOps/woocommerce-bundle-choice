@@ -156,6 +156,7 @@ if(!class_exists('Woo_Bundle_Choice')) {
 
 
 	add_action( 'plugins_loaded', function() {
+		load_plugin_textdomain( 'woo-bundle-choice', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 		wbc()->construct_init();
 	});
 
