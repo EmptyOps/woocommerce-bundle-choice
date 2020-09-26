@@ -95,6 +95,7 @@ box-shadow: none;">
 	            <tr>
 	              <td>
 	                <?php $_steps=["catagorie(s)","attribute(s)","product(s)"]; ?>
+	                <?php /* translators: %s: Title for the automation to be ran */ ?>
 	                <input type="submit" name="save" value="<?php printf(__("Create sample %1s","woo-bundle-choice"),$_steps[$_step-1]); ?>"  class="button button-primary button-hero action">                
 	              </td>
 	              <td>

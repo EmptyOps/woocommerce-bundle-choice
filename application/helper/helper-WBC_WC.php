@@ -73,13 +73,13 @@ class WBC_WC {
             $slug = $args['slug'];
 
             if ( strlen( $slug ) >= 28 ) {
-                /* Language function - comment */
+               /* translators: %s: Name of the product */
                 return new WP_Error( 'invalid_product_attribute_slug_too_long', sprintf( __( __('Name "%s" is too long (28 characters max). Shorten it, please.','woo-bundle-choice'), 'woocommerce' ), $slug ), array( 'status' => 400 ) );
             } elseif ( wc_check_if_attribute_name_is_reserved( $slug ) ) {
-                /* Language function - comment */
+                /* translators: %s: Name of the product */
                 return new WP_Error( 'invalid_product_attribute_slug_reserved_name', sprintf( __( __('Name "%s" is not allowed because it is a reserved term. Change it, please.','woo-bundle-choice'), 'woocommerce' ), $slug ), array( 'status' => 400 ) );
             } elseif ( taxonomy_exists( wc_attribute_taxonomy_name( $args['name'] ) ) ) {
-                /* Language function - comment */
+                /* translators: %s: Name of the product */
                 return new WP_Error( 'invalid_product_attribute_slug_already_exists', sprintf( __( __('Name "%s" is already in use. Change it, please.','woo-bundle-choice'), 'woocommerce' ), $args['name'] ), array( 'status' => 400 ) );
             }
 
