@@ -9,7 +9,8 @@
 		<p>
 			<span class="ui header"><?php echo($title); ?></span>
 			<?php if($reset): ?>
-		&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_icon(event,'<?php echo $term->slug; ?>')">&nbsp;<u><?php echo eowbc_lang('reset'); ?></u></span>
+			/* Language function - comment */ 
+		&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_icon(event,'<?php echo $term->slug; ?>')">&nbsp;<u><?php _e('reset','woo-bundle-choice'); ?></u></span>
 		<?php endif; ?>
 		</p>
 		<div class="ui tiny images ui equal width center aligned grid" style="text-align: center;" data-reset="reset_icon(new Event('click'),'<?php echo $term->slug; ?>')" data-filter-slug="<?php echo $term->slug; ?>">				

@@ -11,7 +11,8 @@
         <div class="ui column left aligned"><?php echo $order; ?></div>
         <div class="ui column left aligned">
             <?php if(empty($first)){ ?>
-                <div class="title"><?php echo eowbc_lang('Choose a '._e($first_name)); ?></div>
+            /* Language function - comment */ 
+                <div class="title"><?php _e('Choose a '._e($first_name),'woo-bundle-choice'); ?></div>
             <?php } else { ?>
                 <div class="title"><?php _e($first_name); ?></div>
                 <div class="description"><?php _e($first->get_name()); ?> - <?php _e(wc_price($first->get_price())); ?></div>

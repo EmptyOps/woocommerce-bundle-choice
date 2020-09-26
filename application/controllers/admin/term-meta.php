@@ -108,13 +108,15 @@ class Term_Meta {
 				<?php if($is_edit): ?>
 					<th scope="row" valign="top">
 				<?php endif; ?>
-						<label for="tag-slug">Color</label>
+				/* Language function - comment */
+						<label for="tag-slug"><?php _e('Color','woo-bundle-choice'); ?></label>
 				<?php if($is_edit): ?>
 					</th>
 					<td>
 				<?php endif; ?>				
 				<input name="wbc_color" id="wbc_color" type="color" class="wbc_color"  style="width: 94%;" value='<?php echo ($is_edit?get_term_meta( $term->term_id,'wbc_color',true):''); ?>'>	
-				<p>Choose a color to be shown as option on variation form.</p>
+				/* Language function - comment */
+				<p><?php _e('Choose a color to be shown as option on variation form.','woo-bundle-choice'); ?></p>
 				<?php if($is_edit): ?>
 					</td>
 				<?php endif; ?>
@@ -140,6 +142,7 @@ class Term_Meta {
 			<?php if($is_edit): ?>
 				<th scope="row" valign="top">
 			<?php endif; ?>
+				/* Language function - comment */
 				<label><?php _e('Image', 'woo-bundle-choice'); ?></label>
 			<?php if($is_edit): ?>
 					</th>
@@ -152,7 +155,8 @@ class Term_Meta {
 				<br/>				
 				<div>					
 					<button class="ui button wbc_thumb_button button" style="padding: 0.6em;">
-						<?php _e(eowbc_lang('Choose Image'), 'woo-bundle-choice'); ?>						
+						/* Language function - comment */
+						<?php _e('Choose Image', 'woo-bundle-choice'); ?>						
 					</button>					
 				</div>
 				
@@ -160,9 +164,11 @@ class Term_Meta {
 
 					jQuery(document).on("click",".wbc_thumb_button",function(){
 						wp_media = wp.media({
-							title: eowbc_lang('Term Image'),
+							/* Language function - comment */
+							title: __('Term Image','woo-bundle-choice'),
 							button: {
-								text: 'Choose Image'
+								/* Language function - comment */
+								text: __('Choose Image','woo-bundle-choice')
 							},
 							multiple: false
 						})
@@ -213,12 +219,12 @@ class Term_Meta {
 		if(!empty($this->attribute)) {			
 			switch ($this->attribute->attribute_type) {
 				case 'color':					
-					$column_title = eowbc_lang('Color');
+					$column_title = _e('Color','woo-bundle-choice');
 					$column_key = 'color';
 					break;
 
 				case 'image' or 'image_text' or 'dropdown_image' or 'dropdown_image_only':
-					$column_title = eowbc_lang('Image');
+					$column_title = _e('Image','woo-bundle-choice');
 					$column_key = 'image';
 					break;				
 			}
@@ -259,7 +265,7 @@ class Term_Meta {
 	        } else {
 	            $src = $woocommerce->plugin_url() . '/assets/images/placeholder.png';
 	        }			
-			$columns .= '<img src="' . esc_url( $src ) . '" alt="' . esc_attr__( eowbc_lang('Thumbnail'), 'woo-bundle-choice' ) . '" class="wp-post-image" height="48" width="48" />';
+			$columns .= '<img src="' . esc_url( $src ) . '" alt="' . esc_attr__( 'Thumbnail', 'woo-bundle-choice' ) . '" class="wp-post-image" height="48" width="48" />';
 		}
 		//die($columns);
 		return $columns;
@@ -272,7 +278,8 @@ class Term_Meta {
 		<div class="form-field" style="overflow:visible;">
 			
 			<div id="swatch-photo">
-				<label><?php _e(eowbc_lang('Thumb Image'), 'woo-bundle-choice'); ?></label>
+				/* Language function - comment */
+				<label><?php _e('Thumb Image', 'woo-bundle-choice'); ?></label>
 				
 				<div>
 					<input type="hidden" name="wbc_attachment_thumb" id="wbc_attachment_thumb">
@@ -280,7 +287,8 @@ class Term_Meta {
 				</div>				
 				<div>					
 					<button type="submit" class="wbc_attachment_thumb_button button">
-						<?php _e(eowbc_lang('Add/Edit image'), 'woo-bundle-choice'); ?>						
+						/* Language function - comment */
+						<?php _e('Add/Edit image', 'woo-bundle-choice'); ?>						
 					</button>					
 				</div>
 				
@@ -288,9 +296,11 @@ class Term_Meta {
 
 					jQuery(document).on("click",".wbc_attachment_thumb_button",function(){
 						wp_media = wp.media({
-							title: eowbc_lang('Term Thumb Image'),
+							/* Language function - comment */
+							title: __('Term Thumb Image','woo-bundle-choice'),
 							button: {
-								text: eowbc_lang('Choose Image')
+								/* Language function - comment */
+								text: __('Choose Image','woo-bundle-choice')
 							},
 							multiple: false
 						})
@@ -326,7 +336,8 @@ class Term_Meta {
 		?>		
 		<tr class="form-field" style="overflow:visible;">			
 			<th scope="row" valign="top">
-				<label><?php _e(eowbc_lang('Image'), 'woo-bundle-choice'); ?></label>
+				/* Language function - comment */
+				<label><?php _e('Image', 'woo-bundle-choice'); ?></label>
 			</th>			
 			<td>
 				<div>
@@ -336,16 +347,19 @@ class Term_Meta {
 					
 				<div>					
 					<button type="submit" class="wbc_attachment_thumb_button button">
-						<?php _e(eowbc_lang('Add/Edit image'), 'woo-bundle-choice'); ?>						
+						/* Language function - comment */
+						<?php _e('Add/Edit image', 'woo-bundle-choice'); ?>						
 					</button>				
 				</div>
 				
 				<script type="text/javascript">	
 					jQuery(document).on("click",".wbc_attachment_thumb_button",function(){
 						wp_media = wp.media({
-							title: eowbc_lang('Term Thumb Image'),
+							/* Language function - comment */
+							title: __('Term Thumb Image','woo-bundle-choice'),
 							button: {
-								text: eowbc_lang('Choose Image')
+								/* Language function - comment */
+								text: __('Choose Image','woo-bundle-choice');
 							},
 							multiple: false
 						})
@@ -369,8 +383,9 @@ class Term_Meta {
 	public function woocommerce_product_attribute_columns($columns) {
 		if(is_array($columns) and !empty($columns)){
 			$__columns = array();		
-			$__columns['cb'] = $columns['cb'];			
-			$__columns['thumbnail'] = __(eowbc_lang('Thumbnail'), 'woo-bundle-choice');			
+			$__columns['cb'] = $columns['cb'];	
+			/* Language function - comment */		
+			$__columns['thumbnail'] = __('Thumbnail', 'woo-bundle-choice');			
 			unset($columns['cb']);			
 			$columns = array_merge($__columns, $columns);	
 		}
@@ -390,7 +405,7 @@ class Term_Meta {
 	        } else {
 	            $src = $woocommerce->plugin_url() . '/assets/images/placeholder.png';
 	        }			
-			$columns .= '<img src="' . esc_url( $src ) . '" alt="' . esc_attr__( eowbc_lang('Thumbnail'), 'woo-bundle-choice' ) . '" class="wp-post-image" height="48" width="48" />';
+			$columns .= '<img src="' . esc_url( $src ) . '" alt="' . esc_attr__('Thumbnail', 'woo-bundle-choice' ) . '" class="wp-post-image" height="48" width="48" />';
 		endif;		
 		return $columns;
 	}
@@ -399,13 +414,14 @@ class Term_Meta {
 
 		// Add additional type so we get the kind of the attribute's behaviour.
 		add_filter( 'product_attributes_type_selector',function($type){
-			$type['button']='Button';
-			$type['color']='Color';
-			$type['image']='Icon';
-			$type['image_text']='Icons with Text';
-			$type['dropdown_image']='Dropdown with Icons';
-			$type['dropdown_image_only']='Dropdown with Icons Only';
-			$type['dropdown']='Dropdown';
+			/* Language function - comment */
+			$type['button']=__('Button','woo-bundle-choice');
+			$type['color']=__('Color','woo-bundle-choice');
+			$type['image']=__('Icon','woo-bundle-choice');
+			$type['image_text']=__('Icons with Text','woo-bundle-choice');
+			$type['dropdown_image']=__('Dropdown with Icons','woo-bundle-choice');
+			$type['dropdown_image_only']=__('Dropdown with Icons Only','woo-bundle-choice');
+			$type['dropdown']=__('Dropdown','woo-bundle-choice');
 
 			return $type;
 		}, 10, 1 );
@@ -417,10 +433,11 @@ class Term_Meta {
 	public function add_taxonomy_form() {
 		ob_start();
 		?>
-			<div class="form-field term-slug-wrap">				
-				<label for="tag-slug">Ribbon Color</label>
+			<div class="form-field term-slug-wrap">	
+			    /* Language function - comment */			
+				<label for="tag-slug"><?php _e('Ribbon Color','woo-bundle-choice'); ?></label>
 				<input name="wbc_color" id="wbc_color" type="color" class="wbc_color"  style="width: 94%;" value=''>	
-				<p>Choose a color for the ribbon on variation form.</p>
+				<p><?php _e('Choose a color for the ribbon on variation form.','woo-bundle-choice'); ?></p>
 			</div>			
 		<?php
 		echo ob_get_clean();
@@ -438,11 +455,11 @@ class Term_Meta {
 		?>
 			<div class="form-field term-slug-wrap">				
 				<th scope="row" valign="top">				
-					<label for="tag-slug">Ribbon Color</label>				
+					<label for="tag-slug"><?php _e('Ribbon Color','woo-bundle-choice'); ?></label>				
 				</th>
 				<td>
 					<input name="wbc_color" id="wbc_color" type="color" class="wbc_color"  style="width: 94%;" value='<?php echo get_term_meta( $taxonomy_id ,'wbc_ribbon_color',true); ?>'>	
-					<p>Choose a color for the ribbon on variation form.</p>
+					<p><?php _e('Choose a color for the ribbon on variation form.','woo-bundle-choice'); ?></p>
 				</td>
 			</div>			
 		<?php

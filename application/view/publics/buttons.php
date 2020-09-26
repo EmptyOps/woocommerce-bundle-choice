@@ -29,7 +29,8 @@ if(empty($heading)) {
 
 $button_text = wbc()->options->get_option('appearance_wid_btns','button_text','');
 if(empty($button_text)) {
-	$button_text = __(eowbc_lang('Start with '),'woo-bundle-choice');
+	/* Language function - comment */
+	$button_text = __('Start with ','woo-bundle-choice');
 }
 else {
 	//add ending space if missing 

@@ -147,7 +147,9 @@ $this_plugin = '';
 			$response = json_decode(wp_remote_retrieve_body($response));			
 		} else {
 			$response = "";
-			$error_message = eowbc_lang("Ooops! Something went wrong please try reloading the page.");
+
+			/* Language function - comment */ 
+			$error_message = __('Ooops! Something went wrong please try reloading the page.','woo-bundle-choice');
 		}
 		if(!empty($response) and !is_wp_error($response) and is_array($response)) {
 			$data = $response;
@@ -202,9 +204,11 @@ $this_plugin = '';
 								<div>
 									<a class="addons-button addons-button-solid" target="_blank" href="<?php echo $product->permalink; ?>" style="margin-left:0 !important;">
 										<?php if(!empty($product->price)){
-										    echo eowbc_lang("Buy Now ($".$product->price.")");
+											/* Language function - comment */ 
+										    _e('Buy Now ($".$product->price.")','woo-bundle-choice');
 										  }else {
-										  	 echo eowbc_lang("Get free access");
+										  	/* Language function - comment */ 
+										  	 _e('Get free access','woo-bundle-choice');
 										  }
 										?>	
 									</a>							
@@ -264,7 +268,8 @@ $this_plugin = '';
 								?>
 								</div>
 								<div>
-									<a class="addons-button addons-button-solid" target="_blank" href="<?php echo $product->permalink; ?>" style="margin-left:0 !important;"><?php echo eowbc_lang("Download Now"); ?></a>							
+									/* Language function - comment */
+									<a class="addons-button addons-button-solid" target="_blank" href="<?php echo $product->permalink; ?>" style="margin-left:0 !important;"><?php _e('Download Now','woo-bundle-choice'); ?></a>							
 								</div>
 							</div>
 					      </div>

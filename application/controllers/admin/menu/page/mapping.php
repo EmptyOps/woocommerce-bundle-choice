@@ -77,17 +77,20 @@ if ( ! class_exists( 'Mapping' ) ) {
 									),
 									1=>array(
 										'is_header' => 1, 
-										'val' => eowbc_lang('First Term'),
+										/* Language function - comment */
+										'val' => __('First Term','woo-bundle-choice'),
 										'field_id'=>'eo_wbc_first_category'
 									),
 									2=>array(
 										'is_header' => 1, 
-										'val' => eowbc_lang('Second Term'),
+										/* Language function - comment */
+										'val' => __('Second Term','woo-bundle-choice'),
 										'field_id'=>'eo_wbc_second_category'
 									),
 									3=>array(
 										'is_header' => 1, 
-										'val' => eowbc_lang('Discount'),
+										/* Language function - comment */
+										'val' => __('Discount','woo-bundle-choice'),
 										'field_id'=>'eo_wbc_add_discount'
 									),
 								),
@@ -95,7 +98,8 @@ if ( ! class_exists( 'Mapping' ) ) {
 			$table['body'] = array(
 								0=>array(
 									0=>array(
-										'val' => eowbc_lang('No map(s) exists, please add some maps.'),
+										/* Language function - comment */
+										'val' => __('No map(s) exists, please add some maps.','woo-bundle-choice'),
 										'colspan' => 4, 
 										'class'=> 'red'
 									),
@@ -104,7 +108,8 @@ if ( ! class_exists( 'Mapping' ) ) {
 
 			$form_definition = array(
 				'prod_mapping_pref'=>array(
-					'label'=>eowbc_lang('Product mapping preference'),
+					/* Language function - comment */
+					'label'=>__('Product mapping preference','woo-bundle-choice'),
 					'form'=> array(
 						'saved_tab_key'=>array(
 							'type'=>'hidden',
@@ -112,36 +117,42 @@ if ( ! class_exists( 'Mapping' ) ) {
 							'sanitize'=>'sanitize_text_field',
 							),
 						'mapping_preference_tab_visible_info'=>array(
-							'label'=>eowbc_lang('(Determine how the product mapping should behave. For example AND means product belongs to both category/attribute A and B, OR means product belongs to either of category/attribute A or B)'),
+							/* Language function - comment */
+							'label'=>__('(Determine how the product mapping should behave. For example AND means product belongs to both category/attribute A and B, OR means product belongs to either of category/attribute A or B)','woo-bundle-choice'),
 							'type'=>'visible_info',
 							'class'=>array('fluid', 'medium'),
 							'size_class'=>array('sixteen','wide'),
 							'inline'=>false,
 						), 
 						'prod_mapping_pref_category'=>array(
-							'label'=>eowbc_lang('Category'),
+							/* Language function - comment */
+							'label'=>__('Category','woo-bundle-choice'),
 							'type'=>'radio',
 							'sanitize'=>'sanitize_text_field',
 							'value'=>'and',
 							'validate'=>array('required'=>''),
-							'options'=>array( 'and'=> eowbc_lang('AND'),'or'=>eowbc_lang('OR') ),
+							/* Language function - comment */
+							'options'=>array( 'and'=> __('AND','woo-bundle-choice'),'or'=>__('OR','woo-bundle-choice')),
 							'class'=>array('fluid'),						
 							'size_class'=>array('eight','wide','required'),
 							'inline'=>false,
 						),
 						'prod_mapping_pref_attribute'=>array(
-							'label'=>eowbc_lang('Attribute'),
+							/* Language function - comment */
+							'label'=>__('Attribute','woo-bundle-choice'),
 							'type'=>'radio',
 							'value'=>'or',
 							'validate'=>array('required'=>''),
 							'sanitize'=>'sanitize_text_field',
-							'options'=>array( 'and'=> eowbc_lang('AND'),'or'=>eowbc_lang('OR') ),
+							/* Language function - comment */
+							'options'=>array( 'and'=> __('AND','woo-bundle-choice'),'or'=>__('OR','woo-bundle-choice') ),
 							'class'=>array('fluid'),						
 							'size_class'=>array('eight','wide','required'),
 							'inline'=>false,
 						),
 						'submit_btn'=>array(
-							'label'=>eowbc_lang('Save'),
+							/* Language function - comment */
+							'label'=>__('Save','woo-bundle-choice'),
 							'type'=>'button',
 							'class'=>array('secondary'),
 							//'size_class'=>array('eight','wide'),
@@ -151,21 +162,24 @@ if ( ! class_exists( 'Mapping' ) ) {
 					)
 				),							
 				'map_creation_modification'=>array(
-						'label'=>eowbc_lang("Map creation and modification"),
+					/* Language function - comment */
+						'label'=>__('Map creation and modification','woo-bundle-choice'),
 						'form'=>array( 
 							$table["id"].'_bulk'=>array(
 								// 'label'=>'Bulk Actions',
 								'type'=>'select',
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
-								'options'=>array(''=>eowbc_lang('Bulk Actions'), 'delete'=>eowbc_lang('Delete')),
+								/* Language function - comment */
+								'options'=>array(''=>__('Bulk Actions','woo-bundle-choice'), 'delete'=>__('Delete','woo-bundle-choice')),
 								'class'=>array('fluid'),
 								'size_class'=>array('two','wide'),
 								'next_inline'=>true,
 								'inline'=>true,
 							),
 							'd_fconfig_submit_btn_bulk'=>array(
-								'label'=>eowbc_lang('Apply'),
+								/* Language function - comment */
+								'label'=>__('Apply','woo-bundle-choice'),
 								'type'=>'button',
 								'class'=>array('secondary'),
 								// 'size_class'=>array('eight','wide'),
@@ -182,6 +196,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 								'sanitize'=>'sanitize_text_field',
 							),
 							'save_sec_title'=>array(
+								/* Language function - comment */
 								'label'=>eowbc_lang("Add New Maps"),
 								'type'=>'label',
 								'size_class'=>array('eight','wide')
@@ -190,7 +205,8 @@ if ( ! class_exists( 'Mapping' ) ) {
 								'type'=>'checkbox',
 								'value'=>array(''),
 								'sanitize'=>'sanitize_text_field',
-								'options'=>array('1'=>eowbc_lang('Select range?')),
+								/* Language function - comment */
+								'options'=>array('1'=>__('Select range?','woo-bundle-choice')),
 								'is_id_as_name'=>true,
 								'inline_class'=>array('three'),
 								'style'=>'normal_without_parent_div',
@@ -210,7 +226,8 @@ if ( ! class_exists( 'Mapping' ) ) {
 								'type'=>'checkbox',
 								'value'=>array(''),
 								'sanitize'=>'sanitize_text_field',
-								'options'=>array('1'=>eowbc_lang('Select range?')),
+								/* Language function - comment */
+								'options'=>array('1'=>__('Select range?','woo-bundle-choice')),
 								'is_id_as_name'=>true,
 								'style'=>'normal_without_parent_div',
 								'prev_inline'=>true,
@@ -218,7 +235,8 @@ if ( ! class_exists( 'Mapping' ) ) {
 							),
 
 							'eo_wbc_first_category'=>array(
-								'label'=>eowbc_lang('First field'),
+								/* Language function - comment */
+								'label'=>__('First field','woo-bundle-choice'),
 								'type'=>'select',
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
@@ -240,7 +258,8 @@ if ( ! class_exists( 'Mapping' ) ) {
 								'inline'=>true,
 							),
 							'eo_wbc_second_category'=>array(
-								'label'=>eowbc_lang('Second field'),
+								/* Language function - comment */
+								'label'=>__('Second field','woo-bundle-choice'),
 								'type'=>'select',
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
@@ -253,7 +272,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 							),
 
 							'eo_wbc_first_category_range'=>array(
-								'type'=>eowbc_lang('select'),
+								'type'=>'select',
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
 								'options'=>$dropdown_opts_first_cat,	//array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
@@ -273,7 +292,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 								'inline'=>true,
 							),
 							'eo_wbc_second_category_range'=>array(
-								'type'=>eowbc_lang('select'),
+								'type'=>'select',
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
 								'options'=>$dropdown_opts_second_cat,	//array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
@@ -283,8 +302,9 @@ if ( ! class_exists( 'Mapping' ) ) {
 								'size_class'=>array('required'),
 							),
 
-							'eo_wbc_first_category_vis_info'=>array( 
-								'label'=>eowbc_lang('Select sub-category or attribute from first category.'),
+							'eo_wbc_first_category_vis_info'=>array(
+								/* Language function - comment */ 
+								'label'=>__('Select sub-category or attribute from first category.','woo-bundle-choice'),
 								'type'=>'visible_info',
 								'class'=>array('fluid', 'small'),
 								'inline_class'=>array('three'),
@@ -301,7 +321,8 @@ if ( ! class_exists( 'Mapping' ) ) {
 								'inline'=>true,
 							),
 							'eo_wbc_second_category_vis_info'=>array(
-								'label'=>eowbc_lang('Select sub-category or attribute from second category.'),
+								/* Language function - comment */
+								'label'=>__('Select sub-category or attribute from second category.','woo-bundle-choice'),
 								'type'=>'visible_info',
 								'class'=>array('fluid', 'small'),
 								'prev_inline'=>true,
@@ -318,7 +339,8 @@ if ( ! class_exists( 'Mapping' ) ) {
 								// 'next_inline'=>true,
 								// 'inline'=>true,
 
-								'visible_info'=>array( 'label'=>eowbc_lang('Discount rate in %'),
+								/* Language function - comment */
+								'visible_info'=>array( 'label'=>__('Discount rate in %','woo-bundle-choice'),
 									'type'=>'visible_info',
 									'class'=>array('fluid', 'small'),
 									'size_class'=>array('eight','wide','required'),
@@ -326,7 +348,8 @@ if ( ! class_exists( 'Mapping' ) ) {
 							),
 							
 							'map_creation_modification_save_btn'=>array(
-								'label'=>eowbc_lang('Save New Map'),
+								/* Language function - comment */
+								'label'=>__('Save New Map','woo-bundle-choice'),
 								'type'=>'button',
 								'class'=>array('secondary'),
 								//'size_class'=>array('eight','wide'),

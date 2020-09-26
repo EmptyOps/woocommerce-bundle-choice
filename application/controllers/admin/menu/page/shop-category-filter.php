@@ -35,34 +35,41 @@ if ( ! class_exists( 'Shop_Category_Filter' ) ) {
 				unset($form_definition['altr_filt_widgts']['form']['builder_altr_filt_widgts']);
 			}
 
-			$form_definition["filter_setting"]["form"]["price_filter_first_cat"]["label"] = "Price Filter";
-			$form_definition["filter_setting"]["form"]["hide_price_filter_first_cat"]["options"]["1"] = "Hide Price Filter?";
+			/* Language function - comment */ 
+			$form_definition["filter_setting"]["form"]["price_filter_first_cat"]["label"] = __('Price Filter','woo-bundle-choice');
+			$form_definition["filter_setting"]["form"]["hide_price_filter_first_cat"]["options"]["1"] = __('Hide Price Filter?','woo-bundle-choice');
 
-			$form_definition['altr_filt_widgts']['form']['first_category_altr_filt_widgts']['label'] = 'Widgets';
+			/* Language function - comment */ 
+			$form_definition['altr_filt_widgts']['form']['first_category_altr_filt_widgts']['label'] = __('Widgets','woo-bundle-choice');
 			unset($form_definition['altr_filt_widgts']['form']['second_category_altr_filt_widgts']);
 			
-			$form_definition['d_fconfig']['label'] = 'Filter Configuration';
-			$form_definition['d_fconfig']['form']['d_fconfig_save_sec_title']['label'] = 'Add Filter Field';
+			/* Language function - comment */ 
+			$form_definition['d_fconfig']['label'] = __('Filter Configuration','woo-bundle-choice');
+			$form_definition['d_fconfig']['form']['d_fconfig_save_sec_title']['label'] = __('Add Filter Field','woo-bundle-choice');
 
 			// add new fields 
 			$sh_filter_setting = array(
 				'sh_shop_cat_filter_location'=>array(
-					'label'=>eowbc_lang('Filter Location'),
+					/* Language function - comment */ 
+					'label'=>__('Filter Location','woo-bundle-choice'),
 					'type'=>'checkbox',
 					'value'=>array(wbc()->options->get_option('filters_sc_filter_setting','sc_shop_cat_filter_location_shop'),wbc()->options->get_option('filters_sc_filter_setting','sc_shop_cat_filter_location_cat')),
 					'force_value'=>1,
 					'sanitize'=>'sanitize_text_field',
-					'options'=>array('sc_shop_cat_filter_location_shop'=>eowbc_lang('Shope Page'),'sc_shop_cat_filter_location_cat'=>eowbc_lang('Category Page')),
+					/* Language function - comment */ 
+					'options'=>array('sc_shop_cat_filter_location_shop'=>__('Shope Page','woo-bundle-choice'),'sc_shop_cat_filter_location_cat'=>__('Category Page','woo-bundle-choice')),
 					'class'=>array('fluid'),
 					'inline'=>false,
-					'visible_info'=>array( 'label'=>eowbc_lang('( Specify on which page you want to display filter, if you select category then you will be asked to select category on which you want to display the filter. )'),
+					/* Language function - comment */ 
+					'visible_info'=>array( 'label'=>__('( Specify on which page you want to display filter, if you select category then you will be asked to select category on which you want to display the filter. )','woo-bundle-choice'),
 						'type'=>'visible_info',
 						'class'=>array('small'),
 					),
 					'inject_at'=>1,
 				),
 				'shop_cat_filter_category'=>array(
-					'label'=>eowbc_lang('Category'),
+					/* Language function - comment */ 
+					'label'=>__('Category','woo-bundle-choice'),
 					'type'=>'select',
 					'value'=>wbc()->options->get_option('filters_sc_filter_setting','shop_cat_filter_category'),
 					/*'force_value'=>1,*/
@@ -73,7 +80,8 @@ if ( ! class_exists( 'Shop_Category_Filter' ) ) {
 					'class'=>array('fluid','multiple','clearable'),
 					'field_attr'=>array('multiple=""'),
 					'inline'=>false,
-					'visible_info'=>array( 'label'=>eowbc_lang('( Select category on which to show filter widget. Applicable only when category page option is enabled from above. )'),
+					/* Language function - comment */ 
+					'visible_info'=>array( 'label'=>__('( Select category on which to show filter widget. Applicable only when category page option is enabled from above. )','woo-bundle-choice'),
 						'type'=>'visible_info',
 						'class'=>array('small'),
 					),
@@ -135,7 +143,8 @@ if ( ! class_exists( 'Shop_Category_Filter' ) ) {
 			//wbc()->common->pr($form_definition['sc_d_fconfig']['form']);
 
 			$form_definition['sc_d_fconfig']['form'] = wbc()->common->array_insert_before($form_definition['sc_d_fconfig']['form'],'d_fconfig_filter','filter_category',array(
-					'label'=>eowbc_lang('Category'),
+					/* Language function - comment */ 
+					'label'=>__('Category','woo-bundle-choice'),
 					'type'=>'select',
 					'value'=>'',					
 					'sanitize'=>'sanitize_text_field',
@@ -143,14 +152,16 @@ if ( ! class_exists( 'Shop_Category_Filter' ) ) {
 					'class'=>array('fluid'/*,'multiple'*/),
 					/*'field_attr'=>array('multiple=""'),*/
 					'inline'=>false,
-					'visible_info'=>array( 'label'=>eowbc_lang('If you leave it empty the filter field will be added to all categories if you enabled and selected categories from configuration, and on shop page if you enabled shop page from configuration.'),
+					/* Language function - comment */ 
+					'visible_info'=>array( 'label'=>__('If you leave it empty the filter field will be added to all categories if you enabled and selected categories from configuration, and on shop page if you enabled shop page from configuration.','woo-bundle-choice'),
 						'type'=>'visible_info',
 						'class'=>array('small'),
 					),
 					/*'size_class'=>array('transition','hidden','required'),*/
 				));
 			$form_definition['sc_d_fconfig']['form']['list']['head'][0][]= array('is_header' => 1,
-                      'val' => 'Category Page',
+					  /* Language function - comment */ 
+                      'val' => __('Category Page','woo-bundle-choice'),
                       'field_id' => 'filter_category',
                     );
 			//wbc()->common->pr($form_definition['sc_d_fconfig']['form']);

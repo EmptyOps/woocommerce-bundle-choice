@@ -259,7 +259,8 @@ class Eowbc_Price_Control_Save_Update_Prices {
 	    }
 	    else {
 	    	$res["type"] = "error";
-	    	$res["msg"] = eowbc_lang("No input data provided");
+	    	/* Language function - comment */ 
+	    	$res["msg"] = __('No input data provided','woo-bundle-choice');
 	    }
 
         return $res;

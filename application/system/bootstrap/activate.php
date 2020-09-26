@@ -108,7 +108,8 @@ class Activate {
 			if(!isset(get_page_by_path('eo-wbc-product-review')->ID)) {
 				$product_review_page_id = wp_insert_post(array(
 	                'post_type' => 'page',
-	                'post_title' => 'Product Review',
+	                /* Language function - comment */ 
+	                'post_title' => __('Product Review','woo-bundle-choice'),
 	                'post_name'=>'eo-wbc-product-review',
 	                'post_content' => '',
 	                'post_status' => 'publish',
@@ -161,8 +162,9 @@ class Activate {
 
 	            $home_sample_post_id = wp_insert_post(array(
 	                'post_type' => 'page',
-	                'post_title' => 'Design your own ring',
-	                'post_name'=>'design-your-own-ring',
+	                /* Language function - comment */ 
+	                'post_title' => __('Design your own ring','woo-bundle-choice'),
+	                'post_name'=>__('design-your-own-ring','woo-bundle-choice'),
 	                'post_content' =>$post_content,
 
 	                'post_status' => 'publish',

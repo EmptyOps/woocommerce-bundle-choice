@@ -21,7 +21,8 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 
 		public function get_menu(){
 			$menu = array(
-				'title'=>eowbc_lang('Home').' - '.constant('EOWBC_NAME'),
+				/* Language function - comment */
+				'title'=>__('Home','woo-bundle-choice').' - '.constant('EOWBC_NAME'),
 				'menu_title'=>constant('EOWBC_NAME'),	//eowbc_lang('WooCommerce Bundle Choice'),
 				'capability'=>'manage_options',
 				'slug'=>'eowbc',
@@ -34,8 +35,9 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 
 						array(
 							'parent_slug'=>null,
-							'title'=>eowbc_lang('Setup').' '.constant('EOWBC_NAME'),	//eowbc_lang('Setup WooCommerce Product Bundle Choice'),
-							'menu_title'=>eowbc_lang('Setup WooCommerce Product Bundle Choice'),
+							/* Language function - comment */
+							'title'=>__('Setup','woo-bundle-choice').' '.constant('EOWBC_NAME'),	//eowbc_lang('Setup WooCommerce Product Bundle Choice'),
+							'menu_title'=>__('Setup WooCommerce Product Bundle Choice','woo-bundle-choice'),
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-install',
 							'template'=>'admin/init-install',							
@@ -43,8 +45,9 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 						),
 						array(
 							'parent_slug'=>'eowbc',
-							'title'=>eowbc_lang('General').' - '.constant('EOWBC_NAME'),	//eowbc_lang('General - Woo Choice Plugin'),
-							'menu_title'=>eowbc_lang('General'),	//eowbc_lang('General - Woo Choice Plugin'),
+							/* Language function - comment */
+							'title'=>__('General','woo-bundle-choice').' - '.constant('EOWBC_NAME'),	//eowbc_lang('General - Woo Choice Plugin'),
+							'menu_title'=>__('General','woo-bundle-choice'),	//eowbc_lang('General - Woo Choice Plugin'),
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-configuration',
 							'template'=>'admin/menu/configuration',
@@ -52,8 +55,9 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 						),
 						array(
 							'parent_slug'=>'eowbc',
-							'title'=>eowbc_lang('Filters').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Filters'),
-							'menu_title'=>eowbc_lang('Filters'),
+							/* Language function - comment */
+							'title'=>__('Filters','woo-bundle-choice').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Filters'),
+							'menu_title'=>__('Filters','woo-bundle-choice'),
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-filters',
 							'template'=>'admin/menu/filters',
@@ -61,8 +65,9 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 						),
 						array(
 							'parent_slug'=>'eowbc',
-							'title'=>eowbc_lang('Mapping').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Mapping'),
-							'menu_title'=>eowbc_lang('Mapping'),
+							/* Language function - comment */
+							'title'=>__('Mapping','woo-bundle-choice').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Mapping'),
+							'menu_title'=>__('Mapping','woo-bundle-choice'),
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-mapping',
 							'template'=>'admin/menu/mapping',
@@ -70,8 +75,9 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 						),																
 						array(
 							'parent_slug'=>'eowbc',
-							'title'=>eowbc_lang('Appearance').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Appearance'),
-							'menu_title'=>eowbc_lang('Appearance'),
+							/* Language function - comment */
+							'title'=>__('Appearance','woo-bundle-choice').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Appearance'),
+							'menu_title'=>__('Appearance','woo-bundle-choice'),
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-appearance',
 							'template'=>'admin/menu/appearance',
@@ -79,8 +85,9 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 						),
 						array(
 							'parent_slug'=>'eowbc',
-							'title'=>eowbc_lang('Bonus Features').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Tiny Features'),
-							'menu_title'=>eowbc_lang('Bonus Features'),
+							/* Language function - comment */
+							'title'=>__('Bonus Features','woo-bundle-choice').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Tiny Features'),
+							'menu_title'=>__('Bonus Features','woo-bundle-choice'),
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-tiny-features',
 							'template'=>'admin/menu/tiny_features',
@@ -88,8 +95,9 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 						),
 						array(
 							'parent_slug'=>'eowbc',
-							'title'=>eowbc_lang('Shortcode Filters').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Tiny Features'),
-							'menu_title'=>eowbc_lang('Shortcode Filters'),
+							/* Language function - comment */
+							'title'=>__('Shortcode Filters','woo-bundle-choice').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Tiny Features'),
+							'menu_title'=>__('Shortcode Filters','woo-bundle-choice')e,
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-shortcode-filters',
 							'template'=>'admin/menu/shortcode_filters',
@@ -97,8 +105,9 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 						),	
 						array(
 							'parent_slug'=>'eowbc',
-							'title'=>eowbc_lang('Filters for Shop/Category Page').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Tiny Features'),
-							'menu_title'=>eowbc_lang('Filters for Shop/Category Page'),
+							/* Language function - comment */
+							'title'=>__('Filters for Shop/Category Page','woo-bundle-choice').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Tiny Features'),
+							'menu_title'=>__('Filters for Shop/Category Page','woo-bundle-choice'),
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-shop-cat-filter',
 							'template'=>'admin/menu/shop_cat_filter',
@@ -106,8 +115,9 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 						),						
 						array(
 							'parent_slug'=>'eowbc',
-							'title'=>eowbc_lang('Price Control(Beta)').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Price Control(Beta)'),
-							'menu_title'=>eowbc_lang('Price Control(Beta)'),
+							/* Language function - comment */
+							'title'=>__('Price Control(Beta)','woo-bundle-choice').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Price Control(Beta)'),
+							'menu_title'=>__('Price Control(Beta)','woo-bundle-choice'),
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-price-control',
 							'template'=>'admin/menu/price_control',
@@ -115,8 +125,9 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 						),
 						array(
 							'parent_slug'=>'eowbc',
-							'title'=>eowbc_lang('Settings & Status').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Settings & Status'),
-							'menu_title'=>eowbc_lang('Settings & Status'),
+							/* Language function - comment */
+							'title'=>__('Settings & Status','woo-bundle-choice').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Settings & Status'),
+							'menu_title'=>__('Settings & Status','woo-bundle-choice'),
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-setting-status',
 							'template'=>'admin/menu/setting-status',
@@ -124,8 +135,9 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 						),
 						array(
 							'parent_slug'=>'eowbc',
-							'title'=>eowbc_lang('Extensions').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Extensions'),
-							'menu_title'=>eowbc_lang('Extensions'),
+							/* Language function - comment */
+							'title'=>__('Extensions','woo-bundle-choice').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Extensions'),
+							'menu_title'=>__('Extensions','woo-bundle-choice'),
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-extensions',
 							'template'=>'admin/menu/extensions',
@@ -233,8 +245,8 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 
 				add_action( 'admin_notices',function() use($primary_features,$active_feature){
 					//printf('<div class="ui negative message"><i class="close icon"></i><div class="header">Required</div><p>Since you enabled <strong>%s</strong> you need to complete setup to make it work on your website, either add sample data from General -> Sample Data tab or add Filters and Mapping in respective Tabs as well as finish the required settings in the General -> Buttons and General -> Navigations Steps( Breadcrumb ) Tabs</p></div>',$primary_features[$active_feature]);
-					
-					printf(eowbc_lang('<div class="notice notice-error is-dismissible"><p>Since you enabled <strong>%s</strong> you need to complete setup to make it work on your website, either <a href="%s">add sample data</a> or simply <a href="%s">complete setup wizard</a>.</p></div>'),$primary_features[$active_feature],admin_url('admin.php?page=eowbc&eo_wbc_view_auto_jewel=1&f='.$active_feature),admin_url('admin.php?page=eowbc&wbc_setup=1'));
+					/* Language function - comment */
+					printf(__('<div class="notice notice-error is-dismissible"><p>Since you enabled <strong>%s</strong> you need to complete setup to make it work on your website, either <a href="%s">add sample data</a> or simply <a href="%s">complete setup wizard</a>.</p></div>','woo-bundle-choice'),$primary_features[$active_feature],admin_url('admin.php?page=eowbc&eo_wbc_view_auto_jewel=1&f='.$active_feature),admin_url('admin.php?page=eowbc&wbc_setup=1'));
 
 					/*printf('<div class="notice notice-error is-dismissible"><p><strong>Required</strong> Since you enabled <strong>%s</strong> you need to complete setup to make it work on your website, either add sample data from General -> Sample Data tab or add Filters and Mapping in respective Tabs as well as finish the required settings in the General -> Buttons and General -> Navigations Steps( Breadcrumb ) Tabs</p></div>',$primary_features[$active_feature]);*/
 				});
@@ -243,7 +255,8 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 			//supposed to be shown on any page of admin panel
 			if( !empty(get_option('eowbc_error_count',0)) or !empty(get_option('eowbc_warning_count',0)) ){
 				$message_type = 'warning'; /*negative*/
-				$message_title = eowbc_lang('Warning');
+				/* Language function - comment */
+				$message_title = __('Warning','woo-bundle-choice');
 				$error_message = array();
 				if( !empty(get_option('eowbc_error_count',0)) ) {
 					$message_type = 'error';
@@ -259,7 +272,8 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 
 				add_action( 'admin_notices',function() use($message_type,$message_title,$error_message){
 					//printf('<div class="ui %s message"><i class="close icon"></i><div class="header">%s</div><p>'.constant('EOWBC_NAME').' have noticed <strong>%s</strong>, would you like to <a href="%s">have a look</a> or <a href="%s">report to the support</a>.</p></div>',$message_type,$message_title,$error_message,admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'),admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'));
-					printf(eowbc_lang('<div class="notice notice-%s is-dismissible"><p><strong>%s</strong> '.constant('EOWBC_NAME').' have noticed <strong>%s</strong>, would you like to <a href="%s">have a look</a> or <a href="%s">report to the support</a>.</p></div>'),$message_type,$message_title,$error_message,admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'),admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'));
+					/* Language function - comment */
+					printf(__('<div class="notice notice-%s is-dismissible"><p><strong>%s</strong> '.constant('EOWBC_NAME').' have noticed <strong>%s</strong>, would you like to <a href="%s">have a look</a> or <a href="%s">report to the support</a>.</p></div>','woo-bundle-choice'),$message_type,$message_title,$error_message,admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'),admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'));
 				});
 
 			}
@@ -272,7 +286,9 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 				$referrer = wbc()->options->get('eo_wbc_mapping_error_report',false);
 				add_action( 'admin_notices',function() use($referrer,$message_type,$message_title){
 					//printf('<div class="ui %s message"><i class="close icon"></i><div class="header">%s</div><p>One user has reported mapping issue at this <a href="%s" target="_blank">link</a>, please ensure you have added mapping to connect products from first to second step. If you like assistance on this <a href="%s">you can contact support</a></p></div>',$message_type,$message_title,$referrer,admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'));
-					printf(eowbc_lang('<div class="notice notice-%s is-dismissible"><p><strong>%s</strong> One user has reported mapping issue at this <a href="%s" target="_blank">link</a>, please ensure you have added mapping to connect products from first to second step. If you like assistance on this <a href="%s">you can contact support</a></p></div>'),$message_type,$message_title,$referrer,admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'));
+					
+					/* Language function - comment */
+					printf(__('<div class="notice notice-%s is-dismissible"><p><strong>%s</strong> One user has reported mapping issue at this <a href="%s" target="_blank">link</a>, please ensure you have added mapping to connect products from first to second step. If you like assistance on this <a href="%s">you can contact support</a></p></div>','woo-bundle-choice'),$message_type,$message_title,$referrer,admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'));
 
 				});
 

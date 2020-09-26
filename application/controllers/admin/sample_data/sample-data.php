@@ -27,8 +27,9 @@ class Sample_Data {
     public function init() {
         
         $callback = $this->get_page( $this->model->data_template()->get_attributes(), $this->model->data_template()->get_categories(), $this->model->data_template()->get_maps() );
-        $position = empty($position)?66:$position;    
-        add_menu_page( eowbc_lang('WooCommerce Bundle Choice'),eowbc_lang('WooCommerce Bundle Choice'),'manage_options','eowbc',$callback,$this->get_icon_url(),$position );
+        $position = empty($position)?66:$position; 
+        /* Language function - comment */   
+        add_menu_page( __('WooCommerce Bundle Choice','woo-bundle-choice'),__('WooCommerce Bundle Choice','woo-bundle-choice'),'manage_options','eowbc',$callback,$this->get_icon_url(),$position );
     }
 
     public function get_icon_url() {

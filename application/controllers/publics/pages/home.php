@@ -24,7 +24,8 @@ class Home {
 		if(isset($_GET['wbc_report']) && !empty(wbc()->sanitize->get('wbc_report'))) {
         	if(isset($_SERVER['HTTP_REFERER'])){
         		wbc()->options->set('eo_wbc_mapping_error_report',$_SERVER['HTTP_REFERER']);
-        		\EOWBC_Error_Handler::log(eowbc_lang('One user has reported mapping issue at this <a href="'.$_SERVER['HTTP_REFERER'].'" target="_blank">link</a>, please ensure you have added mapping to connect products from first to second step.'),2);	
+            /* Language function - comment */
+        		\EOWBC_Error_Handler::log(__('One user has reported mapping issue at this <a href="'.$_SERVER['HTTP_REFERER'].'" target="_blank">link</a>, please ensure you have added mapping to connect products from first to second step.', 'woo-bundle-choice'),2);	
         	}
       	} 
 

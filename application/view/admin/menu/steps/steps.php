@@ -10,20 +10,26 @@
 <div class="ui ordered steps" style="width: 100%">
   <div class="completed step">
     <div class="content">
-      <div class="title"><?php echo eowbc_lang('Configurations'); ?></div>
-      <div class="description"><?php echo eowbc_lang('Quickstart with basic configurations.'); ?></div>
+      /* Language function - comment */ 
+      <div class="title"><?php _e('Configurations','woo-bundle-choice'); ?></div>
+      /* Language function - comment */
+      <div class="description"><?php _e('Quickstart with basic configurations.','woo-bundle-choice'); ?></div>
     </div>
   </div>
   <div class="completed step">
     <div class="content">
-      <div class="title"><?php echo eowbc_lang('Mapping') ?></div>
-      <div class="description"><?php echo eowbc_lang('Create mapping between product/category/attribute.'); ?></div>
+      /* Language function - comment */
+      <div class="title"><?php _e('Mapping','woo-bundle-choice') ?></div>
+      /* Language function - comment */
+      <div class="description"><?php _e('Create mapping between product/category/attribute.','woo-bundle-choice'); ?></div>
     </div>
   </div>
   <div class="active step">
     <div class="content">
-      <div class="title"><?php echo eowbc_lang('Complete'); ?></div>
-      <div class="description"><?php echo eowbc_lang("Voila, it's working."); ?></div>
+      /* Language function - comment */
+      <div class="title"><?php _e('Complete','woo-bundle-choice'); ?></div>
+      /* Language function - comment */
+      <div class="description"><?php _e('Voila, it\'s working.','woo-bundle-choice'); ?></div>
     </div>
   </div>
 </div>

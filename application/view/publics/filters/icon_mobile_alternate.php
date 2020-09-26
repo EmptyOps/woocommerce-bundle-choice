@@ -11,12 +11,15 @@
 <div class="bottom_filter_segment hidden ui segment" id="sticky_mob_filter_<?php echo $term->slug ?>" data-filter-slug="<?php echo $term->slug; ?>">
 		<div class="ui equal width grid">
 				<div class="column close_sticky_mob_filter" data-target="#sticky_mob_filter_<?php echo $term->slug ?>">
-					<i class="ui icon times" style="cursor: pointer;"></i>&nbsp;<?php echo eowbc_lang('Close'); ?>
+					/* Language function - comment */ 
+					<i class="ui icon times" style="cursor: pointer;"></i>&nbsp;<?php _e('Close','woo-bundle-choice'); ?>
 				</div>
 				<div class="column"></div>
 				<div class="column"></div>
 				<div class="column" style="text-align: right;" onclick="reset_icon(event,'<?php echo $term->slug; ?>')">
-					<i class="ui icon redo" style="cursor: pointer;"></i>&nbsp;<?php echo eowbc_lang('Reset'); ?>
+
+					/* Language function - comment */ 
+					<i class="ui icon redo" style="cursor: pointer;"></i>&nbsp;<?php _e('Reset','woo-bundle-choice'); ?>
 				</div>
 		</div>					
 	<br/>

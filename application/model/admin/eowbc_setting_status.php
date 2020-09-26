@@ -150,8 +150,9 @@ class Eowbc_Setting_Status {
 		    }
 		}
 		else {
-			\EOWBC_Error_Handler::eo_wbc_send_error_report();	
-			$res["msg"] = eowbc_lang("Thank you for sending error report, Sphere Plugins Support Team will soon get in touch with you. It generally takes 12 hours.");
+			\EOWBC_Error_Handler::eo_wbc_send_error_report();
+			/* Language function - comment */ 	
+			$res["msg"] = __('Thank you for sending error report, Sphere Plugins Support Team will soon get in touch with you. It generally takes 12 hours.','woo-bundle-choice');
 		}	    
         return $res;
 	}	

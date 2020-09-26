@@ -15,14 +15,14 @@
 <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
 <div class="ui modal align center tiny centered">
 <div class="ui header">              
-  <h4><?php echo eowbc_lang('There is an error on <strong>'.constant('EOWBC_NAME'); ?></strong></h4>
+  <h4><?php _e('There is an error on <strong>'.constant('EOWBC_NAME'),'woo-bundle-choice'); ?></strong></h4>
 </div>
 <div class="content">
   <h5 id="error_popup_title"></h5>
   <?php wp_nonce_field('eowbc_send_error_report', 'eowbc_send_error_report_wpnonce'); ?>
   <?php wp_nonce_field('eo_wbc_throw_error', 'eo_wbc_throw_error_wpnonce'); ?>
   <br>
-  <h5><?php echo eowbc_lang('When you send error report, you agree to SpherePlugins'); ?> <a href="https://sphereplugins.com/terms-conditions/" target="_blank"><?php echo eowbc_lang('Terms'); ?></a><?php echo eowbc_lang('&'); ?> <a href="https://sphereplugins.com/privacy-policy/" target="_blank"><?php echo eowbc_lang('Privacy Policy'); ?></a></h5>
+  <h5><?php echo eowbc_lang('When you send error report, you agree to SpherePlugins'); ?> <a href="https://sphereplugins.com/terms-conditions/" target="_blank"><?php _e('Terms','woo-bundle-choice'); ?></a><?php _e('&','woo-bundle-choice'); ?> <a href="https://sphereplugins.com/privacy-policy/" target="_blank"><?php _e('Privacy Policy','woo-bundle-choice'); ?></a></h5>
 </div>
 <div class="actions">
   	<div class="ui large red cancel button"><?php echo eowbc_lang('Close'); ?></div>

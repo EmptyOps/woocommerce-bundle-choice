@@ -61,7 +61,8 @@ class Options {
 								$selected_item =  sprintf( '%s',esc_attr( $selected_item->name ));
 							}
 						} else {
-							$selected_item =eowbc_lang('Choose an option');	
+							/* Language function - comment */ 
+							$selected_item = __('Choose an option','woo-bundle-choice');	
 						}
 					} else{
 						$selected_item ='Choose an option';
@@ -111,7 +112,7 @@ class Options {
 			'id'               => '',
 			'class'            => '',
 			'type'             => '',
-			'show_option_none' => esc_html__( 'Choose an option')
+			'show_option_none' => esc_html__( __('Choose an option','woo-bundle-choice')) /* Language function - comment */ 
 		) );
 			
 		$type                  = $args[ 'type' ];
@@ -122,7 +123,7 @@ class Options {
 		$id                    = $args[ 'id' ] ? $args[ 'id' ] : sanitize_title( $attribute );
 		$class                 = $args[ 'class' ];
 		$show_option_none      = $args[ 'show_option_none' ] ? true : false;
-		$show_option_none_text = $args[ 'show_option_none' ] ? $args[ 'show_option_none' ] : esc_html__(eowbc_lang('Choose an option')); // We'll do our best to hide the placeholder, but we'll need to show something when resetting options.
+		$show_option_none_text = $args[ 'show_option_none' ] ? $args[ 'show_option_none' ] : esc_html__( __('Choose an option','woo-bundle-choice')); // We'll do our best to hide the placeholder, but we'll need to show something when resetting options.
 		
 		if ( empty( $options ) && ! empty( $product ) && ! empty( $attribute ) ) {
 			$attributes = $product->get_variation_attributes();
@@ -176,8 +177,8 @@ class Options {
 
 
 			$init_toggle = wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_init_status');			
-			
-			$toggle_text = wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_text',__('CUSTOMIZE THIS PRODUCT'));
+			/* Language function - comment */ 
+			$toggle_text = wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_text',__('CUSTOMIZE THIS PRODUCT','woo-bundle-choice'));
 
 			// Variation item non-hovered
 			$dimention = wbc()->options->get_option('tiny_features','tiny_features_option_ui_option_dimention','2em');

@@ -1,26 +1,26 @@
-<div type="submit" name="eowbc-askq" id="eowbc-askq" value="<?php echo $product_id; ?>" class="ui inverted primary button" style="margin-left: 1em;"><?php echo eowbc_lang('Question?'); ?></div>
+<div type="submit" name="eowbc-askq" id="eowbc-askq" value="<?php echo $product_id; ?>" class="ui inverted primary button" style="margin-left: 1em;"><?php echo __('Question?'); ?></div>
 
 
 <div class="ui tiny modal" id="eowbc-askq-modal" data-modal-name="eowbc-askq-modal">  	
-  	<div class="header"><?php echo eowbc_lang('ASK US ABOUT THIS DIAMOND'); ?></div>
+  	<div class="header"><?php _e('ASK US ABOUT THIS DIAMOND','woo-bundle-choice'); ?></div>
   	<div class="content ui form">
     	<!-- <form class="ui form" name="api_new_form" id="eowbc_askq_form"> -->      
 	      	<div class="field required">
-	        	<label><?php echo eowbc_lang('YOUR FIRST NAME'); ?></label>                
+	        	<label><?php echo ('YOUR FIRST NAME'); ?></label>                
 	        	<!-- <input type="hidden" name="action" value="eowbc_askq">
 	      		<?php //wp_create_nonce('eowbc_askq');?>       -->
 	        	<input type="text" name="eowbc_askq_fname" id="eowbc_askq_fname" required="required">
 	      	</div>
 	      	<div class="field required">
-	        	<label><?php echo eowbc_lang('YOUR LAST NAME'); ?></label>                
+	        	<label><?php echo __('YOUR LAST NAME','woo-bundle-choice'); ?></label>                
 	        	<input type="text" name="eowbc_askq_lname" id="eowbc_askq_lname">        
 	      	</div>
 	      	<div class="field required">
-	        	<label><?php echo eowbc_lang('YOUR EMAIL'); ?></label>        
+	        	<label><?php echo __('YOUR EMAIL','woo-bundle-choice'); ?></label>        
 	         	<input type="email" name="eowbc_askq_email" id="eowbc_askq_email">
 	        </div>              
 	      	<div class="field required">
-	        	<label><?php echo eowbc_lang('YOUR PHONE NUMBER'); ?></label>        
+	        	<label><?php echo __('YOUR PHONE NUMBER','woo-bundle-choice'); ?></label>        
 	         	<input type="number" name="eowbc_askq_phone" id="eowbc_askq_phone">
 	        </div>              
 	      	<div class="field required">
@@ -80,7 +80,7 @@
 	            },
 	            success:function(result,status,xhr){
 	               if(result){
-	               		alert(eowbc_lang('Your query has been sent successfully, you will hear back soon.'));
+	               		alert(__('Your query has been sent successfully, you will hear back soon.','woo-bundle-choice'));
 	               }
 	            },
 	            error:function(xhr,status,error){

@@ -59,7 +59,8 @@ if(empty($filter_datas)){
 	$filter_table['body'] = array(				
 		0=>array(
 			0=>array( 
-				'val' => eowbc_lang("No filter(s) exists, please add some filters."),
+				/* Language function - comment */ 
+				'val' => __("No filter(s) exists, please add some filters.",'woo-bundle-choice'),
 				'colspan' => '10" class="tiny_filter_no_filter_found" style="text-align: center'
 			),
 		),
@@ -124,7 +125,8 @@ $shortcode_table['head'] = array(
 $shortcode_table['body'] = array(
 	array(
 		array( 
-			'val' => eowbc_lang("No filter(s) exists, please add some filters."),
+			/* Language function - comment */ 
+			'val' => __("No filter(s) exists, please add some filters.",'woo-bundle-choice'),
 			'colspan' => '10" class="tiny_shortcode_no_filter_found" style="text-align: center'
 		),
 	),
@@ -138,10 +140,11 @@ $form['tabs'] = true;
 $form['data'] = array(
 	
 	'tiny_features_item_page_option'=>array(
-			'label'=>eowbc_lang('Options UI for Item Page'),
+		/* Language function - comment */ 
+			'label'=>__('Options UI for Item Page','woo-bundle-choice'),
 			'form'=>array(
 				/*'tiny_features_option_ui_toggle_status'=>array(
-					'label'=>eowbc_lang('Toggle Button Enabled?'),
+					'label'=>__('Toggle Button Enabled?'),
 					'type'=>'checkbox',
 					'value'=>array(wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_status')),
 					'sanitize'=>'sanitize_text_field',
@@ -150,30 +153,34 @@ $form['data'] = array(
 					// 'size_class'=>array('eight','wide'),
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('Enables the toogle buton to toggle the variation form at product page.'),
+					'visible_info'=>array( 'label'=>__('Enables the toogle buton to toggle the variation form at product page.'),
 						'type'=>'visible_info',
 						'class'=>array('small'),
 						// 'size_class'=>array('sixteen','wide'),
 					),
 				),	*/
 				'tiny_features_option_ui_toggle_init_status'=>array(
-					'label'=>eowbc_lang('Show variation form at initial?'),
+					/* Language function - comment */ 
+					'label'=>__('Show variation form at initial?','woo-bundle-choice'),
 					'type'=>'checkbox',
 					'value'=>array(wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_init_status')),
 					'sanitize'=>'sanitize_text_field',
-					'options'=>array('tiny_features_option_ui_toggle_init_status'=>eowbc_lang('Variation Form Visiblity')),
+					/* Language function - comment */ 
+					'options'=>array('tiny_features_option_ui_toggle_init_status'=>__('Variation Form Visiblity','woo-bundle-choice')),
 					'class'=>array('fluid'),						
 					// 'size_class'=>array('eight','wide'),
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('Enables to set the variation form open at initial.'),
+					/* Language function - comment */ 
+					'visible_info'=>array( 'label'=>__('Enables to set the variation form open at initial.','woo-bundle-choice'),
 						'type'=>'visible_info',
 						'class'=>array('small'),
 						// 'size_class'=>array('sixteen','wide'),
 					),
 				),	
 				'tiny_features_hide_sku_category_product_page'=>array(
-					'label'=>eowbc_lang('Hide SKU,Categories sections?'),
+					/* Language function - comment */ 
+					'label'=>__('Hide SKU,Categories sections?','woo-bundle-choice'),
 					'type'=>'checkbox',
 					'value'=>array(wbc()->options->get_option('tiny_features','tiny_features_hide_sku_category_product_page')),
 					'sanitize'=>'sanitize_text_field',
@@ -183,7 +190,8 @@ $form['data'] = array(
 					'inline'=>false,					
 				),
 				'tiny_features_dropdown_icon_only'=>array(
-					'label'=>eowbc_lang('Display Icon Only on Dropdown?'),
+					/* Language function - comment */ 
+					'label'=>__('Display Icon Only on Dropdown?','woo-bundle-choice'),
 					'type'=>'checkbox',
 					'value'=>array(wbc()->options->get_option('tiny_features','tiny_features_dropdown_icon_only')),
 					'sanitize'=>'sanitize_text_field',
@@ -193,22 +201,25 @@ $form['data'] = array(
 					'inline'=>false,					
 				),					
 				'tiny_features_option_ui_toggle_text'=>array(
-					'label'=>eowbc_lang('Toggle Buton Text'),
+					/* Language function - comment */ 
+					'label'=>__('Toggle Buton Text','woo-bundle-choice'),
 					'type'=>'text',
-					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_text',__('CUSTOMIZE THIS PRODUCT')),
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_text',__('CUSTOMIZE THIS PRODUCT','woo-bundle-choice')),
 					'sanitize'=>'sanitize_text_field',
 					'class'=>array('fluid'),						
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('Text to be shown on the toggle button.'),
+					/* Language function - comment */ 
+					'visible_info'=>array( 'label'=>__('Text to be shown on the toggle button.','woo-bundle-choice'),
 						'type'=>'visible_info',
 						'class'=>array('small','fluid'),
 						// 'size_class'=>array('sixteen','wide'),
 					)
 				),
 				'tiny_features_option_ui_option_dimention'=>array(
-					'label'=>eowbc_lang('Options Box Dimention'),
+					/* Language function - comment */ 
+					'label'=>__('Options Box Dimention','woo-bundle-choice'),
 					'type'=>'text',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_option_dimention','2em'),
 					'sanitize'=>'sanitize_text_field',
@@ -216,14 +227,16 @@ $form['data'] = array(
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('The height and width of the option\'s box.<strong>(prepend px,em,rem as measurement)</strong>'),
+					/* Language function - comment */ 
+					'visible_info'=>array( 'label'=>__('The height and width of the option\'s box.<strong>(prepend px,em,rem as measurement)</strong>','woo-bundle-choice'),
 						'type'=>'visible_info',
 						'class'=>array('small','fluid'),
 						// 'size_class'=>array('sixteen','wide'),
 					)
 				),
 				'tiny_features_option_ui_border_color'=>array(
-					'label'=>eowbc_lang('Options Border Color'),
+					/* Language function - comment */ 
+					'label'=>__('Options Border Color','woo-bundle-choice'),
 					'type'=>'color',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_color','#ECECEC'),
 					'sanitize'=>'sanitize_hex_color',
@@ -231,14 +244,16 @@ $form['data'] = array(
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s border'),
+					/* Language function - comment */ 
+					'visible_info'=>array( 'label'=>__('<br/>The color of the option\'s border','woo-bundle-choice'),
 						'type'=>'visible_info',
 						'class'=>array('small','fluid'),
 						// 'size_class'=>array('sixteen','wide'),
 					)
 				),
 				'tiny_features_option_ui_border_width'=>array(
-					'label'=>eowbc_lang('Options Border width'),
+					/* Language function - comment */ 
+					'label'=>__('Options Border width','woo-bundle-choice'),
 					'type'=>'text',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_width','2px'),
 					'sanitize'=>'sanitize_text_field',
@@ -246,14 +261,16 @@ $form['data'] = array(
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('The border width of the option\'s border.<strong>(prepend px,em,rem as measurement)</strong>'),
+					/* Language function - comment */ 
+					'visible_info'=>array( 'label'=>__('The border width of the option\'s border.<strong>(prepend px,em,rem as measurement)</strong>','woo-bundle-choice'),
 						'type'=>'visible_info',
 						'class'=>array('small','fluid'),
 						// 'size_class'=>array('sixteen','wide'),
 					)
 				),
 				'tiny_features_option_ui_border_color_hover'=>array(
-					'label'=>eowbc_lang('Options Border Color on Hover'),
+					/* Language function - comment */ 
+					'label'=>__('Options Border Color on Hover','woo-bundle-choice'),
 					'type'=>'color',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_color_hover','#3D3D3D'),
 					'sanitize'=>'sanitize_hex_color',
@@ -261,14 +278,16 @@ $form['data'] = array(
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s border on hover.'),
+					/* Language function - comment */ 
+					'visible_info'=>array( 'label'=>__('<br/>The color of the option\'s border on hover.','woo-bundle-choice'),
 						'type'=>'visible_info',
 						'class'=>array('small'),
 						// 'size_class'=>array('sixteen','wide'),
 					)
 				),
 				'tiny_features_option_ui_border_width_hover'=>array(
-					'label'=>eowbc_lang('Options Border width on Hover'),
+					/* Language function - comment */ 
+					'label'=>__('Options Border width on Hover'),
 					'type'=>'text',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_width_hover','2px'),
 					'sanitize'=>'sanitize_text_field',
@@ -276,14 +295,16 @@ $form['data'] = array(
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('The border width of the option\'s border on hover.<strong>(prepend px,em,rem as measurement)</strong>'),
+					/* Language function - comment */ 
+					'visible_info'=>array( 'label'=>__('The border width of the option\'s border on hover.<strong>(prepend px,em,rem as measurement)</strong>','woo-bundle-choice'),
 						'type'=>'visible_info',
 						'class'=>array('small'),
 						// 'size_class'=>array('sixteen','wide'),
 					)
 				),
 				'tiny_features_option_ui_border_radius'=>array(
-					'label'=>eowbc_lang('Options Border Radius'),
+					/* Language function - comment */ 
+					'label'=>__('Options Border Radius','woo-bundle-choice'),
 					'type'=>'text',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_radius','1px'),
 					'sanitize'=>'sanitize_text_field',
@@ -291,14 +312,16 @@ $form['data'] = array(
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('The border radius of the option\'s border.<strong>(prepend px,em,rem as measurement)</strong>'),
+					/* Language function - comment */ 
+					'visible_info'=>array( 'label'=>__('The border radius of the option\'s border.<strong>(prepend px,em,rem as measurement)</strong>','woo-bundle-choice'),
 						'type'=>'visible_info',
 						'class'=>array('small'),
 						// 'size_class'=>array('sixteen','wide'),
 					)
 				),						
 				'tiny_features_option_ui_font_color'=>array(
-					'label'=>eowbc_lang('Options Font Color'),
+					/* Language function - comment */ 
+					'label'=>__('Options Font Color','woo-bundle-choice'),
 					'type'=>'color',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_font_color','#DBDBDB'),
 					'sanitize'=>'sanitize_hex_color',
@@ -306,14 +329,16 @@ $form['data'] = array(
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s text.'),
+					/* Language function - comment */ 
+					'visible_info'=>array( 'label'=>__('<br/>The color of the option\'s text.','woo-bundle-choice'),
 						'type'=>'visible_info',
 						'class'=>array('small'),
 						// 'size_class'=>array('sixteen','wide'),
 					)
 				),
 				'tiny_features_option_ui_font_color_hover'=>array(
-					'label'=>eowbc_lang('Options Font Color on Hover'),
+					/* Language function - comment */ 
+					'label'=>__('Options Font Color on Hover','woo-bundle-choice'),
 					'type'=>'color',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_font_color_hover','#AA7D7D'),
 					'sanitize'=>'sanitize_hex_color',
@@ -321,14 +346,16 @@ $form['data'] = array(
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s text on hover.'),
+					/* Language function - comment */ 
+					'visible_info'=>array( 'label'=>__('<br/>The color of the option\'s text on hover.','woo-bundle-choice'),
 						'type'=>'visible_info',
 						'class'=>array('small'),
 						// 'size_class'=>array('sixteen','wide'),
 					)
 				),
 				'tiny_features_option_ui_bg_color'=>array(
-					'label'=>eowbc_lang('Options Background Color'),
+					/* Language function - comment */ 
+					'label'=>__('Options Background Color','woo-bundle-choice'),
 					'type'=>'color',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_bg_color','#ffffff'),
 					'sanitize'=>'sanitize_hex_color',
@@ -336,14 +363,16 @@ $form['data'] = array(
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s background.'),
+					/* Language function - comment */ 
+					'visible_info'=>array( 'label'=>__('<br/>The color of the option\'s background.','woo-bundle-choice'),
 						'type'=>'visible_info',
 						'class'=>array('small'),
 						// 'size_class'=>array('sixteen','wide'),
 					)
 				),
 				'tiny_features_option_ui_bg_color_hover'=>array(
-					'label'=>eowbc_lang('Options Background Color on Hover'),
+					/* Language function - comment */ 
+					'label'=>__('Options Background Color on Hover','woo-bundle-choice'),
 					'type'=>'color',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_bg_color_hover','#DCC7C7'),
 					'sanitize'=>'sanitize_hex_color',
@@ -351,42 +380,50 @@ $form['data'] = array(
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s background on hover.'),
+					/* Language function - comment */ 
+					'visible_info'=>array( 'label'=>__('<br/>The color of the option\'s background on hover.','woo-bundle-choice'),
 						'type'=>'visible_info',
 						'class'=>array('small'),
 						// 'size_class'=>array('sixteen','wide'),
 					)
 				),
 				'product_page_hide_first_variation_form'=>array(
-					'label'=>eowbc_lang('Hide first category\'s variation menu'),
+					/* Language function - comment */ 
+					'label'=>__('Hide first category\'s variation menu','woo-bundle-choice'),
 					'type'=>'checkbox',
 					'sanitize'=>'sanitize_text_field',
 					'value'=>array(wbc()->options->get_option('tiny_features','product_page_hide_first_variation_form')),
 					'options'=>array('1'=>' '),
 					'is_id_as_name'=>true,
 					'class'=>array(),
-					'visible_info'=>array( 'label'=>eowbc_lang('If enabled the variation selection table for first category\'s products will be hidden if default variations are set'),
+
+					/* Language function - comment */ 
+					'visible_info'=>array( 'label'=>__('If enabled the variation selection table for first category\'s products will be hidden if default variations are set','woo-bundle-choice'),
 						'type'=>'visible_info',
 						'class'=>array('fluid', 'small'),
 						'size_class'=>array('sixteen','wide'),
 					),	
 				), 
 				'product_page_hide_second_variation_form'=>array(
-					'label'=>'Hide second category\'s variation menu',
+					/* Language function - comment */ 
+					'label'=>__('Hide second category\'s variation menu','woo-bundle-choice','woo-bundle-choice'),
 					'type'=>'checkbox',
 					'sanitize'=>'sanitize_text_field',
 					'value'=>array(wbc()->options->get_option('tiny_features','product_page_hide_second_variation_form')),
 					'options'=>array('1'=>' '),
 					'is_id_as_name'=>true,
 					'class'=>array(),
-					'visible_info'=>array( 'label'=>eowbc_lang('If enabled the variation selection table for second category\'s products will be hidden if default variations are set'),
+
+					/* Language function - comment */ 
+					'visible_info'=>array( 'label'=>__('If enabled the variation selection table for second category\'s products will be hidden if default variations are set','woo-bundle-choice'),
 						'type'=>'visible_info',
 						'class'=>array('fluid', 'small'),
 						'size_class'=>array('sixteen','wide'),
 					),	
 				), 
 				'tiny_features_option_ui_save'=>array(
-							'label'=>eowbc_lang('Save'),
+					/* Language function - comment */ 
+							'label'=>__('Save','woo-bundle-choice'),
 							'type'=>'button',		
 							'class'=>array('primary'),
 							'attr'=>array("data-action='save'")				
@@ -394,10 +431,12 @@ $form['data'] = array(
 			)
 		),
 	'tiny_features_specification_view'=>array(
-		'label'=>eowbc_lang('Specifications View for Item Page'),
+		/* Language function - comment */ 
+		'label'=>__('Specifications View for Item Page','woo-bundle-choice'),
 		'form'=>array(
 			'tiny_features_devider_specification_view'=>array(
-					'label'=>eowbc_lang('Specification View Configuration'),
+				/* Language function - comment */ 
+					'label'=>__('Specification View Configuration','woo-bundle-choice'),
 					'type'=>'devider',
 				),
 			/*'tiny_features_specification_view_status'=>array(
@@ -416,42 +455,51 @@ $form['data'] = array(
 					'type'=>'devider',
 				),
 			'tiny_features_specification_view_shortcode_status'=>array(
-					'label'=>eowbc_lang('Shortcode Status'),
+				/* Language function - comment */ 
+					'label'=>__('Shortcode Status','woo-bundle-choice'),
 					'type'=>'checkbox',
 					'value'=>array(wbc()->options->get_option('tiny_features','specification_view_shortcode_status')),
 					'sanitize'=>'sanitize_text_field',
-					'options'=>array('specification_view_shortcode_status'=>eowbc_lang(' Check here to enable shortcode feature of specification view at product page (Use <strong>[woo-bundle-choice-specification-view] </strong> as Shortcode).')),
+					/* Language function - comment */ 
+					'options'=>array('specification_view_shortcode_status'=>__(' Check here to enable shortcode feature of specification view at product page (Use <strong>[woo-bundle-choice-specification-view] </strong> as Shortcode).','woo-bundle-choice')),
 					'class'=>array(),
 					'size_class'=>array('eight','wide'),
 					'inline'=>true,
-					'visible_info'=>array( 'label'=>eowbc_lang('(Please clean product description area on product page for better UI/UX.)'),
+
+					/* Language function - comment */ 
+					'visible_info'=>array( 'label'=>__('(Please clean product description area on product page for better UI/UX.)','woo-bundle-choice'),
 						'type'=>'visible_info',
 						'class'=>array('small'),
 						// 'size_class'=>array('sixteen','wide'),
 					),											
 				),
 			'tiny_features_specification_view_default_status'=>array(
-					'label'=>eowbc_lang('At Default Position - Item/Product Page'),
+				/* Language function - comment */ 
+					'label'=>__('At Default Position - Item/Product Page','woo-bundle-choice'),
 					'type'=>'checkbox',
 					'value'=>array(wbc()->options->get_option('tiny_features','specification_view_default_status')),
 					'sanitize'=>'sanitize_text_field',
-					'options'=>array('specification_view_default_status'=>eowbc_lang('Check here to enable shortcode feature of specification view at specification section on product page.')),
+					/* Language function - comment */ 
+					'options'=>array('specification_view_default_status'=>__('Check here to enable shortcode feature of specification view at specification section on product page.','woo-bundle-choice')),
 					'class'=>array(),
 					'size_class'=>array('eight','wide'),
 					'inline'=>true,
 				),
 			'tiny_features_specification_view_style'=>array(
-					'label'=>eowbc_lang('Alternate Widgets'),
+				/* Language function - comment */ 
+					'label'=>__('Alternate Widgets','woo-bundle-choice'),
 					'type'=>'radio',
 					'value'=>wbc()->options->get_option('tiny_features','specification_view_style','default'),
 					'sanitize'=>'sanitize_text_field',
-					'options'=>array('default'=>eowbc_lang('Default Style'),'template_1'=>eowbc_lang('Template 1'),'template_2'=>eowbc_lang('Template 2')),
+					/* Language function - comment */ 
+					'options'=>array('default'=>__('Default Style','woo-bundle-choice'),'template_1'=>__('Template 1','woo-bundle-choice'),'template_2'=>__('Template 2','woo-bundle-choice')),
 					'class'=>array(),
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>true,
 				),
 			'tiny_features_specification_meta_keys'=>array(
-					'label'=>eowbc_lang('Additional Meta'),
+				/* Language function - comment */ 
+					'label'=>__('Additional Meta','woo-bundle-choice'),
 					'type'=>'select',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_specification_meta_keys',''),
 					'sanitize'=>'sanitize_text_field',		
@@ -460,7 +508,9 @@ $form['data'] = array(
 					'field_attr'=>array('multiple=""'),
 					'inline'=>false,					
 					'size_class'=>array(),
-					'visible_info'=>array( 'label'=>eowbc_lang('Add Keys of your Additional WooCommerce Product Meta here, if you want to display them with specification view. If the meta is not found for your specified key then it will be ignored.'),
+
+					/* Language function - comment */ 
+					'visible_info'=>array( 'label'=>__('Add Keys of your Additional WooCommerce Product Meta here, if you want to display them with specification view. If the meta is not found for your specified key then it will be ignored.','woo-bundle-choice'),
 						'type'=>'visible_info',
 						'class'=>array('small'),
 						// 'size_class'=>array('sixteen','wide'),
@@ -468,7 +518,8 @@ $form['data'] = array(
 					
 				),
 			'tiny_features_save_specification_view'=>array(
-						'label'=>eowbc_lang('Save'),
+				/* Language function - comment */ 
+						'label'=>__('Save','woo-bundle-choice'),
 						'type'=>'button',		
 						'class'=>array('primary'),
 						'attr'=>array("data-action='save'")	
@@ -484,14 +535,14 @@ $form['data'] = array(
 	// 				'type'=>'devider',
 	// 			),
 	// 			'shop_cat_shortcode_filter'=>array(
-	// 				'label'=>eowbc_lang('Filter'),
+	// 				'label'=>__('Filter'),
 	// 				'type'=>'select',
 	// 				'value'=>'',
 	// 				'sanitize'=>'sanitize_text_field',
 	// 				'options'=>array_replace(eo\wbc\model\Category_Attribute::instance()->get_category(),eo\wbc\model\Category_Attribute::instance()->get_attributs()),
 	// 				'class'=>array('fluid'),
 	// 				'inline'=>false,
-	// 				'visible_info'=>array( 'label'=>eowbc_lang('( Select category or attribute on which this filter field should do the searching. )'),
+	// 				'visible_info'=>array( 'label'=>__('( Select category or attribute on which this filter field should do the searching. )'),
 	// 					'type'=>'visible_info',
 	// 					'class'=>array('small'),
 	// 				),
@@ -499,26 +550,26 @@ $form['data'] = array(
 	// 				/*'size_class'=>array('transition','hidden')*/
 	// 			),
 	// 			'shop_cat_shortcode_label'=>array(
-	// 				'label'=>eowbc_lang('Label'),
+	// 				'label'=>__('Label'),
 	// 				'type'=>'text',
 	// 				'value'=>'',					
 	// 				'sanitize'=>'sanitize_text_field',
 	// 				'class'=>array('fluid'),
 	// 				'inline'=>false,
-	// 				'visible_info'=>array( 'label'=>eowbc_lang('( Label text to display on website for this filter field. )'),
+	// 				'visible_info'=>array( 'label'=>__('( Label text to display on website for this filter field. )'),
 	// 					'type'=>'visible_info',
 	// 					'class'=>array('small'),
 	// 				),
 	// 				'size_class'=>array('required')
 	// 			),
 	// 			'shop_cat_shortcode_unique_id'=>array(
-	// 				'label'=>eowbc_lang('Unique ID'),
+	// 				'label'=>__('Unique ID'),
 	// 				'type'=>'text',
 	// 				'value'=>'',					
 	// 				'sanitize'=>'sanitize_text_field',
 	// 				'class'=>array('fluid'),
 	// 				'inline'=>false,
-	// 				'visible_info'=>array( 'label'=>eowbc_lang('( Specify unique id, useful if you want to create dependant filters please visit doc for more details. )'),
+	// 				'visible_info'=>array( 'label'=>__('( Specify unique id, useful if you want to create dependant filters please visit doc for more details. )'),
 	// 					'type'=>'visible_info',
 	// 					'class'=>array('small'),
 	// 				),
@@ -542,7 +593,7 @@ $form['data'] = array(
 	// 				'type'=>'devider',
 	// 			),
 	// 			'shop_cat_shortcode_text'=>array(
-	// 				'label'=>eowbc_lang('Shortcode'),
+	// 				'label'=>__('Shortcode'),
 	// 				'type'=>'textarea',
 	// 				'value'=>'',					
 	// 				'sanitize'=>'sanitize_text_field',
@@ -562,121 +613,121 @@ $form['data'] = array(
 	// 		'label'=>'Filters for Shop/Category Page',
 	// 		'form'=>array(	
 	// 			'shop_cat_filter_location'=>array(
-	// 				'label'=>eowbc_lang('Filter Location'),
+	// 				'label'=>__('Filter Location'),
 	// 				'type'=>'checkbox',
 	// 				'value'=>array(wbc()->options->get_option('tiny_features','shop_cat_filter_location_shop'),wbc()->options->get_option('tiny_features','shop_cat_filter_location_cat')),
 	// 				'sanitize'=>'sanitize_text_field',
 	// 				'options'=>array('shop_cat_filter_location_shop'=>'Shope Page','shop_cat_filter_location_cat'=>'Category Page'),
 	// 				'class'=>array('fluid'),
 	// 				'inline'=>false,
-	// 				'visible_info'=>array( 'label'=>eowbc_lang('( Specify on which page you want to display filter, if you select category then you will be asked to select category on which you want to display the filter. )'),
+	// 				'visible_info'=>array( 'label'=>__('( Specify on which page you want to display filter, if you select category then you will be asked to select category on which you want to display the filter. )'),
 	// 					'type'=>'visible_info',
 	// 					'class'=>array('small'),
 	// 				),
 	// 			),
 	// 			'shop_cat_filter_category'=>array(
-	// 				'label'=>eowbc_lang('Category'),
+	// 				'label'=>__('Category'),
 	// 				'type'=>'select',
 	// 				'value'=>wbc()->options->get_option('tiny_features','shop_cat_filter_category'),
 	// 				'sanitize'=>'sanitize_text_field',
 	// 				'options'=>eo\wbc\model\Category_Attribute::instance()->get_category(),
 	// 				'class'=>array('fluid'),
 	// 				'inline'=>false,
-	// 				'visible_info'=>array( 'label'=>eowbc_lang('( Select category on which to show filter widget. )'),
+	// 				'visible_info'=>array( 'label'=>__('( Select category on which to show filter widget. )'),
 	// 					'type'=>'visible_info',
 	// 					'class'=>array('small'),
 	// 				),
 	// 				'size_class'=>array('transition','hidden','required')
 	// 			),
 	// 			'shop_cat_filter_two_filter'=>array(
-	// 				'label'=>eowbc_lang('Two Filters?'),
+	// 				'label'=>__('Two Filters?'),
 	// 				'type'=>'checkbox',
 	// 				'value'=>array(wbc()->options->get_option('tiny_features','shop_cat_filter_two_filter')),
 	// 				'sanitize'=>'sanitize_text_field',
 	// 				'options'=>array('shop_cat_filter_two_filter'=>' '),
 	// 				'class'=>array('fluid'),
 	// 				'inline'=>false,
-	// 				'visible_info'=>array( 'label'=>eowbc_lang('( For some specific requirements you might want to display two filters on same page, the two filters function separately based on category, if you enable this option you will be asked to select dependent categories. )'),
+	// 				'visible_info'=>array( 'label'=>__('( For some specific requirements you might want to display two filters on same page, the two filters function separately based on category, if you enable this option you will be asked to select dependent categories. )'),
 	// 					'type'=>'visible_info',
 	// 					'class'=>array('small'),
 	// 				),
 	// 			),
 	// 			'shop_cat_filter_two_filter_first'=>array(
-	// 				'label'=>eowbc_lang('First Category'),
+	// 				'label'=>__('First Category'),
 	// 				'type'=>'select',
 	// 				'value'=>wbc()->options->get_option('tiny_features','shop_cat_filter_two_filter_first'),
 	// 				'sanitize'=>'sanitize_text_field',
 	// 				'options'=>eo\wbc\model\Category_Attribute::instance()->get_category(),
 	// 				'class'=>array('fluid'),
 	// 				'inline'=>false,
-	// 				'visible_info'=>array( 'label'=>eowbc_lang('( The first category of the two different filters, please select the main category of which all attribute options and products you want to include in this filter\'s layout and search results. )'),
+	// 				'visible_info'=>array( 'label'=>__('( The first category of the two different filters, please select the main category of which all attribute options and products you want to include in this filter\'s layout and search results. )'),
 	// 					'type'=>'visible_info',
 	// 					'class'=>array('small'),
 	// 				),
 	// 				'size_class'=>array('transition','hidden','required')
 	// 			),
 	// 			'shop_cat_filter_two_filter_first_title'=>array(
-	// 				'label'=>eowbc_lang('First Filter Title'),
+	// 				'label'=>__('First Filter Title'),
 	// 				'type'=>'text',
 	// 				'value'=>wbc()->options->get_option('tiny_features','shop_cat_filter_two_filter_first_title'),		
 	// 				'sanitize'=>'sanitize_text_field',
 	// 				'class'=>array('fluid'),
 	// 				'inline'=>false,
-	// 				'visible_info'=>array( 'label'=>eowbc_lang('( The title text that is set to this filter\'s heading title. )'),
+	// 				'visible_info'=>array( 'label'=>__('( The title text that is set to this filter\'s heading title. )'),
 	// 					'type'=>'visible_info',
 	// 					'class'=>array('small'),
 	// 				),
 	// 				'size_class'=>array('transition','hidden','required')
 	// 			),
 	// 			'shop_cat_filter_two_filter_second'=>array(
-	// 				'label'=>eowbc_lang('Second Category'),
+	// 				'label'=>__('Second Category'),
 	// 				'type'=>'select',
 	// 				'value'=>wbc()->options->get_option('tiny_features','shop_cat_filter_two_filter_second'),
 	// 				'sanitize'=>'sanitize_text_field',
 	// 				'options'=>eo\wbc\model\Category_Attribute::instance()->get_category(),
 	// 				'class'=>array('fluid'),
 	// 				'inline'=>false,
-	// 				'visible_info'=>array( 'label'=>eowbc_lang('( The second category of the two different filters, please select the main category of which all attribute options and products you want to include in this filter\'s layout and search results.' ),
+	// 				'visible_info'=>array( 'label'=>__('( The second category of the two different filters, please select the main category of which all attribute options and products you want to include in this filter\'s layout and search results.' ),
 	// 					'type'=>'visible_info',
 	// 					'class'=>array('small'),
 	// 				),
 	// 				'size_class'=>array('transition','hidden','required')
 	// 			),
 	// 			'shop_cat_filter_two_filter_second_title'=>array(
-	// 				'label'=>eowbc_lang('Second Filter Title'),
+	// 				'label'=>__('Second Filter Title'),
 	// 				'type'=>'text',
 	// 				'value'=>wbc()->options->get_option('tiny_features','shop_cat_filter_two_filter_second_title'),		
 	// 				'sanitize'=>'sanitize_text_field',
 	// 				'class'=>array('fluid'),
 	// 				'inline'=>false,
-	// 				'visible_info'=>array( 'label'=>eowbc_lang('( The title text that is set to this filter\'s heading title. )'),
+	// 				'visible_info'=>array( 'label'=>__('( The title text that is set to this filter\'s heading title. )'),
 	// 					'type'=>'visible_info',
 	// 					'class'=>array('small'),
 	// 				),
 	// 				'size_class'=>array('transition','hidden','required')
 	// 			),
 	// 			'shop_cat_filter_alternate_view'=>array(
-	// 				'label'=>eowbc_lang('Alternate Mobile View Widget?'),
+	// 				'label'=>__('Alternate Mobile View Widget?'),
 	// 				'type'=>'checkbox',
 	// 				'value'=>array(wbc()->options->get_option('tiny_features','shop_cat_filter_alternate_view')),
 	// 				'sanitize'=>'sanitize_text_field',
 	// 				'options'=>array('shop_cat_filter_alternate_view'=>' '),
 	// 				'class'=>array('fluid'),
 	// 				'inline'=>false,
-	// 				'visible_info'=>array( 'label'=>eowbc_lang('( Enable this option if you want to use alternate mobile UI which is quite suitable for mobile layout. )'),
+	// 				'visible_info'=>array( 'label'=>__('( Enable this option if you want to use alternate mobile UI which is quite suitable for mobile layout. )'),
 	// 					'type'=>'visible_info',
 	// 					'class'=>array('small'),
 	// 				),
 	// 			),
 	// 			'shop_cat_filter_selected_filter'=>array(
-	// 				'label'=>eowbc_lang('Selected Filters?'),
+	// 				'label'=>__('Selected Filters?'),
 	// 				'type'=>'checkbox',
 	// 				'value'=>array(wbc()->options->get_option('tiny_features','shop_cat_filter_selected_filter')),
 	// 				'sanitize'=>'sanitize_text_field',
 	// 				'options'=>array('shop_cat_filter_selected_filter'=>' '),
 	// 				'class'=>array('fluid'),
 	// 				'inline'=>false,
-	// 				'visible_info'=>array( 'label'=>eowbc_lang('( Enable this option if you want to show in a line all selected filters with an option to remove them. )'),
+	// 				'visible_info'=>array( 'label'=>__('( Enable this option if you want to show in a line all selected filters with an option to remove them. )'),
 	// 					'type'=>'visible_info',
 	// 					'class'=>array('small'),
 	// 				),
@@ -686,7 +737,7 @@ $form['data'] = array(
 	// 				'type'=>'link-widget',					
 	// 				'options'=>array('Add sample Filter Data'=>admin_url('admin.php?page=eowbc&eo_wbc_view_auto_jewel=1&type=filters_automation'),'Remove sample data'=>admin_url('admin.php?page=eowbc&eo_wbc_view_auto_jewel=1&type=remove_filters_automation')),
 	// 				'class'=>array('secondary'),
-	// 				'visible_info'=>array( 'label'=>eowbc_lang('<br/>( If you want to see sample filters with sample data the please click add button above, you can select what sample data you want to add in the next step and later you can remove sample data by clicking "Remove sample data" button above. After adding sample data visit this sample page to see it in action! )'),
+	// 				'visible_info'=>array( 'label'=>__('<br/>( If you want to see sample filters with sample data the please click add button above, you can select what sample data you want to add in the next step and later you can remove sample data by clicking "Remove sample data" button above. After adding sample data visit this sample page to see it in action! )'),
 	// 					'type'=>'visible_info',
 	// 					'class'=>array('small'),
 	// 				),
@@ -698,7 +749,7 @@ $form['data'] = array(
 	// 				'sanitize'=>'sanitize_text_field',
 	// 				'size_class'=>array('sixteen','wide'),
 	// 				'class'=>array('secondary'),
-	// 				'visible_info'=>array( 'label'=>eowbc_lang('( Specify your custom CSS for the custom styling, you can override any class of any element of the filter layout to achieve styling of your choice. )'),
+	// 				'visible_info'=>array( 'label'=>__('( Specify your custom CSS for the custom styling, you can override any class of any element of the filter layout to achieve styling of your choice. )'),
 	// 					'type'=>'visible_info',
 	// 					'class'=>array('small'),
 	// 				),
@@ -719,7 +770,7 @@ $form['data'] = array(
 	// 				'type'=>'select',
 	// 				'value'=>'',
 	// 				'sanitize'=>'sanitize_text_field',
-	// 				'options'=>array(''=>eowbc_lang('Bulk Actions'), 'delete'=>'Delete'),
+	// 				'options'=>array(''=>__('Bulk Actions'), 'delete'=>'Delete'),
 	// 				'class'=>array('fluid'),
 	// 				'size_class'=>array('two','wide'),
 	// 				'next_inline'=>true,
@@ -764,7 +815,7 @@ $form['data'] = array(
 	// 				'sanitize'=>'sanitize_text_field',
 	// 			),
 	// 			'shop_cat_filter_add_label'=>array(
-	// 				'label'=>eowbc_lang('Label'),
+	// 				'label'=>__('Label'),
 	// 				'type'=>'text',					
 	// 				'size_class'=>array('three','wide'),					
 	// 			),				
@@ -786,14 +837,14 @@ $form['data'] = array(
 	// 				'attr'=>array('type="number"','step="6.25"','min="6.25"','max="100"')
 	// 			),
 	// 			'shop_cat_filter_add_order'=>array(
-	// 				'label'=>eowbc_lang('Ordering'),				
+	// 				'label'=>__('Ordering'),				
 	// 				'type'=>'text',
 	// 				'value'=>'0',
 	// 				'sanitize'=>'sanitize_text_field',
 	// 				'size_class'=>array('three','wide','required'),					
 	// 			),
 	// 			'shop_cat_filter_add_input_type'=>array(
-	// 				'label'=>eowbc_lang('Input Type'),					
+	// 				'label'=>__('Input Type'),					
 	// 				'type'=>'select',
 	// 				'value'=>'',
 	// 				'sanitize'=>'sanitize_text_field',
@@ -802,14 +853,14 @@ $form['data'] = array(
 	// 				'size_class'=>array('three','wide','required'),
 	// 			),				
 	// 			'shop_cat_filter_add_icon_size'=>array(
-	// 				'label' => eowbc_lang('Icon Size'),
+	// 				'label' => __('Icon Size'),
 	// 				'type'=>'text',
 	// 				'value'=>'45px',
 	// 				'sanitize'=>'sanitize_text_field',
 	// 				'size_class'=>array('three','wide'),					
 	// 			),				
 	// 			'shop_cat_filter_add_icon_label_size'=>array(
-	// 				'label' => eowbc_lang('Icon Label Size'),
+	// 				'label' => __('Icon Label Size'),
 	// 				'type'=>'text',
 	// 				'value'=>'0.78571429rem',
 	// 				'sanitize'=>'sanitize_text_field',
@@ -840,7 +891,7 @@ $form['data'] = array(
 	// 				'size_class'=>array('transition','hidden')	
 	// 			),
 	// 			'shop_cat_filter_add_submit_btn'=>array(
-	// 				'label'=>eowbc_lang('Save'),
+	// 				'label'=>__('Save'),
 	// 				'type'=>'button',
 	// 				'class'=>array('secondary'),
 	// 				//'size_class'=>array('eight','wide'),

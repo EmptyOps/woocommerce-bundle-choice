@@ -329,7 +329,8 @@ class Eowbc_Filters extends Eowbc_Model {
 		        	if(!empty(wbc()->sanitize->post($key_clean.'_id')) and !empty($filter_data[wbc()->sanitize->post($key_clean.'_id')])) {
 		        		$filter_data[wbc()->sanitize->post($key_clean.'_id')] = $table_data;
 		        		$res["type"] = "success";
-		    			$res["msg"] = eowbc_lang('Filter updated successfully');
+		        		/* Language function - comment */ 
+		    			$res["msg"] = __('Filter updated successfully','woo-bundle-choice');
 		    			wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data) );
 		                return $res;
 		        	} else {
@@ -339,13 +340,15 @@ class Eowbc_Filters extends Eowbc_Model {
 				            	if( $is_auto_insert_for_template ) {
 					            	$filter_data[$fdkey][$key_clean.'_add_enabled'] = 1;
 					                $res["type"] = "error";
-					    			$res["msg"] = eowbc_lang('Filter Already Exists and activated');
+					                /* Language function - comment */ 
+					    			$res["msg"] = __('Filter Already Exists and activated','woo-bundle-choice');
 					    			wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data) );
 					                return $res;
 				            	}
 				            	else {
 					                $res["type"] = "error";
-					    			$res["msg"] = eowbc_lang('Filter already exists '.(($filter_data[$fdkey][$key_clean.'_add_enabled']==1) ? 'and enabled' : 'but is disabled, you should enable it.'));
+					                /* Language function - comment */ 
+					    			$res["msg"] = __('Filter already exists '.(($filter_data[$fdkey][$key_clean.'_add_enabled']==1) ? 'and enabled' : 'but is disabled, you should enable it.','woo-bundle-choice'));
 					                return $res;
 				            	}
 				            }
@@ -357,8 +360,9 @@ class Eowbc_Filters extends Eowbc_Model {
 		        $filter_data[wbc()->common->createUniqueId()] = $table_data;
 
 		        wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data));
-		        
-		        $res["msg"] = eowbc_lang('New Filter Added Successfully'); 
+
+		        /* Language function - comment */ 
+		        $res["msg"] = __('New Filter Added Successfully','woo-bundle-choice'); 
 			}
 
 	    }
@@ -393,7 +397,7 @@ class Eowbc_Filters extends Eowbc_Model {
   //       }
 
   //       wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data_updated) );
-  //       $res["msg"] = $delete_cnt . " " . eowbc_lang('record(s) deleted'); 
+  //       $res["msg"] = $delete_cnt . " " . __('record(s) deleted'); 
 
   //       return $res;
 
@@ -428,7 +432,8 @@ class Eowbc_Filters extends Eowbc_Model {
         }
 
         wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data) );
-        $res["msg"] = $delete_cnt . " " . eowbc_lang('record(s) activated'); 
+        /* Language function - comment */ 
+        $res["msg"] = $delete_cnt . " " . __('record(s) activated','woo-bundle-choice'); 
 
         return $res;
 	}
@@ -459,7 +464,8 @@ class Eowbc_Filters extends Eowbc_Model {
         }
 
         wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data) );
-        $res["msg"] = $delete_cnt . " " . eowbc_lang('record(s) deactivated'); 
+        /* Language function - comment */ 
+        $res["msg"] = $delete_cnt . " " . __('record(s) deactivated','woo-bundle-choice'); 
 
         return $res;
 	}

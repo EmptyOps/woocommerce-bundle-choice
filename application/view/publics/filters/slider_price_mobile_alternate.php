@@ -11,12 +11,12 @@
 <div class="bottom_filter_segment hidden ui segment" id="sticky_mob_filter_price">
 	<div class="ui equal width grid">
 		<div class="column close_sticky_mob_filter" data-target="#sticky_mob_filter_price">
-			<i class="ui icon times" style="cursor: pointer;"></i>&nbsp;<?php echo eowbc_lang('Close'); ?>
+			<i class="ui icon times" style="cursor: pointer;"></i>&nbsp;<?php _e('Close','woo-bundle-choice'); ?>
 		</div>
 		<div class="column"></div>
 		<div class="column"></div>
 		<div class="column" style="text-align: right;" onclick="reset_price(event,'<?php echo $min; ?>','<?php echo $max; ?>')">
-			<i class="ui icon redo" style="cursor: pointer;"></i>&nbsp;<?php echo eowbc_lang('Reset'); ?>
+			<i class="ui icon redo" style="cursor: pointer;"></i>&nbsp;<?php _e('Reset','woo-bundle-choice'); ?>
 		</div>
 	</div>					
 	<br/>

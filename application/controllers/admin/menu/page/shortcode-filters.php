@@ -34,19 +34,20 @@ if ( ! class_exists( 'Shortcode_Filters' ) ) {
 				unset($form_definition['altr_filt_widgts']['form']['builder_altr_filt_widgts']);
 			}
 			
-			$form_definition['filter_setting']['label'] = 'Configuration & Shortcode';
+			$form_definition['filter_setting']['label'] = __('Configuration & Shortcode','woo-bundle-choice');
 
 			$form_definition['altr_filt_widgts']['form']['first_category_altr_filt_widgts']['label'] = 'Widgets';
 			unset($form_definition['altr_filt_widgts']['form']['second_category_altr_filt_widgts']);
 
-			$form_definition['d_fconfig']['label'] = 'Filter Configuration';
-			$form_definition['d_fconfig']['form']['d_fconfig_save_sec_title']['label'] = 'Add Filter Field';
+			$form_definition['d_fconfig']['label'] = __('Filter Configuration','woo-bundle-choice');
+			$form_definition['d_fconfig']['form']['d_fconfig_save_sec_title']['label'] = __('Add Filter Field','woo-bundle-choice');
 
 			$sh_filter_setting = array(
 
 				'filter_setting_filter'=> $form_definition['filter_setting']['form']['filter_setting_filter'], 
 				'redirect_url'=>array(
-					'label'=>eowbc_lang('Redirect URL'),
+					/* Language function - comment */ 
+					'label'=>__('Redirect URL','woo-bundle-choice'),
 					'type'=>'text',
 					'validate'=>array('required'=>''),
 					'sanitize'=>'sanitize_text_field',
@@ -56,27 +57,32 @@ if ( ! class_exists( 'Shortcode_Filters' ) ) {
 					'inline'=>true,
 				),	
 				'redirect_url_help'=>array(
-					'label'=>eowbc_lang('Set the redirect URL to which you want to redirect user after they hit the search button on filter. Default is set to default URL of WooCommerce shop page.'),
+					/* Language function - comment */ 
+					'label'=>__('Set the redirect URL to which you want to redirect user after they hit the search button on filter. Default is set to default URL of WooCommerce shop page.','woo-bundle-choice'),
 					'type'=>'visible_info',
 					'class'=>array('small'),
 				),
 				'shortcode_label'=>array(
-					'label'=>eowbc_lang('Shortcode'),
+					/* Language function - comment */ 
+					'label'=>__('Shortcode','woo-bundle-choice'),
 					'type'=>'label',
 					'class'=>array('fluid'),
 				),
 				'shortcode'=>array(
-					'label'=>'<strong>[wbc-shortcode-filters]</strong>',
+					/* Language function - comment */
+					'label'=>__('<strong>[wbc-shortcode-filters]</strong>','woo-bundle-choice'),
 					'type'=>'label',
 					'class'=>array('fluid'),
 				),
 				'shortcode_help'=>array(
-					'label'=>eowbc_lang('Put above shortcode anywhere where you want to display filters, it is recommended to use the Elementor Shortcode widget if you are using Elementor on particular page'),
+					/* Language function - comment */ 
+					'label'=>__('Put above shortcode anywhere where you want to display filters, it is recommended to use the Elementor Shortcode widget if you are using Elementor on particular page','woo-bundle-choice'),
 					'type'=>'visible_info',
 					'class'=>array('small'),
 				),
 				'shortcode_multiple'=>array(
-					'label'=>eowbc_lang('If you want to use more than one shortcode based filters then please <a href="http://sphereplugins.com/contact-us" target="_blank">contact us</a>'),
+					/* Language function - comment */ 
+					'label'=>__('If you want to use more than one shortcode based filters then please <a href="http://sphereplugins.com/contact-us" target="_blank">contact us</a>','woo-bundle-choice'),
 					'type'=>'visible_info',
 					'class'=>array('fluid'),
 				),

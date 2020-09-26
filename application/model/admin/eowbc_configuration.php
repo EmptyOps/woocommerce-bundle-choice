@@ -58,7 +58,8 @@ class Eowbc_Configuration {
 	}	
 
 	public function save( $form_definition ) {
-		$res = array( "type"=>"success", "msg"=>eowbc_lang("Updated successfully!") );		
+		/* Language function - comment */ 
+		$res = array( "type"=>"success", "msg"=>__('Updated successfully!','woo-bundle-choice') );		
 		
 		wbc()->sanitize->clean($form_definition);	    
     	wbc()->validate->check($form_definition);
