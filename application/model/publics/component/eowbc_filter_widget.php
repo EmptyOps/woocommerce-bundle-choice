@@ -875,7 +875,7 @@ class EOWBC_Filter_Widget {
 	        }	
 		}		
 
-		return array('list'=>$list,'title'=>$field_title,'slug'=>$field_slug);			
+		return apply_filters('eowbc_filters_range_steps',array('list'=>$list,'title'=>$field_title,'slug'=>$field_slug,'force_title'=>false));			
 	}
 
 	//Generate step slider;
@@ -898,6 +898,10 @@ class EOWBC_Filter_Widget {
 		}
 
 		$filter=$this->range_steps($id,$title,$filter_type);
+		if(!empty($filter['force_title'])){
+			$title = $filter['title'];
+		}
+
 		if(empty($filter)) return false;
 		
 		$items_name=wbc()->common->array_column($filter['list'],'name');			
@@ -953,6 +957,9 @@ class EOWBC_Filter_Widget {
 		}
 
 		$filter=$this->range_steps($id,$title,$filter_type);
+		if(!empty($filter['force_title'])){
+			$title = $filter['title'];
+		}
 		if(empty($filter)) return false;
 
 		array_push($this->__filters,array(
@@ -1430,7 +1437,11 @@ class EOWBC_Filter_Widget {
 
 		if($type == 1){
 			$term = wbc()->wc->eo_wbc_get_attribute($id);
-			$term_list = $this->range_steps($id,$title,$type)['list'];
+			$filter = $this->range_steps($id,$title,$type);			
+			if(!empty($filter['force_title'])){			
+				$title = $filter['title'];
+			}
+			$term_list = $filter['list'];
 		} else{
 			$term = get_term_by('id',$id,'product_cat');
 			$term_list = get_terms('product_cat', array('hide_empty' => 0, 'orderby' => 'menu_order', 'parent'=>$id));
@@ -1757,6 +1768,8 @@ class EOWBC_Filter_Widget {
 
 	public function get_widget() {
 		
+		do_action('eowbc_before_filter_widget');
+
 		$this->_category = apply_filters('eowbc_filter_widget_category',$this->eo_wbc_get_category());
 		$current_category=$this->_category;
 
@@ -1838,6 +1851,8 @@ class EOWBC_Filter_Widget {
 			return !empty($filter_element[$prefix.'_fconfig_add_enabled']);
 		});
 
+		$filter =  apply_filters( 'eowbc_filter_widget_filters_post_clean',$filter,$prefix);
+
 		//$filter =  apply_filters( 'eowbc_filter_widget_filters',$filter);
 
 		foreach ($filter as $key => $item) {
@@ -1876,7 +1891,7 @@ class EOWBC_Filter_Widget {
 			$non_adv_ordered_filter[$item['order']]=$item;
 		}
 
-		ksort($non_adv_ordered_filter);
+		ksort($non_adv_ordered_filter);		
 		ksort($adv_ordered_filter);
 
 		?>
