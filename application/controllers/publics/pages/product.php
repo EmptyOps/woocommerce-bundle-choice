@@ -123,7 +123,8 @@ class Product {
                
             if($product->is_in_stock()){
 
-                add_action('woocommerce_after_add_to_cart_button',function(){                
+                add_action('woocommerce_after_add_to_cart_button',function(){  
+
                     // echo "<button href='#' id='eo_wbc_add_to_cart' class='single_add_to_cart_button button alt make_pair btn btn-default'>".get_option('eo_wbc_pair_text',__('Add to pair','woo-bundle-choice'))."</button>";
                     echo "<button href='#' id='eo_wbc_add_to_cart' class='single_add_to_cart_button button alt make_pair btn btn-default'>".wbc()->options->get_option('configuration','label_make_pair',__('Add to pair','woo-bundle-choice'))."</button>";
                 });
@@ -262,7 +263,7 @@ class Product {
             }
 
             if(empty($btn_text)){
-                $btn_text = 'Continue';
+                $btn_text =  __('Continue','woo-bundle-choice');
             }
             
             global $post;            

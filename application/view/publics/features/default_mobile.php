@@ -7,7 +7,8 @@ if(!empty($product_data)):
     ob_start();
  ?>
 <hr style="clear: both;margin-top: 0.5em;margin-bottom: 0.5em;" />
-    <h4 style="text-align: center;">Specifications</h4>
+    /* Language function - comment */ 
+    <h4 style="text-align: center;"><?php _e('Specifications','woo-bundle-choice'); ?></h4>
 <hr style="clear: both;margin-top: 0.5em;margin-bottom: 0.5em;" />
 <div class="ui container product_specification">
  

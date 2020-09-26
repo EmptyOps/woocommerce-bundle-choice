@@ -57,7 +57,8 @@ function eo_wbc_jpc_attributes_values(){
 $form = array();
 
 $form['id']='jpc_form';
-$form['title']=eowbc_lang('Price Control(Beta)');
+/* Language function - comment */ 
+$form['title']=__('Price Control(Beta)','woo-bundle-choice');
 $form['method']='POST';
 
 $form['data'] = array(
@@ -65,14 +66,16 @@ $form['data'] = array(
 					//section - should be sub array? I think yes... may... be...
 
 					'price_control_section_visible_info'=>array(
-						'label'=>eowbc_lang('(Set pricing method to update price in bulk. For eg.: based on gold,diamond price changes, you might want to bulk update prices.)'),
+						/* Language function - comment */ 
+						'label'=>__('(Set pricing method to update price in bulk. For eg.: based on gold,diamond price changes, you might want to bulk update prices.)','woo-bundle-choice'),
 						'type'=>'visible_info',
 						'class'=>array('fluid', 'medium'),
 						'size_class'=>array('sixteen','wide'),
 						'inline'=>false,
 						), 
 					'jpc_field'=>array(
-						'label'=>eowbc_lang('Field'),
+						/* Language function - comment */ 
+						'label'=>__('Field','woo-bundle-choice','woo-bundle-choice'),
 						'type'=>'select',
 						'value'=>'0',
 						'sanitize'=>'sanitize_text_field',
@@ -82,7 +85,8 @@ $form['data'] = array(
 						'inline'=>false,
 						), 
 					'select_values_label'=>array(
-						'label'=>eowbc_lang('Select Value(s)'),
+						/* Language function - comment */ 
+						'label'=>__('Select Value(s)','woo-bundle-choice'),
 						'type'=>'label',
 						'class'=>array('jpc_rule_fields'),
 						'size_class'=>array('three','wide'),
@@ -92,7 +96,8 @@ $form['data'] = array(
 						'type'=>'select',
 						'value'=>'0',
 						'sanitize'=>'sanitize_text_field',
-						'options'=>array( 'between'=>'Between', 'in'=>'In' ),
+						/* Language function - comment */ 
+						'options'=>array( 'between'=>__('Between','woo-bundle-choice'), 'in'=>__('In','woo-bundle-choice') ),
 						'class'=>array('fluid'),
 						'size_class'=>array('four','wide','jpc_rule_fields'),
 						'next_inline'=>true,
@@ -142,7 +147,8 @@ $form['data'] = array(
 // }
 
 $form['data']['eowbc_pc_add_rule_btn'] = array(
-						'label'=>eowbc_lang('Add Pricing Method'),
+				/* Language function - comment */ 
+						'label'=>__('Add Pricing Method','woo-bundle-choice'),
 						'type'=>'button',
 						'class'=>array('secondary'),
 						//'size_class'=>array('eight','wide'),
@@ -214,7 +220,8 @@ $form['data'] = array_merge( $form['data'], array(
 								) 
 							), 
 						'regular_price_label'=>array(
-							'label'=>eowbc_lang('Regular Price'),
+							/* Language function - comment */ 
+							'label'=>__('Regular Price','woo-bundle-choice'),
 							'type'=>'label',
 							//'class'=>array('fluid'),
 							'size_class'=>array('three','wide','jpc_rules_table'),
@@ -222,9 +229,10 @@ $form['data'] = array_merge( $form['data'], array(
 							'inline'=>true,
 							),
 						'regular_price'=>array(
-							//'label'=>eowbc_lang('Regular Price'),
+							//'label'=>__('Regular Price'),
 							'no_label' => true,
-							'placeholder'=>eowbc_lang('Regular Price'),
+							/* Language function - comment */ 
+							'placeholder'=>__('Regular Price','woo-bundle-choice'),
 							'type'=>'text',
 							'value'=>'0',
 							'sanitize'=>'sanitize_text_field',
@@ -236,7 +244,8 @@ $form['data'] = array_merge( $form['data'], array(
 							'inline'=>true,
 							),
 						'sales_price_label'=>array(
-							'label'=>eowbc_lang('Sales Price'),
+							/* Language function - comment */ 
+							'label'=>__('Sales Price','woo-bundle-choice'),
 							'type'=>'label',
 							//'class'=>array('fluid'),
 							'size_class'=>array('three','wide','jpc_rules_table'),
@@ -245,9 +254,10 @@ $form['data'] = array_merge( $form['data'], array(
 							'inline'=>true,
 							),
 						'sales_price'=>array(
-							//'label'=>eowbc_lang('Sales Price'),
+							//'label'=>__('Sales Price'),
 							'no_label' => true,
-							'placeholder'=>eowbc_lang('Sales Price'),
+							/* Language function - comment */ 
+							'placeholder'=>__('Sales Price','woo-bundle-choice'),
 							'type'=>'text',
 							'value'=>'0',
 							'sanitize'=>'sanitize_text_field',
@@ -258,7 +268,8 @@ $form['data'] = array_merge( $form['data'], array(
 							'inline'=>true,
 							),
 						'jpc_add_price_ctl'=>array(
-							'label'=>eowbc_lang('Save Pricing Method'),
+							/* Language function - comment */ 
+							'label'=>__('Save Pricing Method','woo-bundle-choice'),
 							'type'=>'button',
 							'class'=>array('secondary','jpc_rules_table'),
 							//'size_class'=>array('eight','wide'),
@@ -358,7 +369,7 @@ $table['body'] = array(
 
 $form = array();
 $form['id']='eowbc_price_control_save_update_prices';
-$form['title']= '';	// eowbc_lang('Pricing Method');
+$form['title']= '';	// __('Pricing Method');
 $form['method']='POST';
 // $form['attr']= array('data-is_serialize="false"');
 
@@ -382,14 +393,16 @@ $form['data'] = array(
 						'sanitize'=>'sanitize_text_field',
 						),
 					'jpc_save_price_ctl'=>array(
-						'label'=>eowbc_lang('Save and Update Prices'),
+						/* Language function - comment */ 
+						'label'=>__('Save and Update Prices','woo-bundle-choice'),
 						'type'=>'button',
 						'class'=>array('primary'),
 						//'size_class'=>array('eight','wide'),
 						'attr'=>array("data-action='save'"),
 						'inline'=>false,
 
-						'visible_info'=>array( 'label'=>'(Upon clicking the \'Save and Update Prices\' button, it may take some time to update product prices in bulk.)',
+						/* Language function - comment */ 
+						'visible_info'=>array( 'label'=>__('(Upon clicking the \'Save and Update Prices\' button, it may take some time to update product prices in bulk.)','woo-bundle-choice'),
 								'type'=>'visible_info',
 								'class'=>array('fluid', 'small'),
 								'size_class'=>array('sixteen','wide'),

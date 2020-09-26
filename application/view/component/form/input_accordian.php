@@ -14,6 +14,7 @@ if(!empty($section_type)){
 				<div class="ui accordion <?php echo !empty($class)?$class:''; ?>">
 					<div class="title <?php echo !empty($class)?$class:''; ?>">
 				    	<i class="icon dropdown"></i>
+				    	/* Language function - comment */ 
 				    	<?php _e($label,'woo-bundle-choice'); ?>
 					</div>
 					<div class="content <?php echo !empty($class)?$class:''; ?>">

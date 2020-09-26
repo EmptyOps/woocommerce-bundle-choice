@@ -3,7 +3,8 @@
 $form = array();
 
 $form['id']='eowbc_shop_category_filter';
-$form['title']='Filters for Shop/Category Page';
+/* Language function - comment */
+$form['title']=__('Filters for Shop/Category Page','woo-bundle-choice');
 $form['method']='POST';
 $form['tabs'] = true;
 

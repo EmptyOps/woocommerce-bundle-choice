@@ -7,7 +7,8 @@ wbc()->load->model('admin/eowbc_filters');
 $form = array();
 
 $form['id']='eowbc_filters';
-$form['title']='Filter Settings';
+/* Language function - comment */ 
+$form['title']=__('Filter Settings','woo-bundle-choice');
 $form['method']='POST';
 $form['tabs'] = true;
 

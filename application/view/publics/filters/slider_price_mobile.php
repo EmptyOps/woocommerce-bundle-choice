@@ -9,7 +9,7 @@
 	    <i class="dropdown icon"></i>		    
 	    Price		    
 		<?php if($reset): ?>
-		&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_price(event,'<?php echo $min; ?>','<?php echo $max; ?>')">&nbsp;<u>reset</u></span>
+		&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_price(event,'<?php echo $min; ?>','<?php echo $max; ?>')">&nbsp;<u><?php echo eowbc_lang('reset'); ?></u></span>
 		<?php endif; ?>
 	</div>
   	<div class="content">	

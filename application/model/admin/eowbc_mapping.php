@@ -178,7 +178,8 @@ class Eowbc_Mapping extends Eowbc_Model {
 		        	wbc()->options->update_option_group( 'mapping_'.$key, serialize($mapping_data) );
 		        	//update cache
 			        \Cache_Manager::getInstance()->update_map_caches();
-		        	$res["msg"] = eowbc_lang('Mapping Updated Successfully'); 
+			        /* Language function - comment */ 
+		        	$res["msg"] = __('Mapping Updated Successfully','woo-bundle-choice'); 
 		        	return $res;
 			        
 		        } else{
@@ -198,7 +199,8 @@ class Eowbc_Mapping extends Eowbc_Model {
 
 			            if ($match_found) { 
 			                $res["type"] = "error";
-			    			$res["msg"] = eowbc_lang('Mapping Already Exists');
+			                /* Language function - comment */ 
+			    			$res["msg"] = __('Mapping Already Exists','woo-bundle-choice');
 			                return $res;
 			            }
 			        }
@@ -215,7 +217,8 @@ class Eowbc_Mapping extends Eowbc_Model {
 		        // TODO here it is better if we set it to 1 only if length of mapping_data is greater than zero and otherwise set to 0 if user removes maps and so on 
 				wbc()->options->update_option('configuration','config_map',1);
 
-		        $res["msg"] = eowbc_lang('New Mapping Added Successfully'); 
+				/* Language function - comment */ 
+		        $res["msg"] = __('New Mapping Added Successfully','woo-bundle-choice'); 
 			}
 
 	    }
@@ -246,7 +249,7 @@ class Eowbc_Mapping extends Eowbc_Model {
   //       }
 
   //       wbc()->options->update_option_group( 'mapping_'.$key, serialize($mapping_data_updated) );
-  //       $res["msg"] = $delete_cnt . " " . eowbc_lang('record(s) deleted'); 
+  //       $res["msg"] = $delete_cnt . " " . __('record(s) deleted'); 
 
         // return $res;
 
@@ -261,7 +264,8 @@ class Eowbc_Mapping extends Eowbc_Model {
 			$res['msg'] = json_encode($map[wbc()->sanitize->post('id')]);
 		} else {
 			$res['type'] = 'error';
-			$res['msg'] = 'Selected item does not exists!';
+			/* Language function - comment */ 
+			$res['msg'] = __('Selected item does not exists!','woo-bundle-choice');
 		}		
 		return $res;
 	}	

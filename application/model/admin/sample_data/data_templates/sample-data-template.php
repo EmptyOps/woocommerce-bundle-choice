@@ -33,7 +33,8 @@ class Sample_Data_Template {
 		$this->gallay_img = $_img_url. 'Products/';
 		return array(
         array(
-          'title'=>'Setting #8800950587',
+          /* Language function - comment */ 
+          'title'=>__('Setting #8800950587','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-round-1.jpg',
           'images'=>array('Ring-round-2.jpg','Ring-round-3.jpg'),
           'content'=>'',
@@ -123,7 +124,7 @@ class Sample_Data_Template {
                         )            
         ),
         array(
-          'title'=>'Setting #6461855726',
+          'title'=>__('Setting #6461855726','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-princess-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -213,7 +214,7 @@ class Sample_Data_Template {
                         )            
         ),
         array(
-          'title'=>'Setting #2871986691',
+          'title'=>__('Setting #2871986691','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-emerald-3.jpg',
           'images'=>array('Ring-emerald-4.jpg','Ring-emerald-5.jpg'),
           'content'=>'',
@@ -303,7 +304,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #1318544274',
+          'title'=>__('Setting #1318544274','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-asscher-1.jpg',
           'images'=>array('Ring-asscher-2.jpg'),
           'content'=>'',
@@ -393,7 +394,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #7707154336',
+          'title'=>__('Setting #7707154336','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-marquise.jpg',
           'images'=>array(),
           'content'=>'',
@@ -483,7 +484,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #1388912063',
+          'title'=>__('Setting #1388912063','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-oval-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -573,7 +574,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #0412854474',
+          'title'=>__('Setting #0412854474','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-radiant-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -623,7 +624,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #4270635040',
+          'title'=>__('Setting #4270635040','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-pear-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -713,7 +714,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #4927991215',
+          'title'=>__('Setting #4927991215','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-hert-1.jpg',
           'images'=>array('Ring-hert-2.jpg','Ring-hert-3.jpg'),
           'content'=>'',
@@ -803,7 +804,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #2375118707',
+          'title'=>__('Setting #2375118707','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-cusion-1.jpg',
           'images'=>array('Ring-cusion-2.jpg'),
           'content'=>'',
@@ -896,7 +897,7 @@ class Sample_Data_Template {
         //s-copy-1
 
         array(
-          'title'=>'Setting #10000001',
+          'title'=>__('Setting #10000001','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-round-1.jpg',
           'images'=>array('Ring-round-2.jpg','Ring-round-3.jpg'),
           'content'=>'',
@@ -986,7 +987,7 @@ class Sample_Data_Template {
                         )            
         ),
         array(
-          'title'=>'Setting #10000002',
+          'title'=>__('Setting #10000002','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-princess-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -1076,7 +1077,7 @@ class Sample_Data_Template {
                         )            
         ),
         array(
-          'title'=>'Setting #10000003',
+          'title'=>__('Setting #10000003','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-emerald-3.jpg',
           'images'=>array('Ring-emerald-4.jpg','Ring-emerald-5.jpg'),
           'content'=>'',
@@ -1166,7 +1167,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000004',
+          'title'=>__('Setting #10000004','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-asscher-1.jpg',
           'images'=>array('Ring-asscher-2.jpg'),
           'content'=>'',
@@ -1256,7 +1257,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000005',
+          'title'=>__('Setting #10000005','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-marquise.jpg',
           'images'=>array(),
           'content'=>'',
@@ -1346,7 +1347,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000006',
+          'title'=>__('Setting #10000006','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-oval-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -1436,7 +1437,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000007',
+          'title'=>__('Setting #10000007','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-radiant-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -1486,7 +1487,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000008',
+          'title'=>__('Setting #10000008','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-pear-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -1576,7 +1577,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000009',
+          'title'=>__('Setting #10000009','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-hert-1.jpg',
           'images'=>array('Ring-hert-2.jpg','Ring-hert-3.jpg'),
           'content'=>'',
@@ -1666,7 +1667,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000010',
+          'title'=>__('Setting #10000010','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-cusion-1.jpg',
           'images'=>array('Ring-cusion-2.jpg'),
           'content'=>'',
@@ -1759,7 +1760,7 @@ class Sample_Data_Template {
         //s-copy-2
 
         array(
-          'title'=>'Setting #10000011',
+          'title'=>__('Setting #10000011','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-round-1.jpg',
           'images'=>array('Ring-round-2.jpg','Ring-round-3.jpg'),
           'content'=>'',
@@ -1809,7 +1810,7 @@ class Sample_Data_Template {
                         )            
         ),
         array(
-          'title'=>'Setting #10000012',
+          'title'=>__('Setting #10000012','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-princess-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -1859,7 +1860,7 @@ class Sample_Data_Template {
                         )            
         ),
         array(
-          'title'=>'Setting #10000012',
+          'title'=>__('Setting #10000012','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-emerald-3.jpg',
           'images'=>array('Ring-emerald-4.jpg','Ring-emerald-5.jpg'),
           'content'=>'',
@@ -1909,7 +1910,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000013',
+          'title'=>__('Setting #10000013','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-asscher-1.jpg',
           'images'=>array('Ring-asscher-2.jpg'),
           'content'=>'',
@@ -1959,7 +1960,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000014',
+          'title'=>__('Setting #10000014','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-marquise.jpg',
           'images'=>array(),
           'content'=>'',
@@ -2009,7 +2010,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000015',
+          'title'=>__('Setting #10000015','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-oval-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -2059,7 +2060,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000016',
+          'title'=>__('Setting #10000016','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-radiant-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -2109,7 +2110,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000017',
+          'title'=>__('Setting #10000017','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-pear-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -2159,7 +2160,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000018',
+          'title'=>__('Setting #10000018','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-hert-1.jpg',
           'images'=>array('Ring-hert-2.jpg','Ring-hert-3.jpg'),
           'content'=>'',
@@ -2209,7 +2210,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000019',
+          'title'=>__('Setting #10000019','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-cusion-1.jpg',
           'images'=>array('Ring-cusion-2.jpg'),
           'content'=>'',
@@ -2262,7 +2263,7 @@ class Sample_Data_Template {
         //s-copy-3
         
         array(
-          'title'=>'Setting #10000020',
+          'title'=>__('Setting #10000020','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-round-1.jpg',
           'images'=>array('Ring-round-2.jpg','Ring-round-3.jpg'),
           'content'=>'',
@@ -2352,7 +2353,7 @@ class Sample_Data_Template {
                         )            
         ),
         array(
-          'title'=>'Setting #10000021',
+          'title'=>__('Setting #10000021','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-princess-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -2442,7 +2443,7 @@ class Sample_Data_Template {
                         )            
         ),
         array(
-          'title'=>'Setting #10000022',
+          'title'=>__('Setting #10000022','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-emerald-3.jpg',
           'images'=>array('Ring-emerald-4.jpg','Ring-emerald-5.jpg'),
           'content'=>'',
@@ -2532,7 +2533,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000023',
+          'title'=>__('Setting #10000023','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-asscher-1.jpg',
           'images'=>array('Ring-asscher-2.jpg'),
           'content'=>'',
@@ -2622,7 +2623,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000024',
+          'title'=>__('Setting #10000024','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-marquise.jpg',
           'images'=>array(),
           'content'=>'',
@@ -2712,7 +2713,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000025',
+          'title'=>__('Setting #10000025','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-oval-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -2802,7 +2803,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000026',
+          'title'=>__('Setting #10000026','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-radiant-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -2852,7 +2853,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000027',
+          'title'=>__('Setting #10000027','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-pear-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -2942,7 +2943,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000028',
+          'title'=>__('Setting #10000028','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-hert-1.jpg',
           'images'=>array('Ring-hert-2.jpg','Ring-hert-3.jpg'),
           'content'=>'',
@@ -3032,7 +3033,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000029',
+          'title'=>__('Setting #10000029','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-cusion-1.jpg',
           'images'=>array('Ring-cusion-2.jpg'),
           'content'=>'',
@@ -3125,7 +3126,7 @@ class Sample_Data_Template {
         //s-copy-4
 
         array(
-          'title'=>'Setting #10000030',
+          'title'=>__('Setting #10000030','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-round-1.jpg',
           'images'=>array('Ring-round-2.jpg','Ring-round-3.jpg'),
           'content'=>'',
@@ -3215,7 +3216,7 @@ class Sample_Data_Template {
                         )            
         ),
         array(
-          'title'=>'Setting #10000031',
+          'title'=>__('Setting #10000031','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-princess-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -3305,7 +3306,7 @@ class Sample_Data_Template {
                         )            
         ),
         array(
-          'title'=>'Setting #10000032',
+          'title'=>__('Setting #10000032','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-emerald-3.jpg',
           'images'=>array('Ring-emerald-4.jpg','Ring-emerald-5.jpg'),
           'content'=>'',
@@ -3395,7 +3396,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000033',
+          'title'=>__('Setting #10000033','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-asscher-1.jpg',
           'images'=>array('Ring-asscher-2.jpg'),
           'content'=>'',
@@ -3485,7 +3486,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000034',
+          'title'=>__('Setting #10000034','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-marquise.jpg',
           'images'=>array(),
           'content'=>'',
@@ -3575,7 +3576,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000035',
+          'title'=>__('Setting #10000035','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-oval-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -3665,7 +3666,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000036',
+          'title'=>__('Setting #10000036','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-radiant-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -3715,7 +3716,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000037',
+          'title'=>__('Setting #10000037','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-pear-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -3805,7 +3806,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000038',
+          'title'=>__('Setting #10000038','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-hert-1.jpg',
           'images'=>array('Ring-hert-2.jpg','Ring-hert-3.jpg'),
           'content'=>'',
@@ -3895,7 +3896,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000039',
+          'title'=>__('Setting #10000039','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-cusion-1.jpg',
           'images'=>array('Ring-cusion-2.jpg'),
           'content'=>'',
@@ -3988,7 +3989,7 @@ class Sample_Data_Template {
         //s-copy-5
 
         array(
-          'title'=>'Setting #10000040',
+          'title'=>__('Setting #10000040','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-round-1.jpg',
           'images'=>array('Ring-round-2.jpg','Ring-round-3.jpg'),
           'content'=>'',
@@ -4078,7 +4079,7 @@ class Sample_Data_Template {
                         )            
         ),
         array(
-          'title'=>'Setting #10000041',
+          'title'=>__('Setting #10000041','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-princess-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -4168,7 +4169,7 @@ class Sample_Data_Template {
                         )            
         ),
         array(
-          'title'=>'Setting #10000042',
+          'title'=>__('Setting #10000042','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-emerald-3.jpg',
           'images'=>array('Ring-emerald-4.jpg','Ring-emerald-5.jpg'),
           'content'=>'',
@@ -4258,7 +4259,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000043',
+          'title'=>__('Setting #10000043','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-asscher-1.jpg',
           'images'=>array('Ring-asscher-2.jpg'),
           'content'=>'',
@@ -4348,7 +4349,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000044',
+          'title'=>__('Setting #10000044','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-marquise.jpg',
           'images'=>array(),
           'content'=>'',
@@ -4438,7 +4439,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000045',
+          'title'=>__('Setting #10000045','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-oval-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -4528,7 +4529,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000046',
+          'title'=>__('Setting #10000046','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-radiant-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -4578,7 +4579,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000047',
+          'title'=>__('Setting #10000047','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-pear-1.jpg',
           'images'=>array(),
           'content'=>'',
@@ -4668,7 +4669,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000048',
+          'title'=>__('Setting #10000048','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-hert-1.jpg',
           'images'=>array('Ring-hert-2.jpg','Ring-hert-3.jpg'),
           'content'=>'',
@@ -4758,7 +4759,7 @@ class Sample_Data_Template {
                         )
         ),
         array(
-          'title'=>'Setting #10000049',
+          'title'=>__('Setting #10000049','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Ring-cusion-1.jpg',
           'images'=>array('Ring-cusion-2.jpg'),
           'content'=>'',
@@ -4851,7 +4852,7 @@ class Sample_Data_Template {
         //Diamonds__
         
         array(
-          'title'=>'Round Diamond #89302496',
+          'title'=>__('Round Diamond #89302496','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Round-4.jpg',
           'images'=>array('Round-5.jpg','Round-1.jpg'),
           'content'=>'',
@@ -4943,7 +4944,7 @@ class Sample_Data_Template {
                    )       
         ),
         array(
-          'title'=>'Emerald Diamond #66984597',
+          'title'=>__('Emerald Diamond #66984597','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Emerald-1.jpg',
           'images'=>array('Emerald-2.jpg','Emerald-3.jpg'),
           'content'=>'',
@@ -5035,7 +5036,7 @@ class Sample_Data_Template {
                    )        
         ),
         array(
-          'title'=>'Asscher Diamond #99649028',
+          'title'=>__('Asscher Diamond #99649028','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/asscher-1.jpg',
           'images'=>array('asscher-2.jpg'),
           'content'=>'',
@@ -5127,7 +5128,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'PRINCESS DIAMOND #39398077',
+          'title'=>__('PRINCESS DIAMOND #39398077','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Princess-3.jpg',
           'images'=>array('Princess-1.jpg','Princess-2.jpg'),
           'content'=>'',
@@ -5219,7 +5220,7 @@ class Sample_Data_Template {
                    ) 
         ),
         array(
-          'title'=>'Cusion Diamond #87671292',
+          'title'=>__('Cusion Diamond #87671292','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Cusion-1.jpg',
           'images'=>array('Cusion-2.jpg'),
           'content'=>'',
@@ -5311,7 +5312,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Heart Diamond #95296856',
+          'title'=>__('Heart Diamond #95296856','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Heart-1.jpg',
           'images'=>array('Heart-2.jpg','Heart-3.jpg'),
           'content'=>'',
@@ -5403,7 +5404,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Marquise Diamond #16931364',
+          'title'=>__('Marquise Diamond #16931364','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Marquise-1.jpg',
           'images'=>array('Marquise-2.jpg'),
           'content'=>'',
@@ -5495,7 +5496,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Oval Diamond #75138961',
+          'title'=>__('Oval Diamond #75138961','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Oval-1.jpg',
           'images'=>array('Oval-2.jpg'),
           'content'=>'',
@@ -5587,7 +5588,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Radiant Solitaire Diamond #59218358',
+          'title'=>__('Radiant Solitaire Diamond #59218358','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Radiant-1.jpg',
           'images'=>array('Radiant-2.jpg'),
           'content'=>'',
@@ -5679,7 +5680,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Pear Diamond #95299666',
+          'title'=>__('Pear Diamond #95299666','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Pear-1.jpg',
           'images'=>array('Pear-2.jpg','Pear-3.jpg'),
           'content'=>'',
@@ -5774,7 +5775,7 @@ class Sample_Data_Template {
         //d-copy-1
 
         array(
-          'title'=>'Round Diamond #10000050',
+          'title'=>__('Round Diamond #10000050','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Round-4.jpg',
           'images'=>array('Round-5.jpg','Round-1.jpg'),
           'content'=>'',
@@ -5866,7 +5867,7 @@ class Sample_Data_Template {
                    )       
         ),
         array(
-          'title'=>'Emerald Diamond #10000051',
+          'title'=>__('Emerald Diamond #10000051','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Emerald-1.jpg',
           'images'=>array('Emerald-2.jpg','Emerald-3.jpg'),
           'content'=>'',
@@ -5958,7 +5959,7 @@ class Sample_Data_Template {
                    )        
         ),
         array(
-          'title'=>'Asscher Diamond #10000052',
+          'title'=>__('Asscher Diamond #10000052','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/asscher-1.jpg',
           'images'=>array('asscher-2.jpg'),
           'content'=>'',
@@ -6050,7 +6051,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'PRINCESS DIAMOND #10000053',
+          'title'=>__('PRINCESS DIAMOND #10000053','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Princess-3.jpg',
           'images'=>array('Princess-1.jpg','Princess-2.jpg'),
           'content'=>'',
@@ -6142,7 +6143,7 @@ class Sample_Data_Template {
                    ) 
         ),
         array(
-          'title'=>'Cusion Diamond #10000054',
+          'title'=>__('Cusion Diamond #10000054','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Cusion-1.jpg',
           'images'=>array('Cusion-2.jpg'),
           'content'=>'',
@@ -6234,7 +6235,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Heart Diamond #10000055',
+          'title'=>__('Heart Diamond #10000055','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Heart-1.jpg',
           'images'=>array('Heart-2.jpg','Heart-3.jpg'),
           'content'=>'',
@@ -6326,7 +6327,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Marquise Diamond #10000056',
+          'title'=>__('Marquise Diamond #10000056','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Marquise-1.jpg',
           'images'=>array('Marquise-2.jpg'),
           'content'=>'',
@@ -6418,7 +6419,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Oval Diamond #10000057',
+          'title'=>__('Oval Diamond #10000057','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Oval-1.jpg',
           'images'=>array('Oval-2.jpg'),
           'content'=>'',
@@ -6510,7 +6511,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Radiant Solitaire Diamond #10000058',
+          'title'=>__('Radiant Solitaire Diamond #10000058','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Radiant-1.jpg',
           'images'=>array('Radiant-2.jpg'),
           'content'=>'',
@@ -6602,7 +6603,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Pear Diamond #10000059',
+          'title'=>__('Pear Diamond #10000059','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Pear-1.jpg',
           'images'=>array('Pear-2.jpg','Pear-3.jpg'),
           'content'=>'',
@@ -6697,7 +6698,7 @@ class Sample_Data_Template {
         //d-copy-2
 
         array(
-          'title'=>'Round Diamond #10000060',
+          'title'=>__('Round Diamond #10000060','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Round-4.jpg',
           'images'=>array('Round-5.jpg','Round-1.jpg'),
           'content'=>'',
@@ -6789,7 +6790,7 @@ class Sample_Data_Template {
                    )       
         ),
         array(
-          'title'=>'Emerald Diamond #10000061',
+          'title'=>__('Emerald Diamond #10000061','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Emerald-1.jpg',
           'images'=>array('Emerald-2.jpg','Emerald-3.jpg'),
           'content'=>'',
@@ -6881,7 +6882,7 @@ class Sample_Data_Template {
                    )        
         ),
         array(
-          'title'=>'Asscher Diamond #10000062',
+          'title'=>__('Asscher Diamond #10000062','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/asscher-1.jpg',
           'images'=>array('asscher-2.jpg'),
           'content'=>'',
@@ -6973,7 +6974,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'PRINCESS DIAMOND #10000063',
+          'title'=>__('PRINCESS DIAMOND #10000063','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Princess-3.jpg',
           'images'=>array('Princess-1.jpg','Princess-2.jpg'),
           'content'=>'',
@@ -7065,7 +7066,7 @@ class Sample_Data_Template {
                    ) 
         ),
         array(
-          'title'=>'Cusion Diamond #10000064',
+          'title'=>__('Cusion Diamond #10000064','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Cusion-1.jpg',
           'images'=>array('Cusion-2.jpg'),
           'content'=>'',
@@ -7157,7 +7158,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Heart Diamond #10000065',
+          'title'=>__('Heart Diamond #10000065','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Heart-1.jpg',
           'images'=>array('Heart-2.jpg','Heart-3.jpg'),
           'content'=>'',
@@ -7249,7 +7250,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Marquise Diamond #10000066',
+          'title'=>__('Marquise Diamond #10000066','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Marquise-1.jpg',
           'images'=>array('Marquise-2.jpg'),
           'content'=>'',
@@ -7341,7 +7342,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Oval Diamond #10000067',
+          'title'=>__('Oval Diamond #10000067','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Oval-1.jpg',
           'images'=>array('Oval-2.jpg'),
           'content'=>'',
@@ -7433,7 +7434,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Radiant Solitaire Diamond #10000068',
+          'title'=>__('Radiant Solitaire Diamond #10000068','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Radiant-1.jpg',
           'images'=>array('Radiant-2.jpg'),
           'content'=>'',
@@ -7525,7 +7526,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Pear Diamond #10000069',
+          'title'=>__('Pear Diamond #10000069','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Pear-1.jpg',
           'images'=>array('Pear-2.jpg','Pear-3.jpg'),
           'content'=>'',
@@ -7620,7 +7621,7 @@ class Sample_Data_Template {
         //d-copy-3
 
         array(
-          'title'=>'Round Diamond #10000070',
+          'title'=>__('Round Diamond #10000070','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Round-4.jpg',
           'images'=>array('Round-5.jpg','Round-1.jpg'),
           'content'=>'',
@@ -7712,7 +7713,7 @@ class Sample_Data_Template {
                    )       
         ),
         array(
-          'title'=>'Emerald Diamond #10000071',
+          'title'=>__('Emerald Diamond #10000071','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Emerald-1.jpg',
           'images'=>array('Emerald-2.jpg','Emerald-3.jpg'),
           'content'=>'',
@@ -7804,7 +7805,7 @@ class Sample_Data_Template {
                    )        
         ),
         array(
-          'title'=>'Asscher Diamond #10000072',
+          'title'=>__('Asscher Diamond #10000072','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/asscher-1.jpg',
           'images'=>array('asscher-2.jpg'),
           'content'=>'',
@@ -7896,7 +7897,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'PRINCESS DIAMOND #10000073',
+          'title'=>__('PRINCESS DIAMOND #10000073','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Princess-3.jpg',
           'images'=>array('Princess-1.jpg','Princess-2.jpg'),
           'content'=>'',
@@ -7988,7 +7989,7 @@ class Sample_Data_Template {
                    ) 
         ),
         array(
-          'title'=>'Cusion Diamond #10000074',
+          'title'=>__('Cusion Diamond #10000074','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Cusion-1.jpg',
           'images'=>array('Cusion-2.jpg'),
           'content'=>'',
@@ -8080,7 +8081,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Heart Diamond #10000075',
+          'title'=>__('Heart Diamond #10000075','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Heart-1.jpg',
           'images'=>array('Heart-2.jpg','Heart-3.jpg'),
           'content'=>'',
@@ -8172,7 +8173,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Marquise Diamond #10000076',
+          'title'=>__('Marquise Diamond #10000076','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Marquise-1.jpg',
           'images'=>array('Marquise-2.jpg'),
           'content'=>'',
@@ -8264,7 +8265,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Oval Diamond #10000077',
+          'title'=>__('Oval Diamond #10000077','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Oval-1.jpg',
           'images'=>array('Oval-2.jpg'),
           'content'=>'',
@@ -8356,7 +8357,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Radiant Solitaire Diamond #10000078',
+          'title'=>__('Radiant Solitaire Diamond #10000078','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Radiant-1.jpg',
           'images'=>array('Radiant-2.jpg'),
           'content'=>'',
@@ -8448,7 +8449,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Pear Diamond #10000079',
+          'title'=>__('Pear Diamond #10000079','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Pear-1.jpg',
           'images'=>array('Pear-2.jpg','Pear-3.jpg'),
           'content'=>'',
@@ -8543,7 +8544,7 @@ class Sample_Data_Template {
         //d-copy-4
 
         array(
-          'title'=>'Round Diamond #10000080',
+          'title'=>__('Round Diamond #10000080','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Round-4.jpg',
           'images'=>array('Round-5.jpg','Round-1.jpg'),
           'content'=>'',
@@ -8635,7 +8636,7 @@ class Sample_Data_Template {
                    )       
         ),
         array(
-          'title'=>'Emerald Diamond #10000081',
+          'title'=>__('Emerald Diamond #10000081','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Emerald-1.jpg',
           'images'=>array('Emerald-2.jpg','Emerald-3.jpg'),
           'content'=>'',
@@ -8727,7 +8728,7 @@ class Sample_Data_Template {
                    )        
         ),
         array(
-          'title'=>'Asscher Diamond #10000082',
+          'title'=>__('Asscher Diamond #10000082','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/asscher-1.jpg',
           'images'=>array('asscher-2.jpg'),
           'content'=>'',
@@ -8819,7 +8820,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'PRINCESS DIAMOND #10000083',
+          'title'=>__('PRINCESS DIAMOND #10000083','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Princess-3.jpg',
           'images'=>array('Princess-1.jpg','Princess-2.jpg'),
           'content'=>'',
@@ -8911,7 +8912,7 @@ class Sample_Data_Template {
                    ) 
         ),
         array(
-          'title'=>'Cusion Diamond #10000084',
+          'title'=>__('Cusion Diamond #10000084','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Cusion-1.jpg',
           'images'=>array('Cusion-2.jpg'),
           'content'=>'',
@@ -9003,7 +9004,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Heart Diamond #10000085',
+          'title'=>__('Heart Diamond #10000085','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Heart-1.jpg',
           'images'=>array('Heart-2.jpg','Heart-3.jpg'),
           'content'=>'',
@@ -9095,7 +9096,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Marquise Diamond #10000086',
+          'title'=>__('Marquise Diamond #10000086','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Marquise-1.jpg',
           'images'=>array('Marquise-2.jpg'),
           'content'=>'',
@@ -9187,7 +9188,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Oval Diamond #10000087',
+          'title'=>__('Oval Diamond #10000087','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Oval-1.jpg',
           'images'=>array('Oval-2.jpg'),
           'content'=>'',
@@ -9279,7 +9280,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Radiant Solitaire Diamond #10000088',
+          'title'=>__('Radiant Solitaire Diamond #10000088','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Radiant-1.jpg',
           'images'=>array('Radiant-2.jpg'),
           'content'=>'',
@@ -9371,7 +9372,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Pear Diamond #10000089',
+          'title'=>__('Pear Diamond #10000089','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Pear-1.jpg',
           'images'=>array('Pear-2.jpg','Pear-3.jpg'),
           'content'=>'',
@@ -9466,7 +9467,7 @@ class Sample_Data_Template {
         //d-copy-5
 
         array(
-          'title'=>'Round Diamond #10000090',
+          'title'=>__('Round Diamond #10000090','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Round-4.jpg',
           'images'=>array('Round-5.jpg','Round-1.jpg'),
           'content'=>'',
@@ -9558,7 +9559,7 @@ class Sample_Data_Template {
                    )       
         ),
         array(
-          'title'=>'Emerald Diamond #10000091',
+          'title'=>__('Emerald Diamond #10000091','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Emerald-1.jpg',
           'images'=>array('Emerald-2.jpg','Emerald-3.jpg'),
           'content'=>'',
@@ -9650,7 +9651,7 @@ class Sample_Data_Template {
                    )        
         ),
         array(
-          'title'=>'Asscher Diamond #10000092',
+          'title'=>__('Asscher Diamond #10000092','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/asscher-1.jpg',
           'images'=>array('asscher-2.jpg'),
           'content'=>'',
@@ -9742,7 +9743,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'PRINCESS DIAMOND #10000093',
+          'title'=>__('PRINCESS DIAMOND #10000093','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Princess-3.jpg',
           'images'=>array('Princess-1.jpg','Princess-2.jpg'),
           'content'=>'',
@@ -9834,7 +9835,7 @@ class Sample_Data_Template {
                    ) 
         ),
         array(
-          'title'=>'Cusion Diamond #10000094',
+          'title'=>__('Cusion Diamond #10000094','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Cusion-1.jpg',
           'images'=>array('Cusion-2.jpg'),
           'content'=>'',
@@ -9926,7 +9927,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Heart Diamond #10000095',
+          'title'=>__('Heart Diamond #10000095','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Heart-1.jpg',
           'images'=>array('Heart-2.jpg','Heart-3.jpg'),
           'content'=>'',
@@ -10018,7 +10019,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Marquise Diamond #10000096',
+          'title'=>__('Marquise Diamond #10000096','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Marquise-1.jpg',
           'images'=>array('Marquise-2.jpg'),
           'content'=>'',
@@ -10110,7 +10111,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Oval Diamond #10000097',
+          'title'=>__('Oval Diamond #10000097','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Oval-1.jpg',
           'images'=>array('Oval-2.jpg'),
           'content'=>'',
@@ -10202,7 +10203,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Radiant Solitaire Diamond #10000098',
+          'title'=>__('Radiant Solitaire Diamond #10000098','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Radiant-1.jpg',
           'images'=>array('Radiant-2.jpg'),
           'content'=>'',
@@ -10294,7 +10295,7 @@ class Sample_Data_Template {
                    )
         ),
         array(
-          'title'=>'Pear Diamond #10000099',
+          'title'=>__('Pear Diamond #10000099','woo-bundle-choice'),
           'thumb'=>$_img_url.'Products/Pear-1.jpg',
           'images'=>array('Pear-2.jpg','Pear-3.jpg'),
           'content'=>'',

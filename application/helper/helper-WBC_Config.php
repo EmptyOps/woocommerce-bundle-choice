@@ -19,20 +19,22 @@ class WBC_Config {
 
 	public function get_features() {
 		return array(
-			'ring_builder'=>'Ring Builder',
-			'api_integrations'=>'Diamond APIs Integrations',
-			'pair_maker'=>'Pair Maker',
-			'guidance_tool'=>'Guidance Tool',
+			/* Language function - comment */ 
+			'ring_builder'=>____('Ring Builder','woo-bundle-choice'),
+			'api_integrations'=>__('Diamond APIs Integrations','woo-bundle-choice'),
+			'pair_maker'=>__('Pair Maker','woo-bundle-choice'),
+			'guidance_tool'=>__('Guidance Tool','woo-bundle-choice'),
 		);
 	}
 
 	public function get_bonus_features() {
-		return array(			
-			'filters_shortcode'=>'Shortcode Filters',
-			'filters_shop_cat'=>'Filters for Shop/Category Page',
-			'opts_uis_item_page'=>'Options UI for Item Page',
-			'spec_view_item_page'=>'Specifications View for Item Page',
-			'price_control'=>'Price Control',
+		return array(		
+			/* Language function - comment */	
+			'filters_shortcode'=>__('Shortcode Filters','woo-bundle-choice'),
+			'filters_shop_cat'=>__('Filters for Shop/Category Page','woo-bundle-choice'),
+			'opts_uis_item_page'=>__('Options UI for Item Page','woo-bundle-choice'),
+			'spec_view_item_page'=>__('Specifications View for Item Page','woo-bundle-choice'),
+			'price_control'=>__('Price Control'),
 		);
 	}
 
@@ -42,18 +44,20 @@ class WBC_Config {
 
 	public function get_inventory_types() {
 		return array(
-			'jewelry'=>'Jewelry',
-			'clothing'=>'Clothing',
-			'home_decor'=>'Home Decor',
-			'others'=>'Others'
+			/* Language function - comment */
+			'jewelry'=>__('Jewelry','woo-bundle-choice'),
+			'clothing'=>__('Clothing','woo-bundle-choice'),
+			'home_decor'=>__('Home Decor','woo-bundle-choice'),
+			'others'=>__('Others','woo-bundle-choice')
 		);
 	} 
 
 	public function get_builders() {
 		return array(
-			'ring_builder'=>'Ring Builder',
-			'pair_maker'=>'Pair Maker',
-			'guidance_tool'=>'Guidance Tool'
+			/* Language function - comment */
+			'ring_builder'=>__('Ring Builder','woo-bundle-choice'),
+			'pair_maker'=>__('Pair Maker','woo-bundle-choice'),
+			'guidance_tool'=>__('Guidance Tool','woo-bundle-choice')
 		);
 	}
 }

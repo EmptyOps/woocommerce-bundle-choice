@@ -3,7 +3,8 @@
 $form = array();
 
 $form['id']='eowbc_shortcode_filters';
-$form['title']='Display Filters using Shortcode';
+/* Language function - comment */ 
+$form['title']=__('Display Filters using Shortcode','woo-bundle-choice');
 $form['method']='POST';
 $form['tabs'] = true;
 

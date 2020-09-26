@@ -62,6 +62,7 @@
     // Add certificate link here
     $certificate_link = $product->get_meta('_certificate_link',true);    
     if(!empty($certificate_link)){
+        /* Language function - comment */ 
         $product_data[] = array(__('Certificate','woo-bundle-choice'),"<a href='${certificate_link}' target='_blank'>".__('Click here','woo-bundle-choice')."</a>");
     }
 

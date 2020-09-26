@@ -9,7 +9,8 @@
 		<p>
 			<span class="ui header"><?php echo($filter['title']); ?></span> 
 			<?php if($reset): ?>
-			&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_checkbox(event,'.checklist_<?php echo $filter['slug'] ?>')">&nbsp;<u>reset</u></span>
+			/* Language function - comment */ 
+			&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_checkbox(event,'.checklist_<?php echo $filter['slug'] ?>')">&nbsp;<u><?php _e('reset','woo-bundle-choice'); ?></u></span>
 			<?php endif; ?>
 		</p>
 		<div class="ui tiny form" data-reset="reset_checkbox(new Event('click'),'.checklist_<?php echo $filter['slug'] ?>')">

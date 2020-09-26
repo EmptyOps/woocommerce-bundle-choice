@@ -63,7 +63,8 @@ class Eowbc_Model {
         }
 
         wbc()->options->update_option_group( $key, serialize($list_data_updated) );
-        $res["msg"] = $delete_cnt . " " . eowbc_lang('record(s) deleted'); 
+        /* Language function - comment */ 
+        $res["msg"] = $delete_cnt . " " . __('record(s) deleted','woo-bundle-choice'); 
 
         return $res;
 	}

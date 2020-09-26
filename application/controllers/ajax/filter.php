@@ -73,7 +73,8 @@ class Filter
 		        
 		        	if( isset($_GET['_category']) OR isset($_GET['_current_category']) ){
 
-		        		$tax_query=array('relation' => 'AND');
+		        		/* Language function - comment */
+		        		$tax_query=array('relation' => __('AND','woo-bundle-choice'));
 		                if(!empty(wbc()->sanitize->get('_category'))) {
 
 		                    foreach( array_unique(array_filter(explode(',', wbc()->sanitize->get('_category')))) as $_category){
@@ -83,7 +84,7 @@ class Filter
 		                                'taxonomy' => 'product_cat',
 		                                'field' => 'slug',
 		                                'terms' =>array_filter(explode(',',wbc()->sanitize->get('cat_filter_'.$_category))),
-		                                'compare'=>'EXISTS IN'
+		                                'compare'=>__('EXISTS IN','woo-bundle-choice'); /* Language function - comment */
 		                            );                    
 		                        }
 		                    }  
@@ -94,7 +95,7 @@ class Filter
 		                        'taxonomy' => 'product_cat',
 		                        'field' => 'slug',
 		                        'terms' => explode(',',wbc()->sanitize->get('_current_category')),
-		                        'compare'=>'EXISTS IN'
+		                        'compare'=>__('EXISTS IN','woo-bundle-choice'); /* Language function - comment */
 		                    );
 		                }	
 		                //$query->set('tax_query',$tax_query);	                
@@ -115,7 +116,7 @@ class Filter
 			                                'taxonomy' => $attr,
 			                                'field' => 'term_id',
 			                                'terms' => $this->range($attr,wbc()->sanitize->get('min_'.$attr),wbc()->sanitize->get('max_'.$attr),true),
-			                                'compare'=>'EXISTS IN'
+			                                'compare'=>__('EXISTS IN','woo-bundle-choice');/* Language function - comment */
 			                            );
 			                        }
 			                        else {
@@ -124,7 +125,7 @@ class Filter
 			                                'taxonomy' => $attr,
 			                                'field' => 'term_id',
 			                                'terms' => $this->range($attr,wbc()->sanitize->get('min_'.$attr),wbc()->sanitize->get('max_'.$attr)),
-			                                'compare'=>'EXISTS IN'
+			                                'compare'=>__('EXISTS IN','woo-bundle-choice'); /* Language function - comment */
 			                            );
 			                        }                   
 			                    }
@@ -133,7 +134,7 @@ class Filter
 			                            'taxonomy' => $attr,
 			                            'field' => 'slug',
 			                            'terms' => array_filter(explode(',',wbc()->sanitize->get('checklist_'.$attr))),
-			                            'compare'=>'EXISTS IN'
+			                            'compare'=>__('EXISTS IN','woo-bundle-choice'); /* Language function - comment */
 			                        );     
 			                    } 
 			                }

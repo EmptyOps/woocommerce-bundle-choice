@@ -12,7 +12,8 @@
 	&nbsp; <span class="ui grey text" style="cursor: pointer;">&nbsp;<i class="question circle outline icon" data-help="<?php _e($help); ?>"></i></span>
 	<?php endif; ?>
 		<?php if($reset): ?>
-	&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_icon(event,'<?php echo $term->slug; ?>')">&nbsp;<u>reset</u></span>
+		/* Language function - comment */ 
+	&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_icon(event,'<?php echo $term->slug; ?>')">&nbsp;<u><?php _e('reset','woo-bundle-choice'); ?></u></span>
 	<?php endif; ?>
 	</p>
 	<div class="ui tiny images ui equal width center aligned grid" style="text-align: center;" data-reset="reset_icon(new Event('click'),'<?php echo $term->slug; ?>')" data-filter-slug="<?php echo $term->slug; ?>">				

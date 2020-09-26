@@ -15,19 +15,19 @@
 <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
 <div class="ui modal align center tiny centered">
 <div class="ui header">              
-  <h4>There is an error on <strong><?php echo constant('EOWBC_NAME'); ?></strong></h4>
+  <h4><?php _e('There is an error on <strong>'.constant('EOWBC_NAME'),'woo-bundle-choice'); ?></strong></h4>
 </div>
 <div class="content">
   <h5 id="error_popup_title"></h5>
   <?php wp_nonce_field('eowbc_send_error_report', 'eowbc_send_error_report_wpnonce'); ?>
   <?php wp_nonce_field('eo_wbc_throw_error', 'eo_wbc_throw_error_wpnonce'); ?>
   <br>
-  <h5>When you send error report, you agree to SpherePlugins' <a href="https://sphereplugins.com/terms-conditions/" target="_blank">Terms</a> & <a href="https://sphereplugins.com/privacy-policy/" target="_blank">Privacy Policy</a></h5>
+  <h5><?php echo eowbc_lang('When you send error report, you agree to SpherePlugins'); ?> <a href="https://sphereplugins.com/terms-conditions/" target="_blank"><?php _e('Terms','woo-bundle-choice'); ?></a><?php _e('&','woo-bundle-choice'); ?> <a href="https://sphereplugins.com/privacy-policy/" target="_blank"><?php _e('Privacy Policy','woo-bundle-choice'); ?></a></h5>
 </div>
 <div class="actions">
-  	<div class="ui large red cancel button">Close</div>
-  	<div class="ui large primary view_log button" href="<?php echo admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log') ?>">View and Send error report</div>              
-  	<div class="ui large secondary approve ok button" style="margin-top: 1em !important;">Send an error report now!</div>
+  	<div class="ui large red cancel button"><?php echo eowbc_lang('Close'); ?></div>
+  	<div class="ui large primary view_log button" href="<?php echo admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log') ?>"><?php echo eowbc_lang('View and Send error report'); ?></div>              
+  	<div class="ui large secondary approve ok button" style="margin-top: 1em !important;"><?php echo eowbc_lang('Send an error report now!'); ?></div>
 </div>
 </div>
 <style type="text/css">
@@ -52,15 +52,15 @@ jQuery(document).ready(function($){
   $(".ui.modal").find(".approve").on('click',function(){
     if(!jQuery.send_error){
       jQuery.send_error=1;
-      $(this).text("Sending error report...");
+      $(this).text(eowbc_lang("Sending error report..."));
       
       jQuery.post('<?php echo site_url('/wp-admin/admin-ajax.php');?>',{resolver:'eowbc_send_error_report', _wpnonce:jQuery( jQuery('input[name="eowbc_send_error_report_wpnonce"]')[0] ).val(), action: 'eowbc_ajax', saved_tab_key: 'setting_status_log',is_sent_from_front_end: 1},function(data){                   
         if(data){ 
           jQuery(".ui.modal").find(".actions").html('<div class="ui large green inverted button error_sent">Ok</div>');                    
-          jQuery(".ui.modal .content").html("<h5>Thank you for sending error report, Sphere Plugins Support Team will soon get in touch with you. It generally takes 12 hours.</h5>");
+          jQuery(".ui.modal .content").html(eowbc_lang("<h5>Thank you for sending error report, Sphere Plugins Support Team will soon get in touch with you. It generally takes 12 hours.</h5>"));
           jQuery.send_error=0;
         } else {
-          $(".ui.modal").find(".approve").text("Resend an error report now!");
+          $(".ui.modal").find(".approve").text(eowbc_lang("Resend an error report now!"));
           jQuery.send_error=0;
         } 
       });                

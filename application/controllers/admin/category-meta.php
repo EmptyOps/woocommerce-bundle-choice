@@ -72,6 +72,7 @@ class Category_Meta {
 			<?php if($is_edit): ?>
 				<th scope="row" valign="top">
 			<?php endif; ?>
+			/* Language function - comment */
 				<label><?php _e('Filter Selected Image', 'woo-bundle-choice'); ?></label>
 			<?php if($is_edit): ?>
 					</th>
@@ -84,6 +85,7 @@ class Category_Meta {
 				<br/>				
 				<div>					
 					<button class="ui button wbc_thumb_button button" style="padding: 0.6em;">
+						/* Language function - comment */
 						<?php _e('Choose Image', 'woo-bundle-choice'); ?>						
 					</button>					
 				</div>
@@ -92,9 +94,11 @@ class Category_Meta {
 
 					jQuery(document).on("click",".wbc_thumb_button",function(){
 						wp_media = wp.media({
-							title: 'Filter Selected Image',
+							/* Language function - comment */
+							title: __('Filter Selected Image','woo-bundle-choice'),
 							button: {
-								text: 'Choose Image'
+								/* Language function - comment */
+								text: __('Choose Image','woo-bundle-choice')
 							},
 							multiple: false
 						})
@@ -129,8 +133,8 @@ class Category_Meta {
 	}
 
 	public function columns($columns) {
-
-		$column_title = 'Image';
+		/* Language function - comment */
+		$column_title = __('Image','woo-bundle-choice');
 		$column_key = 'image';
 
 		if(is_array($columns) and !empty($columns)){
@@ -158,8 +162,9 @@ class Category_Meta {
 	            }            
 	        } else {
 	            $src = $woocommerce->plugin_url() . '/assets/images/placeholder.png';
-	        }			
-			$columns .= '<img src="' . esc_url( $src ) . '" alt="' . esc_attr__( 'Thumbnail', 'woo-bundle-choice' ) . '" class="wp-post-image" height="48" width="48" />';
+	        }
+	        /* Language function - comment */			
+			$columns .= '<img src="' . esc_url( $src ) . '" alt="' . esc_attr__( __('Thumbnail','woo-bundle-choice'), 'woo-bundle-choice' ) . '" class="wp-post-image" height="48" width="48" />';
 		}
 		//die($columns);
 		return $columns;

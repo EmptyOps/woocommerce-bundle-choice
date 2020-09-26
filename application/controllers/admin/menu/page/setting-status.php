@@ -24,33 +24,38 @@ class Setting_status {
 
 		$form_definition = array(
 					'setting_status_setting'=>array(
-						'label'=>'Settings',
+						/* Language function - comment */ 
+						'label'=>__('Settings','woo-bundle-choice'),
 						'form'=>array(
 							'saved_tab_key'=>array(
 							'type'=>'hidden',
 							'value'=>'',
 							),
 							'inventory_type'=>array(
-								'label'=>'Inventory Type',
+								/* Language function - comment */ 
+								'label'=>__('Inventory Type','woo-bundle-choice'),
 								'type'=>'select',
 								'value'=>'',	//wbc()->options->get_option('setting_staus','inventory_type'),
 								'validate'=>array('required'=>''),
 								'sanitize'=>'sanitize_text_field',
-								'options'=>array('jewelry'=>'Jewelry','clothing'=>'Clothing','home_decor'=>'Home Decor','others'=>'Others'),
+								/* Language function - comment */ 
+								'options'=>array('jewelry'=>__('Jewelry','woo-bundle-choice'),'clothing'=>__('Clothing','woo-bundle-choice'),'home_decor'=>__('Home Decor','woo-bundle-choice'),'others'=>__('Others','woo-bundle-choice')),
 								'class'=>array('fluid'),
 								'size_class'=>array('eight','wide','required'),
 								'inline'=>true,
 							),
 							'features'=>array(
-								'label'=>'Choose features',
+								/* Language function - comment */ 
+								'label'=>__('Choose features','woo-bundle-choice'),
 								'type'=>'checkbox',
 								'sanitize'=>'sanitize_text_field',
 								'value'=>array(),
-								'options'=>array_replace($__features,array(									
-									'rapnet_api'=>'Rapnet (You will need paid <a href="https://sphereplugins.com/product/woocommerce-rapnet-integration-extension/" target="_blank">extension</a>)',
-									'glowstar_api'=>'GlowStar Diamond API (API service is free, but you will need paid <a href="https://sphereplugins.com/product/diamond-api-integration/" target="_blank">extension</a>)',
-									'jbdiamond_api'=>'JB Diamond API (API service is free, but you will need paid <a href="https://sphereplugins.com/product/diamond-api-integration/" target="_blank">extension</a>)',
-									'srk_api'=>'SRK Diamond API (API service is free, but you will need paid <a href="https://sphereplugins.com/product/diamond-api-integration/" target="_blank">extension</a>)',		
+								'options'=>array_replace($__features,array(	
+									/* Language function - comment */ 								
+									'rapnet_api'=>__('Rapnet (You will need paid <a href="https://sphereplugins.com/product/woocommerce-rapnet-integration-extension/" target="_blank">extension</a>)','woo-bundle-choice'),
+									'glowstar_api'=>__('GlowStar Diamond API (API service is free, but you will need paid <a href="https://sphereplugins.com/product/diamond-api-integration/" target="_blank">extension</a>)','woo-bundle-choice'),
+									'jbdiamond_api'=>__('JB Diamond API (API service is free, but you will need paid <a href="https://sphereplugins.com/product/diamond-api-integration/" target="_blank">extension</a>)','woo-bundle-choice'),
+									'srk_api'=>__('SRK Diamond API (API service is free, but you will need paid <a href="https://sphereplugins.com/product/diamond-api-integration/" target="_blank">extension</a>)','woo-bundle-choice'),		
 									)),
 								'class'=>array('fluid'),
 								'size_class'=>array('eight','wide'),
@@ -58,11 +63,13 @@ class Setting_status {
 								'grouped'=>true
 							),
 							'bonus_feature_devider'=>array(
-								'label'=>eowbc_lang('Bonus Features'),
+								/* Language function - comment */ 
+								'label'=>__('Bonus Features','woo-bundle-choice'),
 								'type'=>'devider',
 							),
 							'bonus_features'=>array(
-								'label'=>'Choose Bonus features',
+								/* Language function - comment */ 
+								'label'=>__('Choose Bonus features','woo-bundle-choice'),
 								'type'=>'checkbox',
 								'sanitize'=>'sanitize_text_field',
 								'value'=>array(),
@@ -73,7 +80,8 @@ class Setting_status {
 								'grouped'=>true
 							),
 							'save'=>array(
-								'label'=>'Save',
+								/* Language function - comment */ 
+								'label'=>__('Save','woo-bundle-choice'),
 								'type'=>'button',				
 								'class'=>array('primary'),
 								'attr'=>array('data-tab_key="setting_status_setting"', "data-action='save'")
@@ -81,16 +89,19 @@ class Setting_status {
 						)							
 					),
 					'setting_status_log'=>array(
-						'label'=>'Logs',
+						/* Language function - comment */ 
+						'label'=>__('Logs','woo-bundle-choice'),
 						'form'=>array(
 							'visible_info'=>array( 
-								'label'=>'Following error details will be sent to '.constant('EOWBC_NAME').'\'s Support Team',
+								/* Language function - comment */ 
+								'label'=>__('Following error details will be sent to '.constant('EOWBC_NAME').'\'s Support Team','woo-bundle-choice'),
 								'type'=>'devider',
 								// 'class'=>array('fluid', 'small'),
 								// 'size_class'=>array('sixteen','wide'),
 							),
 							'send_error_log_subject_label'=>array(
-								'label'=>eowbc_lang('Subject'),
+								/* Language function - comment */ 
+								'label'=>__('Subject','woo-bundle-choice'),
 								'type'=>'label',
 								//'class'=>array('fluid'),
 								'size_class'=>array('three','wide'),
@@ -106,7 +117,8 @@ class Setting_status {
 								// 'inline'=>true,
 							),
 							'eo_wbc_view_error_label'=>array(
-								'label'=>eowbc_lang('Error logs & installed plugins etc. details'),
+								/* Language function - comment */ 
+								'label'=>__('Error logs & installed plugins etc. details','woo-bundle-choice'),
 								'type'=>'label',
 								//'class'=>array('fluid'),
 								'size_class'=>array('sixteen','wide')
@@ -123,7 +135,8 @@ class Setting_status {
 								'type'=>'checkbox',
 								'value'=>array(),
 								'sanitize'=>'sanitize_text_field',
-								'options'=>array('1'=>'I agree with Sphere Plugins <a href="https://sphereplugins.com/terms-conditions/" target="_blank">Terms</a> & <a href="https://sphereplugins.com/privacy-policy/" target="_blank">Privacy Policy</a>'),
+								/* Language function - comment */ 
+								'options'=>array('1'=>__('I agree with Sphere Plugins <a href="https://sphereplugins.com/terms-conditions/" target="_blank">Terms</a> & <a href="https://sphereplugins.com/privacy-policy/" target="_blank">Privacy Policy</a>','woo-bundle-choice')),
 								'options_attrs'=>array('1'=>array("onchange=\"if(jQuery(this)[0].checked){ jQuery('#btn_send_error_report').removeClass('disabled'); } else { jQuery('#btn_send_error_report').addClass('disabled'); }\"")),
 								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
@@ -133,7 +146,8 @@ class Setting_status {
 								// 'inline'=>true,
 							),
 							'btn_cancel'=>array(
-								'label'=>eowbc_lang('Cancel'),
+								/* Language function - comment */ 
+								'label'=>__('Cancel','woo-bundle-choice'),
 								'type'=>'button',				
 								'class'=>array('secondary'),
 								'attr'=>array("data-action='cancel'"/*'onclick="window.location.href=document.referrer"'*/),
@@ -141,7 +155,8 @@ class Setting_status {
 								'inline'=>true,
 							),
 							'btn_send_error_report'=>array(
-								'label'=>((get_option('eowbc_error_count',0) or get_option('eowbc_warning_count',0)) ? eowbc_lang('Send error report'):''),
+								/* Language function - comment */ 
+								'label'=>((get_option('eowbc_error_count',0) or get_option('eowbc_warning_count',0)) ? __('Send error report','woo-bundle-choice'):''),
 								'type'=>'button',				
 								'class'=>array('primary','disabled'),
 								'attr'=>array('data-tab_key="setting_status_log"', "data-action='save'"),
@@ -149,7 +164,8 @@ class Setting_status {
 								'inline'=>true,
 							),
 							'clear_log_and_return'=>array(
-								'label'=>eowbc_lang('Clear Log and Return'),
+								/* Language function - comment */ 
+								'label'=>__('Clear Log and Return','woo-bundle-choice'),
 								'type'=>'link',
 								'attr'=>array("href='".admin_url('admin.php?page=eowbc-setting-status&action=clear&ref='.
 		(empty($_SERVER['HTTP_REFERER'])? admin_url('admin.php?page=eowbc-setting-status'):$_SERVER['HTTP_REFERER']))."'"),
@@ -158,33 +174,39 @@ class Setting_status {
 						)
 					),
 					'advanced_config'=>array(
-						'label'=>'Advanced Configuration',
+						/* Language function - comment */ 
+						'label'=>__('Advanced Configuration','woo-bundle-choice'),
 						'form'=> array(							
 							'internal_url'=>array(
-								'label'=>eowbc_lang('Internal Routing URL'),
+								/* Language function - comment */ 
+								'label'=>__('Internal Routing URL','woo-bundle-choice'),
 								'type'=>'text',								
 								'class'=>array('fluid'),		
 								'validate'=>array('url'=>''),
 								'inline'=>false,
 								'visible_info'=>array( 
-									'label'=>eowbc_lang('This setting is needed in exceptional scenarios where site setup or structure requires setting a specific URL for some operations.'),
+									/* Language function - comment */ 
+									'label'=>__('This setting is needed in exceptional scenarios where site setup or structure requires setting a specific URL for some operations.','woo-bundle-choice'),
 									'type'=>'visible_info',
 									'class'=>array('small'),
 									'size_class'=>array('eight','wide'),
 								),		
 							),
 							'remove_index_php'=>array(
-								'label'=>eowbc_lang('Remove index.php from link?'),
+								/* Language function - comment */ 
+								'label'=>__('Remove index.php from link?','woo-bundle-choice'),
 								'type'=>'checkbox',
 								'sanitize'=>'sanitize_text_field',
 								'value'=>array(),
-								'options'=>array('remove_index_php'=>'Remove index.php'),
+								/* Language function - comment */ 
+								'options'=>array('remove_index_php'=>__('Remove index.php','woo-bundle-choice')),
 								'class'=>array(),
 								'size_class'=>array('eight','wide'),
 								'inline'=>true,
 							),							
 							'submit_button'=>array(
-								'label'=>eowbc_lang('Save'),
+								/* Language function - comment */ 
+								'label'=>__('Save','woo-bundle-choice'),
 								'type'=>'button',
 								'class'=>array('primary'),
 								//'size_class'=>array('eight','wide'),

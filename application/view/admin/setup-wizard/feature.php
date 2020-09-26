@@ -8,7 +8,8 @@
 			<div class="ui form segment">
 			  	<div class="grouped fields">
 
-			    	<label class="ui large text"><?php _e('Choose features','woo-bundle-choice'); ?> <span class="ui medium grey text"><?php echo eowbc_lang( "(You can later change these options from Settings page)" ); ?></span></label>
+			  		/* Language function - comment */ 
+			    	<label class="ui large text"><?php _e('Choose features','woo-bundle-choice'); ?> <span class="ui medium grey text"><?php _e( '(You can later change these options from Settings page)','woo-bundle-choice' ); ?></span></label>
 
 			    	<?php if(wbc()->sanitize->get('eo_wbc_inventory_type') == 'jewelry'): ?>	
 		      		<div class="field">
@@ -112,7 +113,8 @@
 						<div class=" field">
 						    <div class="ui toggle checkbox">
 						      	<input type="checkbox" tabindex="0" class="hidden" name="api_integrations" value="1" <?php echo array_key_exists('api_integrations',$feature_option)?'checked="checked"':''; ?>>
-						      	<label>Diamond APIs Integrations</label>
+						      	/* Language function - comment */ 
+						      	<label><?php __e('Diamond APIs Integrations','woo-bundle-choice'); ?></label>
 						    </div>
 						    <i class="exclamation circle icon" data-html="Rapnet, GlowStar, SRK Diamond, JB Diamond and other popular api integrations, you can even request if the one you want to use is not supported yet by us. (Note that for this feature you will need paid <a href='https://sphereplugins.com/product/woocommerce-diamond-api-integration/' target='_blank'>extension</a>)" data-variation="very wide"></i>
 						</div>
@@ -131,7 +133,8 @@
 							<div class="field">
 			    				<div class="ui toggle checkbox fluid">
 			        				<input type="checkbox" name="filters_shortcode" id="filters_shortcode" <?php echo array_key_exists('filters_shortcode',$bonus_features)?'checked="checked"':''; ?> value="filters_shortcode">
-			        				<label for="filters_shortcode">Shortcode Filters</label>				      	
+			        				 /* Language function - comment */ 
+			        				<label for="filters_shortcode"><?php _e('Shortcode Filters','woo-bundle-choice'); ?></label>				      	
 			        			</div>
 			        			<!-- <i class="exclamation circle icon" data-content="If enabled shortcodes functionality will be enabled for button widgets and other widgets where it is possible for us to provide shortcode." data-variation="very wide"></i> -->
 							</div>
@@ -139,28 +142,32 @@
 				    		<div class="field">
 			    				<div class="ui toggle checkbox fluid">
 			        				<input type="checkbox" name="filters_shop_cat" id="filters_shop_cat" <?php echo array_key_exists('filters_shop_cat',$bonus_features)?'checked="checked"':''; ?> value="filters_shop_cat">
-			        				<label for="filters_shop_cat"> Filters for Shop/Category Page</label>				
+			        				/* Language function - comment */ 
+			        				<label for="filters_shop_cat"> <?php _e('Filters for Shop/Category Page','woo-bundle-choice'); ?></label>				
 			        			</div>
 							</div>
 			    
 				    		<div class="field">
 			    				<div class="ui toggle checkbox fluid">
 			        				<input type="checkbox" name="opts_uis_item_page" id="opts_uis_item_page" <?php echo array_key_exists('opts_uis_item_page',$bonus_features)?'checked="checked"':''; ?> value="opts_uis_item_page">
-			        				<label for="opts_uis_item_page">Options UI for Item Page</label>				      
+			        				/* Language function - comment */ 
+			        				<label for="opts_uis_item_page"><?php _e('Options UI for Item Page','woo-bundle-choice'); ?></label>				      
 			        			</div>
 							</div>
 			    
 				    		<div class="field">
 			    				<div class="ui toggle checkbox fluid">
 			        				<input type="checkbox" name="spec_view_item_page" id="spec_view_item_page" <?php echo array_key_exists('spec_view_item_page',$bonus_features)?'checked="checked"':''; ?> value="spec_view_item_page">
-			        				<label for="spec_view_item_page">Specifications View for Item Page</label>
+			        				 /* Language function - comment */ 
+			        				<label for="spec_view_item_page"><?php _e('Specifications View for Item Page','woo-bundle-choice'); ?></label>
 			        			</div>
 							</div>
 			    
 				    		<div class="field">
 			    				<div class="ui toggle checkbox fluid">
 			        				<input type="checkbox" name="price_control" id="price_control" <?php echo array_key_exists('price_control',$bonus_features)?'checked="checked"':''; ?> value="price_control">
-			        				<label for="price_control">Price Control</label>				      	
+			        				/* Language function - comment */ 
+			        				<label for="price_control"><?php _e('Price Control','woo-bundle-choice'); ?></label>				      	
 			        			</div>
 							</div>
 			    		</div>
@@ -169,10 +176,12 @@
 
 			  	<div class="inline fields">
 			  		<div class="field">
-			  			<button class="ui inverted red button" type="submit" onclick="window.history.go(-1); return false;">Back</button>
+			  			/* Language function - comment */ 
+			  			<button class="ui inverted red button" type="submit" onclick="window.history.go(-1); return false;"><?php _e('Back','woo-bundle-choice'); ?></button>
 			  		</div>
 			  		<div class="field">
-			  			<button class="ui inverted primary button" type="submit"><?php echo eowbc_lang('Next');?></button>
+			  			/* Language function - comment */ 
+			  			<button class="ui inverted primary button" type="submit"><?php _e('Next','woo-bundle-choice');?></button>
 			  		</div>
 			  	</div>
 			</div>

@@ -6,22 +6,22 @@
 
 ?>			
 <div class="ui four wide column toggle_sticky_mob_filter" style="<?php echo $advance?'display: none;':'' ?>" data-target="#sticky_mob_filter_price">
-	<div class="title"><div class="ui segment">Price</div></div>
+	<div class="title"><div class="ui segment"><?php echo eowbc_lang('Price'); ?></div></div>
 </div>
 <div class="bottom_filter_segment hidden ui segment" id="sticky_mob_filter_price">
 	<div class="ui equal width grid">
 		<div class="column close_sticky_mob_filter" data-target="#sticky_mob_filter_price">
-			<i class="ui icon times" style="cursor: pointer;"></i>&nbsp;Close
+			<i class="ui icon times" style="cursor: pointer;"></i>&nbsp;<?php _e('Close','woo-bundle-choice'); ?>
 		</div>
 		<div class="column"></div>
 		<div class="column"></div>
 		<div class="column" style="text-align: right;" onclick="reset_price(event,'<?php echo $min; ?>','<?php echo $max; ?>')">
-			<i class="ui icon redo" style="cursor: pointer;"></i>&nbsp;Reset
+			<i class="ui icon redo" style="cursor: pointer;"></i>&nbsp;<?php _e('Reset','woo-bundle-choice'); ?>
 		</div>
 	</div>					
 	<br/>
 	<div class="ui title">
-		<strong>Price</strong><?php if(!empty($help)): ?>&nbsp;<i class="question circle outline icon" data-help="<?php echo $help; ?>"></i><?php endif; ?>
+		<strong><?php echo eowbc_lang('Price'); ?></strong><?php if(!empty($help)): ?>&nbsp;<i class="question circle outline icon" data-help="<?php echo $help; ?>"></i><?php endif; ?>
 	</div><br/>
 	<div class="content">	
   		<div class="ui tiny form">

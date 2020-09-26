@@ -15,7 +15,8 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_setting_staus')) {
 }
 else {
 	$res["type"] = "error";
-	$res["msg"] = "Nonce validation failed";
+	/* Language function - comment */ 
+	$res["msg"] = __('Nonce validation failed','woo-bundle-choice');
 }
 
 

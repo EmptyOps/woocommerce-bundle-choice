@@ -26,9 +26,11 @@ if ( ! class_exists( 'Configuration' ) ) {
 
 			// check it out link
 			$check_it_out_link_type = 'skip';
-			$check_it_out_link_label = 'Check it out!';
+			/* Language function - comment */ 
+			$check_it_out_link_label =  __('Check it out!','woo-bundle-choice');
 			$check_it_out_link = '';
-			$lbl_txt = 'Congratulations! It seems that you have completed the setup process, click below link to check it out in working on your website.';
+			/* Language function - comment */
+			$lbl_txt = __('Congratulations! It seems that you have completed the setup process, click below link to check it out in working on your website.','woo-bundle-choice');
 			$active_feature = \eo\wbc\controllers\admin\menu\Admin_Menu::active_pair_builder_feature();
 			if( !empty($active_feature) && \eo\wbc\controllers\admin\menu\Admin_Menu::is_pair_builder_feature_all_setup() ) {
 			
@@ -43,35 +45,39 @@ if ( ! class_exists( 'Configuration' ) ) {
 		        }
 		        elseif( $configuration_buttons_page==2 ) {			
 					$check_it_out_link_type = 'label';
-					$check_it_out_link_label = 'You have choose to display buttons using Shortcode only, so please go to the page in which you put the Shortcode to check it.';
-					$lbl_txt = 'Congratulations! It seems that you have completed the setup process.';
+					/* Language function - comment */
+					$check_it_out_link_label = __('You have choose to display buttons using Shortcode only, so please go to the page in which you put the Shortcode to check it.','woo-bundle-choice');
+					$lbl_txt = __('Congratulations! It seems that you have completed the setup process.','woo-bundle-choice');
 		        }
 			}
 
 			$form_definition = 	
 					array(
 						'config_automation'=>array(
-							
-								'label'=>'Sample Data',
+								/* Language function - comment */
+								'label'=>__('Sample Data','woo-bundle-choice'),
 								'form'=>array(
 											'saved_tab_key'=>array(
 												'type'=>'hidden',
 												'value'=>'',
 											),
 											'add_sample_data'=>array(
-												'label'=>'Add Sample Data',
+												/* Language function - comment */
+												'label'=>__('Add Sample Data','woo-bundle-choice'),
 												'type'=>'devider',
 												// 'class'=>array('fluid'),
 												// 'size_class'=>array('eight','wide')
 											),
 											'config_automation_link'=>array(
-												'label'=>'Click here for automated configuration and setup',
+												/* Language function - comment */
+												'label'=>__('Click here for automated configuration and setup','woo-bundle-choice'),
 												'type'=>'link',
 												'attr'=>array("href='".admin_url('admin.php?page=eowbc&eo_wbc_view_auto_jewel=1&f='.$active_feature)."'"),
 												'class'=>array('secondary')	
 											),
 											'config_automation_visible_info'=>array(
-												'label'=>eowbc_lang('We recommend that you try sample data if you have not yet, in addition to providing the preview of how plugin look like on frontend of your website, sample data & configurations will also serve as boilerplate template for configuring the plugin.'),
+												/* Language function - comment */
+												'label'=>__('We recommend that you try sample data if you have not yet, in addition to providing the preview of how plugin look like on frontend of your website, sample data & configurations will also serve as boilerplate template for configuring the plugin.','woo-bundle-choice'),
 												'type'=>'visible_info',
 												'class'=>array('fluid', 'medium'),
 												'size_class'=>array('sixteen','wide'),
@@ -84,7 +90,8 @@ if ( ! class_exists( 'Configuration' ) ) {
 												'attr'=>array("data-action='save'")
 											)*/
 											'check_it_out_status'=>array(
-												'label'=>'Setup Status',
+												/* Language function - comment */
+												'label'=>__('Setup Status','woo-bundle-choice'),
 												'type'=>($check_it_out_link_type != 'skip' ?'devider':$check_it_out_link_type),
 												// 'class'=>array('fluid'),
 												// 'size_class'=>array('eight','wide')
@@ -102,52 +109,61 @@ if ( ! class_exists( 'Configuration' ) ) {
 										)							
 							),
 						'config_buttons_conf'=>array(
-								'label'=>'Buttons',
+							    /* Language function - comment */
+								'label'=>__('Buttons','woo-bundle-choice')'',
 								'form'=>array(
 									'buttons_page'=>array(
-											'label'=>'Choice button position',
+										    /* Language function - comment */
+											'label'=>__('Choice button position','woo-bundle-choice'),
 											'type'=>'select',
 											'value'=>wbc()->options->get_option('configuration','buttons_page'),
 											'validate'=>array('required'=>''),
 											'sanitize'=>'sanitize_text_field',
 											'options'=>array(
-													'0'=>'Custom landing page',
-													'1'=>'Home page only',
-													'2'=>'Shortcode only',
-													'3'=>'Home page and Shortcode'
+													/* Language function - comment */
+													'0'=>__('Custom landing page','woo-bundle-choice'),
+													'1'=>__('Home page only','woo-bundle-choice'),
+													'2'=>__('Shortcode only','woo-bundle-choice'),
+													'3'=>__('Home page and Shortcode','woo-bundle-choice')
 												),
 											'class'=>array('fluid'),
 											'size_class'=>array('eight','wide','required'),
 											'inline'=>true,
 										),
-									'visible_info'=>array( 'label'=>'Choose where you want to display the two Start With with Action buttons. If you choose custom landing page a sample landing page will be provided. The Shortcode for the buttons widget is <strong>[woo-bundle-choice-btn]</strong>.',
+									/* Language function - comment */
+									'visible_info'=>array( 'label'=>__('Choose where you want to display the two Start With with Action buttons. If you choose custom landing page a sample landing page will be provided. The Shortcode for the buttons widget is <strong>[woo-bundle-choice-btn]</strong>.','woo-bundle-choice'),
 											'type'=>'visible_info',
 											'class'=>array('fluid', 'small'),
 											'size_class'=>array('sixteen','wide'),
 										),
 									'config_buttons_position'=>array(
-											'label'=>'Choose where you want to display buttons on home page',
+										    /* Language function - comment */
+											'label'=>__('Choose where you want to display buttons on home page','woo-bundle-choice'),
 											'type'=>'link',
 											'attr'=>array("href='".admin_url('customize.php?autofocus[control]=btn_position_setting_selector_btn')."'"),
 											'class'=>array('secondary'/*,'hidden'*/)	
 										),
 									'config_view_custom_landing_link'=>array(
-											'label'=>'View how landing page will look like',
+											/* Language function - comment */
+											'label'=>__('View how landing page will look like','woo-bundle-choice'),
 											'type'=>'link',
 											'attr'=>array("href='".get_permalink(get_page_by_path('design-your-own-ring'))."'"),
 											'class'=>array('secondary'/*,'hidden'*/)	
 										),
 									'config_devider_make_pair'=>array(
-											'label'=>'Make Pair Button',
+											/* Language function - comment */
+											'label'=>__('Make Pair Button','woo-bundle-choice'),
 											'type'=>'devider'
 										),
-									'config_make_pair_visible_info'=>array( 'label'=>'Make Pair button is a interesting feature for ring builder, pair maker for clothing(be sure to not confuse pair maker with make pair button), etc. If you enable this feature the Make Pair button will appear on item page even if the user is not on the builder process e.g. on diamond page user would see "Add To Ring" button.',
+									/* Language function - comment */
+									'config_make_pair_visible_info'=>array( 'label'=>__('Make Pair button is a interesting feature for ring builder, pair maker for clothing(be sure to not confuse pair maker with make pair button), etc. If you enable this feature the Make Pair button will appear on item page even if the user is not on the builder process e.g. on diamond page user would see "Add To Ring" button.','woo-bundle-choice'),
 												'type'=>'visible_info',
 												'class'=>array('fluid', 'medium'),
 												'size_class'=>array('sixteen','wide'),
 											),
 									'enable_make_pair'=>array(
-											'label'=>'Enabled?',
+											/* Language function - comment */
+											'label'=>__('Enabled?','woo-bundle-choice'),
 											'type'=>'checkbox',
 											'value'=>'',
 											'sanitize'=>'sanitize_text_field',
@@ -156,7 +172,8 @@ if ( ! class_exists( 'Configuration' ) ) {
 											'class'=>array()
 										),
 									'label_make_pair'=>array(
-											'label'=>'Button label',
+											/* Language function - comment */
+											'label'=>__('Button label','woo-bundle-choice'),
 											'type'=>'text',
 											'validate'=>/*( !empty($_POST['enable_make_pair'])?array('required'=>''):array())*/array('validate_if'=>array('enable_make_pair'=>array('required'=>''))),
 											'value'=>wbc()->options->get_option('configuration','label_make_pair'),
@@ -164,13 +181,15 @@ if ( ! class_exists( 'Configuration' ) ) {
 											'size_class'=>array('eight','wide','required'),
 											'inline'=>true,
 										),
-									'label_make_pair_visible_info'=>array( 'label'=>'Set applicable text for button e.g. "Add to Ring" if its for jewelry site. Applicable only if switch above is enabled.',
+									/* Language function - comment */
+									'label_make_pair_visible_info'=>array( 'label'=>__('Set applicable text for button e.g. "Add to Ring" if its for jewelry site. Applicable only if switch above is enabled.','woo-bundle-choice'),
 												'type'=>'visible_info',
 												'class'=>array('fluid', 'small'),
 												'size_class'=>array('sixteen','wide'),
 											),
 									'config_buttons_conf_save_btn'=>array(
-												'label'=>'Save',
+												/* Language function - comment */
+												'label'=>__('Save','woo-bundle-choice'),
 												'type'=>'button',		
 												'class'=>array('primary'),
 												'attr'=>array("data-action='save'",'data-tab_key="config_buttons_conf"')	
@@ -178,14 +197,17 @@ if ( ! class_exists( 'Configuration' ) ) {
 									)
 							),
 						'config_navigation_conf'=>array(
-								'label'=>'Navigations Steps( Breadcrumb )',
+								/* Language function - comment */
+								'label'=>__('Navigations Steps( Breadcrumb )','woo-bundle-choice'),
 								'form'=>array(
 									'devider_first_cat'=>array(
-											'label'=>'First Category',
+											/* Language function - comment */
+											'label'=>__('First Category','woo-bundle-choice'),
 											'type'=>'devider',
 										),
 									'first_name'=>array(
-											'label'=>'Name',
+											/* Language function - comment */
+											'label'=>__('Name','woo-bundle-choice'),
 											'type'=>'select',
 											'value'=>wbc()->options->get_option('configuration','first_name'),
 											'validate'=>array('required'=>''),
@@ -196,7 +218,8 @@ if ( ! class_exists( 'Configuration' ) ) {
 											'inline'=>true,
 										),
 									'first_icon'=>array(
-											'label'=>'Icon',
+											/* Language function - comment */
+											'label'=>__('Icon','woo-bundle-choice'),
 											'type'=>'icon',
 											'value'=>wbc()->options->get_option('configuration','first_icon'),
 											// 'validate'=>array('required'=>''),
@@ -206,11 +229,13 @@ if ( ! class_exists( 'Configuration' ) ) {
 											'inline'=>true,
 										),
 									'config_devider_second_cat'=>array(
-											'label'=>'Second Category',
+											/* Language function - comment */
+											'label'=>__('Second Category','woo-bundle-choice'),
 											'type'=>'devider',
 										),
 									'second_name'=>array(
-											'label'=>'Name',
+											/* Language function - comment */
+											'label'=>__('Name','woo-bundle-choice'),
 											'type'=>'select',
 											'value'=>wbc()->options->get_option('configuration','second_name'),
 											'validate'=>array('required'=>''),
@@ -221,7 +246,8 @@ if ( ! class_exists( 'Configuration' ) ) {
 											'inline'=>true,
 										),
 									'second_icon'=>array(
-											'label'=>'Icon',
+											/* Language function - comment */
+											'label'=>__('Icon','woo-bundle-choice'),
 											'type'=>'icon',
 											'value'=>wbc()->options->get_option('configuration','second_icon'),
 											// 'validate'=>array('required'=>''),
@@ -231,11 +257,13 @@ if ( ! class_exists( 'Configuration' ) ) {
 											'inline'=>true,
 										),
 									'config_devider_preview'=>array(
-											'label'=>'Preview',
+										    /* Language function - comment */
+											'label'=>__('Preview','woo-bundle-choice'),
 											'type'=>'devider',
 										),
 									'preview_name'=>array(
-											'label'=>'Name',
+										     /* Language function - comment */
+											'label'=>__('Name','woo-bundle-choice'),
 											'type'=>'text',
 											'value'=>wbc()->options->get_option('configuration','preview_name'),
 											'validate'=>array('required'=>''),
@@ -245,7 +273,8 @@ if ( ! class_exists( 'Configuration' ) ) {
 											'inline'=>true,
 										),
 									'preview_icon'=>array(
-											'label'=>'Icon',
+											/* Language function - comment */
+											'label'=>__('Icon','woo-bundle-choice'),
 											'type'=>'icon',
 											'value'=>wbc()->options->get_option('configuration','preview_icon'),
 											// 'validate'=>array('required'=>''),
@@ -260,15 +289,18 @@ if ( ! class_exists( 'Configuration' ) ) {
 											'type'=>'devider',
 										),	
 									'config_alternate_breadcrumb'=>array(
-										'label'=>'Alternate Breadcrumb Widgets',
+										/* Language function - comment */
+										'label'=>__('Alternate Breadcrumb Widgets','woo-bundle-choice'),
 										'type'=>'radio',
 										'value'=>wbc()->options->get_option('configuration','config_alternate_breadcrumb','default'),
 										'validate'=>array('required'=>''),
 										'sanitize'=>'sanitize_text_field',
-										'options'=>array('default'=>'Default','template_1'=>'Template 1','template_2'=>'Template 2'/*,'template_3'=>'Template 3'*/),
+										/* Language function - comment */
+										'options'=>array('default'=>__('Default','woo-bundle-choice'),'template_1'=>__('Template 1','woo-bundle-choice'),'template_2'=>__('Template 2','woo-bundle-choice')/*,'template_3'=>'Template 3'*/),
 										'class'=>array(),										
 										'size_class'=>array('required'),
-										'visible_info'=>array( 'label'=>'( Switch to other look of breadcrumb. )',
+										/* Language function - comment */
+										'visible_info'=>array( 'label'=>__('( Switch to other look of breadcrumb. )','woo-bundle-choice'),
 											'type'=>'visible_info',
 											'class'=>array('fluid', 'small'),
 											'size_class'=>array('sixteen','wide'),
@@ -278,14 +310,17 @@ if ( ! class_exists( 'Configuration' ) ) {
 										'type'=>'accordian',
 										'section_type'=>'start',
 										'class'=>array('field'),
-										'label'=>'<span class="ui large text">Advanced Setting</span>',
+										/* Language function - comment */
+										'label'=>__('<span class="ui large text">Advanced Setting</span>','woo-bundle-choice'),
 									),									
 									'config_clickable_breadcrumb'=>array(
-										'label'=>'Clickable Breadcrumbs?',
+										/* Language function - comment */
+										'label'=>__('Clickable Breadcrumbs?','woo-bundle-choice'),
 										'type'=>'checkbox',
 										'value'=>'',
 										'sanitize'=>'sanitize_text_field',
-										'options'=>array('1'=>'Make Breadcrumbs clickable?.'),
+										/* Language function - comment */
+										'options'=>array('1'=>__('Make Breadcrumbs clickable?.','woo-bundle-choice')),
 										'is_id_as_name'=>true,
 										'class'=>array()
 									),							
@@ -294,7 +329,8 @@ if ( ! class_exists( 'Configuration' ) ) {
 										'section_type'=>'end'
 									),
 									'config_navigation_conf_save_btn'=>array(
-												'label'=>'Save',
+										/* Language function - comment */
+												'label'=>__('Save','woo-bundle-choice'),
 												'type'=>'button',		
 												'class'=>array('primary'),
 												'attr'=>array("data-action='save'",'data-tab_key="config_navigation_conf"')	
@@ -307,11 +343,13 @@ if ( ! class_exists( 'Configuration' ) ) {
 					
 			if(!empty($features['pair_maker'])) {
 				$form_definition['config_extra_conf'] = array(
-							'label'=>'Extra',
+						/* Language function - comment */
+							'label'=>__('Extra','woo-bundle-choice'),
 							'form'=>array(									
 								
 								'config_devider_pair_maker'=>array(
-										'label'=>'Pair Maker Configuration',
+										/* Language function - comment */
+										'label'=>__('Pair Maker Configuration','woo-bundle-choice'),
 										'type'=>'devider',
 									),
 								/*'config_pair_maker_status'=>array(
@@ -334,21 +372,25 @@ if ( ! class_exists( 'Configuration' ) ) {
 								// 		'inline'=>true,
 								// 	),					
 								'pair_maker_upper_card'=>array(
-									'label'=>'Upper Card',
+									/* Language function - comment */
+									'label'=>__('Upper Card','woo-bundle-choice'),
 									'type'=>'radio',
 									'value'=>'1',
 									'sanitize'=>'sanitize_text_field',
-									'options'=>array('1'=>'First Category','2'=>'Second Category'),
+									/* Language function - comment */
+									'options'=>array('1'=>__('First Category','woo-bundle-choice'),'2'=>__('Second Category','woo-bundle-choice')),
 									'class'=>array(),										
 									'size_class'=>array(),
-									'visible_info'=>array( 'label'=>'Mark the category\'s card to be always shown at top of other. For example, in clothing should be a top wear category, so you should select either first or second category here based on where you set top wear category i.e. if it is first category setting in navigation or second.',
+									/* Language function - comment */
+									'visible_info'=>array( 'label'=>__('Mark the category\'s card to be always shown at top of other. For example, in clothing should be a top wear category, so you should select either first or second category here based on where you set top wear category i.e. if it is first category setting in navigation or second.','woo-bundle-choice'),
 										'type'=>'visible_info',
 										'class'=>array('fluid', 'small'),
 										'size_class'=>array('sixteen','wide'),
 									),	
 								),				
 								'config_extra_conf_save_btn'=>array(
-											'label'=>'Save',
+											/* Language function - comment */
+											'label'=>__('Save','woo-bundle-choice'),
 											'type'=>'button',		
 											'class'=>array('primary'),
 											'attr'=>array("data-action='save'",'data-tab_key="config_extra_conf"')

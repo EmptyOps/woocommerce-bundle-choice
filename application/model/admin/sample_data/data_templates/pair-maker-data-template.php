@@ -31,40 +31,46 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
         $_alphabets_img_url= constant('EOWBC_ASSET_URL').'img/sample_data/'.$this->asset_folder.'/alphabets/'; 
         return array(
                     array(
-                        'label' => 'Size',
+                        /* Language function - comment */ 
+                        'label' => __('Size','woo-bundle-choice'),
                         'terms' => array('XS','S','M','L','XL','2XL','3XL','28','30','32','34','36','38'),
-                        'description' => 'Size attributes for clothing wear',
+                        'description' => __('Size attributes for clothing wear','woo-bundle-choice'),
                         'slug' => 'wbc_cloth_size_attr'
                     ),
                     array(
-                        'label' => 'Colour',
+                        /* Language function - comment */ 
+                        'label' => __('Colour','woo-bundle-choice'),
                         'terms' => array('White','Black','Red','Purple', 'Blue', 'Green','Yellow','Orange','Gray','Pink','Maroon','Lime','Aqua'),
-                        'description' => 'Colour attributes for clothing wear',
+                        'description' => __('Colour attributes for clothing wear','woo-bundle-choice'),
                         'slug' => 'wbc_cloth_colour_attr',
                         'thumb' => array($_img_url.'colours/white.png',$_img_url.'colours/black.png',$_img_url.'colours/red.png', $_img_url.'colours/purple.png',$_img_url.'colours/blue.png',$_img_url.'colours/green.png',$_img_url.'colours/yellow.png',$_img_url.'colours/orange.png',$_img_url.'colours/gray.png',$_img_url.'colours/pink.png',$_img_url.'colours/maroon.png',$_img_url.'colours/lime.png',$_img_url.'colours/aqua.png')
                     ),
                     array(
-                        'label' => 'Fabric',
+                        /* Language function - comment */ 
+                        'label' => __('Fabric'),
                         'terms' => array('Cotton', 'Silk', 'Canvas', 'Chiffon', 'Damask', 'Wool', 'Jersey', 'Polyester', 'Velvet','Linen'),
-                        'description' => 'Fabric attributes for clothings wear',
+                        'description' => __('Fabric attributes for clothings wear','woo-bundle-choice'),
                         'slug' => 'wbc_cloth_fabric_attr'
                     ),
                     array(
-                        'label' => 'Fit',
+                        /* Language function - comment */ 
+                        'label' => __('Fit','woo-bundle-choice'),
                         'terms' => array('Skinny fit','Slim fit','Regular fit','Tapered fit','Hem fit', 'Ultra slim','Flared','Easy'),
-                        'description' => 'Fit attributes for clothing wear',
+                        'description' => __('Fit attributes for clothing wear','woo-bundle-choice'),
                         'slug' => 'wbc_cloth_fit_attr'
                     ),
                     array(
-                        'label' => 'Neck',
+                        /* Language function - comment */ 
+                        'label' => __('Neck','woo-bundle-choice'),
                         'terms' => array('Round','Crew' , 'Jewel', 'U neckline', 'Square' , 'V neckline', 'Collared neckline', 'Funnel Neckline'),
-                        'description' => 'Neck types attributes for clothings wear',
+                        'description' => __('Neck types attributes for clothings wear','woo-bundle-choice'),
                         'slug' => 'wbc_cloth_neck_attr'
                     ),
                     array(
-                        'label' => 'Occasion',
+                        /* Language function - comment */ 
+                        'label' => __('Occasion','woo-bundle-choice'),
                         'terms' => array('Causal','Formal','Lounge','Tie','Cocktail Attire','Ethnic'),
-                        'description' => 'Occasion attributes for clothings wear',
+                        'description' => __('Occasion attributes for clothings wear','woo-bundle-choice'),
                         'slug' => 'wbc_cloth_occasion_attr'
                     ),
                     // array(
@@ -74,28 +80,32 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                     //     'slug' => 'wbc_cloth_pattern_attr'
                     // ),
                     array(
-                        'label' => 'Sleeve',
+                        /* Language function - comment */ 
+                        'label' => __('Sleeve','woo-bundle-choice'),
                         'terms' => array('Long sleeve', 'Short sleeve', 'Roll-up sleeve','Sleeveless'),        
-                        'description' => 'Sleeve attributes for clothings wear',
+                        'description' => __('Sleeve attributes for clothings wear','woo-bundle-choice'),
                         'slug' => 'wbc_cloth_sleeve_attr'
                     ),
                     array(
-                        'label' => 'Collar',
+                        /* Language function - comment */ 
+                        'label' => __('Collar','woo-bundle-choice'),
                         'terms' => array('Mandrin', 'Band', 'Polo','Funnel','Slim','Spread','Regular','Mao','Notch Lapels'),
-                        'description' => 'Collar attributes for clothings wear',
+                        'description' => __('Collar attributes for clothings wear','woo-bundle-choice'),
                         'slug' => 'wbc_cloth_collar_attr',
                         'thumb' => array($_alphabets_img_url.'icons8-circled-m-100.png', $_alphabets_img_url.'icons8-circled-b-100.png', $_alphabets_img_url.'icons8-circled-p-100.png',$_alphabets_img_url.'icons8-circled-f-100.png',$_alphabets_img_url.'icons8-circled-s-100.png',$_alphabets_img_url.'icons8-circled-s-100.png',$_alphabets_img_url.'icons8-circled-r-100.png',$_alphabets_img_url.'icons8-circled-m-100.png',$_alphabets_img_url.'icons8-circled-n-100.png')
                     ),
                     array(
-                        'label' => 'Closure Type',
+                        /* Language function - comment */ 
+                        'label' => __('Closure Type','woo-bundle-choice'),
                         'terms' => array('Button','Zipper','Hook','Frog & toggle','Elastic'),
-                        'description' => 'Closure type attributes for clothings wear',
+                        'description' => __('Closure type attributes for clothings wear','woo-bundle-choice'),
                         'slug' => 'wbc_cloth_closure_type_attr'
                     ),
                     array(
-                        'label' => 'Length',
+                        /* Language function - comment */ 
+                        'label' => __('Length','woo-bundle-choice'),
                         'terms' => array('Ankle','Full','Calf','Thigh','Knee','Regular'),
-                        'description' => 'Length attributes for clothings wear',
+                        'description' => __('Length attributes for clothings wear','woo-bundle-choice'),
                         'slug' => 'wbc_cloth_length_attr'
                     )
                     // array(
@@ -114,7 +124,8 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
         return array(
                     array(
                         'thumb' => '',
-                        'name' => 'Top wear',
+                        /* Language function - comment */ 
+                        'name' => __('Top wear','woo-bundle-choice','woo-bundle-choice'),
                         'description' => 'Top wear category',
                         'slug' => 'wbc_top_wear_cat',
                         'child'=> 
@@ -122,7 +133,8 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                                 array(
                                     'thumb' => $_img_url.'shirts.png',
                                     'thumb_selected' => $_img_url.'shirts_selected.png',
-                                    'name' => 'Shirts',
+                                    /* Language function - comment */ 
+                                    'name' => __('Shirts','woo-bundle-choice','woo-bundle-choice'),
                                     'description' => 'Top wear shirts',
                                     'slug' => 'wbc_top_wear_shirts_cat'
                                 ),
@@ -143,7 +155,8 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                                 array(
                                     'thumb' => $_img_url.'tshirt.png',
                                     'thumb_selected' => $_img_url.'tshirt_selected.png',
-                                    'name' => 'T-shirts',
+                                    /* Language function - comment */ 
+                                    'name' => __('T-shirts','woo-bundle-choice'),
                                     'description' => 'Top wear t-shirts',
                                     'slug' => 'wbc_top_wear_tshirts_cat'
                                 ),
@@ -164,7 +177,8 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                                 array(
                                     'thumb' => $_img_url.'sweater.png',
                                     'thumb_selected' => $_img_url.'sweater_selected.png',
-                                    'name' => 'Sweaters',
+                                    /* Language function - comment */ 
+                                    'name' => __('Sweaters','woo-bundle-choice'),
                                     'description' => 'Top wear sweaters',
                                     'slug' => 'wbc_top_wear_sweaters_cat'
                                 ),
@@ -185,7 +199,8 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                                 array(
                                     'thumb' => $_img_url.'jacket.png',
                                     'thumb_selected' => $_img_url.'jacket_selected.png',
-                                    'name' => 'Jackets',
+                                    /* Language function - comment */ 
+                                    'name' => __('Jackets','woo-bundle-choice'),
                                     'description' => 'Top wear Jackets',
                                     'slug' => 'wbc_top_wear_jackets_cat'
                                 ),
@@ -206,21 +221,24 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                                 array(
                                     'thumb' => $_img_url.'blazers.png',
                                     'thumb_selected' => $_img_url.'blazers_selected.png',
-                                    'name' => 'Blazers & Coats',
+                                    /* Language function - comment */ 
+                                    'name' => __('Blazers & Coats','woo-bundle-choice'),
                                     'description' => 'Top wear blazers and coats',
                                     'slug' => 'wbc_top_wear_blazers_coats_cat'
                                 ),
                                 array(
                                     'thumb' => $_img_url.'suit.png',
                                     'thumb_selected' => $_img_url.'suit_selected.png',
-                                    'name' => 'Suits',
+                                    /* Language function - comment */ 
+                                    'name' => __('Suits','woo-bundle-choice'),
                                     'description' => 'Top wear suits',
                                     'slug' => 'wbc_top_wear_suits_cat'
                                 ),
                                 array(
                                     'thumb' => $_img_url.'hoodie.png',
                                     'thumb_selected' => $_img_url.'hoodie_selected.png',
-                                    'name' => 'Hoodies',
+                                    /* Language function - comment */ 
+                                    'name' => __('Hoodies','woo-bundle-choice'),
                                     'description' => 'Top wear hoodies',
                                     'slug' => 'wbc_top_wear_hoodies_cat'
                                 ),
@@ -240,14 +258,16 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                                 array(
                                     'thumb' => $_img_url.'tops.png',
                                     'thumb_selected' => $_img_url.'tops_selected.png',
-                                    'name' => 'Tops',
+                                    /* Language function - comment */ 
+                                    'name' => __('Tops','woo-bundle-choice'),
                                     'description' => 'Top wear tops',
                                     'slug' => 'wbc_top_wear_tops_cat'
                                 ),
                                 array(
                                     'thumb' => $_img_url.'tunic.png',
                                     'thumb_selected' => $_img_url.'tunic_selected.png',
-                                    'name' => 'Tunics',
+                                    /* Language function - comment */ 
+                                    'name' => __('Tunics','woo-bundle-choice'),
                                     'description' => 'Top wear tunics',
                                     'slug' => 'wbc_top_wear_tunics_cat'
                                 )
@@ -256,7 +276,8 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                     ),
                     array(
                         'thumb' => '',
-                        'name' => 'Bottom wear',
+                        /* Language function - comment */ 
+                        'name' => __('Bottom wear','woo-bundle-choice'),
                         'description' => 'Bottom wear category',
                         'slug' => 'wbc_bottom_wear_cat',
                         'child'=> 
@@ -264,7 +285,8 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                                 array(
                                     'thumb' => $_img_url.'trousers.png',
                                     'thumb_selected' => $_img_url.'trousers_selected.png',
-                                    'name' => 'Trousers',
+                                    /* Language function - comment */ 
+                                    'name' => __('Trousers','woo-bundle-choice'),
                                     'description' => 'Bottom wear trousers',
                                     'slug' => 'wbc_bottom_wear_trousers_cat'
                                 ),
@@ -285,7 +307,8 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                                 array(
                                     'thumb' => $_img_url.'jeans.png',
                                     'thumb_selected' => $_img_url.'jeans_selected.png',
-                                    'name' => 'Jeans',
+                                    /* Language function - comment */ 
+                                    'name' => __('Jeans','woo-bundle-choice'),
                                     'description' => 'Bottom wear jeans',
                                     'slug' => 'wbc_bottom_wear_jeans_cat'
                                 ),
@@ -306,7 +329,8 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                                 array(
                                     'thumb' => $_img_url.'shorts.png',
                                     'thumb_selected' => $_img_url.'shorts_selected.png',
-                                    'name' => 'Shorts',
+                                    /* Language function - comment */ 
+                                    'name' => __('Shorts','woo-bundle-choice'),
                                     'description' => 'Bottom wear shorts',
                                     'slug' => 'wbc_bottom_wear_shorts_cat'
                                 ),
@@ -327,7 +351,8 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                                 array(
                                     'thumb' => $_img_url.'track.png',
                                     'thumb_selected' => $_img_url.'track_selected.png',
-                                    'name' => 'Track pants',
+                                    /* Language function - comment */ 
+                                    'name' => __('Track pants','woo-bundle-choice'),
                                     'description' => 'Bottom wear track pants',
                                     'slug' => 'wbc_bottom_wear_track_pants_cat'
                                 ),
@@ -348,21 +373,24 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                                 array(
                                     'thumb' => $_img_url.'palazzos.png',
                                     'thumb_selected' => $_img_url.'palazzos_selected.png',
-                                    'name' => 'Palazzos',
+                                    /* Language function - comment */ 
+                                    'name' => __('Palazzos','woo-bundle-choice'),
                                     'description' => 'Bottom wear palazzos',
                                     'slug' => 'wbc_bottom_wear_plazzos_cat'
                                 ),
                                 array(
                                     'thumb' => $_img_url.'skirt.png',
                                     'thumb_selected' => $_img_url.'skirt_selected.png',
-                                    'name' => 'Skirts',
+                                    /* Language function - comment */ 
+                                    'name' => __('Skirts','woo-bundle-choice'),
                                     'description' => 'Bottom wear skirts',
                                     'slug' => 'wbc_bottom_wear_skirts_cat'
                                 ),
                                 array(
                                     'thumb' => $_img_url.'leggings.png',
                                     'thumb_selected' => $_img_url.'leggings_selected.png',
-                                    'name' => 'Leggings',
+                                    /* Language function - comment */ 
+                                    'name' => __('Leggings','woo-bundle-choice'),
                                     'description' => 'Bottom wear leggings',
                                     'slug' => 'wbc_bottom_wear_leggings_cat'
                                 )
@@ -370,7 +398,8 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                     ),
                     array(
                         'thumb' => '',
-                        'name' => 'Top wear',
+                        /* Language function - comment */ 
+                        'name' => __('Top wear','woo-bundle-choice'),
                         'description' => 'Top-wear category',
                         'slug' => 'wbc_topwear_cat',
                         'child'=> 
@@ -378,91 +407,103 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                                 array(
                                     // 'thumb' => $_img_url.'shirts.png',
                                     // 'thumb_selected' => $_img_url.'shirts_selected.png',
-                                    'name' => 'Men white shirts',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men white shirts','woo-bundle-choice'),
                                     'description' => 'Men white shirts',
                                     'slug' => 'wbc_men_white_shirts_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'shirts.png',
                                     // 'thumb_selected' => $_img_url.'shirts_selected.png',
-                                    'name' => 'Men black shirts',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men black shirts','woo-bundle-choice'),
                                     'description' => 'Men balck shirts',
                                     'slug' => 'wbc_men_black_shirts_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'shirts.png',
                                     // 'thumb_selected' => $_img_url.'shirts_selected.png',
-                                    'name' => 'Men white shirts black bottom only',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men white shirts black bottom only','woo-bundle-choice'),
                                     'description' => 'Men white shirts black bottom only',
                                     'slug' => 'wbc_men_white_shirts_blackbottom_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'shirts.png',
                                     // 'thumb_selected' => $_img_url.'shirts_selected.png',
-                                    'name' => 'Men blue shirts blue bottom only',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men blue shirts blue bottom only','woo-bundle-choice'),
                                     'description' => 'Men blue shirts blue bottom only',
                                     'slug' => 'wbc_men_blue_shirts_bluebottom_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'shirts.png',
                                     // 'thumb_selected' => $_img_url.'shirts_selected.png',
-                                    'name' => 'Men blue blazer black bottom only',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men blue blazer black bottom only','woo-bundle-choice'),
                                     'description' => 'Men blue blazer black bottom only',
                                     'slug' => 'wbc_men_blue_blazers_blackbottom_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'shirts.png',
                                     // 'thumb_selected' => $_img_url.'shirts_selected.png',
-                                    'name' => 'Men light blue blazer',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men light blue blazer','woo-bundle-choice'),
                                     'description' => 'Men light blue blazer',
                                     'slug' => 'wbc_men_lightblue_blazers_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'shirts.png',
                                     // 'thumb_selected' => $_img_url.'shirts_selected.png',
-                                    'name' => 'Men gray blazer',
+                                    'name' => __('Men gray blazer','woo-bundle-choice'),
                                     'description' => 'Men gray blazer',
                                     'slug' => 'wbc_men_gray_blazers_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'shirts.png',
                                     // 'thumb_selected' => $_img_url.'shirts_selected.png',
-                                    'name' => 'Men blue shirts',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men blue shirts','woo-bundle-choice'),
                                     'description' => 'Men blue shirts',
                                     'slug' => 'wbc_men_blue_shirts_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'shirts.png',
                                     // 'thumb_selected' => $_img_url.'shirts_selected.png',
-                                    'name' => 'Men green shirts',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men green shirts','woo-bundle-choice'),
                                     'description' => 'Men green shirts',
                                     'slug' => 'wbc_men_green_shirts_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'shirts.png',
                                     // 'thumb_selected' => $_img_url.'shirts_selected.png',
-                                    'name' => 'Men black Jockey tshirts',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men black Jockey tshirts','woo-bundle-choice'),
                                     'description' => 'Men black Jockey tshirts',
                                     'slug' => 'wbc_men_black_jockey_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'shirts.png',
                                     // 'thumb_selected' => $_img_url.'shirts_selected.png',
-                                    'name' => 'Men white Jockey tshirts',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men white Jockey tshirts','woo-bundle-choice'),
                                     'description' => 'Men white Jockey tshirts',
                                     'slug' => 'wbc_men_white_jockey_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'shirts.png',
                                     // 'thumb_selected' => $_img_url.'shirts_selected.png',
-                                    'name' => 'Men gray shirts',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men gray shirts','woo-bundle-choice'),
                                     'description' => 'Men gray shirts',
                                     'slug' => 'wbc_men_gray_shirts_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'shirts.png',
                                     // 'thumb_selected' => $_img_url.'shirts_selected.png',
-                                    'name' => 'Men black shirts',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men black shirts','woo-bundle-choice'),
                                     'description' => 'Men black shirts',
                                     'slug' => 'wbc_men_black_shirts_cat'
                                 ),
@@ -470,28 +511,32 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                                 array(
                                     // 'thumb' => $_img_url.'shirts.png',
                                     // 'thumb_selected' => $_img_url.'shirts_selected.png',
-                                    'name' => 'Women white shirts',
+                                    /* Language function - comment */ 
+                                    'name' => __('Women white shirts','woo-bundle-choice'),
                                     'description' => 'Women white shirts',
                                     'slug' => 'wbc_women_white_shirts_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'shirts.png',
                                     // 'thumb_selected' => $_img_url.'shirts_selected.png',
-                                    'name' => 'Women white shirts',
+                                    /* Language function - comment */ 
+                                    'name' => __('Women white shirts','woo-bundle-choice'),
                                     'description' => 'Women white shirts',
                                     'slug' => 'wbc_women_whiteshirts_blackbottom_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'shirts.png',
                                     // 'thumb_selected' => $_img_url.'shirts_selected.png',
-                                    'name' => 'Women black shirts',
+                                    /* Language function - comment */ 
+                                    'name' => __('Women black shirts','woo-bundle-choice'),
                                     'description' => 'Women black shirts',
                                     'slug' => 'wbc_women_black_shirts_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'tshirt.png',
                                     // 'thumb_selected' => $_img_url.'tshirt_selected.png',
-                                    'name' => 'Women blue shirts',
+                                    /* Language function - comment */ 
+                                    'name' => __('Women blue shirts','woo-bundle-choice'),
                                     'description' => 'Women blue shirts',
                                     'slug' => 'wbc_women_blue_shirts_cat'
                                 ),
@@ -499,14 +544,16 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                                 array(
                                     // 'thumb' => $_img_url.'tshirt.png',
                                     // 'thumb_selected' => $_img_url.'tshirt_selected.png',
-                                    'name' => 'Men white tshirts',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men white tshirts','woo-bundle-choice'),
                                     'description' => 'Men white tshirts',
                                     'slug' => 'wbc_men_white_tshirts_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'tshirt.png',
                                     // 'thumb_selected' => $_img_url.'tshirt_selected.png',
-                                    'name' => 'Men black tshirts',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men black tshirts','woo-bundle-choice'),
                                     'description' => 'Men black tshirts',
                                     'slug' => 'wbc_men_black_tshirts_cat'
                                 ),
@@ -514,28 +561,32 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                                 array(
                                     // 'thumb' => $_img_url.'tshirt.png',
                                     // 'thumb_selected' => $_img_url.'tshirt_selected.png',
-                                    'name' => 'Women white tshirts',
+                                    /* Language function - comment */ 
+                                    'name' => __('Women white tshirts','woo-bundle-choice'),
                                     'description' => 'Women white tshirts',
                                     'slug' => 'wbc_women_white_tshirts_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'tshirt.png',
                                     // 'thumb_selected' => $_img_url.'tshirt_selected.png',
-                                    'name' => 'Women black tshirts',
+                                    /* Language function - comment */ 
+                                    'name' => __('Women black tshirts','woo-bundle-choice'),
                                     'description' => 'Women black tshirts',
                                     'slug' => 'wbc_women_black_tshirts_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'tshirt.png',
                                     // 'thumb_selected' => $_img_url.'tshirt_selected.png',
-                                    'name' => 'Women red tshirts',
+                                    /* Language function - comment */ 
+                                    'name' => __('Women red tshirts','woo-bundle-choice'),
                                     'description' => 'Women red tshirts',
                                     'slug' => 'wbc_women_red_tshirts_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'tshirt.png',
                                     // 'thumb_selected' => $_img_url.'tshirt_selected.png',
-                                    'name' => 'Women white tshirts',
+                                    /* Language function - comment */ 
+                                    'name' => __('Women white tshirts','woo-bundle-choice'),
                                     'description' => 'Women white tshirts',
                                     'slug' => 'wbc_women_white_tshirts_blackbottom_cat'
                                 ),
@@ -543,21 +594,24 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                                 array(
                                     // 'thumb' => $_img_url.'sweater.png',
                                     // 'thumb_selected' => $_img_url.'sweater_selected.png',
-                                    'name' => 'Men white sweater',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men white sweater','woo-bundle-choice'),
                                     'description' => 'Men white sweater',
                                     'slug' => 'wbc_men_white_sweater_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'sweater.png',
                                     // 'thumb_selected' => $_img_url.'sweater_selected.png',
-                                    'name' => 'Men black sweater',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men black sweater','woo-bundle-choice'),
                                     'description' => 'Men balck sweater',
                                     'slug' => 'wbc_men_black_sweater_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'sweater.png',
                                     // 'thumb_selected' => $_img_url.'sweater_selected.png',
-                                    'name' => 'Men green sweater',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men green sweater','woo-bundle-choice'),
                                     'description' => 'Men green sweater',
                                     'slug' => 'wbc_men_green_sweater_cat'
                                 ),
@@ -565,21 +619,24 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                                 array(
                                     // 'thumb' => $_img_url.'sweater.png',
                                     // 'thumb_selected' => $_img_url.'sweater_selected.png',
-                                    'name' => 'Women green sweater',
+                                    /* Language function - comment */ 
+                                    'name' => __('Women green sweater','woo-bundle-choice'),
                                     'description' => 'Women green sweater',
                                     'slug' => 'wbc_women_green_sweater_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'sweater.png',
                                     // 'thumb_selected' => $_img_url.'sweater_selected.png',
-                                    'name' => 'Women purple sweater',
+                                    /* Language function - comment */ 
+                                    'name' => __('Women purple sweater','woo-bundle-choice'),
                                     'description' => 'Women purple sweater',
                                     'slug' => 'wbc_women_purple_sweater_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'sweater.png',
                                     // 'thumb_selected' => $_img_url.'sweater_selected.png',
-                                    'name' => 'Women gray sweater',
+                                    /* Language function - comment */ 
+                                    'name' => __('Women gray sweater','woo-bundle-choice'),
                                     'description' => 'Women gray sweater',
                                     'slug' => 'wbc_women_gray_sweater_cat'
                                 ),
@@ -587,21 +644,24 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                                 array(
                                     // 'thumb' => $_img_url.'jacket.png',
                                     // 'thumb_selected' => $_img_url.'jacket_selected.png',
-                                    'name' => 'Men white jacket',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men white jacket','woo-bundle-choice'),
                                     'description' => 'Men white jacket',
                                     'slug' => 'wbc_men_white_jacket_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'jacket.png',
                                     // 'thumb_selected' => $_img_url.'jacket_selected.png',
-                                    'name' => 'Men black jacket',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men black jacket','woo-bundle-choice'),
                                     'description' => 'Men balck jacket',
                                     'slug' => 'wbc_men_black_jacket_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'jacket.png',
                                     // 'thumb_selected' => $_img_url.'jacket_selected.png',
-                                    'name' => 'Men orange jacket',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men orange jacket','woo-bundle-choice'),
                                     'description' => 'Men orange jacket',
                                     'slug' => 'wbc_men_orange_jacket_cat'
                                 ),
@@ -609,7 +669,8 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                                 array(
                                     // 'thumb' => $_img_url.'jacket.png',
                                     // 'thumb_selected' => $_img_url.'jacket_selected.png',
-                                    'name' => 'Women blue jacket',
+                                    /* Language function - comment */ 
+                                    'name' => __('Women blue jacket','woo-bundle-choice'),
                                     'description' => 'Women blue jacket',
                                     'slug' => 'wbc_women_blue_jacket_cat'
                                 ),
@@ -617,28 +678,32 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                                 array(
                                     // 'thumb' => $_img_url.'blazers.png',
                                     // 'thumb_selected' => $_img_url.'blazers_selected.png',
-                                    'name' => 'Men black blazers',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men black blazers','woo-bundle-choice'),
                                     'description' => 'Men balck blazers',
                                     'slug' => 'wbc_men_black_blazers_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'blazers.png',
                                     // 'thumb_selected' => $_img_url.'blazers_selected.png',
-                                    'name' => 'Men blue blazers',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men blue blazers','woo-bundle-choice'),
                                     'description' => 'Men blue blazers',
                                     'slug' => 'wbc_men_blue_blazers_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'blazers.png',
                                     // 'thumb_selected' => $_img_url.'blazers_selected.png',
-                                    'name' => 'Men green blazers',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men green blazers','woo-bundle-choice'),
                                     'description' => 'Men green blazers',
                                     'slug' => 'wbc_men_green_blazers_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'blazers.png',
                                     // 'thumb_selected' => $_img_url.'blazers_selected.png',
-                                    'name' => 'Men purple blazers',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men purple blazers','woo-bundle-choice'),
                                     'description' => 'Men purple blazers',
                                     'slug' => 'wbc_men_purple_blazers_cat'
                                 ),
@@ -646,28 +711,32 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                                 array(
                                     // 'thumb' => $_img_url.'suit.png',
                                     // 'thumb_selected' => $_img_url.'suit_selected.png',
-                                    'name' => 'Men orange suit',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men orange suit','woo-bundle-choice'),
                                     'description' => 'Men orange suit',
                                     'slug' => 'wbc_men_orange_suit_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'suit.png',
                                     // 'thumb_selected' => $_img_url.'suit_selected.png',
-                                    'name' => 'Men blue suit',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men blue suit','woo-bundle-choice'),
                                     'description' => 'Men blue suit',
                                     'slug' => 'wbc_men_blue_suit_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'suit.png',
                                     // 'thumb_selected' => $_img_url.'suit_selected.png',
-                                    'name' => 'Men purple suit',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men purple suit','woo-bundle-choice'),
                                     'description' => 'Men purple blue suit',
                                     'slug' => 'wbc_men_purple_suits_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'suit.png',
                                     // 'thumb_selected' => $_img_url.'suit_selected.png',
-                                    'name' => 'Men light gray suit',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men light gray suit','woo-bundle-choice'),
                                     'description' => 'Men light gray suit',
                                     'slug' => 'wbc_men_lightgray_suit_cat'
                                 ),
@@ -676,28 +745,32 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                                 array(
                                     // 'thumb' => $_img_url.'hoodie.png',
                                     // 'thumb_selected' => $_img_url.'hoodie_selected.png',
-                                    'name' => 'Men white hoodie',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men white hoodie','woo-bundle-choice'),
                                     'description' => 'Men white hoodie',
                                     'slug' => 'wbc_men_white_hoddies_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'hoodie.png',
                                     // 'thumb_selected' => $_img_url.'hoodie_selected.png',
-                                    'name' => 'Men black hoodie',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men black hoodie','woo-bundle-choice'),
                                     'description' => 'Men balck hoodie',
                                     'slug' => 'wbc_men_black_hoodie_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'hoodie.png',
                                     // 'thumb_selected' => $_img_url.'hoodie_selected.png',
-                                    'name' => 'Men green hoodie',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men green hoodie','woo-bundle-choice'),
                                     'description' => 'Men green hoodie',
                                     'slug' => 'wbc_men_green_hoodie_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'hoodie.png',
                                     // 'thumb_selected' => $_img_url.'hoodie_selected.png',
-                                    'name' => 'Men red hoodie',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men red hoodie','woo-bundle-choice'),
                                     'description' => 'Men red hoodie',
                                     'slug' => 'wbc_men_red_hoodie_cat'
                                 ),
@@ -705,21 +778,24 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                                 array(
                                     // 'thumb' => $_img_url.'hoodie.png',
                                     // 'thumb_selected' => $_img_url.'hoodie_selected.png',
-                                    'name' => 'Women blue hoodie',
+                                    /* Language function - comment */ 
+                                    'name' => __('Women blue hoodie','woo-bundle-choice'),
                                     'description' => 'Women blue hoodie',
                                     'slug' => 'wbc_women_blue_hoodie_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'hoodie.png',
                                     // 'thumb_selected' => $_img_url.'hoodie_selected.png',
-                                    'name' => 'Women red hoodie',
+                                    /* Language function - comment */ 
+                                    'name' => __('Women red hoodie','woo-bundle-choice'),
                                     'description' => 'Women red hoodie',
                                     'slug' => 'wbc_women_red_hoodie_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'hoodie.png',
                                     // 'thumb_selected' => $_img_url.'hoodie_selected.png',
-                                    'name' => 'Women yellow hoodie',
+                                    /* Language function - comment */ 
+                                    'name' => __('Women yellow hoodie','woo-bundle-choice'),
                                     'description' => 'Women yellow hoodie',
                                     'slug' => 'wbc_women_yellow_hoodie_cat'
                                 ),
@@ -727,35 +803,40 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                                 array(
                                     // 'thumb' => $_img_url.'tops.png',
                                     // 'thumb_selected' => $_img_url.'tops_selected.png',
-                                    'name' => 'Women black tops',
+                                    /* Language function - comment */ 
+                                    'name' => __('Women black tops','woo-bundle-choice'),
                                     'description' => 'Women balck tops',
                                     'slug' => 'wbc_Women_black_tops_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'tops.png',
                                     // 'thumb_selected' => $_img_url.'tops_selected.png',
-                                    'name' => 'Women green tops',
+                                    /* Language function - comment */ 
+                                    'name' => __('Women green tops','woo-bundle-choice'),
                                     'description' => 'Women green tops',
                                     'slug' => 'wbc_women_green_tops_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'tops.png',
                                     // 'thumb_selected' => $_img_url.'tops_selected.png',
-                                    'name' => 'Women red tops',
+                                    /* Language function - comment */ 
+                                    'name' => __('Women red tops','woo-bundle-choice'),
                                     'description' => 'Women red tops',
                                     'slug' => 'wbc_women_red_tops_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'tops.png',
                                     // 'thumb_selected' => $_img_url.'tops_selected.png',
-                                    'name' => 'Women purple tops',
+                                    /* Language function - comment */ 
+                                    'name' => __('Women purple tops','woo-bundle-choice'),
                                     'description' => 'Women purple tops',
                                     'slug' => 'wbc_women_purple_tops_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'tops.png',
                                     // 'thumb_selected' => $_img_url.'tops_selected.png',
-                                    'name' => 'Women pink tops',
+                                    /* Language function - comment */ 
+                                    'name' => __('Women pink tops','woo-bundle-choice'),
                                     'description' => 'Women pink tops',
                                     'slug' => 'wbc_women_pink_tops_cat'
                                 ),
@@ -763,21 +844,24 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                                 array(
                                     // 'thumb' => $_img_url.'tunic.png',
                                     // 'thumb_selected' => $_img_url.'tunic_selected.png',
-                                    'name' => 'Women white tunic',
+                                    /* Language function - comment */ 
+                                    'name' => __('Women white tunic','woo-bundle-choice'),
                                     'description' => 'Women white tunic',
                                     'slug' => 'wbc_women_white_tunic_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'tunic.png',
                                     // 'thumb_selected' => $_img_url.'tunic_selected.png',
-                                    'name' => 'Women white tunic',
+                                    /* Language function - comment */ 
+                                    'name' => __('Women white tunic','woo-bundle-choice'),
                                     'description' => 'Women white tunic',
                                     'slug' => 'wbc_women_whitetunic_bluebottom_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'tunic.png',
                                     // 'thumb_selected' => $_img_url.'tunic_selected.png',
-                                    'name' => 'Women orange tunic',
+                                    /* Language function - comment */ 
+                                    'name' => __('Women orange tunic','woo-bundle-choice'),
                                     'description' => 'Women orange tunic',
                                     'slug' => 'wbc_women_orange_tunic_cat'
                                 )
@@ -786,7 +870,8 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                     ),
                     array(
                         'thumb' => '',
-                        'name' => 'Bottom wear',
+                        /* Language function - comment */ 
+                        'name' => __('Bottom wear','woo-bundle-choice'),
                         'description' => 'Bottom-wear category',
                         'slug' => 'wbc_bottomwear_cat',
                         'child'=> 
@@ -794,84 +879,96 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                                 array(
                                     // 'thumb' => $_img_url.'trousers.png',
                                     // 'thumb_selected' => $_img_url.'trousers_selected.png',
-                                    'name' => 'Men white trouser',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men white trouser','woo-bundle-choice'),
                                     'description' => 'Men white trousers',
                                     'slug' => 'wbc_men_white_trousers_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'trousers.png',
                                     // 'thumb_selected' => $_img_url.'trousers_selected.png',
-                                    'name' => 'Men maroon trouser',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men maroon trouser','woo-bundle-choice'),
                                     'description' => 'Men maroon trousers',
                                     'slug' => 'wbc_men_maroon_trousers_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'trousers.png',
                                     // 'thumb_selected' => $_img_url.'trousers_selected.png',
-                                    'name' => 'Men gray trouser',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men gray trouser','woo-bundle-choice'),
                                     'description' => 'Men gray trousers',
                                     'slug' => 'wbc_men_gray_trousers_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'trousers.png',
                                     // 'thumb_selected' => $_img_url.'trousers_selected.png',
-                                    'name' => 'Men orange suit trouser',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men orange suit trouser','woo-bundle-choice'),
                                     'description' => 'Men orange suit trouser',
                                     'slug' => 'wbc_men_orange_suitpant_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'trousers.png',
                                     // 'thumb_selected' => $_img_url.'trousers_selected.png',
-                                    'name' => 'Men blue suit trouser',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men blue suit trouser','woo-bundle-choice'),
                                     'description' => 'Men blue suit trouser',
                                     'slug' => 'wbc_men_blue_suitpant_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'trousers.png',
                                     // 'thumb_selected' => $_img_url.'trousers_selected.png',
-                                    'name' => 'Men gray suit trouser',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men gray suit trouser','woo-bundle-choice'),
                                     'description' => 'Men gray suit trouser',
                                     'slug' => 'wbc_men_gray_suitpant_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'trousers.png',
                                     // 'thumb_selected' => $_img_url.'trousers_selected.png',
-                                    'name' => 'Men light gray suit trouser',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men light gray suit trouser','woo-bundle-choice'),
                                     'description' => 'Men light gray suit trouser',
                                     'slug' => 'wbc_men_lightgray_suitpant_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'trousers.png',
                                     // 'thumb_selected' => $_img_url.'trousers_selected.png',
-                                    'name' => 'Men black trouser',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men black trouser','woo-bundle-choice'),
                                     'description' => 'Men black trousers',
                                     'slug' => 'wbc_men_black_trousers_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'trousers.png',
                                     // 'thumb_selected' => $_img_url.'trousers_selected.png',
-                                    'name' => 'Men green trouser',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men green trouser','woo-bundle-choice'),
                                     'description' => 'Men green trousers',
                                     'slug' => 'wbc_men_green_trousers_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'trousers.png',
                                     // 'thumb_selected' => $_img_url.'trousers_selected.png',
-                                    'name' => 'Men blue trouser',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men blue trouser','woo-bundle-choice'),
                                     'description' => 'Men blue trousers',
                                     'slug' => 'wbc_men_blue_trousers_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'trousers.png',
                                     // 'thumb_selected' => $_img_url.'trousers_selected.png',
-                                    'name' => 'Men purple suit trouser',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men purple suit trouser','woo-bundle-choice'),
                                     'description' => 'Men purple suit trousers',
                                     'slug' => 'wbc_men_purple_suitspant_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'trousers.png',
                                     // 'thumb_selected' => $_img_url.'trousers_selected.png',
-                                    'name' => 'Men yellow trouser',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men yellow trouser','woo-bundle-choice'),
                                     'description' => 'Men yellow trousers',
                                     'slug' => 'wbc_men_yellow_trousers_cat'
                                 ),
@@ -879,28 +976,32 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                                 array(
                                     // 'thumb' => $_img_url.'trousers.png',
                                     // 'thumb_selected' => $_img_url.'trousers_selected.png',
-                                    'name' => 'Women white trouser',
+                                    /* Language function - comment */ 
+                                    'name' => __('Women white trouser','woo-bundle-choice'),
                                     'description' => 'Women white trousers',
                                     'slug' => 'wbc_women_white_trousers_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'trousers.png',
                                     // 'thumb_selected' => $_img_url.'trousers_selected.png',
-                                    'name' => 'Women black trouser',
+                                    /* Language function - comment */ 
+                                    'name' => __('Women black trouser','woo-bundle-choice'),
                                     'description' => 'Women black trousers',
                                     'slug' => 'wbc_women_black_trousers_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'trousers.png',
                                     // 'thumb_selected' => $_img_url.'trousers_selected.png',
-                                    'name' => 'Women blue trouser',
+                                    /* Language function - comment */ 
+                                    'name' => __('Women blue trouser','woo-bundle-choice'),
                                     'description' => 'Women blue trousers',
                                     'slug' => 'wbc_women_blue_trousers_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'trousers.png',
                                     // 'thumb_selected' => $_img_url.'trousers_selected.png',
-                                    'name' => 'Women pink trouser',
+                                    /* Language function - comment */ 
+                                    'name' => __('Women pink trouser','woo-bundle-choice'),
                                     'description' => 'Women pink trousers',
                                     'slug' => 'wbc_women_pink_trousers_cat'
                                 ),
@@ -908,28 +1009,32 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                                 array(
                                     // 'thumb' => $_img_url.'jeans.png',
                                     // 'thumb_selected' => $_img_url.'jeans_selected.png',
-                                    'name' => 'Men black jeans',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men black jeans','woo-bundle-choice'),
                                     'description' => 'Men black jeans',
                                     'slug' => 'wbc_men_black_jeans_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'jeans.png',
                                     // 'thumb_selected' => $_img_url.'jeans_selected.png',
-                                    'name' => 'Men blue jeans',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men blue jeans','woo-bundle-choice'),
                                     'description' => 'Men blue jeans',
                                     'slug' => 'wbc_men_blue_jeans_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'jeans.png',
                                     // 'thumb_selected' => $_img_url.'jeans_selected.png',
-                                    'name' => 'Men white jeans',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men white jeans','woo-bundle-choice'),
                                     'description' => 'Men white jeans',
                                     'slug' => 'wbc_men_white_jeans_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'jeans.png',
                                     // 'thumb_selected' => $_img_url.'jeans_selected.png',
-                                    'name' => 'Men light blue jeans',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men light blue jeans','woo-bundle-choice'),
                                     'description' => 'Men light blue jeans',
                                     'slug' => 'wbc_men_lightblue_jeans_cat'
                                 ),
@@ -937,21 +1042,24 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                                 array(
                                     // 'thumb' => $_img_url.'jeans.png',
                                     // 'thumb_selected' => $_img_url.'jeans_selected.png',
-                                    'name' => 'Women black jeans',
+                                    /* Language function - comment */ 
+                                    'name' => __('Women black jeans','woo-bundle-choice'),
                                     'description' => 'Women black jeans',
                                     'slug' => 'wbc_women_black_jeans_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'jeans.png',
                                     // 'thumb_selected' => $_img_url.'jeans_selected.png',
-                                    'name' => 'Women blue jeans',
+                                    /* Language function - comment */ 
+                                    'name' => __('Women blue jeans','woo-bundle-choice'),
                                     'description' => 'Women blue jeans',
                                     'slug' => 'wbc_women_blue_jeans_cat'
                                 ),
                                  array(
                                     // 'thumb' => $_img_url.'jeans.png',
                                     // 'thumb_selected' => $_img_url.'jeans_selected.png',
-                                    'name' => 'Women sky blue jeans',
+                                    /* Language function - comment */ 
+                                    'name' => __('Women sky blue jeans','woo-bundle-choice'),
                                     'description' => 'Women sky blue jeans',
                                     'slug' => 'wbc_women_skyblue_jeans_cat'
                                 ),
@@ -959,28 +1067,32 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                                 array(
                                     // 'thumb' => $_img_url.'shorts.png',
                                     // 'thumb_selected' => $_img_url.'shorts_selected.png',
-                                    'name' => 'Men white shorts',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men white shorts','woo-bundle-choice'),
                                     'description' => 'Men white shorts',
                                     'slug' => 'wbc_men_white_shorts_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'shorts.png',
                                     // 'thumb_selected' => $_img_url.'shorts_selected.png',
-                                    'name' => 'Men black shorts',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men black shorts','woo-bundle-choice'),
                                     'description' => 'Men black shorts',
                                     'slug' => 'wbc_men_black_shorts_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'shorts.png',
                                     // 'thumb_selected' => $_img_url.'shorts_selected.png',
-                                    'name' => 'Men blue shorts',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men blue shorts','woo-bundle-choice'),
                                     'description' => 'Men blue shorts',
                                     'slug' => 'wbc_men_blue_shorts_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'shorts.png',
                                     // 'thumb_selected' => $_img_url.'shorts_selected.png',
-                                    'name' => 'Men gray shorts',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men gray shorts','woo-bundle-choice'),
                                     'description' => 'Men gray shorts',
                                     'slug' => 'wbc_men_gray_shorts_cat'
                                 ),
@@ -988,14 +1100,16 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                                 array(
                                     // 'thumb' => $_img_url.'shorts.png',
                                     // 'thumb_selected' => $_img_url.'shorts_selected.png',
-                                    'name' => 'Women black shorts',
+                                    /* Language function - comment */ 
+                                    'name' => __('Women black shorts','woo-bundle-choice'),
                                     'description' => 'Women black shorts',
                                     'slug' => 'wbc_women_black_shorts_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'shorts.png',
                                     // 'thumb_selected' => $_img_url.'jeans_selected.png',
-                                    'name' => 'Women blue shorts',
+                                    /* Language function - comment */ 
+                                    'name' => __('Women blue shorts','woo-bundle-choice'),
                                     'description' => 'Women blue shorts',
                                     'slug' => 'wbc_women_blue_shorts_cat'
                                 ),
@@ -1003,28 +1117,29 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                                 array(
                                     // 'thumb' => $_img_url.'track.png',
                                     // 'thumb_selected' => $_img_url.'track_selected.png',
-                                    'name' => 'Men white track',
+                                    /* Language function - comment */ 
+                                    'name' => __('Men white track','woo-bundle-choice'),
                                     'description' => 'Men white track',
                                     'slug' => 'wbc_men_white_track_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'track.png',
                                     // 'thumb_selected' => $_img_url.'track_selected.png',
-                                    'name' => 'Men gray track',
+                                    'name' => __('Men gray track','woo-bundle-choice'),
                                     'description' => 'Men gray track',
                                     'slug' => 'wbc_men_gray_track_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'track.png',
                                     // 'thumb_selected' => $_img_url.'track_selected.png',
-                                    'name' => 'Men black track',
+                                    'name' => __('Men black track','woo-bundle-choice'),
                                     'description' => 'Men black track',
                                     'slug' => 'wbc_men_black_track_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'track.png',
                                     // 'thumb_selected' => $_img_url.'track_selected.png',
-                                    'name' => 'Men black track',
+                                    'name' => __('Men black track','woo-bundle-choice'),
                                     'description' => 'Men black track',
                                     'slug' => 'wbc_men_blue_track_cat'
                                 ),
@@ -1032,14 +1147,14 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                                 array(
                                     // 'thumb' => $_img_url.'track.png',
                                     // 'thumb_selected' => $_img_url.'track_selected.png',
-                                    'name' => 'Women black track',
+                                    'name' => __('Women black track','woo-bundle-choice'),
                                     'description' => 'Women black track',
                                     'slug' => 'wbc_women_black_track_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'track.png',
                                     // 'thumb_selected' => $_img_url.'track_selected.png',
-                                    'name' => 'Women blue track',
+                                    'name' => __('Women blue track','woo-bundle-choice'),
                                     'description' => 'Women blue track',
                                     'slug' => 'wbc_women_blue_track_cat'
                                 ),
@@ -1047,35 +1162,35 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                                 array(
                                     // 'thumb' => $_img_url.'palazzos.png',
                                     // 'thumb_selected' => $_img_url.'palazzos_selected.png',
-                                    'name' => 'Women white palazzos',
+                                    'name' => __('Women white palazzos','woo-bundle-choice'),
                                     'description' => 'Women white palazzos',
                                     'slug' => 'wbc_women_white_palazzos_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'palazzos.png',
                                     // 'thumb_selected' => $_img_url.'palazzos_selected.png',
-                                    'name' => 'Women black palazzos',
+                                    'name' => __('Women black palazzos','woo-bundle-choice'),
                                     'description' => 'Women palazzos palazzos',
                                     'slug' => 'wbc_women_black_palazzos_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'palazzos.png',
                                     // 'thumb_selected' => $_img_url.'palazzos_selected.png',
-                                    'name' => 'Women blue palazzos',
+                                    'name' => __('Women blue palazzos','woo-bundle-choice'),
                                     'description' => 'Women blue palazzos',
                                     'slug' => 'wbc_women_blue_palazzos_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'palazzos.png',
                                     // 'thumb_selected' => $_img_url.'palazzos_selected.png',
-                                    'name' => 'Women sky blue palazzos',
+                                    'name' => __('Women sky blue palazzos','woo-bundle-choice'),
                                     'description' => 'Women sky blue palazzos',
                                     'slug' => 'wbc_women_skyblue_palazzos_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'palazzos.png',
                                     // 'thumb_selected' => $_img_url.'palazzos_selected.png',
-                                    'name' => 'Women orange palazzos',
+                                    'name' => __('Women orange palazzos','woo-bundle-choice'),
                                     'description' => 'Women orange palazzos',
                                     'slug' => 'wbc_women_orange_palazzos_cat'
                                 ),
@@ -1083,14 +1198,14 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                                 array(
                                     // 'thumb' => $_img_url.'skirt.png',
                                     // 'thumb_selected' => $_img_url.'skirt_selected.png',
-                                    'name' => 'Women black skirt',
+                                    'name' => __('Women black skirt','woo-bundle-choice'),
                                     'description' => 'Women palazzos skirt',
                                     'slug' => 'wbc_women_black_skirt_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'skirt.png',
                                     // 'thumb_selected' => $_img_url.'skirt_selected.png',
-                                    'name' => 'Women red skirt',
+                                    'name' => __('Women red skirt','woo-bundle-choice'),
                                     'description' => 'Women red skirt',
                                     'slug' => 'wbc_women_red_skirt_cat'
                                 ),
@@ -1098,28 +1213,28 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                                 array(
                                     // 'thumb' => $_img_url.'leggings.png',
                                     // 'thumb_selected' => $_img_url.'leggings_selected.png',
-                                    'name' => 'Women white leggings',
+                                    'name' => __('Women white leggings','woo-bundle-choice'),
                                     'description' => 'Women white leggings',
                                     'slug' => 'wbc_women_white_leggings_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'leggings.png',
                                     // 'thumb_selected' => $_img_url.'leggings_selected.png',
-                                    'name' => 'Women blue leggings',
+                                    'name' => __('Women blue leggings','woo-bundle-choice'),
                                     'description' => 'Women blue leggings',
                                     'slug' => 'wbc_women_blue_leggings_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'leggings.png',
                                     // 'thumb_selected' => $_img_url.'leggings_selected.png',
-                                    'name' => 'Women black leggings',
+                                    'name' => __('Women black leggings','woo-bundle-choice'),
                                     'description' => 'Women black leggings',
                                     'slug' => 'wbc_women_black_leggings_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'leggings.png',
                                     // 'thumb_selected' => $_img_url.'leggings_selected.png',
-                                    'name' => 'Women gray leggings',
+                                    'name' => __('Women gray leggings','woo-bundle-choice'),
                                     'description' => 'Women gray leggings',
                                     'slug' => 'wbc_women_gray_leggings_cat'
                                 )
@@ -1127,7 +1242,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                     ),
                     array(
                         'thumb' => '',
-                        'name' => 'Fabric',
+                        'name' => __('Fabric','woo-bundle-choice'),
                         'description' => 'Fabric category',
                         'slug' => 'wbc_fabric_cat',
                         'child'=> 
@@ -1135,70 +1250,70 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                                 array(
                                     'thumb' => $_img_url.'fabric.png',
                                     'thumb_selected' => $_img_url.'fabric_selected.png',
-                                    'name' => 'Cotton',
+                                    'name' => __('Cotton','woo-bundle-choice'),
                                     'description' => 'Fabric type cotton',
                                     'slug' => 'wbc_fabric_cotton_cat'
                                 ),
                                 array(
                                     'thumb' => $_img_url.'fabric.png',
                                     'thumb_selected' => $_img_url.'fabric_selected.png',
-                                    'name' => 'Silk',
+                                    'name' => __('Silk','woo-bundle-choice'),
                                     'description' => 'Fabric type silk',
                                     'slug' => 'wbc_fabric_silk_cat'
                                 ),
                                 array(
                                     'thumb' => $_img_url.'fabric.png',
                                     'thumb_selected' => $_img_url.'fabric_selected.png',
-                                    'name' => 'Canvas',
+                                    'name' => __('Canvas','woo-bundle-choice'),
                                     'description' => 'Fabric type canvas',
                                     'slug' => 'wbc_fabric_canvas_cat'
                                 ),
                                 array(
                                     'thumb' => $_img_url.'fabric.png',
                                     'thumb_selected' => $_img_url.'fabric_selected.png',
-                                    'name' => 'Chiffon',
+                                    'name' => __('Chiffon','woo-bundle-choice'),
                                     'description' => 'Fabric type chiffon',
                                     'slug' => 'wbc_fabric_chiffon_cat'
                                 ),
                                 array(
                                     'thumb' => $_img_url.'fabric.png',
                                     'thumb_selected' => $_img_url.'fabric_selected.png',
-                                    'name' => 'Damask',
+                                    'name' => __('Damask','woo-bundle-choice'),
                                     'description' => 'Fabric type damask',
                                     'slug' => 'wbc_fabric_damask_cat'
                                 ),
                                 array(
                                     'thumb' => $_img_url.'fabric.png',
                                     'thumb_selected' => $_img_url.'fabric_selected.png',
-                                    'name' => 'Wool',
+                                    'name' => __('Wool','woo-bundle-choice'),
                                     'description' => 'Fabric type wool',
                                     'slug' => 'wbc_fabric_wool_cat'
                                 ),
                                 array(
                                     'thumb' => $_img_url.'fabric.png',
                                     'thumb_selected' => $_img_url.'fabric_selected.png',
-                                    'name' => 'Jersey',
+                                    'name' => __('Jersey','woo-bundle-choice'),
                                     'description' => 'Fabric type jersey',
                                     'slug' => 'wbc_fabric_jersey_cat'
                                 ),
                                 array(
                                     'thumb' => $_img_url.'fabric.png',
                                     'thumb_selected' => $_img_url.'fabric_selected.png',
-                                    'name' => 'Polyester',
+                                    'name' => __('Polyester','woo-bundle-choice'),
                                     'description' => 'Fabric type polyester',
                                     'slug' => 'wbc_fabric_polyester_cat'
                                 ),
                                 array(
                                     'thumb' => $_img_url.'fabric.png',
                                     'thumb_selected' => $_img_url.'fabric_selected.png',
-                                    'name' => 'Velvet',
+                                    'name' => __('Velvet','woo-bundle-choice'),
                                     'description' => 'Fabric type velvet',
                                     'slug' => 'wbc_fabric_velvet_cat'
                                 ),
                                 array(
                                     'thumb' => $_img_url.'fabric.png',
                                     'thumb_selected' => $_img_url.'fabric_selected.png',
-                                    'name' => 'Linen',
+                                    'name' => __('Linen','woo-bundle-choice'),
                                     'description' => 'Fabric type linen',
                                     'slug' => 'wbc_fabric_linen_cat'
                                 )
@@ -1206,57 +1321,57 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                     ), 
                     array(
                         'thumb' => '',
-                        'name' => 'Pattern',
+                        'name' => __('Pattern','woo-bundle-choice'),
                         'description' => 'Pattern category',
                         'slug' => 'wbc_pattern_cat',
                         'child'=> 
                         array(
                                 array(
                                     'thumb' => $_alphabets_img_url.'icons8-circled-p-100.png',
-                                    'name' => 'Plain',
+                                    'name' => __('Plain','woo-bundle-choice'),
                                     'description' => 'Pattern type plain',
                                     'slug' => 'wbc_pattern_plain_cat'
                                 ),
                                 array(
                                     'thumb' => $_alphabets_img_url.'icons8-circled-s-100.png',
-                                    'name' => 'Stripes',
+                                    'name' => __('Stripes','woo-bundle-choice'),
                                     'description' => 'Pattern type stripes',
                                     'slug' => 'wbc_pattern_stripes_cat'
                                 ),
                                 array(
                                     'thumb' => $_alphabets_img_url.'icons8-circled-c-100.png',
                                     // 'thumb_selected' => $_alphabets_img_url.'pattern_selected.png',
-                                    'name' => 'Checks',
+                                    'name' => __('Checks','woo-bundle-choice'),
                                     'description' => 'Pattern type checks',
                                     'slug' => 'wbc_pattern_checks_cat'
                                 ),
                                 array(
                                     'thumb' => $_alphabets_img_url.'icons8-circled-p-100.png',
-                                    'name' => 'Plaid',
+                                    'name' => __('Plaid','woo-bundle-choice'),
                                     'description' => 'Pattern type plaid',
                                     'slug' => 'wbc_pattern_plaid_cat'
                                 ),
                                 array(
                                     'thumb' => $_alphabets_img_url.'icons8-circled-f-100.png',
-                                    'name' => 'Floral',
+                                    'name' => __('Floral','woo-bundle-choice'),
                                     'description' => 'Pattern type floral',
                                     'slug' => 'wbc_pattern_floral_cat'
                                 ),
                                 array(
                                     'thumb' => $_alphabets_img_url.'icons8-circled-p-100.png',
-                                    'name' => 'Polka Dots',
+                                    'name' => __('Polka Dots','woo-bundle-choice'),
                                     'description' => 'Pattern type polka dots',
                                     'slug' => 'wbc_pattern_polkadots_cat'
                                 ),
                                 array(
                                     'thumb' => $_alphabets_img_url.'icons8-circled-p-100.png',
-                                    'name' => 'Printed',
+                                    'name' => __('Printed','woo-bundle-choice'),
                                     'description' => 'Pattern type printed',
                                     'slug' => 'wbc_pattern_printed_cat'
                                 ),
                                 array(
                                     'thumb' => $_alphabets_img_url.'icons8-circled-d-100.png',
-                                    'name' => 'Detailing',
+                                    'name' => __('Detailing','woo-bundle-choice'),
                                     'description' => 'Pattern type detailing',
                                     'slug' => 'wbc_pattern_detailing_cat'
                                 )

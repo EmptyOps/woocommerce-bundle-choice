@@ -283,7 +283,8 @@ class Form_Builder implements Builder {
 		if( !in_array("text", $hide_defaults) )
 		{
 			$collection[$field_id.'_text'] = array(
-				'label'=>$field_label.' '.eowbc_lang('Text'),
+				/* Language function - comment */ 
+				'label'=>$field_label.' '.__('Text','woo-bundle-choice'),
 				'type'=>'text',
 				'sanitize'=>'sanitize_text_field',
 				'validate'=>array('required'=>''),
@@ -291,7 +292,8 @@ class Form_Builder implements Builder {
 				'size_class'=>array('eight','wide'),
 				'inline'=>false,
 
-				'visible_info'=>array( 'label'=>( array_key_exists("text", $info_text_overrides) ? $info_text_overrides["text"] : eowbc_lang('Sets specified text on '.$field_label) ),
+				/* Language function - comment */ 
+				'visible_info'=>array( 'label'=>( array_key_exists("text", $info_text_overrides) ? $info_text_overrides["text"] : __('Sets specified text on '.$field_label,'woo-bundle-choice') ),
 					'type'=>'visible_info',
 					'class'=>array('small'),
 					// 'size_class'=>array('sixteen','wide'),
@@ -302,14 +304,17 @@ class Form_Builder implements Builder {
 		if( !in_array("font", $hide_defaults) )
 		{
 			$collection[$field_id.'_font'] = array(
-				'label'=>$field_label.' '.eowbc_lang('Text Font'),
+
+				/* Language function - comment */ 
+				'label'=>$field_label.' '.__('Text Font','woo-bundle-choice'),
 				'type'=>'text',
 				// 'class'=>array('fluid'),
 				'sanitize'=>'sanitize_text_field',
 				'size_class'=>array('four','wide'),
 				'inline'=>false,
 
-				'visible_info'=>array( 'label'=>( array_key_exists("font", $info_text_overrides) ? $info_text_overrides["font"] : eowbc_lang('Specify the font family to be used on '.$field_label) ),
+				/* Language function - comment */ 
+				'visible_info'=>array( 'label'=>( array_key_exists("font", $info_text_overrides) ? $info_text_overrides["font"] : __('Specify the font family to be used on '.$field_label,'woo-bundle-choice') ),
 					'type'=>'visible_info',
 					'class'=>array('small'),
 					// 'size_class'=>array('sixteen','wide'),
@@ -320,7 +325,8 @@ class Form_Builder implements Builder {
 		if( !in_array("radius", $hide_defaults) )
 		{
 			$collection[$field_id.'_radius'] = array(
-				'label'=>$field_label.' '.eowbc_lang('Radius (px)'),
+				/* Language function - comment */ 
+				'label'=>$field_label.' '.__('Radius (px)','woo-bundle-choice','woo-bundle-choice','woo-bundle-choice'),
 				'type'=>'text',
 				'sanitize'=>'sanitize_text_field',
 				'validate'=>array('required'=>'','postfix'=>['px']),
@@ -328,7 +334,7 @@ class Form_Builder implements Builder {
 				'size_class'=>array('four','wide'),
 				'inline'=>false,
 
-				'visible_info'=>array( 'label'=>( array_key_exists("radius", $info_text_overrides) ? $info_text_overrides["radius"] : eowbc_lang('Sets specified radius on '.$field_label) ),
+				'visible_info'=>array( 'label'=>( array_key_exists("radius", $info_text_overrides) ? $info_text_overrides["radius"] : __('Sets specified radius on '.$field_label,'woo-bundle-choice','woo-bundle-choice') ),
 					'type'=>'visible_info',
 					'class'=>array('small'),
 					// 'size_class'=>array('sixteen','wide'),
@@ -346,11 +352,13 @@ class Form_Builder implements Builder {
 
 			for($fi=0; $fi<$ftot; $fi++)
 			{
-				$special_lbl = $ftot < 2 ? "" : ( $fi == 0 ? eowbc_lang("Active ") : eowbc_lang("Inactive ") );
+				/* Language function - comment */ 
+				$special_lbl = $ftot < 2 ? "" : ( $fi == 0 ? __("Active ",'woo-bundle-choice') : __("Inactive ",'woo-bundle-choice') );
 				$field_id_suffix = ($fi==0?"_active":"_inactive");
 
 				$collection[$field_id.'_backcolor_lbl'.$field_id_suffix] = array(
-					'label'=>$field_label.' '.$special_lbl.eowbc_lang('Background Color'),
+					/* Language function - comment */ 
+					'label'=>$field_label.' '.$special_lbl.__('Background Color','woo-bundle-choice'),
 					'type'=>'label',
 					'validate'=>array('required'=>''),
 					// 'class'=>array('fluid'),
@@ -358,7 +366,8 @@ class Form_Builder implements Builder {
 					'size_class'=>array('eight','wide'),
 					'inline'=>true,
 
-					'info_icon'=>array( 'text'=>( array_key_exists("backcolor", $info_text_overrides) ? $info_text_overrides["backcolor"] : eowbc_lang('Sets specified color as background color on '.$field_label.( $special_lbl == "" ? "" : ' while its '.$special_lbl) ) ),
+					/* Language function - comment */ 
+					'info_icon'=>array( 'text'=>( array_key_exists("backcolor", $info_text_overrides) ? $info_text_overrides["backcolor"] : __('Sets specified color as background color on '.$field_label.( $special_lbl == "" ? "" : ' while its '.$special_lbl,'woo-bundle-choice') ) ),
 						'type'=>'info_icon',
 					),
 				);
@@ -374,7 +383,8 @@ class Form_Builder implements Builder {
 		if( !in_array("hovercolor", $hide_defaults) )
 		{
 			$collection[$field_id.'_hovercolor_lbl'] = array(
-				'label'=>$field_label.' '.eowbc_lang('Hover Color'),
+				/* Language function - comment */ 
+				'label'=>$field_label.' '.__('Hover Color','woo-bundle-choice'),
 				'type'=>'label',
 				// 'class'=>array('fluid'),
 				'validate'=>array('required'=>''),
@@ -382,7 +392,8 @@ class Form_Builder implements Builder {
 				'size_class'=>array('eight','wide'),
 				'inline'=>true,
 
-				'info_icon'=>array( 'text'=>( array_key_exists("hovercolor", $info_text_overrides) ? $info_text_overrides["hovercolor"] : eowbc_lang('Sets specified color as hover color on '.$field_label) ),
+				/* Language function - comment */ 
+				'info_icon'=>array( 'text'=>( array_key_exists("hovercolor", $info_text_overrides) ? $info_text_overrides["hovercolor"] : __('Sets specified color as hover color on '.$field_label,'woo-bundle-choice') ),
 					'type'=>'info_icon',
 				),
 			);
@@ -397,14 +408,15 @@ class Form_Builder implements Builder {
 		if( !in_array("textcolor", $hide_defaults) )
 		{
 			$collection[$field_id.'_textcolor_lbl'] = array(
-				'label'=>$field_label.' '.eowbc_lang('Text Color'),
+				'label'=>$field_label.' '.__('Text Color','woo-bundle-choice'),
 				'type'=>'label',
 				// 'class'=>array('fluid'),
 				'validate'=>array('required'=>''),
 				'sanitize'=>'sanitize_hex_color',
 				'size_class'=>array('eight','wide'),
 				'inline'=>true,
-				'info_icon'=>array( 'text'=>( array_key_exists("textcolor", $info_text_overrides) ? $info_text_overrides["textcolor"] : eowbc_lang('Sets specified color as text color on '.$field_label) ),
+				/* Language function - comment */ 
+				'info_icon'=>array( 'text'=>( array_key_exists("textcolor", $info_text_overrides) ? $info_text_overrides["textcolor"] : __('Sets specified color as text color on '.$field_label,'woo-bundle-choice') ),
 					'type'=>'info_icon',
 				),
 			);
@@ -419,7 +431,8 @@ class Form_Builder implements Builder {
 		if( !in_array("bordercolor", $hide_defaults) )
 		{
 			$collection[$field_id.'_bordercolor_lbl'] = array(
-				'label'=>$field_label.' '.eowbc_lang('Border Color'),
+				/* Language function - comment */ 
+				'label'=>$field_label.' '.__('Border Color','woo-bundle-choice'),
 				'type'=>'label',
 				// 'class'=>array('fluid'),
 				'validate'=>array('required'=>''),
@@ -427,7 +440,8 @@ class Form_Builder implements Builder {
 				'size_class'=>array('eight','wide'),
 				'inline'=>true,
 
-				'info_icon'=>array( 'text'=>( array_key_exists("bordercolor", $info_text_overrides) ? $info_text_overrides["bordercolor"] : eowbc_lang('Sets specified color as border color on '.$field_label) ),
+				/* Language function - comment */ 
+				'info_icon'=>array( 'text'=>( array_key_exists("bordercolor", $info_text_overrides) ? $info_text_overrides["bordercolor"] : __('Sets specified color as border color on '.$field_label,'woo-bundle-choice') ),
 					'type'=>'info_icon',
 				),
 			);
@@ -452,18 +466,21 @@ class Form_Builder implements Builder {
 				}
 
 				for($fi=0; $fi<$ftot; $fi++) {
-					$special_lbl = $ftot < 2 ? "" : ( $fi == 0 ? eowbc_lang("Active ") : eowbc_lang("Inactive ") );
+					/* Language function - comment */ 
+					$special_lbl = $ftot < 2 ? "" : ( $fi == 0 ? __("Active ") : __("Inactive ",'woo-bundle-choice') );
 					$field_id_suffix = ($fi==0?"_active":"_inactive");
 
 					$collection[$field_id.'_backcolor_lbl'.$field_id_suffix] = array(
-						'label'=>$field_label.' '.$special_lbl.eowbc_lang('Color'),
+						/* Language function - comment */ 
+						'label'=>$field_label.' '.$special_lbl.__('Color'),
 						'type'=>'label',
 						'sanitize'=>'sanitize_text_field',
 						// 'class'=>array('fluid'),
 						'size_class'=>array('eight','wide'),
 						'inline'=>true,
 
-						'info_icon'=>array( 'text'=>( array_key_exists($field_id.$fi, $info_text_overrides) ? $info_text_overrides[$field_id.$fi] : eowbc_lang('Sets specified color as background color on '.$field_label.( $special_lbl == "" ? "" : ' while its '.$special_lbl) ) ),
+						/* Language function - comment */ 
+						'info_icon'=>array( 'text'=>( array_key_exists($field_id.$fi, $info_text_overrides) ? $info_text_overrides[$field_id.$fi] : __('Sets specified color as background color on '.$field_label.( $special_lbl == "" ? "" : ' while its '.$special_lbl,'woo-bundle-choice') ) ),
 							'type'=>'info_icon',
 						),
 					);

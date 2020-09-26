@@ -274,13 +274,16 @@ class Setup_Wizard {
 			<input type="hidden" name="action" value="basic_config">
 			<div class="ui form segment">
 			  	<div class="inline fields">
+			  		/* Language function - comment */ 
 			    	<label><?php _e('Inventory Type','woo-bundle-choice'); ?></label>
 			    	<div class="field">
 			      		<div class="ui selection dropdown">
 						  	<input type="hidden" name="eo_wbc_inventory_type">
 						  	<i class="dropdown icon"></i>
+						  	/* Language function - comment */ 
 						  	<div class="default text"><?php _e('Inventory Type','woo-bundle-choice'); ?></div>
 						  	<div class="menu">
+						  		/* Language function - comment */ 
 							    <div class="item" data-value="jewelryfgdfgfg"><?php _e('Jewelry','woo-bundle-choice'); ?></div>
 							    <div class="item" data-value="clothing"><?php _e('Clothing','woo-bundle-choice'); ?></div>
 							    <div class="item" data-value="home_decor"><?php _e('Home Decor','woo-bundle-choice'); ?></div>
@@ -307,6 +310,7 @@ class Setup_Wizard {
 			<div class="ui form segment">
 			  	<div class="grouped fields">
 
+			  		/* Language function - comment */ 
 			    	<label><?php _e('Choose features','woo-bundle-choice'); ?></label>
 
 			    	<?php if(wbc()->sanitize->get('eo_wbc_inventory_type') == 'jewelry'): ?>	

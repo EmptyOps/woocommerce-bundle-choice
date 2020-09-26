@@ -9,7 +9,8 @@
         <div class="ui grid" style="width: fit-content !important;">
             <div class="column">3</div>
             <div class="column" style="text-align: left;">
-                <div class="description">Complete</div>
+                /* Language function - comment */ 
+                <div class="description"><?php _e('Complete','woo-bundle-choice'); ?></div>
                 <div class="title"><?php _e($preview_name); ?></div>
             </div>             
         </div>               

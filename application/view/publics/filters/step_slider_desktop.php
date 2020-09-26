@@ -9,7 +9,7 @@
 			<p>
 				<span class="ui header"><?php echo $filter['title']; ?></span>
 				<?php if($reset): ?>
-				&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_slider(event,'<?php echo $filter['slug'] ?>',0,<?php echo count(array_filter($items_slug)); ?>)">&nbsp;<u>reset</u></span>
+				&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_slider(event,'<?php echo $filter['slug'] ?>',0,<?php echo count(array_filter($items_slug)); ?>)">&nbsp;<u><?php _e('reset','woo-bundle-choice'); ?></u></span>
 				<?php endif; ?>
 			</p>
 

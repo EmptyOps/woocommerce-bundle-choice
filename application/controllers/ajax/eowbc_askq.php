@@ -22,8 +22,9 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_askq')){
 		$email_body.='Product_ID: '.wbc()->sanitize->post('product_id').$nl;		
 		$email_body.='Message: '.$nl.wbc()->sanitize->post('eowbc_askq_message').$nl;		
 
+		/* Language function - comment */
 		if(!empty(sanitize_email($email))){
-			wp_mail($email,'There is an inquiry for your diamond.', $email_body);
+			wp_mail($email,__('There is an inquiry for your diamond.','woo-bundle-choice'), $email_body);
 		}
 	}
 	echo true;
@@ -31,7 +32,8 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_askq')){
 }
 else {
 	$res["type"] = "error";
-	$res["msg"] = "Nonce validation failed";
+	/* Language function - comment */
+	$res["msg"] = __('Nonce validation failed','woo-bundle-choice');
 }
 
 

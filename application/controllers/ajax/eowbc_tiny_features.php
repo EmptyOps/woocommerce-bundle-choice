@@ -4,7 +4,8 @@
 *
 */
 
-$res = array( "type"=>"success", "msg"=>"Updated successfully!" );
+/* Language function - comment */ 
+$res = array( "type"=>"success", "msg"=>__('Updated successfully!','woo-bundle-choice') );
 
 if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_tiny_features')){
 
@@ -80,7 +81,8 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_tiny_features')){
 }
 else {
 	$res["type"] = "error";
-	$res["msg"] = "Nonce validation failed";
+	/* Language function - comment */ 
+	$res["msg"] = __('Nonce validation failed','woo-bundle-choice');
 }
 
  
