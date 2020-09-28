@@ -265,7 +265,7 @@ if ( ! class_exists( 'Appearance' ) ) {
 						),
 						'product_page_add_to_basket'=>array(
 							/* Language function - comment */
-							'label'=> __('','woo-bundle-choice')eowbc_lang('Add to Basket Text'),
+							'label'=> __('Add to Basket Text','woo-bundle-choice'),
 							'type'=>'text',
 							/*'validate'=>array('required'=>''),*/
 							'sanitize'=>'sanitize_text_field',

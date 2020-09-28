@@ -205,7 +205,7 @@ $this_plugin = '';
 									<a class="addons-button addons-button-solid" target="_blank" href="<?php echo $product->permalink; ?>" style="margin-left:0 !important;">
 										<?php if(!empty($product->price)){
 											/* Language function - comment */ 
-										    _e('Buy Now ($".$product->price.")','woo-bundle-choice');
+										    _e("Buy Now ($ $product->price)",'woo-bundle-choice');
 										  }else {
 										  	/* Language function - comment */ 
 										  	 _e('Get free access','woo-bundle-choice');
@@ -268,7 +268,6 @@ $this_plugin = '';
 								?>
 								</div>
 								<div>
-									/* Language function - comment */
 									<a class="addons-button addons-button-solid" target="_blank" href="<?php echo $product->permalink; ?>" style="margin-left:0 !important;"><?php _e('Download Now','woo-bundle-choice'); ?></a>							
 								</div>
 							</div>

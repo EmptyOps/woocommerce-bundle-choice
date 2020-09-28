@@ -110,7 +110,7 @@ if ( ! class_exists( 'Configuration' ) ) {
 							),
 						'config_buttons_conf'=>array(
 							    /* Language function - comment */
-								'label'=>__('Buttons','woo-bundle-choice')'',
+								'label'=>__('Buttons','woo-bundle-choice'),
 								'form'=>array(
 									'buttons_page'=>array(
 										    /* Language function - comment */
@@ -310,8 +310,7 @@ if ( ! class_exists( 'Configuration' ) ) {
 										'type'=>'accordian',
 										'section_type'=>'start',
 										'class'=>array('field'),
-										/* Language function - comment */
-										'label'=>__('<span class="ui large text">Advanced Setting</span>','woo-bundle-choice'),
+										'label'=>_e('<span class="ui large text">Advanced Setting</span>','woo-bundle-choice'),
 									),									
 									'config_clickable_breadcrumb'=>array(
 										/* Language function - comment */

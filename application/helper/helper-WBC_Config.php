@@ -20,7 +20,7 @@ class WBC_Config {
 	public function get_features() {
 		return array(
 			/* Language function - comment */ 
-			'ring_builder'=>____('Ring Builder','woo-bundle-choice'),
+			'ring_builder'=>__('Ring Builder','woo-bundle-choice'),
 			'api_integrations'=>__('Diamond APIs Integrations','woo-bundle-choice'),
 			'pair_maker'=>__('Pair Maker','woo-bundle-choice'),
 			'guidance_tool'=>__('Guidance Tool','woo-bundle-choice'),
