@@ -97,7 +97,7 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 							'parent_slug'=>'eowbc',
 							/* Language function - comment */
 							'title'=>__('Shortcode Filters','woo-bundle-choice').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Tiny Features'),
-							'menu_title'=>__('Shortcode Filters','woo-bundle-choice')e,
+							'menu_title'=>__('Shortcode Filters','woo-bundle-choice'),
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-shortcode-filters',
 							'template'=>'admin/menu/shortcode_filters',
@@ -246,8 +246,10 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 				add_action( 'admin_notices',function() use($primary_features,$active_feature){
 					//printf('<div class="ui negative message"><i class="close icon"></i><div class="header">Required</div><p>Since you enabled <strong>%s</strong> you need to complete setup to make it work on your website, either add sample data from General -> Sample Data tab or add Filters and Mapping in respective Tabs as well as finish the required settings in the General -> Buttons and General -> Navigations Steps( Breadcrumb ) Tabs</p></div>',$primary_features[$active_feature]);
 					
-					/* translators: %s: Feature name of the Woo Choice Plugin %s: URL to add sample data %s: URL to complete automation */					
-					printf(__('<div class="notice notice-error is-dismissible"><p>Since you enabled <strong>%s</strong> you need to complete setup to make it work on your website, either <a href="%s">add sample data</a> or simply <a href="%s">complete setup wizard</a>.</p></div>','woo-bundle-choice'),$primary_features[$active_feature],admin_url('admin.php?page=eowbc&eo_wbc_view_auto_jewel=1&f='.$active_feature),admin_url('admin.php?page=eowbc&wbc_setup=1'));
+					/* translators: %1s: Feature name of the Woo Choice Plugin */
+					/* translators: %2s: URL to add sample data */
+					/* translators: %3s: URL to complete automation */
+					printf(__('<div class="notice notice-error is-dismissible"><p>Since you enabled <strong>%1$s</strong> you need to complete setup to make it work on your website, either <a href="%2$s">add sample data</a> or simply <a href="%3$s">complete setup wizard</a>.</p></div>','woo-bundle-choice'),$primary_features[$active_feature],admin_url('admin.php?page=eowbc&eo_wbc_view_auto_jewel=1&f='.$active_feature),admin_url('admin.php?page=eowbc&wbc_setup=1'));
 
 					/*printf('<div class="notice notice-error is-dismissible"><p><strong>Required</strong> Since you enabled <strong>%s</strong> you need to complete setup to make it work on your website, either add sample data from General -> Sample Data tab or add Filters and Mapping in respective Tabs as well as finish the required settings in the General -> Buttons and General -> Navigations Steps( Breadcrumb ) Tabs</p></div>',$primary_features[$active_feature]);*/
 				});
@@ -273,8 +275,12 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 
 				add_action( 'admin_notices',function() use($message_type,$message_title,$error_message){
 					//printf('<div class="ui %s message"><i class="close icon"></i><div class="header">%s</div><p>'.constant('EOWBC_NAME').' have noticed <strong>%s</strong>, would you like to <a href="%s">have a look</a> or <a href="%s">report to the support</a>.</p></div>',$message_type,$message_title,$error_message,admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'),admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'));
-					/* translators: %s: notice type class %s: Mesaage title %s: Error and warning counts %s: URL to have a look %s: URL to report to the support */
-					printf(__('<div class="notice notice-%s is-dismissible"><p><strong>%s</strong> '.constant('EOWBC_NAME').' have noticed <strong>%s</strong>, would you like to <a href="%s">have a look</a> or <a href="%s">report to the support</a>.</p></div>','woo-bundle-choice'),$message_type,$message_title,$error_message,admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'),admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'));
+					/* translators: %1s: notice type class */
+					/* translators: %2s: Mesaage title */
+					/* translators: %3s: Error and warning counts */
+					/* translators: %4s: URL to have a look */
+					/* translators: %5s: URL to report to the support */
+					printf(__('<div class="notice notice-%1$s is-dismissible"><p><strong>%2$s</strong> '.constant('EOWBC_NAME').' have noticed <strong>%3$s</strong>, would you like to <a href="%4$s">have a look</a> or <a href="%5$s">report to the support</a>.</p></div>','woo-bundle-choice'),$message_type,$message_title,$error_message,admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'),admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'));
 				});
 
 			}
@@ -288,8 +294,11 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 				add_action( 'admin_notices',function() use($referrer,$message_type,$message_title){
 					//printf('<div class="ui %s message"><i class="close icon"></i><div class="header">%s</div><p>One user has reported mapping issue at this <a href="%s" target="_blank">link</a>, please ensure you have added mapping to connect products from first to second step. If you like assistance on this <a href="%s">you can contact support</a></p></div>',$message_type,$message_title,$referrer,admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'));
 					
-					/* translators: %s: Message class %s: Message title %s: Report link %s: Mapping assist link  */
-					printf(__('<div class="notice notice-%s is-dismissible"><p><strong>%s</strong> One user has reported mapping issue at this <a href="%s" target="_blank">link</a>, please ensure you have added mapping to connect products from first to second step. If you like assistance on this <a href="%s">you can contact support</a></p></div>','woo-bundle-choice'),$message_type,$message_title,$referrer,admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'));
+					/* translators: %1s: Message class */
+					/* translators: %2s: Message title */
+					/* translators: %3s: Report link */
+					/* translators: %4s: Mapping assist link  */
+					printf(__('<div class="notice notice-%1$s is-dismissible"><p><strong>%2$s</strong> One user has reported mapping issue at this <a href="%3$s" target="_blank">link</a>, please ensure you have added mapping to connect products from first to second step. If you like assistance on this <a href="%4$s">you can contact support</a></p></div>','woo-bundle-choice'),$message_type,$message_title,$referrer,admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'));
 
 				});
 

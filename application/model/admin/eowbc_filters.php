@@ -348,7 +348,7 @@ class Eowbc_Filters extends Eowbc_Model {
 				            	else {
 					                $res["type"] = "error";
 					                /* Language function - comment */ 
-					    			$res["msg"] = __('Filter already exists '.(($filter_data[$fdkey][$key_clean.'_add_enabled']==1) ? 'and enabled' : 'but is disabled, you should enable it.','woo-bundle-choice'));
+					    			$res["msg"] = __('Filter already exists '.(($filter_data[$fdkey][$key_clean.'_add_enabled']==1) ? 'and enabled' : 'but is disabled, you should enable it.'),'woo-bundle-choice');
 					                return $res;
 				            	}
 				            }

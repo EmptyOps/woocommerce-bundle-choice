@@ -25,6 +25,6 @@ class Shortcode_Filters extends Category {
         // parent::instance()->filter_prefix ='shortflt_';
 
         parent::init();                    
-        add_filter( 'eowbc_filter_widget_loader','__return_false');
+        add_filter( 'eowbc_filter_widget_loader','__return_true');
     }    
 }

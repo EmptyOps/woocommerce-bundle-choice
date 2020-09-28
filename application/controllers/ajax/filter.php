@@ -84,7 +84,7 @@ class Filter
 		                                'taxonomy' => 'product_cat',
 		                                'field' => 'slug',
 		                                'terms' =>array_filter(explode(',',wbc()->sanitize->get('cat_filter_'.$_category))),
-		                                'compare'=>__('EXISTS IN','woo-bundle-choice'); /* Language function - comment */
+		                                'compare'=>'EXISTS IN'
 		                            );                    
 		                        }
 		                    }  
@@ -95,7 +95,7 @@ class Filter
 		                        'taxonomy' => 'product_cat',
 		                        'field' => 'slug',
 		                        'terms' => explode(',',wbc()->sanitize->get('_current_category')),
-		                        'compare'=>__('EXISTS IN','woo-bundle-choice'); /* Language function - comment */
+		                        'compare'=>'EXISTS IN'
 		                    );
 		                }	
 		                //$query->set('tax_query',$tax_query);	                
@@ -116,7 +116,7 @@ class Filter
 			                                'taxonomy' => $attr,
 			                                'field' => 'term_id',
 			                                'terms' => $this->range($attr,wbc()->sanitize->get('min_'.$attr),wbc()->sanitize->get('max_'.$attr),true),
-			                                'compare'=>__('EXISTS IN','woo-bundle-choice');/* Language function - comment */
+			                                'compare'=>'EXISTS IN'
 			                            );
 			                        }
 			                        else {
@@ -125,7 +125,7 @@ class Filter
 			                                'taxonomy' => $attr,
 			                                'field' => 'term_id',
 			                                'terms' => $this->range($attr,wbc()->sanitize->get('min_'.$attr),wbc()->sanitize->get('max_'.$attr)),
-			                                'compare'=>__('EXISTS IN','woo-bundle-choice'); /* Language function - comment */
+			                                'compare'=>'EXISTS IN'
 			                            );
 			                        }                   
 			                    }
@@ -134,7 +134,7 @@ class Filter
 			                            'taxonomy' => $attr,
 			                            'field' => 'slug',
 			                            'terms' => array_filter(explode(',',wbc()->sanitize->get('checklist_'.$attr))),
-			                            'compare'=>__('EXISTS IN','woo-bundle-choice'); /* Language function - comment */
+			                            'compare'=>'EXISTS IN'
 			                        );     
 			                    } 
 			                }

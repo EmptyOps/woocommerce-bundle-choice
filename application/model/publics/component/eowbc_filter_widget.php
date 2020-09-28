@@ -92,7 +92,7 @@ class EOWBC_Filter_Widget {
 		?>
 		<!--Primary filter button that will only be visible on desktop/tablet-->
 		<!-- This widget is created with Wordpress plugin - WooCommerce Product bundle choice -->
-		<div id="loading" <?php wbc()->options->get_option('appearance_filters','appearance_filters_loader')?_e('style="display:none !important;"'):'';?>></div>	
+		<div id="loading" <?php !empty(wbc()->options->get_option('appearance_filters','appearance_filters_loader'))?_e('style="display:none !important;"'):'';?>></div>	
 		    							
 		<?php 
 			if(wp_is_mobile()) {
@@ -1464,7 +1464,11 @@ class EOWBC_Filter_Widget {
 					$query_list = explode(' ',wbc()->sanitize->get('ATT_LINK'));
 				}
 
-				$mark = in_array($term_item->id,$query_list);				
+				$mark = in_array($term_item->id,$query_list);
+				if(isset($_GET['test'])){
+					wbc()->common->pr($query_list);
+					var_dump($term_item->id);
+				}
 				if($non_edit==false && in_array($term_item->id,$query_list)) {
 					$non_edit=true;						
 				}
@@ -1882,7 +1886,7 @@ class EOWBC_Filter_Widget {
 		?>
 		<!--Primary filter button that will only be visible on desktop/tablet-->
 		<!-- This widget is created with Wordpress plugin - WooCommerce Product bundle choice -->
-		<div id="loading" <?php (wbc()->options->get_option('appearance_filters','appearance_filters_loader') OR apply_filters('eowbc_filter_widget_loader',true))?_e('style="display:none !important;"'):'';?>></div>
+		<div id="loading" <?php (wbc()->options->get_option('appearance_filters','appearance_filters_loader') OR apply_filters('eowbc_filter_widget_loader',false))?_e('style="display:none !important;"'):'';?>></div>
 		
 		<script type="text/javascript">
 			jQuery(document).ready(function(){

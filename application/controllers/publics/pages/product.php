@@ -599,10 +599,24 @@ class Product {
             $attr_pref=wbc()->options->get_option('mapping_prod_mapping_pref','prod_mapping_pref_attribute','or');
             $glue=($attr_pref === 'or' ? ',' : '+' );           
 
+            
+
             foreach ($taxonomy as  $_tax => $_tems) {
                 $filter_query["query_type_{$_tax}"] = $attr_pref;
                 $filter_query["filter_{$_tax}"] = implode($glue,array_unique(array_filter($_tems)));
-            }
+
+                $_tax_name = wc_attribute_taxonomy_name($_tax);
+                if(!empty($_tems) and is_array($_tems)){
+                    foreach ($_tems as $_term_slug) {
+                        $_term_data = get_term_by('slug',$_term_slug,$_tax_name);
+                        if(!empty($_term_data) and !is_wp_error($_term_data)){
+                            $this->att_link[] = $_term_data->term_id;
+                        }
+                    }
+                }
+
+                $this->att_link = array_unique($this->att_link);                
+            }            
             $link.=http_build_query($filter_query).'&';            
         }    
 
