@@ -367,9 +367,7 @@ class Form_Builder implements Builder {
 					'inline'=>true,
 
 					/* Language function - comment */ 
-					'info_icon'=>array( 'text'=>( array_key_exists("backcolor", $info_text_overrides) ? $info_text_overrides["backcolor"] : __('Sets specified color as background color on '.$field_label.( $special_lbl == "" ? "" : ' while its '.$special_lbl,'woo-bundle-choice') ) ),
-						'type'=>'info_icon',
-					),
+					'info_icon'=>array( 'text'=>( array_key_exists("backcolor", $info_text_overrides) ? $info_text_overrides["backcolor"] : __('Sets specified color as background color on '.$field_label.( $special_lbl == "" ? "" : ' while its '.$special_lbl),'woo-bundle-choice') ), 'type'=>'info_icon', ),
 				);
 
 				$collection[$field_id.'_backcolor'.$field_id_suffix] = array(
@@ -480,7 +478,7 @@ class Form_Builder implements Builder {
 						'inline'=>true,
 
 						/* Language function - comment */ 
-						'info_icon'=>array( 'text'=>( array_key_exists($field_id.$fi, $info_text_overrides) ? $info_text_overrides[$field_id.$fi] : __('Sets specified color as background color on '.$field_label.( $special_lbl == "" ? "" : ' while its '.$special_lbl,'woo-bundle-choice') ) ),
+						'info_icon'=>array( 'text'=>( array_key_exists($field_id.$fi, $info_text_overrides) ? $info_text_overrides[$field_id.$fi] : __('Sets specified color as background color on '.$field_label.( $special_lbl == "" ? "" : ' while its '.$special_lbl) ,'woo-bundle-choice') ),
 							'type'=>'info_icon',
 						),
 					);

@@ -97,7 +97,7 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 							'parent_slug'=>'eowbc',
 							/* Language function - comment */
 							'title'=>__('Shortcode Filters','woo-bundle-choice').' - '.constant('EOWBC_NAME'),	//eowbc_lang('Tiny Features'),
-							'menu_title'=>__('Shortcode Filters','woo-bundle-choice')e,
+							'menu_title'=>__('Shortcode Filters','woo-bundle-choice'),
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-shortcode-filters',
 							'template'=>'admin/menu/shortcode_filters',
