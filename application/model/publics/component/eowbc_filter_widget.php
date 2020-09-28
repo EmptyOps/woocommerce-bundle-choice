@@ -1897,7 +1897,7 @@ class EOWBC_Filter_Widget {
 		?>
 		<!--Primary filter button that will only be visible on desktop/tablet-->
 		<!-- This widget is created with Wordpress plugin - WooCommerce Product bundle choice -->
-		<div id="loading" <?php (wbc()->options->get_option('appearance_filters','appearance_filters_loader') OR apply_filters('eowbc_filter_widget_loader',true))?_e('style="display:none !important;"'):'';?>></div>
+		<div id="loading" <?php (wbc()->options->get_option('appearance_filters','appearance_filters_loader') OR apply_filters('eowbc_filter_widget_loader',false))?_e('style="display:none !important;"'):'';?>></div>
 		
 		<script type="text/javascript">
 			jQuery(document).ready(function(){
