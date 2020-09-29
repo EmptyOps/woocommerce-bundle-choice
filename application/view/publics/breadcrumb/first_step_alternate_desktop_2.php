@@ -12,7 +12,7 @@
         <div class="ui column left aligned">
             <?php if(empty($first)){ ?>
             /* Language function - comment */ 
-                <div class="title"><?php _e('Choose a '._e($first_name),'woo-bundle-choice'); ?></div>
+                <div class="title"><?php _e('Choose a ','woo-bundle-choice'); _e($first_name); ?></div>
             <?php } else { ?>
                 <div class="title"><?php _e($first_name); ?></div>
                 <div class="description"><?php _e($first->get_name()); ?> - <?php _e(wc_price($first->get_price())); ?></div>

@@ -136,7 +136,7 @@ box-shadow: none;">
 	        function eowbc_add_catat(index){
 
 	            if(process_flag=='cat' && index>=cat_value){
-	            	var msg = __('There is some error while finishing the category creation process, please contact Sphere Plugins Support for a quick fix on this if the problem persist.','woo-bundle-choice');
+	            	var msg = '<?php _e('There is some error while finishing the category creation process, please contact Sphere Plugins Support for a quick fix on this if the problem persist.','woo-bundle-choice'); ?>';
 
 	                //step 2 redirect;
 	                var data = {	                
@@ -170,7 +170,7 @@ box-shadow: none;">
 	                return false;
 	            } else if(process_flag=='attr' && index>=attr_value) {
 	            	/* Language function - comment */ 
-	            	var msg = __('There is some error while finishing the attribute creation process, please contact Sphere Plugins Support for a quick fix on this if the problem persist.','woo-bundle-choice');
+	            	var msg = '<?php _e('There is some error while finishing the attribute creation process, please contact Sphere Plugins Support for a quick fix on this if the problem persist.','woo-bundle-choice'); ?>'
 
 	            	//step 3 redirect;
 	            	var data = {	                
@@ -264,14 +264,14 @@ box-shadow: none;">
 	                if(cat_value>0){
 	                	process_flag = 'cat';
 	                	/* Language function - comment */ 
-	                	btn_label = __('Categories','woo-bundle-choice');
+	                	btn_label = '<?php _e('Categories','woo-bundle-choice'); ?>'
 	                	main_categories_size = <?php echo sizeof($_category);?>;
 	                	cat_value = <?php echo $sample_data_obj->get_model()->get_categories_size();?>;
 	                	btn_total = cat_value;
 	                } else if(attr_value>0){
 	                	process_flag = 'attr';
 	                	/* Language function - comment */ 
-	                	btn_label = __('Attributes','woo-bundle-choice');
+	                	btn_label = '<?php _e('Attributes','woo-bundle-choice'); ?>'
 	                	attr_value = <?php echo $sample_data_obj->get_model()->get_attributes_size();?>;
 	                	btn_total = attr_value;
 	                }

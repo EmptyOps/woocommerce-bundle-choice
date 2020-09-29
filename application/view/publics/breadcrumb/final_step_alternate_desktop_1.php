@@ -8,8 +8,7 @@
 <div class="ui equal width grid" style="width: 100%;margin-top: -1em !important;">
 
     <div class="column">3</div>
-    <div class="column" style="text-align: left;">
-    	/* Language function - comment */ 
+    <div class="column" style="text-align: left;">    	
         <div class="description"><?php _e('Complete','woo-bundle-choice'); ?></div>
         <div class="title"><?php echo $preview_name; ?></div>
         <div>&nbsp;</div>

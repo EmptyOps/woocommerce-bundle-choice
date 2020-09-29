@@ -169,7 +169,7 @@ class Options {
 
 	public function run() {
 		
-		add_action('wp_footer',function(){
+		add_action('woocommerce_single_product_summary',function(){
 			wbc()->theme->load('css','product');
         	wbc()->theme->load('js','product');
 			// Toggle Button
@@ -203,9 +203,37 @@ class Options {
 
 			$bg_hover_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_bg_color_hover','#DCC7C7');
 
+			if(!empty($toggle_status)){	
+				if(has_action('woocommerce_before_variations_form')){
+					add_action( 'woocommerce_before_variations_form',function( ) use($toggle_text){
+						wbc()->load->asset('css','fomantic/semantic.min');
+						wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
+						ob_start();
+						?>
+							<span id="wbc_variation_toggle" class="ui raised segment">
+								<?php _e($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i>						
+							</span>
+						<?php
+						echo ob_get_clean();
+					}, 10, 1 );	
+				} else {
+					wbc()->load->asset('css','fomantic/semantic.min');
+					wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
+					ob_start();
+					?>	
+						<script>
+							jQuery(document).ready(function(){
+								jQuery(".variations_form").before('<span id="wbc_variation_toggle" class="ui raised segment"><?php _e($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i></span>');		
+							});							
+						</script>
+					<?php
+					echo ob_get_clean();
+				}				
+			}
+
 			ob_start();
 			?>
-				<style type="text/css">
+				<style type="text/css" scoped="scoped">
 					.ui.mini.images .variable-item.image{
 						width: auto;						
 					}					
@@ -407,31 +435,7 @@ class Options {
 			<?php
 			echo ob_get_clean();
 			
-			if(!empty($toggle_status)){	
-				if(has_action('woocommerce_before_variations_form')){
-					add_action( 'woocommerce_before_variations_form',function( ) use($toggle_text){
-						wbc()->load->asset('css','fomantic/semantic.min');
-						wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
-						ob_start();
-						?>
-							<span id="wbc_variation_toggle" class="ui raised segment">
-								<?php _e($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i>						
-							</span>
-						<?php
-						echo ob_get_clean();
-					}, 10, 1 );	
-				} else {
-					wbc()->load->asset('css','fomantic/semantic.min');
-					wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
-					ob_start();
-					?>	
-						<script>
-							jQuery(".variations_form").before('<span id="wbc_variation_toggle" class="ui raised segment"><?php _e($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i></span>');	
-						</script>
-					<?php
-					echo ob_get_clean();
-				}				
-			}
+			
 		});
 		add_filter( 'woocommerce_dropdown_variation_attribute_options_html',function($html, $args){
                               
