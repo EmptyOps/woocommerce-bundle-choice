@@ -10,7 +10,7 @@
         <div class="ui grid">
             <div class="column"><?php echo $order; ?></div>
             <div class="column" style="text-align: left;">
-                <div class="description">Choose a</div>
+                <div class="description"><?php _e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_choose_prefix_text',__('Choose a','woo-bundle-choice'),true,true)); ?></div>
                 <div class="title"><?php _e($second_name) ?></div>
             </div>
         </div>

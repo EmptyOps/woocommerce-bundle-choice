@@ -29,7 +29,7 @@ class EOWBC_Filter_Widget {
 		
 		$this->_category = '';
 		$current_category=$this->_category;
-		$this->eo_wbc_filter_enque_asset();
+		
 
 		$prefix = "";
 		
@@ -46,6 +46,7 @@ class EOWBC_Filter_Widget {
 		$adv_ordered_filter=array();
 
 		if(!(is_array($filter) xor is_object($filter)) or empty($filter)) return false;
+		$this->eo_wbc_filter_enque_asset();
 
 		//map fields to names as per older version, applies to this code block only. 
 		$field_to_old_fields = array(
@@ -526,6 +527,30 @@ class EOWBC_Filter_Widget {
 				<?php
 				echo ob_get_clean();
 			}
+
+			if(wbc()->options->get_option('filters_filter_setting','filter_setting_alternate_slider_ui', false )){
+
+				ob_start();
+				?>
+					<style type="text/css">
+						.ui.labeled.ticked.slider>.labels .label:after{
+							height: 6px !important;
+						    width: 3px !important;
+						    top: -6px !important;
+						    background: #ffffff !important;
+						}
+						.ui.slider .inner {
+						    z-index:0 !important;
+						}
+						/*.ui.labeled.slider>.labels .label{
+							-webkit-transform: translate(-50%,70%) !important;
+							transform: translate(-50%,70%) !important;
+						}*/
+
+					</style>
+				<?php
+				echo ob_get_clean();
+			}	
 
 			/*if(array_intersect(array(wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts'),wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts')),array('fc4','sc4'))){*/
 				ob_start();
@@ -1018,7 +1043,7 @@ class EOWBC_Filter_Widget {
 		
 		/*$min = $curr_prefix.$min.$curr_postfix;
 		$max = $curr_prefix.$max.$curr_postfix;
-*/
+		*/
 		array_push($this->__filters,array(
 										"type"=>"hidden",
 										"name"=>"min_price",
@@ -1833,6 +1858,8 @@ class EOWBC_Filter_Widget {
 
 		if(!(is_array($filter) xor is_object($filter)) or empty($filter)) return false;
 
+		$this->eo_wbc_filter_enque_asset();
+
 		//map fields to names as per older version, applies to this code block only. 
 		$field_to_old_fields = array(
 			$prefix.'_fconfig_filter'=>'name',
@@ -1991,8 +2018,7 @@ class EOWBC_Filter_Widget {
 
 				require_once 'includes/dropdown_filter.php';				
 
-			} else {
-				$this->eo_wbc_filter_enque_asset();	
+			} else {					
 				$this->get_widget();				
 			}
 			

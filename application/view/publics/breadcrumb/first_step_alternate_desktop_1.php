@@ -13,7 +13,7 @@
         <div class="column">1</div>
         <div class="column" style="text-align: left;">                       
             <?php if(empty($first)):?>        
-                <div class="description">Choose a</div>
+                <div class="description"><?php _e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_choose_prefix_text',__('Choose a','woo-bundle-choice'),true,true)); ?></div>
                 <div class="title"><?php echo $first_name; ?></div>
                 <div>&nbsp;</div>
             <?php else:?>

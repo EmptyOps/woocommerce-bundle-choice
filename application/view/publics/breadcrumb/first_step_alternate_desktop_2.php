@@ -11,7 +11,7 @@
         <div class="ui column left aligned"><?php echo $order; ?></div>
         <div class="ui column left aligned">
             <?php if(empty($first)){ ?>
-                <div class="title">Choose a <?php _e($first_name); ?></div>
+                <div class="title"><?php _e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_choose_prefix_text',__('Choose a','woo-bundle-choice'),true,true)); ?> <?php _e($first_name); ?></div>
             <?php } else { ?>
                 <div class="title"><?php _e($first_name); ?></div>
                 <div class="description"><?php _e($first->get_name()); ?> - <?php _e(wc_price($first->get_price())); ?></div>
