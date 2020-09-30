@@ -206,24 +206,24 @@ class Options {
 			if(!empty($toggle_status)){	
 				if(has_action('woocommerce_before_variations_form')){
 					add_action( 'woocommerce_before_variations_form',function( ) use($toggle_text){
-						wbc()->load->asset('css','fomantic/semantic.min');
+						wbc()->load->asset('css','fomantic/fomantic.min');
 						wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
 						ob_start();
 						?>
-							<span id="wbc_variation_toggle" class="ui raised segment">
+							<span class="wbc"><span id="wbc_variation_toggle" class="ui raised segment">
 								<?php _e($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i>						
-							</span>
+							</span></span>
 						<?php
 						echo ob_get_clean();
 					}, 10, 1 );	
 				} else {
-					wbc()->load->asset('css','fomantic/semantic.min');
+					wbc()->load->asset('css','fomantic/fomantic.min');
 					wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
 					ob_start();
 					?>	
 						<script>
 							jQuery(document).ready(function(){
-								jQuery(".variations_form").before('<span id="wbc_variation_toggle" class="ui raised segment"><?php _e($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i></span>');		
+								jQuery(".variations_form").before('<span class="wbc"><span id="wbc_variation_toggle" class="ui raised segment"><?php _e($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i></span></span>');		
 							});							
 						</script>
 					<?php
@@ -234,35 +234,35 @@ class Options {
 			ob_start();
 			?>
 				<style type="text/css" scoped="scoped">
-					.ui.mini.images .variable-item.image{
+					.wbc .ui.mini.images .variable-item.image{
 						width: auto;						
 					}					
-					.image-variable-item{
+					.wbc .image-variable-item{
 						border: none !important;
 						border-bottom: 2px solid transparent !important;
 					}
-					.image-variable-item.selected,.image-variable-item:hover{	        			
+					.wbc .image-variable-item.selected,.image-variable-item:hover{	        			
 						box-shadow: none !important;        			
 	        			border-bottom: 2px <?php _e($border_hover_color) ?> solid !important;
 	        		}
-					.image_text-variable-item{
+					.wbc .image_text-variable-item{
 						border: none !important;
 					}
-					.image_text-variable-item:not(.selected) div{
+					.wbc .image_text-variable-item:not(.selected) div{
 						visibility: hidden;
 					}
 
-					.image_text-variable-item:hover div{
+					.wbc .image_text-variable-item:hover div{
 						visibility: visible;
 					}
 
-					.image_text-variable-item.selected,.image_text-variable-item:hover{	        			
+					.wbc .image_text-variable-item.selected,.image_text-variable-item:hover{	        			
 						box-shadow: none !important;
 	        		}
 					.woocommerce .summary.entry-summary table.variations tr{
 						width: auto !important;
 					}
-					.rotate-up{
+					.wbc .rotate-up{
 						-webkit-animation:spin-up 0.3s linear ;
 					    -moz-animation:spin-up 0.3s linear ;
 					    animation:spin-up 0.3s linear ;
@@ -272,7 +272,7 @@ class Options {
 					@-webkit-keyframes spin-up { 100% { -webkit-transform: rotate(-180deg); } }
 					@keyframes spin-up { 100% { -webkit-transform: rotate(-180deg); transform:rotate(-180deg); } }
 
-					.rotate-down{
+					.wbc .rotate-down{
 						-webkit-animation:spin-down 0.3s linear;
 					    -moz-animation:spin-down 0.3s linear;
 					    animation:spin-down 0.3s linear;
@@ -297,7 +297,7 @@ class Options {
 							transform:rotate(360deg); } 
 						}
 
-					#wbc_variation_toggle
+					.wbc #wbc_variation_toggle
 					{
 						padding: 0.7em;
 						margin-bottom: 0.7em;
@@ -308,47 +308,47 @@ class Options {
 						cursor: pointer;
 						border-radius: 1px !important;
 					} 
-					table.variations{
+					.wbc table.variations{
 						padding: 5px;
 						border: 1px solid #5e5c5b;
 					}
-					table.variations td{
+					.wbc table.variations td{
 						/*display: table-cell !important;*/
 						border: none !important;
 					}
-					table.variations td:first-child{
+					.wbc table.variations td:first-child{
 						/*border-right: 1px solid #5e5c5b !important;*/
 						/*text-align: center;*/
 					}
 					
-					.ui.images {
+					.wbc .ui.images {
 							width: 100% !important;
 							margin: auto !important;
 							float: none !important;
 						}
 					}
-					table.variations {
+					.wbc table.variations {
 					    table-layout: auto !important;
 					    margin: inherit !important;
 					}
-					table.variations td.label{
+					.wbc table.variations td.label{
 						display: none !important;
 					}
-					table.variations .value{
+					.wbc table.variations .value{
 						padding-left: 1rem !important;
 					}
-	        		.variable-items-wrapper{
+	        		.wbc .variable-items-wrapper{
 	        			list-style: none;
 	        			display: table-cell !important;	        			
 	        		}
-	        		.ui.red.ribbon.label{
+	        		.wbc .ui.ribbon.label{
 	        			margin-bottom: 5px !important;
 	        		}
-	        		.variable-items-wrapper .variable-item div{
+	        		.wbc .variable-items-wrapper .variable-item div{
 	        			margin: auto;
 	        			display: block;
 	        		}
-	        		.variable-items-wrapper .variable-item{        			
+	        		.wbc .variable-items-wrapper .variable-item{        			
 	        			/*display: inline-table;*/
 	        			height: <?php _e($dimention); ?>;
 	        			width: <?php _e($dimention); ?>;
@@ -362,32 +362,33 @@ class Options {
 	        			border-radius: <?php _e($border_radius); ?>;
 	        			overflow: hidden;
 	        		}	
-	        		.variable-items-wrapper .variable-item:hover,.variable-items-wrapper .selected{
+	        		.wbc .variable-items-wrapper .variable-item:hover,.variable-items-wrapper .selected{
 	        			box-shadow:0px 0px <?php _e($border_hover_width) ?> <?php _e($border_hover_color) ?>;        			
 	        			border: 1px <?php _e($border_hover_color) ?> solid;
 	        		}
-	        		ul.variable-items-wrapper{
+	        		.wbc ul.variable-items-wrapper{
 	        			margin: 0px;
 	        		}
-	        		.variable-item-color-fill,.variable-item-span{        			
+	        		.wbc .variable-item-color-fill,.variable-item-span{        			
 	        			height: <?php _e($dimention); ?>;
 	        			width: 100%;
 	        			line-height: <?php _e($dimention); ?>;
 	        		}
-	        		.select2,.select3-selection{
+	        		.wbc .select2,.select3-selection{
 	        			display: none !important;
 	        		}
-	        		.button-variable-item{
+	        		.wbc .button-variable-item{
 	        			background-color: <?php _e($bg_color); ?>;
 	        			color: <?php _e($font_color); ?>;
 	        		}
-	        		.button-variable-item:hover{
+	        		.wbc .button-variable-item:hover{
 	        			background-color: <?php _e($bg_hover_color); ?>;
 	        			color: <?php _e($font_hover_color); ?>;	
 	        		}
 	        	</style>
 	        	<script>
 	        		jQuery(document).ready(function($){
+	        			jQuery(".variations_form").addClass('wbc');
 	        			jQuery(".dropdown").dropdown().on('change',function(){
 	        				var target_selector =  $('#'+$(this).find('input[type="hidden"]').data('id'));
 	        				target_selector.val($(this).find('input[type="hidden"]').val());
