@@ -206,3 +206,10 @@ function reset_checkbox(e,selector){
 	jQuery(selector).filter(":not(:checked)").trigger('click');
 	return false;
 }
+
+function reset_button(e,selector){
+	e.preventDefault();
+	e.stopPropagation()
+	jQuery(selector).filter(".eo_wbc_button_selected").trigger('click');
+	return false;
+}

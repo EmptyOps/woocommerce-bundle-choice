@@ -152,6 +152,30 @@ if ( ! class_exists( 'Appearance' ) ) {
 						'label'=>'Filters',
 						'form'=>array_merge( \eo\wbc\model\admin\Form_Builder::instance()->ui_controls_collection( "header", "Header", $hide_defaults=array("text","backcolor","hovercolor","bordercolor","radius"), $additional_fields=array(), $info_text_overrides=array("font"=>"Font family to be used in filters", "textcolor"=>"Color for headers in filters widget") ), \eo\wbc\model\admin\Form_Builder::instance()->ui_controls_collection( "labels", "Labels", $hide_defaults=array("text","backcolor","hovercolor","bordercolor","radius","font"), $additional_fields=array(), $info_text_overrides=array("font"=>"Font family to be used in filters") ),  \eo\wbc\model\admin\Form_Builder::instance()->ui_controls_collection( "rest_filters", "rest_filters", $hide_defaults=array("text","textcolor","backcolor","hovercolor","bordercolor","radius","font"), $additional_fields=array( array("field_id"=>"slider_nodes","field_label"=>"Slider Nodes","type"=>"color"), array("field_id"=>"slider_track","field_label"=>"Slider Track","type"=>"color"), array("field_id"=>"icon_size","field_label"=>"Icon Size","type"=>"text"), array("field_id"=>"icon_label_size","field_label"=>"Icon Label Size","type"=>"text") ), $info_text_overrides=array("slider_track"=>"Sets the specified color to slider's tracks between nodes", "icon_size"=>"Define size of icon at filter in px", "icon_label_size"=>"Define size of icon label in rem"), $special_type=null, $default_values = array("icon_size"=>"50px", "icon_label_size"=>"0.78571429rem") ),
 							array(
+								'appearance_filters_slider_font_size'=>array(
+									'label'=>'Slider font size',
+									'type'=>'text',
+									'sanitize'=>'sanitize_text_field',
+									'value'=>wbc()->options->get_option('appearance_filters','appearance_filters_slider_font_size','0.75em',true,true),									
+									'is_id_as_name'=>true,
+									'class'=>array(),
+								),
+								'appearance_filters_bg_primary'=>array(
+									'label'=>'Primary filter background color',
+									'type'=>'color',
+									'sanitize'=>'sanitize_hex_color',
+									'value'=>wbc()->options->get_option('appearance_filters','appearance_filters_bg_primary','#ffffff',true,true),									
+									'is_id_as_name'=>true,
+									'class'=>array(),
+								),
+								'appearance_filters_bg_advance'=>array(
+									'label'=>'Advance filter background color',
+									'type'=>'color',
+									'sanitize'=>'sanitize_hex_color',
+									'value'=>wbc()->options->get_option('appearance_filters','appearance_filters_bg_advance','#f3f4f5',true,true),
+									'is_id_as_name'=>true,
+									'class'=>array(),
+								),
 								'appearance_filters_alternate_price_filter_first'=>array(
 									'label'=>'Alternate price slider(First Category)',
 									'type'=>'checkbox',
