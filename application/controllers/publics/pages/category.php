@@ -102,7 +102,14 @@ class Category {
             $cart=(array)json_decode($cart);
             
             if(is_array($cart) OR is_object($cart)) {
-                   
+                
+                $variation_data = array();
+                foreach($cart as $cart_key=>$cart_value){
+                    if(substr($cart_key, 0, strlen('attribute_')) === 'attribute_'){
+                        $variation_data[$cart_key]=$cart_value;
+                    }
+                }   
+
                 //if product belongs to first target;
                 if (wbc()->options->get_option('configuration','first_slug')==$cart['eo_wbc_target']) {
 
@@ -111,7 +118,8 @@ class Category {
                             'FIRST'=>array(
                                             $cart['eo_wbc_product_id'],
                                             $cart['quantity'],
-                                            (isset($cart['variation_id'])?$cart['variation_id']:NULL)
+                                            (isset($cart['variation_id'])?$cart['variation_id']:NULL),
+                                            'variation'=>$variation_data,
                                         ),
                             'SECOND'=>NULL
                                                 
@@ -126,7 +134,8 @@ class Category {
                             'SECOND'=>array(
                                             $cart['eo_wbc_product_id'],
                                             $cart['quantity'],
-                                            (isset($cart['variation_id'])?$cart['variation_id']:NULL)
+                                            (isset($cart['variation_id'])?$cart['variation_id']:NULL),
+                                            'variation'=>$variation_data,
                                         )
                     ));
                 }                                              

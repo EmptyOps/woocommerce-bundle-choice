@@ -37,7 +37,8 @@ class View_Order {
             global $wpdb,$sets;
             $query='select * from `'.$wpdb->prefix.'eo_wbc_order_maps` where order_id='.$order_id;
             $sets=$wpdb->get_row($query,'ARRAY_A');
-            $sets=(json_decode($sets['order_map']));            
+            $sets=(json_decode($sets['order_map']));
+            //wbc()->common->pr($sets);            
             ?>
                 <script type="text/javascript">
                 jQuery(document).ready(function(){
@@ -63,6 +64,21 @@ class View_Order {
 
     public function get_set($set)
     {   
+        
+        if(!empty($set[0])){
+          $set[0] = (array) $set[0];    
+              if(!isset($set[0]['variation'])){
+                $set[0]['variation'] = array();
+              }
+          }
+
+          if(!empty($set[1])){
+              $set[1] = (array) $set[1];    
+              if(!isset($set[1]['variation'])){
+                $set[1]['variation'] = array();
+              }
+          }
+        
         $price=0;
         $row="<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><tr>".
             "<td class=\'eo_wbc_row\'>".
@@ -70,7 +86,7 @@ class View_Order {
                   wbc()->wc->eo_wbc_get_product($set[0][0])->get_image("thumbnail")."&nbsp;&nbsp;<p>".
                   wbc()->wc->eo_wbc_get_product($set[0][0])->get_title().
                   ($set[0][2]  ? "<br/>&nbsp; -&nbsp;".
-                    implode(',',wbc()->wc->eo_wbc_get_product_variation_attributes($set[0][2])):'').
+                    implode(',',wbc()->wc->eo_wbc_get_product_variation_attributes($set[0][2],(array)$set[0]['variation'])):'').
                   "&nbsp;X&nbsp;{$set[0][1]}</p>";
                     $price+=get_post_meta($set[0][2]?$set[0][2]:$set[0][0],'_price',TRUE)*$set[0][1];
                               
@@ -80,7 +96,7 @@ class View_Order {
                 "&nbsp;&nbsp;<p>".
                 wbc()->wc->eo_wbc_get_product($set[1][0])->get_title().
                 ($set[1][2]  ? "<br/>&nbsp; -&nbsp;".
-                  implode(',',wbc()->wc->eo_wbc_get_product_variation_attributes($set[1][2])):'').
+                  implode(',',wbc()->wc->eo_wbc_get_product_variation_attributes($set[1][2],(array)$set[1]['variation'])):'').
                 "&nbsp;X&nbsp;{$set[1][1]}</p>";
             $price+=get_post_meta($set[1][2]?$set[1][2]:$set[1][0],'_price',TRUE)*$set[1][1];
         }

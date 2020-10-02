@@ -19,17 +19,17 @@ class Order_Received {
 
     public function init() {
          add_action('woocommerce_thankyou',function($order_id){      
-            $sets=wbc()->session->get('EO_WBC_MAPS');
+            $sets=wbc()->session->get('EO_WBC_MAPS');            
             $maps=array();
             if(!empty($sets) and (is_array($sets) or is_object($sets)) )
             {
                 foreach ($sets as $set)
                 {
                     $map=array();                    
-                        $map[]=array($set["FIRST"][0],$set["FIRST"][1],$set["FIRST"][2]);
+                        $map[]=array($set["FIRST"][0],$set["FIRST"][1],$set["FIRST"][2],'variation'=>$set["FIRST"]['variation']);
                         if($set["SECOND"])
                         {
-                            $map[]=array($set["SECOND"][0],$set["SECOND"][1],$set["SECOND"][2]);
+                            $map[]=array($set["SECOND"][0],$set["SECOND"][1],$set["SECOND"][2],'variation'=>$set["SECOND"]['variation']);
                         }
                         else 
                         {

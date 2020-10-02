@@ -21,11 +21,11 @@
         </td>
         <td data-title="Product">           
             <p><?php _e($first->get_title().
-                ($cart['FIRST'][2]  ? "<br/>&nbsp; - &nbsp;".implode(',',wbc()->wc->eo_wbc_get_product_variation_attributes($cart['FIRST'][2])) :'')); ?></p>          
+                ($cart['FIRST'][2]  ? "<br/>&nbsp; - &nbsp;".implode(',',wbc()->wc->eo_wbc_get_product_variation_attributes($cart['FIRST'][2],$cart['FIRST']['variation'])) :'')); ?></p>          
         
             <?php if($cart['SECOND']):?>
             <p><?php _e($second->get_title().
-                   ($cart['SECOND'][2] ? "<br/>&nbsp; - &nbsp;".implode(',',wbc()->wc->eo_wbc_get_product_variation_attributes($cart['SECOND'][2])):'')); ?></p>
+                   ($cart['SECOND'][2] ? "<br/>&nbsp; - &nbsp;".implode(',',wbc()->wc->eo_wbc_get_product_variation_attributes($cart['SECOND'][2],$cart['SECOND']['variation'])):'')); ?></p>
             <?php endif; ?>                                 
         </td>
         <td data-title="Price"> 

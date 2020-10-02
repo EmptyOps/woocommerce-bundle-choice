@@ -180,7 +180,7 @@ class Preview {
                                 $cart_details['FIRST'][0],
                                 $cart_details['FIRST'][1],
                                 $cart_details['FIRST'][2],
-                                is_null($cart_details['FIRST'][2])?null:wbc()->wc->eo_wbc_get_product_variation_attributes($cart_details['FIRST'][2])
+                                is_null($cart_details['FIRST'][2])?null:wbc()->wc->eo_wbc_get_product_variation_attributes($cart_details['FIRST'][2],$cart_details['FIRST']['variation'])
                             );                  
                 if($FIRT_CART_ID)
                 {
@@ -188,7 +188,7 @@ class Preview {
                                 $cart_details['SECOND'][0],
                                 $cart_details['SECOND'][1],
                                 $cart_details['SECOND'][2],
-                                is_null($cart_details['SECOND'][2])?null:wbc()->wc->eo_wbc_get_product_variation_attributes($cart_details['SECOND'][2])
+                                is_null($cart_details['SECOND'][2])?null:wbc()->wc->eo_wbc_get_product_variation_attributes($cart_details['SECOND'][2],$cart_details['SECOND']['variation'])
                             );
                     if($SECOND_CART_ID)
                     {
@@ -225,17 +225,25 @@ class Preview {
             
             $cart=str_replace("\\",'',$cart);
             $cart=(array)json_decode($cart);
+            //wbc()->common->pr($cart);
             if(is_array($cart) OR is_object($cart)){
 
                 //if product belongs to first target;
-                $eo_wbc_sets=wbc()->session->get('EO_WBC_SETS',array());                
+                $eo_wbc_sets=wbc()->session->get('EO_WBC_SETS',array());
+                $variation_data = array();
+                foreach($cart as $cart_key=>$cart_value){
+                    if(substr($cart_key, 0, strlen('attribute_')) === 'attribute_'){
+                        $variation_data[$cart_key]=$cart_value;
+                    }
+                }                
                 // if (get_option('eo_wbc_first_slug')==$cart['eo_wbc_target']) {
                 if (wbc()->options->get_option('configuration','first_slug')==$cart['eo_wbc_target']) {
 
                     $eo_wbc_sets['FIRST']=array(
                                         $cart['eo_wbc_product_id'],
                                         $cart['quantity'],
-                                        (isset($cart['variation_id'])?$cart['variation_id']:NULL)
+                                        (isset($cart['variation_id'])?$cart['variation_id']:NULL),
+                                        'variation'=>$variation_data,
                                     );
                 }
                 //if product belongs to second target;
@@ -245,7 +253,8 @@ class Preview {
                      $eo_wbc_sets['SECOND']=array(
                                         $cart['eo_wbc_product_id'],
                                         $cart['quantity'],
-                                        (isset($cart['variation_id'])?$cart['variation_id']:NULL)                                            
+                                        (isset($cart['variation_id'])?$cart['variation_id']:NULL),
+                                        'variation'=>$variation_data,                          
                                     );
                 }
                 wbc()->session->set('EO_WBC_SETS',$eo_wbc_sets);
@@ -289,7 +298,7 @@ class Preview {
                 }
             }
             
-            $set=wbc()->session->get('TMP_EO_WBC_SETS',FALSE);                        
+            $set=wbc()->session->get('TMP_EO_WBC_SETS',FALSE);            
             if(!empty($set)){
 
                 $first=wbc()->wc->eo_wbc_get_product((int)($set['FIRST'][2]?$set['FIRST'][2]:$set['FIRST'][0]));
@@ -312,7 +321,7 @@ class Preview {
                           '</div>'.
                         '<div class="content">'.
                             '<div class="header">'.($first->get_title()).'</div>'.
-                            '<div class="meta">'.__($set['FIRST'][2]?"<br/>".implode('<br/>',wbc()->wc->eo_wbc_get_product_variation_attributes($set['FIRST'][2])):'').
+                            '<div class="meta">'.__($set['FIRST'][2]?"<br/>".implode('<br/>',wbc()->wc->eo_wbc_get_product_variation_attributes($set['FIRST'][2],$set['FIRST']['variation'])):'').
                             '</div>'.
                         '</div>'.
                         '<div class="extra content">'.
@@ -334,7 +343,7 @@ class Preview {
                         '</div>'.
                         '<div class="content">'.
                             '<div class="header">'.__($second->get_title()).'</div>'.
-                            '<div class="meta">'.__($set['SECOND'][2]?"<br/>".implode('<br/>',wbc()->wc->eo_wbc_get_product_variation_attributes($set['SECOND'][2])):'').
+                            '<div class="meta">'.__($set['SECOND'][2]?"<br/>".implode('<br/>',wbc()->wc->eo_wbc_get_product_variation_attributes($set['SECOND'][2],$set['SECOND']['variation'])):'').
                             '</div>'.
                         '</div>'.
                         '<div class="extra content">'.

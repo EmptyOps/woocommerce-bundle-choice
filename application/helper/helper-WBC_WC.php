@@ -105,7 +105,7 @@ class WBC_WC {
         }
     }
 
-    public static function eo_wbc_get_product_variation_attributes( $variation_id ) {
+    public static function eo_wbc_get_product_variation_attributes( $variation_id ,$variation_data=array()) {
 
         if(is_null($variation_id))
         {
@@ -119,9 +119,9 @@ class WBC_WC {
                             :
                             self::eo_wbc_support_get_product_variation_attributes($variation_id);   
 
-            $var_attrs=array();                
+            $var_attrs=array();                            
             foreach ($variation_meta as $taxonomy => $term_slug) {
-
+                $attribute_taxonomy = $taxonomy;
                 $taxonomy=substr($taxonomy,strlen('attribute_'));
                 $taxonomy_name='';
                 
@@ -132,7 +132,11 @@ class WBC_WC {
                         $taxonomy_name=$tax->attribute_label;
                     }
                 }
-                $term_data = get_term_by('slug',$term_slug,$taxonomy);
+                if(empty($term_slug) and !empty($variation_data) and isset($variation_data[$attribute_taxonomy])){
+                    $term_slug = (string)$variation_data[$attribute_taxonomy];
+                }
+
+                $term_data = get_term_by('slug',$term_slug,$taxonomy);                
                 if(!is_wp_error($term_data) and !empty($term_data->name)){
                     $var_attrs[]=($taxonomy_name?$taxonomy_name.': ':'').$term_data->name;    
                 }  
