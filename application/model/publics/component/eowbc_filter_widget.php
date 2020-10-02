@@ -315,7 +315,10 @@ class EOWBC_Filter_Widget {
 					#advance_filter,#apply_filter,#reset_filter{
 						width: auto !important;
 					}
-					.ui.slider.wbc .inner .thumb,#advance_filter,#apply_filter{
+					#advance_filter,#apply_filter{
+						background-color:".wbc()->options->get_option('appearance_wid_btns','button_backcolor_active',$active_color)." !important;
+					}
+					.ui.slider.wbc .inner .thumb{
 						background-color:".wbc()->options->get_option('appearance_filters','slider_nodes_backcolor_active',$active_color)/*get_option('eo_wbc_filter_config_slidernode_color','')*/." !important;
 					}
 					.eo-wbc-container.filters, .eo-wbc-container.filters .ui.header{
