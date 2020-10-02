@@ -15,23 +15,23 @@ box-shadow: none;">
 	<div class="ui ordered fluid steps">
       	<div class=" <?php echo $step == 1 ? 'active':( $step > 1 ? 'completed':''); ?> step">		        	
         	<div class="content">
-        		/* Language function - comment */ 
+        		 <!-- Language function - comment -->
           		<div class="title"><?php _e('Inventory','woo-bundle-choice'); ?></div>
           		<div class="description"><?php _e('Choose inventory','woo-bundle-choice'); ?></div>
         	</div>
       	</div>
       	<div class="<?php echo $step == 2 ? 'active':( $step > 2 ? 'completed':''); ?> step">
 	        <div class="content">
-	        	/* Language function - comment */ 
+	        	 <!-- Language function - comment  -->
 		        <div class="title"><?php _e('Features','woo-bundle-choice'); ?></div>
           		<div class="description"><?php _e('Choose Features to be enabled','woo-bundle-choice'); ?></div>
         	</div>
       	</div>
       	<div class="<?php echo $step == 3 ? 'active':( $step > 3 ? 'completed':''); ?> step">			        
 	        <div class="content">
-	        	/* Language function - comment */ 
+	        	 <!-- Language function - comment  -->
 		        <div class="title"><?php _e('Sample Data','woo-bundle-choice'); ?></div>
-		        /* Language function - comment */ 
+		        <!-- Language function - comment -->
           		<div class="description"><?php _e('Add sample products and Complete','woo-bundle-choice'); ?></div>
         	</div>
       	</div>

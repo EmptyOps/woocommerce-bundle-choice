@@ -50,8 +50,7 @@ class Setting_status {
 								'type'=>'checkbox',
 								'sanitize'=>'sanitize_text_field',
 								'value'=>array(),
-								'options'=>array_replace($__features,array(	
-									/* Language function - comment */ 								
+								'options'=>array_replace($__features,array(									
 									'rapnet_api'=>__('Rapnet (You will need paid <a href="https://sphereplugins.com/product/woocommerce-rapnet-integration-extension/" target="_blank">extension</a>)','woo-bundle-choice'),
 									'glowstar_api'=>__('GlowStar Diamond API (API service is free, but you will need paid <a href="https://sphereplugins.com/product/diamond-api-integration/" target="_blank">extension</a>)','woo-bundle-choice'),
 									'jbdiamond_api'=>__('JB Diamond API (API service is free, but you will need paid <a href="https://sphereplugins.com/product/diamond-api-integration/" target="_blank">extension</a>)','woo-bundle-choice'),

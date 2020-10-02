@@ -35,7 +35,7 @@
         <div class="ui grid" style="width: fit-content !important;">
             <div class="column"><?php echo $order; ?></div>
             <div class="column" style="text-align: left;"> 
-                /* Language function - comment */                        
+                <!-- /* Language function - comment */ -->
                 <div class="description"><?php _e('Choose a','woo-bundle-choice'); ?></div>
                 <div class="title"><?php _e($first_name); ?></div>
             </div>

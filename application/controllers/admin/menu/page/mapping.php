@@ -197,7 +197,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 							),
 							'save_sec_title'=>array(
 								/* Language function - comment */
-								'label'=>eowbc_lang("Add New Maps"),
+								'label'=>__('Add New Maps','woo-bundle-choice'),
 								'type'=>'label',
 								'size_class'=>array('eight','wide')
 							),

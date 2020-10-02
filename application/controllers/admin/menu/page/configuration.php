@@ -130,39 +130,33 @@ if ( ! class_exists( 'Configuration' ) ) {
 											'size_class'=>array('eight','wide','required'),
 											'inline'=>true,
 										),
-									/* Language function - comment */
 									'visible_info'=>array( 'label'=>__('Choose where you want to display the two Start With with Action buttons. If you choose custom landing page a sample landing page will be provided. The Shortcode for the buttons widget is <strong>[woo-bundle-choice-btn]</strong>.','woo-bundle-choice'),
 											'type'=>'visible_info',
 											'class'=>array('fluid', 'small'),
 											'size_class'=>array('sixteen','wide'),
 										),
 									'config_buttons_position'=>array(
-										    /* Language function - comment */
 											'label'=>__('Choose where you want to display buttons on home page','woo-bundle-choice'),
 											'type'=>'link',
 											'attr'=>array("href='".admin_url('customize.php?autofocus[control]=btn_position_setting_selector_btn')."'"),
 											'class'=>array('secondary'/*,'hidden'*/)	
 										),
 									'config_view_custom_landing_link'=>array(
-											/* Language function - comment */
 											'label'=>__('View how landing page will look like','woo-bundle-choice'),
 											'type'=>'link',
 											'attr'=>array("href='".get_permalink(get_page_by_path('design-your-own-ring'))."'"),
 											'class'=>array('secondary'/*,'hidden'*/)	
 										),
 									'config_devider_make_pair'=>array(
-											/* Language function - comment */
 											'label'=>__('Make Pair Button','woo-bundle-choice'),
 											'type'=>'devider'
 										),
-									/* Language function - comment */
 									'config_make_pair_visible_info'=>array( 'label'=>__('Make Pair button is a interesting feature for ring builder, pair maker for clothing(be sure to not confuse pair maker with make pair button), etc. If you enable this feature the Make Pair button will appear on item page even if the user is not on the builder process e.g. on diamond page user would see "Add To Ring" button.','woo-bundle-choice'),
 												'type'=>'visible_info',
 												'class'=>array('fluid', 'medium'),
 												'size_class'=>array('sixteen','wide'),
 											),
 									'enable_make_pair'=>array(
-											/* Language function - comment */
 											'label'=>__('Enabled?','woo-bundle-choice'),
 											'type'=>'checkbox',
 											'value'=>'',
@@ -172,7 +166,6 @@ if ( ! class_exists( 'Configuration' ) ) {
 											'class'=>array()
 										),
 									'label_make_pair'=>array(
-											/* Language function - comment */
 											'label'=>__('Button label','woo-bundle-choice'),
 											'type'=>'text',
 											'validate'=>/*( !empty($_POST['enable_make_pair'])?array('required'=>''):array())*/array('validate_if'=>array('enable_make_pair'=>array('required'=>''))),
@@ -181,14 +174,12 @@ if ( ! class_exists( 'Configuration' ) ) {
 											'size_class'=>array('eight','wide','required'),
 											'inline'=>true,
 										),
-									/* Language function - comment */
 									'label_make_pair_visible_info'=>array( 'label'=>__('Set applicable text for button e.g. "Add to Ring" if its for jewelry site. Applicable only if switch above is enabled.','woo-bundle-choice'),
 												'type'=>'visible_info',
 												'class'=>array('fluid', 'small'),
 												'size_class'=>array('sixteen','wide'),
 											),
 									'config_buttons_conf_save_btn'=>array(
-												/* Language function - comment */
 												'label'=>__('Save','woo-bundle-choice'),
 												'type'=>'button',		
 												'class'=>array('primary'),
@@ -197,16 +188,13 @@ if ( ! class_exists( 'Configuration' ) ) {
 									)
 							),
 						'config_navigation_conf'=>array(
-								/* Language function - comment */
 								'label'=>__('Navigations Steps( Breadcrumb )','woo-bundle-choice'),
 								'form'=>array(
 									'devider_first_cat'=>array(
-											/* Language function - comment */
 											'label'=>__('First Category','woo-bundle-choice'),
 											'type'=>'devider',
 										),
 									'first_name'=>array(
-											/* Language function - comment */
 											'label'=>__('Name','woo-bundle-choice'),
 											'type'=>'select',
 											'value'=>wbc()->options->get_option('configuration','first_name'),
@@ -218,7 +206,6 @@ if ( ! class_exists( 'Configuration' ) ) {
 											'inline'=>true,
 										),
 									'first_icon'=>array(
-											/* Language function - comment */
 											'label'=>__('Icon','woo-bundle-choice'),
 											'type'=>'icon',
 											'value'=>wbc()->options->get_option('configuration','first_icon'),
@@ -229,12 +216,10 @@ if ( ! class_exists( 'Configuration' ) ) {
 											'inline'=>true,
 										),
 									'config_devider_second_cat'=>array(
-											/* Language function - comment */
 											'label'=>__('Second Category','woo-bundle-choice'),
 											'type'=>'devider',
 										),
 									'second_name'=>array(
-											/* Language function - comment */
 											'label'=>__('Name','woo-bundle-choice'),
 											'type'=>'select',
 											'value'=>wbc()->options->get_option('configuration','second_name'),
@@ -246,7 +231,6 @@ if ( ! class_exists( 'Configuration' ) ) {
 											'inline'=>true,
 										),
 									'second_icon'=>array(
-											/* Language function - comment */
 											'label'=>__('Icon','woo-bundle-choice'),
 											'type'=>'icon',
 											'value'=>wbc()->options->get_option('configuration','second_icon'),
@@ -257,12 +241,10 @@ if ( ! class_exists( 'Configuration' ) ) {
 											'inline'=>true,
 										),
 									'config_devider_preview'=>array(
-										    /* Language function - comment */
 											'label'=>__('Preview','woo-bundle-choice'),
 											'type'=>'devider',
 										),
 									'preview_name'=>array(
-										     /* Language function - comment */
 											'label'=>__('Name','woo-bundle-choice'),
 											'type'=>'text',
 											'value'=>wbc()->options->get_option('configuration','preview_name'),
@@ -273,7 +255,6 @@ if ( ! class_exists( 'Configuration' ) ) {
 											'inline'=>true,
 										),
 									'preview_icon'=>array(
-											/* Language function - comment */
 											'label'=>__('Icon','woo-bundle-choice'),
 											'type'=>'icon',
 											'value'=>wbc()->options->get_option('configuration','preview_icon'),
@@ -289,17 +270,14 @@ if ( ! class_exists( 'Configuration' ) ) {
 											'type'=>'devider',
 										),	
 									'config_alternate_breadcrumb'=>array(
-										/* Language function - comment */
 										'label'=>__('Alternate Breadcrumb Widgets','woo-bundle-choice'),
 										'type'=>'radio',
 										'value'=>wbc()->options->get_option('configuration','config_alternate_breadcrumb','default'),
 										'validate'=>array('required'=>''),
 										'sanitize'=>'sanitize_text_field',
-										/* Language function - comment */
 										'options'=>array('default'=>__('Default','woo-bundle-choice'),'template_1'=>__('Template 1','woo-bundle-choice'),'template_2'=>__('Template 2','woo-bundle-choice')/*,'template_3'=>'Template 3'*/),
 										'class'=>array(),										
 										'size_class'=>array('required'),
-										/* Language function - comment */
 										'visible_info'=>array( 'label'=>__('( Switch to other look of breadcrumb. )','woo-bundle-choice'),
 											'type'=>'visible_info',
 											'class'=>array('fluid', 'small'),
@@ -310,15 +288,13 @@ if ( ! class_exists( 'Configuration' ) ) {
 										'type'=>'accordian',
 										'section_type'=>'start',
 										'class'=>array('field'),
-										'label'=>_e('<span class="ui large text">Advanced Setting</span>','woo-bundle-choice'),
+										'label'=>__('<span class="ui large text">Advanced Setting</span>','woo-bundle-choice'),
 									),									
 									'config_clickable_breadcrumb'=>array(
-										/* Language function - comment */
 										'label'=>__('Clickable Breadcrumbs?','woo-bundle-choice'),
 										'type'=>'checkbox',
 										'value'=>'',
 										'sanitize'=>'sanitize_text_field',
-										/* Language function - comment */
 										'options'=>array('1'=>__('Make Breadcrumbs clickable?.','woo-bundle-choice')),
 										'is_id_as_name'=>true,
 										'class'=>array()
@@ -328,14 +304,13 @@ if ( ! class_exists( 'Configuration' ) ) {
 										'section_type'=>'end'
 									),
 									'config_navigation_conf_save_btn'=>array(
-										/* Language function - comment */
 												'label'=>__('Save','woo-bundle-choice'),
 												'type'=>'button',		
 												'class'=>array('primary'),
 												'attr'=>array("data-action='save'",'data-tab_key="config_navigation_conf"')	
 											)
 									)
-							),						
+							)						
 					);
 					
 			$features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())));
@@ -349,7 +324,7 @@ if ( ! class_exists( 'Configuration' ) ) {
 								'config_devider_pair_maker'=>array(
 										/* Language function - comment */
 										'label'=>__('Pair Maker Configuration','woo-bundle-choice'),
-										'type'=>'devider',
+										'type'=>'devider'
 									),
 								/*'config_pair_maker_status'=>array(
 										'label'=>'Pair Maker Status',
@@ -393,9 +368,9 @@ if ( ! class_exists( 'Configuration' ) ) {
 											'type'=>'button',		
 											'class'=>array('primary'),
 											'attr'=>array("data-action='save'",'data-tab_key="config_extra_conf"')
-										)
 								)
-						);
+							)
+				);
 			}
 
 			if($is_add_sample_values) {

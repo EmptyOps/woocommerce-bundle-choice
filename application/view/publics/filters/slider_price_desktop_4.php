@@ -7,7 +7,7 @@
 ?>
 <div class="<?php echo $width_class; ?>">
 	<p style="display: inline-block;margin-top: 0.25em;"class="ui three wide field num_slider">
-		/* Language function - comment */ 
+		<!-- /* Language function - comment */  -->
 		<span class="ui header"><?php _e('Price','woo-bundle-choice'); ?></span>
 	</p>
 	<div style="display: inline-block;" class="field twelve ui wide">

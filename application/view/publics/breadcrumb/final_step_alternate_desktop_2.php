@@ -9,6 +9,7 @@
 
     <div class="ui column left aligned">3</div>
     <div class="ui column left aligned">    	
+        <!-- /* Language function - comment */  -->
         <div class="title"><?php _e('Complete ','woo-bundle-choice'); _e($preview_name); ?></div>
     </div>
     <div class="ui column mini image left aligned" style="padding-top: 0px;padding-bottom: 0px;<?php echo empty($preview_icon)?'visibility: hidden;':''; ?>">

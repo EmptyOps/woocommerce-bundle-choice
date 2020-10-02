@@ -11,10 +11,10 @@
 			      		<div class="ui selection dropdown fluid">
 						  	<input type="hidden" name="eo_wbc_inventory_type" id="eo_wbc_inventory_type">
 						  	<i class="dropdown icon"></i>
-						  	/* Language function - comment */ 
+						  	<!-- /* Language function - comment */  -->
 						  	<div class="default text"><?php _e('Inventory Type','woo-bundle-choice')); ?></div>
 						  	<div class="menu">
-						  		/* Language function - comment */ 
+						  		<!-- /* Language function - comment */  -->
 							    <div class="item" data-value="jewelry"><?php _e('Jewelry','woo-bundle-choice'); ?></div>
 							    <div class="item" data-value="clothing"><?php _e('Clothing','woo-bundle-choice'); ?></div>
 							    <div class="item" data-value="home_decor"><?php _e('Home Decor','woo-bundle-choice'); ?></div>
@@ -27,7 +27,7 @@
 			  	<br/>
 			  	<div class="inline fields">			  		
 			  		<div class="field">
-			  			/* Language function - comment */ 
+			  			<!-- /* Language function - comment */  -->
 			  			<button class="ui inverted primary button" type="submit"><?php _e('Next','woo-bundle-choice');?></button>
 			  		</div>
 			  	</div>

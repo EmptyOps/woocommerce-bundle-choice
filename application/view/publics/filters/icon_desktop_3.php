@@ -12,7 +12,7 @@
 	&nbsp; <span class="ui grey text" style="cursor: pointer;">&nbsp;<i class="question circle outline icon" data-help="<?php _e($help); ?>"></i></span>
 	<?php endif; ?>
 		<?php if($reset): ?>
-		/* Language function - comment */ 
+		<!-- /* Language function - comment */  -->
 	&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_icon(event,'<?php echo $term->slug; ?>')">&nbsp;<u><?php _e('reset','woo-bundle-choice'); ?></u></span>
 	<?php endif; ?>
 	</p>

@@ -11,7 +11,7 @@
         <div class="ui column left aligned"><?php echo $order; ?></div>
         <div class="ui column left aligned">
             <?php if(empty($first)){ ?>
-            /* Language function - comment */ 
+                <!-- /* Language function - comment */  -->
                 <div class="title"><?php _e('Choose a ','woo-bundle-choice'); _e($first_name); ?></div>
             <?php } else { ?>
                 <div class="title"><?php _e($first_name); ?></div>

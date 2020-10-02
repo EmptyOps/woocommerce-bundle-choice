@@ -33,7 +33,7 @@
                 </div>
                 <br/>
                 <div class="ui equal width grid">
-                    /* Language function - comment */                             
+                    <!-- /* Language function - comment */ -->
                     <u><a href="<?php echo !empty(wbc()->sanitize->get('FIRST')) ? \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('FIRST'),$order):'#'; ?>"><?php _e('View','woo-bundle-choice'); ?></a>
                     </u>
                     <u>

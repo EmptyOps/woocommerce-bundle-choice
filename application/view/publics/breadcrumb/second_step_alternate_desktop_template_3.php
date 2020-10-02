@@ -10,7 +10,7 @@
         <div class="ui grid">
             <div class="column"><?php echo $order; ?></div>
             <div class="column" style="text-align: left;">
-                /* Language function - comment */ 
+                <!-- /* Language function - comment */  -->
                 <div class="description"><?php _e('Choose a','woo-bundle-choice'); ?></div>
                 <div class="title"><?php _e($second_name) ?></div>
             </div>
@@ -27,7 +27,7 @@
             <div class="column " style="font-size: x-small;">
                 <?php _e(wc_price($second->get_price())); ?>
                 <br/>
-                /* Language function - comment */ 
+                <!-- /* Language function - comment */  -->
                 <u><a href="<?php echo (!empty(wbc()->sanitize->get('SECOND'))?eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('SECOND'),$order):'#'); ?>"><?php _e('View','woo-bundle-choice'); ?></a></u>&nbsp;|&nbsp;<u><a href="<?php echo (!empty(wbc()->sanitize->get('SECOND'))?eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('SECOND')):'#'); ?>"><?php _e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_change_action_text','Change',true,true)); ?></a></u>
             </div>                
     <?php endif; ?>            

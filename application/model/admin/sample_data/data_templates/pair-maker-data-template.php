@@ -47,7 +47,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                     ),
                     array(
                         /* Language function - comment */ 
-                        'label' => __('Fabric'),
+                        'label' => __('Fabric','woo-bundle-choice'),
                         'terms' => array('Cotton', 'Silk', 'Canvas', 'Chiffon', 'Damask', 'Wool', 'Jersey', 'Polyester', 'Velvet','Linen'),
                         'description' => __('Fabric attributes for clothings wear','woo-bundle-choice'),
                         'slug' => 'wbc_cloth_fabric_attr'
