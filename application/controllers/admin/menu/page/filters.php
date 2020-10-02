@@ -597,7 +597,24 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'prev_inline'=>true,
 								// 'next_inline'=>true,
 								// 'inline'=>true,
-							),							
+							),
+							'd_fconfig_elements'=>array(
+								'label'=>eowbc_lang('Show Selected Only'),
+								'type'=>'select',
+								'value'=>'',
+								'options'=>array(),
+								'is_id_as_name'=>true,
+								'class'=>array('fluid','additions','search','multiple','clearable'),							
+								'field_attr'=>array('multiple=""'),
+								'size_class'=>array('three','wide'),
+								'inline'=>false,
+								'visible_info'=>array( 
+									'label'=>eowbc_lang('If you select items from this field then filter will show that items only on front end, and if you leave it blank it will show all sub categories of the category you selected above or all terms of the attribute if you selected attribute above.'),
+									'type'=>'visible_info',
+									'class'=>array('small'),
+									// 'size_class'=>array('sixteen','wide'),
+								),							
+							),
 							'd_fconfig_type'=>array(
 								'type'=>'hidden',
 								'value'=>'',
@@ -694,7 +711,9 @@ if ( ! class_exists( 'Filters' ) ) {
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
 								'validate'=>array('required'=>''),
-								'options'=>array('icon'=>__('Icon Only','woo-bundle-choice'),'icon_text'=>__('Icon and Text','woo-bundle-choice'),'numeric_slider'=>__('Numeric slider','woo-bundle-choice'),'text_slider'=>__('Text slider','woo-bundle-choice'),'checkbox'=>__('Checkbox','woo-bundle-choice'),'toggle_column'=>__('Toggle Column','woo-bundle-choice')),
+
+								'options'=>array('icon'=>__('Icon Only','woo-bundle-choice'),'icon_text'=>__('Icon and Text','woo-bundle-choice'),'numeric_slider'=>__('Numeric slider','woo-bundle-choice'),'text_slider'=>__('Text slider','woo-bundle-choice'),'checkbox'=>__('Checkbox','woo-bundle-choice'),'toggle_column'=>__('Toggle Column','woo-bundle-choice'),'button'=>__('Button','woo-bundle-choice')),
+
 								'class'=>array('fluid'),
 								'size_class'=>array('three','wide','required'),
 								// 'prev_inline'=>true,
@@ -878,16 +897,32 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'next_inline'=>true,
 								// 'inline'=>true,
 							),
-							
+							's_fconfig_elements'=>array(
+								'label'=>eowbc_lang('Show Selected Only'),
+								'type'=>'select',
+								'value'=>'',
+								'options'=>array(),
+								'is_id_as_name'=>true,
+								'class'=>array('fluid','additions','search','multiple','clearable'),							
+								'field_attr'=>array('multiple=""'),
+								'size_class'=>array('three','wide'),
+								'inline'=>false,
+								'visible_info'=>array( 
+									'label'=>eowbc_lang('If you select items from this field then filter will show that items only on front end, and if you leave it blank it will show all sub categories of the category you selected above or all terms of the attribute if you selected attribute above.'),
+									'type'=>'visible_info',
+									'class'=>array('small'),
+									// 'size_class'=>array('sixteen','wide'),
+								),							
+							),
 							's_fconfig_type'=>array(
-							'type'=>'hidden',
-							'value'=>'',
-							'sanitize'=>'sanitize_text_field',
+								'type'=>'hidden',
+								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
 							),
 							's_fconfig_dependent'=>array(
-							'type'=>'hidden',
-							'value'=>'',
-							'sanitize'=>'sanitize_text_field',
+								'type'=>'hidden',
+								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
 							),
 							's_fconfig_label_label'=>array(
 								'label'=>__('Label','woo-bundle-choice'),
@@ -974,8 +1009,10 @@ if ( ! class_exists( 'Filters' ) ) {
 								'type'=>'select',
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
+
 								'validate'=>array('required'=>''), 
-								'options'=>array('icon'=>__('Icon Only','woo-bundle-choice'),'icon_text'=>__('Icon and Text','woo-bundle-choice'),'numeric_slider'=>__('Numeric slider','woo-bundle-choice'),'text_slider'=>__('Text slider','woo-bundle-choice'),'checkbox'=>__('Checkbox','woo-bundle-choice')),
+								'options'=>array('icon'=>__('Icon Only','woo-bundle-choice'),'icon_text'=>__('Icon and Text','woo-bundle-choice'),'numeric_slider'=>__('Numeric slider','woo-bundle-choice'),'text_slider'=>__('Text slider','woo-bundle-choice'),'checkbox'=>__('Checkbox','woo-bundle-choice'),'toggle_column'=>__('Toggle Column','woo-bundle-choice'),'button'=>__('Button','woo-bundle-choice')),
+
 								'class'=>array('fluid'),
 								'size_class'=>array('three','wide','required'),
 								// 'prev_inline'=>true,

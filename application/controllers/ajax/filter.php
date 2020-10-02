@@ -73,8 +73,11 @@ class Filter
 		        
 		        	if( isset($_GET['_category']) OR isset($_GET['_current_category']) ){
 
-		        		/* Language function - comment */
-		        		$tax_query=array('relation' => __('AND','woo-bundle-choice'));
+		        		$old_tax_query = $query->get('tax_query');
+			            $old_tax_query_taxonomy = array();
+
+		        		$tax_query=array('relation' => 'AND');
+
 		                if(!empty(wbc()->sanitize->get('_category'))) {
 
 		                    foreach( array_unique(array_filter(explode(',', wbc()->sanitize->get('_category')))) as $_category){
@@ -97,6 +100,29 @@ class Filter
 		                        'terms' => explode(',',wbc()->sanitize->get('_current_category')),
 		                        'compare'=>'EXISTS IN'
 		                    );
+		                }
+
+		                if(!empty(wbc()->sanitize->get('_current_category')) and !empty($tax_query) ) {
+		                	// remove the default query if the tax query is available
+
+							$_current_category_term = get_term_by('slug',explode(',',wbc()->sanitize->get('_current_category'))[0],'product_cat');             	
+							if(!empty($_current_category_term) and !is_wp_error($_current_category_term) and property_exists($_current_category_term,'term_id')){
+								
+								$_current_category_term_id = $_current_category_term->term_id;
+								if(is_array($old_tax_query) and !empty($old_tax_query)){
+									foreach ($old_tax_query as $old_tax_query_key => $old_tax_query_value) {
+										if(!empty($old_tax_query_value['terms']) and is_array($old_tax_query_value) and in_array($_current_category_term_id,$old_tax_query_value['terms'])){
+
+											if(count($old_tax_query_value['terms'])==1){
+												unset($old_tax_query[$old_tax_query_key]);
+											} elseif(array_search($_current_category_term_id,$old_tax_query_value['terms']) !==false) { 
+
+												unset($old_tax_query[$old_tax_query_key]['terms'][array_search($_current_category_term_id,$old_tax_query_value['terms'])]);
+											}
+										}
+									}
+								}
+							}
 		                }	
 		                //$query->set('tax_query',$tax_query);	                
 		                /*$query->set('tax_query',$tax_query);*/
@@ -142,9 +168,7 @@ class Filter
 			            }
 
 			            //$query->set('tax_query',$tax_query);
-			            $old_tax_query = $query->get('tax_query');
-			            $old_tax_query_taxonomy = array();
-			            
+			           
 			            if(is_array($old_tax_query) and !empty($old_tax_query)){
 			            	$old_tax_query_taxonomy = array_column($old_tax_query,'taxonomy');
 			            }
@@ -152,6 +176,7 @@ class Filter
 			            if(is_array($old_tax_query_taxonomy) AND !empty($old_tax_query_taxonomy)){
 			            	if(in_array('product_visibility',$old_tax_query_taxonomy) and count($old_tax_query_taxonomy)==1) {
 			            		$query->set('tax_query',$tax_query);
+			            		
 				            } else {
 				            	$query->add('tax_query',$tax_query);
 				            }	
@@ -162,8 +187,9 @@ class Filter
 			            //if(is_array($old_tax_query))
 			            /*echo "<pre>";			            
 			            print_r($query->get('tax_query'));
-		                echo "</pre>";
-		                die();*/
+			            unset($_GET['EO_WBC']);
+		                echo "</pre>";*/
+		                //die();
 		            }		            
 		        }		       
 		    });		   

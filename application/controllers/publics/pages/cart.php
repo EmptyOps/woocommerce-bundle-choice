@@ -50,7 +50,7 @@ class Cart {
                         $set["FIRST"][0],
                         $set["FIRST"][1],
                         ($set["FIRST"][2]=='0'?NULL:$set["FIRST"][2]),
-                        ($set["FIRST"][2]=='0'?NULL:wbc()->wc->eo_wbc_get_product_variation_attributes($set["FIRST"][2]))
+                        ($set["FIRST"][2]=='0'?NULL:$set["FIRST"]['variation'])
                       );
                 }
 
@@ -60,8 +60,8 @@ class Cart {
                         $set["SECOND"][0],
                         $set["SECOND"][1],
                         ($set["SECOND"][2]=='0'?NULL:$set["SECOND"][2]),
-                        ($set["SECOND"][2]=='0'?NULL:wbc()->wc->eo_wbc_get_product_variation_attributes($set["SECOND"][2]))
-                      );
+                        ($set["SECOND"][2]=='0'?NULL:$set["SECOND"]['variation'])
+                    );
                 }
             }   
         }                
