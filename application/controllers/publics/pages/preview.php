@@ -175,21 +175,25 @@ class Preview {
             } 
             //adding set to the woocommerce cart
             $cart_details=wbc()->session->get('EO_WBC_SETS');
+           
+           
             if(!empty($cart_details['FIRST']) && !empty($cart_details['SECOND'])){
                 $FIRT_CART_ID=wc()->cart->add_to_cart(
                                 $cart_details['FIRST'][0],
                                 $cart_details['FIRST'][1],
-                                $cart_details['FIRST'][2],
-                                is_null($cart_details['FIRST'][2])?null:wbc()->wc->eo_wbc_get_product_variation_attributes($cart_details['FIRST'][2],$cart_details['FIRST']['variation'])
+                                $cart_details['FIRST'][2],(
+                                is_null($cart_details['FIRST'][2])?null:$cart_details['FIRST']['variation'])
                             );                  
+                
                 if($FIRT_CART_ID)
                 {
                     $SECOND_CART_ID=wc()->cart->add_to_cart(
                                 $cart_details['SECOND'][0],
                                 $cart_details['SECOND'][1],
-                                $cart_details['SECOND'][2],
-                                is_null($cart_details['SECOND'][2])?null:wbc()->wc->eo_wbc_get_product_variation_attributes($cart_details['SECOND'][2],$cart_details['SECOND']['variation'])
+                                $cart_details['SECOND'][2],(
+                                is_null($cart_details['SECOND'][2])?null:$cart_details['SECOND']['variation'])
                             );
+                    
                     if($SECOND_CART_ID)
                     {
                         //All is good so we saved mapps to session.
