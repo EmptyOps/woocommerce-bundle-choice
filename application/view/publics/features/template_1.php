@@ -9,7 +9,7 @@ if(!empty($product_data)):
 <table class="ui striped single line unstackable table" style="clear:both;">
     <tbody>    
         <tr>
-            /* Language function - comment */ 
+            <!-- /* Language function - comment */  -->
           <td rowspan="2" class="center aligned" style="font-weight: bold;    text-align: center;vertical-align: middle;"><?php _e('Specifications','woo-bundle-choice'); ?></td>
             <?php foreach ($product_data as $spec):?>
                 

@@ -77,37 +77,31 @@ if ( ! class_exists( 'Filters' ) ) {
 					),
 					1=>array(
 						'is_header' => 1, 
-						/* Language function - comment */ 
 						'val' => __('Filter','woo-bundle-choice'),
 						'field_id'=>'d_fconfig_filter'
 					),
 					2=>array(
 						'is_header' => 1, 
-						/* Language function - comment */ 
 						'val' => __('Label','woo-bundle-choice'),
 						'field_id'=>'d_fconfig_label'
 					),
 					3=>array(
-						'is_header' => 1, 
-						/* Language function - comment */ 
+						'is_header' => 1,
 						'val' => __('Advance Filter','woo-bundle-choice'),
 						'field_id'=>'d_fconfig_is_advanced'
 					),
 					4=>array(
 						'is_header' => 1, 
-						/* Language function - comment */ 
 						'val' => __('Column Width','woo-bundle-choice'),
 						'field_id'=>'d_fconfig_column_width'
 					),
 					5=>array(
-						'is_header' => 1,
-						/* Language function - comment */  
+						'is_header' => 1, 
 						'val' => __('Template','woo-bundle-choice'),
 						'field_id'=>'filter_template'
 					),
 					6=>array(
 						'is_header' => 1, 
-						/* Language function - comment */ 
 						'val' => __('Ordering','woo-bundle-choice'),
 						'field_id'=>'d_fconfig_ordering'
 					),
@@ -122,14 +116,12 @@ if ( ! class_exists( 'Filters' ) ) {
 						'field_id'=>'d_fconfig_icon_size'
 					),
 					9=>array(
-						'is_header' => 1, 
-						/* Language function - comment */ 
+						'is_header' => 1,
 						'val' => __('Icon Label Size','woo-bundle-choice'),
 						'field_id'=>'d_fconfig_icon_label_size'
 					),
 					10=>array(
-						'is_header' => 1, 
-						/* Language function - comment */ 
+						'is_header' => 1,  
 						'val' => __('Add reset link?','woo-bundle-choice'),
 						'field_id'=>'d_fconfig_add_reset_link'
 					),
@@ -164,7 +156,6 @@ if ( ! class_exists( 'Filters' ) ) {
 				// ),
 				0=>array(
 					0=>array( 
-						/* Language function - comment */ 
 						'val' => __('No filter(s) exists, please add some filters.','woo-bundle-choice'),
 						'colspan' => 10
 					),
@@ -184,62 +175,52 @@ if ( ! class_exists( 'Filters' ) ) {
 						'checkbox'=> array('id'=>'dummy','value'=>array(),'options'=>array('row0_col0_chk'=>''), 'options_attrs'=>array('row0_col0_chk'=>array('data-action="bulk_select_all"', 'data-bulk_table_id="'.$sett_table["id"].'"')),'class'=>'','where'=>'in_table')
 					),
 					1=>array(
-						'is_header' => 1,
-						/* Language function - comment */ 
+						'is_header' => 1, 
 						'val' => __('Filter','woo-bundle-choice'),
 						'field_id'=>'s_fconfig_filter'
 					),
 					2=>array(
 						'is_header' => 1,
-						/* Language function - comment */  
 						'val' => __('Label','woo-bundle-choice'),
 						'field_id'=>'s_fconfig_label'
 					),
 					3=>array(
 						'is_header' => 1, 
-						/* Language function - comment */ 
 						'val' => __('Advance Filter','woo-bundle-choice'),
 						'field_id'=>'s_fconfig_is_advanced'
 					),
 					4=>array(
 						'is_header' => 1, 
-						/* Language function - comment */ 
 						'val' => __('Column Width','woo-bundle-choice'),
 						'field_id'=>'s_fconfig_column_width'
 					),
 					5=>array(
 						'is_header' => 1, 
-						/* Language function - comment */ 
 						'val' => __('Template','woo-bundle-choice'),
 						'field_id'=>'filter_template'
 					),
 					6=>array(
 						'is_header' => 1, 
-						/* Language function - comment */ 
 						'val' => __('Ordering','woo-bundle-choice'),
 						'field_id'=>'s_fconfig_ordering'
 					),
 					7=>array(
-						'is_header' => 1,
-						/* Language function - comment */  
+						'is_header' => 1, 
 						'val' => __('Input Type','woo-bundle-choice'),
 						'field_id'=>'s_fconfig_input_type'
 					),
 					8=>array(
-						'is_header' => 1,
-						/* Language function - comment */  
+						'is_header' => 1,  
 						'val' => __('Icon Size','woo-bundle-choice'),
 						'field_id'=>'s_fconfig_icon_size'
 					),
 					9=>array(
 						'is_header' => 1, 
-						/* Language function - comment */ 
 						'val' => __('Icon Label Size','woo-bundle-choice'),
 						'field_id'=>'s_fconfig_icon_label_size'
 					),
 					10=>array(
 						'is_header' => 1,
-						/* Language function - comment */  
 						'val' => __('Add reset link?','woo-bundle-choice'),
 						'field_id'=>'s_fconfig_add_reset_link'
 					),
@@ -274,7 +255,6 @@ if ( ! class_exists( 'Filters' ) ) {
 				// ),
 				0=>array(
 					0=>array( 
-						/* Language function - comment */ 
 						'val' => __('No filter(s) exists, please add some filters.','woo-bundle-choice'),
 						'colspan' => 7
 					),
@@ -282,29 +262,24 @@ if ( ! class_exists( 'Filters' ) ) {
 			);
 
 			$form_definition = array(
-				'filter_setting'=>array(
-					/* Language function - comment */ 
+				'filter_setting'=>array( 
 						'label'=>__('Configuration','woo-bundle-choice'),
 						'form'=>array( 
 							'filter_setting_filter'=>array(
-								/* Language function - comment */ 
 									'label'=>__('Filter Configuration','woo-bundle-choice'),
 									'type'=>'devider',
 								),
-							'filter_setting_status'=>array(
-								/* Language function - comment */ 
+							'filter_setting_status'=>array( 
 									'label'=>__('Filter Status','woo-bundle-choice'),
 									'type'=>'checkbox',
 									'sanitize'=>'sanitize_text_field',
 									'value'=>array('filter_setting_status'),
-									/* Language function - comment */ 
 									'options'=>array('filter_setting_status'=>__(' Check here to enable horizontal filter bar','woo-bundle-choice')),
 									'class'=>array(),
 									'size_class'=>array('eight','wide'),
 									'inline'=>true,
 								),
 							'filter_setting_price_filter_width'=>array(
-								/* Language function - comment */ 
 								'label'=>__('Price filter\'s column width','woo-bundle-choice'),
 								'type'=>'text',
 								'validate'=>array('required'=>'','postfix'=>['%']),
@@ -314,20 +289,17 @@ if ( ! class_exists( 'Filters' ) ) {
 								'size_class'=>array('eight','wide','required'),
 								'inline'=>true,
 							),								
-							'filter_setting_alternate_slider_ui'=>array(
-								/* Language function - comment */ 
+							'filter_setting_alternate_slider_ui'=>array( 
 								'label'=>__('Alternate Ticked Slider Widget','woo-bundle-choice'),
 								'type'=>'checkbox',
 								'sanitize'=>'sanitize_text_field',
 								'value'=>array(wbc()->options->get_option('filters_filter_setting','filter_setting_alternate_slider_ui')),
-								/* Language function - comment */ 
 								'options'=>array('filter_setting_alternate_slider_ui'=>__(' Check here to enable alternate UI view for filter sliders.','woo-bundle-choice')),
 								'class'=>array(),
 								'size_class'=>array('eight','wide'),
 								'inline'=>true,
 							),
 							'filter_setting_numeric_slider_seperator'=>array(
-								/* Language function - comment */ 
 								'label'=>__('Numeric Filter Separator','woo-bundle-choice'),
 								'type'=>'text',
 								'sanitize'=>'sanitize_text_field',
@@ -337,7 +309,6 @@ if ( ! class_exists( 'Filters' ) ) {
 								'inline'=>true,
 							),
 							'filter_setting_slider_max_lblsize'=>array(
-								/* Language function - comment */ 
 								'label'=>__('Slider Options Text Limit','woo-bundle-choice'),
 								'type'=>'text',
 								'sanitize'=>'sanitize_text_field',
@@ -346,7 +317,6 @@ if ( ! class_exists( 'Filters' ) ) {
 								'size_class'=>array('eight','wide'),
 								'inline'=>false,
 								'visible_info'=>array( 
-									/* Language function - comment */ 
 									'label'=>__('You can truncate longer option texts that are displayed for filters of input type slider. The maximum number characters that will be displayed on your website filters depend on the integer value you set here. ','woo-bundle-choice'),
 									'type'=>'visible_info',
 									'class'=>array('small'),
@@ -354,7 +324,6 @@ if ( ! class_exists( 'Filters' ) ) {
 								),
 							),
 							'filter_icon_wrap_label'=>array(
-								/* Language function - comment */ 
 									'label'=>__('Wrap icon filter label','woo-bundle-choice'),
 									'type'=>'checkbox',
 									'sanitize'=>'sanitize_text_field',
@@ -365,7 +334,6 @@ if ( ! class_exists( 'Filters' ) ) {
 									'inline'=>true,
 								),
 							'filter_icon_wrap_filter_label'=>array(
-									/* Language function - comment */ 
 									'label'=>__('Word Wrap Icon Filter Labels','woo-bundle-choice'),
 									'type'=>'text',
 									'sanitize'=>'sanitize_text_field',
@@ -373,7 +341,6 @@ if ( ! class_exists( 'Filters' ) ) {
 									'class'=>array(),
 									'size_class'=>array('eight','wide'),
 									'visible_info'=>array( 
-									/* Language function - comment */ 
 									'label'=>__('Specify here to limit the number of word that is displayed on icon filters, it is sometime useful to keep it visually appealing.','woo-bundle-choice'),
 									'type'=>'visible_info',
 									'class'=>array('small'),
@@ -381,7 +348,6 @@ if ( ! class_exists( 'Filters' ) ) {
 									),
 								),
 							'filter_setting_btnfilter_now'=>array(
-								/* Language function - comment */ 
 								'label'=>__('Show Apply Filters Button','woo-bundle-choice'),
 								'type'=>'checkbox',
 								'sanitize'=>'sanitize_text_field',
@@ -391,7 +357,6 @@ if ( ! class_exists( 'Filters' ) ) {
 								'size_class'=>array('eight','wide'),
 								'inline'=>true,
 								'visible_info'=>array( 
-									/* Language function - comment */ 
 									'label'=>__('If enabled the ajax search on each change of filter will not fire but the Apply Filters. This is useful if your website has many filters and user would normally filter on many of them.','woo-bundle-choice'),
 									'type'=>'visible_info',
 									'class'=>array('small'),
@@ -399,7 +364,6 @@ if ( ! class_exists( 'Filters' ) ) {
 								),
 							),
 							'filter_setting_reset_now'=>array(
-								/* Language function - comment */ 
 								'label'=>__('Show Reset Filters Button','woo-bundle-choice'),
 								'type'=>'checkbox',
 								'sanitize'=>'sanitize_text_field',
@@ -409,7 +373,6 @@ if ( ! class_exists( 'Filters' ) ) {
 								'size_class'=>array('eight','wide'),
 								'inline'=>true,
 								'visible_info'=>array( 
-									/* Language function - comment */ 
 									'label'=>__('If enabled the Reset Filters buttons will be displayed.','woo-bundle-choice'),
 									'type'=>'visible_info',
 									'class'=>array('small'),
@@ -417,17 +380,14 @@ if ( ! class_exists( 'Filters' ) ) {
 								),
 							),
 							'price_filter_first_cat'=>array(
-								/* Language function - comment */ 
 								'label'=>__('First Category','woo-bundle-choice'),
 								'type'=>'devider',
 							),
 							'hide_price_filter_first_cat'=>array(
-								/* Language function - comment */ 
 								'label'=>__('Hide Price Filter','woo-bundle-choice'),
 								'type'=>'checkbox',
 								'sanitize'=>'sanitize_text_field',
 								'value'=>'',
-								/* Language function - comment */ 
 								'options'=>array('1'=>__(' Hide Price Filter for First Category?','woo-bundle-choice')),
 								'is_id_as_name'=>true,
 								'class'=>array(),
@@ -435,7 +395,6 @@ if ( ! class_exists( 'Filters' ) ) {
 								'inline'=>true,
 							),	
 							'price_filter_order_first_cat'=>array(
-								/* Language function - comment */ 
 								'label'=>__('Display Order','woo-bundle-choice'),
 								'type'=>'text',
 								'sanitize'=>'sanitize_text_field',
@@ -445,17 +404,14 @@ if ( ! class_exists( 'Filters' ) ) {
 								'inline'=>true,
 							),		
 							'price_filter_second_cat'=>array(
-								/* Language function - comment */ 
 								'label'=>__('Second Category','woo-bundle-choice'),
 								'type'=>'devider',
 							),
 							'hide_price_filter_second_cat'=>array(
-								/* Language function - comment */ 
 								'label'=>__('Hide Price Filter','woo-bundle-choice'),
 								'type'=>'checkbox',
 								'sanitize'=>'sanitize_text_field',
 								'value'=>'',
-								/* Language function - comment */ 
 								'options'=>array('1'=>__(' Hide Price Filter for Second Category?','woo-bundle-choice')),
 								'is_id_as_name'=>true,
 								'class'=>array(),
@@ -463,7 +419,6 @@ if ( ! class_exists( 'Filters' ) ) {
 								'inline'=>true,
 							),	
 							'price_filter_order_second_cat'=>array(
-								/* Language function - comment */ 
 								'label'=>__('Display Order','woo-bundle-choice'),
 								'type'=>'text',
 								'sanitize'=>'sanitize_text_field',
@@ -477,31 +432,26 @@ if ( ! class_exists( 'Filters' ) ) {
 								'type'=>'devider',
 							),		
 							'price_filter_prefix'=>array(
-								/* Language function - comment */ 
 								'label'=>__('Prefix currency symbol for price filter','woo-bundle-choice'),
 								'type'=>'checkbox',
 								'sanitize'=>'sanitize_text_field',
 								'value'=>array(),
-								/* Language function - comment */ 
 								'options'=>array('price_filter_prefix'=>__('Add Prefix','woo-bundle-choice')),
 								'class'=>array(),
 								'size_class'=>array('eight','wide'),
 								'inline'=>true,								
 							),
 							'price_filter_postfix'=>array(
-								/* Language function - comment */ 
 								'label'=>__('Postfix currency symbol for price filter','woo-bundle-choice'),
 								'type'=>'checkbox',
 								'sanitize'=>'sanitize_text_field',
 								'value'=>array(),
-								/* Language function - comment */ 
 								'options'=>array('price_filter_postfix'=>__('Add Postfix','woo-bundle-choice')),
 								'class'=>array(),
 								'size_class'=>array('eight','wide'),
 								'inline'=>true,								
 							),
 							'filter_setting_submit_btn'=>array(
-								/* Language function - comment */ 
 								'label'=>__('Save','woo-bundle-choice'),
 								'type'=>'button',								
 								'class'=>array('secondary'),
@@ -511,8 +461,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							)							
 						)
 					),
-				'altr_filt_widgts'=>array(
-					/* Language function - comment */ 
+				'altr_filt_widgts'=>array( 
 					'label'=>__('Alternate Filter Widgets','woo-bundle-choice'),
 					'form'=> array(
 						'saved_tab_key'=>array(
@@ -521,19 +470,16 @@ if ( ! class_exists( 'Filters' ) ) {
 							),
 
 						'first_category_altr_filt_widgts'=>array(
-							/* Language function - comment */ 
 							'label'=>__('First Category','woo-bundle-choice'),
 							'type'=>'radio',
 							'value'=>'fc1',
 							'validate'=>array('required'=>''),
 							'sanitize'=>'sanitize_text_field',
-							/* Language function - comment */ 
 							'options'=>array('fc1'=>__('Default(Grid View)','woo-bundle-choice'),'fc2'=>__('Template 1 (Expand/Collapse)','woo-bundle-choice'),'fc3'=>__('Template 2','woo-bundle-choice'),'fc4'=>__('Template 3','woo-bundle-choice'),'fc5'=>__('Template 4','woo-bundle-choice')),
 							'class'=>array('fluid'),						
 							'size_class'=>array('required'),
 							'inline'=>false,
 
-							/* Language function - comment */ 
 							'visible_info'=>array( 'label'=>__('Applies to first category page in the ring builder process','woo-bundle-choice'),
 								'type'=>'visible_info',
 								'class'=>array('small'),
@@ -542,19 +488,16 @@ if ( ! class_exists( 'Filters' ) ) {
 						),
 
 						'second_category_altr_filt_widgts'=>array(
-							/* Language function - comment */ 
 							'label'=>__('Second Category','woo-bundle-choice'),
 							'type'=>'radio',
 							'value'=>'sc1',
 							'validate'=>array('required'=>''),
 							'sanitize'=>'sanitize_text_field',
-							/* Language function - comment */ 
 							'options'=>array('sc1'=>__('Default(Grid View)','woo-bundle-choice'),'sc2'=>__('Template 1 (Expand/Collapse)','woo-bundle-choice'),'sc3'=>__('Template 2','woo-bundle-choice'),'sc4'=>__('Template 3','woo-bundle-choice'),'sc5'=>__('Template 4','woo-bundle-choice')),
 							'class'=>array('fluid'),						
 							'size_class'=>array('required'),
 							'inline'=>false,
 
-							/* Language function - comment */ 
 							'visible_info'=>array( 'label'=>__('Applies to second category page in the ring builder process','woo-bundle-choice'),
 								'type'=>'visible_info',
 								'class'=>array('small'),
@@ -562,7 +505,6 @@ if ( ! class_exists( 'Filters' ) ) {
 							),
 						),
 						'filter_setting_additional_css'=>array(
-							/* Language function - comment */ 
 							'label'=>__('Additional CSS','woo-bundle-choice'),
 							'type'=>'textarea',
 							'value'=>'',
@@ -572,7 +514,6 @@ if ( ! class_exists( 'Filters' ) ) {
 							//'size_class'=>array('eight','wide','transition',(array_intersect(array(wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts'),wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts')),array('fc4','sc4'))?'':'hidden')),
 							'inline'=>false,
 
-							/* Language function - comment */ 
 							'visible_info'=>array( 'label'=>__('Applies to all templates  of both categories.','woo-bundle-choice'),
 								'type'=>'visible_info',
 								'class'=>array('small'),
@@ -580,19 +521,16 @@ if ( ! class_exists( 'Filters' ) ) {
 							),
 						),
 						'filter_setting_alternate_mobile'=>array(
-								/* Language function - comment */ 
 								'label'=>__('Alternate Mobile Filter Widget','woo-bundle-choice'),
 								'type'=>'checkbox',
 								'sanitize'=>'sanitize_text_field',
 								'value'=>array(wbc()->options->get_option('filters_filter_setting','filter_setting_alternate_mobile')),
-								/* Language function - comment */ 
 								'options'=>array('filter_setting_alternate_mobile'=>__(' Check here to enable alternate filter view for mobile.','woo-bundle-choice')),
 								'class'=>array(),
 								'size_class'=>array('eight','wide'),
 								'inline'=>true,
 							),
 						'submit_btn'=>array(
-							/* Language function - comment */ 
 							'label'=>__('Save','woo-bundle-choice'),
 							'type'=>'button',
 							'class'=>array('secondary'),
@@ -604,14 +542,12 @@ if ( ! class_exists( 'Filters' ) ) {
 				),							
 				'd_fconfig'=>array(
 
-						/* Language function - comment */ 
 						'label'=>(($inventory_type==='jewelry' and $is_ring_builder)?"Diamond":__('First','woo-bundle-choice')).__(' Page Filter Configuration','woo-bundle-choice'),
 						'form'=>array( $table["id"].'_bulk'=>array(
 								// 'label'=>'Bulk Actions',
 								'type'=>'select',
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
-								/* Language function - comment */ 
 								'options'=>array(''=>__('Bulk Actions','woo-bundle-choice'), 'delete'=>__('Delete','woo-bundle-choice'),'activate'=>__('Activate','woo-bundle-choice'),'deactivate'=>__('Deactivate','woo-bundle-choice')),
 								'class'=>array('fluid'),
 								'size_class'=>array('two','wide'),
@@ -619,7 +555,6 @@ if ( ! class_exists( 'Filters' ) ) {
 								'inline'=>true,
 							),
 							'd_fconfig_submit_btn_bulk'=>array(
-								/* Language function - comment */ 
 								'label'=>__('Apply','woo-bundle-choice'),
 								'type'=>'button',								
 								'class'=>array('secondary'),
@@ -632,7 +567,6 @@ if ( ! class_exists( 'Filters' ) ) {
 								'type'=>'table' )
 							), 
 							'd_fconfig_save_sec_title'=>array(
-								/* Language function - comment */ 
 								'label'=>__('Add Filter Field','woo-bundle-choice'),
 								'type'=>'label',
 								'size_class'=>array('eight','wide')
@@ -651,7 +585,6 @@ if ( ! class_exists( 'Filters' ) ) {
 								'sanitize'=>'sanitize_text_field',
 							),
 							'd_fconfig_filter'=>array(
-								/* Language function - comment */ 
 								'label'=>__('Filter','woo-bundle-choice'),
 								'type'=>'select',
 								'value'=>'',
@@ -675,8 +608,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
 							),
-							'd_fconfig_label_label'=>array(
-								/* Language function - comment */ 
+							'd_fconfig_label_label'=>array( 
 								'label'=>__('Label','woo-bundle-choice'),
 								'type'=>'label',
 								//'class'=>array('fluid'),
@@ -702,7 +634,6 @@ if ( ! class_exists( 'Filters' ) ) {
 								'type'=>'checkbox',
 								'value'=>array(),
 								'sanitize'=>'sanitize_text_field',
-								/* Language function - comment */ 
 								'options'=>array('1'=>__('Is it advanced filter?','woo-bundle-choice')),
 								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
@@ -711,8 +642,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'inline'=>true,
 							),
 
-							'd_fconfig_column_width_label'=>array(
-								/* Language function - comment */ 
+							'd_fconfig_column_width_label'=>array( 
 								'label'=>__('Column Width','woo-bundle-choice'),
 								'type'=>'label',
 								//'class'=>array('fluid'),
@@ -731,7 +661,6 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'inline'=>true,
 							),
 							'd_fconfig_ordering_label'=>array(
-								/* Language function - comment */ 
 								'label'=>__('Ordering','woo-bundle-choice'),
 								'type'=>'label',
 								//'class'=>array('fluid'),
@@ -759,14 +688,12 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'next_inline'=>true,
 								// 'inline'=>true,
 							),*/
-							'd_fconfig_input_type'=>array(
-								/* Language function - comment */ 
+							'd_fconfig_input_type'=>array( 
 								'label'=>__('Input Type','woo-bundle-choice'),
 								'type'=>'select',
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
 								'validate'=>array('required'=>''),
-								/* Language function - comment */ 
 								'options'=>array('icon'=>__('Icon Only','woo-bundle-choice'),'icon_text'=>__('Icon and Text','woo-bundle-choice'),'numeric_slider'=>__('Numeric slider','woo-bundle-choice'),'text_slider'=>__('Text slider','woo-bundle-choice'),'checkbox'=>__('Checkbox','woo-bundle-choice'),'toggle_column'=>__('Toggle Column','woo-bundle-choice')),
 								'class'=>array('fluid'),
 								'size_class'=>array('three','wide','required'),
@@ -774,7 +701,6 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'inline'=>true,
 							),
 							'd_fconfig_note_label'=>array(
-								/* Language function - comment */ 
 								'label'=>__('<strong>Note:Since you want to use icons with attributes filter this plugin will enable icon option for attributes on woocommerce page, so please set icons from there.</strong>','woo-bundle-choice'),
 								'type'=>"label",
 								'size_class'=>array('transition','hidden')
@@ -783,8 +709,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'label'=>' ',
 								'type'=>'checkbox',
 								'value'=>array(),
-								'sanitize'=>'sanitize_text_field',
-								/* Language function - comment */ 
+								'sanitize'=>'sanitize_text_field', 
 								'options'=>array('1'=>__('Allow only single selection.','woo-bundle-choice')),
 								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
@@ -792,7 +717,6 @@ if ( ! class_exists( 'Filters' ) ) {
 								'attr'=>array('data-toggle="d_fconfig_is_single_select"'),							
 							),
 							'd_fconfig_icon_size_label'=>array(
-								/* Language function - comment */ 
 								'label'=>__('Icon Size','woo-bundle-choice'),
 								'type'=>'label',
 								//'class'=>array('fluid'),
@@ -813,7 +737,6 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'inline'=>true,
 							),
 							'd_fconfig_icon_label_size_label'=>array(
-								/* Language function - comment */ 
 								'label'=>__('Icon Label Size','woo-bundle-choice'),
 								'type'=>'label',
 								//'class'=>array('fluid'),
@@ -838,7 +761,6 @@ if ( ! class_exists( 'Filters' ) ) {
 								'type'=>'checkbox',
 								'value'=>array('1'),
 								'sanitize'=>'sanitize_text_field',
-								/* Language function - comment */ 
 								'options'=>array('1'=>__('Add reset link?','woo-bundle-choice')),
 								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
@@ -846,7 +768,6 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'prev_inline'=>true,
 								// 'inline'=>true,
 								'visible_info'=>array( 
-									/* Language function - comment */ 
 									'label'=>__('Reset action is not suported yet with the Template 3.','woo-bundle-choice'),
 									'type'=>'visible_info',
 									'class'=>array('small'),
@@ -856,8 +777,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							'd_fconfig_add_help'=>array(
 								'type'=>'checkbox',
 								'value'=>array(),
-								'sanitize'=>'sanitize_text_field',
-								/* Language function - comment */ 
+								'sanitize'=>'sanitize_text_field', 
 								'options'=>array('1'=>__('Add help text?','woo-bundle-choice')),
 								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
@@ -866,7 +786,6 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'inline'=>true,
 							),
 							'd_fconfig_add_help_text'=>array(
-								/* Language function - comment */ 
 								'label'=>__('Help Text','woo-bundle-choice'),
 								'type'=>'textarea',
 								'value'=>'',
@@ -883,7 +802,6 @@ if ( ! class_exists( 'Filters' ) ) {
 								'type'=>'checkbox',
 								'value'=>array('1'),
 								'sanitize'=>'sanitize_text_field',
-								/* Language function - comment */ 
 								'options'=>array('1'=>__('Enabled?','woo-bundle-choice')),
 								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
@@ -892,7 +810,6 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'inline'=>true,
 							),							
 							'd_fconfig_submit_btn'=>array(
-								/* Language function - comment */ 
 								'label'=>__('Save','woo-bundle-choice'),
 								'type'=>'button',
 								'class'=>array('secondary'),
@@ -903,23 +820,20 @@ if ( ! class_exists( 'Filters' ) ) {
 						)
 					),
 				's_fconfig'=>array(
-
-						/* Language function - comment */ 
+ 
 						'label'=>($inventory_type==='jewelry'?"Settings":__('Second','woo-bundle-choice')).__(' Page Filter Configuration','woo-bundle-choice'),
 						'form'=>array( $sett_table["id"].'_bulk'=>array(
 								// 'label'=>'Bulk Actions',
 								'type'=>'select',
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
-								/* Language function - comment */ 
 								'options'=>array(''=>__('Bulk Actions','woo-bundle-choice'), 'delete'=>__('Delete','woo-bundle-choice'),'activate'=>__('Activate','woo-bundle-choice'),'deactivate'=>__('Deactivate','woo-bundle-choice')),
 								'class'=>array('fluid'),
 								'size_class'=>array('two','wide'),
 								'next_inline'=>true,
 								'inline'=>true,
 							),
-							's_fconfig_submit_btn_bulk'=>array(
-								/* Language function - comment */ 
+							's_fconfig_submit_btn_bulk'=>array( 
 								'label'=>__('Apply','woo-bundle-choice'),
 								'type'=>'button',
 								'class'=>array('secondary'),
@@ -933,7 +847,6 @@ if ( ! class_exists( 'Filters' ) ) {
 							), 
 
 							's_fconfig_save_sec_title'=>array(
-								/* Language function - comment */ 
 								'label'=>__('Add Filter Field','woo-bundle-choice'),
 								'type'=>'label',
 								'size_class'=>array('eight','wide')
@@ -952,7 +865,6 @@ if ( ! class_exists( 'Filters' ) ) {
 								'sanitize'=>'sanitize_text_field',
 							),
 							's_fconfig_filter'=>array(
-								/* Language function - comment */ 
 								'label'=>__('Filter','woo-bundle-choice'),
 								'type'=>'select',
 								'value'=>'',
@@ -978,7 +890,6 @@ if ( ! class_exists( 'Filters' ) ) {
 							'sanitize'=>'sanitize_text_field',
 							),
 							's_fconfig_label_label'=>array(
-								/* Language function - comment */ 
 								'label'=>__('Label','woo-bundle-choice'),
 								'type'=>'label',
 								//'class'=>array('fluid'),
@@ -1004,7 +915,6 @@ if ( ! class_exists( 'Filters' ) ) {
 								'type'=>'checkbox',
 								'value'=>array(),
 								'sanitize'=>'sanitize_text_field',
-								/* Language function - comment */ 
 								'options'=>array('1'=>__('Is it advanced filter?','woo-bundle-choice')),
 								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
@@ -1014,7 +924,6 @@ if ( ! class_exists( 'Filters' ) ) {
 							),
 
 							's_fconfig_column_width_label'=>array(
-								/* Language function - comment */ 
 								'label'=>__('Column Width','woo-bundle-choice'),
 								'type'=>'label',
 								//'class'=>array('fluid'),
@@ -1033,7 +942,6 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'inline'=>true,
 							),
 							's_fconfig_ordering_label'=>array(
-								/* Language function - comment */ 
 								'label'=>__('Ordering','woo-bundle-choice'),
 								'type'=>'label',
 								//'class'=>array('fluid'),
@@ -1061,22 +969,19 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'next_inline'=>true,
 								// 'inline'=>true,
 							),*/
-							's_fconfig_input_type'=>array(
-								/* Language function - comment */ 
+							's_fconfig_input_type'=>array( 
 								'label'=>__('Input Type','woo-bundle-choice'),
 								'type'=>'select',
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
-								'validate'=>array('required'=>''),
-								/* Language function - comment */ 
+								'validate'=>array('required'=>''), 
 								'options'=>array('icon'=>__('Icon Only','woo-bundle-choice'),'icon_text'=>__('Icon and Text','woo-bundle-choice'),'numeric_slider'=>__('Numeric slider','woo-bundle-choice'),'text_slider'=>__('Text slider','woo-bundle-choice'),'checkbox'=>__('Checkbox','woo-bundle-choice')),
 								'class'=>array('fluid'),
 								'size_class'=>array('three','wide','required'),
 								// 'prev_inline'=>true,
 								// 'inline'=>true,
 							),
-							's_fconfig_note_label'=>array(
-								/* Language function - comment */ 
+							's_fconfig_note_label'=>array( 
 								'label'=>__('<strong>Note:Since you want to use icons with attributes filter this plugin will enable icon option for attributes on woocommerce page, so please set icons from there.</strong>','woo-bundle-choice'),
 								'type'=>"label",
 								'size_class'=>array('transition','hidden')
@@ -1086,7 +991,6 @@ if ( ! class_exists( 'Filters' ) ) {
 								'type'=>'checkbox',
 								'value'=>array(),
 								'sanitize'=>'sanitize_text_field',
-								/* Language function - comment */ 
 								'options'=>array('1'=>__('Allow only single selection.','woo-bundle-choice')),
 								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
@@ -1094,7 +998,6 @@ if ( ! class_exists( 'Filters' ) ) {
 								'attr'=>array('data-toggle="s_fconfig_is_single_select"'),
 							),
 							's_fconfig_icon_size_label'=>array(
-								/* Language function - comment */ 
 								'label'=>__('Icon Size','woo-bundle-choice'),
 								'type'=>'label',
 								//'class'=>array('fluid'),
@@ -1115,7 +1018,6 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'inline'=>true,
 							),
 							's_fconfig_icon_label_size_label'=>array(
-								/* Language function - comment */ 
 								'label'=>__('Icon Label Size','woo-bundle-choice'),
 								'type'=>'label',
 								//'class'=>array('fluid'),
@@ -1140,7 +1042,6 @@ if ( ! class_exists( 'Filters' ) ) {
 								'type'=>'checkbox',
 								'value'=>array('1'),
 								'sanitize'=>'sanitize_text_field',
-								/* Language function - comment */ 
 								'options'=>array('1'=>__('Add reset link?','woo-bundle-choice')),
 								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
@@ -1148,7 +1049,6 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'prev_inline'=>true,
 								// 'inline'=>true,
 								'visible_info'=>array( 
-									/* Language function - comment */ 
 									'label'=>__('Reset action is not suported yet with the Template 3.','woo-bundle-choice'),
 									'type'=>'visible_info',
 									'class'=>array('small'),
@@ -1156,11 +1056,9 @@ if ( ! class_exists( 'Filters' ) ) {
 								),
 							),
 							's_fconfig_add_help'=>array(
-								/* Language function - comment */ 
 								'type'=>'checkbox',
 								'value'=>array(),
-								'sanitize'=>'sanitize_text_field',
-								/* Language function - comment */ 
+								'sanitize'=>'sanitize_text_field', 
 								'options'=>array('1'=>__('Add help text?','woo-bundle-choice')),
 								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
@@ -1169,7 +1067,6 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'inline'=>true,
 							),
 							's_fconfig_add_help_text'=>array(
-								/* Language function - comment */ 
 								'label'=>__('Help Text','woo-bundle-choice'),
 								'type'=>'textarea',
 								'value'=>'',
@@ -1183,11 +1080,9 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'inline'=>true,
 							),
 							's_fconfig_add_enabled'=>array(
-								/* Language function - comment */ 
 								'type'=>'checkbox',
 								'value'=>array('1'),
-								'sanitize'=>'sanitize_text_field',
-								/* Language function - comment */ 
+								'sanitize'=>'sanitize_text_field', 
 								'options'=>array('1'=>__('Enabled?','woo-bundle-choice')),
 								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
@@ -1196,7 +1091,6 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'inline'=>true,
 							),							
 							's_fconfig_submit_btn'=>array(
-								/* Language function - comment */ 
 								'label'=>__('Save','woo-bundle-choice'),
 								'type'=>'button',
 								'class'=>array('secondary'),

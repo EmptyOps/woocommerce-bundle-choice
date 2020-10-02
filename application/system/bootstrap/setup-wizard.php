@@ -231,7 +231,7 @@ class Setup_Wizard {
 					 	<div class="ui icon header" style="width: 100%;">
 							<img src="<?php echo constant('EO_WBC_PLUGIN_ICO_BIG'); ?>" style = 'max-width: 100;max-height: auto;'/>
 							<br/>
-							<p>WooCommerce Product Bundle Choice</p>
+							<p><?php _e('WooCommerce Product Bundle Choice','woo-bundle-choice'); ?></p>
 							<hr/>
 						</div>
 						<?php $this->navigation(); ?>
@@ -249,20 +249,20 @@ class Setup_Wizard {
 			<div class="ui ordered fluid steps">
 		      	<div class=" <?php echo $this->step == 1 ? 'active':( $this->step > 1 ? 'completed':''); ?> step">		        	
 		        	<div class="content">
-		          		<div class="title">Inventory</div>
-		          		<div class="description">Choose inventory</div>
+		          		<div class="title"><?php _e('Inventory','woo-bundle-choice'); ?></div>
+		          		<div class="description"><?php _e('Choose inventory','woo-bundle-choice'); ?></div>
 		        	</div>
 		      	</div>
 		      	<div class="<?php echo $this->step == 2 ? 'active':( $this->step > 2 ? 'completed':''); ?> step">
 			        <div class="content">
-				        <div class="title">Features</div>
-		          		<div class="description">Choose Features to be enabled</div>
+				        <div class="title"><?php _e('Features','woo-bundle-choice'); ?></div>
+		          		<div class="description"><?php _e('Choose Features to be enabled','woo-bundle-choice'); ?></div>
 		        	</div>
 		      	</div>
 		      	<div class="<?php echo $this->step == 3 ? 'active':( $this->step > 3 ? 'completed':''); ?> step">			        
 			        <div class="content">
-				        <div class="title">Finalize</div>
-		          		<div class="description">Add sample products and Complete</div>
+				        <div class="title"><?php _e('Finalize','woo-bundle-choice'); ?></div>
+		          		<div class="description"><?php _e('Add sample products and Complete','woo-bundle-choice'); ?></div>
 		        	</div>
 		      	</div>
 		    </div>
@@ -274,16 +274,16 @@ class Setup_Wizard {
 			<input type="hidden" name="action" value="basic_config">
 			<div class="ui form segment">
 			  	<div class="inline fields">
-			  		/* Language function - comment */ 
+			  		<!-- /* Language function - comment */  -->
 			    	<label><?php _e('Inventory Type','woo-bundle-choice'); ?></label>
 			    	<div class="field">
 			      		<div class="ui selection dropdown">
 						  	<input type="hidden" name="eo_wbc_inventory_type">
 						  	<i class="dropdown icon"></i>
-						  	/* Language function - comment */ 
+						  	<!-- /* Language function - comment */  -->
 						  	<div class="default text"><?php _e('Inventory Type','woo-bundle-choice'); ?></div>
 						  	<div class="menu">
-						  		/* Language function - comment */ 
+						  		<!-- /* Language function - comment */  -->
 							    <div class="item" data-value="jewelryfgdfgfg"><?php _e('Jewelry','woo-bundle-choice'); ?></div>
 							    <div class="item" data-value="clothing"><?php _e('Clothing','woo-bundle-choice'); ?></div>
 							    <div class="item" data-value="home_decor"><?php _e('Home Decor','woo-bundle-choice'); ?></div>
@@ -295,7 +295,7 @@ class Setup_Wizard {
 			  	<br/>
 			  	<div class="inline fields">			  		
 			  		<div class="field">
-			  			<button class="ui inverted primary button" type="submit">Submit</button>
+			  			<button class="ui inverted primary button" type="submit"><?php _e('Submit','woo-bundle-choice'); ?></button>
 			  		</div>
 			  	</div>
 			</div>
@@ -310,14 +310,14 @@ class Setup_Wizard {
 			<div class="ui form segment">
 			  	<div class="grouped fields">
 
-			  		/* Language function - comment */ 
+			  		<!-- /* Language function - comment */  -->
 			    	<label><?php _e('Choose features','woo-bundle-choice'); ?></label>
 
 			    	<?php if(wbc()->sanitize->get('eo_wbc_inventory_type') == 'jewelry'): ?>	
 		      		<div class="field">
 					    <div class="ui toggle checkbox">
 					      	<input type="checkbox" tabindex="0" class="hidden" name="ring_builder" value="1" <?php echo in_array('ring_builder',$feature_option)?'checked="checked"':''; ?>>
-					      	<label>Ring Builder</label>
+					      	<label><?php _e('Ring Builder','woo-bundle-choice'); ?></label>
 					    </div>
 					</div>
 					<?php endif; ?>
@@ -326,7 +326,7 @@ class Setup_Wizard {
 		      		<div class=" field">
 					    <div class="ui toggle checkbox">
 					      	<input type="checkbox" tabindex="0" class="hidden" name="pair_maker" value="1" <?php echo in_array('pair_maker',$feature_option)?'checked="checked"':''; ?>>
-					      	<label>Pair Maker</label>
+					      	<label><?php _e('Pair Maker','woo-bundle-choice'); ?></label>
 					    </div>
 					</div>
 					<?php endif; ?>
@@ -335,14 +335,14 @@ class Setup_Wizard {
 		      		<div class=" field">
 					    <div class="ui toggle checkbox">
 					      	<input type="checkbox" tabindex="0" class="hidden" name="rapnet_api" value="1" <?php echo in_array('rapnet_api',$feature_option)?'checked="checked"':''; ?>>
-					      	<label>Rapnet (You will need paid <a href="https://sphereplugins.com/product/woocommerce-rapnet-integration-extension/" target="_blank">extension</a>)</label>
+					      	<label><?php _e('Rapnet (You will need paid <a href="https://sphereplugins.com/product/woocommerce-rapnet-integration-extension/" target="_blank">extension</a>)','woo-bundle-choice'); ?></label>
 					    </div>
 					</div>
 
 					<div class=" field">
 					    <div class="ui toggle checkbox">
 					      	<input type="checkbox" tabindex="0" class="hidden" name="glowstar_api" value="1" <?php echo in_array('glowstar_api',$feature_option)?'checked="checked"':''; ?>>
-					      	<label>GlowStart Diamond API (API service is free, but you will need paid <a href="https://sphereplugins.com/product/diamond-api-integration/" target="_blank">extension</a>)</label>
+					      	<label><?php _e('GlowStart Diamond API (API service is free, but you will need paid <a href="https://sphereplugins.com/product/diamond-api-integration/" target="_blank">extension</a>)','woo-bundle-choice'); ?></label>
 					    </div>
 					</div>
 					<?php endif; ?>
@@ -351,7 +351,7 @@ class Setup_Wizard {
 					<div class=" field">
 					    <div class="ui toggle checkbox">
 					      	<input type="checkbox" tabindex="0" class="hidden" name="guidance_tool" value="1" <?php echo in_array('guidance_tool',$feature_option)?'checked="checked"':''; ?>>
-					      	<label>Guidance Tool</label>
+					      	<label><?php _e('Guidance Tool','woo-bundle-choice'); ?></label>
 					    </div>
 					</div>
 					<?php endif; ?>
@@ -359,17 +359,17 @@ class Setup_Wizard {
 					<div class="field">
 					    <div class="ui toggle checkbox">
 					      	<input type="checkbox" tabindex="0" class="hidden" name="price_control" value="1" <?php echo in_array('price_control',$feature_option)?'checked="checked"':''; ?>>
-					      	<label>Price Control</label>
+					      	<label><?php _e('Price Control','woo-bundle-choice'); ?></label>
 					    </div>
 					</div>		    	
 
 			  	</div>
 			  	<div class="inline fields">
 			  		<div class="field">
-			  			<button class="ui inverted red button" type="submit" onclick="window.history.go(-1); return false;">Back</button>
+			  			<button class="ui inverted red button" type="submit" onclick="window.history.go(-1); return false;"><?php _e('Back','woo-bundle-choice'); ?></button>
 			  		</div>
 			  		<div class="field">
-			  			<button class="ui inverted primary button" type="submit">Submit</button>
+			  			<button class="ui inverted primary button" type="submit"><?php _e('Submit','woo-bundle-choice'); ?></button>
 			  		</div>
 			  	</div>
 			</div>
@@ -384,13 +384,13 @@ class Setup_Wizard {
 				<div class="ui form">
 					<div class="inline fields">
 						<div class="field">
-				  			<button class="ui inverted red button" type="submit" onclick="window.history.go(-1); return false;">Back</button>
+				  			<button class="ui inverted red button" type="submit" onclick="window.history.go(-1); return false;"><?php _e('Back','woo-bundle-choice'); ?></button>
 				  		</div>
 						<div class="field">
-							<div class="ui inverted green button" id="create_product">Add sample and Finish</div>	
+							<div class="ui inverted green button" id="create_product"><?php _e('Add sample and Finish','woo-bundle-choice'); ?></div>	
 						</div>
 						<div class="field">
-			  				<u><a href="<?php echo admin_url('admin.php?page=eowbc'); ?>">Skip and finish</a></u>
+			  				<u><a href="<?php echo admin_url('admin.php?page=eowbc'); ?>"><?php _e('Skip and finish','woo-bundle-choice'); ?></a></u>
 			  			</div>
 					</div>
 				</div>

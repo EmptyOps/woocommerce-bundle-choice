@@ -9,7 +9,7 @@
 
     <div class="column">3</div>
     <div class="column" style="text-align: left;">
-    	/* Language function - comment */ 
+    	<!-- /* Language function - comment */  -->
         <div class="description"><?php _e('Complete','woo-bundle-choice'); ?></div>
         <div class="title"><?php echo $preview_name; ?></div>
         <div>&nbsp;</div>

@@ -108,14 +108,14 @@ class Term_Meta {
 				<?php if($is_edit): ?>
 					<th scope="row" valign="top">
 				<?php endif; ?>
-				/* Language function - comment */
+				<!-- Language function - comment -->
 						<label for="tag-slug"><?php _e('Color','woo-bundle-choice'); ?></label>
 				<?php if($is_edit): ?>
 					</th>
 					<td>
 				<?php endif; ?>				
 				<input name="wbc_color" id="wbc_color" type="color" class="wbc_color"  style="width: 94%;" value='<?php echo ($is_edit?get_term_meta( $term->term_id,'wbc_color',true):''); ?>'>	
-				/* Language function - comment */
+				<!-- Language function - comment -->
 				<p><?php _e('Choose a color to be shown as option on variation form.','woo-bundle-choice'); ?></p>
 				<?php if($is_edit): ?>
 					</td>
@@ -142,7 +142,7 @@ class Term_Meta {
 			<?php if($is_edit): ?>
 				<th scope="row" valign="top">
 			<?php endif; ?>
-				/* Language function - comment */
+				<!-- Language function - comment -->
 				<label><?php _e('Image', 'woo-bundle-choice'); ?></label>
 			<?php if($is_edit): ?>
 					</th>
@@ -155,7 +155,7 @@ class Term_Meta {
 				<br/>				
 				<div>					
 					<button class="ui button wbc_thumb_button button" style="padding: 0.6em;">
-						/* Language function - comment */
+						<!-- Language function - comment -->
 						<?php _e('Choose Image', 'woo-bundle-choice'); ?>						
 					</button>					
 				</div>
@@ -278,7 +278,7 @@ class Term_Meta {
 		<div class="form-field" style="overflow:visible;">
 			
 			<div id="swatch-photo">
-				/* Language function - comment */
+				<!-- Language function - comment -->
 				<label><?php _e('Thumb Image', 'woo-bundle-choice'); ?></label>
 				
 				<div>
@@ -287,7 +287,7 @@ class Term_Meta {
 				</div>				
 				<div>					
 					<button type="submit" class="wbc_attachment_thumb_button button">
-						/* Language function - comment */
+						<!-- Language function - comment  -->
 						<?php _e('Add/Edit image', 'woo-bundle-choice'); ?>						
 					</button>					
 				</div>
@@ -336,7 +336,7 @@ class Term_Meta {
 		?>		
 		<tr class="form-field" style="overflow:visible;">			
 			<th scope="row" valign="top">
-				/* Language function - comment */
+				<!-- Language function - comment -->
 				<label><?php _e('Image', 'woo-bundle-choice'); ?></label>
 			</th>			
 			<td>
@@ -347,7 +347,7 @@ class Term_Meta {
 					
 				<div>					
 					<button type="submit" class="wbc_attachment_thumb_button button">
-						/* Language function - comment */
+						<!-- Language function - comment -->
 						<?php _e('Add/Edit image', 'woo-bundle-choice'); ?>						
 					</button>				
 				</div>
@@ -434,7 +434,7 @@ class Term_Meta {
 		ob_start();
 		?>
 			<div class="form-field term-slug-wrap">	
-			    /* Language function - comment */			
+			    <!-- Language function - comment -->
 				<label for="tag-slug"><?php _e('Ribbon Color','woo-bundle-choice'); ?></label>
 				<input name="wbc_color" id="wbc_color" type="color" class="wbc_color"  style="width: 94%;" value=''>	
 				<p><?php _e('Choose a color for the ribbon on variation form.','woo-bundle-choice'); ?></p>

@@ -11,10 +11,10 @@
         <div class="ui column left aligned"><?php echo $order; ?></div>
         <div class="ui column left aligned">
             <?php if(empty($second)){ ?>
-                /* Language function - comment */ 
+                <!-- /* Language function - comment */  -->
                 <div class="title"><?php _e('Choose a '.$second_name,'woo-bundle-choice'); ?></div>
             <?php } else { ?>
-                /* Language function - comment */ 
+                <!-- /* Language function - comment */  -->
                 <div class="title"><?php _e($second_name,'woo-bundle-choice'); ?></div>
                 <div class="description"><?php _e($second->get_name(),'woo-bundle-choice'); ?> - <?php _e(wc_price($second->get_price(),'woo-bundle-choice')); ?></div>
                 <div class="ui small blue text">                

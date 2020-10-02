@@ -7,10 +7,10 @@
 ?>
 <div class="<?php echo $width_class; ?>">
 	<p>
-		/* Language function - comment */ 
+		<!-- /* Language function - comment */  -->
 		<span class="ui header"><?php _e('Price','woo-bundle-choice'); ?></span>				
 		<?php if($reset): ?>
-		/* Language function - comment */ 
+		<!-- /* Language function - comment */  -->
 		&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_price(event,'<?php echo $min; ?>','<?php echo $max; ?>')">&nbsp;<u><?php _e('reset','woo-bundle-choice'); ?></u></span>
 		<?php endif; ?>
 	</p>			

@@ -34,7 +34,7 @@ class WBC_Config {
 			'filters_shop_cat'=>__('Filters for Shop/Category Page','woo-bundle-choice'),
 			'opts_uis_item_page'=>__('Options UI for Item Page','woo-bundle-choice'),
 			'spec_view_item_page'=>__('Specifications View for Item Page','woo-bundle-choice'),
-			'price_control'=>__('Price Control'),
+			'price_control'=>__('Price Control','woo-bundle-choice'),
 		);
 	}
 

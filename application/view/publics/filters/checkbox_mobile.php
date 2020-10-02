@@ -9,7 +9,7 @@
 	    <i class="dropdown icon"></i>		    
 	    <?php echo($filter['title']); ?>
 	    <?php if($reset): ?>
-	    /* Language function - comment */ 
+	    <!-- /* Language function - comment */  -->
 		&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_checkbox(event,'.checklist_<?php echo $filter['slug'] ?>')">&nbsp;<u><?php _e('reset','woo-bundle-choice'); ?></u></span>	
 		<?php endif; ?>
 	</div>

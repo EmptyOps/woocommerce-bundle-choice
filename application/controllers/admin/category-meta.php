@@ -72,7 +72,7 @@ class Category_Meta {
 			<?php if($is_edit): ?>
 				<th scope="row" valign="top">
 			<?php endif; ?>
-			/* Language function - comment */
+			 <!-- Language function - comment -->
 				<label><?php _e('Filter Selected Image', 'woo-bundle-choice'); ?></label>
 			<?php if($is_edit): ?>
 					</th>
@@ -85,7 +85,7 @@ class Category_Meta {
 				<br/>				
 				<div>					
 					<button class="ui button wbc_thumb_button button" style="padding: 0.6em;">
-						/* Language function - comment */
+						<!-- Language function - comment -->
 						<?php _e('Choose Image', 'woo-bundle-choice'); ?>						
 					</button>					
 				</div>
@@ -94,7 +94,7 @@ class Category_Meta {
 
 					jQuery(document).on("click",".wbc_thumb_button",function(){
 						wp_media = wp.media({
-							/* Language function - comment */
+							// Language function - comment
 							title: __('Filter Selected Image','woo-bundle-choice'),
 							button: {
 								/* Language function - comment */
@@ -163,7 +163,7 @@ class Category_Meta {
 	        } else {
 	            $src = $woocommerce->plugin_url() . '/assets/images/placeholder.png';
 	        }
-	        /* Language function - comment */			
+	         // Language function - comment 			
 			$columns .= '<img src="' . esc_url( $src ) . '" alt="' . esc_attr__( __('Thumbnail','woo-bundle-choice'), 'woo-bundle-choice' ) . '" class="wp-post-image" height="48" width="48" />';
 		}
 		//die($columns);

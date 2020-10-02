@@ -326,7 +326,7 @@ class Form_Builder implements Builder {
 		{
 			$collection[$field_id.'_radius'] = array(
 				/* Language function - comment */ 
-				'label'=>$field_label.' '.__('Radius (px)','woo-bundle-choice','woo-bundle-choice','woo-bundle-choice'),
+				'label'=>$field_label.' '.__('Radius (px)','woo-bundle-choice'),
 				'type'=>'text',
 				'sanitize'=>'sanitize_text_field',
 				'validate'=>array('required'=>'','postfix'=>['px']),
@@ -334,7 +334,7 @@ class Form_Builder implements Builder {
 				'size_class'=>array('four','wide'),
 				'inline'=>false,
 
-				'visible_info'=>array( 'label'=>( array_key_exists("radius", $info_text_overrides) ? $info_text_overrides["radius"] : __('Sets specified radius on '.$field_label,'woo-bundle-choice','woo-bundle-choice') ),
+				'visible_info'=>array( 'label'=>( array_key_exists("radius", $info_text_overrides) ? $info_text_overrides["radius"] : __('Sets specified radius on '.$field_label,'woo-bundle-choice') ),
 					'type'=>'visible_info',
 					'class'=>array('small'),
 					// 'size_class'=>array('sixteen','wide'),
@@ -465,7 +465,7 @@ class Form_Builder implements Builder {
 
 				for($fi=0; $fi<$ftot; $fi++) {
 					/* Language function - comment */ 
-					$special_lbl = $ftot < 2 ? "" : ( $fi == 0 ? __("Active ") : __("Inactive ",'woo-bundle-choice') );
+					$special_lbl = $ftot < 2 ? "" : ( $fi == 0 ? __("Active ",'woo-bundle-choice') : __("Inactive ",'woo-bundle-choice') );
 					$field_id_suffix = ($fi==0?"_active":"_inactive");
 
 					$collection[$field_id.'_backcolor_lbl'.$field_id_suffix] = array(

@@ -8,14 +8,14 @@
 			<div class="ui form segment">
 			  	<div class="grouped fields">
 
-			  		/* Language function - comment */ 
+			  		<!-- /* Language function - comment */  -->
 			    	<label class="ui large text"><?php _e('Choose features','woo-bundle-choice'); ?> <span class="ui medium grey text"><?php _e( '(You can later change these options from Settings page)','woo-bundle-choice' ); ?></span></label>
 
 			    	<?php if(wbc()->sanitize->get('eo_wbc_inventory_type') == 'jewelry'): ?>	
 		      		<div class="field">
 					    <div class="ui toggle checkbox">
 					      	<input type="checkbox" tabindex="0" class="hidden" name="ring_builder" id="ring_builder" value="1" <?php echo array_key_exists('ring_builder',$feature_option)?'checked="checked"':''; ?>>
-					      	<label>Ring Builder</label>
+					      	<label><?php _e('Ring Builder','woo-bundle-choice'); ?></label>
 					    </div>
 					</div>
 					<?php endif; ?>
@@ -24,7 +24,7 @@
 		      		<div class=" field">
 					    <div class="ui toggle checkbox">
 					      	<input type="checkbox" tabindex="0" class="hidden" name="pair_maker" value="1" <?php echo array_key_exists('pair_maker',$feature_option)?'checked="checked"':''; ?>>
-					      	<label>Pair Maker</label>
+					      	<label><?php _e('Pair Maker','woo-bundle-choice'); ?></label>
 					    </div>
 					</div>
 					<?php endif; ?>
@@ -36,14 +36,14 @@
 			      		<div class=" field">
 						    <div class="ui toggle checkbox">
 						      	<input type="checkbox" tabindex="0" class="hidden" name="rapnet_api" value="1" <?php echo array_key_exists('rapnet_api',$feature_option)?'checked="checked"':''; ?>>
-						      	<label>Rapnet (You will need paid <a href="https://sphereplugins.com/product/woocommerce-rapnet-integration-extension/" target="_blank">extension</a>)</label>
+						      	<label><?php _e('Rapnet (You will need paid <a href="https://sphereplugins.com/product/woocommerce-rapnet-integration-extension/" target="_blank">extension</a>)','woo-bundle-choice'); ?></label>
 						    </div>
 						</div>
 
 						<div class=" field">
 						    <div class="ui toggle checkbox">
 						      	<input type="checkbox" tabindex="0" class="hidden" name="glowstar_api" value="1" <?php echo array_key_exists('glowstar_api',$feature_option)?'checked="checked"':''; ?>>
-						      	<label>GlowStart Diamond API (API service is free, but you will need paid <a href="https://sphereplugins.com/product/diamond-api-integration/" target="_blank">extension</a>)</label>
+						      	<label><?php _e('GlowStart Diamond API (API service is free, but you will need paid <a href="https://sphereplugins.com/product/diamond-api-integration/" target="_blank">extension</a>)','woo-bundle-choice'); ?></label>
 						    </div>
 						</div>
 					<?php 
@@ -54,7 +54,7 @@
 					<div class=" field">
 					    <div class="ui toggle checkbox">
 					      	<input type="checkbox" tabindex="0" class="hidden" name="guidance_tool" value="1" <?php echo array_key_exists('guidance_tool',$feature_option)?'checked="checked"':''; ?>>
-					      	<label>Guidance Tool</label>
+					      	<label><?php _e('Guidance Tool','woo-bundle-choice'); ?></label>
 					    </div>
 					</div>
 					<?php endif; ?>
@@ -113,7 +113,7 @@
 						<div class=" field">
 						    <div class="ui toggle checkbox">
 						      	<input type="checkbox" tabindex="0" class="hidden" name="api_integrations" value="1" <?php echo array_key_exists('api_integrations',$feature_option)?'checked="checked"':''; ?>>
-						      	/* Language function - comment */ 
+						      	<!-- /* Language function - comment */  -->
 						      	<label><?php __e('Diamond APIs Integrations','woo-bundle-choice'); ?></label>
 						    </div>
 						    <i class="exclamation circle icon" data-html="Rapnet, GlowStar, SRK Diamond, JB Diamond and other popular api integrations, you can even request if the one you want to use is not supported yet by us. (Note that for this feature you will need paid <a href='https://sphereplugins.com/product/woocommerce-diamond-api-integration/' target='_blank'>extension</a>)" data-variation="very wide"></i>
@@ -127,13 +127,13 @@
 			  	<br/>
 			  	<div class=" inline fields">	
 					<div class="field">
-		 				<label for="bonus_features">Bonus features</label> 	
+		 				<label for="bonus_features"><?php _e('Bonus features','woo-bundle-choice'); ?></label> 	
 		 				<hr/>
 	 					<div class="grouped fields">
 							<div class="field">
 			    				<div class="ui toggle checkbox fluid">
 			        				<input type="checkbox" name="filters_shortcode" id="filters_shortcode" <?php echo array_key_exists('filters_shortcode',$bonus_features)?'checked="checked"':''; ?> value="filters_shortcode">
-			        				 /* Language function - comment */ 
+			        				 <!-- /* Language function - comment */  -->
 			        				<label for="filters_shortcode"><?php _e('Shortcode Filters','woo-bundle-choice'); ?></label>				      	
 			        			</div>
 			        			<!-- <i class="exclamation circle icon" data-content="If enabled shortcodes functionality will be enabled for button widgets and other widgets where it is possible for us to provide shortcode." data-variation="very wide"></i> -->
@@ -142,7 +142,7 @@
 				    		<div class="field">
 			    				<div class="ui toggle checkbox fluid">
 			        				<input type="checkbox" name="filters_shop_cat" id="filters_shop_cat" <?php echo array_key_exists('filters_shop_cat',$bonus_features)?'checked="checked"':''; ?> value="filters_shop_cat">
-			        				/* Language function - comment */ 
+			        				<!-- /* Language function - comment */  -->
 			        				<label for="filters_shop_cat"> <?php _e('Filters for Shop/Category Page','woo-bundle-choice'); ?></label>				
 			        			</div>
 							</div>
@@ -150,7 +150,7 @@
 				    		<div class="field">
 			    				<div class="ui toggle checkbox fluid">
 			        				<input type="checkbox" name="opts_uis_item_page" id="opts_uis_item_page" <?php echo array_key_exists('opts_uis_item_page',$bonus_features)?'checked="checked"':''; ?> value="opts_uis_item_page">
-			        				/* Language function - comment */ 
+			        				<!-- /* Language function - comment */  -->
 			        				<label for="opts_uis_item_page"><?php _e('Options UI for Item Page','woo-bundle-choice'); ?></label>				      
 			        			</div>
 							</div>
@@ -158,7 +158,7 @@
 				    		<div class="field">
 			    				<div class="ui toggle checkbox fluid">
 			        				<input type="checkbox" name="spec_view_item_page" id="spec_view_item_page" <?php echo array_key_exists('spec_view_item_page',$bonus_features)?'checked="checked"':''; ?> value="spec_view_item_page">
-			        				 /* Language function - comment */ 
+			        				 <!-- /* Language function - comment */  -->
 			        				<label for="spec_view_item_page"><?php _e('Specifications View for Item Page','woo-bundle-choice'); ?></label>
 			        			</div>
 							</div>
@@ -166,7 +166,7 @@
 				    		<div class="field">
 			    				<div class="ui toggle checkbox fluid">
 			        				<input type="checkbox" name="price_control" id="price_control" <?php echo array_key_exists('price_control',$bonus_features)?'checked="checked"':''; ?> value="price_control">
-			        				/* Language function - comment */ 
+			        				<!-- /* Language function - comment */  -->
 			        				<label for="price_control"><?php _e('Price Control','woo-bundle-choice'); ?></label>				      	
 			        			</div>
 							</div>
@@ -176,11 +176,11 @@
 
 			  	<div class="inline fields">
 			  		<div class="field">
-			  			/* Language function - comment */ 
+			  			<!-- /* Language function - comment */  -->
 			  			<button class="ui inverted red button" type="submit" onclick="window.history.go(-1); return false;"><?php _e('Back','woo-bundle-choice'); ?></button>
 			  		</div>
 			  		<div class="field">
-			  			/* Language function - comment */ 
+			  			<!-- /* Language function - comment */  -->
 			  			<button class="ui inverted primary button" type="submit"><?php _e('Next','woo-bundle-choice');?></button>
 			  		</div>
 			  	</div>

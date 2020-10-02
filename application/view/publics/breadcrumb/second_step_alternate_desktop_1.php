@@ -13,7 +13,7 @@
         <div class="column" style="text-align: left;">
 
             <?php if(empty($second)):?>   
-                /* Language function - comment */      
+                <!-- /* Language function - comment */       -->
                 <div class="description"><?php _e('Choose a','woo-bundle-choice'); ?></div>
                 <div class="title"><?php _e($second_name); ?></div>
                 <div>&nbsp;</div>
@@ -27,7 +27,7 @@
                     }                                            
                 if(empty($view_url) or $view_url=='#'){
                     ?>
-                        /* Language function - comment */ 
+                        <!-- /* Language function - comment */  -->
                         <div class="description"><?php _e('Choose a','woo-bundle-choice'); ?></div>
                         <div class="title"><?php _e($second_name) ?></div>
                         <div>&nbsp;</div>
