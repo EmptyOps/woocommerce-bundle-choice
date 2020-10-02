@@ -118,6 +118,9 @@ if(!class_exists('Woo_Bundle_Choice')) {
 
 			$plugin_data = get_plugin_data(__FILE__);
 
+			// enclose the UI library within .wbc container.
+			defined('EOWBC_ENCLIB') || define('EOWBC_ENCLIB',true);
+
 			defined('EOWBC_DIRECTORY') || define('EOWBC_DIRECTORY', plugin_dir_path( __FILE__ ));
 			defined('EOWBC_BASE_DIRECTORY') || define('EOWBC_BASE_DIRECTORY', basename(__DIR__));
 			
