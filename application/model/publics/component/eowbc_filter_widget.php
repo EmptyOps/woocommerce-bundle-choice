@@ -177,7 +177,7 @@ class EOWBC_Filter_Widget {
     					margin: 0 !important;
     					word-break: keep-all;
     					white-space: nowrap;
-    					cursor: default !important;
+    					cursor: pointer !important;
     				}    				
     				
 					.ui.images {
@@ -335,6 +335,22 @@ class EOWBC_Filter_Widget {
 				</style>";	
 
 				ob_start();
+				if ((in_array(wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts'),array('sc3','sc5')) and $this->_category==wbc()->options->get_option('configuration','second_slug')) or (in_array(wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts'),array('fc3','fc5')) and $this->_category==wbc()->options->get_option('configuration','first_slug'))) {
+					?>
+					<style type="text/css">
+						/*.ui.labeled.ticked.slider>.labels .label:after {
+						    height: 6px !important;
+						    width: 3px !important;
+						    top: -61.5% !important;
+						    background: #ffffff !important;
+						}
+						.ui.labeled.slider>.labels .label {
+						    -webkit-transform: translate(-50%,100%) !important;
+						    transform: translate(-50%,100%) !important;
+						}*/
+					</style>
+					<?php
+				}
 				?>
 				<script type="text/javascript">
 					jQuery.fn.wbc_flip_toggle_image=function(element){
@@ -1812,7 +1828,8 @@ class EOWBC_Filter_Widget {
 		?>
 		<!--Primary filter button that will only be visible on desktop/tablet-->
 		<!-- This widget is created with Wordpress plugin - WooCommerce Product bundle choice -->
-		<div id="loading" <?php wbc()->options->get_option('appearance_filters','appearance_filters_loader')?_e('style="display:none !important;"'):'';?>></div>	
+		<div id="loading" <?php (wbc()->options->get_option('appearance_filters','appearance_filters_loader') OR apply_filters('eowbc_filter_widget_loader',true))?_e('style="display:none !important;"'):'';?>></div>
+		
 		<script type="text/javascript">
 			jQuery(document).ready(function(){
 				jQuery(document).on('click',".question.circle.outline.icon",function(){

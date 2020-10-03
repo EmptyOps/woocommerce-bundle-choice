@@ -36,7 +36,7 @@ class n_ga_preprareForFrontendTestsCest extends n_f_adminSideSetupCest
             // TODO right after the related modifications tests are stable with default widgets, comment below widgets that are statically set to default
 
             $I->set_session('wbc_suite_n__process_current_filter_template_0', 'fc1');
-            $I->get_session('wbc_suite_n__process_current_filter_template_1', 'sc1');
+            $I->set_session('wbc_suite_n__process_current_filter_template_1', 'sc1');
             $this->setAlternateFilterWidget($I, 'fc1', 0);  // first category
             $this->setAlternateFilterWidget($I, 'sc1', 1);  // second category
         }

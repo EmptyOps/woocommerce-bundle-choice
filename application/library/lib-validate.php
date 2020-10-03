@@ -78,14 +78,14 @@ if(!class_exists('WBC_Validate')) {
 			return (!( $value!==0 && $value!=="0" && empty($value) )?true:"`${label}` field is required!");
 		}
 
-		public function validate_if($label,$value,$param){			
-			if(empty($param)) return true;
-			foreach ($param as $key => $validations) {
+		public function validate_if($label,$value,$param){						
+			foreach ($param as $key => $validations) {				
 				if (isset($_POST[$key]) and is_array($validations)) {
 					foreach ($validations as $sanitize_method=>$sanitize_params) 
 					{
 		    			if(in_array($sanitize_method,$this->methods)) {
 		    				$validation_state = call_user_func_array( array( $this,$sanitize_method),array($label,$value,$sanitize_params));
+		    				var_dump($value);
 		    				if($validation_state!==true) {
 				    			$res["msg"] = $validation_state;
 				    			echo json_encode($res);

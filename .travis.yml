@@ -18,6 +18,7 @@ notifications:
 branches:
   only:
     - dev
+    - master
 
 services:
   - mysql 
@@ -70,6 +71,7 @@ language: php
 php:
   - 7.3  
   - 7.2  
+  - 5.6 
   # - 7.2 #.3 
   # - 7.2.2 
 
@@ -213,6 +215,9 @@ script:
   #echo the output 
   - echo_necessary_output
 
+  - pwd
+  - ls -l /home/travis/build/EmptyOps/woocommerce-bundle-choice/deploy/
+
   # - vendor/bin/wpcept run
 
 # - language: node_js
@@ -246,3 +251,13 @@ script:
 #     - env: WBC_TEST_ENV=with_sample_data
 
 #  dist: precise
+deploy:
+  #
+  # Auto-deploys the built plugin to WordPress.org on push to master branch
+  #
+  provider: script
+  skip_cleanup: true
+  script: /home/travis/build/EmptyOps/woocommerce-bundle-choice/deploy/deploy.sh
+  on:
+    branch: master
+    php: 7.2

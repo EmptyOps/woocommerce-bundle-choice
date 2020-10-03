@@ -32,7 +32,7 @@ class Eowbc_Appearance {
 	    foreach ($form_definition as $key => $tab) {
 	    	foreach ($tab["form"] as $fk => $fv) {
 			    //loop through form fields and read values from options and store in the form_definition 
-				$form_definition[$key]["form"][$fk]["value"] = wbc()->options->get_option('appearance_'.$key,$fk, isset($form_definition[$key]["form"][$fk]["value"]) ? $form_definition[$key]["form"][$fk]["value"] : '');
+				$form_definition[$key]["form"][$fk]["value"] = wbc()->options->get_option('appearance_'.$key,$fk, isset($form_definition[$key]["form"][$fk]["value"]) ? $form_definition[$key]["form"][$fk]["value"] : '',true,true);
 			}
 	    }
 

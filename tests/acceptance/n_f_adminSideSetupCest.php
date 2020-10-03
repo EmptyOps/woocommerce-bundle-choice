@@ -280,7 +280,7 @@ class n_f_adminSideSetupCest
                 $I->wbc_fillField($I,$field_id[$i][$j],$field_type[$i][$j],$field_name[$i][$j],$val[$i][$j], isset($field_dropdown_div_id[$i][$j]) ? $field_dropdown_div_id[$i][$j] : ""); 
             }
             
-            $I->scrollTo($save_button_xpath);
+            $I->scrollTo($save_button_xpath, -300, -300);
             $I->wait(3);
             
             // save 
@@ -291,7 +291,12 @@ class n_f_adminSideSetupCest
             // // $I->lookIntoWBCErrorLog($I);
 
             // in case server is hanged and it takes time!
-            $I->waitForText('Filter updated successfuly');
+            if( $operation[$i] == "edit" ) { 
+                $I->waitForText('Filter updated successfully');
+            }
+            else {
+                $I->waitForText("New Filter Added Successfully");
+            }
 
             // confirm if saved properly or not
             $I->amOnPage('/wp-admin/admin.php?page=eowbc-filters');     //$I->reloadPage();   //reload page
@@ -302,7 +307,7 @@ class n_f_adminSideSetupCest
         }
     }
 
-    protected function verifyFilters(AcceptanceTester $I,  $filter_id, $field_id, $field_name, $field_type, $val, $should_see_text=array(), $selector_of_targets=array(), $css_property_of_targets=array())
+    protected function verifyFilters(AcceptanceTester $I, $operation,  $filter_id, $field_id, $field_name, $field_type, $val, $should_see_text=array(), $selector_of_targets=array(), $css_property_of_targets=array())
     {
         // if( !$I->test_allowed_in_this_environment("n_") ) {
         //     return;
@@ -310,31 +315,36 @@ class n_f_adminSideSetupCest
 
         // this function assumes that browser session is currently at desired page where the appearance needs to be tested
 
-        // verify
-        for($i=0; $i<sizeof($field_id); $i++) {
-            if( $field_type[$i] == "text" ) {
-                $I->see($val[$i]);
-            }
-            elseif( $field_type[$i] == "checkbox" || $field_type[$i] == "radio" ) {
-                $I->see($should_see_text[$i]);
-            }
-            elseif( $field_type[$i] == "color" ) {
-                $colorcode = $I->executeJS('return jQuery("'.$selector_of_targets[$i].'").css("'.$css_property_of_targets[$i].'");');  
-                echo "colorcode found... ".$colorcode;
-                if( $colorcode == $val[$i] ) {
-                    $I->dontSee('sd8324hs65gkjv73h');   // assume passed with dummy assert
+        for($i=0; $i<sizeof($operation); $i++) {
+
+            // verify
+            for($j=0; $j<sizeof($field_id[$i]); $j++) {
+                if( $field_type[$i][$j] == "text" ) {
+                    $I->see($val[$i][$j]);
                 }
-                else {
-                    $I->see('sd8324hs65gkjv73h');   // assume failed with dummy assert
+                elseif( $field_type[$i][$j] == "checkbox" || $field_type[$i][$j] == "radio" ) {
+                    $I->see($should_see_text[$i][$j]);
+                }
+                elseif( $field_type[$i][$j] == "color" ) {
+                    $colorcode = $I->executeJS('return jQuery("'.$selector_of_targets[$i][$j].'").css("'.$css_property_of_targets[$i][$j].'");');  
+                    echo "colorcode found... ".$colorcode;
+                    if( $colorcode == $val[$i][$j] ) {
+                        $I->dontSee('sd8324hs65gkjv73h');   // assume passed with dummy assert
+                    }
+                    else {
+                        $I->see('sd8324hs65gkjv73h');   // assume failed with dummy assert
+                    }
+                }
+                elseif( $field_type[$i][$j] == "select" ) {
+                    $I->see($should_see_text[$i][$j]);
                 }
             }
-            elseif( $field_type[$i] == "select" ) {
-                $I->see($should_see_text[$i]);
-            }
+
         }
+
     }
 
-    protected function modifyMappings(AcceptanceTester $I, $tab, $operation, $mapping, $field_id, $field_name, $field_type, $val, $save_button_xpath, $field_dropdown_div_id=array())
+    protected function modifyMappings(AcceptanceTester $I, $tab, $operation, $mapping, $field_id, $field_name, $field_type, $val, $save_button_xpath, $field_dropdown_div_id=array(), $save_button_selector="")
     {
         // if( !$I->test_allowed_in_this_environment("n_") ) {
         //     return;
@@ -366,6 +376,14 @@ class n_f_adminSideSetupCest
             // save 
             $I->click($save_button_xpath);  
 
+            if( $operation[$i] == "edit" ) {
+                $I->wbc_debug_log($I, $save_button_selector, 10);
+                $I->waitForText("Mapping Updated Successfully");
+            }
+            else {
+                $I->waitForText("New Mapping Added Successfully");
+            }
+            
             // confirm if saved properly or not
             $I->amOnPage('/wp-admin/admin.php?page=eowbc-mapping');     //$I->reloadPage();   //reload page
             $I->click($tab);
@@ -490,10 +508,14 @@ class n_f_adminSideSetupCest
         // go to page
         if( !empty($goto_page) ) {
             $I->amOnPage($goto_page);
+
+            // scroll to top in case its already on this page then scroll to top is necessary 
+            $I->scrollTo( $I->get_configs("wp_toolbar", "", "", "selector") );
+            $I->wait(10);
         }
         else {
             // // $I->executeJS('window.scrollTo( 0, 0 );');       //$I->scrollTo('Save'); 
-            // $I->scrollTo( $I->get_configs("wbc_admin_general_tab", "", "", "selector") );  // simply scroll to tab area, since the javascript scroll above is not reliable
+            // $I->scrollTo( $I->get_configs("wp_toolbar", "", "", "selector") );  // simply scroll to tab area, since the javascript scroll above is not reliable
             // $I->wait(30);
 
             throw new Exception("Page uri(goto_page) is now mandatory.", 1); 
@@ -501,7 +523,7 @@ class n_f_adminSideSetupCest
         }
 
         // go to the tab
-        $I->click($goto_tab);
+        $I->click($goto_tab);   //clickWithLeftButton ($goto_tab); //click($goto_tab);
         $I->see($tab_verification_text);
 
         if( !empty($edit_action_xpath) ) {
@@ -538,7 +560,7 @@ class n_f_adminSideSetupCest
         }
         else 
         {
-            $I->waitForText("Filter updated successfuly");
+            $I->waitForText("Filter updated successfully");
         }
 
         // confirm if saved properly or not
@@ -573,7 +595,8 @@ class n_f_adminSideSetupCest
         $I->click('Apply');
 
         if( $bulk_action == 'delete' ) {
-            // TODO need to click here on javascript confirmation alert
+            // need to accept here javascript confirmation alert
+            $I->acceptPopup();
         }
 
         // verify 

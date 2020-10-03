@@ -74,6 +74,15 @@ class Acceptance extends \Codeception\Module
                 throw new \Exception("Selector not set for template ".$widget_template." for key ".$key, 1);
             }
         }
+        else if( $key == "wp_toolbar" && ($prefix=="n_" || empty($prefix)) ) { 
+            if( $type == "selector" ) {
+                return '//*[@id="wp-toolbar"]';
+            }
+            else {
+                throw new \Exception("Selector not set for template ".$widget_template." for key ".$key, 1);
+            }
+        }
+        
 
         // breadcrumb  
         else if( $key == "breadcrumb_radius" && ($prefix=="n_" || empty($prefix)) ) {
@@ -638,7 +647,7 @@ class Acceptance extends \Codeception\Module
         try { 
 
             $I->wait($wait);
-            echo "debug_log ".$I->executeJS(' return jQuery("'.$action_button_selector.'").data("debug_log"); ');
+            echo "debug_log ".$I->executeJS(' return jQuery("'.str_replace('"', "'", $action_button_selector).'").data("debug_log"); ');
 
             return true;
         }

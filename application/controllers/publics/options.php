@@ -167,7 +167,10 @@ class Options {
 	}
 
 	public function run() {
+		
 		add_action('wp_footer',function(){
+			wbc()->theme->load('css','product');
+        	wbc()->theme->load('js','product');
 			// Toggle Button
 			$toggle_status = true/*wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_status',true)*/;
 

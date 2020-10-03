@@ -18,6 +18,9 @@ class n_p_frontendFunctionalityModificationsCest extends n_f_adminSideSetupCest
             return;
         }
 
+        // TODO temp till merge with master is done
+        return;
+
         // for first category and second category. loop.
         for($cat=0; $cat<2; $cat++) {
 
@@ -69,7 +72,7 @@ class n_p_frontendFunctionalityModificationsCest extends n_f_adminSideSetupCest
             $this->gotoStep($I, $cat, true, "n_"); 
 
             // verify functionality modifications
-            $this->verifyFilters($I, $filter_id, $field_id, $field_name, $field_type, $val, array(), $selector_of_targets, $css_property_of_targets );
+            $this->verifyFilters($I, $operation, $filter_id, $field_id, $field_name, $field_type, $val, array(), $selector_of_targets, $css_property_of_targets );
         }
 
     }
@@ -81,12 +84,15 @@ class n_p_frontendFunctionalityModificationsCest extends n_f_adminSideSetupCest
             return;
         }
 
+        // TODO temp till merge with master is done
+        return;
+
         // TODO wait for the edit featur
 
         $operation = array('add_new', 'edit', 'add_new');
         $mapping = array( 
                             '', 
-                            '5f061d4fa67cf', 
+                            '-- Round',    //'5f061d4fa67cf', 
                             '', );
         $field_id = array( 
                             array('range_first_1','','',''), 
@@ -102,7 +108,7 @@ class n_p_frontendFunctionalityModificationsCest extends n_f_adminSideSetupCest
                             array( 'text' ), 
                             array('select', 'select'), );
         $val = array( 
-                            array('1','51','69','34'/*here we set the radiant setting but in reality there should be category of ring that belongs to diamond in carat range for example from 0.75 to 1.25 carat */), 
+                            array('1','51','69','34'/*Here we set the radiant setting but in reality there should be category of ring that belongs to diamond in carat range for example from 0.75 to 1.25 carat. For smaller inventories maybe users would like simple way of product to product mapping. */), 
                             array( '15' ), 
                             array('96','36') );
         $field_dropdown_div_id=array( 
