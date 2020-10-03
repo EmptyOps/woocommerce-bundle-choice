@@ -33,7 +33,7 @@ if(!empty($section_type)){
 			}
 			break;*/
 		case 'end':			
-			?></div><?php
+			?></div></div><?php
 			break;
 		default:			
 			break;
