@@ -825,6 +825,25 @@ if ( ! class_exists( 'Filters' ) ) {
 								'style'=>'normal',
 								// 'prev_inline'=>true,
 								// 'inline'=>true,
+							),
+							'config_advance_begin'=>array(
+								'type'=>'accordian',
+								'section_type'=>'start',
+								'class'=>array('field'),
+								'label'=>'<span class="ui large text">Advanced Setting</span>',
+							),									
+							'd_fconfig_non_auto_adjust'=>array(
+								'label'=>'Disable auto adjust lable?',
+								'type'=>'checkbox',
+								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
+								'options'=>array('1'=>' '),
+								'is_id_as_name'=>true,
+								'class'=>array()
+							),							
+							'config_advance_end'=>array(
+								'type'=>'accordian',
+								'section_type'=>'end'
 							),							
 							'd_fconfig_submit_btn'=>array(
 								'label'=>eowbc_lang('Save'),
@@ -1122,7 +1141,26 @@ if ( ! class_exists( 'Filters' ) ) {
 								'style'=>'normal',
 								// 'prev_inline'=>true,
 								// 'inline'=>true,
+							),	
+							'config_advance_begin'=>array(
+								'type'=>'accordian',
+								'section_type'=>'start',
+								'class'=>array('field'),
+								'label'=>'<span class="ui large text">Advanced Setting</span>',
+							),									
+							's_fconfig_non_auto_adjust'=>array(
+								'label'=>'Disable auto adjust lable?',
+								'type'=>'checkbox',
+								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
+								'options'=>array('1'=>' '),
+								'is_id_as_name'=>true,
+								'class'=>array()
 							),							
+							'config_advance_end'=>array(
+								'type'=>'accordian',
+								'section_type'=>'end'
+							),						
 							's_fconfig_submit_btn'=>array(
 								'label'=>eowbc_lang('Save'),
 								'type'=>'button',

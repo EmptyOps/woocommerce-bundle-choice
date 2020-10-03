@@ -196,6 +196,8 @@
 					    $(this).data('prev_val_max',max);
 					}
 					
+					_params.autoAdjustLabels=false;
+					
 					$("input.text_slider_"+$(e).attr('data-slug')).change(function() {				    
 						console.log($(e).attr('data-slug'));
 						//$("#text_slider_"+$(e).attr('data-slug')).slider("set rangeValue",$("[name=min_"+$(e).attr('data-slug')+"]").val(),$("[name=max_"+$(e).attr('data-slug')+"]").val());
