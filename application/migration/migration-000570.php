@@ -66,8 +66,8 @@ class Migration_000570 {
 				$second_map = explode(',',$map_value[1]);
 
 				$new_mapping[]=array(
-					'range_first'=>count($first_map),
-					'range_second'=>count($second_map),
+					'range_first'=>(count($first_map)==1?false:count($first_map)),
+					'range_second'=>(count($second_map)==1?false:count($second_map)),
 					'eo_wbc_first_category'=>$first_map[0],
 					'eo_wbc_second_category'=>$second_map[0],
 					'eo_wbc_first_category_range'=>(empty($first_map[1])?'':$first_map[1]),
