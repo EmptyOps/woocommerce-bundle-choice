@@ -114,7 +114,7 @@
 						    <div class="ui toggle checkbox">
 						      	<input type="checkbox" tabindex="0" class="hidden" name="api_integrations" value="1" <?php echo array_key_exists('api_integrations',$feature_option)?'checked="checked"':''; ?>>
 						      	<!-- /* Language function - comment */  -->
-						      	<label><?php __e('Diamond APIs Integrations','woo-bundle-choice'); ?></label>
+						      	<label><?php _e('Diamond APIs Integrations','woo-bundle-choice'); ?></label>
 						    </div>
 						    <i class="exclamation circle icon" data-html="Rapnet, GlowStar, SRK Diamond, JB Diamond and other popular api integrations, you can even request if the one you want to use is not supported yet by us. (Note that for this feature you will need paid <a href='https://sphereplugins.com/product/woocommerce-diamond-api-integration/' target='_blank'>extension</a>)" data-variation="very wide"></i>
 						</div>

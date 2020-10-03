@@ -12,7 +12,7 @@
 						  	<input type="hidden" name="eo_wbc_inventory_type" id="eo_wbc_inventory_type">
 						  	<i class="dropdown icon"></i>
 						  	<!-- /* Language function - comment */  -->
-						  	<div class="default text"><?php _e('Inventory Type','woo-bundle-choice')); ?></div>
+						  	<div class="default text"><?php _e('Inventory Type','woo-bundle-choice'); ?></div>
 						  	<div class="menu">
 						  		<!-- /* Language function - comment */  -->
 							    <div class="item" data-value="jewelry"><?php _e('Jewelry','woo-bundle-choice'); ?></div>
