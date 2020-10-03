@@ -196,7 +196,12 @@
 					    $(this).data('prev_val_max',max);
 					}
 					
-					_params.autoAdjustLabels=false;
+					let _adjust_label = $(this).data('label_adjust');
+					
+					if(_adjust_label!=1 && $(this).hasClass('labeled')){
+						console.log($(this));
+						_params.autoAdjustLabels=false;	
+					}					
 					
 					$("input.text_slider_"+$(e).attr('data-slug')).change(function() {				    
 						console.log($(e).attr('data-slug'));
