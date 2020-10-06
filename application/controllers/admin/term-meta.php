@@ -62,7 +62,8 @@ class Term_Meta {
 	
 	public function add_attribute_field() {
 
-		if(!empty($this->attribute)) {			
+		if(!empty($this->attribute)) {
+			$this->woocommerce_add_attribute_thumbnail_field();
 			switch ($this->attribute->attribute_type) {
 				case 'color':					
 					$this->color_chooser();
@@ -81,7 +82,8 @@ class Term_Meta {
 	
 
 	public function edit_attributre_field($term, $taxonomy) {
-		if(!empty($this->attribute)) {			
+		if(!empty($this->attribute)) {
+			$this->woocommerce_edit_attributre_thumbnail_field($term,$taxonomy);
 			switch ($this->attribute->attribute_type) {
 				case 'color':					
 					$this->color_chooser(true,$term, $taxonomy);
@@ -144,7 +146,7 @@ class Term_Meta {
 					<td>
 			<?php endif; ?>					
 				<div>
-					<input type="hidden" name="wbc_attachment" id="wbc_attachment">
+					<input type="hidden" name="wbc_attachment" value="<?php echo $image_src; ?>" id="wbc_attachment">
 					<img src="<?php echo $image_src; ?>" width="100" height="100" id="wbc_thumb_img"/>
 				</div>
 				<br/>				
@@ -196,9 +198,16 @@ class Term_Meta {
 
 			function_exists( 'update_term_meta' ) ? update_term_meta( $term_id,'wbc_color',wbc()->sanitize->post('wbc_color') ) : update_metadata( 'woocommerce_term', $term_id,'wbc_color',wbc()->sanitize->post('wbc_color') );
 		}		
+
+		if(isset($_POST['wbc_attachment_thumb'])) {			
+
+			function_exists( 'update_term_meta' ) ? update_term_meta( $term_id,$taxonomy . '_attachment',wbc()->sanitize->post('wbc_attachment_thumb')) : update_metadata( 'woocommerce_term', $term_id,$taxonomy . '_attachment',wbc()->sanitize->post('wbc_attachment_thumb') );
+
+		}
 	}
 
 	public function attribute_columns($columns) {
+		$columns = $this->woocommerce_product_attribute_columns($columns);
 		$column_title = '';
 		$column_key = '';
 		if(!empty($this->attribute)) {			
@@ -226,7 +235,7 @@ class Term_Meta {
 	}
 
 	public function attribute_column($columns, $column, $id) {
-		
+		$columns = $this->woocommerce_product_attribute_column($columns, $column, $id);
 		global $woocommerce; 
 		if ($column == 'color'){			
 			$color = '#ffffff';			
@@ -263,23 +272,23 @@ class Term_Meta {
 		<div class="form-field" style="overflow:visible;">
 			
 			<div id="swatch-photo">
-				<label><?php _e('Image', 'woo-bundle-choice'); ?></label>
+				<label><?php _e('Thumb Image', 'woo-bundle-choice'); ?></label>
 				
 				<div>
-					<input type="hidden" name="wbc_attachment" id="wbc_attachment">
-					<img src="<?php echo $woocommerce->plugin_url() . '/assets/images/placeholder.png' ?>" width="60" height="60" id="wbc_thumb_img"/>
+					<input type="hidden" name="wbc_attachment_thumb" id="wbc_attachment_thumb">
+					<img src="<?php echo $woocommerce->plugin_url() . '/assets/images/placeholder.png' ?>" width="60" height="60" id="wbc_attachment_thumb_img"/>
 				</div>				
 				<div>					
-					<button type="submit" class="wbc_thumb_button button">
+					<button type="submit" class="wbc_attachment_thumb_button button">
 						<?php _e('Add/Edit image', 'woo-bundle-choice'); ?>						
 					</button>					
 				</div>
 				
 				<script type="text/javascript">					
 
-					jQuery(document).on("click",".wbc_thumb_button",function(){
+					jQuery(document).on("click",".wbc_attachment_thumb_button",function(){
 						wp_media = wp.media({
-							title: 'Term Image',
+							title: 'Term Thumb Image',
 							button: {
 								text: 'Choose Image'
 							},
@@ -288,8 +297,8 @@ class Term_Meta {
 						.on('select', function() {
 
 							var attachment = wp_media.state().get('selection').first().toJSON();
-							jQuery('#wbc_thumb_img').attr('src', attachment.url);
-							jQuery('#wbc_attachment').val( attachment.url);
+							jQuery('#wbc_attachment_thumb_img').attr('src', attachment.url);
+							jQuery('#wbc_attachment_thumb').val( attachment.url);
 						})
 						.open();
 						return false;
@@ -307,12 +316,9 @@ class Term_Meta {
 		global $woocommerce;				
 		$src = '';
 		
-		if (get_term_meta( $term->term_id, $this->taxonomy . '_attachment')) {
+		if (get_term_meta( $term->term_id, $taxonomy . '_attachment',true)) {
 
-            $src = get_term_meta( $term->term_id, $this->taxonomy . '_attachment');
-            if(is_array($src)) {
-                $src = $src[0];
-            }            
+            $src = get_term_meta( $term->term_id, $taxonomy . '_attachment',true);            
         } else {
             $src = $woocommerce->plugin_url() . '/assets/images/placeholder.png';
         }
@@ -320,37 +326,38 @@ class Term_Meta {
 		?>		
 		<tr class="form-field" style="overflow:visible;">			
 			<th scope="row" valign="top">
-				<label><?php _e('Image', 'phoen-visual-attributes'); ?></label>
+				<label><?php _e('Image', 'woo-bundle-choice'); ?></label>
 			</th>			
 			<td>
 				<div>
-					<input type="hidden" name="wbc_attachment" id="wbc_attachment" value="<?php echo $src; ?>">
-					<img src="<?php echo $src; ?>" width="100" height="100" id="wbc_thumb_img"/>
+					<input type="hidden" name="wbc_attachment_thumb" id="wbc_attachment_thumb" value="<?php _e($src); ?>">
+					<img src="<?php _e($src); ?>" width="60" height="60" id="wbc_attachment_thumb_img"/>
 				</div>
 					
 				<div>					
-					<button type="submit" class="wbc_thumb_button button">
+					<button type="submit" class="wbc_attachment_thumb_button button">
 						<?php _e('Add/Edit image', 'woo-bundle-choice'); ?>						
-					</button>					
+					</button>				
 				</div>
 				
 				<script type="text/javascript">	
-					jQuery(document).on("click",".wbc_thumb_button",function(){
+					jQuery(document).on("click",".wbc_attachment_thumb_button",function(){
 						wp_media = wp.media({
-							title: 'Add Media',
+							title: 'Term Thumb Image',
 							button: {
-								text: 'Insert Image'
+								text: 'Choose Image'
 							},
 							multiple: false
 						})
 						.on('select', function() {
+
 							var attachment = wp_media.state().get('selection').first().toJSON();
-							jQuery('#wbc_thumb_img').attr('src', attachment.url);
-							jQuery('#wbc_attachment').val( attachment.url);
+							jQuery('#wbc_attachment_thumb_img').attr('src', attachment.url);
+							jQuery('#wbc_attachment_thumb').val( attachment.url);
 						})
 						.open();
 						return false;
-					});				
+					});		
 				</script>
 				<div class="clear"></div>
 			</td>
@@ -363,7 +370,7 @@ class Term_Meta {
 		if(is_array($columns) and !empty($columns)){
 			$__columns = array();		
 			$__columns['cb'] = $columns['cb'];			
-			$__columns[$this->meta_key] = __('Thumbnail', 'woo-bundle-choice');			
+			$__columns['thumbnail'] = __('Thumbnail', 'woo-bundle-choice');			
 			unset($columns['cb']);			
 			$columns = array_merge($__columns, $columns);	
 		}
@@ -375,15 +382,11 @@ class Term_Meta {
 		
 		global $woocommerce; 
 
-		if ($column == $this->meta_key) :			
+		if ($column == 'thumbnail') :			
 
 			$src='';
-			if (get_term_meta( $id, $this->taxonomy . '_attachment')) {
-
-	            $src = get_term_meta( $id, $this->taxonomy . '_attachment');
-	            if(is_array($src)){
-	                $src = $src[0];
-	            }            
+			if (get_term_meta( $id, $this->taxonomy . '_attachment',true)) {
+	            $src = get_term_meta( $id, $this->taxonomy . '_attachment',true);            
 	        } else {
 	            $src = $woocommerce->plugin_url() . '/assets/images/placeholder.png';
 	        }			

@@ -273,7 +273,26 @@ if ( ! class_exists( 'Configuration' ) ) {
 											'class'=>array('fluid', 'small'),
 											'size_class'=>array('sixteen','wide'),
 										),	
-									),								
+									),		
+									'config_advance_begin'=>array(
+										'type'=>'accordian',
+										'section_type'=>'start',
+										'class'=>array('field'),
+										'label'=>'<span class="ui large text">Advanced Setting</span>',
+									),									
+									'config_clickable_breadcrumb'=>array(
+										'label'=>'Clickable Breadcrumbs?',
+										'type'=>'checkbox',
+										'value'=>'',
+										'sanitize'=>'sanitize_text_field',
+										'options'=>array('1'=>'Make Breadcrumbs clickable?.'),
+										'is_id_as_name'=>true,
+										'class'=>array()
+									),							
+									'config_advance_end'=>array(
+										'type'=>'accordian',
+										'section_type'=>'end'
+									),
 									'config_navigation_conf_save_btn'=>array(
 												'label'=>'Save',
 												'type'=>'button',		
