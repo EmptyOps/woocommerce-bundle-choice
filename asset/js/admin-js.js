@@ -472,7 +472,13 @@ function eowbc_ready($){
                                     
                                 } else if($('.ui.dropdown #'+property).length>0) {
                                     if($('#'+property).parent().hasClass('multiple')){
-                                        $('#'+property).parent().dropdown('set selected',list[property].split(','));
+                                        setTimeout(function(){
+                                            $.each(list[property].split(','),function(index,item){
+                                                if(item!==''){
+                                                    $('#'+property).parent().dropdown('set selected',item);
+                                                }
+                                            });                                        
+                                        },2000);
                                     } else {
                                         $('#'+property).parent().dropdown('set selected',list[property]);    
                                     }                                    

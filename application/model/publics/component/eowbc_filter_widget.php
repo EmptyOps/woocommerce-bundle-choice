@@ -180,7 +180,7 @@ class EOWBC_Filter_Widget {
 						text-align: center !important;
 					}
 
-					.wbc-button-input.eo_wbc_button_selected{
+					.wbc-button-input.eo_wbc_button_selected,.wbc-button-input:hover{
 						border-top:2px solid ".wbc()->options->get_option('appearance_filters','slider_nodes_backcolor_active',$active_color)." !important;
 						border-bottom:2px solid ".wbc()->options->get_option('appearance_filters','slider_nodes_backcolor_active',$active_color)." !important;
 					}
