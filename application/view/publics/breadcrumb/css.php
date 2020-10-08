@@ -22,7 +22,7 @@
 /*breadcrumb_backcolor_inactive*/
 
 
-	echo "<style>.eo-wbc-container.container{max-width:100% !important;min-width:100% !important; margin: auto !important;width:100% !important;} ".
+	echo "<style>.container{ margin:0px !important; padding:0px !important; min-width:100%!important; max-width:100% !important; }.eo-wbc-container.container{max-width:100% !important;min-width:100% !important; margin: auto !important;width:100% !important;} ".
 	(
 		wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_inactive','#ffffff')
 		?

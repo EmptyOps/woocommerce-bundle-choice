@@ -164,6 +164,18 @@ class EOWBC_Filter_Widget {
 			$active_color=wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active',$fg_color); //get_option('eo_wbc_active_breadcrumb_color',$fg_color);
 			//wp-head here....
 			echo "<style>
+					
+					.ui.container{
+						margin:0px !important;
+						padding:0px !important;
+						min-width:100%!important;
+						max-width:100% !important;
+					}
+
+					.ui.grid>.column:not(.row){
+						margin: 0 !important;
+					}
+
 					.ui.labeled.ticked.range.slider .labels{
 						font-size:".wbc()->options->get_option('appearance_filters','appearance_filters_slider_font_size','0.75em',true,true)." !important;
 					}

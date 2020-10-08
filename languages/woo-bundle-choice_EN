@@ -7,7 +7,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-09-26T17:38:28+05:30\n"
+"POT-Creation-Date: 2020-10-07T10:56:05+05:30\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: woo-bundle-choice\n"
@@ -82,7 +82,7 @@ msgstr ""
 
 #: controllers/admin/menu/admin-menu.php:89
 #: controllers/admin/menu/admin-menu.php:90
-#: controllers/admin/menu/page/setting-status.php:67
+#: controllers/admin/menu/page/setting-status.php:66
 msgid "Bonus Features"
 msgstr ""
 
@@ -153,19 +153,19 @@ msgid "Use default button styling or custom styling"
 msgstr ""
 
 #: controllers/admin/menu/page/appearance.php:53
-#: controllers/admin/menu/page/appearance.php:139
-#: controllers/admin/menu/page/appearance.php:218
-#: controllers/admin/menu/page/appearance.php:316
-#: controllers/admin/menu/page/configuration.php:192
-#: controllers/admin/menu/page/configuration.php:333
-#: controllers/admin/menu/page/configuration.php:393
-#: controllers/admin/menu/page/filters.php:505
-#: controllers/admin/menu/page/filters.php:596
-#: controllers/admin/menu/page/filters.php:896
-#: controllers/admin/menu/page/filters.php:1200
+#: controllers/admin/menu/page/appearance.php:152
+#: controllers/admin/menu/page/appearance.php:255
+#: controllers/admin/menu/page/appearance.php:353
+#: controllers/admin/menu/page/configuration.php:183
+#: controllers/admin/menu/page/configuration.php:307
+#: controllers/admin/menu/page/configuration.php:367
+#: controllers/admin/menu/page/filters.php:455
+#: controllers/admin/menu/page/filters.php:534
+#: controllers/admin/menu/page/filters.php:832
+#: controllers/admin/menu/page/filters.php:1131
 #: controllers/admin/menu/page/mapping.php:155
-#: controllers/admin/menu/page/setting-status.php:84
-#: controllers/admin/menu/page/setting-status.php:209
+#: controllers/admin/menu/page/setting-status.php:83
+#: controllers/admin/menu/page/setting-status.php:208
 #: view/admin/menu/tiny_features.php:426
 #: view/admin/menu/tiny_features.php:522
 msgid "Save"
@@ -219,119 +219,123 @@ msgstr ""
 msgid "Specify the text that you want to show for change action of the breadcrumb step's item, default value is 'Change'"
 msgstr ""
 
-#: controllers/admin/menu/page/appearance.php:121
+#: controllers/admin/menu/page/appearance.php:134
 msgid "Wrap title on mobile"
 msgstr ""
 
-#: controllers/admin/menu/page/appearance.php:129
+#: controllers/admin/menu/page/appearance.php:142
 msgid "( Wrap mobile breadcrumb title. )"
 msgstr ""
 
-#: controllers/admin/menu/page/appearance.php:152
+#: controllers/admin/menu/page/appearance.php:165
 msgid "Font family to be used in filters"
 msgstr ""
 
-#: controllers/admin/menu/page/appearance.php:152
+#: controllers/admin/menu/page/appearance.php:165
 msgid "Color for headers in filters widget"
 msgstr ""
 
-#: controllers/admin/menu/page/appearance.php:152
+#: controllers/admin/menu/page/appearance.php:165
 msgid "Labels"
 msgstr ""
 
-#: controllers/admin/menu/page/appearance.php:152
+#: controllers/admin/menu/page/appearance.php:165
 msgid "Slider Nodes"
 msgstr ""
 
-#: controllers/admin/menu/page/appearance.php:152
+#: controllers/admin/menu/page/appearance.php:165
 msgid "Slider Track"
 msgstr ""
 
-#: controllers/admin/menu/page/appearance.php:152
-#: controllers/admin/menu/page/filters.php:127
-#: controllers/admin/menu/page/filters.php:237
-#: controllers/admin/menu/page/filters.php:817
-#: controllers/admin/menu/page/filters.php:1119
+#: controllers/admin/menu/page/appearance.php:165
+#: controllers/admin/menu/page/filters.php:120
+#: controllers/admin/menu/page/filters.php:219
+#: controllers/admin/menu/page/filters.php:759
+#: controllers/admin/menu/page/filters.php:1058
 msgid "Icon Label Size"
 msgstr ""
 
-#: controllers/admin/menu/page/appearance.php:152
+#: controllers/admin/menu/page/appearance.php:165
 msgid "Sets the specified color to slider's tracks between nodes"
 msgstr ""
 
-#: controllers/admin/menu/page/appearance.php:152
+#: controllers/admin/menu/page/appearance.php:165
 msgid "Define size of icon at filter in px"
 msgstr ""
 
-#: controllers/admin/menu/page/appearance.php:152
+#: controllers/admin/menu/page/appearance.php:165
 msgid "Define size of icon label in rem"
 msgstr ""
 
-#: controllers/admin/menu/page/appearance.php:156
+#: controllers/admin/menu/page/appearance.php:193
 msgid "Alternate price slider(First Category)"
 msgstr ""
 
-#: controllers/admin/menu/page/appearance.php:164
+#: controllers/admin/menu/page/appearance.php:201
 msgid "( Alternate slider for price at first category. )"
 msgstr ""
 
-#: controllers/admin/menu/page/appearance.php:172
+#: controllers/admin/menu/page/appearance.php:209
 msgid "Alternate price slider(Second Category)"
 msgstr ""
 
-#: controllers/admin/menu/page/appearance.php:180
+#: controllers/admin/menu/page/appearance.php:217
 msgid "( Alternate slider for price at second category. )"
 msgstr ""
 
-#: controllers/admin/menu/page/appearance.php:188
+#: controllers/admin/menu/page/appearance.php:225
 msgid "Filter title size"
 msgstr ""
 
-#: controllers/admin/menu/page/appearance.php:196
+#: controllers/admin/menu/page/appearance.php:233
 msgid "Table head border"
 msgstr ""
 
-#: controllers/admin/menu/page/appearance.php:206
+#: controllers/admin/menu/page/appearance.php:243
 msgid "Hide filter's loaded"
 msgstr ""
 
-#: controllers/admin/menu/page/appearance.php:230
+#: controllers/admin/menu/page/appearance.php:267
 msgid "Product Page"
 msgstr ""
 
-#: controllers/admin/menu/page/appearance.php:234
+#: controllers/admin/menu/page/appearance.php:271
 msgid "First Category Add to Cart Button Text"
 msgstr ""
 
-#: controllers/admin/menu/page/appearance.php:243
+#: controllers/admin/menu/page/appearance.php:280
 msgid "Text to be shown on add to cart button on product page for the first category"
 msgstr ""
 
-#: controllers/admin/menu/page/appearance.php:251
+#: controllers/admin/menu/page/appearance.php:288
 msgid "Second Category Add to Cart Button Text"
 msgstr ""
 
-#: controllers/admin/menu/page/appearance.php:260
+#: controllers/admin/menu/page/appearance.php:297
 msgid "Text to be shown on add to cart button on product page for the second category"
 msgstr ""
 
-#: controllers/admin/menu/page/appearance.php:276
+#: controllers/admin/menu/page/appearance.php:305
+msgid "Add to Basket Text"
+msgstr ""
+
+#: controllers/admin/menu/page/appearance.php:313
 msgid "( Text to be shown as replacement to `Add to basket` text in dropdown button of add to bundle button. )"
 msgstr ""
 
-#: controllers/admin/menu/page/appearance.php:284
+#: controllers/admin/menu/page/appearance.php:321
 msgid "Show Option UI(swatches)"
 msgstr ""
 
-#: controllers/admin/menu/page/appearance.php:292
+#: controllers/admin/menu/page/appearance.php:329
 msgid "If enabled options ui(swatches) will be displayed on item pages during builder process"
 msgstr ""
 
-#: controllers/admin/menu/page/appearance.php:300
+#: controllers/admin/menu/page/appearance.php:337
 msgid "Show Specification View"
 msgstr ""
 
-#: controllers/admin/menu/page/appearance.php:308
+#: controllers/admin/menu/page/appearance.php:345
 msgid "If enabled specification view will be displayed on item pages during builder process"
 msgstr ""
 
@@ -396,447 +400,454 @@ msgstr ""
 msgid "Home page and Shortcode"
 msgstr ""
 
-#: controllers/admin/menu/page/configuration.php:134
+#: controllers/admin/menu/page/configuration.php:133
 msgid "Choose where you want to display the two Start With with Action buttons. If you choose custom landing page a sample landing page will be provided. The Shortcode for the buttons widget is <strong>[woo-bundle-choice-btn]</strong>."
 msgstr ""
 
-#: controllers/admin/menu/page/configuration.php:141
+#: controllers/admin/menu/page/configuration.php:139
 msgid "Choose where you want to display buttons on home page"
 msgstr ""
 
-#: controllers/admin/menu/page/configuration.php:148
+#: controllers/admin/menu/page/configuration.php:145
 msgid "View how landing page will look like"
 msgstr ""
 
-#: controllers/admin/menu/page/configuration.php:155
+#: controllers/admin/menu/page/configuration.php:151
 msgid "Make Pair Button"
 msgstr ""
 
-#: controllers/admin/menu/page/configuration.php:159
+#: controllers/admin/menu/page/configuration.php:154
 msgid "Make Pair button is a interesting feature for ring builder, pair maker for clothing(be sure to not confuse pair maker with make pair button), etc. If you enable this feature the Make Pair button will appear on item page even if the user is not on the builder process e.g. on diamond page user would see \"Add To Ring\" button."
 msgstr ""
 
-#: controllers/admin/menu/page/configuration.php:166
-#: controllers/admin/menu/page/filters.php:887
-#: controllers/admin/menu/page/filters.php:1191
+#: controllers/admin/menu/page/configuration.php:160
+#: controllers/admin/menu/page/filters.php:824
+#: controllers/admin/menu/page/filters.php:1123
 msgid "Enabled?"
 msgstr ""
 
-#: controllers/admin/menu/page/configuration.php:176
+#: controllers/admin/menu/page/configuration.php:169
 msgid "Button label"
 msgstr ""
 
-#: controllers/admin/menu/page/configuration.php:185
+#: controllers/admin/menu/page/configuration.php:177
 msgid "Set applicable text for button e.g. \"Add to Ring\" if its for jewelry site. Applicable only if switch above is enabled."
 msgstr ""
 
-#: controllers/admin/menu/page/configuration.php:201
+#: controllers/admin/menu/page/configuration.php:191
 msgid "Navigations Steps( Breadcrumb )"
 msgstr ""
 
-#: controllers/admin/menu/page/configuration.php:205
-#: controllers/admin/menu/page/configuration.php:381
-#: controllers/admin/menu/page/filters.php:421
-#: controllers/admin/menu/page/filters.php:525
+#: controllers/admin/menu/page/configuration.php:194
+#: controllers/admin/menu/page/configuration.php:355
+#: controllers/admin/menu/page/filters.php:383
+#: controllers/admin/menu/page/filters.php:473
 msgid "First Category"
 msgstr ""
 
-#: controllers/admin/menu/page/configuration.php:210
-#: controllers/admin/menu/page/configuration.php:238
-#: controllers/admin/menu/page/configuration.php:266
+#: controllers/admin/menu/page/configuration.php:198
+#: controllers/admin/menu/page/configuration.php:223
+#: controllers/admin/menu/page/configuration.php:248
 msgid "Name"
 msgstr ""
 
-#: controllers/admin/menu/page/configuration.php:222
-#: controllers/admin/menu/page/configuration.php:250
-#: controllers/admin/menu/page/configuration.php:277
+#: controllers/admin/menu/page/configuration.php:209
+#: controllers/admin/menu/page/configuration.php:234
+#: controllers/admin/menu/page/configuration.php:258
 #: controllers/admin/term-meta.php:420
 msgid "Icon"
 msgstr ""
 
-#: controllers/admin/menu/page/configuration.php:233
-#: controllers/admin/menu/page/configuration.php:381
-#: controllers/admin/menu/page/filters.php:449
-#: controllers/admin/menu/page/filters.php:546
+#: controllers/admin/menu/page/configuration.php:219
+#: controllers/admin/menu/page/configuration.php:355
+#: controllers/admin/menu/page/filters.php:407
+#: controllers/admin/menu/page/filters.php:491
 msgid "Second Category"
 msgstr ""
 
-#: controllers/admin/menu/page/configuration.php:261
+#: controllers/admin/menu/page/configuration.php:244
 msgid "Preview"
 msgstr ""
 
-#: controllers/admin/menu/page/configuration.php:293
+#: controllers/admin/menu/page/configuration.php:273
 msgid "Alternate Breadcrumb Widgets"
 msgstr ""
 
-#: controllers/admin/menu/page/configuration.php:299
+#: controllers/admin/menu/page/configuration.php:278
 msgid "Default"
 msgstr ""
 
-#: controllers/admin/menu/page/configuration.php:299
+#: controllers/admin/menu/page/configuration.php:278
 #: view/admin/menu/tiny_features.php:495
 msgid "Template 1"
 msgstr ""
 
-#: controllers/admin/menu/page/configuration.php:299
-#: controllers/admin/menu/page/filters.php:531
-#: controllers/admin/menu/page/filters.php:552
+#: controllers/admin/menu/page/configuration.php:278
+#: controllers/admin/menu/page/filters.php:478
+#: controllers/admin/menu/page/filters.php:496
 #: view/admin/menu/tiny_features.php:495
 msgid "Template 2"
 msgstr ""
 
-#: controllers/admin/menu/page/configuration.php:303
+#: controllers/admin/menu/page/configuration.php:281
 msgid "( Switch to other look of breadcrumb. )"
 msgstr ""
 
-#: controllers/admin/menu/page/configuration.php:314
+#: controllers/admin/menu/page/configuration.php:291
 msgid "<span class=\"ui large text\">Advanced Setting</span>"
 msgstr ""
 
-#: controllers/admin/menu/page/configuration.php:318
+#: controllers/admin/menu/page/configuration.php:294
 msgid "Clickable Breadcrumbs?"
 msgstr ""
 
-#: controllers/admin/menu/page/configuration.php:323
+#: controllers/admin/menu/page/configuration.php:298
 msgid "Make Breadcrumbs clickable?."
 msgstr ""
 
-#: controllers/admin/menu/page/configuration.php:347
+#: controllers/admin/menu/page/configuration.php:321
 msgid "Extra"
 msgstr ""
 
-#: controllers/admin/menu/page/configuration.php:352
+#: controllers/admin/menu/page/configuration.php:326
 msgid "Pair Maker Configuration"
 msgstr ""
 
-#: controllers/admin/menu/page/configuration.php:376
+#: controllers/admin/menu/page/configuration.php:350
 msgid "Upper Card"
 msgstr ""
 
-#: controllers/admin/menu/page/configuration.php:385
+#: controllers/admin/menu/page/configuration.php:359
 msgid "Mark the category's card to be always shown at top of other. For example, in clothing should be a top wear category, so you should select either first or second category here based on where you set top wear category i.e. if it is first category setting in navigation or second."
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:81
-#: controllers/admin/menu/page/filters.php:189
-#: controllers/admin/menu/page/filters.php:655
-#: controllers/admin/menu/page/filters.php:956
+#: controllers/admin/menu/page/filters.php:80
+#: controllers/admin/menu/page/filters.php:179
+#: controllers/admin/menu/page/filters.php:588
+#: controllers/admin/menu/page/filters.php:887
 msgid "Filter"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:87
-#: controllers/admin/menu/page/filters.php:195
-#: controllers/admin/menu/page/filters.php:680
-#: controllers/admin/menu/page/filters.php:982
+#: controllers/admin/menu/page/filters.php:85
+#: controllers/admin/menu/page/filters.php:184
+#: controllers/admin/menu/page/filters.php:629
+#: controllers/admin/menu/page/filters.php:928
 msgid "Label"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:93
-#: controllers/admin/menu/page/filters.php:201
+#: controllers/admin/menu/page/filters.php:90
+#: controllers/admin/menu/page/filters.php:189
 msgid "Advance Filter"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:99
-#: controllers/admin/menu/page/filters.php:207
-#: controllers/admin/menu/page/filters.php:716
-#: controllers/admin/menu/page/filters.php:1018
+#: controllers/admin/menu/page/filters.php:95
+#: controllers/admin/menu/page/filters.php:194
+#: controllers/admin/menu/page/filters.php:663
+#: controllers/admin/menu/page/filters.php:962
 msgid "Column Width"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:105
-#: controllers/admin/menu/page/filters.php:213
+#: controllers/admin/menu/page/filters.php:100
+#: controllers/admin/menu/page/filters.php:199
 msgid "Template"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:111
-#: controllers/admin/menu/page/filters.php:219
-#: controllers/admin/menu/page/filters.php:735
-#: controllers/admin/menu/page/filters.php:1037
+#: controllers/admin/menu/page/filters.php:105
+#: controllers/admin/menu/page/filters.php:204
+#: controllers/admin/menu/page/filters.php:681
+#: controllers/admin/menu/page/filters.php:980
 msgid "Ordering"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:133
-#: controllers/admin/menu/page/filters.php:243
-#: controllers/admin/menu/page/filters.php:842
-#: controllers/admin/menu/page/filters.php:1144
+#: controllers/admin/menu/page/filters.php:125
+#: controllers/admin/menu/page/filters.php:224
+#: controllers/admin/menu/page/filters.php:783
+#: controllers/admin/menu/page/filters.php:1082
 msgid "Add reset link?"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:168
-#: controllers/admin/menu/page/filters.php:278
+#: controllers/admin/menu/page/filters.php:159
+#: controllers/admin/menu/page/filters.php:258
 #: view/admin/menu/tiny_features.php:63
 #: view/admin/menu/tiny_features.php:129
 msgid "No filter(s) exists, please add some filters."
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:225
-#: controllers/admin/menu/page/filters.php:764
-#: controllers/admin/menu/page/filters.php:1066
+#: controllers/admin/menu/page/filters.php:209
+#: controllers/admin/menu/page/filters.php:709
+#: controllers/admin/menu/page/filters.php:1008
 msgid "Input Type"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:231
-#: controllers/admin/menu/page/filters.php:796
-#: controllers/admin/menu/page/filters.php:1098
+#: controllers/admin/menu/page/filters.php:214
+#: controllers/admin/menu/page/filters.php:739
+#: controllers/admin/menu/page/filters.php:1038
 msgid "Icon Size"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:287
+#: controllers/admin/menu/page/filters.php:266
 msgid "Configuration"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:291
+#: controllers/admin/menu/page/filters.php:269
 #: controllers/admin/menu/page/shop-category-filter.php:47
 #: controllers/admin/menu/page/shortcode-filters.php:42
 msgid "Filter Configuration"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:296
+#: controllers/admin/menu/page/filters.php:273
 msgid "Filter Status"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:301
+#: controllers/admin/menu/page/filters.php:277
 msgid " Check here to enable horizontal filter bar"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:308
+#: controllers/admin/menu/page/filters.php:283
 msgid "Price filter's column width"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:319
+#: controllers/admin/menu/page/filters.php:293
 msgid "Alternate Ticked Slider Widget"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:324
+#: controllers/admin/menu/page/filters.php:297
 msgid " Check here to enable alternate UI view for filter sliders."
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:331
+#: controllers/admin/menu/page/filters.php:303
 msgid "Numeric Filter Separator"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:341
+#: controllers/admin/menu/page/filters.php:312
 msgid "Slider Options Text Limit"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:350
+#: controllers/admin/menu/page/filters.php:320
 msgid "You can truncate longer option texts that are displayed for filters of input type slider. The maximum number characters that will be displayed on your website filters depend on the integer value you set here. "
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:358
+#: controllers/admin/menu/page/filters.php:327
 msgid "Wrap icon filter label"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:369
+#: controllers/admin/menu/page/filters.php:337
 msgid "Word Wrap Icon Filter Labels"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:377
+#: controllers/admin/menu/page/filters.php:344
 msgid "Specify here to limit the number of word that is displayed on icon filters, it is sometime useful to keep it visually appealing."
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:385
+#: controllers/admin/menu/page/filters.php:351
 msgid "Show Apply Filters Button"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:395
+#: controllers/admin/menu/page/filters.php:360
 msgid "If enabled the ajax search on each change of filter will not fire but the Apply Filters. This is useful if your website has many filters and user would normally filter on many of them."
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:403
+#: controllers/admin/menu/page/filters.php:367
 msgid "Show Reset Filters Button"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:413
+#: controllers/admin/menu/page/filters.php:376
 msgid "If enabled the Reset Filters buttons will be displayed."
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:426
-#: controllers/admin/menu/page/filters.php:454
+#: controllers/admin/menu/page/filters.php:387
+#: controllers/admin/menu/page/filters.php:411
 msgid "Hide Price Filter"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:431
+#: controllers/admin/menu/page/filters.php:391
 msgid " Hide Price Filter for First Category?"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:439
-#: controllers/admin/menu/page/filters.php:467
+#: controllers/admin/menu/page/filters.php:398
+#: controllers/admin/menu/page/filters.php:422
 msgid "Display Order"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:459
+#: controllers/admin/menu/page/filters.php:415
 msgid " Hide Price Filter for Second Category?"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:481
+#: controllers/admin/menu/page/filters.php:435
 msgid "Prefix currency symbol for price filter"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:486
+#: controllers/admin/menu/page/filters.php:439
 msgid "Add Prefix"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:493
+#: controllers/admin/menu/page/filters.php:445
 msgid "Postfix currency symbol for price filter"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:498
+#: controllers/admin/menu/page/filters.php:449
 msgid "Add Postfix"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:516
+#: controllers/admin/menu/page/filters.php:465
 msgid "Alternate Filter Widgets"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:531
-#: controllers/admin/menu/page/filters.php:552
+#: controllers/admin/menu/page/filters.php:478
+#: controllers/admin/menu/page/filters.php:496
 msgid "Default(Grid View)"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:531
-#: controllers/admin/menu/page/filters.php:552
+#: controllers/admin/menu/page/filters.php:478
+#: controllers/admin/menu/page/filters.php:496
 msgid "Template 1 (Expand/Collapse)"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:531
-#: controllers/admin/menu/page/filters.php:552
+#: controllers/admin/menu/page/filters.php:478
+#: controllers/admin/menu/page/filters.php:496
 msgid "Template 3"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:531
-#: controllers/admin/menu/page/filters.php:552
+#: controllers/admin/menu/page/filters.php:478
+#: controllers/admin/menu/page/filters.php:496
 msgid "Template 4"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:537
+#: controllers/admin/menu/page/filters.php:483
 msgid "Applies to first category page in the ring builder process"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:558
+#: controllers/admin/menu/page/filters.php:501
 msgid "Applies to second category page in the ring builder process"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:566
+#: controllers/admin/menu/page/filters.php:508
 msgid "Additional CSS"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:576
+#: controllers/admin/menu/page/filters.php:517
 msgid "Applies to all templates  of both categories."
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:584
+#: controllers/admin/menu/page/filters.php:524
 msgid "Alternate Mobile Filter Widget"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:589
+#: controllers/admin/menu/page/filters.php:528
 msgid " Check here to enable alternate filter view for mobile."
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:608
+#: controllers/admin/menu/page/filters.php:545
 msgid "First"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:608
-#: controllers/admin/menu/page/filters.php:908
+#: controllers/admin/menu/page/filters.php:545
+#: controllers/admin/menu/page/filters.php:843
 msgid " Page Filter Configuration"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:615
-#: controllers/admin/menu/page/filters.php:915
+#: controllers/admin/menu/page/filters.php:551
+#: controllers/admin/menu/page/filters.php:849
 #: controllers/admin/menu/page/mapping.php:174
 msgid "Bulk Actions"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:615
-#: controllers/admin/menu/page/filters.php:915
+#: controllers/admin/menu/page/filters.php:551
+#: controllers/admin/menu/page/filters.php:849
 #: controllers/admin/menu/page/mapping.php:174
 msgid "Delete"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:615
-#: controllers/admin/menu/page/filters.php:915
+#: controllers/admin/menu/page/filters.php:551
+#: controllers/admin/menu/page/filters.php:849
 msgid "Activate"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:615
-#: controllers/admin/menu/page/filters.php:915
+#: controllers/admin/menu/page/filters.php:551
+#: controllers/admin/menu/page/filters.php:849
 msgid "Deactivate"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:623
-#: controllers/admin/menu/page/filters.php:923
+#: controllers/admin/menu/page/filters.php:558
+#: controllers/admin/menu/page/filters.php:856
 #: controllers/admin/menu/page/mapping.php:182
 msgid "Apply"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:636
-#: controllers/admin/menu/page/filters.php:937
+#: controllers/admin/menu/page/filters.php:570
+#: controllers/admin/menu/page/filters.php:869
 #: controllers/admin/menu/page/shop-category-filter.php:48
 #: controllers/admin/menu/page/shortcode-filters.php:43
 msgid "Add Filter Field"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:706
-#: controllers/admin/menu/page/filters.php:1008
+#: controllers/admin/menu/page/filters.php:654
+#: controllers/admin/menu/page/filters.php:953
 msgid "Is it advanced filter?"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:770
-#: controllers/admin/menu/page/filters.php:1072
+#: controllers/admin/menu/page/filters.php:715
+#: controllers/admin/menu/page/filters.php:1014
 msgid "Icon Only"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:770
-#: controllers/admin/menu/page/filters.php:1072
+#: controllers/admin/menu/page/filters.php:715
+#: controllers/admin/menu/page/filters.php:1014
 msgid "Icon and Text"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:770
-#: controllers/admin/menu/page/filters.php:1072
+#: controllers/admin/menu/page/filters.php:715
+#: controllers/admin/menu/page/filters.php:1014
 msgid "Numeric slider"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:770
-#: controllers/admin/menu/page/filters.php:1072
+#: controllers/admin/menu/page/filters.php:715
+#: controllers/admin/menu/page/filters.php:1014
 msgid "Text slider"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:770
-#: controllers/admin/menu/page/filters.php:1072
+#: controllers/admin/menu/page/filters.php:715
+#: controllers/admin/menu/page/filters.php:1014
 msgid "Checkbox"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:770
+#: controllers/admin/menu/page/filters.php:715
+#: controllers/admin/menu/page/filters.php:1014
 msgid "Toggle Column"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:778
-#: controllers/admin/menu/page/filters.php:1080
+#: controllers/admin/menu/page/filters.php:715
+#: controllers/admin/menu/page/filters.php:1014
+#: controllers/admin/term-meta.php:418
+msgid "Button"
+msgstr ""
+
+#: controllers/admin/menu/page/filters.php:723
+#: controllers/admin/menu/page/filters.php:1022
 msgid "<strong>Note:Since you want to use icons with attributes filter this plugin will enable icon option for attributes on woocommerce page, so please set icons from there.</strong>"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:788
-#: controllers/admin/menu/page/filters.php:1090
+#: controllers/admin/menu/page/filters.php:732
+#: controllers/admin/menu/page/filters.php:1031
 msgid "Allow only single selection."
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:850
-#: controllers/admin/menu/page/filters.php:1152
+#: controllers/admin/menu/page/filters.php:790
+#: controllers/admin/menu/page/filters.php:1089
 msgid "Reset action is not suported yet with the Template 3."
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:861
-#: controllers/admin/menu/page/filters.php:1164
+#: controllers/admin/menu/page/filters.php:800
+#: controllers/admin/menu/page/filters.php:1099
 msgid "Add help text?"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:870
-#: controllers/admin/menu/page/filters.php:1173
+#: controllers/admin/menu/page/filters.php:808
+#: controllers/admin/menu/page/filters.php:1107
 msgid "Help Text"
 msgstr ""
 
-#: controllers/admin/menu/page/filters.php:908
+#: controllers/admin/menu/page/filters.php:843
 msgid "Second"
 msgstr ""
 
@@ -873,7 +884,6 @@ msgstr ""
 
 #: controllers/admin/menu/page/mapping.php:135
 #: controllers/admin/menu/page/mapping.php:148
-#: controllers/ajax/filter.php:77
 msgid "AND"
 msgstr ""
 
@@ -888,6 +898,10 @@ msgstr ""
 
 #: controllers/admin/menu/page/mapping.php:166
 msgid "Map creation and modification"
+msgstr ""
+
+#: controllers/admin/menu/page/mapping.php:200
+msgid "Add New Maps"
 msgstr ""
 
 #: controllers/admin/menu/page/mapping.php:209
@@ -965,75 +979,77 @@ msgstr ""
 msgid "Choose features"
 msgstr ""
 
-#: controllers/admin/menu/page/setting-status.php:55
+#: controllers/admin/menu/page/setting-status.php:54
+#: system/bootstrap/setup-wizard.php:338
+#: view/admin/setup-wizard/feature.php:39
 msgid "Rapnet (You will need paid <a href=\"https://sphereplugins.com/product/woocommerce-rapnet-integration-extension/\" target=\"_blank\">extension</a>)"
 msgstr ""
 
-#: controllers/admin/menu/page/setting-status.php:56
+#: controllers/admin/menu/page/setting-status.php:55
 msgid "GlowStar Diamond API (API service is free, but you will need paid <a href=\"https://sphereplugins.com/product/diamond-api-integration/\" target=\"_blank\">extension</a>)"
 msgstr ""
 
-#: controllers/admin/menu/page/setting-status.php:57
+#: controllers/admin/menu/page/setting-status.php:56
 msgid "JB Diamond API (API service is free, but you will need paid <a href=\"https://sphereplugins.com/product/diamond-api-integration/\" target=\"_blank\">extension</a>)"
 msgstr ""
 
-#: controllers/admin/menu/page/setting-status.php:58
+#: controllers/admin/menu/page/setting-status.php:57
 msgid "SRK Diamond API (API service is free, but you will need paid <a href=\"https://sphereplugins.com/product/diamond-api-integration/\" target=\"_blank\">extension</a>)"
 msgstr ""
 
-#: controllers/admin/menu/page/setting-status.php:72
+#: controllers/admin/menu/page/setting-status.php:71
 msgid "Choose Bonus features"
 msgstr ""
 
-#: controllers/admin/menu/page/setting-status.php:93
+#: controllers/admin/menu/page/setting-status.php:92
 msgid "Logs"
 msgstr ""
 
-#: controllers/admin/menu/page/setting-status.php:97
+#: controllers/admin/menu/page/setting-status.php:96
 msgid "Following error details will be sent to "
 msgstr ""
 
-#: controllers/admin/menu/page/setting-status.php:104
+#: controllers/admin/menu/page/setting-status.php:103
 msgid "Subject"
 msgstr ""
 
-#: controllers/admin/menu/page/setting-status.php:121
+#: controllers/admin/menu/page/setting-status.php:120
 msgid "Error logs & installed plugins etc. details"
 msgstr ""
 
-#: controllers/admin/menu/page/setting-status.php:139
+#: controllers/admin/menu/page/setting-status.php:138
 msgid "I agree with Sphere Plugins <a href=\"https://sphereplugins.com/terms-conditions/\" target=\"_blank\">Terms</a> & <a href=\"https://sphereplugins.com/privacy-policy/\" target=\"_blank\">Privacy Policy</a>"
 msgstr ""
 
-#: controllers/admin/menu/page/setting-status.php:150
+#: controllers/admin/menu/page/setting-status.php:149
 msgid "Cancel"
 msgstr ""
 
-#: controllers/admin/menu/page/setting-status.php:159
+#: controllers/admin/menu/page/setting-status.php:158
 msgid "Send error report"
 msgstr ""
 
-#: controllers/admin/menu/page/setting-status.php:168
+#: controllers/admin/menu/page/setting-status.php:167
 msgid "Clear Log and Return"
 msgstr ""
 
-#: controllers/admin/menu/page/setting-status.php:178
+#: controllers/admin/menu/page/setting-status.php:177
 msgid "Advanced Configuration"
 msgstr ""
 
-#: controllers/admin/menu/page/setting-status.php:182
+#: controllers/admin/menu/page/setting-status.php:181
 msgid "Internal Routing URL"
 msgstr ""
 
-#: controllers/admin/menu/page/setting-status.php:189
+#: controllers/admin/menu/page/setting-status.php:188
 msgid "This setting is needed in exceptional scenarios where site setup or structure requires setting a specific URL for some operations."
 msgstr ""
 
-#: controllers/admin/menu/page/setting-status.php:197
+#: controllers/admin/menu/page/setting-status.php:196
 msgid "Remove index.php from link?"
 msgstr ""
 
-#: controllers/admin/menu/page/setting-status.php:202
+#: controllers/admin/menu/page/setting-status.php:201
 msgid "Remove index.php"
 msgstr ""
 
@@ -1129,10 +1145,6 @@ msgstr ""
 msgid "Add/Edit image"
 msgstr ""
 
-#: controllers/admin/term-meta.php:418
-msgid "Button"
-msgstr ""
-
 #: controllers/admin/term-meta.php:421
 msgid "Icons with Text"
 msgstr ""
@@ -1209,14 +1221,6 @@ msgstr ""
 msgid "There is an error at page "
 msgstr ""
 
-#: controllers/ajax/filter.php:87
-#: controllers/ajax/filter.php:98
-#: controllers/ajax/filter.php:119
-#: controllers/ajax/filter.php:128
-#: controllers/ajax/filter.php:137
-msgid "EXISTS IN"
-msgstr ""
-
 #: controllers/publics/options.php:65
 #: controllers/publics/options.php:115
 #: controllers/publics/options.php:126
@@ -1236,11 +1240,11 @@ msgstr ""
 msgid "One user has reported mapping issue at this <a href=\""
 msgstr ""
 
-#: controllers/publics/pages/preview.php:216
+#: controllers/publics/pages/preview.php:220
 msgid "Unexpected error has occured"
 msgstr ""
 
-#: controllers/publics/pages/preview.php:349
+#: controllers/publics/pages/preview.php:362
 msgid "Add This To Cart"
 msgstr ""
 
@@ -1261,17 +1265,29 @@ msgstr ""
 msgid "The index key should be either a string or an integer"
 msgstr ""
 
+#: helper/helper-WBC_Config.php:23
+#: helper/helper-WBC_Config.php:58
+#: system/bootstrap/setup-wizard.php:320
+#: view/admin/setup-wizard/feature.php:18
+msgid "Ring Builder"
+msgstr ""
+
 #: helper/helper-WBC_Config.php:24
+#: view/admin/setup-wizard/feature.php:117
 msgid "Diamond APIs Integrations"
 msgstr ""
 
 #: helper/helper-WBC_Config.php:25
 #: helper/helper-WBC_Config.php:59
+#: system/bootstrap/setup-wizard.php:329
+#: view/admin/setup-wizard/feature.php:27
 msgid "Pair Maker"
 msgstr ""
 
 #: helper/helper-WBC_Config.php:26
 #: helper/helper-WBC_Config.php:60
+#: system/bootstrap/setup-wizard.php:354
+#: view/admin/setup-wizard/feature.php:57
 msgid "Guidance Tool"
 msgstr ""
 
@@ -1287,8 +1303,10 @@ msgstr ""
 msgid "Specifications View for Item Page"
 msgstr ""
 
-#: helper/helper-WBC_Config.php:58
-msgid "Ring Builder"
+#: helper/helper-WBC_Config.php:37
+#: system/bootstrap/setup-wizard.php:362
+#: view/admin/setup-wizard/feature.php:170
+msgid "Price Control"
 msgstr ""
 
 #. translators: %s: Name of the product
@@ -1379,11 +1397,12 @@ msgid "Sets specified radius on "
 msgstr ""
 
 #: model/admin/form-builder.php:356
+#: model/admin/form-builder.php:469
 msgid "Active "
 msgstr ""
 
 #: model/admin/form-builder.php:356
-#: model/admin/form-builder.php:470
+#: model/admin/form-builder.php:469
 msgid "Inactive "
 msgstr ""
 
@@ -1391,658 +1410,28 @@ msgstr ""
 msgid "Background Color"
 msgstr ""
 
-#: model/admin/form-builder.php:370
-#: model/admin/form-builder.php:483
-msgid "Sets specified color as background color on "
-msgstr ""
-
-#: model/admin/form-builder.php:387
+#: model/admin/form-builder.php:386
 msgid "Hover Color"
 msgstr ""
 
-#: model/admin/form-builder.php:396
+#: model/admin/form-builder.php:395
 msgid "Sets specified color as hover color on "
 msgstr ""
 
-#: model/admin/form-builder.php:411
+#: model/admin/form-builder.php:410
 msgid "Text Color"
 msgstr ""
 
-#: model/admin/form-builder.php:419
+#: model/admin/form-builder.php:418
 msgid "Sets specified color as text color on "
 msgstr ""
 
-#: model/admin/form-builder.php:435
+#: model/admin/form-builder.php:434
 msgid "Border Color"
 msgstr ""
 
-#: model/admin/form-builder.php:444
+#: model/admin/form-builder.php:443
 msgid "Sets specified color as border color on "
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:35
-#: model/admin/sample_data/data_templates/ring-builder-data-template.php:76
-msgid "Size"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:37
-msgid "Size attributes for clothing wear"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:42
-#: model/admin/sample_data/data_templates/ring-builder-data-template.php:45
-msgid "Colour"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:44
-msgid "Colour attributes for clothing wear"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:52
-msgid "Fabric attributes for clothings wear"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:57
-msgid "Fit"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:59
-msgid "Fit attributes for clothing wear"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:64
-msgid "Neck"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:66
-msgid "Neck types attributes for clothings wear"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:71
-msgid "Occasion"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:73
-msgid "Occasion attributes for clothings wear"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:84
-msgid "Sleeve"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:86
-msgid "Sleeve attributes for clothings wear"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:91
-msgid "Collar"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:93
-msgid "Collar attributes for clothings wear"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:99
-msgid "Closure Type"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:101
-msgid "Closure type attributes for clothings wear"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:106
-msgid "Length"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:108
-msgid "Length attributes for clothings wear"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:128
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:402
-msgid "Top wear"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:137
-msgid "Shirts"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:159
-msgid "T-shirts"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:181
-msgid "Sweaters"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:203
-msgid "Jackets"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:225
-msgid "Blazers & Coats"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:233
-msgid "Suits"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:241
-msgid "Hoodies"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:262
-msgid "Tops"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:270
-msgid "Tunics"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:280
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:874
-msgid "Bottom wear"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:289
-msgid "Trousers"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:311
-msgid "Jeans"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:333
-msgid "Shorts"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:355
-msgid "Track pants"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:377
-msgid "Palazzos"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:385
-msgid "Skirts"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:393
-msgid "Leggings"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:411
-msgid "Men white shirts"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:419
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:506
-msgid "Men black shirts"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:427
-msgid "Men white shirts black bottom only"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:435
-msgid "Men blue shirts blue bottom only"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:443
-msgid "Men blue blazer black bottom only"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:451
-msgid "Men light blue blazer"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:458
-msgid "Men gray blazer"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:466
-msgid "Men blue shirts"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:474
-msgid "Men green shirts"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:482
-msgid "Men black Jockey tshirts"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:490
-msgid "Men white Jockey tshirts"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:498
-msgid "Men gray shirts"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:515
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:523
-msgid "Women white shirts"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:531
-msgid "Women black shirts"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:539
-msgid "Women blue shirts"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:548
-msgid "Men white tshirts"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:556
-msgid "Men black tshirts"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:565
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:589
-msgid "Women white tshirts"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:573
-msgid "Women black tshirts"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:581
-msgid "Women red tshirts"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:598
-msgid "Men white sweater"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:606
-msgid "Men black sweater"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:614
-msgid "Men green sweater"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:623
-msgid "Women green sweater"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:631
-msgid "Women purple sweater"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:639
-msgid "Women gray sweater"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:648
-msgid "Men white jacket"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:656
-msgid "Men black jacket"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:664
-msgid "Men orange jacket"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:673
-msgid "Women blue jacket"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:682
-msgid "Men black blazers"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:690
-msgid "Men blue blazers"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:698
-msgid "Men green blazers"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:706
-msgid "Men purple blazers"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:715
-msgid "Men orange suit"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:723
-msgid "Men blue suit"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:731
-msgid "Men purple suit"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:739
-msgid "Men light gray suit"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:749
-msgid "Men white hoodie"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:757
-msgid "Men black hoodie"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:765
-msgid "Men green hoodie"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:773
-msgid "Men red hoodie"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:782
-msgid "Women blue hoodie"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:790
-msgid "Women red hoodie"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:798
-msgid "Women yellow hoodie"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:807
-msgid "Women black tops"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:815
-msgid "Women green tops"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:823
-msgid "Women red tops"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:831
-msgid "Women purple tops"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:839
-msgid "Women pink tops"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:848
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:856
-msgid "Women white tunic"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:864
-msgid "Women orange tunic"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:883
-msgid "Men white trouser"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:891
-msgid "Men maroon trouser"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:899
-msgid "Men gray trouser"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:907
-msgid "Men orange suit trouser"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:915
-msgid "Men blue suit trouser"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:923
-msgid "Men gray suit trouser"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:931
-msgid "Men light gray suit trouser"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:939
-msgid "Men black trouser"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:947
-msgid "Men green trouser"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:955
-msgid "Men blue trouser"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:963
-msgid "Men purple suit trouser"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:971
-msgid "Men yellow trouser"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:980
-msgid "Women white trouser"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:988
-msgid "Women black trouser"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:996
-msgid "Women blue trouser"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1004
-msgid "Women pink trouser"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1013
-msgid "Men black jeans"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1021
-msgid "Men blue jeans"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1029
-msgid "Men white jeans"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1037
-msgid "Men light blue jeans"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1046
-msgid "Women black jeans"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1054
-msgid "Women blue jeans"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1062
-msgid "Women sky blue jeans"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1071
-msgid "Men white shorts"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1079
-msgid "Men black shorts"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1087
-msgid "Men blue shorts"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1095
-msgid "Men gray shorts"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1104
-msgid "Women black shorts"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1112
-msgid "Women blue shorts"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1121
-msgid "Men white track"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1128
-msgid "Men gray track"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1135
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1142
-msgid "Men black track"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1150
-msgid "Women black track"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1157
-msgid "Women blue track"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1165
-msgid "Women white palazzos"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1172
-msgid "Women black palazzos"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1179
-msgid "Women blue palazzos"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1186
-msgid "Women sky blue palazzos"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1193
-msgid "Women orange palazzos"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1201
-msgid "Women black skirt"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1208
-msgid "Women red skirt"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1216
-msgid "Women white leggings"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1223
-msgid "Women blue leggings"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1230
-msgid "Women black leggings"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1237
-msgid "Women gray leggings"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1245
-msgid "Fabric"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1253
-msgid "Cotton"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1260
-msgid "Silk"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1267
-msgid "Canvas"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1274
-msgid "Chiffon"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1281
-msgid "Damask"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1288
-msgid "Wool"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1295
-msgid "Jersey"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1302
-msgid "Polyester"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1309
-msgid "Velvet"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1316
-msgid "Linen"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1324
-msgid "Pattern"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1331
-msgid "Plain"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1337
-msgid "Stripes"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1344
-msgid "Checks"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1350
-msgid "Plaid"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1356
-msgid "Floral"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1362
-msgid "Polka Dots"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1368
-msgid "Printed"
-msgstr ""
-
-#: model/admin/sample_data/data_templates/pair-maker-data-template.php:1374
-msgid "Detailing"
 msgstr ""
 
 #: model/admin/sample_data/data_templates/ring-builder-data-template.php:32
@@ -2051,6 +1440,10 @@ msgstr ""
 
 #: model/admin/sample_data/data_templates/ring-builder-data-template.php:39
 msgid "Clarity"
+msgstr ""
+
+#: model/admin/sample_data/data_templates/ring-builder-data-template.php:45
+msgid "Colour"
 msgstr ""
 
 #: model/admin/sample_data/data_templates/ring-builder-data-template.php:51
@@ -2067,6 +1460,10 @@ msgstr ""
 
 #: model/admin/sample_data/data_templates/ring-builder-data-template.php:69
 msgid "Depth"
+msgstr ""
+
+#: model/admin/sample_data/data_templates/ring-builder-data-template.php:76
+msgid "Size"
 msgstr ""
 
 #: model/admin/sample_data/data_templates/ring-builder-data-template.php:83
@@ -2708,19 +2105,73 @@ msgstr ""
 msgid "design-your-own-ring"
 msgstr ""
 
-#: view/admin/menu/extensions.php:152
-msgid "Ooops! Something went wrong please try reloading the page."
+#: system/bootstrap/setup-wizard.php:234
+msgid "WooCommerce Product Bundle Choice"
 msgstr ""
 
-#: view/admin/menu/extensions.php:208
-msgid "Buy Now ($\".$product->price.\")"
+#: system/bootstrap/setup-wizard.php:252
+#: view/admin/setup-wizard/setup-wizard.php:19
+msgid "Inventory"
+msgstr ""
+
+#: system/bootstrap/setup-wizard.php:253
+#: view/admin/setup-wizard/setup-wizard.php:20
+msgid "Choose inventory"
+msgstr ""
+
+#: system/bootstrap/setup-wizard.php:258
+#: view/admin/setup-wizard/setup-wizard.php:26
+msgid "Features"
+msgstr ""
+
+#: system/bootstrap/setup-wizard.php:259
+#: view/admin/setup-wizard/setup-wizard.php:27
+msgid "Choose Features to be enabled"
+msgstr ""
+
+#: system/bootstrap/setup-wizard.php:264
+msgid "Finalize"
+msgstr ""
+
+#: system/bootstrap/setup-wizard.php:265
+#: view/admin/setup-wizard/setup-wizard.php:35
+msgid "Add sample products and Complete"
+msgstr ""
+
+#: system/bootstrap/setup-wizard.php:298
+#: system/bootstrap/setup-wizard.php:372
+msgid "Submit"
+msgstr ""
+
+#: system/bootstrap/setup-wizard.php:345
+#: view/admin/setup-wizard/feature.php:46
+msgid "GlowStart Diamond API (API service is free, but you will need paid <a href=\"https://sphereplugins.com/product/diamond-api-integration/\" target=\"_blank\">extension</a>)"
+msgstr ""
+
+#: system/bootstrap/setup-wizard.php:369
+#: system/bootstrap/setup-wizard.php:387
+#: view/admin/setup-wizard/feature.php:180
+msgid "Back"
+msgstr ""
+
+#: system/bootstrap/setup-wizard.php:390
+msgid "Add sample and Finish"
+msgstr ""
+
+#: system/bootstrap/setup-wizard.php:393
+#: view/admin/setup-wizard/finalize.php:43
+msgid "Skip and finish"
+msgstr ""
+
+#: view/admin/menu/extensions.php:152
+msgid "Ooops! Something went wrong please try reloading the page."
 msgstr ""
 
 #: view/admin/menu/extensions.php:211
 msgid "Get free access"
 msgstr ""
 
-#: view/admin/menu/extensions.php:272
+#: view/admin/menu/extensions.php:271
 msgid "Download Now"
 msgstr ""
 
@@ -2992,6 +2443,22 @@ msgstr ""
 msgid "Create sample %1s"
 msgstr ""
 
+#: view/admin/sample_data/main.php:139
+msgid "There is some error while finishing the category creation process, please contact Sphere Plugins Support for a quick fix on this if the problem persist."
+msgstr ""
+
+#: view/admin/sample_data/main.php:173
+msgid "There is some error while finishing the attribute creation process, please contact Sphere Plugins Support for a quick fix on this if the problem persist."
+msgstr ""
+
+#: view/admin/sample_data/main.php:267
+msgid "Categories"
+msgstr ""
+
+#: view/admin/sample_data/main.php:274
+msgid "Attributes"
+msgstr ""
+
 #: view/admin/setup-wizard/basic_config.php:31
 #: view/admin/setup-wizard/feature.php:184
 msgid "Next"
@@ -3001,40 +2468,12 @@ msgstr ""
 msgid "(You can later change these options from Settings page)"
 msgstr ""
 
-#: view/admin/setup-wizard/feature.php:170
-msgid "Price Control"
-msgstr ""
-
-#: view/admin/setup-wizard/feature.php:180
-msgid "Back"
+#: view/admin/setup-wizard/feature.php:130
+msgid "Bonus features"
 msgstr ""
 
 #: view/admin/setup-wizard/finalize.php:18
 msgid "You enabled below features:"
-msgstr ""
-
-#: view/admin/setup-wizard/finalize.php:43
-msgid "Skip and finish"
-msgstr ""
-
-#: view/admin/setup-wizard/setup-wizard.php:19
-msgid "Inventory"
-msgstr ""
-
-#: view/admin/setup-wizard/setup-wizard.php:20
-msgid "Choose inventory"
-msgstr ""
-
-#: view/admin/setup-wizard/setup-wizard.php:26
-msgid "Features"
-msgstr ""
-
-#: view/admin/setup-wizard/setup-wizard.php:27
-msgid "Choose Features to be enabled"
-msgstr ""
-
-#: view/admin/setup-wizard/setup-wizard.php:35
-msgid "Add sample products and Complete"
 msgstr ""
 
 #: view/publics/breadcrumb/final_step_alternate_desktop_2.php:13
@@ -3043,29 +2482,26 @@ msgstr ""
 
 #: view/publics/breadcrumb/first_step_alternate_desktop_1.php:17
 #: view/publics/breadcrumb/first_step_alternate_desktop_1.php:29
+#: view/publics/breadcrumb/first_step_alternate_desktop_2.php:15
 #: view/publics/breadcrumb/first_step_alternate_desktop_template_3.php:35
 #: view/publics/breadcrumb/first_step_desktop.php:39
-#: view/publics/breadcrumb/second_step_alternate_desktop_1.php:17
-#: view/publics/breadcrumb/second_step_alternate_desktop_1.php:31
+#: view/publics/breadcrumb/second_step_alternate_desktop_1.php:16
+#: view/publics/breadcrumb/second_step_alternate_desktop_1.php:30
+#: view/publics/breadcrumb/second_step_alternate_desktop_2.php:14
 #: view/publics/breadcrumb/second_step_alternate_desktop_template_3.php:14
 #: view/publics/breadcrumb/second_step_desktop.php:14
 msgid "Choose a"
 msgstr ""
 
 #: view/publics/breadcrumb/first_step_alternate_desktop_1.php:38
-#: view/publics/breadcrumb/first_step_alternate_desktop_template_3.php:52
-#: view/publics/breadcrumb/first_step_desktop.php:55
+#: view/publics/breadcrumb/first_step_alternate_desktop_template_3.php:53
+#: view/publics/breadcrumb/first_step_desktop.php:56
 #: view/publics/breadcrumb/first_step_mobile.php:37
-#: view/publics/breadcrumb/second_step_alternate_desktop_2.php:21
-#: view/publics/breadcrumb/second_step_alternate_desktop_template_3.php:31
+#: view/publics/breadcrumb/second_step_alternate_desktop_2.php:20
+#: view/publics/breadcrumb/second_step_alternate_desktop_template_3.php:32
 #: view/publics/breadcrumb/second_step_desktop.php:30
 #: view/publics/breadcrumb/second_step_mobile.php:25
 msgid "View"
-msgstr ""
-
-#: view/publics/breadcrumb/first_step_alternate_desktop_2.php:15
-#: view/publics/breadcrumb/second_step_alternate_desktop_2.php:15
-msgid "Choose a "
 msgstr ""
 
 #: view/publics/buttons.php:27
