@@ -1656,14 +1656,12 @@ class EOWBC_Filter_Widget {
 
 			if(empty($term_item->term_id) and $type == 1){
 
-				$icon = get_term_meta( $term_item->id, $term->slug . '_attachment');
-				if(is_array($icon) and !empty($icon)){
-					$icon = $icon[0];
-				} else {
+				$icon = get_term_meta( $term_item->id, $term->slug . '_attachment',true);
+				if(empty($icon)) {					
 					$icon = $woocommerce->plugin_url() . '/assets/images/placeholder.png';
 				}
 
-				if(!empty(wbc()->sanitize->get('ATT_LINK'))){
+				if(!empty(wbc()->sanitize->get('ATT_LINK'))) {
 					$query_list = explode(' ',wbc()->sanitize->get('ATT_LINK'));
 				}
 
@@ -1672,8 +1670,17 @@ class EOWBC_Filter_Widget {
 					$non_edit=true;						
 				}
 				$select_icon = get_term_meta($term_item->id, 'wbc_attachment',true);
+				
+				if(empty($select_icon)) {					
+					$select_icon = $woocommerce->plugin_url() . '/assets/images/placeholder.png';
+				}
+
 			} else {
 				$icon = wp_get_attachment_url( @get_term_meta( $term_item->term_id, 'thumbnail_id', true ));
+
+				if(empty($icon)) {					
+					$icon = $woocommerce->plugin_url() . '/assets/images/placeholder.png';
+				}
 				
 				if(!empty(wbc()->sanitize->get('CAT_LINK'))) {
 					$query_list = explode(' ',wbc()->sanitize->get('CAT_LINK'));
@@ -1683,7 +1690,11 @@ class EOWBC_Filter_Widget {
 				if($non_edit==false && in_array($term_item->slug,$query_list)) {
 					$non_edit=true;						
 				}
+
 				$select_icon = get_term_meta($term_item->term_id, 'wbc_attachment',true);
+				if(empty($select_icon)) {					
+					$select_icon = $woocommerce->plugin_url() . '/assets/images/placeholder.png';
+				}
 			}
 
 			$truncate_words = wbc()->options->get_option('filters_filter_setting','filter_icon_wrap_filter_label',0,true,true);
