@@ -63,6 +63,17 @@ class WBC_WC {
     public static function eo_wbc_create_attribute($args){
 
         if(function_exists('wc_create_attribute')) {
+                        
+            add_filter('product_attributes_type_selector',function($type){
+                $type['button']=__('Button','woo-bundle-choice');
+                $type['color']=__('Color','woo-bundle-choice');
+                $type['image']=__('Icon','woo-bundle-choice');
+                $type['image_text']=__('Icons with Text','woo-bundle-choice');
+                $type['dropdown_image']=__('Dropdown with Icons','woo-bundle-choice');
+                $type['dropdown_image_only']=__('Dropdown with Icons Only','woo-bundle-choice');
+                $type['dropdown']=__('Dropdown','woo-bundle-choice');
+                return $type;
+            });
 
             return wc_create_attribute($args);
 
@@ -83,7 +94,7 @@ class WBC_WC {
             $data = array(
                 'attribute_label'   => $args['name'],
                 'attribute_name'    => $args['slug'],
-                'attribute_type'    => 'select',
+                'attribute_type'    => (empty($args['type'])?'select':$args['type']),
                 'attribute_orderby' => 'menu_order',
                 'attribute_public'  => 1, // Enable archives ==> true (or 1)
             );

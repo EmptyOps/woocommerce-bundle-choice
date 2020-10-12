@@ -89,10 +89,27 @@
 
 	.				
 	(
+		!empty(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_step_size'))
+		?
+		" .eo-wbc-container.container:not(.filters) .ui.steps .step .column:first-of-type{ font-size:".wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_step_size')." !important; }":''
+	).
+	
+	(
+		!empty(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_header_size'))
+		?
+		" .eo-wbc-container.container:not(.filters) .ui.steps .step .column:nth-child(2){ font-size:".wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_header_size')." !important; }":''
+	).
+	(
+		!empty(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_icon_size'))
+		?
+		" .eo-wbc-container.container:not(.filters) .ui.steps .step img{ width:".wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_icon_size')." !important; }":''
+	).
+	(
 		!empty(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_wrap_mobile'))
 		?
 		" .ui.container.unstackable.steps .step{ max-width: 33.33%;margin: auto !important;margin:0px !important; }":''
 	).
+
 	(
 		!empty(wbc()->options->get_option('appearance_breadcrumb','breadcrumb_radius','2'))
 		?

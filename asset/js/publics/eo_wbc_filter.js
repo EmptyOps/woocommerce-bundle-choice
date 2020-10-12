@@ -112,7 +112,7 @@ jQuery(document).ready(function($){
 			jQuery(this).removeClass('active');
 
 		} else {
-			jQuery("[data-toggle_slug='"+jQuery(this).data('toggle_column')+"']").css('display','unset');
+			jQuery("[data-toggle_slug='"+jQuery(this).data('toggle_column')+"']").css('display','table-cell');
 			jQuery(this).addClass('active');
 			
 		}

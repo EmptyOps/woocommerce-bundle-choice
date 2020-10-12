@@ -747,12 +747,16 @@ class Eowbc_Sample_Data {
 	    		$data = array(
 			        'name'   => wp_unslash($attribute['label']),
 			        'slug'    => empty($attribute['slug']) ? wc_sanitize_taxonomy_name(wp_unslash($attribute['label'])) : $attribute['slug'],
-			        'type'    => 'select',
+			        'type'    => (empty($attribute['type'])?'select':$attribute['type']),
 			        'order_by' => 'menu_order',
 			        'has_archives'  => 1, // Enable archives ==> true (or 1)
 			    );		
 
 	    		$id = wbc()->wc->eo_wbc_create_attribute( $data );
+	    		// @mahesh - added to store the ribbon color from sample data
+	    		if(!empty($id) and !is_wp_error($id) and !empty($attribute['ribbon_color'])) {
+	    			update_term_meta($id,'wbc_ribbon_color',$attribute['ribbon_color']);
+	    		}
 	    		
     			if( ! taxonomy_exists('pa_'.$data['slug']) ){	
     				register_taxonomy(
@@ -782,17 +786,43 @@ class Eowbc_Sample_Data {
 
 							$attr_term_id = wp_insert_term( $term,'pa_'.$data['slug'],array('slug' => sanitize_title($term)) ); 
 							
-							if(!empty($attr_term_id) and !is_wp_error($attr_term_id) and !empty($attribute['thumb'][$term_index])) {
-								
-								$thumb_id=0;
-		    					$thumb_id=$this->add_image_gallary($attribute['thumb'][$term_index]);
+							if(!empty($attr_term_id) and !is_wp_error($attr_term_id)) {
+
 		    					$_attr_term_id = null;
 		    					if(is_array($attr_term_id)) {
+
 		    						$_attr_term_id=isset($attr_term_id['term_id']) ? $attr_term_id['term_id'] : null;
+
 		    						if(!empty($_attr_term_id)) {
 
-		    							update_term_meta( $_attr_term_id, 'pa_'.$data['slug'].'_attachment', wp_get_attachment_url( $thumb_id ) );
-		    							update_term_meta( $_attr_term_id, sanitize_title($term).'_attachment', wp_get_attachment_url( $thumb_id ) );
+		    							if(!empty($attribute['thumb'][$term_index])){
+											$thumb_id=0;
+				    						$thumb_id=$this->add_image_gallary($attribute['thumb'][$term_index]);
+				    						update_term_meta( $_attr_term_id, 'pa_'.$data['slug'].'_attachment', wp_get_attachment_url( $thumb_id ) );
+		    								update_term_meta( $_attr_term_id, sanitize_title($term).'_attachment', wp_get_attachment_url( $thumb_id ) );
+				    					}
+
+		    							if(!empty($attribute['type']) and !empty($attribute['terms_meta']) and is_array($attribute['terms_meta'])){
+
+		    								switch ($attribute['type']) {
+		    									case 'color':
+		    									
+		    									function_exists( 'update_term_meta' ) ? update_term_meta( $_attr_term_id,'wbc_color',$attribute['terms_meta'][$term_index]) : update_metadata( 'woocommerce_term', $_attr_term_id,'wbc_color',$attribute['terms_meta'][$term_index]);
+		    										break;
+		    									
+		    									case 'image':				
+		    									case 'image_text':	
+		    									case 'dropdown_image':
+		    									case 'dropdown_image_only':	
+
+		    									$wbc_attachment_id = $this->add_image_gallary($attribute['terms_meta'][$term_index]);
+
+		    									$wbc_attachment_src =wp_get_attachment_url( $wbc_attachment_id );
+		    									function_exists( 'update_term_meta' ) ? update_term_meta( $_attr_term_id,'wbc_attachment',$wbc_attachment_src) : update_metadata( 'woocommerce_term', $_attr_term_id,'wbc_attachment',$wbc_attachment_src);
+
+		    										break;
+		    								}
+		    							}
 		    						}		    						
 		    					}
 							}		    								    			

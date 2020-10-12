@@ -162,6 +162,8 @@ if ( ! class_exists( 'Filters' ) ) {
 				),
 			);
 
+
+
 			//Setting Page Filter Configuration's list
 			$sett_table = array();
 			$sett_table['id']='eowbc_price_control_sett_methods_list';
@@ -257,6 +259,36 @@ if ( ! class_exists( 'Filters' ) ) {
 					0=>array( 
 						'val' => eowbc_lang("No filter(s) exists, please add some filters."),
 						'colspan' => 7
+					),
+				),
+			);
+
+
+			//Setting Page Filter Configuration's list
+			$filter_set_table = array();
+			$filter_set_table['id']='filter_sets_list';
+			$filter_set_table['head'] = array(
+				0=>array(
+					0=>array(
+						'is_header' => 1, 
+						'val' => '',
+						'is_checkbox' => true, 
+						'sanitize'=>'sanitize_text_field',
+						'checkbox'=> array('id'=>'dummy','value'=>array(),'options'=>array('row0_col0_chk'=>''), 'options_attrs'=>array('row0_col0_chk'=>array('data-action="bulk_select_all"', 'data-bulk_table_id="'.$filter_set_table["id"].'"')),'class'=>'','where'=>'in_table')
+					),
+					1=>array(
+						'is_header' => 1,
+						'val' => 'Filter Set',
+						'field_id'=>'filter_set_name'
+					),					
+				),
+			);
+			$filter_set_table['body'] = array(
+				
+				0=>array(
+					0=>array( 
+						'val' => eowbc_lang("No filter(s) exists, please add some filters."),
+						'colspan' => 1
 					),
 				),
 			);
@@ -1168,6 +1200,72 @@ if ( ! class_exists( 'Filters' ) ) {
 								//'size_class'=>array('eight','wide'),
 								'inline'=>false,
 								'attr'=>array('data-tab_key="s_fconfig"', 'data-action="save"'),
+							)
+						)
+					),
+				'filter_set'=>array(
+
+						'label'=>__("Filter Sets",'woo-bundle-choice'),
+						'form'=>array( $filter_set_table["id"].'_bulk'=>array(
+								// 'label'=>'Bulk Actions',
+								'type'=>'select',
+								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
+								'options'=>array(''=>eowbc_lang('Bulk Actions'), 'delete'=>'Delete','activate'=>'Activate','deactivate'=>'Deactivate'),
+								'class'=>array('fluid'),
+								'size_class'=>array('two','wide'),
+								'next_inline'=>true,
+								'inline'=>true,
+							),
+							'filter_set_submit_btn_bulk'=>array(
+								'label'=>'Apply',
+								'type'=>'button',
+								'class'=>array('secondary'),
+								// 'size_class'=>array('eight','wide'),
+								'prev_inline'=>true,
+								'inline'=>true,
+								'attr'=>array('data-tab_key="filter_set"', 'data-bulk_table_id="'.$filter_set_table["id"].'"', 'data-action="bulk"' )
+							),
+							'list'=>array_merge( $filter_set_table, array(
+								'type'=>'table' )
+							), 
+
+							'filter_set_add_title'=>array(
+								'label'=>"Add Filter Set",
+								'type'=>'label',
+								'size_class'=>array('eight','wide')
+							),							
+							'filter_set_id'=>array(
+								'type'=>'hidden',
+								'value'=>'',								
+								'sanitize'=>'sanitize_text_field',
+							),
+							'filter_set_name'=>array(
+								'label'=>__('Filter Set Name','woo-bundle-choice'),
+								'type'=>'text',
+								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
+								'validate'=>array('required'=>''),
+								'class'=>array('fluid'),
+								'size_class'=>array('three','wide','required'),
+								'visible_info'=>array( 
+									'label'=>eowbc_lang('You can use this set name to group your filters in different sets which you can use to display on different pages based on shortcode or two tab settings e.g. Natural Diamond Tab & Lab Grown Diamond Tab.'),
+									'type'=>'visible_info',
+									'class'=>array('small'),
+									// 'size_class'=>array('sixteen','wide'),
+								),
+							),	
+							'filter_set_add_enabled'=>array(
+								'type'=>'hidden',
+								'value'=>true,					
+							),													
+							'filter_sets_submit_btn'=>array(
+								'label'=>eowbc_lang('Save'),
+								'type'=>'button',
+								'class'=>array('secondary'),
+								//'size_class'=>array('eight','wide'),
+								'inline'=>false,
+								'attr'=>array('data-tab_key="filter_set"', 'data-action="save"'),
 							)
 						)
 					),

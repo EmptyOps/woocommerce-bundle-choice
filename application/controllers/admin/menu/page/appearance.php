@@ -135,6 +135,27 @@ if ( ! class_exists( 'Appearance' ) ) {
 										'size_class'=>array('sixteen','wide'),
 									),	
 								),
+								'appearance_breadcrumb_step_size'=>array(
+									'label'=>'Step number font size',
+									'type'=>'text',
+									'sanitize'=>'sanitize_text_field',
+									'value'=>'',						
+									'class'=>array(),
+								),
+								'appearance_breadcrumb_header_size'=>array(
+									'label'=>'Header font size',
+									'type'=>'text',
+									'sanitize'=>'sanitize_text_field',
+									'value'=>'',						
+									'class'=>array(),
+								),
+								'appearance_breadcrumb_icon_size'=>array(
+									'label'=>'Icon size',
+									'type'=>'text',
+									'sanitize'=>'sanitize_text_field',
+									'value'=>'',						
+									'class'=>array(),
+								),								
 							), 
 							array( 
 								'breadcrumb_submit_btn'=>array(

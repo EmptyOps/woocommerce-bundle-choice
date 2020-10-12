@@ -27,6 +27,7 @@ class Ring_Builder_Data_Template extends Pair_Builder_Data_Template {
     }
 
     public function get_attributes() {
+        $_img_url= constant('EOWBC_ASSET_URL').'img/sample_data/'.$this->asset_folder.'/';
         return array(
                     array(
                         'label' => 'Carat',
@@ -38,14 +39,31 @@ class Ring_Builder_Data_Template extends Pair_Builder_Data_Template {
                     array(
                         'label' => 'Clarity',
                         'terms' => array('IF','VVS1','VVS2','VS1','VS2','SI1'),
+                        'terms_meta'=>array('#968d8d','#96f38d','#728d8d','#968ddd','#96ff8d','#9c5d8d'),
                         'description' => 'Clarity attributes for diamond shape',
-                        'slug' => 'eo_clarity_attr'
+                        'slug' => 'eo_clarity_attr',
+                        'type'=>'color',
+                        'ribbon_color'=>'#824545',
                     ),
                     array(
                         'label' => 'Colour',
                         'terms' => array('D','E','F','G','H','I','J','K','L','M'),
+                        'terms_meta'=>array(
+                                        $_img_url.'round.png',
+                                        $_img_url.'asscher.png',
+                                        $_img_url.'cushion.png',
+                                        $_img_url.'emerald.png',
+                                        $_img_url.'heart.png',
+                                        $_img_url.'marquise.png',
+                                        $_img_url.'oval.png',
+                                        $_img_url.'pear.png',
+                                        $_img_url.'princess.png',
+                                        $_img_url.'rediant.png',
+                                    ),
                         'description' => 'Colour attributes for diamond shape',
-                        'slug' => 'eo_colour_attr'
+                        'slug' => 'eo_colour_attr',
+                        'type'=>'image_text',
+                        'ribbon_color'=>'#8245dd',  
                     ),
                     array(
                         'label' => 'Polish',
