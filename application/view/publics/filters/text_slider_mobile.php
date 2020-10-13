@@ -9,7 +9,7 @@
 	    <i class="dropdown icon"></i>		    
 	    <?php echo $filter['title']; ?>
 	    <?php if($reset): ?>
-		&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_slider(event,'<?php echo $filter['slug'] ?>','<?php echo $filter['min_value']['name']; ?>','<?php echo $filter['max_value']['name']; ?>')">&nbsp;<u>reset</u></span>
+		&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_slider(event,'<?php echo $filter['slug'] ?>','<?php echo $filter['min_value']['name']; ?>','<?php echo $filter['max_value']['name']; ?>')">&nbsp;<u><?php _e('reset','woo-bundle-choice'); ?></u></span>
 		<?php endif; ?>
 	</div>
   	<div class="content">	

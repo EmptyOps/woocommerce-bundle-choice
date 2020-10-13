@@ -7,9 +7,9 @@
 ?>
 	<div class="title">
 	    <i class="dropdown icon"></i>		    
-	    Price		    
+	    <?php _e('Price','woo-bundle-choice'); ?>		    
 		<?php if($reset): ?>
-		&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_price(event,'<?php echo $min; ?>','<?php echo $max; ?>')">&nbsp;<u>reset</u></span>
+		&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_price(event,'<?php echo $min; ?>','<?php echo $max; ?>')">&nbsp;<u><?php _e('reset','woo-bundle-choice'); ?></u></span>
 		<?php endif; ?>
 	</div>
   	<div class="content">	
