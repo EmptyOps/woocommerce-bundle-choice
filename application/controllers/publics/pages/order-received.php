@@ -21,7 +21,7 @@ class Order_Received {
          add_action('woocommerce_thankyou',function($order_id){      
             $sets=wbc()->session->get('EO_WBC_MAPS');
             $maps=array();
-            if(!is_null($sets))
+            if(!empty($sets) and (is_array($sets) or is_object($sets)) )
             {
                 foreach ($sets as $set)
                 {

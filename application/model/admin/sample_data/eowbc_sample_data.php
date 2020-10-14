@@ -791,8 +791,9 @@ class Eowbc_Sample_Data {
 		    					if(is_array($attr_term_id)) {
 		    						$_attr_term_id=isset($attr_term_id['term_id']) ? $attr_term_id['term_id'] : null;
 		    						if(!empty($_attr_term_id)) {
+
 		    							update_term_meta( $_attr_term_id, 'pa_'.$data['slug'].'_attachment', wp_get_attachment_url( $thumb_id ) );
-		    							update_term_meta( $_attr_term_id, sanitize_title($term).'_attachment', wp_get_attachment_url( $thumb_id ) );	
+		    							update_term_meta( $_attr_term_id, sanitize_title($term).'_attachment', wp_get_attachment_url( $thumb_id ) );
 		    						}		    						
 		    					}
 							}		    								    			

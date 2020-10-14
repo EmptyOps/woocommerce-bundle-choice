@@ -106,6 +106,18 @@ if(eo_wbc_object.disp_regular){
 
 jQuery(document).ready(function($){
 
+	jQuery("[data-toggle_column]").click(function(){
+		if(jQuery(this).hasClass('active')){		
+			jQuery("[data-toggle_slug='"+jQuery(this).data('toggle_column')+"']").css('display','none');
+			jQuery(this).removeClass('active');
+
+		} else {
+			jQuery("[data-toggle_slug='"+jQuery(this).data('toggle_column')+"']").css('display','unset');
+			jQuery(this).addClass('active');
+			
+		}
+	});
+
 	jQuery(document).on('click',".reset_all_filters",function(){
         jQuery("[data-reset]").each(function(e){
             eval(jQuery(this).data('reset'));
