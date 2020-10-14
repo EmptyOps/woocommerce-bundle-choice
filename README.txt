@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=hi000
 Requires at least: 3.5
 Tested up to: 5.5
 Requires PHP: 5.6
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -232,6 +232,17 @@ Yes, it is.
 4. Creating a map is the process of binding links between product sub-categories, which will eventually let user combine products based on these category mappings.
 5. Home page after plugin fully configured.
 
+== Changelog ==
+= 1.0.5 (Oct 14,2020) =
+  ** Note 1 ** Even if you have upgraded to version 1.0.4 we recommend that you upgrade to version 1.0.5 since there was a bug related to mapping so you might see issues related to the functionality of the second step in ring builder process if you do not upgrade to 1.0.5
+  ** Note 2 ** The other issue is if after upgrade the breadcrumb steps stops showing on the ring builder process then do one thing, just save the categories again on General => Navigations Steps( Breadcrumb ) tab, just go to the tab and hit save if right categories are already selected. 
+  ** Note 3 ** After the update is complete refresh the wp-admin page you are on or simply once visit the dashboard and then access our plugin admin pages because if you don't refresh and access our admin pages you will see error "Sorry, you are not allowed to access this page" since our menu link structure is changed.  
+  ** New Features ** Being a major update release it contains many exciting features, improvements in user experience, etc.
+  ** New Features ** Being a major update release it contains many exciting features, improvements in user experience, etc.
+  ** UI Widgets ** There are a number of alternate UI widgets added and numerous improvements in UI widgets for non-mobile as well as mobile devices. 
+  ** Fixes ** Some critical fixes to better adhere to wp plugin development standards
+  ** Feel Free to Contact us for Support ** Due to some critical fixes we recommend that you must upgrade to this version, and feel free to contact us as soon as possible if you face any issue during the upgrade. 
+  ** Take Backup ** Since this is a major release we recommend that you take the backup of your site before upgrading. Thanks.
 == Changelog ==
 = 1.0.4 (Sep 25,2020) =
   ** Note 1 ** This is a few migration-related fixes from our older version so you should update to this version to fix any issues. 
