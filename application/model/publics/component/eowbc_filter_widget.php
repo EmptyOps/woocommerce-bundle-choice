@@ -2122,10 +2122,19 @@ class EOWBC_Filter_Widget {
 		    							
 		<?php 
 
-			if(!empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_two_tabs',false)) and !empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_first_tabs',false)) and !empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_second_tabs',false))) {
+			if(
+				!empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_two_tabs',false)) 
+				and 
+				!empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_first_tabs',false))
+				and
+				!empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_second_tabs',false))
+				and 
+				!empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_first_category',false))
+				and 
+				!empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_second_category',false))
+			) {
 
 				$filter_sets = unserialize(wbc()->options->get_option_group('filters_filter_set',"a:0:{}"));
-				//wbc()->common->pr($filter_sets);
 
 				$filter_sets_first = (
 
@@ -2140,20 +2149,45 @@ class EOWBC_Filter_Widget {
 					$filter_sets[wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_first_tabs',false)]['filter_set_name']
 				);
 
-				$filter_sets_second = (empty($filter_sets[wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_second_tabs',false)])?wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_second_tabs',false):$filter_sets[wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_second_tabs',false)]['filter_set_name']);
+				$first_sets_category = get_term_by('id',wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_first_category',false),'product_cat');
+				if(!empty($first_sets_category) and !is_wp_error($first_sets_category)){
+					$first_sets_category = $first_sets_category->slug;
+				}
 
+				$filter_sets_second = (
+					(empty($filter_sets[wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_second_tabs',false)])
+					or
+					empty($filter_sets[wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_second_tabs',false)]['filter_set_name']))
+					?
+					wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_second_tabs',false)
+					:
+					$filter_sets[wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_second_tabs',false)]['filter_set_name']
+				);
+
+				$second_sets_category = get_term_by('id',wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_second_category',false),'product_cat');
+				if(!empty($second_sets_category) and !is_wp_error($second_sets_category)){
+					$second_sets_category = $second_sets_category->slug;
+				}
+
+				$non_adv_ordered_filter_first_tab = 
+
+				$adv_ordered_filter_first_tab
 				?>
 					<div class="ui top attached tabular menu filter_setting_advance_two_tabs" style="margin-top: 3em;">
-				      	<a class="item center active" data-category="<?php _e($filter_sets_first); ?>" style="margin-right: 0px !important;" data-tab="filter_setting_advance_first_tabs"><?php _e($filter_sets_first); ?>
+				      	<a class="item center active" data-category="<?php _e($first_sets_category); ?>" style="margin-right: 0px !important;" data-tab="filter_setting_advance_first_tabs">
+				      		$prefix.'_fconfig_set'
+				      	<?php _e($filter_sets_first); ?>
 				      	</a>
 
-				      	<a class="center item" data-category="<?php _e($filter_sets_second); ?>" style="margin-left: 0px !important;" data-tab="filter_setting_advance_second_tabs">
+				      	<a class="center item" data-category="<?php _e($second_sets_category); ?>" style="margin-left: 0px !important;" data-tab="filter_setting_advance_second_tabs">
 				        <?php _e($filter_sets_second); ?>
 				      	</a>
 				    </div>
 				    <div class="ui bottom attached active tab segment" data-tab="filter_setting_advance_first_tabs">					  
+				    	<?php wbc()->common->pr($non_adv_ordered_filter); ?>
 					</div>
 					<div class="ui bottom attached tab segment" data-tab="filter_setting_advance_second_tabs">					  
+
 					</div>
 					<script type="text/javascript">
 						jQuery(document).ready(function($){
