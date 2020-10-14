@@ -1303,7 +1303,7 @@ class EOWBC_Filter_Widget {
 	}
 
 	public function load_desktop($general_filters, $advance_filters) {
-		
+
 		$category = $this->_category;
 		
 		if(
@@ -1315,7 +1315,9 @@ class EOWBC_Filter_Widget {
 			(wbc()->options->get_option('configuration','second_slug') === $category and wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts') == 'sc2') 
 		){
 			?>
-			<div class="eo-wbc-container filters container">				
+			<div class="eo-wbc-container filters container">
+
+				
 				<div class="ui horizontal segments" style="border: 0px solid transparent;box-shadow: none !important;">
 					<?php $this->load_collapsable_desktop($general_filters, $advance_filters); ?>
 				</div>
@@ -2119,60 +2121,103 @@ class EOWBC_Filter_Widget {
 		</script>
 		    							
 		<?php 
-			if(wp_is_mobile()) {
 
-				if(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')){
+			if(!empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_two_tabs',false)) and !empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_first_tabs',false)) and !empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_second_tabs',false))) {
 
-					?>
-						<div class="eo-wbc-container filters ui grid container">							
-						<?php $this->load_mobile($non_adv_ordered_filter, $adv_ordered_filter); ?>		
-						</div>						
-					<?php	
-					if(!is_wp_error($adv_ordered_filter) and !empty($adv_ordered_filter)) {
+				$filter_sets = unserialize(wbc()->options->get_option_group('filters_filter_set',"a:0:{}"));
+				//wbc()->common->pr($filter_sets);
+
+				$filter_sets_first = (
+
+					(empty($filter_sets[wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_first_tabs',false)])
+					 or 
+
+					empty($filter_sets[wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_first_tabs',false)]['filter_set_name']))
+
+					?
+					wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_first_tabs',false)
+					:
+					$filter_sets[wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_first_tabs',false)]['filter_set_name']
+				);
+
+				$filter_sets_second = (empty($filter_sets[wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_second_tabs',false)])?wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_second_tabs',false):$filter_sets[wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_second_tabs',false)]['filter_set_name']);
+
+				?>
+					<div class="ui top attached tabular menu filter_setting_advance_two_tabs" style="margin-top: 3em;">
+				      	<a class="item center active" data-category="<?php _e($filter_sets_first); ?>" style="margin-right: 0px !important;" data-tab="filter_setting_advance_first_tabs"><?php _e($filter_sets_first); ?>
+				      	</a>
+
+				      	<a class="center item" data-category="<?php _e($filter_sets_second); ?>" style="margin-left: 0px !important;" data-tab="filter_setting_advance_second_tabs">
+				        <?php _e($filter_sets_second); ?>
+				      	</a>
+				    </div>
+				    <div class="ui bottom attached active tab segment" data-tab="filter_setting_advance_first_tabs">					  
+					</div>
+					<div class="ui bottom attached tab segment" data-tab="filter_setting_advance_second_tabs">					  
+					</div>
+					<script type="text/javascript">
+						jQuery(document).ready(function($){
+							$('.filter_setting_advance_two_tabs .item').tab();
+						});
+					</script>
+				<?php									
+			} else{
+
+				if(wp_is_mobile()) {
+
+					if(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')){
+
 						?>
-						<div class="ui grid centered container" id="advance_filter_mob_alternate_container">
-							<div class="row" style="padding: 0px;">
-								<div class="ui button primary" id="advance_filter_mob_alternate" style="border-radius: 0 0 0 0;width: fit-content !important;">Advance Filter&nbsp;<i class="ui icon angle double down"></i></div>
+							<div class="eo-wbc-container filters ui grid container">							
+							<?php $this->load_mobile($non_adv_ordered_filter, $adv_ordered_filter); ?>		
+							</div>						
+						<?php	
+						if(!is_wp_error($adv_ordered_filter) and !empty($adv_ordered_filter)) {
+							?>
+							<div class="ui grid centered container" id="advance_filter_mob_alternate_container">
+								<div class="row" style="padding: 0px;">
+									<div class="ui button primary" id="advance_filter_mob_alternate" style="border-radius: 0 0 0 0;width: fit-content !important;">Advance Filter&nbsp;<i class="ui icon angle double down"></i></div>
+								</div>
 							</div>
-						</div>
+							<?php
+						}			
+
+					} else {
+
+						if(!is_wp_error($non_adv_ordered_filter) and !empty($non_adv_ordered_filter)) {
+
+						?>
+							<div class="ui grid container centered" style="margin:auto !important">
+								<div class="row">
+									<div class="ui button primary fluid" id="primary_filter" style="border-radius: 0 0 0 0;margin-right: 0;">Filters&nbsp;&nbsp;<i class="ui icon angle up"></i></div>
+								</div>
+							</div>
 						<?php
-					}			
 
-				} else {
-
-					if(!is_wp_error($non_adv_ordered_filter) and !empty($non_adv_ordered_filter)) {
-
-					?>
-						<div class="ui grid container centered" style="margin:auto !important">
-							<div class="row">
-								<div class="ui button primary fluid" id="primary_filter" style="border-radius: 0 0 0 0;margin-right: 0;">Filters&nbsp;&nbsp;<i class="ui icon angle up"></i></div>
-							</div>
-						</div>
-					<?php
-
-					}				
-					?>
-						<div class="eo-wbc-container filters container">
-							<div class="ui segments">    			
-					<?php
-					$this->load_mobile($non_adv_ordered_filter, $adv_ordered_filter);
-					?>		</div>
-						</div>
-					<?php
-
-					if( !empty($adv_ordered_filter) ) {
+						}				
 						?>
-						<div class="ui grid centered">
-							<div class="row">
-								<div class="ui button primary" id="advance_filter" style="border-radius: 0 0 0 0;width: fit-content !important;">Advance Filter&nbsp;<i class="ui icon angle double up"></i></div>
+							<div class="eo-wbc-container filters container">
+								<div class="ui segments">    			
+						<?php
+						$this->load_mobile($non_adv_ordered_filter, $adv_ordered_filter);
+						?>		</div>
 							</div>
-						</div>
-						<?php			
-					}
-				}
+						<?php
 
-			} else {				
-				$this->load_desktop($non_adv_ordered_filter, $adv_ordered_filter);				
+						if( !empty($adv_ordered_filter) ) {
+							?>
+							<div class="ui grid centered">
+								<div class="row">
+									<div class="ui button primary" id="advance_filter" style="border-radius: 0 0 0 0;width: fit-content !important;">Advance Filter&nbsp;<i class="ui icon angle double up"></i></div>
+								</div>
+							</div>
+							<?php			
+						}
+					}
+
+				} else {				
+					$this->load_desktop($non_adv_ordered_filter, $adv_ordered_filter);				
+				}
 			}
 		
 		if( $this->is_shortcode_filter ) {

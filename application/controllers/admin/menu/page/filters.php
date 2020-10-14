@@ -62,7 +62,16 @@ if ( ! class_exists( 'Filters' ) ) {
 			
 			$features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())));
 
-			$is_ring_builder = (!empty($features['ring_builder']));
+			$filter_sets = unserialize(wbc()->options->get_option_group('filters_filter_set',"a:0:{}"));
+			//wbc()->common->pr($filter_sets);
+			if(!empty($filter_sets) and is_array($filter_sets)){
+				foreach ($filter_sets as $filter_sets_key => $filter_sets_val) {
+					$filter_sets[$filter_sets_key] = $filter_sets_val['filter_set_name'];
+				}
+			}
+			
+
+			$is_ring_builder = (!empty($features['ring_builder']));			
 			//Diamond Page Filter Configuration's list
 			$table = array();
 			$table['id']='eowbc_price_control_methods_list';
@@ -125,6 +134,11 @@ if ( ! class_exists( 'Filters' ) ) {
 						'val' => 'Add reset link?',
 						'field_id'=>'d_fconfig_add_reset_link'
 					),
+					11=>array(
+						'is_header' => 1, 
+						'val' => 'Filter Set',
+						'field_id'=>'d_fconfig_set'
+					)
 				),
 			);
 			$table['body'] = array(
@@ -157,7 +171,7 @@ if ( ! class_exists( 'Filters' ) ) {
 				0=>array(
 					0=>array( 
 						'val' => eowbc_lang("No filter(s) exists, please add some filters."),
-						'colspan' => 10
+						'colspan' => 12
 					),
 				),
 			);
@@ -226,6 +240,11 @@ if ( ! class_exists( 'Filters' ) ) {
 						'val' => 'Add reset link?',
 						'field_id'=>'s_fconfig_add_reset_link'
 					),
+					11=>array(
+						'is_header' => 1, 
+						'val' => 'Filter Set',
+						'field_id'=>'s_fconfig_set'
+					)
 				),
 			);
 			$sett_table['body'] = array(
@@ -258,7 +277,7 @@ if ( ! class_exists( 'Filters' ) ) {
 				0=>array(
 					0=>array( 
 						'val' => eowbc_lang("No filter(s) exists, please add some filters."),
-						'colspan' => 7
+						'colspan' => 12
 					),
 				),
 			);
@@ -483,6 +502,64 @@ if ( ! class_exists( 'Filters' ) ) {
 								'size_class'=>array('eight','wide'),
 								'inline'=>true,								
 							),
+							'config_advance_begin'=>array(
+								'type'=>'accordian',
+								'section_type'=>'start',
+								'class'=>array('field'),
+								'label'=>'<span class="ui large text">Advanced Setting</span>',
+							),
+							'filter_setting_advance_two_tabs_divider'=>array(
+								'label'=>'Two tabs setting',
+								'type'=>'devider',
+							),
+							'filter_setting_advance_two_tabs'=>array(
+								'label'=>' ',
+								'type'=>'checkbox',
+								'sanitize'=>'sanitize_text_field',
+								'value'=>array(),
+								'options'=>array('filter_setting_advance_two_tabs'=>'Enable/Disable two tabs for the First(or Diamond) category filters'),
+								'class'=>array(),
+								'size_class'=>array('eight','wide'),
+								'inline'=>true,
+							),
+							'filter_setting_advance_first_tabs'=>array(
+								'label'=>'Select first tab\'s filter set' ,
+								'type'=>'select',
+								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
+								'validate'=>array(),
+								'options'=>$filter_sets,
+								'class'=>array('fluid'),
+								'size_class'=>array('three','wide','required'),
+							),
+							'filter_setting_advance_first_category'=>array(
+								'label'=>'Filter',
+								'type'=>'select',
+								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
+								'validate'=>array('required'=>''),
+								'options'=>\eo\wbc\controllers\admin\menu\page\Filters::eo_wbc_attributes_( \eo\wbc\controllers\admin\menu\page\Filters::eo_wbc_prime_category_() ),	//array_replace(\eo\wbc\model\Category_Attribute::instance()->get_category(),\eo\wbc\model\Category_Attribute::instance()->get_attributs()),
+								'class'=>array('fluid'),
+								'size_class'=>array('three','wide','required'),
+								// 'attr'=>array("onchange=\"document.getElementById('d_fconfig_type').value=this.options[this.selectedIndex].getAttribute('data-type')\"")
+								// 'prev_inline'=>true,
+								// 'next_inline'=>true,
+								// 'inline'=>true,
+							),
+							'filter_setting_advance_second_tabs'=>array(
+								'label'=>'Select second tab\'s filter set' ,
+								'type'=>'select',
+								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
+								'validate'=>array(),
+								'options'=>$filter_sets,
+								'class'=>array('fluid'),
+								'size_class'=>array('three','wide','required'),
+							),
+							'config_advance_end'=>array(
+								'type'=>'accordian',
+								'section_type'=>'end'
+							),
 							'filter_setting_submit_btn'=>array(
 								'label'=>eowbc_lang('Save'),
 								'type'=>'button',								
@@ -616,6 +693,22 @@ if ( ! class_exists( 'Filters' ) ) {
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
 							),
+							'd_fconfig_set'=>array(
+								'label'=>'Filter Set',
+								'type'=>'select',
+								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
+								'validate'=>array(),
+								'options'=>$filter_sets,
+								'class'=>array('fluid'),
+								'size_class'=>array('three','wide','required'),
+								'visible_info'=>array( 
+									'label'=>eowbc_lang('You can use this set name to group your filters in different sets which you can use to display on different pages based on shortcode or two tab settings e.g. Natural Diamond Tab & Lab Grown Diamond Tab.'),
+									'type'=>'visible_info',
+									'class'=>array('small'),
+									// 'size_class'=>array('sixteen','wide'),
+								),
+							),							
 							'd_fconfig_filter'=>array(
 								'label'=>'Filter',
 								'type'=>'select',
@@ -932,6 +1025,22 @@ if ( ! class_exists( 'Filters' ) ) {
 								'value'=>'',								
 								'sanitize'=>'sanitize_text_field',
 							),
+							's_fconfig_set'=>array(
+								'label'=>'Filter Set',
+								'type'=>'select',
+								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
+								'validate'=>array(),
+								'options'=>$filter_sets,
+								'class'=>array('fluid'),
+								'size_class'=>array('three','wide','required'),
+								'visible_info'=>array( 
+									'label'=>eowbc_lang('You can use this set name to group your filters in different sets which you can use to display on different pages based on shortcode or two tab settings e.g. Natural Diamond Tab & Lab Grown Diamond Tab.'),
+									'type'=>'visible_info',
+									'class'=>array('small'),
+									// 'size_class'=>array('sixteen','wide'),
+								),
+							),							
 							's_fconfig_filter'=>array(
 								'label'=>eowbc_lang('Filter'),
 								'type'=>'select',

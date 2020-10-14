@@ -65,7 +65,7 @@ class Eowbc_Filters extends Eowbc_Model {
 							// foreach ($rv as $rvk => $rvv) {
 							foreach ($form_definition[$key]["form"][$fk]["head"][0] as $ck => $cv) {
 								if(empty($cv["field_id"])) { continue; }
-								$rvk = $cv["field_id"];
+								$rvk = $cv["field_id"];							
 								$rvv = ( !isset($rv[$rvk]) || wbc()->common->nonZeroEmpty($rv[$rvk]) ) ?  "" : $rv[$rvk];
 								
 								//skip the id
@@ -94,9 +94,11 @@ class Eowbc_Filters extends Eowbc_Model {
 									
 								}elseif(!empty($form_definition[$key]["form"][$cv['field_id']]) and $form_definition[$key]["form"][$cv['field_id']]['type']=='select') {
 									$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv);
+									if($rvk==($key_clean.'_set') and empty($val)) {
+										$val = 'Default';
+									}
 									$row[] = array( 'val' => $val ,'disabled'=>$disabled);
-								}
-								else {
+								} else {
 									if(!empty($row) and count($row)==1){
 										$row[] = array( 'val' => $rvv,'disabled'=>$disabled, 'link'=>1,'edit_id'=>$rk);	
 									} else { 
