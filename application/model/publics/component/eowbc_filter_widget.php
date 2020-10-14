@@ -2169,13 +2169,13 @@ class EOWBC_Filter_Widget {
 					$second_sets_category = $second_sets_category->slug;
 				}
 
-				$non_adv_ordered_filter_first_tab = 
+				$non_adv_ordered_filter_first_tab = array();
 
-				$adv_ordered_filter_first_tab
+				$adv_ordered_filter_first_tab = array();
 				?>
 					<div class="ui top attached tabular menu filter_setting_advance_two_tabs" style="margin-top: 3em;">
 				      	<a class="item center active" data-category="<?php _e($first_sets_category); ?>" style="margin-right: 0px !important;" data-tab="filter_setting_advance_first_tabs">
-				      		$prefix.'_fconfig_set'
+				      		<!-- $prefix.'_fconfig_set' -->
 				      	<?php _e($filter_sets_first); ?>
 				      	</a>
 
@@ -2184,7 +2184,7 @@ class EOWBC_Filter_Widget {
 				      	</a>
 				    </div>
 				    <div class="ui bottom attached active tab segment" data-tab="filter_setting_advance_first_tabs">					  
-				    	<?php wbc()->common->pr($non_adv_ordered_filter); ?>
+				    	<?php //wbc()->common->pr($non_adv_ordered_filter); ?>
 					</div>
 					<div class="ui bottom attached tab segment" data-tab="filter_setting_advance_second_tabs">					  
 
