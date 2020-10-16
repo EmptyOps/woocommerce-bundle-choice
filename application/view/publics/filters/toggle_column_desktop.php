@@ -1,4 +1,4 @@
-<div class="<?php echo $width_class; ?>">
+<div class="<?php echo $width_class; ?>" data-tab-group="<?php _e($tab_set); ?>">
 	<p>
 		<span class="ui header"><?php echo $term->name; ?></span>		
 	</p>		

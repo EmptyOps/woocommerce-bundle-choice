@@ -4,5 +4,6 @@
 }
 .row.category-page-row>.col.large-9{
 	max-width:100% !important;
+	min-width:100% !important;
 }
 </style>

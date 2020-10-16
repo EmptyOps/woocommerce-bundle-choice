@@ -5,7 +5,7 @@
 */
 
 ?>
-	<div class="<?php echo $width_class; ?>">
+	<div class="<?php echo $width_class; ?>" data-tab-group="<?php _e($tab_set); ?>">
 		<div style="display: inline-block;margin-top: 0.25em;" class="ui three wide field num_slider">
 			<span class="ui header"><?php echo $filter['title']; ?><span><?php if($help): ?>
 			&nbsp; <span class="ui grey text" style="cursor: pointer;">&nbsp;<i class="question circle outline icon" data-help="<?php _e($help); ?>"></i></span>
