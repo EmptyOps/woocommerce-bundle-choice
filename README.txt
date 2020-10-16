@@ -19,11 +19,11 @@ In this plugin we provide the following features, at the time of installation yo
 1. Ring Builder (for WooCommerce Jewellery sites)
 1. Pair Maker (for Clothing sites)
 1. Bonus Features 
-1.1 Options UI for Item Page(Swatches)
-1.1 Specifications View for Item Page
-1.1 Shortcode Filters for Home
-1.1 Filters for Shop/Category Page (e.g. Independent Diamond Page)
-1.1 Price Control(Beta)
+  * Options UI for Item Page(Swatches)
+  * Specifications View for Item Page
+  * Shortcode Filters for Home
+  * Filters for Shop/Category Page (e.g. Independent Diamond Page)
+  * Price Control(Beta)
 
 (You can read more about each features in the section below named “UNDERSTANDING FEATURES”, as well as look at the demo section below for demos on features listed above)
 
@@ -36,7 +36,7 @@ Browse the complete list of features [here](https://woochoiceplugin.com/jewelry-
 == For any Inventory ==
 It does not matter to which category your website belongs to if you are selling anything that you think can be sold in a pair/bundle then this plugin is absolutely for you. Our philosophy is to provide technology that enables users to make bundles of their choice that is why the name product bundle (of) choice and this becomes truly exciting for users when they have a preset recommendation set by website admins.
 
-We provide both the features in a single plugin, the ring builder feature will be useful for you if you have a WordPress jewelry/diamond website. It is also useful to create efficient diamond [filters](https://demo.woochoiceplugin.com/zokri-shop/product-category/eo_diamond_shape_cat/) for real diamonds as well as lab-grown or CVD diamonds and the pair maker feature will be useful for you if you have anything that you think can be sold in a pair like fashion, apparel, household items – anything, etc.
+We provide both the features in a single plugin, the ring builder feature will be useful for you if you have a WordPress jewelry/diamond website. It is also useful to create efficient diamond [filters](https://demo.woochoiceplugin.com/zokri-shop/product-category/eo_diamond_shape_cat/)(To achieve page same as in demo setup this free plugin and additionally you will need a [table view extension](https://sphereplugins.com/product/woocommerce-product-bundle-table-view/) worth $20) for real diamonds as well as lab-grown or CVD diamonds and the pair maker feature will be useful for you if you have anything that you think can be sold in a pair like fashion, apparel, household items – anything, etc.
 
 In short, Woo Choice Plugin – also known as WBC — supports every kind of inventory where it is possible to create pair or bundles based on users’ choices/needs and the use cases are immense from fashion to help the user assembling fashion accessories to assembling gift boxes, helping the user choose right pair of home decor items to cosmetics, automobile accessories to pharmaceuticals and the list may go on. 
 
@@ -46,12 +46,41 @@ In short, Woo Choice Plugin – also known as WBC — supports every kind of inv
 This ring builder feature developed with the objectives to fill the gap of lack of such plugin on wordpress.org. While developing the ring builder feature we have kept in mind all the complexity and challenges that website admins go through like setting up the module which is a tiresome task if the backend operations are not developed keeping in mind the ease of use. The other challenge any website/admin face is the efficiency given that the complexity of jewelry inventory it is a bit challenging to achieve both efficiency and ease of use at both backend and frontend sides. We are happy to say that we have solved this problem very well and excited to avail this plugin to the WooCommerce community. Needless to say, you can have earings/necklace builders as well together with the ring builder. This is only a part of our offering for jewelry website besides ring builder you can benefit from bulk price update(read in detail below), built-in variable products which make it easier to create jewelry website with only a few clicks yeah believe us as long as you have WordPress installed and them setup all you need is installing this plugin and you will have your jewelry store setup which was not possible so far this easily. Still, this is not it in addition to that we have nice views and setups if you want to sell real diamonds or CVD diamond/lab-grown diamond. [See a Demo](https://demo.woochoiceplugin.com/jewelry-demo/design-your-own-ring/)
 
 = 2. PAIR MAKER =
-For example, assume you are selling clothes online then the customer after selecting top-wear is guided for the bottom wear automatically. So if by chance, the user is confused then the plugin guides by mixing and matching different alternatives from the stock and thus pair of clothing are created for the customer. This is the only plugin on wordpress.org as of writing this providing pair maker feature for the clothing industry. [See a Demo](https://demo.woochoiceplugin.com/yc_textile/)
+pair maker woocommerce plugin If you are related to clothing/fashion website then Pair Maker feature is something that you may like to know more about and try. Pair Maker feature is the primary feature of Woo Choice Plugin just like Ring Builder and it works with any WooCommerce websites. To give you an example of pair maker, assume you are selling clothes online then the customer after selecting top-wear is guided for the bottom wear automatically. So if by chance, the user is confused then the plugin guides by mixing and matching different alternatives from the available products catalogue on your site and thus pair of clothing is created for the customer. This feature is useful also when assume that users have good knowledge of color matching but this feature can guide them to choose appropriate pattern and style of bottom wear or vice-versa. This feature is indirectly furnished to bring the tranditional salesman approaches to sell more, this is worth trying once. For details on setup see installation tab above it’s easy to setup and get started. [See a Demo](https://demo.woochoiceplugin.com/yc_textile/)
 
 = 3. JEWELRY CUSTOMIZATION =
 We offer fully customizable options with a industry standard experience. Here, fully customization means when the user selects any particular jewelry item then he gets a ton of customization options available in front of him/her like how many carats of gold would they prefer? What exact color of jewelry do they want? and the list goes on…
 
-= 4. BULK PRICE UPDATE =
+= 4. BONUS FEATURES = 
+= 4.1 FILTERS FOR SHOP/CATEGORY PAGE = 
+Shop and Category page filters module in this plugin contains advanced filter tools that makes your work really easier to create advanced ajax based woocommerce product filters on any of your woocommerce websites. There are variety of alternate widgets to create differently styled horizontal filters, it is mobile responsive, you may like to have a look at the [demo](https://demo.woochoiceplugin.com/hify-store/product-category/eo_diamond_shape_cat/)(be sure to check other applicable demos in the demo section below). 
+ 
+If you are looking to create an independent diamond feed page kind of like you would have seen on many sites or if you want to create a product feed page with nice looking filters(you should see related demos in the demo section below) then this feature is for you. 
+KEYPOINTS:
+  * Filter by any WooCommerce Attribute 
+  * Filter by any WooCommerce Category
+  * Filter by any WooCommerce Product Price
+  * Add Filter on WooCommerce Shop Page
+  * Add Filter on any WooCommerce Category Page
+  * Horizontal WooCommerce Filters with Alternate UI Widgets
+ 
+= 4.2 OPTIONS UI FOR ITEM PAGE = 
+If you are looking for nice swatches & other alternatives for options UI for your item page then this feature will be of big help to you.
+
+= 4.3 SPECIFICATIONS VIEW FOR ITEM PAGE = 
+If your product has many informative attributes e.g. diamonds or for any other inventory item that matters then specification view feature is useful to present attributes nicely in the Additional Information tab of the WooCommerce item page.
+
+= 4.4 SHORTCODE FILTERS FOR WOOCOMMERCE = 
+When you have specific requirement to use filter on any page you can use shortcode filters module to create search filters on any page and redirect to your desired target page or to same page. When you have requirement to create any kind of basic or advanced woocommerce product filters then this module is for you. There are some instances when you would like to place light CTA filters on the home page or at any other page and redirect users to a specific page on search action. In many such scenarios shortcode filters are useful. 
+KEYPOINTS:
+  * Filter by any WooCommerce Attribute 
+  * Filter by any WooCommerce Category
+  * Filter by any WooCommerce Product Price
+  * Add Filter on WooCommerce Shop Page
+  * Add Filter on any WooCommerce Category Page
+  * Horizontal WooCommerce Filters with Alternate UI Widgets
+
+= 4.5 PRICE CONTROL(BETA) = 
 It is obvious that any e-commerce website has many products. And the vendors like to keep equal profit margins on all products – say 20%. So you can update all the product’s price at once and this plugin allows you to set the margin percentage as per your wish. This is not all, say you want to update prices for some large/small groups of products say products that belong to some categories or attributes this plugin will enable you to do just that. This feature is best for jewelry website owners as the price of gold keeps on fluctuating, they can update unnumerable jewelry item prices at once.
 
 == Go Further with Extensions: ==
@@ -150,13 +179,18 @@ If you are interested in our plugin, click [here](https://www.woo-product-bundle
 
 We have tested WooCommerce Product Bundle Choice with Wordpress 3.5 to 5.5 and WooCommerce 2.0 to 4.2.0 and our plugin is technically compatible with all the other plugins.
 
-= Live Demo  =
+= LIVE DEMOS = 
 Now that you know how this plugin works, is there any reason to not use it? Do you want to see the live demo?
 
-Below you can check demos for different inventories:
+Below you can check demos for different use cases:
 
-1. Demo with [Jewelry & Diamonds](https://demo.woochoiceplugin.com/jewelry-demo/design-your-own-ring/)
-1. Demo with [Clothing](https://demo.woochoiceplugin.com/yc_textile/)
+1. [Ring Builder Demo](https://demo.woochoiceplugin.com/hify-store/product-category/eo_diamond_shape_cat/?EO_WBC=1&BEGIN=eo_diamond_shape_cat&STEP=1&FIRST=&SECOND=) -- Everything in it is free, just setup this free plugin to implement these features. 
+1. [Pair Maker Demo](https://demo.woochoiceplugin.com/yc_textile/make-a-pair/) -- Everything in it is free, just setup this free plugin to implement these features.
+1. [Diamond Feed(with nice filters) Demo](https://demo.woochoiceplugin.com/hify-store/product-category/eo_diamond_shape_cat/) -- Everything in it is free, just setup this free plugin to implement these features.
+1. [Ring Builder PRO Demo 1](https://demo.woochoiceplugin.com/zokri-shop/product-category/eo_diamond_shape_cat/?EO_WBC=1&BEGIN=eo_diamond_shape_cat&STEP=1&FIRST=&SECOND=) -- You need to buy “Professional” plan from this [page](https://woochoiceplugin.com/jewelry-diamonds-website-package/) to implement these features.
+1. [Ring Builder PRO Demo 2](https://demo.woochoiceplugin.com/jewelry-demo/product-category/eo_diamond_shape_cat/?EO_WBC=1&BEGIN=eo_diamond_shape_cat&STEP=1&FIRST=&SECOND=) -- You need to buy “Premium” plan from this [page](https://woochoiceplugin.com/jewelry-diamonds-website-package/) to implement these features.
+1. [Diamond Feed(with nice filters) PRO Demo 1](https://demo.woochoiceplugin.com/zokri-shop/product-category/eo_diamond_shape_cat/) -- You will need [table view extension](https://sphereplugins.com/product/woocommerce-product-bundle-table-view/) & maybe some other extensions depending on the PRO features you wants.
+1. [Diamond Feed(with nice filters) PRO Demo 2](https://demo.woochoiceplugin.com/jewelry-demo/product-category/eo_diamond_shape_cat/) -- You will need [table view extension](https://sphereplugins.com/product/woocommerce-product-bundle-table-view/) & maybe some other extensions depending on the PRO features you wants.
 
 = Documentation =
 
