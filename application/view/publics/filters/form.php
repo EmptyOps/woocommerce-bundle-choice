@@ -281,7 +281,13 @@
 
 				__slug=$(this).attr('data-filter-slug');					
 
-				_values=jQuery('[name="checklist_'+__slug+'"]').val().split(',');
+				_values = jQuery('[name="checklist_'+__slug+'"]').val();
+
+				if (_values=='' || typeof(_values)==typeof(undefined)) {
+					return true;
+				}
+
+				_values = _values.split(',');
 
 				if(_values.indexOf($(this).attr('data-slug'))!=-1){
 

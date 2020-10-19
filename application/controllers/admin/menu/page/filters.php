@@ -637,13 +637,13 @@ if ( ! class_exists( 'Filters' ) ) {
 						),
 						'filter_setting_alternate_mobile'=>array(
 								'label'=>'Alternate Mobile Filter Widget',
-								'type'=>'checkbox',
+								'type'=>'radio',
 								'sanitize'=>'sanitize_text_field',
-								'value'=>array(wbc()->options->get_option('filters_filter_setting','filter_setting_alternate_mobile')),
-								'options'=>array('filter_setting_alternate_mobile'=>' Check here to enable alternate filter view for mobile.'),
+								'value'=>wbc()->options->get_option('filters_filter_setting','filter_setting_alternate_mobile','default'),
+								'options'=>array('default'=>'Default Template','mobile_1'=>'Mobile View Template 1','mobile_2'=>'Mobile View Template 2'),
 								'class'=>array(),
 								'size_class'=>array('eight','wide'),
-								'inline'=>true,
+								'inline'=>false,
 							),
 						'submit_btn'=>array(
 							'label'=>eowbc_lang('Save'),
