@@ -141,7 +141,7 @@ class Setting_status {
 								'inline'=>true,
 							),
 							'btn_send_error_report'=>array(
-								'label'=>(get_option('eowbc_error_count',0) or get_option('eowbc_warning_count',0) ? eowbc_lang('Send error report'):''),
+								'label'=>((get_option('eowbc_error_count',0) or get_option('eowbc_warning_count',0)) ? eowbc_lang('Send error report'):''),
 								'type'=>'button',				
 								'class'=>array('primary','disabled'),
 								'attr'=>array('data-tab_key="setting_status_log"', "data-action='save'"),

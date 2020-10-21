@@ -80,7 +80,8 @@ class Eowbc_Sample_Data {
 		if(!empty($attributes)){
 	    
 	        //Send for creation and update returned array.
-	        $catat_attribute = unserialize( wbc()->options->get($feature_key.'_created_attribute'), serialize(array()) ); 	//$this->create_attribute($attributes);            
+
+	        $catat_attribute = unserialize( wbc()->options->get($feature_key.'_created_attribute'), 'a:0:{}' ); 	//$this->create_attribute($attributes);            
 	        
 	        // update_option('eo_wbc_attr',serialize($catat_attribute));
 	        wbc()->options->set('eo_wbc_attr',serialize($catat_attribute));
@@ -105,7 +106,7 @@ class Eowbc_Sample_Data {
 		}
 		if(!empty($_POST)) {			
 			
-			if(isset($_POST['_wpnonce']) && wp_verify_nonce($_POST['_wpnonce'],'eo_wbc_auto_jewel')) {
+			if(isset($_POST['_wpnonce']) && wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eo_wbc_auto_jewel')) {
 			  
 			  // commented since moved it to batch based processing
 			  // $index=0;
@@ -169,8 +170,8 @@ class Eowbc_Sample_Data {
 			  
 			}
 
-			if(!empty($_POST['step'])){
-			  if($_POST['step']==3) {
+			if(!empty(wbc()->sanitize->post('step'))){
+			  if(wbc()->sanitize->post('step')==3) {
 
 			    ?>
 			    <script type="text/javascript" >
@@ -221,7 +222,7 @@ class Eowbc_Sample_Data {
 			    });
 			    </script> <?php
 			  }      
-			    $_step=$_POST['step'];
+			    $_step=wbc()->sanitize->post('step');
 			} else {
 			    $_step=1;
 			}
@@ -776,11 +777,25 @@ class Eowbc_Sample_Data {
 					
 				if(empty($attribute['range'])){
 		    		
-		    		foreach ($attribute['terms'] as $term)  {	
+		    		foreach ($attribute['terms'] as $term_index=>$term)  {	
 
 	    				if( ! term_exists( $term, 'pa_'.$data['slug']) ) {
 
-							wp_insert_term( $term,'pa_'.$data['slug'],array('slug' => sanitize_title($term)) ); 
+							$attr_term_id = wp_insert_term( $term,'pa_'.$data['slug'],array('slug' => sanitize_title($term)) ); 
+							
+							if(!empty($attr_term_id) and !is_wp_error($attr_term_id) and !empty($attribute['thumb'][$term_index])) {
+								
+								$thumb_id=0;
+		    					$thumb_id=$this->add_image_gallary($attribute['thumb'][$term_index]);
+		    					$_attr_term_id = null;
+		    					if(is_array($attr_term_id)) {
+		    						$_attr_term_id=isset($attr_term_id['term_id']) ? $attr_term_id['term_id'] : null;
+		    						if(!empty($_attr_term_id)) {
+		    							update_term_meta( $_attr_term_id, 'pa_'.$data['slug'].'_attachment', wp_get_attachment_url( $thumb_id ) );
+		    							update_term_meta( $_attr_term_id, sanitize_title($term).'_attachment', wp_get_attachment_url( $thumb_id ) );	
+		    						}		    						
+		    					}
+							}		    								    			
 			    		}
 			    	}
 		    	}
@@ -826,7 +841,9 @@ class Eowbc_Sample_Data {
 		    if(!is_wp_error($id) || isset($id->error_data['term_exists'])) {
 
 		    	$thumb_id=0;
-		    	$thumb_id=$this->add_image_gallary($cat['thumb']);
+		    	if( isset($cat['thumb']) ) {
+			    	$thumb_id=$this->add_image_gallary($cat['thumb']);
+			    }
 
 		    	$cat_id = null;
 		    	if(is_array($id)) {

@@ -65,6 +65,14 @@ class Public_Handler {
             wbc()->options->get_option('configuration','config_map',0) == 1
         ){
         	
+        	// Support for new url from old url structure.
+        	// @since 1.0.0 
+        	// prior to 1.0.0 old url was supported
+        	if(!empty(wbc()->sanitize->get('EO_WBC')) and isset($_GET['BEGIN']) and isset($_GET['STEP']) and !isset($_GET['FIRST']) and !isset($_GET['SECOND'])){
+        		$_GET['FIRST']='';
+        		$_GET['SECOND']='';
+        	}
+
 
         	add_action('template_redirect',function(){
         		

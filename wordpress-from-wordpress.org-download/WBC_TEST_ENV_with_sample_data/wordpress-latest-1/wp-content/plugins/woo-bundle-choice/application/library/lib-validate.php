@@ -12,7 +12,8 @@ if(!class_exists('WBC_Validate')) {
 				self::$_instance->methods = array(
 					'required',
 					'postfix',
-					'validate_if',									
+					'validate_if',
+					'url'									
 				);
 			}
 			return self::$_instance;
@@ -26,7 +27,7 @@ if(!class_exists('WBC_Validate')) {
 			$res["type"] = "error";
 		    $res["msg"] = "";
 
-		    $saved_tab_key = !empty($_POST["saved_tab_key"]) ? $_POST["saved_tab_key"] : ""; 
+		    $saved_tab_key = !empty(wbc()->sanitize->post("saved_tab_key")) ? wbc()->sanitize->post("saved_tab_key") : ""; 
 			$skip_fileds = array('saved_tab_key');
 
 			foreach ($form as $key => $tab) {
@@ -35,7 +36,7 @@ if(!class_exists('WBC_Validate')) {
 		    	}
 
 		    	foreach ($tab["form"] as $fk => $fv) {		    
-				    // if(!empty($fv['validate']) and array_key_exists($fk,$_POST)) {
+				    
 		    		if( !empty($fv['validate']) and ( isset($_POST[$fk]) || $fv["type"]=='checkbox'  ) ) {
 
 				    	//skip fields where applicable
@@ -49,7 +50,7 @@ if(!class_exists('WBC_Validate')) {
 
 				    	if(is_string($fv['validate']) and in_array($fv['validate'],$this->methods)) {
 
-				    		$validation_state = call_user_func_array( array( $this,$fv['validate']),array($fv['label'], isset($_POST[$fk]) ? $_POST[$fk] : '' ) );
+				    		$validation_state = call_user_func_array( array( $this,$fv['validate']),array($fv['label'], isset($_POST[$fk]) ? wbc()->sanitize->post($fk) : '' ) );
 				    		if($validation_state!==true) {
 				    			$res["msg"] = $validation_state;
 				    			echo json_encode($res);
@@ -58,7 +59,7 @@ if(!class_exists('WBC_Validate')) {
 				    	} elseif(is_array($fv['validate'])) {
 				    		foreach ($fv['validate'] as $sanitize_method=>$sanitize_params) {
 				    			if(in_array($sanitize_method,$this->methods)) {
-				    				$validation_state = call_user_func_array( array( $this,$sanitize_method),array($fv['label'], isset($_POST[$fk]) ? $_POST[$fk] : '',$sanitize_params));
+				    				$validation_state = call_user_func_array( array( $this,$sanitize_method),array($fv['label'], isset($_POST[$fk]) ? wbc()->sanitize->post($fk) : '',$sanitize_params));
 				    				if($validation_state!==true) {
 						    			$res["msg"] = $validation_state;
 						    			echo json_encode($res);
@@ -77,14 +78,14 @@ if(!class_exists('WBC_Validate')) {
 			return (!( $value!==0 && $value!=="0" && empty($value) )?true:"`${label}` field is required!");
 		}
 
-		public function validate_if($label,$value,$param){			
-			if(empty($param)) return true;
-			foreach ($param as $key => $validations) {
+		public function validate_if($label,$value,$param){						
+			foreach ($param as $key => $validations) {				
 				if (isset($_POST[$key]) and is_array($validations)) {
 					foreach ($validations as $sanitize_method=>$sanitize_params) 
 					{
 		    			if(in_array($sanitize_method,$this->methods)) {
 		    				$validation_state = call_user_func_array( array( $this,$sanitize_method),array($label,$value,$sanitize_params));
+		    				var_dump($value);
 		    				if($validation_state!==true) {
 				    			$res["msg"] = $validation_state;
 				    			echo json_encode($res);
@@ -103,7 +104,7 @@ if(!class_exists('WBC_Validate')) {
 			if(!empty($param)){
 
 				foreach ($param as $post_fix) {
-					if((substr($value,-(strlen($post_fix)))==$post_fix)){
+					if((substr($value,-(strlen($post_fix)))==$post_fix) and strlen($post_fix)<strlen($value)){
 						return true;
 					}
 				}
@@ -113,7 +114,7 @@ if(!class_exists('WBC_Validate')) {
 		}
 
 		public function url($label, $value, $param) {
-			return filter_var($value, FILTER_VALIDATE_URL) ? true : "`${label} field does not have valid URL.`";
+			return (empty($value) xor filter_var($value, FILTER_VALIDATE_URL)) ? true : "`${label} field does not have valid URL.`";
 		}
 	}
 }

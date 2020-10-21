@@ -5,8 +5,10 @@
 */
 
 ?>
-	<div class="ui grid container centered">
-		<button id="shortcode_flt_search_btn" name="shortcode_flt_search_btn" class="ui button" onclick="search_btn_click();">Search</button>	
+	<div class="ui grid centered">
+		<div class="">
+			<button id="shortcode_flt_search_btn" name="shortcode_flt_search_btn" class="ui button" onclick="search_btn_click();">Search</button>	
+		</div>
 	</div>
 
 	<script type="text/javascript">		

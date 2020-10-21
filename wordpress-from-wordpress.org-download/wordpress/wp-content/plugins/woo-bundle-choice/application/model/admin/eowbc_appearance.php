@@ -32,7 +32,7 @@ class Eowbc_Appearance {
 	    foreach ($form_definition as $key => $tab) {
 	    	foreach ($tab["form"] as $fk => $fv) {
 			    //loop through form fields and read values from options and store in the form_definition 
-				$form_definition[$key]["form"][$fk]["value"] = wbc()->options->get_option('appearance_'.$key,$fk, isset($form_definition[$key]["form"][$fk]["value"]) ? $form_definition[$key]["form"][$fk]["value"] : '');
+				$form_definition[$key]["form"][$fk]["value"] = wbc()->options->get_option('appearance_'.$key,$fk, isset($form_definition[$key]["form"][$fk]["value"]) ? $form_definition[$key]["form"][$fk]["value"] : '',true,true);
 			}
 	    }
 
@@ -55,7 +55,7 @@ class Eowbc_Appearance {
 
 		/*$res["post"] = $_POST;*/
 
-		$saved_tab_key = !empty($_POST["saved_tab_key"]) ? $_POST["saved_tab_key"] : ""; 
+		$saved_tab_key = !empty(wbc()->sanitize->post("saved_tab_key")) ? wbc()->sanitize->post("saved_tab_key") : ""; 
 		$skip_fileds = array('saved_tab_key');
 		
 	    //loop through form tabs and save 
@@ -70,7 +70,7 @@ class Eowbc_Appearance {
 			    //may need to check field type here and read accordingly only
 			    //only for those for which POST is set
 			    if( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) && (isset($_POST[$fk]) || $fv["type"]=='checkbox')) {
-			    	wbc()->options->update_option('appearance_'.$key,$fk,(isset($_POST[$fk])? sanitize_text_field( $_POST[$fk] ):'' ));	
+			    	wbc()->options->update_option('appearance_'.$key,$fk,(isset($_POST[$fk])? wbc()->sanitize->post($fk):'' ));	
 			    }
 			}
 	    }

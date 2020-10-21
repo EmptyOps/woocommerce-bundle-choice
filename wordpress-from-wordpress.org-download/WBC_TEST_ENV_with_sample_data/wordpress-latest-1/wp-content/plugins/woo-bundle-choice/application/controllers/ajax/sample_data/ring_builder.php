@@ -6,7 +6,7 @@
 
 $res = array( "type"=>"success", "msg"=>"" );
 
-if(wp_verify_nonce(sanitize_text_field($_POST['_wpnonce']),'sample_data_jewelry')){                
+if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'sample_data_jewelry')){                
 	wbc()->load->model('admin/sample_data/eowbc_ring_builder');
 	wbc()->load->model('admin\form-builder');
 	    
@@ -16,7 +16,7 @@ if(wp_verify_nonce(sanitize_text_field($_POST['_wpnonce']),'sample_data_jewelry'
 	// else {
 		//$res = eo\wbc\model\admin\Eowbc_Mapping::instance()->save( eo\wbc\controllers\admin\menu\page\Mapping::get_form_definition() );
 		//\eo\wbc\model\admin\sample_data\Eowbc_Ring_Builder::instance()->CatAtData__construct();
-		$res /*echo*/ = \eo\wbc\model\admin\sample_data\Eowbc_Ring_Builder::instance()->create_product(intval($_POST['product_index']));
+		$res /*echo*/ = \eo\wbc\model\admin\sample_data\Eowbc_Ring_Builder::instance()->create_product(intval(wbc()->sanitize->post('product_index')));
 		// wp_die();
     // }
 	

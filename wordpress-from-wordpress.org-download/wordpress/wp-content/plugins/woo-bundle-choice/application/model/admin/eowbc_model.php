@@ -54,7 +54,7 @@ class Eowbc_Model {
         $delete_cnt = 0;
         foreach ($list_data as $fdkey=>$item) {
             
-            if( !in_array( $check_by_id ? $item["id"] : $fdkey, $ids)) {
+            if( !in_array( (($check_by_id and isset($item["id"])) ? $item["id"] : $fdkey), $ids)) {
             	$list_data_updated[$fdkey] = $item; 
             }
             else {
