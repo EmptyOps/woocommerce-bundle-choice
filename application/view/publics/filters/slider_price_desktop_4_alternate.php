@@ -9,9 +9,7 @@
 	<p style="display: inline-block;margin-top: 0.25em;"class="ui three wide field num_slider">
 		<span class="ui header">Price</span>
 	</p>
-	<div style="display: inline-block;" class="field twelve ui wide">
-
-		
+	<div style="display: inline-block;" class="field twelve ui wide">		
 		<div class="ui tiny form" style="padding:0px 6%;">
 		  <div class="three fields">
 		    <div class="field">	      

@@ -246,19 +246,40 @@
 			window.eo.slider($('.eo-wbc-container.filters').find('.ui.slider'));				
 		
 			/* Activate initiation of sliders at secondary segments. */
-			if($(secondary_computer_only).css('display')!='none'){				
+			if(/*$(secondary_computer_only).css('display')!='none'*/<?php echo wp_is_mobile()?0:true; ?>){				
 
 				$("#advance_filter").on('click',function(){
 					$("#advance_filter").find('.ui.icon').toggleClass('up down');
 					$(secondary_filter).transition('slide down');
 				}).trigger('click');			
 
-			} else if($(secondary_mobile_only).css('display')!='none') {
-				
+			} else/* if($(secondary_mobile_only).css('display')!='none')*/ {
+				<?php if(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_2'): ?>
+				$(secondary_filter).css('display','none');
+				$("#advance_filter").on('click',function(){					
+					$(this).find('.ui.icon').toggleClass('up down');
+					if($(primary_filter).css('display')!=='none'){
+						//switch to advance filter.
+						$(primary_filter).transition('fly right',{duration:0});	
+						$(secondary_filter).transition('fly left',{duration:700});
+						$(this).html('<i class="ui icon chevron left" style="position: absolute;left: 0.5em;"></i><?php _e('Standard Search','woo-bundle-choice'); ?>');
+						$(this).css('text-align','right');
+					} else{
+						//switch to basic filter.
+						$(primary_filter).transition('fly right',{duration:700});			
+						$(secondary_filter).transition('fly left',{duration:0});	
+						$(this).html('<?php _e('Advanced Filters','woo-bundle-choice'); ?><i class="ui icon chevron right" style="position: absolute;right: 0.5em;"></i>');
+						$(this).css('text-align','left');
+					}
+					//$(this).find('.ui.icon').toggleClass('right left');
+									
+				})/*.trigger('click')*/;
+				<?php else: ?>
 				$("#advance_filter").on('click',function(){					
 					$(this).find('.ui.icon').toggleClass('up down');
 					$(secondary_filter).transition('fly right');				
 				}).trigger('click');
+				<?php endif; ?>
 			}
 
 
@@ -271,7 +292,12 @@
 					e.preventDefault();
 					e.stopPropagation();
 					$("#primary_filter").find('.ui.icon').toggleClass("down up");
+					<?php if(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_2'):
+						?>
+						$('.eo-wbc-container.filters>.segments,#advance_filter').transition('fade');	
+					<?php else: ?>
 					$('.eo-wbc-container.filters,#advance_filter').transition('fade');
+					<?php endif; ?>
 				}).trigger('click');
 			}
 			
