@@ -48,7 +48,7 @@ class EOWBC_Filter_Widget {
 		if(!(is_array($filter) xor is_object($filter)) or empty($filter)) return false;
 		$this->eo_wbc_filter_enque_asset();
 
-		//map fields to names as per older version, applies to this code block only. 
+		//map fields to names as per older version, applies to this code block only.
 		$field_to_old_fields = array(
 			$prefix.'_fconfig_filter'=>'name',
             $prefix.'_fconfig_type'=>'type',
@@ -526,6 +526,18 @@ class EOWBC_Filter_Widget {
 				ob_start();
 				?>
 				<style type="text/css">
+					.ui.eo_wbc_page{
+						margin-top: 2em !important;
+					}
+					/* Hide scrollbar for Chrome, Safari and Opera */
+					.scrollable_image_filters::-webkit-scrollbar {
+					    display: none;
+					}
+					/* Hide scrollbar for IE, Edge and Firefox */
+					.scrollable_image_filters{
+						-ms-overflow-style: none;  /* IE and Edge */
+  						scrollbar-width: none;  /* Firefox */
+					}
 					i.icon.plus:before{
 						content: "+" !important;
 					}
@@ -1320,7 +1332,7 @@ class EOWBC_Filter_Widget {
 				?><div class="ui styled fluid accordion" style="border-top-left-radius: 0px !important; border-top-right-radius: 0px !important;"><?php
 					$this->load_grid_mobile($general_filters);
 					$order = wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','price_filter_order_'.$this->cat_name_part.'_cat','');
-					if( !$this->is_shortcode_filter && !wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','hide_price_filter_'.$this->cat_name_part.'_cat',false) && wbc()->common->nonZeroEmpty($order) ) {
+					if( !$this->is_shortcode_filter && !wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','hide_price_filter_'.$this->cat_name_part.'_cat',false) && wbc()->common->nonZeroEmpty($order) && !(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_2') ) {
 						$this->slider_price(0);
 					}
 				?></div><?php
@@ -2364,11 +2376,12 @@ class EOWBC_Filter_Widget {
 				}	
 				//wbc()->common->pr($non_adv_ordered_filter);
 				?>
-					<div class="eo-wbc-container filters container">
+					<div class="eo-wbc-container filters container" style="padding-right: 0px !important;">
 						<?php
 							$icon_filter_shown = false;
 							$price_filter_shown = false;
 							if(!is_wp_error($non_adv_ordered_filter) and !empty($non_adv_ordered_filter)){
+								
 								foreach ($non_adv_ordered_filter as $naof_key => $noaf_filter) {
 									if(!$icon_filter_shown and isset($noaf_filter['type']) and $noaf_filter['type']==0 and isset($noaf_filter['label']) and $noaf_filter['label']==__('Shape','woo-choice-plugin') and isset($noaf_filter['input']) and $noaf_filter['input']=='icon_text') {
 										$noaf_filter['desktop']=0;
@@ -2384,12 +2397,17 @@ class EOWBC_Filter_Widget {
 										$price_filter_shown = true;
 									}
 								}
+
+								if(!$price_filter_shown){
+									$this->slider_price(0);
+									$price_filter_shown = true;
+								}
 							}
 						?>
 						<?php if(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_2'){
 						?>
-						<div class="row" style="padding-left: 1em;">
-							<div class="ui button primary circular" id="primary_filter" style="margin-right: 0;width: auto !important;"><?php _e('Filters','woo-bundle-choice'); ?>&nbsp;&nbsp;<i class="ui icon chevron up"></i></div>
+						<div class="" style="padding-left: 1em;">
+							<div class="ui button primary circular" id="primary_filter" style="margin-right: 0;width: max-content !important;"><?php _e('Filters','woo-bundle-choice'); ?>&nbsp;&nbsp;<i class="ui icon chevron up"></i></div>
 						</div>
 						
 						<?php
@@ -2406,7 +2424,7 @@ class EOWBC_Filter_Widget {
 					?>
 					<div class="ui grid centered">
 						<div class="row">
-							<div class="ui button primary advance_filter" id="advance_filter" style="padding-left: 0.5em;padding-right: 0.5em;border-radius: 0 0 0 0;width: 100vw !important; display: block !important; position: absolute;text-align: left;"><?php _e('Advanced Filters','woo-bundle-choice'); ?>&nbsp;<i class="ui icon chevron right" style="position: absolute;right: 0.5em;"></i></div>
+							<div class="ui button primary advance_filter" id="advance_filter" style="padding-left: 1em;padding-right: 1em;border-radius: 0 0 0 0;width: 100vw !important; display: block !important; position: absolute;text-align: left;"><?php _e('Advanced Filters','woo-bundle-choice'); ?>&nbsp;<i class="ui icon chevron right" style="position: absolute;right:1em;"></i></div>
 						</div>
 					</div>					
 					<?php

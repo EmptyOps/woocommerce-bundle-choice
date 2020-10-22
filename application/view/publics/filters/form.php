@@ -262,13 +262,13 @@
 						//switch to advance filter.
 						$(primary_filter).transition('fly right',{duration:0});	
 						$(secondary_filter).transition('fly left',{duration:700});
-						$(this).html('<i class="ui icon chevron left" style="position: absolute;left: 0.5em;"></i><?php _e('Standard Search','woo-bundle-choice'); ?>');
+						$(this).html('<i class="ui icon chevron left" style="position: absolute;left: 1em;"></i><?php _e('Standard Search','woo-bundle-choice'); ?>');
 						$(this).css('text-align','right');
 					} else{
 						//switch to basic filter.
 						$(primary_filter).transition('fly right',{duration:700});			
 						$(secondary_filter).transition('fly left',{duration:0});	
-						$(this).html('<?php _e('Advanced Filters','woo-bundle-choice'); ?><i class="ui icon chevron right" style="position: absolute;right: 0.5em;"></i>');
+						$(this).html('<?php _e('Advanced Filters','woo-bundle-choice'); ?><i class="ui icon chevron right" style="position: absolute;right: 1em;"></i>');
 						$(this).css('text-align','left');
 					}
 					//$(this).find('.ui.icon').toggleClass('right left');
