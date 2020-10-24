@@ -19,7 +19,7 @@
  */
 
 // If this file is called directly, abort.
-if (!defined('ABSPATH')) exit;
+if (!defined('ABSPATH')) exit; 
 
 //load autoloader file
 //load error detection and handler class
