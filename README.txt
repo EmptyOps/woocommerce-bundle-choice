@@ -56,6 +56,7 @@ We offer fully customizable options with a industry standard experience. Here, f
 Shop and Category page filters module in this plugin contains advanced filter tools that makes your work really easier to create advanced ajax based woocommerce product filters on any of your woocommerce websites. There are variety of alternate widgets to create differently styled horizontal filters, it is mobile responsive, you may like to have a look at the [demo](https://demo.woochoiceplugin.com/hify-store/product-category/eo_diamond_shape_cat/)(be sure to check other applicable demos in the demo section below). 
  
 If you are looking to create an independent diamond feed page kind of like you would have seen on many sites or if you want to create a product feed page with nice looking filters(you should see related demos in the demo section below) then this feature is for you. 
+
 KEYPOINTS:
   * Filter by any WooCommerce Attribute 
   * Filter by any WooCommerce Category
@@ -72,6 +73,7 @@ If your product has many informative attributes e.g. diamonds or for any other i
 
 = 4.4 SHORTCODE FILTERS FOR WOOCOMMERCE = 
 When you have specific requirement to use filter on any page you can use shortcode filters module to create search filters on any page and redirect to your desired target page or to same page. When you have requirement to create any kind of basic or advanced woocommerce product filters then this module is for you. There are some instances when you would like to place light CTA filters on the home page or at any other page and redirect users to a specific page on search action. In many such scenarios shortcode filters are useful. 
+
 KEYPOINTS:
   * Filter by any WooCommerce Attribute 
   * Filter by any WooCommerce Category
