@@ -93,7 +93,7 @@ class EOWBC_Filter_Widget {
 		?>
 		<!--Primary filter button that will only be visible on desktop/tablet-->
 		<!-- This widget is created with Wordpress plugin - WooCommerce Product bundle choice -->
-		<div id="loading" <?php wbc()->options->get_option('appearance_filters','appearance_filters_loader')?_e('style="display:none !important;"'):'';?>></div>	
+		<div id="loading" style="height: 100%; width: 100%; position: fixed; top: 0;<?php (wbc()->options->get_option('appearance_filters','appearance_filters_loader') OR apply_filters('eowbc_filter_widget_loader',false))?_e('display:none !important;'):'';?>"></div>	
 		    							
 		<?php 
 			if(wp_is_mobile()) {
@@ -225,11 +225,12 @@ class EOWBC_Filter_Widget {
 						background-repeat: no-repeat;	    				    
 					    margin: 0;
 					    position:fixed;				    
-					    top:0;
-					    left:0;				    
+					    top:".((!empty(wbc()->options->get_option('appearance_filters','appearance_filters_non_block_loader')))?"50%":"0")." !important;
+					    left:".((!empty(wbc()->options->get_option('appearance_filters','appearance_filters_non_block_loader')))?"50%":"0")." !important;			    
 					    z-index: 10000;				    				    
-					    width: 100%;
-					    height: 100%;				
+					    width: ".((!empty(wbc()->options->get_option('appearance_filters','appearance_filters_non_block_loader')))?"4.7em":"100vw")." !important;
+					    height: ".((!empty(wbc()->options->get_option('appearance_filters','appearance_filters_non_block_loader')))?"4.7em":"100vh")." !important;	
+					    ".((!empty(wbc()->options->get_option('appearance_filters','appearance_filters_non_block_loader')))?"transform: translateX(-50%);":"")."
 					}			
 					.ui.grid.container.mobile.only{
 						padding-bottom: 0px !important;
@@ -731,78 +732,129 @@ class EOWBC_Filter_Widget {
 				$field_slug=$term->slug;			
 
 				$taxonomies=get_terms(array('taxonomy'=>wc_attribute_taxonomy_name_by_id($term->id),'hide_empty'=>false));
+				if(!empty($item[$__prefix.'_fconfig_elements']) and !empty(explode(',',$item[$__prefix.'_fconfig_elements']))) {
 
-				if(is_wp_error($taxonomies) or empty($taxonomies)){
-					$taxonomies=get_terms(wc_attribute_taxonomy_name_by_id($term->id),array('hide_empty'=>false));
-				}
+					$elements = explode(',',$item[$__prefix.'_fconfig_elements']);
+					$taxonomy = get_term_by('slug',$elements[0],$field_slug);
 
-				if( is_wp_error($taxonomies) or empty($taxonomies) ) return false;
+					$min_value=array("id"=>$taxonomies[0]->term_id,"slug"=>$taxonomies[0]->slug,"name"=>str_replace(',','.',$taxonomies[0]->name),"type"=>'attr');
+					$max_value=array("id"=>$taxonomies[0]->term_id,"slug"=>$taxonomies[0]->slug,"name"=>str_replace(',','.',$taxonomies[0]->name),"type"=>'attr');
 
-				$min_value=array("id"=>$taxonomies[0]->term_id,"slug"=>$taxonomies[0]->slug,"name"=>str_replace(',','.',$taxonomies[0]->name),"type"=>'attr');
-				$max_value=array("id"=>$taxonomies[0]->term_id,"slug"=>$taxonomies[0]->slug,"name"=>str_replace(',','.',$taxonomies[0]->name),"type"=>'attr');
+					foreach ($elements as $term_element) {
 
-				foreach ($taxonomies as $taxonomy){
-					if(str_replace(',','.',$taxonomy->name) < str_replace(',','.',$min_value['name'])){
-						$min_value=array("id"=>$taxonomy->term_id,"slug"=>$taxonomy->slug,"name"=>str_replace(',','.',$taxonomy->name),"type"=>'attr');
-						//To markdown if coma is used as seperator of in numeric value.
-						if(strpos($taxonomy->name,',')!==false){
-							$seprator = ',';
+						$taxonomy = get_term_by('slug',$term_element,$field_slug);
+						if(str_replace(',','.',$taxonomy->name) < str_replace(',','.',$min_value['name'])){
+							$min_value=array("id"=>$taxonomy->term_id,"slug"=>$taxonomy->slug,"name"=>str_replace(',','.',$taxonomy->name),"type"=>'attr');
+							//To markdown if coma is used as seperator of in numeric value.
+							if(strpos($taxonomy->name,',')!==false){
+								$seprator = ',';
+							}
 						}
+
+						if(str_replace(',','.',$taxonomy->name) > str_replace(',','.',$max_value['name'])){
+							$max_value=array("id"=>$taxonomy->term_id,"slug"=>$taxonomy->slug,"name"=>str_replace(',','.',$taxonomy->name),"type"=>'attr');
+							//To markdown if coma is used as seperator of in numeric value.
+							if(strpos($taxonomy->name,',')!==false){
+								$seprator = ',';
+							}
+						}	
+					}
+				} else {				
+
+					if(is_wp_error($taxonomies) or empty($taxonomies)){
+						$taxonomies=get_terms(wc_attribute_taxonomy_name_by_id($term->id),array('hide_empty'=>false));
 					}
 
-					if(str_replace(',','.',$taxonomy->name) > str_replace(',','.',$max_value['name'])){
-						$max_value=array("id"=>$taxonomy->term_id,"slug"=>$taxonomy->slug,"name"=>str_replace(',','.',$taxonomy->name),"type"=>'attr');
-						//To markdown if coma is used as seperator of in numeric value.
-						if(strpos($taxonomy->name,',')!==false){
-							$seprator = ',';
+					if( is_wp_error($taxonomies) or empty($taxonomies) ) return false;
+
+					$min_value=array("id"=>$taxonomies[0]->term_id,"slug"=>$taxonomies[0]->slug,"name"=>str_replace(',','.',$taxonomies[0]->name),"type"=>'attr');
+					$max_value=array("id"=>$taxonomies[0]->term_id,"slug"=>$taxonomies[0]->slug,"name"=>str_replace(',','.',$taxonomies[0]->name),"type"=>'attr');
+
+					foreach ($taxonomies as $taxonomy){
+						if(str_replace(',','.',$taxonomy->name) < str_replace(',','.',$min_value['name'])){
+							$min_value=array("id"=>$taxonomy->term_id,"slug"=>$taxonomy->slug,"name"=>str_replace(',','.',$taxonomy->name),"type"=>'attr');
+							//To markdown if coma is used as seperator of in numeric value.
+							if(strpos($taxonomy->name,',')!==false){
+								$seprator = ',';
+							}
 						}
-					}				                	  	
-	        	}
-		        
+
+						if(str_replace(',','.',$taxonomy->name) > str_replace(',','.',$max_value['name'])){
+							$max_value=array("id"=>$taxonomy->term_id,"slug"=>$taxonomy->slug,"name"=>str_replace(',','.',$taxonomy->name),"type"=>'attr');
+							//To markdown if coma is used as seperator of in numeric value.
+							if(strpos($taxonomy->name,',')!==false){
+								$seprator = ',';
+							}
+						}				                	  	
+		        	}
+		        }
 			} else {
 				return false;
 			}			
 		}		
 		else {
 
-			$category=get_term_by('id',$id,'product_cat');
+			if(!empty($item[$__prefix.'_fconfig_elements']) and !empty(explode(',',$item[$__prefix.'_fconfig_elements']))) {
 
-			if(!empty($category) && !is_wp_error($category)){
+				$elements = explode(',',$item[$__prefix.'_fconfig_elements']);
 
-				$field_title=empty($title)?$category->name:$title;
-				$field_slug=$category->slug;
+				$sub_category = get_term_by('slug',$elements[0],'product_cat');
 
-				$sub_categories = get_categories(array(
-		            'hierarchical' => 1,
-		            'show_option_none' => '',
-		            'hide_empty' => false,
-		            'parent' => $id,
-		            'taxonomy' => 'product_cat'
-		        ));
-
-				if( is_wp_error($sub_categories) or empty($sub_categories) ) return false;				
-
-		        $min_value=array("id"=>$sub_categories[0]->term_id,"slug"=>$sub_categories[0]->slug,"name"=>$sub_categories[0]->name,"type"=>'cat');
-				$max_value=array("id"=>$sub_categories[0]->term_id,"slug"=>$sub_categories[0]->slug,"name"=>$sub_categories[0]->name,"type"=>'cat');
+				$min_value=array("id"=>$sub_category->term_id,"slug"=>$sub_category->slug,"name"=>$sub_category->name,"type"=>'cat');
+				$max_value=array("id"=>$sub_category->term_id,"slug"=>$sub_category->slug,"name"=>$sub_category->name,"type"=>'cat');
 				
-		        foreach ($sub_categories as $sub_category) {
+				foreach ($elements as $term_element) {
 
-		        	if($sub_category->name < $min_value['name']){
+					$sub_category = get_term_by('slug',$term_element,'product_cat');
+					if($sub_category->name < $min_value['name']){
 						$min_value=array("id"=>$sub_category->term_id,"slug"=>$sub_category->slug,"name"=>$sub_category->name,"type"=>'cat');
 					}
 
 					if($sub_category->name > $max_value['name']){
 						$max_value=array("id"=>$sub_category->term_id,"slug"=>$sub_category->slug,"name"=>$sub_category->name,"type"=>'cat');
 					}
-		        }			
-			   
-		    } else {
-		    	return false;
-		    }
+				}
+			} else {
+
+				$category=get_term_by('id',$id,'product_cat');
+
+				if(!empty($category) && !is_wp_error($category)){
+
+					$field_title=empty($title)?$category->name:$title;
+					$field_slug=$category->slug;
+
+					$sub_categories = get_categories(array(
+			            'hierarchical' => 1,
+			            'show_option_none' => '',
+			            'hide_empty' => false,
+			            'parent' => $id,
+			            'taxonomy' => 'product_cat'
+			        ));
+
+					if( is_wp_error($sub_categories) or empty($sub_categories) ) return false;				
+
+			        $min_value=array("id"=>$sub_categories[0]->term_id,"slug"=>$sub_categories[0]->slug,"name"=>$sub_categories[0]->name,"type"=>'cat');
+					$max_value=array("id"=>$sub_categories[0]->term_id,"slug"=>$sub_categories[0]->slug,"name"=>$sub_categories[0]->name,"type"=>'cat');
+					
+			        foreach ($sub_categories as $sub_category) {
+
+			        	if($sub_category->name < $min_value['name']){
+							$min_value=array("id"=>$sub_category->term_id,"slug"=>$sub_category->slug,"name"=>$sub_category->name,"type"=>'cat');
+						}
+
+						if($sub_category->name > $max_value['name']){
+							$max_value=array("id"=>$sub_category->term_id,"slug"=>$sub_category->slug,"name"=>$sub_category->name,"type"=>'cat');
+						}
+			        }			
+				   
+			    } else {
+			    	return false;
+			    }
+			}
 		}		
 		$seprator = wbc()->options->get_option('filters_filter_setting','filter_setting_numeric_slider_seperator',$seprator);
 		/*return array('min_value'=>$min_value,'max_value'=>$max_value,'title'=>$field_title,'slug'=>$field_slug,'seprator'=>$seprator);*/
-
+		
 		return apply_filters('eowbc_filters_range_min_max',array('min_value'=>$min_value,'max_value'=>$max_value,'title'=>$field_title,'slug'=>$field_slug,'seprator'=>$seprator,'filter_item'=>$item));
 	}
 	
@@ -2156,7 +2208,7 @@ class EOWBC_Filter_Widget {
 		?>
 		<!--Primary filter button that will only be visible on desktop/tablet-->
 		<!-- This widget is created with Wordpress plugin - WooCommerce Product bundle choice -->
-		<div id="loading" <?php (wbc()->options->get_option('appearance_filters','appearance_filters_loader') OR apply_filters('eowbc_filter_widget_loader',false))?_e('style="display:none !important;"'):'';?>></div>
+		<div id="loading" style="height: 100%; width: 100%; position: fixed; top: 0;<?php (wbc()->options->get_option('appearance_filters','appearance_filters_loader') OR apply_filters('eowbc_filter_widget_loader',false))?_e('display:none !important;'):'';?>"></div>
 		
 		<script type="text/javascript">
 			jQuery(document).ready(function(){

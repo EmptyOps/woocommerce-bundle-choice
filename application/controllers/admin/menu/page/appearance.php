@@ -250,6 +250,15 @@ if ( ! class_exists( 'Appearance' ) ) {
 									'is_id_as_name'=>true,
 									'class'=>array(),
 								), 
+								'appearance_filters_non_block_loader'=>array(
+									'label'=>'Non-bloacking Loader',
+									'type'=>'checkbox',
+									'sanitize'=>'sanitize_text_field',
+									'value'=>array(wbc()->options->get_option('appearance_filters','appearance_filters_non_block_loader')),
+									'options'=>array('1'=>' '),
+									'is_id_as_name'=>true,
+									'class'=>array(),
+								), 
 							),
 							array( 
 								'filters_submit_btn'=>array(
