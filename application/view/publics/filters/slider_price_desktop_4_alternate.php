@@ -17,7 +17,7 @@
 		    </div>
 		    <div class="field"></div>
 		    <div class="field">	      
-		      <input style="font-size: 13px; height: 24px; width: 6em; -webkit-appearance: none;position: absolute;right: 6%;" value="<?php echo $prefix.$max.$postfix;; ?>" type="text" class="text_slider_price aligned right" name="text_max_price" data-sep="<?php _e($seprator); ?>">
+		      <input style="font-size: 13px; height: 24px;" value="<?php echo $prefix.$max.$postfix;; ?>" type="text" class="text_slider_price aligned right" name="text_max_price" data-sep="<?php _e($seprator); ?>">
 		    </div>
 		  </div>	  
 		</div>				

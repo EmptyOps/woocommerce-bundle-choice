@@ -28,6 +28,8 @@ class Service {
     public function discount_service() {
 
 
+        add_action('woocommerce_checkout_update_order_review',array(\eo\wbc\controllers\publics\pages\Checkout::instance(),'update_order_review'));
+
         add_action( 'woocommerce_update_cart_action_cart_updated',function() {
            if(is_array($_POST['cart']) and !empty($_POST['cart'])) {
                 $cart = wbc()->session->get('EO_WBC_MAPS');
@@ -181,7 +183,7 @@ class Service {
             <script type="text/javascript">
                 filter_obj = Object();
                 filter_obj.ajaxurl ='<?php echo admin_url('admin-ajax.php'); ?>';
-                filter_obj.cat_url ='<?php echo get_option("siteurl")."/index.php/product-category/"; ?>';          
+                filter_obj.cat_url ='<?php echo get_option("siteurl")."/index.php/".wbc()->wc->wc_permalink('category_base')."/"; ?>';          
                 filter_obj.shop_url = '<?php echo get_option("siteurl")."/index.php/shop/"; ?>';         
                 filter_obj.not_required_all_select = true;            
             </script>       

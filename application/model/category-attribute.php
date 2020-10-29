@@ -58,7 +58,7 @@ class Category_Attribute{
 		$link = get_term_link( $category,'product_cat');
 
       	if(empty($link) or is_wp_error($link)) {
-        	$link = get_bloginfo('url').'index.php/product-category/'.$category;
+        	$link = get_bloginfo('url').'index.php/'.wbc()->wc->wc_permalink('category_base').'/'.$category;
       	} else {
         	$link = esc_url($link);  
       	}

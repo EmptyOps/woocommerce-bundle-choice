@@ -257,4 +257,17 @@ class WBC_WC {
     public function get_currency_symbol() {
         return get_woocommerce_currency_symbol();
     }
+
+    public function wc_permalink(string $key){
+        $permalink = get_option('woocommerce_permalinks',array());
+        if(empty($permalink)){
+            $permalink['category_base'] = untrailingslashit('product-category');
+        }
+
+        if(empty($permalink) or empty($permalink[$key])){
+            return '';
+        } else {
+            return $permalink[$key];
+        }
+    }
 }
