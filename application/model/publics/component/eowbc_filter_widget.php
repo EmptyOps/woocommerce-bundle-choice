@@ -527,6 +527,17 @@ class EOWBC_Filter_Widget {
 				ob_start();
 				?>
 				<style type="text/css">
+					.eo-wbc-container.filters .ui.header{
+						text-transform: uppercase;
+					}
+					.ui.segments.transition{
+						width: 101vw;
+    					left: -1vw;
+					}
+					.ui.button.advance_filter.transition{
+						margin-left: 0;
+						margin-right: 0;
+					}
 					.ui.eo_wbc_page{
 						margin-top: 2em !important;
 					}
