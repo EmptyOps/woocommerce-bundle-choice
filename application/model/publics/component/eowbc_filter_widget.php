@@ -2426,7 +2426,7 @@ class EOWBC_Filter_Widget {
 
 				if(!is_wp_error($non_adv_ordered_filter) and !empty($non_adv_ordered_filter)) {
 
-					if(!wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_2'){
+					if(!wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)!='mobile_2'){
 						?>
 						<div class="ui grid container centered" style="margin:auto !important">
 							<div class="row">
@@ -2440,6 +2440,9 @@ class EOWBC_Filter_Widget {
 				//wbc()->common->pr($non_adv_ordered_filter);
 				?>
 					<div class="eo-wbc-container filters container" style="padding-right: 0px !important;">
+						
+						<?php if(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_2'){
+						?>
 						<?php
 							$icon_filter_shown = false;
 							$price_filter_shown = false;
@@ -2467,8 +2470,7 @@ class EOWBC_Filter_Widget {
 								}
 							}
 						?>
-						<?php if(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_2'){
-						?>
+
 						<div class="" style="padding-left: 1em;">
 							<div class="ui button primary circular" id="primary_filter" style="margin-right: 0;width: max-content !important;"><?php _e('Filters','woo-bundle-choice'); ?>&nbsp;&nbsp;<i class="ui icon chevron up"></i></div>
 						</div>

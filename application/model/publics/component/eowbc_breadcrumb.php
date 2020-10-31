@@ -154,13 +154,10 @@ class EOWBC_Breadcrumb
                 self::eo_wbc_breadcumb_second_html_mobile($step,1).self::eo_wbc_breadcumb_first_html_mobile($step,2);
                 }
             }
-            ?>          
-            <div 
-                data-href="<?php echo (  (empty(wbc()->sanitize->get('EO_CHANGE')) XOR empty(wbc()->sanitize->get('EO_VIEW'))) &&  !empty( wbc()->sanitize->get('FIRST')) && !empty(wbc()->sanitize->get('SECOND')) ? get_bloginfo('url').'/index.php'.wbc()->options->get_option('configuration','review_page')
-                    .'?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>3,'FIRST'=>wbc()->sanitize->get('FIRST'),'SECOND'=>wbc()->sanitize->get('SECOND'))):'#' ); ?>" 
-                class="<?php echo (($step==3)?'active ':(($step>3)?'completed ':(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb)?'':'disabled'))); ?> step">
-                <div class="content"><?php echo self::$preview_name/*get_option('eo_wbc_collection_title','Preview')*/; ?></div>
-            </div>
+            self::eo_wbc_breadcumb_final_html_mobile($step);
+            ?>
+
+            
         </div>
         <script>
             jQuery(document).ready(function(){ 
@@ -183,11 +180,23 @@ class EOWBC_Breadcrumb
     }
 
     public static function eo_wbc_breadcumb_first_html_mobile($step,$order) {
-        wbc()->load->template('publics/breadcrumb/first_step_mobile', array("step"=>$step,"order"=>$order,"first"=>self::$first_name,"view_url"=>(!empty(wbc()->sanitize->get('FIRST')) ? self::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('FIRST'),$order):'#'),"change_url"=>(!empty(wbc()->sanitize->get('FIRST'))?self::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('FIRST')):'#')));
+        $template = wbc()->options->get_option('configuration','config_alternate_breadcrumb_mobile','default');
+        
+        wbc()->load->template('publics/breadcrumb/first_step_mobile_'.$template, array("step"=>$step,"order"=>$order,"first"=>self::$first_name,"first_obj"=>self::$first,"view_url"=>(!empty(wbc()->sanitize->get('FIRST')) ? self::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('FIRST'),$order):'#'),"change_url"=>(!empty(wbc()->sanitize->get('FIRST'))?self::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('FIRST')):'#')));
+        
+
     }
 
     public static function eo_wbc_breadcumb_second_html_mobile($step,$order){
-        wbc()->load->template('publics/breadcrumb/second_step_mobile',array("step"=>$step,"order"=>$order,"second"=>self::$second_name,"view_url"=>(!empty(wbc()->sanitize->get('SECOND')) ? self::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('SECOND'),$order):'#'),"change_url"=>(!empty(wbc()->sanitize->get('SECOND')?self::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('SECOND')):'#')))); 
+        $template = wbc()->options->get_option('configuration','config_alternate_breadcrumb_mobile','default');
+
+        wbc()->load->template('publics/breadcrumb/second_step_mobile_'.$template,array("step"=>$step,"order"=>$order,"second"=>self::$second_name,"second_obj"=>self::$second,"view_url"=>(!empty(wbc()->sanitize->get('SECOND')) ? self::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('SECOND'),$order):'#'),"change_url"=>(!empty(wbc()->sanitize->get('SECOND')?self::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('SECOND')):'#')))); 
+    }
+
+    public static function eo_wbc_breadcumb_final_html_mobile($step) {
+        $template = wbc()->options->get_option('configuration','config_alternate_breadcrumb_mobile','default');
+
+        wbc()->load->template('publics/breadcrumb/final_step_mobile_'.$template, array("step"=>$step,'preview_name'=>self::$preview_name));
     }
 
     private static function eo_wbc_breadcrumb_desktop($step=1,$begin){

@@ -2,7 +2,7 @@
 window.document.splugins = window.document.splugins || {};
 
 window.document.splugins.is_debug = false; 
-window.document.splugins.is_test_script_debug = false;    
+window.document.splugins.is_test_script_debug = false;  
 
 window.document.splugins.process_debug_log = function(obj,debug_log) {  
    if( window.document.splugins.is_test_script_debug ) {
@@ -85,6 +85,8 @@ window.document.splugins.parseJSON = function(result) {
 $ = jQuery;
 
 function eowbc_ready($){
+    
+    jQuery.fn.accordion = jQuery.fn.ui_accordion
 
     $(".ui.selection.dropdown:not(.additions)").dropdown();
     $(".ui.selection.dropdown.additions").dropdown({ allowAdditions: true });   
