@@ -9,7 +9,7 @@
 <div class="onclick_redirect step <?php echo ($step==$order)?'active ':' '; ?>" data-begin="<?php echo get_term_link(get_term_by('slug', $second_slug, 'product_cat')->term_id,'product_cat').'EO_WBC=1&BEGIN='.$second_slug.'&STEP=1'; ?>" <?php _e((!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb) and !empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second_url))?'data-clickable_breadcrumb="'.\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second_url.'"':''); ?>>            
 
     <div class="ui equal width grid" style="width: 100%;margin-top: -1em !important;">
-        <div class="column">2</div>
+        <div class="column"><?php _e($order,'woo-bundle-choice'); ?></div>
         <div class="column" style="text-align: left;">
 
             <?php if(empty($second)):?>        
