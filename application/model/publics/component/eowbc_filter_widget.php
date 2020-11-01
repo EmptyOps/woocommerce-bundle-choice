@@ -89,6 +89,7 @@ class EOWBC_Filter_Widget {
 		ksort($non_adv_ordered_filter);
 		ksort($adv_ordered_filter);
 
+		echo "non_adv_ordered_filter and adv_ordered_filter dump";
 		wbc()->common->pr($non_adv_ordered_filter);
 		wbc()->common->pr($adv_ordered_filter);
 
