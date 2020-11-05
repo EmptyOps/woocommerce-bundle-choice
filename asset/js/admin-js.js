@@ -129,6 +129,7 @@ function eowbc_ready($){
     });
 
     //Open wordpress media manager on button click
+    jQuery('.field.upload_image>.ui.button').off('click');
     jQuery('.field.upload_image>.ui.button').on('click',function(event){
         event.preventDefault();
         action_root=$(this).parent();
