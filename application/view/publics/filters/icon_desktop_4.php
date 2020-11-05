@@ -7,11 +7,8 @@
 ?>
 <div class="<?php echo $width_class; ?>" data-tab-group="<?php _e($tab_set); ?>">
 	<div style="display: inline-block;"class="ui three wide field icon_header">
-		<span class="ui header"><?php echo($title); ?><span><?php if($help): ?>
-		&nbsp; <span class="ui grey text" style="cursor: pointer;">&nbsp;<i class="question circle outline icon" data-help="<?php _e($help); ?>"></i></span>
+		<span class="ui header"><?php echo($title); ?></span><?php if($help): ?><span class="ui grey text" style="cursor: pointer;"><i class="question circle outline icon" data-help="<?php _e($help); ?>"></i></span>
 		<?php endif; ?>
-		</span></span>
-		
 	</div>	
 
 	<div style="display: inline-block;" class="field twelve ui wide" data-reset="reset_icon(new Event('click'),'<?php echo $term->slug; ?>')">

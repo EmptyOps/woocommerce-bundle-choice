@@ -258,6 +258,19 @@ if ( ! class_exists( 'Appearance' ) ) {
 									'options'=>array('1'=>' '),
 									'is_id_as_name'=>true,
 									'class'=>array(),
+								),
+								'appearance_filters_limit_height'=>array(
+									'label'=>'Filter height',
+									'type'=>'text',
+									'sanitize'=>'sanitize_text_field',
+									'value'=>'',									
+									'is_id_as_name'=>true,
+									'class'=>array(),
+									'visible_info'=>array( 'label'=>'( If value given then the height of the filter is applied to all filters and limited to this height for all the filters with equal height. )',
+										'type'=>'visible_info',
+										'class'=>array('fluid', 'small'),
+										'size_class'=>array('sixteen','wide'),
+									)
 								), 
 							),
 							array( 

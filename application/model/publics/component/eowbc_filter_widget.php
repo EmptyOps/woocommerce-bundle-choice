@@ -357,7 +357,7 @@ class EOWBC_Filter_Widget {
 					}
 					".((wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_2' and wp_is_mobile())?'#primary_filter,':'')."#advance_filter,#apply_filter{
 						background-color:".wbc()->options->get_option('appearance_wid_btns','button_backcolor_active',$active_color)." !important;
-					}
+					}".((!wp_is_mobile() and !empty(wbc()->options->get_option('appearance_filters','appearance_filters_limit_height')))?".container.filters>.segments>.ui.segment .wide.column{ height: ".wbc()->options->get_option('appearance_filters','appearance_filters_limit_height').";}":"")."
 									
 					/*Modifications............................*/
 				</style>";	

@@ -85,8 +85,9 @@ window.document.splugins.parseJSON = function(result) {
 $ = jQuery;
 
 function eowbc_ready($){
-    
-    jQuery.fn.accordion = jQuery.fn.ui_accordion
+    if (typeof(jQuery.fn.ui_accordion)==='function') {
+        jQuery.fn.accordion = jQuery.fn.ui_accordion    
+    }    
 
     $(".ui.selection.dropdown:not(.additions)").dropdown();
     $(".ui.selection.dropdown.additions").dropdown({ allowAdditions: true });   
