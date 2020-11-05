@@ -233,7 +233,10 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 
 				add_action( 'admin_notices',function() use($primary_features,$active_feature){
 					//printf('<div class="ui negative message"><i class="close icon"></i><div class="header">Required</div><p>Since you enabled <strong>%s</strong> you need to complete setup to make it work on your website, either add sample data from General -> Sample Data tab or add Filters and Mapping in respective Tabs as well as finish the required settings in the General -> Buttons and General -> Navigations Steps( Breadcrumb ) Tabs</p></div>',$primary_features[$active_feature]);
-					printf('<div class="notice notice-error is-dismissible"><p><stong>Required</strong> Since you enabled <strong>%s</strong> you need to complete setup to make it work on your website, either add sample data from General -> Sample Data tab or add Filters and Mapping in respective Tabs as well as finish the required settings in the General -> Buttons and General -> Navigations Steps( Breadcrumb ) Tabs</p></div>',$primary_features[$active_feature]);
+					
+					printf('<div class="notice notice-error is-dismissible"><p>Since you enabled <strong>%s</strong> you need to complete setup to make it work on your website, either <a href="%s">add sample data</a> or simply <a href="%s">complete setup wizard</a>.</p></div>',$primary_features[$active_feature],admin_url('admin.php?page=eowbc&eo_wbc_view_auto_jewel=1&f='.$active_feature),admin_url('admin.php?page=eowbc&wbc_setup=1'));
+
+					/*printf('<div class="notice notice-error is-dismissible"><p><strong>Required</strong> Since you enabled <strong>%s</strong> you need to complete setup to make it work on your website, either add sample data from General -> Sample Data tab or add Filters and Mapping in respective Tabs as well as finish the required settings in the General -> Buttons and General -> Navigations Steps( Breadcrumb ) Tabs</p></div>',$primary_features[$active_feature]);*/
 				});
 			}
 
@@ -256,7 +259,7 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 
 				add_action( 'admin_notices',function() use($message_type,$message_title,$error_message){
 					//printf('<div class="ui %s message"><i class="close icon"></i><div class="header">%s</div><p>'.constant('EOWBC_NAME').' have noticed <strong>%s</strong>, would you like to <a href="%s">have a look</a> or <a href="%s">report to the support</a>.</p></div>',$message_type,$message_title,$error_message,admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'),admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'));
-					printf('<div class="notice notice-%s is-dismissible"><p><stong>%s</strong> '.constant('EOWBC_NAME').' have noticed <strong>%s</strong>, would you like to <a href="%s">have a look</a> or <a href="%s">report to the support</a>.</p></div>',$message_type,$message_title,$error_message,admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'),admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'));
+					printf('<div class="notice notice-%s is-dismissible"><p><strong>%s</strong> '.constant('EOWBC_NAME').' have noticed <strong>%s</strong>, would you like to <a href="%s">have a look</a> or <a href="%s">report to the support</a>.</p></div>',$message_type,$message_title,$error_message,admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'),admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'));
 				});
 
 			}
@@ -269,7 +272,7 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 				$referrer = wbc()->options->get('eo_wbc_mapping_error_report',false);
 				add_action( 'admin_notices',function() use($referrer,$message_type,$message_title){
 					//printf('<div class="ui %s message"><i class="close icon"></i><div class="header">%s</div><p>One user has reported mapping issue at this <a href="%s" target="_blank">link</a>, please ensure you have added mapping to connect products from first to second step. If you like assistance on this <a href="%s">you can contact support</a></p></div>',$message_type,$message_title,$referrer,admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'));
-					printf('<div class="notice notice-%s is-dismissible"><p><stong>%s</strong> One user has reported mapping issue at this <a href="%s" target="_blank">link</a>, please ensure you have added mapping to connect products from first to second step. If you like assistance on this <a href="%s">you can contact support</a></p></div>',$message_type,$message_title,$referrer,admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'));
+					printf('<div class="notice notice-%s is-dismissible"><p><strong>%s</strong> One user has reported mapping issue at this <a href="%s" target="_blank">link</a>, please ensure you have added mapping to connect products from first to second step. If you like assistance on this <a href="%s">you can contact support</a></p></div>',$message_type,$message_title,$referrer,admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'));
 
 				});
 

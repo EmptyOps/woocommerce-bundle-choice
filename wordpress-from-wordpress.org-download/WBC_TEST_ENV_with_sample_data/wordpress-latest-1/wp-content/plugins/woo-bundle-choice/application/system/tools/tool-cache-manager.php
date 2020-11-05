@@ -90,8 +90,15 @@ class Cache_Manager {
 		$maps = unserialize(wbc()->options->get_option_group('mapping_map_creation_modification',"a:0:{}"));;
 		if(!is_wp_error($maps) and !empty($maps)) {
 
+			if(empty(array_column($maps,'eo_wbc_first_category')) or empty(array_column($maps,'eo_wbc_second_category'))){
+				return array();
+			}
+
 			$maps = array_map(function($map){
 			 	
+			 	if(empty($map["eo_wbc_first_category"]) or empty($map["eo_wbc_second_category"])){
+					return false;
+				}
 			 	// $first_part = explode(',',$map[0]);
 			 	// $second_part = explode(',',$map[1]);
 			 	$first_part = array();

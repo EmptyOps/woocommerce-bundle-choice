@@ -100,7 +100,7 @@ class Eowbc_Mapping extends Eowbc_Model {
 			}
 	    }
 
-	    return $form_definition;
+	    return $form_definition; 
 	}
 
 	public function save( $form_definition, $is_auto_insert_for_template=false ) {
@@ -113,7 +113,7 @@ class Eowbc_Mapping extends Eowbc_Model {
 	    
 		wbc()->load->model('admin\form-builder');
 
-		$saved_tab_key = !empty($_POST["saved_tab_key"]) ? $_POST["saved_tab_key"] : ""; 
+		$saved_tab_key = !empty(wbc()->sanitize->post("saved_tab_key")) ? wbc()->sanitize->post("saved_tab_key") : ""; 
 		$skip_fileds = array('saved_tab_key');
 		
 	    //loop through form tabs and save 
@@ -144,11 +144,11 @@ class Eowbc_Mapping extends Eowbc_Model {
 
 		    		//save
 			    	if( $is_table_save ) {
-			    		$table_data[$fk] = ( isset($_POST[$fk]) ? $_POST[$fk] : '' ); 
+			    		$table_data[$fk] = ( isset($_POST[$fk]) ? wbc()->sanitize->post($fk) : '' ); 
 			    	}
 			    	else {
 
-			    		wbc()->options->update_option('mapping_'.$key,$fk,(isset($_POST[$fk])? sanitize_text_field( $_POST[$fk] ):'' ));
+			    		wbc()->options->update_option('mapping_'.$key,$fk,(isset($_POST[$fk])? wbc()->sanitize->post($fk):'' ));
 			    	}
 			    }
 			}
@@ -170,9 +170,11 @@ class Eowbc_Mapping extends Eowbc_Model {
 		  //       $eo_wbc_add_discount=$_POST['eo_wbc_add_discount']?$_POST['eo_wbc_add_discount']:0;
 
 				$mapping_data = unserialize(wbc()->options->get_option_group('mapping_'.$key,"a:0:{}"));
-		        if(!empty($_POST['map_creation_modification_id']) and !empty($mapping_data[$_POST['map_creation_modification_id']])) {
+				//print_r($mapping_data);
+				//die();
+		        if(!empty(wbc()->sanitize->post('map_creation_modification_id')) and !empty($mapping_data[wbc()->sanitize->post('map_creation_modification_id')])) {
 		        	$table_data["id"] = wbc()->common->createUniqueId();
-		        	$mapping_data[$_POST['map_creation_modification_id']] = $table_data;
+		        	$mapping_data[wbc()->sanitize->post('map_creation_modification_id')] = $table_data;
 		        	wbc()->options->update_option_group( 'mapping_'.$key, serialize($mapping_data) );
 		        	//update cache
 			        \Cache_Manager::getInstance()->update_map_caches();
@@ -203,7 +205,7 @@ class Eowbc_Mapping extends Eowbc_Model {
 			    }
 
 				$table_data["id"] = wbc()->common->createUniqueId();
-		        $mapping_data[] = $table_data;
+		        $mapping_data[$table_data["id"]] = $table_data;
 
 		        wbc()->options->update_option_group( 'mapping_'.$key, serialize($mapping_data) );
 
@@ -255,8 +257,8 @@ class Eowbc_Mapping extends Eowbc_Model {
 	public function fetch_map(&$res) {
 		$map = unserialize(wbc()->options->get_option_group('mapping_map_creation_modification'));		
 		
-		if(!empty($map[$_POST['id']])){
-			$res['msg'] = json_encode($map[$_POST['id']]);
+		if(!empty($map[wbc()->sanitize->post('id')])){
+			$res['msg'] = json_encode($map[wbc()->sanitize->post('id')]);
 		} else {
 			$res['type'] = 'error';
 			$res['msg'] = 'Selected item does not exists!';

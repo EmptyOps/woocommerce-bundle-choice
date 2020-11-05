@@ -225,7 +225,7 @@ $form['data'] = array(
 				'tiny_features_option_ui_border_color'=>array(
 					'label'=>eowbc_lang('Options Border Color'),
 					'type'=>'color',
-					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_color','#ffffff'),
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_color','#ECECEC'),
 					'sanitize'=>'sanitize_hex_color',
 					'class'=>array('fluid'),				
 					'size_class'=>array('eight','wide','required'),
@@ -240,7 +240,7 @@ $form['data'] = array(
 				'tiny_features_option_ui_border_width'=>array(
 					'label'=>eowbc_lang('Options Border width'),
 					'type'=>'text',
-					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_width','1px'),
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_width','2px'),
 					'sanitize'=>'sanitize_text_field',
 					'class'=>array('fluid'),			
 					'size_class'=>array('eight','wide','required'),
@@ -255,7 +255,7 @@ $form['data'] = array(
 				'tiny_features_option_ui_border_color_hover'=>array(
 					'label'=>eowbc_lang('Options Border Color on Hover'),
 					'type'=>'color',
-					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_color_hover','#ffffff'),
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_color_hover','#3D3D3D'),
 					'sanitize'=>'sanitize_hex_color',
 					'class'=>array('fluid'),				
 					'size_class'=>array('eight','wide','required'),
@@ -270,7 +270,7 @@ $form['data'] = array(
 				'tiny_features_option_ui_border_width_hover'=>array(
 					'label'=>eowbc_lang('Options Border width on Hover'),
 					'type'=>'text',
-					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_width_hover','1px'),
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_width_hover','2px'),
 					'sanitize'=>'sanitize_text_field',
 					'class'=>array('fluid'),
 					'size_class'=>array('eight','wide','required'),
@@ -300,7 +300,7 @@ $form['data'] = array(
 				'tiny_features_option_ui_font_color'=>array(
 					'label'=>eowbc_lang('Options Font Color'),
 					'type'=>'color',
-					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_font_color','#ffffff'),
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_font_color','#DBDBDB'),
 					'sanitize'=>'sanitize_hex_color',
 					'class'=>array('fluid'),
 					'size_class'=>array('eight','wide','required'),
@@ -315,7 +315,7 @@ $form['data'] = array(
 				'tiny_features_option_ui_font_color_hover'=>array(
 					'label'=>eowbc_lang('Options Font Color on Hover'),
 					'type'=>'color',
-					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_font_color_hover','#ffffff'),
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_font_color_hover','#AA7D7D'),
 					'sanitize'=>'sanitize_hex_color',
 					'class'=>array('fluid'),
 					'size_class'=>array('eight','wide','required'),
@@ -345,7 +345,7 @@ $form['data'] = array(
 				'tiny_features_option_ui_bg_color_hover'=>array(
 					'label'=>eowbc_lang('Options Background Color on Hover'),
 					'type'=>'color',
-					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_bg_color_hover','#ffffff'),
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_bg_color_hover','#DCC7C7'),
 					'sanitize'=>'sanitize_hex_color',
 					'class'=>array('fluid'),
 					'size_class'=>array('eight','wide','required'),
@@ -449,6 +449,23 @@ $form['data'] = array(
 					'class'=>array(),
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>true,
+				),
+			'tiny_features_specification_meta_keys'=>array(
+					'label'=>'Additional Meta',
+					'type'=>'select',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_specification_meta_keys',''),
+					'sanitize'=>'sanitize_text_field',		
+					//'options'=>\eo\wbc\model\Category_Attribute::instance()->get_category(),			
+					'class'=>array('fluid','multiple','allow_addition','search'),
+					'field_attr'=>array('multiple=""'),
+					'inline'=>false,					
+					'size_class'=>array(),
+					'visible_info'=>array( 'label'=>eowbc_lang('Add Keys of your Additional WooCommerce Product Meta here, if you want to display them with specification view. If the meta is not found for your specified key then it will be ignored.'),
+						'type'=>'visible_info',
+						'class'=>array('small'),
+						// 'size_class'=>array('sixteen','wide'),
+					),
+					
 				),
 			'tiny_features_save_specification_view'=>array(
 						'label'=>'Save',
@@ -847,3 +864,4 @@ wbc()->load->model('admin\form-builder');
 eo\wbc\model\admin\Form_Builder::instance()->build($form);
 wbc()->load->asset('js','admin/tiny-feature/shortcode-filter');
 wbc()->load->asset('js','admin/tiny-feature/shop-cat');
+wbc()->load->asset('js','admin/tiny-feature/specification');

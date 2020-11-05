@@ -64,12 +64,22 @@ if(!class_exists('WBC_Sanitize')) {
 			}
 		}
 
-		public function post(string $get_field){
-			if(isset($_POST[$get_field])) {
-				return sanitize_text_field($_POST[$get_field]);
+		public function post(string $post_field){
+			if(isset($_POST[$post_field])) {
+				return sanitize_text_field($_POST[$post_field]);
 			} else {
 				return false;
 			}
+		}
+
+		public function post_array(string $post_field){
+			if(isset( $_POST[$post_field] ) and is_array($_POST[$post_field]) and !empty($_POST[$post_field])){
+
+				return array_map( 'sanitize_text_field', $_POST[$post_field] );	
+			} else {
+				return false;
+			}
+			
 		}
 
 	}

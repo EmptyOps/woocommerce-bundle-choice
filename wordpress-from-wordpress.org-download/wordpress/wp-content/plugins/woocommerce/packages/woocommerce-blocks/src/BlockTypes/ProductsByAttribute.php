@@ -1,13 +1,5 @@
 <?php
-/**
- * Products by attribute block.
- *
- * @package WooCommerce/Blocks
- */
-
 namespace Automattic\WooCommerce\Blocks\BlockTypes;
-
-defined( 'ABSPATH' ) || exit;
 
 /**
  * ProductsByAttribute class.
@@ -73,7 +65,7 @@ class ProductsByAttribute extends AbstractProductGrid {
 			'contentVisibility' => $this->get_schema_content_visibility(),
 			'editMode'          => $this->get_schema_boolean( true ),
 			'orderby'           => $this->get_schema_orderby(),
-			'rows'              => $this->get_schema_number( wc_get_theme_support( 'product_blocks::default_rows', 1 ) ),
+			'rows'              => $this->get_schema_number( wc_get_theme_support( 'product_blocks::default_rows', 3 ) ),
 			'isPreview'         => $this->get_schema_boolean( false ),
 		);
 	}

@@ -63,7 +63,12 @@ class Checkout {
     
     public function checkout_rows($map)
     {
+
             if(empty($map)) return false;
+            
+            if(empty(wbc()->wc->eo_wbc_get_product($map['FIRST'][0]))){
+                return '';
+            }
 
             $price=0;            
             $html="<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><tr><td><div><strong>".

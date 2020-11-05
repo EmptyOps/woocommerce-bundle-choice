@@ -239,18 +239,24 @@ class Eowbc_Price_Control_Save_Update_Prices {
 	                
 	                foreach ($rs as $post_id) {     
 	                	$update_cnt++;
+	                	$pid = 0;
+	                	if(is_object($post_id)){
+	                		$pid = $post_id->post_id;
+	                	} elseif(is_array($post_id)){
+	                		$pid = $post_id['post_id'];
+	                	}
 
 	                    if(!empty($q_data[count($q_data)-1]->sales_price)){
 
-	                        update_post_meta($post_id->post_id,'_price',$q_data[count($q_data)-1]->sales_price);
-	                        update_post_meta($post_id->post_id,'_sale_price',$q_data[count($q_data)-1]->sales_price);
+	                        update_post_meta($pid,'_price',$q_data[count($q_data)-1]->sales_price);
+	                        update_post_meta($pid,'_sale_price',$q_data[count($q_data)-1]->sales_price);
 
 	                    } else{
-	                        delete_post_meta($post_id->post_id,'_sale_price');                    
-	                        update_post_meta($post_id->post_id,'_price',$q_data[count($q_data)-1]->regular_price);
+	                        delete_post_meta($pid,'_sale_price');                    
+	                        update_post_meta($pid,'_price',$q_data[count($q_data)-1]->regular_price);
 	                    }            
-	                    update_post_meta($post_id->post_id,'_regular_price',$q_data[count($q_data)-1]->regular_price); 
-	                    wc_delete_product_transients( $post_id->post_id );  
+	                    update_post_meta($pid,'_regular_price',$q_data[count($q_data)-1]->regular_price); 
+	                    wc_delete_product_transients($pid);  
 	                }
 	            }
 	        }

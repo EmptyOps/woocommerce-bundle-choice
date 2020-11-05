@@ -7,7 +7,7 @@
 ?>
 <div class="<?php echo (($step==$order)?'active ':(($step>$order)?'completed ':'disabled')); ?> step">
     <div class="ui equal width grid" style="width: 100%;margin-top: -1em !important;">
-        <div class="ui grid">
+        <div class="ui grid" style="width: fit-content !important;">
             <div class="column"><?php echo $order; ?></div>
             <div class="column" style="text-align: left;">
                 <div class="description">Choose a</div>

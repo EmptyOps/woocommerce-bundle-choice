@@ -89,8 +89,7 @@ class Category {
             }        
             if($this->is_shop_cat_filter!==true && !$this->is_shortcode_filter){
                 $this->eo_wbc_add_breadcrumb();                         
-            }    
-            
+            }
             $this->eo_wbc_render(); 
         }    
     }
@@ -271,14 +270,16 @@ class Category {
     public function eo_wbc_prev_url(){
         $site_ = site_url();
         if($this->eo_wbc_get_category()==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/){
-            $_cat=wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_second_slug')*/;
+            $prev_cat=wbc()->options->get_option('configuration','second_slug')/*get_option('eo_wbc_second_slug')*/;
         } elseif ($this->eo_wbc_get_category()==wbc()->options->get_option('configuration','second_slug')/*get_option('eo_wbc_second_slug')*/) {
-            $_cat=wbc()->options->get_option('configuration','second_slug')/*get_option('eo_wbc_first_slug')*/;
+            $prev_cat=wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/;
+        } else {
+            return $site_;
         }
-        return $site_."/product-category/{$_cat}/?EO_WBC=1&BEGIN={$_cat}&STEP=1&FIRST=&SECOND=";
+        return $site_."/product-category/{$prev_cat}/?EO_WBC=1&BEGIN={$prev_cat}&STEP=1&FIRST=&SECOND=";
     }
     public function eo_wbc_product_url($url){
-        if(empty($_GET['EO_WBC'])){
+        if(empty(wbc()->sanitize->get('EO_WBC'))){
             return $url;
         }
 
@@ -295,7 +296,7 @@ class Category {
                         (
                             !empty(wbc()->sanitize->get('FIRST'))
                                 ? 
-                            sanitize_text_field(wbc()->sanitize->get('FIRST'))
+                            wbc()->sanitize->get('FIRST')
                                 :
                             ''
                         )
@@ -308,7 +309,7 @@ class Category {
                         (
                             !empty(wbc()->sanitize->get('SECOND'))
                                 ?
-                            sanitize_text_field(wbc()->sanitize->get('SECOND'))
+                            wbc()->sanitize->get('SECOND')
                                 :
                             ''
                         )

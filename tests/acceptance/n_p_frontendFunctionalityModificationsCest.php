@@ -18,6 +18,9 @@ class n_p_frontendFunctionalityModificationsCest extends n_f_adminSideSetupCest
             return;
         }
 
+        // TODO temp till merge with master is done
+        return;
+
         // for first category and second category. loop.
         for($cat=0; $cat<2; $cat++) {
 
@@ -80,6 +83,9 @@ class n_p_frontendFunctionalityModificationsCest extends n_f_adminSideSetupCest
         if( !$I->test_allowed_in_this_environment("n_") ) {
             return;
         }
+
+        // TODO temp till merge with master is done
+        return;
 
         // TODO wait for the edit featur
 

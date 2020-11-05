@@ -51,42 +51,45 @@ if(function_exists('wc') && !empty(wc()->session)){
 // },50);
 
 //moved from the home class of older version 
-function eo_wbc_code() //script to get color code from buttons
-{
-	//commented since set in buttons.js
-    // return '<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><script>'.
-    //         'jQuery(document).ready(function($){'.
-    //           '$(".eo_button_container .button").each(function(i,e){'.
-    //             '$(e).attr("href",$(e).attr("href")+"&EO_WBC_CODE="+window.btoa($(".woocommerce a.button").css("background-color")+"/"+$(".woocommerce a.button").css("color")));'.
-    //           '});'.
-    //           '$("#wbc_").find("button").on("click",function(){ document.location.href=$(this).attr("href"); })'.
-    //         '});'.
-    //        '</script>';
-    return '';
+if(!function_exists('eo_wbc_code')){
+	function eo_wbc_code() //script to get color code from buttons
+	{
+		//commented since set in buttons.js
+	    // return '<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><script>'.
+	    //         'jQuery(document).ready(function($){'.
+	    //           '$(".eo_button_container .button").each(function(i,e){'.
+	    //             '$(e).attr("href",$(e).attr("href")+"&EO_WBC_CODE="+window.btoa($(".woocommerce a.button").css("background-color")+"/"+$(".woocommerce a.button").css("color")));'.
+	    //           '});'.
+	    //           '$("#wbc_").find("button").on("click",function(){ document.location.href=$(this).attr("href"); })'.
+	    //         '});'.
+	    //        '</script>';
+	    return '';
+	}
 }
 
 //moved from the home class of older version 
-function eo_wbc_buttons_css(){
+if(!function_exists('eo_wbc_buttons_css')){
+	function eo_wbc_buttons_css(){
 
-	$button_backcolor_active = wbc()->options->get_option('appearance_wid_btns','button_backcolor_active','');
-	$button_textcolor = wbc()->options->get_option('appearance_wid_btns','button_textcolor','#ffffff');
-	$eo_wbc_home_btn_border_color = false;	//dropped this field. wbc()->options->get_option('appearance_wid_btns','button_backcolor_active','');
-	$button_radius = wbc()->options->get_option('appearance_wid_btns','button_radius','');
-	$button_hovercolor = wbc()->options->get_option('appearance_wid_btns','button_hovercolor','');
-  	
-  	// return '<style>.eo-wbc-container .ui.buttons .button{'.
-  	return 
-  		'<style>.wbc_wid_btns{'.
-			($button_backcolor_active?'background-color:'.$button_backcolor_active.' !important;':'').
-			($button_textcolor?'color:'.$button_textcolor.' !important;':'').
-			($eo_wbc_home_btn_border_color?'border-color:'.$eo_wbc_home_btn_border_color.' !important;':'').
-			($button_radius?'border-radius:'.$button_radius.' !important;':'').
-		'}'.
-			($button_hovercolor?'.wbc_wid_btns:hover{ background-color:'.$button_hovercolor.' !important; }':'').
-		'</style>';
-        
+		$button_backcolor_active = wbc()->options->get_option('appearance_wid_btns','button_backcolor_active','');
+		$button_textcolor = wbc()->options->get_option('appearance_wid_btns','button_textcolor','#ffffff');
+		$eo_wbc_home_btn_border_color = false;	//dropped this field. wbc()->options->get_option('appearance_wid_btns','button_backcolor_active','');
+		$button_radius = wbc()->options->get_option('appearance_wid_btns','button_radius','');
+		$button_hovercolor = wbc()->options->get_option('appearance_wid_btns','button_hovercolor','');
+	  	
+	  	// return '<style>.eo-wbc-container .ui.buttons .button{'.
+	  	return 
+	  		'<style>.wbc_wid_btns{'.
+				($button_backcolor_active?'background-color:'.$button_backcolor_active.' !important;':'').
+				($button_textcolor?'color:'.$button_textcolor.' !important;':'').
+				($eo_wbc_home_btn_border_color?'border-color:'.$eo_wbc_home_btn_border_color.' !important;':'').
+				($button_radius?'border-radius:'.$button_radius.' !important;':'').
+			'}'.
+				($button_hovercolor?'.wbc_wid_btns:hover{ background-color:'.$button_hovercolor.' !important; }':'').
+			'</style>';
+	        
+	}
 }
-
 ?>
 <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
 <div id="wbc_" class="eo_wbc_container" <?php echo (isset($is_embed_using_js) && $is_embed_using_js) ? 'style="display: none !important;"' : '';?>>
@@ -94,12 +97,12 @@ function eo_wbc_buttons_css(){
 		<?php _e($heading); ?>
 	</h2>
 	<div class="ui grid center aligned container">
-		<div class="ui buttons large row stackable">
+		<div class="ui buttons large row stackable" style="display: inline-block;display: inline-flex;">
 			<button class="ui button primary column wbc_wid_btns" href="<?php echo $first_url .'EO_WBC=1&BEGIN='.$first_slug.'&STEP=1&FIRST=&SECOND='; ?>" onclick="window.location.href=jQuery(this).attr('href');">
 				<?php echo $button_text.$first_name; ?>
 			</button>
 
-			<div class="or"></div>
+			<div class="or" style="margin: auto;"></div>
 
 
 			<button class="ui button primary column wbc_wid_btns" href="<?php echo $second_url .'EO_WBC=1&BEGIN='.$second_slug.'&STEP=1&FIRST=&SECOND='; ?>" onclick="window.location.href=jQuery(this).attr('href');">

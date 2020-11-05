@@ -36,7 +36,7 @@ class Admin {
         }
 		
 		// If the setup wizard is ran then save the status.
-		if(!empty($_GET['setup_wizard_run'])){
+		if(!empty(wbc()->sanitize->get('setup_wizard_run'))) {
 			wbc()->options->update_option('_system','setup_wizard_run', 1);
 		}
 		
@@ -101,7 +101,8 @@ class Admin {
 			$menu_slugs = array_column($menu_items['submenu'],'slug');			
 		}
 		$menu_slugs[]=$menu_items['slug'];
-		if(!empty($_GET['page']) and in_array($_GET['page'],$menu_slugs)){
+		$page_slug = wbc()->sanitize->get('page');
+		if(!empty($page_slug) and in_array($page_slug,$menu_slugs)){
 
 			//	perform initial task 
 			self::instance()->init();

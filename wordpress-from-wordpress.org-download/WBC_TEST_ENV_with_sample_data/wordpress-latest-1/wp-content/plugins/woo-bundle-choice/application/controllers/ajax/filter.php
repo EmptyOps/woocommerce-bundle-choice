@@ -60,40 +60,40 @@ class Filter
 	//////////////////////////////////////////////////////////////////////////////////////////////////
 	public function filter() {			
 		//die();
-		if(!empty($_GET['eo_wbc_filter'])){
+		if(!empty(wbc()->sanitize->get('eo_wbc_filter'))) {
 			
 		    add_filter('pre_get_posts',function($query ) {		    		
 
 		        if( $query->is_main_query() ) {
 
-		        	if(isset($_GET['products_in']) AND !empty($_GET['products_in']) ){
-		        		$query->set('post__in',explode(',',$_GET['products_in']));			        	
+		        	if(isset($_GET['products_in']) AND !empty(wbc()->sanitize->get('products_in')) ) {
+		        		$query->set('post__in',explode(',',wbc()->sanitize->get('products_in')));			        	
 			        }
 
 		        
 		        	if( isset($_GET['_category']) OR isset($_GET['_current_category']) ){
 
 		        		$tax_query=array('relation' => 'AND');
-		                if(!empty($_GET['_category'])) {
+		                if(!empty(wbc()->sanitize->get('_category'))) {
 
-		                    foreach( array_unique(array_filter(explode(',', $_GET['_category']))) as $_category){
+		                    foreach( array_unique(array_filter(explode(',', wbc()->sanitize->get('_category')))) as $_category){
 		                    	
-		                        if(isset($_GET['cat_filter_'.$_category]) && (!empty($_GET['cat_filter_'.$_category])) ) {                           
+		                        if(isset($_GET['cat_filter_'.$_category]) && (!empty(wbc()->sanitize->get('cat_filter_'.$_category))) ) {                           
 		                            $tax_query[]=array(
 		                                'taxonomy' => 'product_cat',
 		                                'field' => 'slug',
-		                                'terms' =>array_filter(explode(',',$_GET['cat_filter_'.$_category])),
+		                                'terms' =>array_filter(explode(',',wbc()->sanitize->get('cat_filter_'.$_category))),
 		                                'compare'=>'EXISTS IN'
 		                            );                    
 		                        }
 		                    }  
 		                }
-		                elseif(!empty($_GET['_current_category'])) {
+		                elseif(!empty(wbc()->sanitize->get('_current_category'))) {
 
 		                    $tax_query[]=array(
 		                        'taxonomy' => 'product_cat',
 		                        'field' => 'slug',
-		                        'terms' => explode(',',$_GET['_current_category']),
+		                        'terms' => explode(',',wbc()->sanitize->get('_current_category')),
 		                        'compare'=>'EXISTS IN'
 		                    );
 		                }	
@@ -103,18 +103,18 @@ class Filter
 		                ///////////////////////////////////////////////
 	                    //Filter section for attributes
 	                    ///////////////////////////////////////////////  
-		                if(!empty($_GET['_attribute'])) {
+		                if(!empty(wbc()->sanitize->get('_attribute'))) {
 
-			                foreach (array_filter(explode(',', $_GET['_attribute'])) as $attr) {
+			                foreach (array_filter(explode(',', wbc()->sanitize->get('_attribute'))) as $attr) {
 
 			                    if(isset($_GET['min_'.$attr]) && isset($_GET['max_'.$attr])){
 			                        
-			                        if ( is_numeric($_GET['min_'.$attr]) && is_numeric($_GET['max_'.$attr]) ) {
+			                        if ( is_numeric(wbc()->sanitize->get('min_'.$attr)) && is_numeric(wbc()->sanitize->get('max_'.$attr)) ) {
 
 			                            $tax_query[]=array(
 			                                'taxonomy' => $attr,
 			                                'field' => 'term_id',
-			                                'terms' => $this->range($attr,$_GET['min_'.$attr],$_GET['max_'.$attr],true),
+			                                'terms' => $this->range($attr,wbc()->sanitize->get('min_'.$attr),wbc()->sanitize->get('max_'.$attr),true),
 			                                'compare'=>'EXISTS IN'
 			                            );
 			                        }
@@ -123,16 +123,16 @@ class Filter
 			                            $tax_query[]=array(
 			                                'taxonomy' => $attr,
 			                                'field' => 'term_id',
-			                                'terms' => $this->range($attr,$_GET['min_'.$attr],$_GET['max_'.$attr]),
+			                                'terms' => $this->range($attr,wbc()->sanitize->get('min_'.$attr),wbc()->sanitize->get('max_'.$attr)),
 			                                'compare'=>'EXISTS IN'
 			                            );
 			                        }                   
 			                    }
-			                    elseif (isset($_GET['checklist_'.$attr]) && !empty($_GET['checklist_'.$attr])) {
+			                    elseif (isset($_GET['checklist_'.$attr]) && !empty(wbc()->sanitize->get('checklist_'.$attr))) {
 			                        $tax_query[]=array(
 			                            'taxonomy' => $attr,
 			                            'field' => 'slug',
-			                            'terms' => array_filter(explode(',',$_GET['checklist_'.$attr])),
+			                            'terms' => array_filter(explode(',',wbc()->sanitize->get('checklist_'.$attr))),
 			                            'compare'=>'EXISTS IN'
 			                        );     
 			                    } 

@@ -65,15 +65,17 @@ class Migration_000570 {
 				$first_map = explode(',',$map_value[0]);
 				$second_map = explode(',',$map_value[1]);
 
-				$new_mapping[]=array(
-					'range_first'=>count($first_map),
-					'range_second'=>count($second_map),
+				$uniqueid = wbc()->common->createUniqueId();
+				$new_mapping[$uniqueid]=array(
+					'range_first'=>(count($first_map)==1?false:count($first_map)),
+					'range_second'=>(count($second_map)==1?false:count($second_map)),
+
 					'eo_wbc_first_category'=>$first_map[0],
 					'eo_wbc_second_category'=>$second_map[0],
 					'eo_wbc_first_category_range'=>(empty($first_map[1])?'':$first_map[1]),
 					'eo_wbc_second_category_range'=>(empty($second_map[1])?'':$second_map[1]),
 					'eo_wbc_add_discount'=>$map_value[2],
-					'id'=>wbc()->common->createUniqueId(),
+					'id'=>$uniqueid,
 				);             
 			}			
 			wbc()->options->set('eowbc_option_mapping_map_creation_modification',serialize($new_mapping));

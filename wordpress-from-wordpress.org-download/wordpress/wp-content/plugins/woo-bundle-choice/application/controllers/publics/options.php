@@ -167,7 +167,10 @@ class Options {
 	}
 
 	public function run() {
+		
 		add_action('wp_footer',function(){
+			wbc()->theme->load('css','product');
+        	wbc()->theme->load('js','product');
 			// Toggle Button
 			$toggle_status = true/*wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_status',true)*/;
 
@@ -191,7 +194,7 @@ class Options {
 			$border_hover_width = wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_width_hover','2px');
 
 			// button only
-			$font_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_font_color','#000000');
+			$font_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_font_color','#DBDBDB');
 
 			$font_hover_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_font_color_hover','#AA7D7D');
 

@@ -164,7 +164,7 @@ if ( ! class_exists( 'Configuration' ) ) {
 											'size_class'=>array('eight','wide','required'),
 											'inline'=>true,
 										),
-									'label_make_pair_visible_info'=>array( 'label'=>'Set applicable text for button e.g. "Add to Ring" if its for jewelry site',
+									'label_make_pair_visible_info'=>array( 'label'=>'Set applicable text for button e.g. "Add to Ring" if its for jewelry site. Applicable only if switch above is enabled.',
 												'type'=>'visible_info',
 												'class'=>array('fluid', 'small'),
 												'size_class'=>array('sixteen','wide'),

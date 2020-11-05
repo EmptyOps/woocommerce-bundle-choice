@@ -325,7 +325,7 @@ if ( ! class_exists( 'Appearance' ) ) {
 							'label'=>'Show Option UI(swatches)',
 							'type'=>'checkbox',
 							'sanitize'=>'sanitize_text_field',
-							'value'=>array('1'),
+							'value'=>array(),
 							'options'=>array('1'=>' '),
 							'is_id_as_name'=>true,
 							'class'=>array(),

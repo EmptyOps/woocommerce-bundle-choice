@@ -6,29 +6,32 @@
 
 $res = array( "type"=>"success", "msg"=>"Added successfully!" );
 
-if(wp_verify_nonce(sanitize_text_field($_POST['_wpnonce']),'eowbc_tiny_features_filter_add')) {
+if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_tiny_features_filter_add')) {
 	if(
-		!empty($_POST["shop_cat_filter_add_category"]) and
-		!empty($_POST["shop_cat_filter_add_type"]) and
-		!empty($_POST["shop_cat_filter_add_input_type"]) and
-		!empty($_POST["shop_cat_filter_add_column_width"]) and
+		!empty(wbc()->sanitize->post("shop_cat_filter_add_category")) and
+		!empty(wbc()->sanitize->post("shop_cat_filter_add_type")) and
+		!empty(wbc()->sanitize->post("shop_cat_filter_add_input_type")) and
+		!empty(wbc()->sanitize->post("shop_cat_filter_add_column_width")) and
 		isset($_POST["shop_cat_filter_add_order"]) 
 	){
-		$filter_name = $_POST["shop_cat_filter_add_category"];		
-        $filter_type = $_POST["shop_cat_filter_add_type"];
-        $filter_label = (!empty($_POST["shop_cat_filter_add_label"])?$_POST["shop_cat_filter_add_label"]:"");
-        $filter_advanced = (!empty($_POST["shop_cat_filter_add_is_advanced"])?"1":"0");
-        $filter_input = $_POST["shop_cat_filter_add_input_type"];
-        $filter_dependent = (!empty($_POST["shop_cat_filter_add_dependent"])?"1":"0");
-        $filter_width = $_POST["shop_cat_filter_add_column_width"];        
-        $filter_order = $_POST["shop_cat_filter_add_order"];
+		$filter_name = wbc()->sanitize->post("shop_cat_filter_add_category");		
+        $filter_type = wbc()->sanitize->post("shop_cat_filter_add_type");
+        $filter_label = (!empty(wbc()->sanitize->post("shop_cat_filter_add_label"))?wbc()->sanitize->post("shop_cat_filter_add_label"):"");
+        $filter_advanced = (!empty(wbc()->sanitize->post("shop_cat_filter_add_is_advanced"))?"1":"0");
+
+        $filter_input = wbc()->sanitize->post("shop_cat_filter_add_input_type");
+        $filter_dependent = (!empty(wbc()->sanitize->post("shop_cat_filter_add_dependent"))?"1":"0");
+
+        $filter_width = wbc()->sanitize->post("shop_cat_filter_add_column_width");        
+        $filter_order = wbc()->sanitize->post("shop_cat_filter_add_order");
         $filter_reset = (isset($_POST['shop_cat_filter_add_reset_link'])?"1":"0");
 
-        $filter_icon_size = $_POST['shop_cat_filter_add_icon_size'];
-        $filter_icon_font_size = $_POST['shop_cat_filter_add_icon_label_size'];
+        $filter_icon_size = wbc()->sanitize->post('shop_cat_filter_add_icon_size');
+        $filter_icon_font_size = wbc()->sanitize->post('shop_cat_filter_add_icon_label_size');
 
-        $filter_child_filter = empty($_POST['shop_cat_filter_add_child_filter'])?'0':'1';
-        $filter_child_label = $_POST['shop_cat_filter_add_child_label'];
+        $filter_child_filter = empty(wbc()->sanitize->post('shop_cat_filter_add_child_filter'))?'0':'1';
+
+        $filter_child_label = wbc()->sanitize->post('shop_cat_filter_add_child_label');
         
         $filter_data = unserialize(wbc()->options->get_option('tiny_feature','filter_widget',"a:0:{}"));
         if(!empty($filter_data)){
@@ -67,8 +70,8 @@ if(wp_verify_nonce(sanitize_text_field($_POST['_wpnonce']),'eowbc_tiny_features_
 
         $res = array( "type"=>"success", "msg"=>"Added successfully!");
 
-	} elseif(!empty($_POST['sub_action']) and !empty($_POST['ids'])) {
-		$ids = $_POST['ids'];
+	} elseif(!empty(wbc()->sanitize->post('sub_action')) and !empty(wbc()->sanitize->post_array('ids'))) {
+		$ids = wbc()->sanitize->post_array('ids');
 		$filter_data = unserialize(wbc()->options->get_option('tiny_feature','filter_widget',"a:0:{}"));
 		foreach ($ids as $id) {
 			if(array_key_exists($id,$filter_data)){
