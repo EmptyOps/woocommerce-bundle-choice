@@ -19,10 +19,10 @@ In this plugin we provide the following features, at the time of installation yo
 1. Ring Builder (for WooCommerce Jewelry sites)
 1. Pair Maker (for Clothing sites)
 1. Bonus Features 
+  * Filters for Shop/Category Page (e.g. Independent Diamond Page)
   * Options UI for Item Page(Swatches)
   * Specifications View for Item Page
   * Shortcode Filters for Home
-  * Filters for Shop/Category Page (e.g. Independent Diamond Page)
   * Price Control(Beta)
 
 You can read more about each feature in the section given below with the title “UNDERSTANDING FEATURES”.
@@ -99,26 +99,26 @@ It is obvious that any e-commerce website has many products. And the vendors lik
 
 == Shortcodes ==
 1 For Ring Builder
-    [ [woo-bundle-choice-btn] ]
+> [woo-bundle-choice-btn]
 
 2 For Pair Maker
-    [ [woo-bundle-choice-btn] ]
+> [woo-bundle-choice-btn] ]
 
 3 For Bonus Features
   3.1 Shortcode Filters
-    [ [wbc-shortcode-filters] ]
+  > [wbc-shortcode-filters] ]
     
   3.2 Filters for Shop/Category Page
-      [ Not applicable ]    
+  > [ Not applicable ]    
    
   3.3 Options UI for Item Page
-      [ Not applicable ]    
+  > [ Not applicable ]    
    
   3.4 Specifications View for Item Page
-      [ [woo-bundle-choice-specification-view] ]
+  > [ [woo-bundle-choice-specification-view] ]
    
   3.5 Price Control
-      [ Not applicable ] 
+  > [ Not applicable ] 
 
 
 == MAKE IT FIT YOUR WEBSITE PERFECTLY ==
