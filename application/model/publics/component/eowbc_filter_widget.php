@@ -532,7 +532,9 @@ class EOWBC_Filter_Widget {
 					}
 					.ui.segments.transition{
 						width: 101vw;
-    					left: -1vw;
+    					margin: 1em 0.5em 0 !important;
+					    left: 0;
+					    right: 0;
 					}
 					.ui.button.advance_filter.transition{
 						margin-left: 0;
@@ -2426,7 +2428,7 @@ class EOWBC_Filter_Widget {
 
 				if(!is_wp_error($non_adv_ordered_filter) and !empty($non_adv_ordered_filter)) {
 
-					if(!wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)!='mobile_2'){
+					if(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)!='mobile_2'){
 						?>
 						<div class="ui grid container centered" style="margin:auto !important">
 							<div class="row">
