@@ -39,7 +39,10 @@ class Pair_Builder_Data_Template extends Sample_Data_Template {
         // update_option('eo_wbc_first_slug','eo_diamond_shape_cat');//FIRST : SLUG
         wbc()->options->update_option('configuration','first_slug',$catat_category[0]['slug']/*'eo_diamond_shape_cat'*/);
         // update_option('eo_wbc_first_url','/product-category/eo_diamond_shape_cat/');//FIRST : NAME
-        wbc()->options->update_option('configuration','first_url','/product-category/'.$catat_category[0]['slug'].'/');
+
+        $category_base = wbc()->wc->wc_permalink('category_base');
+
+        wbc()->options->update_option('configuration','first_url',"/{$category_base}/".$catat_category[0]['slug'].'/');
 
         $first_icon = $sample_data_instance->add_image_gallary($_img_url.$this->first_icon);
         
@@ -53,7 +56,7 @@ class Pair_Builder_Data_Template extends Sample_Data_Template {
         // update_option('eo_wbc_second_slug','eo_setting_shape_cat');//SECOND : SLUG
         wbc()->options->update_option('configuration','second_slug',$catat_category[1]['slug']/*'eo_setting_shape_cat'*/);
         // update_option('eo_wbc_second_url','/product-category/eo_setting_shape_cat/');//SECOND : URL   
-        wbc()->options->update_option('configuration','second_url','/product-category/'.$catat_category[1]['slug'].'/');
+        wbc()->options->update_option('configuration','second_url',"/{$category_base}/".$catat_category[1]['slug'].'/');
 
         $second_icon = $sample_data_instance->add_image_gallary($_img_url.$this->second_icon);
 

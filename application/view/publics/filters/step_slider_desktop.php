@@ -5,7 +5,7 @@
 */
 
 ?>
-		<div class="<?php echo $width_class; ?>">
+		<div class="<?php echo $width_class; ?>" data-tab-group="<?php _e($tab_set); ?>">
 			<p>
 				<span class="ui header"><?php echo $filter['title']; ?></span>
 				<?php if($reset): ?>
@@ -13,7 +13,7 @@
 				<?php endif; ?>
 			</p>
 
-			<div class="ui labeled ticked range slider wbc" id="text_slider_<?php echo $filter['slug'] ?>" data-slug="<?php echo $filter['slug'] ?>" data-labels="<?php echo(implode(",", $items_name)); ?>" data-slugs="<?php echo(implode(",", $items_slug)); ?>" style="bottom: -12.5%;" data-reset="reset_slider(new Event('click'),'<?php echo $filter['slug'] ?>',0,<?php echo count(array_filter($items_slug)); ?>)"></div>
+			<div class="ui labeled ticked range slider wbc" data-label_adjust="<?php echo $reset_label; ?>" id="text_slider_<?php echo $filter['slug'] ?>" data-slug="<?php echo $filter['slug'] ?>" data-labels="<?php echo(implode(",", $items_name)); ?>" data-slugs="<?php echo(implode(",", $items_slug)); ?>" style="bottom: -12.5%;" data-reset="reset_slider(new Event('click'),'<?php echo $filter['slug'] ?>',0,<?php echo count(array_filter($items_slug)); ?>)"></div>
 		</div>
 		<?php
 	

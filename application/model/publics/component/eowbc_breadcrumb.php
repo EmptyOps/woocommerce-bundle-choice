@@ -162,6 +162,22 @@ class EOWBC_Breadcrumb
                 <div class="content"><?php echo self::$preview_name/*get_option('eo_wbc_collection_title','Preview')*/; ?></div>
             </div>
         </div>
+        <script>
+            jQuery(document).ready(function(){ 
+                /*jQuery('.onclick_redirect').on('click',function(){ 
+                    var _step = jQuery(this);
+                    var _rem_url = jQuery(_step).find('[data-remove-url]');
+                    if(_rem_url.length>0) { 
+                        window.location.href=jQuery(_rem_url[0]).data('remove-url');
+                    } else { 
+                        window.location.href = jQuery(_step).data('begin'); 
+                    }
+                });*/
+                jQuery('[data-clickable_breadcrumb]').on('click',function(){
+                    window.location.href = jQuery(this).data('clickable_breadcrumb'); 
+                });
+            }); 
+        </script>
         <?php 
         return ob_get_clean();
     }
@@ -516,7 +532,7 @@ class EOWBC_Breadcrumb
                 }
             }        
 
-            $url=get_bloginfo('url').'/index.php'.'/product-category/'.$link
+            $url=get_bloginfo('url').'/index.php'.'/'.wbc()->wc->wc_permalink('category_base').'/'.$link
                         .wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>(@wbc()->sanitize->get('BEGIN')),'STEP'=>2,'FIRST'=>(wbc()->sanitize->get('BEGIN')==self::$first_slug? wbc()->sanitize->get('FIRST'):''),'SECOND'=>(wbc()->sanitize->get('BEGIN')==self::$second_slug?wbc()->sanitize->get('SECOND'):''),'EO_CHANGE'=>1,'CAT_LINK'=>$cat_link));            
                         
             if(!empty($category) && is_array($category)) {

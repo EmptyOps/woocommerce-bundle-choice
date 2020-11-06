@@ -282,7 +282,7 @@ class Product {
                             jQuery('form.cart').submit();
                         }
 
-                        jQuery(".single_add_to_cart_button.button.alt:not(.disabled):eq(0)").replaceWith('<div class=\"ui buttons\">'+
+                        jQuery(".single_add_to_cart_button.alt:not(.disabled):eq(0)").replaceWith('<div class=\"ui buttons\">'+
                                 '<div class=\"ui button\" href=\"#\" id=\"eo_wbc_add_to_cart\"><?php echo $btn_text; ?></div>'+
                                     '<div class=\"ui floating dropdown icon button\" style=\"width: fit-content;min-width: unset; max-width: unset;\">'+
                                         '<i class=\"dropdown icon\"></i>'+
@@ -349,20 +349,20 @@ class Product {
             if(!empty(wbc()->sanitize->get('CART')) && !empty(wbc()->sanitize->get('REDIRECT')) && wbc()->sanitize->get('REDIRECT')==1) {
                 //if redirec signal is set and cart data are ready then
                 //relocate user to target path.                
-      
+                $category_base = wbc()->wc->wc_permalink('category_base');
                 // if($category==get_option('eo_wbc_first_slug')) {
                 if($category==wbc()->options->get_option('configuration','first_slug')) {
 
                     $category_link=$this->eo_wbc_category_link();
 
-                    $url=get_bloginfo('url').($remove_index?'':'/index.php').'/product-category/'.$category_link.
+                    $url=get_bloginfo('url').($remove_index?'':'/index.php')."/{$category_base}/".$category_link.
                     wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>2,'FIRST'=>$post->ID,'SECOND'=>wbc()->sanitize->get('SECOND'),'CART'=>wbc()->sanitize->get('CART'),'ATT_LINK'=>implode(' ',$this->att_link),'CAT_LINK'=>substr($category_link,0,strpos($category_link,'/'))));
 
                 // } elseif($category==get_option('eo_wbc_second_slug')) {
                 } elseif($category==wbc()->options->get_option('configuration','second_slug')) {
 
                     $category_link=$this->eo_wbc_category_link();
-                    $url=get_bloginfo('url').($remove_index?'':'/index.php').'/product-category/'.$category_link
+                    $url=get_bloginfo('url').($remove_index?'':'/index.php')."/{$category_base}/".$category_link
                     .wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>2,'FIRST'=>wbc()->sanitize->get('FIRST'),'SECOND'=>$post->ID,'CART'=>wbc()->sanitize->get('CART'),'ATT_LINK'=>implode(' ',$this->att_link),'CAT_LINK'=>substr($category_link,0,strpos($category_link,'/'))));
                 } 
                 if($return_link) {

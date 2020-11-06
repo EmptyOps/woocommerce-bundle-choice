@@ -290,7 +290,7 @@ class Form_Builder implements Builder {
 				// 'class'=>array('fluid'),
 				'size_class'=>array('eight','wide'),
 				'inline'=>false,
-
+				'value'=>( array_key_exists("text", $default_values) ? $default_values["text"] : "" ),
 				'visible_info'=>array( 'label'=>( array_key_exists("text", $info_text_overrides) ? $info_text_overrides["text"] : eowbc_lang('Sets specified text on '.$field_label) ),
 					'type'=>'visible_info',
 					'class'=>array('small'),

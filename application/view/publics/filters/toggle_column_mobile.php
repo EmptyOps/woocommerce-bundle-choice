@@ -1,4 +1,4 @@
-<div class="title">
+<div class="title" data-tab-group="<?php _e($tab_set); ?>">
 	<i class="dropdown icon"></i>		    
 	<?php echo $term->name; ?>	
 </div>

@@ -62,7 +62,16 @@ if ( ! class_exists( 'Filters' ) ) {
 			
 			$features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())));
 
-			$is_ring_builder = (!empty($features['ring_builder']));
+			$filter_sets = unserialize(wbc()->options->get_option_group('filters_filter_set',"a:0:{}"));
+			//wbc()->common->pr($filter_sets);
+			if(!empty($filter_sets) and is_array($filter_sets)){
+				foreach ($filter_sets as $filter_sets_key => $filter_sets_val) {
+					$filter_sets[$filter_sets_key] = $filter_sets_val['filter_set_name'];
+				}
+			}
+			
+
+			$is_ring_builder = (!empty($features['ring_builder']));			
 			//Diamond Page Filter Configuration's list
 			$table = array();
 			$table['id']='eowbc_price_control_methods_list';
@@ -125,6 +134,11 @@ if ( ! class_exists( 'Filters' ) ) {
 						'val' => 'Add reset link?',
 						'field_id'=>'d_fconfig_add_reset_link'
 					),
+					11=>array(
+						'is_header' => 1, 
+						'val' => 'Filter Set',
+						'field_id'=>'d_fconfig_set'
+					)
 				),
 			);
 			$table['body'] = array(
@@ -157,10 +171,12 @@ if ( ! class_exists( 'Filters' ) ) {
 				0=>array(
 					0=>array( 
 						'val' => eowbc_lang("No filter(s) exists, please add some filters."),
-						'colspan' => 10
+						'colspan' => 12
 					),
 				),
 			);
+
+
 
 			//Setting Page Filter Configuration's list
 			$sett_table = array();
@@ -224,6 +240,11 @@ if ( ! class_exists( 'Filters' ) ) {
 						'val' => 'Add reset link?',
 						'field_id'=>'s_fconfig_add_reset_link'
 					),
+					11=>array(
+						'is_header' => 1, 
+						'val' => 'Filter Set',
+						'field_id'=>'s_fconfig_set'
+					)
 				),
 			);
 			$sett_table['body'] = array(
@@ -256,7 +277,37 @@ if ( ! class_exists( 'Filters' ) ) {
 				0=>array(
 					0=>array( 
 						'val' => eowbc_lang("No filter(s) exists, please add some filters."),
-						'colspan' => 7
+						'colspan' => 12
+					),
+				),
+			);
+
+
+			//Setting Page Filter Configuration's list
+			$filter_set_table = array();
+			$filter_set_table['id']='filter_sets_list';
+			$filter_set_table['head'] = array(
+				0=>array(
+					0=>array(
+						'is_header' => 1, 
+						'val' => '',
+						'is_checkbox' => true, 
+						'sanitize'=>'sanitize_text_field',
+						'checkbox'=> array('id'=>'dummy','value'=>array(),'options'=>array('row0_col0_chk'=>''), 'options_attrs'=>array('row0_col0_chk'=>array('data-action="bulk_select_all"', 'data-bulk_table_id="'.$filter_set_table["id"].'"')),'class'=>'','where'=>'in_table')
+					),
+					1=>array(
+						'is_header' => 1,
+						'val' => 'Filter Set',
+						'field_id'=>'filter_set_name'
+					),					
+				),
+			);
+			$filter_set_table['body'] = array(
+				
+				0=>array(
+					0=>array( 
+						'val' => eowbc_lang("No filter(s) exists, please add some filters."),
+						'colspan' => 1
 					),
 				),
 			);
@@ -451,6 +502,70 @@ if ( ! class_exists( 'Filters' ) ) {
 								'size_class'=>array('eight','wide'),
 								'inline'=>true,								
 							),
+							'config_advance_begin'=>array(
+								'type'=>'accordian',
+								'section_type'=>'start',
+								'class'=>array('field'),
+								'label'=>'<span class="ui large text">Advanced Setting</span>',
+							),
+							'filter_setting_advance_two_tabs_divider'=>array(
+								'label'=>'Two tabs setting',
+								'type'=>'devider',
+							),
+							'filter_setting_advance_two_tabs'=>array(
+								'label'=>' ',
+								'type'=>'checkbox',
+								'sanitize'=>'sanitize_text_field',
+								'value'=>array(),
+								'options'=>array('filter_setting_advance_two_tabs'=>'Enable/Disable two tabs for the First(or Diamond) category filters'),
+								'class'=>array(),
+								'size_class'=>array('eight','wide'),
+								'inline'=>true,
+							),
+							'filter_setting_advance_first_tabs'=>array(
+								'label'=>'Select first tab\'s filter set' ,
+								'type'=>'select',
+								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
+								'validate'=>array(),
+								'options'=>$filter_sets,
+								'class'=>array('fluid'),
+								'size_class'=>array('three','wide','required'),
+							),
+							'filter_setting_advance_first_category'=>array(
+								'label'=>'Category for First Filter Set',
+								'type'=>'select',
+								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
+								'validate'=>array('required'=>''),
+								'options'=> \eo\wbc\controllers\admin\menu\page\Filters::eo_wbc_prime_category_(),
+								'class'=>array('fluid'),
+								'size_class'=>array('three','wide','required'),
+							),
+							'filter_setting_advance_second_tabs'=>array(
+								'label'=>'Select second tab\'s filter set' ,
+								'type'=>'select',
+								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
+								'validate'=>array(),
+								'options'=>$filter_sets,
+								'class'=>array('fluid'),
+								'size_class'=>array('three','wide','required'),
+							),
+							'filter_setting_advance_second_category'=>array(
+								'label'=>'Category for Second Filter Set',
+								'type'=>'select',
+								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
+								'validate'=>array('required'=>''),
+								'options'=> \eo\wbc\controllers\admin\menu\page\Filters::eo_wbc_prime_category_(),
+								'class'=>array('fluid'),
+								'size_class'=>array('three','wide','required'),
+							),
+							'config_advance_end'=>array(
+								'type'=>'accordian',
+								'section_type'=>'end'
+							),
 							'filter_setting_submit_btn'=>array(
 								'label'=>eowbc_lang('Save'),
 								'type'=>'button',								
@@ -584,6 +699,22 @@ if ( ! class_exists( 'Filters' ) ) {
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
 							),
+							'd_fconfig_set'=>array(
+								'label'=>'Filter Set',
+								'type'=>'select',
+								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
+								'validate'=>array(),
+								'options'=>$filter_sets,
+								'class'=>array('fluid'),
+								'size_class'=>array('three','wide','required'),
+								'visible_info'=>array( 
+									'label'=>eowbc_lang('You can use this set name to group your filters in different sets which you can use to display on different pages based on shortcode or two tab settings e.g. Natural Diamond Tab & Lab Grown Diamond Tab.'),
+									'type'=>'visible_info',
+									'class'=>array('small'),
+									// 'size_class'=>array('sixteen','wide'),
+								),
+							),							
 							'd_fconfig_filter'=>array(
 								'label'=>'Filter',
 								'type'=>'select',
@@ -597,7 +728,24 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'prev_inline'=>true,
 								// 'next_inline'=>true,
 								// 'inline'=>true,
-							),							
+							),
+							'd_fconfig_elements'=>array(
+								'label'=>eowbc_lang('Show Selected Only'),
+								'type'=>'select',
+								'value'=>'',
+								'options'=>array(),
+								'is_id_as_name'=>true,
+								'class'=>array('fluid','additions','search','multiple','clearable'),							
+								'field_attr'=>array('multiple=""'),
+								'size_class'=>array('three','wide'),
+								'inline'=>false,
+								'visible_info'=>array( 
+									'label'=>eowbc_lang('If you select items from this field then filter will show that items only on front end, and if you leave it blank it will show all sub categories of the category you selected above or all terms of the attribute if you selected attribute above.'),
+									'type'=>'visible_info',
+									'class'=>array('small'),
+									// 'size_class'=>array('sixteen','wide'),
+								),							
+							),
 							'd_fconfig_type'=>array(
 								'type'=>'hidden',
 								'value'=>'',
@@ -694,7 +842,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
 								'validate'=>array('required'=>''),
-								'options'=>array('icon'=>'Icon Only','icon_text'=>'Icon and Text','numeric_slider'=>'Numeric slider','text_slider'=>'Text slider','checkbox'=>'Checkbox','toggle_column'=>'Toggle Column'),
+								'options'=>array('icon'=>'Icon Only','icon_text'=>'Icon and Text','numeric_slider'=>'Numeric slider','text_slider'=>'Text slider','checkbox'=>'Checkbox','toggle_column'=>'Toggle Column','button'=>'Button'),
 								'class'=>array('fluid'),
 								'size_class'=>array('three','wide','required'),
 								// 'prev_inline'=>true,
@@ -808,6 +956,25 @@ if ( ! class_exists( 'Filters' ) ) {
 								'style'=>'normal',
 								// 'prev_inline'=>true,
 								// 'inline'=>true,
+							),
+							'config_advance_begin'=>array(
+								'type'=>'accordian',
+								'section_type'=>'start',
+								'class'=>array('field'),
+								'label'=>'<span class="ui large text">Advanced Setting</span>',
+							),									
+							'd_fconfig_non_auto_adjust'=>array(
+								'label'=>'Disable auto adjust lable?',
+								'type'=>'checkbox',
+								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
+								'options'=>array('1'=>' '),
+								'is_id_as_name'=>true,
+								'class'=>array()
+							),							
+							'config_advance_end'=>array(
+								'type'=>'accordian',
+								'section_type'=>'end'
 							),							
 							'd_fconfig_submit_btn'=>array(
 								'label'=>eowbc_lang('Save'),
@@ -864,6 +1031,22 @@ if ( ! class_exists( 'Filters' ) ) {
 								'value'=>'',								
 								'sanitize'=>'sanitize_text_field',
 							),
+							's_fconfig_set'=>array(
+								'label'=>'Filter Set',
+								'type'=>'select',
+								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
+								'validate'=>array(),
+								'options'=>$filter_sets,
+								'class'=>array('fluid'),
+								'size_class'=>array('three','wide','required'),
+								'visible_info'=>array( 
+									'label'=>eowbc_lang('You can use this set name to group your filters in different sets which you can use to display on different pages based on shortcode or two tab settings e.g. Natural Diamond Tab & Lab Grown Diamond Tab.'),
+									'type'=>'visible_info',
+									'class'=>array('small'),
+									// 'size_class'=>array('sixteen','wide'),
+								),
+							),							
 							's_fconfig_filter'=>array(
 								'label'=>eowbc_lang('Filter'),
 								'type'=>'select',
@@ -878,16 +1061,32 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'next_inline'=>true,
 								// 'inline'=>true,
 							),
-							
+							's_fconfig_elements'=>array(
+								'label'=>eowbc_lang('Show Selected Only'),
+								'type'=>'select',
+								'value'=>'',
+								'options'=>array(),
+								'is_id_as_name'=>true,
+								'class'=>array('fluid','additions','search','multiple','clearable'),							
+								'field_attr'=>array('multiple=""'),
+								'size_class'=>array('three','wide'),
+								'inline'=>false,
+								'visible_info'=>array( 
+									'label'=>eowbc_lang('If you select items from this field then filter will show that items only on front end, and if you leave it blank it will show all sub categories of the category you selected above or all terms of the attribute if you selected attribute above.'),
+									'type'=>'visible_info',
+									'class'=>array('small'),
+									// 'size_class'=>array('sixteen','wide'),
+								),							
+							),
 							's_fconfig_type'=>array(
-							'type'=>'hidden',
-							'value'=>'',
-							'sanitize'=>'sanitize_text_field',
+								'type'=>'hidden',
+								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
 							),
 							's_fconfig_dependent'=>array(
-							'type'=>'hidden',
-							'value'=>'',
-							'sanitize'=>'sanitize_text_field',
+								'type'=>'hidden',
+								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
 							),
 							's_fconfig_label_label'=>array(
 								'label'=>eowbc_lang('Label'),
@@ -975,7 +1174,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
 								'validate'=>array('required'=>''),
-								'options'=>array('icon'=>'Icon Only','icon_text'=>'Icon and Text','numeric_slider'=>'Numeric slider','text_slider'=>'Text slider','checkbox'=>'Checkbox'),
+								'options'=>array('icon'=>'Icon Only','icon_text'=>'Icon and Text','numeric_slider'=>'Numeric slider','text_slider'=>'Text slider','checkbox'=>'Checkbox','toggle_column'=>'Toggle Column','button'=>'Button'),
 								'class'=>array('fluid'),
 								'size_class'=>array('three','wide','required'),
 								// 'prev_inline'=>true,
@@ -1089,7 +1288,26 @@ if ( ! class_exists( 'Filters' ) ) {
 								'style'=>'normal',
 								// 'prev_inline'=>true,
 								// 'inline'=>true,
+							),	
+							'config_advance_begin'=>array(
+								'type'=>'accordian',
+								'section_type'=>'start',
+								'class'=>array('field'),
+								'label'=>'<span class="ui large text">Advanced Setting</span>',
+							),									
+							's_fconfig_non_auto_adjust'=>array(
+								'label'=>'Disable auto adjust lable?',
+								'type'=>'checkbox',
+								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
+								'options'=>array('1'=>' '),
+								'is_id_as_name'=>true,
+								'class'=>array()
 							),							
+							'config_advance_end'=>array(
+								'type'=>'accordian',
+								'section_type'=>'end'
+							),						
 							's_fconfig_submit_btn'=>array(
 								'label'=>eowbc_lang('Save'),
 								'type'=>'button',
@@ -1097,6 +1315,72 @@ if ( ! class_exists( 'Filters' ) ) {
 								//'size_class'=>array('eight','wide'),
 								'inline'=>false,
 								'attr'=>array('data-tab_key="s_fconfig"', 'data-action="save"'),
+							)
+						)
+					),
+				'filter_set'=>array(
+
+						'label'=>__("Filter Sets",'woo-bundle-choice'),
+						'form'=>array( $filter_set_table["id"].'_bulk'=>array(
+								// 'label'=>'Bulk Actions',
+								'type'=>'select',
+								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
+								'options'=>array(''=>eowbc_lang('Bulk Actions'), 'delete'=>'Delete','activate'=>'Activate','deactivate'=>'Deactivate'),
+								'class'=>array('fluid'),
+								'size_class'=>array('two','wide'),
+								'next_inline'=>true,
+								'inline'=>true,
+							),
+							'filter_set_submit_btn_bulk'=>array(
+								'label'=>'Apply',
+								'type'=>'button',
+								'class'=>array('secondary'),
+								// 'size_class'=>array('eight','wide'),
+								'prev_inline'=>true,
+								'inline'=>true,
+								'attr'=>array('data-tab_key="filter_set"', 'data-bulk_table_id="'.$filter_set_table["id"].'"', 'data-action="bulk"' )
+							),
+							'list'=>array_merge( $filter_set_table, array(
+								'type'=>'table' )
+							), 
+
+							'filter_set_add_title'=>array(
+								'label'=>"Add Filter Set",
+								'type'=>'label',
+								'size_class'=>array('eight','wide')
+							),							
+							'filter_set_id'=>array(
+								'type'=>'hidden',
+								'value'=>'',								
+								'sanitize'=>'sanitize_text_field',
+							),
+							'filter_set_name'=>array(
+								'label'=>__('Filter Set Name','woo-bundle-choice'),
+								'type'=>'text',
+								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
+								'validate'=>array('required'=>''),
+								'class'=>array('fluid'),
+								'size_class'=>array('three','wide','required'),
+								'visible_info'=>array( 
+									'label'=>eowbc_lang('You can use this set name to group your filters in different sets which you can use to display on different pages based on shortcode or two tab settings e.g. Natural Diamond Tab & Lab Grown Diamond Tab.'),
+									'type'=>'visible_info',
+									'class'=>array('small'),
+									// 'size_class'=>array('sixteen','wide'),
+								),
+							),	
+							'filter_set_add_enabled'=>array(
+								'type'=>'hidden',
+								'value'=>true,					
+							),													
+							'filter_sets_submit_btn'=>array(
+								'label'=>eowbc_lang('Save'),
+								'type'=>'button',
+								'class'=>array('secondary'),
+								//'size_class'=>array('eight','wide'),
+								'inline'=>false,
+								'attr'=>array('data-tab_key="filter_set"', 'data-action="save"'),
 							)
 						)
 					),

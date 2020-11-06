@@ -50,7 +50,7 @@ class Cart {
                         $set["FIRST"][0],
                         $set["FIRST"][1],
                         ($set["FIRST"][2]=='0'?NULL:$set["FIRST"][2]),
-                        ($set["FIRST"][2]=='0'?NULL:wbc()->wc->eo_wbc_get_product_variation_attributes($set["FIRST"][2]))
+                        ($set["FIRST"][2]=='0'?NULL:$set["FIRST"]['variation'])
                       );
                 }
 
@@ -60,8 +60,8 @@ class Cart {
                         $set["SECOND"][0],
                         $set["SECOND"][1],
                         ($set["SECOND"][2]=='0'?NULL:$set["SECOND"][2]),
-                        ($set["SECOND"][2]=='0'?NULL:wbc()->wc->eo_wbc_get_product_variation_attributes($set["SECOND"][2]))
-                      );
+                        ($set["SECOND"][2]=='0'?NULL:$set["SECOND"]['variation'])
+                    );
                 }
             }   
         }                
@@ -159,31 +159,9 @@ class Cart {
         wbc()->session->set('EO_WBC_MAPS',apply_filters('eowbc_cart_render_maps',$eo_wbc_maps));
 
     }
-    
-    public function eo_wbc_render()
-    {   
-        wbc()->theme->load('css','cart');
-        wbc()->theme->load('js','cart');
-        if(apply_filters('eowbc_filter_sidebars_widgets',true)){
-            add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
-                return array( false );
-            });
-        }
 
-        
-        // if our car is empty then return.
-        $maps=wbc()->session->get('EO_WBC_MAPS');
-        if(empty($maps)) return;        
-
-        //run the cart service.
-        $this->eo_wbc_cart_service();
-
-        // if our is empty even after cart service return now.
-        $maps=wbc()->session->get('EO_WBC_MAPS');        
-        if(empty($maps)) return;
-
-        $this->eo_wbc_add_css();
-
+    public function process_cart($maps){
+        if(empty($maps)) return array();
         foreach ($maps as $key => $map) {
             
             
@@ -235,6 +213,34 @@ class Cart {
             }
 
         }
+        return $maps;
+    }
+    
+    public function eo_wbc_render()
+    {   
+        wbc()->theme->load('css','cart');
+        wbc()->theme->load('js','cart');
+        if(apply_filters('eowbc_filter_sidebars_widgets',true)){
+            add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
+                return array( false );
+            });
+        }
+
+        
+        // if our car is empty then return.
+        $maps=wbc()->session->get('EO_WBC_MAPS');
+        if(empty($maps)) return;        
+
+        //run the cart service.
+        $this->eo_wbc_cart_service();
+
+        // if our is empty even after cart service return now.
+        $maps=wbc()->session->get('EO_WBC_MAPS');        
+        if(empty($maps)) return;
+
+        $this->eo_wbc_add_css();
+
+        $maps = $this->process_cart($maps);        
         
         $cart_actual_content = false;
         add_action('woocommerce_before_cart',function() use (&$cart_actual_content,&$maps){

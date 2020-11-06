@@ -21,6 +21,9 @@
 			value="<?php echo (!empty(wbc()->sanitize->get('CAT_LINK'))?','.wbc()->sanitize->get('CAT_LINK'):'')?>" />
 
 		<input type="hidden" name="_category" value="<?php echo implode(',',$thisObj->___category) ?>"/>
+		
+		<input type="hidden" name="cat_filter__two_tabs" value=""/>
+
 		<input type="hidden" name="_attribute" id="eo_wbc_attr_query" value="" />			
 		<?php if(isset($_GET['products_in']) AND !empty(wbc()->sanitize->get('products_in')) ): ?>
 			<input type="hidden" name="products_in" value="<?php echo wbc()->sanitize->get('products_in') ?>" />			
@@ -196,6 +199,13 @@
 					    $(this).data('prev_val_max',max);
 					}
 					
+					let _adjust_label = $(this).data('label_adjust');
+					
+					if(_adjust_label!=1 && $(this).hasClass('labeled')){
+						console.log($(this));
+						_params.autoAdjustLabels=false;	
+					}					
+					
 					$("input.text_slider_"+$(e).attr('data-slug')).change(function() {				    
 						console.log($(e).attr('data-slug'));
 						//$("#text_slider_"+$(e).attr('data-slug')).slider("set rangeValue",$("[name=min_"+$(e).attr('data-slug')+"]").val(),$("[name=max_"+$(e).attr('data-slug')+"]").val());
@@ -241,15 +251,17 @@
 				$("#advance_filter").on('click',function(){
 					$("#advance_filter").find('.ui.icon').toggleClass('up down');
 					$(secondary_filter).transition('slide down');
-				}).trigger('click');				
+				}).trigger('click');			
 
-			} else if($(secondary_mobile_only).css('display')!='none') {					
+			} else if($(secondary_mobile_only).css('display')!='none') {
 				
-				$("#advance_filter").on('click',function(){
-					$("#advance_filter").find('.ui.icon').toggleClass('up down');
+				$("#advance_filter").on('click',function(){					
+					$(this).find('.ui.icon').toggleClass('up down');
 					$(secondary_filter).transition('fly right');				
 				}).trigger('click');
 			}
+
+
 
 			/*$(secondary_filter).transition('fade');*/
 

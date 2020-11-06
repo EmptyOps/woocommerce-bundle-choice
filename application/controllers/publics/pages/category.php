@@ -102,7 +102,14 @@ class Category {
             $cart=(array)json_decode($cart);
             
             if(is_array($cart) OR is_object($cart)) {
-                   
+                
+                $variation_data = array();
+                foreach($cart as $cart_key=>$cart_value){
+                    if(substr($cart_key, 0, strlen('attribute_')) === 'attribute_'){
+                        $variation_data[$cart_key]=$cart_value;
+                    }
+                }   
+
                 //if product belongs to first target;
                 if (wbc()->options->get_option('configuration','first_slug')==$cart['eo_wbc_target']) {
 
@@ -111,7 +118,8 @@ class Category {
                             'FIRST'=>array(
                                             $cart['eo_wbc_product_id'],
                                             $cart['quantity'],
-                                            (isset($cart['variation_id'])?$cart['variation_id']:NULL)
+                                            (isset($cart['variation_id'])?$cart['variation_id']:NULL),
+                                            'variation'=>$variation_data,
                                         ),
                             'SECOND'=>NULL
                                                 
@@ -126,7 +134,8 @@ class Category {
                             'SECOND'=>array(
                                             $cart['eo_wbc_product_id'],
                                             $cart['quantity'],
-                                            (isset($cart['variation_id'])?$cart['variation_id']:NULL)
+                                            (isset($cart['variation_id'])?$cart['variation_id']:NULL),
+                                            'variation'=>$variation_data,
                                         )
                     ));
                 }                                              
@@ -152,16 +161,26 @@ class Category {
         }
     }
 
-    public function eo_wbc_add_filters() {
-        //Add product filter widget...
-        
-        add_action( 'woocommerce_archive_description',function(){    
+    public function add_filter_widget(){
+        if(!$this->filter_showing_status){
             wbc()->load->model('publics/component/eowbc_filter_widget');          
             // if (class_exists('EO_WBC_Filter_Widget')) {
                 \eo\wbc\model\publics\component\EOWBC_Filter_Widget::instance()->init($this->is_shop_cat_filter,$this->filter_prefix,false);                                
             // }
-        },130);         
-        
+            $this->filter_showing_status = true;
+        }
+    }
+
+    public function eo_wbc_add_filters() {
+        //Add product filter widget...
+        $this->filter_showing_status = false;
+        if(has_action('woocommerce_archive_description', false )){
+            add_action('woocommerce_archive_description',array($this,'add_filter_widget'),130);
+        } else {
+
+            add_action('woocommerce_before_shop_loop',array($this,'add_filter_widget'),1);
+        }
+
         if( $this->is_shortcode_filter ) {
             \eo\wbc\model\publics\component\EOWBC_Filter_Widget::instance()->init(false,$this->filter_prefix,$this->is_shortcode_filter);
         }
@@ -276,7 +295,8 @@ class Category {
         } else {
             return $site_;
         }
-        return $site_."/product-category/{$prev_cat}/?EO_WBC=1&BEGIN={$prev_cat}&STEP=1&FIRST=&SECOND=";
+        $category_base = wbc()->wc->wc_permalink('category_base');
+        return $site_."/{$category_base}/{$prev_cat}/?EO_WBC=1&BEGIN={$prev_cat}&STEP=1&FIRST=&SECOND=";
     }
     public function eo_wbc_product_url($url){
         if(empty(wbc()->sanitize->get('EO_WBC'))){

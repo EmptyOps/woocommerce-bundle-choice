@@ -44,7 +44,7 @@ class Eowbc_Filters extends Eowbc_Model {
 					
 					//wbc()->common->pr($form_definition, false, false);
 					// wbc()->common->var_dump('table data for key '.$key);
-					// wbc()->common->pr($filter_data, false, false);
+					//wbc()->common->pr($filter_data, false, false);
 
 					$body = array();
 
@@ -53,11 +53,11 @@ class Eowbc_Filters extends Eowbc_Model {
 
 						foreach ($filter_data as $rk => $rv) {
 							$row = array();
-
+							
 							$row[] =array(
 									'val' => '',
 									'is_checkbox' => true, 
-									'checkbox'=> array('id'=>$key.$rv[$key_clean.'_filter'],'value'=>array(),'options'=>array(/*$rv[$key.'_filter']*/$rk=>''),'class'=>'','where'=>'in_table')
+									'checkbox'=> array('id'=>($fv['id']=='filter_sets_list'?$rk:($key.$rv[$key_clean.'_filter'])),'value'=>array(),'options'=>array(/*$rv[$key.'_filter']*/$rk=>''),'class'=>'','where'=>'in_table')
 								);
 							
 							$disabled = empty($rv[$key_clean.'_add_enabled'])?true:false;
@@ -65,7 +65,7 @@ class Eowbc_Filters extends Eowbc_Model {
 							// foreach ($rv as $rvk => $rvv) {
 							foreach ($form_definition[$key]["form"][$fk]["head"][0] as $ck => $cv) {
 								if(empty($cv["field_id"])) { continue; }
-								$rvk = $cv["field_id"];
+								$rvk = $cv["field_id"];							
 								$rvv = ( !isset($rv[$rvk]) || wbc()->common->nonZeroEmpty($rv[$rvk]) ) ?  "" : $rv[$rvk];
 								
 								//skip the id
@@ -81,6 +81,11 @@ class Eowbc_Filters extends Eowbc_Model {
 								}							
 								else if( $rvk == $key_clean."_input_type" || $rvk == $key_clean."_filter" ) {
 									$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv);
+									/*
+									if(empty($val)){
+										$val = $rvv;
+									}*/
+
 									if($rvk == $key_clean."_filter"){
 										$row[] = array( 'val' => !is_array($val)?$val:$val["label"] ,'disabled'=>$disabled, 'link'=>($rvk == $key_clean."_filter"),'edit_id'=>$rk);	
 									} else {
@@ -89,10 +94,16 @@ class Eowbc_Filters extends Eowbc_Model {
 									
 								}elseif(!empty($form_definition[$key]["form"][$cv['field_id']]) and $form_definition[$key]["form"][$cv['field_id']]['type']=='select') {
 									$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv);
+									if($rvk==($key_clean.'_set') and empty($val)) {
+										$val = 'Default';
+									}
 									$row[] = array( 'val' => $val ,'disabled'=>$disabled);
-								}
-								else {
-									$row[] = array( 'val' => $rvv ,'disabled'=>$disabled);
+								} else {
+									if(!empty($row) and count($row)==1){
+										$row[] = array( 'val' => $rvv,'disabled'=>$disabled, 'link'=>1,'edit_id'=>$rk);	
+									} else { 
+										$row[] = array( 'val' => $rvv ,'disabled'=>$disabled);
+									}
 								}
 							}
 
@@ -465,14 +476,20 @@ class Eowbc_Filters extends Eowbc_Model {
 	}
 
 	public function fetch_filter(&$res) {
-		$first = unserialize(wbc()->options->get_option_group('filters_'.$this->tab_key_prefix.'d_fconfig'));
-		$second = unserialize(wbc()->options->get_option_group('filters_'.$this->tab_key_prefix.'s_fconfig'));
+		//$first = unserialize(wbc()->options->get_option_group('filters_'.$this->tab_key_prefix.'d_fconfig'));
+		//$second = unserialize(wbc()->options->get_option_group('filters_'.$this->tab_key_prefix.'s_fconfig'));
+		$key = wbc()->sanitize->post('saved_tab_key');
+		$data = unserialize(wbc()->options->get_option_group('filters_'.$key,"a:0:{}"));
 
+		if(!empty($data[wbc()->sanitize->post('id')])){
+			$res['msg'] = json_encode($data[wbc()->sanitize->post('id')]);
+		}
+		/*
 		if(!empty($first[wbc()->sanitize->post('id')])){
 			$res['msg'] = json_encode($first[wbc()->sanitize->post('id')]);
 		} elseif (!empty($second[wbc()->sanitize->post('id')])) {
 			$res['msg'] = json_encode($second[wbc()->sanitize->post('id')]);
-		} else {
+		}*/ else {
 			$res['type'] = 'error';
 			$res['msg'] = 'Selected item does not exists!';
 		}		

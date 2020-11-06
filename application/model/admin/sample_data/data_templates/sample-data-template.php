@@ -715,7 +715,7 @@ class Sample_Data_Template {
         array(
           'title'=>'Setting #4927991215',
           'thumb'=>$_img_url.'Products/Ring-hert-1.jpg',
-          'images'=>array('Ring-hert-2.jpg','Ring-hert-3.jpg'),
+          'images'=>array('Ring-hert-2.jpg','Ring-heart-3.jpg'),
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -1578,7 +1578,7 @@ class Sample_Data_Template {
         array(
           'title'=>'Setting #10000009',
           'thumb'=>$_img_url.'Products/Ring-hert-1.jpg',
-          'images'=>array('Ring-hert-2.jpg','Ring-hert-3.jpg'),
+          'images'=>array('Ring-hert-2.jpg','Ring-heart-3.jpg'),
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -2161,7 +2161,7 @@ class Sample_Data_Template {
         array(
           'title'=>'Setting #10000018',
           'thumb'=>$_img_url.'Products/Ring-hert-1.jpg',
-          'images'=>array('Ring-hert-2.jpg','Ring-hert-3.jpg'),
+          'images'=>array('Ring-hert-2.jpg','Ring-heart-3.jpg'),
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -2944,7 +2944,7 @@ class Sample_Data_Template {
         array(
           'title'=>'Setting #10000028',
           'thumb'=>$_img_url.'Products/Ring-hert-1.jpg',
-          'images'=>array('Ring-hert-2.jpg','Ring-hert-3.jpg'),
+          'images'=>array('Ring-hert-2.jpg','Ring-heart-3.jpg'),
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -3807,7 +3807,7 @@ class Sample_Data_Template {
         array(
           'title'=>'Setting #10000038',
           'thumb'=>$_img_url.'Products/Ring-hert-1.jpg',
-          'images'=>array('Ring-hert-2.jpg','Ring-hert-3.jpg'),
+          'images'=>array('Ring-hert-2.jpg','Ring-heart-3.jpg'),
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -4670,7 +4670,7 @@ class Sample_Data_Template {
         array(
           'title'=>'Setting #10000048',
           'thumb'=>$_img_url.'Products/Ring-hert-1.jpg',
-          'images'=>array('Ring-hert-2.jpg','Ring-hert-3.jpg'),
+          'images'=>array('Ring-hert-2.jpg','Ring-heart-3.jpg'),
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',

@@ -63,6 +63,17 @@ class WBC_WC {
     public static function eo_wbc_create_attribute($args){
 
         if(function_exists('wc_create_attribute')) {
+                        
+            add_filter('product_attributes_type_selector',function($type){
+                $type['button']=__('Button','woo-bundle-choice');
+                $type['color']=__('Color','woo-bundle-choice');
+                $type['image']=__('Icon','woo-bundle-choice');
+                $type['image_text']=__('Icons with Text','woo-bundle-choice');
+                $type['dropdown_image']=__('Dropdown with Icons','woo-bundle-choice');
+                $type['dropdown_image_only']=__('Dropdown with Icons Only','woo-bundle-choice');
+                $type['dropdown']=__('Dropdown','woo-bundle-choice');
+                return $type;
+            });
 
             return wc_create_attribute($args);
 
@@ -83,7 +94,7 @@ class WBC_WC {
             $data = array(
                 'attribute_label'   => $args['name'],
                 'attribute_name'    => $args['slug'],
-                'attribute_type'    => 'select',
+                'attribute_type'    => (empty($args['type'])?'select':$args['type']),
                 'attribute_orderby' => 'menu_order',
                 'attribute_public'  => 1, // Enable archives ==> true (or 1)
             );
@@ -105,7 +116,7 @@ class WBC_WC {
         }
     }
 
-    public static function eo_wbc_get_product_variation_attributes( $variation_id ) {
+    public static function eo_wbc_get_product_variation_attributes( $variation_id ,$variation_data=array()) {
 
         if(is_null($variation_id))
         {
@@ -119,9 +130,9 @@ class WBC_WC {
                             :
                             self::eo_wbc_support_get_product_variation_attributes($variation_id);   
 
-            $var_attrs=array();                
+            $var_attrs=array();                            
             foreach ($variation_meta as $taxonomy => $term_slug) {
-
+                $attribute_taxonomy = $taxonomy;
                 $taxonomy=substr($taxonomy,strlen('attribute_'));
                 $taxonomy_name='';
                 
@@ -132,7 +143,11 @@ class WBC_WC {
                         $taxonomy_name=$tax->attribute_label;
                     }
                 }
-                $term_data = get_term_by('slug',$term_slug,$taxonomy);
+                if(empty($term_slug) and !empty($variation_data) and isset($variation_data[$attribute_taxonomy])){
+                    $term_slug = (string)$variation_data[$attribute_taxonomy];
+                }
+
+                $term_data = get_term_by('slug',$term_slug,$taxonomy);                
                 if(!is_wp_error($term_data) and !empty($term_data->name)){
                     $var_attrs[]=($taxonomy_name?$taxonomy_name.': ':'').$term_data->name;    
                 }  
@@ -241,5 +256,18 @@ class WBC_WC {
 
     public function get_currency_symbol() {
         return get_woocommerce_currency_symbol();
+    }
+
+    public function wc_permalink(string $key){
+        $permalink = get_option('woocommerce_permalinks',array());
+        if(empty($permalink)){
+            $permalink['category_base'] = untrailingslashit('product-category');
+        }
+
+        if(empty($permalink) or empty($permalink[$key])){
+            return '';
+        } else {
+            return $permalink[$key];
+        }
     }
 }

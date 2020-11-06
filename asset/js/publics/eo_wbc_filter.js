@@ -71,36 +71,37 @@ function eo_wbc_filter_render_html(data) {
 	}
 }
 
-if(eo_wbc_object.disp_regular){
+if(eo_wbc_object.disp_regular=='1'){
 	
-	if(typeof(jQuery.fn.eo_wbc_filter_change)=="undefined" || jQuery.fn.eo_wbc_filter_change==undefined){
+	jQuery.fn.eo_wbc_filter_change_native= function(init_call=false) {				
+	//flag indicates if to show products in tabular view or woocommerce's default style.		
 
-		jQuery.fn.eo_wbc_filter_change= function(init_call=false) {				
-		//flag indicates if to show products in tabular view or woocommerce's default style.
+		var form=jQuery("form#eo_wbc_filter");	
+		var site_url=eo_wbc_object.eo_cat_site_url;
+		var ajax_url=site_url+eo_wbc_object.eo_cat_query;
+		
+		jQuery.ajax({
+			url: ajax_url,//form.attr('action'),
+			data:form.serialize(), // form data
+			type:'GET'/*form.attr('method')*/, // POST
+			beforeSend:function(xhr){
+				//jQuery("body").fadeTo('slow','0.3')	
+				jQuery("#loading").addClass('loading');							
+				console.log(this.url);					
+			},
+			complete : function(){
+				//console.log(this.url);
+			},
+			success:function(data){		
+				//console.log(JSON.stringify(data));
+				eo_wbc_filter_render_html(data);
+			}
+		});
+		return false;
+	}	
 
-			var form=jQuery("form#eo_wbc_filter");	
-			var site_url=eo_wbc_object.eo_cat_site_url;
-			var ajax_url=site_url+eo_wbc_object.eo_cat_query;
-			
-			jQuery.ajax({
-				url: ajax_url,//form.attr('action'),
-				data:form.serialize(), // form data
-				type:'GET'/*form.attr('method')*/, // POST
-				beforeSend:function(xhr){
-					//jQuery("body").fadeTo('slow','0.3')	
-					jQuery("#loading").addClass('loading');							
-					console.log(this.url);					
-				},
-				complete : function(){
-					//console.log(this.url);
-				},
-				success:function(data){		
-					//console.log(JSON.stringify(data));
-					eo_wbc_filter_render_html(data);
-				}
-			});
-			return false;
-		}	
+	if(typeof(jQuery.fn.eo_wbc_filter_change)=="undefined" || jQuery.fn.eo_wbc_filter_change==undefined){		
+		jQuery.fn.eo_wbc_filter_change = jQuery.fn.eo_wbc_filter_change_native;
 	}
 }
 
@@ -112,7 +113,7 @@ jQuery(document).ready(function($){
 			jQuery(this).removeClass('active');
 
 		} else {
-			jQuery("[data-toggle_slug='"+jQuery(this).data('toggle_column')+"']").css('display','unset');
+			jQuery("[data-toggle_slug='"+jQuery(this).data('toggle_column')+"']").css('display','table-cell');
 			jQuery(this).addClass('active');
 			
 		}
@@ -204,5 +205,12 @@ function reset_checkbox(e,selector){
 	e.preventDefault();
 	e.stopPropagation()
 	jQuery(selector).filter(":not(:checked)").trigger('click');
+	return false;
+}
+
+function reset_button(e,selector){
+	e.preventDefault();
+	e.stopPropagation()
+	jQuery(selector).filter(".eo_wbc_button_selected").trigger('click');
 	return false;
 }
