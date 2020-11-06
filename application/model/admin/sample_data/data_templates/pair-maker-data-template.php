@@ -34,38 +34,51 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                         'label' => 'Size',
                         'terms' => array('XS','S','M','L','XL','2XL','3XL','28','30','32','34','36','38'),
                         'description' => 'Size attributes for clothing wear',
-                        'slug' => 'wbc_cloth_size_attr'
+                        'slug' => 'wbc_cloth_size_attr',
+                        'type'=>'dropdown',
+                        'ribbon_color'=>'#676e64'
                     ),
                     array(
                         'label' => 'Colour',
                         'terms' => array('White','Black','Red','Purple', 'Blue', 'Green','Yellow','Orange','Gray','Pink','Maroon','Lime','Aqua'),
+                        'terms_meta'=>array($_img_url.'colours/white.png',$_img_url.'colours/black.png',$_img_url.'colours/red.png', $_img_url.'colours/purple.png',$_img_url.'colours/blue.png',$_img_url.'colours/green.png',$_img_url.'colours/yellow.png',$_img_url.'colours/orange.png',$_img_url.'colours/gray.png',$_img_url.'colours/pink.png',$_img_url.'colours/maroon.png',$_img_url.'colours/lime.png',$_img_url.'colours/aqua.png'),
                         'description' => 'Colour attributes for clothing wear',
                         'slug' => 'wbc_cloth_colour_attr',
-                        'thumb' => array($_img_url.'colours/white.png',$_img_url.'colours/black.png',$_img_url.'colours/red.png', $_img_url.'colours/purple.png',$_img_url.'colours/blue.png',$_img_url.'colours/green.png',$_img_url.'colours/yellow.png',$_img_url.'colours/orange.png',$_img_url.'colours/gray.png',$_img_url.'colours/pink.png',$_img_url.'colours/maroon.png',$_img_url.'colours/lime.png',$_img_url.'colours/aqua.png')
+                        'type'=>'dropdown_image',
+                        'ribbon_color'=>'#676e64'
                     ),
                     array(
                         'label' => 'Fabric',
                         'terms' => array('Cotton', 'Silk', 'Canvas', 'Chiffon', 'Damask', 'Wool', 'Jersey', 'Polyester', 'Velvet','Linen'),
                         'description' => 'Fabric attributes for clothings wear',
-                        'slug' => 'wbc_cloth_fabric_attr'
+                        'slug' => 'wbc_cloth_fabric_attr',
+                        'type'=>'dropdown',
+                        'ribbon_color'=>'#676e64'
+
                     ),
                     array(
                         'label' => 'Fit',
                         'terms' => array('Skinny fit','Slim fit','Regular fit','Tapered fit','Hem fit', 'Ultra slim','Flared','Easy'),
                         'description' => 'Fit attributes for clothing wear',
-                        'slug' => 'wbc_cloth_fit_attr'
+                        'slug' => 'wbc_cloth_fit_attr',
+                        'type'=>'dropdown',
+                        'ribbon_color'=>'#676e64'
                     ),
                     array(
                         'label' => 'Neck',
                         'terms' => array('Round','Crew' , 'Jewel', 'U neckline', 'Square' , 'V neckline', 'Collared neckline', 'Funnel Neckline'),
                         'description' => 'Neck types attributes for clothings wear',
-                        'slug' => 'wbc_cloth_neck_attr'
+                        'slug' => 'wbc_cloth_neck_attr',
+                        'type'=>'dropdown',
+                        'ribbon_color'=>'#676e64'
                     ),
                     array(
                         'label' => 'Occasion',
                         'terms' => array('Causal','Formal','Lounge','Tie','Cocktail Attire','Ethnic'),
                         'description' => 'Occasion attributes for clothings wear',
-                        'slug' => 'wbc_cloth_occasion_attr'
+                        'slug' => 'wbc_cloth_occasion_attr',
+                        'type'=>'dropdown',
+                        'ribbon_color'=>'#676e64'
                     ),
                     // array(
                     //     'label' => 'Pattern',
@@ -77,26 +90,34 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                         'label' => 'Sleeve',
                         'terms' => array('Long sleeve', 'Short sleeve', 'Roll-up sleeve','Sleeveless'),        
                         'description' => 'Sleeve attributes for clothings wear',
-                        'slug' => 'wbc_cloth_sleeve_attr'
+                        'slug' => 'wbc_cloth_sleeve_attr',
+                        'type'=>'dropdown',
+                        'ribbon_color'=>'#676e64'
                     ),
                     array(
                         'label' => 'Collar',
                         'terms' => array('Mandrin', 'Band', 'Polo','Funnel','Slim','Spread','Regular','Mao','Notch Lapels'),
+                        'terms_meta' => array($_alphabets_img_url.'icons8-circled-m-100.png', $_alphabets_img_url.'icons8-circled-b-100.png', $_alphabets_img_url.'icons8-circled-p-100.png',$_alphabets_img_url.'icons8-circled-f-100.png',$_alphabets_img_url.'icons8-circled-s-100.png',$_alphabets_img_url.'icons8-circled-s-100.png',$_alphabets_img_url.'icons8-circled-r-100.png',$_alphabets_img_url.'icons8-circled-m-100.png',$_alphabets_img_url.'icons8-circled-n-100.png'),
                         'description' => 'Collar attributes for clothings wear',
                         'slug' => 'wbc_cloth_collar_attr',
-                        'thumb' => array($_alphabets_img_url.'icons8-circled-m-100.png', $_alphabets_img_url.'icons8-circled-b-100.png', $_alphabets_img_url.'icons8-circled-p-100.png',$_alphabets_img_url.'icons8-circled-f-100.png',$_alphabets_img_url.'icons8-circled-s-100.png',$_alphabets_img_url.'icons8-circled-s-100.png',$_alphabets_img_url.'icons8-circled-r-100.png',$_alphabets_img_url.'icons8-circled-m-100.png',$_alphabets_img_url.'icons8-circled-n-100.png')
+                        'type'=>'dropdown_image',
+                        'ribbon_color'=>'#676e64'
                     ),
                     array(
                         'label' => 'Closure Type',
                         'terms' => array('Button','Zipper','Hook','Frog & toggle','Elastic'),
                         'description' => 'Closure type attributes for clothings wear',
-                        'slug' => 'wbc_cloth_closure_type_attr'
+                        'slug' => 'wbc_cloth_closure_type_attr',
+                        'type'=>'dropdown',
+                        'ribbon_color'=>'#676e64'
                     ),
                     array(
                         'label' => 'Length',
                         'terms' => array('Ankle','Full','Calf','Thigh','Knee','Regular'),
                         'description' => 'Length attributes for clothings wear',
-                        'slug' => 'wbc_cloth_length_attr'
+                        'slug' => 'wbc_cloth_length_attr',
+                        'type'=>'dropdown',
+                        'ribbon_color'=>'#676e64'
                     )
                     // array(
                     //     'label' => 'Bottom Type',

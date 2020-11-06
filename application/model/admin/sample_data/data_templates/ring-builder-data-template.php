@@ -34,93 +34,116 @@ class Ring_Builder_Data_Template extends Pair_Builder_Data_Template {
                         'range'=>true,
                         'terms' => array('min'=>'0.2','max'=>'3'),
                         'description' => 'Carat attributes for diamond shape',
-                        'slug' => 'eo_carat_attr'
+                        'slug' => 'eo_carat_attr',
+                        'type'=>'button',
+                        'ribbon_color'=>'#8245dd'
                     ),
                     array(
                         'label' => 'Clarity',
                         'terms' => array('IF','VVS1','VVS2','VS1','VS2','SI1'),
-                        'terms_meta'=>array('#968d8d','#96f38d','#728d8d','#968ddd','#96ff8d','#9c5d8d'),
                         'description' => 'Clarity attributes for diamond shape',
                         'slug' => 'eo_clarity_attr',
-                        'type'=>'color',
-                        'ribbon_color'=>'#824545',
+                        'type'=>'dropdown',
+                        'ribbon_color'=>'#8245dd',
                     ),
                     array(
                         'label' => 'Colour',
                         'terms' => array('D','E','F','G','H','I','J','K','L','M'),
-                        'terms_meta'=>array(
-                                        $_img_url.'round.png',
-                                        $_img_url.'asscher.png',
-                                        $_img_url.'cushion.png',
-                                        $_img_url.'emerald.png',
-                                        $_img_url.'heart.png',
-                                        $_img_url.'marquise.png',
-                                        $_img_url.'oval.png',
-                                        $_img_url.'pear.png',
-                                        $_img_url.'princess.png',
-                                        $_img_url.'rediant.png',
-                                    ),
+                        'terms_meta'=>array('#7edff2','#54de97','#608bf0','#f252ca','#60630a','#ffa70f','#ab7113','#c70fff','#968d8d','#96f38d'),
                         'description' => 'Colour attributes for diamond shape',
                         'slug' => 'eo_colour_attr',
-                        'type'=>'image_text',
+                        'type'=>'color',
                         'ribbon_color'=>'#8245dd',  
                     ),
                     array(
                         'label' => 'Polish',
                         'terms' => array('Excellent','Very Good','Good','Fair'),
                         'description' => 'Polish attributes for diamond shape',
-                        'slug' => 'eo_polish_attr'
+                        'slug' => 'eo_polish_attr',
+                        'type'=>'button',
+                        'ribbon_color'=>'#8245dd'
                     ),
                     array(
                         'label' => 'Symmetry',
                         'terms' => array('Excellent','Very Good','Good','Fair'),
                         'description' => 'Symmetry attributes for diamond shape',
-                        'slug' => 'eo_symmertry_attr'
+                        'slug' => 'eo_symmertry_attr',
+                        'type'=>'button',
+                        'ribbon_color'=>'#8245dd'
                     ),
                     array(
                         'label' => 'Fluorescence',
                         'terms' => array('None','Very','Slight','Slight','Faint'),
                         'description' => 'Fluorescence attributes for diamond shape',
-                        'slug' => 'eo_fluorescence_attr'
+                        'slug' => 'eo_fluorescence_attr',
+                        'type'=>'dropdown',
+                        'ribbon_color'=>'#8245dd'
                     ),
                     array(
                         'label' => 'Depth',
                         'range'=>true,
                         'terms' => array('min'=>'45','max'=>'55'),        
                         'description' => 'Depth attributes for diamond shape',
-                        'slug' => 'eo_depth_attr'
+                        'slug' => 'eo_depth_attr',
+                        'type'=>'dropdown',
+                        'ribbon_color'=>'#8245dd'
                     ),
                     array(
                         'label' => 'Size',
                         'range'=>true,
                         'terms' => array('min'=>'4','max'=>'7'),        
                         'description' => 'Size attributes for settings',
-                        'slug' => 'eo_size_attr'
+                        'slug' => 'eo_size_attr',
+                        'type'=>'button',
+                        'ribbon_color'=>'#8245dd'
                     ),
                     array(
                         'label' => 'Table',
                         'range'=>true,
                         'terms' => array('min'=>'45','max'=>'55'),
                         'description' => 'Table attributes for diamond shape',
-                        'slug' => 'eo_table_attr'
+                        'slug' => 'eo_table_attr',
+                        'type'=>'button',
+                        'ribbon_color'=>'#8245dd'
                     ),
                     array(
                         'label' => 'Grading Report',
                         'terms' => array('GIA','IGI','AGS','HRD'),
                         'description' => 'Grading report attributes for diamond shape',
-                        'slug' => 'eo_grading_report_attr'
+                        'slug' => 'eo_grading_report_attr',
+                        'type'=>'button',
+                        'ribbon_color'=>'#8245dd'
                     ),
                     array(
                         'label' => 'Ring Style',
                         'terms' => array('Halo','Pave','Solitaire','Trilogy'),
+                        'terms_meta'=>array(
+                                        $_img_url.'halo.png',
+                                        $_img_url.'pave.png',
+                                        $_img_url.'solitaire.png',
+                                        $_img_url.'trilogy.png'
+                                    ),
                         'description' => 'Ring style attributes for diamond shape',
-                        'slug' => 'eo_ring_style_attr'
+                        'slug' => 'eo_ring_style_attr',
+                        'type'=>'dropdown_image',
+                        'ribbon_color'=>'#8245dd'
                     ),
                     array(
                         'label' => 'Metal',
                         'terms' => array('14K White Gold','18K White Gold','14K Yellow Gold','18K Yellow Gold','14K Rose Gold','18K Rose Gold','Platinum'),
+                        'terms_meta'=>array(
+                                        $_img_url.'wg-14.jpg',
+                                        $_img_url.'wg-18.jpg',
+                                        $_img_url.'yg-14.jpg',
+                                        $_img_url.'yg-18.jpg',
+                                        $_img_url.'rg-14.jpg',
+                                        $_img_url.'rg-18.jpg',
+                                        $_img_url.'pl.jpg'
+                                    ),
                         'description' => 'Metal attributes for diamond shape',
-                        'slug' => 'eo_metal_attr'
+                        'slug' => 'eo_metal_attr',
+                        'type'=>'dropdown_image',
+                        'ribbon_color'=>'#8245dd'
                     ),
                   ); 
     }
