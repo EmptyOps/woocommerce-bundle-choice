@@ -15,11 +15,11 @@
 		<div class="ui tiny form" style="padding:0px 6%;">
 		  <div class="three fields">
 		    <div class="field" style="display: inline-block;width: min-content !important;">	      
-		      <input style="font-size: 13px; height: 24px; width: 6em; -webkit-appearance: none;padding-left: 0.5em;padding-right: 0.5em;" value="<?php echo $prefix.$min.$postfix; ?>" type="text" class="text_slider_price aligned left" name="text_min_price" data-sep="<?php _e($seprator); ?>">
+		      <input style="font-size: 13px; height: 24px; width: 6em; -webkit-appearance: none;padding-left: 0.5em;padding-right: 0.5em;" value="<?php echo $prefix.' '.number_format($min,2,$seprator,',').' '.$postfix; ?>" type="text" class="text_slider_price aligned left" name="text_min_price" data-sep="<?php _e($seprator); ?>">
 		    </div>
 		    <div class="field" style="display: inline-block;width: min-content !important;"></div>
 		    <div class="field" style="display: inline-block;width: min-content !important;">	      
-		      <input style="font-size: 13px; height: 24px; width: 6em; -webkit-appearance: none;position: absolute;right: 6%;padding-left: 0.5em;padding-right: 0.5em;" value="<?php echo $prefix.$max.$postfix;; ?>" type="text" class="text_slider_price aligned right" name="text_max_price" data-sep="<?php _e($seprator); ?>">
+		      <input style="font-size: 13px; height: 24px; width: 6em; -webkit-appearance: none;position: absolute;right: 6%;padding-left: 0.5em;padding-right: 0.5em;" value="<?php echo $prefix.' '.number_format($max,2,$seprator,',').' '.$postfix; ?>" type="text" class="text_slider_price aligned right" name="text_max_price" data-sep="<?php _e($seprator); ?>">
 		    </div>
 		  </div>	  
 		</div>				

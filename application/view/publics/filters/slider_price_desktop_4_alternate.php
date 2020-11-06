@@ -13,11 +13,11 @@
 		<div class="ui tiny form" style="padding:0px 6%;">
 		  <div class="three fields">
 		    <div class="field">	      
-		      <input style="font-size: 13px; height: 24px; width: 6em; -webkit-appearance: none;" value="<?php echo $prefix.$min.$postfix; ?>" type="text" class="text_slider_price aligned left" name="text_min_price" data-sep="<?php _e($seprator); ?>">
+		      <input style="font-size: 13px; height: 24px; -webkit-appearance: none;" value="<?php echo $prefix.' '.number_format($min,2,$seprator,',').' '.$postfix; ?>" type="text" class="text_slider_price aligned left" name="text_min_price" data-sep="<?php _e($seprator); ?>">
 		    </div>
 		    <div class="field"></div>
 		    <div class="field">	      
-		      <input style="font-size: 13px; height: 24px;" value="<?php echo $prefix.$max.$postfix;; ?>" type="text" class="text_slider_price aligned right" name="text_max_price" data-sep="<?php _e($seprator); ?>">
+		      <input style="font-size: 13px; height: 24px;" value="<?php echo $prefix.' '.number_format($max,2,$seprator,',').' '.$postfix; ?>" type="text" class="text_slider_price aligned right" name="text_max_price" data-sep="<?php _e($seprator); ?>">
 		    </div>
 		  </div>	  
 		</div>				
