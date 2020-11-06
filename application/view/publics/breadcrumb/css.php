@@ -145,11 +145,25 @@
     padding-bottom: 0rem !important; }"
 		
 	).(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_2'?
-		".eo-wbc-container>.ui.steps .step:not(:first-child):before{
+		"
+		.ui.container.unstackable.steps
+		{
+			padding:0px;
+		}
+		.eo-wbc-container.container:not(.filters) .ui.steps .step .column:first-child{
+			max-width:1em !important; 
+		}
+		.ui.steps .step .title~.description {
+			margin-top: .25em !important;
+		}
+		.eo-wbc-container.container .ui.steps .step{
+			padding-left: 1.5em !important;
+		}
+		.eo-wbc-container>.ui.steps .step:not(:first-child):before{
 			content: '';
 			border-top: 3.6em solid transparent;		    
 		    border-bottom: 3.6em solid transparent;
-		    border-left: 1em solid white;
+		    border-left: 1em solid #cfcfcf !important;
 		    height: 0px;
 		    width: 0px;
 		    left:-1px;

@@ -646,6 +646,68 @@ class EOWBC_Filter_Widget {
 
 					</style>
 				<?php
+				if(!wp_is_mobile()){
+					?>
+					<style type="text/css">
+		.eo-wbc-container.filters.container.ui.form .field:last-child{ margin-bottom: 0em !important; 
+		} 
+		.ui.container:not(.fluid){ 
+			width:100% !important; margin:0px !important; 
+		} 
+		#products_table{
+			margin:0px !important
+		}
+		#eo_wbc_filter_table th{
+			text-align: center;
+		}		
+		.eo-wbc-container .wide.column>.wide.field.text_slider{ 
+			margin-top: 0.4em !important; 
+		}
+		
+		.eo-wbc-container{ 
+			padding:0 !important; 
+		}
+		i.icon.question.circle{
+			margin-left:0.25em;
+		}
+		.eo-wbc-container.filters.container.ui.form>.ui.segments>.ui.segment>.ui.grid.container>.wide.column:nth-of-type(odd){
+			padding-left:0px !important;
+		}
+		.eo-wbc-container.filters.container.ui.form>.ui.segments,.eo-wbc-container.filters.container.ui.form>.ui.segments>.ui.segment{ 
+			box-shadow: none !important; 
+		}
+
+		#reset_filter{
+			left:1em !important;
+		}
+
+		.ui.labeled.ticked.range.slider.wbc ul.labels{
+			z-index:9999;
+		}
+
+		.ui.labeled.ticked.range.slider .labels .label::after{
+			top:-1.6em !important;
+			width:2px;
+			height:1.55em;
+			background-color:white !important;
+		}
+
+		.ui.labeled.ticked.range.slider .labels{
+			bottom: -20% !important;
+		}
+
+		.eo-wbc-container.filters>.segments>.ui.segment{
+			padding-left:0 !important;
+		padding-right:0 !important;
+		}
+		.container.filters>.segments>.ui.segment .wide.column{
+			padding-right:0px !important;
+		}
+
+					</style>
+					<?php
+				}
+
 				echo ob_get_clean();
 			}
 
