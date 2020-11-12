@@ -24,7 +24,7 @@ if (!defined('ABSPATH')) exit;
 //load autoloader file
 //load error detection and handler class
 
-if(!class_exists('Woo_Bundle_Choice')) {
+if(!class_exists('Woo_Bundle_Choice') ) {
 
 	class Woo_Bundle_Choice {
 
@@ -144,6 +144,7 @@ if(!class_exists('Woo_Bundle_Choice')) {
 		public function init() {
 
 			do_action( 'before_eowbc_load' );
+			
 			\eo\wbc\controllers\admin\Customizer::instance()->run();
 			$bootstrap = eo\wbc\WooCommerce_Bundle_Choice_Bootstrap::instance()->run();
 
@@ -155,7 +156,10 @@ if(!class_exists('Woo_Bundle_Choice')) {
 
 
 	add_action( 'plugins_loaded', function() {
-		wbc()->construct_init();
+		if(function_exists('wc')){
+			wbc()->construct_init();
+		}
+		
 	});
 
 	if(!function_exists('wbc')){

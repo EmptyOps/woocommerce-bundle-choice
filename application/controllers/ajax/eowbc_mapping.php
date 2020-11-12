@@ -15,6 +15,10 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_mapping')) {
 		$res = eo\wbc\model\admin\Eowbc_Mapping::instance()->delete( wbc()->sanitize->post_array("ids"), wbc()->sanitize->post("saved_tab_key") );
 	} elseif(isset($_POST['sub_action']) and wbc()->sanitize->post('sub_action') == 'fetch') {
 		$res = eo\wbc\model\admin\Eowbc_Mapping::instance()->fetch_map($res);
+	} elseif (isset($_POST['sub_action']) and wbc()->sanitize->post('sub_action') == 'fetch_product') {
+		
+		$res = \eo\wbc\model\Search_Product::instance()->get_ajax();
+
 	} else {
 		$res = eo\wbc\model\admin\Eowbc_Mapping::instance()->save( eo\wbc\controllers\admin\menu\page\Mapping::get_form_definition() );
     }

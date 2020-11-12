@@ -45,9 +45,12 @@ class Category {
 
                 wbc()->theme->load('css','category');
                 wbc()->theme->load('js','category');
-            
-                /*Hide the category Title*/
-                add_filter( 'woocommerce_page_title','__return_false');
+                
+                if(!($this->is_shop_cat_filter===true or $this->is_shortcode_filter)) {
+                    /*Hide the category Title*/
+                    add_filter( 'woocommerce_page_title','__return_false');
+                }
+
 
                 /*Hide sidebar and make content area full width.*/
                 if(apply_filters('eowbc_filter_sidebars_widgets',true)){

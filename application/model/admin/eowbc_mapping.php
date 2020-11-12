@@ -62,7 +62,13 @@ class Eowbc_Mapping extends Eowbc_Model {
 							}
 							
 							if( $rvk == "eo_wbc_first_category" ) {
-								if( wbc()->common->nonZeroEmpty($rv["eo_wbc_first_category_range"]) || wbc()->common->nonZeroEmpty($rv["range_first"]) ) {
+								if( strpos($rvv, 'pid_')==0 ){
+									
+									$product = wbc()->wc->get_product((int)substr($rvv,4));
+
+									$row[] = array( 'val' => ((is_wp_error($product) or empty($product))? '':$product->get_name()),'link'=>1,'edit_id'=>$rk);	
+								}
+								elseif( wbc()->common->nonZeroEmpty($rv["eo_wbc_first_category_range"]) || wbc()->common->nonZeroEmpty($rv["range_first"]) ) {
 									$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv);
 									$row[] = array( 'val' => !is_array($val)?$val:$val["label"] ,'link'=>1,'edit_id'=>$rk);	
 								}
@@ -73,7 +79,13 @@ class Eowbc_Mapping extends Eowbc_Model {
 								}	
 							}
 							else if( $rvk == "eo_wbc_second_category" ) {
-								if( wbc()->common->nonZeroEmpty($rv["eo_wbc_second_category_range"]) || wbc()->common->nonZeroEmpty($rv["range_second"]) ) {
+								if( strpos($rvv, 'pid_')==0 ){
+									
+									$product = wbc()->wc->get_product((int)substr($rvv,4));
+
+									$row[] = array( 'val' => ((is_wp_error($product) or empty($product))? '':$product->get_name()));	
+
+								} elseif( wbc()->common->nonZeroEmpty($rv["eo_wbc_second_category_range"]) || wbc()->common->nonZeroEmpty($rv["range_second"]) ) {
 									$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv);
 									$row[] = array( 'val' => !is_array($val)?$val:$val["label"] );
 								}

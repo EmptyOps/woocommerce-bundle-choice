@@ -229,7 +229,7 @@ class EOWBC_Filter_Widget {
 						background-position: center center;
 						background-repeat: no-repeat;	    				    
 					    margin: 0;
-					    position:fixed;				    
+					    position:fixed !important;				    
 					    top:".((!empty(wbc()->options->get_option('appearance_filters','appearance_filters_non_block_loader')))?"50%":"0")." !important;
 					    left:".((!empty(wbc()->options->get_option('appearance_filters','appearance_filters_non_block_loader')))?"50%":"0")." !important;			    
 					    z-index: 10000;				    				    

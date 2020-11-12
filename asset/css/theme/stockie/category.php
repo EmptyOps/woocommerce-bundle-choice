@@ -6,5 +6,8 @@
 		margin: 0px !important;
 		width: 100% !important;
 	}
+	.woo_c-products .wc-product-title-wrap{
+		visibility: visible; !important;
+	}
 
 </style>

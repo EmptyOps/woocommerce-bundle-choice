@@ -60,6 +60,12 @@ class WBC_WC {
         return function_exists('wc_get_product')?wc_get_product($product_id):WC()->product_factory->get_product($product_id,array());
     }
 
+    public function get_product($product_id){
+        // wrapping up long name to short name, the wrapping up
+        // function is to be removed in future.
+        return $this->eo_wbc_get_product($product_id);
+    }
+
     public static function eo_wbc_create_attribute($args){
 
         if(function_exists('wc_create_attribute')) {

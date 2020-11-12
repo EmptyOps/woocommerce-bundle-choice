@@ -19,19 +19,22 @@ class Customizer {
 		// no implementation
 	}
 
+	public function customizer_assets(){
+		wp_enqueue_style( 'eowbc_customizer_css', constant('EOWBC_ASSET_URL').'css/'.stripslashes('customizer.css') );
+
+		wp_enqueue_script('eowbc_selector_js',constant('EOWBC_ASSET_URL').'js/'.stripslashes('rev_select.js'), array( 'jquery'), '', true );
+
+		wp_enqueue_script('eowbc_customizer_js',constant('EOWBC_ASSET_URL').'js/'.stripslashes('customizer.js'), array( 'jquery'), '', true );
+	}
+
 	public static function run() {
+
 		global $wp_customize;
 	    if( ! defined( 'DOING_AJAX' ) && (!function_exists('is_ajax') || !is_ajax()) && empty(wbc()->sanitize->get("wc-ajax")) and !empty($wp_customize)) {
-	    	//wbc()->load->asset('js','customizer');
-	        ob_start();
-	        ?>        
-	            <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	            <link rel="stylesheet" type="text/css" href="<?php echo constant('EOWBC_ASSET_URL').'css/'.stripslashes('customizer.css'); ?>"/>	            
-	            <script src="<?php echo constant('EOWBC_ASSET_URL').'js/'.stripslashes('rev_select.js'); ?>"></script>
-	            <script src="<?php echo constant('EOWBC_ASSET_URL').'js/'.stripslashes('customizer.js'); ?>"></script>
+	    	
+	    	add_action('admin_enqueue_scripts',array(self::$_instance,'customizer_assets'));	   
 
-	        <?php
-	        echo ob_get_clean();        
+            add_action('wp_enqueue_scripts',array(self::$_instance,'customizer_assets'));	   
 	    }
 	    
 	    //wbc()->load->asset('css','customizer');
@@ -70,6 +73,7 @@ class Customizer {
 	            'type'    => 'button', 
 	            'input_attrs' => array('class' => 'button button-primary'),
 	        ));
+	        return $wp_customize;
 	    });
 	}
 }

@@ -226,9 +226,11 @@ class Cart {
             });
         }
 
+
         
         // if our car is empty then return.
         $maps=wbc()->session->get('EO_WBC_MAPS');
+        
         if(empty($maps)) return;        
 
         //run the cart service.
