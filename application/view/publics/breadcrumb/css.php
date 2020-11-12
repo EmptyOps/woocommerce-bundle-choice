@@ -151,7 +151,7 @@
 			padding:0px;
 		}
 		.eo-wbc-container.container:not(.filters) .ui.steps .step .column:first-child{
-			max-width:1em !important; 
+			max-width:2em !important; 
 		}
 		.ui.steps .step .title~.description {
 			margin-top: .25em !important;

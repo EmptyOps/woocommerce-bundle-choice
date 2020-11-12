@@ -620,6 +620,12 @@ class EOWBC_Filter_Widget {
 						.eo-wbc-container.filters.container.ui.form .field:last-child{
 							margin-bottom: -1.4em;
 						}
+
+						.eo-wbc-container.filters.container.ui.form .field:last-child(:nth-of-type(even)){
+							position: absolute;
+							right: 0;
+						}
+
 						.eo_wbc_filter_icon_select div,.ui.segment:not(.bottom_filter_segment) .eo_wbc_filter_icon:hover:not(.none_editable) div{ visibility: unset !important; 
 						}
 						.eo-wbc-container.filters.container.ui.form .ui.header{
@@ -643,7 +649,13 @@ class EOWBC_Filter_Widget {
 							margin-top: 0.5em !important;
 							margin-bottom: auto !important;
 						}
+						.eo-wbc-container.filters>.segments>.ui.segment{
+							padding-bottom: 2em !important;
+						}
 
+						.eo-wbc-container.filters.ui.form .three.wide.field:nth-child(even){
+							text-align: right !important;
+						}
 					</style>
 				<?php
 				if(!wp_is_mobile()){
@@ -698,7 +710,7 @@ class EOWBC_Filter_Widget {
 
 		.eo-wbc-container.filters>.segments>.ui.segment{
 			padding-left:0 !important;
-		padding-right:0 !important;
+			padding-right:0 !important;
 		}
 		.container.filters>.segments>.ui.segment .wide.column{
 			padding-right:0px !important;
