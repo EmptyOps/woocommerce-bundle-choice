@@ -99,7 +99,7 @@ function eo_wbc_filter_render_html(data) {
 		});
 		return false;
 	}	
-
+	
 	if(typeof(jQuery.fn.eo_wbc_filter_change)=="undefined" || jQuery.fn.eo_wbc_filter_change==undefined){		
 		jQuery.fn.eo_wbc_filter_change = jQuery.fn.eo_wbc_filter_change_native;
 	}

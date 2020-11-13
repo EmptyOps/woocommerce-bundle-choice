@@ -45,12 +45,9 @@ class Category {
 
                 wbc()->theme->load('css','category');
                 wbc()->theme->load('js','category');
-                
-                if(!($this->is_shop_cat_filter===true or $this->is_shortcode_filter)) {
-                    /*Hide the category Title*/
-                    add_filter( 'woocommerce_page_title','__return_false');
-                }
-
+            
+                /*Hide the category Title*/
+                add_filter( 'woocommerce_page_title','__return_false');
 
                 /*Hide sidebar and make content area full width.*/
                 if(apply_filters('eowbc_filter_sidebars_widgets',true)){
@@ -181,7 +178,7 @@ class Category {
             add_action('woocommerce_archive_description',array($this,'add_filter_widget'),130);
         } else {
 
-            add_action('woocommerce_before_shop_loop',array($this,'add_filter_widget'),1);
+            add_action('woocommerce_before_shop_loop',array($this,'add_filter_widget'),10);
         }
 
         if( $this->is_shortcode_filter ) {
