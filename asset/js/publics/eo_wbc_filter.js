@@ -71,7 +71,7 @@ function eo_wbc_filter_render_html(data) {
 	}
 }
 
-if(eo_wbc_object.disp_regular=='1'){
+/*if(eo_wbc_object.disp_regular=='1'){*/
 	
 	jQuery.fn.eo_wbc_filter_change_native= function(init_call=false) {				
 	//flag indicates if to show products in tabular view or woocommerce's default style.		
@@ -103,7 +103,7 @@ if(eo_wbc_object.disp_regular=='1'){
 	if(typeof(jQuery.fn.eo_wbc_filter_change)=="undefined" || jQuery.fn.eo_wbc_filter_change==undefined){		
 		jQuery.fn.eo_wbc_filter_change = jQuery.fn.eo_wbc_filter_change_native;
 	}
-}
+/*}*/
 
 jQuery(document).ready(function($){
 

@@ -936,8 +936,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							'd_fconfig_add_help_text'=>array(
 								'label'=>'Help Text',
 								'type'=>'textarea',
-								'value'=>'',
-								'sanitize'=>'sanitize_text_field',
+								'value'=>'',								
 								'attr'=>array('style="width:100%;"'),
 								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
@@ -1268,8 +1267,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							's_fconfig_add_help_text'=>array(
 								'label'=>'Help Text',
 								'type'=>'textarea',
-								'value'=>'',
-								'sanitize'=>'sanitize_text_field',
+								'value'=>'',								
 								'attr'=>array('style="width:100%;"'),
 								'is_id_as_name'=>true,
 								'class'=>array('fluid'),

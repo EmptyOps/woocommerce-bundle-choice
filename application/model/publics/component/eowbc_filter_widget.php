@@ -349,7 +349,15 @@ class EOWBC_Filter_Widget {
 					}
 
 					#help_modal .close:before{
-						content: 'Close  \\f00d';
+						content: 'Close  \\f00d  ';
+						white-space: pre;
+					}
+					#help_modal .close{
+						z-index: 99 !important;
+					}
+
+					.ui.dimmer.modals{
+						z-index: 9999 !important;
 					}
 
 					#advance_filter,#apply_filter,#reset_filter{
@@ -655,6 +663,22 @@ class EOWBC_Filter_Widget {
 
 						.eo-wbc-container.filters.ui.form .three.wide.field:nth-child(even){
 							text-align: right !important;
+						}
+						.eo-wbc-container.filters.container.ui.form>.ui.segments>.ui.segment>.ui.grid.container>.wide.column:nth-of-type(even){
+							text-align: right;
+						}
+						.eo-wbc-container.filters.container.ui.form>.ui.segments>.ui.segment>.ui.grid.container>.wide.column:nth-of-type(even)>.wide.field.twelve{
+							position: absolute;
+							right: 0;
+							text-align: left !important;
+						}
+
+						#help_modal{
+							border-radius:0 !important;
+							font-family: Avenir !important;
+						}
+						#help_modal .header{
+							border-bottom:none !important;
 						}
 					</style>
 				<?php
