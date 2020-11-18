@@ -6,7 +6,7 @@
 <?php else: ?>
 <style type="text/css">
 	#content{ 
-		max-width:98% !important; 
+		max-width:90% !important; 
 	}
 </style>
 <?php endif; ?>

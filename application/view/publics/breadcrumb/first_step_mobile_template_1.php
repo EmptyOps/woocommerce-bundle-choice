@@ -17,11 +17,13 @@
             border-left: 1em solid white;
             height: 0px;
             width: 0px;
-            left:-1px;
+            left:-2px;
             top: -0.1em;
             position: absolute;         
     } 
     .unstackable.ui.steps .step.active{
+        border-left: 0px !important;
+        border-right: 0px !important;
         background-color: <?php _e(wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active','#dbdbdb')); ?>;; 
     }
     .unstackable.ui.steps .step.active+.step:before{
@@ -78,6 +80,20 @@
     .unstackable.ui.steps{
         height:7em;         
     }
+
+    .ui.steps .step .title{
+        font-size: 1em !important;
+    }
+
+    @media screen and (max-width: 410px) {
+        .unstackable.ui.steps .step.active::after{
+            right: -2.6em !important;
+        }
+        .unstackable.ui.steps .step:after{
+            right: -2.6em !important;   
+        }
+    }
+
 </style>
  <div class="step <?php echo (($step==$order)?'active ':(($step>$order)?'completed ':(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb)?'':'disabled'))); ?>" style="">            
     <div class="ui equal width middle aligned grid" style="width: 100%;padding-top: 0px;text-transform:none;font-family: '<?php echo wbc()->options->get_option('appearance_filters','header_font','ZapfHumanist601BT-Roman'); ?>';">        

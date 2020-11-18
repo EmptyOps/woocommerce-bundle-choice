@@ -12,7 +12,7 @@
 	</div>	
 
 	<div style="display: inline-block;" class="field twelve ui wide" data-reset="reset_icon(new Event('click'),'<?php echo $term->slug; ?>')">
-		<div class="ui equal width center aligned grid" style="text-align: center;margin-top: 0px" data-filter-slug="<?php echo $term->slug; ?>">				
+		<div class="ui equal width center aligned grid" style="text-align: center;margin-top: 0px;margin-left: 0.5em;" data-filter-slug="<?php echo $term->slug; ?>">				
 			<?php foreach ($list as $filter_icon): ?>
 				<div style="padding: 0px;" title="<?php $filter_icon["name"]; ?>"
 					class="eo_wbc_filter_icon column <?php echo $non_edit ? 'none_editable':'' ?> 

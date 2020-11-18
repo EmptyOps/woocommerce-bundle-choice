@@ -97,6 +97,11 @@ function eo_wbc_filter_render_html(data) {
 				eo_wbc_filter_render_html(data);
 			}
 		});
+		
+		if(!init_call){
+			jQuery(".reset_all_filters.mobile_2").removeClass('mobile_2_hidden');
+		}
+
 		return false;
 	}	
 
@@ -122,8 +127,9 @@ jQuery(document).ready(function($){
 	jQuery(document).on('click',".reset_all_filters",function(){
         jQuery("[data-reset]").each(function(e){
             eval(jQuery(this).data('reset'));
-        })
+        });
         jQuery.fn.eo_wbc_filter_change();
+        jQuery(".reset_all_filters.mobile_2").addClass('mobile_2_hidden');
         return false;
     })  
 

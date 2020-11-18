@@ -8,6 +8,7 @@
 <div class="<?php echo $width_class; ?>">
 	<p style="display: inline-block;margin-top: 0.25em;"class="ui three wide field num_slider">
 		<span class="ui header">Price</span>
+		<span class="ui grey text" style="cursor: pointer;"><i class="question circle outline icon" data-help="<h2>Price</h2><br/>All of our prices are in <?php _e(get_woocommerce_currency()); ?>"></i></span>
 	</p>
 	<div style="display: inline-block;" class="field twelve ui wide">
 

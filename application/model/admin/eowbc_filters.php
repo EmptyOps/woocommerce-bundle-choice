@@ -321,7 +321,7 @@ class Eowbc_Filters extends Eowbc_Model {
 				    		$table_data[$fk] = (int)wbc()->sanitize->post($fk); 	
 			    		}
 			    		else {
-			    			$table_data[$fk] = ( isset($_POST[$fk]) ? wbc()->sanitize->post($fk) : '' ); 
+			    			$table_data[$fk] = ( isset($_POST[$fk]) ? wbc()->sanitize->_post($fk) : '' ); 
 			    		}
 			    	}
 			    	else {			    		

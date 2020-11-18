@@ -9,6 +9,7 @@
 	<p style="display:table-cell;vertical-align: top;width: 16vw !important;
 "class="ui three wide field num_slider">
 		<span class="ui header">Price</span>
+		<span class="ui grey text" style="cursor: pointer;color: #a5a5a5db;;"><i class="question circle icon" data-help="<h2>Price</h2><br/>All of our prices are in <?php _e(get_woocommerce_currency()); ?>"></i></span>
 	</p>
 	<div style="display:table-cell;width: 84vw !important;" class="field twelve ui wide">
 		<div class="ui range slider text_slider wbc" id="text_slider_price" data-min="<?php echo $min; ?>" data-max="<?php echo $max; ?>" data-slug="price" style="padding-bottom: 0px !important" data-reset="reset_price(new Event('click'),'<?php echo $min; ?>','<?php echo $max; ?>')" data-sep="<?php _e($seprator); ?>" data-prefix="<?php _e($prefix); ?>" data-postfix="<?php _e($postfix); ?>"></div>

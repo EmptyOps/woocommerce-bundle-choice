@@ -970,7 +970,21 @@ if ( ! class_exists( 'Filters' ) ) {
 								'options'=>array('1'=>' '),
 								'is_id_as_name'=>true,
 								'class'=>array()
-							),							
+							),
+							'd_fconfig_prefix'=>array(
+								'label'=>'Prefix string to the numeric slider',
+								'type'=>'text',
+								'value'=>'',								
+								'is_id_as_name'=>true,
+								'class'=>array()
+							),
+							'd_fconfig_postfix'=>array(
+								'label'=>'Postfix string to the numeric slider',
+								'type'=>'text',
+								'value'=>'',								
+								'is_id_as_name'=>true,
+								'class'=>array()
+							),
 							'config_advance_end'=>array(
 								'type'=>'accordian',
 								'section_type'=>'end'
@@ -1299,6 +1313,20 @@ if ( ! class_exists( 'Filters' ) ) {
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
 								'options'=>array('1'=>' '),
+								'is_id_as_name'=>true,
+								'class'=>array()
+							),
+							's_fconfig_prefix'=>array(
+								'label'=>'Prefix string to the numeric slider',
+								'type'=>'text',
+								'value'=>'',								
+								'is_id_as_name'=>true,
+								'class'=>array()
+							),
+							's_fconfig_postfix'=>array(
+								'label'=>'Postfix string to the numeric slider',
+								'type'=>'text',
+								'value'=>'',								
 								'is_id_as_name'=>true,
 								'class'=>array()
 							),							

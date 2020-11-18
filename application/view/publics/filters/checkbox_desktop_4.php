@@ -11,7 +11,7 @@
 			<?php endif; ?>			
 		</p>
 		<div style="display: inline-block;" class="ui twelve wide field">
-			<div class="ui tiny form" data-reset="reset_checkbox(new Event('click'),'.checklist_<?php echo $filter['slug'] ?>')">
+			<div class="ui tiny form" data-reset="reset_checkbox(new Event('click'),'.checklist_<?php echo $filter['slug'] ?>')" style="margin-left: 0.5em;">
 
 				<?php foreach ($filter['list'] as $term) : ?>
 					<div class="ui checkbox checked">

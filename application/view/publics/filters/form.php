@@ -281,7 +281,7 @@
 						//switch to advance filter.
 						$(primary_filter).transition('fly right',{duration:0});	
 						$(secondary_filter).transition('fly left',{duration:700});
-						$(this).html('<i class="ui icon chevron left" style="position: absolute;left: 1em;"></i><?php _e('Standard Search','woo-bundle-choice'); ?>');
+						$(this).html('<i class="ui icon chevron left" style="position: absolute;left: 1em;"></i><?php _e('Standard Filters','woo-bundle-choice'); ?>');
 						$(this).css('text-align','right');
 					} else{
 						//switch to basic filter.
