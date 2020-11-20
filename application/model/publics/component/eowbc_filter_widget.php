@@ -2595,13 +2595,15 @@ class EOWBC_Filter_Widget {
 							if(!is_wp_error($non_adv_ordered_filter) and !empty($non_adv_ordered_filter)){
 								
 								foreach ($non_adv_ordered_filter as $naof_key => $noaf_filter) {
-									if(!$icon_filter_shown and isset($noaf_filter['type']) and $noaf_filter['type']==0 and isset($noaf_filter['label']) and $noaf_filter['label']==__('Shape','woo-choice-plugin') and isset($noaf_filter['input']) and $noaf_filter['input']=='icon_text') {
+																		
+									if(!$icon_filter_shown and isset($noaf_filter['type']) and $noaf_filter['type']==0 and isset($noaf_filter['label']) and in_array($noaf_filter['label'],array(__('Shape','woo-choice-plugin'),__('Ring Style','woo-choice-plugin'),__('Style','woo-choice-plugin'),__('Metal','woo-choice-plugin'))) and isset($noaf_filter['input']) and in_array($noaf_filter['input'],array('icon_text','icon'))) {
+										
 										$noaf_filter['desktop']=0;
 										$noaf_filter['outer_container']=true;
 										$this->eo_wbc_filter_ui_icon($this->__prefix,$noaf_filter);
 
 										unset($non_adv_ordered_filter[$naof_key]);
-										$icon_filter_shown = true;
+										//$icon_filter_shown = true;
 									} elseif (!$price_filter_shown and isset($noaf_filter['type']) and $noaf_filter['type']=='price_filter') {
 
 										$this->slider_price(0);
@@ -2618,13 +2620,15 @@ class EOWBC_Filter_Widget {
 						?>
 
 						<div class="" style="padding-left: 1em;">
+							<?php if(!empty($non_adv_ordered_filter)): ?>
 							<div class="ui button primary circular" id="primary_filter" style="margin-right: 0;width: max-content !important;"><?php _e('Filters','woo-bundle-choice'); ?>&nbsp;&nbsp;<i class="ui icon chevron up"></i></div>
-							<span class="reset_all_filters mobile_2 mobile_2_hidden" style="position: absolute; right: 2em; bottom: 0.5em;">X Reset All</span>
+							<?php endif; ?>
+							<span class="reset_all_filters mobile_2 mobile_2_hidden" style="float: right; margin-top: 0.5em;">X Reset All</span>
 						</div>
 						
 						<?php
 						} ?>
-						<div class="ui segments">    			
+						<div class="ui segments" style="clear: both;">    			
 				<?php
 				$this->load_mobile($non_adv_ordered_filter, $adv_ordered_filter);
 				?>		</div>

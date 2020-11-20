@@ -24,7 +24,7 @@
 		    </div>
 		  </div>	  
 		</div>				    
-  		<div data-prefix="<?php _e($prefix); ?>" data-postfix="<?php _e($postfix); ?>" class="ui range slider text_slider wbc" id="text_slider_<?php echo $filter['slug'] ?>" data-min="<?php echo $filter['min_value']['name']; ?>" data-max="<?php echo $filter['max_value']['name']; ?>" data-slug="<?php echo $filter['slug'] ?>" data-reset="reset_slider(new Event('click'),'<?php echo $filter['slug'] ?>','<?php echo $filter['min_value']['name']; ?>','<?php echo $filter['max_value']['name']; ?>')"></div>
+  		<div data-sep="<?php _e($filter['seprator']); ?>" data-prefix="<?php _e($prefix); ?>" data-postfix="<?php _e($postfix); ?>" class="ui range slider text_slider wbc" id="text_slider_<?php echo $filter['slug'] ?>" data-min="<?php echo $filter['min_value']['name']; ?>" data-max="<?php echo $filter['max_value']['name']; ?>" data-slug="<?php echo $filter['slug'] ?>" data-reset="reset_slider(new Event('click'),'<?php echo $filter['slug'] ?>','<?php echo $filter['min_value']['name']; ?>','<?php echo $filter['max_value']['name']; ?>')"></div>
   	</div>		
 	<?php
 	
