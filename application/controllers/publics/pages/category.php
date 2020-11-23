@@ -102,6 +102,9 @@ class Category {
             $cart=(array)json_decode($cart);
             
             if(is_array($cart) OR is_object($cart)) {
+                if(empty($cart['quantity'])){
+                    $cart['quantity'] = 1;
+                }
                 
                 $variation_data = array();
                 foreach($cart as $cart_key=>$cart_value){
@@ -173,14 +176,19 @@ class Category {
 
     public function eo_wbc_add_filters() {
         //Add product filter widget...
-        $this->filter_showing_status = false;
+        /*$this->filter_showing_status = false;
         if(has_action('woocommerce_archive_description', false )){
             add_action('woocommerce_archive_description',array($this,'add_filter_widget'),130);
         } else {
 
-            add_action('woocommerce_before_shop_loop',array($this,'add_filter_widget'),10);
-        }
+*/              
+            add_filter('archive_template',function($path){
+                var_dump($path);
+            });
 
+            add_action('woocommerce_before_shop_loop',array($this,'add_filter_widget'),1);
+        /*}
+*/
         if( $this->is_shortcode_filter ) {
             \eo\wbc\model\publics\component\EOWBC_Filter_Widget::instance()->init(false,$this->filter_prefix,$this->is_shortcode_filter);
         }
@@ -190,10 +198,15 @@ class Category {
     public function eo_wbc_add_breadcrumb()
     {           
         //Add Breadcumb at top....      
-        add_action( 'woocommerce_archive_description',function(){     
+       /* add_action( 'woocommerce_archive_description',function(){     
             wbc()->load->model('publics/component/eowbc_breadcrumb');       
             echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_add_breadcrumb(wbc()->sanitize->get('STEP'),wbc()->sanitize->get('BEGIN')).'<br/><br/>';
-        }, 120);
+        }, 120);*/
+
+        add_action( 'woocommerce_before_shop_loop',function(){     
+            wbc()->load->model('publics/component/eowbc_breadcrumb');       
+            echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_add_breadcrumb(wbc()->sanitize->get('STEP'),wbc()->sanitize->get('BEGIN')).'<br/><br/>';
+        }, 0);
     }
 
     public function eo_wbc_render()

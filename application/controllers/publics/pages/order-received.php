@@ -66,8 +66,8 @@ class Order_Received extends \WC_Order_Item_Product {
             $sets=(json_decode($sets['order_map']));
             
             foreach ($items as $item_key => $item_value) {
-                
-                foreach ($sets as $set_key => $set_value) {
+                if(!empty($sets) and is_array($sets) or is_object($sets)){
+                    foreach ($sets as $set_key => $set_value) {
                     
                     //$set_value = (array) $set_value;
                     $set_value[0] = (array)$set_value[0];
@@ -109,6 +109,7 @@ class Order_Received extends \WC_Order_Item_Product {
                             }
                         
                         }
+                    }
                     }
                 }
             }  

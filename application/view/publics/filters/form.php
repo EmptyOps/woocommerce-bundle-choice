@@ -142,6 +142,8 @@
 						_max = Number($(e).attr('data-max'));
 						_sep = $(e).attr('data-sep');
 
+						console.log(min,_min,max,_max);
+
 						if(typeof _labels != typeof undefined && _labels != false){
 							_labels=_labels.split(',');
 							_min=0;
@@ -193,6 +195,17 @@
 					    	<?php if(empty(wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
 					    	jQuery.fn.eo_wbc_filter_change();
 					    	<?php endif; ?>
+					    } else if( min==_min && max==_max ){
+					    	if($(this).attr('data-slug')!='price'){
+						    	//Action of notifying filter change when changes are done.						    	
+					    		if($("[name='_attribute']").val().includes($(this).attr('data-slug'))) {
+					    			
+					    			_values=$("[name='_attribute']").val().split(',')
+					    			_index=_values.indexOf($(this).attr('data-slug'))
+					    			_values.splice(_index,1)
+					    			$("[name='_attribute']").val(_values.join());
+					    		}
+					    	}
 					    }
 					    
 					    $(this).data('prev_val_min',min);						    

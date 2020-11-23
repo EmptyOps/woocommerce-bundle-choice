@@ -191,6 +191,12 @@ function reset_slider(e,selector,first,second){
 	e.preventDefault();
 	e.stopPropagation()
 	jQuery(".ui.slider[data-slug='"+selector+"']").slider('set rangeValue',first,second);
+	if($("[name='_attribute']").val().includes(selector)) {					    			
+		_values=$("[name='_attribute']").val().split(',')
+		_index=_values.indexOf(selector)
+		_values.splice(_index,1)
+		$("[name='_attribute']").val(_values.join());
+	}
 	return false;
 }
 

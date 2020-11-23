@@ -46,7 +46,7 @@ if ( ! class_exists( 'Appearance' ) ) {
 										),
 									),
 
-								), \eo\wbc\model\admin\Form_Builder::instance()->ui_controls_collection( "button", "Button", $hide_defaults=array("font","bordercolor"), $additional_fields=array(), $info_text_overrides=array(), $default_values=array("text"=>__("Start With",'woo-bundle-choice')) ), 
+								), \eo\wbc\model\admin\Form_Builder::instance()->ui_controls_collection( "button", "Button", $hide_defaults=array("font","bordercolor"), $additional_fields=array(), $info_text_overrides=array(),"", $default_values=array("text"=>__("Start With",'woo-bundle-choice')) ), 
 								array( 
 									'wid_btns_submit_btn'=>array(
 										'label'=>eowbc_lang('Save'),
