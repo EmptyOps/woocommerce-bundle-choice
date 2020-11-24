@@ -254,7 +254,7 @@ class Cart {
 
         add_filter('woocommerce_cart_item_thumbnail',function( $image, $cart_item, $cart_item_key) {        
             
-            if(!empty($cart_item['datas'])){
+            if(!empty($cart_item['datas']) and !empty($cart_item['datas']['SECOND'])) {
                return $cart_item['datas']['FIRST']->get_image().$cart_item['datas']['SECOND']->get_image();
             } else {
                 return $image;
@@ -263,7 +263,7 @@ class Cart {
         },99,3);
 
         add_filter('woocommerce_cart_item_name',function($name, $cart_item, $cart_item_key ){
-            if(!empty($cart_item['datas'])){
+            if(!empty($cart_item['datas']) and !empty($cart_item['datas']['SECOND'])) {
                return $cart_item['datas']['FIRST']->get_name().'<br/>'.$cart_item['datas']['SECOND']->get_name();
             } else {
                 return $name;
@@ -271,7 +271,7 @@ class Cart {
         },10,3);
 
         add_filter( 'woocommerce_cart_item_price',function($price,$cart_item, $cart_item_key){
-            if(!empty($cart_item['datas'])){                
+            if(!empty($cart_item['datas']) and !empty($cart_item['datas']['SECOND'])) {                
                 return WC()->cart->get_product_price( $cart_item['datas']['FIRST'] ).'<br/>'.WC()->cart->get_product_price( $cart_item['datas']['SECOND'] );
             } else {
                 return $price;
@@ -282,7 +282,7 @@ class Cart {
 
         add_filter( 'woocommerce_cart_item_quantity',function($product_quantity_first, $cart_item_key, $cart_item){
 
-            if(!empty($cart_item['datas'])){
+            if(!empty($cart_item['datas']) and !empty($cart_item['datas']['SECOND'])) {
 
                 return $cart_item['quantity'].'<br/>'.$cart_item['quantities']['SECOND'];
             } else {
@@ -294,7 +294,7 @@ class Cart {
 
         add_filter( 'woocommerce_cart_item_subtotal',function($total, $cart_item, $cart_item_key){
 
-            if(!empty($cart_item['datas'])){
+            if(!empty($cart_item['datas']) and !empty($cart_item['datas']['SECOND'])){
                 $price = $cart_item['datas']['FIRST']->get_price();
                 $quantity = $cart_item['quantities']['FIRST'];
                 if ( $cart_item['datas']['FIRST']->is_taxable() ) {

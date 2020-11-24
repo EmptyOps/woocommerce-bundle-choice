@@ -17,7 +17,7 @@
             border-left: 1em solid white;
             height: 0px;
             width: 0px;
-            left:-2px;
+            left:-1px;
             top: -0.1em;
             position: absolute;         
     } 

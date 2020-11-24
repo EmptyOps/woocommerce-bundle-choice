@@ -237,13 +237,21 @@
 						}
 
 						if(prefix!=='' && typeof(prefix)!==typeof(undefined) && prefix.hasOwnProperty('length')){
-							min_value = min_value.slice(prefix.length);
-							max_value = max_value.slice(prefix.length);
+							if(min_value.includes(prefix)){
+								min_value = min_value.slice(prefix.length);
+							}
+							if(max_value.includes(prefix)){
+								max_value = max_value.slice(prefix.length);
+							}
 						}
 
 						if(postfix!=='' && typeof(postfix)!==typeof(undefined) && postfix.hasOwnProperty('length')){
-							min_value = min_value.slice(postfix.length);
-							max_value = max_value.slice(postfix.length);
+							if(min_value.includes(postfix)){
+								min_value = min_value.slice(postfix.length);
+							}
+							if(max_value.includes(postfix)){
+								max_value = max_value.slice(postfix.length);
+							}
 						}
 
 						$("#text_slider_"+$(e).attr('data-slug')).slider("set rangeValue",min_value,max_value);
