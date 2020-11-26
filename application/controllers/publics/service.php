@@ -33,20 +33,23 @@ class Service {
         add_action( 'woocommerce_update_cart_action_cart_updated',function() {
            if(is_array($_POST['cart']) and !empty($_POST['cart'])) {
                 $cart = wbc()->session->get('EO_WBC_MAPS');
-                foreach ($_POST['cart'] as $key => $value) {                    
-                    if(array_key_exists($key,$cart) and !empty(sanitize_text_field($value['qty']))) {
-                        foreach (wc()->cart->cart_contents as $cart_key=>$cart_item)
-                        {
-                            if($cart[$key]["FIRST"][0]==$cart_item["product_id"] && $cart[$key]["FIRST"][2]==$cart_item["variation_id"]){
-                                
-                                wc()->cart->set_quantity($cart_key,$cart_item['quantity']+( sanitize_text_field($value['qty'])-$cart[$key]['FIRST'][1]));
-                                $cart[$key]['FIRST'][1] = sanitize_text_field($value['qty']);
-                            }
-                        }               
+                if(is_array($cart)){
+                    foreach ($_POST['cart'] as $key => $value) {                    
+                        
+                        if(array_key_exists($key,$cart) and !empty(sanitize_text_field($value['qty']))) {
+                            foreach (wc()->cart->cart_contents as $cart_key=>$cart_item)
+                            {
+                                if($cart[$key]["FIRST"][0]==$cart_item["product_id"] && $cart[$key]["FIRST"][2]==$cart_item["variation_id"]){
+                                    
+                                    wc()->cart->set_quantity($cart_key,$cart_item['quantity']+( sanitize_text_field($value['qty'])-$cart[$key]['FIRST'][1]));
+                                    $cart[$key]['FIRST'][1] = sanitize_text_field($value['qty']);
+                                }
+                            }               
+                        }
                     }
-                }
-                wbc()->session->set('EO_WBC_MAPS',$cart);                   
-           }
+                    wbc()->session->set('EO_WBC_MAPS',$cart);
+                }                  
+            }
         },10);
         
         $features = array_filter(unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array()))));
@@ -138,7 +141,39 @@ class Service {
         return $discount;
     }        
 
-	function add_shortcode() {	
+	function add_shortcode() {
+
+        add_shortcode('eowbc-breadcrumb-category',function(){
+            $category_page = \eo\wbc\controllers\publics\pages\Category::instance();
+            if(
+            ((($category_page->eo_wbc_get_category()== wbc()->options->get_option('configuration','first_slug')
+              OR
+                $category_page->eo_wbc_get_category()== wbc()->options->get_option('configuration','second_slug'))) and !empty(wbc()->sanitize->get('EO_WBC')) )
+            ) {
+
+                wbc()->load->model('publics/component/eowbc_breadcrumb');       
+                echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_add_breadcrumb(wbc()->sanitize->get('STEP'),wbc()->sanitize->get('BEGIN')).'<br/><br/>';
+            } else {
+                echo '';    
+            }
+            
+        });
+
+        add_shortcode('eowbc-filter-category',function(){
+            $category_page = \eo\wbc\controllers\publics\pages\Category::instance();
+            if(                 
+                (($category_page->eo_wbc_get_category()==wbc()->options->get_option('configuration','first_slug') && wbc()->options->get_option_group('filters_d_fconfig',FALSE) )
+                 OR 
+                 ($category_page->eo_wbc_get_category()==wbc()->options->get_option('configuration','second_slug') && wbc()->options->get_option_group('filters_s_fconfig',FALSE) ))
+            ) {
+                $category_page->filter_showing_status = false;
+                $category_page->add_filter_widget();
+            } else{
+                echo '';    
+            }
+            
+        });
+
 		$this->enque_asset();
 		wbc()->load->model('publics/component/eowbc_filter_widget');
 		$widget = \eo\wbc\model\publics\component\EOWBC_Filter_Widget::instance();

@@ -114,7 +114,7 @@ class Category {
                 }   
 
                 //if product belongs to first target;
-                if (wbc()->options->get_option('configuration','first_slug')==$cart['eo_wbc_target']) {
+                if (!empty($cart['eo_wbc_target']) and wbc()->options->get_option('configuration','first_slug')==$cart['eo_wbc_target']) {
 
                     wbc()->session->set('EO_WBC_SETS',
                         array(
@@ -129,7 +129,7 @@ class Category {
                     ));
                 }
                 //if product belongs to second target;
-                elseif (wbc()->options->get_option('configuration','second_slug')==$cart['eo_wbc_target']) {
+                elseif (!empty($cart['eo_wbc_target']) and wbc()->options->get_option('configuration','second_slug')==$cart['eo_wbc_target']) {
 
                     wbc()->session->set('EO_WBC_SETS',
                         array(
@@ -165,30 +165,35 @@ class Category {
     }
 
     public function add_filter_widget(){
-        if(!$this->filter_showing_status){
+        if(empty($this->filter_showing_status)) {
             wbc()->load->model('publics/component/eowbc_filter_widget');          
             // if (class_exists('EO_WBC_Filter_Widget')) {
-                \eo\wbc\model\publics\component\EOWBC_Filter_Widget::instance()->init($this->is_shop_cat_filter,$this->filter_prefix,false);                                
+                \eo\wbc\model\publics\component\EOWBC_Filter_Widget::instance()->init($this->is_shop_cat_filter,$this->filter_prefix,false);                               
             // }
             $this->filter_showing_status = true;
         }
     }
 
     public function eo_wbc_add_filters() {
+        $this->filter_showing_status = false;
         //Add product filter widget...
         /*$this->filter_showing_status = false;
         if(has_action('woocommerce_archive_description', false )){
             add_action('woocommerce_archive_description',array($this,'add_filter_widget'),130);
         } else {
 
-*/              
-            add_filter('archive_template',function($path){
+        */          
+        
+
+
+       
+            /*add_filter('archive_template',function($path){
                 var_dump($path);
-            });
+            });*/
 
             add_action('woocommerce_before_shop_loop',array($this,'add_filter_widget'),1);
         /*}
-*/
+            */
         if( $this->is_shortcode_filter ) {
             \eo\wbc\model\publics\component\EOWBC_Filter_Widget::instance()->init(false,$this->filter_prefix,$this->is_shortcode_filter);
         }

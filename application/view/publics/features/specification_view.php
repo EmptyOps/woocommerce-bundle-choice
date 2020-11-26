@@ -65,6 +65,9 @@
         $product_data[] = array(__('Certificate','woo-bundle-choice'),"<a href='${certificate_link}' target='_blank'>".__('Click here','woo-bundle-choice')."</a>");
     }
 
+
+    $product_data = apply_filters('eowbc_specification_data',$product_data,$product);
+   
     if(!empty($product_data) and is_array($product_data)) {
         if(wp_is_mobile()) {
             wbc()->load->template('publics/features/default_mobile',compact('product_data'));
