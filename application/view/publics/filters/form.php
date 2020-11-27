@@ -214,20 +214,18 @@
 					}					
 					
 					$("input.text_slider_"+$(e).attr('data-slug')).change(function() {				    
-						console.log($(e).attr('data-slug'));
+						//console.log($(e).attr('data-slug'));
 						//$("#text_slider_"+$(e).attr('data-slug')).slider("set rangeValue",$("[name=min_"+$(e).attr('data-slug')+"]").val(),$("[name=max_"+$(e).attr('data-slug')+"]").val());
 						
-						
-
 						_sep = $(e).attr('data-sep');
 
 						let prefix = $(e).attr('data-prefix');
 						let postfix = $(e).attr('data-postfix');
 						
 						let min_value = $("[name='text_min_"+$(e).attr('data-slug')+"']").val();
-						
+												
 						let max_value = $("[name='text_max_"+$(e).attr('data-slug')+"']").val();
-
+						
 						if(_sep == '.' || typeof(_sep)===typeof(undefined)){
 							min_value = min_value.replace(/,/g, '');
 							max_value = max_value.replace(/,/g, '');
@@ -235,7 +233,7 @@
 							min_value = min_value.replace(/\,(?=.*\,)/g, '');
 							max_value = max_value.replace(/\,(?=.*\,)/g, '');
 						}
-
+						
 						if(prefix!=='' && typeof(prefix)!==typeof(undefined) && prefix.hasOwnProperty('length')){
 							if(min_value.includes(prefix)){
 								min_value = min_value.slice(prefix.length);
@@ -247,13 +245,13 @@
 
 						if(postfix!=='' && typeof(postfix)!==typeof(undefined) && postfix.hasOwnProperty('length')){
 							if(min_value.includes(postfix)){
-								min_value = min_value.slice(postfix.length);
+								min_value = min_value.slice(0,-1*postfix.length);
 							}
 							if(max_value.includes(postfix)){
-								max_value = max_value.slice(postfix.length);
+								max_value = max_value.slice(0,-1*postfix.length);
 							}
 						}
-
+						
 						$("#text_slider_"+$(e).attr('data-slug')).slider("set rangeValue",min_value,max_value);
 					});							
 					$(e).slider(_params);

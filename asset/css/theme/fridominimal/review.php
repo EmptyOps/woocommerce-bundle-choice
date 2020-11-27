@@ -12,4 +12,18 @@
 	.ui.button{
 		color: white !important;
 	}
+
+	@media only screen and (max-width: 375px) {
+		#content{ 
+		    min-width: 100% !important;
+		    max-width: 100% !important;
+		    margin-left: 0;
+    		margin-right: 0;
+		    padding-left: 0.5em;
+		    padding-right: 0.5em;
+		}
+	}
+	.unstackable.ui.steps .step:not(:first-of-type):before{
+		left: -1px !important;
+	}
 </style>
