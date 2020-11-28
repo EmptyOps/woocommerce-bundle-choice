@@ -178,10 +178,9 @@
 		}
 		":""
 	).(
-		array_intersect(array(wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts'),wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts')),array('fc4','sc4'))?".eo-wbc-container.filters.container.ui.form,.eo-wbc-container.filters.container.ui.form .ui.header,.eo-wbc-container.container:not(.filters),.ui.steps .step .title{font-family: ".wbc()->options->get_option('appearance_filters','header_font','ZapfHumanist601BT-Roman')." !important; }.eo-wbc-container.filters.container.ui.form .ui.header{font-size:1em;}.ui.labeled.ticked.range.slider .labels{height:0px; top:unset;bottom:-10%;font-size:12px}.ui.labeled.ticked.range.slider .labels .label::after{top:unset;bottom:100%;}.eo_wbc_filter_icon:hover:not(.none_editable){ border-bottom: 0px !important; } .eo-wbc-container.filters.container.ui.form .ui.segments{ border:none !important;}":""
+		array_intersect(array(wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts'),wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts')),array('fc4','sc4'))?".eo-wbc-container.filters.container.ui.form,.eo-wbc-container.filters.container.ui.form .ui.header,.eo-wbc-container.container:not(.filters),.ui.steps .step .title{font-family: ".wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_header_font_family','Avenir Next')." !important; }.eo-wbc-container.filters.container.ui.form .ui.header{font-size:1em;}.ui.labeled.ticked.range.slider .labels{height:0px; top:unset;bottom:-10%;font-size:12px}.ui.labeled.ticked.range.slider .labels .label::after{top:unset;bottom:100%;}.eo_wbc_filter_icon:hover:not(.none_editable){ border-bottom: 0px !important; } .eo-wbc-container.filters.container.ui.form .ui.segments{ border:none !important;}":""
 		
-	)."</style>";
+	)." .eowbc_breadcrumb_font{ font-family:".(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_header_font_family','Avenir Next'))." !important }</style>";
 
 ?>
-
 

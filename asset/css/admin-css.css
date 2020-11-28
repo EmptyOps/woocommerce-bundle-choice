@@ -10,3 +10,7 @@
 #wpfooter{
 	position: relative !important;
 }
+
+.notice, div.error, div.updated{
+	margin: 5px 2px !important;
+}

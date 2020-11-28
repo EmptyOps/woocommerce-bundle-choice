@@ -467,10 +467,10 @@ class EOWBC_Filter_Widget {
 					.bottom_filter_segment{
 						position: fixed !important;
 					    z-index: 99999;
-					    bottom: -1em;
-					    width: 100vw;
+					    bottom: -1em;					    
 					    width: -webkit-fill-available;
 					    width: -moz-available;;
+					    width: 100vw;
 					    left: 0;
 					    margin-bottom: 1em !important;
 					    -webkit-backface-visibility: hidden;
@@ -484,19 +484,20 @@ class EOWBC_Filter_Widget {
 				</style>
 				<script>
 					jQuery(document).ready(function(){
-						jQuery(".toggle_sticky_mob_filter").on('click tap',function(){
+						jQuery(".toggle_sticky_mob_filter").on('touchstart',function(){
 							jQuery('.bottom_filter_segment.active').transition('fade up');
 							jQuery('.bottom_filter_segment.active').toggleClass('active');
 							jQuery(jQuery(this).data('target')).transition('fade up');
 							jQuery(jQuery(this).data('target')).toggleClass('active');
 						});
 
-						jQuery(".close_sticky_mob_filter").on('click tap',function(){
+						jQuery(".close_sticky_mob_filter").on('touchstart',function(){
 							//jQuery(jQuery(this).data('target')).transition('fade up');
 							jQuery('.bottom_filter_segment.active').transition('fade up');
 							jQuery('.bottom_filter_segment.active').toggleClass('active');
 						});
-						jQuery('#advance_filter_mob_alternate').on('click tap',function(){
+
+						jQuery('#advance_filter_mob_alternate').on('touchstart',function(){
 							let is_twoTab = jQuery('.filter_setting_advance_two_tabs .item.active');
 							
 							if(typeof(is_twoTab)!=typeof(undefined) && is_twoTab.length>0){

@@ -135,6 +135,13 @@ if ( ! class_exists( 'Appearance' ) ) {
 										'size_class'=>array('sixteen','wide'),
 									),	
 								),
+								'appearance_breadcrumb_header_font_family'=>array(
+									'label'=>'Header font family',
+									'type'=>'text',
+									'sanitize'=>'sanitize_text_field',
+									'value'=>'Avenir Next',						
+									'class'=>array(),
+								),
 								'appearance_breadcrumb_step_size'=>array(
 									'label'=>'Step number font size',
 									'type'=>'text',

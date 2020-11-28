@@ -7,14 +7,14 @@
 ?>
 <div class="ui equal width grid" style="width: 100%;margin-top: -1em !important;">
         <div class="ui grid" style="width: fit-content !important;">
-            <div class="column">3</div>
+            <div class="column eowbc_breadcrumb_font">3</div>
             <div class="column" style="text-align: left;">
-                <div class="description">Complete</div>
-                <div class="title"><?php _e($preview_name); ?></div>
+                <div class="description eowbc_breadcrumb_font">Complete</div>
+                <div class="title eowbc_breadcrumb_font"><?php _e($preview_name); ?></div>
             </div>             
         </div>               
         <div class="column ">
-            <div class="title" style="text-align: center;">
+            <div class="title eowbc_breadcrumb_font" style="text-align: center;">
             <?php 
                 if(!empty($first) and !empty($second)){
                     $first_price = $first->get_price() * ( !empty($set['FIRST'][1]) ? $set['FIRST'][1]:$tmp_set['FIRST'][1] );
