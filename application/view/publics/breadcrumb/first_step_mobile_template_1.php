@@ -14,7 +14,7 @@
             display: block;
             border-top: 3.6em solid transparent;            
             border-bottom: 3.6em solid transparent;
-            border-left: 1em solid white;
+            border-left: 1em solid #d6d6d6;
             height: 0px;
             width: 0px;
             left:-1px;
@@ -27,7 +27,7 @@
         background-color: <?php _e(wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active','#dbdbdb')); ?>;; 
     }
     .unstackable.ui.steps .step.active+.step:before{
-        border-left-color: <?php _e(wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active','#dbdbdb')); ?>;;     
+        border-left: 1em solid #d6d6d6;
     }
     
     .unstackable.ui.steps .step:not(.active){
@@ -35,7 +35,7 @@
     }
 
     .unstackable.ui.steps .step:not(.active)+.step:before{
-        border-left-color: <?php _e(wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_inactive','#ffffff')); ?>;;     
+        border-left: 1em solid #d6d6d6;     
     }
 
     .unstackable.ui.steps .step .column:first-child{
@@ -68,7 +68,7 @@
         width: 0px;
         top: 0;
         position: absolute;
-        right: -1em;
+        right: -2.6em;
         transition: none !important;
         transform: none !important;
         background-color:transparent !important;

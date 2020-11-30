@@ -130,6 +130,60 @@ class WBC_WC {
         }
     }
 
+    public function wc_display_product_attributes( $pid ) {
+
+        $product = $this->eo_wbc_get_product($pid);
+
+        if(empty($product) or is_wp_error($product)){
+            return array();
+        }
+
+        $product_attributes = array();
+
+        // Display weight and dimensions before attribute list.
+        $display_dimensions = apply_filters( 'wc_product_enable_dimensions_display', $product->has_weight() || $product->has_dimensions() );
+
+        if ( $display_dimensions && $product->has_weight() ) {
+            $product_attributes['weight'] = __( 'Weight', 'woocommerce' ).": ".wc_format_weight( $product->get_weight() );            
+        }
+
+        if ( $display_dimensions && $product->has_dimensions() ) {
+            $product_attributes['dimensions'] = __( 'Dimensions', 'woocommerce' ).": ".wc_format_dimensions( $product->get_dimensions( false ) );
+        }
+
+        // Add product attributes to list.
+        $attributes = array_filter( $product->get_attributes(), 'wc_attributes_array_filter_visible' );
+
+        foreach ( $attributes as $attribute ) {
+            $values = array();
+
+            if ( $attribute->is_taxonomy() ) {
+                $attribute_taxonomy = $attribute->get_taxonomy_object();
+                $attribute_values   = wc_get_product_terms( $product->get_id(), $attribute->get_name(), array( 'fields' => 'all' ) );
+
+                foreach ( $attribute_values as $attribute_value ) {
+                    $value_name = esc_html( $attribute_value->name );
+
+                    if ( $attribute_taxonomy->attribute_public ) {
+                        $values[] = $value_name;
+                    } else {
+                        $values[] = $value_name;
+                    }
+                }
+            } else {
+                $values = $attribute->get_options();
+
+                foreach ( $values as &$value ) {
+                    $value = make_clickable( esc_html( $value ) );
+                }
+            }
+
+            $product_attributes[ 'attribute_' . sanitize_title_with_dashes( $attribute->get_name() ) ] = wc_attribute_label( $attribute->get_name() ).": ".implode( ', ', $values );
+        }
+
+        return $product_attributes;        
+    }
+
     public static function eo_wbc_get_product_variation_attributes( $variation_id ,$variation_data=array()) {
 
         if(is_null($variation_id))
