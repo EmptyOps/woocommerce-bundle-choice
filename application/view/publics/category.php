@@ -91,7 +91,9 @@
                     // phpcs:enable WordPress.Security
                     
                     ?>
-                    <script type="text/javascript">
+                    <br/>
+                    <div style="display:block;clear:both;width: 100% !important"></div>
+                    <script type="text/javascript">                        
                         jQuery(document).ready(function($){
                             $('.woocommerce-result-count').html('<?php _e($total_text); ?>')
                         });
@@ -101,7 +103,7 @@
 
                 $prev_product_id = wbc()->sanitize->get('FIRST') | wbc()->sanitize->get('SECOND');
                 $prev_product=wbc()->wc->eo_wbc_get_product($prev_product_id);
-
+                
                 foreach ($_posts as $_post) {                                        
                     $curr_product=wbc()->wc->eo_wbc_get_product($_post->ID);
                     

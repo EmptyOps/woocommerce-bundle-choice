@@ -52,7 +52,6 @@ jQuery(document).ready(function($){
         }
     }
 
-
     $('.ui.fluid.selection.dropdown').on('keyup',function(){
         
         $this = $(this);         

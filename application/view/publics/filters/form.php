@@ -80,7 +80,13 @@
 							console.log(_labels);*/
 							if(_labels!=undefined){
 								let _label_value = _labels[value];
-								if(_label_value.length><?php _e((int)wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_slider_max_lblsize',6)) ?>){
+								let _label_max_length = parseInt($(e).data('label_max_size'));
+
+								if((typeof(_label_max_length)==typeof(undefined)) || _label_max_length==""){
+									_label_max_length = <?php _e((int)wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_slider_max_lblsize',6)) ?>;
+								}								
+
+								if(_label_value.length>_label_max_length){
 									_label_value = _label_value.split(' ');
 									_label_value = _label_value.map(function(_label_value_ele){
 										return _label_value_ele[0];

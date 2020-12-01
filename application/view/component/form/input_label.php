@@ -10,7 +10,7 @@ if(!empty($id) and !empty($label)){
 	else {
 		?> 
 		<div class="<?php echo !empty($class)?$class:''; ?> <?php echo !empty($size_class)?$size_class:''; ?> field" id="<?php echo $id; ?>_label_div">
-			<label for="<?php echo $id; ?>"><?php echo $label; ?></label>
+			<label for="<?php echo $id; ?>" class="<?php $inline_class ?>"><?php echo $label; ?></label>
 
 			<?php
 			if (isset($info_icon))

@@ -75,7 +75,7 @@ class Setting_status {
 							'save'=>array(
 								'label'=>'Save',
 								'type'=>'button',				
-								'class'=>array('primary'),
+								'class'=>array('secondary'),
 								'attr'=>array('data-tab_key="setting_status_setting"', "data-action='save'")
 							)
 						)							
@@ -135,7 +135,7 @@ class Setting_status {
 							'btn_cancel'=>array(
 								'label'=>eowbc_lang('Cancel'),
 								'type'=>'button',				
-								'class'=>array('secondary'),
+								'class'=>array('secondary','inverted'),
 								'attr'=>array("data-action='cancel'"/*'onclick="window.location.href=document.referrer"'*/),
 								'next_inline'=>true,
 								'inline'=>true,
@@ -143,7 +143,7 @@ class Setting_status {
 							'btn_send_error_report'=>array(
 								'label'=>((get_option('eowbc_error_count',0) or get_option('eowbc_warning_count',0)) ? eowbc_lang('Send error report'):''),
 								'type'=>'button',				
-								'class'=>array('primary','disabled'),
+								'class'=>array('secondary','disabled'),
 								'attr'=>array('data-tab_key="setting_status_log"', "data-action='save'"),
 								'prev_inline'=>true,
 								'inline'=>true,
@@ -186,7 +186,7 @@ class Setting_status {
 							'submit_button'=>array(
 								'label'=>eowbc_lang('Save'),
 								'type'=>'button',
-								'class'=>array('primary'),
+								'class'=>array('secondary'),
 								//'size_class'=>array('eight','wide'),
 								'attr'=>array("data-action='save'",'data-tab_key="advanced_config"'),
 								'inline'=>false

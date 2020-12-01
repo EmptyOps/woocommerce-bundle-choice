@@ -969,7 +969,22 @@ if ( ! class_exists( 'Filters' ) ) {
 								'options'=>array('1'=>' '),
 								'is_id_as_name'=>true,
 								'class'=>array()
-							),							
+							),
+							'd_fconfig_slider_max_lblsize'=>array(
+								'label'=>'Slider Options Text Limit',
+								'type'=>'text',
+								'sanitize'=>'sanitize_text_field',
+								'value'=>'',
+								'class'=>array(),
+								'size_class'=>array('eight','wide'),
+								'inline'=>false,
+								'visible_info'=>array( 
+									'label'=>eowbc_lang('You can truncate longer option texts that are displayed for filters of input type slider. The maximum number characters that will be displayed on your website filters depend on the integer value you set here. '),
+									'type'=>'visible_info',
+									'class'=>array('small'),
+									// 'size_class'=>array('sixteen','wide'),
+								),
+							),
 							'config_advance_end'=>array(
 								'type'=>'accordian',
 								'section_type'=>'end'
@@ -1301,7 +1316,22 @@ if ( ! class_exists( 'Filters' ) ) {
 								'options'=>array('1'=>' '),
 								'is_id_as_name'=>true,
 								'class'=>array()
-							),							
+							),
+							's_fconfig_slider_max_lblsize'=>array(
+								'label'=>'Slider Options Text Limit',
+								'type'=>'text',
+								'sanitize'=>'sanitize_text_field',
+								'value'=>'',
+								'class'=>array(),
+								'size_class'=>array('eight','wide'),
+								'inline'=>false,
+								'visible_info'=>array( 
+									'label'=>eowbc_lang('You can truncate longer option texts that are displayed for filters of input type slider. The maximum number characters that will be displayed on your website filters depend on the integer value you set here. '),
+									'type'=>'visible_info',
+									'class'=>array('small'),
+									// 'size_class'=>array('sixteen','wide'),
+								),
+							),
 							'config_advance_end'=>array(
 								'type'=>'accordian',
 								'section_type'=>'end'

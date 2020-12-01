@@ -182,7 +182,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 								'sanitize'=>'sanitize_text_field',
 							),
 							'save_sec_title'=>array(
-								'label'=>"Add New Maps",
+								'label'=>"Add/Edit Maps",
 								'type'=>'label',
 								'size_class'=>array('eight','wide')
 							),
@@ -234,7 +234,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 								'label'=>'<------------->',
 								'type'=>'label',
 								//'class'=>array('fluid'),
-								// 'size_class'=>array('two','wide'),
+								'size_class'=>array('two','wide'),
 								'prev_inline'=>true,
 								'next_inline'=>true,
 								'inline'=>true,
@@ -267,7 +267,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 								'label'=>'<------------->',
 								'type'=>'label',
 								//'class'=>array('fluid'),
-								// 'size_class'=>array('two','wide'),
+								'size_class'=>array('two','wide'),
 								'prev_inline'=>true,
 								'next_inline'=>true,
 								'inline'=>true,
@@ -286,7 +286,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 							'eo_wbc_first_category_vis_info'=>array( 
 								'label'=>'Select sub-category or attribute from first category.',
 								'type'=>'visible_info',
-								'class'=>array('fluid', 'small'),
+								'class'=>array('fluid', 'small','field'),
 								'inline_class'=>array('three'),
 								'next_inline'=>true,
 								'inline'=>true,
@@ -295,7 +295,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 								'label'=>'<------------->',
 								'type'=>'label',
 								//'class'=>array('fluid'),
-								// 'size_class'=>array('two','wide'),
+								'size_class'=>array('two','wide'),
 								'prev_inline'=>true,
 								'next_inline'=>true,
 								'inline'=>true,
@@ -303,7 +303,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 							'eo_wbc_second_category_vis_info'=>array(
 								'label'=>'Select sub-category or attribute from second category.',
 								'type'=>'visible_info',
-								'class'=>array('fluid', 'small'),
+								'class'=>array('fluid', 'small','field'),
 								'prev_inline'=>true,
 								'inline'=>true,
 							),
@@ -326,7 +326,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 							),
 							
 							'map_creation_modification_save_btn'=>array(
-								'label'=>eowbc_lang('Save New Map'),
+								'label'=>eowbc_lang('Save'),
 								'type'=>'button',
 								'class'=>array('secondary'),
 								//'size_class'=>array('eight','wide'),

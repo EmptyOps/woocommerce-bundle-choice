@@ -172,7 +172,7 @@ if ( ! class_exists( 'Configuration' ) ) {
 									'config_buttons_conf_save_btn'=>array(
 												'label'=>'Save',
 												'type'=>'button',		
-												'class'=>array('primary'),
+												'class'=>array('secondary'),
 												'attr'=>array("data-action='save'",'data-tab_key="config_buttons_conf"')	
 											)
 									)
@@ -296,7 +296,7 @@ if ( ! class_exists( 'Configuration' ) ) {
 									'config_navigation_conf_save_btn'=>array(
 												'label'=>'Save',
 												'type'=>'button',		
-												'class'=>array('primary'),
+												'class'=>array('secondary'),
 												'attr'=>array("data-action='save'",'data-tab_key="config_navigation_conf"')	
 											)
 									)
@@ -350,7 +350,7 @@ if ( ! class_exists( 'Configuration' ) ) {
 								'config_extra_conf_save_btn'=>array(
 											'label'=>'Save',
 											'type'=>'button',		
-											'class'=>array('primary'),
+											'class'=>array('secondary'),
 											'attr'=>array("data-action='save'",'data-tab_key="config_extra_conf"')
 										)
 								)

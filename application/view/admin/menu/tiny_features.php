@@ -470,7 +470,7 @@ $form['data'] = array(
 			'tiny_features_save_specification_view'=>array(
 						'label'=>'Save',
 						'type'=>'button',		
-						'class'=>array('primary'),
+						'class'=>array('secondary'),
 						'attr'=>array("data-action='save'")	
 					)
 			)									

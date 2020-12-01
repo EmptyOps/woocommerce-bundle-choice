@@ -7,6 +7,10 @@
 	margin:0 0 1em !important;
 }
 
+.ui.tab>.fields>.field{
+	padding-left: 0 !important;	
+}
+
 #wpfooter{
 	position: relative !important;
 }
