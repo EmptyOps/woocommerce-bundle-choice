@@ -62,11 +62,11 @@
 			//Slider creation function
 			window.eo.slider=function(selector){
 
-				$(selector).each(function(i,e){
+				jQuery(selector).each(function(i,e){
 
-					_min = Number($(e).attr('data-min'));						
-					_max = Number($(e).attr('data-max'));												
-					_labels = $(e).attr('data-labels');						
+					_min = Number(jQuery(e).attr('data-min'));						
+					_max = Number(jQuery(e).attr('data-max'));												
+					_labels = jQuery(e).attr('data-labels');						
 
 					_params=new Object();												
 											
@@ -74,13 +74,13 @@
 
 						_labels=_labels.split(',');
 						_params.interpretLabel=function(value){ 						
-							_labels = $(e).attr('data-labels');
+							_labels = jQuery(e).attr('data-labels');
 							_labels=_labels.split(',');
 							/*console.log(value);
 							console.log(_labels);*/
 							if(_labels!=undefined){
 								let _label_value = _labels[value];
-								let _label_max_length = parseInt($(e).data('label_max_size'));
+								let _label_max_length = parseInt(jQuery(e).data('label_max_size'));
 
 								if((typeof(_label_max_length)==typeof(undefined)) || _label_max_length==""){
 									_label_max_length = <?php _e((int)wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_slider_max_lblsize',6)) ?>;
@@ -121,32 +121,32 @@
 					_params.decimalPlaces=4;
 					_params.onMove=function(value, min, max) {
 
-						__slugs = $(e).attr('data-slugs');
+						__slugs = jQuery(e).attr('data-slugs');
 						
 						if(typeof __slugs != typeof undefined && __slugs != false){
 							//PASS
 						} else {
-							_sep = $(e).attr('data-sep');
-							_prefix = $(this).data('prefix');
+							_sep = jQuery(e).attr('data-sep');
+							_prefix = jQuery(this).data('prefix');
 							if(typeof(_prefix) == typeof(undefined) || _prefix=='undefined'){
 								_prefix = '';
 							}
 
-							_postfix = $(this).data('postfix');
+							_postfix = jQuery(this).data('postfix');
 							if(typeof(_postfix) == typeof(undefined) || _postfix=='undefined'){
 								_postfix = '';
 							}
 
-				        	$("input[name='text_min_"+$(e).attr('data-slug')+"']").val( _prefix+(_sep=='.'?Number(min).toFixed(2):(Number(min).toFixed(2)).toString().replace('.',','))+_postfix );
-				        	$("input[name='text_max_"+$(e).attr('data-slug')+"']").val( _prefix+(_sep=='.'?Number(max).toFixed(2):(Number(max).toFixed(2)).toString().replace('.',','))+_postfix);
+				        	jQuery("input[name='text_min_"+jQuery(e).attr('data-slug')+"']").val( _prefix+(_sep=='.'?Number(min).toFixed(2):(Number(min).toFixed(2)).toString().replace('.',','))+_postfix );
+				        	jQuery("input[name='text_max_"+jQuery(e).attr('data-slug')+"']").val( _prefix+(_sep=='.'?Number(max).toFixed(2):(Number(max).toFixed(2)).toString().replace('.',','))+_postfix);
 				        }					      	
 					}
 
 					_params.onChange=function(value, min, max) {	
-						_labels = $(e).attr('data-labels');
-						_min = Number ($(e).attr('data-min'));						
-						_max = Number($(e).attr('data-max'));
-						_sep = $(e).attr('data-sep');
+						_labels = jQuery(e).attr('data-labels');
+						_min = Number (jQuery(e).attr('data-min'));						
+						_max = Number(jQuery(e).attr('data-max'));
+						_sep = jQuery(e).attr('data-sep');
 
 						console.log(min,_min,max,_max);
 
@@ -158,9 +158,9 @@
 
 						if(
 							(
-								($(this).data('prev_val_min')!=min && $(this).data('prev_val_min')!=undefined)
+								(jQuery(this).data('prev_val_min')!=min && jQuery(this).data('prev_val_min')!=undefined)
 								|| 
-								($(this).data('prev_val_max')!=max && $(this).data('prev_val_max')!=undefined)
+								(jQuery(this).data('prev_val_max')!=max && jQuery(this).data('prev_val_max')!=undefined)
 							)
 							||
 							( min!=_min || max!=_max )
@@ -168,73 +168,73 @@
 
 							if(typeof __slugs != typeof undefined && __slugs != false){
 									
-								$("input[name='min_"+$(e).attr('data-slug')+"']").val(__slugs.split(',')[min]);
-					        	$("input[name='max_"+$(e).attr('data-slug')+"']").val(__slugs.split(',')[max]);
+								jQuery("input[name='min_"+jQuery(e).attr('data-slug')+"']").val(__slugs.split(',')[min]);
+					        	jQuery("input[name='max_"+jQuery(e).attr('data-slug')+"']").val(__slugs.split(',')[max]);
 
 							} else {
 
-					        	$("input[name='min_"+$(e).attr('data-slug')+"']").val(Number(min).toFixed(2));
-					        	$("input[name='max_"+$(e).attr('data-slug')+"']").val(Number(max).toFixed(2));
+					        	jQuery("input[name='min_"+jQuery(e).attr('data-slug')+"']").val(Number(min).toFixed(2));
+					        	jQuery("input[name='max_"+jQuery(e).attr('data-slug')+"']").val(Number(max).toFixed(2));
 					        }
 
-					        if($(this).attr('data-slug')!='price'){
+					        if(jQuery(this).attr('data-slug')!='price'){
 						    	//Action of notifying filter change when changes are done.
-						    	if($(this).attr('data-min')==min && $(this).attr('data-max')==max) {
+						    	if(jQuery(this).attr('data-min')==min && jQuery(this).attr('data-max')==max) {
 
-						    		if($("[name='_attribute']").val().includes($(this).attr('data-slug'))) {
+						    		if(jQuery("[name='_attribute']").val().includes(jQuery(this).attr('data-slug'))) {
 						    			
-						    			_values=$("[name='_attribute']").val().split(',')
-						    			_index=_values.indexOf($(this).attr('data-slug'))
+						    			_values=jQuery("[name='_attribute']").val().split(',')
+						    			_index=_values.indexOf(jQuery(this).attr('data-slug'))
 						    			_values.splice(_index,1)
-						    			$("[name='_attribute']").val(_values.join());
+						    			jQuery("[name='_attribute']").val(_values.join());
 						    		}
 						    	}
 						    	else {
-						    		if(! $("[name='_attribute']").val().includes($(this).attr('data-slug'))) {
-						    			_values=$("[name='_attribute']").val().split(',')
-						    			_values.push($(this).attr('data-slug'))
-						    			$("[name='_attribute']").val(_values.join())
+						    		if(! jQuery("[name='_attribute']").val().includes(jQuery(this).attr('data-slug'))) {
+						    			_values=jQuery("[name='_attribute']").val().split(',')
+						    			_values.push(jQuery(this).attr('data-slug'))
+						    			jQuery("[name='_attribute']").val(_values.join())
 						    		}
 						    	}
 					    	}
-					    	$('[name="paged"]').val('1');
+					    	jQuery('[name="paged"]').val('1');
 					    	<?php if(empty(wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
 					    	jQuery.fn.eo_wbc_filter_change();
 					    	<?php endif; ?>
 					    } else if( min==_min && max==_max ){
-					    	if($(this).attr('data-slug')!='price'){
+					    	if(jQuery(this).attr('data-slug')!='price'){
 						    	//Action of notifying filter change when changes are done.						    	
-					    		if($("[name='_attribute']").val().includes($(this).attr('data-slug'))) {
+					    		if(jQuery("[name='_attribute']").val().includes(jQuery(this).attr('data-slug'))) {
 					    			
-					    			_values=$("[name='_attribute']").val().split(',')
-					    			_index=_values.indexOf($(this).attr('data-slug'))
+					    			_values=jQuery("[name='_attribute']").val().split(',')
+					    			_index=_values.indexOf(jQuery(this).attr('data-slug'))
 					    			_values.splice(_index,1)
-					    			$("[name='_attribute']").val(_values.join());
+					    			jQuery("[name='_attribute']").val(_values.join());
 					    		}
 					    	}
 					    }
 					    
-					    $(this).data('prev_val_min',min);						    
-					    $(this).data('prev_val_max',max);
+					    jQuery(this).data('prev_val_min',min);						    
+					    jQuery(this).data('prev_val_max',max);
 					}
 					
-					let _adjust_label = $(this).data('label_adjust');
+					let _adjust_label = jQuery(this).data('label_adjust');
 					
-					if(_adjust_label!=1 && $(this).hasClass('labeled')){
-						console.log($(this));
+					if(_adjust_label!=1 && jQuery(this).hasClass('labeled')){
+						
 						_params.autoAdjustLabels=false;	
 					}					
 					
-					$("input.text_slider_"+$(e).attr('data-slug')).change(function() {				    
-						console.log($(e).attr('data-slug'));
-						//$("#text_slider_"+$(e).attr('data-slug')).slider("set rangeValue",$("[name=min_"+$(e).attr('data-slug')+"]").val(),$("[name=max_"+$(e).attr('data-slug')+"]").val());
+					jQuery("input.text_slider_"+jQuery(e).attr('data-slug')).change(function() {				    
+						
+						//jQuery("#text_slider_"+jQuery(e).attr('data-slug')).slider("set rangeValue",jQuery("[name=min_"+jQuery(e).attr('data-slug')+"]").val(),jQuery("[name=max_"+jQuery(e).attr('data-slug')+"]").val());
 
-						let prefix = $(e).attr('data-prefix');
-						let postfix = $(e).attr('data-postfix');
+						let prefix = jQuery(e).attr('data-prefix');
+						let postfix = jQuery(e).attr('data-postfix');
 						
-						let min_value = $("[name='text_min_"+$(e).attr('data-slug')+"']").val();
+						let min_value = jQuery("[name='text_min_"+jQuery(e).attr('data-slug')+"']").val();
 						
-						let max_value = $("[name='text_max_"+$(e).attr('data-slug')+"']").val();
+						let max_value = jQuery("[name='text_max_"+jQuery(e).attr('data-slug')+"']").val();
 						
 						if(prefix!=='' && typeof(prefix)!==typeof(undefined) && prefix.hasOwnProperty('length')){
 							if(min_value.includes(prefix)){
@@ -254,94 +254,94 @@
 							}
 						}
 						
-						$("#text_slider_"+$(e).attr('data-slug')).slider("set rangeValue",min_value,max_value);
+						jQuery("#text_slider_"+jQuery(e).attr('data-slug')).slider("set rangeValue",min_value,max_value);
 					});							
-					$(e).slider(_params);
+					jQuery(e).slider(_params);
 				});
 			}
 
-			var primary_filter=$(".eo-wbc-container.filters .ui.segment:not(.secondary)");
-			var primary_computer_only=$(primary_filter).find(".computer.tablet.only");
-			var primary_mobile_only=$(primary_filter).find(".mobile.only");
+			var primary_filter=jQuery(".eo-wbc-container.filters .ui.segment:not(.secondary)");
+			var primary_computer_only=jQuery(primary_filter).find(".computer.tablet.only");
+			var primary_mobile_only=jQuery(primary_filter).find(".mobile.only");
 
-			var secondary_filter=$(".eo-wbc-container.filters .ui.segment.secondary");
-			var secondary_computer_only=$(secondary_filter).find(".computer.tablet.only");
-			var secondary_mobile_only=$(secondary_filter).find(".mobile.only");
+			var secondary_filter=jQuery(".eo-wbc-container.filters .ui.segment.secondary");
+			var secondary_computer_only=jQuery(secondary_filter).find(".computer.tablet.only");
+			var secondary_mobile_only=jQuery(secondary_filter).find(".mobile.only");
 
 			
-			$('.ui.accordion').accordion();
-			window.eo.slider($('.eo-wbc-container.filters').find('.ui.slider'));				
+			jQuery('.ui.accordion').accordion();
+			window.eo.slider(jQuery('.eo-wbc-container.filters').find('.ui.slider'));				
 		
 			/* Activate initiation of sliders at secondary segments. */
-			if($(secondary_computer_only).css('display')!='none'){				
+			if(jQuery(secondary_computer_only).css('display')!='none'){				
 
-				$("#advance_filter").on('click',function(){
-					$("#advance_filter").find('.ui.icon').toggleClass('up down');
-					$(secondary_filter).transition('slide down');
+				jQuery("#advance_filter").on('click',function(){
+					jQuery("#advance_filter").find('.ui.icon').toggleClass('up down');
+					jQuery(secondary_filter).transition('slide down');
 				}).trigger('click');			
 
-			} else if($(secondary_mobile_only).css('display')!='none') {
+			} else if(jQuery(secondary_mobile_only).css('display')!='none') {
 				
-				$("#advance_filter").on('click',function(){					
-					$(this).find('.ui.icon').toggleClass('up down');
-					$(secondary_filter).transition('fly right');				
+				jQuery("#advance_filter").on('click',function(){					
+					jQuery(this).find('.ui.icon').toggleClass('up down');
+					jQuery(secondary_filter).transition('fly right');				
 				}).trigger('click');
 			}
 
 
 
-			/*$(secondary_filter).transition('fade');*/
+			/*jQuery(secondary_filter).transition('fade');*/
 
-			if($("#primary_filter").parent().parent().css('display')!='none'){
+			if(jQuery("#primary_filter").parent().parent().css('display')!='none'){
 				
-				$("#primary_filter").click(function(e){
+				jQuery("#primary_filter").click(function(e){
 					e.preventDefault();
 					e.stopPropagation();
-					$("#primary_filter").find('.ui.icon').toggleClass("down up");
-					$('.eo-wbc-container.filters,#advance_filter').transition('fade');
+					jQuery("#primary_filter").find('.ui.icon').toggleClass("down up");
+					jQuery('.eo-wbc-container.filters,#advance_filter').transition('fade');
 				}).trigger('click');
 			}
 			
 			/*----------------------------------------------------*/
 			/*----------------------------------------------------*/
-			$('.checkbox').checkbox({onChange:function(){
+			jQuery('.checkbox').checkbox({onChange:function(){
 
-				__slug=$(this).attr('data-filter-slug');					
+				__slug=jQuery(this).attr('data-filter-slug');					
 
 				_values=jQuery('[name="checklist_'+__slug+'"]').val().split(',');
 
-				if(_values.indexOf($(this).attr('data-slug'))!=-1){
+				if(_values.indexOf(jQuery(this).attr('data-slug'))!=-1){
 
 					_values=jQuery('[name="checklist_'+__slug+'"]').val().split(',');
-					_index=_values.indexOf($(this).attr('data-slug'));						
+					_index=_values.indexOf(jQuery(this).attr('data-slug'));						
 					_values.splice(_index,1);						
 					jQuery('[name="checklist_'+__slug+'"]').val(_values.join());
 
 				} else {
 
 					_values=jQuery('[name="checklist_'+__slug+'"]').val().split(',');
-	    			_values.push($(this).attr('data-slug'));
+	    			_values.push(jQuery(this).attr('data-slug'));
 	    			jQuery('[name="checklist_'+__slug+'"]').val(_values.join());
 				}
 				
 				if( ( jQuery('.checklist_'+__slug+':checkbox').length==jQuery('.checklist_'+__slug+':checkbox:checked').length)  || (jQuery('.checklist_'+__slug+':checkbox:checked').length==0) ) {
 
-		    		if($("[name='_attribute']").val().includes(__slug)) {
+		    		if(jQuery("[name='_attribute']").val().includes(__slug)) {
 		    			
-		    			_values=$("[name='_attribute']").val().split(',')
+		    			_values=jQuery("[name='_attribute']").val().split(',')
 		    			_index=_values.indexOf(__slug)			    			
 		    			_values.splice(_index,1)				    			
-		    			$("[name='_attribute']").val(_values.join());
+		    			jQuery("[name='_attribute']").val(_values.join());
 		    		}
 		    	}
 		    	else {
-		    		if(! $("[name='_attribute']").val().includes(__slug)) {
-		    			_values=$("[name='_attribute']").val().split(',')
+		    		if(! jQuery("[name='_attribute']").val().includes(__slug)) {
+		    			_values=jQuery("[name='_attribute']").val().split(',')
 		    			_values.push(__slug)
-		    			$("[name='_attribute']").val(_values.join())
+		    			jQuery("[name='_attribute']").val(_values.join())
 		    		}
 		    	}
-		    	$('[name="paged"]').val('1');
+		    	jQuery('[name="paged"]').val('1');
 		    	<?php if(empty(wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
 		    	jQuery.fn.eo_wbc_filter_change();
 		    	<?php endif; ?>
