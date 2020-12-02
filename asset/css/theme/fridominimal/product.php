@@ -37,8 +37,9 @@
 		padding-left: 2.5em !important;
 		padding-bottom: 2.5em !important;
 	}
-
-
+	.top-bar .close {
+		top: 10px !important;
+	}
 </style>
 <?php endif; ?>
 

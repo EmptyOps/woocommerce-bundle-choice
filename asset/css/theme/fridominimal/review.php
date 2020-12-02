@@ -32,6 +32,9 @@
 	.eowbc_product_multiplier{
 		display: none !important;
 	}
+	.top-bar .close {
+		top: 10px !important;
+	}
 </style>
 
 <?php

@@ -324,7 +324,7 @@ class Preview {
                           '</div>'.
                         '<div class="content">'.
                             '<div class="header">'.($first->get_title()).'</div>'.
-                            '<div class="meta">'.__($set['FIRST'][2]?"<br/>".implode('<br/>',wbc()->wc->eo_wbc_get_product_variation_attributes($set['FIRST'][2],$set['FIRST']['variation'])):implode('</br>',wbc()->wc->wc_display_product_attributes($set['FIRST'][0]) ) ).
+                            '<div class="meta">'.__($set['FIRST'][2]?"<br/>".implode('<br/>',wbc()->wc->eo_wbc_get_product_variation_attributes($set['FIRST'][2],$set['FIRST']['variation'])):implode('</br>',wbc()->wc->wc_display_product_attributes($set['FIRST'][0],'FIRST') ) ).
                             '</div>'.
                         '</div>'.
                         '<div class="extra content">'.
@@ -346,7 +346,7 @@ class Preview {
                         '</div>'.
                         '<div class="content">'.
                             '<div class="header">'.__($second->get_title()).'</div>'.
-                            '<div class="meta">'.__($set['SECOND'][2]?"<br/>".implode('<br/>',wbc()->wc->eo_wbc_get_product_variation_attributes($set['SECOND'][2],$set['SECOND']['variation'])):implode('</br>',wbc()->wc->wc_display_product_attributes($set['SECOND'][0]) )).
+                            '<div class="meta">'.__($set['SECOND'][2]?"<br/>".implode('<br/>',wbc()->wc->eo_wbc_get_product_variation_attributes($set['SECOND'][2],$set['SECOND']['variation'])):implode('</br>',wbc()->wc->wc_display_product_attributes($set['SECOND'][0],'SECOND') )).
                             '</div>'.
                         '</div>'.
                         '<div class="extra content">'.

@@ -21,7 +21,10 @@ if ( ! class_exists( 'Appearance' ) ) {
 
 		public static function get_form_definition( $is_add_sample_values = false ) {
 			//wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_wrap_mobile');
+
 			wbc()->load->model('admin/form-builder');
+			wbc()->load->model('category-attribute');
+			
 
 			$form_definition = array(
 				'wid_btns'=>array(
@@ -375,7 +378,7 @@ if ( ! class_exists( 'Appearance' ) ) {
 										'type'=>'devider',
 									),*/
 
-/*						'appearence_product_page_toggle_status'=>array(
+						/*						'appearence_product_page_toggle_status'=>array(
 							'label'=>eowbc_lang('Toggle Button Enabled?'),
 							'type'=>'checkbox',
 							'value'=>array(wbc()->options->get_option('appearance_product_page','appearence_product_page_toggle_status')),
@@ -560,8 +563,44 @@ if ( ! class_exists( 'Appearance' ) ) {
 							)
 						),*/
 					)
-				)
-				
+				),
+				'preview_page'=>array(
+					'label'=>'Preview Page',
+					'form'=>array(
+
+						'first_category_attributes'=>array(
+							'label'=>eowbc_lang('First Category Attributes'),
+							'type'=>'select',
+							'value'=>'',
+							'options'=>\eo\wbc\model\Category_Attribute::instance()->get_attributs(),
+							'is_id_as_name'=>true,
+							'class'=>array('fluid','search','multiple','clearable'),							
+							'field_attr'=>array('multiple=""'),
+							'size_class'=>array('three','wide'),
+							'inline'=>false,							
+						),
+						'second_category_attributes'=>array(
+							'label'=>eowbc_lang('Second Category Attributes'),
+							'type'=>'select',
+							'value'=>'',
+							'options'=>\eo\wbc\model\Category_Attribute::instance()->get_attributs(),
+							'is_id_as_name'=>true,
+							'class'=>array('fluid','search','multiple','clearable'),							
+							'field_attr'=>array('multiple=""'),
+							'size_class'=>array('three','wide'),
+							'inline'=>false,							
+						),
+					 
+						'preview_page_submit_btn'=>array(
+							'label'=>eowbc_lang('Save'),
+							'type'=>'button',								
+							'class'=>array('secondary'),
+							//'size_class'=>array('eight','wide'),
+							'inline'=>false,
+							'attr'=>array('data-tab_key="preview_page"', 'data-action="save"'),
+						)
+					)
+				)				
 			);
 
 			if($is_add_sample_values) {

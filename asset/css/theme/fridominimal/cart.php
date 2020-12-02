@@ -13,6 +13,9 @@
 	.cart-collaterals:after, .cart-collaterals:before{
 		display: none !important;
 	}
+	.top-bar .close {
+		top: 10px !important;
+	}
 </style>
 
 <?php

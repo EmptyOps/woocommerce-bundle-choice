@@ -130,7 +130,7 @@ class WBC_WC {
         }
     }
 
-    public function wc_display_product_attributes( $pid ) {
+    public function wc_display_product_attributes( $pid, $category_group ='' ) {
 
         $product = $this->eo_wbc_get_product($pid);
 
@@ -178,7 +178,32 @@ class WBC_WC {
                 }
             }
 
-            $product_attributes[ 'attribute_' . sanitize_title_with_dashes( $attribute->get_name() ) ] = wc_attribute_label( $attribute->get_name() ).": ".implode( ', ', $values );
+            $product_attributes[sanitize_title_with_dashes( $attribute->get_name() ) ] = wc_attribute_label( $attribute->get_name() ).": ".implode( ', ', $values );
+        }
+
+        if(!empty($category_group)){
+            $limit_fields = false;
+            if($category_group == 'FIRST'){
+                $limit_fields = wbc()->options->get_option('appearance_preview_page','first_category_attributes');
+            } elseif ($category_group == 'SECOND') {
+                $limit_fields = wbc()->options->get_option('appearance_preview_page','second_category_attributes');
+            }
+
+            if(!empty($limit_fields)){
+                $new_product_attributes = array();
+                $limit_fields = explode(',',$limit_fields);
+                if(!empty($limit_fields) and is_array($limit_fields)){
+                    foreach ($limit_fields as $field_value) {
+                        if(isset($product_attributes[wc_attribute_taxonomy_name($field_value)])) {
+                            $new_product_attributes[wc_attribute_taxonomy_name($field_value)] = $product_attributes[wc_attribute_taxonomy_name($field_value)];
+                        }                        
+                    }
+
+                    if(!empty($new_product_attributes)){
+                        $product_attributes = $new_product_attributes;
+                    }
+                }
+            }            
         }
 
         return $product_attributes;        

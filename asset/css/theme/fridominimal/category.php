@@ -26,6 +26,15 @@
 	.eo_wbc_filter_icon_select div{
 		overflow-wrap: normal !important;
 	}
+	.top-bar .close {
+		top: 10px !important;
+	}
+	#opal-canvas-filter{
+		display: none !important;
+	}
+	.ui.labeled.ticked.range.slider .labels .label::after{
+		top: -1em !important;
+	}
 </style>
 
 <?php
