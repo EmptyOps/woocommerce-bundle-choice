@@ -778,7 +778,7 @@ class EOWBC_Filter_Widget {
 					<style type="text/css">
 
 						.ui.labeled.ticked.range.slider .labels .label::after{
-							top:-1.6em !important;
+							top:-1em !important;
 							width:2px;
 							height:1.55em;
 							background-color:white !important;
