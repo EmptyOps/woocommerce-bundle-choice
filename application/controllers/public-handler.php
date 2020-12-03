@@ -90,7 +90,7 @@ class Public_Handler {
 
 			    	\eo\wbc\controllers\publics\pages\Product::instance()->init();
 
-			    } elseif(is_page('Product Review')) {
+			    } elseif(is_page(__('Product Review','woo-bundle-choice'))) {
 					\eo\wbc\controllers\publics\pages\Preview::instance()->init();        
 					
 			    } elseif(is_cart()) {

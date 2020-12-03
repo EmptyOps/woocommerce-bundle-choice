@@ -54,6 +54,8 @@ if ( ! class_exists( 'Configuration' ) ) {
 							
 								'label'=>'Sample Data',
 								'form'=>array(
+											'config_automation_section'=>array('label'=>'Install Sample Data','type'=>'segment','desc'=>'Install the sample data containing categorys, attributes and products.'
+											),
 											'saved_tab_key'=>array(
 												'type'=>'hidden',
 												'value'=>'',
@@ -104,6 +106,8 @@ if ( ! class_exists( 'Configuration' ) ) {
 						'config_buttons_conf'=>array(
 								'label'=>'Buttons',
 								'form'=>array(
+									'config_buttons_conf_section'=>array('label'=>'Configure Guidence Buttons','type'=>'segment','desc'=>"Configure the guidence buttona and it's behaviours on the page."
+											),
 									'buttons_page'=>array(
 											'label'=>'Choice button position',
 											'type'=>'select',
@@ -180,6 +184,8 @@ if ( ! class_exists( 'Configuration' ) ) {
 						'config_navigation_conf'=>array(
 								'label'=>'Navigations Steps( Breadcrumb )',
 								'form'=>array(
+									'config_navigation_conf_section'=>array('label'=>'Configure Navigation Steps','type'=>'segment','desc'=>'Configure the navigarion steps and alter the UI of the breadcrumb.'
+									),
 									'devider_first_cat'=>array(
 											'label'=>'First Category',
 											'type'=>'devider',

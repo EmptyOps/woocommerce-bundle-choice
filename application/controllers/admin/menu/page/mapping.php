@@ -106,6 +106,8 @@ if ( ! class_exists( 'Mapping' ) ) {
 				'prod_mapping_pref'=>array(
 					'label'=>'Product mapping preference',
 					'form'=> array(
+						'prod_mapping_pref_section'=>array('label'=>'Configure product mapping','type'=>'segment','desc'=>'Configure the product mapping settings.'
+						),
 						'saved_tab_key'=>array(
 							'type'=>'hidden',
 							'value'=>'',
@@ -152,7 +154,9 @@ if ( ! class_exists( 'Mapping' ) ) {
 				),							
 				'map_creation_modification'=>array(
 						'label'=>"Map creation and modification",
-						'form'=>array( 
+						'form'=>array(
+							'map_creation_modification_section'=>array('label'=>'Add/Edit product maps','type'=>'segment','desc'=>'Add or Edit the product maps.'
+							),
 							$table["id"].'_bulk'=>array(
 								// 'label'=>'Bulk Actions',
 								'type'=>'select',

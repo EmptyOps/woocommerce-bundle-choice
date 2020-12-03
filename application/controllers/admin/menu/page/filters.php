@@ -315,7 +315,9 @@ if ( ! class_exists( 'Filters' ) ) {
 			$form_definition = array(
 				'filter_setting'=>array(
 						'label'=>"Configuration",
-						'form'=>array( 
+						'form'=>array(
+							'filter_setting_section'=>array('label'=>'Filters Configuration','type'=>'segment','desc'=>'Global setting for the filters.'
+									),
 							'filter_setting_filter'=>array(
 									'label'=>'Filter Configuration',
 									'type'=>'devider',
@@ -577,6 +579,9 @@ if ( ! class_exists( 'Filters' ) ) {
 				'altr_filt_widgts'=>array(
 					'label'=>'Alternate Filter Widgets',
 					'form'=> array(
+						'altr_filt_widgts_section'=>array('label'=>'Alternate Filter Widgets UI','type'=>'segment','desc'=>'Set the template of the filter UI for Desktop/Mobile or add custom CSS.'
+						),
+
 						'saved_tab_key'=>array(
 							'type'=>'hidden',
 							'value'=>'',
@@ -656,7 +661,11 @@ if ( ! class_exists( 'Filters' ) ) {
 				'd_fconfig'=>array(
 
 						'label'=>(($inventory_type==='jewelry' and $is_ring_builder)?"Diamond":"First")." Page Filter Configuration",
-						'form'=>array( $table["id"].'_bulk'=>array(
+						'form'=>array( 
+							'd_fconfig_section'=>array('label'=>'Manage filters of '.(($inventory_type==='jewelry' and $is_ring_builder)?"Diamond":"First"),'type'=>'segment','desc'=>'Add/Edit the filters and set their orderings.'
+							),
+
+							$table["id"].'_bulk'=>array(
 								// 'label'=>'Bulk Actions',
 								'type'=>'select',
 								'value'=>'',
@@ -1002,7 +1011,11 @@ if ( ! class_exists( 'Filters' ) ) {
 				's_fconfig'=>array(
 
 						'label'=>($inventory_type==='jewelry'?"Settings":"Second")." Page Filter Configuration",
-						'form'=>array( $sett_table["id"].'_bulk'=>array(
+						'form'=>array( 
+							'd_fconfig_section'=>array('label'=>'Manage filters of '.(($inventory_type==='jewelry' and $is_ring_builder)?"Settings":"Second"),'type'=>'segment','desc'=>'Add/Edit the filters and set their orderings.'
+							),
+
+							$sett_table["id"].'_bulk'=>array(
 								// 'label'=>'Bulk Actions',
 								'type'=>'select',
 								'value'=>'',
@@ -1349,7 +1362,10 @@ if ( ! class_exists( 'Filters' ) ) {
 				'filter_set'=>array(
 
 						'label'=>__("Filter Sets",'woo-bundle-choice'),
-						'form'=>array( $filter_set_table["id"].'_bulk'=>array(
+						'form'=>array( 							
+							'filter_set_section'=>array('label'=>'Manage filters sets','type'=>'segment','desc'=>'Group filters and manage their groups.'
+							),
+							$filter_set_table["id"].'_bulk'=>array(
 								// 'label'=>'Bulk Actions',
 								'type'=>'select',
 								'value'=>'',

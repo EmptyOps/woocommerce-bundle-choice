@@ -103,9 +103,11 @@ class Filter_Samples {
                         }
                         elseif( $tprefix == "shortflt_" ) {
                             $res = \eo\wbc\model\admin\Eowbc_Shortcode_Filters::instance()->save( \eo\wbc\controllers\admin\menu\page\Shortcode_Filters::get_form_definition(), true );
+                        } elseif( $tprefix == "eorad_sc_" ) {
+                            $res = \eo\rad\model\admin\Eorad_Filter::instance()->save( \eo\rad\controller\admin\pages\Request_Diamond_Filter::get_form_definition(), true );
                         }
                         else {
-                            throw new Exception("Sample data process not implemented for the provided prefix ".$tprefix, 1);
+                            throw new \Exception("Sample data process not implemented for the provided prefix ".$tprefix, 1);
                         }
                     }
 

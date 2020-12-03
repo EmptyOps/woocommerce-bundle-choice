@@ -6,7 +6,7 @@
 ?>
 
 <?php if(!empty($label)): ?>
-	<div class="field">
+	<div class="field" style="width: 100% !important">
 		<div class="ui vertical segment"><strong><?php echo $label ?></strong></div>
 		<?php if(!empty($desc)): ?>		
 		<span class="ui grey text fluid medium sixteen wide">(<?php echo $desc; ?>)</span>
