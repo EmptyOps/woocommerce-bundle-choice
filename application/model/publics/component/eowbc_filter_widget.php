@@ -90,9 +90,9 @@ class EOWBC_Filter_Widget {
 		ksort($non_adv_ordered_filter);
 		ksort($adv_ordered_filter);
 
-		echo "non_adv_ordered_filter and adv_ordered_filter dump";
-		wbc()->common->pr($non_adv_ordered_filter);
-		wbc()->common->pr($adv_ordered_filter);
+		//echo "non_adv_ordered_filter and adv_ordered_filter dump";
+		//wbc()->common->pr($non_adv_ordered_filter);
+		//wbc()->common->pr($adv_ordered_filter);
 
 
 		?>
@@ -2070,7 +2070,8 @@ class EOWBC_Filter_Widget {
 			AND price_meta.meta_value > '' ";
 		$sql .= $tax_query_sql['where'] . $meta_query_sql['where'];
 
-		$search = \WC_Query::get_main_search_query_sql();
+
+		$search = @\WC_Query::get_main_search_query_sql();
 		if ( $search ) {
 			$sql .= ' AND ' . $search;
 		}

@@ -76,7 +76,7 @@ class Category_Attribute{
     if(!empty($param)) {
       if(is_numeric($param)) {
         if(function_exists('wc_get_attribute')){
-           return wc_get_attribute($id);
+           return wc_get_attribute($param);
         } else {
 
           foreach (wc_get_attribute_taxonomies() as $attribute) {
