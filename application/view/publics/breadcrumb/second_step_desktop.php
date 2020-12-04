@@ -4,6 +4,33 @@
 *   Template to show breadcrumb second step for desktop
 */
 
+ $view_url = '';                
+if(!empty($second) and !is_wp_error($second)){
+    $view_url =  eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url($second->get_id(),$order);
+} else {
+    $view_url = eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('SECOND'),$order);
+}
+
+if(empty($view_url)){
+    $view_url = '#';
+}
+
+
+
+$change_url = '';
+if(!empty($second) and !is_wp_error($second)){
+
+    $change_url = \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,$second->get_id());
+      
+} else {
+
+    $change_url = \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('SECOND'));
+}
+
+if(empty($change_url)){
+    $change_url = '#';
+}
+
 ?>
 <div class="<?php echo (($step==$order)?'active ':(($step>$order)?'completed ':(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb)?'':'disabled'))); ?> step" >
     <div class="ui equal width grid" style="width: 100%;margin-top: -1em !important;">
@@ -26,7 +53,7 @@
             <div class="column " style="font-size: x-small;">
                 <?php _e(wc_price($second->get_price())); ?>
                 <br/>
-                <u><a href="<?php echo (!empty(wbc()->sanitize->get('SECOND'))?eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('SECOND'),$order):'#'); ?>">View</a></u>&nbsp;|&nbsp;<u><a href="<?php echo (!empty(wbc()->sanitize->get('SECOND'))?eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('SECOND')):'#'); ?>"><?php _e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_change_action_text','Change',true,true)); ?></a></u>
+                <u><a href="<?php echo $view_url; ?>">View</a></u>&nbsp;|&nbsp;<u><a href="<?php echo $change_url; ?>"><?php _e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_change_action_text','Change',true,true)); ?></a></u>
             </div>                
     <?php endif; ?>            
     </div>
