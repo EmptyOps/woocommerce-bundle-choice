@@ -1,0 +1,1 @@
+<i class="ui icon <?php !empty($class)? _e($class) : ''; ?>" style="<?php !empty($style) ? _e($style) : ''; ?>"></i>

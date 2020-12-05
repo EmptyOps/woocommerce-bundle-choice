@@ -292,7 +292,7 @@ class WBC_Common {
 		wp_enqueue_style('eowbc_fomantic_css');
 		
 		wp_register_script('eowbc_fomantic_js',constant('EOWBC_ASSET_URL').'js/fomantic/semantic.min.js');
-		wp_enqueue_script('eowbc_fomantic_js');		
+		wp_enqueue_script('eowbc_fomantic_js','',array('jquery'),'',true);		
     }
 
 }
