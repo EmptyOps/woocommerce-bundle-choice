@@ -749,7 +749,7 @@ class EOWBC_Filter_Widget {
 			top:-1.6em !important;
 			width:2px;
 			height:1.55em;
-			background-color:white !important;
+			background-color:transparent !important;
 		}
 
 		.ui.labeled.ticked.range.slider .labels{
@@ -781,7 +781,7 @@ class EOWBC_Filter_Widget {
 							top:-1em !important;
 							width:2px;
 							height:1.55em;
-							background-color:white !important;
+							background-color:transparent !important;
 						}
 
 						.ui.labeled.ticked.range.slider .labels{
