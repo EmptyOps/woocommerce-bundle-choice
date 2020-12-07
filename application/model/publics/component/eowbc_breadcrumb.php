@@ -182,7 +182,7 @@ class EOWBC_Breadcrumb
     public static function eo_wbc_breadcumb_first_html_mobile($step,$order) {
         $template = wbc()->options->get_option('configuration','config_alternate_breadcrumb_mobile','default');
         
-        wbc()->load->template('publics/breadcrumb/first_step_mobile_'.$template, array("step"=>$step,"order"=>$order,"first"=>self::$first_name,"first_obj"=>self::$first,"view_url"=>(!empty(wbc()->sanitize->get('FIRST')) ? self::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('FIRST'),$order):'#'),"change_url"=>(!empty(wbc()->sanitize->get('FIRST'))?self::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('FIRST')):'#')));
+        wbc()->load->template('publics/breadcrumb/first_step_mobile_'.$template, array("step"=>$step,"order"=>$order,"first"=>self::$first_name,"first_obj"=>self::$first,"first"=>self::$first,"view_url"=>(!empty(wbc()->sanitize->get('FIRST')) ? self::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('FIRST'),$order):'#'),"change_url"=>(!empty(wbc()->sanitize->get('FIRST'))?self::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('FIRST')):'#')));
         
 
     }
@@ -190,7 +190,7 @@ class EOWBC_Breadcrumb
     public static function eo_wbc_breadcumb_second_html_mobile($step,$order){
         $template = wbc()->options->get_option('configuration','config_alternate_breadcrumb_mobile','default');
 
-        wbc()->load->template('publics/breadcrumb/second_step_mobile_'.$template,array("step"=>$step,"order"=>$order,"second"=>self::$second_name,"second_obj"=>self::$second,"view_url"=>(!empty(wbc()->sanitize->get('SECOND')) ? self::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('SECOND'),$order):'#'),"change_url"=>(!empty(wbc()->sanitize->get('SECOND')?self::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('SECOND')):'#')))); 
+        wbc()->load->template('publics/breadcrumb/second_step_mobile_'.$template,array("step"=>$step,"order"=>$order,"second"=>self::$second_name,"second_obj"=>self::$second,"second"=>self::$second,"view_url"=>(!empty(wbc()->sanitize->get('SECOND')) ? self::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('SECOND'),$order):'#'),"change_url"=>(!empty(wbc()->sanitize->get('SECOND')?self::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('SECOND')):'#')))); 
     }
 
     public static function eo_wbc_breadcumb_final_html_mobile($step) {
@@ -559,8 +559,11 @@ class EOWBC_Breadcrumb
 
     private static function eo_wbc_breadcrumb_get_category($product_id)
     {   
+        if(empty($product_id)){
+            return false;
+        }
 
-        return wbc()->common->get_category('product',$product_id,array(wbc()->options->get_option('configuration','first_slug'),wbc()->options->get_option('configuration','second_slug')));
+        return wbc()->common->get_category('product',intval($product_id),array(wbc()->options->get_option('configuration','first_slug'),wbc()->options->get_option('configuration','second_slug')));
 
 
         if(is_object($product_id) and method_exists($product_id,'get_id')) {

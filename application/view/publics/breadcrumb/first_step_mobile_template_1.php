@@ -5,8 +5,8 @@
 */
 
 $view_url = '';                
-if(!empty($first) and !is_wp_error($first)){
-    $view_url =  eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url($first->get_id(),$order);
+if(!empty($first_obj) and !is_wp_error($first_obj)){
+    $view_url =  eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url($first_obj->get_id(),$order);
 } else {
     $view_url = eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('FIRST'),$order);
 }
@@ -18,9 +18,9 @@ if(empty($view_url)){
 
 
 $change_url = '';
-if(!empty($first) and !is_wp_error($first)){
+if(!empty($first_obj) and !is_wp_error($first_obj)){
 
-    $change_url = \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,$first->get_id());
+    $change_url = \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,$first_obj->get_id());
       
 } else {
 
