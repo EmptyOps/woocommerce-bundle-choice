@@ -20,7 +20,7 @@ class WBC_Common {
 		$return_category = '';
 		if($page == 'category' ) {
 			global $wp_query;
-			if(!property_exists($wp_query->get_queried_object(),'term_id')){
+			if(empty($wp_query->get_queried_object()) or !property_exists($wp_query->get_queried_object(),'term_id')) {
 				return false;
 			}
 			if(!empty($in_category) and is_array($in_category)) {

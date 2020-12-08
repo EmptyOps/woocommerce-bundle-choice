@@ -255,7 +255,9 @@ class Eowbc_Price_Control_Save_Update_Prices {
 	                        delete_post_meta($pid,'_sale_price');                    
 	                        update_post_meta($pid,'_price',$q_data[count($q_data)-1]->regular_price);
 	                    }            
-	                    update_post_meta($pid,'_regular_price',$q_data[count($q_data)-1]->regular_price); 
+	                    if(!empty($q_data[count($q_data)-1]->regular_price)){
+	                    	update_post_meta($pid,'_regular_price',$q_data[count($q_data)-1]->regular_price); 
+	                    }
 	                    wc_delete_product_transients($pid);  
 	                }
 	            }

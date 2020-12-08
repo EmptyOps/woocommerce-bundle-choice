@@ -267,7 +267,7 @@ class Product {
             
             global $post;            
             $product = wbc()->wc->eo_wbc_get_product($post->ID);
-            if($product->is_in_stock()){
+            if(!empty($product) and !is_wp_error($product) and  $product->is_in_stock()) {
 
             ?>
             <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->

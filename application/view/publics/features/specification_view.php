@@ -6,6 +6,10 @@
 
 
     global $product;
+    global $post;
+    if(empty($product)){
+        $product = wbc()->wc->get_product($post->ID);
+    }
     
     $product_data = array();
     $sku = $product->get_sku();
