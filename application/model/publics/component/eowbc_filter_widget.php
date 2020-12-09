@@ -433,7 +433,12 @@ class EOWBC_Filter_Widget {
 			if(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_1' and wp_is_mobile()){
 				ob_start();
 				?>
-				<style type="text/css">					
+				<style type="text/css">
+					/*.ui.labeled.ticked.range.slider .label:first-child span{
+					    position: absolute;
+					    transform: translate(-50%, -100%);
+					    white-space: break-spaces;
+					}*/
 					.eo-wbc-container .toggle_sticky_mob_filter{
 						margin: 0px;					
 						text-align: center;
