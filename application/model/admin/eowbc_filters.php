@@ -199,7 +199,6 @@ class Eowbc_Filters extends Eowbc_Model {
 
 				$filter_data = unserialize(wbc()->options->get_option_group('filters_'.$this->tab_key_prefix.'d_fconfig',"a:0:{}"));
 				
-
 				if(!empty($filter_data)){
 					$ids = array_keys($filter_data);
 					$this->deactivate( $ids,$this->tab_key_prefix.'d_fconfig',1 );
