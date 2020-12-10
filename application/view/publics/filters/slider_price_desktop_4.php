@@ -7,7 +7,9 @@
 ?>
 <div class="<?php echo $width_class; ?>">
 	<p style="display: inline-block;margin-top: 0.25em;"class="ui three wide field num_slider">
-		<span class="ui header">Price</span>
+		<span class="ui header">Price</span><?php if($reset): ?>
+			&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_price(event,'<?php echo $min; ?>','<?php echo $max; ?>')">&nbsp;<u>reset</u></span>
+			<?php endif; ?>
 	</p>
 	<div style="display: inline-block;" class="field twelve ui wide">
 
