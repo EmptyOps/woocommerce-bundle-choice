@@ -8,7 +8,7 @@
 	<div class="<?php echo $width_class; ?>" data-tab-group="<?php _e($tab_set); ?>">
 		<p>
 			<span class="ui header"><?php echo($title); ?></span>
-			<<?php if($help): ?>
+			<?php if($help): ?>
 			&nbsp; <span class="ui grey text" style="cursor: pointer;">&nbsp;<i class="question circle outline icon" data-help="<?php _e($help); ?>"></i></span>
 			<?php endif; ?>
 				<?php if($reset): ?>

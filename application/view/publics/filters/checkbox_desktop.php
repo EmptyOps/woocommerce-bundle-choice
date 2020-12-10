@@ -13,6 +13,7 @@
 			<?php endif; ?>
 			<?php if($reset): ?>
 			&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_checkbox(event,'.checklist_<?php echo $filter['slug'] ?>')">&nbsp;<u>reset</u></span>
+			<?php endif; ?>
 		</p>
 		<div class="ui tiny form" data-reset="reset_checkbox(new Event('click'),'.checklist_<?php echo $filter['slug'] ?>')">
 			<?php foreach ($filter['list'] as $term) : ?>
