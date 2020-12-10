@@ -944,7 +944,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'label'=>'Help Text',
 								'type'=>'textarea',
 								'value'=>'',
-								'sanitize'=>'sanitize_text_field',
+								/*'sanitize'=>'sanitize_text_field',*/
 								'attr'=>array('style="width:100%;"'),
 								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
@@ -1295,7 +1295,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'label'=>'Help Text',
 								'type'=>'textarea',
 								'value'=>'',
-								'sanitize'=>'sanitize_text_field',
+								/*'sanitize'=>'sanitize_text_field',*/
 								'attr'=>array('style="width:100%;"'),
 								'is_id_as_name'=>true,
 								'class'=>array('fluid'),

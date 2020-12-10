@@ -36,7 +36,6 @@ class Eowbc_Filters extends Eowbc_Model {
 	    foreach ($form_definition as $key => $tab) {
 
 	    	$key_clean = ((!empty($this->tab_key_prefix) and strpos($key,$this->tab_key_prefix)===0)?substr($key,strlen($this->tab_key_prefix)):$key);
-
 	    	//loop through form fields and read values from options and store in the form_definition 
 			foreach ($tab["form"] as $fk => $fv) {
 				if( $fv["type"] == "table" ) {
@@ -173,7 +172,7 @@ class Eowbc_Filters extends Eowbc_Model {
 		wbc()->validate->check($form_definition);
 		$res = array();
 		$res["type"] = "success";
-	    $res["msg"] = "";	    
+	    $res["msg"] = "";
 	    //$res['post']=$_POST;
 		wbc()->load->model('admin\form-builder');
 
@@ -322,8 +321,7 @@ class Eowbc_Filters extends Eowbc_Model {
 				    		$table_data[$fk] = (int)wbc()->sanitize->post($fk); 	
 			    		}
 			    		else {
-			    			 
-			    			$table_data[$fk] = ( isset($_POST[$fk]) ? wbc()->sanitize->post($fk) : '' ); 
+			    			$table_data[$fk] = ( isset($_POST[$fk]) ? wbc()->sanitize->_post($fk) : '' ); 
 			    		}
 			    	}
 			    	else {			    		
