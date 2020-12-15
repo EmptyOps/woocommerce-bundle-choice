@@ -1409,10 +1409,22 @@ if ( ! class_exists( 'Filters' ) ) {
 								'attr'=>array('data-tab_key="filter_set"', 'data-action="save"'),
 							)
 						)
-					),
-				
+					)
 			);
 
+			if( version_compare( constant('WC_VERSION'), '3.6' ) >=0) {
+				$form_definition['filter_sync'] = array(
+					'label'=>__("Sync",'woo-bundle-choice'),
+					'form' => array(
+						'filter_sync_button'=>array(
+							'label'=>eowbc_lang('Sync Now'),
+							'type'=>'button',
+							'class'=>array('secondary'),
+							'inline'=>false,
+						)
+					)
+				);
+			}
 
 			$form_definition=apply_filters('eowbc_admin_form_filters',$form_definition);
 

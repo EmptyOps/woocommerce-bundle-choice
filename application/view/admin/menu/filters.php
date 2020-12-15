@@ -103,6 +103,42 @@ if(!empty($attributes) and is_array($attributes)){
 					}
 				}
 			
-			});
+		});
+
+		let pids = JSON.parse('<?php echo json_encode(get_posts( array('post_type' => 'product','numberposts' => -1,'post_status' => 'publish','fields' => 'ids',) )); ?>');
+		let batches = Math.ceil(pids.length / 100);
+
+		function eowbc_sync_filter_products(batch) {
+			if(batch>=batches){
+				jQuery("#filter_sync_button").removeClass('disabled');
+			} else {
+				let data = {	                
+	                '_wpnonce': '<?php echo wp_create_nonce('sync_filter_products');?>',
+	                'action':'eowbc_ajax',
+	                'resolver':'sync_filter_products',
+	                'ids':pids.slice(batch*100,(batch+1)*100)
+	            };	
+
+	            jQuery.ajax({
+		            url:'<?php _e(admin_url( 'admin-ajax.php' )); ?>',
+		            type: 'POST',
+		            data: data,
+		            beforeSend:function(xhr){ },
+		            success:function(result,status,xhr){
+		                eowbc_sync_filter_products(batch+1);
+		            },
+		            error:function(xhr,status,error){
+		                eowbc_sync_filter_products(batch);
+		            }
+		        });	
+			}
+		}
+
+		jQuery("#filter_sync_button:not('disabled')").on('click',function(e){
+			e.preventDefault();
+			e.stopPropagation();
+			jQuery("#filter_sync_button").addClass('disabled');
+			eowbc_sync_filter_products(0);
+		});
 	});	
 </script>
