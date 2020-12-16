@@ -20,8 +20,8 @@
 					data-slug="<?php echo $filter_icon['slug']; ?>" 
 					data-filter="<?php echo $term->slug; ?>" style="border-bottom: 2px solid transparent;padding-top: 0rem;padding-bottom: 0rem;"
 					data-type="<?php echo $type; ?>">
-					<div style="height: 30px;display: flex;">
-						<img src='<?php echo ($filter_icon['mark']?$filter_icon['select_icon']:$filter_icon['icon']); ?>' class="ui mini image" style="width:30px !important;margin: auto;display: block;" data-imgsrc="<?php echo $filter_icon['icon']; ?>" data-toggleimgsrc="<?php echo $filter_icon['select_icon']; ?>"/>
+					<div style="<?php _e($icon_css); ?>;display: flex;">
+						<img src='<?php echo ($filter_icon['mark']?$filter_icon['select_icon']:$filter_icon['icon']); ?>' class="ui mini image" style="<?php _e($icon_css); ?>;margin: auto;display: block;" data-imgsrc="<?php echo $filter_icon['icon']; ?>" data-toggleimgsrc="<?php echo $filter_icon['select_icon']; ?>"/>
 					</div>
 					<?php if($input=='icon_text'): ?>
 						<div style="visibility: hidden;"><?php echo($filter_icon['name']); ?></div>

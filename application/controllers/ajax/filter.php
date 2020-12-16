@@ -53,7 +53,7 @@ class Filter
         return $list;
     }
 
-    public function lookup(){
+    public function lookup($return_query = false,$sql_join = '',$order_sql = ''){
     	$pids = array();
 
     	$table_columns = unserialize(wbc()->options->get_option('lookup_manager','table_columns',serialize(array())));
@@ -62,27 +62,30 @@ class Filter
         	return array();
         }
 
-    	if(isset($_GET['products_in']) AND !empty(wbc()->sanitize->get('products_in')) ) {
-    		$pids = explode(',',wbc()->sanitize->get('products_in'));        	
+    	if(isset($_REQUEST['products_in']) AND !empty(wbc()->sanitize->request('products_in')) ) {
+    		$pids = explode(',',wbc()->sanitize->request('products_in'));        	
         }
 
         $category_fields = array();
         $attribute_fields = array();
 
-        if( isset($_GET['_category']) OR isset($_GET['_current_category']) ) {
-        	if(!empty(wbc()->sanitize->get('_category'))) {
-				foreach( array_unique(array_filter(explode(',', wbc()->sanitize->get('_category')))) as $_category){
-					if(isset($_GET['cat_filter_'.$_category]) && (!empty(wbc()->sanitize->get('cat_filter_'.$_category))) ) {
+        if( isset($_REQUEST['_category']) OR isset($_REQUEST['_current_category']) ) {
 
-						foreach (array_filter(explode(',',wbc()->sanitize->get('cat_filter_'.$_category))) as $_category_field) {
+        	if(!empty(wbc()->sanitize->request('_category'))) {
+				foreach( array_unique(array_filter(explode(',', wbc()->sanitize->request('_category')))) as $_category) {
+					if(isset($_REQUEST['cat_filter_'.$_category]) && (!empty(wbc()->sanitize->request('cat_filter_'.$_category))) ) {
+
+						foreach (array_filter(explode(',',wbc()->sanitize->request('cat_filter_'.$_category))) as $_category_field) {
 							if(!empty($table_columns['category'][$_category_field])){
 								$category_fields [] = $_category_field;
 							}
 						}
                     }
 				}        		
-        	} elseif(!empty(wbc()->sanitize->get('_current_category'))) {
-        		foreach (array_filter(explode(',',wbc()->sanitize->get('_current_category'))) as $_category_field) {
+        	} 
+
+        	if(empty($category_fields) and  !empty(wbc()->sanitize->request('_current_category'))) {
+        		foreach (array_filter(explode(',',wbc()->sanitize->request('_current_category'))) as $_category_field) {
 					if(!empty($table_columns['category'][$_category_field])){
 						$category_fields [] = $_category_field;
 					}
@@ -92,15 +95,15 @@ class Filter
         	///////////////////////////////////////////////
             //Filter section for attributes
             ///////////////////////////////////////////////  
-            if(!empty(wbc()->sanitize->get('_attribute'))) {
-            	foreach (array_filter(explode(',', wbc()->sanitize->get('_attribute'))) as $attr) {
+            if(!empty(wbc()->sanitize->request('_attribute'))) {
+            	foreach (array_filter(explode(',', wbc()->sanitize->request('_attribute'))) as $attr) {
 
             		if(!empty($table_columns['attribute'][$attr])) {
 
-	            		if (isset($_GET['checklist_'.$attr]) && !empty(wbc()->sanitize->get('checklist_'.$attr))) {
+	            		if (isset($_REQUEST['checklist_'.$attr]) && !empty(wbc()->sanitize->request('checklist_'.$attr))) {
 
 	            			$checklist_attributes = array();
-	            			foreach (array_filter(explode(',',wbc()->sanitize->get('_current_category'))) as $_attribute_field) {
+	            			foreach (array_filter(explode(',',wbc()->sanitize->request('_current_category'))) as $_attribute_field) {
 								$_attribute_field = get_term_by('slug',$_attribute_field,$attr);
 								if(!empty($_attribute_field) and !is_wp_error($_attribute_field)){
 									$checklist_attributes[] = $_attribute_field->term_id;
@@ -111,11 +114,11 @@ class Filter
 								$attribute_fields[$attr] = $checklist_attributes;
 							}
 
-	                    } elseif(isset($_GET['min_'.$attr]) && isset($_GET['max_'.$attr])){
+	                    } elseif(isset($_REQUEST['min_'.$attr]) && isset($_REQUEST['max_'.$attr])){
 	                        
-	                        if ( is_numeric(wbc()->sanitize->get('min_'.$attr)) && is_numeric(wbc()->sanitize->get('max_'.$attr)) ) {
+	                        if ( is_numeric(wbc()->sanitize->request('min_'.$attr)) && is_numeric(wbc()->sanitize->request('max_'.$attr)) ) {
 
-	                        	$min_max_attributes =  $this->range($attr,wbc()->sanitize->get('min_'.$attr),wbc()->sanitize->get('max_'.$attr),true);
+	                        	$min_max_attributes =  $this->range($attr,wbc()->sanitize->request('min_'.$attr),wbc()->sanitize->request('max_'.$attr),true);
 
 	                        	if(!empty($min_max_attributes)) {
 									$attribute_fields[$attr] = $min_max_attributes;
@@ -123,7 +126,7 @@ class Filter
 	                        }
 	                        else {
 
-	                        	$range_attributes = $this->range($attr,wbc()->sanitize->get('min_'.$attr),wbc()->sanitize->get('max_'.$attr));
+	                        	$range_attributes = $this->range($attr,wbc()->sanitize->request('min_'.$attr),wbc()->sanitize->request('max_'.$attr));
 	                        	if(!empty($range_attributes)) {
 									$attribute_fields[$attr] = $range_attributes;
 								}
@@ -155,10 +158,15 @@ class Filter
         }
 
         global $wpdb;
-        
-        echo "SELECT `product_id`,`parent_id` FROM `{$wpdb->wc_product_meta_lookup}` WHERE ${category_fields} AND ${attribute_fields}";
 
-        $result = $wpdb->get_results("SELECT `product_id`,`parent_id` FROM `{$wpdb->wc_product_meta_lookup}` WHERE ${category_fields} AND ${attribute_fields}",'ARRAY_N');
+        if($return_query) {
+        	return "SELECT `product_id`,`parent_id` FROM `{$wpdb->wc_product_meta_lookup}` ${sql_join} WHERE ${category_fields} AND ${attribute_fields} ${order_sql}";
+        }
+
+        /*echo "SELECT `product_id`,`parent_id` FROM `{$wpdb->wc_product_meta_lookup}` ${sql_join} WHERE ${category_fields} AND ${attribute_fields} ${order_sql}";
+        die();*/
+       
+        $result = $wpdb->get_results("SELECT `product_id`,`parent_id` FROM `{$wpdb->wc_product_meta_lookup}` ${sql_join} WHERE ${category_fields} AND ${attribute_fields} ${order_sql}",'ARRAY_N');
 
 
         if(!empty($result) and !is_wp_error($result)){
@@ -318,11 +326,11 @@ class Filter
 				            }
 				            
 				            //if(is_array($old_tax_query))
-				            echo "<pre>";			            
+				            /*echo "<pre>";			            
 				            print_r($query->get('tax_query'));
 				            unset($_GET['EO_WBC']);
-			                echo "</pre>";
-			                die();
+			                echo "</pre>";*/
+			                //die();
 			            }
 			        }
 		        }		       
