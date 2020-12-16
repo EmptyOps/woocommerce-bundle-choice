@@ -1620,6 +1620,10 @@ class EOWBC_Filter_Widget {
 
 	public function load_desktop($general_filters, $advance_filters) {
 
+		echo "load_desktop non_adv_ordered_filter and adv_ordered_filter dump";
+		wbc()->common->pr($general_filters);
+		wbc()->common->pr($advance_filters);
+
 		$category = $this->_category;
 		
 		if(
@@ -2444,6 +2448,10 @@ class EOWBC_Filter_Widget {
 		ksort($non_adv_ordered_filter);		
 		ksort($adv_ordered_filter);
 
+		echo "non_adv_ordered_filter and adv_ordered_filter dump";
+		wbc()->common->pr($non_adv_ordered_filter);
+		wbc()->common->pr($adv_ordered_filter);
+
 		?>
 		<!--Primary filter button that will only be visible on desktop/tablet-->
 		<!-- This widget is created with Wordpress plugin - WooCommerce Product bundle choice -->
@@ -2514,7 +2522,9 @@ class EOWBC_Filter_Widget {
 					)],array_values($non_adv_ordered_filter));			
 		}
 
-
+		echo "non_adv_ordered_filter and adv_ordered_filter dump 1";
+		wbc()->common->pr($non_adv_ordered_filter);
+		wbc()->common->pr($adv_ordered_filter);
 
 		$this->load_filters($non_adv_ordered_filter,$adv_ordered_filter);
 				
