@@ -68,6 +68,27 @@ class Form_Elements {
 		return $this->color($key,$label,$args);
 	}
 
+	public function back_color($key,$label,$args=array()) {
+		extract($args);
+
+		if(empty($info)){
+			$info = array( 'label'=>eowbc_lang("Sets Backgroound Color on ${label}"),
+				'type'=>'visible_info',
+				'class'=>array('small'),				
+			);
+		} else {
+			$info = array( 'label'=>$info,
+				'type'=>'visible_info',
+				'class'=>array('small'),				
+			);
+		}
+
+		$args['info'] = $info;
+		$args['label'] = "${label} Backgroound Color";
+
+		return $this->color($key,$label,$args);
+	}
+
 	public function color($key,$label,$args=array()) {
 		extract($args);
 		if(empty($required)) {
@@ -120,8 +141,6 @@ class Form_Elements {
 	public function select() {
 
 	}
-
-	
 
 	public function text($key,$label,$args=array()) {
 		
@@ -176,6 +195,7 @@ class Form_Elements {
 	public function font($key,$label,$args=array()){
 		return $this->font_family($key,$label,$args);
 	}
+
 	public function font_family($key,$label,$args=array()) {
 
 		extract($args);
@@ -238,5 +258,160 @@ class Form_Elements {
 		$args['label'] = "${label} Border Radius";
 
 		return $this->text($key,$label,$args);
+	}
+
+	public function height($key,$label,$args=array()) {
+		extract($args);
+
+		if(empty($info)){
+			$info = array( 'label'=>eowbc_lang("Sets specified height on ${label}"),
+				'type'=>'visible_info',
+				'class'=>array('small'),				
+			);
+		} else {
+			$info = array( 'label'=>$info,
+				'type'=>'visible_info',
+				'class'=>array('small'),				
+			);
+		}
+
+		$args['info'] = $info;
+		$args['label'] = "${label} Height";
+
+		return $this->text($key,$label,$args);
+	}
+
+	public function width($key,$label,$args=array()) {
+		extract($args);
+
+		if(empty($info)){
+			$info = array( 'label'=>eowbc_lang("Sets specified width on ${label}"),
+				'type'=>'visible_info',
+				'class'=>array('small'),				
+			);
+		} else {
+			$info = array( 'label'=>$info,
+				'type'=>'visible_info',
+				'class'=>array('small'),				
+			);
+		}
+
+		$args['info'] = $info;
+		$args['label'] = "${label} Width";
+
+		return $this->text($key,$label,$args);
+	}
+
+	public function margin_left($key,$label,$args=array()) {
+		extract($args);
+
+		if(empty($info)){
+			$info = array( 'label'=>eowbc_lang("Sets specified left margin on ${label}"),
+				'type'=>'visible_info',
+				'class'=>array('small'),				
+			);
+		} else {
+			$info = array( 'label'=>$info,
+				'type'=>'visible_info',
+				'class'=>array('small'),				
+			);
+		}
+
+		$args['info'] = $info;
+		$args['label'] = "${label} Left Margin";
+
+		return $this->text($key,$label,$args);
+	}
+
+	public function margin_right($key,$label,$args=array()) {
+		extract($args);
+
+		if(empty($info)){
+			$info = array( 'label'=>eowbc_lang("Sets specified right margin on ${label}"),
+				'type'=>'visible_info',
+				'class'=>array('small'),				
+			);
+		} else {
+			$info = array( 'label'=>$info,
+				'type'=>'visible_info',
+				'class'=>array('small'),				
+			);
+		}
+
+		$args['info'] = $info;
+		$args['label'] = "${label} Right Margin";
+
+		return $this->text($key,$label,$args);
+	}
+
+	public function checkbox($key,$label,$args=array()){
+		extract($args);
+
+		if(empty($info)){
+			$info = array( 'label'=>eowbc_lang("Toggle status of {$label}"),
+				'type'=>'visible_info',
+				'class'=>array('small'),				
+			);
+		} else {
+			$info = array( 'label'=>$info,
+				'type'=>'visible_info',
+				'class'=>array('small'),				
+			);
+		}
+
+		if(!empty($args['label'])){
+			$label = $args['label'];
+		} else {
+			$label = "${label}";
+		}
+
+		if(empty($options)){
+			$options = array();
+		}
+
+		if(empty($inline)){
+			$inline = false;
+		}
+
+		if(empty($grouped)){
+			$grouped = false;
+		}
+
+		if(empty($value)) {
+			$value = array();
+		}
+
+		return array(
+			'label'=>$label,
+			'type'=>'checkbox',
+			'sanitize'=>'sanitize_text_field',
+			'size_class'=>array('eight','wide'),
+			'value'=>$value,
+			'options'=>$options,
+			'inline'=>$inline,
+			'grouped'=>$grouped,
+			'visible_info'=>$info
+		);
+	}
+
+	public function image($key,$label,$args=array()) {
+
+		extract($args);
+		
+		if(!empty($args['label'])){
+			$label = $args['label'];
+		} else {
+			$label = "${label} Image";
+		}
+
+		return array(
+			'label'=>$label,
+			'type'=>'icon',
+			'value'=>'',			
+			'sanitize'=>'sanitize_text_field',
+			'class'=>array(),
+			'size_class'=>array('eight','wide'),
+			'inline'=>false,
+		);
 	}
 }

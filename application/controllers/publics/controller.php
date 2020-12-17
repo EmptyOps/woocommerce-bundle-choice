@@ -1,10 +1,10 @@
 <?php
 
-namespace eo\wbc\controllers;
+namespace eo\wbc\controllers\publics;
 
 defined( 'ABSPATH' ) || exit;
 
-class Controller {
+class Controller extends \eo\wbc\controllers\Controller{
 
 	protected function __construct() {
 		
@@ -20,5 +20,5 @@ class Controller {
 
 	protected function _call() {
 
-	}
+	}	
 }

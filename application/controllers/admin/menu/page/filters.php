@@ -4,7 +4,7 @@ namespace eo\wbc\controllers\admin\menu\page;
 defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'Filters' ) ) {
-	class Filters {
+	class Filters extends \eo\wbc\controllers\admin\Controller {
 
 		private static $_instance;
 		public static function instance() {

@@ -288,7 +288,8 @@ class Eowbc_Filters extends Eowbc_Model {
 	    	}
 	    	$key_clean = ((!empty($this->tab_key_prefix) and strpos($key,$this->tab_key_prefix)===0)?substr($key,strlen($this->tab_key_prefix)):$key);
 	    	//$res['data_form'][]= $tab;
-			$is_table_save = ($key != $this->tab_key_prefix."altr_filt_widgts" and $key != $this->tab_key_prefix."filter_setting") ? true : false;
+			$is_table_save = ($key == $this->tab_key_prefix."d_fconfig" or $key == $this->tab_key_prefix."s_fconfig") ? true : false;
+
 			$table_data = array();
 			$tab_specific_skip_fileds = $is_table_save ? array('eowbc_price_control_methods_list_bulk','eowbc_price_control_sett_methods_list_bulk') : array();
 
