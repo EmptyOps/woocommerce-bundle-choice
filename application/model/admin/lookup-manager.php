@@ -167,32 +167,33 @@ class Lookup_Manager {
 			$fields_type[] = '%d';
 		}
 		$wpdb->update( $lookup_table,$fields,array('product_id'=>$id),$fields_type, array('%d'));
+		return $wpdb->last_query;
 	}
 
 	public function add_product($id, $product) {
 		$data = $this->get_data($product);
 		$this->process_columns($data);
-		$this->save($id,$data);
+		return $this->save($id,$data);
 	}
 
 	public function add_product_variation($id, $product) {
 		$parent_id = $product->get_parent_id();
 		$data = $this->get_data($product);
 		$this->process_columns($data);
-		$this->save($id,$data,$parent_id);
+		return $this->save($id,$data,$parent_id);
 	}
 
 	public function update_product($id, $product) {
 		$data = $this->get_data($product);
 		$this->process_columns($data);
-		$this->save($id,$data);
+		return $this->save($id,$data);
 	}
 
 	public function update_product_variation($id, $product) {
 		$parent_id = $product->get_parent_id();
 		$data = $this->get_data($product);
 		$this->process_columns($data);
-		$this->save($id,$data,$parent_id);
+		return $this->save($id,$data,$parent_id);
 	}
 		
 	public function remove_attribute_column($id, $name, $taxonomy) {
