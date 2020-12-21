@@ -72,13 +72,29 @@ class Filter
         if( isset($_REQUEST['_category']) OR isset($_REQUEST['_current_category']) ) {
 
         	if(!empty(wbc()->sanitize->request('_category'))) {
-				foreach( array_unique(array_filter(explode(',', wbc()->sanitize->request('_category')))) as $_category) {
-					if(isset($_REQUEST['cat_filter_'.$_category]) && (!empty(wbc()->sanitize->request('cat_filter_'.$_category))) ) {
+        		//////////////////////////////////////////////////
+        		//echo wbc()->sanitize->request('_category').PHP_EOL;
 
+				foreach( array_unique(array_filter(explode(',', wbc()->sanitize->request('_category')))) as $_category) {
+					////////////////////////
+					//echo $_category.PHP_EOL;
+
+					if(isset($_REQUEST['cat_filter_'.$_category]) && (!empty(wbc()->sanitize->request('cat_filter_'.$_category))) ) {
+						////////////////////////////////////////////////////////
+						//echo 'FIELD: '.wbc()->sanitize->request('cat_filter_'.$_category).PHP_EOL;
+						$result_false = false;
 						foreach (array_filter(explode(',',wbc()->sanitize->request('cat_filter_'.$_category))) as $_category_field) {
+							//////////////////////////////
+							//echo 'ITEM: '.$_category_field.PHP_EOL;
 							if(!empty($table_columns['category'][$_category_field])){
 								$category_fields [] = $_category_field;
+							} else {
+								$result_false = true;
 							}
+						}
+
+						if(empty($category_fields) and $result_false === true){
+							$category_fields['product_id']='-1';
 						}
                     }
 				}        		
@@ -142,7 +158,7 @@ class Filter
         } else {
         	$field_query = array();
         	foreach ($category_fields as $field) {
-        		$field_query[]="`${field}` = 1";
+        		$field_query[]="`${field}` != 0";
         	}
         	$category_fields = "(" .implode(' OR ',$field_query) .")"; 
         }
@@ -160,13 +176,13 @@ class Filter
         global $wpdb;
 
         if($return_query) {
-        	return "SELECT `product_id`,`parent_id` FROM `{$wpdb->wc_product_meta_lookup}` ${sql_join} WHERE ${category_fields} AND ${attribute_fields} ${order_sql}";
+        	return "SELECT `product_id`,`parent_id` FROM `{$wpdb->wc_product_meta_lookup}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ${attribute_fields} ${order_sql}";
         }
 
         /*echo "SELECT `product_id`,`parent_id` FROM `{$wpdb->wc_product_meta_lookup}` ${sql_join} WHERE ${category_fields} AND ${attribute_fields} ${order_sql}";
         die();*/
        
-        $result = $wpdb->get_results("SELECT `product_id`,`parent_id` FROM `{$wpdb->wc_product_meta_lookup}` ${sql_join} WHERE ${category_fields} AND ${attribute_fields} ${order_sql}",'ARRAY_N');
+        $result = $wpdb->get_results("SELECT `product_id`,`parent_id` FROM `{$wpdb->wc_product_meta_lookup}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ${attribute_fields} ${order_sql}",'ARRAY_N');
 
 
         if(!empty($result) and !is_wp_error($result)){

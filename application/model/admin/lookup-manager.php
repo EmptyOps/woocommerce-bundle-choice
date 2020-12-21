@@ -66,7 +66,7 @@ class Lookup_Manager {
 				foreach ($categories as $cat_id) {
 					$category_object = get_term_by('id',$cat_id,'product_cat');
 					if(!empty($category_object) and !is_wp_error($category_object)) {
-						$category_slug[$category_object->slug] = $category_object->slug;	
+						$category_slug[$category_object->slug] = $cat_id;
 					}
 				}
 			}
@@ -109,11 +109,11 @@ class Lookup_Manager {
 
 		if(!empty($data['category'])){
 			foreach ($data['category'] as $cat_key => $cat_value) {
-				if($wpdb->get_var("SHOW COLUMNS FROM `".$lookup_table."` LIKE '".$cat_value."'" ) != $cat_value)
+				if($wpdb->get_var("SHOW COLUMNS FROM `".$lookup_table."` LIKE '".$cat_key."'" ) != $cat_key)
 		        {
-		            $sql="alter TABLE `".$lookup_table."` ADD `".$cat_value."` bigint(20) null DEFAULT 0";   
+		            $sql="alter TABLE `".$lookup_table."` ADD `".$cat_key."` bigint(20) null DEFAULT 0";   
 		            $wpdb->query($sql);
-		            $table_columns['category'][$cat_value] = $cat_value;
+		            $table_columns['category'][$cat_key] = $cat_value;
 		        }  
 			}
 		}
@@ -127,7 +127,7 @@ class Lookup_Manager {
 		wbc()->options->update_option('lookup_manager','table_columns',serialize($table_columns));
 	}
 
-	public function save($id,$data,$parent_id=0) {
+	public function save($id,$data,$product,$parent_id=0) {
 
 		global $wpdb;
 		$lookup_table = $wpdb->prefix."wc_product_meta_lookup";
@@ -153,7 +153,7 @@ class Lookup_Manager {
 		if(!empty($table_columns['category']) and is_array($table_columns['category']) and !empty($data['category']) and is_array($data['category']) ) {
 			foreach ($table_columns['category'] as $cat_key => $cat_value) {
 				if(!empty($data['category'][$cat_key])) {
-					$fields[$cat_key] = 1;
+					$fields[$cat_key] = $data['category'][$cat_key];
 					$fields_type[] = '%d';
 				} else {
 					$fields[$cat_key] = 0;
@@ -166,34 +166,81 @@ class Lookup_Manager {
 			$fields['parent_id'] = $parent_id;
 			$fields_type[] = '%d';
 		}
-		$wpdb->update( $lookup_table,$fields,array('product_id'=>$id),$fields_type, array('%d'));
-		return $wpdb->last_query;
+
+		if($wpdb->get_var("SELECT product_id FROM `${lookup_table}` WHERE product_id=${id}") == $id){
+			$wpdb->update( $lookup_table,$fields,array('product_id'=>$id),$fields_type, array('%d'));
+			return $wpdb->last_query;
+		} elseif (!empty($product) and !is_wp_error($product)) {
+			$fields['product_id'] = $id;
+			$fields_type[] = '%d';
+			$fields['sku'] = $product->get_sku();
+			$fields_type[] = '%s';
+			$fields['virtual'] = $product->is_virtual();
+			$fields_type[] = '%d';
+			$fields['downloadable'] = $product->is_downloadable();
+			$fields_type[] = '%d';
+			
+			if($product->is_type('variable')){
+				$fields['min_price'] = $product->get_variation_price('min'); (empty($product->get_sale_price())?$product->get_regular_price():$product->get_sale_price());
+				$fields_type[] = '%f';
+				$fields['max_price'] = $product->get_variation_price('max'); $product->get_regular_price();
+				$fields_type[] = '%f';
+			} else {
+				$price  = $product->get_regular_price();
+				if(empty($price)){
+					$price = $product->get_price();
+				}
+				$fields['min_price'] = (empty($product->get_sale_price())?$price:$product->get_sale_price());
+				$fields_type[] = '%f';
+				$fields['max_price'] = $price;
+				$fields_type[] = '%f';
+			}
+			$fields['onsale'] = $product->is_on_sale();
+			$fields_type[] = '%d';
+			$fields['stock_quantity'] = $product->get_stock_quantity();
+			$fields_type[] = '%d';
+			$fields['stock_status'] = $product->get_stock_status();
+			$fields_type[] = '%s';
+			$fields['rating_count'] = $product->get_rating_count();
+			$fields_type[] = '%d';
+			$fields['average_rating'] = $product->get_average_rating();
+			$fields_type[] = '%f';
+			$fields['total_sales'] = $product->get_total_sales();
+			$fields_type[] = '%d';
+			$fields['tax_status'] = $product->get_tax_status();
+			$fields_type[] = '%s';
+			$fields['tax_class'] = $product->get_tax_class();
+			$fields_type[] = '%s';
+			
+			$wpdb->insert( $lookup_table,$fields,$fields_type );
+			return $wpdb->last_query;
+		}		
 	}
 
 	public function add_product($id, $product) {
 		$data = $this->get_data($product);
 		$this->process_columns($data);
-		return $this->save($id,$data);
+		return $this->save($id,$data,$product);
 	}
 
 	public function add_product_variation($id, $product) {
 		$parent_id = $product->get_parent_id();
 		$data = $this->get_data($product);
 		$this->process_columns($data);
-		return $this->save($id,$data,$parent_id);
+		return $this->save($id,$data,$product,$parent_id);
 	}
 
 	public function update_product($id, $product) {
 		$data = $this->get_data($product);
 		$this->process_columns($data);
-		return $this->save($id,$data);
+		return $this->save($id,$data,$product);
 	}
 
 	public function update_product_variation($id, $product) {
 		$parent_id = $product->get_parent_id();
 		$data = $this->get_data($product);
 		$this->process_columns($data);
-		return $this->save($id,$data,$parent_id);
+		return $this->save($id,$data,$product,$parent_id);
 	}
 		
 	public function remove_attribute_column($id, $name, $taxonomy) {
