@@ -44,7 +44,8 @@ if ( ! class_exists( 'Shortcode_Filters' ) ) {
 			$form_definition['d_fconfig']['form']['d_fconfig_save_sec_title']['label'] = 'Add Filter Field';
 
 			$sh_filter_setting = array(
-
+				'filter_setting_filter_section'=>array('label'=>'Configure the Shortcode Behaviour','type'=>'segment','desc'=>'Configure the behaviour of the shortcode and it\'s functionality.'
+											),
 				'filter_setting_filter'=> $form_definition['filter_setting']['form']['filter_setting_filter'], 
 				'redirect_url'=>array(
 					'label'=>eowbc_lang('Redirect URL'),

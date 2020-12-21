@@ -47,6 +47,9 @@ if ( ! class_exists( 'Shop_Category_Filter' ) ) {
 
 			// add new fields 
 			$sh_filter_setting = array(
+				'sh_shop_cat_filter_section'=>array('label'=>'Configure the Shop/Category Filters','type'=>'segment','desc'=>'Change the behaviours of the filters on the shop and category page.'
+											),
+
 				'sh_shop_cat_filter_location'=>array(
 					'label'=>eowbc_lang('Filter Location'),
 					'type'=>'checkbox',
