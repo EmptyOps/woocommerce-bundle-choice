@@ -30,28 +30,7 @@ class Http_Handler {
 	public static function process(){
 
 		do_action( 'before_process_request', array(self::instance(),'preprocess_request') );		
-		$enable_wpbakery = true;
-		$enable_elementor = false;
-		$enable_beaver = false;
-
-		if($enable_wpbakery and class_exists('Vc_Manager') and defined('WPB_PLUGIN_FILE')){
-			add_action('init',function(){
-				WP_Bakery::instance()->init();
-			});
-		}
-
-		if($enable_elementor and defined('ELEMENTOR_PLUGIN_BASE')){
-			add_action('init',function(){
-				Elementor::instance()->init();
-			});
-		}
-
-		if($enable_beaver){
-			add_action('init',function(){
-				WP_Beaver::instance()->init();
-			});
-		}
-		
+				
 		if(is_admin()){
 
 			do_action( 'wbc_before_process_admin_request' );	
