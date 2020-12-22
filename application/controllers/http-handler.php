@@ -5,6 +5,10 @@ use eo\wbc\controllers\admin\menu\Admin_Menu_Factory;
 use eo\wbc\controllers\admin\Admin;
 use eo\wbc\controllers\Public_Handler;
 
+use eo\wbc\controllers\visual_tools\WP_Bakery;
+use eo\wbc\controllers\visual_tools\Elementor;
+use eo\wbc\controllers\visual_tools\WP_Beaver;
+
 defined( 'ABSPATH' ) || exit;
 
 class Http_Handler {
@@ -26,7 +30,28 @@ class Http_Handler {
 	public static function process(){
 
 		do_action( 'before_process_request', array(self::instance(),'preprocess_request') );		
+		$enable_wpbakery = true;
+		$enable_elementor = false;
+		$enable_beaver = false;
 
+		if($enable_wpbakery and class_exists('Vc_Manager') and defined('WPB_PLUGIN_FILE')){
+			add_action('init',function(){
+				WP_Bakery::instance()->init();
+			});
+		}
+
+		if($enable_elementor and defined('ELEMENTOR_PLUGIN_BASE')){
+			add_action('init',function(){
+				Elementor::instance()->init();
+			});
+		}
+
+		if($enable_beaver){
+			add_action('init',function(){
+				WP_Beaver::instance()->init();
+			});
+		}
+		
 		if(is_admin()){
 
 			do_action( 'wbc_before_process_admin_request' );	
