@@ -23,6 +23,13 @@
 </style>
 <?php endif; ?>
 <style type="text/css">
+	
+	.site-footer>.wrap>.container{
+		width: 100% !important;
+	    max-width: 100% !important;
+	    padding: 0 !important;
+	}
+
 	.eo_wbc_filter_icon_select div{
 		overflow-wrap: normal !important;
 	}

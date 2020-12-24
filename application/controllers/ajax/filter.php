@@ -68,6 +68,7 @@ class Filter
 
         $category_fields = array();
         $attribute_fields = array();
+        $checklist_attribute_fields = array();
 
         if( isset($_REQUEST['_category']) OR isset($_REQUEST['_current_category']) ) {
 
@@ -114,20 +115,23 @@ class Filter
             if(!empty(wbc()->sanitize->request('_attribute'))) {
             	foreach (array_filter(explode(',', wbc()->sanitize->request('_attribute'))) as $attr) {
 
+
             		if(!empty($table_columns['attribute'][$attr])) {
 
 	            		if (isset($_REQUEST['checklist_'.$attr]) && !empty(wbc()->sanitize->request('checklist_'.$attr))) {
 
 	            			$checklist_attributes = array();
-	            			foreach (array_filter(explode(',',wbc()->sanitize->request('_current_category'))) as $_attribute_field) {
+	            			foreach (array_filter(explode(',',wbc()->sanitize->request('checklist_'.$attr))) as $_attribute_field) {
+	            				
 								$_attribute_field = get_term_by('slug',$_attribute_field,$attr);
+								
 								if(!empty($_attribute_field) and !is_wp_error($_attribute_field)){
 									$checklist_attributes[] = $_attribute_field->term_id;
 								}
 							}
 
 							if(!empty($checklist_attributes)) {
-								$attribute_fields[$attr] = $checklist_attributes;
+								$checklist_attribute_fields[$attr] = $checklist_attributes;
 							}
 
 	                    } elseif(isset($_REQUEST['min_'.$attr]) && isset($_REQUEST['max_'.$attr])){
@@ -170,8 +174,20 @@ class Filter
         	foreach ($attribute_fields as $key => $field) {
         		$field_query[]="(`${key}` IN(".implode(',',$field)."))";
         	}
-        	$attribute_fields = implode(' AND ', $field_query);
+        	$attribute_fields = "(" .implode(' AND ', $field_query). ")";
         }
+
+        if(empty($checklist_attribute_fields)){
+        	/*$checklist_attribute_fields = 1;*/
+        } else {
+        	$field_query = array();
+        	foreach ($checklist_attribute_fields as $key => $field) {
+        		$field_query[]="(`${key}` IN(".implode(',',$field)."))";
+        	}
+        	$attribute_fields.=" AND (" .implode(' OR ',$field_query) .")"; 
+        }
+
+        
 
         global $wpdb;
 
