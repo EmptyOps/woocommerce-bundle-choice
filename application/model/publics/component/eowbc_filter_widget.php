@@ -1664,7 +1664,7 @@ class EOWBC_Filter_Widget {
 			?>				
 				</div>
 			</div>
-			<?php if( (!empty($advance_filters)) or (!empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))) ) { ?>
+			<?php if( (!empty($advance_filters)) or (!empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))) or (!empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_reset_now'))) ) { ?>
 				<div class="ui grid centered">
 					<div class="row">
 						<?php if(!empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_reset_now'))): ?>
@@ -2006,9 +2006,9 @@ class EOWBC_Filter_Widget {
 				}
 				$select_icon = get_term_meta($term_item->id, 'wbc_attachment',true);
 				
-				if(empty($select_icon)) {					
+				/*if(empty($select_icon)) {					
 					$select_icon = $woocommerce->plugin_url() . '/assets/images/placeholder.png';
-				}
+				}*/
 
 			} else {
 				$icon = wp_get_attachment_url( @get_term_meta( $term_item->term_id, 'thumbnail_id', true ));
@@ -2027,9 +2027,9 @@ class EOWBC_Filter_Widget {
 				}
 
 				$select_icon = get_term_meta($term_item->term_id, 'wbc_attachment',true);
-				if(empty($select_icon)) {					
+				/*if(empty($select_icon)) {					
 					$select_icon = $woocommerce->plugin_url() . '/assets/images/placeholder.png';
-				}
+				}*/
 			}
 
 			$truncate_words = wbc()->options->get_option('filters_filter_setting','filter_icon_wrap_filter_label',0,true,true);
