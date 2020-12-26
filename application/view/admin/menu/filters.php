@@ -107,11 +107,14 @@ if(!empty($attributes) and is_array($attributes)){
 
 		let pids = JSON.parse('<?php echo json_encode(get_posts( array('post_type' => 'product','numberposts' => -1,'post_status' => 'publish','fields' => 'ids',) )); ?>');
 		let batches = Math.ceil(pids.length / 100);
-
+		console.log(batches);
 		function eowbc_sync_filter_products(batch) {
 			if(batch>=batches){
 				jQuery("#filter_sync_button").removeClass('disabled');
 			} else {
+
+				console.log(pids.slice(batch*100,(batch+1)*100));
+
 				let data = {	                
 	                '_wpnonce': '<?php echo wp_create_nonce('sync_filter_products');?>',
 	                'action':'eowbc_ajax',

@@ -172,6 +172,9 @@ class Filter
         } else {
         	$field_query = array();
         	foreach ($attribute_fields as $key => $field) {
+        		if(is_array($field)){
+        			$field[] = -1;
+        		}
         		$field_query[]="(`${key}` IN(".implode(',',$field)."))";
         	}
         	$attribute_fields = "(" .implode(' AND ', $field_query). ")";
@@ -182,6 +185,11 @@ class Filter
         } else {
         	$field_query = array();
         	foreach ($checklist_attribute_fields as $key => $field) {
+
+        		if(is_array($field)){
+        			$field[] = -1;
+        		}
+        		
         		$field_query[]="(`${key}` IN(".implode(',',$field)."))";
         	}
         	$attribute_fields.=" AND (" .implode(' OR ',$field_query) .")"; 
@@ -195,8 +203,8 @@ class Filter
         	return "SELECT `product_id`,`parent_id` FROM `{$wpdb->wc_product_meta_lookup}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ${attribute_fields} ${order_sql}";
         }
 
-        /*echo "SELECT `product_id`,`parent_id` FROM `{$wpdb->wc_product_meta_lookup}` ${sql_join} WHERE ${category_fields} AND ${attribute_fields} ${order_sql}";
-        die();*/
+        //echo "SELECT `product_id`,`parent_id` FROM `{$wpdb->wc_product_meta_lookup}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ${attribute_fields} ${order_sql}";
+        //die();
        
         $result = $wpdb->get_results("SELECT `product_id`,`parent_id` FROM `{$wpdb->wc_product_meta_lookup}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ${attribute_fields} ${order_sql}",'ARRAY_N');
 
@@ -208,7 +216,13 @@ class Filter
         	}
         }
 		
-		$pids = array_unique($pids);
+		/*$pids = array_unique($pids);
+		echo "<pre>";
+		print_r($pids);
+
+		print_r($wpdb->get_results("SELECT * FROM `{$wpdb->wc_product_meta_lookup}` WHERE product_id in(51922,51941)"));
+
+		die();*/
 		return $pids;
     }
 

@@ -31,46 +31,83 @@ class Lookup_Manager {
 
 		add_action('woocommerce_attribute_deleted',array($this,'remove_attribute_column'), 10,3);
 
-		add_action( 'woocommerce_new_product',array($this,'add_product'),99,2);
-		add_action( 'woocommerce_new_product_variation',array($this,'add_product_variation'),99,2);
+		/*add_action( 'woocommerce_new_product',array($this,'add_product'),99,2);
+		add_action( 'woocommerce_new_product_variation',array($this,'add_product_variation'),99,2);*/
 
 		add_action( 'woocommerce_update_product',array($this,'update_product'),99,2);
-		add_action( 'woocommerce_update_product_variation',array($this,'update_product_variation'),99,2);
+		/*add_action( 'woocommerce_update_product_variation',array($this,'update_product_variation'),99,2);*/
 	}
 
-	public function get_data($product) {
+	public function get_data($product,$categories) {
 		if(!empty($product) and !is_wp_error($product)){
-			$attributes = $product->get_attributes();
-			$categories = $product->get_category_ids();
-
+			
 			$attributes_list = array();
-			if(!empty($attributes) and is_array($attributes)) {
-				foreach ($attributes as $attr_key => $attr_value) {
-					if( !empty($attr_value) and is_object($attr_value) and !is_wp_error($attr_value) ) {
-						$attr_options = $attr_value->get_options();
-						if(!empty($attr_options) and is_array($attr_options)) {
-							$attributes_list[$attr_key] = $attr_options[0];
-						}					
-					}elseif (is_string($attr_value)) {
-						$attr_value = get_term_by('slug',$attr_value,$attr_key);
-						
-						if( !empty($attr_value) and is_object($attr_value) and !is_wp_error($attr_value) ) {
-							$attributes_list[$attr_key] = $attr_value->term_id;
+			$categories_list = array();
+
+			if($product->is_type('variation')) {
+				
+				$attributes = $product->get_variation_attributes();
+				//var_dump($attributes);
+				if(!empty($attributes) and is_array($attributes)) {
+					foreach ($attributes as $attr_key => $attr_value) {
+						if(strpos($attr_key,'attribute_')===0){
+							$attr_key = substr($attr_key,10);	
 						}
+						
+						$attr = get_term_by('slug',$attr_value,$attr_key);
+						if( !empty($attr) and is_object($attr) and !is_wp_error($attr) ) {
+							$attributes_list[$attr_key] = $attr->term_id;
+						} elseif (empty($attr_value)) {
+							$attributes_list[$attr_key] = -1;
+						}						
 					}
 				}
-			}
 
-			$category_slug = array();
+			} elseif(!$product->is_type('variable')) {
+
+				$attributes = $product->get_attributes();
+
+				if(!empty($attributes) and is_array($attributes)) {
+					foreach ($attributes as $attr_key => $attr_value) {
+
+						if( !empty($attr_value) and is_object($attr_value) and !is_wp_error($attr_value) ) {
+
+							$attr_options = $attr_value->get_options();
+
+							if(!empty($attr_options) and is_array($attr_options)) {
+
+								$attr = get_term_by('term_taxonomy_id',$attr_options[0],$attr_key);
+								if(empty($attr) or is_wp_error($attr)) {
+									$attr = get_term_by('slug',$attr_options[0],$attr_key);
+								}
+
+								if(!empty($attr) and !is_wp_error($attr)) {
+
+									$attributes_list[$attr_key] = $attr->term_id;
+								}
+							}
+
+						} elseif (is_string($attr_value)) {
+							$attr_value = get_term_by('slug',$attr_value,$attr_key);
+							
+							if( !empty($attr_value) and is_object($attr_value) and !is_wp_error($attr_value) ) {
+								$attributes_list[$attr_key] = $attr_value->term_id;
+							}
+						}
+					}
+				}								
+			}
+			
+				
 			if(!empty($categories) and is_array($categories)){
 				foreach ($categories as $cat_id) {
 					$category_object = get_term_by('id',$cat_id,'product_cat');
 					if(!empty($category_object) and !is_wp_error($category_object)) {
-						$category_slug[$category_object->slug] = $cat_id;
+						$categories_list[$category_object->slug] = $cat_id;
 					}
 				}
-			}
-			return array('attribute'=>$attributes_list,'category'=>$category_slug);
+			}			
+			return array('attribute'=>$attributes_list,'category'=>$categories_list);
 		} else {
 			return array('attribute'=>null,'category'=>null);
 		}
@@ -138,21 +175,24 @@ class Lookup_Manager {
 		$table_columns = unserialize(wbc()->options->get_option('lookup_manager','table_columns',serialize(array())));
 		$fields = array();
 		$fields_type = array();
-		if(!empty($table_columns['attribute']) and is_array($table_columns['attribute']) and !empty($data['attribute']) and is_array($data['attribute']) ) {
+		
+		if(!empty($table_columns['attribute']) and is_array($table_columns['attribute'])) {
 			foreach ($table_columns['attribute'] as $attr_key => $attr_value) {
-				if(!empty($data['attribute'][$attr_key])) {
+				if(!empty($data['attribute']) and is_array($data['attribute']) and !empty($data['attribute'][$attr_key])) {
+
 					$fields[$attr_key] = $data['attribute'][$attr_key];
 					$fields_type[] = '%d';
 				} else {
-					$fields[$attr_key] = "";
+					$fields[$attr_key] = 0;
 					$fields_type[] = '%d';
 				}
 			}
 		}
 		
-		if(!empty($table_columns['category']) and is_array($table_columns['category']) and !empty($data['category']) and is_array($data['category']) ) {
+		if(!empty($table_columns['category']) and is_array($table_columns['category'])) {
 			foreach ($table_columns['category'] as $cat_key => $cat_value) {
-				if(!empty($data['category'][$cat_key])) {
+				if(!empty($data['category']) and is_array($data['category']) and !empty($data['category'][$cat_key])) {
+
 					$fields[$cat_key] = $data['category'][$cat_key];
 					$fields_type[] = '%d';
 				} else {
@@ -166,7 +206,7 @@ class Lookup_Manager {
 			$fields['parent_id'] = $parent_id;
 			$fields_type[] = '%d';
 		}
-
+		
 		if($wpdb->get_var("SELECT product_id FROM `${lookup_table}` WHERE product_id=${id}") == $id){
 			$wpdb->update( $lookup_table,$fields,array('product_id'=>$id),$fields_type, array('%d'));
 			return $wpdb->last_query;
@@ -217,31 +257,64 @@ class Lookup_Manager {
 		}		
 	}
 
-	public function add_product($id, $product) {
+	/*public function add_product($id, $product) {
+		echo "simple";
+		die();
 		$data = $this->get_data($product);
 		$this->process_columns($data);
 		return $this->save($id,$data,$product);
 	}
 
 	public function add_product_variation($id, $product) {
+		echo "variation";
+		die();
 		$parent_id = $product->get_parent_id();
 		$data = $this->get_data($product);
 		$this->process_columns($data);
 		return $this->save($id,$data,$product,$parent_id);
+	}*/
+
+	public function update_product($id, $product) {		
+		$categories = $product->get_category_ids();
+
+		if($product->is_type('variable')){			
+			$childs = $product->get_children();			
+			if(!empty($childs)){
+
+				foreach ($childs as $child) {
+
+					$child_product = wbc()->wc->eo_wbc_get_product($child);
+
+					if(!empty($child_product) and !is_wp_error($child_product)){
+
+						$data = $this->get_data($child_product,$categories);
+						$this->process_columns($data);
+						$this->save($child,$data,$child_product,$id);
+					}
+				}
+			}
+			$data = $this->get_data($product,$categories);
+			$this->process_columns($data);
+			return $this->save($id,$data,$product);
+
+		} else {
+
+			$data = $this->get_data($product,$categories);
+			$this->process_columns($data);
+			return $this->save($id,$data,$product);
+
+		}
 	}
 
-	public function update_product($id, $product) {
-		$data = $this->get_data($product);
-		$this->process_columns($data);
-		return $this->save($id,$data,$product);
-	}
-
-	public function update_product_variation($id, $product) {
+	/*public function update_product_variation($id, $product) {
+		error_log("update pro variation");
+		echo "update variation";
+		die();
 		$parent_id = $product->get_parent_id();
 		$data = $this->get_data($product);
 		$this->process_columns($data);
 		return $this->save($id,$data,$product,$parent_id);
-	}
+	}*/
 		
 	public function remove_attribute_column($id, $name, $taxonomy) {
 		

@@ -17,7 +17,7 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'sync_filter_products')) {
 
 			if(!empty($product) and !is_wp_error($product)) {
 
-				$childs = $product->get_children();
+				/*$childs = $product->get_children();
 				if(!empty($childs)){
 					foreach ($childs as $child) {
 						$child_product = wbc()->wc->eo_wbc_get_product($child);
@@ -25,7 +25,7 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'sync_filter_products')) {
 							$res['wpdb'][$child] = $lookup_manager->update_product_variation($child,$child_product);
 						}
 					}
-				}
+				}*/
 				$res['wpdb'][$pid] = $lookup_manager->update_product($pid,$product);
 			}
 		}
