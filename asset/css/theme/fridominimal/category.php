@@ -42,8 +42,26 @@
 	.ui.labeled.ticked.range.slider .labels .label::after{
 		top: -1em !important;
 	}
+
+
+	.osf-sorting{ display:none; } .eo_wbc_filter_icon.column.ui.image div { margin:auto !important; } .elementor-11 .elementor-element.elementor-element-97f5e0c .elementor-icon-list-icon i{ line-height: 1.2em; } .top-bar .close{ top: 0.9em !important; }
+
+	@media only screen and (min-width: 756px){
+	.text_slider_price.aligned.left,.text_slider_price.aligned.right {
+	min-width:10.5em !important;
+	}}
+
+	@media only screen and (max-width:755px){
+	.text_slider_price.aligned.right{
+	min-width:10.5em !important;
+	}
+	}
+	.eo_wbc_filter_icon.column.ui.image{
+	overflow-wrap: normal !important;
+	}
 </style>
 
 <?php
 	add_filter('eowbc_filter_sidebars_widgets','__return_false');
 ?>
+

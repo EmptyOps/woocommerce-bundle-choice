@@ -39,9 +39,9 @@ if(empty($change_url)){
         <div class="ui column left aligned">
             <?php if(empty($second_obj)){ ?>
                 <div class="title" <?php _e((!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb) and !empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second_url))?'data-clickable_breadcrumb="'.\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second_url.'"':''); ?>><?php _e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_choose_prefix_text',__('Choose a','woo-bundle-choice'),true,true)); ?></div>
-                <div><?php _e($second); ?></div>
+                <div><?php echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second_name; ?></div>
             <?php } else { ?>
-                <div class="title"><?php _e($second); ?></div>                
+                <div class="title"><?php echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second_name; ?></div>                
                 <div class="ui small blue text">                
                     <u><a href="<?php echo $view_url; ?>">View</a></u>&nbsp;|&nbsp;<u><a href="<?php echo $change_url; ?>"><?php _e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_change_action_text','Change',true,true)); ?></a></u>
                 </div>    

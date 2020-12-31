@@ -73,8 +73,22 @@ function eo_wbc_filter_render_html(data) {
 
 /*if(eo_wbc_object.disp_regular=='1'){*/
 	
+	window.eo_wbc_object.enable_filter = true;
+
 	jQuery.fn.eo_wbc_filter_change_native= function(init_call=false) {				
 	//flag indicates if to show products in tabular view or woocommerce's default style.		
+
+		if(window.eo_wbc_object.enable_filter===false){
+			return false;
+		}
+
+		if(init_call) {
+			jQuery("form#eo_wbc_filter [name='paged']").val('1');
+			jQuery("form#eo_wbc_filter [name='last_paged']").val('1');
+
+			jQuery("form#eo_wbc_filter [name='_category']").val(jQuery("form#eo_wbc_filter [name='_current_category']"));
+			jQuery("form#eo_wbc_filter [name='_attribute']").val("");
+		}
 
 		var form=jQuery("form#eo_wbc_filter");	
 		var site_url=eo_wbc_object.eo_cat_site_url;
@@ -125,10 +139,20 @@ jQuery(document).ready(function($){
 	});
 
 	jQuery(document).on('click',".reset_all_filters",function(){
-        jQuery("[data-reset]").each(function(e){
+		//window.eo_wbc_object.enable_filter = false;
+        jQuery("[data-reset]").each(function(i,e){        	
+        	
+        	if(i!==(jQuery("[data-reset]").length-1)) {
+				window.eo_wbc_object.enable_filter = false;        		
+        	} else {
+        		window.eo_wbc_object.enable_filter = true;
+        		jQuery.fn.eo_wbc_filter_change(true);
+        	}
             eval(jQuery(this).data('reset'));
         });
-        jQuery.fn.eo_wbc_filter_change();
+
+        /*window.eo_wbc_object.enable_filter = true;
+        jQuery.fn.eo_wbc_filter_change();*/
         jQuery(".reset_all_filters.mobile_2").addClass('mobile_2_hidden');
         return false;
     })  

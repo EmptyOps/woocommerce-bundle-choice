@@ -42,6 +42,13 @@
 	}
 </style>
 <?php endif; ?>
+<style type="text/css">
+	.elementor-11 .elementor-element.elementor-element-97f5e0c .elementor-icon-list-icon i{ line-height: 1.2em; } .top-bar .close{ padding-top: 0.5em; !important; } 
+	/*.opal-icon-cart{
+		color: black;
+		font-size: 1.6em;
+	}*/
+</style>
 
 <?php 
 add_action('wp_footer',function(){

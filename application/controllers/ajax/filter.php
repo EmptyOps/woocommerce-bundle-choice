@@ -194,8 +194,7 @@ class Filter
         	}
         	$attribute_fields.=" AND (" .implode(' OR ',$field_query) .")"; 
         }
-
-        
+       
 
         global $wpdb;
 

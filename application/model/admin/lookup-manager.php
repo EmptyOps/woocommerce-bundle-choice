@@ -76,13 +76,17 @@ class Lookup_Manager {
 
 							if(!empty($attr_options) and is_array($attr_options)) {
 
-								$attr = get_term_by('term_taxonomy_id',$attr_options[0],$attr_key);
+								$attr = get_term_by('term_id',$attr_options[0],$attr_key);
+
+								if(empty($attr) or is_wp_error($attr)){
+									$attr = get_term_by('term_taxonomy_id',$attr_options[0]);
+								}
+
 								if(empty($attr) or is_wp_error($attr)) {
 									$attr = get_term_by('slug',$attr_options[0],$attr_key);
 								}
 
 								if(!empty($attr) and !is_wp_error($attr)) {
-
 									$attributes_list[$attr_key] = $attr->term_id;
 								}
 							}

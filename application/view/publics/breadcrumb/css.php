@@ -162,6 +162,13 @@
 		.eo-wbc-container.container .ui.steps .step{
 			padding-left: 3.5em !important;
 		}
+
+		
+		@media only screen and (max-width: 890px) and (min-width: 1100px) {
+			.eo-wbc-container.container .ui.steps .step {
+				padding-left: 1.5em !important;
+			}
+		}
 		.eo-wbc-container>.ui.steps .step:not(:first-child):before{
 			content: '';
 			border-top: 4.1em solid transparent;		    
