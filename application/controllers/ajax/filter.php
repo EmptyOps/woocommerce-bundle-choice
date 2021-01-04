@@ -62,7 +62,12 @@ class Filter
 		
 		if(!empty(wbc()->sanitize->get('eo_wbc_filter'))) {
 			
-		    add_filter('pre_get_posts',function($query ) {		    		
+		    add_filter('pre_get_posts',function($query ) {
+
+		    	if(apply_filters('eowbc_filter_override',false)){
+		            echo json_encode(apply_filters('eowbc_filter_response',array()));
+		            die();
+		        }		    		
 
 		        if( $query->is_main_query() ) {
 
