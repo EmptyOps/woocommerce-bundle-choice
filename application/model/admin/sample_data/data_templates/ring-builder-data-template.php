@@ -28,6 +28,7 @@ class Ring_Builder_Data_Template extends Pair_Builder_Data_Template {
 
     public function get_attributes() {
         return array(
+                    /* Language function - comment */ 
                     array(
                         'label' => __('Carat','woo-bundle-choice'),
                         'range'=>true,
@@ -37,31 +38,31 @@ class Ring_Builder_Data_Template extends Pair_Builder_Data_Template {
                     ),
                     array(
                         'label' => __('Clarity','woo-bundle-choice'),
-                        'terms' => array('IF','VVS1','VVS2','VS1','VS2','SI1'),
+                        'terms' => array(__('IF','woo-bundle-choice'),__('VVS1','woo-bundle-choice'),__('VVS2','woo-bundle-choice'),__('VS1','woo-bundle-choice'),__('VS2','woo-bundle-choice'),__('SI1','woo-bundle-choice')),
                         'description' => 'Clarity attributes for diamond shape',
                         'slug' => 'eo_clarity_attr'
                     ),
                     array(
                         'label' => __('Colour','woo-bundle-choice'),
-                        'terms' => array('D','E','F','G','H','I','J','K','L','M'),
+                        'terms' => array(__('D','woo-bundle-choice'),__('E','woo-bundle-choice'),__('F','woo-bundle-choice'),__('G','woo-bundle-choice'),__('H','woo-bundle-choice'),__('I','woo-bundle-choice'),__('J','woo-bundle-choice'),__('K','woo-bundle-choice'),__('L','woo-bundle-choice'),__('M','woo-bundle-choice')),
                         'description' => 'Colour attributes for diamond shape',
                         'slug' => 'eo_colour_attr'
                     ),
                     array(
                         'label' => __('Polish','woo-bundle-choice'),
-                        'terms' => array('Excellent','Very Good','Good','Fair'),
+                        'terms' => array(__('Excellent','woo-bundle-choice'),__('Very Good','woo-bundle-choice'),__('Good','woo-bundle-choice'),__('Fair','woo-bundle-choice')),
                         'description' => 'Polish attributes for diamond shape',
                         'slug' => 'eo_polish_attr'
                     ),
                     array(
                         'label' => __('Symmetry','woo-bundle-choice'),
-                        'terms' => array('Excellent','Very Good','Good','Fair'),
+                        'terms' => array(__('Excellent','woo-bundle-choice'),__('Very Good','woo-bundle-choice'),__('Good','woo-bundle-choice'),__('Fair','woo-bundle-choice')),
                         'description' => 'Symmetry attributes for diamond shape',
                         'slug' => 'eo_symmertry_attr'
                     ),
                     array(
                         'label' => __('Fluorescence','woo-bundle-choice'),
-                        'terms' => array('None','Very','Slight','Slight','Faint'),
+                        'terms' => array(__('None','woo-bundle-choice'),__('Very','woo-bundle-choice'),__('Slight','woo-bundle-choice'),__('Slight','woo-bundle-choice'),__('Faint','woo-bundle-choice')),
                         'description' => 'Fluorescence attributes for diamond shape',
                         'slug' => 'eo_fluorescence_attr'
                     ),
@@ -88,7 +89,7 @@ class Ring_Builder_Data_Template extends Pair_Builder_Data_Template {
                     ),
                     array(
                         'label' => __('Grading Report','woo-bundle-choice'),
-                        'terms' => array('GIA','IGI','AGS','HRD'),
+                        'terms' => array(__('GIA','woo-bundle-choice'),__('IGI','woo-bundle-choice'),__('AGS','woo-bundle-choice'),__('HRD','woo-bundle-choice')),
                         'description' => 'Grading report attributes for diamond shape',
                         'slug' => 'eo_grading_report_attr'
                     ),
