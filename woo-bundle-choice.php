@@ -160,7 +160,7 @@ if(!class_exists('Woo_Bundle_Choice') ) {
 			wbc()->construct_init();
 		}
 		
-	});
+	},30);
 
 	if(!function_exists('wbc')){
 
