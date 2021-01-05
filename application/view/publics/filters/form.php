@@ -313,7 +313,10 @@
 
 				__slug=jQuery(this).attr('data-filter-slug');					
 
-				_values=jQuery('[name="checklist_'+__slug+'"]').val().split(',');
+				_values= Array();
+				if(jQuery('[name="checklist_'+__slug+'"]').length>0 && typeof(jQuery('[name="checklist_'+__slug+'"]').val()) !== typeof(undefined)){
+					jQuery('[name="checklist_'+__slug+'"]').val().split(',');	
+				}				
 
 				if(_values.indexOf(jQuery(this).attr('data-slug'))!=-1){
 

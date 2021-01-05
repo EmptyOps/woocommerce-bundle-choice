@@ -44,7 +44,11 @@ class Cart {
             //Reload cart data
             WC()->cart->empty_cart();           
             foreach ($eo_wbc_maps as $index=>$set)
-            {               
+            {   
+                if(empty($set["FIRST"]['variation'])) {
+                    $set["FIRST"]['variation'] = NULL;
+                }            
+
                 if($set["FIRST"]){          
                     wc()->cart->add_to_cart(
                         $set["FIRST"][0],
@@ -54,7 +58,11 @@ class Cart {
                       );
                 }
 
-                if($set["SECOND"])
+                if(empty($set["SECOND"]['variation'])) {
+                    $set["SECOND"]['variation'] = NULL;
+                }            
+
+                if($set["SECOND"])  
                 {
                     wc()->cart->add_to_cart(
                         $set["SECOND"][0],

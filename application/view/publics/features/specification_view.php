@@ -10,6 +10,10 @@
     if(empty($product)){
         $product = wbc()->wc->get_product($post->ID);
     }
+
+    if(empty($product) or is_wp_error($product )) {
+        return;
+    }
     
     $product_data = array();
     $sku = $product->get_sku();
