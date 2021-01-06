@@ -311,7 +311,11 @@
 			/*----------------------------------------------------*/
 			jQuery('.checkbox').checkbox({onChange:function(){
 
-				__slug=jQuery(this).attr('data-filter-slug');					
+				__slug=jQuery(this).attr('data-filter-slug');
+
+				if(__slug=='' || typeof(__slug)===typeof(undefined)){
+					return true;
+				}					
 
 				_values= Array();
 				if(jQuery('[name="checklist_'+__slug+'"]').length>0 && typeof(jQuery('[name="checklist_'+__slug+'"]').val()) !== typeof(undefined)){
