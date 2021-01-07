@@ -8,7 +8,10 @@
 <div class="title" data-tab-group="<?php _e($tab_set); ?>">
     <i class="dropdown icon"></i>		    
     <?php echo($title); ?>
-    <?php if($reset): ?>
+    <?php if($help): ?>
+	&nbsp; <span class="ui grey text" style="cursor: pointer;">&nbsp;<i class="question circle outline icon" data-help="<?php _e($help); ?>"></i></span>
+	<?php endif; ?>
+		<?php if($reset): ?>
 	&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_icon(event,'<?php echo $term->slug; ?>')">&nbsp;<u>reset</u></span>
 	<?php endif; ?>
 </div>
@@ -22,7 +25,7 @@
 				data-filter="<?php echo $term->slug; ?>" style="border-bottom: 2px solid transparent;"
 				data-type="<?php echo $type; ?>">
 				<div>
-					<img src='<?php echo ($filter_icon['mark']?$filter_icon['select_icon']:$filter_icon['icon']); ?>' data-imgsrc="<?php echo $filter_icon['icon']; ?>" data-toggleimgsrc="<?php echo $filter_icon['select_icon']; ?>"/>
+					<img src='<?php echo ($filter_icon['mark']?$filter_icon['select_icon']:$filter_icon['icon']); ?>' data-imgsrc="<?php echo $filter_icon['icon']; ?>" data-toggleimgsrc="<?php echo $filter_icon['select_icon']; ?>" style='<?php _e($icon_css); ?>' />
 				</div>
 				<?php if($input=='icon_text'): ?>
 					<div><?php echo($filter_icon['name']); ?></div>

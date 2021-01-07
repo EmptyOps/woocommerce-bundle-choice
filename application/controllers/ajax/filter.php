@@ -59,11 +59,11 @@ class Filter
 	//  Enable non table based filter that loads whole page at front :)
 	//////////////////////////////////////////////////////////////////////////////////////////////////
 	public function filter() {			
-		//die();
 		
 		if(!empty(wbc()->sanitize->get('eo_wbc_filter'))) {
 						
 		    add_filter('pre_get_posts',function($query ) {		    		
+
 
 		    	if(apply_filters('eowbc_filter_override',false)){
 		            echo json_encode(apply_filters('eowbc_filter_response',array()));
@@ -71,6 +71,9 @@ class Filter
 		        }
 
 		        if( $query->is_main_query() ) {
+
+		        	/*echo "<pre>";
+		        	print_r($_GET);*/
 
 		        	if(isset($_GET['products_in']) AND !empty(wbc()->sanitize->get('products_in')) ) {
 		        		$query->set('post__in',explode(',',wbc()->sanitize->get('products_in')));			        	
@@ -81,8 +84,7 @@ class Filter
 
 		        		$old_tax_query = $query->get('tax_query');
 			            $old_tax_query_taxonomy = array();
-
-		        		$tax_query=array('relation' => 'AND');
+		        		
 		                if(!empty(wbc()->sanitize->get('_category'))) {
 
 		                    foreach( array_unique(array_filter(explode(',', wbc()->sanitize->get('_category')))) as $_category){
@@ -93,11 +95,13 @@ class Filter
 		                                'field' => 'slug',
 		                                'terms' =>array_filter(explode(',',wbc()->sanitize->get('cat_filter_'.$_category))),
 		                                'compare'=>'EXISTS IN'
-		                            );                    
+		                            );
+		                            $tax_query['relation'] = 'AND';
 		                        }
 		                    }  
 		                }
-		                elseif(!empty(wbc()->sanitize->get('_current_category'))) {
+		                
+		                if(empty($tax_query) and !empty(wbc()->sanitize->get('_current_category'))) {
 
 		                    $tax_query[]=array(
 		                        'taxonomy' => 'product_cat',
@@ -173,6 +177,7 @@ class Filter
 			            }
 
 			            //$query->set('tax_query',$tax_query);
+			            //print_r($tax_query);
 			           
 			            if(is_array($old_tax_query) and !empty($old_tax_query)){
 			            	$old_tax_query_taxonomy = array_column($old_tax_query,'taxonomy');
@@ -188,15 +193,11 @@ class Filter
 			            } else {
 			            	$query->add('tax_query',$tax_query);
 			            }
-			            
-			            //if(is_array($old_tax_query))
-			            /*echo "<pre>";			            
-			            print_r($query->get('tax_query'));
-			            unset($_GET['EO_WBC']);
-		                echo "</pre>";*/
+			            			            			            
 		                //die();
 		            }		            
-		        }		       
+		        }
+		        return $query;		       
 		    });		   
 		}
 	}	

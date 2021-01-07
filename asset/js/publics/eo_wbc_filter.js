@@ -131,8 +131,8 @@ jQuery(document).ready(function($){
 	
 		jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html('');		
 		if(!eo_wbc_object.btnfilter_now){			
-			$("#eo_wbc_filter").on('change',"input:not(:checkbox)",function(){
-				$('[name="paged"]').val('1');
+			jQuery("#eo_wbc_filter").on('change',"input:not(:checkbox)",function(){
+				jQuery('[name="paged"]').val('1');
 				jQuery.fn.eo_wbc_filter_change();										
 			});
 		}
@@ -140,22 +140,23 @@ jQuery(document).ready(function($){
 		jQuery.fn.eo_wbc_filter_change(true);
 
 		//pagination for non-table based view
-		$(".woocommerce-pagination,.pagination,jet-filters-pagination").on('click','a,.jet-filters-pagination__link',function(event){
+
+		jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").on('click','a,.jet-filters-pagination__link',function(event){
 			
 			event.preventDefault();
 			event.stopPropagation();								
 			
-			if($(this).hasClass("next") || $(this).hasClass("prev")){
+			if(jQuery(this).hasClass("next") || jQuery(this).hasClass("prev")){
 			
-				if($(this).hasClass("next")){
-					$("[name='paged']").val(parseInt($(".page-numbers.current").text())+1);
+				if(jQuery(this).hasClass("next")){
+					jQuery("[name='paged']").val(parseInt(jQuery(".page-numbers.current").text())+1);
 				}
-				if($(this).hasClass("prev")){
-					$("[name='paged']").val(parseInt($(".page-numbers.current").text())-1);
+				if(jQuery(this).hasClass("prev")){
+					jQuery("[name='paged']").val(parseInt(jQuery(".page-numbers.current").text())-1);
 				}	
 			}		
 			else {
-				$("[name='paged']").val($(this).text());
+				jQuery("[name='paged']").val(jQuery(this).text());
 			}		
 			jQuery.fn.eo_wbc_filter_change();
 		});
@@ -191,11 +192,11 @@ function reset_slider(e,selector,first,second){
 	e.preventDefault();
 	e.stopPropagation()
 	jQuery(".ui.slider[data-slug='"+selector+"']").slider('set rangeValue',first,second);
-	if($("[name='_attribute']").val().includes(selector)) {					    			
-		_values=$("[name='_attribute']").val().split(',')
+	if(jQuery("[name='_attribute']").val().includes(selector)) {					    			
+		_values=jQuery("[name='_attribute']").val().split(',')
 		_index=_values.indexOf(selector)
 		_values.splice(_index,1)
-		$("[name='_attribute']").val(_values.join());
+		jQuery("[name='_attribute']").val(_values.join());
 	}
 	return false;
 }

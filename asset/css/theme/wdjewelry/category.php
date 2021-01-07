@@ -17,3 +17,4 @@
 		max-width:22% !important;
 	}
 </style>
+<?php add_filter('eowbc_filter_sidebars_widgets','__return_false'); ?>

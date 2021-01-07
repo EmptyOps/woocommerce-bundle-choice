@@ -8,8 +8,11 @@
 	<div class="title" data-tab-group="<?php _e($tab_set); ?>">
 	    <i class="dropdown icon"></i>		    
 	    <?php echo($filter['title']); ?>
-	    <?php if($reset): ?>
-		&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_checkbox(event,'.checklist_<?php echo $filter['slug'] ?>')">&nbsp;<u>reset</u></span>	
+	    <?php if($help): ?>
+		&nbsp; <span class="ui grey text" style="cursor: pointer;">&nbsp;<i class="question circle outline icon" data-help="<?php _e($help); ?>"></i></span>
+		<?php endif; ?>
+		<?php if($reset): ?>
+		&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_checkbox(event,'.checklist_<?php echo $filter['slug'] ?>')">&nbsp;<u>reset</u></span>
 		<?php endif; ?>
 	</div>
   	<div class="content">	

@@ -26,9 +26,11 @@ class Setting_status {
 					'setting_status_setting'=>array(
 						'label'=>'Settings',
 						'form'=>array(
+							'setting_status_setting_section'=>array('label'=>'Plugin Feature Setting','type'=>'segment','desc'=>'Enable and Disable the plugin\'s features.'
+											),
 							'saved_tab_key'=>array(
-							'type'=>'hidden',
-							'value'=>'',
+								'type'=>'hidden',
+								'value'=>'',
 							),
 							'inventory_type'=>array(
 								'label'=>'Inventory Type',
@@ -83,6 +85,8 @@ class Setting_status {
 					'setting_status_log'=>array(
 						'label'=>'Logs',
 						'form'=>array(
+							'setting_status_log_section'=>array('label'=>'System Log for the Plugin','type'=>'segment','desc'=>'The plugin\'s core error reporting system.'
+											),
 							'visible_info'=>array( 
 								'label'=>'Following error details will be sent to '.constant('EOWBC_NAME').'\'s Support Team',
 								'type'=>'devider',
@@ -159,7 +163,9 @@ class Setting_status {
 					),
 					'advanced_config'=>array(
 						'label'=>'Advanced Configuration',
-						'form'=> array(							
+						'form'=> array(	
+							'advanced_config_section'=>array('label'=>'Plugin\'s Advance Configuration','type'=>'segment','desc'=>'Advance configuration for the advance uses.'
+												),						
 							'internal_url'=>array(
 								'label'=>eowbc_lang('Internal Routing URL'),
 								'type'=>'text',								

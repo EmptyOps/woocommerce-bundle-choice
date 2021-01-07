@@ -98,7 +98,8 @@
 								return value;
 							}
 							
-						}			
+						};
+
 						_params.step=1;
 
 						_params.min=0;
@@ -119,6 +120,7 @@
 					_params.smooth=true;
 					_params.autoAdjustLabels=true;
 					_params.decimalPlaces=4;
+					
 					_params.onMove=function(value, min, max) {
 
 						__slugs = jQuery(e).attr('data-slugs');
@@ -140,7 +142,7 @@
 				        	jQuery("input[name='text_min_"+jQuery(e).attr('data-slug')+"']").val( _prefix+(_sep=='.'?Number(min).toFixed(2):(Number(min).toFixed(2)).toString().replace('.',','))+_postfix );
 				        	jQuery("input[name='text_max_"+jQuery(e).attr('data-slug')+"']").val( _prefix+(_sep=='.'?Number(max).toFixed(2):(Number(max).toFixed(2)).toString().replace('.',','))+_postfix);
 				        }					      	
-					}
+					};
 
 					_params.onChange=function(value, min, max) {	
 						_labels = jQuery(e).attr('data-labels');
@@ -216,7 +218,7 @@
 					    
 					    jQuery(this).data('prev_val_min',min);						    
 					    jQuery(this).data('prev_val_max',max);
-					}
+					};
 					
 					let _adjust_label = jQuery(this).data('label_adjust');
 					
@@ -255,25 +257,30 @@
 						}
 						
 						jQuery("#text_slider_"+jQuery(e).attr('data-slug')).slider("set rangeValue",min_value,max_value);
-					});							
+					});
+
 					jQuery(e).slider(_params);
 				});
-			}
+			};
 
 			var primary_filter=jQuery(".eo-wbc-container.filters .ui.segment:not(.secondary)");
+
 			var primary_computer_only=jQuery(primary_filter).find(".computer.tablet.only");
+
 			var primary_mobile_only=jQuery(primary_filter).find(".mobile.only");
 
 			var secondary_filter=jQuery(".eo-wbc-container.filters .ui.segment.secondary");
-			var secondary_computer_only=jQuery(secondary_filter).find(".computer.tablet.only");
-			var secondary_mobile_only=jQuery(secondary_filter).find(".mobile.only");
 
+			var secondary_computer_only=jQuery(secondary_filter).find(".computer.tablet.only");
+
+			var secondary_mobile_only=jQuery(secondary_filter).find(".mobile.only");
 			
 			jQuery('.ui.accordion').accordion();
+
 			window.eo.slider(jQuery('.eo-wbc-container.filters').find('.ui.slider'));				
 		
 			/* Activate initiation of sliders at secondary segments. */
-			if(jQuery(secondary_computer_only).css('display')!='none'){				
+			if(jQuery(secondary_computer_only).css('display')!='none'){			
 
 				jQuery("#advance_filter").on('click',function(){
 					jQuery("#advance_filter").find('.ui.icon').toggleClass('up down');
@@ -287,8 +294,6 @@
 					jQuery(secondary_filter).transition('fly right');				
 				}).trigger('click');
 			}
-
-
 
 			/*jQuery(secondary_filter).transition('fade');*/
 
@@ -306,9 +311,16 @@
 			/*----------------------------------------------------*/
 			jQuery('.checkbox').checkbox({onChange:function(){
 
-				__slug=jQuery(this).attr('data-filter-slug');					
+				__slug=jQuery(this).attr('data-filter-slug');
 
-				_values=jQuery('[name="checklist_'+__slug+'"]').val().split(',');
+				if(__slug=='' || typeof(__slug)===typeof(undefined)){
+					return true;
+				}					
+
+				_values= Array();
+				if(jQuery('[name="checklist_'+__slug+'"]').length>0 && typeof(jQuery('[name="checklist_'+__slug+'"]').val()) !== typeof(undefined)){
+					jQuery('[name="checklist_'+__slug+'"]').val().split(',');	
+				}				
 
 				if(_values.indexOf(jQuery(this).attr('data-slug'))!=-1){
 

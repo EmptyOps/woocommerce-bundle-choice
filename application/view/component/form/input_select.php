@@ -20,6 +20,7 @@ if(!empty($id) /*and !empty($label)*/){
 		  	<div class="default text"></div>		  	
 		  	<div class="menu">
 		  		<?php if(!empty($options) and is_array($options)): ?>
+			    	<div class="item" data-value=""> - Select - </div>
 		  			<?php foreach($options as $key=>$item): ?>
 		  				<?php 
 		  				if( !is_array($item) ){ ?>
