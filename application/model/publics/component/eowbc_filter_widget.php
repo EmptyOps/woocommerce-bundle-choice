@@ -93,7 +93,7 @@ class EOWBC_Filter_Widget {
 		?>
 		<!--Primary filter button that will only be visible on desktop/tablet-->
 		<!-- This widget is created with Wordpress plugin - WooCommerce Product bundle choice -->
-		<div id="loading" style="z-index: -999;height: 100%; width: 100%; position: fixed; top: 0;<?php (wbc()->options->get_option('appearance_filters','appearance_filters_loader') OR apply_filters('eowbc_filter_widget_loader',false))?_e('display:none !important;'):'';?>"></div>	
+		<div id="loading" style="z-index: -999;height: 0px; width: 0px; position: fixed; top: 0;<?php (wbc()->options->get_option('appearance_filters','appearance_filters_loader') OR apply_filters('eowbc_filter_widget_loader',false))?_e('display:none !important;'):'';?>"></div>	
 		    							
 		<?php 
 			if(wp_is_mobile()) {
@@ -220,6 +220,8 @@ class EOWBC_Filter_Widget {
 					}	
 					.loading{												
 						background-image:url(".constant('EOWBC_ASSET_URL')."icon/spinner.gif);
+						height: 100%; 
+						width: 100%;
 						background-color: rgba(255,255,255, 0.6);				    	
 						background-position: center center;
 						background-repeat: no-repeat;	    				    
@@ -2459,7 +2461,7 @@ class EOWBC_Filter_Widget {
 		?>
 		<!--Primary filter button that will only be visible on desktop/tablet-->
 		<!-- This widget is created with Wordpress plugin - WooCommerce Product bundle choice -->
-		<div id="loading" style="z-index: -999; height: 100%; width: 100%; position: fixed; top: 0;<?php (wbc()->options->get_option('appearance_filters','appearance_filters_loader') OR apply_filters('eowbc_filter_widget_loader',false))?_e('display:none !important;'):'';?>"></div>
+		<div id="loading" style="z-index: -999; height: 0px; width: 0px; position: fixed; top: 0;<?php (wbc()->options->get_option('appearance_filters','appearance_filters_loader') OR apply_filters('eowbc_filter_widget_loader',false))?_e('display:none !important;'):'';?>"></div>
 		
 		<script type="text/javascript">
 			jQuery(document).ready(function(){
