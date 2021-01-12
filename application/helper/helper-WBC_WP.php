@@ -189,4 +189,32 @@ class WBC_WP {
         }
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    //////////////////////// Theme Function ///////////////////////////////
+   public function get_theme_mod($key,$default='') {
+        if(empty($key)){
+            return '';
+        }
+        return get_theme_mod($key,$default);
+    }
+
+    public function get_stylesheet_directory_uri() {
+        if(function_exists('get_stylesheet_directory_uri')) {
+            return get_stylesheet_directory_uri();
+        } else {
+            return '';
+        }
+    }
+
+    public function get_template_directory_uri() {
+        if(function_exists('get_template_directory_uri')) {
+            return get_template_directory_uri();
+        } else {
+            return '';
+        }
+    }
+
+    
+
 }
