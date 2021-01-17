@@ -133,8 +133,11 @@
 							
 							
 							if($(this).attr('data-slug')==='price'){
-								$("input[name='text_min_"+$(e).attr('data-slug')+"']").val( _prefix+' '+(_sep=='.'?Number(min).toFixed(2):(Number(min).toFixed(2)).toString().replace('.',',')).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")+' '+_postfix );
-				        		$("input[name='text_max_"+$(e).attr('data-slug')+"']").val( _prefix+' '+(_sep=='.'?Number(max).toFixed(2):(Number(max).toFixed(2)).toString().replace('.',',')).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")+' '+_postfix);
+								/*$("input[name='text_min_"+$(e).attr('data-slug')+"']").val( _prefix+' '+(_sep=='.'?Number(min).toFixed(2):(Number(min).toFixed(2)).toString().replace('.',',')).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")+' '+_postfix );
+				        		$("input[name='text_max_"+$(e).attr('data-slug')+"']").val( _prefix+' '+(_sep=='.'?Number(max).toFixed(2):(Number(max).toFixed(2)).toString().replace('.',',')).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")+' '+_postfix);*/
+
+				        		$("input[name='text_min_"+$(e).attr('data-slug')+"']").val( _prefix+' '+(_sep=='.'?Number(min).toFixed(2):(Number(min).toFixed(0)).toString().replace('.',',')).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")+'.00 '+_postfix );
+				        		$("input[name='text_max_"+$(e).attr('data-slug')+"']").val( _prefix+' '+(_sep=='.'?Number(max).toFixed(2):(Number(max).toFixed(0)).toString().replace('.',',')).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")+'.00 '+_postfix);
 							} else {
 
 				        		$("input[name='text_min_"+$(e).attr('data-slug')+"']").val( _prefix+(_sep=='.'?Number(min).toFixed(2):(Number(min).toFixed(2)).toString().replace('.',','))+_postfix );
