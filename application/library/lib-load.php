@@ -73,14 +73,16 @@ if(!class_exists('WBC_Loader')) {
 
 		public function template( $template_path, $data=array() ) {
 			//	load template file under /view directory
+			
+			$path = apply_filters('eowbc_template_path',constant('EOWBC_TEMPLATE_DIR').$template_path.".php",$template_path,$data);
+
 			if(defined('EOWBC_TEMPLATE_DIR')) {
-				if(file_exists( constant('EOWBC_TEMPLATE_DIR').$template_path.".php" )) {
+				if( file_exists( $path ) ) {
 					
 					if(!empty($data) and is_array($data)){
 						extract($data);
 					}
-
-					require trailingslashit(constant('EOWBC_TEMPLATE_DIR')).$template_path.".php";
+					require $path;
 				}
 				else 
 				{

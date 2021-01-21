@@ -271,7 +271,7 @@ if ( ! class_exists( 'Configuration' ) ) {
 										'value'=>wbc()->options->get_option('configuration','config_alternate_breadcrumb','default'),
 										'validate'=>array('required'=>''),
 										'sanitize'=>'sanitize_text_field',
-										'options'=>array('default'=>'Default','template_1'=>'Template 1','template_2'=>'Template 2'/*,'template_3'=>'Template 3'*/),
+										'options'=>apply_filters('eowbc_alternate_breadcrumb',array('default'=>'Default','template_1'=>'Template 1','template_2'=>'Template 2')),
 										'class'=>array(),										
 										'size_class'=>array('required'),
 										'visible_info'=>array( 'label'=>'( Switch to other look of breadcrumb. )',

@@ -53,6 +53,7 @@
 		?>
 	</form>
 	<br/><br/>
+	<?php if(apply_filters('eowbc_enque_filter_js','__return_true')): ?>
 	<script type="text/javascript">		
 
 		jQuery(document).ready(function($){			
@@ -363,4 +364,4 @@
 
 		});			
 	</script> 
-	
+	<?php endif; ?>
