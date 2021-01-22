@@ -48,6 +48,8 @@ class EOWBC_Filter_Widget {
 		if(!(is_array($filter) xor is_object($filter)) or empty($filter)) return false;
 		if(apply_filters('eowbc_enque_filter_assets','__return_true')){
 			$this->eo_wbc_filter_enque_asset();
+		} else {
+			$this->localize_script();
 		}
 
 		//map fields to names as per older version, applies to this code block only.
@@ -2291,6 +2293,50 @@ class EOWBC_Filter_Widget {
 		return $wpdb->get_row( $sql ); // WPCS: unprepared SQL ok.
 	}
 
+	public function localize_script(){
+
+		global $wp_query;
+		$site_url = '';
+		$product_url = '';
+		if( !$this->is_shortcode_filter && !$this->is_shop_cat_filter ) {
+
+			$current_category = $wp_query->get_queried_object();
+			if(!empty($current_category) and !is_wp_error($current_category)){
+				$current_category = $current_category->slug;
+			} else{
+				$current_category=$this->_category;
+			}
+
+	        $site_url = esc_url(get_term_link( $current_category,'product_cat'));
+	      	if(strpos($site_url, '?')!==false){
+	          	$site_url.='&';
+	      	} else {
+	          	$site_url.='?';
+	      	}
+
+	      	$product_url = $this->product_url();
+		}
+
+		$data = array(
+        					'eo_product_url'=>$product_url,
+        					//'eo_view_tabular'=>($current_category=='solitaire'?1:0),
+        					'disp_regular'=>wbc()->options->get('eo_wbc_e_tabview_status',false)/*get_option('eo_wbc_e_tabview_status',false)*/?1:0,
+        					'eo_admin_ajax_url'=>admin_url( 'admin-ajax.php'),
+        					'eo_part_site_url'=>get_site_url().'/index.php',
+        					'eo_part_end_url'=>'/'.$product_url,
+        					'eo_cat_site_url'=>$site_url,
+        					'eo_cat_query'=>http_build_query($_GET),
+        					'btnfilter_now'=>(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))?false:true),
+        					'btnreset_now'=>(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_reset_now'))?false:true),
+        				);
+
+		?>
+		<script>
+			var eo_wbc_object = JSON.parse('<?php echo json_encode($data); ?>');
+		</script>
+		<?php		
+	}
+
 	public function get_widget() {
 		
 		do_action('eowbc_before_filter_widget');
@@ -2359,6 +2405,8 @@ class EOWBC_Filter_Widget {
 		if(!(is_array($filter) xor is_object($filter)) or empty($filter)) return false;
 		if(apply_filters('eowbc_enque_filter_assets','__return_true')){
 			$this->eo_wbc_filter_enque_asset();
+		} else {
+			$this->localize_script();
 		}
 
 		//map fields to names as per older version, applies to this code block only. 
