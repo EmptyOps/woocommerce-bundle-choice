@@ -52,10 +52,20 @@
 			}
 		?>
 	</form>
-	<br/><br/>
+	<br/>
+	<?php do_action('eowbc_post_filter_form'); ?>
+	<?php add_action('wp_footer',function(){ ?>
 	<script type="text/javascript">		
 
-		jQuery(document).ready(function($){			
+		jQuery(document).ready(function($){
+			
+			jQuery.fn.jui_accordion = jQuery.fn.accordion;
+			jQuery.fn.jui_slider = jQuery.fn.slider;
+			jQuery.fn.jui_checkbox = jQuery.fn.checkbox;
+
+			jQuery.fn.accordion = jQuery.fn.ui_accordion;
+			jQuery.fn.slider = jQuery.fn.ui_slider;
+			jQuery.fn.checkbox = jQuery.fn.ui_checkbox;
 
 			window.eo=new Object();
 			
@@ -255,7 +265,9 @@
 							}
 						}
 						
+						jQuery.fn.slider = jQuery.fn.ui_slider;
 						$("#text_slider_"+$(e).attr('data-slug')).slider("set rangeValue",min_value,max_value);
+						jQuery.fn.slider = jQuery.fn.jui_slider;
 					});							
 					$(e).slider(_params);
 				});
@@ -270,7 +282,7 @@
 			var secondary_mobile_only=$(secondary_filter).find(".mobile.only");
 
 			
-			$('.ui.accordion').accordion();
+			jQuery('.ui.accordion').accordion();
 			window.eo.slider($('.eo-wbc-container.filters').find('.ui.slider'));				
 		
 			/* Activate initiation of sliders at secondary segments. */
@@ -381,7 +393,14 @@
 			}});				
 			/*----------------------------------------------------*/
 			/*----------------------------------------------------*/
+			jQuery.fn.ui_accordion = jQuery.fn.accordion;
+			jQuery.fn.ui_slider = jQuery.fn.slider;
+			jQuery.fn.ui_checkbox = jQuery.fn.checkbox;
 
+			jQuery.fn.accordion = jQuery.fn.jui_accordion;
+			jQuery.fn.slider = jQuery.fn.jui_slider;
+			jQuery.fn.checkbox = jQuery.fn.jui_checkbox;
 		});			
 	</script> 
+	<?php }); ?>
 	

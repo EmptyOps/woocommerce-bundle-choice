@@ -69,6 +69,25 @@ function eo_wbc_filter_render_html(data) {
 	if(typeof(yith_wcwl_l10n)=='object'){
 		eowbc_yith_wishlist_fix();
 	}
+	// Fix for the color swatches.
+	if(typeof(jQuery.fn.tawcvs_variation_swatches_form)=='function'){
+		/*jQuery( '.variations_form' ).tawcvs_variation_swatches_form();
+		jQuery( document.body ).trigger( 'tawcvs_initialized' );*/
+		jQuery(".variable-item.color-variable-item").on('click',function(){
+			let _this = jQuery(this);
+			let _target_container = _this.parentsUntil('.product-block').parent().find('.product-transition .product-image');
+
+			
+			let _images_data = JSON.parse(_target_container.attr('data-swatch'));	
+			let _index = _this.attr('data-value');
+
+			if(_images_data.hasOwnProperty(_index)){
+				_target_container.html(_images_data[_index]);				
+				jQuery('.variations_form').WooVariationSwatches();
+				jQuery('.variations_form').WooVariationSwatches();
+			}
+		});
+	}
 }
 
 /*if(eo_wbc_object.disp_regular=='1'){*/
@@ -220,14 +239,18 @@ function reset_icon(e,selector){
 function reset_slider(e,selector,first,second){	
 	e.preventDefault();
 	e.stopPropagation()
+	jQuery.fn.slider = jQuery.fn.ui_slider;
 	jQuery(".ui.slider[data-slug='"+selector+"']").slider('set rangeValue',first,second);
+	jQuery.fn.slider = jQuery.fn.jui_slider;
 	return false;
 }
 
 function reset_price(e,min,max) {
 	e.preventDefault();
 	e.stopPropagation()
+	jQuery.fn.slider = jQuery.fn.ui_slider;
 	jQuery(".ui.slider[data-slug='price']").slider('set rangeValue',min,max);
+	jQuery.fn.slider = jQuery.fn.jui_slider;
 	return false;	
 }
 

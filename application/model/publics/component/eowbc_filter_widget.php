@@ -138,7 +138,20 @@ class EOWBC_Filter_Widget {
 
 	public function eo_wbc_filter_enque_asset() {
 		wbc()->load->asset('css','fomantic/semantic.min');
-		wbc()->load->asset('js','fomantic/semantic.min');
+		wbc()->load->asset('js','fomantic/semantic.min',array('jquery-ui-core'));
+		wp_add_inline_script('fomantic-semantic.min','jQuery.fn.ui_accordion = jQuery.fn.accordion;
+				jQuery.fn.ui_slider = jQuery.fn.slider;
+				jQuery.fn.ui_checkbox = jQuery.fn.checkbox;');
+		add_action('wp_footer',function(){
+			?>
+			<script type="text/javascript">
+				/*jQuery.fn.ui_accordion = jQuery.fn.accordion;
+				jQuery.fn.ui_slider = jQuery.fn.slider;
+				jQuery.fn.ui_checkbox = jQuery.fn.checkbox;*/
+			</script>
+			<?php
+		},99);
+
 		wbc()->load->asset('js','publics/eo_wbc_filter');
 		wbc()->theme->load('css','filter');
         wbc()->theme->load('js','filter');
@@ -147,8 +160,8 @@ class EOWBC_Filter_Widget {
 		$site_url=site_url();
 
 		wp_enqueue_script('jquery');	
-		wp_dequeue_script('jquery-ui-core');
-		wp_deregister_script('jquery-ui-core');
+		//wp_dequeue_script('jquery-ui-core');
+		//wp_deregister_script('jquery-ui-core');
 		
 		add_action( 'wp_footer',function(){
 
