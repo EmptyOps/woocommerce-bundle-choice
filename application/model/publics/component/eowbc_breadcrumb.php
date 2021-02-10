@@ -133,61 +133,42 @@ class EOWBC_Breadcrumb
     }
 
     public static function eo_wbc_breadcrumb_mobile($step=1,$begin){
+
         ob_start();
-        ?>
-        <div class="ui container unstackable steps" style="width: 100% !important; min-width: unset; max-width: unset; margin: auto; margin-bottom: 1em;">
-            <?php 
-            if(!empty(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_fixed_navigation'))) {
-                 if(!empty(wbc()->sanitize->get('BEGIN')) and wbc()->sanitize->get('BEGIN')==self::$first_slug){                    
-                    self::eo_wbc_breadcumb_first_html_mobile($step,1).self::eo_wbc_breadcumb_second_html_mobile($step,2);
-                } elseif(!empty(wbc()->sanitize->get('BEGIN')) and wbc()->sanitize->get('BEGIN')==self::$second_slug) {
-                    self::eo_wbc_breadcumb_first_html_mobile($step,2).self::eo_wbc_breadcumb_second_html_mobile($step,1);
-                }
 
-            }  else {
-                if($begin==self::$first_slug/*get_option('eo_wbc_first_slug')*/) {
+        wbc()->load->template('publics/breadcrumb/breadcrumb_mobile',
+                                array(
+                                    'step'=>$step,
+                                    'begin'=>$begin,
+                                    'breadcrumb_ui'=>(get_called_class())
+                                )
+                            );                                 
 
-                self::eo_wbc_breadcumb_first_html_mobile($step,1).self::eo_wbc_breadcumb_second_html_mobile($step,2);
-
-                } elseif ($begin==self::$second_slug/*get_option('eo_wbc_second_slug')*/)  {
-
-                self::eo_wbc_breadcumb_second_html_mobile($step,1).self::eo_wbc_breadcumb_first_html_mobile($step,2);
-                }
-            }
-            ?>          
-            <div 
-                data-href="<?php echo (  (empty(wbc()->sanitize->get('EO_CHANGE')) XOR empty(wbc()->sanitize->get('EO_VIEW'))) &&  !empty( wbc()->sanitize->get('FIRST')) && !empty(wbc()->sanitize->get('SECOND')) ? get_bloginfo('url').'/index.php'.wbc()->options->get_option('configuration','review_page')
-                    .'?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>3,'FIRST'=>wbc()->sanitize->get('FIRST'),'SECOND'=>wbc()->sanitize->get('SECOND'))):'#' ); ?>" 
-                class="<?php echo (($step==3)?'active ':(($step>3)?'completed ':(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb)?'':'disabled'))); ?> step">
-                <div class="content"><?php echo self::$preview_name/*get_option('eo_wbc_collection_title','Preview')*/; ?></div>
-            </div>
-        </div>
-        <script>
-            jQuery(document).ready(function(){ 
-                /*jQuery('.onclick_redirect').on('click',function(){ 
-                    var _step = jQuery(this);
-                    var _rem_url = jQuery(_step).find('[data-remove-url]');
-                    if(_rem_url.length>0) { 
-                        window.location.href=jQuery(_rem_url[0]).data('remove-url');
-                    } else { 
-                        window.location.href = jQuery(_step).data('begin'); 
-                    }
-                });*/
-                jQuery('[data-clickable_breadcrumb]').on('click',function(){
-                    window.location.href = jQuery(this).data('clickable_breadcrumb'); 
-                });
-            }); 
-        </script>
-        <?php 
         return ob_get_clean();
     }
 
     public static function eo_wbc_breadcumb_first_html_mobile($step,$order) {
-        wbc()->load->template('publics/breadcrumb/first_step_mobile', array("step"=>$step,"order"=>$order,"first"=>self::$first_name,"view_url"=>(!empty(wbc()->sanitize->get('FIRST')) ? self::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('FIRST'),$order):'#'),"change_url"=>(!empty(wbc()->sanitize->get('FIRST'))?self::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('FIRST')):'#')));
+        $template = wbc()->options->get_option('configuration','config_alternate_breadcrumb','default');
+        if($template=='theme') {
+
+            wbc()->load->template('publics/breadcrumb/theme_first_step_mobile', array("step"=>$step,"order"=>$order,"first"=>self::$first_name,"view_url"=>(!empty(wbc()->sanitize->get('FIRST')) ? self::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('FIRST'),$order):'#'),"change_url"=>(!empty(wbc()->sanitize->get('FIRST'))?self::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('FIRST')):'#'))); 
+
+
+        } else {
+            wbc()->load->template('publics/breadcrumb/first_step_mobile', array("step"=>$step,"order"=>$order,"first"=>self::$first_name,"view_url"=>(!empty(wbc()->sanitize->get('FIRST')) ? self::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('FIRST'),$order):'#'),"change_url"=>(!empty(wbc()->sanitize->get('FIRST'))?self::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('FIRST')):'#')));
+        }
     }
 
     public static function eo_wbc_breadcumb_second_html_mobile($step,$order){
-        wbc()->load->template('publics/breadcrumb/second_step_mobile',array("step"=>$step,"order"=>$order,"second"=>self::$second_name,"view_url"=>(!empty(wbc()->sanitize->get('SECOND')) ? self::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('SECOND'),$order):'#'),"change_url"=>(!empty(wbc()->sanitize->get('SECOND')?self::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('SECOND')):'#')))); 
+        $template = wbc()->options->get_option('configuration','config_alternate_breadcrumb','default');
+        if($template=='theme') {
+
+            wbc()->load->template('publics/breadcrumb/theme_second_step_mobile',array("step"=>$step,"order"=>$order,"second"=>self::$second_name,"view_url"=>(!empty(wbc()->sanitize->get('SECOND')) ? self::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('SECOND'),$order):'#'),"change_url"=>(!empty(wbc()->sanitize->get('SECOND')?self::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('SECOND')):'#')))); 
+
+
+        } else {
+            wbc()->load->template('publics/breadcrumb/second_step_mobile',array("step"=>$step,"order"=>$order,"second"=>self::$second_name,"view_url"=>(!empty(wbc()->sanitize->get('SECOND')) ? self::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('SECOND'),$order):'#'),"change_url"=>(!empty(wbc()->sanitize->get('SECOND')?self::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('SECOND')):'#'))));
+        }
     }
 
     public static function eo_wbc_breadcrumb_desktop($step=1,$begin){

@@ -323,6 +323,8 @@ class Eowbc_Sample_Data {
 			update_post_meta($product_id,"_product_image_gallery",implode(',', $imgs));
 		}
 
+		
+
 		$parent_id = $product_id;
 		if(!empty($product['variation'])){
 
@@ -379,7 +381,24 @@ class Eowbc_Sample_Data {
 			update_post_meta( $parent_id, '_sales_price', $product['price']);
 			update_post_meta( $parent_id, '_sale_price', $product['sale_price']);				
 			update_post_meta( $parent_id, '_manage_stock','no' );						
-		}			
+		}
+
+		/*$product_obj = wc_get_product($parent_id);
+		if(!empty($product_obj) and !is_wp_error($product_obj)){
+			$product_obj->set_description('<p>Sample Lorem Ipsum Text</p> <p>
+                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at ante. Mauris eleifend, 
+                                                        quam a vulputate dictum, massa quam dapibus leo, eget vulputate orci purus ut lorem. In fringilla mi in ligula.
+                                                         Pellentesque aliquam quam vel dolor. Nunc adipiscing. Sed quam odio, tempus ac, aliquam molestie, varius ac, tellus.
+                                                          Vestibulum ut nulla aliquam risus rutrum interdum. Pellentesque lorem. Curabitur sit amet erat quis risus feugiat viverra. 
+                                                        Pellentesque augue justo, sagittis et, lacinia at, venenatis non, arcu. Nunc nec libero. In cursus dictum risus. Etiam tristique nisl a
+                                                    </p><p>Sample Lorem Ipsum Text</p><p>Sed eget turpis a pede tempor malesuada. Vivamus quis mi at leo pulvinar hendrerit.
+                                                         Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+                                                          Pellentesque aliquet lacus vitae pede. Nullam mollis dolor ac nisi. Phasellus sit amet urna.
+                                                          Praesent pellentesque sapien sed lacus. Donec lacinia odio in odio. In sit amet elit. 
+                                                          Maecenas gravida interdum urna. Integer pretium, arcu vitae imperdiet facilisis, elit tellus tempor nisi, vel feugiat ante velit sit amet mauris.
+                                                           Vivamus arcu. Integer pharetra magna ac lacus. Aliquam vitae sapien in nibh vehicula auctor. Suspendisse leo mauris, pulvinar sed, tempor et, consequat ac, lacus. Proin velit. Nulla semper lobortis mauris.
+                                                         Duis urna erat, ornare et, imperdiet eu, suscipit sit amet, massa. Nulla nulla nisi, pellentesque at, egestas quis, fringilla eu, diam.</p>');
+		}*/
 
 		return $res;	// TRUE;
 	}	
