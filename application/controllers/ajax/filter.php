@@ -101,6 +101,19 @@ class Filter
 				}        		
         	} 
 
+        	$_category_query_list = array();
+        	if(!empty(wbc()->sanitize->request('_category_query'))) {
+        		$_category_query = array_filter(explode(',',wbc()->sanitize->request('_category_query')));
+
+
+        		foreach ($_category_query as $_category_field) {
+        			$_category_field = array_filter(explode('+',$_category_field));
+					if(!empty($_category_field)) {
+						$_category_query_list = array_merge($_category_query_list,$_category_field);
+					}
+				}
+        	}
+
         	if(empty($category_fields) and  !empty(wbc()->sanitize->request('_current_category'))) {
         		foreach (array_filter(explode(',',wbc()->sanitize->request('_current_category'))) as $_category_field) {
 					if(!empty($table_columns['category'][$_category_field])){
@@ -167,6 +180,22 @@ class Filter
         	$category_fields = "(" .implode(' OR ',$field_query) .")"; 
         }
 
+        if(empty($_category_query_list)){
+        	$_category_query_list = 1;
+        } else {
+        	$field_query = array();
+        	foreach ($_category_query_list as $field) {
+        		$field_query[]="`${field}` != 0";
+        	}
+        	if(stripos(wbc()->sanitize->request('_category_query'),'+')!==false){
+        		$_category_query_list = "(" .implode(' AND ',$field_query) .")"; 
+        	} else {
+        		$_category_query_list = "(" .implode(' OR ',$field_query) .")"; 
+        	}
+        }
+
+        
+
         if(empty($attribute_fields)){
         	$attribute_fields = 1;
         } else {
@@ -194,18 +223,19 @@ class Filter
         	}
         	$attribute_fields.=" AND (" .implode(' OR ',$field_query) .")"; 
         }
-       
+
+        
 
         global $wpdb;
 
         if($return_query) {
-        	return "SELECT `product_id`,`parent_id` FROM `{$wpdb->wc_product_meta_lookup}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ${attribute_fields} ${order_sql}";
+        	return "SELECT `product_id`,`parent_id` FROM `{$wpdb->wc_product_meta_lookup}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql}";
         }
 
         //echo "SELECT `product_id`,`parent_id` FROM `{$wpdb->wc_product_meta_lookup}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ${attribute_fields} ${order_sql}";
         //die();
        
-        $result = $wpdb->get_results("SELECT `product_id`,`parent_id` FROM `{$wpdb->wc_product_meta_lookup}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ${attribute_fields} ${order_sql}",'ARRAY_N');
+        $result = $wpdb->get_results("SELECT `product_id`,`parent_id` FROM `{$wpdb->wc_product_meta_lookup}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql}",'ARRAY_N');
 
 
         if(!empty($result) and !is_wp_error($result)){
