@@ -107,9 +107,25 @@ class Filter
 
 			        		foreach ($_category_query as $_category_field) {
 			        			$_category_field = array_filter(explode('+',$_category_field));
+
 								if(!empty($_category_field)) {
-									$_category_query_list = array_merge($_category_query_list,$_category_field);
+									
+									$_category_query_list[] = array(
+										'relation'=>'AND',
+										array(
+					                        'taxonomy' => 'product_cat',
+					                        'field' => 'slug',
+					                        'terms' => $_category_field,
+					                        'compare'=>'EXISTS IN'
+										)
+									)									
 								}
+
+							}
+
+							if(!empty($_category_query_list)){
+								$_category_query_list['relation']='OR';
+								$tax_query[] = $_category_query_list;
 							}
 			        	}
 		                
