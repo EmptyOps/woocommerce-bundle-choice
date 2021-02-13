@@ -100,6 +100,19 @@ class Filter
 		                    }  
 		                }
 		                
+		                $_category_query_list = array();
+			        	if(!empty(wbc()->sanitize->request('_category_query'))) {
+			        		$_category_query = array_filter(explode(',',wbc()->sanitize->request('_category_query')));
+
+
+			        		foreach ($_category_query as $_category_field) {
+			        			$_category_field = array_filter(explode('+',$_category_field));
+								if(!empty($_category_field)) {
+									$_category_query_list = array_merge($_category_query_list,$_category_field);
+								}
+							}
+			        	}
+		                
 		                if(empty($tax_query) and !empty(wbc()->sanitize->get('_current_category'))) {
 
 		                    $tax_query[]=array(
