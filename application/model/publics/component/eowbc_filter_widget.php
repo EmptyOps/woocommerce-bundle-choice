@@ -1968,7 +1968,7 @@ class EOWBC_Filter_Widget {
 		} else{
 			$term = get_term_by('id',$id,'product_cat');
 			$term_list = get_terms('product_cat', array('hide_empty' => 0, 'orderby' => 'menu_order', 'parent'=>$id));
-			
+
 			if(!empty($item[$__prefix."_fconfig_elements"])){
 				$filter_in_list = explode(',',$item[$__prefix."_fconfig_elements"]);
 				if(is_array($filter_in_list) and is_array($term_list) and !empty($filter_in_list) and !empty($term_list)){
