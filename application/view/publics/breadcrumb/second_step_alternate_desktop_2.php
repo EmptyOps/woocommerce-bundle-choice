@@ -13,9 +13,9 @@
             <?php if(empty($second)){ ?>
                 <div class="title" <?php _e((!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb) and !empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second_url))?'data-clickable_breadcrumb="'.\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second_url.'"':''); ?>><?php _e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_choose_prefix_text',__('Choose a','woo-bundle-choice'),true,true)); ?> <?php _e($second_name); ?></div>
                 <?php if($step!=$order and (!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb) and !empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second_url))): ?>
-                    <div class="description">
-                        <a style="text-decoration: underline;" href="<?php echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second_url; ?>"><?php echo __('Browse','woo-bundle-choice').' '.__($second_name).'s'; ?></a>
-                    </div>
+                    <!-- <div class="description">
+                        <a style="text-decoration: underline;" href="<?php //echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second_url; ?>"><?php //echo __('Browse','woo-bundle-choice').' '.__($second_name).'s'; ?></a>
+                    </div> -->
                 <?php endif; ?>
             <?php } else {
 
