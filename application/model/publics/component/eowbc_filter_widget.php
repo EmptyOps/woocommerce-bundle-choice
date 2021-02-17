@@ -2423,6 +2423,8 @@ class EOWBC_Filter_Widget {
     					
 			</script>
 			<?php
+
+			wbc()->load->asset('js','publics/eo_wbc_filter');
 		}
 
 		//map fields to names as per older version, applies to this code block only. 
