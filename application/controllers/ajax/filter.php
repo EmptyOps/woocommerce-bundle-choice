@@ -101,8 +101,8 @@ class Filter
 		                }
 		                
 		                $_category_query_list = array();
-			        	if(!empty(wbc()->sanitize->request('_category_query'))) {
-			        		$_category_query = array_filter(explode(',',wbc()->sanitize->request('_category_query')));
+			        	if(!empty(wbc()->sanitize->get('_category_query'))) {
+			        		$_category_query = array_filter(explode(',',wbc()->sanitize->get('_category_query')));
 
 
 			        		foreach ($_category_query as $_category_field) {
@@ -118,7 +118,7 @@ class Filter
 					                        'terms' => $_category_field,
 					                        'compare'=>'EXISTS IN'
 										)
-									)									
+									);									
 								}
 
 							}
