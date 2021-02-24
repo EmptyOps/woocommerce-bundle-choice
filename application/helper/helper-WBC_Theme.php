@@ -20,7 +20,7 @@ class WBC_Theme {
 		}
 
 		$path = implode('/',array_filter(explode('/',$path)));		
-		$path = $base_dir.$type.'/'.'theme/'.wbc()->wp->get_template().'/'.$path.'.php';		
+		$path = $base_dir.$type.'/'.'theme/'.basename(get_stylesheet_directory_uri()).'/'.$path.'.php';		
 		if(file_exists($path)){
 			require_once $path;
 		}
