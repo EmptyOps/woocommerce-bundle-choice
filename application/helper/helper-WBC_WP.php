@@ -134,7 +134,8 @@ class WBC_WP {
         }         
     }
     public function get_template() {
-        return get_template();
+
+        return basename(get_stylesheet_directory_uri());
     }
 
 
