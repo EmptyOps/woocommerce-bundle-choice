@@ -553,6 +553,23 @@ class EOWBC_Filter_Widget {
 				ob_start();
 				?>
 				<style type="text/css">
+					@media screen and (max-width: 412px) {
+						span[title="Very Strong"][alt="Very Strong"]/*
+						.ui.labeled.slider>.labels .label*/{						
+						    max-width: fit-content;
+						    top: -1.5em;
+						    left: -1em;
+						    position: inherit;
+						    line-height: 1;
+						    white-space: break-spaces;
+						}
+						.ui.tabular.menu .item{
+							font-size: 0.7em !important;
+						}
+					}
+					#products_table th {
+					    font-size: 0.8em !important;
+					}
 					.mobile_2_hidden{
 						visibility: hidden !important;
 					}
