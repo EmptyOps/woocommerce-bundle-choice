@@ -9,8 +9,8 @@ class EOWBC_Filter_Widget {
 	public $is_shortcode_filter = false;
 	public $filter_prefix = '';
 
-	private $cat_number = -1;
-	private $cat_name_part = "";
+	public $cat_number = -1;
+	public $cat_name_part = "";
 
 	public static function instance() {
 		if ( ! isset( self::$_instance ) ) {
