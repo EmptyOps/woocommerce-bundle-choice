@@ -16,7 +16,7 @@
 // },50);
 ?>
 <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
-<div class="ui modal align center tiny centered">
+<div class="ui modal align center tiny centered hidden">
 <div class="ui header">              
   <h4>There is an error on <strong><?php echo constant('EOWBC_NAME'); ?></strong></h4>
 </div>
