@@ -324,7 +324,25 @@ class Category {
             return $url;
         }
 
-        return  $url.'?'.wbc()->common->http_query(
+        global $wp_query;
+        $attrib_query = array();
+        $disable_fields = array();
+        if(property_exists($wp_query,'tax_query') and property_exists($wp_query->tax_query,'queried_terms')){
+               $_queried_terms_ = $wp_query->tax_query->queried_terms;
+               
+               if(!empty($_queried_terms_) and is_array($_queried_terms_)){
+                    foreach ($_queried_terms_ as $qt_key => $qt_value) {
+                        if($qt_key!=='product_cat'){
+                            $attrib_query['attribute_'.$qt_key] = $qt_value['terms'][0];
+                            $disable_fields[] = 'attribute_'.$qt_key;
+                        }
+                        //attribute_pa_size
+                    }
+               }
+        }
+        
+
+        return  $url.'?'.(empty($attrib_query)?'':wbc()->common->http_query($attrib_query).'&'.('eo_disabled_fields='.(implode(',',$disable_fields)).'&')).wbc()->common->http_query(
             array(
                 'EO_WBC'=>1,
                 'BEGIN'=>wbc()->sanitize->get('BEGIN'),

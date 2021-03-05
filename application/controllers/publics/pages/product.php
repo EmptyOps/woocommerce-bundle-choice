@@ -234,7 +234,7 @@ class Product {
              .woocommerce .widget-area {
                   display: none !important;
              }
-        </style>
+        </style>        
         <?php
         echo ob_get_clean();
         
@@ -264,7 +264,35 @@ class Product {
         });
           
         //Adding own ADD_TO_CART_BUTTON
-        add_action('wp_footer',function(){               
+        add_action('wp_footer',function(){  
+            ?>
+            <script type="text/javascript">
+            jQuery(document).ready(function(){
+                <?php if(isset($_GET['eo_disabled_fields'])): ?>
+                    let hideable_fields = '<?php echo wbc()->sanitize->get('eo_disabled_fields'); ?>';
+                    hideable_fields = hideable_fields.split(',');
+
+                    jQuery.each(hideable_fields,function(i,e){
+                        if(e=='attribute_pa_shape'){
+                            jQuery("#vwds_shape_dropdown").css('display','none');
+                        }
+                        jQuery('[name="'+e+'"]').attr('disabled','disabled');
+                    });
+                <?php endif; ?>
+            });
+            </script>
+            <style type="text/css">
+                <?php if(isset($_GET['eo_disabled_fields'])): ?>
+                    
+                    <?php if(strpos(wbc()->sanitize->get('eo_disabled_fields'),'attribute_pa_shape')!==false): ?>
+                    #vwds_shape_dropdown{
+                        display: none;
+                    }
+                    <?php endif; ?>
+                <?php endif; ?>
+            </style>
+            <?php
+
             echo "<style>.double-gutter .tmb{ width: 50%;display: inline-flex; }</style>";         
             $category = $this->eo_wbc_get_category();
             $btn_text = '';
