@@ -851,6 +851,11 @@ class EOWBC_Filter_Widget {
 			}
 
 	        $site_url = esc_url(get_term_link( $current_category,'product_cat'));
+
+	        if(isset($_REQUEST['CAT_LINK'])){
+				 $site_url = str_replace($current_category,wbc()->sanitize->get('CAT_LINK'),$site_url) ;
+			}
+
 	      	if(strpos($site_url, '?')!==false){
 	          	$site_url.='&';
 	      	} else {
