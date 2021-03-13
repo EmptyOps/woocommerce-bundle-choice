@@ -20,6 +20,9 @@ function eo_wbc_jpc_list_categories($slug='',$prefix='',$opts_arr=array()){
         $opts_arr = eo_wbc_jpc_list_categories($base->slug,'--',$opts_arr);
     }
 
+    
+    $opts_arr = array_replace([array('label'=>'---Select---'),array('label'=>'Price','attr'=>'data-type="1"')],$opts_arr);
+
     // return $category_option_list;
     return $opts_arr;
 }
@@ -110,7 +113,7 @@ $form['data'] = array(
 		'value'=>'0',
 		'sanitize'=>'sanitize_text_field',
 		'options'=> array(),	// $value,
-		'class'=>array('fluid','jpc_attribute_vals'),
+		'class'=>array('fluid','jpc_attribute_vals','additions','search','clearable'),
 		'size_class'=>array('four','wide'),
 		'prev_inline'=>true,
 		'inline'=>true,
@@ -126,7 +129,7 @@ $form['data'] = array(
 		'value'=>'0',
 		'sanitize'=>'sanitize_text_field',
 		'options'=> array(),	//$value,
-		'class'=>array('fluid','jpc_attribute_vals'),
+		'class'=>array('fluid','jpc_attribute_vals','additions','search','clearable'),
 		'size_class'=>array('four','wide'),
 		'prev_inline'=>true,
 		'inline'=>true,
