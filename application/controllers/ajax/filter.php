@@ -72,6 +72,7 @@ class Filter
 
 		        if( $query->is_main_query() ) {
 
+		        	$_GET = apply_filters('filter_widget_ajax_pre_get',$_GET);
 		        	/*echo "<pre>";
 		        	print_r($_GET);*/
 
@@ -197,7 +198,7 @@ class Filter
 		                //die();
 		            }		            
 		        }
-		        return $query;		       
+		        return apply_filters('filter_widget_ajax_post_query',$query);
 		    });		   
 		}
 	}	

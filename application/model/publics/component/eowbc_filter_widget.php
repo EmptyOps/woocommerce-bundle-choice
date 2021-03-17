@@ -1007,7 +1007,12 @@ class EOWBC_Filter_Widget {
 		        	}
 		        }
 			} else {
-				return false;
+				$alternet_data = apply_filters('eowbc_filters_range_min_max',array('min_value'=>false,'max_value'=>false,'title'=>$field_title,'slug'=>$field_slug,'seprator'=>$seprator,'filter_item'=>$item));
+				if($alternet_data['min_value']===false and $alternet_data['max_value']===false){
+					return false;
+				} else {
+					return $alternet_data;
+				}
 			}			
 		}		
 		else {
@@ -1107,9 +1112,7 @@ class EOWBC_Filter_Widget {
 	//Generate text slider/ non-labeled sliders
 	public function input_text_slider($__prefix,$item/*$id,$title,$filter_type,$desktop=1,$width='50',$reset =  0,$help='',$advance = 0,$prefix=''*/) {
 
-		
-		extract($item);
-	
+		extract($item);	
 
 		$tab_set = (!empty( $item[$__prefix.'_fconfig_set'] )?$item[$__prefix.'_fconfig_set']:'');
 
@@ -1134,7 +1137,9 @@ class EOWBC_Filter_Widget {
 			$postfix = ${$__prefix.'_fconfig_postfix'};
 		}
 
-		$filter=$this->range_min_max($id,$title,$filter_type,$__prefix,$item);						
+		$filter=$this->range_min_max($id,$title,$filter_type,$__prefix,$item);
+
+
 		if(!$filter) return false;		
 
 		array_push($this->__filters,array(
@@ -2369,7 +2374,8 @@ class EOWBC_Filter_Widget {
 		<script>
 			var eo_wbc_object = JSON.parse('<?php echo json_encode($data); ?>');
 		</script>
-		<?php		
+		<?php
+		wbc()->load->asset('js','publics/eo_wbc_filter',array('jquery'));		
 	}
 
 	public function get_widget() {
@@ -2504,6 +2510,8 @@ class EOWBC_Filter_Widget {
 
 		ksort($non_adv_ordered_filter);		
 		ksort($adv_ordered_filter);
+
+		$non_adv_ordered_filter = apply_filters('custome_filter_widget_non_advance_filter',$non_adv_ordered_filter);
 
 		/*echo "non_adv_ordered_filter and adv_ordered_filter dump";
 		wbc()->common->pr($non_adv_ordered_filter);
