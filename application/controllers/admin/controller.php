@@ -41,7 +41,6 @@ class Controller extends \eo\wbc\controllers\Controller {
 			return $form_defination['admin_form'];
 		}
 	}*/
-
 	public function default_uis($type,$exceptance) {
 		$defaults = array(
 			'label'=>array('text','color','back_color','font_family','font_size'),
@@ -51,6 +50,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 			'image'=>array('height','width','image'),
 			'button'=>array('text','color','back_color','font_family','font_size','radius'),
 			'container'=>array('height','width','margin_left','margin_right'),
+			'wc_attribute_field'=>array('attribute'),
 		);
 
 		$collection = array();
@@ -81,7 +81,8 @@ class Controller extends \eo\wbc\controllers\Controller {
 		
 		foreach ($form as $form_key => $form_value) {
 			
-			if(!empty($form_value[$key])) {
+			if(!empty($form_value[$key])) {	
+
 				$control_element = array();
 				$excep_controls = array();
 				
@@ -124,8 +125,12 @@ class Controller extends \eo\wbc\controllers\Controller {
 				$child_control = array();
 
 				if(!empty($form_value['child'])) {
-
-					$child_control = $this->generate_form($form_value['child'],$key);
+					if(empty($form_value['child']['type']) and count($form_value['child'])>1) {
+						$child_control = $this->generate_form($form_value['child'],$key);
+					} else{
+						$child_control = $this->generate_form([$form_value['child']],$key);
+					}
+					
 				} elseif(empty($form_value['type']) and !empty($form_value) and is_array($form_value)) {
 					$child_control = $this->generate_form($form_value,$key);
 				}

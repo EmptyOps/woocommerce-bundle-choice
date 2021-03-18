@@ -142,6 +142,63 @@ class Form_Elements {
 
 	}
 
+	public function attribute($key,$label,$args=array()) {
+		
+		extract($args);
+		if(empty($required)) {
+			$required = false;
+		}
+
+		if(empty($info)){
+			$info = array( 'label'=>eowbc_lang("Sets specified attribute for ${label}"),
+				'type'=>'visible_info',
+				'class'=>array('small'),				
+			);
+		}
+
+
+		if(empty($validate)){
+			if($required){
+				$validate = array('required'=>'');
+			} else {
+				$validate = array();
+			}
+		} else {
+			if($required and  array_key_exists('required',$validate)) {
+				$validate['required'] = '';
+			} else {
+				$validate = array();
+			}
+		}
+
+		if(!empty($args['label'])){
+			$label = $args['label'];
+		} else {
+			$label = "Choose ${label} Attribute";
+		}
+
+		if(empty($options)){
+			$options = \eo\wbc\model\Category_Attribute::instance()->get_attributs();
+		}
+
+		if(empty($id)){
+			$id = $key;
+		}
+
+		return array(
+			'id' => $id,
+			'label'=>$label,
+			'type'=>'select',
+			'sanitize'=>'sanitize_text_field',
+			'validate'=>$validate,
+			'size_class'=>array('eight','wide'),
+			'options'=>$options,
+			'inline'=>false,			
+			'visible_info'=>$info
+		);
+
+	}
+
 	public function text($key,$label,$args=array()) {
 		
 		extract($args);
