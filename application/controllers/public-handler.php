@@ -84,6 +84,8 @@ class Public_Handler {
 			    	\eo\wbc\controllers\publics\pages\Shop::instance()->init();
 
 			    } elseif (is_product_category()) {
+
+			    	wbc()->load->asset('css','fomantic/semantic.min');
 			        \eo\wbc\controllers\publics\pages\Category::instance()->init();
 
 			    } elseif(is_product()) {
