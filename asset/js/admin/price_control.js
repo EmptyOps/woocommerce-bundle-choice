@@ -94,12 +94,14 @@ jQuery(document).ready(function(jQuery){
 
             if(i==1){
                 jQuery("#"+drop_id).dropdown({ onChange:function(val,lab,ele){
+                    
                     jQuery('[name="jpc_values_name_1"]').val(lab);
                     jQuery('[name="jpc_values_value_1"]').val(val);          
                 }, });
             }
             else {
                 jQuery("#"+drop_id).dropdown({ onChange:function(val,lab,ele){
+                    
                     jQuery('[name="jpc_values_name_2"]').val(lab);
                     jQuery('[name="jpc_values_value_2"]').val(val);          
                 }, });
@@ -107,6 +109,7 @@ jQuery(document).ready(function(jQuery){
 
             jQuery("#"+drop_id).parent().transition('show');
         }
+        jQuery('.ui.dropdown.additions').dropdown();
 
     }
 
@@ -143,6 +146,19 @@ jQuery(document).ready(function(jQuery){
     //     jQuery("[name='eo_wbc_jpc_form_data']").val(JSON.stringify(window.eo_wbc.jpc_data));
     //     document.forms.eo_wbc_jpc_form_submit.submit();
     // })
+
+    jQuery(document).on('change','#jpc_values_drop_1_',function(){
+        if(jQuery('[name="jpc_values_value_1"]').val()!==jQuery(this).val()){
+            jQuery('[name="jpc_values_name_1"]').val(jQuery(this).val());
+            jQuery('[name="jpc_values_value_1"]').val(jQuery(this).val());
+        }
+    });
+    jQuery(document).on('change','#jpc_values_drop_2_',function(){
+        if(jQuery('[name="jpc_values_value_2"]').val()!==jQuery(this).val()){
+            jQuery('[name="jpc_values_name_2"]').val(jQuery(this).val());
+            jQuery('[name="jpc_values_value_2"]').val(jQuery(this).val());
+        }
+    });
 
     jQuery("#jpc_price_ctl_table").on('click touch','.ui.icon.delete,a>.ui.icon.delete',function(e){
         e.preventDefault();

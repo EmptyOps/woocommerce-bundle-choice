@@ -107,12 +107,12 @@ $form['data'] = array(
 // $sizearr = sizeof($arr);
 // $cnt = -1;
 // foreach ($arr as $key => $value) {
-	$fieldarr = array(
+	/*$fieldarr = array(
 		'no_label'=>true,
 		'type'=>'select',
 		'value'=>'0',
 		'sanitize'=>'sanitize_text_field',
-		'options'=> array(),	// $value,
+		'options'=> array(),
 		'class'=>array('fluid','jpc_attribute_vals','additions','search','clearable'),
 		'size_class'=>array('four','wide'),
 		'prev_inline'=>true,
@@ -120,29 +120,33 @@ $form['data'] = array(
 	);
 
 	$fieldarr['next_inline'] = true;
-	$form['data']['jpc_values_drop_1_'/*.$key*/] = $fieldarr;
+	$form['data']['jpc_values_drop_1_'] = $fieldarr;*/
 
 
-	$fieldarr = array(
+	$form['data']['jpc_values_drop_1_'] = array(
+		'no_label'=>true,
+		'next_inline'=>true,
+		'type'=>'select',
+		'value'=>'0',
+		'sanitize'=>'sanitize_text_field',
+		'options'=> array(),
+		'class'=>array('fluid','jpc_attribute_vals','addition','search','clearable'),
+		'size_class'=>array('four','wide'),
+		'prev_inline'=>true,
+		'inline'=>true,
+	);
+	
+	$form['data']['jpc_values_drop_2_'] = array(
 		'no_label'=>true,
 		'type'=>'select',
 		'value'=>'0',
 		'sanitize'=>'sanitize_text_field',
 		'options'=> array(),	//$value,
-		'class'=>array('fluid','jpc_attribute_vals','additions','search','clearable'),
+		'class'=>array('fluid','jpc_attribute_vals','addition','search','clearable'),
 		'size_class'=>array('four','wide'),
 		'prev_inline'=>true,
 		'inline'=>true,
 	);
-
-	// $cnt++;
-	// if( $cnt < $sizearr - 1 )
-	// {
-	// 	$fieldarr['next_inline'] = true;
-	// }
-
-	$form['data']['jpc_values_drop_2_'/*.$key*/] = $fieldarr;
-// }
 
 $form['data']['eowbc_pc_add_rule_btn'] = array(
 						'label'=>eowbc_lang('Add Pricing Method'),
