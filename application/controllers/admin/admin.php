@@ -112,6 +112,10 @@ class Admin {
 	}
 
 	public function init() {
+		
+		if(!function_exists('is_ajax') or is_ajax()){
+			return;
+		}
 
 		add_action('admin_init',function(){
 

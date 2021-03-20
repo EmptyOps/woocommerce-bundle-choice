@@ -50,7 +50,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 			'image'=>array('height','width','image'),
 			'button'=>array('text','color','back_color','font_family','font_size','radius'),
 			'container'=>array('height','width','margin_left','margin_right'),
-			'wc_attribute_field'=>array('attribute'),
+			'wc_attribute_field'=>array('attribute','checkbox','text'),
 		);
 
 		$collection = array();
@@ -106,15 +106,18 @@ class Controller extends \eo\wbc\controllers\Controller {
 						'type'=>'devider',
 					);
 
-					foreach ($control_element as $control) {						
+					foreach ($control_element as $control) {
+
+
 						if(empty($form_value[$key][2])){
 							$controls[$form_key.'_'.$control] = call_user_func_array(array($admin_ui,$control),array($form_key.'_'.$control,$form_value[$key][0]));
-						} else {							
+						} else {
 							$control_key = $form_key.'_'.$control;
 							if(!empty($form_value[$key][2]['id'])){
-								$control_key = $form_value[$key][2]['id'];
+								$control_key = $form_value[$key][2]['id'].'_'.$control;
 							}
-							$controls[$control_key] = call_user_func_array(array($admin_ui,$control),array($form_key.'_'.$control,$form_value[$key][0],$form_value[$key][2]));
+							$controls[$control_key] = call_user_func_array(array($admin_ui,$control),array($control_key,$form_value[$key][0],$form_value[$key][2]));
+							
 						}
 					}
 				}
