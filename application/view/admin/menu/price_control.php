@@ -224,9 +224,10 @@ $form['data'] = array_merge( $form['data'], array(
 							'label'=>eowbc_lang('Regular Price'),
 							'type'=>'label',
 							//'class'=>array('fluid'),
-							'size_class'=>array('three','wide','jpc_rules_table'),
+							'size_class'=>array('two','wide','jpc_rules_table','price_model_fix'),
 							'next_inline'=>true,
 							'inline'=>true,
+							'attr'=>array('data-price_model'=>'fix')
 							),
 						'regular_price'=>array(
 							//'label'=>eowbc_lang('Regular Price'),
@@ -237,19 +238,21 @@ $form['data'] = array_merge( $form['data'], array(
 							'sanitize'=>'sanitize_text_field',
 							'options'=>array(),
 							//'class'=>array('fluid'),
-							'size_class'=>array('three','wide','jpc_rules_table'),
+							'size_class'=>array('two','wide','jpc_rules_table','price_model_fix'),
 							'prev_inline'=>true,
 							'next_inline'=>true,
 							'inline'=>true,
+							'attr'=>array('data-price_model'=>'fix')
 							),
 						'sales_price_label'=>array(
 							'label'=>eowbc_lang('Sales Price'),
 							'type'=>'label',
 							//'class'=>array('fluid'),
-							'size_class'=>array('three','wide','jpc_rules_table'),
+							'size_class'=>array('two','wide','jpc_rules_table','price_model_fix'),
 							'prev_inline'=>true,
 							'next_inline'=>true,
 							'inline'=>true,
+							'attr'=>array('data-price_model'=>'fix')
 							),
 						'sales_price'=>array(
 							//'label'=>eowbc_lang('Sales Price'),
@@ -260,10 +263,37 @@ $form['data'] = array_merge( $form['data'], array(
 							'sanitize'=>'sanitize_text_field',
 							'options'=>array(),
 							//'class'=>array('fluid'),
-							'size_class'=>array('three','wide','jpc_rules_table'),
+							'size_class'=>array('two','wide','jpc_rules_table','price_model_fix'),
 							'prev_inline'=>true,
 							'inline'=>true,
+							'attr'=>array('data-price_model'=>'fix')
 							),
+						
+						'ratio_price_label'=>array(
+							'label'=>eowbc_lang('Rational Price'),
+							'type'=>'label',
+							//'class'=>array('fluid'),
+							'size_class'=>array('two','wide','jpc_rules_table','price_model_rational'),
+							'prev_inline'=>true,
+							'next_inline'=>true,
+							'inline'=>true,
+							'attr'=>array('data-price_model'=>'rational')
+							),
+						'ratio_price'=>array(
+							//'label'=>eowbc_lang('Sales Price'),
+							'no_label' => true,
+							'placeholder'=>eowbc_lang('Rational Price(%)'),
+							'type'=>'text',
+							'value'=>'0',
+							'sanitize'=>'sanitize_text_field',
+							'options'=>array(),
+							//'class'=>array('fluid'),
+							'size_class'=>array('two','wide','jpc_rules_table','price_model_rational'),
+							'prev_inline'=>true,
+							'inline'=>true,
+							'attr'=>array('data-price_model'=>'rational')
+						),
+
 						'jpc_add_price_ctl'=>array(
 							'label'=>eowbc_lang('Save Pricing Method'),
 							'type'=>'button',
