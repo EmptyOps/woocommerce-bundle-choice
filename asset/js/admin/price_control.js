@@ -109,7 +109,7 @@ jQuery(document).ready(function(jQuery){
 
             jQuery("#"+drop_id).parent().transition('show');
         }
-        jQuery('.ui.dropdown.additions').dropdown();
+        jQuery('.ui.dropdown.addition').dropdown({ allowAdditions: true });
 
     }
 
