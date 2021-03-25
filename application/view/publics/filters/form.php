@@ -8,7 +8,7 @@
 		
 	<!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
 	<!--WooCommerce Product Bundle Choice filter form-->
-	<form method="GET" name="eo_wbc_filter" id="eo_wbc_filter" style="clear: both;">
+	<form method="GET" name="<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter" id="<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter" style="clear: both;">
 
 		<input type="hidden" name="eo_wbc_filter" value="1" />	
 		<input type="hidden" name="paged" value="1" />	
@@ -23,7 +23,7 @@
 		<input type="hidden" name="_category" value="<?php echo implode(',',$thisObj->___category) ?>"/>
 		
 		<input type="hidden" name="cat_filter__two_tabs" value=""/>
-
+		<?php do_action('eo_wbc_additional_form_field',$filter_ui); ?>
 		<input type="hidden" name="_attribute" id="eo_wbc_attr_query" value="" />			
 		<?php if(isset($_GET['products_in']) AND !empty(wbc()->sanitize->get('products_in')) ): ?>
 			<input type="hidden" name="products_in" value="<?php echo wbc()->sanitize->get('products_in') ?>" />			
@@ -53,7 +53,7 @@
 		?>
 	</form>
 	<br/><br/>
-	<?php if(apply_filters('eowbc_enque_filter_js','__return_true')): ?>
+	<?php if(apply_filters('eowbc_enque_filter_js',call_user_func('__return_true'))): ?>
 	<script type="text/javascript">		
 
 		jQuery(document).ready(function($){			
@@ -202,7 +202,7 @@
 					    	}
 					    	jQuery('[name="paged"]').val('1');
 					    	<?php if(empty(wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
-					    	jQuery.fn.eo_wbc_filter_change();
+					    	jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter');
 					    	<?php endif; ?>
 					    } else if( min==_min && max==_max ){
 					    	if(jQuery(this).attr('data-slug')!='price'){
@@ -356,7 +356,7 @@
 		    	}
 		    	jQuery('[name="paged"]').val('1');
 		    	<?php if(empty(wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
-		    	jQuery.fn.eo_wbc_filter_change();
+		    	jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter');
 		    	<?php endif; ?>
 			}});				
 			/*----------------------------------------------------*/

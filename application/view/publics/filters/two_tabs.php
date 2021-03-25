@@ -69,7 +69,7 @@
           $('#advance_filter_mob_alternate').removeClass('status_hidden');
           $(".toggle_sticky_mob_filter.advance_filter_mob[data-tab-group='"+$(this).data('tab-altname')+"'],.toggle_sticky_mob_filter.advance_filter_mob[data-tab-group='']").hide();
         <?php endif; ?>
-        jQuery.fn.eo_wbc_filter_change();
+        jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter');
 			});
       $('[data-tab="filter_setting_advance_first_tabs"]').trigger('click');
 		});

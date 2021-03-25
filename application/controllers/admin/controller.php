@@ -146,4 +146,65 @@ class Controller extends \eo\wbc\controllers\Controller {
 
 		return $controls;
 	}
+
+	public function get_control_data($form,$key='') {
+		if(empty($form) or !is_array($form) or empty($key)) {
+			return array();
+		}
+		
+		wbc()->load->model('admin/form-elements');
+		$controls_data = array();
+
+		$admin_ui = \eo\wbc\model\admin\Form_Elements::instance();
+		
+		foreach ($form as $form_key => $form_value) {
+			
+			if(!empty($form_value['data_controls']) and !empty($form_value['data_controls']['type'])) {	
+				if( (is_string($form_value['data_controls']['type']) and $form_value['data_controls']['type']===$key) or (is_array($form_value['data_controls']['type']) and array_search($key,$form_value['data_controls']['type'])!==false) ) {
+
+					$label = '';
+					if(!empty($form_value['data_controls']['label'])){
+						$label = $form_value['data_controls']['label'];
+					} elseif(!empty($form_value['label'])){
+						$label = $form_value['label'];
+					}
+
+					$control_id = $form_key;
+					if(!empty($form_value['data_controls']['name'])) {
+						$control_id = $form_value['data_controls']['name'];
+					} elseif(!empty($form_value['data_controls']['id'])) {
+						$control_id = $form_value['data_controls']['id'];
+					} elseif(!empty($form_value['name'])){
+						$control_id = $form_value['name'];
+					} elseif(!empty($form_value['id'])){
+						$control_id = $form_value['id'];
+					}
+
+					$controls_data[$control_id]=array('label'=>$label,'value'=>wbc()->sanitize->post($control_id));
+				}
+			}
+
+			if(!empty($form_value['child']) or (empty($form_value['type']) and !empty($form_value) and is_array($form_value)) ){
+
+				$child_controls_data = array();
+
+				if(!empty($form_value['child'])) {
+					if(empty($form_value['child']['type']) and count($form_value['child'])>1) {
+						$child_controls_data = $this->get_control_data($form_value['child'],$key);
+					} else{
+						$child_controls_data = $this->get_control_data([$form_value['child']],$key);
+					}
+					
+				} elseif(empty($form_value['type']) and !empty($form_value) and is_array($form_value)) {
+					$child_controls_data = $this->get_control_data($form_value,$key);
+				}
+
+				if(!empty($child_controls_data)){
+					$controls_data = array_replace($controls_data,$child_controls_data);
+				}
+			}
+		}
+
+		return $controls_data;
+	}
 }

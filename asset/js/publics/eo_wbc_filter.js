@@ -4,7 +4,7 @@ function eowbc_yith_wishlist_fix(){
 }
 
 //render products DOM to view
-function eo_wbc_filter_render_html(data) {			
+function eo_wbc_filter_render_html(data,render_container) {
 	jQuery("#loading").removeClass('loading');
 	//Replace Result Count Status...
 	if(jQuery('.woocommerce-result-count',jQuery(data)).html()!==undefined){								
@@ -16,9 +16,9 @@ function eo_wbc_filter_render_html(data) {
 	}
 
 	//Replacing Product listings....
-	if(jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products',jQuery(data)).html()!==undefined){	
+	if(jQuery(render_container /*'.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products'*/,jQuery(data)).html()!==undefined){	
 		if( typeof(is_card_view_rendered) == undefined || typeof(is_card_view_rendered) == 'undefined' || is_card_view_rendered == false ) {
-			jQuery(".products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products").html(jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products',jQuery(data)).html());
+			jQuery(render_container/*".products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products"*/).html(jQuery(/*render_container*/'.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products',jQuery(data)).html());
 		}						
 		else {
 			wbc_attach_card_views();
@@ -39,15 +39,18 @@ function eo_wbc_filter_render_html(data) {
 		});
 	}
 	else {
-		jQuery(".products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products").html('<p class="woocommerce-info" style="width: 100%;">No products were found matching your selection.</p>');	
+		jQuery(render_container/*".products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products"*/).html('<p class="woocommerce-info" style="width: 100%;">No products were found matching your selection.</p>');	
 	}	
-	//Replacing Pagination details.....
-	if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html()!==undefined) {
-		
-		jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html());
-	}
-	else {
-		jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html('');	
+	
+	if(render_container===".products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products"){
+		//Replacing Pagination details.....
+		if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html()!==undefined) {
+			
+			jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html());
+		}
+		else {
+			jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html('');	
+		}
 	}
 
 	//jQuery("body").fadeTo('fast','1')									
@@ -63,6 +66,7 @@ function eo_wbc_filter_render_html(data) {
 		jQuery(".double-gutter .tmb").css('width','50%');
 		jQuery(".double-gutter .tmb").css('display','inline-flex');
 	}
+	
 	jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination,jet-filters-pagination').css('visibility','visible');
 
 	// Fix for the yith wishlist.
@@ -73,10 +77,13 @@ function eo_wbc_filter_render_html(data) {
 
 /*if(eo_wbc_object.disp_regular=='1'){
 	*/
-	jQuery.fn.eo_wbc_filter_change_native= function(init_call=false) {				
+	jQuery.fn.eo_wbc_filter_change_native= function(init_call=false,form_selector="form#eo_wbc_filter",render_container='.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products') {				
 	//flag indicates if to show products in tabular view or woocommerce's default style.		
 
-		var form=jQuery("form#eo_wbc_filter");	
+		var form=jQuery(form_selector/*"form#eo_wbc_filter"*/);	
+		if(form.find('[name="html_destination"]').length>0){
+			render_container = form.find('[name="html_destination"]').val();
+		}
 		var site_url=eo_wbc_object.eo_cat_site_url;
 		var ajax_url=site_url+eo_wbc_object.eo_cat_query;
 		
@@ -94,7 +101,7 @@ function eo_wbc_filter_render_html(data) {
 			},
 			success:function(data){		
 				//console.log(JSON.stringify(data));
-				eo_wbc_filter_render_html(data);
+				eo_wbc_filter_render_html(data,render_container);
 			}
 		});
 		return false;
