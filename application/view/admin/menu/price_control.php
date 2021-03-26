@@ -56,6 +56,9 @@ function eo_wbc_jpc_attributes_values(){
     return $attr_vals;
 }
 
+$apis = unserialize(wbc()->options->get_option_group('dapii_api_config',"a:0:{}"));
+$apis = array_column($apis,'api_config_api_name');
+$apis = array_combine(array_values($apis),array_values($apis));
 
 $form = array();
 
@@ -289,9 +292,25 @@ $form['data'] = array_merge( $form['data'], array(
 							'options'=>array(),
 							//'class'=>array('fluid'),
 							'size_class'=>array('two','wide','jpc_rules_table','price_model_rational'),
+							'attr'=>array('data-price_model'=>'rational')
+						),
+						'apply_on_apis'=>array(
+							'label'=>eowbc_lang('Apply on APIs?'),
+							'type'=>'checkbox',
+							'value'=>array(''),
+							'options'=>array('1'=>'Swich to enable on APIs'),
+							'sanitize'=>'sanitize_text_field',
+							'size_class'=>array('eight','wide','jpc_rules_table','apply_on_apis','fields'),							
+						),
+						'api_service'=>array(
+							'label'=>eowbc_lang('Select API'),
+							'type'=>'select',
+							'value'=>array(''),
+							'options'=>$apis,
+							'sanitize'=>'sanitize_text_field',
+							'size_class'=>array('eight','wide','jpc_rules_table','api_service','fields'),
 							'prev_inline'=>true,
 							'inline'=>true,
-							'attr'=>array('data-price_model'=>'rational')
 						),
 
 						'jpc_add_price_ctl'=>array(
