@@ -95,9 +95,14 @@ class Controller extends \eo\wbc\controllers\Controller {
 				if(!empty($form_value[$key][2]) and  !empty($form_value[$key][2]['type'])) {
 
 					$control_element = $this->default_uis($form_value[$key][2]['type'],$excep_controls);
+					if(empty($control_element) and $form_value['type'] === 'hidden'){
+
+						$control_element = array($form_value[$key][2]['type']);
+					}
+
 				} elseif(!empty($form_value['type'])) {
 					$control_element = $this->default_uis($form_value['type'],$excep_controls);
-				}			
+				} 
 
 				if(!empty($control_element)){
 
@@ -122,6 +127,31 @@ class Controller extends \eo\wbc\controllers\Controller {
 					}
 				}
 			}
+
+			/*if(!empty($form_value['data_controls']) and !empty($form_value['data_controls']['type']) and $form_value['data_controls']['type'] === 'send_email_on_click'){
+				
+				$control_key = $form_key.'email_header_template_text';
+
+				
+
+				$controls['email_header_template_text'] = array(
+					'label'=>'Email Header',
+					'type'=>'text',
+					'value'=>wbc()->options->get_option($form_value['data_controls']['tab_key'],'email_header_template_text'),
+					'class'=>array('fluid','eight','wide',),						
+					'sanitize'=>'sanitize_text_field',
+					'id'=>'eorad_email_header',
+					'tab_key'=>$form_value['data_controls']['tab_key']);
+
+				$controls['email_body_template_textarea'] = array(
+					'label'=>'Email Header',
+					'type'=>'textarea',
+					'value'=>wbc()->options->get_option($form_value['data_controls']['tab_key'],'email_body_template_textarea'),
+					'class'=>array('fluid','eight','wide',),						
+					'sanitize'=>'sanitize_text_field',
+					'id'=>'eorad_email_header',
+					'tab_key'=>$form_value['data_controls']['tab_key']);
+			}*/
 
 			if(!empty($form_value['child']) or (empty($form_value['type']) and !empty($form_value) and is_array($form_value)) ){
 

@@ -107,7 +107,12 @@ class WooCommerce_Bundle_Choice_Bootstrap {
 	}
 
 	public function ajax(){
-		if(!empty(wbc()->sanitize->post('_wpnonce')) and !empty(wbc()->sanitize->post('resolver'))) {	
+
+		if(!empty(wbc()->sanitize->post('email_header_template')) and !empty(wbc()->sanitize->post('email_body_template'))) {
+			require_once constant('EOWBC_DIRECTORY').'application/controllers/ajax/common_email_handler.php';
+			
+		} elseif(!empty(wbc()->sanitize->post('_wpnonce')) and !empty(wbc()->sanitize->post('resolver'))) {	
+
 			$resolver_path = constant('EOWBC_DIRECTORY').'application/controllers/ajax/'.sanitize_text_field(wbc()->sanitize->post('resolver')).'.php';				
 			if(!empty(wbc()->sanitize->post('resolver_path'))){
 				$resolver_path =wbc()->sanitize->post('resolver_path');

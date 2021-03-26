@@ -13,8 +13,9 @@
 		<input type="hidden" name="eo_wbc_filter" value="1" />	
 		<input type="hidden" name="paged" value="1" />	
 		<input type="hidden" name="last_paged" value="1" />
+		<?php if(apply_filters('eowbc_show_filter_actions_field',true)): ?>
 		<input type="hidden" name="action" value="eo_wbc_filter"/>
-		
+		<?php endif; ?>
 		<input type="hidden" name="_current_category" value="<?php echo (!empty(wbc()->sanitize->get('CAT_LINK'))?','.wbc()->sanitize->get('CAT_LINK'):$current_category); ?>" />
 
 		<input type="hidden" name="_category_query" id="eo_wbc_cat_query" 

@@ -249,6 +249,57 @@ class Form_Elements {
 		);
 	}
 
+	public function textarea($key,$label,$args=array()) {
+		
+		extract($args);
+		if(empty($required)) {
+			$required = false;
+		}
+
+		if(empty($default)) {
+			$default = '';
+		}
+
+		if(empty($info)){
+			$info = array( 'label'=>eowbc_lang("Sets specified text on ${label}"),
+				'type'=>'visible_info',
+				'class'=>array('small'),				
+			);
+		}
+
+		if(empty($validate)){
+			if($required){
+				$validate = array('required'=>'');
+			} else {
+				$validate = array();
+			}
+		} else {
+			if($required and  array_key_exists('required',$validate)) {
+				$validate['required'] = '';
+			} else {
+				$validate = array();
+			}
+		}
+
+		if(!empty($args['label'])){
+			$label = $args['label'];
+		} else {
+			$label = "${label} Text";
+		}
+
+		return array(
+			'label'=>$label,
+			'type'=>'textarea',
+			'sanitize'=>'sanitize_text_field',
+			'validate'=>$validate,
+			'size_class'=>array('eight','wide'),
+			'inline'=>false,
+			'value'=>$default,
+			'visible_info'=>$info
+		);
+	}
+	
+
 	public function font($key,$label,$args=array()){
 		return $this->font_family($key,$label,$args);
 	}
