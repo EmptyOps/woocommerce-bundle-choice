@@ -183,29 +183,38 @@ jQuery(document).ready(function(jQuery){
 
         _regular_price=jQuery("[name='regular_price']").val().trim();
         _sales_price=jQuery("[name='sales_price']").val().trim();
-        if( _regular_price=='' || isNaN(_regular_price) ){
-            jQuery('body').toast({ class: 'warning', position: 'bottom right', message: 'Regular price field is required numeric value!' });
-            return false;
-        } else {
-
-            if( _sales_price!='' ){
-
-                if(isNaN(_sales_price)){
-                    jQuery('body').toast({ class: 'warning', position: 'bottom right', message: 'Sales price fields must be numeric value!' });
-                    return false;
-                } else {
-
-                    if( Number(_sales_price) > Number(_regular_price) ){
-                        jQuery('body').toast({ class: 'warning', position: 'bottom right', message: 'Sales price must be lesser than Regular price!' });
-                        return false;
-                    }
-                }                        
-            }
-
-            if( jQuery("#jpc_rules_table tbody").find('tr').length <= 0 ){
-                jQuery('body').toast({ class: 'warning', position: 'bottom right', message: 'Atleast one rule must be applied!' });
+        _ratio_price = jQuery("#ratio_price").val().trim();
+        if( _ratio_price!='' ){
+            if( _ratio_price=='' || isNaN(_ratio_price) ){
+                jQuery('body').toast({ class: 'warning', position: 'bottom right', message: 'Rational price field is required numeric value!' });
                 return false;
-            }                    
+            }            
+        } else{
+
+            if( _regular_price=='' || isNaN(_regular_price) ){
+                jQuery('body').toast({ class: 'warning', position: 'bottom right', message: 'Regular price field is required numeric value!' });
+                return false;
+            } else {
+
+                if( _sales_price!='' ){
+
+                    if(isNaN(_sales_price)){
+                        jQuery('body').toast({ class: 'warning', position: 'bottom right', message: 'Sales price fields must be numeric value!' });
+                        return false;
+                    } else {
+
+                        if( Number(_sales_price) > Number(_regular_price) ){
+                            jQuery('body').toast({ class: 'warning', position: 'bottom right', message: 'Sales price must be lesser than Regular price!' });
+                            return false;
+                        }
+                    }                        
+                }
+
+                if( jQuery("#jpc_rules_table tbody").find('tr').length <= 0 ){
+                    jQuery('body').toast({ class: 'warning', position: 'bottom right', message: 'Atleast one rule must be applied!' });
+                    return false;
+                }                    
+            }
         }
         
         //jQuery("#jpc_price_ctl_table").parent().transition('show');
@@ -237,11 +246,11 @@ jQuery(document).ready(function(jQuery){
                 rows_data+='['+jQuery(data[0]).text()+']<br/>';
             }
         });
-        row_obj.push({regular_price:_regular_price,sales_price:_sales_price});
+        row_obj.push({regular_price:_regular_price,sales_price:_sales_price,ratio_price:_ratio_price});
 
         window.eo_wbc.jpc_data[window.eo_wbc.jpc_data.length]=row_obj;
 
-        jQuery("#jpc_price_ctl_table tbody").append("<tr><td class='center aligned'><a href='#'><i class='ui icon delete'></i></a></td><td class='left aligned'>Regular Price:"+_regular_price+"<br/>"+(_sales_price!=''?'Sales Price:'+_sales_price:'')+"</td><td class='center aligned'>"+rows_data+"</td></tr>");                
+        jQuery("#jpc_price_ctl_table tbody").append("<tr><td class='center aligned'><a href='#'><i class='ui icon delete'></i></a></td><td class='left aligned'>"+((_ratio_price!=='')?'Rational Price: '+_ratio_price+'%': ("Regular Price:"+_regular_price+"<br/>"+(_sales_price!=''?'Sales Price:'+_sales_price:'')) )+"</td><td class='center aligned'>"+rows_data+"</td></tr>");                
 
         // jQuery("#jpc_value_1").html('');
         // jQuery("#jpc_value_2").html('');
