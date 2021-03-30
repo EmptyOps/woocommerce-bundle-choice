@@ -138,8 +138,59 @@ class Form_Elements {
 		);
 	}	
 
-	public function select() {
+	public function select($key,$label,$args=array()) {
+		extract($args);
+		if(empty($required)) {
+			$required = false;
+		}
 
+		if(empty($info)){
+			$info = array( 'label'=>eowbc_lang("Sets specified item for ${label}"),
+				'type'=>'visible_info',
+				'class'=>array('small'),				
+			);
+		}
+
+
+		if(empty($validate)){
+			if($required){
+				$validate = array('required'=>'');
+			} else {
+				$validate = array();
+			}
+		} else {
+			if($required and  array_key_exists('required',$validate)) {
+				$validate['required'] = '';
+			} else {
+				$validate = array();
+			}
+		}
+
+		if(!empty($args['label'])){
+			$label = $args['label'];
+		} else {
+			$label = "Choose ${label}";
+		}
+
+		if(empty($options)){
+			$options = array();
+		}
+
+		if(empty($id)){
+			$id = $key;
+		}
+
+		return array(
+			'id' => $id,
+			'label'=>$label,
+			'type'=>'select',
+			'sanitize'=>'sanitize_text_field',
+			'validate'=>$validate,
+			'size_class'=>array('eight','wide'),
+			'options'=>$options,
+			'inline'=>false,			
+			'visible_info'=>$info
+		);
 	}
 
 	public function attribute($key,$label,$args=array()) {
@@ -240,6 +291,56 @@ class Form_Elements {
 		return array(
 			'label'=>$label,
 			'type'=>'text',
+			'sanitize'=>'sanitize_text_field',
+			'validate'=>$validate,
+			'size_class'=>array('eight','wide'),
+			'inline'=>false,
+			'value'=>$default,
+			'visible_info'=>$info
+		);
+	}
+
+	public function number($key,$label,$args=array()) {
+		
+		extract($args);
+		if(empty($required)) {
+			$required = false;
+		}
+
+		if(empty($default)) {
+			$default = '';
+		}
+
+		if(empty($info)){
+			$info = array( 'label'=>eowbc_lang("Sets specified value on ${label}"),
+				'type'=>'visible_info',
+				'class'=>array('small'),				
+			);
+		}
+
+		if(empty($validate)){
+			if($required){
+				$validate = array('required'=>'');
+			} else {
+				$validate = array();
+			}
+		} else {
+			if($required and  array_key_exists('required',$validate)) {
+				$validate['required'] = '';
+			} else {
+				$validate = array();
+			}
+		}
+
+		if(!empty($args['label'])){
+			$label = $args['label'];
+		} else {
+			$label = "${label} Value";
+		}
+
+		return array(
+			'label'=>$label,
+			'type'=>'number',
 			'sanitize'=>'sanitize_text_field',
 			'validate'=>$validate,
 			'size_class'=>array('eight','wide'),

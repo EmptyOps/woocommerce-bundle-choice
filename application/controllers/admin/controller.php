@@ -86,16 +86,22 @@ class Controller extends \eo\wbc\controllers\Controller {
 				$control_element = array();
 				$excep_controls = array();
 				
+
 				if(!empty($form_value[$key][1]) and is_array($form_value[$key])) {
 					$excep_controls = $form_value[$key][1];
 				} elseif (!empty($form_value[$key][1])  and is_string($form_value[$key])) {
 					$excep_controls = explode(',',$form_value[$key][1]);
 				}
 
+				/*echo "<pre>";
+				print_r($form_value[$key][2]);
+				echo "</pre>";
+				die();*/
+
 				if(!empty($form_value[$key][2]) and  !empty($form_value[$key][2]['type'])) {
 
 					$control_element = $this->default_uis($form_value[$key][2]['type'],$excep_controls);
-					if(empty($control_element) and $form_value['type'] === 'hidden'){
+					if(empty($control_element)/* and $form_value['type'] === 'hidden'*/){
 
 						$control_element = array($form_value[$key][2]['type']);
 					}
@@ -112,7 +118,6 @@ class Controller extends \eo\wbc\controllers\Controller {
 					);
 
 					foreach ($control_element as $control) {
-
 
 						if(empty($form_value[$key][2])){
 							$controls[$form_key.'_'.$control] = call_user_func_array(array($admin_ui,$control),array($form_key.'_'.$control,$form_value[$key][0]));

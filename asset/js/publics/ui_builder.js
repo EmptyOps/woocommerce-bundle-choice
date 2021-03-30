@@ -24,29 +24,34 @@ jQuery(function(){
 		}
 
 		validate(form_fields) {
-			let required_fields = jQuery(form_fields).hasClass('required');
-			let numeric_fields = jQuery(form_fields).hasClass('numeric');
+			let required_fields = jQuery(form_fields).filter('.required');			
+			let numeric_fields = jQuery(form_fields).filter('.numeric');
 
-			if((required_fields.hasOwnProperty('length') && required_fields.length<1)){
+			let validation_status = true;
+
+			if(required_fields.hasOwnProperty('length') && required_fields.length>0){
 				jQuery(required_fields).each(function(index,field){
-					let value = jQuery(field).val();
+					let value = jQuery(field).val();					
 					if( typeof(value)===typeof(undefined) || value.trim()==='' ){
 						alert('Please fill the required fields.');
-						return false;
+						validation_status = false;						
+						return validation_status;
 					}
 				});
 			}
 
-			if((numeric_fields.hasOwnProperty('length') && numeric_fields.length<1)){
+			if((numeric_fields.hasOwnProperty('length') && numeric_fields.length>0)) {
 				jQuery(numeric_fields).each(function(index,field){
 					let value = jQuery(field).val();
 					if( typeof(value)===typeof(undefined) || isNaN(value.trim()) ){
 						alert('Please provide numeric value to the numeric fields.');
-						return false;
+						validation_status = false;
+						return validation_status;
 					}
 				});
 			}
-			return true;
+			
+			return validation_status;
 		}
 
 		init() {
@@ -63,7 +68,7 @@ jQuery(function(){
 			}
 			
 			if( this.validate(form_fields)===true ){
-				// Ajax post.
+				console.log('sending ajax');				
 				let _data = jQuery(form_fields).serialize();
 				jQuery.ajax({
 					url: sp_urls.ajax_url,
@@ -72,18 +77,18 @@ jQuery(function(){
 					success:function($res){						
 						$res = JSON.parse($res);
 						if($res.type=='success'){
-							alert('A request is been sent.')
+							alert('A request is been sent.');
 							window.location.reload();
 						} else {
-							alert('Failed to submit request.')
+							alert('Failed to submit request.');
 						}
 					}
-				});	
+				});
 			}
 		}
 	}
 
 	window.document.splugins.EmailForm = function(field_class,button_selector){
-		return new EmailForm(field_class,button_selector)	
+		return new EmailForm(field_class,button_selector);
 	};
 });

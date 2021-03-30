@@ -113,7 +113,7 @@ class Admin {
 
 	public function init() {
 		
-		if(!function_exists('is_ajax') or is_ajax()){
+		if(wp_doing_ajax()){
 			return;
 		}
 
