@@ -9,4 +9,15 @@
 .social-icons .primary{
 	width: auto !important;
 }
+.mfp-container:before {
+    content: '';    
+    height: max-content !important;
+}
+
+@media only screen and (max-width:768px ){
+	.header-full-width .container{
+		max-height: 2rem !important;
+	}
+}
+
 </style>
