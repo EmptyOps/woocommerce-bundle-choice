@@ -236,8 +236,25 @@ class Form_Elements {
 			$id = $key;
 		}
 
+		if(!empty($multiple)){
+			if(!empty($class)){
+				if(is_array($class)){
+					$class[] = 'multiple';
+				} else {
+					$class.= ' multiple ';
+				}
+			} else {
+				$class = array('multiple');
+			}
+		}
+
+		if(empty($class)){
+			$class = array();
+		}
+
 		return array(
 			'id' => $id,
+			'class'=>$class,
 			'label'=>$label,
 			'type'=>'select',
 			'sanitize'=>'sanitize_text_field',
