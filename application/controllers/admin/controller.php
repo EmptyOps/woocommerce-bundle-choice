@@ -51,6 +51,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 			'button'=>array('text','color','back_color','font_family','font_size','radius'),
 			'container'=>array('height','width','margin_left','margin_right'),
 			'wc_attribute_field'=>array('attribute','checkbox','text'),
+			'a'=>array('url')
 		);
 
 		$collection = array();

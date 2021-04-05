@@ -19,7 +19,7 @@ class Order_Received extends \WC_Order_Item_Product {
 
     public function init() {
         
-        add_action('woocommerce_thankyou',function($order_id){      
+        add_action('woocommerce_thankyou',function($order_id){
             $sets=wbc()->session->get('EO_WBC_MAPS');            
             $maps=array();
             if(!empty($sets) and (is_array($sets) or is_object($sets)) )
@@ -63,6 +63,10 @@ class Order_Received extends \WC_Order_Item_Product {
 
             $sets=$wpdb->get_row($query,'ARRAY_A');
             
+            if(empty($sets['order_map'])){
+                $sets['order_map'] = json_encode(array());
+            }
+
             $sets=(json_decode($sets['order_map']));
             
             foreach ($items as $item_key => $item_value) {

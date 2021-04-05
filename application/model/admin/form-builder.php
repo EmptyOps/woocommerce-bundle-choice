@@ -525,7 +525,7 @@ class Form_Builder implements Builder {
 	}
 
 	public static function savable_types() {
-		return array("text","checkbox","color","hidden","radio","select","textarea","icon","time",'number');
+		return array("text","checkbox","color","hidden","radio","select","textarea","icon","time",'number','link','date');
 	}
 
 }

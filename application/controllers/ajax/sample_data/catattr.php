@@ -17,6 +17,8 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'sample_data_jewelry')){
 		)
 	);
 
+	$class_name = apply_filters('wbc_auto_sample_class_ajax', $class_name );
+
 	$data_template_obj = call_user_func(array($class_name,'instance'))->get_data_template();
 
 
