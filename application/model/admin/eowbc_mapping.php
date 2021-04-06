@@ -92,7 +92,7 @@ class Eowbc_Mapping extends Eowbc_Model {
 
 								} elseif( wbc()->common->nonZeroEmpty($rv["eo_wbc_second_category_range"]) || wbc()->common->nonZeroEmpty($rv["range_second"]) ) {
 									$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv);
-									$row[] = array( 'val' => !is_array($val)?$val:$val["label"] );
+									$row[] = array( 'val' => (!is_array($val)?$val:$val["label"]) );
 								}
 								else {
 									$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv);
