@@ -2514,7 +2514,7 @@ class EOWBC_Filter_Widget {
 		ksort($non_adv_ordered_filter);		
 		ksort($adv_ordered_filter);
 
-		$non_adv_ordered_filter = apply_filters('custome_filter_widget_non_advance_filter',$non_adv_ordered_filter);
+		$non_adv_ordered_filter = apply_filters('custome_filter_widget_non_advance_filter',$non_adv_ordered_filter,$this->filter_prefix);
 
 		/*echo "non_adv_ordered_filter and adv_ordered_filter dump";
 		wbc()->common->pr($non_adv_ordered_filter);

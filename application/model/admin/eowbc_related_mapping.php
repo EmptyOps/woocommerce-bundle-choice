@@ -283,8 +283,16 @@ class Eowbc_Related_Mapping /*extends Eowbc_Model*/ {
 		global $post;
 		$map = unserialize(wbc()->options->get_option_group($prefix.'_map_master'));
 
+		if(empty(wbc()->sanitize->post('product_id'))){
+			return array();
+		}		
+
   		$product = wc_get_product(wbc()->sanitize->post('product_id'));
   		
+  		if( empty($product) or is_wp_error($product) ) {
+			return array();
+		}		
+
   		$product_cats = $product->get_category_ids();
   		$default_attributes = $product->get_default_attributes();
   		$attributes = $product->get_attributes();

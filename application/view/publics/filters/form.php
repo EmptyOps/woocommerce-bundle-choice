@@ -4,10 +4,12 @@
 *	Template to show form for filters 
 */
 
+/*jQuery.fn.eo_wbc_filter_change(false,'#sc_eo_wbc_filter');*/
 ?>	
 		
 	<!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
 	<!--WooCommerce Product Bundle Choice filter form-->
+
 	<form method="GET" name="<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter" id="<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter" style="clear: both;">
 
 		<input type="hidden" name="eo_wbc_filter" value="1" />	

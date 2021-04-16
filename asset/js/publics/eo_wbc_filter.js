@@ -55,6 +55,7 @@ function eo_wbc_filter_render_html(data,render_container) {
 
 	//jQuery("body").fadeTo('fast','1')									
 	jQuery("#loading").removeClass('loading');
+	jQuery('.products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)').addClass('product_grid_view');
 	//jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination').css('visibility','visible');
 	if(jQuery(".row-inner>.col-lg-9").length>0){
 		jQuery(".row-inner>.col-lg-9 *").each(function(i,e) {		
