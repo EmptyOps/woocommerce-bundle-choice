@@ -306,6 +306,7 @@ box-shadow: none;">
 	                '_wpnonce': '<?php echo wp_create_nonce('sample_data_jewelry');?>',
 	                'action':'eowbc_ajax',
 	                'resolver':'sample_data/<?php _e($feature_key); ?>',
+	                'resolver_path':'<?php echo apply_filters('eowbc_product_sample_data_resolver_path',''); ?>', 
 	                'product_index':index 
 	            };
 

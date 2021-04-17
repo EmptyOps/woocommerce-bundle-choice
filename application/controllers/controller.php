@@ -6,6 +6,8 @@ defined( 'ABSPATH' ) || exit;
 
 class Controller {
 
+	private static $_instance = null;
+
 	protected function __construct() {
 		
 	}	
