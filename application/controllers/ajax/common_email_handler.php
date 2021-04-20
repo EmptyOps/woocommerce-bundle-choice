@@ -22,6 +22,9 @@ if( !empty(wbc()->sanitize->post('_wpnonce')) ) {
 
 	$subject_template = wbc()->options->get_option($subject_template[1],$subject_template[0]);
 	$email_template = wbc()->options->get_option($email_template[1],$email_template[0]);
+	
+	$email_template = apply_filters('eowbc_common_email_template',$email_template);
+
 
 	if(!empty($subject_template) and !empty($email_template) and !empty(wbc()->sanitize->post('email_field_vars'))) {
 	
@@ -136,6 +139,7 @@ if( !empty(wbc()->sanitize->post('_wpnonce')) ) {
 				$email_template = str_replace('{filter_data}',$filter_details,$email_template);
 			}			
 		}
+
 
 		$nl='<br/>
 		';
