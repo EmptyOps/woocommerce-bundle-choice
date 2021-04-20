@@ -112,12 +112,16 @@ function eo_wbc_filter_render_html(data) {
 		var form=jQuery("form#eo_wbc_filter");	
 		var site_url=eo_wbc_object.eo_cat_site_url;
 		var ajax_url=site_url+eo_wbc_object.eo_cat_query;
-		
+			
 		jQuery.ajax({
 			url: ajax_url,//form.attr('action'),
 			data:form.serialize(), // form data
 			type:'GET'/*form.attr('method')*/, // POST
 			beforeSend:function(xhr){
+				if(eo_wbc_object.hasOwnProperty('nativ_xhr')){
+					eo_wbc_object.nativ_xhr.abort();
+				}
+				eo_wbc_object.nativ_xhr = xhr;
 				//jQuery("body").fadeTo('slow','0.3')	
 				jQuery("#loading").addClass('loading');							
 				console.log(this.url);					
