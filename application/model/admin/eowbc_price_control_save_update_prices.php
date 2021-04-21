@@ -4,7 +4,6 @@
 /*
 *	Woocommerc Category and Attribute Model.
 */
-
 namespace eo\wbc\model\admin;
 
 defined( 'ABSPATH' ) || exit;
@@ -40,6 +39,44 @@ class Eowbc_Price_Control_Save_Update_Prices {
 		// wbc()->common->var_dump($jpc_data,$force_debug = false,$die = true);
 
         return $res;
+	}
+
+	public static function api_price_markup($price) {
+		
+		$jpc_str = wbc()->options->get_option('price_control','rules_data', false);
+	    if( $jpc_str ) {
+
+	    	$jpc_data = json_decode( stripslashes( unserialize( $jpc_str ) ), true );
+
+	    	if(empty($jpc_data)){
+	    		return $price;
+	    	}
+
+	    	if(is_array($jpc_data) OR is_object($jpc_data)){
+	    	
+	        	foreach ($jpc_data as $q_data) {
+
+	        		if(!empty($q_data[count($q_data)-1]['ratio_price'])) {
+						
+						for($l=0;$l<count($q_data)-1;$l++){
+		                	$_field_data=$q_data[$l];
+
+		                	if($_field_data['field_name']==='Price' and ($_field_data['value_data'][0]<= intval($price) and $_field_data['value_data'][1]>= intval($price) )) {
+
+		                		$increment_ratio = $q_data[count($q_data)-1]['ratio_price'];
+		                		//echo $price.PHP_EOL;
+                    			$price = $price*(1+($increment_ratio/100));
+                    			//echo $price.PHP_EOL.PHP_EOL;
+
+                    			return $price;
+		                	}
+		                }
+                    }
+	        	}
+	        }
+
+	    }
+	    return $price;
 	}
 
 	public function update_prices( $post_ID=null, $post=null, $update=null){                           
@@ -146,8 +183,8 @@ class Eowbc_Price_Control_Save_Update_Prices {
 
 	    $q_cat="( SELECT DISTINCT({$wpdb->prefix}term_relationships.object_id), {$wpdb->prefix}terms.name,{$wpdb->prefix}terms.slug,{$wpdb->prefix}term_taxonomy.taxonomy FROM {$wpdb->prefix}term_relationships LEFT JOIN {$wpdb->prefix}term_taxonomy ON {$wpdb->prefix}term_relationships.term_taxonomy_id={$wpdb->prefix}term_taxonomy.term_taxonomy_id LEFT JOIN {$wpdb->prefix}terms ON {$wpdb->prefix}term_taxonomy.term_id={$wpdb->prefix}terms.term_id WHERE {$wpdb->prefix}term_taxonomy.taxonomy='product_cat' )";
 	    
-	    $q_att="( SELECT DISTINCT({$wpdb->prefix}term_relationships.object_id), {$wpdb->prefix}terms.name,{$wpdb->prefix}terms.slug,{$wpdb->prefix}term_taxonomy.taxonomy FROM {$wpdb->prefix}term_relationships LEFT JOIN {$wpdb->prefix}term_taxonomy ON {$wpdb->prefix}term_relationships.term_taxonomy_id={$wpdb->prefix}term_taxonomy.term_taxonomy_id LEFT JOIN {$wpdb->prefix}terms ON {$wpdb->prefix}term_taxonomy.term_id={$wpdb->prefix}terms.term_id WHERE {$wpdb->prefix}term_taxonomy.taxonomy LIKE 'pa_%' )";                
-	    
+	    $q_att="( SELECT DISTINCT({$wpdb->prefix}term_relationships.object_id), {$wpdb->prefix}terms.name,{$wpdb->prefix}terms.slug,{$wpdb->prefix}term_taxonomy.taxonomy FROM {$wpdb->prefix}term_relationships LEFT JOIN {$wpdb->prefix}term_taxonomy ON {$wpdb->prefix}term_relationships.term_taxonomy_id={$wpdb->prefix}term_taxonomy.term_taxonomy_id LEFT JOIN {$wpdb->prefix}terms ON {$wpdb->prefix}term_taxonomy.term_id={$wpdb->prefix}terms.term_id WHERE {$wpdb->prefix}term_taxonomy.taxonomy LIKE 'pa_%' )";
+	    	    
 	    //$jpc_data=json_decode( unserialize(get_option('eo_wbc_jpc_data',serialize(array()))) );
 	    $jpc_data = array();
 	    $jpc_str = wbc()->options->get_option('price_control','rules_data', false);
@@ -181,7 +218,9 @@ class Eowbc_Price_Control_Save_Update_Prices {
 
 		            for($l=0;$l<count($q_data)-1;$l++){
 		                $_field_data=$q_data[$l];               
-		                if($_field_data->field_type==0){
+		                if($_field_data->field_name==='Price'){
+		                	$query=" ( SELECT DISTINCT(ID) as object_id from {$wpdb->prefix}posts LEFT JOIN {$wpdb->prefix}postmeta ON {$wpdb->prefix}postmeta.post_id={$wpdb->prefix}posts.ID WHERE post_type='product' AND {$wpdb->prefix}postmeta.meta_key='_price' AND {$wpdb->prefix}postmeta.meta_value BETWEEN {$_field_data->value_data[0]} AND {$_field_data->value_data[1]} ) ";
+		                } elseif($_field_data->field_type==0){
 		                    //is category
 		                    $query=" ( SELECT * FROM {$q_cat} AS T1 WHERE slug = '".$_field_data->field_value."' AND object_id IN ( SELECT object_id FROM {$query} AS T2 ) )";
 		                }else {
@@ -189,6 +228,7 @@ class Eowbc_Price_Control_Save_Update_Prices {
 		                    $query=" ( SELECT * FROM {$q_att} AS T1 WHERE taxonomy='pa_{$_field_data->field_value}' AND ".($_field_data->cmp_value=="between"?" name BETWEEN '".explode('-',$_field_data->value_name)[0]."' AND '".explode('-',$_field_data->value_name)[1]."' ":" slug IN ('".implode("','",explode(',',$_field_data->value_data[0]))."') ")." AND object_id IN ( SELECT object_id FROM {$query} AS T2 ) ) ";
 		                }        
 		            }
+
 		            $_query = "SELECT object_id FROM {$query} AS T";                                   
 
 	            	$rs=$wpdb->get_results($_query);
@@ -202,20 +242,32 @@ class Eowbc_Price_Control_Save_Update_Prices {
 	                
 	                foreach ($rs as $post_id) {
 	                	$update_cnt++;
-	                    
-	                    if(!empty($q_data[count($q_data)-1]->sales_price)){
+	                    if(!empty($q_data[count($q_data)-1]->ratio_price)){
+	                    	
+	                    	$increment_ratio = $q_data[count($q_data)-1]->ratio_price;
 
-	                    	//here seems bug should be regular_price instead of sales_price
-	                        //update_post_meta($post_id->object_id,'_price',$q_data[count($q_data)-1]->sales_price);
-	                        update_post_meta($post_id->object_id,'_price',$q_data[count($q_data)-1]->regular_price);
-	                        update_post_meta($post_id->object_id,'_sale_price',$q_data[count($q_data)-1]->sales_price);
+	                    	update_post_meta($post_id->object_id,'_price', get_post_meta($post_id->object_id,'_price',true)*(1+($increment_ratio/100)));
+
+	                    	update_post_meta($post_id->object_id,'_sale_price', get_post_meta($post_id->object_id,'_sale_price',true)*(1+($increment_ratio/100)));
+
+	                    	update_post_meta($post_id->object_id,'_regular_price', get_post_meta($post_id->object_id,'_regular_price',true)*(1+($increment_ratio/100)));
+
 
 	                    } else{
-	                        delete_post_meta($post_id->object_id,'_sale_price');                    
-	                        update_post_meta($post_id->object_id,'_price',$q_data[count($q_data)-1]->regular_price);
-	                    }            
-	                    update_post_meta($post_id->object_id,'_regular_price',$q_data[count($q_data)-1]->regular_price);   
-	                    wc_delete_product_transients( $post_id->object_id );
+		                    if(!empty($q_data[count($q_data)-1]->sales_price)){
+
+		                    	//here seems bug should be regular_price instead of sales_price
+		                        //update_post_meta($post_id->object_id,'_price',$q_data[count($q_data)-1]->sales_price);
+		                        update_post_meta($post_id->object_id,'_price',$q_data[count($q_data)-1]->regular_price);
+		                        update_post_meta($post_id->object_id,'_sale_price',$q_data[count($q_data)-1]->sales_price);
+
+		                    } else{
+		                        delete_post_meta($post_id->object_id,'_sale_price');                    
+		                        update_post_meta($post_id->object_id,'_price',$q_data[count($q_data)-1]->regular_price);
+		                    }            
+		                    update_post_meta($post_id->object_id,'_regular_price',$q_data[count($q_data)-1]->regular_price);   
+		                    wc_delete_product_transients( $post_id->object_id );
+		                }
 	                }
 	            }
 	            
@@ -246,18 +298,30 @@ class Eowbc_Price_Control_Save_Update_Prices {
 	                		$pid = $post_id['post_id'];
 	                	}
 
-	                    if(!empty($q_data[count($q_data)-1]->sales_price)){
+	                	if(!empty($q_data[count($q_data)-1]->ratio_price)){
+	                    	
+	                    	$increment_ratio = $q_data[count($q_data)-1]->ratio_price;
 
-	                        update_post_meta($pid,'_price',$q_data[count($q_data)-1]->sales_price);
-	                        update_post_meta($pid,'_sale_price',$q_data[count($q_data)-1]->sales_price);
+	                    	update_post_meta($pid,'_price', get_post_meta($pid,'_price',true)*(1+($increment_ratio/100)));
 
+	                    	update_post_meta($pid,'_sale_price', get_post_meta($pid,'_sale_price',true)*(1+($increment_ratio/100)));
+
+	                    	update_post_meta($pid,'_regular_price', get_post_meta($pid,'_regular_price',true)*(1+($increment_ratio/100)));
 	                    } else{
-	                        delete_post_meta($pid,'_sale_price');                    
-	                        update_post_meta($pid,'_price',$q_data[count($q_data)-1]->regular_price);
-	                    }            
-	                    if(!empty($q_data[count($q_data)-1]->regular_price)){
-	                    	update_post_meta($pid,'_regular_price',$q_data[count($q_data)-1]->regular_price); 
-	                    }
+
+		                    if(!empty($q_data[count($q_data)-1]->sales_price)){
+
+		                        update_post_meta($pid,'_price',$q_data[count($q_data)-1]->sales_price);
+		                        update_post_meta($pid,'_sale_price',$q_data[count($q_data)-1]->sales_price);
+
+		                    } else{
+		                        delete_post_meta($pid,'_sale_price');                    
+		                        update_post_meta($pid,'_price',$q_data[count($q_data)-1]->regular_price);
+		                    }            
+		                    if(!empty($q_data[count($q_data)-1]->regular_price)){
+		                    	update_post_meta($pid,'_regular_price',$q_data[count($q_data)-1]->regular_price); 
+		                    }
+		                }
 	                    wc_delete_product_transients($pid);  
 	                }
 	            }
