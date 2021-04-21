@@ -171,11 +171,12 @@ jQuery(document).ready(function($){
 	}
 	/////////////////////////
 	////////////////////////
-
-	jQuery( ".eo_wbc_advance_filter" ).accordion({
-	  collapsible: true,
-	  active:false
-	});
+	if(jQuery.fn.hasOwnProperty('accordion') && typeof(jQuery.fn.accordion)==='function'){
+		jQuery( ".eo_wbc_advance_filter" ).accordion({
+		  collapsible: true,
+		  active:false
+		});
+	}
 
 	//Reset form and display
 	jQuery(".eo_wbc_srch_btn:eq(2)").click(function(){					
