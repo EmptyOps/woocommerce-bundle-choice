@@ -316,8 +316,7 @@ class Eowbc_Filters extends Eowbc_Model {
 			    				$table_data['filter_template'] = apply_filters('eowbc_admin_form_filters_save_d_filter_template',wbc()->sanitize->post('first_category_altr_filt_widgts'));
 			    			} elseif ($fk == "s_fconfig_ordering" and !empty(wbc()->sanitize->post('second_category_altr_filt_widgts'))) {
 			    				$table_data['filter_template'] = apply_filters('eowbc_admin_form_filters_save_s_filter_template',wbc()->sanitize->post('second_category_altr_filt_widgts'));
-			    			}
-
+			    			}			    			
 				    		$table_data[$fk] = (int)wbc()->sanitize->post($fk); 	
 			    		}
 			    		else {
