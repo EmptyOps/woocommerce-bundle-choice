@@ -1342,7 +1342,7 @@ class EOWBC_Filter_Widget {
 
 	//Generate checkbox based filter option;
 	public function input_checkbox($__prefix,$item/*$id,$title,$filter_type,$desktop = 1, $width = '50',$reset = 0,$help='',$advance = 0*/) {
-		
+
 		extract($item);
 		$tab_set = (!empty( $item[$__prefix.'_fconfig_set'] )?$item[$__prefix.'_fconfig_set']:'');
 		$id = $name;
@@ -1358,7 +1358,8 @@ class EOWBC_Filter_Widget {
 			$prefix = ${$__prefix.'_fconfig_prefix'};
 		}
 
-		$filter=$this->range_steps($id,$title,$filter_type,$__prefix,$item);
+		$filter= apply_filters( 'eowbc_public_filters_checkbox_filter', $this->range_steps($id,$title,$filter_type,$__prefix,$item), $__prefix,$item );
+
 		if(!empty($filter['force_title'])){
 			$title = $filter['title'];
 		}

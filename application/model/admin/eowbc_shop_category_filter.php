@@ -14,10 +14,22 @@ class Eowbc_Shop_Category_Filter extends Eowbc_Filters{
 			self::$_instance = new self;
 		}
 
+		add_filter('eowbc_ajax_filters_check_duplicate',function($status,$item,$table_data,$key_clean){
+
+			if(($item[$key_clean.'_filter']==$table_data[$key_clean."_filter"] and !empty($item['filter_template']) and !empty($table_data['filter_template']) and $item['filter_template']==$table_data['filter_template'] ) and $item['filter_category'] == $table_data['filter_category']) {
+				return true;
+			} else {
+				return false;
+			}
+									
+		},10,4);
+
 		return self::$_instance;
 	}
 
 	private function __construct() {
+
+
 		$this->tab_key_prefix='sc_';
 	}
 }

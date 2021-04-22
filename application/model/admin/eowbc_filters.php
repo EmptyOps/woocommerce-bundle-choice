@@ -346,7 +346,7 @@ class Eowbc_Filters extends Eowbc_Model {
 		        	} else {
 				        foreach ($filter_data as $fdkey=>$item) {
 				          
-				            if ($item[$key_clean.'_filter']==$table_data[$key_clean."_filter"] and !empty($item['filter_template']) and !empty($table_data['filter_template']) and $item['filter_template']==$table_data['filter_template']) { 
+				            if ( apply_filters('eowbc_ajax_filters_check_duplicate', ($item[$key_clean.'_filter']==$table_data[$key_clean."_filter"] and !empty($item['filter_template']) and !empty($table_data['filter_template']) and $item['filter_template']==$table_data['filter_template'] ),$item,$table_data,$key_clean ) ) { 
 				            	if( $is_auto_insert_for_template ) {
 					            	$filter_data[$fdkey][$key_clean.'_add_enabled'] = 1;
 					                $res["type"] = "error";
