@@ -257,9 +257,14 @@ class Eowbc_Sample_Data {
 		if(!isset($this->data_template->get_products()[$index])) {
 			return array( "type"=>"error", "msg"=>"No product found at index ".$index );	//FALSE;
 		}
-	
+
+		
 		$product=$this->data_template->get_products()[$index];
 
+		if(!empty($product['sku']) and !empty(wc_get_product_id_by_sku($product['sku'])) ) {
+			return $res;
+		}
+		
 		$product_id= wp_insert_post( array(
 		    'post_author' => get_current_user_id(),
 		    'post_title' => $product['title'],
@@ -300,6 +305,10 @@ class Eowbc_Sample_Data {
 		}
 
 		update_post_meta( $product_id, '_product_attributes', $product['attribute'] );
+
+		if(!empty($product['sku'])) {
+			update_post_meta( $product_id, '_sku', $product['sku'] );			
+		}
 
 		foreach ($product['attribute'] as $attr_index => $attribute) {
 			wp_set_object_terms( $product_id, explode('|',$attribute['value']) , $attr_index );					
@@ -382,23 +391,6 @@ class Eowbc_Sample_Data {
 			update_post_meta( $parent_id, '_sale_price', $product['sale_price']);				
 			update_post_meta( $parent_id, '_manage_stock','no' );						
 		}
-
-		/*$product_obj = wc_get_product($parent_id);
-		if(!empty($product_obj) and !is_wp_error($product_obj)){
-			$product_obj->set_description('<p>Sample Lorem Ipsum Text</p> <p>
-                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at ante. Mauris eleifend, 
-                                                        quam a vulputate dictum, massa quam dapibus leo, eget vulputate orci purus ut lorem. In fringilla mi in ligula.
-                                                         Pellentesque aliquam quam vel dolor. Nunc adipiscing. Sed quam odio, tempus ac, aliquam molestie, varius ac, tellus.
-                                                          Vestibulum ut nulla aliquam risus rutrum interdum. Pellentesque lorem. Curabitur sit amet erat quis risus feugiat viverra. 
-                                                        Pellentesque augue justo, sagittis et, lacinia at, venenatis non, arcu. Nunc nec libero. In cursus dictum risus. Etiam tristique nisl a
-                                                    </p><p>Sample Lorem Ipsum Text</p><p>Sed eget turpis a pede tempor malesuada. Vivamus quis mi at leo pulvinar hendrerit.
-                                                         Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-                                                          Pellentesque aliquet lacus vitae pede. Nullam mollis dolor ac nisi. Phasellus sit amet urna.
-                                                          Praesent pellentesque sapien sed lacus. Donec lacinia odio in odio. In sit amet elit. 
-                                                          Maecenas gravida interdum urna. Integer pretium, arcu vitae imperdiet facilisis, elit tellus tempor nisi, vel feugiat ante velit sit amet mauris.
-                                                           Vivamus arcu. Integer pharetra magna ac lacus. Aliquam vitae sapien in nibh vehicula auctor. Suspendisse leo mauris, pulvinar sed, tempor et, consequat ac, lacus. Proin velit. Nulla semper lobortis mauris.
-                                                         Duis urna erat, ornare et, imperdiet eu, suscipit sit amet, massa. Nulla nulla nisi, pellentesque at, egestas quis, fringilla eu, diam.</p>');
-		}*/
 
 		return $res;	// TRUE;
 	}	
@@ -704,16 +696,21 @@ class Eowbc_Sample_Data {
         		// $_data = unserialize(wbc()->options->get_option_group('filters_'.$index,"a:0:{}"));
         		// $names=array_column($_data,'name');
         		// if( !in_array($filter['name'], $names)){
+
         			$prefix = "";
+        			if(empty($this->tab_key_prefix)){
+        				$this->tab_key_prefix = '';
+        			}
+
         			if( $index == "d_fconfig" ) {
-						$_POST["saved_tab_key"] = "d_fconfig";
+						$_POST["saved_tab_key"] = $this->tab_key_prefix."d_fconfig";
 						$prefix = "d";
         			}
         			else {
-        				$_POST["saved_tab_key"] = "s_fconfig";
+        				$_POST["saved_tab_key"] = $this->tab_key_prefix."s_fconfig";
 						$prefix = "s";
         			}
-        			 	
+        			        			 	
         			$_POST[$prefix.'_fconfig_filter']=$filter['name'];
 	                $_POST[$prefix.'_fconfig_type']=$filter['type'];
 	                $_POST[$prefix.'_fconfig_label']=$filter['label'];
@@ -730,10 +727,20 @@ class Eowbc_Sample_Data {
 	                $_POST[$prefix.'_fconfig_add_help_text']=$filter['help_text'];
 	                $_POST[$prefix.'_fconfig_add_enabled']=$filter['enabled'];
 
+	                if(!empty($filter['filter_category'])) {
+						$_POST['filter_category']=$filter['filter_category'];	                	
+	                }
+
         			// update_option($index,serialize($_data)); 
         			// wbc()->options->update_option_group( 'filters_'.$index, serialize($_data) );
-        			
-					$res = \eo\wbc\model\admin\Eowbc_Filters::instance()->save( \eo\wbc\controllers\admin\menu\page\Filters::get_form_definition() );
+        			$filter_model = \eo\wbc\model\admin\Eowbc_Filters::instance();
+        			$filter_model->tab_key_prefix = $this->tab_key_prefix;
+
+        			if(empty($this->form_defination)) {
+        				$this->form_defination = \eo\wbc\controllers\admin\menu\page\Filters::get_form_definition(); 
+        			}
+
+					$res = $filter_model->save( $this->form_defination );
 
 					unset($_POST[$prefix.'_fconfig_filter']);
 	                unset($_POST[$prefix.'_fconfig_type']);
@@ -752,9 +759,15 @@ class Eowbc_Sample_Data {
 	                unset($_POST[$prefix.'_fconfig_add_help_text']);
 	                unset($_POST[$prefix.'_fconfig_add_enabled']);
 
+	                if(!empty($filter['filter_category'])) {
+						unset($_POST['filter_category']);
+	                }
+
         		// }
         	}
-    	}        	
+    	}
+
+    	do_action('eowbc_automation_post_sample_filters',$__cat__, $__att__);        	
 	}
 
 	function create_attribute( $args ){

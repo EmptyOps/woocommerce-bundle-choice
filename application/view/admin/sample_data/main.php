@@ -142,6 +142,7 @@ box-shadow: none;">
 		                '_wpnonce': '<?php echo wp_create_nonce('sample_data_jewelry');?>',
 		                'action':'eowbc_ajax',
 		                'resolver':'sample_data/catattr',
+		                'resolver_path':'<?php echo apply_filters('eowbc_catattr_sample_data_resolver_path',''); ?>', 
 		                'feature_key':'<?php _e($feature_key); ?>',
 		                'type':'after_cat_created',
 		            };
@@ -175,6 +176,7 @@ box-shadow: none;">
 		                '_wpnonce': '<?php echo wp_create_nonce('sample_data_jewelry');?>',
 		                'action':'eowbc_ajax',
 		                'resolver':'sample_data/catattr',
+		                'resolver_path':'<?php echo apply_filters('eowbc_catattr_sample_data_resolver_path',''); ?>',
 		                'feature_key':'<?php _e($feature_key); ?>',
 		                'type':'after_attr_created',
 		            };
@@ -224,6 +226,7 @@ box-shadow: none;">
 	                '_wpnonce': '<?php echo wp_create_nonce('sample_data_jewelry');?>',
 	                'action':'eowbc_ajax',
 	                'resolver':'sample_data/catattr',
+	                'resolver_path':'<?php echo apply_filters('eowbc_catattr_sample_data_resolver_path',''); ?>',
 	                'feature_key':'<?php _e($feature_key); ?>',
 	                'label':label,
 	                'value':value,

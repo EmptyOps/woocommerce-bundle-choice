@@ -54,12 +54,13 @@ class Admin {
 	        		// \eo\wbc\controllers\admin\sample_data\Jewelry::instance()->init();
 	        		// TODO here we need to clean and accurate session management to call the second feature's sample data process after the first is done in case there are more than one feature enabled or simply we can do url management to pass the remaining features in a get param. -- We must do this when add sample data for features that can be enabled together.
 
-					do_action('wbc_auto_sample_class');
+					do_action('wbc_auto_sample_class');					
 
 	        		foreach ($enabled_features as $efk => $efv) {
 	        			if( in_array($efv, wbc()->config->get_available_samples()) ) {
 		        			$class = str_replace(" ", "_", ucwords( str_replace("_", " ", $efv) ) );
 		        			$class = '\\eo\\wbc\\controllers\\admin\\sample_data\\' . $class;
+		        			
 	        				if( class_exists($class) ) {
 		        				$class::instance()->init();	
 		        				break;

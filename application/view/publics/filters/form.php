@@ -11,7 +11,7 @@
 	<!--WooCommerce Product Bundle Choice filter form-->
 
 	<form method="GET" name="<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter" id="<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter" style="clear: both;">
-
+		<?php do_action('eowbc_pre_filter_form'); ?>
 		<input type="hidden" name="eo_wbc_filter" value="1" />	
 		<input type="hidden" name="paged" value="1" />	
 		<input type="hidden" name="last_paged" value="1" />
@@ -365,6 +365,11 @@
 			/*----------------------------------------------------*/
 			/*----------------------------------------------------*/
 
-		});			
+		});
+
+
 	</script> 
+
 	<?php endif; ?>
+
+	<?php do_action('eowbc_post_filter_javascript',$filter_ui); ?>

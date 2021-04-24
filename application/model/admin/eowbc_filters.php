@@ -15,7 +15,7 @@ class Eowbc_Filters extends Eowbc_Model {
 
 	private static $_instance = null;
 
-	protected $tab_key_prefix = '';
+	public $tab_key_prefix = '';
 
 	public static function instance() {
 		if ( ! isset( self::$_instance ) ) {
