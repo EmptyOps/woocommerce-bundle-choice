@@ -61,25 +61,26 @@ class Eowbc_Mapping extends Eowbc_Model {
 								continue;
 							}
 							
-							if( $rvk == "eo_wbc_first_category" ) {
-								if( strpos($rvv, 'pid_')==0 ){
+							if( $rvk == "eo_wbc_first_category" ) {								
+								if( strpos($rvv, 'pid_')===0 ){
 									
 									$product = wbc()->wc->get_product((int)substr($rvv,4));
 
 									$row[] = array( 'val' => ((is_wp_error($product) or empty($product))? '':$product->get_name()),'link'=>1,'edit_id'=>$rk);	
 								}
 								elseif( wbc()->common->nonZeroEmpty($rv["eo_wbc_first_category_range"]) || wbc()->common->nonZeroEmpty($rv["range_first"]) ) {
+									
 									$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv);
 									$row[] = array( 'val' => !is_array($val)?$val:$val["label"] ,'link'=>1,'edit_id'=>$rk);	
 								}
-								else {
+								else {									
 									$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv);
 									$val1 = wbc()->common->dropdownSelectedvalueText($tab["form"]["eo_wbc_first_category_range"], $rv["eo_wbc_first_category_range"]);
 									$row[] = array( 'val' =>  "Range from <strong>".(!is_array($val)?$val:$val["label"])."</strong> to <strong>".(!is_array($val1)?$val1:$val1["label"])."</strong>" ,'link'=>1,'edit_id'=>$rk);
 								}	
 							}
 							else if( $rvk == "eo_wbc_second_category" ) {
-								if( strpos($rvv, 'pid_')==0 ){
+								if( strpos($rvv, 'pid_')===0 ){
 									
 									$product = wbc()->wc->get_product((int)substr($rvv,4));
 

@@ -95,6 +95,7 @@ class Eowbc_Sample_Data {
 	        $this->data_template->set_configs_after_attributes();
 
 	        wbc()->options->delete($feature_key.'_created_attribute');
+	        
 	    } 
 	}
 
@@ -705,10 +706,16 @@ class Eowbc_Sample_Data {
         			if( $index == "d_fconfig" ) {
 						$_POST["saved_tab_key"] = $this->tab_key_prefix."d_fconfig";
 						$prefix = "d";
+						$_POST['first_category_altr_filt_widgts'] = $filter['template'];
         			}
         			else {
         				$_POST["saved_tab_key"] = $this->tab_key_prefix."s_fconfig";
 						$prefix = "s";
+						$_POST['second_category_altr_filt_widgts'] = $filter['template'];
+        			}
+
+        			if(!empty($filter['filter_set'])) {        				
+        				$_POST[$prefix.'_fconfig_set']=$filter['filter_set'];
         			}
         			        			 	
         			$_POST[$prefix.'_fconfig_filter']=$filter['name'];
@@ -719,6 +726,7 @@ class Eowbc_Sample_Data {
 	                $_POST[$prefix.'_fconfig_input_type']=$filter['input'];
 	                $_POST[$prefix.'_fconfig_column_width']=$filter['column_width'];
 	                $_POST['filter_template'] = $filter['template'];
+	                
 	                $_POST[$prefix.'_fconfig_ordering']=$filter['order'];
 	                $_POST[$prefix.'_fconfig_icon_size']='';
 	                $_POST[$prefix.'_fconfig_icon_label_size']='';
@@ -726,6 +734,7 @@ class Eowbc_Sample_Data {
 	                $_POST[$prefix.'_fconfig_add_help']=$filter['help'];
 	                $_POST[$prefix.'_fconfig_add_help_text']=$filter['help_text'];
 	                $_POST[$prefix.'_fconfig_add_enabled']=$filter['enabled'];
+	                
 
 	                if(!empty($filter['filter_category'])) {
 						$_POST['filter_category']=$filter['filter_category'];	                	
@@ -740,7 +749,7 @@ class Eowbc_Sample_Data {
         				$this->form_defination = \eo\wbc\controllers\admin\menu\page\Filters::get_form_definition(); 
         			}
 
-					$res = $filter_model->save( $this->form_defination );
+					$res = $filter_model->save( $this->form_defination ,true);
 
 					unset($_POST[$prefix.'_fconfig_filter']);
 	                unset($_POST[$prefix.'_fconfig_type']);
@@ -754,7 +763,20 @@ class Eowbc_Sample_Data {
 	                unset($_POST[$prefix.'_fconfig_icon_label_size']);
 	                unset($_POST[$prefix.'_fconfig_add_reset_link']);
 
+
+	                if(!empty($filter['filter_set'])) {        				
+        				unset($_POST[$prefix.'_fconfig_set']);
+        			}
+
+	                if( $index == "d_fconfig" ) {						
+						unset($_POST['first_category_altr_filt_widgts']);
+        			}
+        			else {        				
+						unset($_POST['second_category_altr_filt_widgts']);
+        			}
+
 	                unset($_POST['filter_template']);
+	                unset($_POST['first_category_altr_filt_widgts']);
 	                unset($_POST[$prefix.'_fconfig_add_help']);
 	                unset($_POST[$prefix.'_fconfig_add_help_text']);
 	                unset($_POST[$prefix.'_fconfig_add_enabled']);
@@ -766,6 +788,32 @@ class Eowbc_Sample_Data {
         		// }
         	}
     	}
+
+    	wbc()->options->update_option_group('filters_filter_set',serialize(array(
+	    		'6085411b707ad' => array(
+	    			'filter_sets_list_bulk' => '',
+		            'filter_set_id' => '',
+		            'filter_set_name' => 'Natural Diamond',
+		            'filter_set_add_enabled' => '1',
+		        ),
+		        '6085412e4cc9b' => array(
+		            'filter_sets_list_bulk' => '',
+		            'filter_set_id' => '',
+		            'filter_set_name' => 'Lab-Grown Diamond',
+		            'filter_set_add_enabled' => '1',
+		        )
+		   	)
+	    ));
+
+	    wbc()->options->update_option('filters_filter_setting','filter_setting_advance_two_tabs','filter_setting_advance_two_tabs');
+
+		wbc()->options->update_option('filters_filter_setting','filter_setting_advance_first_tabs','6085411b707ad');
+
+	    wbc()->options->update_option('filters_filter_setting','filter_setting_advance_first_category',$__cat__['eo_diamond_shape_cat'][0]);
+	    
+	    wbc()->options->update_option('filters_filter_setting','filter_setting_advance_second_tabs','6085412e4cc9b');
+
+	    wbc()->options->update_option('filters_filter_setting','filter_setting_advance_second_category',$__cat__['eo_lab_diamond_shape_cat'][0]);
 
     	do_action('eowbc_automation_post_sample_filters',$__cat__, $__att__);        	
 	}

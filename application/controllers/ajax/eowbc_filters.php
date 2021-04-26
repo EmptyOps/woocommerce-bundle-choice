@@ -23,8 +23,8 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_filters')) {
 	}
 	else {
 		if( strpos(wbc()->sanitize->post("saved_tab_key"), 'd_fconfig') !== FALSE || strpos(wbc()->sanitize->post("saved_tab_key"), 's_fconfig') !== FALSE ) {
-			$_POST["first_category_altr_filt_widgts"] = 'user_manually_added';
-            $_POST["second_category_altr_filt_widgts"] = 'user_manually_added';
+			/*$_POST["first_category_altr_filt_widgts"] = 'user_manually_added';
+            $_POST["second_category_altr_filt_widgts"] = 'user_manually_added';*/
 		}
 		$res = eo\wbc\model\admin\Eowbc_Filters::instance()->save( eo\wbc\controllers\admin\menu\page\Filters::get_form_definition() );
     }

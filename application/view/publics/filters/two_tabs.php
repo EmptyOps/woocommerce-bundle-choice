@@ -11,14 +11,16 @@
 		jQuery(document).ready(function($){
 			$('.filter_setting_advance_two_tabs .item').on('click',function(){
         
-        let _category = $("[name='_category']").val();
+        /*let _category = $("[name='_category']").val();
         _category = _category.split(',');
         if(_category.indexOf('_two_tabs')==-1){
           _category.push('_two_tabs');
           $("[name='_category']").val(_category.join(','));
         }
 
-        $('[name="cat_filter__two_tabs"]').val($(this).data('category'));
+        $('[name="cat_filter__two_tabs"]').val($(this).data('category'));*/
+
+        jQuery('[name="_current_category"]').val(jQuery(this).data('category'));
 
         //cat_filter__two_tabs
 				$('.filter_setting_advance_two_tabs .item').removeClass('active');
