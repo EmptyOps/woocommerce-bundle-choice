@@ -1991,10 +1991,12 @@ class EOWBC_Filter_Widget {
 			
 			if(!empty($item[$__prefix."_fconfig_elements"])){
 				$filter_in_list = explode(',',$item[$__prefix."_fconfig_elements"]);
+
 				if(is_array($filter_in_list) and is_array($term_list) and !empty($filter_in_list) and !empty($term_list)){
 					
 					foreach ($term_list as $list_key => $list_value) {
-						if(!in_array($list_value->term_taxonomy_id,$filter_in_list)){
+
+						if(!in_array($list_value->term_id,$filter_in_list)){
 							unset($term_list[$list_key]);
 						}
 					}
