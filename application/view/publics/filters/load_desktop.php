@@ -24,17 +24,25 @@ if(
 		<div class="ui segments">
 			<div class="ui segment"><?php
 			?><div class="ui grid container align middle relaxed" style="margin-bottom: 0px;"><?php
+
+				do_action('eowbc_pre_standard_filters',$general_filters);
+
 				$filter_ui->load_grid_desktop($general_filters,0);
 				$order = wbc()->options->get_option('filters_'.$filter_ui->filter_prefix.'filter_setting','price_filter_order_'.$filter_ui->cat_name_part.'_cat','');
 				if( !$filter_ui->is_shortcode_filter && !wbc()->options->get_option('filters_'.$filter_ui->filter_prefix.'filter_setting','hide_price_filter_'.$filter_ui->cat_name_part.'_cat',false) && wbc()->common->nonZeroEmpty($order) ) {
 					$filter_ui->slider_price();
 				}
+
+				do_action('eowbc_post_standard_filters',$general_filters);
 			?></div><?php
 		?></div><?php
+
 		if(!is_wp_error($advance_filters) and !empty($advance_filters)) {
 			?><div class="ui segment secondary"><?php
-				?><div class="ui grid container align middle relaxed" style="margin-bottom: 0px;"><?php					
-					$filter_ui->load_grid_desktop($advance_filters,1);					
+				?><div class="ui grid container align middle relaxed" style="margin-bottom: 0px;"><?php
+					do_action('eowbc_pre_advance_filters',$advance_filters);
+					$filter_ui->load_grid_desktop($advance_filters,1);
+					do_action('eowbc_post_advance_filters',$advance_filters);	
 				?></div><?php
 			?></div><?php
 		}			
@@ -59,4 +67,5 @@ if(
 		</div>
 	<?php			
 	}
+	do_action('eowbc_shortby_area_filters',$general_filters,$advance_filters);
 }
