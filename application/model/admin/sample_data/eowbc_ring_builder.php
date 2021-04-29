@@ -55,7 +55,7 @@ class Eowbc_Ring_Builder extends Eowbc_Sample_Data {
 
 		    wbc()->options->update_option('filters_filter_setting','filter_setting_advance_second_category',$__cat__['eo_lab_diamond_shape_cat'][0]);
 
-		}, 10, 1 );
+		}, 10, 2 );
 	}
 
 }

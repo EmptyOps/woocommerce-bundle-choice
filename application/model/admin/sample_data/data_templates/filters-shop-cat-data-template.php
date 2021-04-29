@@ -231,6 +231,87 @@ class Filters_Shop_Cat_Data_Template extends Pair_Builder_Data_Template {
                                 )
                         )
                     ),
+                    
+                    array(
+                        'thumb' => '',
+                        'name' => 'Setting',
+                        'description' => 'Setting shapes category',
+                        'slug' => 'eo_setting_shape_cat',
+                        'child'=> 
+                        array(
+                                array(
+                                    'thumb' => $_img_url.'round.png',
+                                    'thumb_selected' => $_img_url.'round_selected.png',
+                                    'name' => 'Round Setting',
+                                    'description' => 'Setting round shape',
+                                    'slug' => 'eo_setting_round_shape_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'princess.png',
+                                    'thumb_selected' => $_img_url.'princess_selected.png',
+                                    'name' => 'Princess Setting',
+                                    'description' => 'setting princess shape',
+                                    'slug' => 'eo_setting_princess_shape_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'emerald.png',
+                                    'thumb_selected' => $_img_url.'emerald_selected.png',
+                                    'name' => 'Emerald Setting',
+                                    'description' => 'Setting emerald shape',
+                                    'slug' => 'eo_setting_emerald_shape_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'asscher.png',
+                                    'thumb_selected' => $_img_url.'asscher_selected.png',
+                                    'name' => 'Asscher Setting',
+                                    'description' => 'Setting asscher shape',
+                                    'slug' => 'eo_setting_asscher_shape_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'marquise.png',
+                                    'thumb_selected' => $_img_url.'marquise_selected.png',
+                                    'name' => 'Marquise Setting',
+                                    'description' => 'Setting marquise shape',
+                                    'slug' => 'eo_setting_marquise_shape_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'oval.png',
+                                    'thumb_selected' => $_img_url.'oval_selected.png',
+                                    'name' => 'Oval Setting',
+                                    'description' => 'Setting oval shape',
+                                    'slug' => 'eo_setting_oval_shape_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'rediant.png',
+                                    'thumb_selected' => $_img_url.'rediant_selected.png',
+                                    'name' => 'Radiant Setting',
+                                    'description' => 'Setting radiant shape',
+                                    'slug' => 'eo_setting_radiant_shape_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'pear.png',
+                                    'thumb_selected' => $_img_url.'pear_selected.png',
+                                    'name' => 'Pear Setting',
+                                    'description' => 'Setting pear shape',
+                                    'slug' => 'eo_setting_pear_shape_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'heart.png',
+                                    'thumb_selected' => $_img_url.'heart_selected.png',
+                                    'name' => 'Heart Setting',
+                                    'description' => 'Setting heart shape',
+                                    'slug' => 'eo_setting_heart_shape_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'cushion.png',
+                                    'thumb_selected' => $_img_url.'cushion_selected.png',
+                                    'name' => 'Cushion Setting',
+                                    'description' => 'Setting cushion shape',
+                                    'slug' => 'eo_setting_cushion_shape_cat'
+                                )
+                        )
+                    ),
+                    
                     /*Lab-Growns ----*/
                     array(
                         'thumb' => '',
@@ -312,85 +393,7 @@ class Filters_Shop_Cat_Data_Template extends Pair_Builder_Data_Template {
                         )
                     ),
                     /*LAb-Growns ---- END*/
-                    array(
-                        'thumb' => '',
-                        'name' => 'Setting',
-                        'description' => 'Setting shapes category',
-                        'slug' => 'eo_setting_shape_cat',
-                        'child'=> 
-                        array(
-                                array(
-                                    'thumb' => $_img_url.'round.png',
-                                    'thumb_selected' => $_img_url.'round_selected.png',
-                                    'name' => 'Round Setting',
-                                    'description' => 'Setting round shape',
-                                    'slug' => 'eo_setting_round_shape_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'princess.png',
-                                    'thumb_selected' => $_img_url.'princess_selected.png',
-                                    'name' => 'Princess Setting',
-                                    'description' => 'setting princess shape',
-                                    'slug' => 'eo_setting_princess_shape_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'emerald.png',
-                                    'thumb_selected' => $_img_url.'emerald_selected.png',
-                                    'name' => 'Emerald Setting',
-                                    'description' => 'Setting emerald shape',
-                                    'slug' => 'eo_setting_emerald_shape_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'asscher.png',
-                                    'thumb_selected' => $_img_url.'asscher_selected.png',
-                                    'name' => 'Asscher Setting',
-                                    'description' => 'Setting asscher shape',
-                                    'slug' => 'eo_setting_asscher_shape_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'marquise.png',
-                                    'thumb_selected' => $_img_url.'marquise_selected.png',
-                                    'name' => 'Marquise Setting',
-                                    'description' => 'Setting marquise shape',
-                                    'slug' => 'eo_setting_marquise_shape_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'oval.png',
-                                    'thumb_selected' => $_img_url.'oval_selected.png',
-                                    'name' => 'Oval Setting',
-                                    'description' => 'Setting oval shape',
-                                    'slug' => 'eo_setting_oval_shape_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'rediant.png',
-                                    'thumb_selected' => $_img_url.'rediant_selected.png',
-                                    'name' => 'Radiant Setting',
-                                    'description' => 'Setting radiant shape',
-                                    'slug' => 'eo_setting_radiant_shape_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'pear.png',
-                                    'thumb_selected' => $_img_url.'pear_selected.png',
-                                    'name' => 'Pear Setting',
-                                    'description' => 'Setting pear shape',
-                                    'slug' => 'eo_setting_pear_shape_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'heart.png',
-                                    'thumb_selected' => $_img_url.'heart_selected.png',
-                                    'name' => 'Heart Setting',
-                                    'description' => 'Setting heart shape',
-                                    'slug' => 'eo_setting_heart_shape_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'cushion.png',
-                                    'thumb_selected' => $_img_url.'cushion_selected.png',
-                                    'name' => 'Cushion Setting',
-                                    'description' => 'Setting cushion shape',
-                                    'slug' => 'eo_setting_cushion_shape_cat'
-                                )
-                        )
-                    ),
+
                     array(
                         'thumb' => '',
                         'name' => 'Style',
