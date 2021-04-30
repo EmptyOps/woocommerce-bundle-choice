@@ -15,9 +15,9 @@ class Controller extends \eo\wbc\controllers\Controller {
 		return self::$_instance;
 	}
 
-	protected function __construct() {
+	/*public function __construct() {
 		
-	}	
+	}	*/
 
 	protected function _get($name) {
 

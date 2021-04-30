@@ -1,10 +1,10 @@
 <div class="ui top attached tabular menu filter_setting_advance_two_tabs" style="margin-top: 3em;">
-  	<a class="item center active" data-category="<?php _e($first_tab_category); ?>" style="margin-right: 0px !important;" data-tab="filter_setting_advance_first_tabs" data-tab-name="<?php _e($first_tab_id); ?>" data-tab-altname="<?php _e($second_tab_id); ?>">
+  	<a class="item center <?php echo isset($_GET[$second_tab_id])?'':'active' ?>" data-category="<?php _e($first_tab_category); ?>" style="margin-right: 0px !important;" data-tab="filter_setting_advance_first_tabs" data-tab-name="<?php _e($first_tab_id); ?>" data-tab-altname="<?php _e($second_tab_id); ?>">
   		<!-- $prefix.'_fconfig_set' -->
   	<?php _e($first_tab_label); ?>
   	</a>
 
-  	<a class="center item" data-category="<?php _e($second_tab_category); ?>" style="margin-left: 0px !important;" data-tab="filter_setting_advance_second_tabs" data-tab-name="<?php _e($second_tab_id); ?>" data-tab-altname="<?php _e($first_tab_id); ?>">
+  	<a class="center item <?php echo isset($_GET[$second_tab_id])?'active':'' ?>" data-category="<?php _e($second_tab_category); ?>" style="margin-left: 0px !important;" data-tab="filter_setting_advance_second_tabs" data-tab-name="<?php _e($second_tab_id); ?>" data-tab-altname="<?php _e($first_tab_id); ?>">
     <?php _e($second_tab_label); ?>
   	</a>
   	<script type="text/javascript">

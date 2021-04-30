@@ -8,9 +8,9 @@ class Controller {
 
 	private static $_instance = null;
 
-	protected function __construct() {
+	/*protected function __construct() {
 		
-	}	
+	}	*/
 
 	protected function _get($name) {
 
