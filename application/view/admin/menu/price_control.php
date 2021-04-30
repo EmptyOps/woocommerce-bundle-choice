@@ -20,6 +20,9 @@ function eo_wbc_jpc_list_categories($slug='',$prefix='',$opts_arr=array()){
         $opts_arr = eo_wbc_jpc_list_categories($base->slug,'--',$opts_arr);
     }
 
+    
+    $opts_arr = array_replace([array('label'=>'---Select---'),array('label'=>'Price','attr'=>'data-type="1"')],$opts_arr);
+
     // return $category_option_list;
     return $opts_arr;
 }
@@ -53,6 +56,9 @@ function eo_wbc_jpc_attributes_values(){
     return $attr_vals;
 }
 
+$apis = unserialize(wbc()->options->get_option_group('dapii_api_config',"a:0:{}"));
+$apis = array_column($apis,'api_config_api_name');
+$apis = array_combine(array_values($apis),array_values($apis));
 
 $form = array();
 
@@ -104,42 +110,46 @@ $form['data'] = array(
 // $sizearr = sizeof($arr);
 // $cnt = -1;
 // foreach ($arr as $key => $value) {
-	$fieldarr = array(
+	/*$fieldarr = array(
 		'no_label'=>true,
 		'type'=>'select',
 		'value'=>'0',
 		'sanitize'=>'sanitize_text_field',
-		'options'=> array(),	// $value,
-		'class'=>array('fluid','jpc_attribute_vals'),
+		'options'=> array(),
+		'class'=>array('fluid','jpc_attribute_vals','additions','search','clearable'),
 		'size_class'=>array('four','wide'),
 		'prev_inline'=>true,
 		'inline'=>true,
 	);
 
 	$fieldarr['next_inline'] = true;
-	$form['data']['jpc_values_drop_1_'/*.$key*/] = $fieldarr;
+	$form['data']['jpc_values_drop_1_'] = $fieldarr;*/
 
 
-	$fieldarr = array(
+	$form['data']['jpc_values_drop_1_'] = array(
+		'no_label'=>true,
+		'next_inline'=>true,
+		'type'=>'select',
+		'value'=>'0',
+		'sanitize'=>'sanitize_text_field',
+		'options'=> array(),
+		'class'=>array('fluid','jpc_attribute_vals','addition','search','clearable'),
+		'size_class'=>array('four','wide'),
+		'prev_inline'=>true,
+		'inline'=>true,
+	);
+	
+	$form['data']['jpc_values_drop_2_'] = array(
 		'no_label'=>true,
 		'type'=>'select',
 		'value'=>'0',
 		'sanitize'=>'sanitize_text_field',
 		'options'=> array(),	//$value,
-		'class'=>array('fluid','jpc_attribute_vals'),
+		'class'=>array('fluid','jpc_attribute_vals','addition','search','clearable'),
 		'size_class'=>array('four','wide'),
 		'prev_inline'=>true,
 		'inline'=>true,
 	);
-
-	// $cnt++;
-	// if( $cnt < $sizearr - 1 )
-	// {
-	// 	$fieldarr['next_inline'] = true;
-	// }
-
-	$form['data']['jpc_values_drop_2_'/*.$key*/] = $fieldarr;
-// }
 
 $form['data']['eowbc_pc_add_rule_btn'] = array(
 						'label'=>eowbc_lang('Add Pricing Method'),
@@ -217,9 +227,10 @@ $form['data'] = array_merge( $form['data'], array(
 							'label'=>eowbc_lang('Regular Price'),
 							'type'=>'label',
 							//'class'=>array('fluid'),
-							'size_class'=>array('three','wide','jpc_rules_table'),
+							'size_class'=>array('two','wide','jpc_rules_table','price_model_fix'),
 							'next_inline'=>true,
 							'inline'=>true,
+							'attr'=>array('data-price_model'=>'fix')
 							),
 						'regular_price'=>array(
 							//'label'=>eowbc_lang('Regular Price'),
@@ -230,19 +241,21 @@ $form['data'] = array_merge( $form['data'], array(
 							'sanitize'=>'sanitize_text_field',
 							'options'=>array(),
 							//'class'=>array('fluid'),
-							'size_class'=>array('three','wide','jpc_rules_table'),
+							'size_class'=>array('two','wide','jpc_rules_table','price_model_fix'),
 							'prev_inline'=>true,
 							'next_inline'=>true,
 							'inline'=>true,
+							'attr'=>array('data-price_model'=>'fix')
 							),
 						'sales_price_label'=>array(
 							'label'=>eowbc_lang('Sales Price'),
 							'type'=>'label',
 							//'class'=>array('fluid'),
-							'size_class'=>array('three','wide','jpc_rules_table'),
+							'size_class'=>array('two','wide','jpc_rules_table','price_model_fix'),
 							'prev_inline'=>true,
 							'next_inline'=>true,
 							'inline'=>true,
+							'attr'=>array('data-price_model'=>'fix')
 							),
 						'sales_price'=>array(
 							//'label'=>eowbc_lang('Sales Price'),
@@ -253,10 +266,53 @@ $form['data'] = array_merge( $form['data'], array(
 							'sanitize'=>'sanitize_text_field',
 							'options'=>array(),
 							//'class'=>array('fluid'),
-							'size_class'=>array('three','wide','jpc_rules_table'),
+							'size_class'=>array('two','wide','jpc_rules_table','price_model_fix'),
 							'prev_inline'=>true,
 							'inline'=>true,
+							'attr'=>array('data-price_model'=>'fix')
 							),
+						
+						'ratio_price_label'=>array(
+							'label'=>eowbc_lang('Rational Price'),
+							'type'=>'label',
+							//'class'=>array('fluid'),
+							'size_class'=>array('two','wide','jpc_rules_table','price_model_rational'),
+							'prev_inline'=>true,
+							'next_inline'=>true,
+							'inline'=>true,
+							'attr'=>array('data-price_model'=>'rational')
+							),
+						'ratio_price'=>array(
+							//'label'=>eowbc_lang('Sales Price'),
+							'no_label' => true,
+							'placeholder'=>eowbc_lang('Rational Price(%)'),
+							'type'=>'text',
+							'value'=>'0',
+							'sanitize'=>'sanitize_text_field',
+							'options'=>array(),
+							//'class'=>array('fluid'),
+							'size_class'=>array('two','wide','jpc_rules_table','price_model_rational'),
+							'attr'=>array('data-price_model'=>'rational')
+						),
+						'apply_on_apis'=>array(
+							'label'=>eowbc_lang('Apply on APIs?'),
+							'type'=>'checkbox',
+							'value'=>array(''),
+							'options'=>array('1'=>'Swich to enable on APIs'),
+							'sanitize'=>'sanitize_text_field',
+							'size_class'=>array('eight','wide','jpc_rules_table','apply_on_apis','fields'),							
+						),
+						'api_service'=>array(
+							'label'=>eowbc_lang('Select API'),
+							'type'=>'select',
+							'value'=>array(''),
+							'options'=>$apis,
+							'sanitize'=>'sanitize_text_field',
+							'size_class'=>array('eight','wide','jpc_rules_table','api_service','fields'),
+							'prev_inline'=>true,
+							'inline'=>true,
+						),
+
 						'jpc_add_price_ctl'=>array(
 							'label'=>eowbc_lang('Save Pricing Method'),
 							'type'=>'button',

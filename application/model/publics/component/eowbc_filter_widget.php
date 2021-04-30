@@ -101,7 +101,7 @@ class EOWBC_Filter_Widget {
 		?>
 		<!--Primary filter button that will only be visible on desktop/tablet-->
 		<!-- This widget is created with Wordpress plugin - WooCommerce Product bundle choice -->
-		<div id="loading" style="z-index: -999;height: 100%; width: 100%; position: fixed; top: 0;<?php (wbc()->options->get_option('appearance_filters','appearance_filters_loader') OR apply_filters('eowbc_filter_widget_loader',false))?_e('display:none !important;'):'';?>"></div>	
+		<div id="loading" style="z-index: -999;height: 0px; width: 0px; position: fixed; top: 0;<?php (wbc()->options->get_option('appearance_filters','appearance_filters_loader') OR apply_filters('eowbc_filter_widget_loader',false))?_e('display:none !important;'):'';?>"></div>	
 		    							
 		<?php 
 			if(wp_is_mobile()) {
@@ -155,8 +155,11 @@ class EOWBC_Filter_Widget {
 		$site_url=site_url();
 
 		wp_enqueue_script('jquery');	
-		wp_dequeue_script('jquery-ui-core');
-		wp_deregister_script('jquery-ui-core');
+		wp_add_inline_script('fomantic-semantic.min','jQuery.fn.ui_accordion = jQuery.fn.accordion;
+				jQuery.fn.ui_slider = jQuery.fn.slider;
+				jQuery.fn.ui_checkbox = jQuery.fn.checkbox;');
+		/*wp_dequeue_script('jquery-ui-core');
+		wp_deregister_script('jquery-ui-core');*/
 		
 		add_action( 'wp_footer',function(){
 
@@ -228,6 +231,8 @@ class EOWBC_Filter_Widget {
 					}	
 					.loading{												
 						background-image:url(".constant('EOWBC_ASSET_URL')."icon/spinner.gif);
+						height: 100%; 
+						width: 100%;
 						background-color: rgba(255,255,255, 0.6);				    	
 						background-position: center center;
 						background-repeat: no-repeat;	    				    
@@ -854,6 +859,11 @@ class EOWBC_Filter_Widget {
 			}
 
 	        $site_url = esc_url(get_term_link( $current_category,'product_cat'));
+
+	        if(isset($_REQUEST['CAT_LINK'])){
+				 $site_url = str_replace($current_category,wbc()->sanitize->get('CAT_LINK'),$site_url) ;
+			}
+
 	      	if(strpos($site_url, '?')!==false){
 	          	$site_url.='&';
 	      	} else {
@@ -1970,7 +1980,7 @@ class EOWBC_Filter_Widget {
 		} else{
 			$term = get_term_by('id',$id,'product_cat');
 			$term_list = get_terms('product_cat', array('hide_empty' => 0, 'orderby' => 'menu_order', 'parent'=>$id));
-			
+
 			if(!empty($item[$__prefix."_fconfig_elements"])){
 				$filter_in_list = explode(',',$item[$__prefix."_fconfig_elements"]);
 				if(is_array($filter_in_list) and is_array($term_list) and !empty($filter_in_list) and !empty($term_list)){
@@ -2561,7 +2571,7 @@ class EOWBC_Filter_Widget {
 		?>
 		<!--Primary filter button that will only be visible on desktop/tablet-->
 		<!-- This widget is created with Wordpress plugin - WooCommerce Product bundle choice -->
-		<div id="loading" style="z-index: -999; height: 100%; width: 100%; position: fixed; top: 0;<?php (wbc()->options->get_option('appearance_filters','appearance_filters_loader') OR apply_filters('eowbc_filter_widget_loader',false))?_e('display:none !important;'):'';?>"></div>
+		<div id="loading" style="z-index: -999; height: 0px; width: 0px; position: fixed; top: 0;<?php (wbc()->options->get_option('appearance_filters','appearance_filters_loader') OR apply_filters('eowbc_filter_widget_loader',false))?_e('display:none !important;'):'';?>"></div>
 		
 		<script type="text/javascript">
 			jQuery(document).ready(function(){

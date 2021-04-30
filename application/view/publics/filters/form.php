@@ -61,6 +61,14 @@
 
 		jQuery(document).ready(function($){			
 
+			jQuery.fn.jui_accordion = jQuery.fn.accordion;
+			jQuery.fn.jui_slider = jQuery.fn.slider;
+			jQuery.fn.jui_checkbox = jQuery.fn.checkbox;
+
+			jQuery.fn.accordion = jQuery.fn.ui_accordion;
+			jQuery.fn.slider = jQuery.fn.ui_slider;
+			jQuery.fn.checkbox = jQuery.fn.ui_checkbox;
+
 			window.eo=new Object();
 			
 			//Slider creation function
@@ -363,10 +371,15 @@
 		    	<?php endif; ?>
 			}});				
 			/*----------------------------------------------------*/
-			/*----------------------------------------------------*/
+			/*----------------------------------------------------*/			
+			jQuery.fn.ui_accordion = jQuery.fn.accordion;
+			jQuery.fn.ui_slider = jQuery.fn.slider;
+			jQuery.fn.ui_checkbox = jQuery.fn.checkbox;
 
-		});
-
+			jQuery.fn.accordion = jQuery.fn.jui_accordion;
+			jQuery.fn.slider = jQuery.fn.jui_slider;
+			jQuery.fn.checkbox = jQuery.fn.jui_checkbox;
+		});			
 
 	</script> 
 

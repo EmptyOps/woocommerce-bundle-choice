@@ -45,6 +45,23 @@ class Product {
                 wbc()->load->template('publics/features/specification_view');            
             });
             remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
+        } else {
+            add_filter( 'woocommerce_display_product_attributes',function($fields,$product){
+                
+
+                $certificate_link = get_post_meta($product->get_id(),'_certificate_link', true ); /*$product->get_meta('_certificate_link',true);*/
+                //var_dump($certificate_link);
+                
+                if(!empty($certificate_link)){
+
+                    $fields['_certificate_link'] = array(
+                        'label'=>'Certificate',
+                        'value'=>"<a href='${certificate_link}' target='_blank'>".__('link','woo-bundle-choice')."</a>"
+                    );                
+                }
+                
+                return $fields;
+            },10,2);
         }
     }
 
