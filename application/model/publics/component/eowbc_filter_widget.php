@@ -1410,7 +1410,7 @@ class EOWBC_Filter_Widget {
 		$reset =  !empty($reset);	
 		$help=(!empty(${$__prefix.'_fconfig_add_help'})?${$__prefix.'_fconfig_add_help_text'}:'');	
 		
-		if(!empty($text_slider_prefix)){
+		if(!empty($text_slider_prefix)) {
 			$prefix = $text_slider_prefix;
 		} elseif (!empty(${$__prefix.'_fconfig_prefix'})) {
 			$prefix = ${$__prefix.'_fconfig_prefix'};
@@ -1420,6 +1420,10 @@ class EOWBC_Filter_Widget {
 		if(!empty($filter['force_title'])){
 			$title = $filter['title'];
 		}
+
+		$filter = apply_filters('eowbc_filter_button_terms', $filter,$id,$title,$filter_type,$__prefix,$item);
+		
+
 		if(empty($filter)) return false;
 
 		array_push($this->__filters,array(

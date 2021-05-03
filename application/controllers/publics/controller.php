@@ -6,9 +6,9 @@ defined( 'ABSPATH' ) || exit;
 
 class Controller extends \eo\wbc\controllers\Controller{
 
-	protected function __construct() {
+	/*protected function __construct() {
 		
-	}	
+	}*/	
 
 	protected function _get($name) {
 
