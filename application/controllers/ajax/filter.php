@@ -198,6 +198,12 @@ class Filter
 		                //die();
 		            }		            
 		        }
+
+		        /*echo "<pre>";
+		        print_r($_REQUEST);
+		        print_r($query);
+		        die();*/
+
 		        return apply_filters('filter_widget_ajax_post_query',$query);
 		    });		   
 		}

@@ -2,7 +2,7 @@
 	<?php !empty($label)? _e($label) : ''; ?>
 	<?php 
 		if(!empty($builder) and !empty($child)){
-			$builder->build($child,$option_key);
+			$builder->build($child,$option_key,$process_form);
 		}
 	?>	
 </div>

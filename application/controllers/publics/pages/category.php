@@ -326,7 +326,7 @@ class Category {
             return $url;
         }
 
-        return  $url.'?'.wbc()->common->http_query(
+        $external_url = /*$url.'?'.*/wbc()->common->http_query(
             array(
                 'EO_WBC'=>1,
                 'BEGIN'=>wbc()->sanitize->get('BEGIN'),
@@ -358,7 +358,13 @@ class Category {
                         )
                     )
             )
-        );        
+        );
+
+        if(strpos($url,'?')!==false) {
+            return $url."&".$external_url;
+        } else {
+            return $url.'?'.$external_url;
+        }
     }
 
     public function eo_wbc_id_2_slug($id){

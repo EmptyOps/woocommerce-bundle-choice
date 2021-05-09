@@ -82,7 +82,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 		
 		foreach ($form as $form_key => $form_value) {
 			
-			if(!empty($form_value[$key])) {	
+			if(!empty($form_value[$key]) and ( empty($this->check_show_on_admin) xor (!empty($form_value[$key][2]) and !empty($form_value[$key][2]['show_on_admin']) ) ) ) {	
 
 				$control_element = array();
 				$excep_controls = array();

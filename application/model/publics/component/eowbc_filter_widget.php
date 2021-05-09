@@ -74,7 +74,11 @@ class EOWBC_Filter_Widget {
 			foreach ($item as $kitm => $vitm) {
 				if( array_key_exists($kitm, $field_to_old_fields) && !empty($field_to_old_fields[$kitm]) ) {
 					$filter[$key][$field_to_old_fields[$kitm]] = $vitm;
-				}
+				}				
+			}
+
+			if(empty($item['filter_template'])) {
+				$filter[$key]['filter_template'] = 'default';
 			}
 		}
 
@@ -1157,7 +1161,16 @@ class EOWBC_Filter_Widget {
 									"id"=>"max_".$filter['slug'],
 									"class"=>"text_slider_".$filter['slug'],
 									"value"=>$filter['max_value']['name'],
-								));
+									));
+
+		if(empty($item['filter_template'])) {
+			if($__prefix==='d'){
+				$item['filter_template'] = 'fc1';
+			} else {
+				$item['filter_template'] = 'sc1';
+			}
+		}
+
 		if($desktop):
 
 			if(($item['filter_template']=='theme'/* and $this->_category==wbc()->options->get_option('configuration','second_slug')) or ($this->first_theme=='theme' and $this->_category==wbc()->options->get_option('configuration','first_slug')*/)) {
@@ -2513,6 +2526,15 @@ class EOWBC_Filter_Widget {
 			/*if(empty($item[$prefix.'_fconfig_add_enabled'])){
 				continue;
 			}*/
+			
+			if(empty($item['filter_template'])) {
+				if($prefix==='d'){
+					$filter[$key]['filter_template'] = 'fc1';
+				} else {
+					$filter[$key]['filter_template'] = 'sc1';
+				}
+			}
+
 			foreach ($item as $kitm => $vitm) {
 
 				if( array_key_exists($kitm, $field_to_old_fields) && !empty($field_to_old_fields[$kitm]) ) {
@@ -2520,7 +2542,6 @@ class EOWBC_Filter_Widget {
 				}
 			}
 		}
-
 
 		foreach ($filter as $key => $item) {
 

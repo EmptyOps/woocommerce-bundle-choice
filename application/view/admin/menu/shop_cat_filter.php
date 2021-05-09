@@ -58,7 +58,7 @@ if(!empty($attributes) and is_array($attributes)){
 	jQuery(window).load(function() {
 		$ = jQuery;
 		
-		_childs = JSON.parse('<?php echo json_encode($_childs); ?>');
+		_childs = JSON.parse('<?php echo str_replace('"','\"',str_replace("'","\'",json_encode($_childs))); ?>');
 		jQuery(".ui.dropdown:has(#d_fconfig_filter)").dropdown({
 			onChange:function() {
 				let filter_field = $(this).dropdown('get value');
