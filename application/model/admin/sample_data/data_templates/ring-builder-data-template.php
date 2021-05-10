@@ -115,6 +115,26 @@ class Ring_Builder_Data_Template extends Pair_Builder_Data_Template {
                         'ribbon_color'=>'#8245dd'
                     ),
                     array(
+                        'label' => 'Shape',
+                        'terms' => array('Round','Princess','Emerald','Asscher','Marquise','Oval','Radiant','Pear','Heart','Cushion'),
+                        'terms_meta'=>array(
+                                        $_img_url.'round.png',
+                                        $_img_url.'princess.png',
+                                        $_img_url.'emerald.png',
+                                        $_img_url.'asscher.png',
+                                        $_img_url.'marquise.png',
+                                        $_img_url.'oval.png',
+                                        $_img_url.'rediant.png',
+                                        $_img_url.'pear.png',
+                                        $_img_url.'heart.png',
+                                        $_img_url.'cushion.png'
+                                    ),
+                        'description' => 'Shape of the Ring and Diamond',
+                        'slug' => 'shape',
+                        'type'=>'dropdown_image',
+                        'ribbon_color'=>'#8245dd'
+                    ),
+                    array(
                         'label' => 'Ring Style',
                         'terms' => array('Halo','Pave','Solitaire','Trilogy'),
                         'terms_meta'=>array(
