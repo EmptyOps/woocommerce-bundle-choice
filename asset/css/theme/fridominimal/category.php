@@ -59,6 +59,15 @@
 	.eo_wbc_filter_icon.column.ui.image{
 	overflow-wrap: normal !important;
 	}
+	.eo-wbc-container>.ui.steps>div>div {
+	    
+	    display: grid !important;
+	    grid-template-columns: auto auto auto !important;
+	}
+
+	.eo-wbc-container.container:not(.filters) .ui.steps .step .column:first-child {    
+	    margin-right: 5px !important;
+	}
 </style>
 
 <?php

@@ -40,6 +40,15 @@
 	.top-bar .close {
 		top: 10px !important;
 	}
+	.eo-wbc-container>.ui.steps>div>div {
+	    
+	    display: grid !important;
+	    grid-template-columns: auto auto auto !important;
+	}
+
+	.eo-wbc-container.container:not(.filters) .ui.steps .step .column:first-child {    
+	    margin-right: 5px !important;
+	}
 </style>
 <?php endif; ?>
 <style type="text/css">
@@ -57,6 +66,15 @@ add_action('wp_footer',function(){
 			.eo-wbc-container.container .ui.steps .step{
 				padding-left: 2.5em !important;
 				padding-bottom: 2.5em !important;
+			}
+			.eo-wbc-container>.ui.steps>div>div {
+	    
+			    display: grid !important;
+			    grid-template-columns: auto auto auto !important;
+			}
+
+			.eo-wbc-container.container:not(.filters) .ui.steps .step .column:first-child {    
+			    margin-right: 5px !important;
 			}	
 		</style>
 	<?php
