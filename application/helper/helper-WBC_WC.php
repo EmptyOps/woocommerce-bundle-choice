@@ -260,6 +260,34 @@ class WBC_WC {
         }
     } 
 
+    public function get_taxonomy_by_slug($slug){
+        if(!empty($slug)){
+            
+            $attributes = wc_get_attribute_taxonomies();
+
+            if(!empty($attributes)){
+                foreach ($attributes as $attribute) {
+                    
+                    if(wc_attribute_taxonomy_name($attribute->attribute_name)==$slug){
+
+                        $data                    = $attribute;
+                        $attr               = new stdClass();
+                        $attr->id           = (int) $data->attribute_id;
+                        $attr->name         = $data->attribute_label;
+                        $attr->slug         = wc_attribute_taxonomy_name( $data->attribute_name );
+                        $attr->type         = $data->attribute_type;
+                        $attr->order_by     = $data->attribute_orderby;
+                        $attr->has_archives = (bool) $data->attribute_public;
+                        return $attr;
+                    }                    
+                }
+                return false;   
+            } else {
+                return false;
+            }       
+        }
+    }
+
     public function get_currency_symbol() {
         return get_woocommerce_currency_symbol();
     }

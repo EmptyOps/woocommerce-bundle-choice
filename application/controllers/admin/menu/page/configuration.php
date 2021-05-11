@@ -49,7 +49,9 @@ if ( ! class_exists( 'Configuration' ) ) {
 			}
 
 			$bonus_features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','bonus_features',serialize(array())));
-			
+
+			$sample_data = array();
+			$sample_data = do_action('eowbc_additional_sample_data',$sample_data);
 
 			$form_definition = 	
 					array(
@@ -103,7 +105,10 @@ if ( ! class_exists( 'Configuration' ) ) {
 												'class'=>array('fluid', 'medium'),
 												'size_class'=>array('sixteen','wide'),
 												'inline'=>false,
-											),		
+											),
+											
+											
+
 											/*'config_save_automation'=>array(
 												'label'=>'Save',
 												'type'=>'button',				
@@ -333,6 +338,11 @@ if ( ! class_exists( 'Configuration' ) ) {
 									)
 							),						
 					);
+			
+			if(!empty($sample_data)){
+
+				$form_definition['config_automation']['form'] = array_merge($form_definition['config_automation']['form'],$sample_data);
+			}
 					
 			$features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())));
 					
