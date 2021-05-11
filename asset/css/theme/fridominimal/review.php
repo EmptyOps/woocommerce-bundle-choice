@@ -35,6 +35,11 @@
 	.top-bar .close {
 		top: 10px !important;
 	}
+
+	.ui.steps .step .description {
+		font-weight: 400 !important;
+    	font-size: .82857143em !important;
+	}
 </style>
 
 <?php

@@ -68,6 +68,11 @@
 	.eo-wbc-container.container:not(.filters) .ui.steps .step .column:first-child {    
 	    margin-right: 5px !important;
 	}
+
+	.ui.steps .step .description {
+		font-weight: 400 !important;
+    	font-size: .82857143em !important;
+	}
 </style>
 
 <?php
