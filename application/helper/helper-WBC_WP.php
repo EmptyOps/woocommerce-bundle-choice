@@ -216,6 +216,13 @@ class WBC_WP {
         }
     }
 
-    
-
+    public function wishlist_header( $echo = true ) {
+        if(empty($echo)){
+            ob_start();
+        }
+        echo do_shortcode('[ti_wishlist_products_counter]');
+        if(empty($echo)){
+            return ob_get_clean();
+        }
+    }
 }

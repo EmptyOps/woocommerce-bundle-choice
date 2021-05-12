@@ -1184,7 +1184,7 @@ class EOWBC_Filter_Widget {
 			} else {
 				wbc()->load->template('publics/filters/text_slider_desktop', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,'prefix'=>$prefix,'postfix'=>$postfix,'tab_set'=>$tab_set,'help'=>$help,'filter_ui'=>$this)); 
 			}			
-		elseif(apply_filters('eowbc_load_them_filters','__return_false')):
+		elseif(apply_filters('eowbc_load_them_filters',false)):
 			
 			wbc()->load->template('publics/filters/theme_text_slider_mobile', array("filter"=>$filter,"reset"=>$reset,'advance'=>$advance,'prefix'=>$prefix,'postfix'=>$postfix,'tab_set'=>$tab_set,'help'=>$help,'filter_ui'=>$this));
 		
@@ -1341,7 +1341,7 @@ class EOWBC_Filter_Widget {
 			} else {
 				wbc()->load->template('publics/filters/step_slider_desktop', array("width_class"=>$this->get_width_class($width),"reset"=>$reset,"filter"=>$filter,"items_slug"=>$items_slug,"items_name"=>$items_name,'reset_label'=>$reset_label,'tab_set'=>$tab_set,'help'=>$help,'label_max_size'=>$label_max_size,'filter_ui'=>$this)); 
 			}			
-		elseif(apply_filters('eowbc_load_them_filters','__return_false')):
+		elseif(apply_filters('eowbc_load_them_filters',false)):
 			
 			wbc()->load->template('publics/filters/theme_step_slider_mobile', array("width_class"=>$this->get_width_class($width),"reset"=>$reset,"filter"=>$filter,"items_slug"=>$items_slug,"items_name"=>$items_name,'advance'=>$advance,'reset_label'=>$reset_label,'tab_set'=>$tab_set,'help'=>$help,'label_max_size'=>$label_max_size,'filter_ui'=>$this)); 		
 		elseif(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_1'):			
@@ -1399,7 +1399,7 @@ class EOWBC_Filter_Widget {
 			} else {
 				wbc()->load->template('publics/filters/checkbox_desktop', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,'tab_set'=>$tab_set,'help'=>$help,'filter_ui'=>$this));
 			}						
-		elseif(apply_filters('eowbc_load_them_filters','__return_false')):
+		elseif(apply_filters('eowbc_load_them_filters',false)):
 			
 			wbc()->load->template('publics/filters/theme_checkbox_mobile',array("filter"=>$filter,"reset"=>$reset,'advance'=>$advance,'tab_set'=>$tab_set,'help'=>$help,'filter_ui'=>$this)); 
 
@@ -1593,7 +1593,7 @@ class EOWBC_Filter_Widget {
 			}  else {
 				wbc()->load->template('publics/filters/slider_price_desktop'.$alternet_slider, array("width_class"=>$this->get_width_class($width),"min"=>$min,"max"=>$max,"reset"=>$reset,'seprator'=>$seprator,'prefix'=>$curr_prefix,'postfix'=>$curr_postfix,'help'=>$help,'filter_ui'=>$this)); 
 			}
-		elseif(apply_filters('eowbc_load_them_filters','__return_false')):
+		elseif(apply_filters('eowbc_load_them_filters',false)):
 			
 			wbc()->load->template('publics/filters/theme_slider_price_mobile', array("min"=>$min,"max"=>$max,"reset"=>$reset,'advance'=>$advance,'seprator'=>$seprator,'prefix'=>$curr_prefix,'postfix'=>$curr_postfix,'help'=>$help,'filter_ui'=>$this));
 
@@ -1607,7 +1607,7 @@ class EOWBC_Filter_Widget {
 	}
 	
 	public function load_mobile($general_filters, $advance_filters) {
-		if(apply_filters('eowbc_load_them_filters','__return_false')) {
+		if(apply_filters('eowbc_load_them_filters',false)) {
 			
 			wbc()->load->template('publics/filters/theme_mobile_grid',array('general_filters'=>$general_filters,'advance_filters'=>$advance_filters,'filter_ui'=>$this));
 
@@ -2118,7 +2118,7 @@ class EOWBC_Filter_Widget {
 				wbc()->load->template('publics/filters/icon_desktop', array("width_class"=>$this->get_width_class($width),"term"=>$term,"title"=>$title,"list"=>$list,"icon_css"=>$icon_css,"reset"=>$reset,"input"=>$input,"type"=>$type,"non_edit"=>$non_edit,'hidden'=>$hidden,'is_single_select'=>$is_single_select,'tab_set'=>$tab_set,'help'=>$help,'filter_ui'=>$this));
 			}
 
-		elseif(apply_filters('eowbc_load_them_filters','__return_false')):
+		elseif(apply_filters('eowbc_load_them_filters',false)):
 			wbc()->load->template('publics/filters/theme_icon_mobile', array("term"=>$term,"title"=>$title,"list"=>$list,"icon_css"=>$icon_css,"reset"=>$reset,"input"=>$input,"type"=>$type,"non_edit"=>$non_edit,'hidden'=>$hidden,'is_single_select'=>$is_single_select,'tab_set'=>$tab_set,'help'=>$help,'filter_ui'=>$this));
 		elseif(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_1'):			
 			wbc()->load->template('publics/filters/icon_mobile_alternate', array("term"=>$term,"title"=>$title,"list"=>$list,"icon_css"=>$icon_css,"reset"=>$reset,"input"=>$input,"type"=>$type,"non_edit"=>$non_edit,'advance'=>$advance,'hidden'=>$hidden,'is_single_select'=>$is_single_select,'tab_set'=>$tab_set,'help'=>$help,'filter_ui'=>$this)); 
