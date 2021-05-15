@@ -204,6 +204,8 @@ class Filter
 		        print_r($query);
 		        die();*/
 
+		        $query->query_vars['suppress_filters'] = true;
+
 		        return apply_filters('filter_widget_ajax_post_query',$query);
 		    });		   
 		}

@@ -225,4 +225,12 @@ class WBC_WP {
             return ob_get_clean();
         }
     }
+
+    public function registation_template_html(){
+        ob_start();
+        wc_get_template('myaccount/form-login.php',array('registration_only'=>true));
+        $registration_only = ob_get_clean();
+
+        return $registration_only;
+    }
 }

@@ -30,7 +30,13 @@ class Preview {
         {
             $this->eo_wbc_add_this_to_cart();
             //Redirect to cart page.       
-            exit(wp_redirect(wbc()->wc->eo_wbc_get_cart_url()));
+            $cart_url = wbc()->wc->eo_wbc_get_cart_url();
+
+            if(strpos($cart_url,'?')!==false){
+                $cart_url = explode('?', $cart_url)[0];
+            }
+            
+            exit(wp_redirect($cart_url));
         }     
         
         $this->eo_wbc_render();    //Page Review cart data
@@ -315,7 +321,7 @@ class Preview {
                 wbc()->load->model('publics/component/eowbc_breadcrumb');
                 $content= \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_add_breadcrumb(wbc()->sanitize->get('STEP'),wbc()->sanitize->get('BEGIN')).'<br/>';
                 
-                $content.='<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><div class="ui special cards centered" style="margin: auto !important;
+                $content.='<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><div class="ui special cards centered" style="margin: auto !important;direction: ltr;
     min-width: fit-content !important;max-width: fit-content !important;">'.
                     '<div class="card">'.
                         '<div class="blurring dimmable image">'.

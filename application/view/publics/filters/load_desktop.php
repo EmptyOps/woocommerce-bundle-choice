@@ -15,6 +15,14 @@ if(
 			<?php $filter_ui->load_collapsable_desktop($general_filters, $advance_filters); ?>
 		</div>
 	</div>
+	<style type="text/css">
+		@media(max-width:1440px){
+			.ui.dropdown>.left.menu {
+				left: auto!important;
+				right: -152px!important;
+			}		
+		}
+	</style>
 	<?php
 } else {
 
