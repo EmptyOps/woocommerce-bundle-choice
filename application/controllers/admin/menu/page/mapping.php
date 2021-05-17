@@ -308,6 +308,15 @@ if ( ! class_exists( 'Mapping' ) ) {
 								'inline'=>true,
 							),
 
+							'groupable'=>array(
+								'label'=>'Is Groupable?',
+								'type'=>'checkbox',
+								'value'=>array(''),
+								'sanitize'=>'sanitize_text_field',
+								
+								'options'=>array('1'=>eowbc_lang('Is Groupable?')),								
+							),						
+
 							'eo_wbc_add_discount'=>array(
 								'no_label' => true,
 								'type'=>'text',

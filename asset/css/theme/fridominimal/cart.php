@@ -1,3 +1,5 @@
+
+<?php if(is_cart()): ?>
 <style type="text/css">
 	.woocommerce-cart-form .product-thumbnail img:first-child{
 		display: unset !important;
@@ -21,3 +23,5 @@
 <?php
 	add_filter('eowbc_filter_sidebars_widgets','__return_false');
 ?>
+
+<?php endif; ?>

@@ -36,7 +36,8 @@ class Cart {
    
     public function eo_wbc_remove(){
     
-        $eo_wbc_maps=wbc()->session->get('EO_WBC_MAPS',array());   
+        $eo_wbc_maps=wbc()->session->get('EO_WBC_MAPS',array());
+
         if(isset($eo_wbc_maps[wbc()->sanitize->get('EO_WBC_REMOVE')])) {
             unset($eo_wbc_maps[wbc()->sanitize->get('EO_WBC_REMOVE')]);
             wbc()->session->set('EO_WBC_MAPS',$eo_wbc_maps);
@@ -64,7 +65,7 @@ class Cart {
                     );
                 }
             }   
-        }                
+        }  
     } 
     
     public function eo_wbc_empty_cart(){
@@ -218,8 +219,11 @@ class Cart {
     
     public function eo_wbc_render()
     {   
-        wbc()->theme->load('css','cart');
-        wbc()->theme->load('js','cart');
+        if(is_cart()){
+            wbc()->theme->load('css','cart');
+            wbc()->theme->load('js','cart');
+        }
+
         if(apply_filters('eowbc_filter_sidebars_widgets',true)){
             add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
                 return array( false );
@@ -232,17 +236,24 @@ class Cart {
         if(empty($maps)) return;        
 
         //run the cart service.
+        
         $this->eo_wbc_cart_service();
 
         // if our is empty even after cart service return now.
         $maps=wbc()->session->get('EO_WBC_MAPS');        
-        if(empty($maps)) return;
+        if(empty($maps)) return true;
 
         $this->eo_wbc_add_css();
 
-        $maps = $this->process_cart($maps);        
+        $maps = $this->process_cart($maps);
         
         $cart_actual_content = false;
+
+        add_action( 'woocommerce_before_mini_cart',function() use (&$cart_actual_content,&$maps){
+            $cart_actual_content = WC()->cart->get_cart_contents();
+            WC()->cart->set_cart_contents($maps);
+        });
+
         add_action('woocommerce_before_cart',function() use (&$cart_actual_content,&$maps){
             $cart_actual_content = WC()->cart->get_cart_contents();
             WC()->cart->set_cart_contents($maps);
@@ -281,6 +292,18 @@ class Cart {
         
 
         add_filter( 'woocommerce_cart_item_quantity',function($product_quantity_first, $cart_item_key, $cart_item){
+
+            if(!empty($cart_item['datas']) and !empty($cart_item['datas']['SECOND'])) {
+
+                return $cart_item['quantity'].'<br/>'.$cart_item['quantities']['SECOND'];
+            } else {
+                //return $cart_item['quantity'];
+                return $product_quantity_first;
+            }
+
+        },10,3);
+
+        add_filter( 'woocommerce_widget_cart_item_quantity',function($product_quantity_first, $cart_item, $cart_item_key ){
 
             if(!empty($cart_item['datas']) and !empty($cart_item['datas']['SECOND'])) {
 
@@ -371,79 +394,10 @@ class Cart {
         add_action('woocommerce_before_cart_totals',function() use(&$cart_actual_content){
             WC()->cart->set_cart_contents($cart_actual_content);           
         });
-        //WC()->cart->set_cart_contents($cart_actual_content);
 
-        /*foreach ($maps as $index=>$map){
-            
-            $this->eo_wbc_cart_ui($index,$map);               
-        }*/
-        //Removing Cart Table data.....
-        //Adding Custome Cart Table Data.......        
-        /*add_action('woocommerce_before_cart_contents',function(){
-            $this->eo_wbc_cart_service();
-            ?>
-                <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
-                <style>
-                    tr.cart_item
-                    {
-                        display: none;
-                    }
-                    
-                    [name="update_cart"]
-                    {
-                        display: none !important;   
-                    }
-
-                    .shop_table td{
-                        font-size: medium;                         
-                        vertical-align: middle !important;
-                    }
-
-
-
-                    .woocommerce table.shop_table th
-                    {                        
-                        padding-right: 2em !important;                        
-                    }
-                    
-                    #eo_wbc_extra_btn a{
-                        margin-bottom: 2em;
-                    }
-                    #eo_wbc_extra_btn::after{
-                        content: '\A';
-                        white-space: pre;                         
-                    }
-                    [data-title="Price"],[data-title="Quantity"],[data-title="Cost"]{
-                        text-align: right !important;
-                    }
-                    @media screen and (max-width: 720px) {
-                        td[data-title="Thumbnail"] {
-                            display: flex !important;
-                        }
-                        span.column::before{
-                            content: '\A\A';
-                            white-space: pre;
-                        }
-                        #eo_wbc_extra_btn{
-                            display: grid;
-                        }                                             
-                    }                    
-                </style>
-            <?php 
-            $maps=wbc()->session->get('EO_WBC_MAPS');
-            foreach ($maps as $index=>$map){
-                
-                $this->eo_wbc_cart_ui($index,$map);               
-            }
-        });*/
-            
-            // Adding Buttons
-            // 1 Continue Shopping
-            // 2 Empty Cart
-          /*  add_action('woocommerce_after_cart_table',function(){
-                echo '<div style="float:right;" id="eo_wbc_extra_btn"><a href="'.get_bloginfo('url').'" class="checkout-button button alt wc-backword">Continue Shopping</a><br style="display:none;" />
-              <a href="./?EO_WBC=1&empty_cart=1" class="checkout-button button alt wc-backword">Empty Cart</a></div><div style="clear:both;"></div>';
-            });*/
+        add_action('woocommerce_widget_shopping_cart_total',function() use(&$cart_actual_content){
+            WC()->cart->set_cart_contents($cart_actual_content);           
+        });
     }
 
     public function eo_wbc_cart_ui($index,$cart)

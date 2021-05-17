@@ -19,7 +19,7 @@
 
 		<input type="hidden" name="_category_query" id="eo_wbc_cat_query" 
 			value="<?php echo (!empty(wbc()->sanitize->get('CAT_LINK'))?','.wbc()->sanitize->get('CAT_LINK'):'')?>" />
-
+		
 		<input type="hidden" name="_category" value="<?php echo implode(',',$thisObj->___category) ?>"/>
 		
 		<input type="hidden" name="cat_filter__two_tabs" value=""/>

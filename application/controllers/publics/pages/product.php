@@ -468,6 +468,10 @@ class Product {
         $terms=wp_get_post_terms($post->ID,get_taxonomies());        
         $maps = apply_filters('eowbc_product_maps',wp_cache_get( 'cache_maps', 'eo_wbc'));
 
+        /*echo "<pre>";
+        
+        print_r($maps);*/
+
         $is_cleanup = apply_filters( 'eowbc_product_maps_is_reset_cleanup',1);    
 
         if($is_cleanup and !empty($maps) and is_array($maps)) {
@@ -610,7 +614,9 @@ class Product {
             $product_in = array_map(function($product_in){ return substr($product_in,4); },$product_in);
 
             $link.='products_in='.implode(',',$product_in).'&';
-        }             
+        }           
+
+        //die();  
         return $link;
     }
 

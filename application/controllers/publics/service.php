@@ -26,7 +26,26 @@ class Service {
 	}
 
     public function discount_service() {
+        
+        //\eo\wbc\controllers\publics\pages\Cart::instance()->eo_wbc_render();                
 
+        add_action('init',function(){
+            if(!is_cart() and !is_admin()) {                
+
+                if(isset($_GET['EO_WBC_REMOVE'])){
+                    \eo\wbc\controllers\publics\pages\Cart::instance()->eo_wbc_remove();
+                    $_get = $_GET;
+                    unset($_get['EO_WBC_REMOVE']);
+                    unset($_get['EO_WBC']);
+
+                    $url = site_url(http_build_query($_get));
+                    header('Location: '.$url);
+                    die();
+                }
+                \eo\wbc\controllers\publics\pages\Cart::instance()->eo_wbc_render();                
+            }    
+        },10);
+        
 
         add_action('woocommerce_checkout_update_order_review',array(\eo\wbc\controllers\publics\pages\Checkout::instance(),'update_order_review'));
 
