@@ -236,16 +236,17 @@ class Cart {
         if(empty($maps)) return;        
 
         //run the cart service.
-        
-        $this->eo_wbc_cart_service();
+        if(is_cart()){
+            $this->eo_wbc_cart_service();
+        }
 
         // if our is empty even after cart service return now.
         $maps=wbc()->session->get('EO_WBC_MAPS');        
         if(empty($maps)) return true;
 
         $this->eo_wbc_add_css();
-
-        $maps = $this->process_cart($maps);
+        
+        $maps = $this->process_cart($maps);        
         
         $cart_actual_content = false;
 
