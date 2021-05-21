@@ -29,7 +29,11 @@ class Service {
         
         //\eo\wbc\controllers\publics\pages\Cart::instance()->eo_wbc_render();                
 
-        add_action('init',function(){
+
+        add_action('wp_loaded',function(){
+            
+            //remove_all_filters('woocommerce_add_to_cart_fragments');
+
             if(!is_cart() and !is_admin()) {                
 
                 if(isset($_GET['EO_WBC_REMOVE'])){

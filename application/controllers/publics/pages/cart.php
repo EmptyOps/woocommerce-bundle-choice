@@ -46,6 +46,15 @@ class Cart {
             WC()->cart->empty_cart();           
             foreach ($eo_wbc_maps as $index=>$set)
             {               
+
+                if(empty($set["FIRST"]['variation'])){
+                    $set["FIRST"]['variation'] = NULL;
+                }
+
+                if(empty($set["SECOND"]['variation'])){
+                    $set["SECOND"]['variation'] = NULL;
+                }
+
                 if($set["FIRST"]){          
                     wc()->cart->add_to_cart(
                         $set["FIRST"][0],
@@ -92,6 +101,13 @@ class Cart {
     {       
         //wbc()->common->pr(wc()->cart->cart_contents);
         $eo_wbc_maps=wbc()->session->get('EO_WBC_MAPS',array());        
+
+        /*echo "<pre>";
+        print_r(wc()->cart->cart_contents);
+        print_r(wc()->cart);
+        echo "</pre>";
+        die();*/
+
         foreach (wc()->cart->cart_contents as $cart_key=>$cart_item)
         {
             $product_count=0;
@@ -147,6 +163,11 @@ class Cart {
             }
             else
             {
+                /*echo "<pre>";
+                print_r($cart_item);
+                echo "</pre>";
+                die();*/
+
                 $eo_wbc_maps[]=array(
                     "FIRST"=>array(
                         (string)$cart_item["product_id"],
@@ -157,11 +178,24 @@ class Cart {
                 );
             }
         }
+
+       /* if(isset($_GET['test'])){
+
+            echo "<pre>";
+
+
+            //print_r(wc()->cart);
+            print_r(WC()->cart->get_cart_contents());
+
+            print_r($eo_wbc_maps);
+            die();
+        }*/
         wbc()->session->set('EO_WBC_MAPS',apply_filters('eowbc_cart_render_maps',$eo_wbc_maps));
 
     }
 
     public function process_cart($maps){
+
         if(empty($maps)) return array();
         foreach ($maps as $key => $map) {
             
@@ -233,12 +267,11 @@ class Cart {
         
         // if our car is empty then return.
         $maps=wbc()->session->get('EO_WBC_MAPS');
-        if(empty($maps)) return;        
+        if(empty($maps)) return;
 
-        //run the cart service.
-        if(is_cart()){
-            $this->eo_wbc_cart_service();
-        }
+        //run the cart service.        
+        $this->eo_wbc_cart_service();
+        //return true;
 
         // if our is empty even after cart service return now.
         $maps=wbc()->session->get('EO_WBC_MAPS');        
@@ -247,18 +280,25 @@ class Cart {
         $this->eo_wbc_add_css();
         
         $maps = $this->process_cart($maps);        
-        
+
         $cart_actual_content = false;
 
-        add_action( 'woocommerce_before_mini_cart',function() use (&$cart_actual_content,&$maps){
-            $cart_actual_content = WC()->cart->get_cart_contents();
-            WC()->cart->set_cart_contents($maps);
-        });
-
-        add_action('woocommerce_before_cart',function() use (&$cart_actual_content,&$maps){
-            $cart_actual_content = WC()->cart->get_cart_contents();
-            WC()->cart->set_cart_contents($maps);
-        });
+        
+         if(is_cart()){
+            add_action('woocommerce_before_cart',function() use (&$cart_actual_content,&$maps){
+                $cart_actual_content = WC()->cart->get_cart_contents();
+                WC()->cart->set_cart_contents($maps);
+            });
+        } else {
+            add_action( 'woocommerce_before_mini_cart',function() use (&$cart_actual_content,&$maps){
+                /*echo "<pre>";
+                print_r($cart_actual_content);
+                print_r($maps);
+                die();*/
+                $cart_actual_content = WC()->cart->get_cart_contents();
+                WC()->cart->set_cart_contents($maps);
+            });
+        }
         
         add_filter( 'woocommerce_cart_item_permalink',function($link,$cart_item, $cart_item_key){
             return false;
@@ -391,14 +431,16 @@ class Cart {
 
         },10,2);
 
+         if(is_cart()){
+            add_action('woocommerce_before_cart_totals',function() use(&$cart_actual_content){
+                WC()->cart->set_cart_contents($cart_actual_content);           
+            });
+        } else {
 
-        add_action('woocommerce_before_cart_totals',function() use(&$cart_actual_content){
-            WC()->cart->set_cart_contents($cart_actual_content);           
-        });
-
-        add_action('woocommerce_widget_shopping_cart_total',function() use(&$cart_actual_content){
-            WC()->cart->set_cart_contents($cart_actual_content);           
-        });
+            add_action('woocommerce_after_mini_cart',function() use(&$cart_actual_content){
+                WC()->cart->set_cart_contents($cart_actual_content);           
+            });
+        }
     }
 
     public function eo_wbc_cart_ui($index,$cart)

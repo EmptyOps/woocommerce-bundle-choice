@@ -232,6 +232,10 @@ class Preview {
             //wbc()->common->pr($cart);
             if(is_array($cart) OR is_object($cart)){
 
+                if(empty($cart['quantity'])){
+                    $cart['quantity'] = 1;
+                }
+
                 //if product belongs to first target;
                 $eo_wbc_sets=wbc()->session->get('EO_WBC_SETS',array());
                 $variation_data = array();

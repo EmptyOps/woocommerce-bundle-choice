@@ -103,6 +103,10 @@ class Category {
             
             if(is_array($cart) OR is_object($cart)) {
                 
+                if(empty($cart['quantity'])){
+                    $cart['quantity'] = 1;
+                }
+                
                 $variation_data = array();
                 foreach($cart as $cart_key=>$cart_value){
                     if(substr($cart_key, 0, strlen('attribute_')) === 'attribute_'){
