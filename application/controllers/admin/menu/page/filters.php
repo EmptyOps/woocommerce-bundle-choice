@@ -24,7 +24,7 @@ if ( ! class_exists( 'Filters' ) ) {
 	        $map_base = get_categories(array(
 	            'hierarchical' => 1,
 	            'show_option_none' => '',
-	            'hide_empty' => 1,
+	            'hide_empty' => false,
 	            'parent' => (get_term_by('slug',$slug,'product_cat')?get_term_by('slug',$slug,'product_cat')->term_id:''),
 	            'taxonomy' => 'product_cat'
 	        ));
