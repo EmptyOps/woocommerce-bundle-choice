@@ -253,6 +253,8 @@ class Cart {
     
     public function eo_wbc_render()
     {   
+
+
         if(is_cart()){
             wbc()->theme->load('css','cart');
             wbc()->theme->load('js','cart');
@@ -293,6 +295,7 @@ class Cart {
             add_action( 'woocommerce_before_mini_cart',function() use (&$cart_actual_content,&$maps){
                 /*echo "<pre>";
                 print_r($cart_actual_content);
+                var_dump('lol');
                 print_r($maps);
                 die();*/
                 $cart_actual_content = WC()->cart->get_cart_contents();
@@ -431,6 +434,10 @@ class Cart {
 
         },10,2);
 
+
+
+
+
          if(is_cart()){
             add_action('woocommerce_before_cart_totals',function() use(&$cart_actual_content){
                 WC()->cart->set_cart_contents($cart_actual_content);           
@@ -438,6 +445,12 @@ class Cart {
         } else {
 
             add_action('woocommerce_after_mini_cart',function() use(&$cart_actual_content){
+                /*echo "<pre>";
+                print_r($cart_actual_content);
+                print_r($maps);
+                
+                die();*/
+
                 WC()->cart->set_cart_contents($cart_actual_content);           
             });
         }
