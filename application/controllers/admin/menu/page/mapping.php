@@ -60,8 +60,8 @@ if ( ! class_exists( 'Mapping' ) ) {
 			
 			wbc()->load->model('admin/form-builder');
 
-			$dropdown_opts_first_cat = apply_filters('eowbc_admin_form_mapping_first_cat',\eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_attributes( \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_prime_category(wbc()->options->get_option('configuration','first_slug'),' -- ') ));
-			$dropdown_opts_second_cat = apply_filters('eowbc_admin_form_mapping_second_cat',\eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_attributes( \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_prime_category(wbc()->options->get_option('configuration','second_slug'),' -- ') ));
+			$dropdown_opts_first_cat = apply_filters('eowbc_admin_form_mapping_first_cat',\eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_attributes( \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_prime_category(''/*wbc()->options->get_option('configuration','first_slug')*/,' -- ') ));
+			$dropdown_opts_second_cat = apply_filters('eowbc_admin_form_mapping_second_cat',\eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_attributes( \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_prime_category(/*wbc()->options->get_option('configuration','second_slug')*/'',' -- ') ));
 
 			//map list
 			$table = array();
@@ -158,7 +158,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 								'type'=>'select',
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
-								'options'=>array(''=>eowbc_lang('Bulk Actions'), 'delete'=>'Delete'),
+								'options'=>array(''=>eowbc_lang('Bulk Actions'), 'delete'=>'Delete','group'=>'Group'),
 								'class'=>array('fluid'),
 								'size_class'=>array('two','wide'),
 								'next_inline'=>true,
@@ -308,14 +308,14 @@ if ( ! class_exists( 'Mapping' ) ) {
 								'inline'=>true,
 							),
 
-							'groupable'=>array(
+							/*'groupable'=>array(
 								'label'=>'Is Groupable?',
 								'type'=>'checkbox',
 								'value'=>array(''),
 								'sanitize'=>'sanitize_text_field',
 								
-								'options'=>array('1'=>eowbc_lang('Is Groupable?')),								
-							),						
+								'options'=>array('groupable'=>eowbc_lang('Is Groupable?')),								
+							),*/						
 
 							'eo_wbc_add_discount'=>array(
 								'no_label' => true,

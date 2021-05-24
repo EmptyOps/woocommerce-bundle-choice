@@ -8,19 +8,24 @@
 		
 	<!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
 	<!--WooCommerce Product Bundle Choice filter form-->
+
 	<form method="GET" name="eo_wbc_filter" id="eo_wbc_filter" style="clear: both;">
 
 		<input type="hidden" name="eo_wbc_filter" value="1" />	
 		<input type="hidden" name="paged" value="1" />	
 		<input type="hidden" name="last_paged" value="1" />
+		
 		<input type="hidden" name="action" value="eo_wbc_filter"/>
 		
-		<input type="hidden" name="_current_category" value="<?php echo (!empty(wbc()->sanitize->get('CAT_LINK'))?','.wbc()->sanitize->get('CAT_LINK'):$current_category); ?>" />
+		
+
+		<input type="hidden" name="_category" value="<?php echo implode(',',$thisObj->___category) ?>"/>
+
+		<input type="hidden" name="_current_category" value="<?php echo /*$thisObj->_category*/(!empty(wbc()->sanitize->_get('CAT_LINK'))?','.wbc()->sanitize->_get('CAT_LINK'):$current_category); ?>" />
 
 		<input type="hidden" name="_category_query" id="eo_wbc_cat_query" 
-			value="<?php echo (!empty(wbc()->sanitize->get('CAT_LINK'))?','.wbc()->sanitize->get('CAT_LINK'):'')?>" />
-		
-		<input type="hidden" name="_category" value="<?php echo implode(',',$thisObj->___category) ?>"/>
+			value="<?php echo (!empty(wbc()->sanitize->_get('CAT_LINK'))?','.wbc()->sanitize->_get('CAT_LINK'):'')?>" />
+
 		
 		<input type="hidden" name="cat_filter__two_tabs" value=""/>
 

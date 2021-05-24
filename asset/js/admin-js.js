@@ -403,9 +403,27 @@ function eowbc_ready($){
                 eowbc_toast_common( "warning", 'Please select record(s) to proceed');
                 complete_callback();
             }
-        } else {
+        } else if( jQuery( "#" + jQuery(this).data("bulk_table_id") + "_bulk" ).val() == "" ) {
             eowbc_toast_common( "warning", "Please select bulk action to apply" );
             complete_callback();
+        } else {
+            var cbs = [];
+
+            //find table and loop through rows and prepare checked checkboxes
+            jQuery( "#" + jQuery(this).data("bulk_table_id") + " > tbody  > tr" ).each(function(i, row) {
+                var cb = jQuery(row).find('input[type=checkbox]')[0];
+                if( jQuery(cb).is(':checked') ) {
+                    cbs.push( cb );    
+                }
+            });
+            
+            if(cbs.length>0){
+                eowbc_do_table_action(cbs, jQuery(this).data("tab_key"), complete_callback, jQuery( "#" + jQuery(this).data("bulk_table_id") + "_bulk" ).val());       
+            }
+            else {
+                eowbc_toast_common( "warning", 'Please select record(s) to proceed');
+                complete_callback();
+            }
         }
     });
 
@@ -674,6 +692,56 @@ function eowbc_do_deactivate( cbs, saved_tab_key, complete_callback ) {
                     position: 'bottom right',
                     message: (typeof(resjson["msg"]) != undefined && resjson["msg"] != "" ? resjson["msg"] : `Saved!`)
                 });
+            } else {
+                $('body').toast({
+                    class: (typeof(resjson["type"]) != undefined ? resjson["type"] : 'error'),
+                    position: 'bottom right',
+                    message: (typeof(resjson["msg"]) != undefined && resjson["msg"] != "" ? resjson["msg"] : `Failed! Please check Logs page for for more details.`)
+                });
+            }                
+        },
+        error:function(xhr,status,error){
+            /*console.log(xhr);*/
+            $('body').toast({
+                class:'error',
+                position: 'bottom right',
+                message: `Network Error!`
+            });
+        },
+        complete:function(xhr,status){
+            /*console.log(xhr);*/
+
+            complete_callback();
+        }
+    });
+
+}
+
+
+function eowbc_do_table_action( cbs, saved_tab_key, complete_callback,$_action_ ) {
+    ids = [];
+    for(var i=0; i<cbs.length; i++) {
+        ids.push( jQuery(cbs[i]).val() );
+    }
+
+    var form = jQuery(cbs[0]).closest("form");    
+    jQuery.ajax({
+        url:eowbc_object.admin_url,
+        type: 'POST',
+        data: { _wpnonce: jQuery( jQuery(form).find('input[name="_wpnonce"]')[0] ).val(),_wp_http_referer: jQuery( jQuery(form).find('input[name="_wp_http_referer"]')[0] ).val(), action: jQuery( jQuery(form).find('input[name="action"]')[0] ).val(), resolver: jQuery( jQuery(form).find('input[name="resolver"]')[0] ).val(),resolver_path: jQuery( jQuery(form).find('input[name="resolver_path"]')[0] ).val(), saved_tab_key: saved_tab_key, ids: ids, sub_action: $_action_ },
+        beforeSend:function(xhr){
+
+        },
+        success:function(result,status,xhr){
+            var resjson = window.document.splugins.parseJSON(result); 
+            if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
+                
+                $('body').toast({
+                    class:'success',
+                    position: 'bottom right',
+                    message: (typeof(resjson["msg"]) != undefined && resjson["msg"] != "" ? resjson["msg"] : `Saved!`)
+                });
+
             } else {
                 $('body').toast({
                     class: (typeof(resjson["type"]) != undefined ? resjson["type"] : 'error'),

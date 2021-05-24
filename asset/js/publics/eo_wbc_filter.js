@@ -105,7 +105,7 @@ function eo_wbc_filter_render_html(data) {
 			jQuery("form#eo_wbc_filter [name='paged']").val('1');
 			jQuery("form#eo_wbc_filter [name='last_paged']").val('1');
 
-			jQuery("form#eo_wbc_filter [name='_category']").val(jQuery("form#eo_wbc_filter [name='_current_category']"));
+			jQuery("form#eo_wbc_filter [name='_category']").val(jQuery("form#eo_wbc_filter [name='_current_category']").val());
 			jQuery("form#eo_wbc_filter [name='_attribute']").val("");
 		}
 

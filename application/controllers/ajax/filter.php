@@ -54,6 +54,7 @@ class Filter
     }
 
     public function lookup($return_query = false,$sql_join = '',$order_sql = ''){
+    	
     	$pids = array();
 
     	$table_columns = unserialize(wbc()->options->get_option('lookup_manager','table_columns',serialize(array())));
@@ -109,7 +110,7 @@ class Filter
         		foreach ($_category_query as $_category_field) {
         			$_category_field = array_filter(explode('+',$_category_field));
 					if(!empty($_category_field)) {
-						$_category_query_list = array_merge($_category_query_list,$_category_field);
+						$_category_query_list[] = $_category_field;
 					}
 				}
         	}
@@ -179,23 +180,30 @@ class Filter
         	}
         	$category_fields = "(" .implode(' OR ',$field_query) .")"; 
         }
-
+        
         if(empty($_category_query_list)){
         	$_category_query_list = 1;
         } else {
         	$field_query = array();
         	foreach ($_category_query_list as $field) {
-        		$field_query[]="`${field}` != 0";
+        		if(is_array($field) and !empty($field)){
+        			$field_values = array();
+        			foreach ($field as $field_value) {
+        				$field_values[] = "`${field_value}` != 0";
+        			}
+        			$field_query[]="(" .implode(' AND ',$field_values) .")";
+        		}else{
+        			$field_query[]="`${field}` != 0";	
+        		}
         	}
-        	if(stripos(wbc()->sanitize->request('_category_query'),'+')!==false){
+
+        	if(wbc()->options->get_option('mapping_prod_mapping_pref','prod_mapping_pref_category','and')==='and'){
         		$_category_query_list = "(" .implode(' AND ',$field_query) .")"; 
         	} else {
         		$_category_query_list = "(" .implode(' OR ',$field_query) .")"; 
         	}
         }
-
-        
-
+       
         if(empty($attribute_fields)){
         	$attribute_fields = 1;
         } else {
@@ -245,13 +253,7 @@ class Filter
         	}
         }
 		
-		/*$pids = array_unique($pids);
-		echo "<pre>";
-		print_r($pids);
-
-		print_r($wpdb->get_results("SELECT * FROM `{$wpdb->wc_product_meta_lookup}` WHERE product_id in(51922,51941)"));
-
-		die();*/
+		$pids = array_unique($pids);		
 		return $pids;
     }
 
@@ -261,7 +263,7 @@ class Filter
 	//////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public function filter() {			
-		
+				
 		if(!empty(wbc()->sanitize->get('eo_wbc_filter'))) {
 			
 		    add_filter('pre_get_posts',function($query ) {		    		
@@ -269,6 +271,7 @@ class Filter
 		        if( $query->is_main_query() ) {
 
 		        	if( version_compare( constant('WC_VERSION'), '3.6' ) >=0) {
+
 		        		$ids = $this->lookup();		        		
 
 		        		if(!empty($ids)) {
@@ -294,28 +297,47 @@ class Filter
 				            $old_tax_query_taxonomy = array();
 
 			        		$tax_query=array('relation' => 'AND');
+			        		
+			        		$category_query =array();
+
 			                if(!empty(wbc()->sanitize->get('_category'))) {
+			                	
 
 			                    foreach( array_unique(array_filter(explode(',', wbc()->sanitize->get('_category')))) as $_category){
 			                    	
-			                        if(isset($_GET['cat_filter_'.$_category]) && (!empty(wbc()->sanitize->get('cat_filter_'.$_category))) ) {                           
-			                            $tax_query[]=array(
+			                        if(isset($_GET['cat_filter_'.$_category]) && (!empty(wbc()->sanitize->get('cat_filter_'.$_category))) ) {
+
+			                        	$category_query[]=array(
 			                                'taxonomy' => 'product_cat',
 			                                'field' => 'slug',
 			                                'terms' =>array_filter(explode(',',wbc()->sanitize->get('cat_filter_'.$_category))),
 			                                'compare'=>'EXISTS IN'
 			                            );                    
 			                        }
-			                    }  
-			                }
-			                elseif(!empty(wbc()->sanitize->get('_current_category'))) {
+			                    }
 
-			                    $tax_query[]=array(
-			                        'taxonomy' => 'product_cat',
-			                        'field' => 'slug',
-			                        'terms' => explode(',',wbc()->sanitize->get('_current_category')),
-			                        'compare'=>'EXISTS IN'
-			                    );
+			                    if(!empty($category_query)) {
+			                    	$category_query[] = array('relation' => (wbc()->options->get_option('mapping_prod_mapping_pref','prod_mapping_pref_category','and')==='and')?'AND':'OR' );
+			                    	$tax_query[] = $category_query;
+			                    }			                    
+			                }
+			                
+			                if(!empty(wbc()->sanitize->get('_current_category')) and empty($category_query)) {
+			                	
+			                	$category_query = array('relation' => (wbc()->options->get_option('mapping_prod_mapping_pref','prod_mapping_pref_category','and')==='and')?'AND':'OR' );
+			                	foreach ( array_filter(explode(',',wbc()->sanitize->get('_current_category'))) as $category_query_token) {
+			                		
+		                			$category_query[]=array(
+		                				'relation' => 'AND',
+			                			array(
+					                        'taxonomy' => 'product_cat',
+					                        'field' => 'slug',
+					                        'terms' => explode('+',$category_query_token),
+					                        'compare'=>'EXISTS IN'
+					                    )
+			                		);			                		
+			                	}
+			                	$tax_query[]= $category_query;		                    
 			                }
 
 			                if(!empty(wbc()->sanitize->get('_current_category')) and !empty($tax_query) ) {
@@ -400,8 +422,10 @@ class Filter
 				            	$query->add('tax_query',$tax_query);
 				            }
 				            
+
+
 				            //if(is_array($old_tax_query))
-				            /*echo "<pre>";			            
+							/*	echo "<pre>";			            
 				            print_r($query->get('tax_query'));
 				            unset($_GET['EO_WBC']);
 			                echo "</pre>";*/

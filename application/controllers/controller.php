@@ -6,7 +6,7 @@ defined( 'ABSPATH' ) || exit;
 
 class Controller {
 
-	protected static $_instance = null;
+	private static $_instance = null;
 
 	public static function instance() {
 		if ( ! isset( self::$_instance ) ) {
@@ -15,10 +15,6 @@ class Controller {
 
 		return self::$_instance;
 	}
-
-	protected function __construct() {
-		
-	}	
 
 	protected function _get($name) {
 

@@ -356,14 +356,14 @@ class Product {
                     $category_link=$this->eo_wbc_category_link();
 
                     $url=get_bloginfo('url').($remove_index?'':'/index.php')."/{$category_base}/".$category_link.
-                    wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>2,'FIRST'=>$post->ID,'SECOND'=>wbc()->sanitize->get('SECOND'),'CART'=>wbc()->sanitize->get('CART'),'ATT_LINK'=>implode(' ',$this->att_link),'CAT_LINK'=>substr($category_link,0,strpos($category_link,'/'))));
+                    wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>2,'FIRST'=>$post->ID,'SECOND'=>wbc()->sanitize->get('SECOND'),'CART'=>wbc()->sanitize->get('CART'),'ATT_LINK'=>implode(' ',$this->att_link) ));
 
                 // } elseif($category==get_option('eo_wbc_second_slug')) {
                 } elseif($category==wbc()->options->get_option('configuration','second_slug')) {
 
                     $category_link=$this->eo_wbc_category_link();
                     $url=get_bloginfo('url').($remove_index?'':'/index.php')."/{$category_base}/".$category_link
-                    .wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>2,'FIRST'=>wbc()->sanitize->get('FIRST'),'SECOND'=>$post->ID,'CART'=>wbc()->sanitize->get('CART'),'ATT_LINK'=>implode(' ',$this->att_link),'CAT_LINK'=>substr($category_link,0,strpos($category_link,'/'))));
+                    .wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>2,'FIRST'=>wbc()->sanitize->get('FIRST'),'SECOND'=>$post->ID,'CART'=>wbc()->sanitize->get('CART'),'ATT_LINK'=>implode(' ',$this->att_link) ));
                 } 
                 if($return_link) {
                     return $url;
@@ -428,10 +428,24 @@ class Product {
             {
                 $url='';
             }            
-        }        
+        }               
         return $url;
     }
-    
+        
+    public function get_group_id4map($groups,$term_key,$terms) {        
+        $option_key = '';
+        foreach ($groups as $gkey => $gvalue) {
+            if(array_search($term_key,$gvalue)!==false){
+                $option_key = $gkey;
+            }
+
+            if( count(array_intersect($gvalue,array_keys($terms))) === count($terms) ) {
+                return $gkey;
+            }
+        }
+        return $option_key;
+    }
+
     /**
      * @return string
      *  string of mapped category to current category item
@@ -464,13 +478,19 @@ class Product {
                 }
             }
         }
-                
+            
         $terms=wp_get_post_terms($post->ID,get_taxonomies());        
         $maps = apply_filters('eowbc_product_maps',wp_cache_get( 'cache_maps', 'eo_wbc'));
-
-        /*echo "<pre>";
-        
-        print_r($maps);*/
+        $groups = wbc()->options->get_option_group('eowbc_mapping_group',"a:0:{}");
+        $group_keys = array();
+        if(!empty($groups)) {
+            $groups = unserialize(wbc()->options->get_option_group('eowbc_mapping_group'));
+            if(is_array($groups) and !empty($groups)) {
+                foreach ($groups as $gkey => $gvalue) {
+                    $group_keys = array_merge($group_keys,$gvalue);
+                }
+            }
+        }
 
         $is_cleanup = apply_filters( 'eowbc_product_maps_is_reset_cleanup',1);    
 
@@ -539,62 +559,141 @@ class Product {
 
         $category=array();//array to hold category slugs
         $taxonomy=array();//array to hold taxonomy slugs
+
+        $gcategory=array();//array to hold category slugs
+        $gtaxonomy=array();//array to hold taxonomy slugs
+
         if(!is_wp_error($terms) and !empty($terms) and is_array($terms)) {
-            array_walk($terms,function($term) use(&$category,&$taxonomy){
-                $_term_ = null;
-                if(is_array($term)) {
-                    foreach ($term as $_term_) {
-                        $_term_ = get_term_by('term_taxonomy_id', $_term_);
+
+            // simple run
+            foreach ($terms as $term_key => $term_value) {
+                
+                if(in_array($term_key,$group_keys)===false ) {
+
+                    $_term_ = null;
+                    if(is_array($term_value)) {
+                        foreach ($term_value as $_term_id) {
+                            $_term_ = get_term_by('term_taxonomy_id', $_term_id);
+                            if(!is_wp_error($_term_) and !empty($_term_)) {
+                                $_taxonomy_ = $_term_->taxonomy;                            
+                                if($_taxonomy_==='product_cat') {
+
+                                    $category[]= $_term_->slug;
+
+                                } elseif( substr($_taxonomy_,0,3) =='pa_' ) {
+
+                                    $taxonomy[substr($_term_->taxonomy,3)][] = $_term_->slug;
+                                }
+                            }
+                        }
+                    } else {
+                        $_term_ = get_term_by('term_taxonomy_id', $_term_id);
+
                         if(!is_wp_error($_term_) and !empty($_term_)) {
-                            $_taxonomy_ = $_term_->taxonomy;                            
+                            $_taxonomy_ = $_term_->taxonomy;
                             if($_taxonomy_==='product_cat') {
 
                                 $category[]= $_term_->slug;
 
                             } elseif( substr($_taxonomy_,0,3) =='pa_' ) {
-
+                                
                                 $taxonomy[substr($_term_->taxonomy,3)][] = $_term_->slug;
                             }
                         }
                     }
-                } else {
-                    $_term_ = get_term_by('term_taxonomy_id', $_term_);
 
-                    if(!is_wp_error($_term_) and !empty($_term_)) {
-                        $_taxonomy_ = $_term_->taxonomy;                        
-                        if($_taxonomy_==='product_cat') {
+                }
+            }
 
-                            $category[]= $_term_->slug;
+            // group run
+            foreach ($terms as $term_key => $term_value) {
+                
+                if(in_array($term_key,$group_keys)!==false) {
 
-                        } elseif( substr($_taxonomy_,0,3) =='pa_' ) {
-                            
-                            $taxonomy[substr($_term_->taxonomy,3)][] = $_term_->slug;
+                    $_term_ = null;
+                    if(is_array($term_value)) {
+                        foreach ($term_value as $_term_id) {
+                            $_term_ = get_term_by('term_taxonomy_id', $_term_id);
+                            if(!is_wp_error($_term_) and !empty($_term_)) {
+                                $_taxonomy_ = $_term_->taxonomy;                            
+                                if($_taxonomy_==='product_cat') {
+
+                                    $group_keys_id  = $this->get_group_id4map($groups,$term_key,$terms);
+                                    $gcategory[$group_keys_id][]= $_term_->slug;
+
+                                } elseif( substr($_taxonomy_,0,3) =='pa_' ) {
+
+                                    $gtaxonomy[substr($_term_->taxonomy,3)][] = $_term_->slug;
+                                }
+                            }
+                        }
+                    } else {
+                        $_term_ = get_term_by('term_taxonomy_id', $_term_id);
+
+                        if(!is_wp_error($_term_) and !empty($_term_)) {
+                            $_taxonomy_ = $_term_->taxonomy;
+                            if($_taxonomy_==='product_cat') {
+
+                                /*$gcategory[$term_key][]= $_term_->slug;*/
+                                $group_keys_id  = $this->get_group_id4map($groups,$term_key);
+                                $gcategory[$group_keys_id][]= $_term_->slug;
+
+                            } elseif( substr($_taxonomy_,0,3) =='pa_' ) {
+                                
+                                $gtaxonomy[substr($_term_->taxonomy,3)][] = $_term_->slug;
+                            }
                         }
                     }
+
                 }
-            });
+            }
         }
         
         $link='';        
         //if category maping is available then make url filter to category
         //else add default category to the link.
+       
+        // $link.=($this->eo_wbc_get_category()==get_option('eo_wbc_first_slug'))
+        $link.=($this->eo_wbc_get_category()==wbc()->options->get_option('configuration','first_slug'))
+                    ?
+                // get_option('eo_wbc_second_slug')
+                wbc()->options->get_option('configuration','second_slug')
+                    :
+                // get_option('eo_wbc_first_slug');                    
+                wbc()->options->get_option('configuration','first_slug');
+        
+
+        $CAT_LINK = '';
         if(is_array($category) && !empty($category)) {
             // $link=implode( (get_option('eo_wbc_map_cat_pref','and')==='and'?'+':',') , $category );                  
-            $link=implode( (wbc()->options->get_option('mapping_prod_mapping_pref','prod_mapping_pref_category','and')==='and'?'+':',') , $category );                  
+            $CAT_LINK=implode( (wbc()->options->get_option('mapping_prod_mapping_pref','prod_mapping_pref_category','and')==='and'?'+':',') , array_unique($category) );                  
         }
-        else
-        {
-            // $link.=($this->eo_wbc_get_category()==get_option('eo_wbc_first_slug'))
-            $link.=($this->eo_wbc_get_category()==wbc()->options->get_option('configuration','first_slug'))
-                        ?
-                    // get_option('eo_wbc_second_slug')
-                    wbc()->options->get_option('configuration','second_slug')
-                        :
-                    // get_option('eo_wbc_first_slug');                    
-                    wbc()->options->get_option('configuration','first_slug');                    
+            
+        if(is_array($gcategory) && !empty($gcategory)) {
+            // $link=implode( (get_option('eo_wbc_map_cat_pref','and')==='and'?'+':',') , $category );                  
+            
+            foreach ($gcategory as $gcategory_key=>$gcategory_value) {
+                if(is_array($gcategory_value)) {
+                    $gcategory[$gcategory_key] = implode( '+' , array_unique($gcategory_value) );
+                }
+            }
+                        
+            if(!empty($CAT_LINK)) {
+                $CAT_LINK.=(wbc()->options->get_option('mapping_prod_mapping_pref','prod_mapping_pref_category','and')==='and'?'+':',').implode((wbc()->options->get_option('mapping_prod_mapping_pref','prod_mapping_pref_category','and')==='and'?'+':','), array_unique($gcategory) );
+            } else {
+                $CAT_LINK.=implode( (wbc()->options->get_option('mapping_prod_mapping_pref','prod_mapping_pref_category','and')==='and'?'+':',') , array_unique($gcategory) );                  
+            }
         }
 
         $link.="/?";           
+        
+        if(!empty($CAT_LINK)) {
+            $link.='CAT_LINK='.urlencode($CAT_LINK).'&';
+        }
+
+        /*var_dump($link);
+        die();*/
+
         if(is_array($taxonomy) && !empty($taxonomy)){            
             
             $filter_query=array();
@@ -609,20 +708,35 @@ class Product {
             $link.=http_build_query($filter_query).'&';            
         }    
 
+        if(is_array($gtaxonomy) && !empty($gtaxonomy)){            
+            
+            $filter_query=array();
+            // $attr_pref=get_option('eo_wbc_map_attr_pref','or');
+            $attr_pref=wbc()->options->get_option('mapping_prod_mapping_pref','prod_mapping_pref_attribute','or');
+            $glue=($attr_pref === 'or' ? ',' : '+' );           
+
+            foreach ($gtaxonomy as  $_tax => $_tems) {
+                $filter_query["query_type_{$_tax}"] = $attr_pref;
+                $filter_query["filter_{$_tax}"] = implode($glue,array_unique(array_filter($_tems)));
+            }
+            $link.=http_build_query($filter_query).'&';            
+        }    
+
         if(!empty($product_in) && is_array($product_in)) {
             $product_in = array_filter($product_in);
             $product_in = array_map(function($product_in){ return substr($product_in,4); },$product_in);
 
             $link.='products_in='.implode(',',$product_in).'&';
-        }           
-
-        //die();  
+        }        
+        
         return $link;
     }
 
     /**
     *
     */
+    //public function is_valid_group_member($)
+
     public function eo_wbc_sub_categories($slug) {        
         
         $map_base = get_categories(array(
