@@ -18,317 +18,23 @@ class Product {
     }
 
     public function init() {
+        //die();
+        $this->att_link =array();
 
-        ////////////
-        //// Add to cart if its preview page from the second step
-        if( !empty(wbc()->sanitize->get('FIRST')) and !empty(wbc()->sanitize->get('SECOND')) and !empty(wbc()->sanitize->get('EO_WBC')) and !empty(wbc()->sanitize->get('WBC_PREVIEW')) ) {                
-            //if data available at _GET then add to out custom cart
-            if(!empty(wbc()->sanitize->get('eo_wbc_add_to_cart_preview'))) {                
-                $this->add2cart();
-                $cart_url = wbc()->wc->eo_wbc_get_cart_url();
-                if(strpos($cart_url,'?')!==false){
-                    $cart_url = explode('?', $cart_url)[0];
-                }
-                
-                exit(wp_redirect($cart_url));
-            }
-
-            if(!empty(wbc()->sanitize->get('CART'))) {
-                $this->add2session_cart();
-            }
-
-            //Add session set data to temporary iff the set data is not empty.
-            if(wbc()->session->get('EO_WBC_SETS',FALSE)) {
-                
-                $_session_set=wbc()->session->get('EO_WBC_SETS',FALSE);
-                if(!empty($_session_set['FIRST']) && !empty($_session_set['SECOND']) ){
-                    wbc()->session->set('TMP_EO_WBC_SETS',wbc()->session->get('EO_WBC_SETS'));
-                }
-            }
-
-            $this->render_preview();
-        } else {
-
-            //die();
-            $this->att_link =array();
-
-            if (isset($_GET['EO_WBC'])) {
-                $this->eo_wbc_render(); //Render View and Routings
-                $this->eo_wbc_config();            //Disable 'Add to Cart Button' and Set 'Sold Individually'
-                $this->eo_wbc_add_breadcrumb();    //Add Breadcrumb
-                            
-            // } elseif (get_option('eo_wbc_pair_status',false)=='1') {
-            } elseif (wbc()->options->get_option('configuration','enable_make_pair',false)=='1') {
-                $this->eo_wbc_make_pair();
-            }  
-            do_action('wbc_pre_product_page');        
-            $this->specification_view();
-            $this->product_options_view();        
-            do_action('wbc_post_product_page');         
-        }
-    }
-
-    public function render_preview() {
-        // modification hooks to the product page ..
-        $set=wbc()->session->get('TMP_EO_WBC_SETS',FALSE);            
-
-
-
-        
-
-        $first = false;
-        $second = false;
-
-        if(!empty($set)) {
-            $first=wbc()->wc->eo_wbc_get_product((int)($set['FIRST'][2]?$set['FIRST'][2]:$set['FIRST'][0]));
-            $first_parent=wbc()->wc->eo_wbc_get_product((int)($set['FIRST'][0]));
-
-            $second=wbc()->wc->eo_wbc_get_product((int)($set['SECOND'][2]?$set['SECOND'][2]:$set['SECOND'][0]));
-            $second_parent=wbc()->wc->eo_wbc_get_product((int)($set['SECOND'][0]));
-        }
-
-        //price
-        add_filter( 'the_title',function($title, $id) use($first,$second,$first_parent,$second_parent){                        
-            if(!empty($second) and !empty($first) and ($id === $second_parent->get_id()) ) {
-
-                return $first->get_title()." <br/> ".$second->get_title();
-            }
-            return $title;
-        },10,2);
-
-        add_filter('woocommerce_get_price_html',function($price,$product) use($first,$second,$first_parent,$second_parent){
-            
-            //var_dump($product->get_id(), $second->get_id(),$first->get_id());
-
-            if(!empty($second) and !empty($first) and ($product->get_id() === $second_parent->get_id()) ) {
-                return wc_price( $first->get_price() + $second->get_price() );
-            } 
-            return $price;
-        },10,2);
-        //remove options
-        add_filter('woocommerce_product_single_add_to_cart_text', function() {
-            return __('Add This To Cart','woo-bundle-choice');
-        });
-
-        add_filter('woocommerce_get_script_data',function($data,$handle){
-            if($handle == 'wc-add-to-cart-variation'){
-                return false;
-            }
-            return $data;
-        },10,2);
-        
-        add_action('wp_head',function(){
-            wp_dequeue_script('wc-add-to-cart-variation');
-            ?>
-            <style type="text/css">table.variations{display: none;}</style>
-            <script type="text/javascript">
-                jQuery(".single_add_to_cart_button.button.alt").ready(function(){
-
-                    jQuery('form.cart').prepend("<input type='hidden' name='eo_wbc_add_to_cart_preview' value='1'/>");
-                    
-                    jQuery(".single_add_to_cart_button.button.alt:not(.disabled):eq(0)").replaceWith(
-                         "<button href='#' id='eo_wbc_add_to_cart_preview' class='single_add_to_cart_button button alt'><?php _e('Add This To Cart','woo-bundle-choice') ?></button>"
-                    );
-
-                    jQuery(document).on('click','#eo_wbc_add_to_cart_preview',function() {
-                        <?php
-                            global $post;
-                            $url = get_permalink($post->ID);    
-
-                            $get_link = wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>3,'FIRST'=>wbc()->sanitize->get('FIRST'),'SECOND'=>wbc()->sanitize->get('SECOND'),'eo_wbc_add_to_cart_preview'=>'1','WBC_PREVIEW'=>'1'));
-
-                            if(strpos($url,'?') ===false ) {
-                                $url = $url."?".$get_link;
-                            } else {
-                                $url = $url."&".$get_link;
-                            }
-                        ?>
-                        window.location.href = '<?php echo $url; ?>';
-                    });
-
-                    jQuery("table.variations").remove();
-                });
-            </script>
-            <?php
-        });
-
-        
-        $this->eo_wbc_add_breadcrumb();
-    }
-
-    public function add2cart() {
-
-        // Final add to cart call.
-
-        $eo_wbc_sets=wbc()->session->get('EO_WBC_SETS',NULL);
-        $eo_wbc_maps=wbc()->session->get('EO_WBC_MAPS',array());
-        
-        if(!is_null($eo_wbc_sets)){
-            
-            foreach (wc()->cart->cart_contents as $cart_key=>$cart_item)
-            {
-                $product_count=0;
-                $single_count=0;
-                //loop through each of maps and count total product and single product count.
-                foreach ($eo_wbc_maps as $map)
-                {
-                    if($map["FIRST"][0]==$cart_item["product_id"] && $map["FIRST"][2]==$cart_item["variation_id"]){
-                        $product_count+=$map["FIRST"][1];
-                        if (!$map["SECOND"]){
-                            $single_count+=$map["FIRST"][1];
-                        }
-                    }
-                    if ($map["SECOND"] && $map["SECOND"][0]==$cart_item["product_id"] && $map["SECOND"][2]==$cart_item["variation_id"])
-                    {
-                        $product_count+=$map["SECOND"][1];
-                    }
-                }
-                //if no such product available in maps then just add as single to the list.
-                if ($product_count>0)
-                {
-                    //if total product count is lesser then cart's total amount.
-                    if ($product_count<$cart_item["quantity"])
-                    {
-                        //if the item is single only.
-                        if($single_count>0)
-                        {
-                            foreach ($eo_wbc_maps as $map_key=>$map)
-                            {
-                                if($map["FIRST"][0]==$cart_item["product_id"] && $map["FIRST"][2]==$cart_item["variation_id"])
-                                {
-                                    unset($eo_wbc_maps[$map_key]);
-                                }                                
-                            }
-                            $eo_wbc_maps[]=array(
-                                    "FIRST"=>array(
-                                        (string)$cart_item["product_id"],
-                                        (string)($cart_item["quantity"]-$product_count)+$single_count,
-                                        (string)$cart_item["variation_id"]                                        
-                                        ),
-                                    "SECOND"=>FALSE
-                                );
-                        }
-                        else
-                        {
-                            $eo_wbc_maps[]=array(
-                                "FIRST"=>array(
-                                    (string)$cart_item["product_id"],
-                                    (string)($cart_item["quantity"]-$product_count),
-                                    (string)$cart_item["variation_id"]                                    
-                                ),
-                                "SECOND"=>FALSE
-                            );
-                        }
-                    }
-                }
-                else
-                {
-                    //No product available in maps so add as single to list.
-                    $eo_wbc_maps[]=array(
-                        "FIRST"=>array(
-                            (string)$cart_item["product_id"],
-                            (string)$cart_item["quantity"],
-                            (string)$cart_item["variation_id"]                            
-                        ),
-                        "SECOND"=>FALSE
-                    );
-                }
-            } 
-            //adding set to the woocommerce cart
-            $cart_details=wbc()->session->get('EO_WBC_SETS');
-           
-           
-            if(!empty($cart_details['FIRST']) && !empty($cart_details['SECOND'])){
-                $FIRT_CART_ID=wc()->cart->add_to_cart(
-                                $cart_details['FIRST'][0],
-                                $cart_details['FIRST'][1],
-                                $cart_details['FIRST'][2],(
-                                is_null($cart_details['FIRST'][2])?null:$cart_details['FIRST']['variation'])
-                            );                  
-                
-                if($FIRT_CART_ID)
-                {
-                    $SECOND_CART_ID=wc()->cart->add_to_cart(
-                                $cart_details['SECOND'][0],
-                                $cart_details['SECOND'][1],
-                                $cart_details['SECOND'][2],(
-                                is_null($cart_details['SECOND'][2])?null:$cart_details['SECOND']['variation'])
-                            );
-                    
-                    if($SECOND_CART_ID)
-                    {
-                        //All is good so we saved mapps to session.
-                        $eo_wbc_maps[]=wbc()->session->get('EO_WBC_SETS');                            
-                        wbc()->session->set('EO_WBC_MAPS',$eo_wbc_maps);
-                    }
-                    else
-                    {
-                        $FIRST_OB=(array)wc()->cart->get_cart_item($FIRT_CART_ID);
-                        if($FIRST_OB['quantity']==$cart_details['FIRST'][1])
-                        {
-                            wc()->cart->remove_cart_item($FIRT_CART_ID);
-                        }
-                        elseif($FIRST_OB['quantity']>$cart_details['FIRST'][1])
-                        {
-                            wc()->cart->set_quantity($FIRT_CART_ID,($FIRST_OB['quantity']-$cart_details['FIRST'][1]));
-                        }                   
-                    }
-                }            
-            }
-        }
-        else
-        {
-            wc_add_notice(__('Unexpected error has occured','woo-bundle-choice'),'error');
-            wc_print_notices();
-        } 
-    }
-
-    public function add2session_cart() {
-        $cart=base64_decode(wbc()->sanitize->get('CART'),TRUE);        
-        if (!empty($cart)){
-            
-            $cart=str_replace("\\",'',$cart);
-            $cart=(array)json_decode($cart);
-            //wbc()->common->pr($cart);
-            if(is_array($cart) OR is_object($cart)){
-
-                if(empty($cart['quantity'])){
-                    $cart['quantity'] = 1;
-                }
-
-                //if product belongs to first target;
-                $eo_wbc_sets=wbc()->session->get('EO_WBC_SETS',array());
-                $variation_data = array();
-                foreach($cart as $cart_key=>$cart_value){
-                    if(substr($cart_key, 0, strlen('attribute_')) === 'attribute_'){
-                        $variation_data[$cart_key]=$cart_value;
-                    }
-                }                
-                // if (get_option('eo_wbc_first_slug')==$cart['eo_wbc_target']) {
-                if (wbc()->options->get_option('configuration','first_slug')==$cart['eo_wbc_target']) {
-
-                    $eo_wbc_sets['FIRST']=array(
-                                        $cart['eo_wbc_product_id'],
-                                        $cart['quantity'],
-                                        (isset($cart['variation_id'])?$cart['variation_id']:NULL),
-                                        'variation'=>$variation_data,
-                                    );
-                }
-                //if product belongs to second target;
-                // elseif (get_option('eo_wbc_second_slug')==$cart['eo_wbc_target']) {
-                elseif (wbc()->options->get_option('configuration','second_slug')==$cart['eo_wbc_target']) {
-
-                     $eo_wbc_sets['SECOND']=array(
-                                        $cart['eo_wbc_product_id'],
-                                        $cart['quantity'],
-                                        (isset($cart['variation_id'])?$cart['variation_id']:NULL),
-                                        'variation'=>$variation_data,                          
-                                    );
-                }
-                wbc()->session->set('EO_WBC_SETS',$eo_wbc_sets);
-            }
-        }
-    }
+        if (isset($_GET['EO_WBC'])) {
+            $this->eo_wbc_render(); //Render View and Routings
+            $this->eo_wbc_config();            //Disable 'Add to Cart Button' and Set 'Sold Individually'
+            $this->eo_wbc_add_breadcrumb();    //Add Breadcrumb
+                        
+        // } elseif (get_option('eo_wbc_pair_status',false)=='1') {
+        } elseif (wbc()->options->get_option('configuration','enable_make_pair',false)=='1') {
+            $this->eo_wbc_make_pair();
+        }  
+        do_action('wbc_pre_product_page');        
+        $this->specification_view();
+        $this->product_options_view();        
+        do_action('wbc_post_product_page');         
+    }    
 
     public function specification_view() {
         $bonus_features = array_filter(unserialize(wbc()->options->get_option('setting_status_setting_status_setting','bonus_features',serialize(array()))));
@@ -730,7 +436,7 @@ class Product {
         
         elseif(wbc()->sanitize->get('STEP')==2) {   
             
-            /*$review_page_url = '';
+            $review_page_url = '';
 
             $review_page = get_page_by_path('eo-wbc-product-review');
             
@@ -759,32 +465,8 @@ class Product {
                 } else {
                     $url = $review_page_url.'&'.$url;
                 }                
-            }*/
-            /*$setting_page_url  = */
-                        
-            $preview_product_id = (empty($_GET['SECOND'])?$post->ID:$_GET['SECOND']);            
-            $setting_page_url = get_permalink($preview_product_id);
-
-            if(wbc()->sanitize->get('FIRST')==='' OR $category==wbc()->options->get_option('configuration','first_slug')) {
-
-                $url=wbc()->common->http_query(array('EO_WBC'=>1,'WBC_PREVIEW'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>3,'FIRST'=>$post->ID,'SECOND'=>wbc()->sanitize->get('SECOND')));
-
-            } elseif (wbc()->sanitize->get('SECOND')==='' OR $category==wbc()->options->get_option('configuration','second_slug')) {
-
-                $url=wbc()->common->http_query(array('EO_WBC'=>1,'WBC_PREVIEW'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>3,'FIRST'=>wbc()->sanitize->get('FIRST'),'SECOND'=>$post->ID));
-
-            } else {
-
-                $url='';
             }
 
-            if(!empty($url) and !empty($setting_page_url)) {
-                if(strpos($setting_page_url,'?')===false){
-                    $url = $setting_page_url.'?'.$url;
-                } else {
-                    $url = $setting_page_url.'&'.$url;
-                }                
-            }            
         }  
         
         return $url;
