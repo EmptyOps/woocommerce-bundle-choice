@@ -330,7 +330,7 @@ class Cart {
                 //var_dump("expression 2");
                 $cart_actual_content = WC()->cart->get_cart_contents();
                 WC()->cart->set_cart_contents($maps);
-            });
+            },100);
         }
         
         add_filter( 'woocommerce_cart_item_permalink',function($link,$cart_item, $cart_item_key){
