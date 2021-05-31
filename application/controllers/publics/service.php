@@ -38,11 +38,21 @@ class Service {
 
                 if(isset($_GET['EO_WBC_REMOVE'])){
                     \eo\wbc\controllers\publics\pages\Cart::instance()->eo_wbc_remove();
-                    $_get = $_GET;
-                    unset($_get['EO_WBC_REMOVE']);
-                    unset($_get['EO_WBC']);
+                    
+                    $url = home_url($_SERVER['REQUEST_URI']);
 
-                    $url = site_url(http_build_query($_get));
+                    $url = str_replace('&EO_WBC=1','',$url);
+                    $url = str_replace('EO_WBC=1','',$url);
+                    $url = str_replace('&EO_WBC_REMOVE=','',$url);
+                    $url = str_replace('EO_WBC_REMOVE=1','',$url);
+
+                    if(strpos($url,'?')===false){
+                        $url.=http_build_query($_get);
+                    } else {
+                        $url.='/?'.http_build_query($_get);
+                    }
+                    
+                    //header("Refresh:0; url=".$url);
                     header('Location: '.$url);
                     die();
                 }
