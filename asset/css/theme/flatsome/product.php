@@ -19,5 +19,12 @@
 		max-height: 2rem !important;
 	}
 }
-
+.cart #eo_wbc_add_to_cart {
+	margin-bottom: 0rem;
+}
+.image-tools.bottom.left .zoom-button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 </style>
