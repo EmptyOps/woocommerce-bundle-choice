@@ -28,7 +28,7 @@ if(
 
 	?>
 	<div id="help_modal" class="ui small modal"><i class="close icon" style="top: 0;right: 0;color: #000;" onclick='jQuery("#help_modal").modal("hide")'></i><div class="header"></div><div class="content"></div></div>
-	<div class="eo-wbc-container filters container ui form">
+	<div class="eo-wbc-container filters container ui form" style="direction: ltr;">
 		<div class="ui segments">
 			<div class="ui segment"><?php
 			?><div class="ui grid container align middle relaxed" style="margin-bottom: 0px;"><?php

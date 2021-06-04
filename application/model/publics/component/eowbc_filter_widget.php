@@ -1986,7 +1986,16 @@ class EOWBC_Filter_Widget {
 			$term_list = $filter['list'];
 		} else{
 			$term = get_term_by('id',$id,'product_cat');
-			$term_list = get_terms('product_cat', array('hide_empty' => 0, 'orderby' => 'menu_order', 'parent'=>$id));
+
+			global $sitepress;
+			/*remove_filter('terms_clauses', array($sitepress, 'terms_clauses'));*/
+			$term_list = get_terms('product_cat', array('hide_empty' => 0, 'orderby' => 'menu_order', 'parent'=>$id,'lang'=>''));
+			/*add_filter('terms_clauses', array($sitepress, 'terms_clauses'));*/
+			if(isset($_GET['test'])){
+				echo "<pre>";
+				print_r($term_list);
+				die();
+			}
 			
 			if(!empty($item[$__prefix."_fconfig_elements"])){
 				$filter_in_list = explode(',',$item[$__prefix."_fconfig_elements"]);
