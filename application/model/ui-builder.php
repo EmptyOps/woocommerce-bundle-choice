@@ -160,11 +160,15 @@ class UI_Builder implements Builder {
 	}
 
 	public function elementor_form($object,$form) {
-		
+
 		if(!empty($form) and is_array($form)) {
 			foreach ($form as $form_key => $form_value) {
-				
+				if(!empty($form_value['appearence_controls']) and !empty($form_value['appearence_controls'][2]) and !empty($form_value['appearence_controls'][2]['id'])) {
+					$form_key = $form_value['appearence_controls'][2]['id'];
+				}
+
 				if( !empty($form_value['type']) and !empty($form_value['appearence_controls']) ) {
+					
 
 					switch ($form_value['type']) {
 						case 'p':
@@ -172,32 +176,73 @@ class UI_Builder implements Builder {
 						case 'div':
 						case 'span':
 						case 'button':
+						case 'header':
+						case 'a':
 							
 							$object->add_control(
 								$form_key,
 								[
 									'label' => $form_value['appearence_controls'][0],
-									'type' => \Elementor\Controls_Manager::TEXT,
+									'type' => \Elementor\Controls_Manager::WYSIWYG,
 									'default' => '',
 									'placeholder' => '',
 								]
 							);
 
+							if($form_value['type']=='a') {
+								$object->add_control(
+									$form_key.'_link',
+									[
+										'label' => $form_value['appearence_controls'][0].' Link',
+										'type' => \Elementor\Controls_Manager::URL,										
+										'placeholder' => '',
+										'show_external' => true,
+										'default' => [
+											'url' => '',
+											'is_external' => true,
+											'nofollow' => true,
+										],
+									]
+								);
+							}
+
 							break;
 						
 						case 'img':
 						case 'image':
+						case 'video':
 
 							$object->add_control(
-								$form_key,
+								$form_key.'_path',
 								[
 									'label' => $form_value['appearence_controls'][0],
 									'type' => \Elementor\Controls_Manager::MEDIA,
-									'default' => [],
+									'default' => [
+										'url' => \Elementor\Utils::get_placeholder_image_src(),
+									],
 								]
 							);
 
-							break;
+/*							$object->add_control(
+								$form_key.'_dimension',
+								[
+									'label' => $form_value['appearence_controls'][0],
+									'type' => \Elementor\Controls_Manager::IMAGE_DIMENSIONS,
+									'default' => [],
+								]
+							);*/
+							$object->add_group_control(
+								\Elementor\Group_Control_Image_Size::get_type(),
+								[
+									'name' => $form_key.'_dimension'/*'thumbnail'*/, // // Usage: `{name}_size` and `{name}_custom_dimension`, in this case `thumbnail_size` and `thumbnail_custom_dimension`.
+									'exclude' => [ 'custom' ],
+									'include' => [],
+									'default' => 'large',
+								]
+							);
+
+							
+							break;						
 					}				
 
 				}
@@ -216,30 +261,82 @@ class UI_Builder implements Builder {
 		if(!empty($form) and is_array($form)) {
 			foreach ($form as $form_key => $form_value) {
 				
+				$safe_form_key = $form_key;
+				if(!empty($form_value['appearence_controls']) and !empty($form_value['appearence_controls'][2]) and !empty($form_value['appearence_controls'][2]['id'])) {
+					$form_key = $form_value['appearence_controls'][2]['id'];
+				}
+
 				if( !empty($form_value['type']) and !empty($form_value['appearence_controls']) ) {
 
 					switch ($form_value['type']) {
-						case 'p':						
+						case 'p':
+						case 'text':
 						case 'div':
 						case 'span':
 						case 'button':
+						case 'header':
+						case 'a':
+							
 							$element_text = ( $settings[$form_key] );
+							//echo $element_text;
 							if(!empty($element_text)){
 								if(isset($form_value['preHTML'])){
-									$form[$form_key]['preHTML'] = $element_text;
+									$form[$safe_form_key]['preHTML'] = $element_text;
 								} elseif(isset($form_value['postHTML'])) {
-									$form[$form_key]['postHTML'] = $element_text;
+									$form[$safe_form_key]['postHTML'] = $element_text;
 								}
+							}	
+
+							if($form_value['type']=='a') {
+
+								$target = $settings[$form_key.'_link']['is_external'] ? ' target="_blank"' : '';
+								$nofollow = $settings[$form_key.'_link']['nofollow'] ? ' rel="nofollow"' : '';
+								$url = $settings[$form_key.'_link']['url'];
+								$custom_attribute = $settings[$form_key.'_link']['custom_attributes'];
+								
+								$attr = str_replace('|',' ',$custom_attribute);
+								$attr.=$target.$nofollow;
+
+								if(isset($form_value['href'])){
+									$form[$safe_form_key]['href'] = $url;
+									if(empty($form[$safe_form_key]['attr'])) {
+										$form[$safe_form_key]['attr'] = array($attr);
+									} elseif(is_array($form[$safe_form_key]['attr'])) {
+										$form[$safe_form_key]['attr'][] = $attr;
+									} else {
+										$form[$safe_form_key]['attr'].=' '.$attr;
+									}									
+								}
+
+
+								//echo '<a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . '> ... </a>';
+
+								/*$object->add_control(
+									$form_key.'_link',									[
+										'label' => $form_value['appearence_controls'][0].' Link',
+										'type' => \Elementor\Controls_Manager::URL,										
+										'placeholder' => '',
+										'show_external' => true,
+										'default' => [
+											'url' => '',
+											'is_external' => true,
+											'nofollow' => true,
+										],
+									]
+								);*/
 							}
-							
+
 							break;
 						
 						case 'img':
 						case 'image':
+						case 'video':							
 							if(isset($form_value['src'])){
-								$image_url = ( $settings[$form_key]['url'] );
+
+								$image_url = ( $settings[$form_key.'_path']['id'] );
 								if(!empty($image_url)) {
-									$form[$form_key]['src'] = 	$image_url;	
+
+									$form[$safe_form_key]['src'] = 	\Elementor\Group_Control_Image_Size::get_attachment_image_src($settings[$form_key.'_path']['id'],$form_key.'_dimension',$settings);	
 								}								
 							}
 							break;
@@ -248,9 +345,9 @@ class UI_Builder implements Builder {
 				}
 				if(!empty($form_value['child'])) {
 					if(empty($form_value['child']['type'])){
-						$form[$form_key]['child'] = $this->elementor_render($settings,$form_value['child']);
+						$form[$safe_form_key]['child'] = $this->elementor_render($settings,$form_value['child']);
 					} else {
-						$form[$form_key]['child'] = $this->elementor_render($settings,array($form_value['child']))[0];
+						$form[$safe_form_key]['child'] = $this->elementor_render($settings,array($form_value['child']))[0];
 					}
 				}
 			}

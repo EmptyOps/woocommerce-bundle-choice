@@ -46,6 +46,8 @@ class Product {
                 }
             }
 
+            $this->init_safe_click();
+
             $this->render_preview();
         } else {
 
@@ -53,6 +55,9 @@ class Product {
             $this->att_link =array();
 
             if (isset($_GET['EO_WBC'])) {
+                
+                $this->init_safe_click();
+
                 $this->eo_wbc_render(); //Render View and Routings
                 $this->eo_wbc_config();            //Disable 'Add to Cart Button' and Set 'Sold Individually'
                 $this->eo_wbc_add_breadcrumb();    //Add Breadcrumb
@@ -68,7 +73,26 @@ class Product {
         }
     }
 
+    public function init_safe_click() {
+        add_action('woocommerce_after_add_to_cart_button',function(){
+            ob_start();
+            ?>
+            <script type="text/javascript">
+                jQuery(".single_add_to_cart_button:not(#eo_wbc_add_to_cart)").off('click');
+                jQuery(".single_add_to_cart_button:not(#eo_wbc_add_to_cart)").css('cursor','not-allowed !important');
+                
+                jQuery(".single_add_to_cart_button:not(#eo_wbc_add_to_cart)").on('click',function(e){
+                    e.preventDefault();
+                    e.stopPropagation();
+                });
+            </script> 
+            <?php
+            echo(ob_get_clean());
+        });
+    }
+
     public function render_preview() {
+
         // modification hooks to the product page ..
         $set=wbc()->session->get('TMP_EO_WBC_SETS',FALSE);            
 
@@ -88,13 +112,15 @@ class Product {
         }
 
         //price
+        
         add_filter( 'the_title',function($title, $id) use($first,$second,$first_parent,$second_parent){                        
-            if(!empty($second) and !empty($first) and ($id === $second_parent->get_id()) ) {
 
+            if(!empty($second) and !empty($first) and ($id === $second_parent->get_id()) ) {                
                 return $first->get_title()." <br/> ".$second->get_title();
+            } else {
+                return $title;
             }
-            return $title;
-        },10,2);
+        },20,2);
 
         add_filter('woocommerce_get_price_html',function($price,$product) use($first,$second,$first_parent,$second_parent){
             
