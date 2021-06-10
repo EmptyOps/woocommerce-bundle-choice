@@ -1986,16 +1986,8 @@ class EOWBC_Filter_Widget {
 		} else{
 			$term = get_term_by('id',$id,'product_cat');
 
-			global $sitepress;
-			/*remove_filter('terms_clauses', array($sitepress, 'terms_clauses'));*/
-			$term_list = get_terms('product_cat', array('hide_empty' => 0, 'orderby' => 'menu_order', 'parent'=>$id,'lang'=>''));
-			/*add_filter('terms_clauses', array($sitepress, 'terms_clauses'));*/
-			if(isset($_GET['test'])){
-				echo "<pre>";
-				print_r($term_list);
-				die();
-			}
-			
+			$term_list = wbc()->wc->get_terms($id,'menu_order');
+						
 			if(!empty($item[$__prefix."_fconfig_elements"])){
 				$filter_in_list = explode(',',$item[$__prefix."_fconfig_elements"]);
 				if(is_array($filter_in_list) and is_array($term_list) and !empty($filter_in_list) and !empty($term_list)){

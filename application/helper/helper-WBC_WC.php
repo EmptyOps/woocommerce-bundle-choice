@@ -52,6 +52,26 @@ class WBC_WC {
 	    }
     }
 
+    public function get_terms($parent_id = 0, $orderby = 'menu_order') {
+        
+        $term_list =array();
+        if(class_exists('SitePress')) {
+            global $wpdb;
+            /*$term_list = get_terms(array('taxonomy'=>'product_cat','hide_empty' => 0, 'orderby' => 'menu_order', 'parent'=>$id,'lang'=>''));          */
+            $query = "SELECT ".$wpdb->term_taxonomy.".term_id FROM ".$wpdb->term_taxonomy." WHERE ".$wpdb->term_taxonomy.".parent=".$parent_id;
+
+            $result = $wpdb->get_results($query,'ARRAY_A');
+            $result = array_column($result,'term_id');
+            $term_list = array();
+            foreach ($result as $term_id) {
+                $term_list[$term_id] = get_term_by('id',$term_id,'product_cat');
+            }               
+        } else {
+            $term_list = get_terms('product_cat', array('hide_empty' => 0, 'orderby' => $orderby, 'parent'=>$parent_id,'lang'=>''));
+        }
+        return $term_list;
+    }
+
     public static function eo_wbc_get_cart_url() {        
         return function_exists('wc_get_cart_url')?wc_get_cart_url():apply_filters( 'woocommerce_get_cart_url', self::eo_wbc_support_get_page_permalink( 'cart' ));
     }
