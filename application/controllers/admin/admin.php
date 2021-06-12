@@ -145,7 +145,10 @@ class Admin {
                 );            
                 wp_enqueue_script('eowbc_admin_js');
 			}, 10 );
-			wp_enqueue_media();
+
+			if(wbc()->sanitize->get('action')!=='elementor') {
+				wp_enqueue_media();	
+			}			
 		});
 	}	
 }

@@ -1173,7 +1173,7 @@ class EOWBC_Filter_Widget {
 
 		if($desktop):
 
-			if(($item['filter_template']==apply_filters('eowbc_filter_prefix',$this->filter_prefix).'theme'/* and $this->_category==wbc()->options->get_option('configuration','second_slug')) or ($this->first_theme=='theme' and $this->_category==wbc()->options->get_option('configuration','first_slug')*/)) {
+		if(($item['filter_template']==apply_filters('eowbc_filter_prefix',$this->filter_prefix).'theme'/* and $this->_category==wbc()->options->get_option('configuration','second_slug')) or ($this->first_theme=='theme' and $this->_category==wbc()->options->get_option('configuration','first_slug')*/)) {
 
 				wbc()->load->template('publics/filters/theme_text_slider_desktop', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,'prefix'=>$prefix,'postfix'=>$postfix,'help'=>$help,'tab_set'=>$tab_set,'filter_ui'=>$this));
 
@@ -2099,6 +2099,12 @@ class EOWBC_Filter_Widget {
 									));
 		}
 		
+
+		/*var_dump($this->filter_prefix);
+		var_dump(apply_filters('eowbc_filter_prefix',$this->filter_prefix).'theme');
+		var_dump($item['filter_template']);
+		die();*/
+
 		if($desktop):
 			
 			if(($item['filter_template']==apply_filters('eowbc_filter_prefix',$this->filter_prefix).'theme_dropdown'/* and $this->_category==wbc()->options->get_option('configuration','second_slug')) or ($this->first_theme=='theme' and $this->_category==wbc()->options->get_option('configuration','first_slug')*/)) {
@@ -2659,12 +2665,7 @@ class EOWBC_Filter_Widget {
 		/*echo "non_adv_ordered_filter and adv_ordered_filter dump 1";
 		wbc()->common->pr($non_adv_ordered_filter);
 		wbc()->common->pr($adv_ordered_filter);*/
-
-		/*echo "<pre>";
-		print_r($non_adv_ordered_filter);
-		print_r($adv_ordered_filter);
-		die();*/
-
+		
 		$this->load_filters($non_adv_ordered_filter,$adv_ordered_filter);
 				
 		if( $this->is_shortcode_filter ) {

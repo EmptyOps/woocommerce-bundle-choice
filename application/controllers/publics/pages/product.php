@@ -96,12 +96,10 @@ class Product {
         // modification hooks to the product page ..
         $set=wbc()->session->get('TMP_EO_WBC_SETS',FALSE);            
 
-
-
-        
-
         $first = false;
         $second = false;
+        $first_parent = false;
+        $second_parent = false;
 
         if(!empty($set)) {
             $first=wbc()->wc->eo_wbc_get_product((int)($set['FIRST'][2]?$set['FIRST'][2]:$set['FIRST'][0]));
@@ -170,6 +168,7 @@ class Product {
                             }
                         ?>
                         window.location.href = '<?php echo $url; ?>';
+                        return false;
                     });
 
                     jQuery("table.variations").remove();

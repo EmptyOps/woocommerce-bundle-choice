@@ -159,15 +159,16 @@ class UI_Builder implements Builder {
 		}
 	}
 
-	public function elementor_form($object,$form) {
+	public function elementor_form($object,$form,$parent_id='') {
 
 		if(!empty($form) and is_array($form)) {
 			foreach ($form as $form_key => $form_value) {
 				if(!empty($form_value['appearence_controls']) and !empty($form_value['appearence_controls'][2]) and !empty($form_value['appearence_controls'][2]['id'])) {
 					$form_key = $form_value['appearence_controls'][2]['id'];
 				}
+				$form_key.=$parent_id;
 
-				if( !empty($form_value['type']) and !empty($form_value['appearence_controls']) ) {
+				if( !empty($form_value['type'])/* and !empty($form_value['appearence_controls'])*/ ) {
 					
 
 					switch ($form_value['type']) {
@@ -182,7 +183,7 @@ class UI_Builder implements Builder {
 							$object->add_control(
 								$form_key,
 								[
-									'label' => $form_value['appearence_controls'][0],
+									'label' => empty($form_value['appearence_controls'])?'Container':$form_value['appearence_controls'][0],
 									'type' => \Elementor\Controls_Manager::WYSIWYG,
 									'default' => '',
 									'placeholder' => '',
@@ -193,7 +194,7 @@ class UI_Builder implements Builder {
 								$object->add_control(
 									$form_key.'_link',
 									[
-										'label' => $form_value['appearence_controls'][0].' Link',
+										'label' => empty($form_value['appearence_controls'])?'Container Link':$form_value['appearence_controls'][0].' Link',
 										'type' => \Elementor\Controls_Manager::URL,										
 										'placeholder' => '',
 										'show_external' => true,
@@ -215,7 +216,7 @@ class UI_Builder implements Builder {
 							$object->add_control(
 								$form_key.'_path',
 								[
-									'label' => $form_value['appearence_controls'][0],
+									'label' => empty($form_value['appearence_controls']) ? 'Asset':$form_value['appearence_controls'][0],
 									'type' => \Elementor\Controls_Manager::MEDIA,
 									'default' => [
 										'url' => \Elementor\Utils::get_placeholder_image_src(),
@@ -248,16 +249,16 @@ class UI_Builder implements Builder {
 				}
 				if(!empty($form_value['child'])) {
 					if(empty($form_value['child']['type'])){
-						$this->elementor_form($object,$form_value['child']);
+						$this->elementor_form($object,$form_value['child'],$form_key);
 					} else {
-						$this->elementor_form($object,array($form_value['child']));
+						$this->elementor_form($object,array($form_value['child']),$form_key);
 					}
 				}
 			}
 		}
 	}
 
-	public function elementor_render($settings,$form) {
+	public function elementor_render($settings,$form,$parent_id='') {
 		if(!empty($form) and is_array($form)) {
 			foreach ($form as $form_key => $form_value) {
 				
@@ -265,8 +266,9 @@ class UI_Builder implements Builder {
 				if(!empty($form_value['appearence_controls']) and !empty($form_value['appearence_controls'][2]) and !empty($form_value['appearence_controls'][2]['id'])) {
 					$form_key = $form_value['appearence_controls'][2]['id'];
 				}
+				$form_key.=$parent_id;
 
-				if( !empty($form_value['type']) and !empty($form_value['appearence_controls']) ) {
+				if( !empty($form_value['type'])/* and !empty($form_value['appearence_controls'])*/ ) {
 
 					switch ($form_value['type']) {
 						case 'p':
@@ -345,9 +347,9 @@ class UI_Builder implements Builder {
 				}
 				if(!empty($form_value['child'])) {
 					if(empty($form_value['child']['type'])){
-						$form[$safe_form_key]['child'] = $this->elementor_render($settings,$form_value['child']);
+						$form[$safe_form_key]['child'] = $this->elementor_render($settings,$form_value['child'],$form_key);
 					} else {
-						$form[$safe_form_key]['child'] = $this->elementor_render($settings,array($form_value['child']))[0];
+						$form[$safe_form_key]['child'] = $this->elementor_render($settings,array($form_value['child']),$form_key)[0];
 					}
 				}
 			}
