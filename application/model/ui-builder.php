@@ -278,7 +278,16 @@ class UI_Builder implements Builder {
 						case 'button':
 						case 'header':
 						case 'a':
-							
+								
+							if($form_value['type']=='p' || $form_value['type']=='div' || $form_value['type']=='span') {
+								//die();
+							}	
+							/*echo "<pre>";
+							var_dump($form_key);
+							print_r($settings[$form_key]);
+							///print_r($settings);
+							echo "</pre>";*/
+
 							$element_text = ( $settings[$form_key] );
 							//echo $element_text;
 							if(!empty($element_text)){
@@ -286,8 +295,38 @@ class UI_Builder implements Builder {
 									$form[$safe_form_key]['preHTML'] = $element_text;
 								} elseif(isset($form_value['postHTML'])) {
 									$form[$safe_form_key]['postHTML'] = $element_text;
+								} else {									
+									$form[$safe_form_key]['postHTML'] = $element_text;
 								}
-							}	
+							}
+
+							/*if($parent_id==='0' or $parent_id===0) {*/
+
+								$css = array();
+								
+								if(!empty($settings['_background_background'])) {
+									if($settings['_background_background'] === 'classic') {
+										if(!empty($settings['_background_color'])){
+											$css[] = "background-color:".$settings['_background_color'];
+										}
+										/*$css*/
+									} else{
+										//gradient
+									}
+
+								}
+
+								$css = implode(';',$css).';';
+								if(empty($form[$safe_form_key]['attr'])){
+									$form[$safe_form_key]['attr'] = array('style'=>$css);
+								} else {
+									if(empty($form[$safe_form_key]['attr']['style'])) {
+										$form[$safe_form_key]['attr']['style'] = $css;
+									} else {
+										$form[$safe_form_key]['attr']['style'].=$css;	
+									}									
+								}
+							/**/
 
 							if($form_value['type']=='a') {
 
@@ -309,6 +348,13 @@ class UI_Builder implements Builder {
 										$form[$safe_form_key]['attr'].=' '.$attr;
 									}									
 								}
+
+								/*if($form_value['type']=='p' || $form_value['type']=='div' || $form_value['type']=='span') {
+									echo "<pre>";
+									print_r($settings[$form_key]);
+									echo "</pre>";
+									die();
+								}*/
 
 
 								//echo '<a href="' . $settings['website_link']['url'] . '"' . $target . $nofollow . '> ... </a>';
