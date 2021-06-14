@@ -182,8 +182,8 @@ class EOWBC_Breadcrumb
     public static function eo_wbc_breadcumb_first_html_mobile($step,$order) {
 
         $sesssion_product_id = '#';
-        if(wbc()->session->get('TMP_EO_WBC_SETS',FALSE)) {            
-            $_session_set=wbc()->session->get('TMP_EO_WBC_SETS',FALSE);
+        if(apply_filters('eowbc_breadcrumb_set',wbc()->session->get('EO_WBC_SETS',FALSE))) {
+            $_session_set=apply_filters('eowbc_breadcrumb_set',wbc()->session->get('EO_WBC_SETS',FALSE));
             if(!empty($_session_set['FIRST'])) {
                 $sesssion_product_id = empty($_session_set['FIRST'][2])?$_session_set['FIRST'][0]:$_session_set['FIRST'][2];    
             }
@@ -199,8 +199,8 @@ class EOWBC_Breadcrumb
     public static function eo_wbc_breadcumb_second_html_mobile($step,$order){
 
         $sesssion_product_id = '#';
-        if(wbc()->session->get('TMP_EO_WBC_SETS',FALSE)) {            
-            $_session_set=wbc()->session->get('TMP_EO_WBC_SETS',FALSE);
+        if(apply_filters('eowbc_breadcrumb_set',wbc()->session->get('EO_WBC_SETS',FALSE))) {
+            $_session_set=apply_filters('eowbc_breadcrumb_set',wbc()->session->get('EO_WBC_SETS',FALSE));
             if(!empty($_session_set['SECOND'])) {
                 $sesssion_product_id = empty($_session_set['SECOND'][2])?$_session_set['SECOND'][0]:$_session_set['SECOND'][2];    
             }
@@ -293,8 +293,8 @@ class EOWBC_Breadcrumb
     private static function eo_wbc_breadcumb_first_html($step,$order){
 
         $sesssion_product_id = '#';
-        if(wbc()->session->get('TMP_EO_WBC_SETS',FALSE)) {            
-            $_session_set=wbc()->session->get('TMP_EO_WBC_SETS',FALSE);
+        if(apply_filters('eowbc_breadcrumb_set',wbc()->session->get('EO_WBC_SETS',FALSE))) {
+            $_session_set=apply_filters('eowbc_breadcrumb_set',wbc()->session->get('EO_WBC_SETS',FALSE));
             if(!empty($_session_set['FIRST'])) {
                 $sesssion_product_id = empty($_session_set['FIRST'][2])?$_session_set['FIRST'][0]:$_session_set['FIRST'][2];    
             }
@@ -321,8 +321,8 @@ class EOWBC_Breadcrumb
     private static function eo_wbc_breadcumb_second_html($step,$order){
 
         $sesssion_product_id = '#';
-        if(wbc()->session->get('TMP_EO_WBC_SETS',FALSE)) {            
-            $_session_set=wbc()->session->get('TMP_EO_WBC_SETS',FALSE);
+        if(apply_filters('eowbc_breadcrumb_set',wbc()->session->get('EO_WBC_SETS',FALSE))) {
+            $_session_set=apply_filters('eowbc_breadcrumb_set',wbc()->session->get('EO_WBC_SETS',FALSE));
             if(!empty($_session_set['SECOND'])) {
                 $sesssion_product_id = empty($_session_set['SECOND'][2])?$_session_set['SECOND'][0]:$_session_set['SECOND'][2];    
             }
@@ -377,6 +377,25 @@ class EOWBC_Breadcrumb
         $first_id = wbc()->sanitize->get('FIRST');
         $second_id= wbc()->sanitize->get('SECOND');
 
+
+        //print_r(apply_filters('eowbc_breadcrumb_set',wbc()->session->get('EO_WBC_SETS',FALSE)));
+
+
+        if(apply_filters('eowbc_breadcrumb_set',wbc()->session->get('EO_WBC_SETS',FALSE))) {
+            $_session_set=apply_filters('eowbc_breadcrumb_set',wbc()->session->get('EO_WBC_SETS',FALSE));
+            if(empty($first)){            
+                if(!empty($_session_set['FIRST'])) {
+                    $first_id = empty($_session_set['FIRST'][2])?$_session_set['FIRST'][0]:$_session_set['FIRST'][2];    
+                }
+            }
+
+            if(empty($second_id)){
+                if(!empty($_session_set['SECOND'])) {
+                    $second_id = empty($_session_set['SECOND'][2])?$_session_set['SECOND'][0]:$_session_set['SECOND'][2];
+                }                
+            }
+        }
+
         $chage_product_id=$product_id;
         if(wbc()->session->get('TMP_EO_WBC_SETS',FALSE)) {            
             $_session_set=wbc()->session->get('TMP_EO_WBC_SETS',FALSE);
@@ -404,6 +423,7 @@ class EOWBC_Breadcrumb
 
 
         if ($order==1) {
+
             if(self::eo_wbc_breadcrumb_get_category($chage_product_id)==self::$first_slug/*get_option('eo_wbc_first_slug')*/){
 
                 $first_url = \eo\wbc\model\Category_Attribute::instance()->get_category_link(self::$first_slug);
@@ -428,18 +448,19 @@ class EOWBC_Breadcrumb
             }            
         }
         elseif ($order==2) {
+
             //Dirty Routing
             $product=NULL;
             //$target=NULL;//determine which parameter to set;
             if(self::eo_wbc_breadcrumb_get_category($chage_product_id)==self::$first_slug/*get_option('eo_wbc_first_slug')*/){
                 //$target='FIRST';
-                if(empty(wbc()->sanitize->get('SECOND'))) return '#';
-                $product=new \WC_Product(wbc()->sanitize->get('SECOND'));
+                if(empty($second_id)) return '#';
+                $product=new \WC_Product($second_id/*wbc()->sanitize->get('SECOND')*/);
             }
             elseif (self::eo_wbc_breadcrumb_get_category($chage_product_id)==self::$second_slug/*get_option('eo_wbc_second_slug')*/) {
                 //$target='SECOND';
-                if(empty(wbc()->sanitize->get('FIRST'))) return '#';
-                $product=new \WC_Product(wbc()->sanitize->get('FIRST'));
+                if(empty($first_id)) return '#';
+                $product=new \WC_Product($first_id/*wbc()->sanitize->get('FIRST')*/);
             }      
 
             if(empty($product)) return '#';            
