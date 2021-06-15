@@ -159,14 +159,17 @@ class UI_Builder implements Builder {
 		}
 	}
 
-	public function elementor_form($object,$form,$parent_id='') {
+	public function elementor_form($object,$form,$depth=0,$parent_key='') {
 
 		if(!empty($form) and is_array($form)) {
 			foreach ($form as $form_key => $form_value) {
+				
+				$preserve_form_key = $form_key;
+
 				if(!empty($form_value['appearence_controls']) and !empty($form_value['appearence_controls'][2]) and !empty($form_value['appearence_controls'][2]['id'])) {
 					$form_key = $form_value['appearence_controls'][2]['id'];
 				}
-				$form_key.=$parent_id;
+				$form_key.=$parent_key;
 
 				if( !empty($form_value['type'])/* and !empty($form_value['appearence_controls'])*/ ) {
 					
@@ -183,7 +186,7 @@ class UI_Builder implements Builder {
 							$object->add_control(
 								$form_key,
 								[
-									'label' => empty($form_value['appearence_controls'])?'Container':$form_value['appearence_controls'][0],
+									'label' => empty($form_value['appearence_controls'])?'Container(Level: '.$depth.' Sibling: '.$preserve_form_key.')' :$form_value['appearence_controls'][0],
 									'type' => \Elementor\Controls_Manager::WYSIWYG,
 									'default' => '',
 									'placeholder' => '',
@@ -194,7 +197,7 @@ class UI_Builder implements Builder {
 								$object->add_control(
 									$form_key.'_link',
 									[
-										'label' => empty($form_value['appearence_controls'])?'Container Link':$form_value['appearence_controls'][0].' Link',
+										'label' => empty($form_value['appearence_controls'])?'Container Link(Level: '.$depth.' Sibling: '.$preserve_form_key.')' :$form_value['appearence_controls'][0].' Link',
 										'type' => \Elementor\Controls_Manager::URL,										
 										'placeholder' => '',
 										'show_external' => true,
@@ -249,16 +252,16 @@ class UI_Builder implements Builder {
 				}
 				if(!empty($form_value['child'])) {
 					if(empty($form_value['child']['type'])){
-						$this->elementor_form($object,$form_value['child'],$form_key);
+						$this->elementor_form($object,$form_value['child'],$depth+1,$form_key);
 					} else {
-						$this->elementor_form($object,array($form_value['child']),$form_key);
+						$this->elementor_form($object,array($form_value['child']),$depth+1,$form_key);
 					}
 				}
 			}
 		}
 	}
 
-	public function elementor_render($settings,$form,$parent_id='') {
+	public function elementor_render($settings,$form,$depth='') {
 		if(!empty($form) and is_array($form)) {
 			foreach ($form as $form_key => $form_value) {
 				
@@ -266,7 +269,7 @@ class UI_Builder implements Builder {
 				if(!empty($form_value['appearence_controls']) and !empty($form_value['appearence_controls'][2]) and !empty($form_value['appearence_controls'][2]['id'])) {
 					$form_key = $form_value['appearence_controls'][2]['id'];
 				}
-				$form_key.=$parent_id;
+				$form_key.=$depth;
 
 				if( !empty($form_value['type'])/* and !empty($form_value['appearence_controls'])*/ ) {
 
@@ -289,6 +292,8 @@ class UI_Builder implements Builder {
 							echo "</pre>";*/
 
 							$element_text = ( $settings[$form_key] );
+
+														
 							//echo $element_text;
 							if(!empty($element_text)){
 								if(isset($form_value['preHTML'])){
