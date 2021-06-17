@@ -165,7 +165,49 @@ class Ring_Builder_Data_Template extends Pair_Builder_Data_Template {
                         'type'=>'dropdown_image',
                         'ribbon_color'=>'#8245dd'
                     ),
-                  ); 
+
+                    array(
+                        'label' => 'Side-Stone Type',
+                        'terms' => array('NATURAL OR LAB DIAMOND, DEPENDING ON SELECTED CENTER DIAMOND','NATURAL DIAMOND','LAB DIAMOND'),
+                        'description' => '',
+                        'slug' => 'side_stone_type',
+                        'type'=>'button',
+                        'ribbon_color'=>'#8245dd'
+                    ),
+
+                    array(
+                        'label' => 'Side-Stone Number',
+                        'terms' => array('5','7','10','13','15','18','20'),
+                        'description' => '',
+                        'slug' => 'side_stone_number',
+                        'type'=>'button',
+                        'ribbon_color'=>'#8245dd'
+                    ),
+                    array(
+                        'label' => 'Side-Stone Carat',
+                        'terms' => array('0.1','0.2','0.3','0.4','0.5','0.6','0.7'),
+                        'description' => '',
+                        'slug' => 'side_stone_carat',
+                        'type'=>'button',
+                        'ribbon_color'=>'#8245dd'
+                    ),
+                    array(
+                        'label' => 'Side-Stone Color',
+                        'terms' => array('D/E','E/F','F/G','G/H','H/I','I/J','J/K','K/L','L/M'),
+                        'description' => '',
+                        'slug' => 'side_stone_color',
+                        'type'=>'button',
+                        'ribbon_color'=>'#8245dd'
+                    ),
+                    array(
+                        'label' => 'Side-Stone Clarity',
+                        'terms' => array('SI1','SI2','VS1','VS2'),
+                        'description' => '',
+                        'slug' => 'side_stone_clarity',
+                        'type'=>'button',
+                        'ribbon_color'=>'#8245dd'
+                    ),
+                ); 
     }
 
     public function get_categories() {

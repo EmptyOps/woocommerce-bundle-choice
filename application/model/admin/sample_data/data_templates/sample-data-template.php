@@ -37,7 +37,7 @@ class Sample_Data_Template {
           'thumb'=>$_img_url.'Products/Ring-round-1.jpg',
           'images'=>array('Ring-round-2.jpg','Ring-round-3.jpg'),
           'content'=>'',
-          'sku'=>'SET-8800950587',
+          'sku'=>'SET-8800950587-0',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
@@ -58,7 +58,50 @@ class Sample_Data_Template {
                               'is_visible'=>1,
                               'is_variation'=>1,
                               'is_taxonomy'=>1
+                            ),
+
+                    'side_stone_type'=>array(
+                              'name'=>'side_stone_type',
+                              'value'=>'NATURAL DIAMOND',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>0,
+                              'is_taxonomy'=>1
+                            ),
+                    'side_stone_number'=>array(
+                              'name'=>'side_stone_number',
+                              'value'=>'13',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>0,
+                              'is_taxonomy'=>1
+                            ),
+                    'side_stone_carat'=>array(
+                              'name'=>'side_stone_carat',
+                              'value'=>'0.3',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>0,
+                              'is_taxonomy'=>1
+                            ),
+                    'side_stone_color'=>array(
+                              'name'=>'side_stone_color',
+                              'value'=>'F/G',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>0,
+                              'is_taxonomy'=>1
+                            ),
+                    'side_stone_clarity'=>array(
+                              'name'=>'side_stone_clarity',
+                              'value'=>'VS1',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>0,
+                              'is_taxonomy'=>1
                             )
+
+
                     ),
           'variation'=>array(
                           array(

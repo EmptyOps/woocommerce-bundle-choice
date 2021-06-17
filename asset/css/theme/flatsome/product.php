@@ -9,14 +9,25 @@
 .social-icons .primary{
 	width: auto !important;
 }
+.mfp-container:before {
+    content: '';    
+    height: max-content !important;
+}
+
+@media only screen and (max-width:768px ){
+	.header-full-width .container{
+		max-height: 2rem !important;
+	}
+}
+.cart #eo_wbc_add_to_cart {
+	margin-bottom: 0rem;
+}
+.image-tools.bottom.left .zoom-button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 .image-tools.bottom.left a i {
-	top: 6.5px;
-}
-#checkout_timeline.style4.horizontal li:not(:last-child) .timeline-wrapper:after{
-	top: 70px;
-	bottom: auto;
-}
-#checkout_timeline{
-	max-height: 100px;
+    top: 0.5px !important;
 }
 </style>
