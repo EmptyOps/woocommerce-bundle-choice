@@ -147,7 +147,9 @@ class Admin {
 			}, 10 );
 
 			if(wbc()->sanitize->get('action')!=='elementor') {
-				wp_enqueue_media();	
+				if(did_action( 'wp_enqueue_media' )){
+					wp_enqueue_media();	
+				}
 			}			
 		});
 	}	
