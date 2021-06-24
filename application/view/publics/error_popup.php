@@ -6,15 +6,34 @@
 // Load assets first to avoid zaping effect. 
 // TODO here should not load instantly and follow the wp standard by using hook as well as setting last param to false to our load asset function. 
 // add_action( 'wp_enqueue_scripts',function(){ 
+
+?>
+<script type="text/javascript">
+  if( typeof(jQuery.fn.accordion) === 'function' ) {
+    jQuery.fn.ui_accordion = jQuery.fn.accordion;
+    jQuery.fn.ui_modal = jQuery.fn.modal;
+    jQuery.fn.ui_slider = jQuery.fn.slider;
+  }
+</script>
+<?php
+
   global $wp_customize;
   if(empty($wp_customize)){
-    wbc()->load->asset('css','fomantic/semantic.min', array(), "", true);
+    //wbc()->load->asset('css','fomantic/semantic.min', array(), "", true);
   }
   wbc()->load->asset('css','publics/buttons', array(), "", true);
   wbc()->load->asset('js','fomantic/semantic.min', array(), "", true);
   wbc()->load->asset('js','publics/buttons', array(), "", true);
+  wp_enqueue_script('jquery-ui-core');
 // },50);
 ?>
+<script type="text/javascript">
+  if( typeof(jQuery.fn.ui_accordion) === 'function' ) {
+    jQuery.fn.accordion = jQuery.fn.ui_accordion;
+    jQuery.fn.modal = jQuery.fn.ui_modal;
+    jQuery.fn.slider = jQuery.fn.ui_slider;
+  }
+</script>
 <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
 <div class="ui modal align center tiny centered">
 <div class="ui header">              

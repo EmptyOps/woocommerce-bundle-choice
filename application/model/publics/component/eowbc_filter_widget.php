@@ -149,18 +149,19 @@ class EOWBC_Filter_Widget {
 	}
 
 	public function eo_wbc_filter_enque_asset() {
+
 		wbc()->load->asset('css','fomantic/semantic.min');
 		wbc()->load->asset('js','fomantic/semantic.min');
 		wbc()->load->asset('js','publics/eo_wbc_filter');
 		wbc()->theme->load('css','filter');
         wbc()->theme->load('js','filter');
-            
+        
 		$current_category=$this->_category;
 		$site_url=site_url();
 
 		wp_enqueue_script('jquery');	
-		wp_dequeue_script('jquery-ui-core');
-		wp_deregister_script('jquery-ui-core');
+		//wp_dequeue_script('jquery-ui-core');
+		//wp_deregister_script('jquery-ui-core');
 		
 		add_action( 'wp_footer',function(){
 

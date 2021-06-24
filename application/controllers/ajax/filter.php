@@ -196,8 +196,68 @@ class Filter
 			            }
 			            			            			            
 		                //die();
-		            }		            
+		            }
+
+		            $meta_quer_args = $query->get('meta_query');/* array('relation' => 'AND')*/;
+
+		            // meta query price per carat
+		            if(!empty($_POST['min__price_per_caret']) and !empty($_POST['max__price_per_caret'])) {
+		                $meta_quer_args[] = array(
+                                                'key'     => '_price_per_caret',
+                                                'value'   => array(
+                                                                str_replace('$','',$_POST['min__price_per_caret']),
+                                                                str_replace('$','',$_POST['max__price_per_caret'])
+                                                            ),
+                                                'type'    => 'numeric',
+                                                'compare' => 'BETWEEN',
+                                        );
+		            }
+
+		            // if param _meta_field has query data            
+		            if(!empty($_GET['_meta_field'])) {
+
+		                $query_metas = array_filter( explode(',',$_GET['_meta_field']) );
+
+		                if(!empty($query_metas)) {
+
+		                    $meta_list = array_values(unserialize(wbc()->options->get_option_group('list_custom_attribute_filters_map_master',"a:0:{}")));
+
+		                    foreach($query_metas as $meta_key) {
+		                        
+		                        $meta_filter_data = $meta_list[array_search($meta_key,array_column($meta_list,'meta_key'))];
+		                                                
+		                        if(!empty($_GET['_meta_field_'.$meta_key])) {
+
+		                            if($meta_filter_data['value_type'] === 'boolean') {
+		                                $meta_quer_args[] = array(
+		                                       'relation' => 'OR',
+		                                        array(
+		                                            'key'     => $meta_key,
+		                                            'value'   => 1,
+		                                            'compare' => '='
+		                                        ),
+		                                        array(
+		                                            'key'     => $meta_key,
+		                                            'compare' => 'EXISTS',
+		                                        ),
+		                                );
+		                            } elseif ($meta_filter_data['value_type'] === 'days') {
+		                                $meta_quer_args[] = array(                                       
+		                                    'key' => $meta_key,
+		                                    'value' => $_GET['_meta_field_'.$meta_key],
+		                                    'compare' => '<=',
+		                                    'type' => 'DATE'
+		                                );
+		                            }
+
+		                        }
+		                    }
+		                }
+		            }
+
 		        }
+
+		        $query->set('meta_query',$meta_quer_args);
 
 		        /*echo "<pre>";
 		        print_r($_REQUEST);

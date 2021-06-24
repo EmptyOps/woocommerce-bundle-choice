@@ -21,7 +21,17 @@ class Product {
 
         ////////////
         //// Add to cart if its preview page from the second step
-        if( !empty(wbc()->sanitize->get('FIRST')) and !empty(wbc()->sanitize->get('SECOND')) and !empty(wbc()->sanitize->get('EO_WBC')) and !empty(wbc()->sanitize->get('WBC_PREVIEW')) ) {                
+        if( !empty(wbc()->sanitize->get('FIRST')) and !empty(wbc()->sanitize->get('SECOND')) and !empty(wbc()->sanitize->get('EO_WBC')) and !empty(wbc()->sanitize->get('WBC_PREVIEW')) ) { 
+
+            add_filter( 'woocommerce_is_sold_individually','__return_true', 10, 2 );
+
+
+            add_action('woocommerce_before_add_to_cart_form',function(){
+                
+            }, 10, 1 );
+
+
+
             //if data available at _GET then add to out custom cart
             if(!empty(wbc()->sanitize->get('eo_wbc_add_to_cart_preview'))) {                
                 $this->add2cart();

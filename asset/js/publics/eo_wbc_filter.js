@@ -145,6 +145,10 @@ jQuery(document).ready(function($){
 			});
 		}
 
+		if(typeof(jQuery.fn.eo_wbc_filter_change) === typeof(undefined) &&  typeof(window.eo_wbc_filter_change) === 'function') {
+			jQuery.fn.eo_wbc_filter_change = window.eo_wbc_filter_change;				
+		}
+
 		jQuery.fn.eo_wbc_filter_change(true);
 
 		//pagination for non-table based view
