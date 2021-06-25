@@ -295,7 +295,25 @@ class Product {
                     <?php if(!empty(wbc()->options->get_option('appearance_product_page','product_page_add_to_basket',''))) :?>
                         
                         window.wbc_atb_submin_form = function(){
-                            jQuery('form.cart').attr('action',document.location.href);
+                            let url = document.location.href;                            
+                            let add_to_cart_id = false;
+                            <?php if( $product->is_type('variable') ) { ?>
+                                add_to_cart_id =jQuery("[name='variation_id']").val();
+                            <?php } else { ?>
+                                add_to_cart_id = '<?php echo $product->get_id(); ?>';
+                            <?php } ?>
+
+                            if(url.has('/?')) {
+                                url+='&add-to-cart='+add_to_cart_id;
+                            } else if(url.endsWith('/')) {
+                                url+='?add-to-cart='+add_to_cart_id;
+                            } else {
+                                url+='/?add-to-cart='+add_to_cart_id;
+                            }
+
+                            /*window.location.href = url;*/
+
+                            jQuery('form.cart').attr('action',url);
                             jQuery('form.cart').submit();
                         }
 
