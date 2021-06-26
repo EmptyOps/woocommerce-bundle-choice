@@ -2382,8 +2382,6 @@ class EOWBC_Filter_Widget {
 
 		$sql = apply_filters( 'eowbc_woocommerce_price_filter_sql', $sql, $meta_query_sql, $tax_query_sql );
 
-
-
 		return $wpdb->get_row( $sql ); // WPCS: unprepared SQL ok.
 	}
 
