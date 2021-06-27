@@ -24,7 +24,8 @@ class Category {
         //If add to cart triggred
         // Detection : only one category item get length > 0 
         //   i.e. using XOR check if only one of two have been set.
-        if( !empty(wbc()->sanitize->get('CART')) && empty(wbc()->sanitize->get('EO_CHANGE')) && ( empty(wbc()->sanitize->get('FIRST')) XOR empty(wbc()->sanitize->get('SECOND')) ) and !empty(wbc()->sanitize->get('EO_WBC')) ) {
+
+        if( !empty(wbc()->sanitize->get('CART')) && (!empty(wbc()->sanitize->get('EO_CHANGE')) XOR ( empty(wbc()->sanitize->get('FIRST')) XOR empty(wbc()->sanitize->get('SECOND')) )) and !empty(wbc()->sanitize->get('EO_WBC')) ) {
             //Iff condition is mutual exclusive, store it to  the session.
             $this->add2cart();            
         }
@@ -95,6 +96,7 @@ class Category {
     }
 
     public function add2cart() {
+        
         $cart=base64_decode(wbc()->sanitize->get('CART'),TRUE);
         if(!empty($cart)){
 
@@ -307,8 +309,7 @@ class Category {
             return $url;
         }
 
-        return  $url.'?'.wbc()->common->http_query(
-            array(
+        $url_params = array(
                 'EO_WBC'=>1,
                 'BEGIN'=>wbc()->sanitize->get('BEGIN'),
                 'STEP'=>wbc()->sanitize->get('STEP'),
@@ -338,8 +339,13 @@ class Category {
                             ''
                         )
                     )
-            )
-        );        
+            );
+
+        if(!empty(wbc()->sanitize->get('EO_CHANGE'))) {
+            $url_params['EO_CHANGE'] = 1;
+        }
+
+        return  $url.'?'.wbc()->common->http_query( $url_params );
     }
 
     public function eo_wbc_id_2_slug($id){

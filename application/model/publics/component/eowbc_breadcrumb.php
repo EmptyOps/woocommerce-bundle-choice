@@ -433,12 +433,12 @@ class EOWBC_Breadcrumb
             $product=NULL;
             if(self::eo_wbc_breadcrumb_get_category($chage_product_id)==self::$first_slug) {
                 if(empty($second_id)) return '#';
-                $product=new \WC_Product($second_id);
+                $product=wc_get_product($second_id);
                 //$product=new \WC_Product($first_id);
             }
             elseif (self::eo_wbc_breadcrumb_get_category($chage_product_id)==self::$second_slug) {        
-                if(empty($first_id)) return '#';
-                $product=new \WC_Product($first_id);
+                if(empty($first_id)) return '#';                
+                $product= wc_get_product($first_id);
                 //$product=new \WC_Product($second_id);
             }
 
@@ -711,7 +711,7 @@ class EOWBC_Breadcrumb
             //$url=$link.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>(@wbc()->sanitize->get('BEGIN')),'STEP'=>2,'FIRST'=>(wbc()->sanitize->get('BEGIN')==self::$first_slug? wbc()->sanitize->get('FIRST'):''),'SECOND'=>(wbc()->sanitize->get('BEGIN')==self::$second_slug?wbc()->sanitize->get('SECOND'):''),'EO_CHANGE'=>1,'CAT_LINK'=>$cat_link));
 
             $url=get_bloginfo('url').'/index.php'.'/'.wbc()->wc->wc_permalink('category_base').'/'.$link
-                        .wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>(@wbc()->sanitize->get('BEGIN')),'STEP'=>2,'FIRST'=>(wbc()->sanitize->get('BEGIN')==self::$first_slug? wbc()->sanitize->get('FIRST'):''),'SECOND'=>(wbc()->sanitize->get('BEGIN')==self::$second_slug?wbc()->sanitize->get('SECOND'):''),'EO_CHANGE'=>1,'CAT_LINK'=>$cat_link));
+                        .wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>(@wbc()->sanitize->get('BEGIN')),'STEP'=>2,'FIRST'=>(wbc()->sanitize->get('BEGIN')==self::$first_slug? wbc()->sanitize->get('FIRST'):''),'SECOND'=>(wbc()->sanitize->get('BEGIN')==self::$second_slug?wbc()->sanitize->get('SECOND'):''),'EO_CHANGE'=>1,'CAT_LINK'=>$CAT_LINK));
 
             /////////////////////////////////////////////////////////
 
