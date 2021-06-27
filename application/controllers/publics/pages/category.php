@@ -25,7 +25,9 @@ class Category {
         // Detection : only one category item get length > 0 
         //   i.e. using XOR check if only one of two have been set.
 
-        if( !empty(wbc()->sanitize->get('CART')) && (!empty(wbc()->sanitize->get('EO_CHANGE')) XOR ( empty(wbc()->sanitize->get('FIRST')) XOR empty(wbc()->sanitize->get('SECOND')) )) and !empty(wbc()->sanitize->get('EO_WBC')) ) {
+        // removed the XOR check as it won't the users cahnge the item if the url does not has EO_CHANGE as param when the chnge link is clicked
+
+        if( !empty(wbc()->sanitize->get('CART')) /*&& (!empty(wbc()->sanitize->get('EO_CHANGE')) XOR ( empty(wbc()->sanitize->get('FIRST')) XOR empty(wbc()->sanitize->get('SECOND')) ))*/ and !empty(wbc()->sanitize->get('EO_WBC')) ) {
             //Iff condition is mutual exclusive, store it to  the session.
             $this->add2cart();            
         }
