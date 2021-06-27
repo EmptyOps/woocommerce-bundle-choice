@@ -26,6 +26,7 @@ jQuery(function(){
 		validate(form_fields) {
 			let required_fields = jQuery(form_fields).filter('.required');			
 			let numeric_fields = jQuery(form_fields).filter('.numeric');
+			let email_fields = jQuery(form_fields).filter('.email');
 
 			let validation_status = true;
 
@@ -45,6 +46,18 @@ jQuery(function(){
 					let value = jQuery(field).val();
 					if( typeof(value)===typeof(undefined) || isNaN(value.trim()) ){
 						alert('Please provide numeric value to the numeric fields.');
+						validation_status = false;
+						return validation_status;
+					}
+				});
+			}
+
+			if((email_fields.hasOwnProperty('length') && email_fields.length>0)) {
+				jQuery(email_fields).each(function(index,field){
+					let value = jQuery(field).val();
+
+					if( typeof(value)===typeof(undefined) || val.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/) ){
+						alert('Please provide valid email to the email field.');
 						validation_status = false;
 						return validation_status;
 					}
