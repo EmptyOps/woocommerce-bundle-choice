@@ -85,7 +85,7 @@ class Filter
 						////////////////////////////////////////////////////////
 						//echo 'FIELD: '.wbc()->sanitize->request('cat_filter_'.$_category).PHP_EOL;
 						$result_false = false;
-						foreach (array_filter(explode(',',wbc()->sanitize->request('cat_filter_'.$_category))) as $_category_field) {
+						foreach (array_filter(explode('|', str_replace([',','+'],'|',wbc()->sanitize->request('cat_filter_'.$_category)) )) as $_category_field) {
 							//////////////////////////////
 							//echo 'ITEM: '.$_category_field.PHP_EOL;
 							if(!empty($table_columns['category'][$_category_field])){
@@ -178,7 +178,12 @@ class Filter
         	foreach ($category_fields as $field) {
         		$field_query[]="`${field}` != 0";
         	}
-        	$category_fields = "(" .implode(' OR ',$field_query) .")"; 
+
+        	if(wbc()->options->get_option('mapping_prod_mapping_pref','prod_mapping_pref_category','and')==='and'){
+        		$category_fields = "(" .implode(' AND ',$field_query) .")"; 
+        	} else {
+        		$category_fields = "(" .implode(' OR ',$field_query) .")"; 
+        	}
         }
         
         if(empty($_category_query_list)){

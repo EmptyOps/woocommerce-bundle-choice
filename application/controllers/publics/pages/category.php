@@ -195,8 +195,8 @@ class Category {
 
     }
 
-    public function eo_wbc_add_breadcrumb()
-    {           
+    public function eo_wbc_add_breadcrumb() {           
+        
         //Add Breadcumb at top....      
         add_action( 'woocommerce_archive_description',function(){     
             wbc()->load->model('publics/component/eowbc_breadcrumb');       
@@ -204,8 +204,8 @@ class Category {
         }, 120);
     }
 
-    public function eo_wbc_render()
-    {   
+    public function eo_wbc_render() {   
+        
         $features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())));
         
         if( !empty($features['pair_maker'])/*get_option('eo_wbc_pair_maker_status',FALSE)*/ && isset($_GET) && !empty(wbc()->sanitize->get('STEP')) && wbc()->sanitize->get('STEP')==2 && (empty(wbc()->sanitize->get('FIRST')) XOR empty(wbc()->sanitize->get('SECOND'))) ) {

@@ -190,7 +190,7 @@ jQuery(document).ready(function($){
 			});
 		}
 
-		jQuery.fn.eo_wbc_filter_change(true);
+		//jQuery.fn.eo_wbc_filter_change(true);
 
 		//pagination for non-table based view
 		$(".woocommerce-pagination,.pagination").on('click','a',function(event){
