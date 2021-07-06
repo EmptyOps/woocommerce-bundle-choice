@@ -29,12 +29,7 @@ if ( ! class_exists( 'Configuration' ) ) {
 			$check_it_out_link_label = 'Check it out!';
 			$check_it_out_link = '';
 			$lbl_txt = 'Congratulations! It seems that you have completed the setup process, click below link to check it out in working on your website.';
-			$active_feature = array();
-
-			/*if(class_exists('\eo\wbc\controllers\admin\menu\Admin_Menu')) {*/
-				$active_feature = \eo\wbc\controllers\admin\menu\Admin_Menu::active_pair_builder_feature();	
-			/*}*/
-			
+			$active_feature = \eo\wbc\controllers\admin\menu\Admin_Menu::active_pair_builder_feature();
 			if( !empty($active_feature) && \eo\wbc\controllers\admin\menu\Admin_Menu::is_pair_builder_feature_all_setup() ) {
 			
 				$configuration_buttons_page = wbc()->options->get_option('configuration','buttons_page',false);

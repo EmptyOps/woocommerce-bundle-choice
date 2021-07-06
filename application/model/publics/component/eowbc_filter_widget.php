@@ -1768,7 +1768,8 @@ class EOWBC_Filter_Widget {
 	public function two_tabs($prefix,$item){
 		$item['filter_ui'] = $this;
 
-		if(($this->first_theme==apply_filters('eowbc_filter_prefix',$this->filter_prefix).'theme'/*$this->second_theme=='theme'*//* and $this->_category==wbc()->options->get_option('configuration','second_slug')) or ($this->first_theme=='theme' and $this->_category==wbc()->options->get_option('configuration','first_slug')*/)) {
+		if(($this->first_theme==apply_filters('eowbc_filter_prefix',$this->filter_prefix).'theme'/*$this->second_theme=='theme'*//* and $this->_category==wbc()->options->get_option('configuration','second_slug')) or ($this->first_theme=='theme' and $this->_category==wbc()->options->get_option('configuration','first_slug')*/) or $this->first_theme === 'theme') {
+
 				if(wp_is_mobile()){
 					wbc()->load->template('publics/filters/theme_two_tabs_mobile',$item);
 				} else {
@@ -2381,6 +2382,8 @@ class EOWBC_Filter_Widget {
 		$sql = apply_filters( 'woocommerce_price_filter_sql', $sql, $meta_query_sql, $tax_query_sql );
 
 		$sql = apply_filters( 'eowbc_woocommerce_price_filter_sql', $sql, $meta_query_sql, $tax_query_sql );
+
+
 
 		return $wpdb->get_row( $sql ); // WPCS: unprepared SQL ok.
 	}
