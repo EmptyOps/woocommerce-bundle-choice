@@ -5,6 +5,7 @@ function eowbc_yith_wishlist_fix(){
 
 //render products DOM to view
 function eo_wbc_filter_render_html(data,render_container) {
+
 	jQuery("#loading").removeClass('loading');
 	//Replace Result Count Status...
 	if(jQuery('.woocommerce-result-count',jQuery(data)).html()!==undefined){								
@@ -18,7 +19,13 @@ function eo_wbc_filter_render_html(data,render_container) {
 	//Replacing Product listings....
 	if(jQuery(render_container /*'.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products'*/,jQuery(data)).html()!==undefined){	
 		if( typeof(is_card_view_rendered) == undefined || typeof(is_card_view_rendered) == 'undefined' || is_card_view_rendered == false ) {
-			jQuery(render_container/*".products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products"*/).html(jQuery(/*render_container*/'.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products',jQuery(data)).html());
+			if(jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products').length<=0) {
+				jQuery(render_container).html(jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products',jQuery(data)).html());
+			} else {
+				jQuery(render_container).html(jQuery('.products:last,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products',jQuery(data)).html());
+			}
+
+			
 		}						
 		else {
 			wbc_attach_card_views();
@@ -78,8 +85,15 @@ function eo_wbc_filter_render_html(data,render_container) {
 
 /*if(eo_wbc_object.disp_regular=='1'){
 	*/
-	jQuery.fn.eo_wbc_filter_change_native= function(init_call=false,form_selector="form#eo_wbc_filter",render_container='.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products') {				
+	jQuery.fn.eo_wbc_filter_change_native= function(init_call=false,form_selector="form#eo_wbc_filter",render_container='') {				
 	//flag indicates if to show products in tabular view or woocommerce's default style.		
+
+		if(render_container==='') {
+			render_container = jQuery(".products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)");
+			if(render_container.length<=0) {
+				render_container = jQuery(".elementor-products-grid");
+			}
+		}
 
 		var form=jQuery(form_selector/*"form#eo_wbc_filter"*/);	
 		if(form.find('[name="html_destination"]').length>0){

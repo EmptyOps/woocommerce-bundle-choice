@@ -32,7 +32,7 @@
         <?php if(wp_is_mobile() and !wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
           display_style='block';
         <?php endif; ?>
-        $('[data-tab-group="'+group_id+'"]:not(.toggle_sticky_mob_filter.advance_filter_mob)').css('display',display_style);
+        $('[data-tab-group="'+group_id+'"]:not(.toggle_sticky_mob_filter.advance_filter_mob)').not('[data-tab-group]:has([data-switch_filter_type-alternate])').css('display',display_style);
 
         let group_id_alt = $(this).data('tab-altname');
         $('[data-tab-group="'+group_id_alt+'"]').css('display','none');

@@ -23,6 +23,15 @@ jQuery(function(){
 			});		
 		}
 
+		unique_email(fields,cfield) {
+			jQuery(fields).each(function(index,field){
+				if(jQuery(cfield).val() === jQuery(field).val()) {
+					return false;
+				}
+			});
+			return true;
+		}
+
 		validate(form_fields) {
 			let required_fields = jQuery(form_fields).filter('.required');			
 			let numeric_fields = jQuery(form_fields).filter('.numeric');
@@ -87,14 +96,7 @@ jQuery(function(){
 			return validation_status;
 		}
 
-		unique_email(fields,cfield) {
-			jQuery(fields).each(function(index,field){
-				if(jQuery(cfield).val() === jQuery(field).val()) {
-					return false;
-				}
-			});
-			return true;
-		}
+		
 
 		init() {
 
