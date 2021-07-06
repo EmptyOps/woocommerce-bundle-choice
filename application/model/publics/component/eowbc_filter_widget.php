@@ -2248,6 +2248,8 @@ class EOWBC_Filter_Widget {
 				$ordered_filter[$item['order']][] = $item;
 			}
 
+			ksort($ordered_filter);
+
 			$filter = array();
 			foreach ($ordered_filter as $ordered_item) {
 				foreach ($ordered_item as $item) {
