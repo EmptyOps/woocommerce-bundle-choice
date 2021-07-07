@@ -254,8 +254,10 @@ class Filter
 		                    }
 		                }
 		            }
-		            $query->set('meta_query',$meta_quer_args);
-		        }		        
+
+		        }
+
+		        $query->set('meta_query',$meta_quer_args);
 
 		        /*echo "<pre>";
 		        print_r($_REQUEST);

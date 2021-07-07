@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
 
 spl_autoload_register(function( $class ) {
 	// First, separate the components of the incoming file.
-	$path = array_filter(explode( '\\', $class ));
+	$path = explode( '\\', $class );
 
 	if((empty($path[0]) or empty($path[1])) or $path[0] !== 'eo' or $path[1] !== 'wbc') return;
 

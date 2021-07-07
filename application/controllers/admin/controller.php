@@ -44,14 +44,17 @@ class Controller extends \eo\wbc\controllers\Controller {
 	public function default_uis($type,$exceptance) {
 		$defaults = array(
 			'label'=>array('text','color','back_color','font_family','font_size'),
+			'p'=>array('text','color','back_color','font_family','font_size'),
+			'span'=>array('text','color','back_color','font_family','font_size'),
 			'header'=>array('text','color','back_color','font_family','font_size'),
 			'sub_header'=>array('text','color','back_color','font_family','font_size'),
 			'checkbox'=>array('checkbox'),
 			'image'=>array('height','width','image'),
+			'img'=>array('height','width','image'),
 			'button'=>array('text','color','back_color','font_family','font_size','radius'),
 			'container'=>array('height','width','margin_left','margin_right'),
 			'wc_attribute_field'=>array('attribute','checkbox','text'),
-			'a'=>array('url')
+			'a'=>array('url','text')
 		);
 
 		$collection = array();
