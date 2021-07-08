@@ -100,7 +100,13 @@ function eo_wbc_filter_render_html(data,render_container) {
 			render_container = form.find('[name="html_destination"]').val();
 		}
 		var site_url=eo_wbc_object.eo_cat_site_url;
-		var ajax_url=site_url+eo_wbc_object.eo_cat_query;
+		var ajax_url = '';
+
+		if(site_url.includes('?')) {
+			site_url = site_url+eo_wbc_object.eo_cat_query;
+		} else {
+			site_url = site_url+'/?'+eo_wbc_object.eo_cat_query;
+		}		
 		
 		jQuery.ajax({
 			url: ajax_url,//form.attr('action'),
