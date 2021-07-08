@@ -59,6 +59,11 @@ class Filter
 
     	$table_columns = unserialize(wbc()->options->get_option('lookup_manager','table_columns',serialize(array())));
 
+    	/*echo "<pre>";
+    	print_r($table_columns);
+    	echo "</pre>";
+    	die();*/
+
         if(empty($table_columns)){
         	return array();
         }
@@ -96,7 +101,9 @@ class Filter
 						}
 
 						if(empty($category_fields) and $result_false === true){
-							$category_fields['product_id']='-1';
+							//$category_fields['product_id']='-1';
+							//$category_fields[]='product_id';
+							return array();
 						}
                     }
 				}        		
@@ -257,7 +264,7 @@ class Filter
         		$pids[] = empty($value[1])?$value[0]:$value[1]; 
         	}
         }
-		
+
 		$pids = array_unique($pids);		
 		return $pids;
     }
