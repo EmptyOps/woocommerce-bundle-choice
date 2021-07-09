@@ -144,13 +144,15 @@ class Admin {
                     array('admin_url'=>admin_url( 'admin-ajax.php'))
                 );            
                 wp_enqueue_script('eowbc_admin_js');
-			}, 10 );
 
-			if(wbc()->sanitize->get('action')!=='elementor') {
-				if(did_action( 'wp_enqueue_media' )){
-					wp_enqueue_media();	
+                if(wbc()->sanitize->get('action')!=='elementor') {
+					if(!did_action( 'wp_enqueue_media' )){
+						wp_enqueue_media();	
+					}
 				}
-			}			
+
+			}, 10 );
+			
 		});
 	}	
 }
