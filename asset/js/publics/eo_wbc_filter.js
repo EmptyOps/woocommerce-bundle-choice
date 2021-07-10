@@ -23,9 +23,7 @@ function eo_wbc_filter_render_html(data,render_container) {
 				jQuery(render_container).html(jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products',jQuery(data)).html());
 			} else {
 				jQuery(render_container).html(jQuery('.products:last,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products',jQuery(data)).html());
-			}
-
-			
+			}			
 		}						
 		else {
 			wbc_attach_card_views();
@@ -48,9 +46,11 @@ function eo_wbc_filter_render_html(data,render_container) {
 	else {
 		jQuery(render_container/*".products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products"*/).html('<p class="woocommerce-info" style="width: 100%;">No products were found matching your selection.</p>');	
 	}	
-	
-	if(render_container===".products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products"){
-		//Replacing Pagination details.....
+
+	/*if(render_container===".products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products"){*/
+		//Replacing Pagination details.....		
+		console.log(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html());
+
 		if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html()!==undefined) {
 			
 			jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html());
@@ -58,7 +58,7 @@ function eo_wbc_filter_render_html(data,render_container) {
 		else {
 			jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html('');	
 		}
-	}
+	/*}*/
 
 	//jQuery("body").fadeTo('fast','1')									
 	jQuery("#loading").removeClass('loading');
@@ -128,6 +128,10 @@ function eo_wbc_filter_render_html(data,render_container) {
 		return false;
 	}	
 	
+	if(typeof(window.eo_wbc_filter_change) === 'undefined') {
+		window.eo_wbc_filter_change = jQuery.fn.eo_wbc_filter_change_native;
+	}
+
 	if( (typeof(jQuery.fn.eo_wbc_filter_change)=="undefined" || jQuery.fn.eo_wbc_filter_change==undefined) && typeof(window.eo_wbc_e_tabview) !== 'object' ){		
 		jQuery.fn.eo_wbc_filter_change = jQuery.fn.eo_wbc_filter_change_native;
 	}

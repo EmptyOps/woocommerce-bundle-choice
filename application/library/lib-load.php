@@ -21,6 +21,10 @@ if(!class_exists('WBC_Loader')) {
 
 		public function asset($type,$path,$param = array(),$version="",$load_instantly=false) {
 
+			if(!apply_filters('wbc_load_asset_filter',true,$type,$path,$param,$version,$load_instantly)) {
+				return true;
+			}
+
 			$_path = '';
 			$_handle = str_replace(' ','-',str_replace('/','-',$path));			
 			switch ($type) {

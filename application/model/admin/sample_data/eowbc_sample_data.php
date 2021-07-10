@@ -1005,7 +1005,7 @@ class Eowbc_Sample_Data {
 			$attachment = array(
 				'post_mime_type' => $type['type'],
 				'post_parent' => null,
-				'post_title' => preg_replace('/\.[^.]+$/', '', $name),
+				'post_title' => implode('-',explode(' ',strtolower($name))).'-image'/*preg_replace('/\.[^.]+$/', '', $name)*/,
 				'post_content' => '',
 				'post_status' => 'inherit'
 			);
