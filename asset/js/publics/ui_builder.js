@@ -24,17 +24,14 @@ jQuery(function(){
 		}
 
 		unique_email(fields,cfield) {
-			jQuery(fields).each(function(index,field){
-				if(jQuery(cfield).val() === jQuery(field).val()) {
-					return false;
-				}
-			});
-			return true;
+			
 		}
 
 		validate(form_fields) {
 			let required_fields = jQuery(form_fields).filter('.required');			
 			let numeric_fields = jQuery(form_fields).filter('.numeric');
+			let email_fields = jQuery(form_fields).filter('.email:not(.unique)');
+			let email_unique_fields = jQuery(form_fields).filter('.email.unique');
 
 			let validation_status = true;
 
@@ -49,6 +46,10 @@ jQuery(function(){
 				});
 			}
 
+			if(validation_status===false) {
+				return validation_status;
+			}
+
 			if((numeric_fields.hasOwnProperty('length') && numeric_fields.length>0)) {
 				jQuery(numeric_fields).each(function(index,field){
 					let value = jQuery(field).val();
@@ -59,9 +60,57 @@ jQuery(function(){
 					}
 				});
 			}
+
+			if(validation_status===false) {
+				return validation_status;
+			}
+
+			if((email_fields.hasOwnProperty('length') && email_fields.length>0)) {
+				jQuery(email_fields).each(function(index,field){
+					let value = jQuery(field).val();
+
+					if( typeof(value)===typeof(undefined) || !value.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/) ){
+						alert('Please provide valid email to the email field.');
+						validation_status = false;
+						return validation_status;
+					}
+				});
+			}
+
+			if(validation_status===false) {
+				return validation_status;
+			}
+
+			if((email_unique_fields.hasOwnProperty('length') && email_unique_fields.length>0)) {
+				jQuery(email_unique_fields).each(function(index,field){
+					let value = jQuery(field).val();
+
+					if( typeof(value)===typeof(undefined) || !value.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/) ){
+						alert('Please provide valid email to the email field.');
+						validation_status = false;
+						return validation_status;
+					}
+
+					if( !(function(email_unique_fields,field){ 
+						jQuery(fields).each(function(index,field){
+							if(jQuery(cfield).val() === jQuery(field).val()) {
+								return false;
+							}
+						});
+						return true; }) ) {
+
+						alert('Please set unique email to the fields.');
+						validation_status = false;
+						return validation_status;	
+					}
+
+				});
+			}
 			
 			return validation_status;
 		}
+
+		
 
 		init() {
 
@@ -87,7 +136,7 @@ jQuery(function(){
 						$res = JSON.parse($res);
 						if($res.type=='success'){
 							alert('A request is been sent.');
-							window.location.reload();
+							//window.location.reload();
 						} else {
 							alert('Failed to submit request.');
 						}

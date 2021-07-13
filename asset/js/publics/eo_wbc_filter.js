@@ -49,7 +49,7 @@ function eo_wbc_filter_render_html(data,render_container) {
 
 	/*if(render_container===".products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products"){*/
 		//Replacing Pagination details.....		
-		console.log(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html());
+		//console.log(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html());
 
 		if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html()!==undefined) {
 			
