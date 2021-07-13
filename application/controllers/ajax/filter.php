@@ -90,7 +90,7 @@ class Filter
 						////////////////////////////////////////////////////////
 						//echo 'FIELD: '.wbc()->sanitize->request('cat_filter_'.$_category).PHP_EOL;
 						$result_false = false;
-						foreach (array_filter(explode('|', str_replace([',','+'],'|',wbc()->sanitize->request('cat_filter_'.$_category)) )) as $_category_field) {
+						/*foreach (array_filter(explode('|', str_replace([',','+'],'|',wbc()->sanitize->request('cat_filter_'.$_category)) )) as $_category_field) {
 							//////////////////////////////
 							//echo 'ITEM: '.$_category_field.PHP_EOL;
 							if(!empty($table_columns['category'][$_category_field])){
@@ -98,6 +98,31 @@ class Filter
 							} else {
 								$result_false = true;
 							}
+						}*/
+
+						
+						foreach ( array_filter(explode('+',wbc()->sanitize->request('cat_filter_'.$_category))) as $_category_field_index=>$_category_field) {
+							//////////////////////////////
+							//echo 'ITEM: '.$_category_field.PHP_EOL;
+
+							$_category_field_chunk = array_filter(explode(',',$_category_field));
+
+							if(!empty($_category_field_chunk) and is_array($_category_field_chunk)) {
+								
+								$category_fields [$_category_field_index] = array();
+
+								foreach($_category_field_chunk as $_category_field_chunk_) {
+									if(!empty($table_columns['category'][$_category_field_chunk_])){
+										$category_fields [$_category_field_index][] = $_category_field_chunk_;
+									} else {
+										$result_false = true;
+									}		
+								}
+							} else {
+								$result_false = true;
+							}
+
+							
 						}
 
 						if(empty($category_fields) and $result_false === true){
@@ -108,7 +133,7 @@ class Filter
                     }
 				}        		
         	} 
-
+        
         	$_category_query_list = array();
         	if(!empty(wbc()->sanitize->request('_category_query'))) {
         		$_category_query = array_filter(explode(',',wbc()->sanitize->request('_category_query')));
@@ -123,9 +148,11 @@ class Filter
         	}
 
         	if(empty($category_fields) and  !empty(wbc()->sanitize->request('_current_category'))) {
-        		foreach (array_filter(explode(',',wbc()->sanitize->request('_current_category'))) as $_category_field) {
-					if(!empty($table_columns['category'][$_category_field])){
-						$category_fields [] = $_category_field;
+        		
+        		foreach (array_filter(explode(',',wbc()->sanitize->request('_current_category'))) as $_category_field_index=>$_category_field) {
+					if(!empty($table_columns['category'][$_category_field])){						
+						$category_fields[$_category_field_index] = array();
+						$category_fields[$_category_field_index][] = $_category_field;
 					}
 				}
         	}
@@ -178,19 +205,33 @@ class Filter
             }
         }
 
+
         if(empty($category_fields)){
         	$category_fields = 1;
         } else {
-        	$field_query = array();
-        	foreach ($category_fields as $field) {
-        		$field_query[]="`${field}` != 0";
+        	$field_query_and = array();
+
+        	foreach ($category_fields as $field_and_index=>$field_and) {
+        		if(is_array($field_and) and !empty(array_filter($field_and))) {
+        			$field_query_or = array();
+        			foreach ($field_and as $field_or_index=>$field_or) {
+        				$field_query_or[]="`${field_or}` != 0";
+        			}
+
+        			$field_query_and[] = "(" .implode(' OR ',$field_query_or) .")";
+
+        		} else{
+        			$field_query_and[] = "`${field_and}` != 0";	
+        		}
         	}
 
-        	if(wbc()->options->get_option('mapping_prod_mapping_pref','prod_mapping_pref_category','and')==='and'){
+        	$category_fields = "(" .implode(' AND ',$field_query_and) .")"; 
+
+        	/*if(wbc()->options->get_option('mapping_prod_mapping_pref','prod_mapping_pref_category','and')==='and'){
         		$category_fields = "(" .implode(' AND ',$field_query) .")"; 
         	} else {
         		$category_fields = "(" .implode(' OR ',$field_query) .")"; 
-        	}
+        	}*/
         }
         
         if(empty($_category_query_list)){
@@ -247,6 +288,9 @@ class Filter
         
 
         global $wpdb;
+        
+     /*  echo "SELECT `product_id`,`parent_id` FROM `{$wpdb->wc_product_meta_lookup}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql}";
+        die();*/
 
         if($return_query) {
         	return "SELECT `product_id`,`parent_id` FROM `{$wpdb->wc_product_meta_lookup}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql}";
@@ -278,9 +322,9 @@ class Filter
 				
 		if(!empty(wbc()->sanitize->get('eo_wbc_filter'))) {
 			
-		    add_filter('pre_get_posts',function($query ) {		    		
+		    add_filter('pre_get_posts',function($query ) {
 
-		        if( $query->is_main_query() ) {
+		        if( $query->is_main_query() and !empty($query->query_vars['product_cat'])) {
 
 		        	if( version_compare( constant('WC_VERSION'), '3.6' ) >=0) {
 
