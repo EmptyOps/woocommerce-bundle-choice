@@ -75,10 +75,10 @@ class Public_Handler {
 
         	/*add_action('template_redirect',function(){
         		if (is_product_category()) {*/
-		        	if(isset($_GET['EO_WBC']) and !empty($_GET['EO_WBC'])){
+		        	if(isset($_GET['EO_WBC']) and !empty($_GET['EO_WBC']) and empty($_GET['_category'])) {
 			            // on load filter
 			            $_GET['eo_wbc_filter']=1;
-			            if(!empty($_GET['CAT_LINK'])){
+			            if(!empty($_GET['CAT_LINK'])){			            
 			                $_GET['_category']='cat_link';
 			                $_REQUEST['_category']='cat_link';
 			                $_GET['cat_filter_cat_link']=$_GET['CAT_LINK'];

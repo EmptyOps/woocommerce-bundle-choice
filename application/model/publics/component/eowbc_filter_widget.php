@@ -38,7 +38,9 @@ class EOWBC_Filter_Widget {
 		//Advance filters count
 		$advance_count=0;		
 		//Category Filters
-		$this->___category=array();
+		if(empty($this->___category)){
+			$this->___category=array();
+		}
 		//Attribute Filters
 		$_attr_list=array();
 
@@ -894,7 +896,18 @@ class EOWBC_Filter_Widget {
         // 					'eo_part_end_url'=>'/'.$this->product_url(),
         // 					'eo_cat_site_url'=>$site_url,
         // 					'eo_cat_query'=>'/?'.http_build_query($_GET)
-        // 				));            
+        // 				));
+
+        if(empty($this->___category)) {
+        	$this->___category = array();
+        }
+
+		if(!empty(wbc()->sanitize->get('_category'))) {
+			$this->___category = array_unique( explode(',',wbc()->sanitize->get('_category')) , $this->___category );
+			unset($_GET['_category']);
+			unset($_REQUEST['_category']);
+		}
+
         wbc()->load->asset('localize','publics/eo_wbc_filter',array( 'eo_wbc_object' => array(
         					'eo_product_url'=>$product_url,
         					//'eo_view_tabular'=>($current_category=='solitaire'?1:0),

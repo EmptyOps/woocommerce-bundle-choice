@@ -600,7 +600,7 @@ class EOWBC_Breadcrumb
                                     $_taxonomy_ = $_term_->taxonomy;                            
                                     if($_taxonomy_==='product_cat') {
 
-                                        $group_keys_id  = $this->get_group_id4map($groups,$term_key,$terms);
+                                        $group_keys_id  = self::get_group_id4map($groups,$term_key,$terms);
                                         $gcate[$group_keys_id][]= $_term_->slug;
 
                                     } elseif( substr($_taxonomy_,0,3) =='pa_' ) {
@@ -617,7 +617,7 @@ class EOWBC_Breadcrumb
                                 if($_taxonomy_==='product_cat') {
 
                                     /*$gcategory[$term_key][]= $_term_->slug;*/
-                                    $group_keys_id  = $this->get_group_id4map($groups,$term_key);
+                                    $group_keys_id  = self::get_group_id4map($groups,$term_key);
                                     $gcate[$group_keys_id][]= $_term_->slug;
 
                                 } elseif( substr($_taxonomy_,0,3) =='pa_' ) {
@@ -746,6 +746,20 @@ class EOWBC_Breadcrumb
             
         }
         return $url;
+    }
+
+    public static function get_group_id4map($groups,$term_key,$terms) {        
+        $option_key = '';
+        foreach ($groups as $gkey => $gvalue) {
+            if(array_search($term_key,$gvalue)!==false){
+                $option_key = $gkey;
+            }
+
+            if( count(array_intersect($gvalue,array_keys($terms))) === count($terms) ) {
+                return $gkey;
+            }
+        }
+        return $option_key;
     }
 
     private static function eo_wbc_breadcrumb_get_category($product_id)

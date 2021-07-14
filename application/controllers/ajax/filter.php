@@ -82,6 +82,16 @@ class Filter
         		//////////////////////////////////////////////////
         		//echo wbc()->sanitize->request('_category').PHP_EOL;
 
+        		//print_r($_GET);
+
+        		/*print_r($_REQUEST);
+
+        		print_r($_POST);*/
+
+        		//print_r(array_unique(array_filter(explode(',', wbc()->sanitize->get('_category')))));
+
+        		//print_r(array_unique(array_filter(explode(',', wbc()->sanitize->request('_category')))));
+
 				foreach( array_unique(array_filter(explode(',', wbc()->sanitize->request('_category')))) as $_category) {
 					////////////////////////
 					//echo $_category.PHP_EOL;
@@ -289,8 +299,8 @@ class Filter
 
         global $wpdb;
         
-     /*  echo "SELECT `product_id`,`parent_id` FROM `{$wpdb->wc_product_meta_lookup}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql}";
-        die();*/
+     	//echo "SELECT `product_id`,`parent_id` FROM `{$wpdb->wc_product_meta_lookup}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql}";
+        //die();
 
         if($return_query) {
         	return "SELECT `product_id`,`parent_id` FROM `{$wpdb->wc_product_meta_lookup}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql}";
