@@ -20,16 +20,19 @@ class Home {
 
 	public function init() {
 
-
-		if(isset($_GET['wbc_report']) && !empty(wbc()->sanitize->get('wbc_report'))) {
+      $configuration_buttons_page = wbc()->options->get_option('configuration','buttons_page',false);
+		  
+      if(isset($_GET['wbc_report']) && !empty(wbc()->sanitize->get('wbc_report'))) {
         	if(isset($_SERVER['HTTP_REFERER'])){
         		wbc()->options->set('eo_wbc_mapping_error_report',$_SERVER['HTTP_REFERER']);
         		\EOWBC_Error_Handler::log('One user has reported mapping issue at this <a href="'.$_SERVER['HTTP_REFERER'].'" target="_blank">link</a>, please ensure you have added mapping to connect products from first to second step.',2);	
         	}
-      	} 
-
-      	$this->show_buttons();		
-	}
+      } 
+      
+      if( ($configuration_buttons_page==1 or $configuration_buttons_page==3) ) {
+        	$this->show_buttons();
+        }
+	  }
 
     public function show_buttons(){
 
