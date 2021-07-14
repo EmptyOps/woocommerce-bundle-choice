@@ -95,6 +95,7 @@ class Eowbc_Sample_Data {
 	        $this->data_template->set_configs_after_attributes();
 
 	        wbc()->options->delete($feature_key.'_created_attribute');
+	        
 	    } 
 	}
 
@@ -257,9 +258,14 @@ class Eowbc_Sample_Data {
 		if(!isset($this->data_template->get_products()[$index])) {
 			return array( "type"=>"error", "msg"=>"No product found at index ".$index );	//FALSE;
 		}
-	
+
+		
 		$product=$this->data_template->get_products()[$index];
 
+		if(!empty($product['sku']) and !empty(wc_get_product_id_by_sku($product['sku'])) ) {
+			return $res;
+		}
+		
 		$product_id= wp_insert_post( array(
 		    'post_author' => get_current_user_id(),
 		    'post_title' => $product['title'],
@@ -301,6 +307,10 @@ class Eowbc_Sample_Data {
 
 		update_post_meta( $product_id, '_product_attributes', $product['attribute'] );
 
+		if(!empty($product['sku'])) {
+			update_post_meta( $product_id, '_sku', $product['sku'] );			
+		}
+
 		foreach ($product['attribute'] as $attr_index => $attribute) {
 			wp_set_object_terms( $product_id, explode('|',$attribute['value']) , $attr_index );					
 		}
@@ -322,6 +332,8 @@ class Eowbc_Sample_Data {
 
 			update_post_meta($product_id,"_product_image_gallery",implode(',', $imgs));
 		}
+
+		
 
 		$parent_id = $product_id;
 		if(!empty($product['variation'])){
@@ -379,7 +391,7 @@ class Eowbc_Sample_Data {
 			update_post_meta( $parent_id, '_sales_price', $product['price']);
 			update_post_meta( $parent_id, '_sale_price', $product['sale_price']);				
 			update_post_meta( $parent_id, '_manage_stock','no' );						
-		}			
+		}
 
 		return $res;	// TRUE;
 	}	
@@ -685,16 +697,27 @@ class Eowbc_Sample_Data {
         		// $_data = unserialize(wbc()->options->get_option_group('filters_'.$index,"a:0:{}"));
         		// $names=array_column($_data,'name');
         		// if( !in_array($filter['name'], $names)){
+
         			$prefix = "";
+        			if(empty($this->tab_key_prefix)){
+        				$this->tab_key_prefix = '';
+        			}
+
         			if( $index == "d_fconfig" ) {
-						$_POST["saved_tab_key"] = "d_fconfig";
+						$_POST["saved_tab_key"] = $this->tab_key_prefix."d_fconfig";
 						$prefix = "d";
+						$_POST['first_category_altr_filt_widgts'] = $filter['template'];
         			}
         			else {
-        				$_POST["saved_tab_key"] = "s_fconfig";
+        				$_POST["saved_tab_key"] = $this->tab_key_prefix."s_fconfig";
 						$prefix = "s";
+						$_POST['second_category_altr_filt_widgts'] = $filter['template'];
         			}
-        			 	
+
+        			if(!empty($filter['filter_set'])) {        				
+        				$_POST[$prefix.'_fconfig_set']=$filter['filter_set'];
+        			}
+        			        			 	
         			$_POST[$prefix.'_fconfig_filter']=$filter['name'];
 	                $_POST[$prefix.'_fconfig_type']=$filter['type'];
 	                $_POST[$prefix.'_fconfig_label']=$filter['label'];
@@ -703,6 +726,7 @@ class Eowbc_Sample_Data {
 	                $_POST[$prefix.'_fconfig_input_type']=$filter['input'];
 	                $_POST[$prefix.'_fconfig_column_width']=$filter['column_width'];
 	                $_POST['filter_template'] = $filter['template'];
+	                
 	                $_POST[$prefix.'_fconfig_ordering']=$filter['order'];
 	                $_POST[$prefix.'_fconfig_icon_size']='';
 	                $_POST[$prefix.'_fconfig_icon_label_size']='';
@@ -710,11 +734,22 @@ class Eowbc_Sample_Data {
 	                $_POST[$prefix.'_fconfig_add_help']=$filter['help'];
 	                $_POST[$prefix.'_fconfig_add_help_text']=$filter['help_text'];
 	                $_POST[$prefix.'_fconfig_add_enabled']=$filter['enabled'];
+	                
+
+	                if(!empty($filter['filter_category'])) {
+						$_POST['filter_category']=$filter['filter_category'];	                	
+	                }
 
         			// update_option($index,serialize($_data)); 
         			// wbc()->options->update_option_group( 'filters_'.$index, serialize($_data) );
-        			
-					$res = \eo\wbc\model\admin\Eowbc_Filters::instance()->save( \eo\wbc\controllers\admin\menu\page\Filters::get_form_definition() );
+        			$filter_model = \eo\wbc\model\admin\Eowbc_Filters::instance();
+        			$filter_model->tab_key_prefix = $this->tab_key_prefix;
+
+        			if(empty($this->form_defination)) {
+        				$this->form_defination = \eo\wbc\controllers\admin\menu\page\Filters::get_form_definition(); 
+        			}
+
+					$res = $filter_model->save( $this->form_defination ,true);
 
 					unset($_POST[$prefix.'_fconfig_filter']);
 	                unset($_POST[$prefix.'_fconfig_type']);
@@ -728,14 +763,33 @@ class Eowbc_Sample_Data {
 	                unset($_POST[$prefix.'_fconfig_icon_label_size']);
 	                unset($_POST[$prefix.'_fconfig_add_reset_link']);
 
+
+	                if(!empty($filter['filter_set'])) {        				
+        				unset($_POST[$prefix.'_fconfig_set']);
+        			}
+
+	                if( $index == "d_fconfig" ) {						
+						unset($_POST['first_category_altr_filt_widgts']);
+        			}
+        			else {        				
+						unset($_POST['second_category_altr_filt_widgts']);
+        			}
+
 	                unset($_POST['filter_template']);
+	                unset($_POST['first_category_altr_filt_widgts']);
 	                unset($_POST[$prefix.'_fconfig_add_help']);
 	                unset($_POST[$prefix.'_fconfig_add_help_text']);
 	                unset($_POST[$prefix.'_fconfig_add_enabled']);
 
+	                if(!empty($filter['filter_category'])) {
+						unset($_POST['filter_category']);
+	                }
+
         		// }
         	}
-    	}        	
+    	}
+    	
+    	do_action('eowbc_automation_post_sample_filters',$__cat__, $__att__);        	
 	}
 
 	function create_attribute( $args ){
@@ -951,7 +1005,7 @@ class Eowbc_Sample_Data {
 			$attachment = array(
 				'post_mime_type' => $type['type'],
 				'post_parent' => null,
-				'post_title' => preg_replace('/\.[^.]+$/', '', $name),
+				'post_title' => implode('-',explode(' ',strtolower($name))).'-image'/*preg_replace('/\.[^.]+$/', '', $name)*/,
 				'post_content' => '',
 				'post_status' => 'inherit'
 			);

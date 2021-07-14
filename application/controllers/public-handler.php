@@ -24,7 +24,32 @@ class Public_Handler {
 		/*
 		*	root method to process all the frontend requests.
 		*/		
-		do_action( 'before_public_process_request' );		
+		do_action( 'before_public_process_request' );
+
+
+		if(!empty($_GET['EO_WBC'])) {
+			add_filter('WPML_filter_link',function($url, $lang_info){
+				$__get = $_GET;
+				unset($__get['lang']);
+				$query_url=http_build_query($__get);
+				if(strpos($url,'/?')!==false) {
+					if(substr($url,-1)==='&'){
+						$url.=$query_url;
+					} else {
+						$url.='&'.$query_url;	
+					}					
+				} elseif(strpos($url,'?')!==false) {
+					if(substr($url,-1)==='&'){
+						$url.=$query_url;
+					} else {
+						$url.='&'.$query_url;	
+					}				
+				} else {
+					$url = untrailingslashit($url).'/?'.$query_url;					
+				}
+				return $url;			
+			},11,2);
+		}
 
 		//Perform plugin's task only if both configuration and mapping are completed.
 		

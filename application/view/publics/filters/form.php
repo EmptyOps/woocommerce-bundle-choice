@@ -4,26 +4,77 @@
 *	Template to show form for filters 
 */
 
+/*jQuery.fn.eo_wbc_filter_change(false,'#sc_eo_wbc_filter');*/
+
+
+
+
+if(wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting','filter_setting_advance_two_tabs',false)) {
+
+	$first_tab_term = wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting','filter_setting_advance_first_category',false);
+	if(!empty($first_tab_term)) {
+		$first_tab_term = get_term_by('id',$first_tab_term, 'product_cat');
+		if(!empty($first_tab_term) and !is_wp_error($first_tab_term)) {
+			$first_tab_term = $first_tab_term->slug;
+		} else {
+			$first_tab_term = false;
+		}
+	} else {
+		$first_tab_term = false;
+	}
+
+	$second_tab_term = wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting','filter_setting_advance_second_category',false);
+	if(!empty($second_tab_term)) {
+		$second_tab_term = get_term_by('id',$second_tab_term, 'product_cat');
+		if(!empty($second_tab_term) and !is_wp_error($second_tab_term)) {
+			$second_tab_term = $second_tab_term->slug;
+		} else {
+			$second_tab_term = false;
+		}
+	} else {
+		$second_tab_term = false;
+	}
+
+
+	if(isset($_GET[wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting','filter_setting_advance_second_tabs',false)])) {
+		if(array_search($first_tab_term,$thisObj->___category) !==false ) {			
+			unset($thisObj->___category[array_search($first_tab_term,$thisObj->___category)]);
+		}
+
+	} else {
+
+		if(array_search($second_tab_term,$thisObj->___category) !==false ) {
+
+			unset($thisObj->___category[array_search($second_tab_term,$thisObj->___category)]);
+		}
+		
+	}
+}
+
+
 ?>	
 		
 	<!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
 	<!--WooCommerce Product Bundle Choice filter form-->
-	<form method="GET" name="eo_wbc_filter" id="eo_wbc_filter" style="clear: both;">
 
+	<form method="GET" name="<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter" id="<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter" style="clear: both;">
+		<?php do_action('eowbc_pre_filter_form'); ?>
 		<input type="hidden" name="eo_wbc_filter" value="1" />	
 		<input type="hidden" name="paged" value="1" />	
 		<input type="hidden" name="last_paged" value="1" />
+		<?php if(apply_filters('eowbc_show_filter_actions_field',true)): ?>
 		<input type="hidden" name="action" value="eo_wbc_filter"/>
-		
-		<input type="hidden" name="_current_category" value="<?php echo (!empty(wbc()->sanitize->get('CAT_LINK'))?','.wbc()->sanitize->get('CAT_LINK'):$current_category); ?>" />
+		<?php endif; ?>
+
+		<input type="hidden" name="_current_category" value="<?php echo (!empty(wbc()->sanitize->get('CAT_LINK'))?wbc()->sanitize->get('CAT_LINK'):$current_category); ?>" />
 
 		<input type="hidden" name="_category_query" id="eo_wbc_cat_query" 
-			value="<?php echo (!empty(wbc()->sanitize->get('CAT_LINK'))?','.wbc()->sanitize->get('CAT_LINK'):'')?>" />
-
+			value="<?php echo (!empty(wbc()->sanitize->get('CAT_LINK'))?wbc()->sanitize->get('CAT_LINK'):$current_category); ?>" />
+			
 		<input type="hidden" name="_category" value="<?php echo implode(',',$thisObj->___category) ?>"/>
 		
 		<input type="hidden" name="cat_filter__two_tabs" value=""/>
-
+		<?php do_action('eo_wbc_additional_form_field',$filter_ui); ?>
 		<input type="hidden" name="_attribute" id="eo_wbc_attr_query" value="" />			
 		<?php if(isset($_GET['products_in']) AND !empty(wbc()->sanitize->get('products_in')) ): ?>
 			<input type="hidden" name="products_in" value="<?php echo wbc()->sanitize->get('products_in') ?>" />			
@@ -53,6 +104,7 @@
 		?>
 	</form>
 	<br/><br/>
+	<?php if(apply_filters('eowbc_enque_filter_js',call_user_func('__return_true'))): ?>
 	<script type="text/javascript">		
 
 		jQuery(document).ready(function($){			
@@ -209,7 +261,7 @@
 					    	}
 					    	jQuery('[name="paged"]').val('1');
 					    	<?php if(empty(wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
-					    	jQuery.fn.eo_wbc_filter_change();
+					    	jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter');
 					    	<?php endif; ?>
 					    } else if( min==_min && max==_max ){
 					    	if(jQuery(this).attr('data-slug')!='price'){
@@ -363,10 +415,11 @@
 		    	}
 		    	jQuery('[name="paged"]').val('1');
 		    	<?php if(empty(wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
-		    	jQuery.fn.eo_wbc_filter_change();
+		    	jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter');
 		    	<?php endif; ?>
 			}});				
 			/*----------------------------------------------------*/
+
 			/*----------------------------------------------------*/			
 			jQuery.fn.ui_accordion = jQuery.fn.accordion;
 			jQuery.fn.ui_slider = jQuery.fn.slider;
@@ -375,6 +428,10 @@
 			jQuery.fn.accordion = jQuery.fn.jui_accordion;
 			jQuery.fn.slider = jQuery.fn.jui_slider;
 			jQuery.fn.checkbox = jQuery.fn.jui_checkbox;
-		});			
+		});
+
 	</script> 
-	
+
+	<?php endif; ?>
+
+	<?php do_action('eowbc_post_filter_javascript',$filter_ui); ?>

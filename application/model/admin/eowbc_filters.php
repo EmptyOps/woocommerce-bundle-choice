@@ -15,7 +15,7 @@ class Eowbc_Filters extends Eowbc_Model {
 
 	private static $_instance = null;
 
-	protected $tab_key_prefix = '';
+	public $tab_key_prefix = '';
 
 	public static function instance() {
 		if ( ! isset( self::$_instance ) ) {
@@ -198,7 +198,6 @@ class Eowbc_Filters extends Eowbc_Model {
 
 				$filter_data = unserialize(wbc()->options->get_option_group('filters_'.$this->tab_key_prefix.'d_fconfig',"a:0:{}"));
 				
-
 				if(!empty($filter_data)){
 					$ids = array_keys($filter_data);
 					$this->deactivate( $ids,$this->tab_key_prefix.'d_fconfig',1 );
@@ -288,7 +287,8 @@ class Eowbc_Filters extends Eowbc_Model {
 	    	}
 	    	$key_clean = ((!empty($this->tab_key_prefix) and strpos($key,$this->tab_key_prefix)===0)?substr($key,strlen($this->tab_key_prefix)):$key);
 	    	//$res['data_form'][]= $tab;
-			$is_table_save = ($key != $this->tab_key_prefix."altr_filt_widgts" and $key != $this->tab_key_prefix."filter_setting") ? true : false;
+			$is_table_save = ($key == $this->tab_key_prefix."d_fconfig" or $key == $this->tab_key_prefix."s_fconfig" or $key=='filter_set') ? true : false;
+
 			$table_data = array();
 			$tab_specific_skip_fileds = $is_table_save ? array('eowbc_price_control_methods_list_bulk','eowbc_price_control_sett_methods_list_bulk') : array();
 
@@ -316,8 +316,7 @@ class Eowbc_Filters extends Eowbc_Model {
 			    				$table_data['filter_template'] = apply_filters('eowbc_admin_form_filters_save_d_filter_template',wbc()->sanitize->post('first_category_altr_filt_widgts'));
 			    			} elseif ($fk == "s_fconfig_ordering" and !empty(wbc()->sanitize->post('second_category_altr_filt_widgts'))) {
 			    				$table_data['filter_template'] = apply_filters('eowbc_admin_form_filters_save_s_filter_template',wbc()->sanitize->post('second_category_altr_filt_widgts'));
-			    			}
-
+			    			}			    			
 				    		$table_data[$fk] = (int)wbc()->sanitize->post($fk); 	
 			    		}
 			    		else {
@@ -346,12 +345,17 @@ class Eowbc_Filters extends Eowbc_Model {
 		        	} else {
 				        foreach ($filter_data as $fdkey=>$item) {
 				          
-				            if ($item[$key_clean.'_filter']==$table_data[$key_clean."_filter"] and !empty($item['filter_template']) and !empty($table_data['filter_template']) and $item['filter_template']==$table_data['filter_template']) { 
+				            if ( apply_filters('eowbc_ajax_filters_check_duplicate', ($item[$key_clean.'_filter']==$table_data[$key_clean."_filter"] and !empty($item['filter_template']) and !empty($table_data['filter_template']) and $item['filter_template']==$table_data['filter_template'] ),$item,$table_data,$key_clean ) ) { 
 				            	if( $is_auto_insert_for_template ) {
-					            	$filter_data[$fdkey][$key_clean.'_add_enabled'] = 1;
+
+				            		$filter_data[wbc()->common->createUniqueId()] = $table_data;
+
+							        wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data));
+
+					            	/*$filter_data[$fdkey][$key_clean.'_add_enabled'] = 1;
 					                $res["type"] = "error";
 					    			$res["msg"] = eowbc_lang('Filter Already Exists and activated');
-					    			wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data) );
+					    			wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data) );*/
 					                return $res;
 				            	}
 				            	else {

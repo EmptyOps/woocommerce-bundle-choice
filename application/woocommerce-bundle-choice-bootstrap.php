@@ -61,6 +61,9 @@ class WooCommerce_Bundle_Choice_Bootstrap {
     		\eo\wbc\controllers\admin\Category_Meta::instance()->add_category_term_form(wbc()->sanitize->get('taxonomy'));
     	}
 
+    	// call in builder tools
+    	$this->visual_composer();
+
 		if((function_exists('is_ajax') and is_ajax()) or defined('WP_AJAX')) {
 			
 			add_action( "wp_ajax_nopriv_eowbc_ajax",array($this,'ajax'),10);
@@ -77,8 +80,39 @@ class WooCommerce_Bundle_Choice_Bootstrap {
 		}	
 	}
 
+	public function visual_composer(){
+		///////////////////////////////////////////////////
+		$enable_wpbakery = true;
+		$enable_elementor = false;
+		$enable_beaver = false;
+
+		if($enable_wpbakery and class_exists('Vc_Manager') and defined('WPB_PLUGIN_FILE')){
+			/*add_action('init',function(){*/
+				\eo\wbc\controllers\visual_tools\WP_Bakery::instance()->system_init();
+			/*});*/
+		}
+
+		if($enable_elementor and defined('ELEMENTOR_PLUGIN_BASE')){
+			/*add_action('init',function(){*/
+				\eo\wbc\controllers\visual_tools\Elementor::instance()->system_init();
+			/*});*/
+		}
+
+		if($enable_beaver){
+			/*add_action('init',function(){*/
+				\eo\wbc\controllers\visual_tools\WP_Beaver::instance()->system_init();
+			/*});*/
+		}
+		///////////////////////////////////////////////////
+	}
+
 	public function ajax(){
-		if(!empty(wbc()->sanitize->post('_wpnonce')) and !empty(wbc()->sanitize->post('resolver'))) {	
+
+		if(!empty(wbc()->sanitize->post('email_header_template')) and !empty(wbc()->sanitize->post('email_body_template'))) {
+			require_once constant('EOWBC_DIRECTORY').'application/controllers/ajax/common_email_handler.php';
+			
+		} elseif(!empty(wbc()->sanitize->post('_wpnonce')) and !empty(wbc()->sanitize->post('resolver'))) {	
+
 			$resolver_path = constant('EOWBC_DIRECTORY').'application/controllers/ajax/'.sanitize_text_field(wbc()->sanitize->post('resolver')).'.php';				
 			if(!empty(wbc()->sanitize->post('resolver_path'))){
 				$resolver_path =wbc()->sanitize->post('resolver_path');

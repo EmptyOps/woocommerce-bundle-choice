@@ -4,7 +4,7 @@ namespace eo\wbc\controllers\admin\menu\page;
 defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'Filters' ) ) {
-	class Filters {
+	class Filters extends \eo\wbc\controllers\admin\Controller {
 
 		private static $_instance;
 		public static function instance() {
@@ -24,7 +24,7 @@ if ( ! class_exists( 'Filters' ) ) {
 	        $map_base = get_categories(array(
 	            'hierarchical' => 1,
 	            'show_option_none' => '',
-	            'hide_empty' => 1,
+	            'hide_empty' => false,
 	            'parent' => (get_term_by('slug',$slug,'product_cat')?get_term_by('slug',$slug,'product_cat')->term_id:''),
 	            'taxonomy' => 'product_cat'
 	        ));
@@ -593,7 +593,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							'value'=>'fc1',
 							'validate'=>array('required'=>''),
 							'sanitize'=>'sanitize_text_field',
-							'options'=>array('fc1'=>'Default(Grid View)','fc2'=>'Template 1 (Expand/Collapse)','fc3'=>'Template 2','fc4'=>'Template 3','fc5'=>'Template 4'),
+							'options'=>apply_filters('eowbc_alternate_filter',array('fc1'=>'Default(Grid View)','fc2'=>'Template 1 (Expand/Collapse)','fc3'=>'Template 2','fc4'=>'Template 3','fc5'=>'Template 4')),
 							'class'=>array('fluid'),						
 							'size_class'=>array('required'),
 							'inline'=>false,
@@ -611,7 +611,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							'value'=>'sc1',
 							'validate'=>array('required'=>''),
 							'sanitize'=>'sanitize_text_field',
-							'options'=>array('sc1'=>'Default(Grid View)','sc2'=>'Template 1 (Expand/Collapse)','sc3'=>'Template 2','sc4'=>'Template 3','sc5'=>'Template 4'),
+							'options'=>apply_filters('eowbc_alternate_filter',array('sc1'=>'Default(Grid View)','sc2'=>'Template 1 (Expand/Collapse)','sc3'=>'Template 2','sc4'=>'Template 3','sc5'=>'Template 4')),
 							'class'=>array('fluid'),						
 							'size_class'=>array('required'),
 							'inline'=>false,
@@ -728,7 +728,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
 								'validate'=>array('required'=>''),
-								'options'=>\eo\wbc\controllers\admin\menu\page\Filters::eo_wbc_attributes_( \eo\wbc\controllers\admin\menu\page\Filters::eo_wbc_prime_category_() ),	//array_replace(\eo\wbc\model\Category_Attribute::instance()->get_category(),\eo\wbc\model\Category_Attribute::instance()->get_attributs()),
+								'options'=> apply_filters('eowbc_admin_filter_filters', \eo\wbc\controllers\admin\menu\page\Filters::eo_wbc_attributes_( \eo\wbc\controllers\admin\menu\page\Filters::eo_wbc_prime_category_() ) ),	//array_replace(\eo\wbc\model\Category_Attribute::instance()->get_category(),\eo\wbc\model\Category_Attribute::instance()->get_attributs()),
 								'class'=>array('fluid'),
 								'size_class'=>array('three','wide','required'),
 								// 'attr'=>array("onchange=\"document.getElementById('d_fconfig_type').value=this.options[this.selectedIndex].getAttribute('data-type')\"")
@@ -1079,7 +1079,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
 								'validate'=>array('required'=>''),
-								'options'=>\eo\wbc\controllers\admin\menu\page\Filters::eo_wbc_attributes_( \eo\wbc\controllers\admin\menu\page\Filters::eo_wbc_prime_category_() ),	//array_replace(\eo\wbc\model\Category_Attribute::instance()->get_category(),\eo\wbc\model\Category_Attribute::instance()->get_attributs()),
+								'options'=>apply_filters('eowbc_admin_filter_filters',  \eo\wbc\controllers\admin\menu\page\Filters::eo_wbc_attributes_( \eo\wbc\controllers\admin\menu\page\Filters::eo_wbc_prime_category_() ) ),	//array_replace(\eo\wbc\model\Category_Attribute::instance()->get_category(),\eo\wbc\model\Category_Attribute::instance()->get_attributs()),
 								'class'=>array('fluid'),
 								'size_class'=>array('three','wide','required'),
 								// 'attr'=>array("onchange=\"document.getElementById('s_fconfig_type').value=this.options[this.selectedIndex].getAttribute('data-type')\"")

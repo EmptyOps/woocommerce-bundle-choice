@@ -5,17 +5,21 @@ class EOWBC_Filter_Widget {
 
 	private static $_instance = null;
 
-	protected $is_shop_cat_filter = false;
-	protected $is_shortcode_filter = false;
-	protected $filter_prefix = '';
+	public $is_shop_cat_filter = false;
+	public $is_shortcode_filter = false;
+	public $filter_prefix = '';
 
-	private $cat_number = -1;
-	private $cat_name_part = "";
+	public $cat_number = -1;
+	public $cat_name_part = "";
 
 	public static function instance() {
 		if ( ! isset( self::$_instance ) ) {
 			self::$_instance = new self;
 			self::$_instance->_category = '';
+									
+			self::$_instance->first_theme = apply_filters('first_category_altr_filt_widgts',wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts',''));
+
+			self::$_instance->second_theme = apply_filters('second_category_altr_filt_widgts',wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts',''));
 		}
 
 		return self::$_instance;
@@ -46,7 +50,11 @@ class EOWBC_Filter_Widget {
 		$adv_ordered_filter=array();
 
 		if(!(is_array($filter) xor is_object($filter)) or empty($filter)) return false;
-		$this->eo_wbc_filter_enque_asset();
+		if(apply_filters('eowbc_enque_filter_assets','__return_true')){
+			$this->eo_wbc_filter_enque_asset();
+		} else {
+			$this->localize_script();
+		}
 
 		//map fields to names as per older version, applies to this code block only.
 		$field_to_old_fields = array(
@@ -66,7 +74,11 @@ class EOWBC_Filter_Widget {
 			foreach ($item as $kitm => $vitm) {
 				if( array_key_exists($kitm, $field_to_old_fields) && !empty($field_to_old_fields[$kitm]) ) {
 					$filter[$key][$field_to_old_fields[$kitm]] = $vitm;
-				}
+				}				
+			}
+
+			if(empty($item['filter_template'])) {
+				$filter[$key]['filter_template'] = 'default';
 			}
 		}
 
@@ -133,20 +145,22 @@ class EOWBC_Filter_Widget {
 				$this->load_desktop($non_adv_ordered_filter, $adv_ordered_filter);				
 			}
 		
-		wbc()->load->template('publics/filters/form', array("thisObj"=>$this,"current_category"=>$current_category)); 				
+		wbc()->load->template('publics/filters/form', array("thisObj"=>$this,"current_category"=>$current_category,'filter_ui'=>$this)); 				
 	}
 
 	public function eo_wbc_filter_enque_asset() {
+
 		wbc()->load->asset('css','fomantic/semantic.min');
 		wbc()->load->asset('js','fomantic/semantic.min');
 		wbc()->load->asset('js','publics/eo_wbc_filter');
 		wbc()->theme->load('css','filter');
         wbc()->theme->load('js','filter');
-            
+        
 		$current_category=$this->_category;
 		$site_url=site_url();
 
 		wp_enqueue_script('jquery');	
+
 		wp_add_inline_script('fomantic-semantic.min','jQuery.fn.ui_accordion = jQuery.fn.accordion;
 				jQuery.fn.ui_slider = jQuery.fn.slider;
 				jQuery.fn.ui_checkbox = jQuery.fn.checkbox;');
@@ -376,7 +390,7 @@ class EOWBC_Filter_Widget {
 				</style>";	
 
 				ob_start();
-				if ((in_array(wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts'),array('sc3','sc5')) and $this->_category==wbc()->options->get_option('configuration','second_slug')) or (in_array(wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts'),array('fc3','fc5')) and $this->_category==wbc()->options->get_option('configuration','first_slug'))) {
+				if ((in_array(wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts') ,array('sc3','sc5')) and $this->_category==wbc()->options->get_option('configuration','second_slug')) or (in_array(wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts'),array('fc3','fc5')) and $this->_category==wbc()->options->get_option('configuration','first_slug'))) {
 					?>
 					<style type="text/css">
 						/*.ui.labeled.ticked.slider>.labels .label:after {
@@ -886,6 +900,7 @@ class EOWBC_Filter_Widget {
         					'eo_cat_query'=>http_build_query($_GET),
         					'btnfilter_now'=>(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))?false:true),
         					'btnreset_now'=>(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_reset_now'))?false:true),
+        					'_prefix_' => $this->filter_prefix,
         				)));
 
         /*wp_enqueue_script('eo_wbc_filter_js');*/
@@ -1009,7 +1024,12 @@ class EOWBC_Filter_Widget {
 		        	}
 		        }
 			} else {
-				return false;
+				$alternet_data = apply_filters('eowbc_filters_range_min_max',array('min_value'=>false,'max_value'=>false,'title'=>$field_title,'slug'=>$field_slug,'seprator'=>$seprator,'filter_item'=>$item));
+				if($alternet_data['min_value']===false and $alternet_data['max_value']===false){
+					return false;
+				} else {
+					return $alternet_data;
+				}
 			}			
 		}		
 		else {
@@ -1109,9 +1129,7 @@ class EOWBC_Filter_Widget {
 	//Generate text slider/ non-labeled sliders
 	public function input_text_slider($__prefix,$item/*$id,$title,$filter_type,$desktop=1,$width='50',$reset =  0,$help='',$advance = 0,$prefix=''*/) {
 
-		
-		extract($item);
-	
+		extract($item);	
 
 		$tab_set = (!empty( $item[$__prefix.'_fconfig_set'] )?$item[$__prefix.'_fconfig_set']:'');
 
@@ -1136,7 +1154,9 @@ class EOWBC_Filter_Widget {
 			$postfix = ${$__prefix.'_fconfig_postfix'};
 		}
 
-		$filter=$this->range_min_max($id,$title,$filter_type,$__prefix,$item);						
+		$filter=$this->range_min_max($id,$title,$filter_type,$__prefix,$item);
+
+
 		if(!$filter) return false;		
 
 		array_push($this->__filters,array(
@@ -1153,23 +1173,41 @@ class EOWBC_Filter_Widget {
 									"id"=>"max_".$filter['slug'],
 									"class"=>"text_slider_".$filter['slug'],
 									"value"=>$filter['max_value']['name'],
-								));
-		if($desktop):
-			if((wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts')=='sc4' and $this->_category==wbc()->options->get_option('configuration','second_slug')) or (wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts')=='fc4' and $this->_category==wbc()->options->get_option('configuration','first_slug'))) {
-				wbc()->load->template('publics/filters/text_slider_desktop_4', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,'prefix'=>$prefix,'postfix'=>$postfix,'help'=>$help,'tab_set'=>$tab_set));
-			} elseif ((in_array(wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts'),array('sc3','sc5')) and $this->_category==wbc()->options->get_option('configuration','second_slug')) or (in_array(wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts'),array('fc3','fc5')) and $this->_category==wbc()->options->get_option('configuration','first_slug'))) {
-				wbc()->load->template('publics/filters/text_slider_desktop_3', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,'prefix'=>$prefix,'postfix'=>$postfix,'help'=>$help,'tab_set'=>$tab_set));
+									));
+
+		if(empty($item['filter_template'])) {
+			if($__prefix==='d'){
+				$item['filter_template'] = 'fc1';
 			} else {
-				wbc()->load->template('publics/filters/text_slider_desktop', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,'prefix'=>$prefix,'postfix'=>$postfix,'tab_set'=>$tab_set,'help'=>$help)); 
+				$item['filter_template'] = 'sc1';
+			}
+		}
+
+		if($desktop):
+
+		if(($item['filter_template']==apply_filters('eowbc_filter_prefix',$this->filter_prefix).'theme'/* and $this->_category==wbc()->options->get_option('configuration','second_slug')) or ($this->first_theme=='theme' and $this->_category==wbc()->options->get_option('configuration','first_slug')*/)) {
+
+				wbc()->load->template('publics/filters/theme_text_slider_desktop', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,'prefix'=>$prefix,'postfix'=>$postfix,'help'=>$help,'tab_set'=>$tab_set,'filter_ui'=>$this));
+
+			} elseif(($item['filter_template']=='sc4' and $this->_category==wbc()->options->get_option('configuration','second_slug')) or ($item['filter_template']=='fc4' and $this->_category==wbc()->options->get_option('configuration','first_slug'))) {
+				wbc()->load->template('publics/filters/text_slider_desktop_4', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,'prefix'=>$prefix,'postfix'=>$postfix,'help'=>$help,'tab_set'=>$tab_set,'filter_ui'=>$this));
+			} elseif ((in_array($item['filter_template'],array('sc3','sc5')) and $this->_category==wbc()->options->get_option('configuration','second_slug')) or (in_array($item['filter_template'],array('fc3','fc5')) and $this->_category==wbc()->options->get_option('configuration','first_slug'))) {
+				wbc()->load->template('publics/filters/text_slider_desktop_3', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,'prefix'=>$prefix,'postfix'=>$postfix,'help'=>$help,'tab_set'=>$tab_set,'filter_ui'=>$this));
+			} else {
+				wbc()->load->template('publics/filters/text_slider_desktop', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,'prefix'=>$prefix,'postfix'=>$postfix,'tab_set'=>$tab_set,'help'=>$help,'filter_ui'=>$this)); 
 			}			
+		elseif(apply_filters('eowbc_load_them_filters',false)):
+			
+			wbc()->load->template('publics/filters/theme_text_slider_mobile', array("filter"=>$filter,"reset"=>$reset,'advance'=>$advance,'prefix'=>$prefix,'postfix'=>$postfix,'tab_set'=>$tab_set,'help'=>$help,'filter_ui'=>$this));
+		
 		elseif(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_1'):
 			
-			wbc()->load->template('publics/filters/text_slider_mobile_alternate', array("filter"=>$filter,"reset"=>$reset,'advance'=>$advance,'prefix'=>$prefix,'postfix'=>$postfix,'tab_set'=>$tab_set,'help'=>$help)); 
+			wbc()->load->template('publics/filters/text_slider_mobile_alternate', array("filter"=>$filter,"reset"=>$reset,'advance'=>$advance,'prefix'=>$prefix,'postfix'=>$postfix,'tab_set'=>$tab_set,'help'=>$help,'filter_ui'=>$this)); 
 		elseif(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_2'):
 			
-			wbc()->load->template('publics/filters/text_slider_mobile_alternate_2', array("filter"=>$filter,"reset"=>$reset,'advance'=>$advance,'prefix'=>$prefix,'postfix'=>$postfix,'tab_set'=>$tab_set,'help'=>$help)); 
+			wbc()->load->template('publics/filters/text_slider_mobile_alternate_2', array("filter"=>$filter,"reset"=>$reset,'advance'=>$advance,'prefix'=>$prefix,'postfix'=>$postfix,'tab_set'=>$tab_set,'help'=>$help,'filter_ui'=>$this)); 
 		else:
-			wbc()->load->template('publics/filters/text_slider_mobile', array("filter"=>$filter,"reset"=>$reset,'prefix'=>$prefix,'postfix'=>$postfix,'tab_set'=>$tab_set,'help'=>$help)); 
+			wbc()->load->template('publics/filters/text_slider_mobile', array("filter"=>$filter,"reset"=>$reset,'prefix'=>$prefix,'postfix'=>$postfix,'tab_set'=>$tab_set,'help'=>$help,'filter_ui'=>$this)); 
 		endif;
 	}
 
@@ -1303,26 +1341,33 @@ class EOWBC_Filter_Widget {
 									"value"=>$items_slug[count($items_slug)-1],
 								));	
 		if($desktop):
-			if((wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts')=='sc4' and $this->_category==wbc()->options->get_option('configuration','second_slug')) or (wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts')=='fc4' and $this->_category==wbc()->options->get_option('configuration','first_slug'))) {
-				wbc()->load->template('publics/filters/step_slider_desktop_4', array("width_class"=>$this->get_width_class($width),"reset"=>$reset,"filter"=>$filter,"items_slug"=>$items_slug,"items_name"=>$items_name,'help'=>$help,'reset_label'=>$reset_label,'tab_set'=>$tab_set,'label_max_size'=>$label_max_size)); 
-			} elseif ((in_array(wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts'),array('sc3','sc5')) and $this->_category==wbc()->options->get_option('configuration','second_slug')) or (in_array(wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts'),array('fc3','fc5')) and $this->_category==wbc()->options->get_option('configuration','first_slug'))) {
-				wbc()->load->template('publics/filters/step_slider_desktop_3', array("width_class"=>$this->get_width_class($width),"reset"=>$reset,"filter"=>$filter,"items_slug"=>$items_slug,"items_name"=>$items_name,'help'=>$help,'reset_label'=>$reset_label,'tab_set'=>$tab_set,'label_max_size'=>$label_max_size)); 
+			if(($item['filter_template']==apply_filters('eowbc_filter_prefix',$this->filter_prefix).'theme'/* and $this->_category==wbc()->options->get_option('configuration','second_slug')) or ($this->first_theme=='theme' and $this->_category==wbc()->options->get_option('configuration','first_slug')*/)) {
+
+				wbc()->load->template('publics/filters/theme_step_slider_desktop',  array("width_class"=>$this->get_width_class($width),"reset"=>$reset,"filter"=>$filter,"items_slug"=>$items_slug,"items_name"=>$items_name,'help'=>$help,'reset_label'=>$reset_label,'tab_set'=>$tab_set,'label_max_size'=>$label_max_size,'filter_ui'=>$this));
+
+			} elseif(($item['filter_template']=='sc4' and $this->_category==wbc()->options->get_option('configuration','second_slug')) or ($item['filter_template']=='fc4' and $this->_category==wbc()->options->get_option('configuration','first_slug'))) {
+				wbc()->load->template('publics/filters/step_slider_desktop_4', array("width_class"=>$this->get_width_class($width),"reset"=>$reset,"filter"=>$filter,"items_slug"=>$items_slug,"items_name"=>$items_name,'help'=>$help,'reset_label'=>$reset_label,'tab_set'=>$tab_set,'label_max_size'=>$label_max_size,'filter_ui'=>$this)); 
+			} elseif ((in_array($item['filter_template'],array('sc3','sc5')) and $this->_category==wbc()->options->get_option('configuration','second_slug')) or (in_array($item['filter_template'],array('fc3','fc5')) and $this->_category==wbc()->options->get_option('configuration','first_slug'))) {
+				wbc()->load->template('publics/filters/step_slider_desktop_3', array("width_class"=>$this->get_width_class($width),"reset"=>$reset,"filter"=>$filter,"items_slug"=>$items_slug,"items_name"=>$items_name,'help'=>$help,'reset_label'=>$reset_label,'tab_set'=>$tab_set,'label_max_size'=>$label_max_size,'filter_ui'=>$this)); 
 
 			} else {
-				wbc()->load->template('publics/filters/step_slider_desktop', array("width_class"=>$this->get_width_class($width),"reset"=>$reset,"filter"=>$filter,"items_slug"=>$items_slug,"items_name"=>$items_name,'reset_label'=>$reset_label,'tab_set'=>$tab_set,'help'=>$help,'label_max_size'=>$label_max_size)); 
+				wbc()->load->template('publics/filters/step_slider_desktop', array("width_class"=>$this->get_width_class($width),"reset"=>$reset,"filter"=>$filter,"items_slug"=>$items_slug,"items_name"=>$items_name,'reset_label'=>$reset_label,'tab_set'=>$tab_set,'help'=>$help,'label_max_size'=>$label_max_size,'filter_ui'=>$this)); 
 			}			
+		elseif(apply_filters('eowbc_load_them_filters',false)):
+			
+			wbc()->load->template('publics/filters/theme_step_slider_mobile', array("width_class"=>$this->get_width_class($width),"reset"=>$reset,"filter"=>$filter,"items_slug"=>$items_slug,"items_name"=>$items_name,'advance'=>$advance,'reset_label'=>$reset_label,'tab_set'=>$tab_set,'help'=>$help,'label_max_size'=>$label_max_size,'filter_ui'=>$this)); 		
 		elseif(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_1'):			
-			wbc()->load->template('publics/filters/step_slider_mobile_alternate', array("width_class"=>$this->get_width_class($width),"reset"=>$reset,"filter"=>$filter,"items_slug"=>$items_slug,"items_name"=>$items_name,'advance'=>$advance,'reset_label'=>$reset_label,'tab_set'=>$tab_set,'help'=>$help,'label_max_size'=>$label_max_size)); 
+			wbc()->load->template('publics/filters/step_slider_mobile_alternate', array("width_class"=>$this->get_width_class($width),"reset"=>$reset,"filter"=>$filter,"items_slug"=>$items_slug,"items_name"=>$items_name,'advance'=>$advance,'reset_label'=>$reset_label,'tab_set'=>$tab_set,'help'=>$help,'label_max_size'=>$label_max_size,'filter_ui'=>$this)); 
 		elseif(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_2'):			
-			wbc()->load->template('publics/filters/step_slider_mobile_alternate_2', array("width_class"=>$this->get_width_class($width),"reset"=>$reset,"filter"=>$filter,"items_slug"=>$items_slug,"items_name"=>$items_name,'advance'=>$advance,'reset_label'=>$reset_label,'tab_set'=>$tab_set,'help'=>$help,'label_max_size'=>$label_max_size)); 
+			wbc()->load->template('publics/filters/step_slider_mobile_alternate_2', array("width_class"=>$this->get_width_class($width),"reset"=>$reset,"filter"=>$filter,"items_slug"=>$items_slug,"items_name"=>$items_name,'advance'=>$advance,'reset_label'=>$reset_label,'tab_set'=>$tab_set,'help'=>$help,'label_max_size'=>$label_max_size,'filter_ui'=>$this)); 
 		else:
-			wbc()->load->template('publics/filters/step_slider_mobile', array("width_class"=>$this->get_width_class($width),"reset"=>$reset,"filter"=>$filter,"items_slug"=>$items_slug,"items_name"=>$items_name,'reset_label'=>$reset_label,'tab_set'=>$tab_set,'help'=>$help,'label_max_size'=>$label_max_size)); 
+			wbc()->load->template('publics/filters/step_slider_mobile', array("width_class"=>$this->get_width_class($width),"reset"=>$reset,"filter"=>$filter,"items_slug"=>$items_slug,"items_name"=>$items_name,'reset_label'=>$reset_label,'tab_set'=>$tab_set,'help'=>$help,'label_max_size'=>$label_max_size,'filter_ui'=>$this)); 
 		endif;
 	}
 
 	//Generate checkbox based filter option;
 	public function input_checkbox($__prefix,$item/*$id,$title,$filter_type,$desktop = 1, $width = '50',$reset = 0,$help='',$advance = 0*/) {
-		
+
 		extract($item);
 		$tab_set = (!empty( $item[$__prefix.'_fconfig_set'] )?$item[$__prefix.'_fconfig_set']:'');
 		$id = $name;
@@ -1338,7 +1383,8 @@ class EOWBC_Filter_Widget {
 			$prefix = ${$__prefix.'_fconfig_prefix'};
 		}
 
-		$filter=$this->range_steps($id,$title,$filter_type,$__prefix,$item);
+		$filter= apply_filters( 'eowbc_public_filters_checkbox_filter', $this->range_steps($id,$title,$filter_type,$__prefix,$item), $__prefix,$item );
+
 		if(!empty($filter['force_title'])){
 			$title = $filter['title'];
 		}
@@ -1352,21 +1398,29 @@ class EOWBC_Filter_Widget {
 									"value"=>implode(',',wbc()->common->array_column($filter['list'],'slug')),
 									));
 		if($desktop):
-			if((wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts')=='sc4' and $this->_category==wbc()->options->get_option('configuration','second_slug')) or (wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts')=='fc4' and $this->_category==wbc()->options->get_option('configuration','first_slug'))) {
-				wbc()->load->template('publics/filters/checkbox_desktop_4', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,'help'=>$help,'tab_set'=>$tab_set));
-			} elseif ((in_array(wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts'),array('sc3','sc5')) and $this->_category==wbc()->options->get_option('configuration','second_slug')) or (in_array(wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts'),array('fc3','fc5')) and $this->_category==wbc()->options->get_option('configuration','first_slug'))) {
-				wbc()->load->template('publics/filters/checkbox_desktop_3', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,'help'=>$help,'tab_set'=>$tab_set));
+
+			if(($item['filter_template']==apply_filters('eowbc_filter_prefix',$this->filter_prefix).'theme'/* and $this->_category==wbc()->options->get_option('configuration','second_slug')) or ($this->first_theme=='theme' and $this->_category==wbc()->options->get_option('configuration','first_slug')*/)) {
+
+				wbc()->load->template('publics/filters/theme_checkbox_desktop',array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,'help'=>$help,'tab_set'=>$tab_set,'filter_ui'=>$this));
+
+			} elseif(($item['filter_template']=='sc4' and $this->_category==wbc()->options->get_option('configuration','second_slug')) or ($item['filter_template']=='fc4' and $this->_category==wbc()->options->get_option('configuration','first_slug'))) {
+				wbc()->load->template('publics/filters/checkbox_desktop_4', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,'help'=>$help,'tab_set'=>$tab_set,'filter_ui'=>$this));
+			} elseif ((in_array($item['filter_template'],array('sc3','sc5')) and $this->_category==wbc()->options->get_option('configuration','second_slug')) or (in_array($item['filter_template'],array('fc3','fc5')) and $this->_category==wbc()->options->get_option('configuration','first_slug'))) {
+				wbc()->load->template('publics/filters/checkbox_desktop_3', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,'help'=>$help,'tab_set'=>$tab_set,'filter_ui'=>$this));
 
 			} else {
-				wbc()->load->template('publics/filters/checkbox_desktop', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,'tab_set'=>$tab_set,'help'=>$help));
+				wbc()->load->template('publics/filters/checkbox_desktop', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,'tab_set'=>$tab_set,'help'=>$help,'filter_ui'=>$this));
 			}						
+		elseif(apply_filters('eowbc_load_them_filters',false)):
 			
+			wbc()->load->template('publics/filters/theme_checkbox_mobile',array("filter"=>$filter,"reset"=>$reset,'advance'=>$advance,'tab_set'=>$tab_set,'help'=>$help,'filter_ui'=>$this)); 
+
 		elseif(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_1'):			 
-			wbc()->load->template('publics/filters/checkbox_mobile_alternate', array("filter"=>$filter,"reset"=>$reset,'advance'=>$advance,'tab_set'=>$tab_set,'help'=>$help)); 
+			wbc()->load->template('publics/filters/checkbox_mobile_alternate', array("filter"=>$filter,"reset"=>$reset,'advance'=>$advance,'tab_set'=>$tab_set,'help'=>$help,'filter_ui'=>$this)); 
 		elseif(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_2'):			 
-			wbc()->load->template('publics/filters/checkbox_mobile_alternate_2', array("filter"=>$filter,"reset"=>$reset,'advance'=>$advance,'tab_set'=>$tab_set,'help'=>$help)); 
+			wbc()->load->template('publics/filters/checkbox_mobile_alternate_2', array("filter"=>$filter,"reset"=>$reset,'advance'=>$advance,'tab_set'=>$tab_set,'help'=>$help,'filter_ui'=>$this)); 
 		else:
-			wbc()->load->template('publics/filters/checkbox_mobile', array("filter"=>$filter,"reset"=>$reset,'tab_set'=>$tab_set,'help'=>$help)); 
+			wbc()->load->template('publics/filters/checkbox_mobile', array("filter"=>$filter,"reset"=>$reset,'tab_set'=>$tab_set,'help'=>$help,'filter_ui'=>$this)); 
 		endif;
 	}
 
@@ -1381,7 +1435,7 @@ class EOWBC_Filter_Widget {
 		$reset =  !empty($reset);	
 		$help=(!empty(${$__prefix.'_fconfig_add_help'})?${$__prefix.'_fconfig_add_help_text'}:'');	
 		
-		if(!empty($text_slider_prefix)){
+		if(!empty($text_slider_prefix)) {
 			$prefix = $text_slider_prefix;
 		} elseif (!empty(${$__prefix.'_fconfig_prefix'})) {
 			$prefix = ${$__prefix.'_fconfig_prefix'};
@@ -1391,6 +1445,10 @@ class EOWBC_Filter_Widget {
 		if(!empty($filter['force_title'])){
 			$title = $filter['title'];
 		}
+
+		$filter = apply_filters('eowbc_filter_button_terms', $filter,$id,$title,$filter_type,$__prefix,$item);
+		
+
 		if(empty($filter)) return false;
 
 		array_push($this->__filters,array(
@@ -1401,28 +1459,32 @@ class EOWBC_Filter_Widget {
 									"value"=>/*implode(',',wbc()->common->array_column($filter['list'],'slug'))*/'',
 									));
 		if($desktop):
-			if((wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts')=='sc4' and $this->_category==wbc()->options->get_option('configuration','second_slug')) or (wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts')=='fc4' and $this->_category==wbc()->options->get_option('configuration','first_slug'))) {
-				
-				wbc()->load->template('publics/filters/button_desktop_4', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,'help'=>$help,'tab_set'=>$tab_set));
+			if(($item['filter_template']==apply_filters('eowbc_filter_prefix',$this->filter_prefix).'theme'/* and $this->_category==wbc()->options->get_option('configuration','second_slug')) or ($this->first_theme=='theme' and $this->_category==wbc()->options->get_option('configuration','first_slug')*/)) {
 
-			} elseif ((in_array(wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts'),array('sc3','sc5')) and $this->_category==wbc()->options->get_option('configuration','second_slug')) or (in_array(wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts'),array('fc3','fc5')) and $this->_category==wbc()->options->get_option('configuration','first_slug'))) {
+				wbc()->load->template('publics/filters/theme_button_desktop', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,'help'=>$help,'tab_set'=>$tab_set,'filter_ui'=>$this));
+
+			} elseif(($item['filter_template']=='sc4' and $this->_category==wbc()->options->get_option('configuration','second_slug')) or ($item['filter_template']=='fc4' and $this->_category==wbc()->options->get_option('configuration','first_slug'))) {
 				
-				wbc()->load->template('publics/filters/button_desktop_3', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,'help'=>$help,'tab_set'=>$tab_set));
+				wbc()->load->template('publics/filters/button_desktop_4', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,'help'=>$help,'tab_set'=>$tab_set,'filter_ui'=>$this));
+
+			} elseif ((in_array($item['filter_template'],array('sc3','sc5')) and $this->_category==wbc()->options->get_option('configuration','second_slug')) or (in_array($item['filter_template'],array('fc3','fc5')) and $this->_category==wbc()->options->get_option('configuration','first_slug'))) {
+				
+				wbc()->load->template('publics/filters/button_desktop_3', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,'help'=>$help,'tab_set'=>$tab_set,'filter_ui'=>$this));
 
 			} else {
 				
-				wbc()->load->template('publics/filters/button_desktop', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,'tab_set'=>$tab_set,'help'=>$help));
+				wbc()->load->template('publics/filters/button_desktop', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,'tab_set'=>$tab_set,'help'=>$help,'filter_ui'=>$this));
 			}						
 			
 		elseif(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_1'):			 
 			
-			wbc()->load->template('publics/filters/button_mobile_alternate', array("filter"=>$filter,"reset"=>$reset,'advance'=>$advance,'tab_set'=>$tab_set,'help'=>$help)); 
+			wbc()->load->template('publics/filters/button_mobile_alternate', array("filter"=>$filter,"reset"=>$reset,'advance'=>$advance,'tab_set'=>$tab_set,'help'=>$help,'filter_ui'=>$this)); 
 		elseif(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_2'):			 
 			
-			wbc()->load->template('publics/filters/button_mobile_alternate_2', array("filter"=>$filter,"reset"=>$reset,'advance'=>$advance,'tab_set'=>$tab_set,'help'=>$help)); 
+			wbc()->load->template('publics/filters/button_mobile_alternate_2', array("filter"=>$filter,"reset"=>$reset,'advance'=>$advance,'tab_set'=>$tab_set,'help'=>$help,'filter_ui'=>$this)); 
 		else:
 			
-			wbc()->load->template('publics/filters/button_mobile', array("filter"=>$filter,"reset"=>$reset,'tab_set'=>$tab_set,'help'=>$help)); 
+			wbc()->load->template('publics/filters/button_mobile', array("filter"=>$filter,"reset"=>$reset,'tab_set'=>$tab_set,'help'=>$help,'filter_ui'=>$this)); 
 		endif;
 		?>
 		<script type="text/javascript">
@@ -1430,16 +1492,16 @@ class EOWBC_Filter_Widget {
 				$('[data-filter-slug="<?php echo $filter['slug']; ?>"]').on('click',function(){
 
 					<?php if($filter_type==1): ?>
-						let filter_target = jQuery('[name="_attribute"]');
+						let filter_target = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="_attribute"]');
 					<?php else: ?>
-						let filter_target = jQuery('[name="_category"]');
+						let filter_target = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="_category"]');
 					<?php endif;?>
 					
 					let filter_name = jQuery(this).attr('data-filter-slug');
 
 					if($(this).hasClass('eo_wbc_button_selected')){
 						$(this).removeClass('eo_wbc_button_selected');
-						let old_val = $("#checklist_<?php echo $filter['slug']; ?>").val();
+						let old_val = $("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php echo $filter['slug']; ?>").val();
 						old_val = old_val.split(',');
 						if(old_val.indexOf($(this).data('slug'))!=-1){
 							let _slug = $(this).data('slug');
@@ -1447,29 +1509,29 @@ class EOWBC_Filter_Widget {
 								return item==_slug?false:true;
 							});
 							new_val = old_val.join();
-							$("#checklist_<?php echo $filter['slug']; ?>").val(new_val);
+							$("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php echo $filter['slug']; ?>").val(new_val);
 						}
 
 					} else {
 						$(this).addClass('eo_wbc_button_selected');
-						let old_val = $("#checklist_<?php echo $filter['slug']; ?>").val();
+						let old_val = $("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php echo $filter['slug']; ?>").val();
 						old_val = old_val.split(',');
 						if(old_val.indexOf($(this).data('slug'))==-1){
 							let _slug = $(this).data('slug');
 							old_val.push(_slug);
 							new_val = old_val.join();
-							$("#checklist_<?php echo $filter['slug']; ?>").val(new_val);
+							$("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php echo $filter['slug']; ?>").val(new_val);
 						}
 					}
 
-					if(filter_target.val().includes(filter_name) && $("#checklist_<?php echo $filter['slug']; ?>").val().length==0) {
+					if(filter_target.val().includes(filter_name) && $("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php echo $filter['slug']; ?>").val().length==0) {
 						filter_target.val(filter_target.val().replace(','+filter_name,''));
-					} else { if((!filter_target.val().includes(filter_name)) && $("#checklist_<?php echo $filter['slug']; ?>").val().length) {
+					} else { if((!filter_target.val().includes(filter_name)) && $("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter #checklist_<?php echo $filter['slug']; ?>").val().length) {
 						filter_target.val(filter_target.val()+','+filter_name);	
 					} }	
 
 					<?php if(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
-						jQuery.fn.eo_wbc_filter_change();
+						jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $this->filter_prefix; ?>eo_wbc_filter');
 					<?php endif; ?>
 				});
 			});
@@ -1477,7 +1539,7 @@ class EOWBC_Filter_Widget {
 		<?php
 	}
 
-	private function slider_price($desktop=1,$width='50', $reset = 1,$help='',$advance = 0,$prefix='') {
+	public function slider_price($desktop=1,$width='50', $reset = 1,$help='',$advance = 0,$prefix='') {
 
 		$width = str_replace('%','',wbc()->options->get_option('filters_filter_setting','filter_setting_price_filter_width',$width));
 
@@ -1528,25 +1590,41 @@ class EOWBC_Filter_Widget {
 		$seprator = wbc()->options->get_option('filters_filter_setting','filter_setting_numeric_slider_seperator','.');
 		
 		if($desktop):
-			
-			if((wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts')=='sc4' and $this->_category==wbc()->options->get_option('configuration','second_slug')) or (wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts')=='fc4' and $this->_category==wbc()->options->get_option('configuration','first_slug'))) {
-				wbc()->load->template('publics/filters/slider_price_desktop_4'.$alternet_slider, array("width_class"=>$this->get_width_class($width),"min"=>$min,"max"=>$max,"reset"=>$reset,'help'=>$help,'seprator'=>$seprator,'prefix'=>$curr_prefix,'postfix'=>$curr_postfix)); 
+			if(($this->second_theme=='theme_dropdown' and $this->_category==wbc()->options->get_option('configuration','second_slug')) or ($this->first_theme=='theme_dropdown' and $this->_category==wbc()->options->get_option('configuration','first_slug'))) {
+				
+				wbc()->load->template('publics/filters/theme_dropdown_slider_price_desktop', array("width_class"=>$this->get_width_class($width),"min"=>$min,"max"=>$max,"reset"=>$reset,'help'=>$help,'seprator'=>$seprator,'prefix'=>$curr_prefix,'postfix'=>$curr_postfix,'filter_ui'=>$this));
+
+			} elseif(($this->second_theme=='theme' and $this->_category==wbc()->options->get_option('configuration','second_slug')) or ($this->first_theme=='theme' and $this->_category==wbc()->options->get_option('configuration','first_slug'))) {
+				
+				wbc()->load->template('publics/filters/theme_slider_price_desktop', array("width_class"=>$this->get_width_class($width),"min"=>$min,"max"=>$max,"reset"=>$reset,'help'=>$help,'seprator'=>$seprator,'prefix'=>$curr_prefix,'postfix'=>$curr_postfix,'filter_ui'=>$this));
+
+			} elseif((wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts')=='sc4' and $this->_category==wbc()->options->get_option('configuration','second_slug')) or (wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts')=='fc4' and $this->_category==wbc()->options->get_option('configuration','first_slug'))) {
+				wbc()->load->template('publics/filters/slider_price_desktop_4'.$alternet_slider, array("width_class"=>$this->get_width_class($width),"min"=>$min,"max"=>$max,"reset"=>$reset,'help'=>$help,'seprator'=>$seprator,'prefix'=>$curr_prefix,'postfix'=>$curr_postfix,'filter_ui'=>$this)); 
 			} elseif ((in_array(wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts'),array('sc3','sc5')) and $this->_category==wbc()->options->get_option('configuration','second_slug')) or (in_array(wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts'),array('fc3','fc5')) and $this->_category==wbc()->options->get_option('configuration','first_slug'))) {
-				wbc()->load->template('publics/filters/slider_price_desktop_3'.$alternet_slider, array("width_class"=>$this->get_width_class($width),"min"=>$min,"max"=>$max,"reset"=>$reset,'help'=>$help,'seprator'=>$seprator,'prefix'=>$curr_prefix,'postfix'=>$curr_postfix)); 
+				wbc()->load->template('publics/filters/slider_price_desktop_3'.$alternet_slider, array("width_class"=>$this->get_width_class($width),"min"=>$min,"max"=>$max,"reset"=>$reset,'help'=>$help,'seprator'=>$seprator,'prefix'=>$curr_prefix,'postfix'=>$curr_postfix,'filter_ui'=>$this)); 
 			}  else {
-				wbc()->load->template('publics/filters/slider_price_desktop'.$alternet_slider, array("width_class"=>$this->get_width_class($width),"min"=>$min,"max"=>$max,"reset"=>$reset,'seprator'=>$seprator,'prefix'=>$curr_prefix,'postfix'=>$curr_postfix,'help'=>$help)); 
+				wbc()->load->template('publics/filters/slider_price_desktop'.$alternet_slider, array("width_class"=>$this->get_width_class($width),"min"=>$min,"max"=>$max,"reset"=>$reset,'seprator'=>$seprator,'prefix'=>$curr_prefix,'postfix'=>$curr_postfix,'help'=>$help,'filter_ui'=>$this)); 
 			}
+		elseif(apply_filters('eowbc_load_them_filters',false)):
+			
+			wbc()->load->template('publics/filters/theme_slider_price_mobile', array("min"=>$min,"max"=>$max,"reset"=>$reset,'advance'=>$advance,'seprator'=>$seprator,'prefix'=>$curr_prefix,'postfix'=>$curr_postfix,'help'=>$help,'filter_ui'=>$this));
+
 		elseif(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_1'):			
-			wbc()->load->template('publics/filters/slider_price_mobile_alternate', array("min"=>$min,"max"=>$max,"reset"=>$reset,'advance'=>$advance,'seprator'=>$seprator,'prefix'=>$curr_prefix,'postfix'=>$curr_postfix,'help'=>$help));
+			wbc()->load->template('publics/filters/slider_price_mobile_alternate', array("min"=>$min,"max"=>$max,"reset"=>$reset,'advance'=>$advance,'seprator'=>$seprator,'prefix'=>$curr_prefix,'postfix'=>$curr_postfix,'help'=>$help,'filter_ui'=>$this));
 		elseif(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_2'):
-			wbc()->load->template('publics/filters/slider_price_mobile_alternate_2', array("min"=>$min,"max"=>$max,"reset"=>$reset,'advance'=>$advance,'seprator'=>$seprator,'prefix'=>$curr_prefix,'postfix'=>$curr_postfix,'help'=>$help));
+			wbc()->load->template('publics/filters/slider_price_mobile_alternate_2', array("min"=>$min,"max"=>$max,"reset"=>$reset,'advance'=>$advance,'seprator'=>$seprator,'prefix'=>$curr_prefix,'postfix'=>$curr_postfix,'help'=>$help,'filter_ui'=>$this));
 		else:
-			wbc()->load->template('publics/filters/slider_price_mobile', array("min"=>$min,"max"=>$max,"reset"=>$reset,'seprator'=>$seprator,'prefix'=>$curr_prefix,'postfix'=>$curr_postfix,'help'=>$help));
+			wbc()->load->template('publics/filters/slider_price_mobile', array("min"=>$min,"max"=>$max,"reset"=>$reset,'seprator'=>$seprator,'prefix'=>$curr_prefix,'postfix'=>$curr_postfix,'help'=>$help,'filter_ui'=>$this));
 		endif;			
 	}
 	
 	public function load_mobile($general_filters, $advance_filters) {
-		if(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_1') {
+		if( file_exists(apply_filters('eowbc_template_path',constant('EOWBC_TEMPLATE_DIR')."'publics/filters/theme_mobile_grid'.php",'publics/filters/theme_mobile_grid',array('general_filters'=>$general_filters,'advance_filters'=>$advance_filters,'filter_ui'=>$this)) ) ) {
+
+			wbc()->load->template('publics/filters/theme_mobile_grid',array('general_filters'=>$general_filters,'advance_filters'=>$advance_filters,'filter_ui'=>$this));
+
+		} elseif(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_1') {
+
 			$this->load_grid_mobile($general_filters);
 			$order = wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','price_filter_order_'.$this->cat_name_part.'_cat','');
 			if( !$this->is_shortcode_filter && !wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','hide_price_filter_'.$this->cat_name_part.'_cat',false) && wbc()->common->nonZeroEmpty($order) ) {
@@ -1632,75 +1710,8 @@ class EOWBC_Filter_Widget {
 		}
 	}
 
-	public function load_desktop($general_filters, $advance_filters) {
-
-/*		echo "load_desktop non_adv_ordered_filter and adv_ordered_filter dump";
-		wbc()->common->pr($general_filters);
-		wbc()->common->pr($advance_filters);*/
-
-		$category = $this->_category;
-		
-		if(
-			// (get_option('eo_wbc_first_slug') === $category and get_option( 'eo_wbc_first_collapse_view',false)) 
-			// or 
-			// (get_option('eo_wbc_second_slug') === $category and get_option( 'eo_wbc_second_collapse_view',false))
-			(wbc()->options->get_option('configuration','first_slug') === $category and wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts') == 'fc2') 
-			or 
-			(wbc()->options->get_option('configuration','second_slug') === $category and wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts') == 'sc2') 
-		){
-			?>
-			<div class="eo-wbc-container filters container">
-
-				
-				<div class="ui horizontal segments" style="border: 0px solid transparent;box-shadow: none !important;">
-					<?php $this->load_collapsable_desktop($general_filters, $advance_filters); ?>
-				</div>
-			</div>
-			<?php
-		} else {
-
-			?>
-			<div id="help_modal" class="ui small modal"><i class="close icon" style="top: 0;right: 0;color: #000;" onclick='jQuery("#help_modal").modal("hide")'></i><div class="header"></div><div class="content"></div></div>
-			<div class="eo-wbc-container filters container ui form">
-				<div class="ui segments">
-					<div class="ui segment"><?php
-					?><div class="ui grid container align middle relaxed" style="margin-bottom: 0px;"><?php
-						$this->load_grid_desktop($general_filters,0);
-						$order = wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','price_filter_order_'.$this->cat_name_part.'_cat','');
-						if( !$this->is_shortcode_filter && !wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','hide_price_filter_'.$this->cat_name_part.'_cat',false) && wbc()->common->nonZeroEmpty($order) ) {
-							$this->slider_price();
-						}
-					?></div><?php
-				?></div><?php
-				if(!is_wp_error($advance_filters) and !empty($advance_filters)) {
-					?><div class="ui segment secondary"><?php
-						?><div class="ui grid container align middle relaxed" style="margin-bottom: 0px;"><?php					
-							$this->load_grid_desktop($advance_filters,1);					
-						?></div><?php
-					?></div><?php
-				}			
-			?>				
-				</div>
-			</div>
-			<?php if( (!empty($advance_filters)) or (!empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))) ) { ?>
-				<div class="ui grid centered">
-					<div class="row">
-						<?php if(!empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_reset_now'))): ?>
-							<div class="ui button reset_all_filters" id="reset_filter" style="position: absolute;left:1em;top: 1em;border-radius: 0;" >Reset Filters</div>
-						<?php endif; ?>
-
-						<?php if(!empty($advance_filters)): ?>
-							<div class="ui button primary" id="advance_filter" style="border-radius: 0 0 0 0;width: fit-content !important;">ADVANCED FILTERS &nbsp;<i class="ui icon angle double up"></i></div>
-						<?php endif; ?>
-
-						<?php if(!empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
-							<div class="ui button" id="apply_filter" style="position: absolute;right: 1em;top:1em;border-radius: 0;" onclick="jQuery.fn.eo_wbc_filter_change();">Apply Filters</div>
-						<?php endif; ?>
-					</div>
-				</div>
-			<?php			
-			}
-		}
+	public function load_desktop($general_filters, $advance_filters) {		
+		wbc()->load->template('publics/filters/load_desktop',array('general_filters'=>$general_filters,'advance_filters'=>$advance_filters,'filter_ui'=>$this));
 	}
 
 	public function load_grid_desktop($filters,$advance) {
@@ -1765,8 +1776,20 @@ class EOWBC_Filter_Widget {
 		}		
 	}
 
-	public function two_tabs($prefix,$item){		
-		wbc()->load->template('publics/filters/two_tabs',$item);
+	public function two_tabs($prefix,$item){
+		$item['filter_ui'] = $this;
+
+		if(($this->first_theme==apply_filters('eowbc_filter_prefix',$this->filter_prefix).'theme'/*$this->second_theme=='theme'*//* and $this->_category==wbc()->options->get_option('configuration','second_slug')) or ($this->first_theme=='theme' and $this->_category==wbc()->options->get_option('configuration','first_slug')*/) or $this->first_theme === 'theme') {
+
+				if(wp_is_mobile()){
+					wbc()->load->template('publics/filters/theme_two_tabs_mobile',$item);
+				} else {
+					wbc()->load->template('publics/filters/theme_two_tabs',$item);
+				}
+				
+		} else {
+			wbc()->load->template('publics/filters/two_tabs',$item);
+		}
 	}
 
 	//Generate dropdown based filter option;
@@ -1975,14 +1998,15 @@ class EOWBC_Filter_Widget {
 			$term_list = $filter['list'];
 		} else{
 			$term = get_term_by('id',$id,'product_cat');
-			$term_list = get_terms('product_cat', array('hide_empty' => 0, 'orderby' => 'menu_order', 'parent'=>$id));
+
+			$term_list = wbc()->wc->get_terms($id,'menu_order');						
 
 			if(!empty($item[$__prefix."_fconfig_elements"])){
 				$filter_in_list = explode(',',$item[$__prefix."_fconfig_elements"]);
 				if(is_array($filter_in_list) and is_array($term_list) and !empty($filter_in_list) and !empty($term_list)){
 					
 					foreach ($term_list as $list_key => $list_value) {
-						if(!in_array($list_value->term_taxonomy_id,$filter_in_list)){
+						if(!in_array($list_value->term_id,$filter_in_list)){
 							unset($term_list[$list_key]);
 						}
 					}
@@ -2087,26 +2111,44 @@ class EOWBC_Filter_Widget {
 										"edit"=>($non_edit?'0':'1'),
 									));
 		}
+		
+
+		/*var_dump($this->filter_prefix);
+		var_dump(apply_filters('eowbc_filter_prefix',$this->filter_prefix).'theme');
+		var_dump($item['filter_template']);
+		die();*/
 
 		if($desktop):
-			if((wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts')=='sc4' and $this->_category==wbc()->options->get_option('configuration','second_slug')) or (wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts')=='fc4' and $this->_category==wbc()->options->get_option('configuration','first_slug'))) {
-				wbc()->load->template('publics/filters/icon_desktop_4', array("width_class"=>$this->get_width_class($width),"term"=>$term,"title"=>$title,"list"=>$list,"icon_css"=>$icon_css,'icon_width'=>$icon_width,"reset"=>$reset,"input"=>$input,"type"=>$type,"non_edit"=>$non_edit,'help'=>$help,'hidden'=>$hidden,'is_single_select'=>$is_single_select,'tab_set'=>$tab_set));
-			} elseif ((in_array(wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts'),array('sc3','sc5')) and $this->_category==wbc()->options->get_option('configuration','second_slug')) or (in_array(wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts'),array('fc3','fc5')) and $this->_category==wbc()->options->get_option('configuration','first_slug'))) {
-				wbc()->load->template('publics/filters/icon_desktop_3', array("width_class"=>$this->get_width_class($width),"term"=>$term,"title"=>$title,"list"=>$list,"icon_css"=>$icon_css,"reset"=>$reset,"input"=>$input,"type"=>$type,"non_edit"=>$non_edit,'help'=>$help,'hidden'=>$hidden,'is_single_select'=>$is_single_select,'tab_set'=>$tab_set));
+			
+			if(($item['filter_template']==apply_filters('eowbc_filter_prefix',$this->filter_prefix).'theme_dropdown'/* and $this->_category==wbc()->options->get_option('configuration','second_slug')) or ($this->first_theme=='theme' and $this->_category==wbc()->options->get_option('configuration','first_slug')*/)) {
+
+				wbc()->load->template('publics/filters/theme_dropdown_icon_desktop', array("width_class"=>$this->get_width_class($width),"term"=>$term,"title"=>$title,"list"=>$list,"icon_css"=>$icon_css,'icon_width'=>$icon_width,"reset"=>$reset,"input"=>$input,"type"=>$type,"non_edit"=>$non_edit,'help'=>$help,'hidden'=>$hidden,'is_single_select'=>$is_single_select,'tab_set'=>$tab_set,'filter_ui'=>$this));
+
+			} elseif(($item['filter_template']==apply_filters('eowbc_filter_prefix',$this->filter_prefix).'theme'/* and $this->_category==wbc()->options->get_option('configuration','second_slug')) or ($this->first_theme=='theme' and $this->_category==wbc()->options->get_option('configuration','first_slug')*/)) {
+
+				wbc()->load->template('publics/filters/theme_icon_desktop', array("width_class"=>$this->get_width_class($width),"term"=>$term,"title"=>$title,"list"=>$list,"icon_css"=>$icon_css,'icon_width'=>$icon_width,"reset"=>$reset,"input"=>$input,"type"=>$type,"non_edit"=>$non_edit,'help'=>$help,'hidden'=>$hidden,'is_single_select'=>$is_single_select,'tab_set'=>$tab_set,'filter_ui'=>$this));
+
+			} elseif(($item['filter_template']=='sc4' and $this->_category==wbc()->options->get_option('configuration','second_slug')) or ($item['filter_template']=='fc4' and $this->_category==wbc()->options->get_option('configuration','first_slug'))) {
+				
+				wbc()->load->template('publics/filters/icon_desktop_4', array("width_class"=>$this->get_width_class($width),"term"=>$term,"title"=>$title,"list"=>$list,"icon_css"=>$icon_css,'icon_width'=>$icon_width,"reset"=>$reset,"input"=>$input,"type"=>$type,"non_edit"=>$non_edit,'help'=>$help,'hidden'=>$hidden,'is_single_select'=>$is_single_select,'tab_set'=>$tab_set,'filter_ui'=>$this));
+			} elseif ((in_array($item['filter_template'],array('sc3','sc5')) and $this->_category==wbc()->options->get_option('configuration','second_slug')) or (in_array($item['filter_template'],array('fc3','fc5')) and $this->_category==wbc()->options->get_option('configuration','first_slug'))) {
+				wbc()->load->template('publics/filters/icon_desktop_3', array("width_class"=>$this->get_width_class($width),"term"=>$term,"title"=>$title,"list"=>$list,"icon_css"=>$icon_css,"reset"=>$reset,"input"=>$input,"type"=>$type,"non_edit"=>$non_edit,'help'=>$help,'hidden'=>$hidden,'is_single_select'=>$is_single_select,'tab_set'=>$tab_set,'filter_ui'=>$this));
 			} else {
-				wbc()->load->template('publics/filters/icon_desktop', array("width_class"=>$this->get_width_class($width),"term"=>$term,"title"=>$title,"list"=>$list,"icon_css"=>$icon_css,"reset"=>$reset,"input"=>$input,"type"=>$type,"non_edit"=>$non_edit,'hidden'=>$hidden,'is_single_select'=>$is_single_select,'tab_set'=>$tab_set,'help'=>$help));
+				wbc()->load->template('publics/filters/icon_desktop', array("width_class"=>$this->get_width_class($width),"term"=>$term,"title"=>$title,"list"=>$list,"icon_css"=>$icon_css,"reset"=>$reset,"input"=>$input,"type"=>$type,"non_edit"=>$non_edit,'hidden'=>$hidden,'is_single_select'=>$is_single_select,'tab_set'=>$tab_set,'help'=>$help,'filter_ui'=>$this));
 			}
 
+		elseif(apply_filters('eowbc_load_them_filters',false)):
+			wbc()->load->template('publics/filters/theme_icon_mobile', array("term"=>$term,"title"=>$title,"list"=>$list,"icon_css"=>$icon_css,"reset"=>$reset,"input"=>$input,"type"=>$type,"non_edit"=>$non_edit,'hidden'=>$hidden,'is_single_select'=>$is_single_select,'tab_set'=>$tab_set,'help'=>$help,'filter_ui'=>$this));
 		elseif(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_1'):			
-			wbc()->load->template('publics/filters/icon_mobile_alternate', array("term"=>$term,"title"=>$title,"list"=>$list,"icon_css"=>$icon_css,"reset"=>$reset,"input"=>$input,"type"=>$type,"non_edit"=>$non_edit,'advance'=>$advance,'hidden'=>$hidden,'is_single_select'=>$is_single_select,'tab_set'=>$tab_set,'help'=>$help)); 
+			wbc()->load->template('publics/filters/icon_mobile_alternate', array("term"=>$term,"title"=>$title,"list"=>$list,"icon_css"=>$icon_css,"reset"=>$reset,"input"=>$input,"type"=>$type,"non_edit"=>$non_edit,'advance'=>$advance,'hidden'=>$hidden,'is_single_select'=>$is_single_select,'tab_set'=>$tab_set,'help'=>$help,'filter_ui'=>$this)); 
 		elseif(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_2'):
 			if(!empty($item['outer_container'])){
-				wbc()->load->template('publics/filters/icon_mobile_alternate_2_outer', array("term"=>$term,"title"=>$title,"list"=>$list,"icon_css"=>$icon_css,"reset"=>$reset,"input"=>$input,"type"=>$type,"non_edit"=>$non_edit,'advance'=>$advance,'hidden'=>$hidden,'is_single_select'=>$is_single_select,'tab_set'=>$tab_set,'help'=>$help)); 
+				wbc()->load->template('publics/filters/icon_mobile_alternate_2_outer', array("term"=>$term,"title"=>$title,"list"=>$list,"icon_css"=>$icon_css,"reset"=>$reset,"input"=>$input,"type"=>$type,"non_edit"=>$non_edit,'advance'=>$advance,'hidden'=>$hidden,'is_single_select'=>$is_single_select,'tab_set'=>$tab_set,'help'=>$help,'filter_ui'=>$this)); 
 			} else{
-				wbc()->load->template('publics/filters/icon_mobile_alternate_2', array("term"=>$term,"title"=>$title,"list"=>$list,"icon_css"=>$icon_css,"reset"=>$reset,"input"=>$input,"type"=>$type,"non_edit"=>$non_edit,'advance'=>$advance,'hidden'=>$hidden,'is_single_select'=>$is_single_select,'tab_set'=>$tab_set,'help'=>$help)); 
+				wbc()->load->template('publics/filters/icon_mobile_alternate_2', array("term"=>$term,"title"=>$title,"list"=>$list,"icon_css"=>$icon_css,"reset"=>$reset,"input"=>$input,"type"=>$type,"non_edit"=>$non_edit,'advance'=>$advance,'hidden'=>$hidden,'is_single_select'=>$is_single_select,'tab_set'=>$tab_set,'help'=>$help,'filter_ui'=>$this)); 
 			}
 		else:
-			wbc()->load->template('publics/filters/icon_mobile', array("term"=>$term,"title"=>$title,"list"=>$list,"icon_css"=>$icon_css,"reset"=>$reset,"input"=>$input,"type"=>$type,"non_edit"=>$non_edit,'hidden'=>$hidden,'is_single_select'=>$is_single_select,'tab_set'=>$tab_set,'help'=>$help)); 
+			wbc()->load->template('publics/filters/icon_mobile', array("term"=>$term,"title"=>$title,"list"=>$list,"icon_css"=>$icon_css,"reset"=>$reset,"input"=>$input,"type"=>$type,"non_edit"=>$non_edit,'hidden'=>$hidden,'is_single_select'=>$is_single_select,'tab_set'=>$tab_set,'help'=>$help,'filter_ui'=>$this)); 
 		endif;
 		?>					
 		<script type="text/javascript">
@@ -2118,9 +2160,10 @@ class EOWBC_Filter_Widget {
 					//TO BE FIXED LATER.
 					/*jQuery('[data-filter="'+__data_filter_slug+'"]:not(.none_editable)').off();
 					jQuery('[data-filter="'+__data_filter_slug+'"]:not(.none_editable)').on('click',function(e){*/
+					let filter_container = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter').parents().has('[data-filter="<?php echo $term->slug; ?>"]').get(0);
 
-					jQuery('[data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)').off();
-					jQuery('[data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)').on('click',function(e){
+					jQuery(filter_container).find('[data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)').off();
+					jQuery(filter_container).find('[data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)').on('click',function(e){
 						
 						
 						e.stopPropagation();
@@ -2136,21 +2179,21 @@ class EOWBC_Filter_Widget {
 
 						if(icon_filter_type == 1) {
 							/*filter_list = jQuery('[name="checklist_'+__data_filter_slug+'"]');*/
-							filter_list = jQuery('[name="checklist_'+"<?php echo $term->slug; ?>"+'"]');
-							filter_target = jQuery('[name="_attribute"]');
+							filter_list = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="checklist_'+"<?php echo $term->slug; ?>"+'"]');
+							filter_target = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="_attribute"]');
 
 							/*console.log(jQuery('[name="checklist_'+__data_filter_slug+'"]'));*/
-							console.log(jQuery('[name="checklist_'+"<?php echo $term->slug; ?>"+'"]'));
-							console.log(jQuery('[name="_attribute"]'));
+							console.log(jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="checklist_'+"<?php echo $term->slug; ?>"+'"]'));
+							console.log(jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="_attribute"]'));
 						} else {
 							/*filter_list = jQuery('[name="cat_filter_'+__data_filter_slug+'"]');*/
-							filter_list = jQuery('[name="cat_filter_'+"<?php echo $term->slug; ?>"+'"]');
-							filter_target = jQuery('[name="_category"]');
+							filter_list = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="cat_filter_'+"<?php echo $term->slug; ?>"+'"]');
+							filter_target = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="_category"]');
 						}						
 						let is_single_select = jQuery(this).data('single_select');
 						if(typeof(is_single_select) !== typeof(undefined) && is_single_select==1){
-							jQuery('[data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)').removeClass('eo_wbc_filter_icon_select');
-							let toggleable_selections = jQuery('.toggled_image[data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)');
+							jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)').removeClass('eo_wbc_filter_icon_select');
+							let toggleable_selections = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter .toggled_image[data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)');
 							console.log(toggleable_selections);
 							if(typeof(toggleable_selections)!==typeof(undefined) && toggleable_selections.length>0){
 								
@@ -2180,7 +2223,7 @@ class EOWBC_Filter_Widget {
 						jQuery(this).toggleClass('eo_wbc_filter_icon_select');
 						$('[name="paged"]').val('1');
 						<?php if(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
-						jQuery.fn.eo_wbc_filter_change();
+						jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $this->filter_prefix; ?>eo_wbc_filter');
 						<?php endif; ?>
 					});
 
@@ -2189,16 +2232,16 @@ class EOWBC_Filter_Widget {
 						var filter_list= undefined;
 						if(icon_filter_type == 1) {
 							/*filter_list = jQuery('[name="checklist_'+__data_filter_slug+'"]');*/
-							filter_list = jQuery('[name="checklist_'+"<?php echo $term->slug; ?>"+'"]');
+							filter_list = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="checklist_'+"<?php echo $term->slug; ?>"+'"]');
 						} else {
 							/*filter_list = jQuery('[name="cat_filter_'+__data_filter_slug+'"]');*/
-							filter_list = jQuery('[name="cat_filter_'+"<?php echo $term->slug; ?>"+'"]');
+							filter_list = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="cat_filter_'+"<?php echo $term->slug; ?>"+'"]');
 						}
 
 						if(jQuery(filter_list).attr('data-edit')=='1') {
 							jQuery(filter_list).val("");
 
-							jQuery(".eo_wbc_filter_icon_select").each(function(index,element){
+							jQuery("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter .eo_wbc_filter_icon_select").each(function(index,element){
 								jQuery(element).removeClass("eo_wbc_filter_icon_select");
 							});
 						}				
@@ -2208,6 +2251,25 @@ class EOWBC_Filter_Widget {
 		</script>
 		<?php
 		do_action('eowbc_after_icon_filter_widget',$this,$__prefix,$item);
+	}
+
+	public function reorder_filter($filter) {
+		if(!empty($filter)){
+			$ordered_filter = array();
+			foreach ($filter as $item) {
+				$ordered_filter[$item['order']][] = $item;
+			}
+
+			ksort($ordered_filter);
+
+			$filter = array();
+			foreach ($ordered_filter as $ordered_item) {
+				foreach ($ordered_item as $item) {
+					$filter[] = $item;
+				}
+			}
+		}
+		return $filter;
 	}	
 
 	public function toggle_column($__prefix,$item){
@@ -2229,9 +2291,9 @@ class EOWBC_Filter_Widget {
 		}
 		
 		if($desktop){
-			wbc()->load->template('publics/filters/toggle_column_desktop', array("width_class"=>$this->get_width_class($width),"term"=>$term,"title"=>$title));
+			wbc()->load->template('publics/filters/toggle_column_desktop', array("width_class"=>$this->get_width_class($width),"term"=>$term,"title"=>$title,'filter_ui'=>$this));
 		} else {
-			wbc()->load->template('publics/filters/toggle_column_mobile', array("width_class"=>$this->get_width_class($width),"term"=>$term,"title"=>$title)); 
+			wbc()->load->template('publics/filters/toggle_column_mobile', array("width_class"=>$this->get_width_class($width),"term"=>$term,"title"=>$title,'filter_ui'=>$this)); 
 		}
 		//var_dump($term);
 		//die();
@@ -2286,6 +2348,12 @@ class EOWBC_Filter_Widget {
 	protected function get_filtered_price() {
 		global $wpdb;
 
+		$args = array();
+
+		if(property_exists(wc()->query,'query_vars')){
+			$args       = wc()->query->query_vars;
+		}
+
 		$args       = wc()->query->query_vars;
 		$tax_query  = isset( $args['tax_query'] ) ? $args['tax_query'] : array();
 		$meta_query = isset( $args['meta_query'] ) ? $args['meta_query'] : array();
@@ -2318,7 +2386,8 @@ class EOWBC_Filter_Widget {
 			AND price_meta.meta_value > '' ";
 		$sql .= $tax_query_sql['where'] . $meta_query_sql['where'];
 
-		$search = \WC_Query::get_main_search_query_sql();
+		$search = @\WC_Query::get_main_search_query_sql();
+
 		if ( $search ) {
 			$sql .= ' AND ' . $search;
 		}
@@ -2330,6 +2399,52 @@ class EOWBC_Filter_Widget {
 
 
 		return $wpdb->get_row( $sql ); // WPCS: unprepared SQL ok.
+	}
+
+	public function localize_script(){
+
+		global $wp_query;
+		$site_url = '';
+		$product_url = '';
+		if( !$this->is_shortcode_filter && !$this->is_shop_cat_filter ) {
+
+			$current_category = $wp_query->get_queried_object();
+			if(!empty($current_category) and !is_wp_error($current_category)){
+				$current_category = $current_category->slug;
+			} else{
+				$current_category=$this->_category;
+			}
+
+	        $site_url = esc_url(get_term_link( $current_category,'product_cat'));
+	      	if(strpos($site_url, '?')!==false){
+	          	$site_url.='&';
+	      	} else {
+	          	$site_url.='?';
+	      	}
+
+	      	$product_url = $this->product_url();
+		}
+
+		$data = array(
+        					'eo_product_url'=>$product_url,
+        					//'eo_view_tabular'=>($current_category=='solitaire'?1:0),
+        					'disp_regular'=>wbc()->options->get('eo_wbc_e_tabview_status',false)/*get_option('eo_wbc_e_tabview_status',false)*/?1:0,
+        					'eo_admin_ajax_url'=>admin_url( 'admin-ajax.php'),
+        					'eo_part_site_url'=>get_site_url().'/index.php',
+        					'eo_part_end_url'=>'/'.$product_url,
+        					'eo_cat_site_url'=>$site_url,
+        					'eo_cat_query'=>http_build_query($_GET),
+        					'btnfilter_now'=>(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))?false:true),
+        					'btnreset_now'=>(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_reset_now'))?false:true),
+        					'_prefix_' => $this->filter_prefix,
+        				);
+
+		?>
+		<script>
+			var eo_wbc_object = JSON.parse('<?php echo json_encode($data); ?>');
+		</script>
+		<?php
+		wbc()->load->asset('js','publics/eo_wbc_filter',array('jquery'));		
 	}
 
 	public function get_widget() {
@@ -2350,9 +2465,9 @@ class EOWBC_Filter_Widget {
 			$this->cat_name_part = "first";
 			
 		} else {
-			$filter_first=unserialize(wbc()->options->get_option_group('filters_d_fconfig')/*get_option('eo_wbc_add_filter_first')*/);
+			$filter_first=unserialize(wbc()->options->get_option_group(/*'filters_d_fconfig'*/'filters_'.$this->filter_prefix.'d_fconfig')/*get_option('eo_wbc_add_filter_first')*/);
 			
-			$filter_second=unserialize(wbc()->options->get_option_group('filters_s_fconfig')/*get_option('eo_wbc_add_filter_second')*/);
+			$filter_second=unserialize(wbc()->options->get_option_group(/*'filters_s_fconfig'*/'filters_'.$this->filter_prefix.'s_fconfig')/*get_option('eo_wbc_add_filter_second')*/);
 
 			if($current_category==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/){
 				$filter=$filter_first;
@@ -2398,8 +2513,11 @@ class EOWBC_Filter_Widget {
 		$adv_ordered_filter=array();
 
 		if(!(is_array($filter) xor is_object($filter)) or empty($filter)) return false;
-
-		$this->eo_wbc_filter_enque_asset();
+		if(apply_filters('eowbc_enque_filter_assets','__return_true')){
+			$this->eo_wbc_filter_enque_asset();
+		} else {
+			$this->localize_script();
+		}
 
 		//map fields to names as per older version, applies to this code block only. 
 		$field_to_old_fields = array(
@@ -2423,17 +2541,28 @@ class EOWBC_Filter_Widget {
 
 		//$filter =  apply_filters( 'eowbc_filter_widget_filters',$filter);
 
+		
+
 		foreach ($filter as $key => $item) {
 			/*if(empty($item[$prefix.'_fconfig_add_enabled'])){
 				continue;
 			}*/
+			
+			if(empty($item['filter_template'])) {
+				if($prefix==='d'){
+					$filter[$key]['filter_template'] = 'fc1';
+				} else {
+					$filter[$key]['filter_template'] = 'sc1';
+				}
+			}
+
 			foreach ($item as $kitm => $vitm) {
+
 				if( array_key_exists($kitm, $field_to_old_fields) && !empty($field_to_old_fields[$kitm]) ) {
 					$filter[$key][$field_to_old_fields[$kitm]] = $vitm;
 				}
 			}
 		}
-
 
 		foreach ($filter as $key => $item) {
 
@@ -2442,25 +2571,34 @@ class EOWBC_Filter_Widget {
 				
 				$item['column_width']= ( empty($item['column_width']) ? '50' : $item['column_width'] );
 
-				$non_adv_ordered_filter[$item['order']]=$item;				
+				$non_adv_ordered_filter[/*$item['order']*/]=$item;				
 			}
 			else{
 				$item['order']= ( empty($item['order'])?(-1*count($adv_ordered_filter)):$item['order']);
 
 				$item['column_width']= ( empty($item['column_width']) ? '50' : $item['column_width'] );
 
-				$adv_ordered_filter[$item['order']]=$item;
+				$adv_ordered_filter[/*$item['order']*/]=$item;
 			}
 		}		
+
 
 		$order = wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','price_filter_order_'.$this->cat_name_part.'_cat',false);
 		if( !wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','hide_price_filter_'.$this->cat_name_part.'_cat',false) && !wbc()->common->nonZeroEmpty($order) ) {
 			$item = array('order'=>(int)wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','price_filter_order_'.$this->cat_name_part.'_cat',false), 'type'=>'price_filter');
-			$non_adv_ordered_filter[$item['order']]=$item;
+			$non_adv_ordered_filter[/*$item['order']*/]=$item;
 		}
 
-		ksort($non_adv_ordered_filter);		
-		ksort($adv_ordered_filter);
+		$non_adv_ordered_filter = $this->reorder_filter($non_adv_ordered_filter);
+
+		$adv_ordered_filter = $this->reorder_filter($adv_ordered_filter);
+
+		/*ksort($non_adv_ordered_filter);		
+		ksort($adv_ordered_filter);*/
+
+		//wbc()->common->pr($non_adv_ordered_filter);
+
+		$non_adv_ordered_filter = apply_filters('custome_filter_widget_non_advance_filter',$non_adv_ordered_filter,$this->filter_prefix);
 
 		/*echo "non_adv_ordered_filter and adv_ordered_filter dump";
 		wbc()->common->pr($non_adv_ordered_filter);
@@ -2520,175 +2658,44 @@ class EOWBC_Filter_Widget {
 				$second_sets_category = $second_sets_category->slug;
 			}
 
-			$non_adv_ordered_filter = array_merge(
-					[array(
-						$prefix.'_fconfig_input_type'=>'two_tabs',
-						'type'=>'two_tabs',
-						'input'=>'two_tabs',
-						'name'=>'two_tabs',
-						'advance'=>false,
-						'first_tab_label'=>$filter_sets_first,
-						'first_tab_id'=>$filter_sets_first_tab,
-						'first_tab_category'=>$first_sets_category,
-						'second_tab_label'=>$filter_sets_second,
-						'second_tab_id'=>$filter_sets_second_tab,
-						'second_tab_category'=>$second_sets_category,
-					)],array_values($non_adv_ordered_filter));			
+
+			if($current_category === $first_sets_category ){
+				$non_adv_ordered_filter = array_merge(
+						[array(
+							$prefix.'_fconfig_input_type'=>'two_tabs',
+							'type'=>'two_tabs',
+							'input'=>'two_tabs',
+							'name'=>'two_tabs',
+							'advance'=>false,
+							'first_tab_label'=>$filter_sets_first,
+							'first_tab_id'=>$filter_sets_first_tab,
+							'first_tab_category'=>$first_sets_category,
+							'second_tab_label'=>$filter_sets_second,
+							'second_tab_id'=>$filter_sets_second_tab,
+							'second_tab_category'=>$second_sets_category,
+						)],array_values($non_adv_ordered_filter));			
+			}
 		}
 
 		/*echo "non_adv_ordered_filter and adv_ordered_filter dump 1";
 		wbc()->common->pr($non_adv_ordered_filter);
 		wbc()->common->pr($adv_ordered_filter);*/
-
+		
 		$this->load_filters($non_adv_ordered_filter,$adv_ordered_filter);
 				
 		if( $this->is_shortcode_filter ) {
-			wbc()->load->template('publics/filters/shortcode_flt_search_btn', array("is_shortcode_filter"=>$this->is_shortcode_filter)); 	
+			wbc()->load->template('publics/filters/shortcode_flt_search_btn', array("is_shortcode_filter"=>$this->is_shortcode_filter,'filter_ui'=>$this)); 	
 		}
 
-		wbc()->load->template('publics/filters/form', array("thisObj"=>$this,"current_category"=>$current_category,'filter_prefix'=>$this->filter_prefix)); 
+		wbc()->load->template('publics/filters/form', array("thisObj"=>$this,"current_category"=>$current_category,'filter_prefix'=>$this->filter_prefix,'filter_ui'=>$this)); 
 		do_action('eowbc_after_filter_widget');
 	}
 
 	public function load_filters($non_adv_ordered_filter,$adv_ordered_filter){
-		if(wp_is_mobile()) {
-			?>
-			<div id="help_modal" class="ui small modal"><i class="close icon" style="top: 0;right: 0;color: #000;" onclick='jQuery("#help_modal").modal("hide")'></i><div class="header"></div>
-			<div class="content"></div>
-			</div>
-			<script type="text/javascript">
-			jQuery(document).ready(function(){
-				jQuery(document).on('click',".question.circle.icon",function(){
-					jQuery("#help_modal").find(".content").html('');	
-					_help_text = jQuery(this).data('help');
-					jQuery("#help_modal").find(".content").html(_help_text);
-					jQuery("#help_modal").modal('show');
-				});
-				jQuery(document).on('click',"#help_modal .close.icon",function(){
-					jQuery("#help_modal").modal('hide');
-				});
-			});
-			</script>
-			<?php
-			if(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_1'){
 
-				?>
-					<div class="eo-wbc-container filters ui grid container">							
-					<?php $this->load_mobile($non_adv_ordered_filter, $adv_ordered_filter); ?>		
-					</div>						
-				<?php	
-				if(!is_wp_error($adv_ordered_filter) and !empty($adv_ordered_filter)) {
-					if(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_2'){
-					?>
-					<div class="ui grid centered container" id="advance_filter_mob_alternate_container">
-						<div class="row" style="padding: 0px;">
-							<div class="ui button primary" id="advance_filter_mob_alternate" style="border-radius: 0 0 0 0;width: 100vw !important; display: block !important; position: absolute;"><?php _e('Advance Filter','woo-bundle-choice'); ?>&nbsp;<i class="ui icon angle double down"></i></div>
-						</div>
-					</div>
-					<?php
-					} else {
-					?>
-					<div class="ui grid centered container" id="advance_filter_mob_alternate_container">
-						<div class="row" style="padding: 0px;">
-							<div class="ui button primary" id="advance_filter_mob_alternate" style="border-radius: 0 0 0 0;width: fit-content !important;"><?php _e('Advance Filter','woo-bundle-choice'); ?>&nbsp;<i class="ui icon angle double down"></i></div>
-						</div>
-					</div>
-					<?php
-					}
-				}			
+		wbc()->load->template('publics/filters/load_filters',array('non_adv_ordered_filter'=>$non_adv_ordered_filter,'adv_ordered_filter'=>$adv_ordered_filter,'filter_ui'=>$this));
 
-			} else {
-
-				if(!is_wp_error($non_adv_ordered_filter) and !empty($non_adv_ordered_filter)) {
-
-					if(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)!='mobile_2'){
-						?>
-						<div class="ui grid container centered" style="margin:auto !important">
-							<div class="row">
-								<div class="ui button primary fluid" id="primary_filter" style="border-radius: 0 0 0 0;margin-right: 0;"><?php _e('Filters','woo-bundle-choice'); ?>&nbsp;&nbsp;<i class="ui icon angle up"></i></div>
-							</div>
-						</div>
-						<?php
-					}
-
-				}	
-				//wbc()->common->pr($non_adv_ordered_filter);
-				?>
-					<div class="eo-wbc-container filters container" style="padding-right: 0px !important;">
-						
-						<?php if(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_2'){
-						?>
-						<?php
-							$icon_filter_shown = false;
-							$price_filter_shown = false;
-							if(!is_wp_error($non_adv_ordered_filter) and !empty($non_adv_ordered_filter)){
-								
-								foreach ($non_adv_ordered_filter as $naof_key => $noaf_filter) {
-																		
-									if(!$icon_filter_shown and isset($noaf_filter['type']) and $noaf_filter['type']==0 and isset($noaf_filter['label']) and in_array($noaf_filter['label'],array(__('Shape','woo-choice-plugin'),__('Ring Style','woo-choice-plugin'),__('Style','woo-choice-plugin'),__('Metal','woo-choice-plugin'))) and isset($noaf_filter['input']) and in_array($noaf_filter['input'],array('icon_text','icon'))) {
-										
-										$noaf_filter['desktop']=0;
-										$noaf_filter['outer_container']=true;
-										$this->eo_wbc_filter_ui_icon($this->__prefix,$noaf_filter);
-
-										unset($non_adv_ordered_filter[$naof_key]);
-										//$icon_filter_shown = true;
-									} elseif (!$price_filter_shown and isset($noaf_filter['type']) and $noaf_filter['type']=='price_filter') {
-
-										$this->slider_price(0);
-										unset($non_adv_ordered_filter[$naof_key]);
-										$price_filter_shown = true;
-									}
-								}
-
-								if(!$price_filter_shown){
-									$this->slider_price(0);
-									$price_filter_shown = true;
-								}
-							}
-						?>
-
-						<div class="" style="padding-left: 1em;">
-							<?php if(!empty($non_adv_ordered_filter)): ?>
-							<div class="ui button primary circular" id="primary_filter" style="margin-right: 0;width: max-content !important;"><?php _e('Filters','woo-bundle-choice'); ?>&nbsp;&nbsp;<i class="ui icon chevron up"></i></div>
-							<?php endif; ?>
-							<span class="reset_all_filters mobile_2 mobile_2_hidden" style="float: right; margin-top: 0.5em;">X Reset All</span>
-						</div>
-						
-						<?php
-						} ?>
-						<div class="ui segments" style="clear: both;">    			
-				<?php
-				$this->load_mobile($non_adv_ordered_filter, $adv_ordered_filter);
-				?>		</div>
-					</div>
-				<?php
-
-				if( !empty($adv_ordered_filter) ) {
-					if(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_2'){
-					?>
-					<div class="ui grid centered">
-						<div class="row">
-							<div class="ui button primary advance_filter" id="advance_filter" style="padding-left: 1em;padding-right: 1em;border-radius: 0 0 0 0;width: 100vw !important; display: block !important; position: absolute;text-align: left;"><?php _e('Advanced Filters','woo-bundle-choice'); ?>&nbsp;<i class="ui icon chevron right" style="position: absolute;right:1em;"></i></div>
-						</div>
-					</div>					
-					<?php
-					} else {
-					?>
-					<div class="ui grid centered">
-						<div class="row">
-							<div class="ui button primary advance_filter" id="advance_filter" style="border-radius: 0 0 0 0;width: fit-content !important;">Advance Filter&nbsp;<i class="ui icon angle double up"></i></div>
-						</div>
-					</div>
-					<?php
-					}			
-				}
-			}
-
-		} else {	
-
-			$this->load_desktop($non_adv_ordered_filter, $adv_ordered_filter);				
-		}
+		
 	}
 
 	public function init($is_shop_cat_filter=false,$filter_prefix='',$is_shortcode_filter=false) {

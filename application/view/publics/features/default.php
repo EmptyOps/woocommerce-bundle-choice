@@ -9,7 +9,7 @@ if(!empty($product_data)):
 <hr style="clear: both;margin-top: 0.5em;margin-bottom: 0.5em;" />
     <h4 style="text-align: center;">Specifications</h4>
 <hr style="clear: both;margin-top: 0.5em;margin-bottom: 0.5em;" />
-<div class="ui two equal width grid container stackable product_specification">
+<div class="ui two equal width grid container stackable product_specification" style="direction: ltr;">
     <div class="row">
         <?php if(!empty($product_data_1) and is_array($product_data_1)):?>
         <div class="column">                            

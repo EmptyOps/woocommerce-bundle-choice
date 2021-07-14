@@ -27,4 +27,7 @@
 	justify-content: center;
 	align-items: center;
 }
+.image-tools.bottom.left a i {
+    top: 0.5px !important;
+}
 </style>

@@ -115,6 +115,26 @@ class Ring_Builder_Data_Template extends Pair_Builder_Data_Template {
                         'ribbon_color'=>'#8245dd'
                     ),
                     array(
+                        'label' => 'Shape',
+                        'terms' => array('Round','Princess','Emerald','Asscher','Marquise','Oval','Radiant','Pear','Heart','Cushion'),
+                        'terms_meta'=>array(
+                                        $_img_url.'round.png',
+                                        $_img_url.'princess.png',
+                                        $_img_url.'emerald.png',
+                                        $_img_url.'asscher.png',
+                                        $_img_url.'marquise.png',
+                                        $_img_url.'oval.png',
+                                        $_img_url.'rediant.png',
+                                        $_img_url.'pear.png',
+                                        $_img_url.'heart.png',
+                                        $_img_url.'cushion.png'
+                                    ),
+                        'description' => 'Shape of the Ring and Diamond',
+                        'slug' => 'shape',
+                        'type'=>'dropdown_image',
+                        'ribbon_color'=>'#8245dd'
+                    ),
+                    array(
                         'label' => 'Ring Style',
                         'terms' => array('Halo','Pave','Solitaire','Trilogy'),
                         'terms_meta'=>array(
@@ -145,7 +165,49 @@ class Ring_Builder_Data_Template extends Pair_Builder_Data_Template {
                         'type'=>'dropdown_image',
                         'ribbon_color'=>'#8245dd'
                     ),
-                  ); 
+
+                    array(
+                        'label' => 'Side-Stone Type',
+                        'terms' => array('NATURAL OR LAB DIAMOND, DEPENDING ON SELECTED CENTER DIAMOND','NATURAL DIAMOND','LAB DIAMOND'),
+                        'description' => '',
+                        'slug' => 'side_stone_type',
+                        'type'=>'button',
+                        'ribbon_color'=>'#8245dd'
+                    ),
+
+                    array(
+                        'label' => 'Side-Stone Number',
+                        'terms' => array('5','7','10','13','15','18','20'),
+                        'description' => '',
+                        'slug' => 'side_stone_number',
+                        'type'=>'button',
+                        'ribbon_color'=>'#8245dd'
+                    ),
+                    array(
+                        'label' => 'Side-Stone Carat',
+                        'terms' => array('0.1','0.2','0.3','0.4','0.5','0.6','0.7'),
+                        'description' => '',
+                        'slug' => 'side_stone_carat',
+                        'type'=>'button',
+                        'ribbon_color'=>'#8245dd'
+                    ),
+                    array(
+                        'label' => 'Side-Stone Color',
+                        'terms' => array('D/E','E/F','F/G','G/H','H/I','I/J','J/K','K/L','L/M'),
+                        'description' => '',
+                        'slug' => 'side_stone_color',
+                        'type'=>'button',
+                        'ribbon_color'=>'#8245dd'
+                    ),
+                    array(
+                        'label' => 'Side-Stone Clarity',
+                        'terms' => array('SI1','SI2','VS1','VS2'),
+                        'description' => '',
+                        'slug' => 'side_stone_clarity',
+                        'type'=>'button',
+                        'ribbon_color'=>'#8245dd'
+                    ),
+                ); 
     }
 
     public function get_categories() {
@@ -231,6 +293,7 @@ class Ring_Builder_Data_Template extends Pair_Builder_Data_Template {
                                 )
                         )
                     ),
+                    
                     array(
                         'thumb' => '',
                         'name' => 'Setting Shape',
@@ -310,6 +373,89 @@ class Ring_Builder_Data_Template extends Pair_Builder_Data_Template {
                                 )
                         )
                     ),
+                    
+                    /*Lab-Growns ----*/
+                    array(
+                        'thumb' => '',
+                        'name' => 'Lab-Grown',
+                        'description' => 'Lab-Grown',
+                        'slug' => 'eo_lab_diamond_shape_cat',
+                        'child'=> 
+                        array(
+                                array(
+                                    'thumb' => $_img_url.'round.png',
+                                    'thumb_selected' => $_img_url.'round_selected.png',
+                                    'name' => 'Round',
+                                    'description' => 'Diamond round shape',
+                                    'slug' => 'eo_lab_diamond_round_shape_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'princess.png',
+                                    'thumb_selected' => $_img_url.'princess_selected.png',
+                                    'name' => 'Princess',
+                                    'description' => 'Diamond princess shape',
+                                    'slug' => 'eo_lab_diamond_princess_shape_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'emerald.png',
+                                    'thumb_selected' => $_img_url.'emerald_selected.png',
+                                    'name' => 'Emerald',
+                                    'description' => 'Diamond emerald shape',
+                                    'slug' => 'eo_lab_diamond_emerald_shape_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'asscher.png',
+                                    'thumb_selected' => $_img_url.'asscher_selected.png',
+                                    'name' => 'Asscher',
+                                    'description' => 'Diamond asscher shape',
+                                    'slug' => 'eo_lab_diamond_asscher_shape_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'marquise.png',
+                                    'thumb_selected' => $_img_url.'marquise_selected.png',
+                                    'name' => 'Marquise',
+                                    'description' => 'Diamond marquise shape',
+                                    'slug' => 'eo_lab_diamond_marquise_shape_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'oval.png',
+                                    'thumb_selected' => $_img_url.'oval_selected.png',
+                                    'name' => 'Oval',
+                                    'description' => 'Diamond oval shape',
+                                    'slug' => 'eo_lab_diamond_oval_shape_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'rediant.png',
+                                    'thumb_selected' => $_img_url.'rediant_selected.png',
+                                    'name' => 'Radiant',
+                                    'description' => 'Diamond radiant shape',
+                                    'slug' => 'eo_lab_diamond_radiant_shape_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'pear.png',
+                                    'thumb_selected' => $_img_url.'pear_selected.png',
+                                    'name' => 'Pear',
+                                    'description' => 'Diamond pear shape',
+                                    'slug' => 'eo_lab_diamond_pear_shape_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'heart.png',
+                                    'thumb_selected' => $_img_url.'heart_selected.png',
+                                    'name' => 'Heart',
+                                    'description' => 'Diamond heart shape',
+                                    'slug' => 'eo_lab_diamond_heart_shape_cat'
+                                ),
+                                array(
+                                    'thumb' => $_img_url.'cushion.png',
+                                    'thumb_selected' => $_img_url.'cushion_selected.png',
+                                    'name' => 'Cushion',
+                                    'description' => 'Diamond cushion shape',
+                                    'slug' => 'eo_lab_diamond_cushion_shape_cat'
+                                )
+                        )
+                    ),
+                    /*LAb-Growns ---- END*/
+
                     array(
                         'thumb' => '',
                         'name' => 'Ring Style',
@@ -462,7 +608,8 @@ class Ring_Builder_Data_Template extends Pair_Builder_Data_Template {
                     'template'=>'fc1',
                     'help'=>0,
                     'help_text'=>'',
-                    'enabled'=>1
+                    'enabled'=>1,
+                    'filter_set'=>'6085411b707ad'
                 );
         }
         if(!empty($__att__['eo_carat_attr'])){
@@ -478,7 +625,8 @@ class Ring_Builder_Data_Template extends Pair_Builder_Data_Template {
                     'template'=>'fc1',
                     'help'=>0,
                     'help_text'=>'',
-                    'enabled'=>1
+                    'enabled'=>1,
+                    'filter_set'=>'6085411b707ad'
                 );
         }           
         if(!empty($__att__['eo_clarity_attr'])){
@@ -494,7 +642,8 @@ class Ring_Builder_Data_Template extends Pair_Builder_Data_Template {
                 'template'=>'fc1',
                 'help'=>0,
                 'help_text'=>'',
-                'enabled'=>1
+                'enabled'=>1,
+                'filter_set'=>'6085411b707ad'
 
             );
         }
@@ -511,7 +660,8 @@ class Ring_Builder_Data_Template extends Pair_Builder_Data_Template {
                 'template'=>'fc1',
                 'help'=>0,
                 'help_text'=>'',
-                'enabled'=>1
+                'enabled'=>1,
+                'filter_set'=>'6085411b707ad'
             );
         }
         if(!empty($__att__['eo_polish_attr'])){
@@ -527,7 +677,8 @@ class Ring_Builder_Data_Template extends Pair_Builder_Data_Template {
                 'template'=>'fc1',
                 'help'=>0,
                 'help_text'=>'',
-                'enabled'=>1
+                'enabled'=>1,
+                'filter_set'=>'6085411b707ad'
             );
         }
         if(!empty($__att__['eo_symmertry_attr'])){
@@ -543,7 +694,8 @@ class Ring_Builder_Data_Template extends Pair_Builder_Data_Template {
                 'template'=>'fc1',
                 'help'=>0,
                 'help_text'=>'',
-                'enabled'=>1
+                'enabled'=>1,
+                'filter_set'=>'6085411b707ad'
             );
         }
         if(!empty($__att__['eo_fluorescence_attr'])){
@@ -559,7 +711,8 @@ class Ring_Builder_Data_Template extends Pair_Builder_Data_Template {
                 'template'=>'fc1',
                 'help'=>0,
                 'help_text'=>'',
-                'enabled'=>1
+                'enabled'=>1,
+                'filter_set'=>'6085411b707ad'
             );
         }
         if(!empty($__att__['eo_depth_attr'])){
@@ -575,7 +728,8 @@ class Ring_Builder_Data_Template extends Pair_Builder_Data_Template {
                 'template'=>'fc1',
                 'help'=>0,
                 'help_text'=>'',
-                'enabled'=>1
+                'enabled'=>1,
+                'filter_set'=>'6085411b707ad'
             );
         }
         if(!empty($__att__['eo_table_attr'])){
@@ -591,7 +745,8 @@ class Ring_Builder_Data_Template extends Pair_Builder_Data_Template {
                 'template'=>'fc1',
                 'help'=>0,
                 'help_text'=>'',
-                'enabled'=>1
+                'enabled'=>1,
+                'filter_set'=>'6085411b707ad'
             );
         }
         if(!empty($__att__['eo_grading_report_attr'])){
@@ -607,7 +762,181 @@ class Ring_Builder_Data_Template extends Pair_Builder_Data_Template {
                 'template'=>'fc1',
                 'help'=>0,
                 'help_text'=>'',
-                'enabled'=>1
+                'enabled'=>1,
+                'filter_set'=>'6085411b707ad'
+            );
+        }
+
+        //Filters for LAb-Grown
+        if(!empty($__cat__['eo_lab_diamond_shape_cat'])){
+            $filter['d_fconfig'][]=array(
+                    'name'=>$__cat__['eo_lab_diamond_shape_cat'][0],
+                    'type'=>"0",
+                    'label'=>$__cat__['eo_lab_diamond_shape_cat'][1],
+                    'advance'=>"0",
+                    'dependent'=>"0",
+                    'input'=>"icon_text",
+                    'column_width'=> "100",
+                    'order'=>"0",
+                    'template'=>'fc1',
+                    'help'=>0,
+                    'help_text'=>'',
+                    'enabled'=>1,
+                    'filter_set'=>'6085412e4cc9b'
+                );
+        }
+        if(!empty($__att__['eo_carat_attr'])){
+            $filter['d_fconfig'][]=array(
+                    'name'=>$__att__['eo_carat_attr'][0],
+                    'type'=>"1",
+                    'label'=>$__att__['eo_carat_attr'][1],
+                    'advance'=>"0",
+                    'dependent'=>"0",
+                    'input'=>"numeric_slider",
+                    'column_width'=> "50",
+                    'order'=>"1",
+                    'template'=>'fc1',
+                    'help'=>0,
+                    'help_text'=>'',
+                    'enabled'=>1,
+                    'filter_set'=>'6085412e4cc9b'
+                );
+        }           
+        if(!empty($__att__['eo_clarity_attr'])){
+            $filter['d_fconfig'][]=array(
+                'name'=>$__att__['eo_clarity_attr'][0],
+                'type'=>"1",
+                'label'=>$__att__['eo_clarity_attr'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"text_slider",
+                'column_width'=> "50",
+                'order'=>"2",
+                'template'=>'fc1',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1,
+                'filter_set'=>'6085412e4cc9b'
+
+            );
+        }
+        if(!empty($__att__['eo_colour_attr'])){
+            $filter['d_fconfig'][]=array(
+                'name'=>$__att__['eo_colour_attr'][0],
+                'type'=>"1",
+                'label'=>$__att__['eo_colour_attr'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"text_slider",
+                'column_width'=> "50",
+                'order'=>"3",
+                'template'=>'fc1',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1,
+                'filter_set'=>'6085412e4cc9b'
+            );
+        }
+        if(!empty($__att__['eo_polish_attr'])){
+            $filter['d_fconfig'][]=array(
+                'name'=>$__att__['eo_polish_attr'][0],
+                'type'=>"1",
+                'label'=>$__att__['eo_polish_attr'][1],
+                'advance'=>"1",
+                'dependent'=>"0",
+                'input'=>"text_slider",
+                'column_width'=> "50",
+                'order'=>"4",
+                'template'=>'fc1',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1,
+                'filter_set'=>'6085412e4cc9b'
+            );
+        }
+        if(!empty($__att__['eo_symmertry_attr'])){
+            $filter['d_fconfig'][]=array(
+                'name'=>$__att__['eo_symmertry_attr'][0],
+                'type'=>"1",
+                'label'=>$__att__['eo_symmertry_attr'][1],
+                'advance'=>"1",
+                'dependent'=>"0",
+                'input'=>"text_slider",
+                'column_width'=> "50",
+                'order'=>"5",
+                'template'=>'fc1',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1,
+                'filter_set'=>'6085412e4cc9b'
+            );
+        }
+        if(!empty($__att__['eo_fluorescence_attr'])){
+            $filter['d_fconfig'][]=array(
+                'name'=>$__att__['eo_fluorescence_attr'][0],
+                'type'=>"1",
+                'label'=>$__att__['eo_fluorescence_attr'][1],
+                'advance'=>"1",
+                'dependent'=>"0",
+                'input'=>"text_slider",
+                'column_width'=> "50",
+                'order'=>"6",
+                'template'=>'fc1',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1,
+                'filter_set'=>'6085412e4cc9b'
+            );
+        }
+        if(!empty($__att__['eo_depth_attr'])){
+            $filter['d_fconfig'][]=array(
+                'name'=>$__att__['eo_depth_attr'][0],
+                'type'=>"1",
+                'label'=>$__att__['eo_depth_attr'][1],
+                'advance'=>"1",
+                'dependent'=>"0",
+                'input'=>"numeric_slider",
+                'column_width'=> "50",
+                'order'=>"7",
+                'template'=>'fc1',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1,
+                'filter_set'=>'6085412e4cc9b'
+            );
+        }
+        if(!empty($__att__['eo_table_attr'])){
+            $filter['d_fconfig'][]=array(
+                'name'=>$__att__['eo_table_attr'][0],
+                'type'=>"1",
+                'label'=>$__att__['eo_table_attr'][1],
+                'advance'=>"1",
+                'dependent'=>"0",
+                'input'=>"numeric_slider",
+                'column_width'=> "50",
+                'order'=>"8",
+                'template'=>'fc1',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1,
+                'filter_set'=>'6085412e4cc9b'
+            );
+        }
+        if(!empty($__att__['eo_grading_report_attr'])){
+            $filter['d_fconfig'][]=array(
+                'name'=>$__att__['eo_grading_report_attr'][0],
+                'type'=>"1",
+                'label'=>$__att__['eo_grading_report_attr'][1],
+                'advance'=>"1",
+                'dependent'=>"0",
+                'input'=>"checkbox",
+                'column_width'=> "50",
+                'order'=>"9",
+                'template'=>'fc1',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1,
+                'filter_set'=>'6085412e4cc9b'
             );
         }
 

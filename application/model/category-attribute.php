@@ -88,7 +88,7 @@ class Category_Attribute{
           return false;         
         }
       } elseif( is_string($param)) {
-
+        
         foreach (wc_get_attribute_taxonomies() as $attribute) {
 
           if($attribute->attribute_name==$param){

@@ -9,7 +9,7 @@ if(!empty($product_data)):
 <hr style="clear: both;margin-top: 0.5em;margin-bottom: 0.5em;" />
     <h4 style="text-align: center;">Specifications</h4>
 <hr style="clear: both;margin-top: 0.5em;margin-bottom: 0.5em;" />
-<div class="ui container product_specification">
+<div class="ui container product_specification" style="direction: ltr;">
  
     <table class="ui single line unstackable table" style="border: none;">  
       <tbody>                            

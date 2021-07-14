@@ -52,6 +52,26 @@ class WBC_WC {
 	    }
     }
 
+    public function get_terms($parent_id = 0, $orderby = 'menu_order') {
+        
+        $term_list =array();
+        if(class_exists('SitePress')) {
+            global $wpdb;
+            /*$term_list = get_terms(array('taxonomy'=>'product_cat','hide_empty' => 0, 'orderby' => 'menu_order', 'parent'=>$id,'lang'=>''));          */
+            $query = "SELECT ".$wpdb->term_taxonomy.".term_id FROM ".$wpdb->term_taxonomy." WHERE ".$wpdb->term_taxonomy.".parent=".$parent_id;
+
+            $result = $wpdb->get_results($query,'ARRAY_A');
+            $result = array_column($result,'term_id');
+            $term_list = array();
+            foreach ($result as $term_id) {
+                $term_list[$term_id] = get_term_by('id',$term_id,'product_cat');
+            }               
+        } else {
+            $term_list = get_terms('product_cat', array('hide_empty' => 0, 'orderby' => $orderby, 'parent'=>$parent_id,'lang'=>''));
+        }
+        return $term_list;
+    }
+
     public static function eo_wbc_get_cart_url() {        
         return function_exists('wc_get_cart_url')?wc_get_cart_url():apply_filters( 'woocommerce_get_cart_url', self::eo_wbc_support_get_page_permalink( 'cart' ));
     }
@@ -259,6 +279,34 @@ class WBC_WC {
             return null;               
         }
     } 
+
+    public function get_taxonomy_by_slug($slug){
+        if(!empty($slug)){
+            
+            $attributes = wc_get_attribute_taxonomies();
+
+            if(!empty($attributes)){
+                foreach ($attributes as $attribute) {
+                    
+                    if(wc_attribute_taxonomy_name($attribute->attribute_name)==$slug){
+
+                        $data                    = $attribute;
+                        $attr               = new stdClass();
+                        $attr->id           = (int) $data->attribute_id;
+                        $attr->name         = $data->attribute_label;
+                        $attr->slug         = wc_attribute_taxonomy_name( $data->attribute_name );
+                        $attr->type         = $data->attribute_type;
+                        $attr->order_by     = $data->attribute_orderby;
+                        $attr->has_archives = (bool) $data->attribute_public;
+                        return $attr;
+                    }                    
+                }
+                return false;   
+            } else {
+                return false;
+            }       
+        }
+    }
 
     public function get_currency_symbol() {
         return get_woocommerce_currency_symbol();

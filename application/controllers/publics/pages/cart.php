@@ -62,7 +62,7 @@ class Cart {
                     $set["SECOND"]['variation'] = NULL;
                 }            
 
-                if($set["SECOND"])  
+                if($set["SECOND"] and isset($set["SECOND"][0]) and isset($set["SECOND"][1]) )  
                 {
                     wc()->cart->add_to_cart(
                         $set["SECOND"][0],

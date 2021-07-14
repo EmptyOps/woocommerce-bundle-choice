@@ -37,7 +37,7 @@ class WBC_Config {
 	}
 
 	public function get_available_samples() {
-		return array('ring_builder','pair_maker');
+		return array('ring_builder','pair_maker','filters_shop_cat');
 	}
 
 	public function get_inventory_types() {
@@ -53,7 +53,8 @@ class WBC_Config {
 		return array(
 			'ring_builder'=>'Ring Builder',
 			'pair_maker'=>'Pair Maker',
-			'guidance_tool'=>'Guidance Tool'
+			'guidance_tool'=>'Guidance Tool',
+			'filters_shop_cat'=>'Shop/Category Page'
 		);
 	}
 }
