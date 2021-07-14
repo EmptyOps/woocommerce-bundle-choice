@@ -155,7 +155,7 @@ if( !empty(wbc()->sanitize->post('_wpnonce')) ) {
 		$admin_email=wbc()->options->get('admin_email');
 			
 		if(!empty(sanitize_email($admin_email))){
-			wp_mail($admin_email,$subject_template, $email_template);
+			@wp_mail($admin_email,$subject_template, $email_template);
 		}
 
 	} else {
