@@ -182,7 +182,7 @@ jQuery(document).ready(function($){
 
 	if(eo_wbc_object.disp_regular){
 	
-		jQuery(".woocommerce-pagination,.pagination").html('');		
+		//jQuery(".woocommerce-pagination,.pagination").html('');		
 		if(!eo_wbc_object.btnfilter_now){			
 			$("#eo_wbc_filter").on('change',"input:not(:checkbox)",function(){
 				$('[name="paged"]').val('1');
