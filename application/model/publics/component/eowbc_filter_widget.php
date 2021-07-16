@@ -627,7 +627,7 @@ class EOWBC_Filter_Widget {
 
 			$sc_cat = wbc()->options->get_option('filters_sc_filter_setting','shop_cat_filter_category');
 			if(!empty($sc_cat)){
-				$sc_cat = get_term_by('term_id',$sc_cat,'product_cat');	
+				$sc_cat = wbc()->wc->get_term_by('term_id',$sc_cat,'product_cat');	
 				if(!is_wp_error($sc_cat) and !empty($sc_cat)){
 					$sc_cat = $sc_cat->slug;	
 				}
@@ -959,14 +959,14 @@ class EOWBC_Filter_Widget {
 				if(!empty($item[$__prefix.'_fconfig_elements']) and !empty(explode(',',$item[$__prefix.'_fconfig_elements']))) {
 
 					$elements = explode(',',$item[$__prefix.'_fconfig_elements']);
-					$taxonomy = get_term_by('slug',$elements[0],$field_slug);
+					$taxonomy = wbc()->wc->get_term_by('slug',$elements[0],$field_slug);
 
 					$min_value=array("id"=>$taxonomies[0]->term_id,"slug"=>$taxonomies[0]->slug,"name"=>str_replace(',','.',$taxonomies[0]->name),"type"=>'attr');
 					$max_value=array("id"=>$taxonomies[0]->term_id,"slug"=>$taxonomies[0]->slug,"name"=>str_replace(',','.',$taxonomies[0]->name),"type"=>'attr');
 
 					foreach ($elements as $term_element) {
 
-						$taxonomy = get_term_by('slug',$term_element,$field_slug);
+						$taxonomy = wbc()->wc->get_term_by('slug',$term_element,$field_slug);
 						if(str_replace(',','.',$taxonomy->name) < str_replace(',','.',$min_value['name'])){
 							$min_value=array("id"=>$taxonomy->term_id,"slug"=>$taxonomy->slug,"name"=>str_replace(',','.',$taxonomy->name),"type"=>'attr');
 							//To markdown if coma is used as seperator of in numeric value.
@@ -1027,14 +1027,14 @@ class EOWBC_Filter_Widget {
 
 				$elements = explode(',',$item[$__prefix.'_fconfig_elements']);
 
-				$sub_category = get_term_by('slug',$elements[0],'product_cat');
+				$sub_category = wbc()->wc->get_term_by('slug',$elements[0],'product_cat');
 
 				$min_value=array("id"=>$sub_category->term_id,"slug"=>$sub_category->slug,"name"=>$sub_category->name,"type"=>'cat');
 				$max_value=array("id"=>$sub_category->term_id,"slug"=>$sub_category->slug,"name"=>$sub_category->name,"type"=>'cat');
 				
 				foreach ($elements as $term_element) {
 
-					$sub_category = get_term_by('slug',$term_element,'product_cat');
+					$sub_category = wbc()->wc->get_term_by('slug',$term_element,'product_cat');
 					if($sub_category->name < $min_value['name']){
 						$min_value=array("id"=>$sub_category->term_id,"slug"=>$sub_category->slug,"name"=>$sub_category->name,"type"=>'cat');
 					}
@@ -1045,7 +1045,7 @@ class EOWBC_Filter_Widget {
 				}
 			} else {
 
-				$category=get_term_by('id',$id,'product_cat');
+				$category=wbc()->wc->get_term_by('id',$id,'product_cat');
 
 				if(!empty($category) && !is_wp_error($category)){
 
@@ -1238,7 +1238,7 @@ class EOWBC_Filter_Widget {
 		}		
 		else {
 
-			$category=get_term_by('id',$id,'product_cat');
+			$category=wbc()->wc->get_term_by('id',$id,'product_cat');
 			
 			if(!empty($category) && !is_wp_error($category)) {
 
@@ -1655,7 +1655,7 @@ class EOWBC_Filter_Widget {
 			if($item['type']==0 && ($item['input']=='icon' OR $item['input']=='icon_text')) {
 				
 				$this->eo_wbc_filter_ui_icon($this->__prefix,$item/*$item['name'],$item['label'],$item['type'],$item['input'],0,$item['column_width'],(isset($item['icon_size'])?$item['icon_size']:false),(isset($item['font_size'])?$item['font_size']:false),0,(isset($item['child_label'])?$item['child_label']:false),(isset($item['popup'])?$item['popup']:false),$advance*/);								
-				$term = @get_term_by('id',$item['name'],'product_cat');
+				$term = @wbc()->wc->get_term_by('id',$item['name'],'product_cat');
 				if(!empty($term) and !is_wp_error($term)){
 					$this->___category[]=$term->slug;	
 				}				
@@ -1719,7 +1719,7 @@ class EOWBC_Filter_Widget {
 					
 					$this->eo_wbc_filter_ui_icon($this->__prefix,$item/*$item['name'],$item['label'],$item['type'],$item['input'],1,$item['column_width'],(isset($item['icon_size'])?$item['icon_size']:false),(isset($item['font_size'])?$item['font_size']:false),$reset=!empty($item['reset']),false,false,(!empty($item[$this->__prefix.'_fconfig_add_help_text'])?$item[$this->__prefix.'_fconfig_add_help_text']:'')*/);							
 									
-						$term = get_term_by('id',$item['name'],'product_cat');
+						$term = wbc()->wc->get_term_by('id',$item['name'],'product_cat');
 
 						if( !empty( $term ) and !is_wp_error( $term ) ) {
 							$this->___category[] = $term->slug;
@@ -1818,7 +1818,7 @@ class EOWBC_Filter_Widget {
 				$item['desktop']=1;
  				$term = null;
 				if($item['type']==0){
-					$term = get_term_by('id',$item['name'],'product_cat');
+					$term = wbc()->wc->get_term_by('id',$item['name'],'product_cat');
 				} else {
 					$term = wbc()->wc->eo_wbc_get_attribute($item['name']);
 				}				
@@ -1835,7 +1835,7 @@ class EOWBC_Filter_Widget {
 
 							$this->eo_wbc_filter_ui_icon($this->__prefix,$item/*$item['name'],$item['label'],$item['type'],$item['input'],1,100,(isset($item['icon_size'])?$item['icon_size']:false),(isset($item['font_size'])?$item['font_size']:false),$reset=!empty($item['reset'])*/);							
 											
-								$term = get_term_by('id',$item['name'],'product_cat');
+								$term = wbc()->wc->get_term_by('id',$item['name'],'product_cat');
 
 								if( !empty( $term ) and !is_wp_error( $term ) ) {
 									$this->___category[] = $term->slug;
@@ -1986,7 +1986,7 @@ class EOWBC_Filter_Widget {
 			}
 			$term_list = $filter['list'];
 		} else{
-			$term = get_term_by('id',$id,'product_cat');
+			$term = wbc()->wc->get_term_by('id',$id,'product_cat');
 
 			$term_list = wbc()->wc->get_terms($id,'menu_order');
 						
@@ -2003,7 +2003,7 @@ class EOWBC_Filter_Widget {
 				}
 			}
 			
-			/*$term = get_term_by('id',$id,'product_cat');
+			/*$term = wbc()->wc->get_term_by('id',$id,'product_cat');
 			$term_list = get_terms('product_cat', array('hide_empty' => 0, 'orderby' => 'ASC', 'child_of'=>$id));*/
 		}
 		
@@ -2276,7 +2276,7 @@ class EOWBC_Filter_Widget {
 		if($type == 1){
 			$term = wbc()->wc->eo_wbc_get_attribute($id);			
 		} else{
-			$term = get_term_by('id',$id,'product_cat');			
+			$term = wbc()->wc->get_term_by('id',$id,'product_cat');			
 		}
 		
 		if($desktop){
@@ -2290,7 +2290,7 @@ class EOWBC_Filter_Widget {
 
 	//convert category id to slug
 	public function eo_wbc_id_2_slug($id) {
-		$term = get_term_by('id',$id,'product_cat');
+		$term = wbc()->wc->get_term_by('id',$id,'product_cat');
 
 		if(empty($term) or is_wp_error($term)){
 			return false;
@@ -2635,14 +2635,14 @@ class EOWBC_Filter_Widget {
 			$filter_sets_first = ( (empty($filter_sets[$filter_sets_first_tab]) or empty($filter_sets[$filter_sets_first_tab]['filter_set_name'])) ? $filter_sets_first_tab : $filter_sets[$filter_sets_first_tab]['filter_set_name'] );
 
 
-			$first_sets_category = get_term_by('id',wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_first_category',false),'product_cat');
+			$first_sets_category = wbc()->wc->get_term_by('id',wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_first_category',false),'product_cat');
 			if(!empty($first_sets_category) and !is_wp_error($first_sets_category)){
 				$first_sets_category = $first_sets_category->slug;
 			}
 
 			$filter_sets_second = ( (empty($filter_sets[$filter_sets_second_tab]) or empty($filter_sets[$filter_sets_second_tab]['filter_set_name'])) ? $filter_sets_second_tab : $filter_sets[$filter_sets_second_tab]['filter_set_name'] );
 
-			$second_sets_category = get_term_by('id',wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_second_category',false),'product_cat');
+			$second_sets_category = wbc()->wc->get_term_by('id',wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_second_category',false),'product_cat');
 			if(!empty($second_sets_category) and !is_wp_error($second_sets_category)){
 				$second_sets_category = $second_sets_category->slug;
 			}

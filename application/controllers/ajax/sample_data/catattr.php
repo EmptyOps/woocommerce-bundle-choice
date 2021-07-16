@@ -47,7 +47,7 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'sample_data_jewelry')){
 
 					if( $index == $post_index ) {
 						$template = $childcat;
-						$template['parent'] = get_term_by('slug',$cat['slug'] , 'product_cat')->term_id;
+						$template['parent'] = wbc()->wc->get_term_by('slug',$cat['slug'] , 'product_cat')->term_id;
 						$is_break = true;
 						break;
 					}

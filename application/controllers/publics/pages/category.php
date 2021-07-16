@@ -20,7 +20,6 @@ class Category {
     }
 
     public function init() {
-       
         //If add to cart triggred
         // Detection : only one category item get length > 0 
         //   i.e. using XOR check if only one of two have been set.
@@ -35,6 +34,8 @@ class Category {
               OR
             $this->eo_wbc_get_category()== wbc()->options->get_option('configuration','second_slug'))) and !empty(wbc()->sanitize->get('EO_WBC')) ) or $this->is_shop_cat_filter===true or $this->is_shortcode_filter //get_option('eo_wbc_second_slug')
         ){
+
+
 
             //if( get_option('eo_wbc_filter_enable')=='1' ){
             /*wbc()->options->update_option('filters_filter_setting','config_filter_status','config_filter_status');*/
@@ -192,7 +193,7 @@ class Category {
                 var_dump($path);
             });*/
 
-            add_action('woocommerce_before_shop_loop',array($this,'add_filter_widget'),1);
+            add_action(/*'woocommerce_before_shop_loop'*/'woocommerce_archive_description',array($this,'add_filter_widget'),1);
 
         /*}
             */
@@ -203,14 +204,18 @@ class Category {
     }
 
     public function eo_wbc_add_breadcrumb()
-    {           
+    {   
+
+        
+
         //Add Breadcumb at top....      
        /* add_action( 'woocommerce_archive_description',function(){     
             wbc()->load->model('publics/component/eowbc_breadcrumb');       
             echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_add_breadcrumb(wbc()->sanitize->get('STEP'),wbc()->sanitize->get('BEGIN')).'<br/><br/>';
         }, 120);*/
 
-        add_action( 'woocommerce_before_shop_loop',function(){     
+        add_action( /*'woocommerce_before_shop_loop'*/'woocommerce_archive_description',function(){     
+            
             wbc()->load->model('publics/component/eowbc_breadcrumb');       
             echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_add_breadcrumb(wbc()->sanitize->get('STEP'),wbc()->sanitize->get('BEGIN')).'<br/><br/>';
         }, 0);
@@ -368,7 +373,7 @@ class Category {
     }
 
     public function eo_wbc_id_2_slug($id){
-        return get_term_by('id',$id,'product_cat')->slug;
+        return wbc()->wc->get_term_by('id',$id,'product_cat')->slug;
     }
     
     /**

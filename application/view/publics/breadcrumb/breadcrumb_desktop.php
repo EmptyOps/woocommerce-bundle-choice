@@ -5,9 +5,9 @@
         if(!empty(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_fixed_navigation'))){
             $_step = 0;
             $_order = 0;
-            if(!empty(wbc()->sanitize->get('BEGIN')) and wbc()->sanitize->get('BEGIN')==$breadcrumb_ui::$first_slug){                    
+            if(!empty(wbc()->sanitize->get('BEGIN')) and wbc()->wc->slug2slug(wbc()->sanitize->get('BEGIN'))==$breadcrumb_ui::$first_slug){                    
                  $html.=$breadcrumb_ui::eo_wbc_breadcumb_first_html($step,1).$breadcrumb_ui::eo_wbc_breadcumb_second_html($step,2);
-            } elseif(!empty(wbc()->sanitize->get('BEGIN')) and wbc()->sanitize->get('BEGIN')==$breadcrumb_ui::$second_slug) {
+            } elseif(!empty(wbc()->sanitize->get('BEGIN')) and wbc()->wc->slug2slug(wbc()->sanitize->get('BEGIN'))==$breadcrumb_ui::$second_slug) {
                 $html.=$breadcrumb_ui::eo_wbc_breadcumb_first_html($step,2).$breadcrumb_ui::eo_wbc_breadcumb_second_html($step,1);
             }                
 

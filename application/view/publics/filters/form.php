@@ -13,7 +13,7 @@ if(wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting
 
 	$first_tab_term = wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting','filter_setting_advance_first_category',false);
 	if(!empty($first_tab_term)) {
-		$first_tab_term = get_term_by('id',$first_tab_term, 'product_cat');
+		$first_tab_term = wbc()->wc->get_term_by('id',$first_tab_term, 'product_cat');
 		if(!empty($first_tab_term) and !is_wp_error($first_tab_term)) {
 			$first_tab_term = $first_tab_term->slug;
 		} else {
@@ -25,7 +25,7 @@ if(wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting
 
 	$second_tab_term = wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting','filter_setting_advance_second_category',false);
 	if(!empty($second_tab_term)) {
-		$second_tab_term = get_term_by('id',$second_tab_term, 'product_cat');
+		$second_tab_term = wbc()->wc->get_term_by('id',$second_tab_term, 'product_cat');
 		if(!empty($second_tab_term) and !is_wp_error($second_tab_term)) {
 			$second_tab_term = $second_tab_term->slug;
 		} else {

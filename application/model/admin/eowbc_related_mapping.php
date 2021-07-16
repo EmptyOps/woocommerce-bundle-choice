@@ -304,7 +304,7 @@ class Eowbc_Related_Mapping /*extends Eowbc_Model*/ {
   					$_option = $attribute->get_options();
   					if (!empty($_option) and is_array($_option)) {
   						$_option = $_option[0];
-  						$_option_term = get_term_by('id',$_option,$attribute_key);
+  						$_option_term = wbc()->wc->get_term_by('id',$_option,$attribute_key);
   						if(!empty($_option_term) and !is_wp_error($_option_term)){
   							$default_attributes[$attribute_key] = $_option_term->slug;
   						}
@@ -378,7 +378,7 @@ class Eowbc_Related_Mapping /*extends Eowbc_Model*/ {
 
   					if( !empty($range_list_first) and array_key_exists($range_list_first['taxonomy'], $default_attributes) )  {
 
-  						$test_term = get_term_by('slug',$default_attributes[$range_list_first['taxonomy']],$range_list_first['taxonomy']);
+  						$test_term = wbc()->wc->get_term_by('slug',$default_attributes[$range_list_first['taxonomy']],$range_list_first['taxonomy']);
 
   						if(!empty($test_term) and !is_wp_error($test_term) and !empty($range_list_first['terms'][$test_term->term_id]) ) {
   							$final_list = $range_list_second;
@@ -388,7 +388,7 @@ class Eowbc_Related_Mapping /*extends Eowbc_Model*/ {
   					} 
   					if (empty($final_list) and !empty($range_list_second) and array_key_exists($range_list_second['taxonomy'], $default_attributes) ) {
 
-  						$test_term = get_term_by('slug',$default_attributes[$range_list_second['taxonomy']],$range_list_second['taxonomy']);
+  						$test_term = wbc()->wc->get_term_by('slug',$default_attributes[$range_list_second['taxonomy']],$range_list_second['taxonomy']);
 
   						if(!empty($test_term) and !is_wp_error($test_term) and !empty($range_list_second['terms'][$test_term->term_id]) ) {
   							$final_list = $range_list_first;
@@ -463,7 +463,7 @@ class Eowbc_Related_Mapping /*extends Eowbc_Model*/ {
 	}
 
 	public function get_range_terms($taxonomy,$term,$upper_limit,$lower_limit) {
-		$term = get_term_by('slug',$term,'pa_'.$taxonomy);
+		$term = wbc()->wc->get_term_by('slug',$term,'pa_'.$taxonomy);
 		if(!empty($term) and !is_wp_error($term) and is_object($term)){
 			
 		

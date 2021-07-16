@@ -115,7 +115,7 @@ class Filter
 		                if(!empty(wbc()->sanitize->get('_current_category')) and !empty($tax_query) ) {
 		                	// remove the default query if the tax query is available
 
-							$_current_category_term = get_term_by('slug',explode(',',wbc()->sanitize->get('_current_category'))[0],'product_cat');             	
+							$_current_category_term = wbc()->wc->get_term_by('slug',explode(',',wbc()->sanitize->get('_current_category'))[0],'product_cat');             	
 							if(!empty($_current_category_term) and !is_wp_error($_current_category_term) and property_exists($_current_category_term,'term_id')){
 								
 								$_current_category_term_id = $_current_category_term->term_id;

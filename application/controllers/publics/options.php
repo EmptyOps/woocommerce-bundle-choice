@@ -48,7 +48,7 @@ class Options {
 				if(in_array($type,array('dropdown_image','dropdown_image_only','dropdown'))) {
 					$selected_item = sanitize_title( $args[ 'selected' ] );
 					if(!empty($selected_item)){
-						$selected_item = get_term_by( 'slug',$selected_item,$attribute);
+						$selected_item = wbc()->wc->get_term_by( 'slug',$selected_item,$attribute);
 						if(!is_wp_error($selected_item) and !empty($selected_item) ){
 							$image_url = get_term_meta( $selected_item->term_id, 'wbc_attachment', true );
 							

@@ -25,7 +25,7 @@ if ( ! class_exists( 'Filters' ) ) {
 	            'hierarchical' => 1,
 	            'show_option_none' => '',
 	            'hide_empty' => false,
-	            'parent' => (get_term_by('slug',$slug,'product_cat')?get_term_by('slug',$slug,'product_cat')->term_id:''),
+	            'parent' => (wbc()->wc->get_term_by('slug',$slug,'product_cat')?wbc()->wc->get_term_by('slug',$slug,'product_cat')->term_id:''),
 	            'taxonomy' => 'product_cat'
 	        ));
 	        

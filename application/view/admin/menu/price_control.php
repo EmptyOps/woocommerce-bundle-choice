@@ -7,7 +7,7 @@ function eo_wbc_jpc_list_categories($slug='',$prefix='',$opts_arr=array()){
         'hierarchical' => 1,
         'show_option_none' => '',
         'hide_empty' => 0,
-        'parent' => (get_term_by('slug',$slug,'product_cat')?get_term_by('slug',$slug,'product_cat')->term_id:0),
+        'parent' => (wbc()->wc->get_term_by('slug',$slug,'product_cat')?wbc()->wc->get_term_by('slug',$slug,'product_cat')->term_id:0),
         'taxonomy' => 'product_cat'
     ));
     

@@ -25,6 +25,33 @@ class WBC_WC {
 		return wc_placeholder_img_src();
 	}
 
+    public function slug2slug($slug) {
+        $term = get_term_by('slug',$slug,'product_cat');
+        if(!empty($term) and !is_wp_error($term)) {
+             return $term->slug;
+        }
+        return $slug;
+    }
+
+    public function get_term_by($field,$key,$taxonomy) {
+
+        
+        if($field == 'id'){
+
+            $term = get_term_by($field,$key,$taxonomy);
+
+            if(class_exists('SitePress')) {
+                if( !empty($term) and !is_wp_error($term) ) {
+                    $term_slug = $term->slug;
+                    return get_term_by('slug',$term_slug,$taxonomy);
+                }    
+            }
+            return $term;        
+        } else {
+            return get_term_by($field,$key,$taxonomy);
+        }
+    }
+
 	public function is_wc_endpoint_url( $endpoint = false ) {
         
         if(function_exists('is_wc_endpoint_url')) {        	
@@ -64,7 +91,7 @@ class WBC_WC {
             $result = array_column($result,'term_id');
             $term_list = array();
             foreach ($result as $term_id) {
-                $term_list[$term_id] = get_term_by('id',$term_id,'product_cat');
+                $term_list[$term_id] = wbc()->wc->get_term_by('id',$term_id,'product_cat');
             }               
         } else {
             $term_list = get_terms('product_cat', array('hide_empty' => 0, 'orderby' => $orderby, 'parent'=>$parent_id,'lang'=>''));
@@ -173,7 +200,7 @@ class WBC_WC {
                     $term_slug = (string)$variation_data[$attribute_taxonomy];
                 }
 
-                $term_data = get_term_by('slug',$term_slug,$taxonomy);                
+                $term_data = wbc()->wc->get_term_by('slug',$term_slug,$taxonomy);                
                 if(!is_wp_error($term_data) and !empty($term_data->name)){
                     $var_attrs[]=($taxonomy_name?$taxonomy_name.': ':'').$term_data->name;    
                 }  

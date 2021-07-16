@@ -933,7 +933,7 @@ class Product {
                 $_term_ = null;
                 if(is_array($term)) {
                     foreach ($term as $_term_) {
-                        $_term_ = get_term_by('term_taxonomy_id', $_term_);
+                        $_term_ = wbc()->wc->get_term_by('term_taxonomy_id', $_term_);
                         if(!is_wp_error($_term_) and !empty($_term_)) {
                             $_taxonomy_ = $_term_->taxonomy;                            
                             if($_taxonomy_==='product_cat') {
@@ -947,7 +947,7 @@ class Product {
                         }
                     }
                 } else {
-                    $_term_ = get_term_by('term_taxonomy_id', $_term_);
+                    $_term_ = wbc()->wc->get_term_by('term_taxonomy_id', $_term_);
 
                     if(!is_wp_error($_term_) and !empty($_term_)) {
                         $_taxonomy_ = $_term_->taxonomy;                        
@@ -1016,7 +1016,7 @@ class Product {
             'hierarchical' => 1,
             'show_option_none' => '',
             'hide_empty' => 0,
-            'parent' => !empty(get_term_by('slug',$slug,'product_cat')) ?get_term_by('slug',$slug,'product_cat')->term_id : '',
+            'parent' => !empty(wbc()->wc->get_term_by('slug',$slug,'product_cat')) ?wbc()->wc->get_term_by('slug',$slug,'product_cat')->term_id : '',
             'taxonomy' => 'product_cat'
         ));
         

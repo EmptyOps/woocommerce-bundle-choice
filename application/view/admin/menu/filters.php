@@ -25,7 +25,7 @@ $attributes = \eo\wbc\model\Category_Attribute::instance()->get_attributs();
 
 if(!empty($categories) and is_array($categories)){
 	foreach ($categories as $id => $label) {
-		$term = get_term_by('id',$id,'product_cat');		
+		$term = wbc()->wc->get_term_by('id',$id,'product_cat');		
 		$term_list = get_terms('product_cat', array('hide_empty' => 0, 'orderby' => 'menu_order', 'parent'=>$id));
 		if(!empty($term_list)){
 			$child = array();

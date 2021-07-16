@@ -355,7 +355,7 @@ class EOWBC_Breadcrumb
                 {   
                     $new_terms=array();
                     foreach ($terms as $term_id) {
-                        $term_object=get_term_by('term_taxonomy_id',$term_id,'category');
+                        $term_object=wbc()->wc->get_term_by('term_taxonomy_id',$term_id,'category');
                         if($term_object->taxonomy=='product_cat' 
                             or
                             in_array(
@@ -406,7 +406,7 @@ class EOWBC_Breadcrumb
                     $_term_ = null;
                     if(is_array($term)) {
                         foreach ($term as $_term_) {
-                            $_term_ = get_term_by('term_taxonomy_id', $_term_);
+                            $_term_ = wbc()->wc->get_term_by('term_taxonomy_id', $_term_);
                             if(!is_wp_error($_term_) and !empty($_term_)) {
                                 $_taxonomy_ = $_term_->taxonomy;                            
                                 if($_taxonomy_==='product_cat') {
@@ -420,7 +420,7 @@ class EOWBC_Breadcrumb
                             }
                         }
                     } else {
-                        $_term_ = get_term_by('term_taxonomy_id', $_term_);
+                        $_term_ = wbc()->wc->get_term_by('term_taxonomy_id', $_term_);
 
                         if(!is_wp_error($_term_) and !empty($_term_)) {
                             $_taxonomy_ = $_term_->taxonomy;                        
@@ -461,7 +461,7 @@ class EOWBC_Breadcrumb
                 $filter_query=array();
                 if( !empty($tax) && (is_object($tax) or is_array($tax)) ) {
                     foreach ($tax as $tax_id) {
-                        $term_object=get_term_by('term_taxonomy_id',$tax_id,'category');  
+                        $term_object=wbc()->wc->get_term_by('term_taxonomy_id',$tax_id,'category');  
                         if(!empty($term_object)){
                             $filter_query[str_replace('pa_','',$term_object->taxonomy)][]=$term_object->slug;    
                         }                             

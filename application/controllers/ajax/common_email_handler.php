@@ -37,7 +37,7 @@ if( !empty(wbc()->sanitize->post('_wpnonce')) ) {
 				$category = array_filter(explode(',',$category));
 				if(!empty($category) and is_array($category)){
 					foreach ($category as $cat) {
-						$_category = get_term_by('slug',$cat,'product_cat');
+						$_category = wbc()->wc->get_term_by('slug',$cat,'product_cat');
 						if(!empty($_category) and !is_wp_error($_category) and !empty(wbc()->sanitize->post('cat_filter_'.$cat))){
 
 							$cat_terms = wbc()->sanitize->post('cat_filter_'.$cat);
@@ -47,7 +47,7 @@ if( !empty(wbc()->sanitize->post('_wpnonce')) ) {
 
 							if(!empty($cat_terms) and is_array($cat_terms)){
 								foreach ($cat_terms as $cat_term) {
-									$cat_term_obj = get_term_by('slug',$cat_term,'product_cat');
+									$cat_term_obj = wbc()->wc->get_term_by('slug',$cat_term,'product_cat');
 									if(!empty($cat_term_obj) and !is_wp_error($cat_term_obj)){
 										$cat_terms_names[] = $cat_term_obj->name;
 									}
@@ -80,16 +80,16 @@ if( !empty(wbc()->sanitize->post('_wpnonce')) ) {
 								$attr_min = wbc()->sanitize->post('min_'.$attr);
 								$attr_max = wbc()->sanitize->post('max_'.$attr);
 
-								$attr_term_obj_min = get_term_by('slug',$attr_min,$attr);
+								$attr_term_obj_min = wbc()->wc->get_term_by('slug',$attr_min,$attr);
 
 								if(!empty($attr_term_obj_min) and !is_wp_error($attr_term_obj_min)){
-									$attr_term_obj_min = get_term_by('name',$attr_min,$attr);										
+									$attr_term_obj_min = wbc()->wc->get_term_by('name',$attr_min,$attr);										
 								}
 
-								$attr_term_obj_max = get_term_by('slug',$attr_max,$attr);
+								$attr_term_obj_max = wbc()->wc->get_term_by('slug',$attr_max,$attr);
 
 								if(!empty($attr_term_obj_max) and !is_wp_error($attr_term_obj_max)){
-									$attr_term_obj_max = get_term_by('name',$attr_max,$attr);										
+									$attr_term_obj_max = wbc()->wc->get_term_by('name',$attr_max,$attr);										
 								}
 								
 								
@@ -108,10 +108,10 @@ if( !empty(wbc()->sanitize->post('_wpnonce')) ) {
 								if(!empty($attr_terms) and is_array($attr_terms)){
 									foreach ($attr_terms as $attr_term) {
 										
-										$attr_term_obj = get_term_by('slug',$attr_term,$attr);
+										$attr_term_obj = wbc()->wc->get_term_by('slug',$attr_term,$attr);
 
 										if(!empty($attr_term_obj) and !is_wp_error($attr_term_obj)){
-											$attr_term_obj = get_term_by('name',$attr_term,$attr);			
+											$attr_term_obj = wbc()->wc->get_term_by('name',$attr_term,$attr);			
 										}
 										
 										if(!empty($attr_term_obj) and !is_wp_error($attr_term_obj)){

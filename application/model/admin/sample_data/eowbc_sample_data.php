@@ -237,7 +237,7 @@ class Eowbc_Sample_Data {
 			foreach($args as $index=>$cat) {					
 				//to be removed. No more can remove this check as since now due to batch processing we are retrieving all ids later on.
 			   	if(term_exists( $cat['slug'] , 'product_cat' )){
-			   		$args[$index]['id']=get_term_by('slug',$cat['slug'] , 'product_cat')->term_id;
+			   		$args[$index]['id']=wbc()->wc->get_term_by('slug',$cat['slug'] , 'product_cat')->term_id;
 			   	} else {
 			   		$cat_id=$this->create_category_factory($cat);
 			   		$args[$index]['id']=$cat_id;	
@@ -292,7 +292,7 @@ class Eowbc_Sample_Data {
 						}
 
 						if(!empty($tax_term) and !is_wp_error($tax_term)){
-							$term_slug = get_term_by('term_taxonomy_id',$tax_term['term_taxonomy_id'],$_tax);	
+							$term_slug = wbc()->wc->get_term_by('term_taxonomy_id',$tax_term['term_taxonomy_id'],$_tax);	
 							if(!empty($term_slug->slug) and !is_wp_error($term_slug)) {
 								$_val[$key] = $term_slug->slug;
 							}
@@ -361,7 +361,7 @@ class Eowbc_Sample_Data {
 							$tax_term = wp_insert_term( $term_name, $taxonomy );								
 						} 
 						if(!empty($tax_term) and !is_wp_error($tax_term)){
-	    					$term_slug = get_term_by('term_taxonomy_id',$tax_term['term_taxonomy_id'],$taxonomy);
+	    					$term_slug = wbc()->wc->get_term_by('term_taxonomy_id',$tax_term['term_taxonomy_id'],$taxonomy);
 	    					if(!empty($term_slug->slug) and !is_wp_error($term_slug)) {
 	    						$variation['terms'][$taxonomy] = $term_slug->slug;	    					
 	    					}
@@ -467,7 +467,7 @@ class Eowbc_Sample_Data {
 					        if( ! term_exists( $term_name, $taxonomy ) )
         						wp_insert_term( $term_name, $taxonomy );           					
 
-        					$term_slug = get_term_by('name', $term_name, $taxonomy );
+        					$term_slug = wbc()->wc->get_term_by('name', $term_name, $taxonomy );
         					if(!empty($term_slug->slug) and !is_wp_error($term_slug)){
         						update_post_meta( $variation_id, 'attribute_'.$taxonomy, $term_slug->slug );	
         					}				
@@ -1048,13 +1048,13 @@ class Eowbc_Sample_Data {
 
 			foreach ($args as $map) {
         
-				$first=get_term_by($map[0][0],$map[0][1],$map[0][2]);
+				$first=wbc()->wc->get_term_by($map[0][0],$map[0][1],$map[0][2]);
       
 		          if(!empty($first) and !is_wp_error($first)){
 		            $first = $first->term_taxonomy_id;
 		          }
 
-				$second=get_term_by($map[1][0],$map[1][1],$map[1][2]);
+				$second=wbc()->wc->get_term_by($map[1][0],$map[1][1],$map[1][2]);
       
 		          if(!empty($second) and !is_wp_error($second)){
 		            $second = $second->term_taxonomy_id;

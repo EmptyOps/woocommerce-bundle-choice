@@ -502,8 +502,8 @@ class Eowbc_Filters extends Eowbc_Model {
 }
 
 
-$diamond_category = get_term_by( 'slug','eo_diamond_shape_cat','product_cat');
-$setting_category = get_term_by( 'slug','eo_setting_shape_cat','product_cat');
+$diamond_category = wbc()->wc->get_term_by( 'slug','eo_diamond_shape_cat','product_cat');
+$setting_category = wbc()->wc->get_term_by( 'slug','eo_setting_shape_cat','product_cat');
 
 if( !is_ajax() ) {
 	if((is_wp_error($diamond_category) or is_wp_error($setting_category) or empty($diamond_category) or empty($setting_category))) {
