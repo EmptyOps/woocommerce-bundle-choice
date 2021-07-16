@@ -19,7 +19,7 @@ class Home {
 	}
 
 	public function init() {
-
+    /*return true;*/
 
 		if(isset($_GET['wbc_report']) && !empty(wbc()->sanitize->get('wbc_report'))) {
         	if(isset($_SERVER['HTTP_REFERER'])){

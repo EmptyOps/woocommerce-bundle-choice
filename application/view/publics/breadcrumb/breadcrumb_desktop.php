@@ -13,11 +13,11 @@
 
         }  else {         
 
-             if($begin==$breadcrumb_ui::$first_slug)
+             if(wbc()->wc->slug2slug($begin)==$breadcrumb_ui::$first_slug)
             {
                 $html.=$breadcrumb_ui::eo_wbc_breadcumb_first_html($step,1).$breadcrumb_ui::eo_wbc_breadcumb_second_html($step,2);
             }
-            elseif ($begin==$breadcrumb_ui::$second_slug/*get_option('eo_wbc_second_slug')*/)
+            elseif (wbc()->wc->slug2slug($begin)==$breadcrumb_ui::$second_slug/*get_option('eo_wbc_second_slug')*/)
             {
                 $html.=$breadcrumb_ui::eo_wbc_breadcumb_second_html($step,1).$breadcrumb_ui::eo_wbc_breadcumb_first_html($step,2);
             }

@@ -1951,6 +1951,15 @@ class EOWBC_Filter_Widget {
 
 	public function eo_wbc_filter_ui_icon($__prefix,$item/*$id,$title='',$type=0,$input='icon',$desktop=1,$width='50',$icon_width=FALSE,$label_size=FALSE,$reset = 0,$child_label=false,$hidden = false,$help='',$advance=0*/) {
 		
+		global $sitepress;
+
+		$current_language = '';
+		if(!empty($sitepress)) {
+			//remove_filter('get_term', array($sitepress,'get_term_adjust_id'), 1, 1);
+			$current_language = constant('ICL_LANGUAGE_CODE');
+			$sitepress->switch_lang('en');
+		}
+
 		extract($item);
 		$tab_set = (!empty( $item[$__prefix.'_fconfig_set'] )?$item[$__prefix.'_fconfig_set']:'');
 		$id=$name;
@@ -1986,10 +1995,11 @@ class EOWBC_Filter_Widget {
 			}
 			$term_list = $filter['list'];
 		} else{
-			$term = wbc()->wc->get_term_by('id',$id,'product_cat');
+			$term = wbc()->wc->get_term_by('id',apply_filters( 'wpml_object_id',$id,'category', FALSE, 'en'),'product_cat');
 
-			$term_list = wbc()->wc->get_terms($id,'menu_order');
-						
+
+			$term_list = wbc()->wc->get_terms(apply_filters( 'wpml_object_id',$id,'category', FALSE, 'en'),'menu_order');
+									
 			if(!empty($item[$__prefix."_fconfig_elements"])){
 				$filter_in_list = explode(',',$item[$__prefix."_fconfig_elements"]);
 				if(is_array($filter_in_list) and is_array($term_list) and !empty($filter_in_list) and !empty($term_list)){
@@ -2006,7 +2016,7 @@ class EOWBC_Filter_Widget {
 			/*$term = wbc()->wc->get_term_by('id',$id,'product_cat');
 			$term_list = get_terms('product_cat', array('hide_empty' => 0, 'orderby' => 'ASC', 'child_of'=>$id));*/
 		}
-		
+
 		if( empty($term) or is_wp_error($term) ) return false;
 
 		if(empty($term_list) or is_wp_error($term_list) or !(is_array($term_list) or is_object($term_list))) return false;
@@ -2240,6 +2250,12 @@ class EOWBC_Filter_Widget {
 		</script>
 		<?php
 		do_action('eowbc_after_icon_filter_widget',$this,$__prefix,$item);
+
+		if(!empty($sitepress)) {
+			$sitepress->switch_lang($current_language);
+			//remove_filter('get_term', array($sitepress,'get_term_adjust_id'), 1, 1);
+		}
+
 	}
 
 	public function reorder_filter($filter) {
