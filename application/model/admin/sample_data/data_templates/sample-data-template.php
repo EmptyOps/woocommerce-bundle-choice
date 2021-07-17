@@ -260,7 +260,7 @@ class Sample_Data_Template {
         array(
           'title'=>'Setting #2871986691',
           'thumb'=>$_img_url.'Products/Ring_solitaire_round_white_100.jpg',
-          'images'=>array('Ring_solitaire_round_white_101.jpg','Ring_halo_soiltaire_white_102.jpg'),
+          'images'=>array('Ring_solitaire_round_white_101.jpg','Ring_solitaire_round_white_102.jpg'),
           'content'=>'',
           'sku'=>'SET-8800950587-10',
           'regular_price'=>'',
@@ -2130,7 +2130,7 @@ class Sample_Data_Template {
         array(
           'title'=>'Setting #10000016',
           'thumb'=>$_img_url.'Products/Ring_pave_Round_white_1000.jpg',
-          'images'=>array('Ring_pave_Round_white_1001.jpg','Ring_pave_Round_white_1002.jpg'),
+          'images'=>array('Ring_pave_Round_white_1001.jpg'),
           'sku'=>'SET-8800950587-39',
           'content'=>'',
           'regular_price'=>'',
@@ -4356,7 +4356,7 @@ class Sample_Data_Template {
         array(
           'title'=>'Setting #10000043',
           'thumb'=>$_img_url.'Products/Ring_vintage_round_white_700.jpg',
-          'images'=>array('Ring_vintage_round_701.jpg','Ring_vintage_round_702.jpg'),
+          'images'=>array('Ring_vintage_round_white_701.jpg','Ring_vintage_round_white_702.jpg'),
           'content'=>'',
           'sku'=>'SET-8800950587-26',
           'regular_price'=>'',
