@@ -34,8 +34,8 @@ class Sample_Data_Template {
 		return array(
         array(
           'title'=>'Setting #8800950587',
-          'thumb'=>$_img_url.'Products/Ring-round-1.jpg',
-          'images'=>array('Ring-round-2.jpg','Ring-round-3.jpg'),
+          'thumb'=>$_img_url.'Products/Ring_halo_round_white_100.jpeg',
+          'images'=>array('Ring_halo_round_white_101.jpeg','Ring_halo_round_white_102.jpeg'),
           'content'=>'',
           'sku'=>'SET-8800950587-0',
           'regular_price'=>'',
@@ -168,9 +168,10 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #6461855726',
-          'thumb'=>$_img_url.'Products/Ring-princess-1.jpg',
-          'images'=>array(),
+          'thumb'=>$_img_url.'Products/Ring_pave_Round_white_100.jpg',
+          'images'=>array('Ring_pave_Round_white_101.jpg'),
           'content'=>'',
+          'sku'=>'SET-8800950587-30',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
@@ -258,9 +259,10 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #2871986691',
-          'thumb'=>$_img_url.'Products/Ring-emerald-3.jpg',
-          'images'=>array('Ring-emerald-4.jpg','Ring-emerald-5.jpg'),
+          'thumb'=>$_img_url.'Products/Ring_solitaire_round_white_100.jpg',
+          'images'=>array('Ring_solitaire_round_white_101.jpg','Ring_halo_soiltaire_white_102.jpg'),
           'content'=>'',
+          'sku'=>'SET-8800950587-10',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
@@ -348,8 +350,9 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #1318544274',
-          'thumb'=>$_img_url.'Products/Ring-asscher-1.jpg',
-          'images'=>array('Ring-asscher-2.jpg'),
+          'thumb'=>$_img_url.'Products/Ring_trilogy_Round_white_100.jpg',
+          'images'=>array('Ring_trilogy_Round_white_101.jpg'),
+          'sku'=>'SET-8800950587-40',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -438,8 +441,9 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #7707154336',
-          'thumb'=>$_img_url.'Products/Ring-marquise.jpg',
-          'images'=>array(),
+          'thumb'=>$_img_url.'Products/Ring_pave_Round_white_200.jpg',
+          'images'=>array('Ring_pave_Round_white_201.jpg','Ring_pave_Round_white_202.jpg'),
+          'sku'=>'SET-8800950587-31',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -528,9 +532,10 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #1388912063',
-          'thumb'=>$_img_url.'Products/Ring-oval-1.jpg',
-          'images'=>array(),
+          'thumb'=>$_img_url.'Products/Ring_halo_round_white_200.jpeg',
+          'images'=>array('Ring_halo_round_white_201.jpeg','Ring_halo_round_white_200.jpeg'),
           'content'=>'',
+          'sku'=>'SET-8800950587-1',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
@@ -618,9 +623,10 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #0412854474',
-          'thumb'=>$_img_url.'Products/Ring-radiant-1.jpg',
-          'images'=>array(),
+          'thumb'=>$_img_url.'Products/Ring_pave_Round_white_300.jpg',
+          'images'=>array('Ring_pave_Round_white_301.jpg'),
           'content'=>'',
+          'sku'=>'SET-8800950587-32',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
@@ -668,8 +674,9 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #4270635040',
-          'thumb'=>$_img_url.'Products/Ring-pear-1.jpg',
-          'images'=>array(),
+          'thumb'=>$_img_url.'Products/Ring_trilogy_Round_white_200.jpg',
+          'images'=>array('Ring_trilogy_Round_white_201.jpg','Ring_trilogy_Round_white_202.jpg'),
+          'sku'=>'SET-8800950587-41',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -758,9 +765,10 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #4927991215',
-          'thumb'=>$_img_url.'Products/Ring-hert-1.jpg',
-          'images'=>array('Ring-hert-2.jpg','Ring-heart-3.jpg'),
+          'thumb'=>$_img_url.'Products/Ring_solitaire_round_white_200.jpg',
+          'images'=>array('Ring_solitaire_round_white_201.jpg','Ring_solitaire_round_white_202.jpg'),
           'content'=>'',
+          'sku'=>'SET-8800950587-11',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
@@ -848,9 +856,10 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #2375118707',
-          'thumb'=>$_img_url.'Products/Ring-cusion-1.jpg',
-          'images'=>array('Ring-cusion-2.jpg'),
+          'thumb'=>$_img_url.'Products/Ring_halo_round_white_300.jpeg',
+          'images'=>array('Ring_halo_round_white_301.jpeg','Ring_halo_round_white_302.jpeg'),
           'content'=>'',
+          'sku'=>'SET-8800950587-2',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
@@ -941,8 +950,9 @@ class Sample_Data_Template {
 
         array(
           'title'=>'Setting #10000001',
-          'thumb'=>$_img_url.'Products/Ring-round-1.jpg',
-          'images'=>array('Ring-round-2.jpg','Ring-round-3.jpg'),
+          'thumb'=>$_img_url.'Products/Ring_pave_Round_white_400.jpg',
+          'images'=>array('Ring_pave_Round_white_401.jpg'),
+          'sku'=>'SET-8800950587-33',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -1031,8 +1041,9 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000002',
-          'thumb'=>$_img_url.'Products/Ring-princess-1.jpg',
-          'images'=>array(),
+          'thumb'=>$_img_url.'Products/Ring_pave_Round_white_500.jpg',
+          'images'=>array('Ring_pave_Round_white_501.jpg','Ring_pave_Round_white_502.jpg'),
+          'sku'=>'SET-8800950587-34',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -1121,9 +1132,10 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000003',
-          'thumb'=>$_img_url.'Products/Ring-emerald-3.jpg',
-          'images'=>array('Ring-emerald-4.jpg','Ring-emerald-5.jpg'),
+          'thumb'=>$_img_url.'Products/Ring_solitaire_round_white_300.jpg',
+          'images'=>array('Ring_solitaire_round_white_301.jpg','Ring_solitaire_round_white_302.jpg'),
           'content'=>'',
+          'sku'=>'SET-8800950587-12',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
@@ -1211,8 +1223,9 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000004',
-          'thumb'=>$_img_url.'Products/Ring-asscher-1.jpg',
-          'images'=>array('Ring-asscher-2.jpg'),
+          'thumb'=>$_img_url.'Products/w-r-2.jpg',
+          'images'=>array('w-r-1.jpg','w-r-3.jpg'),
+          'sku'=>'SET-8800950587-42',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -1301,8 +1314,9 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000005',
-          'thumb'=>$_img_url.'Products/Ring-marquise.jpg',
-          'images'=>array(),
+          'thumb'=>$_img_url.'Products/Ring_pave_Round_white_600.jpg',
+          'images'=>array('Ring_pave_Round_white_601.jpg'),
+          'sku'=>'SET-8800950587-35',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -1391,9 +1405,10 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000006',
-          'thumb'=>$_img_url.'Products/Ring-oval-1.jpg',
-          'images'=>array(),
+          'thumb'=>$_img_url.'Products/Ring_halo_round_white_400.jpeg',
+          'images'=>array('Ring_halo_round_white_401.jpeg','Ring_halo_round_white_402.jpeg'),
           'content'=>'',
+          'sku'=>'SET-8800950587-3',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
@@ -1481,8 +1496,9 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000007',
-          'thumb'=>$_img_url.'Products/Ring-radiant-1.jpg',
-          'images'=>array(),
+          'thumb'=>$_img_url.'Products/Ring_pave_Round_white_700.jpg',
+          'images'=>array('Ring_pave_Round_white_701.jpg','Ring_pave_Round_white_702.jpg'),
+          'sku'=>'SET-8800950587-36',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -1531,8 +1547,9 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000008',
-          'thumb'=>$_img_url.'Products/Ring-pear-1.jpg',
-          'images'=>array(),
+          'thumb'=>$_img_url.'Products/Ring_trilogy_Round_white_400.jpg',
+          'images'=>array('Ring_trilogy_Round_white_401.jpg','Ring_trilogy_Round_white_401.jpg'),
+          'sku'=>'SET-8800950587-43',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -1621,9 +1638,10 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000009',
-          'thumb'=>$_img_url.'Products/Ring-hert-1.jpg',
-          'images'=>array('Ring-hert-2.jpg','Ring-heart-3.jpg'),
+          'thumb'=>$_img_url.'Products/Ring_solitaire_round_white_400.jpg',
+          'images'=>array('Ring_solitaire_round_white_401.jpg','Ring_solitaire_round_white_402.jpg'),
           'content'=>'',
+          'sku'=>'SET-8800950587-13',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
@@ -1711,9 +1729,10 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000010',
-          'thumb'=>$_img_url.'Products/Ring-cusion-1.jpg',
-          'images'=>array('Ring-cusion-2.jpg'),
+          'thumb'=>$_img_url.'Products/Ring_halo_round_white_500.jpeg',
+          'images'=>array('Ring_halo_round_white_501.jpeg','Ring_halo_round_white_502.jpeg'),
           'content'=>'',
+          'sku'=>'SET-8800950587-4',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
@@ -1804,9 +1823,10 @@ class Sample_Data_Template {
 
         array(
           'title'=>'Setting #10000011',
-          'thumb'=>$_img_url.'Products/Ring-round-1.jpg',
-          'images'=>array('Ring-round-2.jpg','Ring-round-3.jpg'),
+          'thumb'=>$_img_url.'Products/Ring_halo_round_white_600.jpeg',
+          'images'=>array('Ring_halo_round_white_601.jpeg','Ring_halo_round_white_602.jpeg'),
           'content'=>'',
+          'sku'=>'SET-8800950587-5',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
@@ -1854,8 +1874,9 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000012',
-          'thumb'=>$_img_url.'Products/Ring-princess-1.jpg',
-          'images'=>array(),
+          'thumb'=>$_img_url.'Products/Ring_pave_Round_white_800.jpg',
+          'images'=>array('Ring_pave_Round_white_801.jpg'),
+          'sku'=>'SET-8800950587-37',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -1904,9 +1925,10 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000012',
-          'thumb'=>$_img_url.'Products/Ring-emerald-3.jpg',
-          'images'=>array('Ring-emerald-4.jpg','Ring-emerald-5.jpg'),
+          'thumb'=>$_img_url.'Products/Ring_solitaire_round_white_500.jpeg',
+          'images'=>array('Ring_solitaire_round_white_501.jpeg','Ring_solitaire_round_white_502.jpeg'),
           'content'=>'',
+          'sku'=>'SET-8800950587-14',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
@@ -1954,8 +1976,9 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000013',
-          'thumb'=>$_img_url.'Products/Ring-asscher-1.jpg',
-          'images'=>array('Ring-asscher-2.jpg'),
+          'thumb'=>$_img_url.'Products/Ring_trilogy_Round_white_500.jpg',
+          'images'=>array('Ring_trilogy_Round_white_501.jpg'),
+          'sku'=>'SET-8800950587-44',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -2004,8 +2027,9 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000014',
-          'thumb'=>$_img_url.'Products/Ring-marquise.jpg',
-          'images'=>array(),
+          'thumb'=>$_img_url.'Products/Ring_pave_Round_white_900.jpg',
+          'images'=>array('Ring_pave_Round_white_901.jpg','Ring_pave_Round_white_902.jpg'),
+          'sku'=>'SET-8800950587-38',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -2054,9 +2078,10 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000015',
-          'thumb'=>$_img_url.'Products/Ring-oval-1.jpg',
-          'images'=>array(),
+          'thumb'=>$_img_url.'Products/Ring_halo_round_white_700.jpg',
+          'images'=>array('Ring_halo_round_white_701.jpg','Ring_halo_round_white_702.jpg'),
           'content'=>'',
+          'sku'=>'SET-8800950587-6',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
@@ -2104,8 +2129,9 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000016',
-          'thumb'=>$_img_url.'Products/Ring-radiant-1.jpg',
-          'images'=>array(),
+          'thumb'=>$_img_url.'Products/Ring_pave_Round_white_1000.jpg',
+          'images'=>array('Ring_pave_Round_white_1001.jpg','Ring_pave_Round_white_1002.jpg'),
+          'sku'=>'SET-8800950587-39',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -2154,8 +2180,9 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000017',
-          'thumb'=>$_img_url.'Products/Ring-pear-1.jpg',
-          'images'=>array(),
+          'thumb'=>$_img_url.'Products/Ring_trilogy_Round_white_600.jpg',
+          'images'=>array('Ring_trilogy_Round_white_601.jpg'),
+          'sku'=>'SET-8800950587-45',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -2204,9 +2231,10 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000018',
-          'thumb'=>$_img_url.'Products/Ring-hert-1.jpg',
-          'images'=>array('Ring-hert-2.jpg','Ring-heart-3.jpg'),
+          'thumb'=>$_img_url.'Products/Ring_solitaire_round_white_600.jpeg',
+          'images'=>array('Ring_solitaire_round_white_601.jpeg','Ring_solitaire_round_white_602.jpeg'),
           'content'=>'',
+          'sku'=>'SET-8800950587-15',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
@@ -2254,9 +2282,10 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000019',
-          'thumb'=>$_img_url.'Products/Ring-cusion-1.jpg',
-          'images'=>array('Ring-cusion-2.jpg'),
+          'thumb'=>$_img_url.'Products/Ring_halo_round_white_800.jpeg',
+          'images'=>array('Ring_halo_round_white_801.jpeg','Ring_halo_round_white_802.jpeg'),
           'content'=>'',
+          'sku'=>'SET-8800950587-7',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
@@ -2307,9 +2336,10 @@ class Sample_Data_Template {
         
         array(
           'title'=>'Setting #10000020',
-          'thumb'=>$_img_url.'Products/Ring-round-1.jpg',
-          'images'=>array('Ring-round-2.jpg','Ring-round-3.jpg'),
+          'thumb'=>$_img_url.'Products/Ring_halo_round_white_900.jpeg',
+          'images'=>array('Ring_halo_round_white_901.jpeg','Ring_halo_round_white_902.jpeg'),
           'content'=>'',
+          'sku'=>'SET-8800950587-8',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
@@ -2397,14 +2427,15 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000021',
-          'thumb'=>$_img_url.'Products/Ring-princess-1.jpg',
-          'images'=>array(),
+          'thumb'=>$_img_url.'Products/Ring_sidestone_Round_white_100.jpg',
+          'images'=>array('Ring_sidestone_Round_white_101.jpg'),
+          'sku'=>'SET-8800950587-50',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable', //simple | variable
-          'category'=>array('eo_setting_shape_cat','eo_setting_princess_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_pave_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
+          'category'=>array('eo_setting_shape_cat','eo_setting_princess_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_sidestone_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
                               'value'=>'18K Yellow Gold|18K Rose Gold|18K White Gold',
@@ -2487,9 +2518,10 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000022',
-          'thumb'=>$_img_url.'Products/Ring-emerald-3.jpg',
-          'images'=>array('Ring-emerald-4.jpg','Ring-emerald-5.jpg'),
+          'thumb'=>$_img_url.'Products/Ring_solitaire_round_white_700.jpeg',
+          'images'=>array('Ring_solitaire_round_white_701.jpeg','Ring_solitaire_round_white_702.jpeg'),
           'content'=>'',
+          'sku'=>'SET-8800950587-16',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
@@ -2577,8 +2609,9 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000023',
-          'thumb'=>$_img_url.'Products/Ring-asscher-1.jpg',
-          'images'=>array('Ring-asscher-2.jpg'),
+          'thumb'=>$_img_url.'Products/Ring_trilogy_Round_white_700.jpg',
+          'images'=>array('Ring_trilogy_Round_white_701.jpg'),
+          'sku'=>'SET-8800950587-46',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -2667,14 +2700,15 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000024',
-          'thumb'=>$_img_url.'Products/Ring-marquise.jpg',
-          'images'=>array(),
+          'thumb'=>$_img_url.'Products/Ring_sidestone_Round_white_200.jpg',
+          'images'=>array('Ring_sidestone_Round_white_201.jpg'),
+          'sku'=>'SET-8800950587-51',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable', //simple | variable
-          'category'=>array('eo_setting_shape_cat','eo_setting_marquise_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_pave_cat','eo_metal_14k_white_gold_cat','eo_metal_14k_yellow_gold_cat','eo_metal_14k_rose_gold_cat'),
+          'category'=>array('eo_setting_shape_cat','eo_setting_marquise_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_sidestone_cat','eo_metal_14k_white_gold_cat','eo_metal_14k_yellow_gold_cat','eo_metal_14k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
                               'value'=>'14K Yellow Gold|14K Rose Gold|14K White Gold',
@@ -2757,9 +2791,10 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000025',
-          'thumb'=>$_img_url.'Products/Ring-oval-1.jpg',
-          'images'=>array(),
+          'thumb'=>$_img_url.'Products/Ring_halo_round_white_1000.jpeg',
+          'images'=>array('Ring_halo_round_white_1001.jpeg','Ring_halo_round_white_1002.jpeg'),
           'content'=>'',
+          'sku'=>'SET-8800950587-9',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
@@ -2847,14 +2882,15 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000026',
-          'thumb'=>$_img_url.'Products/Ring-radiant-1.jpg',
-          'images'=>array(),
+          'thumb'=>$_img_url.'Products/Ring_sidestone_Round_white_300.jpg',
+          'images'=>array('Ring_sidestone_Round_white_301.jpg','Ring_sidestone_Round_white_302.jpg'),
+          'sku'=>'SET-8800950587-52',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable', //simple | variable
-          'category'=>array('eo_setting_shape_cat','eo_setting_radiant_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_pave_cat','eo_metal_14k_yellow_gold_cat'),
+          'category'=>array('eo_setting_shape_cat','eo_setting_radiant_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_sidestone_cat','eo_metal_14k_yellow_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
                               'value'=>'14K Yellow Gold',
@@ -2897,8 +2933,9 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000027',
-          'thumb'=>$_img_url.'Products/Ring-pear-1.jpg',
-          'images'=>array(),
+          'thumb'=>$_img_url.'Products/Ring_trilogy_Round_white_800.jpg',
+          'images'=>array('Ring_trilogy_Round_white_801.jpg'),
+          'sku'=>'SET-8800950587-47',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -2987,9 +3024,10 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000028',
-          'thumb'=>$_img_url.'Products/Ring-hert-1.jpg',
-          'images'=>array('Ring-hert-2.jpg','Ring-heart-3.jpg'),
+          'thumb'=>$_img_url.'Products/Ring_solitaire_round_white_800.jpg',
+          'images'=>array('Ring_solitaire_round_white_801.jpg','Ring_solitaire_round_white_802.jpg'),
           'content'=>'',
+          'sku'=>'SET-8800950587-17',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
@@ -3077,14 +3115,15 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000029',
-          'thumb'=>$_img_url.'Products/Ring-cusion-1.jpg',
-          'images'=>array('Ring-cusion-2.jpg'),
+          'thumb'=>$_img_url.'Products/Ring_vintage_round_white_100.jpg',
+          'images'=>array('Ring_vintage_round_white_101.jpg','Ring_vintage_round_white_102.jpg'),
           'content'=>'',
+          'sku'=>'SET-8800950587-20',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable', //simple | variable
-          'category'=>array('eo_setting_shape_cat','eo_setting_cushion_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_halo_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
+          'category'=>array('eo_setting_shape_cat','eo_setting_cushion_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_vintage_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
                               'value'=>'18K Yellow Gold|18K Rose Gold|18K White Gold',
@@ -3170,14 +3209,15 @@ class Sample_Data_Template {
 
         array(
           'title'=>'Setting #10000030',
-          'thumb'=>$_img_url.'Products/Ring-round-1.jpg',
-          'images'=>array('Ring-round-2.jpg','Ring-round-3.jpg'),
+          'thumb'=>$_img_url.'Products/Ring_vintage_round_white_200.jpg',
+          'images'=>array('Ring_vintage_round_white_201.jpg','Ring_vintage_round_white_202.jpg'),
           'content'=>'',
+          'sku'=>'SET-8800950587-21',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable', //simple | variable
-          'category'=>array('eo_setting_shape_cat','eo_setting_round_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_halo_cat','eo_metal_14k_white_gold_cat','eo_metal_14k_yellow_gold_cat','eo_metal_14k_rose_gold_cat'),
+          'category'=>array('eo_setting_shape_cat','eo_setting_round_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_vintage_cat','eo_metal_14k_white_gold_cat','eo_metal_14k_yellow_gold_cat','eo_metal_14k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
                               'value'=>'14K Yellow Gold|14K Rose Gold|14K White Gold',
@@ -3260,14 +3300,15 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000031',
-          'thumb'=>$_img_url.'Products/Ring-princess-1.jpg',
-          'images'=>array(),
+          'thumb'=>$_img_url.'Products/Ring_sidestone_Round_white_400.jpg',
+          'images'=>array('Ring_sidestone_Round_white_401.jpg'),
+          'sku'=>'SET-8800950587-53',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable', //simple | variable
-          'category'=>array('eo_setting_shape_cat','eo_setting_princess_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_pave_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
+          'category'=>array('eo_setting_shape_cat','eo_setting_princess_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_sidestone_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
                               'value'=>'18K Yellow Gold|18K Rose Gold|18K White Gold',
@@ -3350,9 +3391,10 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000032',
-          'thumb'=>$_img_url.'Products/Ring-emerald-3.jpg',
-          'images'=>array('Ring-emerald-4.jpg','Ring-emerald-5.jpg'),
+          'thumb'=>$_img_url.'Products/Ring_solitaire_round_white_900.jpeg',
+          'images'=>array('Ring_solitaire_round_white_901.jpeg','Ring_solitaire_round_white_902.jpeg'),
           'content'=>'',
+          'sku'=>'SET-8800950587-18',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
@@ -3440,8 +3482,9 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000033',
-          'thumb'=>$_img_url.'Products/Ring-asscher-1.jpg',
-          'images'=>array('Ring-asscher-2.jpg'),
+          'thumb'=>$_img_url.'Products/Ring_trilogy_Round_white_900.jpg',
+          'images'=>array('Ring_trilogy_Round_white_901.jpg','Ring_trilogy_Round_white_902.jpg'),
+          'sku'=>'SET-8800950587-48',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -3530,14 +3573,15 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000034',
-          'thumb'=>$_img_url.'Products/Ring-marquise.jpg',
-          'images'=>array(),
+          'thumb'=>$_img_url.'Products/Ring_sidestone_Round_white_500.jpg',
+          'images'=>array('Ring_sidestone_Round_white_501.jpg'),
+          'sku'=>'SET-8800950587-54',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable', //simple | variable
-          'category'=>array('eo_setting_shape_cat','eo_setting_marquise_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_pave_cat','eo_metal_14k_white_gold_cat','eo_metal_14k_yellow_gold_cat','eo_metal_14k_rose_gold_cat'),
+          'category'=>array('eo_setting_shape_cat','eo_setting_marquise_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_sidestone_cat','eo_metal_14k_white_gold_cat','eo_metal_14k_yellow_gold_cat','eo_metal_14k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
                               'value'=>'14K Yellow Gold|14K Rose Gold|14K White Gold',
@@ -3620,14 +3664,15 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000035',
-          'thumb'=>$_img_url.'Products/Ring-oval-1.jpg',
-          'images'=>array(),
+          'thumb'=>$_img_url.'Products/Ring_vintage_round_white_300.jpg',
+          'images'=>array('Ring_vintage_round_white_301.jpg','Ring_vintage_round_white_302.jpg'),
           'content'=>'',
+          'sku'=>'SET-8800950587-22',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable', //simple | variable
-          'category'=>array('eo_setting_shape_cat','eo_setting_oval_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_halo_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
+          'category'=>array('eo_setting_shape_cat','eo_setting_oval_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_ vintage_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
                               'value'=>'18K Yellow Gold|18K Rose Gold|18K White Gold',
@@ -3710,14 +3755,15 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000036',
-          'thumb'=>$_img_url.'Products/Ring-radiant-1.jpg',
-          'images'=>array(),
+          'thumb'=>$_img_url.'Products/Ring_sidestone_Round_white_600.jpg',
+          'images'=>array('Ring_sidestone_Round_white_601.jpg','Ring_sidestone_Round_white_602.jpg'),
+          'sku'=>'SET-8800950587-55',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable', //simple | variable
-          'category'=>array('eo_setting_shape_cat','eo_setting_radiant_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_pave_cat','eo_metal_14k_yellow_gold_cat'),
+          'category'=>array('eo_setting_shape_cat','eo_setting_radiant_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_sidestone_cat','eo_metal_14k_yellow_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
                               'value'=>'14K Yellow Gold',
@@ -3760,8 +3806,9 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000037',
-          'thumb'=>$_img_url.'Products/Ring-pear-1.jpg',
-          'images'=>array(),
+          'thumb'=>$_img_url.'Products/Ring_trilogy_Round_white_1000.jpg',
+          'images'=>array('Ring_trilogy_Round_white_1001.jpg'),
+          'sku'=>'SET-8800950587-49',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -3850,9 +3897,10 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000038',
-          'thumb'=>$_img_url.'Products/Ring-hert-1.jpg',
-          'images'=>array('Ring-hert-2.jpg','Ring-heart-3.jpg'),
+          'thumb'=>$_img_url.'Products/Ring_solitaire_round_white_1000.jpg',
+          'images'=>array('Ring_solitaire_round_white_1001.jpg','Ring_solitaire_round_white_1002.jpg'),
           'content'=>'',
+          'sku'=>'SET-8800950587-19',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
@@ -3940,14 +3988,15 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000039',
-          'thumb'=>$_img_url.'Products/Ring-cusion-1.jpg',
-          'images'=>array('Ring-cusion-2.jpg'),
+          'thumb'=>$_img_url.'Products/Ring_vintage_round_white_400.jpg',
+          'images'=>array('Ring_vintage_round_white_401.jpg','Ring_vintage_round_white_402.jpg'),
           'content'=>'',
+          'sku'=>'SET-8800950587-23',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable', //simple | variable
-          'category'=>array('eo_setting_shape_cat','eo_setting_cushion_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_halo_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
+          'category'=>array('eo_setting_shape_cat','eo_setting_cushion_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_vintage_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
                               'value'=>'18K Yellow Gold|18K Rose Gold|18K White Gold',
@@ -4033,14 +4082,15 @@ class Sample_Data_Template {
 
         array(
           'title'=>'Setting #10000040',
-          'thumb'=>$_img_url.'Products/Ring-round-1.jpg',
-          'images'=>array('Ring-round-2.jpg','Ring-round-3.jpg'),
+          'thumb'=>$_img_url.'Products/Ring_vintage_round_white_500.jpg',
+          'images'=>array('Ring_vintage_round_white_501.jpg','Ring_vintage_round_white_502.jpg'),
           'content'=>'',
+          'sku'=>'SET-8800950587-24',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable', //simple | variable
-          'category'=>array('eo_setting_shape_cat','eo_setting_round_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_halo_cat','eo_metal_14k_white_gold_cat','eo_metal_14k_yellow_gold_cat','eo_metal_14k_rose_gold_cat'),
+          'category'=>array('eo_setting_shape_cat','eo_setting_round_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_vintage_cat','eo_metal_14k_white_gold_cat','eo_metal_14k_yellow_gold_cat','eo_metal_14k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
                               'value'=>'14K Yellow Gold|14K Rose Gold|14K White Gold',
@@ -4123,14 +4173,15 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000041',
-          'thumb'=>$_img_url.'Products/Ring-princess-1.jpg',
-          'images'=>array(),
+          'thumb'=>$_img_url.'Products/Ring_sidestone_Round_white_700.jpg',
+          'images'=>array('Ring_sidestone_Round_white_701.jpg'),
+          'sku'=>'SET-8800950587-56',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable', //simple | variable
-          'category'=>array('eo_setting_shape_cat','eo_setting_princess_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_pave_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
+          'category'=>array('eo_setting_shape_cat','eo_setting_princess_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_sidestone_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
                               'value'=>'18K Yellow Gold|18K Rose Gold|18K White Gold',
@@ -4213,14 +4264,15 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000042',
-          'thumb'=>$_img_url.'Products/Ring-emerald-3.jpg',
-          'images'=>array('Ring-emerald-4.jpg','Ring-emerald-5.jpg'),
+          'thumb'=>$_img_url.'Products/Ring_vintage_round_white_600.jpg',
+          'images'=>array('Ring_vintage_round_white_601.jpg','Ring_vintage_round_white_602.jpg'),
           'content'=>'',
+          'sku'=>'SET-8800950587-25',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable', //simple | variable
-          'category'=>array('eo_setting_shape_cat','eo_setting_emerald_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_solitaire_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
+          'category'=>array('eo_setting_shape_cat','eo_setting_emerald_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_vintage_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
                               'value'=>'18K Yellow Gold|18K Rose Gold|18K White Gold',
@@ -4303,14 +4355,15 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000043',
-          'thumb'=>$_img_url.'Products/Ring-asscher-1.jpg',
-          'images'=>array('Ring-asscher-2.jpg'),
+          'thumb'=>$_img_url.'Products/Ring_vintage_round_white_700.jpg',
+          'images'=>array('Ring_vintage_round_701.jpg','Ring_vintage_round_702.jpg'),
           'content'=>'',
+          'sku'=>'SET-8800950587-26',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable', //simple | variable
-          'category'=>array('eo_setting_shape_cat','eo_setting_asscher_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_trilogy_cat','eo_metal_14k_white_gold_cat','eo_metal_14k_yellow_gold_cat','eo_metal_14k_rose_gold_cat'),
+          'category'=>array('eo_setting_shape_cat','eo_setting_asscher_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_vintage_cat','eo_metal_14k_white_gold_cat','eo_metal_14k_yellow_gold_cat','eo_metal_14k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
                               'value'=>'14K Yellow Gold|14K Rose Gold|14K White Gold',
@@ -4393,14 +4446,15 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000044',
-          'thumb'=>$_img_url.'Products/Ring-marquise.jpg',
-          'images'=>array(),
+          'thumb'=>$_img_url.'Products/Ring_sidestone_Round_white_800.jpg',
+          'images'=>array('Ring_sidestone_Round_white_801.jpg'),
+          'sku'=>'SET-8800950587-57',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable', //simple | variable
-          'category'=>array('eo_setting_shape_cat','eo_setting_marquise_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_pave_cat','eo_metal_14k_white_gold_cat','eo_metal_14k_yellow_gold_cat','eo_metal_14k_rose_gold_cat'),
+          'category'=>array('eo_setting_shape_cat','eo_setting_marquise_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_sidestone_cat','eo_metal_14k_white_gold_cat','eo_metal_14k_yellow_gold_cat','eo_metal_14k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
                               'value'=>'14K Yellow Gold|14K Rose Gold|14K White Gold',
@@ -4483,14 +4537,15 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000045',
-          'thumb'=>$_img_url.'Products/Ring-oval-1.jpg',
-          'images'=>array(),
+          'thumb'=>$_img_url.'Products/Ring_vintage_round_white_800.jpg',
+          'images'=>array('Ring_vintage_round_white_801.jpg','Ring_vintage_round_white_802.jpg'),
           'content'=>'',
+          'sku'=>'SET-8800950587-27',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable', //simple | variable
-          'category'=>array('eo_setting_shape_cat','eo_setting_oval_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_halo_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
+          'category'=>array('eo_setting_shape_cat','eo_setting_oval_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_vintage_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
                               'value'=>'18K Yellow Gold|18K Rose Gold|18K White Gold',
@@ -4573,14 +4628,15 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000046',
-          'thumb'=>$_img_url.'Products/Ring-radiant-1.jpg',
-          'images'=>array(),
+          'thumb'=>$_img_url.'Products/Ring_sidestone_Round_white_900.jpg',
+          'images'=>array('Ring_sidestone_Round_white_901.jpg'),
+          'sku'=>'SET-8800950587-58',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable', //simple | variable
-          'category'=>array('eo_setting_shape_cat','eo_setting_radiant_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_pave_cat','eo_metal_14k_yellow_gold_cat'),
+          'category'=>array('eo_setting_shape_cat','eo_setting_radiant_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_sidetone_cat','eo_metal_14k_yellow_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
                               'value'=>'14K Yellow Gold',
@@ -4623,14 +4679,15 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000047',
-          'thumb'=>$_img_url.'Products/Ring-pear-1.jpg',
-          'images'=>array(),
+          'thumb'=>$_img_url.'Products/Ring_sidestone_Round_white_1000.jpg',
+          'images'=>array('Ring_sidestone_Round_white_1001.jpg','Ring_sidestone_Round_white_1002.jpg'),
+          'sku'=>'SET-8800950587-59',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable', //simple | variable
-          'category'=>array('eo_setting_shape_cat','eo_setting_pear_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_trilogy_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
+          'category'=>array('eo_setting_shape_cat','eo_setting_pear_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_sidestone_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
                               'value'=>'18K Yellow Gold|18K Rose Gold|18K White Gold',
@@ -4713,14 +4770,15 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000048',
-          'thumb'=>$_img_url.'Products/Ring-hert-1.jpg',
-          'images'=>array('Ring-hert-2.jpg','Ring-heart-3.jpg'),
+          'thumb'=>$_img_url.'Products/Ring_vintage_round_white_900.jpg',
+          'images'=>array('Ring_vintage_round_white_901.jpg','Ring_vintage_round_white_902.jpg'),
           'content'=>'',
+          'sku'=>'SET-8800950587-28',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable', //simple | variable
-          'category'=>array('eo_setting_shape_cat','eo_setting_heart_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_solitaire_cat','eo_metal_14k_white_gold_cat','eo_metal_14k_yellow_gold_cat','eo_metal_14k_rose_gold_cat'),
+          'category'=>array('eo_setting_shape_cat','eo_setting_heart_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_vintage_cat','eo_metal_14k_white_gold_cat','eo_metal_14k_yellow_gold_cat','eo_metal_14k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
                               'value'=>'14K Yellow Gold|14K Rose Gold|14K White Gold',
@@ -4803,14 +4861,15 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Setting #10000049',
-          'thumb'=>$_img_url.'Products/Ring-cusion-1.jpg',
-          'images'=>array('Ring-cusion-2.jpg'),
+          'thumb'=>$_img_url.'Products/Ring_vintage_round_white_1000.jpg',
+          'images'=>array('Ring_vintage_round_white_1001.jpg','Ring_vintage_round_white_1002.jpg'),
           'content'=>'',
+          'sku'=>'SET-8800950587-29',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable', //simple | variable
-          'category'=>array('eo_setting_shape_cat','eo_setting_cushion_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_halo_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
+          'category'=>array('eo_setting_shape_cat','eo_setting_cushion_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_vintage_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
                               'value'=>'18K Yellow Gold|18K Rose Gold|18K White Gold',
@@ -10429,8 +10488,2801 @@ class Sample_Data_Template {
                             'terms'=>array('pa_eo_carat_attr'=>'0.2','pa_eo_clarity_attr'=>'IF','pa_eo_colour_attr'=>'E','pa_eo_depth_attr'=>'48','pa_eo_fluorescence_attr'=>'Slight','pa_eo_grading_report_attr'=>'GIA','pa_eo_size_attr'=>'0.2','pa_eo_symmertry_attr'=>'Good','pa_eo_table_attr'=>'75')
                           )
                    )
-        )      
-);	
+        ),
+
+        array(
+          'title'=>'Lab Round Diamond #10000100',
+          'thumb'=>$_img_url.'Products/Round-4.jpg',
+          'images'=>array('Round-5.jpg','Round-1.jpg'),
+          'content'=>'',
+          'sku'=>'LAB-810000100',
+          'regular_price'=>'',
+          'sale_price'=>'',
+          'price'=>'',
+          'type'=>'variable', //simple | variable
+          'category'=>array('eo_lab_diamond_shape_cat','eo_lab_diamond_round_shape_cat'),
+          'attribute'=>array('pa_eo_carat_attr'=>array(
+                              'name'=>'pa_eo_carat_attr',
+                              'value'=>'0.5',
+                              'position'=>0,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_clarity_attr'=>array(
+                              'name'=>'pa_eo_clarity_attr',
+                              'value'=>'IF',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_colour_attr'=>array(
+                              'name'=>'pa_eo_colour_attr',
+                              'value'=>'D',
+                              'position'=>2,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_depth_attr'=>array(
+                              'name'=>'pa_eo_depth_attr',
+                              'value'=>'78',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_fluorescence_attr'=>array(
+                              'name'=>'pa_eo_fluorescence_attr',
+                              'value'=>'Slight',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+
+                    'pa_eo_grading_report_attr'=>array(
+                              'name'=>'pa_eo_grading_report_attr',
+                              'value'=>'IGI',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),        
+                    'pa_eo_size_attr'=>array(
+                              'name'=>'pa_eo_size_attr',
+                              'value'=>'4.0',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_symmertry_attr'=>array(
+                              'name'=>'pa_eo_symmertry_attr',
+                              'value'=>'Fair',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_table_attr'=>array(
+                              'name'=>'pa_eo_table_attr',
+                              'value'=>'56',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            )        
+                    ),
+          'variation'=>array(
+                          array(
+                            'regular_price'=>'15691',
+                            'price'=>'15500',
+                            'terms'=>array('pa_eo_carat_attr'=>'0.5','pa_eo_clarity_attr'=>'IF','pa_eo_colour_attr'=>'D','pa_eo_depth_attr'=>'78','pa_eo_fluorescence_attr'=>'Slight','pa_eo_grading_report_attr'=>'IGI','pa_eo_size_attr'=>'4.0','pa_eo_symmertry_attr'=>'Fair','pa_eo_table_attr'=>'56')
+                          )
+                   )       
+        ),
+        array(
+          'title'=>'Lab Emerald Diamond #10000101',
+          'thumb'=>$_img_url.'Products/Emerald-1.jpg',
+          'images'=>array('Emerald-2.jpg','Emerald-3.jpg'),
+          'content'=>'',
+          'sku'=>'LAB-810000101',
+          'regular_price'=>'',
+          'sale_price'=>'',
+          'price'=>'',
+          'type'=>'variable', //simple | variable
+          'category'=>array('eo_lab_diamond_shape_cat','eo_lab_diamond_emerald_shape_cat'),
+          'attribute'=>array('pa_eo_carat_attr'=>array(
+                              'name'=>'pa_eo_carat_attr',
+                              'value'=>'0.7',
+                              'position'=>0,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_clarity_attr'=>array(
+                              'name'=>'pa_eo_clarity_attr',
+                              'value'=>'VVS1',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_colour_attr'=>array(
+                              'name'=>'pa_eo_colour_attr',
+                              'value'=>'G',
+                              'position'=>2,
+                              'is_visible'=>1,            
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_depth_attr'=>array(
+                              'name'=>'pa_eo_depth_attr',
+                              'value'=>'72',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_fluorescence_attr'=>array(
+                              'name'=>'pa_eo_fluorescence_attr',
+                              'value'=>'None',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+
+                    'pa_eo_grading_report_attr'=>array(
+                              'name'=>'pa_eo_grading_report_attr',
+                              'value'=>'HRD',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),        
+                    'pa_eo_size_attr'=>array(
+                              'name'=>'pa_eo_size_attr',
+                              'value'=>'5.0',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_symmertry_attr'=>array(
+                              'name'=>'pa_eo_symmertry_attr',
+                              'value'=>'Very Good',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_table_attr'=>array(
+                              'name'=>'pa_eo_table_attr',
+                              'value'=>'50',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            )        
+                    ),
+          'variation'=>array(
+                          array(
+                            'regular_price'=>'20500',
+                            'price'=>'20399',
+                            'terms'=>array('pa_eo_carat_attr'=>'0.7','pa_eo_clarity_attr'=>'VVS1','pa_eo_colour_attr'=>'G','pa_eo_depth_attr'=>'72','pa_eo_fluorescence_attr'=>'None','pa_eo_grading_report_attr'=>'HRD','pa_eo_size_attr'=>'5.0','pa_eo_symmertry_attr'=>'Very Good','pa_eo_table_attr'=>'50')
+                          )
+                   )        
+        ),
+        array(
+          'title'=>'Lab Asscher Diamond #10000102',
+          'thumb'=>$_img_url.'Products/asscher-1.jpg',
+          'images'=>array('asscher-2.jpg'),
+          'content'=>'',
+          'sku'=>'LAB-810000102',
+          'regular_price'=>'',
+          'sale_price'=>'',
+          'price'=>'',
+          'type'=>'variable', //simple | variable
+          'category'=>array('eo_lab_diamond_shape_cat','eo_lab_diamond_asscher_shape_cat'),
+          'attribute'=>array('pa_eo_carat_attr'=>array(
+                              'name'=>'pa_eo_carat_attr',
+                              'value'=>'0.4',
+                              'position'=>0,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_clarity_attr'=>array(
+                              'name'=>'pa_eo_clarity_attr',
+                              'value'=>'IF',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_colour_attr'=>array(
+                              'name'=>'pa_eo_colour_attr',
+                              'value'=>'J',
+                              'position'=>2,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_depth_attr'=>array(
+                              'name'=>'pa_eo_depth_attr',
+                              'value'=>'45',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_fluorescence_attr'=>array(
+                              'name'=>'pa_eo_fluorescence_attr',
+                              'value'=>'Very',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+
+                    'pa_eo_grading_report_attr'=>array(
+                              'name'=>'pa_eo_grading_report_attr',
+                              'value'=>'AGS',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),        
+                    'pa_eo_size_attr'=>array(
+                              'name'=>'pa_eo_size_attr',
+                              'value'=>'1.0',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_symmertry_attr'=>array(
+                              'name'=>'pa_eo_symmertry_attr',
+                              'value'=>'Fair',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_table_attr'=>array(
+                              'name'=>'pa_eo_table_attr',
+                              'value'=>'55',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            )        
+                    ),
+          'variation'=>array(
+                          array(
+                            'regular_price'=>'12500',
+                            'price'=>'11390',
+                            'terms'=>array('pa_eo_carat_attr'=>'0.4','pa_eo_clarity_attr'=>'IF','pa_eo_colour_attr'=>'J','pa_eo_depth_attr'=>'45','pa_eo_fluorescence_attr'=>'Very','pa_eo_grading_report_attr'=>'AGS','pa_eo_size_attr'=>'1.0','pa_eo_symmertry_attr'=>'Fair','pa_eo_table_attr'=>'55')
+                          )
+                   )
+        ),
+        array(
+          'title'=>'Lab PRINCESS DIAMOND #10000103',
+          'thumb'=>$_img_url.'Products/Princess-3.jpg',
+          'images'=>array('Princess-1.jpg','Princess-2.jpg'),
+          'content'=>'',
+          'sku'=>'LAB-810000103',
+          'regular_price'=>'',
+          'sale_price'=>'',
+          'price'=>'',
+          'type'=>'variable', //simple | variable
+          'category'=>array('eo_lab_diamond_shape_cat','eo_lab_diamond_princess_shape_cat'),
+          'attribute'=>array('pa_eo_carat_attr'=>array(
+                              'name'=>'pa_eo_carat_attr',
+                              'value'=>'5.5',
+                              'position'=>0,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_clarity_attr'=>array(
+                              'name'=>'pa_eo_clarity_attr',
+                              'value'=>'VS1',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_colour_attr'=>array(
+                              'name'=>'pa_eo_colour_attr',
+                              'value'=>'K',
+                              'position'=>2,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_depth_attr'=>array(
+                              'name'=>'pa_eo_depth_attr',
+                              'value'=>'75',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_fluorescence_attr'=>array(
+                              'name'=>'pa_eo_fluorescence_attr',
+                              'value'=>'None',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+
+                    'pa_eo_grading_report_attr'=>array(
+                              'name'=>'pa_eo_grading_report_attr',
+                              'value'=>'GIA',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),        
+                    'pa_eo_size_attr'=>array(
+                              'name'=>'pa_eo_size_attr',
+                              'value'=>'1.2',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_symmertry_attr'=>array(
+                              'name'=>'pa_eo_symmertry_attr',
+                              'value'=>'Slight',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_table_attr'=>array(
+                              'name'=>'pa_eo_table_attr',
+                              'value'=>'80',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            )        
+                    ),
+          'variation'=>array(
+                          array(
+                            'regular_price'=>'22500',
+                            'price'=>'22390',
+                            'terms'=>array('pa_eo_carat_attr'=>'5.5','pa_eo_clarity_attr'=>'VS1','pa_eo_colour_attr'=>'K','pa_eo_depth_attr'=>'75','pa_eo_fluorescence_attr'=>'None','pa_eo_grading_report_attr'=>'GIA','pa_eo_size_attr'=>'1.2','pa_eo_symmertry_attr'=>'Slight','pa_eo_table_attr'=>'80')
+                          )
+                   ) 
+        ),
+        array(
+          'title'=>'Lab Cusion Diamond #10000104',
+          'thumb'=>$_img_url.'Products/Cusion-1.jpg',
+          'images'=>array('Cusion-2.jpg'),
+          'content'=>'',
+          'sku'=>'LAB-810000104',
+          'regular_price'=>'',
+          'sale_price'=>'',
+          'price'=>'',
+          'type'=>'variable', //simple | variable
+          'category'=>array('eo_lab_diamond_shape_cat','eo_lab_diamond_cushion_shape_cat'),
+          'attribute'=>array('pa_eo_carat_attr'=>array(
+                              'name'=>'pa_eo_carat_attr',
+                              'value'=>'0.5',
+                              'position'=>0,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_clarity_attr'=>array(
+                              'name'=>'pa_eo_clarity_attr',
+                              'value'=>'SI1',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_colour_attr'=>array(
+                              'name'=>'pa_eo_colour_attr',
+                              'value'=>'M',
+                              'position'=>2,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_depth_attr'=>array(
+                              'name'=>'pa_eo_depth_attr',
+                              'value'=>'48',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_fluorescence_attr'=>array(
+                              'name'=>'pa_eo_fluorescence_attr',
+                              'value'=>'Faint',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+
+                    'pa_eo_grading_report_attr'=>array(
+                              'name'=>'pa_eo_grading_report_attr',
+                              'value'=>'HRD',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),        
+                    'pa_eo_size_attr'=>array(
+                              'name'=>'pa_eo_size_attr',
+                              'value'=>'0.8',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_symmertry_attr'=>array(
+                              'name'=>'pa_eo_symmertry_attr',
+                              'value'=>'Excellent',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ), 
+                    'pa_eo_table_attr'=>array(
+                              'name'=>'pa_eo_table_attr',
+                              'value'=>'56',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            )        
+                    ),
+          'variation'=>array(
+                          array(
+                            'regular_price'=>'45500',
+                            'price'=>'45399',
+                            'terms'=>array('pa_eo_carat_attr'=>'0.5','pa_eo_clarity_attr'=>'SI1','pa_eo_colour_attr'=>'M','pa_eo_depth_attr'=>'48','pa_eo_fluorescence_attr'=>'Faint','pa_eo_grading_report_attr'=>'HRD','pa_eo_size_attr'=>'0.8','pa_eo_symmertry_attr'=>'Excellent','pa_eo_table_attr'=>'56')
+                          )
+                   )
+        ),
+        array(
+          'title'=>'Lab Heart Diamond #10000105',
+          'thumb'=>$_img_url.'Products/Heart-1.jpg',
+          'images'=>array('Heart-2.jpg','Heart-3.jpg'),
+          'content'=>'',
+          'sku'=>'LAB-810000105',
+          'regular_price'=>'',
+          'sale_price'=>'',
+          'price'=>'',
+          'type'=>'variable', //simple | variable
+          'category'=>array('eo_lab_diamond_shape_cat','eo_lab_diamond_heart_shape_cat'),
+          'attribute'=>array('pa_eo_carat_attr'=>array(
+                              'name'=>'pa_eo_carat_attr',
+                              'value'=>'0.9',
+                              'position'=>0,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_clarity_attr'=>array(
+                              'name'=>'pa_eo_clarity_attr',
+                              'value'=>'IF',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_colour_attr'=>array(
+                              'name'=>'pa_eo_colour_attr',
+                              'value'=>'D',
+                              'position'=>2,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_depth_attr'=>array(
+                              'name'=>'pa_eo_depth_attr',
+                              'value'=>'67',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_fluorescence_attr'=>array(
+                              'name'=>'pa_eo_fluorescence_attr',
+                              'value'=>'None',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+
+                    'pa_eo_grading_report_attr'=>array(
+                              'name'=>'pa_eo_grading_report_attr',
+                              'value'=>'IGI',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),        
+                    'pa_eo_size_attr'=>array(
+                              'name'=>'pa_eo_size_attr',
+                              'value'=>'1.1',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_symmertry_attr'=>array(
+                              'name'=>'pa_eo_symmertry_attr',
+                              'value'=>'Excellent',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_table_attr'=>array(
+                              'name'=>'pa_eo_table_attr',
+                              'value'=>'77',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            )        
+                    ),
+          'variation'=>array(
+                          array(
+                            'regular_price'=>'7500',
+                            'price'=>'7399',
+                            'terms'=>array('pa_eo_carat_attr'=>'0.9','pa_eo_clarity_attr'=>'IF','pa_eo_colour_attr'=>'D','pa_eo_depth_attr'=>'67','pa_eo_fluorescence_attr'=>'None','pa_eo_grading_report_attr'=>'IGI','pa_eo_size_attr'=>'1.1','pa_eo_symmertry_attr'=>'Excellent','pa_eo_table_attr'=>'77')
+                          )
+                   )
+        ),
+        array(
+          'title'=>'Lab Marquise Diamond #10000106',
+          'thumb'=>$_img_url.'Products/Marquise-1.jpg',
+          'images'=>array('Marquise-2.jpg'),
+          'content'=>'',
+          'sku'=>'LAB-810000106',
+          'regular_price'=>'',
+          'sale_price'=>'',
+          'price'=>'',
+          'type'=>'variable', //simple | variable
+          'category'=>array('eo_lab_diamond_shape_cat','eo_lab_diamond_marquise_shape_cat'),
+          'attribute'=>array('pa_eo_carat_attr'=>array(
+                              'name'=>'pa_eo_carat_attr',
+                              'value'=>'12',
+                              'position'=>0,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_clarity_attr'=>array(
+                              'name'=>'pa_eo_clarity_attr',
+                              'value'=>'IF',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_colour_attr'=>array(
+                              'name'=>'pa_eo_colour_attr',
+                              'value'=>'L',
+                              'position'=>2,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_depth_attr'=>array(
+                              'name'=>'pa_eo_depth_attr',
+                              'value'=>'66',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_fluorescence_attr'=>array(
+                              'name'=>'pa_eo_fluorescence_attr',
+                              'value'=>'Faint',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+
+                    'pa_eo_grading_report_attr'=>array(
+                              'name'=>'pa_eo_grading_report_attr',
+                              'value'=>'AGS',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),        
+                    'pa_eo_size_attr'=>array(
+                              'name'=>'pa_eo_size_attr',
+                              'value'=>'2.0',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_symmertry_attr'=>array(
+                              'name'=>'pa_eo_symmertry_attr',
+                              'value'=>'Very Good',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ), 
+                    'pa_eo_table_attr'=>array(
+                              'name'=>'pa_eo_table_attr',
+                              'value'=>'85',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            )        
+                    ),
+          'variation'=>array(
+                          array(
+                            'regular_price'=>'85089',
+                            'price'=>'85080',
+                            'terms'=>array('pa_eo_carat_attr'=>'12','pa_eo_clarity_attr'=>'IF','pa_eo_colour_attr'=>'L','pa_eo_depth_attr'=>'66','pa_eo_fluorescence_attr'=>'Faint','pa_eo_grading_report_attr'=>'AGS','pa_eo_size_attr'=>'2.0','pa_eo_symmertry_attr'=>'Very Good','pa_eo_table_attr'=>'85')
+                          )
+                   )
+        ),
+        array(
+          'title'=>'Lab Oval Diamond #10000107',
+          'thumb'=>$_img_url.'Products/Oval-1.jpg',
+          'images'=>array('Oval-2.jpg'),
+          'content'=>'',
+          'sku'=>'LAB-810000107',
+          'regular_price'=>'',
+          'sale_price'=>'',
+          'price'=>'',
+          'type'=>'variable', //simple | variable
+          'category'=>array('eo_lab_diamond_shape_cat','eo_lab_diamond_oval_shape_cat'),
+          'attribute'=>array('pa_eo_carat_attr'=>array(
+                              'name'=>'pa_eo_carat_attr',
+                              'value'=>'2',
+                              'position'=>0,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_clarity_attr'=>array(
+                              'name'=>'pa_eo_clarity_attr',
+                              'value'=>'VVS1',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_colour_attr'=>array(
+                              'name'=>'pa_eo_colour_attr',
+                              'value'=>'F',
+                              'position'=>2,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_depth_attr'=>array(
+                              'name'=>'pa_eo_depth_attr',
+                              'value'=>'72',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_fluorescence_attr'=>array(
+                              'name'=>'pa_eo_fluorescence_attr',
+                              'value'=>'Faint',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+
+                    'pa_eo_grading_report_attr'=>array(
+                              'name'=>'pa_eo_grading_report_attr',
+                              'value'=>'HRD',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),        
+                    'pa_eo_size_attr'=>array(
+                              'name'=>'pa_eo_size_attr',
+                              'value'=>'2.0',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_symmertry_attr'=>array(
+                              'name'=>'pa_eo_symmertry_attr',
+                              'value'=>'Good',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ), 
+                    'pa_eo_table_attr'=>array(
+                              'name'=>'pa_eo_table_attr',
+                              'value'=>'80',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            )        
+                    ),
+          'variation'=>array(
+                          array(
+                            'regular_price'=>'80089',
+                            'price'=>'80080',
+                            'terms'=>array('pa_eo_carat_attr'=>'2','pa_eo_clarity_attr'=>'VVS1','pa_eo_colour_attr'=>'F','pa_eo_depth_attr'=>'72','pa_eo_fluorescence_attr'=>'Faint','pa_eo_grading_report_attr'=>'HRD','pa_eo_size_attr'=>'2.0','pa_eo_symmertry_attr'=>'Good','pa_eo_table_attr'=>'80')
+                          )
+                   )
+        ),
+        array(
+          'title'=>'Lab Radiant Solitaire Diamond #10000108',
+          'thumb'=>$_img_url.'Products/Radiant-1.jpg',
+          'images'=>array('Radiant-2.jpg'),
+          'content'=>'',
+          'sku'=>'LAB-810000108',
+          'regular_price'=>'',
+          'sale_price'=>'',
+          'price'=>'',
+          'type'=>'variable', //simple | variable
+          'category'=>array('eo_lab_diamond_shape_cat','eo_lab_diamond_radiant_shape_cat'),
+          'attribute'=>array('pa_eo_carat_attr'=>array(
+                              'name'=>'pa_eo_carat_attr',
+                              'value'=>'5',
+                              'position'=>0,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_clarity_attr'=>array(
+                              'name'=>'pa_eo_clarity_attr',
+                              'value'=>'VVS2',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_colour_attr'=>array(
+                              'name'=>'pa_eo_colour_attr',
+                              'value'=>'G',
+                              'position'=>2,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_depth_attr'=>array(
+                              'name'=>'pa_eo_depth_attr',
+                              'value'=>'75',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_fluorescence_attr'=>array(
+                              'name'=>'pa_eo_fluorescence_attr',
+                              'value'=>'Faint',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+
+                    'pa_eo_grading_report_attr'=>array(
+                              'name'=>'pa_eo_grading_report_attr',
+                              'value'=>'HRD',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),        
+                    'pa_eo_size_attr'=>array(
+                              'name'=>'pa_eo_size_attr',
+                              'value'=>'2.0',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_symmertry_attr'=>array(
+                              'name'=>'pa_eo_symmertry_attr',
+                              'value'=>'Good',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ), 
+                    'pa_eo_table_attr'=>array(
+                              'name'=>'pa_eo_table_attr',
+                              'value'=>'83',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            )        
+                    ),
+          'variation'=>array(
+                          array(
+                            'regular_price'=>'92089',
+                            'price'=>'92080',
+                            'terms'=>array('pa_eo_carat_attr'=>'5','pa_eo_clarity_attr'=>'VVS2','pa_eo_colour_attr'=>'G','pa_eo_depth_attr'=>'73','pa_eo_fluorescence_attr'=>'Faint','pa_eo_grading_report_attr'=>'HRD','pa_eo_size_attr'=>'2.0','pa_eo_symmertry_attr'=>'Good','pa_eo_table_attr'=>'83')
+                          )
+                   )
+        ),
+        array(
+          'title'=>'Lab Pear Diamond #10000109',
+          'thumb'=>$_img_url.'Products/Pear-1.jpg',
+          'images'=>array('Pear-2.jpg','Pear-3.jpg'),
+          'content'=>'',
+          'sku'=>'LAB-810000109',
+          'regular_price'=>'',
+          'sale_price'=>'',
+          'price'=>'',
+          'type'=>'variable', //simple | variable
+          'category'=>array('eo_lab_diamond_shape_cat','eo_lab_diamond_pear_shape_cat'),
+          'attribute'=>array('pa_eo_carat_attr'=>array(
+                              'name'=>'pa_eo_carat_attr',
+                              'value'=>'0.2',
+                              'position'=>0,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_clarity_attr'=>array(
+                              'name'=>'pa_eo_clarity_attr',
+                              'value'=>'IF',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_colour_attr'=>array(
+                              'name'=>'pa_eo_colour_attr',
+                              'value'=>'E',
+                              'position'=>2,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_depth_attr'=>array(
+                              'name'=>'pa_eo_depth_attr',
+                              'value'=>'48',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_fluorescence_attr'=>array(
+                              'name'=>'pa_eo_fluorescence_attr',
+                              'value'=>'Slight',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+
+                    'pa_eo_grading_report_attr'=>array(
+                              'name'=>'pa_eo_grading_report_attr',
+                              'value'=>'GIA',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),        
+                    'pa_eo_size_attr'=>array(
+                              'name'=>'pa_eo_size_attr',
+                              'value'=>'0.2',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_symmertry_attr'=>array(
+                              'name'=>'pa_eo_symmertry_attr',
+                              'value'=>'Good',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ), 
+                    'pa_eo_table_attr'=>array(
+                              'name'=>'pa_eo_table_attr',
+                              'value'=>'75',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            )        
+                    ),
+          'variation'=>array(
+                          array(
+                            'regular_price'=>'5500',
+                            'price'=>'5399',
+                            'terms'=>array('pa_eo_carat_attr'=>'0.2','pa_eo_clarity_attr'=>'IF','pa_eo_colour_attr'=>'E','pa_eo_depth_attr'=>'48','pa_eo_fluorescence_attr'=>'Slight','pa_eo_grading_report_attr'=>'GIA','pa_eo_size_attr'=>'0.2','pa_eo_symmertry_attr'=>'Good','pa_eo_table_attr'=>'75')
+                          )
+                   )
+        ),
+
+        array(
+          'title'=>'Lab Round Diamond #10000110',
+          'thumb'=>$_img_url.'Products/Round-4.jpg',
+          'images'=>array('Round-5.jpg','Round-1.jpg'),
+          'content'=>'',
+          'sku'=>'LAB-810000110',
+          'regular_price'=>'',
+          'sale_price'=>'',
+          'price'=>'',
+          'type'=>'variable', //simple | variable
+          'category'=>array('eo_lab_diamond_shape_cat','eo_lab_diamond_round_shape_cat'),
+          'attribute'=>array('pa_eo_carat_attr'=>array(
+                              'name'=>'pa_eo_carat_attr',
+                              'value'=>'0.5',
+                              'position'=>0,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_clarity_attr'=>array(
+                              'name'=>'pa_eo_clarity_attr',
+                              'value'=>'IF',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_colour_attr'=>array(
+                              'name'=>'pa_eo_colour_attr',
+                              'value'=>'D',
+                              'position'=>2,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_depth_attr'=>array(
+                              'name'=>'pa_eo_depth_attr',
+                              'value'=>'78',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_fluorescence_attr'=>array(
+                              'name'=>'pa_eo_fluorescence_attr',
+                              'value'=>'Slight',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+
+                    'pa_eo_grading_report_attr'=>array(
+                              'name'=>'pa_eo_grading_report_attr',
+                              'value'=>'IGI',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),        
+                    'pa_eo_size_attr'=>array(
+                              'name'=>'pa_eo_size_attr',
+                              'value'=>'4.0',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_symmertry_attr'=>array(
+                              'name'=>'pa_eo_symmertry_attr',
+                              'value'=>'Fair',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_table_attr'=>array(
+                              'name'=>'pa_eo_table_attr',
+                              'value'=>'56',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            )        
+                    ),
+          'variation'=>array(
+                          array(
+                            'regular_price'=>'15691',
+                            'price'=>'15500',
+                            'terms'=>array('pa_eo_carat_attr'=>'0.5','pa_eo_clarity_attr'=>'IF','pa_eo_colour_attr'=>'D','pa_eo_depth_attr'=>'78','pa_eo_fluorescence_attr'=>'Slight','pa_eo_grading_report_attr'=>'IGI','pa_eo_size_attr'=>'4.0','pa_eo_symmertry_attr'=>'Fair','pa_eo_table_attr'=>'56')
+                          )
+                   )       
+        ),
+        array(
+          'title'=>'Lab Emerald Diamond #10000111',
+          'thumb'=>$_img_url.'Products/Emerald-1.jpg',
+          'images'=>array('Emerald-2.jpg','Emerald-3.jpg'),
+          'content'=>'',
+          'sku'=>'LAB-810000111',
+          'regular_price'=>'',
+          'sale_price'=>'',
+          'price'=>'',
+          'type'=>'variable', //simple | variable
+          'category'=>array('eo_lab_diamond_shape_cat','eo_lab_diamond_emerald_shape_cat'),
+          'attribute'=>array('pa_eo_carat_attr'=>array(
+                              'name'=>'pa_eo_carat_attr',
+                              'value'=>'0.7',
+                              'position'=>0,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_clarity_attr'=>array(
+                              'name'=>'pa_eo_clarity_attr',
+                              'value'=>'VVS1',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_colour_attr'=>array(
+                              'name'=>'pa_eo_colour_attr',
+                              'value'=>'G',
+                              'position'=>2,
+                              'is_visible'=>1,            
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_depth_attr'=>array(
+                              'name'=>'pa_eo_depth_attr',
+                              'value'=>'72',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_fluorescence_attr'=>array(
+                              'name'=>'pa_eo_fluorescence_attr',
+                              'value'=>'None',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+
+                    'pa_eo_grading_report_attr'=>array(
+                              'name'=>'pa_eo_grading_report_attr',
+                              'value'=>'HRD',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),        
+                    'pa_eo_size_attr'=>array(
+                              'name'=>'pa_eo_size_attr',
+                              'value'=>'5.0',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_symmertry_attr'=>array(
+                              'name'=>'pa_eo_symmertry_attr',
+                              'value'=>'Very Good',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_table_attr'=>array(
+                              'name'=>'pa_eo_table_attr',
+                              'value'=>'50',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            )        
+                    ),
+          'variation'=>array(
+                          array(
+                            'regular_price'=>'20500',
+                            'price'=>'20399',
+                            'terms'=>array('pa_eo_carat_attr'=>'0.7','pa_eo_clarity_attr'=>'VVS1','pa_eo_colour_attr'=>'G','pa_eo_depth_attr'=>'72','pa_eo_fluorescence_attr'=>'None','pa_eo_grading_report_attr'=>'HRD','pa_eo_size_attr'=>'5.0','pa_eo_symmertry_attr'=>'Very Good','pa_eo_table_attr'=>'50')
+                          )
+                   )        
+        ),
+        array(
+          'title'=>'Lab Asscher Diamond #10000112',
+          'thumb'=>$_img_url.'Products/asscher-1.jpg',
+          'images'=>array('asscher-2.jpg'),
+          'content'=>'',
+          'sku'=>'LAB-810000112',
+          'regular_price'=>'',
+          'sale_price'=>'',
+          'price'=>'',
+          'type'=>'variable', //simple | variable
+          'category'=>array('eo_lab_diamond_shape_cat','eo_lab_diamond_asscher_shape_cat'),
+          'attribute'=>array('pa_eo_carat_attr'=>array(
+                              'name'=>'pa_eo_carat_attr',
+                              'value'=>'0.4',
+                              'position'=>0,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_clarity_attr'=>array(
+                              'name'=>'pa_eo_clarity_attr',
+                              'value'=>'IF',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_colour_attr'=>array(
+                              'name'=>'pa_eo_colour_attr',
+                              'value'=>'J',
+                              'position'=>2,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_depth_attr'=>array(
+                              'name'=>'pa_eo_depth_attr',
+                              'value'=>'45',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_fluorescence_attr'=>array(
+                              'name'=>'pa_eo_fluorescence_attr',
+                              'value'=>'Very',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+
+                    'pa_eo_grading_report_attr'=>array(
+                              'name'=>'pa_eo_grading_report_attr',
+                              'value'=>'AGS',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),        
+                    'pa_eo_size_attr'=>array(
+                              'name'=>'pa_eo_size_attr',
+                              'value'=>'1.0',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_symmertry_attr'=>array(
+                              'name'=>'pa_eo_symmertry_attr',
+                              'value'=>'Fair',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_table_attr'=>array(
+                              'name'=>'pa_eo_table_attr',
+                              'value'=>'55',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            )        
+                    ),
+          'variation'=>array(
+                          array(
+                            'regular_price'=>'12500',
+                            'price'=>'11390',
+                            'terms'=>array('pa_eo_carat_attr'=>'0.4','pa_eo_clarity_attr'=>'IF','pa_eo_colour_attr'=>'J','pa_eo_depth_attr'=>'45','pa_eo_fluorescence_attr'=>'Very','pa_eo_grading_report_attr'=>'AGS','pa_eo_size_attr'=>'1.0','pa_eo_symmertry_attr'=>'Fair','pa_eo_table_attr'=>'55')
+                          )
+                   )
+        ),
+        array(
+          'title'=>'Lab PRINCESS DIAMOND #10000113',
+          'thumb'=>$_img_url.'Products/Princess-3.jpg',
+          'images'=>array('Princess-1.jpg','Princess-2.jpg'),
+          'content'=>'',
+          'sku'=>'LAB-810000113',
+          'regular_price'=>'',
+          'sale_price'=>'',
+          'price'=>'',
+          'type'=>'variable', //simple | variable
+          'category'=>array('eo_lab_diamond_shape_cat','eo_lab_diamond_princess_shape_cat'),
+          'attribute'=>array('pa_eo_carat_attr'=>array(
+                              'name'=>'pa_eo_carat_attr',
+                              'value'=>'5.5',
+                              'position'=>0,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_clarity_attr'=>array(
+                              'name'=>'pa_eo_clarity_attr',
+                              'value'=>'VS1',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_colour_attr'=>array(
+                              'name'=>'pa_eo_colour_attr',
+                              'value'=>'K',
+                              'position'=>2,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_depth_attr'=>array(
+                              'name'=>'pa_eo_depth_attr',
+                              'value'=>'75',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_fluorescence_attr'=>array(
+                              'name'=>'pa_eo_fluorescence_attr',
+                              'value'=>'None',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+
+                    'pa_eo_grading_report_attr'=>array(
+                              'name'=>'pa_eo_grading_report_attr',
+                              'value'=>'GIA',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),        
+                    'pa_eo_size_attr'=>array(
+                              'name'=>'pa_eo_size_attr',
+                              'value'=>'1.2',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_symmertry_attr'=>array(
+                              'name'=>'pa_eo_symmertry_attr',
+                              'value'=>'Slight',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_table_attr'=>array(
+                              'name'=>'pa_eo_table_attr',
+                              'value'=>'80',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            )        
+                    ),
+          'variation'=>array(
+                          array(
+                            'regular_price'=>'22500',
+                            'price'=>'22390',
+                            'terms'=>array('pa_eo_carat_attr'=>'5.5','pa_eo_clarity_attr'=>'VS1','pa_eo_colour_attr'=>'K','pa_eo_depth_attr'=>'75','pa_eo_fluorescence_attr'=>'None','pa_eo_grading_report_attr'=>'GIA','pa_eo_size_attr'=>'1.2','pa_eo_symmertry_attr'=>'Slight','pa_eo_table_attr'=>'80')
+                          )
+                   ) 
+        ),
+        array(
+          'title'=>'Lab Cusion Diamond #10000114',
+          'thumb'=>$_img_url.'Products/Cusion-1.jpg',
+          'images'=>array('Cusion-2.jpg'),
+          'content'=>'',
+          'sku'=>'LAB-810000114',
+          'regular_price'=>'',
+          'sale_price'=>'',
+          'price'=>'',
+          'type'=>'variable', //simple | variable
+          'category'=>array('eo_lab_diamond_shape_cat','eo_lab_diamond_cushion_shape_cat'),
+          'attribute'=>array('pa_eo_carat_attr'=>array(
+                              'name'=>'pa_eo_carat_attr',
+                              'value'=>'0.5',
+                              'position'=>0,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_clarity_attr'=>array(
+                              'name'=>'pa_eo_clarity_attr',
+                              'value'=>'SI1',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_colour_attr'=>array(
+                              'name'=>'pa_eo_colour_attr',
+                              'value'=>'M',
+                              'position'=>2,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_depth_attr'=>array(
+                              'name'=>'pa_eo_depth_attr',
+                              'value'=>'48',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_fluorescence_attr'=>array(
+                              'name'=>'pa_eo_fluorescence_attr',
+                              'value'=>'Faint',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+
+                    'pa_eo_grading_report_attr'=>array(
+                              'name'=>'pa_eo_grading_report_attr',
+                              'value'=>'HRD',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),        
+                    'pa_eo_size_attr'=>array(
+                              'name'=>'pa_eo_size_attr',
+                              'value'=>'0.8',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_symmertry_attr'=>array(
+                              'name'=>'pa_eo_symmertry_attr',
+                              'value'=>'Excellent',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ), 
+                    'pa_eo_table_attr'=>array(
+                              'name'=>'pa_eo_table_attr',
+                              'value'=>'56',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            )        
+                    ),
+          'variation'=>array(
+                          array(
+                            'regular_price'=>'45500',
+                            'price'=>'45399',
+                            'terms'=>array('pa_eo_carat_attr'=>'0.5','pa_eo_clarity_attr'=>'SI1','pa_eo_colour_attr'=>'M','pa_eo_depth_attr'=>'48','pa_eo_fluorescence_attr'=>'Faint','pa_eo_grading_report_attr'=>'HRD','pa_eo_size_attr'=>'0.8','pa_eo_symmertry_attr'=>'Excellent','pa_eo_table_attr'=>'56')
+                          )
+                   )
+        ),
+        array(
+          'title'=>'Lab Heart Diamond #10000115',
+          'thumb'=>$_img_url.'Products/Heart-1.jpg',
+          'images'=>array('Heart-2.jpg','Heart-3.jpg'),
+          'content'=>'',
+          'sku'=>'LAB-810000115',
+          'regular_price'=>'',
+          'sale_price'=>'',
+          'price'=>'',
+          'type'=>'variable', //simple | variable
+          'category'=>array('eo_lab_diamond_shape_cat','eo_lab_diamond_heart_shape_cat'),
+          'attribute'=>array('pa_eo_carat_attr'=>array(
+                              'name'=>'pa_eo_carat_attr',
+                              'value'=>'0.9',
+                              'position'=>0,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_clarity_attr'=>array(
+                              'name'=>'pa_eo_clarity_attr',
+                              'value'=>'IF',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_colour_attr'=>array(
+                              'name'=>'pa_eo_colour_attr',
+                              'value'=>'D',
+                              'position'=>2,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_depth_attr'=>array(
+                              'name'=>'pa_eo_depth_attr',
+                              'value'=>'67',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_fluorescence_attr'=>array(
+                              'name'=>'pa_eo_fluorescence_attr',
+                              'value'=>'None',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+
+                    'pa_eo_grading_report_attr'=>array(
+                              'name'=>'pa_eo_grading_report_attr',
+                              'value'=>'IGI',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),        
+                    'pa_eo_size_attr'=>array(
+                              'name'=>'pa_eo_size_attr',
+                              'value'=>'1.1',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_symmertry_attr'=>array(
+                              'name'=>'pa_eo_symmertry_attr',
+                              'value'=>'Excellent',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_table_attr'=>array(
+                              'name'=>'pa_eo_table_attr',
+                              'value'=>'77',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            )        
+                    ),
+          'variation'=>array(
+                          array(
+                            'regular_price'=>'7500',
+                            'price'=>'7399',
+                            'terms'=>array('pa_eo_carat_attr'=>'0.9','pa_eo_clarity_attr'=>'IF','pa_eo_colour_attr'=>'D','pa_eo_depth_attr'=>'67','pa_eo_fluorescence_attr'=>'None','pa_eo_grading_report_attr'=>'IGI','pa_eo_size_attr'=>'1.1','pa_eo_symmertry_attr'=>'Excellent','pa_eo_table_attr'=>'77')
+                          )
+                   )
+        ),
+        array(
+          'title'=>'Lab Marquise Diamond #10000116',
+          'thumb'=>$_img_url.'Products/Marquise-1.jpg',
+          'images'=>array('Marquise-2.jpg'),
+          'content'=>'',
+          'sku'=>'LAB-810000116',
+          'regular_price'=>'',
+          'sale_price'=>'',
+          'price'=>'',
+          'type'=>'variable', //simple | variable
+          'category'=>array('eo_lab_diamond_shape_cat','eo_lab_diamond_marquise_shape_cat'),
+          'attribute'=>array('pa_eo_carat_attr'=>array(
+                              'name'=>'pa_eo_carat_attr',
+                              'value'=>'12',
+                              'position'=>0,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_clarity_attr'=>array(
+                              'name'=>'pa_eo_clarity_attr',
+                              'value'=>'IF',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_colour_attr'=>array(
+                              'name'=>'pa_eo_colour_attr',
+                              'value'=>'L',
+                              'position'=>2,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_depth_attr'=>array(
+                              'name'=>'pa_eo_depth_attr',
+                              'value'=>'66',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_fluorescence_attr'=>array(
+                              'name'=>'pa_eo_fluorescence_attr',
+                              'value'=>'Faint',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+
+                    'pa_eo_grading_report_attr'=>array(
+                              'name'=>'pa_eo_grading_report_attr',
+                              'value'=>'AGS',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),        
+                    'pa_eo_size_attr'=>array(
+                              'name'=>'pa_eo_size_attr',
+                              'value'=>'2.0',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_symmertry_attr'=>array(
+                              'name'=>'pa_eo_symmertry_attr',
+                              'value'=>'Very Good',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ), 
+                    'pa_eo_table_attr'=>array(
+                              'name'=>'pa_eo_table_attr',
+                              'value'=>'85',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            )        
+                    ),
+          'variation'=>array(
+                          array(
+                            'regular_price'=>'85089',
+                            'price'=>'85080',
+                            'terms'=>array('pa_eo_carat_attr'=>'12','pa_eo_clarity_attr'=>'IF','pa_eo_colour_attr'=>'L','pa_eo_depth_attr'=>'66','pa_eo_fluorescence_attr'=>'Faint','pa_eo_grading_report_attr'=>'AGS','pa_eo_size_attr'=>'2.0','pa_eo_symmertry_attr'=>'Very Good','pa_eo_table_attr'=>'85')
+                          )
+                   )
+        ),
+        array(
+          'title'=>'Lab Oval Diamond #10000117',
+          'thumb'=>$_img_url.'Products/Oval-1.jpg',
+          'images'=>array('Oval-2.jpg'),
+          'content'=>'',
+          'sku'=>'LAB-810000117',
+          'regular_price'=>'',
+          'sale_price'=>'',
+          'price'=>'',
+          'type'=>'variable', //simple | variable
+          'category'=>array('eo_lab_diamond_shape_cat','eo_lab_diamond_oval_shape_cat'),
+          'attribute'=>array('pa_eo_carat_attr'=>array(
+                              'name'=>'pa_eo_carat_attr',
+                              'value'=>'2',
+                              'position'=>0,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_clarity_attr'=>array(
+                              'name'=>'pa_eo_clarity_attr',
+                              'value'=>'VVS1',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_colour_attr'=>array(
+                              'name'=>'pa_eo_colour_attr',
+                              'value'=>'F',
+                              'position'=>2,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_depth_attr'=>array(
+                              'name'=>'pa_eo_depth_attr',
+                              'value'=>'72',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_fluorescence_attr'=>array(
+                              'name'=>'pa_eo_fluorescence_attr',
+                              'value'=>'Faint',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+
+                    'pa_eo_grading_report_attr'=>array(
+                              'name'=>'pa_eo_grading_report_attr',
+                              'value'=>'HRD',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),        
+                    'pa_eo_size_attr'=>array(
+                              'name'=>'pa_eo_size_attr',
+                              'value'=>'2.0',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_symmertry_attr'=>array(
+                              'name'=>'pa_eo_symmertry_attr',
+                              'value'=>'Good',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ), 
+                    'pa_eo_table_attr'=>array(
+                              'name'=>'pa_eo_table_attr',
+                              'value'=>'80',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            )        
+                    ),
+          'variation'=>array(
+                          array(
+                            'regular_price'=>'80089',
+                            'price'=>'80080',
+                            'terms'=>array('pa_eo_carat_attr'=>'2','pa_eo_clarity_attr'=>'VVS1','pa_eo_colour_attr'=>'F','pa_eo_depth_attr'=>'72','pa_eo_fluorescence_attr'=>'Faint','pa_eo_grading_report_attr'=>'HRD','pa_eo_size_attr'=>'2.0','pa_eo_symmertry_attr'=>'Good','pa_eo_table_attr'=>'80')
+                          )
+                   )
+        ),
+        array(
+          'title'=>'Lab Radiant Solitaire Diamond #10000118',
+          'thumb'=>$_img_url.'Products/Radiant-1.jpg',
+          'images'=>array('Radiant-2.jpg'),
+          'content'=>'',
+          'sku'=>'LAB-810000118',
+          'regular_price'=>'',
+          'sale_price'=>'',
+          'price'=>'',
+          'type'=>'variable', //simple | variable
+          'category'=>array('eo_lab_diamond_shape_cat','eo_lab_diamond_radiant_shape_cat'),
+          'attribute'=>array('pa_eo_carat_attr'=>array(
+                              'name'=>'pa_eo_carat_attr',
+                              'value'=>'5',
+                              'position'=>0,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_clarity_attr'=>array(
+                              'name'=>'pa_eo_clarity_attr',
+                              'value'=>'VVS2',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_colour_attr'=>array(
+                              'name'=>'pa_eo_colour_attr',
+                              'value'=>'G',
+                              'position'=>2,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_depth_attr'=>array(
+                              'name'=>'pa_eo_depth_attr',
+                              'value'=>'75',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_fluorescence_attr'=>array(
+                              'name'=>'pa_eo_fluorescence_attr',
+                              'value'=>'Faint',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+
+                    'pa_eo_grading_report_attr'=>array(
+                              'name'=>'pa_eo_grading_report_attr',
+                              'value'=>'HRD',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),        
+                    'pa_eo_size_attr'=>array(
+                              'name'=>'pa_eo_size_attr',
+                              'value'=>'2.0',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_symmertry_attr'=>array(
+                              'name'=>'pa_eo_symmertry_attr',
+                              'value'=>'Good',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ), 
+                    'pa_eo_table_attr'=>array(
+                              'name'=>'pa_eo_table_attr',
+                              'value'=>'83',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            )        
+                    ),
+          'variation'=>array(
+                          array(
+                            'regular_price'=>'92089',
+                            'price'=>'92080',
+                            'terms'=>array('pa_eo_carat_attr'=>'5','pa_eo_clarity_attr'=>'VVS2','pa_eo_colour_attr'=>'G','pa_eo_depth_attr'=>'73','pa_eo_fluorescence_attr'=>'Faint','pa_eo_grading_report_attr'=>'HRD','pa_eo_size_attr'=>'2.0','pa_eo_symmertry_attr'=>'Good','pa_eo_table_attr'=>'83')
+                          )
+                   )
+        ),
+        array(
+          'title'=>'Lab Pear Diamond #10000119',
+          'thumb'=>$_img_url.'Products/Pear-1.jpg',
+          'images'=>array('Pear-2.jpg','Pear-3.jpg'),
+          'content'=>'',
+          'sku'=>'LAB-810000119',
+          'regular_price'=>'',
+          'sale_price'=>'',
+          'price'=>'',
+          'type'=>'variable', //simple | variable
+          'category'=>array('eo_lab_diamond_shape_cat','eo_lab_diamond_pear_shape_cat'),
+          'attribute'=>array('pa_eo_carat_attr'=>array(
+                              'name'=>'pa_eo_carat_attr',
+                              'value'=>'0.2',
+                              'position'=>0,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_clarity_attr'=>array(
+                              'name'=>'pa_eo_clarity_attr',
+                              'value'=>'IF',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_colour_attr'=>array(
+                              'name'=>'pa_eo_colour_attr',
+                              'value'=>'E',
+                              'position'=>2,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_depth_attr'=>array(
+                              'name'=>'pa_eo_depth_attr',
+                              'value'=>'48',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_fluorescence_attr'=>array(
+                              'name'=>'pa_eo_fluorescence_attr',
+                              'value'=>'Slight',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+
+                    'pa_eo_grading_report_attr'=>array(
+                              'name'=>'pa_eo_grading_report_attr',
+                              'value'=>'GIA',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),        
+                    'pa_eo_size_attr'=>array(
+                              'name'=>'pa_eo_size_attr',
+                              'value'=>'0.2',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_symmertry_attr'=>array(
+                              'name'=>'pa_eo_symmertry_attr',
+                              'value'=>'Good',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ), 
+                    'pa_eo_table_attr'=>array(
+                              'name'=>'pa_eo_table_attr',
+                              'value'=>'75',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            )        
+                    ),
+          'variation'=>array(
+                          array(
+                            'regular_price'=>'5500',
+                            'price'=>'5399',
+                            'terms'=>array('pa_eo_carat_attr'=>'0.2','pa_eo_clarity_attr'=>'IF','pa_eo_colour_attr'=>'E','pa_eo_depth_attr'=>'48','pa_eo_fluorescence_attr'=>'Slight','pa_eo_grading_report_attr'=>'GIA','pa_eo_size_attr'=>'0.2','pa_eo_symmertry_attr'=>'Good','pa_eo_table_attr'=>'75')
+                          )
+                   )
+        ),
+
+        array(
+          'title'=>'Lab Round Diamond #10000120',
+          'thumb'=>$_img_url.'Products/Round-4.jpg',
+          'images'=>array('Round-5.jpg','Round-1.jpg'),
+          'content'=>'',
+          'sku'=>'LAB-810000120',
+          'regular_price'=>'',
+          'sale_price'=>'',
+          'price'=>'',
+          'type'=>'variable', //simple | variable
+          'category'=>array('eo_lab_diamond_shape_cat','eo_lab_diamond_round_shape_cat'),
+          'attribute'=>array('pa_eo_carat_attr'=>array(
+                              'name'=>'pa_eo_carat_attr',
+                              'value'=>'0.5',
+                              'position'=>0,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_clarity_attr'=>array(
+                              'name'=>'pa_eo_clarity_attr',
+                              'value'=>'IF',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_colour_attr'=>array(
+                              'name'=>'pa_eo_colour_attr',
+                              'value'=>'D',
+                              'position'=>2,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_depth_attr'=>array(
+                              'name'=>'pa_eo_depth_attr',
+                              'value'=>'78',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_fluorescence_attr'=>array(
+                              'name'=>'pa_eo_fluorescence_attr',
+                              'value'=>'Slight',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+
+                    'pa_eo_grading_report_attr'=>array(
+                              'name'=>'pa_eo_grading_report_attr',
+                              'value'=>'IGI',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),        
+                    'pa_eo_size_attr'=>array(
+                              'name'=>'pa_eo_size_attr',
+                              'value'=>'4.0',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_symmertry_attr'=>array(
+                              'name'=>'pa_eo_symmertry_attr',
+                              'value'=>'Fair',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_table_attr'=>array(
+                              'name'=>'pa_eo_table_attr',
+                              'value'=>'56',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            )        
+                    ),
+          'variation'=>array(
+                          array(
+                            'regular_price'=>'15691',
+                            'price'=>'15500',
+                            'terms'=>array('pa_eo_carat_attr'=>'0.5','pa_eo_clarity_attr'=>'IF','pa_eo_colour_attr'=>'D','pa_eo_depth_attr'=>'78','pa_eo_fluorescence_attr'=>'Slight','pa_eo_grading_report_attr'=>'IGI','pa_eo_size_attr'=>'4.0','pa_eo_symmertry_attr'=>'Fair','pa_eo_table_attr'=>'56')
+                          )
+                   )       
+        ),
+        array(
+          'title'=>'Lab Emerald Diamond #10000121',
+          'thumb'=>$_img_url.'Products/Emerald-1.jpg',
+          'images'=>array('Emerald-2.jpg','Emerald-3.jpg'),
+          'content'=>'',
+          'sku'=>'LAB-810000121',
+          'regular_price'=>'',
+          'sale_price'=>'',
+          'price'=>'',
+          'type'=>'variable', //simple | variable
+          'category'=>array('eo_lab_diamond_shape_cat','eo_lab_diamond_emerald_shape_cat'),
+          'attribute'=>array('pa_eo_carat_attr'=>array(
+                              'name'=>'pa_eo_carat_attr',
+                              'value'=>'0.7',
+                              'position'=>0,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_clarity_attr'=>array(
+                              'name'=>'pa_eo_clarity_attr',
+                              'value'=>'VVS1',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_colour_attr'=>array(
+                              'name'=>'pa_eo_colour_attr',
+                              'value'=>'G',
+                              'position'=>2,
+                              'is_visible'=>1,            
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_depth_attr'=>array(
+                              'name'=>'pa_eo_depth_attr',
+                              'value'=>'72',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_fluorescence_attr'=>array(
+                              'name'=>'pa_eo_fluorescence_attr',
+                              'value'=>'None',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+
+                    'pa_eo_grading_report_attr'=>array(
+                              'name'=>'pa_eo_grading_report_attr',
+                              'value'=>'HRD',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),        
+                    'pa_eo_size_attr'=>array(
+                              'name'=>'pa_eo_size_attr',
+                              'value'=>'5.0',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_symmertry_attr'=>array(
+                              'name'=>'pa_eo_symmertry_attr',
+                              'value'=>'Very Good',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_table_attr'=>array(
+                              'name'=>'pa_eo_table_attr',
+                              'value'=>'50',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            )        
+                    ),
+          'variation'=>array(
+                          array(
+                            'regular_price'=>'20500',
+                            'price'=>'20399',
+                            'terms'=>array('pa_eo_carat_attr'=>'0.7','pa_eo_clarity_attr'=>'VVS1','pa_eo_colour_attr'=>'G','pa_eo_depth_attr'=>'72','pa_eo_fluorescence_attr'=>'None','pa_eo_grading_report_attr'=>'HRD','pa_eo_size_attr'=>'5.0','pa_eo_symmertry_attr'=>'Very Good','pa_eo_table_attr'=>'50')
+                          )
+                   )        
+        ),
+        array(
+          'title'=>'Lab Asscher Diamond #10000122',
+          'thumb'=>$_img_url.'Products/asscher-1.jpg',
+          'images'=>array('asscher-2.jpg'),
+          'content'=>'',
+          'sku'=>'LAB-810000122',
+          'regular_price'=>'',
+          'sale_price'=>'',
+          'price'=>'',
+          'type'=>'variable', //simple | variable
+          'category'=>array('eo_lab_diamond_shape_cat','eo_lab_diamond_asscher_shape_cat'),
+          'attribute'=>array('pa_eo_carat_attr'=>array(
+                              'name'=>'pa_eo_carat_attr',
+                              'value'=>'0.4',
+                              'position'=>0,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_clarity_attr'=>array(
+                              'name'=>'pa_eo_clarity_attr',
+                              'value'=>'IF',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_colour_attr'=>array(
+                              'name'=>'pa_eo_colour_attr',
+                              'value'=>'J',
+                              'position'=>2,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_depth_attr'=>array(
+                              'name'=>'pa_eo_depth_attr',
+                              'value'=>'45',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_fluorescence_attr'=>array(
+                              'name'=>'pa_eo_fluorescence_attr',
+                              'value'=>'Very',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+
+                    'pa_eo_grading_report_attr'=>array(
+                              'name'=>'pa_eo_grading_report_attr',
+                              'value'=>'AGS',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),        
+                    'pa_eo_size_attr'=>array(
+                              'name'=>'pa_eo_size_attr',
+                              'value'=>'1.0',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_symmertry_attr'=>array(
+                              'name'=>'pa_eo_symmertry_attr',
+                              'value'=>'Fair',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_table_attr'=>array(
+                              'name'=>'pa_eo_table_attr',
+                              'value'=>'55',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            )        
+                    ),
+          'variation'=>array(
+                          array(
+                            'regular_price'=>'12500',
+                            'price'=>'11390',
+                            'terms'=>array('pa_eo_carat_attr'=>'0.4','pa_eo_clarity_attr'=>'IF','pa_eo_colour_attr'=>'J','pa_eo_depth_attr'=>'45','pa_eo_fluorescence_attr'=>'Very','pa_eo_grading_report_attr'=>'AGS','pa_eo_size_attr'=>'1.0','pa_eo_symmertry_attr'=>'Fair','pa_eo_table_attr'=>'55')
+                          )
+                   )
+        ),
+        array(
+          'title'=>'Lab PRINCESS DIAMOND #10000123',
+          'thumb'=>$_img_url.'Products/Princess-3.jpg',
+          'images'=>array('Princess-1.jpg','Princess-2.jpg'),
+          'content'=>'',
+          'sku'=>'LAB-810000123',
+          'regular_price'=>'',
+          'sale_price'=>'',
+          'price'=>'',
+          'type'=>'variable', //simple | variable
+          'category'=>array('eo_lab_diamond_shape_cat','eo_lab_diamond_princess_shape_cat'),
+          'attribute'=>array('pa_eo_carat_attr'=>array(
+                              'name'=>'pa_eo_carat_attr',
+                              'value'=>'5.5',
+                              'position'=>0,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_clarity_attr'=>array(
+                              'name'=>'pa_eo_clarity_attr',
+                              'value'=>'VS1',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_colour_attr'=>array(
+                              'name'=>'pa_eo_colour_attr',
+                              'value'=>'K',
+                              'position'=>2,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_depth_attr'=>array(
+                              'name'=>'pa_eo_depth_attr',
+                              'value'=>'75',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_fluorescence_attr'=>array(
+                              'name'=>'pa_eo_fluorescence_attr',
+                              'value'=>'None',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+
+                    'pa_eo_grading_report_attr'=>array(
+                              'name'=>'pa_eo_grading_report_attr',
+                              'value'=>'GIA',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),        
+                    'pa_eo_size_attr'=>array(
+                              'name'=>'pa_eo_size_attr',
+                              'value'=>'1.2',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_symmertry_attr'=>array(
+                              'name'=>'pa_eo_symmertry_attr',
+                              'value'=>'Slight',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_table_attr'=>array(
+                              'name'=>'pa_eo_table_attr',
+                              'value'=>'80',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            )        
+                    ),
+          'variation'=>array(
+                          array(
+                            'regular_price'=>'22500',
+                            'price'=>'22390',
+                            'terms'=>array('pa_eo_carat_attr'=>'5.5','pa_eo_clarity_attr'=>'VS1','pa_eo_colour_attr'=>'K','pa_eo_depth_attr'=>'75','pa_eo_fluorescence_attr'=>'None','pa_eo_grading_report_attr'=>'GIA','pa_eo_size_attr'=>'1.2','pa_eo_symmertry_attr'=>'Slight','pa_eo_table_attr'=>'80')
+                          )
+                   ) 
+        ),
+        array(
+          'title'=>'Lab Cusion Diamond #10000124',
+          'thumb'=>$_img_url.'Products/Cusion-1.jpg',
+          'images'=>array('Cusion-2.jpg'),
+          'content'=>'',
+          'sku'=>'LAB-810000124',
+          'regular_price'=>'',
+          'sale_price'=>'',
+          'price'=>'',
+          'type'=>'variable', //simple | variable
+          'category'=>array('eo_lab_diamond_shape_cat','eo_lab_diamond_cushion_shape_cat'),
+          'attribute'=>array('pa_eo_carat_attr'=>array(
+                              'name'=>'pa_eo_carat_attr',
+                              'value'=>'0.5',
+                              'position'=>0,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_clarity_attr'=>array(
+                              'name'=>'pa_eo_clarity_attr',
+                              'value'=>'SI1',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_colour_attr'=>array(
+                              'name'=>'pa_eo_colour_attr',
+                              'value'=>'M',
+                              'position'=>2,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_depth_attr'=>array(
+                              'name'=>'pa_eo_depth_attr',
+                              'value'=>'48',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_fluorescence_attr'=>array(
+                              'name'=>'pa_eo_fluorescence_attr',
+                              'value'=>'Faint',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+
+                    'pa_eo_grading_report_attr'=>array(
+                              'name'=>'pa_eo_grading_report_attr',
+                              'value'=>'HRD',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),        
+                    'pa_eo_size_attr'=>array(
+                              'name'=>'pa_eo_size_attr',
+                              'value'=>'0.8',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_symmertry_attr'=>array(
+                              'name'=>'pa_eo_symmertry_attr',
+                              'value'=>'Excellent',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ), 
+                    'pa_eo_table_attr'=>array(
+                              'name'=>'pa_eo_table_attr',
+                              'value'=>'56',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            )        
+                    ),
+          'variation'=>array(
+                          array(
+                            'regular_price'=>'45500',
+                            'price'=>'45399',
+                            'terms'=>array('pa_eo_carat_attr'=>'0.5','pa_eo_clarity_attr'=>'SI1','pa_eo_colour_attr'=>'M','pa_eo_depth_attr'=>'48','pa_eo_fluorescence_attr'=>'Faint','pa_eo_grading_report_attr'=>'HRD','pa_eo_size_attr'=>'0.8','pa_eo_symmertry_attr'=>'Excellent','pa_eo_table_attr'=>'56')
+                          )
+                   )
+        ),
+        array(
+          'title'=>'Lab Heart Diamond #10000125',
+          'thumb'=>$_img_url.'Products/Heart-1.jpg',
+          'images'=>array('Heart-2.jpg','Heart-3.jpg'),
+          'content'=>'',
+          'sku'=>'LAB-810000125',
+          'regular_price'=>'',
+          'sale_price'=>'',
+          'price'=>'',
+          'type'=>'variable', //simple | variable
+          'category'=>array('eo_lab_diamond_shape_cat','eo_lab_diamond_heart_shape_cat'),
+          'attribute'=>array('pa_eo_carat_attr'=>array(
+                              'name'=>'pa_eo_carat_attr',
+                              'value'=>'0.9',
+                              'position'=>0,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_clarity_attr'=>array(
+                              'name'=>'pa_eo_clarity_attr',
+                              'value'=>'IF',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_colour_attr'=>array(
+                              'name'=>'pa_eo_colour_attr',
+                              'value'=>'D',
+                              'position'=>2,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_depth_attr'=>array(
+                              'name'=>'pa_eo_depth_attr',
+                              'value'=>'67',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_fluorescence_attr'=>array(
+                              'name'=>'pa_eo_fluorescence_attr',
+                              'value'=>'None',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+
+                    'pa_eo_grading_report_attr'=>array(
+                              'name'=>'pa_eo_grading_report_attr',
+                              'value'=>'IGI',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),        
+                    'pa_eo_size_attr'=>array(
+                              'name'=>'pa_eo_size_attr',
+                              'value'=>'1.1',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_symmertry_attr'=>array(
+                              'name'=>'pa_eo_symmertry_attr',
+                              'value'=>'Excellent',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_table_attr'=>array(
+                              'name'=>'pa_eo_table_attr',
+                              'value'=>'77',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            )        
+                    ),
+          'variation'=>array(
+                          array(
+                            'regular_price'=>'7500',
+                            'price'=>'7399',
+                            'terms'=>array('pa_eo_carat_attr'=>'0.9','pa_eo_clarity_attr'=>'IF','pa_eo_colour_attr'=>'D','pa_eo_depth_attr'=>'67','pa_eo_fluorescence_attr'=>'None','pa_eo_grading_report_attr'=>'IGI','pa_eo_size_attr'=>'1.1','pa_eo_symmertry_attr'=>'Excellent','pa_eo_table_attr'=>'77')
+                          )
+                   )
+        ),
+        array(
+          'title'=>'Lab Marquise Diamond #10000126',
+          'thumb'=>$_img_url.'Products/Marquise-1.jpg',
+          'images'=>array('Marquise-2.jpg'),
+          'content'=>'',
+          'sku'=>'LAB-810000126',
+          'regular_price'=>'',
+          'sale_price'=>'',
+          'price'=>'',
+          'type'=>'variable', //simple | variable
+          'category'=>array('eo_lab_diamond_shape_cat','eo_lab_diamond_marquise_shape_cat'),
+          'attribute'=>array('pa_eo_carat_attr'=>array(
+                              'name'=>'pa_eo_carat_attr',
+                              'value'=>'12',
+                              'position'=>0,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_clarity_attr'=>array(
+                              'name'=>'pa_eo_clarity_attr',
+                              'value'=>'IF',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_colour_attr'=>array(
+                              'name'=>'pa_eo_colour_attr',
+                              'value'=>'L',
+                              'position'=>2,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_depth_attr'=>array(
+                              'name'=>'pa_eo_depth_attr',
+                              'value'=>'66',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_fluorescence_attr'=>array(
+                              'name'=>'pa_eo_fluorescence_attr',
+                              'value'=>'Faint',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+
+                    'pa_eo_grading_report_attr'=>array(
+                              'name'=>'pa_eo_grading_report_attr',
+                              'value'=>'AGS',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),        
+                    'pa_eo_size_attr'=>array(
+                              'name'=>'pa_eo_size_attr',
+                              'value'=>'2.0',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_symmertry_attr'=>array(
+                              'name'=>'pa_eo_symmertry_attr',
+                              'value'=>'Very Good',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ), 
+                    'pa_eo_table_attr'=>array(
+                              'name'=>'pa_eo_table_attr',
+                              'value'=>'85',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            )        
+                    ),
+          'variation'=>array(
+                          array(
+                            'regular_price'=>'85089',
+                            'price'=>'85080',
+                            'terms'=>array('pa_eo_carat_attr'=>'12','pa_eo_clarity_attr'=>'IF','pa_eo_colour_attr'=>'L','pa_eo_depth_attr'=>'66','pa_eo_fluorescence_attr'=>'Faint','pa_eo_grading_report_attr'=>'AGS','pa_eo_size_attr'=>'2.0','pa_eo_symmertry_attr'=>'Very Good','pa_eo_table_attr'=>'85')
+                          )
+                   )
+        ),
+        array(
+          'title'=>'Lab Oval Diamond #10000127',
+          'thumb'=>$_img_url.'Products/Oval-1.jpg',
+          'images'=>array('Oval-2.jpg'),
+          'content'=>'',
+          'sku'=>'LAB-810000127',
+          'regular_price'=>'',
+          'sale_price'=>'',
+          'price'=>'',
+          'type'=>'variable', //simple | variable
+          'category'=>array('eo_lab_diamond_shape_cat','eo_lab_diamond_oval_shape_cat'),
+          'attribute'=>array('pa_eo_carat_attr'=>array(
+                              'name'=>'pa_eo_carat_attr',
+                              'value'=>'2',
+                              'position'=>0,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_clarity_attr'=>array(
+                              'name'=>'pa_eo_clarity_attr',
+                              'value'=>'VVS1',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_colour_attr'=>array(
+                              'name'=>'pa_eo_colour_attr',
+                              'value'=>'F',
+                              'position'=>2,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_depth_attr'=>array(
+                              'name'=>'pa_eo_depth_attr',
+                              'value'=>'72',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_fluorescence_attr'=>array(
+                              'name'=>'pa_eo_fluorescence_attr',
+                              'value'=>'Faint',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+
+                    'pa_eo_grading_report_attr'=>array(
+                              'name'=>'pa_eo_grading_report_attr',
+                              'value'=>'HRD',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),        
+                    'pa_eo_size_attr'=>array(
+                              'name'=>'pa_eo_size_attr',
+                              'value'=>'2.0',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_symmertry_attr'=>array(
+                              'name'=>'pa_eo_symmertry_attr',
+                              'value'=>'Good',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ), 
+                    'pa_eo_table_attr'=>array(
+                              'name'=>'pa_eo_table_attr',
+                              'value'=>'80',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            )        
+                    ),
+          'variation'=>array(
+                          array(
+                            'regular_price'=>'80089',
+                            'price'=>'80080',
+                            'terms'=>array('pa_eo_carat_attr'=>'2','pa_eo_clarity_attr'=>'VVS1','pa_eo_colour_attr'=>'F','pa_eo_depth_attr'=>'72','pa_eo_fluorescence_attr'=>'Faint','pa_eo_grading_report_attr'=>'HRD','pa_eo_size_attr'=>'2.0','pa_eo_symmertry_attr'=>'Good','pa_eo_table_attr'=>'80')
+                          )
+                   )
+        ),
+        array(
+          'title'=>'Lab Radiant Solitaire Diamond #10000128',
+          'thumb'=>$_img_url.'Products/Radiant-1.jpg',
+          'images'=>array('Radiant-2.jpg'),
+          'content'=>'',
+          'sku'=>'LAB-810000128',
+          'regular_price'=>'',
+          'sale_price'=>'',
+          'price'=>'',
+          'type'=>'variable', //simple | variable
+          'category'=>array('eo_lab_diamond_shape_cat','eo_lab_diamond_radiant_shape_cat'),
+          'attribute'=>array('pa_eo_carat_attr'=>array(
+                              'name'=>'pa_eo_carat_attr',
+                              'value'=>'5',
+                              'position'=>0,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_clarity_attr'=>array(
+                              'name'=>'pa_eo_clarity_attr',
+                              'value'=>'VVS2',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_colour_attr'=>array(
+                              'name'=>'pa_eo_colour_attr',
+                              'value'=>'G',
+                              'position'=>2,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_depth_attr'=>array(
+                              'name'=>'pa_eo_depth_attr',
+                              'value'=>'75',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_fluorescence_attr'=>array(
+                              'name'=>'pa_eo_fluorescence_attr',
+                              'value'=>'Faint',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+
+                    'pa_eo_grading_report_attr'=>array(
+                              'name'=>'pa_eo_grading_report_attr',
+                              'value'=>'HRD',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),        
+                    'pa_eo_size_attr'=>array(
+                              'name'=>'pa_eo_size_attr',
+                              'value'=>'2.0',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_symmertry_attr'=>array(
+                              'name'=>'pa_eo_symmertry_attr',
+                              'value'=>'Good',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ), 
+                    'pa_eo_table_attr'=>array(
+                              'name'=>'pa_eo_table_attr',
+                              'value'=>'83',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            )        
+                    ),
+          'variation'=>array(
+                          array(
+                            'regular_price'=>'92089',
+                            'price'=>'92080',
+                            'terms'=>array('pa_eo_carat_attr'=>'5','pa_eo_clarity_attr'=>'VVS2','pa_eo_colour_attr'=>'G','pa_eo_depth_attr'=>'73','pa_eo_fluorescence_attr'=>'Faint','pa_eo_grading_report_attr'=>'HRD','pa_eo_size_attr'=>'2.0','pa_eo_symmertry_attr'=>'Good','pa_eo_table_attr'=>'83')
+                          )
+                   )
+        ),
+        array(
+          'title'=>'Lab Pear Diamond #10000129',
+          'thumb'=>$_img_url.'Products/Pear-1.jpg',
+          'images'=>array('Pear-2.jpg','Pear-3.jpg'),
+          'content'=>'',
+          'sku'=>'LAB-810000129',
+          'regular_price'=>'',
+          'sale_price'=>'',
+          'price'=>'',
+          'type'=>'variable', //simple | variable
+          'category'=>array('eo_lab_diamond_shape_cat','eo_lab_diamond_pear_shape_cat'),
+          'attribute'=>array('pa_eo_carat_attr'=>array(
+                              'name'=>'pa_eo_carat_attr',
+                              'value'=>'0.2',
+                              'position'=>0,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_clarity_attr'=>array(
+                              'name'=>'pa_eo_clarity_attr',
+                              'value'=>'IF',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_colour_attr'=>array(
+                              'name'=>'pa_eo_colour_attr',
+                              'value'=>'E',
+                              'position'=>2,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_depth_attr'=>array(
+                              'name'=>'pa_eo_depth_attr',
+                              'value'=>'48',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_fluorescence_attr'=>array(
+                              'name'=>'pa_eo_fluorescence_attr',
+                              'value'=>'Slight',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+
+                    'pa_eo_grading_report_attr'=>array(
+                              'name'=>'pa_eo_grading_report_attr',
+                              'value'=>'GIA',
+                              'position'=>1,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),        
+                    'pa_eo_size_attr'=>array(
+                              'name'=>'pa_eo_size_attr',
+                              'value'=>'0.2',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ),
+                    'pa_eo_symmertry_attr'=>array(
+                              'name'=>'pa_eo_symmertry_attr',
+                              'value'=>'Good',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            ), 
+                    'pa_eo_table_attr'=>array(
+                              'name'=>'pa_eo_table_attr',
+                              'value'=>'75',
+                              'position'=>3,
+                              'is_visible'=>1,
+                              'is_variation'=>1,
+                              'is_taxonomy'=>1
+                            )        
+                    ),
+          'variation'=>array(
+                          array(
+                            'regular_price'=>'5500',
+                            'price'=>'5399',
+                            'terms'=>array('pa_eo_carat_attr'=>'0.2','pa_eo_clarity_attr'=>'IF','pa_eo_colour_attr'=>'E','pa_eo_depth_attr'=>'48','pa_eo_fluorescence_attr'=>'Slight','pa_eo_grading_report_attr'=>'GIA','pa_eo_size_attr'=>'0.2','pa_eo_symmertry_attr'=>'Good','pa_eo_table_attr'=>'75')
+                          )
+                   )
+        )     
+    );  	
 	}
 
   public function get_attributes() {

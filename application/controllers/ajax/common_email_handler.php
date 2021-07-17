@@ -6,6 +6,26 @@
 
 $res = array( "type"=>"success", "msg"=>"" );
 
+function sp_validate_unique_email($fields,$key) {
+	if(!empty($fields) and is_array($fields) and !empty($key)) {
+		$email_value = wbc()->sanitize->post($key);
+		foreach($fields as $field_key=>$field_value) {
+			if($field_key !== $key) {
+				$field_value = (array)$field_value;
+				if(!empty($field_value['validate']) and is_array($field_value['validate']) and array_search('unique',$field_value['validate'])!==false and array_search('email',$field_value['validate'])!==false ) {
+
+					if(wbc()->sanitize->post($field_key) === $email_value ) {
+						return false;
+					}
+
+				}
+
+			}
+		}
+	}
+	return true;
+}
+
 if( !empty(wbc()->sanitize->post('_wpnonce')) ) {
 
 	$subject_template = wbc()->sanitize->post('email_header_template');
@@ -27,7 +47,50 @@ if( !empty(wbc()->sanitize->post('_wpnonce')) ) {
 
 
 	if(!empty($subject_template) and !empty($email_template) and !empty(wbc()->sanitize->post('email_field_vars'))) {
-	
+		
+
+		//validation run		
+		$_email_field_vars_ = str_replace('\\',"",wbc()->sanitize->post('email_field_vars'));
+		$_email_field_vars_ = json_decode($_email_field_vars_);
+		if(!empty($_email_field_vars_) and is_object($_email_field_vars_)) {
+			$_email_field_vars_ = (array)$_email_field_vars_;
+			foreach($_email_field_vars_ as $field_key=>$field_value) {
+				$field_value = (array)$field_value;
+				if(!empty($field_value['label']) and !empty($field_value['validate'])) {
+					if(is_array($field_value['validate']) and !empty($field_value['validate'])) {
+						foreach($field_value['validate'] as $validation_field) {
+							switch($validation_field) {
+								case 'required':
+									if(empty( wbc()->sanitize->post($field_key))){
+										$res["type"]="error";
+										$res["msg"]=$field_value['label'].' is required!';
+										wbc()->rest->response($res);
+										die();
+									}
+									break;
+								case 'email':
+									if(!filter_var(wbc()->sanitize->post($field_key), FILTER_VALIDATE_EMAIL)) {
+										$res["type"]="error";
+										$res["msg"]=$field_value['label'].' is not a valid email.';
+										wbc()->rest->response($res);
+										die();
+									}
+									break;
+								case 'unique':
+									if(!(\sp_validate_unique_email($_email_field_vars_,$field_key))) {
+										$res["type"]="error";
+										$res["msg"]=$field_value['label'].' is not a unique email.';
+										wbc()->rest->response($res);	
+										die();
+									}
+							}
+						}
+					}
+				}
+			}
+		}
+
+
 		if(strpos($email_template,'{filter_data}')){
 			$filter_data = array();
 
@@ -145,7 +208,12 @@ if( !empty(wbc()->sanitize->post('_wpnonce')) ) {
 		';
 		$email_template = str_replace('{nl}', $nl, $email_template);
 		$email_field_vars = wbc()->sanitize->post('email_field_vars');
-		$email_field_vars = explode(',',$email_field_vars);
+
+		if(!empty($_email_field_vars_)){
+			$email_field_vars = array_keys($_email_field_vars_);
+		} else {
+			$email_field_vars = explode(',',$email_field_vars);
+		}
 		if(!empty($email_field_vars) and is_array($email_field_vars)){
 			foreach ($email_field_vars as $email_field_var) {
 				$email_template = str_replace('{'.$email_field_var.'}',wbc()->sanitize->post($email_field_var), $email_template);	
@@ -156,6 +224,9 @@ if( !empty(wbc()->sanitize->post('_wpnonce')) ) {
 			
 		if(!empty(sanitize_email($admin_email))){
 			@wp_mail($admin_email,$subject_template, $email_template);
+		} else {
+			$res["type"]="error";
+			$res["msg"]="Unexpected error occurred!";	
 		}
 
 	} else {
