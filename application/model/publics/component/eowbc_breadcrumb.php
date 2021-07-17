@@ -601,7 +601,12 @@ class EOWBC_Breadcrumb
                                     if($_taxonomy_==='product_cat') {
 
                                         $group_keys_id  = self::get_group_id4map($groups,$term_key,$terms);
-                                        $gcate[$group_keys_id][]= $_term_->slug;
+
+                                        if(array_search($_term_->slug,$cat)!==false) {
+                                            unset($cat[array_search($_term_->slug,$cat)]);
+                                        }
+
+                                        $gcat[$group_keys_id][]= $_term_->slug;
 
                                     } elseif( substr($_taxonomy_,0,3) =='pa_' ) {
 
@@ -618,7 +623,12 @@ class EOWBC_Breadcrumb
 
                                     /*$gcategory[$term_key][]= $_term_->slug;*/
                                     $group_keys_id  = self::get_group_id4map($groups,$term_key);
-                                    $gcate[$group_keys_id][]= $_term_->slug;
+
+                                    if(array_search($_term_->slug,$cat)!==false) {
+                                        unset($cat[array_search($_term_->slug,$cat)]);
+                                    }
+
+                                    $gcat[$group_keys_id][]= $_term_->slug;
 
                                 } elseif( substr($_taxonomy_,0,3) =='pa_' ) {
                                     
@@ -647,6 +657,7 @@ class EOWBC_Breadcrumb
 
 
             $CAT_LINK = '';
+
             if(is_array($cat) && !empty($cat)) {
                 // $link=implode( (get_option('eo_wbc_map_cat_pref','and')==='and'?'+':',') , $category );                  
                 $CAT_LINK=implode( (wbc()->options->get_option('mapping_prod_mapping_pref','prod_mapping_pref_category','and')==='and'?'+':',') , array_unique($cat) );
