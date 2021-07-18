@@ -33,22 +33,36 @@ class WBC_WC {
         return $slug;
     }
 
-    public function get_term_by($field,$key,$taxonomy) {
+    public function get_term_by($field,$key,$taxonomy='') {
 
         
         if($field == 'id'){
-
-            $term = get_term_by($field,$key,$taxonomy);
+            if(!empty($taxonomy)){
+                $term = get_term_by($field,$key,$taxonomy);
+            } else {
+                $term = get_term_by($field,$key);
+            }
 
             if(class_exists('SitePress')) {
                 if( !empty($term) and !is_wp_error($term) ) {
                     $term_slug = $term->slug;
-                    return get_term_by('slug',$term_slug,$taxonomy);
+
+                    if(!empty($taxonomy)){
+                        return get_term_by('slug',$term_slug,$taxonomy);
+                    } else {
+                        return get_term_by('slug',$term_slug);
+                    }
+                    
                 }    
             }
             return $term;        
         } else {
-            return get_term_by($field,$key,$taxonomy);
+
+            if(!empty($taxonomy)){
+                return get_term_by($field,$key,$taxonomy);
+            } else {
+                return get_term_by($field,$key);
+            }            
         }
     }
 
