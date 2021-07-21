@@ -84,6 +84,13 @@ class Filter
 		        	if( isset($_GET['_category']) OR isset($_GET['_current_category']) ){
 
 		        		$old_tax_query = $query->get('tax_query');
+
+		        		/*if(isset($_GET['test'])) {
+		        			echo "<pre>";
+		        			print_r($old_tax_query);
+		        			echo "</pre>";
+		        		}*/
+
 			            $old_tax_query_taxonomy = array();
 		        		
 		                if(!empty(wbc()->sanitize->get('_category'))) {
@@ -110,6 +117,11 @@ class Filter
 		                        'terms' => explode(',',wbc()->sanitize->get('_current_category')),
 		                        'compare'=>'EXISTS IN'
 		                    );
+
+		                    $__current_category__ = array_filter(explode(',',wbc()->sanitize->get('_current_category')));
+		                    if(!empty($__current_category__)) {
+		                    	$query->set('product_cat', array_filter(explode(',',wbc()->sanitize->get('_current_category')))[0]);	
+		                    }		                    
 		                }
 
 		                if(!empty(wbc()->sanitize->get('_current_category')) and !empty($tax_query) ) {
@@ -134,15 +146,25 @@ class Filter
 								}
 							}
 		                }	
+
 		                //$query->set('tax_query',$tax_query);	                
 		                /*$query->set('tax_query',$tax_query);*/
 
 		                ///////////////////////////////////////////////
 	                    //Filter section for attributes
-	                    ///////////////////////////////////////////////  
-		                if(!empty(wbc()->sanitize->get('_attribute'))) {
+	                    ///////////////////////////////////////////////
+	                    $__attribute = $_GET['_attribute'];
+	                    if(is_string($__attribute)) {
+	                    	$__attribute = sanitize_text_field($__attribute);
 
-			                foreach (array_filter(explode(',', wbc()->sanitize->get('_attribute'))) as $attr) {
+	                    	$__attribute = array_filter(explode(',',$__attribute));
+	                    } elseif(is_array($__attribute)) {
+	                    	$__attribute = array_filter($__attribute);
+	                    }
+
+		                if(!empty($__attribute)) {
+
+			                foreach ($__attribute as $attr) {
 
 			                    if(isset($_GET['min_'.$attr]) && isset($_GET['max_'.$attr])){
 			                        
@@ -186,6 +208,7 @@ class Filter
 			            
 			            if(is_array($old_tax_query_taxonomy) AND !empty($old_tax_query_taxonomy)){
 			            	if(in_array('product_visibility',$old_tax_query_taxonomy) and count($old_tax_query_taxonomy)==1) {
+
 			            		$query->set('tax_query',$tax_query);
 			            		
 				            } else {
@@ -200,18 +223,45 @@ class Filter
 
 		            $meta_quer_args = $query->get('meta_query');/* array('relation' => 'AND')*/;
 
+		            if(!empty($_REQUEST['min_price']) and !empty($_REQUEST['max_price']) and empty($meta_quer_args)) {
+		                $meta_quer_args[] = array(
+                                                'key'     => '_price',
+                                                'value'   => array(
+                                                                str_replace('$','',$_REQUEST['min_price']),
+                                                                str_replace('$','',$_REQUEST['max_price'])
+                                                            ),
+                                                'type'    => 'NUMERIC',
+                                                'compare' => 'BETWEEN',
+                                        );
+		                /*$meta_quer_args[] = array(
+                                                'key'     => '_regular_price',
+                                                'value'   => array(
+                                                                str_replace('$','',$_REQUEST['min_price']),
+                                                                str_replace('$','',$_REQUEST['max_price'])
+                                                            ),
+                                                'type'    => 'NUMERIC',
+                                                'compare' => 'BETWEEN',
+                                        );*/
+
+		                $meta_quer_args['relation'] = 'AND';
+		            }
+		            
 		            // meta query price per carat
-		            if(!empty($_POST['min__price_per_caret']) and !empty($_POST['max__price_per_caret'])) {
+		            if(!empty($_REQUEST['min__price_per_caret']) and !empty($_REQUEST['max__price_per_caret'])) {
 		                $meta_quer_args[] = array(
                                                 'key'     => '_price_per_caret',
                                                 'value'   => array(
-                                                                str_replace('$','',$_POST['min__price_per_caret']),
-                                                                str_replace('$','',$_POST['max__price_per_caret'])
+                                                                str_replace('$','',$_REQUEST['min__price_per_caret']),
+                                                                str_replace('$','',$_REQUEST['max__price_per_caret'])
                                                             ),
-                                                'type'    => 'numeric',
+                                                'type'    => 'NUMERIC',
                                                 'compare' => 'BETWEEN',
                                         );
 		            }
+
+
+
+		            
 
 		            // if param _meta_field has query data            
 		            if(!empty($_GET['_meta_field'])) {
@@ -254,15 +304,23 @@ class Filter
 		                    }
 		                }
 		            }
-
+		            $query->set('meta_query',$meta_quer_args);
 		        }
 
-		        $query->set('meta_query',$meta_quer_args);
-
-		        /*echo "<pre>";
-		        print_r($_REQUEST);
-		        print_r($query);
-		        die();*/
+		        if( property_exists($query,'query') ){
+		        	unset($query->query);
+		        }
+		        if( property_exists($query,'tax_query') ){
+		        	unset($query->tax_query);
+		        }
+		        
+		        /*if(isset($_GET['test'])){
+			        echo "<pre>";
+			        print_r($tax_query);
+			        print_r($query);			        
+			        echo "</pre>";
+			        die();
+		    	}*/
 
 		        $query->query_vars['suppress_filters'] = true;
 

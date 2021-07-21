@@ -88,6 +88,23 @@ class Product {
             ob_start();
             ?>
             <script type="text/javascript">
+
+                let sp_add_to_cart_dots = 1
+                let sp_add_to_cart_dots_interval = window.setInterval(function(){
+                    
+                    if(jQuery('#eo_wbc_add_to_cart').length>0) {
+                        console.log('clearing');
+                        window.clearInterval(sp_add_to_cart_dots_interval);
+                    } else {
+                        if(sp_add_to_cart_dots>3) {
+                            sp_add_to_cart_dots = 1;
+                        } else {
+                            sp_add_to_cart_dots = sp_add_to_cart_dots+1;
+                        }
+                        jQuery('.single_add_to_cart_button:not(#eo_wbc_add_to_cart)').text('.'.repeat(sp_add_to_cart_dots));
+                    }
+                },500);
+
                 jQuery(".single_add_to_cart_button:not(#eo_wbc_add_to_cart)").off('click');
                 jQuery(".single_add_to_cart_button:not(#eo_wbc_add_to_cart)").css('cursor','not-allowed !important');
                 
