@@ -45,7 +45,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_round_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_halo_cat','eo_metal_14k_white_gold_cat','eo_metal_14k_yellow_gold_cat','eo_metal_14k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'14K Yellow Gold|14K Rose Gold|14K White Gold',
+                              'value'=>'14K Yellow Gold|14K White Gold|14K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -179,7 +179,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_princess_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_pave_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'18K Yellow Gold|18K Rose Gold|18K White Gold',
+                              'value'=>'18K Yellow Gold|18K White Gold|18K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -270,7 +270,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_emerald_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_solitaire_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'18K Yellow Gold|18K Rose Gold|18K White Gold',
+                              'value'=>'18K Yellow Gold|18K White Gold|18K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -361,7 +361,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_asscher_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_trilogy_cat','eo_metal_14k_white_gold_cat','eo_metal_14k_yellow_gold_cat','eo_metal_14k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'14K Yellow Gold|14K Rose Gold|14K White Gold',
+                              'value'=>'14K Yellow Gold|14K White Gold|14K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -377,26 +377,6 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
-                          array(
-                            'regular_price'=>'250',
-                            'price'=>'245',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'260',
-                            'price'=>'255',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'270',
-                            'price'=>'265',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'280',
-                            'price'=>'275',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
                           array(
                             'regular_price'=>'300',
                             'price'=>'295',
@@ -416,6 +396,26 @@ class Sample_Data_Template {
                             'regular_price'=>'330',
                             'price'=>'325',
                             'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
+                          array(
+                            'regular_price'=>'250',
+                            'price'=>'245',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'260',
+                            'price'=>'255',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'270',
+                            'price'=>'265',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'280',
+                            'price'=>'275',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'7.0')
                           ),
                           array(
                             'regular_price'=>'340',
@@ -452,7 +452,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_marquise_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_pave_cat','eo_metal_14k_white_gold_cat','eo_metal_14k_yellow_gold_cat','eo_metal_14k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'14K Yellow Gold|14K Rose Gold|14K White Gold',
+                              'value'=>'14K Yellow Gold|14K White Gold|14K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -468,26 +468,6 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
-                          array(
-                            'regular_price'=>'250',
-                            'price'=>'245',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'260',
-                            'price'=>'255',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'270',
-                            'price'=>'265',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'280',
-                            'price'=>'275',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
                           array(
                             'regular_price'=>'300',
                             'price'=>'295',
@@ -507,6 +487,26 @@ class Sample_Data_Template {
                             'regular_price'=>'330',
                             'price'=>'325',
                             'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
+                          array(
+                            'regular_price'=>'250',
+                            'price'=>'245',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'260',
+                            'price'=>'255',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'270',
+                            'price'=>'265',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'280',
+                            'price'=>'275',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'7.0')
                           ),
                           array(
                             'regular_price'=>'340',
@@ -543,7 +543,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_oval_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_halo_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'18K Yellow Gold|18K Rose Gold|18K White Gold',
+                              'value'=>'18K Yellow Gold|18K White Gold|18K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -559,26 +559,6 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
-                          array(
-                            'regular_price'=>'250',
-                            'price'=>'245',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'260',
-                            'price'=>'255',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'270',
-                            'price'=>'265',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'280',
-                            'price'=>'275',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
                           array(
                             'regular_price'=>'300',
                             'price'=>'295',
@@ -598,6 +578,26 @@ class Sample_Data_Template {
                             'regular_price'=>'330',
                             'price'=>'325',
                             'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
+                          array(
+                            'regular_price'=>'250',
+                            'price'=>'245',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'260',
+                            'price'=>'255',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'270',
+                            'price'=>'265',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'280',
+                            'price'=>'275',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'7.0')
                           ),
                           array(
                             'regular_price'=>'340',
@@ -634,7 +634,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_radiant_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_pave_cat','eo_metal_14k_yellow_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'14K Yellow Gold',
+                              'value'=>'14K White Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -653,22 +653,22 @@ class Sample_Data_Template {
                           array(
                             'regular_price'=>'340',
                             'price'=>'335',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Yellow Gold','pa_eo_size_attr'=>'4.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'4.0')
                           ),
                           array(
                             'regular_price'=>'350',
                             'price'=>'345',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Yellow Gold','pa_eo_size_attr'=>'5.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'5.0')
                           ),
                           array(
                             'regular_price'=>'360',
                             'price'=>'365',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Yellow Gold','pa_eo_size_attr'=>'6.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'6.0')
                           ),
                           array(
                             'regular_price'=>'370',
                             'price'=>'365',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Yellow Gold','pa_eo_size_attr'=>'7.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'7.0')
                           )
                         )
         ),
@@ -685,7 +685,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_pear_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_trilogy_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'18K Yellow Gold|18K Rose Gold|18K White Gold',
+                              'value'=>'18K Yellow Gold|18K White Gold|18K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -701,6 +701,26 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
+                          array(
+                            'regular_price'=>'300',
+                            'price'=>'295',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'310',
+                            'price'=>'305',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'320',
+                            'price'=>'315',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'330',
+                            'price'=>'325',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
                           array(
                             'regular_price'=>'340',
                             'price'=>'335',
@@ -740,26 +760,6 @@ class Sample_Data_Template {
                             'regular_price'=>'280',
                             'price'=>'275',
                             'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
-                          array(
-                            'regular_price'=>'300',
-                            'price'=>'295',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'310',
-                            'price'=>'305',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'320',
-                            'price'=>'315',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'330',
-                            'price'=>'325',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'7.0')
                           )
                         )
         ),
@@ -776,7 +776,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_heart_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_solitaire_cat','eo_metal_14k_white_gold_cat','eo_metal_14k_yellow_gold_cat','eo_metal_14k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'14K Yellow Gold|14K Rose Gold|14K White Gold',
+                              'value'=>'14K Yellow Gold|14K White Gold|14K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -792,6 +792,26 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
+                          array(
+                            'regular_price'=>'300',
+                            'price'=>'295',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'310',
+                            'price'=>'305',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'320',
+                            'price'=>'315',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'330',
+                            'price'=>'325',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
                           array(
                             'regular_price'=>'340',
                             'price'=>'335',
@@ -831,26 +851,6 @@ class Sample_Data_Template {
                             'regular_price'=>'280',
                             'price'=>'275',
                             'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
-                          array(
-                            'regular_price'=>'300',
-                            'price'=>'295',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'310',
-                            'price'=>'305',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'320',
-                            'price'=>'315',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'330',
-                            'price'=>'325',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'7.0')
                           )
                         )
         ),
@@ -867,7 +867,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_cushion_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_halo_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'18K Yellow Gold|18K Rose Gold|18K White Gold',
+                              'value'=>'18K Yellow Gold|18K White Gold|18K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -883,6 +883,26 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
+                          array(
+                            'regular_price'=>'300',
+                            'price'=>'295',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'310',
+                            'price'=>'305',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'320',
+                            'price'=>'315',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'330',
+                            'price'=>'325',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
                           array(
                             'regular_price'=>'340',
                             'price'=>'335',
@@ -922,26 +942,6 @@ class Sample_Data_Template {
                             'regular_price'=>'280',
                             'price'=>'275',
                             'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
-                          array(
-                            'regular_price'=>'300',
-                            'price'=>'295',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'310',
-                            'price'=>'305',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'320',
-                            'price'=>'315',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'330',
-                            'price'=>'325',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'7.0')
                           )
                         )
         ),
@@ -961,7 +961,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_round_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_pave_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'18K Yellow Gold|18K Rose Gold|18K White Gold',
+                              'value'=>'18K Yellow Gold|18K White Gold|18K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -977,26 +977,6 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
-                          array(
-                            'regular_price'=>'350',
-                            'price'=>'345',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'360',
-                            'price'=>'355',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'370',
-                            'price'=>'365',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'380',
-                            'price'=>'375',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
                           array(
                             'regular_price'=>'400',
                             'price'=>'395',
@@ -1016,6 +996,26 @@ class Sample_Data_Template {
                             'regular_price'=>'430',
                             'price'=>'425',
                             'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
+                          array(
+                            'regular_price'=>'350',
+                            'price'=>'345',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'360',
+                            'price'=>'355',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'370',
+                            'price'=>'365',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'380',
+                            'price'=>'375',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'7.0')
                           ),
                           array(
                             'regular_price'=>'440',
@@ -1052,7 +1052,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_princess_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_pave_cat','eo_metal_14k_white_gold_cat','eo_metal_14k_yellow_gold_cat','eo_metal_14k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'14K Yellow Gold|14K Rose Gold|14K White Gold',
+                              'value'=>'14K Yellow Gold|14K White Gold|14K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -1068,26 +1068,6 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
-                          array(
-                            'regular_price'=>'150',
-                            'price'=>'145',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'160',
-                            'price'=>'255',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'170',
-                            'price'=>'165',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'180',
-                            'price'=>'175',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
                           array(
                             'regular_price'=>'200',
                             'price'=>'195',
@@ -1107,6 +1087,26 @@ class Sample_Data_Template {
                             'regular_price'=>'230',
                             'price'=>'225',
                             'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
+                          array(
+                            'regular_price'=>'150',
+                            'price'=>'145',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'160',
+                            'price'=>'255',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'170',
+                            'price'=>'165',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'180',
+                            'price'=>'175',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'7.0')
                           ),
                           array(
                             'regular_price'=>'240',
@@ -1143,7 +1143,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_emerald_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_solitaire_cat','eo_metal_14k_white_gold_cat','eo_metal_14k_yellow_gold_cat','eo_metal_14k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'14K Yellow Gold|14K Rose Gold|14K White Gold',
+                              'value'=>'14K Yellow Gold|14K White Gold|14K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -1159,26 +1159,6 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
-                          array(
-                            'regular_price'=>'150',
-                            'price'=>'145',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'160',
-                            'price'=>'155',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'170',
-                            'price'=>'165',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'180',
-                            'price'=>'175',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
                           array(
                             'regular_price'=>'200',
                             'price'=>'295',
@@ -1198,6 +1178,26 @@ class Sample_Data_Template {
                             'regular_price'=>'230',
                             'price'=>'225',
                             'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
+                          array(
+                            'regular_price'=>'150',
+                            'price'=>'145',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'160',
+                            'price'=>'155',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'170',
+                            'price'=>'165',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'180',
+                            'price'=>'175',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'7.0')
                           ),
                           array(
                             'regular_price'=>'240',
@@ -1234,7 +1234,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_asscher_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_trilogy_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'18K Yellow Gold|18K Rose Gold|18K White Gold',
+                              'value'=>'18K Yellow Gold|18K White Gold|18K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -1250,26 +1250,6 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
-                          array(
-                            'regular_price'=>'450',
-                            'price'=>'445',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'460',
-                            'price'=>'455',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'470',
-                            'price'=>'465',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'480',
-                            'price'=>'475',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
                           array(
                             'regular_price'=>'400',
                             'price'=>'495',
@@ -1289,6 +1269,26 @@ class Sample_Data_Template {
                             'regular_price'=>'430',
                             'price'=>'425',
                             'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
+                          array(
+                            'regular_price'=>'450',
+                            'price'=>'445',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'460',
+                            'price'=>'455',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'470',
+                            'price'=>'465',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'480',
+                            'price'=>'475',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'7.0')
                           ),
                           array(
                             'regular_price'=>'440',
@@ -1325,7 +1325,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_marquise_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_pave_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'18K Yellow Gold|18K Rose Gold|18K White Gold',
+                              'value'=>'18K Yellow Gold|18K White Gold|18K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -1341,26 +1341,6 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
-                          array(
-                            'regular_price'=>'350',
-                            'price'=>'345',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'360',
-                            'price'=>'355',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'370',
-                            'price'=>'365',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'380',
-                            'price'=>'375',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
                           array(
                             'regular_price'=>'400',
                             'price'=>'395',
@@ -1380,6 +1360,26 @@ class Sample_Data_Template {
                             'regular_price'=>'430',
                             'price'=>'425',
                             'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
+                          array(
+                            'regular_price'=>'350',
+                            'price'=>'345',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'360',
+                            'price'=>'355',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'370',
+                            'price'=>'365',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'380',
+                            'price'=>'375',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'7.0')
                           ),
                           array(
                             'regular_price'=>'440',
@@ -1416,7 +1416,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_oval_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_halo_cat','eo_metal_14k_white_gold_cat','eo_metal_14k_yellow_gold_cat','eo_metal_14k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'14K Yellow Gold|14K Rose Gold|14K White Gold',
+                              'value'=>'14K Yellow Gold|14K White Gold|14K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -1432,26 +1432,6 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
-                          array(
-                            'regular_price'=>'150',
-                            'price'=>'145',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'160',
-                            'price'=>'155',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'170',
-                            'price'=>'165',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'180',
-                            'price'=>'175',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
                           array(
                             'regular_price'=>'200',
                             'price'=>'195',
@@ -1471,6 +1451,26 @@ class Sample_Data_Template {
                             'regular_price'=>'230',
                             'price'=>'225',
                             'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
+                          array(
+                            'regular_price'=>'150',
+                            'price'=>'145',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'160',
+                            'price'=>'155',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'170',
+                            'price'=>'165',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'180',
+                            'price'=>'175',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'7.0')
                           ),
                           array(
                             'regular_price'=>'240',
@@ -1507,7 +1507,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_radiant_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_pave_cat','eo_metal_18k_yellow_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'18K Yellow Gold',
+                              'value'=>'18K White Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -1526,22 +1526,22 @@ class Sample_Data_Template {
                           array(
                             'regular_price'=>'440',
                             'price'=>'435',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Yellow Gold','pa_eo_size_attr'=>'4.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'4.0')
                           ),
                           array(
                             'regular_price'=>'450',
                             'price'=>'445',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Yellow Gold','pa_eo_size_attr'=>'5.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'5.0')
                           ),
                           array(
                             'regular_price'=>'460',
                             'price'=>'465',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Yellow Gold','pa_eo_size_attr'=>'6.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'6.0')
                           ),
                           array(
                             'regular_price'=>'470',
                             'price'=>'465',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Yellow Gold','pa_eo_size_attr'=>'7.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'7.0')
                           )
                         )
         ),
@@ -1558,7 +1558,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_pear_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_trilogy_cat','eo_metal_14k_white_gold_cat','eo_metal_14k_yellow_gold_cat','eo_metal_14k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'14K Yellow Gold|14K Rose Gold|14K White Gold',
+                              'value'=>'14K Yellow Gold|14K White Gold|14K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -1574,6 +1574,26 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
+                          array(
+                            'regular_price'=>'200',
+                            'price'=>'195',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'210',
+                            'price'=>'205',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'220',
+                            'price'=>'215',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'230',
+                            'price'=>'225',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
                           array(
                             'regular_price'=>'240',
                             'price'=>'235',
@@ -1613,26 +1633,6 @@ class Sample_Data_Template {
                             'regular_price'=>'180',
                             'price'=>'175',
                             'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
-                          array(
-                            'regular_price'=>'200',
-                            'price'=>'195',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'210',
-                            'price'=>'205',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'220',
-                            'price'=>'215',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'230',
-                            'price'=>'225',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'7.0')
                           )
                         )
         ),
@@ -1649,7 +1649,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_heart_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_solitaire_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'18K Yellow Gold|18K Rose Gold|18K White Gold',
+                              'value'=>'18K Yellow Gold|18K White Gold|18K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -1665,6 +1665,26 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
+                          array(
+                            'regular_price'=>'400',
+                            'price'=>'395',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'410',
+                            'price'=>'405',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'420',
+                            'price'=>'415',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'430',
+                            'price'=>'425',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
                           array(
                             'regular_price'=>'440',
                             'price'=>'435',
@@ -1704,26 +1724,6 @@ class Sample_Data_Template {
                             'regular_price'=>'380',
                             'price'=>'375',
                             'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
-                          array(
-                            'regular_price'=>'400',
-                            'price'=>'395',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'410',
-                            'price'=>'405',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'420',
-                            'price'=>'415',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'430',
-                            'price'=>'425',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'7.0')
                           )
                         )
         ),
@@ -1740,7 +1740,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_cushion_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_halo_cat','eo_metal_14k_white_gold_cat','eo_metal_14k_yellow_gold_cat','eo_metal_14k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'14K Yellow Gold|14K Rose Gold|14K White Gold',
+                              'value'=>'14K Yellow Gold|14K White Gold|14K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -1756,6 +1756,26 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
+                          array(
+                            'regular_price'=>'200',
+                            'price'=>'195',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'210',
+                            'price'=>'205',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'220',
+                            'price'=>'215',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'230',
+                            'price'=>'225',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
                           array(
                             'regular_price'=>'240',
                             'price'=>'235',
@@ -1795,26 +1815,6 @@ class Sample_Data_Template {
                             'regular_price'=>'180',
                             'price'=>'175',
                             'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
-                          array(
-                            'regular_price'=>'200',
-                            'price'=>'195',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'210',
-                            'price'=>'205',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'220',
-                            'price'=>'215',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'230',
-                            'price'=>'225',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'7.0')
                           )
                         )
         ),
@@ -1834,7 +1834,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_round_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_halo_cat','eo_metal_platinum_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'Platinum',
+                              'value'=>'18K White Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -1853,22 +1853,22 @@ class Sample_Data_Template {
                           array(
                             'regular_price'=>'350',
                             'price'=>'345',
-                            'terms'=>array('pa_eo_metal_attr'=>'Platinum','pa_eo_size_attr'=>'4.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'4.0')
                           ),
                           array(
                             'regular_price'=>'360',
                             'price'=>'355',
-                            'terms'=>array('pa_eo_metal_attr'=>'Platinum','pa_eo_size_attr'=>'5.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'5.0')
                           ),
                           array(
                             'regular_price'=>'370',
                             'price'=>'365',
-                            'terms'=>array('pa_eo_metal_attr'=>'Platinum','pa_eo_size_attr'=>'6.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'6.0')
                           ),
                           array(
                             'regular_price'=>'380',
                             'price'=>'375',
-                            'terms'=>array('pa_eo_metal_attr'=>'Platinum','pa_eo_size_attr'=>'7.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'7.0')
                           )
                         )            
         ),
@@ -1885,7 +1885,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_princess_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_pave_cat','eo_metal_platinum_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'Platinum',
+                              'value'=>'18K White Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -1904,22 +1904,22 @@ class Sample_Data_Template {
                           array(
                             'regular_price'=>'350',
                             'price'=>'345',
-                            'terms'=>array('pa_eo_metal_attr'=>'Platinum','pa_eo_size_attr'=>'4.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'4.0')
                           ),
                           array(
                             'regular_price'=>'360',
                             'price'=>'355',
-                            'terms'=>array('pa_eo_metal_attr'=>'Platinum','pa_eo_size_attr'=>'5.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'5.0')
                           ),
                           array(
                             'regular_price'=>'370',
                             'price'=>'365',
-                            'terms'=>array('pa_eo_metal_attr'=>'Platinum','pa_eo_size_attr'=>'6.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'6.0')
                           ),
                           array(
                             'regular_price'=>'380',
                             'price'=>'375',
-                            'terms'=>array('pa_eo_metal_attr'=>'Platinum','pa_eo_size_attr'=>'7.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'7.0')
                           )
                         )            
         ),
@@ -1936,7 +1936,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_emerald_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_solitaire_cat','eo_metal_platinum_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'Platinum',
+                              'value'=>'14K White Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -1955,22 +1955,22 @@ class Sample_Data_Template {
                           array(
                             'regular_price'=>'350',
                             'price'=>'345',
-                            'terms'=>array('pa_eo_metal_attr'=>'Platinum','pa_eo_size_attr'=>'4.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'4.0')
                           ),
                           array(
                             'regular_price'=>'360',
                             'price'=>'355',
-                            'terms'=>array('pa_eo_metal_attr'=>'Platinum','pa_eo_size_attr'=>'5.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'5.0')
                           ),
                           array(
                             'regular_price'=>'370',
                             'price'=>'365',
-                            'terms'=>array('pa_eo_metal_attr'=>'Platinum','pa_eo_size_attr'=>'6.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'6.0')
                           ),
                           array(
                             'regular_price'=>'380',
                             'price'=>'375',
-                            'terms'=>array('pa_eo_metal_attr'=>'Platinum','pa_eo_size_attr'=>'7.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'7.0')
                           )
                         )
         ),
@@ -1987,7 +1987,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_asscher_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_trilogy_cat','eo_metal_platinum_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'Platinum',
+                              'value'=>'14K White Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -2006,22 +2006,22 @@ class Sample_Data_Template {
                           array(
                             'regular_price'=>'350',
                             'price'=>'345',
-                            'terms'=>array('pa_eo_metal_attr'=>'Platinum','pa_eo_size_attr'=>'4.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'4.0')
                           ),
                           array(
                             'regular_price'=>'360',
                             'price'=>'355',
-                            'terms'=>array('pa_eo_metal_attr'=>'Platinum','pa_eo_size_attr'=>'5.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'5.0')
                           ),
                           array(
                             'regular_price'=>'370',
                             'price'=>'365',
-                            'terms'=>array('pa_eo_metal_attr'=>'Platinum','pa_eo_size_attr'=>'6.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'6.0')
                           ),
                           array(
                             'regular_price'=>'380',
                             'price'=>'375',
-                            'terms'=>array('pa_eo_metal_attr'=>'Platinum','pa_eo_size_attr'=>'7.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'7.0')
                           )
                         )
         ),
@@ -2038,7 +2038,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_marquise_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_pave_cat','eo_metal_platinum_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'Platinum',
+                              'value'=>'14K White Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -2057,22 +2057,22 @@ class Sample_Data_Template {
                           array(
                             'regular_price'=>'350',
                             'price'=>'345',
-                            'terms'=>array('pa_eo_metal_attr'=>'Platinum','pa_eo_size_attr'=>'4.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'4.0')
                           ),
                           array(
                             'regular_price'=>'360',
                             'price'=>'355',
-                            'terms'=>array('pa_eo_metal_attr'=>'Platinum','pa_eo_size_attr'=>'5.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'5.0')
                           ),
                           array(
                             'regular_price'=>'370',
                             'price'=>'365',
-                            'terms'=>array('pa_eo_metal_attr'=>'Platinum','pa_eo_size_attr'=>'6.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'6.0')
                           ),
                           array(
                             'regular_price'=>'380',
                             'price'=>'375',
-                            'terms'=>array('pa_eo_metal_attr'=>'Platinum','pa_eo_size_attr'=>'7.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'7.0')
                           )
                         )
         ),
@@ -2089,7 +2089,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_oval_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_halo_cat','eo_metal_platinum_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'Platinum',
+                              'value'=>'18K White Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -2108,22 +2108,22 @@ class Sample_Data_Template {
                           array(
                             'regular_price'=>'350',
                             'price'=>'345',
-                            'terms'=>array('pa_eo_metal_attr'=>'Platinum','pa_eo_size_attr'=>'4.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'4.0')
                           ),
                           array(
                             'regular_price'=>'360',
                             'price'=>'355',
-                            'terms'=>array('pa_eo_metal_attr'=>'Platinum','pa_eo_size_attr'=>'5.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'5.0')
                           ),
                           array(
                             'regular_price'=>'370',
                             'price'=>'365',
-                            'terms'=>array('pa_eo_metal_attr'=>'Platinum','pa_eo_size_attr'=>'6.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'6.0')
                           ),
                           array(
                             'regular_price'=>'380',
                             'price'=>'375',
-                            'terms'=>array('pa_eo_metal_attr'=>'Platinum','pa_eo_size_attr'=>'7.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'7.0')
                           )
                         )
         ),
@@ -2140,7 +2140,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_radiant_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_pave_cat','eo_metal_platinum_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'Platinum',
+                              'value'=>'18K White Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -2159,22 +2159,22 @@ class Sample_Data_Template {
                           array(
                             'regular_price'=>'440',
                             'price'=>'435',
-                            'terms'=>array('pa_eo_metal_attr'=>'Platinum','pa_eo_size_attr'=>'4.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'4.0')
                           ),
                           array(
                             'regular_price'=>'450',
                             'price'=>'445',
-                            'terms'=>array('pa_eo_metal_attr'=>'Platinum','pa_eo_size_attr'=>'5.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'5.0')
                           ),
                           array(
                             'regular_price'=>'460',
                             'price'=>'465',
-                            'terms'=>array('pa_eo_metal_attr'=>'Platinum','pa_eo_size_attr'=>'6.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'6.0')
                           ),
                           array(
                             'regular_price'=>'470',
                             'price'=>'465',
-                            'terms'=>array('pa_eo_metal_attr'=>'Platinum','pa_eo_size_attr'=>'7.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'7.0')
                           )
                         )
         ),
@@ -2191,7 +2191,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_pear_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_trilogy_cat','eo_metal_platinum_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'Platinum',
+                              'value'=>'18K White Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -2210,22 +2210,22 @@ class Sample_Data_Template {
                           array(
                             'regular_price'=>'440',
                             'price'=>'435',
-                            'terms'=>array('pa_eo_metal_attr'=>'Platinum','pa_eo_size_attr'=>'4.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'4.0')
                           ),
                           array(
                             'regular_price'=>'450',
                             'price'=>'445',
-                            'terms'=>array('pa_eo_metal_attr'=>'Platinum','pa_eo_size_attr'=>'5.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'5.0')
                           ),
                           array(
                             'regular_price'=>'460',
                             'price'=>'465',
-                            'terms'=>array('pa_eo_metal_attr'=>'Platinum','pa_eo_size_attr'=>'6.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'6.0')
                           ),
                           array(
                             'regular_price'=>'470',
                             'price'=>'465',
-                            'terms'=>array('pa_eo_metal_attr'=>'Platinum','pa_eo_size_attr'=>'7.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'7.0')
                           )
                         )
         ),
@@ -2242,7 +2242,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_heart_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_solitaire_cat','eo_metal_platinum_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'Platinum',
+                              'value'=>'18K White Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -2261,22 +2261,22 @@ class Sample_Data_Template {
                           array(
                             'regular_price'=>'440',
                             'price'=>'435',
-                            'terms'=>array('pa_eo_metal_attr'=>'Platinum','pa_eo_size_attr'=>'4.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'4.0')
                           ),
                           array(
                             'regular_price'=>'450',
                             'price'=>'445',
-                            'terms'=>array('pa_eo_metal_attr'=>'Platinum','pa_eo_size_attr'=>'5.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'5.0')
                           ),
                           array(
                             'regular_price'=>'460',
                             'price'=>'465',
-                            'terms'=>array('pa_eo_metal_attr'=>'Platinum','pa_eo_size_attr'=>'6.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'6.0')
                           ),
                           array(
                             'regular_price'=>'470',
                             'price'=>'465',
-                            'terms'=>array('pa_eo_metal_attr'=>'Platinum','pa_eo_size_attr'=>'7.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'7.0')
                           )
                         )
         ),
@@ -2293,7 +2293,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_cushion_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_halo_cat','eo_metal_platinum_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'Platinum',
+                              'value'=>'14K White Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -2312,22 +2312,22 @@ class Sample_Data_Template {
                           array(
                             'regular_price'=>'440',
                             'price'=>'435',
-                            'terms'=>array('pa_eo_metal_attr'=>'Platinum','pa_eo_size_attr'=>'4.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'4.0')
                           ),
                           array(
                             'regular_price'=>'450',
                             'price'=>'445',
-                            'terms'=>array('pa_eo_metal_attr'=>'Platinum','pa_eo_size_attr'=>'5.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'5.0')
                           ),
                           array(
                             'regular_price'=>'460',
                             'price'=>'465',
-                            'terms'=>array('pa_eo_metal_attr'=>'Platinum','pa_eo_size_attr'=>'6.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'6.0')
                           ),
                           array(
                             'regular_price'=>'470',
                             'price'=>'465',
-                            'terms'=>array('pa_eo_metal_attr'=>'Platinum','pa_eo_size_attr'=>'7.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'7.0')
                           )
                         )
         ),
@@ -2347,7 +2347,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_round_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_halo_cat','eo_metal_14k_white_gold_cat','eo_metal_14k_yellow_gold_cat','eo_metal_14k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'14K Yellow Gold|14K Rose Gold|14K White Gold',
+                              'value'=>'14K Yellow Gold|14K White Gold|14K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -2363,26 +2363,6 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
-                          array(
-                            'regular_price'=>'250',
-                            'price'=>'245',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'260',
-                            'price'=>'255',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'270',
-                            'price'=>'265',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'280',
-                            'price'=>'275',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
                           array(
                             'regular_price'=>'300',
                             'price'=>'295',
@@ -2402,6 +2382,26 @@ class Sample_Data_Template {
                             'regular_price'=>'330',
                             'price'=>'325',
                             'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
+                          array(
+                            'regular_price'=>'250',
+                            'price'=>'245',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'260',
+                            'price'=>'255',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'270',
+                            'price'=>'265',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'280',
+                            'price'=>'275',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'7.0')
                           ),
                           array(
                             'regular_price'=>'340',
@@ -2438,7 +2438,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_princess_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_sidestone_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'18K Yellow Gold|18K Rose Gold|18K White Gold',
+                              'value'=>'18K Yellow Gold|18K White Gold|18K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -2454,26 +2454,6 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
-                          array(
-                            'regular_price'=>'250',
-                            'price'=>'245',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'260',
-                            'price'=>'255',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'270',
-                            'price'=>'265',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'280',
-                            'price'=>'275',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
                           array(
                             'regular_price'=>'300',
                             'price'=>'295',
@@ -2493,6 +2473,26 @@ class Sample_Data_Template {
                             'regular_price'=>'330',
                             'price'=>'325',
                             'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
+                          array(
+                            'regular_price'=>'250',
+                            'price'=>'245',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'260',
+                            'price'=>'255',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'270',
+                            'price'=>'265',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'280',
+                            'price'=>'275',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'7.0')
                           ),
                           array(
                             'regular_price'=>'340',
@@ -2529,7 +2529,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_emerald_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_solitaire_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'18K Yellow Gold|18K Rose Gold|18K White Gold',
+                              'value'=>'18K Yellow Gold|18K White Gold|18K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -2545,26 +2545,6 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
-                          array(
-                            'regular_price'=>'250',
-                            'price'=>'245',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'260',
-                            'price'=>'255',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'270',
-                            'price'=>'265',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'280',
-                            'price'=>'275',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
                           array(
                             'regular_price'=>'300',
                             'price'=>'295',
@@ -2584,6 +2564,26 @@ class Sample_Data_Template {
                             'regular_price'=>'330',
                             'price'=>'325',
                             'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
+                          array(
+                            'regular_price'=>'250',
+                            'price'=>'245',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'260',
+                            'price'=>'255',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'270',
+                            'price'=>'265',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'280',
+                            'price'=>'275',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'7.0')
                           ),
                           array(
                             'regular_price'=>'340',
@@ -2620,7 +2620,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_asscher_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_trilogy_cat','eo_metal_14k_white_gold_cat','eo_metal_14k_yellow_gold_cat','eo_metal_14k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'14K Yellow Gold|14K Rose Gold|14K White Gold',
+                              'value'=>'14K Yellow Gold|14K White Gold|14K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -2636,26 +2636,6 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
-                          array(
-                            'regular_price'=>'250',
-                            'price'=>'245',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'260',
-                            'price'=>'255',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'270',
-                            'price'=>'265',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'280',
-                            'price'=>'275',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
                           array(
                             'regular_price'=>'300',
                             'price'=>'295',
@@ -2675,6 +2655,26 @@ class Sample_Data_Template {
                             'regular_price'=>'330',
                             'price'=>'325',
                             'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
+                          array(
+                            'regular_price'=>'250',
+                            'price'=>'245',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'260',
+                            'price'=>'255',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'270',
+                            'price'=>'265',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'280',
+                            'price'=>'275',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'7.0')
                           ),
                           array(
                             'regular_price'=>'340',
@@ -2711,7 +2711,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_marquise_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_sidestone_cat','eo_metal_14k_white_gold_cat','eo_metal_14k_yellow_gold_cat','eo_metal_14k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'14K Yellow Gold|14K Rose Gold|14K White Gold',
+                              'value'=>'14K Yellow Gold|14K White Gold|14K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -2727,26 +2727,6 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
-                          array(
-                            'regular_price'=>'250',
-                            'price'=>'245',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'260',
-                            'price'=>'255',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'270',
-                            'price'=>'265',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'280',
-                            'price'=>'275',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
                           array(
                             'regular_price'=>'300',
                             'price'=>'295',
@@ -2766,6 +2746,26 @@ class Sample_Data_Template {
                             'regular_price'=>'330',
                             'price'=>'325',
                             'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
+                          array(
+                            'regular_price'=>'250',
+                            'price'=>'245',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'260',
+                            'price'=>'255',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'270',
+                            'price'=>'265',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'280',
+                            'price'=>'275',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'7.0')
                           ),
                           array(
                             'regular_price'=>'340',
@@ -2802,7 +2802,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_oval_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_halo_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'18K Yellow Gold|18K Rose Gold|18K White Gold',
+                              'value'=>'18K Yellow Gold|18K White Gold|18K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -2818,26 +2818,6 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
-                          array(
-                            'regular_price'=>'250',
-                            'price'=>'245',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'260',
-                            'price'=>'255',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'270',
-                            'price'=>'265',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'280',
-                            'price'=>'275',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
                           array(
                             'regular_price'=>'300',
                             'price'=>'295',
@@ -2857,6 +2837,26 @@ class Sample_Data_Template {
                             'regular_price'=>'330',
                             'price'=>'325',
                             'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
+                          array(
+                            'regular_price'=>'250',
+                            'price'=>'245',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'260',
+                            'price'=>'255',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'270',
+                            'price'=>'265',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'280',
+                            'price'=>'275',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'7.0')
                           ),
                           array(
                             'regular_price'=>'340',
@@ -2893,7 +2893,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_radiant_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_sidestone_cat','eo_metal_14k_yellow_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'14K Yellow Gold',
+                              'value'=>'14K White Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -2912,22 +2912,22 @@ class Sample_Data_Template {
                           array(
                             'regular_price'=>'340',
                             'price'=>'335',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Yellow Gold','pa_eo_size_attr'=>'4.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'4.0')
                           ),
                           array(
                             'regular_price'=>'350',
                             'price'=>'345',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Yellow Gold','pa_eo_size_attr'=>'5.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'5.0')
                           ),
                           array(
                             'regular_price'=>'360',
                             'price'=>'365',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Yellow Gold','pa_eo_size_attr'=>'6.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'6.0')
                           ),
                           array(
                             'regular_price'=>'370',
                             'price'=>'365',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Yellow Gold','pa_eo_size_attr'=>'7.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'7.0')
                           )
                         )
         ),
@@ -2944,7 +2944,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_pear_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_trilogy_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'18K Yellow Gold|18K Rose Gold|18K White Gold',
+                              'value'=>'18K Yellow Gold|18K White Gold|18K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -2960,6 +2960,26 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
+                          array(
+                            'regular_price'=>'300',
+                            'price'=>'295',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'310',
+                            'price'=>'305',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'320',
+                            'price'=>'315',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'330',
+                            'price'=>'325',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
                           array(
                             'regular_price'=>'340',
                             'price'=>'335',
@@ -2999,26 +3019,6 @@ class Sample_Data_Template {
                             'regular_price'=>'280',
                             'price'=>'275',
                             'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
-                          array(
-                            'regular_price'=>'300',
-                            'price'=>'295',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'310',
-                            'price'=>'305',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'320',
-                            'price'=>'315',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'330',
-                            'price'=>'325',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'7.0')
                           )
                         )
         ),
@@ -3035,7 +3035,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_heart_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_solitaire_cat','eo_metal_14k_white_gold_cat','eo_metal_14k_yellow_gold_cat','eo_metal_14k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'14K Yellow Gold|14K Rose Gold|14K White Gold',
+                              'value'=>'14K Yellow Gold|14K White Gold|14K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -3051,6 +3051,26 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
+                          array(
+                            'regular_price'=>'300',
+                            'price'=>'295',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'310',
+                            'price'=>'305',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'320',
+                            'price'=>'315',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'330',
+                            'price'=>'325',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
                           array(
                             'regular_price'=>'340',
                             'price'=>'335',
@@ -3090,26 +3110,6 @@ class Sample_Data_Template {
                             'regular_price'=>'280',
                             'price'=>'275',
                             'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
-                          array(
-                            'regular_price'=>'300',
-                            'price'=>'295',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'310',
-                            'price'=>'305',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'320',
-                            'price'=>'315',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'330',
-                            'price'=>'325',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'7.0')
                           )
                         )
         ),
@@ -3126,7 +3126,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_cushion_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_vintage_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'18K Yellow Gold|18K Rose Gold|18K White Gold',
+                              'value'=>'18K Yellow Gold|18K White Gold|18K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -3142,6 +3142,26 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
+                          array(
+                            'regular_price'=>'300',
+                            'price'=>'295',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'310',
+                            'price'=>'305',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'320',
+                            'price'=>'315',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'330',
+                            'price'=>'325',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
                           array(
                             'regular_price'=>'340',
                             'price'=>'335',
@@ -3181,26 +3201,6 @@ class Sample_Data_Template {
                             'regular_price'=>'280',
                             'price'=>'275',
                             'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
-                          array(
-                            'regular_price'=>'300',
-                            'price'=>'295',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'310',
-                            'price'=>'305',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'320',
-                            'price'=>'315',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'330',
-                            'price'=>'325',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'7.0')
                           )
                         )
         ),
@@ -3220,7 +3220,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_round_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_vintage_cat','eo_metal_14k_white_gold_cat','eo_metal_14k_yellow_gold_cat','eo_metal_14k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'14K Yellow Gold|14K Rose Gold|14K White Gold',
+                              'value'=>'14K Yellow Gold|14K White Gold|14K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -3236,26 +3236,6 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
-                          array(
-                            'regular_price'=>'250',
-                            'price'=>'245',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'260',
-                            'price'=>'255',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'270',
-                            'price'=>'265',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'280',
-                            'price'=>'275',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
                           array(
                             'regular_price'=>'300',
                             'price'=>'295',
@@ -3275,6 +3255,26 @@ class Sample_Data_Template {
                             'regular_price'=>'330',
                             'price'=>'325',
                             'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
+                          array(
+                            'regular_price'=>'250',
+                            'price'=>'245',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'260',
+                            'price'=>'255',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'270',
+                            'price'=>'265',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'280',
+                            'price'=>'275',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'7.0')
                           ),
                           array(
                             'regular_price'=>'340',
@@ -3311,7 +3311,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_princess_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_sidestone_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'18K Yellow Gold|18K Rose Gold|18K White Gold',
+                              'value'=>'18K Yellow Gold|18K White Gold|18K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -3327,26 +3327,6 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
-                          array(
-                            'regular_price'=>'250',
-                            'price'=>'245',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'260',
-                            'price'=>'255',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'270',
-                            'price'=>'265',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'280',
-                            'price'=>'275',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
                           array(
                             'regular_price'=>'300',
                             'price'=>'295',
@@ -3366,6 +3346,26 @@ class Sample_Data_Template {
                             'regular_price'=>'330',
                             'price'=>'325',
                             'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
+                          array(
+                            'regular_price'=>'250',
+                            'price'=>'245',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'260',
+                            'price'=>'255',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'270',
+                            'price'=>'265',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'280',
+                            'price'=>'275',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'7.0')
                           ),
                           array(
                             'regular_price'=>'340',
@@ -3402,7 +3402,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_emerald_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_solitaire_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'18K Yellow Gold|18K Rose Gold|18K White Gold',
+                              'value'=>'18K Yellow Gold|18K White Gold|18K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -3418,26 +3418,6 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
-                          array(
-                            'regular_price'=>'250',
-                            'price'=>'245',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'260',
-                            'price'=>'255',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'270',
-                            'price'=>'265',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'280',
-                            'price'=>'275',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
                           array(
                             'regular_price'=>'300',
                             'price'=>'295',
@@ -3457,6 +3437,26 @@ class Sample_Data_Template {
                             'regular_price'=>'330',
                             'price'=>'325',
                             'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
+                          array(
+                            'regular_price'=>'250',
+                            'price'=>'245',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'260',
+                            'price'=>'255',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'270',
+                            'price'=>'265',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'280',
+                            'price'=>'275',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'7.0')
                           ),
                           array(
                             'regular_price'=>'340',
@@ -3493,7 +3493,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_asscher_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_trilogy_cat','eo_metal_14k_white_gold_cat','eo_metal_14k_yellow_gold_cat','eo_metal_14k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'14K Yellow Gold|14K Rose Gold|14K White Gold',
+                              'value'=>'14K Yellow Gold|14K White Gold|14K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -3509,26 +3509,6 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
-                          array(
-                            'regular_price'=>'250',
-                            'price'=>'245',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'260',
-                            'price'=>'255',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'270',
-                            'price'=>'265',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'280',
-                            'price'=>'275',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
                           array(
                             'regular_price'=>'300',
                             'price'=>'295',
@@ -3548,6 +3528,26 @@ class Sample_Data_Template {
                             'regular_price'=>'330',
                             'price'=>'325',
                             'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
+                          array(
+                            'regular_price'=>'250',
+                            'price'=>'245',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'260',
+                            'price'=>'255',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'270',
+                            'price'=>'265',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'280',
+                            'price'=>'275',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'7.0')
                           ),
                           array(
                             'regular_price'=>'340',
@@ -3584,7 +3584,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_marquise_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_sidestone_cat','eo_metal_14k_white_gold_cat','eo_metal_14k_yellow_gold_cat','eo_metal_14k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'14K Yellow Gold|14K Rose Gold|14K White Gold',
+                              'value'=>'14K Yellow Gold|14K White Gold|14K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -3600,26 +3600,6 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
-                          array(
-                            'regular_price'=>'250',
-                            'price'=>'245',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'260',
-                            'price'=>'255',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'270',
-                            'price'=>'265',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'280',
-                            'price'=>'275',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
                           array(
                             'regular_price'=>'300',
                             'price'=>'295',
@@ -3639,6 +3619,26 @@ class Sample_Data_Template {
                             'regular_price'=>'330',
                             'price'=>'325',
                             'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
+                          array(
+                            'regular_price'=>'250',
+                            'price'=>'245',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'260',
+                            'price'=>'255',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'270',
+                            'price'=>'265',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'280',
+                            'price'=>'275',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'7.0')
                           ),
                           array(
                             'regular_price'=>'340',
@@ -3675,7 +3675,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_oval_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_ vintage_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'18K Yellow Gold|18K Rose Gold|18K White Gold',
+                              'value'=>'18K Yellow Gold|18K White Gold|18K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -3691,26 +3691,6 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
-                          array(
-                            'regular_price'=>'250',
-                            'price'=>'245',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'260',
-                            'price'=>'255',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'270',
-                            'price'=>'265',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'280',
-                            'price'=>'275',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
                           array(
                             'regular_price'=>'300',
                             'price'=>'295',
@@ -3730,6 +3710,26 @@ class Sample_Data_Template {
                             'regular_price'=>'330',
                             'price'=>'325',
                             'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
+                          array(
+                            'regular_price'=>'250',
+                            'price'=>'245',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'260',
+                            'price'=>'255',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'270',
+                            'price'=>'265',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'280',
+                            'price'=>'275',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'7.0')
                           ),
                           array(
                             'regular_price'=>'340',
@@ -3766,7 +3766,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_radiant_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_sidestone_cat','eo_metal_14k_yellow_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'14K Yellow Gold',
+                              'value'=>'14K White Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -3785,22 +3785,22 @@ class Sample_Data_Template {
                           array(
                             'regular_price'=>'340',
                             'price'=>'335',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Yellow Gold','pa_eo_size_attr'=>'4.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'4.0')
                           ),
                           array(
                             'regular_price'=>'350',
                             'price'=>'345',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Yellow Gold','pa_eo_size_attr'=>'5.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'5.0')
                           ),
                           array(
                             'regular_price'=>'360',
                             'price'=>'365',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Yellow Gold','pa_eo_size_attr'=>'6.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'6.0')
                           ),
                           array(
                             'regular_price'=>'370',
                             'price'=>'365',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Yellow Gold','pa_eo_size_attr'=>'7.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'7.0')
                           )
                         )
         ),
@@ -3817,7 +3817,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_pear_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_trilogy_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'18K Yellow Gold|18K Rose Gold|18K White Gold',
+                              'value'=>'18K Yellow Gold|18K White Gold|18K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -3833,6 +3833,26 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
+                          array(
+                            'regular_price'=>'300',
+                            'price'=>'295',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'310',
+                            'price'=>'305',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'320',
+                            'price'=>'315',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'330',
+                            'price'=>'325',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
                           array(
                             'regular_price'=>'340',
                             'price'=>'335',
@@ -3872,26 +3892,6 @@ class Sample_Data_Template {
                             'regular_price'=>'280',
                             'price'=>'275',
                             'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
-                          array(
-                            'regular_price'=>'300',
-                            'price'=>'295',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'310',
-                            'price'=>'305',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'320',
-                            'price'=>'315',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'330',
-                            'price'=>'325',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'7.0')
                           )
                         )
         ),
@@ -3908,7 +3908,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_heart_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_solitaire_cat','eo_metal_14k_white_gold_cat','eo_metal_14k_yellow_gold_cat','eo_metal_14k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'14K Yellow Gold|14K Rose Gold|14K White Gold',
+                              'value'=>'14K Yellow Gold|14K White Gold|14K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -3924,6 +3924,26 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
+                          array(
+                            'regular_price'=>'300',
+                            'price'=>'295',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'310',
+                            'price'=>'305',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'320',
+                            'price'=>'315',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'330',
+                            'price'=>'325',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
                           array(
                             'regular_price'=>'340',
                             'price'=>'335',
@@ -3963,26 +3983,6 @@ class Sample_Data_Template {
                             'regular_price'=>'280',
                             'price'=>'275',
                             'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
-                          array(
-                            'regular_price'=>'300',
-                            'price'=>'295',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'310',
-                            'price'=>'305',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'320',
-                            'price'=>'315',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'330',
-                            'price'=>'325',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'7.0')
                           )
                         )
         ),
@@ -3999,7 +3999,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_cushion_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_vintage_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'18K Yellow Gold|18K Rose Gold|18K White Gold',
+                              'value'=>'18K Yellow Gold|18K White Gold|18K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -4015,6 +4015,26 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
+                          array(
+                            'regular_price'=>'300',
+                            'price'=>'295',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'310',
+                            'price'=>'305',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'320',
+                            'price'=>'315',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'330',
+                            'price'=>'325',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
                           array(
                             'regular_price'=>'340',
                             'price'=>'335',
@@ -4054,26 +4074,6 @@ class Sample_Data_Template {
                             'regular_price'=>'280',
                             'price'=>'275',
                             'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
-                          array(
-                            'regular_price'=>'300',
-                            'price'=>'295',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'310',
-                            'price'=>'305',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'320',
-                            'price'=>'315',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'330',
-                            'price'=>'325',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'7.0')
                           )
                         )
         ),
@@ -4093,7 +4093,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_round_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_vintage_cat','eo_metal_14k_white_gold_cat','eo_metal_14k_yellow_gold_cat','eo_metal_14k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'14K Yellow Gold|14K Rose Gold|14K White Gold',
+                              'value'=>'14K Yellow Gold|14K White Gold|14K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -4109,26 +4109,6 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
-                          array(
-                            'regular_price'=>'250',
-                            'price'=>'245',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'260',
-                            'price'=>'255',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'270',
-                            'price'=>'265',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'280',
-                            'price'=>'275',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
                           array(
                             'regular_price'=>'300',
                             'price'=>'295',
@@ -4148,6 +4128,26 @@ class Sample_Data_Template {
                             'regular_price'=>'330',
                             'price'=>'325',
                             'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
+                          array(
+                            'regular_price'=>'250',
+                            'price'=>'245',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'260',
+                            'price'=>'255',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'270',
+                            'price'=>'265',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'280',
+                            'price'=>'275',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'7.0')
                           ),
                           array(
                             'regular_price'=>'340',
@@ -4184,7 +4184,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_princess_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_sidestone_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'18K Yellow Gold|18K Rose Gold|18K White Gold',
+                              'value'=>'18K Yellow Gold|18K White Gold|18K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -4200,26 +4200,6 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
-                          array(
-                            'regular_price'=>'250',
-                            'price'=>'245',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'260',
-                            'price'=>'255',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'270',
-                            'price'=>'265',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'280',
-                            'price'=>'275',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
                           array(
                             'regular_price'=>'300',
                             'price'=>'295',
@@ -4239,6 +4219,26 @@ class Sample_Data_Template {
                             'regular_price'=>'330',
                             'price'=>'325',
                             'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
+                          array(
+                            'regular_price'=>'250',
+                            'price'=>'245',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'260',
+                            'price'=>'255',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'270',
+                            'price'=>'265',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'280',
+                            'price'=>'275',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'7.0')
                           ),
                           array(
                             'regular_price'=>'340',
@@ -4275,7 +4275,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_emerald_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_vintage_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'18K Yellow Gold|18K Rose Gold|18K White Gold',
+                              'value'=>'18K Yellow Gold|18K White Gold|18K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -4291,26 +4291,6 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
-                          array(
-                            'regular_price'=>'250',
-                            'price'=>'245',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'260',
-                            'price'=>'255',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'270',
-                            'price'=>'265',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'280',
-                            'price'=>'275',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
                           array(
                             'regular_price'=>'300',
                             'price'=>'295',
@@ -4330,6 +4310,26 @@ class Sample_Data_Template {
                             'regular_price'=>'330',
                             'price'=>'325',
                             'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
+                          array(
+                            'regular_price'=>'250',
+                            'price'=>'245',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'260',
+                            'price'=>'255',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'270',
+                            'price'=>'265',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'280',
+                            'price'=>'275',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'7.0')
                           ),
                           array(
                             'regular_price'=>'340',
@@ -4366,7 +4366,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_asscher_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_vintage_cat','eo_metal_14k_white_gold_cat','eo_metal_14k_yellow_gold_cat','eo_metal_14k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'14K Yellow Gold|14K Rose Gold|14K White Gold',
+                              'value'=>'14K Yellow Gold|14K White Gold|14K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -4382,26 +4382,6 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
-                          array(
-                            'regular_price'=>'250',
-                            'price'=>'245',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'260',
-                            'price'=>'255',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'270',
-                            'price'=>'265',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'280',
-                            'price'=>'275',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
                           array(
                             'regular_price'=>'300',
                             'price'=>'295',
@@ -4421,6 +4401,26 @@ class Sample_Data_Template {
                             'regular_price'=>'330',
                             'price'=>'325',
                             'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
+                          array(
+                            'regular_price'=>'250',
+                            'price'=>'245',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'260',
+                            'price'=>'255',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'270',
+                            'price'=>'265',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'280',
+                            'price'=>'275',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'7.0')
                           ),
                           array(
                             'regular_price'=>'340',
@@ -4457,7 +4457,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_marquise_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_sidestone_cat','eo_metal_14k_white_gold_cat','eo_metal_14k_yellow_gold_cat','eo_metal_14k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'14K Yellow Gold|14K Rose Gold|14K White Gold',
+                              'value'=>'14K Yellow Gold|14K White Gold|14K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -4473,26 +4473,6 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
-                          array(
-                            'regular_price'=>'250',
-                            'price'=>'245',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'260',
-                            'price'=>'255',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'270',
-                            'price'=>'265',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'280',
-                            'price'=>'275',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
                           array(
                             'regular_price'=>'300',
                             'price'=>'295',
@@ -4512,6 +4492,26 @@ class Sample_Data_Template {
                             'regular_price'=>'330',
                             'price'=>'325',
                             'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
+                          array(
+                            'regular_price'=>'250',
+                            'price'=>'245',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'260',
+                            'price'=>'255',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'270',
+                            'price'=>'265',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'280',
+                            'price'=>'275',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'7.0')
                           ),
                           array(
                             'regular_price'=>'340',
@@ -4548,7 +4548,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_oval_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_vintage_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'18K Yellow Gold|18K Rose Gold|18K White Gold',
+                              'value'=>'18K Yellow Gold|18K White Gold|18K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -4564,26 +4564,6 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
-                          array(
-                            'regular_price'=>'250',
-                            'price'=>'245',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'260',
-                            'price'=>'255',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'270',
-                            'price'=>'265',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'280',
-                            'price'=>'275',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
                           array(
                             'regular_price'=>'300',
                             'price'=>'295',
@@ -4603,6 +4583,26 @@ class Sample_Data_Template {
                             'regular_price'=>'330',
                             'price'=>'325',
                             'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
+                          array(
+                            'regular_price'=>'250',
+                            'price'=>'245',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'260',
+                            'price'=>'255',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'270',
+                            'price'=>'265',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'280',
+                            'price'=>'275',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'7.0')
                           ),
                           array(
                             'regular_price'=>'340',
@@ -4639,7 +4639,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_radiant_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_sidetone_cat','eo_metal_14k_yellow_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'14K Yellow Gold',
+                              'value'=>'14K White Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -4658,22 +4658,22 @@ class Sample_Data_Template {
                           array(
                             'regular_price'=>'340',
                             'price'=>'335',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Yellow Gold','pa_eo_size_attr'=>'4.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'4.0')
                           ),
                           array(
                             'regular_price'=>'350',
                             'price'=>'345',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Yellow Gold','pa_eo_size_attr'=>'5.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'5.0')
                           ),
                           array(
                             'regular_price'=>'360',
                             'price'=>'365',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Yellow Gold','pa_eo_size_attr'=>'6.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'6.0')
                           ),
                           array(
                             'regular_price'=>'370',
                             'price'=>'365',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K Yellow Gold','pa_eo_size_attr'=>'7.0')
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'7.0')
                           )
                         )
         ),
@@ -4690,7 +4690,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_pear_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_sidestone_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'18K Yellow Gold|18K Rose Gold|18K White Gold',
+                              'value'=>'18K Yellow Gold|18K White Gold|18K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -4706,6 +4706,26 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
+                          array(
+                            'regular_price'=>'300',
+                            'price'=>'295',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'310',
+                            'price'=>'305',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'320',
+                            'price'=>'315',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'330',
+                            'price'=>'325',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
                           array(
                             'regular_price'=>'340',
                             'price'=>'335',
@@ -4745,26 +4765,6 @@ class Sample_Data_Template {
                             'regular_price'=>'280',
                             'price'=>'275',
                             'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
-                          array(
-                            'regular_price'=>'300',
-                            'price'=>'295',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'310',
-                            'price'=>'305',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'320',
-                            'price'=>'315',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'330',
-                            'price'=>'325',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'7.0')
                           )
                         )
         ),
@@ -4781,7 +4781,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_heart_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_vintage_cat','eo_metal_14k_white_gold_cat','eo_metal_14k_yellow_gold_cat','eo_metal_14k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'14K Yellow Gold|14K Rose Gold|14K White Gold',
+                              'value'=>'14K Yellow Gold|14K White Gold|14K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -4797,6 +4797,26 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
+                          array(
+                            'regular_price'=>'300',
+                            'price'=>'295',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'310',
+                            'price'=>'305',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'320',
+                            'price'=>'315',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'330',
+                            'price'=>'325',
+                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
                           array(
                             'regular_price'=>'340',
                             'price'=>'335',
@@ -4836,26 +4856,6 @@ class Sample_Data_Template {
                             'regular_price'=>'280',
                             'price'=>'275',
                             'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
-                          array(
-                            'regular_price'=>'300',
-                            'price'=>'295',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'310',
-                            'price'=>'305',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'320',
-                            'price'=>'315',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'330',
-                            'price'=>'325',
-                            'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'7.0')
                           )
                         )
         ),
@@ -4872,7 +4872,7 @@ class Sample_Data_Template {
           'category'=>array('eo_setting_shape_cat','eo_setting_cushion_shape_cat','eo_ring_style_cat','eo_metal_cat','eo_ring_vintage_cat','eo_metal_18k_white_gold_cat','eo_metal_18k_yellow_gold_cat','eo_metal_18k_rose_gold_cat'),
           'attribute'=>array('pa_eo_metal_attr'=>array(
                               'name'=>'pa_eo_metal_attr',
-                              'value'=>'18K Yellow Gold|18K Rose Gold|18K White Gold',
+                              'value'=>'18K Yellow Gold|18K White Gold|18K Rose Gold',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -4888,6 +4888,26 @@ class Sample_Data_Template {
                             )
                     ),
           'variation'=>array(
+                          array(
+                            'regular_price'=>'300',
+                            'price'=>'295',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'4.0')
+                          ),
+                          array(
+                            'regular_price'=>'310',
+                            'price'=>'305',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'5.0')
+                          ),
+                          array(
+                            'regular_price'=>'320',
+                            'price'=>'315',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'6.0')
+                          ),
+                          array(
+                            'regular_price'=>'330',
+                            'price'=>'325',
+                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'7.0')
+                          ),
                           array(
                             'regular_price'=>'340',
                             'price'=>'335',
@@ -4927,26 +4947,6 @@ class Sample_Data_Template {
                             'regular_price'=>'280',
                             'price'=>'275',
                             'terms'=>array('pa_eo_metal_attr'=>'18K Rose Gold','pa_eo_size_attr'=>'7.0')
-                          ),
-                          array(
-                            'regular_price'=>'300',
-                            'price'=>'295',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'4.0')
-                          ),
-                          array(
-                            'regular_price'=>'310',
-                            'price'=>'305',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'5.0')
-                          ),
-                          array(
-                            'regular_price'=>'320',
-                            'price'=>'315',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'6.0')
-                          ),
-                          array(
-                            'regular_price'=>'330',
-                            'price'=>'325',
-                            'terms'=>array('pa_eo_metal_attr'=>'18K White Gold','pa_eo_size_attr'=>'7.0')
                           )
                         )
         ),
