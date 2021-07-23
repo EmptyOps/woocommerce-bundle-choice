@@ -89,11 +89,14 @@ class Product {
             ?>
             <script type="text/javascript">
 
+                document.querySelector('.single_add_to_cart_button:not(#eo_wbc_add_to_cart)').addEventListener("click",function(event) {                         
+                         event.preventDefault();
+                },false);
+
                 let sp_add_to_cart_dots = 1
                 let sp_add_to_cart_dots_interval = window.setInterval(function(){
                     
-                    if(jQuery('#eo_wbc_add_to_cart').length>0) {
-                        console.log('clearing');
+                    if(jQuery('#eo_wbc_add_to_cart,#eo_wbc_add_to_cart_preview').length>0) {                        
                         window.clearInterval(sp_add_to_cart_dots_interval);
                     } else {
                         if(sp_add_to_cart_dots>3) {
@@ -101,7 +104,7 @@ class Product {
                         } else {
                             sp_add_to_cart_dots = sp_add_to_cart_dots+1;
                         }
-                        jQuery('.single_add_to_cart_button:not(#eo_wbc_add_to_cart)').text('.'.repeat(sp_add_to_cart_dots));
+                        jQuery('.single_add_to_cart_button:not(#eo_wbc_add_to_cart,#eo_wbc_add_to_cart_preview)').text('.'.repeat(sp_add_to_cart_dots));
                     }
                 },500);
 
@@ -158,7 +161,8 @@ class Product {
         },10,2);
         //remove options
         add_filter('woocommerce_product_single_add_to_cart_text', function() {
-            return __('Add This To Cart','woo-bundle-choice');
+            return '...';
+            //return __('Add This To Cart','woo-bundle-choice');
         });
 
         add_filter('woocommerce_get_script_data',function($data,$handle){
@@ -529,12 +533,15 @@ class Product {
             // if($category == get_option('eo_wbc_first_slug')){
             if($category == wbc()->options->get_option('configuration','first_slug')){
                 // return get_option('eo_wbc_add_to_cart_text_first', __('Continue', 'woo-bundle-choice'));
-                return wbc()->options->get_option('appearance_product_page','fc_atc_button_text',__('Continue', 'woo-bundle-choice'));
+                /* removed on 21-07-2021 by mahesh@emptyops.com -- to replace with `...` loader */
+                /*return wbc()->options->get_option('appearance_product_page','fc_atc_button_text',__('Continue', 'woo-bundle-choice'));*/
             // } elseif( $category == get_option('eo_wbc_second_slug') ) {
             } elseif( $category == wbc()->options->get_option('configuration','second_slug')) {
                 // return get_option('eo_wbc_add_to_cart_text_second', __('Continue', 'woo-bundle-choice'));
-                return wbc()->options->get_option('appearance_product_page','sc_atc_button_text',__('Continue', 'woo-bundle-choice'));
-            }            
+                /* removed on 21-07-2021 by mahesh@emptyops.com -- to replace with `...` loader */
+                //return wbc()->options->get_option('appearance_product_page','sc_atc_button_text',__('Continue', 'woo-bundle-choice'));
+            }     
+            return '...';       
         });
     }
 

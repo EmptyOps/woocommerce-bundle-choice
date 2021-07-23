@@ -97,8 +97,13 @@ function eo_wbc_filter_render_html(data,render_container) {
 
 /*if(eo_wbc_object.disp_regular=='1'){
 	*/
+	window.eo_wbc_object.enable_filter = true;
 	jQuery.fn.eo_wbc_filter_change_native= function(init_call=false,form_selector="form#eo_wbc_filter",render_container='') {				
 	//flag indicates if to show products in tabular view or woocommerce's default style.		
+
+		if(window.eo_wbc_object.enable_filter===false){
+			return false;
+		}
 
 		if(render_container==='') {
 			render_container = jQuery(".products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)");
@@ -125,7 +130,8 @@ function eo_wbc_filter_render_html(data,render_container) {
 			data:form.serialize(), // form data
 			type:'GET'/*form.attr('method')*/, // POST
 			beforeSend:function(xhr){
-				//jQuery("body").fadeTo('slow','0.3')	
+				//jQuery("body").fadeTo('slow','0.3')
+				window.eo_wbc_object.enable_filter = false;	
 				jQuery("#loading").addClass('loading');							
 				console.log(this.url);					
 			},
@@ -135,6 +141,11 @@ function eo_wbc_filter_render_html(data,render_container) {
 			success:function(data){		
 				//console.log(JSON.stringify(data));
 				eo_wbc_filter_render_html(data,render_container);
+				window.eo_wbc_object.enable_filter = true;
+			},
+			error:function(data){
+				jQuery("#loading").removeClass('loading');
+				window.eo_wbc_object.enable_filter = true;
 			}
 		});
 		return false;
