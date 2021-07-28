@@ -64,7 +64,7 @@ class Filter
 						
 		    add_filter('pre_get_posts',function($query ) {		    		
 
-
+		    	$_GET = apply_filters('filter_widget_ajax_pre_get',$_GET);		        	
 		    	if(apply_filters('eowbc_filter_override',false)){
 		            echo json_encode(apply_filters('eowbc_filter_response',array()));
 		            die();
@@ -72,9 +72,7 @@ class Filter
 
 		        if( $query->is_main_query() ) {
 
-		        	$_GET = apply_filters('filter_widget_ajax_pre_get',$_GET);
-		        	/*echo "<pre>";
-		        	print_r($_GET);*/
+
 
 		        	if(isset($_GET['products_in']) AND !empty(wbc()->sanitize->get('products_in')) ) {
 		        		$query->set('post__in',explode(',',wbc()->sanitize->get('products_in')));			        	
@@ -102,7 +100,8 @@ class Filter
 		                                'taxonomy' => 'product_cat',
 		                                'field' => 'slug',
 		                                'terms' =>array_filter(explode(',',wbc()->sanitize->get('cat_filter_'.$_category))),
-		                                'compare'=>'EXISTS IN'
+		                                'compare'=>'EXISTS IN',
+		                                'include_children' => false
 		                            );
 		                            $tax_query['relation'] = 'AND';
 		                        }
@@ -115,7 +114,8 @@ class Filter
 		                        'taxonomy' => 'product_cat',
 		                        'field' => 'slug',
 		                        'terms' => explode(',',wbc()->sanitize->get('_current_category')),
-		                        'compare'=>'EXISTS IN'
+		                        'compare'=>'EXISTS IN',
+		                        'include_children' => false
 		                    );
 
 		                    $__current_category__ = array_filter(explode(',',wbc()->sanitize->get('_current_category')));
@@ -314,14 +314,6 @@ class Filter
 		        	unset($query->tax_query);
 		        }
 		        
-		        /*if(isset($_GET['test'])){
-			        echo "<pre>";
-			        print_r($tax_query);
-			        print_r($query);			        
-			        echo "</pre>";
-			        die();
-		    	}*/
-
 		        $query->query_vars['suppress_filters'] = true;
 
 		        return apply_filters('filter_widget_ajax_post_query',$query);
