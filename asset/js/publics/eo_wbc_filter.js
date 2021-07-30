@@ -9,6 +9,10 @@ var _render_container = '';
 //render products DOM to view
 function eo_wbc_filter_render_html(data,render_container) {
 
+
+	/*jQuery("#loading").removeClass('loading');
+	return true;*/
+
 	render_data = data;
 	_render_container = render_container;
 
@@ -16,7 +20,6 @@ function eo_wbc_filter_render_html(data,render_container) {
 	//Replace Result Count Status...
 	if(jQuery('.woocommerce-result-count',jQuery(data)).html()!==undefined){								
 		jQuery(".woocommerce-result-count").html(jQuery('.woocommerce-result-count',jQuery(data)).html());
-
 	}
 	else {
 		jQuery(".woocommerce-result-count").html('');	

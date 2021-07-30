@@ -34,3 +34,8 @@
 .ui.table,.ui.segment[class*="bottom attached"]{
   border-radius:0 !important;
 }
+
+.ui.top.attached.tabular.menu.tab-wrapped, .ui.pointing.secondary.menu {
+    overflow-x: auto;
+    overflow-y: hidden;
+}

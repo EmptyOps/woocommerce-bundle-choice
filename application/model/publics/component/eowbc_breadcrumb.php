@@ -238,11 +238,11 @@ class EOWBC_Breadcrumb
         //var_dump(self::eo_wbc_breadcrumb_get_category($product_id));
         
         $product_url = get_permalink($product_id);
-
+        
         if(strpos($product_url,'?') !==false) {
-            $product_url.='?';
-        } else {
             $product_url.='&';
+        } else {
+            $product_url.='?';
         }
 
         if(self::eo_wbc_breadcrumb_get_category($product_id)==self::$first_slug/*get_option('eo_wbc_first_slug')*/) {
