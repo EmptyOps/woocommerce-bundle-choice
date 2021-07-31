@@ -163,7 +163,7 @@ class EOWBC_Filter_Widget {
 			}
 
 			$fg_color=wbc()->session->get('EO_WBC_BG_COLOR',$default_color);			
-
+			
 			$active_color=wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active',$fg_color); //get_option('eo_wbc_active_breadcrumb_color',$fg_color);
 			//wp-head here....
 			echo "<style>
@@ -183,10 +183,18 @@ class EOWBC_Filter_Widget {
 						text-align: center !important;
 					}
 
-					.wbc-button-input.eo_wbc_button_selected,.wbc-button-input:hover{
+					.wbc-button-input.eo_wbc_button_selected {
 						border-top:2px solid ".wbc()->options->get_option('appearance_filters','slider_nodes_backcolor_active',$active_color)." !important;
 						border-bottom:2px solid ".wbc()->options->get_option('appearance_filters','slider_nodes_backcolor_active',$active_color)." !important;
 					}
+
+					@media only screen and (min-width: 768px) {
+						.wbc-button-input:hover {
+						    border-top:2px solid ".wbc()->options->get_option('appearance_filters','slider_nodes_backcolor_active',$active_color)." !important;
+							border-bottom:2px solid ".wbc()->options->get_option('appearance_filters','slider_nodes_backcolor_active',$active_color)." !important;
+						}
+					}
+
 
 					.bottom_filter_segment .ui.equal.width.grid .column{
 						display:block;

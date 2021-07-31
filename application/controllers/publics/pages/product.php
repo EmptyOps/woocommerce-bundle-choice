@@ -303,7 +303,7 @@ class Product {
                                 add_to_cart_id = '<?php echo $product->get_id(); ?>';
                             <?php } ?>
 
-                            if(url.has('/?')) {
+                            if(url.includes('/?')) {
                                 url+='&add-to-cart='+add_to_cart_id;
                             } else if(url.endsWith('/')) {
                                 url+='?add-to-cart='+add_to_cart_id;
