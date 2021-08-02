@@ -273,8 +273,47 @@ class EOWBC_Breadcrumb
             }
         }
 
+        $__get = array();
+
+        $product_root_cat = self::eo_wbc_breadcrumb_get_category($chage_product_id);
+        if(!empty($product_root_cat)) {
+            $product_root_cat = get_term_by('slug',$product_root_cat,'product_cat');
+
+            if(!empty($product_root_cat) and !is_wp_error($product_root_cat)) {
+                $product_root_cat_id = $product_root_cat->term_id;
+
+                if(in_array( $product_root_cat_id, array(wbc()->options->get_option('filters_filter_setting','filter_setting_advance_first_category'), wbc()->options->get_option('filters_filter_setting','filter_setting_advance_second_category')) )) {
+
+                    $product_category_ids = array();
+
+                    $change_product = wbc()->wc->get_product($chage_product_id);
+                    if(!empty($change_product) and !is_wp_error($change_product)) {
+                        $product_category_ids = $change_product->get_category_ids();
+                    }
+
+                    if( !empty($product_category_ids) and in_array( ($product_root_cat_id==wbc()->options->get_option('filters_filter_setting','filter_setting_advance_first_category') ? wbc()->options->get_option('filters_filter_setting','filter_setting_advance_second_category') : wbc()->options->get_option('filters_filter_setting','filter_setting_advance_first_category')) , $product_category_ids ) ) {
+
+                        $__get[(
+
+                            ($product_root_cat_id==wbc()->options->get_option('filters_filter_setting','filter_setting_advance_first_category')) 
+                            ? 
+
+                            wbc()->options->get_option('filters_filter_setting','filter_setting_advance_second_tabs') 
+
+                            : 
+
+                            wbc()->options->get_option('filters_filter_setting','filter_setting_advance_first_tabs')
+                        )] = 1;
+
+                    }
+                }
+            }            
+        }
+        
         if ($order==1) {
             if(self::eo_wbc_breadcrumb_get_category($chage_product_id)==self::$first_slug/*get_option('eo_wbc_first_slug')*/){
+
+                //wbc()->common->get_category('product',$product_id,array(self::$first_slug,self::$second_slug))
 
                 $first_url = \eo\wbc\model\Category_Attribute::instance()->get_category_link(self::$first_slug);
                 // $url=get_bloginfo('url').'/index.php'.$first_url/*get_option('eo_wbc_first_url')*/.
@@ -283,7 +322,7 @@ class EOWBC_Breadcrumb
                 // /*'&FIRST='.sanitize_text_field(empty($_GET['FIRST'])?'':$_GET['FIRST']).
                 // '&SECOND='.sanitize_text_field(empty($_GET['SECOND'])?'':$_GET['SECOND']).*/
                 // '&EO_CHANGE=1';
-                $url=$first_url.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>self::$first_slug,'STEP'=>1,'FIRST'=>'','SECOND'=>'','EO_CHANGE'=>1));
+                $url=$first_url.wbc()->common->http_query( array_replace($__get,array('EO_WBC'=>1,'BEGIN'=>self::$first_slug,'STEP'=>1,'FIRST'=>'','SECOND'=>'','EO_CHANGE'=>1)) ) ;
             }
             elseif (self::eo_wbc_breadcrumb_get_category($chage_product_id)==self::$second_slug/*get_option('eo_wbc_second_slug')*/) {
 
@@ -294,7 +333,7 @@ class EOWBC_Breadcrumb
                 // /*'&FIRST='.sanitize_text_field(empty($_GET['FIRST'])?'':$_GET['FIRST']).
                 // '&SECOND='.sanitize_text_field(empty($_GET['SECOND'])?'':$_GET['SECOND']).*/
                 // '&EO_CHANGE=1';
-                $url=$second_url.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>self::$second_slug,'STEP'=>1,'EO_CHANGE'=>1));
+                $url=$second_url.wbc()->common->http_query(array_replace($__get,array('EO_WBC'=>1,'BEGIN'=>self::$second_slug,'STEP'=>1,'EO_CHANGE'=>1)));
             }            
         }
         elseif ($order==2) {
@@ -475,7 +514,7 @@ class EOWBC_Breadcrumb
             }        
 
             $url=get_bloginfo('url').'/index.php'.'/'.wbc()->wc->wc_permalink('category_base').'/'.$link
-                        .wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>(@wbc()->sanitize->get('BEGIN')),'STEP'=>2,'FIRST'=>(wbc()->sanitize->get('BEGIN')==self::$first_slug? wbc()->sanitize->get('FIRST'):''),'SECOND'=>(wbc()->sanitize->get('BEGIN')==self::$second_slug?wbc()->sanitize->get('SECOND'):''),'EO_CHANGE'=>1,'CAT_LINK'=>$cat_link));            
+                        .wbc()->common->http_query(array_replace($__get,array('EO_WBC'=>1,'BEGIN'=>(@wbc()->sanitize->get('BEGIN')),'STEP'=>2,'FIRST'=>(wbc()->sanitize->get('BEGIN')==self::$first_slug? wbc()->sanitize->get('FIRST'):''),'SECOND'=>(wbc()->sanitize->get('BEGIN')==self::$second_slug?wbc()->sanitize->get('SECOND'):''),'EO_CHANGE'=>1,'CAT_LINK'=>$cat_link)));
                         
             if(!empty($category) && is_array($category)) {
                 $category = array_filter($category);

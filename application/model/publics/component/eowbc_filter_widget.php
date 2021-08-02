@@ -900,12 +900,27 @@ class EOWBC_Filter_Widget {
 		$url = '';
 		if(!empty(wbc()->sanitize->get('BEGIN')) and !empty(wbc()->sanitize->get('STEP')) and isset($_GET['FIRST']) and isset($_GET['SECOND'])) {
 
-			$url = '?'.wbc()->common->http_query(
-				array(
-					'EO_WBC'=>1,
-					'BEGIN'=>wbc()->sanitize->get('BEGIN'),
-					'STEP'=>wbc()->sanitize->get('STEP'),
-					'FIRST'=>(
+			$__get = $_GET;
+			if(isset($__get['EO_WBC'])) {
+				unset($__get['EO_WBC']);
+			}
+			if(isset($__get['BEGIN'])) {
+				unset($__get['BEGIN']);
+			}
+			if(isset($__get['STEP'])) {
+				unset($__get['STEP']);
+			}
+			if(isset($__get['FIRST'])) {
+				unset($__get['FIRST']);
+			}
+			if(isset($__get['SECOND'])) {
+				unset($__get['SECOND']);
+			}
+
+			$__get['EO_WBC'] = 1;
+			$__get['BEGIN'] = wbc()->sanitize->get('BEGIN');
+			$__get['STEP'] = wbc()->sanitize->get('STEP');
+			$__get['FIRST'] = (
 	                	$this->_category==wbc()->options->get_option('configuration','first_slug')
 			                    ?
 			                ''
@@ -917,8 +932,8 @@ class EOWBC_Filter_Widget {
 			                        :
 			                    ''
 			                )
-			            ),
-					'SECOND'=>(
+			            );
+			$__get['SECOND'] =(
 		                $this->_category==wbc()->options->get_option('configuration','second_slug')
 			                    ?
 			                ''
@@ -930,10 +945,12 @@ class EOWBC_Filter_Widget {
 			                        :
 			                    ''
 			                )
-			            ),
-				)
-			);
+			            );
+
+
+			$url = '?'.wbc()->common->http_query($__get);
 		} 
+		
         return $url;
 	}
 
