@@ -466,7 +466,13 @@ class EOWBC_Breadcrumb
                 $post_id=$product->ID;
             } 
 
-            $terms=wp_get_post_terms($post_id,get_taxonomies(),array('fields'=>'ids'));
+            $terms=wp_get_post_terms($post_id,get_taxonomies());
+            if(!empty($terms) and is_array($terms)) {
+                foreach($terms as $_terms_key=>$_terms_value_) {
+                    $terms[$_terms_key] = $_terms_value_->term_taxonomy_id;
+                }
+            }
+
             $maps = apply_filters('eowbc_product_maps',wp_cache_get( 'cache_maps', 'eo_wbc'));
             $groups = wbc()->options->get_option_group('eowbc_mapping_group',"a:0:{}");
             $group_keys = array();
@@ -507,7 +513,7 @@ class EOWBC_Breadcrumb
                             or
                             in_array(
                                 $term_object->slug,
-                                array_values(wc_get_product_variation_attributes($cart['variation_id']))) 
+                                array_values(wc_get_product_variation_attributes($post_id))) 
                         ){
                             $new_terms[]=$term_id;
                         }          
@@ -521,7 +527,7 @@ class EOWBC_Breadcrumb
                 elseif(self::eo_wbc_breadcrumb_get_category($post_id)==self::$second_slug) { $map_column = 1; }
                 
                 $product_code = "pid_{$post_id}";
-                            
+                                
                 if(!empty($terms) and is_array($terms)){
                     $terms =array_filter(array_map(function($map) use(&$terms,&$map_column,&$product_code,&$category){
                         
@@ -539,7 +545,7 @@ class EOWBC_Breadcrumb
                             return false;
                         }                
                     },$maps));
-                }
+                }                
             }
          
             //remove empty array space and duplicate values
@@ -553,10 +559,12 @@ class EOWBC_Breadcrumb
 
             if(!is_wp_error($terms) and !empty($terms)) {
                 array_walk($terms,function($term) use(&$cat,&$tax){
+                    
                     $_term_ = null;
                     if(is_array($term)) {
                         foreach ($term as $_term_) {
                             $_term_ = get_term_by('term_taxonomy_id', $_term_);
+                            
                             if(!is_wp_error($_term_) and !empty($_term_)) {
                                 $_taxonomy_ = $_term_->taxonomy;                            
                                 if($_taxonomy_==='product_cat') {
@@ -571,7 +579,7 @@ class EOWBC_Breadcrumb
                         }
                     } else {
                         $_term_ = get_term_by('term_taxonomy_id', $_term_);
-
+                        
                         if(!is_wp_error($_term_) and !empty($_term_)) {
                             $_taxonomy_ = $_term_->taxonomy;                        
                             if($_taxonomy_==='product_cat') {
@@ -596,6 +604,7 @@ class EOWBC_Breadcrumb
                         if(is_array($term_value)) {
                             foreach ($term_value as $_term_id) {
                                 $_term_ = get_term_by('term_taxonomy_id', $_term_id);
+                                
                                 if(!is_wp_error($_term_) and !empty($_term_)) {
                                     $_taxonomy_ = $_term_->taxonomy;                            
                                     if($_taxonomy_==='product_cat') {
@@ -616,7 +625,7 @@ class EOWBC_Breadcrumb
                             }
                         } else {
                             $_term_ = get_term_by('term_taxonomy_id', $_term_id);
-
+                            
                             if(!is_wp_error($_term_) and !empty($_term_)) {
                                 $_taxonomy_ = $_term_->taxonomy;
                                 if($_taxonomy_==='product_cat') {
@@ -642,11 +651,6 @@ class EOWBC_Breadcrumb
             }
            
             $link='';
-
-            /*echo "<pre>";
-            print_r([$cat,$tax,$gcat,$gtax,$terms]);
-            echo "</pre>";
-            die();*/
 
             //if category maping is available then make url filter to category
             //else add default category to the link.
