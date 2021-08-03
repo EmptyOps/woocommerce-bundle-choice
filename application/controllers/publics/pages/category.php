@@ -55,25 +55,7 @@ class Category {
                     add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
                         return array( false );
                     });
-                }
-                ob_start();        
-                ?>
-                <style type="text/css">
-                    .woocommerce-products-header__title page-title{
-                        display: none;
-                    }
-                    .woocommerce .content-area ,#content,#primary,#main,.content,.primary,.main{
-                          width: 100% !important;
-                     }
-                     .woocommerce .widget-area {
-                          display: none !important;
-                     }
-                     .tax-product_cat .thb-shop-title {
-                      display: none;
-                    }
-                </style>
-                <?php
-                echo ob_get_clean();
+                }                
                 /*End --Hide sidebar and make content area full width.*/
 
                 if(
@@ -223,6 +205,7 @@ class Category {
 
     public function eo_wbc_render()
     {   
+
         $features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())));
         
         if( !empty($features['pair_maker'])/*get_option('eo_wbc_pair_maker_status',FALSE)*/ && isset($_GET) && !empty(wbc()->sanitize->get('STEP')) && wbc()->sanitize->get('STEP')==2 && (empty(wbc()->sanitize->get('FIRST')) XOR empty(wbc()->sanitize->get('SECOND'))) ) {
@@ -239,8 +222,21 @@ class Category {
             },100);
 
             add_action('wp_head',function(){
-                ?>
+                ?>                
                     <style type="text/css">
+                        .woocommerce-products-header__title page-title{
+                            display: none;
+                        }
+                        .woocommerce .content-area ,#content,#primary,#main,.content,.primary,.main{
+                              width: 100% !important;
+                         }
+                         .woocommerce .widget-area {
+                              display: none !important;
+                         }
+                         .tax-product_cat .thb-shop-title {
+                          display: none;
+                        }
+                                          
                         .products{
                             display: none !important;
                         }                        
