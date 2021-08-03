@@ -29,7 +29,7 @@ class Migration_010004 {
 
 	public function option() {
 		
-		$mapping = unserialize(wbc()->options->get('eowbc_option_mapping_map_creation_modification',array()));
+		$mapping = unserialize(wbc()->options->get('eowbc_option_mapping_map_creation_modification','a:0:{}'));
 
 		//$mapping = unserialize(get_option('eo_wbc_cat_maps',"a:0:{}"));
 		if(!empty($mapping) and is_array($mapping)){
