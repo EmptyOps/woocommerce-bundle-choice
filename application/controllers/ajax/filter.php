@@ -80,19 +80,13 @@ class Filter
 
         	if(!empty(wbc()->sanitize->request('_category'))) {
         		//////////////////////////////////////////////////
-        		//echo wbc()->sanitize->request('_category').PHP_EOL;
+        		$__category_list = array_unique(array_filter(explode(',', wbc()->sanitize->request('_category'))));
 
-        		//print_r($_GET);
+        		if(!in_array('cat_link',$__category_list)){
+        			$__category_list[]='cat_link';
+        		}
 
-        		/*print_r($_REQUEST);
-
-        		print_r($_POST);*/
-
-        		//print_r(array_unique(array_filter(explode(',', wbc()->sanitize->get('_category')))));
-
-        		//print_r(array_unique(array_filter(explode(',', wbc()->sanitize->request('_category')))));
-
-				foreach( array_unique(array_filter(explode(',', wbc()->sanitize->request('_category')))) as $_category) {
+				foreach($__category_list  as $_category) {
 					////////////////////////
 					//echo $_category.PHP_EOL;
 
