@@ -22,7 +22,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 		public static function eo_wbc_prime_category($slug='',$prefix='',$opts_arr=array()) {        
         
 	        $map_base = get_categories(array(
-	            'hierarchical' => 1,
+	            'hierarchical' => false,
 	            'show_option_none' => '',
 	            'hide_empty' => 0,
 	            'parent' => !empty(get_term_by('slug',$slug,'product_cat')) ?get_term_by('slug',$slug,'product_cat')->term_id : '',
@@ -31,9 +31,16 @@ if ( ! class_exists( 'Mapping' ) ) {
 	        
 	        // $category_option_list='';
 	        
-	        foreach ($map_base as $base) {            
+	        foreach ($map_base as $base) {  
+
+	        	$parent_name='';
+	        	if(!empty($base->parent)) {
+	        		$parent_name = (!empty(get_term_by('id',$base->parent,'product_cat')) ?' - '.get_term_by('id',$base->parent,'product_cat')->name : '');
+	        	}
+
+
 	            // $category_option_list.= "<div class='item' data-value='".$base->term_taxonomy_id."'>".$prefix.$base->name."</div>".eo_wbc_prime_category($base->slug, $prefix.'-');
-	            $opts_arr[$base->term_taxonomy_id] = array( 'label'=>$prefix.$base->name );
+	            $opts_arr[$base->term_taxonomy_id] = array( 'label'=>$prefix.$base->name.$parent_name );
 		        $opts_arr = \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_prime_category($base->slug, $prefix.'-',$opts_arr);
 	        }
 

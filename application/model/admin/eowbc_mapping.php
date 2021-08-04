@@ -250,7 +250,7 @@ class Eowbc_Mapping extends Eowbc_Model {
 
         // return $res;
 
-		$check_by_id=true;
+		//$check_by_id=true;
         return parent::delete( $ids, 'mapping_'.$saved_tab_key, $check_by_id );
 	}
 
