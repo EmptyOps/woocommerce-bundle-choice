@@ -3,7 +3,6 @@
 *	Ajax handler to handle ajax save request for eowbc_filters form.	
 *
 */
-
 $res = array( "type"=>"success", "msg"=>"" );
 
 function sp_validate_unique_email($fields,$key) {
@@ -31,12 +30,14 @@ if( !empty(wbc()->sanitize->post('_wpnonce')) ) {
 	$subject_template = wbc()->sanitize->post('email_header_template');
 	$subject_template = explode(',',$subject_template);
 	if(empty($subject_template) or count($subject_template)!==2){
+		$res["msg"]="Failed to send email(CODE:MISCONF_EMAIL_HEADER)";
 		$res["type"]="error";
 	}
 
 	$email_template = wbc()->sanitize->post('email_body_template');
 	$email_template = explode(',',$email_template);
 	if(empty($email_template) or count($email_template)!==2){
+		$res["msg"]="Failed to send email(CODE:MISCONF_EMAIL_BODY)";
 		$res["type"]="error";
 	}
 
@@ -81,6 +82,14 @@ if( !empty(wbc()->sanitize->post('_wpnonce')) ) {
 										$res["type"]="error";
 										$res["msg"]=$field_value['label'].' is not a unique email.';
 										wbc()->rest->response($res);	
+										die();
+									}
+									break;
+								case 'numeric':
+									if(!is_numeric(wbc()->sanitize->post($field_key))){
+										$res["type"]="error";
+										$res["msg"]=$field_value['label'].' is not a numeric value.';
+										wbc()->rest->response($res);
 										die();
 									}
 							}
@@ -215,8 +224,8 @@ if( !empty(wbc()->sanitize->post('_wpnonce')) ) {
 			$email_field_vars = explode(',',$email_field_vars);
 		}
 		if(!empty($email_field_vars) and is_array($email_field_vars)){
-			foreach ($email_field_vars as $email_field_var) {
-				$email_template = str_replace('{'.$email_field_var.'}',wbc()->sanitize->post($email_field_var), $email_template);	
+			foreach ($email_field_vars as $email_field_key=>$email_field_var) {
+				$email_template = str_replace('{'.$email_field_key.'}',wbc()->sanitize->post($email_field_key), $email_template);	
 			}
 		}
 			
@@ -230,6 +239,7 @@ if( !empty(wbc()->sanitize->post('_wpnonce')) ) {
 		}
 
 	} else {
+		$res["msg"]="Failed to send email(CODE:MISCONF_EMAIL_HEADER|MISCONF_EMAIL_BODY)";
 		$res["type"]="error";
 	}
 }

@@ -144,7 +144,8 @@ class Product {
         add_filter( 'the_title',function($title, $id) use($first,$second,$first_parent,$second_parent){                        
 
             if(!empty($second) and !empty($first) and ($id === $second_parent->get_id()) ) {                
-                return $first->get_title()." <br/> ".$second->get_title();
+                //return $first->get_title()." <br/> ".$second->get_title();
+                return "<span class='wcp_preview_first_product_title' style='font-size: 1.6rem;line-height: 2.4rem;white-space: nowrap;width: 24em;overflow: hidden;text-overflow: ellipsis;float: left;' >".$first->get_title()." - ".wc_price($first->get_price())."</span><br/><span class='wcp_preview_second_product_title' style='font-size: 1.6rem;line-height: 2.4rem;white-space: nowrap;width: 24em;overflow: hidden;text-overflow: ellipsis;float: left;'>".$second->get_title()." - ". wc_price($second->get_price()).'</span>';
             } else {
                 return $title;
             }
