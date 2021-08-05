@@ -44,7 +44,7 @@ if(!class_exists('WBC_Migration')) {
 
 			// An array of versions. eg: 1.2.3 and file name
 			//$versions = array('0.0.0.1'=>'Sample_Migration');			
-			$versions = array('0.5.0'=>'Migration_000500','0.5.70'=>'Migration_000570','1.0.4'=>'Migration_010004');
+			$versions = array('0.5.0'=>'Migration_000500','0.5.70'=>'Migration_000570','1.0.4'=>'Migration_010004','1.0.5'=>'Migration_010004');
 
 			/*if(empty($version)) {
 				wbc()->options->update_option('_system','version', constant('EOWBC_VERSION'));
