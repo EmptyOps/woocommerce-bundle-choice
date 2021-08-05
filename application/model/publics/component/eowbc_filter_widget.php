@@ -2055,7 +2055,8 @@ class EOWBC_Filter_Widget {
 				}
 
 				if(!empty(wbc()->sanitize->get('ATT_LINK'))) {
-					$query_list = explode(' ',wbc()->sanitize->get('ATT_LINK'));
+					$query_list = array_filter(explode('|',str_replace([' ','+',','],'|',wbc()->sanitize->get('ATT_LINK'))));
+					/*$query_list = explode(' ',wbc()->sanitize->get('ATT_LINK'));*/
 				}
 
 				$mark = in_array($term_item->id,$query_list);				
@@ -2076,7 +2077,8 @@ class EOWBC_Filter_Widget {
 				}
 				
 				if(!empty(wbc()->sanitize->get('CAT_LINK'))) {
-					$query_list = explode(' ',wbc()->sanitize->get('CAT_LINK'));
+					$query_list = array_filter(explode('|',str_replace([' ','+',','],'|',wbc()->sanitize->get('CAT_LINK'))));
+					/*$query_list = explode('|', str_replace('' wbc()->sanitize->get('CAT_LINK') );*/
 				}
 
 				$mark = in_array($term_item->slug,$query_list);
