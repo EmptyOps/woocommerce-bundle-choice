@@ -5388,8 +5388,8 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Cusion Diamond #87671292',
-          'thumb'=>$_img_url.'Products/Cusion-1.jpg',
-          'images'=>array('Cusion-2.jpg'),
+          'thumb'=>$_img_url.'Products/1_cushion_new.png',
+          'images'=>array('1_cushion_new.png'),
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -5604,7 +5604,7 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Marquise Diamond #16931364',
-          'thumb'=>$_img_url.'Products/Marquise-1.jpg',
+          'thumb'=>$_img_url.'Products/1_marquise_new.png',
           'images'=>array('Marquise-2.jpg'),
           'content'=>'',
           'regular_price'=>'',
@@ -6471,8 +6471,8 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Cusion Diamond #10000054',
-          'thumb'=>$_img_url.'Products/Cusion-1.jpg',
-          'images'=>array('Cusion-2.jpg'),
+          'thumb'=>$_img_url.'Products/1_cushion_new.png',
+          'images'=>array('1_cushion_new.png'),
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -6687,7 +6687,7 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Marquise Diamond #10000056',
-          'thumb'=>$_img_url.'Products/Marquise-1.jpg',
+          'thumb'=>$_img_url.'Products/1_marquise_new.png',
           'images'=>array('Marquise-2.jpg'),
           'content'=>'',
           'regular_price'=>'',
@@ -7554,8 +7554,8 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Cusion Diamond #10000064',
-          'thumb'=>$_img_url.'Products/Cusion-1.jpg',
-          'images'=>array('Cusion-2.jpg'),
+          'thumb'=>$_img_url.'Products/1_cushion_new.png',
+          'images'=>array('1_cushion_new.png'),
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -7770,7 +7770,7 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Marquise Diamond #10000066',
-          'thumb'=>$_img_url.'Products/Marquise-1.jpg',
+          'thumb'=>$_img_url.'Products/1_marquise_new.png',
           'images'=>array('Marquise-2.jpg'),
           'content'=>'',
           'regular_price'=>'',
@@ -8637,8 +8637,8 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Cusion Diamond #10000074',
-          'thumb'=>$_img_url.'Products/Cusion-1.jpg',
-          'images'=>array('Cusion-2.jpg'),
+          'thumb'=>$_img_url.'Products/1_cushion_new.png',
+          'images'=>array('1_cushion_new.png'),
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -8853,7 +8853,7 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Marquise Diamond #10000076',
-          'thumb'=>$_img_url.'Products/Marquise-1.jpg',
+          'thumb'=>$_img_url.'Products/1_marquise_new.png',
           'images'=>array('Marquise-2.jpg'),
           'content'=>'',
           'regular_price'=>'',
@@ -9720,8 +9720,8 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Cusion Diamond #10000084',
-          'thumb'=>$_img_url.'Products/Cusion-1.jpg',
-          'images'=>array('Cusion-2.jpg'),
+          'thumb'=>$_img_url.'Products/1_cushion_new.png',
+          'images'=>array('1_cushion_new.png'),
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -9936,7 +9936,7 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Marquise Diamond #10000086',
-          'thumb'=>$_img_url.'Products/Marquise-1.jpg',
+          'thumb'=>$_img_url.'Products/1_marquise_new.png',
           'images'=>array('Marquise-2.jpg'),
           'content'=>'',
           'regular_price'=>'',
@@ -10803,8 +10803,8 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Cusion Diamond #10000094',
-          'thumb'=>$_img_url.'Products/Cusion-1.jpg',
-          'images'=>array('Cusion-2.jpg'),
+          'thumb'=>$_img_url.'Products/1_cushion_new.png',
+          'images'=>array('1_cushion_new.png'),
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
@@ -11019,7 +11019,7 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Marquise Diamond #10000096',
-          'thumb'=>$_img_url.'Products/Marquise-1.jpg',
+          'thumb'=>$_img_url.'Products/1_marquise_new.png',
           'images'=>array('Marquise-2.jpg'),
           'content'=>'',
           'regular_price'=>'',
@@ -11890,8 +11890,8 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Lab Cusion Diamond #10000104',
-          'thumb'=>$_img_url.'Products/Cusion-1.jpg',
-          'images'=>array('Cusion-2.jpg'),
+          'thumb'=>$_img_url.'Products/1_cushion_new.png',
+          'images'=>array('1_cushion_new.png'),
           'content'=>'',
           'sku'=>'LAB-810000104',
           'regular_price'=>'',
@@ -12108,7 +12108,7 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Lab Marquise Diamond #10000106',
-          'thumb'=>$_img_url.'Products/Marquise-1.jpg',
+          'thumb'=>$_img_url.'Products/1_marquise_new.png',
           'images'=>array('Marquise-2.jpg'),
           'content'=>'',
           'sku'=>'LAB-810000106',
@@ -12983,8 +12983,8 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Lab Cusion Diamond #10000114',
-          'thumb'=>$_img_url.'Products/Cusion-1.jpg',
-          'images'=>array('Cusion-2.jpg'),
+          'thumb'=>$_img_url.'Products/1_cushion_new.png',
+          'images'=>array('1_cushion_new.png'),
           'content'=>'',
           'sku'=>'LAB-810000114',
           'regular_price'=>'',
@@ -13201,7 +13201,7 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Lab Marquise Diamond #10000116',
-          'thumb'=>$_img_url.'Products/Marquise-1.jpg',
+          'thumb'=>$_img_url.'Products/1_marquise_new.png',
           'images'=>array('Marquise-2.jpg'),
           'content'=>'',
           'sku'=>'LAB-810000116',
@@ -14076,8 +14076,8 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Lab Cusion Diamond #10000124',
-          'thumb'=>$_img_url.'Products/Cusion-1.jpg',
-          'images'=>array('Cusion-2.jpg'),
+          'thumb'=>$_img_url.'Products/1_cushion_new.png',
+          'images'=>array('1_cushion_new.png'),
           'content'=>'',
           'sku'=>'LAB-810000124',
           'regular_price'=>'',
@@ -14294,7 +14294,7 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Lab Marquise Diamond #10000126',
-          'thumb'=>$_img_url.'Products/Marquise-1.jpg',
+          'thumb'=>$_img_url.'Products/1_marquise_new.png',
           'images'=>array('Marquise-2.jpg'),
           'content'=>'',
           'sku'=>'LAB-810000126',
