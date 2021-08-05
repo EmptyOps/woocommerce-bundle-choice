@@ -81,7 +81,7 @@ class Eowbc_Sample_Data {
 	    
 	        //Send for creation and update returned array.
 
-	        $catat_attribute = unserialize( wbc()->options->get($feature_key.'_created_attribute'), 'a:0:{}' ); 	//$this->create_attribute($attributes);            
+	        $catat_attribute = unserialize(wbc()->options->get($feature_key.'_created_attribute','a:0:{}')); 	//$this->create_attribute($attributes);            
 	        
 	        // update_option('eo_wbc_attr',serialize($catat_attribute));
 	        wbc()->options->set('eo_wbc_attr',serialize($catat_attribute));
