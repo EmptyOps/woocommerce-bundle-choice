@@ -5604,7 +5604,7 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Marquise Diamond #16931364',
-          'thumb'=>$_img_url.'Products/Marquise-1.jpg',
+          'thumb'=>$_img_url.'Products/1_marquise_new.png',
           'images'=>array('Marquise-2.jpg'),
           'content'=>'',
           'regular_price'=>'',
@@ -6687,7 +6687,7 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Marquise Diamond #10000056',
-          'thumb'=>$_img_url.'Products/Marquise-1.jpg',
+          'thumb'=>$_img_url.'Products/1_marquise_new.png',
           'images'=>array('Marquise-2.jpg'),
           'content'=>'',
           'regular_price'=>'',
@@ -7770,7 +7770,7 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Marquise Diamond #10000066',
-          'thumb'=>$_img_url.'Products/Marquise-1.jpg',
+          'thumb'=>$_img_url.'Products/1_marquise_new.png',
           'images'=>array('Marquise-2.jpg'),
           'content'=>'',
           'regular_price'=>'',
@@ -8853,7 +8853,7 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Marquise Diamond #10000076',
-          'thumb'=>$_img_url.'Products/Marquise-1.jpg',
+          'thumb'=>$_img_url.'Products/1_marquise_new.png',
           'images'=>array('Marquise-2.jpg'),
           'content'=>'',
           'regular_price'=>'',
@@ -9936,7 +9936,7 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Marquise Diamond #10000086',
-          'thumb'=>$_img_url.'Products/Marquise-1.jpg',
+          'thumb'=>$_img_url.'Products/1_marquise_new.png',
           'images'=>array('Marquise-2.jpg'),
           'content'=>'',
           'regular_price'=>'',
@@ -11019,7 +11019,7 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Marquise Diamond #10000096',
-          'thumb'=>$_img_url.'Products/Marquise-1.jpg',
+          'thumb'=>$_img_url.'Products/1_marquise_new.png',
           'images'=>array('Marquise-2.jpg'),
           'content'=>'',
           'regular_price'=>'',
@@ -12108,7 +12108,7 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Lab Marquise Diamond #10000106',
-          'thumb'=>$_img_url.'Products/Marquise-1.jpg',
+          'thumb'=>$_img_url.'Products/1_marquise_new.png',
           'images'=>array('Marquise-2.jpg'),
           'content'=>'',
           'sku'=>'LAB-810000106',
@@ -13201,7 +13201,7 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Lab Marquise Diamond #10000116',
-          'thumb'=>$_img_url.'Products/Marquise-1.jpg',
+          'thumb'=>$_img_url.'Products/1_marquise_new.png',
           'images'=>array('Marquise-2.jpg'),
           'content'=>'',
           'sku'=>'LAB-810000116',
@@ -14294,7 +14294,7 @@ class Sample_Data_Template {
         ),
         array(
           'title'=>'Lab Marquise Diamond #10000126',
-          'thumb'=>$_img_url.'Products/Marquise-1.jpg',
+          'thumb'=>$_img_url.'Products/1_marquise_new.png',
           'images'=>array('Marquise-2.jpg'),
           'content'=>'',
           'sku'=>'LAB-810000126',
