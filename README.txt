@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=hi000
 Requires at least: 3.5
 Tested up to: 5.5
 Requires PHP: 5.6
-Stable tag: 1.0.4
+Stable tag: 1.0.8
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -233,6 +233,8 @@ Yes, it is.
 5. Home page after plugin fully configured.
 
 == Changelog ==
+= 1.0.8 (Aug 05,2021) =
+  ** - **
 = 1.0.4 (Sep 25,2020) =
   ** Note 1 ** This is a few migration-related fixes from our older version so you should update to this version to fix any issues. 
   ** Note 2 ** After the update is complete refresh the wp-admin page you are on or simply once visit the dashboard and then access our plugin admin pages because if you don't refresh and access our admin pages you will see error "Sorry, you are not allowed to access this page" since our menu link structure is changed.  
