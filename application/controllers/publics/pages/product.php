@@ -145,7 +145,7 @@ class Product {
 
             if(!empty($second) and !empty($first) and ($id === $second_parent->get_id()) ) {                
                 //return $first->get_title()." <br/> ".$second->get_title();
-                return "<span class='wcp_preview_first_product_title' style='font-size: 1.6rem;line-height: 2.4rem;white-space: nowrap;width: 24em;overflow: hidden;text-overflow: ellipsis;float: left;' >".$first->get_title()." - ".wc_price($first->get_price())."</span><br/><span class='wcp_preview_second_product_title' style='font-size: 1.6rem;line-height: 2.4rem;white-space: nowrap;width: 24em;overflow: hidden;text-overflow: ellipsis;float: left;'>".$second->get_title()." - ". wc_price($second->get_price()).'</span>';
+                return "<span class='wcp_preview_first_product_title'>".$first->get_title()." - ".wc_price($first->get_price())."</span><br/><span class='wcp_preview_second_product_title'>".$second->get_title()." - ". wc_price($second->get_price()).'</span>';
             } else {
                 return $title;
             }
@@ -176,6 +176,7 @@ class Product {
         add_action('wp_head',function(){
             wp_dequeue_script('wc-add-to-cart-variation');
             ?>
+            <style> body .wcp_preview_first_product_title, body .wcp_preview_second_product_title{font-size: 1.6rem;line-height: 2.4rem;white-space: nowrap;width: 24rem;overflow: hidden;text-overflow: ellipsis;float: left;} @media only screen and (max-width: 480px) { body .wcp_preview_first_product_title, body .wcp_preview_second_product_title { font-size: 1rem !important; line-height: 2rem !important; width: inherit !important; word-break: break-word; max-width: 20rem; } } @media only screen and (max-width: 320px) { body .wcp_preview_first_product_title, body .wcp_preview_second_product_title { font-size: 1rem !important; line-height: 2rem !important; width: inherit !important; word-break: break-word; max-width: 17rem; } }</style>
             <style type="text/css">table.variations{display: none;}</style>
             <script type="text/javascript">
                 jQuery(".single_add_to_cart_button.button.alt").ready(function(){
