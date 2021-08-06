@@ -421,11 +421,11 @@ class EOWBC_Breadcrumb
             if(self::eo_wbc_breadcrumb_get_category($chage_product_id)==self::$first_slug) {
 
                 $first_url = \eo\wbc\model\Category_Attribute::instance()->get_category_link(self::$first_slug);        
-                $url=$first_url.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>self::$first_slug,'STEP'=>1,'FIRST'=>'','SECOND'=>$second_id,'EO_CHANGE'=>1));
+                $url=$first_url.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>self::$first_slug,'STEP'=>1,'FIRST'=>$first_id,'SECOND'=>$second_id,'EO_CHANGE'=>1));
             } elseif (self::eo_wbc_breadcrumb_get_category($chage_product_id)==self::$second_slug) {
 
                 $second_url = \eo\wbc\model\Category_Attribute::instance()->get_category_link(self::$second_slug);
-                $url=$second_url.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>self::$second_slug,'STEP'=>1,'FIRST'=>$first_id,'SECOND'=>'','EO_CHANGE'=>1));
+                $url=$second_url.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>self::$second_slug,'STEP'=>1,'FIRST'=>$first_id,'SECOND'=>$second_id,'EO_CHANGE'=>1));
             }
         }
         elseif ($order==2) {
@@ -726,7 +726,7 @@ class EOWBC_Breadcrumb
             //$url=$link.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>(@wbc()->sanitize->get('BEGIN')),'STEP'=>2,'FIRST'=>(wbc()->sanitize->get('BEGIN')==self::$first_slug? wbc()->sanitize->get('FIRST'):''),'SECOND'=>(wbc()->sanitize->get('BEGIN')==self::$second_slug?wbc()->sanitize->get('SECOND'):''),'EO_CHANGE'=>1,'CAT_LINK'=>$cat_link));
 
             $url=get_bloginfo('url').'/index.php'.'/'.wbc()->wc->wc_permalink('category_base').'/'.$link
-                        .wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>(@wbc()->sanitize->get('BEGIN')),'STEP'=>2,'FIRST'=>(wbc()->sanitize->get('BEGIN')==self::$first_slug? wbc()->sanitize->get('FIRST'):''),'SECOND'=>(wbc()->sanitize->get('BEGIN')==self::$second_slug?wbc()->sanitize->get('SECOND'):''),'EO_CHANGE'=>1,'CAT_LINK'=>$CAT_LINK));
+                        .wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>(@wbc()->sanitize->get('BEGIN')),'STEP'=>2,'FIRST'=>$first_id/*(wbc()->sanitize->get('BEGIN')==self::$first_slug? wbc()->sanitize->get('FIRST'):'')*/,'SECOND'=>$second_id/*(wbc()->sanitize->get('BEGIN')==self::$second_slug?wbc()->sanitize->get('SECOND'):'')*/,'EO_CHANGE'=>1,'CAT_LINK'=>$CAT_LINK));
 
             /////////////////////////////////////////////////////////
 

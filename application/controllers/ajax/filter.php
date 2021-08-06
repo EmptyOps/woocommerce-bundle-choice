@@ -75,6 +75,7 @@ class Filter
         $category_fields = array();
         $attribute_fields = array();
         $checklist_attribute_fields = array();
+        $_category_query_list = array();
 
         if( isset($_REQUEST['_category']) OR isset($_REQUEST['_current_category']) ) {
 
@@ -91,33 +92,28 @@ class Filter
 					//echo $_category.PHP_EOL;
 
 					if(isset($_REQUEST['cat_filter_'.$_category]) && (!empty(wbc()->sanitize->request('cat_filter_'.$_category))) ) {
-						////////////////////////////////////////////////////////
-						//echo 'FIELD: '.wbc()->sanitize->request('cat_filter_'.$_category).PHP_EOL;
-						$result_false = false;
-						/*foreach (array_filter(explode('|', str_replace([',','+'],'|',wbc()->sanitize->request('cat_filter_'.$_category)) )) as $_category_field) {
-							//////////////////////////////
-							//echo 'ITEM: '.$_category_field.PHP_EOL;
-							if(!empty($table_columns['category'][$_category_field])){
-								$category_fields [] = $_category_field;
-							} else {
-								$result_false = true;
-							}
-						}*/
-
 						
-						foreach ( array_filter(explode('+',wbc()->sanitize->request('cat_filter_'.$_category))) as $_category_field_index=>$_category_field) {
-							//////////////////////////////
-							//echo 'ITEM: '.$_category_field.PHP_EOL;
-
-							$_category_field_chunk = array_filter(explode(',',$_category_field));
+						$result_false = false;
+												
+						foreach ( array_filter(explode(',',wbc()->sanitize->request('cat_filter_'.$_category))) as $_category_field_index=>$_category_field) {
+						
+							$_category_field_chunk = array_filter(explode('+',$_category_field));
 
 							if(!empty($_category_field_chunk) and is_array($_category_field_chunk)) {
 								
-								$category_fields [$_category_field_index] = array();
-
 								foreach($_category_field_chunk as $_category_field_chunk_) {
 									if(!empty($table_columns['category'][$_category_field_chunk_])){
-										$category_fields [$_category_field_index][] = $_category_field_chunk_;
+										if('cat_filter_cat_link' !== 'cat_filter_'.$_category && !empty(wbc()->sanitize->request('cat_filter_cat_link'))) {
+
+											$_category_query_list[] = $_category_field_chunk_;
+
+										} else {
+											if(empty($category_fields[$_category_field_index])) {
+												$category_fields[$_category_field_index] = array();
+											}
+
+											$category_fields[$_category_field_index][] = $_category_field_chunk_;
+										}
 									} else {
 										$result_false = true;
 									}		
@@ -129,19 +125,16 @@ class Filter
 							
 						}
 
-						if(empty($category_fields) and $result_false === true){
-							//$category_fields['product_id']='-1';
-							//$category_fields[]='product_id';
+						if(empty($category_fields) and $result_false === true){							
 							return array();
 						}
                     }
 				}        		
         	} 
         
-        	$_category_query_list = array();
-        	if(!empty(wbc()->sanitize->request('_category_query'))) {
+        	
+        	if(!empty(wbc()->sanitize->request('_category_query')) and empty(wbc()->sanitize->request('CAT_LINK'))) {
         		$_category_query = array_filter(explode(',',wbc()->sanitize->request('_category_query')));
-
 
         		foreach ($_category_query as $_category_field) {
         			$_category_field = array_filter(explode('+',$_category_field));
@@ -222,14 +215,14 @@ class Filter
         				$field_query_or[]="`${field_or}` != 0";
         			}
 
-        			$field_query_and[] = "(" .implode(' OR ',$field_query_or) .")";
+        			$field_query_and[] = "(" .implode(' AND ',$field_query_or) .")";
 
         		} else{
         			$field_query_and[] = "`${field_and}` != 0";	
         		}
         	}
 
-        	$category_fields = "(" .implode(' AND ',$field_query_and) .")"; 
+        	$category_fields = "(" .implode(' OR ',$field_query_and) .")"; 
 
         	/*if(wbc()->options->get_option('mapping_prod_mapping_pref','prod_mapping_pref_category','and')==='and'){
         		$category_fields = "(" .implode(' AND ',$field_query) .")"; 
@@ -293,8 +286,12 @@ class Filter
 
         global $wpdb;
         
-     	//echo "SELECT `product_id`,`parent_id` FROM `{$wpdb->wc_product_meta_lookup}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql}";
-        //die();
+        /*echo "<pre>";
+        print_r($_REQUEST);
+        echo "</pre>";
+
+     	echo "SELECT `product_id`,`parent_id` FROM `{$wpdb->wc_product_meta_lookup}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql}";
+        die();*/
 
         if($return_query) {
         	return "SELECT `product_id`,`parent_id` FROM `{$wpdb->wc_product_meta_lookup}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql}";

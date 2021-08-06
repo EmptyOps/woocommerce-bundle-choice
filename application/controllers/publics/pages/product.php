@@ -433,17 +433,13 @@ class Product {
     }
         
     public function get_group_id4map($groups,$term_key,$terms) {        
-        $option_key = '';
+        $option_key = array();
         foreach ($groups as $gkey => $gvalue) {
-            if(array_search($term_key,$gvalue)!==false){
-                $option_key = $gkey;
+            if(array_search($term_key,$gvalue)!==false and !empty(array_intersect(array_diff(array_keys($terms),array($term_key)),$gvalue)) ){                
+                $option_key[$gkey] = $gkey;
             }
-
-            if( count(array_intersect($gvalue,array_keys($terms))) === count($terms) ) {
-                return $gkey;
-            }
-        }
-        return $option_key;
+        }               
+        return array_values($option_key);
     }
 
     /**
@@ -618,9 +614,13 @@ class Product {
                                 $_taxonomy_ = $_term_->taxonomy;                            
                                 if($_taxonomy_==='product_cat') {
 
-                                    $group_keys_id  = $this->get_group_id4map($groups,$term_key,$terms);
-                                    $gcategory[$group_keys_id][]= $_term_->slug;
+                                    $group_keys_ids  = $this->get_group_id4map($groups,$term_key,$terms);
 
+                                    if(!empty($group_keys_ids) and is_array($group_keys_ids)) {
+                                        foreach($group_keys_ids as $group_keys_id) {
+                                            $gcategory[$group_keys_id][]= $_term_->slug;        
+                                        }
+                                    }                                                                        
                                 } elseif( substr($_taxonomy_,0,3) =='pa_' ) {
 
                                     $gtaxonomy[substr($_term_->taxonomy,3)][] = $_term_->slug;
@@ -634,9 +634,16 @@ class Product {
                             $_taxonomy_ = $_term_->taxonomy;
                             if($_taxonomy_==='product_cat') {
 
+                                $group_keys_ids  = $this->get_group_id4map($groups,$term_key,$terms);
+                                if(!empty($group_keys_ids) and is_array($group_keys_ids)) {
+                                    foreach($group_keys_ids as $group_keys_id) {
+                                        $gcategory[$group_keys_id][]= $_term_->slug;        
+                                    }
+                                }
+
                                 /*$gcategory[$term_key][]= $_term_->slug;*/
-                                $group_keys_id  = $this->get_group_id4map($groups,$term_key);
-                                $gcategory[$group_keys_id][]= $_term_->slug;
+                                /*$group_keys_id  = $this->get_group_id4map($groups,$term_key);
+                                $gcategory[$group_keys_id][]= $_term_->slug;*/
 
                             } elseif( substr($_taxonomy_,0,3) =='pa_' ) {
                                 
@@ -648,7 +655,12 @@ class Product {
                 }
             }
         }
-        
+
+        //$gcategory_preserve = $gcategory;
+        /*$gcategory = array_filter($gcategory,function($_gcategory) use($gcategory_preserve) {            
+            if(count($_gcategory)==1){ return false; } else { return true; }
+        });*/
+                
         $link='';        
         //if category maping is available then make url filter to category
         //else add default category to the link.
