@@ -227,7 +227,7 @@ class UI_Builder implements Builder {
 								]
 							);
 
-/*							$object->add_control(
+							/*$object->add_control(
 								$form_key.'_dimension',
 								[
 									'label' => $form_value['appearence_controls'][0],
@@ -243,9 +243,7 @@ class UI_Builder implements Builder {
 									'include' => [],
 									'default' => 'large',
 								]
-							);
-
-							
+							);							
 							break;						
 					}				
 
