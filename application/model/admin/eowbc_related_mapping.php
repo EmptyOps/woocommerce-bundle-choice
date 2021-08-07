@@ -337,11 +337,31 @@ class Eowbc_Related_Mapping /*extends Eowbc_Model*/ {
 		                            'value'   => array(
 		                            				$product->get_price()-abs($map_value['second_term_down_limit'])
 		                                            ,
-		                                            $product->get_price()+abs($map_value['second_term_upper_limit']),
+		                                            $product->get_price()-1,
 		                                        ),
 		                            'type'    => 'numeric',
 		                            'compare' => 'BETWEEN',
 		                    );
+
+		                    if(empty($map_value['second_term_upper_limit'])) {
+		                    	$meta_query[] = array(
+		                            'key'     => '_price',
+		                            'value'   => abs($product->get_price()+1),
+		                            'type'    => 'numeric',
+		                            'compare' => '>',
+			                    );
+		                    } else {
+		                    	$meta_query[] = array(
+		                            'key'     => '_price',
+		                            'value'   => array(
+		                            				$product->get_price()+1
+		                                            ,
+		                                            $product->get_price()+abs($map_value['second_term_down_limit'])
+		                                        ),
+		                            'type'    => 'numeric',
+		                            'compare' => 'BETWEEN',
+			                    );
+		                    }
 
   					} elseif( array_key_exists('pa_'.$map_value['first_term_attribute'],$default_attributes) ) {
   						
