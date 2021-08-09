@@ -29,7 +29,7 @@ You can read more about each feature in the section given below with the title �
  
 For demos on each feature please have a look at the demos section. 
 
-With this major update, many things changed in UI experience and we hope it will help our users, please be noted that we are working on a documentation update that complies with this update and it will be available very soon. Our apologies to keep you waiting for the updated documentation. But we suggest that during installation & setup process you take a look at the installation tab and simply add sample data it will make your work easier to get started.   
+Our apologies to keep you waiting for the updated documentation, we are happy to say that we have just released the beta documentation, please check it out and be sure to send us your valuable feedback that helps us improve.    
 
 == For Jewellery/Diamond Websites ==
 In addition to ring builder, we support many other features for jewelry & diamond websites. There is a list of features and tools that can help you ensure that your site achieves the level of industry best UI and features. We recommend that you take a look at the list of features [For Jewellery/Diamond Websites](https://woochoiceplugin.com/jewelry-diamonds-website-package/) and take your site to next level.
@@ -234,7 +234,7 @@ Manual installation works just as for other WordPress plugins:
 1. Activate the plugin “Woo Choice Plugin” on the “Plugins” screen of your WordPress Dashboard.
 
 **3. GETTING STARTED** 
-After activation, you will see the setup wizard screen which will help you do the initial setup as well as to add sample data to see sample flow. For step by step instructions or for detailed understanding on how to configure or customize Woo Choice Plugin to your needs, please follow [getting started doc](https://sphereplugins.com/woo-choice-plugin/docs/getting-started/).
+After activation, you will see the setup wizard screen which will help you do the initial setup as well as to add sample data to see sample flow. For step by step instructions or for detailed understanding on how to configure or customize Woo Choice Plugin to your needs, please follow [getting started doc](https://sphereplugins.com/docs/woo-choice-plugin/getting-started/installation-and-setup/).   
 
 **4. SAMPLE DATA** 
 After you activate the plugin during the setup process you will see an option to add sample data, it is quite useful to populate the database with sample data as well as configure all plugin basics with a few clicks. Later on, this sample data can serve as the boilerplate template for you to easily configure the plugin as per your needs. 
@@ -248,7 +248,7 @@ In case you are looking to set filters like the one given in demos related to Di
 
     For the shortcode module also the process is basically the same as above so you can follow the same steps as above to setup shortcode-based filters. 
  
-With this major update, many things changed in the UI experience and we hope it will help our users, please be noted that we are working on a documentation update that complies with this update and it will be available very soon. Our apologies to keep you waiting for the updated documentation. But we recommend that you add sample data it will make your work easier to get started. 
+Our apologies to keep you waiting for the updated documentation, we are happy to say that we have just released the [beta documentation](https://sphereplugins.com/docs/woo-choice-plugin/), please check it out and be sure to send us your valuable feedback that helps us improve. 
 
 == Frequently Asked Questions ==
 
@@ -307,7 +307,8 @@ Yes, it is.
 == Changelog ==
 
 = 1.0.8 (Aug 05,2021) =
-  ** - **
+  ** This update is tested with the latest version of WordPress(version 5.8) and WooCommerce (version 5.5.2). ** 
+  ** As well as we are happy to say that we have just released the [beta documentation](https://sphereplugins.com/docs/woo-choice-plugin/), please check it out and be sure to send us your valuable feedback that helps us improve. **
 = 1.0.5 (Oct 14,2020) =
   ** Note 1 ** Even if you have upgraded to version 1.0.4 we recommend that you upgrade to version 1.0.5 since there was a bug related to mapping so you might see issues related to the functionality of the second step in ring builder process if you do not upgrade to 1.0.5
   ** Note 2 ** The other issue is if after upgrade the breadcrumb steps stops showing on the ring builder process then do one thing, just save the categories again on General => Navigations Steps( Breadcrumb ) tab, just go to the tab and hit save if right categories are already selected. 
