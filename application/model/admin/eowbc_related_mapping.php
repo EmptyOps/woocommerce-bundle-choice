@@ -332,7 +332,7 @@ class Eowbc_Related_Mapping /*extends Eowbc_Model*/ {
   				if(!empty($map_value['first_term_set_all'])){
   					if($map_value['first_term_attribute'] === '__price__'){
   						
-		                    $meta_query[] = array(
+		                    /*$meta_query[] = array(
 		                            'key'     => '_price',
 		                            'value'   => array(
 		                            				$product->get_price()-abs($map_value['second_term_down_limit'])
@@ -361,8 +361,17 @@ class Eowbc_Related_Mapping /*extends Eowbc_Model*/ {
 		                            'type'    => 'numeric',
 		                            'compare' => 'BETWEEN',
 			                    );
-		                    }
-
+		                    } */
+		                    $meta_query[] = array(
+		                            'key'     => '_price',
+		                            'value'   => array(
+		                            				$product->get_price()-abs($map_value['second_term_down_limit'])
+		                                            ,
+		                                            $product->get_price()+abs($map_value['second_term_upper_limit']),
+		                                        ),
+		                            'type'    => 'numeric',
+		                            'compare' => 'BETWEEN',
+		                    );
   					} elseif( array_key_exists('pa_'.$map_value['first_term_attribute'],$default_attributes) ) {
   						
   						$range_list = $this->get_range_terms($map_value['first_term_attribute'],$default_attributes['pa_'.$map_value['first_term_attribute']],$map_value['second_term_upper_limit'],$map_value['second_term_down_limit']);
