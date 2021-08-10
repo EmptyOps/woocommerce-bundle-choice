@@ -70,24 +70,17 @@ class Filter
 		            die();
 		        }
 
+
+
 		        if( $query->is_main_query() ) {
-
-
 
 		        	if(isset($_GET['products_in']) AND !empty(wbc()->sanitize->get('products_in')) ) {
 		        		$query->set('post__in',explode(',',wbc()->sanitize->get('products_in')));			        	
 			        }
 
-		        
 		        	if( isset($_GET['_category']) OR isset($_GET['_current_category']) ){
 
 		        		$old_tax_query = $query->get('tax_query');
-
-		        		/*if(isset($_GET['test'])) {
-		        			echo "<pre>";
-		        			print_r($old_tax_query);
-		        			echo "</pre>";
-		        		}*/
 
 			            $old_tax_query_taxonomy = array();
 		        		
@@ -259,10 +252,6 @@ class Filter
                                         );
 		            }
 
-
-
-		            
-
 		            // if param _meta_field has query data            
 		            if(!empty($_GET['_meta_field'])) {
 
@@ -304,18 +293,21 @@ class Filter
 		                    }
 		                }
 		            }
+
 		            $query->set('meta_query',$meta_quer_args);
+
 		        }
 
 		        if( property_exists($query,'query') ){
-		        	unset($query->query);
+		        	//unset($query->query);
+		        	$query->query = array();
 		        }
 		        if( property_exists($query,'tax_query') ){
-		        	unset($query->tax_query);
-		        }
-		        
-		        $query->query_vars['suppress_filters'] = true;
 
+		        	//unset($query->tax_query);
+		        	$query->tax_query = array();
+		        }		        
+		        $query->query_vars['suppress_filters'] = true;
 		        return apply_filters('filter_widget_ajax_post_query',$query);
 		    });		   
 		}
