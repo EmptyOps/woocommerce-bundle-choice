@@ -64,6 +64,14 @@ if(!class_exists('WBC_Sanitize')) {
 			}
 		}
 
+		public function _get(string $get_field){
+			if(isset($_GET[$get_field])) {
+				return ($_GET[$get_field]);
+			} else {
+				return false;
+			}
+		}
+
 		public function post(string $post_field){
 			if(isset($_POST[$post_field])) {
 				return sanitize_text_field($_POST[$post_field]);

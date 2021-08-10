@@ -200,7 +200,7 @@ jQuery(document).ready(function($){
 
 	if(eo_wbc_object.disp_regular){
 	
-		jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html('');		
+		//jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html('');		
 		if(!eo_wbc_object.btnfilter_now){			
 			jQuery("#eo_wbc_filter").on('change',"input:not(:checkbox)",function(){
 				jQuery('[name="paged"]').val('1');
@@ -211,8 +211,11 @@ jQuery(document).ready(function($){
 		if(typeof(jQuery.fn.eo_wbc_filter_change) === typeof(undefined) &&  typeof(window.eo_wbc_filter_change) === 'function') {
 			jQuery.fn.eo_wbc_filter_change = window.eo_wbc_filter_change;				
 		}
+		
 
-		jQuery.fn.eo_wbc_filter_change(true);
+		//changes: mahesh@emptyops.com
+		// To prevent initila call for the ajax -- speed optimization -- stop ajax at init load;
+		//jQuery.fn.eo_wbc_filter_change(true);
 
 		//pagination for non-table based view
 

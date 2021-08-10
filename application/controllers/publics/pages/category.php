@@ -67,6 +67,12 @@ class Category {
                      ($this->eo_wbc_get_category()==wbc()->options->get_option('configuration','second_slug') && wbc()->options->get_option_group('filters_s_fconfig',FALSE) ))
                      or $this->is_shop_cat_filter===true or $this->is_shortcode_filter
                 ){
+
+                    if($this->eo_wbc_get_category()==wbc()->options->get_option('configuration','first_slug') && wbc()->options->get_option_group('filters_d_fconfig',FALSE)) {
+                        add_filter('woocommerce_product_add_to_cart_text',function($add_to_cart_text,$product){
+                            return __('View','WooCommerce');
+                        },10,2);
+                    }
                     $this->eo_wbc_add_filters();          
                 }
             }        
@@ -209,12 +215,7 @@ class Category {
         $features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())));
         
         if( !empty($features['pair_maker'])/*get_option('eo_wbc_pair_maker_status',FALSE)*/ && isset($_GET) && !empty(wbc()->sanitize->get('STEP')) && wbc()->sanitize->get('STEP')==2 && (empty(wbc()->sanitize->get('FIRST')) XOR empty(wbc()->sanitize->get('SECOND'))) ) {
-
-
-            add_filter('woocommerce_product_add_to_cart_text',function($add_to_cart_text,$product){
-                return __('View','WooCommerce');
-            },10,2);
-            
+                        
 
             add_action( 'wp_enqueue_scripts',function(){ 
                 // wp_register_style('eo_wbc_ui_css',plugin_dir_url(EO_WBC_PLUGIN_FILE).'asset/css/fomantic/semantic.min.css');
@@ -261,7 +262,7 @@ class Category {
         } else {
             //Hide Add to cart in Shop and product_category page
             remove_action( 'woocommerce_after_shop_loop_item','woocommerce_template_loop_add_to_cart');
-                    
+
             //remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30 );    
 
             //Add information to end of pemalink of product
