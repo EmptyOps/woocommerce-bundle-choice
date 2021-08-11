@@ -59,8 +59,6 @@ class UI_Builder implements Builder {
 								$ui_ele['src'] = '';
 							}
 
-							var_dump(wbc()->options->get_option($option_key,$ui_ele['id'].'_image'));
-
 							$ui_ele['src'] = wbc()->options->get_option($option_key,$ui_ele['id'].'_image',$ui_ele['src'],true,true);					
 						}
 
@@ -173,7 +171,6 @@ class UI_Builder implements Builder {
 
 				if( !empty($form_value['type'])/* and !empty($form_value['appearence_controls'])*/ ) {
 					
-
 					switch ($form_value['type']) {
 						case 'p':
 						case 'text':
@@ -245,7 +242,18 @@ class UI_Builder implements Builder {
 								]
 							);							
 							break;						
-					}				
+					}
+
+					if(in_array($form_value['type'],['p','text','div','span','button','header','a','img','image','video'])){
+						$object->add_control(
+							$form_key.'_position',
+							[
+								'label'=> (empty($form_value['appearence_controls'])?'Container(Level: '.$depth.' Sibling: '.$preserve_form_key.')' :$form_value['appearence_controls'][0]). ' Position',
+								'type'=>\Elementor\Controls_Manager::DIMENSIONS,
+								'size_units' => [ 'px', '%', 'em' ]
+							]
+						);
+					}
 
 				}
 				if(!empty($form_value['child'])) {
@@ -290,17 +298,19 @@ class UI_Builder implements Builder {
 							echo "</pre>";*/
 
 							$element_text = ( $settings[$form_key] );
-
+							//echo $element_text.'<br/>';
+							//echo $safe_form_key;
 														
 							//echo $element_text;
 							if(!empty($element_text)){
+
 								if(isset($form_value['preHTML'])){
 									$form[$safe_form_key]['preHTML'] = $element_text;
 								} elseif(isset($form_value['postHTML'])) {
 									$form[$safe_form_key]['postHTML'] = $element_text;
 								} else {									
 									$form[$safe_form_key]['postHTML'] = $element_text;
-								}
+								}								
 							}
 
 							/*if($parent_id==='0' or $parent_id===0) {*/
@@ -318,16 +328,17 @@ class UI_Builder implements Builder {
 									}
 
 								}
-
-								$css = implode(';',$css).';';
-								if(empty($form[$safe_form_key]['attr'])){
-									$form[$safe_form_key]['attr'] = array('style'=>$css);
-								} else {
-									if(empty($form[$safe_form_key]['attr']['style'])) {
-										$form[$safe_form_key]['attr']['style'] = $css;
+								if(!empty($css)){
+									$css = implode(';',$css).';';
+									if(empty($form[$safe_form_key]['attr'])){
+										$form[$safe_form_key]['attr'] = array('style'=>$css);
 									} else {
-										$form[$safe_form_key]['attr']['style'].=$css;	
-									}									
+										if(empty($form[$safe_form_key]['attr']['style'])) {
+											$form[$safe_form_key]['attr']['style'] = $css;
+										} else {
+											$form[$safe_form_key]['attr']['style'].=$css;	
+										}									
+									}
 								}
 							/**/
 
@@ -391,7 +402,56 @@ class UI_Builder implements Builder {
 								}								
 							}
 							break;
-					}				
+					}	
+
+					if(in_array($form_value['type'],['p','text','div','span','button','header','a','img','image','video'])){
+						
+						$css = array();
+						
+						if(!empty($settings[$form_key.'_position']['top']) or  !empty($settings[$form_key.'_position']['right']) or !empty($settings[$form_key.'_position']['bottom']) or !empty($settings[$form_key.'_position']['left'])) {
+							
+							
+							if(!empty($settings[$form_key.'_position']['top'])) {
+								$css[] = 'top:'.$settings[$form_key.'_position']['top'].$settings[$form_key.'_position']['unit'];
+							}
+
+							if(!empty($settings[$form_key.'_position']['right'])) {
+								$css[] = 'right:'.$settings[$form_key.'_position']['right'].$settings[$form_key.'_position']['unit'];
+							}
+
+							if(!empty($settings[$form_key.'_position']['bottom'])) {
+								$css[] = 'bottom:'.$settings[$form_key.'_position']['bottom'].$settings[$form_key.'_position']['unit'];
+							}
+
+							if(!empty($settings[$form_key.'_position']['left'])) {
+								$css[] = 'left:'.$settings[$form_key.'_position']['left'].$settings[$form_key.'_position']['unit'];
+							}
+
+							if(!empty($css)){
+
+								$css = implode(';',$css).';';
+								if(empty($form[$safe_form_key]['attr'])){								
+									$form[$safe_form_key]['attr'] = array('style'=>$css);
+								} else {
+									if(empty($form[$safe_form_key]['attr']['style'])) {
+										$form[$safe_form_key]['attr']['style'] = $css;
+									} else {
+										$form[$safe_form_key]['attr']['style'].=$css;	
+									}									
+								}							
+							}
+						}						
+
+						/*$form[$safe_form_key]['src'] = 	\Elementor\Group_Control_Image_Size::get_attachment_image_src($settings[$form_key.'_path']['id'],$form_key.'_dimension',$settings);	
+
+						$object->add_control(
+							$form_key.'_position',
+							[
+								'label'=> (empty($form_value['appearence_controls'])?'Container(Level: '.$depth.' Sibling: '.$preserve_form_key.')' :$form_value['appearence_controls'][0]). ' Position',
+								'type'=>\Elementor\Controls_Manager::DIMENSIONS
+							]
+						);*/
+					}			
 
 				}
 				if(!empty($form_value['child'])) {
@@ -402,7 +462,7 @@ class UI_Builder implements Builder {
 					}
 				}
 			}
-		}
+		}		
 		return $form;
 	}
 }
