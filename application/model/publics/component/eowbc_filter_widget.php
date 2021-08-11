@@ -935,10 +935,10 @@ class EOWBC_Filter_Widget {
 					'BEGIN'=>wbc()->sanitize->get('BEGIN'),
 					'STEP'=>wbc()->sanitize->get('STEP'),
 					'FIRST'=>(
-	                	$this->_category==wbc()->options->get_option('configuration','first_slug')
+	                	/*$this->_category==wbc()->options->get_option('configuration','first_slug')
 			                    ?
 			                ''
-			                    :
+			                    :*/
 			                (
 			                    !empty(wbc()->sanitize->get('FIRST'))
 			                        ? 
@@ -948,10 +948,10 @@ class EOWBC_Filter_Widget {
 			                )
 			            ),
 					'SECOND'=>(
-		                $this->_category==wbc()->options->get_option('configuration','second_slug')
+		                /*$this->_category==wbc()->options->get_option('configuration','second_slug')
 			                    ?
 			                ''
-			                    :
+			                    :*/
 			                (
 			                    !empty(wbc()->sanitize->get('SECOND'))
 			                        ?
