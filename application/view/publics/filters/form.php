@@ -6,7 +6,7 @@
 
 /*jQuery.fn.eo_wbc_filter_change(false,'#sc_eo_wbc_filter');*/
 
-
+$current_category = implode(',',$thisObj->___category);
 
 
 if(wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting','filter_setting_advance_two_tabs',false)) {
@@ -16,6 +16,7 @@ if(wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting
 		$first_tab_term = wbc()->wc->get_term_by('id',$first_tab_term, 'product_cat');
 		if(!empty($first_tab_term) and !is_wp_error($first_tab_term)) {
 			$first_tab_term = $first_tab_term->slug;
+			$current_category = $first_tab_term;
 		} else {
 			$first_tab_term = false;
 		}
@@ -28,6 +29,7 @@ if(wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting
 		$second_tab_term = wbc()->wc->get_term_by('id',$second_tab_term, 'product_cat');
 		if(!empty($second_tab_term) and !is_wp_error($second_tab_term)) {
 			$second_tab_term = $second_tab_term->slug;
+			$current_category = $second_tab_term;
 		} else {
 			$second_tab_term = false;
 		}
@@ -46,11 +48,9 @@ if(wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting
 		if(array_search($second_tab_term,$thisObj->___category) !==false ) {
 
 			unset($thisObj->___category[array_search($second_tab_term,$thisObj->___category)]);
-		}
-		
+		}		
 	}
 }
-
 
 ?>	
 		

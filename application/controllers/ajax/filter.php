@@ -69,10 +69,8 @@ class Filter
 		            echo json_encode(apply_filters('eowbc_filter_response',array()));
 		            die();
 		        }
-
-
-
-		        if( $query->is_main_query() ) {
+		        
+   		        if( $query->is_main_query() and !empty($query->query_vars['product_cat'])) {
 
 		        	if(isset($_GET['products_in']) AND !empty(wbc()->sanitize->get('products_in')) ) {
 		        		$query->set('post__in',explode(',',wbc()->sanitize->get('products_in')));			        	
@@ -146,7 +144,7 @@ class Filter
 		                ///////////////////////////////////////////////
 	                    //Filter section for attributes
 	                    ///////////////////////////////////////////////
-	                    $__attribute = $_GET['_attribute'];
+	                    $__attribute = (empty($_GET['_attribute'])?'':$_GET['_attribute']);
 	                    if(is_string($__attribute)) {
 	                    	$__attribute = sanitize_text_field($__attribute);
 
@@ -297,6 +295,11 @@ class Filter
 		            $query->set('meta_query',$meta_quer_args);
 
 		        }
+
+		        /*echo "<pre>";
+		        print_r($meta_quer_args);
+		        echo "</pre>";
+		        die();*/
 
 		        if( property_exists($query,'query') ){
 		        	//unset($query->query);

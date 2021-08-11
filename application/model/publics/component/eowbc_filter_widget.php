@@ -1787,11 +1787,11 @@ class EOWBC_Filter_Widget {
 
 		if(($this->first_theme==apply_filters('eowbc_filter_prefix',$this->filter_prefix).'theme'/*$this->second_theme=='theme'*//* and $this->_category==wbc()->options->get_option('configuration','second_slug')) or ($this->first_theme=='theme' and $this->_category==wbc()->options->get_option('configuration','first_slug')*/) or $this->first_theme === 'theme') {
 
-				if(wp_is_mobile()){
-					wbc()->load->template('publics/filters/theme_two_tabs_mobile',$item);
-				} else {
-					wbc()->load->template('publics/filters/theme_two_tabs',$item);
-				}
+			if(wp_is_mobile()){
+				wbc()->load->template('publics/filters/theme_two_tabs_mobile',$item);
+			} else {
+				wbc()->load->template('publics/filters/theme_two_tabs',$item);
+			}
 				
 		} else {
 			wbc()->load->template('publics/filters/two_tabs',$item);
