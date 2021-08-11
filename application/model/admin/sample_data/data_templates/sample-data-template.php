@@ -7564,7 +7564,7 @@ class Sample_Data_Template {
           'category'=>array('eo_diamond_shape_cat','eo_diamond_cushion_shape_cat'),
           'attribute'=>array('pa_eo_carat_attr'=>array(
                               'name'=>'pa_eo_carat_attr',
-                              'value'=>'0',
+                              'value'=>'8',
                               'position'=>0,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -7656,7 +7656,7 @@ class Sample_Data_Template {
                           array(
                             'regular_price'=>'47700',
                             'price'=>'45355',
-                            'terms'=>array('pa_eo_carat_attr'=>'8','pa_eo_clarity_attr'=>'si1','pa_eo_colour_attr'=>'m','pa_eo_depth_attr'=>'48','pa_eo_fluorescence_attr'=>'faint','pa_eo_grading_report_attr'=>'hrd','pa_eo_size_attr'=>'0-8','pa_eo_symmertry_attr'=>'excellent','pa_eo_table_attr'=>'56','pa_eo_origin_attr'=>'orapa','pa_eo_cut_attr'=>'good')
+                            'terms'=>array('pa_eo_carat_attr'=>'8','pa_eo_clarity_attr'=>'si1','pa_eo_colour_attr'=>'m','pa_eo_depth_attr'=>'48','pa_eo_fluorescence_attr'=>'faint','pa_eo_grading_report_attr'=>'hrd','pa_eo_size_attr'=>'0-8','pa_eo_symmertry_attr'=>'excellent','pa_eo_table_attr'=>'56','pa_eo_origin_attr'=>'Mir','pa_eo_cut_attr'=>'good')
                           )
                    )
         ),
