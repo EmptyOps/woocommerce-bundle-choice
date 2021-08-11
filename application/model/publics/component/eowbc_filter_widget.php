@@ -1596,11 +1596,12 @@ class EOWBC_Filter_Widget {
 		$seprator = wbc()->options->get_option('filters_filter_setting','filter_setting_numeric_slider_seperator','.');
 		
 		if($desktop):
-			if(($this->second_theme=='theme_dropdown' and $this->_category==wbc()->options->get_option('configuration','second_slug')) or ($this->first_theme=='theme_dropdown' and $this->_category==wbc()->options->get_option('configuration','first_slug'))) {
+			/*===bhavesh@emptyops.com comment foe price filter===*/
+			if(/*($this->second_theme=='theme_dropdown' and $this->_category==wbc()->options->get_option('configuration','second_slug')) or ($this->first_theme=='theme_dropdown' and $this->_category==wbc()->options->get_option('configuration','first_slug'))*/ (in_array(apply_filters('eowbc_filter_prefix',$this->filter_prefix).'theme_dropdown',array_column($this->__filters__,'filter_template')) !== false ) or (in_array('theme_dropdown',array_column($this->__filters__,'filter_template')) !==false)) {
 				
 				wbc()->load->template('publics/filters/theme_dropdown_slider_price_desktop', array("width_class"=>$this->get_width_class($width),"min"=>$min,"max"=>$max,"reset"=>$reset,'help'=>$help,'seprator'=>$seprator,'prefix'=>$curr_prefix,'postfix'=>$curr_postfix,'filter_ui'=>$this));
 
-			} elseif(($this->second_theme=='theme' and $this->_category==wbc()->options->get_option('configuration','second_slug')) or ($this->first_theme=='theme' and $this->_category==wbc()->options->get_option('configuration','first_slug'))) {
+			} elseif(/*($this->second_theme=='theme' and $this->_category==wbc()->options->get_option('configuration','second_slug')) or ($this->first_theme=='theme' and $this->_category==wbc()->options->get_option('configuration','first_slug'))*/ (in_array(apply_filters('eowbc_filter_prefix',$this->filter_prefix).'theme',array_column($this->__filters__,'filter_template')) !== false ) or (in_array('theme',array_column($this->__filters__,'filter_template')) !==false)) {
 				
 				wbc()->load->template('publics/filters/theme_slider_price_desktop', array("width_class"=>$this->get_width_class($width),"min"=>$min,"max"=>$max,"reset"=>$reset,'help'=>$help,'seprator'=>$seprator,'prefix'=>$curr_prefix,'postfix'=>$curr_postfix,'filter_ui'=>$this));
 
@@ -2562,7 +2563,7 @@ class EOWBC_Filter_Widget {
 		});
 
 		$filter =  apply_filters( 'eowbc_filter_widget_filters_post_clean',$filter,$prefix);
-
+		$this->__filters__=$filter;
 		//$filter =  apply_filters( 'eowbc_filter_widget_filters',$filter);
 
 		
