@@ -408,22 +408,37 @@ class UI_Builder implements Builder {
 						
 						$css = array();
 						
-						if(!empty($settings[$form_key.'_position']['top']) or  !empty($settings[$form_key.'_position']['right']) or !empty($settings[$form_key.'_position']['bottom']) or !empty($settings[$form_key.'_position']['left'])) {
+						if(
+							(!empty($settings[$form_key.'_position']['top']) or $settings[$form_key.'_position']['top']==0) 
+
+							or
+
+							(!empty($settings[$form_key.'_position']['right']) or $settings[$form_key.'_position']['right']==0)
+
+							or
+
+							(!empty($settings[$form_key.'_position']['bottom']) or $settings[$form_key.'_position']['bottom']==0)
+
+							or
+
+							(!empty($settings[$form_key.'_position']['left']) or $settings[$form_key.'_position']['left']==0)
+						) {
 							
 							
-							if(!empty($settings[$form_key.'_position']['top'])) {
+							if(!empty($settings[$form_key.'_position']['top']) or $settings[$form_key.'_position']['top']==0) {
+								
 								$css[] = 'top:'.$settings[$form_key.'_position']['top'].$settings[$form_key.'_position']['unit'];
 							}
 
-							if(!empty($settings[$form_key.'_position']['right'])) {
+							if(!empty($settings[$form_key.'_position']['right']) or $settings[$form_key.'_position']['right']==0) {
 								$css[] = 'right:'.$settings[$form_key.'_position']['right'].$settings[$form_key.'_position']['unit'];
 							}
 
-							if(!empty($settings[$form_key.'_position']['bottom'])) {
+							if(!empty($settings[$form_key.'_position']['bottom']) or $settings[$form_key.'_position']['bottom']==0) {
 								$css[] = 'bottom:'.$settings[$form_key.'_position']['bottom'].$settings[$form_key.'_position']['unit'];
 							}
 
-							if(!empty($settings[$form_key.'_position']['left'])) {
+							if(!empty($settings[$form_key.'_position']['left']) or $settings[$form_key.'_position']['left']==0) {
 								$css[] = 'left:'.$settings[$form_key.'_position']['left'].$settings[$form_key.'_position']['unit'];
 							}
 
