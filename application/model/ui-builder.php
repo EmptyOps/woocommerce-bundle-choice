@@ -429,6 +429,8 @@ class UI_Builder implements Builder {
 
 							if(!empty($css)){
 
+								$css[] = 'position:relative';
+
 								$css = implode(';',$css).';';
 								if(empty($form[$safe_form_key]['attr'])){								
 									$form[$safe_form_key]['attr'] = array('style'=>$css);
