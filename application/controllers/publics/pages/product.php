@@ -35,6 +35,7 @@ class Product {
             //if data available at _GET then add to out custom cart
             if(!empty(wbc()->sanitize->get('eo_wbc_add_to_cart_preview'))) {                
                 $this->add2cart();
+                do_action('sp_wbc_after_add2cart_redirect');
                 $cart_url = wbc()->wc->eo_wbc_get_cart_url();
                 if(strpos($cart_url,'?')!==false){
                     $cart_url = explode('?', $cart_url)[0];
@@ -220,7 +221,7 @@ class Product {
 
         $eo_wbc_sets=wbc()->session->get('EO_WBC_SETS',NULL);
         $eo_wbc_maps=wbc()->session->get('EO_WBC_MAPS',array());
-        
+                
         if(!is_null($eo_wbc_sets)){
             
             foreach (wc()->cart->cart_contents as $cart_key=>$cart_item)
@@ -383,7 +384,7 @@ class Product {
                                         'variation'=>$variation_data,                          
                                     );
                 }
-                wbc()->session->set('EO_WBC_SETS',$eo_wbc_sets);
+                wbc()->session->set('EO_WBC_SETS', apply_filters('sp_wbc_add2session_cart_sets',$eo_wbc_sets,$cart));
             }
         }
     }

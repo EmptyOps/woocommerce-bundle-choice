@@ -102,10 +102,11 @@ class Category {
                     }
                 }   
 
+                $eo_wbc_sets = array();
                 //if product belongs to first target;
                 if (!empty($cart['eo_wbc_target']) and wbc()->options->get_option('configuration','first_slug')==$cart['eo_wbc_target']) {
 
-                    wbc()->session->set('EO_WBC_SETS',
+                    $eo_wbc_sets =
                         array(
                             'FIRST'=>array(
                                             $cart['eo_wbc_product_id'],
@@ -115,12 +116,12 @@ class Category {
                                         ),
                             'SECOND'=>NULL
                                                 
-                    ));
+                        );
                 }
                 //if product belongs to second target;
                 elseif (!empty($cart['eo_wbc_target']) and wbc()->options->get_option('configuration','second_slug')==$cart['eo_wbc_target']) {
 
-                    wbc()->session->set('EO_WBC_SETS',
+                    $eo_wbc_sets =
                         array(
                             'FIRST'=>NULL,
                             'SECOND'=>array(
@@ -129,8 +130,10 @@ class Category {
                                             (isset($cart['variation_id'])?$cart['variation_id']:NULL),
                                             'variation'=>$variation_data,
                                         )
-                    ));
-                }                                              
+                    );
+                }
+
+                wbc()->session->set('EO_WBC_SETS', apply_filters('sp_wbc_add2session_cart_sets',$eo_wbc_sets,$cart));
             }                        
         }
     }
