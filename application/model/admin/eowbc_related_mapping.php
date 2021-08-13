@@ -279,9 +279,10 @@ class Eowbc_Related_Mapping /*extends Eowbc_Model*/ {
 
 
 	public function related_mapping($prefix='',$limit=3) {
-		
-		global $post;
+				
 		$map = unserialize(wbc()->options->get_option_group($prefix.'_map_master'));
+
+		$map = apply_filters($prefix.'_map_master',$map);
 
 		if(empty(wbc()->sanitize->post('product_id'))){
 			return array();
@@ -478,13 +479,16 @@ class Eowbc_Related_Mapping /*extends Eowbc_Model*/ {
   			$args['tax_query'] =$tax_query;	
   		}
 
+  		// mahesh@emptyops.com -- 12-08-2021 -- all products except this one.
+  		$args['post__not_in'] = array($product->get_id());
+
   		$query = new \WP_Query( $args );
   		$products_list = array();
 
   		if( $query->have_posts() ){
   			while( $query->have_posts() ){
   				$query->the_post();
-  				$_product= wc_get_product($post->ID);
+  				$_product= wc_get_product( get_the_ID() /*$post->ID*/);
   				$products_list[] = $_product;
   			} 
   		}

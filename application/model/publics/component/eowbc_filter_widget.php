@@ -56,6 +56,12 @@ class EOWBC_Filter_Widget {
 			$this->localize_script();
 		}
 
+		if(!empty($filter) and is_array($filter)) {
+			foreach($filter as $filter_key=>$filter_value) {
+				$filter[$filter_key][$prefix.'_fconfig_filter'] = str_replace('pa_','',$filter[$filter_key][$prefix.'_fconfig_filter']);
+			}
+		}
+
 		//map fields to names as per older version, applies to this code block only.
 		$field_to_old_fields = array(
 			$prefix.'_fconfig_filter'=>'name',
@@ -964,7 +970,7 @@ class EOWBC_Filter_Widget {
 		$seprator = '.';
 		if ($filter_type) {
 
-			$term= wbc()->wc->eo_wbc_get_attribute($id);
+			$term= wbc()->wc->eo_wbc_get_attribute( str_replace('pa_','',$id) );
 
 			if(!empty($term) && !is_wp_error($term)){
 
@@ -1227,7 +1233,7 @@ class EOWBC_Filter_Widget {
 
 		if ($filter_type) {
 			
-			$term=wbc()->wc->eo_wbc_get_attribute($id);			
+			$term=wbc()->wc->eo_wbc_get_attribute( str_replace('pa_','',$id) );			
 
 			if(!empty($term) && !is_wp_error($term)) {
 
@@ -2508,6 +2514,12 @@ class EOWBC_Filter_Widget {
 			}	
 		}
 
+		if(!empty($filter) and is_array($filter)) {
+			foreach($filter as $filter_key=>$filter_value) {
+				$filter[$filter_key][$prefix.'_fconfig_filter'] = str_replace('pa_','',$filter[$filter_key][$prefix.'_fconfig_filter']);
+			}
+		}
+
 		$filter =  apply_filters( 'eowbc_filter_widget_filters',$filter,$prefix);
 		$is_cleanup = apply_filters( 'eowbc_filter_widget_is_reset_cleanup',1);
 		
@@ -2543,6 +2555,10 @@ class EOWBC_Filter_Widget {
 		} else {
 			$this->localize_script();
 		}
+
+		        
+        
+                
 
 		//map fields to names as per older version, applies to this code block only. 
 		$field_to_old_fields = array(

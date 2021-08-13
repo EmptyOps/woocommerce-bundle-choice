@@ -48,7 +48,7 @@ if ( ! class_exists( 'Filters' ) ) {
 	        // $attributes="";        
 	        foreach (wc_get_attribute_taxonomies() as $item) {                     
 	        	// $attributes .= "<option data-type='1' data-slug='{$item->attribute_name}' value='{$item->attribute_id}'>{$item->attribute_label}</option>";  
-	        	$opts_arr[$item->attribute_id] = array( 'label'=>$item->attribute_label, 'attr'=>' data-type="1" data-slug="'.$item->attribute_name.'" ' );          
+	        	$opts_arr['pa_'.$item->attribute_id] = array( 'label'=>$item->attribute_label, 'attr'=>' data-type="1" data-slug="'.$item->attribute_name.'" ' );          
 	        }
 	        // return $attributes;
 	        return $opts_arr;
