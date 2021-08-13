@@ -57,7 +57,7 @@ if(!empty($attributes) and is_array($attributes)){
 			foreach ($taxonomies as $taxonomy){				
 				$child[$taxonomy->slug]=$taxonomy->name;
         	}
-        	$_childs[$term->id] = $child;
+        	$_childs['pa_'.$term->id] = $child;
         }		
 	}
 }
