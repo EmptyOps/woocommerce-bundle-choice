@@ -35,8 +35,8 @@ class Product {
             //if data available at _GET then add to out custom cart
             if(!empty(wbc()->sanitize->get('eo_wbc_add_to_cart_preview'))) {                
                 $this->add2cart();
-                do_action('sp_wbc_after_add2cart_redirect');
                 $cart_url = wbc()->wc->eo_wbc_get_cart_url();
+                do_action('sp_wbc_after_add2cart_redirect');
                 if(strpos($cart_url,'?')!==false){
                     $cart_url = explode('?', $cart_url)[0];
                 }
