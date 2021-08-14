@@ -29,7 +29,7 @@ You can read more about each feature in the section given below with the title â
  
 For demos on each feature please have a look at the demos section. 
 
-Our apologies to keep you waiting for the updated documentation, we are happy to say that we have just released the beta documentation, please check it out and be sure to send us your valuable feedback that helps us improve.    
+Our apologies to keep you waiting for the updated documentation, we are happy to say that we have just released the [beta documentation](https://sphereplugins.com/docs/woo-choice-plugin/), please check it out and be sure to send us your valuable feedback that helps us improve.    
 
 == For Jewellery/Diamond Websites ==
 In addition to ring builder, we support many other features for jewelry & diamond websites. There is a list of features and tools that can help you ensure that your site achieves the level of industry best UI and features. We recommend that you take a look at the list of features [For Jewellery/Diamond Websites](https://woochoiceplugin.com/jewelry-diamonds-website-package/) and take your site to next level.
