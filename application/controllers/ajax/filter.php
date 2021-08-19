@@ -65,7 +65,8 @@ class Filter
 		    add_filter('pre_get_posts',function($query ) {		    		
 
 		    	$_GET = apply_filters('filter_widget_ajax_pre_get',$_GET);		        	
-		    	if(apply_filters('eowbc_filter_override',false)){
+		    	
+		    	if(apply_filters('eowbc_filter_override',false) and (!empty($_REQUEST['eo_wbc_filter']))) {
 		            echo json_encode(apply_filters('eowbc_filter_response',array()));
 		            die();
 		        }
@@ -81,6 +82,8 @@ class Filter
 		        		$old_tax_query = $query->get('tax_query');
 
 			            $old_tax_query_taxonomy = array();
+
+			            $tax_query = array();
 		        		
 		                if(!empty(wbc()->sanitize->get('_category'))) {
 
@@ -294,23 +297,19 @@ class Filter
 
 		            $query->set('meta_query',$meta_quer_args);
 
-		        }
+		            if( property_exists($query,'query') ){
+			        	//unset($query->query);
+			        	$query->query = array();
+			        }
+			        if( property_exists($query,'tax_query') ){
 
-		        /*echo "<pre>";
-		        print_r($meta_quer_args);
-		        echo "</pre>";
-		        die();*/
+			        	//unset($query->tax_query);
+			        	$query->tax_query = array();
+			        }		        
+			        $query->query_vars['suppress_filters'] = true;
 
-		        if( property_exists($query,'query') ){
-		        	//unset($query->query);
-		        	$query->query = array();
-		        }
-		        if( property_exists($query,'tax_query') ){
+		        }		        		        
 
-		        	//unset($query->tax_query);
-		        	$query->tax_query = array();
-		        }		        
-		        $query->query_vars['suppress_filters'] = true;
 		        return apply_filters('filter_widget_ajax_post_query',$query);
 		    });		   
 		}
