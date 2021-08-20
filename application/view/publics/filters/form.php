@@ -235,7 +235,7 @@
 						//console.log($(e).attr('data-slug'));
 						//$("#text_slider_"+$(e).attr('data-slug')).slider("set rangeValue",$("[name=min_"+$(e).attr('data-slug')+"]").val(),$("[name=max_"+$(e).attr('data-slug')+"]").val());
 						
-						_sep = $(e).attr('data-sep');
+						let _sep = $(e).attr('data-sep');
 
 						let prefix = $(e).attr('data-prefix');
 						let postfix = $(e).attr('data-postfix');
@@ -244,7 +244,7 @@
 												
 						let max_value = $("[name='text_max_"+$(e).attr('data-slug')+"']").val();
 						
-						if(_sep == '.' || typeof(_sep)===typeof(undefined)){
+						if(_sep == '.' || typeof(_sep)===typeof(undefined)) {
 							min_value = min_value.replace(/,/g, '');
 							max_value = max_value.replace(/,/g, '');
 						} else {
