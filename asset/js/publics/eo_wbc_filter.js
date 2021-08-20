@@ -178,6 +178,14 @@ function eo_wbc_filter_render_html(data,render_container) {
 
 jQuery(document).ready(function($){
 
+	jQuery('body').on('click','.woocommerce-pagination a.page-numbers',function(e){
+	    e.preventDefault();
+	    e.stopPropagation();
+	    
+		jQuery('[name="paged"]').val(parseInt(jQuery(this).text().replace(',','')));
+		jQuery.fn.eo_wbc_filter_change();
+	});
+	
 	jQuery("[data-toggle_column]").click(function(){
 		if(jQuery(this).hasClass('active')){		
 			jQuery("[data-toggle_slug='"+jQuery(this).data('toggle_column')+"']").css('display','none');
