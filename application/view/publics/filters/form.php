@@ -8,7 +8,6 @@
 
 $current_category = implode(',',$thisObj->___category);
 
-
 if(wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting','filter_setting_advance_two_tabs',false)) {
 
 	$first_tab_term = wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting','filter_setting_advance_first_category',false);
@@ -57,6 +56,10 @@ if(wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting
 			unset($thisObj->___category[array_search($second_tab_term,$thisObj->___category)]);
 		}		
 	}
+}
+
+if(empty($current_category) and empty($_GET['EO_WBC'])) {
+	$current_category = wbc()->common->get_category('category',null, explode(',', wbc()->options->get_option('sc_filter_setting','shop_cat_filter_category') ) );
 }
 
 ?>	
