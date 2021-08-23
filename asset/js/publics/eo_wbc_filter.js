@@ -114,7 +114,7 @@ function eo_wbc_filter_render_html(data,render_container) {
 /*if(eo_wbc_object.disp_regular=='1'){
 	*/
 	window.eo_wbc_object.enable_filter = true;
-	jQuery.fn.eo_wbc_filter_change_native= function(init_call=false,form_selector="form#eo_wbc_filter",render_container='') {				
+	jQuery.fn.eo_wbc_filter_change_native= function(init_call=false,form_selector="form#eo_wbc_filter",render_container='',parameters={}) {
 	//flag indicates if to show products in tabular view or woocommerce's default style.		
 
 		if(window.eo_wbc_object.enable_filter===false){
@@ -136,11 +136,11 @@ function eo_wbc_filter_render_html(data,render_container) {
 		var ajax_url = '';
 
 		if(site_url.includes('?')) {
-			site_url = site_url+eo_wbc_object.eo_cat_query;
+			ajax_url = site_url+eo_wbc_object.eo_cat_query;
 		} else {
-			site_url = site_url+'/?'+eo_wbc_object.eo_cat_query;
-		}		
-		
+			ajax_url = site_url+'/?'+eo_wbc_object.eo_cat_query;
+		}
+
 		jQuery.ajax({
 			url: ajax_url,//form.attr('action'),
 			data:form.serialize(), // form data

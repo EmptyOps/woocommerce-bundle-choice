@@ -1501,7 +1501,7 @@ class EOWBC_Filter_Widget {
 		?>
 		<script type="text/javascript">
 			jQuery(document).ready(function($){
-				$('[data-filter-slug="<?php echo $filter['slug']; ?>"]').on('click',function(){
+				$('[data-filter-slug="<?php echo $filter['slug']; ?>"]').on('click',function(event){
 
 					<?php if($filter_type==1): ?>
 						let filter_target = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="_attribute"]');
@@ -1543,7 +1543,7 @@ class EOWBC_Filter_Widget {
 					} }	
 
 					<?php if(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
-						jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $this->filter_prefix; ?>eo_wbc_filter');
+						jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $this->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
 					<?php endif; ?>
 				});
 			});
@@ -2190,6 +2190,7 @@ class EOWBC_Filter_Widget {
 					jQuery(filter_container).find('[data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)').off();
 					jQuery(filter_container).find('[data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)').on('click',function(e){
 						
+						event = e;
 						
 						e.stopPropagation();
 						e.preventDefault();
@@ -2248,7 +2249,7 @@ class EOWBC_Filter_Widget {
 						jQuery(this).toggleClass('eo_wbc_filter_icon_select');
 						$('[name="paged"]').val('1');
 						<?php if(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
-						jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $this->filter_prefix; ?>eo_wbc_filter');
+						jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $this->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
 						<?php endif; ?>
 					});
 
@@ -2439,20 +2440,17 @@ class EOWBC_Filter_Widget {
 		$product_url = '';
 		if( !$this->is_shortcode_filter && !$this->is_shop_cat_filter ) {
 
-			$current_category = $wp_query->get_queried_object();
-			if(!empty($current_category) and !is_wp_error($current_category)){
-				$current_category = $current_category->slug;
-			} else{
-				$current_category=$this->_category;
-			}
+			$current_category = $this->_category;
+			$current_category = get_term_by('slug',$current_category,'product_cat');
 
 	        $site_url = esc_url(get_term_link( $current_category,'product_cat'));
+	        
 	      	if(strpos($site_url, '?')!==false){
 	          	$site_url.='&';
 	      	} else {
 	          	$site_url.='?';
 	      	}
-
+	      	
 	      	$product_url = $this->product_url();
 		}
 
@@ -2755,7 +2753,7 @@ class EOWBC_Filter_Widget {
 		$this->is_shop_cat_filter = $is_shop_cat_filter;
 		$this->is_shortcode_filter = $is_shortcode_filter;
 		$this->filter_prefix = $filter_prefix;
-		$this->_category= !$this->is_shortcode_filter && !$this->is_shop_cat_filter ? $this->eo_wbc_get_category() : '';
+		$this->_category= !$this->is_shortcode_filter && !$this->is_shop_cat_filter ? apply_filters('eowbc_filter_widget_category',$this->eo_wbc_get_category()) : '';
 		
 		if(!empty($this->_category) or $this->is_shop_cat_filter or $this->is_shortcode_filter){
 		

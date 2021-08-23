@@ -260,7 +260,7 @@ if(wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting
 					    	}
 					    	jQuery('[name="paged"]').val('1');
 					    	<?php if(empty(wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
-					    	jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter');
+					    	jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':new Event('change',this)});
 					    	<?php endif; ?>
 					    } else if( min==_min && max==_max ){
 					    	if(jQuery(this).attr('data-slug')!='price'){
@@ -368,7 +368,7 @@ if(wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting
 			
 			/*----------------------------------------------------*/
 			/*----------------------------------------------------*/
-			jQuery('.checkbox').checkbox({onChange:function(){
+			jQuery('.checkbox').checkbox({onChange:function(event){
 
 				__slug=jQuery(this).attr('data-filter-slug');
 
@@ -414,7 +414,7 @@ if(wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting
 		    	}
 		    	jQuery('[name="paged"]').val('1');
 		    	<?php if(empty(wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
-		    	jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter');
+		    	jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
 		    	<?php endif; ?>
 			}});				
 			/*----------------------------------------------------*/
