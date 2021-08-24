@@ -114,7 +114,7 @@ function eo_wbc_filter_render_html(data,render_container) {
 /*if(eo_wbc_object.disp_regular=='1'){
 	*/
 	window.eo_wbc_object.enable_filter = true;
-	jQuery.fn.eo_wbc_filter_change_native= function(init_call=false,form_selector="form#eo_wbc_filter",render_container='') {				
+	jQuery.fn.eo_wbc_filter_change_native= function(init_call=false,form_selector="form#eo_wbc_filter",render_container='',parameters={}) {
 	//flag indicates if to show products in tabular view or woocommerce's default style.		
 
 		if(window.eo_wbc_object.enable_filter===false){
@@ -136,11 +136,11 @@ function eo_wbc_filter_render_html(data,render_container) {
 		var ajax_url = '';
 
 		if(site_url.includes('?')) {
-			site_url = site_url+eo_wbc_object.eo_cat_query;
+			ajax_url = site_url+eo_wbc_object.eo_cat_query;
 		} else {
-			site_url = site_url+'/?'+eo_wbc_object.eo_cat_query;
-		}		
-		
+			ajax_url = site_url+'/?'+eo_wbc_object.eo_cat_query;
+		}
+
 		jQuery.ajax({
 			url: ajax_url,//form.attr('action'),
 			data:form.serialize(), // form data
@@ -178,6 +178,14 @@ function eo_wbc_filter_render_html(data,render_container) {
 
 jQuery(document).ready(function($){
 
+	jQuery('body').on('click','.woocommerce-pagination a.page-numbers',function(e){
+	    e.preventDefault();
+	    e.stopPropagation();
+	    
+		jQuery('[name="paged"]').val(parseInt(jQuery(this).text().replace(',','')));
+		jQuery.fn.eo_wbc_filter_change();
+	});
+	
 	jQuery("[data-toggle_column]").click(function(){
 		if(jQuery(this).hasClass('active')){		
 			jQuery("[data-toggle_slug='"+jQuery(this).data('toggle_column')+"']").css('display','none');
@@ -215,7 +223,9 @@ jQuery(document).ready(function($){
 
 		//changes: mahesh@emptyops.com
 		// To prevent initila call for the ajax -- speed optimization -- stop ajax at init load;
-		//jQuery.fn.eo_wbc_filter_change(true);
+		if(typeof(eo_wbc_e_tabview)===typeof(undefined) || typeof(eo_wbc_e_tabview.init_data)===typeof(undefined) || typeof(eo_wbc_object)==typeof(eo_wbc_object) ){
+			jQuery.fn.eo_wbc_filter_change(true);
+		}
 
 		//pagination for non-table based view
 

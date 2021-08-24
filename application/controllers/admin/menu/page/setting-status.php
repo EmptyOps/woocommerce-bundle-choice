@@ -156,7 +156,7 @@ class Setting_status {
 								'label'=>eowbc_lang('Clear Log and Return'),
 								'type'=>'link',
 								'attr'=>array("href='".admin_url('admin.php?page=eowbc-setting-status&action=clear&ref='.
-		(empty($_SERVER['HTTP_REFERER'])? admin_url('admin.php?page=eowbc-setting-status'):$_SERVER['HTTP_REFERER']))."'"),
+								(empty($_SERVER['HTTP_REFERER'])? admin_url('admin.php?page=eowbc-setting-status'):$_SERVER['HTTP_REFERER']))."'"),
 								'class'=>array(/*'secondary','hidden'*/)	
 							)
 						)
@@ -202,7 +202,7 @@ class Setting_status {
 
 				);
 	    
-	    return $form_definition;
+	    return apply_filters('sp_wbc_setting_status_form_defination',$form_definition);
 	}
 
 }	

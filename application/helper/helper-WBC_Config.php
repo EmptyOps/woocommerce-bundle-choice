@@ -18,12 +18,12 @@ class WBC_Config {
 	}
 
 	public function get_features() {
-		return array(
+		return apply_filters('sp_wbc_features',array(
 			'ring_builder'=>'Ring Builder',
 			'api_integrations'=>'Diamond APIs Integrations',
 			'pair_maker'=>'Pair Maker',
 			'guidance_tool'=>'Guidance Tool',
-		);
+		));
 	}
 
 	public function get_bonus_features() {
