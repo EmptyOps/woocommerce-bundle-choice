@@ -79,11 +79,11 @@
 
 				$(selector).each(function(i,e){
 
-					_min = Number($(e).attr('data-min'));						
-					_max = Number($(e).attr('data-max'));												
-					_labels = $(e).attr('data-labels');						
+					let _min = Number($(e).attr('data-min'));						
+					let _max = Number($(e).attr('data-max'));												
+					let _labels = $(e).attr('data-labels');						
 
-					_params=new Object();												
+					let _params=new Object();												
 											
 					if(_labels != undefined && _labels != false){
 
@@ -96,6 +96,7 @@
 							if(_labels!=undefined){
 								let _label_value = _labels[value];
 								if(_label_value.length><?php _e((int)wbc()->options->get_option('filters_'.(empty($filter_prefix)?'':$filter_prefix).'filter_setting','filter_setting_slider_max_lblsize',6)) ?>){
+
 									_label_value = _label_value.split(' ');
 									_label_value = _label_value.map(function(_label_value_ele){
 										return _label_value_ele[0];
@@ -130,18 +131,18 @@
 					_params.decimalPlaces=4;
 					_params.onMove=function(value, min, max) {
 
-						__slugs = $(e).attr('data-slugs');
+						let __slugs = $(e).attr('data-slugs');
 						
 						if(typeof __slugs != typeof undefined && __slugs != false){
 							//PASS
 						} else {
-							_sep = $(e).attr('data-sep');
-							_prefix = $(this).data('prefix');
+							let _sep = $(e).attr('data-sep');
+							let _prefix = $(this).data('prefix');
 							if(typeof(_prefix) == typeof(undefined) || _prefix=='undefined'){
 								_prefix = '';
 							}
 
-							_postfix = $(this).data('postfix');
+							let _postfix = $(this).data('postfix');
 							if(typeof(_postfix) == typeof(undefined) || _postfix=='undefined'){
 								_postfix = '';
 							}
@@ -155,6 +156,8 @@
 				        		$("input[name='text_max_"+$(e).attr('data-slug')+"']").val( _prefix+' '+(_sep=='.'?Number(max).toFixed(0):(Number(max).toFixed(0)).toString().replace('.',',')).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")+'.00 '+_postfix);
 							} else {
 
+								console.log("input[name='text_min_"+$(e).attr('data-slug')+"'] || input[name='text_max_"+$(e).attr('data-slug')+"']");
+
 				        		$("input[name='text_min_"+$(e).attr('data-slug')+"']").val( _prefix+(_sep=='.'?Number(min).toFixed(2):(Number(min).toFixed(2)).toString().replace('.',','))+_postfix );
 				        		$("input[name='text_max_"+$(e).attr('data-slug')+"']").val( _prefix+(_sep=='.'?Number(max).toFixed(2):(Number(max).toFixed(2)).toString().replace('.',','))+_postfix);
 				        	}
@@ -162,10 +165,11 @@
 					}
 
 					_params.onChange=function(value, min, max) {	
-						_labels = $(e).attr('data-labels');
-						_min = Number ($(e).attr('data-min'));						
-						_max = Number($(e).attr('data-max'));
-						_sep = $(e).attr('data-sep');
+						let _labels = $(e).attr('data-labels');
+						let __slugs = $(e).attr('data-slugs');
+						let _min = Number ($(e).attr('data-min'));						
+						let _max = Number($(e).attr('data-max'));
+						let _sep = $(e).attr('data-sep');
 
 						if(typeof _labels != typeof undefined && _labels != false){
 							_labels=_labels.split(',');
@@ -184,11 +188,15 @@
 						){
 
 							if(typeof __slugs != typeof undefined && __slugs != false){
-									
+								
+								console.log("input[name='min_"+$(e).attr('data-slug')+"'] || input[name='max_"+$(e).attr('data-slug')+"'] ----- SLUG",__slugs,__slugs.split(',')[min],__slugs.split(',')[max],min,max);
+
 								$("input[name='min_"+$(e).attr('data-slug')+"']").val(__slugs.split(',')[min]);
 					        	$("input[name='max_"+$(e).attr('data-slug')+"']").val(__slugs.split(',')[max]);
 
 							} else {
+								
+								console.log("input[name='min_"+$(e).attr('data-slug')+"'] || input[name='max_"+$(e).attr('data-slug')+"']",Number(min).toFixed(2),Number(max).toFixed(2),min,max,__slugs);
 
 					        	$("input[name='min_"+$(e).attr('data-slug')+"']").val(Number(min).toFixed(2));
 					        	$("input[name='max_"+$(e).attr('data-slug')+"']").val(Number(max).toFixed(2));
@@ -200,15 +208,15 @@
 
 						    		if($("[name='_attribute']").val().includes($(this).attr('data-slug'))) {
 						    			
-						    			_values=$("[name='_attribute']").val().split(',')
-						    			_index=_values.indexOf($(this).attr('data-slug'))
+						    			let _values=$("[name='_attribute']").val().split(',')
+						    			let _index=_values.indexOf($(this).attr('data-slug'))
 						    			_values.splice(_index,1)
 						    			$("[name='_attribute']").val(_values.join());
 						    		}
 						    	}
 						    	else {
 						    		if(! $("[name='_attribute']").val().includes($(this).attr('data-slug'))) {
-						    			_values=$("[name='_attribute']").val().split(',')
+						    			let _values=$("[name='_attribute']").val().split(',')
 						    			_values.push($(this).attr('data-slug'))
 						    			$("[name='_attribute']").val(_values.join())
 						    		}
