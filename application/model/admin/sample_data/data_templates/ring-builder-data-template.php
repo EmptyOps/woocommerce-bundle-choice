@@ -232,7 +232,7 @@ class Ring_Builder_Data_Template extends Pair_Builder_Data_Template {
         return array(
                     array(
                         'thumb' => '',
-                        'name' => 'Diamond Shape',
+                        'name' => 'Diamond',
                         'description' => 'Diamond shapes category',
                         'slug' => 'eo_diamond_shape_cat',
                         'child'=> 
@@ -393,7 +393,7 @@ class Ring_Builder_Data_Template extends Pair_Builder_Data_Template {
                     
                     array(
                         'thumb' => '',
-                        'name' => 'Setting Shape',
+                        'name' => 'Setting',
                         'description' => 'Setting shapes category',
                         'slug' => 'eo_setting_shape_cat',
                         'child'=> 
