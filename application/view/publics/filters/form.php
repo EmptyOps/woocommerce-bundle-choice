@@ -61,7 +61,11 @@ if(wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting
 if(empty($current_category) and empty($_GET['EO_WBC'])) {
 	$current_category = wbc()->common->get_category('category',null, explode(',', wbc()->options->get_option('sc_filter_setting','shop_cat_filter_category') ) );
 }
-
+	$_per_page = wc_get_loop_prop('per_page');
+        
+    if(empty($_per_page)){
+        $_per_page = apply_filters('loop_shop_per_page',wc_get_default_products_per_row() * wc_get_default_product_rows_per_page());
+    }
 ?>	
 		
 	<!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
@@ -70,7 +74,8 @@ if(empty($current_category) and empty($_GET['EO_WBC'])) {
 	<form method="GET" name="<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter" id="<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter" style="clear: both;">
 		<?php do_action('eowbc_pre_filter_form'); ?>
 		<input type="hidden" name="eo_wbc_filter" value="1" />	
-		<input type="hidden" name="paged" value="1" />	
+		<input type="hidden" name="paged" value="1" />
+		<input type="hidden" name="eo_wbc_page" size="<?php echo $_per_page; ?>" />	
 		<input type="hidden" name="last_paged" value="1" />
 		<?php if(apply_filters('eowbc_show_filter_actions_field',true)): ?>
 		<input type="hidden" name="action" value="eo_wbc_filter"/>
