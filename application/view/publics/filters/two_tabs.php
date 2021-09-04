@@ -23,6 +23,7 @@
         $('[name="cat_filter__two_tabs"]').val($(this).data('category'));*/
 
         jQuery('[name="_current_category"]').val(jQuery(this).data('category'));
+        jQuery('[name="_category"]').val(jQuery(this).data('category'));
 
         //cat_filter__two_tabs
 				$('.filter_setting_advance_two_tabs .item').removeClass('active');
