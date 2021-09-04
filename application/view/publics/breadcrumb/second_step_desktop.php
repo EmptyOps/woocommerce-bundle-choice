@@ -3,6 +3,7 @@
 /*
 *   Template to show breadcrumb second step for desktop
 */
+$model_images = \eo\wbc\model\Images::instance();
 
 ?>
 <div class="<?php echo (($step==$order)?'active ':(($step>$order)?'completed ':(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb)?'':'disabled'))); ?> step" >
@@ -21,7 +22,7 @@
         </div>
         <?php else: ?>                
             <div class="column  product_image_section" style="padding-top: 0px;padding-bottom: 0px;">
-                <?php echo $second->get_image(); ?>
+                <img src="<?php echo $model_images->id2url($second->get_image_id()); ?>">
             </div>
             <div class="column eowbc_breadcrumb_font" style="font-size: x-small;">
                 <?php _e(wc_price($second->get_price())); ?>

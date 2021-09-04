@@ -4,6 +4,8 @@
 *   Template to show breadcrumb first step for desktop
 */
 
+$model_images = \eo\wbc\model\Images::instance();
+
 ?>
 
 <style type="text/css">
@@ -46,7 +48,7 @@
         </div>
         <?php else: ?>
         <div class="column  product_image_section" style="padding-top: 0px;padding-bottom: 0px;">
-            <?php echo $first->get_image(); ?>
+            <img src="<?php echo $model_images->id2url($first->get_image_id()); ?>">
         </div>
         <div class="column eowbc_breadcrumb_font" style="font-size: x-small;">
             <?php _e(wc_price($first->get_price())); ?>

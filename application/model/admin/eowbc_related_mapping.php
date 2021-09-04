@@ -283,7 +283,7 @@ class Eowbc_Related_Mapping /*extends Eowbc_Model*/ {
 		$map = unserialize(wbc()->options->get_option_group($prefix.'_map_master'));
 
 		$map = apply_filters($prefix.'_map_master',$map);
-
+		
 		if(empty(wbc()->sanitize->post('product_id'))){
 			return array();
 		}		
@@ -298,7 +298,7 @@ class Eowbc_Related_Mapping /*extends Eowbc_Model*/ {
   		$default_attributes = $product->get_default_attributes();
   		$attributes = $product->get_attributes();
 
-  		if(!empty($default_attributes) and is_array($default_attributes) and !empty($attributes) and is_array($attributes) and count($default_attributes)!==count($attributes) ){
+  		if(empty($default_attributes) and is_array($default_attributes) and !empty($attributes) and is_array($attributes) and count($default_attributes)!==count($attributes) ){
 
   			foreach ($attributes as $attribute_key=> $attribute) {
   				if(empty($default_attributes[$attribute_key])){
@@ -325,8 +325,30 @@ class Eowbc_Related_Mapping /*extends Eowbc_Model*/ {
             'paged' => 1,
         );
 
-        $meta_query = array();
-        $tax_query = array();
+        $meta_query = array('relation' => 'AND');
+        $tax_query = array('relation' => 'AND');
+
+
+        if(!empty($product_cats)){
+
+        	$this_category_list = array();
+        	foreach($product_cats as $product_cat_id) {
+        		$this_category_list[] = array(
+	                        'taxonomy' => 'product_cat',
+	                        'field' => 'id',
+	                        'terms' => array($product_cat_id),
+	                        'compare'=>'EXISTS IN'
+	                    );
+        	}
+
+        	if(!empty($this_category_list)){
+
+        		$this_category_list['relation'] = 'AND';
+        		$tax_query[] = 	$this_category_list;
+        	}	        
+	    }
+
+        
 
   		if(!empty($map) and is_array($map)){
   			foreach ($map as $map_key => $map_value) {
@@ -379,12 +401,12 @@ class Eowbc_Related_Mapping /*extends Eowbc_Model*/ {
 
   						if(!empty($range_list)){
   							$tax_query[]=array(
-                                    'relation' => 'OR',
+                                    'relation' => 'AND',
                                     array(
                                       	'orderby'=>'meta_value',
                                       	'taxonomy' =>$range_list['taxonomy'],
                                     	'field' => 'term_id',
-                                        'terms' => $range_list['terms'],
+                                        'terms' => array_keys($range_list['terms']),
                                         'compare'=>'EXISTS IN'
                                     ),
                                 );
@@ -456,12 +478,12 @@ class Eowbc_Related_Mapping /*extends Eowbc_Model*/ {
   						} else {
   							
   							$tax_query[]=array(
-                                'relation' => 'OR',
+                                'relation' => 'AND',
                                 array(
                                   	'orderby'=>'meta_value',
                                   	'taxonomy' =>$final_list['taxonomy'],
                                 	'field' => 'term_id',
-                                    'terms' => $final_list['terms'],
+                                    'terms' =>  array_keys($final_list['terms']),
                                     'compare'=>'EXISTS IN'
                                 ),
                             );	  						
@@ -481,6 +503,10 @@ class Eowbc_Related_Mapping /*extends Eowbc_Model*/ {
 
   		// mahesh@emptyops.com -- 12-08-2021 -- all products except this one.
   		$args['post__not_in'] = array($product->get_id());
+
+  		/*echo "<pre>";
+  		print_r($args);
+  		echo "</pre>";*/
 
   		$query = new \WP_Query( $args );
   		$products_list = array();

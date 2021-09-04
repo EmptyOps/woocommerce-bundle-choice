@@ -593,9 +593,9 @@ class Product {
         wbc()->theme->load('js','product');
         /*Hide sidebar and make content area full width.*/
         if(apply_filters('eowbc_filter_sidebars_widgets',true)){
-            add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
+            /*add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
                 return array( false );
-            });    
+            });    */
         }
         
         ob_start();        
