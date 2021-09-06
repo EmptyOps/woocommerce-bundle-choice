@@ -356,7 +356,7 @@ class Product {
                     $category_link=$this->eo_wbc_category_link();
 
                     $url=get_bloginfo('url').($remove_index?'':'/index.php')."/{$category_base}/".$category_link.
-                    wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>2,'FIRST'=>$post->ID,'SECOND'=>wbc()->sanitize->get('SECOND'),'CART'=>wbc()->sanitize->get('CART'),'ATT_LINK'=>implode(' ',$this->att_link),'EO_CHANGE'=>wbc()->sanitize->get('EO_CHANGE')));
+                    wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>2,'FIRST'=>$post->ID,'SECOND'=>''/*wbc()->sanitize->get('SECOND')*/,'CART'=>wbc()->sanitize->get('CART'),'ATT_LINK'=>implode(' ',$this->att_link),'EO_CHANGE'=>wbc()->sanitize->get('EO_CHANGE')));
 
                 // } elseif($category==get_option('eo_wbc_second_slug')) {
                 } elseif($category==wbc()->options->get_option('configuration','second_slug')) {
