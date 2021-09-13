@@ -39,11 +39,10 @@ function eo_wbc_filter_render_html(data,render_container) {
 	
 	/*console.log(data);*/
 
-	let container_html = jQuery(jQuery(data),'.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products').html();
-	
+	let container_html = jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products',jQuery(data)).html();	
 	
 	if(container_html===undefined || container_html==='') {
-		container_html = jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products',jQuery(data)).html();
+		container_html = jQuery(jQuery(data),'.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products').html();
 	}
 
 	if(container_html===undefined || container_html==='') {
@@ -201,7 +200,7 @@ jQuery(document).ready(function($){
 	window.eo_wbc_object = window.eo_wbc_object || {};
 	window.eo_wbc_object.enable_filter = window.eo_wbc_object.enable_filter || false;
 
-	jQuery('body').on('click','.woocommerce-pagination a.page-numbers',function(e){
+	jQuery('body').on('click','.navigation .page-numbers,.woocommerce-pagination a.page-numbers',function(e){
 	    e.preventDefault();
 	    e.stopPropagation();
 	    

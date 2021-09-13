@@ -21,6 +21,7 @@ class Public_Handler {
 	}
 
 	public static function process(){
+
 		/*
 		*	root method to process all the frontend requests.
 		*/		
@@ -99,6 +100,11 @@ class Public_Handler {
 		
 		$features = array_filter(unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array()))));
 		
+		/*var_dump(!empty(array_intersect(array_values($features),array_keys(wbc()->config->get_builders()))),	
+        	wbc()->options->get_option('configuration','config_category',0) == 1,
+            wbc()->options->get_option('configuration','config_map',0) == 1);
+		die();*/
+
         if(	!empty(array_intersect(array_values($features),array_keys(wbc()->config->get_builders())))
         		and        	
         	wbc()->options->get_option('configuration','config_category',0) == 1
@@ -106,6 +112,8 @@ class Public_Handler {
             wbc()->options->get_option('configuration','config_map',0) == 1
         ){
         	
+
+
         	// Support for new url from old url structure.
         	// @since 1.0.0 
         	// prior to 1.0.0 old url was supported
