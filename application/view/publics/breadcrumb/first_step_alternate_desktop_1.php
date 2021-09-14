@@ -18,11 +18,32 @@
                 <div>&nbsp;</div>
             <?php else:?>
                 <?php 
-                    $view_url = !empty(wbc()->sanitize->get('FIRST')) ? eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('FIRST'),$order):'#';
-                    $remove_url = !empty(wbc()->sanitize->get('FIRST'))?eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('FIRST')):'#';                            
-                    if(empty($remove_url) or $remove_url=='#'){
-                        $remove_url = !empty(wbc()->sanitize->get('FIRST'))?eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,sanitize_text_field($first)):'#';
-                    }                            
+                    $view_url = '';                
+                    if(!empty($first) and !is_wp_error($first)){
+                        $view_url =  eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url($first->get_id(),$order);
+                    } else {
+                        $view_url = eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('FIRST'),$order);
+                    }
+
+                    if(empty($view_url)){
+                        $view_url = '#';
+                    }
+
+
+
+                    $change_url = '';
+                    if(!empty($first) and !is_wp_error($first)){
+
+                        $change_url = \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,$first->get_id());
+                          
+                    } else {
+
+                        $change_url = \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('FIRST'));
+                    }
+
+                    if(empty($change_url)){
+                        $change_url = '#';
+                    }                           
                 if(empty($view_url) or $view_url=='#'){
                     ?>
                         <div class="description eowbc_breadcrumb_font">Choose a</div>
@@ -34,7 +55,7 @@
                 <div class="description eowbc_breadcrumb_font"><?php _e($first_name); ?></div>
                 <div><?php /*_e(get_woocommerce_currency().wc_price($first->get_price()));*/ ?><?php _e(wc_price(apply_filters('eowbc_breadcrumb_first_price',$first->get_price(),$first))); ?></div>
                 
-                <div><u><a href="<?php echo $view_url; ?>">View</a></u>&nbsp;|&nbsp;<u><a href="<?php echo $remove_url; ?>" data-remove-url="<?php echo $remove_url; ?>"><?php _e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_change_action_text','Change',true,true)); ?></a></u></div>
+                <div><u><a href="<?php echo $view_url; ?>">View</a></u>&nbsp;|&nbsp;<u><a href="<?php echo $change_url; ?>" data-remove-url="<?php echo $change_url; ?>"><?php _e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_change_action_text','Change',true,true)); ?></a></u></div>
             <?php } endif; ?>                    
         </div>                
         <div class="column">

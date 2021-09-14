@@ -321,8 +321,12 @@ class Preview {
                 wbc()->load->model('publics/component/eowbc_breadcrumb');
                 $content= \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_add_breadcrumb(wbc()->sanitize->get('STEP'),wbc()->sanitize->get('BEGIN')).'<br/>';
                 
+<<<<<<< HEAD
                 $content.='<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><div class="ui special cards centered" style="margin: auto !important;direction: ltr;
     min-width: fit-content !important;max-width: fit-content !important;">'.
+=======
+                $content.='<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><div class="ui special cards centered" style="margin: auto !important;min-width: fit-content !important;max-width: fit-content !important;">'.
+>>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
                     '<div class="card">'.
                         '<div class="blurring dimmable image">'.
                           '<div class="ui dimmer inverted transition hidden">'.
@@ -335,12 +339,12 @@ class Preview {
                           '</div>'.
                         '<div class="content">'.
                             '<div class="header">'.($first->get_title()).'</div>'.
-                            '<div class="meta">'.__($set['FIRST'][2]?"<br/>".implode('<br/>',wbc()->wc->eo_wbc_get_product_variation_attributes($set['FIRST'][2],$set['FIRST']['variation'])):'').
+                            '<div class="meta">'.__($set['FIRST'][2]?"<br/>".implode('<br/>',wbc()->wc->eo_wbc_get_product_variation_attributes($set['FIRST'][2],$set['FIRST']['variation'])):implode('</br>',wbc()->wc->wc_display_product_attributes($set['FIRST'][0],'FIRST') ) ).
                             '</div>'.
                         '</div>'.
                         '<div class="extra content">'.
                             '<div class="header description">'.
-                                (wc_price($first->get_price())."&nbsp;X&nbsp;".$set['FIRST'][1]).
+                                (wc_price($first->get_price())."<span class='eowbc_product_multiplier'>&nbsp;X&nbsp;".$set['FIRST'][1]).'</span>'.
                             '</div>'.
                         '</div>'.
                     '</div>'.
@@ -357,12 +361,12 @@ class Preview {
                         '</div>'.
                         '<div class="content">'.
                             '<div class="header">'.__($second->get_title()).'</div>'.
-                            '<div class="meta">'.__($set['SECOND'][2]?"<br/>".implode('<br/>',wbc()->wc->eo_wbc_get_product_variation_attributes($set['SECOND'][2],$set['SECOND']['variation'])):'').
+                            '<div class="meta">'.__($set['SECOND'][2]?"<br/>".implode('<br/>',wbc()->wc->eo_wbc_get_product_variation_attributes($set['SECOND'][2],$set['SECOND']['variation'])):implode('</br>',wbc()->wc->wc_display_product_attributes($set['SECOND'][0],'SECOND') )).
                             '</div>'.
                         '</div>'.
                         '<div class="extra content">'.
                             '<div class="header description">'.
-                                (wc_price($second->get_price())."&nbsp;X&nbsp;".$set['SECOND'][1]).
+                                (wc_price($second->get_price())."<span class='eowbc_product_multiplier'>&nbsp;X&nbsp;".$set['SECOND'][1]).'</span>'.
                             '</div>'.
                         '</div>'.
                     '</div>'.

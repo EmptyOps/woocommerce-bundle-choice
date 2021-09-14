@@ -242,26 +242,63 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 
 			//supposed to be shown on any page of admin panel
 			if( !empty(get_option('eowbc_error_count',0)) or !empty(get_option('eowbc_warning_count',0)) ){
-				$message_type = 'warning'; /*negative*/
-				$message_title = 'Warning';
-				$error_message = array();
-				if( !empty(get_option('eowbc_error_count',0)) ) {
-					$message_type = 'error';
-					$message_title = 'Error';
-					$error_message[] = get_option('eowbc_error_count',0).' Error ';
+
+				if(isset($_GET['eowbc_disable_warning']) and !empty($_GET['eowbc_disable_warning'])){
+					wbc()->options->update_option('_system','eowbc_disable_warning', true);
 				}
 
-				if( !empty(get_option('eowbc_warning_count',0)) ) {					
-					$error_message[] = get_option('eowbc_warning_count',0).' Warning ';
+				if(isset($_GET['eowbc_disable_error']) and !empty($_GET['eowbc_disable_error'])){
+					wbc()->options->update_option('_system','eowbc_disable_error', true);
 				}
 
-				$error_message = implode(' and ', $error_message);
+				if(!wbc()->options->get_option('_system','eowbc_disable_error',false)) {
+					
+					
 
-				add_action( 'admin_notices',function() use($message_type,$message_title,$error_message){
-					//printf('<div class="ui %s message"><i class="close icon"></i><div class="header">%s</div><p>'.constant('EOWBC_NAME').' have noticed <strong>%s</strong>, would you like to <a href="%s">have a look</a> or <a href="%s">report to the support</a>.</p></div>',$message_type,$message_title,$error_message,admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'),admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'));
-					printf('<div class="notice notice-%s is-dismissible"><p><strong>%s</strong> '.constant('EOWBC_NAME').' have noticed <strong>%s</strong>, would you like to <a href="%s">have a look</a> or <a href="%s">report to the support</a>.</p></div>',$message_type,$message_title,$error_message,admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'),admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'));
-				});
+					$message_type = 'warning'; /*negative*/
+					$message_title = 'Warning';
 
+					$hide_warning_btn = "";
+
+					$error_message = array();
+					if( !empty(get_option('eowbc_error_count',0)) ) {
+						$message_type = 'error';
+						$message_title = 'Error';
+						$error_message[] = get_option('eowbc_error_count',0).' Error ';
+					}
+
+					if(!wbc()->options->get_option('_system','eowbc_disable_warning',false)){
+						if( !empty(get_option('eowbc_warning_count',0)) ) {					
+							$error_message[] = get_option('eowbc_warning_count',0).' Warning ';
+						}
+						
+						$hide_warning_url = '';
+						if(strpos('?',$_SERVER['REQUEST_URI'])!==false){
+							$hide_warning_url = '&eowbc_disable_warning=1';
+						} else {
+							$hide_warning_url = '?eowbc_disable_warning=1';
+						}
+
+						$hide_warning_btn = "<a class='ui button red' style='' href='".$hide_warning_url."'>Don't show me warnings</a>";
+					}
+
+
+					$hide_error_url = '';
+					if(strpos('?',$_SERVER['REQUEST_URI'])!==false){
+						$hide_error_url = '&eowbc_disable_error=1';
+					} else {
+						$hide_error_url = '?eowbc_disable_error=1';
+					}
+
+					$hide_error_btn = "<a class='ui button red' style='' href='".$hide_error_url."'>Don't show me Errors</a>";
+
+					$error_message = implode(' and ', $error_message);
+
+					add_action( 'admin_notices',function() use($message_type,$message_title,$error_message,$hide_warning_btn,$hide_error_btn){
+						//printf('<div class="ui %s message"><i class="close icon"></i><div class="header">%s</div><p>'.constant('EOWBC_NAME').' have noticed <strong>%s</strong>, would you like to <a href="%s">have a look</a> or <a href="%s">report to the support</a>.</p></div>',$message_type,$message_title,$error_message,admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'),admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'));
+						printf('<div class="notice notice-%s is-dismissible"><p><strong>%s</strong> '.constant('EOWBC_NAME').' have noticed <strong>%s</strong>, would you like to <a href="%s">have a look</a> or <a href="%s">report to the support</a>.</p> %s %s </div>',$message_type,$message_title,$error_message,admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'),admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'),$hide_warning_btn,$hide_error_btn);
+					});
+				}
 			}
 			
 			//supposed to be shown on any page of admin panel

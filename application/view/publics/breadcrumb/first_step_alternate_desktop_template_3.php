@@ -4,6 +4,33 @@
 *	Template to show breadcrumb first step for desktop
 */
 
+$view_url = '';                
+if(!empty($first) and !is_wp_error($first)){
+    $view_url =  eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url($first->get_id(),$order);
+} else {
+    $view_url = eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('FIRST'),$order);
+}
+
+if(empty($view_url)){
+    $view_url = '#';
+}
+
+
+
+$change_url = '';
+if(!empty($first) and !is_wp_error($first)){
+
+    $change_url = \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,$first->get_id());
+      
+} else {
+
+    $change_url = \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('FIRST'));
+}
+
+if(empty($change_url)){
+    $change_url = '#';
+}
+
 ?>
 <style type="text/css">
     .eo-wbc-container.container .ui.grid>* {
@@ -26,7 +53,7 @@
         padding: 4px;
     }*/
 </style>
-<div class="step <?php echo (($step==$order)?'active ':(($step>$order)?'completed ':(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb)?'':'disabled'))); ?>" style="" >            
+<div class="step <?php echo (($step==$order)?'active ':(($step>$order)?'completed ':(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb)?'':' '))); ?>" style="" >            
     <div class="ui equal width grid" style="width: 100%;margin-top: -1em !important;">
         <div class="ui grid">
             <div class="column eowbc_breadcrumb_font"><?php echo $order; ?></div>
@@ -47,7 +74,11 @@
         <div class="column eowbc_breadcrumb_font" style="font-size: x-small;">
             <?php _e(wc_price(apply_filters('eowbc_breadcrumb_first_price',$first->get_price(),$first))); ?>
             <br/>
+
             <u><a href="<?php echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url($first->get_id(),$order); //echo !empty(wbc()->sanitize->get('FIRST')) ? eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('FIRST'),$order):'#'; ?>">View</a></u>&nbsp;|&nbsp;<u><a href="<?php echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,$first->get_id())//!empty(wbc()->sanitize->get('FIRST'))?eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('FIRST')):'#'; ?>"><?php _e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_change_action_text','Change',true,true)); ?></a></u>
+
+            <!-- <u><a href="<?php //echo $view_url ?>">View</a></u>&nbsp;|&nbsp;<u><a href="<?php //echo $change_url; ?>"><?php //_e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_change_action_text','Change',true,true)); ?></a></u> -->
+
         </div>                        
         
     <?php endif; ?>

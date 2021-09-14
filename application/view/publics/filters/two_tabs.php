@@ -30,7 +30,7 @@
 				$(this).addClass('active');
         let group_id = $(this).data('tab-name');
         let display_style = 'inline-block';
-        <?php if(wp_is_mobile() and !wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
+        <?php if(wp_is_mobile() and !wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_1'): ?>
           display_style='block';
         <?php endif; ?>
         $('[data-tab-group="'+group_id+'"]:not(.toggle_sticky_mob_filter.advance_filter_mob)').not('[data-tab-group]:has([data-switch_filter_type-alternate])').css('display',display_style);
@@ -43,7 +43,7 @@
           if(typeof(reset_script)!==typeof(undefined) && reset_script!=''){
             eval(reset_script);
           }          
-          <?php if(wp_is_mobile() and !wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
+          <?php if(wp_is_mobile() and !wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_1'): ?>
             if($(this).hasClass('active')){
               $(this).trigger('click');
             }
@@ -53,7 +53,7 @@
             }        
           <?php endif; ?>
 
-          <?php if(wp_is_mobile() and wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
+          <?php if(wp_is_mobile() and wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_1'): ?>
             if($(this).hasClass('active')){
               $(this).trigger('click');
             }          
@@ -70,7 +70,7 @@
           
         });
 
-        <?php if(wp_is_mobile() and wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
+        <?php if(wp_is_mobile() and wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_1'): ?>
           $('#advance_filter_mob_alternate').removeClass('status_hidden');
           $(".toggle_sticky_mob_filter.advance_filter_mob[data-tab-group='"+$(this).data('tab-altname')+"'],.toggle_sticky_mob_filter.advance_filter_mob[data-tab-group='']").hide();
         <?php endif; ?>

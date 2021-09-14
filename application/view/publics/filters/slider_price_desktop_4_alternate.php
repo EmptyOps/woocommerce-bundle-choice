@@ -7,21 +7,23 @@
 ?>
 <div class="<?php echo $width_class; ?>">
 	<p style="display: inline-block;margin-top: 0.25em;"class="ui three wide field num_slider">
-		<span class="ui header">Price</span><?php if($reset): ?>
-			&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_price(event,'<?php echo $min; ?>','<?php echo $max; ?>')">&nbsp;<u>reset</u></span>
-			<?php endif; ?>
-	</p>
-	<div style="display: inline-block;" class="field twelve ui wide">
 
-		
+		<span class="ui header">Price</span>
+		<?php if($reset): ?>
+			&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_price(event,'<?php echo $min; ?>','<?php echo $max; ?>')">&nbsp;<u>reset</u></span>
+		<?php endif; ?>
+		<span class="ui grey text" style="cursor: pointer;"><i class="question circle outline icon" data-help="<h2>Price</h2><br/>All of our prices are in <?php _e(get_woocommerce_currency()); ?>"></i></span>
+
+	</p>
+	<div style="display: inline-block;" class="field twelve ui wide">		
 		<div class="ui tiny form" style="padding:0px 6%;">
 		  <div class="three fields">
 		    <div class="field">	      
-		      <input style="font-size: 13px; height: 24px; width: 6em; -webkit-appearance: none;" value="<?php echo $prefix.$min.$postfix; ?>" type="text" class="text_slider_price aligned left" name="text_min_price" data-sep="<?php _e($seprator); ?>">
+		      <input style="font-size: 13px; height: 24px; -webkit-appearance: none;" value="<?php echo $prefix.' '.number_format($min,2,$seprator,',').' '.$postfix; ?>" type="text" class="text_slider_price aligned left" name="text_min_price" data-sep="<?php _e($seprator); ?>">
 		    </div>
 		    <div class="field"></div>
 		    <div class="field">	      
-		      <input style="font-size: 13px; height: 24px;" value="<?php echo $prefix.$max.$postfix;; ?>" type="text" class="text_slider_price aligned right" name="text_max_price" data-sep="<?php _e($seprator); ?>">
+		      <input style="font-size: 13px; height: 24px;" value="<?php echo $prefix.' '.number_format($max,2,$seprator,',').' '.$postfix; ?>" type="text" class="text_slider_price aligned right" name="text_max_price" data-sep="<?php _e($seprator); ?>">
 		    </div>
 		  </div>	  
 		</div>				

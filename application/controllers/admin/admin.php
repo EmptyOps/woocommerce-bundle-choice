@@ -28,6 +28,14 @@ class Admin {
 
 		do_action( 'wbc_before_admin_process_request' );
 
+		if( version_compare( constant('WC_VERSION'), '3.6' ) >=0){
+			// check version if it is compatible to use the lookup table!
+
+			// init the lookup manager to improve the frontend filter and search.
+			wbc()->load->model('admin/lookup-manager');
+			\eo\wbc\model\admin\Lookup_Manager::instance()->init();
+		}
+		
 		//Hook to update product prices as per the price control feature on the product update feature.		
 		$bonus_features = array_filter(unserialize(wbc()->options->get_option('setting_status_setting_status_setting','bonus_features',serialize(array()))));
         if(!empty($bonus_features['price_control'])){
@@ -135,6 +143,9 @@ class Admin {
 
 				wp_register_script('eowbc_fomantic_js',constant('EOWBC_ASSET_URL').'js/fomantic/semantic.min.js');
 				wp_enqueue_script('eowbc_fomantic_js');
+
+				wp_register_script('eowbc_fomantic__js',constant('EOWBC_ASSET_URL').'js/_semantic.js');
+				wp_enqueue_script('eowbc_fomantic__js');
 
 				wp_register_script('eowbc_admin_js',constant('EOWBC_ASSET_URL').'js/admin-js.js');
 				

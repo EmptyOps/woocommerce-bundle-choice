@@ -51,6 +51,12 @@ class WBC_Common {
 		if(!empty($post) and !empty($in_category) and is_array($in_category)){
 
 			$ancestors = array();
+			$parent = $post->get_parent_id();
+			if(!empty($parent) and !is_wp_error($parent)){
+				$post = wbc()->wc->eo_wbc_get_product($parent);
+			}
+
+
 			$ids = $post->get_category_ids();
 			if(!empty($ids) and is_array($ids)){
 				foreach ($ids as $id) {

@@ -5,6 +5,10 @@ use eo\wbc\controllers\admin\menu\Admin_Menu_Factory;
 use eo\wbc\controllers\admin\Admin;
 use eo\wbc\controllers\Public_Handler;
 
+use eo\wbc\controllers\visual_tools\WP_Bakery;
+use eo\wbc\controllers\visual_tools\Elementor;
+use eo\wbc\controllers\visual_tools\WP_Beaver;
+
 defined( 'ABSPATH' ) || exit;
 
 class Http_Handler {
@@ -26,7 +30,11 @@ class Http_Handler {
 	public static function process(){
 
 		do_action( 'before_process_request', array(self::instance(),'preprocess_request') );		
+<<<<<<< HEAD
 		
+=======
+				
+>>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
 		if(is_admin()){
 
 			do_action( 'wbc_before_process_admin_request' );	

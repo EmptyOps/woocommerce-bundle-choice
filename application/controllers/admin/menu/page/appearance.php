@@ -21,7 +21,10 @@ if ( ! class_exists( 'Appearance' ) ) {
 
 		public static function get_form_definition( $is_add_sample_values = false ) {
 			//wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_wrap_mobile');
+
 			wbc()->load->model('admin/form-builder');
+			wbc()->load->model('category-attribute');
+			
 
 			$form_definition = array(
 				'wid_btns'=>array(
@@ -265,6 +268,19 @@ if ( ! class_exists( 'Appearance' ) ) {
 									'options'=>array('1'=>' '),
 									'is_id_as_name'=>true,
 									'class'=>array(),
+								),
+								'appearance_filters_limit_height'=>array(
+									'label'=>'Filter height',
+									'type'=>'text',
+									'sanitize'=>'sanitize_text_field',
+									'value'=>'',									
+									'is_id_as_name'=>true,
+									'class'=>array(),
+									'visible_info'=>array( 'label'=>'( If value given then the height of the filter is applied to all filters and limited to this height for all the filters with equal height. )',
+										'type'=>'visible_info',
+										'class'=>array('fluid', 'small'),
+										'size_class'=>array('sixteen','wide'),
+									)
 								), 
 							),
 							array( 
@@ -371,7 +387,11 @@ if ( ! class_exists( 'Appearance' ) ) {
 										'type'=>'devider',
 									),*/
 
+<<<<<<< HEAD
 					/*'appearence_product_page_toggle_status'=>array(
+=======
+						/*						'appearence_product_page_toggle_status'=>array(
+>>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
 							'label'=>eowbc_lang('Toggle Button Enabled?'),
 							'type'=>'checkbox',
 							'value'=>array(wbc()->options->get_option('appearance_product_page','appearence_product_page_toggle_status')),
@@ -560,6 +580,7 @@ if ( ! class_exists( 'Appearance' ) ) {
 				'preview_page'=>array(
 					'label'=>'Preview Page',
 					'form'=>array(
+<<<<<<< HEAD
 						'appearence_preview_page_section'=>array('label'=>'Appearence of Preview Page','type'=>'segment','desc'=>'Change the appearence of the Preview Page.')
 						,
 						'enable_enquiry'=>array(
@@ -576,6 +597,32 @@ if ( ! class_exists( 'Appearance' ) ) {
 								'size_class'=>array('sixteen','wide'),
 							),	
 						), 
+=======
+
+						'first_category_attributes'=>array(
+							'label'=>eowbc_lang('First Category Attributes'),
+							'type'=>'select',
+							'value'=>'',
+							'options'=>\eo\wbc\model\Category_Attribute::instance()->get_attributs(),
+							'is_id_as_name'=>true,
+							'class'=>array('fluid','search','multiple','clearable'),							
+							'field_attr'=>array('multiple=""'),
+							'size_class'=>array('three','wide'),
+							'inline'=>false,							
+						),
+						'second_category_attributes'=>array(
+							'label'=>eowbc_lang('Second Category Attributes'),
+							'type'=>'select',
+							'value'=>'',
+							'options'=>\eo\wbc\model\Category_Attribute::instance()->get_attributs(),
+							'is_id_as_name'=>true,
+							'class'=>array('fluid','search','multiple','clearable'),							
+							'field_attr'=>array('multiple=""'),
+							'size_class'=>array('three','wide'),
+							'inline'=>false,							
+						),
+					 
+>>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
 						'preview_page_submit_btn'=>array(
 							'label'=>eowbc_lang('Save'),
 							'type'=>'button',								
@@ -585,8 +632,12 @@ if ( ! class_exists( 'Appearance' ) ) {
 							'attr'=>array('data-tab_key="preview_page"', 'data-action="save"'),
 						)
 					)
+<<<<<<< HEAD
 				)
 				
+=======
+				)				
+>>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
 			);
 
 			if($is_add_sample_values) {

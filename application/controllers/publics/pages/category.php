@@ -36,7 +36,10 @@ class Category {
         //If add to cart triggred
         // Detection : only one category item get length > 0 
         //   i.e. using XOR check if only one of two have been set.
-        if( !empty(wbc()->sanitize->get('CART')) && empty(wbc()->sanitize->get('EO_CHANGE')) && ( empty(wbc()->sanitize->get('FIRST')) XOR empty(wbc()->sanitize->get('SECOND')) ) and !empty(wbc()->sanitize->get('EO_WBC')) ) {
+
+        // removed the XOR check as it won't the users cahnge the item if the url does not has EO_CHANGE as param when the chnge link is clicked
+
+        if( !empty(wbc()->sanitize->get('CART')) /*&& (!empty(wbc()->sanitize->get('EO_CHANGE')) XOR ( empty(wbc()->sanitize->get('FIRST')) XOR empty(wbc()->sanitize->get('SECOND')) ))*/ and !empty(wbc()->sanitize->get('EO_WBC')) ) {
             //Iff condition is mutual exclusive, store it to  the session.
             $this->add2cart();            
         }
@@ -97,6 +100,7 @@ class Category {
     }
 
     public function add2cart() {
+        
         $cart=base64_decode(wbc()->sanitize->get('CART'),TRUE);
         if(!empty($cart)){
 
@@ -104,6 +108,10 @@ class Category {
             $cart=(array)json_decode($cart);
             
             if(is_array($cart) OR is_object($cart)) {
+                if(empty($cart['quantity'])){
+                    $cart['quantity'] = 1;
+                }
+                
                 if(empty($cart['quantity'])){
                     $cart['quantity'] = 1;
                 }
@@ -215,11 +223,16 @@ class Category {
 
     }
 
+<<<<<<< HEAD
     public function eo_wbc_add_breadcrumb()
     {   
 
         
 
+=======
+    public function eo_wbc_add_breadcrumb() {           
+        
+>>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
         //Add Breadcumb at top....      
        /* add_action( 'woocommerce_archive_description',function(){     
             wbc()->load->model('publics/component/eowbc_breadcrumb');       
@@ -233,8 +246,12 @@ class Category {
         }, 0);
     }
 
+<<<<<<< HEAD
     public function eo_wbc_render()
     {   
+=======
+    public function eo_wbc_render() {   
+>>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
         
         $features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())));
         
@@ -356,8 +373,12 @@ class Category {
             return $url;
         }
 
+<<<<<<< HEAD
         $external_url = /*$url.'?'.*/wbc()->common->http_query(
             array(
+=======
+        $url_params = array(
+>>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
                 'EO_WBC'=>1,
                 'BEGIN'=>wbc()->sanitize->get('BEGIN'),
                 'STEP'=>wbc()->sanitize->get('STEP'),
@@ -387,6 +408,7 @@ class Category {
                             ''
                         )
                     )
+<<<<<<< HEAD
             )
         );
 
@@ -395,6 +417,15 @@ class Category {
         } else {
             return $url.'?'.$external_url;
         }
+=======
+            );
+
+        if(!empty(wbc()->sanitize->get('EO_CHANGE'))) {
+            $url_params['EO_CHANGE'] = 1;
+        }
+
+        return  $url.'?'.wbc()->common->http_query( $url_params );
+>>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
     }
 
     public function eo_wbc_id_2_slug($id){

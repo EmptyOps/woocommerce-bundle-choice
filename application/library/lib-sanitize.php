@@ -80,9 +80,39 @@ if(!class_exists('WBC_Sanitize')) {
 			}
 		}
 
+<<<<<<< HEAD
 		public function _post(string $post_field){
 			if(isset($_POST[$post_field])) {
 				return $_POST[$post_field];
+=======
+		public function request(string $field){
+			if(isset($_REQUEST[$field])) {
+				return sanitize_text_field($_REQUEST[$field]);
+			} else {
+				return false;
+			}
+		}
+
+		public function _get(string $get_field){
+			if(isset($_GET[$get_field])) {
+				return ($_GET[$get_field]);
+			} else {
+				return false;
+			}
+		}
+
+		public function _post(string $post_field){
+			if(isset($_POST[$post_field])) {
+				return ($_POST[$post_field]);
+			} else {
+				return false;
+			}
+		}
+
+		public function _request(string $field){
+			if(isset($_REQUEST[$field])) {
+				return ($_REQUEST[$field]);
+>>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
 			} else {
 				return false;
 			}

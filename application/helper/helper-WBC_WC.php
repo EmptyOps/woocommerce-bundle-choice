@@ -93,6 +93,7 @@ class WBC_WC {
 	    }
     }
 
+<<<<<<< HEAD
     public function get_terms($parent_id = 0, $orderby = 'menu_order') {
         
         $term_list =array();
@@ -115,6 +116,24 @@ class WBC_WC {
 
     public static function eo_wbc_get_cart_url() {        
         return function_exists('wc_get_cart_url')?wc_get_cart_url():apply_filters( 'woocommerce_get_cart_url', self::eo_wbc_support_get_page_permalink( 'cart' ));
+=======
+    public static function eo_wbc_get_cart_url() {
+        $cart = '';
+        if(function_exists('wc_get_cart_url')) {
+            $cart = wc_get_cart_url();
+        } 
+
+        if(empty($cart)) {
+            $cart = apply_filters( 'woocommerce_get_cart_url', self::eo_wbc_support_get_page_permalink( 'cart' ));   
+        }
+
+        if(empty($cart)){
+            $page_id   = wc_get_page_id('cart');
+            $cart = 0 < $page_id ? get_permalink( $page_id ) : get_home_url();
+        }   
+
+        return $cart;        
+>>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
     }
 
     public function eo_wbc_get_product($product_id){
@@ -181,6 +200,85 @@ class WBC_WC {
             delete_transient('wc_attribute_taxonomies');
             return $id;
         }
+    }
+
+    public function wc_display_product_attributes( $pid, $category_group ='' ) {
+
+        $product = $this->eo_wbc_get_product($pid);
+
+        if(empty($product) or is_wp_error($product)){
+            return array();
+        }
+
+        $product_attributes = array();
+
+        // Display weight and dimensions before attribute list.
+        $display_dimensions = apply_filters( 'wc_product_enable_dimensions_display', $product->has_weight() || $product->has_dimensions() );
+
+        if ( $display_dimensions && $product->has_weight() ) {
+            $product_attributes['weight'] = __( 'Weight', 'woocommerce' ).": ".wc_format_weight( $product->get_weight() );            
+        }
+
+        if ( $display_dimensions && $product->has_dimensions() ) {
+            $product_attributes['dimensions'] = __( 'Dimensions', 'woocommerce' ).": ".wc_format_dimensions( $product->get_dimensions( false ) );
+        }
+
+        // Add product attributes to list.
+        $attributes = array_filter( $product->get_attributes(), 'wc_attributes_array_filter_visible' );
+
+        foreach ( $attributes as $attribute ) {
+            $values = array();
+
+            if ( $attribute->is_taxonomy() ) {
+                $attribute_taxonomy = $attribute->get_taxonomy_object();
+                $attribute_values   = wc_get_product_terms( $product->get_id(), $attribute->get_name(), array( 'fields' => 'all' ) );
+
+                foreach ( $attribute_values as $attribute_value ) {
+                    $value_name = esc_html( $attribute_value->name );
+
+                    if ( $attribute_taxonomy->attribute_public ) {
+                        $values[] = $value_name;
+                    } else {
+                        $values[] = $value_name;
+                    }
+                }
+            } else {
+                $values = $attribute->get_options();
+
+                foreach ( $values as &$value ) {
+                    $value = make_clickable( esc_html( $value ) );
+                }
+            }
+
+            $product_attributes[sanitize_title_with_dashes( $attribute->get_name() ) ] = wc_attribute_label( $attribute->get_name() ).": ".implode( ', ', $values );
+        }
+
+        if(!empty($category_group)){
+            $limit_fields = false;
+            if($category_group == 'FIRST'){
+                $limit_fields = wbc()->options->get_option('appearance_preview_page','first_category_attributes');
+            } elseif ($category_group == 'SECOND') {
+                $limit_fields = wbc()->options->get_option('appearance_preview_page','second_category_attributes');
+            }
+
+            if(!empty($limit_fields)){
+                $new_product_attributes = array();
+                $limit_fields = explode(',',$limit_fields);
+                if(!empty($limit_fields) and is_array($limit_fields)){
+                    foreach ($limit_fields as $field_value) {
+                        if(isset($product_attributes[wc_attribute_taxonomy_name($field_value)])) {
+                            $new_product_attributes[wc_attribute_taxonomy_name($field_value)] = $product_attributes[wc_attribute_taxonomy_name($field_value)];
+                        }                        
+                    }
+
+                    if(!empty($new_product_attributes)){
+                        $product_attributes = $new_product_attributes;
+                    }
+                }
+            }            
+        }
+
+        return $product_attributes;        
     }
 
     public static function eo_wbc_get_product_variation_attributes( $variation_id ,$variation_data=array()) {

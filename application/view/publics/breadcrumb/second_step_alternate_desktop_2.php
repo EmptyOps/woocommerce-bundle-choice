@@ -5,12 +5,12 @@
 */
 
 ?>
-<div class="step <?php echo (($step==$order)?'active ':(($step>$order)?'completed ':(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb)?'':'disabled'))); ?>" style="" >            
-    <div class="ui equal width middle aligned grid" style="width: 100%;padding-top: 0px;text-transform:none;font-family: 'ZapfHumanist601BT-Roman';">        
+<div class="step <?php echo (($step==$order)?'active ':(($step>$order)?'completed ':(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb)?'':' '))); ?>" style="" >            
+    <div class="ui equal width middle aligned grid" style="width: 100%;padding-top: 0px;text-transform:none;font-family: '<?php echo wbc()->options->get_option('appearance_filters','header_font','Avenir'); ?>';">        
 
         <div class="ui column left aligned eowbc_breadcrumb_font"><?php echo $order; ?></div>
         <div class="ui column left aligned">
-            <?php if(empty($second)){ ?>
+            <?php if(empty($second)){ ?>                
                 <div class="title eowbc_breadcrumb_font" <?php _e((!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb) and !empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second_url))?'data-clickable_breadcrumb="'.\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second_url.'"':''); ?>><?php _e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_choose_prefix_text',__('Choose a','woo-bundle-choice'),true,true)); ?> <?php _e($second_name); ?></div>
             <?php } else { ?>
                 <div class="title eowbc_breadcrumb_font"><?php _e($second_name); ?></div>
@@ -31,7 +31,6 @@
                         $image = $woocommerce->plugin_url() . '/assets/images/placeholder.png';
                     }
                 ?>
-
                 <img src = '<?php _e($image); ?>' class='ui mini image'/>
             <?php } ?>
         </div>

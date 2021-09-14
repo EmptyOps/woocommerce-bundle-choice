@@ -113,12 +113,15 @@ if(empty($_per_page)){
 	<!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
 	<!--WooCommerce Product Bundle Choice filter form-->
 
+	<!-- <form method="GET" name="eo_wbc_filter" id="eo_wbc_filter" style="clear: both;"> -->
 	<form method="GET" name="<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter" id="<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter" style="clear: both;">
 		<?php do_action('eowbc_pre_filter_form'); ?>
 		<input type="hidden" name="eo_wbc_filter" value="1" />	
 		<input type="hidden" name="paged" value="1" />
 		<input type="hidden" name="eo_wbc_page" size="<?php echo $_per_page; ?>" />	
 		<input type="hidden" name="last_paged" value="1" />
+
+
 		<?php if(apply_filters('eowbc_show_filter_actions_field',true)): ?>
 		<input type="hidden" name="action" value="eo_wbc_filter"/>
 		<?php endif; ?>
@@ -130,6 +133,12 @@ if(empty($_per_page)){
 			
 		<input type="hidden" name="_category" value="<?php echo implode(',',$thisObj->___category) ?>"/>
 		
+
+		<!-- <input type="hidden" name="_current_category" value="<?php //echo /*$thisObj->_category*/(!empty(wbc()->sanitize->_get('CAT_LINK'))?','.wbc()->sanitize->_get('CAT_LINK'):$current_category); ?>" />
+
+		<input type="hidden" name="_category_query" id="eo_wbc_cat_query" 
+			value="<?php //echo (!empty(wbc()->sanitize->_get('CAT_LINK'))?','.wbc()->sanitize->_get('CAT_LINK'):'')?>" /> -->
+
 		<input type="hidden" name="cat_filter__two_tabs" value=""/>
 		<?php do_action('eo_wbc_additional_form_field',$filter_ui); ?>
 					
@@ -173,11 +182,21 @@ if(empty($_per_page)){
 
 		<input type="hidden" name="_attribute" id="eo_wbc_attr_query" value="<?php echo implode(',',$queried_attributes); ?>" />
 	</form>
-	<br/><br/>
 	<?php if(apply_filters('eowbc_enque_filter_js',call_user_func('__return_true'))): ?>
+	<br/>
+	<?php do_action('eowbc_post_filter_form'); ?>
+	<?php add_action('wp_footer',function(){ ?>
 	<script type="text/javascript">		
 
-		jQuery(document).ready(function($){			
+		jQuery(document).ready(function($){
+			
+			jQuery.fn.jui_accordion = jQuery.fn.accordion;
+			jQuery.fn.jui_slider = jQuery.fn.slider;
+			jQuery.fn.jui_checkbox = jQuery.fn.checkbox;
+
+			jQuery.fn.accordion = jQuery.fn.ui_accordion;
+			jQuery.fn.slider = jQuery.fn.ui_slider;
+			jQuery.fn.checkbox = jQuery.fn.ui_checkbox;
 
 			window.document.splugins = window.document.splugins || {};
 			window.document.splugins.ui = window.document.splugins.ui || {};
@@ -190,11 +209,11 @@ if(empty($_per_page)){
 
 				jQuery(selector).each(function(i,e){
 
-					_min = Number(jQuery(e).attr('data-min'));						
-					_max = Number(jQuery(e).attr('data-max'));												
-					_labels = jQuery(e).attr('data-labels');						
+					let _min = Number(jQuery(e).attr('data-min'));						
+					let _max = Number(jQuery(e).attr('data-max'));												
+					let _labels = jQuery(e).attr('data-labels');						
 
-					_params=new Object();												
+					let _params=new Object();												
 											
 					if(_labels != undefined && _labels != false){
 
@@ -206,6 +225,7 @@ if(empty($_per_page)){
 							console.log(_labels);*/
 							if(_labels!=undefined){
 								let _label_value = _labels[value];
+
 								let _label_max_length = parseInt(jQuery(e).data('label_max_size'));
 
 								if((typeof(_label_max_length)==typeof(undefined)) || _label_max_length==""){
@@ -213,6 +233,9 @@ if(empty($_per_page)){
 								}								
 
 								if(_label_value.length>_label_max_length){
+
+									/*if(_label_value.length><?php //_e((int)wbc()->options->get_option('filters_'.(empty($filter_prefix)?'':$filter_prefix).'filter_setting','filter_setting_slider_max_lblsize',6)) ?>){*/
+
 									_label_value = _label_value.split(' ');
 									_label_value = _label_value.map(function(_label_value_ele){
 										return _label_value_ele[0];
@@ -249,34 +272,58 @@ if(empty($_per_page)){
 					
 					_params.onMove=function(value, min, max) {
 
-						__slugs = jQuery(e).attr('data-slugs');
+
+						/*__slugs = jQuery(e).attr('data-slugs');*/
+
+						let __slugs = jQuery(e).attr('data-slugs');
 						
 						if(typeof __slugs != typeof undefined && __slugs != false){
 							//PASS
 						} else {
-							_sep = jQuery(e).attr('data-sep');
-							_prefix = jQuery(this).data('prefix');
+
+							/*_sep = jQuery(e).attr('data-sep');
+							_prefix = jQuery(this).data('prefix');*/
+
+							let _sep = jQuery(e).attr('data-sep');
+							let _prefix = jQuery(this).data('prefix');
+
 							if(typeof(_prefix) == typeof(undefined) || _prefix=='undefined'){
 								_prefix = '';
 							}
 
-							_postfix = jQuery(this).data('postfix');
+
+							let _postfix = jQuery(this).data('postfix');
+
 							if(typeof(_postfix) == typeof(undefined) || _postfix=='undefined'){
 								_postfix = '';
 							}
+							
+							
+							if(jQuery(this).attr('data-slug')==='price'){
+								/*jQuery("input[name='text_min_"+jQuery(e).attr('data-slug')+"']").val( _prefix+' '+(_sep=='.'?Number(min).toFixed(2):(Number(min).toFixed(2)).toString().replace('.',',')).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")+' '+_postfix );
+				        		jQuery("input[name='text_max_"+jQuery(e).attr('data-slug')+"']").val( _prefix+' '+(_sep=='.'?Number(max).toFixed(2):(Number(max).toFixed(2)).toString().replace('.',',')).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")+' '+_postfix);*/
 
-				        	jQuery("input[name='text_min_"+jQuery(e).attr('data-slug')+"']").val( _prefix+(_sep=='.'?Number(min).toFixed(2):(Number(min).toFixed(2)).toString().replace('.',','))+_postfix );
-				        	jQuery("input[name='text_max_"+jQuery(e).attr('data-slug')+"']").val( _prefix+(_sep=='.'?Number(max).toFixed(2):(Number(max).toFixed(2)).toString().replace('.',','))+_postfix);
+				        		jQuery("input[name='text_min_"+jQuery(e).attr('data-slug')+"']").val( _prefix+' '+(_sep=='.'?Number(min).toFixed(0):(Number(min).toFixed(0)).toString().replace('.',',')).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")+'.00 '+_postfix );
+				        		jQuery("input[name='text_max_"+jQuery(e).attr('data-slug')+"']").val( _prefix+' '+(_sep=='.'?Number(max).toFixed(0):(Number(max).toFixed(0)).toString().replace('.',',')).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")+'.00 '+_postfix);
+							} else {
+
+								console.log("input[name='text_min_"+jQuery(e).attr('data-slug')+"'] || input[name='text_max_"+jQuery(e).attr('data-slug')+"']");
+
+				        		jQuery("input[name='text_min_"+jQuery(e).attr('data-slug')+"']").val( _prefix+(_sep=='.'?Number(min).toFixed(2):(Number(min).toFixed(2)).toString().replace('.',','))+_postfix );
+				        		jQuery("input[name='text_max_"+jQuery(e).attr('data-slug')+"']").val( _prefix+(_sep=='.'?Number(max).toFixed(2):(Number(max).toFixed(2)).toString().replace('.',','))+_postfix);
+
+				        	}
 				        }					      	
 					};
 
 					_params.onChange=function(value, min, max) {	
-						_labels = jQuery(e).attr('data-labels');
-						__slugs = jQuery(e).attr('data-slugs');
+
+						let _labels = jQuery(e).attr('data-labels');
+						let __slugs = jQuery(e).attr('data-slugs');
 						
-						_min = Number (jQuery(e).attr('data-min'));						
-						_max = Number(jQuery(e).attr('data-max'));
-						_sep = jQuery(e).attr('data-sep');
+						let _min = Number (jQuery(e).attr('data-min'));						
+						let _max = Number(jQuery(e).attr('data-max'));
+						let _sep = jQuery(e).attr('data-sep');
 
 						console.log(min,_min,max,_max);
 
@@ -302,6 +349,8 @@ if(empty($_per_page)){
 					        	jQuery("input[name='max_"+jQuery(e).attr('data-slug')+"']").val(__slugs.split(',')[max]);
 
 							} else {
+								
+								console.log("input[name='min_"+jQuery(e).attr('data-slug')+"'] || input[name='max_"+jQuery(e).attr('data-slug')+"']",Number(min).toFixed(2),Number(max).toFixed(2),min,max,__slugs);
 
 					        	jQuery("input[name='min_"+jQuery(e).attr('data-slug')+"']").val(Number(min).toFixed(2));
 					        	jQuery("input[name='max_"+jQuery(e).attr('data-slug')+"']").val(Number(max).toFixed(2));
@@ -313,23 +362,26 @@ if(empty($_per_page)){
 
 						    		if(jQuery("[name='_attribute']").val().includes(jQuery(this).attr('data-slug'))) {
 						    			
-						    			_values=jQuery("[name='_attribute']").val().split(',')
-						    			_index=_values.indexOf(jQuery(this).attr('data-slug'))
+						    			let _values=jQuery("[name='_attribute']").val().split(',')
+						    			let _index=_values.indexOf(jQuery(this).attr('data-slug'))
+
 						    			_values.splice(_index,1)
 						    			jQuery("[name='_attribute']").val(_values.join());
 						    		}
 						    	}
 						    	else {
+
 						    		if(! jQuery("[name='_attribute']").val().includes(jQuery(this).attr('data-slug'))) {
-						    			_values=jQuery("[name='_attribute']").val().split(',')
-						    			_values.push(jQuery(this).attr('data-slug'))
-						    			jQuery("[name='_attribute']").val(_values.join())
+						    			let _values=jQuery("[name='_attribute']").val().split(',');
+						    			_values.push(jQuery(this).attr('data-slug'));
+						    			jQuery("[name='_attribute']").val(_values.join());
 						    		}
 						    	}
 					    	}
 					    	jQuery('[name="paged"]').val('1');
-					    	<?php if(empty(wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
+					    	<?php if(empty(wbc()->options->get_option('filters_'.(empty($filter_prefix)?'':$filter_prefix).'filter_setting','filter_setting_btnfilter_now'))): ?>
 					    	jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':new Event('change',this)});
+
 					    	<?php endif; ?>
 					    } else if( min==_min && max==_max ){
 					    	if(jQuery(this).attr('data-slug')!='price'){
@@ -355,9 +407,12 @@ if(empty($_per_page)){
 						_params.autoAdjustLabels=false;	
 					}					
 					
-					jQuery("input.text_slider_"+jQuery(e).attr('data-slug')).change(function() {				    
+
+					jQuery("input.text_slider_"+jQuery(e).attr('data-slug')).change(function() {
 						
 						//jQuery("#text_slider_"+jQuery(e).attr('data-slug')).slider("set rangeValue",jQuery("[name=min_"+jQuery(e).attr('data-slug')+"]").val(),jQuery("[name=max_"+jQuery(e).attr('data-slug')+"]").val());
+											
+						let _sep = jQuery(e).attr('data-sep');
 
 						let prefix = jQuery(e).attr('data-prefix');
 						let postfix = jQuery(e).attr('data-postfix');
@@ -366,10 +421,19 @@ if(empty($_per_page)){
 						
 						let max_value = jQuery("[name='text_max_"+jQuery(e).attr('data-slug')+"']").val();
 						
+						if(_sep == '.' || typeof(_sep)===typeof(undefined)) {
+							min_value = min_value.replace(/,/g, '');
+							max_value = max_value.replace(/,/g, '');
+						} else {
+							min_value = min_value.replace(/\,(?=.*\,)/g, '');
+							max_value = max_value.replace(/\,(?=.*\,)/g, '');
+						}
+
 						if(prefix!=='' && typeof(prefix)!==typeof(undefined) && prefix.hasOwnProperty('length')){
 							if(min_value.includes(prefix)){
 								min_value = min_value.slice(prefix.length);	
 							}							
+
 							if(max_value.includes(prefix)){
 								max_value = max_value.slice(prefix.length);
 							}
@@ -379,11 +443,12 @@ if(empty($_per_page)){
 							if(min_value.includes(postfix)){
 								min_value = min_value.slice(0,-1*postfix.length);
 							}
-							if(min_value.includes(postfix)){
+
+							if(max_value.includes(postfix)){
 								max_value = max_value.slice(0,-1*postfix.length);
 							}
-						}
-						
+						}						
+
 						jQuery("#text_slider_"+jQuery(e).attr('data-slug')).slider("set rangeValue",min_value,max_value);
 					});
 
@@ -392,6 +457,13 @@ if(empty($_per_page)){
 					jQuery.fn.slider = window.document.splugins.ui.slider;
 					jQuery(e).slider(_params);
 					jQuery.fn.slider = ui_slider;
+
+						/*jQuery.fn.slider = jQuery.fn.ui_slider;
+						jQuery("#text_slider_"+jQuery(e).attr('data-slug')).slider("set rangeValue",min_value,max_value);
+						jQuery.fn.slider = jQuery.fn.jui_slider;
+					});							
+					jQuery(e).slider(_params);*/
+
 				});
 			};
 
@@ -407,6 +479,7 @@ if(empty($_per_page)){
 
 			var secondary_mobile_only=jQuery(secondary_filter).find(".mobile.only");
 			
+
 			if( typeof(jQuery.fn.accordion) ==='function' ){
 				jQuery('.ui.accordion').accordion();
 			}
@@ -414,19 +487,41 @@ if(empty($_per_page)){
 			window.eo.slider(jQuery('.eo-wbc-container.filters').find('.ui.slider'));				
 		
 			/* Activate initiation of sliders at secondary segments. */
-			if(jQuery(secondary_computer_only).css('display')!='none'){			
+			if(<?php echo wp_is_mobile()?0:true; ?>/*jQuery(secondary_computer_only).css('display')!='none'*/){			
+
 
 				jQuery("#advance_filter").on('click',function(){
 					jQuery("#advance_filter").find('.ui.icon').toggleClass('up down');
 					jQuery(secondary_filter).transition('slide down');
 				}).trigger('click');			
 
-			} else if(jQuery(secondary_mobile_only).css('display')!='none') {
-				
+			} else/* if(jQuery(secondary_mobile_only).css('display')!='none')*/ {
+				<?php if(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_2'): ?>
+				jQuery(secondary_filter).css('display','none');
 				jQuery("#advance_filter").on('click',function(){					
 					jQuery(this).find('.ui.icon').toggleClass('up down');
-					jQuery(secondary_filter).transition('fly right');				
+					if(jQuery(primary_filter).css('display')!=='none'){
+						//switch to advance filter.
+						jQuery(primary_filter).transition('fly right',{duration:0});	
+						jQuery(secondary_filter).transition('fly left',{duration:700});
+						jQuery(this).html('<i class="ui icon chevron left" style="position: absolute;left: 1em;"></i><?php _e('Standard Filters','woo-bundle-choice'); ?>');
+						jQuery(this).css('text-align','right');
+					} else{
+						//switch to basic filter.
+						jQuery(primary_filter).transition('fly right',{duration:700});			
+						jQuery(secondary_filter).transition('fly left',{duration:0});	
+						jQuery(this).html('<?php _e('Advanced Filters','woo-bundle-choice'); ?><i class="ui icon chevron right" style="position: absolute;right: 1em;"></i>');
+						jQuery(this).css('text-align','left');
+					}
+					//jQuery(this).find('.ui.icon').toggleClass('right left');
+									
+				})/*.trigger('click')*/;
+				<?php else: ?>
+				jQuery("#advance_filter").on('click',function(){
+					jQuery(this).find('.ui.icon').toggleClass('up down');
+					jQuery(secondary_filter).transition('fly right');
 				}).trigger('click');
+				<?php endif; ?>
 			}
 
 			/*jQuery(secondary_filter).transition('fade');*/
@@ -436,8 +531,17 @@ if(empty($_per_page)){
 				jQuery("#primary_filter").click(function(e){
 					e.preventDefault();
 					e.stopPropagation();
+
+					/*jQuery("#primary_filter").find('.ui.icon').toggleClass("down up");
+					jQuery('.eo-wbc-container.filters,#advance_filter').transition('fade');*/
+
 					jQuery("#primary_filter").find('.ui.icon').toggleClass("down up");
+					<?php if(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_2'): ?>
+						jQuery('.eo-wbc-container.filters>.segments,#advance_filter').transition('fade');
+					<?php else: ?>
 					jQuery('.eo-wbc-container.filters,#advance_filter').transition('fade');
+					<?php endif; ?>
+
 				}).trigger('click');
 			}
 			
@@ -446,7 +550,17 @@ if(empty($_per_page)){
 
 			if( typeof(jQuery.fn.checkbox) ==='function' ) {
 
+
 				jQuery('.checkbox').checkbox({onChange:function(event){
+
+					/*_values = jQuery('[name="checklist_'+__slug+'"]').val();
+
+					if (_values=='' || typeof(_values)==typeof(undefined)) {
+						return true;
+					}
+
+					_values = _values.split(',');*/
+
 
 					__slug=jQuery(this).attr('data-filter-slug');
 
@@ -456,8 +570,9 @@ if(empty($_per_page)){
 
 					_values= Array();
 					if(jQuery('[name="checklist_'+__slug+'"]').length>0 && typeof(jQuery('[name="checklist_'+__slug+'"]').val()) !== typeof(undefined)){
-						jQuery('[name="checklist_'+__slug+'"]').val().split(',');	
+						_values = jQuery('[name="checklist_'+__slug+'"]').val().split(',');	
 					}				
+
 
 					if(_values.indexOf(jQuery(this).attr('data-slug'))!=-1){
 
@@ -496,14 +611,19 @@ if(empty($_per_page)){
 			    	<?php endif; ?>
 				}});				
 			}
+				
 			/*----------------------------------------------------*/
 			/*----------------------------------------------------*/
+			<?php do_action('eowbc_post_filter_javascript',$filter_ui); ?>
+
+			jQuery.fn.ui_accordion = jQuery.fn.accordion;
+			jQuery.fn.ui_slider = jQuery.fn.slider;
+			jQuery.fn.ui_checkbox = jQuery.fn.checkbox;
+			jQuery.fn.accordion = jQuery.fn.jui_accordion;
+			jQuery.fn.slider = jQuery.fn.jui_slider;
+			jQuery.fn.checkbox = jQuery.fn.jui_checkbox;
 
 		});
-
-
 	</script> 
 
 	<?php endif; ?>
-
-	<?php do_action('eowbc_post_filter_javascript',$filter_ui); ?>

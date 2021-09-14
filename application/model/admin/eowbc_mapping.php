@@ -47,7 +47,7 @@ class Eowbc_Mapping extends Eowbc_Model {
 								'is_header' => 0, 
 								'val' => '',
 								'is_checkbox' => true, 
-								'checkbox'=> array('id'=>$rv["id"],'value'=>array(),'options'=>array($rv["id"]=>''),'class'=>'','where'=>'in_table')
+								'checkbox'=> array('id'=>$rk/*$rv["id"]*/,'value'=>array(),'options'=>array($rk/*$rv["id"]*/=>''),'class'=>'','where'=>'in_table')
 							);
 
 						// foreach ($rv as $rvk => $rvv) {
@@ -276,6 +276,26 @@ class Eowbc_Mapping extends Eowbc_Model {
 			$res['type'] = 'error';
 			$res['msg'] = 'Selected item does not exists!';
 		}		
+		return $res;
+	}
+
+	public function group($res) {
+
+		$map = unserialize(wbc()->options->get_option_group('eowbc_mapping_group'));
+		$ids = wbc()->sanitize->_post('ids');
+		if(!empty($ids)) {
+			if(!empty($map)) {
+				foreach ($map as $map_key => $map_value) {
+					if(!array_diff($ids,$map_value)) {
+						$res['msg'] = 'Group already exists!';
+						return $res;
+					}
+				}				
+			}			
+		}
+		$map[wbc()->common->createUniqueId()] = $ids;
+		wbc()->options->update_option_group('eowbc_mapping_group',serialize($map));
+		$res['msg'] = 'Group added successfully!';
 		return $res;
 	}	
 

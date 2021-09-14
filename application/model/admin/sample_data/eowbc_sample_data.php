@@ -995,7 +995,11 @@ class Eowbc_Sample_Data {
 	      $posts=$attachment_check->get_posts();
 	      return $posts[0]->ID;
 	    }
+<<<<<<< HEAD
 
+=======
+	    
+>>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
 		$file = wp_upload_bits($name, null, file_get_contents(str_replace(' ','%20',$path)));
 
 		if (!$file['error']) {

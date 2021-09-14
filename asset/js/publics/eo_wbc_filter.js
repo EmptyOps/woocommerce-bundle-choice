@@ -126,6 +126,25 @@ function eo_wbc_filter_render_html(data,render_container) {
 	if(typeof(yith_wcwl_l10n)=='object'){
 		eowbc_yith_wishlist_fix();
 	}
+	// Fix for the color swatches.
+	if(typeof(jQuery.fn.tawcvs_variation_swatches_form)=='function'){
+		/*jQuery( '.variations_form' ).tawcvs_variation_swatches_form();
+		jQuery( document.body ).trigger( 'tawcvs_initialized' );*/
+		jQuery(".variable-item.color-variable-item").on('click',function(){
+			let _this = jQuery(this);
+			let _target_container = _this.parentsUntil('.product-block').parent().find('.product-transition .product-image');
+
+			
+			let _images_data = JSON.parse(_target_container.attr('data-swatch'));	
+			let _index = _this.attr('data-value');
+
+			if(_images_data.hasOwnProperty(_index)){
+				_target_container.html(_images_data[_index]);				
+				jQuery('.variations_form').WooVariationSwatches();
+				jQuery('.variations_form').WooVariationSwatches();
+			}
+		});
+	}
 }
 
 /*if(eo_wbc_object.disp_regular=='1'){
@@ -136,6 +155,14 @@ function eo_wbc_filter_render_html(data,render_container) {
 
 		if(window.eo_wbc_object.enable_filter===false){
 			return false;
+		}
+
+		if(init_call) {
+			jQuery(form_selector).find("[name='paged']").val('1');
+			jQuery(form_selector).find("[name='last_paged']").val('1');
+
+			jQuery(form_selector).find("[name='_category']").val(jQuery(form_selector).find("[name='_current_category']").val());
+			jQuery(form_selector).find("[name='_attribute']").val("");
 		}
 
 		if(render_container==='') {
@@ -159,16 +186,21 @@ function eo_wbc_filter_render_html(data,render_container) {
 		}
 
 		console.log(eo_wbc_object);
-
 		jQuery.ajax({
 			url: ajax_url,//form.attr('action'),
 			data:form.serialize(), // form data
 			type:'GET'/*form.attr('method')*/, // POST
 			beforeSend:function(xhr){
-				//jQuery("body").fadeTo('slow','0.3')
+				
 				window.eo_wbc_object.enable_filter = false;	
-				jQuery("#loading").addClass('loading');							
-				console.log(this.url);					
+
+				/* Code block to cancel last call to save network resource */
+				/*if(eo_wbc_object.hasOwnProperty('nativ_xhr')){
+					eo_wbc_object.nativ_xhr.abort();
+				}
+				eo_wbc_object.nativ_xhr = xhr;*/
+
+				jQuery("#loading").addClass('loading');																
 			},
 			complete : function(){
 				//console.log(this.url);
@@ -183,6 +215,11 @@ function eo_wbc_filter_render_html(data,render_container) {
 				window.eo_wbc_object.enable_filter = true;
 			}
 		});
+
+		if(!init_call){
+			jQuery(".reset_all_filters.mobile_2").removeClass('mobile_2_hidden');
+		}
+
 		return false;
 	}	
 	
@@ -193,6 +230,7 @@ function eo_wbc_filter_render_html(data,render_container) {
 	if( (typeof(jQuery.fn.eo_wbc_filter_change)=="undefined" || jQuery.fn.eo_wbc_filter_change==undefined) && typeof(window.eo_wbc_e_tabview) !== 'object' ){		
 		jQuery.fn.eo_wbc_filter_change = jQuery.fn.eo_wbc_filter_change_native;
 	}
+
 /*}*/
 
 jQuery(document).ready(function($){
@@ -221,22 +259,36 @@ jQuery(document).ready(function($){
 	});
 
 	jQuery(document).on('click',".reset_all_filters",function(){
-        jQuery("[data-reset]").each(function(e){
+		//window.eo_wbc_object.enable_filter = false;
+        jQuery("[data-reset]").each(function(i,e){        	
+        	
+        	if(i!==(jQuery("[data-reset]").length-1)) {
+				window.eo_wbc_object.enable_filter = false;        		
+        	} else {
+        		window.eo_wbc_object.enable_filter = true;
+        		jQuery.fn.eo_wbc_filter_change(true);
+        	}
             eval(jQuery(this).data('reset'));
-        })
-        jQuery.fn.eo_wbc_filter_change();
+        });
+
+        /*window.eo_wbc_object.enable_filter = true;
+        jQuery.fn.eo_wbc_filter_change();*/
+        jQuery(".reset_all_filters.mobile_2").addClass('mobile_2_hidden');
         return false;
     })  
 
 	if(eo_wbc_object.disp_regular){
 	
+
 		//jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html('');		
+
 		if(!eo_wbc_object.btnfilter_now){			
 			jQuery("#eo_wbc_filter").on('change',"input:not(:checkbox)",function(){
 				jQuery('[name="paged"]').val('1');
 				jQuery.fn.eo_wbc_filter_change();										
 			});
 		}
+
 
 		if(typeof(jQuery.fn.eo_wbc_filter_change) === typeof(undefined) &&  typeof(window.eo_wbc_filter_change) === 'function') {
 			jQuery.fn.eo_wbc_filter_change = window.eo_wbc_filter_change;				
@@ -248,6 +300,8 @@ jQuery(document).ready(function($){
 		if(typeof(eo_wbc_e_tabview)===typeof(undefined) || typeof(eo_wbc_e_tabview.init_data)===typeof(undefined) || typeof(eo_wbc_object)==typeof(eo_wbc_object) ){
 			jQuery.fn.eo_wbc_filter_change(true);
 		}
+
+		//jQuery.fn.eo_wbc_filter_change(true);
 
 		//pagination for non-table based view
 
@@ -302,20 +356,27 @@ function reset_icon(e,selector){
 function reset_slider(e,selector,first,second){	
 	e.preventDefault();
 	e.stopPropagation()
+	jQuery.fn.slider = jQuery.fn.ui_slider;
 	jQuery(".ui.slider[data-slug='"+selector+"']").slider('set rangeValue',first,second);
+
 	if(jQuery("[name='_attribute']").val().includes(selector)) {					    			
 		_values=jQuery("[name='_attribute']").val().split(',')
 		_index=_values.indexOf(selector)
 		_values.splice(_index,1)
 		jQuery("[name='_attribute']").val(_values.join());
 	}
+
+	jQuery.fn.slider = jQuery.fn.jui_slider;
+
 	return false;
 }
 
 function reset_price(e,min,max) {
 	e.preventDefault();
 	e.stopPropagation()
+	jQuery.fn.slider = jQuery.fn.ui_slider;
 	jQuery(".ui.slider[data-slug='price']").slider('set rangeValue',min,max);
+	jQuery.fn.slider = jQuery.fn.jui_slider;
 	return false;	
 }
 

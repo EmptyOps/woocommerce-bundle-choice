@@ -640,13 +640,13 @@ if ( ! class_exists( 'Filters' ) ) {
 						),
 						'filter_setting_alternate_mobile'=>array(
 								'label'=>'Alternate Mobile Filter Widget',
-								'type'=>'checkbox',
+								'type'=>'radio',
 								'sanitize'=>'sanitize_text_field',
-								'value'=>array(wbc()->options->get_option('filters_filter_setting','filter_setting_alternate_mobile')),
-								'options'=>array('filter_setting_alternate_mobile'=>' Check here to enable alternate filter view for mobile.'),
+								'value'=>wbc()->options->get_option('filters_filter_setting','filter_setting_alternate_mobile','default'),
+								'options'=>array('default'=>'Default Template','mobile_1'=>'Mobile View Template 1','mobile_2'=>'Mobile View Template 2'),
 								'class'=>array(),
 								'size_class'=>array('eight','wide'),
-								'inline'=>true,
+								'inline'=>false,
 							),
 						'submit_btn'=>array(
 							'label'=>eowbc_lang('Save'),
@@ -943,8 +943,12 @@ if ( ! class_exists( 'Filters' ) ) {
 							'd_fconfig_add_help_text'=>array(
 								'label'=>'Help Text',
 								'type'=>'textarea',
+<<<<<<< HEAD
 								'value'=>'',
 								/*'sanitize'=>'sanitize_text_field',*/
+=======
+								'value'=>'',								
+>>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
 								'attr'=>array('style="width:100%;"'),
 								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
@@ -979,6 +983,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'is_id_as_name'=>true,
 								'class'=>array()
 							),
+<<<<<<< HEAD
 							'd_fconfig_slider_max_lblsize'=>array(
 								'label'=>'Slider Options Text Limit',
 								'type'=>'text',
@@ -993,6 +998,21 @@ if ( ! class_exists( 'Filters' ) ) {
 									'class'=>array('small'),
 									// 'size_class'=>array('sixteen','wide'),
 								),
+=======
+							'd_fconfig_prefix'=>array(
+								'label'=>'Prefix string to the numeric slider',
+								'type'=>'text',
+								'value'=>'',								
+								'is_id_as_name'=>true,
+								'class'=>array()
+							),
+							'd_fconfig_postfix'=>array(
+								'label'=>'Postfix string to the numeric slider',
+								'type'=>'text',
+								'value'=>'',								
+								'is_id_as_name'=>true,
+								'class'=>array()
+>>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
 							),
 							'config_advance_end'=>array(
 								'type'=>'accordian',
@@ -1294,8 +1314,12 @@ if ( ! class_exists( 'Filters' ) ) {
 							's_fconfig_add_help_text'=>array(
 								'label'=>'Help Text',
 								'type'=>'textarea',
+<<<<<<< HEAD
 								'value'=>'',
 								/*'sanitize'=>'sanitize_text_field',*/
+=======
+								'value'=>'',								
+>>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
 								'attr'=>array('style="width:100%;"'),
 								'is_id_as_name'=>true,
 								'class'=>array('fluid'),
@@ -1330,6 +1354,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'is_id_as_name'=>true,
 								'class'=>array()
 							),
+<<<<<<< HEAD
 							's_fconfig_slider_max_lblsize'=>array(
 								'label'=>'Slider Options Text Limit',
 								'type'=>'text',
@@ -1345,6 +1370,22 @@ if ( ! class_exists( 'Filters' ) ) {
 									// 'size_class'=>array('sixteen','wide'),
 								),
 							),
+=======
+							's_fconfig_prefix'=>array(
+								'label'=>'Prefix string to the numeric slider',
+								'type'=>'text',
+								'value'=>'',								
+								'is_id_as_name'=>true,
+								'class'=>array()
+							),
+							's_fconfig_postfix'=>array(
+								'label'=>'Postfix string to the numeric slider',
+								'type'=>'text',
+								'value'=>'',								
+								'is_id_as_name'=>true,
+								'class'=>array()
+							),							
+>>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
 							'config_advance_end'=>array(
 								'type'=>'accordian',
 								'section_type'=>'end'
@@ -1427,10 +1468,22 @@ if ( ! class_exists( 'Filters' ) ) {
 								'attr'=>array('data-tab_key="filter_set"', 'data-action="save"'),
 							)
 						)
-					),
-				
+					)
 			);
 
+			if( version_compare( constant('WC_VERSION'), '3.6' ) >=0) {
+				$form_definition['filter_sync'] = array(
+					'label'=>__("Sync",'woo-bundle-choice'),
+					'form' => array(
+						'filter_sync_button'=>array(
+							'label'=>eowbc_lang('Sync Now'),
+							'type'=>'button',
+							'class'=>array('secondary'),
+							'inline'=>false,
+						)
+					)
+				);
+			}
 
 			$form_definition=apply_filters('eowbc_admin_form_filters',$form_definition);
 

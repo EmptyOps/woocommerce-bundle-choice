@@ -35,8 +35,8 @@ class Filter
             	array_push($list_slug,$e->term_id);
             });
 			$list = $list_slug;					
-			
-        } else {
+		
+		} else {
 
             $list=get_terms(array('taxonomy'=>$term,'hide_empty'=>FALSE));                
             
@@ -47,18 +47,278 @@ class Filter
 			$_min=array_search($min,array_values($list_slug));
 			$_max=array_search($max,array_values($list_slug));								
 			$list = array_slice(array_keys($list_slug),$_min,($_max-$_min)+1);
-			/*$list=array_filter($list_slug,function($index) use($_min,$_max){
-				return !($index >= $_min AND $index <= $_max);
-			},ARRAY_FILTER_USE_KEY);*/				
-			/*$list=array_column($list,'term_id');*/				
+        
         }
+        
         return $list;
     }
+
+    public function lookup($return_query = false,$sql_join = '',$order_sql = ''){
+    	
+    	$pids = array();
+
+    	$table_columns = unserialize(wbc()->options->get_option('lookup_manager','table_columns',serialize(array())));
+
+    	/*echo "<pre>";
+    	print_r($table_columns);
+    	echo "</pre>";
+    	die();*/
+
+        if(empty($table_columns)){
+        	return array();
+        }
+
+    	if(isset($_REQUEST['products_in']) AND !empty(wbc()->sanitize->request('products_in')) ) {
+    		$pids = explode(',',wbc()->sanitize->request('products_in'));        	
+        }
+
+        $category_fields = array();
+        $attribute_fields = array();
+        $checklist_attribute_fields = array();
+        $_category_query_list = array();
+
+        if( isset($_REQUEST['_category']) OR isset($_REQUEST['_current_category']) ) {
+
+        	if(!empty(wbc()->sanitize->request('_category'))) {
+        		//////////////////////////////////////////////////
+        		$__category_list = array_unique(array_filter(explode(',', wbc()->sanitize->request('_category'))));
+
+        		if(!in_array('cat_link',$__category_list)){
+        			$__category_list[]='cat_link';
+        		}
+
+				foreach($__category_list  as $_category) {
+					////////////////////////
+					//echo $_category.PHP_EOL;
+
+					if(isset($_REQUEST['cat_filter_'.$_category]) && (!empty(wbc()->sanitize->request('cat_filter_'.$_category))) ) {
+						
+						$result_false = false;
+												
+						foreach ( array_filter(explode(',',wbc()->sanitize->request('cat_filter_'.$_category))) as $_category_field_index=>$_category_field) {
+						
+							$_category_field_chunk = array_filter(explode('+',$_category_field));
+
+							if(!empty($_category_field_chunk) and is_array($_category_field_chunk)) {
+								
+								foreach($_category_field_chunk as $_category_field_chunk_) {
+									if(!empty($table_columns['category'][$_category_field_chunk_])){
+										if('cat_filter_cat_link' !== 'cat_filter_'.$_category && !empty(wbc()->sanitize->request('cat_filter_cat_link'))) {
+
+											$_category_query_list[] = $_category_field_chunk_;
+
+										} else {
+											if(empty($category_fields[$_category_field_index])) {
+												$category_fields[$_category_field_index] = array();
+											}
+
+											$category_fields[$_category_field_index][] = $_category_field_chunk_;
+										}
+									} else {
+										$result_false = true;
+									}		
+								}
+							} else {
+								$result_false = true;
+							}
+
+							
+						}
+
+						if(empty($category_fields) and $result_false === true){							
+							return array();
+						}
+                    }
+				}        		
+        	} 
+        
+        	
+        	if(!empty(wbc()->sanitize->request('_category_query')) and empty(wbc()->sanitize->request('CAT_LINK'))) {
+        		$_category_query = array_filter(explode(',',wbc()->sanitize->request('_category_query')));
+
+        		foreach ($_category_query as $_category_field) {
+        			$_category_field = array_filter(explode('+',$_category_field));
+					if(!empty($_category_field)) {
+						$_category_query_list[] = $_category_field;
+					}
+				}
+        	}
+
+        	if(empty($category_fields) and  !empty(wbc()->sanitize->request('_current_category'))) {
+        		
+        		foreach (array_filter(explode(',',wbc()->sanitize->request('_current_category'))) as $_category_field_index=>$_category_field) {
+					if(!empty($table_columns['category'][$_category_field])){						
+						$category_fields[$_category_field_index] = array();
+						$category_fields[$_category_field_index][] = $_category_field;
+					}
+				}
+        	}
+
+        	///////////////////////////////////////////////
+            //Filter section for attributes
+            ///////////////////////////////////////////////  
+            if(!empty(wbc()->sanitize->request('_attribute'))) {
+            	foreach (array_filter(explode(',', wbc()->sanitize->request('_attribute'))) as $attr) {
+
+
+            		if(!empty($table_columns['attribute'][$attr])) {
+
+	            		if (isset($_REQUEST['checklist_'.$attr]) && !empty(wbc()->sanitize->request('checklist_'.$attr))) {
+
+	            			$checklist_attributes = array();
+	            			foreach (array_filter(explode(',',wbc()->sanitize->request('checklist_'.$attr))) as $_attribute_field) {
+	            				
+								$_attribute_field = get_term_by('slug',$_attribute_field,$attr);
+								
+								if(!empty($_attribute_field) and !is_wp_error($_attribute_field)){
+									$checklist_attributes[] = $_attribute_field->term_id;
+								}
+							}
+
+							if(!empty($checklist_attributes)) {
+								$checklist_attribute_fields[$attr] = $checklist_attributes;
+							}
+
+	                    } elseif(isset($_REQUEST['min_'.$attr]) && isset($_REQUEST['max_'.$attr])){
+	                        
+	                        if ( is_numeric(wbc()->sanitize->request('min_'.$attr)) && is_numeric(wbc()->sanitize->request('max_'.$attr)) ) {
+
+	                        	$min_max_attributes =  $this->range($attr,wbc()->sanitize->request('min_'.$attr),wbc()->sanitize->request('max_'.$attr),true);
+
+	                        	if(!empty($min_max_attributes)) {
+									$attribute_fields[$attr] = $min_max_attributes;
+								}
+	                        }
+	                        else {
+
+	                        	$range_attributes = $this->range($attr,wbc()->sanitize->request('min_'.$attr),wbc()->sanitize->request('max_'.$attr));
+	                        	if(!empty($range_attributes)) {
+									$attribute_fields[$attr] = $range_attributes;
+								}
+	                        }                   
+	                    }
+	                }                    
+                }
+            }
+        }
+
+
+        if(empty($category_fields)){
+        	$category_fields = 1;
+        } else {
+        	$field_query_and = array();
+
+        	foreach ($category_fields as $field_and_index=>$field_and) {
+        		if(is_array($field_and) and !empty(array_filter($field_and))) {
+        			$field_query_or = array();
+        			foreach ($field_and as $field_or_index=>$field_or) {
+        				$field_query_or[]="`${field_or}` != 0";
+        			}
+
+        			$field_query_and[] = "(" .implode(' AND ',$field_query_or) .")";
+
+        		} else{
+        			$field_query_and[] = "`${field_and}` != 0";	
+        		}
+        	}
+
+        	$category_fields = "(" .implode(' OR ',$field_query_and) .")"; 
+
+        	/*if(wbc()->options->get_option('mapping_prod_mapping_pref','prod_mapping_pref_category','and')==='and'){
+        		$category_fields = "(" .implode(' AND ',$field_query) .")"; 
+        	} else {
+        		$category_fields = "(" .implode(' OR ',$field_query) .")"; 
+        	}*/
+        }
+        
+        if(empty($_category_query_list)){
+        	$_category_query_list = 1;
+        } else {
+        	$field_query = array();
+        	foreach ($_category_query_list as $field) {
+        		if(is_array($field) and !empty($field)){
+        			$field_values = array();
+        			foreach ($field as $field_value) {
+        				$field_values[] = "`${field_value}` != 0";
+        			}
+        			$field_query[]="(" .implode(' AND ',$field_values) .")";
+        		}else{
+        			$field_query[]="`${field}` != 0";	
+        		}
+        	}
+
+        	if(wbc()->options->get_option('mapping_prod_mapping_pref','prod_mapping_pref_category','and')==='and'){
+        		$_category_query_list = "(" .implode(' AND ',$field_query) .")"; 
+        	} else {
+        		$_category_query_list = "(" .implode(' OR ',$field_query) .")"; 
+        	}
+        }
+       
+        if(empty($attribute_fields)){
+        	$attribute_fields = 1;
+        } else {
+        	$field_query = array();
+        	foreach ($attribute_fields as $key => $field) {
+        		if(is_array($field)){
+        			$field[] = -1;
+        		}
+        		$field_query[]="(`${key}` IN(".implode(',',$field)."))";
+        	}
+        	$attribute_fields = "(" .implode(' AND ', $field_query). ")";
+        }
+
+        if(empty($checklist_attribute_fields)){
+        	/*$checklist_attribute_fields = 1;*/
+        } else {
+        	$field_query = array();
+        	foreach ($checklist_attribute_fields as $key => $field) {
+
+        		if(is_array($field)){
+        			$field[] = -1;
+        		}
+        		
+        		$field_query[]="(`${key}` IN(".implode(',',$field)."))";
+        	}
+        	$attribute_fields.=" AND (" .implode(' OR ',$field_query) .")"; 
+        }
+
+        global $wpdb;
+        
+        /*echo "<pre>";
+        print_r($_REQUEST);
+        echo "</pre>";
+
+     	echo "SELECT `product_id`,`parent_id` FROM `{$wpdb->wc_product_meta_lookup}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql}";
+        die();*/
+
+        if($return_query) {
+        	return "SELECT `product_id`,`parent_id` FROM `{$wpdb->wc_product_meta_lookup}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql}";
+        }
+
+        //echo "SELECT `product_id`,`parent_id` FROM `{$wpdb->wc_product_meta_lookup}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ${attribute_fields} ${order_sql}";
+        //die();
+       
+        $result = $wpdb->get_results("SELECT `product_id`,`parent_id` FROM `{$wpdb->wc_product_meta_lookup}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql}",'ARRAY_N');
+
+
+        if(!empty($result) and !is_wp_error($result)){
+
+        	foreach ($result as $value) {
+        		$pids[] = empty($value[1])?$value[0]:$value[1]; 
+        	}
+        }
+
+		$pids = array_unique($pids);		
+		return $pids;
+    }
+
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////
 	//  Enable non table based filter that loads whole page at front :)
 	//////////////////////////////////////////////////////////////////////////////////////////////////
+
 	public function filter() {			
+<<<<<<< HEAD
 		
 		if(!empty(wbc()->sanitize->get('eo_wbc_filter'))) {
 						
@@ -72,11 +332,18 @@ class Filter
 		        }
 		        
    		        if( $query->is_main_query() and !empty($query->query_vars['product_cat'])) {
+=======
+				
+		if(!empty(wbc()->sanitize->get('eo_wbc_filter'))) {
+			
+		    add_filter('pre_get_posts',function($query ) {
 
-		        	if(isset($_GET['products_in']) AND !empty(wbc()->sanitize->get('products_in')) ) {
-		        		$query->set('post__in',explode(',',wbc()->sanitize->get('products_in')));			        	
-			        }
+		        if( $query->is_main_query() and !empty($query->query_vars['product_cat'])) {
+>>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
 
+		        	if( version_compare( constant('WC_VERSION'), '3.6' ) >=0) {
+
+<<<<<<< HEAD
 		        	if( isset($_GET['_category']) OR isset($_GET['_current_category']) ){
 
 		        		$old_tax_query = $query->get('tax_query');
@@ -128,11 +395,20 @@ class Filter
 								if(is_array($old_tax_query) and !empty($old_tax_query)){
 									foreach ($old_tax_query as $old_tax_query_key => $old_tax_query_value) {
 										if(!empty($old_tax_query_value['terms']) and is_array($old_tax_query_value) and in_array($_current_category_term_id,$old_tax_query_value['terms'])){
+=======
+		        		$ids = $this->lookup();		        		
+>>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
 
-											if(count($old_tax_query_value['terms'])==1){
-												unset($old_tax_query[$old_tax_query_key]);
-											} elseif(array_search($_current_category_term_id,$old_tax_query_value['terms']) !==false) { 
+		        		if(!empty($ids)) {
+			        		$query->set('post__in',$ids);
+				        } else {
+				        	$query->set('post__in',array(-1));
+				        }
+						/*echo "<pre>";
+				        print_r($query);
+				        echo "</pre>";*/
 
+<<<<<<< HEAD
 												unset($old_tax_query[$old_tax_query_key]['terms'][array_search($_current_category_term_id,$old_tax_query_value['terms'])]);
 											}
 										}
@@ -159,40 +435,66 @@ class Filter
 		                if(!empty($__attribute)) {
 
 			                foreach ($__attribute as $attr) {
+=======
+				        return $query;				        
+		        	} else {
 
-			                    if(isset($_GET['min_'.$attr]) && isset($_GET['max_'.$attr])){
-			                        
-			                        if ( is_numeric(wbc()->sanitize->get('min_'.$attr)) && is_numeric(wbc()->sanitize->get('max_'.$attr)) ) {
+			        	if(isset($_GET['products_in']) AND !empty(wbc()->sanitize->get('products_in')) ) {
+			        		$query->set('post__in',explode(',',wbc()->sanitize->get('products_in')));			        	
+				        }
 
-			                            $tax_query[]=array(
-			                                'taxonomy' => $attr,
-			                                'field' => 'term_id',
-			                                'terms' => $this->range($attr,wbc()->sanitize->get('min_'.$attr),wbc()->sanitize->get('max_'.$attr),true),
+			        
+			        	if( isset($_GET['_category']) OR isset($_GET['_current_category']) ){
+>>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
+
+			        		$old_tax_query = $query->get('tax_query');
+				            $old_tax_query_taxonomy = array();
+
+			        		$tax_query=array('relation' => 'AND');
+			        		
+			        		$category_query =array();
+
+			                if(!empty(wbc()->sanitize->get('_category'))) {
+			                	
+
+			                    foreach( array_unique(array_filter(explode(',', wbc()->sanitize->get('_category')))) as $_category){
+			                    	
+			                        if(isset($_GET['cat_filter_'.$_category]) && (!empty(wbc()->sanitize->get('cat_filter_'.$_category))) ) {
+
+			                        	$category_query[]=array(
+			                                'taxonomy' => 'product_cat',
+			                                'field' => 'slug',
+			                                'terms' =>array_filter(explode(',',wbc()->sanitize->get('cat_filter_'.$_category))),
 			                                'compare'=>'EXISTS IN'
-			                            );
+			                            );                    
 			                        }
-			                        else {
-
-			                            $tax_query[]=array(
-			                                'taxonomy' => $attr,
-			                                'field' => 'term_id',
-			                                'terms' => $this->range($attr,wbc()->sanitize->get('min_'.$attr),wbc()->sanitize->get('max_'.$attr)),
-			                                'compare'=>'EXISTS IN'
-			                            );
-			                        }                   
 			                    }
-			                    elseif (isset($_GET['checklist_'.$attr]) && !empty(wbc()->sanitize->get('checklist_'.$attr))) {
-			                        $tax_query[]=array(
-			                            'taxonomy' => $attr,
-			                            'field' => 'slug',
-			                            'terms' => array_filter(explode(',',wbc()->sanitize->get('checklist_'.$attr))),
-			                            'compare'=>'EXISTS IN'
-			                        );     
-			                    } 
+
+			                    if(!empty($category_query)) {
+			                    	$category_query[] = array('relation' => (wbc()->options->get_option('mapping_prod_mapping_pref','prod_mapping_pref_category','and')==='and')?'AND':'OR' );
+			                    	$tax_query[] = $category_query;
+			                    }			                    
 			                }
 			                
-			            }
+			                if(!empty(wbc()->sanitize->get('_current_category')) and empty($category_query)) {
+			                	
+			                	$category_query = array('relation' => (wbc()->options->get_option('mapping_prod_mapping_pref','prod_mapping_pref_category','and')==='and')?'AND':'OR' );
+			                	foreach ( array_filter(explode(',',wbc()->sanitize->get('_current_category'))) as $category_query_token) {
+			                		
+		                			$category_query[]=array(
+		                				'relation' => 'AND',
+			                			array(
+					                        'taxonomy' => 'product_cat',
+					                        'field' => 'slug',
+					                        'terms' => explode('+',$category_query_token),
+					                        'compare'=>'EXISTS IN'
+					                    )
+			                		);			                		
+			                	}
+			                	$tax_query[]= $category_query;		                    
+			                }
 
+<<<<<<< HEAD
 			            //$query->set('tax_query',$tax_query);
 			            //print_r($tax_query);
 			           
@@ -205,12 +507,100 @@ class Filter
 
 			            		$query->set('tax_query',$tax_query);
 			            		
+=======
+			                if(!empty(wbc()->sanitize->get('_current_category')) and !empty($tax_query) ) {
+			                	// remove the default query if the tax query is available
+
+								$_current_category_term = get_term_by('slug',explode(',',wbc()->sanitize->get('_current_category'))[0],'product_cat');             	
+								if(!empty($_current_category_term) and !is_wp_error($_current_category_term) and property_exists($_current_category_term,'term_id')){
+									
+									$_current_category_term_id = $_current_category_term->term_id;
+									if(is_array($old_tax_query) and !empty($old_tax_query)){
+										foreach ($old_tax_query as $old_tax_query_key => $old_tax_query_value) {
+											if(!empty($old_tax_query_value['terms']) and is_array($old_tax_query_value) and in_array($_current_category_term_id,$old_tax_query_value['terms'])){
+
+												if(count($old_tax_query_value['terms'])==1){
+													unset($old_tax_query[$old_tax_query_key]);
+												} elseif(array_search($_current_category_term_id,$old_tax_query_value['terms']) !==false) { 
+
+													unset($old_tax_query[$old_tax_query_key]['terms'][array_search($_current_category_term_id,$old_tax_query_value['terms'])]);
+												}
+											}
+										}
+									}
+								}
+			                }	
+			                //$query->set('tax_query',$tax_query);	                
+			                /*$query->set('tax_query',$tax_query);*/
+
+			                ///////////////////////////////////////////////
+		                    //Filter section for attributes
+		                    ///////////////////////////////////////////////  
+			                if(!empty(wbc()->sanitize->get('_attribute'))) {
+
+				                foreach (array_filter(explode(',', wbc()->sanitize->get('_attribute'))) as $attr) {
+
+				                    if(isset($_GET['min_'.$attr]) && isset($_GET['max_'.$attr])){
+				                        
+				                        if ( is_numeric(wbc()->sanitize->get('min_'.$attr)) && is_numeric(wbc()->sanitize->get('max_'.$attr)) ) {
+
+				                            $tax_query[]=array(
+				                                'taxonomy' => $attr,
+				                                'field' => 'term_id',
+				                                'terms' => $this->range($attr,wbc()->sanitize->get('min_'.$attr),wbc()->sanitize->get('max_'.$attr),true),
+				                                'compare'=>'EXISTS IN'
+				                            );
+				                        }
+				                        else {
+
+				                            $tax_query[]=array(
+				                                'taxonomy' => $attr,
+				                                'field' => 'term_id',
+				                                'terms' => $this->range($attr,wbc()->sanitize->get('min_'.$attr),wbc()->sanitize->get('max_'.$attr)),
+				                                'compare'=>'EXISTS IN'
+				                            );
+				                        }                   
+				                    }
+				                    elseif (isset($_GET['checklist_'.$attr]) && !empty(wbc()->sanitize->get('checklist_'.$attr))) {
+				                        $tax_query[]=array(
+				                            'taxonomy' => $attr,
+				                            'field' => 'slug',
+				                            'terms' => array_filter(explode(',',wbc()->sanitize->get('checklist_'.$attr))),
+				                            'compare'=>'EXISTS IN'
+				                        );     
+				                    } 
+				                }
+				                
+				            }
+
+				            //$query->set('tax_query',$tax_query);
+				           
+				            if(is_array($old_tax_query) and !empty($old_tax_query)){
+				            	$old_tax_query_taxonomy = array_column($old_tax_query,'taxonomy');
+				            }
+				            
+				            if(is_array($old_tax_query_taxonomy) AND !empty($old_tax_query_taxonomy)){
+				            	if(in_array('product_visibility',$old_tax_query_taxonomy) and count($old_tax_query_taxonomy)==1) {
+				            		$query->set('tax_query',$tax_query);
+				            		
+					            } else {
+					            	$query->add('tax_query',$tax_query);
+					            }	
+>>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
 				            } else {
 				            	$query->add('tax_query',$tax_query);
-				            }	
-			            } else {
-			            	$query->add('tax_query',$tax_query);
+				            }
+				            
+
+
+				            //if(is_array($old_tax_query))
+							/*	echo "<pre>";			            
+				            print_r($query->get('tax_query'));
+				            unset($_GET['EO_WBC']);
+			                echo "</pre>";*/
+			                //die();
 			            }
+<<<<<<< HEAD
 			            			            			            
 		                //die();
 		            }
@@ -311,6 +701,10 @@ class Filter
 		        }		        		        
 
 		        return apply_filters('filter_widget_ajax_post_query',$query);
+=======
+			        }
+		        }		       
+>>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
 		    });		   
 		}
 	}	

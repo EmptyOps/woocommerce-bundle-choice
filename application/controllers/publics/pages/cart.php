@@ -36,7 +36,8 @@ class Cart {
    
     public function eo_wbc_remove(){
     
-        $eo_wbc_maps=wbc()->session->get('EO_WBC_MAPS',array());   
+        $eo_wbc_maps=wbc()->session->get('EO_WBC_MAPS',array());
+
         if(isset($eo_wbc_maps[wbc()->sanitize->get('EO_WBC_REMOVE')])) {
             unset($eo_wbc_maps[wbc()->sanitize->get('EO_WBC_REMOVE')]);
             wbc()->session->set('EO_WBC_MAPS',$eo_wbc_maps);
@@ -44,10 +45,22 @@ class Cart {
             //Reload cart data
             WC()->cart->empty_cart();           
             foreach ($eo_wbc_maps as $index=>$set)
+<<<<<<< HEAD
             {   
                 if(empty($set["FIRST"]['variation'])) {
                     $set["FIRST"]['variation'] = NULL;
                 }            
+=======
+            {               
+
+                if(empty($set["FIRST"]['variation'])){
+                    $set["FIRST"]['variation'] = NULL;
+                }
+
+                if(empty($set["SECOND"]['variation'])){
+                    $set["SECOND"]['variation'] = NULL;
+                }
+>>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
 
                 if($set["FIRST"]){          
                     wc()->cart->add_to_cart(
@@ -72,7 +85,7 @@ class Cart {
                     );
                 }
             }   
-        }                
+        }  
     } 
     
     public function eo_wbc_empty_cart(){
@@ -99,8 +112,20 @@ class Cart {
     {       
         //wbc()->common->pr(wc()->cart->cart_contents);
         $eo_wbc_maps=wbc()->session->get('EO_WBC_MAPS',array());        
+<<<<<<< HEAD
         foreach (wc()->cart->cart_contents as $cart_key=>$cart_item) {
 
+=======
+
+        /*echo "<pre>";
+        print_r(wc()->cart->cart_contents);
+        print_r(wc()->cart);
+        echo "</pre>";
+        die();*/
+
+        foreach (wc()->cart->cart_contents as $cart_key=>$cart_item)
+        {
+>>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
             $product_count=0;
             $single_count=0;
             foreach ($eo_wbc_maps as $map)
@@ -154,6 +179,11 @@ class Cart {
             }
             else
             {
+                /*echo "<pre>";
+                print_r($cart_item);
+                echo "</pre>";
+                die();*/
+
                 $eo_wbc_maps[]=array(
                     "FIRST"=>array(
                         (string)$cart_item["product_id"],
@@ -164,13 +194,35 @@ class Cart {
                 );
             }
         }
+
+       /* if(isset($_GET['test'])){
+
+            echo "<pre>";
+
+
+            //print_r(wc()->cart);
+            print_r(WC()->cart->get_cart_contents());
+
+            print_r($eo_wbc_maps);
+            die();
+        }*/
         wbc()->session->set('EO_WBC_MAPS',apply_filters('eowbc_cart_render_maps',$eo_wbc_maps));
     }
 
     public function process_cart($maps){
+
         if(empty($maps)) return array();
+
+        $retain_scond_items = array();
+
         foreach ($maps as $key => $map) {
+<<<<<<< HEAD
                         
+=======
+            
+            /*$key = uniqid();*/
+            
+>>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
             $maps[$key]['data'] = wbc()->wc->eo_wbc_get_product((empty($map['FIRST'][2]))?$map['FIRST'][0]:$map['FIRST'][2]);
             if(empty($maps[$key]['data'])){
                 unset($maps[$key]);
@@ -218,51 +270,109 @@ class Cart {
                 );
             }
 
+            /*if(!empty($map['SECOND'])){
+
+                
+                if( empty( $retain_scond_items['retain_'.(empty($map['SECOND'][2])?$map['SECOND'][0]:$map['SECOND'][2])] ) ) {
+                    // skip processing cart row
+                    $retain_scond_items['retain_'.(empty($map['SECOND'][2])?$map['SECOND'][0]:$map['SECOND'][2])]['skip_cart_row'] = true;
+                    // Quantity
+                    $retain_scond_items['retain_'.(empty($map['SECOND'][2])?$map['SECOND'][0]:$map['SECOND'][2])]['quantity']=$map['SECOND'][1];
+                    // Data
+                    $retain_scond_items['retain_'.(empty($map['SECOND'][2])?$map['SECOND'][0]:$map['SECOND'][2])]['data'] = wbc()->wc->eo_wbc_get_product((empty($map['SECOND'][2]))?$map['SECOND'][0]:$map['SECOND'][2]);
+                    // Product_id
+                    $retain_scond_items['retain_'.(empty($map['SECOND'][2])?$map['SECOND'][0]:$map['SECOND'][2])]['product_id'] = ((empty($map['SECOND'][2]))?$map['SECOND'][0]:$map['SECOND'][2]);
+                    // variation_id
+                    $retain_scond_items['retain_'.(empty($map['SECOND'][2])?$map['SECOND'][0]:$map['SECOND'][2])]['variation_id'] = $map['SECOND'][2];
+                    // variation
+                    $retain_scond_items['retain_'.(empty($map['SECOND'][2])?$map['SECOND'][0]:$map['SECOND'][2])]['variation'] = empty($map['SECOND'][2])?array():wbc()->wc::eo_wbc_support_get_product_variation_attributes($map['SECOND'][2]);
+                        
+                } else {
+                    // Quantity
+                    $retain_scond_items['retain_'.(empty($map['SECOND'][2])?$map['SECOND'][0]:$map['SECOND'][2])]['quantity']+=$map['SECOND'][1];
+                }
+            }*/
         }
+<<<<<<< HEAD
         return  apply_filters('sp_wbc_pre_cart_render_maps',$maps);
+=======
+
+        $maps = array_replace($maps,$retain_scond_items);
+        
+        /*echo "<pre>";
+        print_r($maps);
+        die();*/
+
+        return $maps;
+>>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
     }
     
     public function eo_wbc_render()
     {   
-        wbc()->theme->load('css','cart');
-        wbc()->theme->load('js','cart');
-        if(apply_filters('eowbc_filter_sidebars_widgets',true)){
+
+
+        if(is_cart()){
+            wbc()->theme->load('css','cart');
+            wbc()->theme->load('js','cart');
+        }
+
+        /*if(apply_filters('eowbc_filter_sidebars_widgets',true)){
             add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
                 return array( false );
             });
-        }
+        }*/
 
 
         
         // if our car is empty then return.
         $maps=wbc()->session->get('EO_WBC_MAPS');
+<<<<<<< HEAD
         
         if(empty($maps)) return;        
+=======
+        if(empty($maps)) return;
+>>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
 
-        //run the cart service.
+        //run the cart service.        
         $this->eo_wbc_cart_service();
+        //return true;
 
         // if our is empty even after cart service return now.
         $maps=wbc()->session->get('EO_WBC_MAPS');        
-        if(empty($maps)) return;
+        if(empty($maps)) return true;
 
         $this->eo_wbc_add_css();
-
-        $maps = $this->process_cart($maps);        
         
+        $maps = $this->process_cart($maps);        
+
         $cart_actual_content = false;
-        add_action('woocommerce_before_cart',function() use (&$cart_actual_content,&$maps){
-            $cart_actual_content = WC()->cart->get_cart_contents();
-            WC()->cart->set_cart_contents($maps);
-        });
+
+        
+         if(is_cart()){
+            add_action('woocommerce_before_cart',function() use (&$cart_actual_content,&$maps){
+                //var_dump("expression 1");
+                $cart_actual_content = WC()->cart->get_cart_contents();
+                WC()->cart->set_cart_contents($maps);
+            });
+        } else {
+            add_action( 'woocommerce_before_mini_cart',function() use (&$cart_actual_content,&$maps){                
+                //var_dump("expression 2");
+                $cart_actual_content = WC()->cart->get_cart_contents();
+                WC()->cart->set_cart_contents($maps);
+            },100);
+        }
         
         add_filter( 'woocommerce_cart_item_permalink',function($link,$cart_item, $cart_item_key){
             return false;
         },10,3);     
 
-        add_filter('woocommerce_cart_item_thumbnail',function( $image, $cart_item, $cart_item_key) {        
+        add_filter('woocommerce_cart_item_thumbnail',function( $image, $cart_item, $cart_item_key) {
+
+            if(!empty($cart_item['skip_cart_row'])){
+                return '';
+            }
             
-            if(!empty($cart_item['datas'])){
+            if(!empty($cart_item['datas']) and !empty($cart_item['datas']['SECOND'])) {
                return $cart_item['datas']['FIRST']->get_image().$cart_item['datas']['SECOND']->get_image();
             } else {
                 return $image;
@@ -271,7 +381,12 @@ class Cart {
         },99,3);
 
         add_filter('woocommerce_cart_item_name',function($name, $cart_item, $cart_item_key ){
-            if(!empty($cart_item['datas'])){
+
+            if(!empty($cart_item['skip_cart_row'])){
+                return '';
+            }
+
+            if(!empty($cart_item['datas']) and !empty($cart_item['datas']['SECOND'])) {
                return $cart_item['datas']['FIRST']->get_name().'<br/>'.$cart_item['datas']['SECOND']->get_name();
             } else {
                 return $name;
@@ -279,7 +394,12 @@ class Cart {
         },10,3);
 
         add_filter( 'woocommerce_cart_item_price',function($price,$cart_item, $cart_item_key){
-            if(!empty($cart_item['datas'])){                
+
+            if(!empty($cart_item['skip_cart_row'])){
+                return '';
+            }
+
+            if(!empty($cart_item['datas']) and !empty($cart_item['datas']['SECOND'])) {                
                 return WC()->cart->get_product_price( $cart_item['datas']['FIRST'] ).'<br/>'.WC()->cart->get_product_price( $cart_item['datas']['SECOND'] );
             } else {
                 return $price;
@@ -288,7 +408,27 @@ class Cart {
 
         add_filter( 'woocommerce_cart_item_quantity',function($product_quantity_first, $cart_item_key, $cart_item){
 
-            if(!empty($cart_item['datas'])){
+            if(!empty($cart_item['skip_cart_row'])){
+                return '';
+            }
+
+            if(!empty($cart_item['datas']) and !empty($cart_item['datas']['SECOND'])) {
+
+                return $cart_item['quantity'].'<br/>'.$cart_item['quantities']['SECOND'];
+            } else {
+                //return $cart_item['quantity'];
+                return $product_quantity_first;
+            }
+
+        },10,3);
+
+        add_filter( 'woocommerce_widget_cart_item_quantity',function($product_quantity_first, $cart_item, $cart_item_key ){
+
+            if(!empty($cart_item['skip_cart_row'])){
+                return '';
+            }
+
+            if(!empty($cart_item['datas']) and !empty($cart_item['datas']['SECOND'])) {
 
                 return $cart_item['quantity'].'<br/>'.$cart_item['quantities']['SECOND'];
             } else {
@@ -300,7 +440,11 @@ class Cart {
 
         add_filter( 'woocommerce_cart_item_subtotal',function($total, $cart_item, $cart_item_key){
 
-            if(!empty($cart_item['datas'])){
+            if(!empty($cart_item['skip_cart_row'])){
+                return '';
+            }
+
+            if(!empty($cart_item['datas']) and !empty($cart_item['datas']['SECOND'])){
                 $price = $cart_item['datas']['FIRST']->get_price();
                 $quantity = $cart_item['quantities']['FIRST'];
                 if ( $cart_item['datas']['FIRST']->is_taxable() ) {
@@ -365,91 +509,44 @@ class Cart {
             return array();
         },10,2);
 
-        add_filter('woocommerce_cart_item_remove_link',function($link,$cart_item_key
-                                ){
+        add_filter('woocommerce_cart_item_remove_link',function($link,$cart_item_key) { 
+
+            if(!empty($cart_item['skip_cart_row'])) {
+                return '';
+            }
+                               
             return sprintf(
                             '<a href="?EO_WBC=1&amp;EO_WBC_REMOVE=%s" class="remove" aria-label="%s">&times;</a>',$cart_item_key,
                             esc_html__( 'Remove this item', 'woocommerce' ));
 
         },10,2);
 
-
-        add_action('woocommerce_before_cart_totals',function() use(&$cart_actual_content){
-            WC()->cart->set_cart_contents($cart_actual_content);           
-        });
-        //WC()->cart->set_cart_contents($cart_actual_content);
-
-        /*foreach ($maps as $index=>$map){
-            
-            $this->eo_wbc_cart_ui($index,$map);               
-        }*/
-        //Removing Cart Table data.....
-        //Adding Custome Cart Table Data.......        
-        /*add_action('woocommerce_before_cart_contents',function(){
-            $this->eo_wbc_cart_service();
-            ?>
-                <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
-                <style>
-                    tr.cart_item
-                    {
-                        display: none;
-                    }
-                    
-                    [name="update_cart"]
-                    {
-                        display: none !important;   
-                    }
-
-                    .shop_table td{
-                        font-size: medium;                         
-                        vertical-align: middle !important;
-                    }
+        add_filter('woocommerce_cart_item_product',function($product, $cart_item, $cart_item_key){
+            if(!empty($cart_item['skip_cart_row'])) {
+                return false;
+            } 
+            return $product;
+        },10,3);
 
 
+         if(is_cart()){
+            add_action(/*'woocommerce_cart_contents'*/'woocommerce_before_cart_totals',function() use(&$cart_actual_content){
+                //var_dump("expression 3");
+                WC()->cart->set_cart_contents($cart_actual_content);           
+            });
+        } else {
 
-                    .woocommerce table.shop_table th
-                    {                        
-                        padding-right: 2em !important;                        
-                    }
-                    
-                    #eo_wbc_extra_btn a{
-                        margin-bottom: 2em;
-                    }
-                    #eo_wbc_extra_btn::after{
-                        content: '\A';
-                        white-space: pre;                         
-                    }
-                    [data-title="Price"],[data-title="Quantity"],[data-title="Cost"]{
-                        text-align: right !important;
-                    }
-                    @media screen and (max-width: 720px) {
-                        td[data-title="Thumbnail"] {
-                            display: flex !important;
-                        }
-                        span.column::before{
-                            content: '\A\A';
-                            white-space: pre;
-                        }
-                        #eo_wbc_extra_btn{
-                            display: grid;
-                        }                                             
-                    }                    
-                </style>
-            <?php 
-            $maps=wbc()->session->get('EO_WBC_MAPS');
-            foreach ($maps as $index=>$map){
+            add_action('woocommerce_after_mini_cart',function() use(&$cart_actual_content){
+                //var_dump("expression 4");
+                /*echo "<pre>";
+                print_r($cart_actual_content);
+                print_r($maps);
                 
-                $this->eo_wbc_cart_ui($index,$map);               
-            }
-        });*/
-            
-            // Adding Buttons
-            // 1 Continue Shopping
-            // 2 Empty Cart
-          /*  add_action('woocommerce_after_cart_table',function(){
-                echo '<div style="float:right;" id="eo_wbc_extra_btn"><a href="'.get_bloginfo('url').'" class="checkout-button button alt wc-backword">Continue Shopping</a><br style="display:none;" />
-              <a href="./?EO_WBC=1&empty_cart=1" class="checkout-button button alt wc-backword">Empty Cart</a></div><div style="clear:both;"></div>';
-            });*/
+                die();*/
+
+                WC()->cart->set_cart_contents($cart_actual_content);           
+            });
+        }
     }
 
     public function eo_wbc_cart_ui($index,$cart)

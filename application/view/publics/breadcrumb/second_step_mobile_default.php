@@ -4,9 +4,37 @@
 *	Template to show breadcrumb first step for mobile
 */
 
+ $view_url = '';                
+if(!empty($second_obj) and !is_wp_error($second_obj)){
+    $view_url =  eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url($second_obj->get_id(),$order);
+} else {
+    $view_url = eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('SECOND'),$order);
+}
+
+if(empty($view_url)){
+    $view_url = '#';
+}
+
+
+
+$change_url = '';
+if(!empty($second_obj) and !is_wp_error($second_obj)){
+
+    $change_url = \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,$second_obj->get_id());
+      
+} else {
+
+    $change_url = \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('SECOND'));
+}
+
+if(empty($change_url)){
+    $change_url = '#';
+}
+
 ?>
-<div class="step <?php echo (($step==$order)?'active ':(($step>$order)?'completed ':(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb)?'':'disabled'))); ?> second_mobile" >
+<div class="step <?php echo (($step==$order)?'active ':(($step>$order)?'completed ':(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb)?'':' '/*'disabled'*/))); ?> second_mobile" >
     <div class="content eowbc_breadcrumb_font" <?php _e((!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb) and !empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second_url))?'data-clickable_breadcrumb="'.\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second_url.'"':''); ?>><?php echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second_name; ?></div>
+
     <div class="ui flowing popup bottom right transition hidden second_mobile" style="width: 80%;">
         <div class="ui grid">
             <div class="six wide column eowbc_breadcrumb_font" style="width: 80px;height: auto;margin: auto;">
@@ -21,12 +49,15 @@
                     <?php _e(wc_price(apply_filters('eowbc_breadcrumb_second_price',\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second->get_price(),\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second))); ?>
                     <?php endif; ?>
                 </div>
+
                 <br/> 
                 <div class="ui equal width grid eowbc_breadcrumb_font">                            
-                    <u><a href="<?php echo !empty(wbc()->sanitize->get('SECOND')) ? \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('SECOND'),$order):'#'; ?>">View</a>
+                    <u>
+                        <a href="<?php echo !empty(wbc()->sanitize->get('SECOND')) ? \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('SECOND'),$order):'#'; ?>">View</a>
+                        <br/>                
                     </u>
                     <u>
-                        <a href="<?php echo !empty(wbc()->sanitize->get('SECOND'))?\eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('SECOND')):'#'; ?>"><?php _e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_change_action_text','Change',true,true)); ?></a>
+                        <a href="<?php echo $change_url; ?>"><?php _e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_change_action_text','Change',true,true)); ?></a>
                     </u>
                 </div>  
             </div>                

@@ -37,6 +37,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 	        }*/
 	        //$parent_name = (!empty(wbc()->wc->get_term_by('slug',$slug,'product_cat')) ?' - '.wbc()->wc->get_term_by('slug',$slug,'product_cat')->name : '');
 	        
+<<<<<<< HEAD
 	        foreach ($map_base as $base) {            
 
 	        	$parent_name='';
@@ -44,6 +45,16 @@ if ( ! class_exists( 'Mapping' ) ) {
 	        		$parent_name = (!empty(wbc()->wc->get_term_by('id',$base->parent,'product_cat')) ?' - '.wbc()->wc->get_term_by('id',$base->parent,'product_cat')->name : '');
 	        	}
 
+=======
+	        foreach ($map_base as $base) {  
+
+	        	$parent_name='';
+	        	if(!empty($base->parent)) {
+	        		$parent_name = (!empty(get_term_by('id',$base->parent,'product_cat')) ?' - '.get_term_by('id',$base->parent,'product_cat')->name : '');
+	        	}
+
+
+>>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
 	            // $category_option_list.= "<div class='item' data-value='".$base->term_taxonomy_id."'>".$prefix.$base->name."</div>".eo_wbc_prime_category($base->slug, $prefix.'-');
 	            $opts_arr[$base->term_taxonomy_id] = array( 'label'=>$prefix.$base->name.$parent_name );
 		        $opts_arr = \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_prime_category($base->slug, $prefix.'-',$opts_arr);
@@ -72,8 +83,13 @@ if ( ! class_exists( 'Mapping' ) ) {
 			
 			wbc()->load->model('admin/form-builder');
 
+<<<<<<< HEAD
 			$dropdown_opts_first_cat = apply_filters('eowbc_admin_form_mapping_first_cat',\eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_attributes( \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_prime_category(/*wbc()->options->get_option('configuration','first_slug')*/'',' ') ));
 			$dropdown_opts_second_cat = apply_filters('eowbc_admin_form_mapping_second_cat',\eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_attributes( \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_prime_category(''/*wbc()->options->get_option('configuration','second_slug')*/,' ') ));
+=======
+			$dropdown_opts_first_cat = apply_filters('eowbc_admin_form_mapping_first_cat',\eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_attributes( \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_prime_category(''/*wbc()->options->get_option('configuration','first_slug')*/,' -- ') ));
+			$dropdown_opts_second_cat = apply_filters('eowbc_admin_form_mapping_second_cat',\eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_attributes( \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_prime_category(/*wbc()->options->get_option('configuration','second_slug')*/'',' -- ') ));
+>>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
 
 			//map list
 			$table = array();
@@ -174,7 +190,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 								'type'=>'select',
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
-								'options'=>array(''=>eowbc_lang('Bulk Actions'), 'delete'=>'Delete'),
+								'options'=>array(''=>eowbc_lang('Bulk Actions'), 'delete'=>'Delete','group'=>'Group'),
 								'class'=>array('fluid'),
 								'size_class'=>array('two','wide'),
 								'next_inline'=>true,
@@ -323,6 +339,15 @@ if ( ! class_exists( 'Mapping' ) ) {
 								'prev_inline'=>true,
 								'inline'=>true,
 							),
+
+							/*'groupable'=>array(
+								'label'=>'Is Groupable?',
+								'type'=>'checkbox',
+								'value'=>array(''),
+								'sanitize'=>'sanitize_text_field',
+								
+								'options'=>array('groupable'=>eowbc_lang('Is Groupable?')),								
+							),*/						
 
 							'eo_wbc_add_discount'=>array(
 								'no_label' => true,
