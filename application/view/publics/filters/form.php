@@ -179,6 +179,10 @@ if(empty($_per_page)){
 
 		jQuery(document).ready(function($){			
 
+			window.document.splugins = window.document.splugins || {};
+			window.document.splugins.ui = window.document.splugins.ui || {};
+			window.document.splugins.ui.slider = window.document.splugins.ui.slider || jQuery.fn.slider;
+
 			window.eo=new Object();
 			
 			//Slider creation function
@@ -383,7 +387,11 @@ if(empty($_per_page)){
 						jQuery("#text_slider_"+jQuery(e).attr('data-slug')).slider("set rangeValue",min_value,max_value);
 					});
 
+					let ui_slider = jQuery.fn.slider;
+
+					jQuery.fn.slider = window.document.splugins.ui.slider;
 					jQuery(e).slider(_params);
+					jQuery.fn.slider = ui_slider;
 				});
 			};
 

@@ -161,6 +161,7 @@ class EOWBC_Filter_Widget {
 		wbc()->load->asset('js','publics/eo_wbc_filter');
 		wbc()->theme->load('css','filter');
         wbc()->theme->load('js','filter');
+        //wbc()->load->asset('js','filter');
         
 		$current_category=$this->_category;
 		$site_url=site_url();
