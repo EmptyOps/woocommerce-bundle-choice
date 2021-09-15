@@ -29,20 +29,7 @@ class Service {
         
         //\eo\wbc\controllers\publics\pages\Cart::instance()->eo_wbc_render();                
 
-
-        add_action('wp_loaded',function(){
-            
-            //remove_all_filters('woocommerce_add_to_cart_fragments');
-
-            if(!is_cart() and !is_admin()) {                
-
-                if(isset($_GET['EO_WBC_REMOVE'])){
-                    \eo\wbc\controllers\publics\pages\Cart::instance()->eo_wbc_remove();
-                    
-                    $url = home_url($_SERVER['REQUEST_URI']);
-
-<<<<<<< HEAD
-        add_filter('woocommerce_display_product_attributes',function($product_attributes, $product){
+         add_filter('woocommerce_display_product_attributes',function($product_attributes, $product){
 
             $_certificate_link = $product->get_meta('_certificate_link',true);
             if(!empty($_certificate_link)){
@@ -56,7 +43,18 @@ class Service {
             return $product_attributes;          
 
         },20,2);
-=======
+
+        add_action('wp_loaded',function(){
+            
+            //remove_all_filters('woocommerce_add_to_cart_fragments');
+
+            if(!is_cart() and !is_admin()) {                
+
+                if(isset($_GET['EO_WBC_REMOVE'])){
+                    \eo\wbc\controllers\publics\pages\Cart::instance()->eo_wbc_remove();
+                    
+                    $url = home_url($_SERVER['REQUEST_URI']);
+
                     $url = str_replace('&EO_WBC=1','',$url);
                     $url = str_replace('EO_WBC=1','',$url);
                     $url = str_replace('&EO_WBC_REMOVE=','',$url);
@@ -76,8 +74,6 @@ class Service {
             }    
         },10);
         
->>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
-
         add_action('woocommerce_checkout_update_order_review',array(\eo\wbc\controllers\publics\pages\Checkout::instance(),'update_order_review'));
 
         add_action( 'woocommerce_update_cart_action_cart_updated',function() {

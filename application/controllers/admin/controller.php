@@ -15,13 +15,11 @@ class Controller extends \eo\wbc\controllers\Controller {
 		return self::$_instance;
 	}
 
-<<<<<<< HEAD
+
 	/*public function __construct() {
 		
 	}	*/
 
-=======
->>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
 	protected function _get($name) {
 
 	}
@@ -47,27 +45,17 @@ class Controller extends \eo\wbc\controllers\Controller {
 	public function default_uis($type,$exceptance) {
 		$defaults = array(
 			'label'=>array('text','color','back_color','font_family','font_size'),
-<<<<<<< HEAD
 			'p'=>array('text','color','back_color','font_family','font_size'),
 			'span'=>array('text','color','back_color','font_family','font_size'),
-=======
->>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
 			'header'=>array('text','color','back_color','font_family','font_size'),
 			'sub_header'=>array('text','color','back_color','font_family','font_size'),
 			'checkbox'=>array('checkbox'),
 			'image'=>array('height','width','image'),
-<<<<<<< HEAD
 			'img'=>array('height','width','image'),
 			'button'=>array('text','color','back_color','font_family','font_size','radius'),
 			'container'=>array('height','width','margin_left','margin_right'),
 			'wc_attribute_field'=>array('attribute','checkbox','text'),
 			'a'=>array('url','text')
-=======
-			'button'=>array('text','color','back_color','font_family','font_size','radius'),
-			'container'=>array('height','width','margin_left','margin_right'),
-			'wc_attribute_field'=>array('attribute','checkbox','text'),
-			'a'=>array('url')
->>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
 		);
 
 		$collection = array();
@@ -98,11 +86,10 @@ class Controller extends \eo\wbc\controllers\Controller {
 		
 		foreach ($form as $form_key => $form_value) {
 			
-<<<<<<< HEAD
 			if(!empty($form_value[$key]) and ( empty($this->check_show_on_admin) xor (!empty($form_value[$key][2]) and !empty($form_value[$key][2]['show_on_admin']) ) ) ) {	
-=======
-			if(!empty($form_value[$key])) {	
->>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
+
+				/*if(!empty($form_value[$key])) {	*/
+
 
 				$control_element = array();
 				$excep_controls = array();

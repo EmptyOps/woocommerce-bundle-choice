@@ -223,16 +223,9 @@ class Category {
 
     }
 
-<<<<<<< HEAD
-    public function eo_wbc_add_breadcrumb()
-    {   
 
-        
-
-=======
     public function eo_wbc_add_breadcrumb() {           
-        
->>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
+
         //Add Breadcumb at top....      
        /* add_action( 'woocommerce_archive_description',function(){     
             wbc()->load->model('publics/component/eowbc_breadcrumb');       
@@ -246,13 +239,9 @@ class Category {
         }, 0);
     }
 
-<<<<<<< HEAD
-    public function eo_wbc_render()
-    {   
-=======
+
     public function eo_wbc_render() {   
->>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
-        
+
         $features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())));
         
         if( !empty($features['pair_maker'])/*get_option('eo_wbc_pair_maker_status',FALSE)*/ && isset($_GET) && !empty(wbc()->sanitize->get('STEP')) && wbc()->sanitize->get('STEP')==2 && (empty(wbc()->sanitize->get('FIRST')) XOR empty(wbc()->sanitize->get('SECOND'))) ) {
@@ -373,12 +362,9 @@ class Category {
             return $url;
         }
 
-<<<<<<< HEAD
         $external_url = /*$url.'?'.*/wbc()->common->http_query(
             array(
-=======
-        $url_params = array(
->>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
+
                 'EO_WBC'=>1,
                 'BEGIN'=>wbc()->sanitize->get('BEGIN'),
                 'STEP'=>wbc()->sanitize->get('STEP'),
@@ -408,7 +394,6 @@ class Category {
                             ''
                         )
                     )
-<<<<<<< HEAD
             )
         );
 
@@ -417,15 +402,15 @@ class Category {
         } else {
             return $url.'?'.$external_url;
         }
-=======
-            );
 
-        if(!empty(wbc()->sanitize->get('EO_CHANGE'))) {
+        
+
+        /*if(!empty(wbc()->sanitize->get('EO_CHANGE'))) {
             $url_params['EO_CHANGE'] = 1;
         }
 
-        return  $url.'?'.wbc()->common->http_query( $url_params );
->>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
+        return  $url.'?'.wbc()->common->http_query( $url_params );*/
+
     }
 
     public function eo_wbc_id_2_slug($id){

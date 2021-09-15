@@ -15,15 +15,13 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_mapping')) {
 		$res = eo\wbc\model\admin\Eowbc_Mapping::instance()->delete( wbc()->sanitize->post_array("ids"), wbc()->sanitize->post("saved_tab_key") );
 	} elseif(isset($_POST['sub_action']) and wbc()->sanitize->post('sub_action') == 'fetch') {
 		$res = eo\wbc\model\admin\Eowbc_Mapping::instance()->fetch_map($res);
-<<<<<<< HEAD
-	} elseif (isset($_POST['sub_action']) and wbc()->sanitize->post('sub_action') == 'fetch_product') {
-		
+
+	} elseif (isset($_POST['sub_action']) and wbc()->sanitize->post('sub_action') == 'fetch_product') {		
 		$res = \eo\wbc\model\Search_Product::instance()->get_ajax();
 
-=======
 	} elseif(isset($_POST['sub_action']) and wbc()->sanitize->post('sub_action') == 'group') {
 		$res = eo\wbc\model\admin\Eowbc_Mapping::instance()->group($res);
->>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
+
 	} else {
 		$res = eo\wbc\model\admin\Eowbc_Mapping::instance()->save( eo\wbc\controllers\admin\menu\page\Mapping::get_form_definition() );
     }

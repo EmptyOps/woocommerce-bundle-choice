@@ -761,31 +761,26 @@ class Product {
 
                     $category_link=$this->eo_wbc_category_link();
 
-<<<<<<< HEAD
+
                     $url=$site_url.($remove_index?'':'/index.php')."/{$category_base}/".$category_link.
                     wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>2,'FIRST'=>$post->ID,'SECOND'=>wbc()->sanitize->get('SECOND'),'CART'=>wbc()->sanitize->get('CART'),'ATT_LINK'=>implode(' ',$this->att_link),'CAT_LINK'=>substr($category_link,0,strpos($category_link,'/')))).$site_url_get;
-=======
-                    $url=get_bloginfo('url').($remove_index?'':'/index.php')."/{$category_base}/".$category_link.
-                    wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>2,'FIRST'=>$post->ID,'SECOND'=>''/*wbc()->sanitize->get('SECOND')*/,'CART'=>wbc()->sanitize->get('CART'),'ATT_LINK'=>implode(' ',$this->att_link),'EO_CHANGE'=>wbc()->sanitize->get('EO_CHANGE')));
->>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
+
+                    //$url=get_bloginfo('url').($remove_index?'':'/index.php')."/{$category_base}/".$category_link.
+                    //wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>2,'FIRST'=>$post->ID,'SECOND'=>''/*wbc()->sanitize->get('SECOND')*/,'CART'=>wbc()->sanitize->get('CART'),'ATT_LINK'=>implode(' ',$this->att_link),'EO_CHANGE'=>wbc()->sanitize->get('EO_CHANGE')));
+
 
                 // } elseif($category==get_option('eo_wbc_second_slug')) {
                 } elseif($category==$this->second_category_slug) {
 
                     $category_link=$this->eo_wbc_category_link();
-<<<<<<< HEAD
+
                     $url=$site_url.($remove_index?'':'/index.php')."/{$category_base}/".$category_link
                     .wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>2,'FIRST'=>wbc()->sanitize->get('FIRST'),'SECOND'=>$post->ID,'CART'=>wbc()->sanitize->get('CART'),'ATT_LINK'=>implode(' ',$this->att_link),'CAT_LINK'=>substr($category_link,0,strpos($category_link,'/')))).$site_url_get;
+
+                    /*$url=get_bloginfo('url').($remove_index?'':'/index.php')."/{$category_base}/".$category_link
+                    .wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>2,'FIRST'=>wbc()->sanitize->get('FIRST'),'SECOND'=>$post->ID,'CART'=>wbc()->sanitize->get('CART'),'ATT_LINK'=>implode(' ',$this->att_link),'EO_CHANGE'=>wbc()->sanitize->get('EO_CHANGE') ));*/
                 }
 
-                /*echo $url;
-                die();*/
-
-=======
-                    $url=get_bloginfo('url').($remove_index?'':'/index.php')."/{$category_base}/".$category_link
-                    .wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>2,'FIRST'=>wbc()->sanitize->get('FIRST'),'SECOND'=>$post->ID,'CART'=>wbc()->sanitize->get('CART'),'ATT_LINK'=>implode(' ',$this->att_link),'EO_CHANGE'=>wbc()->sanitize->get('EO_CHANGE') ));
-                } 
->>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
                 if($return_link) {
                     return $url;
                 }
@@ -800,42 +795,41 @@ class Product {
                 // if($category==get_option('eo_wbc_first_slug')) {
                 if($category==$this->first_category_slug) {
 
-<<<<<<< HEAD
+
                     $get_link=wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>1,'FIRST'=>$post->ID,'SECOND'=>(empty(wbc()->sanitize->get('SECOND'))?'':wbc()->sanitize->get('SECOND')),'REDIRECT'=>1));
-=======
-                    $url=get_permalink($post->ID)
-                        .'?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>1,'FIRST'=>$post->ID,'SECOND'=>(empty(wbc()->sanitize->get('SECOND'))?'':wbc()->sanitize->get('SECOND')),'REDIRECT'=>1,'EO_CHANGE'=>wbc()->sanitize->get('EO_CHANGE')));
->>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
+
+                    /*$url=get_permalink($post->ID)
+                        .'?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>1,'FIRST'=>$post->ID,'SECOND'=>(empty(wbc()->sanitize->get('SECOND'))?'':wbc()->sanitize->get('SECOND')),'REDIRECT'=>1,'EO_CHANGE'=>wbc()->sanitize->get('EO_CHANGE')));*/
 
                 // } elseif($category==get_option('eo_wbc_second_slug')) {
                 } elseif($category==$this->second_category_slug) {
 
-<<<<<<< HEAD
+
                     $get_link=wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>1,'FIRST'=>(empty(wbc()->sanitize->get('FIRST'))?'':wbc()->sanitize->get('FIRST')),'SECOND'=>$post->ID,'REDIRECT'=>1));
-=======
-                    $url=get_permalink($post->ID)
-                        .'?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>1,'FIRST'=>(empty(wbc()->sanitize->get('FIRST'))?'':wbc()->sanitize->get('FIRST')),'SECOND'=>$post->ID,'REDIRECT'=>1,'EO_CHANGE'=>wbc()->sanitize->get('EO_CHANGE')));
->>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
+
+                    /*$url=get_permalink($post->ID)
+                        .'?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>1,'FIRST'=>(empty(wbc()->sanitize->get('FIRST'))?'':wbc()->sanitize->get('FIRST')),'SECOND'=>$post->ID,'REDIRECT'=>1,'EO_CHANGE'=>wbc()->sanitize->get('EO_CHANGE')));*/
+
                 } else {
                     // well due to some reason could not determine category properly so working based on begin offset recived via _GET.
                     $begin = wbc()->sanitize->get('BEGIN');                    
                     // if($begin==get_option('eo_wbc_first_slug')){
                     if($begin==$this->first_category_slug){
 
-<<<<<<< HEAD
+
                         $get_link=wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>1,'FIRST'=>$post->ID,'SECOND'=>(empty(wbc()->sanitize->get('SECOND'))?'':wbc()->sanitize->get('SECOND')),'REDIRECT'=>1));
-=======
-                        $url.= '?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>1,'FIRST'=>$post->ID,'SECOND'=>(empty(wbc()->sanitize->get('SECOND'))?'':wbc()->sanitize->get('SECOND')),'REDIRECT'=>1,'EO_CHANGE'=>wbc()->sanitize->get('EO_CHANGE')));
->>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
+
+                        /*$url.= '?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>1,'FIRST'=>$post->ID,'SECOND'=>(empty(wbc()->sanitize->get('SECOND'))?'':wbc()->sanitize->get('SECOND')),'REDIRECT'=>1,'EO_CHANGE'=>wbc()->sanitize->get('EO_CHANGE')));*/
+
 
                     // } elseif($begin==get_option('eo_wbc_second_slug')) {
                     } elseif($begin==$this->second_category_slug) {
 
-<<<<<<< HEAD
+
                         $get_link=wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>1,'FIRST'=>(empty(wbc()->sanitize->get('FIRST'))?'':wbc()->sanitize->get('FIRST')),'SECOND'=>$post->ID,'REDIRECT'=>1));
-=======
-                        $url.= '?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>1,'FIRST'=>(empty(wbc()->sanitize->get('FIRST'))?'':wbc()->sanitize->get('FIRST')),'SECOND'=>$post->ID,'REDIRECT'=>1,'EO_CHANGE'=>wbc()->sanitize->get('EO_CHANGE')));
->>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
+
+                        /*$url.= '?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>1,'FIRST'=>(empty(wbc()->sanitize->get('FIRST'))?'':wbc()->sanitize->get('FIRST')),'SECOND'=>$post->ID,'REDIRECT'=>1,'EO_CHANGE'=>wbc()->sanitize->get('EO_CHANGE')));*/
+
                     }                    
                 }
 
@@ -861,21 +855,19 @@ class Product {
         
             if(wbc()->sanitize->get('FIRST')==='' OR $category==$this->first_category_slug)
             {
-<<<<<<< HEAD
+
                 $url=wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>3,'FIRST'=>$post->ID,'SECOND'=>wbc()->sanitize->get('SECOND')));
-=======
-                $url=$review_page_url
+
+                //$url=$review_page_url
                     .'?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>3,'FIRST'=>$post->ID,'SECOND'=>wbc()->sanitize->get('SECOND'),'EO_CHANGE'=>wbc()->sanitize->get('EO_CHANGE')));
->>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
             }
             elseif (wbc()->sanitize->get('SECOND')==='' OR $category==$this->second_category_slug)
             {
-<<<<<<< HEAD
+
                 $url=wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>3,'FIRST'=>wbc()->sanitize->get('FIRST'),'SECOND'=>$post->ID));
-=======
-                $url=$review_page_url
+                
+                //$url=$review_page_url
                     .'?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>3,'FIRST'=>wbc()->sanitize->get('FIRST'),'SECOND'=>$post->ID,'EO_CHANGE'=>wbc()->sanitize->get('EO_CHANGE')));
->>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
             }
             else
             {
@@ -914,12 +906,8 @@ class Product {
                     $url = $setting_page_url.'&'.$url;
                 }                
             }            
-<<<<<<< HEAD
-        }  
-        
-=======
         }               
->>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
+
         return $url;
     }
         
@@ -1051,13 +1039,12 @@ class Product {
         $gtaxonomy=array();//array to hold taxonomy slugs
 
         if(!is_wp_error($terms) and !empty($terms) and is_array($terms)) {
-<<<<<<< HEAD
-            array_walk($terms,function($term) use(&$category,&$taxonomy){
+
+            /*array_walk($terms,function($term) use(&$category,&$taxonomy) {
                 $_term_ = null;
                 if(is_array($term)) {
                     foreach ($term as $_term_) {
-                        $_term_ = wbc()->wc->get_term_by('term_taxonomy_id', $_term_);
-=======
+                        $_term_ = wbc()->wc->get_term_by('term_taxonomy_id', $_term_);*/
 
             // simple run
             foreach ($terms as $term_key => $term_value) {
@@ -1083,7 +1070,6 @@ class Product {
                     } else {
                         $_term_ = get_term_by('term_taxonomy_id', $_term_id);
 
->>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
                         if(!is_wp_error($_term_) and !empty($_term_)) {
                             $_taxonomy_ = $_term_->taxonomy;
                             if($_taxonomy_==='product_cat') {
@@ -1096,12 +1082,9 @@ class Product {
                             }
                         }
                     }
-<<<<<<< HEAD
+
                 } else {
                     $_term_ = wbc()->wc->get_term_by('term_taxonomy_id', $_term_);
-=======
->>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
-
                 }
             }
 
@@ -1180,13 +1163,9 @@ class Product {
         
 
         $CAT_LINK = '';
-        if(is_array($category) && !empty($category)) {
-            // $link=implode( (get_option('eo_wbc_map_cat_pref','and')==='and'?'+':',') , $category );                  
+        /*if(is_array($category) && !empty($category)) {            
             $CAT_LINK=implode( (wbc()->options->get_option('mapping_prod_mapping_pref','prod_mapping_pref_category','and')==='and'?'+':',') , array_unique($category) );                  
-        }
-<<<<<<< HEAD
-        else
-        {
+        } else {
             $first_parent_object = get_term_by('slug',$this->first_category_slug,'product_cat');
             $first_parent_slug = $this->first_category_slug;
 
@@ -1201,18 +1180,13 @@ class Product {
                 $second_parent_slug = $second_parent_object->slug;
             }
 
-
-            // $link.=($this->eo_wbc_get_category()==get_option('eo_wbc_first_slug'))
             $link.=($this->eo_wbc_get_category()==$this->first_category_slug)
-                        ?
-                    // get_option('eo_wbc_second_slug')
-                        $second_parent_slug
-                    /*$this->second_category_slug*/
-                        :
-                    // get_option('eo_wbc_first_slug');                    
+                        ?                    
+                        $second_parent_slug                    
+                        :                    
                         $first_parent_slug
-                    /*$this->first_category_slug*/;                    
-=======
+                    
+        }*/                  
             
         if(is_array($gcategory) && !empty($gcategory)) {
             // $link=implode( (get_option('eo_wbc_map_cat_pref','and')==='and'?'+':',') , $category );                  
@@ -1228,7 +1202,6 @@ class Product {
             } else {
                 $CAT_LINK.=implode( (wbc()->options->get_option('mapping_prod_mapping_pref','prod_mapping_pref_category','and')==='and'?'+':',') , array_unique($gcategory) );                  
             }
->>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
         }
 
         $link.="/?";           

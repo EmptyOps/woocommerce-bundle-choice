@@ -44,14 +44,7 @@ class Cart {
                         
             //Reload cart data
             WC()->cart->empty_cart();           
-            foreach ($eo_wbc_maps as $index=>$set)
-<<<<<<< HEAD
-            {   
-                if(empty($set["FIRST"]['variation'])) {
-                    $set["FIRST"]['variation'] = NULL;
-                }            
-=======
-            {               
+            foreach ($eo_wbc_maps as $index=>$set) {               
 
                 if(empty($set["FIRST"]['variation'])){
                     $set["FIRST"]['variation'] = NULL;
@@ -60,7 +53,6 @@ class Cart {
                 if(empty($set["SECOND"]['variation'])){
                     $set["SECOND"]['variation'] = NULL;
                 }
->>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
 
                 if($set["FIRST"]){          
                     wc()->cart->add_to_cart(
@@ -112,20 +104,9 @@ class Cart {
     {       
         //wbc()->common->pr(wc()->cart->cart_contents);
         $eo_wbc_maps=wbc()->session->get('EO_WBC_MAPS',array());        
-<<<<<<< HEAD
+
         foreach (wc()->cart->cart_contents as $cart_key=>$cart_item) {
 
-=======
-
-        /*echo "<pre>";
-        print_r(wc()->cart->cart_contents);
-        print_r(wc()->cart);
-        echo "</pre>";
-        die();*/
-
-        foreach (wc()->cart->cart_contents as $cart_key=>$cart_item)
-        {
->>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
             $product_count=0;
             $single_count=0;
             foreach ($eo_wbc_maps as $map)
@@ -216,13 +197,6 @@ class Cart {
         $retain_scond_items = array();
 
         foreach ($maps as $key => $map) {
-<<<<<<< HEAD
-                        
-=======
-            
-            /*$key = uniqid();*/
-            
->>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
             $maps[$key]['data'] = wbc()->wc->eo_wbc_get_product((empty($map['FIRST'][2]))?$map['FIRST'][0]:$map['FIRST'][2]);
             if(empty($maps[$key]['data'])){
                 unset($maps[$key]);
@@ -293,18 +267,11 @@ class Cart {
                 }
             }*/
         }
-<<<<<<< HEAD
+
         return  apply_filters('sp_wbc_pre_cart_render_maps',$maps);
-=======
 
-        $maps = array_replace($maps,$retain_scond_items);
-        
-        /*echo "<pre>";
-        print_r($maps);
-        die();*/
-
-        return $maps;
->>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
+        /*$maps = array_replace($maps,$retain_scond_items);*/        
+        /*return $maps;*/
     }
     
     public function eo_wbc_render()
@@ -326,12 +293,8 @@ class Cart {
         
         // if our car is empty then return.
         $maps=wbc()->session->get('EO_WBC_MAPS');
-<<<<<<< HEAD
         
-        if(empty($maps)) return;        
-=======
         if(empty($maps)) return;
->>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
 
         //run the cart service.        
         $this->eo_wbc_cart_service();

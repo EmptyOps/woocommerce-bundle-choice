@@ -30,11 +30,7 @@ class Http_Handler {
 	public static function process(){
 
 		do_action( 'before_process_request', array(self::instance(),'preprocess_request') );		
-<<<<<<< HEAD
-		
-=======
-				
->>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
+
 		if(is_admin()){
 
 			do_action( 'wbc_before_process_admin_request' );	

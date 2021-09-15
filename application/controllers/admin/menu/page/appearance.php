@@ -387,11 +387,9 @@ if ( ! class_exists( 'Appearance' ) ) {
 										'type'=>'devider',
 									),*/
 
-<<<<<<< HEAD
+
 					/*'appearence_product_page_toggle_status'=>array(
-=======
-						/*						'appearence_product_page_toggle_status'=>array(
->>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
+
 							'label'=>eowbc_lang('Toggle Button Enabled?'),
 							'type'=>'checkbox',
 							'value'=>array(wbc()->options->get_option('appearance_product_page','appearence_product_page_toggle_status')),
@@ -580,7 +578,7 @@ if ( ! class_exists( 'Appearance' ) ) {
 				'preview_page'=>array(
 					'label'=>'Preview Page',
 					'form'=>array(
-<<<<<<< HEAD
+
 						'appearence_preview_page_section'=>array('label'=>'Appearence of Preview Page','type'=>'segment','desc'=>'Change the appearence of the Preview Page.')
 						,
 						'enable_enquiry'=>array(
@@ -597,8 +595,6 @@ if ( ! class_exists( 'Appearance' ) ) {
 								'size_class'=>array('sixteen','wide'),
 							),	
 						), 
-=======
-
 						'first_category_attributes'=>array(
 							'label'=>eowbc_lang('First Category Attributes'),
 							'type'=>'select',
@@ -621,8 +617,6 @@ if ( ! class_exists( 'Appearance' ) ) {
 							'size_class'=>array('three','wide'),
 							'inline'=>false,							
 						),
-					 
->>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
 						'preview_page_submit_btn'=>array(
 							'label'=>eowbc_lang('Save'),
 							'type'=>'button',								
@@ -632,12 +626,7 @@ if ( ! class_exists( 'Appearance' ) ) {
 							'attr'=>array('data-tab_key="preview_page"', 'data-action="save"'),
 						)
 					)
-<<<<<<< HEAD
 				)
-				
-=======
-				)				
->>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
 			);
 
 			if($is_add_sample_values) {

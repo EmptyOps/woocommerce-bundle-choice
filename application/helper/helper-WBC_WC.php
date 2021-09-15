@@ -93,7 +93,7 @@ class WBC_WC {
 	    }
     }
 
-<<<<<<< HEAD
+
     public function get_terms($parent_id = 0, $orderby = 'menu_order') {
         
         $term_list =array();
@@ -116,24 +116,6 @@ class WBC_WC {
 
     public static function eo_wbc_get_cart_url() {        
         return function_exists('wc_get_cart_url')?wc_get_cart_url():apply_filters( 'woocommerce_get_cart_url', self::eo_wbc_support_get_page_permalink( 'cart' ));
-=======
-    public static function eo_wbc_get_cart_url() {
-        $cart = '';
-        if(function_exists('wc_get_cart_url')) {
-            $cart = wc_get_cart_url();
-        } 
-
-        if(empty($cart)) {
-            $cart = apply_filters( 'woocommerce_get_cart_url', self::eo_wbc_support_get_page_permalink( 'cart' ));   
-        }
-
-        if(empty($cart)){
-            $page_id   = wc_get_page_id('cart');
-            $cart = 0 < $page_id ? get_permalink( $page_id ) : get_home_url();
-        }   
-
-        return $cart;        
->>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
     }
 
     public function eo_wbc_get_product($product_id){

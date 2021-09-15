@@ -1,10 +1,5 @@
-/*<<<<<<< HEAD*/
-/*window.eo_wbc_object = window.eo_wbc_object || {};
-window.eo_wbc_object.enable_filter = window.eo_wbc_object.enable_filter || false;*/
-/*=======*/
 window.eo_wbc_object = window.eo_wbc_object || {};
 window.eo_wbc_object.enable_filter = window.eo_wbc_object.enable_filter || false;
-/*>>>>>>> dad35916d59c134734156ded85678133f6c607a0*/
 
 // YITH wishlist fix
 function eowbc_yith_wishlist_fix(){
