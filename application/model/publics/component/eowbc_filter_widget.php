@@ -169,6 +169,20 @@ class EOWBC_Filter_Widget {
 		wp_enqueue_script('jquery');	
 		//wp_dequeue_script('jquery-ui-core');
 		//wp_deregister_script('jquery-ui-core');
+
+		add_action('wp_head',function(){
+
+			if(!isset($_GET['FIRST']) and !isset($_GET['SECOND'])) {
+				?>
+				<style type="text/css">
+				.eo-wbc-container.container:not(.ui.form) {
+				    display: none;
+				}
+				</style>
+				<?php
+			}
+		});
+
 		
 		add_action( 'wp_footer',function(){
 
@@ -720,6 +734,7 @@ class EOWBC_Filter_Widget {
 						}
 					</style>
 				<?php
+
 				if(!wp_is_mobile()){
 					?>
 					<style type="text/css">
@@ -882,7 +897,11 @@ class EOWBC_Filter_Widget {
 	      	$product_url = $this->product_url();
 		}
 
-        
+
+		if(empty($site_url)) {
+			$site_url = esc_url(get_term_link( $current_category,'product_cat'));
+		}
+
         // wp_localize_script('eo_wbc_filter_js','eo_wbc_object',array(
         // 					'eo_product_url'=>$this->product_url(),
         // 					//'eo_view_tabular'=>($current_category=='solitaire'?1:0),
