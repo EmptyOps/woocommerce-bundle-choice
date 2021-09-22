@@ -41,9 +41,9 @@ function eo_wbc_filter_render_html(data,render_container) {
 
 	let container_html = jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products',jQuery(data)).html();	
 	
-	if(container_html===undefined || container_html==='') {
+	/*if(container_html===undefined || container_html==='') {
 		container_html = jQuery(jQuery(data),'.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products').html();
-	}
+	}*/
 
 	if(container_html===undefined || container_html==='') {
 		container_html = jQuery(".elementor-products-grid",jQuery(data)).html();
@@ -302,6 +302,14 @@ function reset_icon(e,selector){
 function reset_slider(e,selector,first,second){	
 	e.preventDefault();
 	e.stopPropagation()
+
+	window.document.splugins = window.document.splugins || {};
+	window.document.splugins.ui = window.document.splugins.ui || {};
+	window.document.splugins.ui.slider = window.document.splugins.ui.slider || jQuery.fn.slider;
+
+	let ui_slider = jQuery.fn.slider;		
+	jQuery.fn.slider = window.document.splugins.ui.slider;	
+
 	jQuery(".ui.slider[data-slug='"+selector+"']").slider('set rangeValue',first,second);
 	if(jQuery("[name='_attribute']").val().includes(selector)) {					    			
 		_values=jQuery("[name='_attribute']").val().split(',')
@@ -309,6 +317,8 @@ function reset_slider(e,selector,first,second){
 		_values.splice(_index,1)
 		jQuery("[name='_attribute']").val(_values.join());
 	}
+
+	jQuery.fn.slider = ui_slider;
 	return false;
 }
 
