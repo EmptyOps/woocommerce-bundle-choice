@@ -5,7 +5,7 @@
 */
 
 ?>			
-<div class="ui four wide column toggle_sticky_mob_filter <?php echo $advance?'advance_filter_mob':'' ?>" style="<?php echo $advance?'display: none;':'' ?>" data-target="#sticky_mob_filter_<?php echo $filter['slug'] ?>">
+<div class="ui four wide column toggle_sticky_mob_filter <?php echo $advance?'advance_filter_mob':'' ?>" style="<?php echo $advance?'display: none;':'' ?>" data-target="#sticky_mob_filter_<?php echo $filter['slug'] ?>" data-tab-group="<?php _e($tab_set); ?>">
 	<div class="title"><div class="ui segment"><?php echo($filter['title']); ?></div></div>
 </div>
 <div class="bottom_filter_segment hidden ui segment" id="sticky_mob_filter_<?php echo $filter['slug'] ?>">
@@ -34,6 +34,6 @@
 		    </div>
 		  </div>	  
 		</div>	
-		<div class="ui range slider text_slider" id="text_slider_<?php echo $filter['slug'] ?>" data-min="<?php echo $filter['min_value']['name']; ?>" data-max="<?php echo $filter['max_value']['name']; ?>" data-slug="<?php echo $filter['slug'] ?>" data-sep="<?php echo $filter['seprator']; ?>" data-postfix="<?php echo $prefix; ?>" data-reset="reset_slider(new Event(''),'<?php echo $filter['slug'] ?>','<?php echo $filter['min_value']['name']; ?>','<?php echo $filter['max_value']['name']; ?>')"></div>			
+		<div class="ui range slider text_slider wbc" id="text_slider_<?php echo $filter['slug'] ?>" data-min="<?php echo $filter['min_value']['name']; ?>" data-max="<?php echo $filter['max_value']['name']; ?>" data-slug="<?php echo $filter['slug'] ?>" data-sep="<?php echo $filter['seprator']; ?>" data-postfix="<?php echo $prefix; ?>" data-reset="reset_slider(new Event(''),'<?php echo $filter['slug'] ?>','<?php echo $filter['min_value']['name']; ?>','<?php echo $filter['max_value']['name']; ?>')"></div>			
   	</div>
 </div>

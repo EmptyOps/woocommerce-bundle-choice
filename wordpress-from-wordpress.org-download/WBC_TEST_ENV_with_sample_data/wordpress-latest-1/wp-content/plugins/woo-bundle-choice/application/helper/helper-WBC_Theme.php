@@ -13,9 +13,14 @@ class WBC_Theme {
 	}
 
 	public function load($type='css',$path='main',$param = array()) {
-		 constant('EOWBC_ASSET_URL').'js'.'/'.$path.'.js';	
+
+		$base_dir = constant('EOWBC_ASSET_DIR');
+		if(!empty($param['base_dir'])){
+			$base_dir = $param['base_dir'];
+		}
+
 		$path = implode('/',array_filter(explode('/',$path)));		
-		$path = constant('EOWBC_ASSET_DIR').$type.'/'.'theme/'.wbc()->wp->get_template().'/'.$path.'.php';		
+		$path = $base_dir.$type.'/'.'theme/'.wbc()->wp->get_template().'/'.$path.'.php';		
 		if(file_exists($path)){
 			require_once $path;
 		}

@@ -6,6 +6,14 @@
 
 
     global $product;
+    global $post;
+    if(empty($product)){
+        $product = wbc()->wc->get_product($post->ID);
+    }
+
+    if(empty($product) or is_wp_error($product )) {
+        return;
+    }
     
     $product_data = array();
     $sku = $product->get_sku();
@@ -32,13 +40,13 @@
                 if(!empty($terms) and !is_wp_error($terms)){
                     $_term_list_ = array();
                     foreach ($terms as $term_id) {
-                        $_term_ = get_term_by( 'id',$term_id,$attribute['name']); 
+                        $_term_ = wbc()->wc->get_term_by( 'id',$term_id,$attribute['name']); 
                         if( !empty($_term_) && !is_wp_error($_term_) && is_object($_term_) && property_exists($_term_,'name')) {
                             $_term_list_[] = $_term_->name;   
                         }
                     }
                     $product_data[]=array(wc_attribute_label($attribute->get_name()),implode(', ',$_term_list_));
-                }                        //get_term_by( 'id',,$attribute['name']);    
+                }                        //wbc()->wc->get_term_by( 'id',,$attribute['name']);    
             }
         }
     }
@@ -65,6 +73,9 @@
         $product_data[] = array(__('Certificate','woo-bundle-choice'),"<a href='${certificate_link}' target='_blank'>".__('Click here','woo-bundle-choice')."</a>");
     }
 
+
+    $product_data = apply_filters('eowbc_specification_data',$product_data,$product);
+   
     if(!empty($product_data) and is_array($product_data)) {
         if(wp_is_mobile()) {
             wbc()->load->template('publics/features/default_mobile',compact('product_data'));

@@ -43,21 +43,47 @@
         }
     }
 
-    if(!empty($product_data)){
-        $display_style = wbc()->options->get_option('tiny_features','specification_view_style','default');
-        if('default'===$display_style){
-            if(sizeof($product_data) > 1) {
-                list($product_data_1, $product_data_2) = array_chunk($product_data, ceil(count($product_data) / 2));
-                wbc()->load->template('publics/features/default',compact('product_data','product_data_1','product_data_2'));
+
+    //Additional meta here
+    $additional_meta_keys = wbc()->options->get_option('tiny_features','tiny_features_specification_meta_keys','');
+    if(!empty($additional_meta_keys)){
+        $additional_meta_keys = explode(',',$additional_meta_keys);
+        if(is_array($additional_meta_keys) and !is_wp_error($additional_meta_keys)){
+            foreach ($additional_meta_keys as $meta_key) {
+                $meta_value = $product->get_meta($meta_key,true);
+                if(!empty($meta_value)){
+                    $product_data[] = array($meta_key,$meta_value);
+                }
+
             }
-            else {
-                wbc()->load->template('publics/features/default',compact('product_data'));
+        }
+    }
+
+    // Add certificate link here
+    $certificate_link = $product->get_meta('_certificate_link',true);    
+    if(!empty($certificate_link)){
+        $product_data[] = array(__('Certificate','woo-bundle-choice'),"<a href='${certificate_link}' target='_blank'>".__('Click here','woo-bundle-choice')."</a>");
+    }
+
+    if(!empty($product_data) and is_array($product_data)) {
+        if(wp_is_mobile()) {
+            wbc()->load->template('publics/features/default_mobile',compact('product_data'));
+        } else {
+            $display_style = wbc()->options->get_option('tiny_features','specification_view_style','default');
+            if('default'===$display_style){
+                if(sizeof($product_data) > 1) {
+                    list($product_data_1, $product_data_2) = array_chunk($product_data, ceil(count($product_data) / 2));
+                    wbc()->load->template('publics/features/default',compact('product_data','product_data_1','product_data_2'));
+                }
+                else {
+                    wbc()->load->template('publics/features/default',compact('product_data'));
+                }
+            } elseif ('template_1'===$display_style) {            
+                wbc()->load->template('publics/features/template_1',compact('product_data'));
+                
+            } elseif ('template_2'===$display_style) {
+                wbc()->load->template('publics/features/template_2',compact('product_data'));
             }
-        } elseif ('template_1'===$display_style) {            
-            wbc()->load->template('publics/features/template_1',compact('product_data'));
-            
-        } elseif ('template_2'===$display_style) {
-            wbc()->load->template('publics/features/template_2',compact('product_data'));
         }
     }
    

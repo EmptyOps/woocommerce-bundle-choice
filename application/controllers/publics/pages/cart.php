@@ -44,24 +44,32 @@ class Cart {
             //Reload cart data
             WC()->cart->empty_cart();           
             foreach ($eo_wbc_maps as $index=>$set)
-            {               
+            {   
+                if(empty($set["FIRST"]['variation'])) {
+                    $set["FIRST"]['variation'] = NULL;
+                }            
+
                 if($set["FIRST"]){          
                     wc()->cart->add_to_cart(
                         $set["FIRST"][0],
                         $set["FIRST"][1],
                         ($set["FIRST"][2]=='0'?NULL:$set["FIRST"][2]),
-                        ($set["FIRST"][2]=='0'?NULL:wbc()->wc->eo_wbc_get_product_variation_attributes($set["FIRST"][2]))
+                        ($set["FIRST"][2]=='0'?NULL:$set["FIRST"]['variation'])
                       );
                 }
 
-                if($set["SECOND"])
+                if(empty($set["SECOND"]['variation'])) {
+                    $set["SECOND"]['variation'] = NULL;
+                }            
+
+                if($set["SECOND"] and isset($set["SECOND"][0]) and isset($set["SECOND"][1]) )  
                 {
                     wc()->cart->add_to_cart(
                         $set["SECOND"][0],
                         $set["SECOND"][1],
                         ($set["SECOND"][2]=='0'?NULL:$set["SECOND"][2]),
-                        ($set["SECOND"][2]=='0'?NULL:wbc()->wc->eo_wbc_get_product_variation_attributes($set["SECOND"][2]))
-                      );
+                        ($set["SECOND"][2]=='0'?NULL:$set["SECOND"]['variation'])
+                    );
                 }
             }   
         }                
@@ -91,8 +99,8 @@ class Cart {
     {       
         //wbc()->common->pr(wc()->cart->cart_contents);
         $eo_wbc_maps=wbc()->session->get('EO_WBC_MAPS',array());        
-        foreach (wc()->cart->cart_contents as $cart_key=>$cart_item)
-        {
+        foreach (wc()->cart->cart_contents as $cart_key=>$cart_item) {
+
             $product_count=0;
             $single_count=0;
             foreach ($eo_wbc_maps as $map)
@@ -157,36 +165,12 @@ class Cart {
             }
         }
         wbc()->session->set('EO_WBC_MAPS',apply_filters('eowbc_cart_render_maps',$eo_wbc_maps));
-
     }
-    
-    public function eo_wbc_render()
-    {   
-        wbc()->theme->load('css','cart');
-        wbc()->theme->load('js','cart');
-        if(apply_filters('eowbc_filter_sidebars_widgets',true)){
-            add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
-                return array( false );
-            });
-        }
 
-        
-        // if our car is empty then return.
-        $maps=wbc()->session->get('EO_WBC_MAPS');
-        if(empty($maps)) return;        
-
-        //run the cart service.
-        $this->eo_wbc_cart_service();
-
-        // if our is empty even after cart service return now.
-        $maps=wbc()->session->get('EO_WBC_MAPS');        
-        if(empty($maps)) return;
-
-        $this->eo_wbc_add_css();
-
+    public function process_cart($maps){
+        if(empty($maps)) return array();
         foreach ($maps as $key => $map) {
-            
-            
+                        
             $maps[$key]['data'] = wbc()->wc->eo_wbc_get_product((empty($map['FIRST'][2]))?$map['FIRST'][0]:$map['FIRST'][2]);
             if(empty($maps[$key]['data'])){
                 unset($maps[$key]);
@@ -235,6 +219,36 @@ class Cart {
             }
 
         }
+        return  apply_filters('sp_wbc_pre_cart_render_maps',$maps);
+    }
+    
+    public function eo_wbc_render()
+    {   
+        wbc()->theme->load('css','cart');
+        wbc()->theme->load('js','cart');
+        if(apply_filters('eowbc_filter_sidebars_widgets',true)){
+            add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
+                return array( false );
+            });
+        }
+
+
+        
+        // if our car is empty then return.
+        $maps=wbc()->session->get('EO_WBC_MAPS');
+        
+        if(empty($maps)) return;        
+
+        //run the cart service.
+        $this->eo_wbc_cart_service();
+
+        // if our is empty even after cart service return now.
+        $maps=wbc()->session->get('EO_WBC_MAPS');        
+        if(empty($maps)) return;
+
+        $this->eo_wbc_add_css();
+
+        $maps = $this->process_cart($maps);        
         
         $cart_actual_content = false;
         add_action('woocommerce_before_cart',function() use (&$cart_actual_content,&$maps){
@@ -270,9 +284,7 @@ class Cart {
             } else {
                 return $price;
             }
-        },10,3);
-
-        
+        },10,3);        
 
         add_filter( 'woocommerce_cart_item_quantity',function($product_quantity_first, $cart_item_key, $cart_item){
 

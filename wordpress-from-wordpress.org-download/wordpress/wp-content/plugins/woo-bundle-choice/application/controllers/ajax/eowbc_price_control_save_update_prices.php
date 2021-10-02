@@ -13,7 +13,7 @@ $res = array( "type"=>"success", "msg"=>"" );
 //     && $_POST['eo_wbc_action']==='save_jpc_data'
 //     && !empty($_POST['eo_wbc_jpc_form_data'])
 // ) 
-if(wp_verify_nonce(sanitize_text_field($_POST['_wpnonce']),'eowbc_price_control_save_update_prices')){                
+if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_price_control_save_update_prices')) {                
 
 	//hiren 09-05-2020: added json_decode to adapt with previous javascript version
     wbc()->load->model('admin/eowbc_price_control_save_update_prices');

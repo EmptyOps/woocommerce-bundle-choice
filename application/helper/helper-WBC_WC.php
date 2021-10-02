@@ -25,6 +25,47 @@ class WBC_WC {
 		return wc_placeholder_img_src();
 	}
 
+    public function slug2slug($slug) {
+        $term = get_term_by('slug',$slug,'product_cat');
+        if(!empty($term) and !is_wp_error($term)) {
+             return $term->slug;
+        }
+        return $slug;
+    }
+
+    public function get_term_by($field,$key,$taxonomy='') {
+
+        
+        if($field == 'id'){
+            if(!empty($taxonomy)){
+                $term = get_term_by($field,$key,$taxonomy);
+            } else {
+                $term = get_term_by($field,$key);
+            }
+
+            if(class_exists('SitePress')) {
+                if( !empty($term) and !is_wp_error($term) ) {
+                    $term_slug = $term->slug;
+
+                    if(!empty($taxonomy)){
+                        return get_term_by('slug',$term_slug,$taxonomy);
+                    } else {
+                        return get_term_by('slug',$term_slug);
+                    }
+                    
+                }    
+            }
+            return $term;        
+        } else {
+
+            if(!empty($taxonomy)){
+                return get_term_by($field,$key,$taxonomy);
+            } else {
+                return get_term_by($field,$key);
+            }            
+        }
+    }
+
 	public function is_wc_endpoint_url( $endpoint = false ) {
         
         if(function_exists('is_wc_endpoint_url')) {        	
@@ -52,6 +93,26 @@ class WBC_WC {
 	    }
     }
 
+    public function get_terms($parent_id = 0, $orderby = 'menu_order') {
+        
+        $term_list =array();
+        if(class_exists('SitePress')) {
+            global $wpdb;
+            /*$term_list = get_terms(array('taxonomy'=>'product_cat','hide_empty' => 0, 'orderby' => 'menu_order', 'parent'=>$id,'lang'=>''));          */
+            $query = "SELECT ".$wpdb->term_taxonomy.".term_id FROM ".$wpdb->term_taxonomy." WHERE ".$wpdb->term_taxonomy.".parent=".$parent_id;
+
+            $result = $wpdb->get_results($query,'ARRAY_A');
+            $result = array_column($result,'term_id');
+            $term_list = array();
+            foreach ($result as $term_id) {
+                $term_list[$term_id] = wbc()->wc->get_term_by('id',$term_id,'product_cat');
+            }               
+        } else {
+            $term_list = get_terms('product_cat', array('hide_empty' => 0, 'orderby' => $orderby, 'parent'=>$parent_id,'lang'=>''));
+        }
+        return $term_list;
+    }
+
     public static function eo_wbc_get_cart_url() {        
         return function_exists('wc_get_cart_url')?wc_get_cart_url():apply_filters( 'woocommerce_get_cart_url', self::eo_wbc_support_get_page_permalink( 'cart' ));
     }
@@ -60,9 +121,26 @@ class WBC_WC {
         return function_exists('wc_get_product')?wc_get_product($product_id):WC()->product_factory->get_product($product_id,array());
     }
 
+    public function get_product($product_id){
+        // wrapping up long name to short name, the wrapping up
+        // function is to be removed in future.
+        return $this->eo_wbc_get_product($product_id);
+    }
+
     public static function eo_wbc_create_attribute($args){
 
         if(function_exists('wc_create_attribute')) {
+                        
+            add_filter('product_attributes_type_selector',function($type){
+                $type['button']=__('Button','woo-bundle-choice');
+                $type['color']=__('Color','woo-bundle-choice');
+                $type['image']=__('Icon','woo-bundle-choice');
+                $type['image_text']=__('Icons with Text','woo-bundle-choice');
+                $type['dropdown_image']=__('Dropdown with Icons','woo-bundle-choice');
+                $type['dropdown_image_only']=__('Dropdown with Icons Only','woo-bundle-choice');
+                $type['dropdown']=__('Dropdown','woo-bundle-choice');
+                return $type;
+            });
 
             return wc_create_attribute($args);
 
@@ -83,7 +161,7 @@ class WBC_WC {
             $data = array(
                 'attribute_label'   => $args['name'],
                 'attribute_name'    => $args['slug'],
-                'attribute_type'    => 'select',
+                'attribute_type'    => (empty($args['type'])?'select':$args['type']),
                 'attribute_orderby' => 'menu_order',
                 'attribute_public'  => 1, // Enable archives ==> true (or 1)
             );
@@ -105,7 +183,7 @@ class WBC_WC {
         }
     }
 
-    public static function eo_wbc_get_product_variation_attributes( $variation_id ) {
+    public static function eo_wbc_get_product_variation_attributes( $variation_id ,$variation_data=array()) {
 
         if(is_null($variation_id))
         {
@@ -119,9 +197,9 @@ class WBC_WC {
                             :
                             self::eo_wbc_support_get_product_variation_attributes($variation_id);   
 
-            $var_attrs=array();                
+            $var_attrs=array();                            
             foreach ($variation_meta as $taxonomy => $term_slug) {
-
+                $attribute_taxonomy = $taxonomy;
                 $taxonomy=substr($taxonomy,strlen('attribute_'));
                 $taxonomy_name='';
                 
@@ -132,7 +210,11 @@ class WBC_WC {
                         $taxonomy_name=$tax->attribute_label;
                     }
                 }
-                $term_data = get_term_by('slug',$term_slug,$taxonomy);
+                if(empty($term_slug) and !empty($variation_data) and isset($variation_data[$attribute_taxonomy])){
+                    $term_slug = (string)$variation_data[$attribute_taxonomy];
+                }
+
+                $term_data = wbc()->wc->get_term_by('slug',$term_slug,$taxonomy);                
                 if(!is_wp_error($term_data) and !empty($term_data->name)){
                     $var_attrs[]=($taxonomy_name?$taxonomy_name.': ':'').$term_data->name;    
                 }  
@@ -239,7 +321,48 @@ class WBC_WC {
         }
     } 
 
+    public function get_taxonomy_by_slug($slug){
+        if(!empty($slug)){
+            
+            $attributes = wc_get_attribute_taxonomies();
+
+            if(!empty($attributes)){
+                foreach ($attributes as $attribute) {
+                    
+                    if(wc_attribute_taxonomy_name($attribute->attribute_name)==$slug){
+
+                        $data                    = $attribute;
+                        $attr               = new stdClass();
+                        $attr->id           = (int) $data->attribute_id;
+                        $attr->name         = $data->attribute_label;
+                        $attr->slug         = wc_attribute_taxonomy_name( $data->attribute_name );
+                        $attr->type         = $data->attribute_type;
+                        $attr->order_by     = $data->attribute_orderby;
+                        $attr->has_archives = (bool) $data->attribute_public;
+                        return $attr;
+                    }                    
+                }
+                return false;   
+            } else {
+                return false;
+            }       
+        }
+    }
+
     public function get_currency_symbol() {
         return get_woocommerce_currency_symbol();
+    }
+
+    public function wc_permalink(string $key){
+        $permalink = get_option('woocommerce_permalinks',array());
+        if(empty($permalink)){
+            $permalink['category_base'] = untrailingslashit('product-category');
+        }
+
+        if(empty($permalink) or empty($permalink[$key])){
+            return '';
+        } else {
+            return $permalink[$key];
+        }
     }
 }

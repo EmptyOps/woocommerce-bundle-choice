@@ -65,15 +65,17 @@ class Migration_000570 {
 				$first_map = explode(',',$map_value[0]);
 				$second_map = explode(',',$map_value[1]);
 
-				$new_mapping[]=array(
-					'range_first'=>count($first_map),
-					'range_second'=>count($second_map),
+				$uniqueid = wbc()->common->createUniqueId();
+				$new_mapping[$uniqueid]=array(
+					'range_first'=>(count($first_map)==1?false:count($first_map)),
+					'range_second'=>(count($second_map)==1?false:count($second_map)),
+
 					'eo_wbc_first_category'=>$first_map[0],
 					'eo_wbc_second_category'=>$second_map[0],
 					'eo_wbc_first_category_range'=>(empty($first_map[1])?'':$first_map[1]),
 					'eo_wbc_second_category_range'=>(empty($second_map[1])?'':$second_map[1]),
 					'eo_wbc_add_discount'=>$map_value[2],
-					'id'=>wbc()->common->createUniqueId(),
+					'id'=>$uniqueid,
 				);             
 			}			
 			wbc()->options->set('eowbc_option_mapping_map_creation_modification',serialize($new_mapping));
@@ -127,23 +129,23 @@ class Migration_000570 {
 									'breadcrumb_radius'=>
 										get_option('eo_wbc_breadcrumb_radius','5').'px',
 									'breadcrumb_backcolor_active'=>
-										get_option('eo_wbc_active_breadcrumb_color'),
+										get_option('eo_wbc_active_breadcrumb_color','#dbdbdb'),
 									'breadcrumb_backcolor_inactive'=>
-										get_option('eo_wbc_non_active_breadcrumb_color'),
+										get_option('eo_wbc_non_active_breadcrumb_color','#ffffff'),
 									'showhide_icons'=>
 										get_option('eo_wbc_show_hide_breadcrumb_icon'),
 									'breadcrumb_num_icon_backcolor_active'=>
-										get_option('eo_wbc_breadcrumb_icon_color_active'),
+										get_option('eo_wbc_breadcrumb_icon_color_active','#000000'),
 									'breadcrumb_num_icon_backcolor_inactive'=>
-										get_option('eo_wbc_breadcrumb_icon_color_inactive'),
+										get_option('eo_wbc_breadcrumb_icon_color_inactive','#000000'),
 									'breadcrumb_actions_backcolor_active'=>
-										get_option('eo_wbc_breadcrumb_action_color_active'),
+										get_option('eo_wbc_breadcrumb_action_color_active','#4773f7'),
 									'breadcrumb_actions_backcolor_inactive'=>
-										get_option('eo_wbc_breadcrumb_action_color_inactive'),
+										get_option('eo_wbc_breadcrumb_action_color_inactive','#939ebf'),
 									'breadcrumb_title_backcolor_active'=>
-										get_option('eo_wbc_breadcrumb_title_color_inactive'),
+										get_option('eo_wbc_breadcrumb_title_color_active','#ffffff'),
 									'breadcrumb_title_backcolor_inactive'=>
-										get_option('eo_wbc_breadcrumb_title_color_active'),
+										get_option('eo_wbc_breadcrumb_title_color_inactive','#9e9e9e'),
 								),	
 							'appearance_filters'=>array(
 									'header_font'=>

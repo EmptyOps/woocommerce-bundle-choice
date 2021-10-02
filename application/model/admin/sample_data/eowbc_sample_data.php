@@ -80,8 +80,7 @@ class Eowbc_Sample_Data {
 		if(!empty($attributes)){
 	    
 	        //Send for creation and update returned array.
-
-	        $catat_attribute = unserialize(wbc()->options->get($feature_key.'_created_attribute','a:0:{}')); 	//$this->create_attribute($attributes);            
+	        $catat_attribute = unserialize(wbc()->options->get( $feature_key.'_created_attribute', 'a:0:{}')); 	//$this->create_attribute($attributes);            
 	        
 	        // update_option('eo_wbc_attr',serialize($catat_attribute));
 	        wbc()->options->set('eo_wbc_attr',serialize($catat_attribute));
@@ -94,6 +93,7 @@ class Eowbc_Sample_Data {
 	        $this->data_template->set_configs_after_attributes();
 
 	        wbc()->options->delete($feature_key.'_created_attribute');
+	        
 	    } 
 	}
 
@@ -235,7 +235,7 @@ class Eowbc_Sample_Data {
 			foreach($args as $index=>$cat) {					
 				//to be removed. No more can remove this check as since now due to batch processing we are retrieving all ids later on.
 			   	if(term_exists( $cat['slug'] , 'product_cat' )){
-			   		$args[$index]['id']=get_term_by('slug',$cat['slug'] , 'product_cat')->term_id;
+			   		$args[$index]['id']=wbc()->wc->get_term_by('slug',$cat['slug'] , 'product_cat')->term_id;
 			   	} else {
 			   		$cat_id=$this->create_category_factory($cat);
 			   		$args[$index]['id']=$cat_id;	
@@ -256,9 +256,14 @@ class Eowbc_Sample_Data {
 		if(!isset($this->data_template->get_products()[$index])) {
 			return array( "type"=>"error", "msg"=>"No product found at index ".$index );	//FALSE;
 		}
-	
+
+		
 		$product=$this->data_template->get_products()[$index];
 
+		if(!empty($product['sku']) and !empty(wc_get_product_id_by_sku($product['sku'])) ) {
+			return $res;
+		}
+		
 		$product_id= wp_insert_post( array(
 		    'post_author' => get_current_user_id(),
 		    'post_title' => $product['title'],
@@ -285,7 +290,7 @@ class Eowbc_Sample_Data {
 						}
 
 						if(!empty($tax_term) and !is_wp_error($tax_term)){
-							$term_slug = get_term_by('term_taxonomy_id',$tax_term['term_taxonomy_id'],$_tax);	
+							$term_slug = wbc()->wc->get_term_by('term_taxonomy_id',$tax_term['term_taxonomy_id'],$_tax);	
 							if(!empty($term_slug->slug) and !is_wp_error($term_slug)) {
 								$_val[$key] = $term_slug->slug;
 							}
@@ -299,6 +304,10 @@ class Eowbc_Sample_Data {
 		}
 
 		update_post_meta( $product_id, '_product_attributes', $product['attribute'] );
+
+		if(!empty($product['sku'])) {
+			update_post_meta( $product_id, '_sku', $product['sku'] );			
+		}
 
 		foreach ($product['attribute'] as $attr_index => $attribute) {
 			wp_set_object_terms( $product_id, explode('|',$attribute['value']) , $attr_index );					
@@ -321,6 +330,8 @@ class Eowbc_Sample_Data {
 
 			update_post_meta($product_id,"_product_image_gallery",implode(',', $imgs));
 		}
+
+		
 
 		$parent_id = $product_id;
 		if(!empty($product['variation'])){
@@ -348,7 +359,7 @@ class Eowbc_Sample_Data {
 							$tax_term = wp_insert_term( $term_name, $taxonomy );								
 						} 
 						if(!empty($tax_term) and !is_wp_error($tax_term)){
-	    					$term_slug = get_term_by('term_taxonomy_id',$tax_term['term_taxonomy_id'],$taxonomy);
+	    					$term_slug = wbc()->wc->get_term_by('term_taxonomy_id',$tax_term['term_taxonomy_id'],$taxonomy);
 	    					if(!empty($term_slug->slug) and !is_wp_error($term_slug)) {
 	    						$variation['terms'][$taxonomy] = $term_slug->slug;	    					
 	    					}
@@ -378,7 +389,7 @@ class Eowbc_Sample_Data {
 			update_post_meta( $parent_id, '_sales_price', $product['price']);
 			update_post_meta( $parent_id, '_sale_price', $product['sale_price']);				
 			update_post_meta( $parent_id, '_manage_stock','no' );						
-		}			
+		}
 
 		return $res;	// TRUE;
 	}	
@@ -454,7 +465,7 @@ class Eowbc_Sample_Data {
 					        if( ! term_exists( $term_name, $taxonomy ) )
         						wp_insert_term( $term_name, $taxonomy );           					
 
-        					$term_slug = get_term_by('name', $term_name, $taxonomy );
+        					$term_slug = wbc()->wc->get_term_by('name', $term_name, $taxonomy );
         					if(!empty($term_slug->slug) and !is_wp_error($term_slug)){
         						update_post_meta( $variation_id, 'attribute_'.$taxonomy, $term_slug->slug );	
         					}				
@@ -684,16 +695,27 @@ class Eowbc_Sample_Data {
         		// $_data = unserialize(wbc()->options->get_option_group('filters_'.$index,"a:0:{}"));
         		// $names=array_column($_data,'name');
         		// if( !in_array($filter['name'], $names)){
+
         			$prefix = "";
+        			if(empty($this->tab_key_prefix)){
+        				$this->tab_key_prefix = '';
+        			}
+
         			if( $index == "d_fconfig" ) {
-						$_POST["saved_tab_key"] = "d_fconfig";
+						$_POST["saved_tab_key"] = $this->tab_key_prefix."d_fconfig";
 						$prefix = "d";
+						$_POST['first_category_altr_filt_widgts'] = $filter['template'];
         			}
         			else {
-        				$_POST["saved_tab_key"] = "s_fconfig";
+        				$_POST["saved_tab_key"] = $this->tab_key_prefix."s_fconfig";
 						$prefix = "s";
+						$_POST['second_category_altr_filt_widgts'] = $filter['template'];
         			}
-        			 	
+
+        			if(!empty($filter['filter_set'])) {        				
+        				$_POST[$prefix.'_fconfig_set']=$filter['filter_set'];
+        			}
+        			        			 	
         			$_POST[$prefix.'_fconfig_filter']=$filter['name'];
 	                $_POST[$prefix.'_fconfig_type']=$filter['type'];
 	                $_POST[$prefix.'_fconfig_label']=$filter['label'];
@@ -702,6 +724,7 @@ class Eowbc_Sample_Data {
 	                $_POST[$prefix.'_fconfig_input_type']=$filter['input'];
 	                $_POST[$prefix.'_fconfig_column_width']=$filter['column_width'];
 	                $_POST['filter_template'] = $filter['template'];
+	                
 	                $_POST[$prefix.'_fconfig_ordering']=$filter['order'];
 	                $_POST[$prefix.'_fconfig_icon_size']='';
 	                $_POST[$prefix.'_fconfig_icon_label_size']='';
@@ -709,11 +732,22 @@ class Eowbc_Sample_Data {
 	                $_POST[$prefix.'_fconfig_add_help']=$filter['help'];
 	                $_POST[$prefix.'_fconfig_add_help_text']=$filter['help_text'];
 	                $_POST[$prefix.'_fconfig_add_enabled']=$filter['enabled'];
+	                
+
+	                if(!empty($filter['filter_category'])) {
+						$_POST['filter_category']=$filter['filter_category'];	                	
+	                }
 
         			// update_option($index,serialize($_data)); 
         			// wbc()->options->update_option_group( 'filters_'.$index, serialize($_data) );
-        			
-					$res = \eo\wbc\model\admin\Eowbc_Filters::instance()->save( \eo\wbc\controllers\admin\menu\page\Filters::get_form_definition() );
+        			$filter_model = \eo\wbc\model\admin\Eowbc_Filters::instance();
+        			$filter_model->tab_key_prefix = $this->tab_key_prefix;
+
+        			if(empty($this->form_defination)) {
+        				$this->form_defination = \eo\wbc\controllers\admin\menu\page\Filters::get_form_definition(); 
+        			}
+
+					$res = $filter_model->save( $this->form_defination ,true);
 
 					unset($_POST[$prefix.'_fconfig_filter']);
 	                unset($_POST[$prefix.'_fconfig_type']);
@@ -727,14 +761,33 @@ class Eowbc_Sample_Data {
 	                unset($_POST[$prefix.'_fconfig_icon_label_size']);
 	                unset($_POST[$prefix.'_fconfig_add_reset_link']);
 
+
+	                if(!empty($filter['filter_set'])) {        				
+        				unset($_POST[$prefix.'_fconfig_set']);
+        			}
+
+	                if( $index == "d_fconfig" ) {						
+						unset($_POST['first_category_altr_filt_widgts']);
+        			}
+        			else {        				
+						unset($_POST['second_category_altr_filt_widgts']);
+        			}
+
 	                unset($_POST['filter_template']);
+	                unset($_POST['first_category_altr_filt_widgts']);
 	                unset($_POST[$prefix.'_fconfig_add_help']);
 	                unset($_POST[$prefix.'_fconfig_add_help_text']);
 	                unset($_POST[$prefix.'_fconfig_add_enabled']);
 
+	                if(!empty($filter['filter_category'])) {
+						unset($_POST['filter_category']);
+	                }
+
         		// }
         	}
-    	}        	
+    	}
+    	
+    	do_action('eowbc_automation_post_sample_filters',$__cat__, $__att__);        	
 	}
 
 	function create_attribute( $args ){
@@ -748,12 +801,16 @@ class Eowbc_Sample_Data {
 	    		$data = array(
 			        'name'   => wp_unslash($attribute['label']),
 			        'slug'    => empty($attribute['slug']) ? wc_sanitize_taxonomy_name(wp_unslash($attribute['label'])) : $attribute['slug'],
-			        'type'    => 'select',
+			        'type'    => (empty($attribute['type'])?'select':$attribute['type']),
 			        'order_by' => 'menu_order',
 			        'has_archives'  => 1, // Enable archives ==> true (or 1)
 			    );		
 
 	    		$id = wbc()->wc->eo_wbc_create_attribute( $data );
+	    		// @mahesh - added to store the ribbon color from sample data
+	    		if(!empty($id) and !is_wp_error($id) and !empty($attribute['ribbon_color'])) {
+	    			update_term_meta($id,'wbc_ribbon_color',$attribute['ribbon_color']);
+	    		}
 	    		
     			if( ! taxonomy_exists('pa_'.$data['slug']) ){	
     				register_taxonomy(
@@ -783,16 +840,43 @@ class Eowbc_Sample_Data {
 
 							$attr_term_id = wp_insert_term( $term,'pa_'.$data['slug'],array('slug' => sanitize_title($term)) ); 
 							
-							if(!empty($attr_term_id) and !is_wp_error($attr_term_id) and !empty($attribute['thumb'][$term_index])) {
-								
-								$thumb_id=0;
-		    					$thumb_id=$this->add_image_gallary($attribute['thumb'][$term_index]);
+							if(!empty($attr_term_id) and !is_wp_error($attr_term_id)) {
+
 		    					$_attr_term_id = null;
 		    					if(is_array($attr_term_id)) {
+
 		    						$_attr_term_id=isset($attr_term_id['term_id']) ? $attr_term_id['term_id'] : null;
+
 		    						if(!empty($_attr_term_id)) {
-		    							update_term_meta( $_attr_term_id, 'pa_'.$data['slug'].'_attachment', wp_get_attachment_url( $thumb_id ) );
-		    							update_term_meta( $_attr_term_id, sanitize_title($term).'_attachment', wp_get_attachment_url( $thumb_id ) );	
+
+		    							if(!empty($attribute['thumb'][$term_index])){
+											$thumb_id=0;
+				    						$thumb_id=$this->add_image_gallary($attribute['thumb'][$term_index]);
+				    						update_term_meta( $_attr_term_id, 'pa_'.$data['slug'].'_attachment', wp_get_attachment_url( $thumb_id ) );
+		    								update_term_meta( $_attr_term_id, sanitize_title($term).'_attachment', wp_get_attachment_url( $thumb_id ) );
+				    					}
+
+		    							if(!empty($attribute['type']) and !empty($attribute['terms_meta']) and is_array($attribute['terms_meta'])){
+
+		    								switch ($attribute['type']) {
+		    									case 'color':
+		    									
+		    									function_exists( 'update_term_meta' ) ? update_term_meta( $_attr_term_id,'wbc_color',$attribute['terms_meta'][$term_index]) : update_metadata( 'woocommerce_term', $_attr_term_id,'wbc_color',$attribute['terms_meta'][$term_index]);
+		    										break;
+		    									
+		    									case 'image':				
+		    									case 'image_text':	
+		    									case 'dropdown_image':
+		    									case 'dropdown_image_only':	
+
+		    									$wbc_attachment_id = $this->add_image_gallary($attribute['terms_meta'][$term_index]);
+
+		    									$wbc_attachment_src =wp_get_attachment_url( $wbc_attachment_id );
+		    									function_exists( 'update_term_meta' ) ? update_term_meta( $_attr_term_id,'wbc_attachment',$wbc_attachment_src) : update_metadata( 'woocommerce_term', $_attr_term_id,'wbc_attachment',$wbc_attachment_src);
+
+		    										break;
+		    								}
+		    							}
 		    						}		    						
 		    					}
 							}		    								    			
@@ -910,7 +994,7 @@ class Eowbc_Sample_Data {
 	      return $posts[0]->ID;
 	    }
 
-		$file = wp_upload_bits($name, null, file_get_contents($path));
+		$file = wp_upload_bits($name, null, file_get_contents(str_replace(' ','%20',$path)));
 
 		if (!$file['error']) {
 
@@ -919,7 +1003,7 @@ class Eowbc_Sample_Data {
 			$attachment = array(
 				'post_mime_type' => $type['type'],
 				'post_parent' => null,
-				'post_title' => preg_replace('/\.[^.]+$/', '', $name),
+				'post_title' => implode('-',explode(' ',strtolower($name))).'-image'/*preg_replace('/\.[^.]+$/', '', $name)*/,
 				'post_content' => '',
 				'post_status' => 'inherit'
 			);
@@ -962,13 +1046,13 @@ class Eowbc_Sample_Data {
 
 			foreach ($args as $map) {
         
-				$first=get_term_by($map[0][0],$map[0][1],$map[0][2]);
+				$first=wbc()->wc->get_term_by($map[0][0],$map[0][1],$map[0][2]);
       
 		          if(!empty($first) and !is_wp_error($first)){
 		            $first = $first->term_taxonomy_id;
 		          }
 
-				$second=get_term_by($map[1][0],$map[1][1],$map[1][2]);
+				$second=wbc()->wc->get_term_by($map[1][0],$map[1][1],$map[1][2]);
       
 		          if(!empty($second) and !is_wp_error($second)){
 		            $second = $second->term_taxonomy_id;

@@ -95,10 +95,10 @@ box-shadow: none;">
 	            <tr>
 	              <td>
 	                <?php $_steps=["catagorie(s)","attribute(s)","product(s)"]; ?>
-	                <input type="submit" name="save" value="<?php printf(__("Create sample %1s","woo-bundle-choice"),$_steps[$_step-1]); ?>"  class="button button-primary button-hero action">                
+	                <input type="submit" name="save" value="<?php printf(__("Create sample %1s","woo-bundle-choice"),$_steps[$_step-1]); ?>"  class="button button-primary button-hero action ui button secondary">
 	              </td>
 	              <td>
-	                <a href="#" class="button button-hero action" onclick="if(!jQuery(this).hasClass('disabled')){ window.location.href='<?php echo admin_url('admin.php?page=eowbc'); ?>'; }">Cancel</a>
+	                <a href="#" class="button button-hero action ui button secondary inverted" onclick="if(!jQuery(this).hasClass('disabled')){ window.location.href='<?php echo admin_url('admin.php?page=eowbc'); ?>'; }">Cancel</a>
 	              </td>
 	            </tr>
 	          </tfoot>
@@ -142,6 +142,7 @@ box-shadow: none;">
 		                '_wpnonce': '<?php echo wp_create_nonce('sample_data_jewelry');?>',
 		                'action':'eowbc_ajax',
 		                'resolver':'sample_data/catattr',
+		                'resolver_path':'<?php echo apply_filters('eowbc_catattr_sample_data_resolver_path',''); ?>', 
 		                'feature_key':'<?php _e($feature_key); ?>',
 		                'type':'after_cat_created',
 		            };
@@ -175,6 +176,7 @@ box-shadow: none;">
 		                '_wpnonce': '<?php echo wp_create_nonce('sample_data_jewelry');?>',
 		                'action':'eowbc_ajax',
 		                'resolver':'sample_data/catattr',
+		                'resolver_path':'<?php echo apply_filters('eowbc_catattr_sample_data_resolver_path',''); ?>',
 		                'feature_key':'<?php _e($feature_key); ?>',
 		                'type':'after_attr_created',
 		            };
@@ -224,6 +226,7 @@ box-shadow: none;">
 	                '_wpnonce': '<?php echo wp_create_nonce('sample_data_jewelry');?>',
 	                'action':'eowbc_ajax',
 	                'resolver':'sample_data/catattr',
+	                'resolver_path':'<?php echo apply_filters('eowbc_catattr_sample_data_resolver_path',''); ?>',
 	                'feature_key':'<?php _e($feature_key); ?>',
 	                'label':label,
 	                'value':value,
@@ -306,10 +309,11 @@ box-shadow: none;">
 	                '_wpnonce': '<?php echo wp_create_nonce('sample_data_jewelry');?>',
 	                'action':'eowbc_ajax',
 	                'resolver':'sample_data/<?php _e($feature_key); ?>',
+	                'resolver_path':'<?php echo apply_filters('eowbc_product_sample_data_resolver_path',''); ?>', 
 	                'product_index':index 
 	            };
 
-	            jQuery.post('<?php echo admin_url( 'admin-ajax.php' ); ?>', data, function(response) {
+	            jQuery.post('<?php echo admin_url( 'admin-ajax.php'); ?>', data, function(response) {
 	            	var resjson = jQuery.parseJSON(response);
 	                if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
 		                eo_wbc_add_products(++index);                    

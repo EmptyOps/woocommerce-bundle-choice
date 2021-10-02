@@ -52,7 +52,7 @@ class Product {
 
         $bonus_features = array_filter(unserialize(wbc()->options->get_option('setting_status_setting_status_setting','bonus_features',serialize(array()))));
 
-        if( ( !isset($_GET['EO_WBC']) and !empty($bonus_features['opts_uis_item_page']) )/*(!isset($_GET['EO_WBC']) and wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_status',false))*/ or ( isset($_GET['EO_WBC']) and wbc()->options->get_option('appearance_product_page','show_options_ui_in_pair_builder','1') ) ){
+        if( ( !isset($_GET['EO_WBC']) and !empty($bonus_features['opts_uis_item_page']) )/*(!isset($_GET['EO_WBC']) and wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_status',false))*/ or ( isset($_GET['EO_WBC']) and wbc()->options->get_option('appearance_product_page','show_options_ui_in_pair_builder',false) ) ){
 
             \eo\wbc\controllers\publics\Options::instance()->run();        
         }
@@ -118,22 +118,30 @@ class Product {
                 // wp_enqueue_script('eo_wbc_add_to_cart_js');
             });
 
-            add_action('woocommerce_after_add_to_cart_button',function(){                
-                // echo "<button href='#' id='eo_wbc_add_to_cart' class='single_add_to_cart_button button alt make_pair btn btn-default'>".get_option('eo_wbc_pair_text',__('Add to pair','woo-bundle-choice'))."</button>";
-                echo "<button href='#' id='eo_wbc_add_to_cart' class='single_add_to_cart_button button alt make_pair btn btn-default'>".wbc()->options->get_option('configuration','label_make_pair',__('Add to pair','woo-bundle-choice'))."</button>";
-            });
+            global $post;            
+            $product = wbc()->wc->eo_wbc_get_product($post->ID);
+               
+            if($product->is_in_stock()){
+
+                add_action('woocommerce_after_add_to_cart_button',function(){                
+                    // echo "<button href='#' id='eo_wbc_add_to_cart' class='single_add_to_cart_button button alt make_pair btn btn-default'>".get_option('eo_wbc_pair_text',__('Add to pair','woo-bundle-choice'))."</button>";
+                    echo "<button href='#' id='eo_wbc_add_to_cart' class='single_add_to_cart_button button alt make_pair btn btn-default'>".wbc()->options->get_option('configuration','label_make_pair',__('Add to pair','woo-bundle-choice'))."</button>";
+                });
+            }
             //Add css to the head
             add_Action('wp_head',function(){
                 ?>
                     <style>
+                        
+                        @media only screen and (max-width: 678px){
+                            .make_pair{
+                                margin: auto !important;
+                            }
+                        }
+
                         .make_pair{
                             margin-left: 5px !important;
                         }
-                        @media only screen and (max-width: 600px){
-                            .make_pair{
-                                margin-top: 1em !important;
-                            }
-                        }                        
                     </style>
                 <?php
             });
@@ -256,6 +264,11 @@ class Product {
             if(empty($btn_text)){
                 $btn_text = 'Continue';
             }
+            
+            global $post;            
+            $product = wbc()->wc->eo_wbc_get_product($post->ID);
+            if($product->is_in_stock()){
+
             ?>
             <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
             <script type="text/javascript">
@@ -269,7 +282,7 @@ class Product {
                             jQuery('form.cart').submit();
                         }
 
-                        jQuery(".single_add_to_cart_button.button.alt:not(.disabled)").replaceWith('<div class=\"ui buttons\">'+
+                        jQuery(".single_add_to_cart_button.button.alt:not(.disabled):eq(0)").replaceWith('<div class=\"ui buttons\">'+
                                 '<div class=\"ui button\" href=\"#\" id=\"eo_wbc_add_to_cart\"><?php echo $btn_text; ?></div>'+
                                     '<div class=\"ui floating dropdown icon button\" style=\"width: fit-content;min-width: unset; max-width: unset;\">'+
                                         '<i class=\"dropdown icon\"></i>'+
@@ -293,6 +306,7 @@ class Product {
             </script>
             
             <?php 
+            }
             
             global $post;            
             $product = wbc()->wc->eo_wbc_get_product($post->ID);

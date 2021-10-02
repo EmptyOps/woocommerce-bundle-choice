@@ -2,7 +2,7 @@
 
 $res = array( "type"=>"success", "msg"=>"Success" );
 
-if(wp_verify_nonce(wbc()->sanitize->post($_POST['_wpnonce']),'eowbc_askq')){                
+if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_askq')){                
 	if( !empty(wbc()->sanitize->post('eowbc_askq_fname')) and 
 		!empty(wbc()->sanitize->post('eowbc_askq_lname')) and
 		!empty(wbc()->sanitize->post('eowbc_askq_email')) and 

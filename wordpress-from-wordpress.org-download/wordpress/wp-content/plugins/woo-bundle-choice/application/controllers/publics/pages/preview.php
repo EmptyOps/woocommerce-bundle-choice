@@ -220,7 +220,7 @@ class Preview {
     
     private function eo_wbc_add_to_cart()
     {
-        $cart=base64_decode(sanitize_text_field(wbc()->sanitize->get('CART')),TRUE);        
+        $cart=base64_decode(wbc()->sanitize->get('CART'),TRUE);        
         if (!empty($cart)){
             
             $cart=str_replace("\\",'',$cart);
@@ -274,7 +274,7 @@ class Preview {
         /*add_filter('the_content',function(){*/
            
             
-            if( !empty(wbc()->sanitize->get('FIRST')) && !empty(wbc()->sanitize->get('SECOND')) && !empty(wbc()->sanitize->get('CART')) and !empty($_GET['EO_WBC']))
+            if( !empty(wbc()->sanitize->get('FIRST')) && !empty(wbc()->sanitize->get('SECOND')) && !empty(wbc()->sanitize->get('CART')) and !empty(wbc()->sanitize->get('EO_WBC')))
             {                
                 //if data available at _GET then add to out custom cart
                 $this->eo_wbc_add_to_cart();
@@ -296,7 +296,7 @@ class Preview {
                 $second=wbc()->wc->eo_wbc_get_product((int)($set['SECOND'][2]?$set['SECOND'][2]:$set['SECOND'][0]));
 
                 wbc()->load->model('publics/component/eowbc_breadcrumb');
-                $content= \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_add_breadcrumb(sanitize_text_field(wbc()->sanitize->get('STEP')),sanitize_text_field(wbc()->sanitize->get('BEGIN'))).'<br/>';
+                $content= \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_add_breadcrumb(wbc()->sanitize->get('STEP'),wbc()->sanitize->get('BEGIN')).'<br/>';
                 
                 $content.='<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><div class="ui special cards centered" style="margin: auto !important;
     min-width: fit-content !important;max-width: fit-content !important;">'.
@@ -344,7 +344,7 @@ class Preview {
                         '</div>'.
                     '</div>'.
                 '</div>'.
-                '<div class="ui row" style="display:grid !important;"><form action="" method="post" class="woocommerce" style="float:right;margin-top: 1.5em;display:grid !important;">'.
+                '<div class="ui row" style="display:table !important;margin:auto;margin-bottom: 2em !important;"><form action="" method="post" class="woocommerce" style="float:right;margin-top: 1.5em;display:grid !important;">'.
                     '<input type="hidden" name="add_to_cart" value=1>'.
                     '<button class="ui button right floated aligned" style="width: fit-content;margin: auto;background-color:'.wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active',wbc()->session->get('EO_WBC_BG_COLOR',FALSE))/*get_option('eo_wbc_active_breadcrumb_color',wbc()->session->get('EO_WBC_BG_COLOR',FALSE))*/.'">'.__('Add This To Cart','woo-bundle-choice').
                     '</button>'.

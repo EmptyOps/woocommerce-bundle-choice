@@ -1,5 +1,4 @@
 <?php
-
 /**
  *
  * @link https://wordpress.org/plugins/woo-bundle-choice/
@@ -10,7 +9,7 @@
  * Plugin Name: Woo Choice Plugin | Ring Builder | Pair Maker | Guidance Tool
  * Plugin URI: https://wordpress.org/plugins/woo-bundle-choice/
  * Description: Product bundling as ring builder for jewelry, pair maker for clothing and guidance tool for home decor, cosmetics etc. Product bundling as per user's choice.
- * Version: 1.0.0
+ * Version: 1.0.5
  * Author: emptyopssphere
  * Author URI: https://profiles.wordpress.org/emptyopssphere
  * License: GPLv3+
@@ -139,7 +138,7 @@ if(!class_exists('Woo_Bundle_Choice')) {
 
 			defined('EOWBC_ICON') || define('EOWBC_ICON', constant('EOWBC_ASSET_URL').'icon/mini.png');
 			defined('EOWBC_JUMBO_ICON') || define('EOWBC_JUMBO_ICON', constant('EOWBC_ASSET_URL').'/icon/jumbo.png');
-			defined('EOWBC_ICON_SVG') || define('EOWBC_ICON_SVG', 'https://www.emptyops.com/demo/zokri-shop/wp-content/uploads/2020/02/bundle_site_logo_2-1.svg');
+			defined('EOWBC_ICON_SVG') || define('EOWBC_ICON_SVG', constant('EOWBC_ASSET_URL').'/icon/bundle_logo.svg');
 		}
 
 		public function init() {
@@ -154,13 +153,6 @@ if(!class_exists('Woo_Bundle_Choice')) {
 		}
 	}
 
-	// if( isset($_GET["page"]) && $_GET["page"] == "eowbc-configuration" ) {
-	// 	echo "in wbc here 1";
-	// 	wp_die("in wbc here 1");
-	// 	die("in wbc here 1");
-	// 	exit();
-	// }
-	
 
 	add_action( 'plugins_loaded', function() {
 		wbc()->construct_init();

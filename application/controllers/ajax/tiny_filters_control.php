@@ -5,7 +5,7 @@ if(isset($_POST['slug']) && isset($_POST['type']) ) {
         
     $slug = wbc()->sanitize->post('slug');
 
-    $term=get_term_by('slug',$slug,'product_cat');
+    $term=wbc()->wc->get_term_by('slug',$slug,'product_cat');
 
     $id=$term->term_id;
     $label=wbc()->sanitize->post('title');

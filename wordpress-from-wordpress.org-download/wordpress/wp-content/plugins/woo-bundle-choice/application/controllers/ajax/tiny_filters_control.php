@@ -3,13 +3,13 @@ if(isset($_POST['slug']) && isset($_POST['type']) ) {
     wbc()->load->model('publics/component/eowbc_filter_widget');
     $widget = \eo\wbc\model\publics\component\EOWBC_Filter_Widget::instance();       
         
-    $slug = sanitize_text_field($_POST['slug']);
+    $slug = wbc()->sanitize->post('slug');
 
     $term=get_term_by('slug',$slug,'product_cat');
 
     $id=$term->term_id;
-    $label=sanitize_text_field($_POST['title']);
-    $type=sanitize_text_field($_POST['type']);        
+    $label=wbc()->sanitize->post('title');
+    $type=wbc()->sanitize->post('type');
 
     $filter=$widget->range_steps($id,$label,$type);                                                     
     $widget->input_dropdown($filter['slug'],

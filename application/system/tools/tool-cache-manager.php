@@ -45,7 +45,7 @@ class Cache_Manager {
 
 	private function cache_taxonomy(){		
 
-		$_taxonomy_ = wc_get_attribute_taxonomies();
+		$_taxonomy_ = \wc_get_attribute_taxonomies();
     
     	if(!empty($_taxonomy_) and !is_wp_error($_taxonomy_)) {
     		$cache = array();

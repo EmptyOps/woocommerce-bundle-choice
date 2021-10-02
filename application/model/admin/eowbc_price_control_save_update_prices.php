@@ -25,6 +25,10 @@ class Eowbc_Price_Control_Save_Update_Prices {
 		
 	}
 
+	public static function api_price_markup($price) {
+		return $price;
+	}
+
 	public function save($eo_wbc_jpc_form_data) {
 		wbc()->sanitize->clean($eo_wbc_jpc_form_data);
 
@@ -255,7 +259,9 @@ class Eowbc_Price_Control_Save_Update_Prices {
 	                        delete_post_meta($pid,'_sale_price');                    
 	                        update_post_meta($pid,'_price',$q_data[count($q_data)-1]->regular_price);
 	                    }            
-	                    update_post_meta($pid,'_regular_price',$q_data[count($q_data)-1]->regular_price); 
+	                    if(!empty($q_data[count($q_data)-1]->regular_price)){
+	                    	update_post_meta($pid,'_regular_price',$q_data[count($q_data)-1]->regular_price); 
+	                    }
 	                    wc_delete_product_transients($pid);  
 	                }
 	            }

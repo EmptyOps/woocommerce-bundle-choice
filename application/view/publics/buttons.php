@@ -7,14 +7,24 @@
 $first_term = wbc()->options->get_option('configuration','first_name');
 $second_term = wbc()->options->get_option('configuration','second_name');
 
-$first_slug = get_term_by( 'term_taxonomy_id', $first_term, 'product_cat')->slug;
+$first_slug = wbc()->wc->get_term_by( 'term_taxonomy_id', $first_term, 'product_cat')->slug;
 
-$second_slug = get_term_by( 'term_taxonomy_id', $second_term, 'product_cat')->slug;
+$second_slug = wbc()->wc->get_term_by( 'term_taxonomy_id', $second_term, 'product_cat')->slug;
 
-$first_name = get_term_by( 'term_taxonomy_id', $first_term, 'product_cat')->name;
+
+$first_object = wbc()->wc->get_term_by( 'term_taxonomy_id', $first_term, 'product_cat');
+$first_name ='';
+if(!empty($first_object) and !is_wp_error($first_object)){
+	$first_name = $first_object->name;
+}
 $first_name = !empty($first_name)?$first_name:'FIRST';
 
-$second_name = get_term_by( 'term_taxonomy_id', $second_term, 'product_cat')->name;
+
+$second_object = wbc()->wc->get_term_by( 'term_taxonomy_id', $second_term, 'product_cat');
+$second_name ='';
+if(!empty($second_object) and !is_wp_error($second_object)){
+	$second_name = $second_object->name;
+}
 $second_name = !empty($second_name)?$second_name:'SECOND';
 
 

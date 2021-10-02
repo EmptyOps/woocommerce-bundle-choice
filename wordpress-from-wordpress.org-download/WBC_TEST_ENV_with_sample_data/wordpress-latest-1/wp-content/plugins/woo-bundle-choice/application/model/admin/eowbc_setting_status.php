@@ -72,10 +72,10 @@ class Eowbc_Setting_Status {
 	    $res["msg"] = "Saved Sucessfully!";
 		wbc()->load->model('admin\form-builder');
 
-		$saved_tab_key = !empty($_POST["saved_tab_key"]) ? $_POST["saved_tab_key"] : ""; 
+		$saved_tab_key = !empty(wbc()->sanitize->post("saved_tab_key")) ? wbc()->sanitize->post("saved_tab_key") : ""; 
 					
-		if(!empty($_POST['inventory_type'])){
-			switch ($_POST['inventory_type']) {
+		if(!empty(wbc()->sanitize->post('inventory_type'))){
+			switch (wbc()->sanitize->post('inventory_type')) {
 				case 'jewelry':
 					$_POST['pair_maker'] = '';
 					$_POST['guidance_tool'] = '';
@@ -128,10 +128,10 @@ class Eowbc_Setting_Status {
 			    		$checkbox_keys= array_keys($fv["options"]);
 			    		$checbox_status = array();
 			    		foreach($checkbox_keys as $checkbox_key){
-			    			if(empty($_POST[$checkbox_key])){
+			    			if(empty(wbc()->sanitize->post($checkbox_key))){
 			    				$checbox_status[$checkbox_key]='';
 			    			} else {
-			    				$checbox_status[$checkbox_key]=$_POST[$checkbox_key];
+			    				$checbox_status[$checkbox_key]=wbc()->sanitize->post($checkbox_key);
 			    			}
 			    		}
 			    		$_POST[$fk] = serialize($checbox_status);		    		
@@ -139,14 +139,14 @@ class Eowbc_Setting_Status {
 
 				    if( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) && (isset($_POST[$fk]) || $fv["type"]=='checkbox') ) {
 				    	
-				    	wbc()->options->update_option('setting_status_'.$key,$fk,(isset($_POST[$fk])? sanitize_text_field( $_POST[$fk] ):'' ));	
+				    	wbc()->options->update_option('setting_status_'.$key,$fk,(isset($_POST[$fk])?wbc()->sanitize->post($fk):'' ));	
 				    }
 				}
 		    }
 		    
 		    //this is a specific connected config to the pair_maker_status from feature option pair_maker 
 		    if( $saved_tab_key == "setting_status_setting" ) {
-		    	wbc()->options->update_option('configuration','pair_maker_status',(empty($_POST['pair_maker'])?'':sanitize_text_field($_POST['pair_maker'])));
+		    	wbc()->options->update_option('configuration','pair_maker_status',(empty(wbc()->sanitize->post('pair_maker'))?'':wbc()->sanitize->post('pair_maker')));
 		    }
 		}
 		else {

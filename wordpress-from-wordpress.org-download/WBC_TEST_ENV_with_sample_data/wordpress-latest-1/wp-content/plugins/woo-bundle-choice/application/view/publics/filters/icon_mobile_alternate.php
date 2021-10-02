@@ -33,7 +33,7 @@
 				data-siblings="<?php echo implode(',',array_column($list,'slug')); ?>" 
 				data-type="<?php echo $type; ?>" data-reset="reset_single_icon(new Event(''),'[data-slug=\'<?php echo $filter_icon['slug']; ?>\']')">
 				<div>
-					<img src='<?php echo $filter_icon['icon']; ?>' data-imgsrc="<?php echo $filter_icon['icon']; ?>" data-toggleimgsrc="<?php echo $filter_icon['select_icon']; ?>"/>
+					<img src='<?php echo ($filter_icon['mark']?$filter_icon['select_icon']:$filter_icon['icon']); ?>' data-imgsrc="<?php echo $filter_icon['icon']; ?>" data-toggleimgsrc="<?php echo $filter_icon['select_icon']; ?>"/>
 				</div>
 				<?php if($input=='icon_text'): ?>
 					<div><?php echo($filter_icon['name']); ?></div>

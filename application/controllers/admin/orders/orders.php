@@ -23,6 +23,12 @@ class Orders
       add_action('woocommerce_admin_order_data_after_order_details',function($order){
            global $wpdb;
            $sets=$wpdb->get_row('select * from `'.$wpdb->prefix.'eo_wbc_order_maps` where order_id='.$order->get_order_number(),'ARRAY_A');
+
+           if(empty($sets['order_map'])){
+            return true;
+                //$sets['order_map'] = json_encode(array());
+            }
+
            $sets=(json_decode($sets['order_map']));
            add_action('admin_footer',function() use ($sets){
                  echo "<script>
@@ -55,6 +61,19 @@ class Orders
    //Method to get detail about single set
    public function eo_wbc_get_set($set)
    {   
+      if(!empty($set[0])){
+          $set[0] = (array) $set[0];    
+          if(!isset($set[0]['variation'])){
+            $set[0]['variation'] = array();
+          }
+      }
+
+      if(!empty($set[1])){
+          $set[1] = (array) $set[1];    
+          if(!isset($set[1]['variation'])){
+            $set[1]['variation'] = array();
+          }
+      }
        $price=0;
        $row="<tr>".
            "<td style=\"min-width:330px;vertical-align: middle;\">".wbc()->wc->eo_wbc_get_product($set[0][0])->get_image("thumbnail")."&nbsp;";
@@ -63,9 +82,9 @@ class Orders
        }
        $row.="</td>".
            "<td style=\"vertical-align: middle;\">".
-           "<h5>".wbc()->wc->eo_wbc_get_product($set[0][0])->get_title().($set[0][2]  ? "<br/>&nbsp; -".implode(',',wbc()->wc->eo_wbc_get_product_variation_attributes($set[0][2])):'')."</h5>";
+           "<h5>".wbc()->wc->eo_wbc_get_product($set[0][0])->get_title().($set[0][2]  ? "<br/>&nbsp; -".implode(',',wbc()->wc->eo_wbc_get_product_variation_attributes($set[0][2],(array)$set[0]['variation'])):'')."</h5>";
        if($set[1]){
-           $row.="<h5>".wbc()->wc->eo_wbc_get_product($set[1][0])->get_title().($set[1][2]  ? "<br/>&nbsp; -".implode(',',wbc()->wc->eo_wbc_get_product_variation_attributes($set[1][2])):'')."</h5>";
+           $row.="<h5>".wbc()->wc->eo_wbc_get_product($set[1][0])->get_title().($set[1][2]  ? "<br/>&nbsp; -".implode(',',wbc()->wc->eo_wbc_get_product_variation_attributes($set[1][2],(array)$set[1]['variation'])):'')."</h5>";
        }
        $row.="</td>".
            "<td style=\"vertical-align: middle;\">".

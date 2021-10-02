@@ -5,19 +5,21 @@
 */
 
 ?>
-	<div class="<?php echo $width_class; ?>">
+	<div class="<?php echo $width_class; ?>" data-tab-group="<?php _e($tab_set); ?>">
 		<div style="display: inline-block;margin-top: 0.25em;" class="ui three wide field num_slider">
-			<span class="ui header"><?php echo $filter['title']; ?><span><?php if($help): ?>
+			<span class="ui header"><?php echo $filter['title']; ?></span>
+			<?php if($help): ?>
 			&nbsp; <span class="ui grey text" style="cursor: pointer;">&nbsp;<i class="question circle outline icon" data-help="<?php _e($help); ?>"></i></span>
 			<?php endif; ?>
-			</span></span>
-			
+			<?php if($reset): ?>
+			&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_slider(event,'<?php echo $filter['slug'] ?>','<?php echo $filter['min_value']['name']; ?>','<?php echo $filter['max_value']['name']; ?>')">&nbsp;<u>reset</u></span>
+			<?php endif; ?>			
 		</div>
 
 
 		<div style="display: inline-block;" class="ui twelve wide field">
 
-			<div class="ui range slider text_slider" id="text_slider_<?php echo $filter['slug'] ?>" data-min="<?php echo $filter['min_value']['name']; ?>" data-max="<?php echo $filter['max_value']['name']; ?>" data-slug="<?php echo $filter['slug'] ?>" data-sep="<?php echo $filter['seprator']; ?>" style="padding-bottom: 0px !important"></div>
+			<div class="ui range slider text_slider wbc" id="text_slider_<?php echo $filter['slug'] ?>" data-min="<?php echo $filter['min_value']['name']; ?>" data-max="<?php echo $filter['max_value']['name']; ?>" data-slug="<?php echo $filter['slug'] ?>" data-sep="<?php echo $filter['seprator']; ?>" style="padding-bottom: 0px !important"></div>
 			<div class="ui tiny form" style="padding:0px 6%;">
 			  <div class="three fields">
 			    <div class="field">	      

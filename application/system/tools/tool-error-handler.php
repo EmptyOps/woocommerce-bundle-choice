@@ -47,9 +47,9 @@ if(!class_exists('EOWBC_Error_Handler')){
 
 		public static function write_to_log($log) {
 			//	Just create log file if not exists.
-			if (!file_exists(EOWBC_Error_Handler::log_file_path())) {
+			if (file_exists(EOWBC_Error_Handler::log_file_path())) {
 				try {
-					if( $fh = @fopen(EOWBC_Error_Handler::log_file_path(), 'w') ) {
+					if( $fh = @fopen(EOWBC_Error_Handler::log_file_path(), 'w+') ) {
 						fclose($fh);	
 					}	
 				}

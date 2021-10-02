@@ -5,10 +5,10 @@
 */
 
 ?>			
-<div class="ui four wide column toggle_sticky_mob_filter <?php echo $advance?'advance_filter_mob':'' ?>" style="<?php echo $advance?'display: none;':'' ?><?php echo $hidden?'display:none;':''; ?>" data-target="#sticky_mob_filter_<?php echo $term->slug ?>">
+<div class="ui four wide column toggle_sticky_mob_filter <?php echo $advance?'advance_filter_mob':'' ?>" style="<?php echo $advance?'display: none;':'' ?><?php echo $hidden?'display:none;':''; ?>" data-target="#sticky_mob_filter_<?php echo $term->slug ?>" data-tab-group="<?php _e($tab_set); ?>">
 	<div class="title"><div class="ui segment"><?php echo($title); ?></div></div>
 </div>
-<div class="bottom_filter_segment hidden ui segment" id="sticky_mob_filter_<?php echo $term->slug ?>">
+<div class="bottom_filter_segment hidden ui segment" id="sticky_mob_filter_<?php echo $term->slug ?>" data-filter-slug="<?php echo $term->slug; ?>">
 		<div class="ui equal width grid">
 				<div class="column close_sticky_mob_filter" data-target="#sticky_mob_filter_<?php echo $term->slug ?>">
 					<i class="ui icon times" style="cursor: pointer;"></i>&nbsp;Close
@@ -33,7 +33,7 @@
 				data-siblings="<?php echo implode(',',array_column($list,'slug')); ?>" 
 				data-type="<?php echo $type; ?>" data-reset="reset_single_icon(new Event(''),'[data-slug=\'<?php echo $filter_icon['slug']; ?>\']')">
 				<div>
-					<img src='<?php echo ($filter_icon['mark']?$filter_icon['select_icon']:$filter_icon['icon']); ?>' data-imgsrc="<?php echo $filter_icon['icon']; ?>" data-toggleimgsrc="<?php echo $filter_icon['select_icon']; ?>"/>
+					<img src='<?php echo ($filter_icon['mark']?$filter_icon['select_icon']:$filter_icon['icon']); ?>' data-imgsrc="<?php echo $filter_icon['icon']; ?>" data-toggleimgsrc="<?php echo $filter_icon['select_icon']; ?>" style="<?php _e($icon_css); ?>" />
 				</div>
 				<?php if($input=='icon_text'): ?>
 					<div><?php echo($filter_icon['name']); ?></div>

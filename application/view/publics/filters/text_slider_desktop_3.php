@@ -5,7 +5,7 @@
 */
 
 ?>
-	<div class="<?php echo $width_class; ?>">
+	<div class="<?php echo $width_class; ?>" data-tab-group="<?php _e($tab_set); ?>">
 		<p>
 			<span class="ui header"><?php echo $filter['title']; ?></span>
 			<?php if($help): ?>
@@ -27,7 +27,7 @@
 		    </div>
 		  </div>	  
 		</div>			
-		<div class="ui range slider text_slider" id="text_slider_<?php echo $filter['slug'] ?>" data-min="<?php echo $filter['min_value']['name']; ?>" data-max="<?php echo $filter['max_value']['name']; ?>" data-slug="<?php echo $filter['slug'] ?>" data-sep="<?php echo $filter['seprator']; ?>" data-reset="reset_slider(new Event('click'),'<?php echo $filter['slug'] ?>','<?php echo $filter['min_value']['name']; ?>','<?php echo $filter['max_value']['name']; ?>')"></div>
+		<div  class="ui range slider text_slider wbc" id="text_slider_<?php echo $filter['slug'] ?>" data-min="<?php echo $filter['min_value']['name']; ?>" data-max="<?php echo $filter['max_value']['name']; ?>" data-slug="<?php echo $filter['slug'] ?>" data-sep="<?php echo $filter['seprator']; ?>" data-reset="reset_slider(new Event('click'),'<?php echo $filter['slug'] ?>','<?php echo $filter['min_value']['name']; ?>','<?php echo $filter['max_value']['name']; ?>')"></div>
 	</div>
 	<?php
 	

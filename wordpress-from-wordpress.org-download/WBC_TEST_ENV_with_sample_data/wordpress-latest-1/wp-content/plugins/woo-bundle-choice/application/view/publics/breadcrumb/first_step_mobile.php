@@ -5,6 +5,17 @@
 */
 
 ?>
+ <style type="text/css">
+     .ui.container.unstackable.steps .step:after{
+        display: none !important;        
+     }
+
+    .ui.container.unstackable.steps .step{
+        padding: 2vw;        
+        text-align: center !important;
+    }
+
+ </style>
  <div class="step <?php echo (($step==$order)?'active ':(($step>$order)?'completed ':'disabled')); ?> first_mobile">
     <div class="content"><?php echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::$first_name; ?></div>                          
     <div class="ui flowing popup bottom right transition hidden first_mobile" style="width:80%;">

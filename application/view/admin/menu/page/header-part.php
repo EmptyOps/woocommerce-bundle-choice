@@ -10,7 +10,7 @@ if( empty($mode) || ( $mode != "setup_wizard" && $mode != "plain" ) ) {
     <h2 class="ui header left aligned left floated ">   
     	<img class="ui avatar image" src="<?php echo constant('EOWBC_ICON_SVG'); ?>" / style="margin-top: 0px !important"> 
       <div class="content" style="height: 2em;"><?php echo constant('EOWBC_NAME'); ?>
-          <div class="sub header" style="font-style: italic;">Thank you for installing <?php echo constant('EOWBC_NAME'); ?>! <?php echo eowbc_lang("Product bundling based on user's choice."); ?></div>  
+          <div class="sub header" style="font-style: italic;">Thank you for installing <?php echo constant('EOWBC_NAME'); ?>! <?php echo eowbc_lang("Product bundling as per user's choice."); ?></div>  
              
       </div> 
     </h2>

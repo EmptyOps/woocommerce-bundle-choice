@@ -34,38 +34,51 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                         'label' => 'Size',
                         'terms' => array('XS','S','M','L','XL','2XL','3XL','28','30','32','34','36','38'),
                         'description' => 'Size attributes for clothing wear',
-                        'slug' => 'wbc_cloth_size_attr'
+                        'slug' => 'wbc_cloth_size_attr',
+                        'type'=>'dropdown',
+                        'ribbon_color'=>'#676e64'
                     ),
                     array(
                         'label' => 'Colour',
                         'terms' => array('White','Black','Red','Purple', 'Blue', 'Green','Yellow','Orange','Gray','Pink','Maroon','Lime','Aqua'),
+                        'terms_meta'=>array($_img_url.'colours/white.png',$_img_url.'colours/black.png',$_img_url.'colours/red.png', $_img_url.'colours/purple.png',$_img_url.'colours/blue.png',$_img_url.'colours/green.png',$_img_url.'colours/yellow.png',$_img_url.'colours/orange.png',$_img_url.'colours/gray.png',$_img_url.'colours/pink.png',$_img_url.'colours/maroon.png',$_img_url.'colours/lime.png',$_img_url.'colours/aqua.png'),
                         'description' => 'Colour attributes for clothing wear',
                         'slug' => 'wbc_cloth_colour_attr',
-                        'thumb' => array($_img_url.'colours/white.png',$_img_url.'colours/black.png',$_img_url.'colours/red.png', $_img_url.'colours/purple.png',$_img_url.'colours/blue.png',$_img_url.'colours/green.png',$_img_url.'colours/yellow.png',$_img_url.'colours/orange.png',$_img_url.'colours/gray.png',$_img_url.'colours/pink.png',$_img_url.'colours/maroon.png',$_img_url.'colours/lime.png',$_img_url.'colours/aqua.png')
+                        'type'=>'dropdown_image',
+                        'ribbon_color'=>'#676e64'
                     ),
                     array(
                         'label' => 'Fabric',
                         'terms' => array('Cotton', 'Silk', 'Canvas', 'Chiffon', 'Damask', 'Wool', 'Jersey', 'Polyester', 'Velvet','Linen'),
                         'description' => 'Fabric attributes for clothings wear',
-                        'slug' => 'wbc_cloth_fabric_attr'
+                        'slug' => 'wbc_cloth_fabric_attr',
+                        'type'=>'dropdown',
+                        'ribbon_color'=>'#676e64'
+
                     ),
                     array(
                         'label' => 'Fit',
                         'terms' => array('Skinny fit','Slim fit','Regular fit','Tapered fit','Hem fit', 'Ultra slim','Flared','Easy'),
                         'description' => 'Fit attributes for clothing wear',
-                        'slug' => 'wbc_cloth_fit_attr'
+                        'slug' => 'wbc_cloth_fit_attr',
+                        'type'=>'dropdown',
+                        'ribbon_color'=>'#676e64'
                     ),
                     array(
                         'label' => 'Neck',
                         'terms' => array('Round','Crew' , 'Jewel', 'U neckline', 'Square' , 'V neckline', 'Collared neckline', 'Funnel Neckline'),
                         'description' => 'Neck types attributes for clothings wear',
-                        'slug' => 'wbc_cloth_neck_attr'
+                        'slug' => 'wbc_cloth_neck_attr',
+                        'type'=>'dropdown',
+                        'ribbon_color'=>'#676e64'
                     ),
                     array(
                         'label' => 'Occasion',
                         'terms' => array('Causal','Formal','Lounge','Tie','Cocktail Attire','Ethnic'),
                         'description' => 'Occasion attributes for clothings wear',
-                        'slug' => 'wbc_cloth_occasion_attr'
+                        'slug' => 'wbc_cloth_occasion_attr',
+                        'type'=>'dropdown',
+                        'ribbon_color'=>'#676e64'
                     ),
                     // array(
                     //     'label' => 'Pattern',
@@ -77,26 +90,34 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                         'label' => 'Sleeve',
                         'terms' => array('Long sleeve', 'Short sleeve', 'Roll-up sleeve','Sleeveless'),        
                         'description' => 'Sleeve attributes for clothings wear',
-                        'slug' => 'wbc_cloth_sleeve_attr'
+                        'slug' => 'wbc_cloth_sleeve_attr',
+                        'type'=>'dropdown',
+                        'ribbon_color'=>'#676e64'
                     ),
                     array(
                         'label' => 'Collar',
                         'terms' => array('Mandrin', 'Band', 'Polo','Funnel','Slim','Spread','Regular','Mao','Notch Lapels'),
+                        'terms_meta' => array($_alphabets_img_url.'icons8-circled-m-100.png', $_alphabets_img_url.'icons8-circled-b-100.png', $_alphabets_img_url.'icons8-circled-p-100.png',$_alphabets_img_url.'icons8-circled-f-100.png',$_alphabets_img_url.'icons8-circled-s-100.png',$_alphabets_img_url.'icons8-circled-s-100.png',$_alphabets_img_url.'icons8-circled-r-100.png',$_alphabets_img_url.'icons8-circled-m-100.png',$_alphabets_img_url.'icons8-circled-n-100.png'),
                         'description' => 'Collar attributes for clothings wear',
                         'slug' => 'wbc_cloth_collar_attr',
-                        'thumb' => array($_alphabets_img_url.'icons8-circled-m-100.png', $_alphabets_img_url.'icons8-circled-b-100.png', $_alphabets_img_url.'icons8-circled-p-100.png',$_alphabets_img_url.'icons8-circled-f-100.png',$_alphabets_img_url.'icons8-circled-s-100.png',$_alphabets_img_url.'icons8-circled-s-100.png',$_alphabets_img_url.'icons8-circled-r-100.png',$_alphabets_img_url.'icons8-circled-m-100.png',$_alphabets_img_url.'icons8-circled-n-100.png')
+                        'type'=>'dropdown_image',
+                        'ribbon_color'=>'#676e64'
                     ),
                     array(
                         'label' => 'Closure Type',
                         'terms' => array('Button','Zipper','Hook','Frog & toggle','Elastic'),
                         'description' => 'Closure type attributes for clothings wear',
-                        'slug' => 'wbc_cloth_closure_type_attr'
+                        'slug' => 'wbc_cloth_closure_type_attr',
+                        'type'=>'dropdown',
+                        'ribbon_color'=>'#676e64'
                     ),
                     array(
                         'label' => 'Length',
                         'terms' => array('Ankle','Full','Calf','Thigh','Knee','Regular'),
                         'description' => 'Length attributes for clothings wear',
-                        'slug' => 'wbc_cloth_length_attr'
+                        'slug' => 'wbc_cloth_length_attr',
+                        'type'=>'dropdown',
+                        'ribbon_color'=>'#676e64'
                     )
                     // array(
                     //     'label' => 'Bottom Type',
@@ -748,9 +769,16 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                                 array(
                                     // 'thumb' => $_img_url.'tops.png',
                                     // 'thumb_selected' => $_img_url.'tops_selected.png',
-                                    'name' => 'Women purple tops',
-                                    'description' => 'Women purple tops',
-                                    'slug' => 'wbc_women_purple_tops_cat'
+                                    'name' => 'Women maroon tops',
+                                    'description' => 'Women maroon tops',
+                                    'slug' => 'wbc_women_maroon_tops_cat'
+                                ),
+                                array(
+                                    // 'thumb' => $_img_url.'tops.png',
+                                    // 'thumb_selected' => $_img_url.'tops_selected.png',
+                                    'name' => 'Women maroon tops',
+                                    'description' => 'Women maroon tops',
+                                    'slug' => 'wbc_women_maroon_tops_bluebottom_cat'
                                 ),
                                 array(
                                     // 'thumb' => $_img_url.'tops.png',
@@ -944,6 +972,13 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                                 array(
                                     // 'thumb' => $_img_url.'jeans.png',
                                     // 'thumb_selected' => $_img_url.'jeans_selected.png',
+                                    'name' => 'Women blue jogger jeans',
+                                    'description' => 'Women blue jogger jeans',
+                                    'slug' => 'wbc_women_blue_jogger_jeans_cat'
+                                ),
+                                 array(
+                                    // 'thumb' => $_img_url.'jeans.png',
+                                    // 'thumb_selected' => $_img_url.'jeans_selected.png',
                                     'name' => 'Women blue jeans',
                                     'description' => 'Women blue jeans',
                                     'slug' => 'wbc_women_blue_jeans_cat'
@@ -951,9 +986,9 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                                  array(
                                     // 'thumb' => $_img_url.'jeans.png',
                                     // 'thumb_selected' => $_img_url.'jeans_selected.png',
-                                    'name' => 'Women sky blue jeans',
-                                    'description' => 'Women sky blue jeans',
-                                    'slug' => 'wbc_women_skyblue_jeans_cat'
+                                    'name' => 'Women blue jeans',
+                                    'description' => 'Women blue jeans',
+                                    'slug' => 'wbc_women_darkblue_jeans_cat'
                                 ),
                                 //men-shorts
                                 array(
@@ -1422,6 +1457,10 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                         // ),
             
                         array(
+                            ['slug','wbc_women_maroon_tops_bluebottom_cat','product_cat'],
+                            ['slug','wbc_women_maroon_tops_bluebottom_cat','product_cat']
+                        ),
+                        array(
                             ['slug','wbc_men_white_hoddies_cat','product_cat'],
                             ['slug','wbc_men_lightblue_jeans_cat','product_cat']
                         ),
@@ -1520,10 +1559,6 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                         array(
                             ['slug','wbc_women_blue_shirts_cat','product_cat'],
                             ['slug','wbc_women_blue_jeans_cat','product_cat']
-                        ),
-                        array(
-                            ['slug','wbc_women_blue_shirts_cat','product_cat'],
-                            ['slug','wbc_women_skyblue_jeans_cat','product_cat']
                         ),
                         array(
                             ['slug','wbc_men_blue_shirts_cat','product_cat'],
@@ -1639,11 +1674,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                         ),
                         array(
                             ['slug','wbc_women_white_tshirts_cat','product_cat'],
-                            ['slug','wbc_women_blue_jeans_cat','product_cat']
-                        ),
-                        array(
-                            ['slug','wbc_women_white_tshirts_cat','product_cat'],
-                            ['slug','wbc_women_skyblue_jeans_cat','product_cat']
+                            ['slug','wbc_women_blue_jogger_jeans_cat','product_cat']
                         ),
                         array(
                             ['slug','wbc_women_red_tshirts_cat','product_cat'],
@@ -1656,10 +1687,6 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                         array(
                             ['slug','wbc_women_red_tshirts_cat','product_cat'],
                             ['slug','wbc_women_skyblue_palazzos_cat','product_cat']
-                        ),
-                        array(
-                            ['slug','wbc_women_red_tshirts_cat','product_cat'],
-                            ['slug','wbc_women_skyblue_jeans_cat','product_cat']
                         ),
                         array(
                             ['slug','wbc_women_red_tshirts_cat','product_cat'],
@@ -1701,17 +1728,9 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                             ['slug','wbc_women_gray_sweater_cat','product_cat'],
                             ['slug','wbc_women_blue_jeans_cat','product_cat']
                         ),
-                        array(
-                            ['slug','wbc_women_gray_sweater_cat','product_cat'],
-                            ['slug','wbc_women_skyblue_jeans_cat','product_cat']
-                        ),
-                        array(
-                            ['slug','wbc_women_blue_jacket_cat','product_cat'],
-                            ['slug','wbc_women_blue_jeans_cat','product_cat']
-                        ),
                          array(
                             ['slug','wbc_women_blue_jacket_cat','product_cat'],
-                            ['slug','wbc_women_skyblue_jeans_cat','product_cat']
+                            ['slug','wbc_women_blue_jeans_cat','product_cat']
                         ),
                         array(
                             ['slug','wbc_men_black_blazers_cat','product_cat'],
@@ -1834,12 +1853,8 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                             ['slug','wbc_women_black_palazzos_cat','product_cat']
                         ),
                         array(
-                            ['slug','wbc_women_purple_tops_cat','product_cat'],
+                            ['slug','wbc_women_maroon_tops_cat','product_cat'],
                             ['slug','wbc_women_white_leggings_cat','product_cat']
-                        ),
-                        array(
-                            ['slug','wbc_women_purple_tops_cat','product_cat'],
-                            ['slug','wbc_women_blue_jeans_cat','product_cat']
                         ),
                         array(
                             ['slug','wbc_women_pink_tops_cat','product_cat'],
@@ -1848,10 +1863,6 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                         array(
                             ['slug','wbc_women_white_tunic_cat','product_cat'],
                             ['slug','wbc_women_blue_jeans_cat','product_cat']
-                        ),
-                        array(
-                            ['slug','wbc_women_white_tunic_cat','product_cat'],
-                            ['slug','wbc_women_skyblue_jeans_cat','product_cat']
                         ),
                         array(
                             ['slug','wbc_women_orange_tunic_cat','product_cat'],
@@ -5570,7 +5581,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_tops_cat','wbc_topwear_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_women_purple_tops_cat','wbc_fabric_silk_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_top_wear_cat','wbc_top_wear_tops_cat','wbc_topwear_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_women_maroon_tops_bluebottom_cat','wbc_fabric_silk_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -5582,7 +5593,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                             ),
                     'pa_wbc_cloth_colour_attr'=>array(
                               'name'=>'pa_wbc_cloth_colour_attr',
-                              'value'=>'Purple',
+                              'value'=>'Maroon',
                               'position'=>1,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -5626,7 +5637,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                           array(
                             'regular_price'=>'1200',
                             'price'=>'1180',
-                            'terms'=>array('pa_wbc_cloth_size_attr'=>'M','pa_wbc_cloth_colour_attr'=>'Purple','pa_wbc_cloth_neck_attr'=>'Crew','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_sleeve_attr'=>'Long sleeve','pa_wbc_cloth_collar_attr'=>'Spread')
+                            'terms'=>array('pa_wbc_cloth_size_attr'=>'M','pa_wbc_cloth_colour_attr'=>'Maroon','pa_wbc_cloth_neck_attr'=>'Crew','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_sleeve_attr'=>'Long sleeve','pa_wbc_cloth_collar_attr'=>'Spread')
                           )
                    ) 
         ),
@@ -6115,7 +6126,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_top_wear_cat','wbc_top_wear_tops_cat','wbc_topwear_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_women_purple_tops_cat','wbc_fabric_damask_cat','wbc_pattern_detailing_cat'),
+          'category'=>array('wbc_top_wear_cat','wbc_top_wear_tops_cat','wbc_topwear_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_women_maroon_tops_cat','wbc_fabric_damask_cat','wbc_pattern_detailing_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -6127,7 +6138,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                             ),
                     'pa_wbc_cloth_colour_attr'=>array(
                               'name'=>'pa_wbc_cloth_colour_attr',
-                              'value'=>'Purple',
+                              'value'=>'Maroon',
                               'position'=>1,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -6171,7 +6182,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                           array(
                             'regular_price'=>'1550',
                             'price'=>'1545',
-                            'terms'=>array('pa_wbc_cloth_size_attr'=>'L','pa_wbc_cloth_colour_attr'=>'Purple','pa_wbc_cloth_neck_attr'=>'Crew','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_sleeve_attr'=>'Long sleeve','pa_wbc_cloth_collar_attr'=>'Spread')
+                            'terms'=>array('pa_wbc_cloth_size_attr'=>'L','pa_wbc_cloth_colour_attr'=>'Maroon','pa_wbc_cloth_neck_attr'=>'Crew','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_sleeve_attr'=>'Long sleeve','pa_wbc_cloth_collar_attr'=>'Spread')
                           )
                    ) 
         ),
@@ -6791,7 +6802,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_jeans_cat','wbc_bottomwear_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_women_skyblue_jeans_cat','wbc_fabric_damask_cat','wbc_pattern_stripes_cat'),
+          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_jeans_cat','wbc_bottomwear_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_women_blue_jeans_cat','wbc_fabric_damask_cat','wbc_pattern_stripes_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -6985,7 +6996,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                    )
           ),
           array(
-          'title'=>'Jeans #20000018',
+          'title'=>'Women jeans #20000018',
           'thumb'=>$_img_url.'women_black_pant.jpg',
           'content'=>'',
           'regular_price'=>'',
@@ -7119,14 +7130,14 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                    )
           ),
           array(
-          'title'=>'Pant #20000020',
-          'thumb'=>$_img_url.'women_white_palazzos.jpg',
+          'title'=>'Women jeans #20000020',
+          'thumb'=>$_img_url.'women_jeans_005.jpeg',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_plazzos_cat','wbc_bottomwear_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_women_white_palazzos_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_jeans_cat','wbc_bottomwear_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_women_darkblue_jeans_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -7138,7 +7149,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                             ),
                     'pa_wbc_cloth_colour_attr'=>array(
                               'name'=>'pa_wbc_cloth_colour_attr',
-                              'value'=>'White',
+                              'value'=>'Blue',
                               'position'=>1,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -7162,7 +7173,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                             ),
                     'pa_wbc_cloth_closure_type_attr'=>array(
                               'name'=>'pa_wbc_cloth_closure_type_attr',
-                              'value'=>'Elastic',
+                              'value'=>'Button',
                               'position'=>5,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -7170,7 +7181,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                             ),
                     'pa_wbc_cloth_length_attr'=>array(
                               'name'=>'pa_wbc_cloth_length_attr',
-                              'value'=>'Ankle',
+                              'value'=>'Regular',
                               'position'=>6,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -7181,7 +7192,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                           array(
                             'regular_price'=>'1550',
                             'price'=>'1540',
-                            'terms'=>array('pa_wbc_cloth_size_attr'=>'30','pa_wbc_cloth_colour_attr'=>'White','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_fit_attr'=>'Regular fit','pa_wbc_cloth_closure_type_attr'=>'Elastic','pa_wbc_cloth_length_attr'=>'Ankle')
+                            'terms'=>array('pa_wbc_cloth_size_attr'=>'30','pa_wbc_cloth_colour_attr'=>'Blue','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_fit_attr'=>'Regular fit','pa_wbc_cloth_closure_type_attr'=>'Button','pa_wbc_cloth_length_attr'=>'Regular')
                           )
                    )
           ),
@@ -7462,7 +7473,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_jeans_cat','wbc_bottomwear_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_men_lightblue_jeans_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_jeans_cat','wbc_bottomwear_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_men_blue_jeans_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -8461,14 +8472,14 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                    )
           ),
           array(
-          'title'=>'Men trouser #20000089',
-          'thumb'=>$_img_url.'men_trouser_004.jpeg',
+          'title'=>'Men jeans #20000089',
+          'thumb'=>$_img_url.'men_jeans_008.jpeg',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_trousers_cat','wbc_bottomwear_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_men_green_trousers_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_jeans_cat','wbc_bottomwear_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_men_blue_jeans_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -8480,7 +8491,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                             ),
                     'pa_wbc_cloth_colour_attr'=>array(
                               'name'=>'pa_wbc_cloth_colour_attr',
-                              'value'=>'Green',
+                              'value'=>'Blue',
                               'position'=>1,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -8504,7 +8515,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                             ),
                     'pa_wbc_cloth_closure_type_attr'=>array(
                               'name'=>'pa_wbc_cloth_closure_type_attr',
-                              'value'=>'Frog & toggle',
+                              'value'=>'Button',
                               'position'=>5,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -8523,7 +8534,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                           array(
                             'regular_price'=>'1200',
                             'price'=>'1190',
-                            'terms'=>array('pa_wbc_cloth_size_attr'=>'28','pa_wbc_cloth_colour_attr'=>'Green','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_fit_attr'=>'Skinny fit','pa_wbc_cloth_closure_type_attr'=>'Frog & toggle','pa_wbc_cloth_length_attr'=>'Regular')
+                            'terms'=>array('pa_wbc_cloth_size_attr'=>'28','pa_wbc_cloth_colour_attr'=>'Button','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_fit_attr'=>'Skinny fit','pa_wbc_cloth_closure_type_attr'=>'Button','pa_wbc_cloth_length_attr'=>'Regular')
                           )
                    )
           ),
@@ -8663,14 +8674,14 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                    )
           ),
           array(
-          'title'=>'Men trouser #20000092',
-          'thumb'=>$_img_url.'men_trouser_007.jpeg',
+          'title'=>'Men jeans #20000092',
+          'thumb'=>$_img_url.'men_jeans_009.jpeg',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_trousers_cat','wbc_bottomwear_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_men_green_trousers_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
+          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_jeans_cat','wbc_bottomwear_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_men_blue_jeans_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -8682,7 +8693,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                             ),
                     'pa_wbc_cloth_colour_attr'=>array(
                               'name'=>'pa_wbc_cloth_colour_attr',
-                              'value'=>'Green',
+                              'value'=>'Blue',
                               'position'=>1,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -8706,7 +8717,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                             ),
                     'pa_wbc_cloth_closure_type_attr'=>array(
                               'name'=>'pa_wbc_cloth_closure_type_attr',
-                              'value'=>'Frog & toggle',
+                              'value'=>'Button',
                               'position'=>5,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -8725,7 +8736,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                           array(
                             'regular_price'=>'950',
                             'price'=>'945',
-                            'terms'=>array('pa_wbc_cloth_size_attr'=>'38','pa_wbc_cloth_colour_attr'=>'Green','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_fit_attr'=>'Regular fit','pa_wbc_cloth_closure_type_attr'=>'Frog & toggle','pa_wbc_cloth_length_attr'=>'Regular')
+                            'terms'=>array('pa_wbc_cloth_size_attr'=>'38','pa_wbc_cloth_colour_attr'=>'Blue','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_fit_attr'=>'Regular fit','pa_wbc_cloth_closure_type_attr'=>'Button','pa_wbc_cloth_length_attr'=>'Regular')
                           )
                    )
           ),
@@ -8737,7 +8748,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_jeans_cat','wbc_bottomwear_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_women_blue_jeans_cat','wbc_fabric_canvas_cat','wbc_pattern_printed_cat'),
+          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_jeans_cat','wbc_bottomwear_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_women_blue_jogger_jeans_cat','wbc_fabric_canvas_cat','wbc_pattern_printed_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -8871,7 +8882,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_jeans_cat','wbc_bottomwear_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_women_skyblue_jeans_cat','wbc_fabric_cotton_cat','wbc_pattern_printed_cat'),
+          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_jeans_cat','wbc_bottomwear_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_women_blue_jogger_jeans_cat','wbc_fabric_cotton_cat','wbc_pattern_printed_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -10156,14 +10167,14 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                    )
           ),
         array(
-          'title'=>'Women plazzo #20000114',
-          'thumb'=>$_img_url.'women_plazzo_005.jpeg',
+          'title'=>'Women jeans #20000114',
+          'thumb'=>$_img_url.'women_jeans_004.jpeg',
           'content'=>'',
           'regular_price'=>'',
           'sale_price'=>'',
           'price'=>'',
           'type'=>'variable',
-          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_plazzos_cat','wbc_bottomwear_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_women_white_palazzos_cat','wbc_fabric_silk_cat','wbc_pattern_stripes_cat'),
+          'category'=>array('wbc_bottom_wear_cat','wbc_bottom_wear_jeans_cat','wbc_bottomwear_cat','wbc_fabric_cat','wbc_pattern_cat','wbc_women_blue_jeans_cat','wbc_fabric_cotton_cat','wbc_pattern_plain_cat'),
           'attribute'=>array(
                     'pa_wbc_cloth_size_attr'=>array(
                               'name'=>'pa_wbc_cloth_size_attr',
@@ -10175,7 +10186,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                             ),
                     'pa_wbc_cloth_colour_attr'=>array(
                               'name'=>'pa_wbc_cloth_colour_attr',
-                              'value'=>'White',
+                              'value'=>'Blue',
                               'position'=>1,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -10192,7 +10203,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                     
                     'pa_wbc_cloth_fit_attr'=>array(
                               'name'=>'pa_wbc_cloth_fit_attr',
-                              'value'=>'Flared',
+                              'value'=>'Skinny fit',
                               'position'=>4,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -10200,7 +10211,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                             ),
                     'pa_wbc_cloth_closure_type_attr'=>array(
                               'name'=>'pa_wbc_cloth_closure_type_attr',
-                              'value'=>'Elastic',
+                              'value'=>'Button',
                               'position'=>5,
                               'is_visible'=>1,
                               'is_variation'=>1,
@@ -10219,7 +10230,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                           array(
                             'regular_price'=>'1700',
                             'price'=>'1790',
-                            'terms'=>array('pa_wbc_cloth_size_attr'=>'30','pa_wbc_cloth_colour_attr'=>'White','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_fit_attr'=>'Flared','pa_wbc_cloth_closure_type_attr'=>'Elastic','pa_wbc_cloth_length_attr'=>'Regular')
+                            'terms'=>array('pa_wbc_cloth_size_attr'=>'30','pa_wbc_cloth_colour_attr'=>'blue','pa_wbc_cloth_occasion_attr'=>'Causal','pa_wbc_cloth_fit_attr'=>'Skinny fit','pa_wbc_cloth_closure_type_attr'=>'Button','pa_wbc_cloth_length_attr'=>'Regular')
                           )
                    )
           ),

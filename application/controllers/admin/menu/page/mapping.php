@@ -22,18 +22,30 @@ if ( ! class_exists( 'Mapping' ) ) {
 		public static function eo_wbc_prime_category($slug='',$prefix='',$opts_arr=array()) {        
         
 	        $map_base = get_categories(array(
-	            'hierarchical' => 1,
+	            'hierarchical' => false,
 	            'show_option_none' => '',
 	            'hide_empty' => 0,
-	            'parent' => !empty(get_term_by('slug',$slug,'product_cat')) ?get_term_by('slug',$slug,'product_cat')->term_id : '',
+	            'parent' => !empty(wbc()->wc->get_term_by('slug',$slug,'product_cat')) ?wbc()->wc->get_term_by('slug',$slug,'product_cat')->term_id : '',
 	            'taxonomy' => 'product_cat'
 	        ));
 	        
-	        // $category_option_list='';
+	        $category_option_list='';
+	        /*if(!empty($slug)) {
+	        	echo "<pre>";
+	        	print_r(wbc()->wc->get_term_by('slug',$slug,'product_cat'));
+	        	echo "</pre>";
+	        }*/
+	        //$parent_name = (!empty(wbc()->wc->get_term_by('slug',$slug,'product_cat')) ?' - '.wbc()->wc->get_term_by('slug',$slug,'product_cat')->name : '');
 	        
 	        foreach ($map_base as $base) {            
+
+	        	$parent_name='';
+	        	if(!empty($base->parent)) {
+	        		$parent_name = (!empty(wbc()->wc->get_term_by('id',$base->parent,'product_cat')) ?' - '.wbc()->wc->get_term_by('id',$base->parent,'product_cat')->name : '');
+	        	}
+
 	            // $category_option_list.= "<div class='item' data-value='".$base->term_taxonomy_id."'>".$prefix.$base->name."</div>".eo_wbc_prime_category($base->slug, $prefix.'-');
-	            $opts_arr[$base->term_taxonomy_id] = array( 'label'=>$prefix.$base->name );
+	            $opts_arr[$base->term_taxonomy_id] = array( 'label'=>$prefix.$base->name.$parent_name );
 		        $opts_arr = \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_prime_category($base->slug, $prefix.'-',$opts_arr);
 	        }
 
@@ -60,8 +72,8 @@ if ( ! class_exists( 'Mapping' ) ) {
 			
 			wbc()->load->model('admin/form-builder');
 
-			$dropdown_opts_first_cat = apply_filters('eowbc_admin_form_mapping_first_cat',\eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_attributes( \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_prime_category(wbc()->options->get_option('configuration','first_slug'),' -- ') ));
-			$dropdown_opts_second_cat = apply_filters('eowbc_admin_form_mapping_second_cat',\eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_attributes( \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_prime_category(wbc()->options->get_option('configuration','second_slug'),' -- ') ));
+			$dropdown_opts_first_cat = apply_filters('eowbc_admin_form_mapping_first_cat',\eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_attributes( \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_prime_category(/*wbc()->options->get_option('configuration','first_slug')*/'',' ') ));
+			$dropdown_opts_second_cat = apply_filters('eowbc_admin_form_mapping_second_cat',\eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_attributes( \eo\wbc\controllers\admin\menu\page\Mapping::eo_wbc_prime_category(''/*wbc()->options->get_option('configuration','second_slug')*/,' ') ));
 
 			//map list
 			$table = array();
@@ -106,6 +118,8 @@ if ( ! class_exists( 'Mapping' ) ) {
 				'prod_mapping_pref'=>array(
 					'label'=>'Product mapping preference',
 					'form'=> array(
+						'prod_mapping_pref_section'=>array('label'=>'Configure product mapping','type'=>'segment','desc'=>'Configure the product mapping settings.'
+						),
 						'saved_tab_key'=>array(
 							'type'=>'hidden',
 							'value'=>'',
@@ -152,7 +166,9 @@ if ( ! class_exists( 'Mapping' ) ) {
 				),							
 				'map_creation_modification'=>array(
 						'label'=>"Map creation and modification",
-						'form'=>array( 
+						'form'=>array(
+							'map_creation_modification_section'=>array('label'=>'Add/Edit product maps','type'=>'segment','desc'=>'Add or Edit the product maps.'
+							),
 							$table["id"].'_bulk'=>array(
 								// 'label'=>'Bulk Actions',
 								'type'=>'select',
@@ -182,7 +198,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 								'sanitize'=>'sanitize_text_field',
 							),
 							'save_sec_title'=>array(
-								'label'=>"Add New Maps",
+								'label'=>"Add/Edit Maps",
 								'type'=>'label',
 								'size_class'=>array('eight','wide')
 							),
@@ -224,7 +240,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 								'sanitize'=>'sanitize_text_field',
 								'validate'=>array('required'=>''),
 								'options'=>$dropdown_opts_first_cat,	//array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
-								'class'=>array('fluid'),
+								'class'=>array('fluid','search','clearable'),
 								'inline_class'=>array('three'),
 								'next_inline'=>true,
 								'inline'=>true,
@@ -234,7 +250,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 								'label'=>'<------------->',
 								'type'=>'label',
 								//'class'=>array('fluid'),
-								// 'size_class'=>array('two','wide'),
+								'size_class'=>array('two','wide'),
 								'prev_inline'=>true,
 								'next_inline'=>true,
 								'inline'=>true,
@@ -246,7 +262,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 								'sanitize'=>'sanitize_text_field',
 								'validate'=>array('required'=>''),
 								'options'=>$dropdown_opts_second_cat,	//array('0'=>'Category 1', '1'=>'Category 2','2'=>'Attribute 1', '3'=>'Attribute 2',),
-								'class'=>array('fluid'),
+								'class'=>array('fluid','search','clearable'),
 								'prev_inline'=>true,
 								'inline'=>true,
 								'size_class'=>array('required'),
@@ -267,7 +283,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 								'label'=>'<------------->',
 								'type'=>'label',
 								//'class'=>array('fluid'),
-								// 'size_class'=>array('two','wide'),
+								'size_class'=>array('two','wide'),
 								'prev_inline'=>true,
 								'next_inline'=>true,
 								'inline'=>true,
@@ -286,7 +302,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 							'eo_wbc_first_category_vis_info'=>array( 
 								'label'=>'Select sub-category or attribute from first category.',
 								'type'=>'visible_info',
-								'class'=>array('fluid', 'small'),
+								'class'=>array('fluid', 'small','field'),
 								'inline_class'=>array('three'),
 								'next_inline'=>true,
 								'inline'=>true,
@@ -295,7 +311,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 								'label'=>'<------------->',
 								'type'=>'label',
 								//'class'=>array('fluid'),
-								// 'size_class'=>array('two','wide'),
+								'size_class'=>array('two','wide'),
 								'prev_inline'=>true,
 								'next_inline'=>true,
 								'inline'=>true,
@@ -303,7 +319,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 							'eo_wbc_second_category_vis_info'=>array(
 								'label'=>'Select sub-category or attribute from second category.',
 								'type'=>'visible_info',
-								'class'=>array('fluid', 'small'),
+								'class'=>array('fluid', 'small','field'),
 								'prev_inline'=>true,
 								'inline'=>true,
 							),
@@ -326,7 +342,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 							),
 							
 							'map_creation_modification_save_btn'=>array(
-								'label'=>eowbc_lang('Save New Map'),
+								'label'=>eowbc_lang('Save'),
 								'type'=>'button',
 								'class'=>array('secondary'),
 								//'size_class'=>array('eight','wide'),

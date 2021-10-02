@@ -26,9 +26,11 @@ class Setting_status {
 					'setting_status_setting'=>array(
 						'label'=>'Settings',
 						'form'=>array(
+							'setting_status_setting_section'=>array('label'=>'Plugin Feature Setting','type'=>'segment','desc'=>'Enable and Disable the plugin\'s features.'
+											),
 							'saved_tab_key'=>array(
-							'type'=>'hidden',
-							'value'=>'',
+								'type'=>'hidden',
+								'value'=>'',
 							),
 							'inventory_type'=>array(
 								'label'=>'Inventory Type',
@@ -75,7 +77,7 @@ class Setting_status {
 							'save'=>array(
 								'label'=>'Save',
 								'type'=>'button',				
-								'class'=>array('primary'),
+								'class'=>array('secondary'),
 								'attr'=>array('data-tab_key="setting_status_setting"', "data-action='save'")
 							)
 						)							
@@ -83,6 +85,8 @@ class Setting_status {
 					'setting_status_log'=>array(
 						'label'=>'Logs',
 						'form'=>array(
+							'setting_status_log_section'=>array('label'=>'System Log for the Plugin','type'=>'segment','desc'=>'The plugin\'s core error reporting system.'
+											),
 							'visible_info'=>array( 
 								'label'=>'Following error details will be sent to '.constant('EOWBC_NAME').'\'s Support Team',
 								'type'=>'devider',
@@ -135,7 +139,7 @@ class Setting_status {
 							'btn_cancel'=>array(
 								'label'=>eowbc_lang('Cancel'),
 								'type'=>'button',				
-								'class'=>array('secondary'),
+								'class'=>array('secondary','inverted'),
 								'attr'=>array("data-action='cancel'"/*'onclick="window.location.href=document.referrer"'*/),
 								'next_inline'=>true,
 								'inline'=>true,
@@ -143,7 +147,7 @@ class Setting_status {
 							'btn_send_error_report'=>array(
 								'label'=>((get_option('eowbc_error_count',0) or get_option('eowbc_warning_count',0)) ? eowbc_lang('Send error report'):''),
 								'type'=>'button',				
-								'class'=>array('primary','disabled'),
+								'class'=>array('secondary','disabled'),
 								'attr'=>array('data-tab_key="setting_status_log"', "data-action='save'"),
 								'prev_inline'=>true,
 								'inline'=>true,
@@ -152,14 +156,16 @@ class Setting_status {
 								'label'=>eowbc_lang('Clear Log and Return'),
 								'type'=>'link',
 								'attr'=>array("href='".admin_url('admin.php?page=eowbc-setting-status&action=clear&ref='.
-		(empty($_SERVER['HTTP_REFERER'])? admin_url('admin.php?page=eowbc-setting-status'):$_SERVER['HTTP_REFERER']))."'"),
+								(empty($_SERVER['HTTP_REFERER'])? admin_url('admin.php?page=eowbc-setting-status'):$_SERVER['HTTP_REFERER']))."'"),
 								'class'=>array(/*'secondary','hidden'*/)	
 							)
 						)
 					),
 					'advanced_config'=>array(
 						'label'=>'Advanced Configuration',
-						'form'=> array(							
+						'form'=> array(	
+							'advanced_config_section'=>array('label'=>'Plugin\'s Advance Configuration','type'=>'segment','desc'=>'Advance configuration for the advance uses.'
+												),						
 							'internal_url'=>array(
 								'label'=>eowbc_lang('Internal Routing URL'),
 								'type'=>'text',								
@@ -186,7 +192,7 @@ class Setting_status {
 							'submit_button'=>array(
 								'label'=>eowbc_lang('Save'),
 								'type'=>'button',
-								'class'=>array('primary'),
+								'class'=>array('secondary'),
 								//'size_class'=>array('eight','wide'),
 								'attr'=>array("data-action='save'",'data-tab_key="advanced_config"'),
 								'inline'=>false
@@ -196,7 +202,7 @@ class Setting_status {
 
 				);
 	    
-	    return $form_definition;
+	    return apply_filters('sp_wbc_setting_status_form_defination',$form_definition);
 	}
 
 }	

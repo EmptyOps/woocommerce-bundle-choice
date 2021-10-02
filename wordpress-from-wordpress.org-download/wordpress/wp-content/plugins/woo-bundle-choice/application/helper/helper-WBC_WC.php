@@ -132,7 +132,11 @@ class WBC_WC {
                         $taxonomy_name=$tax->attribute_label;
                     }
                 }
-                $var_attrs[]=($taxonomy_name?$taxonomy_name.': ':'').get_term_by('slug',$term_slug,$taxonomy)->name;                    
+                $term_data = get_term_by('slug',$term_slug,$taxonomy);
+                if(!is_wp_error($term_data) and !empty($term_data->name)){
+                    $var_attrs[]=($taxonomy_name?$taxonomy_name.': ':'').$term_data->name;    
+                }  
+                //$var_attrs[]=($taxonomy_name?$taxonomy_name.': ':'').get_term_by('slug',$term_slug,$taxonomy)->name;                    
             }
             return array_filter($var_attrs);
         }        

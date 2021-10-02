@@ -9,7 +9,11 @@
  * Plugin Name: Woo Choice Plugin | Ring Builder | Pair Maker | Guidance Tool
  * Plugin URI: https://wordpress.org/plugins/woo-bundle-choice/
  * Description: Product bundling as ring builder for jewelry, pair maker for clothing and guidance tool for home decor, cosmetics etc. Product bundling as per user's choice.
+<<<<<<< HEAD
  * Version: 1.0.8
+=======
+ * Version: 1.1.0
+>>>>>>> 00a1bba96d9ad9ef8de11cfff3242f4bba316362
  * Author: emptyopssphere
  * Author URI: https://profiles.wordpress.org/emptyopssphere
  * License: GPLv3+
@@ -24,7 +28,7 @@ if (!defined('ABSPATH')) exit;
 //load autoloader file
 //load error detection and handler class
 
-if(!class_exists('Woo_Bundle_Choice')) {
+if(!class_exists('Woo_Bundle_Choice') ) {
 
 	class Woo_Bundle_Choice {
 
@@ -144,6 +148,7 @@ if(!class_exists('Woo_Bundle_Choice')) {
 		public function init() {
 
 			do_action( 'before_eowbc_load' );
+			
 			\eo\wbc\controllers\admin\Customizer::instance()->run();
 			$bootstrap = eo\wbc\WooCommerce_Bundle_Choice_Bootstrap::instance()->run();
 
@@ -155,8 +160,11 @@ if(!class_exists('Woo_Bundle_Choice')) {
 
 
 	add_action( 'plugins_loaded', function() {
-		wbc()->construct_init();
-	});
+		if(function_exists('wc')){
+			wbc()->construct_init();
+		}
+		
+	},30);
 
 	if(!function_exists('wbc')){
 

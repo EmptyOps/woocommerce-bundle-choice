@@ -1,0 +1,7 @@
+2020-09-17T11:00:30+00:00 CRITICAL Uncaught Error: Class 'eo\wbc\model\publics\component\EOWBC_Filter_Widget' not found in /var/www/html/tmp/WBC_TEST_ENV_with_sample_data/wordpress-latest-1/wp-content/plugins/woo-bundle-choice/application/controllers/publics/service.php:142
+Stack trace:
+#0 /var/www/html/tmp/WBC_TEST_ENV_with_sample_data/wordpress-latest-1/wp-content/plugins/woo-bundle-choice/application/controllers/publics/service.php(23): eo\wbc\controllers\publics\Service->add_shortcode()
+#1 /var/www/html/tmp/WBC_TEST_ENV_with_sample_data/wordpress-latest-1/wp-content/plugins/woo-bundle-choice/application/controllers/public-handler.php(56): eo\wbc\controllers\publics\Service->run()
+#2 /var/www/html/tmp/WBC_TEST_ENV_with_sample_data/wordpress-latest-1/wp-content/plugins/woo-bundle-choice/application/controllers/http-handler.php(40): eo\wbc\controllers\Public_Handler::process()
+#3 /var/www/html/tmp/WBC_TEST_ENV_with_sample_data/wordpress-latest-1/wp-content/plugins/woo-bundle-choice/application/woocommerce-bundle-choice-bootstrap.php(66): eo\wbc\controllers\Http_Handler::p in /var/www/html/tmp/WBC_TEST_ENV_with_sample_data/wordpress-latest-1/wp-content/plugins/woo-bundle-choice/application/controllers/publics/service.php on line 142
+

@@ -5,10 +5,13 @@
 */
 
 ?>
-	<div class="title">
+	<div class="title" data-tab-group="<?php _e($tab_set); ?>">
 	    <i class="dropdown icon"></i>		    
 	    <?php echo $filter['title']; ?>
-	    <?php if($reset): ?>
+	    <?php if($help): ?>
+		&nbsp; <span class="ui grey text" style="cursor: pointer;">&nbsp;<i class="question circle outline icon" data-help="<?php _e($help); ?>"></i></span>
+		<?php endif; ?>
+		<?php if($reset): ?>
 		&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_slider(event,'<?php echo $filter['slug'] ?>','<?php echo $filter['min_value']['name']; ?>','<?php echo $filter['max_value']['name']; ?>')">&nbsp;<u>reset</u></span>
 		<?php endif; ?>
 	</div>
@@ -23,7 +26,7 @@
 		    </div>
 		  </div>	  
 		</div>				    
-  		<div class="ui range slider text_slider" id="text_slider_<?php echo $filter['slug'] ?>" data-min="<?php echo $filter['min_value']['name']; ?>" data-max="<?php echo $filter['max_value']['name']; ?>" data-slug="<?php echo $filter['slug'] ?>"></div>
+  		<div class="ui range slider text_slider wbc" id="text_slider_<?php echo $filter['slug'] ?>" data-min="<?php echo $filter['min_value']['name']; ?>" data-max="<?php echo $filter['max_value']['name']; ?>" data-slug="<?php echo $filter['slug'] ?>" data-reset="reset_slider(new Event('click'),'<?php echo $filter['slug'] ?>','<?php echo $filter['min_value']['name']; ?>','<?php echo $filter['max_value']['name']; ?>')"></div>
   	</div>		
 	<?php
 	

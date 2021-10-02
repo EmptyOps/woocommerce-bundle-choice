@@ -1,4 +1,4 @@
-jQuery(document).ready(function(jQuery){
+jQuery(document).ready(function($){
     
     //hide necessary things
     jQuery('.range_section').transition('hide');
@@ -51,6 +51,40 @@ jQuery(document).ready(function(jQuery){
             }
         }
     }
+
+    $('.ui.fluid.selection.dropdown').on('keyup',function(){
+        
+        $this = $(this);         
+        $form = $($this).closest('form');
+        
+        $.post(eowbc_object.admin_url,{
+                    action:$form.find('[name="action"]').val(),
+                    term:$($this).find('.search').val(),
+                    _wpnonce:$form.find('[name="_wpnonce"]:eq(0)').val(),
+                    _wp_http_referer:$form.find('[name="_wp_http_referer"]:eq(0)').val(),
+                    resolver:$form.find('[name="resolver"]:eq(0)').val(),
+                    sub_action:'fetch_product'
+                },
+            function(data){
+
+            if(data!==false){
+                //$target=$($this).find("[data-search-tag]");
+                $target=$($this).find(".menu");
+                
+                $target.find('[data-search-product]').remove();
+                $html='';
+                $.each(data,function(i,e){                            
+                    $html=$html+'<div class="item" data-search-product="1" data-value="pid_'+i+'"><img class="ui avatar image" src="'+e[1]+'">'+e[0]+'</div>';                                                        
+                });                           
+                $target.prepend($html);
+            }
+        });
+    });
+
+    $('.ui.fluid.selection.dropdown .menu').on('click keyup','[data-search-product]',function(){
+        $('[data-search-product]').remove();
+    });
+
 
 });
 

@@ -7,7 +7,7 @@ function eo_wbc_jpc_list_categories($slug='',$prefix='',$opts_arr=array()){
         'hierarchical' => 1,
         'show_option_none' => '',
         'hide_empty' => 0,
-        'parent' => (get_term_by('slug',$slug,'product_cat')?get_term_by('slug',$slug,'product_cat')->term_id:0),
+        'parent' => (wbc()->wc->get_term_by('slug',$slug,'product_cat')?wbc()->wc->get_term_by('slug',$slug,'product_cat')->term_id:0),
         'taxonomy' => 'product_cat'
     ));
     
@@ -384,11 +384,10 @@ $form['data'] = array(
 					'jpc_save_price_ctl'=>array(
 						'label'=>eowbc_lang('Save and Update Prices'),
 						'type'=>'button',
-						'class'=>array('primary'),
+						'class'=>array('secondary'),
 						//'size_class'=>array('eight','wide'),
 						'attr'=>array("data-action='save'"),
 						'inline'=>false,
-
 						'visible_info'=>array( 'label'=>'(Upon clicking the \'Save and Update Prices\' button, it may take some time to update product prices in bulk.)',
 								'type'=>'visible_info',
 								'class'=>array('fluid', 'small'),

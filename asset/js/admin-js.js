@@ -1,21 +1,21 @@
 // a shared namespace among plugins and extensions of the sphere plugins
-jQuery.splugins = jQuery.splugins || {};
+window.document.splugins = window.document.splugins || {};
 
-jQuery.splugins.is_debug = false; 
-jQuery.splugins.is_test_script_debug = false;    
+window.document.splugins.is_debug = false; 
+window.document.splugins.is_test_script_debug = false;    
 
-jQuery.splugins.process_debug_log = function(obj,debug_log) {  
-   if( jQuery.splugins.is_test_script_debug ) {
+window.document.splugins.process_debug_log = function(obj,debug_log) {  
+   if( window.document.splugins.is_test_script_debug ) {
         var __debug_log = jQuery(obj).attr('data-debug_log');
         jQuery(obj).attr('data-debug_log', (typeof(__debug_log) != "undefined" && typeof(__debug_log) != undefined ? __debug_log : "" ) + debug_log);
     }
 };
 
-jQuery.splugins.hasAttr = function(obj,name) {  
+window.document.splugins.hasAttr = function(obj,name) {  
    return jQuery(obj).attr(name) !== undefined;
 };
 
-jQuery.splugins.extractJSON = function(str) {
+window.document.splugins.extractJSON = function(str) {
     var firstOpen, firstClose, candidate;
     firstOpen = str.indexOf('{', firstOpen + 1);
     do {
@@ -41,7 +41,7 @@ jQuery.splugins.extractJSON = function(str) {
     } while(firstOpen != -1);
 }
 
-jQuery.splugins.parseJSON = function(result) {
+window.document.splugins.parseJSON = function(result) {
     var resjson = null;
     try{
         console.log('called splugins parseJSON');
@@ -50,7 +50,7 @@ jQuery.splugins.parseJSON = function(result) {
     catch(e) {
         try{
             console.log('Normal jQuery parseJSON failed. Trying extract.');
-            jsonobjs = jQuery.splugins.extractJSON(result);
+            jsonobjs = window.document.splugins.extractJSON(result);
             // TODO here it is possible that in some rare cases more than one json result object is return in that case we need to find all json string object from response and identify our response only by putting some unique key/identifier like wbc_ajax_response maybe in our response
             if( typeof(jsonobjs[0]) != undefined && typeof(jsonobjs[0]) != 'undefined' ) {
                 console.log('splugins parseJSON extracted the json string from response');
@@ -90,7 +90,8 @@ function eowbc_ready($){
     $(".ui.selection.dropdown.additions").dropdown({ allowAdditions: true });   
     $(".ui.pointing.secondary.menu>.item").tab();
     $(".exclamation.circle.icon").popup({position:'bottom left',hoverable:true});
-
+    $('.ui.accordion').accordion({selector: {trigger: '.title'}});
+    
     jQuery("#d_fconfig_input_type_dropdown_div,#s_fconfig_input_type_dropdown_div").on('change',function(){
         let value = jQuery(this).dropdown('get value')
         let prefix = (jQuery(this).attr('id')=='d_fconfig_input_type_dropdown_div'?'d':'s');
@@ -128,6 +129,7 @@ function eowbc_ready($){
     });
 
     //Open wordpress media manager on button click
+    jQuery('.field.upload_image>.ui.button').off('click');
     jQuery('.field.upload_image>.ui.button').on('click',function(event){
         event.preventDefault();
         action_root=$(this).parent();
@@ -169,18 +171,18 @@ function eowbc_ready($){
 
         var original_txt = jQuery($this).text();
         var original_cursor = jQuery($this).css('cursor');
-        var processing_txt = jQuery.splugins.hasAttr(this,'data-loading_text') ? jQuery($this).attr('data-loading_text') : 'Processing...';
+        var processing_txt = window.document.splugins.hasAttr(this,'data-loading_text') ? jQuery($this).attr('data-loading_text') : 'Processing...';
         if( original_txt == processing_txt ) { 
-            jQuery.splugins.process_debug_log( $this, "In progress processing detected..." );
+            window.document.splugins.process_debug_log( $this, "In progress processing detected..." );
             return; 
         }
         else {
-            jQuery.splugins.process_debug_log( $this, "Starting save process..." );
+            window.document.splugins.process_debug_log( $this, "Starting save process..." );
         }
         jQuery($this).text(processing_txt);
         jQuery($this).css('cursor', 'default');
 
-        // jQuery.splugins.process_debug_log( $this, "tmp at here 1" );
+        // window.document.splugins.process_debug_log( $this, "tmp at here 1" );
 
         // var is_update_post_values = false;
         // var temp_fcf='';
@@ -198,7 +200,7 @@ function eowbc_ready($){
         //var form = jQuery(document).find('form').has(this);
         var form = jQuery(this).closest('form');
         
-        // jQuery.splugins.process_debug_log( $this, "tmp at here 2" );
+        // window.document.splugins.process_debug_log( $this, "tmp at here 2" );
 
         /*
         *   send Ajax request to save the configurations.
@@ -209,7 +211,7 @@ function eowbc_ready($){
             form_type = 'POST';
         }
 
-        // jQuery.splugins.process_debug_log( $this, "tmp at here 3" );
+        // window.document.splugins.process_debug_log( $this, "tmp at here 3" );
 
         if( jQuery(form).data("is_per_tab_save") != undefined && jQuery(form).data("is_per_tab_save") == true ) {
             
@@ -217,7 +219,7 @@ function eowbc_ready($){
             jQuery('#'+formid+' #saved_tab_key').val( jQuery(this).data("tab_key") );
         }
 
-        // jQuery.splugins.process_debug_log( $this, "tmp at here 4" );
+        // window.document.splugins.process_debug_log( $this, "tmp at here 4" );
 
         var serform = null;
         if( jQuery(form).data("is_serialize") == undefined || jQuery(form).data("is_serialize") == "true" ) {
@@ -240,8 +242,8 @@ function eowbc_ready($){
         //     $('[name="second_category_altr_filt_widgts"]').val(temp_scf);
         // } 
 
-        // jQuery.splugins.process_debug_log( $this, "serform " + serform );
-        // jQuery.splugins.process_debug_log( $this, "tmp at here 5" );
+        // window.document.splugins.process_debug_log( $this, "serform " + serform );
+        // window.document.splugins.process_debug_log( $this, "tmp at here 5" );
 
         jQuery.ajax({
             url:eowbc_object.admin_url,
@@ -251,9 +253,9 @@ function eowbc_ready($){
 
             },
             success:function(result,status,xhr){
-                jQuery.splugins.process_debug_log( $this, " success result " + result );
+                window.document.splugins.process_debug_log( $this, " success result " + result );
 
-                var resjson = jQuery.splugins.parseJSON(result);     //jQuery.parseJSON(result);
+                var resjson = window.document.splugins.parseJSON(result);     //jQuery.parseJSON(result);
                 if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
 
                     // console.log({
@@ -279,7 +281,7 @@ function eowbc_ready($){
                 }                   
             },
             error:function(xhr,status,error){
-                jQuery.splugins.process_debug_log( $this, " caught error " + error );
+                window.document.splugins.process_debug_log( $this, " caught error " + error );
 
                 /*console.log(xhr);*/
                 $('body').toast({
@@ -327,7 +329,7 @@ function eowbc_ready($){
 
         var original_txt = jQuery($this).text();
         var original_cursor = jQuery($this).css('cursor');
-        var processing_txt = jQuery.splugins.hasAttr(this,'data-loading_text') ? jQuery($this).attr('data-loading_text') : 'Processing...';
+        var processing_txt = window.document.splugins.hasAttr(this,'data-loading_text') ? jQuery($this).attr('data-loading_text') : 'Processing...';
         if( original_txt == processing_txt ) { return; }
         jQuery($this).text(processing_txt);
         jQuery($this).css('cursor', 'default');
@@ -420,7 +422,7 @@ function eowbc_ready($){
 
         var original_txt = jQuery($this).text();
         var original_cursor = jQuery($this).css('cursor');
-        var processing_txt = jQuery.splugins.hasAttr(this,'data-loading_text') ? jQuery($this).attr('data-loading_text') : 'Loading...';
+        var processing_txt = window.document.splugins.hasAttr(this,'data-loading_text') ? jQuery($this).attr('data-loading_text') : 'Loading...';
         if( original_txt == processing_txt ) { return; }
         jQuery($this).text(processing_txt);
         jQuery($this).css('cursor', 'default');
@@ -445,7 +447,7 @@ function eowbc_ready($){
         }
 
         // if(e.hasOwnProperty('srcElement') && e.srcElement.hasOwnProperty('nodeName') && e.srcElement.nodeName!='INPUT'){
-        if( jQuery.splugins.hasAttr(this,'data-wbc-editid') ) {
+        if( window.document.splugins.hasAttr(this,'data-wbc-editid') ) {
 
             jQuery.ajax({
                 url:eowbc_object.admin_url,
@@ -455,7 +457,7 @@ function eowbc_ready($){
 
                 },
                 success:function(result,status,xhr){
-                    var resjson = jQuery.splugins.parseJSON(result);    //jQuery.parseJSON(result);
+                    var resjson = window.document.splugins.parseJSON(result);    //jQuery.parseJSON(result);
                     if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
                         let list = JSON.parse(resjson["msg"]);
                         for(let property in list){
@@ -471,7 +473,13 @@ function eowbc_ready($){
                                     
                                 } else if($('.ui.dropdown #'+property).length>0) {
                                     if($('#'+property).parent().hasClass('multiple')){
-                                        $('#'+property).parent().dropdown('set selected',list[property].split(','));
+                                        setTimeout(function(){
+                                            $.each(list[property].split(','),function(index,item){
+                                                if(item!==''){
+                                                    $('#'+property).parent().dropdown('set selected',item);
+                                                }
+                                            });                                        
+                                        },2000);
                                     } else {
                                         $('#'+property).parent().dropdown('set selected',list[property]);    
                                     }                                    
@@ -549,7 +557,7 @@ function eowbc_do_delete( cbs, saved_tab_key, complete_callback ) {
 
         },
         success:function(result,status,xhr){
-            var resjson = jQuery.splugins.parseJSON(result);    //jQuery.parseJSON(result);
+            var resjson = window.document.splugins.parseJSON(result);    //jQuery.parseJSON(result);
             if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
                 //remove rows 
                 for(var i=0; i<cbs.length; i++) {
@@ -601,7 +609,7 @@ function eowbc_do_activate( cbs, saved_tab_key, complete_callback ) {
 
         },
         success:function(result,status,xhr){
-            var resjson = jQuery.splugins.parseJSON(result);    //jQuery.parseJSON(result);
+            var resjson = window.document.splugins.parseJSON(result);    //jQuery.parseJSON(result);
             if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
                 //remove rows 
                 for(var i=0; i<cbs.length; i++) {
@@ -652,7 +660,7 @@ function eowbc_do_deactivate( cbs, saved_tab_key, complete_callback ) {
 
         },
         success:function(result,status,xhr){
-            var resjson = jQuery.splugins.parseJSON(result);    //jQuery.parseJSON(result);
+            var resjson = window.document.splugins.parseJSON(result);    //jQuery.parseJSON(result);
             if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
                 //remove rows 
                 for(var i=0; i<cbs.length; i++) {                    

@@ -40,7 +40,7 @@ if(!class_exists('WBC_Sanitize')) {
 		public function clean($form) {	
 
 			foreach ($form as $key => $tab) {
-		    	foreach ($tab["form"] as $fk => $fv) {		    
+		    	foreach ($tab["form"] as $fk => $fv) {
 				    if(!empty($fv['sanitize']) and array_key_exists($fk,$_POST)) {
 				    	if(is_string($fv['sanitize']) and in_array($fv['sanitize'],$this->methods)){
 				    		$_POST[$fk] = call_user_func_array(array(wbc()->wp,$fv['sanitize']),array($_POST[$fk]));
@@ -64,9 +64,25 @@ if(!class_exists('WBC_Sanitize')) {
 			}
 		}
 
+		public function _get(string $get_field){
+			if(isset($_GET[$get_field])) {
+				return ($_GET[$get_field]);
+			} else {
+				return false;
+			}
+		}
+
 		public function post(string $post_field){
 			if(isset($_POST[$post_field])) {
 				return sanitize_text_field($_POST[$post_field]);
+			} else {
+				return false;
+			}
+		}
+
+		public function _post(string $post_field){
+			if(isset($_POST[$post_field])) {
+				return $_POST[$post_field];
 			} else {
 				return false;
 			}

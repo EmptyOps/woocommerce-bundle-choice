@@ -20,7 +20,7 @@ class WBC_Common {
 		$return_category = '';
 		if($page == 'category' ) {
 			global $wp_query;
-			if(!property_exists($wp_query->get_queried_object(),'term_id')){
+			if(empty($wp_query->get_queried_object()) or !property_exists($wp_query->get_queried_object(),'term_id')) {
 				return false;
 			}
 			if(!empty($in_category) and is_array($in_category)) {
@@ -285,6 +285,14 @@ class WBC_Common {
     // should move all other such array functions from code igniter helper libs for productivity
     public function isEmptyArr($arr){
     	return empty($arr) || !is_array($arr);
+    }
+
+    public function load_fomantic(){
+		wp_register_style('eowbc_fomantic_css',constant('EOWBC_ASSET_URL').'css/fomantic/semantic.min.css');
+		wp_enqueue_style('eowbc_fomantic_css');
+		
+		wp_register_script('eowbc_fomantic_js',constant('EOWBC_ASSET_URL').'js/fomantic/semantic.min.js');
+		wp_enqueue_script('eowbc_fomantic_js','',array('jquery'),'',true);		
     }
 
 }

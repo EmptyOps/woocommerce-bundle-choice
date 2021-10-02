@@ -26,6 +26,7 @@ if ( ! class_exists( 'Shortcode_Filters' ) ) {
 			$form_definition = parent::get_form_definition();
 
 			unset($form_definition['s_fconfig']);
+			unset($form_definition['filter_set']);
 			
 			if(isset($form_definition['d_fconfig']['form']['d_fconfig_builder'])) {
 				unset($form_definition['d_fconfig']['form']['d_fconfig_builder']);
@@ -43,7 +44,8 @@ if ( ! class_exists( 'Shortcode_Filters' ) ) {
 			$form_definition['d_fconfig']['form']['d_fconfig_save_sec_title']['label'] = 'Add Filter Field';
 
 			$sh_filter_setting = array(
-
+				'filter_setting_filter_section'=>array('label'=>'Configure the Shortcode Behaviour','type'=>'segment','desc'=>'Configure the behaviour of the shortcode and it\'s functionality.'
+											),
 				'filter_setting_filter'=> $form_definition['filter_setting']['form']['filter_setting_filter'], 
 				'redirect_url'=>array(
 					'label'=>eowbc_lang('Redirect URL'),
@@ -110,7 +112,7 @@ if ( ! class_exists( 'Shortcode_Filters' ) ) {
 			// unset($form_definition['shortflt_filter_setting']['form']['filter_setting_price_filter_width']);
 			// unset($form_definition['shortflt_filter_setting']['form']['filter_setting_alternate_slider_ui']);	
 
-			$fields_to_keep = array('filter_setting_submit_btn','filter_setting_slider_max_lblsize');
+			$fields_to_keep = array('filter_setting_submit_btn','filter_setting_slider_max_lblsize','config_advance_begin','filter_setting_advance_two_tabs','filter_setting_advance_first_tabs','filter_setting_advance_second_tabs','config_advance_end','filter_setting_advance_two_tabs_divider');
 			foreach ($form_definition['shortflt_filter_setting']['form'] as $key => $value) {
 				if( !in_array($key, $fields_to_keep)) {
 					unset($form_definition['shortflt_filter_setting']['form'][$key]);

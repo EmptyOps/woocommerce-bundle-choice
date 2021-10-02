@@ -7,7 +7,7 @@
 
 $res = array( "type"=>"success", "msg"=>"" );
 
-if(wp_verify_nonce(sanitize_text_field($_POST['_wpnonce']),'eowbc_configuration')){                
+if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_configuration')) {                
 
 	wbc()->load->model('admin/eowbc_configuration');
     wbc()->load->model('admin/form-builder');

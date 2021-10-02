@@ -41,6 +41,11 @@ class WBC_Options {
 		$options = unserialize(get_option('eowbc_option_'.$option,"a:0:{}"));
 		if(!empty($options) and is_array($options) and isset($options[$key])/*!empty($options[$key])*/)  {		
 			$return = $options[$key];
+
+			if( $option === 'configuration' and in_array($key,array('first_slug','second_slug')) ){
+				$return = wbc()->wc->slug2slug($return);
+			}			
+
 		} else {
 			$return = $default;
 		}		

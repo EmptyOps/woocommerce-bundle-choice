@@ -15,7 +15,7 @@ class Eowbc_Filters extends Eowbc_Model {
 
 	private static $_instance = null;
 
-	protected $tab_key_prefix = '';
+	public $tab_key_prefix = '';
 
 	public static function instance() {
 		if ( ! isset( self::$_instance ) ) {
@@ -44,7 +44,7 @@ class Eowbc_Filters extends Eowbc_Model {
 					
 					//wbc()->common->pr($form_definition, false, false);
 					// wbc()->common->var_dump('table data for key '.$key);
-					// wbc()->common->pr($filter_data, false, false);
+					//wbc()->common->pr($filter_data, false, false);
 
 					$body = array();
 
@@ -53,11 +53,11 @@ class Eowbc_Filters extends Eowbc_Model {
 
 						foreach ($filter_data as $rk => $rv) {
 							$row = array();
-
+							
 							$row[] =array(
 									'val' => '',
 									'is_checkbox' => true, 
-									'checkbox'=> array('id'=>$key.$rv[$key_clean.'_filter'],'value'=>array(),'options'=>array(/*$rv[$key.'_filter']*/$rk=>''),'class'=>'','where'=>'in_table')
+									'checkbox'=> array('id'=>($fv['id']=='filter_sets_list'?$rk:($key.$rv[$key_clean.'_filter'])),'value'=>array(),'options'=>array(/*$rv[$key.'_filter']*/$rk=>''),'class'=>'','where'=>'in_table')
 								);
 							
 							$disabled = empty($rv[$key_clean.'_add_enabled'])?true:false;
@@ -65,7 +65,7 @@ class Eowbc_Filters extends Eowbc_Model {
 							// foreach ($rv as $rvk => $rvv) {
 							foreach ($form_definition[$key]["form"][$fk]["head"][0] as $ck => $cv) {
 								if(empty($cv["field_id"])) { continue; }
-								$rvk = $cv["field_id"];
+								$rvk = $cv["field_id"];							
 								$rvv = ( !isset($rv[$rvk]) || wbc()->common->nonZeroEmpty($rv[$rvk]) ) ?  "" : $rv[$rvk];
 								
 								//skip the id
@@ -81,6 +81,13 @@ class Eowbc_Filters extends Eowbc_Model {
 								}							
 								else if( $rvk == $key_clean."_input_type" || $rvk == $key_clean."_filter" ) {
 									$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv);
+									if(!is_array($val) and empty($val)) {
+										$val = '#';
+									}
+									/*if(empty($val)){
+										$val = $rvv;
+									}*/
+
 									if($rvk == $key_clean."_filter"){
 										$row[] = array( 'val' => !is_array($val)?$val:$val["label"] ,'disabled'=>$disabled, 'link'=>($rvk == $key_clean."_filter"),'edit_id'=>$rk);	
 									} else {
@@ -89,10 +96,16 @@ class Eowbc_Filters extends Eowbc_Model {
 									
 								}elseif(!empty($form_definition[$key]["form"][$cv['field_id']]) and $form_definition[$key]["form"][$cv['field_id']]['type']=='select') {
 									$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv);
+									if($rvk==($key_clean.'_set') and empty($val)) {
+										$val = 'Default';
+									}
 									$row[] = array( 'val' => $val ,'disabled'=>$disabled);
-								}
-								else {
-									$row[] = array( 'val' => $rvv ,'disabled'=>$disabled);
+								} else {
+									if(!empty($row) and count($row)==1){
+										$row[] = array( 'val' => $rvv,'disabled'=>$disabled, 'link'=>1,'edit_id'=>$rk);	
+									} else { 
+										$row[] = array( 'val' => $rvv ,'disabled'=>$disabled);
+									}
 								}
 							}
 
@@ -187,7 +200,6 @@ class Eowbc_Filters extends Eowbc_Model {
 
 				$filter_data = unserialize(wbc()->options->get_option_group('filters_'.$this->tab_key_prefix.'d_fconfig',"a:0:{}"));
 				
-
 				if(!empty($filter_data)){
 					$ids = array_keys($filter_data);
 					$this->deactivate( $ids,$this->tab_key_prefix.'d_fconfig',1 );
@@ -277,7 +289,8 @@ class Eowbc_Filters extends Eowbc_Model {
 	    	}
 	    	$key_clean = ((!empty($this->tab_key_prefix) and strpos($key,$this->tab_key_prefix)===0)?substr($key,strlen($this->tab_key_prefix)):$key);
 	    	//$res['data_form'][]= $tab;
-			$is_table_save = ($key != $this->tab_key_prefix."altr_filt_widgts" and $key != $this->tab_key_prefix."filter_setting") ? true : false;
+			$is_table_save = ($key == $this->tab_key_prefix."d_fconfig" or $key == $this->tab_key_prefix."s_fconfig" or $key=='filter_set') ? true : false;
+
 			$table_data = array();
 			$tab_specific_skip_fileds = $is_table_save ? array('eowbc_price_control_methods_list_bulk','eowbc_price_control_sett_methods_list_bulk') : array();
 
@@ -305,12 +318,11 @@ class Eowbc_Filters extends Eowbc_Model {
 			    				$table_data['filter_template'] = apply_filters('eowbc_admin_form_filters_save_d_filter_template',wbc()->sanitize->post('first_category_altr_filt_widgts'));
 			    			} elseif ($fk == "s_fconfig_ordering" and !empty(wbc()->sanitize->post('second_category_altr_filt_widgts'))) {
 			    				$table_data['filter_template'] = apply_filters('eowbc_admin_form_filters_save_s_filter_template',wbc()->sanitize->post('second_category_altr_filt_widgts'));
-			    			}
-
+			    			}			    			
 				    		$table_data[$fk] = (int)wbc()->sanitize->post($fk); 	
 			    		}
 			    		else {
-			    			$table_data[$fk] = ( isset($_POST[$fk]) ? wbc()->sanitize->post($fk) : '' ); 
+			    			$table_data[$fk] = ( isset($_POST[$fk]) ? wbc()->sanitize->_post($fk) : '' ); 
 			    		}
 			    	}
 			    	else {			    		
@@ -335,12 +347,17 @@ class Eowbc_Filters extends Eowbc_Model {
 		        	} else {
 				        foreach ($filter_data as $fdkey=>$item) {
 				          
-				            if ($item[$key_clean.'_filter']==$table_data[$key_clean."_filter"] and !empty($item['filter_template']) and !empty($table_data['filter_template']) and $item['filter_template']==$table_data['filter_template']) { 
+				            if ( apply_filters('eowbc_ajax_filters_check_duplicate', ($item[$key_clean.'_filter']==$table_data[$key_clean."_filter"] and !empty($item['filter_template']) and !empty($table_data['filter_template']) and $item['filter_template']==$table_data['filter_template'] ),$item,$table_data,$key_clean ) ) { 
 				            	if( $is_auto_insert_for_template ) {
-					            	$filter_data[$fdkey][$key_clean.'_add_enabled'] = 1;
+
+				            		$filter_data[wbc()->common->createUniqueId()] = $table_data;
+
+							        wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data));
+
+					            	/*$filter_data[$fdkey][$key_clean.'_add_enabled'] = 1;
 					                $res["type"] = "error";
 					    			$res["msg"] = eowbc_lang('Filter Already Exists and activated');
-					    			wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data) );
+					    			wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data) );*/
 					                return $res;
 				            	}
 				            	else {
@@ -465,14 +482,20 @@ class Eowbc_Filters extends Eowbc_Model {
 	}
 
 	public function fetch_filter(&$res) {
-		$first = unserialize(wbc()->options->get_option_group('filters_'.$this->tab_key_prefix.'d_fconfig'));
-		$second = unserialize(wbc()->options->get_option_group('filters_'.$this->tab_key_prefix.'s_fconfig'));
+		//$first = unserialize(wbc()->options->get_option_group('filters_'.$this->tab_key_prefix.'d_fconfig'));
+		//$second = unserialize(wbc()->options->get_option_group('filters_'.$this->tab_key_prefix.'s_fconfig'));
+		$key = wbc()->sanitize->post('saved_tab_key');
+		$data = unserialize(wbc()->options->get_option_group('filters_'.$key,"a:0:{}"));
 
+		if(!empty($data[wbc()->sanitize->post('id')])){
+			$res['msg'] = json_encode($data[wbc()->sanitize->post('id')]);
+		}
+		/*
 		if(!empty($first[wbc()->sanitize->post('id')])){
 			$res['msg'] = json_encode($first[wbc()->sanitize->post('id')]);
 		} elseif (!empty($second[wbc()->sanitize->post('id')])) {
 			$res['msg'] = json_encode($second[wbc()->sanitize->post('id')]);
-		} else {
+		}*/ else {
 			$res['type'] = 'error';
 			$res['msg'] = 'Selected item does not exists!';
 		}		
@@ -481,8 +504,8 @@ class Eowbc_Filters extends Eowbc_Model {
 }
 
 
-$diamond_category = get_term_by( 'slug','eo_diamond_shape_cat','product_cat');
-$setting_category = get_term_by( 'slug','eo_setting_shape_cat','product_cat');
+$diamond_category = wbc()->wc->get_term_by( 'slug','eo_diamond_shape_cat','product_cat');
+$setting_category = wbc()->wc->get_term_by( 'slug','eo_setting_shape_cat','product_cat');
 
 if( !is_ajax() ) {
 	if((is_wp_error($diamond_category) or is_wp_error($setting_category) or empty($diamond_category) or empty($setting_category))) {

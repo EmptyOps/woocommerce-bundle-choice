@@ -17,12 +17,12 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'sample_data_jewelry')){
 		)
 	);
 
+	$class_name = apply_filters('wbc_auto_sample_class_ajax', $class_name );
+
 	$data_template_obj = call_user_func(array($class_name,'instance'))->get_data_template();
-
-
-
-
+	
 	$template = array();
+
 	if(wbc()->sanitize->post('type')=='cat') {
 		$template = $data_template_obj->get_categories();
 
@@ -47,7 +47,7 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'sample_data_jewelry')){
 
 					if( $index == $post_index ) {
 						$template = $childcat;
-						$template['parent'] = get_term_by('slug',$cat['slug'] , 'product_cat')->term_id;
+						$template['parent'] = wbc()->wc->get_term_by('slug',$cat['slug'] , 'product_cat')->term_id;
 						$is_break = true;
 						break;
 					}
@@ -85,25 +85,7 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'sample_data_jewelry')){
 	} 
 	elseif(wbc()->sanitize->post('type')=='after_attr_created') {
 		call_user_func(array($class_name,'instance'))->after_attr_created(wbc()->sanitize->post('feature_key'));
-	} 
-	// elseif(sanitize_text_field($_POST['type'])=='save_map'){
-	// 	$_maps = $data_template_obj->get_maps();
-	// 	if(!empty($_maps)){
- //        	\eo\wbc\model\admin\sample_data\Eowbc_Sample_Data::instance()->add_maps($_maps);
- //      	}
- //      	wbc()->options->set('eo_wbc_cats',serialize($data_template_obj->get_categories())); 
- //      	$data_template_obj->set_configs_after_categories($data_template_obj->get_categories());
-
-	// } 
-	// elseif (sanitize_text_field($_POST['type'])=='save_filter') {
-	// 	/*$filters = $data_template_obj->get_filters($data_template_obj->get_categories(),$data_template_obj->get_attributes());
-	// 	if(!empty($filters)){
- //        	\eo\wbc\model\admin\sample_data\Eowbc_Sample_Data::instance()->add_filters($_maps);
- //      	}
- //      	wbc()->options->set('eo_wbc_cats',serialize($catat_category)); 
- //      	$this->data_template->set_configs_after_categories($catat_category);*/
-	// }
-
+	} 	
 }
 else {
 	$res["type"] = "error";

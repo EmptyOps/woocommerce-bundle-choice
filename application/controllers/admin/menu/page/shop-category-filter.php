@@ -27,6 +27,7 @@ if ( ! class_exists( 'Shop_Category_Filter' ) ) {
 
 			// update labels, remove unnecessary tabs
 			unset($form_definition['s_fconfig']);
+			unset($form_definition['filter_set']);
 			
 			if(isset($form_definition['d_fconfig']['form']['d_fconfig_builder'])) {
 				unset($form_definition['d_fconfig']['form']['d_fconfig_builder']);
@@ -46,6 +47,9 @@ if ( ! class_exists( 'Shop_Category_Filter' ) ) {
 
 			// add new fields 
 			$sh_filter_setting = array(
+				'sh_shop_cat_filter_section'=>array('label'=>'Configure the Shop/Category Filters','type'=>'segment','desc'=>'Change the behaviours of the filters on the shop and category page.'
+											),
+
 				'sh_shop_cat_filter_location'=>array(
 					'label'=>eowbc_lang('Filter Location'),
 					'type'=>'checkbox',
@@ -68,6 +72,7 @@ if ( ! class_exists( 'Shop_Category_Filter' ) ) {
 					/*'force_value'=>1,*/
 					'validate'=>array('validate_if'=>array('sc_shop_cat_filter_location_cat'=>array('required'=>''))),
 					'sanitize'=>'sanitize_text_field',
+					'validate'=>array('validate_if'=>array('sc_shop_cat_filter_location_cat'=>array('required'=>''))),
 					'options'=>\eo\wbc\model\Category_Attribute::instance()->get_category(),
 					'class'=>array('fluid','multiple','clearable'),
 					'field_attr'=>array('multiple=""'),
@@ -107,7 +112,7 @@ if ( ! class_exists( 'Shop_Category_Filter' ) ) {
 			}
 
 			// remove unnecessary fields
-			$fields_to_keep = array('filter_setting_btnfilter_now','filter_setting_filter','filter_setting_slider_max_lblsize','filter_setting_submit_btn','price_filter_first_cat','hide_price_filter_first_cat','price_filter_order_first_cat','price_filter_prefix_postfix_devider','price_filter_prefix','price_filter_postfix');
+			$fields_to_keep = array('filter_setting_btnfilter_now','filter_setting_reset_now','filter_setting_filter','filter_setting_slider_max_lblsize','filter_setting_submit_btn','price_filter_first_cat','hide_price_filter_first_cat','price_filter_order_first_cat','price_filter_prefix_postfix_devider','price_filter_prefix','price_filter_postfix','config_advance_begin','filter_setting_advance_two_tabs','filter_setting_advance_first_tabs','filter_setting_advance_first_category','filter_setting_advance_second_tabs','filter_setting_advance_second_category','config_advance_end','filter_setting_advance_two_tabs_divider');
 			foreach ($form_definition['sc_filter_setting']['form'] as $key => $value) {
 				if( !in_array($key, $fields_to_keep)) {
 					unset($form_definition['sc_filter_setting']['form'][$key]);

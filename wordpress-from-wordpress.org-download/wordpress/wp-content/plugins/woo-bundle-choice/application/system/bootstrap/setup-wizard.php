@@ -37,12 +37,12 @@ class Setup_Wizard {
 		$feature_option = array();
 		$bonus_features = array();
 
-		if(!empty(wbc()->sanitize->get('_wpnonce')) and wp_verify_nonce(sanitize_text_field(wbc()->sanitize->get('_wpnonce')),'eo_wbc_setup')){
+		if(!empty(wbc()->sanitize->get('_wpnonce')) and wp_verify_nonce(wbc()->sanitize->get('_wpnonce'),'eo_wbc_setup')) {
 			
 			if(!empty(wbc()->sanitize->get('step'))){
 				
 
-				if(sanitize_text_field(wbc()->sanitize->get('step'))>3 or sanitize_text_field(wbc()->sanitize->get('step'))<1){ $_GET["step"]/*wbc()->sanitize->get('step')*/=1; }
+				if(wbc()->sanitize->get('step')>3 or wbc()->sanitize->get('step')<1){ $_GET["step"]/*wbc()->sanitize->get('step')*/=1; }
 
 				$forms = array('1' =>'basic_config', '2'=>'feature', '3'=>'finalize');
 				$this->step = wbc()->sanitize->get('step');
@@ -121,10 +121,10 @@ class Setup_Wizard {
 			if(!empty(wbc()->sanitize->get('step'))) {
 				
 
-				if(sanitize_text_field(wbc()->sanitize->get('step'))>3 or sanitize_text_field(wbc()->sanitize->get('step'))<1){ $_GET["step"]/*wbc()->sanitize->get('step')*/=1; }
+				if(wbc()->sanitize->get('step')>3 or wbc()->sanitize->get('step')<1){ $_GET["step"]/*wbc()->sanitize->get('step')*/=1; }
 
 				$forms = array('1' =>'basic_config', '2'=>'feature', '3'=>'finalize');
-				$this->step = sanitize_text_field(wbc()->sanitize->get('step'));
+				$this->step = wbc()->sanitize->get('step');
 				$this->form = empty($forms[$this->step])?$forms[1]:$forms[$this->step];
 			}
 			$this->action();

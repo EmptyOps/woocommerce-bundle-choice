@@ -109,7 +109,7 @@ class Ring_Builder_Data_Template extends Pair_Builder_Data_Template {
 
     public function get_categories() {
         $_img_url= constant('EOWBC_ASSET_URL').'img/sample_data/'.$this->asset_folder.'/';    // EO_WBC_PLUGIN_DIR.'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/';
-        error_log($_img_url);
+        
         return array(
                     array(
                         'thumb' => '',
