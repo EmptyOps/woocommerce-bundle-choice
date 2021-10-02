@@ -75,6 +75,9 @@ class Controller extends \eo\wbc\controllers\Controller {
 	}
 
 	public function generate_form($form,$key='appearence_controls') {
+
+		/*global $render_modules_params;*/
+
 		if(empty($form) or !is_array($form)){
 			return array();
 		}
@@ -165,6 +168,99 @@ class Controller extends \eo\wbc\controllers\Controller {
 					'id'=>'eorad_email_header',
 					'tab_key'=>$form_value['data_controls']['tab_key']);
 			}*/
+
+			if(!empty($form_value['child']) or (empty($form_value['type']) and !empty($form_value) and is_array($form_value)) ){
+
+				$child_control = array();
+
+				if(!empty($form_value['child'])) {
+					if(empty($form_value['child']['type']) and count($form_value['child'])>1) {
+						$child_control = $this->generate_form($form_value['child'],$key);
+					} else{
+						$child_control = $this->generate_form([$form_value['child']],$key);
+					}
+					
+				} elseif(empty($form_value['type']) and !empty($form_value) and is_array($form_value)) {
+					$child_control = $this->generate_form($form_value,$key);
+				}
+
+				if(!empty($child_control)){
+					$controls = array_replace($controls,$child_control);
+				}
+			}
+		}
+
+		return $controls;
+	}
+
+
+	// return all appearance control data to be dumped in to json
+	// format must include `form_control_key` as third array element and the id if necessary.
+	
+	public function generate_json_dump($form,$key='appearence_controls') {
+
+		if(empty($form) or !is_array($form)){
+			return array();
+		}
+		
+		wbc()->load->model('admin/form-elements');
+		$controls = array();
+
+		$admin_ui = \eo\wbc\model\admin\Form_Elements::instance();
+		
+		foreach ($form as $form_key => $form_value) {
+			
+			if(!empty($form_value[$key]) and ( empty($this->check_show_on_admin) xor (!empty($form_value[$key][2]) and !empty($form_value[$key][2]['show_on_admin']) ) ) ) {	
+
+				$control_element = array();
+				$excep_controls = array();
+				
+
+				if(!empty($form_value[$key][1]) and is_array($form_value[$key])) {
+					$excep_controls = $form_value[$key][1];
+				} elseif (!empty($form_value[$key][1])  and is_string($form_value[$key])) {
+					$excep_controls = explode(',',$form_value[$key][1]);
+				}
+			
+				if(!empty($form_value[$key][2]) and  !empty($form_value[$key][2]['type'])) {
+
+					$control_element = $this->default_uis($form_value[$key][2]['type'],$excep_controls);
+					if(empty($control_element)/* and $form_value['type'] === 'hidden'*/){
+
+						$control_element = array($form_value[$key][2]['type']);
+					}
+
+				} elseif(!empty($form_value['type'])) {
+					$control_element = $this->default_uis($form_value['type'],$excep_controls);
+				} 
+
+				if(!empty($control_element)){
+
+					/*$controls[$form_key.'_form_segment'] = array(
+						'label'=> $form_value[$key][0],
+						'type'=>'devider',
+					);*/
+
+					$form_control_key = '';
+					if(!empty($form_value[$key][2]['form_control_key'])) {
+						$form_control_key = $form_value[$key][2]['form_control_key'];
+					}
+
+					foreach ($control_element as $control) {
+
+						if(empty($form_value[$key][2])){
+							$controls[$form_key.'_'.$control] = wbc()->options->get_option($form_control_key,$form_key.'_'.$control); /*call_user_func_array(array($admin_ui,$control),array($form_key.'_'.$control,$form_value[$key][0]))*/;
+						} else {
+							$control_key = $form_key.'_'.$control;
+							if(!empty($form_value[$key][2]['id'])){
+								$control_key = $form_value[$key][2]['id'].'_'.$control;
+							}
+							$controls[$control_key] =  wbc()->options->get_option($form_control_key,$control_key); /*call_user_func_array(array($admin_ui,$control),array($control_key,$form_value[$key][0],$form_value[$key][2]))*/;
+							
+						}
+					}
+				}
+			}
 
 			if(!empty($form_value['child']) or (empty($form_value['type']) and !empty($form_value) and is_array($form_value)) ){
 

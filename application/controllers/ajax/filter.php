@@ -57,7 +57,10 @@ class Filter
     	
     	$pids = array();
 
-    	$table_columns = unserialize(wbc()->options->get_option('lookup_manager','table_columns',serialize(array())));
+    	/*$table_columns = unserialize(wbc()->options->get_option('lookup_manager','table_columns',serialize(array())));*/
+    	$table_columns = unserialize(wbc()->options->get_option('sp_lookup_manager','table_columns',serialize(array())));
+
+    	
 
     	/*echo "<pre>";
     	print_r($table_columns);
@@ -283,22 +286,13 @@ class Filter
         }
 
         global $wpdb;
-        
-        /*echo "<pre>";
-        print_r($_REQUEST);
-        echo "</pre>";
-
-     	echo "SELECT `product_id`,`parent_id` FROM `{$wpdb->wc_product_meta_lookup}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql}";
-        die();*/
-
+        $lookup_table = $wpdb->prefix."sp_product_lookup";
+                        
         if($return_query) {
-        	return "SELECT `product_id`,`parent_id` FROM `{$wpdb->wc_product_meta_lookup}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql}";
+        	return "SELECT `product_id`,`parent_id` FROM `{$lookup_table}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql}";
         }
-
-        //echo "SELECT `product_id`,`parent_id` FROM `{$wpdb->wc_product_meta_lookup}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ${attribute_fields} ${order_sql}";
-        //die();
        
-        $result = $wpdb->get_results("SELECT `product_id`,`parent_id` FROM `{$wpdb->wc_product_meta_lookup}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql}",'ARRAY_N');
+        $result = $wpdb->get_results("SELECT `product_id`,`parent_id` FROM `{$lookup_table}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql}",'ARRAY_N');
 
 
         if(!empty($result) and !is_wp_error($result)){

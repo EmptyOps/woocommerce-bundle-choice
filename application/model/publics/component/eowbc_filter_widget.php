@@ -983,19 +983,8 @@ class EOWBC_Filter_Widget {
 			$__get['BEGIN'] = wbc()->sanitize->get('BEGIN');
 			$__get['STEP'] = wbc()->sanitize->get('STEP');
 			$__get['FIRST'] = (
-	                	$this->_category==$this->first_category_slug
-
-			/*$url = '?'.wbc()->common->http_query(
-				array(
-					'EO_WBC'=>1,
-					'BEGIN'=>wbc()->sanitize->get('BEGIN'),
-					'STEP'=>wbc()->sanitize->get('STEP'),
-					'FIRST'=>(*/
-	                	/*$this->_category==wbc()->options->get_option('configuration','first_slug')
-
-			                    ?
-			                ''
-			                    :*/
+	                	/*$this->_category==$this->first_category_slug*/
+		
 			                (
 			                    !empty(wbc()->sanitize->get('FIRST'))
 			                        ? 
@@ -1006,7 +995,7 @@ class EOWBC_Filter_Widget {
 
 			            );
 			$__get['SECOND'] =(
-		                $this->_category==$this->second_category_slug
+		                /*$this->_category==$this->second_category_slug*/
 
 			            /*),
 					'SECOND'=>(*/

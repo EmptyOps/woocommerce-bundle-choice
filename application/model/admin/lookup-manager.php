@@ -34,8 +34,16 @@ class Lookup_Manager {
 		/*add_action( 'woocommerce_new_product',array($this,'add_product'),99,2);
 		add_action( 'woocommerce_new_product_variation',array($this,'add_product_variation'),99,2);*/
 
-		add_action( 'woocommerce_update_product',array($this,'update_product'),99,2);
+		//add_action( 'woocommerce_update_product',array($this,'update_product'),99,2);
 		/*add_action( 'woocommerce_update_product_variation',array($this,'update_product_variation'),99,2);*/
+		
+
+		// new standard action binding
+		add_action('woocommerce_before_product_object_save',array($this,'before_product_object_save'),99,2);
+	}
+
+	public function before_product_object_save($product,$params) {
+		$this->update_product($product->get_id(),$product);		
 	}
 
 	public function get_data($product,$categories) {
@@ -117,13 +125,31 @@ class Lookup_Manager {
 		}
 	}
 
+	public function check_table() {
+		global $wpdb;
+		$lookup_table = $wpdb->prefix."sp_product_lookup";
+		
+		if($wpdb->get_var( "SHOW TABLES LIKE '$lookup_table'" ) != $lookup_table) {
+            $sql = "CREATE TABLE `$lookup_table`( ";	            
+            $sql .= "product_id INT(20) NULL ) ".$wpdb->get_charset_collate().";";
+            require_once( ABSPATH . '/wp-admin/includes/upgrade.php' );
+            dbDelta($sql);
+        }
+
+	}
+
 	public function process_columns($data) {
 
 		global $wpdb;
-		require_once( constant('ABSPATH') . '/wp-admin/includes/upgrade.php' );
-		$lookup_table = $wpdb->prefix."wc_product_meta_lookup";
 
-		$table_columns = unserialize(wbc()->options->get_option('lookup_manager','table_columns',serialize(array()))) ;
+		$this->check_table();		
+
+		require_once( constant('ABSPATH') . '/wp-admin/includes/upgrade.php' );
+		/*$lookup_table = $wpdb->prefix."wc_product_meta_lookup";*/
+		$lookup_table = $wpdb->prefix."sp_product_lookup";
+
+		//$table_columns = unserialize(wbc()->options->get_option('lookup_manager','table_columns',serialize(array()))) ;
+		$table_columns = unserialize(wbc()->options->get_option('sp_lookup_manager','table_columns',serialize(array()))) ;
 
 		if(empty($table_columns)){
 			$table_columns = array('attribute'=>array(),'category'=>array());
@@ -135,6 +161,19 @@ class Lookup_Manager {
 
 		if(empty($table_columns['category'])){
 			$table_columns['category'] = array();
+		}
+
+		$additional_columns = ['sku','virtual','downloadable','min_price','max_price','onsale','stock_quantity','stock_status','rating_count','average_rating','total_sales','tax_status','tax_class'];
+		if(!empty($additional_columns)) {
+			foreach ($additional_columns as $additional_column) {
+
+				if($wpdb->get_var("SHOW COLUMNS FROM `".$lookup_table."` LIKE '".$additional_column."'" ) != $additional_column)
+		        {
+		            $sql="alter TABLE `".$lookup_table."` ADD `".$additional_column."` bigint(20) null";   
+		            $wpdb->query($sql);
+		            $table_columns['additional_column'][$additional_column] = $additional_column;
+		        }
+			}
 		}
 		
 		if(!empty($data['attribute'])){
@@ -165,18 +204,25 @@ class Lookup_Manager {
             $wpdb->query($sql);
         }
 
-		wbc()->options->update_option('lookup_manager','table_columns',serialize($table_columns));
+		wbc()->options->update_option('sp_lookup_manager','table_columns',serialize($table_columns));
 	}
 
 	public function save($id,$data,$product,$parent_id=0) {
 
 		global $wpdb;
-		$lookup_table = $wpdb->prefix."wc_product_meta_lookup";
+
+		$this->check_table();
+
+		/*$lookup_table = $wpdb->prefix."wc_product_meta_lookup";*/
+		$lookup_table = $wpdb->prefix."sp_product_lookup";
+
 		if(empty($id) or empty($data)){
 			return false;
 		}
 
-		$table_columns = unserialize(wbc()->options->get_option('lookup_manager','table_columns',serialize(array())));
+		//$table_columns = unserialize(wbc()->options->get_option('lookup_manager','table_columns',serialize(array())));
+		$table_columns = unserialize(wbc()->options->get_option('sp_lookup_manager','table_columns',serialize(array())));
+		
 		$fields = array();
 		$fields_type = array();
 		
@@ -215,6 +261,7 @@ class Lookup_Manager {
 			$wpdb->update( $lookup_table,$fields,array('product_id'=>$id),$fields_type, array('%d'));
 			return $wpdb->last_query;
 		} elseif (!empty($product) and !is_wp_error($product)) {
+
 			$fields['product_id'] = $id;
 			$fields_type[] = '%d';
 			$fields['sku'] = $product->get_sku();
@@ -257,6 +304,9 @@ class Lookup_Manager {
 			$fields_type[] = '%s';
 			
 			$wpdb->insert( $lookup_table,$fields,$fields_type );
+
+			/*var_dump($wpdb->last_query);
+			die();*/
 			return $wpdb->last_query;
 		}		
 	}
@@ -322,13 +372,17 @@ class Lookup_Manager {
 		
 	public function remove_attribute_column($id, $name, $taxonomy) {
 		
-		$table_columns = unserialize(wbc()->options->get_option('lookup_manager','table_columns',serialize(array())));
+		$this->check_table();
+
+		//$table_columns = unserialize(wbc()->options->get_option('lookup_manager','table_columns',serialize(array())));
+		$table_columns = unserialize(wbc()->options->get_option('sp_lookup_manager','table_columns',serialize(array())));
 
 		if(!empty($table_columns['attribute']) and !empty($table_columns['attribute'][$taxonomy])){
 
 			global $wpdb;
 			require_once( constant('ABSPATH') . '/wp-admin/includes/upgrade.php' );
-			$lookup_table = $wpdb->prefix."wc_product_meta_lookup";
+			/*$lookup_table = $wpdb->prefix."wc_product_meta_lookup";*/
+			$lookup_table = $wpdb->prefix."sp_product_lookup";
 
 			if($wpdb->get_var("SHOW COLUMNS FROM `".$lookup_table."` LIKE '".$taxonomy."'" ) == $taxonomy) {
 
@@ -341,18 +395,22 @@ class Lookup_Manager {
 		}
 	}
 
-	public function remove_category_column($term, $tt_id, $taxonomy, $deleted_term, $object_ids )
-	{
+	public function remove_category_column($term, $tt_id, $taxonomy, $deleted_term, $object_ids ) {
+		
+		$this->check_table();
+
 		if($taxonomy == 'product_cat' and !empty($deleted_term) and !is_wp_error($deleted_term) ){
 			
-			$table_columns = unserialize(wbc()->options->get_option('lookup_manager','table_columns',serialize(array())));
+			//$table_columns = unserialize(wbc()->options->get_option('lookup_manager','table_columns',serialize(array())));
+			$table_columns = unserialize(wbc()->options->get_option('sp_lookup_manager','table_columns',serialize(array())));
 			$term_slug = $deleted_term->slug;
 
 			if(!empty($table_columns['category']) and !empty($table_columns['category'][$term_slug])){
 
 				global $wpdb;
 				require_once( constant('ABSPATH') . '/wp-admin/includes/upgrade.php' );
-				$lookup_table = $wpdb->prefix."wc_product_meta_lookup";
+				/*$lookup_table = $wpdb->prefix."wc_product_meta_lookup";*/
+				$lookup_table = $wpdb->prefix."sp_product_lookup";
 
 				if($wpdb->get_var("SHOW COLUMNS FROM `".$lookup_table."` LIKE '".$term_slug."'" ) == $term_slug) {
 
