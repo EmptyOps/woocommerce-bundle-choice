@@ -470,7 +470,7 @@ class Eowbc_Sample_Data {
         						update_post_meta( $variation_id, 'attribute_'.$taxonomy, $term_slug->slug );	
         					}				
 						}						
-						WC_Product_Variable::sync($parent_id);
+						\WC_Product_Variable::sync($parent_id);
 					}
 
 				    $variation_obj->save(); // Save the data

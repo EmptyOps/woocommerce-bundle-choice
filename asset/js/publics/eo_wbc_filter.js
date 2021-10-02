@@ -26,8 +26,12 @@ function eo_wbc_filter_render_html(data,render_container) {
 
 	jQuery("#loading").removeClass('loading');
 	//Replace Result Count Status...
-	if(jQuery('.woocommerce-result-count',jQuery(data)).html()!==undefined){								
-		jQuery(".woocommerce-result-count").html(jQuery('.woocommerce-result-count',jQuery(data)).html());
+	if(jQuery('.woocommerce-result-count',jQuery(data)).html()!==undefined){
+		if(jQuery(".woocommerce-result-count").length>0){
+			jQuery(".woocommerce-result-count").html(jQuery('.woocommerce-result-count',jQuery(data)).html());
+		} else {
+			jQuery(jQuery('.woocommerce-result-count',jQuery(render_data)).get(0).outerHTML).insertBefore('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products');
+		}
 	}
 	else {
 		jQuery(".woocommerce-result-count").html('');	
