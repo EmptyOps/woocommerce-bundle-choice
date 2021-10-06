@@ -1271,14 +1271,21 @@ class EOWBC_Filter_Widget {
 				$field_title=empty($title)?$term->name:$title;
 				$field_slug=$term->slug;
 				//////////////////////////////////////////////////////////
-				$term = wbc()->wc->get_term_by('id',apply_filters( 'wpml_object_id',$id,'category', FALSE, 'en'),'product_cat');
-				$term_list = wbc()->wc->get_terms(apply_filters( 'wpml_object_id',$id,'category', FALSE, 'en'),'menu_order');
+				//$term = wbc()->wc->get_term_by('id',apply_filters( 'wpml_object_id',$id,'category', FALSE, 'en'),'product_cat');
+				//$term_list = wbc()->wc->get_terms(apply_filters( 'wpml_object_id',$id,'category', FALSE, 'en'),'menu_order');
 				////////////////////////////////////////////////////////
 				$taxonomies=get_terms(array('taxonomy'=>wc_attribute_taxonomy_name_by_id($term->id),'hide_empty'=>false));
 				//var_dump($taxonomies);
 
+
+
 				echo "<pre>";
-				print_r(wbc()->wc->get_terms($term->id,'menu_order',$term->slug);
+
+				print_r(wc_get_attribute_taxonomy_ids());
+
+				die();
+
+				print_r(wbc()->wc->get_terms($term->id,'menu_order',$term->slug));
 				echo "</pre>";
 
 				if(is_wp_error($taxonomies)){
