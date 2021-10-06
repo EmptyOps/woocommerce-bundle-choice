@@ -180,7 +180,7 @@ function eo_wbc_filter_render_html(data,render_container) {
 			ajax_url = site_url+'/?'+eo_wbc_object.eo_cat_query;
 		}
 
-		console.log(eo_wbc_object);
+		/*console.log(eo_wbc_object);*/
 		jQuery.ajax({
 			url: ajax_url,//form.attr('action'),
 			data:form.serialize(), // form data

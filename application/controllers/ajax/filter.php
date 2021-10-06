@@ -316,7 +316,7 @@ class Filter
 		
 		if(!empty(wbc()->sanitize->get('eo_wbc_filter'))) {
 						
-		    add_filter('pre_get_posts',function($query ) {		    		
+		    add_filter('pre_get_posts',function($query ) {
 
 		    	$_GET = apply_filters('filter_widget_ajax_pre_get',$_GET);		        	
 		    	

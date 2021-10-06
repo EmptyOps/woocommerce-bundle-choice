@@ -426,8 +426,7 @@ class EOWBC_Filter_Widget {
 				?>
 				<script type="text/javascript">
 					jQuery.fn.wbc_flip_toggle_image=function(element){
-						let img = jQuery(element).find('img');
-						console.log(img);
+						let img = jQuery(element).find('img');						
 						if(jQuery(element).hasClass('eo_wbc_filter_icon_select')) {
 							let toggle_src = jQuery(img).attr('data-toggleimgsrc');
 							if((typeof(toggle_src)!==typeof(undefined)) && toggle_src.trim()!==''){
