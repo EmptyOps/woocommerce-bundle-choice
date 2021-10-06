@@ -59,9 +59,7 @@ class Filter
 
     	/*$table_columns = unserialize(wbc()->options->get_option('lookup_manager','table_columns',serialize(array())));*/
     	$table_columns = unserialize(wbc()->options->get_option('sp_lookup_manager','table_columns',serialize(array())));
-
-    	
-
+		
     	/*echo "<pre>";
     	print_r($table_columns);
     	echo "</pre>";
@@ -95,7 +93,7 @@ class Filter
 					//echo $_category.PHP_EOL;
 
 					if(isset($_REQUEST['cat_filter_'.$_category]) && (!empty(wbc()->sanitize->request('cat_filter_'.$_category))) ) {
-						
+
 						$result_false = false;
 												
 						foreach ( array_filter(explode(',',wbc()->sanitize->request('cat_filter_'.$_category))) as $_category_field_index=>$_category_field) {
@@ -127,7 +125,7 @@ class Filter
 
 							
 						}
-
+												
 						if(empty($category_fields) and $result_false === true){							
 							return array();
 						}
@@ -287,7 +285,10 @@ class Filter
 
         global $wpdb;
         $lookup_table = $wpdb->prefix."sp_product_lookup";
-                        
+        
+        /*echo "SELECT `product_id`,`parent_id` FROM `{$lookup_table}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql}";;
+        die();*/
+
         if($return_query) {
         	return "SELECT `product_id`,`parent_id` FROM `{$lookup_table}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql}";
         }
@@ -328,7 +329,7 @@ class Filter
    		        if( $query->is_main_query() and !empty($query->query_vars['product_cat'])) {
 
 		        	if( version_compare( constant('WC_VERSION'), '3.6' ) >=0) {
-
+		        		
 		        		$ids = $this->lookup();		        		
 
 		        		if(!empty($ids)) {

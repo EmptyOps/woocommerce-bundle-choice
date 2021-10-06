@@ -36,9 +36,9 @@ function eo_wbc_filter_render_html(data,render_container) {
 
 	let container_html = jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products',jQuery(data)).html();	
 	
-	if(container_html===undefined || container_html==='') {
+	/*if(container_html===undefined || container_html==='') {
 		container_html = jQuery(jQuery(data),'.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products').html();
-	}
+	}*/
 
 	if(container_html===undefined || container_html==='') {
 		container_html = jQuery(".elementor-products-grid",jQuery(data)).html();
