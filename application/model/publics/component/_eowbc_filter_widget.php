@@ -1262,31 +1262,14 @@ class EOWBC_Filter_Widget {
 
 		if ($filter_type) {
 			
-			$term=wbc()->wc->eo_wbc_get_attribute( str_replace('pa_','',$id) );	
-
-			var_dump($term);
+			$term=wbc()->wc->eo_wbc_get_attribute( str_replace('pa_','',$id) );			
 
 			if(!empty($term) && !is_wp_error($term)) {
 
 				$field_title=empty($title)?$term->name:$title;
 				$field_slug=$term->slug;
-				//////////////////////////////////////////////////////////
-				//$term = wbc()->wc->get_term_by('id',apply_filters( 'wpml_object_id',$id,'category', FALSE, 'en'),'product_cat');
-				//$term_list = wbc()->wc->get_terms(apply_filters( 'wpml_object_id',$id,'category', FALSE, 'en'),'menu_order');
-				////////////////////////////////////////////////////////
+
 				$taxonomies=get_terms(array('taxonomy'=>wc_attribute_taxonomy_name_by_id($term->id),'hide_empty'=>false));
-				//var_dump($taxonomies);
-
-
-
-				echo "<pre>";
-
-				print_r(wc_get_attribute_taxonomy_ids());
-
-				die();
-
-				print_r(wbc()->wc->get_terms($term->id,'menu_order',$term->slug));
-				echo "</pre>";
 
 				if(is_wp_error($taxonomies)){
 
@@ -1355,8 +1338,6 @@ class EOWBC_Filter_Widget {
 
 		$tab_set = (!empty( $item[$__prefix.'_fconfig_set'] )?$item[$__prefix.'_fconfig_set']:'');
 
-		
-
 		$id = $name;
 		$title = $label;
 		$filter_type = $type;
@@ -1379,7 +1360,7 @@ class EOWBC_Filter_Widget {
 		if(empty($label_max_size)){
 			$label_max_size = "";
 		}
-		
+
 		if(empty($filter)) return false;
 		
 		$items_name=wbc()->common->array_column($filter['list'],'name');			
