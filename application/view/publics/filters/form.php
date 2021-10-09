@@ -182,18 +182,21 @@ if(empty($_per_page)){
 
 	<input type="hidden" name="_attribute" id="eo_wbc_attr_query" value="<?php echo implode(',',$queried_attributes); ?>" />
 </form>
+
+
+
 <?php if(apply_filters('eowbc_enque_filter_js',call_user_func('__return_true'))): ?>
 <br/>
+
 	<?php do_action('eowbc_post_filter_form'); ?>
-	<?php add_action('wp_footer',function() { ?>
+	<?php add_action('wp_footer',function() use($thisObj){ ?>
 
 		<script type="text/javascript">
 			jQuery(function(){
 
 			});
-		</script>
-
-		<?php do_action('eowbc_post_filter_javascript',$filter_ui); ?>
+		</script>		
+		<?php do_action('eowbc_post_filter_javascript',$thisObj); ?>
 
 		<script type="text/javascript">		
 
@@ -238,7 +241,7 @@ if(empty($_per_page)){
 									let _label_max_length = parseInt(jQuery(e).data('label_max_size'));
 
 									if((typeof(_label_max_length)==typeof(undefined)) || _label_max_length==""){
-										_label_max_length = <?php _e((int)wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_slider_max_lblsize',6)) ?>;
+										_label_max_length = <?php _e((int)wbc()->options->get_option('filters_'.$thisObj->__prefix.'filter_setting','filter_setting_slider_max_lblsize',6)) ?>;
 									}								
 
 									if(_label_value.length>_label_max_length){
@@ -389,7 +392,7 @@ if(empty($_per_page)){
 						    	}
 						    	jQuery('[name="paged"]').val('1');
 						    	<?php if(empty(wbc()->options->get_option('filters_'.(empty($filter_prefix)?'':$filter_prefix).'filter_setting','filter_setting_btnfilter_now'))): ?>
-						    	jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':new Event('change',this)});
+						    	jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $thisObj->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':new Event('change',this)});
 
 						    	<?php endif; ?>
 						    } else if( min==_min && max==_max ){
@@ -615,8 +618,8 @@ if(empty($_per_page)){
 				    		}
 				    	}
 				    	jQuery('[name="paged"]').val('1');
-				    	<?php if(empty(wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
-				    	jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
+				    	<?php if(empty(wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
+				    	jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $thisObj->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
 				    	<?php endif; ?>
 					}});				
 				}

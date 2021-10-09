@@ -278,18 +278,31 @@ class Eowbc_Related_Mapping /*extends Eowbc_Model*/ {
 	}	
 
 
-	public function related_mapping($prefix='',$limit=3) {
-				
-		$map = unserialize(wbc()->options->get_option_group($prefix.'_map_master'));
-
-		$map = apply_filters($prefix.'_map_master',$map);
+	public function related_mapping($prefix='',$limit=3,$override_product_id = false, $override_map = array(),$exception) {
 		
-		if(empty(wbc()->sanitize->post('product_id'))){
-			return array();
-		}		
+		$map = array();
 
-  		$product = wc_get_product(wbc()->sanitize->post('product_id'));
-  		
+		if(empty($override_map)){
+			$map = unserialize(wbc()->options->get_option_group($prefix.'_map_master'));
+
+			$map = apply_filters($prefix.'_map_master',$map);
+		} else {
+			$map = $override_map;
+		}
+		
+		$product = false;
+
+		if(empty($override_product_id)){
+
+			if(empty(wbc()->sanitize->post('product_id'))){
+				return array();
+			}		
+
+  			$product = wc_get_product(wbc()->sanitize->post('product_id'));
+  		} else {
+  			$product = wc_get_product(intval($override_product_id));
+  		}
+
   		if( empty($product) or is_wp_error($product) ) {
 			return array();
 		}		
@@ -400,6 +413,7 @@ class Eowbc_Related_Mapping /*extends Eowbc_Model*/ {
   						$range_list = $this->get_range_terms($map_value['first_term_attribute'],$default_attributes['pa_'.$map_value['first_term_attribute']],$map_value['second_term_upper_limit'],$map_value['second_term_down_limit']);
 
   						if(!empty($range_list)){
+
   							$tax_query[]=array(
                                     'relation' => 'AND',
                                     array(
@@ -502,11 +516,8 @@ class Eowbc_Related_Mapping /*extends Eowbc_Model*/ {
   		}
 
   		// mahesh@emptyops.com -- 12-08-2021 -- all products except this one.
-  		$args['post__not_in'] = array($product->get_id());
-
-  		/*echo "<pre>";
-  		print_r($args);
-  		echo "</pre>";*/
+  		$args['post__not_in'] = array_unique( array_merge($exception,[$product->get_id()]) );
+  		
 
   		$query = new \WP_Query( $args );
   		$products_list = array();
@@ -522,11 +533,15 @@ class Eowbc_Related_Mapping /*extends Eowbc_Model*/ {
 	}
 
 	public function get_range_terms($taxonomy,$term,$upper_limit,$lower_limit) {
+
 		$term = wbc()->wc->get_term_by('slug',$term,'pa_'.$taxonomy);
 		if(!empty($term) and !is_wp_error($term) and is_object($term)){
 			
 		
 			$term_list = get_terms(array('taxonomy'=>'pa_'.$taxonomy,'hide_empty'=>FALSE,'orderby' => 'menu_order'));
+
+
+
 			$formated_term_list = array();
 			if(!empty($term_list) and is_array($term_list)){
 				foreach ($term_list as $term_list_key => $term_list_value) {
@@ -539,9 +554,13 @@ class Eowbc_Related_Mapping /*extends Eowbc_Model*/ {
 				}
 			}
 
+
+
 			if( is_numeric($term->name) ){
 				asort($formated_term_list);
 			}
+
+
 			
 			$term_index = is_numeric($term->name) ? array_search($term->name,$formated_term_list) : array_search($term->slug,$formated_term_list);
 
@@ -558,12 +577,15 @@ class Eowbc_Related_Mapping /*extends Eowbc_Model*/ {
 				$lower_limit = 0;
 			}
 
-
 			$lower_limit_index = $term_index - $lower_limit;
 			$upper_limit_index = $lower_limit + $upper_limit;
 
 			if($lower_limit<0){
-				$lower_limit = 0;
+				$lower_limit = 0;				
+			}
+
+			if($lower_limit_index<0){
+				$lower_limit_index = 0;				
 			}
 
 			$term_list = array_slice($formated_term_list,$lower_limit_index,$upper_limit_index,true);

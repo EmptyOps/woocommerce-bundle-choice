@@ -296,10 +296,10 @@ class Filter
         die();*/
 
         if($return_query) {
-        	return "SELECT SQL_CALC_FOUND_ROWS `product_id`,`parent_id` FROM `{$lookup_table}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql} LIMIT ${current_page},${per_page}";
+        	return "SELECT SQL_CALC_FOUND_ROWS `product_id`,`parent_id` FROM `{$lookup_table}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql} GROUP BY(`parent_id`) LIMIT ${current_page},${per_page}";
         }
        
-        $result = $wpdb->get_results("SELECT SQL_CALC_FOUND_ROWS `product_id`,`parent_id` FROM `{$lookup_table}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql} LIMIT ${current_page},${per_page}",'ARRAY_N');
+        $result = $wpdb->get_results("SELECT SQL_CALC_FOUND_ROWS `product_id`,`parent_id` FROM `{$lookup_table}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql} GROUP BY(`parent_id`) LIMIT ${current_page},${per_page}",'ARRAY_N');
 
         $result_count = ($wpdb->get_var('SELECT FOUND_ROWS()'));
 
@@ -309,7 +309,7 @@ class Filter
         if(!empty($result) and !is_wp_error($result)){
 
         	foreach ($result as $value) {
-        		$pids[] = $value[0]/*empty($value[1])?$value[0]:$value[1]*/; 
+        		$pids[] = $value[1]/*empty($value[1])?$value[0]:$value[1]*/; 
         	}
         }
 
@@ -342,8 +342,9 @@ class Filter
 		        		
 		        		$ids = $this->lookup();
 
-		        		$ids = $ids['pids'];
 		        		$result_count = $ids['result_count'];
+		        		$ids = $ids['pids'];
+		        		
 
 		        		/*echo "<pre>";
 		        		print_r($ids);

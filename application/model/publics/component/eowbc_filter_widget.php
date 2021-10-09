@@ -999,7 +999,7 @@ class EOWBC_Filter_Widget {
 			            /*),
 					'SECOND'=>(*/
 		                /*$this->_category==wbc()->options->get_option('configuration','second_slug')
->>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
+					>>>>>>> c3dc42e4fb97d6ae1ea0920712ac0ec198116dc4
 			                    ?
 			                ''
 			                    :*/
