@@ -65,8 +65,8 @@ class Filter
     	echo "</pre>";
     	die();*/
 
-        if(empty($table_columns)){
-        	return array();
+        if(empty($table_columns)){        	
+        	return ['pids'=>array(),'result_count'=>0];
         }
 
     	if(isset($_REQUEST['products_in']) AND !empty(wbc()->sanitize->request('products_in')) ) {
@@ -95,7 +95,11 @@ class Filter
 					if(isset($_REQUEST['cat_filter_'.$_category]) && (!empty(wbc()->sanitize->request('cat_filter_'.$_category))) ) {
 
 						$result_false = false;
-												
+						
+						/*var_dump('LOL');
+						var_dump(array_filter(explode(',',wbc()->sanitize->request('cat_filter_'.$_category))));
+						die();*/
+
 						foreach ( array_filter(explode(',',wbc()->sanitize->request('cat_filter_'.$_category))) as $_category_field_index=>$_category_field) {
 						
 							$_category_field_chunk = array_filter(explode('+',$_category_field));
@@ -121,13 +125,11 @@ class Filter
 								}
 							} else {
 								$result_false = true;
-							}
-
-							
+							}							
 						}
-												
-						if(empty($category_fields) and $result_false === true){							
-							return array();
+																		
+						if(empty($category_fields) and $result_false === true){
+							return ['pids'=>array(),'result_count'=>0];
 						}
                     }
 				}        		
@@ -295,22 +297,24 @@ class Filter
         /*echo "SELECT SQL_CALC_FOUND_ROWS `product_id`,`parent_id` FROM `{$lookup_table}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql} LIMIT ${current_page},${per_page}";
         die();*/
 
+        /*"SELECT SQL_CALC_FOUND_ROWS `product_id`,`parent_id` FROM `{$lookup_table}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql} GROUP BY(`parent_id`) LIMIT ${current_page},${per_page}"*/
+
         if($return_query) {
-        	return "SELECT SQL_CALC_FOUND_ROWS `product_id`,`parent_id` FROM `{$lookup_table}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql} GROUP BY(`parent_id`) LIMIT ${current_page},${per_page}";
+        	return "SELECT SQL_CALC_FOUND_ROWS `product_id`,`parent_id` FROM `{$lookup_table}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql} LIMIT ${current_page},${per_page}";
         }
        
-        $result = $wpdb->get_results("SELECT SQL_CALC_FOUND_ROWS `product_id`,`parent_id` FROM `{$lookup_table}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql} GROUP BY(`parent_id`) LIMIT ${current_page},${per_page}",'ARRAY_N');
+        $result = $wpdb->get_results("SELECT SQL_CALC_FOUND_ROWS `product_id`,`parent_id` FROM `{$lookup_table}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql}  LIMIT ${current_page},${per_page}",'ARRAY_N');
 
         $result_count = ($wpdb->get_var('SELECT FOUND_ROWS()'));
 
         /*SQL_CALC_FOUND_ROWS*/
-        
-
+       	$pids = array();
         if(!empty($result) and !is_wp_error($result)){
-
+        	
         	foreach ($result as $value) {
-        		$pids[] = $value[1]/*empty($value[1])?$value[0]:$value[1]*/; 
-        	}
+
+        		$pids[] = (empty($value[1])?$value[0]:$value[1]); 
+        	}        	
         }
 
 		$pids = array_unique($pids);		
@@ -341,15 +345,25 @@ class Filter
 		        	if( version_compare( constant('WC_VERSION'), '3.6' ) >=0) {
 		        		
 		        		$ids = $this->lookup();
-
+		        		
 		        		$result_count = $ids['result_count'];
 		        		$ids = $ids['pids'];
-		        		
-
-		        		/*echo "<pre>";
-		        		print_r($ids);
-		        		print_r($result_count);
+						
+						/*var_dump(is_ajax());
+		        		var_dump(defined('WP_AJAX'));
 		        		die();*/
+
+						if(!empty(wbc()->sanitize->get('eo_wbc_filter'))) {
+
+							
+							$GLOBALS['wp_query']->max_num_pages = ceil($result_count / wc_get_loop_prop('per_page') );
+
+							var_dump($GLOBALS['wp_query']->max_num_pages);
+							
+							
+							echo do_shortcode('[products ids="'.implode(',',$ids).'" class="eowbc_ajax" paginate="true"]');
+							die();
+						}
 
 		        		$query->set('post_type',array('product', 'product_variation'));
 		        		
@@ -358,9 +372,15 @@ class Filter
 				        } else {
 				        	$query->set('post__in',array(-1));
 				        }
-						/*echo "<pre>";
-				        print_r($query);
-				        echo "</pre>";*/
+						
+				        unset($_GET['min_price']);
+				        unset($_GET['max_price']);
+				        unset($_POST['min_price']);
+				        unset($_POST['max_price']);
+				        unset($_REQUEST['min_price']);
+				        unset($_REQUEST['max_price']);
+
+						$query->set('tax_query',array());
 
 				        //return $query;	
 
@@ -604,7 +624,6 @@ class Filter
 
 			        	}
 			        }		        		        
-
 			        return apply_filters('filter_widget_ajax_post_query',$query);
 			    }
 
