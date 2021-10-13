@@ -354,12 +354,14 @@ class Filter
 		        		die();*/
 
 						if(!empty(wbc()->sanitize->get('eo_wbc_filter'))) {
-
 							
-							$GLOBALS['wp_query']->max_num_pages = ceil($result_count / wc_get_loop_prop('per_page') );
+							add_filter('woocommerce_shortcode_products_query_results',function($results) use($result_count) {
 
-							var_dump($GLOBALS['wp_query']->max_num_pages);
-							
+								wc_set_loop_prop('total',$result_count);
+								
+								$results->total_pages = ceil($result_count / wc_get_loop_prop('per_page') );
+								return $results;								
+							});
 							
 							echo do_shortcode('[products ids="'.implode(',',$ids).'" class="eowbc_ajax" paginate="true"]');
 							die();
