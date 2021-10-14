@@ -293,7 +293,7 @@ jQuery(document).ready(function($){
 		//changes: mahesh@emptyops.com
 		// To prevent initila call for the ajax -- speed optimization -- stop ajax at init load;
 		if(typeof(eo_wbc_e_tabview)===typeof(undefined) || typeof(eo_wbc_e_tabview.init_data)===typeof(undefined) || typeof(eo_wbc_object)==typeof(eo_wbc_object) ){
-			jQuery.fn.eo_wbc_filter_change(true);
+			//jQuery.fn.eo_wbc_filter_change(true);
 		}
 
 		//jQuery.fn.eo_wbc_filter_change(true);

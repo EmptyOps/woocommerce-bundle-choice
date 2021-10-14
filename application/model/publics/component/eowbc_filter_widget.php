@@ -241,9 +241,11 @@ class EOWBC_Filter_Widget {
 					.ui.images {
 						font-size: 1em !important; 
 					}					
-					.products{
+					
+					/*.products{
 						visibility: hidden;
-					}
+					}*/
+
 					.product-listing{
 						visibility: hidden;
 					}

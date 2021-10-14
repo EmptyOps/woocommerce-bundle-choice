@@ -190,12 +190,7 @@ if(empty($_per_page)){
 
 	<?php do_action('eowbc_post_filter_form'); ?>
 	<?php add_action('wp_footer',function() use($thisObj){ ?>
-
-		<script type="text/javascript">
-			jQuery(function(){
-
-			});
-		</script>		
+			
 		<?php do_action('eowbc_post_filter_javascript',$thisObj); ?>
 
 		<script type="text/javascript">		

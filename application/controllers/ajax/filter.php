@@ -60,11 +60,6 @@ class Filter
     	/*$table_columns = unserialize(wbc()->options->get_option('lookup_manager','table_columns',serialize(array())));*/
     	$table_columns = unserialize(wbc()->options->get_option('sp_lookup_manager','table_columns',serialize(array())));
 		
-    	/*echo "<pre>";
-    	print_r($table_columns);
-    	echo "</pre>";
-    	die();*/
-
         if(empty($table_columns)){        	
         	return ['pids'=>array(),'result_count'=>0];
         }
@@ -95,11 +90,7 @@ class Filter
 					if(isset($_REQUEST['cat_filter_'.$_category]) && (!empty(wbc()->sanitize->request('cat_filter_'.$_category))) ) {
 
 						$result_false = false;
-						
-						/*var_dump('LOL');
-						var_dump(array_filter(explode(',',wbc()->sanitize->request('cat_filter_'.$_category))));
-						die();*/
-
+												
 						foreach ( array_filter(explode(',',wbc()->sanitize->request('cat_filter_'.$_category))) as $_category_field_index=>$_category_field) {
 						
 							$_category_field_chunk = array_filter(explode('+',$_category_field));
@@ -134,7 +125,6 @@ class Filter
                     }
 				}        		
         	} 
-        
         	
         	if(!empty(wbc()->sanitize->request('_category_query')) and empty(wbc()->sanitize->request('CAT_LINK'))) {
         		$_category_query = array_filter(explode(',',wbc()->sanitize->request('_category_query')));
@@ -205,9 +195,18 @@ class Filter
             }
         }
 
-
         if(empty($category_fields)){
-        	$category_fields = 1;
+        	if(empty(wbc()->sanitize->get('eo_wbc_filter'))) {
+
+        		$current_category_page = get_queried_object();
+        		if(!empty($current_category_page) and property_exists($current_category_page,'slug')) {
+					$category_fields ='(`'.$current_category_page->slug.'` != 0)';
+        		} else {
+        			$category_fields = 1;	
+        		}				
+        	} else {
+        		$category_fields = 1;
+        	}
         } else {
         	$field_query_and = array();
 
@@ -292,13 +291,13 @@ class Filter
         die();*/
 
         $per_page = (wc_get_default_products_per_row() * wc_get_default_product_rows_per_page());
-        $current_page = empty($_REQUEST['paged'])?1:$_REQUEST['paged'];
+        $current_page = ((empty($_REQUEST['paged'])?1: str_replace(',','',$_REQUEST['paged']))-1)*$per_page;
 
         /*echo "SELECT SQL_CALC_FOUND_ROWS `product_id`,`parent_id` FROM `{$lookup_table}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql} LIMIT ${current_page},${per_page}";
         die();*/
 
         /*"SELECT SQL_CALC_FOUND_ROWS `product_id`,`parent_id` FROM `{$lookup_table}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql} GROUP BY(`parent_id`) LIMIT ${current_page},${per_page}"*/
-
+       	        
         if($return_query) {
         	return "SELECT SQL_CALC_FOUND_ROWS `product_id`,`parent_id` FROM `{$lookup_table}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql} LIMIT ${current_page},${per_page}";
         }
@@ -328,9 +327,35 @@ class Filter
 
 	public function filter() {
 
-		
 		if(!empty(wbc()->sanitize->get('eo_wbc_filter'))) {
-						
+			
+			
+
+
+			if(empty($_REQUEST['paged'])) {
+
+				if(empty($_REQUEST['product-page'])) {
+					$_REQUEST['paged'] = 1;
+					$_POST['paged'] = 1;
+					$_GET['paged'] = 1;
+				} else {
+
+					$_REQUEST['paged'] = $_REQUEST['product-page'];
+					$_POST['paged'] = $_REQUEST['product-page'];
+					$_GET['paged'] = $_REQUEST['product-page'];
+				}
+			} else {
+				$_REQUEST['paged'] = str_replace(',','',$_REQUEST['paged']);
+
+				$_REQUEST['product-page'] = $_REQUEST['paged'];
+				$_POST['product-page'] = $_REQUEST['paged'];
+				$_GET['product-page'] = $_REQUEST['paged'];
+			}
+
+			/*add_action('woocommerce_after_shop_loop',function(){
+				die();
+			});*/
+
 		    add_filter('pre_get_posts',function($query ) {
 
 		    	$_GET = apply_filters('filter_widget_ajax_pre_get',$_GET);		        	
@@ -349,22 +374,31 @@ class Filter
 		        		$result_count = $ids['result_count'];
 		        		$ids = $ids['pids'];
 						
-						/*var_dump(is_ajax());
-		        		var_dump(defined('WP_AJAX'));
-		        		die();*/
 
-						if(!empty(wbc()->sanitize->get('eo_wbc_filter'))) {
+						if(!empty(wbc()->sanitize->get('eo_wbc_filter')) and !empty($ids)) {
 							
 							add_filter('woocommerce_shortcode_products_query_results',function($results) use($result_count) {
 
-								wc_set_loop_prop('total',$result_count);
 								
+								$results->total = $result_count;
 								$results->total_pages = ceil($result_count / wc_get_loop_prop('per_page') );
+								$results->current = (empty($_REQUEST['paged'])?1:str_replace(',','',$_REQUEST['paged']));
+								$results->per_page = wc_get_loop_prop('per_page');
+
+								wc_set_loop_prop('total',$result_count);
+								wc_set_loop_prop('total_pages',ceil($result_count / wc_get_loop_prop('per_page') ));
+								wc_set_loop_prop('current',(empty($_REQUEST['paged'])?1:str_replace(',','',$_REQUEST['paged'])));
+								wc_set_loop_prop('per_page',wc_get_loop_prop('per_page'));
 								return $results;								
 							});
 							
 							echo do_shortcode('[products ids="'.implode(',',$ids).'" class="eowbc_ajax" paginate="true"]');
 							die();
+						} else {
+
+							wc_set_loop_prop( 'total', $result_count );
+							wc_set_loop_prop('total_pages',ceil($result_count / wc_get_loop_prop('per_page') ));
+							wc_set_loop_prop('current',(empty($_REQUEST['paged'])?1:str_replace(',','',$_REQUEST['paged'])));							
 						}
 
 		        		$query->set('post_type',array('product', 'product_variation'));
