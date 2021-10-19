@@ -63,9 +63,18 @@ if(!empty($attributes) and is_array($attributes)){
 			onChange:function() {
 				let filter_field = $(this).dropdown('get value');
 				if(filter_field!==''){
-					if(_childs.hasOwnProperty(filter_field)) {
+					//if(_childs.hasOwnProperty(filter_field)) {
+					if(_childs.hasOwnProperty(filter_field) || _childs.hasOwnProperty('pa_'+filter_field)) {
+
+						let _child_data = false ;
+						if(_childs.hasOwnProperty(filter_field)){
+							_child_data = _childs[filter_field];
+						} else if(_childs.hasOwnProperty('pa_'+filter_field)) {
+							_child_data = _childs['pa_'+filter_field];
+						}
 						let html = '';
-						jQuery.each(_childs[filter_field],function(index,item) {
+						//jQuery.each(_childs[filter_field],function(index,item) {
+						jQuery.each(_child_data,function(index,item) {
 						    html+='<div class="item" data-value="'+index+'">'+item+'</div>';
 						});
 						jQuery(".ui.dropdown:has(#d_fconfig_elements)").find(".menu").html(html);
@@ -81,9 +90,18 @@ if(!empty($attributes) and is_array($attributes)){
 				onChange:function() {
 					let filter_field = $(this).dropdown('get value');
 					if(filter_field!==''){
-						if(_childs.hasOwnProperty(filter_field)) {
+						//if(_childs.hasOwnProperty(filter_field)) {
+						if(_childs.hasOwnProperty(filter_field) || _childs.hasOwnProperty('pa_'+filter_field)) {
+
+							let _child_data = false ;
+							if(_childs.hasOwnProperty(filter_field)){
+								_child_data = _childs[filter_field];
+							} else if(_childs.hasOwnProperty('pa_'+filter_field)) {
+								_child_data = _childs['pa_'+filter_field];
+							}
 							let html = '';
-							jQuery.each(_childs[filter_field],function(index,item) {
+							//jQuery.each(_childs[filter_field],function(index,item) {
+							jQuery.each(_child_data,function(index,item) {
 							    html+='<div class="item" data-value="'+index+'">'+item+'</div>';
 							});
 							jQuery(".ui.dropdown:has(#s_fconfig_elements)").find(".menu").html(html);
