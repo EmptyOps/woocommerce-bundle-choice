@@ -423,6 +423,14 @@ class Eowbc_Sample_Data {
 					set_post_thumbnail( $product_id,$img_id );
 				}
 
+				if($product['type']==='simple'){
+					
+					update_post_meta( $product_id, '_regular_price',$product['regular_price'] );
+					update_post_meta( $product_id, '_price', $product['regular_price']);						
+					update_post_meta( $product_id, '_sales_price', $product['sale_price']);
+					update_post_meta( $product_id, '_manage_stock','no' );
+				}
+
 				$parent_id = $product_id;
 
 				foreach ($product['variation'] as $var_index => $variation) {						

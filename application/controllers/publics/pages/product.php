@@ -50,9 +50,20 @@ class Product {
             if(!empty(wbc()->sanitize->get('eo_wbc_add_to_cart_preview'))) {                
                 $this->add2cart();
                 $cart_url = wbc()->wc->eo_wbc_get_cart_url();
+                
                 do_action('sp_wbc_after_add2cart_redirect');
                 if(strpos($cart_url,'?')!==false){
+                    $cart_url_parts = explode('?', $cart_url);
                     $cart_url = explode('?', $cart_url)[0];
+                    
+                    if (!empty($cart_url_parts[1])) {
+                        $url_params = false;
+                        parse_str( $cart_url_parts[1],$url_params );
+                        
+                        if(!empty($url_params['lang'])) {
+                            $cart_url.='?lang='.$url_params['lang'];
+                        }
+                    }
                 }
                 
                 exit(wp_redirect($cart_url));
