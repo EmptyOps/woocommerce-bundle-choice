@@ -163,7 +163,7 @@ class Lookup_Manager {
 			$table_columns['category'] = array();
 		}
 
-		$additional_columns = ['sku','virtual','downloadable','min_price','max_price','onsale','stock_quantity','stock_status','rating_count','average_rating','total_sales','tax_status','tax_class'];
+		$additional_columns = ['sku','virtual','downloadable','min_price','max_price','onsale','stock_quantity','stock_status','rating_count','average_rating','total_sales','tax_status','tax_class','id'];
 		if(!empty($additional_columns)) {
 			foreach ($additional_columns as $additional_column) {
 
@@ -254,6 +254,12 @@ class Lookup_Manager {
 
 		if(!empty($parent_id) and is_numeric($parent_id)) {
 			$fields['parent_id'] = $parent_id;
+			$fields_type[] = '%d';
+
+			$fields['id'] = $parent_id;
+			$fields_type[] = '%d';
+		} else {
+			$fields['id'] = $id;
 			$fields_type[] = '%d';
 		}
 		

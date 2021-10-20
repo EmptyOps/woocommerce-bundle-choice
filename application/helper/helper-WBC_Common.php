@@ -20,13 +20,35 @@ class WBC_Common {
 		$return_category = '';
 		if($page == 'category' ) {
 			global $wp_query;
-			if(empty($wp_query->get_queried_object()) or !property_exists($wp_query->get_queried_object(),'term_id')) {
+			if( (empty($wp_query->get_queried_object()) or !property_exists($wp_query->get_queried_object(),'term_id') ) and empty($_REQUEST['product_cat']) ) {
 				return false;
 			}
+
 			if(!empty($in_category) and is_array($in_category)) {
-				$term_slug=array_map(array(wbc()->wp,"cat_id2slug"),get_ancestors($wp_query->get_queried_object()->term_id, 'product_cat'));				
-				$term_slug[]=$wp_query->get_queried_object()->slug;					
+
+				$queried_object_id = false;
+				if(!empty($wp_query->get_queried_object())) {
+					$queried_object_id = $wp_query->get_queried_object()->term_id;
+				} else {
+					$queried_object_slug = explode(',', $_REQUEST['product_cat'] );
+					$queried_object = get_term_by('slug',\current($queried_object_slug),'product_cat');
+					if(!empty($queried_object) and !is_wp_error($queried_object)) {
+						$queried_object_id = $queried_object->term_id;
+					} else {
+						return false;
+					}
+				}
+
+				$term_slug=array_map(array(wbc()->wp,"cat_id2slug"),get_ancestors($queried_object_id,'product_cat'));
+				
+				if(!empty($wp_query->get_queried_object())) {
+					$term_slug[]=$wp_query->get_queried_object()->slug;	
+				} else {
+					$term_slug[]=current(explode(',', $_REQUEST['product_cat'] ));
+				}
+
 				$matches = array_intersect($in_category,$term_slug);				
+
 				if(!empty($matches) and is_array($matches)){
 					$matches = array_values($matches);					
 					$return_category = $matches[0];

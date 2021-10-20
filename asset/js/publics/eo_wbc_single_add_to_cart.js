@@ -4,7 +4,7 @@ jQuery(document).ready(function(){
 		e.stopPropagation();
 		e.preventDefault();
 		//console.log("LOG : "+eo_wbc_object.url+'&CART='+window.btoa(form_2_json(jQuery('form.cart'))));
-		window.location.href =eo_wbc_object.url+'&CART='+window.btoa(form_2_json(jQuery('form.cart')));		    			    
+		window.location.href =eo_wbc_object.url+'&CART='+window.btoa(form_2_json(jQuery('form.cart')));
 	});
 });
 
@@ -13,7 +13,7 @@ function form_2_json(form) {
 	var form_data=form.serializeArray();
 	var json={};
 	jQuery.each(form_data,function(){
-		json[this.name]=this.value || '';		
+		json[this.name]=encodeURIComponent(this.value) || '';		
 	});
 	//console.log(json);
 	return JSON.stringify(json);

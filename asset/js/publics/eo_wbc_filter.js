@@ -34,16 +34,16 @@ function eo_wbc_filter_render_html(data,render_container) {
 	
 	/*console.log(data);*/
 
-	let container_html = jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products',jQuery(data)).html();	
-	
+	let container_html = jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products',data).html();	
+		
 	if(container_html===undefined || container_html==='') {
-		container_html = jQuery(jQuery(data),'.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products').html();
+		container_html = jQuery(data,'.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products').html();
 	}
-
+	
 	if(container_html===undefined || container_html==='') {
 		container_html = jQuery(".elementor-products-grid",jQuery(data)).html();
 	}
-
+	
 	if(container_html!==undefined && container_html!=='') {	
 		if( typeof(is_card_view_rendered) == undefined || typeof(is_card_view_rendered) == 'undefined' || is_card_view_rendered == false ) {
 			if(jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products').length<=0) {
@@ -293,7 +293,7 @@ jQuery(document).ready(function($){
 		//changes: mahesh@emptyops.com
 		// To prevent initila call for the ajax -- speed optimization -- stop ajax at init load;
 		if(typeof(eo_wbc_e_tabview)===typeof(undefined) || typeof(eo_wbc_e_tabview.init_data)===typeof(undefined) || typeof(eo_wbc_object)==typeof(eo_wbc_object) ){
-			//jQuery.fn.eo_wbc_filter_change(true);
+			jQuery.fn.eo_wbc_filter_change(true);
 		}
 
 		//jQuery.fn.eo_wbc_filter_change(true);

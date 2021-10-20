@@ -299,10 +299,10 @@ class Filter
         /*"SELECT SQL_CALC_FOUND_ROWS `product_id`,`parent_id` FROM `{$lookup_table}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql} GROUP BY(`parent_id`) LIMIT ${current_page},${per_page}"*/
        	        
         if($return_query) {
-        	return "SELECT SQL_CALC_FOUND_ROWS `product_id`,`parent_id` FROM `{$lookup_table}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql} LIMIT ${current_page},${per_page}";
+        	return "SELECT SQL_CALC_FOUND_ROWS `id` FROM `{$lookup_table}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql} GROUP BY(`id`) LIMIT ${current_page},${per_page}";
         }
        
-        $result = $wpdb->get_results("SELECT SQL_CALC_FOUND_ROWS `product_id`,`parent_id` FROM `{$lookup_table}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql}  LIMIT ${current_page},${per_page}",'ARRAY_N');
+        $result = $wpdb->get_results("SELECT SQL_CALC_FOUND_ROWS `id` FROM `{$lookup_table}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql} GROUP BY(`id`) LIMIT ${current_page},${per_page}",'ARRAY_N');
 
         $result_count = ($wpdb->get_var('SELECT FOUND_ROWS()'));
 
@@ -329,9 +329,6 @@ class Filter
 
 		if(!empty(wbc()->sanitize->get('eo_wbc_filter'))) {
 			
-			
-
-
 			if(empty($_REQUEST['paged'])) {
 
 				if(empty($_REQUEST['product-page'])) {
