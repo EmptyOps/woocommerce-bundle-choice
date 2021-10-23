@@ -456,13 +456,13 @@ if(empty($_per_page)){
 
 					_values= Array();
 					if(jQuery('[name="checklist_'+__slug+'"]').length>0 && typeof(jQuery('[name="checklist_'+__slug+'"]').val()) !== typeof(undefined)){
-						jQuery('[name="checklist_'+__slug+'"]').val().split(',');	
+						_values = jQuery('[name="checklist_'+__slug+'"]').val().split(',');	
 					}				
 
 					if(_values.indexOf(jQuery(this).attr('data-slug'))!=-1){
 
 						_values=jQuery('[name="checklist_'+__slug+'"]').val().split(',');
-						_index=_values.indexOf(jQuery(this).attr('data-slug'));						
+						_index=_values.indexOf(jQuery(this).attr('data-slug'));
 						_values.splice(_index,1);						
 						jQuery('[name="checklist_'+__slug+'"]').val(_values.join());
 
