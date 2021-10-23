@@ -15,7 +15,6 @@ class Controller extends \eo\wbc\controllers\Controller {
 		return self::$_instance;
 	}
 
-
 	/*public function __construct() {
 		
 	}	*/
@@ -75,9 +74,6 @@ class Controller extends \eo\wbc\controllers\Controller {
 	}
 
 	public function generate_form($form,$key='appearence_controls') {
-
-		/*global $render_modules_params;*/
-
 		if(empty($form) or !is_array($form)){
 			return array();
 		}
@@ -90,9 +86,6 @@ class Controller extends \eo\wbc\controllers\Controller {
 		foreach ($form as $form_key => $form_value) {
 			
 			if(!empty($form_value[$key]) and ( empty($this->check_show_on_admin) xor (!empty($form_value[$key][2]) and !empty($form_value[$key][2]['show_on_admin']) ) ) ) {	
-
-				/*if(!empty($form_value[$key])) {	*/
-
 
 				$control_element = array();
 				$excep_controls = array();
@@ -193,8 +186,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 		return $controls;
 	}
 
-
-	// return all appearance control data to be dumped in to json
+		// return all appearance control data to be dumped in to json
 	// format must include `form_control_key` as third array element and the id if necessary.
 	
 	public function generate_json_dump($form,$key='appearence_controls') {
@@ -285,7 +277,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 
 		return $controls;
 	}
-
+	
 	public function get_control_data($form,$key='') {
 		if(empty($form) or !is_array($form) or empty($key)) {
 			return array();
