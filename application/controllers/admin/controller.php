@@ -238,6 +238,10 @@ class Controller extends \eo\wbc\controllers\Controller {
 						$form_control_key = $form_value[$key][2]['form_control_key'];
 					}
 
+					if(empty($form_control_key) and !empty($form_value[$key][2]['control_key'])) {
+						$form_control_key = $form_value[$key][2]['control_key'];
+					}
+
 					foreach ($control_element as $control) {
 
 						if(empty($form_value[$key][2])){
@@ -247,7 +251,8 @@ class Controller extends \eo\wbc\controllers\Controller {
 							if(!empty($form_value[$key][2]['id'])){
 								$control_key = $form_value[$key][2]['id'].'_'.$control;
 							}
-							$controls[$control_key] =  wbc()->options->get_option($form_control_key,$control_key); /*call_user_func_array(array($admin_ui,$control),array($control_key,$form_value[$key][0],$form_value[$key][2]))*/;
+							
+							$controls[$form_key][$control] =  wbc()->options->get_option($form_control_key,$control_key); /*call_user_func_array(array($admin_ui,$control),array($control_key,$form_value[$key][0],$form_value[$key][2]))*/;
 							
 						}
 					}
