@@ -1523,9 +1523,9 @@ class EOWBC_Filter_Widget {
 			$title = $filter['title'];
 		}
 
-		$filter = apply_filters('eowbc_filter_button_terms', $filter,$id,$title,$filter_type,$__prefix,$item);
+		/* to be commented in parag*/
+		//$filter = apply_filters('eowbc_filter_button_terms', $filter,$id,$title,$filter_type,$__prefix,$item);
 		
-
 		if(empty($filter)) return false;
 
 		array_push($this->__filters,array(
@@ -1551,8 +1551,11 @@ class EOWBC_Filter_Widget {
 			} else {
 			
 				wbc()->load->template('publics/filters/button_desktop', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,'tab_set'=>$tab_set,'help'=>$help,'filter_ui'=>$this));
-			}						
+			}
+		elseif(($item['filter_template']==apply_filters('eowbc_filter_prefix',$this->filter_prefix).'theme') or ($item['filter_template'] === 'theme' and ($this->is_shop_cat_filter or $this->is_shortcode_filter))): 
 			
+			wbc()->load->template('publics/filters/theme_button_mobile', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,'help'=>$help,'tab_set'=>$tab_set,'filter_ui'=>$this));
+
 		elseif(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_1'):			 
 			
 
@@ -2514,7 +2517,7 @@ class EOWBC_Filter_Widget {
 		global $wp_query;
 		$site_url = '';
 		$product_url = '';
-		if( !$this->is_shortcode_filter && !$this->is_shop_cat_filter ) {
+		/*if( !$this->is_shortcode_filter && !$this->is_shop_cat_filter ) {*/
 
 			$current_category = $this->_category;
 			$current_category = get_term_by('slug',$current_category,'product_cat');
@@ -2528,7 +2531,7 @@ class EOWBC_Filter_Widget {
 	      	}
 	      	
 	      	$product_url = $this->product_url();
-		}
+		/*}*/
 
 		$data = array(
         					'eo_product_url'=>$product_url,

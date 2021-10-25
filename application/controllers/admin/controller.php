@@ -252,8 +252,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 								$control_key = $form_value[$key][2]['id'].'_'.$control;
 							}
 							
-							$controls[$form_key][$control] =  wbc()->options->get_option($form_control_key,$control_key); /*call_user_func_array(array($admin_ui,$control),array($control_key,$form_value[$key][0],$form_value[$key][2]))*/;
-							
+							$controls[$form_key][$control] =  wbc()->options->get_option($form_control_key,$control_key);							
 						}
 					}
 				}

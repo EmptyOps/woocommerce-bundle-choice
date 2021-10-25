@@ -562,12 +562,24 @@ if(empty($_per_page)){
 
 						/*_values = jQuery('[name="checklist_'+__slug+'"]').val();
 
-						if (_values=='' || typeof(_values)==typeof(undefined)) {
-							return true;
-						}
+						<<<<<<< HEAD
+							if (_values=='' || typeof(_values)==typeof(undefined)) {
+								return true;
+							}
+						=======
+						_values= Array();
+						if(jQuery('[name="checklist_'+__slug+'"]').length>0 && typeof(jQuery('[name="checklist_'+__slug+'"]').val()) !== typeof(undefined)){
+							_values = jQuery('[name="checklist_'+__slug+'"]').val().split(',');	
+						}				
+						>>>>>>> 8ba310c0b06977ee8828392032acc1d9a04c96ca
 
 						_values = _values.split(',');*/
 
+
+						_values=jQuery('[name="checklist_'+__slug+'"]').val().split(',');
+						_index=_values.indexOf(jQuery(this).attr('data-slug'));
+						_values.splice(_index,1);						
+						jQuery('[name="checklist_'+__slug+'"]').val(_values.join());
 
 						__slug=jQuery(this).attr('data-filter-slug');
 
