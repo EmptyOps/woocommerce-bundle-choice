@@ -278,7 +278,7 @@ class Eowbc_Related_Mapping /*extends Eowbc_Model*/ {
 	}	
 
 
-	public function related_mapping($prefix='',$limit=3,$override_product_id = false, $override_map = array(),$exception) {
+	public function related_mapping($prefix='',$limit=3,$override_product_id = false, $override_map = array(),$exception=array()) {
 		
 		$map = array();
 

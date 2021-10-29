@@ -213,7 +213,7 @@ class Category {
                 var_dump($path);
             });*/
 
-            add_action(/*'woocommerce_before_shop_loop'*/ 'woocommerce_archive_description',array($this,'add_filter_widget'),1);
+            add_action('woocommerce_before_shop_loop' /*'woocommerce_archive_description'*/,array($this,'add_filter_widget'),1);
 
         /*}
             */
