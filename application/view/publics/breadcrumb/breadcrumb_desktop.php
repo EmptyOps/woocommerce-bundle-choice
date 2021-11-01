@@ -1,28 +1,29 @@
 <?php
+if(isset($_GET['FIRST']) and isset($_GET['SECOND'])) {
     $html='<!-- Widget start Wordpress plugin - WooCommerce Product bundle choice --><div class="eo-wbc-container container" style="direction: ltr;">';
         //$html.='<div class="ui ordered steps">';
         $html.='<div class="ui steps">'; 
         if(!empty(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_fixed_navigation'))){
             $_step = 0;
             $_order = 0;
-            if(!empty(wbc()->sanitize->get('BEGIN')) and wbc()->sanitize->get('BEGIN')==$breadcrumb_ui::$first_slug){                    
+            if(!empty(wbc()->sanitize->get('BEGIN')) and wbc()->wc->slug2slug(wbc()->sanitize->get('BEGIN'))==$breadcrumb_ui::$first_slug){                    
                  $html.=$breadcrumb_ui::eo_wbc_breadcumb_first_html($step,1).$breadcrumb_ui::eo_wbc_breadcumb_second_html($step,2);
-            } elseif(!empty(wbc()->sanitize->get('BEGIN')) and wbc()->sanitize->get('BEGIN')==$breadcrumb_ui::$second_slug) {
+            } elseif(!empty(wbc()->sanitize->get('BEGIN')) and wbc()->wc->slug2slug(wbc()->sanitize->get('BEGIN'))==$breadcrumb_ui::$second_slug) {
                 $html.=$breadcrumb_ui::eo_wbc_breadcumb_first_html($step,2).$breadcrumb_ui::eo_wbc_breadcumb_second_html($step,1);
             }                
 
         }  else {         
 
-             if($begin==$breadcrumb_ui::$first_slug)
+             if(wbc()->wc->slug2slug($begin)==$breadcrumb_ui::$first_slug)
             {
                 $html.=$breadcrumb_ui::eo_wbc_breadcumb_first_html($step,1).$breadcrumb_ui::eo_wbc_breadcumb_second_html($step,2);
             }
-            elseif ($begin==$breadcrumb_ui::$second_slug/*get_option('eo_wbc_second_slug')*/)
+            elseif (wbc()->wc->slug2slug($begin)==$breadcrumb_ui::$second_slug/*get_option('eo_wbc_second_slug')*/)
             {
                 $html.=$breadcrumb_ui::eo_wbc_breadcumb_second_html($step,1).$breadcrumb_ui::eo_wbc_breadcumb_first_html($step,2);
             }
         }
-       
+        
             $html.='<div data-href="'.( (empty(wbc()->sanitize->get('EO_CHANGE')) XOR empty(wbc()->sanitize->get('EO_VIEW')) ) && !empty(wbc()->sanitize->get('FIRST')) && !empty(wbc()->sanitize->get('SECOND'))?get_bloginfo('url').'/index.php'
                 .wbc()->options->get_option('configuration','review_page')/*get_option('eo_wbc_review_page')*/
                 .'?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>3,'FIRST'=>wbc()->sanitize->get('FIRST'),'SECOND'=>wbc()->sanitize->get('SECOND'))):'#' ).'" class="'.(($step==3)?'active ':((!(empty($breadcrumb_ui::$first) and empty($breadcrumb_ui::$second)))?'completed ':(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb)?'':'disabled'))).' step" onclick="window.location.href=jQuery(this).data(\'href\');">';
@@ -68,3 +69,4 @@
                 }); 
             </script>";
     echo $html;
+}

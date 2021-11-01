@@ -14,9 +14,6 @@ class Order_Received extends \WC_Order_Item_Product {
         return self::$_instance;
     }
 
-    private function __construct() {        
-    }
-
     public function init() {
         
         add_action('woocommerce_thankyou',function($order_id){

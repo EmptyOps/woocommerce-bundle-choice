@@ -128,7 +128,7 @@ class WBC_WP {
 
     public function cat_id2slug($id) {
         if(term_exists($id,'product_cat')) {
-            return get_term_by('id',$id,'product_cat')->slug;
+            return wbc()->wc->get_term_by('id',$id,'product_cat')->slug;
         } else {
             return false;
         }         

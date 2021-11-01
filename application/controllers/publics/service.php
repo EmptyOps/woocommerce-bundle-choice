@@ -27,6 +27,20 @@ class Service {
 
     public function discount_service() {
 
+        add_filter('woocommerce_display_product_attributes',function($product_attributes, $product){
+
+            $_certificate_link = $product->get_meta('_certificate_link',true);
+            if(!empty($_certificate_link)){
+
+                $product_attributes[ 'attribute__certificate_link' ] = array(
+                    'label' => 'Certificate',
+                    'value' => "<a href='${_certificate_link}' target='_blank'>".__('Click here','woo-bundle-choice')."</a>",
+                );
+            }
+
+            return $product_attributes;          
+
+        },20,2);
 
         add_action('woocommerce_checkout_update_order_review',array(\eo\wbc\controllers\publics\pages\Checkout::instance(),'update_order_review'));
 

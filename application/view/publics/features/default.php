@@ -12,8 +12,8 @@ if(!empty($product_data)):
 <div class="ui two equal width grid container stackable product_specification" style="direction: ltr;">
     <div class="row">
         <?php if(!empty($product_data_1) and is_array($product_data_1)):?>
-        <div class="column">                            
-            <table class="ui single line unstackable table striped" style="border: none;">  
+        <div class="eight wide column">
+            <table class="ui single line unstackable table striped" style="border: none;">
               <tbody>                            
                 <?php foreach ($product_data_1 as $data): ?> 
                     <tr>
@@ -32,7 +32,7 @@ if(!empty($product_data)):
         </div>
         <?Php endif; ?>
         <?php if(!empty($product_data_2) and is_array($product_data_2)):?>
-        <div class="column">                            
+        <div class="eight wide column">
             <table class="ui single line unstackable table striped" style="border: none;">  
               <tbody>                            
                 <?php foreach ($product_data_2 as $data): ?> 

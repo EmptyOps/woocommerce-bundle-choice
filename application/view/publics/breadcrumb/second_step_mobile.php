@@ -17,7 +17,8 @@
             <div class="ten wide column">
                 <div class="ui header eowbc_breadcrumb_font">
                     <?php if(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second)) : ?>
-                    <?php _e(wc_price(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second->get_price())); ?>
+                    
+                    <?php _e(wc_price(apply_filters('eowbc_breadcrumb_second_price',\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second->get_price(),\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second))); ?>
                     <?php endif; ?>
                 </div>
                 <br/> 

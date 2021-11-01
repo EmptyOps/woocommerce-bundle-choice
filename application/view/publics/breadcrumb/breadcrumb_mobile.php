@@ -1,3 +1,5 @@
+<?php if(isset($_GET['FIRST']) and isset($_GET['SECOND'])) { ?>
+
 <!-- Widget start Wordpress plugin - WooCommerce Product bundle choice -->
 <div class="ui container unstackable steps" style="direction: ltr;width: 100% !important; min-width: unset; max-width: unset; margin: auto; margin-bottom: 1em;">
     <?php 
@@ -42,3 +44,5 @@
         });
     }); 
 </script>
+
+<?php } ?>

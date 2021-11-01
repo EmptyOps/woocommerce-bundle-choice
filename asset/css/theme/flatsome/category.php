@@ -5,6 +5,10 @@
 	});
 ?>
 <style type="text/css">
+body p.name.product-title.woocommerce-loop-product__title{
+	visibility: hidden;
+}
+
 .row.category-page-row>.col.large-3{
 	display: none !important;
 }

@@ -26,7 +26,7 @@ class Category_Attribute{
 	}
 
   public function get_single_category(int $id) {    
-    return get_term_by('term_taxonomy_id',$id,'product_cat');
+    return wbc()->wc->get_term_by('term_taxonomy_id',$id,'product_cat');
   }
 
 	public function get_category($parent_id = 0,$prefix = '-') {

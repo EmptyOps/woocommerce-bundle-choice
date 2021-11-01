@@ -40,13 +40,13 @@
                 if(!empty($terms) and !is_wp_error($terms)){
                     $_term_list_ = array();
                     foreach ($terms as $term_id) {
-                        $_term_ = get_term_by( 'id',$term_id,$attribute['name']); 
+                        $_term_ = wbc()->wc->get_term_by( 'id',$term_id,$attribute['name']); 
                         if( !empty($_term_) && !is_wp_error($_term_) && is_object($_term_) && property_exists($_term_,'name')) {
                             $_term_list_[] = $_term_->name;   
                         }
                     }
                     $product_data[]=array(wc_attribute_label($attribute->get_name()),implode(', ',$_term_list_));
-                }                        //get_term_by( 'id',,$attribute['name']);    
+                }                        //wbc()->wc->get_term_by( 'id',,$attribute['name']);    
             }
         }
     }

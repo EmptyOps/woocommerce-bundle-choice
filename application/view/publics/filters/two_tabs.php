@@ -11,7 +11,7 @@
   	</a>
   	<script type="text/javascript">
 		jQuery(document).ready(function($){
-			$('.filter_setting_advance_two_tabs .item').on('click',function(){
+			$('.filter_setting_advance_two_tabs .item').on('click',function(event){
         
         /*let _category = $("[name='_category']").val();
         _category = _category.split(',');
@@ -23,6 +23,7 @@
         $('[name="cat_filter__two_tabs"]').val($(this).data('category'));*/
 
         jQuery('[name="_current_category"]').val(jQuery(this).data('category'));
+        jQuery('[name="_category"]').val(jQuery(this).data('category'));
 
         //cat_filter__two_tabs
 				$('.filter_setting_advance_two_tabs .item').removeClass('active');
@@ -73,7 +74,7 @@
           $('#advance_filter_mob_alternate').removeClass('status_hidden');
           $(".toggle_sticky_mob_filter.advance_filter_mob[data-tab-group='"+$(this).data('tab-altname')+"'],.toggle_sticky_mob_filter.advance_filter_mob[data-tab-group='']").hide();
         <?php endif; ?>
-        jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter');
+        jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
 			});
       //jQuery('[data-tab="filter_setting_advance_first_tabs"]').trigger('click');
       jQuery('.filter_setting_advance_two_tabs .item.active').click();

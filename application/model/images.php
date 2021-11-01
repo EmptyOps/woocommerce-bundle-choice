@@ -26,13 +26,14 @@ class Images{
 	}
 
   public function id2url($id){
+  	global $woocommerce;
   	if (empty($id)) {
-  		return '';
+  		return $woocommerce->plugin_url() . '/assets/images/placeholder.png';
   	}
   	
     $url = wp_get_attachment_url($id);
     if(is_wp_error($url) or empty($url)) {
-      return '';
+      return $woocommerce->plugin_url() . '/assets/images/placeholder.png';
     }
     return $url;
   }

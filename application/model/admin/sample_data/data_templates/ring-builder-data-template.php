@@ -32,7 +32,7 @@ class Ring_Builder_Data_Template extends Pair_Builder_Data_Template {
                     array(
                         'label' => 'Carat',
                         'range'=>true,
-                        'terms' => array('min'=>'0.2','max'=>'3'),
+                        'terms' => array('min'=>'0.2','max'=>'12'),
                         'description' => 'Carat attributes for diamond shape',
                         'slug' => 'eo_carat_attr',
                         'type'=>'button',
@@ -43,6 +43,22 @@ class Ring_Builder_Data_Template extends Pair_Builder_Data_Template {
                         'terms' => array('IF','VVS1','VVS2','VS1','VS2','SI1'),
                         'description' => 'Clarity attributes for diamond shape',
                         'slug' => 'eo_clarity_attr',
+                        'type'=>'dropdown',
+                        'ribbon_color'=>'#8245dd',
+                    ),
+                    array(
+                        'label' => 'Origin',
+                        'terms' => array('Aikhal','Jwaneng','Udachny','Orapa','Catoca','Ekati','Venetia','Lomonosov','Mir'),
+                        'description' => 'Origin attributes for diamond shape',
+                        'slug' => 'eo_origin_attr',
+                        'type'=>'dropdown',
+                        'ribbon_color'=>'#8245dd',
+                    ),
+                    array(
+                        'label' => 'Cut',
+                        'terms' => array('Poor','Good','Very Good','Excellent'),
+                        'description' => 'Origin attributes for diamond shape',
+                        'slug' => 'eo_cut_attr',
                         'type'=>'dropdown',
                         'ribbon_color'=>'#8245dd',
                     ),
@@ -216,7 +232,7 @@ class Ring_Builder_Data_Template extends Pair_Builder_Data_Template {
         return array(
                     array(
                         'thumb' => '',
-                        'name' => 'Diamond Shape',
+                        'name' => 'Diamond',
                         'description' => 'Diamond shapes category',
                         'slug' => 'eo_diamond_shape_cat',
                         'child'=> 
@@ -290,13 +306,94 @@ class Ring_Builder_Data_Template extends Pair_Builder_Data_Template {
                                     'name' => 'Cushion',
                                     'description' => 'Diamond cushion shape',
                                     'slug' => 'eo_diamond_cushion_shape_cat'
-                                )
+                                ),
+                                /*Lab-Growns ----*/
+                                array(
+                                    'thumb' => '',
+                                    'name' => 'Lab-Grown',
+                                    'description' => 'Lab-Grown',
+                                    'slug' => 'eo_lab_diamond_shape_cat',
+                                    'child'=> 
+                                    array(
+                                            array(
+                                                'thumb' => $_img_url.'round.png',
+                                                'thumb_selected' => $_img_url.'round_selected.png',
+                                                'name' => 'Round',
+                                                'description' => 'Diamond round shape',
+                                                'slug' => 'eo_lab_diamond_round_shape_cat'
+                                            ),
+                                            array(
+                                                'thumb' => $_img_url.'princess.png',
+                                                'thumb_selected' => $_img_url.'princess_selected.png',
+                                                'name' => 'Princess',
+                                                'description' => 'Diamond princess shape',
+                                                'slug' => 'eo_lab_diamond_princess_shape_cat'
+                                            ),
+                                            array(
+                                                'thumb' => $_img_url.'emerald.png',
+                                                'thumb_selected' => $_img_url.'emerald_selected.png',
+                                                'name' => 'Emerald',
+                                                'description' => 'Diamond emerald shape',
+                                                'slug' => 'eo_lab_diamond_emerald_shape_cat'
+                                            ),
+                                            array(
+                                                'thumb' => $_img_url.'asscher.png',
+                                                'thumb_selected' => $_img_url.'asscher_selected.png',
+                                                'name' => 'Asscher',
+                                                'description' => 'Diamond asscher shape',
+                                                'slug' => 'eo_lab_diamond_asscher_shape_cat'
+                                            ),
+                                            array(
+                                                'thumb' => $_img_url.'marquise.png',
+                                                'thumb_selected' => $_img_url.'marquise_selected.png',
+                                                'name' => 'Marquise',
+                                                'description' => 'Diamond marquise shape',
+                                                'slug' => 'eo_lab_diamond_marquise_shape_cat'
+                                            ),
+                                            array(
+                                                'thumb' => $_img_url.'oval.png',
+                                                'thumb_selected' => $_img_url.'oval_selected.png',
+                                                'name' => 'Oval',
+                                                'description' => 'Diamond oval shape',
+                                                'slug' => 'eo_lab_diamond_oval_shape_cat'
+                                            ),
+                                            array(
+                                                'thumb' => $_img_url.'rediant.png',
+                                                'thumb_selected' => $_img_url.'rediant_selected.png',
+                                                'name' => 'Radiant',
+                                                'description' => 'Diamond radiant shape',
+                                                'slug' => 'eo_lab_diamond_radiant_shape_cat'
+                                            ),
+                                            array(
+                                                'thumb' => $_img_url.'pear.png',
+                                                'thumb_selected' => $_img_url.'pear_selected.png',
+                                                'name' => 'Pear',
+                                                'description' => 'Diamond pear shape',
+                                                'slug' => 'eo_lab_diamond_pear_shape_cat'
+                                            ),
+                                            array(
+                                                'thumb' => $_img_url.'heart.png',
+                                                'thumb_selected' => $_img_url.'heart_selected.png',
+                                                'name' => 'Heart',
+                                                'description' => 'Diamond heart shape',
+                                                'slug' => 'eo_lab_diamond_heart_shape_cat'
+                                            ),
+                                            array(
+                                                'thumb' => $_img_url.'cushion.png',
+                                                'thumb_selected' => $_img_url.'cushion_selected.png',
+                                                'name' => 'Cushion',
+                                                'description' => 'Diamond cushion shape',
+                                                'slug' => 'eo_lab_diamond_cushion_shape_cat'
+                                            )
+                                    )
+                                ),
+                                /*LAb-Growns ---- END*/
                         )
                     ),
                     
                     array(
                         'thumb' => '',
-                        'name' => 'Setting Shape',
+                        'name' => 'Setting',
                         'description' => 'Setting shapes category',
                         'slug' => 'eo_setting_shape_cat',
                         'child'=> 
@@ -374,87 +471,7 @@ class Ring_Builder_Data_Template extends Pair_Builder_Data_Template {
                         )
                     ),
                     
-                    /*Lab-Growns ----*/
-                    array(
-                        'thumb' => '',
-                        'name' => 'Lab-Grown',
-                        'description' => 'Lab-Grown',
-                        'slug' => 'eo_lab_diamond_shape_cat',
-                        'child'=> 
-                        array(
-                                array(
-                                    'thumb' => $_img_url.'round.png',
-                                    'thumb_selected' => $_img_url.'round_selected.png',
-                                    'name' => 'Round',
-                                    'description' => 'Diamond round shape',
-                                    'slug' => 'eo_lab_diamond_round_shape_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'princess.png',
-                                    'thumb_selected' => $_img_url.'princess_selected.png',
-                                    'name' => 'Princess',
-                                    'description' => 'Diamond princess shape',
-                                    'slug' => 'eo_lab_diamond_princess_shape_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'emerald.png',
-                                    'thumb_selected' => $_img_url.'emerald_selected.png',
-                                    'name' => 'Emerald',
-                                    'description' => 'Diamond emerald shape',
-                                    'slug' => 'eo_lab_diamond_emerald_shape_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'asscher.png',
-                                    'thumb_selected' => $_img_url.'asscher_selected.png',
-                                    'name' => 'Asscher',
-                                    'description' => 'Diamond asscher shape',
-                                    'slug' => 'eo_lab_diamond_asscher_shape_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'marquise.png',
-                                    'thumb_selected' => $_img_url.'marquise_selected.png',
-                                    'name' => 'Marquise',
-                                    'description' => 'Diamond marquise shape',
-                                    'slug' => 'eo_lab_diamond_marquise_shape_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'oval.png',
-                                    'thumb_selected' => $_img_url.'oval_selected.png',
-                                    'name' => 'Oval',
-                                    'description' => 'Diamond oval shape',
-                                    'slug' => 'eo_lab_diamond_oval_shape_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'rediant.png',
-                                    'thumb_selected' => $_img_url.'rediant_selected.png',
-                                    'name' => 'Radiant',
-                                    'description' => 'Diamond radiant shape',
-                                    'slug' => 'eo_lab_diamond_radiant_shape_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'pear.png',
-                                    'thumb_selected' => $_img_url.'pear_selected.png',
-                                    'name' => 'Pear',
-                                    'description' => 'Diamond pear shape',
-                                    'slug' => 'eo_lab_diamond_pear_shape_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'heart.png',
-                                    'thumb_selected' => $_img_url.'heart_selected.png',
-                                    'name' => 'Heart',
-                                    'description' => 'Diamond heart shape',
-                                    'slug' => 'eo_lab_diamond_heart_shape_cat'
-                                ),
-                                array(
-                                    'thumb' => $_img_url.'cushion.png',
-                                    'thumb_selected' => $_img_url.'cushion_selected.png',
-                                    'name' => 'Cushion',
-                                    'description' => 'Diamond cushion shape',
-                                    'slug' => 'eo_lab_diamond_cushion_shape_cat'
-                                )
-                        )
-                    ),
-                    /*LAb-Growns ---- END*/
+
 
                     array(
                         'thumb' => '',

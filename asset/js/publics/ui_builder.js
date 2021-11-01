@@ -138,7 +138,8 @@ jQuery(function(){
 							alert('A request is been sent.');
 							//window.location.reload();
 						} else {
-							alert('Failed to submit request.');
+
+							alert( ($res.msg).replace('u0027',"'") /*'Failed to submit request.'*/);
 						}
 					}
 				});

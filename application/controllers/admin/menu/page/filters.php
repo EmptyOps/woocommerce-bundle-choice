@@ -22,19 +22,19 @@ if ( ! class_exists( 'Filters' ) ) {
 		public static function eo_wbc_prime_category_($slug='',$prefix='',$opts_arr=array())
 	    {
 	        $map_base = get_categories(array(
-	            'hierarchical' => 1,
+	            'hierarchical' => false,
 	            'show_option_none' => '',
 	            'hide_empty' => false,
-	            'parent' => (get_term_by('slug',$slug,'product_cat')?get_term_by('slug',$slug,'product_cat')->term_id:''),
+	            'parent' => (wbc()->wc->get_term_by('slug',$slug,'product_cat')?wbc()->wc->get_term_by('slug',$slug,'product_cat')->term_id:''),
 	            'taxonomy' => 'product_cat'
 	        ));
 	        
 	        // $category_option_list='';
 	        
 	        foreach ($map_base as $base) {
-
+	        	
 	            // $category_option_list.= "<option data-type='0' data-slug='{$base->slug}' value='".$base->term_id."'>".$prefix.$base->name."</option>".eo_wbc_prime_category_($base->slug,' --');
-	            $opts_arr[$base->term_id] = array( 'label'=>$prefix.$base->name, 'attr'=>' data-type="0" data-slug="'.$base->slug.'" ' );
+	            $opts_arr[$base->term_taxonomy_id] = array( 'label'=>$prefix.$base->name, 'attr'=>' data-type="0" data-slug="'.$base->slug.'" ' );
 		        $opts_arr = \eo\wbc\controllers\admin\menu\page\Filters::eo_wbc_prime_category_($base->slug,'--',$opts_arr);
 
 	        }
@@ -48,7 +48,7 @@ if ( ! class_exists( 'Filters' ) ) {
 	        // $attributes="";        
 	        foreach (wc_get_attribute_taxonomies() as $item) {                     
 	        	// $attributes .= "<option data-type='1' data-slug='{$item->attribute_name}' value='{$item->attribute_id}'>{$item->attribute_label}</option>";  
-	        	$opts_arr[$item->attribute_id] = array( 'label'=>$item->attribute_label, 'attr'=>' data-type="1" data-slug="'.$item->attribute_name.'" ' );          
+	        	$opts_arr['pa_'.$item->attribute_id] = array( 'label'=>$item->attribute_label, 'attr'=>' data-type="1" data-slug="'.$item->attribute_name.'" ' );          
 	        }
 	        // return $attributes;
 	        return $opts_arr;
