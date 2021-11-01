@@ -11,7 +11,7 @@ if(!empty($product_data)):
 <hr style="clear: both;margin-top: 0.5em;margin-bottom: 0.5em;" />
 <div class="ui container product_specification" style="direction: ltr;">
  
-    <table class="ui single line unstackable table" style="border: none;">  
+    <table class="ui single line unstackable table striped" style="border: none;">  
       <tbody>                            
         <?php foreach ($product_data as $data): ?> 
             <tr>
@@ -29,6 +29,11 @@ border-bottom: none !important;"><?php echo $data[1]; ?></td>
     </table>                                                
        
 </div>
+<style type="text/css">    
+    .product_specification .column table tbody tr:nth-child(odd) {
+        background: #efefef;
+    }
+</style>
 <br/>            
 <?php 
     echo ob_get_clean();

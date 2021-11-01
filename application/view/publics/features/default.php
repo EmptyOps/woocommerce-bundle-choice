@@ -13,7 +13,7 @@ if(!empty($product_data)):
     <div class="row">
         <?php if(!empty($product_data_1) and is_array($product_data_1)):?>
         <div class="column">                            
-            <table class="ui single line unstackable table" style="border: none;">  
+            <table class="ui single line unstackable table striped" style="border: none;">  
               <tbody>                            
                 <?php foreach ($product_data_1 as $data): ?> 
                     <tr>
@@ -33,7 +33,7 @@ if(!empty($product_data)):
         <?Php endif; ?>
         <?php if(!empty($product_data_2) and is_array($product_data_2)):?>
         <div class="column">                            
-            <table class="ui single line unstackable table" style="border: none;">  
+            <table class="ui single line unstackable table striped" style="border: none;">  
               <tbody>                            
                 <?php foreach ($product_data_2 as $data): ?> 
                     <tr>
@@ -53,6 +53,14 @@ if(!empty($product_data)):
         <?Php endif; ?>
     </div>
 </div>
+<style type="text/css">
+    body .ui.two.equal.width.grid.product_specification>.row>.column {
+        max-width: 50%;
+    }
+    .product_specification .column table tbody tr:nth-child(odd) {
+        background: #efefef;
+    }
+</style>
 <br/>            
 <?php 
     echo ob_get_clean();
