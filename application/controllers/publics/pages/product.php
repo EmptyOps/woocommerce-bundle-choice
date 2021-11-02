@@ -171,7 +171,7 @@ class Product {
 
             if(!empty($second) and !empty($first) and ($id === $second_parent->get_id()) ) {                
                 //return $first->get_title()." <br/> ".$second->get_title();
-                return "<span class='wcp_preview_first_product_title'>".$first->get_title()." - ".wc_price($first->get_price())."</span><br/><span class='wcp_preview_second_product_title'>".$second->get_title()." - ". wc_price($second->get_price()).'</span>';
+                return "<span class='wcp_preview_first_product_title'>".$first->get_title()." - ".wc_price(apply_filters('eowbc_breadcrumb_first_price',$first->get_price(),$first))."</span><br/><span class='wcp_preview_second_product_title'>".$second->get_title()." - ". wc_price( apply_filters('eowbc_breadcrumb_second_price',$second->get_price(),$second)).'</span>';
             } else {
                 return $title;
             }

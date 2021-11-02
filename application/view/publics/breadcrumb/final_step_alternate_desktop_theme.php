@@ -21,7 +21,9 @@
 
                 $second_price = $second->get_price() * ( !empty($set['SECOND'][1]) ? $set['SECOND'][1]:$tmp_set['SECOND'][1] );
 
-                    _e(wc_price($first_price + $second_price));                
+                _e(wc_price(/*$first_price + $second_price*/apply_filters( 'eowbc_breadcrumb_final_price',$first_price + $second_price,$first,$second)));
+
+                /*_e(wc_price($first_price + $second_price));*/
             }
         ?>
         </div>
