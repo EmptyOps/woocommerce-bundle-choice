@@ -43,18 +43,18 @@ class Controller extends \eo\wbc\controllers\Controller {
 	}*/
 	public function default_uis($type,$exceptance) {
 		$defaults = array(
-			'label'=>array('text','color','back_color','font_family','font_size'),
-			'p'=>array('text','color','back_color','font_family','font_size'),
-			'span'=>array('text','color','back_color','font_family','font_size'),
-			'header'=>array('text','color','back_color','font_family','font_size'),
-			'sub_header'=>array('text','color','back_color','font_family','font_size'),
-			'checkbox'=>array('checkbox'),
-			'image'=>array('height','width','image'),
-			'img'=>array('height','width','image'),
-			'button'=>array('text','color','back_color','font_family','font_size','radius'),
-			'container'=>array('height','width','margin_left','margin_right'),
-			'wc_attribute_field'=>array('attribute','checkbox','text'),
-			'a'=>array('url','text')
+			'label'=>array('text','color','back_color','font_family','font_size','visibility'),
+			'p'=>array('text','color','back_color','font_family','font_size','visibility'),
+			'span'=>array('text','color','back_color','font_family','font_size','visibility'),
+			'header'=>array('text','color','back_color','font_family','font_size','visibility'),
+			'sub_header'=>array('text','color','back_color','font_family','font_size','visibility'),
+			'checkbox'=>array('checkbox','visibility'),
+			'image'=>array('height','width','image','visibility'),
+			'img'=>array('height','width','image','visibility'),
+			'button'=>array('text','color','back_color','font_family','font_size','radius','visibility'),
+			'container'=>array('height','width','margin_left','margin_right','visibility'),
+			'wc_attribute_field'=>array('attribute','checkbox','text','visibility'),
+			'a'=>array('url','text','visibility')
 		);
 
 		$collection = array();
@@ -238,6 +238,10 @@ class Controller extends \eo\wbc\controllers\Controller {
 						$form_control_key = $form_value[$key][2]['form_control_key'];
 					}
 
+					if(!empty($form_value[$key][2]['control_key'])) {
+						$form_control_key = $form_value[$key][2]['control_key'];
+					}
+
 					foreach ($control_element as $control) {
 
 						if(empty($form_value[$key][2])){
@@ -247,7 +251,12 @@ class Controller extends \eo\wbc\controllers\Controller {
 							if(!empty($form_value[$key][2]['id'])){
 								$control_key = $form_value[$key][2]['id'].'_'.$control;
 							}
-							$controls[$control_key] =  wbc()->options->get_option($form_control_key,$control_key); /*call_user_func_array(array($admin_ui,$control),array($control_key,$form_value[$key][0],$form_value[$key][2]))*/;
+
+							//var_dump($form_control_key,$control_key);
+
+							$controls[$form_key][$control] =  wbc()->options->get_option($form_control_key,$control_key); 
+
+							/*call_user_func_array(array($admin_ui,$control),array($control_key,$form_value[$key][0],$form_value[$key][2]))*/;
 							
 						}
 					}
