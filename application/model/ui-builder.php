@@ -347,6 +347,11 @@ class UI_Builder implements Builder {
 								$target = $settings[$form_key.'_link']['is_external'] ? ' target="_blank"' : '';
 								$nofollow = $settings[$form_key.'_link']['nofollow'] ? ' rel="nofollow"' : '';
 								$url = $settings[$form_key.'_link']['url'];
+
+								if(empty($url) and !empty($form_value['href'])) {
+									$url = $form_value['href'];
+								}
+
 								$custom_attribute = $settings[$form_key.'_link']['custom_attributes'];
 								
 								$attr = str_replace('|',' ',$custom_attribute);

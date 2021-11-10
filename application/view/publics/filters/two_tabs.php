@@ -77,7 +77,7 @@
         jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
 			});
       //jQuery('[data-tab="filter_setting_advance_first_tabs"]').trigger('click');
-      jQuery('.filter_setting_advance_two_tabs .item.active,.filter_setting_advance_two_tabs .nav-link.active').click();
+      //jQuery('.filter_setting_advance_two_tabs .item.active,.filter_setting_advance_two_tabs .nav-link.active').click();
 		});
 	</script>
 </div>

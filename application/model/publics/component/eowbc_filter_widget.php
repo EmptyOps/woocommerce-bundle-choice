@@ -940,6 +940,10 @@ class EOWBC_Filter_Widget {
 			unset($_REQUEST['_category']);
 		}*/
 
+		if(isset($_GET['paged'])) {
+			unset($_GET['paged']);
+		}
+
         wbc()->load->asset('localize','publics/eo_wbc_filter',array( 'eo_wbc_object' => array(
         					'eo_product_url'=>$product_url,
         					//'eo_view_tabular'=>($current_category=='solitaire'?1:0),
@@ -964,9 +968,15 @@ class EOWBC_Filter_Widget {
 
 
 			$__get = $_GET;
+
 			if(isset($__get['EO_WBC'])) {
 				unset($__get['EO_WBC']);
 			}
+
+			if(isset($__get['paged'])) {
+				unset($__get['paged']);
+			}
+
 			if(isset($__get['BEGIN'])) {
 				unset($__get['BEGIN']);
 			}
@@ -1524,7 +1534,7 @@ class EOWBC_Filter_Widget {
 		}
 
 		/* to be commented in parag*/
-		//$filter = apply_filters('eowbc_filter_button_terms', $filter,$id,$title,$filter_type,$__prefix,$item);
+		$filter = apply_filters('eowbc_filter_button_terms', $filter,$id,$title,$filter_type,$__prefix,$item);
 		
 		if(empty($filter)) return false;
 
@@ -2533,6 +2543,10 @@ class EOWBC_Filter_Widget {
 	      	$product_url = $this->product_url();
 		/*}*/
 
+		if(isset($_GET['paged'])) {
+			unset($_GET['paged']);
+		}
+
 		$data = array(
         					'eo_product_url'=>$product_url,
         					//'eo_view_tabular'=>($current_category=='solitaire'?1:0),
@@ -2635,6 +2649,8 @@ class EOWBC_Filter_Widget {
 		} else {
 			$this->localize_script();
 		}
+
+		/*return true;*/
 
 		//map fields to names as per older version, applies to this code block only. 
 		$field_to_old_fields = array(

@@ -96,11 +96,12 @@ function eo_wbc_filter_render_html(data,render_container) {
 
 
 	let container_html = jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products',data).html();	
-		
+	if(container_html===undefined || container_html==='') {
+		container_html = jQuery(render_data).filter('.products').html();
+	}	
 	if(container_html===undefined || container_html==='') {
 		container_html = jQuery(data,'.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products').html();
-	}
-	
+	}	
 
 	/*let container_html = jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products',jQuery(data)).html();	*/	
 	/*if(container_html===undefined || container_html==='') {

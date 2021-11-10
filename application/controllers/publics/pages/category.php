@@ -213,7 +213,7 @@ class Category {
                 var_dump($path);
             });*/
 
-            add_action('woocommerce_before_shop_loop' /*'woocommerce_archive_description'*/,array($this,'add_filter_widget'),1);
+            add_action(/*'woocommerce_before_shop_loop'*/ 'woocommerce_archive_description',array($this,'add_filter_widget'),1);
 
         /*}
             */
@@ -232,7 +232,7 @@ class Category {
             echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_add_breadcrumb(wbc()->sanitize->get('STEP'),wbc()->sanitize->get('BEGIN')).'<br/><br/>';
         }, 120);*/
 
-        add_action( 'woocommerce_before_shop_loop' /*'woocommerce_archive_description'*/ ,function(){     
+        add_action( /*'woocommerce_before_shop_loop'*/ 'woocommerce_archive_description' ,function(){     
             
             wbc()->load->model('publics/component/eowbc_breadcrumb');       
             echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_add_breadcrumb(wbc()->sanitize->get('STEP'),wbc()->sanitize->get('BEGIN')).'<br/><br/>';
