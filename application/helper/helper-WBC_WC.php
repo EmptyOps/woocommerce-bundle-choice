@@ -112,9 +112,9 @@ class WBC_WC {
                 $term_list[$term_id] = wbc()->wc->get_term_by('id',$term_id,$taxonomy);
             }               
         } else {
-            if($taxonomy==='product_cat'){
+            if($taxonomy==='product_cat') {
                 $term_list = get_terms($taxonomy, array('hide_empty' => 0, 'orderby' => $orderby, 'parent'=>$parent_id,'lang'=>''));
-            } else{
+            } else {
             
                 $term_list = get_terms($taxonomy,array('hide_empty' => 0, 'orderby' => $orderby,'lang'=>''));
             }            

@@ -1034,22 +1034,22 @@ class EOWBC_Filter_Widget {
 	//Returns minimum value and maximum value of range;
 	public function range_min_max($id,$title='',$filter_type=0,$__prefix='',$item=null) {
 		
-		$field_title='';	
+		$field_title='';
 		$field_slug='';
 		$min_value=array("id"=>'',"slug"=>'',"name"=>"0","type"=>'');
 		$max_value=array("id"=>'',"slug"=>'',"name"=>"0","type"=>'');
 		$seprator = '.';
 		if ($filter_type) {
 
-			$term= wbc()->wc->eo_wbc_get_attribute( str_replace('pa_','',$id) );
+			$term= \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_taxonomy('id',str_replace('pa_','',$id));//wbc()->wc->eo_wbc_get_attribute( str_replace('pa_','',$id) );
 
 			if(!empty($term) && !is_wp_error($term)){
 
-				$field_title=empty($title)?$term->name:$title;		
+				$field_title=empty($title)?$term->name:$title;
 
-				$field_slug=$term->slug;			
+				$field_slug=$term->slug;
 
-				$taxonomies=get_terms(array('taxonomy'=>wc_attribute_taxonomy_name_by_id($term->id),'hide_empty'=>false));
+				$taxonomies= \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_terms(wc_attribute_taxonomy_name($term->slug)); //get_terms(array('taxonomy'=>wc_attribute_taxonomy_name_by_id($term->id),'hide_empty'=>false));
 				if(!empty($item[$__prefix.'_fconfig_elements']) and !empty(explode(',',$item[$__prefix.'_fconfig_elements']))) {
 
 					$elements = explode(',',$item[$__prefix.'_fconfig_elements']);
@@ -1080,7 +1080,7 @@ class EOWBC_Filter_Widget {
 				} else {				
 
 					if(is_wp_error($taxonomies) or empty($taxonomies)){
-						$taxonomies=get_terms(wc_attribute_taxonomy_name_by_id($term->id),array('hide_empty'=>false));
+						$taxonomies= \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_terms(wc_attribute_taxonomy_name($term->slug));//get_terms(wc_attribute_taxonomy_name_by_id($term->id),array('hide_empty'=>false));
 					}
 
 					if( is_wp_error($taxonomies) or empty($taxonomies) ) return false;
@@ -1305,18 +1305,17 @@ class EOWBC_Filter_Widget {
 
 		if ($filter_type) {
 			
-			$term=wbc()->wc->eo_wbc_get_attribute( str_replace('pa_','',$id) );			
+			$term= \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_taxonomy('id',str_replace('pa_','',$id));/* wbc()->wc->eo_wbc_get_attribute( str_replace('pa_','',$id) );*/			
 
 			if(!empty($term) && !is_wp_error($term)) {
 
 				$field_title=empty($title)?$term->name:$title;
 				$field_slug=$term->slug;
 
-				$taxonomies=get_terms(array('taxonomy'=>wc_attribute_taxonomy_name_by_id($term->id),'hide_empty'=>false));
+				$taxonomies = \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_terms(wc_attribute_taxonomy_name($term->slug)); //get_terms(array('taxonomy'=>wc_attribute_taxonomy_name_by_id($term->id),'hide_empty'=>false));
 
 				if(is_wp_error($taxonomies)){
-
-					$taxonomies=get_terms(wc_attribute_taxonomy_name_by_id($term->id),array('hide_empty'=>false));
+					$taxonomies= \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_terms(wc_attribute_taxonomy_name($term->slug)); //get_terms(wc_attribute_taxonomy_name_by_id($term->id),array('hide_empty'=>false));
 				}
 
 				if(is_wp_error($taxonomies) or empty($taxonomies)) return false;
@@ -1796,7 +1795,7 @@ class EOWBC_Filter_Widget {
 					default:
 						$this->input_step_slider($this->__prefix,$item/*$item['name'],$item['label'],$item['type'],0,$item['column_width'],0,(isset($item['popup'])?$item['popup']:false),$advance*/);
 				}
-				$term=wbc()->wc->eo_wbc_get_attribute($item['name']);
+				$term=\eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_taxonomy('slug',$item['name']);//wbc()->wc->eo_wbc_get_attribute($item['name']);
 				if(!empty($term) and !is_wp_error( $term )){
 					$_attr_list[]=$term->slug;	
 				}				
@@ -1862,7 +1861,7 @@ class EOWBC_Filter_Widget {
 						default:
 							$this->input_step_slider($this->__prefix,$item);
 					}		
-					$term = wbc()->wc->eo_wbc_get_attribute($item['name']);		
+					$term = \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_taxonomy('slug',$item['name']);//wbc()->wc->eo_wbc_get_attribute($item['name']);		
 					if(!empty($term) and !is_wp_error($term) ){
 						$_attr_list[]=$term->slug;	
 					}			
@@ -1926,7 +1925,7 @@ class EOWBC_Filter_Widget {
 				if($item['type']==0){
 					$term = wbc()->wc->get_term_by('id',$item['name'],'product_cat');
 				} else {
-					$term = wbc()->wc->eo_wbc_get_attribute($item['name']);
+					$term = \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_taxonomy('slug',$item['name']);//wbc()->wc->eo_wbc_get_attribute($item['name']);
 				}				
 				?>				
 				
@@ -1971,7 +1970,7 @@ class EOWBC_Filter_Widget {
 								default:
 									$this->input_step_slider($this->__prefix,$item/*$item['name'],$item['label'],$item['type'],1,100,$reset=!empty($item['reset'])*/);
 							}		
-							$term = wbc()->wc->eo_wbc_get_attribute($item['name']);		
+							$term = \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_taxonomy('slug',$item['name']);//wbc()->wc->eo_wbc_get_attribute($item['name']);		
 							if(!empty($term) and !is_wp_error($term) ){
 								$_attr_list[]=$term->slug;	
 							}	
@@ -2003,7 +2002,7 @@ class EOWBC_Filter_Widget {
 								default:
 									$this->input_step_slider($this->__prefix,$item/*$item['name'],$item['label'],$item['type'],1,100,$reset=!empty($item['reset'])*/);
 							}		
-							$term = wbc()->wc->eo_wbc_get_attribute($item['name']);		
+							$term = \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_taxonomy('slug',$item['name']);//wbc()->wc->eo_wbc_get_attribute($item['name']);		
 							if(!empty($term) and !is_wp_error($term) ){
 								$_attr_list[]=$term->slug;	
 							}			
@@ -2094,17 +2093,18 @@ class EOWBC_Filter_Widget {
 		$term_list = array();
 
 		if($type == 1){
-			$term = wbc()->wc->eo_wbc_get_attribute($id);
+
+			$term = \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_taxonomy('id',$id);//wbc()->wc->eo_wbc_get_attribute($id);
 			$filter = $this->range_steps($id,$title,$type,$__prefix,$item);			
 			if(!empty($filter['force_title'])){			
 				$title = $filter['title'];
 			}
 			$term_list = $filter['list'];
 		} else{
-			$term = wbc()->wc->get_term_by('id',apply_filters( 'wpml_object_id',$id,'category', FALSE, 'en'),'product_cat');
 
-
-			$term_list = wbc()->wc->get_terms(apply_filters( 'wpml_object_id',$id,'category', FALSE, 'en'),'menu_order');
+			$term = \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_term('id',$id,'product_cat'); //wbc()->wc->get_term_by('id',apply_filters( 'wpml_object_id',$id,'category', FALSE, 'en'),'product_cat');
+			
+			$term_list =  \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_terms('product_cat',$id); //wbc()->wc->get_terms(apply_filters( 'wpml_object_id',$id,'category', FALSE, 'en'),'menu_order');
 									
 			if(!empty($item[$__prefix."_fconfig_elements"])){
 				$filter_in_list = explode(',',$item[$__prefix."_fconfig_elements"]);
@@ -2131,17 +2131,21 @@ class EOWBC_Filter_Widget {
 		
 		foreach ($term_list  as $term_item) {
 			$term_item = (object)$term_item;
-			if(!empty($term_item) and is_object($term_item))
+			//if(!empty($term_item) and is_object($term_item))
 			$icon = '';
 			$select_icon = '';
 			$mark = false;
-
+			
 			$query_list = array();
 
-			if(empty($term_item->term_id) and $type == 1){
-
-				$icon = get_term_meta( $term_item->id, $term->slug . '_attachment',true);
+			if(empty($term_item->term_id) and $type == 1) {				
+				/*$icon = get_term_meta( $term_item->id, $term->slug . '_attachment',true);
 				if(empty($icon)) {					
+					$icon = $woocommerce->plugin_url() . '/assets/images/placeholder.png';
+				}*/
+
+				$icon = $term_item->thumbnail_id;
+				if(empty($icon)) {
 					$icon = $woocommerce->plugin_url() . '/assets/images/placeholder.png';
 				}
 
@@ -2156,16 +2160,24 @@ class EOWBC_Filter_Widget {
 				if($non_edit==false && in_array($term_item->id,$query_list)) {
 					$non_edit=true;						
 				}
-				$select_icon = get_term_meta($term_item->id, 'wbc_attachment',true);
+				/*$select_icon = get_term_meta($term_item->id, 'wbc_attachment',true);*/
 				
 				/*if(empty($select_icon)) {					
 					$select_icon = $woocommerce->plugin_url() . '/assets/images/placeholder.png';
 				}*/
+				$select_icon = $term_item->wbc_attachment;
+				if(empty($select_icon)) {
+					$select_icon = $woocommerce->plugin_url() . '/assets/images/placeholder.png';
+				}
 
 			} else {
-				$icon = wp_get_attachment_url( @get_term_meta( $term_item->term_id, 'thumbnail_id', true ));
+				/*$icon = wp_get_attachment_url( @get_term_meta( $term_item->term_id, 'thumbnail_id', true ));
 
 				if(empty($icon)) {					
+					$icon = $woocommerce->plugin_url() . '/assets/images/placeholder.png';
+				}*/
+				$icon = $term_item->thumbnail_id;
+				if(empty($icon)) {
 					$icon = $woocommerce->plugin_url() . '/assets/images/placeholder.png';
 				}
 				
@@ -2181,10 +2193,15 @@ class EOWBC_Filter_Widget {
 					$non_edit=true;						
 				}
 
-				$select_icon = get_term_meta($term_item->term_id, 'wbc_attachment',true);
+				/*$select_icon = get_term_meta($term_item->term_id, 'wbc_attachment',true);*/
 				/*if(empty($select_icon)) {					
 					$select_icon = $woocommerce->plugin_url() . '/assets/images/placeholder.png';
 				}*/
+
+				$select_icon = $term_item->wbc_attachment;
+				if(empty($select_icon)) {
+					$select_icon = $woocommerce->plugin_url() . '/assets/images/placeholder.png';
+				}
 			}
 
 			$truncate_words = wbc()->options->get_option('filters_filter_setting','filter_icon_wrap_filter_label',0,true,true);
@@ -2406,7 +2423,7 @@ class EOWBC_Filter_Widget {
 		$is_single_select = (!empty(${$__prefix.'_fconfig_is_single_select'})?1:0);
 		$term = false;
 		if($type == 1){
-			$term = wbc()->wc->eo_wbc_get_attribute($id);			
+			$term = \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_taxonomy('id',$id);//wbc()->wc->eo_wbc_get_attribute($id);			
 		} else{
 			$term = wbc()->wc->get_term_by('id',$id,'product_cat');			
 		}
@@ -2571,6 +2588,7 @@ class EOWBC_Filter_Widget {
 
 	public function get_widget() {
 		
+		//$start_time = microtime(true);
 		do_action('eowbc_before_filter_widget');
 
 		$this->_category = apply_filters('eowbc_filter_widget_category',$this->eo_wbc_get_category());
@@ -2822,6 +2840,8 @@ class EOWBC_Filter_Widget {
 
 		wbc()->load->template('publics/filters/form', array("thisObj"=>$this,"current_category"=>$current_category,'filter_prefix'=>$this->filter_prefix,'filter_ui'=>$this)); 
 		do_action('eowbc_after_filter_widget');
+
+		//$end_time = microtime(true);
 	}
 
 	public function load_filters($non_adv_ordered_filter,$adv_ordered_filter){

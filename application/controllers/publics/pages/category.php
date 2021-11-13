@@ -186,13 +186,18 @@ class Category {
     }
 
     public function add_filter_widget(){
-        if(empty($this->filter_showing_status)) {
-            wbc()->load->model('publics/component/eowbc_filter_widget');          
-            // if (class_exists('EO_WBC_Filter_Widget')) {
-                \eo\wbc\model\publics\component\EOWBC_Filter_Widget::instance()->init($this->is_shop_cat_filter,$this->filter_prefix,false);                               
-            // }
-            $this->filter_showing_status = true;
-            do_action('eowbc_category_after_filter_rendered');
+
+        if(!defined('EOWBC_FILTER_WIDGET_RENDER')){
+
+            if(empty($this->filter_showing_status)) {
+                wbc()->load->model('publics/component/eowbc_filter_widget');          
+                // if (class_exists('EO_WBC_Filter_Widget')) {
+                    \eo\wbc\model\publics\component\EOWBC_Filter_Widget::instance()->init($this->is_shop_cat_filter,$this->filter_prefix,false);                               
+                // }
+                $this->filter_showing_status = true;
+                do_action('eowbc_category_after_filter_rendered');
+            }
+            define('EOWBC_FILTER_WIDGET_RENDER',true);
         }
     }
 
@@ -213,6 +218,8 @@ class Category {
                 var_dump($path);
             });*/
 
+            add_action('woocommerce_before_shop_loop' /*'woocommerce_archive_description'*/,array($this,'add_filter_widget'),1);
+
             add_action(/*'woocommerce_before_shop_loop'*/ 'woocommerce_archive_description',array($this,'add_filter_widget'),1);
 
         /*}
@@ -223,6 +230,13 @@ class Category {
 
     }
 
+    public function render_breadcrumb() {
+        if(!defined('EOWBC_BREADCRUMB_WIDGET_RENDER')){
+            wbc()->load->model('publics/component/eowbc_breadcrumb');       
+            echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_add_breadcrumb(wbc()->sanitize->get('STEP'),wbc()->sanitize->get('BEGIN')).'<br/><br/>';
+            define('EOWBC_BREADCRUMB_WIDGET_RENDER',true);
+        }
+    }
 
     public function eo_wbc_add_breadcrumb() {           
 
@@ -232,11 +246,8 @@ class Category {
             echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_add_breadcrumb(wbc()->sanitize->get('STEP'),wbc()->sanitize->get('BEGIN')).'<br/><br/>';
         }, 120);*/
 
-        add_action( /*'woocommerce_before_shop_loop'*/ 'woocommerce_archive_description' ,function(){     
-            
-            wbc()->load->model('publics/component/eowbc_breadcrumb');       
-            echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_add_breadcrumb(wbc()->sanitize->get('STEP'),wbc()->sanitize->get('BEGIN')).'<br/><br/>';
-        }, 0);
+        add_action( 'woocommerce_before_shop_loop' /*'woocommerce_archive_description'*/ ,array($this,'render_breadcrumb'), 0);
+        add_action( /*'woocommerce_before_shop_loop'*/ 'woocommerce_archive_description' ,array($this,'render_breadcrumb'), 0);
     }
 
 

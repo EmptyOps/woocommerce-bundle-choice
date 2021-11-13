@@ -40,6 +40,10 @@ class WooCommerce_Bundle_Choice_Bootstrap {
 
 
 		add_filter( 'widget_text', 'do_shortcode' );
+
+		//enable service to single term and taxonomy sync
+		\eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->sync_single();
+
 		add_action('created_term', array(\eo\wbc\controllers\admin\Term_Meta::instance(),'save_terms'), 10, 3);
 		add_action('edit_term', array(\eo\wbc\controllers\admin\Term_Meta::instance(),'save_terms'), 10, 3);
 
