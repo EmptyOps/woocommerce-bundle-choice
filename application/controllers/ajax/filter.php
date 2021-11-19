@@ -394,35 +394,37 @@ class Filter
 		        } elseif( $query->is_main_query() and !empty($query->query_vars['product_cat'])) {
 
 		        	if( version_compare( constant('WC_VERSION'), '3.6' ) >=0 ) {
-		        		
-		        		$ids = $this->lookup();
-		        		$result_count = $ids['result_count'];
-		        		$ids = $ids['pids'];
-							
-						if(!empty(wbc()->sanitize->get('eo_wbc_filter')) and !empty($ids)) {
-							
-							add_filter('woocommerce_shortcode_products_query_results',function($results) use($result_count) {
+		        		$ids = array();		        		
+		        		if(!apply_filters('eowbc_filter_override',false)){
+			        		$ids = $this->lookup();
+			        		$result_count = $ids['result_count'];
+			        		$ids = $ids['pids'];
 								
-								$results->total = $result_count;
+							if(!empty(wbc()->sanitize->get('eo_wbc_filter')) and !empty($ids)) {
 								
-								$results->total_pages = ceil($result_count / (empty(wc_get_loop_prop('per_page'))?12:wc_get_loop_prop('per_page')) );
-								$results->current = (empty($_REQUEST['paged'])?1:str_replace(',','',$_REQUEST['paged']));
-								$results->per_page = (empty(wc_get_loop_prop('per_page'))?12:wc_get_loop_prop('per_page'));
+								add_filter('woocommerce_shortcode_products_query_results',function($results) use($result_count) {
+									
+									$results->total = $result_count;
+									
+									$results->total_pages = ceil($result_count / (empty(wc_get_loop_prop('per_page'))?12:wc_get_loop_prop('per_page')) );
+									$results->current = (empty($_REQUEST['paged'])?1:str_replace(',','',$_REQUEST['paged']));
+									$results->per_page = (empty(wc_get_loop_prop('per_page'))?12:wc_get_loop_prop('per_page'));
+									
+									wc_set_loop_prop('total',$result_count);
+									wc_set_loop_prop('total_pages',ceil($result_count / (empty(wc_get_loop_prop('per_page'))?12:wc_get_loop_prop('per_page')) ));
+									wc_set_loop_prop('current',(empty($_REQUEST['paged'])?1:str_replace(',','',$_REQUEST['paged'])));
+									wc_set_loop_prop('per_page',(empty(wc_get_loop_prop('per_page'))?12:wc_get_loop_prop('per_page')));
+									return $results;								
+								});
 								
-								wc_set_loop_prop('total',$result_count);
+								echo do_shortcode('[products ids="'.implode(',',$ids).'" class="eowbc_ajax" paginate="true"]');
+								die();
+							} else {
+
+								wc_set_loop_prop( 'total', $result_count );
 								wc_set_loop_prop('total_pages',ceil($result_count / (empty(wc_get_loop_prop('per_page'))?12:wc_get_loop_prop('per_page')) ));
 								wc_set_loop_prop('current',(empty($_REQUEST['paged'])?1:str_replace(',','',$_REQUEST['paged'])));
-								wc_set_loop_prop('per_page',(empty(wc_get_loop_prop('per_page'))?12:wc_get_loop_prop('per_page')));
-								return $results;								
-							});
-							
-							echo do_shortcode('[products ids="'.implode(',',$ids).'" class="eowbc_ajax" paginate="true"]');
-							die();
-						} else {
-
-							wc_set_loop_prop( 'total', $result_count );
-							wc_set_loop_prop('total_pages',ceil($result_count / (empty(wc_get_loop_prop('per_page'))?12:wc_get_loop_prop('per_page')) ));
-							wc_set_loop_prop('current',(empty($_REQUEST['paged'])?1:str_replace(',','',$_REQUEST['paged'])));
+							}
 						}
 
 		        		$query->set('post_type',array('product'));
@@ -432,8 +434,13 @@ class Filter
 				        } else {
 				        	$query->set('post__in',array(-1));
 				        }
-				        $query->tax_query = array();
-						$query->set('tax_query',array());
+				        
+				        /*if( (!empty(wbc()->sanitize->get('STEP')) and wbc()->sanitize->get('STEP')==2 and (wbc()->sanitize->get('FIRST') xor wbc()->sanitize->get('SECOND'))) ) {*/
+
+							$query->tax_query = array();
+							$query->set('tax_query',array());
+
+				        /*}*/
 
 						/*echo "<pre>";
 						print_r($query);
@@ -680,7 +687,21 @@ class Filter
 					        $query->query_vars['suppress_filters'] = true;
 
 			        	}
-			        }		        		        
+			        }
+
+			        if(!empty($_REQUEST['orderby'])) {
+			        	if($_REQUEST['orderby']==='price-desc') {
+			        		$query->set('orderby','meta_value_num');
+			        		$query->set('order','desc');
+			        		$query->set('meta_key','_price');
+			        	} elseif($_REQUEST['orderby']==='price') {
+			        		$query->set('orderby','meta_value_num');
+			        		$query->set('order','asc');
+			        		$query->set('meta_key','_price');	
+			        	}
+			        	
+			        }
+			        
 			        return apply_filters('filter_widget_ajax_post_query',$query);
 			    }
 

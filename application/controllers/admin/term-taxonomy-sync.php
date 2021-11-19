@@ -87,6 +87,27 @@ class Term_Taxonomy_Sync {
 		return $wpdb->get_results("SELECT * FROM ${lookup_table} WHERE `taxonomy`='${taxonomy}' AND `parent`='${parent_id}'");
 	}
 
+	public function get_terms_min_max($taxonomy,$parent_id = 0,$min=false,$max=false) {
+		global $wpdb;
+		$table = 'wp_wc_terms_lookup';		
+		$lookup_table = $wpdb->prefix.$table;
+
+
+
+		if($min===false or $max===false) {
+			return [
+				'min'=>$wpdb->get_row("SELECT * FROM `${lookup_table}` a ,(SELECT MIN(name) as min_value FROM `${lookup_table}` WHERE `taxonomy`='${taxonomy}' AND `parent`='0') b WHERE a.name=b.min_value AND `taxonomy`='${taxonomy}'"),
+				'max'=>$wpdb->get_row("SELECT * FROM `${lookup_table}` a ,(SELECT MAX(name) as max_value FROM `${lookup_table}` WHERE `taxonomy`='${taxonomy}' AND `parent`='0') b WHERE a.name=b.max_value AND `taxonomy`='${taxonomy}'")
+			];
+		} else {
+
+			return [
+				'min'=>$wpdb->get_row("SELECT * FROM `${lookup_table}` a ,(SELECT MIN(name) as min_value FROM `${lookup_table}` WHERE `taxonomy`='${taxonomy}' AND `parent`='0' AND name>=${min}) b WHERE a.name=b.min_value AND `taxonomy`='${taxonomy}'"),
+				'max'=>$wpdb->get_row("SELECT * FROM `${lookup_table}` a ,(SELECT MAX(name) as max_value FROM `${lookup_table}` WHERE `taxonomy`='${taxonomy}' AND `parent`='0' AND name<=${max}) b WHERE a.name=b.max_value AND `taxonomy`='${taxonomy}'")
+			];			
+		}		
+	}
+
 	//Saves the product attribute taxonomy term data
 	public function save_terms($term_id, $tt_id, $taxonomy) {
 
@@ -129,8 +150,22 @@ class Term_Taxonomy_Sync {
 			$select_icon = $no_icon;	
 		}
 
+		if(!empty(wbc()->sanitize->post($taxonomy.'_attachment'))) {
+			$_attachment = wbc()->sanitize->post($taxonomy.'_attachment');	
+		} else {
+			$_attachment = get_term_meta($tt_id,$taxonomy.'_attachment',true);
+		}
+
+		if(empty($_attachment)) {
+			$_attachment = $no_icon;	
+		}
+
+
+		
+
 		$data['thumbnail_id'] = $icon;
 		$data['wbc_attachment'] = $select_icon;
+		$data['_attachment'] = $_attachment;		
 		$data['wbc_color'] = (empty(wbc()->sanitize->post('wbc_color'))?'#ffffff':wbc()->sanitize->post('wbc_color'));
 
 		$column_data = array(
@@ -145,6 +180,7 @@ class Term_Taxonomy_Sync {
 			'count'=>'int(20)',
 			'filter'=>'varchar(255)',
 			'thumbnail_id'=>'mediumtext',
+			'_attachment'=>'mediumtext',
 			'wbc_attachment'=>'mediumtext',
 			'wbc_color'=>'varchar(10)'
 		);

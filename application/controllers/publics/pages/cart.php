@@ -336,7 +336,7 @@ class Cart {
             }
             
             if(!empty($cart_item['datas']) and !empty($cart_item['datas']['SECOND'])) {
-               return $cart_item['datas']['FIRST']->get_image().$cart_item['datas']['SECOND']->get_image();
+               return '<span class="cart-first-item-image">'.$cart_item['datas']['FIRST']->get_image().'</span><span class="cart-second-item-image">'.$cart_item['datas']['SECOND']->get_image().'</span>';
             } else {
                 return $image;
             }
@@ -393,7 +393,61 @@ class Cart {
 
             if(!empty($cart_item['datas']) and !empty($cart_item['datas']['SECOND'])) {
 
-                return $cart_item['quantity'].'<br/>'.$cart_item['quantities']['SECOND'];
+                $price = $cart_item['datas']['FIRST']->get_price();
+                $quantity = $cart_item['quantities']['FIRST'];
+                if ( $cart_item['datas']['FIRST']->is_taxable() ) {
+
+                    if ( WC()->cart->display_prices_including_tax() ) {
+                        $row_price        = wc_get_price_including_tax( $cart_item['datas']['FIRST'], array( 'qty' => $cart_item['quantities']['FIRST'] ) );
+                        $product_subtotal = $row_price;
+
+                        if ( ! wc_prices_include_tax() && WC()->cart->get_subtotal_tax() > 0 ) {
+                            $product_subtotal .= ' <small class="tax_label">' . WC()->countries->inc_tax_or_vat() . '</small>';
+                        }
+                    } else {
+                        $row_price        = wc_get_price_excluding_tax($cart_item['datas']['FIRST'], array( 'qty' => $cart_item['quantities']['FIRST'] ) );
+                        $product_subtotal = $row_price;
+
+                        if ( wc_prices_include_tax() && WC()->cart->get_subtotal_tax() > 0 ) {
+                            $product_subtotal .= ' <small class="tax_label">' . WC()->countries->ex_tax_or_vat() . '</small>';
+                        }
+                    }
+                } else {
+                    $row_price        = $price * $quantity;
+                    $product_subtotal = $row_price;
+                }
+
+                $product_subtotal_first = $product_subtotal;
+
+                $price = $cart_item['datas']['SECOND']->get_price();
+                $quantity = $cart_item['quantities']['SECOND'];
+                if ( $cart_item['datas']['SECOND']->is_taxable() ) {
+
+                    if ( WC()->cart->display_prices_including_tax() ) {
+                        $row_price        = wc_get_price_including_tax( $cart_item['datas']['SECOND'], array( 'qty' => $cart_item['quantities']['SECOND'] ) );
+                        $product_subtotal = $row_price;
+
+                        if ( ! wc_prices_include_tax() && WC()->cart->get_subtotal_tax() > 0 ) {
+                            $product_subtotal .= ' <small class="tax_label">' . WC()->countries->inc_tax_or_vat() . '</small>';
+                        }
+                    } else {
+                        $row_price        = wc_get_price_excluding_tax($cart_item['datas']['SECOND'], array( 'qty' => $cart_item['quantities']['SECOND'] ) );
+                        $product_subtotal = $row_price;
+
+                        if ( wc_prices_include_tax() && WC()->cart->get_subtotal_tax() > 0 ) {
+                            $product_subtotal .= ' <small class="tax_label">' . WC()->countries->ex_tax_or_vat() . '</small>';
+                        }
+                    }
+                } else {
+                    $row_price        = $price * $quantity;
+                    $product_subtotal = $row_price;
+                }
+
+                $product_subtotal_second = $product_subtotal;
+
+                $product_subtotal_line = wc_price($product_subtotal_first+$product_subtotal_second);
+
+                return '<div class="minicart-first-item-price">'.$cart_item['quantity'].' x '.$product_subtotal_first.'</div><div class="minicart-second-item-price">'.$cart_item['quantities']['SECOND'].' x '.$product_subtotal_second.'</div>';
             } else {
                 //return $cart_item['quantity'];
                 return $product_quantity_first;
