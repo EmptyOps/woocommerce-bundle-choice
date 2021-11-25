@@ -228,11 +228,14 @@ class Controller extends \eo\wbc\controllers\Controller {
 
 				if(!empty($control_element)){
 
+
+
 					/*$controls[$form_key.'_form_segment'] = array(
 						'label'=> $form_value[$key][0],
-						'type'=>'devider',
+						'typ
+						e'=>'devider',
 					);*/
-
+					
 					$form_control_key = '';
 					if(!empty($form_value[$key][2]['form_control_key'])) {
 						$form_control_key = $form_value[$key][2]['form_control_key'];
@@ -255,7 +258,10 @@ class Controller extends \eo\wbc\controllers\Controller {
 							//var_dump($form_control_key,$control_key);
 
 							$controls[$form_key][$control] =  wbc()->options->get_option($form_control_key,$control_key); 
-
+							if($control === 'image' and is_numeric($controls[$form_key][$control])) {
+								$controls[$form_key][$control] = wp_get_attachment_url($controls[$form_key][$control]);
+							}
+							
 							/*call_user_func_array(array($admin_ui,$control),array($control_key,$form_value[$key][0],$form_value[$key][2]))*/;
 							
 						}
