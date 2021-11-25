@@ -196,6 +196,22 @@ class Category {
                 // }
                 $this->filter_showing_status = true;
                 do_action('eowbc_category_after_filter_rendered');
+
+                /*?>
+                <div id="eowbc_render_filter"></div>
+                <script type="text/javascript">
+                    jQuery(document).ready(function(){                        
+                        jQuery.ajax({    
+                            url:'<?php echo admin_url('admin-ajax.php');?>', 
+                            method:'POST',
+                            data: { action:'eowbc_ajax',resolver:'dom_filter',_wpnonce:'__OPEN_KEY__',category:'<?php echo $this->eo_wbc_get_category(); ?>'},
+                            success:function(result,status,xhr){
+                                jQuery('#eowbc_render_filter').replaceWith(result);
+                            }
+                        });
+                    });
+                </script>
+                <?php*/
             }
             define('EOWBC_FILTER_WIDGET_RENDER',true);
         }
@@ -232,7 +248,7 @@ class Category {
 
     public function render_breadcrumb() {
         if(!defined('EOWBC_BREADCRUMB_WIDGET_RENDER')){
-            wbc()->load->model('publics/component/eowbc_breadcrumb');       
+            wbc()->load->model('publics/component/eowbc_breadcrumb');
             echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_add_breadcrumb(wbc()->sanitize->get('STEP'),wbc()->sanitize->get('BEGIN')).'<br/><br/>';
             define('EOWBC_BREADCRUMB_WIDGET_RENDER',true);
         }

@@ -17,6 +17,12 @@ class WBC_Common {
 		$in_category = apply_filters('eoowbc_helper_common_get_category_in_category',$in_category);		
 		$page = apply_filters('eoowbc_helper_common_get_category_page',$page);
 		$post_id = apply_filters('eoowbc_helper_common_get_category_post_id',$post_id);
+
+		static $__list__ = array();
+		if(!empty($__list__[$post_id])) {
+			return $__list__[$post_id];
+		}
+
 		$return_category = '';
 		if($page == 'category' ) {
 			global $wp_query;
@@ -66,6 +72,7 @@ class WBC_Common {
 		}		
 
 		$return_category = apply_filters('eoowbc_helper_common_get_category_return_category',$return_category);
+		$__list__[$post_id] = $return_category;
 		return $return_category;
 	}
 
