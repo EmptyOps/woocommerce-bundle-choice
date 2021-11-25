@@ -894,7 +894,7 @@ class EOWBC_Filter_Widget {
 		$site_url = '';
 		$product_url = '';
 
-		if( !$this->is_shortcode_filter && !$this->is_shop_cat_filter ) {
+		if( $this->is_shortcode_filter && !$this->is_shop_cat_filter ) {
 
 			$current_category = $wp_query->get_queried_object();
 			if(!empty($current_category) and !is_wp_error($current_category)){
@@ -906,9 +906,9 @@ class EOWBC_Filter_Widget {
 			}
 
 			if(empty($current_category)) {
-				$current_category=$this->_category;	
+				$current_category= apply_filters('eowbc_filter_widget_category_json',$this->_category);
 			}
-			
+
 	        $site_url = esc_url(get_term_link( $current_category,'product_cat'));
 	        
 	      	if(strpos($site_url, '?')!==false){
@@ -2630,7 +2630,7 @@ class EOWBC_Filter_Widget {
 
 		if(!(is_array($filter) xor is_object($filter)) or empty($filter)) return false;
 
-		if(apply_filters('eowbc_enque_filter_assets','__return_true')){
+		if(apply_filters('eowbc_enque_filter_assets','__return_true')){			
 			$this->eo_wbc_filter_enque_asset();
 		} else {
 			$this->localize_script();
@@ -2796,12 +2796,13 @@ class EOWBC_Filter_Widget {
 
 		/*echo "non_adv_ordered_filter and adv_ordered_filter dump 1";
 		wbc()->common->pr($non_adv_ordered_filter);
-		wbc()->common->pr($adv_ordered_filter);*/
+		wbc()->common->pr($adv_ordered_filter);
+		die();*/
 		
 		$this->load_filters($non_adv_ordered_filter,$adv_ordered_filter);
 				
 		if( $this->is_shortcode_filter ) {
-			wbc()->load->template('publics/filters/shortcode_flt_search_btn', array("is_shortcode_filter"=>$this->is_shortcode_filter,'filter_ui'=>$this)); 	
+			//wbc()->load->template('publics/filters/shortcode_flt_search_btn', array("is_shortcode_filter"=>$this->is_shortcode_filter,'filter_ui'=>$this)); 	
 		}
 
 		wbc()->load->template('publics/filters/form', array("thisObj"=>$this,"current_category"=>$current_category,'filter_prefix'=>$this->filter_prefix,'filter_ui'=>$this)); 
