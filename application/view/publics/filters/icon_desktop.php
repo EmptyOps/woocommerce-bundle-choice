@@ -18,7 +18,7 @@
 		<div class="ui tiny images ui equal width center aligned grid" style="text-align: center;" data-reset="reset_icon(new Event('click'),'<?php echo $term->slug; ?>')" data-filter-slug="<?php echo $term->slug; ?>">				
 			<?php foreach ($list as $filter_icon): ?>
 				<div title="<?php $filter_icon["name"]; ?>"
-					class="eo_wbc_filter_icon column <?php echo ($non_edit and (empty(wbc()->sanitize->get('FIRST')) XOR empty(wbc()->sanitize->get('SECOND')))) ?> 
+					class="eo_wbc_filter_icon column <?php echo ($non_edit and (empty(wbc()->sanitize->get('FIRST')) XOR empty(wbc()->sanitize->get('SECOND'))))?'none_editable':''; ?> 
 						<?php echo $filter_icon['mark'] ? 'eo_wbc_filter_icon_select':''?> ui image" data-single_select="<?php _e($is_single_select); ?>"
 					data-slug="<?php echo $filter_icon['slug']; ?>" 
 					data-filter="<?php echo $term->slug; ?>" style="border-bottom: 2px solid transparent;<?php echo $icon_css; ?>"
