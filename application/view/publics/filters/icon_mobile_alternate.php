@@ -26,7 +26,7 @@
 	<div class="ui tiny images" data-reset="reset_icon(new Event('click'),'<?php echo $term->slug; ?>')" style="text-align: center;">
 		<?php foreach ($list as $filter_icon): ?>
 			<div title="<?php $filter_icon["name"]; ?>"
-				class="eo_wbc_filter_icon <?php echo $non_edit ? 'none_editable':'' ?> 
+				class="eo_wbc_filter_icon <?php echo ($non_edit and (empty(wbc()->sanitize->get('FIRST')) XOR empty(wbc()->sanitize->get('SECOND')))) ?> 
 					<?php echo $filter_icon['mark'] ? 'eo_wbc_filter_icon_select':''?> ui image" data-single_select="<?php _e($is_single_select); ?>"
 				data-slug="<?php echo $filter_icon['slug']; ?>" data-label="<?php echo($filter_icon['name']); ?>" 
 				data-filter="<?php echo $term->slug; ?>" style="<?php echo get_option('eo_wbc_alternate_breadcrumb',false)?"border":"border-bottom"?>: 2px solid transparent;"
