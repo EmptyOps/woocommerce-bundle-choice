@@ -236,7 +236,7 @@ class Service {
             
         });
 
-		$this->enque_asset();
+		//$this->enque_asset();
 		wbc()->load->model('publics/component/eowbc_filter_widget');
 		$widget = \eo\wbc\model\publics\component\EOWBC_Filter_Widget::instance();
 		
@@ -266,28 +266,28 @@ class Service {
 
         if(!empty($bonus_features['filters_shortcode'])){
             add_shortcode('wbc-shortcode-filters',function(){
+
+                ob_start();
+                ?>
+                <script type="text/javascript">
+                    filter_obj = Object();
+                    filter_obj.ajaxurl ='<?php echo admin_url('admin-ajax.php'); ?>';
+                    filter_obj.cat_url ='<?php echo get_option("siteurl")."/index.php/".wbc()->wc->wc_permalink('category_base')."/"; ?>';          
+                    filter_obj.shop_url = '<?php echo get_option("siteurl")."/index.php/shop/"; ?>';         
+                    filter_obj.not_required_all_select = true;            
+                </script>       
+                <?php
+                echo ob_get_clean();
+                wbc()->load->asset('js','shortcode-filter');
+
                 \eo\wbc\controllers\publics\pages\Shortcode_Filters::instance()->init();
             },10);
         }
-        
-
 	}
 
-	public function enque_asset() {		
+	/*public function enque_asset() {		
 		add_action( 'wp_enqueue_scripts',function(){
-            ob_start();
-            ?>
-            <script type="text/javascript">
-                filter_obj = Object();
-                filter_obj.ajaxurl ='<?php echo admin_url('admin-ajax.php'); ?>';
-                filter_obj.cat_url ='<?php echo get_option("siteurl")."/index.php/".wbc()->wc->wc_permalink('category_base')."/"; ?>';          
-                filter_obj.shop_url = '<?php echo get_option("siteurl")."/index.php/shop/"; ?>';         
-                filter_obj.not_required_all_select = true;            
-            </script>       
-            <?php
-            echo ob_get_clean();
-			wbc()->load->asset('js','shortcode-filter');		
-		}, 10, 1 );
-		
-	}
+            
+		}, 10, 1 );		
+	}*/
 }

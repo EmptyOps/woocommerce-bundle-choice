@@ -42,7 +42,8 @@ if(!class_exists('Woo_Bundle_Choice') ) {
 			//do nothing, construct_init will be called from plugins_loaded hook
 		}
 
-		public function construct_init() {			
+		public function construct_init() {	
+
 			// define constant before our work bwgins.
 			$this->define_constants();
 			// load neccesary tools.
@@ -163,7 +164,6 @@ if(!class_exists('Woo_Bundle_Choice') ) {
 	},30);
 
 	if(!function_exists('wbc')){
-
 		function wbc(){
 			return Woo_Bundle_Choice::instance();
 		}	

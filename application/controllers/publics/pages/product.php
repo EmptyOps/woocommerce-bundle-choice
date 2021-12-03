@@ -64,8 +64,7 @@ class Product {
                             $cart_url.='?lang='.$url_params['lang'];
                         }
                     }
-                }
-                
+                }                
                 exit(wp_redirect($cart_url));
             }
 

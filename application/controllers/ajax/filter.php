@@ -54,7 +54,7 @@ class Filter
     }
 
     public function lookup($return_query = false,$sql_join = '',$order_sql = ''){
-    	
+
     	$queried_category = wbc()->sanitize->request('_category');
     	$queried_category_object = get_queried_object();
         if(!empty($queried_category_object) and property_exists($queried_category_object,'slug')) {
@@ -436,10 +436,8 @@ class Filter
 				        }
 				        
 				        /*if( (!empty(wbc()->sanitize->get('STEP')) and wbc()->sanitize->get('STEP')==2 and (wbc()->sanitize->get('FIRST') xor wbc()->sanitize->get('SECOND'))) ) {*/
-
 							$query->tax_query = array();
 							$query->set('tax_query',array());
-
 				        /*}*/
 
 						/*echo "<pre>";
@@ -698,11 +696,10 @@ class Filter
 			        		$query->set('orderby','meta_value_num');
 			        		$query->set('order','asc');
 			        		$query->set('meta_key','_price');	
-			        	}
-			        	
+			        	}		        	
 			        }
-			        
-			        return apply_filters('filter_widget_ajax_post_query',$query);
+			        return $query;
+			        //return apply_filters('filter_widget_ajax_post_query',$query);
 			    }
 
 		    });		   
