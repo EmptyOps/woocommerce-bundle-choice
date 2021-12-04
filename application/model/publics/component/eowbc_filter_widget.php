@@ -915,11 +915,10 @@ class EOWBC_Filter_Widget {
 	          	$site_url.='&';
 	      	} else {
 	          	$site_url.='?';
-	      	}
-
-	      	$product_url = $this->product_url();
+	      	}	      	
 		}
 
+		$product_url = $this->product_url();
         
         // wp_localize_script('eo_wbc_filter_js','eo_wbc_object',array(
         // 					'eo_product_url'=>$this->product_url(),
@@ -2091,10 +2090,10 @@ class EOWBC_Filter_Widget {
 			}
 			$term_list = $filter['list'];
 		} else{
-			$term = wbc()->wc->get_term_by('id',apply_filters( 'wpml_object_id',$id,'category', FALSE, 'en'),'product_cat');
 
+			$term = wbc()->wc->get_term_by('term_taxonomy_id',apply_filters( 'wpml_object_id',$id,'category', FALSE, 'en'),'product_cat');
 
-			$term_list = wbc()->wc->get_terms(apply_filters( 'wpml_object_id',$id,'category', FALSE, 'en'),'menu_order');
+			$term_list = wbc()->wc->get_terms(apply_filters( 'wpml_object_id',$term->term_id,'category', FALSE, 'en'),'menu_order');
 									
 			if(!empty($item[$__prefix."_fconfig_elements"])){
 				$filter_in_list = explode(',',$item[$__prefix."_fconfig_elements"]);
@@ -2534,18 +2533,18 @@ class EOWBC_Filter_Widget {
 		/*}*/
 
 		$data = array(
-        					'eo_product_url'=>$product_url,
-        					//'eo_view_tabular'=>($current_category=='solitaire'?1:0),
-        					'disp_regular'=>wbc()->options->get('eo_wbc_e_tabview_status',false)/*get_option('eo_wbc_e_tabview_status',false)*/?1:0,
-        					'eo_admin_ajax_url'=>admin_url( 'admin-ajax.php'),
-        					'eo_part_site_url'=>get_site_url().'/index.php',
-        					'eo_part_end_url'=>'/'.$product_url,
-        					'eo_cat_site_url'=>$site_url,
-        					'eo_cat_query'=>http_build_query($_GET),
-        					'btnfilter_now'=>(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))?false:true),
-        					'btnreset_now'=>(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_reset_now'))?false:true),
-        					'_prefix_' => $this->filter_prefix,
-        				);
+    					'eo_product_url'=>$product_url,
+    					//'eo_view_tabular'=>($current_category=='solitaire'?1:0),
+    					'disp_regular'=>wbc()->options->get('eo_wbc_e_tabview_status',false)/*get_option('eo_wbc_e_tabview_status',false)*/?1:0,
+    					'eo_admin_ajax_url'=>admin_url( 'admin-ajax.php'),
+    					'eo_part_site_url'=>get_site_url().'/index.php',
+    					'eo_part_end_url'=>'/'.$product_url,
+    					'eo_cat_site_url'=>$site_url,
+    					'eo_cat_query'=>http_build_query($_GET),
+    					'btnfilter_now'=>(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))?false:true),
+    					'btnreset_now'=>(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_reset_now'))?false:true),
+    					'_prefix_' => $this->filter_prefix,
+    				);
 
 		?>
 		<script>
@@ -2656,7 +2655,7 @@ class EOWBC_Filter_Widget {
 
 		$filter =  apply_filters( 'eowbc_filter_widget_filters_post_clean',$filter,$prefix);
 		$this->__filters__=$filter;
-		//$filter =  apply_filters( 'eowbc_filter_widget_filters',$filter);
+		$filter =  apply_filters( 'eowbc_filter_widget_filters',$filter);
 
 		
 
@@ -2763,18 +2762,21 @@ class EOWBC_Filter_Widget {
 			$filter_sets_first = ( (empty($filter_sets[$filter_sets_first_tab]) or empty($filter_sets[$filter_sets_first_tab]['filter_set_name'])) ? $filter_sets_first_tab : $filter_sets[$filter_sets_first_tab]['filter_set_name'] );
 
 
-			$first_sets_category = wbc()->wc->get_term_by('id',wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_first_category',false),'product_cat');
+			$first_sets_category = wbc()->wc->get_term_by('term_taxonomy_id',wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_first_category',false),'product_cat');
 			if(!empty($first_sets_category) and !is_wp_error($first_sets_category)){
 				$first_sets_category = $first_sets_category->slug;
 			}
 
 			$filter_sets_second = ( (empty($filter_sets[$filter_sets_second_tab]) or empty($filter_sets[$filter_sets_second_tab]['filter_set_name'])) ? $filter_sets_second_tab : $filter_sets[$filter_sets_second_tab]['filter_set_name'] );
 
-			$second_sets_category = wbc()->wc->get_term_by('id',wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_second_category',false),'product_cat');
+			$second_sets_category = wbc()->wc->get_term_by('term_taxonomy_id',wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_second_category',false),'product_cat');
 			if(!empty($second_sets_category) and !is_wp_error($second_sets_category)){
 				$second_sets_category = $second_sets_category->slug;
 			}
 
+			/*var_dump($current_category);
+			var_dump($first_sets_category);
+			die();*/
 
 			if($current_category === $first_sets_category ){
 				$non_adv_ordered_filter = array_merge(
