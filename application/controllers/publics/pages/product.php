@@ -771,10 +771,13 @@ class Product {
 
                     $category_link=$this->eo_wbc_category_link();
 
+                    //var_dump($category_link);
 
                     $url=$site_url.($remove_index?'':'/index.php')."/{$category_base}/".$category_link.
-                    wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>2,'FIRST'=>$post->ID,'SECOND'=>wbc()->sanitize->get('SECOND'),'CART'=>wbc()->sanitize->get('CART'),'ATT_LINK'=>implode(' ',$this->att_link),'CAT_LINK'=>substr($category_link,0,strpos($category_link,'/')))).$site_url_get;
-
+                    wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>2,'FIRST'=>$post->ID,'SECOND'=>wbc()->sanitize->get('SECOND'),'CART'=>wbc()->sanitize->get('CART'),'ATT_LINK'=>implode(' ',$this->att_link)/*,'CAT_LINK'=>substr($category_link,0,strpos($category_link,'/'))*/)).$site_url_get;
+                    
+                    //echo $url;
+                    //die();
                     //$url=get_bloginfo('url').($remove_index?'':'/index.php')."/{$category_base}/".$category_link.
                     //wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>2,'FIRST'=>$post->ID,'SECOND'=>''/*wbc()->sanitize->get('SECOND')*/,'CART'=>wbc()->sanitize->get('CART'),'ATT_LINK'=>implode(' ',$this->att_link),'EO_CHANGE'=>wbc()->sanitize->get('EO_CHANGE')));
 
@@ -1173,31 +1176,11 @@ class Product {
         
 
         $CAT_LINK = '';
-        /*if(is_array($category) && !empty($category)) {            
+        if(is_array($category) && !empty($category)) {
             $CAT_LINK=implode( (wbc()->options->get_option('mapping_prod_mapping_pref','prod_mapping_pref_category','and')==='and'?'+':',') , array_unique($category) );                  
-        } else {
-            $first_parent_object = get_term_by('slug',$this->first_category_slug,'product_cat');
-            $first_parent_slug = $this->first_category_slug;
+        }
+        
 
-            if(!empty($first_parent_object) and !is_wp_error($first_parent_object)) {
-                $first_parent_slug = $first_parent_object->slug;
-            }
-
-            $second_parent_object = get_term_by('slug',$this->second_category_slug,'product_cat');
-            $second_parent_slug = $this->second_category_slug;
-
-            if(!empty($second_parent_object) and !is_wp_error($second_parent_object)) {
-                $second_parent_slug = $second_parent_object->slug;
-            }
-
-            $link.=($this->eo_wbc_get_category()==$this->first_category_slug)
-                        ?                    
-                        $second_parent_slug                    
-                        :                    
-                        $first_parent_slug
-                    
-        }*/                  
-            
         if(is_array($gcategory) && !empty($gcategory)) {
             // $link=implode( (get_option('eo_wbc_map_cat_pref','and')==='and'?'+':',') , $category );                  
             
@@ -1256,8 +1239,8 @@ class Product {
             $product_in = array_map(function($product_in){ return substr($product_in,4); },$product_in);
 
             $link.='products_in='.implode(',',$product_in).'&';
-        }        
-        
+        }      
+
         return $link;
     }
 
