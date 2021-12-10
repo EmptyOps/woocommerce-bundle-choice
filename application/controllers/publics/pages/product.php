@@ -210,7 +210,7 @@ class Product {
                     jQuery('form.cart').prepend("<input type='hidden' name='eo_wbc_add_to_cart_preview' value='1'/>");
                     
                     jQuery(".single_add_to_cart_button.button.alt:not(.disabled):eq(0)").replaceWith(
-                         "<button href='#' id='eo_wbc_add_to_cart_preview' class='single_add_to_cart_button button alt'><?php _e('Add This To Cart','woo-bundle-choice') ?></button>"
+                         "<button href='#' id='eo_wbc_add_to_cart_preview' class='single_add_to_cart_button button alt'><?php _e('Add To Cart','woo-bundle-choice') ?></button>"
                     );
 
                     jQuery(document).on('click','#eo_wbc_add_to_cart_preview',function() {
@@ -655,11 +655,20 @@ class Product {
             // if($category == get_option('eo_wbc_first_slug')){
             if($category == $this->first_category_slug){
                 // $btn_text = get_option('eo_wbc_add_to_cart_text_first', __('Continue', 'woo-bundle-choice'));
-                $btn_text = wbc()->options->get_option('appearance_product_page','fc_atc_button_text',__('Continue', 'woo-bundle-choice'));
+                if(!empty(wbc()->sanitize->get('STEP')) and wbc()->sanitize->get('STEP')==2) {
+                    $btn_text = wbc()->options->get_option('appearance_product_page','fc_atc_button_text_second',__('Continue', 'woo-bundle-choice'));                    
+                } else {
+
+                    $btn_text = wbc()->options->get_option('appearance_product_page','fc_atc_button_text',__('Continue', 'woo-bundle-choice'));
+                }
             // } elseif( $category == get_option('eo_wbc_second_slug') ) {
             } elseif( $category == $this->second_category_slug ) {
                 // $btn_text = get_option('eo_wbc_add_to_cart_text_second', __('Continue', 'woo-bundle-choice'));
-                $btn_text = wbc()->options->get_option('appearance_product_page','sc_atc_button_text',__('Continue', 'woo-bundle-choice'));
+                if(!empty(wbc()->sanitize->get('STEP')) and wbc()->sanitize->get('STEP')==2) {
+                    $btn_text = wbc()->options->get_option('appearance_product_page','sc_atc_button_text_second',__('Continue', 'woo-bundle-choice'));
+                } else {
+                    $btn_text = wbc()->options->get_option('appearance_product_page','sc_atc_button_text',__('Continue', 'woo-bundle-choice'));
+                }
             }
 
             if(empty($btn_text)){
