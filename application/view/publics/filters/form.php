@@ -56,6 +56,13 @@ if(wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting
 			unset($thisObj->___category[array_search($second_tab_term,$thisObj->___category)]);
 		}		
 	}
+
+	/*// 13-12-2021 -- changes by mahesh@emptyops.com for the removal of the second tab as they are not required for initial filter params
+	if(!empty($current_category)) {	
+		$current_category = explode(',',$current_category);
+		unset($current_category[array_search($second_tab_term,$current_category)]);
+		$current_category = implode(',',$current_category);
+	}*/
 }
 
 if(empty($current_category) and empty($_GET['EO_WBC'])) {
@@ -129,7 +136,7 @@ if(empty($_per_page)){
 	<input type="hidden" name="_current_category" value="<?php echo (!empty(wbc()->sanitize->get('CAT_LINK'))?wbc()->sanitize->get('CAT_LINK'):$current_category); ?>" />
 
 	<input type="hidden" name="_category_query" id="eo_wbc_cat_query" 
-		value="<?php echo (!empty(wbc()->sanitize->get('CAT_LINK'))?wbc()->sanitize->get('CAT_LINK'):$current_category); ?>" />
+		value="<?php echo (!empty(wbc()->sanitize->get('CAT_LINK'))?wbc()->sanitize->get('CAT_LINK'):''/*$current_category*/); ?>" />
 		
 	<input type="hidden" name="_category" value="<?php echo implode(',',$thisObj->___category) ?>"/>
 	

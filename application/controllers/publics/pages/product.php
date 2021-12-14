@@ -651,16 +651,25 @@ class Product {
             echo "<style>.double-gutter .tmb{ width: 50%;display: inline-flex; }</style>";         
             $category = $this->eo_wbc_get_category();
             $btn_text = '';
+
+            $add2cart_button = '';
+
             // if($category == get_option('eo_wbc_first_slug')){
             if($category == $this->first_category_slug){
                 // $btn_text = get_option('eo_wbc_add_to_cart_text_first', __('Continue', 'woo-bundle-choice'));
                 $btn_text = wbc()->options->get_option('appearance_product_page','fc_atc_button_text',__('Continue', 'woo-bundle-choice'));
+
+
+                $add2cart_button = wbc()->options->get_option('appearance_product_page','product_page_add_to_basket_diamond');
+
             // } elseif( $category == get_option('eo_wbc_second_slug') ) {
             } elseif( $category == $this->second_category_slug ) {
                 // $btn_text = get_option('eo_wbc_add_to_cart_text_second', __('Continue', 'woo-bundle-choice'));
                 $btn_text = wbc()->options->get_option('appearance_product_page','sc_atc_button_text',__('Continue', 'woo-bundle-choice'));
-            }
 
+                $add2cart_button = wbc()->options->get_option('appearance_product_page','product_page_add_to_basket_ring');
+            }
+            
             if(empty($btn_text)){
                 $btn_text = 'Continue';
             }
@@ -701,7 +710,14 @@ class Product {
                          +"<?php echo $btn_text; ?>"
                          +"</button>"
                         );
-                    <?php endif; ?>
+
+                        <?php if(!empty($add2cart_button)): ?>
+
+                            jQuery(".single_add_to_cart_button.button.alt:not(.disabled):eq(0)").after('<button type="submit" name="add-to-cart" value="<?php echo $post->ID; ?>" class="single_add_to_cart_button button alt"><?php echo $add2cart_button; ?></button>');                            
+                        <?php endif; ?>
+
+                    <?php endif; ?>                    
+
                     });
             </script>
             
@@ -895,9 +911,18 @@ class Product {
                 }                
             }*/
             /*$setting_page_url  = */
-                        
-            $preview_product_id = (empty($_GET['SECOND'])?$post->ID:$_GET['SECOND']);            
+            /*mahesh@emptyops.com -- 11-12-2021*/
+            /* update the URL to the variation link for the sake of the view with the XXX  extension.*/
+
+            $session_set = wbc()->session->get('EO_WBC_SETS',NULL);
+            $preview_product_id = (empty($_GET['SECOND']) ? $post->ID : $_GET['SECOND']);
+            if(!empty($session_set) and !empty($session_set['SECOND']) and !empty($session_set['SECOND'][0])) {
+                $preview_product_id = (empty($session_set['SECOND'][2])?$session_set['SECOND'][0]:$session_set['SECOND'][2]);
+            }
             $setting_page_url = get_permalink($preview_product_id);
+                        
+            /*$preview_product_id = (empty($_GET['SECOND'])?$post->ID:$_GET['SECOND']);            
+            $setting_page_url = get_permalink($preview_product_id);*/
 
             if(wbc()->sanitize->get('FIRST')==='' OR $category==$this->first_category_slug) {
 
