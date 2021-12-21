@@ -75,6 +75,9 @@ class Filter
 
     	/*$table_columns = unserialize(wbc()->options->get_option('lookup_manager','table_columns',serialize(array())));*/
     	$table_columns = unserialize(wbc()->options->get_option('sp_lookup_manager','table_columns',serialize(array())));
+    	/*echo "<pre>";
+    	print_r($table_columns);
+    	echo "</pre>";*/
 		
         if(empty($table_columns)){        	
         	return ['pids'=>array(),'result_count'=>0,'sql'=>''];
@@ -169,15 +172,19 @@ class Filter
             if(!empty(wbc()->sanitize->request('_attribute'))) {
             	foreach (array_filter(explode(',', wbc()->sanitize->request('_attribute'))) as $attr) {
 
+            		$attr_taxonomy = $attr;
+            		if(strpos('pa_',$attr)===false) {
+            			$attr_taxonomy = 'pa_'.$attr_taxonomy;
+            		}
 
-            		if(!empty($table_columns['attribute'][$attr])) {
+            		if(!empty($table_columns['attribute'][$attr_taxonomy])) {
 
 	            		if (isset($_REQUEST['checklist_'.$attr]) && !empty(wbc()->sanitize->request('checklist_'.$attr))) {
 
 	            			$checklist_attributes = array();
 	            			foreach (array_filter(explode(',',wbc()->sanitize->request('checklist_'.$attr))) as $_attribute_field) {
 	            				
-								$_attribute_field = get_term_by('slug',$_attribute_field,$attr);
+								$_attribute_field = get_term_by('slug',$_attribute_field,$attr_taxonomy);
 								
 								if(!empty($_attribute_field) and !is_wp_error($_attribute_field)){
 									$checklist_attributes[] = $_attribute_field->term_id;
@@ -185,7 +192,7 @@ class Filter
 							}
 
 							if(!empty($checklist_attributes)) {
-								$checklist_attribute_fields[$attr] = $checklist_attributes;
+								$checklist_attribute_fields[$attr_taxonomy] = $checklist_attributes;
 							}
 
 	                    } elseif(isset($_REQUEST['min_'.$attr]) && isset($_REQUEST['max_'.$attr])){
@@ -209,7 +216,58 @@ class Filter
 	                }                    
                 }
             }
-        }
+        } elseif(!defined('WP_AJAX')){        	
+	        // on load query_type query.            
+	        $__get = $_GET;
+	        foreach($__get as $get_param_key=>$get_param) {
+	        	
+	        	if(strpos($get_param_key,'query_type_')===0 and !empty($__get['filter_'.substr($get_param_key,11)])) {
+
+	        		$attr_taxonomy = 'pa_'.substr($get_param_key,11);
+	        		$attr = substr($get_param_key,11);
+	        		if(!empty($table_columns['attribute'][$attr_taxonomy])) {
+
+	        			if ($__get['query_type_'.$attr]==='and') {
+
+	            			$checklist_attributes = array();
+	            			foreach (array_filter(explode(',',wbc()->sanitize->request('filter_'.$attr))) as $_attribute_field) {
+	            				
+								$_attribute_field = get_term_by('slug',$_attribute_field,$attr_taxonomy);
+								
+								if(!empty($_attribute_field) and !is_wp_error($_attribute_field)){
+									$checklist_attributes[] = $_attribute_field->term_id;
+								}
+							}
+
+							if(!empty($checklist_attributes)) {								
+								$checklist_attribute_fields[$attr_taxonomy] = $checklist_attributes;
+							}
+
+	                    } elseif(isset($_REQUEST['min_'.$attr]) && isset($_REQUEST['max_'.$attr])){
+	                        
+	                        if ( is_numeric(wbc()->sanitize->request('min_'.$attr)) && is_numeric(wbc()->sanitize->request('max_'.$attr)) ) {
+
+	                        	$min_max_attributes =  $this->range($attr,wbc()->sanitize->request('min_'.$attr),wbc()->sanitize->request('max_'.$attr),true);
+
+	                        	if(!empty($min_max_attributes)) {
+									$attribute_fields[$attr] = $min_max_attributes;
+								}
+	                        }
+	                        else {
+
+	                        	$range_attributes = $this->range($attr,wbc()->sanitize->request('min_'.$attr),wbc()->sanitize->request('max_'.$attr));
+	                        	if(!empty($range_attributes)) {
+									$attribute_fields[$attr] = $range_attributes;
+								}
+	                        }                   
+	                    }
+
+	        		}
+
+	        	}
+
+	        }
+	    }        
 
         if(empty($category_fields)){
         	if(empty(wbc()->sanitize->get('eo_wbc_filter'))) {
@@ -291,13 +349,13 @@ class Filter
         	$field_query = array();
         	foreach ($checklist_attribute_fields as $key => $field) {
 
-        		if(is_array($field)){
+        		if(!is_array($field)){
         			$field[] = -1;
         		}
         		
         		$field_query[]="(`${key}` IN(".implode(',',$field)."))";
         	}
-        	$attribute_fields.=" AND (" .implode(' OR ',$field_query) .")"; 
+        	$attribute_fields.=" AND (" .implode(' AND ',$field_query) .")"; 
         }
 
         global $wpdb;
@@ -324,6 +382,9 @@ class Filter
         	$max_price = $_REQUEST['max_price'];
         }         
         
+        /*echo "SELECT SQL_CALC_FOUND_ROWS `id` FROM `{$lookup_table}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql} AND `{$lookup_table}`.`min_price`>={$min_price} AND `{$lookup_table}`.`max_price`<={$max_price} GROUP BY(`id`) LIMIT ${current_page},${per_page}";
+        die();*/
+
         $lookup_sql = "SELECT SQL_CALC_FOUND_ROWS `id` FROM `{$lookup_table}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql} AND `{$lookup_table}`.`min_price`>={$min_price} AND `{$lookup_table}`.`max_price`<={$max_price} GROUP BY(`id`) LIMIT ${current_page},${per_page}";
 
         if($return_query) {
@@ -347,7 +408,7 @@ class Filter
 		$pids = array_unique($pids);		
 		
 		$this->preload_response = ['pids'=>$pids,'result_count'=>$result_count,'sql'=>$lookup_sql];		
-
+		
 		return ['pids'=>$pids,'result_count'=>$result_count,'sql'=>$lookup_sql];
     }
 

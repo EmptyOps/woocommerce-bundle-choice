@@ -71,7 +71,8 @@ class Lookup_Manager {
 					}
 				}
 
-			} elseif(!$product->is_type('variable')) {
+			/*} elseif(!$product->is_type('variable')) {*/ //removed this section for the variable and simple products
+			} else/*($product->is_type('variable')) */{
 
 				$attributes = $product->get_attributes();
 
@@ -337,7 +338,8 @@ class Lookup_Manager {
 	public function update_product($id, $product) {		
 		$categories = $product->get_category_ids();
 
-		if($product->is_type('variable')){			
+		if($product->is_type('variable')){	
+			//var_dump($product->get_type());
 			$childs = $product->get_children();			
 			if(!empty($childs)){
 

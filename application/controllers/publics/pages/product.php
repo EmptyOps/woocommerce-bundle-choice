@@ -44,7 +44,26 @@ class Product {
                 
             }, 10, 1 );
 
+            // Add gallery elements of the diamond and the ring in the gallery as one
+            // To be coverable later
+            /*add_filter('woocommerce_product_get_gallery_image_ids',function($ids,$product){
+                global $post;
+                if( !empty($product) and $post->ID === $product->get_id()){
 
+                    $session_data = wbc()->session->get('EO_WBC_SETS',FALSE);
+                    if(empty($session_data)) {
+                        $session_data = wbc()->session->get('TMP_EO_WBC_SETS',FALSE);
+                    }
+
+                    if(!empty($session_data)) {
+                        $first_product = wbc()->wc->get_product((empty($session_data['FIRST'][2])?$session_data['FIRST'][0]:$session_data['FIRST'][2]));
+                        var_dump($first_product->get_data());
+                        die();
+                        $ids = array_merge($ids,$first_product->data['gallery_image_ids']);
+                    }
+                }
+                return $ids;
+            },30,2);*/
 
             //if data available at _GET then add to out custom cart
             if(!empty(wbc()->sanitize->get('eo_wbc_add_to_cart_preview'))) {                

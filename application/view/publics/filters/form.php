@@ -172,12 +172,17 @@ if(empty($_per_page)){
 			$thisObj->__filters = apply_filters('sp_wbc_pre_filter_form_attribute',$thisObj->__filters);
 
 			foreach ($thisObj->__filters as $__filter) {						
-
+				
 				if(!empty($_REQUEST[ $__filter['id'] ])) {
 					
 					$queried_attributes[str_replace(['min_','max_'],'',$__filter['id'])] = str_replace(['min_','max_'],'',$__filter['id']);
 
 					$__filter['value'] = sanitize_text_field($_REQUEST[ $__filter['id'] ]);
+				}
+
+				if(!empty($_REQUEST['query_type_'.str_replace(['min_','max_','checklist_'],'',$__filter['id']) ]) and !empty($_REQUEST['filter_'.str_replace(['min_','max_','checklist_'],'',$__filter['id']) ])) {
+
+					$queried_attributes[str_replace(['min_','max_','checklist_'],'',$__filter['id'])] = str_replace(['min_','max_','checklist_'],'',$__filter['id']);
 				}
 
 				?>

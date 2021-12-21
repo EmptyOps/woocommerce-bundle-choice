@@ -990,6 +990,10 @@ class EOWBC_Filter_Widget {
 				unset($__get['SECOND']);
 			}
 
+			if(isset($__get['CART'])) {
+				unset($__get['CART']);
+			}
+
 			$__get['EO_WBC'] = 1;
 			$__get['BEGIN'] = wbc()->sanitize->get('BEGIN');
 			$__get['STEP'] = wbc()->sanitize->get('STEP');
@@ -2168,7 +2172,12 @@ class EOWBC_Filter_Widget {
 
 				}
 
-				$mark = in_array($term_item->id,$query_list);				
+				if(!empty(wbc()->sanitize->get('filter_'.$term->slug))) {
+
+					$query_list = array_merge( $query_list, array_filter(explode('|',str_replace([' ','+',','],'|',wbc()->sanitize->get('filter_'.$term->slug)))) );
+				}
+
+				$mark = in_array($term_item->slug,$query_list);
 				if($non_edit==false && in_array($term_item->id,$query_list)) {
 					$non_edit=true;						
 				}
@@ -2318,9 +2327,7 @@ class EOWBC_Filter_Widget {
 
 						var filter_list= undefined;
 						var filter_target = undefined;
-
-						console.log(icon_filter_type);
-
+						
 						if(icon_filter_type == 1) {
 							/*filter_list = jQuery('[name="checklist_'+__data_filter_slug+'"]');*/
 							filter_list = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="checklist_'+"<?php echo $term->slug; ?>"+'"]');
@@ -2333,7 +2340,8 @@ class EOWBC_Filter_Widget {
 							/*filter_list = jQuery('[name="cat_filter_'+__data_filter_slug+'"]');*/
 							filter_list = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="cat_filter_'+"<?php echo $term->slug; ?>"+'"]');
 							filter_target = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="_category"]');
-						}						
+						}
+
 						let is_single_select = jQuery(this).data('single_select');
 						if(typeof(is_single_select) !== typeof(undefined) && is_single_select==1){
 							jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)').removeClass('eo_wbc_filter_icon_select');
@@ -2344,16 +2352,23 @@ class EOWBC_Filter_Widget {
 								jQuery.fn.wbc_flip_toggle_image(toggleable_selections[0]);
 							}							
 							filter_list.val(jQuery(this).attr("data-slug"));
-						} else {
-							if(filter_list.val().includes( jQuery(this).attr('data-slug'))){
-								filter_list.val(filter_list.val().replace(','+jQuery(this).attr('data-slug'),''));
+						} else {							
+
+							if(filter_list.val().includes(jQuery(this).attr('data-slug'))){
+
+								let filter_list_items = filter_list.val().split(',');
+								let this_slug = jQuery(this).attr('data-slug').trim();
+
+								if(filter_list_items.includes(this_slug)) {
+									filter_list_items.splice(filter_list_items.indexOf(this_slug),1);
+								}
+
+								filter_list.val( filter_list_items.join(',') /*filter_list.val().replace(','+jQuery(this).attr('data-slug'),'')*/);
 							}
 							else {
 								filter_list.val(filter_list.val()+','+jQuery(this).attr("data-slug"));
 							}	
-						}
-
-						
+						}						
 
 						if(filter_target.val().includes(filter_name) && filter_list.val().length==0) {
 							filter_target.val(filter_target.val().replace(','+filter_name,''));
