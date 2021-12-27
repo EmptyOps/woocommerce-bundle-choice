@@ -445,6 +445,96 @@ class Filter
 				die();
 			});*/
 
+			/*add_filter('woocommerce_product_get_image_id',function($id,$post){
+				
+				if( !empty($_REQUEST['_attribute']) and !empty($post) and method_exists($post,'get_type') and $post->get_type()==='variable') {
+
+					$data_store = \WC_Data_Store::load( 'product' );
+					if(!empty($data_store) and !is_wp_error($data_store)) {
+
+						$_attribute = array_filter(explode(',',$_REQUEST['_attribute']));
+						if(!empty($_attribute) and is_array($_attribute)) {
+
+							$variation_query = array();
+							foreach($_attribute as $taxonomy_slug) {
+
+								if(!empty( $_REQUEST['checklist_'.$taxonomy_slug] )) {
+
+									$terms_list = explode(',',$_REQUEST['checklist_'.$taxonomy_slug]);
+									if(!empty($terms_list)) {
+										$terms_list = array_filter($terms_list);
+										$term = \end($terms_list);
+										if(strpos('pa_',$taxonomy_slug)===0){
+											$variation_query['attribute_'.$taxonomy_slug] = $term;	
+										} else {
+											$variation_query['attribute_pa_'.$taxonomy_slug] = $term;
+										}
+									}
+
+								}//elseif(!empty( wbc()->sanitize->get('min_'.$taxonomy_slug) )) {
+									//$variation_query['attribute_'.$taxonomy_slug] = $term;
+								//}
+							}
+
+							if(!empty($variation_query)) {
+
+								$variation_id = $data_store->find_matching_product_variation( $post, $variation_query);
+
+								if(!empty($variation_id)) {
+									$variation_product = wbc()->wc->get_product($variation_id);
+									return $variation_product->get_image_id();
+								}
+							}
+						}
+					}
+				}
+				return $id;				
+			},99,2);
+
+			add_filter('woocommerce_product_add_to_cart_url',function($url,$post){
+				
+				if( !empty($_REQUEST['_attribute']) and !empty($post) and method_exists($post,'get_type') and $post->get_type()==='variable') {
+
+					$data_store = \WC_Data_Store::load( 'product' );
+					if(!empty($data_store) and !is_wp_error($data_store)) {
+
+						$_attribute = array_filter(explode(',',$_REQUEST['_attribute']));
+						if(!empty($_attribute) and is_array($_attribute)) {
+
+							$variation_query = array();
+							foreach($_attribute as $taxonomy_slug) {
+
+								if(!empty( $_REQUEST['checklist_'.$taxonomy_slug] )) {
+
+									$terms_list = explode(',',$_REQUEST['checklist_'.$taxonomy_slug]);
+									if(!empty($terms_list)) {
+										$terms_list = array_filter($terms_list);
+										$term = \end($terms_list);
+										if(strpos('pa_',$taxonomy_slug)===0){
+											$variation_query['attribute_'.$taxonomy_slug] = $term;	
+										} else {
+											$variation_query['attribute_pa_'.$taxonomy_slug] = $term;
+										}
+									}
+
+								}// elseif(!empty( wbc()->sanitize->get('min_'.$taxonomy_slug) )) {
+									//$variation_query['attribute_'.$taxonomy_slug] = $term;
+								//}
+							}
+
+							if(!empty($variation_query)) {
+								$variation_id = $data_store->find_matching_product_variation( $post, $variation_query);
+								if(!empty($variation_id)) {
+									$variation_product = wbc()->wc->get_product($variation_id);
+									return $variation_product->get_permalink();
+								}
+							}
+						}
+					}
+				}
+				return $url;
+			},PHP_INT_MAX,2);*/
+
 		    add_filter('pre_get_posts',function($query ) {
 
 		    	$_GET = apply_filters('filter_widget_ajax_pre_get',$_GET);		        	

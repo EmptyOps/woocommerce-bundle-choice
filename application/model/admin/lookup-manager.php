@@ -54,8 +54,11 @@ class Lookup_Manager {
 
 			if($product->is_type('variation')) {
 				
-				$attributes = $product->get_variation_attributes();
-				//var_dump($attributes);
+				$attributes = /*$product->get_attributes(); */$product->get_variation_attributes();
+
+				$parent_product = wbc()->wc->get_product($product->get_parent_id());
+				$parent_attributes = $parent_product->get_attributes();
+
 				if(!empty($attributes) and is_array($attributes)) {
 					foreach ($attributes as $attr_key => $attr_value) {
 						if(strpos($attr_key,'attribute_')===0){
@@ -68,6 +71,19 @@ class Lookup_Manager {
 						} elseif (empty($attr_value)) {
 							$attributes_list[$attr_key] = -1;
 						}						
+					}
+				}
+
+				if(!empty($parent_attributes) and is_array($parent_attributes)) {
+					foreach($parent_attributes as $parent_attribute_slug => $parent_attribute ) {
+
+						if(empty($attributes_list[$parent_attribute_slug])) {
+							$parent_attribute_options = $parent_attribute->get_options();
+							if(!empty($parent_attribute_options) and is_array($parent_attribute_options)) {
+								$attributes_list[$parent_attribute_slug] = \current($parent_attribute_options);
+							}
+						}
+
 					}
 				}
 
