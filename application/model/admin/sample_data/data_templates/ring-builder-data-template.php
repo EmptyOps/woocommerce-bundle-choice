@@ -66,6 +66,18 @@ class Ring_Builder_Data_Template extends Pair_Builder_Data_Template {
                         'label' => 'Colour',
                         'terms' => array('D','E','F','G','H','I','J','K','L','M'),
                         'terms_meta'=>array('#7edff2','#54de97','#608bf0','#f252ca','#60630a','#ffa70f','#ab7113','#c70fff','#968d8d','#96f38d'),
+                        'thumb'=>array(
+                                        $_img_url.'d_colors.png',
+                                        $_img_url.'e_colors.png',
+                                        $_img_url.'f_colors.png',
+                                        $_img_url.'g_colors.png',
+                                        $_img_url.'h_colors.png',
+                                        $_img_url.'i_colors.png',
+                                        $_img_url.'j_colors.png',
+                                        $_img_url.'k_colors.png',
+                                        $_img_url.'l_colors.png',
+                                        $_img_url.'m_colors.png'
+                                    ),
                         'description' => 'Colour attributes for diamond shape',
                         'slug' => 'eo_colour_attr',
                         'type'=>'color',
@@ -145,6 +157,18 @@ class Ring_Builder_Data_Template extends Pair_Builder_Data_Template {
                                         $_img_url.'heart.png',
                                         $_img_url.'cushion.png'
                                     ),
+                        'thumb'=>array(
+                                        $_img_url.'round.png',
+                                        $_img_url.'princess.png',
+                                        $_img_url.'emerald.png',
+                                        $_img_url.'asscher.png',
+                                        $_img_url.'marquise.png',
+                                        $_img_url.'oval.png',
+                                        $_img_url.'rediant.png',
+                                        $_img_url.'pear.png',
+                                        $_img_url.'heart.png',
+                                        $_img_url.'cushion.png'
+                                    ),
                         'description' => 'Shape of the Ring and Diamond',
                         'slug' => 'shape',
                         'type'=>'dropdown_image',
@@ -154,6 +178,12 @@ class Ring_Builder_Data_Template extends Pair_Builder_Data_Template {
                         'label' => 'Ring Style',
                         'terms' => array('Halo','Pave','Solitaire','Trilogy'),
                         'terms_meta'=>array(
+                                        $_img_url.'halo_selected.png',
+                                        $_img_url.'pave_selected.png',
+                                        $_img_url.'solitaire_selected.png',
+                                        $_img_url.'trilogy_selected.png'
+                                    ),
+                        'thumb'=>array(
                                         $_img_url.'halo.png',
                                         $_img_url.'pave.png',
                                         $_img_url.'solitaire.png',
@@ -168,6 +198,15 @@ class Ring_Builder_Data_Template extends Pair_Builder_Data_Template {
                         'label' => 'Metal',
                         'terms' => array('14K White Gold','18K White Gold','14K Yellow Gold','18K Yellow Gold','14K Rose Gold','18K Rose Gold','Platinum'),
                         'terms_meta'=>array(
+                                        $_img_url.'wg-14.jpg',
+                                        $_img_url.'wg-18.jpg',
+                                        $_img_url.'yg-14.jpg',
+                                        $_img_url.'yg-18.jpg',
+                                        $_img_url.'rg-14.jpg',
+                                        $_img_url.'rg-18.jpg',
+                                        $_img_url.'pl.jpg'
+                                    ),
+                        'thumb'=>array(
                                         $_img_url.'wg-14.jpg',
                                         $_img_url.'wg-18.jpg',
                                         $_img_url.'yg-14.jpg',
@@ -519,42 +558,49 @@ class Ring_Builder_Data_Template extends Pair_Builder_Data_Template {
                         array(
                                 array(
                                     'thumb' => $_img_url.'wg-14.jpg',
+                                    'thumb_selected' => $_img_url.'wg-14.jpg',
                                     'name' => '14K White Gold',
                                     'description' => '14k white gold category for metal',
                                     'slug' => 'eo_metal_14k_white_gold_cat'
                                 ),
                                 array(
                                     'thumb' => $_img_url.'wg-18.jpg',
+                                    'thumb_selected' => $_img_url.'wg-18.jpg',
                                     'name' => '18K White Gold',
                                     'description' => '18k white gold category for metal',
                                     'slug' => 'eo_metal_18k_white_gold_cat'
                                 ),
                                 array(
                                     'thumb' => $_img_url.'yg-14.jpg',
+                                    'thumb_selected' => $_img_url.'yg-14.jpg',
                                     'name' => '14K Yellow Gold',
                                     'description' => '14k yellow gold category for metal',
                                     'slug' => 'eo_metal_14k_yellow_gold_cat'
                                 ),
                                 array(
                                     'thumb' => $_img_url.'yg-18.jpg',
+                                    'thumb_selected' => $_img_url.'yg-18.jpg',
                                     'name' => '18K Yellow Gold',
                                     'description' => '18k yellow gold category for metal',
                                     'slug' => 'eo_metal_18k_yellow_gold_cat'
                                 ),
                                 array(
                                     'thumb' => $_img_url.'rg-14.jpg',
+                                    'thumb_selected' => $_img_url.'rg-14.jpg',
                                     'name' => '14K Rose Gold',
                                     'description' => '14k rose gold category for metal',
                                     'slug' => 'eo_metal_14k_rose_gold_cat'
                                 ),
                                 array(
                                     'thumb' => $_img_url.'rg-18.jpg',
+                                    'thumb_selected' => $_img_url.'rg-18.jpg',
                                     'name' => '18K Rose Gold',
                                     'description' => '18k rose gold category for metal',
                                     'slug' => 'eo_metal_18k_rose_gold_cat'
                                 ),
                                 array(
                                     'thumb' => $_img_url.'pl.jpg',
+                                    'thumb_selected' => $_img_url.'pl.jpg',
                                     'name' => 'Platinum',
                                     'description' => 'Platinum category for metal',
                                     'slug' => 'eo_metal_platinum_cat'

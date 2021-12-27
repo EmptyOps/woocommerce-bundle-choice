@@ -19,7 +19,7 @@ class Category {
     private function __construct() {        
     }
 
-    public function init() {
+    public function init($category = '') {
 
         $this->first_category_slug = wbc()->options->get_option('configuration','first_slug');
         $first_category_object = get_term_by('slug',$this->first_category_slug,'product_cat');
@@ -210,7 +210,9 @@ class Category {
         /*}
             */
         if( $this->is_shortcode_filter ) {
-            \eo\wbc\model\publics\component\EOWBC_Filter_Widget::instance()->init(false,$this->filter_prefix,$this->is_shortcode_filter);
+            $add_category = \eo\wbc\model\publics\component\EOWBC_Filter_Widget::instance();
+            $add_category->_category = $this->_category;
+            $add_category->init(false,$this->filter_prefix,$this->is_shortcode_filter);
         }
 
     }

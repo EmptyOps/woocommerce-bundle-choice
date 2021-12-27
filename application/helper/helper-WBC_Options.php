@@ -20,7 +20,7 @@ class WBC_Options {
 		} else {
 			return $default;
 		}		
-	}
+	} 
 
 	public function update_option_group(string $option,$value) {
 

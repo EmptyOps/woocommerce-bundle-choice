@@ -233,6 +233,7 @@ class Service {
         }
 
         if(!empty($bonus_features['filters_shortcode'])){
+            
             add_shortcode('wbc-shortcode-filters',function($params){
 
                 $params = shortcode_atts([
@@ -242,6 +243,7 @@ class Service {
                 $shortcode_filter = \eo\wbc\controllers\publics\pages\Shortcode_Filters::instance();
                 $shortcode_filter->_category = $params['category'];
                 $shortcode_filter->init();                
+
             },10);
         }
         

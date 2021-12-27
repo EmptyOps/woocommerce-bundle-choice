@@ -19,7 +19,7 @@ class Shop_Category_Filter extends Category {
         $this->filter_prefix ='sc_';
     }
 
-    public function init() {
+    public function init($category = '') {
 
         $shop_page_status = wbc()->options->get_option('filters_sc_filter_setting','sc_shop_cat_filter_location_shop');
 
