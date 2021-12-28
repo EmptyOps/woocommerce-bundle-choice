@@ -195,6 +195,8 @@ function eo_wbc_filter_render_html(data,render_container) {
 	*/
 	window.eo_wbc_object.enable_filter = true;
 	jQuery.fn.eo_wbc_filter_change_native= function(init_call=false,form_selector="form#eo_wbc_filter",render_container='',parameters={}) {
+
+		console.log(form_selector);
 	//flag indicates if to show products in tabular view or woocommerce's default style.		
 
 		if(window.eo_wbc_object.enable_filter===false){
@@ -267,8 +269,8 @@ jQuery(document).ready(function($){
 	    e.preventDefault();
 	    e.stopPropagation();
 	    
-		jQuery('[name="paged"]').val(parseInt(jQuery(this).text().replace(',','')));
-		jQuery.fn.eo_wbc_filter_change();
+		jQuery('[name="paged"]').val(parseInt(jQuery(this).text().replace(',','')));		
+		jQuery.fn.eo_wbc_filter_change(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
 	});
 	
 	jQuery("[data-toggle_column]").click(function(){
@@ -314,7 +316,7 @@ jQuery(document).ready(function($){
 
 		//pagination for non-table based view
 
-		jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").on('click','a,.jet-filters-pagination__link',function(event){
+		jQuery("body").on('click','.woocommerce-pagination a,.pagination a,.jet-filters-pagination a,.woocommerce-pagination .jet-filters-pagination__link,.pagination .jet-filters-pagination__link,.jet-filters-pagination .jet-filters-pagination__link',function(event){
 			
 			event.preventDefault();
 			event.stopPropagation();								
@@ -331,7 +333,8 @@ jQuery(document).ready(function($){
 			else {
 				jQuery("[name='paged']").val(jQuery(this).text());
 			}		
-			jQuery.fn.eo_wbc_filter_change();
+
+			jQuery.fn.eo_wbc_filter_change(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
 		});
 	}
 	/////////////////////////

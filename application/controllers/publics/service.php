@@ -233,16 +233,17 @@ class Service {
         }
 
         if(!empty($bonus_features['filters_shortcode'])){
+            
+            add_shortcode('wbc-shortcode-filters',function($params){
 
-            add_shortcode('wbc-shortcode-filters',function($atts){
+                $params = shortcode_atts([
+                    'category'=>''
+                ],$params,'wbc-shortcode-filters');
 
-                $atts = shortcode_atts( array(
-                    'category' => ''
-                ), $atts );
-                /*echo "<pre>"; print_r($atts['category']);
-                echo "</pre>";
-                die();*/
-                \eo\wbc\controllers\publics\pages\Shortcode_Filters::instance()->init($atts['category']);
+                $shortcode_filter = \eo\wbc\controllers\publics\pages\Shortcode_Filters::instance();
+                $shortcode_filter->_category = $params['category'];
+                $shortcode_filter->init();                
+
             },10);
         }
         
