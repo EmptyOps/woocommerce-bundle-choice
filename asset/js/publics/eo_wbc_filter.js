@@ -137,21 +137,26 @@ function eo_wbc_filter_render_html(data,render_container) {
 			if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination').length>0){
 				jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html());
 			} else {
-				let product_container = jQuery(".products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)");
-				if(product_container.length<=0) {
-					product_container = jQuery(".elementor-products-grid");
+
+				if(jQuery(render_container).length>0) {
+					jQuery(render_container).after( '<nav class="woocommerce-pagination">'+jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html()+'</nav>');	
+				} else{
+
+					let product_container = jQuery(".products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)");
 					if(product_container.length<=0) {
-						product_container = jQuery(".elementor-widget-container").has('[data-elementor-type="loop"]');
+						product_container = jQuery(".elementor-products-grid");
 						if(product_container.length<=0) {
-							product_container = jQuery("[data-widget_type='archive-posts.archive_custom']");						
+							product_container = jQuery(".elementor-widget-container").has('[data-elementor-type="loop"]');
+							if(product_container.length<=0) {
+								product_container = jQuery("[data-widget_type='archive-posts.archive_custom']");						
+							}
 						}
 					}
+					jQuery(product_container).after( '<nav class="woocommerce-pagination">'+jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html()+'</nav>');
 				}
-				//jQuery(product_container).append('<nav class="woocommerce-pagination">'+jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html()+'</nav>');
 			}
-		}
-		else {
-			jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html('');	
+		} else {
+			jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html('');
 		}
 	/*}*/
 
@@ -205,7 +210,7 @@ function eo_wbc_filter_render_html(data,render_container) {
 			if(href.indexOf('?')==-1) {
 				jQuery(element).attr('href',jQuery(element).attr('href')+eo_wbc_object.eo_product_url);
 			} else {
-				jQuery(element).attr('href',href.substring(0,href.indexOf('?'))+eo_wbc_object.eo_product_url);
+				jQuery(element).attr('href',href.substring(0,href.indexOf('?'))+eo_wbc_object.eo_product_url+'&'+href.substring(href.indexOf('?')+1));
 			}
 		}
 		

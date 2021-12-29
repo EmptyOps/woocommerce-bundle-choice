@@ -413,6 +413,49 @@ class Filter
     }
 
 
+    public function variation_url($url,$post) {
+    	if( !empty($_REQUEST['_attribute']) and !empty($post) and method_exists($post,'get_type') and $post->get_type()==='variable') {
+
+			$data_store = \WC_Data_Store::load( 'product' );
+			if(!empty($data_store) and !is_wp_error($data_store)) {
+
+				$_attribute = array_filter(explode(',',$_REQUEST['_attribute']));
+				if(!empty($_attribute) and is_array($_attribute)) {
+
+					$variation_query = array();
+					foreach($_attribute as $taxonomy_slug) {
+
+						if(!empty( $_REQUEST['checklist_'.$taxonomy_slug] )) {
+
+							$terms_list = explode(',',$_REQUEST['checklist_'.$taxonomy_slug]);
+							if(!empty($terms_list)) {
+								$terms_list = array_filter($terms_list);
+								$term = \end($terms_list);
+								if(strpos($taxonomy_slug,'pa_')===0){
+									$variation_query['attribute_'.$taxonomy_slug] = $term;	
+								} else {
+									$variation_query['attribute_pa_'.$taxonomy_slug] = $term;
+								}
+							}
+
+						}// elseif(!empty( wbc()->sanitize->get('min_'.$taxonomy_slug) )) {
+							//$variation_query['attribute_'.$taxonomy_slug] = $term;
+						//}
+					}
+
+					if(!empty($variation_query)) {
+						$variation_id = $data_store->find_matching_product_variation( $post, $variation_query);
+						if(!empty($variation_id)) {
+							$variation_product = wbc()->wc->get_product($variation_id);
+							return $variation_product->get_permalink();
+						}
+					}
+				}
+			}
+		}
+		return $url;
+    }
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////
 	//  Enable non table based filter that loads whole page at front :)
 	//////////////////////////////////////////////////////////////////////////////////////////////////
@@ -445,7 +488,7 @@ class Filter
 				die();
 			});*/
 
-			/*add_filter('woocommerce_product_get_image_id',function($id,$post){
+			add_filter('woocommerce_product_get_image_id',function($id,$post){
 				
 				if( !empty($_REQUEST['_attribute']) and !empty($post) and method_exists($post,'get_type') and $post->get_type()==='variable') {
 
@@ -464,7 +507,7 @@ class Filter
 									if(!empty($terms_list)) {
 										$terms_list = array_filter($terms_list);
 										$term = \end($terms_list);
-										if(strpos('pa_',$taxonomy_slug)===0){
+										if(strpos($taxonomy_slug,'pa_')===0){
 											$variation_query['attribute_'.$taxonomy_slug] = $term;	
 										} else {
 											$variation_query['attribute_pa_'.$taxonomy_slug] = $term;
@@ -491,49 +534,9 @@ class Filter
 				return $id;				
 			},99,2);
 
-			add_filter('woocommerce_product_add_to_cart_url',function($url,$post){
-				
-				if( !empty($_REQUEST['_attribute']) and !empty($post) and method_exists($post,'get_type') and $post->get_type()==='variable') {
-
-					$data_store = \WC_Data_Store::load( 'product' );
-					if(!empty($data_store) and !is_wp_error($data_store)) {
-
-						$_attribute = array_filter(explode(',',$_REQUEST['_attribute']));
-						if(!empty($_attribute) and is_array($_attribute)) {
-
-							$variation_query = array();
-							foreach($_attribute as $taxonomy_slug) {
-
-								if(!empty( $_REQUEST['checklist_'.$taxonomy_slug] )) {
-
-									$terms_list = explode(',',$_REQUEST['checklist_'.$taxonomy_slug]);
-									if(!empty($terms_list)) {
-										$terms_list = array_filter($terms_list);
-										$term = \end($terms_list);
-										if(strpos('pa_',$taxonomy_slug)===0){
-											$variation_query['attribute_'.$taxonomy_slug] = $term;	
-										} else {
-											$variation_query['attribute_pa_'.$taxonomy_slug] = $term;
-										}
-									}
-
-								}// elseif(!empty( wbc()->sanitize->get('min_'.$taxonomy_slug) )) {
-									//$variation_query['attribute_'.$taxonomy_slug] = $term;
-								//}
-							}
-
-							if(!empty($variation_query)) {
-								$variation_id = $data_store->find_matching_product_variation( $post, $variation_query);
-								if(!empty($variation_id)) {
-									$variation_product = wbc()->wc->get_product($variation_id);
-									return $variation_product->get_permalink();
-								}
-							}
-						}
-					}
-				}
-				return $url;
-			},PHP_INT_MAX,2);*/
+			
+			add_filter('woocommerce_product_add_to_cart_url', array($this,'variation_url'),PHP_INT_MAX,2);
+			add_filter('woocommerce_loop_product_link', array($this,'variation_url'),PHP_INT_MAX,2);
 
 		    add_filter('pre_get_posts',function($query ) {
 
@@ -557,23 +560,23 @@ class Filter
 									
 									$results->total = $result_count;
 									
-									$results->total_pages = ceil($result_count / (empty(wc_get_loop_prop('per_page'))?12:wc_get_loop_prop('per_page')) );
+									$results->total_pages = ceil($result_count / (wc_get_default_products_per_row() * wc_get_default_product_rows_per_page())/*(empty(wc_get_loop_prop('per_page'))?12:wc_get_loop_prop('per_page'))*/ );
 									$results->current = (empty($_REQUEST['paged'])?1:str_replace(',','',$_REQUEST['paged']));
-									$results->per_page = (empty(wc_get_loop_prop('per_page'))?12:wc_get_loop_prop('per_page'));
+									$results->per_page = (wc_get_default_products_per_row() * wc_get_default_product_rows_per_page())/*(empty(wc_get_loop_prop('per_page'))?12:wc_get_loop_prop('per_page'))*/;
 									
 									wc_set_loop_prop('total',$result_count);
-									wc_set_loop_prop('total_pages',ceil($result_count / (empty(wc_get_loop_prop('per_page'))?12:wc_get_loop_prop('per_page')) ));
+									wc_set_loop_prop('total_pages',ceil($result_count / (wc_get_default_products_per_row() * wc_get_default_product_rows_per_page())/*(empty(wc_get_loop_prop('per_page'))?12:wc_get_loop_prop('per_page'))*/ ));
 									wc_set_loop_prop('current',(empty($_REQUEST['paged'])?1:str_replace(',','',$_REQUEST['paged'])));
-									wc_set_loop_prop('per_page',(empty(wc_get_loop_prop('per_page'))?12:wc_get_loop_prop('per_page')));
+									wc_set_loop_prop('per_page',(wc_get_default_products_per_row() * wc_get_default_product_rows_per_page())/*(empty(wc_get_loop_prop('per_page'))?12:wc_get_loop_prop('per_page'))*/);
 									return $results;								
 								});
 								
 								echo do_shortcode('[products ids="'.implode(',',$ids).'" class="eowbc_ajax" paginate="true"]');
 								die();
 							} else {
-
+								
 								wc_set_loop_prop( 'total', $result_count );
-								wc_set_loop_prop('total_pages',ceil($result_count / (empty(wc_get_loop_prop('per_page'))?12:wc_get_loop_prop('per_page')) ));
+								wc_set_loop_prop('total_pages',ceil($result_count / (wc_get_default_products_per_row() * wc_get_default_product_rows_per_page()) ));
 								wc_set_loop_prop('current',(empty($_REQUEST['paged'])?1:str_replace(',','',$_REQUEST['paged'])));
 							}
 						}

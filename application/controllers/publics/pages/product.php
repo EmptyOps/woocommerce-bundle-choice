@@ -100,6 +100,43 @@ class Product {
                 }
             }
 
+            add_filter('woocommerce_product_get_image_id',function($id,$product){
+
+                $__get = $_GET;
+
+                global $post;
+
+                if(!empty($product) and method_exists($product,'get_type') and $product->get_type()==='variable' and !empty($__get) and is_array($__get) and $product->get_id()===$post->ID) {
+
+                    $data_store = \WC_Data_Store::load( 'product' );
+                    if(!empty($data_store) and !is_wp_error($data_store)) {
+
+                        $variation_query = array();
+
+                        foreach($__get as $_get_key => $_get_value) {
+
+                            if(strpos($_get_key,'attribute_pa_')===0) {
+                                $variation_query[$_get_key] = $_get_value;
+                            }
+                        }
+                        
+                        if(!empty($variation_query)) {
+
+                            $variation_id = $data_store->find_matching_product_variation( $product, $variation_query);
+
+                            if(!empty($variation_id)) {
+                                $variation_product = wbc()->wc->get_product($variation_id);
+                                return $variation_product->get_image_id();
+                            }
+                        }
+                    }
+
+                }
+
+                return $id;
+
+            },99,2);
+
             $this->init_safe_click();
 
             $this->render_preview();
