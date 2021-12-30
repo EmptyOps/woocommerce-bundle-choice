@@ -225,7 +225,7 @@ function eo_wbc_filter_render_html(data,render_container) {
 /*if(eo_wbc_object.disp_regular=='1'){
 	*/
 	window.eo_wbc_object.enable_filter = true;
-	jQuery.fn.eo_wbc_filter_change_native= function(init_call=false,form_selector="form#eo_wbc_filter",render_container='',parameters={}) {
+	jQuery.fn.eo_wbc_filter_change_native= function(init_call=false,form_selector='form[id*="eo_wbc_filter"]',render_container='',parameters={}) {
 	//flag indicates if to show products in tabular view or woocommerce's default style.		
 
 		if(window.eo_wbc_object.enable_filter===false){
