@@ -48,6 +48,11 @@ if ( ! class_exists( 'Configuration' ) ) {
 		        }
 			}
 
+			$bonus_features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','bonus_features',serialize(array())));
+
+			$sample_data = array();
+			$sample_data = do_action('eowbc_additional_sample_data',$sample_data);
+
 			$form_definition = 	
 					array(
 						'config_automation'=>array(
@@ -66,6 +71,28 @@ if ( ! class_exists( 'Configuration' ) ) {
 												// 'class'=>array('fluid'),
 												// 'size_class'=>array('eight','wide')
 											),
+											
+											'config_automation_shop_category_link'=>(!empty($bonus_features['filters_shop_cat'])?array(
+												'label'=>'Click here for automated configuration and setup Shop/Category Filters',
+												'type'=>'link',
+												'attr'=>array("href='".admin_url('admin.php?page=eowbc&eo_wbc_view_auto_jewel=1&f=filters_shop_cat')."'"),
+												'class'=>array('secondary'),
+												'visible_info'=>array( 'label'=>'Please visit at '.site_url(get_option('woocommerce_permalinks')['category_base'].'eo_diamond_shape_cat/'),
+													'type'=>'visible_info',
+													'class'=>array('fluid', 'small'),
+													'size_class'=>array('sixteen','wide'),
+												),	
+											):array()),
+
+											'config_automation_shop_category_link_visible_info'=>(!empty($bonus_features['filters_shop_cat'])?
+												array(
+													'label'=>'Please visit at '.site_url(get_option('woocommerce_permalinks')['category_base'].'/eo_diamond_shape_cat/')." OR ".site_url(get_option('woocommerce_permalinks')['category_base'].'/eo_setting_shape_cat/')."</br>(The URLs will works with default setting of permalink, if you are using any other setting then follow accodingly)",
+													'type'=>'visible_info',
+													'class'=>array('fluid', 'medium'),
+													'size_class'=>array('sixteen','wide'),
+													'inline'=>false,
+												):array()),
+
 											'config_automation_link'=>array(
 												'label'=>'Click here for automated configuration and setup',
 												'type'=>'link',
@@ -78,7 +105,10 @@ if ( ! class_exists( 'Configuration' ) ) {
 												'class'=>array('fluid', 'medium'),
 												'size_class'=>array('sixteen','wide'),
 												'inline'=>false,
-											),		
+											),
+											
+											
+
 											/*'config_save_automation'=>array(
 												'label'=>'Save',
 												'type'=>'button',				
@@ -271,7 +301,7 @@ if ( ! class_exists( 'Configuration' ) ) {
 										'value'=>wbc()->options->get_option('configuration','config_alternate_breadcrumb','default'),
 										'validate'=>array('required'=>''),
 										'sanitize'=>'sanitize_text_field',
-										'options'=>array('default'=>'Default','template_1'=>'Template 1','template_2'=>'Template 2'/*,'template_3'=>'Template 3'*/),
+										'options'=>apply_filters('eowbc_alternate_breadcrumb',array('default'=>'Default','template_1'=>'Template 1','template_2'=>'Template 2')),
 										'class'=>array(),										
 										'size_class'=>array('required'),
 										'visible_info'=>array( 'label'=>'( Switch to other look of breadcrumb. )',
@@ -308,6 +338,11 @@ if ( ! class_exists( 'Configuration' ) ) {
 									)
 							),						
 					);
+			
+			if(!empty($sample_data)){
+
+				$form_definition['config_automation']['form'] = array_merge($form_definition['config_automation']['form'],$sample_data);
+			}
 					
 			$features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())));
 					

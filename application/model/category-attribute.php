@@ -26,7 +26,7 @@ class Category_Attribute{
 	}
 
   public function get_single_category(int $id) {    
-    return get_term_by('term_taxonomy_id',$id,'product_cat');
+    return wbc()->wc->get_term_by('term_taxonomy_id',$id,'product_cat');
   }
 
 	public function get_category($parent_id = 0,$prefix = '-') {
@@ -45,6 +45,7 @@ class Category_Attribute{
         $categories=array();       	
         foreach ($category as $_category) {                                	
             $categories[$_category->term_taxonomy_id] = \substr($prefix,1).$_category->name;
+            //$categories[$_category->term_id] = \substr($prefix,1).$_category->name;
             // using array_replace to merge the array by keeping the keys.
             $categories = array_replace($categories,$this->get_category($_category->term_id,$prefix.\substr($prefix,0,1)));
         }        
@@ -88,7 +89,7 @@ class Category_Attribute{
           return false;         
         }
       } elseif( is_string($param)) {
-
+        
         foreach (wc_get_attribute_taxonomies() as $attribute) {
 
           if($attribute->attribute_name==$param){

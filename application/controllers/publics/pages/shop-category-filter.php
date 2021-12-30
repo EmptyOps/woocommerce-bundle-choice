@@ -19,7 +19,7 @@ class Shop_Category_Filter extends Category {
         $this->filter_prefix ='sc_';
     }
 
-    public function init() {
+    public function init($category = '') {
 
         $shop_page_status = wbc()->options->get_option('filters_sc_filter_setting','sc_shop_cat_filter_location_shop');
 
@@ -31,7 +31,7 @@ class Shop_Category_Filter extends Category {
         $is_product_category = is_product_category();
         
         $category_term = array_map(function($id){
-            $term = get_term_by('id',$id,'product_cat');
+            $term = wbc()->wc->get_term_by('id',$id,'product_cat');
             if(!empty($term) and !is_wp_error($term)){
                 return $term->slug;
             }
@@ -71,7 +71,7 @@ class Shop_Category_Filter extends Category {
                     if(empty($item['filter_category'])){
                         $_filter[]=$item;  
                     } else{
-                        $term = get_term_by('id',$item['filter_category'],'product_cat');
+                        $term = wbc()->wc->get_term_by('id',$item['filter_category'],'product_cat');
                         if(!empty($term) and !is_wp_error($term) and property_exists($term,'slug') and ($_category === $term->slug)) {
                             $_filter[] = $item;
                         }

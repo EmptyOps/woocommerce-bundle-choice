@@ -27,4 +27,13 @@
 	justify-content: center;
 	align-items: center;
 }
+.image-tools.bottom.left a i {
+    top: 0.5px !important;
+}
 </style>
+
+<?php 
+	add_filter('eowbc_filter_sidebars_widgets',function(){
+		return false;
+	});
+?>

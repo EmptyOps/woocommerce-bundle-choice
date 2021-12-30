@@ -25,14 +25,16 @@ $attributes = \eo\wbc\model\Category_Attribute::instance()->get_attributs();
 
 if(!empty($categories) and is_array($categories)){
 	foreach ($categories as $id => $label) {
-		$term = get_term_by('id',$id,'product_cat');		
+		$term = wbc()->wc->get_term_by('id',$id,'product_cat');		
+		$term_taxonomy_id = $term->term_taxonomy_id;
+		
 		$term_list = get_terms('product_cat', array('hide_empty' => 0, 'orderby' => 'menu_order', 'parent'=>$id));
 		if(!empty($term_list)){
 			$child = array();
 			foreach ($term_list as $term) {
 				$child[$term->term_id] = $term->name;
 			}
-			$_childs[$id] = $child;
+			$_childs[$term_taxonomy_id] = $child;
 		}
 	}
 }
@@ -57,7 +59,7 @@ if(!empty($attributes) and is_array($attributes)){
 			foreach ($taxonomies as $taxonomy){				
 				$child[$taxonomy->slug]=$taxonomy->name;
         	}
-        	$_childs[$term->id] = $child;
+        	$_childs['pa_'.$term->id] = $child;
         }		
 	}
 }
@@ -68,7 +70,7 @@ if(!empty($attributes) and is_array($attributes)){
 	jQuery(window).load(function() {
 		$ = jQuery;
 		
-		_childs = JSON.parse('<?php echo json_encode($_childs); ?>');
+		_childs = JSON.parse('<?php echo str_replace('"','\"',str_replace("'","\'",json_encode($_childs))); ?>');
 		jQuery(".ui.dropdown:has(#d_fconfig_filter)").dropdown({
 			onChange:function() {
 				let filter_field = $(this).dropdown('get value');

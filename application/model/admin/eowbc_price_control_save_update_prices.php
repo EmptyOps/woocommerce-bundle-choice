@@ -24,6 +24,10 @@ class Eowbc_Price_Control_Save_Update_Prices {
 		
 	}
 
+	public static function api_price_markup($price) {
+		return $price;
+	}
+
 	public function save($eo_wbc_jpc_form_data) {
 		wbc()->sanitize->clean($eo_wbc_jpc_form_data);
 

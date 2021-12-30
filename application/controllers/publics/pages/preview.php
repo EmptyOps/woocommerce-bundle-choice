@@ -30,7 +30,13 @@ class Preview {
         {
             $this->eo_wbc_add_this_to_cart();
             //Redirect to cart page.       
-            exit(wp_redirect(wbc()->wc->eo_wbc_get_cart_url()));
+            $cart_url = wbc()->wc->eo_wbc_get_cart_url();
+
+            if(strpos($cart_url,'?')!==false){
+                $cart_url = explode('?', $cart_url)[0];
+            }
+            
+            exit(wp_redirect($cart_url));
         }     
         
         $this->eo_wbc_render();    //Page Review cart data
@@ -315,7 +321,7 @@ class Preview {
                 wbc()->load->model('publics/component/eowbc_breadcrumb');
                 $content= \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_add_breadcrumb(wbc()->sanitize->get('STEP'),wbc()->sanitize->get('BEGIN')).'<br/>';
                 
-                $content.='<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><div class="ui special cards centered" style="margin: auto !important;
+                $content.='<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><div class="ui special cards centered" style="margin: auto !important;direction: ltr;
     min-width: fit-content !important;max-width: fit-content !important;">'.
                     '<div class="card">'.
                         '<div class="blurring dimmable image">'.
@@ -361,10 +367,10 @@ class Preview {
                         '</div>'.
                     '</div>'.
                 '</div>'.
-                '<div class="ui row" style="display:table !important;margin:auto;margin-bottom: 2em !important;"><form action="" method="post" class="woocommerce" style="float:right;margin-top: 1.5em;display:grid !important;">'.
+                '<div class="ui row" style="display:table !important;margin:auto;margin-bottom: 2em !important;"><form name="preview_add_to_cart" id="preview_add_to_cart" action="" method="post" class="woocommerce" style="float:right;margin-top: 1.5em;display:grid !important;">'.
                     '<input type="hidden" name="add_to_cart" value=1>'.
-                    '<button class="ui button right floated aligned" style="width: fit-content;margin: auto;background-color:'.wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active',wbc()->session->get('EO_WBC_BG_COLOR',FALSE))/*get_option('eo_wbc_active_breadcrumb_color',wbc()->session->get('EO_WBC_BG_COLOR',FALSE))*/.'">'.__('Add This To Cart','woo-bundle-choice').
-                    '</button>'.
+                    '<button id="preview_add_to_cart_button" class="ui button right floated aligned" style="width: fit-content;margin: auto;background-color:'.wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active',wbc()->session->get('EO_WBC_BG_COLOR',FALSE))/*get_option('eo_wbc_active_breadcrumb_color',wbc()->session->get('EO_WBC_BG_COLOR',FALSE))*/.'">'.__('Add This To Cart','woo-bundle-choice').
+                    '</button><script>jQuery(document).ready(function(){ jQuery("#preview_add_to_cart_button").on("click",function(){ jQuery("#preview_add_to_cart").get(0).submit(); }); })</script>'.
                 '</form></div>';                
                 add_filter('the_content',function() use($content){
                     if(!in_the_loop() || !is_singular() || !is_main_query() ) return '';

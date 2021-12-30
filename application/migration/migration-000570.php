@@ -28,8 +28,8 @@ class Migration_000570 {
 	}
 
 	public function option() {
-		$first_term = get_term_by('slug',get_option('eo_wbc_first_slug'),'product_cat');
-		$second_term = get_term_by('slug',get_option('eo_wbc_second_slug'),'product_cat');
+		$first_term = wbc()->wc->get_term_by('slug',get_option('eo_wbc_first_slug'),'product_cat');
+		$second_term = wbc()->wc->get_term_by('slug',get_option('eo_wbc_second_slug'),'product_cat');
 
 		$first_id = '';
 		if(!is_wp_error($first_term) and !empty($first_term)){

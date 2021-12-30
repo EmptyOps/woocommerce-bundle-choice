@@ -62,6 +62,12 @@ if(!empty($id) /*and !empty($label)*/){
 				?>
 
 
+			<?php else:  ?>
+				<div class="field">
+			    	<div class="ui toggle checkbox <?php echo !empty($class)?$class:''; ?>">
+			        	<input type="checkbox" name="<?php echo (!empty($id)? $id :'');?>" id="<?php echo (!empty($id)) ? $id:''; ?>" <?php echo (!empty($value)) ? 'checked="checked"':''; ?> value="1">			        	
+			      	</div>
+				</div>
 			<?php endif; ?>
 
 			<?php

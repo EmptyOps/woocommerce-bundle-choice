@@ -21,10 +21,52 @@ class Public_Handler {
 	}
 
 	public static function process(){
+
 		/*
 		*	root method to process all the frontend requests.
 		*/		
-		do_action( 'before_public_process_request' );		
+		do_action( 'before_public_process_request' );
+
+
+		if(!empty($_GET['EO_WBC'])) {
+			add_filter('WPML_filter_link',function($url, $lang_info){
+				$__get = $_GET;
+				unset($__get['lang']);
+				$query_url=http_build_query($__get);
+				if(strpos($url,'/?')!==false) {
+					if(substr($url,-1)==='&'){
+						$url.=$query_url;
+					} else {
+						$url.='&'.$query_url;	
+					}					
+				} elseif(strpos($url,'?')!==false) {
+					if(substr($url,-1)==='&'){
+						$url.=$query_url;
+					} else {
+						$url.='&'.$query_url;	
+					}				
+				} else {
+					$url = untrailingslashit($url).'/?'.$query_url;					
+				}
+				return $url;			
+			},11,2);
+		}
+
+
+		// 10-08-2021 mahesh@emptyops.com
+		// Intial load optimization -- fire intial load filters to avoid initil ajax call.
+		/*if(isset($_GET['EO_WBC']) and !empty($_GET['EO_WBC']) and empty($_GET['_category'])) {
+	        // on load filter
+	        $_GET['eo_wbc_filter']=1;
+	        if(!empty($_GET['CAT_LINK'])){			            
+	            $_GET['_category']='cat_link';
+	            $_REQUEST['_category']='cat_link';
+	            $_GET['cat_filter_cat_link']=$_GET['CAT_LINK'];
+	            $_REQUEST['cat_filter_cat_link']=$_GET['CAT_LINK'];
+	        }
+	        \eo\wbc\controllers\ajax\Filter::instance()->filter();
+	        unset($_GET['eo_wbc_filter']);
+	    }*/
 
 		//Perform plugin's task only if both configuration and mapping are completed.
 		
@@ -58,6 +100,11 @@ class Public_Handler {
 		
 		$features = array_filter(unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array()))));
 		
+		/*var_dump(!empty(array_intersect(array_values($features),array_keys(wbc()->config->get_builders()))),	
+        	wbc()->options->get_option('configuration','config_category',0) == 1,
+            wbc()->options->get_option('configuration','config_map',0) == 1);
+		die();*/
+
         if(	!empty(array_intersect(array_values($features),array_keys(wbc()->config->get_builders())))
         		and        	
         	wbc()->options->get_option('configuration','config_category',0) == 1
@@ -65,6 +112,8 @@ class Public_Handler {
             wbc()->options->get_option('configuration','config_map',0) == 1
         ){
         	
+
+
         	// Support for new url from old url structure.
         	// @since 1.0.0 
         	// prior to 1.0.0 old url was supported
@@ -73,9 +122,63 @@ class Public_Handler {
         		$_GET['SECOND']='';
         	}
 
+        	add_action('init',function(){
+	        	// 10-08-2021 mahesh@emptyops.com
+				// Intial load optimization -- fire intial load filters to avoid initil ajax call.
+	        	/*add_action('template_redirect',function(){
+	        		if (is_product_category()) {*/
+			        	if(isset($_GET['EO_WBC']) and !empty($_GET['EO_WBC']) and empty($_GET['_category'])) {
+				            // on load filter
+				            $_GET['eo_wbc_filter']=1;
+				            if(!empty($_GET['CAT_LINK'])){			            
+				                $_GET['_category']='cat_link';
+				                $_REQUEST['_category']='cat_link';
+				                $_GET['cat_filter_cat_link']=$_GET['CAT_LINK'];
+				                $_REQUEST['cat_filter_cat_link']=$_GET['CAT_LINK'];
+				            }
+
+				            if(wbc()->options->get_option('filters_filter_setting','filter_setting_advance_two_tabs')) {
+				            	$_first_tab_id = wbc()->options->get_option('filters_filter_setting','filter_setting_advance_first_category');
+				            	$_first_tab_key = wbc()->options->get_option('filters_filter_setting','filter_setting_advance_first_tabs');
+				            	$_second_tab_id = wbc()->options->get_option('filters_filter_setting','filter_setting_advance_second_category');
+				            	$_second_tab_key = wbc()->options->get_option('filters_filter_setting','filter_setting_advance_second_tabs');
+
+				            	$_current_category_id = false;
+
+				            	if(!empty($_REQUEST[$_first_tab_key])) {
+				            		$_current_category_id = $_first_tab_id;
+				            	} elseif(!empty($_REQUEST[$_second_tab_key])) {			            		
+				            		$_current_category_id = $_second_tab_id;
+				            	}
+
+				            	if(!empty($_current_category_id)) {
+				            		
+				            		$_current_category_object = wbc()->wc->get_term_by('term_id',$_current_category_id,'product_cat');
+				            		if(!empty($_current_category_object) and !is_wp_error($_current_category_object)) {
+					            		$_GET['_current_category'] = $_current_category_object->slug;
+					                	$_REQUEST['_current_category']= $_current_category_object->slug;
+
+					                	if(!empty($_GET['_category'])){
+					                		$_GET['_category'] .= ','.$_current_category_object->slug;
+					                		$_REQUEST['_category'] .= ','.$_current_category_object->slug;
+					                	} else {
+					                		$_GET['_category'] = $_current_category_object->slug;
+					                		$_REQUEST['_category'] = $_current_category_object->slug;
+					                	}
+					                }
+				            	}
+				            }
+
+				            \eo\wbc\controllers\ajax\Filter::instance()->filter();
+				            unset($_GET['eo_wbc_filter']);
+				        }
+				    /*}
+			    });*/
+			});
+
 
         	add_action('template_redirect',function(){
-        		
+
         		self::instance()->enable_session();        		
         		if(is_front_page()) {
 				    \eo\wbc\controllers\publics\pages\Home::instance()->init();

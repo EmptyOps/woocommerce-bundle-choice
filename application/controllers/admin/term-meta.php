@@ -76,7 +76,6 @@ class Term_Meta {
 				case 'button':
 					break;				
 			}
-
 		}
 	}
 	

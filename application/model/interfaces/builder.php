@@ -11,5 +11,5 @@ interface Builder {
 	/**
 	*	A generic function to build an object for the classes.
 	*/
-	public function build(array $build_data);	
+	//public function build(array $build_data);	
 }

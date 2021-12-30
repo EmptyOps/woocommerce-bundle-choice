@@ -4,7 +4,7 @@ namespace eo\wbc\controllers\admin\menu\page;
 defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'Filters' ) ) {
-	class Filters {
+	class Filters extends \eo\wbc\controllers\admin\Controller {
 
 		private static $_instance;
 		public static function instance() {
@@ -22,19 +22,19 @@ if ( ! class_exists( 'Filters' ) ) {
 		public static function eo_wbc_prime_category_($slug='',$prefix='',$opts_arr=array())
 	    {
 	        $map_base = get_categories(array(
-	            'hierarchical' => 1,
+	            'hierarchical' => false,
 	            'show_option_none' => '',
-	            'hide_empty' => 1,
-	            'parent' => (get_term_by('slug',$slug,'product_cat')?get_term_by('slug',$slug,'product_cat')->term_id:''),
+	            'hide_empty' => false,
+	            'parent' => (wbc()->wc->get_term_by('slug',$slug,'product_cat')?wbc()->wc->get_term_by('slug',$slug,'product_cat')->term_id:''),
 	            'taxonomy' => 'product_cat'
 	        ));
 	        
 	        // $category_option_list='';
 	        
 	        foreach ($map_base as $base) {
-
+	        	
 	            // $category_option_list.= "<option data-type='0' data-slug='{$base->slug}' value='".$base->term_id."'>".$prefix.$base->name."</option>".eo_wbc_prime_category_($base->slug,' --');
-	            $opts_arr[$base->term_id] = array( 'label'=>$prefix.$base->name, 'attr'=>' data-type="0" data-slug="'.$base->slug.'" ' );
+	            $opts_arr[$base->term_taxonomy_id] = array( 'label'=>$prefix.$base->name, 'attr'=>' data-type="0" data-slug="'.$base->slug.'" ' );
 		        $opts_arr = \eo\wbc\controllers\admin\menu\page\Filters::eo_wbc_prime_category_($base->slug,'--',$opts_arr);
 
 	        }
@@ -48,7 +48,7 @@ if ( ! class_exists( 'Filters' ) ) {
 	        // $attributes="";        
 	        foreach (wc_get_attribute_taxonomies() as $item) {                     
 	        	// $attributes .= "<option data-type='1' data-slug='{$item->attribute_name}' value='{$item->attribute_id}'>{$item->attribute_label}</option>";  
-	        	$opts_arr[$item->attribute_id] = array( 'label'=>$item->attribute_label, 'attr'=>' data-type="1" data-slug="'.$item->attribute_name.'" ' );          
+	        	$opts_arr['pa_'.$item->attribute_id] = array( 'label'=>$item->attribute_label, 'attr'=>' data-type="1" data-slug="'.$item->attribute_name.'" ' );          
 	        }
 	        // return $attributes;
 	        return $opts_arr;
@@ -593,7 +593,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							'value'=>'fc1',
 							'validate'=>array('required'=>''),
 							'sanitize'=>'sanitize_text_field',
-							'options'=>array('fc1'=>'Default(Grid View)','fc2'=>'Template 1 (Expand/Collapse)','fc3'=>'Template 2','fc4'=>'Template 3','fc5'=>'Template 4'),
+							'options'=>apply_filters('eowbc_alternate_filter',array('fc1'=>'Default(Grid View)','fc2'=>'Template 1 (Expand/Collapse)','fc3'=>'Template 2','fc4'=>'Template 3','fc5'=>'Template 4')),
 							'class'=>array('fluid'),						
 							'size_class'=>array('required'),
 							'inline'=>false,
@@ -611,7 +611,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							'value'=>'sc1',
 							'validate'=>array('required'=>''),
 							'sanitize'=>'sanitize_text_field',
-							'options'=>array('sc1'=>'Default(Grid View)','sc2'=>'Template 1 (Expand/Collapse)','sc3'=>'Template 2','sc4'=>'Template 3','sc5'=>'Template 4'),
+							'options'=>apply_filters('eowbc_alternate_filter',array('sc1'=>'Default(Grid View)','sc2'=>'Template 1 (Expand/Collapse)','sc3'=>'Template 2','sc4'=>'Template 3','sc5'=>'Template 4')),
 							'class'=>array('fluid'),						
 							'size_class'=>array('required'),
 							'inline'=>false,
@@ -728,7 +728,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
 								'validate'=>array('required'=>''),
-								'options'=>\eo\wbc\controllers\admin\menu\page\Filters::eo_wbc_attributes_( \eo\wbc\controllers\admin\menu\page\Filters::eo_wbc_prime_category_() ),	//array_replace(\eo\wbc\model\Category_Attribute::instance()->get_category(),\eo\wbc\model\Category_Attribute::instance()->get_attributs()),
+								'options'=> apply_filters('eowbc_admin_filter_filters', \eo\wbc\controllers\admin\menu\page\Filters::eo_wbc_attributes_( \eo\wbc\controllers\admin\menu\page\Filters::eo_wbc_prime_category_() ) ),	//array_replace(\eo\wbc\model\Category_Attribute::instance()->get_category(),\eo\wbc\model\Category_Attribute::instance()->get_attributs()),
 								'class'=>array('fluid'),
 								'size_class'=>array('three','wide','required'),
 								// 'attr'=>array("onchange=\"document.getElementById('d_fconfig_type').value=this.options[this.selectedIndex].getAttribute('data-type')\"")
@@ -1079,7 +1079,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
 								'validate'=>array('required'=>''),
-								'options'=>\eo\wbc\controllers\admin\menu\page\Filters::eo_wbc_attributes_( \eo\wbc\controllers\admin\menu\page\Filters::eo_wbc_prime_category_() ),	//array_replace(\eo\wbc\model\Category_Attribute::instance()->get_category(),\eo\wbc\model\Category_Attribute::instance()->get_attributs()),
+								'options'=>apply_filters('eowbc_admin_filter_filters',  \eo\wbc\controllers\admin\menu\page\Filters::eo_wbc_attributes_( \eo\wbc\controllers\admin\menu\page\Filters::eo_wbc_prime_category_() ) ),	//array_replace(\eo\wbc\model\Category_Attribute::instance()->get_category(),\eo\wbc\model\Category_Attribute::instance()->get_attributs()),
 								'class'=>array('fluid'),
 								'size_class'=>array('three','wide','required'),
 								// 'attr'=>array("onchange=\"document.getElementById('s_fconfig_type').value=this.options[this.selectedIndex].getAttribute('data-type')\"")

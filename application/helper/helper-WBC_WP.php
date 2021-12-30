@@ -128,13 +128,14 @@ class WBC_WP {
 
     public function cat_id2slug($id) {
         if(term_exists($id,'product_cat')) {
-            return get_term_by('id',$id,'product_cat')->slug;
+            return wbc()->wc->get_term_by('id',$id,'product_cat')->slug;
         } else {
             return false;
         }         
     }
     public function get_template() {
-        return get_template();
+
+        return basename(get_stylesheet_directory_uri());
     }
 
 
@@ -189,4 +190,47 @@ class WBC_WP {
         }
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    //////////////////////// Theme Function ///////////////////////////////
+   public function get_theme_mod($key,$default='') {
+        if(empty($key)){
+            return '';
+        }
+        return get_theme_mod($key,$default);
+    }
+
+    public function get_stylesheet_directory_uri() {
+        if(function_exists('get_stylesheet_directory_uri')) {
+            return get_stylesheet_directory_uri();
+        } else {
+            return '';
+        }
+    }
+
+    public function get_template_directory_uri() {
+        if(function_exists('get_template_directory_uri')) {
+            return get_template_directory_uri();
+        } else {
+            return '';
+        }
+    }
+
+    public function wishlist_header( $echo = true ) {
+        if(empty($echo)){
+            ob_start();
+        }
+        echo do_shortcode('[ti_wishlist_products_counter]');
+        if(empty($echo)){
+            return ob_get_clean();
+        }
+    }
+
+    public function registation_template_html(){
+        ob_start();
+        wc_get_template('myaccount/form-login.php',array('registration_only'=>true));
+        $registration_only = ob_get_clean();
+
+        return $registration_only;
+    }
 }

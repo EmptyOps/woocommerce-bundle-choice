@@ -6,7 +6,7 @@
 
 ?>
 
-<div class="onclick_redirect step <?php echo ($step==$order)?'active ':' '; ?>" data-begin="<?php echo get_term_link(get_term_by('slug', $second_slug, 'product_cat')->term_id,'product_cat').'EO_WBC=1&BEGIN='.$second_slug.'&STEP=1'; ?>" <?php _e((!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb) and !empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second_url))?'data-clickable_breadcrumb="'.\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second_url.'"':''); ?>>            
+<div class="onclick_redirect step <?php echo ($step==$order)?'active ':' '; ?>" data-begin="<?php echo get_term_link(wbc()->wc->get_term_by('slug', $second_slug, 'product_cat')->term_id,'product_cat').'EO_WBC=1&BEGIN='.$second_slug.'&STEP=1'; ?>" <?php _e((!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb) and !empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second_url))?'data-clickable_breadcrumb="'.\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second_url.'"':''); ?>>            
 
     <div class="ui equal width grid" style="width: 100%;margin-top: -1em !important;">
         <div class="column eowbc_breadcrumb_font"><?php _e($order,'woo-bundle-choice'); ?></div>
@@ -33,7 +33,7 @@
                 } else {
                 ?>
                 <div class="description eowbc_breadcrumb_font"><?php _e($second_name); ?></div>
-                <div><?php _e(get_woocommerce_currency().wc_price($second->get_price())); ?></div>
+                <div><?php /*_e(get_woocommerce_currency().wc_price($second->get_price()));*/ ?><?php _e(wc_price(apply_filters('eowbc_breadcrumb_second_price',$second->get_price(),$second))); ?></div>
                 
                 <div><u><a href="<?php echo $view_url; ?>">View</a></u>&nbsp;|&nbsp;<u><a href="<?php echo $remove_url; ?>" data-remove-url="<?php echo $remove_url; ?>"><?php _e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_change_action_text','Change',true,true)); ?></a></u></div>
             <?php } endif; ?>                    

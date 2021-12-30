@@ -32,7 +32,7 @@ if ( ! class_exists( 'Appearance' ) ) {
 									'def_button'=>array(
 										'label'=>eowbc_lang('Default Button'),
 										'type'=>'checkbox',
-										'value'=>array('1'),
+										'value'=>array( ),
 										'options'=>array('1'=>' '),
 										'is_id_as_name'=>true,
 										'class'=>array('fluid'),						
@@ -300,6 +300,22 @@ if ( ! class_exists( 'Appearance' ) ) {
 								// 'size_class'=>array('sixteen','wide'),
 							),
 						),
+						'fc_atc_button_text_second'=>array(
+							'label'=>eowbc_lang('First Category on Second Step'),
+							'type'=>'text',
+							'validate'=>array('required'=>''),
+							'sanitize'=>'sanitize_text_field',
+							'value'=>'Continue',
+							'class'=>array('fluid'),						
+							'size_class'=>array('eight','wide','required'),
+							'inline'=>false,
+
+							'visible_info'=>array( 'label'=>eowbc_lang('Text to be shown on add to cart button on product page for the first category'),
+								'type'=>'visible_info',
+								'class'=>array('small'),
+								// 'size_class'=>array('sixteen','wide'),
+							),
+						),
 						'sc_atc_button_text'=>array(
 							'label'=>eowbc_lang('Second Category Add to Cart Button Text'),
 							'type'=>'text',
@@ -316,6 +332,24 @@ if ( ! class_exists( 'Appearance' ) ) {
 								// 'size_class'=>array('sixteen','wide'),
 							),							
 						),
+
+						'sc_atc_button_text_second'=>array(
+							'label'=>eowbc_lang('Second Category on Second Step'),
+							'type'=>'text',
+							'validate'=>array('required'=>''),
+							'sanitize'=>'sanitize_text_field',
+							'value'=>'Continue',
+							'class'=>array('fluid'),						
+							'size_class'=>array('eight','wide','required'),
+							'inline'=>false,
+
+							'visible_info'=>array( 'label'=>eowbc_lang('Text to be shown on add to cart button on product page for the second category'),
+								'type'=>'visible_info',
+								'class'=>array('small'),
+								// 'size_class'=>array('sixteen','wide'),
+							),							
+						),
+
 						'product_page_add_to_basket'=>array(
 							'label'=>'Add to Basket Text',
 							'type'=>'text',
@@ -348,7 +382,7 @@ if ( ! class_exists( 'Appearance' ) ) {
 							'label'=>'Show Specification View',
 							'type'=>'checkbox',
 							'sanitize'=>'sanitize_text_field',
-							'value'=>array('1'),
+							'value'=>array( ),
 							'options'=>array('1'=>' '),
 							'is_id_as_name'=>true,
 							'class'=>array(),
@@ -371,7 +405,7 @@ if ( ! class_exists( 'Appearance' ) ) {
 										'type'=>'devider',
 									),*/
 
-/*						'appearence_product_page_toggle_status'=>array(
+					/*'appearence_product_page_toggle_status'=>array(
 							'label'=>eowbc_lang('Toggle Button Enabled?'),
 							'type'=>'checkbox',
 							'value'=>array(wbc()->options->get_option('appearance_product_page','appearence_product_page_toggle_status')),
@@ -555,6 +589,35 @@ if ( ! class_exists( 'Appearance' ) ) {
 								// 'size_class'=>array('sixteen','wide'),
 							)
 						),*/
+					)
+				),
+				'preview_page'=>array(
+					'label'=>'Preview Page',
+					'form'=>array(
+						'appearence_preview_page_section'=>array('label'=>'Appearence of Preview Page','type'=>'segment','desc'=>'Change the appearence of the Preview Page.')
+						,
+						'enable_enquiry'=>array(
+							'label'=>'Allow Enquiry Plugins on Preview Page',
+							'type'=>'checkbox',
+							'sanitize'=>'sanitize_text_field',
+							'value'=>array( ),
+							'options'=>array('1'=>' '),
+							'is_id_as_name'=>true,
+							'class'=>array(),
+							'visible_info'=>array( 'label'=>'If enabled the service by enquiry button will be set on the enquiry page only',
+								'type'=>'visible_info',
+								'class'=>array('fluid', 'small'),
+								'size_class'=>array('sixteen','wide'),
+							),	
+						), 
+						'preview_page_submit_btn'=>array(
+							'label'=>eowbc_lang('Save'),
+							'type'=>'button',								
+							'class'=>array('secondary'),
+							//'size_class'=>array('eight','wide'),
+							'inline'=>false,
+							'attr'=>array('data-tab_key="preview_page"', 'data-action="save"'),
+						)
 					)
 				)
 				

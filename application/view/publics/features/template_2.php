@@ -6,7 +6,7 @@
 if(!empty($product_data)):
   ob_start();
  ?>
-<table class="ui compact celled definition table" style="clear:both;">
+<table class="ui compact celled definition table" style="clear:both;direction: ltr;">
     <thead style="text-align:center;">
       <tr>
         <th style="border-top:1px solid rgba(34,36,38,.1); border-left:1px solid rgba(34,36,38,.1);">Specifications</th>
