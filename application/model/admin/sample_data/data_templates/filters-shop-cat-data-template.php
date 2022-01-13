@@ -440,42 +440,49 @@ class Filters_Shop_Cat_Data_Template extends Pair_Builder_Data_Template {
                         array(
                                 array(
                                     'thumb' => $_img_url.'wg-14.jpg',
+                                    'thumb_selected' => $_img_url.'wg-14.jpg',
                                     'name' => '14K White Gold',
                                     'description' => '14k white gold category for metal',
                                     'slug' => 'eo_metal_14k_white_gold_cat'
                                 ),
                                 array(
                                     'thumb' => $_img_url.'wg-18.jpg',
+                                    'thumb_selected' => $_img_url.'wg-14.jpg',
                                     'name' => '18K White Gold',
                                     'description' => '18k white gold category for metal',
                                     'slug' => 'eo_metal_18k_white_gold_cat'
                                 ),
                                 array(
                                     'thumb' => $_img_url.'yg-14.jpg',
+                                    'thumb_selected' => $_img_url.'wg-14.jpg',
                                     'name' => '14K Yellow Gold',
                                     'description' => '14k yellow gold category for metal',
                                     'slug' => 'eo_metal_14k_yellow_gold_cat'
                                 ),
                                 array(
                                     'thumb' => $_img_url.'yg-18.jpg',
+                                    'thumb_selected' => $_img_url.'wg-14.jpg',
                                     'name' => '18K Yellow Gold',
                                     'description' => '18k yellow gold category for metal',
                                     'slug' => 'eo_metal_18k_yellow_gold_cat'
                                 ),
                                 array(
                                     'thumb' => $_img_url.'rg-14.jpg',
+                                    'thumb_selected' => $_img_url.'wg-14.jpg',
                                     'name' => '14K Rose Gold',
                                     'description' => '14k rose gold category for metal',
                                     'slug' => 'eo_metal_14k_rose_gold_cat'
                                 ),
                                 array(
                                     'thumb' => $_img_url.'rg-18.jpg',
+                                    'thumb_selected' => $_img_url.'wg-14.jpg',
                                     'name' => '18K Rose Gold',
                                     'description' => '18k rose gold category for metal',
                                     'slug' => 'eo_metal_18k_rose_gold_cat'
                                 ),
                                 array(
                                     'thumb' => $_img_url.'pl.jpg',
+                                    'thumb_selected' => $_img_url.'wg-14.jpg',
                                     'name' => 'Platinum',
                                     'description' => 'Platinum category for metal',
                                     'slug' => 'eo_metal_platinum_cat'

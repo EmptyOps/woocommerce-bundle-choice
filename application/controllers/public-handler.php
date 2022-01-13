@@ -17,7 +17,7 @@ class Public_Handler {
 	}
 
 	private function __construct() {
-		// no implementation
+		// no implementation 
 	}
 
 	public static function process(){
