@@ -82,6 +82,8 @@ class Term_Taxonomy_Sync {
 
 	public function get_terms($taxonomy,$parent_id = 0) {
 		global $wpdb;
+		
+
 		$table = 'wp_wc_terms_lookup';		
 		$lookup_table = $wpdb->prefix.$table;
 		return $wpdb->get_results("SELECT * FROM ${lookup_table} WHERE `taxonomy`='${taxonomy}' AND `parent`='${parent_id}'");

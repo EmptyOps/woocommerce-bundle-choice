@@ -599,7 +599,7 @@ class Filter
 						echo "</pre>";*/
 
 				        return $query;
-				    } else {
+				    } else {				    	
 
 				    	if( $query->is_main_query() and !empty($query->query_vars['product_cat'])) {
 
@@ -816,7 +816,8 @@ class Filter
 				                                    'key' => $meta_key,
 				                                    'value' => $_GET['_meta_field_'.$meta_key],
 				                                    'compare' => '<=',
-				                                    'type' => 'DATE'
+				                                    /*'type' => 'DATE'*/
+				                                    'type' => 'NUMERIC'				                                    
 				                                );
 				                            }
 

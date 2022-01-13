@@ -114,9 +114,13 @@ class WBC_WC {
         } else {
             if($taxonomy==='product_cat') {
                 $term_list = get_terms($taxonomy, array('hide_empty' => 0, 'orderby' => $orderby, 'parent'=>$parent_id,'lang'=>''));
-            } else {
-            
-                $term_list = get_terms($taxonomy,array('hide_empty' => 0, 'orderby' => $orderby,'lang'=>''));
+            } else {                
+                $term_list = get_terms(array('taxonomy'=>$taxonomy,'hide_empty'=>false,'orderby' => $orderby,'lang'=>''));
+
+                if(empty($term_list) or empty(array_filter($term_list))) {                    
+                    $term_list = get_terms($taxonomy,array('hide_empty' => 0, 'orderby' => $orderby,'lang'=>''));                    
+                }
+                //$term_list = get_terms($taxonomy,array('hide_empty' => 0, 'orderby' => $orderby,'lang'=>''));
             }            
         }
         return $term_list;

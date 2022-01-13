@@ -171,6 +171,23 @@ class Public_Handler {
 
 				            \eo\wbc\controllers\ajax\Filter::instance()->filter();
 				            unset($_GET['eo_wbc_filter']);
+				        } elseif(!empty($_GET['CAT_LINK']) and empty($_GET['_category'])) {
+				        	$_GET['eo_wbc_filter']=1;
+
+				        	/*$_GET['_category']='cat_link';*/
+			                $_REQUEST['_category']='cat_link';
+			                /*$_GET['cat_filter_cat_link']=$_GET['CAT_LINK'];*/
+			                $_REQUEST['cat_filter_cat_link']=$_GET['CAT_LINK'];
+
+				        	\eo\wbc\controllers\ajax\Filter::instance()->filter();
+				            unset($_GET['eo_wbc_filter']);
+
+				            /*unset($_GET['_category']);
+			                unset($_REQUEST['_category']);
+			                unset($_GET['cat_filter_cat_link']);
+			                unset($_REQUEST['cat_filter_cat_link']);*/
+
+				        	//die();
 				        }
 				    /*}
 			    });*/

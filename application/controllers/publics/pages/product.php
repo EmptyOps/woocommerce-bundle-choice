@@ -1328,6 +1328,8 @@ class Product {
             $link.='products_in='.implode(',',$product_in).'&';
         }
 
+        /*echo $link; die();*/
+
         return $link;
     }
 

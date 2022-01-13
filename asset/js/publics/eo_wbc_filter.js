@@ -175,8 +175,7 @@ function eo_wbc_filter_render_html(data,render_container) {
 		jQuery(".double-gutter .tmb").css('display','inline-flex');
 	}
 	
-	jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination,jet-filters-pagination').css('visibility','visible');
-
+	jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination,jet-filters-pagination').css('visibility','visible');	
 	// Fix for the yith wishlist.
 	if(typeof(yith_wcwl_l10n)=='object'){
 		eowbc_yith_wishlist_fix();

@@ -1048,7 +1048,9 @@ class EOWBC_Filter_Widget {
 		$seprator = '.';
 		if ($filter_type) {
 
-			$term= \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_taxonomy('id',$taxonomy_term_id);//wbc()->wc->eo_wbc_get_attribute( str_replace('pa_','',$id) );
+			$term = wbc()->wc->eo_wbc_get_attribute( str_replace('pa_','',$id) );
+			/*$term= \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_taxonomy('id',$taxonomy_term_id);*/
+			//wbc()->wc->eo_wbc_get_attribute( str_replace('pa_','',$id) );
 
 			//var_dump($term); die();
 
@@ -1060,9 +1062,13 @@ class EOWBC_Filter_Widget {
 				
 				//get_terms(array('taxonomy'=>wc_attribute_taxonomy_name_by_id($term->id),'hide_empty'=>false));
 				/*To be tested -- the section works if the elements are provided for the inclusion*/
+				$taxonomies=get_terms(array('taxonomy'=>wc_attribute_taxonomy_name_by_id($term->id),'hide_empty'=>false));
+
 				if(!empty($item[$__prefix.'_fconfig_elements']) and !empty(explode(',',$item[$__prefix.'_fconfig_elements']))) {
 
-					$taxonomies= \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_terms(wc_attribute_taxonomy_name($term->attribute_name)); 
+					
+					/*$taxonomies= \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_terms(wc_attribute_taxonomy_name($term->attribute_name)); */
+
 					$elements = explode(',',$item[$__prefix.'_fconfig_elements']);
 					$taxonomy = wbc()->wc->get_term_by('slug',$elements[0],$field_slug);
 
@@ -1090,15 +1096,22 @@ class EOWBC_Filter_Widget {
 					}
 				} else {				
 
-					$taxonomies= \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_terms_min_max(wc_attribute_taxonomy_name($term->slug));
+					if(is_wp_error($taxonomies) or empty($taxonomies)){
+						$taxonomies=get_terms(wc_attribute_taxonomy_name_by_id($term->id),array('hide_empty'=>false));
+					}
+
+					
+					//$taxonomies= \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_terms_min_max(wc_attribute_taxonomy_name($term->slug));
 					
 					if( is_wp_error($taxonomies) or empty($taxonomies) ) return false;
 
-					$min_value=array("id"=>$taxonomies['min']->term_id,"slug"=>$taxonomies['min']->slug,"name"=>str_replace(',','.',$taxonomies['min']->name),"type"=>'attr');
+					$min_value=$max_value= array("id"=> current($taxonomies)->term_id,"slug"=>current($taxonomies)->slug,"name"=>str_replace(',','.',current($taxonomies)->name),"type"=>'attr');
 
-					$max_value=array("id"=>$taxonomies['max']->term_id,"slug"=>$taxonomies['max']->slug,"name"=>str_replace(',','.',$taxonomies['max']->name),"type"=>'attr');
+					/*$min_value=array("id"=>$taxonomies['min']->term_id,"slug"=>$taxonomies['min']->slug,"name"=>str_replace(',','.',$taxonomies['min']->name),"type"=>'attr');
 
-					/*foreach ($taxonomies as $taxonomy){
+					$max_value=array("id"=>$taxonomies['max']->term_id,"slug"=>$taxonomies['max']->slug,"name"=>str_replace(',','.',$taxonomies['max']->name),"type"=>'attr');*/
+
+					foreach ($taxonomies as $taxonomy){
 						if(str_replace(',','.',$taxonomy->name) < str_replace(',','.',$min_value['name'])){
 							$min_value=array("id"=>$taxonomy->term_id,"slug"=>$taxonomy->slug,"name"=>str_replace(',','.',$taxonomy->name),"type"=>'attr');
 							//To markdown if coma is used as seperator of in numeric value.
@@ -1114,7 +1127,7 @@ class EOWBC_Filter_Widget {
 								$seprator = ',';
 							}
 						}				                	  	
-		        	}*/
+		        	}
 		        }
 			} else {
 				$alternet_data = apply_filters('eowbc_filters_range_min_max',array('min_value'=>false,'max_value'=>false,'title'=>$field_title,'slug'=>$field_slug,'seprator'=>$seprator,'filter_item'=>$item));
@@ -1149,13 +1162,24 @@ class EOWBC_Filter_Widget {
 				}
 			} else {
 
-				$category = \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_taxonomy('id',$taxonomy_term_id);//wbc()->wc->get_term_by('id',$id,'product_cat');
+				//$category = \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_taxonomy('id',$taxonomy_term_id);
+				//wbc()->wc->get_term_by('id',$id,'product_cat');
+				$category=wbc()->wc->get_term_by('id',$id,'product_cat');
 
 				if(!empty($category) && !is_wp_error($category)){
 
 					$field_title=empty($title)?$category->name:$title;
 					$field_slug=$category->slug;
-					$sub_categories = \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_terms_min_max('product_cat',$taxonomy_term_id);
+					//$sub_categories = \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_terms_min_max('product_cat',$taxonomy_term_id);
+
+					$sub_categories = get_categories(array(
+			            'hierarchical' => 1,
+			            'show_option_none' => '',
+			            'hide_empty' => false,
+			            'parent' => $id,
+			            'taxonomy' => 'product_cat'
+			        ));
+
 					/*$sub_categories = get_categories(array(
 			            'hierarchical' => 1,
 			            'show_option_none' => '',
@@ -1313,19 +1337,28 @@ class EOWBC_Filter_Widget {
 		$field_title='';	
 		$field_slug='';		
 		if ($filter_type) {
-			
-			$term= \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_taxonomy('id',str_replace('pa_','',$id));/* wbc()->wc->eo_wbc_get_attribute( str_replace('pa_','',$id) );*/			
+
+			$term=wbc()->wc->eo_wbc_get_attribute( str_replace('pa_','',$id) );
+
+			//$term= \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_taxonomy('id',str_replace('pa_','',$id));
+			/* wbc()->wc->eo_wbc_get_attribute( str_replace('pa_','',$id) );*/			
 
 			if(!empty($term) && !is_wp_error($term)) {
 
 				$field_title=empty($title)?$term->name:$title;
 				$field_slug=$term->slug;
 
-				$taxonomies = \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_terms(wc_attribute_taxonomy_name($term->slug)); //get_terms(array('taxonomy'=>wc_attribute_taxonomy_name_by_id($term->id),'hide_empty'=>false));
+				$taxonomies = wbc()->wc->get_terms($term->id,'menu_order',wc_attribute_taxonomy_name_by_id($term->id));
 
-				if(is_wp_error($taxonomies)){
-					$taxonomies= \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_terms(wc_attribute_taxonomy_name($term->slug)); //get_terms(wc_attribute_taxonomy_name_by_id($term->id),array('hide_empty'=>false));
-				}
+				//$taxonomies = get_terms(array('taxonomy'=>wc_attribute_taxonomy_name_by_id($term->id),'hide_empty'=>false));
+				//$taxonomies = \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_terms(wc_attribute_taxonomy_name($term->slug));
+				//get_terms(array('taxonomy'=>wc_attribute_taxonomy_name_by_id($term->id),'hide_empty'=>false));
+
+				//if(is_wp_error($taxonomies)){
+					//$taxonomies=get_terms(wc_attribute_taxonomy_name_by_id($term->id),array('hide_empty'=>false));
+					//$taxonomies= \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_terms(wc_attribute_taxonomy_name($term->slug));
+					//get_terms(wc_attribute_taxonomy_name_by_id($term->id),array('hide_empty'=>false));
+				//}
 
 				if(is_wp_error($taxonomies) or empty($taxonomies)) return false;
 
@@ -1339,15 +1372,23 @@ class EOWBC_Filter_Widget {
 	        }
 		}		
 		else {
-
-			$category = \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_taxonomy('id',$id);/*wbc()->wc->get_term_by('id',$id,'product_cat')*/;
+			$category=wbc()->wc->get_term_by('id',$id,'product_cat');
+			//$category = \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_taxonomy('id',$id);
+			/*wbc()->wc->get_term_by('id',$id,'product_cat')*/;
 			
 			if(!empty($category) && !is_wp_error($category)) {
 
 				$field_title=empty($title)?$category->name:$title;
 				$field_slug=$category->slug;
 
-				$sub_categories = \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_terms('product_cat',$id);
+				//$sub_categories = \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_terms('product_cat',$id);
+				$sub_categories = get_categories(array(
+		            'hierarchical' => 1,
+		            'show_option_none' => '',
+		            'hide_empty' => false,
+		            'parent' => $id,
+		            'taxonomy' => 'product_cat'
+		        ));
 
 				/*$sub_categories = get_categories(array(
 		            'hierarchical' => 1,
@@ -1805,7 +1846,9 @@ class EOWBC_Filter_Widget {
 					default:
 						$this->input_step_slider($this->__prefix,$item/*$item['name'],$item['label'],$item['type'],0,$item['column_width'],0,(isset($item['popup'])?$item['popup']:false),$advance*/);
 				}
-				$term=\eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_taxonomy('slug',$item['name']);//wbc()->wc->eo_wbc_get_attribute($item['name']);
+				$term=wbc()->wc->eo_wbc_get_attribute($item['name']);
+				//$term=\eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_taxonomy('slug',$item['name']);
+				//wbc()->wc->eo_wbc_get_attribute($item['name']);
 				if(!empty($term) and !is_wp_error( $term )){
 					$_attr_list[]=$term->slug;	
 				}				
@@ -1871,7 +1914,9 @@ class EOWBC_Filter_Widget {
 						default:
 							$this->input_step_slider($this->__prefix,$item);
 					}		
-					$term = \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_taxonomy('slug',$item['name']);//wbc()->wc->eo_wbc_get_attribute($item['name']);		
+					$term = wbc()->wc->eo_wbc_get_attribute($item['name']);	
+					//$term = \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_taxonomy('slug',$item['name']);
+					//wbc()->wc->eo_wbc_get_attribute($item['name']);		
 					if(!empty($term) and !is_wp_error($term) ){
 						$_attr_list[]=$term->slug;	
 					}			
@@ -1935,7 +1980,9 @@ class EOWBC_Filter_Widget {
 				if($item['type']==0){
 					$term = wbc()->wc->get_term_by('id',$item['name'],'product_cat');
 				} else {
-					$term = \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_taxonomy('slug',$item['name']);//wbc()->wc->eo_wbc_get_attribute($item['name']);
+					$term = wbc()->wc->eo_wbc_get_attribute($item['name']);
+					//$term = \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_taxonomy('slug',$item['name']);
+					//wbc()->wc->eo_wbc_get_attribute($item['name']);
 				}				
 				?>				
 				
@@ -1980,7 +2027,9 @@ class EOWBC_Filter_Widget {
 								default:
 									$this->input_step_slider($this->__prefix,$item/*$item['name'],$item['label'],$item['type'],1,100,$reset=!empty($item['reset'])*/);
 							}		
-							$term = \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_taxonomy('slug',$item['name']);//wbc()->wc->eo_wbc_get_attribute($item['name']);		
+							$term = wbc()->wc->eo_wbc_get_attribute($item['name']);	
+							//$term = \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_taxonomy('slug',$item['name']);
+							//wbc()->wc->eo_wbc_get_attribute($item['name']);		
 							if(!empty($term) and !is_wp_error($term) ){
 								$_attr_list[]=$term->slug;	
 							}	
@@ -2012,7 +2061,9 @@ class EOWBC_Filter_Widget {
 								default:
 									$this->input_step_slider($this->__prefix,$item/*$item['name'],$item['label'],$item['type'],1,100,$reset=!empty($item['reset'])*/);
 							}		
-							$term = \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_taxonomy('slug',$item['name']);//wbc()->wc->eo_wbc_get_attribute($item['name']);		
+							$term = wbc()->wc->eo_wbc_get_attribute($item['name']);
+							//$term = \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_taxonomy('slug',$item['name']);
+							//wbc()->wc->eo_wbc_get_attribute($item['name']);		
 							if(!empty($term) and !is_wp_error($term) ){
 								$_attr_list[]=$term->slug;	
 							}			
@@ -2104,7 +2155,8 @@ class EOWBC_Filter_Widget {
 
 		if($type == 1){
 
-			$term = \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_taxonomy('id',$id);
+			$term = wbc()->wc->eo_wbc_get_attribute($id);
+			//$term = \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_taxonomy('id',$id);
 			//wbc()->wc->eo_wbc_get_attribute($id);
 			$filter = $this->range_steps($id,$title,$type,$__prefix,$item);			
 			if(!empty($filter['force_title'])){			
@@ -2112,10 +2164,12 @@ class EOWBC_Filter_Widget {
 			}
 			$term_list = $filter['list'];
 		} else{
-
-			$term = \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_term('id',$id,'product_cat'); //wbc()->wc->get_term_by('id',apply_filters( 'wpml_object_id',$id,'category', FALSE, 'en'),'product_cat');
+			$term = wbc()->wc->get_term_by('id',apply_filters( 'wpml_object_id',$id,'category', FALSE, 'en'),'product_cat');
+			//$term = \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_term('id',$id,'product_cat');
+			//wbc()->wc->get_term_by('id',apply_filters( 'wpml_object_id',$id,'category', FALSE, 'en'),'product_cat');
 			
-			$term_list =  \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_terms('product_cat',$id);
+			$term_list = wbc()->wc->get_terms(apply_filters( 'wpml_object_id',$id,'category', FALSE, 'en'),'menu_order');
+			//$term_list =  \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_terms('product_cat',$id);
 			//wbc()->wc->get_terms(apply_filters( 'wpml_object_id',$id,'category', FALSE, 'en'),'menu_order');
 									
 			if(!empty($item[$__prefix."_fconfig_elements"])){
@@ -2155,15 +2209,15 @@ class EOWBC_Filter_Widget {
 			$query_list = array();
 
 			if(empty($term_item->term_id) and $type == 1) {				
-				/*$icon = get_term_meta( $term_item->id, $term->slug . '_attachment',true);
+				$icon = get_term_meta( $term_item->id, $term->slug . '_attachment',true);
 				if(empty($icon)) {					
 					$icon = $woocommerce->plugin_url() . '/assets/images/placeholder.png';
-				}*/
+				}
 
-				$icon = $term_item->thumbnail_id;
+				/*$icon = $term_item->thumbnail_id;
 				if(empty($icon)) {
 					$icon = $woocommerce->plugin_url() . '/assets/images/placeholder.png';
-				}
+				}*/
 
 				if(!empty(wbc()->sanitize->get('ATT_LINK'))) {
 					$query_list = array_filter(explode('|',str_replace([' ','+',','],'|',wbc()->sanitize->get('ATT_LINK'))));
@@ -2181,26 +2235,28 @@ class EOWBC_Filter_Widget {
 				if($non_edit==false && in_array($term_item->id,$query_list)) {
 					$non_edit=true;						
 				}
-				/*$select_icon = get_term_meta($term_item->id, 'wbc_attachment',true);*/
 				
-				/*if(empty($select_icon)) {					
+				$select_icon = get_term_meta($term_item->id, 'wbc_attachment',true);
+				
+				if(empty($select_icon)) {					
 					$select_icon = $woocommerce->plugin_url() . '/assets/images/placeholder.png';
-				}*/
-				$select_icon = $term_item->wbc_attachment;
+				}
+				
+				/*$select_icon = $term_item->wbc_attachment;
 				if(empty($select_icon)) {
 					$select_icon = $woocommerce->plugin_url() . '/assets/images/placeholder.png';
-				}
+				}*/
 
 			} else {
-				/*$icon = wp_get_attachment_url( @get_term_meta( $term_item->term_id, 'thumbnail_id', true ));
-
+				$icon = wp_get_attachment_url( @get_term_meta( $term_item->term_id, 'thumbnail_id', true ));
 				if(empty($icon)) {					
 					$icon = $woocommerce->plugin_url() . '/assets/images/placeholder.png';
-				}*/
-				$icon = $term_item->thumbnail_id;
+				}
+
+				/*$icon = $term_item->thumbnail_id;
 				if(empty($icon)) {
 					$icon = $woocommerce->plugin_url() . '/assets/images/placeholder.png';
-				}
+				}*/
 				
 				if(!empty(wbc()->sanitize->get('CAT_LINK'))) {
 					$query_list = array_filter(explode('|',str_replace([' ','+',','],'|',wbc()->sanitize->get('CAT_LINK'))));
@@ -2214,15 +2270,15 @@ class EOWBC_Filter_Widget {
 					$non_edit=true;						
 				}
 
-				/*$select_icon = get_term_meta($term_item->term_id, 'wbc_attachment',true);*/
-				/*if(empty($select_icon)) {					
-					$select_icon = $woocommerce->plugin_url() . '/assets/images/placeholder.png';
-				}*/
-
-				$select_icon = $term_item->wbc_attachment;
-				if(empty($select_icon)) {
+				$select_icon = get_term_meta($term_item->term_id, 'wbc_attachment',true);
+				if(empty($select_icon)) {					
 					$select_icon = $woocommerce->plugin_url() . '/assets/images/placeholder.png';
 				}
+
+				/*$select_icon = $term_item->wbc_attachment;
+				if(empty($select_icon)) {
+					$select_icon = $woocommerce->plugin_url() . '/assets/images/placeholder.png';
+				}*/
 			}
 
 			$truncate_words = wbc()->options->get_option('filters_filter_setting','filter_icon_wrap_filter_label',0,true,true);
@@ -2450,7 +2506,8 @@ class EOWBC_Filter_Widget {
 		$is_single_select = (!empty(${$__prefix.'_fconfig_is_single_select'})?1:0);
 		$term = false;
 		if($type == 1){
-			$term = \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_taxonomy('id',$id);//wbc()->wc->eo_wbc_get_attribute($id);			
+			$term = wbc()->wc->eo_wbc_get_attribute($id);
+			//$term = \eo\wbc\controllers\admin\Term_Taxonomy_Sync::instance()->get_taxonomy('id',$id);//wbc()->wc->eo_wbc_get_attribute($id);			
 		} else{
 			$term = wbc()->wc->get_term_by('id',$id,'product_cat');			
 		}
