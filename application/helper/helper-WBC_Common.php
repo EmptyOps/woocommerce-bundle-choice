@@ -295,4 +295,41 @@ class WBC_Common {
 		wp_enqueue_script('eowbc_fomantic_js','',array('jquery'),'',true);		
     }
 
+    public function site_url($slug='', $query_string=''){
+    	$url = site_url( $slug );
+    	if( !empty($query_string) ) {
+    		if( strpos($url, "?") !== FALSE ) {
+    			$url .= "&".$query_string;
+    		}
+    		else {
+    			$url .= "?".$query_string;
+    		}
+    	}
+    	return $url;
+    }
+
+    public function current_uri(){
+    	return $_SERVER['REQUEST_URI'];
+    }
+
+    public function current_url(){
+    	$pageURL = 'http';
+        if(isset($_SERVER["HTTPS"]) and $_SERVER["HTTPS"] == "on") {
+            $pageURL .= "s";
+        }
+        $pageURL .= "://";
+        if ($_SERVER["SERVER_PORT"] != "80") {
+            $pageURL .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . $_SERVER["REQUEST_URI"];
+        } else {
+            $pageURL .= $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
+        }
+        return $pageURL;
+    }
+
+	public function current_theme_key() {
+		$stylesheet     = get_stylesheet();
+	    $theme_root     = get_theme_root( $stylesheet );
+		return basename( $theme_root )."___".basename( $stylesheet );
+	}
+
 }

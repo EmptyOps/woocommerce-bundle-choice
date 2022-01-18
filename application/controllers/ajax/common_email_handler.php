@@ -223,13 +223,12 @@ if( !empty(wbc()->sanitize->post('_wpnonce')) ) {
 		} else {
 			$email_field_vars = explode(',',$email_field_vars);
 		}
-
 		if(!empty($email_field_vars) and is_array($email_field_vars)){
 			foreach ($email_field_vars as $email_field_key=>$email_field_var) {
-				$email_template = str_replace('{'.$email_field_var.'}',wbc()->sanitize->post($email_field_var), $email_template);	
+				$email_template = str_replace('{'.$email_field_key.'}',wbc()->sanitize->post($email_field_key), $email_template);	
 			}
 		}
-
+			
 		$admin_email=wbc()->options->get('admin_email');
 			
 		if(!empty(sanitize_email($admin_email))){

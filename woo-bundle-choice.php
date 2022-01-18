@@ -141,6 +141,37 @@ if(!class_exists('Woo_Bundle_Choice') ) {
 			defined('EOWBC_ICON_SVG') || define('EOWBC_ICON_SVG', constant('EOWBC_ASSET_URL').'/icon/bundle_logo.svg');
 		}
 
+		public function theme_adaption_check() {
+
+			// admin 
+			if( is_admin() ) {
+				$page_slug = wbc()->sanitize->get('page');
+				if( strpos($page_slug, "---theme-adaption") !== FALSE ) {
+					$curr_plugin_slug = explode("---", $page_slug)[0];
+
+					if( $curr_plugin_slug == 'woo-bundle-choice' ) {
+
+						add_filter('sp_wbc_theme_adaption_config', function( $plugin_slug ) {
+
+							if( $plugin_slug == 'woo-bundle-choice' ) {
+								return wbc()->config->required_hooks_n_filters_etc();
+							}
+						}, 10, 1);
+					}
+
+				}
+			}
+
+			//add action 
+			if( !empty(wbc()->sanitize->get('thadc')) && wbc()->sanitize->get('thadc') == 1 ) {
+				add_action('sp_wbc_theme_adaption_check',function(){
+					wbc()->load->model('utilities/eowbc_theme_adaption_check');
+					eo\wbc\model\utilities\Eowbc_Theme_Adaption_Check::instance()->check( wbc()->config->required_hooks_n_filters_etc() );
+				});
+			}
+			
+		}
+
 		public function init() {
 
 			do_action( 'before_eowbc_load' );
@@ -150,7 +181,10 @@ if(!class_exists('Woo_Bundle_Choice') ) {
 
 			// //TODO temp. hiren added on around 23-04-2020, to manually test activate class
 			// eo\wbc\WooCommerce_Bundle_Choice_Bootstrap::activate();						
-			do_action( 'after_eowbc_load' );			
+			do_action( 'after_eowbc_load' );
+
+			// added on 01-01-2022
+			$this->theme_adaption_check();
 		}
 	}
 
@@ -158,6 +192,9 @@ if(!class_exists('Woo_Bundle_Choice') ) {
 	add_action( 'plugins_loaded', function() {
 		if(function_exists('wc')){
 			wbc()->construct_init();
+
+			//run base service for theme adaption check 
+			eo\wbc\model\UI_Builder::instance()->theme_adaption_check();
 		}
 		
 	},30);

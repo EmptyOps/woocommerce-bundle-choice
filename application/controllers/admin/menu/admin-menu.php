@@ -131,6 +131,7 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 							'template'=>'admin/menu/extensions',
 							'position'=>10
 						),
+						$this->define_theme_adaption_menu()
 					);
 			$features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())));			
 			if(empty($features['ring_builder']) and empty($features['pair_maker']) and empty($features['guidance_tool'])) {
@@ -175,6 +176,18 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 			$this->add_message($features,$menu);
 
 			return $menu;
+		}
+
+		public function define_theme_adaption_menu() {
+			return 	array(
+					'parent_slug'=>'eowbc',
+					'title'=>eowbc_lang('Theme Adaption').' - '.constant('EOWBC_NAME'),
+					'menu_title'=>eowbc_lang('Theme Adaption'),
+					'capability'=>'manage_options',
+					'slug'=>'woo-bundle-choice---theme-adaption',
+					'template'=>'admin/menu/theme-adaption',
+					'position'=>111 
+				);
 		}
 
 		public function get_icon_url() {
@@ -279,6 +292,81 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 				wbc()->options->delete('eo_wbc_mapping_error_report');
 			}
 
+			$this->add_theme_adaption_message('woo-bundle-choice');
+
+		}
+
+		public function add_theme_adaption_message($plugin_slug) {	
+			$theme_adaption_config = apply_filters('sp_wbc_theme_adaption_config',$plugin_slug);
+			if( wbc()->common->isEmptyArr( $theme_adaption_config) ) {
+				return false;
+			}
+		
+			//notification if theme adaption check is not ran: supposed to be shown on any page of admin panel 
+				// with options Run and Close
+				$theme_adcheck_result = wbc()->options->get_option_group('thadcr_'.$plugin_slug,array());
+				if( wbc()->common->isEmptyArr( $theme_adcheck_result ) ) {
+					$this->add_notification( 'error','Run Theme Adaption Check','You should run Theme Adaption Check at earliest, click on the link provided below to view Theme Adaption status and then you can run it from there. It will help ensure that our plugin is adapting smoothly to your website frontend theme.',admin_url('admin.php?page='.$plugin_slug.'---theme-adaption'),'Continue');
+
+				}
+				else 
+				{
+					// show notification when theme is changed and for that theme the theme adaption check is not ran yet 
+					$curr_theme_key = \eo\wbc\model\utilities\Eowbc_Theme_Adaption_Check::current_theme_key();			
+					if( !isset($theme_adcheck_result[$curr_theme_key]) ) {
+						$this->add_notification( 'error','Run Theme Adaption Check for your new Theme','It seems that your website theme is changed so we suggest you run Theme Adaption Check, click on the link provided below to view Theme Adaption status and then you can run it from there. It will help ensure that our plugin is adapting smoothly to your new theme.',admin_url('admin.php?page='.$plugin_slug.'---theme-adaption'),'Continue');
+
+					}
+					else {
+						//notification if theme adaption check has any critical error or concern but not warnings: supposed to be shown on any page of admin panel 
+						// with options Check, Close and Don't show again
+						$is_notify = false;
+						foreach ($theme_adcheck_result as $theme_key => $sections) {
+
+							if( $theme_key != $curr_theme_key ) {
+								continue;
+							}
+
+							foreach ($sections as $section_key => $section) {
+
+								foreach ($section as $required_key => $items) {
+
+									if( $required_key != 'mandatory' ) {
+										continue;
+									}
+
+									foreach ($items as $itemkey => $item) {
+
+										if( $item['result'] == 0 ) {
+											$is_notify = true;
+											break;
+										}
+									}
+
+									if( $is_notify )	break;
+								}	
+								
+								if( $is_notify )	break;
+							}
+
+							if( $is_notify )	break;
+						}
+
+						if( $is_notify ) {
+							$this->add_notification( 'error','There are some critical errors with Theme Adaption','Click on the link provided below to review the errors and to work towards the resolution.',admin_url('admin.php?page='.$plugin_slug.'---theme-adaption'),'Review Errors');
+
+						}
+
+					}
+				}
+
+		}
+
+		public function add_notification($message_type,$message_title,$message,$action_link,$action_text) {
+
+			add_action( 'admin_notices',function() use($message_type,$message_title,$message,$action_link,$action_text){
+				printf('<div class="notice notice-%s is-dismissible"><p><strong>%s</strong> <br>%s</p><p><a href="%s"><strong>%s</strong></a></p></div>',$message_type,$message_title,$message,$action_link,$action_text);
+			});
 		}
 
 		public function get_position() {

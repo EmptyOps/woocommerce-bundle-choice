@@ -93,7 +93,8 @@ if(!class_exists('WBC_Loader')) {
 					//exception handling
 					if( true || constant('WP_DEBUG') == true )
 					{
-						throw new Exception("template file '".constant('EOWBC_TEMPLATE_DIR').$template_path.".php' is not found");
+						// throw new Exception("template file '".constant('EOWBC_TEMPLATE_DIR').$template_path.".php' is not found");
+						throw new Exception("template file '".$path."' is not found, actual non filtered path was '".constant('EOWBC_TEMPLATE_DIR').$template_path.".php'");
 					}
 					else 
 					{
