@@ -63,12 +63,15 @@ class Category {
                 /*Hide the category Title*/
                 add_filter( 'woocommerce_page_title','__return_false');
 
+                $enable_side_bar_widget = unserialize(wbc()->options->get_option('setting_status_advanced_config','enable_side_bar_widget','a:0:{}'));
+                if(empty($enable_side_bar_widget['enable_side_bar_widget'])) {
                 /*Hide sidebar and make content area full width.*/
-                if(apply_filters('eowbc_filter_sidebars_widgets',true)){
-                    add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
-                        return array( false );
-                    });
-                }                
+                    if(apply_filters('eowbc_filter_sidebars_widgets',true)){
+                        add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
+                            return array( false );
+                        });
+                    }    
+                }            
                 /*End --Hide sidebar and make content area full width.*/
 
                 if(

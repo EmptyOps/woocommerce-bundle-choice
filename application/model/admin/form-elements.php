@@ -637,7 +637,7 @@ class Form_Elements {
 		}
 
 		$args['info'] = $info;
-		$args['label'] = "${label} visibility";
+		$args['label'] = "Hide ${label}?";
 		return $this->checkbox($key,$label,$args);
 	}
 
