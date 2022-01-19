@@ -5,6 +5,11 @@
 */
 
 //wbc()->common->pr($options,$force_debug = false,$die = false);
+
+if(is_array($value)) {
+	$value = implode(',',$value);
+}
+
 if(!empty($id) /*and !empty($label)*/){
 	?>	
 	<div class="<?php echo !empty($size_class)?$size_class:''; ?> field" <?php echo !empty($attr)?$attr:''; ?>>

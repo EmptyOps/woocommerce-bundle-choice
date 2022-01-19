@@ -30,7 +30,7 @@ class EOWBC_Breadcrumb
        require_once 'css/eo_wbc_breadcrumb.php';
     }  
     
-    public static function eo_wbc_add_breadcrumb($step=1,$begin){
+    public static function eo_wbc_add_breadcrumb($step=1,$begin=''){
         
         wbc()->load->model('category-attribute');
         $model_category_attribute = \eo\wbc\model\Category_Attribute::instance();
@@ -140,7 +140,7 @@ class EOWBC_Breadcrumb
             wbc()->load->template('publics/breadcrumb/css');
     }
 
-    public static function eo_wbc_breadcrumb_mobile($step=1,$begin){
+    public static function eo_wbc_breadcrumb_mobile($step=1,$begin=''){
 
         ob_start();
 
@@ -179,7 +179,7 @@ class EOWBC_Breadcrumb
         }
     }
 
-    public static function eo_wbc_breadcrumb_desktop($step=1,$begin){
+    public static function eo_wbc_breadcrumb_desktop($step=1,$begin=1){
 
         ob_start();
 
