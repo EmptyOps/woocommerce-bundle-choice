@@ -142,7 +142,21 @@ class UI_Builder implements Builder {
 							}
 
 							$ui_ele['style'].='margin-right:'.wbc()->options->get_option($option_key,$ui_ele['id'].'_margin_right','',true,true).' !important;';
-						}					
+						}
+
+						if(in_array('visibility',$controls)) {
+					
+							if(empty($ui_ele['style'])){
+								$ui_ele['style'] = '';
+							}
+
+
+							if (wbc()->options->get_option($option_key,$ui_ele['id'].'_visibility',-1,true,true) == 1) {
+								//$ui_ele['style'].='display: none !important;';
+								return;	//simply return from here and skip addind element 
+							}
+					
+				}					
 
 					}
 					

@@ -156,7 +156,7 @@ function eo_wbc_filter_render_html(data,render_container) {
 						}
 					}
 				}
-				//jQuery(product_container).append('<nav class="woocommerce-pagination">'+jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html()+'</nav>');
+				jQuery(product_container).after('<nav class="woocommerce-pagination">'+jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html()+'</nav>');
 			}
 		}
 		else {
