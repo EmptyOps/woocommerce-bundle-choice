@@ -164,6 +164,7 @@ class WBC_WP {
             $type = wp_check_filetype($name, null );
 
             $attachment = array(
+                'guid' => $file['url'],
                 'post_mime_type' => $type['type'],
                 'post_parent' => null,
                 'post_title' => preg_replace('/\.[^.]+$/', '', $name),
@@ -171,7 +172,7 @@ class WBC_WP {
                 'post_status' => 'inherit'
             );
 
-            $id = wp_insert_attachment( $attachment, $file['file'], null );
+            $id = @wp_insert_attachment( $attachment, $file['file'], null );
 
             if (!is_wp_error($id)) {
 

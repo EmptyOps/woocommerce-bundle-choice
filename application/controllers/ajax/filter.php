@@ -54,7 +54,7 @@ class Filter
     }
 
     public function lookup($return_query = false,$sql_join = '',$order_sql = ''){
-
+    	
     	$queried_category = wbc()->sanitize->request('_category');
     	$queried_category_object = get_queried_object();
         if(!empty($queried_category_object) and property_exists($queried_category_object,'slug')) {
@@ -361,6 +361,15 @@ class Filter
         global $wpdb;
         $lookup_table = $wpdb->prefix."sp_product_lookup";
         
+
+        if(!empty($_REQUEST['orderby'])) {
+        	if($_REQUEST['orderby']==='price-desc') {        		
+        		$order_sql = " ORDER BY MIN(`{$lookup_table}`.`min_price`) DESC ";        		
+        	} elseif($_REQUEST['orderby']==='price') {
+        		$order_sql = " ORDER BY MAX(`{$lookup_table}`.`max_price`) ASC ";
+        	}		        	
+        }
+
         /*echo "SELECT `product_id`,`parent_id` FROM `{$lookup_table}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql}";;
         die();*/
 
@@ -385,7 +394,9 @@ class Filter
         /*echo "SELECT SQL_CALC_FOUND_ROWS `id` FROM `{$lookup_table}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql} AND `{$lookup_table}`.`min_price`>={$min_price} AND `{$lookup_table}`.`max_price`<={$max_price} GROUP BY(`id`) LIMIT ${current_page},${per_page}";
         die();*/
 
-        $lookup_sql = "SELECT SQL_CALC_FOUND_ROWS `id` FROM `{$lookup_table}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql} AND `{$lookup_table}`.`min_price`>={$min_price} AND `{$lookup_table}`.`max_price`<={$max_price} GROUP BY(`id`) LIMIT ${current_page},${per_page}";
+        /*$lookup_sql = "SELECT SQL_CALC_FOUND_ROWS `id` FROM `{$lookup_table}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql} AND `{$lookup_table}`.`min_price`>={$min_price} AND `{$lookup_table}`.`max_price`<={$max_price} GROUP BY(`id`) LIMIT ${current_page},${per_page}";*/
+
+        $lookup_sql = "SELECT SQL_CALC_FOUND_ROWS `id` FROM `{$lookup_table}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} AND `{$lookup_table}`.`min_price`>={$min_price} AND `{$lookup_table}`.`max_price`<={$max_price} GROUP BY(`id`) ${order_sql} LIMIT ${current_page},${per_page}";
 
         if($return_query) {
         	return $lookup_sql;
@@ -408,7 +419,7 @@ class Filter
 		$pids = array_unique($pids);		
 		
 		$this->preload_response = ['pids'=>$pids,'result_count'=>$result_count,'sql'=>$lookup_sql];		
-		
+
 		return ['pids'=>$pids,'result_count'=>$result_count,'sql'=>$lookup_sql];
     }
 
@@ -841,18 +852,7 @@ class Filter
 
 			        	}
 			        }
-
-			        if(!empty($_REQUEST['orderby'])) {
-			        	if($_REQUEST['orderby']==='price-desc') {
-			        		$query->set('orderby','meta_value_num');
-			        		$query->set('order','desc');
-			        		$query->set('meta_key','_price');
-			        	} elseif($_REQUEST['orderby']==='price') {
-			        		$query->set('orderby','meta_value_num');
-			        		$query->set('order','asc');
-			        		$query->set('meta_key','_price');	
-			        	}		        	
-			        }
+			        
 			        return $query;
 			        //return apply_filters('filter_widget_ajax_post_query',$query);
 			    }

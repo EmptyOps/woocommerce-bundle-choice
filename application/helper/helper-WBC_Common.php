@@ -310,7 +310,11 @@ class WBC_Common {
 
     public function http_query($param){
     	$param = apply_filters('eowbc_helper_http_query',$param);
-    	return http_build_query($param);
+    	if(is_array($param)) {
+    		return http_build_query($param);
+    	} else {
+    		return '';
+    	}
     }
 
     public function is_object($obj){

@@ -43,10 +43,10 @@ if(wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting
 		$second_tab_term = false;
 	}
 
-
 	if(isset($_GET[wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting','filter_setting_advance_second_tabs',false)])) {
 		if(array_search($first_tab_term,$thisObj->___category) !==false ) {			
 			unset($thisObj->___category[array_search($first_tab_term,$thisObj->___category)]);
+			$current_category = implode(',',$thisObj->___category);
 		}
 
 	} else {
@@ -54,6 +54,7 @@ if(wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting
 		if(array_search($second_tab_term,$thisObj->___category) !==false ) {
 
 			unset($thisObj->___category[array_search($second_tab_term,$thisObj->___category)]);
+			$current_category = implode(',',$thisObj->___category);
 		}		
 	}
 
