@@ -798,7 +798,7 @@ class Product {
                 if($return_link) {
                     return $url;
                 }
-
+                
                 return header("Location: {$url}");
                 wp_die();
                 //wp_safe_redirect($url ,301 );               
