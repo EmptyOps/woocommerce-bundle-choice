@@ -127,18 +127,32 @@ class Eowbc_Price_Control_Save_Update_Prices {
 	                foreach ($rs as $post_id) {
 	                	$update_cnt++;
 	                    
-	                    if(!empty( end($q_data)->sales_price)) {
-	                    	//here seems bug should be regular_price instead of sales_price
-	                        //update_post_meta($post_id->object_id,'_price',$q_data[count($q_data)-1]->sales_price);
-	                        update_post_meta($post_id->object_id,'_price',end($q_data)['regular_price']);
-	                        update_post_meta($post_id->object_id,'_sale_price',end($q_data)['sales_price']);
+	                	if(!empty(end($q_data)['ratio_price'])) {
+	                    	
+	                    	$increment_ratio = end($q_data)['ratio_price'];
 
-	                    } else{
-	                        delete_post_meta($post_id->object_id,'_sale_price');                    
-	                        update_post_meta($post_id->object_id,'_price',end($q_data)['regular_price']);
-	                    }            
-	                    update_post_meta($post_id->object_id,'_regular_price',end($q_data)['regular_price']);
-	                    wc_delete_product_transients( $post_id->object_id );
+	                    	update_post_meta($post_id->object_id,'_price', get_post_meta($post_id->object_id,'_price',true)*(1+($increment_ratio/100)));
+
+	                    	update_post_meta($post_id->object_id,'_sale_price', get_post_meta($post_id->object_id,'_sale_price',true)*(1+($increment_ratio/100)));
+
+	                    	update_post_meta($post_id->object_id,'_regular_price', get_post_meta($post_id->object_id,'_regular_price',true)*(1+($increment_ratio/100)));
+
+	                    	wc_delete_product_transients( $post_id->object_id );
+	                    } else {
+
+		                    if(!empty( end($q_data)->sales_price)) {
+		                    	//here seems bug should be regular_price instead of sales_price
+		                        //update_post_meta($post_id->object_id,'_price',$q_data[count($q_data)-1]->sales_price);
+		                        update_post_meta($post_id->object_id,'_price',end($q_data)['regular_price']);
+		                        update_post_meta($post_id->object_id,'_sale_price',end($q_data)['sales_price']);
+
+		                    } else{
+		                        delete_post_meta($post_id->object_id,'_sale_price');                    
+		                        update_post_meta($post_id->object_id,'_price',end($q_data)['regular_price']);
+		                    }            
+		                    update_post_meta($post_id->object_id,'_regular_price',end($q_data)['regular_price']);
+		                    wc_delete_product_transients( $post_id->object_id );
+		                }
 	                }
 	            }
 	            
@@ -169,19 +183,33 @@ class Eowbc_Price_Control_Save_Update_Prices {
 	                		$pid = $post_id['post_id'];
 	                	}
 
-	                    if(!empty($q_data[count($q_data)-1]->sales_price)){
+	                	if(!empty(end($q_data)['ratio_price'])) {
+	                    	
+	                    	$increment_ratio = end($q_data)['ratio_price'];
 
-	                        update_post_meta($pid,'_price',$q_data[count($q_data)-1]->sales_price);
-	                        update_post_meta($pid,'_sale_price',$q_data[count($q_data)-1]->sales_price);
+	                    	update_post_meta($pid,'_price', get_post_meta($pid,'_price',true)*(1+($increment_ratio/100)));
 
-	                    } else{
-	                        delete_post_meta($pid,'_sale_price');                    
-	                        update_post_meta($pid,'_price',$q_data[count($q_data)-1]->regular_price);
-	                    }            
-	                    if(!empty($q_data[count($q_data)-1]->regular_price)){
-	                    	update_post_meta($pid,'_regular_price',$q_data[count($q_data)-1]->regular_price); 
-	                    }
-	                    wc_delete_product_transients($pid);  
+	                    	update_post_meta($pid,'_sale_price', get_post_meta($pid,'_sale_price',true)*(1+($increment_ratio/100)));
+
+	                    	update_post_meta($pid,'_regular_price', get_post_meta($pid,'_regular_price',true)*(1+($increment_ratio/100)));
+	                    	
+	                    	wc_delete_product_transients( $pid );
+	                    } else {
+
+		                    if(!empty($q_data[count($q_data)-1]->sales_price)){
+
+		                        update_post_meta($pid,'_price',$q_data[count($q_data)-1]->sales_price);
+		                        update_post_meta($pid,'_sale_price',$q_data[count($q_data)-1]->sales_price);
+
+		                    } else{
+		                        delete_post_meta($pid,'_sale_price');                    
+		                        update_post_meta($pid,'_price',$q_data[count($q_data)-1]->regular_price);
+		                    }            
+		                    if(!empty($q_data[count($q_data)-1]->regular_price)){
+		                    	update_post_meta($pid,'_regular_price',$q_data[count($q_data)-1]->regular_price); 
+		                    }
+		                    wc_delete_product_transients($pid);  
+		                }
 	                }
 	            }
 	        }
