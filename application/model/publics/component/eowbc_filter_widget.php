@@ -2664,7 +2664,7 @@ class EOWBC_Filter_Widget {
 
 		$filter =  apply_filters( 'eowbc_filter_widget_filters_post_clean',$filter,$prefix);
 		$this->__filters__=$filter;
-		$filter =  apply_filters( 'eowbc_filter_widget_filters',$filter);
+		$filter =  apply_filters( 'eowbc_filter_widget_filters',$filter,$prefix);
 
 		
 
