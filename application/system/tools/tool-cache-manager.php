@@ -24,6 +24,10 @@ class Cache_Manager {
 	}
 
 	public function generate_cache(){
+
+		if(!function_exists('wc')) {
+			return false;
+		}
 		
 		if(!wp_cache_get('cache_taxonomy','eo_wbc')) {
 
