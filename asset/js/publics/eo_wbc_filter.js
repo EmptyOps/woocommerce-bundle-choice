@@ -98,7 +98,7 @@ function eo_wbc_filter_render_html(data,render_container) {
 	
 	/*console.log(data);*/
 
-	let container_html = jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products',jQuery(data)).html();	
+	let container_html = /*jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products',jQuery(data)).html()*/jQuery(jQuery(data),'.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products').html();	
 	
 	/*if(container_html===undefined || container_html==='') {
 		container_html = jQuery(jQuery(data),'.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products').html();
