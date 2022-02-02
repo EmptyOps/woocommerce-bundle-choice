@@ -41,8 +41,8 @@ class Admin {
         if(!empty($bonus_features['price_control'])){
             wbc()->load->model('admin/eowbc_price_control_save_update_prices');
 
-            add_action( 'woocommerce_before_data_object_save',array(\eo\wbc\model\admin\Eowbc_Price_Control_Save_Update_Prices::instance(),'update_product'),10,2);
-            add_action( 'woocommerce_before_product_object_save',array(\eo\wbc\model\admin\Eowbc_Price_Control_Save_Update_Prices::instance(),'update_product'),10,2);
+            /*add_action( 'woocommerce_before_data_object_save',array(\eo\wbc\model\admin\Eowbc_Price_Control_Save_Update_Prices::instance(),'update_product'),10,2);
+            add_action( 'woocommerce_before_product_object_save',array(\eo\wbc\model\admin\Eowbc_Price_Control_Save_Update_Prices::instance(),'update_product'),10,2);*/
 
 			add_action( 'save_post',array(\eo\wbc\model\admin\Eowbc_Price_Control_Save_Update_Prices::instance(),'update_prices'),10,3);
         }

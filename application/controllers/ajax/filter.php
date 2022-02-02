@@ -397,7 +397,7 @@ class Filter
         /*$lookup_sql = "SELECT SQL_CALC_FOUND_ROWS `id` FROM `{$lookup_table}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql} AND `{$lookup_table}`.`min_price`>={$min_price} AND `{$lookup_table}`.`max_price`<={$max_price} GROUP BY(`id`) LIMIT ${current_page},${per_page}";*/
 
         $lookup_sql = "SELECT SQL_CALC_FOUND_ROWS `id` FROM `{$lookup_table}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} AND `{$lookup_table}`.`min_price`>={$min_price} AND `{$lookup_table}`.`max_price`<={$max_price} GROUP BY(`id`) ${order_sql} LIMIT ${current_page},${per_page}";
-
+        
         if($return_query) {
         	return $lookup_sql;
         }

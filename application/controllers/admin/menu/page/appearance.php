@@ -607,8 +607,7 @@ if ( ! class_exists( 'Appearance' ) ) {
 					'label'=>'Preview Page',
 					'form'=>array(
 
-						'appearence_preview_page_section'=>array('label'=>'Appearence of Preview Page','type'=>'segment','desc'=>'Change the appearence of the Preview Page.')
-						,
+						'appearence_preview_page_section'=>array('label'=>'Appearence of Preview Page','type'=>'segment','desc'=>'Change the appearence of the Preview Page.'),
 						'enable_enquiry'=>array(
 							'label'=>'Allow Enquiry Plugins on Preview Page',
 							'type'=>'checkbox',

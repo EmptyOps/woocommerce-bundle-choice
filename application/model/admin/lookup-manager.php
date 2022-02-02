@@ -279,7 +279,7 @@ class Lookup_Manager {
 			$fields['id'] = $id;
 			$fields_type[] = '%d';
 		}
-		
+
 		if($wpdb->get_var("SELECT product_id FROM `${lookup_table}` WHERE product_id=${id}") == $id){
 			$wpdb->update( $lookup_table,$fields,array('product_id'=>$id),$fields_type, array('%d'));
 			return $wpdb->last_query;
@@ -328,8 +328,6 @@ class Lookup_Manager {
 			
 			$wpdb->insert( $lookup_table,$fields,$fields_type );
 
-			/*var_dump($wpdb->last_query);
-			die();*/
 			return $wpdb->last_query;
 		}		
 	}
