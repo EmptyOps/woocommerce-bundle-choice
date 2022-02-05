@@ -5,7 +5,7 @@
 *	WBC base Publics Model.
 */
 
-namespace eo\wbc\model\publics;
+namespace eo\wbc\system\core\publics;
 
 defined( 'ABSPATH' ) || exit;
 
