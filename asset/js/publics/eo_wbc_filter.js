@@ -217,8 +217,14 @@ function eo_wbc_filter_render_html(data,render_container) {
 	
 	// lazyload
 	if(typeof(LazyLoad)=='function'){
-		eowbc_lazyload();
+		eowbc_lazyload();		
 	}
+	window.setTimeout(function(){
+		jQuery('img.lazy[data-src]').each(function(index,element){
+		    let __element = jQuery(element);
+		    __element.attr('src',__element.attr('data-src'));
+		});
+	},1500);
 }
 
 /*if(eo_wbc_object.disp_regular=='1'){
@@ -368,6 +374,10 @@ jQuery(document).ready(function($){
 			jQuery.fn.eo_wbc_filter_change = window.eo_wbc_filter_change;				
 		}
 		
+
+		/*if(eo_wbc_object.init_api_data) {*/
+			jQuery.fn.eo_wbc_filter_change(true);
+		/*}*/
 
 		//changes: mahesh@emptyops.com
 		// To prevent initila call for the ajax -- speed optimization -- stop ajax at init load;

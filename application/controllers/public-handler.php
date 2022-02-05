@@ -55,7 +55,7 @@ class Public_Handler {
 
 		// 10-08-2021 mahesh@emptyops.com
 		// Intial load optimization -- fire intial load filters to avoid initil ajax call.
-		/*if(isset($_GET['EO_WBC']) and !empty($_GET['EO_WBC']) and empty($_GET['_category'])) {
+		if(isset($_GET['EO_WBC']) and !empty($_GET['EO_WBC']) and empty($_GET['_category'])) {
 	        // on load filter
 	        $_GET['eo_wbc_filter']=1;
 	        if(!empty($_GET['CAT_LINK'])){			            
@@ -66,7 +66,7 @@ class Public_Handler {
 	        }
 	        \eo\wbc\controllers\ajax\Filter::instance()->filter();
 	        unset($_GET['eo_wbc_filter']);
-	    }*/
+	    }
 
 		//Perform plugin's task only if both configuration and mapping are completed.
 		
