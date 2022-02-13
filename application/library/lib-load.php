@@ -120,5 +120,6 @@ if(!class_exists('WBC_Loader')) {
 				require_once trailingslashit(constant('EOWBC_MODEL_DIR')).$model_path.'.php';				
 			}
 		}
+
 	}
 }
