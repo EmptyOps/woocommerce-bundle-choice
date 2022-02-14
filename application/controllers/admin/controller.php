@@ -109,12 +109,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 
 					$control_element = $this->default_uis($form_value[$key][2]['type'],$excep_controls);
 					if(empty($control_element)/* and $form_value['type'] === 'hidden'*/){
-
-						
-						//if (empty($form_value[$key][2]['type'] = 'dynamic_attributes')) {
-							$control_element = array($form_value[$key][2]['type']);
-						//}	
-						
+						$control_element = array($form_value[$key][2]['type']);
 					}
 
 				} elseif(!empty($form_value['type'])) {
@@ -141,24 +136,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 							
 						}
 					}
-				}/*else{
-
-					foreach($form_value[$key][2] as $attributes){
-						var_dump($attributes);
-						if(empty($form_value[$key][2]['attributes'])){
-							$controls[$form_key.'_'.$attributes] = call_user_func_array(array($admin_ui,$attributes),array($form_key.'_'.$attributes,$form_value[$key][0]));
-						} else {
-							$control_key = $form_key.'_'.$attributes;
-							if(!empty($form_value[$key][2]['id'])){
-								$control_key = $form_value[$key][2]['id'].'_'.$attributes;
-							}
-							$controls[$control_key] = call_user_func_array(array($admin_ui,$attributes),array($control_key,$form_value[$key][0],$form_value[$key][2]));
-							
-						}
-						
-					}
-					var_dump($controls);die();
-				}*/
+				}
 			}
 
 			/*if(!empty($form_value['data_controls']) and !empty($form_value['data_controls']['type']) and $form_value['data_controls']['type'] === 'send_email_on_click'){

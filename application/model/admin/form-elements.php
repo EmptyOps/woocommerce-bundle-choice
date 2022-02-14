@@ -711,31 +711,4 @@ class Form_Elements {
 			'inline'=>false,
 		);
 	}
-	/*public function dynamic_attributes($key,$label,$args=array()) {
-
-		extract($args);
-
-		$fields = array();
-		foreach ($args['attributes'] as $__key => $__value) {
-			if(empty($info)){
-				$info = array( 'label'=>eowbc_lang("Sets specified date on ${label}"),
-					'type'=>'visible_info',
-					'class'=>array('small'),				
-				);
-			} else {
-				$info = array( 'label'=>$info,
-					'type'=>'visible_info',
-					'class'=>array('small'),				
-				);
-			}
-
-			$args['info'] = $info;
-			$args['label'] = "${label} date";
-
-			$fields[] = $this->{$__value['type']}($key.$__key,$label,$args);
-		}
-
-		return $fields; 
-		
-	}*/
 }
