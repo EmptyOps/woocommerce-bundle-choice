@@ -144,7 +144,7 @@ class WBC_WP {
 
         if(!$path) return FALSE;
 
-        $name = basename($path);
+        $name = rand().basename($path);
 
         $attachment_check=new \Wp_Query( array(
             'posts_per_page' => 1,

@@ -33,6 +33,11 @@ class Product {
 
         $this->page_category = $this->eo_wbc_get_category();
 
+        /*patia -- @mahesh - to fix the issue on the product page for the review submission during ring builder process*/
+        add_action('comment_form_top',function(){
+            ?><input type="hidden" name="redirect_to" value="<?php _e( ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? "https" : "http")."://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}"); ?>"><?php
+        });
+
         ////////////
         //// Add to cart if its preview page from the second step
         if( !empty(wbc()->sanitize->get('FIRST')) and !empty(wbc()->sanitize->get('SECOND')) and !empty(wbc()->sanitize->get('EO_WBC')) and !empty(wbc()->sanitize->get('WBC_PREVIEW')) ) { 
@@ -66,25 +71,59 @@ class Product {
             },30,2);*/
 
             //if data available at _GET then add to out custom cart
-            if(!empty(wbc()->sanitize->get('eo_wbc_add_to_cart_preview'))) {                
+            if(!empty(wbc()->sanitize->get('eo_wbc_add_to_cart_preview'))) {  
+
+                if(!empty(wbc()->sanitize->get('sp_ring_size'))) {
+                    $ring_size = wbc()->sanitize->get('sp_ring_size');
+
+                    global $product;   
+
+                    if(wbc()->session->get('EO_WBC_SETS',FALSE)) {                
+                        $_session_set=wbc()->session->get('EO_WBC_SETS',FALSE);
+
+                        if(!empty($_session_set['SECOND']) and is_array($_session_set['SECOND'])) {
+
+                            $ring_size_att = wbc()->options->get_option('configuration','ring_size_attribute','');
+                            $variation_data = $_session_set['SECOND']['variation'];
+                            $variation_data['attribute_pa_'.$ring_size_att] = $ring_size;
+
+                            $_session_set['SECOND']['variation'] = $variation_data;
+
+                            
+
+                            $__product__ = wbc()->wc->get_product($_session_set['SECOND'][0]);
+                            
+                            $data_store = \WC_Data_Store::load( 'product' );
+                            $variation_id = $data_store->find_matching_product_variation( $__product__, $variation_data);    
+                            if(!empty($variation_id)){
+                                $_session_set['SECOND'][2] = $variation_id;                                
+                            }
+                            wbc()->session->set('EO_WBC_SETS',$_session_set);
+                        }                        
+                    }
+                }
+
                 $this->add2cart();
                 $cart_url = wbc()->wc->eo_wbc_get_cart_url();
                 
                 do_action('sp_wbc_after_add2cart_redirect');
-                if(strpos($cart_url,'?')!==false){
+                if(strpos($cart_url,'?')!==false) {
                     $cart_url_parts = explode('?', $cart_url);
-                    $cart_url = explode('?', $cart_url)[0];
-                    
+                    $cart_url = $cart_url_parts[0];
+
                     if (!empty($cart_url_parts[1])) {
                         $url_params = false;
-                        parse_str( $cart_url_parts[1],$url_params );
+                        parse_str( $cart_url_parts[1],$url_params );                        
+
+                        $allowed_params = array('lang'=>'lang','page_id'=>'page_id');
+                        $url_params = array_intersect_key($url_params,$allowed_params);
                         
-                        if(!empty($url_params['lang'])) {
-                            $cart_url.='?lang='.$url_params['lang'];
-                        }
+                        $cart_url = site_url('?'.http_build_query($url_params));  
                     }
-                }                
+                }
+                
                 exit(wp_redirect($cart_url));
+                die();
             }
 
             if(!empty(wbc()->sanitize->get('CART'))) {
@@ -232,6 +271,45 @@ class Product {
             }
         },20,2);
 
+        add_action('woocommerce_after_add_to_cart_quantity',function() {
+            
+            /*if(!defined('RING_ATTRIBUTE_SELECT_RENDER')){*/
+
+                global $product;
+                $ring_size_att = wbc()->options->get_option('configuration','ring_size_attribute','');
+                if(!empty($ring_size_att)) {
+                    $ring_size_att = 'pa_'.$ring_size_att;
+                    $attributes = $product->get_attributes();
+
+                    if(!empty($attributes[$ring_size_att])){
+
+                        $ring_size_options = $attributes[$ring_size_att];
+                        ?>
+                        <table>
+                            <tbody>                    
+                                <tr>
+                                    <th class="label"><label for="<?php echo esc_attr( sanitize_title( $ring_size_att ) ); ?>"><?php echo wc_attribute_label( $ring_size_att ); // WPCS: XSS ok. ?></label></th>
+                                    <td class="value" id="sp_ring_size_select">
+                                        <?php
+                                            wc_dropdown_variation_attribute_options(
+                                                array(                                                
+                                                    'attribute' => $ring_size_att,
+                                                    'product'   => $product,
+                                                )
+                                            );                                        
+                                        ?>
+                                    </td>
+                                </tr>                    
+                            </tbody>
+                        </table>                
+                        <?php
+                    }      
+                } 
+
+                /*define('RING_ATTRIBUTE_SELECT_RENDER',true);           
+            }*/
+        });        
+
         add_filter('woocommerce_get_price_html',function($price,$product) use($first,$second,$first_parent,$second_parent){
             
             //var_dump($product->get_id(), $second->get_id(),$first->get_id());
@@ -281,7 +359,14 @@ class Product {
                                 $url = $url."&".$get_link;
                             }
                         ?>
-                        window.location.href = '<?php echo $url; ?>';
+
+                        if(jQuery('#sp_ring_size_select select').length>0) {
+                            let ring_size = jQuery('#sp_ring_size_select select').val();    
+                            window.location.href = '<?php echo $url.'&sp_ring_size='; ?>'+ring_size;
+                        } else {
+                            window.location.href = '<?php echo $url; ?>';
+                        }                        
+                        
                         return false;
                     });
 
@@ -576,6 +661,17 @@ class Product {
                
             if($product->is_in_stock()){
 
+
+                if(wbc()->options->get_option('configuration','only_make_pair')) {                    
+                    
+                        ?> <style type="text/css">
+                            button[type="submit"].single_add_to_cart_button.button.alt,.tinv-wraper.woocommerce.tinv-wishlist.tinvwl-after-add-to-cart{
+                                display: none !important;
+                            }
+                        </style> <?php                    
+                    //remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );
+                }
+
                 add_action('woocommerce_after_add_to_cart_button',function(){                
                     // echo "<button href='#' id='eo_wbc_add_to_cart' class='single_add_to_cart_button button alt make_pair btn btn-default'>".get_option('eo_wbc_pair_text',__('Add to pair','woo-bundle-choice'))."</button>";
                     echo "<button href='#' id='eo_wbc_add_to_cart' class='single_add_to_cart_button button alt make_pair btn btn-default'>".wbc()->options->get_option('configuration','label_make_pair',__('Add to pair','woo-bundle-choice'))."</button>";
@@ -652,8 +748,14 @@ class Product {
         }, 15 );
     }
     
-    public function eo_wbc_render()
-    {   
+    public function eo_wbc_render() {   
+
+        /*global $post,$product;
+        echo "<pre>";
+        $attributes = $product->get_attributes();
+        wbc()->options->get_option('configuration','ring_size_attribute');
+        die();*/
+        
         $redirect_url = $this->eo_wbc_product_route();
         wbc()->theme->load('css','product');
         wbc()->theme->load('js','product');
@@ -673,9 +775,49 @@ class Product {
              .woocommerce .widget-area {
                   display: none !important;
              }
-        </style>
+
+            <?php if(!empty(wbc()->options->get_option('configuration','ring_size_attribute'))): ?>
+            .variations [data-attribute_name="attribute_pa_<?php _e(wbc()->options->get_option('configuration','ring_size_attribute')); ?>"] ,.variations label[for="pa_ring-size"]{
+                display: none !important;
+            }
+            <?php endif; ?>
+
+        </style>       
         <?php
         echo ob_get_clean();
+
+        add_action('wp_footer',function(){
+            ?>
+            <script type="text/javascript">
+            jQuery(window).on('load', function () {                
+                <?php
+                    global $product;
+                    $ring_size_att = wbc()->options->get_option('configuration','ring_size_attribute','');
+                    if(!empty($ring_size_att)) {
+                        
+                        $default_attr = $product->get_default_attributes();
+                        if(empty($default_attr['pa_'.$ring_size_att])) {
+
+                            $attributes = $product->get_attributes();                            
+                            if(!empty($attributes['pa_'.$ring_size_att])) {
+                                $ring_size_options = $attributes['pa_'.$ring_size_att];
+
+                                if(!empty($ring_size_options) and is_object($ring_size_options)) {
+                                    $initial_ring_size = current($ring_size_options->get_options());
+                                    $initial_ring_size_term = get_term_by('id',$initial_ring_size,'pa_'.$ring_size_att);
+                                    if(!empty($initial_ring_size_term) and !is_wp_error($initial_ring_size_term)) {
+
+                                        ?> jQuery("[data-attribute_name='attribute_pa_<?php _e($ring_size_att); ?>']").val('<?php _e($initial_ring_size_term->slug); ?>'); <?php 
+
+                                    }
+                                }
+                            }
+                        }            
+                    }
+                ?>
+            });
+            </script><?php
+        });
         
         //Registering Scripts : JavaScript
         add_action( 'wp_enqueue_scripts',function() use(&$redirect_url){

@@ -38,8 +38,40 @@ class Lookup_Manager {
 		/*add_action( 'woocommerce_update_product_variation',array($this,'update_product_variation'),99,2);*/
 		
 
+		add_action('trashed_post',array($this,'trashed'));
+		add_action('untrashed_post',array($this,'trashed'),99,2);		
+
+		add_action('deleted_post',array($this,'deleted'),99,2);
+
 		// new standard action binding
 		add_action('woocommerce_before_product_object_save',array($this,'before_product_object_save'),99,2);
+	}
+
+	public function deleted($pid, $post) {
+		$product = wbc()->wc->get_product($pid);
+		if(!empty($product) and !is_wp_error($product)) {
+
+			global $wpdb;
+			$lookup_table = $wpdb->prefix."sp_product_lookup";
+
+			if($wpdb->get_var("SELECT product_id FROM `${lookup_table}` WHERE product_id=${pid}") == $pid) {
+				$wpdb->delete( $lookup_table,array('product_id'=>$pid),array('%d'));				
+			}
+		}
+	}
+
+	public function untrashed($pid,$previous_status) {
+		$product = wbc()->wc->get_product($pid);
+		if(!empty($product) and !is_wp_error($product)) {
+			$this->update_product($product->get_id(),$product);
+		}
+	}
+
+	public function trashed($pid) {
+		$product = wbc()->wc->get_product($pid);
+		if(!empty($product) and !is_wp_error($product)) {
+			$this->update_product($product->get_id(),$product);
+		}
 	}
 
 	public function before_product_object_save($product,$params) {
@@ -189,6 +221,8 @@ class Lookup_Manager {
 		            $sql="alter TABLE `".$lookup_table."` ADD `".$additional_column."` bigint(20) null";   
 		            $wpdb->query($sql);
 		            $table_columns['additional_column'][$additional_column] = $additional_column;
+		        } else {
+		        	/*$table_columns['additional_column'][$additional_column] = $additional_column;*/
 		        }
 			}
 		}
@@ -200,7 +234,9 @@ class Lookup_Manager {
 		            $sql="alter TABLE `".$lookup_table."` ADD `".$attr_key."` bigint(20) null";   
 		            $wpdb->query($sql);
 		            $table_columns['attribute'][$attr_key] = $attr_key;
-		        }  
+		        } else {
+		        	/*$table_columns['attribute'][$attr_key] = $attr_key;*/
+		        }
 			}
 		}
 
@@ -211,7 +247,9 @@ class Lookup_Manager {
 		            $sql="alter TABLE `".$lookup_table."` ADD `".$cat_key."` bigint(20) null DEFAULT 0";   
 		            $wpdb->query($sql);
 		            $table_columns['category'][$cat_key] = $cat_value;
-		        }  
+		        } else {
+		        	/*$table_columns['category'][$cat_key] = $cat_value;*/
+		        }
 			}
 		}
 
@@ -220,6 +258,25 @@ class Lookup_Manager {
             $sql="alter TABLE `".$lookup_table."` ADD `parent_id` bigint(20) null";   
             $wpdb->query($sql);
         }
+
+        if($wpdb->get_var("SHOW COLUMNS FROM `".$lookup_table."` LIKE 'published'" ) != 'published') {
+            $sql="alter TABLE `".$lookup_table."` ADD `published` bigint(20) null";   
+            $wpdb->query($sql);
+        }        
+
+        /*if(!empty($table_columns) and is_array($table_columns)) {
+        	foreach($table_columns as $table_columns_group_key => $table_columns_group) {
+        		
+        		if(!empty( $table_columns_group ) and is_array($table_columns_group)) {
+
+        			foreach( $table_columns_group as $table_column_key=>$table_column_value ) {
+        				if($wpdb->get_var("SHOW COLUMNS FROM `".$lookup_table."` LIKE '${table_column_key}'" ) != $table_column_key) {
+        					unset($table_columns[$table_columns_group_key][$table_column_key]);
+        				}
+        			}
+        		}
+        	}
+        }*/
 
 		wbc()->options->update_option('sp_lookup_manager','table_columns',serialize($table_columns));
 	}
@@ -279,6 +336,10 @@ class Lookup_Manager {
 			$fields['id'] = $id;
 			$fields_type[] = '%d';
 		}
+
+		/*Publishing status*/
+		$fields['published'] =  intval($product->get_status() === 'publish');
+		$fields_type[] = '%d';
 
 		if($wpdb->get_var("SELECT product_id FROM `${lookup_table}` WHERE product_id=${id}") == $id){
 			$wpdb->update( $lookup_table,$fields,array('product_id'=>$id),$fields_type, array('%d'));
@@ -349,9 +410,10 @@ class Lookup_Manager {
 		return $this->save($id,$data,$product,$parent_id);
 	}*/
 
-	public function update_product($id, $product) {		
+	public function update_product($id, $product) {	
+		
 		$categories = $product->get_category_ids();
-
+		
 		if($product->is_type('variable')){	
 			//var_dump($product->get_type());
 			$childs = $product->get_children();			
@@ -375,10 +437,9 @@ class Lookup_Manager {
 
 		} else {
 
-			$data = $this->get_data($product,$categories);
+			$data = $this->get_data($product,$categories);			
 			$this->process_columns($data);
 			return $this->save($id,$data,$product);
-
 		}
 	}
 
@@ -412,7 +473,7 @@ class Lookup_Manager {
 	            $wpdb->query($sql);
 	            unset($table_columns['attribute'][$taxonomy]);
 
-	            wbc()->options->update_option('lookup_manager','table_columns',serialize($table_columns));
+	            wbc()->options->update_option('sp_lookup_manager','table_columns',serialize($table_columns));
 	        } 
 		}
 	}
@@ -440,7 +501,7 @@ class Lookup_Manager {
 		            $wpdb->query($sql);
 		            unset($table_columns['category'][$term_slug]);
 
-		            wbc()->options->update_option('lookup_manager','table_columns',serialize($table_columns));
+		            wbc()->options->update_option('sp_lookup_manager','table_columns',serialize($table_columns));
 		        } 
 			}
 

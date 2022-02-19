@@ -396,7 +396,7 @@ class Filter
 
         /*$lookup_sql = "SELECT SQL_CALC_FOUND_ROWS `id` FROM `{$lookup_table}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} ${order_sql} AND `{$lookup_table}`.`min_price`>={$min_price} AND `{$lookup_table}`.`max_price`<={$max_price} GROUP BY(`id`) LIMIT ${current_page},${per_page}";*/
 
-        $lookup_sql = "SELECT SQL_CALC_FOUND_ROWS `id` FROM `{$lookup_table}` ${sql_join} WHERE stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} AND `{$lookup_table}`.`min_price`>={$min_price} AND `{$lookup_table}`.`max_price`<={$max_price} GROUP BY(`id`) ${order_sql} LIMIT ${current_page},${per_page}";
+        $lookup_sql = "SELECT SQL_CALC_FOUND_ROWS `id` FROM `{$lookup_table}` ${sql_join} WHERE published=1 AND stock_status='instock' AND ${category_fields} AND ( ${_category_query_list} ) AND ${attribute_fields} AND `{$lookup_table}`.`min_price`>={$min_price} AND `{$lookup_table}`.`max_price`<={$max_price} GROUP BY(`id`) ${order_sql} LIMIT ${current_page},${per_page}";
         
         if($return_query) {
         	return $lookup_sql;
@@ -581,7 +581,7 @@ class Filter
 									wc_set_loop_prop('per_page',(wc_get_default_products_per_row() * wc_get_default_product_rows_per_page())/*(empty(wc_get_loop_prop('per_page'))?12:wc_get_loop_prop('per_page'))*/);
 									return $results;								
 								});
-								
+																
 								echo do_shortcode('[products ids="'.implode(',',$ids).'" class="eowbc_ajax" paginate="true"]');
 								die();
 							} else {

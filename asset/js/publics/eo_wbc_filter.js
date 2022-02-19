@@ -94,7 +94,13 @@ function eo_wbc_filter_render_html(data,render_container) {
 	
 	/*console.log(data);*/
 
+	/*let container_html = jQuery(data).find('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products').html();
 
+	if(typeof(container_html)===undefined) {
+		container_html = jQuery(jQuery(data),'.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products').html();
+	}*/
+
+	/*jQuery(data).find('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products').html();*/
 	let container_html = jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products',data).html();	
 	if(container_html===undefined || container_html==='') {
 		container_html = jQuery(render_data).filter('.products').html();

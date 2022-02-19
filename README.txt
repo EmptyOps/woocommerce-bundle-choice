@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 === Woo Choice Plugin | Ring Builder | Pair Maker | Guidance Tool ===
 Contributors: emptyopssphere
 Tags: woocommerce,product bundle,product bundles,woocommerce product bundles,bundles,bundle,woo,woocommerce product bundle,design your own,buy in pair

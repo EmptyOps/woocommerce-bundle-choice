@@ -341,7 +341,6 @@ class Eowbc_Related_Mapping /*extends Eowbc_Model*/ {
         $meta_query = array('relation' => 'AND');
         $tax_query = array('relation' => 'AND');
 
-
         if(!empty($product_cats)){
 
         	$this_category_list = array();
@@ -360,8 +359,6 @@ class Eowbc_Related_Mapping /*extends Eowbc_Model*/ {
         		$tax_query[] = 	$this_category_list;
         	}	        
 	    }
-
-        
 
   		if(!empty($map) and is_array($map)){
   			foreach ($map as $map_key => $map_value) {
@@ -517,8 +514,7 @@ class Eowbc_Related_Mapping /*extends Eowbc_Model*/ {
 
   		// mahesh@emptyops.com -- 12-08-2021 -- all products except this one.
   		$args['post__not_in'] = array_unique( array_merge($exception,[$product->get_id()]) );
-  		
-
+  		  		
   		$query = new \WP_Query( $args );
   		$products_list = array();
 

@@ -55,6 +55,33 @@ if ( ! class_exists( 'Configuration' ) ) {
 
 			$form_definition = 	
 					array(
+						'general_settings'=>array(
+							'label'=>'General Settings',
+							'form'=>array(
+								'general_settings_desc'=>array('label'=>'General Settings','type'=>'segment','desc'=>"The general settings."),
+								
+								/*ring builder only -- show the ring size form here.*/
+								'ring_size_attribute'=>array(
+									'label'=>'Ring Size Attribute',
+									'type'=>'select',
+									'value'=>wbc()->options->get_option('configuration','ring_size_attribute'),
+									'validate'=>array('required'=>''),
+									'sanitize'=>'sanitize_text_field',
+									'options'=>\eo\wbc\model\Category_Attribute::instance()->get_attributs(),
+									'class'=>array('fluid'),
+									'size_class'=>array('eight','wide','required'),
+									'inline'=>true,
+								),
+
+								'general_settings_save'=>array(
+									'label'=>'Save',
+									'type'=>'button',		
+									'class'=>array('secondary'),
+									'attr'=>array("data-action='save'",'data-tab_key="general_settings"')	
+								)
+							)
+						
+						),
 						'config_automation'=>array(
 							
 								'label'=>'Sample Data',
@@ -186,6 +213,15 @@ if ( ! class_exists( 'Configuration' ) ) {
 											'value'=>'',
 											'sanitize'=>'sanitize_text_field',
 											'options'=>array('1'=>'Make pair button status.'),
+											'is_id_as_name'=>true,
+											'class'=>array()
+										),
+									'only_make_pair'=>array(
+											'label'=>'Add to cart only in the `Builder Process`?',
+											'type'=>'checkbox',
+											'value'=>'',
+											'sanitize'=>'sanitize_text_field',
+											'options'=>array('1'=>'Make the items of the builder process only purchasable view builder process.'),
 											'is_id_as_name'=>true,
 											'class'=>array()
 										),
