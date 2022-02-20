@@ -106,4 +106,8 @@ class WBC_Config {
 		);
 	}
 
+	public function separator() {
+		return "~~~";
+	}
+
 }
