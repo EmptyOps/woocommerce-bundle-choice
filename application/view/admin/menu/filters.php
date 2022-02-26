@@ -123,7 +123,7 @@ if(!empty($attributes) and is_array($attributes)){
 			
 		});
 
-		let pids = JSON.parse('<?php echo json_encode(get_posts( array('post_type' => 'product','numberposts' => -1,'post_status' => 'publish','fields' => 'ids',) )); ?>');
+		let pids = JSON.parse('<?php echo json_encode(get_posts( array('post_type' => 'product','numberposts' => -1,'post_status' =>array('publish', 'pending', 'draft', 'auto-draft', 'future', 'private', 'inherit', 'trash'),'fields' => 'ids',) )); ?>');
 		let batches = Math.ceil(pids.length / 100);
 		console.log(batches);
 		function eowbc_sync_filter_products(batch) {

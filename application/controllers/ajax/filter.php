@@ -474,6 +474,15 @@ class Filter
 	public function filter() {
 
 		if(!empty(wbc()->sanitize->get('eo_wbc_filter'))) {
+
+			if(apply_filters('eowbc_filter_override',false) and (!empty($_REQUEST['eo_wbc_filter']))) {
+	            echo json_encode(apply_filters('eowbc_filter_response',array()));
+	            die();
+	        } else {
+	        	if(class_exists('\eo\dapii\classes\api\Diamond_API_Lib') and wbc()->options->get_option('dapii_config','save_to_db',false) and !empty( wbc()->sanitize->get('eo_wbc_filter')) ) {
+	                \eo\dapii\classes\api\Diamond_API_Lib::getInstance()->common_loop_response(wbc()->sanitize->get('_category'));
+	            } 
+	        }
 			
 			if(empty($_REQUEST['paged'])) {
 
@@ -562,6 +571,7 @@ class Filter
 		        		$ids = array();		        		
 		        		if(!apply_filters('eowbc_filter_override',false)){
 			        		$ids = $this->lookup();
+
 			        		$result_count = $ids['result_count'];
 			        		$ids = $ids['pids'];
 								

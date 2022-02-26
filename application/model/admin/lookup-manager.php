@@ -339,6 +339,10 @@ class Lookup_Manager {
 
 		/*Publishing status*/
 		$fields['published'] =  intval($product->get_status() === 'publish');
+		if($product->is_type('variation')) {
+			$parent_product = wbc()->wc->get_product($product->get_parent_id());
+			$fields['published'] =  intval($parent_product->get_status() === 'publish');
+		}
 		$fields_type[] = '%d';
 
 		if($wpdb->get_var("SELECT product_id FROM `${lookup_table}` WHERE product_id=${id}") == $id){
