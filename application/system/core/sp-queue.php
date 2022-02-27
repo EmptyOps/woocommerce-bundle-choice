@@ -90,7 +90,9 @@ class SP_Queue {
 		wbc()->options->set( 'sp_queue_batch_number___'.$queue_key, $this->get_curr_batch_number($queue_key)+1 );
 
 		// record info for displaying states
-		$this->set_info($queue_key, $this->prepare_info_entry($queue_key,$processed_batch_size));
+		if( $this->should_set_info($queue_key) ) {
+			$this->set_info($queue_key, $this->prepare_info_entry($queue_key,$processed_batch_size));
+		}
 	}
 
 	public function get_curr_batch_number($queue_key){
@@ -106,11 +108,18 @@ class SP_Queue {
 		wbc()->options->set( 'sp_queue_last_sync_complete___'.$queue_key, date('Y-m-d H:i:s') );
 
 		// prepare and set info entry
-		$this->set_info($queue_key, $this->prepare_info_entry($queue_key,$processed_batch_size));
+		if( $this->should_set_info($queue_key) ) {
+			$this->set_info($queue_key, $this->prepare_info_entry($queue_key,$processed_batch_size)); 
+		}
 
 		// reset 
 		$this->reset($queue_key);
 
+	}
+
+	private function should_set_info($queue_key, $is_disable_logging=null){
+		//	TODO give option to disable logging, as soon as it seems necessary. this option should be on the queue/sync admin page and here if this function is called with a non null val for arg is_disable_logging then simply use that as flag without reading in options db to save system from that time also but that is possible when we do synchronization of whole config read of any entity once in one web call, system wide. 
+		return true;
 	}
 
 	private function prepare_info_entry($queue_key,$processed_batch_size) {

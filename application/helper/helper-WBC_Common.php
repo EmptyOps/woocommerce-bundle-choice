@@ -111,6 +111,13 @@ class WBC_Common {
 
 	}
 
+	public function free_memory( &$var ) {
+		//TODO do research and implement most appropriate approach, in case, anything is not good
+
+		//	TODO previously in older systems we were relying on null assignment but maybe unset is better, anyway check which is better when we take into consideration garbage collector and so on 
+		$var = null;
+	}
+
 	public function consistsOfTheSameValues(array $a, array $b, bool $strict = false) {
 	    // check size of both arrays
 	    if (count($a) !== count($b)) {
