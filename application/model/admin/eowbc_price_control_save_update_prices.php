@@ -119,10 +119,10 @@ class Eowbc_Price_Control_Save_Update_Prices {
 
 			$__product__ = wbc()->wc->get_product($post_ID);
 
-			echo ($__product__->get_sku());
-
+			
 			if(!empty($jpc_data) and is_array($jpc_data) and !empty($__product__) and !is_wp_error($__product__)) {
 
+				echo ($__product__->get_sku());
 				// loop through the price rule
 
 				foreach($jpc_data as $jpc_row) {
