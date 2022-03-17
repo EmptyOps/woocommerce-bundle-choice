@@ -241,7 +241,7 @@ box-shadow: none;">
 	            	}
 	            }
 
-	            jQuery.post('<?php echo admin_url( 'admin-ajax.php' ); ?>', data, function(response) {
+	            jQuery.post('<?php echo str_replace(array('https:','http:'),'',admin_url( 'admin-ajax.php') ); ?>', data, function(response) {
 	            	var resjson = jQuery.parseJSON(response);
 	                if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
 		                eowbc_add_catat(++index);                    
@@ -313,7 +313,7 @@ box-shadow: none;">
 	                'product_index':index 
 	            };
 
-	            jQuery.post('<?php echo admin_url( 'admin-ajax.php'); ?>', data, function(response) {
+	            jQuery.post('<?php echo str_replace(array('https:','http:'),'',admin_url( 'admin-ajax.php') ); ?>', data, function(response) {
 	            	var resjson = jQuery.parseJSON(response);
 	                if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
 		                eo_wbc_add_products(++index);                    

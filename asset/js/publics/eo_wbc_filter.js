@@ -97,9 +97,13 @@ function eo_wbc_filter_render_html(data,render_container) {
 	document.wbc_data = data;
 	
 	/*console.log(data);*/
-
-	let container_html = /*jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products',jQuery(data)).html()*/jQuery(jQuery(data),'.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products').html();	
-	
+	let container_html = jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products',data).html();	
+	if(container_html===undefined || container_html==='') {
+		container_html = jQuery(render_data).filter('.products').html();
+	}	
+	if(container_html===undefined || container_html==='') {
+		container_html = jQuery(data,'.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products').html();
+	}
 	/*if(container_html===undefined || container_html==='') {
 		container_html = jQuery(jQuery(data),'.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products').html();
 	}*/
@@ -141,6 +145,8 @@ function eo_wbc_filter_render_html(data,render_container) {
 	/*if(render_container===".products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products"){*/
 		//Replacing Pagination details.....		
 		//console.log(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html());
+		
+		//console.log(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html());
 
 		if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html()!==undefined) {
 			if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination').length>0){
@@ -160,6 +166,9 @@ function eo_wbc_filter_render_html(data,render_container) {
 			}
 		}
 		else {
+
+
+
 			jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html('');	
 		}
 	/*}*/
@@ -194,7 +203,7 @@ function eo_wbc_filter_render_html(data,render_container) {
 /*if(eo_wbc_object.disp_regular=='1'){
 	*/
 	window.eo_wbc_object.enable_filter = true;
-	jQuery.fn.eo_wbc_filter_change_native= function(init_call=false,form_selector="form#eo_wbc_filter",render_container='',parameters={}) {
+	jQuery.fn.eo_wbc_filter_change_native= function(init_call=false,form_selector='form[id*="eo_wbc_filter"]',render_container='',parameters={}) {
 
 		console.log(form_selector);
 	//flag indicates if to show products in tabular view or woocommerce's default style.		
@@ -251,16 +260,21 @@ function eo_wbc_filter_render_html(data,render_container) {
 		return false;
 	}	
 	
+	
+	
 	if(typeof(window.eo_wbc_filter_change) === 'undefined') {
+
 		window.eo_wbc_filter_change = jQuery.fn.eo_wbc_filter_change_native;
 	}
 
 	if( (typeof(jQuery.fn.eo_wbc_filter_change)=="undefined" || jQuery.fn.eo_wbc_filter_change==undefined) && typeof(window.eo_wbc_e_tabview) !== 'object' ){		
 		jQuery.fn.eo_wbc_filter_change = jQuery.fn.eo_wbc_filter_change_native;
 	}
+
 /*}*/
 
 jQuery(document).ready(function($){
+
 
 	window.eo_wbc_object = window.eo_wbc_object || {};
 	window.eo_wbc_object.enable_filter = window.eo_wbc_object.enable_filter || false;

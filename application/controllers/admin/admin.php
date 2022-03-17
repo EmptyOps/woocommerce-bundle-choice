@@ -145,7 +145,8 @@ class Admin {
 				wp_localize_script(
                     'eowbc_admin_js',
                     'eowbc_object',
-                    array('admin_url'=>admin_url( 'admin-ajax.php'))
+                    //array('admin_url'=>admin_url( 'admin-ajax.php'))
+                    array('admin_url'=> str_replace(array('https:','http:'),'',admin_url( 'admin-ajax.php')))
                 );            
                 wp_enqueue_script('eowbc_admin_js');
 
