@@ -13,6 +13,24 @@ class WBC_Config {
 		return self::$_instance;
 	}
 
+	// one of the benefit of it is, it loads admin specifi class on admin side only and frontend specific class on frontend only
+	public function explicit_class_loader_config( $singleton_functionUpper ) {
+
+		return array(
+			'admin'=> array(
+
+				// NOTE: for type dir it is critically important to note that, make sure the dir specified do not have any file that have script execute directly in core php way means when the file included using require once and so on 
+				// array( 'type'=>'dir', 'path'=> '' ), 
+		 		// array( 'type'=>'file', 'path'=> constant($singleton_functionUpper.'_DIRECTORY')."/application/model/publics/component/sp-cafjkj.php" )
+			), 
+			'frontend'=> array(
+
+				// NOTE: for type dir it is critically important to note that, make sure the dir specified do not have any file that have script execute directly in core php way means when the file included using require once and so on 
+				array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY').'application/system/core/publics/eowbc_base_model_publics.php' ), 
+			)
+		);
+	}
+
 	public function get_all_feature() {
 		return array_replace($this->get_features(),$this->get_bonus_features());
 	}

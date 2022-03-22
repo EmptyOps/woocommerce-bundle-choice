@@ -11,6 +11,8 @@ class SP_Data_Layer {
 
 	private static $_instance = null;
 
+	public const static $col_name_sep = "__";
+
 	public static function instance() {
 
 		throw new Exception("Sorry, singleton instance method not supported for this class. Always use construct method to create object.", 1);
@@ -62,4 +64,5 @@ class SP_Data_Layer {
 			)
 		);
 	}
+
 }

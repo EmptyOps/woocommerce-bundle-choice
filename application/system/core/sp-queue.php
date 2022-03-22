@@ -26,12 +26,12 @@ class SP_Queue {
 
 	public static function should_init(){
 
-		//do action if cron is detected
-		if( ( !empty(wbc()->sanitize->get('sp_crjob')) or !empty(wbc()->sanitize->get('dapii_job')) ) and !empty(wbc()->sanitize->get('key'))){
-			return true;
-		}
+		// //do action if cron is detected
+		// if( ( !empty(wbc()->sanitize->get('sp_crjob')) or !empty(wbc()->sanitize->get('dapii_job')) ) and !empty(wbc()->sanitize->get('key'))){
+		// 	return true;
+		// }
 
-		return false;
+		// return false;
 	}
 
 	public function init(){

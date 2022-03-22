@@ -51,6 +51,16 @@ if(!class_exists('Woo_Bundle_Choice') ) {
 			$this->load_helpers();
 			// load library.
 			$this->load_library();		
+
+			// explcit class loader. call it if the settings are defined in the config file. 
+			if( property_exists($this, 'config') && method_exists($this->config, 'explicit_class_loader_config') ) {
+
+				$singleton_functionUpper = 'WBC';
+				$explicit_class_loader_config = $this->config->explicit_class_loader_config( $singleton_functionUpper );
+
+				$this->load->explicit_class_loader( $explicit_class_loader_config );
+			}
+
 			// begin the work.
 			$this->init();
 		}
@@ -81,7 +91,7 @@ if(!class_exists('Woo_Bundle_Choice') ) {
 			*	where the tool_name should only be added to the list.
 			*/
 
-			$helpers = array('options'=>'WBC_Options','lang'=>'WBC_language','wc'=>'WBC_WC','common'=>'WBC_Common','session'=>'WBC_Session','wp'=>'WBC_WP','config'=>'WBC_Config','theme'=>'WBC_Theme');
+			$helpers = array('options'=>'WBC_Options','lang'=>'WBC_language','wc'=>'WBC_WC','common'=>'WBC_Common','session'=>'WBC_Session','wp'=>'WBC_WP','config'=>'WBC_Config','theme'=>'WBC_Theme','file'=>'WBC_File');
 
 			if(!empty($helpers)){
 

@@ -406,7 +406,7 @@ class WBC_WC {
 
                 $option_list[$base->term_id] = $base->slug;
             } elseif( $format == 'detailed_dropdown' ) {
-                $option_list.='<div class="item" data-value="'.$base->term_id.'" data-sp_eid="'.$separator.'prod_cat'.$separator.$base->term_id'">'.str_replace("'","\'",$base->name).'</div>'.eo_dapii_get_productCats($base->slug);
+                $option_list.='<div class="item" data-value="'.$base->term_id.'" data-sp_eid="'.$separator.'prod_cat'.$separator.$base->term_id.'">'.str_replace("'","\'",$base->name).'</div>'.$this->get_productCats($base->slug, $format);
             }
           }
         }
@@ -414,54 +414,33 @@ class WBC_WC {
         return $option_list;
     }
 
-    public function get_productAttributes($parent_slug = '', $format = ''){
-        
-        $parent = '';
-        if( !empty($parent_slug) ) {
-            $parent_term = get_term_by('slug',$parent_slug,'product_cat');
-            if( $parent_term ) {
-                $parent = $parent_term->term_id;
-            } 
-        }
+    public function get_productAttributes($format = ''){
 
-        $map_base = get_categories(array(
-            'hierarchical' => 1,
-            'show_option_none' => '',
-            'hide_empty' => 0,
-            'parent' => $parent,
-            'taxonomy' => 'product_cat'
-        ));
+        $attributes = null;
+        if(function_exists('wc_get_attribute_taxonomies')){
+          $attributes = wc_get_attribute_taxonomies();
+        }
           
         $option_list=null;    
         if( empty($format) ) {
 
             $option_list=array();    
         } elseif( $format == 'detailed_dropdown' ) {
-            $option_list='';    
+            $option_list='<div class="divider"></div><div class="header">'.__('Attributes','diamond-api-integrator').'</div>';
         }
 
-        if(is_array($map_base) and !empty($map_base)){
-          foreach ($map_base as $base) {        
+        if(is_array($attributes) and !empty($attributes)){
+          foreach ($attributes as $attribute) {        
             if( empty($format) ) {
 
-                $option_list[$base->term_id] = $base->slug;
+                $option_list[$attribute->term_id] = 'pa_'.$attribute->attribute_name.'';
             } elseif( $format == 'detailed_dropdown' ) {
-                $option_list.='<div class="item" data-value="'.$base->term_id.'" data-sp_eid="'.$separator.'prod_cat'.$separator.$base->term_id'">'.str_replace("'","\'",$base->name).'</div>'.eo_dapii_get_productCats($base->slug);
+                $option_list.='<div class="item" data-value="pa_'.$attribute->attribute_name.'" data-sp_eid="'.$separator.'attr'.$separator.$attribute->term_id.'">'.$attribute->attribute_label.'</div>';
             }
           }
         }
 
         return $option_list;
-    }
-
-    if(function_exists('wc_get_attribute_taxonomies')){
-      $attributes = wc_get_attribute_taxonomies();
-      if(is_array($attributes) and !empty($attributes)){
-        $html.='<div class="divider"></div><div class="header">'.__('Attributes','diamond-api-integrator').'</div>';
-        foreach ($attributes as $attribute) {
-          $html.= '<div class="item" data-value="pa_'.$attribute->attribute_name.'" data-sp_eid="'.$separator.'attr'.$separator.$attribute->term_id'">'.$attribute->attribute_label.'</div>';
-        }
-      }
     }
 
 }

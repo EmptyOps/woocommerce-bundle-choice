@@ -2,6 +2,8 @@
 namespace eo\wbc\controllers\publics\pages;
 defined( 'ABSPATH' ) || exit;
 
+use eo\wbc\model\publics\SP_Model_Feed;
+
 class Category {
 
     private static $_instance = null;
@@ -60,9 +62,7 @@ class Category {
                 wbc()->theme->load('css','category');
                 wbc()->theme->load('js','category');
             
-                SP_Model_Feed::instance()->page_title();
-
-                SP_Model_Feed::instance()->sidebars_widgets();
+                SP_Model_Feed::instance()->init();
 
                 if(
                      // ($this->eo_wbc_get_category()==get_option('eo_wbc_first_slug') && get_option('eo_wbc_add_filter_first',FALSE) )

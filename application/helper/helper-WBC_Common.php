@@ -339,4 +339,25 @@ class WBC_Common {
 		return basename( $theme_root )."___".basename( $stylesheet );
 	}
 
+	private function makeNestedArray($keys, $value, $target_array=null)
+    {
+	    $var = !is_null($target_array) ? $target_array : array();   
+	    $index=array_shift($keys);
+	    if (!isset($keys[0]))
+        {
+	        $var[$index]=$value;
+        }
+	    else 
+        {   
+	        $var[$index]= $this->makeNestedArray($keys,$value);            
+        }
+	    return $var;
+    }
+
+	public function arrValuesToNestedArr($arr, $target_value, $target_array=null) { 
+
+		$keys = array_values($arr);		// array('key1', 'key2', 'key3');
+		return $this->makeNestedArray($keys,$target_value,$target_array);
+	}
+
 }

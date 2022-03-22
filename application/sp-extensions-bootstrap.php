@@ -85,6 +85,9 @@ class SP_Extensions_Bootstrap {
 			// add_action( "wp_ajax_eowbc_ajax",array($this,'ajax'),10);
 
 		} else {			
+			// system core
+			$this->system_core();
+
 			/*if(class_exists('Http_Handler')){*/
 				$Extensions_Http_Handler = new Extensions_Http_Handler( $this->SP_Extension );
 				Extensions_Http_Handler::process__($Extensions_Http_Handler);				
@@ -136,6 +139,22 @@ class SP_Extensions_Bootstrap {
 			}
 		}
 		die();
+	}
+
+	private function system_core(){
+
+		//	core loaders
+		//
+		if( method_exists($this->SP_Extension->singleton_function()(), 'system_core_loader') ) {
+			$this->SP_Extension->singleton_function()()->system_core_loader();
+		}
+
+		//	core init 
+		//
+		if( method_exists($this->SP_Extension->singleton_function()(), 'system_core_init') ) {
+			$this->SP_Extension->singleton_function()()->system_core_init();
+		}
+
 	}
 
 	public static function safe_load() {

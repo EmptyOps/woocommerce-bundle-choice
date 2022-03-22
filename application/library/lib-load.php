@@ -67,6 +67,17 @@ if(!class_exists('WBC_Loader')) {
 						wp_enqueue_script($_handle);					
 					}
 					break;
+				case 'asset.php':	//	NOTE: it is important here to note that this asset loading block is fundamentally different from other asset loading blocks here since it is loading assets that are implemented in the php file
+					$_path = ( isset($data['ASSET_DIR']) ? $data['ASSET_DIR'].$path : $path );	
+
+					if(isset($param[0]) && ($param[0]=='jquery' || $param[0]=='jQuery')) {
+						echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/'.(!empty($version)?$version:"3.4.1").'/jquery.min.js"></script>';
+						unset($param[0]);
+					}
+
+					extract($param);
+					require_once $_path;
+					break;
 				case 'localize':
 					wp_localize_script($_handle,array_keys($param)[0],$param[array_keys($param)[0]]);
 					break;				
@@ -118,6 +129,57 @@ if(!class_exists('WBC_Loader')) {
 			if(file_exists(constant('EOWBC_MODEL_DIR').$model_path.".php")) {
 
 				require_once trailingslashit(constant('EOWBC_MODEL_DIR')).$model_path.'.php';				
+			}
+		}
+
+		public function explicit_class_loader( $explicit_class_loader_config ) {
+
+      		$dirs_n_files = null; 
+      		if( is_admin() ) {
+      			$dirs_n_files = isset($explicit_class_loader_config['admin']) ? $explicit_class_loader_config['admin'] : array();
+      		} else {
+      			$dirs_n_files = isset($explicit_class_loader_config['frontend']) ? $explicit_class_loader_config['frontend'] : array();
+      		}
+
+			if(!empty($dirs_n_files)){
+
+				foreach ($dirs_n_files as $key=>$val) {
+
+					if( $val['type'] == 'dir' ) {
+
+						if( empty($val['path']) ) {
+							//	in case of empty do nothing, since config array maybe incomplete or in progress. but maybe we are required to throw error for a straight and strict flow 
+							throw new \Exception("Directory path must not be empty, check your explicit_class_loader config array", 1);
+							
+						}
+						throw new \Exception("dir is not supported yet. ACTIVE_TODO have s, b or d to add support for it", 1);
+						
+					} else {
+
+						$this->load_class_file( $val['path'] );
+					}					
+				}	
+			}
+		}
+
+		private function load_class_file( $path ) {
+
+			if( empty($path) ) {
+				//	in case of empty do nothing, since config array maybe incomplete or in progress. but maybe we are required to throw error for a straight and strict flow 
+				throw new \Exception("File path must not be empty, check your explicit_class_loader config array", 1);
+				
+			}
+			
+			if( wbc()->file->extension_from_path( $path ) != 'php' ) {
+				throw new \Exception("The php files are only supported so far in the explicit_class_loader, check your file extension", 1);
+				
+			}
+
+			if( wbc()->file->file_exists( $path ) ) {
+				require_once $path;
+			} else {
+				throw new \Exception("The file you requested to load through the explicit_class_loader config is not found, please check if the file at path ".$path." actually exist.", 1);
+				
 			}
 		}
 

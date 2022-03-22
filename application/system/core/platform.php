@@ -25,10 +25,6 @@ class Platform {
 		$this->platform_name = $platform_name;
 	}
 
-	public function __construct() {
-		throw new Exception("Sorry, only construct method with platform_key etc parameters is supported, so pass platform_key etc parameters as parameters to construct method. Default construct method is not supported.", 1);
-	}
-
 	public function set_platform_key(){
 		throw new Exception("Set method is not supposed to be supported for this property, rely on construct method to set this property.", 1);
 	}

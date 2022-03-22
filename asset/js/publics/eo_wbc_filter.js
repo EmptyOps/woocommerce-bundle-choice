@@ -321,6 +321,7 @@ jQuery(document).ready(function($){
 			event.preventDefault();
 			event.stopPropagation();								
 			
+			page nnumber text would break below with multilanguage so instead use the data attribute to store and read the page number
 			if(jQuery(this).hasClass("next") || jQuery(this).hasClass("prev")){
 			
 				if(jQuery(this).hasClass("next")){
@@ -358,6 +359,7 @@ jQuery(document).ready(function($){
 	});	
 });
 
+here if reset even is encapsulated within particule filter fields object then that field can have more control on its state changes 
 function reset_icon(e,selector){
 	e.preventDefault();
 	e.stopPropagation()
@@ -408,3 +410,14 @@ function reset_button(e,selector){
 	jQuery(selector).filter(".eo_wbc_button_selected").trigger('click');
 	return false;
 }
+
+
+window.document.splugins.wbc = window.document.splugins.wbc || {};
+
+// the filters js module
+window.document.splugins.wbc.filters = window.document.splugins.wbc.filters || {};
+//	maybe observer pattern with filters as subject, filter types like ring builder filters, shop/cat filters, shortcode filters and diamond quiz etc filters as observer(subscriber) but also the filter fields also as observer(subscriber)(as per standard it should be only filter types not fields but we can implement by adding subtype field in the definition arcitecture and still it is not pure standard but would work), and also the filter or any of its layers like network(ajax) or render(html render) as the singleton factory design pattern 
+	//	but not sure which pattern or mix pattern would be most appropriate to fit in our filters module and help achieve symphony and stabiity across different layers wbc and many other extensions -- the subject and observer(subscriber) notify pattern is of help for render_container like callback while if we see filter fields like slider or icon filter or checkbox filter as single unit then notify pattern maybe useful for emitting reset filter or any other such event 
+		//	anyway we need it since there is absolute lack of hierarchy and structure in the entire funnel of the filters, feed(pagination) and rendering layer and event management of different interactions with UI
+			//	but would do little in each iteration and would do most of this refactoring when only the testing reaches at this layer with backend layers tested and confirmed basically
+				//	should onerror wrapping? maybe module definition of jquery are in their own thread but what about vanila js defs? maybe they too?

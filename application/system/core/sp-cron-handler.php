@@ -52,7 +52,10 @@ class SP_Cron_Handler {
 		if($secret_key===$expected_key){
 			if( $is_debug_cron ){ \EOWBC_Error_Handler::log('Cron secret matched'); }
 
-			do_action('sp_cron_handler_job');
+			add_filter('sp_cron_handler__is_run_job', function() {
+
+				return true;
+			});
 
 		}
 		else {

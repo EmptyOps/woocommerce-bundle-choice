@@ -50,6 +50,11 @@ if(!class_exists('SP_Plugin_Index_Class') ) {
 			// load library.
 			$this->load_library();		
 
+			// explcit class loader. call it if the settings are defined in the config file. 
+			if( property_exists($this->SP_Extension->singleton_function()(), 'config') && method_exists($this->SP_Extension->singleton_function()()->config, 'explicit_class_loader_config') ) {
+				$this->explicit_class_loader();
+			}
+
 			// begin the work.  
 			$this->__init( $childClassObj );
 
@@ -58,6 +63,14 @@ if(!class_exists('SP_Plugin_Index_Class') ) {
 				$childClassObj->init();
 			}
 
+		}
+
+		public function getSP_Extension() {			
+			return $this->SP_Extension;
+		}
+
+		public function SP_Extension() {			
+			return $this->getSP_Extension();
 		}
 
 		public function setFILE($FILE) {			
@@ -148,6 +161,14 @@ if(!class_exists('SP_Plugin_Index_Class') ) {
 					$this->$lib = $lib_class::instance();
 				}	
 			}
+		}
+
+		public function explicit_class_loader() {
+
+			$singleton_functionUpper = strtoupper( $this->SP_Extension->singleton_function() );
+			$explicit_class_loader_config = $this->SP_Extension->singleton_function()()->config->explicit_class_loader_config( $singleton_functionUpper );
+
+			wbc()->load->explicit_class_loader( $explicit_class_loader_config );
 		}
 
 		public function define_constants() {
