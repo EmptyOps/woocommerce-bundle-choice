@@ -200,6 +200,8 @@ if(!class_exists('Woo_Bundle_Choice') ) {
 
 
 	add_action( 'plugins_loaded', function() {
+		// echo "bundle choice";
+		// echo "<br>";
 		if(function_exists('wc')){
 			wbc()->construct_init();
 
@@ -207,7 +209,7 @@ if(!class_exists('Woo_Bundle_Choice') ) {
 			eo\wbc\model\UI_Builder::instance()->theme_adaption_check();
 		}
 		
-	},30);
+	},9999);
 
 	if(!function_exists('wbc')){
 
