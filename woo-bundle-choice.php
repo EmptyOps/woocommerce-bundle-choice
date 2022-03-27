@@ -209,7 +209,7 @@ if(!class_exists('Woo_Bundle_Choice') ) {
 			eo\wbc\model\UI_Builder::instance()->theme_adaption_check();
 		}
 		
-	},9999);
+	},999);
 
 	if(!function_exists('wbc')){
 

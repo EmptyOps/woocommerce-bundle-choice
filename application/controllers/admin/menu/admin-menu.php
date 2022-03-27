@@ -190,6 +190,18 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 				);
 		}
 
+		protected function define_queue_menu() {
+			return 	array(
+					'parent_slug'=>'eowbc',
+					'title'=>eowbc_lang('Sync Queue').' - '.constant('EOWBC_NAME'),
+					'menu_title'=>eowbc_lang('Sync Queue'),
+					'capability'=>'manage_options',
+					'slug'=>'woo-bundle-choice---sp-queue',
+					'template'=>'admin/menu/queue',
+					'position'=>121 
+				);
+		}
+
 		public function get_icon_url() {
 			return esc_url(apply_filters( 'eowbc_icon_url',constant('EOWBC_ICON')));
 		}

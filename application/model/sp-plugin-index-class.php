@@ -242,7 +242,9 @@ if(!class_exists('SP_Plugin_Index_Class') ) {
 
 		public function __init( $childClassObj ) {
 
-			add_action( 'after_eowbc_load', function() use($childClassObj) {
+			//	NOTE: below hook dependancy is commented because there is no need of it. however here it is critical to note that just like none of wbc extensions or theme can work without wbc installed, none of them would function properly if the plugins_loaded priority order is not maitained in ASC order means wbc first and then followed by extensions, theme and library and so on. and based on the assumption that ASC order will always be maintained the below hook dependancy is commented so all wbc extensions, themes and library and so on must follow that. 
+			// add_action( 'after_eowbc_load', function() use($childClassObj) {
+
 				do_action( 'before_spext_init', $this->SP_Extension->extension_slug() );
 				
 				// TODO implement customizer flow that is specific for extensions, only if necessary. 
@@ -254,7 +256,7 @@ if(!class_exists('SP_Plugin_Index_Class') ) {
 
 				$childClassObj->theme_adaption_check();
 
-			});
+			// });
 
 		}
 

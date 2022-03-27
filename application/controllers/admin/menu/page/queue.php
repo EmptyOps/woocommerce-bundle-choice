@@ -77,8 +77,8 @@ if ( ! class_exists( 'Queue' ) ) {
 			foreach ($subtabs as $sbkey => $sbvalue) {
 				$sbcnt++;
 
-				$form_definition['queue___'.$sbvalue['name']] = array(
-					'label'=>( !empty($sbvalue['display_name']) ? $sbvalue['display_name'] : $sbvalue['name'] ).' Sync Details',
+				$form_definition['queue___'.$sbkey] = array(
+					'label'=>( !empty($sbvalue['display_name']) ? $sbvalue['display_name'].'('.$sbkey.')' : $sbkey /*$sbvalue['api_config_api_name']*/ ).' Sync Details',
 					'form'=> array(
 						'queue_sync_details_section'=>array('label'=>'Sync Details','type'=>'segment','desc'=>'The details provided below are of last 10 batch process events for particular API. For scheduling the frequency for example at what speed the API should be synced, Edit particular API on Add/Edit APIs tab and then go to scheduler section at bottom.'
 						),
@@ -92,7 +92,7 @@ if ( ! class_exists( 'Queue' ) ) {
 							'size_class'=>array('eight','wide')
 						),
 
-						'sp_queue_reset_link___'.$sbvalue['name']=>array(
+						'sp_queue_reset_link___'.$sbkey=>array(
 							'label'=>'Reset',
 							'type'=>'link',
 							'attr'=>array("href='".admin_url('admin.php?page=eowbc&eo_wbc_view_auto_jewel=1&f=filters_shop_cat')."'"),
@@ -104,7 +104,7 @@ if ( ! class_exists( 'Queue' ) ) {
 							),	
 						),
 
-						'sp_queue_batch_size___'.$sbvalue['name']=>array(
+						'sp_queue_batch_size___'.$sbkey=>array(
 							'label' => 'Batch Size',
 							'type'=>'text',
 							'value'=>'',
@@ -122,18 +122,18 @@ if ( ! class_exists( 'Queue' ) ) {
 							),
 						),
 
-						'sp_queue_save_btn___'.$sbvalue['name']=>array(
+						'sp_queue_save_btn___'.$sbkey=>array(
 							'label'=>'Save',
 							'type'=>'button',		
 							'class'=>array('secondary'),
-							'attr'=>array("data-action='save'",'data-tab_key="queue___'.$sbvalue['name'].'"')	
+							'attr'=>array("data-action='save'",'data-tab_key="queue___'.$sbkey.'"')	
 						)
-
+					)
 				);
 
 				if( $sbcnt == 0 ) {
 
-					$form_definition['queue___'.$sbvalue['name']]['form']['saved_tab_key'] = array(
+					$form_definition['queue___'.$sbkey]['form']['saved_tab_key'] = array(
 						'type'=>'hidden',
 						'value'=>'',
 						'sanitize'=>'sanitize_text_field',

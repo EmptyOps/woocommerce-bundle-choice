@@ -152,7 +152,7 @@ if(!class_exists('WBC_Loader')) {
 							throw new \Exception("Directory path must not be empty, check your explicit_class_loader config array", 1);
 							
 						}
-						throw new \Exception("dir is not supported yet. ACTIVE_TODO have s, b or d to add support for it", 1);
+						$this->load_classes( $val['path'], isset($val['is_also_subdirs']) ? $val['is_also_subdirs'] : null);
 						
 					} else {
 
@@ -160,6 +160,35 @@ if(!class_exists('WBC_Loader')) {
 					}					
 				}	
 			}
+		}
+
+		// loads classes from the dir path 
+		private function load_classes($path, $is_recurssive = false)
+		{
+			// $actual_link = __DIR__;
+			$files = scandir($path);
+			$files = array_diff(scandir($path), array('.', '..'));
+
+			foreach($files as $file)
+			{
+			  if(is_dir($path.'/'.$file))
+			  {
+			      if($is_recurssive)
+			      {
+			          $this->load_classes( $path.'/'.$file, $is_recurssive);
+			      }
+			  }
+			 else
+			 {
+			          if(($file != ".") 
+			             && ($file != "..")
+			             && (strtolower(substr($file, strrpos($file, '.') + 1)) == 'php'))
+			          {
+			          // echo '<LI><a href="'.$file.'">',$actual_link.'/'.$path.'/'.$file.'</a>';
+			          	$this->load_class_file( $path.'/'.$file ); 
+			         }
+			     }
+			}	
 		}
 
 		private function load_class_file( $path ) {

@@ -56,7 +56,7 @@ if ( ! class_exists( 'Extensions_Admin_Menu' ) ) {
 			//if there are additional requirement of menu by particular extensions, then should publish filters from here or just read to the config class? I think config class is clean, faster and simple
 
 
-			if( wbc()->sanitize->get('page') == $this->SP_Extension->admin_page_slug() || wbc()->sanitize->get('page') == $this->SP_Extension->extension_slug().'---theme-adaption' ) {
+			if( wbc()->sanitize->get('page') == $this->SP_Extension->admin_page_slug() || ( wbc()->sanitize->get('page') == $this->SP_Extension->extension_slug().'---theme-adaption' || wbc()->sanitize->get('page') == $this->SP_Extension->extension_slug().'---sp-queue' ) ) {
 
 				//config array should be defined, if not then do not add submenu
 	            if( isset($this->SP_Extension->singleton_function()()->config) && method_exists($this->SP_Extension->singleton_function()()->config, 'required_hooks_n_filters_etc') ) {
@@ -69,6 +69,11 @@ if ( ! class_exists( 'Extensions_Admin_Menu' ) ) {
 					}
 				}
 
+				//check if applicable to add submenu 
+	            if( apply_filters( 'sp_queue_applicable', $this->SP_Extension->extension_slug() ) ) {
+					
+					$submenu[] = $this->define_queue_menu();
+				}
 			}
 
 			$menu['submenu'] = $submenu;
@@ -109,6 +114,16 @@ if ( ! class_exists( 'Extensions_Admin_Menu' ) ) {
 			$theme_adaption_menu['parent_slug'] = 'eowbc';	// $this->SP_Extension->admin_page_slug();
 			$theme_adaption_menu['title'] = eowbc_lang('Theme Adaption').' - '.$this->SP_Extension->extension_name().' - '.constant('EOWBC_NAME');
 			$theme_adaption_menu['slug'] = $this->SP_Extension->extension_slug().'---theme-adaption';
+
+			return $theme_adaption_menu;
+		}
+
+		protected function define_queue_menu() {
+
+			$theme_adaption_menu = parent::define_queue_menu();
+			$theme_adaption_menu['parent_slug'] = 'eowbc';	// $this->SP_Extension->admin_page_slug();
+			$theme_adaption_menu['title'] = eowbc_lang('Sync Queue').' - '.$this->SP_Extension->extension_name().' - '.constant('EOWBC_NAME');
+			$theme_adaption_menu['slug'] = $this->SP_Extension->extension_slug().'---sp-queue';
 
 			return $theme_adaption_menu;
 		}
