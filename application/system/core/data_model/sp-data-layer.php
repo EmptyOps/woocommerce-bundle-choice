@@ -11,7 +11,7 @@ class SP_Data_Layer {
 
 	private static $_instance = null;
 
-	public const static $col_name_sep = "__";
+	public const COL_NAME_SEP = "__";
 
 	public static function instance() {
 

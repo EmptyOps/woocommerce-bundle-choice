@@ -36,7 +36,7 @@ class SP_Product extends SP_Entity {
 		$this->create();
 	}
 
-	protected function create() {
+	protected static function create() {
 		// TODO bind to the sample data sample product creation flow(and that should also be adhering to and following the data layer structure defs) where there is either product factory or entire function(s) to do so 
 
 		//	TODO and extensions which needs product factory related operations are also supposed to rely on this class for such operations 

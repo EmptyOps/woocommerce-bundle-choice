@@ -87,8 +87,14 @@ class WBC_Common {
 		}
 	}
 
-	public function pr(array $ar,$force_debug = false,$die = false) {
+	public function pr($ar,$force_debug = false,$die = false) {
 		//TODO yet to implement optional arg force_debug
+
+		if( !is_array($ar) )
+		{
+			echo 'the common helper pr function says the var provided is not an array. skipping.';
+			return false;
+		}
 
 		echo "<pre>"; print_r($ar); echo "</pre>";
 
