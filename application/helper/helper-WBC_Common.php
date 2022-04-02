@@ -366,4 +366,18 @@ class WBC_Common {
 		return $this->makeNestedArray($keys,$target_value,$target_array);
 	}
 
+	public function array_slice_keys($array, $keys = null) {
+	    if ( empty($keys) ) {
+	        $keys = array_keys($array);
+	    }
+	    if ( !is_array($keys) ) {
+	        $keys = array($keys);
+	    }
+	    if ( !is_array($array) ) {
+	        return array();
+	    } else {
+	        return array_intersect_key($array, array_fill_keys($keys, '1'));
+	    }
+	}
+
 }
