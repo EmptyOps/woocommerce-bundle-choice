@@ -9,6 +9,7 @@ defined( 'ABSPATH' ) || exit;
 
 class SP_Entity {
 
+
 	private static $_instance = null;
 
 	private static $id = null;
@@ -30,7 +31,7 @@ class SP_Entity {
 		throw new Exception("Not supported yet", 1);
 	}
 
-	public static function createFromArray(){
+	public static function createFromArray($data_array){
 		throw new Exception("Not supported yet", 1);
 	}
 
