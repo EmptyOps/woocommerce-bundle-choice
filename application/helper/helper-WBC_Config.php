@@ -28,7 +28,15 @@ class WBC_Config {
 
 				// NOTE: for type dir it is critically important to note that, make sure the dir specified do not have any file that have script execute directly in core php way means when the file included using require once and so on 
 				array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY').'application/system/core/publics/eowbc_base_model_publics.php' ), 
-			)
+			), 
+			'both'=> array(
+
+				array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY').'application/system/core/publics/sp-query.php' ), 
+
+		 		array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."/application/model/publics/component/eowbc_filter_widget.php" ), 
+
+			)	
+
 		);
 	}
 
@@ -126,7 +134,7 @@ class WBC_Config {
 	}
 
 	public function separator() {
-		return "~~~";
+		return "____"; 
 	}
 
 }

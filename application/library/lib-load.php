@@ -141,6 +141,17 @@ if(!class_exists('WBC_Loader')) {
       			$dirs_n_files = isset($explicit_class_loader_config['frontend']) ? $explicit_class_loader_config['frontend'] : array();
       		}
 
+      		$this->load_classes_array($dirs_n_files);
+
+      		//	for both
+  			if( isset($explicit_class_loader_config['both']) ) {
+
+	      		$this->load_classes_array($explicit_class_loader_config['both']);
+  			} 
+		}
+
+		private function load_classes_array($dirs_n_files) {
+
 			if(!empty($dirs_n_files)){
 
 				foreach ($dirs_n_files as $key=>$val) {

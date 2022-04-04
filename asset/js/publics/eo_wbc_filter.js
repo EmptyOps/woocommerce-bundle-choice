@@ -1,3 +1,65 @@
+
+
+window.document.splugins.wbc = window.document.splugins.wbc || {};
+
+// the filters js module
+window.document.splugins.wbc.filters = window.document.splugins.wbc.filters || {};
+//	maybe observer pattern with filters as subject, filter types like ring builder filters, shop/cat filters, shortcode filters and diamond quiz etc filters as observer(subscriber) but also the filter fields also as observer(subscriber)(as per standard it should be only filter types not fields but we can implement by adding subtype field in the definition arcitecture and still it is not pure standard but would work), and also the filter or any of its layers like network(ajax) or render(html render) as the singleton factory design pattern 
+	//	moved to asana 
+window.document.splugins.wbc.filters.core = function() {
+    // this.subjects = [];
+
+
+
+    return {
+
+        before_search: function() {
+
+			window.document.splugins.Feed.events.core.notifyAllObservers( 'filters', 'before_search' );
+        }, 
+        // createSubject: function( feature_unique_key, notifications ) {
+        //     // console.log("Observer " + index + " is notified!");
+
+        //     // TODO check if subject already created and exist then throw error
+        //     // var index = this.observers.indexOf(observer);
+        //     // if(index > -1) {
+        //     // this.observers.splice(index, 1);
+        //     // }
+
+        //     this.subjects.push( window.document.splugins.Feed.events.subject( feature_unique_key, notifications ) );
+        // }, 
+        // subscribeObserver: function(feature_unique_key, callbacks) {
+        //     // console.log("Observer " + index + " is notified!");
+
+        //     // before subscribing the ovserver check if the feature_unique_key subject is created in the first place, if not then throw error 
+        //     var found_index = null;
+        //     for(var i = 0; i < this.subjects.length; i++){
+        //         if( this.subjects[i].feature_unique_key() == feature_unique_key ) {
+
+        //             found_index = i;
+        //             break;
+        //         }
+        //     }
+
+        //     if( found_index == -1 ) {
+
+        //         throw "There is no subject exist for specified feature_unique_key "+feature_unique_key;
+        //     } else {
+
+        //         this.subjects[found_index].subscribeObserver( window.document.splugins.Feed.events.observer( callbacks ) );
+        //     }
+        // },
+        no_products_found: function() {
+
+			window.document.splugins.Feed.events.core.notifyAllObservers( 'filters', 'no_products_found' );
+        }, 
+
+    }
+}
+
+//	the filter events 
+window.document.splugins.Feed.events.core.createSubject( 'filters', ['before_search', 'no_products_found'] );
+
 /*<<<<<<< HEAD*/
 /*window.eo_wbc_object = window.eo_wbc_object || {};
 window.eo_wbc_object.enable_filter = window.eo_wbc_object.enable_filter || false;*/
@@ -135,6 +197,10 @@ function eo_wbc_filter_render_html(data,render_container) {
 		});
 	}
 	else {
+		
+		//	NOTE: if there are any return false etc statement occur below this statement then this core function call should be moved underneath the return statement because this core functions is supposed to be called only if search actually happens but yeah at earliest possible also so that there are any dependent flow below or elsewhere then they are taken care of properly 
+		window.document.splugins.wbc.filters.core.no_products_found();
+
 		jQuery(render_container/*".products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products"*/).html('<p class="woocommerce-info" style="width: 100%;">No products were found matching your selection.</p>');	
 	}	
 
@@ -202,6 +268,9 @@ function eo_wbc_filter_render_html(data,render_container) {
 		if(window.eo_wbc_object.enable_filter===false){
 			return false;
 		}
+
+		//	NOTE: if there are any return false etc statement occur below this statement then this core function call should be moved underneath the return statement because this core functions is supposed to be called only if search actually happens but yeah at earliest possible also so that there are any dependent flow below or elsewhere then they are taken care of properly 
+		window.document.splugins.wbc.filters.core.before_search();
 
 		if(render_container==='') {
 			render_container = jQuery(".products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)");
@@ -410,12 +479,4 @@ function reset_button(e,selector){
 	jQuery(selector).filter(".eo_wbc_button_selected").trigger('click');
 	return false;
 }
-
-
-window.document.splugins.wbc = window.document.splugins.wbc || {};
-
-// the filters js module
-window.document.splugins.wbc.filters = window.document.splugins.wbc.filters || {};
-//	maybe observer pattern with filters as subject, filter types like ring builder filters, shop/cat filters, shortcode filters and diamond quiz etc filters as observer(subscriber) but also the filter fields also as observer(subscriber)(as per standard it should be only filter types not fields but we can implement by adding subtype field in the definition arcitecture and still it is not pure standard but would work), and also the filter or any of its layers like network(ajax) or render(html render) as the singleton factory design pattern 
-	//	moved to asana 
 	
