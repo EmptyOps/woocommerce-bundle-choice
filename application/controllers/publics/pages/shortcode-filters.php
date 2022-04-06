@@ -19,12 +19,24 @@ class Shortcode_Filters extends Category {
         $this->filter_prefix ='shortflt_';
     }
 
-    public function init() {
+    public function init($category = '') {
         
         // parent::instance()->is_shortcode_filter = true;
         // parent::instance()->filter_prefix ='shortflt_';
 
+<<<<<<< HEAD
+        add_filter('eowbc_filter_widget_category_json',function($category){
+            if(!empty($this->_category)){
+                return $this->_category;
+            }
+            return $category;
+        });
+
         parent::init();                    
+=======
+        parent::init();
+        $this->_category = $category;
+>>>>>>> d0ee5bc47d10084771d08a5586b84321af4742af
         add_filter( 'eowbc_filter_widget_loader','__return_false');
     }    
 }

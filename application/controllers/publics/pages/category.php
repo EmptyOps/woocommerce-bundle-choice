@@ -19,7 +19,7 @@ class Category {
     private function __construct() {        
     }
 
-    public function init() {
+    public function init($category = '') {
 
         $this->first_category_slug = wbc()->options->get_option('configuration','first_slug');
         $first_category_object = get_term_by('slug',$this->first_category_slug,'product_cat');
@@ -63,12 +63,15 @@ class Category {
                 /*Hide the category Title*/
                 add_filter( 'woocommerce_page_title','__return_false');
 
+                $enable_side_bar_widget = unserialize(wbc()->options->get_option('setting_status_advanced_config','enable_side_bar_widget','a:0:{}'));
+                if(empty($enable_side_bar_widget['enable_side_bar_widget'])) {
                 /*Hide sidebar and make content area full width.*/
-                if(apply_filters('eowbc_filter_sidebars_widgets',true)){
-                    add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
-                        return array( false );
-                    });
-                }                
+                    if(apply_filters('eowbc_filter_sidebars_widgets',true)){
+                        add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
+                            return array( false );
+                        });
+                    }    
+                }            
                 /*End --Hide sidebar and make content area full width.*/
 
                 if(
@@ -210,7 +213,9 @@ class Category {
         /*}
             */
         if( $this->is_shortcode_filter ) {
-            \eo\wbc\model\publics\component\EOWBC_Filter_Widget::instance()->init(false,$this->filter_prefix,$this->is_shortcode_filter);
+            $add_category = \eo\wbc\model\publics\component\EOWBC_Filter_Widget::instance();
+            $add_category->_category = $this->_category;
+            $add_category->init(false,$this->filter_prefix,$this->is_shortcode_filter);
         }
 
     }

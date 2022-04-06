@@ -21,7 +21,7 @@ class Migration_000500 {
 	public static function run() {
 		self::instance()->db();
 		self::instance()->option();
-	}
+	} 
 
 	public function db() {
 		global $wpdb;

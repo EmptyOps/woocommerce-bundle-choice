@@ -45,28 +45,28 @@ class Product {
             }, 10, 1 );
 
 
-
             //if data available at _GET then add to out custom cart
             if(!empty(wbc()->sanitize->get('eo_wbc_add_to_cart_preview'))) {                
                 $this->add2cart();
                 $cart_url = wbc()->wc->eo_wbc_get_cart_url();
-                
+
                 do_action('sp_wbc_after_add2cart_redirect');
-                if(strpos($cart_url,'?')!==false){
+                if(strpos($cart_url,'?')!==false) {
                     $cart_url_parts = explode('?', $cart_url);
-                    $cart_url = explode('?', $cart_url)[0];
-                    
+                    $cart_url = $cart_url_parts[0];
+
                     if (!empty($cart_url_parts[1])) {
                         $url_params = false;
-                        parse_str( $cart_url_parts[1],$url_params );
+                        parse_str( $cart_url_parts[1],$url_params );                       
+
+                        $allowed_params = array('lang'=>'lang','page_id'=>'page_id');
+                        $url_params = array_intersect_key($url_params,$allowed_params);
                         
-                        if(!empty($url_params['lang'])) {
-                            $cart_url.='?lang='.$url_params['lang'];
-                        }
+                        $cart_url = site_url('?'.http_build_query($url_params));  
                     }
-                }
-                
+                }                
                 exit(wp_redirect($cart_url));
+                die();
             }
 
             if(!empty(wbc()->sanitize->get('CART'))) {
@@ -210,7 +210,7 @@ class Product {
                     jQuery('form.cart').prepend("<input type='hidden' name='eo_wbc_add_to_cart_preview' value='1'/>");
                     
                     jQuery(".single_add_to_cart_button.button.alt:not(.disabled):eq(0)").replaceWith(
-                         "<button href='#' id='eo_wbc_add_to_cart_preview' class='single_add_to_cart_button button alt'><?php _e('Add This To Cart','woo-bundle-choice') ?></button>"
+                         "<button href='#' id='eo_wbc_add_to_cart_preview' class='single_add_to_cart_button button alt'><?php _e('Add To Cart','woo-bundle-choice') ?></button>"
                     );
 
                     jQuery(document).on('click','#eo_wbc_add_to_cart_preview',function() {
@@ -655,11 +655,20 @@ class Product {
             // if($category == get_option('eo_wbc_first_slug')){
             if($category == $this->first_category_slug){
                 // $btn_text = get_option('eo_wbc_add_to_cart_text_first', __('Continue', 'woo-bundle-choice'));
-                $btn_text = wbc()->options->get_option('appearance_product_page','fc_atc_button_text',__('Continue', 'woo-bundle-choice'));
+                if(!empty(wbc()->sanitize->get('STEP')) and wbc()->sanitize->get('STEP')==2) {
+                    $btn_text = wbc()->options->get_option('appearance_product_page','fc_atc_button_text_second',__('Continue', 'woo-bundle-choice'));                    
+                } else {
+
+                    $btn_text = wbc()->options->get_option('appearance_product_page','fc_atc_button_text',__('Continue', 'woo-bundle-choice'));
+                }
             // } elseif( $category == get_option('eo_wbc_second_slug') ) {
             } elseif( $category == $this->second_category_slug ) {
                 // $btn_text = get_option('eo_wbc_add_to_cart_text_second', __('Continue', 'woo-bundle-choice'));
-                $btn_text = wbc()->options->get_option('appearance_product_page','sc_atc_button_text',__('Continue', 'woo-bundle-choice'));
+                if(!empty(wbc()->sanitize->get('STEP')) and wbc()->sanitize->get('STEP')==2) {
+                    $btn_text = wbc()->options->get_option('appearance_product_page','sc_atc_button_text_second',__('Continue', 'woo-bundle-choice'));
+                } else {
+                    $btn_text = wbc()->options->get_option('appearance_product_page','sc_atc_button_text',__('Continue', 'woo-bundle-choice'));
+                }
             }
 
             if(empty($btn_text)){
@@ -789,7 +798,7 @@ class Product {
                 if($return_link) {
                     return $url;
                 }
-
+                
                 return header("Location: {$url}");
                 wp_die();
                 //wp_safe_redirect($url ,301 );               

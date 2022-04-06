@@ -32,6 +32,10 @@ class Admin {
 		$bonus_features = array_filter(unserialize(wbc()->options->get_option('setting_status_setting_status_setting','bonus_features',serialize(array()))));
         if(!empty($bonus_features['price_control'])){
             wbc()->load->model('admin/eowbc_price_control_save_update_prices');
+            
+            add_action( 'woocommerce_before_data_object_save',array(\eo\wbc\model\admin\Eowbc_Price_Control_Save_Update_Prices::instance(),'update_product'),10,2);
+            add_action( 'woocommerce_before_product_object_save',array(\eo\wbc\model\admin\Eowbc_Price_Control_Save_Update_Prices::instance(),'update_product'),10,2);
+
 			add_action( 'save_post',array(\eo\wbc\model\admin\Eowbc_Price_Control_Save_Update_Prices::instance(),'update_prices'),10,3);
         }
 		
@@ -141,7 +145,8 @@ class Admin {
 				wp_localize_script(
                     'eowbc_admin_js',
                     'eowbc_object',
-                    array('admin_url'=>admin_url( 'admin-ajax.php'))
+                    //array('admin_url'=>admin_url( 'admin-ajax.php'))
+                    array('admin_url'=> str_replace(array('https:','http:'),'',admin_url( 'admin-ajax.php')))
                 );            
                 wp_enqueue_script('eowbc_admin_js');
 

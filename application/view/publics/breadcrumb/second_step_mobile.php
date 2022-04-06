@@ -35,12 +35,14 @@
 </div>
 <script>
     jQuery(document).ready(function(){
-        jQuery('.step.completed.second_mobile').popup({
-            popup : jQuery('.ui.popup.second_mobile'),
-            on    : 'click',
-            target   :jQuery('.step.completed.second_mobile').parent(),
-            position : 'bottom left',
-            inline: true
-        });
+        if (typeof(jQuery.fn.popup)==='function') {
+            jQuery('.step.completed.second_mobile').popup({
+                popup : jQuery('.ui.popup.second_mobile'),
+                on    : 'click',
+                target   :jQuery('.step.completed.second_mobile').parent(),
+                position : 'bottom left',
+                inline: true
+            });
+        }
     });
 </script>

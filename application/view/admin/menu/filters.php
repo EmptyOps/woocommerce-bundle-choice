@@ -26,13 +26,15 @@ $attributes = \eo\wbc\model\Category_Attribute::instance()->get_attributs();
 if(!empty($categories) and is_array($categories)){
 	foreach ($categories as $id => $label) {
 		$term = wbc()->wc->get_term_by('id',$id,'product_cat');		
+		$term_taxonomy_id = $term->term_taxonomy_id;
+		
 		$term_list = get_terms('product_cat', array('hide_empty' => 0, 'orderby' => 'menu_order', 'parent'=>$id));
 		if(!empty($term_list)){
 			$child = array();
 			foreach ($term_list as $term) {
 				$child[$term->term_id] = $term->name;
 			}
-			$_childs[$id] = $child;
+			$_childs[$term_taxonomy_id] = $child;
 		}
 	}
 }
