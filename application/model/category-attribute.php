@@ -45,6 +45,7 @@ class Category_Attribute{
         $categories=array();       	
         foreach ($category as $_category) {                                	
             $categories[$_category->term_taxonomy_id] = \substr($prefix,1).$_category->name;
+            //$categories[$_category->term_id] = \substr($prefix,1).$_category->name;
             // using array_replace to merge the array by keeping the keys.
             $categories = array_replace($categories,$this->get_category($_category->term_id,$prefix.\substr($prefix,0,1)));
         }        

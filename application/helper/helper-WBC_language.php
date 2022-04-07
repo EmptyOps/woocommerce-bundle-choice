@@ -5,7 +5,12 @@ defined( 'ABSPATH' ) || exit;
 function eowbc_lang($string) {
 	return __($string,'woocommerce-bundle-choice');
 }
-	
+
+//TODO when a dedicated language helper is created for extensions then move below function in that file 
+function spext_lang($string, $extension_slug) {
+	return __($string,$extension_slug);
+}
+
 class WBC_language {
 	private static $_instance = null;
 

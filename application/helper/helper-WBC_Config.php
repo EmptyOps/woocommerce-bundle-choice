@@ -13,6 +13,33 @@ class WBC_Config {
 		return self::$_instance;
 	}
 
+	// one of the benefit of it is, it loads admin specifi class on admin side only and frontend specific class on frontend only
+	public function explicit_class_loader_config( $singleton_functionUpper ) {
+
+		return array(
+			'admin'=> array(
+
+				// NOTE: for type dir it is critically important to note that, make sure the dir specified do not have any file that have script execute directly in core php way means when the file included using require once and so on 
+				// array( 'type'=>'dir', 'path'=> '' ), 
+		 		// array( 'type'=>'file', 'path'=> constant($singleton_functionUpper.'_DIRECTORY')."/application/model/publics/component/sp-cafjkj.php" )
+				array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY').'application/system/core/publics/eowbc_base_model_publics.php' ), 
+			), 
+			'frontend'=> array(
+
+				// NOTE: for type dir it is critically important to note that, make sure the dir specified do not have any file that have script execute directly in core php way means when the file included using require once and so on 
+				array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY').'application/system/core/publics/eowbc_base_model_publics.php' ), 
+			), 
+			'both'=> array(
+
+				array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY').'application/system/core/publics/sp-query.php' ), 
+
+		 		array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."/application/model/publics/component/eowbc_filter_widget.php" ), 
+
+			)	
+
+		);
+	}
+
 	public function get_all_feature() {
 		return array_replace($this->get_features(),$this->get_bonus_features());
 	}
@@ -57,4 +84,57 @@ class WBC_Config {
 			'filters_shop_cat'=>'Shop/Category Page'
 		);
 	}
+
+	public function required_hooks_n_filters_etc() {
+		return array(			
+			'plugin_slug' => 'woo-bundle-choice', 
+			'widget_sections'=>array(
+						'category_page' => array(
+							'test_slug' => '/product-category/eo_setting_shape_cat', 
+							'mandatory' => array(
+								array(
+									'key' => 'woocommerce_before_main_content', 
+									'label' => '', 	//user friendly name (optional)
+									'type' => 'filter',	
+									'filter_priority_1' => 10,	
+									'filter_priority_2' => 1	
+								)
+							),
+							'recommended' => array(
+								array(
+									'key' => 'woocommerce_before_main_content', 
+									'label' => '', 	//user friendly name (optional)
+									'type' => 'filter',	
+									'filter_priority_1' => 10,	
+									'filter_priority_2' => 1	
+								)
+							)
+						), 
+						'item_page' => array(
+							'test_slug' => '/product-item-page-slug/of-our-sample-data-base-product', 
+							'mandatory' => array(
+								array(
+									'key' => 'woocommerce_before_add_to_cart_button', 
+									'label' => '', 	//user friendly name (optional)
+									'type' => 'action'	
+								)
+							),
+							'recommended' => array(
+								array(
+									'key' => 'woocommerce_product_additional_information', 
+									'label' => '', 	//user friendly name (optional)
+									'type' => 'action',	
+									'filter_priority_1' => 10,	
+									'filter_priority_2' => 1	
+								)
+							)
+						), 
+				)
+		);
+	}
+
+	public function separator() {
+		return "____"; 
+	}
+
 }

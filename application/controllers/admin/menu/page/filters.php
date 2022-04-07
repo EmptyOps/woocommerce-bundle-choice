@@ -323,11 +323,11 @@ if ( ! class_exists( 'Filters' ) ) {
 									'type'=>'devider',
 								),
 							'filter_setting_status'=>array(
-									'label'=>'Filter Status',
+									'label'=>'Filter Location',	//hiren changed this label title on 29-01-2022 since now support is being added for the normal vertical filters //Filter Status
 									'type'=>'checkbox',
 									'sanitize'=>'sanitize_text_field',
 									'value'=>array('filter_setting_status'),
-									'options'=>array('filter_setting_status'=>' Check here to enable horizontal filter bar'),
+									'options'=>array('filter_setting_status'=>' Check here to enable horizontal filter bar, otherwise filters will be displayed in default vertical style layout'),
 									'class'=>array(),
 									'size_class'=>array('eight','wide'),
 									'inline'=>true,

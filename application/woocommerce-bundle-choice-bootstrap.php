@@ -16,6 +16,8 @@ use eo\wbc\system\bootstrap\Uninstall;
 use eo\wbc\controllers\Ajax_Handler;
 use eo\wbc\controllers\Http_Handler;
 
+use eo\wbc\system\core\Platform;
+
 class WooCommerce_Bundle_Choice_Bootstrap {
 
 	private static $_instance = null;
@@ -70,6 +72,9 @@ class WooCommerce_Bundle_Choice_Bootstrap {
 			add_action( "wp_ajax_eowbc_ajax",array($this,'ajax'),10);
 
 		} else {			
+			// system core
+			$this->system_core();
+
 			/*if(class_exists('Http_Handler')){*/
 				Http_Handler::process();				
 			/*}*/
@@ -124,6 +129,22 @@ class WooCommerce_Bundle_Choice_Bootstrap {
 			}
 		}
 		die();
+	}
+
+	private function system_core(){
+
+		// NOTE: if it is required by earlies layers called befor this function then need move it further up in the whole bootstrap process of wbc 
+		wbc()->platform = new Platform(null,null);
+
+		//	core loaders
+
+		//	core init 
+		//
+		// require_once constant('EOWBC_DIRECTORY')."application/system/core/sp-cron-handler.php";
+		if( \eo\wbc\system\core\SP_Cron_Handler::should_init() ) {
+			\eo\wbc\system\core\SP_Cron_Handler::instance()->init();
+		}
+
 	}
 
 	public static function safe_load() {

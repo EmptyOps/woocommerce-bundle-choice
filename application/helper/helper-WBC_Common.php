@@ -87,8 +87,14 @@ class WBC_Common {
 		}
 	}
 
-	public function pr(array $ar,$force_debug = false,$die = false) {
+	public function pr($ar,$force_debug = false,$die = false) {
 		//TODO yet to implement optional arg force_debug
+
+		if( !is_array($ar) )
+		{
+			echo 'the common helper pr function says the var provided is not an array. skipping.';
+			return false;
+		}
 
 		echo "<pre>"; print_r($ar); echo "</pre>";
 
@@ -109,6 +115,13 @@ class WBC_Common {
 			wp_die( 'die from the common helper var_dump function' );
 		}
 
+	}
+
+	public function free_memory( &$var ) {
+		//TODO do research and implement most appropriate approach, in case, anything is not good
+
+		//	TODO previously in older systems we were relying on null assignment but maybe unset is better, anyway check which is better when we take into consideration garbage collector and so on 
+		$var = null;
 	}
 
 	public function consistsOfTheSameValues(array $a, array $b, bool $strict = false) {
@@ -294,5 +307,77 @@ class WBC_Common {
 		wp_register_script('eowbc_fomantic_js',constant('EOWBC_ASSET_URL').'js/fomantic/semantic.min.js');
 		wp_enqueue_script('eowbc_fomantic_js','',array('jquery'),'',true);		
     }
+
+    public function site_url($slug='', $query_string=''){
+    	$url = site_url( $slug );
+    	if( !empty($query_string) ) {
+    		if( strpos($url, "?") !== FALSE ) {
+    			$url .= "&".$query_string;
+    		}
+    		else {
+    			$url .= "?".$query_string;
+    		}
+    	}
+    	return $url;
+    }
+
+    public function current_uri(){
+    	return $_SERVER['REQUEST_URI'];
+    }
+
+    public function current_url(){
+    	$pageURL = 'http';
+        if(isset($_SERVER["HTTPS"]) and $_SERVER["HTTPS"] == "on") {
+            $pageURL .= "s";
+        }
+        $pageURL .= "://";
+        if ($_SERVER["SERVER_PORT"] != "80") {
+            $pageURL .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . $_SERVER["REQUEST_URI"];
+        } else {
+            $pageURL .= $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
+        }
+        return $pageURL;
+    }
+
+	public function current_theme_key() {
+		$stylesheet     = get_stylesheet();
+	    $theme_root     = get_theme_root( $stylesheet );
+		return basename( $theme_root )."___".basename( $stylesheet );
+	}
+
+	private function makeNestedArray($keys, $value, $target_array=null)
+    {
+	    $var = !is_null($target_array) ? $target_array : array();   
+	    $index=array_shift($keys);
+	    if (!isset($keys[0]))
+        {
+	        $var[$index]=$value;
+        }
+	    else 
+        {   
+	        $var[$index]= $this->makeNestedArray($keys,$value);            
+        }
+	    return $var;
+    }
+
+	public function arrValuesToNestedArr($arr, $target_value, $target_array=null) { 
+
+		$keys = array_values($arr);		// array('key1', 'key2', 'key3');
+		return $this->makeNestedArray($keys,$target_value,$target_array);
+	}
+
+	public function array_slice_keys($array, $keys = null) {
+	    if ( empty($keys) ) {
+	        $keys = array_keys($array);
+	    }
+	    if ( !is_array($keys) ) {
+	        $keys = array($keys);
+	    }
+	    if ( !is_array($array) ) {
+	        return array();
+	    } else {
+	        return array_intersect_key($array, array_fill_keys($keys, '1'));
+	    }
+	}
 
 }

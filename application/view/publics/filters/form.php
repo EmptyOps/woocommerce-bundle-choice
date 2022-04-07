@@ -126,7 +126,7 @@ if(empty($_per_page)){
 		<input type="hidden" name="_current_category" value="<?php echo (!empty(wbc()->sanitize->get('CAT_LINK'))?wbc()->sanitize->get('CAT_LINK'):$current_category); ?>" />
 
 		<input type="hidden" name="_category_query" id="eo_wbc_cat_query" 
-			value="<?php echo (!empty(wbc()->sanitize->get('CAT_LINK'))?wbc()->sanitize->get('CAT_LINK'):$current_category); ?>" />
+			value="<?php echo (!empty(wbc()->sanitize->get('CAT_LINK'))?wbc()->sanitize->get('CAT_LINK'):''/*$current_category*/); ?>" />
 			
 		<input type="hidden" name="_category" value="<?php echo implode(',',$thisObj->___category) ?>"/>
 		
@@ -448,6 +448,37 @@ if(empty($_per_page)){
 
 				jQuery('.checkbox').checkbox({onChange:function(event){
 
+					/*__slug=jQuery(this).attr('data-filter-slug');
+
+					if(__slug=='' || typeof(__slug)===typeof(undefined)){
+						return true;
+					}					
+
+					_values= Array();
+					jQuery('[data-filter-slug="'+__slug+'"]:checked').each(function(index,item){ 
+						_values.push(jQuery(item).attr('data-slug'));
+					});
+
+					jQuery('#checklist_'+__slug).val(_values.join());
+
+					if( ( jQuery('.checklist_'+__slug+':checkbox').length==jQuery('.checklist_'+__slug+':checkbox:checked').length)  || (jQuery('.checklist_'+__slug+':checkbox:checked').length==0) ) {
+
+			    		if(jQuery("[name='_attribute']").val().includes(__slug)) {
+			    			
+			    			_values=jQuery("[name='_attribute']").val().split(',')
+			    			_index=_values.indexOf(__slug)			    			
+			    			_values.splice(_index,1)				    			
+			    			jQuery("[name='_attribute']").val(_values.join());
+			    		}
+			    	}
+			    	else {
+			    		if(! jQuery("[name='_attribute']").val().includes(__slug)) {
+			    			_values=jQuery("[name='_attribute']").val().split(',')
+			    			_values.push(__slug)
+			    			jQuery("[name='_attribute']").val(_values.join())
+			    		}
+			    	}*/
+
 					__slug=jQuery(this).attr('data-filter-slug');
 
 					if(__slug=='' || typeof(__slug)===typeof(undefined)){
@@ -456,13 +487,13 @@ if(empty($_per_page)){
 
 					_values= Array();
 					if(jQuery('[name="checklist_'+__slug+'"]').length>0 && typeof(jQuery('[name="checklist_'+__slug+'"]').val()) !== typeof(undefined)){
-						jQuery('[name="checklist_'+__slug+'"]').val().split(',');	
+						_values = jQuery('[name="checklist_'+__slug+'"]').val().split(',');	
 					}				
 
 					if(_values.indexOf(jQuery(this).attr('data-slug'))!=-1){
 
 						_values=jQuery('[name="checklist_'+__slug+'"]').val().split(',');
-						_index=_values.indexOf(jQuery(this).attr('data-slug'));						
+						_index=_values.indexOf(jQuery(this).attr('data-slug'));
 						_values.splice(_index,1);						
 						jQuery('[name="checklist_'+__slug+'"]').val(_values.join());
 

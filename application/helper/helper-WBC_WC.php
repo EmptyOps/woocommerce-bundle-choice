@@ -373,4 +373,84 @@ class WBC_WC {
             return $permalink[$key];
         }
     }
+
+    public function get_productCats($parent_slug = '', $format = ''){
+        
+        $parent = '';
+        if( !empty($parent_slug) ) {
+            $parent_term = get_term_by('slug',$parent_slug,'product_cat');
+            if( $parent_term ) {
+                $parent = $parent_term->term_id;
+            } 
+        }
+        $separator = wbc()->config->separator();
+        $map_base = get_categories(array(
+            'hierarchical' => 1,
+            'show_option_none' => '',
+            'hide_empty' => 0,
+            'parent' => $parent,
+            'taxonomy' => 'product_cat'
+        ));
+          
+        $option_list=null;    
+        if( empty($format) ) {
+
+            $option_list=array();    
+        } elseif( $format == 'detailed_dropdown' ) {
+            $option_list='';    
+        } elseif( $format == 'detailed'){
+            $option_list=array();
+        }
+
+        if(is_array($map_base) and !empty($map_base)){
+          foreach ($map_base as $base) {        
+            if( empty($format) ) {
+
+                $option_list[$base->term_id] = $base->slug;
+            } elseif( $format == 'detailed_dropdown' ) {
+                $option_list.='<div class="item" data-value="'.$base->term_id.'" data-sp_eid="'.$separator.'prod_cat'.$separator.$base->term_id.'">'.str_replace("'","\'",$base->name).'</div>'.$this->get_productCats($base->slug, $format);
+            } elseif( $format == 'detailed') {
+                $option_list[$base->term_id] = array('label'=>str_replace("'","\'",$base->name), 'attr'=>' data-sp_eid="'.$separator.'prod_cat'.$separator.$base->term_id.' " ', $format);
+                $option_list = array_merge($option_list, self::get_productCats($base->slug, $format));
+            }
+          }
+        }
+
+        return $option_list;
+    }
+
+    public function get_productAttributes($format = ''){
+
+        $attributes = null;
+        if(function_exists('wc_get_attribute_taxonomies')){
+          $attributes = wc_get_attribute_taxonomies();
+        }
+        $separator = wbc()->config->separator();
+        $option_list=null;    
+        if( empty($format) ) {
+
+            $option_list=array();    
+        } elseif( $format == 'detailed_dropdown' ) {
+            $option_list='<div class="divider"></div><div class="header">'.__('Attributes','diamond-api-integrator').'</div>';
+        } elseif( $format == 'detailed' ) {
+            $option_list=array();
+        }
+
+        if(is_array($attributes) and !empty($attributes)){
+          foreach ($attributes as $attribute) {        
+            if( empty($format) ) {
+
+                $option_list[$attribute->term_id] = 'pa_'.$attribute->attribute_name.'';
+            } elseif( $format == 'detailed_dropdown' ) {
+
+                $option_list.='<div class="item" data-value="pa_'.$attribute->attribute_name.'" data-sp_eid="'.$separator.'attr'.$separator.$attribute->term_id.'">'.$attribute->attribute_label.'</div>';
+
+            } elseif( $format == 'detailed' ) {
+                $option_list['pa_'.$attribute->attribute_name] = array('label'=>$attribute->attribute_label, 'attr'=>'data-sp_eid="'.$separator.$attribute->term_id.' " ', $format);       
+            }
+          }
+        }
+        return $option_list;
+    }
+
 }

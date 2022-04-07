@@ -300,6 +300,22 @@ if ( ! class_exists( 'Appearance' ) ) {
 								// 'size_class'=>array('sixteen','wide'),
 							),
 						),
+						'fc_atc_button_text_second'=>array(
+							'label'=>eowbc_lang('First Category on Second Step'),
+							'type'=>'text',
+							'validate'=>array('required'=>''),
+							'sanitize'=>'sanitize_text_field',
+							'value'=>'Continue',
+							'class'=>array('fluid'),						
+							'size_class'=>array('eight','wide','required'),
+							'inline'=>false,
+
+							'visible_info'=>array( 'label'=>eowbc_lang('Text to be shown on add to cart button on product page for the first category'),
+								'type'=>'visible_info',
+								'class'=>array('small'),
+								// 'size_class'=>array('sixteen','wide'),
+							),
+						),
 						'sc_atc_button_text'=>array(
 							'label'=>eowbc_lang('Second Category Add to Cart Button Text'),
 							'type'=>'text',
@@ -316,6 +332,24 @@ if ( ! class_exists( 'Appearance' ) ) {
 								// 'size_class'=>array('sixteen','wide'),
 							),							
 						),
+
+						'sc_atc_button_text_second'=>array(
+							'label'=>eowbc_lang('Second Category on Second Step'),
+							'type'=>'text',
+							'validate'=>array('required'=>''),
+							'sanitize'=>'sanitize_text_field',
+							'value'=>'Continue',
+							'class'=>array('fluid'),						
+							'size_class'=>array('eight','wide','required'),
+							'inline'=>false,
+
+							'visible_info'=>array( 'label'=>eowbc_lang('Text to be shown on add to cart button on product page for the second category'),
+								'type'=>'visible_info',
+								'class'=>array('small'),
+								// 'size_class'=>array('sixteen','wide'),
+							),							
+						),
+
 						'product_page_add_to_basket'=>array(
 							'label'=>'Add to Basket Text',
 							'type'=>'text',
