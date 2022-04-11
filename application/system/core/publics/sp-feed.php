@@ -99,15 +99,15 @@ class SP_Feed extends Eowbc_Base_Model_Publics {
 		}
 	}
 
-	protected function loop_box_overrides(){
+	protected function loop_box_overrides( $feedObj, $extra_args = array()){
 		//do nothing as there is no override in the core features except some add cart button text etc. matters for which functions defined in this class		
 	}
 
-	protected function pagination_page(){
+	protected function pagination_page( $layer, $page ){
 		//there is no override in the core features
 	}
 
-	protected function pagination_per_page(){
+	protected function pagination_per_page( $layer,$per_page ){
 		//there is no override in the core features
 	}
 
