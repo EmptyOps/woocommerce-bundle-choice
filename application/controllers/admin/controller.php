@@ -140,9 +140,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 			/*if(!empty($form_value['data_controls']) and !empty($form_value['data_controls']['type']) and $form_value['data_controls']['type'] === 'send_email_on_click'){
 				
 				$control_key = $form_key.'email_header_template_text';
-
 				
-
 				$controls['email_header_template_text'] = array(
 					'label'=>'Email Header',
 					'type'=>'text',
@@ -151,7 +149,6 @@ class Controller extends \eo\wbc\controllers\Controller {
 					'sanitize'=>'sanitize_text_field',
 					'id'=>'eorad_email_header',
 					'tab_key'=>$form_value['data_controls']['tab_key']);
-
 				$controls['email_body_template_textarea'] = array(
 					'label'=>'Email Header',
 					'type'=>'textarea',

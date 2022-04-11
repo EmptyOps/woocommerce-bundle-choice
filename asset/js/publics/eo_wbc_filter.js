@@ -1,5 +1,7 @@
 
 
+window.document.splugins = window.document.splugins || {};
+
 window.document.splugins.wbc = window.document.splugins.wbc || {};
 
 // the filters js module
@@ -15,7 +17,7 @@ window.document.splugins.wbc.filters.core = function() {
 
         before_search: function() {
 
-			window.document.splugins.Feed.events.core.notifyAllObservers( 'filters', 'before_search' );
+			window.document.splugins.Feed.events.core.notifyAllObservers( 'filters', 'before_search' ); 
         }, 
         // createSubject: function( feature_unique_key, notifications ) {
         //     // console.log("Observer " + index + " is notified!");
@@ -54,11 +56,12 @@ window.document.splugins.wbc.filters.core = function() {
 			window.document.splugins.Feed.events.core.notifyAllObservers( 'filters', 'no_products_found' );
         }, 
 
-    }
+    } 
 }
 
 //	the filter events 
-window.document.splugins.Feed.events.core.createSubject( 'filters', ['before_search', 'no_products_found'] );
+// 	ACTIVE_TODO commented below events subject creation, during testing only. so temporary only.
+// window.document.splugins.Feed.events.core.createSubject( 'filters', ['before_search', 'no_products_found'] );
 
 /*<<<<<<< HEAD*/
 /*window.eo_wbc_object = window.eo_wbc_object || {};
@@ -197,9 +200,10 @@ function eo_wbc_filter_render_html(data,render_container) {
 		});
 	}
 	else {
-		
+
 		//	NOTE: if there are any return false etc statement occur below this statement then this core function call should be moved underneath the return statement because this core functions is supposed to be called only if search actually happens but yeah at earliest possible also so that there are any dependent flow below or elsewhere then they are taken care of properly 
-		window.document.splugins.wbc.filters.core.no_products_found();
+		// 	ACTIVE_TODO commented below events subject creation, during testing only. so temporary only.
+		// window.document.splugins.wbc.filters.core.no_products_found();
 
 		jQuery(render_container/*".products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products"*/).html('<p class="woocommerce-info" style="width: 100%;">No products were found matching your selection.</p>');	
 	}	
@@ -270,7 +274,8 @@ function eo_wbc_filter_render_html(data,render_container) {
 		}
 
 		//	NOTE: if there are any return false etc statement occur below this statement then this core function call should be moved underneath the return statement because this core functions is supposed to be called only if search actually happens but yeah at earliest possible also so that there are any dependent flow below or elsewhere then they are taken care of properly 
-		window.document.splugins.wbc.filters.core.before_search();
+		// 	ACTIVE_TODO commented below events subject creation, during testing only. so temporary only.
+		// window.document.splugins.wbc.filters.core.before_search();
 
 		if(render_container==='') {
 			render_container = jQuery(".products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)");
@@ -390,7 +395,7 @@ jQuery(document).ready(function($){
 			event.preventDefault();
 			event.stopPropagation();								
 			
-			page nnumber text would break below with multilanguage so instead use the data attribute to store and read the page number
+			// ACTIVE_TODO page nnumber text would break below with multilanguage so instead use the data attribute to store and read the page number -- to a and/or -- to h
 			if(jQuery(this).hasClass("next") || jQuery(this).hasClass("prev")){
 			
 				if(jQuery(this).hasClass("next")){
@@ -428,7 +433,7 @@ jQuery(document).ready(function($){
 	});	
 });
 
-here if reset even is encapsulated within particule filter fields object then that field can have more control on its state changes 
+// ACTIVE_TODO here if reset even is encapsulated within particule filter fields object then that field can have more control on its state changes -- to a and/or -- to h 
 function reset_icon(e,selector){
 	e.preventDefault();
 	e.stopPropagation()
