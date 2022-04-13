@@ -446,10 +446,12 @@ class WBC_WC {
                 $option_list.='<div class="item" data-value="pa_'.$attribute->attribute_name.'" data-sp_eid="'.$separator.'attr'.$separator.$attribute->term_id.'">'.$attribute->attribute_label.'</div>';
 
             } elseif( $format == 'detailed' ) {
-                $option_list['pa_'.$attribute->attribute_name] = array('label'=>$attribute->attribute_label, 'attr'=>'data-sp_eid="'.$separator.$attribute->term_id.' " ', $format);       
+                $option_list['pa_'.$attribute->attribute_name] = array('label'=>$attribute->attribute_label, 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$attribute->term_id.' " ', $format);       
             }
           }
         }
+        
+
         return $option_list;
     }
 
