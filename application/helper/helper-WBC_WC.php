@@ -411,7 +411,7 @@ class WBC_WC {
                 $option_list.='<div class="item" data-value="'.$base->term_id.'" data-sp_eid="'.$separator.'prod_cat'.$separator.$base->term_id.'">'.str_replace("'","\'",$base->name).'</div>'.$this->get_productCats($base->slug, $format);
             } elseif( $format == 'detailed') {
                 $option_list[$base->term_id] = array('label'=>str_replace("'","\'",$base->name), 'attr'=>' data-sp_eid="'.$separator.'prod_cat'.$separator.$base->term_id.' " ', $format);
-                $option_list = array_merge($option_list, self::get_productCats($base->slug, $format));
+                $option_list = array_replace($option_list, self::get_productCats($base->slug, $format)); //array_merge($option_list, self::get_productCats($base->slug, $format));
             }
           }
         }
@@ -440,13 +440,13 @@ class WBC_WC {
           foreach ($attributes as $attribute) {        
             if( empty($format) ) {
 
-                $option_list[$attribute->term_id] = 'pa_'.$attribute->attribute_name.'';
+                $option_list[$attribute->attribute_id] = 'pa_'.$attribute->attribute_name.'';
             } elseif( $format == 'detailed_dropdown' ) {
 
-                $option_list.='<div class="item" data-value="pa_'.$attribute->attribute_name.'" data-sp_eid="'.$separator.'attr'.$separator.$attribute->term_id.'">'.$attribute->attribute_label.'</div>';
+                $option_list.='<div class="item" data-value="pa_'.$attribute->attribute_name.'" data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.'">'.$attribute->attribute_label.'</div>';
 
             } elseif( $format == 'detailed' ) {
-                $option_list['pa_'.$attribute->attribute_name] = array('label'=>$attribute->attribute_label, 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$attribute->term_id.' " ', $format);       
+                $option_list['pa_'.$attribute->attribute_name] = array('label'=>$attribute->attribute_label, 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.' " ', $format);       
             }
           }
         }
