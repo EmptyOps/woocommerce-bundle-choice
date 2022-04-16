@@ -374,6 +374,13 @@ class WBC_WC {
         }
     }
 
+    public function get_cat_name($term_id){
+
+        $term = $this->get_term_by( 'id', $term_id );
+
+        return $term->name;
+    }
+
     public function get_productCats($parent_slug = '', $format = ''){
         
         $parent = '';

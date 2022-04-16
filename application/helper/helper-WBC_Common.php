@@ -14,6 +14,9 @@ class WBC_Common {
 	}
 
 	public function get_category($page='product',int $post_id = null,array $in_category=array()){
+
+		// ACTIVE_TODO just for the notes that, almost all the logic of this function seems to be deeply implemented for the proper working of the different premium pair builders supported by the earring pendant builder extension, so let keep that in mind while we are getting into the refactoring of those earring pendant builder and other related extensions of category page and item page set 
+
 		$in_category = apply_filters('eoowbc_helper_common_get_category_in_category',$in_category);		
 		$page = apply_filters('eoowbc_helper_common_get_category_page',$page);
 		$post_id = apply_filters('eoowbc_helper_common_get_category_post_id',$post_id);
