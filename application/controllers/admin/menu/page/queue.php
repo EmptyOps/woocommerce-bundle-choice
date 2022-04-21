@@ -95,14 +95,14 @@ if ( ! class_exists( 'Queue' ) ) {
 						'sp_queue_reset_link___'.$sbkey=>array(
 							'label'=>'Reset',
 							'type'=>'link',
-							'attr'=>array("href='".admin_url('admin.php?page=eowbc&eo_wbc_view_auto_jewel=1&f=filters_shop_cat')."'"),
+							'attr'=>array("href='".admin_url('admin.php?page='.$plugin_slug.'---sp-queue&reset=1&sbkey='.$sbkey)."'"),
 							'class'=>array('secondary'),
-							'visible_info'=>array( 'label'=>'Click above link to reset the queue. After reset it will sync again from the beginning.',
-								'type'=>'visible_info',
-								'class'=>array('fluid', 'small'),
-								'size_class'=>array('sixteen','wide'),
-							),	
 						),
+						'visible_info'=>array( 'label'=>'Click above link to reset the queue. After reset it will sync again from the beginning.',
+							'type'=>'visible_info',
+							'class'=>array('fluid', 'small'),
+							'size_class'=>array('sixteen','wide','required'),
+						),	
 
 						'sp_queue_batch_size___'.$sbkey=>array(
 							'label' => 'Batch Size',

@@ -38,7 +38,7 @@ class SP_Queue {
 
 	}
 
-	protected function reset($queue_key){
+	protected function reset($queue_key, $sub_queue_key=""){
 
 		//	a (options) db based queue, simple one that works for our batch processing requirements
 
@@ -56,6 +56,10 @@ class SP_Queue {
 
 
 		wbc()->options->set( 'sp_queue_batch_number___'.$queue_key, 1 );
+
+		if( !empty($sub_queue_key) ) {
+			wbc()->options->set( 'sp_queue_batch_number___'.$queue_key.$sub_queue_key, 1 );
+		}
 
 	}
 
@@ -86,24 +90,27 @@ class SP_Queue {
 		return wbc()->options->get_option( 'queue_queue___'.$queue_key, 'sp_queue_batch_size___'.$queue_key, $default );
 	}
 
-	protected function increment_curr_batch_number($queue_key, $processed_batch_size){
-		wbc()->options->set( 'sp_queue_batch_number___'.$queue_key, $this->get_curr_batch_number($queue_key)+1 );
+	protected function increment_curr_batch_number($queue_key, $processed_batch_size, $sub_queue_key="", $desc=null){
+		wbc()->options->set( 'sp_queue_batch_number___'.$queue_key.$sub_queue_key, $this->get_curr_batch_number($queue_key, $sub_queue_key)+1 );
 
 		// record info for displaying states
 		if( $this->should_set_info($queue_key) ) {
-			$this->set_info($queue_key, $this->prepare_info_entry($queue_key,$processed_batch_size));
+			$this->set_info($queue_key, $this->prepare_info_entry($queue_key,$processed_batch_size,$desc));
 		}
 	}
 
-	public function get_curr_batch_number($queue_key){
-		return wbc()->options->get( 'sp_queue_batch_number___'.$queue_key, 1 );
+	public function get_curr_batch_number($queue_key, $sub_queue_key=""){
+
+		// NOTE: sub_queue_key is additional sub queues that may needed for keeping stat of the operations like initialization, cleanup and so on. it will mostly be requiring stat of the batch number only and nothing else like batch_size and so on so its support is added on relevant functions only. 
+
+		return wbc()->options->get( 'sp_queue_batch_number___'.$queue_key.$sub_queue_key, 1 );
 	}
 
 	public function is_finished($result_cnt, $batch_size){
 		return ( $result_cnt < $batch_size );
 	}
 
-	public function mark_finished($queue_key,$processed_batch_size){
+	public function mark_finished($queue_key,$processed_batch_size, $sub_queue_key=""){
 		// update sync complete time 
 		wbc()->options->set( 'sp_queue_last_sync_complete___'.$queue_key, date('Y-m-d H:i:s') );
 
@@ -113,7 +120,7 @@ class SP_Queue {
 		}
 
 		// reset 
-		$this->reset($queue_key);
+		$this->reset($queue_key, $sub_queue_key);
 
 	}
 
@@ -122,7 +129,7 @@ class SP_Queue {
 		return true;
 	}
 
-	private function prepare_info_entry($queue_key,$processed_batch_size) {
+	private function prepare_info_entry($queue_key,$processed_batch_size,$desc=null) {
 
 		//	prepare info
 		$table_data = array();
@@ -130,6 +137,7 @@ class SP_Queue {
 		$table_data['sp_queue_last_sync_time'] = wbc()->options->get( 'sp_queue_last_sync_complete___'.$queue_key ); 
 		$table_data['sp_queue_in_process_at_index'] = $this->get_curr_batch_number($queue_key); 
 		$table_data['sp_queue_in_process_last_updated_at'] = date('Y-m-d H:i:s'); 
+		$table_data['sp_queue_desc'] = !empty($desc) ? $desc : ""; 
 
 		return $table_data;
 	}
