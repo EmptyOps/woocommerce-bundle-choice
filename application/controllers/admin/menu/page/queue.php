@@ -74,8 +74,10 @@ if ( ! class_exists( 'Queue' ) ) {
 
 			$form_definition = array();
 			$sbcnt = -1;
-			foreach ($subtabs as $sbkey => $sbvalue) {
+			foreach ($subtabs as $sbkey => $sbvalue) {	
 				$sbcnt++;
+
+    			$sp_queue_batch_size = \eo\wbc\system\core\SP_Queue::instance()->get_batch_size($sbkey);
 
 				$form_definition['queue___'.$sbkey] = array(
 					'label'=>( !empty($sbvalue['display_name']) ? $sbvalue['display_name'].'('.$sbkey.')' : $sbkey /*$sbvalue['api_config_api_name']*/ ).' Sync Details',
@@ -107,7 +109,7 @@ if ( ! class_exists( 'Queue' ) ) {
 						'sp_queue_batch_size___'.$sbkey=>array(
 							'label' => 'Batch Size',
 							'type'=>'text',
-							'value'=>'',
+							'value'=>$sp_queue_batch_size,	// '',
 							'validate'=>array('required'=>''),
 							'sanitize'=>'sanitize_text_field',
 							'size_class'=>array('one','wide'),

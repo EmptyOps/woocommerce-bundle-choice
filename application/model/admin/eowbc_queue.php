@@ -196,7 +196,7 @@ class Eowbc_Queue extends Eowbc_Model {
 			    	else {
 			    		if( strpos($fk, 'sp_queue_batch_size___') !== FALSE ) {
 			    			$queue_key = explode("___", $fk)[1];
-			    			eo\wbc\system\core\SP_Queue::instance()->set_batch_size($queue_key, (isset($_POST[$fk])? wbc()->sanitize->post($fk):'' ));
+			    			\eo\wbc\system\core\SP_Queue::instance()->set_batch_size($queue_key, (isset($_POST[$fk])? wbc()->sanitize->post($fk):'' ));
 			    		}
 			    		else {
 				    		wbc()->options->update_option('queue_'.$key,$fk,(isset($_POST[$fk])? wbc()->sanitize->post($fk):'' ));

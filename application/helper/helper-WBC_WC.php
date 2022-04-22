@@ -376,8 +376,8 @@ class WBC_WC {
 
     public function get_cat_name($term_id){
 
-        $term = $this->get_term_by( 'id', $term_id );
-
+        $term = $this->get_term_by( 'id', $term_id, 'product_cat' );
+        
         return $term->name;
     }
 
