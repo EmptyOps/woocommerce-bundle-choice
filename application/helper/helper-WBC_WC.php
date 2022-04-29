@@ -483,7 +483,7 @@ class WBC_WC {
             $opts_arr[wbc()->common->stringToKey( ($attribute->attribute_label?$attribute->attribute_label:$attribute->attribute_name) )] = array( 'label'=>($attribute->attribute_label?$attribute->attribute_label:$attribute->attribute_name), 'is_header'=>true );                  
             foreach (get_terms(['taxonomy' => wc_attribute_taxonomy_name($attribute->attribute_name),'hide_empty' => false]) as $term) {
                 // $taxonomies.="<div class='item' data-value='".$term->term_taxonomy_id."'>".$term->name."</div>";   
-                $opts_arr[$term->attribute_id] = array( 'label'=>$term->name , 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$term->attribute_id.' " ');  
+                $opts_arr[$term->term_taxonomy_id] = array( 'label'=>$term->name , 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$term->term_taxonomy_id.' " ');  
             }
         }
         // return $taxonomies;
