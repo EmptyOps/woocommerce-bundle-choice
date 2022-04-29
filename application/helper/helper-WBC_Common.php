@@ -190,19 +190,26 @@ class WBC_Common {
 	    return md5($str);
 	}
 
-	public function dropdownSelectedvalueText($field, $selectedkey) {
+	public function dropdownSelectedvalueText($field, $selectedkey, $inner_key=null) {
 		if(!is_array($selectedkey)){
 			$__selectedkey = "";
 			if( !wbc()->common->nonZeroEmpty($selectedkey) ) {
 				$__selectedkey = $selectedkey;
 			}
 
-			if( isset($field["options"][$__selectedkey]) ) {
-				return $field["options"][$__selectedkey];
+			if( isset($field["options"][$__selectedkey]) && !empty($inner_key) && is_array($field["options"][$__selectedkey]) ) {
+				return $field["options"][$__selectedkey][$inner_key];
 			}
 			else {
-				return "";
+				if( isset($field["options"][$__selectedkey]) ) {
+					return $field["options"][$__selectedkey];
+				}
+				else {
+					return "";
+				}	
 			}	
+
+			
 		} elseif(!empty($selectedkey)) {
 			$__selectedkeys = array();
 			foreach ($selectedkey as $key => $value) {
@@ -211,8 +218,12 @@ class WBC_Common {
 					$__selectedkey = $value;
 				}
 
-				if( isset($field["options"][$__selectedkey]) ) {
-					$__selectedkeys[] = $field["options"][$__selectedkey];
+				if( isset($field["options"][$__selectedkey]) && is_array($field["options"][$__selectedkey]) ) {
+					$__selectedkeys[] = $field["options"][$__selectedkey][$inner_key];
+				} else {
+					if( isset($field["options"][$__selectedkey]) ) {
+						$__selectedkeys[] = $field["options"][$__selectedkey];
+					}
 				}
 			}			
 			return $__selectedkeys;			
