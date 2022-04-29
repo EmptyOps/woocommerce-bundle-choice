@@ -392,4 +392,12 @@ class WBC_Common {
 
 	}
 
+	public function key_to_title( $key ) {
+
+		// ACTIVE_TODO implement this function with simple flow like pgTitle of the ci system, so maybe simply copy from there. -- to s 
+		// 	ACTIVE_TODO and also create one more function that applies the sanitization and for that use the wordpress sanitized title function they have -- to s 
+		return $key;
+
+	}
+
 }
