@@ -82,6 +82,10 @@ if ( ! class_exists( 'Queue' ) ) {
 					'form'=> array(
 						'queue_sync_details_section'=>array('label'=>'Sync Details','type'=>'segment','desc'=>'The details provided below are of last 10 batch process events for particular API. For scheduling the frequency for example at what speed the API should be synced, Edit particular API on Add/Edit APIs tab and then go to scheduler section at bottom.'
 						),
+						'resolver_path'=>array(
+							'type'=>'hidden',
+							'value'=>constant('EOWBC_DIRECTORY').'application/controllers/ajax/eowbc_queue.php',
+						),
 						'list'=>array_merge( $table , array(
 							'type'=>'table' )
 						), 
@@ -139,6 +143,7 @@ if ( ! class_exists( 'Queue' ) ) {
 						'sanitize'=>'sanitize_text_field',
 					);
 				}
+				
 
 			}
 			
