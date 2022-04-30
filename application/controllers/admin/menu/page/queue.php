@@ -110,6 +110,18 @@ if ( ! class_exists( 'Queue' ) ) {
 							'size_class'=>array('sixteen','wide','required'),
 						),	
 
+						'sp_queue_flush_and_reset_link___'.$sbkey=>array(
+							'label'=>'Flush and Reset',
+							'type'=>'link',
+							'attr'=>array("href='javascript:void(0);'", " onclick='window.document.splugins.common.confirm_and_redirect( \"Are sure you to delete all synced data? Please confirm. Note that depending on the storage option and the api inventory size it may take sometime for this process to finish.\", \"".admin_url('admin.php?page='.$plugin_slug.'---sp-queue&reset=1&sbkey='.$sbkey.'&hsulf=1')."\" )' "),	
+							'class'=>array('secondary'),
+						),
+						'visible_info_flush_and_reset'=>array( 'label'=>'Click above link to flush existing synced data and reset the queue. Be sure that you understand the outcomes of flushing all synced data since it will make your website frontend feed empty till the sync process do not catch up again. You may not need to do it normally except if there are any exceptional scenarios.',
+							'type'=>'visible_info',
+							'class'=>array('fluid', 'small'),
+							'size_class'=>array('sixteen','wide','required'),
+						),	
+
 						'sp_queue_batch_size___'.$sbkey=>array(
 							'label' => 'Batch Size',
 							'type'=>'text',
