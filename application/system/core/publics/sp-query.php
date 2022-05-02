@@ -5,7 +5,7 @@
 
 namespace eo\wbc\system\core\publics;
 
-defined( 'ABSPATH' ) || exit;
+defined( 'ABSPATH' ) || exit;   
 
 class SP_Query {
 
@@ -467,4 +467,18 @@ class SP_Query {
     	} 	    	
     	return $new_list;
     }
+
+    public function attribute_range($term,$min,$max) {
+
+        $list=array();
+        $list=get_terms(array('taxonomy'=>$term,'hide_empty'=>FALSE));                        
+        $list_slug = array();
+        array_walk($list,function($e) use(&$list_slug){
+            $list_slug[$e->slug]=$e->name;
+        });
+        $_min=array_search($min,array_keys($list_slug));
+        $_max=array_search($max,array_keys($list_slug));                              
+        $list = array_slice(array_values($list_slug),$_min,($_max-$_min)+1);        
+        return $list;
+    }  
 }
