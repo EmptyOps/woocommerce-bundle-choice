@@ -1,5 +1,7 @@
 /**
  * common js functions and also the common defs for the module, observer, prototype and singleton design patterns 
+ * 
+ * this asset file will contain the common layer and functions, and if there are common functions which are specific to admin only then that will not go here but on in the admin asset js file, and if there are common functions which are to be used by frontend but in some cases by admin or even if not going to be used by admin then also be added here. so this asset file will be loaded on both admin and frontend. the decision of managing common flows like this and priotizing what goes to frontend is because of the requirement of minimizing the number of assets that would be loaded on frontend. 
  */
 window.document.splugins = window.document.splugins || {};
 window.document.splugins.common = window.document.splugins.common || {};

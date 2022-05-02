@@ -190,19 +190,26 @@ class WBC_Common {
 	    return md5($str);
 	}
 
-	public function dropdownSelectedvalueText($field, $selectedkey) {
+	public function dropdownSelectedvalueText($field, $selectedkey, $inner_key=null) {
 		if(!is_array($selectedkey)){
 			$__selectedkey = "";
 			if( !wbc()->common->nonZeroEmpty($selectedkey) ) {
 				$__selectedkey = $selectedkey;
 			}
 
-			if( isset($field["options"][$__selectedkey]) ) {
-				return $field["options"][$__selectedkey];
+			if( isset($field["options"][$__selectedkey]) && !empty($inner_key) && is_array($field["options"][$__selectedkey]) ) {
+				return $field["options"][$__selectedkey][$inner_key];
 			}
 			else {
-				return "";
+				if( isset($field["options"][$__selectedkey]) ) {
+					return $field["options"][$__selectedkey];
+				}
+				else {
+					return "";
+				}	
 			}	
+
+			
 		} elseif(!empty($selectedkey)) {
 			$__selectedkeys = array();
 			foreach ($selectedkey as $key => $value) {
@@ -211,8 +218,12 @@ class WBC_Common {
 					$__selectedkey = $value;
 				}
 
-				if( isset($field["options"][$__selectedkey]) ) {
-					$__selectedkeys[] = $field["options"][$__selectedkey];
+				if( isset($field["options"][$__selectedkey]) && is_array($field["options"][$__selectedkey]) ) {
+					$__selectedkeys[] = $field["options"][$__selectedkey][$inner_key];
+				} else {
+					if( isset($field["options"][$__selectedkey]) ) {
+						$__selectedkeys[] = $field["options"][$__selectedkey];
+					}
 				}
 			}			
 			return $__selectedkeys;			
@@ -389,6 +400,14 @@ class WBC_Common {
 	public function special_characters() {
 
 		return array('"',"'",".","#"," ","%","~","!","@","$","^","&","*","`","(",")","[","]","-","=","+","{","}",":",";","|","/","?","<",">",",",".","`","¢","£","¤","¥","¦","§","¨","©","ª","«","¬","®","ˉ","°","±","²","³","µ","¶","¸","¹","º","»","¼","¼","¾","¿","À","Á","Â","Ã","Ä","Å","Æ","Ç","È","É","Ê","Ë","Ì","Í","Î","Ï","Ð","Ñ","Ò","Ó","Ô","Õ","Ö","×","Ø","Ù","Ú","Û","Ü","Ý","Þ","ß","à","á","â","ã","ä","å","æ","ç","è","é","ê","ë","ì","í","î","ï","ð","ñ","ò","ó","ô","õ","ö","÷","ø","ù","ú","û","ü","ý","þ","ÿ","\\");
+
+	}
+
+	public function key_to_title( $key ) {
+
+		// ACTIVE_TODO implement this function with simple flow like pgTitle of the ci system, so maybe simply copy from there. -- to s 
+		// 	ACTIVE_TODO and also create one more function that applies the sanitization and for that use the wordpress sanitized title function they have -- to s 
+		return $key;
 
 	}
 

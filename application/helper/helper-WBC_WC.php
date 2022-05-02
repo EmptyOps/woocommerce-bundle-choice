@@ -1,29 +1,29 @@
 <?php
 
 /*
-*	woocommerce helper class
+*   woocommerce helper class
 */
 defined( 'ABSPATH' ) || exit;
 
 class WBC_WC {
 
-	private static $_instance = null;
+    private static $_instance = null;
 
-	public static function instance() {
-		if ( ! isset( self::$_instance ) ) {
-			self::$_instance = new self;
-		}
+    public static function instance() {
+        if ( ! isset( self::$_instance ) ) {
+            self::$_instance = new self;
+        }
 
-		return self::$_instance;
-	}
+        return self::$_instance;
+    }
 
-	private function __construct() {
-		
-	}
+    private function __construct() {
+        
+    }
 
-	public function wc_placeholder_img_src() {
-		return wc_placeholder_img_src();
-	}
+    public function wc_placeholder_img_src() {
+        return wc_placeholder_img_src();
+    }
 
     public function slug2slug($slug) {
         $term = get_term_by('slug',$slug,'product_cat');
@@ -66,31 +66,31 @@ class WBC_WC {
         }
     }
 
-	public function is_wc_endpoint_url( $endpoint = false ) {
+    public function is_wc_endpoint_url( $endpoint = false ) {
         
-        if(function_exists('is_wc_endpoint_url')) {        	
-        	return is_wc_endpoint_url($endpoint);
+        if(function_exists('is_wc_endpoint_url')) {         
+            return is_wc_endpoint_url($endpoint);
         } else {
 
-	        global $wp;
-	        $wc_endpoints = WC()->query->query_vars;
-	        
-	        if ( false !== $endpoint ) {
-	            if ( ! isset( $wc_endpoints[ $endpoint ] ) ) {
-	                return false;
-	            } else {
-	                $endpoint_var = $wc_endpoints[ $endpoint ];
-	            }            
-	            return isset( $wp->query_vars[ $endpoint_var ] );
-	        } else {
-	            foreach ( $wc_endpoints as $key => $value ) {
-	                if ( isset( $wp->query_vars[ $key ] ) ) {
-	                    return true;
-	                }
-	            }            
-	            return false;
-	        }
-	    }
+            global $wp;
+            $wc_endpoints = WC()->query->query_vars;
+            
+            if ( false !== $endpoint ) {
+                if ( ! isset( $wc_endpoints[ $endpoint ] ) ) {
+                    return false;
+                } else {
+                    $endpoint_var = $wc_endpoints[ $endpoint ];
+                }            
+                return isset( $wp->query_vars[ $endpoint_var ] );
+            } else {
+                foreach ( $wc_endpoints as $key => $value ) {
+                    if ( isset( $wp->query_vars[ $key ] ) ) {
+                        return true;
+                    }
+                }            
+                return false;
+            }
+        }
     }
 
     public function get_terms($parent_id = 0, $orderby = 'menu_order',$taxonomy='product_cat') {
@@ -421,6 +421,7 @@ class WBC_WC {
             } elseif( $format == 'detailed') {
                 $option_list[$base->term_id] = array('label'=>str_replace("'","\'",$base->name), 'attr'=>' data-sp_eid="'.$separator.'prod_cat'.$separator.$base->term_id.' " ', $format);
 
+
                 $option_list = array_replace($option_list, self::get_productCats($base->slug, $format)); //array_merge($option_list, self::get_productCats($base->slug, $format));
 
             } elseif( $format == 'id_and_title' ){
@@ -461,6 +462,7 @@ class WBC_WC {
                 $option_list.='<div class="item" data-value="pa_'.$attribute->attribute_name.'" data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.'">'.$attribute->attribute_label.'</div>';
 
             } elseif( $format == 'detailed' ) {
+
                 $option_list['pa_'.$attribute->attribute_name] = array('label'=>$attribute->attribute_label, 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.' " ', $format);  
 
             } elseif( $format == 'id_and_title' ) {
@@ -476,6 +478,7 @@ class WBC_WC {
     public static function eo_wbc_attributes($opts_arr=array()) {        
         // $taxonomies="";
         $separator = wbc()->config->separator();
+
         if(function_exists('wc_get_attribute_taxonomies')){
           $attributes = wc_get_attribute_taxonomies();
         } 
@@ -513,7 +516,8 @@ class WBC_WC {
                 $parent_name = (!empty(wbc()->wc->get_term_by('id',$base->parent,'product_cat')) ?' - '.wbc()->wc->get_term_by('id',$base->parent,'product_cat')->name : '');
             }
 
-            $opts_arr[$base->term_id] = array( 'label'=>$prefix.$base->name.$parent_name, 'attr'=>' data-sp_eid="'.$separator.'prod_cat'.$separator.$base->term_id.' " ' );
+
+            $opts_arr[$base->term_id] = array( 'label'=>$prefix.$base->name.$parent_name, 'attr'=>' data-sp_eid="'.$separator.'prod_cat'.$separator.$base->term_id.' " ', );
             $opts_arr = self::instance()->eo_wbc_prime_category($base->slug, $prefix.'-',$opts_arr);
         }
 

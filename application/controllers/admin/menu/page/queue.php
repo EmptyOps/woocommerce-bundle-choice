@@ -84,6 +84,10 @@ if ( ! class_exists( 'Queue' ) ) {
 					'form'=> array(
 						'queue_sync_details_section'=>array('label'=>'Sync Details','type'=>'segment','desc'=>'The details provided below are of last 10 batch process events for particular API. For scheduling the frequency for example at what speed the API should be synced, Edit particular API on Add/Edit APIs tab and then go to scheduler section at bottom.'
 						),
+						'resolver_path'=>array(
+							'type'=>'hidden',
+							'value'=>constant('EOWBC_DIRECTORY').'application/controllers/ajax/eowbc_queue.php',
+						),
 						'list'=>array_merge( $table , array(
 							'type'=>'table' )
 						), 
@@ -101,6 +105,18 @@ if ( ! class_exists( 'Queue' ) ) {
 							'class'=>array('secondary'),
 						),
 						'visible_info'=>array( 'label'=>'Click above link to reset the queue. After reset it will sync again from the beginning.',
+							'type'=>'visible_info',
+							'class'=>array('fluid', 'small'),
+							'size_class'=>array('sixteen','wide','required'),
+						),	
+
+						'sp_queue_flush_and_reset_link___'.$sbkey=>array(
+							'label'=>'Flush and Reset',
+							'type'=>'link',
+							'attr'=>array("href='javascript:void(0);'", " onclick='window.document.splugins.common.confirm_and_redirect( \"Are sure you to delete all synced data? Please confirm. Note that depending on the storage option and the api inventory size it may take sometime for this process to finish.\", \"".admin_url('admin.php?page='.$plugin_slug.'---sp-queue&reset=1&sbkey='.$sbkey.'&hsulf=1')."\" )' "),	
+							'class'=>array('secondary'),
+						),
+						'visible_info_flush_and_reset'=>array( 'label'=>'Click above link to flush existing synced data and reset the queue. Be sure that you understand the outcomes of flushing all synced data since it will make your website frontend feed empty till the sync process do not catch up again. You may not need to do it normally except if there are any exceptional scenarios.',
 							'type'=>'visible_info',
 							'class'=>array('fluid', 'small'),
 							'size_class'=>array('sixteen','wide','required'),
@@ -141,6 +157,7 @@ if ( ! class_exists( 'Queue' ) ) {
 						'sanitize'=>'sanitize_text_field',
 					);
 				}
+				
 
 			}
 			
