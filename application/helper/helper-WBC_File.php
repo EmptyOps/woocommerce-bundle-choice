@@ -104,7 +104,7 @@ class WBC_File {
 
 		foreach ($files as $key => $file) {
 
-			$this->unlink($file);			
+			$this->unlink($file);				
 		}
 	}
 
