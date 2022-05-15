@@ -38,10 +38,15 @@ class WBC_File {
 	 */
 	public  function file_read( $filepath )
 	{
-		$fp = fopen($filepath, "r");
+		$content = null;
 
-		$content = fread($fp, filesize($filepath));
-		fclose($fp);
+		if( $this->file_exists($filepath) ) {
+			
+			$fp = fopen($filepath, "r");
+
+			$content = fread($fp, filesize($filepath));
+			fclose($fp);
+		}
 
 		return $content;
 	}
@@ -85,7 +90,7 @@ class WBC_File {
 				else
 				{
 
-					if( empty$filter_by) or strpos($file, $filter_by) !== FALSE ) {
+					if( empty($filter_by) or strpos($file, $filter_by) !== FALSE ) {
 
 						$files[] = $source . '/' . $file;
 					}
