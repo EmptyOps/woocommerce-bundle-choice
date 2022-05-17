@@ -123,6 +123,20 @@ class WBC_Common {
 
 	}
 
+	public function file_get_contents($path, $path_separator = 'woo-bundle-choice') {
+		$file = null;
+        $file_bits = file_get_contents($path);
+
+        if(empty($file_bits)){
+            $tmpA = explode('woo-bundle-choice', $path);
+            $newpath = constant('EOWBC_DIRECTORY').$tmpA[1];
+            $fs = fopen ($newpath, 'rb');
+            $f_size=filesize ($newpath);
+            $file_bits= fread ($fs, $f_size);
+            fclose ($fs);
+        }
+	}
+
 	public function free_memory( &$var ) {
 		//TODO do research and implement most appropriate approach, in case, anything is not good
 

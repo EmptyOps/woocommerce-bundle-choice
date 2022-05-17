@@ -1001,8 +1001,10 @@ class Eowbc_Sample_Data {
 	      $posts=$attachment_check->get_posts();
 	      return $posts[0]->ID;
 	    }
+	    
+		$file_bits = wbc()->common->file_get_contents($path);
 
-		$file = wp_upload_bits($name, null, file_get_contents(str_replace(' ','%20',$path)));
+        $file = wp_upload_bits($name, null, $file_bits);
 
 		if (!$file['error']) {
 
