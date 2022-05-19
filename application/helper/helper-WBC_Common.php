@@ -110,7 +110,21 @@ class WBC_Common {
 		}
 
 	}
+	///////////// 14-05-2022 -- @drashti /////////////
+	public function file_get_contents($path, $path_separator = 'woo-bundle-choice') {
+        $file_bits = file_get_contents($path);
 
+        if(empty($file_bits)){
+            $tmpA = explode($path_separator, $path);
+            $newpath = constant('EOWBC_DIRECTORY').$tmpA[1];
+            $fs = fopen ($newpath, 'rb');
+            $f_size=filesize ($newpath);
+            $file_bits= fread ($fs, $f_size);
+            fclose ($fs);
+        }
+        return $file_bits;
+	}
+	//////////////////////////////////////////////////
 	public function consistsOfTheSameValues(array $a, array $b, bool $strict = false) {
 	    // check size of both arrays
 	    if (count($a) !== count($b)) {

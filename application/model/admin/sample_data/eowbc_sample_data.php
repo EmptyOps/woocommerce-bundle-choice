@@ -1002,7 +1002,15 @@ class Eowbc_Sample_Data {
 	      return $posts[0]->ID;
 	    }
 
-		$file = wp_upload_bits($name, null, file_get_contents(str_replace(' ','%20',$path)));
+		//$file = wp_upload_bits($name, null, file_get_contents(str_replace(' ','%20',$path)));
+
+	    ///////////// 14-05-2022 -- @drashti /////////////
+
+		$file_bits = wbc()->common->file_get_contents($path);
+
+		$file = wp_upload_bits($name, null, $file_bits);
+
+	    /////////////////////////////////////////////////
 
 		if (!$file['error']) {
 
