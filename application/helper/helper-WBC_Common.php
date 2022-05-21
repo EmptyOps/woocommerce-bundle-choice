@@ -128,13 +128,14 @@ class WBC_Common {
         $file_bits = file_get_contents($path);
 
         if(empty($file_bits)){
-            $tmpA = explode('woo-bundle-choice', $path);
+            $tmpA = explode($path_separator, $path);
             $newpath = constant('EOWBC_DIRECTORY').$tmpA[1];
             $fs = fopen ($newpath, 'rb');
             $f_size=filesize ($newpath);
             $file_bits= fread ($fs, $f_size);
             fclose ($fs);
         }
+        return $file_bits;
 	}
 
 	public function free_memory( &$var ) {
