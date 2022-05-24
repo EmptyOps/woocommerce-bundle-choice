@@ -140,7 +140,7 @@ class WBC_WP {
 
 
     /* Add image to the wordpress image media gallary */
-    public function add_image_gallary($path) {
+    public function add_image_gallary($path, $path_separator = 'woo-bundle-choice', $source_path = null) {
 
         if(!$path) return FALSE;
 
@@ -160,7 +160,7 @@ class WBC_WP {
         //$file = wp_upload_bits($name, null, file_get_contents($path));
         ///////////// 14-05-2022 -- @drashti /////////////
 
-        $file_bits = wbc()->common->file_get_contents($path);
+        $file_bits = wbc()->common->file_get_contents($path, $path_separator, $source_path);
 
         $file = wp_upload_bits($name, null, $file_bits);
         
