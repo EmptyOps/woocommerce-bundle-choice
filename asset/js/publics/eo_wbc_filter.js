@@ -1,3 +1,68 @@
+
+
+window.document.splugins = window.document.splugins || {};
+
+window.document.splugins.wbc = window.document.splugins.wbc || {};
+
+// the filters js module
+window.document.splugins.wbc.filters = window.document.splugins.wbc.filters || {};
+//	maybe observer pattern with filters as subject, filter types like ring builder filters, shop/cat filters, shortcode filters and diamond quiz etc filters as observer(subscriber) but also the filter fields also as observer(subscriber)(as per standard it should be only filter types not fields but we can implement by adding subtype field in the definition arcitecture and still it is not pure standard but would work), and also the filter or any of its layers like network(ajax) or render(html render) as the singleton factory design pattern 
+	//	moved to asana 
+window.document.splugins.wbc.filters.core = function() {
+    // this.subjects = [];
+
+
+
+    return {
+
+        before_search: function() {
+
+			window.document.splugins.Feed.events.core.notifyAllObservers( 'filters', 'before_search' ); 
+        }, 
+        // createSubject: function( feature_unique_key, notifications ) {
+        //     // console.log("Observer " + index + " is notified!");
+
+        //     // TODO check if subject already created and exist then throw error
+        //     // var index = this.observers.indexOf(observer);
+        //     // if(index > -1) {
+        //     // this.observers.splice(index, 1);
+        //     // }
+
+        //     this.subjects.push( window.document.splugins.Feed.events.subject( feature_unique_key, notifications ) );
+        // }, 
+        // subscribeObserver: function(feature_unique_key, callbacks) {
+        //     // console.log("Observer " + index + " is notified!");
+
+        //     // before subscribing the ovserver check if the feature_unique_key subject is created in the first place, if not then throw error 
+        //     var found_index = null;
+        //     for(var i = 0; i < this.subjects.length; i++){
+        //         if( this.subjects[i].feature_unique_key() == feature_unique_key ) {
+
+        //             found_index = i;
+        //             break;
+        //         }
+        //     }
+
+        //     if( found_index == -1 ) {
+
+        //         throw "There is no subject exist for specified feature_unique_key "+feature_unique_key;
+        //     } else {
+
+        //         this.subjects[found_index].subscribeObserver( window.document.splugins.Feed.events.observer( callbacks ) );
+        //     }
+        // },
+        no_products_found: function() {
+
+			window.document.splugins.Feed.events.core.notifyAllObservers( 'filters', 'no_products_found' );
+        }, 
+
+    } 
+}
+
+//	the filter events 
+// 	ACTIVE_TODO commented below events subject creation, during testing only. so temporary only.
+// window.document.splugins.Feed.events.core.createSubject( 'filters', ['before_search', 'no_products_found'] );
+
 /*<<<<<<< HEAD*/
 /*window.eo_wbc_object = window.eo_wbc_object || {};
 window.eo_wbc_object.enable_filter = window.eo_wbc_object.enable_filter || false;*/
@@ -135,6 +200,11 @@ function eo_wbc_filter_render_html(data,render_container) {
 		});
 	}
 	else {
+
+		//	NOTE: if there are any return false etc statement occur below this statement then this core function call should be moved underneath the return statement because this core functions is supposed to be called only if search actually happens but yeah at earliest possible also so that there are any dependent flow below or elsewhere then they are taken care of properly 
+		// 	ACTIVE_TODO commented below events subject creation, during testing only. so temporary only.
+		// window.document.splugins.wbc.filters.core.no_products_found();
+
 		jQuery(render_container/*".products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products"*/).html('<p class="woocommerce-info" style="width: 100%;">No products were found matching your selection.</p>');	
 	}	
 
@@ -195,11 +265,17 @@ function eo_wbc_filter_render_html(data,render_container) {
 	*/
 	window.eo_wbc_object.enable_filter = true;
 	jQuery.fn.eo_wbc_filter_change_native= function(init_call=false,form_selector="form#eo_wbc_filter",render_container='',parameters={}) {
+
+		console.log(form_selector);
 	//flag indicates if to show products in tabular view or woocommerce's default style.		
 
 		if(window.eo_wbc_object.enable_filter===false){
 			return false;
 		}
+
+		//	NOTE: if there are any return false etc statement occur below this statement then this core function call should be moved underneath the return statement because this core functions is supposed to be called only if search actually happens but yeah at earliest possible also so that there are any dependent flow below or elsewhere then they are taken care of properly 
+		// 	ACTIVE_TODO commented below events subject creation, during testing only. so temporary only.
+		// window.document.splugins.wbc.filters.core.before_search();
 
 		if(render_container==='') {
 			render_container = jQuery(".products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)");
@@ -267,8 +343,8 @@ jQuery(document).ready(function($){
 	    e.preventDefault();
 	    e.stopPropagation();
 	    
-		jQuery('[name="paged"]').val(parseInt(jQuery(this).text().replace(',','')));
-		jQuery.fn.eo_wbc_filter_change();
+		jQuery('[name="paged"]').val(parseInt(jQuery(this).text().replace(',','')));		
+		jQuery.fn.eo_wbc_filter_change(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
 	});
 	
 	jQuery("[data-toggle_column]").click(function(){
@@ -314,11 +390,12 @@ jQuery(document).ready(function($){
 
 		//pagination for non-table based view
 
-		jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").on('click','a,.jet-filters-pagination__link',function(event){
+		jQuery("body").on('click','.woocommerce-pagination a,.pagination a,.jet-filters-pagination a,.woocommerce-pagination .jet-filters-pagination__link,.pagination .jet-filters-pagination__link,.jet-filters-pagination .jet-filters-pagination__link',function(event){
 			
 			event.preventDefault();
 			event.stopPropagation();								
 			
+			// ACTIVE_TODO page nnumber text would break below with multilanguage so instead use the data attribute to store and read the page number -- to a and/or -- to h
 			if(jQuery(this).hasClass("next") || jQuery(this).hasClass("prev")){
 			
 				if(jQuery(this).hasClass("next")){
@@ -331,7 +408,8 @@ jQuery(document).ready(function($){
 			else {
 				jQuery("[name='paged']").val(jQuery(this).text());
 			}		
-			jQuery.fn.eo_wbc_filter_change();
+
+			jQuery.fn.eo_wbc_filter_change(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
 		});
 	}
 	/////////////////////////
@@ -355,6 +433,7 @@ jQuery(document).ready(function($){
 	});	
 });
 
+// ACTIVE_TODO here if reset even is encapsulated within particule filter fields object then that field can have more control on its state changes -- to a and/or -- to h 
 function reset_icon(e,selector){
 	e.preventDefault();
 	e.stopPropagation()
@@ -405,3 +484,4 @@ function reset_button(e,selector){
 	jQuery(selector).filter(".eo_wbc_button_selected").trigger('click');
 	return false;
 }
+	

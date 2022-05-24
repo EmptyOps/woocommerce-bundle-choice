@@ -4,6 +4,7 @@ namespace eo\wbc\model;
 *	A UI builder class to generate UI based on the array of params recived.
 */
 use eo\wbc\model\interfaces\Builder;
+use eo\wbc\model\utilities\Eowbc_Theme_Adaption_Check;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -482,4 +483,13 @@ class UI_Builder implements Builder {
 		}		
 		return $form;
 	}
+
+	// added on 01-01-2022
+	public function theme_adaption_check() {
+		if( !empty(wbc()->sanitize->get('thadc')) && wbc()->sanitize->get('thadc') == 1 ) {
+			wbc()->load->model('utilities/eowbc_theme_adaption_check');
+			Eowbc_Theme_Adaption_Check::instance()->run();
+		}
+	}
+
 }

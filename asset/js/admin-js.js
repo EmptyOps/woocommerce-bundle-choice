@@ -4,6 +4,8 @@ window.document.splugins = window.document.splugins || {};
 window.document.splugins.is_debug = false; 
 window.document.splugins.is_test_script_debug = false;    
 
+window.document.splugins.common = window.document.splugins.common || {};
+
 window.document.splugins.process_debug_log = function(obj,debug_log) {  
    if( window.document.splugins.is_test_script_debug ) {
         var __debug_log = jQuery(obj).attr('data-debug_log');
@@ -80,6 +82,15 @@ window.document.splugins.parseJSON = function(result) {
     else {
         return {"type":"error","msg":"Unable to parse result json object, please contact Sphere Plugins Support for a quick fix on this issue."};
     }
+}
+
+window.document.splugins.common.confirm_and_redirect = function(confirm_txt, url) {
+
+    if( confirm(confirm_txt) ) {
+        window.location.href = url;
+    } else {
+        return false;
+    }    
 }
 
 $ = jQuery;

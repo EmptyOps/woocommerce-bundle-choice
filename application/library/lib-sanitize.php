@@ -65,6 +65,7 @@ if(!class_exists('WBC_Sanitize')) {
 		}
 
 		public function _get(string $get_field){
+			// ACTIVE_TODO this should be deprecated soon, and if there is requirement of using the input without sanitize then check for the standard process there must be something in php or in wp api 
 			if(isset($_GET[$get_field])) {
 				return ($_GET[$get_field]);
 			} else {
@@ -81,8 +82,17 @@ if(!class_exists('WBC_Sanitize')) {
 		}
 
 		public function _post(string $post_field){
+			// ACTIVE_TODO this should be deprecated soon, and if there is requirement of using the input without sanitize then check for the standard process there must be something in php or in wp api 
 			if(isset($_POST[$post_field])) {
 				return $_POST[$post_field];
+			} else {
+				return false;
+			}
+		}
+
+		public function request(string $post_field){
+			if(isset($_REQUEST[$post_field])) {
+				return sanitize_text_field($_REQUEST[$post_field]);
 			} else {
 				return false;
 			}

@@ -43,18 +43,18 @@ class Controller extends \eo\wbc\controllers\Controller {
 	}*/
 	public function default_uis($type,$exceptance) {
 		$defaults = array(
-			'label'=>array('text','color','back_color','font_family','font_size'),
-			'p'=>array('text','color','back_color','font_family','font_size'),
-			'span'=>array('text','color','back_color','font_family','font_size'),
-			'header'=>array('text','color','back_color','font_family','font_size'),
-			'sub_header'=>array('text','color','back_color','font_family','font_size'),
-			'checkbox'=>array('checkbox'),
-			'image'=>array('height','width','image'),
-			'img'=>array('height','width','image'),
-			'button'=>array('text','color','back_color','font_family','font_size','radius'),
-			'container'=>array('height','width','margin_left','margin_right'),
-			'wc_attribute_field'=>array('attribute','checkbox','text'),
-			'a'=>array('url','text')
+			'label'=>array('text','color','back_color','font_family','font_size','visibility'),
+			'p'=>array('text','color','back_color','font_family','font_size','visibility'),
+			'span'=>array('text','color','back_color','font_family','font_size','visibility'),
+			'header'=>array('text','color','back_color','font_family','font_size','visibility'),
+			'sub_header'=>array('text','color','back_color','font_family','font_size','visibility'),
+			'checkbox'=>array('checkbox','visibility'),
+			'image'=>array('height','width','image','visibility'),
+			'img'=>array('height','width','image','visibility'),
+			'button'=>array('text','color','back_color','font_family','font_size','radius','visibility'),
+			'container'=>array('height','width','margin_left','margin_right','visibility'),
+			'wc_attribute_field'=>array('attribute','checkbox','text','visibility'),
+			'a'=>array('url','text','visibility')
 		);
 
 		$collection = array();
@@ -140,9 +140,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 			/*if(!empty($form_value['data_controls']) and !empty($form_value['data_controls']['type']) and $form_value['data_controls']['type'] === 'send_email_on_click'){
 				
 				$control_key = $form_key.'email_header_template_text';
-
 				
-
 				$controls['email_header_template_text'] = array(
 					'label'=>'Email Header',
 					'type'=>'text',
@@ -151,7 +149,6 @@ class Controller extends \eo\wbc\controllers\Controller {
 					'sanitize'=>'sanitize_text_field',
 					'id'=>'eorad_email_header',
 					'tab_key'=>$form_value['data_controls']['tab_key']);
-
 				$controls['email_body_template_textarea'] = array(
 					'label'=>'Email Header',
 					'type'=>'textarea',
@@ -201,7 +198,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 		$admin_ui = \eo\wbc\model\admin\Form_Elements::instance();
 		
 		foreach ($form as $form_key => $form_value) {
-
+			
 			if(!empty($form_value[$key]) and ( empty($this->check_show_on_admin) xor (!empty($form_value[$key][2]) and !empty($form_value[$key][2]['show_on_admin']) ) ) ) {	
 
 				$control_element = array();
@@ -228,17 +225,19 @@ class Controller extends \eo\wbc\controllers\Controller {
 
 				if(!empty($control_element)){
 
+
+
 					/*$controls[$form_key.'_form_segment'] = array(
 						'label'=> $form_value[$key][0],
-						'type'=>'devider',
+						'typ
+						e'=>'devider',
 					);*/
-
-					/*$form_control_key = '';
+					
+					$form_control_key = '';
 					if(!empty($form_value[$key][2]['form_control_key'])) {
 						$form_control_key = $form_value[$key][2]['form_control_key'];
-					}*/
+					}
 
-					$form_control_key = '';
 					if(!empty($form_value[$key][2]['control_key'])) {
 						$form_control_key = $form_value[$key][2]['control_key'];
 					}
@@ -246,24 +245,21 @@ class Controller extends \eo\wbc\controllers\Controller {
 					foreach ($control_element as $control) {
 
 						if(empty($form_value[$key][2])){
-							
-							$controls[$form_key][$control] = wbc()->options->get_option($form_control_key,$form_key.'_'.$control);
-
-							if($control==='image') {
-								$controls[$form_key][$control] = wp_get_attachment_url( intval($controls[$form_key][$control]) );
-							}
-							
+							$controls[$form_key.'_'.$control] = wbc()->options->get_option($form_control_key,$form_key.'_'.$control); /*call_user_func_array(array($admin_ui,$control),array($form_key.'_'.$control,$form_value[$key][0]))*/;
 						} else {
-							
 							$control_key = $form_key.'_'.$control;
 							if(!empty($form_value[$key][2]['id'])){
 								$control_key = $form_value[$key][2]['id'].'_'.$control;
 							}
 
-							$controls[$form_key][$control] =  wbc()->options->get_option($form_control_key,$control_key);
-							if($control==='image') {
-								$controls[$form_key][$control] = wp_get_attachment_url( intval($controls[$form_key][$control]) );
+							//var_dump($form_control_key,$control_key);
+
+							$controls[$form_key][$control] =  wbc()->options->get_option($form_control_key,$control_key); 
+							if($control === 'image' and is_numeric($controls[$form_key][$control])) {
+								$controls[$form_key][$control] = wp_get_attachment_url($controls[$form_key][$control]);
 							}
+							
+							/*call_user_func_array(array($admin_ui,$control),array($control_key,$form_value[$key][0],$form_value[$key][2]))*/;
 							
 						}
 					}
