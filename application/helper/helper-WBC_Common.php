@@ -154,7 +154,6 @@ class WBC_Common {
 		$var = null;
 	}
 
->>>>>>> 26f2b3028dffadf8931fd30e5e311562ea393bb1
 	public function consistsOfTheSameValues(array $a, array $b, bool $strict = false) {
 	    // check size of both arrays
 	    if (count($a) !== count($b)) {
