@@ -184,13 +184,26 @@ window.document.splugins.wbc.variations.core = function() {
             --  in this case it will be second if layer above so carry accoding to that layer flows 
 
     var init = function() {
-        
-        var element = document.getElementById('attribute-to-change');
-        element.innerHTML = contents;
+
+
     }
+
+    var legacyBinding? = function() {
+
+        jQuery('#select_attribute_of_variation').on('woocommerce_variation_has_changed', function(){
+            // do your magic here...
+         })
+    }
+
+    we may need to bind to the click of our sp_variations attributes variation widgets option change/click event and based on that pubish/trigger variation change event of the legacy js layers 
+        --  for this need to study our options UI implementation flow and also the other plugins swatches implementation flow to find out different flows that different sco system can implement 
 
     return {
 
+        init: function() {
+
+            window.document.splugins.variation.events.core.notifyAllObservers( 'variation', 'before_search' ); 
+        },
         before_search: function() {
 
             window.document.splugins.variation.events.core.notifyAllObservers( 'variation', 'before_search' ); 
@@ -231,6 +244,301 @@ window.document.splugins.wbc.variations.core = function() {
 
             window.document.splugins.variation.events.core.notifyAllObservers( 'variation', 'no_products_found' );
         }, 
+
+                    global $product,$post;
+                    if(empty($product)) {
+                        $product = wbc()->wc->get_product($post->ID);
+                    }
+
+                    if(!empty($first_collection)) {
+                        foreach ($first_collection as $url_index => $url) {
+                            $first_collection[$url_index] = implode('.', array_slice( explode('.',(wp_get_attachment_url($url))) ,0,-1) );
+                        }
+                    }
+
+                    if(!empty($first_collection)) {
+
+
+
+                        ?>
+                        <!-- <style type="text/css">
+                            .woocommerce-product-gallery__image:first-child,.flex-control-thumbs>li:first-child{
+                                display: none !important;
+                            }
+                        </style> -->
+                        <?php
+                    }
+
+                    ?>
+
+                    
+                    <script type="text/javascript">
+
+                        jQuery(document).ready(function(){
+
+                            <?php 
+                            now we will let the below big imag flow also work as per the standard, so we should not need to enable any of the below things.  -- like we had planned to use first variation images that woocommerce supports so similarly here also that image would come on its own. -- however we had certain flows of disabling default and also the requirement will come of what variation user had selected on the category page that is the one that should be loaded on the item page. so that need to be covered. 
+                            if(get_post_meta($product->get_id(),'__spvw_flush_images',true)!=-1 and (!empty(get_post_meta($post->ID,'__spvw_images',true))) and is_array($first_collection_image) and !empty($first_collection_image) and !empty(array_filter($first_collection_image))): ?>
+                                if(jQuery('.big-img').length>0){
+                                    <?php if(!empty($first_collection_image)): ?>
+                                        jQuery('.big-img').get(0).src = '<?php echo wp_get_attachment_url(array_values($first_collection_image)[0]); ?>'
+                                    <?php else: ?>
+                                        jQuery('.big-img').get(0).src=jQuery(jQuery('.exzoom_img_ul .small-img,.xzoom-thumbs .dots-sp-product').get(0)).attr('src');
+                                    <?php endif; ?>
+                                }
+                            <?php endif; ?>
+
+                            <?php if(!empty($first_collection)): ?>
+                            jQuery('.variations_form').on('woocommerce_variation_select_change',function(){
+                                //jQuery('.woocommerce-product-gallery').data('flexslider').removeSlide(0);
+                                /*jQuery('.woocommerce-product-gallery').data('flexslider').controlNav[0].remove();
+
+                                var times_it = 0;
+                                let interval = setInterval(function () {
+                                    jQuery('.woocommerce-product-gallery').flexslider(1);                                   
+                                   if (++times_it === 1000) {
+                                       window.clearInterval(interval);
+                                   }
+                                },1);*/
+
+                                //jQuery(jQuery('.woocommerce-product-gallery').data('flexslider').controlNav[1]).trigger('click');
+                                //window.setTimeout(function(){      },10);                             
+                            });                 
+                            <?php  endif; ?>
+                            
+                            window.__spvw_images = JSON.parse('<?php echo json_encode($__spvw_images_src); ?>');
+                            window.__spvw_terms = JSON.parse('<?php echo json_encode($attributes_list); ?>');
+                            window.__spvw_initial_images = JSON.parse('<?php echo json_encode( ((is_array($first_collection) and !empty($first_collection)) ? array_values($first_collection) : array() )); ?>');
+
+                            <?php 
+                                global $product,$post;
+                                if(empty($product) and !is_object($product)) {
+                                    $product = wbc()->wc->get_product($post->ID);
+                                }
+
+                                $default_attributes = $product->get_default_attributes(); 
+
+                                $size_slug = get_option('view_with_size_select','eo_size_attr');
+                                if(!empty($size_slug) and strpos($size_slug,'pa_')!==0) {
+                                    $size_slug = 'pa_'.$size_slug;
+                                }
+
+                                $shape_slug = get_option('view_with_shape_select','pa_shape');
+                                if(!empty($shape_slug) and strpos($shape_slug,'pa_')!==0) {
+                                    $shape_slug = 'pa_'.$shape_slug;
+                                }
+
+                                $metal_slug = wbc()->options->get_option('sp_metal_color','metal_color_images_field',false);
+                                if(!empty($metal_slug) and strpos($metal_slug,'pa_')!==0) {
+                                    $metal_slug = 'pa_'.$metal_slug;
+                                }
+
+                                $_size_slug = '';
+                                $_shape_slug = '';
+                                $_metal_slug = '';
+
+                                if(!empty($default_attributes[$size_slug])) {
+                                    $_size_slug = $default_attributes[$size_slug];
+                                }
+
+                                if(!empty($default_attributes[$shape_slug])) {
+                                    $_shape_slug = $default_attributes[$shape_slug];    
+                                }
+
+                                if(!empty($default_attributes[$metal_slug])) {
+                                    $_metal_slug = $default_attributes[$metal_slug];
+                                }                               
+                            ?>
+
+                            if(typeof(window.__vw_first_slug) == typeof(undefined)){
+                                window.__vw_first_slug = '<?php echo apply_filters('spvw_vw_first_slug', $_size_slug ); ?>';
+                                <?php if(!empty($_size_slug)): ?>
+                                    window.__vw_first_slug = '<?php echo $_size_slug; ?>';
+                                <?php endif; ?>
+                            }
+
+                            if(typeof(window.__vw_second_slug) == typeof(undefined)){
+                                window.__vw_second_slug = '<?php echo apply_filters('spvw_vw_second_slug', $_shape_slug ); ?>';
+                                <?php if(!empty($_shape_slug)): ?>
+                                    window.__vw_second_slug = '<?php echo $_shape_slug; ?>';
+                                <?php endif; ?>
+                            }
+
+                            if(typeof(window.__vw_third_slug) == typeof(undefined)){
+                                window.__vw_third_slug = '<?php echo apply_filters('spvw_vw_third_slug',$_metal_slug); ?>';
+
+                                <?php if(!empty($_metal_slug)): ?>
+                                    window.__vw_third_slug = '<?php echo $_metal_slug; ?>';
+
+                                <?php endif; ?>
+
+                                if(window.__vw_third_slug===''){
+                                    window.__vw_third_slug = jQuery(".metal_color_images_option:eq(0)").data('slug');
+                                }
+                            }
+
+
+                            /*Fix if the size attribute do not exists in the images section*/
+                            if(!window.__spvw_images.hasOwnProperty(window.__vw_first_slug) && window.__spvw_images.hasOwnProperty(window.__vw_second_slug)) {
+                                window.__spvw_images[window.__vw_first_slug] = window.__spvw_images;
+                            }
+
+
+                            console.log(window.__vw_first_slug);
+                            console.log(window.__vw_second_slug);
+                            console.log(window.__vw_third_slug);
+                            <?php if(empty($_GET['WBC_PREVIEW'])): ?>
+
+                            window.spvw_findimage = function(data,value) {
+
+                                if(Object.keys(data).indexOf('0')!==-1 || Object.keys(data).indexOf(0)!==-1) {
+                                    data = data[0];
+                                    if( typeof(data)==='object' && Object.keys(data).length>0 && typeof( Object.values(data)[0] )!=='object' ) {
+                                        return data;
+                                    } else {
+                                        return window.spvw_findimage(data,value);
+                                    }                                   
+                                } else {
+                                    
+                                    let is_traversed = false;
+                                    if(window.__vw_first_slug.length>0 && typeof(window.__vw_first_slug)==='string') {
+                                        if(Object.keys(data).indexOf(window.__vw_first_slug)!==-1) {
+                                            data = data[window.__vw_first_slug];
+                                            is_traversed = true;
+                                        }                                       
+                                    }
+                                    
+                                    if(window.__vw_second_slug.length>0 && typeof(window.__vw_second_slug)==='string') {
+                                        if(Object.keys(data).indexOf(window.__vw_second_slug)!==-1) {
+                                            data = data[window.__vw_second_slug];
+                                            is_traversed = true;
+                                        }
+                                    }
+                                    
+                                    if(window.__vw_third_slug.length>0 && typeof(window.__vw_third_slug)==='string') {
+                                        if(Object.keys(data).indexOf(window.__vw_third_slug)!==-1) {
+                                            data = data[window.__vw_third_slug];
+                                            is_traversed = true;
+                                        }
+                                    }
+
+                                    if(!is_traversed) {
+                                        data = Object.values(data)[0];
+                                    }
+
+                                    if( typeof(data)==='object' && Object.keys(data).length>0 && typeof( Object.values(data)[0] )!=='object' ) {
+                                        return data;
+                                    } else {                                        
+                                        return window.spvw_findimage(data,value);
+                                    }                                   
+                                }
+                            }
+
+                            window.spvw = function($slug,$val) {
+
+                                console.log(window.__vw_first_slug);
+                                console.log(window.__vw_second_slug);
+                                console.log(window.__vw_third_slug);
+
+                                console.log(window.__spvw_images);
+
+                                console.log($slug);
+
+                                if(jQuery("#pa_"+$slug).length>0){
+                                    jQuery("#pa_"+$slug).val($val);
+                                    
+                                    how other plugin teams would be getting it to work, without managin flexslider and so on hardcoded? 
+                                    if(typeof(jQuery.fn.flexslider) === 'function' && jQuery('.woocommerce-product-gallery').data('flexslider')!==undefined) {
+                                        
+                                        /*let image_index = jQuery('.flex-control-thumbs li .flex-active').closest(".flex-control-thumbs li").index();
+                                        jQuery("#pa_"+$slug).trigger('change');
+                                        jQuery('.woocommerce-product-gallery').flexslider(image_index);*/
+                                        //jQuery('.woocommerce-product-gallery').data('flexslider').update();
+
+                                        let image_index = jQuery('.flex-control-thumbs li .flex-active').closest(".flex-control-thumbs li").index();
+                                        
+                                        /*jQuery("#pa_shape").trigger('change');*/
+                                        jQuery("#pa_"+$slug).trigger('change');
+                                        window.setTimeout(function(){
+                                                jQuery('.woocommerce-product-gallery').flexslider(image_index);
+                                        },0);
+                                        jQuery('.woocommerce-product-gallery').flexslider(image_index);
+
+
+                                    } else {
+                                        jQuery("#pa_"+$slug).trigger('change');
+                                    }
+                                }
+
+                                if( /*(window.__vw_first_slug.length<=0 ^ window.__spvw_images.hasOwnProperty(window.__vw_first_slug)) && (window.__vw_second_slug.length<=0 ^ (window.__spvw_images.hasOwnProperty(window.__vw_first_slug) && window.__spvw_images[window.__vw_first_slug].hasOwnProperty(window.__vw_second_slug))) && (window.__vw_third_slug.length<=0 ^ (window.__spvw_images.hasOwnProperty(window.__vw_first_slug) && window.__spvw_images[window.__vw_first_slug].hasOwnProperty(window.__vw_second_slug) && window.__spvw_images[window.__vw_first_slug][window.__vw_second_slug].hasOwnProperty(window.__vw_third_slug)))*/ true) {
+
+                                    //alert();
+
+                                    let image = [];
+
+                                    if(window.__spvw_images.hasOwnProperty(window.__vw_first_slug) && window.__spvw_images[window.__vw_first_slug].hasOwnProperty(window.__vw_second_slug) && window.__spvw_images[window.__vw_first_slug][window.__vw_second_slug].hasOwnProperty(window.__vw_third_slug)) {
+                                        image = window.__spvw_images[window.__vw_first_slug][window.__vw_second_slug][window.__vw_third_slug];
+                                        console.log('Simple', image);
+                                    } else {
+                                        image = window.spvw_findimage(window.__spvw_images,$val);
+
+                                        console.log(image);
+
+                                    }
+                                     
+                                    /*console.log(image);*/
+                                    
+                                    if(typeof(image)==='object') {
+                                        /*console.log('OBJECT');*/
+                                        image = Object.values(image);
+                                        jQuery.each(image,function(i,e){ 
+                                            
+                                            console.log(jQuery('.spvw_images_'+ (i).toString()), jQuery('.spvw_images_'+ (i).toString()).length);
+
+                                            if(jQuery('.spvw_images_'+ (i).toString()).length>0) {
+                                                if(e!==false && e){                                             
+                                                    jQuery('[src^="'+jQuery('.spvw_images_'+(i).toString()).attr('src')+'"]').attr('src',e);
+                                                }
+                                            } else {
+
+                                                let spvw_target_image = jQuery('[src^="'+window.__spvw_initial_images[i]+'"]');
+                                                spvw_target_image.attr('data-src','');
+                                                spvw_target_image.attr('srcset','');
+                                                console.log(e);
+                                                spvw_target_image.attr('src',e);
+                                                spvw_target_image.addClass('spvw_images_'+(i).toString());
+                                            }
+                                        });
+                                    } else {
+                                        
+                                        jQuery('.woocommerce-product-gallery__image:eq(0) img:eq(0)').attr('data-src','');
+                                        jQuery('.woocommerce-product-gallery__image:eq(0) img:eq(0)').attr('srcset','');
+                                        jQuery(".img-fluid.big-img,.woocommerce-product-gallery__image:eq(0) img:eq(0)").attr('src',image); 
+                                    }
+                                }
+
+                                jQuery('tr:has(td>#pa_'+$slug+')').val($val);
+                                jQuery('tr:has(td>#pa_'+$slug+')').trigger('change');
+                            }
+                            <?php else: ?>
+                                window.spvw = function($slug,$val) {
+                                    
+                                }
+                            <?php endif; ?>
+
+                            <?php foreach ($attributes_list as $attribute_slug): ?>
+                                jQuery('tr:has(td>#pa_<?php echo $attribute_slug; ?>)').css('display','none');  
+                            <?php endforeach; ?>                            
+
+                            /*jQuery(document).on('click','.metal_color_images_options li',function(){
+                                jQuery('.metal_color_images_option').css('border','none');
+                                jQuery(this).find('.metal_color_images_option').css('border','1px solid');
+                            });*/
+                        });
+
+                        
+
+                    </script>
 
     } 
 }
