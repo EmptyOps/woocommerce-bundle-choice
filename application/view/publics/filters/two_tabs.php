@@ -74,7 +74,11 @@
           $('#advance_filter_mob_alternate').removeClass('status_hidden');
           $(".toggle_sticky_mob_filter.advance_filter_mob[data-tab-group='"+$(this).data('tab-altname')+"'],.toggle_sticky_mob_filter.advance_filter_mob[data-tab-group='']").hide();
         <?php endif; ?>
+        //////// 27-05-2022 - @drashti /////////
+        --add to be confirmed--
+        window.document.splugins.wbc.filters.core.eo_wbc_filter_change_wrapper(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
         jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
+        ////////////////////////////////////////
 			});
       //jQuery('[data-tab="filter_setting_advance_first_tabs"]').trigger('click');
       jQuery('.filter_setting_advance_two_tabs .item.active').click();

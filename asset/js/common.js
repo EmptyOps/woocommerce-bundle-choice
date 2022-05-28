@@ -77,7 +77,7 @@ window.document.splugins.Feed.events.observer = function(callbacks) {
     }
 }
 
-window.document.splugins.Feed.events.core = function() {
+window.document.splugins.events.core = function() {
     this.subjects = [];
 
     return {

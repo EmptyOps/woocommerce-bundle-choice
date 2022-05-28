@@ -17,6 +17,9 @@
 		var shortflt_filter_setting__redirect_url = <?php echo "'".wbc()->options->get_option('shortflt_filter_setting','redirect_url',get_permalink( function_exists('wc_get_page_id') ? wc_get_page_id('shop') : woocommerce_get_page_id('shop') ) )."'";?>;
 
 		function override_flt_change_function() {
+			//////// 27-05-2022 - @drashti /////////
+			--add to be confirmed--
+			window.document.splugins.wbc.filters.core.eo_wbc_filter_change_wrapper();
 			if(typeof(jQuery.fn.eo_wbc_filter_change)!="undefined" && jQuery.fn.eo_wbc_filter_change!=undefined){
 				jQuery.fn.eo_wbc_filter_change= function(init_call=false) {				
 					//do nothing on change
@@ -26,6 +29,7 @@
 			else {
 				setTimeout(override_flt_change_function, 500);
 			}
+			////////////////////////////////////////
 		}
 		override_flt_change_function();
 		
