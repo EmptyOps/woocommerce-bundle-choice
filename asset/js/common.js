@@ -183,7 +183,7 @@ window.document.splugins.wbc.variations.core = function() {
         --  then user would be using one of our recommend slider and zoom modules out of the 5 recommended plugins we planned to present 
             --  in this case it will be second if layer above so carry accoding to that layer flows 
 
-    var init = function() {
+    var initPrivate = function() {
 
 
     }
@@ -198,6 +198,9 @@ window.document.splugins.wbc.variations.core = function() {
     we may need to bind to the click of our sp_variations attributes variation widgets option change/click event and based on that pubish/trigger variation change event of the legacy js layers 
         --  for this need to study our options UI implementation flow and also the other plugins swatches implementation flow to find out different flows that different sco system can implement 
 
+    will the category and item page both will use this same module? and all the flows will be same? 
+
+    
     return {
 
         init: function() {
