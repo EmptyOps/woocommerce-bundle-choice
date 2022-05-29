@@ -27,7 +27,8 @@ window.document.splugins.wbc.filters.core = function() {
     				--	so maybe simply let events work on their own and for the modules like variations where maybe the same events can be reused on category page which was defined for the item page flows then that is fine and we are happy with reusability, but not sure if it can create disasters or mess in the flow. and this maybe a big question 
 		//	the filter events 
 		// 	ACTIVE_TODO commented below events subject creation, during testing only. so temporary only.
-		window.document.splugins.Feed.events.core.createSubject( 'filters', ['before_search', 'no_products_found'] );
+		// window.document.splugins.Feed.events.core.createSubject( 'filters', ['before_search', 'no_products_found'] );
+		window.document.splugins.events.core.createSubject( 'filters', ['before_search', 'no_products_found'] );
 
     };
 
@@ -47,7 +48,7 @@ window.document.splugins.wbc.filters.core = function() {
 		// console.log(this.url);
 	}; 
 
-	success:function(data)
+	var success = function(data)
 	{
 
 
@@ -61,13 +62,14 @@ window.document.splugins.wbc.filters.core = function() {
 		eo_wbc_e_render_table(type,data);	
 		window.eo_wbc_object.enable_filter_table = true;
 		// jQuery(".ui.sticky").sticky('refresh');
-	},
-	error:function(data){
+	}; 
+
+	var error = function(data){
 		jQuery("#loading").removeClass('loading');
 		console.log('error');
 		console.log(data);
 		window.eo_wbc_object.enable_filter_table = true;
-	},
+	};
 
 	what other functions we would like to be here? maybe the functions like before_search, no_products_found, preprocess_data(it may contain some of those render_html layer logic like they are in this file or in that sp_tv_template file), find_container/locate_container/determine_target_container, reset_all_filters(should even create rest_filter and then send to that specific functions like reset_icon, reset_slider and so on? maybe yes), apply_filters and so on 
 
@@ -76,7 +78,10 @@ window.document.splugins.wbc.filters.core = function() {
 
         before_search: function() {
 
-			window.document.splugins.Feed.events.core.notifyAllObservers( 'filters', 'before_search' ); 
+        	init_private();
+			// window.document.splugins.Feed.events.core.notifyAllObservers( 'filters', 'before_search' ); 
+			window.document.splugins.events.core.notifyAllObservers( 'filters', 'before_search' ); 
+
         }, 
 		eo_wbc_filter_change_wrapper: function() {
 
@@ -117,7 +122,9 @@ window.document.splugins.wbc.filters.core = function() {
         // },
         no_products_found: function() {
 
-			window.document.splugins.Feed.events.core.notifyAllObservers( 'filters', 'no_products_found' );
+			// window.document.splugins.Feed.events.core.notifyAllObservers( 'filters', 'no_products_found' );
+			window.document.splugins.events.core.notifyAllObservers( 'filters', 'no_products_found' );
+
         }, 
 
     } 

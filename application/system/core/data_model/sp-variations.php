@@ -49,4 +49,5 @@ class SP_Variations extends SP_Product {
 
 	}
 
+
 }

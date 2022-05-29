@@ -188,7 +188,12 @@
 					    	}
 					    	$('[name="paged"]').val('1');
 					    	<?php if(empty(wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
-					    	jQuery.fn.eo_wbc_filter_change();
+
+					    	//////// 27-05-2022 - @drashti /////////
+							--add to be confirmed--
+							window.document.splugins.wbc.filters.core.eo_wbc_filter_change_wrapper();
+			                jQuery.fn.eo_wbc_filter_change();
+							////////////////////////////////////////
 					    	<?php endif; ?>
 					    }
 					    
@@ -303,8 +308,13 @@
 		    		}
 		    	}
 		    	$('[name="paged"]').val('1');
-		    	<?php if(empty(wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
-		    	jQuery.fn.eo_wbc_filter_change();
+		    	<?php if(empty(wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?> 
+		    	
+		    	//////// 27-05-2022 - @drashti /////////
+				--add to be confirmed--
+				window.document.splugins.wbc.filters.core.eo_wbc_filter_change_wrapper();
+                jQuery.fn.eo_wbc_filter_change();
+				////////////////////////////////////////
 		    	<?php endif; ?>
 			}});				
 			/*----------------------------------------------------*/
