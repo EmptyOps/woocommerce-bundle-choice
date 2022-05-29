@@ -192,7 +192,24 @@ window.document.splugins.wbc.variations.core = function() {
 
         jQuery('#select_attribute_of_variation').on('woocommerce_variation_has_changed', function(){
             // do your magic here...
-         })
+         }); 
+
+
+        moved here from the wbc options(optionsUI) controller 
+        $('.variable-item').on('click',function(){
+            var target_selector = $('#'+$(this).data('id'));
+            target_selector.val($(this).data('value'));
+            $(this).parent().find('.selected').removeClass('selected');
+            $(this).addClass('selected');
+            jQuery(".variations_form" ).trigger('check_variations');
+            $(target_selector).trigger('change');
+        });
+
+        jQuery(".variations_form").on('click', '.reset_variations'/*'woocommerce_variation_select_change'*//*'reset'*/,function(){
+            jQuery('.variable-items-wrapper .selected').removeClass('selected');
+            jQuery('.variable-items-wrapper .dropdown').dropdown('restore defaults');
+        });
+
     }
 
     we may need to bind to the click of our sp_variations attributes variation widgets option change/click event and based on that pubish/trigger variation change event of the legacy js layers 
