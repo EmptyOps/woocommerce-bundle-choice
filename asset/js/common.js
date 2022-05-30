@@ -195,6 +195,12 @@ window.document.splugins.wbc.variations.core = function() {
          }); 
 
 
+        for optionsUI swatches
+            --  the fundamental is ensuring all required ajax bindings 
+            --  and of course the fundamental calls to the legacy woo js layer apis like woo variation form or something such and so on 
+            --  and accurate management of fundamentals like generated, change and check(which m was triggering) etc. events and also out of stock and other such business logic implementation 
+            --  and yeah even supporting the keyboard and mouse events which is vital for the user experience 
+
         moved here from the wbc options(optionsUI) controller 
         $('.variable-item').on('click',function(){
             var target_selector = $('#'+$(this).data('id'));
@@ -217,7 +223,10 @@ window.document.splugins.wbc.variations.core = function() {
 
     will the category and item page both will use this same module? and all the flows will be same? 
 
-    
+
+    and add compatiblity related private function here and add all those theme and other patch that the other plugin we were exploring have. but of course in our case it will be as per our flow of how we manage loading and then ajax loading of swatches options 
+        --  that other plugin have some more theme specific patch fix, and some other patch for managing unexpected effects like blink and so on 
+
     return {
 
         init: function() {
