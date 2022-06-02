@@ -33,49 +33,9 @@ class SP_WBC_Variations extends SP_Variations {
 
 	}
 
-	public static function admin_data_tab_render( $attributes, $attributes_options, $extra_args ) {
-		add_action( 'woocommerce_product_after_variable_attributes', function(){
-			$variation_id   = absint( $variation->ID );
-			$gallery_images = get_post_meta( $variation_id, 'woo_variation_gallery_images', true );
-			?>
-			<div data-product_variation_id="<?php echo esc_attr( $variation_id ) ?>" class="form-row form-row-full woo-variation-gallery-wrapper">
-				<div class="woo-variation-gallery-postbox">
-					<div class="postbox-header">
-						<h2><?php esc_html_e( 'Variation Product Gallery', 'woo-variation-gallery' ) ?></h2>
-						<button type="button" class="handle-div" aria-expanded="true">
-							<span class="toggle-indicator" aria-hidden="true"></span>
-						</button>
-					</div>
-
-					<div class="woo-variation-gallery-inside">
-						<div class="woo-variation-gallery-image-container">
-							<ul class="woo-variation-gallery-images">
-								<?php
-								if ( is_array( $gallery_images ) && ! empty( $gallery_images ) ) {
-									include dirname( __FILE__ ) . '/admin-template.php';
-								}
-								?>
-							</ul>
-						</div>
-						<div class="add-woo-variation-gallery-image-wrapper hide-if-no-js">
-							<a href="#" data-product_variation_loop="<?php echo absint( $loop ) ?>" data-product_variation_id="<?php echo esc_attr( $variation_id ) ?>" class="button-primary add-woo-variation-gallery-image"><?php esc_html_e( 'Add Variation Gallery Image', 'woo-variation-gallery' ) ?></a>
-							<?php if ( ! woo_variation_gallery()->is_pro() ): ?>
-								<a target="_blank" href="<?php echo esc_url( woo_variation_gallery()->get_backend()->get_pro_link() ) ?>" style="display: none" class="button woo-variation-gallery-pro-button"><?php esc_html_e( 'Upgrade to pro to add more images and videos', 'woo-variation-gallery' ) ?></a>
-							<?php endif; ?>
-						</div>
-					</div>
-				</div>
-			</div>
-			
-
-			<!DOCTYPE html>
-			<html lang="en">
-				<head>
-				    <meta charset="UTF-8">
-				    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-				    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-				    <title>Document</title>
-				    <style>
+	private function admin_data_tab_inline_css(){
+		?>
+		<style>
 				        .spui_custum_row {
 				            float: left;
 				            width: 100%;
@@ -170,69 +130,118 @@ class SP_WBC_Variations extends SP_Variations {
 				            text-transform: capitalize;
 				        }
 
-				    </style>
+		</style>
+		<?php
+	}
 
-				</head>
-				<body>
-				    <div class="spui_custum_row">
-				        <div class="form-row form-row-first spui_custum_assets">
-				              <div class="spui_form_row_title">
-				                  <h5>Gallery Image</h5>
-				              </div>
-				              <div class="spui_form_asset_container upload_image asset_section_one">
-				                <a href="#" class="upload_image_button tips">
-				                  <img src="http://localhost/fresh/wp-content/plugins/woocommerce/assets/images/placeholder.png">
-				                  <input type="hidden" name="upload_image_id[0]" class="upload_image_id" value="0">        
-				                </a>
-				                <div class="spui_asset_upload_cta">
-				                     <a href="#" class="btn">+</a>   
-				                </div>
-				              </div>  
-				        </div>
-				    
-				        <div class="form-row form-row-first upload_image spui_form_second_row">
-				            <div class="spui_form_row_title">
-				                  <h5>Video &amp; Custum Field</h5>
-				            </div>
-				            <div class="spui_custum_video_container">
-				                <div class="spui_video_links">
-				                    <a href="#" class="btn">
-				                        <img src="https://cdn-icons.flaticon.com/png/512/797/premium/797592.png?token=exp=1653727260~hmac=c2ce871afdfde03d00785cbf295ff801" class="img-fluid">
-				                    </a>
-				                    <p>video</p>
-				                </div>
-				    
-				                <div class="spui_video_input_field">
-				                    <input type="text" class="short wc_input_decimal" style="" name="variable_weight[0]" id="variable_weight0" value="" placeholder="">
-				                    <p>video url</p>
-				                </div> 
-				                <div class="spui_form_asset_container upload_image asset_section_two">
-				                    <a href="#" class="upload_image_button tips">
-				                    <img src="http://localhost/fresh/wp-content/plugins/woocommerce/assets/images/placeholder.png">
-				                    <input type="hidden" name="upload_image_id[0]" class="upload_image_id" value="0">        
-				                    </a>
-				                    <div class="spui_asset_upload_cta">
-				                        <a href="#" class="btn">+</a>   
-				                    </div>
-				                    <div class="asset_content">
-				                        <p>images</p>
-				                    </div>
-				                </div>
-				    
-				       
-				            </div>
-				        </div>
-				        
-				    </div>
-				</body>
-			</html>
+	public static function admin_data_tab_render( $attributes, $attributes_options, $extra_args ) {
+
+		
+
+		add_action('woocommerce_product_after_variable_attributes', function(){
+			$variation_id   = absint( $variation->ID );
+			// $gallery_images = get_post_meta( $variation_id, 'woo_variation_gallery_images', true );
+			$gallery_images = get_post_meta( $variation_id, 'sp_variations_data', true );
+
+
+			apply_filters('sp_variations_data_before_admin_form_render', 'admin_data_tab_render');
+
+			$this->admin_data_tab_inline_css();
+
+			?>
+
+			<div class="spui_custum_row sp_variations" data-variation_id="<?php echo $variation_id ; ?>" data-product_id = "<?php ?>">
+		        <div class="form-row form-row-first spui_custum_assets">
+		              <div class="spui_form_row_title">
+		                  <h5><?php echo eowbc_lang("Gallery Image", 'woo-bundle-choice') ?></h5>
+		              </div>
+		              <div class="spui_form_asset_container upload_image asset_section_one">
+		                <a href="#" class="upload_image_button tips">
+		                  <img src="http://localhost/fresh/wp-content/plugins/woocommerce/assets/images/placeholder.png">
+		                  <input type="hidden" name="upload_image_id[0]" class="upload_image_id" value="0">        
+		                </a>
+		                <div class="spui_asset_upload_cta">
+		                     <a href="#" class="btn">+</a>   
+		                </div>
+		              </div>  
+		        </div>
+		    
+		        <div class="form-row form-row-first upload_image spui_form_second_row">
+		            <div class="spui_form_row_title">
+		                  <h5> <?php echo eowbc_lang("Video &amp; Custum Field", 'woo-bundle-choice') ?></h5>
+		            </div>
+		            <div class="spui_custum_video_container">
+		                <div class="spui_video_links">
+		                    <a href="#" class="btn">
+		                        <img src="https://cdn-icons.flaticon.com/png/512/797/premium/797592.png?token=exp=1653727260~hmac=c2ce871afdfde03d00785cbf295ff801" class="img-fluid">
+		                    </a>
+		                    <p> <?php echo eowbc_lang("video", 'woo-bundle-choice') ?></p>
+		                </div>
+		    
+		                <div class="spui_video_input_field">
+		                    <input type="text" class="short wc_input_decimal" style="" name="variable_weight[0]" id="variable_weight0" value="" placeholder="">
+		                    <p> <?php echo eowbc_lang("video url", 'woo-bundle-choice') ?></p>
+		                </div> 
+		                <div class="spui_form_asset_container upload_image asset_section_two">
+		                    <a href="#" class="upload_image_button tips">
+		                    <img src="http://localhost/fresh/wp-content/plugins/woocommerce/assets/images/placeholder.png">
+		                    <input type="hidden" name="upload_image_id[0]" class="upload_image_id" value="0">        
+		                    </a>
+		                    <div class="spui_asset_upload_cta">
+		                        <a href="#" class="btn">+</a>   
+		                    </div>
+		                    <div class="asset_content">
+		                        <p> <?php echo eowbc_lang("images", 'woo-bundle-choice') ?></p>
+		                    </div>
+		                </div>
+		    
+		       
+		            </div>
+		        </div>
+		        
+		    </div>
+
+
+
+			<div data-product_variation_id="<?php echo esc_attr( $variation_id ) ?>" class="form-row form-row-full woo-variation-gallery-wrapper">
+				<div class="woo-variation-gallery-postbox">
+					<div class="postbox-header">
+						<h2><?php esc_html_e( 'Variation Product Gallery', 'woo-variation-gallery' ) ?></h2>
+						<button type="button" class="handle-div" aria-expanded="true">
+							<span class="toggle-indicator" aria-hidden="true"></span>
+						</button>
+					</div>
+
+					<div class="woo-variation-gallery-inside">
+						<div class="woo-variation-gallery-image-container">
+							<ul class="woo-variation-gallery-images">
+								<?php
+								if ( is_array( $gallery_images ) && ! empty( $gallery_images ) ) {
+									include dirname( __FILE__ ) . '/admin-template.php';
+								}
+								?>
+							</ul>
+						</div>
+						<div class="add-woo-variation-gallery-image-wrapper hide-if-no-js">
+							<a href="#" data-product_variation_loop="<?php echo absint( $loop ) ?>" data-product_variation_id="<?php echo esc_attr( $variation_id ) ?>" class="button-primary add-woo-variation-gallery-image"><?php esc_html_e( 'Add Variation Gallery Image', 'woo-variation-gallery' ) ?></a>
+							<?php if ( ! woo_variation_gallery()->is_pro() ): ?>
+								<a target="_blank" href="<?php echo esc_url( woo_variation_gallery()->get_backend()->get_pro_link() ) ?>" style="display: none" class="button woo-variation-gallery-pro-button"><?php esc_html_e( 'Upgrade to pro to add more images and videos', 'woo-variation-gallery' ) ?></a>
+							<?php endif; ?>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		   
+
 			<?php
 		}
 		, 10, 3 );
 	}
 
+
 	public static function admin_data_tab_save( $attributes, $attributes_options, $extra_args ) {
-		
+
 		need to be execured once, no matter how many extensions call it. 
 
 
@@ -240,6 +249,20 @@ class SP_WBC_Variations extends SP_Variations {
 
 
 		hook to register logical fields that requires variations specific data save 
+		
+		if ( !empty( wbc()->sanitize->post['woo_variation_gallery'] ) ) {
+
+				if ( !empty( wbc()->sanitize->post['woo_variation_gallery'][ $variation_id ] ) ) {
+// drashti ne kevanu 6 update_post_meta
+					$gallery_image_ids = array_map( 'absint', wbc()->sanitize->post['woo_variation_gallery'][ $variation_id ] );
+					update_post_meta( $variation_id, 'sp_variations_data', $gallery_image_ids );
+				} else {
+					delete_post_meta( $variation_id, 'sp_variations_data' );
+				}
+			} else {
+				delete_post_meta( $variation_id, 'sp_variations_data' );
+			}
+		
 
 		
 	}
