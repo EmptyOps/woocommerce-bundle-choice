@@ -111,10 +111,15 @@ class WBC_Common {
 
 	}
 
-	public function var_dump($v,$force_debug = false,$die = false) {
+	public function var_dump($v,$force_debug = false,$die = false,$add_br = true) {
 		//TODO yet to implement optional arg force_debug
 
 		var_dump($v); 
+
+		if( $add_br )
+		{
+			echo "<br>";
+		}
 
 		if( $die )
 		{
@@ -306,6 +311,10 @@ class WBC_Common {
     public function http_query($param){
     	$param = apply_filters('eowbc_helper_http_query',$param);
     	return http_build_query($param);
+    }
+
+    public function is_ajax(){
+    	return wp_doing_ajax();
     }
 
     public function is_object($obj){
