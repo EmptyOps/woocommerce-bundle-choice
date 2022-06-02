@@ -478,12 +478,17 @@ class WBC_WC {
     public static function eo_wbc_attributes($opts_arr=array()) {        
         // $taxonomies="";
         $separator = wbc()->config->separator();
-        foreach (wc_get_attribute_taxonomies() as $attribute) {                 
+
+        if(function_exists('wc_get_attribute_taxonomies')){
+          $attributes = wc_get_attribute_taxonomies();
+        } 
+        foreach ($attributes as $attribute) {                 
             // $taxonomies.="<div class='divider'></div><div class='header'>".($attribute->attribute_label?$attribute->attribute_label:$attribute->attribute_name)."</div>";
             $opts_arr[wbc()->common->stringToKey( ($attribute->attribute_label?$attribute->attribute_label:$attribute->attribute_name) )] = array( 'label'=>($attribute->attribute_label?$attribute->attribute_label:$attribute->attribute_name), 'is_header'=>true );                  
             foreach (get_terms(['taxonomy' => wc_attribute_taxonomy_name($attribute->attribute_name),'hide_empty' => false]) as $term) {
+
                 // $taxonomies.="<div class='item' data-value='".$term->term_taxonomy_id."'>".$term->name."</div>";   
-                $opts_arr[$term->attribute_id] = array( 'label'=>$term->name.' sdfgsdf sdfsddfsff' , 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$term->attribute_id.' " ');   
+                $opts_arr[$term->term_taxonomy_id] = array( 'label'=>$term->name , 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$term->term_taxonomy_id.' " ');  
             }
         }
         // return $taxonomies;
@@ -510,6 +515,7 @@ class WBC_WC {
             if(!empty($base->parent)) {
                 $parent_name = (!empty(wbc()->wc->get_term_by('id',$base->parent,'product_cat')) ?' - '.wbc()->wc->get_term_by('id',$base->parent,'product_cat')->name : '');
             }
+
 
             $opts_arr[$base->term_id] = array( 'label'=>$prefix.$base->name.$parent_name, 'attr'=>' data-sp_eid="'.$separator.'prod_cat'.$separator.$base->term_id.' " ', );
             $opts_arr = self::instance()->eo_wbc_prime_category($base->slug, $prefix.'-',$opts_arr);

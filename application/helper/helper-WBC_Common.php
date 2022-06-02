@@ -128,6 +128,30 @@ class WBC_Common {
 
 	}
 
+	///////////// 14-05-2022 -- @drashti /////////////
+	public function file_get_contents($path, $path_separator = 'woo-bundle-choice', $source_path = null) {
+        $file_bits = file_get_contents($path);
+
+        if(empty($file_bits)){
+            $tmpA = explode($path_separator, $path);
+            $newpath = null;
+            if(empty($source_path)){
+ 				$newpath = constant('EOWBC_DIRECTORY').$tmpA[1];
+            }
+            else{
+            	$newpath = constant($source_path).$tmpA[1];
+            }
+           
+            $fs = fopen ($newpath, 'rb');
+            $f_size=filesize ($newpath);
+            $file_bits= fread ($fs, $f_size);
+            fclose ($fs);
+        }
+        return $file_bits;
+	}
+	//////////////////////////////////////////////////
+
+
 	public function free_memory( &$var ) {
 		//TODO do research and implement most appropriate approach, in case, anything is not good
 
