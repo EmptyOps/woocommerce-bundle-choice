@@ -2,13 +2,13 @@
 namespace eo\wbc\controllers\admin\menu\page;
 
 defined( 'ABSPATH' ) || exit;
-
+session_start(); 
 if ( ! class_exists( 'Queue' ) ) {
 	class Queue {
-
+	 
 		private static $_instance;
 		public static function instance() {
-		if ( ! isset( self::$_instance ) ) {
+			if ( ! isset( self::$_instance ) ) {
 				self::$_instance = new self;
 			}
 
@@ -24,59 +24,70 @@ if ( ! class_exists( 'Queue' ) ) {
 			wbc()->load->model('admin/form-builder');
 
 			$subtabs = array();
+
 			$page_slug = wbc()->sanitize->get('page');
+
+			if(empty($page_slug)) {
+				$current_page_param = wbc()->sanitize->post('current_page_param');
+				if(!empty($current_page_param)) {
+					$page_slug = $current_page_param;
+				}
+			}
 			$plugin_slug = explode("---", $page_slug)[0];
-			$subtabs = apply_filters('sp_queue_subtabs',$plugin_slug, $subtabs);
+			$subtabs = apply_filters('sp_queue_subtabs',$plugin_slug, $subtabs);			
 
-			//queue sync details list
-			$table = array();
-			$table['id']='sp_queue_info_list';
-			$table['head'] = array(
-								0=>array(
-									// 0=>array(
-									// 	'is_header' => 1, 
-									// 	'val' => '',
-									// 	'is_checkbox' => true, 
-									// 	'sanitize'=>'sanitize_text_field',
-									// 	'checkbox'=> array('id'=>'dummy','value'=>array(),'options'=>array('row0_col0_chk'=>''),'options_attrs'=>array('row0_col0_chk'=>array('data-action="bulk_select_all"', 'data-bulk_table_id="'.$table["id"].'"')),'class'=>'','where'=>'in_table')
-									// ),
-									0=>array(
-										'is_header' => 1, 
-										'val' => 'Batch',
-										'field_id'=>'sp_queue_batch_size'
-									),
-									1=>array(
-										'is_header' => 1, 
-										'val' => 'Last Sync Complete At',
-										'field_id'=>'sp_queue_last_sync_time'
-									),
-									2=>array(
-										'is_header' => 1, 
-										'val' => 'In Process At Index',
-										'field_id'=>'sp_queue_in_process_at_index'
-									),
-									3=>array(
-										'is_header' => 1, 
-										'val' => 'In Process Last Updated At',
-										'field_id'=>'sp_queue_in_process_last_updated_at'
-									),
-								),
-							);
-			$table['body'] = array(
-								0=>array(
-									0=>array(
-										'val' => eowbc_lang('No records available yet'),
-										'colspan' => 4, 
-										'class'=> ''
-									),
-								),
-							);
+				//queue sync details list
 
+				$table = array();
+				$table['id']='sp_queue_info_list';
+				$table['head'] = array(
+									0=>array(
+										// 0=>array(
+										// 	'is_header' => 1, 
+										// 	'val' => '',
+										// 	'is_checkbox' => true, 
+										// 	'sanitize'=>'sanitize_text_field',
+										// 	'checkbox'=> array('id'=>'dummy','value'=>array(),'options'=>array('row0_col0_chk'=>''),'options_attrs'=>array('row0_col0_chk'=>array('data-action="bulk_select_all"', 'data-bulk_table_id="'.$table["id"].'"')),'class'=>'','where'=>'in_table')
+										// ),
+										0=>array(
+											'is_header' => 1, 
+											'val' => 'Batch',
+											'field_id'=>'sp_queue_batch_size'
+										),
+										1=>array(
+											'is_header' => 1, 
+											'val' => 'Last Sync Complete At',
+											'field_id'=>'sp_queue_last_sync_time'
+										),
+										2=>array(
+											'is_header' => 1, 
+											'val' => 'In Process At Index',
+											'field_id'=>'sp_queue_in_process_at_index'
+										),
+										3=>array(
+											'is_header' => 1, 
+											'val' => 'In Process Last Updated At',
+											'field_id'=>'sp_queue_in_process_last_updated_at'
+										),
+									),
+								);
+				$table['body'] = array(
+									0=>array(
+										0=>array(
+											'val' => eowbc_lang('No records available yet'),
+											'colspan' => 4, 
+											'class'=> ''
+										),
+									),
+								);
+			
 			$form_definition = array();
 			$sbcnt = -1;
-			foreach ($subtabs as $sbkey => $sbvalue) {	
-				$sbcnt++;
 
+			foreach($subtabs as $sbkey => $sbvalue) {
+
+				$sbcnt++;
+			
     			$sp_queue_batch_size = \eo\wbc\system\core\SP_Queue::instance()->get_batch_size($sbkey);
 
 				$form_definition['queue___'.$sbkey] = array(
@@ -84,10 +95,19 @@ if ( ! class_exists( 'Queue' ) ) {
 					'form'=> array(
 						'queue_sync_details_section'=>array('label'=>'Sync Details','type'=>'segment','desc'=>'The details provided below are of last 10 batch process events for particular API. For scheduling the frequency for example at what speed the API should be synced, Edit particular API on Add/Edit APIs tab and then go to scheduler section at bottom.'
 						),
-						'resolver_path'=>array(
-							'type'=>'hidden',
-							'value'=>constant('EOWBC_DIRECTORY').'application/controllers/ajax/eowbc_queue.php',
-						),
+						// 'saved_tab_key'=>array(
+						// 	'type'=>'hidden',
+						// 	'value'=>''
+						// ),
+						// 'current_page_param'=>array(
+						// 	'type'=>'hidden',
+						// 	'value'=>$page_slug
+						// ),
+						
+						// 'resolver_path'=>array(
+						// 	'type'=>'hidden',
+						// 	'value'=>constant('EOWBC_DIRECTORY').'application/controllers/ajax/eowbc_queue.php',
+						// ),
 						'list'=>array_merge( $table , array(
 							'type'=>'table' )
 						), 
@@ -150,19 +170,27 @@ if ( ! class_exists( 'Queue' ) ) {
 				);
 
 				if( $sbcnt == 0 ) {
-
 					$form_definition['queue___'.$sbkey]['form']['saved_tab_key'] = array(
 						'type'=>'hidden',
 						'value'=>'',
 						'sanitize'=>'sanitize_text_field',
 					);
+					$form_definition['queue___'.$sbkey]['form']['resolver_path'] = array(
+						'type'=>'hidden',
+						'value'=>constant('EOWBC_DIRECTORY').'application/controllers/ajax/eowbc_queue.php',
+					);
+					$form_definition['queue___'.$sbkey]['form']['current_page_param'] = array(
+						'type'=>'hidden',
+						'value'=>$page_slug,
+					);
+
 				}
 				
 
 			}
 			
 			$form_definition = apply_filters('eowbc_admin_form_queue',$form_definition);
-
+			
 			if($is_add_sample_values) {
 				//loop through form tabs and set (random) sample values for each field  
 				foreach ($form_definition as $key => $tab) {
