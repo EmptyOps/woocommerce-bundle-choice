@@ -34,7 +34,87 @@ window.document.splugins.wbc.filters.core = function() {
 
     from tv js layer -- currently from sp_tv_template js layer 
 	jQuery.fn.eo_wbc_filter_change=function(init_call=false,form_selector="form[id*='eo_wbc_filter']",render_container='.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products') 
-	var eo_wbc_filter_change_wrapper_private = function()
+	var eo_wbc_filter_change_wrapper_private = function() {
+
+
+	};
+
+	var prepare_query_data = function() {
+
+		from 0= this file function 
+
+		from 1 	
+		var form=jQuery(form_selector);
+
+		if(form.find('[name="html_destination"]').length>0) {
+
+			render_container = form.find('[name="html_destination"]').val();
+		}
+
+
+		if(form.find('[name="filter_native"]').length>0) {
+			jQuery.fn.eo_wbc_filter_change_native(init_call,form_selector,render_container);
+			return true;
+		}					
+
+			from 1 after eo_wbc_filter_change_native call 
+			jQuery(form).attr('method','POST');	
+			jQuery("[name*='action']").val("eo_wbc_e_tabview");	
+
+			//
+
+			form_data=undefined;
+			if(init_call)
+			{
+				if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
+					_products_in = jQuery("[name='products_in']").val()
+					if(_products_in == undefined){
+						_products_in = '';
+					} else {
+						_products_in = _products_in.trim();
+					}
+					form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:'eo_wbc_e_tabview',products_in:_products_in};
+					if(eo_wbc_e_tabview.eo_table_view_per_page){
+						form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
+					}
+				}
+				else
+				{
+					//form_data={_category:jQuery("[name='_category']").val().trim(),action:'eo_wbc_filter'};	
+					form_data=jQuery("#tableview_order,#tableview_order_direction,[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
+					if(eo_wbc_e_tabview.eo_table_view_per_page){
+						form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
+					}
+				}
+
+				if(jQuery("select[name='orderby']").length>0){
+					form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
+				}
+
+				if(jQuery("select[name='orderby']").length>0){
+					form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
+				}
+				form_data.action='eo_wbc_e_tabview';
+			}
+			else{
+				form_data=form.serialize();
+				if(eo_wbc_e_tabview.eo_table_view_per_page){
+					form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
+				}
+
+				if(jQuery("select[name='orderby']").length>0){
+					form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
+				}
+
+				if(jQuery("#tableview_order").val()!=='' && jQuery("#tableview_order_direction").val()!==''){
+					form_data+='&tableview_order='+jQuery("#tableview_order").val();
+					form_data+='&tableview_order_direction='+jQuery("#tableview_order_direction").val();
+				}
+
+				form_data+='&action=eo_wbc_e_tabview';
+			}
+
+	};	
 
 	so here there will be those ajax callback functions like beforeSend, complete, success, error and so on? mostly yes so that we can call it from wrapper and especially put all the refactored code from different instances of ht eo_wbc_filter_change functions in here 
 		--	so let just do it -- to d had already did it for two functions below 
@@ -76,6 +156,14 @@ window.document.splugins.wbc.filters.core = function() {
     //	published public functions 
     return {
 
+    	below before_search function need to make private 
+    		--	however it will continue to broadcast before search notification, and whoever interested in the before_search event should bind to that event notification 
+    		--	and there will be one more function like should_search, which will also be private. and that will handle onle the logic of checking flags and so on like the enable_filter_table flag above 
+    		--	and the whole ajax request layer will be handled by the private instance of the eo_wbc_filter_change_wrapper function 
+    		--	and below public wrapper function namely eo_wbc_filter_change_wrapper will call functios like should_search, before_search and then at delegate the rest to eo_wbc_filter_change_wrapper_private function 
+    		--	and the before_search will set flags like enable_filter_table(now the name should be changed, but to maintain trace to older var names need to keep the old flga names commented right above it) and it should not be by the should_search function 
+    		--	and then refactor and implement the eo_wbc_filter_change function instance of this file itself at bottom 
+    			-- and then need to focus on loading stack that starts maybe from the load or ready event at the bottom of this file 
         before_search: function() {
 
         	init_private();
@@ -83,10 +171,594 @@ window.document.splugins.wbc.filters.core = function() {
 			window.document.splugins.events.core.notifyAllObservers( 'filters', 'before_search' ); 
 
         }, 
-		eo_wbc_filter_change_wrapper: function() {
+		eo_wbc_filter_change_wrapper: function(init_call=false,form_selector="form#eo_wbc_filter,form[id*='eo_wbc_filter']",render_container='.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products',parameters={}) {
+			// //	this eo_wbc_filter.js 
+			// jQuery.fn.eo_wbc_filter_change_native= function(init_call=false,form_selector="form#eo_wbc_filter",render_container='',parameters={}) {
+
+			// // /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
+			// jQuery.fn.eo_wbc_filter_change=function(init_call=false,form_selector="form[id*='eo_wbc_filter']",render_container='.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products') 
+
+			// // /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
+			// 					jQuery.fn.eo_wbc_filter_change=function(init_call=false) 
+
+			// // /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
+			// 				jQuery.fn.eo_wbc_filter_change=function(init_call=false) 
+
+			// // /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template1.js
+			// 		jQuery.fn.eo_wbc_filter_change=function(init_call=false) 
+
+			// // /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template2.js
+			// 	jQuery.fn.eo_wbc_filter_change=function(init_call=false)
 
 			make sure that any js layers of wbc or any extensions which is calling the eo_wbc_filter_change function should call this function of this filters module -- to d 
+
 			and this function will simply call the private wrapper function eo_wbc_filter_change_wrapper_private 
+			// prepare_query_data 	
+				// var form=jQuery(form_selector);
+
+				// if(form.find('[name="html_destination"]').length>0) {
+
+				// 	render_container = form.find('[name="html_destination"]').val();
+				// }
+
+
+				if(form.find('[name="filter_native"]').length>0) {
+					jQuery.fn.eo_wbc_filter_change_native(init_call,form_selector,render_container);
+					return true;
+				}
+			prepare_query_data();							
+
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
+
+								//////// 27-05-2022 - @drashti /////////
+				    			--add to be confirmed & 2187 TO 2324-- 
+								jQuery.fn.eo_wbc_filter_change=function(init_call=false,form_selector="form[id*='eo_wbc_filter']",render_container='.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products') 
+				    			////////////////////////////////////////
+
+								{	
+
+									where should this logic go? and it may not be necessary to maintain this logic, but as per our usual approach we can not drop it now but keep it as it is and later comment it 
+									if(window.eo_wbc_object.enable_filter_table === false){
+
+										return false;
+									}
+
+
+									// prepare_query_data 	
+										// var form=jQuery(form_selector);
+
+										// if(form.find('[name="html_destination"]').length>0) {
+
+										// 	render_container = form.find('[name="html_destination"]').val();
+										// }
+
+
+										// if(form.find('[name="filter_native"]').length>0) {
+										// 	jQuery.fn.eo_wbc_filter_change_native(init_call,form_selector,render_container);
+										// 	return true;
+										// }
+
+						
+									// console.log(init_call);
+									// console.log(form_selector);
+
+									// console.log(jQuery.fn.eo_wbc_filter_change_native(init_call,form_selector,render_container));
+
+									what is the point of below call if still there is code layers below it which are also making ajax search request to server? but find out that most like now only above if condition if filter_native is what till where the calls would be reachine but from that if the return true executed 
+										--	so if that assumption is true then we can believe that eo_wbc_filter_change_native function is already refactored basically and QC mainly should be followed by only 
+										--	either way it sounds illogical to execute the entire search layer twice, so just check below layers and consider what is worth consideration and the two calls is not seem necessary API 	
+									jQuery.fn.eo_wbc_filter_change_native(init_call,form_selector,render_container);
+
+									// jQuery.fn.eo_wbc_filter_change_native(init_call,form_selector,render_container);
+
+			  	
+									// prepare_query_data 	
+										// jQuery(form).attr('method','POST');	
+										// jQuery("[name*='action']").val("eo_wbc_e_tabview");	
+				
+										// //
+
+										// form_data=undefined;
+										// if(init_call)
+										// {
+										// 	if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
+										// 		_products_in = jQuery("[name='products_in']").val()
+										// 		if(_products_in == undefined){
+										// 			_products_in = '';
+										// 		} else {
+										// 			_products_in = _products_in.trim();
+										// 		}
+										// 		form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:'eo_wbc_e_tabview',products_in:_products_in};
+										// 		if(eo_wbc_e_tabview.eo_table_view_per_page){
+										// 			form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
+										// 		}
+										// 	}
+										// 	else
+										// 	{
+										// 		//form_data={_category:jQuery("[name='_category']").val().trim(),action:'eo_wbc_filter'};	
+										// 		form_data=jQuery("#tableview_order,#tableview_order_direction,[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
+										// 		if(eo_wbc_e_tabview.eo_table_view_per_page){
+										// 			form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
+										// 		}
+										// 	}
+
+										// 	if(jQuery("select[name='orderby']").length>0){
+										// 		form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
+										// 	}
+
+										// 	if(jQuery("select[name='orderby']").length>0){
+										// 		form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
+										// 	}
+										// 	form_data.action='eo_wbc_e_tabview';
+										// }
+										// else{
+										// 	form_data=form.serialize();
+										// 	if(eo_wbc_e_tabview.eo_table_view_per_page){
+										// 		form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
+										// 	}
+
+										// 	if(jQuery("select[name='orderby']").length>0){
+										// 		form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
+										// 	}
+
+										// 	if(jQuery("#tableview_order").val()!=='' && jQuery("#tableview_order_direction").val()!==''){
+										// 		form_data+='&tableview_order='+jQuery("#tableview_order").val();
+										// 		form_data+='&tableview_order_direction='+jQuery("#tableview_order_direction").val();
+										// 	}
+
+										// 	form_data+='&action=eo_wbc_e_tabview';
+										// }
+
+
+									// var site_url=eo_wbc_object.eo_admin_ajax_url;
+									// var ajax_url = '';
+
+									// if(site_url.includes('?')) {
+									// 	ajax_url = site_url+eo_wbc_object.eo_cat_query;
+									// } else {
+									// 	ajax_url = site_url+'/?'+eo_wbc_object.eo_cat_query;
+									// }
+
+									jQuery.fn.sp_filter_request = jQuery.ajax(
+									{
+										url: eo_wbc_object.eo_admin_ajax_url,//form.attr('action'),
+										data:form_data, // form data
+										type:'POST', // POST
+										beforeSend:function(xhr){
+											window.eo_wbc_object.enable_filter_table = false;
+											jQuery("#loading").addClass('loading');					
+											//console.log(JSON.stringify(form_data).replace("\\",''));
+										},
+										complete : function(){
+											// console.log(this.url);
+										},
+										success:function(data)
+										{
+
+				
+											//console.log(data);
+											//document.write(data);
+											//jQuery("#loading").removeClass('loading');
+											// --	and this is called for the slick_table if block so is not the type should be slick_table here? discuss with shraddha -- to d 
+											// 	-- rectify if there are any such similar issue
+
+											//////// 02-04-2022 @shraddha /////// 
+											eo_wbc_e_render_table(type,data);	
+											window.eo_wbc_object.enable_filter_table = true;
+											// jQuery(".ui.sticky").sticky('refresh');
+										},
+										error:function(data){
+											jQuery("#loading").removeClass('loading');
+											console.log('error');
+											console.log(data);
+											window.eo_wbc_object.enable_filter_table = true;
+										},
+									}
+									);						
+									
+									if(!init_call){
+										jQuery(".reset_all_filters.mobile_2").removeClass('mobile_2_hidden');
+									}
+
+									return false;
+								}
+
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
+								//////// 27-05-2022 - @drashti /////////
+				    			--add to be confirmed 2601 TO 2705--
+				    			window.document.splugins.wbc.filters.core.eo_wbc_filter_change_wrapper();
+								jQuery.fn.eo_wbc_filter_change=function(init_call=false) 
+				    			////////////////////////////////////////
+
+								{	
+
+									if(init_call/* || typeof(window.eo_wbc_filter_change_table_view_service)===typeof(undefined)*/) {
+										/*window.eo_wbc_filter_change_table_view_service = true*/
+										return false;
+									}
+									console.log(init_call,window.eo_wbc_filter_change_table_view_service);
+									
+									if(window.eo_wbc_object.enable_filter===false){
+										return false;
+									}
+
+									if(init_call) {
+										jQuery("form#eo_wbc_filter [name='paged']").val('1');
+										jQuery("form#eo_wbc_filter [name='last_paged']").val('1');
+
+										jQuery("form#eo_wbc_filter [name='_category']").val(jQuery("form#eo_wbc_filter [name='_current_category']"));
+										jQuery("form#eo_wbc_filter [name='_attribute']").val("");
+									}
+
+									var form=jQuery("form#eo_wbc_filter");	
+									
+									jQuery(form).attr('method','POST');	
+									jQuery("[name*='action']").val("eo_wbc_e_tabview");	
+								
+									form_data=undefined;
+									if(init_call){
+										if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
+											_products_in = jQuery("[name='products_in']").val()
+											if(_products_in == undefined){
+												_products_in = '';
+											} else {
+												_products_in = _products_in.trim();
+											}
+											form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:'eo_wbc_e_tabview',products_in:_products_in};
+											if(eo_wbc_e_tabview.eo_table_view_per_page){
+												form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
+											}
+										}
+										else
+										{
+											//form_data={_category:jQuery("[name='_category']").val().trim(),action:'eo_wbc_filter'};	
+											form_data=jQuery("#tableview_order,#tableview_order_direction,[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
+											if(eo_wbc_e_tabview.eo_table_view_per_page){
+												form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
+											}
+										}
+
+										if(jQuery("select[name='orderby']").length>0){
+											form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
+										}
+
+										if(jQuery("select[name='orderby']").length>0){
+											form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
+										}
+									}
+									else{
+										form_data=form.serialize();
+										if(eo_wbc_e_tabview.eo_table_view_per_page){
+											form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
+										}
+
+										if(jQuery("select[name='orderby']").length>0){
+											form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
+										}
+
+										if(jQuery("#tableview_order").val()!=='' && jQuery("#tableview_order_direction").val()!==''){
+											form_data+='&tableview_order='+jQuery("#tableview_order").val();
+											form_data+='&tableview_order_direction='+jQuery("#tableview_order_direction").val();
+										}
+									}
+
+									jQuery.ajax({
+										url: eo_wbc_object.eo_admin_ajax_url,//form.attr('action'),
+										data:form_data, // form data
+										type:'POST', // POST
+										beforeSend:function(xhr){
+											if(eo_wbc_object.hasOwnProperty('xhr')){
+												eo_wbc_object.xhr.abort();
+											}
+											eo_wbc_object.xhr = xhr;
+											jQuery("#loading").addClass('loading');					
+											//console.log(JSON.stringify(form_data).replace("\\",''));
+										},
+										complete : function(){
+											//console.log(this.url);
+										},
+										success:function(data){		
+											//console.log(data);
+											//document.write(data);
+											//jQuery("#loading").removeClass('loading');
+											eo_wbc_e_render_table(data);	
+											// jQuery(".ui.sticky").sticky('refresh');
+										},
+										error:function(data){
+											jQuery("#loading").removeClass('loading');
+										}
+									});						
+									
+									if(!init_call){
+										jQuery(".reset_all_filters.mobile_2").removeClass('mobile_2_hidden');
+									}
+
+									return false;
+								}
+
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
+							//////// 27-05-2022 - @drashti /////////
+			    			--add to be confirmed 3159 TO 3232--
+			    			window.document.splugins.wbc.filters.core.eo_wbc_filter_change_wrapper();
+							jQuery.fn.eo_wbc_filter_change=function(init_call=false) 
+			    			////////////////////////////////////////
+							{				
+										
+								var form=jQuery("form#eo_wbc_filter");	
+								
+								jQuery(form).attr('method','POST');	
+								jQuery("[name*='action']").val("eo_wbc_e_tabview");	
+							
+								form_data=undefined;
+								if(init_call){
+									if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
+										_products_in = jQuery("[name='products_in']").val()
+										if(_products_in == undefined){
+											_products_in = '';
+										} else {
+											_products_in = _products_in.trim();
+										}
+										form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:'eo_wbc_e_tabview',products_in:_products_in};
+										if(eo_wbc_e_tabview.eo_table_view_per_page){
+											form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
+										}
+									}
+									else
+									{
+										//form_data={_category:jQuery("[name='_category']").val().trim(),action:'eo_wbc_filter'};	
+										form_data=jQuery("[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
+										if(eo_wbc_e_tabview.eo_table_view_per_page){
+											form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
+										}
+									}
+
+									if(jQuery("select[name='orderby']").length>0){
+										form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
+									}
+								}
+								else{
+									form_data=form.serialize();
+									if(eo_wbc_e_tabview.eo_table_view_per_page){
+										form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
+									}
+
+									if(jQuery("select[name='orderby']").length>0){
+										form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
+									}
+								}
+
+								jQuery.ajax({
+									url: eo_wbc_object.eo_admin_ajax_url,//form.attr('action'),
+									data:form_data, // form data
+									type:'POST', // POST
+									beforeSend:function(xhr){
+										if(eo_wbc_object.hasOwnProperty('xhr')){
+											eo_wbc_object.xhr.abort();
+										}
+										eo_wbc_object.xhr = xhr;
+										jQuery("#loading").addClass('loading');					
+										//console.log(JSON.stringify(form_data).replace("\\",''));
+									},
+									complete : function(){
+										//console.log(this.url);
+									},
+									success:function(data){		
+										//console.log(data);
+										//document.write(data);
+										//jQuery("#loading").removeClass('loading');
+										eo_wbc_e_render_table(data);	
+										// jQuery(".ui.sticky").sticky('refresh');
+									},
+									error:function(data){
+										jQuery("#loading").removeClass('loading');
+									}
+								});						
+								
+								return false;
+							}
+
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template1.js
+					//////// 27-05-2022 - @drashti /////////
+					--add to be confirmed 630 TO 734--
+					window.document.splugins.wbc.filters.core.eo_wbc_filter_change_wrapper();
+					jQuery.fn.eo_wbc_filter_change=function(init_call=false) 
+					////////////////////////////////////////
+
+					{	
+
+						if(init_call/* || typeof(window.eo_wbc_filter_change_table_view_service)===typeof(undefined)*/) {
+							/*window.eo_wbc_filter_change_table_view_service = true*/
+							return false;
+						}
+						console.log(init_call,window.eo_wbc_filter_change_table_view_service);
+						
+						if(window.eo_wbc_object.enable_filter===false){
+							return false;
+						}
+
+						if(init_call) {
+							jQuery("form#eo_wbc_filter [name='paged']").val('1');
+							jQuery("form#eo_wbc_filter [name='last_paged']").val('1');
+
+							jQuery("form#eo_wbc_filter [name='_category']").val(jQuery("form#eo_wbc_filter [name='_current_category']"));
+							jQuery("form#eo_wbc_filter [name='_attribute']").val("");
+						}
+
+						var form=jQuery("form#eo_wbc_filter");	
+						
+						jQuery(form).attr('method','POST');	
+						jQuery("[name*='action']").val(eo_wbc_e_tabview.eo_ajax_func);	
+					
+						form_data=undefined;
+						if(init_call){
+							if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
+								_products_in = jQuery("[name='products_in']").val()
+								if(_products_in == undefined){
+									_products_in = '';
+								} else {
+									_products_in = _products_in.trim();
+								}
+								form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:eo_wbc_e_tabview.eo_ajax_func,products_in:_products_in};
+								if(eo_wbc_e_tabview.eo_table_view_per_page){
+									form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
+								}
+							}
+							else
+							{
+								//form_data={_category:jQuery("[name='_category']").val().trim(),action:'eo_wbc_filter'};	
+								form_data=jQuery("#tableview_order,#tableview_order_direction,[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
+								if(eo_wbc_e_tabview.eo_table_view_per_page){
+									form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
+								}
+							}
+
+							if(jQuery("select[name='orderby']").length>0){
+								form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
+							}
+
+							if(jQuery("select[name='orderby']").length>0){
+								form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
+							}
+						}
+						else{
+							form_data=form.serialize();
+							if(eo_wbc_e_tabview.eo_table_view_per_page){
+								form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
+							}
+
+							if(jQuery("select[name='orderby']").length>0){
+								form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
+							}
+
+							if(jQuery("#tableview_order").val()!=='' && jQuery("#tableview_order_direction").val()!==''){
+								form_data+='&tableview_order='+jQuery("#tableview_order").val();
+								form_data+='&tableview_order_direction='+jQuery("#tableview_order_direction").val();
+							}
+						}
+
+						jQuery.ajax({
+							url: eo_wbc_object.eo_admin_ajax_url,//form.attr('action'),
+							data:form_data, // form data
+							type:'POST', // POST
+							beforeSend:function(xhr){
+								if(eo_wbc_object.hasOwnProperty('xhr')){
+									eo_wbc_object.xhr.abort();
+								}
+								eo_wbc_object.xhr = xhr;
+								jQuery("#loading").addClass('loading');					
+								//console.log(JSON.stringify(form_data).replace("\\",''));
+							},
+							complete : function(){
+								//console.log(this.url);
+							},
+							success:function(data){		
+								//console.log(data);
+								//document.write(data);
+								//jQuery("#loading").removeClass('loading');
+								eo_wbc_e_render_table(data);	
+								// jQuery(".ui.sticky").sticky('refresh');
+							},
+							error:function(data){
+								jQuery("#loading").removeClass('loading');
+							}
+						});						
+						
+						if(!init_call){
+							jQuery(".reset_all_filters.mobile_2").removeClass('mobile_2_hidden');
+						}
+
+						return false;
+					}
+
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template2.js
+				//////// 27-05-2022 - @drashti /////////
+				--add to be confirmed 302 TO 375--
+				window.document.splugins.wbc.filters.core.eo_wbc_filter_change_wrapper();
+				jQuery.fn.eo_wbc_filter_change=function(init_call=false)
+				////////////////////////////////////////
+
+				{				
+							
+					var form=jQuery("form#eo_wbc_filter");	
+					
+					jQuery(form).attr('method','POST');	
+					jQuery("[name*='action']").val("eo_wbc_e_tabview");	
+				
+					form_data=undefined;
+					if(init_call){
+						if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
+							_products_in = jQuery("[name='products_in']").val()
+							if(_products_in == undefined){
+								_products_in = '';
+							} else {
+								_products_in = _products_in.trim();
+							}
+							form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:'eo_wbc_e_tabview',products_in:_products_in};
+							if(eo_wbc_e_tabview.eo_table_view_per_page){
+								form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
+							}
+						}
+						else
+						{
+							//form_data={_category:jQuery("[name='_category']").val().trim(),action:'eo_wbc_filter'};	
+							form_data=jQuery("[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
+							if(eo_wbc_e_tabview.eo_table_view_per_page){
+								form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
+							}
+						}
+
+						if(jQuery("select[name='orderby']").length>0){
+							form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
+						}
+					}
+					else{
+						form_data=form.serialize();
+						if(eo_wbc_e_tabview.eo_table_view_per_page){
+							form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
+						}
+
+						if(jQuery("select[name='orderby']").length>0){
+							form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
+						}
+					}
+
+					jQuery.ajax({
+						url: eo_wbc_object.eo_admin_ajax_url,//form.attr('action'),
+						data:form_data, // form data
+						type:'POST', // POST
+						beforeSend:function(xhr){
+							if(eo_wbc_object.hasOwnProperty('xhr')){
+								eo_wbc_object.xhr.abort();
+							}
+							eo_wbc_object.xhr = xhr;
+							jQuery("#loading").addClass('loading');					
+							//console.log(JSON.stringify(form_data).replace("\\",''));
+						},
+						complete : function(){
+							//console.log(this.url);
+						},
+						success:function(data){		
+							//console.log(data);
+							//document.write(data);
+							//jQuery("#loading").removeClass('loading');
+							eo_wbc_e_render_table(data);	
+							// jQuery(".ui.sticky").sticky('refresh');
+						},
+						error:function(data){
+							jQuery("#loading").removeClass('loading');
+						}
+					});						
+					
+					return false;
+				}
+
+
+
 		}, 
         // createSubject: function( feature_unique_key, notifications ) {
         //     // console.log("Observer " + index + " is notified!");
