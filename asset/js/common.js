@@ -20,9 +20,9 @@ window.document.splugins.Feed = window.document.splugins.Feed || {};
 //  Feed.events 
 //  the feeling comes in the mind is it may become overloaded if we create such a broad class like Feed where Feed page can contain many features, events and so on. but there is absolute need of one central observer pattern which let subscribe to any subject(feature) and then later notify them when related event occurs. the need is of central observer and notifier but nothing beyond that so it will be very light and almost like a namespace holding diferent fetures. and in essense Feed will be collection of different subject(feature) where each subject is itself a observer pattern. 
     //  it is supposed to hold the collection of features like pagination, filters, feed render, sorting and so on but yeah its only job is to listen to events and notify to their subscribers. 
-window.document.splugins.Feed.events = window.document.splugins.Feed.events || {};
+window.document.splugins.events = window.document.splugins.events || {};
 
-window.document.splugins.Feed.events.subject = function( feature_unique_key, notifications ) {
+window.document.splugins.events.subject = function( feature_unique_key, notifications ) {
     this.feature_unique_key = feature_unique_key;
     this.notifications = notifications;     // [];    //  list of notifications it can notify for.  
     this.observers = [];
@@ -59,7 +59,7 @@ window.document.splugins.Feed.events.subject = function( feature_unique_key, not
     };
 };
 
-window.document.splugins.Feed.events.observer = function(callbacks) {
+window.document.splugins.events.observer = function(callbacks) {
     this.callbacks = callbacks;     // [];    //  list of notifications callbacks it waits for.  
 
     return {
@@ -91,7 +91,7 @@ window.document.splugins.events.core = function() {
             // this.observers.splice(index, 1);
             // }
 
-            this.subjects.push( new window.document.splugins.Feed.events.subject( feature_unique_key, notifications ) );
+            this.subjects.push( new window.document.splugins.events.subject( feature_unique_key, notifications ) );
         }, 
         subscribeObserver: function(feature_unique_key, callbacks) {
             // console.log("Observer " + index + " is notified!");
@@ -111,7 +111,7 @@ window.document.splugins.events.core = function() {
                 throw "There is no subject exist for specified feature_unique_key "+feature_unique_key;
             } else {
 
-                this.subjects[found_index].subscribeObserver( new window.document.splugins.Feed.events.observer( callbacks ) );
+                this.subjects[found_index].subscribeObserver( new window.document.splugins.events.observer( callbacks ) );
             }
         },
         notifyAllObservers: function(feature_unique_key, notification) {
