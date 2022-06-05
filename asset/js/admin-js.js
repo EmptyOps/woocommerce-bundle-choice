@@ -43,6 +43,9 @@ window.document.splugins.extractJSON = function(str) {
     } while(firstOpen != -1);
 }
 
+// ACTIVE_TODO below function and other functions above should be moved under the common namespace and in the common js file -- to d 
+//     ACTIVE_TODO but yeah if there are any admin specific function only then move those under admin namespace -- to d 
+    // ACTIVE_TODO note that below parseJSON in already implemented under common namespace and extended a bit so just comment below function and change all calls to the common namespace function -- to d 
 window.document.splugins.parseJSON = function(result) {
     var resjson = null;
     try{

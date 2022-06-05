@@ -27,7 +27,16 @@ class SP_Model_Query extends SP_Query {
 	    	    	$_POST = apply_filters('filter_widget_ajax_pre_get',$_POST);		        	
 		    	}
 
+				if( wbc()->sanitize->get('is_test') == 1 ) {
+					wbc()->common->var_dump( "SP_Model_Query wbc prepare_query pre_get_posts ".$input_method );
+				}
+
 		    	if(apply_filters('eowbc_filter_override',false) and (!empty($_REQUEST['eo_wbc_filter']))) {
+
+					if( wbc()->sanitize->get('is_test') == 1 ) {
+						wbc()->common->var_dump( "SP_Model_Query wbc prepare_query pre_get_posts eowbc_filter_override ".$input_method );
+					}
+
 		            echo json_encode(apply_filters('eowbc_filter_response',array()));
 		            die();
 		        }
