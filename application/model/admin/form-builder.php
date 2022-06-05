@@ -60,6 +60,7 @@ class Form_Builder implements Builder {
 						if(!empty($tab_data['form']) and is_array($tab_data['form'])){
 
 							$dynamic_add_support_html = null;
+							$das_fields_details_for_export = null;
 							foreach ($tab_data['form'] as $id => $form_element) {
 
 								if(!empty($form_element['type'])) {
@@ -88,7 +89,7 @@ class Form_Builder implements Builder {
 
 									$tab_segment.=$this->render_template("in_tab_segment", $form_element);
 
-									$this->process_dynamic_add_support($id, $form_element, $sub_elements, $dynamic_add_support_html, $tab_segment);
+									$this->process_dynamic_add_support($id, $form_element, $sub_elements, $dynamic_add_support_html, $tab_segment, $das_fields_details_for_export);
 								}
 							}
 						}
@@ -229,15 +230,6 @@ class Form_Builder implements Builder {
 
 		if( $type == "in_tab_segment" ) {
 
-			if( $sub_type == "for_js_template" ) {
-
-				//	check if the added_counter placeholder is already set if not then set at last 
-				if( strpos($form_element['id'], '{{data.added_counter}}') === FALSE ) {
-
-					$form_element['id'] = $form_element['id']."{{data.added_counter}}";	
-				}
-			}
-
 			ob_start();
 			
 			if( (!isset($form_element['prev_inline']) || !$form_element['prev_inline']) && $form_element['type']!='devider' && $form_element['type']!='hidden' ){
@@ -252,7 +244,15 @@ class Form_Builder implements Builder {
 
 			// if($form_element['type']=='devider'){
 				//	$tab_segment.=ob_get_clean();
-				return ob_get_clean();	
+
+					if( $sub_type == "for_js_template" or $sub_type == "for_plus_button" ) {
+
+						return ob_get_clean();	
+					} else {
+
+						// ACTIVE_TODO/TODO in future this function should recieve the flag that says if the das is in progress then only it should apply replace and avoid otherwise 
+						return str_replace("{{data.added_counter}}", "", ob_get_clean());	
+					}
 			// } else {
 			// 	$tab_segment.='<div class="fields">'.ob_get_clean().'</div>';
 			// }
@@ -572,6 +572,13 @@ class Form_Builder implements Builder {
 		return array( 'js_templating_lib'=>'wp','added_counter_sep'=>wbc()->config->separator() );
 	}
 
+	private function das_added_counter_format($added_counter) {
+
+		//	NOTE: this format should be created and applied by this class layer and the js layer of this form module and that is why this function should be kept private only, always. 
+
+		return ( self::dynamic_add_support_config()['added_counter_sep'] . $added_counter . self::dynamic_add_support_config()['added_counter_sep'] );
+	}
+
 	private function js_template_wrap(string $id, string $in_progress_html) {
 
 		// wrap with tag as appliable as per the js_templating_lib 
@@ -636,17 +643,27 @@ class Form_Builder implements Builder {
 
 								//	ACTIVE_TODO during filter save (edit mode)
 
-								if( $dynamic_add_support_html == null ) {	
-									$dynamic_add_support_html = "dummy html";
-									$dynamic_add_support_elements = array();
-								}
+
+								// if( $dynamic_add_support_html == null ) {	
+								// 	$dynamic_add_support_html = "dummy html";
+								// 	$dynamic_add_support_elements = array();
+								// }
 
 								//	simulate form array here by duplicating the appliable form elements 
 								if( $added_counter >= 1 ) {
 
 									for($i=1; $i<=$added_counter; $i++) {
 
-										//	ACTIVE_TODO we will need placeholder support here or is there any work around
+										foreach ($dynamic_add_support_elements as $element_id => $element) {
+
+											//	repace the counter placeholder with actual counter 
+											$element_id = str_replace("{{data.added_counter}}", $this->das_added_counter_format($i), $element_id);	
+
+											// ACTIVE_TODO if required then in future we will need to replace recursiely all elements of array including the multidimensional arrays of any elements where it is appliable 										
+
+											$newform[$element_id] = $element;	
+										}
+
 									}
 								}
 
@@ -684,15 +701,25 @@ class Form_Builder implements Builder {
 
 	}
 
-	private function process_dynamic_add_support(string $field_id, array $form_element, $sub_elements, &$in_progress_html, &$container_html) {
+	private function process_dynamic_add_support(string $field_id, array $form_element, $sub_elements, &$in_progress_html, &$container_html, &$das_fields_details_for_export) {
 
 		if( $this->is_dynamic_add_in_progress($form_element, $in_progress_html) ) {
 
 			if( $in_progress_html == null ) {	
 				$in_progress_html = "";
+				$das_fields_details_for_export = array();
 			}
 
-			$in_progress_html.=$this->render_template("in_tab_segment", $form_element, "for_js_template");
+			$form_element_for_template = $form_element;
+
+			//	check if the added_counter placeholder is already set if not then set at last 
+			if( strpos($field_id, '{{data.added_counter}}') === FALSE ) {
+
+				$form_element_for_template['id'] = $field_id."{{data.added_counter}}";	
+			}
+
+			$in_progress_html.=$this->render_template("in_tab_segment", $form_element_for_template, "for_js_template");
+			$das_fields_details_for_export[$form_element_for_template['id']] = wbc()->common->array_slice_keys( $form_element_for_template, array('type') );
 		}
 
 		//	check if it is only one element or if group is ending, then just wrap with template tags, set in parent container html and empty the in progress html 
@@ -700,15 +727,16 @@ class Form_Builder implements Builder {
 
 			$container_html.=$this->js_template_wrap($field_id, $in_progress_html);
 
-			$in_progress_html = null;
-
 			//	add plus button. by default it will be added from here but if the button support is disabled explicitly then it will not be added from here. 
 			if( !isset($form_element['dynamic_add_support_plus_button']) or !empty($form_element['dynamic_add_support_plus_button']) ) {
 
-				$plus_button_id = $this->dynamic_add_support_plus_button( $field_id, $sub_elements, $container_html );
+				$plus_button_id = $this->dynamic_add_support_plus_button( $field_id, $sub_elements, $container_html, $das_fields_details_for_export );
 
 				$this->das_plus_button_dependancies( $plus_button_id, $sub_elements, $container_html);
 			}
+
+			$in_progress_html = null;
+			$das_fields_details_for_export = null;
 		}
 
 	}
@@ -718,21 +746,21 @@ class Form_Builder implements Builder {
 		return $field_id."_plus_button";
 	}
 
-	private function dynamic_add_support_plus_button(string $field_id, $sub_elements, &$container_html) {
+	private function dynamic_add_support_plus_button(string $field_id, $sub_elements, &$container_html, $das_fields_details_for_export) {
 
 		$plus_button_id = $this->das_plus_button_id($field_id);
 
 		$button = array(
 				'label'=>eowbc_lang('+'),
-				'type'=>'button',
-				'class'=>array('secondary'),
-				'attr'=>array("onclick='window.document.splugins.common.admin.form_builder.api.das_add( \"".$field_id."\", \"".$plus_button_id."\", \"wp\" );'")
+				'type'=>'link',
+				'class'=>array('button', 'secondary'),
+				'attr'=>array('href="javascript:void(0);"', "onclick='window.document.splugins.common.admin.form_builder.api.das_add( \"".$field_id."\", \"".$plus_button_id."\", \"wp\" ); return false;'", 'data-das_fields=\''.json_encode($das_fields_details_for_export).'\'')
 
 			);
 
 		$button = $this->process_property_group_wrapper($button, $plus_button_id, $sub_elements);
 
-		$container_html.=$this->render_template("in_tab_segment", $button);
+		$container_html.=$this->render_template("in_tab_segment", $button,  "for_plus_button");
 
 		return $plus_button_id;	
 	}
@@ -752,7 +780,7 @@ class Form_Builder implements Builder {
 
 		$field = $this->process_property_group_wrapper($field, $this->das_counter_field_id($plus_button_id), $sub_elements);
 
-		$container_html.=$this->render_template("in_tab_segment", $field);
+		$container_html.=$this->render_template("in_tab_segment", $field, "for_plus_button");
 	}
 
 		
