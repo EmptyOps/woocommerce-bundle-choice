@@ -7,6 +7,55 @@ window.document.splugins = window.document.splugins || {};
 window.document.splugins.common = window.document.splugins.common || {};
 
 
+//  common functions 
+window.document.splugins.common.parseJSON = function(result,confirm_obj_format=true, obj_format='result'/*our standard response result object on any kind of ajax or api calls to our backends and other applicable layers*/) {
+    var resjson = null;
+    try{
+        console.log('called splugins parseJSON');
+        resjson = jQuery.parseJSON(result);
+    }
+    catch(e) {
+        try{
+            console.log('Normal jQuery parseJSON failed. Trying extract.');
+            jsonobjs = window.document.splugins.extractJSON(result);
+            // TODO here it is possible that in some rare cases more than one json result object is return in that case we need to find all json string object from response and identify our response only by putting some unique key/identifier like wbc_ajax_response maybe in our response
+            if( typeof(jsonobjs[0]) != undefined && typeof(jsonobjs[0]) != 'undefined' ) {
+                console.log('splugins parseJSON extracted the json string from response');
+                result = JSON.stringify(jsonobjs[0]);   //since we want to use jQuery.parseJSON
+                resjson = jQuery.parseJSON(result); 
+            }
+        }
+        catch(e) {
+            console.log('Exception handling of splugins parseJSON failed.');
+        }
+    }
+
+    if( resjson ){
+
+        if( confirm_obj_format ) {
+
+            if( obj_format == 'result' ) {
+
+                if( typeof(resjson["type"]) == undefined || typeof(resjson["type"]) == 'undefined' ) {
+                    console.log('splugins parseJSON undefined type detected in the json response');
+                    resjson["type"] = "error";
+                }
+
+                if( typeof(resjson["msg"]) == undefined || typeof(resjson["msg"]) == 'undefined' ) {
+                    console.log('splugins parseJSON undefined msg detected in the json response');
+                    resjson["msg"] = "";
+                }
+            }
+        }
+        
+        return resjson;
+    }
+    else {
+        return {"type":"error","msg":"Unable to parse result json object, please contact Sphere Plugins Support for a quick fix on this issue."};
+    }
+}
+
+
 //  TODO publish defs from here of the any design pattern that we define to be used as common patter like design pattern of the wbc.filters module 
     //  below the observer design pattern implemented for Feed.events act as one of published defs
 
@@ -158,6 +207,57 @@ window.document.splugins.events.core = function() {
 // // Observer 2 is notified!
 // // Observer 3 is notified!
 // // Observer 4 is notified!
+
+
+//  templating 
+window.document.splugins.templating = window.document.splugins.templating || {};
+
+window.document.splugins.templating.core = function(configs) {
+    this.configs = jQuery.extend({}, {}/*default configs*/, configs);   
+
+    var get_template = function( tmpl_id, templating_lib ) {
+
+        if( templating_lib == 'wp' ) {
+
+            return wp.template( tmpl_id );  
+        }
+    };
+
+    var apply_data = function( template, template_data, templating_lib ) {
+
+        if( templating_lib == 'wp' ) {
+
+            return template( template_data );   
+        }
+    };
+
+    //  so far the templates are set from the server layers so no need to set it from here so far  
+    var set_template = function( tmpl_id, template_content, templating_lib ) {
+
+        //  TODO implement 
+    };
+
+    return {
+
+        get_template: function( tmpl_id, templating_lib ) {
+
+            return get_template( tmpl_id, templating_lib );
+        }, 
+        apply_data: function( template, template_data, templating_lib ) {
+
+            return apply_data( tmpl_id, template_content, templating_lib ); 
+        }, 
+        set_template: function( tmpl_id, template_content, templating_lib ) {
+
+            set_template( tmpl_id, template_content, templating_lib ); 
+        }
+
+    };
+};
+
+//  publish it 
+window.document.splugins.templating.api = window.document.splugins.templating.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
+
 
 // the variations js module
 window.document.splugins.wbc.variations = window.document.splugins.wbc.variations || {};

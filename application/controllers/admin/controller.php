@@ -8,6 +8,12 @@ class Controller extends \eo\wbc\controllers\Controller {
 
 	private static $_instance = null;
 
+	// base_key -- the slug of the page, main key of the option group of the particular module should be defined based on this key 
+	private $base_key = null;
+
+	// base_key_suffix -- so if there are custom logic then that controller can be handled 
+	private $base_key_suffix = null;
+
 	public static function instance() {
 		if ( ! isset( self::$_instance ) ) {
 			self::$_instance = new self;
@@ -18,6 +24,26 @@ class Controller extends \eo\wbc\controllers\Controller {
 	/*public function __construct() {
 		
 	}	*/
+
+	public function get_base_key() {
+
+		return $this->base_key;
+	}
+
+	protected function set_base_key($base_key) {
+
+		$this->base_key = $base_key;
+	}
+
+	public function get_base_key_suffix() {
+
+		return $this->base_key_suffix;
+	}
+
+	protected function set_base_key_suffix($base_key_suffix) {
+
+		$this->base_key_suffix = $base_key_suffix;
+	}
 
 	protected function _get($name) {
 
@@ -33,6 +59,28 @@ class Controller extends \eo\wbc\controllers\Controller {
 
 	public function get_form_defination($args = array()){
 		// To do here.
+	}
+
+	// ACTIVE_TODO need to refactor get_form_defination function on all admin controllers including the theme admin controllers and ensure one flow only which like below a static function with args param -- to s
+	// 	ACTIVE_TODO but yeah __ at last in the name should be dropped. -- to s
+			// ACTIVE_TODO and there is spell mistake type in above and below function need to fix that too, to bring it in like with function defs in all controllers -- to s 
+	public function get_form_defination__($args = null) {
+
+		// during post save 
+		// 	maybe everything will be handled by the form builder like detecting the added counter field post data and simulating based on that 
+		if( isset($_POST["sub_action"]) && $_POST["sub_action"] == "save" ) {
+
+			$args["sub_action"] = "save";
+		}
+			
+		// during the featch filter 	
+		// 	ACTIVE_TODO it will determine the post related data if required like save tab key that was there in that model but nothing else like that id and so on 
+		// 		ACTIVE_TODO and this fetch filter data will be passed to the form builder function 
+
+
+		// and then the rest just will be handled by form builder 
+		// 	and that will return the processed form definition 
+		return \eo\wbc\model\admin\Form_Builder::instance()->das_form_definition_support($args);	
 	}
 
 	/*public function get_admin_form($args = array()){

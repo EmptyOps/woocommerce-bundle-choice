@@ -26,7 +26,9 @@ class Http_Handler {
 	public static function process(){
 
 		do_action( 'before_process_request', array(self::instance(),'preprocess_request') );		
-		
+
+		self::instance()->load_asset();
+
 		if(is_admin()){
 
 			do_action( 'wbc_before_process_admin_request' );	
@@ -43,6 +45,12 @@ class Http_Handler {
 		}
 
 		do_action( 'after_process_request', array(self::instance(),'postprocess_request') );
+	}
+	
+	// NOTE: note that it is loading the ultimate common asset from based on the precondition that above function and so this function also is called only when it is not the ajax call process and also that this process is being called once only. but still if in future if we feel that we should move this asset loading to a more appropriate layer and if there is any layer that is more suitable then will move there. 	
+	private function load_asset() {
+
+		wbc()->load->asset( 'asset.php', constant( 'EOWBC_ASSET_DIR' ).'js/js.vars.asset.php' );
 	}
 
 }
