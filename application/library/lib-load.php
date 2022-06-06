@@ -119,5 +119,25 @@ if(!class_exists('WBC_Loader')) {
 				require_once trailingslashit(constant('EOWBC_MODEL_DIR')).$model_path.'.php';				
 			}
 		}
+
+		public function built_in($type,$handle,$param = array(),$version=""){
+
+			if ($type == "fomantic") {
+
+				//ACTIVE_TODO as planned override the handle after 1/2 revisions are done, and then override it to standard fomantic key only which means handle will be one only for built_in asset of type fomantic so system wide it is loaded once only -- to s
+				if (empty($handle)) {
+
+					$handle = 'fomantic';
+				}
+
+				//ACTIVE_TODO in future we would like to load it using above asset function only to ensure reusability and avoid duplicate code -- to s
+				wp_register_style( $handle.'-css',constant('EOWBC_ASSET_URL').'css/fomantic/semantic.min.css','2.8.1');
+	    		wp_enqueue_style( $handle.'-css');      
+
+		        wp_register_script( $handle.'-js',constant('EOWBC_ASSET_URL').'js/fomantic/semantic.min.js',array('jquery'));
+		        wp_enqueue_script( $handle.'-js');   
+		    }
+
+		}
 	}
 }

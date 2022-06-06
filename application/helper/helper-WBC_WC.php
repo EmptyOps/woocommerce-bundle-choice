@@ -373,4 +373,23 @@ class WBC_WC {
             return $permalink[$key];
         }
     }
+
+    public function is_variable($product){
+
+        if( $product->is_type( 'variable' )){
+           return true;
+        }
+
+        return false;
+    }
+
+    public function is_variation_object($product){
+
+        if(is_a( $product, 'WC_Product_Variable' ) or is_a( $product, 'WC_Product_Variation' )){
+           return true;
+        }
+
+        return false;
+    }
+
 }
