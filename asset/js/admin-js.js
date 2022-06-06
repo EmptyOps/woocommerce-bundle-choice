@@ -4,6 +4,8 @@ window.document.splugins = window.document.splugins || {};
 window.document.splugins.is_debug = false; 
 window.document.splugins.is_test_script_debug = false;    
 
+window.document.splugins.common = window.document.splugins.common || {};
+
 window.document.splugins.process_debug_log = function(obj,debug_log) {  
    if( window.document.splugins.is_test_script_debug ) {
         var __debug_log = jQuery(obj).attr('data-debug_log');
@@ -41,6 +43,9 @@ window.document.splugins.extractJSON = function(str) {
     } while(firstOpen != -1);
 }
 
+// ACTIVE_TODO below function and other functions above should be moved under the common namespace and in the common js file -- to d 
+//     ACTIVE_TODO but yeah if there are any admin specific function only then move those under admin namespace -- to d 
+    // ACTIVE_TODO note that below parseJSON in already implemented under common namespace and extended a bit so just comment below function and change all calls to the common namespace function -- to d 
 window.document.splugins.parseJSON = function(result) {
     var resjson = null;
     try{
@@ -80,6 +85,15 @@ window.document.splugins.parseJSON = function(result) {
     else {
         return {"type":"error","msg":"Unable to parse result json object, please contact Sphere Plugins Support for a quick fix on this issue."};
     }
+}
+
+window.document.splugins.common.confirm_and_redirect = function(confirm_txt, url) {
+
+    if( confirm(confirm_txt) ) {
+        window.location.href = url;
+    } else {
+        return false;
+    }    
 }
 
 $ = jQuery;

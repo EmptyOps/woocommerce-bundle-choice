@@ -2,6 +2,8 @@
 namespace eo\wbc\controllers\publics\pages;
 defined( 'ABSPATH' ) || exit;
 
+use eo\wbc\model\publics\SP_Model_Feed;
+
 class Category {
 
     private static $_instance = null;
@@ -60,19 +62,7 @@ class Category {
                 wbc()->theme->load('css','category');
                 wbc()->theme->load('js','category');
             
-                /*Hide the category Title*/
-                add_filter( 'woocommerce_page_title','__return_false');
-
-                $enable_side_bar_widget = unserialize(wbc()->options->get_option('setting_status_advanced_config','enable_side_bar_widget','a:0:{}'));
-                if(empty($enable_side_bar_widget['enable_side_bar_widget'])) {
-                /*Hide sidebar and make content area full width.*/
-                    if(apply_filters('eowbc_filter_sidebars_widgets',true)){
-                        add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
-                            return array( false );
-                        });
-                    }    
-                }            
-                /*End --Hide sidebar and make content area full width.*/
+                SP_Model_Feed::instance()->init();
 
                 if(
                      // ($this->eo_wbc_get_category()==get_option('eo_wbc_first_slug') && get_option('eo_wbc_add_filter_first',FALSE) )
@@ -85,9 +75,7 @@ class Category {
                 ){
 
                     if($this->eo_wbc_get_category()==$this->first_category_slug && wbc()->options->get_option_group('filters_d_fconfig',FALSE)) {
-                        add_filter('woocommerce_product_add_to_cart_text',function($add_to_cart_text,$product){
-                            return __('View','WooCommerce');
-                        },10,2);
+                        SP_Model_Feed::instance()->add_to_cart_text();
                     }
                     $this->eo_wbc_add_filters();          
                 }
@@ -208,7 +196,8 @@ class Category {
                 var_dump($path);
             });*/
 
-            add_action('woocommerce_before_shop_loop' /*'woocommerce_archive_description'*/,array($this,'add_filter_widget'),1);
+            $filter_container_location_action = SP_Model_Feed::instance()->filter_container_location_action( $this->is_shop_cat_filter, $this->is_shortcode_filter );
+            add_action($filter_container_location_action /*'woocommerce_before_shop_loop'*/ /*'woocommerce_archive_description'*/,array($this,'add_filter_widget'),1);
 
         /*}
             */

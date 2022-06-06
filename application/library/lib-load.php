@@ -19,14 +19,14 @@ if(!class_exists('WBC_Loader')) {
 			//	no implemetations 
 		}
 
-		public function asset($type,$path,$param = array(),$version="",$load_instantly=false) {
+		public function asset($type,$path,$param = array(),$version="",$load_instantly=false,$is_prefix_handle=false) {
 
 			if(!apply_filters('wbc_load_asset_filter',true,$type,$path,$param,$version,$load_instantly)) {
 				return true;
 			}
 
 			$_path = '';
-			$_handle = str_replace(' ','-',str_replace('/','-',$path));			
+			$_handle = ( $is_prefix_handle ? "sp_wbc_" : "" ) . str_replace(' ','-',str_replace('/','-',$path));			
 			switch ($type) {
 				case 'css':
 					$_path = constant('EOWBC_ASSET_URL').'css'.'/'.$path.'.css';
@@ -67,6 +67,17 @@ if(!class_exists('WBC_Loader')) {
 						wp_enqueue_script($_handle);					
 					}
 					break;
+				case 'asset.php':	//	NOTE: it is important here to note that this asset loading block is fundamentally different from other asset loading blocks here since it is loading assets that are implemented in the php file
+					$_path = ( isset($data['ASSET_DIR']) ? $data['ASSET_DIR'].$path : $path );	
+
+					if(isset($param[0]) && ($param[0]=='jquery' || $param[0]=='jQuery')) {
+						echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/'.(!empty($version)?$version:"3.4.1").'/jquery.min.js"></script>';
+						unset($param[0]);
+					}
+
+					extract($param);
+					require_once $_path;
+					break;
 				case 'localize':
 					wp_localize_script($_handle,array_keys($param)[0],$param[array_keys($param)[0]]);
 					break;				
@@ -93,7 +104,8 @@ if(!class_exists('WBC_Loader')) {
 					//exception handling
 					if( true || constant('WP_DEBUG') == true )
 					{
-						throw new Exception("template file '".constant('EOWBC_TEMPLATE_DIR').$template_path.".php' is not found");
+						// throw new Exception("template file '".constant('EOWBC_TEMPLATE_DIR').$template_path.".php' is not found");
+						throw new Exception("template file '".$path."' is not found, actual non filtered path was '".constant('EOWBC_TEMPLATE_DIR').$template_path.".php'");
 					}
 					else 
 					{
@@ -120,24 +132,96 @@ if(!class_exists('WBC_Loader')) {
 			}
 		}
 
-		public function built_in($type,$handle,$param = array(),$version=""){
+		public function explicit_class_loader( $explicit_class_loader_config ) {
 
-			if ($type == "fomantic") {
+      		$dirs_n_files = null; 
+      		if( is_admin() ) {
+      			$dirs_n_files = isset($explicit_class_loader_config['admin']) ? $explicit_class_loader_config['admin'] : array();
+      		} else {
+      			$dirs_n_files = isset($explicit_class_loader_config['frontend']) ? $explicit_class_loader_config['frontend'] : array();
+      		}
 
-				//ACTIVE_TODO as planned override the handle after 1/2 revisions are done, and then override it to standard fomantic key only which means handle will be one only for built_in asset of type fomantic so system wide it is loaded once only -- to s
-				if (empty($handle)) {
+      		$this->load_classes_array($dirs_n_files);
 
-					$handle = 'fomantic';
-				}
+      		//	for both
+  			if( isset($explicit_class_loader_config['both']) ) {
 
-				//ACTIVE_TODO in future we would like to load it using above asset function only to ensure reusability and avoid duplicate code -- to s
-				wp_register_style( $handle.'-css',constant('EOWBC_ASSET_URL').'css/fomantic/semantic.min.css','2.8.1');
-	    		wp_enqueue_style( $handle.'-css');      
-
-		        wp_register_script( $handle.'-js',constant('EOWBC_ASSET_URL').'js/fomantic/semantic.min.js',array('jquery'));
-		        wp_enqueue_script( $handle.'-js');   
-		    }
-
+	      		$this->load_classes_array($explicit_class_loader_config['both']);
+  			} 
 		}
+
+		private function load_classes_array($dirs_n_files) {
+
+			if(!empty($dirs_n_files)){
+
+				foreach ($dirs_n_files as $key=>$val) {
+
+					if( $val['type'] == 'dir' ) {
+
+						if( empty($val['path']) ) {
+							//	in case of empty do nothing, since config array maybe incomplete or in progress. but maybe we are required to throw error for a straight and strict flow 
+							throw new \Exception("Directory path must not be empty, check your explicit_class_loader config array", 1);
+							
+						}
+						$this->load_classes( $val['path'], isset($val['is_also_subdirs']) ? $val['is_also_subdirs'] : null);
+						
+					} else {
+
+						$this->load_class_file( $val['path'] );
+					}					
+				}	
+			}
+		}
+
+		// loads classes from the dir path 
+		private function load_classes($path, $is_recurssive = false)
+		{
+			// $actual_link = __DIR__;
+			$files = scandir($path);
+			$files = array_diff(scandir($path), array('.', '..'));
+
+			foreach($files as $file)
+			{
+			  if(is_dir($path.'/'.$file))
+			  {
+			      if($is_recurssive)
+			      {
+			          $this->load_classes( $path.'/'.$file, $is_recurssive);
+			      }
+			  }
+			 else
+			 {
+			          if(($file != ".") 
+			             && ($file != "..")
+			             && (strtolower(substr($file, strrpos($file, '.') + 1)) == 'php'))
+			          {
+			          // echo '<LI><a href="'.$file.'">',$actual_link.'/'.$path.'/'.$file.'</a>';
+			          	$this->load_class_file( $path.'/'.$file ); 
+			         }
+			     }
+			}	
+		}
+
+		private function load_class_file( $path ) {
+
+			if( empty($path) ) {
+				//	in case of empty do nothing, since config array maybe incomplete or in progress. but maybe we are required to throw error for a straight and strict flow 
+				throw new \Exception("File path must not be empty, check your explicit_class_loader config array", 1);
+				
+			}
+			
+			if( wbc()->file->extension_from_path( $path ) != 'php' ) {
+				throw new \Exception("The php files are only supported so far in the explicit_class_loader, check your file extension", 1);
+				
+			}
+
+			if( wbc()->file->file_exists( $path ) ) {
+				require_once $path;
+			} else {
+				throw new \Exception("The file you requested to load through the explicit_class_loader config is not found, please check if the file at path ".$path." actually exist.", 1);
+				
+			}
+		}
+
 	}
 }
