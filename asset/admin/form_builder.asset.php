@@ -45,7 +45,13 @@ window.document.splugins.common.admin.form_builder.core = function( configs ) {
 
     	let added_counter_ele = jQuery('#'+plus_button_id+'_added_count');	
 
-    	let added_counter = added_counter_ele.val();
+        // ACTIVE_TODO bring all the common js function from old CI repo and publish that under the common namespace. -- to d 
+        //     ACTIVE_TODO and then use that only below -- to d 
+        console.log( "added_counter_ele.val() " + added_counter_ele.val() );
+        console.log( parseInt(added_counter_ele.val()) ) ;  
+    	let added_counter = parseInt( added_counter_ele.val() );
+        added_counter = Number.isNaN(added_counter) ? 0 : added_counter;
+        console.log( added_counter );  
 
     	if( action == 'increment' ) {
 

@@ -63,6 +63,11 @@ class Form_Builder implements Builder {
 							$das_fields_details_for_export = null;
 							foreach ($tab_data['form'] as $id => $form_element) {
 
+								//	NOTE: the das form element version will be kept for das only while the main stream will cleaned first of everything else 
+								$das_id = $id;
+								$das_form_element = $form_element;
+								$this->das_clean_form_element($id, $form_element);	
+
 								if(!empty($form_element['type'])) {
 
 									if( $form_element['type'] == "skip" ){
@@ -77,6 +82,7 @@ class Form_Builder implements Builder {
 										continue;
 									}
 
+
 									// $form_element = $this->process_property_group($form_element, $id);
 
 									// foreach ($sub_elements as $skey => $svalue) {
@@ -87,9 +93,14 @@ class Form_Builder implements Builder {
 									// }
 									$form_element = $this->process_property_group_wrapper($form_element, $id, $sub_elements);
 
+									//	NOTE: the das vars are also processed here with property group flows so that they can also receive support of the property group flows. and similarly if there are any other such supports required then that also should be applied here.  
+									if( $this->is_dynamic_add_in_progress($form_element, $dynamic_add_support_html) ) {
+										$das_form_element = $this->process_property_group_wrapper($das_form_element, $das_id, $sub_elements);
+									}
+
 									$tab_segment.=$this->render_template("in_tab_segment", $form_element);
 
-									$this->process_dynamic_add_support($id, $form_element, $sub_elements, $dynamic_add_support_html, $tab_segment, $das_fields_details_for_export);
+									$this->process_dynamic_add_support($id, $form_element, $sub_elements, $dynamic_add_support_html, $tab_segment, $das_fields_details_for_export, $das_id, $das_form_element);
 								}
 							}
 						}
@@ -569,7 +580,7 @@ class Form_Builder implements Builder {
 
 	public static function dynamic_add_support_config() {
 
-		return array( 'js_templating_lib'=>'wp','added_counter_sep'=>wbc()->config->separator() );
+		return array( 'js_templating_lib'=>'wp','added_counter_sep'=>wbc()->config->separator()/*."das".wbc()->config->separator()*/ );
 	}
 
 	private function das_added_counter_format($added_counter) {
@@ -591,6 +602,16 @@ class Form_Builder implements Builder {
 		
 	public function das_form_definition_support($args) {
 
+		if( wbc()->sanitize->get('is_test') == 1 ) {
+			wbc()->common->var_dump( "Form_Builder das_form_definition_support" );
+		}
+
+		if( $args["sub_action"] != "save" ) {
+
+			//	just return the default value if it do not required any processing 
+			return $args['form_definition'];	
+		}
+
 		//	NOTE: due to true condition below the non tab based forms will not be supported. and either there is no plan to support nonn tab based forms for this das support and either way there should be no plan to support the non tab based forms as they are not as per the standards 
 		if(true || !empty($form['tabs'])){
 
@@ -604,6 +625,14 @@ class Form_Builder implements Builder {
 					$newform = array();
 					foreach ($tab_data['form'] as $id => $form_element) {
 
+						//	NOTE: the das form element version will be kept for das only while the main stream will cleaned first of everything else 
+						$das_id = $id;
+						$das_form_element = $form_element;
+						$this->das_clean_form_element($id, $form_element);	
+						// if( wbc()->sanitize->get('is_test') == 1 ) {
+						// 	wbc()->common->var_dump( "Form_Builder das_form_definition_support duplicating elements for simulation das_id " . $das_id . " id " . $id );
+						// }
+
 						$newform[$id] = $form_element;
 
 						if(!empty($form_element['type'])) {
@@ -616,6 +645,12 @@ class Form_Builder implements Builder {
 								continue;
 							}
 
+							//	NOTE: the das vars are also processed here with property group flows so that they can also receive support of the property group flows. and similarly if there are any other such supports required then that also should be applied here.  
+							if( $this->is_dynamic_add_in_progress($form_element, $dynamic_add_support_html) ) {
+
+								//	nothing to do here so far 
+							}
+
 							if( $this->is_dynamic_add_in_progress($form_element, $dynamic_add_support_html) ) {
 
 								if( $dynamic_add_support_html == null ) {	
@@ -623,7 +658,7 @@ class Form_Builder implements Builder {
 									$dynamic_add_support_elements = array();
 								}
 
-								$dynamic_add_support_elements[$id] = $form_element;	
+								$dynamic_add_support_elements[$das_id] = $das_form_element;	
 							}
 
 							if( $this->is_dynamic_add_ended( $form_element ) ) {
@@ -644,6 +679,11 @@ class Form_Builder implements Builder {
 								//	ACTIVE_TODO during filter save (edit mode)
 
 
+								if( wbc()->sanitize->get('is_test') == 1 ) {
+									wbc()->common->var_dump( "Form_Builder das_form_definition_support sub_action " . $args["sub_action"] );
+									wbc()->common->var_dump( "Form_Builder das_form_definition_support das_counter_field_id " . $das_counter_field_id );
+									wbc()->common->var_dump( "Form_Builder das_form_definition_support added_counter " . $added_counter );
+								}
 								// if( $dynamic_add_support_html == null ) {	
 								// 	$dynamic_add_support_html = "dummy html";
 								// 	$dynamic_add_support_elements = array();
@@ -662,6 +702,10 @@ class Form_Builder implements Builder {
 											// ACTIVE_TODO if required then in future we will need to replace recursiely all elements of array including the multidimensional arrays of any elements where it is appliable 										
 
 											$newform[$element_id] = $element;	
+											if( wbc()->sanitize->get('is_test') == 1 ) {
+												wbc()->common->var_dump( "Form_Builder das_form_definition_support duplicating elements for simulation element_id " . $element_id );
+												wbc()->common->pr( $newform[$element_id] );		
+											}
 										}
 
 									}
@@ -701,7 +745,17 @@ class Form_Builder implements Builder {
 
 	}
 
-	private function process_dynamic_add_support(string $field_id, array $form_element, $sub_elements, &$in_progress_html, &$container_html, &$das_fields_details_for_export) {
+	private function das_clean_form_element(string &$field_id, array &$form_element) {
+
+		//	clean the form element for the standard flow, but yeah it will be for placeholder cleanings only. the flags related to das will still be kept as it is. 
+
+		$field_id = str_replace("{{data.added_counter}}", "", $field_id);
+
+		// ACTIVE_TODO do the form_element cleaning also, and after that we do not need to manage the cleaning in the render_template or anywhere else. just this function will take care of everything related to cleaning. 
+
+	}
+
+	private function process_dynamic_add_support(string $field_id, array $form_element, $sub_elements, &$in_progress_html, &$container_html, &$das_fields_details_for_export, $das_field_id, $das_form_element) {
 
 		if( $this->is_dynamic_add_in_progress($form_element, $in_progress_html) ) {
 
@@ -710,16 +764,15 @@ class Form_Builder implements Builder {
 				$das_fields_details_for_export = array();
 			}
 
-			$form_element_for_template = $form_element;
 
 			//	check if the added_counter placeholder is already set if not then set at last 
-			if( strpos($field_id, '{{data.added_counter}}') === FALSE ) {
+			if( strpos($das_field_id, '{{data.added_counter}}') === FALSE ) {
 
-				$form_element_for_template['id'] = $field_id."{{data.added_counter}}";	
+				$das_form_element['id'] = $das_field_id."{{data.added_counter}}";	
 			}
 
-			$in_progress_html.=$this->render_template("in_tab_segment", $form_element_for_template, "for_js_template");
-			$das_fields_details_for_export[$form_element_for_template['id']] = wbc()->common->array_slice_keys( $form_element_for_template, array('type') );
+			$in_progress_html.=$this->render_template("in_tab_segment", $das_form_element, "for_js_template");
+			$das_fields_details_for_export[$das_form_element['id']] = wbc()->common->array_slice_keys( $das_form_element, array('type') );
 		}
 
 		//	check if it is only one element or if group is ending, then just wrap with template tags, set in parent container html and empty the in progress html 
@@ -790,7 +843,12 @@ class Form_Builder implements Builder {
 
 			$this->is_load_asset_done = true;	
 
-			wbc()->load->asset( 'asset.php', constant( 'EOWBC_ASSET_DIR' ).'admin/form_builder.asset.php', array( 'configs' => array( 'das'=>$this->dynamic_add_support_config() ) ) );
+			// ACTIVE_TODO it is not neceesary here to use wp_enqueue_scripts since it is coming at the sequenece in loading sequenece that may be after the wp_enqueue_scripts so now we need to create one such condition maybe in the asset.php switch block in the asset function called below and then that condition will add action if required or otherwise simply load asset directly -- to s 
+				// ACTIVE_TODO and if it may help on admin the community says the hook admin_enqueue_scripts would work only -- to s 
+			// add_action( 'wp_enqueue_scripts',function(){
+
+				wbc()->load->asset( 'asset.php', constant( 'EOWBC_ASSET_DIR' ).'admin/form_builder.asset.php', array( 'configs' => array( 'das'=>$this->dynamic_add_support_config() ) ) );
+			// }, 9999);
 		}
 	}
 
