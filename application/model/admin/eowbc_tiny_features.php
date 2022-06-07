@@ -264,5 +264,9 @@ class Tiny_Features extends Eowbc_Model {
 		
 	}
 
+	public function render_ui() {
+		
+	}
+
 
 }
