@@ -167,14 +167,16 @@ class WBC_WP {
         
         /////////////////////////////////////////////////
 
+
         if (!$file['error']) {
 
             $type = wp_check_filetype($name, null );
 
             $attachment = array(
+                'guid' => $file['url'],
                 'post_mime_type' => $type['type'],
                 'post_parent' => null,
-                'post_title' => preg_replace('/\.[^.]+$/', '', $name),
+                'post_title' => sanitize_file_name($name),
                 'post_content' => '',
                 'post_status' => 'inherit'
             );

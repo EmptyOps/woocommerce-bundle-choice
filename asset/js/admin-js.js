@@ -250,6 +250,16 @@ function eowbc_ready($){
             );            
         }
 
+        if( typeof(jQuery(this).data('save-reset')) !== typeof(undefined)) {
+        
+
+            if(typeof(serform) === typeof({})) {
+                serform.is_form_reset = true;
+            } else {
+                serform+='&is_form_reset=true&'
+            }
+        }
+
         // if(is_update_post_values){            
         //     console.log('is_update_post_values here 2');
         //     $('[name="first_category_altr_filt_widgts"]').val(temp_fcf);             

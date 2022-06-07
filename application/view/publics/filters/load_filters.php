@@ -116,21 +116,40 @@ if(wp_is_mobile()) {
 			if(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_2'){
 			?>
 			<div class="ui grid centered">
-				<div class="row">
-					<div class="ui button primary advance_filter" id="advance_filter" style="padding-left: 1em;padding-right: 1em;border-radius: 0 0 0 0;width: 100vw !important; display: block !important; position: absolute;text-align: left;"><?php spext_lang('Advanced Filters','woo-bundle-choice'); ?>&nbsp;<i class="ui icon chevron right" style="position: absolute;right:1em;"></i></div>
+				<div class="row" id="advance_filter">
+					<div class="ui button primary advance_filter" style="padding-left: 1em;padding-right: 1em;border-radius: 0 0 0 0;width: 100vw !important; display: block !important; position: absolute;text-align: left;"><?php spext_lang('Advanced Filters','woo-bundle-choice'); ?>&nbsp;<i class="ui icon chevron right" style="position: absolute;right:1em;"></i>
+					</div>
+					<?php if(!empty(wbc()->options->get_option('filters_'.$filter_ui->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
+					
+						<div class="ui button" id="apply_filter" style="position: absolute;right: 1em;top:1em;border-radius: 0;" onclick="jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':new Event('click',this)});"> <?php spext_lang('Apply Filters','woo-bundle-choice'); ?></div>
+					<?php endif;  ?>
 				</div>
 			</div>					
 			<?php
 			} else {
 			?>
 			<div class="ui grid centered">
-				<div class="row">
-					<div class="ui button primary advance_filter" id="advance_filter" style="border-radius: 0 0 0 0;width: fit-content !important;">Advance Filter&nbsp;<i class="ui icon angle double up"></i></div>
+				<div class="row" id="advance_filter">
+					<div class="ui button primary advance_filter"  style="border-radius: 0 0 0 0;width: fit-content !important;">Advance Filter&nbsp;<i class="ui icon angle double up"></i>
+					</div>
+					<?php if(!empty(wbc()->options->get_option('filters_'.$filter_ui->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
+					
+					<div class="ui button" id="apply_filter" style="position: absolute;right: 1em;top:1em;border-radius: 0;" onclick="jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':new Event('click',this)});"><?php spext_lang('Apply Filters','woo-bundle-choice'); ?></div>
+				<?php endif;  ?>
 				</div>
 			</div>
 			<?php
 			}			
+		}else{
+		 if(!empty(wbc()->options->get_option('filters_'.$filter_ui->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
+			<div class="ui grid centered">
+				<div class="row" id="advance_filter">
+					<div class="ui button" id="apply_filter" style="position: absolute;right: 1em;top:1em;border-radius: 0;" onclick="jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':new Event('click',this)});"><?php spext_lang('Apply Filters','woo-bundle-choice'); ?></div>
+					</div>
+			</div>
+				<?php endif;  
 		}
+		 
 	}
 
 } else {	
