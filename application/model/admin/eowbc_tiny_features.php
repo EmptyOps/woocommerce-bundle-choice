@@ -26,6 +26,12 @@ class Tiny_Features extends Eowbc_Model {
 		
 	}
 
+	public function legacy_admin(){
+
+		private function admin_data_tab_render( $attributes, $attributes_options, $extra_args ) {
+		private function admin_data_tab_save( $attributes, $attributes_options, $extra_args ) {
+	}
+
 	private function admin_data_tab_inline_css(){
 		?>
 		<style>
@@ -127,7 +133,7 @@ class Tiny_Features extends Eowbc_Model {
 		<?php
 	}
 
-	public static function admin_data_tab_render( $attributes, $attributes_options, $extra_args ) {
+	private function admin_data_tab_render( $attributes, $attributes_options, $extra_args ) {
 
 		
 
@@ -232,7 +238,7 @@ class Tiny_Features extends Eowbc_Model {
 		, 10, 3 );
 	}
 
-	public static function admin_data_tab_save( $attributes, $attributes_options, $extra_args ) {
+	private function admin_data_tab_save( $attributes, $attributes_options, $extra_args ) {
 
 		need to be execured once, no matter how many extensions call it. 
 
@@ -244,17 +250,18 @@ class Tiny_Features extends Eowbc_Model {
 		
 		if ( !empty( wbc()->sanitize->post['woo_variation_gallery'] ) ) {
 
-				if ( !empty( wbc()->sanitize->post['woo_variation_gallery'][ $variation_id ] ) ) {
-		// drashti ne kevanu 6 update_post_meta
-					$gallery_image_ids = array_map( 'absint', wbc()->sanitize->post['woo_variation_gallery'][ $variation_id ] );
-					update_post_meta( $variation_id, 'sp_variations_data', $gallery_image_ids );
-				} else {
-					delete_post_meta( $variation_id, 'sp_variations_data' );
-				}
+			if ( !empty( wbc()->sanitize->post['woo_variation_gallery'][ $variation_id ] ) ) {
+			
+				// drashti ne kevanu 6 update_post_meta
+				$gallery_image_ids = array_map( 'absint', wbc()->sanitize->post['woo_variation_gallery'][ $variation_id ] );
+				update_post_meta( $variation_id, 'sp_variations_data', $gallery_image_ids );
 			} else {
 				delete_post_meta( $variation_id, 'sp_variations_data' );
 			}
-			
+		} else {
+			delete_post_meta( $variation_id, 'sp_variations_data' );
+		}
+		
 	}
 
 
