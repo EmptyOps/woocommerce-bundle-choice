@@ -9,7 +9,7 @@
         <div class="ui grid" style="width: fit-content !important;">
             <div class="column eowbc_breadcrumb_font">3</div>
             <div class="column" style="text-align: left;">
-                <div class="description eowbc_breadcrumb_font">Complete</div>
+                <div class="description eowbc_breadcrumb_font"> <?php spext_lang("Complete", 'woo-bundle-choice') ?></div>
                 <div class="title eowbc_breadcrumb_font"><?php _e($preview_name); ?></div>
             </div>             
         </div>               
