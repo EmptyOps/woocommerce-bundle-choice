@@ -16,7 +16,9 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 		}
 
 		private function __construct() {
-			// no implementation.
+			parent::set_base_key("wbc_");	
+
+			parent::set_base_key_suffix($base_key_suffix);
 		}
 
 		public function should_init(){
@@ -68,7 +70,8 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 					);	
 				);
 			);
-			return $form_definition;
+			// return $form_definition;
+			return parent::get_legacy_ui_definition__( array('form_definition'=>$form_definition) );
 	    }
 	}
 }		
