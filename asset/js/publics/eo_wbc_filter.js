@@ -32,6 +32,20 @@ window.document.splugins.wbc.filters.core = function() {
 
     };
 
+	// --	and there will be one more function like should_search, which will also be private. and that will handle onle the logic of checking flags and so on like the enable_filter_table flag above 
+    var should_search = function() {
+
+    };	 
+
+    var before_search = function() {
+
+		// below before_search function need to make private 
+		// 	--	however it will continue to broadcast before search notification, and whoever interested in the before_search event should bind to that event notification 
+		// window.document.splugins.Feed.events.core.notifyAllObservers( 'filters', 'before_search' ); 
+		window.document.splugins.events.core.notifyAllObservers( 'filters', 'before_search' ); 
+
+    };	 
+
     from tv js layer -- currently from sp_tv_template js layer 
 	jQuery.fn.eo_wbc_filter_change=function(init_call=false,form_selector="form[id*='eo_wbc_filter']",render_container='.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products') 
 	var eo_wbc_filter_change_wrapper_private = function() {
@@ -156,7 +170,7 @@ window.document.splugins.wbc.filters.core = function() {
     //	published public functions 
     return {
 
-    	below before_search function need to make private 
+    	below before_search function need to make private D
     		--	however it will continue to broadcast before search notification, and whoever interested in the before_search event should bind to that event notification 
     		--	and there will be one more function like should_search, which will also be private. and that will handle onle the logic of checking flags and so on like the enable_filter_table flag above 
     		--	and the whole ajax request layer will be handled by the private instance of the eo_wbc_filter_change_wrapper function 
@@ -164,13 +178,17 @@ window.document.splugins.wbc.filters.core = function() {
     		--	and the before_search will set flags like enable_filter_table(now the name should be changed, but to maintain trace to older var names need to keep the old flga names commented right above it) and it should not be by the should_search function 
     		--	and then refactor and implement the eo_wbc_filter_change function instance of this file itself at bottom 
     			-- and then need to focus on loading stack that starts maybe from the load or ready event at the bottom of this file 
-        before_search: function() {
 
-        	init_private();
-			// window.document.splugins.Feed.events.core.notifyAllObservers( 'filters', 'before_search' ); 
-			window.document.splugins.events.core.notifyAllObservers( 'filters', 'before_search' ); 
+    	regarding events 
+    		--	the variations module would like bind to the render event of the filtrs, which would be broadcasted from the render_html function 
+    			--	so that on each render event, variations module could take care the ops related to variations swatches and gallery changes/modification that is required on each render event -- means simply the loopbox refresh will be required 
+    		 	
 
-        }, 
+		//	this function is supposed to be called by parent init layers or simply the init layers of the system so that if there are any filters js module init related ops then they are covered. and it is not related the filter_change(means search event) event but it is about initializing search filter module related ops. so yeah maybe any required core binding, event binding and so on can be invoked from this function. 
+    	init: function() {
+
+    		init_private();	
+    	}, 		
 		eo_wbc_filter_change_wrapper: function(init_call=false,form_selector="form#eo_wbc_filter,form[id*='eo_wbc_filter']",render_container='.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products',parameters={}) {
 			// //	this eo_wbc_filter.js 
 			// jQuery.fn.eo_wbc_filter_change_native= function(init_call=false,form_selector="form#eo_wbc_filter",render_container='',parameters={}) {

@@ -92,8 +92,8 @@ class Admin {
 	        }
         }        
 
-        //Initiate Orders Page
-        \eo\wbc\controllers\admin\orders\Orders::instance()->init(); 
+        //Initiate legacy admin 
+        \eo\wbc\controllers\admin\legacy_admin\Legacy_Admin::instance()->init(); 
 	
 		do_action( 'wbc_after_admin_process_request' );
 	}
