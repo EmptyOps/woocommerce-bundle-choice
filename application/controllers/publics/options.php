@@ -36,10 +36,16 @@ class Options {
 	public function variable_item( $type, $options, $args, $saved_attribute = array() ) {
 	
 		-- here we see that the different swatches templates that are supported are scattered around, but now it should be in the new template folder planned as per the templating standard 
-			--	there will be three template files that will be required for any widget that provides swatches UI 
+			--	there will be three template files that will be required for any widget that provides swatches UI -- to b 
+					--	 and in the palce of the dropdown part in below filename the input type name would change to icon, icon_dropdown, slider and so on -- to b 
 				--	sp_variations_optionsUI_dropdown_ribbon_wrapper.php 		
 				--	sp_variations_optionsUI_dropdown.php 		
 				--	sp_variations_optionsUI_dropdown_option_template_part.php 		
+			--	I think the swatches means maybe the icon template will be default and rest will be in their own folder like dropdown, icon-dropdown and so on -- to b 
+				--	and now the $args will support one more param like page_section which will work as dir so the folder structure would become single-product/variations-swatches/icon-dropdown/ -- to b 
+					--	and for extensions like darker lighter or 360 or recently purchased or diamond meta have their tempalte for image gallary then the folder structure would become single-product/image-gallery/ * /	and it would be needed for both recently purchased and the diamond meta -- to b 
+				--	and also accordingly you also need to precisely separate the below templates and put them in their owm dolers, as per above mentioned structure. do it accurately by following all the if and so on conditions below and in above function also -- to b 
+					--	and most of logic in this class also sound like the rendering logic so need to keep track of that also -- to b 
 		$product   = $args[ 'product' ];
 		$attribute = $args[ 'attribute' ];
 		$data      = '';
