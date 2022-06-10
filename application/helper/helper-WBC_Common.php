@@ -459,3 +459,15 @@ class WBC_Common {
 	}
 
 }
+
+function wbc_pr($ar, $force_debug = false, $die = false) {
+		
+	return wbc()->common->pr($ar, $force_debug, $die);
+
+}
+
+function wbc_var_dump($v, $force_debug = false,$die = false, $add_br = true) {
+		
+	return wbc()->common->var_dump($v, $force_debug, $die, $add_br);
+
+}

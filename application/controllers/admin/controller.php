@@ -68,7 +68,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 
 		// during post save 
 		// 	maybe everything will be handled by the form builder like detecting the added counter field post data and simulating based on that 
-		if( isset($_POST["sub_action"]) && $_POST["sub_action"] == "save" ) {
+		if( ( !empty($_POST) && empty(wbc()->sanitize->post("sub_action")) ) or wbc()->sanitize->post("sub_action") == "save" ) {
 
 			$args["sub_action"] = "save";
 		}
