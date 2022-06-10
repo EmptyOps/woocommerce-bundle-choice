@@ -24,4 +24,23 @@ class SP_Compatibility {
 
 	}
 
+	public function single_product_gallery_compatability(){
+
+ 	}
+
+ 	public function single_Product_variations_form_compatability(){
+
+ 	}
+
+ 	public function feed_loopbox_variations_container_compatability(){
+
+ 	}
+
+ 	public function feed_quickview_container_compatability(){
+
+ 	}
+
+ 	public function sp_variations(){
+ 		
+ 	}
 }

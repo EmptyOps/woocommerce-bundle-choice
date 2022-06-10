@@ -72,5 +72,21 @@ class SP_WBC_Compatibility extends SP_Compatibility {
 			$term_list = wbc()->wc->get_terms(apply_filters( 'wpml_object_id',$term->term_id,'category', FALSE, 'en'),'menu_order');	
 	}
 
+	public function variations_gallery_data_compatability(){
+
+	}
+
+	public function variations_gallery_render_compatability(){
+
+	}
+
+	public function variations_swatches_data_compatability(){
+
+	}
+
+	public function variations_swatches_render_compatability(){
+
+	}
+
 
 }

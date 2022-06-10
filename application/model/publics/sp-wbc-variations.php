@@ -70,25 +70,26 @@ class SP_WBC_Variations extends SP_Variations {
 
 		add_filter( 'woocommerce_available_variation',  function($variation_get_max_purchase_quantity){
 
-		}, 99, $instance,  $variation);
+		}, 99, 1);
 
 
 		add_filter( 'woocommerce_ajax_variation_threshold',  function($int){
 
-		}, 99, $product);
+		}, 99, 1);
 
 		
 		add_filter( 'woocommerce_dropdown_variation_attribute_options_html',  function($html){
 
-		}, 99, $args)
+		}, 99, 1)
 
 		
 		add_filter( 'script_loader_tag',  function($tag){
 
-		}, 99, $handle, $src)
+		}, 99, 1)
 
 		return $sp_variations_data;
 	}
+ 
 
 
 }
