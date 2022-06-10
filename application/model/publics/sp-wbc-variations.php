@@ -68,8 +68,28 @@ class SP_WBC_Variations extends SP_Variations {
 						--	one thing that just came to the mind is that we may need to trigger the legacy variations change event when our sp_variations attribute widgets option elements like(icon panel, slider or dropdown etc. does change) 
 							--	so far have not noticed that but m must have managed it somewhere because without that the prices would not be changing 
 
+		add_filter( 'woocommerce_available_variation',  function($variation_get_max_purchase_quantity){
+
+		}, 99, 1);
+
+
+		add_filter( 'woocommerce_ajax_variation_threshold',  function($int){
+
+		}, 99, 1);
+
+		
+		add_filter( 'woocommerce_dropdown_variation_attribute_options_html',  function($html){
+
+		}, 99, 1)
+
+		
+		add_filter( 'script_loader_tag',  function($tag){
+
+		}, 99, 1)
+
 		return $sp_variations_data;
 	}
+ 
 
 
 }

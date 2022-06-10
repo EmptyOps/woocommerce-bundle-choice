@@ -68,6 +68,39 @@ class Eowbc_Model {
         return $res;
 	}
 
+	public function activate_deactivate( $ids, $saved_tab_key ,$by_key=false) {
+		
+		$res = array();
+		$res["type"] = "success";
+	    $res["msg"] = "";
+	    
+    	$key = $saved_tab_key;
+    	
+    	$key_clean = ((!empty($this->tab_key_prefix) and strpos($key,$this->tab_key_prefix)===0)?substr($key,strlen($this->tab_key_prefix)):$key);
+
+		$filter_data = unserialize(wbc()->options->get_option_group('filters_'.$key,"a:0:{}"));
+		$filter_data_updated = array();
+        
+        $delete_cnt = 0;
+        foreach ($filter_data as $fdkey=>$item) {
+            if($by_key and in_array($fdkey, $ids)){
+            	$filter_data[$fdkey][$key_clean."_add_enabled"]=1;
+                $delete_cnt++;
+            } 
+            // since it was generating undefined index warning, added isset at first in below condition, but I believe this condition has no use and should be removed. 
+            elseif (isset($item[$key."_filter"]) && in_array($item[$key."_filter"], $ids)) { 
+                //$filter_data_updated[] = $item; 
+                $filter_data[$fdkey][$key_clean."_add_enabled"]=1;
+                $delete_cnt++;
+            }            
+        }
+
+        wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data) );
+        $res["msg"] = $delete_cnt . " " . eowbc_lang('record(s) activated'); 
+
+        return $res;
+	}
+
 	// commented due to param mismatch, in child class fix the number of param and then uncomment it
 	// public function activate( $ids, $saved_tab_key ,$by_key=false) {
 
