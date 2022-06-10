@@ -21,3 +21,15 @@ class WBC_Currency {
 		return number_format( round( $price, 0 ) - 0.01, $rounding );	
 	}
 }
+
+function wbc_to_price($amount, $rounding = 2){
+
+	return wbc()->currency->to_price($amount, $rounding);
+
+}
+
+function wbc_formatted_price($price, $rounding){
+
+	return wbc()->currency->formatted_price($price, $rounding);
+
+}

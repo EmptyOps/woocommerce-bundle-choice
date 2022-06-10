@@ -471,3 +471,111 @@ function wbc_var_dump($v, $force_debug = false,$die = false, $add_br = true) {
 	return wbc()->common->var_dump($v, $force_debug, $die, $add_br);
 
 }
+
+function wbc_free_memory( &$var ) {
+		
+	return wbc()->common->free_memory($var);
+
+}
+
+function wbc_consistsOfTheSameValues(array $a, array $b, bool $strict = false) {
+	   
+   	return wbc()->common->consistsOfTheSameValues($a, $b, $strict);
+}
+
+function wbc_nonZeroEmpty(&$var) {
+
+	return wbc()->common->nonZeroEmpty($var);
+}
+
+function wbc_createUniqueId() {
+
+	return wbc()->common->createUniqueId();
+
+}
+
+function wbc_stringToKey( $str )
+{
+
+	return wbc()->common->stringToKey($str);
+
+}
+
+function wbc_createUniqueHashId(array $a, array $fields_to_use, string $prefix = "") {
+
+	return wbc()->common->createUniqueHashId($a, $fields_to_use, $prefix);
+
+}
+
+function wbc_array_column($input = null, $columnKey = null, $indexKey = null) { 
+    
+	return wbc()->common->array_column($input, $columnKey, $indexKey);
+    
+}
+
+function wbc_http_query($param){
+
+	return wbc()->common->http_query($param);
+
+}
+
+function wbc_is_ajax(){
+
+	return wbc()->common->is_ajax();
+
+}
+
+function wbc_is_object($obj){
+
+	return wbc()->common->is_object($obj);
+
+}
+
+function wbc_isEmptyArr($arr){
+
+	return wbc()->common->isEmptyArr($arr);
+
+}
+
+function current_theme_key() {
+	
+	return wbc()->common->current_theme_key();
+
+}
+
+function wbc_site_url($slug='', $query_string=''){
+
+	return wbc()->common->site_url($slug, $query_string);
+
+}
+
+function wbc_makeNestedArray($keys, $value, $target_array=null)
+{
+
+    return wbc()->common->makeNestedArray($keys, $value, $target_array);
+
+}
+
+function wbc_arrValuesToNestedArr($arr, $target_value, $target_array=null) { 
+
+	return wbc()->common->arrValuesToNestedArr($arr, $target_value, $target_array);
+
+}
+
+function wbc_special_characters() {
+
+	return wbc()->common->special_characters();
+
+}
+
+function wbc_key_to_title( $key ) {
+
+	return wbc()->common->key_to_title($key);
+
+}
+
+function truncate($str,$limit) {
+
+	return wbc()->common->truncate($str,$limit);
+	
+}
