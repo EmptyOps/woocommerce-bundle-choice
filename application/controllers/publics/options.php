@@ -34,7 +34,12 @@ class Options {
 	}
 
 	public function variable_item( $type, $options, $args, $saved_attribute = array() ) {
-			
+	
+		-- here we see that the different swatches templates that are supported are scattered around, but now it should be in the new template folder planned as per the templating standard 
+			--	there will be three template files that will be required for any widget that provides swatches UI 
+				--	sp_variations_optionsUI_dropdown_ribbon_wrapper.php 		
+				--	sp_variations_optionsUI_dropdown.php 		
+				--	sp_variations_optionsUI_dropdown_option_template_part.php 		
 		$product   = $args[ 'product' ];
 		$attribute = $args[ 'attribute' ];
 		$data      = '';
@@ -168,6 +173,14 @@ class Options {
 
 	public function run() {
 		
+		--	as planned the flows and expecially the templating flows the below layers will be from their own templating layers 
+			--	and it should be rendered from the model as per the whole rendering flow including the render_ui function -- to d 
+				--	from the optionsUI widget model -- to d 
+					--	so create the model class with similar flow how we have the filter widget model class, and in this case I think the core class is not necessary but will do in future if required. and the filter widget model either does not have the core class -- to d
+						INVALID no more creating the optionsUI widget model class. so instead single product model class will be used. and on the category page flow the feed model class will be used.  
+					--	however the single product controller(if wbc do not have it yet then create one) should call directly the single product model of wbc for flows which are not in particular related to optionsUI or firstly it is to be taken care of by the page layers and then from there it can call the optionsUI layers - NOTE
+			--	and the CSS need to be managed in a way that even if multiple templates of this free semantic UI is used means for one than attributes this template is used which would be normal where the free ui is used, then in such cases somehow figure out that the CSS is only loaded once -- to d 
+				--	if there are no other way then simply use constant, and it is important to do due to the SEO concerns -- to d 
 		add_action('wp_footer',function(){
 			wbc()->theme->load('css','product');
         	wbc()->theme->load('js','product');
@@ -387,6 +400,7 @@ class Options {
 	        				$('#wbc_variation_toggle').trigger('click');
 	        			<?php endif; ?>
 
+	        			--	below two click events would be implemented in the core variations js module, in that case it will be remove here 
 	        			$('.variable-item').on('click',function(){
 	        				var target_selector = $('#'+$(this).data('id'));
 	        				target_selector.val($(this).data('value'));
@@ -432,6 +446,9 @@ class Options {
 				}				
 			}
 		});
+		
+		--	and from where the below flow will be layered? I guess it would be somewhere from the optionsUI widget model that is planned -- check and confirm 
+			--	either way make use of the below and/or the hook that other plugins we are exploring are if they are mature enough or mix of both 	
 		add_filter( 'woocommerce_dropdown_variation_attribute_options_html',function($html, $args){
                               
             if ( apply_filters( 'default_wbc_variation_attribute_options_html', false, $args, $html ) ) {
@@ -452,6 +469,8 @@ class Options {
 
             $product_id = $args[ 'product' ]->get_id();
             
+        	--	and we can make use of the below flow in our fetch data function layers planned 
+        		--	and keep in mind that we had to take care of two data layers(or response that we need to sent to two different place one is variations image gallery and the second is the variations form) one for variations image gallery and the second is for the variations form 
             $attributes = $args[ 'product' ]->get_variation_attributes();
             $variations = $args[ 'product' ]->get_available_variations();
 

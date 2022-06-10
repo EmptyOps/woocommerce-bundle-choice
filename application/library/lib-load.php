@@ -19,14 +19,14 @@ if(!class_exists('WBC_Loader')) {
 			//	no implemetations 
 		}
 
-		public function asset($type,$path,$param = array(),$version="",$load_instantly=false) {
+		public function asset($type,$path,$param = array(),$version="",$load_instantly=false,$is_prefix_handle=false) {
 
 			if(!apply_filters('wbc_load_asset_filter',true,$type,$path,$param,$version,$load_instantly)) {
 				return true;
 			}
 
 			$_path = '';
-			$_handle = str_replace(' ','-',str_replace('/','-',$path));			
+			$_handle = ( $is_prefix_handle ? "sp_wbc_" : "" ) . str_replace(' ','-',str_replace('/','-',$path));			
 			switch ($type) {
 				case 'css':
 					$_path = constant('EOWBC_ASSET_URL').'css'.'/'.$path.'.css';

@@ -45,28 +45,28 @@ class Product {
             }, 10, 1 );
 
 
-
             //if data available at _GET then add to out custom cart
             if(!empty(wbc()->sanitize->get('eo_wbc_add_to_cart_preview'))) {                
                 $this->add2cart();
                 $cart_url = wbc()->wc->eo_wbc_get_cart_url();
-                
+
                 do_action('sp_wbc_after_add2cart_redirect');
-                if(strpos($cart_url,'?')!==false){
+                if(strpos($cart_url,'?')!==false) {
                     $cart_url_parts = explode('?', $cart_url);
-                    $cart_url = explode('?', $cart_url)[0];
-                    
+                    $cart_url = $cart_url_parts[0];
+
                     if (!empty($cart_url_parts[1])) {
                         $url_params = false;
-                        parse_str( $cart_url_parts[1],$url_params );
+                        parse_str( $cart_url_parts[1],$url_params );                       
+
+                        $allowed_params = array('lang'=>'lang','page_id'=>'page_id');
+                        $url_params = array_intersect_key($url_params,$allowed_params);
                         
-                        if(!empty($url_params['lang'])) {
-                            $cart_url.='?lang='.$url_params['lang'];
-                        }
+                        $cart_url = site_url('?'.http_build_query($url_params));  
                     }
-                }
-                
+                }                
                 exit(wp_redirect($cart_url));
+                die();
             }
 
             if(!empty(wbc()->sanitize->get('CART'))) {
@@ -179,13 +179,44 @@ class Product {
 
         add_filter('woocommerce_get_price_html',function($price,$product) use($first,$second,$first_parent,$second_parent){
             
-            //var_dump($product->get_id(), $second->get_id(),$first->get_id());
+            // var_dump($product->get_id(), $second->get_id(),$first->get_id());
 
-            if(!empty($second) and !empty($first) and ($product->get_id() === $second_parent->get_id()) ) {
-                return wc_price( $first->get_price() + $second->get_price() );
+            if(!empty($second) and !empty($first)) {   
+                
+                $product_var_id = !empty($product) and wbc()->wc->is_variation_object($product) ? $product->get_parent_id() : $product->get_id();
+                $second_parent_var_id = !empty($second_parent) and wbc()->wc->is_variation_object($second_parent) ? $second_parent->get_parent_id() : $second_parent->get_id();
+
+                if( $product_var_id === $second_parent_var_id ) {
+                    return wc_price( $first->get_price() + $second->get_price() );
+                }
             } 
             return $price;
         },10,2);
+        
+        /*add_filter('woocommerce_product_variation_get_regular_price', function($price, $product){
+            echo "<pre>";
+            print_r($price);
+            echo"<pre>";
+            return $price;
+        },10,3);
+        add_filter('woocommerce_product_variation_get_price', function($price, $product){
+            echo "22";
+
+            return $price;
+        },10,3);
+
+        // Variations (of a variable product)
+        add_filter('woocommerce_variation_prices_price', function($price, $variation, $product){
+            echo "33";
+
+            return $price;
+        },10,4);
+        add_filter('woocommerce_variation_prices_regular_price', function($price, $variation, $product){
+            echo "44";
+
+            return $price;
+        },10,4);*/
+
         //remove options
         add_filter('woocommerce_product_single_add_to_cart_text', function() {
             return '...';
@@ -798,7 +829,7 @@ class Product {
                 if($return_link) {
                     return $url;
                 }
-
+                
                 return header("Location: {$url}");
                 wp_die();
                 //wp_safe_redirect($url ,301 );               

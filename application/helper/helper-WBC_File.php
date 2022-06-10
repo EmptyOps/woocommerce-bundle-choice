@@ -38,10 +38,15 @@ class WBC_File {
 	 */
 	public  function file_read( $filepath )
 	{
-		$fp = fopen($filepath, "r");
+		$content = null;
 
-		$content = fread($fp, filesize($filepath));
-		fclose($fp);
+		if( $this->file_exists($filepath) ) {
+			
+			$fp = fopen($filepath, "r");
+
+			$content = fread($fp, filesize($filepath));
+			fclose($fp);
+		}
 
 		return $content;
 	}
@@ -64,6 +69,48 @@ class WBC_File {
 
 	public function unlink($filepath) {
 		return unlink( $filepath );
+	}
+
+	//	not supporting recursion yet, and when we support recursion as a simple precaution GET based param or something of that sort that requires devs to specify in URL or so would save from disasters some time. but anyway the ultimate solution is always follow the backup and workflow policies accurately like working max on staging domain and never even debug such things on live. so debug at max on staging only. 
+	public function list_files( $in_dir, $filter_by=null ) {
+
+		$files = array();
+		$source = $in_dir;
+
+		$dir = opendir( $source );
+		while( false !== ( $file = readdir( $dir ) ) )
+		{
+			if ( ( $file != '.' ) && ( $file != '..' ) )
+			{
+				if( is_dir( $source . '/' . $file ) )
+				{
+
+					//	implement recursion here 
+				}
+				else
+				{
+
+					if( empty($filter_by) or strpos($file, $filter_by) !== FALSE ) {
+
+						$files[] = $source . '/' . $file;
+					}
+				}
+			}
+		}
+		closedir($dir);
+
+		return $files;
+	}
+
+	//	not supporting recursion yet, and when we support recursion as a simple precaution GET based param or something of that sort that requires devs to specify in URL or so would save from disasters some time. but anyway the ultimate solution is always follow the backup and workflow policies accurately like working max on staging domain and never even debug such things on live. so debug at max on staging only. 
+	public function delete_files( $in_dir, $filter_by=null ) {
+		
+		$files = $this->list_files( $in_dir, $filter_by );
+
+		foreach ($files as $key => $file) {
+
+			$this->unlink($file);				
+		}
 	}
 
 	public function save_json($filepath, $data) {

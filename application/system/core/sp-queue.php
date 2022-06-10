@@ -144,11 +144,16 @@ class SP_Queue {
 
 	private function set_info($queue_key, $info_entry){
 		// should maintain list entry of last 10 udpates? maybe yes
+		$info_keep_size = 10; 
+
+		if( wbc()->sanitize->get('is_test') == 1 ) {
+			$info_keep_size = 5000;
+		}			
 
 		$key = 'queue_info___'.$queue_key;
 
 		$queue_data = unserialize(wbc()->options->get_option_group('queue_'.$key,"a:0:{}"));
-		if( sizeof($queue_data) >= 10 ) {
+		if( sizeof($queue_data) >= $info_keep_size ) {
 			// Make sure to reset the array's current index
 			reset($queue_data);
 

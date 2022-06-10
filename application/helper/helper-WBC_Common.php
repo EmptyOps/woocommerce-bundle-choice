@@ -19,7 +19,7 @@ class WBC_Common {
 
 		// ACTIVE_TODO currently with new upgraded flows we are just using the old category structure, but that need to be revisted and revised deeply while taking in to considerations different facts that as per the old method we are just using the same root diamond category for all apis(for old system if it was about the natural and lab diamond coming from same api like vdb then it was implicit as there was only one API instance being created for fetching any kind of feed from the one particular API but now with the new system that is not true as to fetch different category/feeds the different API instances are created), there are data mapping fields for the lab and gemstone category which we are not sure how much depended on in the old system, there are search layers which works in the old system with this mix of root category, lab category and so on but not sure how this search layers take care of it so just need to revisit that flow make it in sync with data funnel flows of the new updrade from bottom up. -- to h HIGH PRIORITY --	even in old system it works with the two different APIs csv-ftp/csv-ftp-2 being set with two diff categories diamond & lab diamond and it works but that is because there is no category check on the front end category page layers of these two class and so it comes with the side effect that any search event would be excuted twice means for each class and returns results and some how on frontend either the wrong results would be shown or no product found result would be shown on the inactive tab but since that was hidden so that went unnoticed I guess. -- anyway for now we are also temporarily setting the diamond category as main category in both APIs, it is other way around of what is done in older system but it will let the APIs feed layer to be accessed and in this case also it will be two search event and the other will not be noticed on inactive tab but we must fix it asap within 2-3 days otherwise it is massive performance overhead and slowdown the response by a second or so. 
 		// 	ACTIVE_TODO and at this point not sure how the default search means without any search filters applied would behave for the sub categories like lab category which route from the filter set tab -> _current_category (_GET) + _category (_GET) -> search filters prepare query -> query execution layers, so this is high priority -- to h HIGH PRIORITY -- when the filter set tab is selected that belongs to some other sub category like the lab category then the filter js layer will pass the _current_category and especially the _category field accordingly and that will take care of it. 
-		// 		ACTIVE_TODO and since it is business logic of the application layer, it should not be in the wc helper but think about it if this common helper is right place for it or if it should be moved to some appropriate module -- it seems that the appropriate layer it would be the routing module. so let me work on the definition of the module and then you create the initial prorotype of the class and move such functions there, but yeah we can not change calls system wide so from this common function that rounting functions called -- to s HIGH PRIORITY 
+		// 		ACTIVE_TODO and since it is business logic of the application layer, it should not be in the wc helper but think about it if this common helper is right place for it or if it should be moved to some appropriate module -- it seems that the appropriate layer it would be the routing module. so let me work on the definition of the module and then you create the initial prorotype of the class and move such functions there, but yeah we can not change calls system wide so from this common function that rounting functions called -- to s or to d HIGH PRIORITY 
 		$in_category = apply_filters('eoowbc_helper_common_get_category_in_category',$in_category);		
 		$page = apply_filters('eoowbc_helper_common_get_category_page',$page);
 		$post_id = apply_filters('eoowbc_helper_common_get_category_post_id',$post_id);
@@ -111,10 +111,15 @@ class WBC_Common {
 
 	}
 
-	public function var_dump($v,$force_debug = false,$die = false) {
+	public function var_dump($v,$force_debug = false,$die = false,$add_br = true) {
 		//TODO yet to implement optional arg force_debug
 
 		var_dump($v); 
+
+		if( $add_br )
+		{
+			echo "<br>";
+		}
 
 		if( $die )
 		{
@@ -332,6 +337,10 @@ class WBC_Common {
     	return http_build_query($param);
     }
 
+    public function is_ajax(){
+    	return wp_doing_ajax();
+    }
+
     public function is_object($obj){
     	return !empty($obj) && is_object($obj);
     }
@@ -348,6 +357,12 @@ class WBC_Common {
 		wp_register_script('eowbc_fomantic_js',constant('EOWBC_ASSET_URL').'js/fomantic/semantic.min.js');
 		wp_enqueue_script('eowbc_fomantic_js','',array('jquery'),'',true);		
     }
+    
+    public function current_theme_key() {
+		$stylesheet     = get_stylesheet();
+	    $theme_root     = get_theme_root( $stylesheet );
+		return basename( $theme_root )."___".basename( $stylesheet );
+	}
 
     public function site_url($slug='', $query_string=''){
     	$url = site_url( $slug );
@@ -434,5 +449,25 @@ class WBC_Common {
 		return $key;
 
 	}
+
+	public function truncate($str,$limit) {
+
+		if(strlen($str) < $limit)
+			return $str;
+		else
+			return  substr($str,0,$limit)."...";
+	}
+
+}
+
+function wbc_pr($ar, $force_debug = false, $die = false) {
+		
+	return wbc()->common->pr($ar, $force_debug, $die);
+
+}
+
+function wbc_var_dump($v, $force_debug = false,$die = false, $add_br = true) {
+		
+	return wbc()->common->var_dump($v, $force_debug, $die, $add_br);
 
 }
