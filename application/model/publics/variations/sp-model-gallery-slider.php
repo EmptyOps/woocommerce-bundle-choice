@@ -1,13 +1,15 @@
 <?php
-/**
- *	SP Compatibility class 
- */
+/*
+*	SP Model Gallery Slider class 
+*/
 
-namespace eo\wbc\system\core;
+namespace eo\sp_tv\model\publics\variations;
 
 defined( 'ABSPATH' ) || exit;
 
-class SP_Compatibility {
+use eo\wbc\system\core\publics\Eowbc_Base_Model_Publics ;
+
+class SP_Model_Gallery_Slider extends Eowbc_Base_Model_Publics {
 
 	private static $_instance = null;
 
@@ -23,5 +25,4 @@ class SP_Compatibility {
 	public function __construct() {
 
 	}
-
-}
+}	

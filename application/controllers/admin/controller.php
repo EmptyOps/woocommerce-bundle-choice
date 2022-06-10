@@ -61,6 +61,8 @@ class Controller extends \eo\wbc\controllers\Controller {
 		// To do here.
 	}
 
+
+
 	// ACTIVE_TODO need to refactor get_form_defination function on all admin controllers including the theme admin controllers and ensure one flow only which like below a static function with args param -- to s
 	// 	ACTIVE_TODO but yeah __ at last in the name should be dropped. -- to s
 			// ACTIVE_TODO and there is spell mistake type in above and below function need to fix that too, to bring it in like with function defs in all controllers -- to s 
@@ -81,6 +83,10 @@ class Controller extends \eo\wbc\controllers\Controller {
 		// and then the rest just will be handled by form builder 
 		// 	and that will return the processed form definition 
 		return \eo\wbc\model\admin\Form_Builder::instance()->das_form_definition_support($args);	
+	}
+
+	public function get_legacy_ui_definition($section, $args=null){
+		return $this->get_form_defination__($args);
 	}
 
 	/*public function get_admin_form($args = array()){
@@ -398,4 +404,6 @@ class Controller extends \eo\wbc\controllers\Controller {
 
 		return $controls_data;
 	}
+
+	
 }

@@ -1,9 +1,9 @@
 <?php
-namespace eo\wbc\controllers\admin\legacy_admin;
+namespace eo\wbc\controllers\admin\legacy;
 
 defined( 'ABSPATH' ) || exit;
 
-class Legacy_Admin
+class Legacy_Admin extends \eo\wbc\controllers\admin\Controller
 {
 
     private static $_instance = null;
@@ -20,6 +20,9 @@ class Legacy_Admin
     }   
 
     public function init() {
+
+        //Initiate Tiny_features Page
+        \eo\wbc\controllers\admin\menu\page\Tiny_features::instance()->init(array("is_legacy_admin" => true));
 
          //Initiate Orders Page
         \eo\wbc\controllers\admin\orders\Orders::instance()->init(); 
