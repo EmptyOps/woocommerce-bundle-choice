@@ -258,22 +258,14 @@ class Tiny_Features extends Eowbc_Model {
 		} else {
 			delete_post_meta( $variation_id, 'sp_variations_data' );
 		}
+
+		apply_filters('sp_variations_data_before_save', '');
 		
 	}
 
 	public function render_ui($ui, $args = null) {
-
-		add_filter( 'body_class',  function($classes){
-
-		}, 99, 1);
 	
-		// apply_filters( 'body_class', string[] $classes, string[] $class );
-
-		add_filter( 'post_class',  function($classes){
-
-		}, 99, 1); 
-
-		// apply_filters( 'post_class', string[] $classes, string[] $class, int $post_id );
+		
 	}
 
 

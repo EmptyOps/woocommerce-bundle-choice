@@ -28,6 +28,35 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 	public function render_ui(){
 
+		$this->render_variations_ui();
+
+		add_filter( 'body_class',  function($classes){
+
+		}, 99, 1);
+	
+		apply_filters( 'body_class', string[] $classes, string[] $class );
+
+		add_filter( 'post_class',  function($classes){
+
+		}, 99, 1); 
+
+		// apply_filters( 'post_class', string[] $classes, string[] $class, int $post_id );
+
+	}
+
+	public function render_variations_ui() {
+
+		$this->render_image_gallery();
+		$this->render_variations_swatches();
+
+	}
+
+	public function render_image_gallery() {
+
+	}
+
+	public function render_variations_swatches() {
+
 	}
 	public function load_asset(){
 
