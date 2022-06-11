@@ -59,4 +59,16 @@ class SP_Attribute extends SP_Entity {
 		return $this->platform_name;
 	}
 
+	public function attribute_display_name(){
+
+	}
+
+	public function option_terms(){
+
+		add_action( 'woocommerce_product_option_terms', function($attribute_taxonomy){
+
+		}, 99, 1 );
+
+	}
+
 }
