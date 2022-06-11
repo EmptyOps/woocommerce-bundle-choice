@@ -263,17 +263,17 @@ class Tiny_Features extends Eowbc_Model {
 
 	public function render_ui($ui, $args = null) {
 
-		add_filter( 'body_class',  function(){
+		add_filter( 'body_class',  function($classes){
 
-		})
+		}, 99, 1);
 	
-		apply_filters( 'body_class', string[] $classes, string[] $class );
+		// apply_filters( 'body_class', string[] $classes, string[] $class );
 
-		add_filter( 'post_class',  function(){
+		add_filter( 'post_class',  function($classes){
 
-		}) 
+		}, 99, 1); 
 
-		apply_filters( 'post_class', string[] $classes, string[] $class, int $post_id );
+		// apply_filters( 'post_class', string[] $classes, string[] $class, int $post_id );
 	}
 
 
