@@ -70,7 +70,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 
 		// during post save 
 		// 	maybe everything will be handled by the form builder like detecting the added counter field post data and simulating based on that 
-		if( isset($_POST["sub_action"]) && $_POST["sub_action"] == "save" ) {
+		if( ( !empty($_POST) && empty(wbc()->sanitize->post("sub_action")) ) or wbc()->sanitize->post("sub_action") == "save" ) {
 
 			$args["sub_action"] = "save";
 		}
@@ -102,7 +102,8 @@ class Controller extends \eo\wbc\controllers\Controller {
 			'span'=>array('text','color','back_color','font_family','font_size','visibility'),
 			'header'=>array('text','color','back_color','font_family','font_size','visibility'),
 			'sub_header'=>array('text','color','back_color','font_family','font_size','visibility'),
-			'checkbox'=>array('checkbox','visibility'),
+			'checkbox'=>array('checkbox'),
+			'text'=>array('text','visibility'),
 			'image'=>array('height','width','image','visibility'),
 			'img'=>array('height','width','image','visibility'),
 			'button'=>array('text','color','back_color','font_family','font_size','radius','visibility'),
@@ -156,11 +157,12 @@ class Controller extends \eo\wbc\controllers\Controller {
 				echo "</pre>";
 				die();*/
 
+				// lup attr 
+
 				if(!empty($form_value[$key][2]) and  !empty($form_value[$key][2]['type'])) {
 
 					$control_element = $this->default_uis($form_value[$key][2]['type'],$excep_controls);
 					if(empty($control_element)/* and $form_value['type'] === 'hidden'*/){
-
 						$control_element = array($form_value[$key][2]['type']);
 					}
 
@@ -283,8 +285,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 
 					/*$controls[$form_key.'_form_segment'] = array(
 						'label'=> $form_value[$key][0],
-						'typ
-						e'=>'devider',
+						'type'=>'devider',
 					);*/
 					
 					$form_control_key = '';

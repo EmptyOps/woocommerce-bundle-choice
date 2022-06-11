@@ -64,12 +64,15 @@ class Options {
 							$image_url = get_term_meta( $selected_item->term_id, 'wbc_attachment', true );
 							
 							if($type=='dropdown_image' and !empty($image_url)) {
-								$selected_item =  sprintf( '<img class="ui mini avatar image" src="%s">%s', esc_url( $image_url ),esc_attr( $selected_item->name ));
+								--- move to woo-bundle-choice/templates/single-product/variations-swatches/dropdown_image/sp_variations_optionsUI-dropdown_image-option_template_part.php file
+								/*$selected_item =  sprintf( '<img class="ui mini avatar image" src="%s">%s', esc_url( $image_url ),esc_attr( $selected_item->name ));*/
 								
 							} elseif ($type=='dropdown_image_only' and !empty($image_url)) {
-								$selected_item =  sprintf( '<img class="ui mini avatar image" src="%s">', esc_url( $image_url ));
+								--- move to /woo-bundle-choice/templates/single-product/variations-swatches/dropdown_image_only/sp_variations_optionsUI-dropdown_image_only-option_template_part.php file 
+								/*$selected_item =  sprintf( '<img class="ui mini avatar image" src="%s">', esc_url( $image_url ));*/
 							} else {
-								$selected_item =  sprintf( '%s',esc_attr( $selected_item->name ));
+								move to /woo-bundle-choice/templates/single-product/variations-swatches/dropdown/sp_variations_optionsUI-dropdown-option_template_part.php file
+								/*$selected_item =  sprintf( '%s',esc_attr( $selected_item->name ));*/
 							}
 						} else {
 							$selected_item ='Choose an option';	
@@ -77,13 +80,17 @@ class Options {
 					} else{
 						$selected_item ='Choose an option';
 					}
-					$data.=sprintf( '<div class="ui fluid selection dropdown" style="min-height: auto;">
+					----- move to woo-bundle-choice/templates/single-product/variations-swatches/sp_variations_optionsUI-dropdown-image-image_only-ribbon_wrapper.php ma
+					/*$data.=sprintf( '<div class="ui fluid selection dropdown" style="min-height: auto;">
 							  <input type="hidden" name="attribute_%s" data-attribute_name="attribute_%s" data-id="%s">
 							  <i class="dropdown icon"></i>
 							  <div class="default text">%s</div>
-							  <div class="menu">',esc_attr( $attribute ),esc_attr( $attribute ),esc_attr( $attribute ),$selected_item);
+							  <div class="menu">',esc_attr( $attribute ),esc_attr( $attribute ),esc_attr( $attribute ),$selected_item);*/
 				}
-				foreach ( $terms as $term ) {
+
+
+				--- move to woo-bundle-choice/templates/single-product/variations-swatches/sp_variations_optionsUI-dropdown-image-image_only.php ma
+				/*foreach ( $terms as $term ) {
 					if ( in_array( $term->slug, $options ) ) {
 						$selected_class = ( sanitize_title( $args[ 'selected' ] ) == $term->slug ) ? 'selected' : '';
 						
@@ -100,11 +107,12 @@ class Options {
 						}						
 						$data .= '</li>';
 					}
-				}
+				}*/
 
-				if(in_array($type,array('dropdown_image','dropdown_image_only','dropdown'))) {
+				----- move to woo-bundle-choice/templates/single-product/variations-swatches/sp_variations_optionsUI-dropdown-image-image_only-ribbon_wrapper.php ma
+				/*if(in_array($type,array('dropdown_image','dropdown_image_only','dropdown'))) {
 					$data.=sprintf('</div></div>');
-				}
+				}*/
 			}
 		}
 

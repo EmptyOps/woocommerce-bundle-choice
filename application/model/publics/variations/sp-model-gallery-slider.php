@@ -3,7 +3,7 @@
 *	SP Model Gallery Slider class 
 */
 
-namespace eo\sp_tv\model\publics\variations;
+namespace eo\wbc\model\publics\variations;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -23,6 +23,17 @@ class SP_Model_Gallery_Slider extends Eowbc_Base_Model_Publics {
 	}
 
 	public function __construct() {
+
+	}
+	public function get_data($for_section="default", $args=null) {
+
+	}
+
+	public function render_ui(){
+		
+
+	}
+	public function load_asset(){
 
 	}
 }	

@@ -201,6 +201,9 @@ if(!class_exists('SP_Plugin_Index_Class') ) {
 			// defined('EOWBC_TEMPLATE_DIR') || define('EOWBC_TEMPLATE_DIR', constant('EOWBC_DIRECTORY').'application/view/');
 			defined( $singleton_functionUpper.'_TEMPLATE_DIR') || define($singleton_functionUpper.'_TEMPLATE_DIR', method_exists($this->SP_Extension, 'TEMPLATE_DIR') ? $this->SP_Extension->TEMPLATE_DIR() : constant($singleton_functionUpper.'_DIRECTORY').'application/view/' );
 
+			//new _TEMPLATE_DIR
+			defined( $singleton_functionUpper.'_TEMPLATE_DIR_EXTENDED') || define($singleton_functionUpper.'_TEMPLATE_DIR_EXTENDED', method_exists($this->SP_Extension, 'TEMPLATE_DIR_EXTENDED') ? $this->SP_Extension->TEMPLATE_DIR() : constant($singleton_functionUpper.'_DIRECTORY').'templates/' );
+
 			// defined('EOWBC_LOG_DIR') || define('EOWBC_LOG_DIR', constant('EOWBC_ASSET_DIR').'logs/');
 
 			// defined('EOWBC_ICON') || define('EOWBC_ICON', constant('EOWBC_ASSET_URL').'icon/mini.png');

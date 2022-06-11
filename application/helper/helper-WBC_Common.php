@@ -111,10 +111,15 @@ class WBC_Common {
 
 	}
 
-	public function var_dump($v,$force_debug = false,$die = false) {
+	public function var_dump($v,$force_debug = false,$die = false,$add_br = true) {
 		//TODO yet to implement optional arg force_debug
 
 		var_dump($v); 
+
+		if( $add_br )
+		{
+			echo "<br>";
+		}
 
 		if( $die )
 		{
@@ -122,6 +127,30 @@ class WBC_Common {
 		}
 
 	}
+
+	///////////// 14-05-2022 -- @drashti /////////////
+	public function file_get_contents($path, $path_separator = 'woo-bundle-choice', $source_path = null) {
+        $file_bits = file_get_contents($path);
+
+        if(empty($file_bits)){
+            $tmpA = explode($path_separator, $path);
+            $newpath = null;
+            if(empty($source_path)){
+ 				$newpath = constant('EOWBC_DIRECTORY').$tmpA[1];
+            }
+            else{
+            	$newpath = constant($source_path).$tmpA[1];
+            }
+           
+            $fs = fopen ($newpath, 'rb');
+            $f_size=filesize ($newpath);
+            $file_bits= fread ($fs, $f_size);
+            fclose ($fs);
+        }
+        return $file_bits;
+	}
+	//////////////////////////////////////////////////
+
 
 	public function free_memory( &$var ) {
 		//TODO do research and implement most appropriate approach, in case, anything is not good
@@ -308,6 +337,10 @@ class WBC_Common {
     	return http_build_query($param);
     }
 
+    public function is_ajax(){
+    	return wp_doing_ajax();
+    }
+
     public function is_object($obj){
     	return !empty($obj) && is_object($obj);
     }
@@ -324,6 +357,12 @@ class WBC_Common {
 		wp_register_script('eowbc_fomantic_js',constant('EOWBC_ASSET_URL').'js/fomantic/semantic.min.js');
 		wp_enqueue_script('eowbc_fomantic_js','',array('jquery'),'',true);		
     }
+    
+    public function current_theme_key() {
+		$stylesheet     = get_stylesheet();
+	    $theme_root     = get_theme_root( $stylesheet );
+		return basename( $theme_root )."___".basename( $stylesheet );
+	}
 
     public function site_url($slug='', $query_string=''){
     	$url = site_url( $slug );
@@ -411,4 +450,132 @@ class WBC_Common {
 
 	}
 
+	public function truncate($str,$limit) {
+
+		if(strlen($str) < $limit)
+			return $str;
+		else
+			return  substr($str,0,$limit)."...";
+	}
+
+}
+
+function wbc_pr($ar, $force_debug = false, $die = false) {
+		
+	return wbc()->common->pr($ar, $force_debug, $die);
+
+}
+
+function wbc_var_dump($v, $force_debug = false,$die = false, $add_br = true) {
+		
+	return wbc()->common->var_dump($v, $force_debug, $die, $add_br);
+
+}
+
+function wbc_free_memory( &$var ) {
+		
+	return wbc()->common->free_memory($var);
+
+}
+
+function wbc_consistsOfTheSameValues(array $a, array $b, bool $strict = false) {
+	   
+   	return wbc()->common->consistsOfTheSameValues($a, $b, $strict);
+}
+
+function wbc_nonZeroEmpty(&$var) {
+
+	return wbc()->common->nonZeroEmpty($var);
+}
+
+function wbc_createUniqueId() {
+
+	return wbc()->common->createUniqueId();
+
+}
+
+function wbc_stringToKey( $str )
+{
+
+	return wbc()->common->stringToKey($str);
+
+}
+
+function wbc_createUniqueHashId(array $a, array $fields_to_use, string $prefix = "") {
+
+	return wbc()->common->createUniqueHashId($a, $fields_to_use, $prefix);
+
+}
+
+function wbc_array_column($input = null, $columnKey = null, $indexKey = null) { 
+    
+	return wbc()->common->array_column($input, $columnKey, $indexKey);
+    
+}
+
+function wbc_http_query($param){
+
+	return wbc()->common->http_query($param);
+
+}
+
+function wbc_is_ajax(){
+
+	return wbc()->common->is_ajax();
+
+}
+
+function wbc_is_object($obj){
+
+	return wbc()->common->is_object($obj);
+
+}
+
+function wbc_isEmptyArr($arr){
+
+	return wbc()->common->isEmptyArr($arr);
+
+}
+
+function current_theme_key() {
+	
+	return wbc()->common->current_theme_key();
+
+}
+
+function wbc_site_url($slug='', $query_string=''){
+
+	return wbc()->common->site_url($slug, $query_string);
+
+}
+
+function wbc_makeNestedArray($keys, $value, $target_array=null)
+{
+
+    return wbc()->common->makeNestedArray($keys, $value, $target_array);
+
+}
+
+function wbc_arrValuesToNestedArr($arr, $target_value, $target_array=null) { 
+
+	return wbc()->common->arrValuesToNestedArr($arr, $target_value, $target_array);
+
+}
+
+function wbc_special_characters() {
+
+	return wbc()->common->special_characters();
+
+}
+
+function wbc_key_to_title( $key ) {
+
+	return wbc()->common->key_to_title($key);
+
+}
+
+function truncate($str,$limit) {
+
+	return wbc()->common->truncate($str,$limit);
+	
 }

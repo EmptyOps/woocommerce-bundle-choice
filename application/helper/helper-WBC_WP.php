@@ -140,7 +140,7 @@ class WBC_WP {
 
 
     /* Add image to the wordpress image media gallary */
-    public function add_image_gallary($path) {
+    public function add_image_gallary($path, $path_separator = 'woo-bundle-choice', $source_path = null) {
 
         if(!$path) return FALSE;
 
@@ -157,16 +157,26 @@ class WBC_WP {
           return $posts[0]->ID;
         }
 
-        $file = wp_upload_bits($name, null, file_get_contents($path));
+
+        //$file = wp_upload_bits($name, null, file_get_contents($path));
+        ///////////// 14-05-2022 -- @drashti /////////////
+
+        $file_bits = wbc()->common->file_get_contents($path, $path_separator, $source_path);
+
+        $file = wp_upload_bits($name, null, $file_bits);
+        
+        /////////////////////////////////////////////////
+
 
         if (!$file['error']) {
 
             $type = wp_check_filetype($name, null );
 
             $attachment = array(
+                'guid' => $file['url'],
                 'post_mime_type' => $type['type'],
                 'post_parent' => null,
-                'post_title' => preg_replace('/\.[^.]+$/', '', $name),
+                'post_title' => sanitize_file_name($name),
                 'post_content' => '',
                 'post_status' => 'inherit'
             );

@@ -438,3 +438,78 @@ class WBC_File {
 	// }
 
 }
+
+function wbc_extension_from_path($filepath) {
+
+	return wbc()->file->extension_from_path($filepath);
+}
+
+
+function wbc_file_exists($filepath) {
+
+	return wbc()->file->file_exists($filepath);
+
+}
+
+function wbc_file_write( $filepath, $content )
+{
+
+	return wbc()->file->file_write($filepath, $content);
+
+}
+
+function wbc_file_read( $filepath )
+{
+
+	return wbc()->file->file_read($filepath);
+	
+}
+
+function wbc_file_lines( $filepath )
+{
+
+	return wbc()->file->file_lines($filepath);
+
+}
+
+function wbc_rename_file($source, $dest) {
+
+	return wbc()->file->rename_file($source, $dest);
+
+}
+
+function wbc_delete_file($filepath) {
+
+	return wbc()->file->delete_file($filepath);
+
+}
+
+function wbc_unlink($filepath) {
+
+	return wbc()->file->unlink($filepath);
+
+}
+
+function wbc_list_files( $in_dir, $filter_by=null ) {
+
+	return wbc()->file->list_files($in_dir, $filter_by);
+
+}
+
+function wbc_delete_files( $in_dir, $filter_by=null ) {
+	
+	return wbc()->file->delete_files($in_dir, $filter_by);
+
+}
+
+function wbc_save_json($filepath, $data) {
+
+	return wbc()->file->save_json($filepath, $data);
+
+}
+
+function wbc_get_json($filepath) {
+
+	return wbc()->file->get_json($filepath);
+
+}
