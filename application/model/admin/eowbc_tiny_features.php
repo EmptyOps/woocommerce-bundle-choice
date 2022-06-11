@@ -261,8 +261,34 @@ class Tiny_Features extends Eowbc_Model {
 		
 	}
 
-	public function render_ui($ui, $args = null) {
+	public function render_ui($form_definition, $args = null) {
 
+		$form = array();
+
+		$form['id']='dapii_apis';
+		$form['title']='<h2>APIs & Configuration</h2>';
+		$form['method']='POST';
+		$form['tabs'] = true;
+		$form['is_legacy_admin'] = isset($args['is_legacy_admin']) ? $args['is_legacy_admin'] : false;
+		$form['attr']= array('data-is_per_tab_save="true"');
+
+		$form['data'] = \eo\dapii\model\admin\API_Configuration::instance()->get( \eo\dapii\controllers\admin\menu\page\API_Configuration::instance()->get_form_definition() );
+
+		echo \eo\wbc\model\admin\Form_Builder::instance()->build($form);
+
+
+		// wbc()->load->asset('js','admin-js');
+		// wp_localize_script(
+		//     'admin-js',
+		//     'eowbc_object',
+		//     array('admin_url'=>admin_url( 'admin-ajax.php'))
+		// );
+
+		
+		//	if there is any module specific js or css then it should be loaded view file or asset.php file -- both have their pros and cons. but I think asset.php is for flows var a asset file was necessary and where view is available we can simply put such js/css stuff there but in case of the admin also now we are moving the render related logic model and so maybe there will be little things in the view file 
+			// ACTIVE_TODO we may need to load above css, mostly that will going to be needed 
+
+		below hook binding should be moved to frontend class, I think d made mistake here -- to d 
 		add_filter( 'body_class',  function(){
 
 		})
