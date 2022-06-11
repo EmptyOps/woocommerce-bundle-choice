@@ -38,7 +38,7 @@ if(!class_exists('Woo_Bundle_Choice') ) {
 			if ( ! isset( self::$_instance ) ) {
 				self::$_instance = new self;
 			}
-
+ 
 			return self::$_instance;
 		}
 
