@@ -24,79 +24,85 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 
 		public function should_init(){
 
-	        --- ACTIVE_TODO implments
+	        // TODO implement as required 
 	    }
 
 	    public function init( $args = null ) { 
+	    
 	        \eo\wbc\controllers\admin\menu\page\Tiny_features::instance()->getUI($args);
 	    }
 
 		private function getUI($args = null){
+		
 			if($args['is_legacy_admin'] == true){
-				\eo\wbc\model\admin\Tiny_features::instance()->render_ui( $this->get_legacy_ui_definition('sp_variations', $args), $args );
+				\eo\wbc\model\admin\Tiny_features::instance()->render_ui( $this->get_legacy_form_definition('sp_variations', $args), $args );
 			}
 			else{
-				\eo\wbc\model\admin\Tiny_features::instance()->render_ui( $this->get_ui_definition( $args), $args );
+				\eo\wbc\model\admin\Tiny_features::instance()->render_ui( $this->get_form_definition( $args), $args );
 			}
 	        
 	    }
 
-	    public function get_ui_definition($args = null){
+	    public function get_form_definition($args = null){
 
 	    }	    
 
-	    private function get_legacy_ui_definition( $section, $args=null ) {
+	    private function get_legacy_form_definition( $page_section, $args=null ) {
 
-	    	$form_definition = array(
-				'sp_variations'=>array(
-					'label'=>"Gallery Images and Video(optionsUI)",
-					'form'=>array(
-						'sp_variations_image'=>array(
-							'label'=>'Video &amp; Custum Field',
-							'type'=>'icon',
-							'sanitize'=>'sanitize_text_field',
-							'value'=>array('filter_setting_status'),
-							'class'=>array(),
-							'size_class'=>array('eight','wide'),
-							'inline'=>true,
-							'save_as'=>'post_meta',
-						),
-						'sp_variations_video'=>array(
-							'label'=>'Video',
-							'type'=>'file',
-							'sanitize'=>'sanitize_text_field',
-							'value'=>array('filter_setting_status'),
-							'class'=>array(),
-							'size_class'=>array('eight','wide'),
-							'inline'=>true,
-							'save_as'=>'post_meta',
-						),
-						'sp_variations_video_url'=>array(
-							'label'=>'Video',
-							'type'=>'text',
-							'sanitize'=>'sanitize_text_field',
-							'value'=>array('filter_setting_status'),
-							'class'=>array(),
-							'size_class'=>array('eight','wide'),
-							'inline'=>true,
-							'save_as'=>'post_meta',
-						),
-						'sp_variations_image2'=>array(
-							'label'=>'images',
-							'type'=>'icon',
-							'sanitize'=>'sanitize_text_field',
-							'value'=>array('filter_setting_status'),
-							'class'=>array(),
-							'size_class'=>array('eight','wide'),
-							'inline'=>true,
-							'save_as'=>'post_meta',
-						)
-					);	
+	    	$form_definition = null;	
+	    	if( $page_section == 'sp_variations' ) {
+
+		    	$form_definition = array(
+					'sp_variations'=>array(
+						'label'=>"Gallery Images and Video(optionsUI)",
+						'form'=>array(
+							'sp_variations_image'=>array(
+								'label'=>'Video &amp; Custum Field',
+								'type'=>'icon',
+								'sanitize'=>'sanitize_text_field',
+								'value'=>array('filter_setting_status'),
+								'class'=>array(),
+								'size_class'=>array('eight','wide'),
+								'inline'=>true,
+								'save_as'=>'post_meta',
+							),
+							'sp_variations_video'=>array(
+								'label'=>'Video',
+								'type'=>'file',
+								'sanitize'=>'sanitize_text_field',
+								'value'=>array('filter_setting_status'),
+								'class'=>array(),
+								'size_class'=>array('eight','wide'),
+								'inline'=>true,
+								'save_as'=>'post_meta',
+							),
+							'sp_variations_video_url'=>array(
+								'label'=>'Video',
+								'type'=>'text',
+								'sanitize'=>'sanitize_text_field',
+								'value'=>array('filter_setting_status'),
+								'class'=>array(),
+								'size_class'=>array('eight','wide'),
+								'inline'=>true,
+								'save_as'=>'post_meta',
+							),
+							'sp_variations_image2'=>array(
+								'label'=>'images',
+								'type'=>'icon',
+								'sanitize'=>'sanitize_text_field',
+								'value'=>array('filter_setting_status'),
+								'class'=>array(),
+								'size_class'=>array('eight','wide'),
+								'inline'=>true,
+								'save_as'=>'post_meta',
+							)
+						);	
+					);
 				);
-			);
+		    }
 
 			// return $form_definition;
-			return parent::get_legacy_ui_definition( array('form_definition'=>$form_definition) );
+			return parent::get_legacy_form_definition__( array('form_definition'=>$form_definition) );
 	    }
 	}
 }		
