@@ -3,6 +3,7 @@
  *	SP WBC Variations class 
  */
 
+need to move this class to data_model package and also check other such variations classes also if they are in right package or not -- to d 
 namespace eo\wbc\model\publics;
 
 defined( 'ABSPATH' ) || exit;
@@ -77,15 +78,6 @@ class SP_WBC_Variations extends SP_Variations {
 
 		}, 99, 1);
 
-		
-		add_filter( 'woocommerce_dropdown_variation_attribute_options_html',  function($html){
-
-		}, 99, 1)
-
-		
-		add_filter( 'script_loader_tag',  function($tag){
-
-		}, 99, 1)
 
 		return $sp_variations_data;
 	}
