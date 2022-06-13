@@ -27,8 +27,9 @@ class Options {
 		$css_classes = array("{$type}-variable-wrapper");
 		$ribbon_color = get_term_meta( $attribute_object->attribute_id,'wbc_ribbon_color',true);
 
-		$data = sprintf( '<div class="ui segment">
-      <span class="ui ribbon label" style="background-color:%s;border-color:%s;color:white;">%s</span><span><ul class="ui mini images variable-items-wrapper %s" data-attribute_name="%s">%s</ul></span></div>',$ribbon_color,$ribbon_color,$attribute_object->attribute_label,trim( implode( ' ', array_unique( $css_classes ) ) ), esc_attr( wc_variation_attribute_name( $attribute ) ), $contents );
+		---- move to /woo-bundle-choice/templates/single-product/variations-swatches/sp_variations_optionsUI-common-ribbon_wrapper.php file ma
+		/*$data = sprintf( '<div class="ui segment">
+      <span class="ui ribbon label" style="background-color:%s;border-color:%s;color:white;">%s</span><span><ul class="ui mini images variable-items-wrapper %s" data-attribute_name="%s">%s</ul></span></div>',$ribbon_color,$ribbon_color,$attribute_object->attribute_label,trim( implode( ' ', array_unique( $css_classes ) ) ), esc_attr( wc_variation_attribute_name( $attribute ) ), $contents );*/
 		
 		return apply_filters( 'wvs_variable_items_wrapper', $data, $contents, $type, $args, $saved_attribute );
 	}
@@ -80,7 +81,7 @@ class Options {
 					} else{
 						$selected_item ='Choose an option';
 					}
-					----- move to woo-bundle-choice/templates/single-product/variations-swatches/sp_variations_optionsUI-dropdown-image-image_only-ribbon_wrapper.php ma
+					----- move to /woo-bundle-choice/templates/single-product/variations-swatches/sp_variations_optionsUI-common-option_template_part.php ma
 					/*$data.=sprintf( '<div class="ui fluid selection dropdown" style="min-height: auto;">
 							  <input type="hidden" name="attribute_%s" data-attribute_name="attribute_%s" data-id="%s">
 							  <i class="dropdown icon"></i>
@@ -89,12 +90,13 @@ class Options {
 				}
 
 
-				--- move to woo-bundle-choice/templates/single-product/variations-swatches/sp_variations_optionsUI-dropdown-image-image_only.php ma
-				/*foreach ( $terms as $term ) {
+				
+				foreach ( $terms as $term ) {
 					if ( in_array( $term->slug, $options ) ) {
 						$selected_class = ( sanitize_title( $args[ 'selected' ] ) == $term->slug ) ? 'selected' : '';
 						
-						if(!in_array($type,array('dropdown_image','dropdown_image_only','dropdown'))) {
+						--- move to woo-bundle-choice/templates/single-product/variations-swatches/sp_variations_optionsUI-dropdown-image-image_only.php ma
+						/*if(!in_array($type,array('dropdown_image','dropdown_image_only','dropdown'))) {
 							$data .= sprintf( '<li class="ui image middle aligned variable-item %1$s-variable-item %1$s-variable-item-%2$s %3$s" title="%4$s" data-value="%2$s" role="button" tabindex="0" data-id="%5$s">', esc_attr( $type ), esc_attr( $term->slug ), esc_attr( $selected_class ), esc_html( $term->name ),$id);
 						}						
 						ob_start();
@@ -105,11 +107,11 @@ class Options {
 						} else {
 							$data .= $ui_data;	
 						}						
-						$data .= '</li>';
+						$data .= '</li>';*/
 					}
-				}*/
+				}
 
-				----- move to woo-bundle-choice/templates/single-product/variations-swatches/sp_variations_optionsUI-dropdown-image-image_only-ribbon_wrapper.php ma
+				----- move to /woo-bundle-choice/templates/single-product/variations-swatches/sp_variations_optionsUI-common-option_template_part.php ma
 				/*if(in_array($type,array('dropdown_image','dropdown_image_only','dropdown'))) {
 					$data.=sprintf('</div></div>');
 				}*/

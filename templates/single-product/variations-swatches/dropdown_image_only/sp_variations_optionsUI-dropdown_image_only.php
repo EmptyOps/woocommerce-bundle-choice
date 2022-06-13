@@ -6,3 +6,19 @@
 
 --- a code woo-bundle-choice/application/controllers/publics/options.php no che
 $selected_item =  sprintf( '<img class="ui mini avatar image" src="%s">', esc_url( $image_url ));
+
+
+
+
+
+
+
+
+
+
+
+array(
+    'type' => 'img',
+    'class' => 'ui mini avatar image',
+    'src' => '%s',
+)

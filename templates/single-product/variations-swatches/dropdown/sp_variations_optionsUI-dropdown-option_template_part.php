@@ -9,3 +9,13 @@ $selected_class = ( sanitize_title( $args[ 'selected' ] ) == $term->slug ) ? 'se
 
 printf( '<div class="item" data-value="%s">%s</div>', esc_attr( $term->slug ), esc_attr( $term->name ));
  
+
+
+
+
+ array(
+    'type' => 'div',
+    'class' => 'item',
+    'preHTML' => '%s',
+    'attr' => array( 'data-value' => '%s' ),
+)
