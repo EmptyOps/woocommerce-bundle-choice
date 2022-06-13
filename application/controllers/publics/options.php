@@ -3,21 +3,65 @@ namespace eo\wbc\controllers\publics;
 
 defined( 'ABSPATH' ) || exit;
 
-class Options {
+class Options extends \eo\wbc\controllers\publics\Controller {
 
-	private static $_instance = null;
+    private static $_instance = null;
 
-	public static function instance() {
-		if ( ! isset( self::$_instance ) ) {
-			self::$_instance = new self;
-		}
+    public static function instance() {
+        if ( ! isset( self::$_instance ) ) {
+            self::$_instance = new self;
+        }
 
-		return self::$_instance;
-	}
+        return self::$_instance;
+    }
 
-	private function __construct() {
-		
-	}
+    private function __construct() {
+        
+    }
+
+    public function should_init(){
+
+    }
+
+
+    public function init($args = null){
+
+        \eo\wbc\controller\publics\pages\Single_Product::instance()->selectron();
+    }
+
+    public function selectron_hook_render(){
+
+        \eo\wbc\controller\publics\pages\Single_Product::instance()->getUI();
+    }
+
+    private function selectron(){
+
+    }
+
+    private function getUI(){
+
+        \eo\wbc\model\publics\SP_Model_Single_Product::instance()->render_ui( $this->get_ui_definition());
+    } 
+
+    private function get_ui_definition($args = null){
+
+        if (!in_array($args)) {
+            $args = array();
+        }
+        $args['template_option_key'] = 'diffrent_size_configure';
+        $args['option_group_key'] = 'templat_size';
+        $args['plugin_slug'] = sp_tv()->SP_Extension()->singleton_function();
+
+        return parent::get_ui_definition($args);
+
+       /* --- Publics.php no hook_render function no code che
+        $react_templat = wbc()->options->get_option('diffrent_size_configure','templat_size');
+        if ($react_templat == 'react_template') {
+            
+        }else{
+
+        }*/
+    }
 
 	public function variable_items_wrapper( $contents, $type, $args, $saved_attribute = array()){
 
