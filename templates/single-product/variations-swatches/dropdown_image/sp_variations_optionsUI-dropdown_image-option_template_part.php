@@ -13,3 +13,35 @@ if(!empty($image_url)){
 } else {
     printf( '<div class="item" data-value="%s">%s</div>', esc_attr( $term->slug ), esc_attr( $term->name ));    
 }
+
+
+
+
+
+
+array(
+    'type' => 'div',
+    'class' => 'item',
+    'attr' => array( 'data-value' => '%s' ),
+    'child' => array(
+        array(
+            'type' => 'img',
+            'class' => 'ui mini avatar image',
+            'src' => '%s',
+        ),
+    ),
+    'preHTML'=>'%s',
+)
+
+
+
+
+
+
+
+array(
+    'type' => 'div',
+    'class' => 'item',
+    'preHTML' => '%s',
+    'attr' => array( 'data-value' => '%s' ),
+)

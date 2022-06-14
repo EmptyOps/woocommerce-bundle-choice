@@ -1,4 +1,5 @@
 <?php
+--- move to /woo-bundle-choice/templates/single-product/variations-swatches/select/sp_variations_optionsUI-select-option_template_part.php file
 $selected_class = ( sanitize_title( $args[ 'selected' ] ) == $term->slug ) ? 'selected' : '';
 $image_url = get_term_meta( $term->term_id, 'wbc_attachment', true );						
 if(wbc()->options->get_option('tiny_features','tiny_features_dropdown_icon_only',false) and !empty($image_url)) {

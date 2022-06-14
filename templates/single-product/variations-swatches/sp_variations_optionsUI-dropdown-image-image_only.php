@@ -4,22 +4,54 @@
  * in case if you want to implement your custom html then follow our documentation guide on how to add add custom html templates by following this link https://sphereplugins.com/docs/how-to-override-templates-using-custom-html
  */
 
---- a code woo-bundle-choice/application/controllers/publics/options.php no che
-foreach ( $terms as $term ) {
-    if ( in_array( $term->slug, $options ) ) {
-        $selected_class = ( sanitize_title( $args[ 'selected' ] ) == $term->slug ) ? 'selected' : '';
-        
-        if(!in_array($type,array('dropdown_image','dropdown_image_only','dropdown'))) {
-            $data .= sprintf( '<li class="ui image middle aligned variable-item %1$s-variable-item %1$s-variable-item-%2$s %3$s" title="%4$s" data-value="%2$s" role="button" tabindex="0" data-id="%5$s">', esc_attr( $type ), esc_attr( $term->slug ), esc_attr( $selected_class ), esc_html( $term->name ),$id);
-        }                       
-        ob_start();
-        wbc()->load->template("publics/swatches/${type}", array('args'=>$args,'term'=>$term,'type'=>$type));
-        $ui_data = ob_get_clean();
-        if(empty($ui_data)){
-            $data .= apply_filters( 'wvs_variable_default_item_content', '', $term, $args, $saved_attribute );
-        } else {
-            $data .= $ui_data;  
-        }                       
-        $data .= '</li>';
-    }
+ --- a code woo-bundle-choice/application/controllers/publics/options.php no che
+$data.=sprintf( '<div class="ui fluid selection dropdown" style="min-height: auto;">
+      <input type="hidden" name="attribute_%s" data-attribute_name="attribute_%s" data-id="%s">
+      <i class="dropdown icon"></i>
+      <div class="default text">%s</div>
+      <div class="menu">',esc_attr( $attribute ),esc_attr( $attribute ),esc_attr( $attribute ),$selected_item);
+
+
+
+
+
+if(in_array($type,array('dropdown_image','dropdown_image_only','dropdown'))) {
+    $data.=sprintf('</div></div>');
 }
+
+
+
+
+
+
+
+
+
+
+
+array(
+    'type' => 'div',
+    'class' => 'ui fluid selection dropdown',
+    'attr' => array( 'style' => 'min-height: auto;' ),
+    'child' => array(
+        array(
+            'type' => 'input',
+            'name' => 'attribute_%s',
+            'attr' => array( 'type' => 'hidden', 'data-attribute_name' => 'attribute_%s', 'data-id' => '%s' ),
+        ),
+        array(
+            'type' => 'header',
+            'tag' => 'i',
+            'class' => 'dropdown icon',
+        ),
+        array(
+            'type' => 'div',
+            'class' => 'default text',
+            'preHTML' => '%s',
+        ),
+        array(
+            'type' => 'div',
+            'class' => 'menu',
+        ),
+    ),
+)
