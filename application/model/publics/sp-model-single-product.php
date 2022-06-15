@@ -63,16 +63,19 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			--	and the CSS need to be managed in a way that even if multiple templates of this free semantic UI is used means for one than attributes this template is used which would be normal where the free ui is used, then in such cases somehow figure out that the CSS is only loaded once -- to d 
 				--	if there are no other way then simply use constant, and it is important to do due to the SEO concerns -- to d 
 		add_action('wp_footer',function(){
+			--	check below two files and check if there is any optionsUI related flow there -- to b 
 			wbc()->theme->load('css','product');
         	wbc()->theme->load('js','product');
 			// Toggle Button
 			$toggle_status = true/*wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_status',true)*/;
 
 
+			--	and by default the expand collapse should be disabled, and when that is disabled nothing related to that will be loaded on frontend -- to b. if required ask t to take care of html css js etc -- to t 
 			$init_toggle = wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_init_status');			
 			
 			$toggle_text = wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_text',__('CUSTOMIZE THIS PRODUCT'));
 
+			--	have t update defaults to a general kind of theme -- to t. current style is so catchy and dark and need to have grayish like general theme that works mostly if not updated. 
 			// Variation item non-hovered
 			$dimention = wbc()->options->get_option('tiny_features','tiny_features_option_ui_option_dimention','2em');
 
