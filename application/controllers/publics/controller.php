@@ -42,7 +42,8 @@ class Controller extends \eo\wbc\controllers\Controller{
 
 
         $template_key = wbc()->options->get_option($args['template_option_key'],$args['option_group_key']);
-        $template_dir = '';
+        $template_dir = isset( $args['template_sub_dir']) ? 'default' : '';
+
         if (!empty($args['widget_key'])) {
         	
         	$template_dir = $args['widget_key'].'/';
