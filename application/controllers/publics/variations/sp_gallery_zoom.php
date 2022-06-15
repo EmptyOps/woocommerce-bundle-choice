@@ -25,7 +25,11 @@ class SP_Gallery_Zoom extends \eo\wbc\controllers\publics\Controller{
     }
 
     public function init(){
-        //\eo\sp_p360g\controller\publics\pages\Single_Product::instance()->selectron();
+
+        \eo\wbc\model\publics\variations\SP_Model_Gallery_Zoom::instance()->init_core();
+        
+        --- get ui call
+        \eo\wbc\model\publics\variations\SP_Model_Gallery_Zoom::instance()->render_core();
     }
 
     private function selectron(){
