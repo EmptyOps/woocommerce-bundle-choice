@@ -34,10 +34,10 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 
 		private function getUI($args = null){
 		
-			if($args['is_legacy_admin'] == true){
+			if($args['is_legacy_admin'] == true) {
+				$args['page_section'] = 'sp_variations';	
 				\eo\wbc\model\admin\Tiny_features::instance()->render_ui( $this->get_legacy_form_definition('sp_variations', $args), $args );
-			}
-			else{
+			} else {
 				\eo\wbc\model\admin\Tiny_features::instance()->render_ui( $this->get_form_definition( $args), $args );
 			}
 	        

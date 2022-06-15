@@ -1042,7 +1042,8 @@ class SP_Model_Single_Product extends SP_Single_Product {
 								--	sp_variations_optionsUI_dropdown_ribbon_wrapper.php 		
 								--	sp_variations_optionsUI_dropdown.php 		
 								--	sp_variations_optionsUI_dropdown_option_template_part.php 		
-							--	I think the swatches means maybe the icon template will be default and rest will be in their own folder like dropdown, icon-dropdown and so on -- to b 
+							--	I think the swatches means maybe the icon template will be default and rest will be in their own folder like dropdown, icon-dropdown and so on -- to b ACTIVE_TODO
+									--	when we implement the switches for the default swatches type at that time we should do it -- to h or -- to b or -- to d ACTIVE_TODO 
 								--	and now the $args will support one more param like page_section which will work as dir so the folder structure would become single-product/variations-swatches/icon-dropdown/ -- to b 
 									--	and for extensions like darker lighter or 360 or recently purchased or diamond meta have their tempalte for image gallary then the folder structure would become single-product/image-gallery/ * /	and it would be needed for both recently purchased and the diamond meta -- to b 
 								--	and also accordingly you also need to precisely separate the below templates and put them in their owm dolers, as per above mentioned structure. do it accurately by following all the if and so on conditions below and in above function also -- to b 
@@ -1166,6 +1167,9 @@ class SP_Model_Single_Product extends SP_Single_Product {
             
         	--	and we can make use of the below flow in our fetch data function layers planned 
         		--	and keep in mind that we had to take care of two data layers(or response that we need to sent to two different place one is variations image gallery and the second is the variations form) one for variations image gallery and the second is for the variations form 
+        		--	move all the applicable data layers from below and also from gallery_images layer to the below called get_data -> fetch_data function -- to b 
+        			--	and then have only get_data call with sp_variations argument from the main render_variations_ui and pass the result data to gallery_images and render_variations_swatches function being called -- to b 
+        				--	and then get_data should also host means fetch_data should also the layer with gallery_images and swatches as the argument, so that their specific data can be loaded from there only -- to b 
             $attributes = $args[ 'product' ]->get_variation_attributes();
             $variations = $args[ 'product' ]->get_available_variations();
 			$this->get_data( "sp_variations" );	

@@ -224,16 +224,22 @@ class Form_Builder implements Builder {
 				}
 			}
 
-			wbc()->load->template('component/form/form',
-				array(
-					'form_html'=>$form_html,
-					'id'=>str_replace(' ','_',$form['id']),
-					'title'=>isset($form['title'])?$form['title']:'',
-					'method'=>isset($form['method'])?$form['method']:'GET',
-					'class'=>isset($form['class'])?$this->process_property($form['class']):'',
-					'attr'=>isset($form['attr'])?$this->process_property($form['attr']):''
-				)
-			);
+			if( empty($form['no_form_tag']) ) {
+
+				wbc()->load->template('component/form/form',
+					array(
+						'form_html'=>$form_html,
+						'id'=>str_replace(' ','_',$form['id']),
+						'title'=>isset($form['title'])?$form['title']:'',
+						'method'=>isset($form['method'])?$form['method']:'GET',
+						'class'=>isset($form['class'])?$this->process_property($form['class']):'',
+						'attr'=>isset($form['attr'])?$this->process_property($form['attr']):''
+					)
+				);
+			} else {
+
+				return $form_html;	
+			}
 		}
 	}
 
