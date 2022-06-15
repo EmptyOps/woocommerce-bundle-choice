@@ -27,13 +27,6 @@ class SP_WBC_Variations extends SP_Variations {
 
 	}
 
-	public function render_ui(){
-
-	}
-	public function load_asset(){
-
-	}
-
 	public static function fetch_data( $product, maybe no other arguments are necessary like variation_id since we are going to use on single product page and from there it should load the default variation or all the variations as applicable as per the legacy flows. can also check that other plugin to find out or confirm about legacy flow. and then return the data saved from our variations admin tab defined above of default variations or all variations as applicable as per the legacy standards. $extra_args=array() ) {
 
 		$sp_variations_data = array();	//	NOTE: this is default object format of $sp_variations_data and when there is no data available it will return empty array instead of the null or false etc. 
@@ -77,6 +70,83 @@ class SP_WBC_Variations extends SP_Variations {
 		add_filter( 'woocommerce_ajax_variation_threshold',  function($int){
 
 		}, 99, 1);
+
+
+
+
+
+
+        $attributes = $args['args'][ 'product' ]->get_variation_attributes();
+        $variations = $args[ 'product' ]->get_available_variations();
+
+
+					if ( $default_image_type_attribute === '__max' ) {
+
+						$attribute_counts = array();
+						foreach ( $attributes as $attr_key => $attr_values ) {
+							$attribute_counts[ $attr_key ] = count( $attr_values );
+						}
+
+						$max_attribute_count = max( $attribute_counts );
+						$attribute_key       = array_search( $max_attribute_count, $attribute_counts );
+
+					} elseif ( $default_image_type_attribute === '__min' ) {
+						$attribute_counts = array();
+						foreach ( $attributes as $attr_key => $attr_values ) {
+							$attribute_counts[ $attr_key ] = count( $attr_values );
+						}
+						$min_attribute_count = min( $attribute_counts );
+						$attribute_key       = array_search( $min_attribute_count, $attribute_counts );
+
+					} elseif ( $default_image_type_attribute === '__first' ) {
+						$attribute_keys = array_keys( $attributes );
+						$attribute_key  = current( $attribute_keys );
+					} else {
+						$attribute_key = $default_image_type_attribute;
+					}
+
+					$selected_attribute_name = wc_variation_attribute_name( $attribute_key );
+
+
+					$default_attribute_keys = array_keys( $attributes );
+					$default_attribute_key  = current( $default_attribute_keys );
+					$default_attribute_name = wc_variation_attribute_name( $default_attribute_key );
+
+					$current_attribute      = $args['attribute'];
+					$current_attribute_name = wc_variation_attribute_name( $current_attribute );
+
+
+					if ( $is_default_to_image ) {
+
+						$assigned = array();
+
+						foreach ( $variations as $variation_key => $variation ) {
+
+							$attribute_name = isset( $variation['attributes'][ $selected_attribute_name ] ) ? $selected_attribute_name : $default_attribute_name;
+
+							$attribute_value = esc_html( $variation['attributes'][ $attribute_name ] );
+
+							$assigned[ $attribute_name ][ $attribute_value ] = array(
+								'image_id'     => $variation['image_id'],
+								'variation_id' => $variation['variation_id'],
+								'type'         => ( empty( $variation['image_id'] ) ? 'button' : 'image' ),
+							);
+
+
+
+
+		$terms = wc_get_product_terms( $product->get_id(), $attribute, array( 'fields' => 'all' ) );
+
+
+
+
+		from here to prepare attribute display name, unique name, shoow options none and other such matters, call the SP_Attribute class or object methods 
+
+
+
+
+		apply filter hook here to let extensions filter over swatches data, 
+
 
 
 		return $sp_variations_data;
