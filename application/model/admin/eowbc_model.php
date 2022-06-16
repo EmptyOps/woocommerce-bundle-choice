@@ -57,6 +57,7 @@ class Eowbc_Model {
 
 							if( !isset($save_as_data['post_meta']) ) {
 
+								// NOTE: id is standard column name that we use for our options module based simple entity storage, so for the legacy admin flows also where necessary we can simply use the same where the necessity arise to maintain one uniqid and I think it will be almost always. 
 								$save_as_data['post_meta'] = get_post_meta( $args['id'], $args['page_section'].'_data', true );	
 							}
 						}
@@ -80,19 +81,6 @@ class Eowbc_Model {
 		
 		if( !empty($args['is_legacy_admin']) ) {
 			
-			if ( !empty( wbc()->sanitize->post['woo_variation_gallery'] ) ) {
-				if ( !empty( wbc()->sanitize->post['woo_variation_gallery'][ $variation_id ] ) ) {
-					$gallery_image_ids = array_map( 'absint', wbc()->sanitize->post['woo_variation_gallery'][ $variation_id ] );
-					update_post_meta( $variation_id, 'sp_variations_data', $gallery_image_ids );
-				} else {
-					delete_post_meta( $variation_id, 'sp_variations_data' );
-				}
-			} else {
-				delete_post_meta( $variation_id, 'sp_variations_data' );
-			}
-			
-
-
 			wbc()->sanitize->clean($form_definition);
 			wbc()->validate->check($form_definition);
 			$res = array();
@@ -101,121 +89,30 @@ class Eowbc_Model {
 		    //$res['post']=$_POST;
 			wbc()->load->model('admin\form-builder');
 
-			$saved_tab_key = !empty(wbc()->sanitize->post("saved_tab_key")) ? wbc()->sanitize->post("saved_tab_key") : ""; 
-			$skip_fileds = array('saved_tab_key');
+			$saved_tab_key = !empty(wbc()->sanitize->post("sp_frmb_saved_tab_key")) ? wbc()->sanitize->post("sp_frmb_saved_tab_key") : ""; 
+			$skip_fileds = array('sp_frmb_saved_tab_key');
 			
 			if($saved_tab_key == $this->tab_key_prefix.'altr_filt_widgts') {
-				$res['ef'] = wbc()->sanitize->post('first_category_altr_filt_widgts');
-				$res['tf'] = wbc()->options->get_option('filters_'.$this->tab_key_prefix.'altr_filt_widgts','first_category_altr_filt_widgts');
-				if(!empty(wbc()->sanitize->post('first_category_altr_filt_widgts')) and wbc()->sanitize->post('first_category_altr_filt_widgts')!=wbc()->options->get_option('filters_'.$this->tab_key_prefix.'altr_filt_widgts','first_category_altr_filt_widgts') ) {
-					
-					if(wbc()->sanitize->post('first_category_altr_filt_widgts')=='fc5'){
-						$this->switch_template_5();
-					} elseif(wbc()->sanitize->post('first_category_altr_filt_widgts')=='fc4'){
-						$this->switch_template_4();
-					} elseif (wbc()->sanitize->post('first_category_altr_filt_widgts')=='fc3') {
-						$this->switch_template_3();
-					} elseif (wbc()->sanitize->post('first_category_altr_filt_widgts')=='fc2') {
-						$this->switch_template_2();
-					} elseif (wbc()->sanitize->post('first_category_altr_filt_widgts')=='fc1') {
-						$this->switch_template_1();
-					}
 
-					$filter_data = unserialize(wbc()->options->get_option_group('filters_'.$this->tab_key_prefix.'d_fconfig',"a:0:{}"));
-					
-					if(!empty($filter_data)){
-						$ids = array_keys($filter_data);
-						$this->deactivate( $ids,$this->tab_key_prefix.'d_fconfig',1 );
-						$ids = array();
-						foreach ($filter_data as $filter_key=>$filter) {
-							if(isset($filter['filter_template']) and wbc()->sanitize->post('first_category_altr_filt_widgts')==$filter['filter_template']) {
-								//$ids[] = $filter['d_fconfig_filter'];
-								$ids[] = $filter_key;
-							}
-						}					
-						$ids = apply_filters('eowbc_admin_form_filters_save_changable_ids', $ids, $filter_data,wbc()->sanitize->post('first_category_altr_filt_widgts'));
-
-						if(empty($ids)) {
-							wbc()->load->model('admin/sample_data/eowbc_filter_samples');
-							$sample = \eo\wbc\model\admin\sample_data\Filter_Samples::instance();
-							if(method_exists($sample,wbc()->sanitize->post('first_category_altr_filt_widgts'))) {
-								$sample->save(call_user_func(array($sample,wbc()->sanitize->post('first_category_altr_filt_widgts'))),$this->tab_key_prefix);
-							}
-							
-						} else {
-							$this->activate( $ids,$this->tab_key_prefix.'d_fconfig',1);	
-						}
-						
-					} else {
-						wbc()->load->model('admin/sample_data/eowbc_filter_samples');
-						$sample = \eo\wbc\model\admin\sample_data\Filter_Samples::instance();
-						if(method_exists($sample,wbc()->sanitize->post('first_category_altr_filt_widgts'))) {
-							$sample->save(call_user_func(array($sample,wbc()->sanitize->post('first_category_altr_filt_widgts'))),$this->tab_key_prefix);	
-						}
-					}
-				}
-
-				if(!empty(wbc()->sanitize->post('second_category_altr_filt_widgts')) and wbc()->sanitize->post('second_category_altr_filt_widgts')!=wbc()->options->get_option('filters_'.$this->tab_key_prefix.'altr_filt_widgts','second_category_altr_filt_widgts') ) {
-
-					if(wbc()->sanitize->post('second_category_altr_filt_widgts')=='sc5'){
-						$this->switch_template_5();
-					}elseif(wbc()->sanitize->post('second_category_altr_filt_widgts')=='sc4'){
-						$this->switch_template_4();
-					} elseif (wbc()->sanitize->post('second_category_altr_filt_widgts')=='sc3') {
-						$this->switch_template_3();
-					} elseif (wbc()->sanitize->post('second_category_altr_filt_widgts')=='sc2') {
-						$this->switch_template_2();
-					} elseif (wbc()->sanitize->post('second_category_altr_filt_widgts')=='sc1') {
-						$this->switch_template_1();
-					}
-
-					$filter_data = unserialize(wbc()->options->get_option_group('filters_'.$this->tab_key_prefix.'s_fconfig',"a:0:{}"));
-					if(!empty($filter_data)){
-						$ids =array_keys($filter_data);
-						$this->deactivate( $ids,$this->tab_key_prefix.'s_fconfig',1);
-						$ids = array();
-						foreach ($filter_data as $filter_key=>$filter) {
-							if( isset($filter['filter_template']) and wbc()->sanitize->post('second_category_altr_filt_widgts')==$filter['filter_template']) {
-								//$ids[] = $filter['s_fconfig_filter'];
-								$ids[] = $filter_key;							
-							}
-						}
-						$ids = apply_filters('eowbc_admin_form_filters_save_changable_ids', $ids, $filter_data,wbc()->sanitize->post('second_category_altr_filt_widgts'));
-
-						if(empty($ids)){
-							wbc()->load->model('admin/sample_data/eowbc_filter_samples');
-							$sample = \eo\wbc\model\admin\sample_data\Filter_Samples::instance();
-							if(method_exists($sample,wbc()->sanitize->post('second_category_altr_filt_widgts'))) {
-								$res['meta'] = call_user_func(array($sample,wbc()->sanitize->post('second_category_altr_filt_widgts')));
-
-								$sample->save(call_user_func(array($sample,wbc()->sanitize->post('second_category_altr_filt_widgts'))));	
-							}
-							
-						} else {
-							$this->activate( $ids,$this->tab_key_prefix.'s_fconfig',1);
-						}					
-					} else {
-						wbc()->load->model('admin/sample_data/eowbc_filter_samples');
-							$sample = \eo\wbc\model\admin\sample_data\Filter_Samples::instance();
-						if(method_exists($sample,wbc()->sanitize->post('second_category_altr_filt_widgts'))){							
-							$sample->save(call_user_func(array($sample,wbc()->sanitize->post('second_category_altr_filt_widgts'))));	
-						}
-					}				
-				}
+				// NOTE: tab specific logic 
+					// NOTE: however since it is implementation in the base model so the tab specific conditional blocks can not come here but should be in the particular child class 
 			}
 			
+			$save_as_data = array();	
+			$save_as_data_meta = array();	
+
 		    //loop through form tabs and save 
-		    
 		    foreach ($form_definition as $key => $tab) {
 		    	if( $key != $saved_tab_key ) {
 		    		continue;
 		    	}
+		    
 		    	$key_clean = ((!empty($this->tab_key_prefix) and strpos($key,$this->tab_key_prefix)===0)?substr($key,strlen($this->tab_key_prefix)):$key);
 		    	//$res['data_form'][]= $tab;
-				$is_table_save = ($key == $this->tab_key_prefix."d_fconfig" or $key == $this->tab_key_prefix."s_fconfig" or $key=='filter_set') ? true : false;
+				$is_table_save = false;	//	ACTIVE_TODO/TODO it should be passed from child maybe or make dynamic as applicable. ($key == $this->tab_key_prefix."d_fconfig" or $key == $this->tab_key_prefix."s_fconfig" or $key=='filter_set') ? true : false;
 
 				$table_data = array();
-				$tab_specific_skip_fileds = $is_table_save ? array('eowbc_price_control_methods_list_bulk','eowbc_price_control_sett_methods_list_bulk') : array();
+				$tab_specific_skip_fileds = array();	//	ACTIVE_TODO/TODO it should be passed from child maybe or make dynamic as applicable.  $is_table_save ? array('eowbc_price_control_methods_list_bulk','eowbc_price_control_sett_methods_list_bulk') : array();
 
 		    	foreach ($tab["form"] as $fk => $fv) {
 
@@ -233,72 +130,113 @@ class Eowbc_Model {
 			    		if( in_array($fk, $tab_specific_skip_fileds) ) {
 			    			continue;
 			    		}
-			    		//save
-				    	if( $is_table_save ) {
-				    		if( $fk == "d_fconfig_ordering" || $fk == "s_fconfig_ordering" )  {
-				    			
-				    			if($fk=='d_fconfig_ordering' and !empty(wbc()->sanitize->post('first_category_altr_filt_widgts'))){
-				    				$table_data['filter_template'] = apply_filters('eowbc_admin_form_filters_save_d_filter_template',wbc()->sanitize->post('first_category_altr_filt_widgts'));
-				    			} elseif ($fk == "s_fconfig_ordering" and !empty(wbc()->sanitize->post('second_category_altr_filt_widgts'))) {
-				    				$table_data['filter_template'] = apply_filters('eowbc_admin_form_filters_save_s_filter_template',wbc()->sanitize->post('second_category_altr_filt_widgts'));
-				    			}			    			
-					    		$table_data[$fk] = (int)wbc()->sanitize->post($fk); 	
-				    		}
-				    		else {
-				    			$table_data[$fk] = ( isset($_POST[$fk]) ? wbc()->sanitize->_post($fk) : '' ); 
-				    		}
-				    	}
-				    	else {			    		
-				    		
-				    		wbc()->options->update_option('filters_'.$key,$fk,(isset($_POST[$fk])? ( wbc()->sanitize->post($fk) ):'' ) );
-				    	}
+
+						if( empty($fv['save_as']) or $fv['save_as'] == "default" ) {
+
+							// TODO implement
+
+				    		//save
+					    	if( $is_table_save ) {
+
+					    		// ACTIVE_TODO/TODO to cover logic like below commented logic what we can do is implement maybe callback or simply the hooks mechanisam, but maybe the callbacks are simple and easy to debug and enough for such requirements. so can do callbacks like we did for some class heirarchies -- to s 
+					    		// if( $fk == "d_fconfig_ordering" || $fk == "s_fconfig_ordering" )  {
+					    			
+					    		// 	if($fk=='d_fconfig_ordering' and !empty(wbc()->sanitize->post('first_category_altr_filt_widgts'))){
+					    		// 		$table_data['filter_template'] = apply_filters('eowbc_admin_form_filters_save_d_filter_template',wbc()->sanitize->post('first_category_altr_filt_widgts'));
+					    		// 	} elseif ($fk == "s_fconfig_ordering" and !empty(wbc()->sanitize->post('second_category_altr_filt_widgts'))) {
+					    		// 		$table_data['filter_template'] = apply_filters('eowbc_admin_form_filters_save_s_filter_template',wbc()->sanitize->post('second_category_altr_filt_widgts'));
+					    		// 	}			    			
+						    	// 	$table_data[$fk] = (int)wbc()->sanitize->post($fk); 	
+					    		// }
+					    		// else {
+					    			$table_data[$fk] = ( isset($_POST[$fk]) ? wbc()->sanitize->_post($fk) : '' ); 
+					    		// }
+					    	}
+					    	else {			    		
+					    		
+					    		wbc()->options->update_option('filters_'.$key,$fk,(isset($_POST[$fk])? ( wbc()->sanitize->post($fk) ):'' ) );
+					    	}
+						} elseif( $fv['save_as'] == "post_meta" ) {
+
+							if( !isset($save_as_data['post_meta']) ) {
+
+								$save_as_data['post_meta'] = array();	
+							}
+
+							if( isset($_POST[$fk]) ) {
+
+								$save_as_data_meta['post_meta_found'] = true;	
+							}
+
+							$save_as_data['post_meta'][$fk] = ( isset($_POST[$fk]) ? wbc()->sanitize->_post($fk) : '' ); 
+						}
+
 				    }
 				}
 
+				//loop through save_as_data and save 
+			    foreach ($save_as_data as $sadk => $sadv) {
+
+			    	// NOTE: normally for our standard admn layer there is maybe no flow of deleting record if that is not detected, and as far as I can say the delete action is available only for the table/entity based form where user can delete in bulk and so on. but here it is for storage efficiency, cleanlieness and so on the post meta are deleted and will be followed in similar manner for other similar save_as options. 
+
+			    	if( $sadk == "post_meta" ) {
+						
+						// TODO we may like to use post meta api functions like get_post_meta(used above), update_post_meta/delete_post_meta(used below) through our common wp helper 
+						
+						if ( !empty( $save_as_data_meta['post_meta_found'] ) ) {
+							update_post_meta( $args['id'], $args['page_section'].'_data', $sadv );
+						} else {
+							delete_post_meta( $args['id'], $args['page_section'].'_data' );
+						}
+			    	}
+			    }
+
 				if( $is_table_save ) {
 
-					$filter_data = unserialize(wbc()->options->get_option_group('filters_'.$key,"a:0:{}"));
+					// ACTIVE_TODO/TODO implement 
 
-			        if(is_array($filter_data) and !empty($filter_data)){
+					// $filter_data = unserialize(wbc()->options->get_option_group('filters_'.$key,"a:0:{}"));
 
-			        	if(!empty(wbc()->sanitize->post($key_clean.'_id')) and !empty($filter_data[wbc()->sanitize->post($key_clean.'_id')])) {
-			        		$filter_data[wbc()->sanitize->post($key_clean.'_id')] = $table_data;
-			        		$res["type"] = "success";
-			    			$res["msg"] = eowbc_lang('Filter updated successfully');
-			    			wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data) );
-			                return $res;
-			        	} else {
-					        foreach ($filter_data as $fdkey=>$item) {
+			  //       if(is_array($filter_data) and !empty($filter_data)){
+
+			  //       	if(!empty(wbc()->sanitize->post($key_clean.'_id')) and !empty($filter_data[wbc()->sanitize->post($key_clean.'_id')])) {
+			  //       		$filter_data[wbc()->sanitize->post($key_clean.'_id')] = $table_data;
+			  //       		$res["type"] = "success";
+			  //   			$res["msg"] = eowbc_lang('Filter updated successfully');
+			  //   			wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data) );
+			  //               return $res;
+			  //       	} else {
+					//         foreach ($filter_data as $fdkey=>$item) {
 					          
-					            if ( apply_filters('eowbc_ajax_filters_check_duplicate', ($item[$key_clean.'_filter']==$table_data[$key_clean."_filter"] and !empty($item['filter_template']) and !empty($table_data['filter_template']) and $item['filter_template']==$table_data['filter_template'] ),$item,$table_data,$key_clean ) ) { 
-					            	if( $is_auto_insert_for_template ) {
+					//             if ( apply_filters('eowbc_ajax_filters_check_duplicate', ($item[$key_clean.'_filter']==$table_data[$key_clean."_filter"] and !empty($item['filter_template']) and !empty($table_data['filter_template']) and $item['filter_template']==$table_data['filter_template'] ),$item,$table_data,$key_clean ) ) { 
+					//             	if( $is_auto_insert_for_template ) {
 
-					            		$filter_data[wbc()->common->createUniqueId()] = $table_data;
+					//             		$filter_data[wbc()->common->createUniqueId()] = $table_data;
 
-								        wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data));
+					// 			        wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data));
 
-						            	/*$filter_data[$fdkey][$key_clean.'_add_enabled'] = 1;
-						                $res["type"] = "error";
-						    			$res["msg"] = eowbc_lang('Filter Already Exists and activated');
-						    			wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data) );*/
-						                return $res;
-					            	}
-					            	else {
-						                $res["type"] = "error";
-						    			$res["msg"] = eowbc_lang('Filter already exists '.(($filter_data[$fdkey][$key_clean.'_add_enabled']==1) ? 'and enabled' : 'but is disabled, you should enable it.'));
-						                return $res;
-					            	}
-					            }
+					// 	            	/*$filter_data[$fdkey][$key_clean.'_add_enabled'] = 1;
+					// 	                $res["type"] = "error";
+					// 	    			$res["msg"] = eowbc_lang('Filter Already Exists and activated');
+					// 	    			wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data) );*/
+					// 	                return $res;
+					//             	}
+					//             	else {
+					// 	                $res["type"] = "error";
+					// 	    			$res["msg"] = eowbc_lang('Filter already exists '.(($filter_data[$fdkey][$key_clean.'_add_enabled']==1) ? 'and enabled' : 'but is disabled, you should enable it.'));
+					// 	                return $res;
+					//             	}
+					//             }
 
-					        }
-					    }
-				    }
+					//         }
+					//     }
+				 //    }
 
-			        $filter_data[wbc()->common->createUniqueId()] = $table_data;
+			  //       $filter_data[wbc()->common->createUniqueId()] = $table_data;
 
-			        wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data));
+			  //       wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data));
 			        
-			        $res["msg"] = eowbc_lang('New Filter Added Successfully'); 
+			  //       $res["msg"] = eowbc_lang('New Filter Added Successfully'); 
 				}
 
 		    }
