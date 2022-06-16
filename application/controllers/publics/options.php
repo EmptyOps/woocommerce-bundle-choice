@@ -20,14 +20,17 @@ class Options extends \eo\wbc\controllers\publics\Controller {
     }
 
     public function should_init(){
-
+    	return true;
     }
 
 
     public function init($args = null){
 
-    	correct below call -- to b or -- to d 
-        \eo\wbc\controller\publics\pages\Single_Product::instance()->selectron();
+    	$args['data'] = \eo\wbc\model\publics\SP_Model_Single_Product()::instance()->get_data('swatches_init');
+        \eo\wbc\controller\publics\Options::instance()->selectron('swatches',$args);
+
+        $args['data'] = \eo\wbc\model\publics\SP_Model_Single_Product()::instance()->get_data('gallery_images_init');
+        \eo\wbc\model\publics\SP_Model_Single_Product::instance()->render_gallery_images_template($args);
 
     	call the getUI from here once so that default render_ui is called once at last for handling general matters -- to b 
     		--	and for getUI set two args first is $page_section and second is $args -- to b 
@@ -35,14 +38,35 @@ class Options extends \eo\wbc\controllers\publics\Controller {
     				--	and so page_section param will also be passed to get_ui_definition but there it will be passed through in args param -- to b 
     }
 
-    public function selectron_hook_render(){
+    public function selectron_hook_render($page_section,$container_class,$args = null){
 
-    	correct below call -- to b or -- to d  
-        \eo\wbc\controller\publics\pages\Single_Product::instance()->getUI();
+    	if ($page_section == 'swatches') {
+    		if ($container_class == 'woo_variation_attr_html') {
+    			\eo\wbc\model\publics\SP_Model_Single_Product::instance()->prepare_swatches_data($args);
+    		}
+    	}else{
+    	    \eo\wbc\controller\publics\Options::instance()->getUI();
+    	}
     }
 
-    private function selectron(){
+    private function selectron($page_section,$args = null){
 
+    	//--	move below to options controller selectron function -- to b done
+			//--	and from init function of the same controller call the selectron with page_section=swatches and args param that init may have or null -- to b  done
+				//--	so selectron will also have two param like getUI of options controller -- to b done 
+					//--	and from within callback function call the selectron hook render or something such function, with the hook args set in the args var and also the page_section param and also the container_class(for the particular hook) param -- to b done		
+						//--	and then create function prepare_swatches_data in single-product model in wbc, and move all code inside below to that selectron hook render in its swatches section -- to b done
+		if ($page_section == 'swatches') {
+			add_filter( 'woocommerce_dropdown_variation_attribute_options_html',  function($html, $hook_args) use($page_section,$args){
+
+		        $args['hook_callback_args'] = array();
+            	$args['hook_callback_args']['html'] = $html;
+            	$args['hook_callback_args']['hook_args'] = $hook_args;
+
+	            return $this->selectron_hook_render($page_section,'woo_variation_attr_html',$args);
+
+			}, 200, 2);
+		}
     }
 
     private function load_view(){
@@ -52,7 +76,7 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 
     }
 
-    private function getUI(){
+    private function getUI($page_section,$args = null){
 
         \eo\wbc\model\publics\SP_Model_Single_Product::instance()->render_ui( $this->get_ui_definition());
     } 
@@ -79,180 +103,174 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 
 	public function variable_items_wrapper( $contents, $type, $args, $saved_attribute = array()){
 
-		$attribute = $args[ 'attribute' ];
-		$attribute_object = $args['attribute_object'];
-		
-		$css_classes = array("{$type}-variable-wrapper");
-		$ribbon_color = get_term_meta( $attribute_object->attribute_id,'wbc_ribbon_color',true);
+		// ---- move to /woo-bundle-choice/templates/single-product/variations-swatches/sp_variations_optionsUI-common-ribbon_wrapper.php file ma
+		if (false) {
+			$attribute = $args[ 'attribute' ];
+			$attribute_object = $args['attribute_object'];
+			
+			$css_classes = array("{$type}-variable-wrapper");
+			$ribbon_color = get_term_meta( $attribute_object->attribute_id,'wbc_ribbon_color',true);
 
-		---- move to /woo-bundle-choice/templates/single-product/variations-swatches/sp_variations_optionsUI-common-ribbon_wrapper.php file ma
-		/*$data = sprintf( '<div class="ui segment">
-      <span class="ui ribbon label" style="background-color:%s;border-color:%s;color:white;">%s</span><span><ul class="ui mini images variable-items-wrapper %s" data-attribute_name="%s">%s</ul></span></div>',$ribbon_color,$ribbon_color,$attribute_object->attribute_label,trim( implode( ' ', array_unique( $css_classes ) ) ), esc_attr( wc_variation_attribute_name( $attribute ) ), $contents );*/
-		
+			
+			$data = sprintf( '<div class="ui segment">
+	  		    <span class="ui ribbon label" style="background-color:%s;border-color:%s;color:white;">%s</span><span><ul class="ui mini images variable-items-wrapper %s" data-attribute_name="%s">%s</ul></span></div>',$ribbon_color,$ribbon_color,$attribute_object->attribute_label,trim( implode( ' ', array_unique( $css_classes ) ) ), esc_attr( wc_variation_attribute_name( $attribute ) ), $contents );
+		}
 		return apply_filters( 'wvs_variable_items_wrapper', $data, $contents, $type, $args, $saved_attribute );
 	}
 
 	public function variable_item( $type, $options, $args, $saved_attribute = array() ) {
-	
-		-- here we see that the different swatches templates that are supported are scattered around, but now it should be in the new template folder planned as per the templating standard 
-			--	there will be three template files that will be required for any widget that provides swatches UI -- to b 
-					--	 and in the palce of the dropdown part in below filename the input type name would change to icon, icon_dropdown, slider and so on -- to b 
-				--	sp_variations_optionsUI_dropdown_ribbon_wrapper.php 		
-				--	sp_variations_optionsUI_dropdown.php 		
-				--	sp_variations_optionsUI_dropdown_option_template_part.php 		
-			--	I think the swatches means maybe the icon template will be default and rest will be in their own folder like dropdown, icon-dropdown and so on -- to b 
-				--	and now the $args will support one more param like page_section which will work as dir so the folder structure would become single-product/variations-swatches/icon-dropdown/ -- to b 
-					--	and for extensions like darker lighter or 360 or recently purchased or diamond meta have their tempalte for image gallary then the folder structure would become single-product/image-gallery/ * /	and it would be needed for both recently purchased and the diamond meta -- to b 
-				--	and also accordingly you also need to precisely separate the below templates and put them in their owm dolers, as per above mentioned structure. do it accurately by following all the if and so on conditions below and in above function also -- to b 
-					--	and most of logic in this class also sound like the rendering logic so need to keep track of that also -- to b 
-		$product   = $args[ 'product' ];
-		$attribute = $args[ 'attribute' ];
-		$data      = '';
-		$id                    = $args[ 'id' ] ? $args[ 'id' ] : sanitize_title( $attribute );
+		if (false) {
+			$product   = $args[ 'product' ];
+			$attribute = $args[ 'attribute' ];
+			$data      = '';
+			$id                    = $args[ 'id' ] ? $args[ 'id' ] : sanitize_title( $attribute );
 
-		if ( ! empty( $options ) ) {			
-			if ( $product && taxonomy_exists( $attribute ) ) {
-				$terms = wc_get_product_terms( $product->get_id(), $attribute, array( 'fields' => 'all' ) );
-				$name  = uniqid( wc_variation_attribute_name( $attribute ) );
+			if ( ! empty( $options ) ) {			
+				if ( $product && taxonomy_exists( $attribute ) ) {
+					$terms = wc_get_product_terms( $product->get_id(), $attribute, array( 'fields' => 'all' ) );
+					$name  = uniqid( wc_variation_attribute_name( $attribute ) );
 
-				if(in_array($type,array('dropdown_image','dropdown_image_only','dropdown'))) {
-					$selected_item = sanitize_title( $args[ 'selected' ] );
-					if(!empty($selected_item)){
-						$selected_item = wbc()->wc->get_term_by( 'slug',$selected_item,$attribute);
-						if(!is_wp_error($selected_item) and !empty($selected_item) ){
-							$image_url = get_term_meta( $selected_item->term_id, 'wbc_attachment', true );
-							
-							if($type=='dropdown_image' and !empty($image_url)) {
-								--- move to woo-bundle-choice/templates/single-product/variations-swatches/dropdown_image/sp_variations_optionsUI-dropdown_image-option_template_part.php file
-								/*$selected_item =  sprintf( '<img class="ui mini avatar image" src="%s">%s', esc_url( $image_url ),esc_attr( $selected_item->name ));*/
+					if(in_array($type,array('dropdown_image','dropdown_image_only','dropdown'))) {
+						$selected_item = sanitize_title( $args[ 'selected' ] );
+						if(!empty($selected_item)){
+							$selected_item = wbc()->wc->get_term_by( 'slug',$selected_item,$attribute);
+							if(!is_wp_error($selected_item) and !empty($selected_item) ){
+								$image_url = get_term_meta( $selected_item->term_id, 'wbc_attachment', true );
 								
-							} elseif ($type=='dropdown_image_only' and !empty($image_url)) {
-								--- move to /woo-bundle-choice/templates/single-product/variations-swatches/dropdown_image_only/sp_variations_optionsUI-dropdown_image_only-option_template_part.php file 
-								/*$selected_item =  sprintf( '<img class="ui mini avatar image" src="%s">', esc_url( $image_url ));*/
+								if($type=='dropdown_image' and !empty($image_url)) {
+									--- move to woo-bundle-choice/templates/single-product/variations-swatches/dropdown_image/sp_variations_optionsUI-dropdown_image-option_template_part.php file
+									/*$selected_item =  sprintf( '<img class="ui mini avatar image" src="%s">%s', esc_url( $image_url ),esc_attr( $selected_item->name ));*/
+									
+								} elseif ($type=='dropdown_image_only' and !empty($image_url)) {
+									--- move to /woo-bundle-choice/templates/single-product/variations-swatches/dropdown_image_only/sp_variations_optionsUI-dropdown_image_only-option_template_part.php file 
+									/*$selected_item =  sprintf( '<img class="ui mini avatar image" src="%s">', esc_url( $image_url ));*/
+								} else {
+									move to /woo-bundle-choice/templates/single-product/variations-swatches/dropdown/sp_variations_optionsUI-dropdown-option_template_part.php file
+									/*$selected_item =  sprintf( '%s',esc_attr( $selected_item->name ));*/
+								}
 							} else {
-								move to /woo-bundle-choice/templates/single-product/variations-swatches/dropdown/sp_variations_optionsUI-dropdown-option_template_part.php file
-								/*$selected_item =  sprintf( '%s',esc_attr( $selected_item->name ));*/
+								$selected_item ='Choose an option';	
 							}
-						} else {
-							$selected_item ='Choose an option';	
+						} else{
+							$selected_item ='Choose an option';
 						}
-					} else{
-						$selected_item ='Choose an option';
+						----- move to /woo-bundle-choice/templates/single-product/variations-swatches/sp_variations_optionsUI-common-option_template_part.php ma
+						/*$data.=sprintf( '<div class="ui fluid selection dropdown" style="min-height: auto;">
+								  <input type="hidden" name="attribute_%s" data-attribute_name="attribute_%s" data-id="%s">
+								  <i class="dropdown icon"></i>
+								  <div class="default text">%s</div>
+								  <div class="menu">',esc_attr( $attribute ),esc_attr( $attribute ),esc_attr( $attribute ),$selected_item);*/
 					}
+
+
+					
+					foreach ( $terms as $term ) {
+						if ( in_array( $term->slug, $options ) ) {
+							$selected_class = ( sanitize_title( $args[ 'selected' ] ) == $term->slug ) ? 'selected' : '';
+							
+							--- move to woo-bundle-choice/templates/single-product/variations-swatches/sp_variations_optionsUI-dropdown-image-image_only.php ma
+							/*if(!in_array($type,array('dropdown_image','dropdown_image_only','dropdown'))) {
+								$data .= sprintf( '<li class="ui image middle aligned variable-item %1$s-variable-item %1$s-variable-item-%2$s %3$s" title="%4$s" data-value="%2$s" role="button" tabindex="0" data-id="%5$s">', esc_attr( $type ), esc_attr( $term->slug ), esc_attr( $selected_class ), esc_html( $term->name ),$id);
+							}						
+							ob_start();
+							wbc()->load->template("publics/swatches/${type}", array('args'=>$args,'term'=>$term,'type'=>$type));
+							$ui_data = ob_get_clean();
+							if(empty($ui_data)){
+								$data .= apply_filters( 'wvs_variable_default_item_content', '', $term, $args, $saved_attribute );
+							} else {
+								$data .= $ui_data;	
+							}						
+							$data .= '</li>';*/
+						}
+					}
+
 					----- move to /woo-bundle-choice/templates/single-product/variations-swatches/sp_variations_optionsUI-common-option_template_part.php ma
-					/*$data.=sprintf( '<div class="ui fluid selection dropdown" style="min-height: auto;">
-							  <input type="hidden" name="attribute_%s" data-attribute_name="attribute_%s" data-id="%s">
-							  <i class="dropdown icon"></i>
-							  <div class="default text">%s</div>
-							  <div class="menu">',esc_attr( $attribute ),esc_attr( $attribute ),esc_attr( $attribute ),$selected_item);*/
+					/*if(in_array($type,array('dropdown_image','dropdown_image_only','dropdown'))) {
+						$data.=sprintf('</div></div>');
+					}*/
 				}
-
-
-				
-				foreach ( $terms as $term ) {
-					if ( in_array( $term->slug, $options ) ) {
-						$selected_class = ( sanitize_title( $args[ 'selected' ] ) == $term->slug ) ? 'selected' : '';
-						
-						--- move to woo-bundle-choice/templates/single-product/variations-swatches/sp_variations_optionsUI-dropdown-image-image_only.php ma
-						/*if(!in_array($type,array('dropdown_image','dropdown_image_only','dropdown'))) {
-							$data .= sprintf( '<li class="ui image middle aligned variable-item %1$s-variable-item %1$s-variable-item-%2$s %3$s" title="%4$s" data-value="%2$s" role="button" tabindex="0" data-id="%5$s">', esc_attr( $type ), esc_attr( $term->slug ), esc_attr( $selected_class ), esc_html( $term->name ),$id);
-						}						
-						ob_start();
-						wbc()->load->template("publics/swatches/${type}", array('args'=>$args,'term'=>$term,'type'=>$type));
-						$ui_data = ob_get_clean();
-						if(empty($ui_data)){
-							$data .= apply_filters( 'wvs_variable_default_item_content', '', $term, $args, $saved_attribute );
-						} else {
-							$data .= $ui_data;	
-						}						
-						$data .= '</li>';*/
-					}
-				}
-
-				----- move to /woo-bundle-choice/templates/single-product/variations-swatches/sp_variations_optionsUI-common-option_template_part.php ma
-				/*if(in_array($type,array('dropdown_image','dropdown_image_only','dropdown'))) {
-					$data.=sprintf('</div></div>');
-				}*/
 			}
-		}
 
-		return $data;
+			return $data;
+		}
 	}
 
 	public function variation_options($args = array()) {		
-		
-		$args = wp_parse_args( $args, array(
-			'options'          => false,
-			'attribute'        => false,
-			'product'          => false,
-			'selected'         => false,
-			'name'             => '',
-			'id'               => '',
-			'class'            => '',
-			'type'             => '',
-			'show_option_none' => esc_html__( 'Choose an option')
-		) );
-			
-		$type                  = $args[ 'type' ];
-		$options               = $args[ 'options' ];
-		$product               = $args[ 'product' ];
-		$attribute             = $args[ 'attribute' ];
-		$name                  = $args[ 'name' ] ? $args[ 'name' ] : wc_variation_attribute_name( $attribute );
-		$id                    = $args[ 'id' ] ? $args[ 'id' ] : sanitize_title( $attribute );
-		$class                 = $args[ 'class' ];
-		$show_option_none      = $args[ 'show_option_none' ] ? true : false;
-		$show_option_none_text = $args[ 'show_option_none' ] ? $args[ 'show_option_none' ] : esc_html__('Choose an option'); // We'll do our best to hide the placeholder, but we'll need to show something when resetting options.
-		
-		if ( empty( $options ) && ! empty( $product ) && ! empty( $attribute ) ) {
-			$attributes = $product->get_variation_attributes();
-			$options    = $attributes[ $attribute ];
-		}
-		
-		if ( $product && taxonomy_exists( $attribute ) ) {
-
-			echo '<select id="' . esc_attr( $id ) . '" class="' . esc_attr( $class ) . ' hide woo-variation-raw-select woo-variation-raw-type-' . esc_attr( $type ) . '" style="display:none" name="' . esc_attr( $name ) . '" data-attribute_name="' . esc_attr( wc_variation_attribute_name( $attribute ) ) . '" data-show_option_none="' . ( $show_option_none ? 'yes' : 'no' ) . '">';			
-		} else {
-			echo '<select id="' . esc_attr( $id ) . '" class="' . esc_attr( $class ) . '" name="' . esc_attr( $name ) . '" data-attribute_name="' . esc_attr( wc_variation_attribute_name( $attribute ) ) . '" data-show_option_none="' . ( $show_option_none ? 'yes' : 'no' ) . '">';
-		}
-		
-		if ( $args[ 'show_option_none' ] ) {
-			echo '<option value="">' . esc_html( $show_option_none_text ) . '</option>';
-		}
-	
-		if ( ! empty( $options ) ) {
-			if ( $product && taxonomy_exists( $attribute ) ) {
-				// Get terms if this is a taxonomy - ordered. We need the names too.
-				$terms = wc_get_product_terms( $product->get_id(), $attribute, array( 'fields' => 'all' ) );
+		if (false) {
+			$args = wp_parse_args( $args, array(
+				'options'          => false,
+				'attribute'        => false,
+				'product'          => false,
+				'selected'         => false,
+				'name'             => '',
+				'id'               => '',
+				'class'            => '',
+				'type'             => '',
+				'show_option_none' => esc_html__( 'Choose an option')
+			) );
 				
-				foreach ( $terms as $term ) {
-					if ( in_array( $term->slug, $options ) ) {
-						echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args[ 'selected' ] ), $term->slug, false ) . '>' . apply_filters( 'woocommerce_variation_option_name', $term->name ) . '</option>';
+			$type                  = $args[ 'type' ];
+			$options               = $args[ 'options' ];
+			$product               = $args[ 'product' ];
+			$attribute             = $args[ 'attribute' ];
+			$name                  = $args[ 'name' ] ? $args[ 'name' ] : wc_variation_attribute_name( $attribute );
+			$id                    = $args[ 'id' ] ? $args[ 'id' ] : sanitize_title( $attribute );
+			$class                 = $args[ 'class' ];
+			$show_option_none      = $args[ 'show_option_none' ] ? true : false;
+			$show_option_none_text = $args[ 'show_option_none' ] ? $args[ 'show_option_none' ] : esc_html__('Choose an option'); // We'll do our best to hide the placeholder, but we'll need to show something when resetting options.
+			
+			if ( empty( $options ) && ! empty( $product ) && ! empty( $attribute ) ) {
+				$attributes = $product->get_variation_attributes();
+				$options    = $attributes[ $attribute ];
+			}
+			
+			if ( $product && taxonomy_exists( $attribute ) ) {
+
+				echo '<select id="' . esc_attr( $id ) . '" class="' . esc_attr( $class ) . ' hide woo-variation-raw-select woo-variation-raw-type-' . esc_attr( $type ) . '" style="display:none" name="' . esc_attr( $name ) . '" data-attribute_name="' . esc_attr( wc_variation_attribute_name( $attribute ) ) . '" data-show_option_none="' . ( $show_option_none ? 'yes' : 'no' ) . '">';			
+			} else {
+				echo '<select id="' . esc_attr( $id ) . '" class="' . esc_attr( $class ) . '" name="' . esc_attr( $name ) . '" data-attribute_name="' . esc_attr( wc_variation_attribute_name( $attribute ) ) . '" data-show_option_none="' . ( $show_option_none ? 'yes' : 'no' ) . '">';
+			}
+			
+			if ( $args[ 'show_option_none' ] ) {
+				echo '<option value="">' . esc_html( $show_option_none_text ) . '</option>';
+			}
+		
+			if ( ! empty( $options ) ) {
+				if ( $product && taxonomy_exists( $attribute ) ) {
+					// Get terms if this is a taxonomy - ordered. We need the names too.
+					$terms = wc_get_product_terms( $product->get_id(), $attribute, array( 'fields' => 'all' ) );
+					
+					foreach ( $terms as $term ) {
+						if ( in_array( $term->slug, $options ) ) {
+							echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args[ 'selected' ] ), $term->slug, false ) . '>' . apply_filters( 'woocommerce_variation_option_name', $term->name ) . '</option>';
+						}
+					}
+				} else {
+					foreach ( $options as $option ) {
+						// This handles < 2.4.0 bw compatibility where text attributes were not sanitized.
+						$selected = sanitize_title( $args[ 'selected' ] ) === $args[ 'selected' ] ? selected( $args[ 'selected' ], sanitize_title( $option ), false ) : selected( $args[ 'selected' ], $option, false );
+						echo '<option value="' . esc_attr( $option ) . '" ' . $selected . '>' . esc_html( apply_filters( 'woocommerce_variation_option_name', $option ) ) . '</option>';
 					}
 				}
-			} else {
-				foreach ( $options as $option ) {
-					// This handles < 2.4.0 bw compatibility where text attributes were not sanitized.
-					$selected = sanitize_title( $args[ 'selected' ] ) === $args[ 'selected' ] ? selected( $args[ 'selected' ], sanitize_title( $option ), false ) : selected( $args[ 'selected' ], $option, false );
-					echo '<option value="' . esc_attr( $option ) . '" ' . $selected . '>' . esc_html( apply_filters( 'woocommerce_variation_option_name', $option ) ) . '</option>';
-				}
 			}
-		}
-			
-		echo '</select>';
+				
+			echo '</select>';
 
-		$content = $this->variable_item( $type, $options, $args );
-		
-		echo $this->variable_items_wrapper( $content, $type, $args );
+			$content = $this->variable_item( $type, $options, $args );
+			
+			echo $this->variable_items_wrapper( $content, $type, $args );
+		}
 	}
 
 	public function run() {
 		
-		from public handler or http handler call the should_init and init function like we did on the size extension -- to b or -- to d 
-			--	and inside should_init just return true if there is nothing else there -- to b or -- to d 
+		/*from public handler or http handler call the should_init and init function like we did on the size extension -- to b or -- to d  done 
+			--	and inside should_init just return true if there is nothing else there -- to b or -- to d done  */
 
 		//	everything from here is now moved and running from different layers of this controller and its model 
-		--	put if false, and like this also in above two functions -- to b or -- to d 
-			--	and also on the variable_items_wrapper function at top but after confirming that function code is moved or covered -- to b or -- to d 
+		//--	put if false, and like this also in above two functions -- to b or -- to d  done
+			//--	and also on the variable_items_wrapper function at top but after confirming that function code is moved or covered -- to b or -- to d  done
+		if (false) {
 			add_action('wp_footer',function(){
 				wbc()->theme->load('css','product');
 	        	wbc()->theme->load('js','product');
@@ -518,7 +536,8 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 					}				
 				}
 			});
-			
+		
+		
 			--	and from where the below flow will be layered? I guess it would be somewhere from the optionsUI widget model that is planned -- check and confirm 
 				--	either way make use of the below and/or the hook that other plugins we are exploring are if they are mature enough or mix of both 	
 			add_filter( 'woocommerce_dropdown_variation_attribute_options_html',function($html, $args){
@@ -569,5 +588,11 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 	            }            
 	            return $html;
 	        }, 200, 2 );
+		}
 	}
+
+	public function product_images_template_callback(){
+		\eo\wbc\model\publics\SP_Model_Single_Product::instance()->render_gallery_images_template_callback();
+	}
+
 }
