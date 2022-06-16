@@ -28,6 +28,7 @@ class SP_Gallery_Slider extends \eo\wbc\controllers\publics\Controller{
         \eo\wbc\model\publics\variations\SP_Model_Gallery_Slider::instance()->init_core();
         
         --- get ui call
+        
         \eo\wbc\model\publics\variations\SP_Model_Gallery_Slider::instance()->render_core();
     }
 
