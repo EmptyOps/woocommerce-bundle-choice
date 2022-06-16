@@ -24,7 +24,11 @@ class SP_Gallery_Slider extends \eo\wbc\controllers\publics\Controller{
     }
 
     public function init(){
-        //\eo\sp_p360g\controller\publics\pages\Single_Product::instance()->selectron();
+        
+        \eo\wbc\model\publics\variations\SP_Model_Gallery_Slider::instance()->init_core();
+        
+        --- get ui call
+        \eo\wbc\model\publics\variations\SP_Model_Gallery_Slider::instance()->render_core();
     }
 
     private function selectron(){

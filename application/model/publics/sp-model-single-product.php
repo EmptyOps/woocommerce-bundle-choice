@@ -54,25 +54,20 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 		///////////////////////////woocommerce-bundle-choice/application/controllers/publics/options.php
 		////////////////////////function run()
-		--	as planned the flows and expecially the templating flows the below layers will be from their own templating layers 
-			--	and it should be rendered from the model as per the whole rendering flow including the render_ui function -- to d 
-				--	from the optionsUI widget model -- to d 
-					--	so create the model class with similar flow how we have the filter widget model class, and in this case I think the core class is not necessary but will do in future if required. and the filter widget model either does not have the core class -- to d
-						INVALID no more creating the optionsUI widget model class. so instead single product model class will be used. and on the category page flow the feed model class will be used.  
-					--	however the single product controller(if wbc do not have it yet then create one) should call directly the single product model of wbc for flows which are not in particular related to optionsUI or firstly it is to be taken care of by the page layers and then from there it can call the optionsUI layers - NOTE
-			--	and the CSS need to be managed in a way that even if multiple templates of this free semantic UI is used means for one than attributes this template is used which would be normal where the free ui is used, then in such cases somehow figure out that the CSS is only loaded once -- to d 
-				--	if there are no other way then simply use constant, and it is important to do due to the SEO concerns -- to d 
 		add_action('wp_footer',function(){
+			--	check below two files and check if there is any optionsUI related flow there -- to b 
 			wbc()->theme->load('css','product');
         	wbc()->theme->load('js','product');
 			// Toggle Button
 			$toggle_status = true/*wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_status',true)*/;
 
 
+			--	and by default the expand collapse should be disabled, and when that is disabled nothing related to that will be loaded on frontend -- to b. if required ask t to take care of html css js etc -- to t 
 			$init_toggle = wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_init_status');			
 			
 			$toggle_text = wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_text',__('CUSTOMIZE THIS PRODUCT'));
 
+			--	have t update defaults to a general kind of theme -- to t. current style is so catchy and dark and need to have grayish like general theme that works mostly if not updated. 
 			// Variation item non-hovered
 			$dimention = wbc()->options->get_option('tiny_features','tiny_features_option_ui_option_dimention','2em');
 
@@ -327,59 +322,11 @@ class SP_Model_Single_Product extends SP_Single_Product {
 				}				
 			}
 		});
+
 		
-		--	and from where the below flow will be layered? I guess it would be somewhere from the optionsUI widget model that is planned -- check and confirm 
-			--	either way make use of the below and/or the hook that other plugins we are exploring are if they are mature enough or mix of both 	
-		add_filter( 'woocommerce_dropdown_variation_attribute_options_html',function($html, $args){
-                              
-            if ( apply_filters( 'default_wbc_variation_attribute_options_html', false, $args, $html ) ) {
-                return $html;
-            }
-            
-            // WooCommerce Product Bundle Fixing
-            if ( isset( $_POST[ 'action' ] ) && wbc()->sanitize->post('action') === 'woocommerce_configure_bundle_order_item' ) {
-                return $html;
-            }
-            
-            $attribute_id = wc_variation_attribute_name( $args[ 'attribute' ] );
-            
-            $attribute_name = sanitize_title( $args[ 'attribute' ] );
+		add_filter( 'script_loader_tag',  function($tag){
 
-            wbc()->load->model('category-attribute');
-            $attribute = \eo\wbc\model\Category_Attribute::instance()->get_attribute(str_replace('pa_','',$args[ 'attribute' ]));
-
-            $product_id = $args[ 'product' ]->get_id();
-            
-        	--	and we can make use of the below flow in our fetch data function layers planned 
-        		--	and keep in mind that we had to take care of two data layers(or response that we need to sent to two different place one is variations image gallery and the second is the variations form) one for variations image gallery and the second is for the variations form 
-            $attributes = $args[ 'product' ]->get_variation_attributes();
-            $variations = $args[ 'product' ]->get_available_variations();
-
-            $type = 'select';     
-            if(!empty($attribute->attribute_type)){
-            	$type = $attribute->attribute_type;
-            } else {
-            	$type = 'select';
-            }
-
-            if(in_array($type,array('color','image','image_text','dropdown_image','dropdown_image_only','dropdown','button'))) {
-            	$html = call_user_func_array(
-            		array($this,'variation_options'),array(
-            		array(
-                    	'options'    => $args[ 'options' ],
-                    	'attribute'  => $args[ 'attribute' ],
-                    	'product'    => $args[ 'product' ],
-                        'selected'   => $args[ 'selected' ],
-                        'type'       => $type,
-                        'is_archive' => ( isset( $args[ 'is_archive' ] ) && $args[ 'is_archive' ]),
-                        'attribute_object' => $attribute
-                    ))
-            	);
-            }            
-            return $html;
-        }, 200, 2 );
-		///////////////////////////////
-
+		}, 99, 1);
 
 
 		///////////////////////////var/www/html/drashti_project/27-05-2022/woo-variation-gallery/includes/class-woo-variation-gallery-frontend.php
@@ -465,17 +412,20 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 	public function render_image_gallery() {
 
-		add_filter( 'woocommerce_available_variation', array( $this, 'get_available_variation_gallery' ), 90, 3 );
-
-		add_action( 'wc_ajax_get_default_gallery', array( $this, 'get_default_gallery' ) );
-		add_action( 'wc_ajax_get_variation_gallery', array( $this, 'get_variation_gallery' ) );
-
-		add_filter( 'disable_woo_variation_gallery', array( $this, 'disable_for_specific_product_type' ) );
-		add_filter( 'woo_variation_product_gallery_inline_style', array( $this, 'gallery_inline_style' ) );
+		like for swatches there are get_data call in controller and model, do similar for the gallery_images layers also -- to d 
 
 		add_action( 'after_setup_theme', array( $this, 'enable_theme_support' ), 200 );
 		add_action( 'wp_footer', array( $this, 'slider_template_js' ) );
 
+		create product-images.php file like in the other plugin that we were exploring have -- to b 
+			--	and add below two hooks in this same render_image_gallery function -- to b 
+				--	and create function in model namely render_image_gallery_template and call it from controller right below the get_data call for gallery_images_init -- to b 
+					--	and inside the hooks set path of above created file -- to b 
+						--	and from inside the file call options controller function product_images_template_callback, so create that function -- to b 
+							--	and from that function call model function render_gallery_images_template_callback -- to b 
+								--	and on this note wherever there is function name have part image_gallery then rename it to gallery_images -- to b 
+									--	from above function in model copy the code from the referenced template and the implementation will start from here. it will mostly have hook bindings that will provide the variations images and the rest of the template rendering and even js tempalte preparation will happen on slider and zoom module layers -- to b 
+										--	and on this regard if nothing else then this function should at top init the slider and zoom module but maybe that should be at more appropriate higher layers of init etc. functions maybe -- to b 
 		add_filter( 'wc_get_template', array( $this, 'gallery_template' ), 30, 2 );
 		add_filter( 'wc_get_template_part', array( $this, 'gallery_template_part' ), 30, 2 );
 
@@ -1124,7 +1074,12 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		echo $this->variable_items_wrapper( $content, $type, $args );
 		///////////////////////////
 
-		
+
+		--	move below to options controller selectron function -- to b 
+			--	and from init function of the same controller call the selectron with page_section=swatches and args param that init may have or null -- to b 
+				--	so selectron will also have two param like getUI of options controller -- to b 
+					--	and from within callback function call the selectron hook render or something such function, with the hook args set in the args var and also the page_section param and also the container_class(for the particular hook) param -- to b 		
+						--	and then create function prepare_swatches_data in single-product model in wbc, and move all code inside below to that selectron hook render in its swatches section -- to b 
 		add_filter( 'woocommerce_dropdown_variation_attribute_options_html',  function($html, $args){
             
             if ( apply_filters( 'default_wbc_variation_attribute_options_html', false, $args, $html ) ) {
@@ -1155,7 +1110,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 
 
-
+			----------- most of is to be discared 
             $attribute_id = wc_variation_attribute_name( $args[ 'attribute' ] );
             
             $attribute_name = sanitize_title( $args[ 'attribute' ] );
@@ -1172,16 +1127,32 @@ class SP_Model_Single_Product extends SP_Single_Product {
         				--	and then get_data should also host means fetch_data should also the layer with gallery_images and swatches as the argument, so that their specific data can be loaded from there only -- to b 
             $attributes = $args[ 'product' ]->get_variation_attributes();
             $variations = $args[ 'product' ]->get_available_variations();
-			$this->get_data( "sp_variations" );	
+			----------- most of is to be discared 
 
-            $type = 'select';     
+			-- also call get_data of model from above the selectron is called for swatches, call with first param as swatches_init -- to b 
+				--	and below call it with swatches only as first param -- to b 
+					--	and in fetch_data function in wbc variations set proper if conditions there -- to ddddd 
+					--	ACTIVE_TODO and if required then in fetch_data swatches_init also there will be a binding to hook available_variation just like there is going to be for gallery_images_init. this is only modular and efficient way so for both will be separate and still it can use same callback function with page_section means swatches_init etc. param passed there also -- to d 
+
+			ob_start();
+
+			$this->get_data( "sp_variations" );	
+			-- read from above get_data call -- to b 
+			$attributes = $product->get_variation_attributes();
+			$variations = $product->get_available_variations();
+
+            $type = null;	// 'select';     
             if(!empty($attribute->attribute_type)){
             	$type = $attribute->attribute_type;
             } else {
             	$type = 'select';
             }
 
+
+            add or condition here to apply_filter with key sp_variations_supporting_attribute_type with default to false and second arg will be type -- to b 
+            	--	and now need to add that hook to add type on woo attribute admin, see details in ssm variations class -- to d 
             if(in_array($type,array('color','image','image_text','dropdown_image','dropdown_image_only','dropdown','button'))) {
+
             	$html = call_user_func_array(
             		array($this,'variation_options'),array(
             		array(
@@ -1199,7 +1170,14 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 
 
-			ob_start();
+            the rest of the broad flow would be like, the prepare_swatches_data will return back the prepared data to controller -- to b 
+            	-- but for the below layers and above if is to be clearer yet -- to h 
+            		--	and then the controller will call load_view function of the controller, and template flows will handled from there -- to b 
+            			--	and that will also mean to publish the html hooks so the extensions can apply their html as applicable -- to b 
+            				--	but before above hooks still there is one more hook that is of doing specific ops on the attribute options means args param below like that size extension have min max and so on logic and similarly if others have something else -- to b 
+            					-- so all such logics of such extensions which are moved to render_ui will be implemented after they bind to above hook, so they will bind to above hook in ssm variations class or their own variations class -- to b 
+            					--	however above html hook will be bound from the single product ssm model maybe or in their own model -- to b 
+            		--	and apart from load view the controller layer can additionally create render fucntions like render_image_gallery_template and so on are in model, for example render_variations_swatches_attribute_types to implement some specific logic or conditions but yeah the get ui definition will striictly be managed from controller layers as per fundamental mvc architecture. -- to h or -- to b. ACTIVE_TODO 
 
 			if ( apply_filters( 'wvs_no_individual_settings', true, $args, $is_default_to_image, $is_default_to_button ) ) {
 
@@ -1341,10 +1319,6 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			return $html;
 		}, 200, 2);	
 
-		
-		add_filter( 'script_loader_tag',  function($tag){
-
-		}, 99, 1)
 	}
 
 	public function load_asset(){

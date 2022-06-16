@@ -36,4 +36,12 @@ class SP_Model_Gallery_Slider extends Eowbc_Base_Model_Publics {
 	public function load_asset(){
 
 	}
+
+	public function init_core(){
+
+	}
+	
+	public function render_core(){
+
+	}
 }	
