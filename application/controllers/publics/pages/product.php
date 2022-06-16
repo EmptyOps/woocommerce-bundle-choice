@@ -473,7 +473,10 @@ class Product {
 
         if( ( !isset($_GET['EO_WBC']) and !empty($bonus_features['opts_uis_item_page']) )/*(!isset($_GET['EO_WBC']) and wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_status',false))*/ or ( isset($_GET['EO_WBC']) and wbc()->options->get_option('appearance_product_page','show_options_ui_in_pair_builder',false) ) ){
 
-            \eo\wbc\controllers\publics\Options::instance()->run();        
+            //\eo\wbc\controllers\publics\Options::instance()->run();   
+            if( \eo\wbc\controller\publics\Options::instance()->should_init() ) {
+                \eo\wbc\controller\publics\Options::instance()->init();
+            } 
         }
     }
     

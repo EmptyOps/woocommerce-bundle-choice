@@ -29,6 +29,7 @@ class SP_Gallery_Zoom extends \eo\wbc\controllers\publics\Controller{
         \eo\wbc\model\publics\variations\SP_Model_Gallery_Zoom::instance()->init_core();
         
         --- get ui call
+        
         \eo\wbc\model\publics\variations\SP_Model_Gallery_Zoom::instance()->render_core();
     }
 
