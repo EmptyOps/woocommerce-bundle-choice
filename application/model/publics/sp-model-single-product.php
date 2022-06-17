@@ -1293,7 +1293,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
         //the rest of the broad flow would be like, the prepare_swatches_data will return back the prepared data to controller -- to b done
         	-- but for the below layers and above if is to be clearer yet -- to h 
         			--	the flow will be like the prepare_swatches_data will prepare main and broad level data. get_data call is already done but follow points if ther are added any sub points below -- to b 
-        				--	atleast need to create one function sp_variations_swatches_supported_attribute_types, in wbc variations class -- to d 
+        				--	atleast need to create one function sp_variations_swatches_supported_attribute_types, in wbc variations class -- to d  
         					--	and that will host all free types, so find that in those our woo related files -- to d 
         						--	to find the root of type list check from where those chooser functions are referenced -- to d 
         					--	and additionally it will apply that filter hook on above free type array -- to d 
