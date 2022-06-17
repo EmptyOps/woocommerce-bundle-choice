@@ -6,6 +6,12 @@
 
 
 --- a code /woo-bundle-choice/application/controllers/publics/options.php file no che 
+$attribute = $args[ 'attribute' ];
+$attribute_object = $args['attribute_object'];
+
+$css_classes = array("{$type}-variable-wrapper");
+$ribbon_color = get_term_meta( $attribute_object->attribute_id,'wbc_ribbon_color',true);
+
  $data = sprintf( '<div class="ui segment">
       <span class="ui ribbon label" style="background-color:%s;border-color:%s;color:white;">%s</span><span><ul class="ui mini images variable-items-wrapper %s" data-attribute_name="%s">%s</ul></span></div>',$ribbon_color,$ribbon_color,$attribute_object->attribute_label,trim( implode( ' ', array_unique( $css_classes ) ) ), esc_attr( wc_variation_attribute_name( $attribute ) ), $contents );
 
@@ -13,7 +19,7 @@
 
 
 
- array(
+$template = array(
     'type' => 'div',
     'class' => 'ui segment',
     'child' => array(
@@ -34,4 +40,4 @@
             )
         ),
     ),
-)
+);
