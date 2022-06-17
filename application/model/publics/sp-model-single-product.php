@@ -427,8 +427,9 @@ class SP_Model_Single_Product extends SP_Single_Product {
 						//--	and from inside the file call options controller function product_images_template_callback, so create that function -- to b done
 							//--	and from that function call model function render_gallery_images_template_callback -- to b done
 								//--	and on this note wherever there is function name have part image_gallery then rename it to gallery_images -- to b  done
-									--	from above function in model copy the code from the referenced template and the implementation will start from here. it will mostly have hook bindings that will provide the variations images and the rest of the template rendering and even js tempalte preparation will happen on slider and zoom module layers -- to b 
-										--	and on this regard if nothing else then this function should at top init the slider and zoom module but maybe that should be at more appropriate higher layers of init etc. functions maybe -- to b 
+									// --	from above function in model copy the code from the referenced template and the implementation will start from here. it will mostly have hook bindings that will provide the variations images and the rest of the template rendering and even js tempalte preparation will happen on slider and zoom module layers. 
+										--	and on this regard if nothing else then this function should at top init the slider and zoom module but maybe that should be at more appropriate higher layers of init etc. functions maybe
+											--	so add call from here at top in this function -- to b  
 		
 
 		public function enable_theme_support() {
@@ -1527,6 +1528,19 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		----product no peramiter pass kervano baki che
 		$args['data'] = \eo\wbc\model\publics\SP_Model_Single_Product()::instance()->get_data('gallery_images');
 
+		here recieve the $data param of the caller function -- to b 
+			--	pass it in all three functions called below and prepare the daa in the heirachiical structure the way these loops and functions calls and data and template load sequence is -- to b 
+
+		create two static methods in the wbc variations clas s, namely get_default_attributes and get_default_variation_id -- to d 
+			and the move the respective logic from below to there -- to d 
+				--	and then replace below statements with function calls to that class -- to d 
+		and create one more function get_available_variation, a public static function in the same class wbc variations -- to d 
+			and the ove the respective logic from below to there -- to d 
+				--	and then replace below statements with function calls to that class -- to d 
+
+		create two static methods in the SP_Product clas s, namely get_image_id and get_gallery_image_ids -- to d 
+			and the move the respective logic from below to there -- to d 
+				--	and then replace below statements with function calls to that class -- to d 
 
 		$product_id = $product->get_id();
 
@@ -1536,7 +1550,8 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 		$product_type = $product->get_type();
 
-		$columns = absint( woo_variation_gallery()->get_option( 'thumbnails_columns', apply_filters( 'woo_variation_gallery_default_thumbnails_columns', 4 ) ) );
+		// ACTIVE_TODO we may like to use the columns var later to till gallery_images slider and zoom module layers including till applicable js layers -- to h or -- to d 
+		$columns = -1;	//	thumbnail columns 
 
 		$post_thumbnail_id = $product->get_image_id();
 
@@ -1645,6 +1660,15 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		$post_thumbnail_id = (int) apply_filters( 'woo_variation_gallery_post_thumbnail_id', $post_thumbnail_id, $attachment_ids, $product );
 		$attachment_ids    = (array) apply_filters( 'woo_variation_gallery_attachment_ids', $attachment_ids, $post_thumbnail_id, $product );
 
+		bind to hook from here for the hook that is applied from both slider and zoom module for the images. means add filter here, and provide back with gallery_images data. so simply entire data var will be added to filter var but yeah the variation_gallery_images, attachment_ids etc. would be key -- to b 
+
+		and also do a action hook from here with key sp_variations_gallery_images_render -- to b 
+			-- and the init core or render core function, whichever is applicable, will add action to above hook -- b 
+				-- and so all three hooks of both slider and zoom module should be applied or bind to within this action hook -- to b 
+
+		create list of woo hooks that are used below -- to d 
+			-- and then at least our default slider and zoom frontend that is provided should respect these hooks. soo apply these hooks there -- to d 
+				--	also create list of other such matters that may have missed here -- to d 
 		?>
 
 		<?php do_action( 'woo_variation_product_gallery_start', $product ); ?>
@@ -1719,9 +1743,11 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		$this->prepare_woo_dropdown_attribute_html_data();
 
 		------------------a etlu wvs_default_button_variation_attribute_options alg che
+			--	for this need to compare default and take unique too -- to b 
 			$content = wvs_default_variable_item( $type, $options, $args );
 		-------------
 		----------a etlu wvs_default_image_variation_attribute_options alg che
+			--	for this need to compare default and take unique too -- to b 
 		if ( $type === 'select' ) {
 			return '';
 		}
@@ -1737,6 +1763,14 @@ class SP_Model_Single_Product extends SP_Single_Product {
 	}
 
 	public function prepare_woo_dropdown_attribute_html_data (){
+
+		create two static methods in the SP_Attribue clas s, namely variation_attribute_name and variation_option_name -- to d 
+			and the ove the respective logic from below to there -- to d 
+				--	and then replace below statements with function calls to that class -- to d 
+		and create one more function get_product_terms, a public static function in the same class SP_Attribue -- to d 
+			and the ove the respective logic from below to there -- to d 
+				--	and then replace below statements with function calls to that class -- to d 
+
 		$args = wp_parse_args(
 			$args, array(
 				'options'          => false,
@@ -1771,6 +1805,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		$show_option_none_text = $args['show_option_none'] ? $args['show_option_none'] : esc_html__( 'Choose an option', 'woocommerce' ); // We'll do our best to hide the placeholder, but we'll need to show something when resetting options.
 
 		if ( empty( $options ) && ! empty( $product ) && ! empty( $attribute ) ) {
+			-- recieve data in function params to till this function, since I think we have exact same data on above layers but still confirm -- to b 
 			$attributes = $product->get_variation_attributes();
 			$options    = $attributes[ $attribute ];
 		}
