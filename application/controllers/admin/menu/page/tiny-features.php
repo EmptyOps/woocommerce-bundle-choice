@@ -29,14 +29,22 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 
 	    public function init( $args = null ) { 
 	    
+			// since legacy admins are saving on form submit so we may need to have save called from the init function or other relevant function of the controller, but in the same style as the save is called from ajax resolver means with form_definition and so on 
+				//	so in case of legacy admin call it from here, and yeah it should be before getUI call so that aftre render repopulates saved data on the same page load event 
+			if($args['is_legacy_admin'] == true) {
+				$args['page_section'] = 'sp_variations';	
+				$args['form_definition'] = $this->get_legacy_form_definition($args['page_section'], $args);	
+
+				\eo\wbc\model\admin\Tiny_features::instance()->save( $args['form_definition'], false, $args );
+			}
+
 	        \eo\wbc\controllers\admin\menu\page\Tiny_features::instance()->getUI($args);
 	    }
 
 		private function getUI($args = null){
 		
 			if($args['is_legacy_admin'] == true) {
-				$args['page_section'] = 'sp_variations';	
-				\eo\wbc\model\admin\Tiny_features::instance()->render_ui( $this->get_legacy_form_definition('sp_variations', $args), $args );
+				\eo\wbc\model\admin\Tiny_features::instance()->render_ui( $args['form_definition'], $args );
 			} else {
 				\eo\wbc\model\admin\Tiny_features::instance()->render_ui( $this->get_form_definition( $args), $args );
 			}
