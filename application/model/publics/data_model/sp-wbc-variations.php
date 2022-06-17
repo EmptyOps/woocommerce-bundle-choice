@@ -326,7 +326,22 @@ class SP_WBC_Variations extends SP_Variations {
 
 		// return apply_filters( 'woo_variation_gallery_get_image_props', $props, $attachment_id, $product_id );
 		return $props;
-		
+
+	}
+
+	public function sp_variations_swatches_supported_attribute_types(){
+
+		$type = array();
+		$type['button']='Button';
+		$type['color']='Color';
+		$type['image']='Icon';
+		$type['image_text']='Icons with Text';
+		$type['dropdown_image']='Dropdown with Icons';
+		$type['dropdown_image_only']='Dropdown with Icons Only';
+		$type['dropdown']='Dropdown';
+
+		apply_filters('sp_variations_swatches_attribute_types', $type);	 
+
 	}
 
 }
