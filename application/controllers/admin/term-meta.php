@@ -120,6 +120,8 @@ class Term_Meta {
 			</div>			
 		<?php
 		echo ob_get_clean();
+
+		apply_filters('sp_variations_swatches_attribute_types', $value);	
 	}	
 
 	public function image_chooser($is_edit = false,$term = false, $taxonomy = false) {
