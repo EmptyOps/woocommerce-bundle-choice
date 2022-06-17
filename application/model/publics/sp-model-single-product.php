@@ -1326,12 +1326,21 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			return $html;
 		}
 
-		ACTIVE_TODO move it to sp_wbc_compatability function woo_general_broad_matters_compatability -- to d 
+		
+    	//move it to sp_wbc_compatability function woo_general_broad_matters_compatability -- to d done 
         // WooCommerce Product Bundle Fixing
-        if ( isset( $_POST[ 'action' ] ) && wbc()->sanitize->post('action') === 'woocommerce_configure_bundle_order_item' ) {
-            return $html;
+
+        ///////////////// -- 16-06-2022 -- @drashti -- ///////////////
+
+        // if ( isset( $_POST[ 'action' ] ) && wbc()->sanitize->post('action') === 'woocommerce_configure_bundle_order_item' ) {
+        //     return $html;
+        // }
+
+        // \eo\wbc\model\SP_WBC_Compatibility::instance()->woo_general_broad_matters_compatability($section);
+
+        if($html = \eo\wbc\model\SP_WBC_Compatibility::instance()->woo_general_broad_matters_compatability('woocommerce_configure_bundle')){
+        	return $html;
         }
-        
 
 		// For bundle Product static item
 		$hook_args['show_option_none'] = esc_html__( 'Choose an option', 'woo-variation-swatches' );

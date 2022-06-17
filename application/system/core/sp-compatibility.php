@@ -177,71 +177,71 @@ class SP_Compatibility {
 
  	//////////////////////////////////////////////
 
-		 	jQuery(function ($)
-		 {
-		  Promise.resolve().then(function () {
-		    return _interopRequireWildcard(__webpack_require__("./src/js/WooVariationGallery.js"));
-		  }).then(function () {
-		    // For Single Product
-		    $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery(); // Ajax and Variation Product
+		//  jQuery(function ($)
+		//  {
+		//   Promise.resolve().then(function () {
+		//     return _interopRequireWildcard(__webpack_require__("./src/js/WooVariationGallery.js"));
+		//   }).then(function () {
+		//     // For Single Product
+		//     $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery(); // Ajax and Variation Product
 
-		    $(document).on('wc_variation_form', '.variations_form', function () {
-		      $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery();
-		    }); // Support for Jetpack's Infinite Scroll,
+		//     $(document).on('wc_variation_form', '.variations_form', function () {
+		//       $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery();
+		//     }); // Support for Jetpack's Infinite Scroll,
 
-		    $(document.body).on('post-load', function () {
-		      $('.woo-variation-gallery-wrapper:not(.woo-variation-gallery-product-type-variable):not(.wvg-loaded)').WooVariationGallery();
-		    }); // YITH Quickview
+		//     $(document.body).on('post-load', function () {
+		//       $('.woo-variation-gallery-wrapper:not(.woo-variation-gallery-product-type-variable):not(.wvg-loaded)').WooVariationGallery();
+		//     }); // YITH Quickview
 
-		    $(document).on('qv_loader_stop', function () {
-		      $('.woo-variation-gallery-wrapper:not(.woo-variation-gallery-product-type-variable):not(.wvg-loaded)').WooVariationGallery();
-		    }); // Elementor
+		//     $(document).on('qv_loader_stop', function () {
+		//       $('.woo-variation-gallery-wrapper:not(.woo-variation-gallery-product-type-variable):not(.wvg-loaded)').WooVariationGallery();
+		//     }); // Elementor
 
-		    if (window.elementorFrontend && window.elementorFrontend.hooks) {
-		      elementorFrontend.hooks.addAction('frontend/element_ready/woocommerce-product-images.default', function ($scope) {
-		        $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery();
-		      });
-		    }
-		  });
-		});
+		//     if (window.elementorFrontend && window.elementorFrontend.hooks) {
+		//       elementorFrontend.hooks.addAction('frontend/element_ready/woocommerce-product-images.default', function ($scope) {
+		//         $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery();
+		//       });
+		//     }
+		//   });
+		// });
 
 
-		add_action( 'wvs_global_attribute_column', function ( $column, $term_id, $taxonomy, $attribute, $fields, $available_types ) {
-			if ( class_exists( 'SitePress' ) ) {
+		// add_action( 'wvs_global_attribute_column', function ( $column, $term_id, $taxonomy, $attribute, $fields, $available_types ) {
+		// 	if ( class_exists( 'SitePress' ) ) {
 
-				global $sitepress;
+		// 		global $sitepress;
 
-				$keys = wp_list_pluck( $fields, 'id' );
-				// $keys = array_column($fields, 'id');
+		// 		$keys = wp_list_pluck( $fields, 'id' );
+		// 		// $keys = array_column($fields, 'id');
 
-				foreach ( $keys as $key ) {
-					$value = sanitize_text_field( get_term_meta( $term_id, $key, true ) );
-					// $original_element_id = $sitepress->get_original_element_id( $term_id, 'tax_' . $taxonomy );
-					$trid         = $sitepress->get_element_trid( $term_id, 'tax_' . $taxonomy );
-					$translations = $sitepress->get_element_translations( $trid, 'tax_' . $taxonomy );
+		// 		foreach ( $keys as $key ) {
+		// 			$value = sanitize_text_field( get_term_meta( $term_id, $key, true ) );
+		// 			// $original_element_id = $sitepress->get_original_element_id( $term_id, 'tax_' . $taxonomy );
+		// 			$trid         = $sitepress->get_element_trid( $term_id, 'tax_' . $taxonomy );
+		// 			$translations = $sitepress->get_element_translations( $trid, 'tax_' . $taxonomy );
 
-					$current_lang = $sitepress->get_current_language();
-					$default_lang = $sitepress->get_default_language();
+		// 			$current_lang = $sitepress->get_current_language();
+		// 			$default_lang = $sitepress->get_default_language();
 
-					if ( $translations && empty( $value ) ) {
-						// source_language_code
-						$translation = array_values( array_filter( $translations, function ( $translation ) {
-							return isset( $translation->original ) && ! empty( $translation->original );
-						} ) );
+		// 			if ( $translations && empty( $value ) ) {
+		// 				// source_language_code
+		// 				$translation = array_values( array_filter( $translations, function ( $translation ) {
+		// 					return isset( $translation->original ) && ! empty( $translation->original );
+		// 				} ) );
 
-						$translation = array_shift( $translation );
+		// 				$translation = array_shift( $translation );
 
-						if ( empty( $value ) && $translation ) {
-							$original_term_id = $translation->term_id;
-							$original_value   = sanitize_text_field( get_term_meta( $original_term_id, $key, true ) );
-							// Copy term meta from original
-							update_term_meta( $term_id, $key, $original_value );
-						}
-					}
+		// 				if ( empty( $value ) && $translation ) {
+		// 					$original_term_id = $translation->term_id;
+		// 					$original_value   = sanitize_text_field( get_term_meta( $original_term_id, $key, true ) );
+		// 					// Copy term meta from original
+		// 					update_term_meta( $term_id, $key, $original_value );
+		// 				}
+		// 			}
 
-				}
-			}
-		}, 10, 6 );
+		// 		}
+		// 	}
+		// }, 10, 6 );
 
 
 }

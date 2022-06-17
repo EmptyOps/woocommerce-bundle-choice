@@ -25,6 +25,7 @@ class SP_Model_Gallery_Slider extends Eowbc_Base_Model_Publics {
 	public function __construct() {
 
 	}
+	
 	public function get_data($for_section="default", $args=null) {
 
 	}
@@ -45,6 +46,6 @@ class SP_Model_Gallery_Slider extends Eowbc_Base_Model_Publics {
 		
 		$classes = array('sp-variations-gallery-images-slider');
 		$classes = apply_filters('sp_slzm_slider_container',$classes);
-		
+
 	}
 }	
