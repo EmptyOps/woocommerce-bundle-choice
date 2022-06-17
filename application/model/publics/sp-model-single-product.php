@@ -1713,6 +1713,9 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 	public function prepare_swatches_data_by_attribute_type(){
 
+		here recieve the $data param of the caller function -- to b 
+			--	pass it in all three functions called below and prepare the daa in the heirachiical structure the way these loops and functions calls and data and template load sequence is -- to b 
+
 		$this->prepare_woo_dropdown_attribute_html_data();
 
 		------------------a etlu wvs_default_button_variation_attribute_options alg che
