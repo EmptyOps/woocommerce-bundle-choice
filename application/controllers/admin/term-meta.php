@@ -120,8 +120,6 @@ class Term_Meta {
 			</div>			
 		<?php
 		echo ob_get_clean();
-
-		apply_filters('sp_variations_swatches_attribute_types', $value);	
 	}	
 
 	public function image_chooser($is_edit = false,$term = false, $taxonomy = false) {
@@ -400,13 +398,9 @@ class Term_Meta {
 
 		// Add additional type so we get the kind of the attribute's behaviour.
 		add_filter( 'product_attributes_type_selector',function($type){
-			$type['button']='Button';
-			$type['color']='Color';
-			$type['image']='Icon';
-			$type['image_text']='Icons with Text';
-			$type['dropdown_image']='Dropdown with Icons';
-			$type['dropdown_image_only']='Dropdown with Icons Only';
-			$type['dropdown']='Dropdown';
+
+			$type = array_merge($type, \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->sp_variations_swatches_supported_attribute_types($args););
+
 
 			return $type;
 		}, 10, 1 );
