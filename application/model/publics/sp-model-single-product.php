@@ -1041,28 +1041,9 @@ class SP_Model_Single_Product extends SP_Single_Product {
         	wbc()->theme->load('js','product');
 			// Toggle Button
 
-// <<<<<<< HEAD
-			// ACTIVE_TODO move it to sp_wbc_compatability function woo_general_broad_matters_compatability -- to d done 
-   //          // WooCommerce Product Bundle Fixing
-
-   //          ///////////////// -- 16-06-2022 -- @drashti -- ///////////////
-
-   //          // if ( isset( $_POST[ 'action' ] ) && wbc()->sanitize->post('action') === 'woocommerce_configure_bundle_order_item' ) {
-   //          //     return $html;
-   //          // }
-
-   //          // \eo\wbc\model\SP_WBC_Compatibility::instance()->woo_general_broad_matters_compatability($section);
-
-   //          if($html = \eo\wbc\model\SP_WBC_Compatibility::instance()->woo_general_broad_matters_compatability('woocommerce_configure_bundle')){
-   //          	return $html;
-   //          }
-            
-// =======
         	$asset_params = array();
         	
 			$asset_params['toggle_status'] = true/*wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_status',true)*/;
-			
-// >>>>>>> 0c3e0d1dedd06381350cebf21ca49f8abf6cd0c3
 
 
 			--	and by default the expand collapse should be disabled, and when that is disabled nothing related to that will be loaded on frontend -- to b. if required ask t to take care of html css js etc -- to t 
@@ -1345,12 +1326,21 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			return $html;
 		}
 
-		ACTIVE_TODO move it to sp_wbc_compatability function woo_general_broad_matters_compatability -- to d 
+		
+    	//move it to sp_wbc_compatability function woo_general_broad_matters_compatability -- to d done 
         // WooCommerce Product Bundle Fixing
-        if ( isset( $_POST[ 'action' ] ) && wbc()->sanitize->post('action') === 'woocommerce_configure_bundle_order_item' ) {
-            return $html;
+
+        ///////////////// -- 16-06-2022 -- @drashti -- ///////////////
+
+        // if ( isset( $_POST[ 'action' ] ) && wbc()->sanitize->post('action') === 'woocommerce_configure_bundle_order_item' ) {
+        //     return $html;
+        // }
+
+        // \eo\wbc\model\SP_WBC_Compatibility::instance()->woo_general_broad_matters_compatability($section);
+
+        if($html = \eo\wbc\model\SP_WBC_Compatibility::instance()->woo_general_broad_matters_compatability('woocommerce_configure_bundle')){
+        	return $html;
         }
-        
 
 		// For bundle Product static item
 		$hook_args['show_option_none'] = esc_html__( 'Choose an option', 'woo-variation-swatches' );
@@ -1428,12 +1418,45 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
         the rest of the broad flow would be like, the prepare_swatches_data will return back the prepared data to controller -- to b 
         	-- but for the below layers and above if is to be clearer yet -- to h 
-        		--	and then the controller will call load_view function of the controller, and template flows will handled from there -- to b 
-        			--	and that will also mean to publish the html hooks so the extensions can apply their html as applicable -- to b 
-        				--	but before above hooks still there is one more hook that is of doing specific ops on the attribute options means args param below like that size extension have min max and so on logic and similarly if others have something else -- to b 
+        			--	the flow will be like the prepare_swatches_data will prepare main and broad level data. get_data call is already done but follow points if ther are added any sub points below -- to b 
+        				--	atleast need to create one function sp_variations_swatches_supported_attribute_types, in wbc variations class -- to d 
+        					--	and that will host all free types, so find that in those our woo related files -- to d 
+        						--	to find the root of type list check from where those chooser functions are referenced -- to d 
+        					--	and additionally it will apply that filter hook on above free type array -- to d 
+        					--	and then the free list on the woo should be populated from above sp_variations_swatches_supported_attribute_types function -- to d 
+        					--	and on ssm variations clas s create overrided function sp_variations_swatches_supported_attribute_types and it will bind to above hooks and add additional type that extensions may have registered in thier config -- to d 
+        						--	so this function should be called always when extension loads since it is going to be depended on by both admin and frontend so can maybe call from http handler but since extensions so far do not have that so call from other applicable place with comment "ACTIVE_TODO when there is http handler class for extensions then move it there" -- to d 
+        					--	and above in_array condition should also call that function, so remove the hardcoded array from here -- to b 
+        						--	also now remove that or condition hook that we added since that will be now from the base function -- to b 
+        			--	and additionally this model will have prepare_variable_item_data and prepare_variable_item_wrapper_data function that will be called from the prepare_swatches_data function loop. so simply follow the code loop below and it will use the data from above get_data call and rest if added from below -- to b 
+        					--	additionally there will be one more function prepare_swatches_data_by_attribute_type and that will be actually called from prepare_swatches_data and the two functions mentioned above (including on more mentioned below so total three) will be called from this function -- to b 
+        				--	create below mentioned functions first and add call to them. -- to b 
+	        				--	firstly the prepare_woo_dropdown_attribute_html_data function will be called, so create that function -- to b 
+	        					-- then prepare_variable_item_data function will be called -- to b 
+	        					--	then prepare_variable_item_wrapper_data function will be called -- to b 
+	        			--	and then derive its code from the plugin we were exploring and put it there but additionally compare with our code of similar function layers and take our unique flows and put it there -- to b 
+	        			--	and then prepare data and in all three functions and put it in $data array and return back -- to b 
+	        				--	and in this process there will be one hook(mentioned below for specific min max and so on ops) with key sp_prepare_swatches_data_by_attribute_type that will be applied as filter hook on $data or $options var from the above prepare_swatches_data_by_attribute_type function after it had aquire data response by calling all three functions above -- to b 
+								--	bind to above hook from the respective models of each extensions from their function -- to d 
+									--	so first create same heirarchy of functions in each extensions -- to d 
+										--	b will assist with atleast first extension means with size extension -- to b and -- to d 
+										--	then after the prepare_swatches_data_by_attribute_type function is created then from there bind to the hook sp_prepare_swatches_data_by_attribute_type -- to d 
+        		--	and then the controller will call load_view function of the controller using the data recieved from the above prepare data set of functions, and template flows will handled from there as outlined in the below list of points -- to b 
+        				--	there will be one wrapper function render_swatches_data_by_attribute_type, in the same options controller and will be called from the load_view function -- to b 
+        						--	and from above function there will be three functions that will be called and that will also be in controller. they are render_woo_dropdown_attribute_html_data, render_variable_item_data, and render_variable_item_wrapper_data so create those functions and call to them -- to b 
+        							--	and from above three fucntions the respective templates are loaded with particular data, so it will call the getUI function with specific params and data and that will load the ui templates using the get_ui_definition function -- to b 
+        								--	and the woo dropdown attribute html will also be loaded from tempalte so create one template for that in the templates folder -- to b 
+        									--	ACTIVE_TODO in future if required then we need to give control to extensions as well to load their specific template by overridding the filter hook that we can publish or we can give set of hooks that extensions can use to contol/override certain aspects of that template -- to h or -- to b 
+        							--	and after the call to render_woo_dropdown_attribute_html_data there will be one filter hook that will be applied which is sp_render_swatches_data_by_attribute_type with first param to be null and if that returned any html then the other two functions will not be called. so it will be if conditions with $hooked_html assignment. -- to b 
+        								--	bind to above hook from the respective models of each extensions from their function -- to d 
+        									--	so first create same heirarchy of functions in each extensions -- to d 
+        										--	b will assist with atleast first extension means with size extension -- to b and -- to d 
+        										--	then after the render_swatches_data_by_attribute_type function is created then from there bind to the hook sp_render_swatches_data_by_attribute_type -- to d 
+        				--	but before above hooks still there is one more hook that is of doing specific ops on the attribute options means args param below like that size extension have min max and so on logic and similarly if others have something else -- covered above already  
         					-- so all such logics of such extensions which are moved to render_ui will be implemented after they bind to above hook, so they will bind to above hook in ssm variations class or their own variations class -- to b 
         					--	however above html hook will be bound from the single product ssm model maybe or in their own model -- to b 
         		--	and apart from load view the controller layer can additionally create render fucntions like render_image_gallery_template and so on are in model, for example render_variations_swatches_attribute_types to implement some specific logic or conditions but yeah the get ui definition will striictly be managed from controller layers as per fundamental mvc architecture. -- to h or -- to b. ACTIVE_TODO 
+        			--	NOTE: now while all hooks required by above extensions and extensions can do their job using those hooks then so not sure if render_variations_swatches_attribute_types function in the model is necessary or not. 
 
 		if ( apply_filters( 'wvs_no_individual_settings', true, $hook_args, $is_default_to_image, $is_default_to_button ) ) {
 
