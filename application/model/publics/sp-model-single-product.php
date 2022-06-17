@@ -1041,28 +1041,9 @@ class SP_Model_Single_Product extends SP_Single_Product {
         	wbc()->theme->load('js','product');
 			// Toggle Button
 
-// <<<<<<< HEAD
-			// ACTIVE_TODO move it to sp_wbc_compatability function woo_general_broad_matters_compatability -- to d done 
-   //          // WooCommerce Product Bundle Fixing
-
-   //          ///////////////// -- 16-06-2022 -- @drashti -- ///////////////
-
-   //          // if ( isset( $_POST[ 'action' ] ) && wbc()->sanitize->post('action') === 'woocommerce_configure_bundle_order_item' ) {
-   //          //     return $html;
-   //          // }
-
-   //          // \eo\wbc\model\SP_WBC_Compatibility::instance()->woo_general_broad_matters_compatability($section);
-
-   //          if($html = \eo\wbc\model\SP_WBC_Compatibility::instance()->woo_general_broad_matters_compatability('woocommerce_configure_bundle')){
-   //          	return $html;
-   //          }
-            
-// =======
         	$asset_params = array();
         	
 			$asset_params['toggle_status'] = true/*wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_status',true)*/;
-			
-// >>>>>>> 0c3e0d1dedd06381350cebf21ca49f8abf6cd0c3
 
 
 			--	and by default the expand collapse should be disabled, and when that is disabled nothing related to that will be loaded on frontend -- to b. if required ask t to take care of html css js etc -- to t 
@@ -1345,12 +1326,21 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			return $html;
 		}
 
-		ACTIVE_TODO move it to sp_wbc_compatability function woo_general_broad_matters_compatability -- to d 
+		
+    	//move it to sp_wbc_compatability function woo_general_broad_matters_compatability -- to d done 
         // WooCommerce Product Bundle Fixing
-        if ( isset( $_POST[ 'action' ] ) && wbc()->sanitize->post('action') === 'woocommerce_configure_bundle_order_item' ) {
-            return $html;
+
+        ///////////////// -- 16-06-2022 -- @drashti -- ///////////////
+
+        // if ( isset( $_POST[ 'action' ] ) && wbc()->sanitize->post('action') === 'woocommerce_configure_bundle_order_item' ) {
+        //     return $html;
+        // }
+
+        // \eo\wbc\model\SP_WBC_Compatibility::instance()->woo_general_broad_matters_compatability($section);
+
+        if($html = \eo\wbc\model\SP_WBC_Compatibility::instance()->woo_general_broad_matters_compatability('woocommerce_configure_bundle')){
+        	return $html;
         }
-        
 
 		// For bundle Product static item
 		$hook_args['show_option_none'] = esc_html__( 'Choose an option', 'woo-variation-swatches' );
