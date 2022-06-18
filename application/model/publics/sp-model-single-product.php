@@ -1310,8 +1310,8 @@ class SP_Model_Single_Product extends SP_Single_Product {
 	        					-- then prepare_variable_item_data function will be called -- to b 
 	        					--	then prepare_variable_item_wrapper_data function will be called -- to b 
 	        			--	and then derive its code from the plugin we were exploring and put it there but additionally compare with our code of similar function layers and take our unique flows and put it there -- to b 
-	        			--	and then prepare data and in all three functions and put it in $data array and return back -- to b 
-	        				--	and in this process there will be one hook(mentioned below for specific min max and so on ops) with key sp_prepare_swatches_data_by_attribute_type that will be applied as filter hook on $data or $options var from the above prepare_swatches_data_by_attribute_type function after it had aquire data response by calling all three functions above -- to b 
+	        			// --	and then prepare data and in all three functions and put it in $data array and return back -- to b done
+	        			// 	--	and in this process there will be one hook(mentioned below for specific min max and so on ops) with key sp_prepare_swatches_data_by_attribute_type that will be applied as filter hook on $data or $options var from the above  prepare_swatches_data_by_attribute_type function after it had aquire data response by calling all three functions above -- to b done
 								--	bind to above hook from the respective models of each extensions from their function -- to d 
 									--	so first create same heirarchy of functions in each extensions -- to d 
 										--	b will assist with atleast first extension means with size extension -- to b and -- to d 
@@ -1665,6 +1665,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		and also do a action hook from here with key sp_variations_gallery_images_render -- to b 
 			-- and the init core or render core function, whichever is applicable, will add action to above hook -- b 
 				-- and so all three hooks of both slider and zoom module should be applied or bind to within this action hook -- to b 
+				do_action( 'sp_variations_gallery_images_render');
 
 		create list of woo hooks that are used below -- to d 
 			--wc_placeholder_img_src
@@ -1779,9 +1780,9 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		// create two static methods in the SP_Attribue clas s, namely variation_attribute_name and variation_option_name -- to d done
 		// 	and the ove the respective logic from below to there -- to d done 
 		// 		--	and then replace below statements with function calls to that class -- to d done
-		and create one more function get_product_terms, a public static function in the same class SP_Attribue -- to d 
-			and the ove the respective logic from below to there -- to d 
-				--	and then replace below statements with function calls to that class -- to d 
+		// and create one more function get_product_terms, a public static function in the same class SP_Attribue -- to d done
+		// 	and the ove the respective logic from below to there -- to d done
+		// 		--	and then replace below statements with function calls to that class -- to d done
 
 		$data['woo_dropdown_attribute_html_data']['args'] = wp_parse_args(
 			$args['hook_callback_args']['hook_args'], array(
@@ -1825,7 +1826,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		--------------a etlu wvs_default_button_variation_attribute_options alg che
 		if ( $data['woo_dropdown_attribute_html_data']['product'] ) {
 			$data['woo_dropdown_attribute_html_data']['attribute_name'] = \eo\wbc\system\core\data_model\SP_Attribute::instance()->variation_attribute_name($attribute);
-			echo '<select id="' . esc_attr( $id ) . '" class="' . esc_attr( $class ) . ' hide woo-variation-raw-select woo-variation-raw-type-' . $type . '" style="display:none" name="' . esc_attr( $name ) . '" data-attribute_name="' . esc_attr( wc_variation_attribute_name( $attribute ) ) . '" data-show_option_none="' . ( $show_option_none ? 'yes' : 'no' ) . '">';
+			echo '<select id="' . esc_attr( $id ) . '" class="' . esc_attr( $class ) . ' hide woo-variation-raw-select woo-variation-raw-type-' . $type . '" style="display:none" name="' . esc_attr( $name ) . '" data-attribute_name="' . esc_attr( \eo\wbc\system\core\data_model\SP_Attribute::instance()->variation_attribute_name($attribute)) . '" data-show_option_none="' . ( $show_option_none ? 'yes' : 'no' ) . '">';
 		}
 		-----------------
 
@@ -1833,16 +1834,16 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		if ( $data['woo_dropdown_attribute_html_data']['product'] ) {
 
 			if ( $data['woo_dropdown_attribute_html_data']['type'] === 'select' ) {
-				echo '<select id="' . esc_attr( $id ) . '" class="' . esc_attr( $class ) . '" name="' . esc_attr( $name ) . '" data-attribute_name="' . esc_attr( wc_variation_attribute_name( $attribute ) ) . '" data-show_option_none="' . ( $show_option_none ? 'yes' : 'no' ) . '">';
+				echo '<select id="' . esc_attr( $id ) . '" class="' . esc_attr( $class ) . '" name="' . esc_attr( $name ) . '" data-attribute_name="' . esc_attr( \eo\wbc\system\core\data_model\SP_Attribute::instance()->variation_attribute_name($attribute) ) . '" data-show_option_none="' . ( $show_option_none ? 'yes' : 'no' ) . '">';
 			} else {
-				echo '<select id="' . esc_attr( $id ) . '" class="' . esc_attr( $class ) . ' hide woo-variation-raw-select woo-variation-raw-type-' . $type . '" style="display:none" name="' . esc_attr( $name ) . '" data-attribute_name="' . esc_attr( wc_variation_attribute_name( $attribute ) ) . '" data-show_option_none="' . ( $show_option_none ? 'yes' : 'no' ) . '">';
+				echo '<select id="' . esc_attr( $id ) . '" class="' . esc_attr( $class ) . ' hide woo-variation-raw-select woo-variation-raw-type-' . $type . '" style="display:none" name="' . esc_attr( $name ) . '" data-attribute_name="' . esc_attr( \eo\wbc\system\core\data_model\SP_Attribute::instance()->variation_attribute_name($attribute) ) . '" data-show_option_none="' . ( $show_option_none ? 'yes' : 'no' ) . '">';
 			}
 		}
 		-------------
 		if ( $data['woo_dropdown_attribute_html_data']['product'] && taxonomy_exists( $data['woo_dropdown_attribute_html_data']['attribute'] ) ) {
-			echo '<select id="' . esc_attr( $id ) . '" class="' . esc_attr( $class ) . ' hide woo-variation-raw-select woo-variation-raw-type-' . esc_attr( $type ) . '" style="display:none" name="' . esc_attr( $name ) . '" data-attribute_name="' . esc_attr( wc_variation_attribute_name( $attribute ) ) . '" data-show_option_none="' . ( $show_option_none ? 'yes' : 'no' ) . '">';
+			echo '<select id="' . esc_attr( $id ) . '" class="' . esc_attr( $class ) . ' hide woo-variation-raw-select woo-variation-raw-type-' . esc_attr( $type ) . '" style="display:none" name="' . esc_attr( $name ) . '" data-attribute_name="' . esc_attr( \eo\wbc\system\core\data_model\SP_Attribute::instance()->variation_attribute_name($attribute) ) . '" data-show_option_none="' . ( $show_option_none ? 'yes' : 'no' ) . '">';
 		} else {
-			echo '<select id="' . esc_attr( $id ) . '" class="' . esc_attr( $class ) . '" name="' . esc_attr( $name ) . '" data-attribute_name="' . esc_attr( wc_variation_attribute_name( $attribute ) ) . '" data-show_option_none="' . ( $show_option_none ? 'yes' : 'no' ) . '">';
+			echo '<select id="' . esc_attr( $id ) . '" class="' . esc_attr( $class ) . '" name="' . esc_attr( $name ) . '" data-attribute_name="' . esc_attr( \eo\wbc\system\core\data_model\SP_Attribute::instance()->variation_attribute_name($attribute) ) . '" data-show_option_none="' . ( $show_option_none ? 'yes' : 'no' ) . '">';
 		}
 
 		if ( $args['hook_callback_args']['hook_args']['show_option_none'] ) {
@@ -1917,7 +1918,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 				$data['variable_item_data']['terms'] = \eo\wbc\system\core\data_model\SP_Attribute::instance()->get_product_terms( $data['woo_dropdown_attribute_html_data']['product']->get_id(), $data['variable_item_data']['attribute'], array( 'fields' => 'all' ) );
 
-				$data['variable_item_data']['name']  = uniqid( wc_variation_attribute_name( $data['variable_item_data']['attribute'] ) );
+				$data['variable_item_data']['name']  = uniqid( \eo\wbc\system\core\data_model\SP_Attribute::instance()->variation_attribute_name( $data['variable_item_data']['attribute'] ) );
 				------- m have this additional
 				if(in_array($data['woo_dropdown_attribute_html_data']['type'],array('dropdown_image','dropdown_image_only','dropdown'))) {
 					$data['variable_item_data']['selected_item'] = sanitize_title( $data['woo_dropdown_attribute_html_data']['args'][ 'selected' ] );
@@ -1978,7 +1979,8 @@ class SP_Model_Single_Product extends SP_Single_Product {
 					if ( in_array( $term->slug, $data['woo_dropdown_attribute_html_data']['options'], true ) ) {
 
 						// aria-checked="false"
-						$data['variable_item_data'][$term->slug]['option'] = esc_html( apply_filters( 'woocommerce_variation_option_name', $term->name, $term, $data['variable_item_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product'] ) );
+						// $data['variable_item_data'][$term->slug]['option'] = esc_html( apply_filters( 'woocommerce_variation_option_name', $term->name, $term, $data['variable_item_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product'] ) );
+						$data['variable_item_data'][$term->slug]['option'] = esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name($term->name, $term, $data['variable_item_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product'] ) );
 
 						$data['variable_item_data'][$term->slug]['is_selected']    = ( sanitize_title( $data['woo_dropdown_attribute_html_data']['args']['selected'] ) == $term->slug );
 						$data['variable_item_data'][$term->slug]['selected_class'] = $data['variable_item_data'][$term->slug]['is_selected'] ? 'selected' : '';
@@ -2054,7 +2056,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 					foreach ( $data['woo_dropdown_attribute_html_data']['options'] as $option ) {
 						// This handles < 2.4.0 bw compatibility where text attributes were not sanitized.
 
-						$data['variable_item_data'][$term->slug]['option'] = esc_html( apply_filters( 'woocommerce_variation_option_name', $option, null, $data['variable_item_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product'] ) );
+						$data['variable_item_data'][$term->slug]['option'] = esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $option, null, $data['variable_item_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product'] ) );
 
 						$data['variable_item_data'][$term->slug]['is_selected'] = ( sanitize_title( $data['variable_item_data'][$term->slug]['option'] ) == sanitize_title( $data['woo_dropdown_attribute_html_data']['args']['selected'] ) );
 
@@ -2128,7 +2130,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 
 			$data = sprintf( '<div class="ui segment">
-	  		    <span class="ui ribbon label" style="background-color:%s;border-color:%s;color:white;">%s</span><span><ul class="ui mini images variable-items-wrapper %s" data-attribute_name="%s">%s</ul></span></div>',$ribbon_color,$ribbon_color,$attribute_object->attribute_label,trim( implode( ' ', array_unique( $css_classes ) ) ), esc_attr( wc_variation_attribute_name( $attribute ) ), $contents );
+	  		    <span class="ui ribbon label" style="background-color:%s;border-color:%s;color:white;">%s</span><span><ul class="ui mini images variable-items-wrapper %s" data-attribute_name="%s">%s</ul></span></div>',$ribbon_color,$ribbon_color,$attribute_object->attribute_label,trim( implode( ' ', array_unique( $css_classes ) ) ), esc_attr( \eo\wbc\system\core\data_model\SP_Attribute::instance()->variation_attribute_name($attribute) ), $contents );
 		-------------
 
 		$data['variable_item_wrapper_data']['attribute'] = $data['woo_dropdown_attribute_html_data']['args']['attribute'];
@@ -2141,7 +2143,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		array_push( $data['variable_item_wrapper_data']['css_classes'], $data['variable_item_wrapper_data']['clear_on_reselect'] );
 
 		// <div aria-live="polite" aria-atomic="true" class="screen-reader-text">%1$s: <span data-default=""></span></div>
-		$data = sprintf( '<ul role="radiogroup" aria-label="%1$s"  class="variable-items-wrapper %2$s" data-attribute_name="%3$s" data-attribute_values="%4$s">%5$s</ul>', esc_attr( wc_attribute_label( $attribute ) ), trim( implode( ' ', array_unique( $css_classes ) ) ), esc_attr( wc_variation_attribute_name( $attribute ) ), wc_esc_json( wp_json_encode( array_values( $options ) ) ), $contents );
+		$data = sprintf( '<ul role="radiogroup" aria-label="%1$s"  class="variable-items-wrapper %2$s" data-attribute_name="%3$s" data-attribute_values="%4$s">%5$s</ul>', esc_attr( wc_attribute_label( $attribute ) ), trim( implode( ' ', array_unique( $css_classes ) ) ), esc_attr( \eo\wbc\system\core\data_model\SP_Attribute::instance()->variation_attribute_name($attribute) ), wc_esc_json( wp_json_encode( array_values( $options ) ) ), $contents );
 		
 		
 		return apply_filters( 'wvs_variable_items_wrapper', $data, $contents, $data['woo_dropdown_attribute_html_data']['type'], $data['woo_dropdown_attribute_html_data']['args'], $saved_attribute );
