@@ -595,4 +595,19 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 		\eo\wbc\model\publics\SP_Model_Single_Product::instance()->render_gallery_images_template_callback();
 	}
 
+	public function render_swatches_data_by_attribute_type(){
+
+	}
+
+	public function render_woo_dropdown_attribute_html_data(){
+
+	}
+
+	public function render_variable_item_data(){
+
+	}
+
+	public function render_variable_item_wrapper_data(){\
+
+	}
 }

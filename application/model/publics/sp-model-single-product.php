@@ -1188,17 +1188,17 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 	}
 
-	public function prepare_swatches_data($args = null){
+	public function prepare_swatches_data($args = array()){
 
 		$data = array();
-		$html = $args['hook_callback_args']['html'];
-        $hook_args = $args['hook_callback_args']['hook_args'];
+		/*$html = $args['hook_callback_args']['html'];
+        $hook_args = $args['hook_callback_args']['hook_args'];*/
 
-		if ( apply_filters( 'default_wbc_variation_attribute_options_html', false, $hook_args, $html ) ) {
-            return $html;
+		if ( apply_filters( 'default_wbc_variation_attribute_options_html', false, $args['hook_callback_args']['hook_args'], $args['hook_callback_args']['html'] ) ) {
+            return $args['hook_callback_args']['html'];
         }
-		if ( apply_filters( 'default_wvs_variation_attribute_options_html', false, $hook_args, $html ) if the args['type'] is not supported by our free plugin or premium template then simply return the html. so we maybe need that flow here which checks for premium template is not set or even not available in free plugin. we maybe planned hook for this already or atleast the hook is suggested for this. there is that older hook also but we simply need to create new one and use that only to ensure neat and clean implementation as well as it will help avoid confusion that is likely. mark older as deprecated. ) {
-			return $html;
+		if ( apply_filters( 'default_wvs_variation_attribute_options_html', false, $args['hook_callback_args']['hook_args'], $args['hook_callback_args']['html'] ) if the args['type'] is not supported by our free plugin or premium template then simply return the html. so we maybe need that flow here which checks for premium template is not set or even not available in free plugin. we maybe planned hook for this already or atleast the hook is suggested for this. there is that older hook also but we simply need to create new one and use that only to ensure neat and clean implementation as well as it will help avoid confusion that is likely. mark older as deprecated. ) {
+			return $args['hook_callback_args']['html'];
 		}
 
 		
@@ -1218,13 +1218,13 @@ class SP_Model_Single_Product extends SP_Single_Product {
         }
 
 		// For bundle Product static item
-		$hook_args['show_option_none'] = esc_html__( 'Choose an option', 'woo-variation-swatches' );
+		$args['hook_callback_args']['hook_args']['show_option_none'] = esc_html__( 'Choose an option', 'woo-variation-swatches' );
 
 		ACTIVE_TODO we also need to provide default setting and I think we can 
 		simply give dropdown with three options like default to image, button or dropdown_image 
-		// $is_default_to_image          = apply_filters( 'wvs_is_default_to_image', ! ! ( woo_variation_swatches()->get_option( 'default_to_image' ) ), $hook_args );
-		// $is_default_to_button         = apply_filters( 'wvs_is_default_to_button', ! ! ( woo_variation_swatches()->get_option( 'default_to_button' ) ), $hook_args );
-		// $default_image_type_attribute = apply_filters( 'wvs_default_image_type_attribute', woo_variation_swatches()->get_option( 'default_image_type_attribute' ), $hook_args );
+		// $is_default_to_image          = apply_filters( 'wvs_is_default_to_image', ! ! ( woo_variation_swatches()->get_option( 'default_to_image' ) ), $args['hook_callback_args']['hook_args'] );
+		// $is_default_to_button         = apply_filters( 'wvs_is_default_to_button', ! ! ( woo_variation_swatches()->get_option( 'default_to_button' ) ), $args['hook_callback_args']['hook_args'] );
+		// $default_image_type_attribute = apply_filters( 'wvs_default_image_type_attribute', woo_variation_swatches()->get_option( 'default_image_type_attribute' ), $args['hook_callback_args']['hook_args'] );
 
 		// $is_default_to_image_button = ( $is_default_to_image || $is_default_to_button );
 
@@ -1233,22 +1233,22 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 
 		----------- most of is to be discared 
-        $attribute_id = wc_variation_attribute_name( $hook_args[ 'attribute' ] );
+        $attribute_id = wc_variation_attribute_name( $args['hook_callback_args']['hook_args'][ 'attribute' ] );
         
-        $attribute_name = sanitize_title( $hook_args[ 'attribute' ] );
+        $attribute_name = sanitize_title( $args['hook_callback_args']['hook_args'][ 'attribute' ] );
 
         wbc()->load->model('category-attribute');
-        $attribute = \eo\wbc\model\Category_Attribute::instance()->get_attribute(str_replace('pa_','',$hook_args[ 'attribute' ]));
+        $attribute = \eo\wbc\model\Category_Attribute::instance()->get_attribute(str_replace('pa_','',$args['hook_callback_args']['hook_args'][ 'attribute' ]));
 
-        $product_id = $hook_args[ 'product' ]->get_id();
+        $product_id = $args['hook_callback_args']['hook_args'][ 'product' ]->get_id();
         
     	--	and we can make use of the below flow in our fetch data function layers planned 
     		--	and keep in mind that we had to take care of two data layers(or response that we need to sent to two different place one is variations image gallery and the second is the variations form) one for variations image gallery and the second is for the variations form 
     		--	move all the applicable data layers from below and also from gallery_images layer to the below called get_data -> fetch_data function -- to b 
     			--	and then have only get_data call with sp_variations argument from the main render_variations_ui and pass the result data to gallery_images and render_variations_swatches function being called -- to b 
     				--	and then get_data should also host means fetch_data should also the layer with gallery_images and swatches as the argument, so that their specific data can be loaded from there only -- to b 
-        $attributes = $hook_args[ 'product' ]->get_variation_attributes();
-        $variations = $hook_args[ 'product' ]->get_available_variations();
+        $attributes = $args['hook_callback_args']['hook_args'][ 'product' ]->get_variation_attributes();
+        $variations = $args['hook_callback_args']['hook_args'][ 'product' ]->get_available_variations();
 		----------- most of is to be discared 
 
 		//-- also call get_data of model from above the selectron is called for swatches, call with first param as swatches_init -- to b done
@@ -1257,9 +1257,9 @@ class SP_Model_Single_Product extends SP_Single_Product {
 				--	ACTIVE_TODO and if required then in fetch_data swatches_init also there will be a binding to hook available_variation just like there is going to be for gallery_images_init. this is only modular and efficient way so for both will be separate and still it can use same callback function with page_section means swatches_init etc. param passed there also -- to d 
 
 		ob_start();
-		$args['data'] = $this->get_data('swatches'); 
-		$attributes = $args['data']['attributes']; /*$product->get_variation_attributes();*/
-		$variations = $args['data']['variations']; /*$product->get_available_variations();*/
+		$data = $this->get_data('swatches'); 
+		$attributes = $data['attributes']; /*$product->get_variation_attributes();*/
+		$variations = $data['variations']; /*$product->get_available_variations();*/
 
 
         $type = null;	// 'select';     
@@ -1271,18 +1271,18 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 
         //add or condition here to apply_filter with key sp_variations_supporting_attribute_type with default to false and second arg will be type -- to b done
-        	--	and now need to add that hook to add type on woo attribute admin, see details in ssm variations class -- to d 
-        if(in_array($type,array('color','image','image_text','dropdown_image','dropdown_image_only','dropdown','button')) or apply_filters('sp_variations_supporting_attribute_type',false,$type)) {
-
-        	$html = call_user_func_array(
+        	//--	and now need to add that hook to add type on woo attribute admin, see details in ssm variations class -- to d done
+        if(in_array($type,\eo\wbc\model\publics\SP_WBC_Variations::sp_variations_swatches_supported_attribute_types())) {
+	
+        	$args['hook_callback_args']['html'] = call_user_func_array(
         		array($this,'variation_options'),array(
         		array(
-                	'options'    => $hook_args[ 'options' ],
-                	'attribute'  => $hook_args[ 'attribute' ],
-                	'product'    => $hook_args[ 'product' ],
-                    'selected'   => $hook_args[ 'selected' ],
+                	'options'    => $args['hook_callback_args']['hook_args'][ 'options' ],
+                	'attribute'  => $args['hook_callback_args']['hook_args'][ 'attribute' ],
+                	'product'    => $args['hook_callback_args']['hook_args'][ 'product' ],
+                    'selected'   => $args['hook_callback_args']['hook_args'][ 'selected' ],
                     'type'       => $type,
-                    'is_archive' => ( isset( $hook_args[ 'is_archive' ] ) && $hook_args[ 'is_archive' ]),
+                    'is_archive' => ( isset( $args['hook_callback_args']['hook_args'][ 'is_archive' ] ) && $args['hook_callback_args']['hook_args'][ 'is_archive' ]),
                     'attribute_object' => $attribute
                 ))
         	);
@@ -1293,16 +1293,16 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
         //the rest of the broad flow would be like, the prepare_swatches_data will return back the prepared data to controller -- to b done
         	-- but for the below layers and above if is to be clearer yet -- to h 
-        			--	the flow will be like the prepare_swatches_data will prepare main and broad level data. get_data call is already done but follow points if ther are added any sub points below -- to b 
-        				--	atleast need to create one function sp_variations_swatches_supported_attribute_types, in wbc variations class -- to d  
-        					--	and that will host all free types, so find that in those our woo related files -- to d 
-        						--	to find the root of type list check from where those chooser functions are referenced -- to d 
-        					--	and additionally it will apply that filter hook on above free type array -- to d 
-        					--	and then the free list on the woo should be populated from above sp_variations_swatches_supported_attribute_types function -- to d 
+        			//--	the flow will be like the prepare_swatches_data will prepare main and broad level data. get_data call is already done but follow points if ther are added any sub points below -- to b done
+        				//--	atleast need to create one function sp_variations_swatches_supported_attribute_types, in wbc variations class -- to d  done
+        					//--	and that will host all free types, so find that in those our woo related files -- to d done
+        						//--	to find the root of type list check from where those chooser functions are referenced -- to d done
+        					//--	and additionally it will apply that filter hook on above free type array -- to d done
+        					//--	and then the free list on the woo should be populated from above sp_variations_swatches_supported_attribute_types function -- to d done
         					--	and on ssm variations clas s create overrided function sp_variations_swatches_supported_attribute_types and it will bind to above hooks and add additional type that extensions may have registered in thier config -- to d 
-        						--	so this function should be called always when extension loads since it is going to be depended on by both admin and frontend so can maybe call from http handler but since extensions so far do not have that so call from other applicable place with comment "ACTIVE_TODO when there is http handler class for extensions then move it there" -- to d 
-        					--	and above in_array condition should also call that function, so remove the hardcoded array from here -- to b 
-        						--	also now remove that or condition hook that we added since that will be now from the base function -- to b 
+        						//--	so this function should be called always when extension loads since it is going to be depended on by both admin and frontend so can maybe call from http handler but since extensions so far do not have that so call from other applicable place with comment "ACTIVE_TODO when there is http handler class for extensions then move it there" -- to d done
+        					//--	and above in_array condition should also call that function, so remove the hardcoded array from here -- to b done 
+        						//--	also now remove that or condition hook that we added since that will be now from the base function -- to b done
         			--	and additionally this model will have prepare_variable_item_data and prepare_variable_item_wrapper_data function that will be called from the prepare_swatches_data function loop. so simply follow the code loop below and it will use the data from above get_data call and rest if added from below -- to b 
         					--	additionally there will be one more function prepare_swatches_data_by_attribute_type and that will be actually called from prepare_swatches_data and the two functions mentioned above (including on more mentioned below so total three) will be called from this function -- to b 
         				--	create below mentioned functions first and add call to them. -- to b 
@@ -1333,7 +1333,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
         		--	and apart from load view the controller layer can additionally create render fucntions like render_image_gallery_template and so on are in model, for example render_variations_swatches_attribute_types to implement some specific logic or conditions but yeah the get ui definition will striictly be managed from controller layers as per fundamental mvc architecture. -- to h or -- to b. ACTIVE_TODO 
         			--	NOTE: now while all hooks required by above extensions and extensions can do their job using those hooks then so not sure if render_variations_swatches_attribute_types function in the model is necessary or not. 
 
-		if ( apply_filters( 'wvs_no_individual_settings', true, $hook_args, $is_default_to_image, $is_default_to_button ) ) {
+		if ( apply_filters( 'wvs_no_individual_settings', true, $args['hook_callback_args']['hook_args'], $is_default_to_image, $is_default_to_button ) ) {
 
 			$attributes = $product->get_variation_attributes();
 			$variations = $product->get_available_variations();
@@ -1343,19 +1343,19 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			$default             = true;
 
 			foreach ( $available_type_keys as $type ) {
-				if ( wvs_wc_product_has_attribute_type( $type, $hook_args['attribute'] ) ) {
+				if ( wvs_wc_product_has_attribute_type( $type, $args['hook_callback_args']['hook_args']['attribute'] ) ) {
 
-					$output_callback = apply_filters( 'wvs_variation_attribute_options_callback', $available_types[ $type ]['output'], $available_types, $type, $hook_args, $html );
+					$output_callback = apply_filters( 'wvs_variation_attribute_options_callback', $available_types[ $type ]['output'], $available_types, $type, $args['hook_callback_args']['hook_args'], $args['hook_callback_args']['html'] );
 					$output_callback(
 						apply_filters(
 							'wvs_variation_attribute_options_args', wp_parse_args(
-								$hook_args, array(
-									'options'    => $hook_args['options'],
-									'attribute'  => $hook_args['attribute'],
+								$args['hook_callback_args']['hook_args'], array(
+									'options'    => $args['hook_callback_args']['hook_args']['options'],
+									'attribute'  => $args['hook_callback_args']['hook_args']['attribute'],
 									'product'    => $product,
-									'selected'   => $hook_args['selected'],
+									'selected'   => $args['hook_callback_args']['hook_args']['selected'],
 									'type'       => $type,
-									'is_archive' => ( isset( $hook_args['is_archive'] ) && $hook_args['is_archive'] )
+									'is_archive' => ( isset( $args['hook_callback_args']['hook_args']['is_archive'] ) && $args['hook_callback_args']['hook_args']['is_archive'] )
 								)
 							)
 						)
@@ -1363,7 +1363,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 					$default = false;
 				}
 			}
-			$this->prepare_swatches_data_by_attribute_type();
+			$data = $this->prepare_swatches_data_by_attribute_type($data,$args);
 
 			if ( $default && $is_default_to_image_button ) {
 
@@ -1399,7 +1399,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 				$default_attribute_key  = current( $default_attribute_keys );
 				$default_attribute_name = wc_variation_attribute_name( $default_attribute_key );
 
-				$current_attribute      = $hook_args['attribute'];
+				$current_attribute      = $args['hook_callback_args']['hook_args']['attribute'];
 				$current_attribute_name = wc_variation_attribute_name( $current_attribute );
 
 
@@ -1430,14 +1430,14 @@ class SP_Model_Single_Product extends SP_Single_Product {
 					wvs_default_image_variation_attribute_options(
 						apply_filters(
 							'wvs_variation_attribute_options_args', wp_parse_args(
-								$hook_args, array(
-									'options'    => $hook_args['options'],
-									'attribute'  => $hook_args['attribute'],
+								$args['hook_callback_args']['hook_args'], array(
+									'options'    => $args['hook_callback_args']['hook_args']['options'],
+									'attribute'  => $args['hook_callback_args']['hook_args']['attribute'],
 									'product'    => $product,
-									'selected'   => $hook_args['selected'],
+									'selected'   => $args['hook_callback_args']['hook_args']['selected'],
 									'assigned'   => $assigned,
 									'type'       => $type,
-									'is_archive' => ( isset( $hook_args['is_archive'] ) && $hook_args['is_archive'] )
+									'is_archive' => ( isset( $args['hook_callback_args']['hook_args']['is_archive'] ) && $args['hook_callback_args']['hook_args']['is_archive'] )
 								)
 							)
 						)
@@ -1448,35 +1448,35 @@ class SP_Model_Single_Product extends SP_Single_Product {
 					wvs_default_button_variation_attribute_options(
 						apply_filters(
 							'wvs_variation_attribute_options_args', wp_parse_args(
-								$hook_args, array(
-									'options'    => $hook_args['options'],
-									'attribute'  => $hook_args['attribute'],
+								$args['hook_callback_args']['hook_args'], array(
+									'options'    => $args['hook_callback_args']['hook_args']['options'],
+									'attribute'  => $args['hook_callback_args']['hook_args']['attribute'],
 									'product'    => $product,
-									'selected'   => $hook_args['selected'],
-									'is_archive' => ( isset( $hook_args['is_archive'] ) && $hook_args['is_archive'] )
+									'selected'   => $args['hook_callback_args']['hook_args']['selected'],
+									'is_archive' => ( isset( $args['hook_callback_args']['hook_args']['is_archive'] ) && $args['hook_callback_args']['hook_args']['is_archive'] )
 								)
 							)
 						)
 					);
 				} else {
-					echo $html;
+					echo $args['hook_callback_args']['html'];
 				}
 			} elseif ( $default && ! $is_default_to_image_button ) {
-				echo $html;
+				echo $args['hook_callback_args']['html'];
 			}
 
 		}
 
 		$data = ob_get_clean();
 
-		$html = apply_filters( 'wvs_variation_attribute_options_html', $data, $hook_args, $is_default_to_image, $is_default_to_button );
+		$args['hook_callback_args']['html'] = apply_filters( 'wvs_variation_attribute_options_html', $data, $args['hook_callback_args']['hook_args'], $is_default_to_image, $is_default_to_button );
 
-		//return $html;
+		//return $args['hook_callback_args']['html'];
 		return $data;
 
 	}
 
-	public function render_gallery_images_template($args = null){
+	public function render_gallery_images_template($args = array()){
 
 		add_filter( 'wc_get_template', function($template, $template_name){
 			$old_template = $template;
@@ -1521,7 +1521,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 	}
 
-	public function render_gallery_images_template_callback($args = null){
+	public function render_gallery_images_template_callback($args = array()){
 
 		global $product;
 
@@ -1735,12 +1735,12 @@ class SP_Model_Single_Product extends SP_Single_Product {
 	}
 
 
-	public function prepare_swatches_data_by_attribute_type(){
+	public function prepare_swatches_data_by_attribute_type($data,$args = array()){
 
-		here recieve the $data param of the caller function -- to b 
+		//here recieve the $data param of the caller function -- to b  done
 			--	pass it in all three functions called below and prepare the daa in the heirachiical structure the way these loops and functions calls and data and template load sequence is -- to b 
 
-		$this->prepare_woo_dropdown_attribute_html_data();
+		$data = $this->prepare_woo_dropdown_attribute_html_data($data,$args);
 
 		------------------a etlu wvs_default_button_variation_attribute_options alg che
 			--	for this need to compare default and take unique too -- to b 
@@ -1758,11 +1758,15 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 		echo wvs_variable_items_wrapper( $content, $type, $args );
 
-		$this->prepare_variable_item_data();
-		$this->prepare_variable_item_wrapper_data();
+		$data = $this->prepare_variable_item_data($data,$args);
+		$data = $this->prepare_variable_item_wrapper_data($data,$args);
 	}
 
-	public function prepare_woo_dropdown_attribute_html_data (){
+	public function prepare_woo_dropdown_attribute_html_data ($data,$args = array()){
+
+		$data['woo_dropdown_attribute_html_data'] = array();
+		$attributes = $data['attributes']; /*$product->get_variation_attributes();*/
+		$variations = $data['variations'];
 
 		create two static methods in the SP_Attribue clas s, namely variation_attribute_name and variation_option_name -- to d 
 			and the ove the respective logic from below to there -- to d 
@@ -1771,8 +1775,8 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			and the ove the respective logic from below to there -- to d 
 				--	and then replace below statements with function calls to that class -- to d 
 
-		$args = wp_parse_args(
-			$args, array(
+		$data['woo_dropdown_attribute_html_data']['args'] = wp_parse_args(
+			$args['hook_callback_args']['hook_args'], array(
 				'options'          => false,
 				'attribute'        => false,
 				'product'          => false,
@@ -1791,89 +1795,103 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			)
 		);
 
-		$type                  = $args[ 'type' ];
+		$data['woo_dropdown_attribute_html_data']['type']                  = $args['hook_callback_args']['hook_args'][ 'type' ];
 		--------------a etlu wvs_default_button_variation_attribute_options alg che
-		$type                  = $args['type'] ? $args['type'] : 'button';
+		$data['woo_dropdown_attribute_html_data']['type']                  = $args['hook_callback_args']['hook_args']['type'] ? $args['hook_callback_args']['hook_args']['type'] : 'button';
 		------------------
-		$options               = $args['options'];
-		$product               = $args['product'];
-		$attribute             = $args['attribute'];
-		$name                  = $args['name'] ? $args['name'] : wc_variation_attribute_name( $attribute );
-		$id                    = $args['id'] ? $args['id'] : sanitize_title( $attribute );
-		$class                 = $args['class'];
-		$show_option_none      = $args['show_option_none'] ? true : false;
-		$show_option_none_text = $args['show_option_none'] ? $args['show_option_none'] : esc_html__( 'Choose an option', 'woocommerce' ); // We'll do our best to hide the placeholder, but we'll need to show something when resetting options.
+		$data['woo_dropdown_attribute_html_data']['options']               = $args['hook_callback_args']['hook_args']['options'];
+		$data['woo_dropdown_attribute_html_data']['product']               = $args['hook_callback_args']['hook_args']['product'];
+		$data['woo_dropdown_attribute_html_data']['attribute']             = $args['hook_callback_args']['hook_args']['attribute'];
+		$data['woo_dropdown_attribute_html_data']['name']                  = $args['hook_callback_args']['hook_args']['name'] ? $args['hook_callback_args']['hook_args']['name'] : wc_variation_attribute_name( $attribute );
+		$data['woo_dropdown_attribute_html_data']['id']                    = $args['hook_callback_args']['hook_args']['id'] ? $args['hook_callback_args']['hook_args']['id'] : sanitize_title( $attribute );
+		$data['woo_dropdown_attribute_html_data']['class']                 = $args['hook_callback_args']['hook_args']['class'];
+		$data['woo_dropdown_attribute_html_data']['show_option_none']      = $args['hook_callback_args']['hook_args']['show_option_none'] ? true : false;
+		$data['woo_dropdown_attribute_html_data']['show_option_none_text'] = $args['hook_callback_args']['hook_args']['show_option_none'] ? $args['hook_callback_args']['hook_args']['show_option_none'] : esc_html__( 'Choose an option', 'woocommerce' ); // We'll do our best to hide the placeholder, but we'll need to show something when resetting options.
 
-		if ( empty( $options ) && ! empty( $product ) && ! empty( $attribute ) ) {
+		if ( empty( $data['woo_dropdown_attribute_html_data']['options'] ) && ! empty( $data['woo_dropdown_attribute_html_data']['product'] ) && ! empty( $data['woo_dropdown_attribute_html_data']['attribute'] ) ) {
 			-- recieve data in function params to till this function, since I think we have exact same data on above layers but still confirm -- to b 
-			$attributes = $product->get_variation_attributes();
-			$options    = $attributes[ $attribute ];
+			//$data['woo_dropdown_attribute_html_data']['attributes'] = $product->get_variation_attributes();
+			$data['woo_dropdown_attribute_html_data']['options']    = $attributes[ $data['woo_dropdown_attribute_html_data']['attribute']  ];
 		}
 
 		--------------a etlu wvs_default_button_variation_attribute_options alg che
-		if ( $product ) {
+		if ( $data['woo_dropdown_attribute_html_data']['product'] ) {
 			echo '<select id="' . esc_attr( $id ) . '" class="' . esc_attr( $class ) . ' hide woo-variation-raw-select woo-variation-raw-type-' . $type . '" style="display:none" name="' . esc_attr( $name ) . '" data-attribute_name="' . esc_attr( wc_variation_attribute_name( $attribute ) ) . '" data-show_option_none="' . ( $show_option_none ? 'yes' : 'no' ) . '">';
 		}
 		-----------------
 
 		-------------- a etlu wvs_default_image_variation_attribute_options alg che
-		if ( $product ) {
+		if ( $data['woo_dropdown_attribute_html_data']['product'] ) {
 
-			if ( $type === 'select' ) {
+			if ( $data['woo_dropdown_attribute_html_data']['type'] === 'select' ) {
 				echo '<select id="' . esc_attr( $id ) . '" class="' . esc_attr( $class ) . '" name="' . esc_attr( $name ) . '" data-attribute_name="' . esc_attr( wc_variation_attribute_name( $attribute ) ) . '" data-show_option_none="' . ( $show_option_none ? 'yes' : 'no' ) . '">';
 			} else {
 				echo '<select id="' . esc_attr( $id ) . '" class="' . esc_attr( $class ) . ' hide woo-variation-raw-select woo-variation-raw-type-' . $type . '" style="display:none" name="' . esc_attr( $name ) . '" data-attribute_name="' . esc_attr( wc_variation_attribute_name( $attribute ) ) . '" data-show_option_none="' . ( $show_option_none ? 'yes' : 'no' ) . '">';
 			}
 		}
 		-------------
-		if ( $product && taxonomy_exists( $attribute ) ) {
+		if ( $data['woo_dropdown_attribute_html_data']['product'] && taxonomy_exists( $data['woo_dropdown_attribute_html_data']['attribute'] ) ) {
 			echo '<select id="' . esc_attr( $id ) . '" class="' . esc_attr( $class ) . ' hide woo-variation-raw-select woo-variation-raw-type-' . esc_attr( $type ) . '" style="display:none" name="' . esc_attr( $name ) . '" data-attribute_name="' . esc_attr( wc_variation_attribute_name( $attribute ) ) . '" data-show_option_none="' . ( $show_option_none ? 'yes' : 'no' ) . '">';
 		} else {
 			echo '<select id="' . esc_attr( $id ) . '" class="' . esc_attr( $class ) . '" name="' . esc_attr( $name ) . '" data-attribute_name="' . esc_attr( wc_variation_attribute_name( $attribute ) ) . '" data-show_option_none="' . ( $show_option_none ? 'yes' : 'no' ) . '">';
 		}
 
-		if ( $args['show_option_none'] ) {
+		if ( $args['hook_callback_args']['hook_args']['show_option_none'] ) {
 			echo '<option value="">' . esc_html( $show_option_none_text ) . '</option>';
 		}
 
-		if ( ! empty( $options ) ) {
-			if ( $product && taxonomy_exists( $attribute ) ) {
+		if ( ! empty( $data['woo_dropdown_attribute_html_data']['options'] ) ) {
+			if ( $data['woo_dropdown_attribute_html_data']['product'] && taxonomy_exists( $data['woo_dropdown_attribute_html_data']['attribute'] ) ) {
 				// Get terms if this is a taxonomy - ordered. We need the names too.
-				$terms = wc_get_product_terms( $product->get_id(), $attribute, array( 'fields' => 'all' ) );
+				$data['woo_dropdown_attribute_html_data']['terms'] = wc_get_product_terms( $data['woo_dropdown_attribute_html_data']['product']->get_id(), $data['woo_dropdown_attribute_html_data']['attribute'], array( 'fields' => 'all' ) );
 
-				foreach ( $terms as $term ) {
-					if ( in_array( $term->slug, $options, true ) ) {
+				foreach ( $data['woo_dropdown_attribute_html_data']['terms'] as $term ) {
+					if ( in_array( $term->slug, $data['woo_dropdown_attribute_html_data']['options'], true ) ) {
 						
-					------------- a etlu wvs_default_button_variation_attribute_options alg che
-						echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . esc_html( apply_filters( 'woocommerce_variation_option_name', $term->name, $term, $attribute, $product ) ) . '</option>';
-					-------------
-					------------- a etlu wvs_default_image_variation_attribute_options  alg che
-						echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . esc_html( apply_filters( 'woocommerce_variation_option_name', $term->name, $term, $attribute, $product ) ) . '</option>';
-					-----
-					--------------a etlu wvs_radio_variation_attribute_options  alg che
-						echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . esc_html( apply_filters( 'woocommerce_variation_option_name', $term->name, $term, $attribute, $product ) ) . '</option>';
-					--------------
-					echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . apply_filters( 'woocommerce_variation_option_name', $term->name, $term, $attribute, $product ) . '</option>';
+						------------- a etlu wvs_default_button_variation_attribute_options alg che
+							echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . esc_html( apply_filters( 'woocommerce_variation_option_name', $term->name, $term, $attribute, $product ) ) . '</option>';
+						-------------
+						------------- a etlu wvs_default_image_variation_attribute_options  alg che
+							echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . esc_html( apply_filters( 'woocommerce_variation_option_name', $term->name, $term, $attribute, $product ) ) . '</option>';
+						-----
+						--------------a etlu wvs_radio_variation_attribute_options  alg che
+							echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . esc_html( apply_filters( 'woocommerce_variation_option_name', $term->name, $term, $attribute, $product ) ) . '</option>';
+						--------------
+						echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . apply_filters( 'woocommerce_variation_option_name', $term->name, $term, $attribute, $product ) . '</option>';
 					}
 				}
 			} else {
-				foreach ( $options as $option ) {
+				foreach ( $data['woo_dropdown_attribute_html_data']['options'] as $option ) {
 					// This handles < 2.4.0 bw compatibility where text attributes were not sanitized.
-					$selected = sanitize_title( $args['selected'] ) === $args['selected'] ? selected( $args['selected'], sanitize_title( $option ), false ) : selected( $args['selected'], $option, false );
+					$data['woo_dropdown_attribute_html_data']['selected'] = sanitize_title( $args['hook_callback_args']['hook_args']['selected'] ) === $args['hook_callback_args']['hook_args']['selected'] ? selected( $args['hook_callback_args']['hook_args']['selected'], sanitize_title( $option ), false ) : selected( $args['hook_callback_args']['hook_args']['selected'], $option, false );
 					echo '<option value="' . esc_attr( $option ) . '" ' . $selected . '>' . esc_html( apply_filters( 'woocommerce_variation_option_name', $option, null, $attribute, $product ) ) . '</option>';
 				}
 			}
 		}
 
 		echo '</select>';
+
+		return $data;
 	}
 
-	public function prepare_variable_item_data (){
+	public function prepare_variable_item_data ($data,$args = array()){
 		$product   = $args['product'];
 		$attribute = $args['attribute'];
 		$data      = '';
+		--------- a etlu wvs_default_variable_item alg che
+			$assigned  = $args['assigned'];
+
+			$is_archive           = ( isset( $args['is_archive'] ) && $args['is_archive'] );
+			$show_archive_tooltip = wc_string_to_bool( woo_variation_swatches()->get_option( 'show_tooltip_on_archive' ) );
+
+			$data = '';
+
+			if ( isset( $args['fallback_type'] ) && $args['fallback_type'] === 'select' ) {
+				//	return '';
+			}
+		-----
 		------- m have this additional
-		$id                    = $args[ 'id' ] ? $args[ 'id' ] : sanitize_title( $attribute );
+			$id = $args[ 'id' ] ? $args[ 'id' ] : sanitize_title( $attribute );
 		-------
 
 		if ( ! empty( $options ) ) {
@@ -1946,6 +1964,11 @@ class SP_Model_Single_Product extends SP_Single_Product {
 						$selected_class = $is_selected ? 'selected' : '';
 						$tooltip        = trim( apply_filters( 'wvs_variable_item_tooltip', $option, $term, $args ) );
 
+						--------- a etlu wvs_default_variable_item alg che
+							if ( $is_archive && ! $show_archive_tooltip ) {
+								$tooltip = false;
+							}
+						--------
 						$tooltip_html_attr       = ! empty( $tooltip ) ? sprintf( ' data-wvstooltip="%s"', esc_attr( $tooltip ) ) : '';
 						$screen_reader_html_attr = $is_selected ? ' aria-checked="true"' : ' aria-checked="false"';
 
@@ -1953,6 +1976,13 @@ class SP_Model_Single_Product extends SP_Single_Product {
 							$tooltip_html_attr .= ! empty( $tooltip ) ? ' tabindex="2"' : '';
 						}
 
+						--------- a etlu wvs_default_variable_item alg che
+							$type = isset( $assigned[ $term->slug ] ) ? $assigned[ $term->slug ]['type'] : $type;
+
+							if ( ! isset( $assigned[ $term->slug ] ) || empty( $assigned[ $term->slug ]['image_id'] ) ) {
+								$type = 'button';
+							}
+						-------
 						$data .= sprintf( '<li %1$s class="variable-item %2$s-variable-item %2$s-variable-item-%3$s %4$s" title="%5$s" data-title="%5$s" data-value="%3$s" role="radio" tabindex="0"><div class="variable-item-contents">', $screen_reader_html_attr . $tooltip_html_attr, esc_attr( $type ), esc_attr( $term->slug ), esc_attr( $selected_class ), $option );
 
 						switch ( $type ):
@@ -1963,7 +1993,10 @@ class SP_Model_Single_Product extends SP_Single_Product {
 								break;
 
 							case 'image':
-
+								--------- a etlu wvs_default_variable_item alg che
+									$attachment_id = $assigned[ $term->slug ]['image_id'];
+									$image_size    = sanitize_text_field( woo_variation_swatches()->get_option( 'attribute_image_size' ) );
+								-------
 								$attachment_id = apply_filters( 'wvs_product_global_attribute_image_id', absint( wvs_get_product_attribute_image( $term ) ), $term, $args );
 								$image_size    = woo_variation_swatches()->get_option( 'attribute_image_size' );
 								$image         = wp_get_attachment_image_src( $attachment_id, apply_filters( 'wvs_product_attribute_image_size', $image_size, $attribute, $product ) );
@@ -1996,15 +2029,73 @@ class SP_Model_Single_Product extends SP_Single_Product {
 				}*/
 				------
 			}
+			--------- a etlu wvs_default_variable_item alg che
+				else{
+					foreach ( $options as $option ) {
+						// This handles < 2.4.0 bw compatibility where text attributes were not sanitized.
+
+						$option = esc_html( apply_filters( 'woocommerce_variation_option_name', $option, null, $attribute, $product ) );
+
+						$is_selected = ( sanitize_title( $option ) == sanitize_title( $args['selected'] ) );
+
+						$selected_class = $is_selected ? 'selected' : '';
+						$tooltip        = trim( apply_filters( 'wvs_variable_item_tooltip', $option, $options, $args ) );
+
+
+						if ( $is_archive && ! $show_archive_tooltip ) {
+							$tooltip = false;
+						}
+
+						$tooltip_html_attr       = ! empty( $tooltip ) ? sprintf( 'data-wvstooltip="%s"', esc_attr( $tooltip ) ) : '';
+						$screen_reader_html_attr = $is_selected ? ' aria-checked="true"' : ' aria-checked="false"';
+
+						if ( wp_is_mobile() ) {
+							$tooltip_html_attr .= ! empty( $tooltip ) ? ' tabindex="2"' : '';
+						}
+
+						$type = isset( $assigned[ $option ] ) ? $assigned[ $option ]['type'] : $type;
+
+						if ( ! isset( $assigned[ $option ] ) || empty( $assigned[ $option ]['image_id'] ) ) {
+							$type = 'button';
+						}
+
+						$data .= sprintf( '<li %1$s class="variable-item %2$s-variable-item %2$s-variable-item-%3$s %4$s" title="%5$s" data-title="%5$s"  data-value="%3$s" role="radio" tabindex="0"><div class="variable-item-contents">', $screen_reader_html_attr . $tooltip_html_attr, esc_attr( $type ), esc_attr( $option ), esc_attr( $selected_class ), esc_html( $option ) );
+
+						switch ( $type ):
+
+							case 'image':
+								$attachment_id = $assigned[ $option ]['image_id'];
+								$image_size    = sanitize_text_field( woo_variation_swatches()->get_option( 'attribute_image_size' ) );
+								$image         = wp_get_attachment_image_src( $attachment_id, apply_filters( 'wvs_product_attribute_image_size', $image_size, $attribute, $product ) );
+
+								$data .= sprintf( '<img class="variable-item-image" aria-hidden="true" alt="%s" src="%s" width="%d" height="%d" />', esc_attr( $option ), esc_url( $image[0] ), esc_attr( $image[1] ), esc_attr( $image[2] ) );
+								// $data .= $image_html;
+								break;
+
+
+							case 'button':
+								$data .= sprintf( '<span class="variable-item-span variable-item-span-%s">%s</span>', esc_attr( $type ), esc_html( $option ) );
+								break;
+
+							default:
+								$data .= apply_filters( 'wvs_variable_default_item_content', '', $option, $args, array() );
+								break;
+						endswitch;
+						$data .= '</div></li>';
+					}
+				}
+			--------------
 		}
 		------- m have this additional
 		return $data;
 		-----------
 		return apply_filters( 'wvs_variable_item', $data, $type, $options, $args, $saved_attribute );
+		
+		return $data;
 
 	}
 
-	public function prepare_variable_item_wrapper_data (){
+	public function prepare_variable_item_wrapper_data ($data,$args = array()){
 
 		------- m have this additional
 			$attribute_object = $args['attribute_object'];
@@ -2032,6 +2123,8 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		
 		
 		return apply_filters( 'wvs_variable_items_wrapper', $data, $contents, $type, $args, $saved_attribute );
+		
+		return $data;
 
 	}
 }
