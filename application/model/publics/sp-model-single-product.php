@@ -1531,31 +1531,31 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		here recieve the $data param of the caller function -- to b 
 			--	pass it in all three functions called below and prepare the daa in the heirachiical structure the way these loops and functions calls and data and template load sequence is -- to b 
 
-		create two static methods in the wbc variations clas s, namely get_default_attributes and get_default_variation_id -- to d 
-			and the move the respective logic from below to there -- to d 
-				--	and then replace below statements with function calls to that class -- to d 
-		and create one more function get_available_variation, a public static function in the same class wbc variations -- to d 
-			and the ove the respective logic from below to there -- to d 
-				--	and then replace below statements with function calls to that class -- to d 
+		// create two static methods in the wbc variations clas s, namely get_default_attributes and get_default_variation_id -- to d done
+		// 	and the move the respective logic from below to there -- to d done
+		// 		--	and then replace below statements with function calls to that class -- to d done
+		// and create one more function get_available_variation, a public static function in the same class wbc variations -- to d done
+		// 	and the ove the respective logic from below to there -- to d 
+		// 		--	and then replace below statements with function calls to that class -- to d done
 
-		create two static methods in the SP_Product clas s, namely get_image_id and get_gallery_image_ids -- to d 
-			and the move the respective logic from below to there -- to d 
-				--	and then replace below statements with function calls to that class -- to d 
+		// create two static methods in the SP_Product clas s, namely get_image_id and get_gallery_image_ids -- to d done 
+		// 	and the move the respective logic from below to there -- to d done
+		// 		--	and then replace below statements with function calls to that class -- to d done
 
 		$product_id = $product->get_id();
 
-		$default_attributes = woo_variation_gallery()->get_frontend()->get_product_default_attributes( $product_id );
+		$default_attributes = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_default_attributes($product_id);
 
-		$default_variation_id = woo_variation_gallery()->get_frontend()->get_product_default_variation_id( $product, $default_attributes );
+		$default_variation_id = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_default_variation_id($product, $attributes);
 
 		$product_type = $product->get_type();
 
 		// ACTIVE_TODO we may like to use the columns var later to till gallery_images slider and zoom module layers including till applicable js layers -- to h or -- to d 
 		$columns = -1;	//	thumbnail columns 
 
-		$post_thumbnail_id = $product->get_image_id();
+		$post_thumbnail_id = \eo\wbc\system\core\data_model\SP_Product::instance()->get_image_id($product);
 
-		$attachment_ids = $product->get_gallery_image_ids();
+		$attachment_ids = \eo\wbc\system\core\data_model\SP_Product::instance()->get_gallery_image_ids($product);
 
 		$has_post_thumbnail = has_post_thumbnail();
 
@@ -1568,7 +1568,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 		if ( 'variable' === $product_type && $default_variation_id > 0 ) {
 
-			$product_variation = woo_variation_gallery()->get_frontend()->get_available_variation( $product_id, $default_variation_id );
+			$product_variation = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_available_variation($product_id, $variation_id);
 
 			if ( isset( $product_variation['image_id'] ) ) {
 				$post_thumbnail_id  = $product_variation['image_id'];
@@ -1667,8 +1667,16 @@ class SP_Model_Single_Product extends SP_Single_Product {
 				-- and so all three hooks of both slider and zoom module should be applied or bind to within this action hook -- to b 
 
 		create list of woo hooks that are used below -- to d 
+			--wc_placeholder_img_src
+			--woocommerce_single_product_image_thumbnail_html
+
 			-- and then at least our default slider and zoom frontend that is provided should respect these hooks. soo apply these hooks there -- to d 
 				--	also create list of other such matters that may have missed here -- to d 
+
+			-- need to apply esc_attr, esc_html and trim on our template layers of slider and zoom. so apply as and where applicable -- to d 
+			    -- and also need to do the same for the swatches template layers also -- to d 
+			        -- and also do the same for respective template layers of applicable extensions for above two points -- to d 
+			-- and check if there are other such functions we need to respect and if there are then cover all three points below for them -- to d 	
 		?>
 
 		<?php do_action( 'woo_variation_product_gallery_start', $product ); ?>
