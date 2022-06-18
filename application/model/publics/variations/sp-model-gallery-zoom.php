@@ -43,6 +43,10 @@ class SP_Model_Gallery_Zoom extends Eowbc_Base_Model_Publics {
 	}
 	
 	public function render_core(){
+
+		add_action('sp_variations_gallery_images_render', function(){
+
+		}, 10);
 		
 		$classes = array('sp-variations-gallery-images-zoom');
 		$classes = apply_filters('sp_slzm_zoom_container',$classes);
