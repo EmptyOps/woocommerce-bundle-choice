@@ -508,107 +508,7 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
         -   plugins/themes 
         --  there will be list of compatiblity matters that need to be handled so it will go under the compatiblity matter, and clearly it will go in compatiblity layers 
             --  not related to this section but lets create simply a compatiblity module of its own like at the level where templating module is in namespace -- to d --    ACTIVE_TODO/TODO then each modules like filters, variations and so on can have their own module like ...filters.compatiblity just like there ...filters.core core module. but this is only if necessary, otherwise a function inside core module is much readability friendly. 
-                --  a compatiblity function inside filters, variations.swatches and variations.gallery_images module -- to d 
-        
-        ///////////// -- 15-06-2022 -- @drashti -- ///////////////////////////////
-        if(section == 'product-listing'){
-            jQuery('.products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)').addClass('product_grid_view');
-            //jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination').css('visibility','visible');
-            if(jQuery(".row-inner>.col-lg-9").length>0){
-                jQuery(".row-inner>.col-lg-9 *").each(function(i,e) {       
-                    if(jQuery(e).css('opacity') == '0'){
-                        jQuery(e).css('opacity','1');        
-                    }
-                });
-                jQuery(".t-entry-visual-overlay").removeClass('t-entry-visual-overlay');
-                jQuery(".double-gutter .tmb").css('width','50%');
-                jQuery(".double-gutter .tmb").css('display','inline-flex');
-            }
-            
-            jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination,jet-filters-pagination').css('visibility','visible');
-
-            // Fix for the yith wishlist.
-            if(typeof(yith_wcwl_l10n)=='object'){
-                eowbc_yith_wishlist_fix();
-            }
-            // lazyload
-            if(typeof(LazyLoad)=='function'){
-                eowbc_lazyload();
-            } 
-        }
-        
-
-        eo_wbc_filter_render_html();
-        ////////////////////////////////////////////////////
-        if(section == 'variations_gallery'){
-            jQuery(function ($)
-            {
-                Promise.resolve().then(function () {
-                  return _interopRequireWildcard(__webpack_require__("./src/js/WooVariationGallery.js"));
-                }).then(function () {
-                // For Single Product
-                $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery(); // Ajax and Variation Product
-
-                    $(document).on('wc_variation_form', '.variations_form', function () {
-                      $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery();
-                    }); // Support for Jetpack's Infinite Scroll,
-
-                    $(document.body).on('post-load', function () {
-                      $('.woo-variation-gallery-wrapper:not(.woo-variation-gallery-product-type-variable):not(.wvg-loaded)').WooVariationGallery();
-                    }); // YITH Quickview
-
-                    $(document).on('qv_loader_stop', function () {
-                      $('.woo-variation-gallery-wrapper:not(.woo-variation-gallery-product-type-variable):not(.wvg-loaded)').WooVariationGallery();
-                    }); // Elementor
-
-                    if (window.elementorFrontend && window.elementorFrontend.hooks) {
-                      elementorFrontend.hooks.addAction('frontend/element_ready/woocommerce-product-images.default', function ($scope) {
-                        $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery();
-                      });
-                    }
-                });
-            });
-
-
-            add_action( 'wvs_global_attribute_column', function ( $column, $term_id, $taxonomy, $attribute, $fields, $available_types ) {
-                if ( class_exists( 'SitePress' ) ) {
-
-                    global $sitepress;
-
-                    $keys = wp_list_pluck( $fields, 'id' );
-                    // $keys = array_column($fields, 'id');
-
-                    foreach ( $keys as $key ) {
-                        $value = sanitize_text_field( get_term_meta( $term_id, $key, true ) );
-                        // $original_element_id = $sitepress->get_original_element_id( $term_id, 'tax_' . $taxonomy );
-                        $trid         = $sitepress->get_element_trid( $term_id, 'tax_' . $taxonomy );
-                        $translations = $sitepress->get_element_translations( $trid, 'tax_' . $taxonomy );
-
-                        $current_lang = $sitepress->get_current_language();
-                        $default_lang = $sitepress->get_default_language();
-
-                        if ( $translations && empty( $value ) ) {
-                            // source_language_code
-                            $translation = array_values( array_filter( $translations, function ( $translation ) {
-                                return isset( $translation->original ) && ! empty( $translation->original );
-                            } ) );
-
-                            $translation = array_shift( $translation );
-
-                            if ( empty( $value ) && $translation ) {
-                                $original_term_id = $translation->term_id;
-                                $original_value   = sanitize_text_field( get_term_meta( $original_term_id, $key, true ) );
-                                // Copy term meta from original
-                                update_term_meta( $term_id, $key, $original_value );
-                            }
-                        }
-
-                    }
-                }
-            }, 10, 6 );
-        } 
-
-        ////////////////////////////////////////////////////   
+                --  a compatiblity function inside filters, variations.swatches and variations.gallery_images module -- to d  
 
     }; 
 
@@ -673,34 +573,7 @@ window.document.splugins.wbc.variations.gallery_images.core = function() {
 
     ///////////// -- 15-06-2022 -- @drashti -- ///////////////////////////////
     var compatability = function(section, object, expected_result) {
-        if(section == 'product-listing'){
-            jQuery('.products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)').addClass('product_grid_view');
-            //jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination').css('visibility','visible');
-            if(jQuery(".row-inner>.col-lg-9").length>0){
-                jQuery(".row-inner>.col-lg-9 *").each(function(i,e) {       
-                    if(jQuery(e).css('opacity') == '0'){
-                        jQuery(e).css('opacity','1');        
-                    }
-                });
-                jQuery(".t-entry-visual-overlay").removeClass('t-entry-visual-overlay');
-                jQuery(".double-gutter .tmb").css('width','50%');
-                jQuery(".double-gutter .tmb").css('display','inline-flex');
-            }
-            
-            jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination,jet-filters-pagination').css('visibility','visible');
 
-            // Fix for the yith wishlist.
-            if(typeof(yith_wcwl_l10n)=='object'){
-                eowbc_yith_wishlist_fix();
-            }
-            // lazyload
-            if(typeof(LazyLoad)=='function'){
-                eowbc_lazyload();
-            } 
-        }
-        
-
-        eo_wbc_filter_render_html();
         ////////////////////////////////////////////////////
         if(section == 'variations_gallery'){
             jQuery(function ($)
@@ -731,43 +604,6 @@ window.document.splugins.wbc.variations.gallery_images.core = function() {
                 });
             });
 
-
-            add_action( 'wvs_global_attribute_column', function ( $column, $term_id, $taxonomy, $attribute, $fields, $available_types ) {
-                if ( class_exists( 'SitePress' ) ) {
-
-                    global $sitepress;
-
-                    $keys = wp_list_pluck( $fields, 'id' );
-                    // $keys = array_column($fields, 'id');
-
-                    foreach ( $keys as $key ) {
-                        $value = sanitize_text_field( get_term_meta( $term_id, $key, true ) );
-                        // $original_element_id = $sitepress->get_original_element_id( $term_id, 'tax_' . $taxonomy );
-                        $trid         = $sitepress->get_element_trid( $term_id, 'tax_' . $taxonomy );
-                        $translations = $sitepress->get_element_translations( $trid, 'tax_' . $taxonomy );
-
-                        $current_lang = $sitepress->get_current_language();
-                        $default_lang = $sitepress->get_default_language();
-
-                        if ( $translations && empty( $value ) ) {
-                            // source_language_code
-                            $translation = array_values( array_filter( $translations, function ( $translation ) {
-                                return isset( $translation->original ) && ! empty( $translation->original );
-                            } ) );
-
-                            $translation = array_shift( $translation );
-
-                            if ( empty( $value ) && $translation ) {
-                                $original_term_id = $translation->term_id;
-                                $original_value   = sanitize_text_field( get_term_meta( $original_term_id, $key, true ) );
-                                // Copy term meta from original
-                                update_term_meta( $term_id, $key, $original_value );
-                            }
-                        }
-
-                    }
-                }
-            }, 10, 6 );
         }    
 
         /////////////////////////////////////////////////////        

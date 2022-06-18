@@ -191,7 +191,7 @@ class SP_WBC_Variations extends SP_Variations {
 	// for reference see wc_get_product_attachment_props function source code 
 	public function get_product_attachment_props( $attachment_id, $product_id = false ) {
 
-		check hooks like woo_variation_gallery of and do the needful, we can drop those hooks if is not sound so necessary for now. and later as required we can add our overrides -- to b or -- to d 			
+		// check hooks like woo_variation_gallery of and do the needful, we can drop those hooks if is not sound so necessary for now. and later as required we can add our overrides -- to b or -- to d done		
 
 		$props      = array(
 			'image_id'                => '',
@@ -318,13 +318,10 @@ class SP_WBC_Variations extends SP_Variations {
 			$props['srcset'] = wp_get_attachment_image_srcset( $attachment_id, $image_size );
 			$props['sizes']  = wp_get_attachment_image_sizes( $attachment_id, $image_size );
 
-			// $props['extra_params'] = wc_implode_html_attributes( apply_filters( 'woo_variation_gallery_image_extra_params', array(), $props, $attachment_id, $product_id ) );
-
 			$props['extra_params'] = wc_implode_html_attributes( array() );
 
 		}
 
-		// return apply_filters( 'woo_variation_gallery_get_image_props', $props, $attachment_id, $product_id );
 		return $props;
 
 	}
@@ -341,6 +338,68 @@ class SP_WBC_Variations extends SP_Variations {
 		$type['dropdown']='Dropdown';
 
 		apply_filters('sp_variations_swatches_attribute_types', $type);	 
+
+	}
+
+	public static function get_default_attributes($product_id){
+
+		$product = wc_get_product( $product_id );
+
+		if ( ! $product->is_type( 'variable' ) ) {
+			return array();
+		}
+
+		$variable_product = new WC_Product_Variable( absint( $product_id ) );
+
+		// $selected = isset( $_REQUEST[ $selected_key ] ) ? wc_clean( wp_unslash( $_REQUEST[ $selected_key ] ) ) : $args['product']->get_variation_default_attribute( $args['attribute'] );
+
+		$selected_attributes = array();
+		$default_attributes  = $variable_product->get_default_attributes();
+		$attributes          = $variable_product->get_attributes();
+		foreach ( $attributes as $attribute_name => $attribute_data ) {
+			$selected_key = wc_variation_attribute_name( $attribute_name );
+			if ( isset( $_REQUEST[ $selected_key ] ) ) {
+				$selected_attributes[ sanitize_title( $attribute_name ) ] = wc_clean( wp_unslash( $_REQUEST[ $selected_key ] ) );
+			}
+		}
+
+		return empty( $selected_attributes ) ? $default_attributes : $selected_attributes;
+
+	}
+
+	public static function get_default_variation_id($product, $attributes){
+
+		if ( is_numeric( $product ) ) {
+			$product = wc_get_product( $product );
+		}
+
+		if ( ! $product->is_type( 'variable' ) ) {
+			return 0;
+		}
+
+		$product_id = $product->get_id();
+
+		foreach ( $attributes as $key => $value ) {
+			if ( strpos( $key, 'attribute_' ) === 0 ) {
+				continue;
+			}
+
+			unset( $attributes[ $key ] );
+			$attributes[ sprintf( 'attribute_%s', $key ) ] = $value;
+		}
+
+		$data_store = WC_Data_Store::load( 'product' );
+
+		return $data_store->find_matching_product_variation( $product, $attributes );
+		
+	}
+
+	public static function get_available_variation($product_id, $variation_id){
+
+		$variable_product = new WC_Product_Variable( $product_id );
+		$variation        = $variable_product->get_available_variation( $variation_id );
+
+		return $variation;
 
 	}
 
