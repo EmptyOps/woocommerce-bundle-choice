@@ -417,6 +417,14 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 		like for swatches there are get_data call in controller and model, do similar for the gallery_images layers also -- to b 
 
+		if( \eo\wbc\controller\publics\variations\SP_Gallery_Slider::instance()->should_init() ) {
+			\eo\wbc\controller\publics\variations\SP_Gallery_Slider::instance()->init();
+		}
+
+		if( \eo\wbc\controller\publics\variations\SP_Gallery_Zoom::instance()->should_init() ) {
+			\eo\wbc\controller\publics\variations\SP_Gallery_Zoom::instance()->init();
+		}
+
 		add_action( 'after_setup_theme', array( $this, 'enable_theme_support' ), 200 );
 		add_action( 'wp_footer', array( $this, 'slider_template_js' ) );
 
@@ -429,7 +437,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 								//--	and on this note wherever there is function name have part image_gallery then rename it to gallery_images -- to b  done
 									// --	from above function in model copy the code from the referenced template and the implementation will start from here. it will mostly have hook bindings that will provide the variations images and the rest of the template rendering and even js tempalte preparation will happen on slider and zoom module layers. 
 										--	and on this regard if nothing else then this function should at top init the slider and zoom module but maybe that should be at more appropriate higher layers of init etc. functions maybe
-											--	so add call from here at top in this function -- to b  
+											//--	so add call from here at top in this function -- to b  done
 		
 
 		public function enable_theme_support() {
@@ -1322,11 +1330,11 @@ class SP_Model_Single_Product extends SP_Single_Product {
         							--	and from above three fucntions the respective templates are loaded with particular data, so it will call the getUI function with specific params and data and that will load the ui templates using the get_ui_definition function -- to b 
         								--	and the woo dropdown attribute html will also be loaded from tempalte so create one template for that in the templates folder -- to b 
         									--	ACTIVE_TODO in future if required then we need to give control to extensions as well to load their specific template by overridding the filter hook that we can publish or we can give set of hooks that extensions can use to contol/override certain aspects of that template -- to h or -- to b 
-        							--	and after the call to render_woo_dropdown_attribute_html_data there will be one filter hook that will be applied which is sp_render_swatches_data_by_attribute_type with first param to be null and if that returned any html then the other two functions will not be called. so it will be if conditions with $hooked_html assignment. -- to b 
-        								--	bind to above hook from the respective models of each extensions from their function -- to d 
-        									--	so first create same heirarchy of functions in each extensions -- to d 
-        										--	b will assist with atleast first extension means with size extension -- to b and -- to d 
-        										--	then after the render_swatches_data_by_attribute_type function is created then from there bind to the hook sp_render_swatches_data_by_attribute_type -- to d 
+        							//--	and after the call to render_woo_dropdown_attribute_html_data there will be one filter hook that will be applied which is sp_render_swatches_data_by_attribute_type with first param to be null and if that returned any html then the other two functions will not be called. so it will be if conditions with $hooked_html assignment. -- to b done
+        								//--	bind to above hook from the respective models of each extensions from their function -- to d done
+        									//--	so first create same heirarchy of functions in each extensions -- to d done
+        										//--	b will assist with atleast first extension means with size extension -- to b and -- to d done 
+        										//--	then after the render_swatches_data_by_attribute_type function is created then from there bind to the hook sp_render_swatches_data_by_attribute_type -- to d done
         				--	but before above hooks still there is one more hook that is of doing specific ops on the attribute options means args param below like that size extension have min max and so on logic and similarly if others have something else -- covered above already  
         					-- so all such logics of such extensions which are moved to render_ui will be implemented after they bind to above hook, so they will bind to above hook in ssm variations class or their own variations class -- to b 
         					--	however above html hook will be bound from the single product ssm model maybe or in their own model -- to b 
@@ -1521,14 +1529,14 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 	}
 
-	public function render_gallery_images_template_callback($args = array()){
+	public function render_gallery_images_template_callback($data,$args = array()){
 
 		global $product;
 
 		----product no peramiter pass kervano baki che
-		$args['data'] = \eo\wbc\model\publics\SP_Model_Single_Product()::instance()->get_data('gallery_images');
+		$data = \eo\wbc\model\publics\SP_Model_Single_Product()::instance()->get_data('gallery_images');
 
-		here recieve the $data param of the caller function -- to b 
+		//here recieve the $data param of the caller function -- to b done
 			--	pass it in all three functions called below and prepare the daa in the heirachiical structure the way these loops and functions calls and data and template load sequence is -- to b 
 
 		// create two static methods in the wbc variations clas s, namely get_default_attributes and get_default_variation_id -- to d done
@@ -1768,6 +1776,8 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 		$data = $this->prepare_variable_item_data($data,$args);
 		$data = $this->prepare_variable_item_wrapper_data($data,$args);
+
+		return apply_filters('sp_prepare_swatches_data_by_attribute_type',$data);
 	}
 
 	public function prepare_woo_dropdown_attribute_html_data ($data,$args = array()){
@@ -1822,32 +1832,35 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			$data['woo_dropdown_attribute_html_data']['options']    = $attributes[ $data['woo_dropdown_attribute_html_data']['attribute']  ];
 		}
 
+		---------- move to /var/www/html/wp/wp-content/plugins/woo-bundle-choice/templates/single-product/variations-swatches/woo_dropdown_attribute/woo_dropdown_attribute.php file ma
+
 		--------------a etlu wvs_default_button_variation_attribute_options alg che
 		if ( $data['woo_dropdown_attribute_html_data']['product'] ) {
 			$data['woo_dropdown_attribute_html_data']['attribute_name'] = \eo\wbc\system\core\data_model\SP_Attribute::instance()->variation_attribute_name($attribute);
-			echo '<select id="' . esc_attr( $id ) . '" class="' . esc_attr( $class ) . ' hide woo-variation-raw-select woo-variation-raw-type-' . $type . '" style="display:none" name="' . esc_attr( $name ) . '" data-attribute_name="' . esc_attr( wc_variation_attribute_name( $attribute ) ) . '" data-show_option_none="' . ( $show_option_none ? 'yes' : 'no' ) . '">';
+			/*echo '<select id="' . esc_attr( $id ) . '" class="' . esc_attr( $class ) . ' hide woo-variation-raw-select woo-variation-raw-type-' . $type . '" style="display:none" name="' . esc_attr( $name ) . '" data-attribute_name="' . esc_attr( wc_variation_attribute_name( $attribute ) ) . '" data-show_option_none="' . ( $show_option_none ? 'yes' : 'no' ) . '">';*/
 		}
 		-----------------
 
 		-------------- a etlu wvs_default_image_variation_attribute_options alg che
 		if ( $data['woo_dropdown_attribute_html_data']['product'] ) {
 
-			if ( $data['woo_dropdown_attribute_html_data']['type'] === 'select' ) {
+			/*if ( $data['woo_dropdown_attribute_html_data']['type'] === 'select' ) {
 				echo '<select id="' . esc_attr( $id ) . '" class="' . esc_attr( $class ) . '" name="' . esc_attr( $name ) . '" data-attribute_name="' . esc_attr( wc_variation_attribute_name( $attribute ) ) . '" data-show_option_none="' . ( $show_option_none ? 'yes' : 'no' ) . '">';
 			} else {
 				echo '<select id="' . esc_attr( $id ) . '" class="' . esc_attr( $class ) . ' hide woo-variation-raw-select woo-variation-raw-type-' . $type . '" style="display:none" name="' . esc_attr( $name ) . '" data-attribute_name="' . esc_attr( wc_variation_attribute_name( $attribute ) ) . '" data-show_option_none="' . ( $show_option_none ? 'yes' : 'no' ) . '">';
-			}
+			}*/
 		}
 		-------------
-		if ( $data['woo_dropdown_attribute_html_data']['product'] && taxonomy_exists( $data['woo_dropdown_attribute_html_data']['attribute'] ) ) {
+		/*if ( $data['woo_dropdown_attribute_html_data']['product'] && taxonomy_exists( $data['woo_dropdown_attribute_html_data']['attribute'] ) ) {
 			echo '<select id="' . esc_attr( $id ) . '" class="' . esc_attr( $class ) . ' hide woo-variation-raw-select woo-variation-raw-type-' . esc_attr( $type ) . '" style="display:none" name="' . esc_attr( $name ) . '" data-attribute_name="' . esc_attr( wc_variation_attribute_name( $attribute ) ) . '" data-show_option_none="' . ( $show_option_none ? 'yes' : 'no' ) . '">';
 		} else {
 			echo '<select id="' . esc_attr( $id ) . '" class="' . esc_attr( $class ) . '" name="' . esc_attr( $name ) . '" data-attribute_name="' . esc_attr( wc_variation_attribute_name( $attribute ) ) . '" data-show_option_none="' . ( $show_option_none ? 'yes' : 'no' ) . '">';
-		}
+		}*/
 
-		if ( $args['hook_callback_args']['hook_args']['show_option_none'] ) {
+		----- move to /woo-bundle-choice/templates/single-product/variations-swatches/woo_dropdown_attribute/woo_dropdown_attribute-template_part.php file ma
+		/*if ( $args['hook_callback_args']['hook_args']['show_option_none'] ) {
 			echo '<option value="">' . esc_html( $show_option_none_text ) . '</option>';
-		}
+		}*/
 
 		if ( ! empty( $data['woo_dropdown_attribute_html_data']['options'] ) ) {
 			if ( $data['woo_dropdown_attribute_html_data']['product'] && taxonomy_exists( $data['woo_dropdown_attribute_html_data']['attribute'] ) ) {
@@ -1859,18 +1872,18 @@ class SP_Model_Single_Product extends SP_Single_Product {
 						
 						------------- a etlu wvs_default_button_variation_attribute_options alg che
 							$data['woo_dropdown_attribute_html_data']['option_name'] = \eo\wbc\system\core\data_model\SP_Attribute::instance()->variation_option_name( $term_name, $term, $attribute, $product);
-							echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) ) . '</option>';
+							/*echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) ) . '</option>';*/
 						-------------
 						------------- a etlu wvs_default_image_variation_attribute_options  alg che
 							$data['woo_dropdown_attribute_html_data']['option_name'] = \eo\wbc\system\core\data_model\SP_Attribute::instance()->variation_option_name( $term_name, $term, $attribute, $product);
-							echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) ) . '</option>';
+							/*echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) ) . '</option>';*/
 						-----
 						--------------a etlu wvs_radio_variation_attribute_options  alg che
 							$data['woo_dropdown_attribute_html_data']['option_name'] = \eo\wbc\system\core\data_model\SP_Attribute::instance()->variation_option_name( $term_name, $term, $attribute, $product);
-							echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) ) . '</option>';
+							/*echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) ) . '</option>';*/
 						--------------
 						$data['woo_dropdown_attribute_html_data']['option_name'] = \eo\wbc\system\core\data_model\SP_Attribute::instance()->variation_option_name( $term_name, $term, $attribute, $product);
-						echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) . '</option>';
+						/*echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) . '</option>';*/
 					}
 				}
 			} else {
@@ -1879,12 +1892,12 @@ class SP_Model_Single_Product extends SP_Single_Product {
 					$data['woo_dropdown_attribute_html_data'][$option]['selected'] = sanitize_title( $args['hook_callback_args']['hook_args']['selected'] ) === $args['hook_callback_args']['hook_args']['selected'] ? selected( $args['hook_callback_args']['hook_args']['selected'], sanitize_title( $option ), false ) : selected( $args['hook_callback_args']['hook_args']['selected'], $option, false );
 
 					$data['woo_dropdown_attribute_html_data'][$option]['option_name'] = \eo\wbc\system\core\data_model\SP_Attribute::instance()->variation_option_name( $term_name, $term, $attribute, $product);
-					echo '<option value="' . esc_attr( $option ) . '" ' . $selected . '>' . esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) . '</option>';
+					/*echo '<option value="' . esc_attr( $option ) . '" ' . $selected . '>' . esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) . '</option>';*/
 				}
 			}
 		}
 
-		echo '</select>';
+		/*echo '</select>';*/
 
 		return $data;
 	}

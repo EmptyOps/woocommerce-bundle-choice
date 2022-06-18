@@ -42,7 +42,8 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 
     	if ($page_section == 'swatches') {
     		if ($container_class == 'woo_variation_attr_html') {
-    			\eo\wbc\model\publics\SP_Model_Single_Product::instance()->prepare_swatches_data($args);
+    			$data = \eo\wbc\model\publics\SP_Model_Single_Product::instance()->prepare_swatches_data($args);
+    			$this->load_view($data,$args);
     		}
     	}else{
     	    \eo\wbc\controller\publics\Options::instance()->getUI();
@@ -73,22 +74,53 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 
     	// NOTE: since so far we do not needed to create the view class and the actual ui is also coming from the templates folder so, so far not creating the view class. and just implementing the required logic from here. but if it become necessary then in future create the view class. 
 
-
+    	$this->render_swatches_data_by_attribute_type($data,$args);
     }
 
     private function getUI($page_section,$args = null){
 
-        \eo\wbc\model\publics\SP_Model_Single_Product::instance()->render_ui( $this->get_ui_definition());
+    	$args['page_section'] = $page_section;
+    	
+    	if ($page_section == 'woo_dropdown_attribute_html' or $page_section == 'variable_item' or $page_section == 'variable_item_wrapper') {
+    		$this->get_ui_definition($args)
+    	}else{	
+
+        	\eo\wbc\model\publics\SP_Model_Single_Product::instance()->render_ui( $this->get_ui_definition($args));
+        }
     } 
 
-    private function get_ui_definition($args = null){
+    private function get_ui_definition($args = array()){
+    	if ($args['page_section'] == 'woo_dropdown_attribute_html') {
 
-        if (!in_array($args)) {
-            $args = array();
-        }
-        $args['template_option_key'] = 'diffrent_size_configure';
-        $args['option_group_key'] = 'templat_size';
-        $args['plugin_slug'] = sp_tv()->SP_Extension()->singleton_function();
+    		$args['widget_key'] = '';
+    		$args['template_sub_dir'] = '';
+    		$args['template_option_key'] = '';
+	        $args['option_group_key'] = '';
+	        $args['plugin_slug'] = '';
+
+
+    	}else if ($args['page_section'] == 'variable_item') {
+
+    		$args['widget_key'] = '';
+    		$args['template_sub_dir'] = '';
+    		$args['template_option_key'] = '';
+	        $args['option_group_key'] = '';
+	        $args['plugin_slug'] = '';
+
+    	}else if ($args['page_section'] == 'variable_item_wrapper') {
+
+    		$args['widget_key'] = '';
+    		$args['template_sub_dir'] = '';
+    		$args['template_option_key'] = '';
+	        $args['option_group_key'] = '';
+	        $args['plugin_slug'] = '';
+
+    	}else{
+    		$args['template_option_key'] = '';
+	        $args['option_group_key'] = '';
+	        $args['plugin_slug'] = '';
+
+	    }
 
         return parent::get_ui_definition($args);
 
@@ -595,19 +627,41 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 		\eo\wbc\model\publics\SP_Model_Single_Product::instance()->render_gallery_images_template_callback();
 	}
 
-	public function render_swatches_data_by_attribute_type(){
+	public function render_swatches_data_by_attribute_type($data,$args = array()){
+
+		echo $this->render_woo_dropdown_attribute_html_data($data,$args);
+
+		$html = apply_filters('sp_render_swatches_data_by_attribute_type',null,$data);
+
+		if (!empty($html)) {
+			echo $html;
+		}else{
+
+			$html = $this->render_variable_item_data($data,$args);
+
+			echo $this->render_variable_item_wrapper_data($data,$args,$html ? );
+		}
 
 	}
 
-	public function render_woo_dropdown_attribute_html_data(){
+	public function render_woo_dropdown_attribute_html_data($data,$args = array()){
+
+		$args['data'] = $data;
+		$this->getUI('woo_dropdown_attribute_html',$args);
 
 	}
 
-	public function render_variable_item_data(){
+	public function render_variable_item_data($data,$args = array()){
+
+		$args['data'] = $data;
+		$this->getUI('variable_item',$args);
 
 	}
 
-	public function render_variable_item_wrapper_data(){\
+	public function render_variable_item_wrapper_data($data,$args = array()){
+
+		$args['data'] = $data;
+		$this->getUI('variable_item_wrapper',$args);
 
 	}
 }

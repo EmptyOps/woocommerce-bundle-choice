@@ -19,8 +19,8 @@ class SP_Gallery_Slider extends \eo\wbc\controllers\publics\Controller{
     }
     public function should_init(){
 
-     --- ACTIVE_TODO implments
-
+    /* --- ACTIVE_TODO implments*/
+        return true;
     }
 
     public function init(){
