@@ -1536,6 +1536,8 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		----product no peramiter pass kervano baki che
 		$data = \eo\wbc\model\publics\SP_Model_Single_Product()::instance()->get_data('gallery_images');
 
+		$data['gallery_images_template_data'] = array();
+
 		//here recieve the $data param of the caller function -- to b done
 			--	pass it in all three functions called below and prepare the daa in the heirachiical structure the way these loops and functions calls and data and template load sequence is -- to b 
 
@@ -1550,48 +1552,48 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		// 	and the move the respective logic from below to there -- to d done
 		// 		--	and then replace below statements with function calls to that class -- to d done
 
-		$product_id = $product->get_id();
+		$data['gallery_images_template_data']['product_id'] = $product->get_id();
 
-		$default_attributes = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_default_attributes($product_id);
+		$data['gallery_images_template_data']['default_attributes'] = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_default_attributes($data['gallery_images_template_data']['product_id']);
 
-		$default_variation_id = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_default_variation_id($product, $attributes);
+		$data['gallery_images_template_data']['default_variation_id'] = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_default_variation_id($product, $data['attributes']);
 
-		$product_type = $product->get_type();
+		$data['gallery_images_template_data']['product_type'] = $product->get_type();
 
 		// ACTIVE_TODO we may like to use the columns var later to till gallery_images slider and zoom module layers including till applicable js layers -- to h or -- to d 
-		$columns = -1;	//	thumbnail columns 
+		$data['gallery_images_template_data']['columns'] = -1;	//	thumbnail columns 
 
-		$post_thumbnail_id = \eo\wbc\system\core\data_model\SP_Product::instance()->get_image_id($product);
+		$data['gallery_images_template_data']['post_thumbnail_id'] = \eo\wbc\system\core\data_model\SP_Product::instance()->get_image_id($product);
 
-		$attachment_ids = \eo\wbc\system\core\data_model\SP_Product::instance()->get_gallery_image_ids($product);
+		$data['gallery_images_template_data']['attachment_ids'] = \eo\wbc\system\core\data_model\SP_Product::instance()->get_gallery_image_ids($product);
 
-		$has_post_thumbnail = has_post_thumbnail();
+		$data['gallery_images_template_data']['has_post_thumbnail'] = has_post_thumbnail();
 
 		// No main image but gallery
-		if ( ! $has_post_thumbnail && count( $attachment_ids ) > 0 ) {
-			$post_thumbnail_id = $attachment_ids[0];
-			array_shift( $attachment_ids );
-			$has_post_thumbnail = true;
+		if ( ! $data['gallery_images_template_data']['has_post_thumbnail'] && count( $data['gallery_images_template_data']['attachment_ids'] ) > 0 ) {
+			$data['gallery_images_template_data']['post_thumbnail_id'] = $data['gallery_images_template_data']['attachment_ids'][0];
+			array_shift( $data['gallery_images_template_data']['attachment_ids'] );
+			$data['gallery_images_template_data']['has_post_thumbnail'] = true;
 		}
 
-		if ( 'variable' === $product_type && $default_variation_id > 0 ) {
+		if ( 'variable' === $data['gallery_images_template_data']['product_type'] && $data['gallery_images_template_data']['default_variation_id'] > 0 ) {
 
-			$product_variation = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_available_variation($product_id, $variation_id);
+			$data['gallery_images_template_data']['product_variation'] = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_available_variation($data['gallery_images_template_data']['product_id'], $data['gallery_images_template_data']['default_variation_id']);
 
-			if ( isset( $product_variation['image_id'] ) ) {
-				$post_thumbnail_id  = $product_variation['image_id'];
-				$has_post_thumbnail = true;
+			if ( isset( $data['gallery_images_template_data']['product_variation']['image_id'] ) ) {
+				$data['gallery_images_template_data']['post_thumbnail_id']  = $data['gallery_images_template_data']['product_variation']['image_id'];
+				$data['gallery_images_template_data']['has_post_thumbnail'] = true;
 			}
 
-			if ( isset( $product_variation['variation_gallery_images'] ) ) {
-				$attachment_ids = wp_list_pluck( $product_variation['variation_gallery_images'], 'image_id' );
-				array_shift( $attachment_ids );
+			if ( isset( $data['gallery_images_template_data']['product_variation']['variation_gallery_images'] ) ) {
+				$data['gallery_images_template_data']['attachment_ids'] = wp_list_pluck( $data['gallery_images_template_data']['product_variation']['variation_gallery_images'], 'image_id' );
+				array_shift( $data['gallery_images_template_data']['attachment_ids'] );
 			}
 		}
 
-		$has_gallery_thumbnail = ( $has_post_thumbnail && ( count( $attachment_ids ) > 0 ) );
+		$data['gallery_images_template_data']['has_gallery_thumbnail'] = ( $data['gallery_images_template_data']['has_post_thumbnail'] && ( count( $data['gallery_images_template_data']['attachment_ids'] ) > 0 ) );
 
-		$only_has_post_thumbnail = ( $has_post_thumbnail && ( count( $attachment_ids ) === 0 ) );
+		$data['gallery_images_template_data']['only_has_post_thumbnail'] = ( $data['gallery_images_template_data']['has_post_thumbnail'] && ( count( $data['gallery_images_template_data']['attachment_ids'] ) === 0 ) );
 
 		// $wrapper                          = sanitize_text_field( get_option( 'woo_variation_gallery_and_variation_wrapper', apply_filters( 'woo_variation_gallery_and_variation_default_wrapper', '.product' ) ) )
 
