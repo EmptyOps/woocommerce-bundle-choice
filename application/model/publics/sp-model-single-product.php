@@ -1776,9 +1776,9 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		$attributes = $data['attributes']; /*$product->get_variation_attributes();*/
 		$variations = $data['variations'];
 
-		create two static methods in the SP_Attribue clas s, namely variation_attribute_name and variation_option_name -- to d 
-			and the ove the respective logic from below to there -- to d 
-				--	and then replace below statements with function calls to that class -- to d 
+		// create two static methods in the SP_Attribue clas s, namely variation_attribute_name and variation_option_name -- to d done
+		// 	and the ove the respective logic from below to there -- to d done 
+		// 		--	and then replace below statements with function calls to that class -- to d done
 		and create one more function get_product_terms, a public static function in the same class SP_Attribue -- to d 
 			and the ove the respective logic from below to there -- to d 
 				--	and then replace below statements with function calls to that class -- to d 
@@ -1810,7 +1810,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		$data['woo_dropdown_attribute_html_data']['options']               = $args['hook_callback_args']['hook_args']['options'];
 		$data['woo_dropdown_attribute_html_data']['product']               = $args['hook_callback_args']['hook_args']['product'];
 		$data['woo_dropdown_attribute_html_data']['attribute']             = $args['hook_callback_args']['hook_args']['attribute'];
-		$data['woo_dropdown_attribute_html_data']['name']                  = $args['hook_callback_args']['hook_args']['name'] ? $args['hook_callback_args']['hook_args']['name'] : wc_variation_attribute_name( $attribute );
+		$data['woo_dropdown_attribute_html_data']['name']                  = $args['hook_callback_args']['hook_args']['name'] ? $args['hook_callback_args']['hook_args']['name'] : \eo\wbc\system\core\data_model\SP_Attribute::instance()->variation_attribute_name($attribute);
 		$data['woo_dropdown_attribute_html_data']['id']                    = $args['hook_callback_args']['hook_args']['id'] ? $args['hook_callback_args']['hook_args']['id'] : sanitize_title( $attribute );
 		$data['woo_dropdown_attribute_html_data']['class']                 = $args['hook_callback_args']['hook_args']['class'];
 		$data['woo_dropdown_attribute_html_data']['show_option_none']      = $args['hook_callback_args']['hook_args']['show_option_none'] ? true : false;
@@ -1824,6 +1824,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 		--------------a etlu wvs_default_button_variation_attribute_options alg che
 		if ( $data['woo_dropdown_attribute_html_data']['product'] ) {
+			$data['woo_dropdown_attribute_html_data']['attribute_name'] = \eo\wbc\system\core\data_model\SP_Attribute::instance()->variation_attribute_name($attribute);
 			echo '<select id="' . esc_attr( $id ) . '" class="' . esc_attr( $class ) . ' hide woo-variation-raw-select woo-variation-raw-type-' . $type . '" style="display:none" name="' . esc_attr( $name ) . '" data-attribute_name="' . esc_attr( wc_variation_attribute_name( $attribute ) ) . '" data-show_option_none="' . ( $show_option_none ? 'yes' : 'no' ) . '">';
 		}
 		-----------------
@@ -1851,28 +1852,34 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		if ( ! empty( $data['woo_dropdown_attribute_html_data']['options'] ) ) {
 			if ( $data['woo_dropdown_attribute_html_data']['product'] && taxonomy_exists( $data['woo_dropdown_attribute_html_data']['attribute'] ) ) {
 				// Get terms if this is a taxonomy - ordered. We need the names too.
-				$data['woo_dropdown_attribute_html_data']['terms'] = wc_get_product_terms( $data['woo_dropdown_attribute_html_data']['product']->get_id(), $data['woo_dropdown_attribute_html_data']['attribute'], array( 'fields' => 'all' ) );
+				$data['woo_dropdown_attribute_html_data']['terms'] = \eo\wbc\system\core\data_model\SP_Attribute::instance()->get_product_terms( $data['woo_dropdown_attribute_html_data']['product']->get_id(), $data['woo_dropdown_attribute_html_data']['attribute'], array( 'fields' => 'all' ) );
 
 				foreach ( $data['woo_dropdown_attribute_html_data']['terms'] as $term ) {
 					if ( in_array( $term->slug, $data['woo_dropdown_attribute_html_data']['options'], true ) ) {
 						
 						------------- a etlu wvs_default_button_variation_attribute_options alg che
-							echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . esc_html( apply_filters( 'woocommerce_variation_option_name', $term->name, $term, $attribute, $product ) ) . '</option>';
+							$data['woo_dropdown_attribute_html_data']['option_name'] = \eo\wbc\system\core\data_model\SP_Attribute::instance()->variation_option_name( $term_name, $term, $attribute, $product);
+							echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) ) . '</option>';
 						-------------
 						------------- a etlu wvs_default_image_variation_attribute_options  alg che
-							echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . esc_html( apply_filters( 'woocommerce_variation_option_name', $term->name, $term, $attribute, $product ) ) . '</option>';
+							$data['woo_dropdown_attribute_html_data']['option_name'] = \eo\wbc\system\core\data_model\SP_Attribute::instance()->variation_option_name( $term_name, $term, $attribute, $product);
+							echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) ) . '</option>';
 						-----
 						--------------a etlu wvs_radio_variation_attribute_options  alg che
-							echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . esc_html( apply_filters( 'woocommerce_variation_option_name', $term->name, $term, $attribute, $product ) ) . '</option>';
+							$data['woo_dropdown_attribute_html_data']['option_name'] = \eo\wbc\system\core\data_model\SP_Attribute::instance()->variation_option_name( $term_name, $term, $attribute, $product);
+							echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) ) . '</option>';
 						--------------
-						echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . apply_filters( 'woocommerce_variation_option_name', $term->name, $term, $attribute, $product ) . '</option>';
+						$data['woo_dropdown_attribute_html_data']['option_name'] = \eo\wbc\system\core\data_model\SP_Attribute::instance()->variation_option_name( $term_name, $term, $attribute, $product);
+						echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) . '</option>';
 					}
 				}
 			} else {
 				foreach ( $data['woo_dropdown_attribute_html_data']['options'] as $option ) {
 					// This handles < 2.4.0 bw compatibility where text attributes were not sanitized.
-					$data['woo_dropdown_attribute_html_data']['selected'] = sanitize_title( $args['hook_callback_args']['hook_args']['selected'] ) === $args['hook_callback_args']['hook_args']['selected'] ? selected( $args['hook_callback_args']['hook_args']['selected'], sanitize_title( $option ), false ) : selected( $args['hook_callback_args']['hook_args']['selected'], $option, false );
-					echo '<option value="' . esc_attr( $option ) . '" ' . $selected . '>' . esc_html( apply_filters( 'woocommerce_variation_option_name', $option, null, $attribute, $product ) ) . '</option>';
+					$data['woo_dropdown_attribute_html_data'][$option]['selected'] = sanitize_title( $args['hook_callback_args']['hook_args']['selected'] ) === $args['hook_callback_args']['hook_args']['selected'] ? selected( $args['hook_callback_args']['hook_args']['selected'], sanitize_title( $option ), false ) : selected( $args['hook_callback_args']['hook_args']['selected'], $option, false );
+
+					$data['woo_dropdown_attribute_html_data'][$option]['option_name'] = \eo\wbc\system\core\data_model\SP_Attribute::instance()->variation_option_name( $term_name, $term, $attribute, $product);
+					echo '<option value="' . esc_attr( $option ) . '" ' . $selected . '>' . esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) . '</option>';
 				}
 			}
 		}
@@ -1904,7 +1911,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 		if ( ! empty( $options ) ) {
 			if ( $product && taxonomy_exists( $attribute ) ) {
-				$terms = wc_get_product_terms( $product->get_id(), $attribute, array( 'fields' => 'all' ) );
+				$terms = \eo\wbc\system\core\data_model\SP_Attribute::instance()->get_product_terms( $product->get_id(), $attribute, array( 'fields' => 'all' ) );
 				$name  = uniqid( wc_variation_attribute_name( $attribute ) );
 				------- m have this additional
 				if(in_array($type,array('dropdown_image','dropdown_image_only','dropdown'))) {

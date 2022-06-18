@@ -71,4 +71,22 @@ class SP_Attribute extends SP_Entity {
 
 	}
 
+	public static function variation_attribute_name($attribute){
+
+		return wc_variation_attribute_name( $attribute );
+
+	}
+
+	public static function variation_option_name( $term_name, $term, $attribute, $product){
+
+		return apply_filters( 'woocommerce_variation_option_name', $term_name, $term, $attribute, $product );
+
+	}
+
+	public static function get_product_terms($product_id, $attribute, $args = array()){
+
+		return wc_get_product_terms($product_id, $attribute, $args);
+
+	}
+
 }
