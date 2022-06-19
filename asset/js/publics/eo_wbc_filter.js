@@ -12,41 +12,6 @@ window.document.splugins.wbc.filters = window.document.splugins.wbc.filters || {
 window.document.splugins.wbc.filters.core = function() {
     // this.subjects = [];
 
-    ///////////// -- 15-06-2022 -- @drashti -- ///////////////////////////////
-    var compatability = function(section, object, expected_result) {
-        if(section == 'product-listing'){
-            jQuery('.products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)').addClass('product_grid_view');
-            //jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination').css('visibility','visible');
-            if(jQuery(".row-inner>.col-lg-9").length>0){
-                jQuery(".row-inner>.col-lg-9 *").each(function(i,e) {       
-                    if(jQuery(e).css('opacity') == '0'){
-                        jQuery(e).css('opacity','1');        
-                    }
-                });
-                jQuery(".t-entry-visual-overlay").removeClass('t-entry-visual-overlay');
-                jQuery(".double-gutter .tmb").css('width','50%');
-                jQuery(".double-gutter .tmb").css('display','inline-flex');
-            }
-            
-            jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination,jet-filters-pagination').css('visibility','visible');
-
-            // Fix for the yith wishlist.
-            if(typeof(yith_wcwl_l10n)=='object'){
-                eowbc_yith_wishlist_fix();
-            }
-            // lazyload
-            if(typeof(LazyLoad)=='function'){
-                eowbc_lazyload();
-            } 
-        }
-        
-
-        eo_wbc_filter_render_html();     
-
-    }
-    ///////////////////////////////////////////////////////
-
-
 
     //	private functions 
     var init_private = function() {
@@ -56,13 +21,15 @@ window.document.splugins.wbc.filters.core = function() {
 
 
     	we like to move the events namespace under splugins instead of under the Feed, but the problem is that the events are initially planned for the Feed page however the events API is supposed to be used for any layers of any page and so on. 
-    		--	so what maybe we could do is move the events api functions under the splugins namespace -- to d 
+    		// --	so what maybe we could do is move the events api functions under the splugins namespace -- to d done 
     		--	and we need something that says the event is for Feed page or item page or all pages. by default it need to define at least one page maybe
     			--	it is clear that events are for the browser context so whatever js is loaded on the current page or say context is what the event subjects are for. 
     				--	so maybe simply let events work on their own and for the modules like variations where maybe the same events can be reused on category page which was defined for the item page flows then that is fine and we are happy with reusability, but not sure if it can create disasters or mess in the flow. and this maybe a big question 
 		//	the filter events 
 		// 	ACTIVE_TODO commented below events subject creation, during testing only. so temporary only.
 		// window.document.splugins.Feed.events.core.createSubject( 'filters', ['before_search', 'no_products_found'] );
+			--	check if the events module is not exported like the way it is supposed to be means in the syntax style as in form builder, then just follow the export style of form builder and export it under ...api -- to d 
+				--	in that case update the calls here in this file and also in the common js file -- to d 
 		window.document.splugins.events.core.createSubject( 'filters', ['before_search', 'no_products_found'] );
 
     };
@@ -76,6 +43,8 @@ window.document.splugins.wbc.filters.core = function() {
 
 		// below before_search function need to make private 
 		// 	--	however it will continue to broadcast before search notification, and whoever interested in the before_search event should bind to that event notification 
+
+
 		// window.document.splugins.Feed.events.core.notifyAllObservers( 'filters', 'before_search' ); 
 		window.document.splugins.events.core.notifyAllObservers( 'filters', 'before_search' ); 
 
@@ -91,6 +60,7 @@ window.document.splugins.wbc.filters.core = function() {
 	var prepare_query_data = function() {
 
 		from 0= this file function 
+		bring here the code from there -- to d 
 
 		from 1 	
 		var form=jQuery(form_selector);
@@ -165,8 +135,11 @@ window.document.splugins.wbc.filters.core = function() {
 
 	};	
 
-	so here there will be those ajax callback functions like beforeSend, complete, success, error and so on? mostly yes so that we can call it from wrapper and especially put all the refactored code from different instances of ht eo_wbc_filter_change functions in here 
-		--	so let just do it -- to d had already did it for two functions below 
+	// so here there will be those ajax callback functions like beforeSend, complete, success, error and so on? mostly yes so that we can call it from wrapper and especially put all the refactored code from different instances of ht eo_wbc_filter_change functions in here 
+	// 	--	so let just do it -- to d. done. had already did it for two functions below 
+		--	for all four functions below bring the code from all applicable functions -- to d 
+			--	and compare and put common only once and for identical means different put separetely and comment for both -- to d. ask b for how to do this process precisely, and do it precisely no more in rubbish way. 
+			--	and note one thing clearly that identical table code that is identified here need to be moved in their own calling layers to this function, so there will be some call back or so that need to be defined that can cover it. or we can simply use what is available by way of observer pattern and their notification callback that is planned that maybe of help if finalized -- to d 
 	var beforeSend = function(xhr) {
 		window.eo_wbc_object.enable_filter_table = false;
 		jQuery("#loading").addClass('loading');					
@@ -200,18 +173,72 @@ window.document.splugins.wbc.filters.core = function() {
 		window.eo_wbc_object.enable_filter_table = true;
 	};
 
+    ///////////// -- 15-06-2022 -- @drashti -- ///////////////////////////////
+    var compatability = function(section, object, expected_result) {
+
+    	do the call from where the below section is moved here, and if you already did the call then show and confirm with me -- to d 
+        if(section == 'product-listing'){
+            jQuery('.products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)').addClass('product_grid_view');
+            //jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination').css('visibility','visible');
+            if(jQuery(".row-inner>.col-lg-9").length>0){
+                jQuery(".row-inner>.col-lg-9 *").each(function(i,e) {       
+                    if(jQuery(e).css('opacity') == '0'){
+                        jQuery(e).css('opacity','1');        
+                    }
+                });
+                jQuery(".t-entry-visual-overlay").removeClass('t-entry-visual-overlay');
+                jQuery(".double-gutter .tmb").css('width','50%');
+                jQuery(".double-gutter .tmb").css('display','inline-flex');
+            }
+            
+            jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination,jet-filters-pagination').css('visibility','visible');
+
+            // Fix for the yith wishlist.
+            if(typeof(yith_wcwl_l10n)=='object'){
+                eowbc_yith_wishlist_fix();
+            }
+            // lazyload
+            if(typeof(LazyLoad)=='function'){
+                eowbc_lazyload();
+            } 
+        }
+        
+
+        -- check and let me know the below statement should not be here so give me instructions related to that which was given to you -- to d 
+        eo_wbc_filter_render_html();     
+
+    }
+    ///////////////////////////////////////////////////////
+
+
 	what other functions we would like to be here? maybe the functions like before_search, no_products_found, preprocess_data(it may contain some of those render_html layer logic like they are in this file or in that sp_tv_template file), find_container/locate_container/determine_target_container, reset_all_filters(should even create rest_filter and then send to that specific functions like reset_icon, reset_slider and so on? maybe yes), apply_filters and so on 
 
     //	published public functions 
     return {
 
-    	below before_search function need to make private D
-    		--	however it will continue to broadcast before search notification, and whoever interested in the before_search event should bind to that event notification 
+    	// below before_search function need to make private done
+    		--	however it will continue to broadcast before search notification, and whoever interested in the before_search event should bind to that event notification -- to h and -- to d 
     		--	and there will be one more function like should_search, which will also be private. and that will handle onle the logic of checking flags and so on like the enable_filter_table flag above 
-    		--	and the whole ajax request layer will be handled by the private instance of the eo_wbc_filter_change_wrapper function 
-    		--	and below public wrapper function namely eo_wbc_filter_change_wrapper will call functios like should_search, before_search and then at delegate the rest to eo_wbc_filter_change_wrapper_private function 
+    			-- however above enable_filter_table flag need to be handled through some callback mechanisal as planned and stated above also since it is tableview flow, so it will be from tableview layers only -- to d 
+    				--	and for tableview in the first place, if above flag sounds unnecessary and our refactored implementation can do without that then just comment that -- to d 
+    			--	and if there are any such other flags that come around then just implement it from above said should_search function -- to d 
+
+
+    		--	and the whole ajax request layer will be handled by the private instance of the eo_wbc_filter_change_wrapper function -- to h and -- to d 
+    			--	and wherever there are layer specific logic like if tableview, diamond quiz and so on have they own additional or identical logic on their layers then cover it through ovserver pattern callback, and maybe for this we can use simple callback but that would make the process lengthy in terms of the additional code that required. but the observer pattern is not seem ideal in terms of the execution sequence that would become complex so simply have the caller pass the applicable callback in the last parameters arg in the below eo_wbc_filter_change_wrapper -- to d 
+    				--	and pass that to till all applicable functions and layers in this module, and if that become overwhelming process then can matainn the last parameters var in the this object stat but that would be not so standard flow in terms of the stat management especially while this wrapper function is supposed to one way function that can be called any number of times by any layers. so simply need to pass the parameters var everywhere in all function and layers that are called within the module. -- to d 
+    				--	so now the above tableview flag namely the enable_filter_table will also be handled by such callbacks provided from their calling layer, so now handle that accordingly -- to d 
+
+    		--	and below public wrapper function namely eo_wbc_filter_change_wrapper will call functios like should_search, before_search and then at delegate the rest to eo_wbc_filter_change_wrapper_private function -- to d 
+    			--	and so should_search function call will be inside if condition and would cancel the entire function call if that returned false -- to d 
+    				--	and that function would in its implementation would be calling the callbacks using if condition like above and return false if the should_search callback provided by tableview returns false -- to d 
+
     		--	and the before_search will set flags like enable_filter_table(now the name should be changed, but to maintain trace to older var names need to keep the old flga names commented right above it) and it should not be by the should_search function 
+    			--	find all traces of enable_filter_table flag and show it to me, and now as planned it will be handled only on the tableview layers and will not be set in before_search like said above so need to confirm all its traces -- to d 
+
     		--	and then refactor and implement the eo_wbc_filter_change function instance of this file itself at bottom 
+    				--	just move all the different sections to their applicable functions, like you did moved all instances of the function eo_wbc_filter_change below and then moved their sections to their applicable functions above -- to d. do it like we did atleast some moving for the prepare_query_data function, so  first cover the one point below related to prepare_query_data,.  
+    				--	and same for all the other instances that you already moved below, so from there move it to their respective functions, like we did above -- to d 
     			-- and then need to focus on loading stack that starts maybe from the load or ready event at the bottom of this file 
 
     	regarding events 
@@ -219,8 +246,10 @@ window.document.splugins.wbc.filters.core = function() {
     			--	so that on each render event, variations module could take care the ops related to variations swatches and gallery changes/modification that is required on each render event -- means simply the loopbox refresh will be required 
     		 	
 
-		//	this function is supposed to be called by parent init layers or simply the init layers of the system so that if there are any filters js module init related ops then they are covered. and it is not related the filter_change(means search event) event but it is about initializing search filter module related ops. so yeah maybe any required core binding, event binding and so on can be invoked from this function. 
     	init: function() {
+
+			//	NOTE: this function is supposed to be called by parent init layers or simply the init layers of the system so that if there are any filters js module init related ops then they are covered. and it is not related the filter_change(means search event) event but it is about initializing search filter module related ops. so yeah maybe any required core binding, event binding and so on can be invoked from this function. 
+
 
     		init_private();	
     	}, 		
@@ -243,9 +272,12 @@ window.document.splugins.wbc.filters.core = function() {
 			// // /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template2.js
 			// 	jQuery.fn.eo_wbc_filter_change=function(init_call=false)
 
-			make sure that any js layers of wbc or any extensions which is calling the eo_wbc_filter_change function should call this function of this filters module -- to d 
+			// make sure that any js layers of wbc or any extensions which is calling the eo_wbc_filter_change function should call this function of this filters module -- to d done
+				--	above is done basically but yet to confirm the basic syntax there -- to h and -- to d. 
+					--	first confirm with me calls from wbc and tableview -- to d 
+					--	and then at you your own self be sure to do confirm with me for the rest of the extensions -- to d 
 
-			and this function will simply call the private wrapper function eo_wbc_filter_change_wrapper_private 
+			and this function will simply call the private wrapper function eo_wbc_filter_change_wrapper_private -- to d 
 			// prepare_query_data 	
 				// var form=jQuery(form_selector);
 
@@ -260,6 +292,7 @@ window.document.splugins.wbc.filters.core = function() {
 					return true;
 				}
 			prepare_query_data();							
+			--	above call is okay but move it to private wrapper above and also the if statement above it but make that commented -- to d 
 
 			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
@@ -847,6 +880,9 @@ window.document.splugins.wbc.filters.core = function() {
         // },
         no_products_found: function() {
 
+        	create private counter part of the no_products_found function with name no_products_found_private, so that the inner private layers can call that internally -- to d 
+        		--	and move below code there and from here just call that private fucntion -- to d 
+
 			// window.document.splugins.Feed.events.core.notifyAllObservers( 'filters', 'no_products_found' );
 			window.document.splugins.events.core.notifyAllObservers( 'filters', 'no_products_found' );
 
@@ -1030,6 +1066,30 @@ function eo_wbc_filter_render_html(data,render_container) {
 		//console.log(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html());
 
 		move below logic to the pagination js module -- to d. including the compatibility conditions are there in the if else block, like planned above to keep the compatibility patches as it is if they are already implemented otherwise we will put them in the dedicated compatibility function. 
+			-- create below functions in that module 
+				--	bind_click -- to d. put comment inside function "it will bind to all kind of such on_click events of pagination, it will be private but it may broadcast notification with a callback which js layers of like tableview and so on can call when they recieve their own click event or they can simply call below on_click function". so it is private function. 
+					--	and from this function call the private click function -- to d 
+				--	on_click -- to d. put comment inside function "listen to all on_click events". so it is public function. 
+				--	click -- to d. put comment inside function "it will internally implement all flows related to pagination link click event". so it is private function. 
+					--	call this function from above on_click -- to d 	
+					-- raise on_click notification using notifyAllObservers -- to d 
+					-- in init_private function first create the subject for observer pattern also -- to d 
+					-- so also create init_private and init(public) function -- to d 
+				--	compatibility -- to d. it is private function. 
+				--	get_page_number -- to d. it is public function. 
+				--	set_page_number -- to d. it is public function. 
+					-- raise page_number_udpated notification using notifyAllObservers -- to d 
+				--	on_reset -- to d. it is public function. 
+					--	external layers would simply call this function, since observer pattern is not seem necessary here -- to d 
+					--	and from this function call the private reset function -- to d 
+				--	reset -- to d. it is private function. 
+					-- raise on_reset notification using notifyAllObservers -- to d 
+				tableview and so on would depend on that extended flow of observer pattern where notification will provide a callback, this flow is to be confirmed so either it or something else that is confirmed there on common js variations notes will be used. 
+					-- tableview will use it for its flows like binding click event, which is ideal use case of the observer pattern -- to d 
+					-- and it will also use it for triggerring the click event, means of its own pagination links dom -- to d 
+						-- ACTIVE_TODO but very soon maybe the tableview may not have its own pagination links dom if that is not necessary for it -- to h and -- to d 
+					-- and for setting and getting current page_number 
+						--	for it may simply need to use the pagination modules published api interface -- to d 
 		if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html()!==undefined) {
 			if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination').length>0){
 				jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html());
@@ -1061,6 +1121,7 @@ function eo_wbc_filter_render_html(data,render_container) {
 	jQuery("#loading").removeClass('loading');
 	
 	almost all of the below seems compatibility related to so move that to compatibility function, and at there we need to have section conditon like this would be broadly as product-listing -- to d 
+		--	you already moved below code, which I saw, but there is not comment below that it is moved so please let me know what is going on -- to d 
 	jQuery('.products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)').addClass('product_grid_view');
 	//jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination').css('visibility','visible');
 	if(jQuery(".row-inner>.col-lg-9").length>0){
@@ -1103,13 +1164,13 @@ function eo_wbc_filter_render_html(data,render_container) {
 	//flag indicates if to show products in tabular view or woocommerce's default style.		
 
 		below logic should be in the init_search function so there will be a init_search function that we need to create -- to d 
+			--	actually not in init_search but do it in the should_search function -- to d 
 		if(window.eo_wbc_object.enable_filter===false){
 			return false;
 		}
 
 		//	NOTE: if there are any return false etc statement occur below this statement then this core function call should be moved underneath the return statement because this core functions is supposed to be called only if search actually happens but yeah at earliest possible also so that there are any dependent flow below or elsewhere then they are taken care of properly 
-		// 	ACTIVE_TODO commented below events subject creation, during testing only. so temporary only.
-		// window.document.splugins.wbc.filters.core.before_search();
+		window.document.splugins.wbc.filters.core.before_search();
 
 		and below will be inside the init_search also -- to d
 		if(render_container==='') {
@@ -1171,9 +1232,14 @@ function eo_wbc_filter_render_html(data,render_container) {
 
 jQuery(document).ready(function($){
 
+	if any of the below vars are related to the stat and so on vars that we planned to rename or move then should be covered here also, otherwise at runtime it will break and would not run and crash -- to d 
 	window.eo_wbc_object = window.eo_wbc_object || {};
 	window.eo_wbc_object.enable_filter = window.eo_wbc_object.enable_filter || false;
 
+	move to pagination js modules bind_click function -- to d 
+		--	and also be sure to the filter_change function call. and why that is so far not changed? -- to d 
+		--  and comment code below but the pagination modules init function need to be called from here -- to d 
+			--	so first export and publish that module under ...api -- to d 
 	jQuery('body').on('click','.navigation .page-numbers,.woocommerce-pagination a.page-numbers',function(e){
 	    e.preventDefault();
 	    e.stopPropagation();
@@ -1182,6 +1248,8 @@ jQuery(document).ready(function($){
 		jQuery.fn.eo_wbc_filter_change(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
 	});
 	
+	ask t for what it is -- to d 
+		-- then need to create if applicable then applicable function in applicable js module and mode code there -- to d 
 	jQuery("[data-toggle_column]").click(function(){
 		if(jQuery(this).hasClass('active')){		
 			jQuery("[data-toggle_slug='"+jQuery(this).data('toggle_column')+"']").css('display','none');
@@ -1194,6 +1262,10 @@ jQuery(document).ready(function($){
 		}
 	});
 
+	create function bind_reset_click in filters js module and move below code there -- to d 
+		--	and then from just make call to that private function from the init_private of the same module -- to d 
+		--  and comment code below but the filters modules init function need to be called from here -- to d 
+			--	so first export and publish that module under ...api -- to d 
 	jQuery(document).on('click',".reset_all_filters",function(){
         jQuery("[data-reset]").each(function(e){
             eval(jQuery(this).data('reset'));
@@ -1204,6 +1276,8 @@ jQuery(document).ready(function($){
 
 	if(eo_wbc_object.disp_regular){
 	
+		create function bind_click in filters js module and move below code there -- to d 
+			--	and then from just make call to that private function from the init_private of the same module -- to d 
 		//jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html('');		
 		if(!eo_wbc_object.btnfilter_now){			
 			jQuery("#eo_wbc_filter").on('change',"input:not(:checkbox)",function(){
@@ -1225,6 +1299,8 @@ jQuery(document).ready(function($){
 
 		//pagination for non-table based view
 
+		move to pagination js modules bind_click function -- to d 
+			--	and also be sure to the filter_change function call. and why that is so far not changed? -- to d 
 		jQuery("body").on('click','.woocommerce-pagination a,.pagination a,.jet-filters-pagination a,.woocommerce-pagination .jet-filters-pagination__link,.pagination .jet-filters-pagination__link,.jet-filters-pagination .jet-filters-pagination__link',function(event){
 			
 			event.preventDefault();
@@ -1249,6 +1325,8 @@ jQuery(document).ready(function($){
 	}
 	/////////////////////////
 	////////////////////////
+	create function advance_filter_accordian in filters js module and move below code there -- to d 
+		--	and then from just make call to that private function from the init_private of the same module -- to d 
 	if(jQuery.fn.hasOwnProperty('accordion') && typeof(jQuery.fn.accordion)==='function'){
 		jQuery( ".eo_wbc_advance_filter" ).accordion({
 		  collapsible: true,
@@ -1256,6 +1334,7 @@ jQuery(document).ready(function($){
 		});
 	}
 
+	in function bind_reset_click in filters js module and move below code there -- to d 
 	//Reset form and display
 	jQuery(".eo_wbc_srch_btn:eq(2)").click(function(){					
 		///////////////////////////////////////////
