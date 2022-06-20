@@ -506,4 +506,14 @@ class UI_Builder implements Builder {
 		}
 	}
 
+	static function js_template_wrap(string $id, string $html, string $js_templating_lib) {
+
+		// wrap with tag as appliable as per the js_templating_lib 
+		if( $js_templating_lib == 'wp' ) {
+
+			return '<script type="text/html" id="tmpl-'.$id.'">' . $html . '</script>'; 
+		}
+			
+	}
+
 }
