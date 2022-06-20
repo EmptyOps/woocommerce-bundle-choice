@@ -316,10 +316,12 @@ window.document.splugins.wbc.variations = window.document.splugins.wbc.variation
                 --  (input) types like dropdown, button, image swatches and so on 
                 --  attribute options/terms 
                     --  properties of options/terms like if out of stock 
+            --  extract product_variations and assign in our main data var -- to d 
             --  gallery_images  
                 --  images 
                 --  videos 
                 --  custom_html 
+                --  NOTE: since the data in case gallery_images module will be comming from the variation events in the variation etc. event args so nothing needed to be assigned in our main data var. 
         -   template 
             --  will vary based on attribute types, extensions and some other feature related conditions also 
                 --  but to simplify it we can simply depend on template_type or if required then in specific scenarios on the particular template_key
@@ -369,6 +371,10 @@ window.document.splugins.wbc.variations = window.document.splugins.wbc.variation
         -   configs 
                 --  will control decision of whether to display certain section or not, for example whether to display template part of attribute name (for us ribbon wrapper)
                 --  or whether to show tooltip or not 
+                --  ACTIVE_TODO image preload will going to be an important and strategic feature for the gallery_images module, so we will need to add support for that very soon with on admin by default is applicable flag will be on, and user can disable that if they want -- to h and -- to d 
+                    --  ACTIVE_TODO/TODO and after the above feature is basically implemented very soon in future we may like add the feasible and effective innovations that would add value to this feature -- to h and -- to d 
+                --  ACTIVE_TODO like above thumbnail height and thumbnail position is also something that we need to support very soon -- to h and -- to d 
+                    --  ACTIVE_TODO and similarly if there is anything else like above things or related matters in the plugins we were exploring then we should cover them too -- to h and -- to d 
         -   php hooks and js api 
                         --  but yeah it will be served only if the related requirement is enabled, for example external slider and zoom option is enabled. so that extra hook and event are served or events are bound only if required and it will prevent unnecessary resource usage. 
             --  would be used by our extensions and would be used for the hooks/js-api support for slider zoom replacement 
@@ -476,6 +482,518 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
 
             
         }); 
+
+
+            // Init on Ajax Popup :)
+            $(document).on('wc_variation_form.wvs', '.variations_form:not(.wvs-loaded)', function (event) {
+              $(this).WooVariationSwatches();
+            });
+
+            // Try to cover all ajax data complete
+            $(document).ajaxComplete(function (event, request, settings) {
+              _.delay(function () {
+                $('.variations_form:not(.wvs-loaded)').each(function () {
+                  $(this).wc_variation_form();
+                });
+              }, 100);
+            });
+
+            // Composite product load
+            // JS API: https://docs.woocommerce.com/document/composite-products/composite-products-js-api-reference/
+            $(document.body).on('wc-composite-initializing', '.composite_data', function (event, composite) {
+              composite.actions.add_action('component_options_state_changed', function (self) {
+                $(self.$component_content).find('.variations_form').removeClass('wvs-loaded wvs-pro-loaded');
+              });
+
+              /* composite.actions.add_action('active_scenarios_updated', (self) => {
+                 console.log('active_scenarios_updated')
+                 $(self.$component_content).find('.variations_form').removeClass('wvs-loaded wvs-pro-loaded')
+               })*/
+            });
+
+            // Support for Yith Infinite Scroll
+            so a call from here to the compatability function of this module, and that will cover all compatability matters of load time inlcuding the promize resolve block of the plugin we were exploring. so call compatability with section=bootstrap -- to d 
+
+            // WooCommerce Filter Nav
+            $('body').on('aln_reloaded.wvs', function () {
+              _.delay(function () {
+                $('.variations_form:not(.wvs-loaded)').each(function () {
+                  $(this).wc_variation_form();
+                });
+              }, 100);
+            });
+
+              this.product_variations = this.$element.data('product_variations') || [];
+              this.is_ajax_variation = this.product_variations.length < 1;
+              this.product_id = this.$element.data('product_id');
+              this.reset_variations = this.$element.find('.reset_variations');
+
+              this.$element.addClass('wvs-loaded');
+
+              // Call
+              this.init();
+              this.update();
+
+              // Trigger
+              $(document).trigger('woo_variation_swatches', [this.$element]);
+
+            _createClass(WooVariationSwatches, [{
+              key: 'init',
+              value: function init() {
+                var _this2 = this;
+
+                var _this = this;
+
+                this._generated = this.product_variations.reduce(function (obj, variation) {
+
+                  Object.keys(variation.attributes).map(function (attribute_name) {
+                    if (!obj[attribute_name]) {
+                      obj[attribute_name] = [];
+                    }
+
+                    if (variation.attributes[attribute_name]) {
+                      obj[attribute_name].push(variation.attributes[attribute_name]);
+                    }
+                  });
+
+                  return obj;
+                }, {});
+
+                this._out_of_stock = this.product_variations.reduce(function (obj, variation) {
+
+                  Object.keys(variation.attributes).map(function (attribute_name) {
+                    if (!obj[attribute_name]) {
+                      obj[attribute_name] = [];
+                    }
+
+                    if (variation.attributes[attribute_name] && !variation.is_in_stock) {
+                      obj[attribute_name].push(variation.attributes[attribute_name]);
+                    }
+                  });
+
+                  return obj;
+                }, {});
+
+                // Append Selected Item Template
+                if (woo_variation_swatches_options.show_variation_label) {
+                  this.$element.find('.variations .label').each(function (index, el) {
+                    $(el).append(_this2.selected_item_template);
+                  });
+                }
+
+                this.$element.find('ul.variable-items-wrapper').each(function (i, el) {
+
+                  $(this).parent().addClass('woo-variation-items-wrapper');
+
+                  var select = $(this).siblings('select.woo-variation-raw-select');
+                  var selected = '';
+                  var options = select.find('option');
+                  var disabled = select.find('option:disabled');
+                  var out_of_stock = select.find('option.enabled.out-of-stock');
+                  var current = select.find('option:selected');
+                  var eq = select.find('option').eq(1);
+
+                  var li = $(this).find('li:not(.woo-variation-swatches-variable-item-more)');
+                  var reselect_clear = $(this).hasClass('reselect-clear');
+
+                  var mouse_event_name = 'click.wvs'; // 'touchstart click';
+
+                  var attribute = $(this).data('attribute_name');
+                  // let attribute_values = ((_this.is_ajax_variation) ? [] : _this._generated[attribute])
+                  // let out_of_stocks = ((_this.is_ajax_variation) ? [] : _this._out_of_stock[attribute])
+                  var selects = [];
+                  var disabled_selects = [];
+                  var out_of_stock_selects = [];
+                  var $selected_variation_item = $(this).parent().prev().find('.woo-selected-variation-item-name');
+
+                  // For Avada FIX
+                  if (options.length < 1) {
+                    select = $(this).parent().find('select.woo-variation-raw-select');
+                    options = select.find('option');
+                    disabled = select.find('option:disabled');
+                    out_of_stock = select.find('option.enabled.out-of-stock');
+                    current = select.find('option:selected');
+                    eq = select.find('option').eq(1);
+                  }
+
+                  options.each(function () {
+                    if ($(this).val() !== '') {
+                      selects.push($(this).val());
+                      selected = current.length === 0 ? eq.val() : current.val();
+                    }
+                  });
+
+                  disabled.each(function () {
+                    if ($(this).val() !== '') {
+                      disabled_selects.push($(this).val());
+                    }
+                  });
+
+                  // Out Of Stocks
+                  out_of_stock.each(function () {
+                    if ($(this).val() !== '') {
+                      out_of_stock_selects.push($(this).val());
+                    }
+                  });
+
+                  var in_stocks = _.difference(selects, disabled_selects);
+
+                  // console.log('out of stock', out_of_stock_selects)
+                  // console.log('in stock', in_stocks)
+
+                  var available = _.difference(in_stocks, out_of_stock_selects);
+
+                  // Mark Selected
+                  li.each(function (index, li) {
+
+                    var attribute_value = $(this).attr('data-value');
+                    var attribute_title = $(this).attr('data-title');
+
+                    // Resetting LI
+                    $(this).removeClass('selected disabled out-of-stock').addClass('disabled');
+                    $(this).attr('aria-checked', 'false');
+                    $(this).attr('tabindex', '-1');
+
+                    if ($(this).hasClass('radio-variable-item')) {
+                      $(this).find('input.wvs-radio-variable-item:radio').prop('disabled', true).prop('checked', false);
+                    }
+
+                    // Default Selected
+                    // We can't use es6 includes for IE11
+                    // in_stocks.includes(attribute_value)
+                    // _.contains(in_stocks, attribute_value)
+                    // _.includes(in_stocks, attribute_value)
+
+                    if (_.includes(in_stocks, attribute_value)) {
+
+                      $(this).removeClass('selected disabled');
+                      $(this).removeAttr('aria-hidden');
+                      $(this).attr('tabindex', '0');
+
+                      $(this).find('input.wvs-radio-variable-item:radio').prop('disabled', false);
+
+                      if (attribute_value === selected) {
+
+                        $(this).addClass('selected');
+                        $(this).attr('aria-checked', 'true');
+
+                        if (woo_variation_swatches_options.show_variation_label) {
+                          $selected_variation_item.text(woo_variation_swatches_options.variation_label_separator + ' ' + attribute_title);
+                        }
+
+                        if ($(this).hasClass('radio-variable-item')) {
+                          $(this).find('input.wvs-radio-variable-item:radio').prop('checked', true);
+                        }
+                      }
+                    }
+
+                    // Out of Stock
+
+                    if (available.length > 0 && _.includes(out_of_stock_selects, attribute_value) && woo_variation_swatches_options.clickable_out_of_stock) {
+                      $(this).removeClass('disabled').addClass('out-of-stock');
+                    }
+                  });
+
+                  // Trigger Select event based on list
+
+                  if (reselect_clear) {
+                    // Non Selected Item Should Select
+                    $(this).on(mouse_event_name, 'li:not(.selected):not(.radio-variable-item):not(.woo-variation-swatches-variable-item-more)', function (e) {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      var value = $(this).data('value');
+                      select.val(value).trigger('change');
+                      select.trigger('click');
+
+                      select.trigger('focusin');
+
+                      if (_this.is_mobile) {
+                        select.trigger('touchstart');
+                      }
+
+                      $(this).trigger('focus'); // Mobile tooltip
+                      $(this).trigger('wvs-selected-item', [value, select, _this.$element]); // Custom Event for li
+                    });
+
+                    // Selected Item Should Non Select
+                    $(this).on(mouse_event_name, 'li.selected:not(.radio-variable-item):not(.woo-variation-swatches-variable-item-more)', function (e) {
+                      e.preventDefault();
+                      e.stopPropagation();
+
+                      var value = $(this).val();
+
+                      select.val('').trigger('change');
+                      select.trigger('click');
+
+                      select.trigger('focusin');
+
+                      if (_this.is_mobile) {
+                        select.trigger('touchstart');
+                      }
+
+                      $(this).trigger('focus'); // Mobile tooltip
+
+                      $(this).trigger('wvs-unselected-item', [value, select, _this.$element]); // Custom Event for li
+                    });
+
+                    // RADIO
+
+                    // On Click trigger change event on Radio button
+                    $(this).on(mouse_event_name, 'input.wvs-radio-variable-item:radio', function (e) {
+
+                      e.stopPropagation();
+
+                      $(this).trigger('change.wvs', { radioChange: true });
+                    });
+
+                    $(this).on('change.wvs', 'input.wvs-radio-variable-item:radio', function (e, params) {
+
+                      e.preventDefault();
+                      e.stopPropagation();
+
+                      if (params && params.radioChange) {
+
+                        var value = $(this).val();
+                        var is_selected = $(this).parent('li.radio-variable-item').hasClass('selected');
+
+                        if (is_selected) {
+                          select.val('').trigger('change');
+                          $(this).parent('li.radio-variable-item').trigger('wvs-unselected-item', [value, select, _this.$element]); // Custom Event for li
+                        } else {
+                          select.val(value).trigger('change');
+                          $(this).parent('li.radio-variable-item').trigger('wvs-selected-item', [value, select, _this.$element]); // Custom Event for li
+                        }
+
+                        select.trigger('click');
+                        select.trigger('focusin');
+                        if (_this.is_mobile) {
+                          select.trigger('touchstart');
+                        }
+                      }
+                    });
+                  } else {
+
+                    $(this).on(mouse_event_name, 'li:not(.radio-variable-item):not(.woo-variation-swatches-variable-item-more)', function (event) {
+
+                      event.preventDefault();
+                      event.stopPropagation();
+
+                      var value = $(this).data('value');
+                      select.val(value).trigger('change');
+                      select.trigger('click');
+                      select.trigger('focusin');
+                      if (_this.is_mobile) {
+                        select.trigger('touchstart');
+                      }
+
+                      $(this).trigger('focus'); // Mobile tooltip
+
+                      $(this).trigger('wvs-selected-item', [value, select, _this._element]); // Custom Event for li
+                    });
+
+                    // Radio
+                    $(this).on('change.wvs', 'input.wvs-radio-variable-item:radio', function (event) {
+                      event.preventDefault();
+                      event.stopPropagation();
+
+                      var value = $(this).val();
+
+                      select.val(value).trigger('change');
+                      select.trigger('click');
+                      select.trigger('focusin');
+
+                      if (_this.is_mobile) {
+                        select.trigger('touchstart');
+                      }
+
+                      // Radio
+                      $(this).parent('li.radio-variable-item').removeClass('selected disabled').addClass('selected');
+                      $(this).parent('li.radio-variable-item').trigger('wvs-selected-item', [value, select, _this.$element]); // Custom Event for li
+                    });
+                  }
+
+                  // Keyboard Access
+                  $(this).on('keydown.wvs', 'li:not(.disabled):not(.woo-variation-swatches-variable-item-more)', function (event) {
+                    if (event.keyCode && 32 === event.keyCode || event.key && ' ' === event.key || event.keyCode && 13 === event.keyCode || event.key && 'enter' === event.key.toLowerCase()) {
+                      event.preventDefault();
+                      $(this).trigger(mouse_event_name);
+                    }
+                  });
+                });
+
+                this.$element.trigger('woo_variation_swatches_init', [this, this.product_variations]);
+
+                $(document).trigger('woo_variation_swatches_loaded', [this.$element, this.product_variations]);
+              }
+            }, {
+              key: 'update',
+              value: function update() {
+
+                var _this = this;
+                this.$element.off('woocommerce_variation_has_changed.wvs');
+                this.$element.on('woocommerce_variation_has_changed.wvs', function (event) {
+
+                  // Don't use any propagation. It will disable composit product functionality
+                  // event.stopPropagation();
+
+                  $(this).find('ul.variable-items-wrapper').each(function (index, el) {
+
+                    var select = $(this).siblings('select.woo-variation-raw-select');
+                    var selected = '';
+                    var options = select.find('option');
+                    var disabled = select.find('option:disabled');
+                    var out_of_stock = select.find('option.enabled.out-of-stock');
+                    var current = select.find('option:selected');
+                    var eq = select.find('option').eq(1);
+                    var li = $(this).find('li:not(.woo-variation-swatches-variable-item-more)');
+
+                    //let reselect_clear   = $(this).hasClass('reselect-clear');
+                    //let is_mobile        = $('body').hasClass('woo-variation-swatches-on-mobile');
+                    //let mouse_event_name = 'click.wvs'; // 'touchstart click';
+
+                    var attribute = $(this).data('attribute_name');
+                    // let attribute_values = ((_this.is_ajax_variation) ? [] : _this._generated[attribute])
+                    // let out_of_stocks = ((_this.is_ajax_variation) ? [] : _this._out_of_stock[attribute])
+
+                    var selects = [];
+                    var disabled_selects = [];
+                    var out_of_stock_selects = [];
+                    var $selected_variation_item = $(this).parent().prev().find('.woo-selected-variation-item-name');
+
+                    // For Avada FIX
+                    if (options.length < 1) {
+                      select = $(this).parent().find('select.woo-variation-raw-select');
+                      options = select.find('option');
+                      disabled = select.find('option:disabled');
+                      out_of_stock = select.find('option.enabled.out-of-stock');
+                      current = select.find('option:selected');
+                      eq = select.find('option').eq(1);
+                    }
+
+                    options.each(function () {
+                      if ($(this).val() !== '') {
+                        selects.push($(this).val());
+                        // selected = current ? current.val() : eq.val()
+                        selected = current.length === 0 ? eq.val() : current.val();
+                      }
+                    });
+
+                    disabled.each(function () {
+                      if ($(this).val() !== '') {
+                        disabled_selects.push($(this).val());
+                      }
+                    });
+
+                    // Out Of Stocks
+                    out_of_stock.each(function () {
+                      if ($(this).val() !== '') {
+                        out_of_stock_selects.push($(this).val());
+                      }
+                    });
+
+                    var in_stocks = _.difference(selects, disabled_selects);
+
+                    var available = _.difference(in_stocks, out_of_stock_selects);
+
+                    if (_this.is_ajax_variation) {
+
+                      li.each(function (index, el) {
+
+                        var attribute_value = $(this).attr('data-value');
+                        var attribute_title = $(this).attr('data-title');
+
+                        $(this).removeClass('selected disabled');
+                        $(this).attr('aria-checked', 'false');
+
+                        // To Prevent blink
+                        if (selected.length < 1 && woo_variation_swatches_options.show_variation_label) {
+                          $selected_variation_item.text('');
+                        }
+
+                        if (attribute_value === selected) {
+                          $(this).addClass('selected');
+                          $(this).attr('aria-checked', 'true');
+
+                          if (woo_variation_swatches_options.show_variation_label) {
+                            $selected_variation_item.text(woo_variation_swatches_options.variation_label_separator + ' ' + attribute_title);
+                          }
+
+                          if ($(this).hasClass('radio-variable-item')) {
+                            $(this).find('input.wvs-radio-variable-item:radio').prop('disabled', false).prop('checked', true);
+                          }
+                        }
+
+                        $(this).trigger('wvs-item-updated', [selected, attribute_value, _this]);
+                      });
+                    } else {
+
+                      li.each(function (index, el) {
+
+                        var attribute_value = $(this).attr('data-value');
+                        var attribute_title = $(this).attr('data-title');
+
+                        $(this).removeClass('selected disabled out-of-stock').addClass('disabled');
+                        $(this).attr('aria-checked', 'false');
+                        $(this).attr('tabindex', '-1');
+
+                        if ($(this).hasClass('radio-variable-item')) {
+                          $(this).find('input.wvs-radio-variable-item:radio').prop('disabled', true).prop('checked', false);
+                        }
+
+                        // if (_.contains(selects, value))
+                        // if (_.indexOf(selects, value) !== -1)
+                        // if (selects.includes(value))
+
+                        // We can't use es6 includes for IE11
+                        // in_stocks.includes(attribute_value)
+                        // _.contains(in_stocks, attribute_value)
+                        // _.includes(in_stocks, attribute_value)
+
+                        // Make Selected // selects.includes(attribute_value) // in_stocks
+                        if (_.includes(in_stocks, attribute_value)) {
+
+                          $(this).removeClass('selected disabled');
+                          $(this).removeAttr('aria-hidden');
+                          $(this).attr('tabindex', '0');
+
+                          $(this).find('input.wvs-radio-variable-item:radio').prop('disabled', false);
+
+                          // To Prevent blink
+                          if (selected.length < 1 && woo_variation_swatches_options.show_variation_label) {
+                            $selected_variation_item.text('');
+                          }
+
+                          if (attribute_value === selected) {
+
+                            $(this).addClass('selected');
+                            $(this).attr('aria-checked', 'true');
+
+                            if (woo_variation_swatches_options.show_variation_label) {
+                              $selected_variation_item.text(woo_variation_swatches_options.variation_label_separator + ' ' + attribute_title);
+                            }
+
+                            if ($(this).hasClass('radio-variable-item')) {
+                              $(this).find('input.wvs-radio-variable-item:radio').prop('checked', true);
+                            }
+                          }
+                        }
+
+                        // Out of Stock
+                        if (available.length > 0 && _.includes(out_of_stock_selects, attribute_value) && woo_variation_swatches_options.clickable_out_of_stock) {
+                          $(this).removeClass('disabled').addClass('out-of-stock');
+                        }
+
+                        $(this).trigger('wvs-item-updated', [selected, attribute_value, _this]);
+                      });
+                    }
+
+                    // Items Updated
+                    $(this).trigger('wvs-items-updated');
+                  });
+                });
+              }
+            }]
+
     };
 
     // -   events 
@@ -656,7 +1174,373 @@ window.document.splugins.wbc.variations.gallery_images.core = function() {
                                     --  but if we are to use this trick then we need to bring it closer to standard implementation by ensuring the possible flows like always have our classes in zoom area container like sp-variations-zoom-container 
         }); 
 
-    };
+              this.$variations_form = this.$wrapper.find('.variations_form');
+              this.$attributeFields = this.$variations_form.find('.variations select');
+              this.$target = this._element.parent();
+              this.$slider = $('.woo-variation-gallery-slider', this._element);
+              this.$thumbnail = $('.woo-variation-gallery-thumbnail-slider', this._element);
+              this.product_id = this.$variations_form.data('product_id');
+              this.is_variation_product = this.$variations_form.length > 0;
+
+              this._element.addClass('wvg-loaded');
+
+              this.defaultDimension();
+              this.defaultGallery();
+
+              this.initEvents();
+              this.initVariationGallery();
+
+              if (!this.is_variation_product) {
+                this.imagesLoaded();
+              }
+
+              if (this.is_variation_product) {
+                this.initSlick();
+                this.initZoom();
+                this.initPhotoswipe();
+              }
+
+              this._element.data('woo_variation_gallery', this);
+
+              $(document).trigger('woo_variation_gallery_init', [this]);
+
+            _createClass(WooVariationGallery, [{
+              key: "init",
+              value: function init() {
+                var _this = this;
+
+                return _.debounce(function () {
+                  _this.initSlick();
+
+                  _this.initZoom();
+
+                  _this.initPhotoswipe();
+                }, 500);
+              }
+            }, {
+              key: "getChosenAttributes",
+              value: function getChosenAttributes() {
+                var data = {};
+                var count = 0;
+                var chosen = 0;
+                this.$attributeFields.each(function () {
+                  var attribute_name = $(this).data('attribute_name') || $(this).attr('name');
+                  var value = $(this).val() || '';
+
+                  if (value.length > 0) {
+                    chosen++;
+                  }
+
+                  count++;
+                  data[attribute_name] = value;
+                });
+                return {
+                  'count': count,
+                  'chosenCount': chosen,
+                  'data': data
+                };
+              }
+            }, {
+              key: "defaultDimension",
+              value: function defaultDimension() {
+                var _this2 = this;
+
+                // console.log(this._element.height(), this._element.width());
+                this._element.css('min-height', this._element.height()).css('min-width', this._element.width());
+
+                $(window).on('resize.wvg', _.debounce(function (event) {
+                  if (event.originalEvent) {
+                    _this2._element.css('min-height', _this2._element.height()).css('min-width', _this2._element.width());
+                  }
+                }, 300));
+                $(window).on('resize.wvg', _.debounce(function (event) {
+                  if (event.originalEvent) {
+                    _this2._element.css('min-height', '').css('min-width', '');
+                  }
+                }, 100, {
+                  'leading': true,
+                  'trailing': false
+                }));
+              }
+            }, {
+              key: "initEvents",
+              value: function initEvents() {
+                var _this3 = this;
+
+                this._element.on('woo_variation_gallery_slider_slick_init', function (event, gallery) {
+                  if (woo_variation_gallery_options.is_vertical) {
+                    //$(window).off('resize.wvg');
+                    $(window).on('resize', _this3.enableThumbnailPositionDebounce()); //$(window).on('resize', this.thumbnailHeightDebounce());
+                    //this.$slider.on('setPosition', this.enableThumbnailPositionDebounce());
+
+                    _this3.$slider.on('setPosition', _this3.thumbnailHeightDebounce());
+
+                    _this3.$slider.on('afterChange', function () {
+                      _this3.thumbnailHeight();
+                    });
+                  }
+
+                  if (woo_variation_gallery_options.enable_thumbnail_slide) {
+                    var thumbnails = _this3.$thumbnail.find('.wvg-gallery-thumbnail-image').length;
+
+                    if (parseInt(woo_variation_gallery_options.gallery_thumbnails_columns) < thumbnails) {
+                      _this3.$thumbnail.find('.wvg-gallery-thumbnail-image').removeClass('current-thumbnail');
+
+                      _this3.initThumbnailSlick();
+                    } else {
+                      _this3.$slider.slick('slickSetOption', 'asNavFor', null, false);
+                    }
+                  }
+                });
+
+                this._element.on('woo_variation_gallery_slick_destroy', function (event, gallery) {
+                  if (_this3.$thumbnail.hasClass('slick-initialized')) {
+                    _this3.$thumbnail.slick('unslick');
+                  }
+                });
+
+                this._element.on('woo_variation_gallery_image_loaded', this.init());
+              }
+            }, {
+              key: "initSlick",
+              value: function initSlick() {
+                var _this4 = this;
+
+                if (this.$slider.is('.slick-initialized')) {
+                  this.$slider.slick('unslick');
+                }
+
+                this.$slider.off('init');
+                this.$slider.off('beforeChange');
+                this.$slider.off('afterChange');
+
+                this._element.trigger('woo_variation_gallery_before_init', [this]); // Slider
+
+
+                this.$slider.on('init', function (event) {
+                  if (_this4.initial_load) {
+                    _this4.initial_load = false; // this._element.css('min-height', this.$slider.height() + 'px');
+                    //_.delay(() => {
+                    //    this.$slider.slick('setPosition');
+                    //}, 2000)
+                  }
+                }).on('beforeChange', function (event, slick, currentSlide, nextSlide) {
+                  _this4.$thumbnail.find('.wvg-gallery-thumbnail-image').not('.slick-slide').removeClass('current-thumbnail');
+
+                  _this4.$thumbnail.find('.wvg-gallery-thumbnail-image').not('.slick-slide').eq(nextSlide).addClass('current-thumbnail');
+                }).on('afterChange', function (event, slick, currentSlide) {
+                  _this4.stopVideo(_this4.$slider);
+
+                  _this4.initZoomForTarget(currentSlide);
+                }).slick(); // Thumbnails
+
+                this.$thumbnail.find('.wvg-gallery-thumbnail-image').not('.slick-slide').first().addClass('current-thumbnail');
+                this.$thumbnail.find('.wvg-gallery-thumbnail-image').not('.slick-slide').each(function (index, el) {
+                  $(el).find('div, img').on('click', function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+
+                    _this4.$slider.slick('slickGoTo', index);
+                  });
+                });
+
+                _.delay(function () {
+                  _this4._element.trigger('woo_variation_gallery_slider_slick_init', [_this4]);
+                }, 1);
+
+                _.delay(function () {
+                  // console.log(this._element.height(), this._element.width());
+                  //    this._element.css('min-height', this._element.height())
+                  //    this._element.css('min-width', this._element.width())
+                  _this4.removeLoadingClass();
+                }, 100);
+              }
+            }, {
+              key: "initZoomForTarget",
+              value: function initZoomForTarget(currentSlide) {
+                if (!woo_variation_gallery_options.enable_gallery_zoom) {
+                  return;
+                }
+
+                var galleryWidth = parseInt(this.$target.width()),
+                    zoomEnabled = false,
+                    zoomTarget = this.$slider.slick('getSlick').$slides.eq(currentSlide);
+                $(zoomTarget).each(function (index, target) {
+                  var image = $(target).find('img');
+
+                  if (parseInt(image.data('large_image_width')) > galleryWidth) {
+                    zoomEnabled = true;
+                    return false;
+                  }
+                }); // If zoom not included.
+
+                if (!$().zoom) {
+                  return;
+                } // But only zoom if the img is larger than its container.
+
+
+                if (zoomEnabled) {
+                  var zoom_options = $.extend({
+                    touch: false
+                  }, wc_single_product_params.zoom_options);
+
+                  if ('ontouchstart' in document.documentElement) {
+                    zoom_options.on = 'click';
+                  }
+
+                  zoomTarget.trigger('zoom.destroy');
+                  zoomTarget.zoom(zoom_options);
+                }
+              }
+            }, {
+              key: "initZoom",
+              value: function initZoom() {
+                var currentSlide = this.$slider.slick('slickCurrentSlide');
+                this.initZoomForTarget(currentSlide);
+              }
+            }, {
+              key: "initPhotoswipe",
+              value: function initPhotoswipe() {
+                var _this5 = this;
+
+                if (!woo_variation_gallery_options.enable_gallery_lightbox) {
+                  return;
+                }
+
+                this._element.off('click', '.woo-variation-gallery-trigger');
+
+                this._element.off('click', '.wvg-gallery-image a');
+
+                this._element.on('click', '.woo-variation-gallery-trigger', function (event) {
+                  _this5.openPhotoswipe(event);
+                });
+
+                this._element.on('click', '.wvg-gallery-image a', function (event) {
+                  _this5.openPhotoswipe(event);
+                });
+              }
+            }, {
+              key: "stopVideo",
+              value: function stopVideo(element) {
+                $(element).find('iframe, video').each(function () {
+                  var tag = $(this).prop("tagName").toLowerCase();
+
+                  if (tag === 'iframe') {
+                    var src = $(this).attr('src'); //   $(this).attr('src', src);
+                  }
+
+                  if (tag === 'video') {
+                    $(this)[0].pause();
+                  }
+                });
+              }
+            }, {
+              key: "defaultGallery",
+              value: function defaultGallery() {
+
+                we would not like to manage extra layer of ajax to get default gallery and so on, if it is not necessary by standard flow but if by any chance standard flows does require handling any exceptional scenarios then we would need to do it -- to h and -- to d 
+            }, {
+              key: "showVariationImage",
+              value: function showVariationImage(variation) {
+                if (variation) {
+                  this.addLoadingClass();
+                  this.galleryInit(variation.variation_gallery_images || []);
+                }
+              }
+            }, {
+              key: "initVariationGallery",
+              value: function initVariationGallery() {
+                var _this9 = this;
+
+                // show_variation, found_variation
+                this.$variations_form.off('reset_image.wvg');
+                this.$variations_form.off('click.wvg', '.reset_variations');
+                this.$variations_form.off('show_variation.wvg');
+                this.$variations_form.off('hide_variation.wvg'); // this.$variations_form.off('found_variation.wvg');
+                // Show Gallery
+                // console.log(this.$variations_form)
+
+                this.$variations_form.on('show_variation.wvg', function (event, variation) {
+                  _this9.showVariationImage(variation);
+                });
+
+                if (woo_variation_gallery_options.gallery_reset_on_variation_change) {
+                  this.$variations_form.on('hide_variation.wvg', function () {
+                    _this9.resetVariationImage();
+                  });
+                } else {
+                  this.$variations_form.on('click.wvg', '.reset_variations', function () {
+                    _this9.resetVariationImage();
+                  });
+                }
+              }
+            }, {
+              key: "galleryInit",
+              value: function galleryInit(images) {
+                var _this11 = this;
+
+                var hasGallery = images.length > 1;
+
+                this._element.trigger('before_woo_variation_gallery_init', [this, images]);
+
+                this.destroySlick();
+                var slider_inner_html = images.map(function (image) {
+                  var template = wp.template('woo-variation-gallery-slider-template');
+                  return template(image);
+                }).join('');
+                var thumbnail_inner_html = images.map(function (image) {
+                  var template = wp.template('woo-variation-gallery-thumbnail-template');
+                  return template(image);
+                }).join('');
+
+                if (hasGallery) {
+                  this.$target.addClass('woo-variation-gallery-has-product-thumbnail');
+                } else {
+                  this.$target.removeClass('woo-variation-gallery-has-product-thumbnail');
+                }
+
+                this.$slider.html(slider_inner_html);
+
+                if (hasGallery) {
+                  this.$thumbnail.html(thumbnail_inner_html);
+                } else {
+                  this.$thumbnail.html('');
+                } //this._element.trigger('woo_variation_gallery_init', [this, images]);
+
+
+                _.delay(function () {
+                  _this11.imagesLoaded();
+                }, 1); //this._element.trigger('after_woo_variation_gallery_init', [this, images]);
+
+              }
+
+            }, {
+              key: "initThumbnailSlick",
+              value: function initThumbnailSlick() {
+                var _this13 = this;
+
+                if (this.$thumbnail.hasClass('slick-initialized')) {
+                  this.$thumbnail.slick('unslick');
+                }
+
+                this.$thumbnail.off('init');
+                this.$thumbnail.on('init', function () {}).slick();
+
+                _.delay(function () {
+                  _this13._element.trigger('woo_variation_gallery_thumbnail_slick_init', [_this13]);
+                }, 1);
+              }
+            }, {
+
+            for below mattter also research on WooCommerce ajax variations with keywords WooCommerce ajax variations legacy 
+            // For Single Product
+            $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery(); // Ajax and Variation Product
+
+            $(document).on('wc_variation_form', '.variations_form', function () {
+              $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery();
+            }); // Support for Jetpack's Infinite Scroll,
+            so a call from here to the compatability function of this module, and that will cover all compatability matters of load time inlcuding the promize resolve block of the plugin we were exploring. so call compatability with section=bootstrap -- to d 
+
 
         -   slider and zoom 
             --  it will mostly be matter of interest to the variations.gallery_images module but since it is vital for overall stability of functions and the overall experience that is why it is considered as a dedicated thing 

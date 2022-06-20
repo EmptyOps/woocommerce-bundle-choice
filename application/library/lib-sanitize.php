@@ -37,7 +37,7 @@ if(!class_exists('WBC_Sanitize')) {
 			
 		}
 
-		ACTIVE_TODO confirm that global sanitize is limited to admin model save function scope and then it is restored, if it not then is not it a very big mistake of changing stat of the global var which is being used by wp, woo, other plugins and what not. confirm if it is not decision for specific matter and if it is actually a mistake then just restore the stat from admin model save function that is from where it is called -- to h. -- to s. 
+		// ACTIVE_TODO confirm that global sanitize is limited to admin model save function scope and then it is restored, if it not then is not it a very big mistake of changing stat of the global var which is being used by wp, woo, other plugins and what not. confirm if it is not decision for specific matter and if it is actually a mistake then just restore the stat from admin model save function that is from where it is called -- to h. -- to s. 
 		public function clean($form) {	
 
 			foreach ($form as $key => $tab) {
