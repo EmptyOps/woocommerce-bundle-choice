@@ -22,7 +22,7 @@ class Controller extends \eo\wbc\controllers\Controller{
 
 	}	
 
-    protected function get_ui_definition($args = null){
+    protected function get_ui_definition($args = array()){
 
         /*function will accept the args param=null ... which will support the param like template_option_key, option_group_key 
             from that it will read template key  -- to b done
@@ -40,16 +40,27 @@ class Controller extends \eo\wbc\controllers\Controller{
 
                                     -- ACTIVE_TODO and in future what we can support is if any .php template file is added on template folder then the additional radio option for that respective template does show up on admin and when user enable that template system would load that template so it become handy for users to add new templates without needing to modify existing templates so that they can recieve our udpates and still continue to use their custom templates */
 
-
-        $template_key = wbc()->options->get_option($args['template_option_key'],$args['option_group_key']);
-        $template_dir = isset( $args['template_sub_dir']) ? 'default' : '';
+        $template_key = null;
+        if (!empty($args['template_key'])) {
+            $template_key = $args['template_key'];
+        }else{
+            $template_key = wbc()->options->get_option($args['template_option_key'],$args['option_group_key']);
+        }
+        $template_dir = isset( $args['template_sub_dir']) ? $args['template_sub_dir'].'/' : '';
 
         if (!empty($args['widget_key'])) {
         	
-        	$template_dir = $args['widget_key'].'/';
+        	$template_dir .= $args['widget_key'].'/';
         }
 
-        wbc()->load->template($template_dir.$template_key,array(),true,$args['plugin_slug'],true);
+        //ACTIVE_TODO implements
+        if ($desktop) {
+           if ($mobile) {
+
+           }
+        }
+
+        wbc()->load->template($template_dir.$template_key,(isset($args['data'])?array('data' => $args['data']):array()),true,$args['plugin_slug'],true);
         
         return $template;
     }
