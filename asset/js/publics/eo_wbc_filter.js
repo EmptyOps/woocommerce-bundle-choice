@@ -35,7 +35,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// window.document.splugins.Feed.events.core.createSubject( 'filters', ['before_search', 'no_products_found'] );
 			--	check if the events module is not exported like the way it is supposed to be means in the syntax style as in form builder, then just follow the export style of form builder and export it under ...api -- to d 
 				--	in that case update the calls here in this file and also in the common js file -- to d 
-		window.document.splugins.events.core.createSubject( 'filters', ['before_search', 'no_products_found'] );
+		window.document.splugins.events.api.createSubject( 'filters', ['before_search', 'no_products_found'] );
 
 		bind_reset_click();
 		bind_click();
@@ -102,7 +102,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 
 		// window.document.splugins.Feed.events.core.notifyAllObservers( 'filters', 'before_search' ); 
-		window.document.splugins.events.core.notifyAllObservers( 'filters', 'before_search' ); 
+		window.document.splugins.events.api.notifyAllObservers( 'filters', 'before_search' ); 
 
     };	 
 
@@ -980,7 +980,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
         		--	and move below code there and from here just call that private fucntion -- to d 
 
 			// window.document.splugins.Feed.events.core.notifyAllObservers( 'filters', 'no_products_found' );
-			window.document.splugins.events.core.notifyAllObservers( 'filters', 'no_products_found' );
+			window.document.splugins.events.api.notifyAllObservers( 'filters', 'no_products_found' );
 
         }, 
 
@@ -1012,6 +1012,28 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 			e.stopPropagation();
 			
 			jQuery('[name="paged"]').val(parseInt(jQuery(this).text().replace(',','')));		
+			jQuery.fn.eo_wbc_filter_change(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
+		});
+
+		jQuery("body").on('click','.woocommerce-pagination a,.pagination a,.jet-filters-pagination a,.woocommerce-pagination .jet-filters-pagination__link,.pagination .jet-filters-pagination__link,.jet-filters-pagination .jet-filters-pagination__link',function(event){
+			
+			event.preventDefault();
+			event.stopPropagation();								
+			
+			// ACTIVE_TODO page nnumber text would break below with multilanguage so instead use the data attribute to store and read the page number -- to a and/or -- to h
+			if(jQuery(this).hasClass("next") || jQuery(this).hasClass("prev")){
+			
+				if(jQuery(this).hasClass("next")){
+					jQuery("[name='paged']").val(parseInt(jQuery(".page-numbers.current").text())+1);
+				}
+				if(jQuery(this).hasClass("prev")){
+					jQuery("[name='paged']").val(parseInt(jQuery(".page-numbers.current").text())-1);
+				}	
+			}		
+			else {
+				jQuery("[name='paged']").val(jQuery(this).text());
+			}		
+
 			jQuery.fn.eo_wbc_filter_change(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
 		});
 
@@ -1480,7 +1502,7 @@ jQuery(document).ready(function($){
 
 		//pagination for non-table based view
 
-		move to pagination js modules bind_click function -- to d 
+		//done move to pagination js modules bind_click function -- to d 
 			--	and also be sure to the filter_change function call. and why that is so far not changed? -- to d 
 		jQuery("body").on('click','.woocommerce-pagination a,.pagination a,.jet-filters-pagination a,.woocommerce-pagination .jet-filters-pagination__link,.pagination .jet-filters-pagination__link,.jet-filters-pagination .jet-filters-pagination__link',function(event){
 			

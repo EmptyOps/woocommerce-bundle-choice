@@ -31,7 +31,7 @@ class SP_Gallery_Slider extends \eo\wbc\controllers\publics\Controller{
         
         \eo\wbc\model\publics\variations\SP_Model_Gallery_Slider::instance()->render_core();
 
-        \eo\wbc\controller\publics\variations\SP_Gallery_Slider::instance()->selectron('slider_images',$args);
+        $this->selectron('slider_images',$args);
 
         $this->getUI(null);
     }

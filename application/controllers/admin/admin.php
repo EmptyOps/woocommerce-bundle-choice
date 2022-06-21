@@ -92,10 +92,16 @@ class Admin {
 	        }
         }        
 
+		self::legacy_admin_process();
+
+		do_action( 'wbc_after_admin_process_request' );
+	}
+
+	public static function legacy_admin_process($is_ajax=false){
+
         //Initiate legacy admin 
         \eo\wbc\controllers\admin\legacy_admin\Legacy_Admin::instance()->init(); 
 	
-		do_action( 'wbc_after_admin_process_request' );
 	}
 
 	public function menu() {

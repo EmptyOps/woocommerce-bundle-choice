@@ -395,11 +395,11 @@ class WBC_Common {
         return $pageURL;
     }
 
-	public function current_theme_key() {
-		$stylesheet     = get_stylesheet();
-	    $theme_root     = get_theme_root( $stylesheet );
-		return basename( $theme_root )."___".basename( $stylesheet );
-	}
+	// public function current_theme_key() {
+	// 	$stylesheet     = get_stylesheet();
+	//     $theme_root     = get_theme_root( $stylesheet );
+	// 	return basename( $theme_root )."___".basename( $stylesheet );
+	// }
 
 	private function makeNestedArray($keys, $value, $target_array=null)
     {

@@ -38,21 +38,18 @@ class Tiny_Features extends Eowbc_Model {
 		$form['no_form_tag'] = !empty($args['is_legacy_admin']) ? true : false;
 		$form['attr']= array('data-is_per_tab_save="true"');
 
-		$form['data'] = self::instance()->get( $form_definition, $args );
-
 
 		if( !empty($args['is_legacy_admin']) ) {
 
 			//	in case of legacy admin bind to hooks if applicable otherwise can simply call render ui sub process function 
 			if( $args['page_section'] == 'sp_variations' ) {
 
-				add_action('woocommerce_product_after_variable_attributes', function( $loop, $variation_data, $variation ) use($form, $args) {
+				add_action('woocommerce_product_after_variable_attributes', function( $loop, $variation_data, $variation ) use($form_definition, $form, $args) {
 				
 					// NOTE: id is standard column name that we use for our options module based simple entity storage, so for the legacy admin flows also where necessary we can simply use the same where the necessity arise to maintain one uniqid and I think it will be almost always. 
 					$args['id'] = absint( $variation->ID );
 
-					maybe this hook is need to be moved controller right before the form_definition is passed to parent class function. and the form_definition will be filter parameter. -- and yeah there would be one hook only that maybe needed. not separate needed for render and save 
-					apply_filters('sp_variations_data_before_admin_form_render', 'admin_data_tab_render');
+					$form['data'] = self::instance()->get( $form_definition, $args );
 
 
 					if( false ) {
@@ -151,6 +148,8 @@ class Tiny_Features extends Eowbc_Model {
 
 		} else {
 
+			$form['data'] = self::instance()->get( $form_definition, $args );
+
 			$this->render_ui_sub_process($form, $args);
 		}		
 	}
@@ -190,16 +189,12 @@ class Tiny_Features extends Eowbc_Model {
 
 					$args['id'] = absint( $variation_id );
 
-					hook to register attributes that define variations 
-
-
-					hook to register logical fields that requires variations specific data save 
-
-					maybe this hook is need to be moved controller right before the form_definition is passed to parent class function. and the form_definition will be filter parameter. -- and yeah there would be one hook only that maybe needed. not separate needed for render and save 
-					apply_filters('sp_variations_data_before_save', '');
+					// maybe this hook is need to be moved controller right before the form_definition is passed to parent class function. and the form_definition will be filter parameter. -- and yeah there would be one hook only that maybe needed. not separate needed for render and save 
+					// apply_filters('sp_variations_data_before_save', '');
 
 					$res = parent::save( $form_definition, $is_auto_insert_for_template, $args );	
 				}, 10, 2 );
+			}
 
 		} else {
 
