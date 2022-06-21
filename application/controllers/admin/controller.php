@@ -73,6 +73,9 @@ class Controller extends \eo\wbc\controllers\Controller {
 		if( ( !empty($_POST) && empty(wbc()->sanitize->post("sub_action")) ) or wbc()->sanitize->post("sub_action") == "save" ) {
 
 			$args["sub_action"] = "save";
+		} else {
+
+			$args["sub_action"] = "";
 		}
 			
 		// during the featch filter 	

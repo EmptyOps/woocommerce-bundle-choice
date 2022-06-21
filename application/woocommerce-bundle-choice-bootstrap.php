@@ -18,6 +18,8 @@ use eo\wbc\controllers\Http_Handler;
 
 use eo\wbc\system\core\Platform;
 
+use eo\wbc\controllers\admin\Admin;
+
 class WooCommerce_Bundle_Choice_Bootstrap {
 
 	private static $_instance = null;
@@ -67,6 +69,9 @@ class WooCommerce_Bundle_Choice_Bootstrap {
     	$this->visual_composer();
 
 		if((function_exists('is_ajax') and is_ajax()) or defined('WP_AJAX')) {
+
+			//	legacy admin process need to be initiated during ajax also, so that its applicable modules can bind with the legacy admin side hooks of wp, woo and other plugins 
+			Admin::legacy_admin_process( true );
 			
 			add_action( "wp_ajax_nopriv_eowbc_ajax",array($this,'ajax'),10);
 			add_action( "wp_ajax_eowbc_ajax",array($this,'ajax'),10);
