@@ -37,6 +37,50 @@ window.document.splugins.wbc.filters.core = function() {
 	// --	and there will be one more function like should_search, which will also be private. and that will handle onle the logic of checking flags and so on like the enable_filter_table flag above 
     var should_search = function() {
 
+    	// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
+		// --add to be confirmed 2601 TO 2705--		
+
+		if(init_call/* || typeof(window.eo_wbc_filter_change_table_view_service)===typeof(undefined)*/) {
+			/*window.eo_wbc_filter_change_table_view_service = true*/
+			return false;
+		}
+		console.log(init_call,window.eo_wbc_filter_change_table_view_service);
+
+		if(window.eo_wbc_object.enable_filter===false){
+			return false;
+		}
+
+		if(init_call) {
+			jQuery("form#eo_wbc_filter [name='paged']").val('1');
+			jQuery("form#eo_wbc_filter [name='last_paged']").val('1');
+
+			jQuery("form#eo_wbc_filter [name='_category']").val(jQuery("form#eo_wbc_filter [name='_current_category']"));
+			jQuery("form#eo_wbc_filter [name='_attribute']").val("");
+		}	
+
+
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template1.js
+		// --add to be confirmed 630 TO 734--
+
+		if(init_call/* || typeof(window.eo_wbc_filter_change_table_view_service)===typeof(undefined)*/) {
+			/*window.eo_wbc_filter_change_table_view_service = true*/
+			return false;
+		}
+		console.log(init_call,window.eo_wbc_filter_change_table_view_service);
+
+		if(window.eo_wbc_object.enable_filter===false){
+			return false;
+		}
+
+		if(init_call) {
+			jQuery("form#eo_wbc_filter [name='paged']").val('1');
+			jQuery("form#eo_wbc_filter [name='last_paged']").val('1');
+
+			jQuery("form#eo_wbc_filter [name='_category']").val(jQuery("form#eo_wbc_filter [name='_current_category']"));
+			jQuery("form#eo_wbc_filter [name='_attribute']").val("");
+		}									
+
     };	 
 
     var before_search = function() {
@@ -359,31 +403,31 @@ window.document.splugins.wbc.filters.core = function() {
 		// jQuery(".ui.sticky").sticky('refresh');
 
 		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
-		--add to be confirmed & 2187 TO 2324--
+		// --add to be confirmed & 2187 TO 2324--
 
 		eo_wbc_e_render_table(type,data);	
 		window.eo_wbc_object.enable_filter_table = true; 
 
 
 		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
-		--add to be confirmed 2601 TO 2705--
+		// --add to be confirmed 2601 TO 2705--
 
 		eo_wbc_e_render_table(data);
 
 
 		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
-		--add to be confirmed 3159 TO 3232--
+		// --add to be confirmed 3159 TO 3232--
 
 		eo_wbc_e_render_table(data);
 
 
 		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template1.js
-		--add to be confirmed 630 TO 734--
+		// --add to be confirmed 630 TO 734--
 
 		eo_wbc_e_render_table(data);
 
 		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template2.js
-		--add to be confirmed 302 TO 375--
+		// --add to be confirmed 302 TO 375--
 
 		eo_wbc_e_render_table(data);
 
