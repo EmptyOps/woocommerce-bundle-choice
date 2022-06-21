@@ -214,8 +214,11 @@ window.document.splugins.events.core = function() {
 //  templating 
 window.document.splugins.templating = window.document.splugins.templating || {};
 
-window.document.splugins.templating.core = function(configs) {
-    this.configs = jQuery.extend({}, {}/*default configs*/, configs);   
+window.document.splugins.templating.core = function( configs ) {
+
+    var _this = this; 
+
+	_this.configs = jQuery.extend({}, {}/*default configs*/, configs);	
 
     var get_template = function( tmpl_id, templating_lib ) {
 
@@ -256,6 +259,9 @@ window.document.splugins.templating.core = function(configs) {
 
     };
 };
+
+//  publish it 
+window.document.splugins.templating.api = window.document.splugins.templating.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
 
 ///////////// -- 15-06-2022 -- @drashti -- ///////////////////////////////
 
@@ -301,8 +307,6 @@ window.document.splugins.compatability.core = function(configs) {
 
 ////////////////////////////////////////////
 
-//  publish it 
-window.document.splugins.templating.api = window.document.splugins.templating.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
 
 
 // the variations js module
@@ -388,7 +392,6 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
     var _this = this; 
 
     _this.configs = jQuery.extend({}, {}/*default configs*/, configs);
-
 
     _this.base_container = jQuery( ...common._o( _this.configs, 'base_container_selector') -- to d. base_container_selector ||  '.variations_form' );    
 
@@ -569,10 +572,18 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
     }; 
 };
 
+//  publish it 
+window.document.splugins.wbc.variations.swatches.api = window.document.splugins.wbc.variations.swatches.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
+
 // the variations gallery images js module
 window.document.splugins.wbc.variations.gallery_images = window.document.splugins.wbc.variations.gallery_images || {};
 
-window.document.splugins.wbc.variations.gallery_images.core = function() {
+window.document.splugins.wbc.variations.gallery_images.core = function( configs ) {
+
+    var _this = this; 
+
+	_this.configs = jQuery.extend({}, {}/*default configs*/, configs);	
+    
     // this.subjects = [];
 
     this.$wrapper = this._element.closest('.product');
@@ -801,3 +812,6 @@ window.document.splugins.wbc.variations.gallery_images.core = function() {
 
     }; 
 };
+
+//  publish it 
+window.document.splugins.wbc.variations.gallery_images.api = window.document.splugins.wbc.variations.gallery_images.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );

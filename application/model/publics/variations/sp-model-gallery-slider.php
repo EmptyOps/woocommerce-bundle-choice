@@ -48,6 +48,7 @@ class SP_Model_Gallery_Slider extends Eowbc_Base_Model_Publics {
 
 		add_action('sp_variations_gallery_images_render', function(){
 
+
 			$classes = array('sp-variations-gallery-images-slider');
 			$classes = apply_filters('sp_slzm_slider_container',$classes);
 

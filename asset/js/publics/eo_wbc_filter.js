@@ -9,7 +9,12 @@ window.document.splugins.wbc.filters = window.document.splugins.wbc.filters || {
 //	maybe observer pattern with filters as subject, filter types like ring builder filters, shop/cat filters, shortcode filters and diamond quiz etc filters as observer(subscriber) but also the filter fields also as observer(subscriber)(as per standard it should be only filter types not fields but we can implement by adding subtype field in the definition arcitecture and still it is not pure standard but would work), and also the filter or any of its layers like network(ajax) or render(html render) as the singleton factory design pattern 
 	//	moved to asana 
 
-window.document.splugins.wbc.filters.core = function() {
+window.document.splugins.wbc.filters.core = function( configs ) {
+
+    var _this = this; 
+
+	_this.configs = jQuery.extend({}, {}/*default configs*/, configs);	
+
     // this.subjects = [];
 
 
@@ -133,6 +138,156 @@ window.document.splugins.wbc.filters.core = function() {
 				form_data+='&action=eo_wbc_e_tabview';
 			}
 
+
+			// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
+			// --add to be confirmed 3159 TO 3232--
+
+			var form=jQuery("form#eo_wbc_filter");	
+											
+			jQuery(form).attr('method','POST');	
+			jQuery("[name*='action']").val("eo_wbc_e_tabview");	
+
+			form_data=undefined;
+			if(init_call){
+				if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
+					_products_in = jQuery("[name='products_in']").val()
+					if(_products_in == undefined){
+						_products_in = '';
+					} else {
+						_products_in = _products_in.trim();
+					}
+					form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:'eo_wbc_e_tabview',products_in:_products_in};
+					if(eo_wbc_e_tabview.eo_table_view_per_page){
+						form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
+					}
+				}
+				else
+				{
+					//form_data={_category:jQuery("[name='_category']").val().trim(),action:'eo_wbc_filter'};	
+					form_data=jQuery("[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
+					if(eo_wbc_e_tabview.eo_table_view_per_page){
+						form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
+					}
+				}
+
+				if(jQuery("select[name='orderby']").length>0){
+					form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
+				}
+			}
+			else{
+				form_data=form.serialize();
+				if(eo_wbc_e_tabview.eo_table_view_per_page){
+					form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
+				}
+
+				if(jQuery("select[name='orderby']").length>0){
+					form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
+				}
+			}
+
+
+			// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template1.js
+			// --add to be confirmed 630 TO 734--
+
+			var form=jQuery("form#eo_wbc_filter");	
+									
+			jQuery(form).attr('method','POST');	
+			jQuery("[name*='action']").val(eo_wbc_e_tabview.eo_ajax_func);	
+
+			form_data=undefined;
+			if(init_call){
+				if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
+					_products_in = jQuery("[name='products_in']").val()
+					if(_products_in == undefined){
+						_products_in = '';
+					} else {
+						_products_in = _products_in.trim();
+					}
+					form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:eo_wbc_e_tabview.eo_ajax_func,products_in:_products_in};
+					if(eo_wbc_e_tabview.eo_table_view_per_page){
+						form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
+					}
+				}
+				else
+				{
+					//form_data={_category:jQuery("[name='_category']").val().trim(),action:'eo_wbc_filter'};	
+					form_data=jQuery("#tableview_order,#tableview_order_direction,[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
+					if(eo_wbc_e_tabview.eo_table_view_per_page){
+						form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
+					}
+				}
+
+				if(jQuery("select[name='orderby']").length>0){
+					form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
+				}
+
+				if(jQuery("select[name='orderby']").length>0){
+					form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
+				}
+			}
+			else{
+				form_data=form.serialize();
+				if(eo_wbc_e_tabview.eo_table_view_per_page){
+					form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
+				}
+
+				if(jQuery("select[name='orderby']").length>0){
+					form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
+				}
+
+				if(jQuery("#tableview_order").val()!=='' && jQuery("#tableview_order_direction").val()!==''){
+					form_data+='&tableview_order='+jQuery("#tableview_order").val();
+					form_data+='&tableview_order_direction='+jQuery("#tableview_order_direction").val();
+				}
+			}
+
+
+			// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template2.js
+			// --add to be confirmed 302 TO 375--
+
+			var form=jQuery("form#eo_wbc_filter");	
+								
+			jQuery(form).attr('method','POST');	
+			jQuery("[name*='action']").val("eo_wbc_e_tabview");	
+
+			form_data=undefined;
+			if(init_call){
+				if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
+					_products_in = jQuery("[name='products_in']").val()
+					if(_products_in == undefined){
+						_products_in = '';
+					} else {
+						_products_in = _products_in.trim();
+					}
+					form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:'eo_wbc_e_tabview',products_in:_products_in};
+					if(eo_wbc_e_tabview.eo_table_view_per_page){
+						form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
+					}
+				}
+				else
+				{
+					//form_data={_category:jQuery("[name='_category']").val().trim(),action:'eo_wbc_filter'};	
+					form_data=jQuery("[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
+					if(eo_wbc_e_tabview.eo_table_view_per_page){
+						form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
+					}
+				}
+
+				if(jQuery("select[name='orderby']").length>0){
+					form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
+				}
+			}
+			else{
+				form_data=form.serialize();
+				if(eo_wbc_e_tabview.eo_table_view_per_page){
+					form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
+				}
+
+				if(jQuery("select[name='orderby']").length>0){
+					form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
+				}
+			}
+
 	};	
 
 	// so here there will be those ajax callback functions like beforeSend, complete, success, error and so on? mostly yes so that we can call it from wrapper and especially put all the refactored code from different instances of ht eo_wbc_filter_change functions in here 
@@ -144,6 +299,49 @@ window.document.splugins.wbc.filters.core = function() {
 		window.eo_wbc_object.enable_filter_table = false;
 		jQuery("#loading").addClass('loading');					
 		//console.log(JSON.stringify(form_data).replace("\\",''));
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
+		// --add to be confirmed & 2187 TO 2324-- 
+
+		window.eo_wbc_object.enable_filter_table = false;
+		jQuery("#loading").addClass('loading');
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
+		// --add to be confirmed 2601 TO 2705--	
+
+		if(eo_wbc_object.hasOwnProperty('xhr')){
+			eo_wbc_object.xhr.abort();
+		}
+		eo_wbc_object.xhr = xhr;
+		jQuery("#loading").addClass('loading');	
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
+		// --add to be confirmed 3159 TO 3232--
+
+		if(eo_wbc_object.hasOwnProperty('xhr')){
+			eo_wbc_object.xhr.abort();
+		}
+		eo_wbc_object.xhr = xhr;
+		jQuery("#loading").addClass('loading');	   
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template1.js
+		// --add to be confirmed 630 TO 734--	
+
+		if(eo_wbc_object.hasOwnProperty('xhr')){
+			eo_wbc_object.xhr.abort();
+		}
+		eo_wbc_object.xhr = xhr;
+		jQuery("#loading").addClass('loading');	
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template2.js
+		// --add to be confirmed 302 TO 375--	
+
+		if(eo_wbc_object.hasOwnProperty('xhr')){
+			eo_wbc_object.xhr.abort();
+		}
+		eo_wbc_object.xhr = xhr;
+		jQuery("#loading").addClass('loading');
+
 	};
 
 	var complete = function(){
@@ -164,6 +362,37 @@ window.document.splugins.wbc.filters.core = function() {
 		eo_wbc_e_render_table(type,data);	
 		window.eo_wbc_object.enable_filter_table = true;
 		// jQuery(".ui.sticky").sticky('refresh');
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
+		--add to be confirmed & 2187 TO 2324--
+
+		eo_wbc_e_render_table(type,data);	
+		window.eo_wbc_object.enable_filter_table = true; 
+
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
+		--add to be confirmed 2601 TO 2705--
+
+		eo_wbc_e_render_table(data);
+
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
+		--add to be confirmed 3159 TO 3232--
+
+		eo_wbc_e_render_table(data);
+
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template1.js
+		--add to be confirmed 630 TO 734--
+
+		eo_wbc_e_render_table(data);
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template2.js
+		--add to be confirmed 302 TO 375--
+
+		eo_wbc_e_render_table(data);
+
+
 	}; 
 
 	var error = function(data){
@@ -171,6 +400,35 @@ window.document.splugins.wbc.filters.core = function() {
 		console.log('error');
 		console.log(data);
 		window.eo_wbc_object.enable_filter_table = true;
+
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
+		// --add to be confirmed & 2187 TO 2324-- 
+
+		jQuery("#loading").removeClass('loading');
+		console.log('error');
+		console.log(data);
+		window.eo_wbc_object.enable_filter_table = true;
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
+		// --add to be confirmed 2601 TO 2705--	
+			    			
+		jQuery("#loading").removeClass('loading');	
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
+		// --add to be confirmed 3159 TO 3232--	
+
+		jQuery("#loading").removeClass('loading');		
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template1.js
+		// --add to be confirmed 630 TO 734--    
+
+		jQuery("#loading").removeClass('loading');	
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template2.js
+		// --add to be confirmed 302 TO 375--	
+
+		jQuery("#loading").removeClass('loading');
 	};
 
     ///////////// -- 15-06-2022 -- @drashti -- ///////////////////////////////
@@ -891,6 +1149,88 @@ window.document.splugins.wbc.filters.core = function() {
     } 
 }
 
+//  publish it 
+window.document.splugins.wbc.filters.api = window.document.splugins.wbc.filters.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
+
+// the pagination js module
+window.document.splugins.wbc.pagination = window.document.splugins.wbc.pagination || {};
+
+window.document.splugins.wbc.pagination.core = function( configs ) {
+
+    var _this = this; 
+
+	_this.configs = jQuery.extend({}, {}/*default configs*/, configs);	
+
+	var init_private = function() {
+
+	};
+
+	var bind_click = function(){
+
+		NOTE : it will bind to all kind of such on_click events of pagination, it will be private but it may broadcast notification with a callback which js layers of like tableview and so on can call when they recieve their own click event or they can simply call below on_click function". so it is private function.
+    	
+		jQuery('body').on('click','.navigation .page-numbers,.woocommerce-pagination a.page-numbers',function(e){
+			e.preventDefault();
+			e.stopPropagation();
+			
+			jQuery('[name="paged"]').val(parseInt(jQuery(this).text().replace(',','')));		
+			jQuery.fn.eo_wbc_filter_change(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
+		});
+
+		click();
+
+	};
+
+    var click = function(){
+        
+		NOTE : it will internally implement all flows related to pagination link click event
+
+    };
+
+    var compatability = function(section, object, expected_result){
+        
+    };
+
+    var reset = function(){
+
+    };
+	
+	return {
+		
+		init: function() {
+
+			init_private();	
+		},
+
+		on_click: function() {
+
+			NOTE : listen to all on_click events
+
+			click();
+
+		},
+
+		get_page_number: function() {
+
+		},
+
+		set_page_number: function() {
+
+		},
+
+		on_reset: function() {
+
+			reset();
+
+		}
+
+	};
+
+};
+
+//  publish it 
+window.document.splugins.pagination.api = window.document.splugins.pagination.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
+
 now this state mantaining flow should be inside its own module so inside the filters module above, but does it mean that we will stop keeping it direcly under the window object or we will keep it but start using the filters module stat everywhere and once everything sound stable then comment out below? 
 	--	maybe later is the right idea but the point is that if at some places the calls are still going to below stat vars instead of the modules stat then js layer may not show sign but if comment it now then it will crash and that is enough for us to know. but yeah the fact is also that for sometime some js layers are going to be used un-refactored they will depending on below stat vars so we need keep it as per the former option. 
 	--	anyway create the stat vars inside the filters module and set it there also from underneath below statements -- to d 
@@ -1065,24 +1405,24 @@ function eo_wbc_filter_render_html(data,render_container) {
 		//Replacing Pagination details.....		
 		//console.log(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html());
 
-		move below logic to the pagination js module -- to d. including the compatibility conditions are there in the if else block, like planned above to keep the compatibility patches as it is if they are already implemented otherwise we will put them in the dedicated compatibility function. 
-			-- create below functions in that module 
-				--	bind_click -- to d. put comment inside function "it will bind to all kind of such on_click events of pagination, it will be private but it may broadcast notification with a callback which js layers of like tableview and so on can call when they recieve their own click event or they can simply call below on_click function". so it is private function. 
-					--	and from this function call the private click function -- to d 
-				--	on_click -- to d. put comment inside function "listen to all on_click events". so it is public function. 
-				--	click -- to d. put comment inside function "it will internally implement all flows related to pagination link click event". so it is private function. 
-					--	call this function from above on_click -- to d 	
+		//done move below logic to the pagination js module -- to d. including the compatibility conditions are there in the if else block, like planned above to keep the compatibility patches as it is if they are already implemented otherwise we will put them in the dedicated compatibility function. 
+			-- //done create below functions in that module 
+				-- //done 	bind_click -- to d. put comment inside function "it will bind to all kind of such on_click events of pagination, it will be private but it may broadcast notification with a callback which js layers of like tableview and so on can call when they recieve their own click event or they can simply call below on_click function". so it is private function. 
+					-- //done 	and from this function call the private click function -- to d 
+				-- //done 	on_click -- to d. put comment inside function "listen to all on_click events". so it is public function. 
+				-- //done 	click -- to d. put comment inside function "it will internally implement all flows related to pagination link click event". so it is private function. 
+					-- //done 	call this function from above on_click -- to d 	
 					-- raise on_click notification using notifyAllObservers -- to d 
 					-- in init_private function first create the subject for observer pattern also -- to d 
-					-- so also create init_private and init(public) function -- to d 
-				--	compatibility -- to d. it is private function. 
-				--	get_page_number -- to d. it is public function. 
-				--	set_page_number -- to d. it is public function. 
+					-- //done  so also create init_private and init(public) function -- to d 
+				-- //done 	compatibility -- to d. it is private function. 
+				-- //done 	get_page_number -- to d. it is public function. 
+				-- //done 	set_page_number -- to d. it is public function. 
 					-- raise page_number_udpated notification using notifyAllObservers -- to d 
-				--	on_reset -- to d. it is public function. 
+				-- //done 	on_reset -- to d. it is public function. 
 					--	external layers would simply call this function, since observer pattern is not seem necessary here -- to d 
-					--	and from this function call the private reset function -- to d 
-				--	reset -- to d. it is private function. 
+					-- //done 	and from this function call the private reset function -- to d 
+				-- //done 	reset -- to d. it is private function. 
 					-- raise on_reset notification using notifyAllObservers -- to d 
 				tableview and so on would depend on that extended flow of observer pattern where notification will provide a callback, this flow is to be confirmed so either it or something else that is confirmed there on common js variations notes will be used. 
 					-- tableview will use it for its flows like binding click event, which is ideal use case of the observer pattern -- to d 
@@ -1236,18 +1576,19 @@ jQuery(document).ready(function($){
 	window.eo_wbc_object = window.eo_wbc_object || {};
 	window.eo_wbc_object.enable_filter = window.eo_wbc_object.enable_filter || false;
 
-	move to pagination js modules bind_click function -- to d 
+	//done move to pagination js modules bind_click function -- to d 
 		--	and also be sure to the filter_change function call. and why that is so far not changed? -- to d 
-		--  and comment code below but the pagination modules init function need to be called from here -- to d 
-			--	so first export and publish that module under ...api -- to d 
-	jQuery('body').on('click','.navigation .page-numbers,.woocommerce-pagination a.page-numbers',function(e){
-	    e.preventDefault();
-	    e.stopPropagation();
+		--//done  and comment code below but the pagination modules init function need to be called from here -- to d 
+			--//done	so first export and publish that module under ...api -- to d 
+	// jQuery('body').on('click','.navigation .page-numbers,.woocommerce-pagination a.page-numbers',function(e){
+	//     e.preventDefault();
+	//     e.stopPropagation();
 	    
-		jQuery('[name="paged"]').val(parseInt(jQuery(this).text().replace(',','')));		
-		jQuery.fn.eo_wbc_filter_change(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
-	});
-	
+	// 	jQuery('[name="paged"]').val(parseInt(jQuery(this).text().replace(',','')));		
+	// 	jQuery.fn.eo_wbc_filter_change(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
+	// });
+	window.document.splugins.pagination.api.init();
+
 	ask t for what it is -- to d 
 		-- then need to create if applicable then applicable function in applicable js module and mode code there -- to d 
 	jQuery("[data-toggle_column]").click(function(){

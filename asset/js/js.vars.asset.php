@@ -7,3 +7,25 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 
 	wbc()->load->asset('js','common',array(),"0.1.3",false,true);
 }, 99);
+
+?>
+<script type="text/javascript">
+
+	if('is_category_page' == true){ 
+
+		window.document.splugins.common.is_category_page = window.document.splugins.common.is_category_page || {};
+
+	}else if('is_category_page' == true){
+
+		window.document.splugins.common.is_item_page = window.document.splugins.common.is_item_page || {};
+	
+	}else if('is_mobile' == true){
+
+		window.document.splugins.common.is_item_page = window.document.splugins.common.is_item_page || {};
+	
+	}else if('is_tablet' == true){
+
+		window.document.splugins.common.is_item_page = window.document.splugins.common.is_item_page || {};
+	}
+
+</script>
