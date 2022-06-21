@@ -26,7 +26,7 @@ class SP_WBC_Variations extends SP_Variations {
 
 	}
 
-	public static function fetch_data($for_section, $product = null,  $args = null ) {
+	public static function fetch_data($for_section, $product = null,  $args = array() ) {
 
 		$sp_variations_data = array();
 			//	NOTE: this is default object format of $sp_variations_data and when there is no data available it will return empty array instead of the null or false etc. 
@@ -326,7 +326,7 @@ class SP_WBC_Variations extends SP_Variations {
 
 	}
 
-	public function sp_variations_swatches_supported_attribute_types(){
+	public function sp_variations_swatches_supported_attribute_types($configs = array()){
 
 		$type = array();
 		$type['button']='Button';

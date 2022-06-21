@@ -92,47 +92,55 @@ class Options extends \eo\wbc\controllers\publics\Controller {
     } 
 
     private function get_ui_definition($args = array()){
+    	$type = 'button';
+    	
     	if ($args['page_section'] == 'woo_dropdown_attribute_html') {
 
     		$args['widget_key'] = '';
-    		$args['template_sub_dir'] = '';
+    		$args['template_sub_dir'] = 'single-product/variations-swatches/woo_dropdown_attribute/'.$type;
     		$args['template_option_key'] = '';
 	        $args['option_group_key'] = '';
+	        $args['template_key'] = 'woo_dropdown_attribute';
 	        $args['plugin_slug'] = '';
-
 
     	}else if ($args['page_section'] == 'variable_item') {
 
+    		if (!isset($args['data'])) {
+
+    			$args['data'] = array();
+
+    		}
+
+    		$args['data']['template_data'] = array();
+    		$args['data']['template_data']['template_key_actual'] = 'sp_variations_optionsUI-'.$type.'-option_template_part';
+    		$args['data']['template_data']['template_sub_dir'] = 'single-product/variations-swatches/'.$type;
+
     		$args['widget_key'] = '';
-    		$args['template_sub_dir'] = '';
+    		$args['template_sub_dir'] = 'single-product/variations-swatches';
     		$args['template_option_key'] = '';
 	        $args['option_group_key'] = '';
+	        $args['template_key'] = 'sp_variations_optionsUI-common-option_template_part';
 	        $args['plugin_slug'] = '';
 
     	}else if ($args['page_section'] == 'variable_item_wrapper') {
 
     		$args['widget_key'] = '';
+    		$args['template_sub_dir'] = 'single-product/variations-swatches/'.$type;
+    		$args['template_option_key'] = '';
+	        $args['option_group_key'] = '';
+	        $args['template_key'] = 'sp_variations_optionsUI-'.$type.'-ribbon_wrapper';
+	        $args['plugin_slug'] = '';
+	
+    	}/*else {
     		$args['template_sub_dir'] = '';
     		$args['template_option_key'] = '';
 	        $args['option_group_key'] = '';
+	        $args['template_key'] = '';
 	        $args['plugin_slug'] = '';
 
-    	}else{
-    		$args['template_option_key'] = '';
-	        $args['option_group_key'] = '';
-	        $args['plugin_slug'] = '';
-
-	    }
+	    }*/
 
         return parent::get_ui_definition($args);
-
-       /* --- Publics.php no hook_render function no code che
-        $react_templat = wbc()->options->get_option('diffrent_size_configure','templat_size');
-        if ($react_templat == 'react_template') {
-            
-        }else{
-
-        }*/
     }
 
 	public function variable_items_wrapper( $contents, $type, $args, $saved_attribute = array()){
