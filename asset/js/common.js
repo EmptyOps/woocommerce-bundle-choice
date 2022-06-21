@@ -73,7 +73,9 @@ window.document.splugins.Feed = window.document.splugins.Feed || {};
     //  NOTE: whenever if any requirements comes up of supporting the jquery events based on their trigger/on api functions then that can as usual be supported internally, all that is needed is is register subject with one additional param that is event_core_backend=jQuery. -- and on this regard the syntax can also bring as much closer as possible to that of jQuery syntax but yeah we will need atleast something like sp_e or so just like _ underscore js have _ in there for everything. 
 window.document.splugins.events = window.document.splugins.events || {};
 
-window.document.splugins.events.subject = function( feature_unique_key, notifications ) {
+window.document.splugins.events.subject = window.document.splugins.events.subject || {};
+
+window.document.splugins.events.subject.core = function( feature_unique_key, notifications ) {
     this.feature_unique_key = feature_unique_key;
     this.notifications = notifications;     // [];    //  list of notifications it can notify for.  
     this.observers = [];
@@ -110,7 +112,12 @@ window.document.splugins.events.subject = function( feature_unique_key, notifica
     };
 };
 
-window.document.splugins.events.observer = function(callbacks) {
+//  publish it 
+window.document.splugins.events.subject.api = window.document.splugins.events.subject.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
+
+window.document.splugins.events.observer = window.document.splugins.events.observer || {};
+
+window.document.splugins.events.observer.core = function(callbacks) {
     this.callbacks = callbacks;     // [];    //  list of notifications callbacks it waits for.  
 
     return {
@@ -127,6 +134,9 @@ window.document.splugins.events.observer = function(callbacks) {
         }
     }
 }
+
+//  publish it 
+window.document.splugins.events.observer.api = window.document.splugins.events.observer.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
 
 window.document.splugins.events.core = function() {
     this.subjects = [];
@@ -190,6 +200,10 @@ window.document.splugins.events.core = function() {
     }
 }
 
+
+//  publish it 
+window.document.splugins.events.api = window.document.splugins.events.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
+
 // var subject = new Subject();
 
 // var observer1 = new Observer();
@@ -214,8 +228,11 @@ window.document.splugins.events.core = function() {
 //  templating 
 window.document.splugins.templating = window.document.splugins.templating || {};
 
-window.document.splugins.templating.core = function(configs) {
-    this.configs = jQuery.extend({}, {}/*default configs*/, configs);   
+window.document.splugins.templating.core = function( configs ) {
+
+    var _this = this; 
+
+	_this.configs = jQuery.extend({}, {}/*default configs*/, configs);	
 
     var get_template = function( tmpl_id, templating_lib ) {
 
@@ -256,6 +273,9 @@ window.document.splugins.templating.core = function(configs) {
 
     };
 };
+
+//  publish it 
+window.document.splugins.templating.api = window.document.splugins.templating.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
 
 ///////////// -- 15-06-2022 -- @drashti -- ///////////////////////////////
 
@@ -301,8 +321,6 @@ window.document.splugins.compatability.core = function(configs) {
 
 ////////////////////////////////////////////
 
-//  publish it 
-window.document.splugins.templating.api = window.document.splugins.templating.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
 
 
 // the variations js module
@@ -404,7 +422,6 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
     var _this = this; 
 
     _this.configs = jQuery.extend({}, {}/*default configs*/, configs);
-
 
     _this.base_container = jQuery( ...common._o( _this.configs, 'base_container_selector') -- to d. base_container_selector ||  '.variations_form' );    
 
@@ -1051,11 +1068,11 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
 
         init: function() {
 
-            window.document.splugins.variation.events.core.notifyAllObservers( 'variation', 'before_search' ); 
+            window.document.splugins.variation.events.api.notifyAllObservers( 'variation', 'before_search' ); 
         },
         before_search: function() {
 
-            window.document.splugins.variation.events.core.notifyAllObservers( 'variation', 'before_search' ); 
+            window.document.splugins.variation.events.api.notifyAllObservers( 'variation', 'before_search' ); 
         }, 
         // createSubject: function( feature_unique_key, notifications ) {
         //     // console.log("Observer " + index + " is notified!");
@@ -1091,16 +1108,24 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
         // },
         no_products_found: function() {
 
-            window.document.splugins.variation.events.core.notifyAllObservers( 'variation', 'no_products_found' );
+            window.document.splugins.variation.events.api.notifyAllObservers( 'variation', 'no_products_found' );
         }, 
 
     }; 
 };
 
+//  publish it 
+window.document.splugins.wbc.variations.swatches.api = window.document.splugins.wbc.variations.swatches.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
+
 // the variations gallery images js module
 window.document.splugins.wbc.variations.gallery_images = window.document.splugins.wbc.variations.gallery_images || {};
 
-window.document.splugins.wbc.variations.gallery_images.core = function() {
+window.document.splugins.wbc.variations.gallery_images.core = function( configs ) {
+
+    var _this = this; 
+
+	_this.configs = jQuery.extend({}, {}/*default configs*/, configs);	
+    
     // this.subjects = [];
 
     this.$wrapper = this._element.closest('.product');
@@ -1650,11 +1675,11 @@ window.document.splugins.wbc.variations.gallery_images.core = function() {
 
         init: function() {
 
-            window.document.splugins.variation.events.core.notifyAllObservers( 'variation', 'before_search' ); 
+            window.document.splugins.variation.events.api.notifyAllObservers( 'variation', 'before_search' ); 
         },
         before_search: function() {
 
-            window.document.splugins.variation.events.core.notifyAllObservers( 'variation', 'before_search' ); 
+            window.document.splugins.variation.events.api.notifyAllObservers( 'variation', 'before_search' ); 
         }, 
         // createSubject: function( feature_unique_key, notifications ) {
         //     // console.log("Observer " + index + " is notified!");
@@ -1690,8 +1715,11 @@ window.document.splugins.wbc.variations.gallery_images.core = function() {
         // },
         no_products_found: function() {
 
-            window.document.splugins.variation.events.core.notifyAllObservers( 'variation', 'no_products_found' );
+            window.document.splugins.variation.events.api.notifyAllObservers( 'variation', 'no_products_found' );
         }, 
 
     }; 
 };
+
+//  publish it 
+window.document.splugins.wbc.variations.gallery_images.api = window.document.splugins.wbc.variations.gallery_images.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
