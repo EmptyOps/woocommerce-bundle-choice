@@ -1,5 +1,5 @@
 <?php
-namespace eo\wbc\controllers\admin\legacy;
+namespace eo\wbc\controllers\admin\legacy_admin;
 
 defined( 'ABSPATH' ) || exit;
 

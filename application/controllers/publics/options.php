@@ -33,7 +33,7 @@ class Options extends \eo\wbc\controllers\publics\Controller {
         \eo\wbc\model\publics\SP_Model_Single_Product::instance()->render_gallery_images_template($args);
 
 
-    	call the getUI from here once so that default render_ui is called once at last for handling general matters -- to b 
+    	// call the getUI from here once so that default render_ui is called once at last for handling general matters -- to b done 
     		//--	and for getUI set two args first is $page_section and second is $args -- to b done
     			//-- empty page_section means call will go to default render_ui function -- to b done
     				//--	and so page_section param will also be passed to get_ui_definition but there it will be passed through in args param -- to b done

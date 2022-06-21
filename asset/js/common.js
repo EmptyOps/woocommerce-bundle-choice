@@ -333,6 +333,16 @@ window.document.splugins.wbc.variations = window.document.splugins.wbc.variation
                         --  so that these hooks become publish ready when we decide to publish the hooks and js api for slider and zoom -- and as planned in one of the option of our four option offering for the gallery_images slider and zoom, that we look forward to try supporting the external zoom and slider with our planned level of efforts, we can (and should) provide service to make the slider and zoom template dynamic using our data by implementing those hooks when those plugins are enabled.  
                             --  ACTIVE_TODO when we decide to actually publish php hooks and js api for slider and zoom, based on user demand as mentioned below, then at that above planned php hooks will also be published 
                                 --  just for the comments, it seems that as long as any external slider and zoom plugin is providing the key js events like that slider_thumb_click and zoom_area_hover and on php side with above flows we are almost covering the 70-80% of basics requirement to host external slider and zoom dynamically 
+            --  since we need to manage the slider and js templating dynamically on the slider and zoom layers 
+                --  so gallery_images module will have template related functions that the form builder js module have, so create those functions -- to d 
+                --  and yeah in gallery_images module we will need one more object namely template_data so create that under data object that is created -- to d 
+                    --  if data object is not created then create that in gallery_images module also -- to d 
+                --  and t we need to make sure that our slider and zoom assets are lighter so make sure that they are loading only needed things and are difinitely the minified versions only 
+                    --  first confirm if they are loading on the right place like from footer hook and so on, and are also loading once only of course -- to t 
+                    --  second make sure that only minified versions are loading and if they are not minified then minify them and load that only -- to t 
+                    --  third also make sure that desktop assets only are loading for desktop and the mobile assets only are loading for the mobile -- to t 
+            --  react tempaltes -- we will going to one alternate widgets set of templates which would be based on react framework 
+            --  what about zoom dom loop template, just create one and replace inside or create all and hide/show? the later is clean and would require less maintainance so should do that. 
         -   pages 
             -- category page 
             -- item page 
