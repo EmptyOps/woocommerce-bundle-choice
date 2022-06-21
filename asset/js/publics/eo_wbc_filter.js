@@ -37,6 +37,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				--	in that case update the calls here in this file and also in the common js file -- to d 
 		window.document.splugins.events.core.createSubject( 'filters', ['before_search', 'no_products_found'] );
 
+		bind_reset_click();
+		bind_click();
+		advance_filter_accordian();
+
     };
 
 	// --	and there will be one more function like should_search, which will also be private. and that will handle onle the logic of checking flags and so on like the enable_filter_table flag above 
@@ -55,13 +59,11 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			return false;
 		}
 
-		if(init_call) {
-			jQuery("form#eo_wbc_filter [name='paged']").val('1');
-			jQuery("form#eo_wbc_filter [name='last_paged']").val('1');
+		//////////////////////
 
-			jQuery("form#eo_wbc_filter [name='_category']").val(jQuery("form#eo_wbc_filter [name='_current_category']"));
-			jQuery("form#eo_wbc_filter [name='_attribute']").val("");
-		}	
+		// if(!init_call){
+		// 	jQuery(".reset_all_filters.mobile_2").removeClass('mobile_2_hidden');
+		// }	
 
 
 
@@ -76,15 +78,20 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		if(window.eo_wbc_object.enable_filter===false){
 			return false;
-		}
+		}	
 
-		if(init_call) {
-			jQuery("form#eo_wbc_filter [name='paged']").val('1');
-			jQuery("form#eo_wbc_filter [name='last_paged']").val('1');
+		///////////
 
-			jQuery("form#eo_wbc_filter [name='_category']").val(jQuery("form#eo_wbc_filter [name='_current_category']"));
-			jQuery("form#eo_wbc_filter [name='_attribute']").val("");
-		}									
+		// if(!init_call){
+		// 	jQuery(".reset_all_filters.mobile_2").removeClass('mobile_2_hidden');
+		// }	
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
+		// --add to be confirmed & 2187 TO 2324--
+
+		// if(!init_call){
+		// 	jQuery(".reset_all_filters.mobile_2").removeClass('mobile_2_hidden');
+		// }							
 
     };	 
 
@@ -125,212 +132,284 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			return true;
 		}					
 
-			from 1 after eo_wbc_filter_change_native call 
-			jQuery(form).attr('method','POST');	
-			jQuery("[name*='action']").val("eo_wbc_e_tabview");	
+		from 1 after eo_wbc_filter_change_native call 
+		jQuery(form).attr('method','POST');	
+		jQuery("[name*='action']").val("eo_wbc_e_tabview");	
 
-			//
+		//
 
-			form_data=undefined;
-			if(init_call)
+		form_data=undefined;
+		if(init_call)
+		{
+			if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
+				_products_in = jQuery("[name='products_in']").val()
+				if(_products_in == undefined){
+					_products_in = '';
+				} else {
+					_products_in = _products_in.trim();
+				}
+				form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:'eo_wbc_e_tabview',products_in:_products_in};
+				if(eo_wbc_e_tabview.eo_table_view_per_page){
+					form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
+				}
+			}
+			else
 			{
-				if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
-					_products_in = jQuery("[name='products_in']").val()
-					if(_products_in == undefined){
-						_products_in = '';
-					} else {
-						_products_in = _products_in.trim();
-					}
-					form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:'eo_wbc_e_tabview',products_in:_products_in};
-					if(eo_wbc_e_tabview.eo_table_view_per_page){
-						form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
-					}
-				}
-				else
-				{
-					//form_data={_category:jQuery("[name='_category']").val().trim(),action:'eo_wbc_filter'};	
-					form_data=jQuery("#tableview_order,#tableview_order_direction,[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
-					if(eo_wbc_e_tabview.eo_table_view_per_page){
-						form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
-					}
-				}
-
-				if(jQuery("select[name='orderby']").length>0){
-					form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
-				}
-
-				if(jQuery("select[name='orderby']").length>0){
-					form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
-				}
-				form_data.action='eo_wbc_e_tabview';
-			}
-			else{
-				form_data=form.serialize();
+				//form_data={_category:jQuery("[name='_category']").val().trim(),action:'eo_wbc_filter'};	
+				form_data=jQuery("#tableview_order,#tableview_order_direction,[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
 				if(eo_wbc_e_tabview.eo_table_view_per_page){
-					form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
-				}
-
-				if(jQuery("select[name='orderby']").length>0){
-					form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
-				}
-
-				if(jQuery("#tableview_order").val()!=='' && jQuery("#tableview_order_direction").val()!==''){
-					form_data+='&tableview_order='+jQuery("#tableview_order").val();
-					form_data+='&tableview_order_direction='+jQuery("#tableview_order_direction").val();
-				}
-
-				form_data+='&action=eo_wbc_e_tabview';
-			}
-
-
-			// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
-			// --add to be confirmed 3159 TO 3232--
-
-			var form=jQuery("form#eo_wbc_filter");	
-											
-			jQuery(form).attr('method','POST');	
-			jQuery("[name*='action']").val("eo_wbc_e_tabview");	
-
-			form_data=undefined;
-			if(init_call){
-				if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
-					_products_in = jQuery("[name='products_in']").val()
-					if(_products_in == undefined){
-						_products_in = '';
-					} else {
-						_products_in = _products_in.trim();
-					}
-					form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:'eo_wbc_e_tabview',products_in:_products_in};
-					if(eo_wbc_e_tabview.eo_table_view_per_page){
-						form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
-					}
-				}
-				else
-				{
-					//form_data={_category:jQuery("[name='_category']").val().trim(),action:'eo_wbc_filter'};	
-					form_data=jQuery("[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
-					if(eo_wbc_e_tabview.eo_table_view_per_page){
-						form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
-					}
-				}
-
-				if(jQuery("select[name='orderby']").length>0){
-					form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
+					form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
 				}
 			}
-			else{
-				form_data=form.serialize();
+
+			if(jQuery("select[name='orderby']").length>0){
+				form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
+			}
+
+			if(jQuery("select[name='orderby']").length>0){
+				form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
+			}
+			form_data.action='eo_wbc_e_tabview';
+		}
+		else{
+			form_data=form.serialize();
+			if(eo_wbc_e_tabview.eo_table_view_per_page){
+				form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
+			}
+
+			if(jQuery("select[name='orderby']").length>0){
+				form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
+			}
+
+			if(jQuery("#tableview_order").val()!=='' && jQuery("#tableview_order_direction").val()!==''){
+				form_data+='&tableview_order='+jQuery("#tableview_order").val();
+				form_data+='&tableview_order_direction='+jQuery("#tableview_order_direction").val();
+			}
+
+			form_data+='&action=eo_wbc_e_tabview';
+		}
+
+		////////////////////////////////
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
+		// --add to be confirmed 2601 TO 2705--
+
+		if(init_call) {
+			jQuery("form#eo_wbc_filter [name='paged']").val('1');
+			jQuery("form#eo_wbc_filter [name='last_paged']").val('1');
+
+			jQuery("form#eo_wbc_filter [name='_category']").val(jQuery("form#eo_wbc_filter [name='_current_category']"));
+			jQuery("form#eo_wbc_filter [name='_attribute']").val("");
+		}
+
+		var form=jQuery("form#eo_wbc_filter");	
+
+		jQuery(form).attr('method','POST');	
+		jQuery("[name*='action']").val("eo_wbc_e_tabview");	
+
+		form_data=undefined;
+		if(init_call){
+			if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
+				_products_in = jQuery("[name='products_in']").val()
+				if(_products_in == undefined){
+					_products_in = '';
+				} else {
+					_products_in = _products_in.trim();
+				}
+				form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:'eo_wbc_e_tabview',products_in:_products_in};
 				if(eo_wbc_e_tabview.eo_table_view_per_page){
-					form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
-				}
-
-				if(jQuery("select[name='orderby']").length>0){
-					form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
+					form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
 				}
 			}
-
-
-			// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template1.js
-			// --add to be confirmed 630 TO 734--
-
-			var form=jQuery("form#eo_wbc_filter");	
-									
-			jQuery(form).attr('method','POST');	
-			jQuery("[name*='action']").val(eo_wbc_e_tabview.eo_ajax_func);	
-
-			form_data=undefined;
-			if(init_call){
-				if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
-					_products_in = jQuery("[name='products_in']").val()
-					if(_products_in == undefined){
-						_products_in = '';
-					} else {
-						_products_in = _products_in.trim();
-					}
-					form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:eo_wbc_e_tabview.eo_ajax_func,products_in:_products_in};
-					if(eo_wbc_e_tabview.eo_table_view_per_page){
-						form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
-					}
-				}
-				else
-				{
-					//form_data={_category:jQuery("[name='_category']").val().trim(),action:'eo_wbc_filter'};	
-					form_data=jQuery("#tableview_order,#tableview_order_direction,[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
-					if(eo_wbc_e_tabview.eo_table_view_per_page){
-						form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
-					}
-				}
-
-				if(jQuery("select[name='orderby']").length>0){
-					form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
-				}
-
-				if(jQuery("select[name='orderby']").length>0){
-					form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
-				}
-			}
-			else{
-				form_data=form.serialize();
+			else
+			{
+				//form_data={_category:jQuery("[name='_category']").val().trim(),action:'eo_wbc_filter'};	
+				form_data=jQuery("#tableview_order,#tableview_order_direction,[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
 				if(eo_wbc_e_tabview.eo_table_view_per_page){
-					form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
-				}
-
-				if(jQuery("select[name='orderby']").length>0){
-					form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
-				}
-
-				if(jQuery("#tableview_order").val()!=='' && jQuery("#tableview_order_direction").val()!==''){
-					form_data+='&tableview_order='+jQuery("#tableview_order").val();
-					form_data+='&tableview_order_direction='+jQuery("#tableview_order_direction").val();
+					form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
 				}
 			}
 
-
-			// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template2.js
-			// --add to be confirmed 302 TO 375--
-
-			var form=jQuery("form#eo_wbc_filter");	
-								
-			jQuery(form).attr('method','POST');	
-			jQuery("[name*='action']").val("eo_wbc_e_tabview");	
-
-			form_data=undefined;
-			if(init_call){
-				if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
-					_products_in = jQuery("[name='products_in']").val()
-					if(_products_in == undefined){
-						_products_in = '';
-					} else {
-						_products_in = _products_in.trim();
-					}
-					form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:'eo_wbc_e_tabview',products_in:_products_in};
-					if(eo_wbc_e_tabview.eo_table_view_per_page){
-						form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
-					}
-				}
-				else
-				{
-					//form_data={_category:jQuery("[name='_category']").val().trim(),action:'eo_wbc_filter'};	
-					form_data=jQuery("[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
-					if(eo_wbc_e_tabview.eo_table_view_per_page){
-						form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
-					}
-				}
-
-				if(jQuery("select[name='orderby']").length>0){
-					form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
-				}
+			if(jQuery("select[name='orderby']").length>0){
+				form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
 			}
-			else{
-				form_data=form.serialize();
+
+			if(jQuery("select[name='orderby']").length>0){
+				form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
+			}
+		}
+		else{
+			form_data=form.serialize();
+			if(eo_wbc_e_tabview.eo_table_view_per_page){
+				form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
+			}
+
+			if(jQuery("select[name='orderby']").length>0){
+				form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
+			}
+
+			if(jQuery("#tableview_order").val()!=='' && jQuery("#tableview_order_direction").val()!==''){
+				form_data+='&tableview_order='+jQuery("#tableview_order").val();
+				form_data+='&tableview_order_direction='+jQuery("#tableview_order_direction").val();
+			}
+		}
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
+		// --add to be confirmed 3159 TO 3232--
+
+		var form=jQuery("form#eo_wbc_filter");	
+										
+		jQuery(form).attr('method','POST');	
+		jQuery("[name*='action']").val("eo_wbc_e_tabview");	
+
+		form_data=undefined;
+		if(init_call){
+			if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
+				_products_in = jQuery("[name='products_in']").val()
+				if(_products_in == undefined){
+					_products_in = '';
+				} else {
+					_products_in = _products_in.trim();
+				}
+				form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:'eo_wbc_e_tabview',products_in:_products_in};
 				if(eo_wbc_e_tabview.eo_table_view_per_page){
-					form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
-				}
-
-				if(jQuery("select[name='orderby']").length>0){
-					form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
+					form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
 				}
 			}
+			else
+			{
+				//form_data={_category:jQuery("[name='_category']").val().trim(),action:'eo_wbc_filter'};	
+				form_data=jQuery("[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
+				if(eo_wbc_e_tabview.eo_table_view_per_page){
+					form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
+				}
+			}
+
+			if(jQuery("select[name='orderby']").length>0){
+				form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
+			}
+		}
+		else{
+			form_data=form.serialize();
+			if(eo_wbc_e_tabview.eo_table_view_per_page){
+				form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
+			}
+
+			if(jQuery("select[name='orderby']").length>0){
+				form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
+			}
+		}
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template1.js
+		// --add to be confirmed 630 TO 734--
+
+		if(init_call) {
+			jQuery("form#eo_wbc_filter [name='paged']").val('1');
+			jQuery("form#eo_wbc_filter [name='last_paged']").val('1');
+
+			jQuery("form#eo_wbc_filter [name='_category']").val(jQuery("form#eo_wbc_filter [name='_current_category']"));
+			jQuery("form#eo_wbc_filter [name='_attribute']").val("");
+		}
+
+		var form=jQuery("form#eo_wbc_filter");	
+
+		jQuery(form).attr('method','POST');	
+		jQuery("[name*='action']").val(eo_wbc_e_tabview.eo_ajax_func);	
+
+		form_data=undefined;
+		if(init_call){
+			if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
+				_products_in = jQuery("[name='products_in']").val()
+				if(_products_in == undefined){
+					_products_in = '';
+				} else {
+					_products_in = _products_in.trim();
+				}
+				form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:eo_wbc_e_tabview.eo_ajax_func,products_in:_products_in};
+				if(eo_wbc_e_tabview.eo_table_view_per_page){
+					form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
+				}
+			}
+			else
+			{
+				//form_data={_category:jQuery("[name='_category']").val().trim(),action:'eo_wbc_filter'};	
+				form_data=jQuery("#tableview_order,#tableview_order_direction,[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
+				if(eo_wbc_e_tabview.eo_table_view_per_page){
+					form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
+				}
+			}
+
+			if(jQuery("select[name='orderby']").length>0){
+				form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
+			}
+
+			if(jQuery("select[name='orderby']").length>0){
+				form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
+			}
+		}
+		else{
+			form_data=form.serialize();
+			if(eo_wbc_e_tabview.eo_table_view_per_page){
+				form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
+			}
+
+			if(jQuery("select[name='orderby']").length>0){
+				form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
+			}
+
+			if(jQuery("#tableview_order").val()!=='' && jQuery("#tableview_order_direction").val()!==''){
+				form_data+='&tableview_order='+jQuery("#tableview_order").val();
+				form_data+='&tableview_order_direction='+jQuery("#tableview_order_direction").val();
+			}
+		}
+
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template2.js
+		// --add to be confirmed 302 TO 375--
+
+		var form=jQuery("form#eo_wbc_filter");	
+							
+		jQuery(form).attr('method','POST');	
+		jQuery("[name*='action']").val("eo_wbc_e_tabview")
+
+		form_data=undefined;
+		if(init_call){
+			if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
+				_products_in = jQuery("[name='products_in']").val()
+				if(_products_in == undefined){
+					_products_in = '';
+				} else {
+					_products_in = _products_in.trim();
+				}
+				form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:'eo_wbc_e_tabview',products_in:_products_in};
+				if(eo_wbc_e_tabview.eo_table_view_per_page){
+					form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
+				}
+			}
+			else
+			{
+				//form_data={_category:jQuery("[name='_category']").val().trim(),action:'eo_wbc_filter'};	
+				form_data=jQuery("[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
+				if(eo_wbc_e_tabview.eo_table_view_per_page){
+					form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
+				}
+			}
+
+			if(jQuery("select[name='orderby']").length>0){
+				form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
+			}
+		}
+		else{
+			form_data=form.serialize();
+			if(eo_wbc_e_tabview.eo_table_view_per_page){
+				form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
+			}
+
+			if(jQuery("select[name='orderby']").length>0){
+				form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
+			}
+		}
+			
 
 	};	
 
@@ -339,52 +418,15 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		--	for all four functions below bring the code from all applicable functions -- to d 
 			--	and compare and put common only once and for identical means different put separetely and comment for both -- to d. ask b for how to do this process precisely, and do it precisely no more in rubbish way. 
 			--	and note one thing clearly that identical table code that is identified here need to be moved in their own calling layers to this function, so there will be some call back or so that need to be defined that can cover it. or we can simply use what is available by way of observer pattern and their notification callback that is planned that maybe of help if finalized -- to d 
+	
 	var beforeSend = function(xhr) {
 		window.eo_wbc_object.enable_filter_table = false;
-		jQuery("#loading").addClass('loading');					
-		//console.log(JSON.stringify(form_data).replace("\\",''));
-
-		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
-		// --add to be confirmed & 2187 TO 2324-- 
-
-		window.eo_wbc_object.enable_filter_table = false;
-		jQuery("#loading").addClass('loading');
-
-		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
-		// --add to be confirmed 2601 TO 2705--	
-
 		if(eo_wbc_object.hasOwnProperty('xhr')){
 			eo_wbc_object.xhr.abort();
 		}
 		eo_wbc_object.xhr = xhr;
-		jQuery("#loading").addClass('loading');	
 
-		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
-		// --add to be confirmed 3159 TO 3232--
-
-		if(eo_wbc_object.hasOwnProperty('xhr')){
-			eo_wbc_object.xhr.abort();
-		}
-		eo_wbc_object.xhr = xhr;
-		jQuery("#loading").addClass('loading');	   
-
-		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template1.js
-		// --add to be confirmed 630 TO 734--	
-
-		if(eo_wbc_object.hasOwnProperty('xhr')){
-			eo_wbc_object.xhr.abort();
-		}
-		eo_wbc_object.xhr = xhr;
-		jQuery("#loading").addClass('loading');	
-
-		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template2.js
-		// --add to be confirmed 302 TO 375--	
-
-		if(eo_wbc_object.hasOwnProperty('xhr')){
-			eo_wbc_object.xhr.abort();
-		}
-		eo_wbc_object.xhr = xhr;
-		jQuery("#loading").addClass('loading');
+		show_loader();
 
 	};
 
@@ -440,39 +482,12 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 	}; 
 
 	var error = function(data){
-		jQuery("#loading").removeClass('loading');
+		
 		console.log('error');
 		console.log(data);
 		window.eo_wbc_object.enable_filter_table = true;
 
-
-		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
-		// --add to be confirmed & 2187 TO 2324-- 
-
-		jQuery("#loading").removeClass('loading');
-		console.log('error');
-		console.log(data);
-		window.eo_wbc_object.enable_filter_table = true;
-
-		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
-		// --add to be confirmed 2601 TO 2705--	
-			    			
-		jQuery("#loading").removeClass('loading');	
-
-		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
-		// --add to be confirmed 3159 TO 3232--	
-
-		jQuery("#loading").removeClass('loading');		
-
-		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template1.js
-		// --add to be confirmed 630 TO 734--    
-
-		jQuery("#loading").removeClass('loading');	
-
-		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template2.js
-		// --add to be confirmed 302 TO 375--	
-
-		jQuery("#loading").removeClass('loading');
+		hide_loader();
 	};
 
     ///////////// -- 15-06-2022 -- @drashti -- ///////////////////////////////
@@ -510,6 +525,305 @@ window.document.splugins.wbc.filters.core = function( configs ) {
         eo_wbc_filter_render_html();     
 
     }
+
+    var eo_wbc_filter_render_html = function(data,render_container){
+
+
+		/*jQuery("#loading").removeClass('loading');
+		return true;*/
+
+		render_data = data;
+		_render_container = render_container;
+
+		create two function show_loader and hide_loader in filters core js module -- to d 
+			--	and then move the below code in the hide_loader -- to d 
+			--	and check all the change function implementation and move show related code in the show_loader function and hide related code in the hide_loader function -- to d
+			--	needless to say but still note that the loader hide show event should be carefully caled from each related search events like search, complete, error and maybe also some other which handle some particular scenarios. -- to d 
+				--	so that what happen is that in future if the events namespace is firing the search or any related events around and if by any change any event that the filters module recieve is related to the show hide loader flow then that is taken care of implicitly.  
+		jQuery("#loading").removeClass('loading');
+
+		create one function update_result_count in filters core js module -- to d 
+		--	and then move the below code in that -- to d 
+		--	and check all the change function implementation and move show related code in that function -- to d 
+		--	I have some doubt the below condition's logic it is setting to empty when there is not result count container is returned. but I guess that is exceptional scenario which would never be happening but if it happens then we need to handle that exceptional scenario, so for now keeping it open and if no such thing show up after 1st or 2nd revision then remove this task ACTIVE_TODO -- to b 
+			--	move above task comment also with the code -- to d 
+		//Replace Result Count Status...
+		if(jQuery('.woocommerce-result-count',jQuery(data)).html()!==undefined){
+			if(jQuery(".woocommerce-result-count").length>0){
+				jQuery(".woocommerce-result-count").html(jQuery('.woocommerce-result-count',jQuery(data)).html());
+			} else {
+				jQuery(jQuery('.woocommerce-result-count',jQuery(render_data)).get(0).outerHTML).insertBefore('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products');
+			}
+		}
+		else {
+			jQuery(".woocommerce-result-count").html('');	
+		}
+
+		//Replacing Product listings....
+		like vars under window object are moved filter core js module, similarly move below var also to filters js module and underneath below statement set it in the filters js module -- to d 
+		document.wbc_data = data;
+		
+		/*console.log(data);*/
+
+		we can define a compatibility check flow, where the compatibility function will be available in each js module -- to d 
+			-- that will recieve a object and second argument will be the excpected result. -- to d 
+			-- if that is not matched then the compatibility function will apply its all available compatibility scenarios -- to d. like the below elementor-products-grid class statement would then go inside compatibility if. and .jet-woo-products also belong there, but let it be there and same for any js module layers where we have compatibility patch is mixed with basic/standard implementation statement to avoid the errors while separating them. 
+		let container_html = jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products',jQuery(data)).html();	
+		
+		/*if(container_html===undefined || container_html==='') {
+			container_html = jQuery(jQuery(data),'.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products').html();
+		}*/
+
+		if(container_html===undefined || container_html==='') {
+			container_html = jQuery(".elementor-products-grid",jQuery(data)).html();
+		}
+
+		if(container_html!==undefined && container_html!=='') {	
+			if( typeof(is_card_view_rendered) == undefined || typeof(is_card_view_rendered) == 'undefined' || is_card_view_rendered == false ) {
+				if(jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products').length<=0) {
+					jQuery(render_container).html(container_html);
+				} else {
+					jQuery(render_container).html(container_html);
+				}			
+			}						
+			else {
+				we need to track execution of this function so search in all 5 repos and confirm where this function is defined -- to d 
+					--	and if that is found then only track above where is_card_view_rendered to see from which different locations it is defined and/or coming -- to d 
+				wbc_attach_card_views();
+			}
+
+			var links=jQuery(".products a,.product-listing a");
+			jQuery.each(links,function(index,element) {
+
+				var href=jQuery(element).attr('href');
+				if(typeof(href)!==typeof(undefined) && href.hasOwnProperty('indexOf')){
+					if(href.indexOf('?')==-1) {
+						jQuery(element).attr('href',jQuery(element).attr('href')+eo_wbc_object.eo_product_url);
+					} else {
+						jQuery(element).attr('href',href.substring(0,href.indexOf('?'))+eo_wbc_object.eo_product_url);
+					}
+				}
+				
+			});
+		}
+		else {
+
+			ACTIVE_TODO instead of determining if products are found or not on the js layer, it is really if we send a flag var from the php layer. so do it. in the dapii feed layers it is already like that but ensure that in wbc and tableview(in tableview also it is at least almost planned and roughly implemented) -- to h or -- to d 
+			// 	ACTIVE_TODO commented below events subject creation, during testing only. so temporary only.
+			window.document.splugins.wbc.filters.core.no_products_found();
+
+			just move below line in the no_products_found function of the filters js module -- to d 
+				--	and so now the render_container will recieve one parameter that is render_container, it will defaults to null so from where it is applicable it is passed otherwise it will be left blank -- to d 
+			jQuery(render_container/*".products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products"*/).html('<p class="woocommerce-info" style="width: 100%;">No products were found matching your selection.</p>');	
+		}	
+
+		/*if(render_container===".products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products"){*/
+			//Replacing Pagination details.....		
+			//console.log(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html());
+
+			//done move below logic to the pagination js module -- to d. including the compatibility conditions are there in the if else block, like planned above to keep the compatibility patches as it is if they are already implemented otherwise we will put them in the dedicated compatibility function. 
+				-- //done create below functions in that module 
+					-- //done 	bind_click -- to d. put comment inside function "it will bind to all kind of such on_click events of pagination, it will be private but it may broadcast notification with a callback which js layers of like tableview and so on can call when they recieve their own click event or they can simply call below on_click function". so it is private function. 
+						-- //done 	and from this function call the private click function -- to d 
+					-- //done 	on_click -- to d. put comment inside function "listen to all on_click events". so it is public function. 
+					-- //done 	click -- to d. put comment inside function "it will internally implement all flows related to pagination link click event". so it is private function. 
+						-- //done 	call this function from above on_click -- to d 	
+						-- raise on_click notification using notifyAllObservers -- to d 
+						-- in init_private function first create the subject for observer pattern also -- to d 
+						-- //done  so also create init_private and init(public) function -- to d 
+					-- //done 	compatibility -- to d. it is private function. 
+					-- //done 	get_page_number -- to d. it is public function. 
+					-- //done 	set_page_number -- to d. it is public function. 
+						-- raise page_number_udpated notification using notifyAllObservers -- to d 
+					-- //done 	on_reset -- to d. it is public function. 
+						--	external layers would simply call this function, since observer pattern is not seem necessary here -- to d 
+						-- //done 	and from this function call the private reset function -- to d 
+					-- //done 	reset -- to d. it is private function. 
+						-- raise on_reset notification using notifyAllObservers -- to d 
+					tableview and so on would depend on that extended flow of observer pattern where notification will provide a callback, this flow is to be confirmed so either it or something else that is confirmed there on common js variations notes will be used. 
+						-- tableview will use it for its flows like binding click event, which is ideal use case of the observer pattern -- to d 
+						-- and it will also use it for triggerring the click event, means of its own pagination links dom -- to d 
+							-- ACTIVE_TODO but very soon maybe the tableview may not have its own pagination links dom if that is not necessary for it -- to h and -- to d 
+						-- and for setting and getting current page_number 
+							--	for it may simply need to use the pagination modules published api interface -- to d 
+			if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html()!==undefined) {
+				if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination').length>0){
+					jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html());
+				} else {
+
+					@d once all the pagination related layers brought to this function, we need to check if the below incomplete implementation is completely implemented anywhere in our repo -- to d 
+						--	if not then test with the elementor created category feed page and also with elementor hello themes custom loop to check if it works. if not then must uncomment the last uncommented line and finish the implementation -- to d or -- to b 
+					let product_container = jQuery(".products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)");
+					if(product_container.length<=0) {
+						product_container = jQuery(".elementor-products-grid");
+						if(product_container.length<=0) {
+							product_container = jQuery(".elementor-widget-container").has('[data-elementor-type="loop"]');
+							if(product_container.length<=0) {
+								product_container = jQuery("[data-widget_type='archive-posts.archive_custom']");						
+							}
+						}
+					}
+					//jQuery(product_container).append('<nav class="woocommerce-pagination">'+jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html()+'</nav>');
+				}
+			}
+			else {
+				jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html('');	
+			}
+		/*}*/
+
+
+		and below one to the hide_loader function -- to d 
+		//jQuery("body").fadeTo('fast','1')									
+		jQuery("#loading").removeClass('loading');
+		
+		almost all of the below seems compatibility related to so move that to compatibility function, and at there we need to have section conditon like this would be broadly as product-listing -- to d 
+			--	you already moved below code, which I saw, but there is not comment below that it is moved so please let me know what is going on -- to d 
+		jQuery('.products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)').addClass('product_grid_view');
+		//jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination').css('visibility','visible');
+		if(jQuery(".row-inner>.col-lg-9").length>0){
+			jQuery(".row-inner>.col-lg-9 *").each(function(i,e) {		
+			    if(jQuery(e).css('opacity') == '0'){
+					jQuery(e).css('opacity','1');        
+			    }
+			});
+			jQuery(".t-entry-visual-overlay").removeClass('t-entry-visual-overlay');
+			jQuery(".double-gutter .tmb").css('width','50%');
+			jQuery(".double-gutter .tmb").css('display','inline-flex');
+		}
+		
+		jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination,jet-filters-pagination').css('visibility','visible');
+
+		// Fix for the yith wishlist.
+		if(typeof(yith_wcwl_l10n)=='object'){
+			eowbc_yith_wishlist_fix();
+		}
+		// lazyload
+		if(typeof(LazyLoad)=='function'){
+			eowbc_lazyload();
+		}
+
+    }
+
+    var show_loader = function(){
+
+    	jQuery("#loading").addClass('loading');	
+
+    	// jQuery("#loading").addClass('loading');					
+		//console.log(JSON.stringify(form_data).replace("\\",''));
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
+		// --add to be confirmed & 2187 TO 2324-- 
+
+		// window.eo_wbc_object.enable_filter_table = false;
+		// jQuery("#loading").addClass('loading');
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
+		// --add to be confirmed 2601 TO 2705--	
+
+		//////////////////////
+
+		// jQuery("#loading").addClass('loading');	
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
+		// --add to be confirmed 3159 TO 3232--
+
+		// if(eo_wbc_object.hasOwnProperty('xhr')){
+		// 	eo_wbc_object.xhr.abort();
+		// }
+		// eo_wbc_object.xhr = xhr;
+		// jQuery("#loading").addClass('loading');	   
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template1.js
+		// --add to be confirmed 630 TO 734--	
+
+		// if(eo_wbc_object.hasOwnProperty('xhr')){
+		// 	eo_wbc_object.xhr.abort();
+		// }
+		// eo_wbc_object.xhr = xhr;
+		// jQuery("#loading").addClass('loading');	
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template2.js
+		// --add to be confirmed 302 TO 375--	
+
+		// if(eo_wbc_object.hasOwnProperty('xhr')){
+		// 	eo_wbc_object.xhr.abort();
+		// }
+		// eo_wbc_object.xhr = xhr;
+		// jQuery("#loading").addClass('loading');
+
+    }
+
+    var hide_loader = function(){
+
+    	jQuery("#loading").removeClass('loading');
+
+    	// jQuery("#loading").removeClass('loading');
+
+    	////////////////////////
+
+    	// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
+		// --add to be confirmed & 2187 TO 2324-- 
+
+		// jQuery("#loading").removeClass('loading');
+		// console.log('error');
+		// console.log(data);
+		// window.eo_wbc_object.enable_filter_table = true;
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
+		// --add to be confirmed 2601 TO 2705--	
+			    			
+		// jQuery("#loading").removeClass('loading');	
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
+		// --add to be confirmed 3159 TO 3232--	
+
+		// jQuery("#loading").removeClass('loading');		
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template1.js
+		// --add to be confirmed 630 TO 734--    
+
+		// jQuery("#loading").removeClass('loading');	
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template2.js
+		// --add to be confirmed 302 TO 375--	
+
+		// jQuery("#loading").removeClass('loading');
+
+    }
+
+    var bind_reset_click = function(){
+
+    	jQuery(document).on('click',".reset_all_filters",function(){
+        jQuery("[data-reset]").each(function(e){
+            eval(jQuery(this).data('reset'));
+        })
+        jQuery.fn.eo_wbc_filter_change();
+        	return false;
+		})
+
+    }
+
+    var bind_click = function(){
+
+    	if(!eo_wbc_object.btnfilter_now){			
+			jQuery("#eo_wbc_filter").on('change',"input:not(:checkbox)",function(){
+				jQuery('[name="paged"]').val('1');
+				jQuery.fn.eo_wbc_filter_change();										
+			});
+		}
+
+    }
+
+    var advance_filter_accordian = function(){
+
+		if(jQuery.fn.hasOwnProperty('accordion') && typeof(jQuery.fn.accordion)==='function'){
+			jQuery( ".eo_wbc_advance_filter" ).accordion({
+			  collapsible: true,
+			  active:false
+			});
+		}
+
+    } 
     ///////////////////////////////////////////////////////
 
 
@@ -589,597 +903,77 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				// }
 
 
-				if(form.find('[name="filter_native"]').length>0) {
-					jQuery.fn.eo_wbc_filter_change_native(init_call,form_selector,render_container);
-					return true;
-				}
+				// if(form.find('[name="filter_native"]').length>0) {
+				// 	jQuery.fn.eo_wbc_filter_change_native(init_call,form_selector,render_container);
+				// 	return true;
+				// }
+
 			prepare_query_data();							
 			--	above call is okay but move it to private wrapper above and also the if statement above it but make that commented -- to d 
+			
 
-			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
-
-								//////// 27-05-2022 - @drashti /////////
-				    			--add to be confirmed & 2187 TO 2324-- 
-								jQuery.fn.eo_wbc_filter_change=function(init_call=false,form_selector="form[id*='eo_wbc_filter']",render_container='.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products') 
-				    			////////////////////////////////////////
-
-								{	
-
-									where should this logic go? and it may not be necessary to maintain this logic, but as per our usual approach we can not drop it now but keep it as it is and later comment it 
-									if(window.eo_wbc_object.enable_filter_table === false){
-
-										return false;
-									}
-
-
-									// prepare_query_data 	
-										// var form=jQuery(form_selector);
-
-										// if(form.find('[name="html_destination"]').length>0) {
-
-										// 	render_container = form.find('[name="html_destination"]').val();
-										// }
-
-
-										// if(form.find('[name="filter_native"]').length>0) {
-										// 	jQuery.fn.eo_wbc_filter_change_native(init_call,form_selector,render_container);
-										// 	return true;
-										// }
-
-						
-									// console.log(init_call);
-									// console.log(form_selector);
-
-									// console.log(jQuery.fn.eo_wbc_filter_change_native(init_call,form_selector,render_container));
-
-									what is the point of below call if still there is code layers below it which are also making ajax search request to server? but find out that most like now only above if condition if filter_native is what till where the calls would be reachine but from that if the return true executed 
-										--	so if that assumption is true then we can believe that eo_wbc_filter_change_native function is already refactored basically and QC mainly should be followed by only 
-										--	either way it sounds illogical to execute the entire search layer twice, so just check below layers and consider what is worth consideration and the two calls is not seem necessary API 	
-									jQuery.fn.eo_wbc_filter_change_native(init_call,form_selector,render_container);
-
-									// jQuery.fn.eo_wbc_filter_change_native(init_call,form_selector,render_container);
-
-			  	
-									// prepare_query_data 	
-										// jQuery(form).attr('method','POST');	
-										// jQuery("[name*='action']").val("eo_wbc_e_tabview");	
-				
-										// //
-
-										// form_data=undefined;
-										// if(init_call)
-										// {
-										// 	if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
-										// 		_products_in = jQuery("[name='products_in']").val()
-										// 		if(_products_in == undefined){
-										// 			_products_in = '';
-										// 		} else {
-										// 			_products_in = _products_in.trim();
-										// 		}
-										// 		form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:'eo_wbc_e_tabview',products_in:_products_in};
-										// 		if(eo_wbc_e_tabview.eo_table_view_per_page){
-										// 			form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
-										// 		}
-										// 	}
-										// 	else
-										// 	{
-										// 		//form_data={_category:jQuery("[name='_category']").val().trim(),action:'eo_wbc_filter'};	
-										// 		form_data=jQuery("#tableview_order,#tableview_order_direction,[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
-										// 		if(eo_wbc_e_tabview.eo_table_view_per_page){
-										// 			form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
-										// 		}
-										// 	}
-
-										// 	if(jQuery("select[name='orderby']").length>0){
-										// 		form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
-										// 	}
-
-										// 	if(jQuery("select[name='orderby']").length>0){
-										// 		form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
-										// 	}
-										// 	form_data.action='eo_wbc_e_tabview';
-										// }
-										// else{
-										// 	form_data=form.serialize();
-										// 	if(eo_wbc_e_tabview.eo_table_view_per_page){
-										// 		form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
-										// 	}
-
-										// 	if(jQuery("select[name='orderby']").length>0){
-										// 		form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
-										// 	}
-
-										// 	if(jQuery("#tableview_order").val()!=='' && jQuery("#tableview_order_direction").val()!==''){
-										// 		form_data+='&tableview_order='+jQuery("#tableview_order").val();
-										// 		form_data+='&tableview_order_direction='+jQuery("#tableview_order_direction").val();
-										// 	}
-
-										// 	form_data+='&action=eo_wbc_e_tabview';
-										// }
-
-
-									// var site_url=eo_wbc_object.eo_admin_ajax_url;
-									// var ajax_url = '';
-
-									// if(site_url.includes('?')) {
-									// 	ajax_url = site_url+eo_wbc_object.eo_cat_query;
-									// } else {
-									// 	ajax_url = site_url+'/?'+eo_wbc_object.eo_cat_query;
-									// }
-
-									jQuery.fn.sp_filter_request = jQuery.ajax(
-									{
-										url: eo_wbc_object.eo_admin_ajax_url,//form.attr('action'),
-										data:form_data, // form data
-										type:'POST', // POST
-										beforeSend:function(xhr){
-											window.eo_wbc_object.enable_filter_table = false;
-											jQuery("#loading").addClass('loading');					
-											//console.log(JSON.stringify(form_data).replace("\\",''));
-										},
-										complete : function(){
-											// console.log(this.url);
-										},
-										success:function(data)
-										{
-
-				
-											//console.log(data);
-											//document.write(data);
-											//jQuery("#loading").removeClass('loading');
-											// --	and this is called for the slick_table if block so is not the type should be slick_table here? discuss with shraddha -- to d 
-											// 	-- rectify if there are any such similar issue
-
-											//////// 02-04-2022 @shraddha /////// 
-											eo_wbc_e_render_table(type,data);	
-											window.eo_wbc_object.enable_filter_table = true;
-											// jQuery(".ui.sticky").sticky('refresh');
-										},
-										error:function(data){
-											jQuery("#loading").removeClass('loading');
-											console.log('error');
-											console.log(data);
-											window.eo_wbc_object.enable_filter_table = true;
-										},
-									}
-									);						
-									
-									if(!init_call){
-										jQuery(".reset_all_filters.mobile_2").removeClass('mobile_2_hidden');
-									}
-
-									return false;
-								}
-
-			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
-								//////// 27-05-2022 - @drashti /////////
-				    			--add to be confirmed 2601 TO 2705--
-				    			window.document.splugins.wbc.filters.core.eo_wbc_filter_change_wrapper();
-								jQuery.fn.eo_wbc_filter_change=function(init_call=false) 
-				    			////////////////////////////////////////
-
-								{	
-
-									if(init_call/* || typeof(window.eo_wbc_filter_change_table_view_service)===typeof(undefined)*/) {
-										/*window.eo_wbc_filter_change_table_view_service = true*/
-										return false;
-									}
-									console.log(init_call,window.eo_wbc_filter_change_table_view_service);
-									
-									if(window.eo_wbc_object.enable_filter===false){
-										return false;
-									}
-
-									if(init_call) {
-										jQuery("form#eo_wbc_filter [name='paged']").val('1');
-										jQuery("form#eo_wbc_filter [name='last_paged']").val('1');
-
-										jQuery("form#eo_wbc_filter [name='_category']").val(jQuery("form#eo_wbc_filter [name='_current_category']"));
-										jQuery("form#eo_wbc_filter [name='_attribute']").val("");
-									}
-
-									var form=jQuery("form#eo_wbc_filter");	
-									
-									jQuery(form).attr('method','POST');	
-									jQuery("[name*='action']").val("eo_wbc_e_tabview");	
-								
-									form_data=undefined;
-									if(init_call){
-										if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
-											_products_in = jQuery("[name='products_in']").val()
-											if(_products_in == undefined){
-												_products_in = '';
-											} else {
-												_products_in = _products_in.trim();
-											}
-											form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:'eo_wbc_e_tabview',products_in:_products_in};
-											if(eo_wbc_e_tabview.eo_table_view_per_page){
-												form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
-											}
-										}
-										else
-										{
-											//form_data={_category:jQuery("[name='_category']").val().trim(),action:'eo_wbc_filter'};	
-											form_data=jQuery("#tableview_order,#tableview_order_direction,[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
-											if(eo_wbc_e_tabview.eo_table_view_per_page){
-												form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
-											}
-										}
-
-										if(jQuery("select[name='orderby']").length>0){
-											form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
-										}
-
-										if(jQuery("select[name='orderby']").length>0){
-											form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
-										}
-									}
-									else{
-										form_data=form.serialize();
-										if(eo_wbc_e_tabview.eo_table_view_per_page){
-											form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
-										}
-
-										if(jQuery("select[name='orderby']").length>0){
-											form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
-										}
-
-										if(jQuery("#tableview_order").val()!=='' && jQuery("#tableview_order_direction").val()!==''){
-											form_data+='&tableview_order='+jQuery("#tableview_order").val();
-											form_data+='&tableview_order_direction='+jQuery("#tableview_order_direction").val();
-										}
-									}
-
-									jQuery.ajax({
-										url: eo_wbc_object.eo_admin_ajax_url,//form.attr('action'),
-										data:form_data, // form data
-										type:'POST', // POST
-										beforeSend:function(xhr){
-											if(eo_wbc_object.hasOwnProperty('xhr')){
-												eo_wbc_object.xhr.abort();
-											}
-											eo_wbc_object.xhr = xhr;
-											jQuery("#loading").addClass('loading');					
-											//console.log(JSON.stringify(form_data).replace("\\",''));
-										},
-										complete : function(){
-											//console.log(this.url);
-										},
-										success:function(data){		
-											//console.log(data);
-											//document.write(data);
-											//jQuery("#loading").removeClass('loading');
-											eo_wbc_e_render_table(data);	
-											// jQuery(".ui.sticky").sticky('refresh');
-										},
-										error:function(data){
-											jQuery("#loading").removeClass('loading');
-										}
-									});						
-									
-									if(!init_call){
-										jQuery(".reset_all_filters.mobile_2").removeClass('mobile_2_hidden');
-									}
-
-									return false;
-								}
-
-			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
-							//////// 27-05-2022 - @drashti /////////
-			    			--add to be confirmed 3159 TO 3232--
-			    			window.document.splugins.wbc.filters.core.eo_wbc_filter_change_wrapper();
-							jQuery.fn.eo_wbc_filter_change=function(init_call=false) 
-			    			////////////////////////////////////////
-							{				
-										
-								var form=jQuery("form#eo_wbc_filter");	
-								
-								jQuery(form).attr('method','POST');	
-								jQuery("[name*='action']").val("eo_wbc_e_tabview");	
-							
-								form_data=undefined;
-								if(init_call){
-									if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
-										_products_in = jQuery("[name='products_in']").val()
-										if(_products_in == undefined){
-											_products_in = '';
-										} else {
-											_products_in = _products_in.trim();
-										}
-										form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:'eo_wbc_e_tabview',products_in:_products_in};
-										if(eo_wbc_e_tabview.eo_table_view_per_page){
-											form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
-										}
-									}
-									else
-									{
-										//form_data={_category:jQuery("[name='_category']").val().trim(),action:'eo_wbc_filter'};	
-										form_data=jQuery("[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
-										if(eo_wbc_e_tabview.eo_table_view_per_page){
-											form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
-										}
-									}
-
-									if(jQuery("select[name='orderby']").length>0){
-										form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
-									}
-								}
-								else{
-									form_data=form.serialize();
-									if(eo_wbc_e_tabview.eo_table_view_per_page){
-										form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
-									}
-
-									if(jQuery("select[name='orderby']").length>0){
-										form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
-									}
-								}
-
-								jQuery.ajax({
-									url: eo_wbc_object.eo_admin_ajax_url,//form.attr('action'),
-									data:form_data, // form data
-									type:'POST', // POST
-									beforeSend:function(xhr){
-										if(eo_wbc_object.hasOwnProperty('xhr')){
-											eo_wbc_object.xhr.abort();
-										}
-										eo_wbc_object.xhr = xhr;
-										jQuery("#loading").addClass('loading');					
-										//console.log(JSON.stringify(form_data).replace("\\",''));
-									},
-									complete : function(){
-										//console.log(this.url);
-									},
-									success:function(data){		
-										//console.log(data);
-										//document.write(data);
-										//jQuery("#loading").removeClass('loading');
-										eo_wbc_e_render_table(data);	
-										// jQuery(".ui.sticky").sticky('refresh');
-									},
-									error:function(data){
-										jQuery("#loading").removeClass('loading');
-									}
-								});						
-								
-								return false;
-							}
-
-			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template1.js
-					//////// 27-05-2022 - @drashti /////////
-					--add to be confirmed 630 TO 734--
-					window.document.splugins.wbc.filters.core.eo_wbc_filter_change_wrapper();
-					jQuery.fn.eo_wbc_filter_change=function(init_call=false) 
-					////////////////////////////////////////
+			//////// 27-05-2022 - @drashti /////////
+			--add to be confirmed 630 TO 734--
 
-					{	
+			if(!init_call){
+				jQuery(".reset_all_filters.mobile_2").removeClass('mobile_2_hidden');
+			}	
 
-						if(init_call/* || typeof(window.eo_wbc_filter_change_table_view_service)===typeof(undefined)*/) {
-							/*window.eo_wbc_filter_change_table_view_service = true*/
-							return false;
-						}
-						console.log(init_call,window.eo_wbc_filter_change_table_view_service);
-						
-						if(window.eo_wbc_object.enable_filter===false){
-							return false;
-						}
+			// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
+			//////// 27-05-2022 - @drashti /////////
+			--add to be confirmed 2601 TO 2705--
 
-						if(init_call) {
-							jQuery("form#eo_wbc_filter [name='paged']").val('1');
-							jQuery("form#eo_wbc_filter [name='last_paged']").val('1');
+			if(!init_call){
+				jQuery(".reset_all_filters.mobile_2").removeClass('mobile_2_hidden');
+			}
 
-							jQuery("form#eo_wbc_filter [name='_category']").val(jQuery("form#eo_wbc_filter [name='_current_category']"));
-							jQuery("form#eo_wbc_filter [name='_attribute']").val("");
-						}
 
-						var form=jQuery("form#eo_wbc_filter");	
-						
-						jQuery(form).attr('method','POST');	
-						jQuery("[name*='action']").val(eo_wbc_e_tabview.eo_ajax_func);	
-					
-						form_data=undefined;
-						if(init_call){
-							if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
-								_products_in = jQuery("[name='products_in']").val()
-								if(_products_in == undefined){
-									_products_in = '';
-								} else {
-									_products_in = _products_in.trim();
-								}
-								form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:eo_wbc_e_tabview.eo_ajax_func,products_in:_products_in};
-								if(eo_wbc_e_tabview.eo_table_view_per_page){
-									form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
-								}
-							}
-							else
-							{
-								//form_data={_category:jQuery("[name='_category']").val().trim(),action:'eo_wbc_filter'};	
-								form_data=jQuery("#tableview_order,#tableview_order_direction,[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
-								if(eo_wbc_e_tabview.eo_table_view_per_page){
-									form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
-								}
-							}
+			// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
 
-							if(jQuery("select[name='orderby']").length>0){
-								form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
-							}
+			//////// 27-05-2022 - @drashti /////////
+			--add to be confirmed & 2187 TO 2324--
 
-							if(jQuery("select[name='orderby']").length>0){
-								form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
-							}
-						}
-						else{
-							form_data=form.serialize();
-							if(eo_wbc_e_tabview.eo_table_view_per_page){
-								form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
-							}
 
-							if(jQuery("select[name='orderby']").length>0){
-								form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
-							}
-
-							if(jQuery("#tableview_order").val()!=='' && jQuery("#tableview_order_direction").val()!==''){
-								form_data+='&tableview_order='+jQuery("#tableview_order").val();
-								form_data+='&tableview_order_direction='+jQuery("#tableview_order_direction").val();
-							}
-						}
-
-						jQuery.ajax({
-							url: eo_wbc_object.eo_admin_ajax_url,//form.attr('action'),
-							data:form_data, // form data
-							type:'POST', // POST
-							beforeSend:function(xhr){
-								if(eo_wbc_object.hasOwnProperty('xhr')){
-									eo_wbc_object.xhr.abort();
-								}
-								eo_wbc_object.xhr = xhr;
-								jQuery("#loading").addClass('loading');					
-								//console.log(JSON.stringify(form_data).replace("\\",''));
-							},
-							complete : function(){
-								//console.log(this.url);
-							},
-							success:function(data){		
-								//console.log(data);
-								//document.write(data);
-								//jQuery("#loading").removeClass('loading');
-								eo_wbc_e_render_table(data);	
-								// jQuery(".ui.sticky").sticky('refresh');
-							},
-							error:function(data){
-								jQuery("#loading").removeClass('loading');
-							}
-						});						
-						
-						if(!init_call){
-							jQuery(".reset_all_filters.mobile_2").removeClass('mobile_2_hidden');
-						}
-
-						return false;
-					}
-
-			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template2.js
-				//////// 27-05-2022 - @drashti /////////
-				--add to be confirmed 302 TO 375--
-				window.document.splugins.wbc.filters.core.eo_wbc_filter_change_wrapper();
-				jQuery.fn.eo_wbc_filter_change=function(init_call=false)
-				////////////////////////////////////////
-
-				{				
-							
-					var form=jQuery("form#eo_wbc_filter");	
-					
-					jQuery(form).attr('method','POST');	
-					jQuery("[name*='action']").val("eo_wbc_e_tabview");	
-				
-					form_data=undefined;
-					if(init_call){
-						if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
-							_products_in = jQuery("[name='products_in']").val()
-							if(_products_in == undefined){
-								_products_in = '';
-							} else {
-								_products_in = _products_in.trim();
-							}
-							form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:'eo_wbc_e_tabview',products_in:_products_in};
-							if(eo_wbc_e_tabview.eo_table_view_per_page){
-								form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
-							}
-						}
-						else
-						{
-							//form_data={_category:jQuery("[name='_category']").val().trim(),action:'eo_wbc_filter'};	
-							form_data=jQuery("[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
-							if(eo_wbc_e_tabview.eo_table_view_per_page){
-								form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
-							}
-						}
-
-						if(jQuery("select[name='orderby']").length>0){
-							form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
-						}
-					}
-					else{
-						form_data=form.serialize();
-						if(eo_wbc_e_tabview.eo_table_view_per_page){
-							form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
-						}
-
-						if(jQuery("select[name='orderby']").length>0){
-							form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
-						}
-					}
-
-					jQuery.ajax({
-						url: eo_wbc_object.eo_admin_ajax_url,//form.attr('action'),
-						data:form_data, // form data
-						type:'POST', // POST
-						beforeSend:function(xhr){
-							if(eo_wbc_object.hasOwnProperty('xhr')){
-								eo_wbc_object.xhr.abort();
-							}
-							eo_wbc_object.xhr = xhr;
-							jQuery("#loading").addClass('loading');					
-							//console.log(JSON.stringify(form_data).replace("\\",''));
-						},
-						complete : function(){
-							//console.log(this.url);
-						},
-						success:function(data){		
-							//console.log(data);
-							//document.write(data);
-							//jQuery("#loading").removeClass('loading');
-							eo_wbc_e_render_table(data);	
-							// jQuery(".ui.sticky").sticky('refresh');
-						},
-						error:function(data){
-							jQuery("#loading").removeClass('loading');
-						}
-					});						
-					
-					return false;
-				}
+			if(!init_call){
+				jQuery(".reset_all_filters.mobile_2").removeClass('mobile_2_hidden');
+			}
 
 
 
 		}, 
-        // createSubject: function( feature_unique_key, notifications ) {
-        //     // console.log("Observer " + index + " is notified!");
+	        // createSubject: function( feature_unique_key, notifications ) {
+	        //     // console.log("Observer " + index + " is notified!");
 
-        //     // TODO check if subject already created and exist then throw error
-        //     // var index = this.observers.indexOf(observer);
-        //     // if(index > -1) {
-        //     // this.observers.splice(index, 1);
-        //     // }
+	        //     // TODO check if subject already created and exist then throw error
+	        //     // var index = this.observers.indexOf(observer);
+	        //     // if(index > -1) {
+	        //     // this.observers.splice(index, 1);
+	        //     // }
 
-        //     this.subjects.push( window.document.splugins.Feed.events.subject( feature_unique_key, notifications ) );
-        // }, 
-        // subscribeObserver: function(feature_unique_key, callbacks) {
-        //     // console.log("Observer " + index + " is notified!");
+	        //     this.subjects.push( window.document.splugins.Feed.events.subject( feature_unique_key, notifications ) );
+	        // }, 
+	        // subscribeObserver: function(feature_unique_key, callbacks) {
+	        //     // console.log("Observer " + index + " is notified!");
 
-        //     // before subscribing the ovserver check if the feature_unique_key subject is created in the first place, if not then throw error 
-        //     var found_index = null;
-        //     for(var i = 0; i < this.subjects.length; i++){
-        //         if( this.subjects[i].feature_unique_key() == feature_unique_key ) {
+	        //     // before subscribing the ovserver check if the feature_unique_key subject is created in the first place, if not then throw error 
+	        //     var found_index = null;
+	        //     for(var i = 0; i < this.subjects.length; i++){
+	        //         if( this.subjects[i].feature_unique_key() == feature_unique_key ) {
 
-        //             found_index = i;
-        //             break;
-        //         }
-        //     }
+	        //             found_index = i;
+	        //             break;
+	        //         }
+	        //     }
 
-        //     if( found_index == -1 ) {
+	        //     if( found_index == -1 ) {
 
-        //         throw "There is no subject exist for specified feature_unique_key "+feature_unique_key;
-        //     } else {
+	        //         throw "There is no subject exist for specified feature_unique_key "+feature_unique_key;
+	        //     } else {
 
-        //         this.subjects[found_index].subscribeObserver( window.document.splugins.Feed.events.observer( callbacks ) );
-        //     }
-        // },
+	        //         this.subjects[found_index].subscribeObserver( window.document.splugins.Feed.events.observer( callbacks ) );
+	        //     }
+	        // },
         no_products_found: function() {
 
         	create private counter part of the no_products_found function with name no_products_found_private, so that the inner private layers can call that internally -- to d 
@@ -1651,13 +1445,15 @@ jQuery(document).ready(function($){
 		--	and then from just make call to that private function from the init_private of the same module -- to d 
 		--  and comment code below but the filters modules init function need to be called from here -- to d 
 			--	so first export and publish that module under ...api -- to d 
-	jQuery(document).on('click',".reset_all_filters",function(){
-        jQuery("[data-reset]").each(function(e){
-            eval(jQuery(this).data('reset'));
-        })
-        jQuery.fn.eo_wbc_filter_change();
-        return false;
-    })  
+	// jQuery(document).on('click',".reset_all_filters",function(){
+ //        jQuery("[data-reset]").each(function(e){
+ //            eval(jQuery(this).data('reset'));
+ //        })
+ //        jQuery.fn.eo_wbc_filter_change();
+ //        return false;
+ //    })  
+
+ 	init_private();
 
 	if(eo_wbc_object.disp_regular){
 	

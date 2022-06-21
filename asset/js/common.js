@@ -314,75 +314,77 @@ window.document.splugins.wbc.variations = window.document.splugins.wbc.variation
 
 //  TODO right now variations swatches and gallery images are managed through their own js modules and so far there is no need of the central variations core js module, but whenver required we need to create one. 
     have d move to asana, the all below open comments and other comments. for reference keep some part here. and then replace this line only with "moved to asana"
-    things supposed to be managed by the sp_variations 
-        -   data 
-            --  attributes 
-                --  (input) types like dropdown, button, image swatches and so on 
-                --  attribute options/terms 
-                    --  properties of options/terms like if out of stock 
-            --  gallery_images  
-                --  images 
-                --  videos 
-                --  custom_html 
-        -   template 
-            --  will vary based on attribute types, extensions and some other feature related conditions also 
-                --  but to simplify it we can simply depend on template_type or if required then in specific scenarios on the particular template_key
-            --  we will also need to interact (mainly create) the slider and zoom tempaltes 
-                --  the main requirement will be making/creating template dynamic using the image array and so on data 
-                    --  it will almost only on php side 
-                        --  and what we could do is do it using the hooks in our slider and zoom modules php layers 
-                        --  so even our internal slider and zoom js/jquery plugins tempaltes will also be made dynamic using this hooks 
-                        --  so that these hooks become publish ready when we decide to publish the hooks and js api for slider and zoom -- and as planned in one of the option of our four option offering for the gallery_images slider and zoom, that we look forward to try supporting the external zoom and slider with our planned level of efforts, we can (and should) provide service to make the slider and zoom template dynamic using our data by implementing those hooks when those plugins are enabled.  
-                            --  ACTIVE_TODO when we decide to actually publish php hooks and js api for slider and zoom, based on user demand as mentioned below, then at that above planned php hooks will also be published 
-                                --  just for the comments, it seems that as long as any external slider and zoom plugin is providing the key js events like that slider_thumb_click and zoom_area_hover and on php side with above flows we are almost covering the 70-80% of basics requirement to host external slider and zoom dynamically 
-        -   pages 
-            -- category page 
-            -- item page 
-            --- like we implicitly assumed for the devices and so on layers, that there will be flgas like is_mobile, is_tablet that will be used throughout this variations js modules and the other layers interacting with it, similar way we can have the flgas for this pages layers also. like is_category_page and is_item_page. 
-                    -- create above two flags under ..splugins.common namespace, in js.vars.asset.php so no need to pass those as configs here when this module initiated -- to d 
-                --  but yeah since the pages is a significant and major layer so at some place we may like dedicated functions and there would be like some flows will require dedicated functions for the item page while some flows will require dedicated functions for the category page 
-        -   slider and zoom 
-            --  it will mostly be matter of interest to the variations.gallery_images module but since it is vital for overall stability of functions and the overall experience that is why it is considered as a dedicated thing 
-            --  its events -- it may directly or indirectly connect itself to the below events layer mentioned 
-            --  events it listens to simply the events that it mandatorily expects and the events that is optional for it but accepts 
-                --  based on these we can easily define what our hooks (php layer) and js api that we are to provide for slider and zoom would look like or how it will be composed 
-            --  media 
-                --  images 
-                --  in addition to images other things that it may need to support are videos and custom html 
-        -   events 
-                --  mouse events 
-                --  keyboard events 
-                --  legacy events (events of woo emitted on certain scenarios) 
-                --  events emitted by other plugins/themes which we need to take care of in case of compatiblity matters, so it can be termed as the compatiblity events 
-        -   effects and managing after effects 
-                --  may need to provide some effects but only where and if necessary, the majority of effects will be provided by the slider and zoom js/jQuery plugin 
-                --  will need to manage the after effects very precisely, to ensure smooth and non cluttering experience 
-                    --  it may or likely include managing the loading, swaping and updating of images 
-        -   devices 
-                --  is_mobile and is_tablet - this would be primary 
-                        -- create above two flags under ..splugins.common namespace, in js.vars.asset.php so no need to pass those as configs here when this module initiated -- to d 
-                    --  for layers which need to have complete different implementation for mobile etc. then for them applicable flgas should be set/initiated from the higher layers layers for example the slider and zoom would be completely different plugin for mobile devices -- but anyway now we will see to it again to reconsider using the new slider also for mobile but only if that is beneficial in terms of setup time and maintainance time, for the later it would be beneficial but not sure about the initial setup and implementation time and challanges that may arise. 
-                        --  and we would like to reconsider the zoom also in the same way like above 
-                --  browser - will matter so much 
-                --  screen size - need to handle occasionally only as long as overall UI/UX layers are mature 
-                --  os 
-        -   plugins/themes 
-                --  there will be list of compatiblity matters that need to be handled so it will go under the compatiblity matter, and clearly it will go in compatiblity layers 
-                    --  not related to this section but lets create simply a compatiblity module of its own like at the level where templating module is in namespace -- to d --    ACTIVE_TODO/TODO then each modules like filters, variations and so on can have their own module like ...filters.compatiblity just like there ...filters.core core module. but this is only if necessary, otherwise a function inside core module is much readability friendly. 
-                        --  a compatiblity function inside filters, variations.swatches and variations.gallery_images module -- to d 
-        -   configs 
-                --  will control decision of whether to display certain section or not, for example whether to display template part of attribute name (for us ribbon wrapper)
-                --  or whether to show tooltip or not 
-        -   php hooks and js api 
-                        --  but yeah it will be served only if the related requirement is enabled, for example external slider and zoom option is enabled. so that extra hook and event are served or events are bound only if required and it will prevent unnecessary resource usage. 
-            --  would be used by our extensions and would be used for the hooks/js-api support for slider zoom replacement 
-                --  for extensions it would our events module of subject/observer pattern 
-                    --  can we create and publish of it for external use also by users, at least not till it is not well thought and confirmed that it will not create any conflict or issues of any kind otherwise it will create mess for our users too 
-                --  the events that sp_variations provide so that any slider or zoom can at least cover their mandatory events if not the optional 
-                    --  there are two or more important ACTIVE_TODO mentioned here in this common js file, that are important to above point 
-                --  the events that sp_variations will listen to 
-                    --  so that slider zoom can inject their dom and so on 
-                        --  there are two or more important ACTIVE_TODO mentioned here in this common js file, that are important to above point 
+
+    "moved to asana" 
+    // things supposed to be managed by the sp_variations 
+    //     -   data 
+    //         --  attributes 
+    //             --  (input) types like dropdown, button, image swatches and so on 
+    //             --  attribute options/terms 
+    //                 --  properties of options/terms like if out of stock 
+    //         --  gallery_images  
+    //             --  images 
+    //             --  videos 
+    //             --  custom_html 
+    //     -   template 
+    //         --  will vary based on attribute types, extensions and some other feature related conditions also 
+    //             --  but to simplify it we can simply depend on template_type or if required then in specific scenarios on the particular template_key
+    //         --  we will also need to interact (mainly create) the slider and zoom tempaltes 
+    //             --  the main requirement will be making/creating template dynamic using the image array and so on data 
+    //                 --  it will almost only on php side 
+    //                     --  and what we could do is do it using the hooks in our slider and zoom modules php layers 
+    //                     --  so even our internal slider and zoom js/jquery plugins tempaltes will also be made dynamic using this hooks 
+    //                     --  so that these hooks become publish ready when we decide to publish the hooks and js api for slider and zoom -- and as planned in one of the option of our four option offering for the gallery_images slider and zoom, that we look forward to try supporting the external zoom and slider with our planned level of efforts, we can (and should) provide service to make the slider and zoom template dynamic using our data by implementing those hooks when those plugins are enabled.  
+    //                         --  ACTIVE_TODO when we decide to actually publish php hooks and js api for slider and zoom, based on user demand as mentioned below, then at that above planned php hooks will also be published 
+    //                             --  just for the comments, it seems that as long as any external slider and zoom plugin is providing the key js events like that slider_thumb_click and zoom_area_hover and on php side with above flows we are almost covering the 70-80% of basics requirement to host external slider and zoom dynamically 
+    //     -   pages 
+    //         -- category page 
+    //         -- item page 
+    //         --- like we implicitly assumed for the devices and so on layers, that there will be flgas like is_mobile, is_tablet that will be used throughout this variations js modules and the other layers interacting with it, similar way we can have the flgas for this pages layers also. like is_category_page and is_item_page. 
+    //                 -- create above two flags under ..splugins.common namespace, in js.vars.asset.php so no need to pass those as configs here when this module initiated -- to d 
+    //             --  but yeah since the pages is a significant and major layer so at some place we may like dedicated functions and there would be like some flows will require dedicated functions for the item page while some flows will require dedicated functions for the category page 
+    //     -   slider and zoom 
+    //         --  it will mostly be matter of interest to the variations.gallery_images module but since it is vital for overall stability of functions and the overall experience that is why it is considered as a dedicated thing 
+    //         --  its events -- it may directly or indirectly connect itself to the below events layer mentioned 
+    //         --  events it listens to simply the events that it mandatorily expects and the events that is optional for it but accepts 
+    //             --  based on these we can easily define what our hooks (php layer) and js api that we are to provide for slider and zoom would look like or how it will be composed 
+    //         --  media 
+    //             --  images 
+    //             --  in addition to images other things that it may need to support are videos and custom html 
+    //     -   events 
+    //             --  mouse events 
+    //             --  keyboard events 
+    //             --  legacy events (events of woo emitted on certain scenarios) 
+    //             --  events emitted by other plugins/themes which we need to take care of in case of compatiblity matters, so it can be termed as the compatiblity events 
+    //     -   effects and managing after effects 
+    //             --  may need to provide some effects but only where and if necessary, the majority of effects will be provided by the slider and zoom js/jQuery plugin 
+    //             --  will need to manage the after effects very precisely, to ensure smooth and non cluttering experience 
+    //                 --  it may or likely include managing the loading, swaping and updating of images 
+    //     -   devices 
+    //             --  is_mobile and is_tablet - this would be primary 
+    //                     -- create above two flags under ..splugins.common namespace, in js.vars.asset.php so no need to pass those as configs here when this module initiated -- to d 
+    //                 --  for layers which need to have complete different implementation for mobile etc. then for them applicable flgas should be set/initiated from the higher layers layers for example the slider and zoom would be completely different plugin for mobile devices -- but anyway now we will see to it again to reconsider using the new slider also for mobile but only if that is beneficial in terms of setup time and maintainance time, for the later it would be beneficial but not sure about the initial setup and implementation time and challanges that may arise. 
+    //                     --  and we would like to reconsider the zoom also in the same way like above 
+    //             --  browser - will matter so much 
+    //             --  screen size - need to handle occasionally only as long as overall UI/UX layers are mature 
+    //             --  os 
+    //     -   plugins/themes 
+    //             --  there will be list of compatiblity matters that need to be handled so it will go under the compatiblity matter, and clearly it will go in compatiblity layers 
+    //                 --  not related to this section but lets create simply a compatiblity module of its own like at the level where templating module is in namespace -- to d --    ACTIVE_TODO/TODO then each modules like filters, variations and so on can have their own module like ...filters.compatiblity just like there ...filters.core core module. but this is only if necessary, otherwise a function inside core module is much readability friendly. 
+    //                     --  a compatiblity function inside filters, variations.swatches and variations.gallery_images module -- to d 
+    //     -   configs 
+    //             --  will control decision of whether to display certain section or not, for example whether to display template part of attribute name (for us ribbon wrapper)
+    //             --  or whether to show tooltip or not 
+    //     -   php hooks and js api 
+    //                     --  but yeah it will be served only if the related requirement is enabled, for example external slider and zoom option is enabled. so that extra hook and event are served or events are bound only if required and it will prevent unnecessary resource usage. 
+    //         --  would be used by our extensions and would be used for the hooks/js-api support for slider zoom replacement 
+    //             --  for extensions it would our events module of subject/observer pattern 
+    //                 --  can we create and publish of it for external use also by users, at least not till it is not well thought and confirmed that it will not create any conflict or issues of any kind otherwise it will create mess for our users too 
+    //             --  the events that sp_variations provide so that any slider or zoom can at least cover their mandatory events if not the optional 
+    //                 --  there are two or more important ACTIVE_TODO mentioned here in this common js file, that are important to above point 
+    //             --  the events that sp_variations will listen to 
+    //                 --  so that slider zoom can inject their dom and so on 
+    //                     --  there are two or more important ACTIVE_TODO mentioned here in this common js file, that are important to above point 
 
 // the variations swatches js module
 window.document.splugins.wbc.variations.swatches = window.document.splugins.wbc.variations.swatches || {};
