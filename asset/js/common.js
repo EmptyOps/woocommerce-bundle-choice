@@ -73,7 +73,9 @@ window.document.splugins.Feed = window.document.splugins.Feed || {};
     //  NOTE: whenever if any requirements comes up of supporting the jquery events based on their trigger/on api functions then that can as usual be supported internally, all that is needed is is register subject with one additional param that is event_core_backend=jQuery. -- and on this regard the syntax can also bring as much closer as possible to that of jQuery syntax but yeah we will need atleast something like sp_e or so just like _ underscore js have _ in there for everything. 
 window.document.splugins.events = window.document.splugins.events || {};
 
-window.document.splugins.events.subject = function( feature_unique_key, notifications ) {
+window.document.splugins.events.subject = window.document.splugins.events.subject || {};
+
+window.document.splugins.events.subject.core = function( feature_unique_key, notifications ) {
     this.feature_unique_key = feature_unique_key;
     this.notifications = notifications;     // [];    //  list of notifications it can notify for.  
     this.observers = [];
@@ -110,7 +112,12 @@ window.document.splugins.events.subject = function( feature_unique_key, notifica
     };
 };
 
-window.document.splugins.events.observer = function(callbacks) {
+//  publish it 
+window.document.splugins.events.subject.api = window.document.splugins.events.subject.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
+
+window.document.splugins.events.observer = window.document.splugins.events.observer || {};
+
+window.document.splugins.events.observer.core = function(callbacks) {
     this.callbacks = callbacks;     // [];    //  list of notifications callbacks it waits for.  
 
     return {
@@ -127,6 +134,9 @@ window.document.splugins.events.observer = function(callbacks) {
         }
     }
 }
+
+//  publish it 
+window.document.splugins.events.observer.api = window.document.splugins.events.observer.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
 
 window.document.splugins.events.core = function() {
     this.subjects = [];
@@ -189,6 +199,10 @@ window.document.splugins.events.core = function() {
 
     }
 }
+
+
+//  publish it 
+window.document.splugins.events.api = window.document.splugins.events.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
 
 // var subject = new Subject();
 
@@ -526,11 +540,11 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
 
         init: function() {
 
-            window.document.splugins.variation.events.core.notifyAllObservers( 'variation', 'before_search' ); 
+            window.document.splugins.variation.events.api.notifyAllObservers( 'variation', 'before_search' ); 
         },
         before_search: function() {
 
-            window.document.splugins.variation.events.core.notifyAllObservers( 'variation', 'before_search' ); 
+            window.document.splugins.variation.events.api.notifyAllObservers( 'variation', 'before_search' ); 
         }, 
         // createSubject: function( feature_unique_key, notifications ) {
         //     // console.log("Observer " + index + " is notified!");
@@ -566,7 +580,7 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
         // },
         no_products_found: function() {
 
-            window.document.splugins.variation.events.core.notifyAllObservers( 'variation', 'no_products_found' );
+            window.document.splugins.variation.events.api.notifyAllObservers( 'variation', 'no_products_found' );
         }, 
 
     }; 
@@ -767,11 +781,11 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
 
         init: function() {
 
-            window.document.splugins.variation.events.core.notifyAllObservers( 'variation', 'before_search' ); 
+            window.document.splugins.variation.events.api.notifyAllObservers( 'variation', 'before_search' ); 
         },
         before_search: function() {
 
-            window.document.splugins.variation.events.core.notifyAllObservers( 'variation', 'before_search' ); 
+            window.document.splugins.variation.events.api.notifyAllObservers( 'variation', 'before_search' ); 
         }, 
         // createSubject: function( feature_unique_key, notifications ) {
         //     // console.log("Observer " + index + " is notified!");
@@ -807,7 +821,7 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
         // },
         no_products_found: function() {
 
-            window.document.splugins.variation.events.core.notifyAllObservers( 'variation', 'no_products_found' );
+            window.document.splugins.variation.events.api.notifyAllObservers( 'variation', 'no_products_found' );
         }, 
 
     }; 
