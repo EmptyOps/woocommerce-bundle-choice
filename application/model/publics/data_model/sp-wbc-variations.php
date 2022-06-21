@@ -49,6 +49,8 @@ class SP_WBC_Variations extends SP_Variations {
 		}elseif( $for_section == "swatches_init" ) {
 			add_filter( 'woocommerce_ajax_variation_threshold',  function($int){
 
+				return absint( woo_variation_swatches()->get_option( 'threshold' ) );
+
 				// ACTIVE_TODO implement, check that other plugin we were exploring -- to d
 				// ACTIVE_TODO	--	and implement if logically useful -- to d  
 

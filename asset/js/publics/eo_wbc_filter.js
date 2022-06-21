@@ -138,6 +138,156 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				form_data+='&action=eo_wbc_e_tabview';
 			}
 
+
+			// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
+			// --add to be confirmed 3159 TO 3232--
+
+			var form=jQuery("form#eo_wbc_filter");	
+											
+			jQuery(form).attr('method','POST');	
+			jQuery("[name*='action']").val("eo_wbc_e_tabview");	
+
+			form_data=undefined;
+			if(init_call){
+				if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
+					_products_in = jQuery("[name='products_in']").val()
+					if(_products_in == undefined){
+						_products_in = '';
+					} else {
+						_products_in = _products_in.trim();
+					}
+					form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:'eo_wbc_e_tabview',products_in:_products_in};
+					if(eo_wbc_e_tabview.eo_table_view_per_page){
+						form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
+					}
+				}
+				else
+				{
+					//form_data={_category:jQuery("[name='_category']").val().trim(),action:'eo_wbc_filter'};	
+					form_data=jQuery("[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
+					if(eo_wbc_e_tabview.eo_table_view_per_page){
+						form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
+					}
+				}
+
+				if(jQuery("select[name='orderby']").length>0){
+					form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
+				}
+			}
+			else{
+				form_data=form.serialize();
+				if(eo_wbc_e_tabview.eo_table_view_per_page){
+					form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
+				}
+
+				if(jQuery("select[name='orderby']").length>0){
+					form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
+				}
+			}
+
+
+			// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template1.js
+			// --add to be confirmed 630 TO 734--
+
+			var form=jQuery("form#eo_wbc_filter");	
+									
+			jQuery(form).attr('method','POST');	
+			jQuery("[name*='action']").val(eo_wbc_e_tabview.eo_ajax_func);	
+
+			form_data=undefined;
+			if(init_call){
+				if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
+					_products_in = jQuery("[name='products_in']").val()
+					if(_products_in == undefined){
+						_products_in = '';
+					} else {
+						_products_in = _products_in.trim();
+					}
+					form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:eo_wbc_e_tabview.eo_ajax_func,products_in:_products_in};
+					if(eo_wbc_e_tabview.eo_table_view_per_page){
+						form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
+					}
+				}
+				else
+				{
+					//form_data={_category:jQuery("[name='_category']").val().trim(),action:'eo_wbc_filter'};	
+					form_data=jQuery("#tableview_order,#tableview_order_direction,[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
+					if(eo_wbc_e_tabview.eo_table_view_per_page){
+						form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
+					}
+				}
+
+				if(jQuery("select[name='orderby']").length>0){
+					form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
+				}
+
+				if(jQuery("select[name='orderby']").length>0){
+					form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
+				}
+			}
+			else{
+				form_data=form.serialize();
+				if(eo_wbc_e_tabview.eo_table_view_per_page){
+					form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
+				}
+
+				if(jQuery("select[name='orderby']").length>0){
+					form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
+				}
+
+				if(jQuery("#tableview_order").val()!=='' && jQuery("#tableview_order_direction").val()!==''){
+					form_data+='&tableview_order='+jQuery("#tableview_order").val();
+					form_data+='&tableview_order_direction='+jQuery("#tableview_order_direction").val();
+				}
+			}
+
+
+			// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template2.js
+			// --add to be confirmed 302 TO 375--
+
+			var form=jQuery("form#eo_wbc_filter");	
+								
+			jQuery(form).attr('method','POST');	
+			jQuery("[name*='action']").val("eo_wbc_e_tabview");	
+
+			form_data=undefined;
+			if(init_call){
+				if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
+					_products_in = jQuery("[name='products_in']").val()
+					if(_products_in == undefined){
+						_products_in = '';
+					} else {
+						_products_in = _products_in.trim();
+					}
+					form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:'eo_wbc_e_tabview',products_in:_products_in};
+					if(eo_wbc_e_tabview.eo_table_view_per_page){
+						form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
+					}
+				}
+				else
+				{
+					//form_data={_category:jQuery("[name='_category']").val().trim(),action:'eo_wbc_filter'};	
+					form_data=jQuery("[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
+					if(eo_wbc_e_tabview.eo_table_view_per_page){
+						form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
+					}
+				}
+
+				if(jQuery("select[name='orderby']").length>0){
+					form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
+				}
+			}
+			else{
+				form_data=form.serialize();
+				if(eo_wbc_e_tabview.eo_table_view_per_page){
+					form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
+				}
+
+				if(jQuery("select[name='orderby']").length>0){
+					form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
+				}
+			}
+
 	};	
 
 	// so here there will be those ajax callback functions like beforeSend, complete, success, error and so on? mostly yes so that we can call it from wrapper and especially put all the refactored code from different instances of ht eo_wbc_filter_change functions in here 
@@ -149,6 +299,49 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		window.eo_wbc_object.enable_filter_table = false;
 		jQuery("#loading").addClass('loading');					
 		//console.log(JSON.stringify(form_data).replace("\\",''));
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
+		// --add to be confirmed & 2187 TO 2324-- 
+
+		window.eo_wbc_object.enable_filter_table = false;
+		jQuery("#loading").addClass('loading');
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
+		// --add to be confirmed 2601 TO 2705--	
+
+		if(eo_wbc_object.hasOwnProperty('xhr')){
+			eo_wbc_object.xhr.abort();
+		}
+		eo_wbc_object.xhr = xhr;
+		jQuery("#loading").addClass('loading');	
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
+		// --add to be confirmed 3159 TO 3232--
+
+		if(eo_wbc_object.hasOwnProperty('xhr')){
+			eo_wbc_object.xhr.abort();
+		}
+		eo_wbc_object.xhr = xhr;
+		jQuery("#loading").addClass('loading');	   
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template1.js
+		// --add to be confirmed 630 TO 734--	
+
+		if(eo_wbc_object.hasOwnProperty('xhr')){
+			eo_wbc_object.xhr.abort();
+		}
+		eo_wbc_object.xhr = xhr;
+		jQuery("#loading").addClass('loading');	
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template2.js
+		// --add to be confirmed 302 TO 375--	
+
+		if(eo_wbc_object.hasOwnProperty('xhr')){
+			eo_wbc_object.xhr.abort();
+		}
+		eo_wbc_object.xhr = xhr;
+		jQuery("#loading").addClass('loading');
+
 	};
 
 	var complete = function(){
@@ -169,6 +362,37 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		eo_wbc_e_render_table(type,data);	
 		window.eo_wbc_object.enable_filter_table = true;
 		// jQuery(".ui.sticky").sticky('refresh');
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
+		--add to be confirmed & 2187 TO 2324--
+
+		eo_wbc_e_render_table(type,data);	
+		window.eo_wbc_object.enable_filter_table = true; 
+
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
+		--add to be confirmed 2601 TO 2705--
+
+		eo_wbc_e_render_table(data);
+
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
+		--add to be confirmed 3159 TO 3232--
+
+		eo_wbc_e_render_table(data);
+
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template1.js
+		--add to be confirmed 630 TO 734--
+
+		eo_wbc_e_render_table(data);
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template2.js
+		--add to be confirmed 302 TO 375--
+
+		eo_wbc_e_render_table(data);
+
+
 	}; 
 
 	var error = function(data){
@@ -176,6 +400,35 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		console.log('error');
 		console.log(data);
 		window.eo_wbc_object.enable_filter_table = true;
+
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
+		// --add to be confirmed & 2187 TO 2324-- 
+
+		jQuery("#loading").removeClass('loading');
+		console.log('error');
+		console.log(data);
+		window.eo_wbc_object.enable_filter_table = true;
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
+		// --add to be confirmed 2601 TO 2705--	
+			    			
+		jQuery("#loading").removeClass('loading');	
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
+		// --add to be confirmed 3159 TO 3232--	
+
+		jQuery("#loading").removeClass('loading');		
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template1.js
+		// --add to be confirmed 630 TO 734--    
+
+		jQuery("#loading").removeClass('loading');	
+
+		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template2.js
+		// --add to be confirmed 302 TO 375--	
+
+		jQuery("#loading").removeClass('loading');
 	};
 
     ///////////// -- 15-06-2022 -- @drashti -- ///////////////////////////////

@@ -24,7 +24,7 @@ class Options extends \eo\wbc\controllers\publics\Controller {
     }
 
 
-    public function init($args = null){
+    public function init($args = array()){
 
     	$args['data'] = \eo\wbc\model\publics\SP_Model_Single_Product()::instance()->get_data('swatches_init');
         \eo\wbc\controller\publics\Options::instance()->selectron('swatches',$args);
@@ -32,13 +32,15 @@ class Options extends \eo\wbc\controllers\publics\Controller {
         $args['data'] = \eo\wbc\model\publics\SP_Model_Single_Product()::instance()->get_data('gallery_images_init');
         \eo\wbc\model\publics\SP_Model_Single_Product::instance()->render_gallery_images_template($args);
 
+
     	call the getUI from here once so that default render_ui is called once at last for handling general matters -- to b 
-    		--	and for getUI set two args first is $page_section and second is $args -- to b 
-    			-- empty page_section means call will go to default render_ui function -- to b 
-    				--	and so page_section param will also be passed to get_ui_definition but there it will be passed through in args param -- to b 
+    		//--	and for getUI set two args first is $page_section and second is $args -- to b done
+    			//-- empty page_section means call will go to default render_ui function -- to b done
+    				//--	and so page_section param will also be passed to get_ui_definition but there it will be passed through in args param -- to b done
+    	$this->getUI(null);
     }
 
-    public function selectron_hook_render($page_section,$container_class,$args = null){
+    public function selectron_hook_render($page_section,$container_class,$args = array()){
 
     	if ($page_section == 'swatches') {
     		if ($container_class == 'woo_variation_attr_html') {
@@ -50,7 +52,7 @@ class Options extends \eo\wbc\controllers\publics\Controller {
     	}
     }
 
-    private function selectron($page_section,$args = null){
+    private function selectron($page_section,$args = array()){
 
     	//--	move below to options controller selectron function -- to b done
 			//--	and from init function of the same controller call the selectron with page_section=swatches and args param that init may have or null -- to b  done
@@ -70,19 +72,19 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 		}
     }
 
-    private function load_view(){
+    private function load_view($data,$args = array()){
 
     	// NOTE: since so far we do not needed to create the view class and the actual ui is also coming from the templates folder so, so far not creating the view class. and just implementing the required logic from here. but if it become necessary then in future create the view class. 
 
     	$this->render_swatches_data_by_attribute_type($data,$args);
     }
 
-    private function getUI($page_section,$args = null){
+    private function getUI($page_section,$args = array()){
 
     	$args['page_section'] = $page_section;
     	
     	if ($page_section == 'woo_dropdown_attribute_html' or $page_section == 'variable_item' or $page_section == 'variable_item_wrapper') {
-    		$this->get_ui_definition($args)
+    		$this->get_ui_definition($args);
     	}else{	
 
         	\eo\wbc\model\publics\SP_Model_Single_Product::instance()->render_ui( $this->get_ui_definition($args));

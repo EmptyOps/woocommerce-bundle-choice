@@ -1670,16 +1670,26 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		$post_thumbnail_id = (int) apply_filters( 'woo_variation_gallery_post_thumbnail_id', $post_thumbnail_id, $attachment_ids, $product );
 		$attachment_ids    = (array) apply_filters( 'woo_variation_gallery_attachment_ids', $attachment_ids, $post_thumbnail_id, $product );
 
-		bind to hook from here for the hook that is applied from both slider and zoom module for the images. means add filter here, and provide back with gallery_images data. so simply entire data var will be added to filter var but yeah the variation_gallery_images, attachment_ids etc. would be key -- to b 
+		//bind to hook from here for the hook that is applied from both slider and zoom module for the images. means add filter here, and provide back with gallery_images data. so simply entire data var will be added to filter var but yeah the variation_gallery_images, attachment_ids etc. would be key -- to b done
+		add_filter('sp_slzm_slider_images',function($hook_data) use($data){
 
-		and also do a action hook from here with key sp_variations_gallery_images_render -- to b 
-			-- and the init core or render core function, whichever is applicable, will add action to above hook -- b 
-				-- and so all three hooks of both slider and zoom module should be applied or bind to within this action hook -- to b 
+			return $data;
+
+		});
+		add_filter('sp_slzm_zoom_images',function($hook_data) use($data){
+
+			return $data;
+
+		});
+
+		//and also do a action hook from here with key sp_variations_gallery_images_render -- to b done
+			//-- and the init core or render core function, whichever is applicable, will add action to above hook -- b done
+				//-- and so all three hooks of both slider and zoom module should be applied or bind to within this action hook -- to b done
 				do_action( 'sp_variations_gallery_images_render');
 
-		create list of woo hooks that are used below -- to d 
-			--wc_placeholder_img_src
-			--woocommerce_single_product_image_thumbnail_html
+		//create list of woo hooks that are used below -- to d done
+			--wc_placeholder_img_src, gallery and slider templating layer ma implementation kervanu che -- to b
+			--woocommerce_single_product_image_thumbnail_html, gallery and slider templating layer ma implementation kervanu che -- to b
 
 			-- and then at least our default slider and zoom frontend that is provided should respect these hooks. soo apply these hooks there -- to d 
 				--	also create list of other such matters that may have missed here -- to d 
