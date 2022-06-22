@@ -1006,11 +1006,11 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
         
         if(type == 'buttons'){
 
-            compatability();
+            compatability("button_section");
 
         }else if(type == 'image'){
 
-            compatability();
+            compatability("image_section");
 
         } 
 
