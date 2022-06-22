@@ -69,51 +69,82 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 								'value'=>'sp_variations',
 							),
 
-							'sp_variations_image'=>array(
-								'label'=>'Video &amp; Custom Field',
+							'devider1'=>array(
+								'label'=>'Gallery Images',
+								'type'=>'devider'
+							),
+
+							'gallary_images'=>array(
+								'label'=>' ',
 								'type'=>'icon',
 								'sanitize'=>'sanitize_text_field',
+								'dynamic_add_support_start'=>true,
 								'value'=>array(''),
 								'class'=>array(),
 								'size_class'=>array('eight','wide'),
 								'inline'=>true,
-								'dynamic_add_support_start'=>true,
 								'save_as'=>'post_meta',
+								'dynamic_add_support_end'=>true,
 							),
 
-							'sp_variations_video'=>array(
-								'label'=>'Video',
+							'devider2'=>array(
+								'label'=>'Video & Custum Field',
+								'type'=>'devider'
+							),
+
+							'video_custum_field'=>array(
+								'label'=>'',
 								'type'=>'file',
 								'sanitize'=>'sanitize_text_field',
 								'value'=>array(''),
 								'class'=>array(),
 								'size_class'=>array('eight','wide'),
 								'inline'=>true,
-								'dynamic_add_support_end'=>true,
 								'save_as'=>'post_meta',
+							),
+
+							'video_segment'=>array(
+								'label'=>'(Video)',
+								'type'=>'segment'
 							),
 
 							'sp_variations_video_url'=>array(
-								'label'=>'Video',
+								'label'=>'',
 								'type'=>'text',
 								'sanitize'=>'sanitize_text_field',
-								'value'=>array(''),
+								'value'=>'',
 								'class'=>array(),
 								'size_class'=>array('eight','wide'),
 								'inline'=>true,
 								'save_as'=>'post_meta',
+							),
+							'video_url_segment'=>array(
+								'label'=>'(Video Url)',
+								'type'=>'segment'
+							),
+							
+							'devider3'=>array(
+								'label'=>' ',
+								'type'=>'devider'
 							),
 
-							'sp_variations_image2'=>array(
-								'label'=>'images',
+							'gallary_images2'=>array(
+								'label'=>' ',
 								'type'=>'icon',
 								'sanitize'=>'sanitize_text_field',
+								'dynamic_add_support_start'=>true,
 								'value'=>array(''),
+								'multiple_add_support'=>'start',
 								'class'=>array(),
 								'size_class'=>array('eight','wide'),
 								'inline'=>true,
-								'save_as'=>'post_meta',
+								/*'save_as'=>'post_meta',*/
+								'dynamic_add_support_end'=>true,
 							),
+							'images_segment'=>array(
+								'label'=>'(Images)',
+								'type'=>'segment'
+							)
 
 							/*'submit_button'=>array(
 								'label'=>eowbc_lang('Save'),
