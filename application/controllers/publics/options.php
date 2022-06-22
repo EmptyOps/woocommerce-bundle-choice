@@ -92,9 +92,15 @@ class Options extends \eo\wbc\controllers\publics\Controller {
     } 
 
     private function get_ui_definition($args = array()){
+
+    	--	make below type var dynamic now -- to b
     	$type = 'button';
     	
+    	and make all four templates below dynamic, based on the points added on data layer and also there might be some on the template files -- to b 
+
     	if ($args['page_section'] == 'woo_dropdown_attribute_html') {
+
+    		drop type var from below and set name of the one only template, simply set it hardcoded -- to b 
 
     		$args['widget_key'] = '';
     		$args['template_sub_dir'] = 'single-product/variations-swatches/woo_dropdown_attribute/'.$type;
@@ -111,8 +117,15 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 
     		}
 
+    		dropd template part from both actual key params below, it will be loaded from inside the below main template -- to b 
+    			--	from inside the commong template below the particular template would be loaded -- to b 
+    				--	and on this note for non dropdown types we can simply one file and load their specific option_template_part from there. but lets keep theme together only if they share common code -- to b 
+    			--	and from that particular template the their option_template_part would be loaded 
+
+    			--	so there would be some heirarchical if conditions that will be required, the conditions would be based on $type -- to b 
+
     		$args['data']['template_data'] = array();
-    		$args['data']['template_data']['template_key_actual'] = 'sp_variations_optionsUI-'.$type.'-option_template_part';
+    		$args['data']['template_data']['template_key'] = 'sp_variations_optionsUI-'.$type.'-option_template_part';
     		$args['data']['template_data']['template_sub_dir'] = 'single-product/variations-swatches/'.$type;
 
     		$args['widget_key'] = '';
@@ -123,6 +136,8 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 	        $args['plugin_slug'] = '';
 
     	}else if ($args['page_section'] == 'variable_item_wrapper') {
+
+    		drop type var from below and set name of the one only template, simply set it hardcoded -- to b 
 
     		$args['widget_key'] = '';
     		$args['template_sub_dir'] = 'single-product/variations-swatches/'.$type;

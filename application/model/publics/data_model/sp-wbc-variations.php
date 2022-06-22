@@ -49,6 +49,9 @@ class SP_WBC_Variations extends SP_Variations {
 		}elseif( $for_section == "swatches_init" ) {
 			add_filter( 'woocommerce_ajax_variation_threshold',  function($int){
 
+				first of all need to research about ajax variation settings, and everything about woocommerce ajax variations, so just need search all its settings -- to h and -- to d 
+					--	and then find appropriate settings value and set that hardcoded from here -- to d 
+						--	ACTIVE_TODO/TODO very soon we may like to provide the above setting on admin or something such -- to h and -- to s 
 				return absint( woo_variation_swatches()->get_option( 'threshold' ) );
 
 				// ACTIVE_TODO implement, check that other plugin we were exploring -- to d
