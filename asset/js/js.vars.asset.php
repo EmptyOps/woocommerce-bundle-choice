@@ -21,11 +21,11 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 	
 	}else if('is_mobile' == true){
 
-		window.document.splugins.common.is_item_page = window.document.splugins.common.is_item_page || {};
+		window.document.splugins.common.is_mobile = window.document.splugins.common.is_mobile || {};
 	
 	}else if('is_tablet' == true){
 
-		window.document.splugins.common.is_item_page = window.document.splugins.common.is_item_page || {};
+		window.document.splugins.common.is_tablet = window.document.splugins.common.is_tablet || {};
 	}
 
 </script>
