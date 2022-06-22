@@ -1213,55 +1213,10 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
         preprocess_data( _this.data );   
 
         do necessary bindings for the gallery images  
-            --  will need a dedicated function namely process_images -- to d 
+            --done  will need a dedicated function namely process_images -- to d 
                 --  and since the actual images would be available only after the variation change event(and specifically the event binding and other stat should be set and maintained for currently active images of current variation only so it must be on variation change event, and in case of simple product types that will not be the cases) so the process_images function should be called on each such stat changes -- to d 
-                    --  move entire section below inside that function -- to d 
-        //  process images  
-        _this.data.images.each( function( image ) {
-
-            --  the key controller here in case of gallery_images module, for defining the calling sequences and flow will be, the image index(even though we had plan to use index but that is only when it is must to use that), otherwise there should be gallery_item_type field that take care implicitly the things like custom_html images for zoom area and so on 
-                    --  so should we plan gallery_item_type field support? maybe it is good idea, to have such field support right from the config file function planned for each extensions, while for wbc gallery items like image and videos it will be gallery_item_type=image or video. -- to h 
-            --  so above preprocess_data call should simply prepare two attribute types list, first is attribute_types and second is ... or simply one only. and simply delegate everything else that is not coming under attribute_types, to the extensions layers. and should simply publish this list of attribute_types from backend. 
-            NOTE: and one of the key benefit of this approach is that these layers will emit the broadcast notification event only if they detect the type to be the premiumly supported type and otherwise not. which would minimize process and little or not hanging processes and less debug console logs that would appear around. 
-
-            is the woo input template type means dropdown is mandatorily kept by plugins, not seems likely but still confirm and then we need a way to determine(always) the exact input type based on the field/input type selected on woo panel or otherwise simply support the input_template_type field which will be set in background implicitly based on the field/input type selected on woo panel -- this field is simply better then managing many different template names of extensions and defining based on that -- and it will default to the above field/input type for wbc nothing to manage, only if condition below that if input_template_type is not defined then read simply above field/input type. and in case of extensions that need to be defined based on the template that is selected on their admin panel. so this template option should be only be defining it and passing it where applicable so that is gets here. and it is need to be defined based on that only to avoid confusion and many unnecessary and confusing configuration overheads. no simply need to stick to attribute type only means field/input-type selected on woo panel and that is standard and clean. so implement here based on that only. -- to h or -- to d 
-
-
-            if( type == '?' )
-             do necessary logic if support is available
-                --  that means based on type call/process necessary functions/layers for example events functions(some events functions already defined below), template functions/layers, pages functions/layers, like events the effects functions/layers, plugins/themes applicable compatiblity function calls, slider and zoom functions/layers(note that even for swatches modules there might be some conditions or conditional logics that would be required) -- to d 
-                --  and also do call/process necessary functions/layers for the provided device type(and maybe some of their specifications would also need to be handled in future like width(which would otherwise mostly be dynamically handled), resolution and so on ACTIVE_TODO) and configs, but it will be a specific block here only and the dedicated function for them sound unnecessary -- to d
-                    --  and we need some logic of if function or layer need to be called once only then take care of that, for all above functions, including the devices and configs that are to be handled from here -- to d 
-                    --  and as usual there will going to be if conditions for applicable matters in applicable functions and their layers defined above, to handle the devices and configuration specific matters. and so the dedicated blocks of devices and configs will handle some specific matters which do not necessarily mixed with other things mentioned above like events, template, pages and so on layers. -- to h             
-            , if not for example slider input is not supported then host the listener event so that extension js do its job or simply skip it and let extension js do their part 
-                --  and we can and should simply use observer pattern events to host for example the slider listener here and then emit internal change event from here     
-                    --  still in this case the variation.swatches will register its event subject and emit bootstrap level notification like bootstrap/on.load maybe on.load is more user friendly 
-                    --  then at that time applicable extension will bootstrap the js layer 
-                    --  and when the change event occurs the applicable extension will simply call the ...swatches.api function to notify back about their change event or the events module can add support to provide callbacks to subscriber so that they can reply with something when they have done something based on notification. so it can be called the notification_response. -- but it will be about breaking our own rule of keeping the events simple. so even if we must do then in that case it must be till notification_response only and no further callback back and forth can be supported. otherwise it mostly lead to long debug sequences. --  however it has benefit of less maintainance since otherwise extensions need to know about the ...swatches.api but in case of events support of notification_response it only need to learn about and depend on the variations.swatches subject of events module. and as long as we can keep it limited to notification_response only and do not extend it further it will be clean to be frank. 
-
-
-                    --  and we are planning to host darker/lighter slider support also from here as usual so it will be just like above slider example 
-                        --  but yeah after the change event is recieved here that will be emitted to the gallery_images module to let them do their job. since darker lighter is not part of the variation there is no further thing to do from here after the change event is recieved. 
-                            --  and since it is different kind processing that is required after change event so the input_template_type must be defined uniquely like slider_no_variation 
-                                NOTE: and yeah on that note everything of the sp_variations module must be dynamic and nothing should be hardcoded so slider_no_variation input template type must be passed right from where the template is defined on admin to till here 
-            if( type == 'radio' ) 
-
-                -   configs 
-                        --  will control decision of whether to display certain section or not, for example whether to display template part of attribute name (for us ribbon wrapper)
-                        --  or whether to show tooltip or not 
-
-            --  it wil be a specific block here for devices and configs -- to d 
-            --  while for the rest create dedicated functions like process_template, process_events and so on. for the layers listed below. 
-                --  create below list of functions after the process_attribute_types function, and apply above peudo flows there and rest of the flows those functions should adapt from the flow notes from the heirachical flow plan at top -- to d and -- to h 
-                    -- process_template -- to d
-                    -- process_pages -- to d
-                    -- process_slider_and_zoom -- to d
-                    -- process_events -- to d
-                    -- process_and_manage_effects -- to d
-                    -- process_compatability_matters -- to d
-            
-        }); 
-
+                    --done  move entire section below inside that function -- to d 
+        
         //  data applicable loops 
         _this.data.product_variations.each( function() {
 
@@ -1680,6 +1635,174 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
     //  hooks and js api for our users to use their own preferred slider and zoom plugin. so it will be as per the user demand or something such. 
     // --  mouse events 
         - listener events 
+    
+    var preprocess_data = function() {
+
+        ACTIVE_TODO not sure if this is necessary 
+        this._generated = this.product_variations.reduce(function (obj, variation) {
+
+          Object.keys(variation.attributes).map(function (attribute_name) {
+            if (!obj[attribute_name]) {
+              obj[attribute_name] = [];
+            }
+
+            if (variation.attributes[attribute_name]) {
+              obj[attribute_name].push(variation.attributes[attribute_name]);
+            }
+          });
+
+          return obj;
+        }, {});
+
+        ACTIVE_TODO but we will make use of it from beginning 
+        this._out_of_stock = this.product_variations.reduce(function (obj, variation) {
+
+          Object.keys(variation.attributes).map(function (attribute_name) {
+            if (!obj[attribute_name]) {
+              obj[attribute_name] = [];
+            }
+
+            if (variation.attributes[attribute_name] && !variation.is_in_stock) {
+              obj[attribute_name].push(variation.attributes[attribute_name]);
+            }
+          });
+
+          return obj;
+        }, {});
+    };
+
+    var process_images = function() {
+
+        //  process images
+        _this.data.images.each( function( image ) {
+
+            --  the key controller here in case of gallery_images module, for defining the calling sequences and flow will be, the image index(even though we had plan to use index but that is only when it is must to use that), otherwise there should be gallery_item_type field that take care implicitly the things like custom_html images for zoom area and so on 
+                    --  so should we plan gallery_item_type field support? maybe it is good idea, to have such field support right from the config file function planned for each extensions, while for wbc gallery items like image and videos it will be gallery_item_type=image or video. -- to h 
+            --  so above preprocess_data call should simply prepare two attribute types list, first is attribute_types and second is ... or simply one only. and simply delegate everything else that is not coming under attribute_types, to the extensions layers. and should simply publish this list of attribute_types from backend. 
+            NOTE: and one of the key benefit of this approach is that these layers will emit the broadcast notification event only if they detect the type to be the premiumly supported type and otherwise not. which would minimize process and little or not hanging processes and less debug console logs that would appear around. 
+
+            is the woo input template type means dropdown is mandatorily kept by plugins, not seems likely but still confirm and then we need a way to determine(always) the exact input type based on the field/input type selected on woo panel or otherwise simply support the input_template_type field which will be set in background implicitly based on the field/input type selected on woo panel -- this field is simply better then managing many different template names of extensions and defining based on that -- and it will default to the above field/input type for wbc nothing to manage, only if condition below that if input_template_type is not defined then read simply above field/input type. and in case of extensions that need to be defined based on the template that is selected on their admin panel. so this template option should be only be defining it and passing it where applicable so that is gets here. and it is need to be defined based on that only to avoid confusion and many unnecessary and confusing configuration overheads. no simply need to stick to attribute type only means field/input-type selected on woo panel and that is standard and clean. so implement here based on that only. -- to h or -- to d 
+
+
+            if( type == '?' )
+             do necessary logic if support is available
+                --  that means based on type call/process necessary functions/layers for example events functions(some events functions already defined below), template functions/layers, pages functions/layers, like events the effects functions/layers, plugins/themes applicable compatiblity function calls, slider and zoom functions/layers(note that even for swatches modules there might be some conditions or conditional logics that would be required) -- to d 
+                --  and also do call/process necessary functions/layers for the provided device type(and maybe some of their specifications would also need to be handled in future like width(which would otherwise mostly be dynamically handled), resolution and so on ACTIVE_TODO) and configs, but it will be a specific block here only and the dedicated function for them sound unnecessary -- to d
+                    --  and we need some logic of if function or layer need to be called once only then take care of that, for all above functions, including the devices and configs that are to be handled from here -- to d 
+                    --  and as usual there will going to be if conditions for applicable matters in applicable functions and their layers defined above, to handle the devices and configuration specific matters. and so the dedicated blocks of devices and configs will handle some specific matters which do not necessarily mixed with other things mentioned above like events, template, pages and so on layers. -- to h    
+                    
+
+                    process_template(type);
+
+                    process_pages(type);
+                    
+                    process_slider_and_zoom(type);
+                    
+                    process_events(type);
+
+                    process_and_manage_effects(type);
+
+                    process_compatability_matters(type);
+
+                -   devices 
+                        --  for layers which need to have complete different implementation for mobile etc. then for them applicable flgas should be set/initiated from the higher layers layers for example the slider and zoom would be completely different plugin for mobile devices -- but anyway now we will see to it again to reconsider using the new slider also for mobile but only if that is beneficial in terms of setup time and maintainance time, for the later it would be beneficial but not sure about the initial setup and implementation time and challanges that may arise. 
+                            --  and we would like to reconsider the zoom also in the same way like above 
+                    --  browser - will matter so much 
+                    --  screen size - need to handle occasionally only as long as overall UI/UX layers are mature 
+                    --  os 
+
+                    if(window.document.splugins.common.is_mobile){
+
+                    }else if(window.document.splugins.common.is_tablet){
+
+                    }else if(browser){
+
+                    }else if(screen size){
+
+                    }else if(os){
+
+                    };
+
+                -   configs 
+                    --  will control decision of whether to display certain section or not, for example whether to display template part of attribute name (for us ribbon wrapper)
+                    --  or whether to show tooltip or not 
+
+                    if( type == 'radio' ) 
+
+            else if( not for example slider input is not supported then host the listener event so that extension js do its job or simply skip it and let extension js do their part )
+                --  and we can and should simply use observer pattern events to host for example the slider listener here and then emit internal change event from here     
+                    --  still in this case the variation.swatches will register its event subject and emit bootstrap level notification like bootstrap/on.load maybe on.load is more user friendly 
+                    --  then at that time applicable extension will bootstrap the js layer 
+                    --  and when the change event occurs the applicable extension will simply call the ...swatches.api function to notify back about their change event or the events module can add support to provide callbacks to subscriber so that they can reply with something when they have done something based on notification. so it can be called the notification_response. -- but it will be about breaking our own rule of keeping the events simple. so even if we must do then in that case it must be till notification_response only and no further callback back and forth can be supported. otherwise it mostly lead to long debug sequences. --  however it has benefit of less maintainance since otherwise extensions need to know about the ...swatches.api but in case of events support of notification_response it only need to learn about and depend on the variations.swatches subject of events module. and as long as we can keep it limited to notification_response only and do not extend it further it will be clean to be frank. 
+
+
+                    --  and we are planning to host darker/lighter slider support also from here as usual so it will be just like above slider example 
+                        --  but yeah after the change event is recieved here that will be emitted to the gallery_images module to let them do their job. since darker lighter is not part of the variation there is no further thing to do from here after the change event is recieved. 
+                            --  and since it is different kind processing that is required after change event so the input_template_type must be defined uniquely like slider_no_variation 
+                                NOTE: and yeah on that note everything of the sp_variations module must be dynamic and nothing should be hardcoded so slider_no_variation input template type must be passed right from where the template is defined on admin to till here 
+            
+
+            --  it wil be a specific block here for devices and configs -- to d 
+            --  while for the rest create dedicated functions like process_template, process_events and so on. for the layers listed below. 
+                --  create below list of functions after the process_attribute_types function, and apply above peudo flows there and rest of the flows those functions should adapt from the flow notes from the heirachical flow plan at top -- to d and -- to h 
+                    -- process_template -- to d
+                    -- process_pages -- to d
+                    -- process_slider_and_zoom -- to d
+                    -- process_events -- to d
+                    -- process_and_manage_effects -- to d
+                    -- process_compatability_matters -- to d
+            
+        }); 
+
+    }
+
+    var process_template = function() {
+
+        --  or whether to show tooltip or not 
+                    
+        if( type == 'radio' ) 
+
+    }
+
+    var process_pages = function() {
+
+        if(window.document.splugins.common.is_category_page){
+
+        }else if(window.document.splugins.common.is_item_page){
+
+        };
+
+    }
+
+    var process_slider_and_zoom = function() {
+
+    }
+
+    var process_events = function() {
+
+         on_click();
+
+    }
+
+    var process_and_manage_effects = function() {
+
+    }
+
+    var process_compatability_matters = function() {
+
+        if(type == 'buttons'){
+
+            compatability("button_section");
+
+        }else if(type == 'image'){
+
+            compatability("image_section");
+
+        }; 
+
+    }
+
+
     var slider_thumb_click_listener = function() {
 
 
