@@ -452,10 +452,11 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 	// so here there will be those ajax callback functions like beforeSend, complete, success, error and so on? mostly yes so that we can call it from wrapper and especially put all the refactored code from different instances of ht eo_wbc_filter_change functions in here 
 	// 	--	so let just do it -- to d. done. had already did it for two functions below 
-		--	for all four functions below bring the code from all applicable functions -- to d 
-			--	and compare and put common only once and for identical means different put separetely and comment for both -- to d. ask b for how to do this process precisely, and do it precisely no more in rubbish way. 
-			--	and note one thing clearly that identical table code that is identified here need to be moved in their own calling layers to this function, so there will be some call back or so that need to be defined that can cover it. or we can simply use what is available by way of observer pattern and their notification callback that is planned that maybe of help if finalized -- to d 
-	
+		// ACTIVE_TODO_OC_START
+		// --	for all four functions below bring the code from all applicable functions -- to d 
+		// 	--	and compare and put common only once and for identical means different put separetely and comment for both -- to d. ask b for how to do this process precisely, and do it precisely no more in rubbish way. 
+		// 	--	and note one thing clearly that identical table code that is identified here need to be moved in their own calling layers to this function, so there will be some call back or so that need to be defined that can cover it. or we can simply use what is available by way of observer pattern and their notification callback that is planned that maybe of help if finalized -- to d 
+		// ACTIVE_TODO_OC_END	
 	var beforeSend = function(xhr) {
 		window.eo_wbc_object.enable_filter_table = false;
 		if(eo_wbc_object.hasOwnProperty('xhr')){
@@ -600,19 +601,20 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		render_data = data;
 		_render_container = render_container;
+		// ACTIVE_TODO_OC_START
+		// create two function show_loader and hide_loader in filters core js module -- to d 
+		// 	--	and then move the below code in the hide_loader -- to d 
+		// 	--	and check all the change function implementation and move show related code in the show_loader function and hide related code in the hide_loader function -- to d
+		// 	--	needless to say but still note that the loader hide show event should be carefully caled from each related search events like search, complete, error and maybe also some other which handle some particular scenarios. -- to d 
+		// 		--	so that what happen is that in future if the events namespace is firing the search or any related events around and if by any change any event that the filters module recieve is related to the show hide loader flow then that is taken care of implicitly.  
+		// jQuery("#loading").removeClass('loading');
 
-		create two function show_loader and hide_loader in filters core js module -- to d 
-			--	and then move the below code in the hide_loader -- to d 
-			--	and check all the change function implementation and move show related code in the show_loader function and hide related code in the hide_loader function -- to d
-			--	needless to say but still note that the loader hide show event should be carefully caled from each related search events like search, complete, error and maybe also some other which handle some particular scenarios. -- to d 
-				--	so that what happen is that in future if the events namespace is firing the search or any related events around and if by any change any event that the filters module recieve is related to the show hide loader flow then that is taken care of implicitly.  
-		jQuery("#loading").removeClass('loading');
-
-		create one function update_result_count in filters core js module -- to d 
-		--	and then move the below code in that -- to d 
-		--	and check all the change function implementation and move show related code in that function -- to d 
-		--	I have some doubt the below condition's logic it is setting to empty when there is not result count container is returned. but I guess that is exceptional scenario which would never be happening but if it happens then we need to handle that exceptional scenario, so for now keeping it open and if no such thing show up after 1st or 2nd revision then remove this task ACTIVE_TODO -- to b 
-			--	move above task comment also with the code -- to d 
+		// create one function update_result_count in filters core js module -- to d 
+		// --	and then move the below code in that -- to d 
+		// --	and check all the change function implementation and move show related code in that function -- to d 
+		// --	I have some doubt the below condition's logic it is setting to empty when there is not result count container is returned. but I guess that is exceptional scenario which would never be happening but if it happens then we need to handle that exceptional scenario, so for now keeping it open and if no such thing show up after 1st or 2nd revision then remove this task ACTIVE_TODO -- to b 
+		// 	--	move above task comment also with the code -- to d 
+		// ACTIVE_TODO_OC_END	
 		//Replace Result Count Status...
 		if(jQuery('.woocommerce-result-count',jQuery(data)).html()!==undefined){
 			if(jQuery(".woocommerce-result-count").length>0){
@@ -630,10 +632,11 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		document.wbc_data = data;
 		
 		/*console.log(data);*/
-
-		we can define a compatibility check flow, where the compatibility function will be available in each js module -- to d 
-			-- that will recieve a object and second argument will be the excpected result. -- to d 
-			-- if that is not matched then the compatibility function will apply its all available compatibility scenarios -- to d. like the below elementor-products-grid class statement would then go inside compatibility if. and .jet-woo-products also belong there, but let it be there and same for any js module layers where we have compatibility patch is mixed with basic/standard implementation statement to avoid the errors while separating them. 
+		// ACTIVE_TODO_OC_START
+		// we can define a compatibility check flow, where the compatibility function will be available in each js module -- to d 
+		// 	-- that will recieve a object and second argument will be the excpected result. -- to d 
+		// 	-- if that is not matched then the compatibility function will apply its all available compatibility scenarios -- to d. like the below elementor-products-grid class statement would then go inside compatibility if. and .jet-woo-products also belong there, but let it be there and same for any js module layers where we have compatibility patch is mixed with basic/standard implementation statement to avoid the errors while separating them. 
+		// ACTIVE_TODO_OC_END
 		let container_html = jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products',jQuery(data)).html();	
 		
 		/*if(container_html===undefined || container_html==='') {
@@ -673,45 +676,50 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			});
 		}
 		else {
-
-			ACTIVE_TODO instead of determining if products are found or not on the js layer, it is really if we send a flag var from the php layer. so do it. in the dapii feed layers it is already like that but ensure that in wbc and tableview(in tableview also it is at least almost planned and roughly implemented) -- to h or -- to d 
-			// 	ACTIVE_TODO commented below events subject creation, during testing only. so temporary only.
+			// ACTIVE_TODO_OC_START
+			// ACTIVE_TODO instead of determining if products are found or not on the js layer, it is really if we send a flag var from the php layer. so do it. in the dapii feed layers it is already like that but ensure that in wbc and tableview(in tableview also it is at least almost planned and roughly implemented) -- to h or -- to d 
+			// // 	ACTIVE_TODO commented below events subject creation, during testing only. so temporary only.
+			// ACTIVE_TODO_OC_END
 			window.document.splugins.wbc.filters.core.no_products_found();
 
-			just move below line in the no_products_found function of the filters js module -- to d 
-				--	and so now the render_container will recieve one parameter that is render_container, it will defaults to null so from where it is applicable it is passed otherwise it will be left blank -- to d 
+			// ACTIVE_TODO_OC_START
+			// just move below line in the no_products_found function of the filters js module -- to d 
+			// 	--	and so now the render_container will recieve one parameter that is render_container, it will defaults to null so from where it is applicable it is passed otherwise it will be left blank -- to d 
+			// ACTIVE_TODO_OC_END
 			jQuery(render_container/*".products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products"*/).html('<p class="woocommerce-info" style="width: 100%;">No products were found matching your selection.</p>');	
 		}	
 
-		/*if(render_container===".products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products"){*/
-			//Replacing Pagination details.....		
-			//console.log(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html());
+		// ACTIVE_TODO_OC_START
+		// /*if(render_container===".products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products"){*/
+		// 	//Replacing Pagination details.....		
+		// 	//console.log(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html());
 
-			//done move below logic to the pagination js module -- to d. including the compatibility conditions are there in the if else block, like planned above to keep the compatibility patches as it is if they are already implemented otherwise we will put them in the dedicated compatibility function. 
-				-- //done create below functions in that module 
-					-- //done 	bind_click -- to d. put comment inside function "it will bind to all kind of such on_click events of pagination, it will be private but it may broadcast notification with a callback which js layers of like tableview and so on can call when they recieve their own click event or they can simply call below on_click function". so it is private function. 
-						-- //done 	and from this function call the private click function -- to d 
-					-- //done 	on_click -- to d. put comment inside function "listen to all on_click events". so it is public function. 
-					-- //done 	click -- to d. put comment inside function "it will internally implement all flows related to pagination link click event". so it is private function. 
-						-- //done 	call this function from above on_click -- to d 	
-						-- raise on_click notification using notifyAllObservers -- to d 
-						-- in init_private function first create the subject for observer pattern also -- to d 
-						-- //done  so also create init_private and init(public) function -- to d 
-					-- //done 	compatibility -- to d. it is private function. 
-					-- //done 	get_page_number -- to d. it is public function. 
-					-- //done 	set_page_number -- to d. it is public function. 
-						-- raise page_number_udpated notification using notifyAllObservers -- to d 
-					-- //done 	on_reset -- to d. it is public function. 
-						--	external layers would simply call this function, since observer pattern is not seem necessary here -- to d 
-						-- //done 	and from this function call the private reset function -- to d 
-					-- //done 	reset -- to d. it is private function. 
-						-- raise on_reset notification using notifyAllObservers -- to d 
-					tableview and so on would depend on that extended flow of observer pattern where notification will provide a callback, this flow is to be confirmed so either it or something else that is confirmed there on common js variations notes will be used. 
-						-- tableview will use it for its flows like binding click event, which is ideal use case of the observer pattern -- to d 
-						-- and it will also use it for triggerring the click event, means of its own pagination links dom -- to d 
-							-- ACTIVE_TODO but very soon maybe the tableview may not have its own pagination links dom if that is not necessary for it -- to h and -- to d 
-						-- and for setting and getting current page_number 
-							--	for it may simply need to use the pagination modules published api interface -- to d 
+		// 	//done move below logic to the pagination js module -- to d. including the compatibility conditions are there in the if else block, like planned above to keep the compatibility patches as it is if they are already implemented otherwise we will put them in the dedicated compatibility function. 
+		// 		-- //done create below functions in that module 
+		// 			-- //done 	bind_click -- to d. put comment inside function "it will bind to all kind of such on_click events of pagination, it will be private but it may broadcast notification with a callback which js layers of like tableview and so on can call when they recieve their own click event or they can simply call below on_click function". so it is private function. 
+		// 				-- //done 	and from this function call the private click function -- to d 
+		// 			-- //done 	on_click -- to d. put comment inside function "listen to all on_click events". so it is public function. 
+		// 			-- //done 	click -- to d. put comment inside function "it will internally implement all flows related to pagination link click event". so it is private function. 
+		// 				-- //done 	call this function from above on_click -- to d 	
+		// 				-- raise on_click notification using notifyAllObservers -- to d 
+		// 				-- in init_private function first create the subject for observer pattern also -- to d 
+		// 				-- //done  so also create init_private and init(public) function -- to d 
+		// 			-- //done 	compatibility -- to d. it is private function. 
+		// 			-- //done 	get_page_number -- to d. it is public function. 
+		// 			-- //done 	set_page_number -- to d. it is public function. 
+		// 				-- raise page_number_udpated notification using notifyAllObservers -- to d 
+		// 			-- //done 	on_reset -- to d. it is public function. 
+		// 				--	external layers would simply call this function, since observer pattern is not seem necessary here -- to d 
+		// 				-- //done 	and from this function call the private reset function -- to d 
+		// 			-- //done 	reset -- to d. it is private function. 
+		// 				-- raise on_reset notification using notifyAllObservers -- to d 
+		// 			tableview and so on would depend on that extended flow of observer pattern where notification will provide a callback, this flow is to be confirmed so either it or something else that is confirmed there on common js variations notes will be used. 
+		// 				-- tableview will use it for its flows like binding click event, which is ideal use case of the observer pattern -- to d 
+		// 				-- and it will also use it for triggerring the click event, means of its own pagination links dom -- to d 
+		// 					-- ACTIVE_TODO but very soon maybe the tableview may not have its own pagination links dom if that is not necessary for it -- to h and -- to d 
+		// 				-- and for setting and getting current page_number 
+		// 					--	for it may simply need to use the pagination modules published api interface -- to d 
+		// ACTIVE_TODO_OC_END					
 			if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html()!==undefined) {
 				if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination').length>0){
 					jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html());
@@ -741,9 +749,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		and below one to the hide_loader function -- to d 
 		//jQuery("body").fadeTo('fast','1')									
 		jQuery("#loading").removeClass('loading');
-		
-		almost all of the below seems compatibility related to so move that to compatibility function, and at there we need to have section conditon like this would be broadly as product-listing -- to d 
-			--	you already moved below code, which I saw, but there is not comment below that it is moved so please let me know what is going on -- to d 
+		// ACTIVE_TODO_OC_START
+		// almost all of the below seems compatibility related to so move that to compatibility function, and at there we need to have section conditon like this would be broadly as product-listing -- to d 
+		// 	--	you already moved below code, which I saw, but there is not comment below that it is moved so please let me know what is going on -- to d 
+		// ACTIVE_TODO_OC_END
 		jQuery('.products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)').addClass('product_grid_view');
 		//jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination').css('visibility','visible');
 		if(jQuery(".row-inner>.col-lg-9").length>0){
