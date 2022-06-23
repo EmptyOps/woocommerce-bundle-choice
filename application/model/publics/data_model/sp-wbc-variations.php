@@ -44,7 +44,7 @@ class SP_WBC_Variations extends SP_Variations {
 		if( $for_section == "gallery_images_init" ) {
 
 			//	below hooked function will add our data layers of sp_variations gallery_images and maybe also others of the sp_variations to the woo data 					
-			add_filter( 'woocommerce_available_variation', array( $this, 'get_available_variation' ), 90, 3);
+			add_filter( 'woocommerce_available_variation', array( $this, 'get_available_variation_hook_callback' ), 90, 3);
 			
 		}elseif( $for_section == "swatches_init" ) {
 			add_filter( 'woocommerce_ajax_variation_threshold',  function($int){
@@ -138,7 +138,7 @@ class SP_WBC_Variations extends SP_Variations {
 	}
  
 	//	not sure if hook core can callback it on its instance if it is a private function, so kept it public for now. 
-	public function get_available_variation( $variation_get_max_purchase_quantity,  $instance,  $variation ) {
+	public function get_available_variation_hook_callback( $variation_get_max_purchase_quantity,  $instance,  $variation ) {
 
 		first of all rename the vars inside this function as per the above args, look at the plugin we were exploring for clear understanding. we will be using the standard woo args name. -- to d or -- to b 
 
@@ -342,7 +342,7 @@ class SP_WBC_Variations extends SP_Variations {
 		$type['dropdown_image_only']='Dropdown with Icons Only';
 		$type['dropdown']='Dropdown';
 
-		apply_filters('sp_variations_swatches_attribute_types', $type);	 
+		return apply_filters('sp_variations_swatches_attribute_types', $type);	 
 
 	}
 
@@ -406,6 +406,15 @@ class SP_WBC_Variations extends SP_Variations {
 
 		return $variation;
 
+	}
+
+	public static function get_available_variations( $product ) {
+
+		if ( is_numeric( $product ) ) {
+			$product = wc_get_product( absint( $product ) );
+		}
+
+		return $product->get_available_variations();
 	}
 
 }
