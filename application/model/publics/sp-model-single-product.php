@@ -29,8 +29,8 @@ class SP_Model_Single_Product extends SP_Single_Product {
 	//	it will also accept a param like for_section with its default value to default, this param will be useful when any module have more than one section of data is applicable so that can be managed with if condition for them 
 	public function get_data($for_section="default", $args=null) {
 
-		add that four conditions here in below if, simply as or conditions -- to d or -- to b 
-		if( $for_section == "sp_variations" ) {
+		// add that four conditions here in below if, simply as or conditions -- to d or -- to b done
+		if( $for_section == "gallery_images_init" ||  $for_section == "swatches_init" || $for_section == "swatches" || $for_section == "gallery_images") {
 
 			global $product;	
 
@@ -1208,6 +1208,10 @@ class SP_Model_Single_Product extends SP_Single_Product {
         	--	and then inside put an if condition that check the hook_args['type'](note the level of type param) against our sp_variations_swatches_supported_attribute_types function that is in the same class -- to d 
         		--	and if condition is true for new hook below, then simply return is two elements is_return_default_html and html -- to d 
         			--	and then on the selectorn hook render layers instead of calling the templating layers flows just return the html if above flag is detected -- to d 
+		if (apply_filters( 'default_sp_variations_swatches_variation_attribute_options_html', false, $args['hook_callback_args']['hook_args'], $args['hook_callback_args']['html'] ))
+		{
+			return $args['hook_callback_args']['html'];
+		}
 
         // ACTIVE_TODO mark this as deprecated and we maybe like a mechanisam flow now in our releases change logs or somewhere else on wordpress.org page which list such things on appropriate corners/sections of technical details 	
 		if ( apply_filters( 'default_wbc_variation_attribute_options_html', false, $args['hook_callback_args']['hook_args'], $args['hook_callback_args']['html'] ) ) {
@@ -1226,9 +1230,9 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
         // \eo\wbc\model\SP_WBC_Compatibility::instance()->woo_general_broad_matters_compatability($section);
 
-        remove $html from below and just return true from there, that will do it -- to d or -- to b 
-        if($html = \eo\wbc\model\SP_WBC_Compatibility::instance()->woo_general_broad_matters_compatability('woocommerce_configure_bundle')){
-        	return $html;
+        // remove $html from below and just return true from there, that will do it -- to d or -- to b done
+        if(\eo\wbc\model\SP_WBC_Compatibility::instance()->woo_general_broad_matters_compatability('woocommerce_configure_bundle')){
+        	return $args['hook_callback_args']['html'];
         }
 
         --	fix the below get text call -- to d 
@@ -1243,8 +1247,9 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 		// $is_default_to_image_button = ( $is_default_to_image || $is_default_to_button );
 
-		ACTIVE_TODO maybe this currency var need to be removed, but confirm if used here or in the plugin we were exploring -- to d 
-		$currency       = get_woocommerce_currency();
+		// ACTIVE_TODO maybe this currency var need to be removed, but confirm if used here or in the plugin we were exploring -- to d
+		// ACTIVE_TODO it will be necessary when we do caching implementation 
+		// $currency       = get_woocommerce_currency();
 
 
 

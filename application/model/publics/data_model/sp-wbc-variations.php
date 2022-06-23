@@ -58,6 +58,19 @@ class SP_WBC_Variations extends SP_Variations {
 				// ACTIVE_TODO	--	and implement if logically useful -- to d  
 
 			}, 8, 2);
+
+			add_filter('default_sp_variations_swatches_variation_attribute_options_html', function($hook_args){
+
+				if(in_array($hook_args['type'],\eo\wbc\model\publics\SP_WBC_Variations::sp_variations_swatches_supported_attribute_types())){
+					return true;
+				}else{
+					return false;
+				}
+
+
+			}, 10, 1);
+
+
 		}elseif( $for_section == "swatches" || $for_section == "gallery_images") {
 
 			$sp_variations_data['attributes'] = $args['args'][ 'product' ]->get_variation_attributes();

@@ -92,7 +92,7 @@ class SP_WBC_Compatibility extends SP_Compatibility {
 
         if($section == 'woocommerce_configure_bundle'){
 		    if ( isset( $_POST[ 'action' ] ) && wbc()->sanitize->post('action') === 'woocommerce_configure_bundle_order_item' ) {
-            	return $html;
+            	return true;
         	}
         }
 	}

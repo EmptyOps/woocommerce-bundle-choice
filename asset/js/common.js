@@ -56,6 +56,24 @@ window.document.splugins.common.parseJSON = function(result,confirm_obj_format=t
     }
 }
 
+window.document.splugins.common._o = function(object, key) {
+   
+}
+
+window.document.splugins.common._b = function(binding_stats, event, key) {
+    
+    binding_stats[event] = this.binding_stats[event]  || {};
+
+    if(typeof( binding_stats[event][key]) == undefined){
+
+         binding_stats[event][key] = true;
+
+    }
+
+    return true;
+
+}
+
 
 //  TODO publish defs from here of the any design pattern that we define to be used as common patter like design pattern of the wbc.filters module 
     //  below the observer design pattern implemented for Feed.events act as one of published defs
@@ -367,7 +385,7 @@ window.document.splugins.wbc.variations = window.document.splugins.wbc.variation
 //             -- category page 
 //             -- item page 
 //             --- like we implicitly assumed for the devices and so on layers, that there will be flgas like is_mobile, is_tablet that will be used throughout this variations js modules and the other layers interacting with it, similar way we can have the flgas for this pages layers also. like is_category_page and is_item_page. 
-//                     -- create above two flags under ..splugins.common namespace, in js.vars.asset.php so no need to pass those as configs here when this module initiated -- to d 
+//                     -- create above two flags under ..splugins.common namespace, in js.vars.asset.php so no need to pass those as configs here when this module initiated -- to d done
 //                 --  but yeah since the pages is a significant and major layer so at some place we may like dedicated functions and there would be like some flows will require dedicated functions for the item page while some flows will require dedicated functions for the category page 
 //         -   slider and zoom 
 //             --  it will mostly be matter of interest to the variations.gallery_images module but since it is vital for overall stability of functions and the overall experience that is why it is considered as a dedicated thing 
@@ -389,7 +407,7 @@ window.document.splugins.wbc.variations = window.document.splugins.wbc.variation
 //                     --  it may or likely include managing the loading, swaping and updating of images 
 //         -   devices 
 //                 --  is_mobile and is_tablet - this would be primary 
-//                         -- create above two flags under ..splugins.common namespace, in js.vars.asset.php so no need to pass those as configs here when this module initiated -- to d 
+//                         -- create above two flags under ..splugins.common namespace, in js.vars.asset.php so no need to pass those as configs here when this module initiated -- to d done
 //                     --  for layers which need to have complete different implementation for mobile etc. then for them applicable flgas should be set/initiated from the higher layers layers for example the slider and zoom would be completely different plugin for mobile devices -- but anyway now we will see to it again to reconsider using the new slider also for mobile but only if that is beneficial in terms of setup time and maintainance time, for the later it would be beneficial but not sure about the initial setup and implementation time and challanges that may arise. 
 //                         --  and we would like to reconsider the zoom also in the same way like above 
 //                 --  browser - will matter so much 
@@ -427,9 +445,10 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
 
     _this.configs = jQuery.extend({}, {}/*default configs*/, configs);
 
-    _this.base_container = jQuery( ...common._o( _this.configs, 'base_container_selector') /*ACTIVE_TODO_OC_START -- to d. base_container_selector ACTIVE_TODO_OC_END*/ ||  '.variations_form' );    
+    _this.base_container = jQuery( ...common._o( _this.configs, 'base_container_selector') /*ACTIVE_TODO_OC_START -- to d. base_container_selector ACTIVE_TODO_OC_END*/ ||  '.variations_form' );      
 
-    _this.data = {};    
+    var _this.data = {};
+    var _this.binding_stats = {};     
     _this.data.product_variations = _this.data('product_variations') || []; not confirm yet if actually this container holds this data or something else     
 
 
@@ -494,8 +513,8 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
 
         // ACTIVE_TODO_OC_START
         // do necessary bindings for the attribute types to be supported 
-        //     --  will need a dedicated function namely process_attribute_types, under the preprocess_data function below -- to d 
-        //         --  move entire section below inside that function -- to d 
+        //     --  will need a dedicated function namely process_attribute_types, under the preprocess_data function below -- to d done
+        //         --  move entire section below inside that function -- to d done 
         // ACTIVE_TODO_OC_END
                 
         //  process by type  
@@ -533,12 +552,12 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
         //     --  it wil be a specific block here for devices and configs -- to d 
         //     --  while for the rest create dedicated functions like process_template, process_events and so on. for the layers listed below. 
         //         --  create below list of functions after the process_attribute_types function, and apply above peudo flows there and rest of the flows those functions should adapt from the flow notes from the heirachical flow plan at top -- to d and -- to h 
-        //             -- process_template -- to d
-        //             -- process_pages -- to d
-        //             -- process_slider_and_zoom -- to d
-        //             -- process_events -- to d
-        //             -- process_and_manage_effects -- to d
-        //             -- process_compatability_matters -- to d
+        //             -- process_template -- to d done
+        //             -- process_pages -- to d done
+        //             -- process_slider_and_zoom -- to d done
+        //             -- process_events -- to d done
+        //             -- process_and_manage_effects -- to d done
+        //             -- process_compatability_matters -- to d done
             
         // }); 
 
@@ -1038,7 +1057,9 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
 
     // -   events 
     // --  mouse events 
-    var on_click = function() {
+    var on_click = function(type) {
+
+        window.document.splugins.common._b();
 
 
     };
@@ -1809,7 +1830,7 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
 //     // --  mouse events 
 //         - listener events 
 //     ACTIVE_TODO_OC_END
-
+}}}
     var preprocess_data = function() {
 
         ACTIVE_TODO not sure if this is necessary 
@@ -1922,9 +1943,9 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
             var callback = null ;
             window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'process_images', type, callback );
 
-            // --  it wil be a specific block here for devices and configs -- to d 
+            // --  it wil be a specific block here for devices and configs -- to d done
             // --  while for the rest create dedicated functions like process_template, process_events and so on. for the layers listed below. 
-            //     --  create below list of functions after the process_attribute_types function, and apply above peudo flows there and rest of the flows those functions should adapt from the flow notes from the heirachical flow plan at top -- to d and -- to h 
+            //     --  create below list of functions after the process_attribute_types function, and apply above peudo flows there and rest of the flows those functions should adapt from the flow notes from the heirachical flow plan at top -- to d and -- to h done
             //         --done process_template -- to d
             //         --done process_pages -- to d
             //         --done process_slider_and_zoom -- to d

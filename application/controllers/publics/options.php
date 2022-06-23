@@ -19,12 +19,12 @@ class Options extends \eo\wbc\controllers\publics\Controller {
         
     }
 
-
     public function should_init(){
     	return true;
     }
 
-    public function init($args = array()){
+
+    public function init($args = null){
 
     	$args['data'] = \eo\wbc\model\publics\SP_Model_Single_Product()::instance()->get_data('swatches_init');
         \eo\wbc\controller\publics\Options::instance()->selectron('swatches',$args);
@@ -32,15 +32,13 @@ class Options extends \eo\wbc\controllers\publics\Controller {
         $args['data'] = \eo\wbc\model\publics\SP_Model_Single_Product()::instance()->get_data('gallery_images_init');
         \eo\wbc\model\publics\SP_Model_Single_Product::instance()->render_gallery_images_template($args);
 
-
-    	// call the getUI from here once so that default render_ui is called once at last for handling general matters -- to b done 
-    		//--	and for getUI set two args first is $page_section and second is $args -- to b done
-    			//-- empty page_section means call will go to default render_ui function -- to b done
-    				//--	and so page_section param will also be passed to get_ui_definition but there it will be passed through in args param -- to b done
-    	$this->getUI(null);
+    	call the getUI from here once so that default render_ui is called once at last for handling general matters -- to b 
+    		--	and for getUI set two args first is $page_section and second is $args -- to b 
+    			-- empty page_section means call will go to default render_ui function -- to b 
+    				--	and so page_section param will also be passed to get_ui_definition but there it will be passed through in args param -- to b 
     }
 
-    public function selectron_hook_render($page_section,$container_class,$args = array()){
+    public function selectron_hook_render($page_section,$container_class,$args = null){
 
     	if ($page_section == 'swatches') {
     		if ($container_class == 'woo_variation_attr_html') {
@@ -52,7 +50,7 @@ class Options extends \eo\wbc\controllers\publics\Controller {
     	}
     }
 
-    private function selectron($page_section,$args = array()){
+    private function selectron($page_section,$args = null){
 
     	//--	move below to options controller selectron function -- to b done
 			//--	and from init function of the same controller call the selectron with page_section=swatches and args param that init may have or null -- to b  done
@@ -72,19 +70,19 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 		}
     }
 
-    private function load_view($data,$args = array()){
+    private function load_view(){
 
     	// NOTE: since so far we do not needed to create the view class and the actual ui is also coming from the templates folder so, so far not creating the view class. and just implementing the required logic from here. but if it become necessary then in future create the view class. 
 
     	$this->render_swatches_data_by_attribute_type($data,$args);
     }
 
-    private function getUI($page_section,$args = array()){
+    private function getUI($page_section,$args = null){
 
     	$args['page_section'] = $page_section;
     	
     	if ($page_section == 'woo_dropdown_attribute_html' or $page_section == 'variable_item' or $page_section == 'variable_item_wrapper') {
-    		$this->get_ui_definition($args);
+    		$this->get_ui_definition($args)
     	}else{	
 
         	\eo\wbc\model\publics\SP_Model_Single_Product::instance()->render_ui( $this->get_ui_definition($args));
@@ -92,70 +90,47 @@ class Options extends \eo\wbc\controllers\publics\Controller {
     } 
 
     private function get_ui_definition($args = array()){
-
-    	--	make below type var dynamic now -- to b
-    	$type = 'button';
-    	
-    	and make all four templates below dynamic, based on the points added on data layer and also there might be some on the template files -- to b 
-
     	if ($args['page_section'] == 'woo_dropdown_attribute_html') {
 
-    		drop type var from below and set name of the one only template, simply set it hardcoded -- to b 
-
     		$args['widget_key'] = '';
-    		$args['template_sub_dir'] = 'single-product/variations-swatches/woo_dropdown_attribute/'.$type;
+    		$args['template_sub_dir'] = '';
     		$args['template_option_key'] = '';
 	        $args['option_group_key'] = '';
-	        $args['template_key'] = 'woo_dropdown_attribute';
 	        $args['plugin_slug'] = '';
+
 
     	}else if ($args['page_section'] == 'variable_item') {
 
-    		if (!isset($args['data'])) {
-
-    			$args['data'] = array();
-
-    		}
-
-    		dropd template part from both actual key params below, it will be loaded from inside the below main template -- to b 
-    			--	from inside the commong template below the particular template would be loaded -- to b 
-    				--	and on this note for non dropdown types we can simply one file and load their specific option_template_part from there. but lets keep theme together only if they share common code -- to b 
-    			--	and from that particular template the their option_template_part would be loaded 
-
-    			--	so there would be some heirarchical if conditions that will be required, the conditions would be based on $type -- to b 
-
-    		$args['data']['template_data'] = array();
-    		$args['data']['template_data']['template_key'] = 'sp_variations_optionsUI-'.$type.'-option_template_part';
-    		$args['data']['template_data']['template_sub_dir'] = 'single-product/variations-swatches/'.$type;
-
     		$args['widget_key'] = '';
-    		$args['template_sub_dir'] = 'single-product/variations-swatches';
+    		$args['template_sub_dir'] = '';
     		$args['template_option_key'] = '';
 	        $args['option_group_key'] = '';
-	        $args['template_key'] = 'sp_variations_optionsUI-common-option_template_part';
 	        $args['plugin_slug'] = '';
 
     	}else if ($args['page_section'] == 'variable_item_wrapper') {
 
-    		drop type var from below and set name of the one only template, simply set it hardcoded -- to b 
-
     		$args['widget_key'] = '';
-    		$args['template_sub_dir'] = 'single-product/variations-swatches/'.$type;
-    		$args['template_option_key'] = '';
-	        $args['option_group_key'] = '';
-	        $args['template_key'] = 'sp_variations_optionsUI-'.$type.'-ribbon_wrapper';
-	        $args['plugin_slug'] = '';
-	
-    	}/*else {
     		$args['template_sub_dir'] = '';
     		$args['template_option_key'] = '';
 	        $args['option_group_key'] = '';
-	        $args['template_key'] = '';
 	        $args['plugin_slug'] = '';
 
-	    }*/
+    	}else{
+    		$args['template_option_key'] = '';
+	        $args['option_group_key'] = '';
+	        $args['plugin_slug'] = '';
+
+	    }
 
         return parent::get_ui_definition($args);
+
+       /* --- Publics.php no hook_render function no code che
+        $react_templat = wbc()->options->get_option('diffrent_size_configure','templat_size');
+        if ($react_templat == 'react_template') {
+            
+        }else{
+
+        }*/
     }
 
 	public function variable_items_wrapper( $contents, $type, $args, $saved_attribute = array()){
