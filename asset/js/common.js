@@ -56,7 +56,7 @@ window.document.splugins.common.parseJSON = function(result,confirm_obj_format=t
     }
 }
 
-window.document.splugins.common._o = function(object, key) {
+window.document.splugins.common._o = function(object, property) {
 
     return Object.prototype.hasOwnProperty.call(object, property);
    
@@ -64,11 +64,12 @@ window.document.splugins.common._o = function(object, key) {
 
 window.document.splugins.common._b = function(binding_stats, event, key) {
     
-    binding_stats[event] = this.binding_stats[event]  || {};
+    binding_stats[event] = binding_stats[event]  || {};
 
     if(typeof( binding_stats[event][key]) == undefined){
 
          binding_stats[event][key] = true;
+         return false;
 
     }
 
@@ -1061,7 +1062,9 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
     // --  mouse events 
     var on_click = function(type) {
 
-        window.document.splugins.common._b();
+       if(window.document.splugins.common._b(_this.binding_stats, 'on_click', type)){
+            return false;
+       }
 
 
     };
