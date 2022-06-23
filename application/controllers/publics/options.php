@@ -154,6 +154,9 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 
 	    }*/
 
+	    --	in parent class function add if condition, that if template_option_key and template_key both is empty then simply return $template -- to b 
+	    	--	so at top define the null $template var -- to b 
+	    	
         return parent::get_ui_definition($args);
     }
 

@@ -328,74 +328,25 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			});
 		}
 		
+		ACTIVE_TODO do the needful asap as per the demand -- to h and -- to d 
+			--	first check in the plugin we were exploring, if there is any implementation that is necessary -- to d 
 		add_filter( 'script_loader_tag',  function($tag){
 
 		}, 99, 1);
 
 
-		///////////////////////////var/www/html/drashti_project/27-05-2022/woo-variation-gallery/includes/class-woo-variation-gallery-frontend.php
-
-
- 		public function get_available_variations( $product ) {
-
-			if ( is_numeric( $product ) ) {
-				$product = wc_get_product( absint( $product ) );
-			}
-
-			return $product->get_available_variations();
-		}
-
-		////////////////////////////////
-
-
-		/////////////////var/www/html/drashti_project/27-05-2022/woo-variation-gallery/includes/class-woo-variation-gallery-frontend.php
-			$images               = array();
-			$available_variations = $this->get_available_variations( $product_id );
-
-			foreach ( $available_variations as $i => $variation ) {
-				array_push( $variation['variation_gallery_images'], $variation['image'] );
-			}
-
-		/////////////////////////
-		
-		//////////////////	/var/www/html/drashti_project/27-05-2022/woo-variation-gallery/includes/functions.php
-			// Get Variations info
-			//-------------------------------------------------------------------------------
-			if ( ! function_exists( 'wvg_get_product_variations' ) ):
-				function wvg_get_product_variations( $product ) {
-
-					if ( is_numeric( $product ) ) {
-						$product = wc_get_product( absint( $product ) );
-					}
-
-					return $product->get_available_variations();
-				}
-			endif;
-
-		//////////////////////////////
-		
-		//////////////////////////home/shraddha/Downloads/woo-variation-gallery/includes/class-woo-variation-gallery-frontend.php
-
-		is_default_to_image, $is_default_to_button ) ) {
-
-			$attributes = $product->get_variation_attributes();
-			$variations = $product->get_available_variations();
-
-			$available_type_keys = array_keys( wvs_available_attributes_types() );
-			$available_types     = wvs_available_attributes_types();
-			$default             = true;
-
-		/////////////////////
 
 
 
 
-
-
+		move below hooks to the specific render_gallery_images and render_variations_swatches fucntions below. means both body_class and post_class hook, and also implement the woocommerce_post_class hook for both which is for now only for the gallery_images function only -- to b 
+			--	and in each hook add classes in this format for example wbc-sp-variations-swatches and wbc-sp-variations-swatches-rtl and wbc-sp-variations-swatches-post and wbc-sp-variations-swatches-post-rtl and wbc-sp-variations-swatches-woopost and so on. for theme it would be wbc-sp-variations-swatches-theme. and same for the gallery_images function also, of course. -- to b 
+				--	regarding css, t be noted that it should go in appropriate asset files only. will discuss about that -- to t. 
+					--	move this point where below hooks are moved. -- to b
 		add_filter( 'body_class',  function($classes){
 
 			$classes[] = 'sp-wbc-variations-gallery-swatches';
-			$classes[] = sprintf( 'sp-wbc-variations-gallery-swatches-%s', call common theme key fucntion  );
+			$classes[] = sprintf( 'sp-wbc-variations-gallery-swatches-%s', call common theme key fucntion -- to b  );
 
 			if ( is_rtl() ) {
 				$classes[] = 'sp-wbc-variations-gallery-swatches-rtl';
@@ -416,8 +367,6 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 	public function render_gallery_images() {
 
-		like for swatches there are get_data call in controller and model, do similar for the gallery_images layers also -- to b 
-
 		if( \eo\wbc\controller\publics\variations\SP_Gallery_Slider::instance()->should_init() ) {
 			\eo\wbc\controller\publics\variations\SP_Gallery_Slider::instance()->init();
 		}
@@ -426,7 +375,12 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			\eo\wbc\controller\publics\variations\SP_Gallery_Zoom::instance()->init();
 		}
 
+		implement the hook in inline callback function here -- to d 
+			ACTIVE_TODO we need to observer if it is actually required to enable it otherwise if it is creating any issue then we can simply disable 
 		add_action( 'after_setup_theme', array( $this, 'enable_theme_support' ), 200 );
+
+		we may not need to load any js from here, but still confirm and then comment -- to d
+			// ACTIVE_TODO but yeah very soon for both gallery_images and swatches module we would like publich the init flags from here and if that is true then only init the respective modules on the js layer -- to d 
 		add_action( 'wp_footer', array( $this, 'slider_template_js' ) );
 
 		//create product-images.php file like in the other plugin that we were exploring have -- to b done
@@ -437,7 +391,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 							//--	and from that function call model function render_gallery_images_template_callback -- to b done
 								//--	and on this note wherever there is function name have part image_gallery then rename it to gallery_images -- to b  done
 									// --	from above function in model copy the code from the referenced template and the implementation will start from here. it will mostly have hook bindings that will provide the variations images and the rest of the template rendering and even js tempalte preparation will happen on slider and zoom module layers. 
-										--	and on this regard if nothing else then this function should at top init the slider and zoom module but maybe that should be at more appropriate higher layers of init etc. functions maybe
+										// --	and on this regard if nothing else then this function should at top init the slider and zoom module but maybe that should be at more appropriate higher layers of init etc. functions maybe
 											//--	so add call from here at top in this function -- to b  done
 		
 
@@ -454,29 +408,6 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			if ( $thumbnail_width > 0 ) {
 				add_theme_support( 'woocommerce', array( 'gallery_thumbnail_image_width' => absint( $thumbnail_width ) ) );
 			}
-		}
-
-		public function post_class( $classes, $product ) {
-
-			$classes[] = 'woo-variation-gallery-product';
-
-			return $classes;
-		}
-
-		public function body_class( $classes ) {
-
-			$classes[] = 'woo-variation-gallery';
-			$classes[] = sprintf( 'woo-variation-gallery-theme-%s', strtolower( basename( get_template_directory() ) ) );
-
-			if ( is_rtl() ) {
-				$classes[] = 'woo-variation-gallery-rtl';
-			}
-
-			if ( woo_variation_gallery()->is_pro() ) {
-				$classes[] = 'woo-variation-gallery-pro';
-			}
-
-			return array_unique( array_values( $classes ) );
 		}
 
 		public function enqueue_scripts() {
@@ -521,191 +452,6 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			$this->add_inline_style();
 
 			do_action( 'woo_variation_gallery_enqueue_scripts', $this );
-		}
-
-		public function get_available_variation_gallery( $available_variation, $variationProductObject, $variation ) {
-
-			$product_id         = absint( $variation->get_parent_id() );
-			$variation_id       = absint( $variation->get_id() );
-			$variation_image_id = absint( $variation->get_image_id() );
-
-			$has_variation_gallery_images = (bool) get_post_meta( $variation_id, 'woo_variation_gallery_images', true );
-			//  $product                      = wc_get_product( $product_id );
-
-			if ( $has_variation_gallery_images ) {
-				$gallery_images = (array) get_post_meta( $variation_id, 'woo_variation_gallery_images', true );
-			} else {
-				// $gallery_images = $product->get_gallery_image_ids();
-				$gallery_images = $variationProductObject->get_gallery_image_ids();
-			}
-
-
-			if ( $variation_image_id ) {
-				// Add Variation Default Image
-				array_unshift( $gallery_images, $variation_image_id );
-			} else {
-				// Add Product Default Image
-
-				/*if ( has_post_thumbnail( $product_id ) ) {
-					array_unshift( $gallery_images, get_post_thumbnail_id( $product_id ) );
-				}*/
-				$parent_product          = wc_get_product( $product_id );
-				$parent_product_image_id = $parent_product->get_image_id();
-				$placeholder_image_id    = get_option( 'woocommerce_placeholder_image', 0 );
-
-				if ( ! empty( $parent_product_image_id ) ) {
-					array_unshift( $gallery_images, $parent_product_image_id );
-				} else {
-					array_unshift( $gallery_images, $placeholder_image_id );
-				}
-			}
-
-			$available_variation['variation_gallery_images'] = array();
-
-			foreach ( $gallery_images as $i => $variation_gallery_image_id ) {
-				$available_variation['variation_gallery_images'][ $i ] = $this->get_product_attachment_props( $variation_gallery_image_id );
-			}
-
-			return apply_filters( 'woo_variation_gallery_available_variation_gallery', $available_variation, $variation, $product_id );
-		}
-
-
-		//-------------------------------------------------------------------------------
-		// Gallery Template
-		// Copy of: wc_get_product_attachment_props( $attachment_id = null, $product = false )
-		//-------------------------------------------------------------------------------
-
-		public function get_product_attachment_props( $attachment_id, $product_id = false ) {
-			$props      = array(
-				'image_id'                => '',
-				'title'                   => '',
-				'caption'                 => '',
-				'url'                     => '',
-				'alt'                     => '',
-				'full_src'                => '',
-				'full_src_w'              => '',
-				'full_src_h'              => '',
-				'full_class'              => '',
-				//'full_srcset'              => '',
-				//'full_sizes'               => '',
-				'gallery_thumbnail_src'   => '',
-				'gallery_thumbnail_src_w' => '',
-				'gallery_thumbnail_src_h' => '',
-				'gallery_thumbnail_class' => '',
-				//'gallery_thumbnail_srcset' => '',
-				//'gallery_thumbnail_sizes'  => '',
-				'archive_src'             => '',
-				'archive_src_w'           => '',
-				'archive_src_h'           => '',
-				'archive_class'           => '',
-				//'archive_srcset'           => '',
-				//'archive_sizes'            => '',
-				'src'                     => '',
-				'class'                   => '',
-				'src_w'                   => '',
-				'src_h'                   => '',
-				'srcset'                  => '',
-				'sizes'                   => '',
-			);
-			$attachment = get_post( $attachment_id );
-
-			if ( $attachment ) {
-
-				$props['image_id'] = $attachment_id;
-				$props['title']    = _wp_specialchars( get_post_field( 'post_title', $attachment_id ), ENT_QUOTES, 'UTF-8', true );
-				$props['caption']  = _wp_specialchars( get_post_field( 'post_excerpt', $attachment_id ), ENT_QUOTES, 'UTF-8', true );
-				$props['url']      = wp_get_attachment_url( $attachment_id );
-
-				// Alt text.
-				$alt_text = array(
-					trim( wp_strip_all_tags( get_post_meta( $attachment_id, '_wp_attachment_image_alt', true ) ) ),
-					$props['caption'],
-					wp_strip_all_tags( $attachment->post_title )
-				);
-
-				if ( $product_id ) {
-					$product    = wc_get_product( $product_id );
-					$alt_text[] = wp_strip_all_tags( get_the_title( $product->get_id() ) );
-				}
-
-				$alt_text     = array_filter( $alt_text );
-				$props['alt'] = isset( $alt_text[0] ) ? $alt_text[0] : '';
-
-				// Large version.
-				$full_size           = apply_filters( 'woocommerce_gallery_full_size', apply_filters( 'woocommerce_product_thumbnails_large_size', 'full' ) );
-				$full_size_src       = wp_get_attachment_image_src( $attachment_id, $full_size );
-				$props['full_src']   = esc_url( $full_size_src[0] );
-				$props['full_src_w'] = esc_attr( $full_size_src[1] );
-				$props['full_src_h'] = esc_attr( $full_size_src[2] );
-
-				$full_size_class = $full_size;
-				if ( is_array( $full_size_class ) ) {
-					$full_size_class = implode( 'x', $full_size_class );
-				}
-
-				$props['full_class'] = "attachment-$full_size_class size-$full_size_class";
-				//$props[ 'full_srcset' ] = wp_get_attachment_image_srcset( $attachment_id, $full_size );
-				//$props[ 'full_sizes' ]  = wp_get_attachment_image_sizes( $attachment_id, $full_size );
-
-
-				// Gallery thumbnail.
-				$gallery_thumbnail                = wc_get_image_size( 'gallery_thumbnail' );
-				$gallery_thumbnail_size           = apply_filters( 'woocommerce_gallery_thumbnail_size', array(
-					$gallery_thumbnail['width'],
-					$gallery_thumbnail['height']
-				) );
-				$gallery_thumbnail_src            = wp_get_attachment_image_src( $attachment_id, $gallery_thumbnail_size );
-				$props['gallery_thumbnail_src']   = esc_url( $gallery_thumbnail_src[0] );
-				$props['gallery_thumbnail_src_w'] = esc_attr( $gallery_thumbnail_src[1] );
-				$props['gallery_thumbnail_src_h'] = esc_attr( $gallery_thumbnail_src[2] );
-
-				$gallery_thumbnail_class = $gallery_thumbnail_size;
-				if ( is_array( $gallery_thumbnail_class ) ) {
-					$gallery_thumbnail_class = implode( 'x', $gallery_thumbnail_class );
-				}
-
-				$props['gallery_thumbnail_class'] = "attachment-$gallery_thumbnail_class size-$gallery_thumbnail_class";
-				//$props[ 'gallery_thumbnail_srcset' ] = wp_get_attachment_image_srcset( $attachment_id, $gallery_thumbnail );
-				//$props[ 'gallery_thumbnail_sizes' ]  = wp_get_attachment_image_sizes( $attachment_id, $gallery_thumbnail );
-
-
-				// Archive/Shop Page version.
-				$thumbnail_size         = apply_filters( 'woocommerce_thumbnail_size', 'woocommerce_thumbnail' );
-				$thumbnail_size_src     = wp_get_attachment_image_src( $attachment_id, $thumbnail_size );
-				$props['archive_src']   = esc_url( $thumbnail_size_src[0] );
-				$props['archive_src_w'] = esc_attr( $thumbnail_size_src[1] );
-				$props['archive_src_h'] = esc_attr( $thumbnail_size_src[2] );
-
-				$archive_thumbnail_class = $thumbnail_size;
-				if ( is_array( $archive_thumbnail_class ) ) {
-					$archive_thumbnail_class = implode( 'x', $archive_thumbnail_class );
-				}
-
-				$props['archive_class'] = "attachment-$archive_thumbnail_class size-$archive_thumbnail_class";
-				//$props[ 'archive_srcset' ] = wp_get_attachment_image_srcset( $attachment_id, $thumbnail_size );
-				//$props[ 'archive_sizes' ]  = wp_get_attachment_image_sizes( $attachment_id, $thumbnail_size );
-
-
-				// Image source.
-				$image_size     = apply_filters( 'woocommerce_gallery_image_size', 'woocommerce_single' );
-				$src            = wp_get_attachment_image_src( $attachment_id, $image_size );
-				$props['src']   = esc_url( $src[0] );
-				$props['src_w'] = esc_attr( $src[1] );
-				$props['src_h'] = esc_attr( $src[2] );
-
-				$image_size_class = $image_size;
-				if ( is_array( $image_size_class ) ) {
-					$image_size_class = implode( 'x', $image_size_class );
-				}
-				$props['class']  = "wp-post-image wvg-post-image attachment-$image_size_class size-$image_size_class ";
-				$props['srcset'] = wp_get_attachment_image_srcset( $attachment_id, $image_size );
-				$props['sizes']  = wp_get_attachment_image_sizes( $attachment_id, $image_size );
-
-				$props['extra_params'] = wc_implode_html_attributes( apply_filters( 'woo_variation_gallery_image_extra_params', array(), $props, $attachment_id, $product_id ) );
-
-			}
-
-			return apply_filters( 'woo_variation_gallery_get_image_props', $props, $attachment_id, $product_id );
 		}
 
 
@@ -1448,8 +1194,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			$old_template = $template;
 
 			// Disable gallery on specific product
-
-			if ( apply_filters( 'disable_woo_variation_gallery', false ) ) {
+			if ( apply_filters( 'disable_sp_variations_gallery_images', false ) ) {
 				return $old_template;
 			}
 
@@ -1463,12 +1208,12 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 			return $template;
 		}, 30, 2 );
+
 		add_filter( 'wc_get_template_part', function($template, $slug){
 			$old_template = $template;
 
 			// Disable gallery on specific product
-
-			if ( apply_filters( 'disable_woo_variation_gallery', false ) ) {
+			if ( apply_filters( 'disable_sp_variations_gallery_images', false ) ) {
 				return $old_template;
 			}
 
