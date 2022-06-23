@@ -361,8 +361,11 @@ window.document.splugins.wbc.variations = window.document.splugins.wbc.variation
 //             --  gallery_images  
 //                 --  images 
 //                 --  videos 
+                        --  video can be served using custom_html also but maybe its own specific type for video is necessary? need to decide on it -- to h 
 //                 --  custom_html 
 //                 --  NOTE: since the data in case gallery_images module will be comming from the variation events in the variation etc. event args so nothing needed to be assigned in our main data var. 
+                        --  and like for swatches if required then need to dump the data in images container dom element, like for swatches it is on variable-items-wrapper element dom -- to h and -- to b 
+                            --  check if that plugin we were exploring does have, but either way we will do only if it is necessary for us on the js layer 
 //         -   template 
 //             --  will vary based on attribute types, extensions and some other feature related conditions also 
 //                 --  but to simplify it we can simply depend on template_type or if required then in specific scenarios on the particular template_key
@@ -384,6 +387,8 @@ window.document.splugins.wbc.variations = window.document.splugins.wbc.variation
 //                     --  third also make sure that desktop assets only are loading for desktop and the mobile assets only are loading for the mobile -- to t 
 //             --  react tempaltes -- we will going to one alternate widgets set of templates which would be based on react framework 
 //             --  what about zoom dom loop template, just create one and replace inside or create all and hide/show? the later is clean and would require less maintainance so should do that. 
+                    // --  and in case some zoom must need only one tempalte then we can simply enable that setting using a hook for zoom core layers and php and publish that under the configsfor variations gallery_images and swatches as well. 
+                    //     --  on js layer such configs we can keep on common parent later of the variations js module itself. 
 //         -   pages 
 //             -- category page 
 //             -- item page 

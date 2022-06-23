@@ -455,80 +455,36 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		}
 
 
-		public function get_gallery_image_html( $product, $attachment_id, $options = array() ) {
+		ACTIVE_TODO we may like to provide remove_featured_image setting on our admin 
+			--	t and a need make sure that this time you make the css structure precisely and maturely, like that is in sync with and based on the heirachiical classes structure we have planned -- to a and -- to t. it is a must. 
+				--	there should be dedicated classes for things like wbc-sp-variations-slider-video-thumb wbc-sp-variations-zoom-video-container wbc-sp-variations-zoom-darklight-container and so on. -- to t and -- to a and -- to b 
 
-			$defaults = array( 'is_main_thumbnail' => false, 'has_only_thumbnail' => false );
-			$options  = wp_parse_args( $options, $defaults );
 
-			$image             = $this->get_product_attachment_props( $attachment_id );
-			$post_thumbnail_id = $product->get_image_id();
-
-			$remove_featured_image = wc_string_to_bool( woo_variation_gallery()->get_option( 'remove_featured_image', 'no', 'woo_variation_gallery_remove_featured_image' ) );
-
-			if ( $remove_featured_image && absint( $attachment_id ) == absint( $post_thumbnail_id ) ) {
-				return '';
+		we need to create zoom loop custom html tempalte that supports the mp4 videos 
+			--	what option do we have for the dom, I think its below two one is iframe and second is video tag, but not sure what are their pros and cons -- to t and -- to a 
+				--	brief about the pros and cons of both options -- to t and -- to a 
+		if ( ! $options['has_only_thumbnail'] ) {
+			if ( isset( $image['video_link'] ) && ! empty( $image['video_link'] ) && $image['video_embed_type'] === 'iframe' ) {
+				$template   = '<div class="wvg-single-gallery-iframe-container" style="padding-bottom: %d%%"><iframe src="%s" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div>';
+				$inner_html = sprintf( $template, $image['video_ratio'], $image['video_embed_url'] );
 			}
 
-			$classes = array( 'wvg-gallery-image' );
-			if ( isset( $image['video_link'] ) && ! empty( $image['video_link'] ) ) {
-				array_push( $classes, 'wvg-gallery-video-slider' );
+			if ( isset( $image['video_link'] ) && ! empty( $image['video_link'] ) && $image['video_embed_type'] === 'video' ) {
+				$template   = '<div class="wvg-single-gallery-video-container" style="padding-bottom: %d%%"><video preload="auto" controls controlsList="nodownload" src="%s"></video></div>';
+				$inner_html = sprintf( $template, $image['video_ratio'], $image['video_link'] );
 			}
-			$classes = apply_filters( 'woo_variation_gallery_slider_image_html_class', $classes, $attachment_id, $image );
-
-
-			$template = '<div class="wvg-single-gallery-image-container"><img loading="lazy" width="%d" height="%d" src="%s" class="%s" alt="%s" title="%s" data-caption="%s" data-src="%s" data-large_image="%s" data-large_image_width="%d" data-large_image_height="%d" srcset="%s" sizes="%s" %s /></div>';
-
-			$inner_html = sprintf( $template, esc_attr( $image['src_w'] ), esc_attr( $image['src_h'] ), esc_url( $image['src'] ), esc_attr( $image['class'] ), esc_attr( $image['alt'] ), esc_attr( $image['title'] ), esc_attr( $image['caption'] ), esc_url( $image['full_src'] ), esc_url( $image['full_src'] ), esc_attr( $image['full_src_w'] ), esc_attr( $image['full_src_h'] ), esc_attr( $image['srcset'] ), esc_attr( $image['sizes'] ), $image['extra_params'] );
-
-			if ( ! $options['has_only_thumbnail'] ) {
-				if ( isset( $image['video_link'] ) && ! empty( $image['video_link'] ) && $image['video_embed_type'] === 'iframe' ) {
-					$template   = '<div class="wvg-single-gallery-iframe-container" style="padding-bottom: %d%%"><iframe src="%s" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div>';
-					$inner_html = sprintf( $template, $image['video_ratio'], $image['video_embed_url'] );
-				}
-
-				if ( isset( $image['video_link'] ) && ! empty( $image['video_link'] ) && $image['video_embed_type'] === 'video' ) {
-					$template   = '<div class="wvg-single-gallery-video-container" style="padding-bottom: %d%%"><video preload="auto" controls controlsList="nodownload" src="%s"></video></div>';
-					$inner_html = sprintf( $template, $image['video_ratio'], $image['video_link'] );
-				}
-			}
-
-			$inner_html = apply_filters( 'woo_variation_gallery_image_inner_html', $inner_html, $image, $template, $attachment_id, $options );
-
-			// If require thumbnail
-			if ( ! $options['is_main_thumbnail'] ) {
-
-				$classes = array( 'wvg-gallery-thumbnail-image' );
-
-				if ( isset( $image['video_link'] ) && ! empty( $image['video_link'] ) ) {
-					array_push( $classes, 'wvg-gallery-video-thumbnail' );
-				}
-
-				$classes = apply_filters( 'woo_variation_gallery_thumbnail_image_html_class', $classes, $attachment_id, $image );
-
-				$template   = '<img width="%d" height="%d" src="%s" class="%s" alt="%s" title="%s" />';
-				$inner_html = sprintf( $template, esc_attr( $image['gallery_thumbnail_src_w'] ), esc_attr( $image['gallery_thumbnail_src_h'] ), esc_url( $image['gallery_thumbnail_src'] ), esc_attr( $image['gallery_thumbnail_class'] ), esc_attr( $image['alt'] ), esc_attr( $image['title'] ) );
-				$inner_html = apply_filters( 'woo_variation_gallery_thumbnail_image_inner_html', $inner_html, $image, $template, $attachment_id, $options );
-			}
-
-			return '<div class="' . esc_attr( implode( ' ', array_unique( $classes ) ) ) . '"><div>' . $inner_html . '</div></div>';
 		}
 
-		public function get_available_variation( $product_id, $variation_id ) {
-			$variable_product = new WC_Product_Variable( $product_id );
-			$variation        = $variable_product->get_available_variation( $variation_id );
+		what difference does it make when edit is used in the below function call, need to do research -- to d ACTIVE_TODO 
+		$attachment_ids       = $product->get_gallery_image_ids( 'edit' );
+		$post_thumbnail_id    = $product->get_image_id( 'edit' );
 
-			return $variation;
-		}
-
-		public function get_available_variations( $product ) {
-
-			if ( is_numeric( $product ) ) {
-				$product = wc_get_product( absint( $product ) );
-			}
-
-			return $product->get_available_variations();
-		}
-
+		firstly we need to create a standard ajax function in options controller -- to d 
+			then need to define some way in the bootstrap proces so that ajax function of this options controller gets callled on ajax -- to h. simply we can create a ajax function in the bootstrap process, or there is one already, and that function would call certain controllers ajax function when their applicable ajax action is detected? so maybe the ajax function will recieve the key of detected ajax action in its args param(so ajax function will have args param) 
+				--	then it can call set of functions of controller and model like get_data, selectron, selectron hook render, load view, getUI, render ui and so on but yeah it can not call the should_init and init. -- to d 
+					--	so just implement below four functions in the applicable function layers, with appropriate page_section key setting -- to d 
+						--	one important thing is that we will the merge the implementation of our get_available_variation hook callback function implementation in wbc variations class with below two functions, below two functions will simply inject their unique flows with proper if conditions -- to d 
+							--	however that need to be moved a common function with some name like get_available_variation_core and it will be private function in the same class with some more params with default values -- to d 
 		public function get_default_gallery_images( $product_id ) {
 
 			$product              = wc_get_product( $product_id );
@@ -621,13 +577,6 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			wp_send_json( apply_filters( 'woo_variation_gallery_get_variation_gallery', $images, $product_id ) );
 		}
 
-		public function slider_template_js() {
-			ob_start();
-			require_once dirname( __FILE__ ) . '/slider-template-js.php';
-			$data = ob_get_clean();
-			echo apply_filters( 'woo_variation_gallery_slider_template_js', $data );
-		}
-
 		add_filter( 'woocommerce_post_class', function( $classes, $product ) {
 
 			$classes[] = '';
@@ -642,16 +591,17 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		//////function variation_options 
 		//--- merged 
 
-		$content = $this->variable_item( $type, $options, $args );
 				/*function variable_item( $type, $options, $args, $saved_attribute = array() ) {*/
 					//--- merged 
+					move to asana task like wbc templating. -- to d 
 						-- here we see that the different swatches templates that are supported are scattered around, but now it should be in the new template folder planned as per the templating standard 
-							--	there will be three template files that will be required for any widget that provides swatches UI -- to b 
-									--	 and in the palce of the dropdown part in below filename the input type name would change to icon, icon_dropdown, slider and so on -- to b 
+							--	there will be three template files that will be required for any widget that provides swatches UI 
+									--	 and in the palce of the dropdown part in below filename the input type name would change to icon, icon_dropdown, slider and so on  
 								--	sp_variations_optionsUI_dropdown_ribbon_wrapper.php 		
 								--	sp_variations_optionsUI_dropdown.php 		
 								--	sp_variations_optionsUI_dropdown_option_template_part.php 		
-							--	I think the swatches means maybe the icon template will be default and rest will be in their own folder like dropdown, icon-dropdown and so on -- to b ACTIVE_TODO
+							--	I think the swatches means maybe the icon template will be default and rest will be in their own folder like dropdown, icon-dropdown and so on -- to b ACTIVE_TODO 
+										--	there is a catch, dropdown, icon-dropdown and so on folders in the tempaltes folder does represent one entire widget and whatever inside there should be considered as the default template and if then any other folder appear inside above folders then that would be considered as the alternate widget folder - NOTE 
 									--	when we implement the switches for the default swatches type at that time we should do it -- to h or -- to b or -- to d ACTIVE_TODO 
 								--	and now the $args will support one more param like page_section which will work as dir so the folder structure would become single-product/variations-swatches/icon-dropdown/ -- to b 
 									--	and for extensions like darker lighter or 360 or recently purchased or diamond meta have their tempalte for image gallary then the folder structure would become single-product/image-gallery/ * /	and it would be needed for both recently purchased and the diamond meta -- to b 
@@ -659,13 +609,11 @@ class SP_Model_Single_Product extends SP_Single_Product {
 									--	and most of logic in this class also sound like the rendering logic so need to keep track of that also -- to b 
 						 
 					/*}*/
-		
-		//echo $this->variable_items_wrapper( $content, $type, $args );
-		///////////////////////////	
 
 		add_action('wp_footer',function(){
 			/*--	check below two files and check if there is any optionsUI related flow there -- to b done*/
 				/*-- ACTIVE_TODO need to rethink theme adaption library flow, the patches inside the files are fine but all those patches are related to something else and none are related to optionsUI so we need a flow where particular layer load thier particular theme adaption part only. -- and on this regard one other thing that is needed that we noted for theme adaption is reusability and maintainability mostly.*/  
+
 			wbc()->theme->load('css','product');
         	wbc()->theme->load('js','product');
 			// Toggle Button
@@ -704,6 +652,11 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 			$asset_params['bg_hover_color'] = wbc()->options->get_option('tiny_features','tiny_features_option_ui_bg_color_hover','#DCC7C7');
 
+			--	and load asset function of this model from here, with page_section param -- to b 
+				--	and inside there put if condition for page_section and load asset from inside there like you did in some other model -- to b 
+					--	then remove all below css and js from here -- to b 
+
+			--	and do same all above for slider and zoom layers of their default implementation render layers also if not yet -- to b. note that it has nothing to do with their init_core and render_core fucntion. 
 			ob_start();
 			?>
 				--- move to /woo-bundle-choice/asset/variations.assets.php file ma
