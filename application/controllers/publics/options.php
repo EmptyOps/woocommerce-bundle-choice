@@ -93,17 +93,16 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 
     private function get_ui_definition($args = array()){
 
-    	--	make below type var dynamic now -- to b
-    	$type = 'button';
+    	$type = $args['data']['woo_dropdown_attribute_html_data']['type'];
     	
     	and make all four templates below dynamic, based on the points added on data layer and also there might be some on the template files -- to b 
 
     	if ($args['page_section'] == 'woo_dropdown_attribute_html') {
 
-    		drop type var from below and set name of the one only template, simply set it hardcoded -- to b 
+    		//drop type var from below and set name of the one only template, simply set it hardcoded -- to b done
 
     		$args['widget_key'] = '';
-    		$args['template_sub_dir'] = 'single-product/variations-swatches/woo_dropdown_attribute/'.$type;
+    		$args['template_sub_dir'] = 'single-product/variations-swatches/woo_dropdown_attribute';
     		$args['template_option_key'] = '';
 	        $args['option_group_key'] = '';
 	        $args['template_key'] = 'woo_dropdown_attribute';
@@ -125,25 +124,25 @@ class Options extends \eo\wbc\controllers\publics\Controller {
     			--	so there would be some heirarchical if conditions that will be required, the conditions would be based on $type -- to b 
 
     		$args['data']['template_data'] = array();
-    		$args['data']['template_data']['template_key'] = 'sp_variations_optionsUI-'.$type.'-option_template_part';
-    		$args['data']['template_data']['template_sub_dir'] = 'single-product/variations-swatches/'.$type;
+    		$args['data']['template_data']['template_key'] = 'sp_variations_optionsUI-common-option_template_part';
+    		$args['data']['template_data']['template_sub_dir'] = 'single-product/variations-swatches';
 
     		$args['widget_key'] = '';
     		$args['template_sub_dir'] = 'single-product/variations-swatches';
     		$args['template_option_key'] = '';
 	        $args['option_group_key'] = '';
-	        $args['template_key'] = 'sp_variations_optionsUI-common-option_template_part';
+	        $args['template_key'] = 'sp_variations_optionsUI-common';
 	        $args['plugin_slug'] = '';
 
     	}else if ($args['page_section'] == 'variable_item_wrapper') {
 
-    		drop type var from below and set name of the one only template, simply set it hardcoded -- to b 
+    		// drop type var from below and set name of the one only template, simply set it hardcoded -- to b done
 
     		$args['widget_key'] = '';
-    		$args['template_sub_dir'] = 'single-product/variations-swatches/'.$type;
+    		$args['template_sub_dir'] = 'single-product/variations-swatches';
     		$args['template_option_key'] = '';
 	        $args['option_group_key'] = '';
-	        $args['template_key'] = 'sp_variations_optionsUI-'.$type.'-ribbon_wrapper';
+	        $args['template_key'] = 'sp_variations_optionsUI-common-ribbon_wrapper';
 	        $args['plugin_slug'] = '';
 	
     	}/*else {

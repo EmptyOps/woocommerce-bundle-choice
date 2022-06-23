@@ -408,4 +408,34 @@ class SP_WBC_Variations extends SP_Variations {
 
 	}
 
+	public static function wc_product_has_attribute_type( $type, $attribute_name ) {
+
+		$attributes           = wc_get_attribute_taxonomies();
+		$attribute_name_clean = str_replace( 'pa_', '', wc_sanitize_taxonomy_name( $attribute_name ) );
+
+		// Created Attribute
+		if ( 'pa_' === substr( $attribute_name, 0, 3 ) ) {
+
+
+			$attribute = array_values(
+				array_filter(
+					$attributes, function ( $attribute ) use ( $type, $attribute_name_clean ) {
+					return $attribute_name_clean === $attribute->attribute_name;
+				}
+				)
+			);
+
+			if ( ! empty( $attribute ) ) {
+				$attribute =  $attribute[0];
+			} else {
+				$attribute = \eo\wbc\system\core\data_model\SP_Attribute::get_wc_attribute_taxonomy( $attribute_name );
+			}
+
+			//ACTIVE_TODO not sure if this check is really necessary, and we may like to consider it for dropping if it is not necessary. but it might be since it seems community standard logic. 
+			return isset( $attribute->attribute_type ) && ( $attribute->attribute_type == $type );
+		} else {
+			return false;
+		}
+	}
+
 }

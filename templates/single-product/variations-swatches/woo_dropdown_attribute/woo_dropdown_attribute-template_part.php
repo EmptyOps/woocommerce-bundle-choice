@@ -25,7 +25,6 @@ if ( ! empty( $data['woo_dropdown_attribute_html_data']['options'] ) ) {
 		foreach ( $data['woo_dropdown_attribute_html_data']['terms'] as $term ) {
 			if ( in_array( $term->slug, $data['woo_dropdown_attribute_html_data']['options'], true ) ) {
 				
-				------------- a etlu wvs_default_button_variation_attribute_options alg che
 					echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) ) . '</option>';
 
 
@@ -40,49 +39,6 @@ if ( ! empty( $data['woo_dropdown_attribute_html_data']['options'] ) ) {
 				        'attr' =>$attr ,
 					)
 
-				-------------
-				------------- a etlu wvs_default_image_variation_attribute_options  alg che
-					echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) ) . '</option>';
-
-
-
-					$attr = array( 'value' => esc_attr( $term->slug ) );
-					if (!empty(selected( sanitize_title( $args['selected'] ), $term->slug, false ))) {
-						$attr['selected'] = 'selected';
-					}
-					array(
-					    'type' => 'option',
-				        'preHTML' => esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) ),
-				        'attr' => $attr,
-					)
-
-				-----
-				--------------a etlu wvs_radio_variation_attribute_options  alg che
-					echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) ) . '</option>';
-
-
-					$attr = array( 'value' => esc_attr( $term->slug ) );
-					if (!empty(selected( sanitize_title( $args['selected'] ), $term->slug, false ))) {
-						$attr['selected'] = 'selected';
-					}
-					array(
-					    'type' => 'option',
-				        'preHTML' => esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) ),
-				        'attr' => $attr,
-					)
-				--------------
-				echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) . '</option>';
-
-
-					$attr = array( 'value' => esc_attr( $term->slug ) );
-					if (!empty(selected( sanitize_title( $args['selected'] ), $term->slug, false ))) {
-						$attr['selected'] = 'selected';
-					}
-					array(
-					    'type' => 'option',
-				        'preHTML' => \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product),
-				        'attr' => $attr,
-					)
 			}
 		}
 	} else {

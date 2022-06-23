@@ -1343,13 +1343,16 @@ class SP_Model_Single_Product extends SP_Single_Product {
         			--	NOTE: now while all hooks required by above extensions and extensions can do their job using those hooks then so not sure if render_variations_swatches_attribute_types function in the model is necessary or not. 
 
 
-        	check the logic of below called function -- to d or -- to b 
-        		--	 and we may like to implement such function -- to d or -- to b 
-			foreach ( $available_type_keys as $type ) {
-				if ( wvs_wc_product_has_attribute_type( $type, $args['hook_callback_args']['hook_args']['attribute'] ) ) {
+        	
+			if ( \eo\wbc\model\publics\data_model\SP_WBC_Variations::wc_product_has_attribute_type( $type, $args['hook_callback_args']['hook_args']['attribute'] ) ) {
+
+				$data = $this->prepare_swatches_data_by_attribute_type($data,$args);
+
+			} else{
+
+				ACTIVE_TODO need to implement the default implementation very soon. 
 
 
-			$data = $this->prepare_swatches_data_by_attribute_type($data,$args);
 
 				ACTIVE_TODO we may very soon like to do the logic of using variation image as the option image and something such 
 					--	and this point is related default settings planned above, means the default_image_type_attribute 
@@ -1429,7 +1432,9 @@ class SP_Model_Single_Product extends SP_Single_Product {
 				// 		)
 				// 	);
 
-				// } 
+				// }
+
+			}
 
 		// $data = ob_get_clean();
 
@@ -1735,10 +1740,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 		$content = wvs_default_variable_item( $type, $options, $args );
 		-------
-		also comment on why below two lines are here -- to b 
-		$content = wvs_variable_item( $type, $options, $args );
-
-		echo wvs_variable_items_wrapper( $content, $type, $args );
+		/*$content = wvs_variable_item( $type, $options, $args );*/
 
 		$data = $this->prepare_variable_item_data($data,$args);
 		$data = $this->prepare_variable_item_wrapper_data($data,$args);
@@ -1834,22 +1836,8 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 				foreach ( $data['woo_dropdown_attribute_html_data']['terms'] as $term ) {
 					if ( in_array( $term->slug, $data['woo_dropdown_attribute_html_data']['options'], true ) ) {
-						
-						------------- a etlu wvs_default_button_variation_attribute_options alg che
-							$data['woo_dropdown_attribute_html_data']['option_name'] = \eo\wbc\system\core\data_model\SP_Attribute::instance()->variation_option_name( $term_name, $term, $attribute, $product);
-							/*echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) ) . '</option>';*/
-						-------------
-						------------- a etlu wvs_default_image_variation_attribute_options  alg che
-							$data['woo_dropdown_attribute_html_data']['option_name'] = \eo\wbc\system\core\data_model\SP_Attribute::instance()->variation_option_name( $term_name, $term, $attribute, $product);
-							/*echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) ) . '</option>';*/
-						-----
-						--------------a etlu wvs_radio_variation_attribute_options  alg che
-							$data['woo_dropdown_attribute_html_data']['option_name'] = \eo\wbc\system\core\data_model\SP_Attribute::instance()->variation_option_name( $term_name, $term, $attribute, $product);
-							/*echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) ) . '</option>';*/
-						--------------
-						please check all three above variants against the below and tell me what is different that you see in between them. I do not notice anything so far. -- to b 
 						$data['woo_dropdown_attribute_html_data']['option_name'] = \eo\wbc\system\core\data_model\SP_Attribute::instance()->variation_option_name( $term_name, $term, $attribute, $product);
-						/*echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) . '</option>';*/
+						/*echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) ) . '</option>';*/
 					}
 				}
 			} else {
@@ -1872,7 +1860,6 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 		$data['variable_item_data'] = array();
 
-		check below 2-3 lines, I have some doubt here -- to b 
 		$data['variable_item_data']['product']   = $data['woo_dropdown_attribute_html_data']['product'];
 		$data['variable_item_data']['attribute'] = $data['woo_dropdown_attribute_html_data']['attribute'];
 		$data['variable_item_data']['data']      = '';
@@ -1925,8 +1912,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 					} else{
 						$data['variable_item_data']['selected_item'] ='Choose an option';
 					}
-					there might be some mistake here, it must not be moved to ribbon wrapper. fix it. -- to b 
-					----- move to woo-bundle-choice/templates/single-product/variations-swatches/sp_variations_optionsUI-dropdown-image-image_only-ribbon_wrapper.php ma
+					----- move to woo-bundle-choice/templates/single-product/variations-swatches/sp_variations_optionsUI-dropdown-image-image_only.php ma
 					/*$data.=sprintf( '<div class="ui fluid selection dropdown" style="min-height: auto;">
 							  <input type="hidden" name="attribute_%s" data-attribute_name="attribute_%s" data-id="%s">
 							  <i class="dropdown icon"></i>
@@ -1935,9 +1921,9 @@ class SP_Model_Single_Product extends SP_Single_Product {
 				}
 				-------------------
 				
-				below moved section should be moved to template part, which would be common amongst non dropdown types. so need to move in a common template part file(and create one if not yet there), and from this file also load dropdown types, which are skipped here but we can manage in some if/else conddition below -- to b 
-				------- m have this additional
-				--- move to woo-bundle-choice/templates/single-product/variations-swatches/sp_variations_optionsUI-dropdown-image-image_only.php ma
+				//below moved section should be moved to template part, which would be common amongst non dropdown types. so need to move in a common template part file(and create one if not yet there), and from this file also load dropdown types, which are skipped here but we can manage in some if/else conddition below -- to b done
+				//------- m have this additional
+				--- move to woo-bundle-choice/templates/single-product/variations-swatches/sp_variations_optionsUI-common-option_template_part.php ma
 				/*foreach ( $terms as $term ) {
 					if ( in_array( $term->slug, $options ) ) {
 						$selected_class = ( sanitize_title( $args[ 'selected' ] ) == $term->slug ) ? 'selected' : '';
@@ -1956,7 +1942,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 						$data .= '</li>';
 					}
 				}*/
-					----------
+					// ----------
 
 				and will us e below being prepared data for applying in above templates -- to b 
 					--	and apply the optimum number of properties, html attr/class etc from below to above tempaltes. but yeah can skip the tooltip -- to b 
@@ -2131,7 +2117,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 		array_push( $data['variable_item_wrapper_data']['css_classes'], $data['variable_item_wrapper_data']['clear_on_reselect'] );
 
-		and just dump the options on ribbon wrapper main element, that will going to be needed on the js layers -- to b 
+		//and just dump the options on ribbon wrapper main element, that will going to be needed on the js layers -- to b done
 		// <div aria-live="polite" aria-atomic="true" class="screen-reader-text">%1$s: <span data-default=""></span></div>
 		$data = sprintf( '<ul role="radiogroup" aria-label="%1$s"  class="variable-items-wrapper %2$s" data-attribute_name="%3$s" data-attribute_values="%4$s">%5$s</ul>', esc_attr( wc_attribute_label( $attribute ) ), trim( implode( ' ', array_unique( $css_classes ) ) ), esc_attr( \eo\wbc\system\core\data_model\SP_Attribute::instance()->variation_attribute_name($attribute) ), wc_esc_json( wp_json_encode( array_values( $options ) ) ), $contents );
 		
