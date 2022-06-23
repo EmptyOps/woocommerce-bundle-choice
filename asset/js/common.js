@@ -57,6 +57,8 @@ window.document.splugins.common.parseJSON = function(result,confirm_obj_format=t
 }
 
 window.document.splugins.common._o = function(object, key) {
+
+    return Object.prototype.hasOwnProperty.call(object, property);
    
 }
 

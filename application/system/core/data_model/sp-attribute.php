@@ -89,4 +89,16 @@ class SP_Attribute extends SP_Entity {
 
 	}
 
+	public static  function get_wc_attribute_taxonomy( $attribute_name ) {
+
+		//ACTIVE_TODO we may very soon like to implement the caching here, if the loading time or overall speed is concern then this would be high priority 
+		global $wpdb;
+
+		$attribute_name = str_replace( 'pa_', '', wc_sanitize_taxonomy_name( $attribute_name ) );
+
+		$attribute_taxonomy = $wpdb->get_row( "SELECT * FROM " . $wpdb->prefix . "woocommerce_attribute_taxonomies WHERE attribute_name='{$attribute_name}'" );
+
+			
+		return $attribute_taxonomy;
+	}
 }

@@ -90,29 +90,63 @@ class Options extends \eo\wbc\controllers\publics\Controller {
     } 
 
     private function get_ui_definition($args = array()){
+<<<<<<< HEAD
     	if ($args['page_section'] == 'woo_dropdown_attribute_html') {
 
     		$args['widget_key'] = '';
     		$args['template_sub_dir'] = '';
+=======
+
+    	$type = $args['data']['woo_dropdown_attribute_html_data']['type'];
+    	
+    	and make all four templates below dynamic, based on the points added on data layer and also there might be some on the template files -- to b 
+
+    	if ($args['page_section'] == 'woo_dropdown_attribute_html') {
+
+    		//drop type var from below and set name of the one only template, simply set it hardcoded -- to b done
+
+    		$args['widget_key'] = '';
+    		$args['template_sub_dir'] = 'single-product/variations-swatches/woo_dropdown_attribute';
+>>>>>>> 552e4e0735a377fc1d900335c054fea6fb5ed9f0
     		$args['template_option_key'] = '';
 	        $args['option_group_key'] = '';
 	        $args['plugin_slug'] = '';
 
 
+<<<<<<< HEAD
     	}else if ($args['page_section'] == 'variable_item') {
+=======
+    		$args['data']['template_data'] = array();
+    		$args['data']['template_data']['template_key'] = 'sp_variations_optionsUI-common-option_template_part';
+    		$args['data']['template_data']['template_sub_dir'] = 'single-product/variations-swatches';
+>>>>>>> 552e4e0735a377fc1d900335c054fea6fb5ed9f0
 
     		$args['widget_key'] = '';
     		$args['template_sub_dir'] = '';
     		$args['template_option_key'] = '';
 	        $args['option_group_key'] = '';
+<<<<<<< HEAD
+=======
+	        $args['template_key'] = 'sp_variations_optionsUI-common';
+>>>>>>> 552e4e0735a377fc1d900335c054fea6fb5ed9f0
 	        $args['plugin_slug'] = '';
 
     	}else if ($args['page_section'] == 'variable_item_wrapper') {
 
+<<<<<<< HEAD
     		$args['widget_key'] = '';
     		$args['template_sub_dir'] = '';
     		$args['template_option_key'] = '';
 	        $args['option_group_key'] = '';
+=======
+    		// drop type var from below and set name of the one only template, simply set it hardcoded -- to b done
+
+    		$args['widget_key'] = '';
+    		$args['template_sub_dir'] = 'single-product/variations-swatches';
+    		$args['template_option_key'] = '';
+	        $args['option_group_key'] = '';
+	        $args['template_key'] = 'sp_variations_optionsUI-common-ribbon_wrapper';
+>>>>>>> 552e4e0735a377fc1d900335c054fea6fb5ed9f0
 	        $args['plugin_slug'] = '';
 
     	}else{
@@ -122,6 +156,9 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 
 	    }
 
+	    --	in parent class function add if condition, that if template_option_key and template_key both is empty then simply return $template -- to b 
+	    	--	so at top define the null $template var -- to b 
+	    	
         return parent::get_ui_definition($args);
 
        /* --- Publics.php no hook_render function no code che

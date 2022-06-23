@@ -44,7 +44,7 @@ class SP_WBC_Variations extends SP_Variations {
 		if( $for_section == "gallery_images_init" ) {
 
 			//	below hooked function will add our data layers of sp_variations gallery_images and maybe also others of the sp_variations to the woo data 					
-			add_filter( 'woocommerce_available_variation', array( $this, 'get_available_variation' ), 90, 3);
+			add_filter( 'woocommerce_available_variation', array( $this, 'get_available_variation_hook_callback' ), 90, 3);
 			
 		}elseif( $for_section == "swatches_init" ) {
 			add_filter( 'woocommerce_ajax_variation_threshold',  function($int){
@@ -151,7 +151,7 @@ class SP_WBC_Variations extends SP_Variations {
 	}
  
 	//	not sure if hook core can callback it on its instance if it is a private function, so kept it public for now. 
-	public function get_available_variation( $variation_get_max_purchase_quantity,  $instance,  $variation ) {
+	public function get_available_variation_hook_callback( $variation_get_max_purchase_quantity,  $instance,  $variation ) {
 
 		first of all rename the vars inside this function as per the above args, look at the plugin we were exploring for clear understanding. we will be using the standard woo args name. -- to d or -- to b 
 
@@ -355,7 +355,7 @@ class SP_WBC_Variations extends SP_Variations {
 		$type['dropdown_image_only']='Dropdown with Icons Only';
 		$type['dropdown']='Dropdown';
 
-		apply_filters('sp_variations_swatches_attribute_types', $type);	 
+		return apply_filters('sp_variations_swatches_attribute_types', $type);	 
 
 	}
 
@@ -419,6 +419,46 @@ class SP_WBC_Variations extends SP_Variations {
 
 		return $variation;
 
+	}
+
+
+	public static function wc_product_has_attribute_type( $type, $attribute_name ) {
+
+		$attributes           = wc_get_attribute_taxonomies();
+		$attribute_name_clean = str_replace( 'pa_', '', wc_sanitize_taxonomy_name( $attribute_name ) );
+
+		// Created Attribute
+		if ( 'pa_' === substr( $attribute_name, 0, 3 ) ) {
+
+
+			$attribute = array_values(
+				array_filter(
+					$attributes, function ( $attribute ) use ( $type, $attribute_name_clean ) {
+					return $attribute_name_clean === $attribute->attribute_name;
+				}
+				)
+			);
+
+			if ( ! empty( $attribute ) ) {
+				$attribute =  $attribute[0];
+			} else {
+				$attribute = \eo\wbc\system\core\data_model\SP_Attribute::get_wc_attribute_taxonomy( $attribute_name );
+			}
+
+			//ACTIVE_TODO not sure if this check is really necessary, and we may like to consider it for dropping if it is not necessary. but it might be since it seems community standard logic. 
+			return isset( $attribute->attribute_type ) && ( $attribute->attribute_type == $type );
+		} else {
+			return false;
+		}
+	}
+	
+	public static function get_available_variations( $product ) {
+
+		if ( is_numeric( $product ) ) {
+			$product = wc_get_product( absint( $product ) );
+		}
+
+		return $product->get_available_variations();
 	}
 
 }
