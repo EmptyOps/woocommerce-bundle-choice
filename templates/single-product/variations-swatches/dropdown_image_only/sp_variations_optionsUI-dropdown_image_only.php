@@ -17,8 +17,8 @@ $selected_item =  sprintf( '<img class="ui mini avatar image" src="%s">', esc_ur
 
 
 
-array(
+$template = array(
     'type' => 'img',
     'class' => 'ui mini avatar image',
-    'src' => '%s',
-)
+    'src' => esc_url( $variable_item_data['options_loop_image'][$term->slug] ),
+);

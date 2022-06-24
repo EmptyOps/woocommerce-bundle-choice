@@ -9,12 +9,14 @@ $image_url = get_term_meta( $term->term_id, 'wbc_attachment', true );
 printf( '<img alt="%s" src="%s" width="%d" height="%d" /><div>%s</div>', esc_attr( $term->name ), esc_url( $image_url ), 40, 40,$term->name);
 
 
-array(
+$template = array(
     'type' => 'img',
-    'src' => '%s',
-    'attr' => array( 'alt' => '%s', 'width' => '%d', 'height' => '%d' ),
-),
-array(
+    'src' => esc_url( $variable_item_data['options_loop_image'][$term->slug] ),
+    'attr' => array( 'alt' => esc_attr( $term->name ), 'width' => '40', 'height' => '40' ),
+);
+
+
+$template = array(
     'type' => 'div',
-    'preHTML' => '%s',
-)
+    'preHTML' => $term->name,
+);

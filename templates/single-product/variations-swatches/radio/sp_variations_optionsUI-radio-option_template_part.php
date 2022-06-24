@@ -10,15 +10,16 @@ printf( '<input name="%1$s" id="%2$s" class="wvs-radio-variable-item" %3$s  type
 
 
 
-array(
+$template = array(
     'type' => 'input',
-    'class' => 'wvs-radio-variable-item',
-    'name' => '%1$s',
-    'id' => '%2$s',
-    'attr' => array( 'type' => 'radio', 'value' => '%4$s', 'data-value' => '%4$s' ),
-),
-array(
+    'class' => 'wvs-radio-variable-item '.checked( sanitize_title( $woo_dropdown_attribute_html_data['options_loop_selected'][ $term->slug ] ), $term->slug, false ),
+    'name' => $variable_item_data['name'],
+    'id' => $variable_item_data['options_loop_id'][$term->slug]['id'],
+    'attr' => array( 'type' => 'radio', 'value' => '%4$s', 'data-value' => esc_attr( $term->slug ) ),
+);
+
+$template = array(
     'type' => 'label',
-    'preHTML' => '%5$s',
-    'attr' => array( 'for' => '%2$s' ),
-)
+    'preHTML' => esc_html( $term->name ),
+    'attr' => array( 'for' => $variable_item_data['options_loop_id'][$term->slug]['id']),
+);

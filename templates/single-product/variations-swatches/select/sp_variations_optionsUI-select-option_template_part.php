@@ -20,43 +20,44 @@ if(wbc()->options->get_option('tiny_features','tiny_features_dropdown_icon_only'
 
 
 
-array(
+$template = array(
     'type' => 'div',
     'class' => 'item',
-    'attr' => array( 'data-value' => '%s' ),
+    'attr' => array( 'data-value' => esc_attr( $term->slug ) ),
     'child' => array(
 		array(
 		    'type' => 'img',
 		    'class' => 'ui mini avatar image',
-		    'src' => '%s',
+		    'src' => esc_url( $variable_item_data['options_loop_image'][$term->slug] ),
 		),
     ),
-)
+    'postHTML' => esc_attr( $term->name ),
+);
 
 
 
 
 
-array(
+$template = array(
     'type' => 'div',
     'class' => 'item',
-    'attr' => array( 'data-value' => '%s' ),
+    'attr' => array( 'data-value' => esc_attr( $term->slug ) ),
     'child' => array(
 		array(
 		    'type' => 'img',
 		    'class' => 'ui mini avatar image',
-		    'src' => '%s',
+		    'src' => esc_url( $variable_item_data['options_loop_image'][$term->slug] ),
 		),
     ),
-    'postHTML'=> '%s',
-)
+    'postHTML'=> esc_attr( $term->name ),
+);
 
 
 
 
-array(
+$template = array(
     'type' => 'div',
     'class' => 'item',
-    'preHTML' => '%s',
-    'attr' => array( 'data-value' => '%s' ),
-)
+    'preHTML' => $term->name,
+    'attr' => array( 'data-value' => esc_attr( $term->slug ) ),
+);

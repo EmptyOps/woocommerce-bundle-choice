@@ -13,8 +13,8 @@ printf( '<div class="variable-item-span variable-item-span-%s">%s</div>', esc_at
 
 
 
-array(
+$template = array(
     'type' => 'div',
-    'class' => 'variable-item-span variable-item-span-%s',
-    'preHTML' => '%s',
-)
+    'class' => 'variable-item-span variable-item-span-'.esc_attr( $variable_item_data['options_loop_type'][$term->slug]['type'] ),
+    'preHTML' => esc_html( $term->name ),
+);
