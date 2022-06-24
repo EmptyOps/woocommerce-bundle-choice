@@ -120,7 +120,7 @@ class Options extends \eo\wbc\controllers\publics\Controller {
     		$args['data']['template_data']['template_sub_dir'] = 'single-product/variations-swatches';
 
     		$args['widget_key'] = '';
-    		$args['template_sub_dir'] = '';
+    		$args['template_sub_dir'] = 'single-product/variations-swatches';
     		$args['template_option_key'] = '';
 	        $args['option_group_key'] = '';
 	        $args['template_key'] = 'sp_variations_optionsUI-common';
