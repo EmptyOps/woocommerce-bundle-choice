@@ -9,7 +9,7 @@
 $attribute = $woo_dropdown_attribute_html_data['args'][ 'attribute' ];
 $attribute_object = $woo_dropdown_attribute_html_data['args']['attribute_object'];
 
-$css_classes = array("{$variable_item_data['options_loop_type'][$term->slug]['type']}-variable-wrapper");
+$css_classes = array("{$variable_item_data['options_loop_type'][$term->slug]}-variable-wrapper");
 $ribbon_color = get_term_meta( $attribute_object->attribute_id,'wbc_ribbon_color',true);
 
  $data = sprintf( '<div class="ui segment"><span class="ui ribbon label" style="background-color:%s;border-color:%s;color:white;">%s</span><span><ul class="ui mini images variable-items-wrapper %s" data-attribute_name="%s" data-attribute_values="%s">%s</ul></span></div>'

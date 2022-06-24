@@ -14,12 +14,12 @@ $template = array(
     'type' => 'input',
     'class' => 'wvs-radio-variable-item '.checked( sanitize_title( $woo_dropdown_attribute_html_data['options_loop_selected'][ $term->slug ] ), $term->slug, false ),
     'name' => $variable_item_data['name'],
-    'id' => $variable_item_data['options_loop_id'][$term->slug]['id'],
+    'id' => $variable_item_data['options_loop_id'][$term->slug],
     'attr' => array( 'type' => 'radio', 'value' => '%4$s', 'data-value' => esc_attr( $term->slug ) ),
 );
 
 $template = array(
     'type' => 'label',
     'preHTML' => esc_html( $term->name ),
-    'attr' => array( 'for' => $variable_item_data['options_loop_id'][$term->slug]['id']),
+    'attr' => array( 'for' => $variable_item_data['options_loop_id'][$term->slug]),
 );

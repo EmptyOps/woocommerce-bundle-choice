@@ -4,7 +4,7 @@
  * in case if you want to implement your custom html then follow our documentation guide on how to add add custom html templates by following this link https://sphereplugins.com/docs/how-to-override-templates-using-custom-html
  */
 
-if(in_array($variable_item_data['options_loop_type'][$term->slug]['type'],array('dropdown_image','dropdown_image_only','dropdown'))) {
+if(in_array($variable_item_data['options_loop_type'][$term->slug],array('dropdown_image','dropdown_image_only','dropdown'))) {
 
      --- a code woo-bundle-choice/application/controllers/publics/options.php no che
     $data.=sprintf( '<div class="ui fluid selection dropdown" style="min-height: auto;">
@@ -21,7 +21,7 @@ if(in_array($variable_item_data['options_loop_type'][$term->slug]['type'],array(
 
 
 
-    if(in_array($variable_item_data['options_loop_type'][$term->slug]['type'],array('dropdown_image','dropdown_image_only','dropdown'))) {
+    if(in_array($variable_item_data['options_loop_type'][$term->slug],array('dropdown_image','dropdown_image_only','dropdown'))) {
         $data.=sprintf('</div></div>');
     }
 
