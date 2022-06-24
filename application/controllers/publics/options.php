@@ -90,12 +90,6 @@ class Options extends \eo\wbc\controllers\publics\Controller {
     } 
 
     private function get_ui_definition($args = array()){
-<<<<<<< HEAD
-    	if ($args['page_section'] == 'woo_dropdown_attribute_html') {
-
-    		$args['widget_key'] = '';
-    		$args['template_sub_dir'] = '';
-=======
 
     	$type = $args['data']['woo_dropdown_attribute_html_data']['type'];
     	
@@ -104,41 +98,36 @@ class Options extends \eo\wbc\controllers\publics\Controller {
     	if ($args['page_section'] == 'woo_dropdown_attribute_html') {
 
     		//drop type var from below and set name of the one only template, simply set it hardcoded -- to b done
-
     		$args['widget_key'] = '';
     		$args['template_sub_dir'] = 'single-product/variations-swatches/woo_dropdown_attribute';
->>>>>>> 552e4e0735a377fc1d900335c054fea6fb5ed9f0
     		$args['template_option_key'] = '';
 	        $args['option_group_key'] = '';
+	        $args['template_key'] = 'woo_dropdown_attribute';
 	        $args['plugin_slug'] = '';
 
-
-<<<<<<< HEAD
     	}else if ($args['page_section'] == 'variable_item') {
-=======
+
+    		if (!isset($args['data'])) {
+    			$args['data'] = array();
+    		}
+    		dropd template part from both actual key params below, it will be loaded from inside the below main template -- to b 
+    			--	from inside the commong template below the particular template would be loaded -- to b 
+    				--	and on this note for non dropdown types we can simply one file and load their specific option_template_part from there. but lets keep theme together only if they share common code -- to b 
+    			--	and from that particular template the their option_template_part would be loaded 
+    			--	so there would be some heirarchical if conditions that will be required, the conditions would be based on $type -- to b 
     		$args['data']['template_data'] = array();
     		$args['data']['template_data']['template_key'] = 'sp_variations_optionsUI-common-option_template_part';
     		$args['data']['template_data']['template_sub_dir'] = 'single-product/variations-swatches';
->>>>>>> 552e4e0735a377fc1d900335c054fea6fb5ed9f0
 
     		$args['widget_key'] = '';
-    		$args['template_sub_dir'] = '';
+    		$args['template_sub_dir'] = 'single-product/variations-swatches';
     		$args['template_option_key'] = '';
 	        $args['option_group_key'] = '';
-<<<<<<< HEAD
-=======
 	        $args['template_key'] = 'sp_variations_optionsUI-common';
->>>>>>> 552e4e0735a377fc1d900335c054fea6fb5ed9f0
 	        $args['plugin_slug'] = '';
 
     	}else if ($args['page_section'] == 'variable_item_wrapper') {
 
-<<<<<<< HEAD
-    		$args['widget_key'] = '';
-    		$args['template_sub_dir'] = '';
-    		$args['template_option_key'] = '';
-	        $args['option_group_key'] = '';
-=======
     		// drop type var from below and set name of the one only template, simply set it hardcoded -- to b done
 
     		$args['widget_key'] = '';
@@ -146,15 +135,15 @@ class Options extends \eo\wbc\controllers\publics\Controller {
     		$args['template_option_key'] = '';
 	        $args['option_group_key'] = '';
 	        $args['template_key'] = 'sp_variations_optionsUI-common-ribbon_wrapper';
->>>>>>> 552e4e0735a377fc1d900335c054fea6fb5ed9f0
 	        $args['plugin_slug'] = '';
 
-    	}else{
+    	}/*else {
+    		$args['template_sub_dir'] = '';
     		$args['template_option_key'] = '';
 	        $args['option_group_key'] = '';
+	        $args['template_key'] = '';
 	        $args['plugin_slug'] = '';
-
-	    }
+	    }*/
 
 	    --	in parent class function add if condition, that if template_option_key and template_key both is empty then simply return $template -- to b 
 	    	--	so at top define the null $template var -- to b 
