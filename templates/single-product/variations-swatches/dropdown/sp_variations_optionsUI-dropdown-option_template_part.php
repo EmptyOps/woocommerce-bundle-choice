@@ -13,9 +13,9 @@ printf( '<div class="item" data-value="%s">%s</div>', esc_attr( $term->slug ), e
 
 
 
- array(
+$template = array(
     'type' => 'div',
     'class' => 'item',
-    'preHTML' => '%s',
-    'attr' => array( 'data-value' => '%s' ),
-)
+    'attr' => array( 'data-value' => esc_attr( $term->slug ) ),
+    'preHTML' => esc_attr( $term->name ),
+);

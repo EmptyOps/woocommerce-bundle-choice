@@ -6,13 +6,13 @@
 
 $template = null;
 
-foreach ( $terms as $term ) {
-    if ( in_array( $term->slug, $options ) ) {
-        $selected_class = ( sanitize_title( $args[ 'selected' --nid to use staderd data dtaobject hiyer ] ) == $term->slug ) ? 'selected' : '';
+foreach ( $variable_item_data['terms'] as $term ) {
+    if ( in_array( $term->slug, $woo_dropdown_attribute_html_data['options'] ) ) {
+        $selected_class = ( sanitize_title( $woo_dropdown_attribute_html_data['args'][ 'selected'] ) == $term->slug ) ? 'selected' : '';
 
         if (!empty($template_data['template_key'])) {
             -- nid to macit re useabul -- to h
-            wbc()->load->template($template_sub_dir.$template_key,(isset($args['data'])?array('data' => $args['data'],'term'=>$term):array()),true,$args['plugin_slug'],true);
+            wbc()->load->template($template_sub_dir.$template_key,(isset($woo_dropdown_attribute_html_data['args']['data'])?array('data' => $woo_dropdown_attribute_html_data['args']['data'],'term'=>$term):array()),true,$woo_dropdown_attribute_html_data['args']['plugin_slug'],true);
         
         }
 
