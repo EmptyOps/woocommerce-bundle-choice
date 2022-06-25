@@ -499,6 +499,10 @@ ACTIVE_TODO_OC_START
                 --  may need to provide some effects but only where and if necessary, the majority of effects will be provided by the slider and zoom js/jQuery plugin 
                 --  will need to manage the after effects very precisely, to ensure smooth and non cluttering experience 
                     --  it may or likely include managing the loading, swaping and updating of images 
+
+                --  we may like to use the underscore js, I think we must use it from very beginning -- to h 
+                    --  first of all confirm that if wp/woo legacy stack is loading it and if they are then we should not load our own versions to ensure optimum performance -- to t and -- to h 
+                        --  either way if we required to load it then we must load as per the wp, woo and theme/plugins standards so that we can avoid unnecessary versions and mostly load the similar versions -- to a and -- to t. here the catch is that we need to find our the wp standards to let load the common version used by most to save on the performance and so on. 
         -   devices 
                 --  is_mobile and is_tablet - this would be primary 
                         -- create above two flags under ..splugins.common namespace, in js.vars.asset.php so no need to pass those as configs here when this module initiated -- to d done
@@ -741,7 +745,7 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
 
             most part of below code developes the logic for the stock based disable and enable feature 
                 --  so we may like to consider the fundamentals for now and would do mature implementation in the 2nd revision -- to h 
-                
+
             // Append Selected Item Template
             if (woo_variation_swatches_options.show_variation_label) {
               this.$element.find('.variations .label').each(function (index, el) {
@@ -1454,9 +1458,6 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
     var _this.data = {};
     var _this.binding_stats = {};
 
-    this.$wrapper = this._element.closest('.product');
-    this.$variations_form = this.$wrapper.find('.variations_form');
-
     ///////////// -- 15-06-2022 -- @drashti -- ///////////////////////////////
     var compatability = function(section, object, expected_result) {
 
@@ -1501,6 +1502,17 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
 
         window.document.splugins.events.api.createSubject( 'gallery_images', ['process_images'] );
 
+        return _.debounce(function () {
+          
+            preprocess();   
+
+            since we are going to provide the refresh api for external slider and zoom so similarly we should provide the init api function also, and it would most like be from here -- to h or -- to s. from here means after all the preprocess and everything else is covered. 
+
+            have t research on the photo swipe events and effects management that we might need to do -- to t. explore the plugin we are exploring and confirm the events and effects management that we would like to do. 
+          _this.initPhotoswipe();
+
+            note that apart from above most important for us is to test extensively and that 10 demo and 5 slider zoom experiements must be covered in details, and we should research on what available on all community plugins and list out the set of things which we have issues, things that we would like to do and innovations that should be brought to community -- to t and -- to kk and -- to ks and -- to a 
+        }, 500);
     }
 
     var legacyBinding? = function() {
@@ -1542,13 +1554,16 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
                 // ACTIVE_TODO_OC_END                    
         }); 
 
-              this.$variations_form = this.$wrapper.find('.variations_form');
+        like in the swatches module we have the base_container_selector settings need to manage it here, to figure out the below _element -- to h 
+        this.$wrapper = this._element.closest('.product');
+        this.$variations_form = this.$wrapper.find('.variations_form');
+
               this.$attributeFields = this.$variations_form.find('.variations select');
               this.$target = this._element.parent();
               this.$slider = $('.woo-variation-gallery-slider', this._element);
               this.$thumbnail = $('.woo-variation-gallery-thumbnail-slider', this._element);
-              this.product_id = this.$variations_form.data('product_id');
-              this.is_variation_product = this.$variations_form.length > 0;
+        this.product_id = this.$variations_form.data('product_id');
+        this.is_variation_product = this.$variations_form.length > 0;
 
               this._element.addClass('wvg-loaded');
 
@@ -1558,57 +1573,24 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
               this.initEvents();
               this.initVariationGallery();
 
-              if (!this.is_variation_product) {
-                this.imagesLoaded();
-              }
+        if (!this.is_variation_product) {
+        this.imagesLoaded();
+        }
 
-              if (this.is_variation_product) {
-                this.initSlick();
-                this.initZoom();
-                this.initPhotoswipe();
-              }
+        if (this.is_variation_product) {
+        this.initSlick();
+        this.initZoom();
+        this.initPhotoswipe();
+        }
 
               this._element.data('woo_variation_gallery', this);
 
               $(document).trigger('woo_variation_gallery_init', [this]);
 
             _createClass(WooVariationGallery, [{
-              key: "init",
-              value: function init() {
-                var _this = this;
 
-                return _.debounce(function () {
-                  _this.initSlick();
-
-                  _this.initZoom();
-
-                  _this.initPhotoswipe();
-                }, 500);
-              }
-            }, {
-              key: "getChosenAttributes",
-              value: function getChosenAttributes() {
-                var data = {};
-                var count = 0;
-                var chosen = 0;
-                this.$attributeFields.each(function () {
-                  var attribute_name = $(this).data('attribute_name') || $(this).attr('name');
-                  var value = $(this).val() || '';
-
-                  if (value.length > 0) {
-                    chosen++;
-                  }
-
-                  count++;
-                  data[attribute_name] = value;
-                });
-                return {
-                  'count': count,
-                  'chosenCount': chosen,
-                  'data': data
-                };
-              }
-            }, {
+                even if the plugin we are exploring does doing it or not, we would like to do it most likely. and it seems related to resize events so might be connecting to the responsive ness matters, so have to confirm on that -- to t 
+                    --  and then lets do it -- to h and -- to s 
               key: "defaultDimension",
               value: function defaultDimension() {
                 var _this2 = this;
@@ -1634,38 +1616,6 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
               key: "initEvents",
               value: function initEvents() {
                 var _this3 = this;
-
-                this._element.on('woo_variation_gallery_slider_slick_init', function (event, gallery) {
-                  if (woo_variation_gallery_options.is_vertical) {
-                    //$(window).off('resize.wvg');
-                    $(window).on('resize', _this3.enableThumbnailPositionDebounce()); //$(window).on('resize', this.thumbnailHeightDebounce());
-                    //this.$slider.on('setPosition', this.enableThumbnailPositionDebounce());
-
-                    _this3.$slider.on('setPosition', _this3.thumbnailHeightDebounce());
-
-                    _this3.$slider.on('afterChange', function () {
-                      _this3.thumbnailHeight();
-                    });
-                  }
-
-                  if (woo_variation_gallery_options.enable_thumbnail_slide) {
-                    var thumbnails = _this3.$thumbnail.find('.wvg-gallery-thumbnail-image').length;
-
-                    if (parseInt(woo_variation_gallery_options.gallery_thumbnails_columns) < thumbnails) {
-                      _this3.$thumbnail.find('.wvg-gallery-thumbnail-image').removeClass('current-thumbnail');
-
-                      _this3.initThumbnailSlick();
-                    } else {
-                      _this3.$slider.slick('slickSetOption', 'asNavFor', null, false);
-                    }
-                  }
-                });
-
-                this._element.on('woo_variation_gallery_slick_destroy', function (event, gallery) {
-                  if (_this3.$thumbnail.hasClass('slick-initialized')) {
-                    _this3.$thumbnail.slick('unslick');
-                  }
-                });
 
                 this._element.on('woo_variation_gallery_image_loaded', this.init());
               }
@@ -1844,44 +1794,6 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
                 }
               }
             }, {
-              key: "galleryInit",
-              value: function galleryInit(images) {
-                var _this11 = this;
-
-                var hasGallery = images.length > 1;
-
-                this._element.trigger('before_woo_variation_gallery_init', [this, images]);
-
-                this.destroySlick();
-                var slider_inner_html = images.map(function (image) {
-                  var template = wp.template('woo-variation-gallery-slider-template');
-                  return template(image);
-                }).join('');
-                var thumbnail_inner_html = images.map(function (image) {
-                  var template = wp.template('woo-variation-gallery-thumbnail-template');
-                  return template(image);
-                }).join('');
-
-                if (hasGallery) {
-                  this.$target.addClass('woo-variation-gallery-has-product-thumbnail');
-                } else {
-                  this.$target.removeClass('woo-variation-gallery-has-product-thumbnail');
-                }
-
-                this.$slider.html(slider_inner_html);
-
-                if (hasGallery) {
-                  this.$thumbnail.html(thumbnail_inner_html);
-                } else {
-                  this.$thumbnail.html('');
-                } //this._element.trigger('woo_variation_gallery_init', [this, images]);
-
-
-                _.delay(function () {
-                  _this11.imagesLoaded();
-                }, 1); //this._element.trigger('after_woo_variation_gallery_init', [this, images]);
-
-              }
 
             }, {
               key: "initThumbnailSlick",
@@ -2072,6 +1984,48 @@ ACTIVE_TODO_OC_START
         // --  or whether to show tooltip or not 
         // ACTIVE_TODO_OC_END            
         if( type == 'radio' ) 
+
+        note that we may like to create some dedicated functions for updating the actual templates in dom, since this process_template function is broad layer for handling all template related -- to h 
+            --  and should we update templates on the init_private means page load event also, I think we should only if it is required by community standards. and since it would help in avoiding load time hangs to we must confirm with legacy standards and the plugin we were is doing -- to h 
+                --  and once the dom updated of the slider and zoom area the we would like to call many functions or simply can call the init layers functions like preprocess is kind of init level of function -- to h 
+                          key: "galleryInit",
+              value: function galleryInit(images) {
+                var _this11 = this;
+
+                var hasGallery = images.length > 1;
+
+                this._element.trigger('before_woo_variation_gallery_init', [this, images]);
+
+                this.destroySlick();
+                var slider_inner_html = images.map(function (image) {
+                  var template = wp.template('woo-variation-gallery-slider-template');
+                  return template(image);
+                }).join('');
+                var thumbnail_inner_html = images.map(function (image) {
+                  var template = wp.template('woo-variation-gallery-thumbnail-template');
+                  return template(image);
+                }).join('');
+
+                if (hasGallery) {
+                  this.$target.addClass('woo-variation-gallery-has-product-thumbnail');
+                } else {
+                  this.$target.removeClass('woo-variation-gallery-has-product-thumbnail');
+                }
+
+                this.$slider.html(slider_inner_html);
+
+                if (hasGallery) {
+                  this.$thumbnail.html(thumbnail_inner_html);
+                } else {
+                  this.$thumbnail.html('');
+                } //this._element.trigger('woo_variation_gallery_init', [this, images]);
+
+
+                _.delay(function () {
+                  _this11.imagesLoaded();
+                }, 1); //this._element.trigger('after_woo_variation_gallery_init', [this, images]);
+
+              }
 
     }
 
