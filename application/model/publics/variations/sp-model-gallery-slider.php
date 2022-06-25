@@ -35,6 +35,22 @@ class SP_Model_Gallery_Slider extends Eowbc_Base_Model_Publics {
 		add_filter('sp_variations_gallery_images_render', function($classes){
 			$classes[] = 'small-img';
 		});
+
+		add_filter('sp_slzm_slider_image_loop_js_template',function($html){
+
+			$image['gallery_thumbnail_src'] = '{{gallery_thumbnail_src}}';
+			$image['gallery_thumbnail_class'] = '{{gallery_thumbnail_class}}';
+			$image['gallery_thumbnail_src_w'] = '{{gallery_thumbnail_src_w}}';
+			$image['gallery_thumbnail_src_h'] = '{{gallery_thumbnail_src_h}}';
+			$image['alt'] = '{{alt}}';
+			$image['title'] = '{{title}}';
+			$image['post_thumbnail_id'] = '{{post_thumbnail_id}}';
+
+			ACTIVE_TODO templete lode kervani form controllers
+			return $html;
+
+		});
+
 	}
 	public function load_asset(){
 
