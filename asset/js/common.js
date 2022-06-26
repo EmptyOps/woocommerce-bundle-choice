@@ -419,6 +419,15 @@ ACTIVE_TODO_OC_START
             --  media 
                 --  images 
                 --  in addition to images other things that it may need to support are videos and custom html 
+
+            --  configurations 
+                --  regarding configurations we would like to find out the way to use the legacy zoom optons settings provided maybe, first confirm if its actually legacy -- to h 
+                                      var zoom_options = $.extend({
+                    touch: false
+                  }, wc_single_product_params.zoom_options);
+                    --  and if it is legacy then first need to confirm if it has any use for other zoom plugins, or is it useful only when the legacy zoom theme support is enabled? -- to h 
+                        --  that will most likely be the case, but in that case is it better idea to make the legacy zoom, lightbox, slider theme suppoort as default slider and zoom implementation? it may seems like that so in that case we must do it and asap -- to h 
+                            --  however note that lightbox seems to be specific only to the photo swipe and so on feature in the plugin we were exploring -- to h 
         -   events 
                 --  mouse events 
                 --  keyboard events 
@@ -503,6 +512,7 @@ ACTIVE_TODO_OC_START
                 --  we may like to use the underscore js, I think we must use it from very beginning -- to h 
                     --  first of all confirm that if wp/woo legacy stack is loading it and if they are then we should not load our own versions to ensure optimum performance -- to t and -- to h 
                         --  either way if we required to load it then we must load as per the wp, woo and theme/plugins standards so that we can avoid unnecessary versions and mostly load the similar versions -- to a and -- to t. here the catch is that we need to find our the wp standards to let load the common version used by most to save on the performance and so on. 
+                    --  and note that while we are planning to use the underscore js for effects management and smoothing among its other users that we may do, we should note that mostly we need to manage smoothing of broad or specific layers or mianly of extensions events/effects but apart from that the slider and zoom plugins internal smoothing and effects should managed by that plugins and that include all those image effects, smoothing including maybe also the image preload management among other things and if the particular slider and zoom is not providing it or if their support is not mature then can simply change the slider and zoom js/jquery plugin -- to h. just for the notes. 
         -   devices 
                 --  is_mobile and is_tablet - this would be primary 
                         -- create above two flags under ..splugins.common namespace, in js.vars.asset.php so no need to pass those as configs here when this module initiated -- to d done
@@ -636,39 +646,6 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
         window.document.splugins.events.api.createSubject( 'swatches', ['process_attribute_types'] );
 
     };
-
-    var legacyBinding? = function() {
-
-        jQuery('#select_attribute_of_variation').on('woocommerce_variation_has_changed', function(){
-            // do your magic here...
-         }); 
-
-        // ACTIVE_TODO_OC_START
-        // for optionsUI swatches
-        //     --  the fundamental is ensuring all required ajax bindings 
-        //     --  and of course the fundamental calls to the legacy woo js layer apis like woo variation form or something such and so on 
-        //     --  and accurate management of fundamentals like generated, change and check(which m was triggering) etc. events and also out of stock and other such business logic implementation 
-        //     --  and yeah even supporting the keyboard and mouse events which is vital for the user experience 
-
-        // moved here from the wbc options(optionsUI) controller 
-        // ACTIVE_TODO_OC_END
-
-        here it seems that m have explicitly handled the click event, but we should do if it is by standard require and the legacy flows does need us to take care of it. so confirm first with the plugin we are exploring -- to h 
-        $('.variable-item').on('click',function(){
-            var target_selector = $('#'+$(this).data('id'));
-            target_selector.val($(this).data('value'));
-            $(this).parent().find('.selected').removeClass('selected');
-            $(this).addClass('selected');
-            jQuery(".variations_form" ).trigger('check_variations');
-            $(target_selector).trigger('change');
-        });
-
-        jQuery(".variations_form").on('click', '.reset_variations'/*'woocommerce_variation_select_change'*//*'reset'*/,function(){
-            jQuery('.variable-items-wrapper .selected').removeClass('selected');
-            jQuery('.variable-items-wrapper .dropdown').dropdown('restore defaults');
-        });
-
-    }
 
 
     var preprocess = function() {
@@ -1157,8 +1134,10 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
     }
 
     var process_events = function(type){
-        on_click();
 
+        on_change_listener();    
+
+        on_click_listener();    
     }
 
     var process_and_manage_effects = function(type){
@@ -1181,28 +1160,15 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
 
     // -   events 
     // --  mouse events 
-    var on_click = function(type) {
+    var on_change_listener = function(type) {
 
-       if(window.document.splugins.common._b(_this.binding_stats, 'on_click', type)){
+        if(window.document.splugins.common._b(_this.binding_stats, 'on_change_listener', type)){
             return false;
-       }
+        }
 
-
-    };
-    // ACTIVE_TODO_OC_START
-    // --  keyboard events 
-    // ACTIVE_TODO_OC_END
-    var on_keyup or down ? = function() {
-
-
-    };
-            // ACTIVE_TODO_OC_START
-            // --  legacy events (events of woo emitted on certain scenarios) 
-            // --  events emitted by other plugins/themes which we need to take care of in case of compatiblity matters, so it can be termed as the compatiblity events 
-            // ACTIVE_TODO_OC_END
-
-    // -- base events - after the above events are handled by their particular function/layer, they would call below functions to do the ultimate work         
-    var change = function() {
+        jQuery('#select_attribute_of_variation').on('woocommerce_variation_has_changed', function(){
+            // do your magic here...
+         }); 
 
         var _this = this;
         this.$element.off('woocommerce_variation_has_changed.wvs');
@@ -1366,6 +1332,72 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
             $(this).trigger('wvs-items-updated');
           });
         });
+
+        on_change();
+
+    };
+
+    var on_click_listener = function(type) {
+
+        if(window.document.splugins.common._b(_this.binding_stats, 'on_click', type)){
+            return false;
+        }
+
+        ACTIVE_TODO_OC_START
+        for optionsUI swatches
+            --  the fundamental is ensuring all required ajax bindings 
+            --  and of course the fundamental calls to the legacy woo js layer apis like woo variation form or something such and so on 
+            --  and accurate management of fundamentals like generated, change and check(which m was triggering) etc. events and also out of stock and other such business logic implementation 
+            --  and yeah even supporting the keyboard and mouse events which is vital for the user experience 
+
+        moved here from the wbc options(optionsUI) controller 
+        ACTIVE_TODO_OC_END
+
+        here it seems that m have explicitly handled the click event, but we should do if it is by standard require and the legacy flows does need us to take care of it. so confirm first with the plugin we are exploring -- to h 
+        $('.variable-item').on('click',function(){
+            var target_selector = $('#'+$(this).data('id'));
+            target_selector.val($(this).data('value'));
+            $(this).parent().find('.selected').removeClass('selected');
+            $(this).addClass('selected');
+            jQuery(".variations_form" ).trigger('check_variations');
+            $(target_selector).trigger('change');
+        });
+
+        jQuery(".variations_form").on('click', '.reset_variations'/*'woocommerce_variation_select_change'*//*'reset'*/,function(){
+            jQuery('.variable-items-wrapper .selected').removeClass('selected');
+            jQuery('.variable-items-wrapper .dropdown').dropdown('restore defaults');
+        });
+
+        on_click();
+
+    };
+
+    var on_change = function(type) {
+
+    };
+
+    var on_click = function(type) {
+
+    };
+
+    // ACTIVE_TODO_OC_START
+    // --  keyboard events 
+    // ACTIVE_TODO_OC_END
+    var on_keyup or down ? = function() {
+
+
+    };
+            // ACTIVE_TODO_OC_START
+            // --  legacy events (events of woo emitted on certain scenarios) 
+            // --  events emitted by other plugins/themes which we need to take care of in case of compatiblity matters, so it can be termed as the compatiblity events 
+            // ACTIVE_TODO_OC_END
+
+    // -- base events - after the above events are handled by their particular function/layer, they would call below functions to do the ultimate work         
+    var change = function() {
+
+    };
+
+    var click = function() {
 
     };
 
@@ -1570,9 +1602,17 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
               this.defaultDimension();
               this.defaultGallery();
 
-              this.initEvents();
+        --  in our flow the events and other functions heirarchy called from this preprocess is, for us the initEvents level of flow -- to h. just for the notes. 
+            --  and then the init or refresh function of the external slider/zoom api that is to be called, after the dom updated with slider/zoom templates is what will cover the image loaded flow of plugin we are exploring. 
+        this.initEvents();
               this.initVariationGallery();
 
+        --  we need to call the update dom templates functions on page load when it is non variation product -- to h 
+            --  while for variation products it will be called by woo legacy api when the variation change event does fire on page load, so nothing to do in that case 
+                --  but yeah in either case after dom templates functions are done then need to call the required functions heirarchy which would cover something similar like what init set of functions doing in the plugin we were exploring -- to h. and so this function heirarchy calling would definitely include the call to init function of the js api for slider and zoom.  
+                    --  so some set of functions heirarchy would not be called initially for variation products -- to h 
+                        --  otherwise if required then we can simply call it during init and then it will be called again on woo legacy change event called during page load so in this case it would be called twice during page load -- to h 
+                            --  so this in essense clears the loading stack quest and points mentioned/planned in the process_template function of this module -- to h. just for the notes. 
         if (!this.is_variation_product) {
         this.imagesLoaded();
         }
@@ -1620,200 +1660,16 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
                 this._element.on('woo_variation_gallery_image_loaded', this.init());
               }
             }, {
-              key: "initSlick",
-              value: function initSlick() {
-                var _this4 = this;
-
-                if (this.$slider.is('.slick-initialized')) {
-                  this.$slider.slick('unslick');
-                }
-
-                this.$slider.off('init');
-                this.$slider.off('beforeChange');
-                this.$slider.off('afterChange');
-
-                this._element.trigger('woo_variation_gallery_before_init', [this]); // Slider
-
-
-                this.$slider.on('init', function (event) {
-                  if (_this4.initial_load) {
-                    _this4.initial_load = false; // this._element.css('min-height', this.$slider.height() + 'px');
-                    //_.delay(() => {
-                    //    this.$slider.slick('setPosition');
-                    //}, 2000)
-                  }
-                }).on('beforeChange', function (event, slick, currentSlide, nextSlide) {
-                  _this4.$thumbnail.find('.wvg-gallery-thumbnail-image').not('.slick-slide').removeClass('current-thumbnail');
-
-                  _this4.$thumbnail.find('.wvg-gallery-thumbnail-image').not('.slick-slide').eq(nextSlide).addClass('current-thumbnail');
-                }).on('afterChange', function (event, slick, currentSlide) {
-                  _this4.stopVideo(_this4.$slider);
-
-                  _this4.initZoomForTarget(currentSlide);
-                }).slick(); // Thumbnails
-
-                this.$thumbnail.find('.wvg-gallery-thumbnail-image').not('.slick-slide').first().addClass('current-thumbnail');
-                this.$thumbnail.find('.wvg-gallery-thumbnail-image').not('.slick-slide').each(function (index, el) {
-                  $(el).find('div, img').on('click', function (event) {
-                    event.preventDefault();
-                    event.stopPropagation();
-
-                    _this4.$slider.slick('slickGoTo', index);
-                  });
-                });
-
-                _.delay(function () {
-                  _this4._element.trigger('woo_variation_gallery_slider_slick_init', [_this4]);
-                }, 1);
-
-                _.delay(function () {
-                  // console.log(this._element.height(), this._element.width());
-                  //    this._element.css('min-height', this._element.height())
-                  //    this._element.css('min-width', this._element.width())
-                  _this4.removeLoadingClass();
-                }, 100);
-              }
-            }, {
-              key: "initZoomForTarget",
-              value: function initZoomForTarget(currentSlide) {
-                if (!woo_variation_gallery_options.enable_gallery_zoom) {
-                  return;
-                }
-
-                var galleryWidth = parseInt(this.$target.width()),
-                    zoomEnabled = false,
-                    zoomTarget = this.$slider.slick('getSlick').$slides.eq(currentSlide);
-                $(zoomTarget).each(function (index, target) {
-                  var image = $(target).find('img');
-
-                  if (parseInt(image.data('large_image_width')) > galleryWidth) {
-                    zoomEnabled = true;
-                    return false;
-                  }
-                }); // If zoom not included.
-
-                if (!$().zoom) {
-                  return;
-                } // But only zoom if the img is larger than its container.
-
-
-                if (zoomEnabled) {
-                  var zoom_options = $.extend({
-                    touch: false
-                  }, wc_single_product_params.zoom_options);
-
-                  if ('ontouchstart' in document.documentElement) {
-                    zoom_options.on = 'click';
-                  }
-
-                  zoomTarget.trigger('zoom.destroy');
-                  zoomTarget.zoom(zoom_options);
-                }
-              }
-            }, {
-              key: "initZoom",
-              value: function initZoom() {
-                var currentSlide = this.$slider.slick('slickCurrentSlide');
-                this.initZoomForTarget(currentSlide);
-              }
-            }, {
-              key: "initPhotoswipe",
-              value: function initPhotoswipe() {
-                var _this5 = this;
-
-                if (!woo_variation_gallery_options.enable_gallery_lightbox) {
-                  return;
-                }
-
-                this._element.off('click', '.woo-variation-gallery-trigger');
-
-                this._element.off('click', '.wvg-gallery-image a');
-
-                this._element.on('click', '.woo-variation-gallery-trigger', function (event) {
-                  _this5.openPhotoswipe(event);
-                });
-
-                this._element.on('click', '.wvg-gallery-image a', function (event) {
-                  _this5.openPhotoswipe(event);
-                });
-              }
-            }, {
-              key: "stopVideo",
-              value: function stopVideo(element) {
-                $(element).find('iframe, video').each(function () {
-                  var tag = $(this).prop("tagName").toLowerCase();
-
-                  if (tag === 'iframe') {
-                    var src = $(this).attr('src'); //   $(this).attr('src', src);
-                  }
-
-                  if (tag === 'video') {
-                    $(this)[0].pause();
-                  }
-                });
-              }
-            }, {
               key: "defaultGallery",
               value: function defaultGallery() {
-                // ACTIVE_TODO_OC_START
-                // we would not like to manage extra layer of ajax to get default gallery and so on, if it is not necessary by standard flow but if by any chance standard flows does require handling any exceptional scenarios then we would need to do it -- to h and -- to d 
-                // ACTIVE_TODO_OC_END
+                ACTIVE_TODO_OC_START
+                we would not like to manage extra layer of ajax to get default gallery and so on, if it is not necessary by standard flow but if by any chance standard flows does require handling any exceptional scenarios then we would need to do it -- to h and -- to d 
+                    --  here check if that wc ajax event is if invoked by the plugin we were exploring? it might not be but still confirm and in the first place check if the execution even reaching till ajax since it was not noticed in the browser console -- to h 
+                ACTIVE_TODO_OC_END
             }, {
-              key: "showVariationImage",
-              value: function showVariationImage(variation) {
-                if (variation) {
-                  this.addLoadingClass();
-                  this.galleryInit(variation.variation_gallery_images || []);
-                }
-              }
-            }, {
-              key: "initVariationGallery",
-              value: function initVariationGallery() {
-                var _this9 = this;
-
-                // show_variation, found_variation
-                this.$variations_form.off('reset_image.wvg');
-                this.$variations_form.off('click.wvg', '.reset_variations');
-                this.$variations_form.off('show_variation.wvg');
-                this.$variations_form.off('hide_variation.wvg'); // this.$variations_form.off('found_variation.wvg');
-                // Show Gallery
-                // console.log(this.$variations_form)
-
-                this.$variations_form.on('show_variation.wvg', function (event, variation) {
-                  _this9.showVariationImage(variation);
-                });
-
-                if (woo_variation_gallery_options.gallery_reset_on_variation_change) {
-                  this.$variations_form.on('hide_variation.wvg', function () {
-                    _this9.resetVariationImage();
-                  });
-                } else {
-                  this.$variations_form.on('click.wvg', '.reset_variations', function () {
-                    _this9.resetVariationImage();
-                  });
-                }
-              }
             }, {
 
-            }, {
-              key: "initThumbnailSlick",
-              value: function initThumbnailSlick() {
-                var _this13 = this;
-
-                if (this.$thumbnail.hasClass('slick-initialized')) {
-                  this.$thumbnail.slick('unslick');
-                }
-
-                this.$thumbnail.off('init');
-                this.$thumbnail.on('init', function () {}).slick();
-
-                _.delay(function () {
-                  _this13._element.trigger('woo_variation_gallery_thumbnail_slick_init', [_this13]);
-                }, 1);
-              }
-            }, {
-
-            for below mattter also research on WooCommerce ajax variations with keywords WooCommerce ajax variations legacy 
+            for below mattter also research on WooCommerce ajax variations with keywords WooCommerce ajax variations legacy -- to h 
             // For Single Product
             $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery(); // Ajax and Variation Product
 
@@ -2104,7 +1960,18 @@ ACTIVE_TODO_OC_START
 
     var on_slider_thumb_click = function() {
 
+        --  among other things the fundamental things to do are changing zoom are active image, we would be doing it like hiding all the templates within the zoom area container first and the showing the current index template -- to h 
+            --  very first do it basically by hiding maybe all nodes within the main zoom container class and then just show the node/element at index which need to be shows -- to h. since we need to start testing 1st revision asap so lets do this asap. 
+                --  then eventually we may like to maintain based on the image template class(so hook would be required for it) and index, or just based on index. to ensure that maximum adaptability is ensured for external slider and zoom and even if within the main zoom area container the dom has complex structure then also things work fine, and it is like that slider/zoom plugins would have complex dom. -- to h 
 
+        --  what could be other things that we need to do or would like to cover? 
+            --  we need to stop the video of the current index(means the index which was already set before click) is actually gallery_item_type=video -- to h 
+            --  and of course if clicked thumb represents the gallery_item_type=video(note that gallery_item_type video would be providing the base video support means mp4 videos while for the other formats inlcuding 360 will have other premium types support) then call the play_video function(so there will be play_video and pause_video functions) but however the play_video may have nothing since by default we are implementing auto play support for the videos -- to h 
+                --  ACTIVE_TODO so on this regard very soon on admin we may like to provide setting to disable preload and/or auto play support for the videos -- to h 
+            --  and of course other are covering the points mentioned in main flow above related to events, templates, compatability and so on as applicable if there are any there or anywhere else -- to h 
+                --  and yeah need to make sure that if any additional notification is required then that is emitted from here, or if any extensions need to respond on notification_response callback then that is implemented -- to h 
+            --  and zoom refresh seems to be needed to be called on each on_slider_thumb_click event, so just call that refresh event of the js api -- to h 
+                --  but yeah if the clicked gallery_item_type of the slider thumb is not image then skip above call -- to h 
     };
 
     var on_zoom_area_hover = function() {
@@ -2137,7 +2004,17 @@ ACTIVE_TODO_OC_START
 
     var variation_change = function() {
 
+        for gallery_images it is not only the variation_change event but below list of events that also need to be listened to, so implement them -- to h 
+            --  show_variation
+            --  hide_variation
+            --  click on .reset_variations
+        --  and one strange matter is that there is not seem to be the variation_change event in the plugn we were exploring, but double check and it is likely be there -- to h. so either way need to implement all above events including variation_change since we may have had it and it make no sense to skip that. 
+            --  and on this regard better to create functions like init_gallery, init_variation_gallery and maybe also default_gallery and default_variation_gallery as this would create proper heirarchy like in the plugin we were exploring -- to h 
+            --  it is confirmed that there is no dependancy on the variations change function in the plugin we were exploring, however it still makes sense to use that only. but in the first place confirm if above show_variation and hide_variation events are actually available, and if they are available then decide which we should use. see we can use all of them but that can create mess if not always then in certain scenarios so to ensure neat execution lets just do the best suitable only -- to h 
+
         //  here it will call the internal function swap_images( variation_id ) which will be doing one of the main process of this gallery_images module 
+            --  here the function should be named something like show_gallery_images, which would simply show initially or update and after that show, and also there would be show_variation_gallery_images which would be doing the same but for variation gallery images -- to h 
+                --  and both above function from inside call the process_template heirarchy of function like process_gallery_images_template -- to h 
         swap_images( variation_id );    
     };
 
