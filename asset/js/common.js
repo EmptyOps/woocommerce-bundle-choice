@@ -527,6 +527,7 @@ ACTIVE_TODO_OC_START
                         --  a compatiblity function inside filters, variations.swatches and variations.gallery_images module -- to d 
 
                     --  initially even in 1st revision we must implement some fundamental compatiblity matters -- to h 
+                        --  make sure that all the compatiblity matters are covered from the plugins we were exploring -- to h or -- to s 
         -   configs 
                 --  will control decision of whether to display certain section or not, for example whether to display template part of attribute name (for us ribbon wrapper)
                 --  or whether to show tooltip or not 
@@ -701,16 +702,19 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
               }, 100);
             });
 
-              this.product_variations = this.$element.data('product_variations') || [];
-              this.is_ajax_variation = this.product_variations.length < 1;
-              this.product_id = this.$element.data('product_id');
+        this.product_variations = this.$element.data('product_variations') || [];
+        this.is_ajax_variation = this.product_variations.length < 1;
+        this.product_id = this.$element.data('product_id');
               this.reset_variations = this.$element.find('.reset_variations');
 
-              this.$element.addClass('wvs-loaded');
+        this.$element.addClass('wvs-loaded');
 
-              // Call
-              this.init();
-              this.update();
+        our flow of calling the functions heirarchy as part of the preprocess function, will cover below like flow of binding for the update and also initialization tasks -- to h 
+            --  and in out init and preprocess layer we need to bind all above legacy events which are mostly for executing the wc_variation_form ultimately -- to h 
+                --  and non legacy matters in above list would go to the compatability layers -- to h 
+        // Call
+        this.init();
+        this.update();
 
               // Trigger
               $(document).trigger('woo_variation_swatches', [this.$element]);
@@ -723,12 +727,17 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
             most part of below code developes the logic for the stock based disable and enable feature 
                 --  so we may like to consider the fundamentals for now and would do mature implementation in the 2nd revision -- to h 
 
-            // Append Selected Item Template
-            if (woo_variation_swatches_options.show_variation_label) {
-              this.$element.find('.variations .label').each(function (index, el) {
-                $(el).append(_this2.selected_item_template);
-              });
-            }
+        ACTIVE_TODO_OC_START
+        this would be determined based on admin options settings, and we may already have that admin options settings and if not then we need to add that -- to h and -- to s 
+            --  and the options object should be loaded from the variations.assets.php file, and that is already recieving many admin options related to apprearance from the model. all this options or required options should be passed to this js module under configs parameter but admin settings options should reside under key options within the configs object. -- to h and -- to s 
+            --  and view with shape was already supporting this selected item label, so need to manage this asap. and atleast we can first execute this point so that shape extension does function as expected -- to h 
+        // Append Selected Item Template
+        if (woo_variation_swatches_options.show_variation_label) {
+          this.$element.find('.variations .label').each(function (index, el) {
+            $(el).append(_this2.selected_item_template);
+          });
+        }
+
 
             this.$element.find('ul.variable-items-wrapper').each(function (i, el) {
 
@@ -765,6 +774,9 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
                 eq = select.find('option').eq(1);
               }
 
+              there will be dedicated functions under preprocess_data function heirarchy, for managing stock status and other limitations 
+                --  the functions names would be namely preprocess_stock_status_data -- to h 
+                --  and the other such functions which would be required is manging other such conditions, managing the legacy number of variations limit and other such limitations of supporting 30 variations only for certain functions which was there in the plugin we were exploring -- to h. it may be ACTIVE_TODO 
               options.each(function () {
                 if ($(this).val() !== '') {
                   selects.push($(this).val());
@@ -840,132 +852,6 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
 
                 if (available.length > 0 && _.includes(out_of_stock_selects, attribute_value) && woo_variation_swatches_options.clickable_out_of_stock) {
                   $(this).removeClass('disabled').addClass('out-of-stock');
-                }
-              });
-
-              // Trigger Select event based on list
-
-              if (reselect_clear) {
-                // Non Selected Item Should Select
-                $(this).on(mouse_event_name, 'li:not(.selected):not(.radio-variable-item):not(.woo-variation-swatches-variable-item-more)', function (e) {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  var value = $(this).data('value');
-                  select.val(value).trigger('change');
-                  select.trigger('click');
-
-                  select.trigger('focusin');
-
-                  if (_this.is_mobile) {
-                    select.trigger('touchstart');
-                  }
-
-                  $(this).trigger('focus'); // Mobile tooltip
-                  $(this).trigger('wvs-selected-item', [value, select, _this.$element]); // Custom Event for li
-                });
-
-                // Selected Item Should Non Select
-                $(this).on(mouse_event_name, 'li.selected:not(.radio-variable-item):not(.woo-variation-swatches-variable-item-more)', function (e) {
-                  e.preventDefault();
-                  e.stopPropagation();
-
-                  var value = $(this).val();
-
-                  select.val('').trigger('change');
-                  select.trigger('click');
-
-                  select.trigger('focusin');
-
-                  if (_this.is_mobile) {
-                    select.trigger('touchstart');
-                  }
-
-                  $(this).trigger('focus'); // Mobile tooltip
-
-                  $(this).trigger('wvs-unselected-item', [value, select, _this.$element]); // Custom Event for li
-                });
-
-                // RADIO
-
-                // On Click trigger change event on Radio button
-                $(this).on(mouse_event_name, 'input.wvs-radio-variable-item:radio', function (e) {
-
-                  e.stopPropagation();
-
-                  $(this).trigger('change.wvs', { radioChange: true });
-                });
-
-                $(this).on('change.wvs', 'input.wvs-radio-variable-item:radio', function (e, params) {
-
-                  e.preventDefault();
-                  e.stopPropagation();
-
-                  if (params && params.radioChange) {
-
-                    var value = $(this).val();
-                    var is_selected = $(this).parent('li.radio-variable-item').hasClass('selected');
-
-                    if (is_selected) {
-                      select.val('').trigger('change');
-                      $(this).parent('li.radio-variable-item').trigger('wvs-unselected-item', [value, select, _this.$element]); // Custom Event for li
-                    } else {
-                      select.val(value).trigger('change');
-                      $(this).parent('li.radio-variable-item').trigger('wvs-selected-item', [value, select, _this.$element]); // Custom Event for li
-                    }
-
-                    select.trigger('click');
-                    select.trigger('focusin');
-                    if (_this.is_mobile) {
-                      select.trigger('touchstart');
-                    }
-                  }
-                });
-              } else {
-
-                $(this).on(mouse_event_name, 'li:not(.radio-variable-item):not(.woo-variation-swatches-variable-item-more)', function (event) {
-
-                  event.preventDefault();
-                  event.stopPropagation();
-
-                  var value = $(this).data('value');
-                  select.val(value).trigger('change');
-                  select.trigger('click');
-                  select.trigger('focusin');
-                  if (_this.is_mobile) {
-                    select.trigger('touchstart');
-                  }
-
-                  $(this).trigger('focus'); // Mobile tooltip
-
-                  $(this).trigger('wvs-selected-item', [value, select, _this._element]); // Custom Event for li
-                });
-
-                // Radio
-                $(this).on('change.wvs', 'input.wvs-radio-variable-item:radio', function (event) {
-                  event.preventDefault();
-                  event.stopPropagation();
-
-                  var value = $(this).val();
-
-                  select.val(value).trigger('change');
-                  select.trigger('click');
-                  select.trigger('focusin');
-
-                  if (_this.is_mobile) {
-                    select.trigger('touchstart');
-                  }
-
-                  // Radio
-                  $(this).parent('li.radio-variable-item').removeClass('selected disabled').addClass('selected');
-                  $(this).parent('li.radio-variable-item').trigger('wvs-selected-item', [value, select, _this.$element]); // Custom Event for li
-                });
-              }
-
-              // Keyboard Access
-              $(this).on('keydown.wvs', 'li:not(.disabled):not(.woo-variation-swatches-variable-item-more)', function (event) {
-                if (event.keyCode && 32 === event.keyCode || event.key && ' ' === event.key || event.keyCode && 13 === event.keyCode || event.key && 'enter' === event.key.toLowerCase()) {
-                  event.preventDefault();
-                  $(this).trigger(mouse_event_name);
                 }
               });
             });
@@ -1343,16 +1229,6 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
             return false;
         }
 
-        ACTIVE_TODO_OC_START
-        for optionsUI swatches
-            --  the fundamental is ensuring all required ajax bindings 
-            --  and of course the fundamental calls to the legacy woo js layer apis like woo variation form or something such and so on 
-            --  and accurate management of fundamentals like generated, change and check(which m was triggering) etc. events and also out of stock and other such business logic implementation 
-            --  and yeah even supporting the keyboard and mouse events which is vital for the user experience 
-
-        moved here from the wbc options(optionsUI) controller 
-        ACTIVE_TODO_OC_END
-
         here it seems that m have explicitly handled the click event, but we should do if it is by standard require and the legacy flows does need us to take care of it. so confirm first with the plugin we are exploring -- to h 
         $('.variable-item').on('click',function(){
             var target_selector = $('#'+$(this).data('id'));
@@ -1368,9 +1244,143 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
             jQuery('.variable-items-wrapper .dropdown').dropdown('restore defaults');
         });
 
+
+        // Trigger Select event based on list
+
+        if (reselect_clear) {
+        // Non Selected Item Should Select
+        $(this).on(mouse_event_name, 'li:not(.selected):not(.radio-variable-item):not(.woo-variation-swatches-variable-item-more)', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          var value = $(this).data('value');
+          select.val(value).trigger('change');
+          select.trigger('click');
+
+          select.trigger('focusin');
+
+          if (_this.is_mobile) {
+            select.trigger('touchstart');
+          }
+
+          $(this).trigger('focus'); // Mobile tooltip
+          $(this).trigger('wvs-selected-item', [value, select, _this.$element]); // Custom Event for li
+        });
+
+        // Selected Item Should Non Select
+        $(this).on(mouse_event_name, 'li.selected:not(.radio-variable-item):not(.woo-variation-swatches-variable-item-more)', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          var value = $(this).val();
+
+          select.val('').trigger('change');
+          select.trigger('click');
+
+          select.trigger('focusin');
+
+          if (_this.is_mobile) {
+            select.trigger('touchstart');
+          }
+
+          $(this).trigger('focus'); // Mobile tooltip
+
+          $(this).trigger('wvs-unselected-item', [value, select, _this.$element]); // Custom Event for li
+        });
+
+        // RADIO
+
+        // On Click trigger change event on Radio button
+        $(this).on(mouse_event_name, 'input.wvs-radio-variable-item:radio', function (e) {
+
+          e.stopPropagation();
+
+          $(this).trigger('change.wvs', { radioChange: true });
+        });
+
+        $(this).on('change.wvs', 'input.wvs-radio-variable-item:radio', function (e, params) {
+
+          e.preventDefault();
+          e.stopPropagation();
+
+          if (params && params.radioChange) {
+
+            var value = $(this).val();
+            var is_selected = $(this).parent('li.radio-variable-item').hasClass('selected');
+
+            if (is_selected) {
+              select.val('').trigger('change');
+              $(this).parent('li.radio-variable-item').trigger('wvs-unselected-item', [value, select, _this.$element]); // Custom Event for li
+            } else {
+              select.val(value).trigger('change');
+              $(this).parent('li.radio-variable-item').trigger('wvs-selected-item', [value, select, _this.$element]); // Custom Event for li
+            }
+
+            select.trigger('click');
+            select.trigger('focusin');
+            if (_this.is_mobile) {
+              select.trigger('touchstart');
+            }
+          }
+        });
+        } else {
+
+        $(this).on(mouse_event_name, 'li:not(.radio-variable-item):not(.woo-variation-swatches-variable-item-more)', function (event) {
+
+          event.preventDefault();
+          event.stopPropagation();
+
+          var value = $(this).data('value');
+          select.val(value).trigger('change');
+          select.trigger('click');
+          select.trigger('focusin');
+          if (_this.is_mobile) {
+            select.trigger('touchstart');
+          }
+
+          $(this).trigger('focus'); // Mobile tooltip
+
+          $(this).trigger('wvs-selected-item', [value, select, _this._element]); // Custom Event for li
+        });
+
+        // Radio
+        $(this).on('change.wvs', 'input.wvs-radio-variable-item:radio', function (event) {
+          event.preventDefault();
+          event.stopPropagation();
+
+          var value = $(this).val();
+
+          select.val(value).trigger('change');
+          select.trigger('click');
+          select.trigger('focusin');
+
+          if (_this.is_mobile) {
+            select.trigger('touchstart');
+          }
+
+          // Radio
+          $(this).parent('li.radio-variable-item').removeClass('selected disabled').addClass('selected');
+          $(this).parent('li.radio-variable-item').trigger('wvs-selected-item', [value, select, _this.$element]); // Custom Event for li
+        });
+        }
+
         on_click();
 
     };
+
+    var on_keydown_listener = function(type) {
+
+        if(window.document.splugins.common._b(_this.binding_stats, 'on_click', type)){
+            return false;
+        }
+
+        // Keyboard Access
+        $(this).on('keydown.wvs', 'li:not(.disabled):not(.woo-variation-swatches-variable-item-more)', function (event) {
+        });
+
+        on_keydown();
+
+    };
+
 
     var on_change = function(type) {
 
@@ -1380,17 +1390,22 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
 
     };
 
+    var on_reset_all = function(type) {
+
+    };
+
     // ACTIVE_TODO_OC_START
     // --  keyboard events 
     // ACTIVE_TODO_OC_END
-    var on_keyup or down ? = function() {
+    var on_keydown = function() {
 
-
+        keydown();  
     };
             // ACTIVE_TODO_OC_START
             // --  legacy events (events of woo emitted on certain scenarios) 
             // --  events emitted by other plugins/themes which we need to take care of in case of compatiblity matters, so it can be termed as the compatiblity events 
             // ACTIVE_TODO_OC_END
+
 
     // -- base events - after the above events are handled by their particular function/layer, they would call below functions to do the ultimate work         
     var change = function() {
@@ -1404,6 +1419,14 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
     var reset_all = function() {
 
 
+    };
+
+    var keydown = function() {
+
+        if (event.keyCode && 32 === event.keyCode || event.key && ' ' === event.key || event.keyCode && 13 === event.keyCode || event.key && 'enter' === event.key.toLowerCase()) {
+          event.preventDefault();
+          $(this).trigger(mouse_event_name);
+        }
     };
 
 
