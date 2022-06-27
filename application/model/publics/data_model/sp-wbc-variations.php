@@ -158,52 +158,11 @@ class SP_WBC_Variations extends SP_Variations {
 		below hooked function will add our data layers of sp_variations gallery_images and maybe also others of the sp_variations to the woo data. 
 			read and set first the images from our post meta key -- to b or -- to d 
 
-		$product_id         = absint( $variation->get_parent_id() );
-		$variation_id       = absint( $variation->get_id() );
-		$variation_image_id = absint( $variation->get_image_id() );
+		$this->get_available_variation_core($variation_get_max_purchase_quantity, $instance, $variation);
 
-		$has_variation_gallery_images = (bool) get_post_meta( $variation_id, 'woo_variation_gallery_images', true );
-		//  $product                      = wc_get_product( $product_id );
+		return $variation_get_max_purchase_quantity;
 
-		if ( $has_variation_gallery_images ) {
-			$gallery_images = (array) get_post_meta( $variation_id, 'woo_variation_gallery_images', true );
-		} else {
-			// $gallery_images = $product->get_gallery_image_ids();
-			$gallery_images = $instance->get_gallery_image_ids();
-		}
-
-
-		this function will return also the default(or say the data that are supported and provided by legacy api) data as applicable like below image or all other such applicable default data 
-		if ( $variation_image_id ) {
-			// Add Variation Default Image
-			array_unshift( $gallery_images, $variation_image_id );
-		} else {
-			// Add Product Default Image
-
-			/*if ( has_post_thumbnail( $product_id ) ) {
-				array_unshift( $gallery_images, get_post_thumbnail_id( $product_id ) );
-			}*/
-			$parent_product          = wc_get_product( $product_id );
-			$parent_product_image_id = $parent_product->get_image_id();
-			$placeholder_image_id    = get_option( 'woocommerce_placeholder_image', 0 );
-
-			if ( ! empty( $parent_product_image_id ) ) {
-				array_unshift( $gallery_images, $parent_product_image_id );
-			} else {
-				array_unshift( $gallery_images, $placeholder_image_id );
-			}
-		}
-
-		$variation_get_max_purchase_quantity['variation_gallery_images'] = array();
-
-		foreach ( $gallery_images as $i => $variation_gallery_image_id ) {
-			$variation_get_max_purchase_quantity['variation_gallery_images'][ $i ] = $this->get_product_attachment_props( $variation_gallery_image_id );
-		}
-
-		// apply filter hook here to let extensions filter over swatches data, with key sp_variations_available_variation -- to d or -- to b done
-
-
-		return apply_filters( 'sp_variations_available_variation', $variation_get_max_purchase_quantity, $variation, $product_id );
+		
 	}
 
 	// for reference see wc_get_product_attachment_props function source code 
@@ -459,6 +418,122 @@ class SP_WBC_Variations extends SP_Variations {
 		}
 
 		return $product->get_available_variations();
+	}
+
+	private function get_available_variation_core( $variation_get_max_purchase_quantity,  $instance,  $variation){
+		if('get_available_variation_core' == true){
+			$product_id         = absint( $variation->get_parent_id() );
+			$variation_id       = absint( $variation->get_id() );
+			$variation_image_id = absint( $variation->get_image_id() );
+
+			$has_variation_gallery_images = (bool) get_post_meta( $variation_id, 'woo_variation_gallery_images', true );
+			//  $product                      = wc_get_product( $product_id );
+
+			if ( $has_variation_gallery_images ) {
+				$gallery_images = (array) get_post_meta( $variation_id, 'woo_variation_gallery_images', true );
+			} else {
+				// $gallery_images = $product->get_gallery_image_ids();
+				$gallery_images = $instance->get_gallery_image_ids();
+			}
+
+
+			this function will return also the default(or say the data that are supported and provided by legacy api) data as applicable like below image or all other such applicable default data 
+			if ( $variation_image_id ) {
+				// Add Variation Default Image
+				array_unshift( $gallery_images, $variation_image_id );
+			} else {
+				// Add Product Default Image
+
+				/*if ( has_post_thumbnail( $product_id ) ) {
+					array_unshift( $gallery_images, get_post_thumbnail_id( $product_id ) );
+				}*/
+				$parent_product          = wc_get_product( $product_id );
+				$parent_product_image_id = $parent_product->get_image_id();
+				$placeholder_image_id    = get_option( 'woocommerce_placeholder_image', 0 );
+
+				if ( ! empty( $parent_product_image_id ) ) {
+					array_unshift( $gallery_images, $parent_product_image_id );
+				} else {
+					array_unshift( $gallery_images, $placeholder_image_id );
+				}
+			}
+
+			$variation_get_max_purchase_quantity['variation_gallery_images'] = array();
+
+			foreach ( $gallery_images as $i => $variation_gallery_image_id ) {
+				$variation_get_max_purchase_quantity['variation_gallery_images'][ $i ] = $this->get_product_attachment_props( $variation_gallery_image_id );
+			}
+
+			// apply filter hook here to let extensions filter over swatches data, with key sp_variations_available_variation -- to d or -- to b done
+
+
+			return apply_filters( 'sp_variations_available_variation', $variation_get_max_purchase_quantity, $variation, $product_id );
+		}
+
+		if('is_default_gallary' == true){
+			$product              = wc_get_product( $product_id );
+			$product_id           = $product->get_id();
+			$attachment_ids       = $product->get_gallery_image_ids( 'edit' );
+			$post_thumbnail_id    = $product->get_image_id( 'edit' );
+			$has_post_thumbnail   = has_post_thumbnail();
+
+			$placeholder_image_id = get_option( 'woocommerce_placeholder_image', 0 );
+		}
+		if('is_default_gallary' == true || 'is_variation_gallary' == true){
+			$images               = array();
+		}
+
+		if('is_variation_gallary' == true){
+
+			$available_variations = $this->get_available_variations( $product_id );
+
+			foreach ( $available_variations as $i => $variation ) {
+				array_push( $variation['variation_gallery_images'], $variation['image'] );
+			}
+
+			foreach ( $available_variations as $i => $variation ) {
+				foreach ( $variation['variation_gallery_images'] as $image ) {
+					array_push( $images, $image );
+				}
+			}
+
+		}
+
+		/*if ( has_post_thumbnail( $product_id ) ) {
+			array_unshift( $gallery_images, get_post_thumbnail_id( $product_id ) );
+		}*/
+		if('is_default_gallary' == true){
+			$post_thumbnail_id = (int) apply_filters( 'woo_variation_gallery_post_thumbnail_id', $post_thumbnail_id, $attachment_ids, $product );
+			$attachment_ids    = (array) apply_filters( 'woo_variation_gallery_attachment_ids', $attachment_ids, $post_thumbnail_id, $product );
+
+
+			$remove_featured_image = wc_string_to_bool( woo_variation_gallery()->get_option( 'remove_featured_image', 'no', 'woo_variation_gallery_remove_featured_image' ) );
+
+
+			// IF PLACEHOLDER IMAGE HAVE VIDEO IT MAY NOT LOAD.
+			if ( ! empty( $post_thumbnail_id ) ) {
+				array_unshift( $attachment_ids, $post_thumbnail_id );
+			} else {
+				array_unshift( $attachment_ids, $placeholder_image_id );
+			}
+
+			if ( is_array( $attachment_ids ) && ! empty( $attachment_ids ) ) {
+
+				foreach ( $attachment_ids as $i => $image_id ) {
+
+					if ( $remove_featured_image && absint( $post_thumbnail_id ) == absint( $image_id ) ) {
+						continue;
+					}
+
+					$images[] = apply_filters( 'woo_variation_gallery_get_default_gallery_image', $this->get_product_attachment_props( $image_id, $product ), $product );
+				}
+			}
+
+			return apply_filters( 'woo_variation_gallery_get_default_gallery_images', $images, $product );
+
+		}
+		
+
 	}
 
 }
