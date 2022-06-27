@@ -102,25 +102,30 @@ class SP_Gallery_Slider extends \eo\wbc\controllers\publics\Controller{
 
     private function get_ui_definition($args = array()){
 
+        $type = $args['data']['woo_dropdown_attribute_html_data']['type'];
+
+
         if ($args['page_section'] == 'slider_images') {
 
+            if (!isset($args['data'])) {
+
+                $args['data'] = array();
+
+            }
+
+            $args['data']['template_data'] = array(); 
+            $args['data']['template_data']['template_key'] = '{{template_key}}_image_loop';
+            $args['data']['template_data']['template_sub_dir'] = 'single-product/gallery-slider';
+
             $args['widget_key'] = '';
-            $args['template_sub_dir'] = 'single-product\gallery-slider';
+            $args['template_sub_dir'] = 'single-product/gallery-slider';
             $args['template_option_key'] = '';
             $args['option_group_key'] = '';
-            $args['template_key'] = 'gallery_slider_desktop';
-            $args['plugin_slug'] = '';
-
-        }else if ($args['page_section'] == 'slider_images_image_loop') {
-
-            $args['widget_key'] = '';
-            $args['template_sub_dir'] = 'single-product\gallery-slider';
-            $args['template_option_key'] = '';
-            $args['option_group_key'] = '';
-            $args['template_key'] = 'gallery_slider_image_loop_desktop';
+            $args['template_key'] = '{{template_key}}';
             $args['plugin_slug'] = '';
 
         }
+
         return parent::get_ui_definition($args);
 
        /* if (!in_array($args)) {

@@ -29,7 +29,7 @@
 		        zoomstart: 2,
 		        zoomrange: [2,2],
 		        innerzoom: true,
-		        magnifierborder: "none",
+		        magnifierborder: "none", 
 	        });
         }
 

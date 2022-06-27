@@ -19,19 +19,19 @@ if(!empty($image_url)){
 
 
 
-array(
+$template = array(
     'type' => 'div',
     'class' => 'item',
-    'attr' => array( 'data-value' => '%s' ),
+    'attr' => array( 'data-value' => esc_attr( $term->slug ) ),
     'child' => array(
         array(
             'type' => 'img',
             'class' => 'ui mini avatar image',
-            'src' => '%s',
+            'src' => esc_url( $variable_item_data['options_loop_image'][$term->slug] ),
         ),
     ),
-    'preHTML'=>'%s',
-)
+    'preHTML'=>esc_attr( $term->name ),
+);
 
 
 
@@ -39,9 +39,9 @@ array(
 
 
 
-array(
+$template = array(
     'type' => 'div',
     'class' => 'item',
-    'preHTML' => '%s',
-    'attr' => array( 'data-value' => '%s' ),
-)
+    'preHTML' => esc_attr( $term->name ),
+    'attr' => array( 'data-value' => esc_attr( $term->slug ) ),
+);

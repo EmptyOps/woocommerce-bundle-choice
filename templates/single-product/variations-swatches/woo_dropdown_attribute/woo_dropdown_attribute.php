@@ -7,7 +7,7 @@
 
 --- a code /woo-bundle-choice/application/model/publics/sp-model-single-product.php no che
     --------------a etlu wvs_default_button_variation_attribute_options alg che
-if ( $data['woo_dropdown_attribute_html_data']['product'] ) {
+if ( $woo_dropdown_attribute_html_data['product'] ) {
     
     echo '<select id="' . esc_attr( $id ) . '" class="' . esc_attr( $class ) . ' hide woo-variation-raw-select woo-variation-raw-type-' . $type . '" style="display:none" name="' . esc_attr( $name ) . '" data-attribute_name="' . esc_attr( wc_variation_attribute_name( $attribute ) ) . '" data-show_option_none="' . ( $show_option_none ? 'yes' : 'no' ) . '">';
 
@@ -15,10 +15,10 @@ if ( $data['woo_dropdown_attribute_html_data']['product'] ) {
 
     array(
         'type' => 'select',
-        'class' => esc_attr( $class ) . ' hide woo-variation-raw-select woo-variation-raw-type-' . $type,
-        'id' => esc_attr( $id ),
-        'name' => esc_attr( $name ),
-        'attr' => array( 'style' => 'display:none', 'data-attribute_name' => esc_attr( wc_variation_attribute_name( $attribute ) ), 'data-show_option_none' => ( $show_option_none ? 'yes' : 'no' ) ),
+        'class' => esc_attr( $woo_dropdown_attribute_html_data['class'] ) . ' hide woo-variation-raw-select woo-variation-raw-type-' . $woo_dropdown_attribute_html_data['type'],
+        'id' => esc_attr( $woo_dropdown_attribute_html_data['id'] ),
+        'name' => esc_attr( $woo_dropdown_attribute_html_data['name'] ),
+        'attr' => array( 'style' => 'display:none', 'data-attribute_name' => esc_attr( wc_variation_attribute_name( $woo_dropdown_attribute_html_data['attribute'] ) ), 'data-show_option_none' => ( $woo_dropdown_attribute_html_data['show_option_none'] ? 'yes' : 'no' ) ),
     )
 
 
@@ -26,18 +26,18 @@ if ( $data['woo_dropdown_attribute_html_data']['product'] ) {
 -----------------
 
 -------------- a etlu wvs_default_image_variation_attribute_options alg che
-if ( $data['woo_dropdown_attribute_html_data']['product'] ) {
+if ( $woo_dropdown_attribute_html_data['product'] ) {
 
-    if ( $data['woo_dropdown_attribute_html_data']['type'] === 'select' ) {
+    if ( $woo_dropdown_attribute_html_data['type'] === 'select' ) {
         echo '<select id="' . esc_attr( $id ) . '" class="' . esc_attr( $class ) . '" name="' . esc_attr( $name ) . '" data-attribute_name="' . esc_attr( wc_variation_attribute_name( $attribute ) ) . '" data-show_option_none="' . ( $show_option_none ? 'yes' : 'no' ) . '">';
 
 
         array(
             'type' => 'select',
-            'class' => eesc_attr( $class ),
-            'id' => esc_attr( $id ),
-            'name' => esc_attr( $name ),
-            'attr' => array('data-attribute_name' => esc_attr( wc_variation_attribute_name( $attribute ) ), 'data-show_option_none' => ( $show_option_none ? 'yes' : 'no' ) ),
+            'class' => eesc_attr( $woo_dropdown_attribute_html_data['class'] ),
+            'id' => esc_attr( $woo_dropdown_attribute_html_data['id'] ),
+            'name' => esc_attr( $woo_dropdown_attribute_html_data['name'] ),
+            'attr' => array('data-attribute_name' => esc_attr( wc_variation_attribute_name( $woo_dropdown_attribute_html_data['attribute'] ) ), 'data-show_option_none' => ( $woo_dropdown_attribute_html_data['show_option_none'] ? 'yes' : 'no' ) ),
         )
 
 
@@ -48,25 +48,25 @@ if ( $data['woo_dropdown_attribute_html_data']['product'] ) {
 
         array(
             'type' => 'select',
-            'class' => esc_attr( $class ) . ' hide woo-variation-raw-select woo-variation-raw-type-' . $type,
-            'id' => esc_attr( $id ),
-            'name' => esc_attr( $name ),
-            'attr' => array( 'style' => 'display:none', 'data-attribute_name' => esc_attr( wc_variation_attribute_name( $attribute ) ), 'data-show_option_none' => ( $show_option_none ? 'yes' : 'no' ) ),
+            'class' => esc_attr( $woo_dropdown_attribute_html_data['class'] ) . ' hide woo-variation-raw-select woo-variation-raw-type-' . $woo_dropdown_attribute_html_data['type'],
+            'id' => esc_attr( $woo_dropdown_attribute_html_data['id'] ),
+            'name' => esc_attr( $woo_dropdown_attribute_html_data['name'] ),
+            'attr' => array( 'style' => 'display:none', 'data-attribute_name' => esc_attr( wc_variation_attribute_name( $woo_dropdown_attribute_html_data['attribute'] ) ), 'data-show_option_none' => ( $woo_dropdown_attribute_html_data['show_option_none'] ? 'yes' : 'no' ) ),
         )
 
     }
 }
 -------------
-if ( $data['woo_dropdown_attribute_html_data']['product'] && taxonomy_exists( $data['woo_dropdown_attribute_html_data']['attribute'] ) ) {
+if ( $woo_dropdown_attribute_html_data['product'] && taxonomy_exists( $data['woo_dropdown_attribute_html_data']['attribute'] ) ) {
     echo '<select id="' . esc_attr( $id ) . '" class="' . esc_attr( $class ) . ' hide woo-variation-raw-select woo-variation-raw-type-' . esc_attr( $type ) . '" style="display:none" name="' . esc_attr( $name ) . '" data-attribute_name="' . esc_attr( wc_variation_attribute_name( $attribute ) ) . '" data-show_option_none="' . ( $show_option_none ? 'yes' : 'no' ) . '">';
 
 
     array(
         'type' => 'select',
-        'class' => esc_attr( $class ) . ' hide woo-variation-raw-select woo-variation-raw-type-' . $type,
-        'id' => esc_attr( $id ),
-        'name' => esc_attr( $name ),
-        'attr' => array( 'style' => 'display:none', 'data-attribute_name' => esc_attr( wc_variation_attribute_name( $attribute ) ), 'data-show_option_none' => ( $show_option_none ? 'yes' : 'no' ) ),
+        'class' => esc_attr( $woo_dropdown_attribute_html_data['class'] ) . ' hide woo-variation-raw-select woo-variation-raw-type-' . esc_attr($woo_dropdown_attribute_html_data['type']),
+        'id' => esc_attr( $woo_dropdown_attribute_html_data['id'] ),
+        'name' => esc_attr( $woo_dropdown_attribute_html_data['name'] ),
+        'attr' => array( 'style' => 'display:none', 'data-attribute_name' => esc_attr( wc_variation_attribute_name( $woo_dropdown_attribute_html_data['attribute'] ) ), 'data-show_option_none' => ( $woo_dropdown_attribute_html_data['show_option_none'] ? 'yes' : 'no' ) ),
     )
 
 } else {
@@ -75,9 +75,10 @@ if ( $data['woo_dropdown_attribute_html_data']['product'] && taxonomy_exists( $d
 
     array(
         'type' => 'select',
-        'class' => esc_attr( $class ),
-        'name' => esc_attr( $name ),
-        'attr' => array( 'data-attribute_name' => esc_attr( wc_variation_attribute_name( $attribute ) ), 'data-show_option_none' => ( $show_option_none ? 'yes' : 'no' ) ),
+        'class' => esc_attr( $woo_dropdown_attribute_html_data['class'] ),
+        'id' => esc_attr( $woo_dropdown_attribute_html_data['id'] ),
+        'name' => esc_attr( $woo_dropdown_attribute_html_data['name'] ),
+        'attr' => array( 'data-attribute_name' => esc_attr( wc_variation_attribute_name( $woo_dropdown_attribute_html_data['attribute'] ) ), 'data-show_option_none' => ( $woo_dropdown_attribute_html_data['show_option_none'] ? 'yes' : 'no' ) ),
     )
 
 
