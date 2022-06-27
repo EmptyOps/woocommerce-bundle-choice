@@ -36,6 +36,32 @@ class SP_Model_Gallery_Zoom extends Eowbc_Base_Model_Publics {
 			$classes[] = 'big-img';
 		});
 
+		add_filter('sp_slzm_zoom_image_loop_js_tempalte',function($html){
+
+			$image['class'] = '{{class}}';
+			$image['src'] = '{{src}}';
+			$image['src_w'] = '{{src_w}}';
+			$image['src_h'] = '{{src_h}}';
+			$image['alt'] = '{{alt}}';
+			$image['title'] = '{{title}}';
+			$image['caption'] = '{{caption}}';
+			$image['full_src'] = '{{full_src}}';
+			$image['full_src_w'] = '{{full_src_w}}';
+			$image['full_src_h'] = '{{full_src_h}}';
+			$image['srcset'] = '{{srcset}}';
+			$image['sizes'] = '{{sizes}}';
+			$image['extra_params'] = '{{extra_params}}';
+			$options['has_only_thumbnail'] = '{{has_only_thumbnail}}';
+			$image['video_link'] = '{{video_link}}';
+			$image['video_embed_type'] = '{{video_embed_type}}';
+			$image['video_embed_url'] = '{{video_embed_url}}';
+			$image['post_thumbnail_id'] = '{{post_thumbnail_id}}';
+
+			ACTIVE_TODO templete lode kervani form controllers
+
+			return $html;
+		});
+
 	}
 
 	public function load_asset(){
