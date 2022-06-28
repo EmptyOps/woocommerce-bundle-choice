@@ -33,7 +33,7 @@ class SP_Gallery_Slider extends \eo\wbc\controllers\publics\Controller{
 
         $this->selectron('slider_images',$args);
 
-        $this->getUI(null);
+        $this->getUI(null,$args);
     }
 
     private function selectron($page_section,$args = array()){
