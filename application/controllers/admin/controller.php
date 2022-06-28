@@ -409,5 +409,24 @@ class Controller extends \eo\wbc\controllers\Controller {
 		return $controls_data;
 	}
 
+	public function pre_process_form_definition($form_definition) {
+		
+		$separator = wbc()->config->separator();
+
+		$count = -1;
+
+		foreach($form_definition[0] as $key=>$value) {
+
+			foreach($key['form'] as $fdfk=>$fdfv) {
+				
+				$count++;
+
+				$dynamic_key[$fdfk.$separator.$count] = $fdfk;
+			
+			}
+		}
+		return $form_definition;
+	}
+
 	
 }
