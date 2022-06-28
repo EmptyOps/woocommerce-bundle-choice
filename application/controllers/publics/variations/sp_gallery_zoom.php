@@ -34,7 +34,7 @@ class SP_Gallery_Zoom extends \eo\wbc\controllers\publics\Controller{
 
         \eo\wbc\controller\publics\variations\SP_Gallery_Zoom::instance()->selectron('zoom_images',$args);
 
-        $this->getUI(null);
+        $this->getUI(null,$args);
     }
 
     private function selectron($page_section,$args = array()){

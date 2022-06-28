@@ -328,36 +328,20 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			});
 		}
 		
-		ACTIVE_TODO do the needful asap as per the demand -- to h and -- to d 
-			--	first check in the plugin we were exploring, if there is any implementation that is necessary -- to d 
+		// ACTIVE_TODO do the needful asap as per the demand -- to h and -- to d 
+		// 	--	first check in the plugin we were exploring, if there is any implementation that is necessary -- to d 
 		add_filter( 'script_loader_tag',  function($tag){
+			
+			// ACTIVE_TODO - we may like to implement defer loading logic.
 
-		}, 99, 1);
-
-
-
-
+		}, 10, 3);
 
 
-		move below hooks to the specific render_gallery_images and render_variations_swatches fucntions below. means both body_class and post_class hook, and also implement the woocommerce_post_class hook for both which is for now only for the gallery_images function only -- to b 
-			--	and in each hook add classes in this format for example wbc-sp-variations-swatches and wbc-sp-variations-swatches-rtl and wbc-sp-variations-swatches-post and wbc-sp-variations-swatches-post-rtl and wbc-sp-variations-swatches-woopost and so on. for theme it would be wbc-sp-variations-swatches-theme. and same for the gallery_images function also, of course. -- to b 
-				--	regarding css, t be noted that it should go in appropriate asset files only. will discuss about that -- to t. 
-					--	move this point where below hooks are moved. -- to b
-		add_filter( 'body_class',  function($classes){
 
-			$classes[] = 'sp-wbc-variations-gallery-swatches';
-			$classes[] = sprintf( 'sp-wbc-variations-gallery-swatches-%s', call common theme key fucntion -- to b  );
 
-			if ( is_rtl() ) {
-				$classes[] = 'sp-wbc-variations-gallery-swatches-rtl';
-			}
 
-		}, 99, 1);
 
-		note that there is one woocommerce_post_class hoos also there in the render_image_gallery function below 
-		add_filter( 'post_class',  function($classes){
-
-		}, 99, 1); 
+		
 
 		// apply_filters( 'post_class', string[] $classes, string[] $class, int $post_id );
 
@@ -577,12 +561,48 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			wp_send_json( apply_filters( 'woo_variation_gallery_get_variation_gallery', $images, $product_id ) );
 		}
 
+				// move below hooks to the specific render_gallery_images and render_variations_swatches fucntions below. means both body_class and post_class hook, and also implement the woocommerce_post_class hook for both which is for now only for the gallery_images function only -- to b done 
+			// --	and in each hook add classes in this format for example wbc-sp-variations-swatches and wbc-sp-variations-swatches-rtl and wbc-sp-variations-swatches-post and wbc-sp-variations-swatches-post-rtl and wbc-sp-variations-swatches-woopost and so on. for theme it would be wbc-sp-variations-swatches-theme. and same for the gallery_images function also, of course. -- to b done  
+				--	regarding css, t be noted that it should go in appropriate asset files only. will discuss about that -- to t. 
+
 		add_filter( 'woocommerce_post_class', function( $classes, $product ) {
 
-			$classes[] = '';
+			$classes[] = 'wbc-sp-variations-gallery-images-woopost';
+			$classes[] = sprintf( 'wbc-sp-variations-gallery-images-woopost-theme-%s', wbc()->common->current_theme_key() );
+
+			if ( is_rtl() ) {
+				$classes[] = 'wbc-sp-variations-gallery-images-woopost-rtl';
+			}
 
 			return $classes;
 		}, 25, 2 );
+
+		add_filter( 'body_class',  function($classes){
+
+			$classes[] = 'wbc-sp-variations-gallery-images';
+			$classes[] = sprintf( 'wbc-sp-variations-gallery-images-theme-%s', wbc()->common->current_theme_key() );
+
+			if ( is_rtl() ) {
+				$classes[] = 'wbc-sp-variations-gallery-images-rtl';
+			}
+
+			return $classes;
+
+		});
+
+		add_filter( 'post_class',  function($classes){
+
+			$classes[] = 'wbc-sp-variations-gallery-images-post';
+			$classes[] = sprintf( 'wbc-sp-variations-gallery-images-post-theme-%s', wbc()->common->current_theme_key() );
+
+			if ( is_rtl() ) {
+				$classes[] = 'wbc-sp-variations-gallery-images-post-rtl';
+			}
+
+			return $classes;
+
+		}, 25, 2); 
+
 	}
 
 	public function render_variations_swatches() {
@@ -889,6 +909,50 @@ class SP_Model_Single_Product extends SP_Single_Product {
 				}				
 			}
 		});
+	
+				// move below hooks to the specific render_gallery_images and render_variations_swatches fucntions below. means both body_class and post_class hook, and also implement the woocommerce_post_class hook for both which is for now only for the gallery_images function only -- to b done 
+			// --	and in each hook add classes in this format for example wbc-sp-variations-swatches and wbc-sp-variations-swatches-rtl and wbc-sp-variations-swatches-post and wbc-sp-variations-swatches-post-rtl and wbc-sp-variations-swatches-woopost and so on. for theme it would be wbc-sp-variations-swatches-theme. and same for the gallery_images function also, of course. -- to b done  
+				--	regarding css, t be noted that it should go in appropriate asset files only. will discuss about that -- to t. 
+					// --	move this point where below hooks are moved. -- to b done
+
+		add_filter( 'woocommerce_post_class', function( $classes, $product ) {
+
+			$classes[] = 'wbc-sp-variations-swatches-woopost';
+			$classes[] = sprintf( 'wbc-sp-variations-swatches-woopost-theme-%s', wbc()->common->current_theme_key() );
+
+			if ( is_rtl() ) {
+				$classes[] = 'wbc-sp-variations-swatches-woopost-rtl';
+			}
+
+			return $classes;
+
+		}, 25, 2 );
+
+		add_filter( 'body_class',  function($classes){
+
+			$classes[] = 'wbc-sp-variations-swatches';
+			$classes[] = sprintf( 'wbc-sp-variations-swatches-theme-%s', wbc()->common->current_theme_key() );
+
+			if ( is_rtl() ) {
+				$classes[] = 'wbc-sp-variations-swatches-rtl';
+			}
+
+			return $classes;
+
+		});
+
+		add_filter( 'post_class',  function($classes){
+			
+			$classes[] = 'wbc-sp-variations-swatches-post';
+			$classes[] = sprintf( 'wbc-sp-variations-swatches-post-theme-%s', wbc()->common->current_theme_key() );
+
+			if ( is_rtl() ) {
+				$classes[] = 'wbc-sp-variations-swatches-post-rtl';
+			}
+
+			return $classes;
+
+		}, 25, 2); 
 
 	}
 
