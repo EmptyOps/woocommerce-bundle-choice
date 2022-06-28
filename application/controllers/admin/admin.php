@@ -99,6 +99,11 @@ class Admin {
 
 	public static function legacy_admin_process($is_ajax=false){
 
+		add_filter('sp_is_legacy_admin_page', function($status) {
+
+			return true;
+		});
+
         //Initiate legacy admin 
         \eo\wbc\controllers\admin\legacy_admin\Legacy_Admin::instance()->init(); 
 	
