@@ -359,8 +359,10 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			\eo\wbc\controller\publics\variations\SP_Gallery_Zoom::instance()->init();
 		}
 
-		implement the hook in inline callback function here -- to d 
-			ACTIVE_TODO we need to observer if it is actually required to enable it otherwise if it is creating any issue then we can simply disable 
+		// implement the hook in inline callback function here -- to d done
+			 
+	
+
 		add_action( 'after_setup_theme', array( $this, 'enable_theme_support' ), 200 );
 
 		we may not need to load any js from here, but still confirm and then comment -- to d
@@ -380,6 +382,9 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		
 
 		public function enable_theme_support() {
+
+			ACTIVE_TODO we need to observer if it is actually required to enable it otherwise if it is creating any issue then we can simply disable
+
 			// WooCommerce.
 			add_theme_support( 'wc-product-gallery-zoom' );
 			add_theme_support( 'wc-product-gallery-lightbox' );
@@ -966,14 +971,18 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		/*$html = $args['hook_callback_args']['html'];
         $hook_args = $args['hook_callback_args']['hook_args'];*/
 
-        first apply filter hook here with key default_sp_variations_swatches_variation_attribute_options_html -- to d or -- to b 
-        add filter to below hook simply from the swatches_init section of fetch_data functio n variations class -- to d 
-        	--	and then inside put an if condition that check the hook_args['type'](note the level of type param) against our sp_variations_swatches_supported_attribute_types function that is in the same class -- to d 
+       // first apply filter hook here with key default_sp_variations_swatches_variation_attribute_options_html -- to d or -- to b 
+       // add filter to below hook simply from the swatches_init section of fetch_data functio n variations class -- to d done
+        	//--	and then inside put an if condition that check the hook_args['type'](note the level of type param) against our sp_variations_swatches_supported_attribute_types function that is in the same class -- to d done
         		--	and if condition is true for new hook below, then simply return is two elements is_return_default_html and html -- to d 
         			--	and then on the selectorn hook render layers instead of calling the templating layers flows just return the html if above flag is detected -- to d 
 		if (apply_filters( 'default_sp_variations_swatches_variation_attribute_options_html', false, $args['hook_callback_args']['hook_args'], $args['hook_callback_args']['html'] ))
 		{
-			return $args['hook_callback_args']['html'];
+			$data = array();			
+			$data['is_return_default_html'] = true;
+			$data['html'] = $args['hook_callback_args']['html'];
+			return $data;
+
 		}
 
         // ACTIVE_TODO mark this as deprecated and we maybe like a mechanisam flow now in our releases change logs or somewhere else on wordpress.org page which list such things on appropriate corners/sections of technical details 	
@@ -1000,7 +1009,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
         --	fix the below get text call -- to d 
 		// For bundle Product static item
-		$args['hook_callback_args']['hook_args']['show_option_none'] = esc_html__( 'Choose an option', 'woo-variation-swatches' );
+		$args['hook_callback_args']['hook_args']['show_option_none'] = eowbc_lang_esc_html__( 'Choose an option', 'woo-variation-swatches' );
 
 		ACTIVE_TODO we also need to provide default setting and I think we can 
 		simply give dropdown with three options like default to image, button or dropdown_image 
@@ -1207,6 +1216,12 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		// $data = ob_get_clean();
 
 		return $data;
+
+	}
+
+	public function get_ajax_gallery_data(){
+
+
 
 	}
 

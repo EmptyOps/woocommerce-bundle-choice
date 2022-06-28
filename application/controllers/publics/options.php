@@ -52,7 +52,8 @@ class Options extends \eo\wbc\controllers\publics\Controller {
     	}
     }
 
-    private function selectron($page_section,$args = array()){
+
+    private function selectron($page_section, $container_class, $args = null){
 
     	//--	move below to options controller selectron function -- to b done
 			//--	and from init function of the same controller call the selectron with page_section=swatches and args param that init may have or null -- to b  done
@@ -69,14 +70,57 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 	            return $this->selectron_hook_render($page_section,'woo_variation_attr_html',$args);
 
 			}, 200, 2);
+		}elseif ($page_section == 'get_default_gallery'){
+			add_filter( 'woocommerce_dropdown_variation_attribute_options_html',  function($html, $hook_args) use($page_section,$args){
+
+		        $args['hook_callback_args'] = array();
+            	$args['hook_callback_args']['html'] = $html;
+            	$args['hook_callback_args']['hook_args'] = $hook_args;
+
+	            return $this->selectron_hook_render($page_section,'woo_variation_attr_html',$args);
+
+			}, 200, 2);
+			if ($container_class == 'woo_variation_attr_html') {
+
+				add_action( 'wc_ajax_get_default_gallery', array( $this, 'get_default_gallery' ) );
+
+			}
+
+		}elseif ($page_section == 'get_variation_gallery'){
+			add_filter( 'woocommerce_dropdown_variation_attribute_options_html',  function($html, $hook_args) use($page_section,$args){
+
+		        $args['hook_callback_args'] = array();
+            	$args['hook_callback_args']['html'] = $html;
+            	$args['hook_callback_args']['hook_args'] = $hook_args;
+
+	            return $this->selectron_hook_render($page_section,'woo_variation_attr_html',$args);
+
+			}, 200, 2);
+
+			if ($container_class == 'woo_variation_attr_html') {
+
+				add_action( 'wc_ajax_get_variation_gallery', array( $this, 'get_variation_gallery' ) );
+			}
+
 		}
+		
+		
     }
 
-    private function load_view(){
+    private function load_view($page_section, $container_class, $args){
+
+
 
     	// NOTE: since so far we do not needed to create the view class and the actual ui is also coming from the templates folder so, so far not creating the view class. and just implementing the required logic from here. but if it become necessary then in future create the view class. 
+    	if ($page_section == 'swatches') {
 
-    	$this->render_swatches_data_by_attribute_type($data,$args);
+    		if ($container_class == 'woo_variation_attr_html') {
+
+	    		$this->render_swatches_data_by_attribute_type($data,$args);
+
+	    	}
+
+    	}	
     }
 
     private function getUI($page_section,$args = array()){
@@ -690,6 +734,13 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 
 		$args['data'] = $data;
 		$this->getUI('variable_item_wrapper',$args);
+
+	}
+
+	public function ajax($page_section, $args = array()){
+
+		$args['data'] = \eo\wbc\model\publics\SP_Model_Single_Product()::instance()->get_data('swatches_init');
+        \eo\wbc\controller\publics\Options::instance()->selectron('swatches',$args);
 
 	}
 }

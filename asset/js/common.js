@@ -256,7 +256,7 @@ window.document.splugins.templating.core = function( configs ) {
 
     var _this = this; 
 
-	_this.configs = jQuery.extend({}, {}/*default configs*/, configs);	
+    _this.configs = jQuery.extend({}, {}/*default configs*/, configs);  
 
     var get_template = function( tmpl_id, templating_lib ) {
 
@@ -570,16 +570,19 @@ ACTIVE_TODO_OC_START
                 --  so the callback function need to be saved under _this object with var name _this.on_change_callback, when the notification is recieved -- to a 
                 --  and on the core swatches module the inline function of callback (would be created from where the notification is sent) would recieve the callaback and simply pass the call to the base on_change or change function of the swatches module -- to a 
 
-            --  360 extensions host its own hover event based on its selector, so move that applicable code to the applicable function in the function heirarchy -- to a 
-                --  so we may need to create one or two applicable from our function heirarchy in gallery_images module to over there -- to a 
+            // --  360 extensions host its own hover event based on its selector, so move that applicable code to the applicable function in the function heirarchy -- to a done 
+                // --  so we may need to create one or two applicable from our function heirarchy in gallery_images module to over there -- to a done
                     --  and one more additional event that need to be host is slider thumb hover, here the thumb is of 360 extension -- to a 
                         --  and please do check once and also talk with both k and t about if hover is now should be replaced with the click or not, if click is standard experience and most sites are doing that then we should switch to that -- to a. but maybe hover is what most sites are doing and that is why we did that actually. 
                 --  and then move inside those functions the applicable existing code of the particular extension -- to a 
                     --  in this extension there will be code of playing and pausing the video so need to create base functions for them and then call them -- to a 
-                    --  and also there will be code of implementing the top left height and width properties of iframe, so implement that accordingly but whichever is applicable for the item page -- to a 
+                        --- play and pause aa 2 function banava na
+                            ---- play and pause no code bhavesh bhai pase thi levanose
+                    --  and also there will be code of implementing the top left height and width properties of iframe, so implement that accordingly but whichever is applicable for the item page -- to a
+                            --- process_properties_template (position - top left valo code , item and catary vali condition mukvi) 
                         --  so there there will be item page condition, just implement that as it is in the swatches etc module -- to a 
                         --  and this layers will also host or recieve many logics and flows of the 360 overall improvements and major upgrades we planned -- to h and -- to a 
-                    --  and additionally there are 360 related handling inside the zoom assets.php file so move that at right place in the this 360 js module -- to a 
+                    --  and additionally there are 360 related handling inside the zoom assets.php file so move that at right place in the this 360 js module -- to a (360 related code levano baki hoy to check karvu) 
                 --  and some of the existing code need to be commented, which I will update you about -- to h and -- to a 
                 --  and then after that if any code remains there then discuss with me -- to a 
                 --  and then listen for process_images notification and upon recieving that notification call the above functions which hosts the events -- to a 
@@ -588,16 +591,13 @@ ACTIVE_TODO_OC_START
                 --  so the callback function need to be saved under _this object with var name _this.on_change_callback, when the notification is recieved -- to a 
                 --  and on the core swatches module the inline function of callback (would be created from where the notification is sent) would recieve the callaback and simply pass the call to the base on_change or change function of the swatches module -- to a 
 
-            --  darker lighter extensions host its own hover event based on its selector, so move that applicable code to the applicable function in the function heirarchy -- to a 
-                --  so we may need to create one or two applicable from our function heirarchy in gallery_images module to over there -- to a 
+            // --  darker lighter extensions host its own hover event based on its selector, so move that applicable code to the applicable function in the function heirarchy -- to a done
+                // --  so we may need to create one or two applicable from our function heirarchy in gallery_images module to over there -- to a done
                     --  and one more additional event that need to be host is slider thumb hover, here the thumb is of darker lighter extension -- to a 
                         --  and please do check once and also talk with both k and t about if hover is now should be replaced with the click or not, if click is standard experience and most sites are doing that then we should switch to that -- to a. but maybe hover is what most sites are doing and that is why we did that actually. 
                 --  and then move inside those functions the applicable existing code of the particular extension -- to a 
-                    --  in this extension there will be code of playing and pausing the video so need to create base functions for them and then call them -- to a 
-                    --  and also there will be code of implementing the top left height and width properties of iframe, so implement that accordingly but whichever is applicable for the item page -- to a 
-                        --  so there there will be item page condition, just implement that as it is in the swatches etc module -- to a 
-                        --  and this layers will also host or recieve many logics and flows of the darker lighter overall improvements and major upgrades we planned -- to h and -- to a 
-                    --  and additionally there maybe darker lighter related code handling inside the zoom assets.php file so move that at right place in the this darker lighter js module -- to a 
+                        --  and this layers will also host or recieve many logics and flows of the darker lighter overall improvements and major upgrades we planned -- to h and -- to a (omar ni site ma virtual try on check karvanu darker lighter , darker lighter mobile ni javascript all point)
+                    --  and additionally there maybe darker lighter related code handling inside the zoom assets.php file so move that at right place in the this darker lighter js module -- to a (aa file mathi code levano se)
                 --  and some of the existing code need to be commented, which I will update you about -- to h and -- to a 
                 --  and then after that if any code remains there then discuss with me -- to a 
                 --  and then listen for process_images notification and upon recieving that notification call the above functions which hosts the events -- to a 
@@ -1506,7 +1506,7 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
 
     var _this = this; 
 
-	_this.configs = jQuery.extend({}, {}/*default configs*/, configs);	
+    _this.configs = jQuery.extend({}, {}/*default configs*/, configs);  
     
     // this.subjects = [];
 
