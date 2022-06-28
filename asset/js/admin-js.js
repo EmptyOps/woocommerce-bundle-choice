@@ -6,6 +6,8 @@ window.document.splugins.is_test_script_debug = false;
 
 window.document.splugins.common = window.document.splugins.common || {};
 
+window.document.splugins.admin = window.document.splugins.admin || {};
+
 window.document.splugins.process_debug_log = function(obj,debug_log) {  
    if( window.document.splugins.is_test_script_debug ) {
         var __debug_log = jQuery(obj).attr('data-debug_log');
@@ -100,11 +102,14 @@ $ = jQuery;
 
 function eowbc_ready($){
 
-    $(".ui.selection.dropdown:not(.additions)").dropdown();
-    $(".ui.selection.dropdown.additions").dropdown({ allowAdditions: true });   
-    $(".ui.pointing.secondary.menu>.item").tab();
-    $(".exclamation.circle.icon").popup({position:'bottom left',hoverable:true});
-    $('.ui.accordion').accordion({selector: {trigger: '.title'}});
+    if( !window.document.splugins.admin.is_legacy_admin_page ) {
+
+        $(".ui.selection.dropdown:not(.additions)").dropdown();
+        $(".ui.selection.dropdown.additions").dropdown({ allowAdditions: true });   
+        $(".ui.pointing.secondary.menu>.item").tab();
+        $(".exclamation.circle.icon").popup({position:'bottom left',hoverable:true});
+        $('.ui.accordion').accordion({selector: {trigger: '.title'}});
+    }
     
     jQuery("#d_fconfig_input_type_dropdown_div,#s_fconfig_input_type_dropdown_div").on('change',function(){
         let value = jQuery(this).dropdown('get value')
@@ -143,10 +148,10 @@ function eowbc_ready($){
     });
 
     //Open wordpress media manager on button click
-    jQuery('.field.upload_image>.ui.button').off('click');
-    jQuery('.field.upload_image>.ui.button').on('click',function(event){
+    window.document.splugins.admin.upload_image = function(thisObj,event) {
+
         event.preventDefault();
-        action_root=$(this).parent();
+        action_root=$(thisObj).parent();
         // If the media frame already exists, reopen it.
         /*if (typeof(file_frame)!=undefined) {                 
             // Open frame
@@ -168,7 +173,17 @@ function eowbc_ready($){
         });
         // Finally, open the modal
         file_frame.open();
-    }); 
+    };
+    window.document.splugins.admin.upload_image_bind = function() {
+
+        jQuery('.field.upload_image>.ui.button').off('click');
+
+        // jQuery('.field.upload_image>.ui.button').on('click',function(event){
+        jQuery(document).on('click','.field.upload_image>.ui.button',function(event){
+
+            window.document.splugins.admin.upload_image(this,event);  
+        });
+    };
 
     $('button.ui.button[data-action="cancel"]').on('click',function(e){
         e.preventDefault();
@@ -543,6 +558,13 @@ function eowbc_ready($){
         }
         return false;
     });
+
+    window.document.splugins.admin.do_event_binding = function() {
+
+        window.document.splugins.admin.upload_image_bind();  
+    };
+
+    window.document.splugins.admin.do_event_binding();
 }
 
 jQuery(document).ready(function($){

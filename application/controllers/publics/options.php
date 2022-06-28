@@ -32,12 +32,11 @@ class Options extends \eo\wbc\controllers\publics\Controller {
         $args['data'] = \eo\wbc\model\publics\SP_Model_Single_Product()::instance()->get_data('gallery_images_init');
         \eo\wbc\model\publics\SP_Model_Single_Product::instance()->render_gallery_images_template($args);
 
-    	// call the getUI from here once so that default render_ui is called once at last for handling general matters -- to b done
-    		// --	and for getUI set two args first is $page_section and second is $args -- to b done
-    			// -- empty page_section means call will go to default render_ui function -- to b done 
-    				--	and so page_section param will also be passed to get_ui_definition but there it will be passed through in args param -- to b 
-
-    	$this->getUI( null,$args );
+    	call the getUI from here once so that default render_ui is called once at last for handling general matters -- to b 
+    		//--	and for getUI set two args first is $page_section and second is $args -- to b done
+    			//-- empty page_section means call will go to default render_ui function -- to b done
+    				//--	and so page_section param will also be passed to get_ui_definition but there it will be passed through in args param -- to b done
+    	$this->getUI(null,$args);
     }
 
     public function selectron_hook_render($page_section,$container_class,$args = array()){
@@ -67,10 +66,10 @@ class Options extends \eo\wbc\controllers\publics\Controller {
     	}
     }
 
+    private function selectron($page_section,$args = array()){
+    	//--	move below to options controller selectron function -- to b done
+			//--	and from init function of the same controller call the selectron with page_section=swatches and args param that init may have or null -- to b  done
 
-    private function selectron($page_section,$container_class,$args = array()){
-
-    	//--	move below to options contuif the same controller call the selectron with page_section=swatches and args param that init may have or null -- to b  done
 				//--	so selectron will also have two param like getUI of options controller -- to b done 
 					//--	and from within callback function call the selectron hook render or something such function, with the hook args set in the args var and also the page_section param and also the container_class(for the particular hook) param -- to b done		
 						//--	and then create function prepare_swatches_data in single-product model in wbc, and move all code inside below to that selectron hook render in its swatches section -- to b done
@@ -85,61 +84,19 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 	            return $this->selectron_hook_render($page_section,'woo_variation_attr_html',$args);
 
 			}, 200, 2);
-		} elseif ($page_section == 'get_default_gallery'){
-			add_filter( 'wc_ajax_get_default_gallery',  function(){
-
-	            return $this->selectron_hook_render($page_section,'woo_variation_attr_html',$args);
-
-			});
-
-		} elseif ($page_section == 'get_variation_gallery'){
-			add_filter( 'wc_ajax_get_variation_gallery',  function(){
-
-	            return $this->selectron_hook_render($page_section,'woo_variation_attr_html',$args);
-
-			});
-
 		}
-		
     }
-
-    private function load_view($data, $args){
-
-
-
+    private function load_view($data,$args = array()){
     	// NOTE: since so far we do not needed to create the view class and the actual ui is also coming from the templates folder so, so far not creating the view class. and just implementing the required logic from here. but if it become necessary then in future create the view class. 
-    	if ($args['page_section'] == 'swatches') {
 
-	    	$this->render_swatches_data_by_attribute_type($data,$args);
-
-    	} elseif ($args['page_section'] == 'get_default_gallery') {
-    		
-    		$this->getUI($page_section,$args);
-
-    	} elseif ($args['page_section'] == 'get_variation_gallery') {
-    		
-    		$this->getUI($page_section,$args);
-    	
-    	}
+    	$this->render_swatches_data_by_attribute_type($data,$args);
     }
-
     private function getUI($page_section,$args = array()){
-
     	$args['page_section'] = $page_section;
     	
     	if ($page_section == 'woo_dropdown_attribute_html' or $page_section == 'variable_item' or $page_section == 'variable_item_wrapper') {
-    		$this->get_ui_definition($args)
-    	
-
-        }elseif($page_section == 'get_default_gallery') {
-        
-        	\eo\wbc\model\publics\SP_Model_Single_Product::instance()->render_ui( $this->get_ui_definition($args));
-
-        }elseif($page_section == 'get_variation_gallery') {
-        	
-        	\eo\wbc\model\publics\SP_Model_Single_Product::instance()->render_ui( $this->get_ui_definition($args));
-        
-        }else{	
+    		$this->get_ui_definition($args);
+    	}else{
 
         	\eo\wbc\model\publics\SP_Model_Single_Product::instance()->render_ui( $this->get_ui_definition($args));
         }
@@ -161,10 +118,13 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 	        $args['template_key'] = 'woo_dropdown_attribute';
 	        $args['plugin_slug'] = '';
 
+
     	}else if ($args['page_section'] == 'variable_item') {
 
     		if (!isset($args['data'])) {
+
     			$args['data'] = array();
+
     		}
     		dropd template part from both actual key params below, it will be loaded from inside the below main template -- to b 
     			--	from inside the commong template below the particular template would be loaded -- to b 
@@ -747,21 +707,4 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 
 	}
 
-	public function ajax($args = array()){
-
-		$args['data'] = \eo\wbc\model\publics\SP_Model_Single_Product()::instance()->get_data('swatches_init');
-        
-        \eo\wbc\controller\publics\Options::instance()->selectron('swatches',$args);
-
-		$args['data'] = \eo\wbc\model\publics\SP_Model_Single_Product()::instance()->get_data('get_default_gallery_init');
-
-        \eo\wbc\controller\publics\Options::instance()->selectron('get_default_gallery');
-
-        $args['data'] = \eo\wbc\model\publics\SP_Model_Single_Product()::instance()->get_data('get_variation_gallery_init');
-
-        \eo\wbc\controller\publics\Options::instance()->selectron('get_variation_gallery');
-        
-	    }
-
-	}
 }

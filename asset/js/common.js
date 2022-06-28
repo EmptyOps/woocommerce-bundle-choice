@@ -2123,4 +2123,4 @@ window.document.splugins.wbc.variations.gallery_images.api = window.document.spl
 // ACTIVE_TODO_OC_START
 // put ACTIVE_TODO_OC_START and ACTIVE_TODO_OC_END around each open comments section, and then comment them -- to d 
 //     --  and need to do the same for filter js and ssm variations class file -- to d 
-// ACTIVE_TODO_OC_END    
+// ACTIVE_TODO_OC_END  

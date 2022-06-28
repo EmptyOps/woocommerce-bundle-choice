@@ -30,6 +30,19 @@ class Eowbc_Model {
 	}
 
 
+	public function render_ui_sub_process($form, $args = null) {
+
+		echo \eo\wbc\model\admin\Form_Builder::instance()->build($form);
+
+		if( !empty($args['is_legacy_admin']) ) {
+
+			echo '<script type="text/javascript">window.document.splugins.admin.do_event_binding();</script>';
+		} else {
+
+		}		
+		
+	}
+
 	public function get( $form_definition, $args = null ) {
 
 		// NOTE: with this function implementation now instead of using the fetch_filter function the get function would be used with id passed in the args parameter. if it is not feasible for all layers in the meantime we will keep using it atleast for the legacy admin.	
@@ -182,7 +195,7 @@ class Eowbc_Model {
 			    	if( $sadk == "post_meta" ) {
 						
 						// TODO we may like to use post meta api functions like get_post_meta(used above), update_post_meta/delete_post_meta(used below) through our common wp helper 
-						
+
 						if ( !empty( $save_as_data_meta['post_meta_found'] ) ) {
 							update_post_meta( $args['id'], $args['page_section'].'_data', $sadv );
 						} else {

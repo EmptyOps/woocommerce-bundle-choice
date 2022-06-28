@@ -152,13 +152,13 @@ class Tiny_Features extends Eowbc_Model {
 
 			$this->render_ui_sub_process($form, $args);
 		}		
+
+		parent::load_asset($args);	
 	}
 
 	public function render_ui_sub_process($form, $args = null) {
 
-		echo \eo\wbc\model\admin\Form_Builder::instance()->build($form);
-
-		parent::load_asset($args);	
+		parent::render_ui_sub_process($form, $args);
 		
 		//	if there is any module specific js or css then it should be loaded view file or asset.php file -- both have their pros and cons. but I think asset.php is for flows var a asset file was necessary and where view is available we can simply put such js/css stuff there but in case of the admin also now we are moving the render related logic model and so maybe there will be little things in the view file 
 		
