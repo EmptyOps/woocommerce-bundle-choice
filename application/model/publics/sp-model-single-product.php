@@ -29,10 +29,11 @@ class SP_Model_Single_Product extends SP_Single_Product {
 	//	it will also accept a param like for_section with its default value to default, this param will be useful when any module have more than one section of data is applicable so that can be managed with if condition for them 
 	public function get_data($for_section="default", $args=null) {
 
+		
+		global $product;	
+
 		// add that four conditions here in below if, simply as or conditions -- to d or -- to b done
 		if( $for_section == "gallery_images_init" ||  $for_section == "swatches_init" || $for_section == "swatches" || $for_section == "gallery_images") {
-
-			global $product;	
 
 			// once the data is ready the particular layer will do action hook like sp_variations_render_data and so below render_ui function will add action to that hook -- to h 
 			// 		INVALID	
@@ -41,13 +42,27 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			// 			--	or instead the below fetch_data should simply be called from within the woo swatches related hooks so that there is no unnecessary hook that we need to add. yeah this is good idea. 
 			// 				--	however even better is from inside that hook only get_data of this class will be called, so below call will remain here 
 			return \eo\wbc\model\publics\SP_WBC_Variations::fetch_data($for_section, $product, $args );	
+		}elseif( $page_section == "get_default_gallery") {
+
+			return \eo\wbc\model\publics\SP_WBC_Variations::fetch_data($for_section, $product, $args );	
+
+		}elseif( $page_section == "get_variation_gallery") {	
+
+			return \eo\wbc\model\publics\SP_WBC_Variations::fetch_data($for_section, $product, $args );	
+
 		}	
 		
 	}
 
-	public function render_ui(){
+	public function render_ui($page_section){
 
 		$this->render_variations_ui();
+
+		if($page_section == 'get_default_gallery') {
+
+		} elseif($page_section == 'get_variation_gallery') {
+		
+		}
 	}
 
 	public function render_variations_ui() {
@@ -363,7 +378,11 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			 
 	
 
-		add_action( 'after_setup_theme', array( $this, 'enable_theme_support' ), 200 );
+		// add_action( 'after_setup_theme', array( $this, 'enable_theme_support' ), 200 );
+		add_action( 'after_setup_theme', function(){
+
+		}, 200 );
+
 
 		we may not need to load any js from here, but still confirm and then comment -- to d
 			// ACTIVE_TODO but yeah very soon for both gallery_images and swatches module we would like publich the init flags from here and if that is true then only init the respective modules on the js layer -- to d 
@@ -566,9 +585,9 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			wp_send_json( apply_filters( 'woo_variation_gallery_get_variation_gallery', $images, $product_id ) );
 		}
 
-				// move below hooks to the specific render_gallery_images and render_variations_swatches fucntions below. means both body_class and post_class hook, and also implement the woocommerce_post_class hook for both which is for now only for the gallery_images function only -- to b done 
+		// move below hooks to the specific render_gallery_images and render_variations_swatches fucntions below. means both body_class and post_class hook, and also implement the woocommerce_post_class hook for both which is for now only for the gallery_images function only -- to b done 
 			// --	and in each hook add classes in this format for example wbc-sp-variations-swatches and wbc-sp-variations-swatches-rtl and wbc-sp-variations-swatches-post and wbc-sp-variations-swatches-post-rtl and wbc-sp-variations-swatches-woopost and so on. for theme it would be wbc-sp-variations-swatches-theme. and same for the gallery_images function also, of course. -- to b done  
-				--	regarding css, t be noted that it should go in appropriate asset files only. will discuss about that -- to t. 
+			--	regarding css, t be noted that it should go in appropriate asset files only. will discuss about that -- to t. 
 
 		add_filter( 'woocommerce_post_class', function( $classes, $product ) {
 
@@ -915,9 +934,9 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			}
 		});
 	
-				// move below hooks to the specific render_gallery_images and render_variations_swatches fucntions below. means both body_class and post_class hook, and also implement the woocommerce_post_class hook for both which is for now only for the gallery_images function only -- to b done 
+		// move below hooks to the specific render_gallery_images and render_variations_swatches fucntions below. means both body_class and post_class hook, and also implement the woocommerce_post_class hook for both which is for now only for the gallery_images function only -- to b done 
 			// --	and in each hook add classes in this format for example wbc-sp-variations-swatches and wbc-sp-variations-swatches-rtl and wbc-sp-variations-swatches-post and wbc-sp-variations-swatches-post-rtl and wbc-sp-variations-swatches-woopost and so on. for theme it would be wbc-sp-variations-swatches-theme. and same for the gallery_images function also, of course. -- to b done  
-				--	regarding css, t be noted that it should go in appropriate asset files only. will discuss about that -- to t. 
+			--	regarding css, t be noted that it should go in appropriate asset files only. will discuss about that -- to t. 
 					// --	move this point where below hooks are moved. -- to b done
 
 		add_filter( 'woocommerce_post_class', function( $classes, $product ) {
