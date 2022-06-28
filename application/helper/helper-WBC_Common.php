@@ -458,6 +458,11 @@ class WBC_Common {
 			return  substr($str,0,$limit)."...";
 	}
 
+	public function is_mobile() {
+
+		return  wp_is_mobile();
+	}
+
 }
 
 function wbc_pr($ar, $force_debug = false, $die = false) {
@@ -574,8 +579,14 @@ function wbc_key_to_title( $key ) {
 
 }
 
-function truncate($str,$limit) {
+function wbc_truncate($str,$limit) {
 
 	return wbc()->common->truncate($str,$limit);
+	
+}
+
+function wbc_is_mobile() {
+
+	return wbc()->common->is_mobile();
 	
 }
