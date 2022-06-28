@@ -414,6 +414,10 @@ class SP_WBC_Variations extends SP_Variations {
 
 	private function get_available_variation_core( $variation_get_max_purchase_quantity,  $instance,  $variation){
 
+		eo\wbc\model\admin\Eowbc_Model::instance()->get($form_definition);
+
+		
+
 		first of all rename the vars inside this function as per the above args, look at the plugin we were exploring for clear understanding. we will be using the standard woo args name. -- to d or -- to b 
 
 		below hooked function will add our data layers of sp_variations gallery_images and maybe also others of the sp_variations to the woo data. 
@@ -452,8 +456,50 @@ class SP_WBC_Variations extends SP_Variations {
 			$variation_get_max_purchase_quantity['variation_gallery_images'][ $i ] = $this->get_product_attachment_props( $variation_gallery_image_id );
 		}
 		// apply filter hook here to let extensions filter over swatches data, with key sp_variations_available_variation -- to d or -- to b done
+		
 		return apply_filters( 'sp_variations_available_variation', $variation_get_max_purchase_quantity, $variation, $product_id );
 
+	}
+	
+	public function get_default_gallery_images( $product_id ) {
+
+		$product              = wc_get_product( $product_id );
+		$product_id           = $product->get_id();
+		$attachment_ids       = $product->get_gallery_image_ids( 'edit' );
+		$post_thumbnail_id    = $product->get_image_id( 'edit' );
+		$has_post_thumbnail   = has_post_thumbnail();
+		$images               = array();
+		$placeholder_image_id = get_option( 'woocommerce_placeholder_image', 0 );
+
+
+		/*if ( has_post_thumbnail( $product_id ) ) {
+			array_unshift( $gallery_images, get_post_thumbnail_id( $product_id ) );
+		}*/
+
+		// ACTIVE_TODO implement remove featured images
+		$remove_featured_image = false;
+
+
+		// IF PLACEHOLDER IMAGE HAVE VIDEO IT MAY NOT LOAD.
+		if ( ! empty( $post_thumbnail_id ) ) {
+			array_unshift( $attachment_ids, $post_thumbnail_id );
+		} else {
+			array_unshift( $attachment_ids, $placeholder_image_id );
+		}
+
+		if ( is_array( $attachment_ids ) && ! empty( $attachment_ids ) ) {
+
+			foreach ( $attachment_ids as $i => $image_id ) {
+
+				if ( $remove_featured_image && absint( $post_thumbnail_id ) == absint( $image_id ) ) {
+					continue;
+				}
+
+				$images[] = $this->get_product_attachment_props( $image_id, $product );
+			}
+		}
+
+		return $images;
 	}
 
 }

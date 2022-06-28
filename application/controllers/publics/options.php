@@ -45,23 +45,23 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 
     	} elseif ($page_section == 'get_default_gallery') {
     		
-    		if ($container_class == 'woo_variation_attr_html') {
-    			$data = \eo\wbc\model\publics\SP_Model_Single_Product::instance()->prepare_swatches_data($args);
-    			$this->load_view($data,$args);
+    		if ($container_class == 'get_default_gallery_ajax') {
+    			$data = \eo\wbc\model\publics\SP_Model_Single_Product::instance()->prepare_default_gallery_data($args);
+    			$this->ajax_response($data,$args);
     		}
 
     	} elseif ($page_section == 'get_variation_gallery') {
     		
-    		if ($container_class == 'woo_variation_attr_html') {
-    			$data = \eo\wbc\model\publics\SP_Model_Single_Product::instance()->prepare_swatches_data($args);
-    			$this->load_view($data,$args);
+    		if ($container_class == 'get_variation_gallery_ajax') {
+    			// $data = \eo\wbc\model\publics\SP_Model_Single_Product::instance()->prepare_default_gallery_data($args);
+    			// $this->ajax_response($data,$args);
     		}
 
     	} else{
     	    \eo\wbc\controller\publics\Options::instance()->getUI();
     	}
     }
-    
+
     private function selectron($page_section,$args = array()){
     	//--	move below to options controller selectron function -- to b done
 			//--	and from init function of the same controller call the selectron with page_section=swatches and args param that init may have or null -- to b  done
@@ -81,14 +81,14 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 		} elseif ($page_section == 'get_default_gallery'){
 			add_filter( 'wc_ajax_get_default_gallery',  function(){
 
-	            return $this->selectron_hook_render($page_section,'woo_variation_attr_html',$args);
+	            return $this->selectron_hook_render($page_section,'get_default_gallery_ajax',$args);
 
 			});
 
 		} elseif ($page_section == 'get_variation_gallery'){
 			add_filter( 'wc_ajax_get_variation_gallery',  function(){
 
-	            return $this->selectron_hook_render($page_section,'woo_variation_attr_html',$args);
+	            return $this->selectron_hook_render($page_section,'get_variation_gallery_ajax',$args);
 
 			});
 
@@ -103,11 +103,11 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 
     	} elseif ($args['page_section'] == 'get_default_gallery') {
     		
-    		$this->getUI($page_section,$args);
+    		$this->getUI($args['page_section'],$args);
 
     	} elseif ($args['page_section'] == 'get_variation_gallery') {
     		
-    		$this->getUI($page_section,$args);
+    		$this->getUI($args['page_section'],$args);
     	
     	}
     }
@@ -738,17 +738,23 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 
 	public function ajax($args = array()){
 
-		$args['data'] = \eo\wbc\model\publics\SP_Model_Single_Product()::instance()->get_data('swatches_init');
-        
-        \eo\wbc\controller\publics\Options::instance()->selectron('swatches',$args);
+		$args['page_section'] == 'get_default_gallery';
 
 		$args['data'] = \eo\wbc\model\publics\SP_Model_Single_Product()::instance()->get_data('get_default_gallery_init');
 
         \eo\wbc\controller\publics\Options::instance()->selectron('get_default_gallery');
 
+        $args['page_section'] == 'get_variation_gallery';
+
         $args['data'] = \eo\wbc\model\publics\SP_Model_Single_Product()::instance()->get_data('get_variation_gallery_init');
 
         \eo\wbc\controller\publics\Options::instance()->selectron('get_variation_gallery');
 
+	}
+
+	private function ajax_response($data, $args = array()){
+		ob_start();
+
+		wp_send_json( $data );
 	}
 }

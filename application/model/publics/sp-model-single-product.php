@@ -27,13 +27,26 @@ class SP_Model_Single_Product extends SP_Single_Product {
 	}
 
 	//	it will also accept a param like for_section with its default value to default, this param will be useful when any module have more than one section of data is applicable so that can be managed with if condition for them 
-	public function get_data($for_section="default", $args=null) {
+	public function get_data($for_section="default", $args=array()) {
 
 		
 		global $product;	
 
 		// add that four conditions here in below if, simply as or conditions -- to d or -- to b done
 		if( $for_section == "gallery_images_init" ||  $for_section == "swatches_init" || $for_section == "swatches" || $for_section == "gallery_images") {
+
+			// --	ACTIVE_TODO we need to make the common data layer clas s definition and create its base class(or maybe the grand parent or so class of the model classes which eowbc_model maybe appropriate choise for considering as data layer class but that should be in data model package like we have some data layer class heirarchy but that is mostly focused on legacy while our these modules are not strictly legacy neither strictly independent so need to decide right class for serving as data class for a module) or say data clas s and it would be used by both admin and frontend layer -- to h 
+			// --	ACTIVE_TODO	and based on the data definition the form definition will be created always if not the ui definition
+			// 	--	ACTIVE_TODO	and the ui definition will also be created based on this but it will depend on possibility so where possible it will be created 
+			// 		--	ACTIVE_TODO	and once above is implemented, then implement the calling stack precisely and on this regard the ui definition and form definition would be created from controller layers. -- and once it is neatly implemented then it will clear our 1-2 year old quest of creating a central layer for both admin and frontend and we started with assuming the ui_array(definition) as the base of all of it and center to everything but now (most likely) the data clas s would sit on top of ui_array(definition). but yeah ui_array will have its own independance to define ui but the data within the ui would be controlled by the data definition. 
+
+			// temporary till above ACTIVE_TODO are implemented
+
+			if($page_section == 'gallery_images') {
+				$args['data_definition'] = null;
+				$args['form_definition'] = eo\wbc\controllers\admin\menu\page\Tiny_features::instance()->init($args['temporary_get_form_directly']);
+				$args['ui_definition'] = null;
+			}
 
 			// once the data is ready the particular layer will do action hook like sp_variations_render_data and so below render_ui function will add action to that hook -- to h 
 			// 		INVALID	
@@ -1995,6 +2008,22 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		$data = sprintf( '<ul role="radiogroup" aria-label="%1$s"  class="variable-items-wrapper %2$s" data-attribute_name="%3$s" data-attribute_values="%4$s">%5$s</ul>', esc_attr( wc_attribute_label( $attribute ) ), trim( implode( ' ', array_unique( $css_classes ) ) ), esc_attr( \eo\wbc\system\core\data_model\SP_Attribute::instance()->variation_attribute_name($attribute) ), wc_esc_json( wp_json_encode( array_values( $options ) ) ), $contents );
 		
 		
+		return $data;
+
+	}
+
+	public function prepare_default_gallery_data($args = array()){
+
+		$data = array();
+
+		if ( empty( wbc()->sanitize->post() ) || empty( wbc()->sanitize->post('product_id') ) ) {
+			wp_send_json( false );
+		}
+
+		$product_id = absint( wbc()->sanitize->post('product_id') );
+
+		$data['images'] = eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_default_gallery_images( $product_id );
+
 		return $data;
 
 	}
