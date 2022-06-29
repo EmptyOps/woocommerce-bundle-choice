@@ -647,6 +647,8 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
 
         window.document.splugins.events.api.createSubject( 'swatches', ['process_attribute_types'] );
 
+        preprocess();
+    
     };
 
 
@@ -1452,6 +1454,9 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
         init: function() {
 
             window.document.splugins.variation.events.api.notifyAllObservers( 'variation', 'before_search' ); 
+            
+            init_private();
+
         },
         before_search: function() {
 
@@ -1557,6 +1562,8 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
     var init_private = function() {
 
         window.document.splugins.events.api.createSubject( 'gallery_images', ['process_images'] );
+
+        preprocess();
 
         return _.debounce(function () {
           
@@ -1700,7 +1707,7 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
             $(document).on('wc_variation_form', '.variations_form', function () {
               $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery();
             }); // Support for Jetpack's Infinite Scroll,
-ACTIVE_TODO_OC_START
+    ACTIVE_TODO_OC_START
             so a call from here to the compatability function of this module, and that will cover all compatability matters of load time inlcuding the promize resolve block of the plugin we were exploring. so call compatability with section=bootstrap -- to d 
 
 
@@ -2073,6 +2080,8 @@ ACTIVE_TODO_OC_START
         init: function() {
 
             window.document.splugins.variation.events.api.notifyAllObservers( 'variation', 'before_search' ); 
+
+            init_private();
         },
         before_search: function() {
 
