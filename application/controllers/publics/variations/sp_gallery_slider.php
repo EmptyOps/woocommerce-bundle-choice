@@ -85,9 +85,6 @@ class SP_Gallery_Slider extends \eo\wbc\controllers\publics\Controller{
         
         if ($page_section == 'slider_images') {
 
-            $args['page_section'] = 'slider_images_image_loop';
-            $args['data'] = $this->get_ui_definition($args);
-
             $args['page_section'] = 'slider_images';
             $ui = $this->get_ui_definition($args);
 
@@ -102,27 +99,26 @@ class SP_Gallery_Slider extends \eo\wbc\controllers\publics\Controller{
 
     private function get_ui_definition($args = array()){
 
-        $type = $args['data']['woo_dropdown_attribute_html_data']['type'];
+        if (!isset($args['data'])) {
 
+            $args['data'] = array();
+
+        }
+        $args['singleton_function'] = 'wbc';
 
         if ($args['page_section'] == 'slider_images') {
 
-            if (!isset($args['data'])) {
-
-                $args['data'] = array();
-
-            }
-
             $args['data']['template_data'] = array(); 
-            $args['data']['template_data']['template_key'] = '{{template_key}}_image_loop';
+            $args['data']['template_data']['template_key'] = 'gallery_slider_{{template_key_device}}_image_loop_content';
             $args['data']['template_data']['template_sub_dir'] = 'single-product/gallery-slider';
+            $args['data']['template_data']['data'] = $args['data'];
+            $args['data']['template_data']['singleton_function'] = 'wbc';
 
             $args['widget_key'] = '';
             $args['template_sub_dir'] = 'single-product/gallery-slider';
             $args['template_option_key'] = '';
             $args['option_group_key'] = '';
-            $args['template_key'] = '{{template_key}}';
-            $args['plugin_slug'] = '';
+            $args['template_key'] = 'gallery_slider_{{template_key_device}}_image_loop';
 
         }
 

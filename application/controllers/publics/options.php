@@ -133,6 +133,14 @@ class Options extends \eo\wbc\controllers\publics\Controller {
     } 
 
     private function get_ui_definition($args = array()){
+    	
+    	if (!isset($args['data'])) {
+
+			$args['data'] = array();
+
+		}
+
+		$args['singleton_function'] = 'wbc';
 
     	$type = $args['data']['woo_dropdown_attribute_html_data']['type'];
     	
@@ -146,16 +154,11 @@ class Options extends \eo\wbc\controllers\publics\Controller {
     		$args['template_option_key'] = '';
 	        $args['option_group_key'] = '';
 	        $args['template_key'] = 'woo_dropdown_attribute';
-	        $args['plugin_slug'] = '';
+	     
 
 
     	}else if ($args['page_section'] == 'variable_item') {
 
-    		if (!isset($args['data'])) {
-
-    			$args['data'] = array();
-
-    		}
     		dropd template part from both actual key params below, it will be loaded from inside the below main template -- to b 
     			--	from inside the commong template below the particular template would be loaded -- to b 
     				--	and on this note for non dropdown types we can simply one file and load their specific option_template_part from there. but lets keep theme together only if they share common code -- to b 
@@ -164,13 +167,15 @@ class Options extends \eo\wbc\controllers\publics\Controller {
     		$args['data']['template_data'] = array();
     		$args['data']['template_data']['template_key'] = 'sp_variations_optionsUI-common-option_template_part';
     		$args['data']['template_data']['template_sub_dir'] = 'single-product/variations-swatches';
+    		$args['data']['template_data']['data'] = $args['data'];
+    		$args['data']['template_data']['singleton_function'] = 'wbc';
 
     		$args['widget_key'] = '';
     		$args['template_sub_dir'] = 'single-product/variations-swatches';
     		$args['template_option_key'] = '';
 	        $args['option_group_key'] = '';
 	        $args['template_key'] = 'sp_variations_optionsUI-common';
-	        $args['plugin_slug'] = '';
+	       
 
     	}else if ($args['page_section'] == 'variable_item_wrapper') {
 
@@ -181,7 +186,7 @@ class Options extends \eo\wbc\controllers\publics\Controller {
     		$args['template_option_key'] = '';
 	        $args['option_group_key'] = '';
 	        $args['template_key'] = 'sp_variations_optionsUI-common-ribbon_wrapper';
-	        $args['plugin_slug'] = '';
+	        
 
     	}/*else {
     		$args['template_sub_dir'] = '';

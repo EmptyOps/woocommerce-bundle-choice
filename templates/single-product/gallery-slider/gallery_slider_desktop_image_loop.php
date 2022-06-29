@@ -4,6 +4,24 @@
  * in case if you want to implement your custom html then follow our documentation guide on how to add add custom html templates by following this link https://sphereplugins.com/docs/how-to-override-templates-using-custom-html
  */
 
+
+---- a code /purple_theme/application/controllers/publics/pages/Content_Single_Product.php no che
+-- main container 
+$template = array(
+    'type'=>'div',
+    'class'=>'imgScrollWrap_v',
+    'id'=>'slider1',
+    'child'=>array(
+        'type'=>'div',
+        'class'=>'splide__track',
+        'child'=>array(
+            'type'=>'ul',
+            'class'=>'exzoom_img_ul splide__list',
+            'child'=>$data
+        )
+    )
+);
+
 ---- a code /purple_theme/application/controllers/publics/pages/Content_Single_Product.php no che
 global $product;
 $template = array();
@@ -28,7 +46,7 @@ $template = array();
 }*/
 
 if(!empty($gallery_images_template_data['attachment_ids'])){
-    foreach ($gallery_images_template_data['attachment_ids'] as $id) {
+    foreach ($gallery_images_template_data['attachment_ids'] as $index=>$id) {
 
         // ACTIVE_TODO nid to lode admin settings here 
         $options = array();
@@ -36,7 +54,7 @@ if(!empty($gallery_images_template_data['attachment_ids'])){
         $defaults = array();
         $options  = wp_parse_args( $options, $defaults );
 
-        $image             = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_product_attachment_props( $id );
+        $image = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_product_attachment_props( $id );
         $post_thumbnail_id = $product->get_image_id();
 
         $remove_featured_image = false;
@@ -65,6 +83,10 @@ if(!empty($gallery_images_template_data['attachment_ids'])){
         }else{
             $src = wp_get_attachment_image_url($id,'original',false); //wp_get_attachment_url($id);
         }*/
-        $template[] = lode templte woo-bundle-choice/templates/single-product/gallery-slider/gallery_slider_desktop_image_loop_content.php              
+        if (!empty($template_data['template_key'])) {
+           $template[] =  wbc()->load->template($template_data['template_sub_dir'].$template_data['template_key'],(isset($template_data['data'])?array('data' => $template_data['data'],'index'=>$index,'id'=>$id):array()),true,$template_data['singleton_function'],true);
+        
+        }
+                       
     }
 }

@@ -39,12 +39,10 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			// --	ACTIVE_TODO	and based on the data definition the form definition will be created always if not the ui definition
 			// 	--	ACTIVE_TODO	and the ui definition will also be created based on this but it will depend on possibility so where possible it will be created 
 			// 		--	ACTIVE_TODO	and once above is implemented, then implement the calling stack precisely and on this regard the ui definition and form definition would be created from controller layers. -- and once it is neatly implemented then it will clear our 1-2 year old quest of creating a central layer for both admin and frontend and we started with assuming the ui_array(definition) as the base of all of it and center to everything but now (most likely) the data clas s would sit on top of ui_array(definition). but yeah ui_array will have its own independance to define ui but the data within the ui would be controlled by the data definition. 
-
 			// temporary till above ACTIVE_TODO are implemented
-
-			if($page_section == 'gallery_images') {
+			if($page_section == 'gallery_images_init') {
 				$args['data_definition'] = null;
-				$args['form_definition'] = eo\wbc\controllers\admin\menu\page\Tiny_features::instance()->init($args['temporary_get_form_directly']);
+				$args['form_definition'] = \eo\wbc\controllers\admin\menu\page\Tiny_features::instance()->init(array('temporary_get_form_directly'=>true, 'is_legacy_admin'=>true));
 				$args['ui_definition'] = null;
 			}
 
@@ -1480,7 +1478,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		    foreach ($data['gallery_images_template_data']['attachment_ids'] as $id) {
 
 		       
-		        $data['gallery_images_template_data']['attachment_ids_loop_image'][$id]             = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_product_attachment_props( $id );
+		        $data['gallery_images_template_data']['attachment_ids_loop_image'][$id] = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_product_attachment_props( $id );
 		        $data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'][$id] = $product->get_image_id();
 
 		        $data['gallery_images_template_data']['attachment_ids_loop_remove_featured_image'][$id] = false;

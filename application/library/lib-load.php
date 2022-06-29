@@ -86,12 +86,12 @@ if(!class_exists('WBC_Loader')) {
 			}			
 		}
 
-		public function template( $template_path, $data=array(),$is_template_dir_extended = false,$plugin_slug = null,$is_return_template = false) {
+		public function template( $template_path, $data=array(),$is_template_dir_extended = false,$singleton_function = null,$is_return_template = false) {
 			//	load template file under /view directory
 
 			$path = null;
 			if ($is_template_dir_extended) {
-				$path = constant( strtoupper( sp_tv()->SP_Extension()->singleton_function() ).'_TEMPLATE_DIR_EXTENDED').$template_path.".php";
+				$path = constant( strtoupper( $singleton_function ).'_TEMPLATE_DIR_EXTENDED').$template_path.".php";
 			}else{
 				$path = constant('EOWBC_TEMPLATE_DIR').$template_path.".php";
 			}

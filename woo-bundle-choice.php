@@ -148,6 +148,8 @@ if(!class_exists('Woo_Bundle_Choice') ) {
 			defined('EOWBC_LIBRARY_DIR') || define('EOWBC_LIBRARY_DIR', constant('EOWBC_DIRECTORY').'application/library/');
 			defined('EOWBC_TEMPLATE_DIR') || define('EOWBC_TEMPLATE_DIR', constant('EOWBC_DIRECTORY').'application/view/');
 
+			defined('WBC_TEMPLATE_DIR_EXTENDED') || define('WBC_TEMPLATE_DIR_EXTENDED', constant('EOWBC_DIRECTORY').'templates/');
+
 			defined('EOWBC_LOG_DIR') || define('EOWBC_LOG_DIR', constant('EOWBC_ASSET_DIR').'logs/');
 
 			defined('EOWBC_ICON') || define('EOWBC_ICON', constant('EOWBC_ASSET_URL').'icon/mini.png');

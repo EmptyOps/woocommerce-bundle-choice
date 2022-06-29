@@ -44,7 +44,9 @@ class SP_WBC_Variations extends SP_Variations {
 		if( $for_section == "gallery_images_init" ) {
 
 			//	below hooked function will add our data layers of sp_variations gallery_images and maybe also others of the sp_variations to the woo data 					
-			add_filter( 'woocommerce_available_variation', array( $this, 'get_available_variation_hook_callback' ), 90, 3);
+			add_filter( 'woocommerce_available_variation', function($variation_get_max_purchase_quantity,  $instance,  $variation) use($args){
+				return $this->get_available_variation_hook_callback($variation_get_max_purchase_quantity,  $instance,  $variation, $args);
+			}, 90, 3);
 			
 		}elseif( $for_section == "swatches_init" ) {
 			add_filter( 'woocommerce_ajax_variation_threshold',  function($int){
@@ -151,9 +153,9 @@ class SP_WBC_Variations extends SP_Variations {
 	}
  
 	//	not sure if hook core can callback it on its instance if it is a private function, so kept it public for now. 
-	public function get_available_variation_hook_callback( $variation_get_max_purchase_quantity,  $instance,  $variation ) {
+	public function get_available_variation_hook_callback( $variation_get_max_purchase_quantity,  $instance,  $variation ,$args = array()) {
 
-		return $this->get_available_variation_core($variation_get_max_purchase_quantity, $instance, $variation);
+		return $this->get_available_variation_core($variation_get_max_purchase_quantity, $instance, $variation, $args);
 		
 	}
 
@@ -412,10 +414,7 @@ class SP_WBC_Variations extends SP_Variations {
 		return $product->get_available_variations();
 	}
 
-	private function get_available_variation_core( $variation_get_max_purchase_quantity,  $instance,  $variation){
-
-		eo\wbc\model\admin\Eowbc_Model::instance()->get($form_definition);
-
+	private function get_available_variation_core( $variation_get_max_purchase_quantity,  $instance,  $variation, $args = array()){
 		
 
 		first of all rename the vars inside this function as per the above args, look at the plugin we were exploring for clear understanding. we will be using the standard woo args name. -- to d or -- to b 
@@ -425,14 +424,19 @@ class SP_WBC_Variations extends SP_Variations {
 		$product_id         = absint( $variation->get_parent_id() );
 		$variation_id       = absint( $variation->get_id() );
 		$variation_image_id = absint( $variation->get_image_id() );
-		$has_variation_gallery_images = (bool) get_post_meta( $variation_id, 'woo_variation_gallery_images', true );
+		$data 				= \eo\wbc\model\admin\Eowbc_Model::instance()->get($args['form_definition'],array('is_convert_das_to_array'=>true));
 		//  $product                      = wc_get_product( $product_id );
-		if ( $has_variation_gallery_images ) {
-			$gallery_images = (array) get_post_meta( $variation_id, 'woo_variation_gallery_images', true );
+		if ( !empty($data) ? ) {
+
+			loop and prepare images and video
+
+			$gallery_images = $data ?;
+
 		} else {
 			// $gallery_images = $product->get_gallery_image_ids();
 			$gallery_images = $instance->get_gallery_image_ids();
 		}
+
 		this function will return also the default(or say the data that are supported and provided by legacy api) data as applicable like below image or all other such applicable default data 
 		if ( $variation_image_id ) {
 			// Add Variation Default Image

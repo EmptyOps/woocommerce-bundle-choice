@@ -940,6 +940,7 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
           return obj;
         }, {});
+    
     };
 
     var process_attribute_types = function( product_variations ) {
@@ -1287,7 +1288,7 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
     var on_click_listener = function(type) {
 
-        if(window.document.splugins.common._b(_this.binding_stats, 'on_click', type)){
+        if(window.document.splugins.common._b(_this.binding_stats, 'on_click_listener', type)){
             return false;
         }
 
@@ -1431,7 +1432,7 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
     var on_keydown_listener = function(type) {
 
-        if(window.document.splugins.common._b(_this.binding_stats, 'on_click', type)){
+        if(window.document.splugins.common._b(_this.binding_stats, 'on_keydown_listener', type)){
             return false;
         }
 
@@ -1513,6 +1514,9 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
         init: function() {
 
             window.document.splugins.variation.events.api.notifyAllObservers( 'variation', 'before_search' ); 
+            
+            init_private();
+
         },
         before_search: function() {
 
@@ -1618,6 +1622,8 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
     var init_private = function() {
 
         window.document.splugins.events.api.createSubject( 'gallery_images', ['process_images'] );
+
+        preprocess();
 
         return _.debounce(function () {
           
@@ -1761,7 +1767,7 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
             $(document).on('wc_variation_form', '.variations_form', function () {
               $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery();
             }); // Support for Jetpack's Infinite Scroll,
-ACTIVE_TODO_OC_START
+    ACTIVE_TODO_OC_START
             so a call from here to the compatability function of this module, and that will cover all compatability matters of load time inlcuding the promize resolve block of the plugin we were exploring. so call compatability with section=bootstrap -- to d 
 
 
@@ -1986,9 +1992,9 @@ ACTIVE_TODO_OC_START
 
     var process_events = function() {
 
-         slider_thumb_click_listener();
+        slider_thumb_click_listener();
 
-         zoom_area_hover_listener();
+        zoom_area_hover_listener();
 
     }
 
@@ -2013,14 +2019,8 @@ ACTIVE_TODO_OC_START
 
     var slider_thumb_click_listener = function(type) {
 
-        var _this.binding_stats.slider_thumb_click_listener = this.binding_stats.slider_thumb_click_listener || {};
-
-        if(typeof(_this.binding_stats.slider_thumb_click_listener[type]) == undefined){
-
-            _this.binding_stats.slider_thumb_click_listener[type] = true;
-
-        }else{
-            return true;
+        if(window.document.splugins.common._b(_this.binding_stats, 'slider_thumb_click_listener', type)){
+            return false;
         }
 
         on_slider_thumb_click();
@@ -2029,14 +2029,8 @@ ACTIVE_TODO_OC_START
 
     var zoom_area_hover_listener = function() {
 
-        var _this.binding_stats.zoom_area_hover_listener = this.binding_stats.zoom_area_hover_listener || {};
-
-        if(typeof(_this.binding_stats.zoom_area_hover_listener[type]) == undefined){
-
-            _this.binding_stats.zoom_area_hover_listener[type] = true;
-
-        }else{
-            return true;
+        if(window.document.splugins.common._b(_this.binding_stats, 'zoom_area_hover_listener', type)){
+            return false;
         }
 
         on_zoom_area_hover();
@@ -2134,6 +2128,8 @@ ACTIVE_TODO_OC_START
         init: function() {
 
             window.document.splugins.variation.events.api.notifyAllObservers( 'variation', 'before_search' ); 
+
+            init_private();
         },
         before_search: function() {
 
