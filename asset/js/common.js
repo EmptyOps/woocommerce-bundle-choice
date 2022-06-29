@@ -648,7 +648,6 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
         window.document.splugins.events.api.createSubject( 'swatches', ['process_attribute_types'] );
 
         preprocess();
-    
     };
 
 
@@ -899,6 +898,7 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
 
           return obj;
         }, {});
+    
     };
 
     var process_attribute_types = function() {
@@ -1228,7 +1228,7 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
 
     var on_click_listener = function(type) {
 
-        if(window.document.splugins.common._b(_this.binding_stats, 'on_click', type)){
+        if(window.document.splugins.common._b(_this.binding_stats, 'on_click_listener', type)){
             return false;
         }
 
@@ -1372,7 +1372,7 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
 
     var on_keydown_listener = function(type) {
 
-        if(window.document.splugins.common._b(_this.binding_stats, 'on_click', type)){
+        if(window.document.splugins.common._b(_this.binding_stats, 'on_keydown_listener', type)){
             return false;
         }
 
@@ -1932,9 +1932,9 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
 
     var process_events = function() {
 
-         slider_thumb_click_listener();
+        slider_thumb_click_listener();
 
-         zoom_area_hover_listener();
+        zoom_area_hover_listener();
 
     }
 
@@ -1959,14 +1959,8 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
 
     var slider_thumb_click_listener = function(type) {
 
-        var _this.binding_stats.slider_thumb_click_listener = this.binding_stats.slider_thumb_click_listener || {};
-
-        if(typeof(_this.binding_stats.slider_thumb_click_listener[type]) == undefined){
-
-            _this.binding_stats.slider_thumb_click_listener[type] = true;
-
-        }else{
-            return true;
+        if(window.document.splugins.common._b(_this.binding_stats, 'slider_thumb_click_listener', type)){
+            return false;
         }
 
         on_slider_thumb_click();
@@ -1975,14 +1969,8 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
 
     var zoom_area_hover_listener = function() {
 
-        var _this.binding_stats.zoom_area_hover_listener = this.binding_stats.zoom_area_hover_listener || {};
-
-        if(typeof(_this.binding_stats.zoom_area_hover_listener[type]) == undefined){
-
-            _this.binding_stats.zoom_area_hover_listener[type] = true;
-
-        }else{
-            return true;
+        if(window.document.splugins.common._b(_this.binding_stats, 'zoom_area_hover_listener', type)){
+            return false;
         }
 
         on_zoom_area_hover();
