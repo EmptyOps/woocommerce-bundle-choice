@@ -6,13 +6,27 @@
 
 $template = null;
 
-foreach ( $variable_item_data['terms'] as $term ) {
+
+    
+$options = null;
+
+if ( $woo_dropdown_attribute_html_data['product'] && taxonomy_exists( $variable_item_data['attribute'] ) ) {
+
+    $options = $variable_item_data['terms'];  
+
+} else {
+
+    $options = $woo_dropdown_attribute_html_data['options']; 
+
+}
+
+foreach ( $options as $term ) {
+        
     if ( in_array( $term->slug, $woo_dropdown_attribute_html_data['options'] ) ) {
         $selected_class = ( sanitize_title( $woo_dropdown_attribute_html_data['args'][ 'selected'] ) == $term->slug ) ? 'selected' : '';
 
         if (!empty($template_data['template_key'])) {
-            -- nid to macit re useabul -- to h
-            wbc()->load->template($template_sub_dir.$template_key,(isset($woo_dropdown_attribute_html_data['args']['data'])?array('data' => $woo_dropdown_attribute_html_data['args']['data'],'term'=>$term):array()),true,$woo_dropdown_attribute_html_data['args']['plugin_slug'],true);
+            $template = wbc()->load->template($template_data['template_sub_dir'].$template_data['template_key'],(isset($template_data['data'])?array('data' => $template_data['data'],'term'=>$term):array()),true,$template_data['singleton_function'],true);
         
         }
 

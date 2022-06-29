@@ -1478,7 +1478,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		    foreach ($data['gallery_images_template_data']['attachment_ids'] as $id) {
 
 		       
-		        $data['gallery_images_template_data']['attachment_ids_loop_image'][$id]             = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_product_attachment_props( $id );
+		        $data['gallery_images_template_data']['attachment_ids_loop_image'][$id] = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_product_attachment_props( $id );
 		        $data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'][$id] = $product->get_image_id();
 
 		        $data['gallery_images_template_data']['attachment_ids_loop_remove_featured_image'][$id] = false;

@@ -19,4 +19,4 @@ $template = array(
 );
 
 
-$template = apply_filters( 'woocommerce_single_product_image_thumbnail_html', woo_variation_gallery()->get_frontend()->$template, $post_thumbnail_id );
+$template = apply_filters( 'woocommerce_single_product_image_thumbnail_html',$template, $post_thumbnail_id );

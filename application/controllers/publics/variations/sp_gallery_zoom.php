@@ -83,9 +83,6 @@ class SP_Gallery_Zoom extends \eo\wbc\controllers\publics\Controller{
         
         if ($page_section == 'zoom_images') {
 
-            $args['page_section'] = 'zoom_images_image_loop';
-            $args['data'] = $this->get_ui_definition($args);
-
             $args['page_section'] = 'zoom_images';
             $ui = $this->get_ui_definition($args);
 
@@ -101,25 +98,30 @@ class SP_Gallery_Zoom extends \eo\wbc\controllers\publics\Controller{
 
     private function get_ui_definition($args = array()){
 
-        if ($args['page_section'] == 'zoom_images') {
+        if (!isset($args['data'])) {
 
-            $args['widget_key'] = '';
-            $args['template_sub_dir'] = 'single-product\gallery-zoom';
-            $args['template_option_key'] = '';
-            $args['option_group_key'] = '';
-            $args['template_key'] = 'gallery_zoom_desktop';
-            $args['plugin_slug'] = '';
-
-        } else  if ($args['page_section'] == 'zoom_images_image_loop') {
-
-            $args['widget_key'] = '';
-            $args['template_sub_dir'] = 'single-product\gallery-zoom';
-            $args['template_option_key'] = '';
-            $args['option_group_key'] = '';
-            $args['template_key'] = 
-            $args['plugin_slug'] = '';
+            $args['data'] = array();
 
         }
+
+        $args['singleton_function'] = 'wbc';
+
+        if ($args['page_section'] == 'slider_images') {
+
+            $args['data']['template_data'] = array(); 
+            $args['data']['template_data']['template_key'] = 'gallery_zoom_{{template_key_device}}_image_loop_content';
+            $args['data']['template_data']['template_sub_dir'] = 'single-product/gallery-zoom';
+            $args['data']['template_data']['data'] = $args['data'];
+            $args['data']['template_data']['singleton_function'] = 'wbc';
+
+            $args['widget_key'] = '';
+            $args['template_sub_dir'] = 'single-product/gallery-zoom';
+            $args['template_option_key'] = '';
+            $args['option_group_key'] = '';
+            $args['template_key'] = 'gallery_zoom_{{template_key_device}}_image_loop';
+
+        }
+
         return parent::get_ui_definition($args);
 
        /* if (!in_array($args)) {
