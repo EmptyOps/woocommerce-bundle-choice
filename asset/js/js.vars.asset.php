@@ -45,6 +45,10 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 	</script>
 <?php 
 
+	// ACTIVE_TODO even though now we are going to use the underscore js but so far it is only by the optionsUI feature so skip loading it here for the rest of features and just put the if condition here for lighter experience to all other users -- to s 
+	wp_enqueue_script('undescore'/*, includes_url('js') . '/underscore.min.js'*/ );	
+
+
 	wbc()->load->asset('js','common',array(),"0.1.3",false,true);
 }, 99);
 
