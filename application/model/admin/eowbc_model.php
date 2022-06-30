@@ -124,7 +124,6 @@ class Eowbc_Model {
 		    	if( $key != $saved_tab_key ) {
 		    		continue;
 		    	}
-		    
 		    	$key_clean = ((!empty($this->tab_key_prefix) and strpos($key,$this->tab_key_prefix)===0)?substr($key,strlen($this->tab_key_prefix)):$key);
 		    	//$res['data_form'][]= $tab;
 				$is_table_save = false;	//	ACTIVE_TODO/TODO it should be passed from child maybe or make dynamic as applicable. ($key == $this->tab_key_prefix."d_fconfig" or $key == $this->tab_key_prefix."s_fconfig" or $key=='filter_set') ? true : false;
