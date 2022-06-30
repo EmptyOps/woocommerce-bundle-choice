@@ -1,5 +1,5 @@
 <?php
-namespace eo\wbc\controller\publics\variations;
+namespace eo\wbc\controllers\publics\variations;
 defined( 'ABSPATH' ) || exit;
 
 class SP_Gallery_Slider extends \eo\wbc\controllers\publics\Controller{
@@ -27,7 +27,9 @@ class SP_Gallery_Slider extends \eo\wbc\controllers\publics\Controller{
         
         \eo\wbc\model\publics\variations\SP_Model_Gallery_Slider::instance()->init_core();
         
-        --- get ui call
+        // ACTIVE_TODO_OC_START
+        // --- get ui call
+        // ACTIVE_TODO_OC_END
         
         \eo\wbc\model\publics\variations\SP_Model_Gallery_Slider::instance()->render_core();
 
@@ -97,7 +99,7 @@ class SP_Gallery_Slider extends \eo\wbc\controllers\publics\Controller{
         }
     }
 
-    private function get_ui_definition($args = array()){
+    protected function get_ui_definition($args = array()){
 
         if (!isset($args['data'])) {
 

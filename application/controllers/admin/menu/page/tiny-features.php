@@ -40,7 +40,7 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 				}
 
 				//\eo\wbc\model\admin\Tiny_features::instance()->save( $args['form_definition'], false, $args );
-				$this->selectron('sp_variations_save',$args);
+				//$this->selectron('sp_variations_save',$args);
 			}
 
 	        //\eo\wbc\controllers\admin\menu\page\Tiny_features::instance()->getUI($args);
@@ -56,23 +56,31 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 	    			$args['data'] = $args['hook_callback_args'];
                 	unset($args['hook_callback_args']);
 	    			\eo\wbc\controllers\admin\menu\page\Tiny_features::instance()->getUI($args);
-	    		}
 
-	    	} else if ($page_section == 'sp_variations_save') {
-	    		if ($container_class == 'sp_variations_save_html') {
+	    		} else if ($container_class == 'sp_variations_save_html') {
 	    			$args['data'] = $args['hook_callback_args'];
                 	unset($args['hook_callback_args']);
 
-                	$args['page_section'] = 'sp_variations_save';
+                	$args['page_section'] = 'sp_variations';
 
 	    			\eo\wbc\model\admin\Tiny_features::instance()->save( $this->get_legacy_form_definition('sp_variations', $args), false, $args );
 	    		}
-
 	    	} 
 	    }
 
 	    private function selectron($page_section,$args = array()){
 			if ($page_section == 'sp_variations') {
+
+				add_action( 'woocommerce_save_product_variation', function( $variation_id, $loop ) use($page_section,$args){
+
+					$args['hook_callback_args'] = array();
+					$args['hook_callback_args']['id'] = absint( $variation_id );
+
+					// maybe this hook is need to be moved controller right before the form_definition is passed to parent class function. and the form_definition will be filter parameter. -- and yeah there would be one hook only that maybe needed. not separate needed for render and save 
+					// apply_filters('sp_variations_data_before_save', '');
+
+					return $this->selectron_hook_render($page_section,'sp_variations_save_html',$args);
+				}, 10, 2 );
 
 				add_action('woocommerce_product_after_variable_attributes', function( $loop, $variation_data, $variation ) use($page_section,$args) {
 
@@ -173,18 +181,7 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 					return $this->selectron_hook_render($page_section,'sp_variations_html',$args);
 
 				}, 10, 3 );
-			} else if ($page_section == 'sp_variations_save') {
 
-				add_action( 'woocommerce_save_product_variation', function( $variation_id, $loop ) use($page_section,$args){
-
-					$args['hook_callback_args'] = array();
-					$args['hook_callback_args']['id'] = absint( $variation_id );
-
-					// maybe this hook is need to be moved controller right before the form_definition is passed to parent class function. and the form_definition will be filter parameter. -- and yeah there would be one hook only that maybe needed. not separate needed for render and save 
-					// apply_filters('sp_variations_data_before_save', '');
-
-					return $this->selectron_hook_render($page_section,'sp_variations_save_html',$args);
-				}, 10, 2 );
 			} 
 	    }
 
@@ -211,7 +208,7 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 					'sp_variations'=>array(
 						'label'=>"Gallery Images and Video(optionsUI)",
 						'form'=>array(
-							'sp_frmb_saved_tab_key{{id}}'=>array(
+							'sp_frmb_saved_tab_key'=>array(
 								'type'=>'hidden',
 								'value'=>'sp_variations',
 							),

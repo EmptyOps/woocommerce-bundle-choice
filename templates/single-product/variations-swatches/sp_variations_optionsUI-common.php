@@ -4,7 +4,7 @@
  * in case if you want to implement your custom html then follow our documentation guide on how to add add custom html templates by following this link https://sphereplugins.com/docs/how-to-override-templates-using-custom-html
  */
 
-$template = null;
+$template = array();
 
 
     
@@ -26,7 +26,9 @@ foreach ( $options as $term ) {
         $selected_class = ( sanitize_title( $woo_dropdown_attribute_html_data['args'][ 'selected'] ) == $term->slug ) ? 'selected' : '';
 
         if (!empty($template_data['template_key'])) {
-            $template = wbc()->load->template($template_data['template_sub_dir'].$template_data['template_key'],(isset($template_data['data'])?array('data' => $template_data['data'],'term'=>$term):array()),true,$template_data['singleton_function'],true);
+            $template_data['data']['term'] = $term; 
+            $template_data['data']['template_sub_dir'] = $template_data['template_sub_dir']; 
+            $template[] = wbc()->load->template($template_data['template_sub_dir'].'/'.$template_data['template_key'],(isset($template_data['data'])?$template_data['data']:array()),true,$template_data['singleton_function'],true);
         
         }
 

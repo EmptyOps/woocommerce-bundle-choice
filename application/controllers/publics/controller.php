@@ -51,7 +51,7 @@ class Controller extends \eo\wbc\controllers\Controller{
         $template_key_option = null;
 
         if(!empty($args['template_option_key'])) {
-            $template_key_option = wbc()->options->get_option($args['template_option_key'],$args['option_group_key']);
+            $template_key_option = wbc()->options->get_option($args['option_group_key'],$args['template_option_key']);
         }
 
         if(!empty($template_key_option)) {
@@ -66,7 +66,7 @@ class Controller extends \eo\wbc\controllers\Controller{
             }
 
         } else {
-            $template_key = wbc()->options->get_option($args['template_option_key'],$args['option_group_key']);
+            $template_key = $template_key_option;
         }
 
         $template_path = $template_dir.$template_key;
@@ -87,8 +87,12 @@ class Controller extends \eo\wbc\controllers\Controller{
             $template_path = $template_path_new;
         }
 
-        wbc()->load->template($template_path,(isset($args['data'])?array('data' => $args['data']):array()),true,$args['plugin_slug'],true);
+        if(!empty($template_path)) {
+         
+            return wbc()->load->template($template_path,(isset($args['data'])?$args['data']:array()),true,$args['singleton_function'],true);
+        } else {
+            return null;
+        }
         
-        return $template;
     }
 }
