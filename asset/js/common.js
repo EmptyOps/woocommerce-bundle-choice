@@ -8,6 +8,10 @@ window.document.splugins.common = window.document.splugins.common || {};
 
 window.document.splugins.wbc = window.document.splugins.wbc || {};
 
+//  port the very base namespace and also some key and common libraries and functions 
+var splugins = window.document.splugins;    
+splugins._ = _;    //   underscore js 
+
 //  common functions 
 window.document.splugins.common.parseJSON = function(result,confirm_obj_format=true, obj_format='result'/*our standard response result object on any kind of ajax or api calls to our backends and other applicable layers*/) {
     var resjson = null;
@@ -88,10 +92,11 @@ window.document.splugins.Feed = window.document.splugins.Feed || {};
 
 
 
-//  Feed.events 
+//  (Feed.) events 
 //  the feeling comes in the mind is it may become overloaded if we create such a broad class like Feed where Feed page can contain many features, events and so on. but there is absolute need of one central observer pattern which let subscribe to any subject(feature) and then later notify them when related event occurs. the need is of central observer and notifier but nothing beyond that so it will be very light and almost like a namespace holding diferent fetures. and in essense Feed will be collection of different subject(feature) where each subject is itself a observer pattern. 
     //  it is supposed to hold the collection of features like pagination, filters, feed render, sorting and so on but yeah its only job is to listen to events and notify to their subscribers. 
-    //  NOTE: whenever if any requirements comes up of supporting the jquery events based on their trigger/on api functions then that can as usual be supported internally, all that is needed is is register subject with one additional param that is event_core_backend=jQuery. -- and on this regard the syntax can also bring as much closer as possible to that of jQuery syntax but yeah we will need atleast something like sp_e or so just like _ underscore js have _ in there for everything. 
+    //  NOTE: whenever if any requirements comes up of supporting the jquery events based on their trigger/on api functions then that can as usual be supported internally, all that is needed is is register subject with one additional param that is event_core_backend=jQuery. -- and on this regard the syntax can also bring as much closer as possible to that of jQuery syntax but yeah we will need atleast something like sp_e or so just like _ underscore js have _ in there for everything. -- a potential TODO
+    //  NOTE: and regarding our syntax of exporting and consuming the modules, if we ever feel the need to instead export it is as _jQueryInterface, and then consume as per the _jQueryInterface standard, then we can export our modules as per that flow also. and it seems that we would need little refactoring but not a lot and on this regard in each modules like in the swatches and gallery_images module below we have the provision for the _base_container which is assumed to be conterpart of the base selector in the _jQueryInterface style standards. -- a potential TODO
 window.document.splugins.events = window.document.splugins.events || {};
 
 window.document.splugins.events.subject = window.document.splugins.events.subject || {};
@@ -359,10 +364,10 @@ ACTIVE_TODO_OC_START
             --  attributes 
                 --  (input) types like dropdown, button, image swatches and so on 
                     --  ACTIVE_TODO so do we need to host any additional events beyond basics done, maybe not but still need to confirm, before launching the beta. so test all widget input types that we support on wbc free version -- to d and -- to h 
-                --  attribute options/terms 
-                    --  properties of options/terms like if out of stock 
-                        --  it maybe already coming in that variable-items-wrapper dump, if not then we need to dump it from there -- to b 
-            --  extract product_variations and assign in our main data var -- to d 
+                // --  attribute options/terms 
+                //     --  properties of options/terms like if out of stock 
+                //         --  it maybe already coming in that variable-items-wrapper dump, if not then we need to dump it from there -- to b 
+            // --  extract product_variations and assign in our main data var -- to d 
             --  gallery_images  
                 --  images 
                 --  videos 
@@ -371,6 +376,7 @@ ACTIVE_TODO_OC_START
                 --  NOTE: since the data in case gallery_images module will be comming from the variation events in the variation etc. event args so nothing needed to be assigned in our main data var. 
                         --  and like for swatches if required then need to dump the data in images container dom element, like for swatches it is on variable-items-wrapper element dom -- to h and -- to b 
                             --  check if that plugin we were exploring does have, but either way we will do only if it is necessary for us on the js layer -- to b 
+                                --  all this data would be available in the variation_gallery_images var of the variation -- to h 
         -   template 
             // --  will vary based on attribute types, extensions and some other feature related conditions also 
             //     --  but to simplify it we can simply depend on template_type or if required then in specific scenarios on the particular template_key 
@@ -379,6 +385,11 @@ ACTIVE_TODO_OC_START
                             --  on the backend legacy admin form we may already have type field which would be used as this -- to b 
                             --  and on js layers put appropriate conditions at needed layers -- to d 
                             --  and the name/key gallery_item_type may change, so lets just use the right one only -- to d and -- to b 
+                                --  lets simply name it type but within that e params that we thought of -- to h 
+                                    --  and if this type param is detected then even though still the image or video base type is resepcted on applicable layers to achieve optimum reusability like we envision for the swatches module with base_type field, but the responsibility of managing templates will be on their applicable layers of extensions and they would either repond with template or just replace there on their layers -- to h 
+                                        --  so for this need to work out that now that js tempalte hook let the extensions to create and dump their own tempalte and manage simply on their end, this hook simply need to give that ability when above additional type is detected -- to b or -- to s 
+                                        --  and also need to publish configs accordingly for applicable extensions, and on this note publish configs of all extensions -- to s or -- to a 
+                                            --  and the applicable extensions will hold their own template var under configs and the template id in it -- to s or -- to a 
             // --  we will also need to interact (mainly create) the slider and zoom tempaltes 
             //     --  the main requirement will be making/creating template dynamic using the image array and so on data 
             //         --  it will almost only on php side 
@@ -402,23 +413,24 @@ ACTIVE_TODO_OC_START
                 --  what if same data which is coming from model and passed to load view is given to react as json, maybe that is the option, and our layers on php data layer and tempalting layer does match with templating layer of the react so just replace the php templating layer with react. need to confim if this is the flow we should do and yeah it is not close enough to our plan of reusability and even using executable instructions that is mentioned there in that ssm class notes -- to h 
                     --  and even if above is confirmed still in that case also we would like to continue using (and we must do it for reusability and above all we can not manage two application layers) the same js modules of particular extensions (which is rendering react widget instead of regular widgets) as the application layer specifically one which is managing events and application stat and logical insteractions(so not the UI level events, stat or logical interactions that would still be handled by react only). but is possible, confirm with t -- to h. 
             --  what about zoom dom loop template, just create one and replace inside or create all and hide/show? the later is clean and would require less maintainance so should do that. -- to h. related tasks are in the events section below. 
-                    --  and in case some zoom must need only one tempalte then we can simply enable that setting using a hook for zoom core layers and php and publish that under the configsfor variations gallery_images and swatches as well. 
-                        --  on js layer such configs we can keep on common parent later of the variations js module itself. 
+                    --  and in case some zoom must need only one tempalte then we can simply enable that setting using a hook for zoom core layers and php and publish that under the configsfor variations gallery_images and swatches as well. ACTIVE_TODO/TODO
+                        --  on js layer such configs we can keep on common parent later of the variations js module itself. ACTIVE_TODO/TODO 
         -   pages 
-            -- category page 
-            -- item page 
-            --- like we implicitly assumed for the devices and so on layers, that there will be flgas like is_mobile, is_tablet that will be used throughout this variations js modules and the other layers interacting with it, similar way we can have the flgas for this pages layers also. like is_category_page and is_item_page. 
-                    -- create above two flags under ..splugins.common namespace, in js.vars.asset.php so no need to pass those as configs here when this module initiated -- to d done
+            // -- category page 
+            // -- item page 
+            // --- like we implicitly assumed for the devices and so on layers, that there will be flgas like is_mobile, is_tablet that will be used throughout this variations js modules and the other layers interacting with it, similar way we can have the flgas for this pages layers also. like is_category_page and is_item_page. 
+            //         -- create above two flags under ..splugins.common namespace, in js.vars.asset.php so no need to pass those as configs here when this module initiated -- to d done
                 --  but yeah since the pages is a significant and major layer so at some place we may like dedicated functions and there would be like some flows will require dedicated functions for the item page while some flows will require dedicated functions for the category page 
+                    --  also see function process_pages of the swatches module below. 
         -   slider and zoom 
             --  it will mostly be matter of interest to the variations.gallery_images module but since it is vital for overall stability of functions and the overall experience that is why it is considered as a dedicated thing 
             --  its events -- it may directly or indirectly connect itself to the below events layer mentioned 
                 --  it should always be indirectly, and a mature abstraction should be ensured always otherwise our task of providing the php and js api for external and zoom and slider would become challanging 
             --  events it listens to simply the events that it mandatorily expects and the events that is optional for it but accepts 
                 --  based on these we can easily define what our hooks (php layer) and js api that we are to provide for slider and zoom would look like or how it will be composed 
-            --  media 
-                --  images 
-                --  in addition to images other things that it may need to support are videos and custom html 
+            // --  media 
+            //     --  images 
+            //     --  in addition to images other things that it may need to support are videos and custom html 
 
             --  configurations 
                 --  regarding configurations we would like to find out the way to use the legacy zoom optons settings provided maybe, first confirm if its actually legacy -- to h 
@@ -474,6 +486,10 @@ ACTIVE_TODO_OC_START
                                 --  but yeah after the change event is recieved here that will be emitted to the gallery_images module to let them do their job. since darker lighter is not part of the variation there is no further thing to do from here after the change event is recieved. -- to h. so it will involve the observer pattern notifications. 
                                     --  and since it is different kind processing that is required after change event so the input_template_type must be defined uniquely like slider_no_variation -- to h. just do the needful. 
                                         NOTE: and yeah on that note everything of the sp_variations module must be dynamic and nothing should be hardcoded so slider_no_variation input template type must be passed right from where the template is defined on admin to till here 
+                                        --  first of all, the change event will be hosted, recieved and processed by darker lighter extension layer only -- to a 
+                                            --  and there will be nothing here for that from here in the swatches module but it will be from gallery_images module -- to h or -- to s. the gallery_images module will emit notification on its similar flow like here. 
+                                            --  and the extension would respond back with anything that it think can be handled on common layers here based on base type(here its very image or video type) -- to h or -- to a 
+                                            NOTE: and there is no input_template_type implementation, but the type will be considered as base type while the e param provide type will be specific extended type. 
                         // ACTIVE_TODO_OC_END                
 
                     //  data applicable loops 
@@ -504,14 +520,17 @@ ACTIVE_TODO_OC_START
                             // ACTIVE_TODO_OC_END                    
                     }); 
 
+                    NOTE: note that we may have planned some unnecessary events below that from swatches module notifies the gallery_images module, and vice-versa. but it is pretty standard that both should abstract our each other and work on abstraction level only where they do not directly interacts with each other but depend on the global variation change and so on(for gallery_images) events to do their job. and similarly slider and zoom module work on their own level of abstraction and just init or refresh their js/jQuery module if the related event is detected from the js api that is to be published for the external slider and zoom module. 
+
         -   effects and managing after effects 
                 --  may need to provide some effects but only where and if necessary, the majority of effects will be provided by the slider and zoom js/jQuery plugin 
                 --  will need to manage the after effects very precisely, to ensure smooth and non cluttering experience 
                     --  it may or likely include managing the loading, swaping and updating of images 
 
-                --  we may like to use the underscore js, I think we must use it from very beginning -- to h 
-                    --  first of all confirm that if wp/woo legacy stack is loading it and if they are then we should not load our own versions to ensure optimum performance -- to t and -- to h 
-                        --  either way if we required to load it then we must load as per the wp, woo and theme/plugins standards so that we can avoid unnecessary versions and mostly load the similar versions -- to a and -- to t. here the catch is that we need to find our the wp standards to let load the common version used by most to save on the performance and so on. 
+                // --  we may like to use the underscore js, I think we must use it from very beginning -- to h 
+                //     --  first of all confirm that if wp/woo legacy stack is loading it and if they are then we should not load our own versions to ensure optimum performance -- to t and -- to h 
+                //         --  either way if we required to load it then we must load as per the wp, woo and theme/plugins standards so that we can avoid unnecessary versions and mostly load the similar versions -- to a and -- to t. here the catch is that we need to find our the wp standards to let load the common version used by most to save on the performance and so on. 
+                    //  DONE
                     --  and note that while we are planning to use the underscore js for effects management and smoothing among its other users that we may do, we should note that mostly we need to manage smoothing of broad or specific layers or mianly of extensions events/effects but apart from that the slider and zoom plugins internal smoothing and effects should managed by that plugins and that include all those image effects, smoothing including maybe also the image preload management among other things and if the particular slider and zoom is not providing it or if their support is not mature then can simply change the slider and zoom js/jquery plugin -- to h. just for the notes. 
         -   devices 
                 --  is_mobile and is_tablet - this would be primary 
@@ -618,97 +637,109 @@ ACTIVE_TODO_OC_END
 // the variations swatches js module
 window.document.splugins.wbc.variations.swatches = window.document.splugins.wbc.variations.swatches || {};
 
-window.document.splugins.wbc.variations.swatches.core = function( base_container_selector, configs ) {
+window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
     var _this = this; 
 
     _this.configs = jQuery.extend({}, {}/*default configs*/, configs);
 
-    _this.base_container = jQuery( ...common._o( _this.configs, 'base_container_selector') /*ACTIVE_TODO_OC_START -- to d. base_container_selector ACTIVE_TODO_OC_END*/ ||  '.variations_form' );      
+    _this.configs.attribute_types_keys = Object.keys( _this.configs.attribute_types );
+
+    _this.base_container = jQuery( ( window.document.splugins.common._o( _this.configs, 'base_container_selector') ? _this.configs.base_container_selector : '.variations_form' ) );      
 
     var _this.data = {};
     var _this.binding_stats = {};     
-    _this.data.product_variations = _this.data('product_variations') || []; not confirm yet if actually this container holds this data or something else     
 
-
-    this.$wrapper = this._element.closest('.product');
-    this.$variations_form = this.$wrapper.find('.variations_form');
     // ACTIVE_TODO_OC_START
     // here mostly in the private scope, the variations module should subscribe to search filter events and pass those to variations core which would call the change event so that filters those affecting the variations data like images etc. are rendered accordingly. so that metal color based or shape based images render appropriately. 
     //     --  however, it is not limited to js layer only and actually js layer here would not be of use except the search is client side only based on the js. but the searches are always carried on the backend so the php layer need to ensure that return appropriate variations images etc. whenever the selected options of the search filters connects with variations instead of the main product. 
     //         --  m have did it already but need to implement throughly as per standard if not proper yet 
     
-    // if below difference and includes functions are provided by underscore js backed by wp/woo maybe then we can port through our common namespace, mainly because maybe on other platforms or so the underscore might not be available then it can be replaced somehow from there. so maybe still it will going to be _(underscore) function only and we will need to call it with long name pattern or we can port even the common namespace as sp_common so the call will be like sp_common._ -- to h 
+    // if below difference and includes functions are provided by underscore js backed by wp/woo maybe then we can port through our common namespace, mainly because maybe on other platforms or so the underscore might not be available then it can be replaced somehow from there. so maybe still it will going to be _(underscore) function only and we will need to call it with long name pattern or we can port even the common namespace as sp_common so the call will be like splugins._ -- to h. --   and when required we can do splugins.c for the common namespace maybe.  
+
+    // var in_stocks = _.difference(selects, disabled_selects);
+    // if (_.includes(in_stocks, attribute_value)) {
     // ACTIVE_TODO_OC_END
-    var in_stocks = _.difference(selects, disabled_selects);
-    if (_.includes(in_stocks, attribute_value)) {
 
     var init_private = function() {
 
         window.document.splugins.events.api.createSubject( 'swatches', ['process_attribute_types'] );
 
+        // init on all applicable events 
+        jQuery(document).on('wc_variation_form', _this.base_container+':not(.wbc-swatches-loaded)', function (event) {
+
+            //  had we used the _jQueryInterface style the _jQueryInterface call would have started from here 
+            preprocess( this, event );  
+        });
+
+        below do apply our flows like -- to s 
+            --  change with _this.base_container 
+            --  change $ with jQuery but only where it is used as $() var 
+            --  replace _ (underscore) js calls with sp_common._ 
+            --  replace loaded classs 
+            --  and other such matters if any 
+        // Try to cover all ajax data complete
+        jQuery(document).ajaxComplete(function (event, request, settings) {
+          _.delay(function () {
+            $('.variations_form:not(.wvs-loaded)').each(function () {
+              $(this).wc_variation_form();
+            });
+          }, 100);
+        });
+
+        // Composite product load
+        // JS API: https://docs.woocommerce.com/document/composite-products/composite-products-js-api-reference/
+        $(document.body).on('wc-composite-initializing', '.composite_data', function (event, composite) {
+          composite.actions.add_action('component_options_state_changed', function (self) {
+            $(self.$component_content).find('.variations_form').removeClass('wvs-loaded wvs-pro-loaded');
+          });
+
+          /* composite.actions.add_action('active_scenarios_updated', (self) => {
+             console.log('active_scenarios_updated')
+             $(self.$component_content).find('.variations_form').removeClass('wvs-loaded wvs-pro-loaded')
+           })*/
+        });
+
+        // ACTIVE_TODO_OC_START
+        // // Support for Yith Infinite Scroll
+        so a call from here to the compatability function of this module, and that will cover all compatability matters of load time inlcuding the promize resolve block of the plugin we were exploring. so call compatability with section=preprocess -- to d 
+        // ACTIVE_TODO_OC_END
+
+        // WooCommerce Filter Nav
+        $('body').on('aln_reloaded.wvs', function () {
+          _.delay(function () {
+            $('.variations_form:not(.wvs-loaded)').each(function () {
+              $(this).wc_variation_form();
+            });
+          }, 100);
+        });
     };
 
 
-    var preprocess = function() {
+    var preprocess = function( element, event ) {
+
+        _this.base_element = element;
+        _this.$base_element = jQuery( _this.base_element );
+
+
+        _this.data.product_variations = _this.$base_element.data('product_variations') || [];      
+
+
+        _this.data.is_ajax_variation = _this.data.product_variations.length < 1;
+        _this.data.product_id = _this.$base_element.data('product_id');
+              this.reset_variations = this.$element.find('.reset_variations');
+
+        this.$element.addClass('wbc-swatches-loaded');
+
 
         //
         //  data applicable loops 
         //
         // pre process data and process collections that would be necessary for neat and quick ops 
-        preprocess_data( _this.data.product_variations );   
+        _this.data = preprocess_data( _this.data );   
 
         // do necessary bindings for the attribute types to be supported 
-        process_attribute_types();  
-
-
-            // Init on Ajax Popup :)
-            $(document).on('wc_variation_form.wvs', '.variations_form:not(.wvs-loaded)', function (event) {
-              $(this).WooVariationSwatches();
-            });
-
-            // Try to cover all ajax data complete
-            $(document).ajaxComplete(function (event, request, settings) {
-              _.delay(function () {
-                $('.variations_form:not(.wvs-loaded)').each(function () {
-                  $(this).wc_variation_form();
-                });
-              }, 100);
-            });
-
-            // Composite product load
-            // JS API: https://docs.woocommerce.com/document/composite-products/composite-products-js-api-reference/
-            $(document.body).on('wc-composite-initializing', '.composite_data', function (event, composite) {
-              composite.actions.add_action('component_options_state_changed', function (self) {
-                $(self.$component_content).find('.variations_form').removeClass('wvs-loaded wvs-pro-loaded');
-              });
-
-              /* composite.actions.add_action('active_scenarios_updated', (self) => {
-                 console.log('active_scenarios_updated')
-                 $(self.$component_content).find('.variations_form').removeClass('wvs-loaded wvs-pro-loaded')
-               })*/
-            });
-
-            // ACTIVE_TODO_OC_START
-            // // Support for Yith Infinite Scroll
-            so a call from here to the compatability function of this module, and that will cover all compatability matters of load time inlcuding the promize resolve block of the plugin we were exploring. so call compatability with section=bootstrap -- to d 
-            // ACTIVE_TODO_OC_END
-
-            // WooCommerce Filter Nav
-            $('body').on('aln_reloaded.wvs', function () {
-              _.delay(function () {
-                $('.variations_form:not(.wvs-loaded)').each(function () {
-                  $(this).wc_variation_form();
-                });
-              }, 100);
-            });
-
-        this.product_variations = this.$element.data('product_variations') || [];
-        this.is_ajax_variation = this.product_variations.length < 1;
-        this.product_id = this.$element.data('product_id');
-              this.reset_variations = this.$element.find('.reset_variations');
-
-        this.$element.addClass('wvs-loaded');
+        process_attribute_types( _this.data.product_variations );  
 
         our flow of calling the functions heirarchy as part of the preprocess function, will cover below like flow of binding for the update and also initialization tasks -- to h 
             --  and in out init and preprocess layer we need to bind all above legacy events which are mostly for executing the wc_variation_form ultimately -- to h 
@@ -864,10 +895,23 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
 
     };
 
-    var preprocess_data = function() {
+    var preprocess_data = function(data) {
+
+        data.attribute_types = {};
+        data.product_variations.each(function (i, variation) {
+
+          Object.keys(variation.attributes).map(function (attribute_name) {
+
+            here confirm if attribute object below has the attribute type field, check our demo or of other plugin -- to s 
+                --  and fix the loop or so if not correct -- to s
+            data.attribute_types[attribute_name] = variation.attributes[attribute_name].attribute_type;
+          });
+
+          break;
+        }, {});
 
         ACTIVE_TODO not sure if this is necessary 
-        this._generated = this.product_variations.reduce(function (obj, variation) {
+        data._generated = data.product_variations.reduce(function (obj, variation) {
 
           Object.keys(variation.attributes).map(function (attribute_name) {
             if (!obj[attribute_name]) {
@@ -882,8 +926,7 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
           return obj;
         }, {});
 
-        ACTIVE_TODO but we will make use of it from beginning 
-        this._out_of_stock = this.product_variations.reduce(function (obj, variation) {
+        data._out_of_stock = data.product_variations.reduce(function (obj, variation) {
 
           Object.keys(variation.attributes).map(function (attribute_name) {
             if (!obj[attribute_name]) {
@@ -897,11 +940,21 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
 
           return obj;
         }, {});
+    
     };
 
-    var process_attribute_types = function() {
+    var process_attribute_types = function( product_variations ) {
 
-        _this.data.attribute_types.each( function( type ) {
+        localize the configs var(localize like we are doing during admin-js load and so on) with common js load -- to s 
+            --  it will host two vars for now below attribute_types, so call that function -- to s 
+                --  and the function you call need to support one flag like is_base_type_only so pass that simply in the configs array as direct array -- to s 
+            --  it also need to host that very configs files, config function configs so add that too in the final configs array -- to s 
+                --  so at first create the configs array at top and then we will keep adding the required var in it -- to s 
+            --  and yeah it also need to have the template id param unde templates.slider.id and same for zoom. so create said level of elements in the configs array and look at the slider zoom models render core functions -- to s 
+            --  and at last set the configs below where it is exported, you can ask a if required -- to s 
+                --  actually the template vars will be required for the gallery_images module, so create config for that also and then set for that also where it is exported -- to s 
+                    --  gallery_images module will also have almost all similar vars, except that it will have additional tempalte var -- to s 
+        _this.data.attribute_types.each( function( i, type ) {
 
             // ACTIVE_TODO_OC_START
             // --  so above preprocess_data call should simply prepare two attribute types list, first is attribute_types and second is ... or simply one only. and simply delegate everything else that is not coming under attribute_types, to the extensions layers. and should simply publish this list of attribute_types from backend. 
@@ -910,14 +963,17 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
             // is the woo input template type means dropdown is mandatorily kept by plugins, not seems likely but still confirm and then we need a way to determine(always) the exact input type based on the field/input type selected on woo panel or otherwise simply support the input_template_type field which will be set in background implicitly based on the field/input type selected on woo panel -- this field is simply better then managing many different template names of extensions and defining based on that -- and it will default to the above field/input type for wbc nothing to manage, only if condition below that if input_template_type is not defined then read simply above field/input type. and in case of extensions that need to be defined based on the template that is selected on their admin panel. so this template option should be only be defining it and passing it where applicable so that is gets here. and it is need to be defined based on that only to avoid confusion and many unnecessary and confusing configuration overheads. no simply need to stick to attribute type only means field/input-type selected on woo panel and that is standard and clean. so implement here based on that only. -- to h or -- to d 
             // ACTIVE_TODO_OC_END
 
-            if( type == '?' )
-            // ACTIVE_TODO_OC_START    
-            // do necessary logic if support is available
-            //     --  that means based on type call/process necessary functions/layers for example events functions(some events functions already defined below), template functions/layers, pages functions/layers, like events the effects functions/layers, plugins/themes applicable compatiblity function calls, slider and zoom functions/layers(note that even for swatches modules there might be some conditions or conditional logics that would be required) -- to d 
-            //     --  and also do call/process necessary functions/layers for the provided device type(and maybe some of their specifications would also need to be handled in future like width(which would otherwise mostly be dynamically handled), resolution and so on ACTIVE_TODO) and configs, but it will be a specific block here only and the dedicated function for them sound unnecessary -- to d
-            //         --  and we need some logic of if function or layer need to be called once only then take care of that, for all above functions, including the devices and configs that are to be handled from here -- to d 
-            //         --  and as usual there will going to be if conditions for applicable matters in applicable functions and their layers defined above, to handle the devices and configuration specific matters. and so the dedicated blocks of devices and configs will handle some specific matters which do not necessarily mixed with other things mentioned above like events, template, pages and so on layers. -- to h    
-            // ACTIVE_TODO_OC_END   
+            if (splugins._.includes(_this.configs.attribute_types_keys, type)) {
+
+                // ACTIVE_TODO_OC_START    
+                // do necessary logic if support is available
+                //     --  that means based on type call/process necessary functions/layers for example events functions(some events functions already defined below), template functions/layers, pages functions/layers, like events the effects functions/layers, plugins/themes applicable compatiblity function calls, slider and zoom functions/layers(note that even for swatches modules there might be some conditions or conditional logics that would be required) -- to d 
+                //     --  and also do call/process necessary functions/layers for the provided device type(and maybe some of their specifications would also need to be handled in future like width(which would otherwise mostly be dynamically handled), resolution and so on ACTIVE_TODO) and configs, but it will be a specific block here only and the dedicated function for them sound unnecessary -- to d
+                //         --  and we need some logic of if function or layer need to be called once only then take care of that, for all above functions, including the devices and configs that are to be handled from here -- to d 
+                //         --  and as usual there will going to be if conditions for applicable matters in applicable functions and their layers defined above, to handle the devices and configuration specific matters. and so the dedicated blocks of devices and configs will handle some specific matters which do not necessarily mixed with other things mentioned above like events, template, pages and so on layers. -- to h    
+                // ACTIVE_TODO_OC_END   
+
+                process_template(type); 
 
                 process_pages(type);
 
@@ -958,7 +1014,8 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
                 // ACTIVE_TODO_OC_END
 
                     if( type == 'radio' ) 
-                          
+
+            }                          
             else if( not for example slider input is not supported then host the listener event so that extension js do its job or simply skip it and let extension js do their part )
                 // ACTIVE_TODO_OC_START
                 // --  and we can and should simply use observer pattern events to host for example the slider listener here and then emit internal change event from here     
@@ -996,7 +1053,7 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
     }
 
 
-    var process_template = function() {
+    var process_template = function(type) {
 
         // ACTIVE_TODO_OC_START
         // --  or whether to show tooltip or not 
@@ -1006,8 +1063,13 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
 
     }
 
-    var process_pages = function() {
+    var process_pages = function(type) {
 
+        fundamentally we are going to put here page specific handling and management 
+            --  but how we can make the many layers common which can work semalessly in common(means many things of different layers, not necessarily entire layers)? -- to h 
+                --  data layers already be common and that should remain common for most part except some conditions -- to h 
+                --  while we shuold do little or no common for events and effects since they are strictly ui bound layers so that would result in weak balance between modules -- to h 
+                --  what else? 
         if(window.document.splugins.common.is_category_page){
 
         }else if(window.document.splugins.common.is_item_page){
@@ -1226,7 +1288,7 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
 
     var on_click_listener = function(type) {
 
-        if(window.document.splugins.common._b(_this.binding_stats, 'on_click', type)){
+        if(window.document.splugins.common._b(_this.binding_stats, 'on_click_listener', type)){
             return false;
         }
 
@@ -1370,7 +1432,7 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
 
     var on_keydown_listener = function(type) {
 
-        if(window.document.splugins.common._b(_this.binding_stats, 'on_click', type)){
+        if(window.document.splugins.common._b(_this.binding_stats, 'on_keydown_listener', type)){
             return false;
         }
 
@@ -1452,6 +1514,9 @@ window.document.splugins.wbc.variations.swatches.core = function( base_container
         init: function() {
 
             window.document.splugins.variation.events.api.notifyAllObservers( 'variation', 'before_search' ); 
+            
+            init_private();
+
         },
         before_search: function() {
 
@@ -1557,6 +1622,8 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
     var init_private = function() {
 
         window.document.splugins.events.api.createSubject( 'gallery_images', ['process_images'] );
+
+        preprocess();
 
         return _.debounce(function () {
           
@@ -1700,7 +1767,7 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
             $(document).on('wc_variation_form', '.variations_form', function () {
               $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery();
             }); // Support for Jetpack's Infinite Scroll,
-ACTIVE_TODO_OC_START
+    ACTIVE_TODO_OC_START
             so a call from here to the compatability function of this module, and that will cover all compatability matters of load time inlcuding the promize resolve block of the plugin we were exploring. so call compatability with section=bootstrap -- to d 
 
 
@@ -1925,9 +1992,9 @@ ACTIVE_TODO_OC_START
 
     var process_events = function() {
 
-         slider_thumb_click_listener();
+        slider_thumb_click_listener();
 
-         zoom_area_hover_listener();
+        zoom_area_hover_listener();
 
     }
 
@@ -1952,14 +2019,8 @@ ACTIVE_TODO_OC_START
 
     var slider_thumb_click_listener = function(type) {
 
-        var _this.binding_stats.slider_thumb_click_listener = this.binding_stats.slider_thumb_click_listener || {};
-
-        if(typeof(_this.binding_stats.slider_thumb_click_listener[type]) == undefined){
-
-            _this.binding_stats.slider_thumb_click_listener[type] = true;
-
-        }else{
-            return true;
+        if(window.document.splugins.common._b(_this.binding_stats, 'slider_thumb_click_listener', type)){
+            return false;
         }
 
         on_slider_thumb_click();
@@ -1968,14 +2029,8 @@ ACTIVE_TODO_OC_START
 
     var zoom_area_hover_listener = function() {
 
-        var _this.binding_stats.zoom_area_hover_listener = this.binding_stats.zoom_area_hover_listener || {};
-
-        if(typeof(_this.binding_stats.zoom_area_hover_listener[type]) == undefined){
-
-            _this.binding_stats.zoom_area_hover_listener[type] = true;
-
-        }else{
-            return true;
+        if(window.document.splugins.common._b(_this.binding_stats, 'zoom_area_hover_listener', type)){
+            return false;
         }
 
         on_zoom_area_hover();
@@ -2073,6 +2128,8 @@ ACTIVE_TODO_OC_START
         init: function() {
 
             window.document.splugins.variation.events.api.notifyAllObservers( 'variation', 'before_search' ); 
+
+            init_private();
         },
         before_search: function() {
 

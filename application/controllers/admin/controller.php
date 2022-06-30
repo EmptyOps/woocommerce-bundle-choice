@@ -57,7 +57,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 
 	}
 
-	public function pre_process_form_definition($form_definition) {
+	public function pre_process_form_definition($form_definition,$args = array()) {
 		
 		$separator = wbc()->config->separator();
 

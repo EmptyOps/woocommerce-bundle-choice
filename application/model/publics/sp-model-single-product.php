@@ -1540,7 +1540,6 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			        -- and also do the same for respective template layers of applicable extensions for above two points -- to d 
 			-- and check if there are other such functions we need to respect and if there are then cover all three points below for them -- to d 	
 
-
 		?>
 
 		<?php do_action( 'woo_variation_product_gallery_start', $product ); ?>

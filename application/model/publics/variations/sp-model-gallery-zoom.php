@@ -35,7 +35,7 @@ class SP_Model_Gallery_Zoom extends Eowbc_Base_Model_Publics {
 		add_filter('sp_variations_gallery_images_render', function($classes){
 			$classes[] = 'big-img';
 		});
-
+		
 		add_filter('sp_slzm_zoom_image_loop_js_tempalte',function($html){
 
 			$image['class'] = '{{class}}';
@@ -58,6 +58,17 @@ class SP_Model_Gallery_Zoom extends Eowbc_Base_Model_Publics {
 			$image['post_thumbnail_id'] = '{{post_thumbnail_id}}';
 
 			ACTIVE_TODO templete lode kervani form controllers
+
+			$data = array();
+			$data['image'] = $image;
+
+			$template_data = array(); 
+            $template_data['template_key'] = 'gallery_zoom_{{template_key_device}}_image_loop_content';
+            $template_data['template_sub_dir'] = 'single-product/gallery-slider';
+            $template_data['data'] = $data;
+            $template_data['singleton_function'] = 'wbc';
+
+            $html =  wbc()->load->template($template_data['template_sub_dir'].$template_data['template_key'],(isset($template_data['data'])?array('data' => $template_data['data'],'index'=>-1,'id'=>-1):array()),true,$template_data['singleton_function'],true)
 
 			return $html;
 		});
