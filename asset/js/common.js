@@ -570,10 +570,13 @@ window.document.splugins.templating.api = window.document.splugins.templating.co
 //             --  each extensions will have their own module, so create variations.assets.php file in each 7 extensions. in some b had already created -- to a. ask b if you have questions. 
 //                 --  also create load asset function in model -- to a. ask b if questions. 
 //                 --  and then always call load_asset from render_ui calling stack -- to a. 
+//                     -- wbc (load_asset) 
 //                 --  so confirm that render_ui is called from the controller init stack, the flow for it is set in either size or shape extensions so follow that -- to a 
 //                 --  and then load asset should load above variations.assets.php so put that loading statements -- to a. ask d or b 
 //                 --  and then inside variations.assets.php crete the js module, the module name should be based on the singleton function name -- to a 
 //                 --  and then inside module create the general fucntions like init, init_private, bootstrap, preprocess, preprocess_data and so on -- to s 
+//                     -- process_attribute_types (size,shape,color)
+//                     -- process_images (other 4 extention)                 
 //                 --  and then from here mostly instead of hosting things like managing events or binding clicks etc. it will just listen to events. so implement all subscribe statements -- to a 
 //                 --  and then it will additionally implement logic of when the notification recieved like doing business logic on notification or doing some processing and then calling back the callback, since now events api support one way calling back on notification -- to a  
 //                 --  and also export publish the module under ...api -- to a 
