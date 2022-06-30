@@ -31,12 +31,12 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 	    
 			// since legacy admins are saving on form submit so we may need to have save called from the init function or other relevant function of the controller, but in the same style as the save is called from ajax resolver means with form_definition and so on 
 				//	so in case of legacy admin call it from here, and yeah it should be before getUI call so that aftre render repopulates saved data on the same page load event 
-			if($args['is_legacy_admin'] == true) {
+			if(!empty($args['is_legacy_admin'])) {
 				$args['page_section'] = 'sp_variations';	
 				$args['form_definition'] = $this->get_legacy_form_definition($args['page_section'], $args);	
 
 				//temp
-				if($args['temporary_get_form_directly'] == true ) {
+				if(!empty($args['temporary_get_form_directly'])) {
 					return $args['form_definition'];	
 				}
 
