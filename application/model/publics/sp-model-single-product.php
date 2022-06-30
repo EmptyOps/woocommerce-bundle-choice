@@ -1440,6 +1440,77 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		$post_thumbnail_id = (int) apply_filters( 'woo_variation_gallery_post_thumbnail_id', $post_thumbnail_id, $attachment_ids, $product );
 		$attachment_ids    = (array) apply_filters( 'woo_variation_gallery_attachment_ids', $attachment_ids, $post_thumbnail_id, $product );
 
+
+		$data['gallery_images_template_data']['attachment_ids_loop_image'] = array();
+		$data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'] = array();
+		$data['gallery_images_template_data']['attachment_ids_loop_remove_featured_image'] = array();
+		$data['gallery_images_template_data']['attachment_ids_loop_classes'] = array();
+
+		if('variable' === $data['gallery_images_template_data']['product_type']){
+
+			if(!empty(isset( $data['gallery_images_template_data']['product_variation']['variation_gallery_images'] ))){
+			    
+			    foreach ($data['gallery_images_template_data']['product_variation']['variation_gallery_images'] as $index=>$image) {
+
+			       	
+
+			        $data['gallery_images_template_data']['attachment_ids_loop_image'][$index] = $image;
+			        $data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'][$index] = $product->get_image_id();
+
+			        $data['gallery_images_template_data']['attachment_ids_loop_remove_featured_image'][$index] = false;
+
+			        if ( $data['gallery_images_template_data']['attachment_ids_loop_remove_featured_image'][$index] && absint( $id ) == absint( $data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'][$index] ) ) {
+			            return '';
+			        }
+
+			        $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id] = array( '' );
+
+			        if ( isset( $data['gallery_images_template_data']['attachment_ids_loop_image'][$id]['video_link'] ) && ! empty( $data['gallery_images_template_data']['attachment_ids_loop_image'][$id]['video_link'] ) ) {
+			            array_push( $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id], '' );
+			        }
+
+			        //ACTIVE_TODO publish hook if required 
+			        // $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id] = apply_filters( '', $classes, $id, $image );
+			        
+			       //return '<div class="' . esc_attr( implode( ' ', array_map( 'sanitize_html_class', array_unique( $classes ) ) ) ) . '"><div>' . $inner_html . '</div></div>';
+	     
+			    }
+			}
+
+		}
+
+		else {
+			if(!empty($data['gallery_images_template_data']['attachment_ids'])){
+			    
+			    foreach ($data['gallery_images_template_data']['attachment_ids'] as $index=>$id) {
+
+			       	
+
+			        $data['gallery_images_template_data']['attachment_ids_loop_image'][$index] = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_product_attachment_props( $id );
+			        $data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'][$index] = $product->get_image_id();
+
+			        $data['gallery_images_template_data']['attachment_ids_loop_remove_featured_image'][$index] = false;
+
+			        if ( $data['gallery_images_template_data']['attachment_ids_loop_remove_featured_image'][$index] && absint( $id ) == absint( $data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'][$index] ) ) {
+			            return '';
+			        }
+
+			        $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id] = array( '' );
+
+			        if ( isset( $data['gallery_images_template_data']['attachment_ids_loop_image'][$id]['video_link'] ) && ! empty( $data['gallery_images_template_data']['attachment_ids_loop_image'][$id]['video_link'] ) ) {
+			            array_push( $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id], '' );
+			        }
+
+			        //ACTIVE_TODO publish hook if required 
+			        // $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id] = apply_filters( '', $classes, $id, $image );
+			        
+			       //return '<div class="' . esc_attr( implode( ' ', array_map( 'sanitize_html_class', array_unique( $classes ) ) ) ) . '"><div>' . $inner_html . '</div></div>';
+	     
+			    }
+			}
+		}
+
+
 		//bind to hook from here for the hook that is applied from both slider and zoom module for the images. means add filter here, and provide back with gallery_images data. so simply entire data var will be added to filter var but yeah the variation_gallery_images, attachment_ids etc. would be key -- to b done
 		add_filter('sp_slzm_slider_images',function($hook_data) use($data){
 
@@ -1468,37 +1539,6 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			    -- and also need to do the same for the swatches template layers also -- to d 
 			        -- and also do the same for respective template layers of applicable extensions for above two points -- to d 
 			-- and check if there are other such functions we need to respect and if there are then cover all three points below for them -- to d 	
-
-		$data['gallery_images_template_data']['attachment_ids_loop_image'] = array();
-		$data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'] = array();
-		$data['gallery_images_template_data']['attachment_ids_loop_remove_featured_image'] = array();
-		$data['gallery_images_template_data']['attachment_ids_loop_classes'] = array();
-
-		if(!empty($data['gallery_images_template_data']['attachment_ids'])){
-		    foreach ($data['gallery_images_template_data']['attachment_ids'] as $id) {
-
-		       
-		        $data['gallery_images_template_data']['attachment_ids_loop_image'][$id]             = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_product_attachment_props( $id );
-		        $data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'][$id] = $product->get_image_id();
-
-		        $data['gallery_images_template_data']['attachment_ids_loop_remove_featured_image'][$id] = false;
-
-		        if ( $remove_featured_image && absint( $id ) == absint( $post_thumbnail_id ) ) {
-		            return '';
-		        }
-
-		        $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id] = array( '' );
-
-		        if ( isset( $image['video_link'] ) && ! empty( $image['video_link'] ) ) {
-		            array_push( $classes, '' );
-		        }
-
-		        //ACTIVE_TODO publish hook if required 
-		        $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id] = apply_filters( '', $classes, $id, $image );
-		       //return '<div class="' . esc_attr( implode( ' ', array_map( 'sanitize_html_class', array_unique( $classes ) ) ) ) . '"><div>' . $inner_html . '</div></div>';
-     
-		    }
-		}
 
 
 		?>

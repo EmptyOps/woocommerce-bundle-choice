@@ -64,17 +64,18 @@ class Controller extends \eo\wbc\controllers\Controller {
 		$count = -1;
 
 		// ACTIVE_TODO need to add recursion only till level 3 or 4 for replacingn {{id}} -- to s		
-		foreach($form_definition[0] as $key=>$value) {
+		foreach($form_definition as $array) {
 
-			foreach($key as $fdfk=>$fdfv) {
+			foreach($array as $inner_array) {
 				
-				$count++;
-
-				$dynamic_key[$fdfk.$separator.$count] = $fdfk;
+				foreach($inner_array as $fdfk=>$fdfv) {
+					$count++;
 			
+					$form_definition[$fdfk.$separator.$count] = $fdfv;
+				}
 			}
 		}
-		return $form_definition;
+		return $form_definition; 
 	}
 
 	public function get_form_defination($args = array()){
