@@ -71,8 +71,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 					unset($form_definition[$tab_slug]['form'][$fdfk]);
 					$fdfk = (str_replace('{{id}}',$separator.$args['data']['id'].$separator,$fdfk));
 					$form_definition[$tab_slug]['form'][$fdfk] = $fdfv;
-				}			
-				
+				}
 			}
 		}
 		return $form_definition; 

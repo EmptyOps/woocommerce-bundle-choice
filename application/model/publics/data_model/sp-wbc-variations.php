@@ -160,7 +160,7 @@ class SP_WBC_Variations extends SP_Variations {
 	}
 
 	// for reference see wc_get_product_attachment_props function source code 
-	public function get_product_attachment_props( $attachment_id, $product_id = false ) {
+	public function get_product_attachment_props( $attachment_id, $product_id = false, $type = null ) {
 
 		// check hooks like woo_variation_gallery of and do the needful, we can drop those hooks if is not sound so necessary for now. and later as required we can add our overrides -- to b or -- to d done		
 
@@ -195,6 +195,14 @@ class SP_WBC_Variations extends SP_Variations {
 			'srcset'                  => '',
 			'sizes'                   => '',
 		);
+
+		if($type == 'video_url') {
+
+			$props['src']   = esc_url( $attachment_id );
+			return $props;
+
+		}
+
 		$attachment = get_post( $attachment_id );
 
 		if ( $attachment ) {
@@ -219,75 +227,111 @@ class SP_WBC_Variations extends SP_Variations {
 			$alt_text     = array_filter( $alt_text );
 			$props['alt'] = isset( $alt_text[0] ) ? $alt_text[0] : '';
 
-			// Large version.
-			$full_size           = apply_filters( 'woocommerce_gallery_full_size', apply_filters( 'woocommerce_product_thumbnails_large_size', 'full' ) );
-			$full_size_src       = wp_get_attachment_image_src( $attachment_id, $full_size );
-			$props['full_src']   = esc_url( $full_size_src[0] );
-			$props['full_src_w'] = esc_attr( $full_size_src[1] );
-			$props['full_src_h'] = esc_attr( $full_size_src[2] );
+			if(empty($type) || $type == 'image') {				
+			
+				// Large version.
+				$full_size           = apply_filters( 'woocommerce_gallery_full_size', apply_filters( 'woocommerce_product_thumbnails_large_size', 'full' ) );
+				$full_size_src       = wp_get_attachment_image_src( $attachment_id, $full_size );
+				$props['full_src']   = esc_url( $full_size_src[0] );
+				$props['full_src_w'] = esc_attr( $full_size_src[1] );
+				$props['full_src_h'] = esc_attr( $full_size_src[2] );
 
-			$full_size_class = $full_size;
-			if ( is_array( $full_size_class ) ) {
-				$full_size_class = implode( 'x', $full_size_class );
+				$full_size_class = $full_size;
+				if ( is_array( $full_size_class ) ) {
+					$full_size_class = implode( 'x', $full_size_class );
+				}
+				$props['full_class'] = "attachment-$full_size_class size-$full_size_class";
+				//$props[ 'full_srcset' ] = wp_get_attachment_image_srcset( $attachment_id, $full_size );
+				//$props[ 'full_sizes' ]  = wp_get_attachment_image_sizes( $attachment_id, $full_size );
+
+			} else {
+
+				$props['full_class'] = "attachment-video";
+				//$props[ 'full_srcset' ] = wp_get_attachment_image_srcset( $attachment_id, $full_size );
+				//$props[ 'full_sizes' ]  = wp_get_attachment_image_sizes( $attachment_id, $full_size );
+
+			}
+			
+			
+
+			if(empty($type) || $type == 'image') {
+
+				// Gallery thumbnail.
+				$gallery_thumbnail                = wc_get_image_size( 'gallery_thumbnail' );
+				$gallery_thumbnail_size           = apply_filters( 'woocommerce_gallery_thumbnail_size', array(
+					$gallery_thumbnail['width'],
+					$gallery_thumbnail['height']
+				) );
+				$gallery_thumbnail_src            = wp_get_attachment_image_src( $attachment_id, $gallery_thumbnail_size );
+				$props['gallery_thumbnail_src']   = esc_url( $gallery_thumbnail_src[0] );
+				$props['gallery_thumbnail_src_w'] = esc_attr( $gallery_thumbnail_src[1] );
+				$props['gallery_thumbnail_src_h'] = esc_attr( $gallery_thumbnail_src[2] );
+
+				$gallery_thumbnail_class = $gallery_thumbnail_size;
+				if ( is_array( $gallery_thumbnail_class ) ) {
+					$gallery_thumbnail_class = implode( 'x', $gallery_thumbnail_class );
+				}
+
+				$props['gallery_thumbnail_class'] = "attachment-$gallery_thumbnail_class size-$gallery_thumbnail_class";
+				//$props[ 'gallery_thumbnail_srcset' ] = wp_get_attachment_image_srcset( $attachment_id, $gallery_thumbnail );
+				//$props[ 'gallery_thumbnail_sizes' ]  = wp_get_attachment_image_sizes( $attachment_id, $gallery_thumbnail );
+
+			} else {
+	
+				$props['gallery_thumbnail_class'] = "attachment-thumbnail-video";
+				//$props[ 'gallery_thumbnail_srcset' ] = wp_get_attachment_image_srcset( $attachment_id, $gallery_thumbnail );
+				//$props[ 'gallery_thumbnail_sizes' ]  = wp_get_attachment_image_sizes( $attachment_id, $gallery_thumbnail );
+
 			}
 
-			$props['full_class'] = "attachment-$full_size_class size-$full_size_class";
-			//$props[ 'full_srcset' ] = wp_get_attachment_image_srcset( $attachment_id, $full_size );
-			//$props[ 'full_sizes' ]  = wp_get_attachment_image_sizes( $attachment_id, $full_size );
+			if(empty($type) || $type == 'image') {
 
+				// Archive/Shop Page version.
+				$thumbnail_size         = apply_filters( 'woocommerce_thumbnail_size', 'woocommerce_thumbnail' );
+				$thumbnail_size_src     = wp_get_attachment_image_src( $attachment_id, $thumbnail_size );
+				$props['archive_src']   = esc_url( $thumbnail_size_src[0] );
+				$props['archive_src_w'] = esc_attr( $thumbnail_size_src[1] );
+				$props['archive_src_h'] = esc_attr( $thumbnail_size_src[2] );
 
-			// Gallery thumbnail.
-			$gallery_thumbnail                = wc_get_image_size( 'gallery_thumbnail' );
-			$gallery_thumbnail_size           = apply_filters( 'woocommerce_gallery_thumbnail_size', array(
-				$gallery_thumbnail['width'],
-				$gallery_thumbnail['height']
-			) );
-			$gallery_thumbnail_src            = wp_get_attachment_image_src( $attachment_id, $gallery_thumbnail_size );
-			$props['gallery_thumbnail_src']   = esc_url( $gallery_thumbnail_src[0] );
-			$props['gallery_thumbnail_src_w'] = esc_attr( $gallery_thumbnail_src[1] );
-			$props['gallery_thumbnail_src_h'] = esc_attr( $gallery_thumbnail_src[2] );
+				$archive_thumbnail_class = $thumbnail_size;
+				if ( is_array( $archive_thumbnail_class ) ) {
+					$archive_thumbnail_class = implode( 'x', $archive_thumbnail_class );
+				}
 
-			$gallery_thumbnail_class = $gallery_thumbnail_size;
-			if ( is_array( $gallery_thumbnail_class ) ) {
-				$gallery_thumbnail_class = implode( 'x', $gallery_thumbnail_class );
+				$props['archive_class'] = "attachment-$archive_thumbnail_class size-$archive_thumbnail_class";
+				//$props[ 'archive_srcset' ] = wp_get_attachment_image_srcset( $attachment_id, $thumbnail_size );
+				//$props[ 'archive_sizes' ]  = wp_get_attachment_image_sizes( $attachment_id, $thumbnail_size );
+
+			} else {
+
+				$props['archive_class'] = "attachment-archive-video";
+				//$props[ 'archive_srcset' ] = wp_get_attachment_image_srcset( $attachment_id, $thumbnail_size );
+				//$props[ 'archive_sizes' ]  = wp_get_attachment_image_sizes( $attachment_id, $thumbnail_size );
+
 			}
 
-			$props['gallery_thumbnail_class'] = "attachment-$gallery_thumbnail_class size-$gallery_thumbnail_class";
-			//$props[ 'gallery_thumbnail_srcset' ] = wp_get_attachment_image_srcset( $attachment_id, $gallery_thumbnail );
-			//$props[ 'gallery_thumbnail_sizes' ]  = wp_get_attachment_image_sizes( $attachment_id, $gallery_thumbnail );
+			if(empty($type) || $type == 'image') {
+				// Image source.
+				$image_size     = apply_filters( 'woocommerce_gallery_image_size', 'woocommerce_single' );
+				$src            = wp_get_attachment_image_src( $attachment_id, $image_size );
+				$props['src']   = esc_url( $src[0] );
+				$props['src_w'] = esc_attr( $src[1] );
+				$props['src_h'] = esc_attr( $src[2] );
 
+				$image_size_class = $image_size;
+				if ( is_array( $image_size_class ) ) {
+					$image_size_class = implode( 'x', $image_size_class );
+				}
+				$props['class']  = "wp-post-image wvg-post-image attachment-$image_size_class size-$image_size_class ";
+				$props['srcset'] = wp_get_attachment_image_srcset( $attachment_id, $image_size );
+				$props['sizes']  = wp_get_attachment_image_sizes( $attachment_id, $image_size );
 
-			// Archive/Shop Page version.
-			$thumbnail_size         = apply_filters( 'woocommerce_thumbnail_size', 'woocommerce_thumbnail' );
-			$thumbnail_size_src     = wp_get_attachment_image_src( $attachment_id, $thumbnail_size );
-			$props['archive_src']   = esc_url( $thumbnail_size_src[0] );
-			$props['archive_src_w'] = esc_attr( $thumbnail_size_src[1] );
-			$props['archive_src_h'] = esc_attr( $thumbnail_size_src[2] );
+			}else{
 
-			$archive_thumbnail_class = $thumbnail_size;
-			if ( is_array( $archive_thumbnail_class ) ) {
-				$archive_thumbnail_class = implode( 'x', $archive_thumbnail_class );
+				$src            = wp_get_attachment_url( $attachment_id);
+				$props['src']   = esc_url( $src );
+
 			}
-
-			$props['archive_class'] = "attachment-$archive_thumbnail_class size-$archive_thumbnail_class";
-			//$props[ 'archive_srcset' ] = wp_get_attachment_image_srcset( $attachment_id, $thumbnail_size );
-			//$props[ 'archive_sizes' ]  = wp_get_attachment_image_sizes( $attachment_id, $thumbnail_size );
-
-
-			// Image source.
-			$image_size     = apply_filters( 'woocommerce_gallery_image_size', 'woocommerce_single' );
-			$src            = wp_get_attachment_image_src( $attachment_id, $image_size );
-			$props['src']   = esc_url( $src[0] );
-			$props['src_w'] = esc_attr( $src[1] );
-			$props['src_h'] = esc_attr( $src[2] );
-
-			$image_size_class = $image_size;
-			if ( is_array( $image_size_class ) ) {
-				$image_size_class = implode( 'x', $image_size_class );
-			}
-			$props['class']  = "wp-post-image wvg-post-image attachment-$image_size_class size-$image_size_class ";
-			$props['srcset'] = wp_get_attachment_image_srcset( $attachment_id, $image_size );
-			$props['sizes']  = wp_get_attachment_image_sizes( $attachment_id, $image_size );
 
 			$props['extra_params'] = wc_implode_html_attributes( array() );
 
@@ -424,13 +468,35 @@ class SP_WBC_Variations extends SP_Variations {
 		$product_id         = absint( $variation->get_parent_id() );
 		$variation_id       = absint( $variation->get_id() );
 		$variation_image_id = absint( $variation->get_image_id() );
+
+		need to pass variation_id as id in the below call -- to s 
 		$data 				= \eo\wbc\model\admin\Eowbc_Model::instance()->get($args['form_definition'],array('is_convert_das_to_array'=>true));
 		//  $product                      = wc_get_product( $product_id );
 		if ( !empty($data) ? ) {
 
 			loop and prepare images and video
 
-			$gallery_images = $data ?;
+			foreach($data as $key=>$value){
+
+				if ( strpos( $key, 'sp_variations_gallery_images' ) !== false ) {
+
+					array_push($gallery_images,array('type'=>'image','value'=>$value,'key'=>$key));
+
+				} elseif ( strpos( $key, 'sp_variations_video_url' ) !== false ) {
+
+					array_push($gallery_images,array('type'=>'video_url','value'=>$value,'key'=>$key));
+
+				} elseif ( strpos( $key, 'sp_variations_video' ) !== false ) {
+
+					array_push($gallery_images,array('type'=>'video','value'=>$value,'key'=>$key));
+
+				} else {
+
+					array_push($gallery_images,apply_filters('sp_variations_available_variation_type', array('type'=>'video','value'=>$value,'key'=>$key), $key ) );
+
+				}
+
+			}
 
 		} else {
 			// $gallery_images = $product->get_gallery_image_ids();
@@ -456,12 +522,41 @@ class SP_WBC_Variations extends SP_Variations {
 			}
 		}
 		$variation_get_max_purchase_quantity['variation_gallery_images'] = array();
-		foreach ( $gallery_images as $i => $variation_gallery_image_id ) {
-			$variation_get_max_purchase_quantity['variation_gallery_images'][ $i ] = $this->get_product_attachment_props( $variation_gallery_image_id );
+
+		if ( !empty($gallery_images) ? ) {
+
+			foreach ( $gallery_images as $i=>$value ) {
+
+				if ( is_array($value) ) {
+
+					$variation_get_max_purchase_quantity['variation_gallery_images'][ $i ] = $this->get_product_attachment_props( $value['value'],false,$value['type']);
+
+					$image = $this->get_product_attachment_props( $value['value'],false,$value['type']);
+
+					$image['extra_params'] =  apply_filters('sp_variations_available_variation_image_attachment_props', $image, $value, $key );
+
+				} else {
+
+					$variation_get_max_purchase_quantity['variation_gallery_images'][ $i ] = $this->get_product_attachment_props( $value);
+
+				}
+
+			}
+
+		} else {
+
+			foreach ( $gallery_images as $i => $variation_gallery_image_id ) {
+				$variation_get_max_purchase_quantity['variation_gallery_images'][ $i ] = $this->get_product_attachment_props( $variation_gallery_image_id );
+			}
+
 		}
+
+
 		// apply filter hook here to let extensions filter over swatches data, with key sp_variations_available_variation -- to d or -- to b done
 		
-		return apply_filters( 'sp_variations_available_variation', $variation_get_max_purchase_quantity, $variation, $product_id );
+		// return apply_filters( 'sp_variations_available_variation', $variation_get_max_purchase_quantity, $variation, $product_id );
+
+		return $variation_get_max_purchase_quantity;
 
 	}
 	

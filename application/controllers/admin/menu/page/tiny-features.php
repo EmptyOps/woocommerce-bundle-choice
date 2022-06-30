@@ -216,12 +216,12 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 								'value'=>'sp_variations',
 							),
 
-							'devider1'=>array(
+							'devider1{{id}}'=>array(
 								'label'=>'Gallery Images',
 								'type'=>'devider'
 							),
 
-							'gallary_images'=>array(
+							'sp_variations_gallery_images{{id}}'=>array(
 								'label'=>' ',
 								'type'=>'icon',
 								'sanitize'=>'sanitize_text_field',
@@ -234,12 +234,12 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 								'dynamic_add_support_end'=>true,
 							),
 
-							'devider2'=>array(
-								'label'=>'Video & Custum Field',
+							'devider2{{id}}'=>array(
+								'label'=>'Video & Custom Field',
 								'type'=>'devider'
 							),
 
-							'video_custum_field'=>array(
+							'sp_variations_video{{id}}'=>array(
 								'label'=>'',
 								'type'=>'file',
 								'sanitize'=>'sanitize_text_field',
@@ -250,12 +250,12 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 								'save_as'=>'post_meta',
 							),
 
-							'video_segment'=>array(
+							'video_segment{{id}}'=>array(
 								'label'=>'(Video)',
 								'type'=>'segment'
 							),
 
-							'sp_variations_video_url'=>array(
+							'sp_variations_video_url{{id}}'=>array(
 								'label'=>'',
 								'type'=>'text',
 								'sanitize'=>'sanitize_text_field',
@@ -265,17 +265,17 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 								'inline'=>true,
 								'save_as'=>'post_meta',
 							),
-							'video_url_segment'=>array(
+							'video_url_segment{{id}}'=>array(
 								'label'=>'(Video Url)',
 								'type'=>'segment'
 							),
 							
-							'devider3'=>array(
+							'devider3{{id}}'=>array(
 								'label'=>' ',
 								'type'=>'devider'
 							),
 
-							'gallary_images2'=>array(
+							'sp_variations_gallery_images2{{id}}'=>array(
 								'label'=>' ',
 								'type'=>'icon',
 								'sanitize'=>'sanitize_text_field',
@@ -288,7 +288,7 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 								/*'save_as'=>'post_meta',*/
 								'dynamic_add_support_end'=>true,
 							),
-							'images_segment'=>array(
+							'images_segment{{id}}'=>array(
 								'label'=>'(Images)',
 								'type'=>'segment'
 							)
