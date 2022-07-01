@@ -27,12 +27,15 @@ class SP_WBC_Compatibility extends SP_Compatibility {
 	}
 
 	public function nnnnnn(){
-		// /var/www/html/drashti_project/27-05-2022/woo-variation-gallery/wpml-config.xml
-		<wpml-config>
-	    <custom-fields>
-	        <custom-field action="copy">woo_variation_gallery_images</custom-field>
-	    </custom-fields>
-		</wpml-config>
+
+		// ACTIVE_TODO_OC_START
+		// // /var/www/html/drashti_project/27-05-2022/woo-variation-gallery/wpml-config.xml
+		// <wpml-config>
+	 //    <custom-fields>
+	 //        <custom-field action="copy">woo_variation_gallery_images</custom-field>
+	 //    </custom-fields>
+		// </wpml-config>
+		// ACTIVE_TODO_OC_END
 
 		if(!empty($_GET['EO_WBC'])) {
 			add_filter('WPML_filter_link',function($url, $lang_info){

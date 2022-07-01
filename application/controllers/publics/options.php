@@ -23,13 +23,14 @@ class Options extends \eo\wbc\controllers\publics\Controller {
     	return true;
     }
     public function init($args = array()){
-    	$args['data'] = \eo\wbc\model\publics\SP_Model_Single_Product()::instance()->get_data('swatches_init');
-        \eo\wbc\controller\publics\Options::instance()->selectron('swatches',$args);
+    	$args['data'] = \eo\wbc\model\publics\SP_Model_Single_Product::instance()->get_data('swatches_init');
+    	$args['page_section'] = 'swatches';
+        self::instance()->selectron($args['page_section'],$args);
 
-        $args['data'] = \eo\wbc\model\publics\SP_Model_Single_Product()::instance()->get_data('gallery_images_init');
+        $args['data'] = \eo\wbc\model\publics\SP_Model_Single_Product::instance()->get_data('gallery_images_init');
         \eo\wbc\model\publics\SP_Model_Single_Product::instance()->render_gallery_images_template($args);
 
-    	call the getUI from here once so that default render_ui is called once at last for handling general matters -- to b 
+    	//call the getUI from here once so that default render_ui is called once at last for handling general matters -- to b done
     		//--	and for getUI set two args first is $page_section and second is $args -- to b done
     			//-- empty page_section means call will go to default render_ui function -- to b done
     				//--	and so page_section param will also be passed to get_ui_definition but there it will be passed through in args param -- to b done
@@ -115,7 +116,7 @@ class Options extends \eo\wbc\controllers\publics\Controller {
     	$args['page_section'] = $page_section;
     	
     	if ($page_section == 'woo_dropdown_attribute_html' or $page_section == 'variable_item' or $page_section == 'variable_item_wrapper') {
-    		$this->get_ui_definition($args)
+    		return $this->get_ui_definition($args);
     	
 
         }elseif($page_section == 'get_default_gallery') {
@@ -132,7 +133,7 @@ class Options extends \eo\wbc\controllers\publics\Controller {
         }
     } 
 
-    private function get_ui_definition($args = array()){
+    protected function get_ui_definition($args = array()){
     	
     	if (!isset($args['data'])) {
 
@@ -144,7 +145,9 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 
     	$type = $args['data']['woo_dropdown_attribute_html_data']['type'];
     	
+    	/*ACTIVE_TODO_OC_START
     	and make all four templates below dynamic, based on the points added on data layer and also there might be some on the template files -- to b 
+    	ACTIVE_TODO_OC_END*/
 
     	if ($args['page_section'] == 'woo_dropdown_attribute_html') {
 
@@ -154,16 +157,17 @@ class Options extends \eo\wbc\controllers\publics\Controller {
     		$args['template_option_key'] = '';
 	        $args['option_group_key'] = '';
 	        $args['template_key'] = 'woo_dropdown_attribute';
-	     
+	     	$args['singleton_function'] = 'wbc';
 
 
     	}else if ($args['page_section'] == 'variable_item') {
-
+    		/*ACTIVE_TODO_OC_START
     		dropd template part from both actual key params below, it will be loaded from inside the below main template -- to b 
     			--	from inside the commong template below the particular template would be loaded -- to b 
     				--	and on this note for non dropdown types we can simply one file and load their specific option_template_part from there. but lets keep theme together only if they share common code -- to b 
     			--	and from that particular template the their option_template_part would be loaded 
     			--	so there would be some heirarchical if conditions that will be required, the conditions would be based on $type -- to b 
+    			ACTIVE_TODO_OC_END*/
     		$args['data']['template_data'] = array();
     		$args['data']['template_data']['template_key'] = 'sp_variations_optionsUI-common-option_template_part';
     		$args['data']['template_data']['template_sub_dir'] = 'single-product/variations-swatches';
@@ -175,6 +179,7 @@ class Options extends \eo\wbc\controllers\publics\Controller {
     		$args['template_option_key'] = '';
 	        $args['option_group_key'] = '';
 	        $args['template_key'] = 'sp_variations_optionsUI-common';
+	     	$args['singleton_function'] = 'wbc';
 	       
 
     	}else if ($args['page_section'] == 'variable_item_wrapper') {
@@ -186,6 +191,8 @@ class Options extends \eo\wbc\controllers\publics\Controller {
     		$args['template_option_key'] = '';
 	        $args['option_group_key'] = '';
 	        $args['template_key'] = 'sp_variations_optionsUI-common-ribbon_wrapper';
+   	     	$args['singleton_function'] = 'wbc';
+
 	        
 
     	}/*else {
@@ -195,10 +202,10 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 	        $args['template_key'] = '';
 	        $args['plugin_slug'] = '';
 	    }*/
-
+	    /*ACTIVE_TODO_OC_START
 	    --	in parent class function add if condition, that if template_option_key and template_key both is empty then simply return $template -- to b 
 	    	--	so at top define the null $template var -- to b 
-	    	
+	    ACTIVE_TODO_OC_END*/
         return parent::get_ui_definition($args);
 
        /* --- Publics.php no hook_render function no code che
@@ -246,14 +253,14 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 								$image_url = get_term_meta( $selected_item->term_id, 'wbc_attachment', true );
 								
 								if($type=='dropdown_image' and !empty($image_url)) {
-									--- move to woo-bundle-choice/templates/single-product/variations-swatches/dropdown_image/sp_variations_optionsUI-dropdown_image-option_template_part.php file
+									//--- move to woo-bundle-choice/templates/single-product/variations-swatches/dropdown_image/sp_variations_optionsUI-dropdown_image-option_template_part.php file
 									/*$selected_item =  sprintf( '<img class="ui mini avatar image" src="%s">%s', esc_url( $image_url ),esc_attr( $selected_item->name ));*/
 									
 								} elseif ($type=='dropdown_image_only' and !empty($image_url)) {
-									--- move to /woo-bundle-choice/templates/single-product/variations-swatches/dropdown_image_only/sp_variations_optionsUI-dropdown_image_only-option_template_part.php file 
+									//--- move to /woo-bundle-choice/templates/single-product/variations-swatches/dropdown_image_only/sp_variations_optionsUI-dropdown_image_only-option_template_part.php file 
 									/*$selected_item =  sprintf( '<img class="ui mini avatar image" src="%s">', esc_url( $image_url ));*/
 								} else {
-									move to /woo-bundle-choice/templates/single-product/variations-swatches/dropdown/sp_variations_optionsUI-dropdown-option_template_part.php file
+									//move to /woo-bundle-choice/templates/single-product/variations-swatches/dropdown/sp_variations_optionsUI-dropdown-option_template_part.php file
 									/*$selected_item =  sprintf( '%s',esc_attr( $selected_item->name ));*/
 								}
 							} else {
@@ -262,7 +269,7 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 						} else{
 							$selected_item ='Choose an option';
 						}
-						----- move to /woo-bundle-choice/templates/single-product/variations-swatches/sp_variations_optionsUI-common-option_template_part.php ma
+						//----- move to /woo-bundle-choice/templates/single-product/variations-swatches/sp_variations_optionsUI-common-option_template_part.php ma
 						/*$data.=sprintf( '<div class="ui fluid selection dropdown" style="min-height: auto;">
 								  <input type="hidden" name="attribute_%s" data-attribute_name="attribute_%s" data-id="%s">
 								  <i class="dropdown icon"></i>
@@ -276,7 +283,7 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 						if ( in_array( $term->slug, $options ) ) {
 							$selected_class = ( sanitize_title( $args[ 'selected' ] ) == $term->slug ) ? 'selected' : '';
 							
-							--- move to woo-bundle-choice/templates/single-product/variations-swatches/sp_variations_optionsUI-dropdown-image-image_only.php ma
+							//--- move to woo-bundle-choice/templates/single-product/variations-swatches/sp_variations_optionsUI-dropdown-image-image_only.php ma
 							/*if(!in_array($type,array('dropdown_image','dropdown_image_only','dropdown'))) {
 								$data .= sprintf( '<li class="ui image middle aligned variable-item %1$s-variable-item %1$s-variable-item-%2$s %3$s" title="%4$s" data-value="%2$s" role="button" tabindex="0" data-id="%5$s">', esc_attr( $type ), esc_attr( $term->slug ), esc_attr( $selected_class ), esc_html( $term->name ),$id);
 							}						
@@ -292,7 +299,7 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 						}
 					}
 
-					----- move to /woo-bundle-choice/templates/single-product/variations-swatches/sp_variations_optionsUI-common-option_template_part.php ma
+					//----- move to /woo-bundle-choice/templates/single-product/variations-swatches/sp_variations_optionsUI-common-option_template_part.php ma
 					/*if(in_array($type,array('dropdown_image','dropdown_image_only','dropdown'))) {
 						$data.=sprintf('</div></div>');
 					}*/
@@ -645,9 +652,10 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 				}
 			});
 		
-		
+		/*ACTIVE_TODO_OC_START
 			--	and from where the below flow will be layered? I guess it would be somewhere from the optionsUI widget model that is planned -- check and confirm 
 				--	either way make use of the below and/or the hook that other plugins we are exploring are if they are mature enough or mix of both 	
+			ACTIVE_TODO_OC_END*/
 			add_filter( 'woocommerce_dropdown_variation_attribute_options_html',function($html, $args){
 	                              
 	            if ( apply_filters( 'default_wbc_variation_attribute_options_html', false, $args, $html ) ) {
@@ -667,9 +675,10 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 	            $attribute = \eo\wbc\model\Category_Attribute::instance()->get_attribute(str_replace('pa_','',$args[ 'attribute' ]));
 
 	            $product_id = $args[ 'product' ]->get_id();
-	            
+	            /*ACTIVE_TODO_OC_START
 	        	--	and we can make use of the below flow in our fetch data function layers planned 
 	        		--	and keep in mind that we had to take care of two data layers(or response that we need to sent to two different place one is variations image gallery and the second is the variations form) one for variations image gallery and the second is for the variations form 
+	        	ACTIVE_TODO_OC_END*/
 	            $attributes = $args[ 'product' ]->get_variation_attributes();
 	            $variations = $args[ 'product' ]->get_available_variations();
 
@@ -705,17 +714,26 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 
 	public function render_swatches_data_by_attribute_type($data,$args = array()){
 
-		echo $this->render_woo_dropdown_attribute_html_data($data,$args);
+		// put ui-builder in autoloader function in config file and then remove load model ui builder statement from everywhere -- to b
+		$ui = $this->render_woo_dropdown_attribute_html_data($data,$args);
+        wbc()->load->model('ui-builder');
+        \eo\wbc\model\UI_Builder::instance()->build($ui,'woo_dropdown_attribute_html');
 
 		$html = apply_filters('sp_render_swatches_data_by_attribute_type',null,$data);
 
 		if (!empty($html)) {
-			echo $html;
+			$ui = $html;
+			wbc()->load->model('ui-builder');
+        	\eo\wbc\model\UI_Builder::instance()->build($ui,'swatches');
 		}else{
 
-			$html = $this->render_variable_item_data($data,$args);
+			$data['variable_item_ui'] = $this->render_variable_item_data($data,$args);
 
-			echo $this->render_variable_item_wrapper_data($data,$args,$html ? );
+			$ui = $this->render_variable_item_wrapper_data($data,$args );
+		var_dump($ui);
+		die();
+			wbc()->load->model('ui-builder');
+        	\eo\wbc\model\UI_Builder::instance()->build($ui,'woo_dropdown_attribute_html');
 		}
 
 	}
@@ -723,21 +741,21 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 	public function render_woo_dropdown_attribute_html_data($data,$args = array()){
 
 		$args['data'] = $data;
-		$this->getUI('woo_dropdown_attribute_html',$args);
+		return $this->getUI('woo_dropdown_attribute_html',$args);
 
 	}
 
 	public function render_variable_item_data($data,$args = array()){
 
 		$args['data'] = $data;
-		$this->getUI('variable_item',$args);
+		return $this->getUI('variable_item',$args);
 
 	}
 
 	public function render_variable_item_wrapper_data($data,$args = array()){
 
 		$args['data'] = $data;
-		$this->getUI('variable_item_wrapper',$args);
+		return $this->getUI('variable_item_wrapper',$args);
 
 	}
 

@@ -125,7 +125,7 @@ class Eowbc_Model {
 		    	if( $key != $saved_tab_key ) {
 		    		continue;
 		    	}
-		    
+		    	
 		    	$key_clean = ((!empty($this->tab_key_prefix) and strpos($key,$this->tab_key_prefix)===0)?substr($key,strlen($this->tab_key_prefix)):$key);
 		    	//$res['data_form'][]= $tab;
 				$is_table_save = false;	//	ACTIVE_TODO/TODO it should be passed from child maybe or make dynamic as applicable. ($key == $this->tab_key_prefix."d_fconfig" or $key == $this->tab_key_prefix."s_fconfig" or $key=='filter_set') ? true : false;
@@ -216,15 +216,15 @@ class Eowbc_Model {
 
 					// $filter_data = unserialize(wbc()->options->get_option_group('filters_'.$key,"a:0:{}"));
 
-			  //       if(is_array($filter_data) and !empty($filter_data)){
+					  //       if(is_array($filter_data) and !empty($filter_data)){
 
-			  //       	if(!empty(wbc()->sanitize->post($key_clean.'_id')) and !empty($filter_data[wbc()->sanitize->post($key_clean.'_id')])) {
-			  //       		$filter_data[wbc()->sanitize->post($key_clean.'_id')] = $table_data;
-			  //       		$res["type"] = "success";
-			  //   			$res["msg"] = eowbc_lang('Filter updated successfully');
-			  //   			wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data) );
-			  //               return $res;
-			  //       	} else {
+					  //       	if(!empty(wbc()->sanitize->post($key_clean.'_id')) and !empty($filter_data[wbc()->sanitize->post($key_clean.'_id')])) {
+					  //       		$filter_data[wbc()->sanitize->post($key_clean.'_id')] = $table_data;
+					  //       		$res["type"] = "success";
+					  //   			$res["msg"] = eowbc_lang('Filter updated successfully');
+					  //   			wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data) );
+					  //               return $res;
+					  //       	} else {
 					//         foreach ($filter_data as $fdkey=>$item) {
 					          
 					//             if ( apply_filters('eowbc_ajax_filters_check_duplicate', ($item[$key_clean.'_filter']==$table_data[$key_clean."_filter"] and !empty($item['filter_template']) and !empty($table_data['filter_template']) and $item['filter_template']==$table_data['filter_template'] ),$item,$table_data,$key_clean ) ) { 
@@ -251,11 +251,11 @@ class Eowbc_Model {
 					//     }
 				 //    }
 
-			  //       $filter_data[wbc()->common->createUniqueId()] = $table_data;
+					  //       $filter_data[wbc()->common->createUniqueId()] = $table_data;
 
-			  //       wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data));
-			        
-			  //       $res["msg"] = eowbc_lang('New Filter Added Successfully'); 
+					  //       wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data));
+					        
+					  //       $res["msg"] = eowbc_lang('New Filter Added Successfully'); 
 				}
 
 		    }

@@ -40,11 +40,14 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 				}
 
 				//\eo\wbc\model\admin\Tiny_features::instance()->save( $args['form_definition'], false, $args );
-				$this->selectron('sp_variations_save',$args);
+				//$this->selectron('sp_variations_save',$args);
 			}
 
 	        //\eo\wbc\controllers\admin\menu\page\Tiny_features::instance()->getUI($args);
 	        $this->selectron($args['page_section'],$args);
+
+
+	        \eo\wbc\controllers\admin\menu\page\Tiny_features::instance()->getUI(null);
 	    }
 
 	    public function selectron_hook_render($page_section,$container_class,$args = array()){
@@ -53,20 +56,32 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 	    			$args['data'] = $args['hook_callback_args'];
                 	unset($args['hook_callback_args']);
 	    			\eo\wbc\controllers\admin\menu\page\Tiny_features::instance()->getUI($args);
-	    		}
 
-	    	} else if ($page_section == 'sp_variations_save') {
-	    		if ($container_class == 'sp_variations_save_html') {
+	    		} else if ($container_class == 'sp_variations_save_html') {
 	    			$args['data'] = $args['hook_callback_args'];
                 	unset($args['hook_callback_args']);
+
+                	$args['page_section'] = 'sp_variations';
+
 	    			\eo\wbc\model\admin\Tiny_features::instance()->save( $this->get_legacy_form_definition('sp_variations', $args), false, $args );
 	    		}
-
 	    	} 
 	    }
 
 	    private function selectron($page_section,$args = array()){
 			if ($page_section == 'sp_variations') {
+
+				add_action( 'woocommerce_save_product_variation', function( $variation_id, $loop ) use($page_section,$args){
+
+					$args['hook_callback_args'] = array();
+					$args['hook_callback_args']['id'] = absint( $variation_id );
+
+					// maybe this hook is need to be moved controller right before the form_definition is passed to parent class function. and the form_definition will be filter parameter. -- and yeah there would be one hook only that maybe needed. not separate needed for render and save 
+					// apply_filters('sp_variations_data_before_save', '');
+
+					return $this->selectron_hook_render($page_section,'sp_variations_save_html',$args);
+				}, 10, 2 );
+
 				add_action('woocommerce_product_after_variable_attributes', function( $loop, $variation_data, $variation ) use($page_section,$args) {
 
 					$args['hook_callback_args'] = array();
@@ -166,35 +181,25 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 					return $this->selectron_hook_render($page_section,'sp_variations_html',$args);
 
 				}, 10, 3 );
-			} else if ($page_section == 'sp_variations_save') {
-				add_action( 'woocommerce_save_product_variation', function( $variation_id, $loop ) {
 
-					$args['hook_callback_args'] = array();
-					$args['hook_callback_args']['id'] = absint( $variation_id );
-
-					// maybe this hook is need to be moved controller right before the form_definition is passed to parent class function. and the form_definition will be filter parameter. -- and yeah there would be one hook only that maybe needed. not separate needed for render and save 
-					// apply_filters('sp_variations_data_before_save', '');
-
-					return $this->selectron_hook_render($page_section,'sp_variations_save_html',$args);
-				}, 10, 2 );
 			} 
 	    }
 
-		private function getUI($args = null){
+		private function getUI($args = array()){
 		
-			if($args['is_legacy_admin'] == true) {
-				\eo\wbc\model\admin\Tiny_features::instance()->render_ui( $args['form_definition'], $args );
+			if(!empty($args['is_legacy_admin'])) {
+				\eo\wbc\model\admin\Tiny_features::instance()->render_ui( $this->get_legacy_form_definition($args['page_section'], $args), $args );
 			} else {
 				\eo\wbc\model\admin\Tiny_features::instance()->render_ui( $this->get_form_definition( $args), $args );
 			}
 	        
 	    }
 
-	    public function get_form_definition($args = null){
+	    public function get_form_definition($args = array()){
 
 	    }	    
 
-	    private function get_legacy_form_definition( $page_section, $args=null ) {
+	    private function get_legacy_form_definition( $page_section, $args=array() ) {
 
 	    	$form_definition = null;	
 	    	if( $page_section == 'sp_variations' ) {
@@ -203,7 +208,7 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 					'sp_variations'=>array(
 						'label'=>"Gallery Images and Video(optionsUI)",
 						'form'=>array(
-							'sp_frmb_saved_tab_key{{id}}'=>array(
+							'sp_frmb_saved_tab_key'=>array(
 								'type'=>'hidden',
 								'value'=>'sp_variations',
 							),
@@ -301,7 +306,7 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 			// maybe this hook is need to be moved controller right before the form_definition is passed to parent class function. and the form_definition will be filter parameter. -- and yeah there would be one hook only that maybe needed. not separate needed for render and save 
 			apply_filters('sp_variations_data_before_admin_form_render', $form_definition);
 
-			\eo\wbc\controllers\admin\Controller::instance()->pre_process_form_definition($form_definition,$args)
+			$form_definition = \eo\wbc\controllers\admin\Controller::instance()->pre_process_form_definition($form_definition,$args);
 
 			// return $form_definition;
 			return parent::get_form_defination__( array('form_definition'=>$form_definition) );

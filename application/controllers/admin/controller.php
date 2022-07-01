@@ -61,17 +61,16 @@ class Controller extends \eo\wbc\controllers\Controller {
 		
 		$separator = wbc()->config->separator();
 
-		$count = -1;
-
 		// ACTIVE_TODO need to add recursion only till level 3 or 4 for replacingn {{id}} -- to s		
-		foreach($form_definition as $array) {
+		foreach($form_definition as $tab_slug => $tab_data) {
 
-			foreach($array as $inner_array) {
-				
-				foreach($inner_array as $fdfk=>$fdfv) {
-					$count++;
-			
-					$form_definition[$fdfk.$separator.$count] = $fdfv;
+			foreach($tab_data['form'] as $fdfk=>$fdfv) {
+					
+				if (strpos($fdfk,'{{id}}') !== false) {
+					
+					unset($form_definition[$tab_slug]['form'][$fdfk]);
+					$fdfk = (str_replace('{{id}}',$separator.$args['data']['id'].$separator,$fdfk));
+					$form_definition[$tab_slug]['form'][$fdfk] = $fdfv;
 				}
 			}
 		}

@@ -28,36 +28,39 @@ class Tiny_Features extends Eowbc_Model {
 
 	public function render_ui($form_definition, $args = null) {
 
-		$form = array();
+		if (!empty($args['page_section'])) {
+			$form = array();
 
-		$form['id']='dapii_apis';
-		$form['title']='<h2>APIs & Configuration</h2>';
-		$form['method']='POST';
-		$form['tabs'] = true;
-		$form['is_legacy_admin'] = isset($args['is_legacy_admin']) ? $args['is_legacy_admin'] : false;
-		$form['no_form_tag'] = !empty($args['is_legacy_admin']) ? true : false;
-		$form['attr']= array('data-is_per_tab_save="true"');
+			$form['id']='dapii_apis';
+			$form['title']='<h2>APIs & Configuration</h2>';
+			$form['method']='POST';
+			$form['tabs'] = true;
+			$form['is_legacy_admin'] = isset($args['is_legacy_admin']) ? $args['is_legacy_admin'] : false;
+			$form['no_form_tag'] = !empty($args['is_legacy_admin']) ? true : false;
+			$form['attr']= array('data-is_per_tab_save="true"');
 
 
-		if( !empty($args['is_legacy_admin']) ) {
+			if( !empty($args['is_legacy_admin']) ) {
 
-			//	in case of legacy admin bind to hooks if applicable otherwise can simply call render ui sub process function 
-			if( $args['page_section'] == 'sp_variations' ) {
-				
+				//	in case of legacy admin bind to hooks if applicable otherwise can simply call render ui sub process function 
+				if( $args['page_section'] == 'sp_variations' ) {
+					
+					$form['data'] = self::instance()->get( $form_definition, $args );
+
+					$this->render_ui_sub_process($form, $args);
+
+				}
+
+			} else {
+
 				$form['data'] = self::instance()->get( $form_definition, $args );
 
 				$this->render_ui_sub_process($form, $args);
+			}		
+		} else{
 
-			}
-
-		} else {
-
-			$form['data'] = self::instance()->get( $form_definition, $args );
-
-			$this->render_ui_sub_process($form, $args);
-		}		
-
-		parent::load_asset($args);	
+			parent::load_asset($args);	
+		}
 	}
 
 	public function render_ui_sub_process($form, $args = null) {
@@ -71,7 +74,8 @@ class Tiny_Features extends Eowbc_Model {
 	public function get( $form_definition, $args = null ) {
 		
 		if( !empty($args['is_legacy_admin']) ) {
-
+			
+			$args['id'] = $args['data']['id'];
 			$form_definition = parent::get( $form_definition, $args );	
 		} else {
 
@@ -87,8 +91,9 @@ class Tiny_Features extends Eowbc_Model {
 		if( !empty($args['is_legacy_admin']) ) {
 
 			//	in case of legacy admin bind to hooks if applicable otherwise can simply call render ui sub process function 
-			if( $args['page_section'] == 'sp_variations_save' ) {
+			if( $args['page_section'] == 'sp_variations' ) {
 
+				$args['id'] = $args['data']['id'];
 				$res = parent::save( $form_definition, $is_auto_insert_for_template, $args );
 			}
 

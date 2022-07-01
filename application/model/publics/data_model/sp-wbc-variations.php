@@ -31,13 +31,15 @@ class SP_WBC_Variations extends SP_Variations {
 		$sp_variations_data = array();
 			//	NOTE: this is default object format of $sp_variations_data and when there is no data available it will return empty array instead of the null or false etc. 
 
-		also to implement the hook woocommerce_available_variation so this function will return only required data like js vars related or maybe not that one either because that can be set from the hook woocommerce_available_variation and since it is about loading the script of vars so maybe even this function will only do necessary things here like fetching and returning variations and the hook woocommerce_available_variation should be implemented in the ssm single product model that is just planned 
-			--	ACTIVE_TODO also need to implement hook wc_ajax_get_default_gallery and also the hook wc_ajax_get_variation_gallery -- to h 
-				--	ACTIVE_TODO first do research on this hooks like when they are called and in which versions they were provided by woo -- to d or -- to b 
-					--	and maybe it is important to note that with these ajax hooks maybe woocommerce is handling all management including the changing of images in the dom, but that is not possible by woo since that do not have the bare tempalate of html or does it have? maybe it have, lets check their hooks 
-						--	and so if that is possible then we do not need to manage that in our javascript layer -- ACTIVE_TODO and if that possible then we can even try sending variations images even when our slider/zoom is disabled in a hope that other slider zoom plugins read our images data and implement it(I think they will normally get the data since it is clear woo standard hooks, but now I doubt if all variations hooks are for supporting such functions because they by default are not providing the multiple variations option but maybe they are publishing hoooks for their extensions and so for others it also work?). if these hooks are for that function then it is highly likely that works -- ACTIVE_TODO and in that case we will just test the 5 sliders and 5 zoom plugin to confirm that they work well with our standard hooks implementation. 
-							--	one thing that just came to the mind is that we may need to trigger the legacy variations change event when our sp_variations attribute widgets option elements like(icon panel, slider or dropdown etc. does change) 
-								--	so far have not noticed that but m must have managed it somewhere because without that the prices would not be changing 
+		// ACTIVE_TODO_OC_START
+		// also to implement the hook woocommerce_available_variation so this function will return only required data like js vars related or maybe not that one either because that can be set from the hook woocommerce_available_variation and since it is about loading the script of vars so maybe even this function will only do necessary things here like fetching and returning variations and the hook woocommerce_available_variation should be implemented in the ssm single product model that is just planned 
+		// 	--	ACTIVE_TODO also need to implement hook wc_ajax_get_default_gallery and also the hook wc_ajax_get_variation_gallery -- to h 
+		// 		--	ACTIVE_TODO first do research on this hooks like when they are called and in which versions they were provided by woo -- to d or -- to b 
+		// 			--	and maybe it is important to note that with these ajax hooks maybe woocommerce is handling all management including the changing of images in the dom, but that is not possible by woo since that do not have the bare tempalate of html or does it have? maybe it have, lets check their hooks 
+		// 				--	and so if that is possible then we do not need to manage that in our javascript layer -- ACTIVE_TODO and if that possible then we can even try sending variations images even when our slider/zoom is disabled in a hope that other slider zoom plugins read our images data and implement it(I think they will normally get the data since it is clear woo standard hooks, but now I doubt if all variations hooks are for supporting such functions because they by default are not providing the multiple variations option but maybe they are publishing hoooks for their extensions and so for others it also work?). if these hooks are for that function then it is highly likely that works -- ACTIVE_TODO and in that case we will just test the 5 sliders and 5 zoom plugin to confirm that they work well with our standard hooks implementation. 
+		// 					--	one thing that just came to the mind is that we may need to trigger the legacy variations change event when our sp_variations attribute widgets option elements like(icon panel, slider or dropdown etc. does change) 
+		// 						--	so far have not noticed that but m must have managed it somewhere because without that the prices would not be changing 
+		// ACTIVE_TODO_OC_END
 
 
 
@@ -45,25 +47,26 @@ class SP_WBC_Variations extends SP_Variations {
 
 			//	below hooked function will add our data layers of sp_variations gallery_images and maybe also others of the sp_variations to the woo data 					
 			add_filter( 'woocommerce_available_variation', function($variation_get_max_purchase_quantity,  $instance,  $variation) use($args){
-				return $this->get_available_variation_hook_callback($variation_get_max_purchase_quantity,  $instance,  $variation, $args);
+				return self::instance()->get_available_variation_hook_callback($variation_get_max_purchase_quantity,  $instance,  $variation, $args);
 			}, 90, 3);
 			
 		}elseif( $for_section == "swatches_init" ) {
 			add_filter( 'woocommerce_ajax_variation_threshold',  function($int){
 
-				first of all need to research about ajax variation settings, and everything about woocommerce ajax variations, so just need search all its settings -- to h and -- to d 
-					--	and then find appropriate settings value and set that hardcoded from here -- to d 
-						--	ACTIVE_TODO/TODO very soon we may like to provide the above setting on admin or something such -- to h and -- to s 
-				return absint( woo_variation_swatches()->get_option( 'threshold' ) );
+				// ACTIVE_TODO_OC_START
+				// first of all need to research about ajax variation settings, and everything about woocommerce ajax variations, so just need search all its settings -- to h and -- to d 
+				// 	--	and then find appropriate settings value and set that hardcoded from here -- to d 
+				// 		--	ACTIVE_TODO/TODO very soon we may like to provide the above setting on admin or something such -- to h and -- to s 
+				// return absint( get_option( 'threshold' ) );\
+				// ACTIVE_TODO_OC_END
 
-				// ACTIVE_TODO implement, check that other plugin we were exploring -- to d
-				// ACTIVE_TODO	--	and implement if logically useful -- to d  
+				return $int;
 
 			}, 8, 2);
 
 			add_filter('default_sp_variations_swatches_variation_attribute_options_html', function($hook_args){
 
-				if(in_array($hook_args['type'],\eo\wbc\model\publics\SP_WBC_Variations::sp_variations_swatches_supported_attribute_types())){
+				if(in_array($hook_args['type'],self::sp_variations_swatches_supported_attribute_types())){
 					return true;
 				}else{
 					return false;
@@ -75,79 +78,67 @@ class SP_WBC_Variations extends SP_Variations {
 
 		}elseif( $for_section == "swatches" || $for_section == "gallery_images") {
 
-			$sp_variations_data['attributes'] = $args['args'][ 'product' ]->get_variation_attributes();
-			$sp_variations_data['variations'] = $args['args'][ 'product' ]->get_available_variations();
+			$sp_variations_data['attributes'] = $product->get_variation_attributes();
+			$sp_variations_data['variations'] = $product->get_available_variations();
 
 		}	
 
-					if ( $default_image_type_attribute === '__max' ) {
-
-						$attribute_counts = array();
-						foreach ( $attributes as $attr_key => $attr_values ) {
-							$attribute_counts[ $attr_key ] = count( $attr_values );
-						}
-
-						$max_attribute_count = max( $attribute_counts );
-						$attribute_key       = array_search( $max_attribute_count, $attribute_counts );
-
-					} elseif ( $default_image_type_attribute === '__min' ) {
-						$attribute_counts = array();
-						foreach ( $attributes as $attr_key => $attr_values ) {
-							$attribute_counts[ $attr_key ] = count( $attr_values );
-						}
-						$min_attribute_count = min( $attribute_counts );
-						$attribute_key       = array_search( $min_attribute_count, $attribute_counts );
-
-					} elseif ( $default_image_type_attribute === '__first' ) {
-						$attribute_keys = array_keys( $attributes );
-						$attribute_key  = current( $attribute_keys );
-					} else {
-						$attribute_key = $default_image_type_attribute;
-					}
-
-					$selected_attribute_name = wc_variation_attribute_name( $attribute_key );
+					// ACTIVE_TODO_OC_START
 
 
-					$default_attribute_keys = array_keys( $attributes );
-					$default_attribute_key  = current( $default_attribute_keys );
-					$default_attribute_name = wc_variation_attribute_name( $default_attribute_key );
+					// if ( $default_image_type_attribute === '__max' ) {
 
-					$current_attribute      = $args['attribute'];
-					$current_attribute_name = wc_variation_attribute_name( $current_attribute );
+					// 	$attribute_counts = array();
+					// 	foreach ( $attributes as $attr_key => $attr_values ) {
+					// 		$attribute_counts[ $attr_key ] = count( $attr_values );
+					// 	}
 
+					// 	$max_attribute_count = max( $attribute_counts );
+					// 	$attribute_key       = array_search( $max_attribute_count, $attribute_counts );
 
-					if ( $is_default_to_image ) {
+					// } elseif ( $default_image_type_attribute === '__min' ) {
+					// 	$attribute_counts = array();
+					// 	foreach ( $attributes as $attr_key => $attr_values ) {
+					// 		$attribute_counts[ $attr_key ] = count( $attr_values );
+					// 	}
+					// 	$min_attribute_count = min( $attribute_counts );
+					// 	$attribute_key       = array_search( $min_attribute_count, $attribute_counts );
 
-						$assigned = array();
+					// } elseif ( $default_image_type_attribute === '__first' ) {
+					// 	$attribute_keys = array_keys( $attributes );
+					// 	$attribute_key  = current( $attribute_keys );
+					// } else {
+					// 	$attribute_key = $default_image_type_attribute;
+					// }
 
-						foreach ( $variations as $variation_key => $variation ) {
-
-							$attribute_name = isset( $variation['attributes'][ $selected_attribute_name ] ) ? $selected_attribute_name : $default_attribute_name;
-
-							$attribute_value = esc_html( $variation['attributes'][ $attribute_name ] );
-
-							$assigned[ $attribute_name ][ $attribute_value ] = array(
-								'image_id'     => $variation['image_id'],
-								'variation_id' => $variation['variation_id'],
-								'type'         => ( empty( $variation['image_id'] ) ? 'button' : 'image' ),
-							);
-
-
-
-
-		$terms = wc_get_product_terms( $product->get_id(), $attribute, array( 'fields' => 'all' ) );
+					// $selected_attribute_name = wc_variation_attribute_name( $attribute_key );
 
 
+					// $default_attribute_keys = array_keys( $attributes );
+					// $default_attribute_key  = current( $default_attribute_keys );
+					// $default_attribute_name = wc_variation_attribute_name( $default_attribute_key );
+
+					// $current_attribute      = $args['attribute'];
+					// $current_attribute_name = wc_variation_attribute_name( $current_attribute );
 
 
-		from here to prepare attribute display name, unique name, shoow options none and other such matters, call the SP_Attribute class or object methods 
+					// if ( $is_default_to_image ) {
 
+					// 	$assigned = array();
 
+					// 	foreach ( $variations as $variation_key => $variation ) {
 
+					// 		$attribute_name = isset( $variation['attributes'][ $selected_attribute_name ] ) ? $selected_attribute_name : $default_attribute_name;
 
-		apply filter hook here to let extensions filter over swatches data, but it may not be necessary if the core get_available_variation function do all the job 
+					// 		$attribute_value = esc_html( $variation['attributes'][ $attribute_name ] );
 
+					// 		$assigned[ $attribute_name ][ $attribute_value ] = array(
+					// 			'image_id'     => $variation['image_id'],
+					// 			'variation_id' => $variation['variation_id'],
+					// 			'type'         => ( empty( $variation['image_id'] ) ? 'button' : 'image' ),
+					// 		);
 
+					// ACTIVE_TODO_OC_END
 
 		return $sp_variations_data;
 	}
@@ -341,7 +332,7 @@ class SP_WBC_Variations extends SP_Variations {
 
 	}
 
-	public function sp_variations_swatches_supported_attribute_types($configs = array()){
+	public static function sp_variations_swatches_supported_attribute_types($configs = array()){
 
 		$type = array();
 		$type['button']='Button';
@@ -461,22 +452,18 @@ class SP_WBC_Variations extends SP_Variations {
 	private function get_available_variation_core( $variation_get_max_purchase_quantity,  $instance,  $variation, $args = array()){
 		
 
-		first of all rename the vars inside this function as per the above args, look at the plugin we were exploring for clear understanding. we will be using the standard woo args name. -- to d or -- to b 
-
-		below hooked function will add our data layers of sp_variations gallery_images and maybe also others of the sp_variations to the woo data. 
-			read and set first the images from our post meta key -- to b or -- to d 
 		$product_id         = absint( $variation->get_parent_id() );
 		$variation_id       = absint( $variation->get_id() );
 		$variation_image_id = absint( $variation->get_image_id() );
 
-		need to pass variation_id as id in the below call -- to s 
-		$data 				= \eo\wbc\model\admin\Eowbc_Model::instance()->get($args['form_definition'],array('is_convert_das_to_array'=>true));
+		// ACTIVE_TODO there is big architectural error here but it as might be because of our incomplete implementation of data class(which would be commonly used by the admin and frontend modules) which planned in get data function of single product model -- the error here is it is directly calling the function of parent class instead of calling its own model of the tiny features. 
+		$data 				= \eo\wbc\model\admin\Eowbc_Model::instance()->get($args['form_definition'],array('is_convert_das_to_array'=>true, 'id'=>$variation_id, 'is_legacy_admin'=>true ));
 		//  $product                      = wc_get_product( $product_id );
-		if ( !empty($data) ? ) {
+		if ( !empty($data['sp_variations']["form"]) ) {
 
-			loop and prepare images and video
+			foreach($data['sp_variations']["form"] as $key=>$fv){
 
-			foreach($data as $key=>$value){
+				$value = $fv['value'];
 
 				if ( strpos( $key, 'sp_variations_gallery_images' ) !== false ) {
 
@@ -503,7 +490,7 @@ class SP_WBC_Variations extends SP_Variations {
 			$gallery_images = $instance->get_gallery_image_ids();
 		}
 
-		this function will return also the default(or say the data that are supported and provided by legacy api) data as applicable like below image or all other such applicable default data 
+		// NOTE: this function will return also the default(or say the data that are supported and provided by legacy api) data as applicable like below image or all other such applicable default data 
 		if ( $variation_image_id ) {
 			// Add Variation Default Image
 			array_unshift( $gallery_images, $variation_image_id );
@@ -523,7 +510,7 @@ class SP_WBC_Variations extends SP_Variations {
 		}
 		$variation_get_max_purchase_quantity['variation_gallery_images'] = array();
 
-		if ( !empty($gallery_images) ? ) {
+		if ( !empty($data['sp_variations']["form"]) ) {
 
 			foreach ( $gallery_images as $i=>$value ) {
 
@@ -533,14 +520,11 @@ class SP_WBC_Variations extends SP_Variations {
 
 					$image = $this->get_product_attachment_props( $value['value'],false,$value['type']);
 
-					$image['extra_params'] =  apply_filters('sp_variations_available_variation_image_attachment_props', $image, $value, $key );
-
+					$image =  apply_filters('sp_variations_available_variation_image_attachment_props', $image, $value, $key );
 				} else {
 
 					$variation_get_max_purchase_quantity['variation_gallery_images'][ $i ] = $this->get_product_attachment_props( $value);
-
 				}
-
 			}
 
 		} else {
@@ -548,9 +532,7 @@ class SP_WBC_Variations extends SP_Variations {
 			foreach ( $gallery_images as $i => $variation_gallery_image_id ) {
 				$variation_get_max_purchase_quantity['variation_gallery_images'][ $i ] = $this->get_product_attachment_props( $variation_gallery_image_id );
 			}
-
 		}
-
 
 		// apply filter hook here to let extensions filter over swatches data, with key sp_variations_available_variation -- to d or -- to b done
 		

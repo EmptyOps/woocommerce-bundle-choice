@@ -1,5 +1,5 @@
 <?php
-namespace eo\wbc\controller\publics\variations;
+namespace eo\wbc\controllers\publics\variations;
 defined( 'ABSPATH' ) || exit;
 
 class SP_Gallery_Zoom extends \eo\wbc\controllers\publics\Controller{
@@ -28,11 +28,13 @@ class SP_Gallery_Zoom extends \eo\wbc\controllers\publics\Controller{
 
         \eo\wbc\model\publics\variations\SP_Model_Gallery_Zoom::instance()->init_core();
         
-        --- get ui call
+        // ACTIVE_TODO_OC_START
+        // --- get ui call
+        // ACTIVE_TODO_OC_END
         
         \eo\wbc\model\publics\variations\SP_Model_Gallery_Zoom::instance()->render_core();
 
-        \eo\wbc\controller\publics\variations\SP_Gallery_Zoom::instance()->selectron('zoom_images',$args);
+        \eo\wbc\controllers\publics\variations\SP_Gallery_Zoom::instance()->selectron('zoom_images',$args);
 
         $this->getUI(null,$args);
     }
@@ -96,7 +98,7 @@ class SP_Gallery_Zoom extends \eo\wbc\controllers\publics\Controller{
         
     }
 
-    private function get_ui_definition($args = array()){
+    protected function get_ui_definition($args = array()){
 
         if (!isset($args['data'])) {
 
