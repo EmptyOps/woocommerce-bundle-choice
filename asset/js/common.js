@@ -689,7 +689,7 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
         // Composite product load
         // JS API: https://docs.woocommerce.com/document/composite-products/composite-products-js-api-reference/
-        $(document.body).on('wc-composite-initializing', '.composite_data', function (event, composite) {
+        $(document.body).on('wc-composite-initializing', _this.base_container+'.composite_data', function (event, composite) {
           composite.actions.add_action('component_options_state_changed', function (self) {
             $(self.$component_content).find('.variations_form').removeClass('wvs-loaded wvs-pro-loaded');
           });
@@ -704,6 +704,11 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
         // // Support for Yith Infinite Scroll
         so a call from here to the compatability function of this module, and that will cover all compatability matters of load time inlcuding the promize resolve block of the plugin we were exploring. so call compatability with section=preprocess -- to d 
         // ACTIVE_TODO_OC_END
+
+        compatability();
+        preprocess();
+
+        compatability(section=preprocess);
 
         // WooCommerce Filter Nav
         $('body').on('aln_reloaded.wvs', function () {
@@ -1577,6 +1582,7 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
     // this.subjects = [];
 
     var _this.data = {};
+    var _this.template_data = {};
     var _this.binding_stats = {};
 
     ///////////// -- 15-06-2022 -- @drashti -- ///////////////////////////////
@@ -1769,6 +1775,10 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
             }); // Support for Jetpack's Infinite Scroll,
     ACTIVE_TODO_OC_START
             so a call from here to the compatability function of this module, and that will cover all compatability matters of load time inlcuding the promize resolve block of the plugin we were exploring. so call compatability with section=bootstrap -- to d 
+
+
+            compatability();
+            bootstrap();
 
 
         -   slider and zoom 
