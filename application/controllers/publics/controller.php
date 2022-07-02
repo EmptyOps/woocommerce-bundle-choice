@@ -71,25 +71,9 @@ class Controller extends \eo\wbc\controllers\Controller{
 
         $template_path = $template_dir.$template_key;
 
-        //devices templtes  
-        $template_path_new = null;
-        if (wbc_is_mobile()) {
-
-            $template_path_new = str_replace('{{template_key_device}}','mobile',$template_path);
-
-        }else{
-
-            $template_path_new = str_replace('{{template_key_device}}','desktop',$template_path);
-        }
-
-        if (file_exists($template_path_new.'.php')) {
-            
-            $template_path = $template_path_new;
-        }
-
         if(!empty($template_path)) {
          
-            return wbc()->load->template($template_path,(isset($args['data'])?$args['data']:array()),true,$args['singleton_function'],true);
+            return wbc()->load->template($template_path,(isset($args['data'])?$args['data']:array()),true,$args['singleton_function'],true,true);
         } else {
             return null;
         }

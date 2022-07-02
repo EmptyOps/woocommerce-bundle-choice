@@ -406,9 +406,10 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 		/*ACTIVE_TODO_OC_START
 		we may not need to load any js from here, but still confirm and then comment -- to d
-		ACTIVE_TODO_OC_END*/
+		
 			// ACTIVE_TODO but yeah very soon for both gallery_images and swatches module we would like publich the init flags from here and if that is true then only init the respective modules on the js layer -- to d 
 		add_action( 'wp_footer', array( $this, 'slider_template_js' ) );
+		ACTIVE_TODO_OC_END*/
 
 		//create product-images.php file like in the other plugin that we were exploring have -- to b done
 			//--	and add below two hooks in this same render_image_gallery function -- to b done
@@ -1195,6 +1196,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 	public function render_gallery_images_template($args = array()){
 
 		add_filter( 'wc_get_template', function($template, $template_name){
+			
 			$old_template = $template;
 
 			// Disable gallery on specific product
@@ -1203,17 +1205,18 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			}
 
 			if ( $template_name == 'single-product/product-image.php' ) {
-				$template = constant('EOWBC_DIRECTORY').'templates/product-images.php';
+				$template = constant('EOWBC_DIRECTORY').'templates/single-product/product-images.php';
 			}
 
 			if ( $template_name == 'single-product/product-thumbnails.php' ) {
-				$template = constant('EOWBC_DIRECTORY').'templates/product-thumbnails.php';
+				$template = constant('EOWBC_DIRECTORY').'templates/single-product/product-thumbnails.php';
 			}
 
 			return $template;
 		}, 30, 2 );
 
 		add_filter( 'wc_get_template_part', function($template, $slug){
+			
 			$old_template = $template;
 
 			// Disable gallery on specific product
@@ -1222,12 +1225,12 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			}
 
 			if ( $slug == 'single-product/product-image' ) {
-				$template = constant('EOWBC_DIRECTORY').'templates/product-images.php';
+				$template = constant('EOWBC_DIRECTORY').'templates/single-product/product-images.php';
 
 			}
 
 			if ( $slug == 'single-product/product-thumbnails' ) {
-				$template = constant('EOWBC_DIRECTORY').'templates/product-thumbnails.php';
+				$template = constant('EOWBC_DIRECTORY').'templates/single-product/product-thumbnails.php';
 
 			}
 
@@ -1236,14 +1239,14 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 	}
 
-	public function render_gallery_images_template_callback($data,$args = array()){
+	public function render_gallery_images_template_callback($args = array()){
 
 		global $product;
 
 		/*ACTIVE_TODO_OC_START
 		----product no peramiter pass kervano baki che
 		ACTIVE_TODO_OC_END*/
-		$data = \eo\wbc\model\publics\SP_Model_Single_Product()::instance()->get_data('gallery_images');
+		$data = \eo\wbc\model\publics\SP_Model_Single_Product::instance()->get_data('gallery_images');
 
 		$data['gallery_images_template_data'] = array();
 
@@ -1268,16 +1271,16 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 		$data['gallery_images_template_data']['default_attributes'] = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_default_attributes($data['gallery_images_template_data']['product_id']);
 
-		$data['gallery_images_template_data']['default_variation_id'] = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_default_variation_id($product, $data['attributes']);
+		$data['gallery_images_template_data']['default_variation_id'] = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_default_variation_id($product, $data['gallery_images_template_data']['default_attributes'] );
 
 		$data['gallery_images_template_data']['product_type'] = $product->get_type();
 
 		// ACTIVE_TODO we may like to use the columns var later to till gallery_images slider and zoom module layers including till applicable js layers -- to h or -- to d 
 		$data['gallery_images_template_data']['columns'] = -1;	//	thumbnail columns 
 
-		$data['gallery_images_template_data']['post_thumbnail_id'] = \eo\wbc\system\core\data_model\SP_Product::instance()->get_image_id($product);
+		$data['gallery_images_template_data']['post_thumbnail_id'] = \eo\wbc\system\core\data_model\SP_Product::get_image_id($product);
 
-		$data['gallery_images_template_data']['attachment_ids'] = \eo\wbc\system\core\data_model\SP_Product::instance()->get_gallery_image_ids($product);
+		$data['gallery_images_template_data']['attachment_ids'] = \eo\wbc\system\core\data_model\SP_Product::get_gallery_image_ids($product);
 
 		$data['gallery_images_template_data']['has_post_thumbnail'] = has_post_thumbnail();
 
@@ -1308,7 +1311,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		$data['gallery_images_template_data']['only_has_post_thumbnail'] = ( $data['gallery_images_template_data']['has_post_thumbnail'] && ( count( $data['gallery_images_template_data']['attachment_ids'] ) === 0 ) );
 
 		// $wrapper                          = sanitize_text_field( get_option( 'woo_variation_gallery_and_variation_wrapper', apply_filters( 'woo_variation_gallery_and_variation_default_wrapper', '.product' ) ) )
-
+		/*ACTIVE_TODO_OC_START
 		$slider_js_options = array(
 			'slidesToShow'   => 1,
 			'slidesToScroll' => 1,
@@ -1381,7 +1384,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 		$post_thumbnail_id = (int) apply_filters( 'woo_variation_gallery_post_thumbnail_id', $post_thumbnail_id, $attachment_ids, $product );
 		$attachment_ids    = (array) apply_filters( 'woo_variation_gallery_attachment_ids', $attachment_ids, $post_thumbnail_id, $product );
-
+		ACTIVE_TODO_OC_END*/
 
 		$data['gallery_images_template_data']['attachment_ids_loop_image'] = array();
 		$data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'] = array();

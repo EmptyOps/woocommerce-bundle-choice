@@ -152,6 +152,13 @@ class Options extends \eo\wbc\controllers\publics\Controller {
     	if ($args['page_section'] == 'woo_dropdown_attribute_html') {
 
     		//drop type var from below and set name of the one only template, simply set it hardcoded -- to b done
+    		$args['data']['template_data'] = array();
+    		$args['data']['template_data']['template_key'] = 'woo_dropdown_attribute-template_part';
+    		$args['data']['template_data']['template_sub_dir'] = 'single-product/variations-swatches/woo_dropdown_attribute';
+    		$args['data']['template_data']['data'] = $args['data'];
+    		$args['data']['template_data']['singleton_function'] = 'wbc';
+
+
     		$args['widget_key'] = '';
     		$args['template_sub_dir'] = 'single-product/variations-swatches/woo_dropdown_attribute';
     		$args['template_option_key'] = '';
@@ -716,26 +723,22 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 
 		// put ui-builder in autoloader function in config file and then remove load model ui builder statement from everywhere -- to b
 		$ui = $this->render_woo_dropdown_attribute_html_data($data,$args);
-        wbc()->load->model('ui-builder');
-        \eo\wbc\model\UI_Builder::instance()->build($ui,'woo_dropdown_attribute_html');
-
+		//echo ">!>!>!";
+        \sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui,'woo_dropdown_attribute_html');
+        //echo "<<<<<>!>!>!";
 		$html = apply_filters('sp_render_swatches_data_by_attribute_type',null,$data);
 
 		if (!empty($html)) {
 			$ui = $html;
-			wbc()->load->model('ui-builder');
-        	\eo\wbc\model\UI_Builder::instance()->build($ui,'swatches');
 		}else{
 
 			$data['variable_item_ui'] = $this->render_variable_item_data($data,$args);
 
-			$ui = $this->render_variable_item_wrapper_data($data,$args );
-		var_dump($ui);
-		die();
-			wbc()->load->model('ui-builder');
-        	\eo\wbc\model\UI_Builder::instance()->build($ui,'woo_dropdown_attribute_html');
+			$ui = $this->render_variable_item_wrapper_data($data,$args );        	
 		}
+		//wbc_pr($ui); die();
 
+		\sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui,'swatches');
 	}
 
 	public function render_woo_dropdown_attribute_html_data($data,$args = array()){
