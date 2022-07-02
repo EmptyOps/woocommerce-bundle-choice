@@ -2369,6 +2369,7 @@ window.document.splugins.wbc.variations.gallery_images.api = window.document.spl
 // ACTIVE_TODO_OC_START
 // put ACTIVE_TODO_OC_START and ACTIVE_TODO_OC_END around each open comments section, and then comment them -- to d 
 //     --  and need to do the same for filter js and ssm variations class file -- to d 
+<<<<<<< HEAD
 // ACTIVE_TODO_OC_END  
 
 // the variations sp_slzm js module
@@ -2399,3 +2400,6 @@ window.document.splugins.wbc.variations.gallery_images.sp_slzm.core = function( 
 
 //  publish it 
 window.document.splugins.wbc.variations.gallery_images.sp_slzm.api = window.document.splugins.wbc.variations.gallery_images.sp_slzm.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
+=======
+// ACTIVE_TODO_OC_END 
+>>>>>>> 390dc146f1df6b150a561dbd1c4b512384386950
