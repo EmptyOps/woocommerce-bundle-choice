@@ -343,19 +343,31 @@ class SP_WBC_Variations extends SP_Variations {
 		$type['dropdown_image_only']='Dropdown with Icons Only';
 		$type['dropdown']='Dropdown';
 
-		return apply_filters('sp_variations_swatches_attribute_types', $type);	 
+		if(empty($type['is_base_type_only'])){
+
+			return apply_filters('sp_variations_swatches_attribute_types', $type);	 
+		
+		} else {
+
+			return $type;
+		}
 
 	}
 
-	public static function sp_variations_gallery_images_supported_attribute_types($configs = array()){
+	public static function sp_variations_gallery_images_supported_types($configs = array()){
 
 		$type = array();
-		$type['image']='Images';
+		$type['image']='Image';
 		$type['video']='Video';
 
-		return $type;
+		if(empty($type['is_base_type_only'])){
 
+			return apply_filters('sp_variations_gallery_images_types', $type);	 
+		
+		} else {
 
+			return $type;
+		}
 
 	}
 
