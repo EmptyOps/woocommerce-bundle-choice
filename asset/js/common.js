@@ -748,6 +748,7 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
         this.init();
         this.update();
 
+                ACTIVE_TODO/TODO we may also like raise some broad general level event triggers(for us its observer pattern notifications), it seems important for establish mature and generc structure of events and overall flow on js layers. 
               // Trigger
               $(document).trigger('woo_variation_swatches', [this.$element]);
 
@@ -763,6 +764,14 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
         this would be determined based on admin options settings, and we may already have that admin options settings and if not then we need to add that -- to h and -- to s 
             --  and the options object should be loaded from the variations.assets.php file, and that is already recieving many admin options related to apprearance from the model. all this options or required options should be passed to this js module under configs parameter but admin settings options should reside under key options within the configs object. -- to h and -- to s 
             --  and view with shape was already supporting this selected item label, so need to manage this asap. and atleast we can first execute this point so that shape extension does function as expected -- to h 
+                --  we still first need to see all flows of the plugins we were exploring so look for keywords like selected, and I will see the snaps -- to s 
+                    --  then will need to finalize our flow and heirachical structure -- to h. lets confim below flow with the flow of plugins we were exploring have  
+                        --  I think the layers that would be involved in the heirachical structure would be 
+                            --  configs from admin 
+                                --  and applicable section conditions here 
+                            --  templates from php layers 
+                                --  and applicable template function calls from here 
+                                    --  and updating templates with applicable data on variation change and so on events, but mainly it will be variation change event 
         // Append Selected Item Template
         if (woo_variation_swatches_options.show_variation_label) {
           this.$element.find('.variations .label').each(function (index, el) {
@@ -770,11 +779,48 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
           });
         }
 
+                heirachical classes 
+                    --  add three level classes in our swatches templates -- to s 
+                            --  inlcuding in extensions -- to s 
+                            --  and while you do remove the unnecessary classes of plugins we were exploring and other such (maybe we can drop the unused classes of m also but I think lets just be there till they are not marked as deprecated) -- to s 
+                        --  first would be wbc-swatches-variation-items-wrapper and second would be wbc-swatches-variable-item (still confirm the actual class name used by woo)
+                        --  and third is not any level but create the class for woo select dropdown that stays there in hidden, it would be something like wbc-swatches-raw-select -- to s 
+                            --  but first confirm if that dropdown is actually given the name of the raw and if saw is it on select of their parent raw? -- to s 
+                    --  ACTIVE_TODO and similarly and already implemented most classes for gallery_images, for gallery_images we need to make sure that the heirarchy of classes normally been applied by woo and the plugins we were exploring are followed in our templates layers and all the applicable classes are in place -- to s and -- to a 
+                        --  ACTIVE_TODO and then t and a you need to appropriately plan the css for all those classes taking into consideration all different popular themes. but yeah css structuring should be generic so that it adapats as planned to all different themes. -- to t and -- to a. this task need to be executed very soon or now while we are approaching to finalize the 10 theme demos. 
+
+                heirachical and/or applicable css -- to t 
+                    --  just research all the different classes, elements, events and flows and then plan the generic yet elegant css which I discussed with you about -- to t 
+                        --  and look at the li.each loop below they had create and applied a common and generic selected class, which would be relied upon by all their templates of different types -- to t 
+                            --  so we need to create similar for our types -- to t 
+                            --  and also for types of the extensions -- to t 
+
+                our own heirachical structure -- to s and -- to a 
+                    --  the variable-items-wrapper loop below will work as type loop for us now, so implement similar there and comment from here -- to s 
+                        --  and from within that loop all those functions will be called, and with function call pass the attribute type and if that is not available even in the variable-items-wrapper element then we will simply dump it there from our common woo attribute dropdown element -- to s 
+                        --  and together with the type, always pass the this object from any each loop to ensure optimum stability -- to s 
+                        --  there will be process function for options under the process_template function heirarchy -- to s 
+                            --  so call the process_attribute_template function from the process_template function -- to s 
+                                --  and within that function the main options loop and if there is any other loop then that will implemented -- to s 
+                        --  for the rest follow the task given below for entire swatches module -- to s 
+
+                    --  for the gallery_images module, a you need to follow the tasks given in the gallery_images module -- to a 
+
+                additional our own flow that we may like to use beyond notifications and so on, that may help in future exnteding or improving flows/features as well as scalling. -- I think it would be mature heirachical structure, mature data keeping (brief client side caching for smooth UI and effects) and data flows throughout the funnel, precise and neat notification (events) definitions, simple to the point selectors and neat & clean overall implementation and execution 
+
+
+                and some things that still is not came to the attention 
+
 
             this.$element.find('ul.variable-items-wrapper').each(function (i, el) {
 
+            ACTIVE_TODO is it needed? and why they did it? -- to s. check and update me 
               $(this).parent().addClass('woo-variation-items-wrapper');
 
+
+              move all below in the process_attribute_template function -- to s 
+                --  however also check the logic and use of eq below -- to s 
+                --  and as mentioned above this object will always be passed from all .each loops under element, so use that element inside the process_attribute_template -- to s 
               var select = $(this).siblings('select.woo-variation-raw-select');
               var selected = '';
               var options = select.find('option');
@@ -783,29 +829,36 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
               var current = select.find('option:selected');
               var eq = select.find('option').eq(1);
 
-              var li = $(this).find('li:not(.woo-variation-swatches-variable-item-more)');
-              var reselect_clear = $(this).hasClass('reselect-clear');
 
-              var mouse_event_name = 'click.wvs'; // 'touchstart click';
+              move all below tabbed in the process_attribute_template function -- to s 
+                      var li = $(this).find('li:not(.woo-variation-swatches-variable-item-more)');
+                            ACTIVE_TODO however not this, for this once t gives conclusion our final implementation will follow -- to t 
+                      var reselect_clear = $(this).hasClass('reselect-clear');
 
-              var attribute = $(this).data('attribute_name');
-              // let attribute_values = ((_this.is_ajax_variation) ? [] : _this._generated[attribute])
-              // let out_of_stocks = ((_this.is_ajax_variation) ? [] : _this._out_of_stock[attribute])
-              var selects = [];
-              var disabled_selects = [];
-              var out_of_stock_selects = [];
-              var $selected_variation_item = $(this).parent().prev().find('.woo-selected-variation-item-name');
+                      var mouse_event_name = 'click.wvs'; // 'touchstart click';
 
-              // For Avada FIX
-              if (options.length < 1) {
-                select = $(this).parent().find('select.woo-variation-raw-select');
-                options = select.find('option');
-                disabled = select.find('option:disabled');
-                out_of_stock = select.find('option.enabled.out-of-stock');
-                current = select.find('option:selected');
-                eq = select.find('option').eq(1);
-              }
+                      var attribute = $(this).data('attribute_name');
+                      // let attribute_values = ((_this.is_ajax_variation) ? [] : _this._generated[attribute])
+                      // let out_of_stocks = ((_this.is_ajax_variation) ? [] : _this._out_of_stock[attribute])
+                      var selects = [];
+                      var disabled_selects = [];
+                      var out_of_stock_selects = [];
+                      var $selected_variation_item = $(this).parent().prev().find('.woo-selected-variation-item-name');
 
+                      this need to be moved to compatability function, so from here there would be call to the compatability function -- to s 
+                      // For Avada FIX
+                      if (options.length < 1) {
+                        select = $(this).parent().find('select.woo-variation-raw-select');
+                        options = select.find('option');
+                        disabled = select.find('option:disabled');
+                        out_of_stock = select.find('option.enabled.out-of-stock');
+                        current = select.find('option:selected');
+                        eq = select.find('option').eq(1);
+                      }
+
+            all below to attribute data function -- to s 
+                --  and they will return data object of local scope -- to s 
+                    --  ACTIVE_TODO/TODO but whenever it make sense we can keep such data in global data var of module to benefit from the caching as planned. 
               there will be dedicated functions under preprocess_data function heirarchy, for managing stock status and other limitations 
                 --  the functions names would be namely preprocess_stock_status_data -- to h 
                 --  and the other such functions which would be required is manging other such conditions, managing the legacy number of variations limit and other such limitations of supporting 30 variations only for certain functions which was there in the plugin we were exploring -- to h. it may be ACTIVE_TODO 
@@ -836,6 +889,8 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
               var available = _.difference(in_stocks, out_of_stock_selects);
 
+              the type specific matters are rarely found above due to abstraction that was not needed 
+                --  however like below the type specific things handled, we would have type specific condition in function process_attribute_template. as below will going to be moved there -- to s 
               // Mark Selected
               li.each(function (index, li) {
 
@@ -888,6 +943,8 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
               });
             });
 
+
+            check if below two events are been bound by anything -- to s 
             this.$element.trigger('woo_variation_swatches_init', [this, this.product_variations]);
 
             $(document).trigger('woo_variation_swatches_loaded', [this.$element, this.product_variations]);
@@ -1308,6 +1365,8 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
         });
 
 
+        for all sections of update layers in below sections and elsewhere in this plugin, what we can do is simply call the process_attribute_template function but with mode param equal to update or so -- to s 
+            --  and also ensure to make the duplicate code in that same function -- to s 
         // Trigger Select event based on list
 
         if (reselect_clear) {
@@ -1574,11 +1633,19 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
 
     _this.configs = jQuery.extend({}, {}/*default configs*/, configs);  
     
-    // this.subjects = [];
 
+    like we did the base_container and so on things, do them here also -- to a 
+        --  but for now that does not need to be updated -- to a 
     var _this.data = {};
     var _this.binding_stats = {};
 
+    and move below function at right place -- to a 
+            --  then need to call it from init_private function with section=init_private -- to a 
+        --  and remove the resolve part from it -- to a 
+        --  and the first statement need to be moved to init_private, but anyway comment that there after moving -- to a 
+            --  and instead of that create our planned module for external slider and zoom inside common js for now -- to a. 
+                --  it will have name sp_slzm, actually search with sp_slzm and there are related tasks above -- to a 
+                --  and then as mentioned there call the init function of api from appropriate place, but I think it is not mentioned there and we need to decide right place if there is better place then above mentioned init_private location -- to a 
     ///////////// -- 15-06-2022 -- @drashti -- ///////////////////////////////
     var compatability = function(section, object, expected_result) {
 
@@ -1625,7 +1692,7 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
 
         preprocess();
 
-        return _.debounce(function () {
+        return splugins_.debounce(function () {
           
             preprocess();   
 
@@ -1640,6 +1707,7 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
 
     var legacyBinding? = function() {
 
+        remove this entire legacyBinding function, once the variation change event is bound from belo functions of this module -- to a 
         jQuery('#select_attribute_of_variation').on('woocommerce_variation_has_changed', function(){
             // do your magic here...
          }); 
@@ -1677,7 +1745,9 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
                 // ACTIVE_TODO_OC_END                    
         }); 
 
-        like in the swatches module we have the base_container_selector settings need to manage it here, to figure out the below _element -- to h 
+        like in the swatches module we have the base_container_selector settings need to manage it here, to figure out the below _element -- to h and -- to a 
+            --  and confirm if all below are fron the plugin we were exploring -- to a 
+                --  then I will tell you which to keep and which to drop -- to a 
         this.$wrapper = this._element.closest('.product');
         this.$variations_form = this.$wrapper.find('.variations_form');
 
@@ -1756,11 +1826,14 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
                 ACTIVE_TODO_OC_START
                 we would not like to manage extra layer of ajax to get default gallery and so on, if it is not necessary by standard flow but if by any chance standard flows does require handling any exceptional scenarios then we would need to do it -- to h and -- to d 
                     --  here check if that wc ajax event is if invoked by the plugin we were exploring? it might not be but still confirm and in the first place check if the execution even reaching till ajax since it was not noticed in the browser console -- to h 
+                        --  still need to research about the ajax variation but above two tasks is mostly unnecessary so we can mark them invalid after 2nd revision -- to h
+                            --  research about the ajax variation, but after discussing with me -- to s 
                 ACTIVE_TODO_OC_END
             }, {
             }, {
 
             for below mattter also research on WooCommerce ajax variations with keywords WooCommerce ajax variations legacy -- to h 
+                --  research about the ajax variation, but after discussing with me -- to s 
             // For Single Product
             $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery(); // Ajax and Variation Product
 
@@ -1769,16 +1842,6 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
             }); // Support for Jetpack's Infinite Scroll,
     ACTIVE_TODO_OC_START
             so a call from here to the compatability function of this module, and that will cover all compatability matters of load time inlcuding the promize resolve block of the plugin we were exploring. so call compatability with section=bootstrap -- to d 
-
-
-        -   slider and zoom 
-            --  it will mostly be matter of interest to the variations.gallery_images module but since it is vital for overall stability of functions and the overall experience that is why it is considered as a dedicated thing 
-            --  its events -- it may directly or indirectly connect itself to the below events layer mentioned 
-            --  events it listens to simply the events that it mandatorily expects and the events that is optional for it but accepts 
-                --  based on these we can easily define what our hooks (php layer) and js api that we are to provide for slider and zoom would look like or how it will be composed 
-            --  media 
-                --  images 
-                --  in addition to images other things that it may need to support are videos (would be covered by custom_html) and custom html 
 
 
     --  if our slider/zoom module is enabled then 
@@ -1935,6 +1998,11 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
         note that we may like to create some dedicated functions for updating the actual templates in dom, since this process_template function is broad layer for handling all template related -- to h 
             --  and should we update templates on the init_private means page load event also, I think we should only if it is required by community standards. and since it would help in avoiding load time hangs to we must confirm with legacy standards and the plugin we were is doing -- to h 
                 --  and once the dom updated of the slider and zoom area the we would like to call many functions or simply can call the init layers functions like preprocess is kind of init level of function -- to h 
+
+        --  there will be two functions that will be called from here like, process_slider_template and process_zoom_template -- to a 
+            --  and this two function would recieve all images at once so that they can instantly update template -- to a 
+                --  and these functions would most likely be called from variation_change base event handling function, and since we do not have any requirement so far or managing the template at page load time so that is fine -- to a 
+                    --  but need to confirm if the function calls are as per heirachical structure flow we are planning -- to h. 
                           key: "galleryInit",
               value: function galleryInit(images) {
                 var _this11 = this;
