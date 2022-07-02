@@ -347,6 +347,18 @@ class SP_WBC_Variations extends SP_Variations {
 
 	}
 
+	public static function sp_variations_gallery_images_supported_attribute_types($configs = array()){
+
+		$type = array();
+		$type['image']='Images';
+		$type['video']='Video';
+
+		return $type;
+
+
+
+	}
+
 	public static function get_default_attributes($product_id){
 
 		$product = wc_get_product( $product_id );

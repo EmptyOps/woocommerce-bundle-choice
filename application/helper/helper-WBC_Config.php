@@ -148,5 +148,18 @@ class WBC_Config {
 		//	NOTE: it is critically important to note that special characters in this separator had created unknown and un-notified issue in js and dom processing and it is a fact that special characters would create problem in any deep corners of system and the bug may take lot of time to be found. so if required increase the number of underscores in the below separator but using any special characters is not a good idea 
 		return "____"; 
 	}
+	
+	public function product_variations_configs(){
 
+		return array( 
+					'sp_variations_attributes'=> array( 
+
+
+					),
+					'sp_variations_data_fields'=> array( 
+
+					)
+
+		);
+	}
 }
