@@ -375,21 +375,24 @@
                  --  custom_html 
                  --  NOTE: since the data in case gallery_images module will be comming from the variation events in the variation etc. event args so nothing needed to be assigned in our main data var. 
                          --  and like for swatches if required then need to dump the data in images container dom element, like for swatches it is on variable-items-wrapper element dom -- to h and -- to b 
+                                --  need to finalize now the process_images_template function and see if we fall short there of any data. so lets just finalize the data and everything there -- to a 
                              --  check if that plugin we were exploring does have, but either way we will do only if it is necessary for us on the js layer -- to b 
                                  --  all this data would be available in the variation_gallery_images var of the variation -- to h 
          -   template 
              // --  will vary based on attribute types, extensions and some other feature related conditions also 
              //     --  but to simplify it we can simply depend on template_type or if required then in specific scenarios on the particular template_key 
              //         --  maybe adding anything else is unnecessary, and the attribute_types for swatches and gallery_item_type for the gallery_images is enough. so adding anything additional would make it unnecessarily complex. and either way both attribute_types and the gallery_item_type does conncets to the templates. so nothing to do here. 
-                         --  however need to ensure that gallery_item_type support is in place -- to h 
-                             --  on the backend legacy admin form we may already have type field which would be used as this -- to b 
-                             --  and on js layers put appropriate conditions at needed layers -- to d 
-                             --  and the name/key gallery_item_type may change, so lets just use the right one only -- to d and -- to b 
+                         // --  however need to ensure that gallery_item_type support is in place -- to h 
+                         //     --  on the backend legacy admin form we may already have type field which would be used as this -- to b 
+                         //     --  and on js layers put appropriate conditions at needed layers -- to d 
+                         //     --  and the name/key gallery_item_type may change, so lets just use the right one only -- to d and -- to b 
                                  --  lets simply name it type but within that e params that we thought of -- to h 
                                      --  and if this type param is detected then even though still the image or video base type is resepcted on applicable layers to achieve optimum reusability like we envision for the swatches module with base_type field, but the responsibility of managing templates will be on their applicable layers of extensions and they would either repond with template or just replace there on their layers -- to h 
-                                         --  so for this need to work out that now that js tempalte hook let the extensions to create and dump their own tempalte and manage simply on their end, this hook simply need to give that ability when above additional type is detected -- to b or -- to s 
+                                         --  so for this need to work out that now that js tempalte hook let the extensions to create and dump their own tempalte and manage simply on their end, this hook simply need to give that ability when above additional type is detected -- to b or -- to s or -- to a 
                                          --  and also need to publish configs accordingly for applicable extensions, and on this note publish configs of all extensions -- to s or -- to a 
                                              --  and the applicable extensions will hold their own template var under configs and the template id in it -- to s or -- to a 
+                                                --  and like the types var is to be prepaired for gallery_images module, same way on gallery_images bound extensions prepare types there also -- to a 
+                                                    --  which will be used for implementing if conditions on notifications -- to a 
              // --  we will also need to interact (mainly create) the slider and zoom tempaltes 
              //     --  the main requirement will be making/creating template dynamic using the image array and so on data 
              //         --  it will almost only on php side 
@@ -398,12 +401,12 @@
              //             --  so that these hooks become publish ready when we decide to publish the hooks and js api for slider and zoom -- and as planned in one of the option of our four option offering for the gallery_images slider and zoom, that we look forward to try supporting the external zoom and slider with our planned level of efforts, we can (and should) provide service to make the slider and zoom template dynamic using our data by implementing those hooks when those plugins are enabled.  
                              // --  ACTIVE_TODO when we decide to actually publish php hooks and js api for slider and zoom, based on user demand as mentioned below, then at that above planned php hooks will also be published 
              --  since we need to manage the slider and js templating dynamically on the slider and zoom layers 
-                 --  so gallery_images module will have template related functions that the form builder js module have, so create those functions -- to d 
+                 --  so gallery_images module will have template related functions that the form builder js module have, so create those functions -- to d or -- to a 
  
-                 --  and yeah in gallery_images module we will need one more object namely template_data so create that under data object that is created -- to d 
-                     --  if data object is not created then create that in gallery_images module also -- to d 
+                 --  and yeah in gallery_images module we will need one more object namely template_data so create that under data object that is created -- to d or -- to a  
+                     --  if data object is not created then create that in gallery_images module also -- to d or -- to a  
  
-                     -- Above two points might not be necessary so check if form builder module had any flow that requires it otherwise just keep it on hold. and mark above two and these as ACTIVE_TODO and then we would remove it after 1st revision -- to d and -- to h 
+                     -- Above two points might not be necessary so check if form builder module had any flow that requires it otherwise just keep it on hold. and mark above two and these as ACTIVE_TODO and then we would remove it after 1st revision -- to d and -- to h or -- to a  
  
                  --  and t we need to make sure that our slider and zoom assets are lighter so make sure that they are loading only needed things and are difinitely the minified versions only 
                      --  first confirm if they are loading on the right place like from footer hook and so on, and are also loading once only of course -- to t 
@@ -412,9 +415,10 @@
              --  react tempaltes -- we will going to one alternate widgets set of templates which would be based on react framework 
                  --  what if same data which is coming from model and passed to load view is given to react as json, maybe that is the option, and our layers on php data layer and tempalting layer does match with templating layer of the react so just replace the php templating layer with react. need to confim if this is the flow we should do and yeah it is not close enough to our plan of reusability and even using executable instructions that is mentioned there in that ssm class notes -- to h 
                      --  and even if above is confirmed still in that case also we would like to continue using (and we must do it for reusability and above all we can not manage two application layers) the same js modules of particular extensions (which is rendering react widget instead of regular widgets) as the application layer specifically one which is managing events and application stat and logical insteractions(so not the UI level events, stat or logical interactions that would still be handled by react only). but is possible, confirm with t -- to h. 
-             --  what about zoom dom loop template, just create one and replace inside or create all and hide/show? the later is clean and would require less maintainance so should do that. -- to h. related tasks are in the events section below. 
-                     --  and in case some zoom must need only one tempalte then we can simply enable that setting using a hook for zoom core layers and php and publish that under the configsfor variations gallery_images and swatches as well. ACTIVE_TODO/TODO
+             --  what about zoom dom loop template, just create one and replace inside or create all and hide/show? the later is clean and would require less maintainance so should do that. -- to h or -- to a . related tasks are in the events section below. 
+                     --  and in case some zoom must need only one tempalte then we can simply enable that setting using a hook for zoom core layers and php and publish that under the configsfor variations gallery_images and swatches as well.  or -- to a 
                          --  on js layer such configs we can keep on common parent later of the variations js module itself. ACTIVE_TODO/TODO 
+                            --  for now that is just needed on the gallery_images layer, so lets just use there or -- to a 
          -   pages 
              // -- category page 
              // -- item page 
@@ -427,6 +431,10 @@
              --  its events -- it may directly or indirectly connect itself to the below events layer mentioned 
                  --  it should always be indirectly, and a mature abstraction should be ensured always otherwise our task of providing the php and js api for external and zoom and slider would become challanging 
              --  events it listens to simply the events that it mandatorily expects and the events that is optional for it but accepts 
+                        --  here we need to confirm if the slider thumb click listener is well set here, with our own slider container class we need to set the click listener. and there will be no dependancy on external slider since we have the container class -- to a 
+                            --  for now set the container class hardcoded -- to a 
+                                --  ACTIVE_TODO but very soon we need to provide it through configs, so on php layer on model there need to have one static function which would provide class to both hook and js layer configs -- to s 
+                            --  and on click we need to update the zoom template based on the zoom template settings, means whether if that is one template dom(and update dom each time using js template) or is it the all template dom(and just hide the all zoom dom images first and then show the (current) index image) -- to a 
                  --  based on these we can easily define what our hooks (php layer) and js api that we are to provide for slider and zoom would look like or how it will be composed 
              // --  media 
              //     --  images 
@@ -447,27 +455,44 @@
                  --  events emitted by other plugins/themes which we need to take care of in case of compatiblity matters, so it can be termed as the compatiblity events 
                  --  just for the comments, it seems that as long as any external slider and zoom plugin is providing the key js events like that slider_thumb_click and zoom_area_hover and on php side with above flows we are almost covering the 70-80% of basics requirement to host external slider and zoom dynamically 
                      --  maybe we all we need to do is have our main container classes emitting through the base configs of particular modules -- to b 
-                         --  then bind events here based on that class, so maybe dependancy on slider and zoom js/jQuery plugins is not necessary -- to h  
+                         --  then bind events here based on that class, so maybe dependancy on slider and zoom js/jQuery plugins is not necessary -- to h or -- to a   
                              --  yeah but some jquery plugins might be preventing the events from reaching to their parent elements so in such cases we need to handle the exceptional scenarios by depending on the slider/zoom plugin to provide that event api or we may have still some other work around or compatiblity layers would help if we add there section for handling compatiblity for these required events and then if we put patches for specific slider/zoom or theme or mix of both then that will work. -- and last sort would be to depend on the external slider/zoom to provide the event API -- to h ACTIVE_TODO or would be on going TODO 
                              --  and in case when the only option that is left is to depend on the external slider/zoom jquery plugin does provide the api then in that case out gallery_images and swatches module should publish public functions under ...api namely on_click and on_hover functions which directly call the internal private functions of click and hover etc events. so in this case the listener fucntions would not be in picture and the external plugins api should be connected directly to private functions and that would achieve clean flow. -- to h ACTIVE_TODO 
                                  --  and the flow for making this connection between the external plugin api and our modules published api namespace would be provided by maube a dedicated module that will provide the very planned js api for external slider/zoom plugins. -- to h ACTIVE_TODO 
                                      --  so we may like to create one such module when we do implementation to provide api for external slider/zoom plugins. -- to h ACTIVE_TODO  
-                         --  and on that regard the fundamental job of the slider thumb click listener is to replace the zoom are container dom with whatever the particular related zoom template at that index provide -- to h 
-                             --  and the fundamental job of the hover event of the zoom area is nothing as of now, since even the extensions handle their own business logic -- to h. so we can let the function be there and bind only when there is requirement. 
+                         --  and on that regard the fundamental job of the slider thumb click listener is to replace the zoom are container dom with whatever the particular related zoom template at that index provide -- to h or -- to a  
+                             --  and the fundamental job of the hover event of the zoom area is nothing as of now, since even the extensions handle their own business logic -- to hv. so we can let the function be there and bind only when there is requirement. 
                          --  and on that regard the fundamental job of the swatches change event is to 
-                             --  emit the necessary events based on the current attribute_types to be processed. so check what m had did in service class, and other extensions js -- to d 
-                             --  and on this regard the base event of reset_all/reset has to emit the wc reset_variations but that must be handled by legacy layers so not sure why m did that but maybe it is raising reset event from our layers that is what m may have did in which case need to handle that -- to h 
+                             // --  emit the necessary events based on the current attribute_types to be processed. so check what m had did in service class, and other extensions js -- to d 
+                                // INVALID
+                             --  and on this regard the base event of reset_all/reset has to emit the wc reset_variations but that must be handled by legacy layers so not sure why m did that but maybe it is raising reset event from our layers that is what m may have did in which case need to handle that -- to h or -- to a  
                              --  and on this regard when we clear the old js layers of wbc, service class and extensions then we will know many such things -- to h 
-                         --  and on this regard gallery_images module also need to create listener function for variation change event and listen to that, and when that is detected -- to h 
+                                    --  basically it is covered but still confirm if anything is missed slider and zoom assets.php, and especially the 360 and darker lighter variation assets.php since there were code there which was actually of use to the wbc layers or -- to a 
+                                        --  and same way swatches module should check for if anything is missed on the variations assets.php of wbc or -- to s 
+                         --  and on this regard gallery_images module also need to create listener function for variation change event and listen to that, and when that is detected -- to h or -- to a 
+                                --  do cover the sub tasks below also or -- to a  
                              --  then do erase the slider and zoom dom 
                                  --  it may create blink and jump effects, so could we handle that using the effects and after effect management 
+                                    --  to be sure here and ensure neat flow check once how that other plugin we were exploring does updating the templates, means are they erasing and then appending or -- to a 
+                                        --  it just crossed the mind that they were actually updating the html so erase and append at once, but at there must be some resolve or other smoothing function calls which might be of interest to us or -- to a 
                              --  then append new templates in the loop in both slider and zoom, there would be their own function and loop 
                                  --  but is it good idea to do it from single function and single loop then so if certain conditions need to be managed then slider and zoom does work in sync by default without having to worry about anything 
-                             --  then need to refresh the slider and zoom, so here the external slider and zoom must be binding to api events so that they does refresh their plugin when the event is recieved 
+                             --  then need to refresh the slider and zoom, so here the external slider and zoom must be binding to api events so that they does refresh their plugin when the event is recieved -- to a 
+                                    --  from slider assets.php call the sp_slzm init_listener and refresh_listener and provide that the callbacks -- to a 
+                                        --  and when the callaback function is called just init or refresh the slider using their particular api function call -- to a 
+
+                                        --  and do both points above for the zoom assets.php -- to a  
                                  // --  so here now maybe we need to simply publish the api with very few basics covered but atleast that would help start flow experimented and our default slider and zoom implementation can simply use that and that will help in experiment. so simply publish the api under .gallery_images.sp_slzm(confirm namespace on variations class).core and export it under ...api as usual. done
                                  // --  and for now just provide one public function refresh_listener and one private refresh_listener which would subscribe internally to the gallery_images notification done
+                                        --  here notification part not done, so subscribe that notification  or -- to a 
+                                            --  and the notification will be raised from the process_images_template or so function which was called from last in the on_variation_change or -- to a 
                                      --  and private function upon recieving the notification from the gallery_images module it would just call the callback function -- to h and -- to a
-                                     --  so the public refresh_listener function would accept the callback -- to h and -- to a   
+                                         --  so the public refresh_listener function would accept the callback -- to h and -- to a   
+
+                                    --  do all four points above for the init_listener function also, but not sure from where the init notification will be raised from gallery_images module -- to a 
+                                        --  I think it should be raised from that process template function, from below that comment, and if any page load time events come there in future then that will be after that load time event handling. so briefly at last -- to a 
+
+                                    --  and name both private listener function as the refresh_listener_private and so on -- to a 
                                      --  ACTIVE_TODO in future though we may like to move the .gallery_images.sp_slzm module to separate asset file and separate it from our other noisy code of all js modules so that users find it clean also. 
                                          --  ACTIVE_TODO and definitely it is very basic approach with which we are going, but we would like to do research on how to build and publish api layers and api. and definitely we would like to do mature implementation from the initial versions. 
  
@@ -479,17 +504,18 @@
                          //     --  then at that time applicable extension will bootstrap the js layer 
                          //     --  and when the change event occurs the applicable extension will simply call the ...swatches.api function to notify back about their change event or the events module can add support to provide callbacks to subscriber so that they can reply with something when they have done something based on notification. so it can be called the notification_response. -- but it will be about breaking our own rule of keeping the events simple. so even if we must do then in that case it must be till notification_response only and no further callback back and forth can be supported. otherwise it mostly lead to long debug sequences. --  however it has benefit of less maintainance since otherwise extensions need to know about the ...swatches.api but in case of events support of notification_response it only need to learn about and depend on the variations.swatches subject of events module. and as long as we can keep it limited to notification_response only and do not extend it further it will be clean to be frank. 
  
-                         var callback = null ;
-                         window.document.splugins.events.api.notifyAllObservers( 'swatches', 'process_attribute_types', type, callback );
- 
                          //     --  and we are planning to host darker/lighter slider support also from here as usual so it will be just like above slider example 
                                  --  but yeah after the change event is recieved here that will be emitted to the gallery_images module to let them do their job. since darker lighter is not part of the variation there is no further thing to do from here after the change event is recieved. -- to h. so it will involve the observer pattern notifications. 
                                      --  and since it is different kind processing that is required after change event so the input_template_type must be defined uniquely like slider_no_variation -- to h. just do the needful. 
                                          NOTE: and yeah on that note everything of the sp_variations module must be dynamic and nothing should be hardcoded so slider_no_variation input template type must be passed right from where the template is defined on admin to till here 
                                          --  first of all, the change event will be hosted, recieved and processed by darker lighter extension layer only -- to a 
-                                             --  and there will be nothing here for that from here in the swatches module but it will be from gallery_images module -- to h or -- to s. the gallery_images module will emit notification on its similar flow like here. 
+                                             --  and there will be nothing here for that from here in the swatches module but it will be from gallery_images module -- to h or -- to a. the gallery_images module will emit notification on its similar flow like here. I think gallery_images module will do it and there is nothing else to do. 
                                              --  and the extension would respond back with anything that it think can be handled on common layers here based on base type(here its very image or video type) -- to h or -- to a 
+                                                --  so will that be our recursive flow? I think that is what we thought ofm with simple and precise condition that would avoid the recursion in any scenarios -- to a 
                                              NOTE: and there is no input_template_type implementation, but the type will be considered as base type while the e param provide type will be specific extended type. 
+                                                --  so extra param will host one type field and additionally a types object within which there would be single type  -- to a 
+                                                    --  and when the types is prepared, at that time simply object type is considered -- to a  
+                                                        --  and then it extensions would respond back with (base) type which could be further processed with recursive call -- to a 
                          // ACTIVE_TODO_OC_END                
  
                      //  data applicable loops 
@@ -511,17 +537,22 @@
                          //  do necessary logic if support is available, if not for example custom_html then manage accordingly  
                          if( type == 'default'/*means the default template provided by slider and zoom*/ || type == 'custom_html' ) 
                              // ACTIVE_TODO_OC_START
-                             in case of custom_html as long as the slider and zoom events are not emitted and they would not be since we would be doing our custom html, but if they are then need to cancel them using their apis (only) as mentioned in the events functions below 
+                             in case of custom_html as long as the slider and zoom events are not emitted and they would not be since we would be doing our custom html, but if they are then need to cancel them using their apis (only) as mentioned in the events functions below  -- to h 
                                  -- but one matter that we need to handle in detail is managing the slider thumb indexes which is providing anything custom like custom_html dom (like 360,  darker lighter, diamond meta and recently purchased) for their main image ares (which is also zoom area) 
                                      --  and mostly none of the slider or zoom plugin would be providing such complex apis and even if they do then not sure if all have those and even if they do then not sure if all have it mature 
                                          --  so one simple (but tricky, yeah it is trick and not standard) option is to simply hide the zoom area container and show the custom html. 
                                              --  but since it is not standard we should find standard, or can use that trick since it is simple and also effective option especially because it is less likely for most slider and zoom to provide support
                                                  --  but if we are to use this trick then we need to bring it closer to standard implementation by ensuring the possible flows like always have our classes in zoom area container like sp-variations-zoom-container 
+
+                                                --  now simply the zoom template would be provided based on type so just make sure that type based template is provided by each applicable extensions listed above -- to a 
                              // ACTIVE_TODO_OC_END                    
                      }); 
  
                      NOTE: note that we may have planned some unnecessary events below that from swatches module notifies the gallery_images module, and vice-versa. but it is pretty standard that both should abstract our each other and work on abstraction level only where they do not directly interacts with each other but depend on the global variation change and so on(for gallery_images) events to do their job. and similarly slider and zoom module work on their own level of abstraction and just init or refresh their js/jQuery module if the related event is detected from the js api that is to be published for the external slider and zoom module. 
- 
+                    
+                    --  all applicable points listed above for darker lighter also need to be done for other extensions in their own regard -- to a 
+                        --  first we will do it for the 360 in their own regard, means whatever is necessary for it would be done there like event binding, and further processing on those events and so on -- to a 
+
          -   effects and managing after effects 
                  --  may need to provide some effects but only where and if necessary, the majority of effects will be provided by the slider and zoom js/jQuery plugin 
                  --  will need to manage the after effects very precisely, to ensure smooth and non cluttering experience 
@@ -609,6 +640,7 @@
                  --  and that would simply call the callback function -- to a 
                  --  so the callback function need to be saved under _this object with var name _this.on_change_callback, when the notification is recieved -- to a 
                  --  and on the core swatches module the inline function of callback (would be created from where the notification is sent) would recieve the callaback and simply pass the call to the base on_change or change function of the swatches module -- to a 
+                    --  so this sounds like specific (base) type recursion -- to a. and using this maybe is necessary since otherwise there is no other way for base module to listen to those events -- to a 
                  -- init - initprivate - preprocess - (prepocessdata)   
  
              // --  darker lighter extensions host its own hover event based on its selector, so move that applicable code to the applicable function in the function heirarchy -- to a done
@@ -660,7 +692,10 @@
      // var in_stocks = _.difference(selects, disabled_selects);
      // if (_.includes(in_stocks, attribute_value)) {
      // ACTIVE_TODO_OC_END
- 
+
+    after clearing the current points, lets focus on finishing if there is any broad structuring or so related points -- to s 
+        --  and after that will start from beginning of module, and basically finalize to make it ready for run -- to s  
+            --  and then will do one more cycle finalizing the code implementation like confirming selector, find and so on statements, other such layers and definitely applying the remaining class structure everywhere -- to s 
      var init_private = function() {
  
          window.document.splugins.events.api.createSubject( 'swatches', ['process_attribute_types'] );
@@ -1126,6 +1161,7 @@
              --  but how we can make the many layers common which can work semalessly in common(means many things of different layers, not necessarily entire layers)? -- to h 
                  --  data layers already be common and that should remain common for most part except some conditions -- to h 
                  --  while we shuold do little or no common for events and effects since they are strictly ui bound layers so that would result in weak balance between modules -- to h 
+                    --  anyway common always need to be common, and optimum possible common to make maintainance realistically possible. 
                  --  what else? 
          if(window.document.splugins.common.is_category_page){
  
@@ -1745,7 +1781,7 @@
          this.initEvents();
                this.initVariationGallery();
  
-         --  we need to call the update dom templates functions on page load when it is non variation product -- to h 
+         --  we need to call the update dom templates functions on page load when it is non variation product -- to h -- to a. tally this and all sub tasks below.  
              --  while for variation products it will be called by woo legacy api when the variation change event does fire on page load, so nothing to do in that case 
                  --  but yeah in either case after dom templates functions are done then need to call the required functions heirarchy which would cover something similar like what init set of functions doing in the plugin we were exploring -- to h. and so this function heirarchy calling would definitely include the call to init function of the js api for slider and zoom.  
                      --  so some set of functions heirarchy would not be called initially for variation products -- to h 
@@ -2160,7 +2196,7 @@
              --  very first do it basically by hiding maybe all nodes within the main zoom container class and then just show the node/element at index which need to be shows -- to h. since we need to start testing 1st revision asap so lets do this asap. 
                  --  then eventually we may like to maintain based on the image template class(so hook would be required for it) and index, or just based on index. to ensure that maximum adaptability is ensured for external slider and zoom and even if within the main zoom area container the dom has complex structure then also things work fine, and it is like that slider/zoom plugins would have complex dom. -- to h 
  
-         --  what could be other things that we need to do or would like to cover? 
+         --  what could be other things that we need to do or would like to cover? -- to a  
              --  we need to stop the video of the current index(means the index which was already set before click) is actually gallery_item_type=video -- to h 
              --  and of course if clicked thumb represents the gallery_item_type=video(note that gallery_item_type video would be providing the base video support means mp4 videos while for the other formats inlcuding 360 will have other premium types support) then call the play_video function(so there will be play_video and pause_video functions) but however the play_video may have nothing since by default we are implementing auto play support for the videos -- to h 
                  --  ACTIVE_TODO so on this regard very soon on admin we may like to provide setting to disable preload and/or auto play support for the videos -- to h 
@@ -2207,7 +2243,8 @@
      };
  
      var variation_change = function(event, variation) {
- 
+
+         -- to a  
          for gallery_images it is not only the variation_change event but below list of events that also need to be listened to, so implement them -- to h 
              --  show_variation
              --  hide_variation
@@ -2344,7 +2381,6 @@
  // ACTIVE_TODO_OC_START
  // put ACTIVE_TODO_OC_START and ACTIVE_TODO_OC_END around each open comments section, and then comment them -- to d 
  //     --  and need to do the same for filter js and ssm variations class file -- to d 
- <<<<<<< HEAD
  // ACTIVE_TODO_OC_END  
  
  // the variations sp_slzm js module
@@ -2375,6 +2411,3 @@
  
  //  publish it 
  window.document.splugins.wbc.variations.gallery_images.sp_slzm.api = window.document.splugins.wbc.variations.gallery_images.sp_slzm.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
- =======
- // ACTIVE_TODO_OC_END 
- >>>>>>> 390dc146f1df6b150a561dbd1c4b512384386950
