@@ -34,9 +34,8 @@ $template = array(
                     'class' => 'ui mini images variable-items-wrapper '.trim( implode( ' ', array_unique( $css_classes ) ) ),
                     // 'preHTML' => $contents,
                     'attr' => array( 'data-attribute_name' => esc_attr( wc_variation_attribute_name( $attribute ) ),'data-attribute_values' =>wc_esc_json( wp_json_encode( array_values( $woo_dropdown_attribute_html_data['options'] ) ) )),
-                    'child' => array(
-                        $variable_item_ui
-                    )
+                    'child' => $variable_item_ui
+                   
                 )
             )
         ),

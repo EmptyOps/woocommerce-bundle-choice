@@ -5,26 +5,12 @@
  */
 
 
----- a code /purple_theme/application/controllers/publics/pages/Content_Single_Product.php no che
--- main container 
-$template = array(
-    'type'=>'div',
-    'class'=>'imgScrollWrap_v',
-    'id'=>'slider1',
-    'child'=>array(
-        'type'=>'div',
-        'class'=>'splide__track',
-        'child'=>array(
-            'type'=>'ul',
-            'class'=>'exzoom_img_ul splide__list',
-            'child'=>$data
-        )
-    )
-);
 
----- a code /purple_theme/application/controllers/publics/pages/Content_Single_Product.php no che
+
+//---- a code /purple_theme/application/controllers/publics/pages/Content_Single_Product.php no che
 global $product;
 $template = array();
+$template_inner = array();
 /*if(!empty($ids)){
     foreach ($ids as $id) {
         --if below additional params of original and the second param is for any fix or improvement then drop below if condition and so it will be used for preview page as well
@@ -45,8 +31,9 @@ $template = array();
     }
 }*/
 
-if(!empty($gallery_images_template_data['attachment_ids'])){
-    foreach ($gallery_images_template_data['attachment_ids'] as $index=>$id) {
+
+if(!empty($gallery_images_template_data['attachment_ids_loop_image'])){
+    foreach ($gallery_images_template_data['attachment_ids_loop_image'] as $index=>$image) {
 
         // ACTIVE_TODO nid to lode admin settings here 
         $options = array();
@@ -54,14 +41,16 @@ if(!empty($gallery_images_template_data['attachment_ids'])){
         $defaults = array();
         $options  = wp_parse_args( $options, $defaults );
 
-        $image = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_product_attachment_props( $id );
+        //$image = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_product_attachment_props( $id );
         $post_thumbnail_id = $product->get_image_id();
 
+        /*ACTIVE_TODO_OC_START
         $remove_featured_image = false;
 
         if ( $remove_featured_image && absint( $id ) == absint( $post_thumbnail_id ) ) {
             return '';
         }
+        ACTIVE_TODO_OC_END*/
 
         $classes = array( '' );
 
@@ -69,10 +58,11 @@ if(!empty($gallery_images_template_data['attachment_ids'])){
             array_push( $classes, '' );
         }
 
+        /*ACTIVE_TODO_OC_START
         //ACTIVE_TODO publish hook if required 
         $classes = apply_filters( '', $classes, $id, $image );
        //return '<div class="' . esc_attr( implode( ' ', array_map( 'sanitize_html_class', array_unique( $classes ) ) ) ) . '"><div>' . $inner_html . '</div></div>';
-
+        ACTIVE_TODO_OC_END*/
 
 
 
@@ -84,9 +74,28 @@ if(!empty($gallery_images_template_data['attachment_ids'])){
             $src = wp_get_attachment_image_url($id,'original',false); //wp_get_attachment_url($id);
         }*/
         if (!empty($template_data['template_key'])) {
-           $template[] =  wbc()->load->template($template_data['template_sub_dir'].$template_data['template_key'],(isset($template_data['data'])?array('data' => $template_data['data'],'index'=>$index,'id'=>$id):array()),true,$template_data['singleton_function'],true);
+            $template_data['data']['image'] = $image;
+            $template_data['data']['index'] = $index;
+           $template_inner[] =  wbc()->load->template($template_data['template_sub_dir'].'/'.$template_data['template_key'],(isset($template_data['data'])?$template_data['data']:array()),true,$template_data['singleton_function'],true,true);
         
         }
                        
     }
 }
+
+/*---- a code /purple_theme/application/controllers/publics/pages/Content_Single_Product.php no che
+-- main container */
+$template = array(
+    'type'=>'div',
+    'class'=>'imgScrollWrap_v',
+    'id'=>'slider1',
+    'child'=>array(
+        'type'=>'div',
+        'class'=>'splide__track',
+        'child'=>array(
+            'type'=>'ul',
+            'class'=>'exzoom_img_ul splide__list',
+            'child'=>$template_inner
+        )
+    )
+);
