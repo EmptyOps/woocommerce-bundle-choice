@@ -51,7 +51,7 @@ class Controller extends \eo\wbc\controllers\Controller{
         $template_key_option = null;
 
         if(!empty($args['template_option_key'])) {
-            $template_key_option = wbc()->options->get_option($args['template_option_key'],$args['option_group_key']);
+            $template_key_option = wbc()->options->get_option($args['option_group_key'],$args['template_option_key']);
         }
 
         if(!empty($template_key_option)) {
@@ -66,29 +66,17 @@ class Controller extends \eo\wbc\controllers\Controller{
             }
 
         } else {
-            $template_key = wbc()->options->get_option($args['template_option_key'],$args['option_group_key']);
+            $template_key = $template_key_option;
         }
 
         $template_path = $template_dir.$template_key;
 
-        //devices templtes  
-        $template_path_new = null;
-        if (wbc_is_mobile()) {
-
-            $template_path_new = str_replace('{{template_key_device}}','mobile',$template_path);
-
-        }else{
-
-            $template_path_new = str_replace('{{template_key_device}}','desktop',$template_path);
+        if(!empty($template_path)) {
+         
+            return wbc()->load->template($template_path,(isset($args['data'])?$args['data']:array()),true,$args['singleton_function'],true,true);
+        } else {
+            return null;
         }
-
-        if (file_exists($template_path_new.'.php')) {
-            
-            $template_path = $template_path_new;
-        }
-
-        wbc()->load->template($template_path,(isset($args['data'])?array('data' => $args['data']):array()),true,$args['plugin_slug'],true);
         
-        return $template;
     }
 }

@@ -1,5 +1,5 @@
 <?php
-namespace eo\wbc\controller\publics\variations;
+namespace eo\wbc\controllers\publics\variations;
 defined( 'ABSPATH' ) || exit;
 
 class SP_Gallery_Slider extends \eo\wbc\controllers\publics\Controller{
@@ -27,7 +27,9 @@ class SP_Gallery_Slider extends \eo\wbc\controllers\publics\Controller{
         
         \eo\wbc\model\publics\variations\SP_Model_Gallery_Slider::instance()->init_core();
         
-        --- get ui call
+        // ACTIVE_TODO_OC_START
+        // --- get ui call
+        // ACTIVE_TODO_OC_END
         
         \eo\wbc\model\publics\variations\SP_Model_Gallery_Slider::instance()->render_core();
 
@@ -49,7 +51,7 @@ class SP_Gallery_Slider extends \eo\wbc\controllers\publics\Controller{
                 $args['hook_callback_args']['images_data'] = $images_data;
 
                 return $this->selectron_hook_render($page_section,'slider_images_html',$args);
-            });
+            },10,2);
 
         }       
 
@@ -60,9 +62,9 @@ class SP_Gallery_Slider extends \eo\wbc\controllers\publics\Controller{
         if ($page_section == 'slider_images') {
 
             if ($container_class == 'slider_images_html') {
-                $data = $args['hook_callback_args'];
+                $data = $args['hook_callback_args']['images_data'];
                 unset($args['hook_callback_args']);
-                $this->load_view($data,$args);
+                return $this->load_view($data,$args);
             }
 
         }else{
@@ -75,7 +77,7 @@ class SP_Gallery_Slider extends \eo\wbc\controllers\publics\Controller{
     private function load_view($data,$args = array()){
 
         $args['data'] = $data;
-        $this->getUI($args['page_section'],$args);
+        return $this->getUI($args['page_section'],$args);
 
     }
 
@@ -86,10 +88,9 @@ class SP_Gallery_Slider extends \eo\wbc\controllers\publics\Controller{
         if ($page_section == 'slider_images') {
 
             $args['page_section'] = 'slider_images';
-            $ui = $this->get_ui_definition($args);
+            return $this->get_ui_definition($args);
 
-            wbc()->load->model('ui-builder');
-            \eo\wbc\model\UI_Builder::instance()->build($ui,'sp_variations_gallery_images_slider');
+            
             
         }else{  
 
@@ -97,7 +98,7 @@ class SP_Gallery_Slider extends \eo\wbc\controllers\publics\Controller{
         }
     }
 
-    private function get_ui_definition($args = array()){
+    protected function get_ui_definition($args = array()){
 
         if (!isset($args['data'])) {
 

@@ -57,24 +57,24 @@ class Controller extends \eo\wbc\controllers\Controller {
 
 	}
 
-	public function pre_process_form_definition($form_definition) {
+	public function pre_process_form_definition($form_definition,$args = array()) {
 		
 		$separator = wbc()->config->separator();
 
-		$count = -1;
-
 		// ACTIVE_TODO need to add recursion only till level 3 or 4 for replacingn {{id}} -- to s		
-		foreach($form_definition[0] as $key=>$value) {
+		foreach($form_definition as $tab_slug => $tab_data) {
 
-			foreach($key as $fdfk=>$fdfv) {
-				
-				$count++;
-
-				$dynamic_key[$fdfk.$separator.$count] = $fdfk;
-			
+			foreach($tab_data['form'] as $fdfk=>$fdfv) {
+					
+				if (strpos($fdfk,'{{id}}') !== false) {
+					
+					unset($form_definition[$tab_slug]['form'][$fdfk]);
+					$fdfk = (str_replace('{{id}}',$separator.$args['data']['id'].$separator,$fdfk));
+					$form_definition[$tab_slug]['form'][$fdfk] = $fdfv;
+				}
 			}
 		}
-		return $form_definition;
+		return $form_definition; 
 	}
 
 	public function get_form_defination($args = array()){

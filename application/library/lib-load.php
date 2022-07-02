@@ -86,7 +86,7 @@ if(!class_exists('WBC_Loader')) {
 			}			
 		}
 
-		public function template( $template_path, $data=array(),$is_template_dir_extended = false,$singleton_function = null,$is_return_template = false) {
+		public function template( $template_path, $data=array(),$is_template_dir_extended = false,$singleton_function = null,$is_return_template = false,$is_devices_templates = false) {
 			//	load template file under /view directory
 
 			$path = null;
@@ -95,8 +95,36 @@ if(!class_exists('WBC_Loader')) {
 			}else{
 				$path = constant('EOWBC_TEMPLATE_DIR').$template_path.".php";
 			}
-			$path = apply_filters('eowbc_template_path',$path,$template_path,$data);
+			
 
+			//devices templtes  
+			if($is_devices_templates){
+	        	$template_path_new = null;
+		        if(strpos($path,'{{template_key_device}}') !== FALSE){
+
+		            if (wbc_is_mobile()) {
+
+		                $template_path_new = str_replace('{{template_key_device}}','mobile',$path);
+
+		            }else{
+
+		                $template_path_new = str_replace('{{template_key_device}}','desktop',$path);
+		            }
+
+		            if (file_exists($template_path_new)) {
+		                
+		                $path = $template_path_new;
+		            }
+		           /* wbc_pr($path);
+		            wbc_pr($template_path_new);
+		            die();*/
+
+
+		        }
+		    }
+
+
+		    $path = apply_filters('eowbc_template_path',$path,$template_path,$data);
 
 			if(defined('EOWBC_TEMPLATE_DIR')) {
 				if( file_exists( $path ) ) {

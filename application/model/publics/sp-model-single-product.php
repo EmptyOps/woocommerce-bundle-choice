@@ -52,14 +52,14 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			// 		--	since swatches related woo hook is also providing or covering on most data so we may have limited needs for below fetch_data function to cover data requirements 
 			// 			--	or instead the below fetch_data should simply be called from within the woo swatches related hooks so that there is no unnecessary hook that we need to add. yeah this is good idea. 
 			// 				--	however even better is from inside that hook only get_data of this class will be called, so below call will remain here 
-			return \eo\wbc\model\publics\SP_WBC_Variations::fetch_data($for_section, $product, $args );	
+			return \eo\wbc\model\publics\data_model\SP_WBC_Variations::fetch_data($for_section, $product, $args );	
 		}elseif( $page_section == "get_default_gallery") {
 
-			return \eo\wbc\model\publics\SP_WBC_Variations::fetch_data($for_section, $product, $args );	
+			return \eo\wbc\model\publics\data_model\SP_WBC_Variations::fetch_data($for_section, $product, $args );	
 
 		}elseif( $page_section == "get_variation_gallery") {	
 
-			return \eo\wbc\model\publics\SP_WBC_Variations::fetch_data($for_section, $product, $args );	
+			return \eo\wbc\model\publics\data_model\SP_WBC_Variations::fetch_data($for_section, $product, $args );	
 
 		}	
 		
@@ -84,20 +84,24 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		/*---- move to public function render_variations_swatches() ma*/
 		if (false) {
 			add_action('wp_footer',function(){
+				/*ACTIVE_TODO_OC_START
 				--	check below two files and check if there is any optionsUI related flow there -- to b 
+				ACTIVE_TODO_OC_END*/
 				wbc()->theme->load('css','product');
 	        	wbc()->theme->load('js','product');
 				// Toggle Button
 				$toggle_status = true;
 				//wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_status',true);
 
-
+				/*ACTIVE_TODO_OC_START
 				--	and by default the expand collapse should be disabled, and when that is disabled nothing related to that will be loaded on frontend -- to b. if required ask t to take care of html css js etc -- to t 
+				ACTIVE_TODO_OC_END*/
 				$init_toggle = wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_init_status');			
 				
 				$toggle_text = wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_text',__('CUSTOMIZE THIS PRODUCT'));
-
+				/*ACTIVE_TODO_OC_START
 				--	have t update defaults to a general kind of theme -- to t. current style is so catchy and dark and need to have grayish like general theme that works mostly if not updated. 
+				ACTIVE_TODO_OC_END*/
 				// Variation item non-hovered
 				$dimention = wbc()->options->get_option('tiny_features','tiny_features_option_ui_option_dimention','2em');
 
@@ -377,12 +381,12 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 	public function render_gallery_images() {
 
-		if( \eo\wbc\controller\publics\variations\SP_Gallery_Slider::instance()->should_init() ) {
-			\eo\wbc\controller\publics\variations\SP_Gallery_Slider::instance()->init();
+		if( \eo\wbc\controllers\publics\variations\SP_Gallery_Slider::instance()->should_init() ) {
+			\eo\wbc\controllers\publics\variations\SP_Gallery_Slider::instance()->init();
 		}
 
-		if( \eo\wbc\controller\publics\variations\SP_Gallery_Zoom::instance()->should_init() ) {
-			\eo\wbc\controller\publics\variations\SP_Gallery_Zoom::instance()->init();
+		if( \eo\wbc\controllers\publics\variations\SP_Gallery_Zoom::instance()->should_init() ) {
+			\eo\wbc\controllers\publics\variations\SP_Gallery_Zoom::instance()->init();
 		}
 
 		// implement the hook in inline callback function here -- to d done
@@ -391,13 +395,21 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 		// add_action( 'after_setup_theme', array( $this, 'enable_theme_support' ), 200 );
 		add_action( 'after_setup_theme', function(){
-
+			/*ACTIVE_TODO_OC_START
+			ACTIVE_TODO we need to observer if it is actually required to enable it otherwise if it is creating any issue then we can simply disable
+			ACTIVE_TODO_OC_END*/
+			// WooCommerce.
+			/*add_theme_support( 'wc-product-gallery-zoom' );
+			add_theme_support( 'wc-product-gallery-lightbox' );
+			$this->gallery_thumbnail_image_width();*/
 		}, 200 );
 
-
+		/*ACTIVE_TODO_OC_START
 		we may not need to load any js from here, but still confirm and then comment -- to d
+		
 			// ACTIVE_TODO but yeah very soon for both gallery_images and swatches module we would like publich the init flags from here and if that is true then only init the respective modules on the js layer -- to d 
 		add_action( 'wp_footer', array( $this, 'slider_template_js' ) );
+		ACTIVE_TODO_OC_END*/
 
 		//create product-images.php file like in the other plugin that we were exploring have -- to b done
 			//--	and add below two hooks in this same render_image_gallery function -- to b done
@@ -411,16 +423,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 											//--	so add call from here at top in this function -- to b  done
 		
 
-		public function enable_theme_support() {
-
-			ACTIVE_TODO we need to observer if it is actually required to enable it otherwise if it is creating any issue then we can simply disable
-
-			// WooCommerce.
-			add_theme_support( 'wc-product-gallery-zoom' );
-			add_theme_support( 'wc-product-gallery-lightbox' );
-			$this->gallery_thumbnail_image_width();
-		}
-
+		/*ACTIVE_TODO_OC_START
 		public function gallery_thumbnail_image_width() {
 			// Set from gallery settings
 			$thumbnail_width = absint( woo_variation_gallery()->get_option( 'thumbnail_width', 100, 'woo_variation_gallery_thumbnail_width' ) );
@@ -472,8 +475,9 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 			do_action( 'woo_variation_gallery_enqueue_scripts', $this );
 		}
+		ACTIVE_TODO_OC_END*/
 
-
+		/*ACTIVE_TODO_OC_START
 		ACTIVE_TODO we may like to provide remove_featured_image setting on our admin 
 			--	t and a need make sure that this time you make the css structure precisely and maturely, like that is in sync with and based on the heirachiical classes structure we have planned -- to a and -- to t. it is a must. 
 				--	there should be dedicated classes for things like wbc-sp-variations-slider-video-thumb wbc-sp-variations-zoom-video-container wbc-sp-variations-zoom-darklight-container and so on. -- to t and -- to a and -- to b 
@@ -482,6 +486,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		we need to create zoom loop custom html tempalte that supports the mp4 videos 
 			--	what option do we have for the dom, I think its below two one is iframe and second is video tag, but not sure what are their pros and cons -- to t and -- to a 
 				--	brief about the pros and cons of both options -- to t and -- to a 
+		ACTIVE_TODO_OC_END*/
 		if ( ! $options['has_only_thumbnail'] ) {
 			if ( isset( $image['video_link'] ) && ! empty( $image['video_link'] ) && $image['video_embed_type'] === 'iframe' ) {
 				$template   = '<div class="wvg-single-gallery-iframe-container" style="padding-bottom: %d%%"><iframe src="%s" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div>';
@@ -493,112 +498,24 @@ class SP_Model_Single_Product extends SP_Single_Product {
 				$inner_html = sprintf( $template, $image['video_ratio'], $image['video_link'] );
 			}
 		}
+		/*ACTIVE_TODO_OC_START
+		what difference does it make when edit is used in the below function call, need to do research -- to d ACTIVE_TODO
+		ACTIVE_TODO_OC_END */
 
-		what difference does it make when edit is used in the below function call, need to do research -- to d ACTIVE_TODO 
-		$attachment_ids       = $product->get_gallery_image_ids( 'edit' );
-		$post_thumbnail_id    = $product->get_image_id( 'edit' );
-
+		/*ACTIVE_TODO_OC_START
 		firstly we need to create a standard ajax function in options controller -- to d 
 			then need to define some way in the bootstrap proces so that ajax function of this options controller gets callled on ajax -- to h. simply we can create a ajax function in the bootstrap process, or there is one already, and that function would call certain controllers ajax function when their applicable ajax action is detected? so maybe the ajax function will recieve the key of detected ajax action in its args param(so ajax function will have args param) 
 				--	then it can call set of functions of controller and model like get_data, selectron, selectron hook render, load view, getUI, render ui and so on but yeah it can not call the should_init and init. -- to d 
 					--	so just implement below four functions in the applicable function layers, with appropriate page_section key setting -- to d 
 						--	one important thing is that we will the merge the implementation of our get_available_variation hook callback function implementation in wbc variations class with below two functions, below two functions will simply inject their unique flows with proper if conditions -- to d 
 							--	however that need to be moved a common function with some name like get_available_variation_core and it will be private function in the same class with some more params with default values -- to d 
-		public function get_default_gallery_images( $product_id ) {
-
-			$product              = wc_get_product( $product_id );
-			$product_id           = $product->get_id();
-			$attachment_ids       = $product->get_gallery_image_ids( 'edit' );
-			$post_thumbnail_id    = $product->get_image_id( 'edit' );
-			$has_post_thumbnail   = has_post_thumbnail();
-			$images               = array();
-			$placeholder_image_id = get_option( 'woocommerce_placeholder_image', 0 );
-
-
-			/*if ( has_post_thumbnail( $product_id ) ) {
-				array_unshift( $gallery_images, get_post_thumbnail_id( $product_id ) );
-			}*/
-
-			$post_thumbnail_id = (int) apply_filters( 'woo_variation_gallery_post_thumbnail_id', $post_thumbnail_id, $attachment_ids, $product );
-			$attachment_ids    = (array) apply_filters( 'woo_variation_gallery_attachment_ids', $attachment_ids, $post_thumbnail_id, $product );
-
-
-			$remove_featured_image = wc_string_to_bool( woo_variation_gallery()->get_option( 'remove_featured_image', 'no', 'woo_variation_gallery_remove_featured_image' ) );
-
-
-			// IF PLACEHOLDER IMAGE HAVE VIDEO IT MAY NOT LOAD.
-			if ( ! empty( $post_thumbnail_id ) ) {
-				array_unshift( $attachment_ids, $post_thumbnail_id );
-			} else {
-				array_unshift( $attachment_ids, $placeholder_image_id );
-			}
-
-			if ( is_array( $attachment_ids ) && ! empty( $attachment_ids ) ) {
-
-				foreach ( $attachment_ids as $i => $image_id ) {
-
-					if ( $remove_featured_image && absint( $post_thumbnail_id ) == absint( $image_id ) ) {
-						continue;
-					}
-
-					$images[] = apply_filters( 'woo_variation_gallery_get_default_gallery_image', $this->get_product_attachment_props( $image_id, $product ), $product );
-				}
-			}
-
-			return apply_filters( 'woo_variation_gallery_get_default_gallery_images', $images, $product );
-		}
-
-		public function get_variation_gallery_images( $product_id ) {
-
-			$images               = array();
-			$available_variations = $this->get_available_variations( $product_id );
-
-			foreach ( $available_variations as $i => $variation ) {
-				array_push( $variation['variation_gallery_images'], $variation['image'] );
-			}
-
-			foreach ( $available_variations as $i => $variation ) {
-				foreach ( $variation['variation_gallery_images'] as $image ) {
-					array_push( $images, $image );
-				}
-			}
-
-			return apply_filters( 'woo_variation_gallery_get_variation_gallery_images', $images, $product_id );
-		}
-
-		public function get_default_gallery() {
-
-			ob_start();
-
-			if ( empty( $_POST ) || empty( $_POST['product_id'] ) ) {
-				wp_send_json( false );
-			}
-
-			$product_id = absint( $_POST['product_id'] );
-
-			$images = $this->get_default_gallery_images( $product_id );
-
-			wp_send_json( apply_filters( 'woo_variation_gallery_get_default_gallery', $images, $product_id ) );
-		}
-
-		public function get_variation_gallery() {
-
-			ob_start();
-
-			if ( empty( $_POST ) || empty( $_POST['product_id'] ) ) {
-				wp_send_json( false );
-			}
-
-			$product_id = absint( $_POST['product_id'] );
-
-			$images = $this->get_variation_gallery_images( $product_id );
-
-			wp_send_json( apply_filters( 'woo_variation_gallery_get_variation_gallery', $images, $product_id ) );
-		}
+		ACTIVE_TODO_OC_END*/
 
 		// move below hooks to the specific render_gallery_images and render_variations_swatches fucntions below. means both body_class and post_class hook, and also implement the woocommerce_post_class hook for both which is for now only for the gallery_images function only -- to b done 
 			// --	and in each hook add classes in this format for example wbc-sp-variations-swatches and wbc-sp-variations-swatches-rtl and wbc-sp-variations-swatches-post and wbc-sp-variations-swatches-post-rtl and wbc-sp-variations-swatches-woopost and so on. for theme it would be wbc-sp-variations-swatches-theme. and same for the gallery_images function also, of course. -- to b done  
+		/*ACTIVE_TODO_OC_START
 			--	regarding css, t be noted that it should go in appropriate asset files only. will discuss about that -- to t. 
+		ACTIVE_TODO_OC_END*/
 
 		add_filter( 'woocommerce_post_class', function( $classes, $product ) {
 
@@ -648,6 +565,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 				/*function variable_item( $type, $options, $args, $saved_attribute = array() ) {*/
 					//--- merged 
+					/*ACTIVE_TODO_OC_START
 					move to asana task like wbc templating. -- to d 
 						-- here we see that the different swatches templates that are supported are scattered around, but now it should be in the new template folder planned as per the templating standard 
 							--	there will be three template files that will be required for any widget that provides swatches UI 
@@ -662,6 +580,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 									--	and for extensions like darker lighter or 360 or recently purchased or diamond meta have their tempalte for image gallary then the folder structure would become single-product/image-gallery/ * /	and it would be needed for both recently purchased and the diamond meta -- to b 
 								--	and also accordingly you also need to precisely separate the below templates and put them in their owm dolers, as per above mentioned structure. do it accurately by following all the if and so on conditions below and in above function also -- to b 
 									--	and most of logic in this class also sound like the rendering logic so need to keep track of that also -- to b 
+					ACTIVE_TODO_OC_END*/
 						 
 					/*}*/
 
@@ -677,13 +596,15 @@ class SP_Model_Single_Product extends SP_Single_Product {
         	
 			$asset_params['toggle_status'] = true/*wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_status',true)*/;
 
-
+			/*ACTIVE_TODO_OC_START
 			--	and by default the expand collapse should be disabled, and when that is disabled nothing related to that will be loaded on frontend -- to b. if required ask t to take care of html css js etc -- to t 
+			ACTIVE_TODO_OC_END*/
 			$asset_params['init_toggle'] = wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_init_status');			
 			
 			$asset_params['toggle_text'] = wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_text',__('CUSTOMIZE THIS PRODUCT'));
-
-			--	have t update defaults to a general kind of theme -- to t. current style is so catchy and dark and need to have grayish like general theme that works mostly if not updated. 
+			/*ACTIVE_TODO_OC_START
+			--	have t update defaults to a general kind of theme -- to t. current style is so catchy and dark and need to have grayish like general theme that works mostly if not updated.
+			ACTIVE_TODO_OC_END */
 			// Variation item non-hovered
 			$asset_params['dimention'] = wbc()->options->get_option('tiny_features','tiny_features_option_ui_option_dimention','2em');
 
@@ -706,15 +627,16 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			$asset_params['bg_color'] = wbc()->options->get_option('tiny_features','tiny_features_option_ui_bg_color','#ffffff');
 
 			$asset_params['bg_hover_color'] = wbc()->options->get_option('tiny_features','tiny_features_option_ui_bg_color_hover','#DCC7C7');
-
+			/*ACTIVE_TODO_OC_START
 			--	and load asset function of this model from here, with page_section param -- to b 
 				--	and inside there put if condition for page_section and load asset from inside there like you did in some other model -- to b 
 					--	then remove all below css and js from here -- to b 
 
-			--	and do same all above for slider and zoom layers of their default implementation render layers also if not yet -- to b. note that it has nothing to do with their init_core and render_core fucntion. 
+			--	and do same all above for slider and zoom layers of their default implementation render layers also if not yet -- to b. note that it has nothing to do with their init_core and render_core fucntion.
+			ACTIVE_TODO_OC_END*/ 
 			ob_start();
 			?>
-				--- move to /woo-bundle-choice/asset/variations.assets.php file ma
+				//--- move to /woo-bundle-choice/asset/variations.assets.php file ma
 				<!-- <style type="text/css">
 					.ui.mini.images .variable-item.image{
 						width: auto;						
@@ -947,7 +869,9 @@ class SP_Model_Single_Product extends SP_Single_Product {
 	
 		// move below hooks to the specific render_gallery_images and render_variations_swatches fucntions below. means both body_class and post_class hook, and also implement the woocommerce_post_class hook for both which is for now only for the gallery_images function only -- to b done 
 			// --	and in each hook add classes in this format for example wbc-sp-variations-swatches and wbc-sp-variations-swatches-rtl and wbc-sp-variations-swatches-post and wbc-sp-variations-swatches-post-rtl and wbc-sp-variations-swatches-woopost and so on. for theme it would be wbc-sp-variations-swatches-theme. and same for the gallery_images function also, of course. -- to b done  
+			/*ACTIVE_TODO_OC_START
 			--	regarding css, t be noted that it should go in appropriate asset files only. will discuss about that -- to t. 
+			ACTIVE_TODO_OC_END*/
 					// --	move this point where below hooks are moved. -- to b done
 
 		add_filter( 'woocommerce_post_class', function( $classes, $product ) {
@@ -1004,8 +928,10 @@ class SP_Model_Single_Product extends SP_Single_Product {
        // first apply filter hook here with key default_sp_variations_swatches_variation_attribute_options_html -- to d or -- to b 
        // add filter to below hook simply from the swatches_init section of fetch_data functio n variations class -- to d done
         	//--	and then inside put an if condition that check the hook_args['type'](note the level of type param) against our sp_variations_swatches_supported_attribute_types function that is in the same class -- to d done
+        	/*ACTIVE_TODO_OC_START
         		--	and if condition is true for new hook below, then simply return is two elements is_return_default_html and html -- to d 
         			--	and then on the selectorn hook render layers instead of calling the templating layers flows just return the html if above flag is detected -- to d 
+        	ACTIVE_TODO_OC_END*/
 		if (apply_filters( 'default_sp_variations_swatches_variation_attribute_options_html', false, $args['hook_callback_args']['hook_args'], $args['hook_callback_args']['html'] ))
 		{
 			$data = array();			
@@ -1036,13 +962,17 @@ class SP_Model_Single_Product extends SP_Single_Product {
         if(\eo\wbc\model\SP_WBC_Compatibility::instance()->woo_general_broad_matters_compatability('woocommerce_configure_bundle')){
         	return $args['hook_callback_args']['html'];
         }
-
+        /*ACTIVE_TODO_OC_START
         --	fix the below get text call -- to d 
+        ACTIVE_TODO_OC_END*/
 		// For bundle Product static item
 		$args['hook_callback_args']['hook_args']['show_option_none'] = eowbc_lang_esc_html__( 'Choose an option', 'woo-variation-swatches' );
 
+		/*ACTIVE_TODO_OC_START
 		ACTIVE_TODO we also need to provide default setting and I think we can 
 		simply give dropdown with three options like default to image, button or dropdown_image 
+		ACTIVE_TODO_OC_END*/
+
 		// $is_default_to_image          = apply_filters( 'wvs_is_default_to_image', ! ! ( woo_variation_swatches()->get_option( 'default_to_image' ) ), $args['hook_callback_args']['hook_args'] );
 		// $is_default_to_button         = apply_filters( 'wvs_is_default_to_button', ! ! ( woo_variation_swatches()->get_option( 'default_to_button' ) ), $args['hook_callback_args']['hook_args'] );
 		// $default_image_type_attribute = apply_filters( 'wvs_default_image_type_attribute', woo_variation_swatches()->get_option( 'default_image_type_attribute' ), $args['hook_callback_args']['hook_args'] );
@@ -1054,8 +984,9 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		// $currency       = get_woocommerce_currency();
 
 
-
+		/*ACTIVE_TODO_OC_START
 		----------- most of is to be discared 
+		ACTIVE_TODO_OC_END*/
         $attribute_id = wc_variation_attribute_name( $args['hook_callback_args']['hook_args'][ 'attribute' ] );
         
         $attribute_name = sanitize_title( $args['hook_callback_args']['hook_args'][ 'attribute' ] );
@@ -1064,13 +995,18 @@ class SP_Model_Single_Product extends SP_Single_Product {
         $attribute = \eo\wbc\model\Category_Attribute::instance()->get_attribute(str_replace('pa_','',$args['hook_callback_args']['hook_args'][ 'attribute' ]));
 
         $product_id = $args['hook_callback_args']['hook_args'][ 'product' ]->get_id();
-        
+
+        /*ACTIVE_TODO_OC_START
 		----------- most of is to be discared 
+		ACTIVE_TODO_OC_END*/
 
 		//-- also call get_data of model from above the selectron is called for swatches, call with first param as swatches_init -- to b done
 			//--	and below call it with swatches only as first param -- to b done
 				// --	done	and in fetch_data function in wbc variations set proper if conditions there -- to ddddd 
+
+				/*ACTIVE_TODO_OC_START
 				--	ACTIVE_TODO and if required then in fetch_data swatches_init also there will be a binding to hook available_variation just like there is going to be for gallery_images_init. this is only modular and efficient way so for both will be separate and still it can use same callback function with page_section means swatches_init etc. param passed there also -- to d 
+				ACTIVE_TODO_OC_END*/
 
 		// ob_start();
 		$data = $this->get_data('swatches'); 
@@ -1106,7 +1042,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 
 
-
+        /*ACTIVE_TODO_OC_START
         //the rest of the broad flow would be like, the prepare_swatches_data will return back the prepared data to controller -- to b done
         	-- but for the below layers and above if is to be clearer yet -- to h 
         			//--	the flow will be like the prepare_swatches_data will prepare main and broad level data. get_data call is already done but follow points if ther are added any sub points below -- to b done
@@ -1149,7 +1085,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
         		--	and apart from load view the controller layer can additionally create render fucntions like render_image_gallery_template and so on are in model, for example render_variations_swatches_attribute_types to implement some specific logic or conditions but yeah the get ui definition will striictly be managed from controller layers as per fundamental mvc architecture. -- to h or -- to b. ACTIVE_TODO 
         			--	NOTE: now while all hooks required by above extensions and extensions can do their job using those hooks then so not sure if render_variations_swatches_attribute_types function in the model is necessary or not. 
 
-
+        	ACTIVE_TODO_OC_END*/
         	
 			if ( \eo\wbc\model\publics\data_model\SP_WBC_Variations::wc_product_has_attribute_type( $type, $args['hook_callback_args']['hook_args']['attribute'] ) ) {
 
@@ -1157,12 +1093,14 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 			} else{
 
+				/*ACTIVE_TODO_OC_START
 				ACTIVE_TODO need to implement the default implementation very soon. 
 
 
 
 				ACTIVE_TODO we may very soon like to do the logic of using variation image as the option image and something such 
 					--	and this point is related default settings planned above, means the default_image_type_attribute 
+				ACTIVE_TODO_OC_END*/
 				// if ( $default_image_type_attribute === '__max' ) {
 
 				// 	$attribute_counts = array();
@@ -1258,6 +1196,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 	public function render_gallery_images_template($args = array()){
 
 		add_filter( 'wc_get_template', function($template, $template_name){
+			
 			$old_template = $template;
 
 			// Disable gallery on specific product
@@ -1266,17 +1205,18 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			}
 
 			if ( $template_name == 'single-product/product-image.php' ) {
-				$template = constant('EOWBC_DIRECTORY').'templates/product-images.php';
+				$template = constant('EOWBC_DIRECTORY').'templates/single-product/product-images.php';
 			}
 
 			if ( $template_name == 'single-product/product-thumbnails.php' ) {
-				$template = constant('EOWBC_DIRECTORY').'templates/product-thumbnails.php';
+				$template = constant('EOWBC_DIRECTORY').'templates/single-product/product-thumbnails.php';
 			}
 
 			return $template;
 		}, 30, 2 );
 
 		add_filter( 'wc_get_template_part', function($template, $slug){
+			
 			$old_template = $template;
 
 			// Disable gallery on specific product
@@ -1285,12 +1225,12 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			}
 
 			if ( $slug == 'single-product/product-image' ) {
-				$template = constant('EOWBC_DIRECTORY').'templates/product-images.php';
+				$template = constant('EOWBC_DIRECTORY').'templates/single-product/product-images.php';
 
 			}
 
 			if ( $slug == 'single-product/product-thumbnails' ) {
-				$template = constant('EOWBC_DIRECTORY').'templates/product-thumbnails.php';
+				$template = constant('EOWBC_DIRECTORY').'templates/single-product/product-thumbnails.php';
 
 			}
 
@@ -1299,17 +1239,22 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 	}
 
-	public function render_gallery_images_template_callback($data,$args = array()){
+	public function render_gallery_images_template_callback($args = array()){
 
 		global $product;
 
+		/*ACTIVE_TODO_OC_START
 		----product no peramiter pass kervano baki che
-		$data = \eo\wbc\model\publics\SP_Model_Single_Product()::instance()->get_data('gallery_images');
+		ACTIVE_TODO_OC_END*/
+		$data = \eo\wbc\model\publics\SP_Model_Single_Product::instance()->get_data('gallery_images');
 
 		$data['gallery_images_template_data'] = array();
 
 		//here recieve the $data param of the caller function -- to b done
+
+		/*ACTIVE_TODO_OC_START
 			--	pass it in all three functions called below and prepare the daa in the heirachiical structure the way these loops and functions calls and data and template load sequence is -- to b 
+		ACTIVE_TODO_OC_END*/
 
 		// create two static methods in the wbc variations clas s, namely get_default_attributes and get_default_variation_id -- to d done
 		// 	and the move the respective logic from below to there -- to d done
@@ -1326,16 +1271,16 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 		$data['gallery_images_template_data']['default_attributes'] = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_default_attributes($data['gallery_images_template_data']['product_id']);
 
-		$data['gallery_images_template_data']['default_variation_id'] = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_default_variation_id($product, $data['attributes']);
+		$data['gallery_images_template_data']['default_variation_id'] = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_default_variation_id($product, $data['gallery_images_template_data']['default_attributes'] );
 
 		$data['gallery_images_template_data']['product_type'] = $product->get_type();
 
 		// ACTIVE_TODO we may like to use the columns var later to till gallery_images slider and zoom module layers including till applicable js layers -- to h or -- to d 
 		$data['gallery_images_template_data']['columns'] = -1;	//	thumbnail columns 
 
-		$data['gallery_images_template_data']['post_thumbnail_id'] = \eo\wbc\system\core\data_model\SP_Product::instance()->get_image_id($product);
+		$data['gallery_images_template_data']['post_thumbnail_id'] = \eo\wbc\system\core\data_model\SP_Product::get_image_id($product);
 
-		$data['gallery_images_template_data']['attachment_ids'] = \eo\wbc\system\core\data_model\SP_Product::instance()->get_gallery_image_ids($product);
+		$data['gallery_images_template_data']['attachment_ids'] = \eo\wbc\system\core\data_model\SP_Product::get_gallery_image_ids($product);
 
 		$data['gallery_images_template_data']['has_post_thumbnail'] = has_post_thumbnail();
 
@@ -1366,7 +1311,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		$data['gallery_images_template_data']['only_has_post_thumbnail'] = ( $data['gallery_images_template_data']['has_post_thumbnail'] && ( count( $data['gallery_images_template_data']['attachment_ids'] ) === 0 ) );
 
 		// $wrapper                          = sanitize_text_field( get_option( 'woo_variation_gallery_and_variation_wrapper', apply_filters( 'woo_variation_gallery_and_variation_default_wrapper', '.product' ) ) )
-
+		/*ACTIVE_TODO_OC_START
 		$slider_js_options = array(
 			'slidesToShow'   => 1,
 			'slidesToScroll' => 1,
@@ -1439,6 +1384,77 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 		$post_thumbnail_id = (int) apply_filters( 'woo_variation_gallery_post_thumbnail_id', $post_thumbnail_id, $attachment_ids, $product );
 		$attachment_ids    = (array) apply_filters( 'woo_variation_gallery_attachment_ids', $attachment_ids, $post_thumbnail_id, $product );
+		ACTIVE_TODO_OC_END*/
+
+		$data['gallery_images_template_data']['attachment_ids_loop_image'] = array();
+		$data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'] = array();
+		$data['gallery_images_template_data']['attachment_ids_loop_remove_featured_image'] = array();
+		$data['gallery_images_template_data']['attachment_ids_loop_classes'] = array();
+
+		if('variable' === $data['gallery_images_template_data']['product_type']){
+
+			if(!empty(isset( $data['gallery_images_template_data']['product_variation']['variation_gallery_images'] ))){
+			    
+			    foreach ($data['gallery_images_template_data']['product_variation']['variation_gallery_images'] as $index=>$image) {
+
+			       	
+
+			        $data['gallery_images_template_data']['attachment_ids_loop_image'][$index] = $image;
+			        $data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'][$index] = $product->get_image_id();
+
+			        $data['gallery_images_template_data']['attachment_ids_loop_remove_featured_image'][$index] = false;
+
+			        if ( $data['gallery_images_template_data']['attachment_ids_loop_remove_featured_image'][$index] && absint( $id ) == absint( $data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'][$index] ) ) {
+			            return '';
+			        }
+
+			        $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id] = array( '' );
+
+			        if ( isset( $data['gallery_images_template_data']['attachment_ids_loop_image'][$id]['video_link'] ) && ! empty( $data['gallery_images_template_data']['attachment_ids_loop_image'][$id]['video_link'] ) ) {
+			            array_push( $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id], '' );
+			        }
+
+			        //ACTIVE_TODO publish hook if required 
+			        // $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id] = apply_filters( '', $classes, $id, $image );
+			        
+			       //return '<div class="' . esc_attr( implode( ' ', array_map( 'sanitize_html_class', array_unique( $classes ) ) ) ) . '"><div>' . $inner_html . '</div></div>';
+	     
+			    }
+			}
+
+		}
+
+		else {
+			if(!empty($data['gallery_images_template_data']['attachment_ids'])){
+			    
+			    foreach ($data['gallery_images_template_data']['attachment_ids'] as $index=>$id) {
+
+			       	
+
+			        $data['gallery_images_template_data']['attachment_ids_loop_image'][$index] = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_product_attachment_props( $id );
+			        $data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'][$index] = $product->get_image_id();
+
+			        $data['gallery_images_template_data']['attachment_ids_loop_remove_featured_image'][$index] = false;
+
+			        if ( $data['gallery_images_template_data']['attachment_ids_loop_remove_featured_image'][$index] && absint( $id ) == absint( $data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'][$index] ) ) {
+			            return '';
+			        }
+
+			        $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id] = array( '' );
+
+			        if ( isset( $data['gallery_images_template_data']['attachment_ids_loop_image'][$id]['video_link'] ) && ! empty( $data['gallery_images_template_data']['attachment_ids_loop_image'][$id]['video_link'] ) ) {
+			            array_push( $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id], '' );
+			        }
+
+			        //ACTIVE_TODO publish hook if required 
+			        // $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id] = apply_filters( '', $classes, $id, $image );
+			        
+			       //return '<div class="' . esc_attr( implode( ' ', array_map( 'sanitize_html_class', array_unique( $classes ) ) ) ) . '"><div>' . $inner_html . '</div></div>';
+	     
+			    }
+			}
+		}
+
 
 		//bind to hook from here for the hook that is applied from both slider and zoom module for the images. means add filter here, and provide back with gallery_images data. so simply entire data var will be added to filter var but yeah the variation_gallery_images, attachment_ids etc. would be key -- to b done
 		add_filter('sp_slzm_slider_images',function($hook_data) use($data){
@@ -1458,6 +1474,8 @@ class SP_Model_Single_Product extends SP_Single_Product {
 				do_action( 'sp_variations_gallery_images_render');
 
 		//create list of woo hooks that are used below -- to d done
+
+			/*ACTIVE_TODO_OC_START
 			--wc_placeholder_img_src, gallery and slider templating layer ma implementation kervanu che -- to b
 			--woocommerce_single_product_image_thumbnail_html, gallery and slider templating layer ma implementation kervanu che -- to b
 
@@ -1468,39 +1486,8 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			    -- and also need to do the same for the swatches template layers also -- to d 
 			        -- and also do the same for respective template layers of applicable extensions for above two points -- to d 
 			-- and check if there are other such functions we need to respect and if there are then cover all three points below for them -- to d 	
-
-		$data['gallery_images_template_data']['attachment_ids_loop_image'] = array();
-		$data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'] = array();
-		$data['gallery_images_template_data']['attachment_ids_loop_remove_featured_image'] = array();
-		$data['gallery_images_template_data']['attachment_ids_loop_classes'] = array();
-
-		if(!empty($data['gallery_images_template_data']['attachment_ids'])){
-		    foreach ($data['gallery_images_template_data']['attachment_ids'] as $id) {
-
-		       
-		        $data['gallery_images_template_data']['attachment_ids_loop_image'][$id] = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_product_attachment_props( $id );
-		        $data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'][$id] = $product->get_image_id();
-
-		        $data['gallery_images_template_data']['attachment_ids_loop_remove_featured_image'][$id] = false;
-
-		        if ( $remove_featured_image && absint( $id ) == absint( $post_thumbnail_id ) ) {
-		            return '';
-		        }
-
-		        $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id] = array( '' );
-
-		        if ( isset( $image['video_link'] ) && ! empty( $image['video_link'] ) ) {
-		            array_push( $classes, '' );
-		        }
-
-		        //ACTIVE_TODO publish hook if required 
-		        $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id] = apply_filters( '', $classes, $id, $image );
-		       //return '<div class="' . esc_attr( implode( ' ', array_map( 'sanitize_html_class', array_unique( $classes ) ) ) ) . '"><div>' . $inner_html . '</div></div>';
-     
-		    }
-		}
-
-
+			ACTIVE_TODO_OC_END*/
+			return;
 		?>
 
 		<?php do_action( 'woo_variation_product_gallery_start', $product ); ?>
@@ -1573,6 +1560,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 		$data = $this->prepare_woo_dropdown_attribute_html_data($data,$args);
 
+		/*ACTIVE_TODO_OC_START
 		------------------a etlu wvs_default_button_variation_attribute_options alg che
 			--	for this need to compare default and take unique too -- to b 
 			$content = wvs_default_variable_item( $type, $options, $args );
@@ -1585,6 +1573,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 		$content = wvs_default_variable_item( $type, $options, $args );
 		-------
+		ACTIVE_TODO_OC_END*/
 		/*$content = wvs_variable_item( $type, $options, $args );*/
 
 		$data = $this->prepare_variable_item_data($data,$args);
@@ -1617,42 +1606,55 @@ class SP_Model_Single_Product extends SP_Single_Product {
 				'class'            => '',
 				'type'             => '',
 				'assigned'         => '',
+				/*ACTIVE_TODO_OC_START
 				fix the below get text call -- to d 
+				ACTIVE_TODO_OC_END*/
 				'show_option_none' => esc_html__( 'Choose an option', 'woo-variation-swatches' )
 			)
 		);
 
 		$data['woo_dropdown_attribute_html_data']['type']                  = $args['hook_callback_args']['hook_args'][ 'type' ];
+		/*ACTIVE_TODO_OC_START
 		--------------a etlu wvs_default_button_variation_attribute_options alg che
+		ACTIVE_TODO_OC_END*/
 		$data['woo_dropdown_attribute_html_data']['type']                  = $args['hook_callback_args']['hook_args']['type'] ? $args['hook_callback_args']['hook_args']['type'] : 'button';
+		/*ACTIVE_TODO_OC_START
 		------------------
+		ACTIVE_TODO_OC_END*/
 		$data['woo_dropdown_attribute_html_data']['options']               = $args['hook_callback_args']['hook_args']['options'];
 		$data['woo_dropdown_attribute_html_data']['product']               = $args['hook_callback_args']['hook_args']['product'];
 		$data['woo_dropdown_attribute_html_data']['attribute']             = $args['hook_callback_args']['hook_args']['attribute'];
-		$data['woo_dropdown_attribute_html_data']['name']                  = $args['hook_callback_args']['hook_args']['name'] ? $args['hook_callback_args']['hook_args']['name'] : \eo\wbc\system\core\data_model\SP_Attribute::instance()->variation_attribute_name($attribute);
+		$data['woo_dropdown_attribute_html_data']['name']                  = $args['hook_callback_args']['hook_args']['name'] ? $args['hook_callback_args']['hook_args']['name'] : \eo\wbc\system\core\data_model\SP_Attribute::variation_attribute_name($attribute);
 		$data['woo_dropdown_attribute_html_data']['id']                    = $args['hook_callback_args']['hook_args']['id'] ? $args['hook_callback_args']['hook_args']['id'] : sanitize_title( $attribute );
 		$data['woo_dropdown_attribute_html_data']['class']                 = $args['hook_callback_args']['hook_args']['class'];
 		$data['woo_dropdown_attribute_html_data']['show_option_none']      = $args['hook_callback_args']['hook_args']['show_option_none'] ? true : false;
 		$data['woo_dropdown_attribute_html_data']['show_option_none_text'] = $args['hook_callback_args']['hook_args']['show_option_none'] ? $args['hook_callback_args']['hook_args']['show_option_none'] : esc_html__( 'Choose an option', 'woocommerce' ); // We'll do our best to hide the placeholder, but we'll need to show something when resetting options.
 
 		if ( empty( $data['woo_dropdown_attribute_html_data']['options'] ) && ! empty( $data['woo_dropdown_attribute_html_data']['product'] ) && ! empty( $data['woo_dropdown_attribute_html_data']['attribute'] ) ) {
+			/*ACTIVE_TODO_OC_START
 			-- recieve data in function params to till this function, since I think we have exact same data on above layers but still confirm -- to b 
+			ACTIVE_TODO_OC_END*/
 			//$data['woo_dropdown_attribute_html_data']['attributes'] = $product->get_variation_attributes();
 			$data['woo_dropdown_attribute_html_data']['options']    = $attributes[ $data['woo_dropdown_attribute_html_data']['attribute']  ];
 		}
 
+		/*ACTIVE_TODO_OC_START
 		---------- move to /var/www/html/wp/wp-content/plugins/woo-bundle-choice/templates/single-product/variations-swatches/woo_dropdown_attribute/woo_dropdown_attribute.php file ma
 
 		--------------a etlu wvs_default_button_variation_attribute_options alg che
+		ACTIVE_TODO_OC_END*/
 		if ( $data['woo_dropdown_attribute_html_data']['product'] ) {
-			$data['woo_dropdown_attribute_html_data']['attribute_name'] = \eo\wbc\system\core\data_model\SP_Attribute::instance()->variation_attribute_name($attribute);
+			$data['woo_dropdown_attribute_html_data']['attribute_name'] = \eo\wbc\system\core\data_model\SP_Attribute::variation_attribute_name($attribute);
 
 			/*echo '<select id="' . esc_attr( $id ) . '" class="' . esc_attr( $class ) . ' hide woo-variation-raw-select woo-variation-raw-type-' . $type . '" style="display:none" name="' . esc_attr( $name ) . '" data-attribute_name="' . esc_attr( wc_variation_attribute_name( $attribute ) ) . '" data-show_option_none="' . ( $show_option_none ? 'yes' : 'no' ) . '">';*/
 
 		}
-		-----------------
+		/*ACTIVE_TODO_OC_START
+		------------------
+		
 
 		-------------- a etlu wvs_default_image_variation_attribute_options alg che
+		ACTIVE_TODO_OC_END*/
 		if ( $data['woo_dropdown_attribute_html_data']['product'] ) {
 
 
@@ -1662,14 +1664,16 @@ class SP_Model_Single_Product extends SP_Single_Product {
 				echo '<select id="' . esc_attr( $id ) . '" class="' . esc_attr( $class ) . ' hide woo-variation-raw-select woo-variation-raw-type-' . $type . '" style="display:none" name="' . esc_attr( $name ) . '" data-attribute_name="' . esc_attr( wc_variation_attribute_name( $attribute ) ) . '" data-show_option_none="' . ( $show_option_none ? 'yes' : 'no' ) . '">';
 			}*/
 		}
-		-------------
+		/*ACTIVE_TODO_OC_START
+		------------------
+		ACTIVE_TODO_OC_END*/
 		/*if ( $data['woo_dropdown_attribute_html_data']['product'] && taxonomy_exists( $data['woo_dropdown_attribute_html_data']['attribute'] ) ) {
 			echo '<select id="' . esc_attr( $id ) . '" class="' . esc_attr( $class ) . ' hide woo-variation-raw-select woo-variation-raw-type-' . esc_attr( $type ) . '" style="display:none" name="' . esc_attr( $name ) . '" data-attribute_name="' . esc_attr( wc_variation_attribute_name( $attribute ) ) . '" data-show_option_none="' . ( $show_option_none ? 'yes' : 'no' ) . '">';
 		} else {
 			echo '<select id="' . esc_attr( $id ) . '" class="' . esc_attr( $class ) . '" name="' . esc_attr( $name ) . '" data-attribute_name="' . esc_attr( wc_variation_attribute_name( $attribute ) ) . '" data-show_option_none="' . ( $show_option_none ? 'yes' : 'no' ) . '">';
 		}*/
 
-		----- move to /woo-bundle-choice/templates/single-product/variations-swatches/woo_dropdown_attribute/woo_dropdown_attribute-template_part.php file ma
+		//----- move to /woo-bundle-choice/templates/single-product/variations-swatches/woo_dropdown_attribute/woo_dropdown_attribute-template_part.php file ma
 		/*if ( $args['hook_callback_args']['hook_args']['show_option_none'] ) {
 			echo '<option value="">' . esc_html( $show_option_none_text ) . '</option>';
 		}*/
@@ -1677,13 +1681,13 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		if ( ! empty( $data['woo_dropdown_attribute_html_data']['options'] ) ) {
 			if ( $data['woo_dropdown_attribute_html_data']['product'] && taxonomy_exists( $data['woo_dropdown_attribute_html_data']['attribute'] ) ) {
 				// Get terms if this is a taxonomy - ordered. We need the names too.
-				$data['woo_dropdown_attribute_html_data']['terms'] = \eo\wbc\system\core\data_model\SP_Attribute::instance()->get_product_terms( $data['woo_dropdown_attribute_html_data']['product']->get_id(), $data['woo_dropdown_attribute_html_data']['attribute'], array( 'fields' => 'all' ) );
+				$data['woo_dropdown_attribute_html_data']['terms'] = \eo\wbc\system\core\data_model\SP_Attribute::get_product_terms( $data['woo_dropdown_attribute_html_data']['product']->get_id(), $data['woo_dropdown_attribute_html_data']['attribute'], array( 'fields' => 'all' ) );
 
 				$data['woo_dropdown_attribute_html_data']['options_loop_selected'] = array();
 				$data['woo_dropdown_attribute_html_data']['options_loop_option_name'] = array();
 				foreach ( $data['woo_dropdown_attribute_html_data']['terms'] as $term ) {
 					if ( in_array( $term->slug, $data['woo_dropdown_attribute_html_data']['options'], true ) ) {
-						$data['woo_dropdown_attribute_html_data']['options_loop_option_name'][$term->slug] = \eo\wbc\system\core\data_model\SP_Attribute::instance()->variation_option_name( $term_name, $term, $attribute, $product);
+						$data['woo_dropdown_attribute_html_data']['options_loop_option_name'][$term->slug] = \eo\wbc\system\core\data_model\SP_Attribute::variation_option_name( $term_name, $term, $attribute, $product);
 						/*echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) ) . '</option>';*/
 					}
 				}
@@ -1695,7 +1699,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 					// This handles < 2.4.0 bw compatibility where text attributes were not sanitized.
 					$data['woo_dropdown_attribute_html_data']['options_loop_selected'][$option] = sanitize_title( $args['hook_callback_args']['hook_args']['selected'] ) === $args['hook_callback_args']['hook_args']['selected'] ? selected( $args['hook_callback_args']['hook_args']['selected'], sanitize_title( $option ), false ) : selected( $args['hook_callback_args']['hook_args']['selected'], $option, false );
 
-					$data['woo_dropdown_attribute_html_data']['options_loop_option_name'][$option] = \eo\wbc\system\core\data_model\SP_Attribute::instance()->variation_option_name( $term_name, $term, $attribute, $product);
+					$data['woo_dropdown_attribute_html_data']['options_loop_option_name'][$option] = \eo\wbc\system\core\data_model\SP_Attribute::variation_option_name( $term_name, $term, $attribute, $product);
 					/*echo '<option value="' . esc_attr( $option ) . '" ' . $selected . '>' . esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) . '</option>';*/
 				}
 			}
@@ -1713,7 +1717,9 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		$data['variable_item_data']['product']   = $data['woo_dropdown_attribute_html_data']['product'];
 		$data['variable_item_data']['attribute'] = $data['woo_dropdown_attribute_html_data']['attribute'];
 		$data['variable_item_data']['data']      = '';
+		/*ACTIVE_TODO_OC_START
 		--------- a etlu wvs_default_variable_item alg che
+		ACTIVE_TODO_OC_END*/
 			$data['variable_item_data']['assigned']  = $data['woo_dropdown_attribute_html_data']['args']['assigned'];
 
 			$data['variable_item_data']['is_archive']           = ( isset( $data['woo_dropdown_attribute_html_data']['args']['is_archive'] ) && $data['woo_dropdown_attribute_html_data']['args']['is_archive'] );
@@ -1724,20 +1730,25 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			if ( isset( $data['woo_dropdown_attribute_html_data']['args']['fallback_type'] ) && $data['woo_dropdown_attribute_html_data']['args']['fallback_type'] === 'select' ) {
 				//	return '';
 			}
+		/*ACTIVE_TODO_OC_START
 		-----
 		------- m have this additional
+		ACTIVE_TODO_OC_END*/
 			$data['variable_item_data']['id'] = $data['woo_dropdown_attribute_html_data']['args'][ 'id' ] ? $data['woo_dropdown_attribute_html_data']['args'][ 'id' ] : sanitize_title( $data['variable_item_data']['attribute'] );
+		/*ACTIVE_TODO_OC_START
 		-------
+		ACTIVE_TODO_OC_END*/
 
 		if ( ! empty( $data['woo_dropdown_attribute_html_data']['options'] ) ) {
 			if ( $data['woo_dropdown_attribute_html_data']['product'] && taxonomy_exists( $data['variable_item_data']['attribute'] ) ) {
 
-				$data['variable_item_data']['terms'] = \eo\wbc\system\core\data_model\SP_Attribute::instance()->get_product_terms( $data['woo_dropdown_attribute_html_data']['product']->get_id(), $data['variable_item_data']['attribute'], array( 'fields' => 'all' ) );
+				$data['variable_item_data']['terms'] = \eo\wbc\system\core\data_model\SP_Attribute::get_product_terms( $data['woo_dropdown_attribute_html_data']['product']->get_id(), $data['variable_item_data']['attribute'], array( 'fields' => 'all' ) );
 
-				$data['variable_item_data']['name']  = uniqid( \eo\wbc\system\core\data_model\SP_Attribute::instance()->variation_attribute_name( $data['variable_item_data']['attribute'] ) );
-				
+				$data['variable_item_data']['name']  = uniqid( \eo\wbc\system\core\data_model\SP_Attribute::variation_attribute_name( $data['variable_item_data']['attribute'] ) );
+				/*ACTIVE_TODO_OC_START
 				keep it and use below data params to make our tempalte dynamic -- to b 	
 				------- m have this additional
+				ACTIVE_TODO_OC_END*/
 				if(in_array($data['woo_dropdown_attribute_html_data']['type'],array('dropdown_image','dropdown_image_only','dropdown'))) {
 					$data['variable_item_data']['selected_item'] = sanitize_title( $data['woo_dropdown_attribute_html_data']['args'][ 'selected' ] );
 					if(!empty($data['variable_item_data']['selected_item'])){
@@ -1746,14 +1757,14 @@ class SP_Model_Single_Product extends SP_Single_Product {
 							$data['variable_item_data']['image_url'] = get_term_meta( $data['variable_item_data']['selected_item']->term_id, 'wbc_attachment', true );
 							
 							if($data['woo_dropdown_attribute_html_data']['type']=='dropdown_image' and !empty($data['variable_item_data']['image_url'])) {
-								--- move to woo-bundle-choice/templates/single-product/variations-swatches/dropdown_image/sp_variations_optionsUI-dropdown_image-option_template_part.php file
+								//--- move to woo-bundle-choice/templates/single-product/variations-swatches/dropdown_image/sp_variations_optionsUI-dropdown_image-option_template_part.php file
 								/*$selected_item =  sprintf( '<img class="ui mini avatar image" src="%s">%s', esc_url( $image_url ),esc_attr( $selected_item->name ));*/
 								
 							} elseif ($data['woo_dropdown_attribute_html_data']['type']=='dropdown_image_only' and !empty($data['variable_item_data']['image_url'])) {
-								--- move to /woo-bundle-choice/templates/single-product/variations-swatches/dropdown_image_only/sp_variations_optionsUI-dropdown_image_only-option_template_part.php file 
+								//--- move to /woo-bundle-choice/templates/single-product/variations-swatches/dropdown_image_only/sp_variations_optionsUI-dropdown_image_only-option_template_part.php file 
 								/*$selected_item =  sprintf( '<img class="ui mini avatar image" src="%s">', esc_url( $image_url ));*/
 							} else {
-								move to /woo-bundle-choice/templates/single-product/variations-swatches/dropdown/sp_variations_optionsUI-dropdown-option_template_part.php file
+								//move to /woo-bundle-choice/templates/single-product/variations-swatches/dropdown/sp_variations_optionsUI-dropdown-option_template_part.php file
 								/*$selected_item =  sprintf( '%s',esc_attr( $selected_item->name ));*/
 							}
 						} else {
@@ -1762,18 +1773,18 @@ class SP_Model_Single_Product extends SP_Single_Product {
 					} else{
 						$data['variable_item_data']['selected_item'] ='Choose an option';
 					}
-					----- move to woo-bundle-choice/templates/single-product/variations-swatches/sp_variations_optionsUI-dropdown-image-image_only.php ma
+					//----- move to woo-bundle-choice/templates/single-product/variations-swatches/sp_variations_optionsUI-dropdown-image-image_only.php ma
 					/*$data.=sprintf( '<div class="ui fluid selection dropdown" style="min-height: auto;">
 							  <input type="hidden" name="attribute_%s" data-attribute_name="attribute_%s" data-id="%s">
 							  <i class="dropdown icon"></i>
 							  <div class="default text">%s</div>
 							  <div class="menu">',esc_attr( $attribute ),esc_attr( $attribute ),esc_attr( $attribute ),$selected_item);*/
 				}
-				-------------------
+				//-------------------
 				
 				//below moved section should be moved to template part, which would be common amongst non dropdown types. so need to move in a common template part file(and create one if not yet there), and from this file also load dropdown types, which are skipped here but we can manage in some if/else conddition below -- to b done
 				//------- m have this additional
-				--- move to woo-bundle-choice/templates/single-product/variations-swatches/sp_variations_optionsUI-common-option_template_part.php ma
+				//--- move to woo-bundle-choice/templates/single-product/variations-swatches/sp_variations_optionsUI-common-option_template_part.php ma
 				/*foreach ( $terms as $term ) {
 					if ( in_array( $term->slug, $options ) ) {
 						$selected_class = ( sanitize_title( $args[ 'selected' ] ) == $term->slug ) ? 'selected' : '';
@@ -1792,10 +1803,11 @@ class SP_Model_Single_Product extends SP_Single_Product {
 					}
 				}*/
 					// ----------
-
+				/*ACTIVE_TODO_OC_START
 				and will us e below being prepared data for applying in above templates -- to b 
 					--	and apply the optimum number of properties, html attr/class etc from below to above tempaltes. but yeah can skip the tooltip -- to b 
 						--	and if there properties in below data which we should implement but if it is not feasible in 1st revision then mark as active to do -- to b 
+				ACTIVE_TODO_OC_END*/
 
 				$data['variable_item_data']['options_loop_option'] = array();
 				$data['variable_item_data']['options_loop_is_selected'] = array();
@@ -1815,7 +1827,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 						// aria-checked="false"
 						// $data['variable_item_data'][$term->slug]['option'] = esc_html( apply_filters( 'woocommerce_variation_option_name', $term->name, $term, $data['variable_item_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product'] ) );
-						$data['variable_item_data']['options_loop_option'][$term->slug] = esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name($term->name, $term, $data['variable_item_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product'] ) );
+						$data['variable_item_data']['options_loop_option'][$term->slug] = esc_html( \eo\wbc\system\core\data_model\SP_Attribute::variation_option_name($term->name, $term, $data['variable_item_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product'] ) );
 
 						$data['variable_item_data']['options_loop_is_selected'][$term->slug]    = ( sanitize_title( $data['woo_dropdown_attribute_html_data']['args']['selected'] ) == $term->slug );
 						$data['variable_item_data']['options_loop_selected_class'][$term->slug] = $data['variable_item_data']['options_loop_is_selected'][$term->slug] ? 'selected' : '';
@@ -1826,79 +1838,92 @@ class SP_Model_Single_Product extends SP_Single_Product {
 						$data['variable_item_data']['options_loop_selected_class'][$term->slug] = ( sanitize_title( $data['woo_dropdown_attribute_html_data']['args'][ 'selected' ] ) == $term->slug ) ? 'selected' : '';
 
 
-
+						/*ACTIVE_TODO_OC_START
 						--------- a etlu wvs_default_variable_item alg che
+						ACTIVE_TODO_OC_END*/
 							if ( $data['variable_item_data']['is_archive'] && ! $data['variable_item_data']['show_archive_tooltip'] ) {
 								$data['variable_item_data']['options_loop_tooltip'][$term->slug] = false;
 							}
-						--------
+						//--------
 						$data['variable_item_data']['options_loop_tooltip_html_attr'][$term->slug]       = ! empty( $data['variable_item_data']['options_loop_tooltip'][$term->slug] ) ? sprintf( ' data-wvstooltip="%s"', esc_attr( $data['variable_item_data']['options_loop_tooltip'][$term->slug] ) ) : '';
 						$data['variable_item_data']['options_loop_screen_reader_html_attr'][$term->slug] = $data['variable_item_data']['options_loop_is_selected'][$term->slug] ? ' aria-checked="true"' : ' aria-checked="false"';
 
 						if ( wp_is_mobile() ) {
 							$data['variable_item_data']['options_loop_tooltip_html_attr'][$term->slug] .= ! empty( $data['variable_item_data']['options_loop_tooltip'][$term->slug] ) ? ' tabindex="2"' : '';
 						}
-
+						/*ACTIVE_TODO_OC_START
 						--------- a etlu wvs_default_variable_item alg che
+						ACTIVE_TODO_OC_END*/
 							$data['variable_item_data']['options_loop_type'][$term->slug] = isset( $data['variable_item_data']['assigned'][ $term->slug ] ) ? $data['variable_item_data']['assigned'][ $term->slug ]['type'] : $data['woo_dropdown_attribute_html_data']['type'];
 
 							if ( ! isset( $data['variable_item_data']['assigned'][ $term->slug ] ) || empty( $data['variable_item_data']['assigned'][ $term->slug ]['image_id'] ) ) {
 								$data['variable_item_data']['options_loop_type'][$term->slug] = 'button';
 							}
+						/*ACTIVE_TODO_OC_START
 						-------
 
 						so instead of below templates our tempaltes will be above ones but take note of unique flow or data that we may like to apply -- to b 
 						$data .= sprintf( '<li %1$s class="variable-item %2$s-variable-item %2$s-variable-item-%3$s %4$s" title="%5$s" data-title="%5$s" data-value="%3$s" role="radio" tabindex="0"><div class="variable-item-contents">', $data['variable_item_data']['options_loop_screen_reader_html_attr'][$term->slug] . $data['variable_item_data']['options_loop_tooltip_html_attr'][$term->slug], esc_attr( $data['variable_item_data']['options_loop_type'][$term->slug] ), esc_attr( $term->slug ), esc_attr( $data['variable_item_data']['options_loop_selected_class'][$term->slug] ), $data['variable_item_data']['options_loop_option'][$term->slug] );
+						--	and same for the many commented templates in the switch case statement below -- to b 
+						ACTIVE_TODO_OC_END*/
 
 						switch ( $data['variable_item_data']['options_loop_type'][$term->slug] ):
 							case 'color':
 
 								$data['variable_item_data']['options_loop_color'][$term->slug]['color'] = sanitize_hex_color( wvs_get_product_attribute_color( $term ) );
-								$data  .= sprintf( '<span class="variable-item-span variable-item-span-%s" style="background-color:%s;"></span>', esc_attr( $data['variable_item_data']['options_loop_type'][$term->slug] ), esc_attr( $color ) );
+								// $data  .= sprintf( '<span class="variable-item-span variable-item-span-%s" style="background-color:%s;"></span>', esc_attr( $data['variable_item_data']['options_loop_type'][$term->slug] ), esc_attr( $color ) );
 
 								$data['variable_item_data']['options_loop_color'][$term->slug]['color'] = sanitize_hex_color( get_term_meta( $term->term_id, 'wbc_color', true ) );
 
 								break;
 
 							case 'image':
+								/*ACTIVE_TODO_OC_START
 								--------- a etlu wvs_default_variable_item alg che
+								ACTIVE_TODO_OC_END*/
 									$data['variable_item_data']['options_loop_attachment_id'][$term->slug] = $data['variable_item_data']['assigned'][ $term->slug ]['image_id'];
 									$data['variable_item_data']['options_loop_image_size'][$term->slug]    = sanitize_text_field( woo_variation_swatches()->get_option( 'attribute_image_size' ) );
-								-------
+								//-------
 								$data['variable_item_data']['options_loop_attachment_id'][$term->slug] = apply_filters( 'wvs_product_global_attribute_image_id', absint( wvs_get_product_attribute_image( $term ) ), $term, $data['woo_dropdown_attribute_html_data']['args'] );
 								$data['variable_item_data']['options_loop_image_size'][$term->slug]    = woo_variation_swatches()->get_option( 'attribute_image_size' );
+								/*ACTIVE_TODO_OC_START
 								-- ACTIVE_TODO hier manage size width etc image properties
+								ACTIVE_TODO_OC_END*/
 								$data['variable_item_data']['options_loop_image'][$term->slug]         = get_term_meta( $term->term_id, 'wbc_attachment', true );/*wp_get_attachment_image_src( $data['variable_item_data']['options_loop_attachment_id'][$term->slug]['attachment_id'], apply_filters( 'wvs_product_attribute_image_size', $data['variable_item_data']['options_loop_image_size'][$term->slug]['image_size'], $data['variable_item_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product'] ) );*/
 
-								$data .= sprintf( '<img class="variable-item-image" aria-hidden="true" alt="%s" src="%s" width="%d" height="%d" />', esc_attr( $data['variable_item_data']['options_loop_option'][$term->slug] ), esc_url( $image[0] ), esc_attr( $image[1] ), esc_attr( $image[2] ) );
+								// $data .= sprintf( '<img class="variable-item-image" aria-hidden="true" alt="%s" src="%s" width="%d" height="%d" />', esc_attr( $data['variable_item_data']['options_loop_option'][$term->slug] ), esc_url( $image[0] ), esc_attr( $image[1] ), esc_attr( $image[2] ) );
 
 								break;
 
 
 							case 'button':
-								$data .= sprintf( '<span class="variable-item-span variable-item-span-%s">%s</span>', esc_attr( $data['variable_item_data']['options_loop_type'][$term->slug] ), $data['variable_item_data']['options_loop_option'][$term->slug] );
+								// $data .= sprintf( '<span class="variable-item-span variable-item-span-%s">%s</span>', esc_attr( $data['variable_item_data']['options_loop_type'][$term->slug] ), $data['variable_item_data']['options_loop_option'][$term->slug] );
 								break;
 
 							case 'radio':
 								$data['variable_item_data']['options_loop_id'][$term->slug]    = uniqid( $term->slug );
-								$data .= sprintf( '<input name="%1$s" id="%2$s" class="wvs-radio-variable-item" %3$s  type="radio" value="%4$s" data-title="%5$s" data-value="%4$s" /><label for="%2$s">%5$s</label>', $name, $id, checked( sanitize_title( $data['woo_dropdown_attribute_html_data']['args']['selected'] ), $term->slug, false ), esc_attr( $term->slug ), $data['variable_item_data']['options_loop_option'][$term->slug] );
+								// $data .= sprintf( '<input name="%1$s" id="%2$s" class="wvs-radio-variable-item" %3$s  type="radio" value="%4$s" data-title="%5$s" data-value="%4$s" /><label for="%2$s">%5$s</label>', $name, $id, checked( sanitize_title( $data['woo_dropdown_attribute_html_data']['args']['selected'] ), $term->slug, false ), esc_attr( $term->slug ), $data['variable_item_data']['options_loop_option'][$term->slug] );
 								break;
 
 							default:
-								$data .= apply_filters( 'wvs_variable_default_item_content', '', $term, $data['woo_dropdown_attribute_html_data']['args'], $saved_attribute );
+								// $data .= apply_filters( 'wvs_variable_default_item_content', '', $term, $data['woo_dropdown_attribute_html_data']['args'], $saved_attribute );
 								break;
 						endswitch;
-						$data .= '</div></li>';
+						// $data .= '</div></li>';
 					}
 				}
+				/*ACTIVE_TODO_OC_START
 				------- m have this additional
 				----- move to woo-bundle-choice/templates/single-product/variations-swatches/sp_variations_optionsUI-dropdown-image-image_only-ribbon_wrapper.php ma
+				ACTIVE_TODO_OC_END*/
 				/*if(in_array($type,array('dropdown_image','dropdown_image_only','dropdown'))) {
 					$data.=sprintf('</div></div>');
 				}*/
-				------
+				//------
 			}
+			/*ACTIVE_TODO_OC_START
 			--------- a etlu wvs_default_variable_item alg che
+			ACTIVE_TODO_OC_END*/
 				else{
 
 					$data['variable_item_data']['options_loop_option'] = array();
@@ -1940,32 +1965,35 @@ class SP_Model_Single_Product extends SP_Single_Product {
 							$data['variable_item_data']['options_loop_type'][$term->slug] = 'button';
 						}
 
-						$data .= sprintf( '<li %1$s class="variable-item %2$s-variable-item %2$s-variable-item-%3$s %4$s" title="%5$s" data-title="%5$s"  data-value="%3$s" role="radio" tabindex="0"><div class="variable-item-contents">', $screen_reader_html_attr . $tooltip_html_attr, esc_attr( $data['variable_item_data']['options_loop_type'][$term->slug] ), esc_attr( $data['variable_item_data']['options_loop_option'][$term->slug] ), esc_attr( $data['variable_item_data']['options_loop_selected_class'][$term->slug] ), esc_html( $data['variable_item_data']['options_loop_option'][$term->slug] ) );
+						/*ACTIVE_TODO_OC_START
+						so instead of below templates our tempaltes will be above ones but take note of unique flow or data that we may like to apply -- to b 
+						--	and same for the many commented templates in the switch case statement below -- to b 
+						ACTIVE_TODO_OC_END*/
 
 						switch ( $data['variable_item_data']['options_loop_type'][$term->slug] ):
 
 							case 'image':
-								$data['variable_item_data']['options_loop_attachment_id'][$term->slug = $data['variable_item_data']['assigned'][ $data['variable_item_data']['options_loop_option'][$term->slug] ]['image_id'];
+								$data['variable_item_data']['options_loop_attachment_id'][$term->slug] = $data['variable_item_data']['assigned'][ $data['variable_item_data']['options_loop_option'][$term->slug] ]['image_id'];
 								$data['variable_item_data']['options_loop_image_size'][$term->slug]    = sanitize_text_field( woo_variation_swatches()->get_option( 'attribute_image_size' ) );
 								$data['variable_item_data']['options_loop_image'][$term->slug]         = wp_get_attachment_image_src( $data['variable_item_data']['options_loop_attachment_id'][$term->slug], apply_filters( 'wvs_product_attribute_image_size', $data['variable_item_data']['options_loop_image_size'][$term->slug], $data['variable_item_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product'] ) );
 
-								$data .= sprintf( '<img class="variable-item-image" aria-hidden="true" alt="%s" src="%s" width="%d" height="%d" />', esc_attr( $option ), esc_url( $image[0] ), esc_attr( $image[1] ), esc_attr( $image[2] ) );
+								// $data .= sprintf( '<img class="variable-item-image" aria-hidden="true" alt="%s" src="%s" width="%d" height="%d" />', esc_attr( $option ), esc_url( $image[0] ), esc_attr( $image[1] ), esc_attr( $image[2] ) );
 								// $data .= $image_html;
 								break;
 
 
 							case 'button':
-								$data .= sprintf( '<span class="variable-item-span variable-item-span-%s">%s</span>', esc_attr( $data['variable_item_data']['options_loop_type'][$term->slug] ), esc_html( $option ) );
+								// $data .= sprintf( '<span class="variable-item-span variable-item-span-%s">%s</span>', esc_attr( $data['variable_item_data']['options_loop_type'][$term->slug] ), esc_html( $option ) );
 								break;
 
 							default:
-								$data .= apply_filters( 'wvs_variable_default_item_content', '', $option, $data['woo_dropdown_attribute_html_data']['args'], array() );
+								// $data .= apply_filters( 'wvs_variable_default_item_content', '', $option, $data['woo_dropdown_attribute_html_data']['args'], array() );
 								break;
 						endswitch;
-						$data .= '</div></li>';
+						// $data .= '</div></li>';
 					}
 				}
-			--------------
+			//--------------
 		}
 		
 		return $data;
@@ -1975,10 +2003,11 @@ class SP_Model_Single_Product extends SP_Single_Product {
 	public function prepare_variable_item_wrapper_data ($data,$args = array()){
 
 		$data['variable_item_wrapper_data'] = array();
-
+		/*ACTIVE_TODO_OC_START
 		keep and make use of below data and load below ribbon wrapper tempalte -- to b 
 			--	on this note the actual ribbon wrapper tempalte is below one, so move it there -- to b 
 		------- m have this additional
+		ACTIVE_TODO_OC_END*/
 			$data['variable_item_wrapper_data']['attribute_object'] = $data['woo_dropdown_attribute_html_data']['args']['attribute_object'];
 
 			$data['variable_item_wrapper_data']['css_classes'] = array("{$data['woo_dropdown_attribute_html_data']['type']}-variable-wrapper");
@@ -1986,24 +2015,24 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			$data['variable_item_wrapper_data']['ribbon_color'] = get_term_meta( $data['variable_item_wrapper_data']['attribute_object']->attribute_id,'wbc_ribbon_color',true);
 
 
-			$data = sprintf( '<div class="ui segment">
-	  		    <span class="ui ribbon label" style="background-color:%s;border-color:%s;color:white;">%s</span><span><ul class="ui mini images variable-items-wrapper %s" data-attribute_name="%s">%s</ul></span></div>',$ribbon_color,$ribbon_color,$attribute_object->attribute_label,trim( implode( ' ', array_unique( $css_classes ) ) ), esc_attr( \eo\wbc\system\core\data_model\SP_Attribute::instance()->variation_attribute_name($attribute) ), $contents );
-		-------------
+			// $data = sprintf( '<div class="ui segment">
+	  // 		    <span class="ui ribbon label" style="background-color:%s;border-color:%s;color:white;">%s</span><span><ul class="ui mini images variable-items-wrapper %s" data-attribute_name="%s">%s</ul></span></div>',$ribbon_color,$ribbon_color,$attribute_object->attribute_label,trim( implode( ' ', array_unique( $css_classes ) ) ), esc_attr( \eo\wbc\system\core\data_model\SP_Attribute::instance()->variation_attribute_name($attribute) ), $contents );
+		//-------------
 
 		$data['variable_item_wrapper_data']['attribute'] = $data['woo_dropdown_attribute_html_data']['args']['attribute'];
 		$data['variable_item_wrapper_data']['options']   = $data['woo_dropdown_attribute_html_data']['args']['options'];
 
 		$data['variable_item_wrapper_data']['css_classes'] = apply_filters( 'wvs_variable_items_wrapper_class', array( "{$data['woo_dropdown_attribute_html_data']['type']}-variable-wrapper" ), $data['woo_dropdown_attribute_html_data']['type'], $data['woo_dropdown_attribute_html_data']['args'], $saved_attribute );
-
+		/*ACTIVE_TODO_OC_START
 		check about these clear_on_reselect flow, let us check if it is good to do -- to t 
 			--	you can check those available demos -- to t 
-		$data['variable_item_wrapper_data']['clear_on_reselect'] = woo_variation_swatches()->get_option( 'clear_on_reselect' ) ? 'reselect-clear' : '';
+		ACTIVE_TODO_OC_END*/
+		$data['variable_item_wrapper_data']['clear_on_reselect'] = '';	//get_option( 'clear_on_reselect' ) ? 'reselect-clear' : '';
 
 		array_push( $data['variable_item_wrapper_data']['css_classes'], $data['variable_item_wrapper_data']['clear_on_reselect'] );
 
-		//and just dump the options on ribbon wrapper main element, that will going to be needed on the js layers -- to b done
 		// <div aria-live="polite" aria-atomic="true" class="screen-reader-text">%1$s: <span data-default=""></span></div>
-		$data = sprintf( '<ul role="radiogroup" aria-label="%1$s"  class="variable-items-wrapper %2$s" data-attribute_name="%3$s" data-attribute_values="%4$s">%5$s</ul>', esc_attr( wc_attribute_label( $attribute ) ), trim( implode( ' ', array_unique( $css_classes ) ) ), esc_attr( \eo\wbc\system\core\data_model\SP_Attribute::instance()->variation_attribute_name($attribute) ), wc_esc_json( wp_json_encode( array_values( $options ) ) ), $contents );
+		// $data = sprintf( '<ul role="radiogroup" aria-label="%1$s"  class="variable-items-wrapper %2$s" data-attribute_name="%3$s" data-attribute_values="%4$s">%5$s</ul>', esc_attr( wc_attribute_label( $attribute ) ), trim( implode( ' ', array_unique( $css_classes ) ) ), esc_attr( \eo\wbc\system\core\data_model\SP_Attribute::instance()->variation_attribute_name($attribute) ), wc_esc_json( wp_json_encode( array_values( $options ) ) ), $contents );
 		
 		
 		return $data;

@@ -6,6 +6,7 @@
 
 
 
+$template = null;
 
 $template = array(
     'type' => 'image',
@@ -39,7 +40,7 @@ if ( ! $options['has_only_thumbnail'] ) {
             'child' => array(
                 array(
                     'type' => 'video',
-                    'attr' => array( 'preload'=>'auto'. 'controlsList'=>'nodownload','autoplay'=>''),
+                    'attr' => array( 'preload'=>'auto', 'controlsList'=>'nodownload','autoplay'=>''),
                     'child' => array(
                         array(
                             'type' => 'source',

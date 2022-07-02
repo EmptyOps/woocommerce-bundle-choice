@@ -157,14 +157,15 @@ class UI_Builder implements Builder {
 								return;	//simply return from here and skip addind element 
 							}
 					
-				}					
+						}					
 
 					}
 					
 					$ui_ele['option_key'] =$option_key;
 					$ui_ele['process_form'] =$process_form;
 					// passing self contained object so the template can use the child parameter in the $ui_ele to created a nested complax UI.
-					$ui_ele['builder'] = $this;					
+					$ui_ele['builder'] = $this;		
+								
 					wbc()->load->template('core/ui/components/'.$ui_ele['type'],$ui_ele);
 				}
 			}

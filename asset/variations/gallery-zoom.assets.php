@@ -1,11 +1,13 @@
 
 
----- a code /themes/purple_theme/woocommerce/content-single-product.php no che 
+<!-- ---- a code /themes/purple_theme/woocommerce/content-single-product.php no che 
 -- zoom no
-
+ -->
 <script>
  	jQuery(document).ready(function(){
- 		---- error event ma sem che
+ 		// ACTIVE_TODO_OC_START
+ 		// // ---- error event ma sem che
+ 		// ACTIVE_TODO_OC_END
         //jQuery(".small-img").hover(function(){
         jQuery(".small-img").click(function(){
             jQuery(".big-img").attr('src',jQuery(this).attr('src'));
@@ -42,7 +44,7 @@
 
 	      if(typeof(jQuery.fn.imagezoomsl)!=='function'){
 	        let script = document.createElement('script');
-	        script.src = "<?php echo constant('SP_THEME_PATH') . '/assets/js/N-product/zoomsl.min.js'; ?>";
+	        script.src = "<?php echo constant( strtoupper( 'EOWBC_ASSET_DIR' ) ).'/variations/gallery_images/external-plugins/zoomsl/zoomsl.min.js'; ?>";
 	        document.head.append(script);
 
 	        window.setTimeout(function(){
@@ -73,7 +75,7 @@
 </script>
 
 
----- a code /themes/purple_theme/woocommerce/content-single-product.php no che 
+<!-- ---- a code /themes/purple_theme/woocommerce/content-single-product.php no che  -->
 <?php
 if(empty($url) && defined('PRODUCT_360_DIR')){ ?>
 	<style type="text/css">

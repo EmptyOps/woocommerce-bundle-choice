@@ -21,14 +21,8 @@ class SP_Attribute extends SP_Entity {
 		throw new Exception("Sorry, singleton instance method not supported for this class. Always use construct method to create object.", 1);
 	}
 
-	public function __construct( $platform_key, $platform_name ) {
-
-		$this->platform_key = $platform_key;
-		$this->platform_name = $platform_name;
-	}
-
 	public function __construct() {
-		throw new Exception("Sorry, only construct method with platform_key etc parameters is supported, so pass platform_key etc parameters as parameters to construct method. Default construct method is not supported.", 1);
+		throw new Exception("Default construct method is not supported. Use class function createFromArray etc. to create product or its object.", 1);
 	}
 
 	public static function createFromJson(){
@@ -39,7 +33,7 @@ class SP_Attribute extends SP_Entity {
 		throw new Exception("Set method is not supposed to be supported for this property, rely on construct method to set this property.", 1);
 	}
 
-	public static function createFromArray(){
+	public static function createFromArray($data_array){
 		throw new Exception("Set method is not supposed to be supported for this property, rely on construct method to set this property.", 1);
 	}
 
@@ -63,8 +57,9 @@ class SP_Attribute extends SP_Entity {
 
 	}
 
-	public function option_terms(){
+	public static function option_terms(){
 
+		// ACTIVE_TODO below hook is unimplemented yet so refer to the plugins we were exploring 
 		add_action( 'woocommerce_product_option_terms', function($attribute_taxonomy){
 
 		}, 99, 1 );

@@ -33,6 +33,11 @@ class WBC_Config {
 
 				// NOTE: for type dir it is critically important to note that, make sure the dir specified do not have any file that have script execute directly in core php way means when the file included using require once and so on 
 				array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY').'application/system/core/publics/eowbc_base_model_publics.php' ), 
+
+				array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."/application/controllers/publics/variations/sp_gallery_slider.php" ), 
+				array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."/application/controllers/publics/variations/sp_gallery_zoom.php" ), 
+
+		 		array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."/application/model/admin/eowbc_model.php" ), 
 			), 
 			'both'=> array(
 

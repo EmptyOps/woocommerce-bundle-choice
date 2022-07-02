@@ -531,7 +531,24 @@ class WBC_WC {
         $categories = self::instance()->eo_wbc_prime_category();
         return array_replace($attribute, $categories);
 
-    }   
- 
+    }  
+     
+    public function is_variable($product){
+
+        if( $product->is_type( 'variable' )){
+           return true;
+        }
+
+        return false;
+    }
+
+    public function is_variation_object($product){
+
+        if(is_a( $product, 'WC_Product_Variable' ) or is_a( $product, 'WC_Product_Variation' )){
+           return true;
+        }
+
+        return false;
+    }
 
 }
