@@ -80,7 +80,7 @@ window.document.splugins.common._b = function(binding_stats, event, key) {
     return true;
 
 }
-
+ 
 
 //  TODO publish defs from here of the any design pattern that we define to be used as common patter like design pattern of the wbc.filters module 
     //  below the observer design pattern implemented for Feed.events act as one of published defs
@@ -464,10 +464,10 @@ ACTIVE_TODO_OC_START
                             --  then append new templates in the loop in both slider and zoom, there would be their own function and loop 
                                 --  but is it good idea to do it from single function and single loop then so if certain conditions need to be managed then slider and zoom does work in sync by default without having to worry about anything 
                             --  then need to refresh the slider and zoom, so here the external slider and zoom must be binding to api events so that they does refresh their plugin when the event is recieved 
-                                --  so here now maybe we need to simply publish the api with very few basics covered but atleast that would help start flow experimented and our default slider and zoom implementation can simply use that and that will help in experiment. so simply publish the api under .gallery_images.sp_slzm(confirm namespace on variations class).core and export it under ...api as usual. 
-                                --  and for now just provide one public function refresh_listener and one private refresh_listener which would subscribe internally to the gallery_images notification
-                                    --  and private function upon recieving the notification from the gallery_images module it would just call the callback function
-                                    --  so the public refresh_listener function would accept the callback 
+                                // --  so here now maybe we need to simply publish the api with very few basics covered but atleast that would help start flow experimented and our default slider and zoom implementation can simply use that and that will help in experiment. so simply publish the api under .gallery_images.sp_slzm(confirm namespace on variations class).core and export it under ...api as usual. done
+                                // --  and for now just provide one public function refresh_listener and one private refresh_listener which would subscribe internally to the gallery_images notification done
+                                    --  and private function upon recieving the notification from the gallery_images module it would just call the callback function -- to h and -- to a
+                                    --  so the public refresh_listener function would accept the callback -- to h and -- to a   
                                     --  ACTIVE_TODO in future though we may like to move the .gallery_images.sp_slzm module to separate asset file and separate it from our other noisy code of all js modules so that users find it clean also. 
                                         --  ACTIVE_TODO and definitely it is very basic approach with which we are going, but we would like to do research on how to build and publish api layers and api. and definitely we would like to do mature implementation from the initial versions. 
 
@@ -1633,62 +1633,39 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
 
     _this.configs = jQuery.extend({}, {}/*default configs*/, configs);  
     
+    _this.base_container = jQuery( ( window.document.splugins.common._o( _this.configs, 'base_container_selector') ? _this.configs.base_container_selector : '.variations_form' ) );     
+
+    _this.base_element = element;
+
+    _this.$base_element = jQuery( _this.base_element );
+
+    //bhavesh pase thi class levano se
 
     like we did the base_container and so on things, do them here also -- to a 
         --  but for now that does not need to be updated -- to a 
     var _this.data = {};
     var _this.binding_stats = {};
 
-    and move below function at right place -- to a 
-            --  then need to call it from init_private function with section=init_private -- to a 
-        --  and remove the resolve part from it -- to a 
-        --  and the first statement need to be moved to init_private, but anyway comment that there after moving -- to a 
-            --  and instead of that create our planned module for external slider and zoom inside common js for now -- to a. 
-                --  it will have name sp_slzm, actually search with sp_slzm and there are related tasks above -- to a 
+
+    // and move below function at right place -- to a done
+            // --  then need to call it from init_private function with section=init -- to a done
+        // --  and remove the resolve part from it -- to a done
+        // --  and the first statement need to be moved to init_private, but anyway comment that there after moving -- to a done
+            // --  and instead of that create our planned module for external slider and zoom inside common js for now -- to a. done
+                // --  it will have name sp_slzm, actually search with sp_slzm and there are related tasks above -- to a done
                 --  and then as mentioned there call the init function of api from appropriate place, but I think it is not mentioned there and we need to decide right place if there is better place then above mentioned init_private location -- to a 
-    ///////////// -- 15-06-2022 -- @drashti -- ///////////////////////////////
-    var compatability = function(section, object, expected_result) {
 
-        ////////////////////////////////////////////////////
-        if(section == 'variations_gallery'){
-            jQuery(function ($)
-            {
-                Promise.resolve().then(function () {
-                  return _interopRequireWildcard(__webpack_require__("./src/js/WooVariationGallery.js"));
-                }).then(function () {
-                // For Single Product
-                $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery(); // Ajax and Variation Product
-
-                    $(document).on('wc_variation_form', '.variations_form', function () {
-                      $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery();
-                    }); // Support for Jetpack's Infinite Scroll,
-
-                    $(document.body).on('post-load', function () {
-                      $('.woo-variation-gallery-wrapper:not(.woo-variation-gallery-product-type-variable):not(.wvg-loaded)').WooVariationGallery();
-                    }); // YITH Quickview
-
-                    $(document).on('qv_loader_stop', function () {
-                      $('.woo-variation-gallery-wrapper:not(.woo-variation-gallery-product-type-variable):not(.wvg-loaded)').WooVariationGallery();
-                    }); // Elementor
-
-                    if (window.elementorFrontend && window.elementorFrontend.hooks) {
-                      elementorFrontend.hooks.addAction('frontend/element_ready/woocommerce-product-images.default', function ($scope) {
-                        $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery();
-                      });
-                    }
-                });
-            });
-
-        }    
-
-        /////////////////////////////////////////////////////        
-
-    }
     ///////////////////////////////////////////////////////
 
     var init_private = function() {
 
         window.document.splugins.events.api.createSubject( 'gallery_images', ['process_images'] );
+
+        // // For Single Product
+        // $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery(); // Ajax and Variation Product
+
+        compatability('init');
+
 
         preprocess();
 
@@ -1748,17 +1725,17 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
         like in the swatches module we have the base_container_selector settings need to manage it here, to figure out the below _element -- to h and -- to a 
             --  and confirm if all below are fron the plugin we were exploring -- to a 
                 --  then I will tell you which to keep and which to drop -- to a 
-        this.$wrapper = this._element.closest('.product');
-        this.$variations_form = this.$wrapper.find('.variations_form');
+        _this.$wrapper = _this.$base_element.closest('.product');
+        _this.$variations_form = _this.$wrapper.find('.variations_form');
 
               this.$attributeFields = this.$variations_form.find('.variations select');
               this.$target = this._element.parent();
               this.$slider = $('.woo-variation-gallery-slider', this._element);
               this.$thumbnail = $('.woo-variation-gallery-thumbnail-slider', this._element);
-        this.product_id = this.$variations_form.data('product_id');
-        this.is_variation_product = this.$variations_form.length > 0;
+        _this.product_id = _this.$variations_form.data('product_id');
+        _this.is_variation_product = _this.$variations_form.length > 0;
 
-              this._element.addClass('wvg-loaded');
+        _this.$base_element.addClass('spui-wbc-gallery_images-loaded');
 
               this.defaultDimension();
               this.defaultGallery();
@@ -1837,11 +1814,12 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
             // For Single Product
             $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery(); // Ajax and Variation Product
 
-            $(document).on('wc_variation_form', '.variations_form', function () {
-              $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery();
-            }); // Support for Jetpack's Infinite Scroll,
+            // $(document).on('wc_variation_form', '.variations_form', function () {
+            //   $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery();
+            // }); // Support for Jetpack's Infinite Scroll,
     ACTIVE_TODO_OC_START
             so a call from here to the compatability function of this module, and that will cover all compatability matters of load time inlcuding the promize resolve block of the plugin we were exploring. so call compatability with section=bootstrap -- to d 
+                // ACTIVE_TODO we may like to mack use of promise resolve
 
 
     --  if our slider/zoom module is enabled then 
@@ -1896,12 +1874,14 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
 
           return obj;
         }, {});
+    
     };
 
     var process_images = function() {
 
         //  process images
         _this.data.images.each( function( image ) {
+
             // ACTIVE_TODO_OC_START
             // --  the key controller here in case of gallery_images module, for defining the calling sequences and flow will be, the image index(even though we had plan to use index but that is only when it is must to use that), otherwise there should be gallery_item_type field that take care implicitly the things like custom_html images for zoom area and so on 
             //         --  so should we plan gallery_item_type field support? maybe it is good idea, to have such field support right from the config file function planned for each extensions, while for wbc gallery items like image and videos it will be gallery_item_type=image or video. -- to h 
@@ -1990,10 +1970,13 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
     }
 
     var process_template = function() {
+
         // ACTIVE_TODO_OC_START
         // --  or whether to show tooltip or not 
         // ACTIVE_TODO_OC_END            
         if( type == 'radio' ) 
+
+        -- NOTE: from here the process images template will be called only if we need to manage the templates at load time which is not required so far     
 
         note that we may like to create some dedicated functions for updating the actual templates in dom, since this process_template function is broad layer for handling all template related -- to h 
             --  and should we update templates on the init_private means page load event also, I think we should only if it is required by community standards. and since it would help in avoiding load time hangs to we must confirm with legacy standards and the plugin we were is doing -- to h 
@@ -2044,6 +2027,72 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
 
     }
 
+    var process_images_template = function(images) {
+
+        for (var i = 0; i < images.length; i++) {
+          try {
+            // Note: this won't work when chrome devtool is open and 'disable cache' is enabled within the network panel
+            var _img = new Image();
+
+            var _gallery = new Image();
+
+            var _full = new Image();
+
+            var _thumbnail = new Image();
+
+            _img.src = images[i].src;
+
+            if (images[i].srcset) {
+              _img.srcset = images[i].srcset;
+            }
+
+            _gallery.src = images[i].gallery_thumbnail_src;
+            _full.src = images[i].full_src;
+            _thumbnail.src = images[i].archive_src;
+            var video_link = $.trim(images[i].video_link);
+
+            if (video_link && images[i].video_embed_type === 'video') {
+              var req = new XMLHttpRequest();
+              req.open('GET', video_link, true);
+              req.responseType = 'blob';
+
+              req.onload = function () {
+                // Onload is triggered even on 404
+                // so we need to check the status code
+                if (this.status === 200) {
+                  var videoBlob = this.response;
+                  var vid = URL.createObjectURL(videoBlob); // IE10+
+                  // Video is now downloaded
+                  // and we can set it as source on the video element
+                  // video.src = vid;
+                }
+              };
+
+              req.onerror = function () {// Error
+              };
+
+              req.send();
+            } // Append Content
+
+            /*let _img_src    = images[i].src;
+            let _img_srcset = images[i].srcset;
+             let _gallery_src   = images[i].gallery_thumbnail_src;
+            let _full_src      = images[i].full_src;
+            let _thumbnail_src = images[i].archive_src;
+             let template = `<div style="display: none"><img aria-hidden="true" style="display: none" src="${_img_src}" /><img style="display: none" src="${_gallery_src}" /><img style="display: none" src="${_thumbnail_src}" /><img style="display: none" src="${_full_src}" /></div>`;
+             if (_img_srcset) {
+                template = `<div style="display: none"><img aria-hidden="true" style="display: none" src="${_img_src}" srcset="${_img_srcset}" /><img style="display: none" src="${_gallery_src}" /><img style="display: none" src="${_thumbnail_src}" /><img style="display: none" src="${_full_src}" /></div>`;
+            }
+             // let template = `<div style="display: none"><img aria-hidden="true" style="display: none" src="${_img_src}" srcset="${_img_srcset}" /><img style="display: none" src="${_gallery_src}" /><img style="display: none" src="${_thumbnail_src}" /><img style="display: none" src="${_full_src}" /></div>`;
+            $('body').append(template)*/
+
+          } catch (e) {
+            console.error(e);
+          }
+        }
+    
+    };
+
     var process_pages = function() {
 
         if(window.document.splugins.common.is_category_page){
@@ -2063,6 +2112,10 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
         slider_thumb_click_listener();
 
         zoom_area_hover_listener();
+
+        variation_change_listener();
+
+        reset_variation_change_listener();
 
     }
 
@@ -2084,7 +2137,6 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
 
     }
 
-
     var slider_thumb_click_listener = function(type) {
 
         if(window.document.splugins.common._b(_this.binding_stats, 'slider_thumb_click_listener', type)){
@@ -2105,6 +2157,28 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
 
     };
 
+    var variation_change_listener = function() {
+
+        _this.$variations_form.on('show_variation', function (event, variation) {
+          on_variation_change(event, variation);
+        });
+
+    };
+
+    var reset_variation_change_listener = function() {
+
+        if (woo_variation_gallery_options.gallery_reset_on_variation_change ?) {
+          _this.$variations_form.on('hide_variation', function () {
+            on_reset_variation_change();
+          });
+        } else {
+          _this.$variations_form.on('click', '.reset_variations', function () {
+            on_reset_variation_change();
+          });
+        }
+
+    };
+
     var on_slider_thumb_click = function() {
 
         --  among other things the fundamental things to do are changing zoom are active image, we would be doing it like hiding all the templates within the zoom area container first and the showing the current index template -- to h 
@@ -2119,22 +2193,30 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
                 --  and yeah need to make sure that if any additional notification is required then that is emitted from here, or if any extensions need to respond on notification_response callback then that is implemented -- to h 
             --  and zoom refresh seems to be needed to be called on each on_slider_thumb_click event, so just call that refresh event of the js api -- to h 
                 --  but yeah if the clicked gallery_item_type of the slider thumb is not image then skip above call -- to h 
+    
     };
 
     var on_zoom_area_hover = function() {
         // ACTIVE_TODO_OC_START
         // for certain images or custom html we may need to cancel the zoom event, but I think for extensions like darker lighter, diamond meta, recently purchase which have the custom html requirement then that will not emit the zoom hover event since they would not be on the standard zoom container. -- and even in case when images have such requirement fr any feature or flows then in that case we can simply skip using the standard zoom container for displaying image in the zoom area 
         // ACTIVE_TODO_OC_END    
+    
     };
 
-
-    var on_variation_change = function() {
+    var on_variation_change = function(event, variation) {
 
         //  here it will be recieved by the parent layers, and the parent layer would be bootstrap or dedicated function maybe namely subscribe_to_events which will subscrive to the swatches subject of the ...variations.swatches module for the variation change event 
 
 
         //  from here call the internal base event handler of this event which is variation_change 
-        variation_change(); 
+        variation_change(event, variation); 
+
+    };
+
+    var on_reset_variation_change = function() {
+
+        reset_variation_change();
+    
     };
 
     var on_custom_input_change = function() {
@@ -2146,10 +2228,10 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
         // //  if the it is for the custom html then do accordingly 
         //     note that it is still not clear if the custom html is approached directly from here for their change event or rather a notification will be broadcasted on which the particular extension do some action and then respond back if it is applicable. here in this case the responding back would be based on how we decide to do it for slider handling in above swatches module. 
         // ACTIVE_TODO_OC_END    
+    
     };
 
-
-    var variation_change = function() {
+    var variation_change = function(event, variation) {
 
         for gallery_images it is not only the variation_change event but below list of events that also need to be listened to, so implement them -- to h 
             --  show_variation
@@ -2163,6 +2245,13 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
             --  here the function should be named something like show_gallery_images, which would simply show initially or update and after that show, and also there would be show_variation_gallery_images which would be doing the same but for variation gallery images -- to h 
                 --  and both above function from inside call the process_template heirarchy of function like process_gallery_images_template -- to h 
         swap_images( variation_id );    
+        
+        process_images_template(variation.variation_gallery_images);
+    
+    };
+
+    var reset_variation_change = function() {
+
     };
 
     // ACTIVE_TODO_OC_START    
@@ -2183,6 +2272,37 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
 
 
     };
+
+        ///////////// -- 15-06-2022 -- @drashti -- ///////////////////////////////
+    var compatability = function(section, object, expected_result) {
+
+        ////////////////////////////////////////////////////
+        if(section == 'init'){
+            jQuery(function ($)
+            {
+                    $(document).on('wc_variation_form', '.variations_form', function () {
+                      $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery();
+                    }); // Support for Jetpack's Infinite Scroll,
+
+                    $(document.body).on('post-load', function () {
+                      $('.woo-variation-gallery-wrapper:not(.woo-variation-gallery-product-type-variable):not(.wvg-loaded)').WooVariationGallery();
+                    }); // YITH Quickview
+
+                    $(document).on('qv_loader_stop', function () {
+                      $('.woo-variation-gallery-wrapper:not(.woo-variation-gallery-product-type-variable):not(.wvg-loaded)').WooVariationGallery();
+                    }); // Elementor
+
+                    if (window.elementorFrontend && window.elementorFrontend.hooks) {
+                      elementorFrontend.hooks.addAction('frontend/element_ready/woocommerce-product-images.default', function ($scope) {
+                        $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery();
+                      });
+                    }
+                });     
+        }    
+
+        /////////////////////////////////////////////////////        
+
+    }
 
     // ACTIVE_TODO_OC_START
     // -   effects and managing after effects 
@@ -2250,3 +2370,32 @@ window.document.splugins.wbc.variations.gallery_images.api = window.document.spl
 // put ACTIVE_TODO_OC_START and ACTIVE_TODO_OC_END around each open comments section, and then comment them -- to d 
 //     --  and need to do the same for filter js and ssm variations class file -- to d 
 // ACTIVE_TODO_OC_END  
+
+// the variations sp_slzm js module
+window.document.splugins.wbc.variations.gallery_images.sp_slzm = window.document.splugins.wbc.variations.gallery_images.sp_slzm || {};
+
+window.document.splugins.wbc.variations.gallery_images.sp_slzm.core = function( configs ) {
+
+    var init_listener = function() {
+
+    };
+
+    var refresh_listener = function() {
+
+    };
+
+    return {
+
+        init_listener: function() {
+
+        },
+
+        refresh_listener: function() {
+
+        }
+    };    
+
+};
+
+//  publish it 
+window.document.splugins.wbc.variations.gallery_images.sp_slzm.api = window.document.splugins.wbc.variations.gallery_images.sp_slzm.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
