@@ -696,27 +696,34 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
     // if (_.includes(in_stocks, attribute_value)) {
     // ACTIVE_TODO_OC_END
 
+
+
+    after clearing the current points, lets focus on finishing if there is any broad structuring or so related points -- to s 
+        --  and after that will start from beginning of module, and basically finalize to make it ready for run -- to s  
+            --  and then will do one more cycle finalizing the code implementation like confirming selector, find and so on statements, other such layers and definitely applying the remaining class structure everywhere -- to s 
+
     var init_private = function() {
 
         window.document.splugins.events.api.createSubject( 'swatches', ['process_attribute_types'] );
 
         // init on all applicable events 
-        jQuery(document).on('wc_variation_form', _this.base_container+':not(.wbc-swatches-loaded)', function (event) {
+        jQuery(document).on('wc_variation_form', _this.base_container+':not(.spui-wbc-swatches-loaded)', function (event) {
 
             //  had we used the _jQueryInterface style the _jQueryInterface call would have started from here 
             preprocess( this, event );  
         });
 
         below do apply our flows like -- to s 
-            --  change with _this.base_container 
-            --  change $ with jQuery but only where it is used as $() var 
-            --  replace _ (underscore) js calls with sp_common._ 
-            --  replace loaded classs 
-            --  and other such matters if any 
-        // Try to cover all ajax data complete
+            // --  change with _this.base_container done
+            // --  change $ with jQuery but only where it is used as $() var done
+            // --  replace _ (underscore) js calls with sp_common._ done
+            // --  replace loaded classs done
+            // --  and other such matters if any done 
+            --  remove variation form
+            // Try to cover all ajax data complete
         jQuery(document).ajaxComplete(function (event, request, settings) {
           splugins._.delay(function () {
-            jQuery(_this.base_container+'.variations_form:not(.wbc-swatches-loaded)').each(function () {
+            jQuery(_this.base_container+':not(.spui-wbc-swatches-loaded)').each(function () {
               jQuery(this).wc_variation_form();
             });
           }, 100);
@@ -726,7 +733,10 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
         // JS API: https://docs.woocommerce.com/document/composite-products/composite-products-js-api-reference/
         jQuery(document.body).on('wc-composite-initializing', '.composite_data', function (event, composite) {
           composite.actions.add_action('component_options_state_changed', function (self) {
-            jQuery(self.$component_content).find(_this.base_container+'.variations_form').removeClass('wbc-swatches-loaded .wbc-swatches-pro-loaded');
+           
+            // ACTIVE_TODO whenever we remove loaded classs we also need to flush bindingf stats and also turn of event binding -- to s
+                // ACTIVE_TODO same for gallery_images module -- to a
+            jQuery(self.$component_content).find(_this.base_container).removeClass('spui-wbc-swatches-loaded .spui-wbc-swatches-pro__type__-loaded');
           });
 
           /* composite.actions.add_action('active_scenarios_updated', (self) => {
@@ -737,14 +747,16 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
         // ACTIVE_TODO_OC_START
         // // Support for Yith Infinite Scroll
-        so a call from here to the compatability function of this module, and that will cover all compatability matters of load time inlcuding the promize resolve block of the plugin we were exploring. so call compatability with section=preprocess -- to d 
+
+        // so a call from here to the compatability function of this module, and that will cover all compatability matters of load time inlcuding the promize resolve block of the plugin we were exploring. so call compatability with section=preprocess -- to d done
+            // ACTIVE_TODO we nedd to add promise resolve as required -- to s
         compatability('preprocess');
         // ACTIVE_TODO_OC_END
 
         // WooCommerce Filter Nav
         jQuery('body').on('aln_reloaded', function () {
           splugins._.delay(function () {
-            jQuery(_this.base_container+'.variations_form:not(.wbc-swatches-loaded)').each(function () {
+            jQuery(_this.base_container+':not(.spui-wbc-swatches-loaded)').each(function () {
               jQuery(this).wc_variation_form();
             });
           }, 100);
@@ -765,7 +777,7 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
         _this.data.product_id = _this.$base_element.data('product_id');
               this.reset_variations = this.$element.find('.reset_variations');
 
-        this.$element.addClass('wbc-swatches-loaded');
+        _this.$base_element.addClass('spui-wbc-swatches-loaded');
 
 
         //
@@ -784,9 +796,9 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
         this.init();
         this.update();
 
-                ACTIVE_TODO/TODO we may also like raise some broad general level event triggers(for us its observer pattern notifications), it seems important for establish mature and generc structure of events and overall flow on js layers. 
+              /*  ACTIVE_TODO/TODO we may also like raise some broad general level event triggers(for us its observer pattern notifications), it seems important for establish mature and generc structure of events and overall flow on js layers. 
               // Trigger
-              $(document).trigger('woo_variation_swatches', [this.$element]);
+              $(document).trigger('woo_variation_swatches', [this.$element]);*/
 
             var _this2 = this;
 
@@ -808,18 +820,18 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
                             --  templates from php layers 
                                 --  and applicable template function calls from here 
                                     --  and updating templates with applicable data on variation change and so on events, but mainly it will be variation change event 
-        // Append Selected Item Template
-        if (woo_variation_swatches_options.show_variation_label) {
-          this.$element.find('.variations .label').each(function (index, el) {
-            $(el).append(_this2.selected_item_template);
-          });
-        }
+        // // Append Selected Item Template
+        // if (woo_variation_swatches_options.show_variation_label) {
+        //   this.$element.find('.variations .label').each(function (index, el) {
+        //     $(el).append(_this2.selected_item_template);
+        //   });
+        // }
 
                 heirachical classes 
                     --  add three level classes in our swatches templates -- to s 
                             --  inlcuding in extensions -- to s 
                             --  and while you do remove the unnecessary classes of plugins we were exploring and other such (maybe we can drop the unused classes of m also but I think lets just be there till they are not marked as deprecated) -- to s 
-                        --  first would be wbc-swatches-variation-items-wrapper and second would be wbc-swatches-variable-item (still confirm the actual class name used by woo)
+                        --  first would be spui-wbc-swatches-variation-items-wrapper and second would be spui-wbc-swatches-variable-item (still confirm the actual class name used by woo)
                         --  and third is not any level but create the class for woo select dropdown that stays there in hidden, it would be something like wbc-swatches-raw-select -- to s 
                             --  but first confirm if that dropdown is actually given the name of the raw and if saw is it on select of their parent raw? -- to s 
                     --  ACTIVE_TODO and similarly and already implemented most classes for gallery_images, for gallery_images we need to make sure that the heirarchy of classes normally been applied by woo and the plugins we were exploring are followed in our templates layers and all the applicable classes are in place -- to s and -- to a 
@@ -993,50 +1005,41 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
     var preprocess_data = function(data) {
 
-        data.attribute_types = {};
-        data.product_variations.each(function (i, variation) {
-
-          Object.keys(variation.attributes).map(function (attribute_name) {
-
-            here confirm if attribute object below has the attribute type field, check our demo or of other plugin -- to s 
-                --  and fix the loop or so if not correct -- to s
-            data.attribute_types[attribute_name] = variation.attributes[attribute_name].attribute_type;
-          });
-
-          break;
-        }, {});
-
-        ACTIVE_TODO not sure if this is necessary 
-        data._generated = data.product_variations.reduce(function (obj, variation) {
-
-          Object.keys(variation.attributes).map(function (attribute_name) {
-            if (!obj[attribute_name]) {
-              obj[attribute_name] = [];
-            }
-
-            if (variation.attributes[attribute_name]) {
-              obj[attribute_name].push(variation.attributes[attribute_name]);
-            }
-          });
-
-          return obj;
-        }, {});
-
-        data._out_of_stock = data.product_variations.reduce(function (obj, variation) {
-
-          Object.keys(variation.attributes).map(function (attribute_name) {
-            if (!obj[attribute_name]) {
-              obj[attribute_name] = [];
-            }
-
-            if (variation.attributes[attribute_name] && !variation.is_in_stock) {
-              obj[attribute_name].push(variation.attributes[attribute_name]);
-            }
-          });
-
-          return obj;
-        }, {});
+        return data;
     
+    };
+
+    var process_attribute_data = function(type, element, data, mode = null) {
+
+        data.options.each(function () {
+            if (jQuery(element).val() !== '') {
+                data.selects.push(jQuery(element).val());
+                data.selected = current.length === 0 ? eq.val() : current.val();
+            }
+        });
+
+        data.disabled.each(function () {
+            if (jQuery(element).val() !== '') {
+                data.disabled_selects.push(jQuery(element).val());
+            }
+        });
+
+          // Out Of Stocks
+        data.out_of_stock.each(function () {
+            if (jQuery(element).val() !== '') {
+                data.out_of_stock_selects.push($(element).val());
+            }
+        });
+
+        data.in_stocks = splugins._.difference(selects, disabled_selects);
+
+        // console.log('out of stock', out_of_stock_selects)
+        // console.log('in stock', in_stocks)
+
+        data.available = splugins._.difference(in_stocks, out_of_stock_selects);
+
+        return data;
+
     };
 
     var process_attribute_types = function( product_variations ) {
@@ -1050,10 +1053,19 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
             --  and at last set the configs below where it is exported, you can ask a if required -- to s 
                 --  actually the template vars will be required for the gallery_images module, so create config for that also and then set for that also where it is exported -- to s 
                     --  gallery_images module will also have almost all similar vars, except that it will have additional tempalte var -- to s 
+
+        // Append Selected Item Template
+        if (_this.options.configs.show_variation_label) { 
+            // ACTIVE_TODO t need to provide details -- to t & to s
+          this.$element.find('.variations .label').each(function (index, el) {
+            $(el).append(_this2.selected_item_template);
+          });
+        }
+
         // _this.data.attribute_types.each( function( i, type ) {
-        _this.$base_element.find('ul.variable-items-wrapper').each(function (i, element) {
+        _this.$base_element.find('ul.spui-wbc-swatches-variable-item,.spui-wbc-swatches-variable-item').each(function (i, element) {
             
-            var type = ? ;
+            var type = jQuery(element).data('type');
 
             // ACTIVE_TODO_OC_START
             // --  so above preprocess_data call should simply prepare two attribute types list, first is attribute_types and second is ... or simply one only. and simply delegate everything else that is not coming under attribute_types, to the extensions layers. and should simply publish this list of attribute_types from backend. 
@@ -1093,18 +1105,18 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
                 //     --  os 
                 // ACTIVE_TODO_OC_END    
 
-                    if(window.document.splugins.common.is_mobile){
+                if(window.document.splugins.common.is_mobile){
 
-                    }else if(window.document.splugins.common.is_tablet){
+                }else if(window.document.splugins.common.is_tablet){
 
 
-                    }else if(browser){
+                }else if(browser){
 
-                    }else if(screen size){
+                }else if(screen size){
 
-                    }else if(os){
+                }else if(os){
 
-                    };
+                };
 
                 // ACTIVE_TODO_OC_START    
                 // -   configs 
@@ -1112,10 +1124,10 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
                 //     --  or whether to show tooltip or not 
                 // ACTIVE_TODO_OC_END
 
-                    if( type == 'radio' ) 
+                // if( type == 'radio' ) 
 
             }                          
-            else if( not for example slider input is not supported then host the listener event so that extension js do its job or simply skip it and let extension js do their part )
+            else if( not for example slider input is not supported then host the listener event so that extension js do its job or simply skip it and let extension js do their part ) {
                 // ACTIVE_TODO_OC_START
                 // --  and we can and should simply use observer pattern events to host for example the slider listener here and then emit internal change event from here     
                 //     --  still in this case the variation.swatches will register its event subject and emit bootstrap level notification like bootstrap/on.load maybe on.load is more user friendly 
@@ -1129,23 +1141,27 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
                 //         --  but yeah after the change event is recieved here that will be emitted to the gallery_images module to let them do their job. since darker lighter is not part of the variation there is no further thing to do from here after the change event is recieved. 
                 //             --  and since it is different kind processing that is required after change event so the input_template_type must be defined uniquely like slider_no_variation 
                 //                 NOTE: and yeah on that note everything of the sp_variations module must be dynamic and nothing should be hardcoded so slider_no_variation input template type must be passed right from where the template is defined on admin to till here 
-                // ACTIVE_TODO_OC_END                
-            if( type == 'radio' ) 
-            // ACTIVE_TODO_OC_START    
-            //     -   configs 
-            //             --  will control decision of whether to display certain section or not, for example whether to display template part of attribute name (for us ribbon wrapper)
-            //             --  or whether to show tooltip or not 
+                // ACTIVE_TODO_OC_END  
 
-            // --  it wil be a specific block here for devices and configs -- to d 
-            // --  while for the rest create dedicated functions like process_template, process_events and so on. for the layers listed below. 
-            //     --  create below list of functions after the process_attribute_types function, and apply above peudo flows there and rest of the flows those functions should adapt from the flow notes from the heirachical flow plan at top -- to d and -- to h 
-            //         // -- process_template -- to d done
-            //         // -- process_pages -- to d done
-            //         // -- process_slider_and_zoom -- to d done
-            //         // -- process_events -- to d done
-            //         // -- process_and_manage_effects -- to d done
-            //         // -- process_compatability_matters -- to d done
-            // ACTIVE_TODO_OC_END        
+                // if( type == 'radio' ) 
+
+                // ACTIVE_TODO_OC_START    
+                //     -   configs 
+                //             --  will control decision of whether to display certain section or not, for example whether to display template part of attribute name (for us ribbon wrapper)
+                //             --  or whether to show tooltip or not 
+
+                // --  it wil be a specific block here for devices and configs -- to d 
+                // --  while for the rest create dedicated functions like process_template, process_events and so on. for the layers listed below. 
+                //     --  create below list of functions after the process_attribute_types function, and apply above peudo flows there and rest of the flows those functions should adapt from the flow notes from the heirachical flow plan at top -- to d and -- to h 
+                //         // -- process_template -- to d done
+                //         // -- process_pages -- to d done
+                //         // -- process_slider_and_zoom -- to d done
+                //         // -- process_events -- to d done
+                //         // -- process_and_manage_effects -- to d done
+                //         // -- process_compatability_matters -- to d done
+                // ACTIVE_TODO_OC_END  
+
+            }      
             
         }); 
 
@@ -1159,9 +1175,6 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
         // ACTIVE_TODO_OC_END 
 
         process_attribute_template(type, element);
-
-
-        if( type == 'radio' ) 
 
     }
 
@@ -1195,9 +1208,9 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
         data.out_of_stock_selects = [];
         data.$selected_variation_item = jQuery(element).parent().prev().find('.woo-selected-variation-item-name');
        
-        this need to be moved to compatability function, so from here there would be call to the compatability function -- to s 
+        // this need to be moved to compatability function, so from here there would be call to the compatability function -- to s done
 
-            compatability(type, element);
+            compatability('attribute_options', {'element':element});
           // attribute_template
         // if (options.length < 1) {
         //     select = $(this).parent().find('select.woo-variation-raw-select');
@@ -1218,8 +1231,8 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
         
         inner_list.each(function (index, inner_element, ) {
 
-            data.attribute_value = $(inner_element).attr('data-value');
-            data.attribute_title = $(inner_element).attr('data-title');
+            data.attribute_value = jQuery(inner_element).attr('data-value');
+            data.attribute_title = jQuery(inner_element).attr('data-title');
 
             // Resetting LI
             jQuery(inner_element).removeClass('selected disabled out-of-stock').addClass('disabled');
@@ -1254,7 +1267,7 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
                 }
 
                 if (jQuery(inner_element).hasClass('radio-variable-item')) {
-                  jQuery(inner_element).find('input.wvs-radio-variable-item:radio').prop('checked', true);
+                  jQuery(inner_element).find('input.pui-wbc-swatches-variable-item-radio:radio').prop('checked', true);
                 }
               }
             }
@@ -1270,38 +1283,7 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
     };
 
-    var process_attribute_data = function(type, element, data, mode = null) {
 
-        data.options.each(function () {
-            if (jQuery(element).val() !== '') {
-                data.selects.push(jQuery(element).val());
-                data.selected = current.length === 0 ? eq.val() : current.val();
-            }
-        });
-
-        data.disabled.each(function () {
-            if (jQuery(element).val() !== '') {
-                data.disabled_selects.push(jQuery(element).val());
-            }
-        });
-
-          // Out Of Stocks
-        data.out_of_stock.each(function () {
-            if (jQuery(element).val() !== '') {
-                data.out_of_stock_selects.push($(element).val());
-            }
-        });
-
-        data.in_stocks = splugins._.difference(selects, disabled_selects);
-
-        // console.log('out of stock', out_of_stock_selects)
-        // console.log('in stock', in_stocks)
-
-        data.available = splugins._.difference(in_stocks, out_of_stock_selects);
-
-        return data;
-
-    };
 
     var process_pages = function(type, element) {
 
@@ -1324,9 +1306,12 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
     var process_events = function(type, element){
 
-        on_change_listener();    
+        on_change_listener(type, element);    
 
-        on_click_listener();    
+        on_click_listener(type, element);
+
+        on_keydown_listener(type, element);   
+
     }
 
     var process_and_manage_effects = function(type, element){
@@ -1349,19 +1334,18 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
     // -   events 
     // --  mouse events 
-    var on_change_listener = function(type) {
+    var on_change_listener = function(type, element) {
 
         if(window.document.splugins.common._b(_this.binding_stats, 'on_change_listener', type)){
             return false;
         }
 
-        jQuery('#select_attribute_of_variation').on('woocommerce_variation_has_changed', function(){
+        /*jQuery('#select_attribute_of_variation').on('woocommerce_variation_has_changed', function(){
             // do your magic here...
-         }); 
+         }); */
 
-        var _this = this;
-        this.$element.off('woocommerce_variation_has_changed');
-        this.$element.on('woocommerce_variation_has_changed', function (event) {
+        _this.$base_element.off('woocommerce_variation_has_changed');
+        _this.$base_element.on('woocommerce_variation_has_changed', function (event) {
 
           // Don't use any propagation. It will disable composit product functionality
           // event.stopPropagation();
@@ -1523,31 +1507,99 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
             
           process_attribute_template(type, element, 'change');  
 
+          on_change(type, element, event);
+
         });
 
-        on_change();
+        if (reselect_clear) {
+ 
+            if(type == 'radio') {      
+
+                jQuery(element).on('change', 'input.spui-wbc-swatches-variable-item-radio:radio', function (e, params) {
+
+                  e.preventDefault();
+                  e.stopPropagation();
+
+                  if (params && params.radioChange) {
+
+                    var value = jQuery(element).val();
+                    var is_selected = jQuery(element).parent('li.spui-wbc-swatches-variable-item-radio').hasClass('selected');
+
+                    if (is_selected) {
+                      select.val('').trigger('change');
+                      jQuery(element).parent('li.spui-wbc-swatches-variable-item-radio').trigger('wvs-selected-item', [value, select, _this.$element]); // Custom Event for li
+                    } else {
+                      select.val(value).trigger('change');
+                      jQuery(element).parent('li.spui-wbc-swatches-variable-item-radio').trigger('wvs-selected-item', [value, select, _this.$element]); // Custom Event for li
+                    }
+
+                    select.trigger('click');
+                    select.trigger('focusin');
+                    if (window.document.splugins.common.is_mobile) {
+                      select.trigger('touchstart');
+                    }
+                  }
+
+                  on_change(type, element, event);
+
+                });
+            }
+ 
+        } else {
+
+            if(type == 'radio') {
+
+                jQuery(element).on('change', 'input.spui-wbc-swatches-variable-item-radio:radio', function (event) {
+                  event.preventDefault();
+                  event.stopPropagation();
+
+                  var value = jQuery(element).val();
+
+                  select.val(value).trigger('change');
+                  select.trigger('click');
+                  select.trigger('focusin');
+
+                  if (window.document.splugins.common.is_mobile) {
+                    select.trigger('touchstart');
+                  }
+
+                  // Radio
+                  jQuery(element).parent('li.spui-wbc-swatches-variable-item-radio').removeClass('selected disabled').addClass('selected');
+                  jQuery(element).parent('li.spui-wbc-swatches-variable-item-radio').trigger('wvs-selected-item', [value, select, _this.$element]); // Custom Event for li
+
+                  on_change(type, element, event);
+
+                });
+            }
+        }
 
     };
 
-    var on_click_listener = function(type) {
+    var on_click_listener = function(type, element) {
 
         if(window.document.splugins.common._b(_this.binding_stats, 'on_click_listener', type)){
             return false;
         }
+        
+        var mouse_event_name = 'click';
 
         here it seems that m have explicitly handled the click event, but we should do if it is by standard require and the legacy flows does need us to take care of it. so confirm first with the plugin we are exploring -- to h 
-        $('.variable-item').on('click',function(){
+        jQuery('.variable-item').on('click',function(){
             var target_selector = $('#'+$(this).data('id'));
-            target_selector.val($(this).data('value'));
-            $(this).parent().find('.selected').removeClass('selected');
-            $(this).addClass('selected');
-            jQuery(".variations_form" ).trigger('check_variations');
-            $(target_selector).trigger('change');
+            target_selector.val(jQuery(element).data('value'));
+            jQuery(element).parent().find('.selected').removeClass('selected');
+            jQuery(element).addClass('selected');
+            jQuery(_this.base_container).trigger('check_variations');
+            jQuery(target_selector).trigger('change');
+
+            on_click(type, element);
         });
 
-        jQuery(".variations_form").on('click', '.reset_variations'/*'woocommerce_variation_select_change'*//*'reset'*/,function(){
+        jQuery(_this.base_container).on('click', '.reset_variations'/*'woocommerce_variation_select_change'*//*'reset'*/,function(){
             jQuery('.variable-items-wrapper .selected').removeClass('selected');
             jQuery('.variable-items-wrapper .dropdown').dropdown('restore defaults');
+
+            on_click(type, element);
         });
 
 
@@ -1557,106 +1609,120 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
         if (reselect_clear) {
 
-        // Non Selected Item Should Select
-        $(this).on(mouse_event_name, 'li:not(.selected):not(.spui-wbc-swatches-variable-item-radio):not(.spui-wbc-swatches-variable-item-more)', function (e) {
-          e.preventDefault();
-          e.stopPropagation();
-          var value = $(this).data('value');
-          select.val(value).trigger('change');
-          select.trigger('click');
-
-          select.trigger('focusin');
-
-          if (_this.is_mobile) {
-            select.trigger('touchstart');
-          }
-
-          $(this).trigger('focus'); // Mobile tooltip
-          $(this).trigger('spui-wbc-swatches-variable-item-selected', [value, select, _this.$element]); // Custom Event for li
-        });
-
-        // Selected Item Should Non Select
-        $(this).on(mouse_event_name, 'li.selected:not(.spui-wbc-swatches-variable-item-radio):not(.spui-wbc-swatches-variable-item-more)', function (e) {
-          e.preventDefault();
-          e.stopPropagation();
-
-          var value = $(this).val();
-
-          select.val('').trigger('change');
-          select.trigger('click');
-
-          select.trigger('focusin');
-
-          if (_this.is_mobile) {
-            select.trigger('touchstart');
-          }
-
-          $(this).trigger('focus'); // Mobile tooltip
-
-          $(this).trigger('spui-wbc-swatches-variable-item-unselected', [value, select, _this.$element]); // Custom Event for li
-        });
-
-        // RADIO
-
-        // On Click trigger change event on Radio button
-        $(this).on(mouse_event_name, 'input.spui-wbc-swatches-variable-item-radio:radio', function (e) {
-
-          e.stopPropagation();
-
-          $(this).trigger('change', { radioChange: true });
-        });
-
-        $(this).on('change', 'input.spui-wbc-swatches-variable-item-radio:radio', function (e, params) {
-
-          e.preventDefault();
-          e.stopPropagation();
-
-          if (params && params.radioChange) {
-
-            var value = $(this).val();
-            var is_selected = $(this).parent('li.spui-wbc-swatches-variable-item-radio').hasClass('selected');
-
-            if (is_selected) {
-              select.val('').trigger('change');
-              $(this).parent('li.spui-wbc-swatches-variable-item-radio').trigger('spui-wbc-swatches-variable-item-unselected', [value, select, _this.$element]); // Custom Event for li
-            } else {
-              select.val(value).trigger('change');
-              $(this).parent('li.spui-wbc-swatches-variable-item-radio').trigger('spui-wbc-swatches-variable-item-selected', [value, select, _this.$element]); // Custom Event for li
-            }
-
-            select.trigger('click');
-            select.trigger('focusin');
-            if (_this.is_mobile) {
-              select.trigger('touchstart');
-            }
-          }
-        });
-        } else {
-
-            $(this).on(mouse_event_name, 'li:not(.spui-wbc-swatches-variable-item-radio):not(.spui-wbc-swatches-variable-item-more)', function (event) {
-
-              event.preventDefault();
-              event.stopPropagation();
-
-              var value = $(this).data('value');
+            // Non Selected Item Should Select
+            jQuery(element).on(mouse_event_name, 'li:not(.selected):not(.radio-variable-item):not(.spui-wbc-swatches-variable-item-more)', function (event) {
+              e.preventDefault();
+              e.stopPropagation();
+              var value = jQuery(element).data('value');
               select.val(value).trigger('change');
               select.trigger('click');
+
               select.trigger('focusin');
-              if (_this.is_mobile) {
+
+              if (window.document.splugins.common.is_mobile) {
                 select.trigger('touchstart');
               }
 
-              $(this).trigger('focus'); // Mobile tooltip
-
-              $(this).trigger('spui-wbc-swatches-variable-item-selected', [value, select, _this._element]); // Custom Event for li
+              jQuery(element).trigger('focus'); // Mobile tooltip
+              jQuery(element).trigger('wvs-selected-item', [value, select, _this.$element]); // Custom Event for li
+              
+              on_click(type, element, event);
             });
 
-            // Radio
-            $(this).on('change', 'input.spui-wbc-swatches-variable-item-radio:radio', function (event) {
+            // Selected Item Should Non Select
+            jQuery(element).on(mouse_event_name, 'li.selected:not(.radio-variable-item):not(.spui-wbc-swatches-variable-item-more)', function (event) {
+              e.preventDefault();
+              e.stopPropagation();
+
+              var value = jQuery(element).val();
+
+              select.val('').trigger('change');
+              select.trigger('click');
+
+              select.trigger('focusin');
+
+              if (window.document.splugins.common.is_mobile) {
+                select.trigger('touchstart');
+              }
+
+              jQuery(element).trigger('focus'); // Mobile tooltip
+
+              jQuery(element).trigger('wvs-unselected-item', [value, select, _this.$element]); // Custom Event for li
+
+              on_click(type, element, event);
+            });
+
+            
+
+            if(type == 'radio') {
+
+                // RADIO
+
+                // On Click trigger change event on Radio button
+
+                jQuery(element).on(mouse_event_name, 'input.spui-wbc-swatches-variable-item-radio:radio', function (event) {
+
+                  e.stopPropagation();
+
+                  jQuery(element).trigger('change', { radioChange: true });
+
+                  on_click(type, element, event);
+                });
+            }
+
+            /*jQuery(element).on('change', 'input.spui-wbc-swatches-variable-item-radio:radio', function (e, params) {
+
+              e.preventDefault();
+              e.stopPropagation();
+
+              if (params && params.radioChange) {
+
+                var value = jQuery(element).val();
+                var is_selected = jQuery(element).parent('li.spui-wbc-swatches-variable-item-radio').hasClass('selected');
+
+                if (is_selected) {
+                  select.val('').trigger('change');
+                  jQuery(element).parent('li.spui-wbc-swatches-variable-item-radio').trigger('spui-wbc-swatches-variable-item-unselected', [value, select, _this.$element]); // Custom Event for li
+                } else {
+                  select.val(value).trigger('change');
+                  jQuery(element).parent('li.spui-wbc-swatches-variable-item-radio').trigger('spui-wbc-swatches-variable-item-selected', [value, select, _this.$element]); // Custom Event for li
+                }
+
+                select.trigger('click');
+                select.trigger('focusin');
+                if (_this.is_mobile) {
+                  select.trigger('touchstart');
+                }
+              }
+            });*/
+        } else {
+
+            jQuery(element).on(mouse_event_name, 'li:not(.radio-variable-item):not(.spui-wbc-swatches-variable-item-more)', function (event) {
+
               event.preventDefault();
               event.stopPropagation();
 
-              var value = $(this).val();
+              var value = jQuery(element).data('value');
+              select.val(value).trigger('change');
+              select.trigger('click');
+              select.trigger('focusin');
+              if (window.document.splugins.common.is_mobile) {
+                select.trigger('touchstart');
+              }
+
+              jQuery(element).trigger('focus'); // Mobile tooltip
+
+              jQuery(element).trigger('wvs-selected-item', [value, select, _this._element]); // Custom Event for li
+
+              on_click(type, element, event);
+            });
+
+            /* // Radio
+            jQuery(element).on('change', 'input.spui-wbc-swatches-variable-item-radio:radio', function (event) {
+              event.preventDefault();
+              event.stopPropagation();
+
+              var value = jQuery(element).val();
 
               select.val(value).trigger('change');
               select.trigger('click');
@@ -1667,35 +1733,38 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
               }
 
               // Radio
-              $(this).parent('li.spui-wbc-swatches-variable-item-radio').removeClass('selected disabled').addClass('selected');
-              $(this).parent('li.spui-wbc-swatches-variable-item-radio').trigger('spui-wbc-swatches-variable-item-selected', [value, select, _this.$element]); // Custom Event for li
-            });
+              jQuery(element).parent('li.spui-wbc-swatches-variable-item-radio').removeClass('selected disabled').addClass('selected');
+              jQuery(element).parent('li.spui-wbc-swatches-variable-item-radio').trigger('spui-wbc-swatches-variable-item-selected', [value, select, _this.$element]); // Custom Event for li
+            });*/
         }
-
-        on_click();
 
     };
 
-    var on_keydown_listener = function(type) {
+    var on_keydown_listener = function(type, element) {
 
         if(window.document.splugins.common._b(_this.binding_stats, 'on_keydown_listener', type)){
             return false;
         }
 
         // Keyboard Access
-        $(this).on('keydown', 'li:not(.disabled):not(.woo-variation-swatches-variable-item-more)', function (event) {
-        });
+        jQuery(element).on('keydown', 'li:not(.disabled):not(.spui-wbc-swatches-variable-item--more)', function (event) {
 
-        on_keydown();
+            on_keydown(type, element, event);
 
-    };
-
-
-    var on_change = function(type) {
+        }); 
 
     };
 
-    var on_click = function(type) {
+
+    var on_change = function(type, element, event) {
+
+        change(type, element);
+
+    };
+
+    var on_click = function(type, element, event) {
+
+        click(type, element);
 
     };
 
@@ -1706,9 +1775,9 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
     // ACTIVE_TODO_OC_START
     // --  keyboard events 
     // ACTIVE_TODO_OC_END
-    var on_keydown = function() {
+    var on_keydown = function(type, element, event) {
 
-        keydown();  
+        keydown(type, element);  
     };
             // ACTIVE_TODO_OC_START
             // --  legacy events (events of woo emitted on certain scenarios) 
@@ -1717,29 +1786,28 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
 
     // -- base events - after the above events are handled by their particular function/layer, they would call below functions to do the ultimate work         
-    var change = function() {
+    var change = function(type, element) {
 
     };
 
-    var click = function() {
+    var click = function(type, element) {
 
     };
 
     var reset_all = function() {
 
-
     };
 
-    var keydown = function() {
+    var keydown = function(type, element) {
 
         if (event.keyCode && 32 === event.keyCode || event.key && ' ' === event.key || event.keyCode && 13 === event.keyCode || event.key && 'enter' === event.key.toLowerCase()) {
           event.preventDefault();
-          $(this).trigger(mouse_event_name);
+          jQuery(element).trigger(mouse_event_name);
         }
     };
 
 
-    var compatability = function() {
+    var compatability = function(section, object, expected_result) {
 
         // ACTIVE_TODO_OC_START
         // this compatiblity function flow will be as per the commets in the filter js file 
@@ -1753,14 +1821,25 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
         //     --  that other plugin have some more theme specific patch fix, and some other patch for managing unexpected effects like blink and so on -- to d    
         // ACTIVE_TODO_OC_END    
 
-        if (options.length < 1) {
-            select = $(this).parent().find('select.woo-variation-raw-select');
-            options = select.find('option');
-            disabled = select.find('option:disabled');
-            out_of_stock = select.find('option.enabled.out-of-stock');
-            current = select.find('option:selected');
-            eq = select.find('option').eq(1);
+        if(section == 'preprocess'){
+            jQuery(document).on('yith_infs_added_elem', function () {
+              jQuery(_this.base_container+':not(.spui-wbc-swatches-loaded)').each(function () {
+                jQuery(this).wc_variation_form();
+              });
+            });
+        } else if (section == 'attribute_options'){
+
+            if (options.length < 1) {
+                select = jQuery(object.element).parent().find('select.woo-variation-raw-select');
+                options = select.find('option');
+                disabled = select.find('option:disabled');
+                out_of_stock = select.find('option.enabled.out-of-stock');
+                current = select.find('option:selected');
+                eq = select.find('option').eq(1);
+            }
+
         }
+        
 
     }; 
 

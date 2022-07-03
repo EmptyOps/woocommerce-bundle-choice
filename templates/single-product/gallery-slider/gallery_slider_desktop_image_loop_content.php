@@ -14,7 +14,7 @@ $template = array(
         'type'=>'image',
         'src'=>esc_url( $image['gallery_thumbnail_src'] ),
         'class'=>array('img-fluid','small-img',esc_attr( $image['gallery_thumbnail_class'] )),
-        'attr' => array( 'width' => esc_attr( $image['gallery_thumbnail_src_w'] ), 'height' => esc_attr( $image['gallery_thumbnail_src_h'] ), 'alt' => esc_attr( $image['alt'] ), 'title' => esc_attr( $image['title'] ) ),
+        'attr' => array( 'width' => esc_attr( $image['gallery_thumbnail_src_w'] ), 'height' => esc_attr( $image['gallery_thumbnail_src_h'] ), 'alt' => esc_attr( $image['alt'] ), 'title' => esc_attr( $image['title'] ), 'data-index' => $index ),
     )
 );
 

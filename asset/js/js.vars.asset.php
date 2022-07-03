@@ -55,6 +55,9 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 	$swatches_configs['attribute_types']            = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->sp_variations_swatches_supported_attribute_types(array('is_base_type_only'=>true));
 	$swatches_configs['product_variations_configs'] = wbc()->config->product_variations_configs();
 
+// ACTIVE_TODO admin options need to b loaded from variations.assets.php where b have already prepare all options -- to s 
+	$swatches_configs['options'] = array('show_variation_label' => false);
+
 
 
 	$gallery_images_configs['types'] 					  = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->sp_variations_swatches_supported_attribute_types(array('is_base_type_only'=>true));
