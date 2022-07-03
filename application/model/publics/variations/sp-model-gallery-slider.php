@@ -78,7 +78,7 @@ class SP_Model_Gallery_Slider extends Eowbc_Base_Model_Publics {
 	
 	public function render_core(){
 
-		add_action('sp_variations_gallery_images_render', function(){
+		add_filter('sp_variations_gallery_images_slider_ui', function($ui){
 
 
 			$classes = array('sp-variations-gallery-images-slider');
@@ -95,8 +95,9 @@ class SP_Model_Gallery_Slider extends Eowbc_Base_Model_Publics {
 				'class'=>$classes,
 				'child'=>$html
 			);
-			\sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui,'sp_variations_gallery_images_slider_container');
+			//\sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui,'sp_variations_gallery_images_slider_container');
 
+			//js template
 			$html = null;
 			$html = apply_filters('sp_slzm_slider_image_loop_js_template',$html);
 
@@ -106,6 +107,7 @@ class SP_Model_Gallery_Slider extends Eowbc_Base_Model_Publics {
 
 			echo \eo\wbc\model\UI_Builder::instance()->js_template_wrap('sp_slzm_slider_image_loop','temp'/*$html*/,'wp');
 
+			return $ui;
 		}, 10);	
 
 	}
