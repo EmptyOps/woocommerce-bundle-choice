@@ -2567,4 +2567,3 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
  
  //  publish it 
  window.document.splugins.wbc.variations.gallery_images.sp_slzm.api = window.document.splugins.wbc.variations.gallery_images.sp_slzm.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
- 
