@@ -38,7 +38,7 @@ $template = array(
                     'type' =>'ul',
                     'class' => 'ui mini images variable-items-wrapper '.trim( implode( ' ', array_unique( $css_classes ) ) ),
                     // 'preHTML' => $contents,
-                    'attr' => array( 'data-attribute_name' => esc_attr( wc_variation_attribute_name( $attribute ) ),'data-attribute_values' =>wc_esc_json( wp_json_encode( array_values( $woo_dropdown_attribute_html_data['options'] ) ) )),
+                    'attr' => array( 'data-attribute_name' => esc_attr( wc_variation_attribute_name( $attribute ) ),'data-attribute_values' =>wc_esc_json( wp_json_encode( array_values( $woo_dropdown_attribute_html_data['options'] ) ) ), 'data-type'=>$variable_item_data['options_loop_type'][$term->slug]),
                     'child' => $variable_item_ui
                    
                 )
