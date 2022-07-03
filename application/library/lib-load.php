@@ -19,7 +19,7 @@ if(!class_exists('WBC_Loader')) {
 			//	no implemetations 
 		}
 
-		public function asset($type,$path,$param = array(),$version="",$load_instantly=false,$is_prefix_handle=false) {
+		public function asset($type,$path,$param = array(),$version="",$load_instantly=false,$is_prefix_handle=false,$localize_var=null,$localize_var_val=null) {
 
 			if(!apply_filters('wbc_load_asset_filter',true,$type,$path,$param,$version,$load_instantly)) {
 				return true;
@@ -65,6 +65,15 @@ if(!class_exists('WBC_Loader')) {
 							wp_register_script($_handle, $_path, $param, $version );
 						}				
 						wp_enqueue_script($_handle);					
+
+						if( !empty($localize_var) && !empty($localize_var_val) ) {
+
+							wp_localize_script(
+							    $_handle,
+							    $localize_var,
+							    $localize_var_val
+							);
+						}
 					}
 					break;
 				case 'asset.php':	//	NOTE: it is important here to note that this asset loading block is fundamentally different from other asset loading blocks here since it is loading assets that are implemented in the php file

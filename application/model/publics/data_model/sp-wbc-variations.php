@@ -486,7 +486,7 @@ class SP_WBC_Variations extends SP_Variations {
 		//  $product                      = wc_get_product( $product_id );
 
 		$gallery_images = array();	
-		if (false and !empty($data['sp_variations']["form"]) ) {
+		if ( !empty($data['sp_variations']["form"]) ) {
 
 			foreach($data['sp_variations']["form"] as $key=>$fv){
 
@@ -495,8 +495,10 @@ class SP_WBC_Variations extends SP_Variations {
 				}
 
 				$value = $fv['value'];
-				/*echo ">>>>>>>>>>>";
-				wbc_pr($fv);*/
+				
+				echo ">>>>>>>>>>>";
+				wbc_pr($key);
+				wbc_pr($fv);
 
 				if ( strpos( $key, 'sp_variations_gallery_images' ) !== false ) {
 
