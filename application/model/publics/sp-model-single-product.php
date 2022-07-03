@@ -40,9 +40,9 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			// 	--	ACTIVE_TODO	and the ui definition will also be created based on this but it will depend on possibility so where possible it will be created 
 			// 		--	ACTIVE_TODO	and once above is implemented, then implement the calling stack precisely and on this regard the ui definition and form definition would be created from controller layers. -- and once it is neatly implemented then it will clear our 1-2 year old quest of creating a central layer for both admin and frontend and we started with assuming the ui_array(definition) as the base of all of it and center to everything but now (most likely) the data clas s would sit on top of ui_array(definition). but yeah ui_array will have its own independance to define ui but the data within the ui would be controlled by the data definition. 
 			// temporary till above ACTIVE_TODO are implemented
-			if($page_section == 'gallery_images_init') {
+			if($for_section == 'gallery_images_init') {
 				$args['data_definition'] = null;
-				$args['form_definition'] = \eo\wbc\controllers\admin\menu\page\Tiny_features::instance()->init(array('temporary_get_form_directly'=>true, 'is_legacy_admin'=>true));
+				$args['form_definition'] = null;	//	now the form definition is created on the hook layer because without the entity id it was not possible to prepare the form // \eo\wbc\controllers\admin\menu\page\Tiny_features::instance()->init(array('temporary_get_form_directly'=>true, 'is_legacy_admin'=>true));
 				$args['ui_definition'] = null;
 			}
 
@@ -53,11 +53,11 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			// 			--	or instead the below fetch_data should simply be called from within the woo swatches related hooks so that there is no unnecessary hook that we need to add. yeah this is good idea. 
 			// 				--	however even better is from inside that hook only get_data of this class will be called, so below call will remain here 
 			return \eo\wbc\model\publics\data_model\SP_WBC_Variations::fetch_data($for_section, $product, $args );	
-		}elseif( $page_section == "get_default_gallery") {
+		}elseif( $for_section == "get_default_gallery") {
 
 			return \eo\wbc\model\publics\data_model\SP_WBC_Variations::fetch_data($for_section, $product, $args );	
 
-		}elseif( $page_section == "get_variation_gallery") {	
+		}elseif( $for_section == "get_variation_gallery") {	
 
 			return \eo\wbc\model\publics\data_model\SP_WBC_Variations::fetch_data($for_section, $product, $args );	
 
@@ -486,7 +486,8 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		we need to create zoom loop custom html tempalte that supports the mp4 videos 
 			--	what option do we have for the dom, I think its below two one is iframe and second is video tag, but not sure what are their pros and cons -- to t and -- to a 
 				--	brief about the pros and cons of both options -- to t and -- to a 
-		ACTIVE_TODO_OC_END*/
+
+
 		if ( ! $options['has_only_thumbnail'] ) {
 			if ( isset( $image['video_link'] ) && ! empty( $image['video_link'] ) && $image['video_embed_type'] === 'iframe' ) {
 				$template   = '<div class="wvg-single-gallery-iframe-container" style="padding-bottom: %d%%"><iframe src="%s" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div>';
@@ -498,6 +499,8 @@ class SP_Model_Single_Product extends SP_Single_Product {
 				$inner_html = sprintf( $template, $image['video_ratio'], $image['video_link'] );
 			}
 		}
+		ACTIVE_TODO_OC_END*/
+
 		/*ACTIVE_TODO_OC_START
 		what difference does it make when edit is used in the below function call, need to do research -- to d ACTIVE_TODO
 		ACTIVE_TODO_OC_END */
@@ -925,6 +928,9 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		/*$html = $args['hook_callback_args']['html'];
         $hook_args = $args['hook_callback_args']['hook_args'];*/
 
+        //ACTIVE_TODO nid to manage default when we provide default setting on admin has planed.
+		$args['hook_callback_args']['hook_args']['type']                  = isset($args['hook_callback_args']['hook_args']['type']) ? $args['hook_callback_args']['hook_args']['type'] : 'button';
+
        // first apply filter hook here with key default_sp_variations_swatches_variation_attribute_options_html -- to d or -- to b 
        // add filter to below hook simply from the swatches_init section of fetch_data functio n variations class -- to d done
         	//--	and then inside put an if condition that check the hook_args['type'](note the level of type param) against our sp_variations_swatches_supported_attribute_types function that is in the same class -- to d done
@@ -1092,7 +1098,6 @@ class SP_Model_Single_Product extends SP_Single_Product {
 				$data = $this->prepare_swatches_data_by_attribute_type($data,$args);
 
 			} else{
-
 				/*ACTIVE_TODO_OC_START
 				ACTIVE_TODO need to implement the default implementation very soon. 
 
@@ -1408,10 +1413,10 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			            return '';
 			        }
 
-			        $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id] = array( '' );
+			        $data['gallery_images_template_data']['attachment_ids_loop_classes'][$index] = array( '' );
 
-			        if ( isset( $data['gallery_images_template_data']['attachment_ids_loop_image'][$id]['video_link'] ) && ! empty( $data['gallery_images_template_data']['attachment_ids_loop_image'][$id]['video_link'] ) ) {
-			            array_push( $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id], '' );
+			        if ( isset( $data['gallery_images_template_data']['attachment_ids_loop_image'][$index]['video_link'] ) && ! empty( $data['gallery_images_template_data']['attachment_ids_loop_image'][$index]['video_link'] ) ) {
+			            array_push( $data['gallery_images_template_data']['attachment_ids_loop_classes'][$index], '' );
 			        }
 
 			        //ACTIVE_TODO publish hook if required 
@@ -1471,7 +1476,24 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		//and also do a action hook from here with key sp_variations_gallery_images_render -- to b done
 			//-- and the init core or render core function, whichever is applicable, will add action to above hook -- b done
 				//-- and so all three hooks of both slider and zoom module should be applied or bind to within this action hook -- to b done
-				do_action( 'sp_variations_gallery_images_render');
+
+				$ui = array(
+					'type'=>'div',
+					'class'=>'spui-sp-variations-gallery-images',
+					'child'=>array(
+						array(
+							'type'=>'html',
+							'child'=>apply_filters('sp_variations_gallery_images_slider_ui',null),
+						),
+						array(
+							'type'=>'html',
+							'child'=>apply_filters('sp_variations_gallery_images_zoom_ui',null),
+						),
+					)
+				);
+				//do_action( 'sp_variations_gallery_images_render');
+				\sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui,'sp_variations_gallery_images_container');
+
 
 		//create list of woo hooks that are used below -- to d done
 
@@ -1617,6 +1639,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		/*ACTIVE_TODO_OC_START
 		--------------a etlu wvs_default_button_variation_attribute_options alg che
 		ACTIVE_TODO_OC_END*/
+		//ACTIVE_TODO nid to manage default when we provide default setting on admin has planed.
 		$data['woo_dropdown_attribute_html_data']['type']                  = $args['hook_callback_args']['hook_args']['type'] ? $args['hook_callback_args']['hook_args']['type'] : 'button';
 		/*ACTIVE_TODO_OC_START
 		------------------

@@ -41,6 +41,10 @@ class Options extends \eo\wbc\controllers\publics\Controller {
     	if ($page_section == 'swatches') {
     		if ($container_class == 'woo_variation_attr_html') {
     			$data = \eo\wbc\model\publics\SP_Model_Single_Product::instance()->prepare_swatches_data($args);
+    			if (!empty($data['is_return_default_html'])) {
+    				return $data['html'];
+    			}
+    			//wbc_pr($data); die();
     			$this->load_view($data,$args);
     		}
 
@@ -143,7 +147,7 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 
 		$args['singleton_function'] = 'wbc';
 
-    	$type = $args['data']['woo_dropdown_attribute_html_data']['type'];
+    	$type = isset($args['data']['woo_dropdown_attribute_html_data']['type']) ? $args['data']['woo_dropdown_attribute_html_data']['type'] : null;
     	
     	/*ACTIVE_TODO_OC_START
     	and make all four templates below dynamic, based on the points added on data layer and also there might be some on the template files -- to b 

@@ -190,7 +190,7 @@ if(!class_exists('SP_Plugin_Index_Class') ) {
 			// defined('EOWBC_VERSION') || define('EOWBC_VERSION', $plugin_data['Version']);
 
 			// defined('EOWBC_ASSET_DIR') || define('EOWBC_ASSET_DIR', constant('EOWBC_DIRECTORY').'asset/');
-			defined( $singleton_functionUpper.'_ASSET_DIR') || define($singleton_functionUpper.'_ASSET_DIR', method_exists($this->SP_Extension, 'ASSET_DIR') ? $this->SP_Extension->ASSET_DIR() : constant($singleton_functionUpper.'_DIRECTORY').'asset/' );
+			defined( $singleton_functionUpper.'_ASSET_DIR') || define($singleton_functionUpper.'_ASSET_DIR', method_exists($this->SP_Extension, 'ASSET_DIR') ? $this->SP_Extension->ASSET_DIR() : constant($singleton_functionUpper.'_DIRECTORY').'assets/' );
 			// defined('EOWBC_ASSET_URL') || define('EOWBC_ASSET_URL', plugins_url(constant('EOWBC_BASE_DIRECTORY')).'/asset/');
 			
 			// defined('EOWBC_MIGRATION_DIR') || define('EOWBC_MIGRATION_DIR', constant('EOWBC_DIRECTORY').'application/migration/');			
