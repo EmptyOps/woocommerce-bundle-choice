@@ -89,6 +89,14 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 					// NOTE: id is standard column name that we use for our options module based simple entity storage, so for the legacy admin flows also where necessary we can simply use the same where the necessity arise to maintain one uniqid and I think it will be almost always. 
 					$args['hook_callback_args']['id'] = absint( $variation->ID );
 
+
+					// ACTIVE_TODO_OC_START
+					// need to use the wp media manager popup so in the file input that you added, please add the format field support -- to s 
+					// 	--	which should accept the allowed file extensions as an option -- to s 
+					// 		--	but yeah for now we will support only specific types, so for that create function in form builder class. like there is that savable type function -- to s 
+					// 		--	and regarding our video field that should accept only mp4 -- to s 
+					// 		--	ACTIVE_TODO and on validation layer of form builder, we may need to add support for file field validation. which simply validates the uploaded file extensions, so the validate property of the form array should now accept the allowed_file_types as a key. or is it already? I think not -- to s 
+					// ACTIVE_TODO_OC_END 		
 					if( false ) {
 
 					?>
@@ -232,7 +240,7 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 							),
 
 							'devider2{{id}}'=>array(
-								'label'=>'Video & Custom Field',
+								'label'=>'Video',
 								'type'=>'devider'
 							),
 
@@ -271,24 +279,6 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 								'label'=>' ',
 								'type'=>'devider'
 							),
-
-							'sp_variations_gallery_images2{{id}}'=>array(
-								'label'=>' ',
-								'type'=>'icon',
-								'sanitize'=>'sanitize_text_field',
-								'dynamic_add_support_start'=>true,
-								'value'=>array(''),
-								'multiple_add_support'=>'start',
-								'class'=>array(),
-								'size_class'=>array('eight','wide'),
-								'inline'=>true,
-								/*'save_as'=>'post_meta',*/
-								'dynamic_add_support_end'=>true,
-							),
-							'images_segment{{id}}'=>array(
-								'label'=>'(Images)',
-								'type'=>'segment'
-							)
 
 							/*'submit_button'=>array(
 								'label'=>eowbc_lang('Save'),

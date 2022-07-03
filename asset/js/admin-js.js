@@ -167,11 +167,9 @@ function eowbc_ready($){
             multiple: false // Set to true to allow multiple files to be selected
         });
         file_frame.on('select', function() {
-            console.log('called select ');
             attachment = file_frame.state().get('selection').first().toJSON();          
             console.log(attachment);
             action_root.find("img").attr('src',attachment.url).css( 'width', 'auto' );
-            console.log(attachment.url);
             action_root.find("input[type='hidden']").val( attachment.id );
         });
         // Finally, open the modal

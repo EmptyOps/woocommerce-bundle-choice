@@ -60,7 +60,7 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 
 
 
-	$gallery_images_configs['types'] 					  = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->sp_variations_swatches_supported_attribute_types(array('is_base_type_only'=>true));
+	$gallery_images_configs['types'] 					  = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->sp_variations_gallery_images_supported_types(array('is_base_type_only'=>true));
 	$gallery_images_configs['product_variations_configs'] = wbc()->config->product_variations_configs();
 	$gallery_images_configs['template'] 				  = array('slider'=>array('id'=>'sp_slzm_slider_image_loop'), 'zoom'=>array('id'=>'sp_slzm_zoom_image_loop'));	
 	$gallery_images_configs['classes'] 				  = array('slider'=>array('container'=>'sp-variations-gallery-images-slider'), 'zoom'=>array('container'=>'sp-variations-gallery-images-zoom'));	
