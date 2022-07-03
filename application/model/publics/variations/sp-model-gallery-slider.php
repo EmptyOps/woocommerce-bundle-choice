@@ -32,7 +32,7 @@ class SP_Model_Gallery_Slider extends Eowbc_Base_Model_Publics {
 
 	public function render_ui(){
 		
-		add_filter('sp_variations_gallery_images_render', function($classes){
+		add_filter('sp_slzm_slider_container', function($classes){
 			$classes[] = 'small-img';
 		});
 
@@ -55,15 +55,21 @@ class SP_Model_Gallery_Slider extends Eowbc_Base_Model_Publics {
             $template_data['data'] = $data;
             $template_data['singleton_function'] = 'wbc';
 
-            $html =  wbc()->load->template($template_data['template_sub_dir'].$template_data['template_key'],(isset($template_data['data'])?array('data' => $template_data['data'],'index'=>-1,'id'=>-1):array()),true,$template_data['singleton_function'],true);
+            $template_data['data']['image'] = -1;
+        	$template_data['data']['index'] = -1;
+            $html =  wbc()->load->template($template_data['template_sub_dir'].'/'.$template_data['template_key'],(isset($template_data['data'])?$template_data['data']:array()),true,$template_data['singleton_function'],true,true);
 
 			return $html;
 
 		});
 
+		$this->load_asset();
+
 	}
+
 	public function load_asset(){
 
+		wbc()->load->asset( 'asset.php', constant( strtoupper( 'EOWBC_ASSET_DIR' ) ).'variations/gallery-slider.assets.php' );
 	}
 
 	public function init_core(){
@@ -84,17 +90,21 @@ class SP_Model_Gallery_Slider extends Eowbc_Base_Model_Publics {
 			$html = null;
 			$html = apply_filters('sp_slzm_slider_images_html',$html,$images_data);
 
-			wbc()->load->model('ui-builder');
 			$ui = array(
 				'type'=>'div',
 				'class'=>$classes,
-				'preHTML'=>$html
+				'child'=>$html
 			);
-			\eo\wbc\model\UI_Builder::instance()->build($ui,'sp_variations_gallery_images_slider_container');
+			\sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui,'sp_variations_gallery_images_slider_container');
 
 			$html = null;
 			$html = apply_filters('sp_slzm_slider_image_loop_js_template',$html);
-			echo \eo\wbc\model\UI_Builder::instance()->js_template_wrap('sp_slzm_slider_image_loop',$html,'wp');
+
+
+			$html = \sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($html,'sp_variations_gallery_images_slider_container',true);
+
+
+			echo \eo\wbc\model\UI_Builder::instance()->js_template_wrap('sp_slzm_slider_image_loop','temp'/*$html*/,'wp');
 
 		}, 10);	
 

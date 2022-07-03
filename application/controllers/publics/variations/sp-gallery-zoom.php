@@ -52,7 +52,7 @@ class SP_Gallery_Zoom extends \eo\wbc\controllers\publics\Controller{
                 $args['hook_callback_args']['images_data'] = $images_data;
 
                 return $this->selectron_hook_render($page_section,'zoom_images_html',$args);
-            });
+            },10,2);
 
         }       
 
@@ -62,9 +62,9 @@ class SP_Gallery_Zoom extends \eo\wbc\controllers\publics\Controller{
 
         if ($page_section == 'zoom_images') {
             if ($container_class == 'zoom_images_html') {
-                $data = $args['hook_callback_args'];
+                $data = $args['hook_callback_args']['images_data'];
                 unset($args['hook_callback_args']);
-                $this->load_view($data,$args);
+                return $this->load_view($data,$args);
             }
         }else{
 
@@ -75,7 +75,7 @@ class SP_Gallery_Zoom extends \eo\wbc\controllers\publics\Controller{
     private function load_view($data,$args = array()){
 
         $args['data'] = $data;
-        $this->getUI($args['page_section'],$args);
+        return $this->getUI($args['page_section'],$args);
 
     }
 
@@ -86,11 +86,8 @@ class SP_Gallery_Zoom extends \eo\wbc\controllers\publics\Controller{
         if ($page_section == 'zoom_images') {
 
             $args['page_section'] = 'zoom_images';
-            $ui = $this->get_ui_definition($args);
+            return $this->get_ui_definition($args);
 
-            wbc()->load->model('ui-builder');
-            \eo\wbc\model\UI_Builder::instance()->build($ui,'sp_variations_gallery_images_zoom');
-            
         }else{  
 
            \eo\wbc\model\publics\variations\SP_Model_Gallery_Zoom::instance()->render_ui( $this->get_ui_definition($args));
@@ -108,7 +105,7 @@ class SP_Gallery_Zoom extends \eo\wbc\controllers\publics\Controller{
 
         $args['singleton_function'] = 'wbc';
 
-        if ($args['page_section'] == 'slider_images') {
+        if ($args['page_section'] == 'zoom_images') {
 
             $args['data']['template_data'] = array(); 
             $args['data']['template_data']['template_key'] = 'gallery_zoom_{{template_key_device}}_image_loop_content';

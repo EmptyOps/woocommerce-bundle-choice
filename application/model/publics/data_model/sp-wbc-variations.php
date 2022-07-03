@@ -347,6 +347,18 @@ class SP_WBC_Variations extends SP_Variations {
 
 	}
 
+	public static function sp_variations_gallery_images_supported_attribute_types($configs = array()){
+
+		$type = array();
+		$type['image']='Images';
+		$type['video']='Video';
+
+		return $type;
+
+
+
+	}
+
 	public static function get_default_attributes($product_id){
 
 		$product = wc_get_product( $product_id );
@@ -355,7 +367,7 @@ class SP_WBC_Variations extends SP_Variations {
 			return array();
 		}
 
-		$variable_product = new WC_Product_Variable( absint( $product_id ) );
+		$variable_product = new \WC_Product_Variable( absint( $product_id ) );
 
 		// $selected = isset( $_REQUEST[ $selected_key ] ) ? wc_clean( wp_unslash( $_REQUEST[ $selected_key ] ) ) : $args['product']->get_variation_default_attribute( $args['attribute'] );
 
@@ -394,7 +406,7 @@ class SP_WBC_Variations extends SP_Variations {
 			$attributes[ sprintf( 'attribute_%s', $key ) ] = $value;
 		}
 
-		$data_store = WC_Data_Store::load( 'product' );
+		$data_store = \WC_Data_Store::load( 'product' );
 
 		return $data_store->find_matching_product_variation( $product, $attributes );
 		
@@ -402,7 +414,7 @@ class SP_WBC_Variations extends SP_Variations {
 
 	public static function get_available_variation($product_id, $variation_id){
 
-		$variable_product = new WC_Product_Variable( $product_id );
+		$variable_product = new \WC_Product_Variable( $product_id );
 		$variation        = $variable_product->get_available_variation( $variation_id );
 
 		return $variation;
@@ -530,8 +542,11 @@ class SP_WBC_Variations extends SP_Variations {
 		} else {
 
 			foreach ( $gallery_images as $i => $variation_gallery_image_id ) {
+
 				$variation_get_max_purchase_quantity['variation_gallery_images'][ $i ] = $this->get_product_attachment_props( $variation_gallery_image_id );
 			}
+		/*	wbc_pr($variation_get_max_purchase_quantity);
+die();*/
 		}
 
 		// apply filter hook here to let extensions filter over swatches data, with key sp_variations_available_variation -- to d or -- to b done
