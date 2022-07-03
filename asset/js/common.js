@@ -374,9 +374,9 @@
                          --  video can be served using custom_html also but maybe its own specific type for video is necessary? need to decide on it -- to h 
                  --  custom_html 
                  --  NOTE: since the data in case gallery_images module will be comming from the variation events in the variation etc. event args so nothing needed to be assigned in our main data var. 
-                         --  and like for swatches if required then need to dump the data in images container dom element, like for swatches it is on variable-items-wrapper element dom -- to h and -- to b 
-                                --  need to finalize now the process_images_template function and see if we fall short there of any data. so lets just finalize the data and everything there -- to a 
-                             --  check if that plugin we were exploring does have, but either way we will do only if it is necessary for us on the js layer -- to b 
+                         // --  and like for swatches if required then need to dump the data in images container dom element, like for swatches it is on variable-items-wrapper element dom -- to h and -- to b done
+                                // --  need to finalize now the process_images_template function and see if we fall short there of any data. so lets just finalize the data and everything there -- to a done
+                             // --  check if that plugin we were exploring does have, but either way we will do only if it is necessary for us on the js layer -- to b done
                                  --  all this data would be available in the variation_gallery_images var of the variation -- to h 
          -   template 
              // --  will vary based on attribute types, extensions and some other feature related conditions also 
@@ -389,6 +389,7 @@
                                  --  lets simply name it type but within that e params that we thought of -- to h 
                                      --  and if this type param is detected then even though still the image or video base type is resepcted on applicable layers to achieve optimum reusability like we envision for the swatches module with base_type field, but the responsibility of managing templates will be on their applicable layers of extensions and they would either repond with template or just replace there on their layers -- to h 
                                          --  so for this need to work out that now that js tempalte hook let the extensions to create and dump their own tempalte and manage simply on their end, this hook simply need to give that ability when above additional type is detected -- to b or -- to s or -- to a 
+                                                -- the hook and tamplate neet to be at index leval  -- to a 
                                          --  and also need to publish configs accordingly for applicable extensions, and on this note publish configs of all extensions -- to s or -- to a 
                                              --  and the applicable extensions will hold their own template var under configs and the template id in it -- to s or -- to a 
                                                 --  and like the types var is to be prepaired for gallery_images module, same way on gallery_images bound extensions prepare types there also -- to a 
@@ -513,9 +514,10 @@
                                              --  and the extension would respond back with anything that it think can be handled on common layers here based on base type(here its very image or video type) -- to h or -- to a 
                                                 --  so will that be our recursive flow? I think that is what we thought ofm with simple and precise condition that would avoid the recursion in any scenarios -- to a 
                                              NOTE: and there is no input_template_type implementation, but the type will be considered as base type while the e param provide type will be specific extended type. 
-                                                --  so extra param will host one type field and additionally a types object within which there would be single type  -- to a 
-                                                    --  and when the types is prepared, at that time simply object type is considered -- to a  
-                                                        --  and then it extensions would respond back with (base) type which could be further processed with recursive call -- to a 
+                                                // --  so extra param will host one type field and additionally a types object within which there would be single type  -- to a done 
+                                                    // --  and when the types is prepared, at that time simply type is considered -- to a done
+                                                        --  and then it extensions would respond back with object (base) type which could be further processed with recursive call -- to a 
+                                                            -- extentions can return object (base) type -- to a
                          // ACTIVE_TODO_OC_END                
  
                      //  data applicable loops 
@@ -667,996 +669,1152 @@
  ACTIVE_TODO_OC_END
  
  // the variations swatches js module
- window.document.splugins.wbc.variations.swatches = window.document.splugins.wbc.variations.swatches || {};
- 
- window.document.splugins.wbc.variations.swatches.core = function( configs ) {
- 
-     var _this = this; 
- 
-     _this.configs = jQuery.extend({}, {}/*default configs*/, configs);
- 
-     _this.configs.attribute_types_keys = Object.keys( _this.configs.attribute_types );
- 
-     _this.base_container = jQuery( ( window.document.splugins.common._o( _this.configs, 'base_container_selector') ? _this.configs.base_container_selector : '.variations_form' ) );      
- 
-     var _this.data = {};
-     var _this.binding_stats = {};     
- 
-     // ACTIVE_TODO_OC_START
-     // here mostly in the private scope, the variations module should subscribe to search filter events and pass those to variations core which would call the change event so that filters those affecting the variations data like images etc. are rendered accordingly. so that metal color based or shape based images render appropriately. 
-     //     --  however, it is not limited to js layer only and actually js layer here would not be of use except the search is client side only based on the js. but the searches are always carried on the backend so the php layer need to ensure that return appropriate variations images etc. whenever the selected options of the search filters connects with variations instead of the main product. 
-     //         --  m have did it already but need to implement throughly as per standard if not proper yet 
-     
-     // if below difference and includes functions are provided by underscore js backed by wp/woo maybe then we can port through our common namespace, mainly because maybe on other platforms or so the underscore might not be available then it can be replaced somehow from there. so maybe still it will going to be _(underscore) function only and we will need to call it with long name pattern or we can port even the common namespace as sp_common so the call will be like splugins._ -- to h. --   and when required we can do splugins.c for the common namespace maybe.  
- 
-     // var in_stocks = _.difference(selects, disabled_selects);
-     // if (_.includes(in_stocks, attribute_value)) {
-     // ACTIVE_TODO_OC_END
+window.document.splugins.wbc.variations.swatches = window.document.splugins.wbc.variations.swatches || {};
 
-    after clearing the current points, lets focus on finishing if there is any broad structuring or so related points -- to s 
-        --  and after that will start from beginning of module, and basically finalize to make it ready for run -- to s  
-            --  and then will do one more cycle finalizing the code implementation like confirming selector, find and so on statements, other such layers and definitely applying the remaining class structure everywhere -- to s 
-     var init_private = function() {
- 
-         window.document.splugins.events.api.createSubject( 'swatches', ['process_attribute_types'] );
- 
-         // init on all applicable events 
-         jQuery(document).on('wc_variation_form', _this.base_container+':not(.wbc-swatches-loaded)', function (event) {
- 
-             //  had we used the _jQueryInterface style the _jQueryInterface call would have started from here 
-             preprocess( this, event );  
-         });
- 
-         below do apply our flows like -- to s 
-             --  change with _this.base_container 
-             --  change $ with jQuery but only where it is used as $() var 
-             --  replace _ (underscore) js calls with sp_common._ 
-             --  replace loaded classs 
-             --  and other such matters if any 
-         // Try to cover all ajax data complete
-         jQuery(document).ajaxComplete(function (event, request, settings) {
-           _.delay(function () {
-             $('.variations_form:not(.wvs-loaded)').each(function () {
-               $(this).wc_variation_form();
-             });
-           }, 100);
-         });
- 
-         // Composite product load
-         // JS API: https://docs.woocommerce.com/document/composite-products/composite-products-js-api-reference/
-         $(document.body).on('wc-composite-initializing', '.composite_data', function (event, composite) {
-           composite.actions.add_action('component_options_state_changed', function (self) {
-             $(self.$component_content).find('.variations_form').removeClass('wvs-loaded wvs-pro-loaded');
-           });
- 
-           /* composite.actions.add_action('active_scenarios_updated', (self) => {
-              console.log('active_scenarios_updated')
-              $(self.$component_content).find('.variations_form').removeClass('wvs-loaded wvs-pro-loaded')
-            })*/
-         });
- 
-         // ACTIVE_TODO_OC_START
-         // // Support for Yith Infinite Scroll
-         so a call from here to the compatability function of this module, and that will cover all compatability matters of load time inlcuding the promize resolve block of the plugin we were exploring. so call compatability with section=preprocess -- to d 
-         // ACTIVE_TODO_OC_END
- 
-         // WooCommerce Filter Nav
-         $('body').on('aln_reloaded.wvs', function () {
-           _.delay(function () {
-             $('.variations_form:not(.wvs-loaded)').each(function () {
-               $(this).wc_variation_form();
-             });
-           }, 100);
-         });
-     };
- 
- 
-     var preprocess = function( element, event ) {
- 
-         _this.base_element = element;
-         _this.$base_element = jQuery( _this.base_element );
- 
- 
-         _this.data.product_variations = _this.$base_element.data('product_variations') || [];      
- 
- 
-         _this.data.is_ajax_variation = _this.data.product_variations.length < 1;
-         _this.data.product_id = _this.$base_element.data('product_id');
-               this.reset_variations = this.$element.find('.reset_variations');
- 
-         this.$element.addClass('wbc-swatches-loaded');
- 
- 
-         //
-         //  data applicable loops 
-         //
-         // pre process data and process collections that would be necessary for neat and quick ops 
-         _this.data = preprocess_data( _this.data );   
- 
-         // do necessary bindings for the attribute types to be supported 
-         process_attribute_types( _this.data.product_variations );  
- 
-         our flow of calling the functions heirarchy as part of the preprocess function, will cover below like flow of binding for the update and also initialization tasks -- to h 
-             --  and in out init and preprocess layer we need to bind all above legacy events which are mostly for executing the wc_variation_form ultimately -- to h 
-                 --  and non legacy matters in above list would go to the compatability layers -- to h 
-         // Call
-         this.init();
-         this.update();
- 
-                 ACTIVE_TODO/TODO we may also like raise some broad general level event triggers(for us its observer pattern notifications), it seems important for establish mature and generc structure of events and overall flow on js layers. 
-               // Trigger
-               $(document).trigger('woo_variation_swatches', [this.$element]);
- 
-             var _this2 = this;
- 
-             var _this = this;
- 
- 
-             most part of below code developes the logic for the stock based disable and enable feature 
-                 --  so we may like to consider the fundamentals for now and would do mature implementation in the 2nd revision -- to h 
- 
-         ACTIVE_TODO_OC_START
-         this would be determined based on admin options settings, and we may already have that admin options settings and if not then we need to add that -- to h and -- to s 
-             --  and the options object should be loaded from the variations.assets.php file, and that is already recieving many admin options related to apprearance from the model. all this options or required options should be passed to this js module under configs parameter but admin settings options should reside under key options within the configs object. -- to h and -- to s 
-             --  and view with shape was already supporting this selected item label, so need to manage this asap. and atleast we can first execute this point so that shape extension does function as expected -- to h 
-                 --  we still first need to see all flows of the plugins we were exploring so look for keywords like selected, and I will see the snaps -- to s 
-                     --  then will need to finalize our flow and heirachical structure -- to h. lets confim below flow with the flow of plugins we were exploring have  
-                         --  I think the layers that would be involved in the heirachical structure would be 
-                             --  configs from admin 
-                                 --  and applicable section conditions here 
-                             --  templates from php layers 
-                                 --  and applicable template function calls from here 
-                                     --  and updating templates with applicable data on variation change and so on events, but mainly it will be variation change event 
-         // Append Selected Item Template
-         if (woo_variation_swatches_options.show_variation_label) {
-           this.$element.find('.variations .label').each(function (index, el) {
-             $(el).append(_this2.selected_item_template);
-           });
-         }
- 
-                 heirachical classes 
-                     --  add three level classes in our swatches templates -- to s 
-                             --  inlcuding in extensions -- to s 
-                             --  and while you do remove the unnecessary classes of plugins we were exploring and other such (maybe we can drop the unused classes of m also but I think lets just be there till they are not marked as deprecated) -- to s 
-                         --  first would be wbc-swatches-variation-items-wrapper and second would be wbc-swatches-variable-item (still confirm the actual class name used by woo)
-                         --  and third is not any level but create the class for woo select dropdown that stays there in hidden, it would be something like wbc-swatches-raw-select -- to s 
-                             --  but first confirm if that dropdown is actually given the name of the raw and if saw is it on select of their parent raw? -- to s 
-                     --  ACTIVE_TODO and similarly and already implemented most classes for gallery_images, for gallery_images we need to make sure that the heirarchy of classes normally been applied by woo and the plugins we were exploring are followed in our templates layers and all the applicable classes are in place -- to s and -- to a 
-                         --  ACTIVE_TODO and then t and a you need to appropriately plan the css for all those classes taking into consideration all different popular themes. but yeah css structuring should be generic so that it adapats as planned to all different themes. -- to t and -- to a. this task need to be executed very soon or now while we are approaching to finalize the 10 theme demos. 
- 
-                 heirachical and/or applicable css -- to t 
-                     --  just research all the different classes, elements, events and flows and then plan the generic yet elegant css which I discussed with you about -- to t 
-                         --  and look at the li.each loop below they had create and applied a common and generic selected class, which would be relied upon by all their templates of different types -- to t 
-                             --  so we need to create similar for our types -- to t 
-                             --  and also for types of the extensions -- to t 
- 
-                 our own heirachical structure -- to s and -- to a 
-                     --  the variable-items-wrapper loop below will work as type loop for us now, so implement similar there and comment from here -- to s 
-                         --  and from within that loop all those functions will be called, and with function call pass the attribute type and if that is not available even in the variable-items-wrapper element then we will simply dump it there from our common woo attribute dropdown element -- to s 
-                         --  and together with the type, always pass the this object from any each loop to ensure optimum stability -- to s 
-                         --  there will be process function for options under the process_template function heirarchy -- to s 
-                             --  so call the process_attribute_template function from the process_template function -- to s 
-                                 --  and within that function the main options loop and if there is any other loop then that will implemented -- to s 
-                         --  for the rest follow the task given below for entire swatches module -- to s 
- 
-                     --  for the gallery_images module, a you need to follow the tasks given in the gallery_images module -- to a 
- 
-                 additional our own flow that we may like to use beyond notifications and so on, that may help in future exnteding or improving flows/features as well as scalling. -- I think it would be mature heirachical structure, mature data keeping (brief client side caching for smooth UI and effects) and data flows throughout the funnel, precise and neat notification (events) definitions, simple to the point selectors and neat & clean overall implementation and execution 
- 
- 
-                 and some things that still is not came to the attention 
- 
- 
-             this.$element.find('ul.variable-items-wrapper').each(function (i, el) {
- 
-             ACTIVE_TODO is it needed? and why they did it? -- to s. check and update me 
-               $(this).parent().addClass('woo-variation-items-wrapper');
- 
- 
-               move all below in the process_attribute_template function -- to s 
-                 --  however also check the logic and use of eq below -- to s 
-                 --  and as mentioned above this object will always be passed from all .each loops under element, so use that element inside the process_attribute_template -- to s 
-               var select = $(this).siblings('select.woo-variation-raw-select');
-               var selected = '';
-               var options = select.find('option');
-               var disabled = select.find('option:disabled');
-               var out_of_stock = select.find('option.enabled.out-of-stock');
-               var current = select.find('option:selected');
-               var eq = select.find('option').eq(1);
- 
- 
-               move all below tabbed in the process_attribute_template function -- to s 
-                       var li = $(this).find('li:not(.woo-variation-swatches-variable-item-more)');
-                             ACTIVE_TODO however not this, for this once t gives conclusion our final implementation will follow -- to t 
-                       var reselect_clear = $(this).hasClass('reselect-clear');
- 
-                       var mouse_event_name = 'click.wvs'; // 'touchstart click';
- 
-                       var attribute = $(this).data('attribute_name');
-                       // let attribute_values = ((_this.is_ajax_variation) ? [] : _this._generated[attribute])
-                       // let out_of_stocks = ((_this.is_ajax_variation) ? [] : _this._out_of_stock[attribute])
-                       var selects = [];
-                       var disabled_selects = [];
-                       var out_of_stock_selects = [];
-                       var $selected_variation_item = $(this).parent().prev().find('.woo-selected-variation-item-name');
- 
-                       this need to be moved to compatability function, so from here there would be call to the compatability function -- to s 
-                       // For Avada FIX
-                       if (options.length < 1) {
-                         select = $(this).parent().find('select.woo-variation-raw-select');
-                         options = select.find('option');
-                         disabled = select.find('option:disabled');
-                         out_of_stock = select.find('option.enabled.out-of-stock');
-                         current = select.find('option:selected');
-                         eq = select.find('option').eq(1);
-                       }
- 
-             all below to attribute data function -- to s 
-                 --  and they will return data object of local scope -- to s 
-                     --  ACTIVE_TODO/TODO but whenever it make sense we can keep such data in global data var of module to benefit from the caching as planned. 
-               there will be dedicated functions under preprocess_data function heirarchy, for managing stock status and other limitations 
-                 --  the functions names would be namely preprocess_stock_status_data -- to h 
-                 --  and the other such functions which would be required is manging other such conditions, managing the legacy number of variations limit and other such limitations of supporting 30 variations only for certain functions which was there in the plugin we were exploring -- to h. it may be ACTIVE_TODO 
-               options.each(function () {
-                 if ($(this).val() !== '') {
-                   selects.push($(this).val());
-                   selected = current.length === 0 ? eq.val() : current.val();
-                 }
-               });
- 
-               disabled.each(function () {
-                 if ($(this).val() !== '') {
-                   disabled_selects.push($(this).val());
-                 }
-               });
- 
-               // Out Of Stocks
-               out_of_stock.each(function () {
-                 if ($(this).val() !== '') {
-                   out_of_stock_selects.push($(this).val());
-                 }
-               });
- 
-               var in_stocks = _.difference(selects, disabled_selects);
- 
-               // console.log('out of stock', out_of_stock_selects)
-               // console.log('in stock', in_stocks)
- 
-               var available = _.difference(in_stocks, out_of_stock_selects);
- 
-               the type specific matters are rarely found above due to abstraction that was not needed 
-                 --  however like below the type specific things handled, we would have type specific condition in function process_attribute_template. as below will going to be moved there -- to s 
-               // Mark Selected
-               li.each(function (index, li) {
- 
-                 var attribute_value = $(this).attr('data-value');
-                 var attribute_title = $(this).attr('data-title');
- 
-                 // Resetting LI
-                 $(this).removeClass('selected disabled out-of-stock').addClass('disabled');
-                 $(this).attr('aria-checked', 'false');
-                 $(this).attr('tabindex', '-1');
- 
-                 if ($(this).hasClass('radio-variable-item')) {
-                   $(this).find('input.wvs-radio-variable-item:radio').prop('disabled', true).prop('checked', false);
-                 }
- 
-                 // Default Selected
-                 // We can't use es6 includes for IE11
-                 // in_stocks.includes(attribute_value)
-                 // _.contains(in_stocks, attribute_value)
-                 // _.includes(in_stocks, attribute_value)
- 
-                 if (_.includes(in_stocks, attribute_value)) {
- 
-                   $(this).removeClass('selected disabled');
-                   $(this).removeAttr('aria-hidden');
-                   $(this).attr('tabindex', '0');
- 
-                   $(this).find('input.wvs-radio-variable-item:radio').prop('disabled', false);
- 
-                   if (attribute_value === selected) {
- 
-                     $(this).addClass('selected');
-                     $(this).attr('aria-checked', 'true');
- 
-                     if (woo_variation_swatches_options.show_variation_label) {
-                       $selected_variation_item.text(woo_variation_swatches_options.variation_label_separator + ' ' + attribute_title);
-                     }
- 
-                     if ($(this).hasClass('radio-variable-item')) {
-                       $(this).find('input.wvs-radio-variable-item:radio').prop('checked', true);
-                     }
-                   }
-                 }
- 
-                 // Out of Stock
- 
-                 if (available.length > 0 && _.includes(out_of_stock_selects, attribute_value) && woo_variation_swatches_options.clickable_out_of_stock) {
-                   $(this).removeClass('disabled').addClass('out-of-stock');
-                 }
-               });
-             });
- 
- 
-             check if below two events are been bound by anything -- to s 
-             this.$element.trigger('woo_variation_swatches_init', [this, this.product_variations]);
- 
-             $(document).trigger('woo_variation_swatches_loaded', [this.$element, this.product_variations]);
-           }
- 
-     };
- 
-     var preprocess_data = function(data) {
- 
-         data.attribute_types = {};
-         data.product_variations.each(function (i, variation) {
- 
-           Object.keys(variation.attributes).map(function (attribute_name) {
- 
-             here confirm if attribute object below has the attribute type field, check our demo or of other plugin -- to s 
-                 --  and fix the loop or so if not correct -- to s
-             data.attribute_types[attribute_name] = variation.attributes[attribute_name].attribute_type;
-           });
- 
-           break;
-         }, {});
- 
-         ACTIVE_TODO not sure if this is necessary 
-         data._generated = data.product_variations.reduce(function (obj, variation) {
- 
-           Object.keys(variation.attributes).map(function (attribute_name) {
-             if (!obj[attribute_name]) {
-               obj[attribute_name] = [];
-             }
- 
-             if (variation.attributes[attribute_name]) {
-               obj[attribute_name].push(variation.attributes[attribute_name]);
-             }
-           });
- 
-           return obj;
-         }, {});
- 
-         data._out_of_stock = data.product_variations.reduce(function (obj, variation) {
- 
-           Object.keys(variation.attributes).map(function (attribute_name) {
-             if (!obj[attribute_name]) {
-               obj[attribute_name] = [];
-             }
- 
-             if (variation.attributes[attribute_name] && !variation.is_in_stock) {
-               obj[attribute_name].push(variation.attributes[attribute_name]);
-             }
-           });
- 
-           return obj;
-         }, {});
-     
-     };
- 
-     var process_attribute_types = function( product_variations ) {
- 
-         localize the configs var(localize like we are doing during admin-js load and so on) with common js load -- to s 
-             --  it will host two vars for now below attribute_types, so call that function -- to s 
-                 --  and the function you call need to support one flag like is_base_type_only so pass that simply in the configs array as direct array -- to s 
-             --  it also need to host that very configs files, config function configs so add that too in the final configs array -- to s 
-                 --  so at first create the configs array at top and then we will keep adding the required var in it -- to s 
-             --  and yeah it also need to have the template id param unde templates.slider.id and same for zoom. so create said level of elements in the configs array and look at the slider zoom models render core functions -- to s 
-             --  and at last set the configs below where it is exported, you can ask a if required -- to s 
-                 --  actually the template vars will be required for the gallery_images module, so create config for that also and then set for that also where it is exported -- to s 
-                     --  gallery_images module will also have almost all similar vars, except that it will have additional tempalte var -- to s 
-         _this.data.attribute_types.each( function( i, type ) {
- 
-             // ACTIVE_TODO_OC_START
-             // --  so above preprocess_data call should simply prepare two attribute types list, first is attribute_types and second is ... or simply one only. and simply delegate everything else that is not coming under attribute_types, to the extensions layers. and should simply publish this list of attribute_types from backend. 
-             // NOTE: and one of the key benefit of this approach is that these layers will emit the broadcast notification event only if they detect the type to be the premiumly supported type and otherwise not. which would minimize process and little or not hanging processes and less debug console logs that would appear around. 
- 
-             // is the woo input template type means dropdown is mandatorily kept by plugins, not seems likely but still confirm and then we need a way to determine(always) the exact input type based on the field/input type selected on woo panel or otherwise simply support the input_template_type field which will be set in background implicitly based on the field/input type selected on woo panel -- this field is simply better then managing many different template names of extensions and defining based on that -- and it will default to the above field/input type for wbc nothing to manage, only if condition below that if input_template_type is not defined then read simply above field/input type. and in case of extensions that need to be defined based on the template that is selected on their admin panel. so this template option should be only be defining it and passing it where applicable so that is gets here. and it is need to be defined based on that only to avoid confusion and many unnecessary and confusing configuration overheads. no simply need to stick to attribute type only means field/input-type selected on woo panel and that is standard and clean. so implement here based on that only. -- to h or -- to d 
-             // ACTIVE_TODO_OC_END
- 
-             if (splugins._.includes(_this.configs.attribute_types_keys, type)) {
- 
-                 // ACTIVE_TODO_OC_START    
-                 // do necessary logic if support is available
-                 //     --  that means based on type call/process necessary functions/layers for example events functions(some events functions already defined below), template functions/layers, pages functions/layers, like events the effects functions/layers, plugins/themes applicable compatiblity function calls, slider and zoom functions/layers(note that even for swatches modules there might be some conditions or conditional logics that would be required) -- to d 
-                 //     --  and also do call/process necessary functions/layers for the provided device type(and maybe some of their specifications would also need to be handled in future like width(which would otherwise mostly be dynamically handled), resolution and so on ACTIVE_TODO) and configs, but it will be a specific block here only and the dedicated function for them sound unnecessary -- to d
-                 //         --  and we need some logic of if function or layer need to be called once only then take care of that, for all above functions, including the devices and configs that are to be handled from here -- to d 
-                 //         --  and as usual there will going to be if conditions for applicable matters in applicable functions and their layers defined above, to handle the devices and configuration specific matters. and so the dedicated blocks of devices and configs will handle some specific matters which do not necessarily mixed with other things mentioned above like events, template, pages and so on layers. -- to h    
-                 // ACTIVE_TODO_OC_END   
- 
-                 process_template(type); 
- 
-                 process_pages(type);
- 
-                 process_slider_and_zoom(type); 
- 
-                 process_events(type); 
- 
-                 process_and_manage_effects(type);
- 
-                 process_compatability_matters(type);
- 
-                 // ACTIVE_TODO_OC_START
-                 // -   devices 
-                 //         --  for layers which need to have complete different implementation for mobile etc. then for them applicable flgas should be set/initiated from the higher layers layers for example the slider and zoom would be completely different plugin for mobile devices -- but anyway now we will see to it again to reconsider using the new slider also for mobile but only if that is beneficial in terms of setup time and maintainance time, for the later it would be beneficial but not sure about the initial setup and implementation time and challanges that may arise. 
-                 //             --  and we would like to reconsider the zoom also in the same way like above 
-                 //     --  browser - will matter so much 
-                 //     --  screen size - need to handle occasionally only as long as overall UI/UX layers are mature 
-                 //     --  os 
-                 // ACTIVE_TODO_OC_END    
- 
-                     if(window.document.splugins.common.is_mobile){
- 
-                     }else if(window.document.splugins.common.is_tablet){
- 
- 
-                     }else if(browser){
- 
-                     }else if(screen size){
- 
-                     }else if(os){
- 
-                     };
- 
-                 // ACTIVE_TODO_OC_START    
-                 // -   configs 
-                 //     --  will control decision of whether to display certain section or not, for example whether to display template part of attribute name (for us ribbon wrapper)
-                 //     --  or whether to show tooltip or not 
-                 // ACTIVE_TODO_OC_END
- 
-                     if( type == 'radio' ) 
- 
-             }                          
-             else if( not for example slider input is not supported then host the listener event so that extension js do its job or simply skip it and let extension js do their part )
-                 // ACTIVE_TODO_OC_START
-                 // --  and we can and should simply use observer pattern events to host for example the slider listener here and then emit internal change event from here     
-                 //     --  still in this case the variation.swatches will register its event subject and emit bootstrap level notification like bootstrap/on.load maybe on.load is more user friendly 
-                 //     --  then at that time applicable extension will bootstrap the js layer 
-                 //     --  and when the change event occurs the applicable extension will simply call the ...swatches.api function to notify back about their change event or the events module can add support to provide callbacks to subscriber so that they can reply with something when they have done something based on notification. so it can be called the notification_response. -- but it will be about breaking our own rule of keeping the events simple. so even if we must do then in that case it must be till notification_response only and no further callback back and forth can be supported. otherwise it mostly lead to long debug sequences. --  however it has benefit of less maintainance since otherwise extensions need to know about the ...swatches.api but in case of events support of notification_response it only need to learn about and depend on the variations.swatches subject of events module. and as long as we can keep it limited to notification_response only and do not extend it further it will be clean to be frank. 
- 
-                 var callback = null ;
-                 window.document.splugins.events.api.notifyAllObservers( 'swatches', 'process_attribute_types', type, callback );
- 
-                 //     --  and we are planning to host darker/lighter slider support also from here as usual so it will be just like above slider example 
-                 //         --  but yeah after the change event is recieved here that will be emitted to the gallery_images module to let them do their job. since darker lighter is not part of the variation there is no further thing to do from here after the change event is recieved. 
-                 //             --  and since it is different kind processing that is required after change event so the input_template_type must be defined uniquely like slider_no_variation 
-                 //                 NOTE: and yeah on that note everything of the sp_variations module must be dynamic and nothing should be hardcoded so slider_no_variation input template type must be passed right from where the template is defined on admin to till here 
-                 // ACTIVE_TODO_OC_END                
-             if( type == 'radio' ) 
-             // ACTIVE_TODO_OC_START    
-             //     -   configs 
-             //             --  will control decision of whether to display certain section or not, for example whether to display template part of attribute name (for us ribbon wrapper)
-             //             --  or whether to show tooltip or not 
- 
-             // --  it wil be a specific block here for devices and configs -- to d 
-             // --  while for the rest create dedicated functions like process_template, process_events and so on. for the layers listed below. 
-             //     --  create below list of functions after the process_attribute_types function, and apply above peudo flows there and rest of the flows those functions should adapt from the flow notes from the heirachical flow plan at top -- to d and -- to h 
-             //         // -- process_template -- to d done
-             //         // -- process_pages -- to d done
-             //         // -- process_slider_and_zoom -- to d done
-             //         // -- process_events -- to d done
-             //         // -- process_and_manage_effects -- to d done
-             //         // -- process_compatability_matters -- to d done
-             // ACTIVE_TODO_OC_END        
-             
+window.document.splugins.wbc.variations.swatches.core = function( configs ) {
+
+    var _this = this; 
+
+    _this.configs = jQuery.extend({}, {}/*default configs*/, configs);
+
+    _this.configs.attribute_types_keys = Object.keys( _this.configs.attribute_types );
+
+    _this.base_container = jQuery( ( window.document.splugins.common._o( _this.configs, 'base_container_selector') ? _this.configs.base_container_selector : '.variations_form' ) );      
+
+    var _this.data = {};
+    var _this.binding_stats = {};     
+
+    // ACTIVE_TODO_OC_START
+    // here mostly in the private scope, the variations module should subscribe to search filter events and pass those to variations core which would call the change event so that filters those affecting the variations data like images etc. are rendered accordingly. so that metal color based or shape based images render appropriately. 
+    //     --  however, it is not limited to js layer only and actually js layer here would not be of use except the search is client side only based on the js. but the searches are always carried on the backend so the php layer need to ensure that return appropriate variations images etc. whenever the selected options of the search filters connects with variations instead of the main product. 
+    //         --  m have did it already but need to implement throughly as per standard if not proper yet 
+    
+    // if below difference and includes functions are provided by underscore js backed by wp/woo maybe then we can port through our common namespace, mainly because maybe on other platforms or so the underscore might not be available then it can be replaced somehow from there. so maybe still it will going to be _(underscore) function only and we will need to call it with long name pattern or we can port even the common namespace as sp_common so the call will be like splugins._ -- to h. --   and when required we can do splugins.c for the common namespace maybe.  
+
+    // var in_stocks = _.difference(selects, disabled_selects);
+    // if (_.includes(in_stocks, attribute_value)) {
+    // ACTIVE_TODO_OC_END
+
+    var init_private = function() {
+
+        window.document.splugins.events.api.createSubject( 'swatches', ['process_attribute_types'] );
+
+        // init on all applicable events 
+        jQuery(document).on('wc_variation_form', _this.base_container+':not(.wbc-swatches-loaded)', function (event) {
+
+            //  had we used the _jQueryInterface style the _jQueryInterface call would have started from here 
+            preprocess( this, event );  
+        });
+
+        below do apply our flows like -- to s 
+            --  change with _this.base_container 
+            --  change $ with jQuery but only where it is used as $() var 
+            --  replace _ (underscore) js calls with sp_common._ 
+            --  replace loaded classs 
+            --  and other such matters if any 
+        // Try to cover all ajax data complete
+        jQuery(document).ajaxComplete(function (event, request, settings) {
+          splugins._.delay(function () {
+            jQuery(_this.base_container+'.variations_form:not(.wbc-swatches-loaded)').each(function () {
+              jQuery(this).wc_variation_form();
+            });
+          }, 100);
+        });
+
+        // Composite product load
+        // JS API: https://docs.woocommerce.com/document/composite-products/composite-products-js-api-reference/
+        jQuery(document.body).on('wc-composite-initializing', '.composite_data', function (event, composite) {
+          composite.actions.add_action('component_options_state_changed', function (self) {
+            jQuery(self.$component_content).find(_this.base_container+'.variations_form').removeClass('wbc-swatches-loaded .wbc-swatches-pro-loaded');
+          });
+
+          /* composite.actions.add_action('active_scenarios_updated', (self) => {
+             console.log('active_scenarios_updated')
+             $(self.$component_content).find('.variations_form').removeClass('wvs-loaded wvs-pro-loaded')
+           })*/
+        });
+
+        // ACTIVE_TODO_OC_START
+        // // Support for Yith Infinite Scroll
+        so a call from here to the compatability function of this module, and that will cover all compatability matters of load time inlcuding the promize resolve block of the plugin we were exploring. so call compatability with section=preprocess -- to d 
+        compatability('preprocess');
+        // ACTIVE_TODO_OC_END
+
+        // WooCommerce Filter Nav
+        jQuery('body').on('aln_reloaded', function () {
+          splugins._.delay(function () {
+            jQuery(_this.base_container+'.variations_form:not(.wbc-swatches-loaded)').each(function () {
+              jQuery(this).wc_variation_form();
+            });
+          }, 100);
+        });
+    };
+
+
+    var preprocess = function( element, event ) {
+
+        _this.base_element = element;
+        _this.$base_element = jQuery( _this.base_element );
+
+
+        _this.data.product_variations = _this.$base_element.data('product_variations') || [];      
+
+
+        _this.data.is_ajax_variation = _this.data.product_variations.length < 1;
+        _this.data.product_id = _this.$base_element.data('product_id');
+              this.reset_variations = this.$element.find('.reset_variations');
+
+        this.$element.addClass('wbc-swatches-loaded');
+
+
+        //
+        //  data applicable loops 
+        //
+        // pre process data and process collections that would be necessary for neat and quick ops 
+        _this.data = preprocess_data( _this.data );   
+
+        // do necessary bindings for the attribute types to be supported 
+        process_attribute_types( _this.data.product_variations );  
+
+        our flow of calling the functions heirarchy as part of the preprocess function, will cover below like flow of binding for the update and also initialization tasks -- to h 
+            --  and in out init and preprocess layer we need to bind all above legacy events which are mostly for executing the wc_variation_form ultimately -- to h 
+                --  and non legacy matters in above list would go to the compatability layers -- to h 
+        // Call
+        this.init();
+        this.update();
+
+                ACTIVE_TODO/TODO we may also like raise some broad general level event triggers(for us its observer pattern notifications), it seems important for establish mature and generc structure of events and overall flow on js layers. 
+              // Trigger
+              $(document).trigger('woo_variation_swatches', [this.$element]);
+
+            var _this2 = this;
+
+            var _this = this;
+
+
+            most part of below code developes the logic for the stock based disable and enable feature 
+                --  so we may like to consider the fundamentals for now and would do mature implementation in the 2nd revision -- to h 
+
+        ACTIVE_TODO_OC_START
+        this would be determined based on admin options settings, and we may already have that admin options settings and if not then we need to add that -- to h and -- to s 
+            --  and the options object should be loaded from the variations.assets.php file, and that is already recieving many admin options related to apprearance from the model. all this options or required options should be passed to this js module under configs parameter but admin settings options should reside under key options within the configs object. -- to h and -- to s 
+            --  and view with shape was already supporting this selected item label, so need to manage this asap. and atleast we can first execute this point so that shape extension does function as expected -- to h 
+                --  we still first need to see all flows of the plugins we were exploring so look for keywords like selected, and I will see the snaps -- to s 
+                    --  then will need to finalize our flow and heirachical structure -- to h. lets confim below flow with the flow of plugins we were exploring have  
+                        --  I think the layers that would be involved in the heirachical structure would be 
+                            --  configs from admin 
+                                --  and applicable section conditions here 
+                            --  templates from php layers 
+                                --  and applicable template function calls from here 
+                                    --  and updating templates with applicable data on variation change and so on events, but mainly it will be variation change event 
+        // Append Selected Item Template
+        if (woo_variation_swatches_options.show_variation_label) {
+          this.$element.find('.variations .label').each(function (index, el) {
+            $(el).append(_this2.selected_item_template);
+          });
+        }
+
+                heirachical classes 
+                    --  add three level classes in our swatches templates -- to s 
+                            --  inlcuding in extensions -- to s 
+                            --  and while you do remove the unnecessary classes of plugins we were exploring and other such (maybe we can drop the unused classes of m also but I think lets just be there till they are not marked as deprecated) -- to s 
+                        --  first would be wbc-swatches-variation-items-wrapper and second would be wbc-swatches-variable-item (still confirm the actual class name used by woo)
+                        --  and third is not any level but create the class for woo select dropdown that stays there in hidden, it would be something like wbc-swatches-raw-select -- to s 
+                            --  but first confirm if that dropdown is actually given the name of the raw and if saw is it on select of their parent raw? -- to s 
+                    --  ACTIVE_TODO and similarly and already implemented most classes for gallery_images, for gallery_images we need to make sure that the heirarchy of classes normally been applied by woo and the plugins we were exploring are followed in our templates layers and all the applicable classes are in place -- to s and -- to a 
+                        --  ACTIVE_TODO and then t and a you need to appropriately plan the css for all those classes taking into consideration all different popular themes. but yeah css structuring should be generic so that it adapats as planned to all different themes. -- to t and -- to a. this task need to be executed very soon or now while we are approaching to finalize the 10 theme demos. 
+
+                heirachical and/or applicable css -- to t 
+                    --  just research all the different classes, elements, events and flows and then plan the generic yet elegant css which I discussed with you about -- to t 
+                        --  and look at the li.each loop below they had create and applied a common and generic selected class, which would be relied upon by all their templates of different types -- to t 
+                            --  so we need to create similar for our types -- to t 
+                            --  and also for types of the extensions -- to t 
+
+                our own heirachical structure -- to s and -- to a 
+                    // --  the variable-items-wrapper loop below will work as type loop for us now, so implement similar there and comment from here -- to s done 
+                        --  and from within that loop all those functions will be called, and with function call pass the attribute type and if that is not available even in the variable-items-wrapper element then we will simply dump it there from our common woo attribute dropdown element -- to s 
+                        // --  and together with the type, always pass the this object from any each loop to ensure optimum stability -- to s done
+                        // --  there will be process function for options under the process_template function heirarchy -- to s done
+                            // --  so call the process_attribute_template function from the process_template function -- to s done 
+                                // --  and within that function the main options loop and if there is any other loop then that will implemented -- to s done
+                        // --  for the rest follow the task given below for entire swatches module -- to s done
+
+                    --  for the gallery_images module, a you need to follow the tasks given in the gallery_images module -- to a 
+
+                additional our own flow that we may like to use beyond notifications and so on, that may help in future exnteding or improving flows/features as well as scalling. -- I think it would be mature heirachical structure, mature data keeping (brief client side caching for smooth UI and effects) and data flows throughout the funnel, precise and neat notification (events) definitions, simple to the point selectors and neat & clean overall implementation and execution 
+
+
+                and some things that still is not came to the attention 
+
+
+            // this.$element.find('ul.variable-items-wrapper').each(function (i, el) {
+
+              ACTIVE_TODO is it needed? and why they did it? -- to s. check and update me 
+              $(this).parent().addClass('woo-variation-items-wrapper');
+
+
+              move all below in the process_attribute_template function -- to s 
+                --  however also check the logic and use of eq below -- to s 
+                --  and as mentioned above this object will always be passed from all .each loops under element, so use that element inside the process_attribute_template -- to s 
+              // var select = $(this).siblings('select.woo-variation-raw-select');
+              // var selected = '';
+              // var options = select.find('option');
+              // var disabled = select.find('option:disabled');
+              // var out_of_stock = select.find('option.enabled.out-of-stock');
+              // var current = select.find('option:selected');
+              // var eq = select.find('option').eq(1);
+
+
+              move all below tabbed in the process_attribute_template function -- to s 
+                      // var li = $(this).find('li:not(.woo-variation-swatches-variable-item-more)');
+                      //       ACTIVE_TODO however not this, for this once t gives conclusion our final implementation will follow -- to t 
+                      // var reselect_clear = $(this).hasClass('reselect-clear');
+
+                      // var mouse_event_name = 'click.wvs'; // 'touchstart click';
+
+                      // var attribute = $(this).data('attribute_name');
+                      // // let attribute_values = ((_this.is_ajax_variation) ? [] : _this._generated[attribute])
+                      // // let out_of_stocks = ((_this.is_ajax_variation) ? [] : _this._out_of_stock[attribute])
+                      // var selects = [];
+                      // var disabled_selects = [];
+                      // var out_of_stock_selects = [];
+                      // var $selected_variation_item = $(this).parent().prev().find('.woo-selected-variation-item-name');
+
+                      // this need to be moved to compatability function, so from here there would be call to the compatability function -- to s 
+                      // // For Avada FIX
+                      // if (options.length < 1) {
+                      //   select = $(this).parent().find('select.woo-variation-raw-select');
+                      //   options = select.find('option');
+                      //   disabled = select.find('option:disabled');
+                      //   out_of_stock = select.find('option.enabled.out-of-stock');
+                      //   current = select.find('option:selected');
+                      //   eq = select.find('option').eq(1);
+                      // }
+
+              all below to attribute data function -- to s 
+                --  and they will return data object of local scope -- to s 
+                    --  ACTIVE_TODO/TODO but whenever it make sense we can keep such data in global data var of module to benefit from the caching as planned. 
+              there will be dedicated functions under preprocess_data function heirarchy, for managing stock status and other limitations 
+                --  the functions names would be namely preprocess_stock_status_data -- to h 
+                --  and the other such functions which would be required is manging other such conditions, managing the legacy number of variations limit and other such limitations of supporting 30 variations only for certain functions which was there in the plugin we were exploring -- to h. it may be ACTIVE_TODO 
+
+                  // options.each(function () {
+                  //   if ($(this).val() !== '') {
+                  //     selects.push($(this).val());
+                  //     selected = current.length === 0 ? eq.val() : current.val();
+                  //   }
+                  // });
+
+                  // disabled.each(function () {
+                  //   if ($(this).val() !== '') {
+                  //     disabled_selects.push($(this).val());
+                  //   }
+                  // });
+
+                  // // Out Of Stocks
+                  // out_of_stock.each(function () {
+                  //   if ($(this).val() !== '') {
+                  //     out_of_stock_selects.push($(this).val());
+                  //   }
+                  // });
+
+                  // var in_stocks = _.difference(selects, disabled_selects);
+
+                  // // console.log('out of stock', out_of_stock_selects)
+                  // // console.log('in stock', in_stocks)
+
+                  // var available = _.difference(in_stocks, out_of_stock_selects);
+
+
+
+              the type specific matters are rarely found above due to abstraction that was not needed 
+                --  however like below the type specific things handled, we would have type specific condition in function process_attribute_template. as below will going to be moved there -- to s 
+              // Mark Selected
+            //   li.each(function (index, li) {
+
+            //     var attribute_value = $(this).attr('data-value');
+            //     var attribute_title = $(this).attr('data-title');
+
+            //     // Resetting LI
+            //     $(this).removeClass('selected disabled out-of-stock').addClass('disabled');
+            //     $(this).attr('aria-checked', 'false');
+            //     $(this).attr('tabindex', '-1');
+
+            //     if ($(this).hasClass('radio-variable-item')) {
+            //       $(this).find('input.wvs-radio-variable-item:radio').prop('disabled', true).prop('checked', false);
+            //     }
+
+            //     // Default Selected
+            //     // We can't use es6 includes for IE11
+            //     // in_stocks.includes(attribute_value)
+            //     // _.contains(in_stocks, attribute_value)
+            //     // _.includes(in_stocks, attribute_value)
+
+            //     if (_.includes(in_stocks, attribute_value)) {
+
+            //       $(this).removeClass('selected disabled');
+            //       $(this).removeAttr('aria-hidden');
+            //       $(this).attr('tabindex', '0');
+
+            //       $(this).find('input.wvs-radio-variable-item:radio').prop('disabled', false);
+
+            //       if (attribute_value === selected) {
+
+            //         $(this).addClass('selected');
+            //         $(this).attr('aria-checked', 'true');
+
+            //         if (woo_variation_swatches_options.show_variation_label) {
+            //           $selected_variation_item.text(woo_variation_swatches_options.variation_label_separator + ' ' + attribute_title);
+            //         }
+
+            //         if ($(this).hasClass('radio-variable-item')) {
+            //           $(this).find('input.wvs-radio-variable-item:radio').prop('checked', true);
+            //         }
+            //       }
+            //     }
+
+            //     // Out of Stock
+
+            //     if (available.length > 0 && _.includes(out_of_stock_selects, attribute_value) && woo_variation_swatches_options.clickable_out_of_stock) {
+            //       $(this).removeClass('disabled').addClass('out-of-stock');
+            //     }
+            //   });
+            // // });
+
+
+            check if below two events are been bound by anything -- to s 
+            this.$element.trigger('woo_variation_swatches_init', [this, this.product_variations]);
+
+            $(document).trigger('woo_variation_swatches_loaded', [this.$element, this.product_variations]);
+          // }
+
+    };
+
+    var preprocess_data = function(data) {
+
+        data.attribute_types = {};
+        data.product_variations.each(function (i, variation) {
+
+          Object.keys(variation.attributes).map(function (attribute_name) {
+
+            here confirm if attribute object below has the attribute type field, check our demo or of other plugin -- to s 
+                --  and fix the loop or so if not correct -- to s
+            data.attribute_types[attribute_name] = variation.attributes[attribute_name].attribute_type;
+          });
+
+          break;
+        }, {});
+
+        ACTIVE_TODO not sure if this is necessary 
+        data._generated = data.product_variations.reduce(function (obj, variation) {
+
+          Object.keys(variation.attributes).map(function (attribute_name) {
+            if (!obj[attribute_name]) {
+              obj[attribute_name] = [];
+            }
+
+            if (variation.attributes[attribute_name]) {
+              obj[attribute_name].push(variation.attributes[attribute_name]);
+            }
+          });
+
+          return obj;
+        }, {});
+
+        data._out_of_stock = data.product_variations.reduce(function (obj, variation) {
+
+          Object.keys(variation.attributes).map(function (attribute_name) {
+            if (!obj[attribute_name]) {
+              obj[attribute_name] = [];
+            }
+
+            if (variation.attributes[attribute_name] && !variation.is_in_stock) {
+              obj[attribute_name].push(variation.attributes[attribute_name]);
+            }
+          });
+
+          return obj;
+        }, {});
+    
+    };
+
+    var process_attribute_types = function( product_variations ) {
+
+        localize the configs var(localize like we are doing during admin-js load and so on) with common js load -- to s 
+            --  it will host two vars for now below attribute_types, so call that function -- to s 
+                --  and the function you call need to support one flag like is_base_type_only so pass that simply in the configs array as direct array -- to s 
+            --  it also need to host that very configs files, config function configs so add that too in the final configs array -- to s 
+                --  so at first create the configs array at top and then we will keep adding the required var in it -- to s 
+            --  and yeah it also need to have the template id param unde templates.slider.id and same for zoom. so create said level of elements in the configs array and look at the slider zoom models render core functions -- to s 
+            --  and at last set the configs below where it is exported, you can ask a if required -- to s 
+                --  actually the template vars will be required for the gallery_images module, so create config for that also and then set for that also where it is exported -- to s 
+                    --  gallery_images module will also have almost all similar vars, except that it will have additional tempalte var -- to s 
+        // _this.data.attribute_types.each( function( i, type ) {
+        _this.$base_element.find('ul.variable-items-wrapper').each(function (i, element) {
+            
+            var type = ? ;
+
+            // ACTIVE_TODO_OC_START
+            // --  so above preprocess_data call should simply prepare two attribute types list, first is attribute_types and second is ... or simply one only. and simply delegate everything else that is not coming under attribute_types, to the extensions layers. and should simply publish this list of attribute_types from backend. 
+            // NOTE: and one of the key benefit of this approach is that these layers will emit the broadcast notification event only if they detect the type to be the premiumly supported type and otherwise not. which would minimize process and little or not hanging processes and less debug console logs that would appear around. 
+
+            // is the woo input template type means dropdown is mandatorily kept by plugins, not seems likely but still confirm and then we need a way to determine(always) the exact input type based on the field/input type selected on woo panel or otherwise simply support the input_template_type field which will be set in background implicitly based on the field/input type selected on woo panel -- this field is simply better then managing many different template names of extensions and defining based on that -- and it will default to the above field/input type for wbc nothing to manage, only if condition below that if input_template_type is not defined then read simply above field/input type. and in case of extensions that need to be defined based on the template that is selected on their admin panel. so this template option should be only be defining it and passing it where applicable so that is gets here. and it is need to be defined based on that only to avoid confusion and many unnecessary and confusing configuration overheads. no simply need to stick to attribute type only means field/input-type selected on woo panel and that is standard and clean. so implement here based on that only. -- to h or -- to d 
+            // ACTIVE_TODO_OC_END
+
+            if (splugins._.includes(_this.configs.attribute_types_keys, type)) {
+
+                // ACTIVE_TODO_OC_START    
+                // do necessary logic if support is available
+                //     --  that means based on type call/process necessary functions/layers for example events functions(some events functions already defined below), template functions/layers, pages functions/layers, like events the effects functions/layers, plugins/themes applicable compatiblity function calls, slider and zoom functions/layers(note that even for swatches modules there might be some conditions or conditional logics that would be required) -- to d 
+                //     --  and also do call/process necessary functions/layers for the provided device type(and maybe some of their specifications would also need to be handled in future like width(which would otherwise mostly be dynamically handled), resolution and so on ACTIVE_TODO) and configs, but it will be a specific block here only and the dedicated function for them sound unnecessary -- to d
+                //         --  and we need some logic of if function or layer need to be called once only then take care of that, for all above functions, including the devices and configs that are to be handled from here -- to d 
+                //         --  and as usual there will going to be if conditions for applicable matters in applicable functions and their layers defined above, to handle the devices and configuration specific matters. and so the dedicated blocks of devices and configs will handle some specific matters which do not necessarily mixed with other things mentioned above like events, template, pages and so on layers. -- to h    
+                // ACTIVE_TODO_OC_END   
+                
+                process_template(type, element); 
+
+                process_pages(type, element);
+
+                process_slider_and_zoom(type, element); 
+
+                process_events(type, element); 
+
+                process_and_manage_effects(type, element);
+
+                process_compatability_matters(type, element);
+
+                // ACTIVE_TODO_OC_START
+                // -   devices 
+                //         --  for layers which need to have complete different implementation for mobile etc. then for them applicable flgas should be set/initiated from the higher layers layers for example the slider and zoom would be completely different plugin for mobile devices -- but anyway now we will see to it again to reconsider using the new slider also for mobile but only if that is beneficial in terms of setup time and maintainance time, for the later it would be beneficial but not sure about the initial setup and implementation time and challanges that may arise. 
+                //             --  and we would like to reconsider the zoom also in the same way like above 
+                //     --  browser - will matter so much 
+                //     --  screen size - need to handle occasionally only as long as overall UI/UX layers are mature 
+                //     --  os 
+                // ACTIVE_TODO_OC_END    
+
+                    if(window.document.splugins.common.is_mobile){
+
+                    }else if(window.document.splugins.common.is_tablet){
+
+
+                    }else if(browser){
+
+                    }else if(screen size){
+
+                    }else if(os){
+
+                    };
+
+                // ACTIVE_TODO_OC_START    
+                // -   configs 
+                //     --  will control decision of whether to display certain section or not, for example whether to display template part of attribute name (for us ribbon wrapper)
+                //     --  or whether to show tooltip or not 
+                // ACTIVE_TODO_OC_END
+
+                    if( type == 'radio' ) 
+
+            }                          
+            else if( not for example slider input is not supported then host the listener event so that extension js do its job or simply skip it and let extension js do their part )
+                // ACTIVE_TODO_OC_START
+                // --  and we can and should simply use observer pattern events to host for example the slider listener here and then emit internal change event from here     
+                //     --  still in this case the variation.swatches will register its event subject and emit bootstrap level notification like bootstrap/on.load maybe on.load is more user friendly 
+                //     --  then at that time applicable extension will bootstrap the js layer 
+                //     --  and when the change event occurs the applicable extension will simply call the ...swatches.api function to notify back about their change event or the events module can add support to provide callbacks to subscriber so that they can reply with something when they have done something based on notification. so it can be called the notification_response. -- but it will be about breaking our own rule of keeping the events simple. so even if we must do then in that case it must be till notification_response only and no further callback back and forth can be supported. otherwise it mostly lead to long debug sequences. --  however it has benefit of less maintainance since otherwise extensions need to know about the ...swatches.api but in case of events support of notification_response it only need to learn about and depend on the variations.swatches subject of events module. and as long as we can keep it limited to notification_response only and do not extend it further it will be clean to be frank. 
+
+                var callback = null ;
+                window.document.splugins.events.api.notifyAllObservers( 'swatches', 'process_attribute_types', type, callback );
+
+                //     --  and we are planning to host darker/lighter slider support also from here as usual so it will be just like above slider example 
+                //         --  but yeah after the change event is recieved here that will be emitted to the gallery_images module to let them do their job. since darker lighter is not part of the variation there is no further thing to do from here after the change event is recieved. 
+                //             --  and since it is different kind processing that is required after change event so the input_template_type must be defined uniquely like slider_no_variation 
+                //                 NOTE: and yeah on that note everything of the sp_variations module must be dynamic and nothing should be hardcoded so slider_no_variation input template type must be passed right from where the template is defined on admin to till here 
+                // ACTIVE_TODO_OC_END                
+            if( type == 'radio' ) 
+            // ACTIVE_TODO_OC_START    
+            //     -   configs 
+            //             --  will control decision of whether to display certain section or not, for example whether to display template part of attribute name (for us ribbon wrapper)
+            //             --  or whether to show tooltip or not 
+
+            // --  it wil be a specific block here for devices and configs -- to d 
+            // --  while for the rest create dedicated functions like process_template, process_events and so on. for the layers listed below. 
+            //     --  create below list of functions after the process_attribute_types function, and apply above peudo flows there and rest of the flows those functions should adapt from the flow notes from the heirachical flow plan at top -- to d and -- to h 
+            //         // -- process_template -- to d done
+            //         // -- process_pages -- to d done
+            //         // -- process_slider_and_zoom -- to d done
+            //         // -- process_events -- to d done
+            //         // -- process_and_manage_effects -- to d done
+            //         // -- process_compatability_matters -- to d done
+            // ACTIVE_TODO_OC_END        
+            
+        }); 
+
+    };
+
+
+    var process_template = function(type, element) {
+
+        // ACTIVE_TODO_OC_START
+        // --  or whether to show tooltip or not 
+        // ACTIVE_TODO_OC_END 
+
+        process_attribute_template(type, element);
+
+
+        if( type == 'radio' ) 
+
+    }
+
+    var process_attribute_template = function(type, element, mode = null) {
+        
+        var data = {};
+
+        --  however also check the logic and use of eq below -- to s 
+        --  and as mentioned above this object will always be passed from all .each loops under element, so use that element inside the process_attribute_template -- to s 
+        data.select = jQuery(element).siblings('select.woo-variation-raw-select');
+        data.selected = '';
+        data.options = select.find('option');
+        data.disabled = select.find('option:disabled');
+        data.out_of_stock = select.find('option.enabled.out-of-stock');
+        data.current = select.find('option:selected');
+        data.eq = select.find('option').eq(1);
+
+
+
+        data.inner_element = jQuery(element).find('inner_element:not(.woo-variation-swatches-variable-item-more)');
+            ACTIVE_TODO however not this, for this once t gives conclusion our final implementation will follow -- to t 
+        data.reselect_clear = jQuery(element).hasClass('reselect-clear');
+
+        data.mouse_event_name = 'click'; // 'touchstart click';
+
+        data.attribute = jQuery(element).data('attribute_name');
+        // let attribute_values = ((_this.is_ajax_variation) ? [] : _this._generated[attribute])
+        // let out_of_stocks = ((_this.is_ajax_variation) ? [] : _this._out_of_stock[attribute])
+        data.selects = [];
+        data.disabled_selects = [];
+        data.out_of_stock_selects = [];
+        data.$selected_variation_item = jQuery(element).parent().prev().find('.woo-selected-variation-item-name');
+       
+        this need to be moved to compatability function, so from here there would be call to the compatability function -- to s 
+
+            compatability(type, element);
+          // attribute_template
+        // if (options.length < 1) {
+        //     select = $(this).parent().find('select.woo-variation-raw-select');
+        //     options = select.find('option');
+        //     disabled = select.find('option:disabled');
+        //     out_of_stock = select.find('option.enabled.out-of-stock');
+        //     current = select.find('option:selected');
+        //     eq = select.find('option').eq(1);
+        // }
+
+        
+
+        data.options = options;
+        data.disabled = disabled;
+        data.out_of_stock = out_of_stock;
+
+        data = process_attribute_data(type, element, data, mode);
+        
+        inner_list.each(function (index, inner_element, ) {
+
+            data.attribute_value = $(inner_element).attr('data-value');
+            data.attribute_title = $(inner_element).attr('data-title');
+
+            // Resetting LI
+            jQuery(inner_element).removeClass('selected disabled out-of-stock').addClass('disabled');
+            jQuery(inner_element).attr('aria-checked', 'false');
+            jQuery(inner_element).attr('tabindex', '-1');
+
+            if (jQuery(inner_element).hasClass('radio-variable-item')) {
+              jQuery(inner_element).find('input.spui-wbc-swatches-variable-item-radio:radio').prop('disabled', true).prop('checked', false);
+            }
+
+            // Default Selected
+            // We can't use es6 includes for IE11
+            // in_stocks.includes(attribute_value)
+            // _.contains(in_stocks, attribute_value)
+            // _.includes(in_stocks, attribute_value)
+
+            if (splugins._.includes(data.in_stocks, data.attribute_value)) {
+
+              jQuery(inner_element).removeClass('selected disabled');
+              jQuery(inner_element).removeAttr('aria-hidden');
+              jQuery(inner_element).attr('tabindex', '0');
+
+              jQuery(inner_element).find('input.spui-wbc-swatches-variable-item-radio:radio').prop('disabled', false);
+
+              if (data.attribute_value === data.selected) {
+
+                jQuery(inner_element).addClass('selected');
+                jQuery(inner_element).attr('aria-checked', 'true');
+
+                if (woo_variation_swatches_options.show_variation_label) {
+                  $selected_variation_item.text(woo_variation_swatches_options.variation_label_separator + ' ' + data.attribute_title);
+                }
+
+                if (jQuery(inner_element).hasClass('radio-variable-item')) {
+                  jQuery(inner_element).find('input.wvs-radio-variable-item:radio').prop('checked', true);
+                }
+              }
+            }
+
+            // Out of Stock
+
+            if (available.length > 0 && splugins._.includes(data.out_of_stock_selects, data.attribute_value) && woo_variation_swatches_options.clickable_out_of_stock) {
+              $(data.inner_element).removeClass('disabled').addClass('out-of-stock');
+            }
+        });
+        // });
+
+
+    };
+
+    var process_attribute_data = function(type, element, data, mode = null) {
+
+        data.options.each(function () {
+            if (jQuery(element).val() !== '') {
+                data.selects.push(jQuery(element).val());
+                data.selected = current.length === 0 ? eq.val() : current.val();
+            }
+        });
+
+        data.disabled.each(function () {
+            if (jQuery(element).val() !== '') {
+                data.disabled_selects.push(jQuery(element).val());
+            }
+        });
+
+          // Out Of Stocks
+        data.out_of_stock.each(function () {
+            if (jQuery(element).val() !== '') {
+                data.out_of_stock_selects.push($(element).val());
+            }
+        });
+
+        data.in_stocks = splugins._.difference(selects, disabled_selects);
+
+        // console.log('out of stock', out_of_stock_selects)
+        // console.log('in stock', in_stocks)
+
+        data.available = splugins._.difference(in_stocks, out_of_stock_selects);
+
+        return data;
+
+    };
+
+    var process_pages = function(type, element) {
+
+        fundamentally we are going to put here page specific handling and management 
+            --  but how we can make the many layers common which can work semalessly in common(means many things of different layers, not necessarily entire layers)? -- to h 
+                --  data layers already be common and that should remain common for most part except some conditions -- to h 
+                --  while we shuold do little or no common for events and effects since they are strictly ui bound layers so that would result in weak balance between modules -- to h 
+                --  what else? 
+        if(window.document.splugins.common.is_category_page){
+
+        }else if(window.document.splugins.common.is_item_page){
+
+        };
+
+    }
+
+    var process_slider_and_zoom = function(type, element){
+        
+    }
+
+    var process_events = function(type, element){
+
+        on_change_listener();    
+
+        on_click_listener();    
+    }
+
+    var process_and_manage_effects = function(type, element){
+        
+    }
+
+    var process_compatability_matters = function(type, element){
+        
+        if(type == 'buttons'){
+
+            compatability("button_section");
+
+        }else if(type == 'image'){
+
+            compatability("image_section");
+
+        } 
+
+    }
+
+    // -   events 
+    // --  mouse events 
+    var on_change_listener = function(type) {
+
+        if(window.document.splugins.common._b(_this.binding_stats, 'on_change_listener', type)){
+            return false;
+        }
+
+        jQuery('#select_attribute_of_variation').on('woocommerce_variation_has_changed', function(){
+            // do your magic here...
          }); 
- 
-     }
- 
- 
-     var process_template = function(type) {
- 
-         // ACTIVE_TODO_OC_START
-         // --  or whether to show tooltip or not 
-         // ACTIVE_TODO_OC_END 
- 
-         if( type == 'radio' ) 
- 
-     }
- 
-     var process_pages = function(type) {
- 
-         fundamentally we are going to put here page specific handling and management 
-             --  but how we can make the many layers common which can work semalessly in common(means many things of different layers, not necessarily entire layers)? -- to h 
-                 --  data layers already be common and that should remain common for most part except some conditions -- to h 
-                 --  while we shuold do little or no common for events and effects since they are strictly ui bound layers so that would result in weak balance between modules -- to h 
-                    --  anyway common always need to be common, and optimum possible common to make maintainance realistically possible. 
-                 --  what else? 
-         if(window.document.splugins.common.is_category_page){
- 
-         }else if(window.document.splugins.common.is_item_page){
- 
-         };
- 
-     }
- 
-     var process_slider_and_zoom = function(type){
-         
-     }
- 
-     var process_events = function(type){
- 
-         on_change_listener();    
- 
-         on_click_listener();    
-     }
- 
-     var process_and_manage_effects = function(type){
-         
-     }
- 
-     var process_compatability_matters = function(type){
-         
-         if(type == 'buttons'){
- 
-             compatability("button_section");
- 
-         }else if(type == 'image'){
- 
-             compatability("image_section");
- 
-         } 
- 
-     }
- 
-     // -   events 
-     // --  mouse events 
-     var on_change_listener = function(type) {
- 
-         if(window.document.splugins.common._b(_this.binding_stats, 'on_change_listener', type)){
-             return false;
-         }
- 
-         jQuery('#select_attribute_of_variation').on('woocommerce_variation_has_changed', function(){
-             // do your magic here...
-          }); 
- 
-         var _this = this;
-         this.$element.off('woocommerce_variation_has_changed.wvs');
-         this.$element.on('woocommerce_variation_has_changed.wvs', function (event) {
- 
-           // Don't use any propagation. It will disable composit product functionality
-           // event.stopPropagation();
- 
-           $(this).find('ul.variable-items-wrapper').each(function (index, el) {
- 
-             var select = $(this).siblings('select.woo-variation-raw-select');
-             var selected = '';
-             var options = select.find('option');
-             var disabled = select.find('option:disabled');
-             var out_of_stock = select.find('option.enabled.out-of-stock');
-             var current = select.find('option:selected');
-             var eq = select.find('option').eq(1);
-             var li = $(this).find('li:not(.woo-variation-swatches-variable-item-more)');
- 
-             //let reselect_clear   = $(this).hasClass('reselect-clear');
-             //let is_mobile        = $('body').hasClass('woo-variation-swatches-on-mobile');
-             //let mouse_event_name = 'click.wvs'; // 'touchstart click';
- 
-             var attribute = $(this).data('attribute_name');
-             // let attribute_values = ((_this.is_ajax_variation) ? [] : _this._generated[attribute])
-             // let out_of_stocks = ((_this.is_ajax_variation) ? [] : _this._out_of_stock[attribute])
- 
-             var selects = [];
-             var disabled_selects = [];
-             var out_of_stock_selects = [];
-             var $selected_variation_item = $(this).parent().prev().find('.woo-selected-variation-item-name');
- 
-             // For Avada FIX
-             if (options.length < 1) {
-               select = $(this).parent().find('select.woo-variation-raw-select');
-               options = select.find('option');
-               disabled = select.find('option:disabled');
-               out_of_stock = select.find('option.enabled.out-of-stock');
-               current = select.find('option:selected');
-               eq = select.find('option').eq(1);
-             }
- 
-             options.each(function () {
-               if ($(this).val() !== '') {
-                 selects.push($(this).val());
-                 // selected = current ? current.val() : eq.val()
-                 selected = current.length === 0 ? eq.val() : current.val();
-               }
-             });
- 
-             disabled.each(function () {
-               if ($(this).val() !== '') {
-                 disabled_selects.push($(this).val());
-               }
-             });
- 
-             // Out Of Stocks
-             out_of_stock.each(function () {
-               if ($(this).val() !== '') {
-                 out_of_stock_selects.push($(this).val());
-               }
-             });
- 
-             var in_stocks = _.difference(selects, disabled_selects);
- 
-             var available = _.difference(in_stocks, out_of_stock_selects);
- 
-             if (_this.is_ajax_variation) {
- 
-               li.each(function (index, el) {
- 
-                 var attribute_value = $(this).attr('data-value');
-                 var attribute_title = $(this).attr('data-title');
- 
-                 $(this).removeClass('selected disabled');
-                 $(this).attr('aria-checked', 'false');
- 
-                 // To Prevent blink
-                 if (selected.length < 1 && woo_variation_swatches_options.show_variation_label) {
-                   $selected_variation_item.text('');
-                 }
- 
-                 if (attribute_value === selected) {
-                   $(this).addClass('selected');
-                   $(this).attr('aria-checked', 'true');
- 
-                   if (woo_variation_swatches_options.show_variation_label) {
-                     $selected_variation_item.text(woo_variation_swatches_options.variation_label_separator + ' ' + attribute_title);
-                   }
- 
-                   if ($(this).hasClass('radio-variable-item')) {
-                     $(this).find('input.wvs-radio-variable-item:radio').prop('disabled', false).prop('checked', true);
-                   }
-                 }
- 
-                 $(this).trigger('wvs-item-updated', [selected, attribute_value, _this]);
-               });
-             } else {
- 
-               li.each(function (index, el) {
- 
-                 var attribute_value = $(this).attr('data-value');
-                 var attribute_title = $(this).attr('data-title');
- 
-                 $(this).removeClass('selected disabled out-of-stock').addClass('disabled');
-                 $(this).attr('aria-checked', 'false');
-                 $(this).attr('tabindex', '-1');
- 
-                 if ($(this).hasClass('radio-variable-item')) {
-                   $(this).find('input.wvs-radio-variable-item:radio').prop('disabled', true).prop('checked', false);
-                 }
- 
-                 // if (_.contains(selects, value))
-                 // if (_.indexOf(selects, value) !== -1)
-                 // if (selects.includes(value))
- 
-                 // We can't use es6 includes for IE11
-                 // in_stocks.includes(attribute_value)
-                 // _.contains(in_stocks, attribute_value)
-                 // _.includes(in_stocks, attribute_value)
- 
-                 // Make Selected // selects.includes(attribute_value) // in_stocks
-                 if (_.includes(in_stocks, attribute_value)) {
- 
-                   $(this).removeClass('selected disabled');
-                   $(this).removeAttr('aria-hidden');
-                   $(this).attr('tabindex', '0');
- 
-                   $(this).find('input.wvs-radio-variable-item:radio').prop('disabled', false);
- 
-                   // To Prevent blink
-                   if (selected.length < 1 && woo_variation_swatches_options.show_variation_label) {
-                     $selected_variation_item.text('');
-                   }
- 
-                   if (attribute_value === selected) {
- 
-                     $(this).addClass('selected');
-                     $(this).attr('aria-checked', 'true');
- 
-                     if (woo_variation_swatches_options.show_variation_label) {
-                       $selected_variation_item.text(woo_variation_swatches_options.variation_label_separator + ' ' + attribute_title);
-                     }
- 
-                     if ($(this).hasClass('radio-variable-item')) {
-                       $(this).find('input.wvs-radio-variable-item:radio').prop('checked', true);
-                     }
-                   }
-                 }
- 
-                 // Out of Stock
-                 if (available.length > 0 && _.includes(out_of_stock_selects, attribute_value) && woo_variation_swatches_options.clickable_out_of_stock) {
-                   $(this).removeClass('disabled').addClass('out-of-stock');
-                 }
- 
-                 $(this).trigger('wvs-item-updated', [selected, attribute_value, _this]);
-               });
-             }
- 
-             // Items Updated
-             $(this).trigger('wvs-items-updated');
-           });
-         });
- 
-         on_change();
- 
-     };
- 
-     var on_click_listener = function(type) {
- 
-         if(window.document.splugins.common._b(_this.binding_stats, 'on_click_listener', type)){
-             return false;
-         }
- 
-         here it seems that m have explicitly handled the click event, but we should do if it is by standard require and the legacy flows does need us to take care of it. so confirm first with the plugin we are exploring -- to h 
-         $('.variable-item').on('click',function(){
-             var target_selector = $('#'+$(this).data('id'));
-             target_selector.val($(this).data('value'));
-             $(this).parent().find('.selected').removeClass('selected');
-             $(this).addClass('selected');
-             jQuery(".variations_form" ).trigger('check_variations');
-             $(target_selector).trigger('change');
-         });
- 
-         jQuery(".variations_form").on('click', '.reset_variations'/*'woocommerce_variation_select_change'*//*'reset'*/,function(){
-             jQuery('.variable-items-wrapper .selected').removeClass('selected');
-             jQuery('.variable-items-wrapper .dropdown').dropdown('restore defaults');
-         });
- 
- 
-         for all sections of update layers in below sections and elsewhere in this plugin, what we can do is simply call the process_attribute_template function but with mode param equal to update or so -- to s 
-             --  and also ensure to make the duplicate code in that same function -- to s 
-         // Trigger Select event based on list
- 
-         if (reselect_clear) {
-         // Non Selected Item Should Select
-         $(this).on(mouse_event_name, 'li:not(.selected):not(.radio-variable-item):not(.woo-variation-swatches-variable-item-more)', function (e) {
-           e.preventDefault();
-           e.stopPropagation();
-           var value = $(this).data('value');
-           select.val(value).trigger('change');
-           select.trigger('click');
- 
-           select.trigger('focusin');
- 
-           if (_this.is_mobile) {
-             select.trigger('touchstart');
-           }
- 
-           $(this).trigger('focus'); // Mobile tooltip
-           $(this).trigger('wvs-selected-item', [value, select, _this.$element]); // Custom Event for li
-         });
- 
-         // Selected Item Should Non Select
-         $(this).on(mouse_event_name, 'li.selected:not(.radio-variable-item):not(.woo-variation-swatches-variable-item-more)', function (e) {
-           e.preventDefault();
-           e.stopPropagation();
- 
-           var value = $(this).val();
- 
-           select.val('').trigger('change');
-           select.trigger('click');
- 
-           select.trigger('focusin');
- 
-           if (_this.is_mobile) {
-             select.trigger('touchstart');
-           }
- 
-           $(this).trigger('focus'); // Mobile tooltip
- 
-           $(this).trigger('wvs-unselected-item', [value, select, _this.$element]); // Custom Event for li
-         });
- 
-         // RADIO
- 
-         // On Click trigger change event on Radio button
-         $(this).on(mouse_event_name, 'input.wvs-radio-variable-item:radio', function (e) {
- 
-           e.stopPropagation();
- 
-           $(this).trigger('change.wvs', { radioChange: true });
-         });
- 
-         $(this).on('change.wvs', 'input.wvs-radio-variable-item:radio', function (e, params) {
- 
-           e.preventDefault();
-           e.stopPropagation();
- 
-           if (params && params.radioChange) {
- 
-             var value = $(this).val();
-             var is_selected = $(this).parent('li.radio-variable-item').hasClass('selected');
- 
-             if (is_selected) {
-               select.val('').trigger('change');
-               $(this).parent('li.radio-variable-item').trigger('wvs-unselected-item', [value, select, _this.$element]); // Custom Event for li
-             } else {
-               select.val(value).trigger('change');
-               $(this).parent('li.radio-variable-item').trigger('wvs-selected-item', [value, select, _this.$element]); // Custom Event for li
-             }
- 
-             select.trigger('click');
-             select.trigger('focusin');
-             if (_this.is_mobile) {
-               select.trigger('touchstart');
-             }
-           }
-         });
-         } else {
- 
-         $(this).on(mouse_event_name, 'li:not(.radio-variable-item):not(.woo-variation-swatches-variable-item-more)', function (event) {
- 
-           event.preventDefault();
-           event.stopPropagation();
- 
-           var value = $(this).data('value');
-           select.val(value).trigger('change');
-           select.trigger('click');
-           select.trigger('focusin');
-           if (_this.is_mobile) {
-             select.trigger('touchstart');
-           }
- 
-           $(this).trigger('focus'); // Mobile tooltip
- 
-           $(this).trigger('wvs-selected-item', [value, select, _this._element]); // Custom Event for li
-         });
- 
-         // Radio
-         $(this).on('change.wvs', 'input.wvs-radio-variable-item:radio', function (event) {
-           event.preventDefault();
-           event.stopPropagation();
- 
-           var value = $(this).val();
- 
-           select.val(value).trigger('change');
-           select.trigger('click');
-           select.trigger('focusin');
- 
-           if (_this.is_mobile) {
-             select.trigger('touchstart');
-           }
- 
-           // Radio
-           $(this).parent('li.radio-variable-item').removeClass('selected disabled').addClass('selected');
-           $(this).parent('li.radio-variable-item').trigger('wvs-selected-item', [value, select, _this.$element]); // Custom Event for li
-         });
-         }
- 
-         on_click();
- 
-     };
- 
-     var on_keydown_listener = function(type) {
- 
-         if(window.document.splugins.common._b(_this.binding_stats, 'on_keydown_listener', type)){
-             return false;
-         }
- 
-         // Keyboard Access
-         $(this).on('keydown.wvs', 'li:not(.disabled):not(.woo-variation-swatches-variable-item-more)', function (event) {
-         });
- 
-         on_keydown();
- 
-     };
- 
- 
-     var on_change = function(type) {
- 
-     };
- 
-     var on_click = function(type) {
- 
-     };
- 
-     var on_reset_all = function(type) {
- 
-     };
- 
-     // ACTIVE_TODO_OC_START
-     // --  keyboard events 
-     // ACTIVE_TODO_OC_END
-     var on_keydown = function() {
- 
-         keydown();  
-     };
-             // ACTIVE_TODO_OC_START
-             // --  legacy events (events of woo emitted on certain scenarios) 
-             // --  events emitted by other plugins/themes which we need to take care of in case of compatiblity matters, so it can be termed as the compatiblity events 
-             // ACTIVE_TODO_OC_END
- 
- 
-     // -- base events - after the above events are handled by their particular function/layer, they would call below functions to do the ultimate work         
-     var change = function() {
- 
-     };
- 
-     var click = function() {
- 
-     };
- 
-     var reset_all = function() {
- 
- 
-     };
- 
-     var keydown = function() {
- 
-         if (event.keyCode && 32 === event.keyCode || event.key && ' ' === event.key || event.keyCode && 13 === event.keyCode || event.key && 'enter' === event.key.toLowerCase()) {
-           event.preventDefault();
-           $(this).trigger(mouse_event_name);
-         }
-     };
- 
- 
-     var compatability = function() {
- 
-         // ACTIVE_TODO_OC_START
-         // this compatiblity function flow will be as per the commets in the filter js file 
-         // -   plugins/themes 
-         // --  there will be list of compatiblity matters that need to be handled so it will go under the compatiblity matter, and clearly it will go in compatiblity layers 
-         //     --  not related to this section but lets create simply a compatiblity module of its own like at the level where templating module is in namespace -- to d --    ACTIVE_TODO/TODO then each modules like filters, variations and so on can have their own module like ...filters.compatiblity just like there ...filters.core core module. but this is only if necessary, otherwise a function inside core module is much readability friendly. 
-         //         --  a compatiblity function inside filters, variations.swatches and variations.gallery_images module -- to d  
- 
-         // and add all those theme and other patch that the other plugin we were exploring have. -- to d 
-         //         --  but of course in our case it will be as per our flow of how we manage loading and then ajax loading of swatches options -- to h and -- to d 
-         //     --  that other plugin have some more theme specific patch fix, and some other patch for managing unexpected effects like blink and so on -- to d    
-         // ACTIVE_TODO_OC_END    
- 
-     }; 
- 
-     return {
- 
-         init: function() {
- 
-             window.document.splugins.variation.events.api.notifyAllObservers( 'variation', 'before_search' ); 
-             
-             init_private();
- 
-         },
-         before_search: function() {
- 
-             window.document.splugins.variation.events.api.notifyAllObservers( 'variation', 'before_search' ); 
-         }, 
-         // createSubject: function( feature_unique_key, notifications ) {
-         //     // console.log("Observer " + index + " is notified!");
- 
-         //     // TODO check if subject already created and exist then throw error
-         //     // var index = this.observers.indexOf(observer);
-         //     // if(index > -1) {
-         //     // this.observers.splice(index, 1);
-         //     // }
- 
-         //     this.subjects.push( window.document.splugins.Feed.events.subject( feature_unique_key, notifications ) );
-         // }, 
-         // subscribeObserver: function(feature_unique_key, callbacks) {
-         //     // console.log("Observer " + index + " is notified!");
- 
-         //     // before subscribing the ovserver check if the feature_unique_key subject is created in the first place, if not then throw error 
-         //     var found_index = null;
-         //     for(var i = 0; i < this.subjects.length; i++){
-         //         if( this.subjects[i].feature_unique_key() == feature_unique_key ) {
- 
-         //             found_index = i;
-         //             break;
-         //         }
-         //     }
- 
-         //     if( found_index == -1 ) {
- 
-         //         throw "There is no subject exist for specified feature_unique_key "+feature_unique_key;
-         //     } else {
- 
-         //         this.subjects[found_index].subscribeObserver( window.document.splugins.Feed.events.observer( callbacks ) );
-         //     }
-         // },
-         no_products_found: function() {
- 
-             window.document.splugins.variation.events.api.notifyAllObservers( 'variation', 'no_products_found' );
-         }, 
- 
-     }; 
- };
- 
+
+        var _this = this;
+        this.$element.off('woocommerce_variation_has_changed');
+        this.$element.on('woocommerce_variation_has_changed', function (event) {
+
+          // Don't use any propagation. It will disable composit product functionality
+          // event.stopPropagation();
+
+          // $(this).find('ul.variable-items-wrapper').each(function (index, el) {
+
+          //   var select = $(this).siblings('select.woo-variation-raw-select');
+          //   var selected = '';
+          //   var options = select.find('option');
+          //   var disabled = select.find('option:disabled');
+          //   var out_of_stock = select.find('option.enabled.out-of-stock');
+          //   var current = select.find('option:selected');
+          //   var eq = select.find('option').eq(1);
+          //   var li = $(this).find('li:not(.woo-variation-swatches-variable-item-more)');
+
+          //   //let reselect_clear   = $(this).hasClass('reselect-clear');
+          //   //let is_mobile        = $('body').hasClass('woo-variation-swatches-on-mobile');
+          //   //let mouse_event_name = 'click.wvs'; // 'touchstart click';
+
+          //   var attribute = $(this).data('attribute_name');
+          //   // let attribute_values = ((_this.is_ajax_variation) ? [] : _this._generated[attribute])
+          //   // let out_of_stocks = ((_this.is_ajax_variation) ? [] : _this._out_of_stock[attribute])
+
+          //   var selects = [];
+          //   var disabled_selects = [];
+          //   var out_of_stock_selects = [];
+          //   var $selected_variation_item = $(this).parent().prev().find('.woo-selected-variation-item-name');
+
+          //   // For Avada FIX
+          //   if (options.length < 1) {
+          //     select = $(this).parent().find('select.woo-variation-raw-select');
+          //     options = select.find('option');
+          //     disabled = select.find('option:disabled');
+          //     out_of_stock = select.find('option.enabled.out-of-stock');
+          //     current = select.find('option:selected');
+          //     eq = select.find('option').eq(1);
+          //   }
+
+          //   options.each(function () {
+          //     if ($(this).val() !== '') {
+          //       selects.push($(this).val());
+          //       // selected = current ? current.val() : eq.val()
+          //       selected = current.length === 0 ? eq.val() : current.val();
+          //     }
+          //   });
+
+          //   disabled.each(function () {
+          //     if ($(this).val() !== '') {
+          //       disabled_selects.push($(this).val());
+          //     }
+          //   });
+
+          //   // Out Of Stocks
+          //   out_of_stock.each(function () {
+          //     if ($(this).val() !== '') {
+          //       out_of_stock_selects.push($(this).val());
+          //     }
+          //   });
+
+          //   var in_stocks = _.difference(selects, disabled_selects);
+
+          //   var available = _.difference(in_stocks, out_of_stock_selects);
+
+          //   if (_this.is_ajax_variation) {
+
+          //     li.each(function (index, el) {
+
+          //       var attribute_value = $(this).attr('data-value');
+          //       var attribute_title = $(this).attr('data-title');
+
+          //       $(this).removeClass('selected disabled');
+          //       $(this).attr('aria-checked', 'false');
+
+          //       // To Prevent blink
+          //       if (selected.length < 1 && woo_variation_swatches_options.show_variation_label) {
+          //         $selected_variation_item.text('');
+          //       }
+
+          //       if (attribute_value === selected) {
+          //         $(this).addClass('selected');
+          //         $(this).attr('aria-checked', 'true');
+
+          //         if (woo_variation_swatches_options.show_variation_label) {
+          //           $selected_variation_item.text(woo_variation_swatches_options.variation_label_separator + ' ' + attribute_title);
+          //         }
+
+          //         if ($(this).hasClass('radio-variable-item')) {
+          //           $(this).find('input.wvs-radio-variable-item:radio').prop('disabled', false).prop('checked', true);
+          //         }
+          //       }
+
+          //       $(this).trigger('wvs-item-updated', [selected, attribute_value, _this]);
+          //     });
+          //   } else {
+
+          //     li.each(function (index, el) {
+
+          //       var attribute_value = $(this).attr('data-value');
+          //       var attribute_title = $(this).attr('data-title');
+
+          //       $(this).removeClass('selected disabled out-of-stock').addClass('disabled');
+          //       $(this).attr('aria-checked', 'false');
+          //       $(this).attr('tabindex', '-1');
+
+          //       if ($(this).hasClass('radio-variable-item')) {
+          //         $(this).find('input.wvs-radio-variable-item:radio').prop('disabled', true).prop('checked', false);
+          //       }
+
+          //       // if (_.contains(selects, value))
+          //       // if (_.indexOf(selects, value) !== -1)
+          //       // if (selects.includes(value))
+
+          //       // We can't use es6 includes for IE11
+          //       // in_stocks.includes(attribute_value)
+          //       // _.contains(in_stocks, attribute_value)
+          //       // _.includes(in_stocks, attribute_value)
+
+          //       // Make Selected // selects.includes(attribute_value) // in_stocks
+          //       if (_.includes(in_stocks, attribute_value)) {
+
+          //         $(this).removeClass('selected disabled');
+          //         $(this).removeAttr('aria-hidden');
+          //         $(this).attr('tabindex', '0');
+
+          //         $(this).find('input.wvs-radio-variable-item:radio').prop('disabled', false);
+
+          //         // To Prevent blink
+          //         if (selected.length < 1 && woo_variation_swatches_options.show_variation_label) {
+          //           $selected_variation_item.text('');
+          //         }
+
+          //         if (attribute_value === selected) {
+
+          //           $(this).addClass('selected');
+          //           $(this).attr('aria-checked', 'true');
+
+          //           if (woo_variation_swatches_options.show_variation_label) {
+          //             $selected_variation_item.text(woo_variation_swatches_options.variation_label_separator + ' ' + attribute_title);
+          //           }
+
+          //           if ($(this).hasClass('radio-variable-item')) {
+          //             $(this).find('input.wvs-radio-variable-item:radio').prop('checked', true);
+          //           }
+          //         }
+          //       }
+
+          //       // Out of Stock
+          //       if (available.length > 0 && _.includes(out_of_stock_selects, attribute_value) && woo_variation_swatches_options.clickable_out_of_stock) {
+          //         $(this).removeClass('disabled').addClass('out-of-stock');
+          //       }
+
+          //       // $(this).trigger('wvs-item-updated', [selected, attribute_value, _this]);
+          //     });
+          //   }
+
+          //   // Items Updated
+          //   // $(this).trigger('wvs-items-updated');
+          // });
+            
+          process_attribute_template(type, element, 'change');  
+
+        });
+
+        on_change();
+
+    };
+
+    var on_click_listener = function(type) {
+
+        if(window.document.splugins.common._b(_this.binding_stats, 'on_click_listener', type)){
+            return false;
+        }
+
+        here it seems that m have explicitly handled the click event, but we should do if it is by standard require and the legacy flows does need us to take care of it. so confirm first with the plugin we are exploring -- to h 
+        $('.variable-item').on('click',function(){
+            var target_selector = $('#'+$(this).data('id'));
+            target_selector.val($(this).data('value'));
+            $(this).parent().find('.selected').removeClass('selected');
+            $(this).addClass('selected');
+            jQuery(".variations_form" ).trigger('check_variations');
+            $(target_selector).trigger('change');
+        });
+
+        jQuery(".variations_form").on('click', '.reset_variations'/*'woocommerce_variation_select_change'*//*'reset'*/,function(){
+            jQuery('.variable-items-wrapper .selected').removeClass('selected');
+            jQuery('.variable-items-wrapper .dropdown').dropdown('restore defaults');
+        });
+
+
+        for all sections of update layers in below sections and elsewhere in this plugin, what we can do is simply call the process_attribute_template function but with mode param equal to update or so -- to s 
+            --  and also ensure to make the duplicate code common in that same function -- to s 
+        // Trigger Select event based on list
+
+        if (reselect_clear) {
+
+        // Non Selected Item Should Select
+        $(this).on(mouse_event_name, 'li:not(.selected):not(.spui-wbc-swatches-variable-item-radio):not(.spui-wbc-swatches-variable-item-more)', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          var value = $(this).data('value');
+          select.val(value).trigger('change');
+          select.trigger('click');
+
+          select.trigger('focusin');
+
+          if (_this.is_mobile) {
+            select.trigger('touchstart');
+          }
+
+          $(this).trigger('focus'); // Mobile tooltip
+          $(this).trigger('spui-wbc-swatches-variable-item-selected', [value, select, _this.$element]); // Custom Event for li
+        });
+
+        // Selected Item Should Non Select
+        $(this).on(mouse_event_name, 'li.selected:not(.spui-wbc-swatches-variable-item-radio):not(.spui-wbc-swatches-variable-item-more)', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          var value = $(this).val();
+
+          select.val('').trigger('change');
+          select.trigger('click');
+
+          select.trigger('focusin');
+
+          if (_this.is_mobile) {
+            select.trigger('touchstart');
+          }
+
+          $(this).trigger('focus'); // Mobile tooltip
+
+          $(this).trigger('spui-wbc-swatches-variable-item-unselected', [value, select, _this.$element]); // Custom Event for li
+        });
+
+        // RADIO
+
+        // On Click trigger change event on Radio button
+        $(this).on(mouse_event_name, 'input.spui-wbc-swatches-variable-item-radio:radio', function (e) {
+
+          e.stopPropagation();
+
+          $(this).trigger('change', { radioChange: true });
+        });
+
+        $(this).on('change', 'input.spui-wbc-swatches-variable-item-radio:radio', function (e, params) {
+
+          e.preventDefault();
+          e.stopPropagation();
+
+          if (params && params.radioChange) {
+
+            var value = $(this).val();
+            var is_selected = $(this).parent('li.spui-wbc-swatches-variable-item-radio').hasClass('selected');
+
+            if (is_selected) {
+              select.val('').trigger('change');
+              $(this).parent('li.spui-wbc-swatches-variable-item-radio').trigger('spui-wbc-swatches-variable-item-unselected', [value, select, _this.$element]); // Custom Event for li
+            } else {
+              select.val(value).trigger('change');
+              $(this).parent('li.spui-wbc-swatches-variable-item-radio').trigger('spui-wbc-swatches-variable-item-selected', [value, select, _this.$element]); // Custom Event for li
+            }
+
+            select.trigger('click');
+            select.trigger('focusin');
+            if (_this.is_mobile) {
+              select.trigger('touchstart');
+            }
+          }
+        });
+        } else {
+
+            $(this).on(mouse_event_name, 'li:not(.spui-wbc-swatches-variable-item-radio):not(.spui-wbc-swatches-variable-item-more)', function (event) {
+
+              event.preventDefault();
+              event.stopPropagation();
+
+              var value = $(this).data('value');
+              select.val(value).trigger('change');
+              select.trigger('click');
+              select.trigger('focusin');
+              if (_this.is_mobile) {
+                select.trigger('touchstart');
+              }
+
+              $(this).trigger('focus'); // Mobile tooltip
+
+              $(this).trigger('spui-wbc-swatches-variable-item-selected', [value, select, _this._element]); // Custom Event for li
+            });
+
+            // Radio
+            $(this).on('change', 'input.spui-wbc-swatches-variable-item-radio:radio', function (event) {
+              event.preventDefault();
+              event.stopPropagation();
+
+              var value = $(this).val();
+
+              select.val(value).trigger('change');
+              select.trigger('click');
+              select.trigger('focusin');
+
+              if (_this.is_mobile) {
+                select.trigger('touchstart');
+              }
+
+              // Radio
+              $(this).parent('li.spui-wbc-swatches-variable-item-radio').removeClass('selected disabled').addClass('selected');
+              $(this).parent('li.spui-wbc-swatches-variable-item-radio').trigger('spui-wbc-swatches-variable-item-selected', [value, select, _this.$element]); // Custom Event for li
+            });
+        }
+
+        on_click();
+
+    };
+
+    var on_keydown_listener = function(type) {
+
+        if(window.document.splugins.common._b(_this.binding_stats, 'on_keydown_listener', type)){
+            return false;
+        }
+
+        // Keyboard Access
+        $(this).on('keydown', 'li:not(.disabled):not(.woo-variation-swatches-variable-item-more)', function (event) {
+        });
+
+        on_keydown();
+
+    };
+
+
+    var on_change = function(type) {
+
+    };
+
+    var on_click = function(type) {
+
+    };
+
+    var on_reset_all = function(type) {
+
+    };
+
+    // ACTIVE_TODO_OC_START
+    // --  keyboard events 
+    // ACTIVE_TODO_OC_END
+    var on_keydown = function() {
+
+        keydown();  
+    };
+            // ACTIVE_TODO_OC_START
+            // --  legacy events (events of woo emitted on certain scenarios) 
+            // --  events emitted by other plugins/themes which we need to take care of in case of compatiblity matters, so it can be termed as the compatiblity events 
+            // ACTIVE_TODO_OC_END
+
+
+    // -- base events - after the above events are handled by their particular function/layer, they would call below functions to do the ultimate work         
+    var change = function() {
+
+    };
+
+    var click = function() {
+
+    };
+
+    var reset_all = function() {
+
+
+    };
+
+    var keydown = function() {
+
+        if (event.keyCode && 32 === event.keyCode || event.key && ' ' === event.key || event.keyCode && 13 === event.keyCode || event.key && 'enter' === event.key.toLowerCase()) {
+          event.preventDefault();
+          $(this).trigger(mouse_event_name);
+        }
+    };
+
+
+    var compatability = function() {
+
+        // ACTIVE_TODO_OC_START
+        // this compatiblity function flow will be as per the commets in the filter js file 
+        // -   plugins/themes 
+        // --  there will be list of compatiblity matters that need to be handled so it will go under the compatiblity matter, and clearly it will go in compatiblity layers 
+        //     --  not related to this section but lets create simply a compatiblity module of its own like at the level where templating module is in namespace -- to d --    ACTIVE_TODO/TODO then each modules like filters, variations and so on can have their own module like ...filters.compatiblity just like there ...filters.core core module. but this is only if necessary, otherwise a function inside core module is much readability friendly. 
+        //         --  a compatiblity function inside filters, variations.swatches and variations.gallery_images module -- to d  
+
+        // and add all those theme and other patch that the other plugin we were exploring have. -- to d 
+        //         --  but of course in our case it will be as per our flow of how we manage loading and then ajax loading of swatches options -- to h and -- to d 
+        //     --  that other plugin have some more theme specific patch fix, and some other patch for managing unexpected effects like blink and so on -- to d    
+        // ACTIVE_TODO_OC_END    
+
+        if (options.length < 1) {
+            select = $(this).parent().find('select.woo-variation-raw-select');
+            options = select.find('option');
+            disabled = select.find('option:disabled');
+            out_of_stock = select.find('option.enabled.out-of-stock');
+            current = select.find('option:selected');
+            eq = select.find('option').eq(1);
+        }
+
+    }; 
+
+    return {
+
+        init: function() {
+
+            window.document.splugins.variation.events.api.notifyAllObservers( 'variation', 'before_search' ); 
+            
+            init_private();
+
+        },
+        before_search: function() {
+
+            window.document.splugins.variation.events.api.notifyAllObservers( 'variation', 'before_search' ); 
+        }, 
+        // createSubject: function( feature_unique_key, notifications ) {
+        //     // console.log("Observer " + index + " is notified!");
+
+        //     // TODO check if subject already created and exist then throw error
+        //     // var index = this.observers.indexOf(observer);
+        //     // if(index > -1) {
+        //     // this.observers.splice(index, 1);
+        //     // }
+
+        //     this.subjects.push( window.document.splugins.Feed.events.subject( feature_unique_key, notifications ) );
+        // }, 
+        // subscribeObserver: function(feature_unique_key, callbacks) {
+        //     // console.log("Observer " + index + " is notified!");
+
+        //     // before subscribing the ovserver check if the feature_unique_key subject is created in the first place, if not then throw error 
+        //     var found_index = null;
+        //     for(var i = 0; i < this.subjects.length; i++){
+        //         if( this.subjects[i].feature_unique_key() == feature_unique_key ) {
+
+        //             found_index = i;
+        //             break;
+        //         }
+        //     }
+
+        //     if( found_index == -1 ) {
+
+        //         throw "There is no subject exist for specified feature_unique_key "+feature_unique_key;
+        //     } else {
+
+        //         this.subjects[found_index].subscribeObserver( window.document.splugins.Feed.events.observer( callbacks ) );
+        //     }
+        // },
+        no_products_found: function() {
+
+            window.document.splugins.variation.events.api.notifyAllObservers( 'variation', 'no_products_found' );
+        }, 
+
+    }; 
+};
  //  publish it 
  window.document.splugins.wbc.variations.swatches.api = window.document.splugins.wbc.variations.swatches.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
  
@@ -1671,9 +1829,13 @@
      
      _this.base_container = jQuery( ( window.document.splugins.common._o( _this.configs, 'base_container_selector') ? _this.configs.base_container_selector : '.variations_form' ) );     
  
+    
      _this.base_element = element;
  
      _this.$base_element = jQuery( _this.base_element );
+    
+    _this.$slider_container = jQuery( '.'+ _this.configs.classes.slider.container );
+    _this.$zoom_container = jQuery( '.'+ _this.configs.classes.zoom.container );
  
      //bhavesh pase thi class levano se
  
@@ -1877,40 +2039,21 @@
          - listener events 
      ACTIVE_TODO_OC_END
  }}}
-     var preprocess_data = function() {
- 
-         ACTIVE_TODO not sure if this is necessary 
-         this._generated = this.product_variations.reduce(function (obj, variation) {
- 
-           Object.keys(variation.attributes).map(function (attribute_name) {
-             if (!obj[attribute_name]) {
-               obj[attribute_name] = [];
-             }
- 
-             if (variation.attributes[attribute_name]) {
-               obj[attribute_name].push(variation.attributes[attribute_name]);
-             }
-           });
- 
-           return obj;
-         }, {});
- 
-         ACTIVE_TODO but we will make use of it from beginning 
-         this._out_of_stock = this.product_variations.reduce(function (obj, variation) {
- 
-           Object.keys(variation.attributes).map(function (attribute_name) {
-             if (!obj[attribute_name]) {
-               obj[attribute_name] = [];
-             }
- 
-             if (variation.attributes[attribute_name] && !variation.is_in_stock) {
-               obj[attribute_name].push(variation.attributes[attribute_name]);
-             }
-           });
- 
-           return obj;
-         }, {});
-     
+
+     var preprocess_data = function(data) {
+
+        data.types = {};
+        data.product_variations.each(function (i, variation) {
+
+          jQuery(variation.variation_gallery_images).each(function (index,image) {
+
+            data.types.push(image.extra_params.type);
+          });
+
+          break;
+        });
+        
+        return data;
      };
  
      var process_images = function() {
@@ -2071,15 +2214,18 @@
  
       var hasGallery = images.length > 1;
 
-      this._element.trigger('before_woo_variation_gallery_init', [this, images]);
+      // this._element.trigger('before_woo_variation_gallery_init', [this, images]);
 
-      this.destroySlick();
+      // ACTIVE_TODO if requared we may neet to provide destroy or stop listener in our sp_slzm api 
+      // this.destroySlick();
+
       var slider_inner_html = images.map(function (image) {
-        var template = wp.template('woo-variation-gallery-slider-template');
+        var template = wp.template(_this.configs.template.slider.id);
         return template(image);
       }).join('');
-      var thumbnail_inner_html = images.map(function (image) {
-        var template = wp.template('woo-variation-gallery-thumbnail-template');
+
+      var zoom_inner_html = images.map(function (image) {
+        var template = wp.template(_this.configs.template.zoom.id);
         return template(image);
       }).join('');
 
@@ -2089,16 +2235,16 @@
         this.$target.removeClass('woo-variation-gallery-has-product-thumbnail');
       }
 
-      this.$slider.html(slider_inner_html);
+      this.$slider_container.html(slider_inner_html);
 
       if (hasGallery) {
-        this.$thumbnail.html(thumbnail_inner_html);
+        this.$zoom_container.html(zoom_inner_html);
       } else {
-        this.$thumbnail.html('');
+        this.$zoom_container.html('');
       } //this._element.trigger('woo_variation_gallery_init', [this, images]);
 
 
-      _.delay(function () {
+      splugins._.delay(function () {
         _this11.imagesLoaded();
       }, 1); //this._element.trigger('after_woo_variation_gallery_init', [this, images]);
 
@@ -2388,21 +2534,26 @@
  
  window.document.splugins.wbc.variations.gallery_images.sp_slzm.core = function( configs ) {
  
-     var init_listener = function() {
- 
+     var init_listener_private = function() {
+    
+        callback();
+
      };
  
-     var refresh_listener = function() {
- 
+     var refresh_listener_private = function() {
+
+        callback(); 
+
      };
  
      return {
  
-         init_listener: function() {
- 
+         init_listener: function(callback) {
+
+
          },
  
-         refresh_listener: function() {
+         refresh_listener: function(callback) {
  
          }
      };    

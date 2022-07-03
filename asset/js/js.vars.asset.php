@@ -43,7 +43,7 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 		}
 
 	</script>
-<?php 
+<?php  
 
 	// ACTIVE_TODO even though now we are going to use the underscore js but so far it is only by the optionsUI feature so skip loading it here for the rest of features and just put the if condition here for lighter experience to all other users -- to s 
 	wp_enqueue_script('undescore'/*, includes_url('js') . '/underscore.min.js'*/ );	 
@@ -57,8 +57,9 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 
 
 	$gallery_images_configs['types'] 					  = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->sp_variations_swatches_supported_attribute_types(array('is_base_type_only'=>true));
-	$gallery_images_configs['template'] 				  = array('slider'=>array('id'=>'sp_slzm_slider_image_loop'), 'zoom'=>array('id'=>'sp_slzm_zoom_image_loop'));	
 	$gallery_images_configs['product_variations_configs'] = wbc()->config->product_variations_configs();
+	$gallery_images_configs['template'] 				  = array('slider'=>array('id'=>'sp_slzm_slider_image_loop'), 'zoom'=>array('id'=>'sp_slzm_zoom_image_loop'));	
+	$gallery_images_configs['classes'] 				  = array('slider'=>array('container'=>'sp-variations-gallery-images-slider'), 'zoom'=>array('container'=>'sp-variations-gallery-images-zoom'));	
 
 	wbc()->load->asset('js','common',array('swatches_config'=>$swatches_configs, 'gallery_images_configs'=>$gallery_images_configs),"0.1.3",false,true);
 
