@@ -52,14 +52,18 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 	$gallery_images_configs = array();
 
 
-	$swatches_configs['attribute_types']            = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->sp_variations_swatches_supported_attribute_types(array('is_base_type_only'=>'true'));
+	$swatches_configs['attribute_types']            = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->sp_variations_swatches_supported_attribute_types(array('is_base_type_only'=>true));
 	$swatches_configs['product_variations_configs'] = wbc()->config->product_variations_configs();
+
 
 
 	$gallery_images_configs['types'] 					  = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->sp_variations_swatches_supported_attribute_types(array('is_base_type_only'=>true));
 	$gallery_images_configs['product_variations_configs'] = wbc()->config->product_variations_configs();
 	$gallery_images_configs['template'] 				  = array('slider'=>array('id'=>'sp_slzm_slider_image_loop'), 'zoom'=>array('id'=>'sp_slzm_zoom_image_loop'));	
 	$gallery_images_configs['classes'] 				  = array('slider'=>array('container'=>'sp-variations-gallery-images-slider'), 'zoom'=>array('container'=>'sp-variations-gallery-images-zoom'));	
+
+	// ACTIVE_TODO we neet to manage the loding secuance here so that any zoom layers including external plugin implimentetion layers can add filter do it 
+	$gallery_images_configs['template']['zoom']['all_in_dom'] = apply_filters('sp_slzm_zoom_template_all_in_dom',0);
 
 	wbc()->load->asset('js','common',array('swatches_config'=>$swatches_configs, 'gallery_images_configs'=>$gallery_images_configs),"0.1.3",false,true);
 

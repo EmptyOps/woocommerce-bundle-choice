@@ -201,7 +201,7 @@
                  this.subjects[found_index].subscribeObserver( new window.document.splugins.events.observer( callbacks ) );
              }
          },
-         notifyAllObservers: function(feature_unique_key, notification, stat_object=null, callbackt=null ) {
+         notifyAllObservers: function(feature_unique_key, notification, stat_object=null, notification_callback=null ) {
  
              // NOTE: now the events module will officially support one way callback on the notification that is recieved by subscriber. and also the one more stat_object var. and the callback is strictly one way only and there is no plan to extend it further. and even if it is required for any flow then the base flow and architecture should be refactored to achieve that which will ensure simple and clean flow, and if extend callback flow further then it would help achieve high dynamics but would also lead to unnecessarily complex, sensitive to regression effects and the messy architecture resulting in many long debug sessions also. so instead in such cases js modules should refine there architecture a little as needed and simply publish public function under their api which would do the job. and if even by any chance we required to do this then it must be confirmed with the expertly designed architectures and design patterns which confirms that more level of callbacks would be fine and not lead to complex or messy flows or race conditions if followed certain standards. -- and on a side note one can make use of stat_object and some additional mechanisam to implement back and forth callbacks but as usual since we are not supporting the callbacks officially similarly we neither intend to implement or approve any such flow. so that should not be done in the first place. 
  
@@ -401,13 +401,13 @@
              //             --  so even our internal slider and zoom js/jquery plugins tempaltes will also be made dynamic using this hooks 
              //             --  so that these hooks become publish ready when we decide to publish the hooks and js api for slider and zoom -- and as planned in one of the option of our four option offering for the gallery_images slider and zoom, that we look forward to try supporting the external zoom and slider with our planned level of efforts, we can (and should) provide service to make the slider and zoom template dynamic using our data by implementing those hooks when those plugins are enabled.  
                              // --  ACTIVE_TODO when we decide to actually publish php hooks and js api for slider and zoom, based on user demand as mentioned below, then at that above planned php hooks will also be published 
-             --  since we need to manage the slider and js templating dynamically on the slider and zoom layers 
-                 --  so gallery_images module will have template related functions that the form builder js module have, so create those functions -- to d or -- to a 
+             // --  since we need to manage the slider and js templating dynamically on the slider and zoom layers 
+             //     --  so gallery_images module will have template related functions that the form builder js module have, so create those functions -- to d or -- to a done
  
-                 --  and yeah in gallery_images module we will need one more object namely template_data so create that under data object that is created -- to d or -- to a  
-                     --  if data object is not created then create that in gallery_images module also -- to d or -- to a  
+                 // --  ACTIVE_TODO and yeah in gallery_images module we will need one more object namely template_data so create that under data object that is created -- to d or -- to a  
+                 //     --  ACTIVE_TODO if data object is not created then create that in gallery_images module also -- to d or -- to a  
  
-                     -- Above two points might not be necessary so check if form builder module had any flow that requires it otherwise just keep it on hold. and mark above two and these as ACTIVE_TODO and then we would remove it after 1st revision -- to d and -- to h or -- to a  
+                 //     -- Above two points might not be necessary so check if form builder module had any flow that requires it otherwise just keep it on hold. and mark above two and these as ACTIVE_TODO and then we would remove it after 1st revision -- to d and -- to h or -- to a  
  
                  --  and t we need to make sure that our slider and zoom assets are lighter so make sure that they are loading only needed things and are difinitely the minified versions only 
                      --  first confirm if they are loading on the right place like from footer hook and so on, and are also loading once only of course -- to t 
@@ -479,21 +479,22 @@
                              --  then append new templates in the loop in both slider and zoom, there would be their own function and loop 
                                  --  but is it good idea to do it from single function and single loop then so if certain conditions need to be managed then slider and zoom does work in sync by default without having to worry about anything 
                              --  then need to refresh the slider and zoom, so here the external slider and zoom must be binding to api events so that they does refresh their plugin when the event is recieved -- to a 
-                                    --  from slider assets.php call the sp_slzm init_listener and refresh_listener and provide that the callbacks -- to a 
-                                        --  and when the callaback function is called just init or refresh the slider using their particular api function call -- to a 
+                                    // --  from slider assets.php call the sp_slzm init_listener and refresh_listener and provide that the callbacks -- to a done
+                                    //     --  and when the callaback function is called just init or refresh the slider using their particular api function call -- to a done
 
-                                        --  and do both points above for the zoom assets.php -- to a  
+                                    //     --  and do both points above for the zoom assets.php -- to a  done
                                  // --  so here now maybe we need to simply publish the api with very few basics covered but atleast that would help start flow experimented and our default slider and zoom implementation can simply use that and that will help in experiment. so simply publish the api under .gallery_images.sp_slzm(confirm namespace on variations class).core and export it under ...api as usual. done
                                  // --  and for now just provide one public function refresh_listener and one private refresh_listener which would subscribe internally to the gallery_images notification done
-                                        --  here notification part not done, so subscribe that notification  or -- to a 
-                                            --  and the notification will be raised from the process_images_template or so function which was called from last in the on_variation_change or -- to a 
-                                     --  and private function upon recieving the notification from the gallery_images module it would just call the callback function -- to h and -- to a
-                                         --  so the public refresh_listener function would accept the callback -- to h and -- to a   
+                                        // --  here notification part not done, so subscribe that notification  or -- to a done 
+                                            // --  and the notification will be raised from the process_images_template or so function which was called from last in the on_variation_change or -- to a done
 
-                                    --  do all four points above for the init_listener function also, but not sure from where the init notification will be raised from gallery_images module -- to a 
-                                        --  I think it should be raised from that process template function, from below that comment, and if any page load time events come there in future then that will be after that load time event handling. so briefly at last -- to a 
+                                     // --  and private function upon recieving the notification from the gallery_images module it would just call the callback function -- to h and -- to a done
+                                     //     --  so the public refresh_listener function would accept the callback -- to h and -- to a  done 
 
-                                    --  and name both private listener function as the refresh_listener_private and so on -- to a 
+                                    // --  do all four points above for the init_listener function also, but not sure from where the init notification will be raised from gallery_images module -- to a done 
+                                    //     --  I think it should be raised from that process template function, from below that comment, and if any page load time events come there in future then that will be after that load time event handling. so briefly at last -- to a done
+
+                                    // --  and name both private listener function as the refresh_listener_private and so on -- to a done
                                      --  ACTIVE_TODO in future though we may like to move the .gallery_images.sp_slzm module to separate asset file and separate it from our other noisy code of all js modules so that users find it clean also. 
                                          --  ACTIVE_TODO and definitely it is very basic approach with which we are going, but we would like to do research on how to build and publish api layers and api. and definitely we would like to do mature implementation from the initial versions. 
  
@@ -1857,7 +1858,7 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
  
      var init_private = function() {
  
-         window.document.splugins.events.api.createSubject( 'gallery_images', ['process_images'] );
+         window.document.splugins.events.api.createSubject( 'gallery_images', ['process_images','sp_slzm_refresh'] );
  
          // // For Single Product
          // $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery(); // Ajax and Variation Product
@@ -2136,7 +2137,7 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
              //                     NOTE: and yeah on that note everything of the sp_variations module must be dynamic and nothing should be hardcoded so slider_no_variation input template type must be passed right from where the template is defined on admin to till here
  
              var callback = null ;
-             window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'process_images', type, callback );
+             window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'process_images', {type:type}, callback );
  
              // --  it wil be a specific block here for devices and configs -- to d done
              // --  while for the rest create dedicated functions like process_template, process_events and so on. for the layers listed below. 
@@ -2151,7 +2152,17 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
          }); 
  
      }
- 
+    
+    var template = function( tmpl_id, templating_lib ) {
+
+        return window.document.splugins.templating.api.get_template( tmpl_id, templating_lib );
+    };
+
+    var apply_template_data = function( template, template_data, templating_lib ) {
+
+        return window.document.splugins.templating.api.apply_data( template, template_data, templating_lib );
+    };
+
      var process_template = function() {
  
          // ACTIVE_TODO_OC_START
@@ -2159,8 +2170,8 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
          // ACTIVE_TODO_OC_END            
          if( type == 'radio' ) 
  
-         -- NOTE: from here the process images template will be called only if we need to manage the templates at load time which is not required so far     
- 
+
+
          note that we may like to create some dedicated functions for updating the actual templates in dom, since this process_template function is broad layer for handling all template related -- to h 
              --  and should we update templates on the init_private means page load event also, I think we should only if it is required by community standards. and since it would help in avoiding load time hangs to we must confirm with legacy standards and the plugin we were is doing -- to h 
                  --  and once the dom updated of the slider and zoom area the we would like to call many functions or simply can call the init layers functions like preprocess is kind of init level of function -- to h 
@@ -2170,44 +2181,12 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
                  --  and these functions would most likely be called from variation_change base event handling function, and since we do not have any requirement so far or managing the template at page load time so that is fine -- to a 
                      --  but need to confirm if the function calls are as per heirachical structure flow we are planning -- to h. 
                            key: "galleryInit",
-               value: function galleryInit(images) {
-                 var _this11 = this;
- 
-                 var hasGallery = images.length > 1;
- 
-                 this._element.trigger('before_woo_variation_gallery_init', [this, images]);
- 
-                 this.destroySlick();
-                 var slider_inner_html = images.map(function (image) {
-                   var template = wp.template('woo-variation-gallery-slider-template');
-                   return template(image);
-                 }).join('');
-                 var thumbnail_inner_html = images.map(function (image) {
-                   var template = wp.template('woo-variation-gallery-thumbnail-template');
-                   return template(image);
-                 }).join('');
- 
-                 if (hasGallery) {
-                   this.$target.addClass('woo-variation-gallery-has-product-thumbnail');
-                 } else {
-                   this.$target.removeClass('woo-variation-gallery-has-product-thumbnail');
-                 }
- 
-                 this.$slider.html(slider_inner_html);
- 
-                 if (hasGallery) {
-                   this.$thumbnail.html(thumbnail_inner_html);
-                 } else {
-                   this.$thumbnail.html('');
-                 } //this._element.trigger('woo_variation_gallery_init', [this, images]);
- 
- 
-                 _.delay(function () {
-                   _this11.imagesLoaded();
-                 }, 1); //this._element.trigger('after_woo_variation_gallery_init', [this, images]);
- 
-               }
- 
+               value: function galleryInit(images) {}
+                 
+        // NOTE: from here the process images template will be called only if we need to manage the templates at load time which is not required so far     
+        
+        window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'sp_slzm_init' );    
+
      }
  
      var process_images_template = function(images) {
@@ -2217,39 +2196,69 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
       // this._element.trigger('before_woo_variation_gallery_init', [this, images]);
 
       // ACTIVE_TODO if requared we may neet to provide destroy or stop listener in our sp_slzm api 
-      // this.destroySlick();
+      // this.destroySlick();      
 
-      var slider_inner_html = images.map(function (image) {
-        var template = wp.template(_this.configs.template.slider.id);
-        return template(image);
-      }).join('');
+      process_slider_template(images);
 
-      var zoom_inner_html = images.map(function (image) {
-        var template = wp.template(_this.configs.template.zoom.id);
-        return template(image);
-      }).join('');
+      process_zoom_template(images,-1,hasGallery);
 
+      // ACTIVE_TODO shraddha pase thi class levana -- to a
       if (hasGallery) {
         this.$target.addClass('woo-variation-gallery-has-product-thumbnail');
       } else {
         this.$target.removeClass('woo-variation-gallery-has-product-thumbnail');
       }
 
-      this.$slider_container.html(slider_inner_html);
-
-      if (hasGallery) {
-        this.$zoom_container.html(zoom_inner_html);
-      } else {
-        this.$zoom_container.html('');
-      } //this._element.trigger('woo_variation_gallery_init', [this, images]);
-
-
       splugins._.delay(function () {
-        _this11.imagesLoaded();
-      }, 1); //this._element.trigger('after_woo_variation_gallery_init', [this, images]);
+        window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'sp_slzm_refresh' );
+      }, 1); 
 
      };
  
+     var process_slider_template = function(images){
+
+        var templating_lib = window.document.splugins.common._o( _this.configs, 'templating_lib') ? _this.configs.templating_lib : 'wp';
+        
+        var template = template( _this.configs.template.slider.id, templating_lib );
+        var slider_inner_html = images.map(function (image) {
+            return apply_template_data(template, image, templating_lib);
+        }).join('');
+
+        _this.$slider_container.html(slider_inner_html);
+
+     };
+
+     var process_zoom_template = function(images,index,hasGallery){
+
+        var templating_lib = window.document.splugins.common._o( _this.configs, 'templating_lib') ? _this.configs.templating_lib : 'wp';
+
+        var template = template( _this.configs.template.zoom.id, templating_lib );
+        var zoom_inner_html = jQuery( images).each(function (index_inner,image) {
+
+            if(_this.configs.template.zoom.all_in_dom == 0){
+                
+                if(index == index_inner){
+
+                    return apply_template_data(template, image, templating_lib);
+
+                }else{
+                    return '';
+                }
+
+            }else{
+                return apply_template_data(template, image, templating_lib);
+            }
+            
+        }).join('');
+
+        if (hasGallery) {
+          _this.$zoom_container.html(zoom_inner_html);
+        } else {
+          _this.$zoom_container.html('');
+        } //this._element.trigger('woo_variation_gallery_init', [this, images]);
+
+     };
+
      var process_pages = function() {
  
          if(window.document.splugins.common.is_category_page){
@@ -2300,7 +2309,9 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
              return false;
          }
  
-         on_slider_thumb_click();
+        _this.$slider_container.find('img').on('click', function () {
+            on_slider_thumb_click(type,this);            
+        });
  
      };
  
@@ -2336,7 +2347,7 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
  
      };
  
-     var on_slider_thumb_click = function() {
+     var on_slider_thumb_click = function(type,element) {
  
          --  among other things the fundamental things to do are changing zoom are active image, we would be doing it like hiding all the templates within the zoom area container first and the showing the current index template -- to h 
              --  very first do it basically by hiding maybe all nodes within the main zoom container class and then just show the node/element at index which need to be shows -- to h. since we need to start testing 1st revision asap so lets do this asap. 
@@ -2350,7 +2361,7 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
                  --  and yeah need to make sure that if any additional notification is required then that is emitted from here, or if any extensions need to respond on notification_response callback then that is implemented -- to h 
              --  and zoom refresh seems to be needed to be called on each on_slider_thumb_click event, so just call that refresh event of the js api -- to h 
                  --  but yeah if the clicked gallery_item_type of the slider thumb is not image then skip above call -- to h 
-     
+        slider_thumb_click(type,element);
      };
  
      var on_zoom_area_hover = function() {
@@ -2361,7 +2372,7 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
      };
  
      var on_variation_change = function(event, variation) {
- 
+
          //  here it will be recieved by the parent layers, and the parent layer would be bootstrap or dedicated function maybe namely subscribe_to_events which will subscrive to the swatches subject of the ...variations.swatches module for the variation change event 
  
  
@@ -2388,7 +2399,25 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
      
      };
  
+     var slider_thumb_click = function(type,element){
+        
+        var index = jQuery(element).data('index'); 
+
+        if(_this.configs.template.zoom.all_in_dom == 0){
+            // update one tamplate 
+
+            process_zoom_template(_this.data.current_variation.variation_gallery_images,index,_this.data.current_variation.variation_gallery_images.length > 1);
+        window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'sp_slzm_refresh_zoom' ); 
+
+        }else{
+            // hide and show image elements
+        }
+
+     };
+
      var variation_change = function(event, variation) {
+ 
+        _this.data.current_variation = variation;
 
          -- to a  
          for gallery_images it is not only the variation_change event but below list of events that also need to be listened to, so implement them -- to h 
@@ -2401,9 +2430,7 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
  
          //  here it will call the internal function swap_images( variation_id ) which will be doing one of the main process of this gallery_images module 
              --  here the function should be named something like show_gallery_images, which would simply show initially or update and after that show, and also there would be show_variation_gallery_images which would be doing the same but for variation gallery images -- to h 
-                 --  and both above function from inside call the process_template heirarchy of function like process_gallery_images_template -- to h 
-         swap_images( variation_id );    
-         
+                 --  and both above function from inside call the process_template heirarchy of function like process_gallery_images_template -- to        
          process_images_template(variation.variation_gallery_images);
      
      };
@@ -2533,29 +2560,66 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
  window.document.splugins.wbc.variations.gallery_images.sp_slzm = window.document.splugins.wbc.variations.gallery_images.sp_slzm || {};
  
  window.document.splugins.wbc.variations.gallery_images.sp_slzm.core = function( configs ) {
- 
-     var init_listener_private = function() {
     
-        callback();
+    var _this = this; 
+    
+    _this.init_callbacks = [];
+    _this.refresh_callbacks = [];
+    _this.zoom_callbacks = [];
 
-     };
- 
-     var refresh_listener_private = function() {
+    var init_private = function(){
 
-        callback(); 
+        init_listener_private();
+        refresh_listener_private();
+    };
 
-     };
- 
-     return {
- 
-         init_listener: function(callback) {
+    var init_listener_private = function() {
+    
+        window.document.splugins.events.api.subscribeObserver( 'gallery_images', 'sp_slzm', 'sp_slzm_init',function(stat_object, notification_response){
 
+            jQuery(_this.init_callbacks).each(function (index,callback) {
 
-         },
+                callback();     
+            });         
+        });
+
+    };
  
-         refresh_listener: function(callback) {
+    var refresh_listener_private = function() {
+
+        window.document.splugins.events.api.subscribeObserver( 'gallery_images', 'sp_slzm', 'sp_slzm_refresh',function(stat_object, notification_response){
+
+            jQuery(_this.refresh_callbacks).each(function (index,callback) {
+
+                callback();     
+            });         
+        });
+
+        window.document.splugins.events.api.subscribeObserver( 'gallery_images', 'sp_slzm', 'sp_slzm_refresh_zoom',function(stat_object, notification_response){
+
+            jQuery(_this.zoom_callbacks).each(function (index,callback) {
+
+                callback();     
+            });         
+        });
+    };
+
+    return {
  
-         }
+        init: function(){
+
+            init_private();
+        };
+
+        init_listener: function(callback) {
+
+            _this.init_callbacks.push(callback);
+        },
+ 
+        refresh_listener: function(callback) {
+            
+            _this.refresh_callbacks.push(callback);
+        }
      };    
  
  };

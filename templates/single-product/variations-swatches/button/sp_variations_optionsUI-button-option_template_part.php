@@ -12,9 +12,8 @@ printf( '<div class="variable-item-span variable-item-span-%s">%s</div>', esc_at
 
 
 
-
 $template = array(
     'type' => 'div',
-    'class' => 'variable-item-span variable-item-span-'.esc_attr( $variable_item_data['options_loop_type'][$term->slug] ),
+    'class' => 'variable-item-span variable-item-span-'.esc_attr( $variable_item_data['options_loop_type'][$term->slug]). ' spui-wbc-swatches-variable-item spui-wbc-swatches-variable-item-'.$variable_item_data['options_loop_type'][$term->slug],
     'preHTML' => esc_html( $term->name ),
 );

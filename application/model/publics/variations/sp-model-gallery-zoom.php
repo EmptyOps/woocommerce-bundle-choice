@@ -88,7 +88,7 @@ class SP_Model_Gallery_Zoom extends Eowbc_Base_Model_Publics {
 	
 	public function render_core(){
 
-		add_action('sp_variations_gallery_images_render', function(){
+		add_filter('sp_variations_gallery_images_zoom_ui', function($ui){
 
 			$classes = array('sp-variations-gallery-images-zoom');
 			$classes = apply_filters('sp_slzm_zoom_container',$classes);
@@ -105,7 +105,7 @@ class SP_Model_Gallery_Zoom extends Eowbc_Base_Model_Publics {
 				'child'=>$html
 			);
 
-			\sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui,'sp_variations_gallery_images_zoom_container');
+			//\sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui,'sp_variations_gallery_images_zoom_container');
 
 
 			$html = null;
@@ -116,6 +116,7 @@ class SP_Model_Gallery_Zoom extends Eowbc_Base_Model_Publics {
 
 			echo \eo\wbc\model\UI_Builder::instance()->js_template_wrap('sp_slzm_zoom_image_loop','temp'/*$html*/,'wp');
 
+			return $ui;
 		}, 10);
 		
 	}

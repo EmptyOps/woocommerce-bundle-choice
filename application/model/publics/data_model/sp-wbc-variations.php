@@ -64,16 +64,15 @@ class SP_WBC_Variations extends SP_Variations {
 
 			}, 8, 2);
 
-			add_filter('default_sp_variations_swatches_variation_attribute_options_html', function($hook_args){
-
-				if(in_array($hook_args['type'],self::sp_variations_swatches_supported_attribute_types())){
+			add_filter('default_sp_variations_swatches_variation_attribute_options_html', function($status, $hook_args){
+				//wbc_pr(self::sp_variations_swatches_supported_attribute_types()); die();
+				if(!isset(self::sp_variations_swatches_supported_attribute_types()[$hook_args['type']])){
 					return true;
-				}else{
-					return false;
 				}
 
+				return $status;	
 
-			}, 10, 1);
+			}, 10, 2);
 
 
 		}elseif( $for_section == "swatches" || $for_section == "gallery_images") {
@@ -343,19 +342,31 @@ class SP_WBC_Variations extends SP_Variations {
 		$type['dropdown_image_only']='Dropdown with Icons Only';
 		$type['dropdown']='Dropdown';
 
-		return apply_filters('sp_variations_swatches_attribute_types', $type);	 
+		if(empty($type['is_base_type_only'])){
+
+			return apply_filters('sp_variations_swatches_attribute_types', $type);	 
+		
+		} else {
+
+			return $type;
+		}
 
 	}
 
-	public static function sp_variations_gallery_images_supported_attribute_types($configs = array()){
+	public static function sp_variations_gallery_images_supported_types($configs = array()){
 
 		$type = array();
-		$type['image']='Images';
+		$type['image']='Image';
 		$type['video']='Video';
 
-		return $type;
+		if(empty($type['is_base_type_only'])){
 
+			return apply_filters('sp_variations_gallery_images_types', $type);	 
+		
+		} else {
 
+			return $type;
+		}
 
 	}
 
@@ -468,14 +479,24 @@ class SP_WBC_Variations extends SP_Variations {
 		$variation_id       = absint( $variation->get_id() );
 		$variation_image_id = absint( $variation->get_image_id() );
 
+
+		$args['form_definition'] = \eo\wbc\controllers\admin\menu\page\Tiny_features::instance()->init(array('temporary_get_form_directly'=>true, 'is_legacy_admin'=>true, 'data'=>array('id'=>$variation_id)));
 		// ACTIVE_TODO there is big architectural error here but it as might be because of our incomplete implementation of data class(which would be commonly used by the admin and frontend modules) which planned in get data function of single product model -- the error here is it is directly calling the function of parent class instead of calling its own model of the tiny features. 
-		$data 				= \eo\wbc\model\admin\Eowbc_Model::instance()->get($args['form_definition'],array('is_convert_das_to_array'=>true, 'id'=>$variation_id, 'is_legacy_admin'=>true ));
+		$data 				= \eo\wbc\model\admin\Eowbc_Model::instance()->get($args['form_definition'],array('page_section'=>'sp_variations', 'is_convert_das_to_array'=>true, 'id'=>$variation_id, 'is_legacy_admin'=>true ));
 		//  $product                      = wc_get_product( $product_id );
-		if ( !empty($data['sp_variations']["form"]) ) {
+
+		$gallery_images = array();	
+		if (false and !empty($data['sp_variations']["form"]) ) {
 
 			foreach($data['sp_variations']["form"] as $key=>$fv){
 
+				if( !in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types())) {
+					continue;
+				}
+
 				$value = $fv['value'];
+				/*echo ">>>>>>>>>>>";
+				wbc_pr($fv);*/
 
 				if ( strpos( $key, 'sp_variations_gallery_images' ) !== false ) {
 
@@ -525,7 +546,7 @@ class SP_WBC_Variations extends SP_Variations {
 		if ( !empty($data['sp_variations']["form"]) ) {
 
 			foreach ( $gallery_images as $i=>$value ) {
-
+				
 				if ( is_array($value) ) {
 
 					$variation_get_max_purchase_quantity['variation_gallery_images'][ $i ] = $this->get_product_attachment_props( $value['value'],false,$value['type']);
