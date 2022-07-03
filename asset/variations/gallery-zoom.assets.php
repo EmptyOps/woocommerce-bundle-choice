@@ -9,21 +9,31 @@ add_action( 'wp_enqueue_scripts' ,function(){
 	 		// ACTIVE_TODO_OC_START
 	 		// // ---- error event ma sem che
 	 		// ACTIVE_TODO_OC_END
-	        //jQuery(".small-img").hover(function(){
-	        jQuery(".small-img").click(function(){
-	            jQuery(".big-img").attr('src',jQuery(this).attr('src'));
-	        });
-	        
-	        if(typeof(jQuery.fn.imagezoomsl)=='function'){
-	        	jQuery(".big-img").imagezoomsl({
-		           /* zoomrange:[3,3],
+            // ACTIVETODO enable below code if requared
+	        // //jQuery(".small-img").hover(function(){
+	        // jQuery(".small-img").click(function(){
+	        //     jQuery(".big-img").attr('src',jQuery(this).attr('src'));
+	        // });
+
+	        if(typeof(jQuery.fn.imagezoomsl)!=='function'){
+		        let script = document.createElement('script');
+		        script.src = "<?php echo constant( strtoupper( 'EOWBC_ASSET_URL' ) ).'js/variations/gallery_images/external-plugins/zoomsl/zoomsl.min.js'; ?>";
+		        document.head.append(script);
+
+		       
+		     }
+
+		    var init_function = function(){
+		    	
+		        jQuery(".big-img").imagezoomsl({
+		            /*zoomrange:[3,3],
 		            disablewheel: true,
 		            scrollspeedanimate: 10,
 		            loopspeedanimate: 5,
 		            cursorshadeborder: "1px solid black",
 		            magnifiereffectanimate: "slideIn",
 		            magnifiersize: [640, 480],*/
-		           /* disablewheel: true,
+		            /*disablewheel: true,
 			        zoomstart: 3,
 			        zoomrange: [3,3],
 			        magnifiersize: [502, 502],
@@ -32,49 +42,45 @@ add_action( 'wp_enqueue_scripts' ,function(){
 			        zoomstart: 2,
 			        zoomrange: [2,2],
 			        innerzoom: true,
-			        magnifierborder: "none", 
-		        });
-	        }
+			        magnifierborder: "none",
+			        /*disablewheel: true,
+	                zoomstart: 3,
+	                zoomrange: [3,3],
+	                magnifiersize: [502, 502],
+	                cursorshadeborder: "1px solid black",*/
+			    });
+		        
+		    };  
+
+		    var bind_listeners = function(){
+
+	            window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.init_listener(function(){
+
+	                init_function();
+	            });
+	            window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.refresh_listener(function(){
+	            	
+	                init_function();
+	            });
+
+		    };
+
+		    bind_listeners();
 
 	        window.addEventListener('error', function(e){
 
-	        	// jQuery(".small-img").hover(function(){
-	        	jQuery(".small-img").click(function(){
-		            jQuery(".big-img").attr('src',jQuery(this).attr('src'));
-		        });
-
-		      if(typeof(jQuery.fn.imagezoomsl)!=='function'){
-		        let script = document.createElement('script');
-		        script.src = "<?php echo constant( strtoupper( 'EOWBC_ASSET_URL' ) ).'js/variations/gallery_images/external-plugins/zoomsl/zoomsl.min.js'; ?>";
-		        document.head.append(script);
+   	            // ACTIVETODO enable below code if requared
+	        	// // jQuery(".small-img").hover(function(){
+	        	// jQuery(".small-img").click(function(){
+		        //     jQuery(".big-img").attr('src',jQuery(this).attr('src'));
+		        // });
 
 		        window.setTimeout(function(){
-		          jQuery(".big-img").imagezoomsl({
-			            /*zoomrange:[3,3],
-			            disablewheel: true,
-			            scrollspeedanimate: 10,
-			            loopspeedanimate: 5,
-			            cursorshadeborder: "1px solid black",
-			            magnifiereffectanimate: "slideIn",
-			            magnifiersize: [640, 480],*/
-			            /*disablewheel: true,
-				        zoomstart: 3,
-				        zoomrange: [3,3],
-				        magnifiersize: [502, 502],
-				        cursorshadeborder: "1px solid black",*/
-				        disablewheel: true,
-				        zoomstart: 2,
-				        zoomrange: [2,2],
-				        innerzoom: true,
-				        magnifierborder: "none",
-				        /*disablewheel: true,
-		                zoomstart: 3,
-		                zoomrange: [3,3],
-		                magnifiersize: [502, 502],
-		                cursorshadeborder: "1px solid black",*/
-			        });
-		        },2000);
-		      }
+
+       			    bind_listeners();
+
+		        },2000);	
+		     
 		    });
 
 	    });
