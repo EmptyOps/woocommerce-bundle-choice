@@ -480,13 +480,15 @@ class SP_WBC_Variations extends SP_Variations {
 		$variation_image_id = absint( $variation->get_image_id() );
 
 
+		$gallery_images_types 					  = self::sp_variations_gallery_images_supported_types(array('is_base_type_only'=>true));	
+
 		$args['form_definition'] = \eo\wbc\controllers\admin\menu\page\Tiny_features::instance()->init(array('temporary_get_form_directly'=>true, 'is_legacy_admin'=>true, 'data'=>array('id'=>$variation_id)));
 		// ACTIVE_TODO there is big architectural error here but it as might be because of our incomplete implementation of data class(which would be commonly used by the admin and frontend modules) which planned in get data function of single product model -- the error here is it is directly calling the function of parent class instead of calling its own model of the tiny features. 
 		$data 				= \eo\wbc\model\admin\Eowbc_Model::instance()->get($args['form_definition'],array('page_section'=>'sp_variations', 'is_convert_das_to_array'=>true, 'id'=>$variation_id, 'is_legacy_admin'=>true ));
 		//  $product                      = wc_get_product( $product_id );
 
 		$gallery_images = array();	
-		if (false and !empty($data['sp_variations']["form"]) ) {
+		if ( !empty($data['sp_variations']["form"]) ) {
 
 			foreach($data['sp_variations']["form"] as $key=>$fv){
 
@@ -495,8 +497,10 @@ class SP_WBC_Variations extends SP_Variations {
 				}
 
 				$value = $fv['value'];
-				/*echo ">>>>>>>>>>>";
-				wbc_pr($fv);*/
+				
+				// echo ">>>>>>>>>>> data fields";
+				// wbc_pr($key);
+				// wbc_pr($fv);
 
 				if ( strpos( $key, 'sp_variations_gallery_images' ) !== false ) {
 
@@ -512,11 +516,16 @@ class SP_WBC_Variations extends SP_Variations {
 
 				} else {
 
-					array_push($gallery_images,apply_filters('sp_variations_available_variation_type', array('type'=>'video','value'=>$value,'key'=>$key), $key ) );
+					$value_arr = apply_filters('sp_variations_available_variation_type', array('type'=>null,'value'=>$value,'key'=>$key), $key );	
 
+					if( !empty($value_arr['type']) && !empty($gallery_images_types[$value_arr['type']]) ) {
+
+						array_push($gallery_images, $value_arr);
+					}
 				}
 
 			}
+			// wbc_pr($gallery_images);
 
 		} else {
 			// $gallery_images = $product->get_gallery_image_ids();

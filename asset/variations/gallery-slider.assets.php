@@ -36,7 +36,9 @@ add_action( 'wp_enqueue_scripts' ,function(){
 
     <!-- -- a tejas che api che -->
     <script type="text/javascript">
-        document.addEventListener("DOMContentLoaded", function(event) {
+
+        var init_function = function(){
+
             var splide = new Splide( '#slider1', {
                 direction   : 'ttb',
                  wheel       : true,
@@ -60,12 +62,27 @@ add_action( 'wp_enqueue_scripts' ,function(){
                 },
             } );
             splide.mount();
+        };
+
+        document.addEventListener("DOMContentLoaded", function(event) {
+            
+            window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.init_listener(function(){
+
+                init_function();
+            });
+            window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.refresh_listener(function(){
+
+                init_function();
+            });
+
         } );
         jQuery(document).ready(function(){
-            //slider
-            jQuery(".small-img").click(function(){
-                jQuery(".big-img").attr('src',jQuery(this).attr('src'));
-            });
+
+            // ACTIVETODO enable below code if requared
+            // //slider
+            // jQuery(".small-img").click(function(){
+            //     jQuery(".big-img").attr('src',jQuery(this).attr('src'));
+            // });
 
 
              //-- seme che uper lode karli che

@@ -168,6 +168,7 @@ function eowbc_ready($){
         });
         file_frame.on('select', function() {
             attachment = file_frame.state().get('selection').first().toJSON();          
+            console.log(attachment);
             action_root.find("img").attr('src',attachment.url).css( 'width', 'auto' );
             action_root.find("input[type='hidden']").val( attachment.id );
         });
@@ -447,7 +448,9 @@ function eowbc_ready($){
     });
 
     jQuery(document).ready(function(){
-        jQuery(".question.circle.outline.eo_help.icon").popup({hoverable:true,onShow:function(){jQuery('.ui.popup').css('max-height', jQuery(window).height());}});
+        if( !window.document.splugins.admin.is_legacy_admin_page ) {
+            jQuery(".question.circle.outline.eo_help.icon").popup({hoverable:true,onShow:function(){jQuery('.ui.popup').css('max-height', jQuery(window).height());}});
+        }
     });
 
     $(".ui.negative.message .close.icon").click(function(){

@@ -1,0 +1,6 @@
+[submodule "application/library/shared/submudule/sp_ssm_variations/sp_ssm_variations"]
+	path = application/library/shared/submudule/sp_ssm_variations/sp_ssm_variations
+	url = https://tejasr_emptyoops@bitbucket.org/hsquaretech/sp_ssm_variations.git
+[submodule "application/library/shared/submodule/sp_ssm_variations"]
+	path = application/library/shared/submodule/sp_ssm_variations
+	url = https://tejasr_emptyoops@bitbucket.org/hsquaretech/sp_ssm_variations.git
