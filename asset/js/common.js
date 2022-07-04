@@ -1577,7 +1577,7 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
         if(window.document.splugins.common._b(_this.binding_stats, 'on_click_listener', type)){
             return false;
         }
-        
+
         var mouse_event_name = 'click';
 
         here it seems that m have explicitly handled the click event, but we should do if it is by standard require and the legacy flows does need us to take care of it. so confirm first with the plugin we are exploring -- to h 
@@ -1837,7 +1837,6 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
         }
         
-
     }; 
 
     return {
