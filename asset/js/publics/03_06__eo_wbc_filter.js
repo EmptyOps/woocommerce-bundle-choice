@@ -591,7 +591,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
         eo_wbc_filter_render_html();     
 
-    }
+    };
 
     var eo_wbc_filter_render_html = function(data,render_container){
 
@@ -1649,7 +1649,7 @@ jQuery(document).ready(function($){
         })
         jQuery.fn.eo_wbc_filter_change();
         return false;
-    })  
+    });  
 
  	window.document.splugins.filters.api.init();
 

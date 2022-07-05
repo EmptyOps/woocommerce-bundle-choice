@@ -62,6 +62,8 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 	// ACTIVE_TODO we neet to manage the loding secuance here so that any zoom layers including external plugin implimentetion layers can add filter do it 
 	$gallery_images_configs['template']['zoom']['all_in_dom'] = apply_filters('sp_slzm_zoom_template_all_in_dom',0);
 
+	$gallery_images_configs['options'] = array('gallery_reset_on_variation_change'=>false);
+
 	wbc()->load->asset('js','common',array('jquery'),"0.1.3",false,true,'common_configs',array('swatches_config'=>$swatches_configs, 'gallery_images_configs'=>$gallery_images_configs));
 
 }, 99);

@@ -115,36 +115,58 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
      this.feature_unique_key = feature_unique_key;
      this.notifications = notifications;     // [];    //  list of notifications it can notify for.  
      this.observers = [];
+
  
      return {
-     feature_unique_key: function() {
- 
-         return this.feature_unique_key;
-     },    
-     subscribeObserver: function(observer) {
-         // ACTIVE_TODO here check the callbacks of observer first and if this subject is not supporting the notifications for particular callback then simply throw error and do not subscriber the observer 
- 
-         this.observers.push(observer);
-     },
-     unsubscribeObserver: function(observer) {
-         // ACTIVE_TODO implement as required only
-         // var index = this.observers.indexOf(observer);
-         // if(index > -1) {
-         // this.observers.splice(index, 1);
-         // }
-     },
-     notifyObserver: function(observer) {
-         // ACTIVE_TODO implement as required only
-         // var index = this.observers.indexOf(observer);
-         // if(index > -1) {
-         // this.observers[index].notify(index);
-         // }
-     },
-     notifyAllObservers: function(notification) {
-         for(var i = 0; i < this.observers.length; i++){
-             this.observers[i].notify(i, notification);
-         };
-     }
+         feature_unique_key: function() {
+     
+             return this.feature_unique_key;
+         },    
+         subscribeObserver: function(observer) {
+             // ACTIVE_TODO here check the callbacks of observer first and if this subject is not supporting the notifications for particular callback then simply throw error and do not subscriber the observer 
+     
+             this.observers.push(observer);
+         },
+         unsubscribeObserver: function(observer) {
+             // ACTIVE_TODO implement as required only
+             // var index = this.observers.indexOf(observer);
+             // if(index > -1) {
+             // this.observers.splice(index, 1);
+             // }
+         },
+         notifyObserver: function(observer) {
+             // ACTIVE_TODO implement as required only
+             // var index = this.observers.indexOf(observer);
+             // if(index > -1) {
+             // this.observers[index].notify(index);
+             // }
+         },
+         notifyAllObservers: function(notification) {
+             for(var i = 0; i < this.observers.length; i++){
+                 this.observers[i].notify(i, notification);
+             };
+         },
+         get_observer: function(subscriber_key) {
+            
+            var found_index = null;
+            for(var i = 0; i < this.subjects.length; i++){
+               if( this.subjects[i].feature_unique_key() == feature_unique_key ) {
+
+                    found_index = i;
+                    break;
+                }
+            }
+
+            if( found_index == -1 ) {
+
+                throw "There is no subject exist for specified feature_unique_key "+feature_unique_key;
+            } else {
+
+                this.subjects[found_index].subscribeObserver( new window.document.splugins.events.observer( callbacks ) );
+            }
+
+            return this.get_observer;
+         }
      };
  };
  
@@ -153,22 +175,31 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
  
  window.document.splugins.events.observer = window.document.splugins.events.observer || {};
  
- window.document.splugins.events.observer.core = function(callbacks) {
-     this.callbacks = callbacks;     // [];    //  list of notifications callbacks it waits for.  
+ window.document.splugins.events.observer.core = function(callbacks, subscriber_key) {
+    this.subscriber_key = subscriber_key; 
+    this.callbacks = callbacks;     // [];    //  list of notifications callbacks it waits for. 
  
-     return {
-         notify: function(index, notification) {
-             // console.log("Observer " + index + " is notified!");
+    return {
+        subscriber_unique_key: function() {
+     
+             return this.subscriber_unique_key;
+         },  
+        notify: function(index, notification) {
+            // console.log("Observer " + index + " is notified!");
  
-             // TODO check if observer listens to this notification and if not then return with false
-             // var index = this.observers.indexOf(observer);
-             // if(index > -1) {
-             // this.observers.splice(index, 1);
-             // }
+            // TODO check if observer listens to this notification and if not then return with false
+            // var index = this.observers.indexOf(observer);
+            // if(index > -1) {
+            // this.observers.splice(index, 1);
+            // }
  
-             this.callbacks[notification]();
-         }
-     }
+            this.callbacks[notification]();
+        },
+        subscribe_notification: function(index, notification) {
+
+        },
+
+    }
  }
  
  //  publish it 
@@ -190,7 +221,10 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
  
              this.subjects.push( new window.document.splugins.events.subject( feature_unique_key, notifications ) );
          }, 
-         subscribeObserver: function(feature_unique_key, callbacks) {
+
+         window.document.splugins.events.api.subscribeObserver( 'gallery_images', 'sp_slzm', 'sp_slzm_init',function(stat_object, notification_response){
+         
+         subscribeObserver: function(feature_unique_key, subscriber_key, notification_key callbacks) {
              // console.log("Observer " + index + " is notified!");
  
              // before subscribing the ovserver check if the feature_unique_key subject is created in the first place, if not then throw error 
@@ -207,6 +241,8 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
  
                  throw "There is no subject exist for specified feature_unique_key "+feature_unique_key;
              } else {
+
+                get_observer();
  
                  this.subjects[found_index].subscribeObserver( new window.document.splugins.events.observer( callbacks ) );
              }
@@ -1111,11 +1147,11 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
                 }else if(window.document.splugins.common.is_tablet){
 
 
-                }else if(browser){
+                }else if(false/*browser*/){
 
-                }else if(screen size){
+                }else if(false/*screen size*/){
 
-                }else if(os){
+                }else if(false/*os*/){
 
                 }
 
@@ -2109,7 +2145,7 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
      ACTIVE_TODO_OC_END
  }}}
 
-     var preprocess_data = function(data) {
+    var preprocess_data = function(data) {
 
         data.types = {};
         data.product_variations.each(function (i, variation) {
@@ -2123,9 +2159,9 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
         });
         
         return data;
-     };
+    };
  
-     var process_images = function() {
+    var process_images = function() {
  
         // below types var neet to be prepaired in preprocess_data -- to a done
           // -- also neet to clear type managment in wbc variation class. simply set type in extra perance -- to b or -- to a done
@@ -2177,11 +2213,11 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
   
                       }else if(window.document.splugins.common.is_tablet){
   
-                      }else if(browser){
+                      }else if(false/*browser*/){
   
-                      }else if(screen size){
+                      }else if(false/*screen size*/){
   
-                      }else if(os){
+                      }else if(false/*os*/){
   
                       }
                   // ACTIVE_TODO_OC_START    
@@ -2218,13 +2254,13 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
                  //         --done process_compatability_matters -- to d
                  //     ACTIVE_TODO_OC_END
             }
-         }); 
+        }); 
 
 
         var sp_variations_gallery_images_loaded_callback = null ;
         window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'sp_variations_gallery_images_loaded', {}, sp_variations_gallery_images_loaded_callback );
  
-     };
+    };
     
     var template = function( tmpl_id, templating_lib ) {
 
@@ -2289,7 +2325,7 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
 
     };
  
-     var process_slider_template = function(images){
+    var process_slider_template = function(images){
 
         var templating_lib = window.document.splugins.common._o( _this.configs, 'templating_lib') ? _this.configs.templating_lib : 'wp';
         
@@ -2300,18 +2336,20 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
 
         _this.$slider_container.html(slider_inner_html);
 
-     };
+    };
 
-     var process_zoom_template = function(images,index,hasGallery){
+    var process_zoom_template = function(images,index,hasGallery){
 
         var templating_lib = window.document.splugins.common._o( _this.configs, 'templating_lib') ? _this.configs.templating_lib : 'wp';
 
-        var template = template( _this.configs.template.zoom.id, templating_lib );
+        
         var zoom_inner_html = jQuery( images).each(function (index_inner,image) {
 
             if(_this.configs.template.zoom.all_in_dom == 0){
                 
                 if(index == index_inner){
+
+                    var template = template( _this.configs.template.zoom.id+'_'+index_inner, templating_lib );
 
                     return apply_template_data(template, image, templating_lib);
 
@@ -2320,6 +2358,9 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
                 }
 
             }else{
+
+                var template = template( _this.configs.template.zoom.id+'_'+index_inner, templating_lib );
+
                 return apply_template_data(template, image, templating_lib);
             }
             
@@ -2331,9 +2372,9 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
           _this.$zoom_container.html('');
         } //this._element.trigger('woo_variation_gallery_init', [this, images]);
 
-     };
+    };
 
-     var process_pages = function(type) {
+    var process_pages = function(type) {
  
          if(window.document.splugins.common.is_category_page){
  
@@ -2341,13 +2382,13 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
  
          };
  
-     };
+    };
  
-     var process_slider_and_zoom = function(type) {
+    var process_slider_and_zoom = function(type) {
  
-     };
+    };
  
-     var process_events = function(type) {
+    var process_events = function(type) {
  
          slider_thumb_click_listener(type);
  
@@ -2357,7 +2398,7 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
  
          reset_variation_change_listener(type);
  
-     };
+    };
  
      var process_and_manage_effects = function(type) {
  
@@ -2373,7 +2414,7 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
  
              compatability("video_section");
  
-         }; 
+         }
  
      };
  
@@ -2407,25 +2448,26 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
  
      };
  
-     var reset_variation_change_listener = function(type) {
- 
-         if (woo_variation_gallery_options.gallery_reset_on_variation_change ?) {
+     var reset_variation_listener = function(type) {
+
+         if (_this.configs.options.gallery_reset_on_variation_change) {
            _this.$variations_form.on('hide_variation', function () {
-             on_reset_variation_change(type);
+             on_reset_variation(type);
            });
          } else {
            _this.$variations_form.on('click', '.reset_variations', function () {
-             on_reset_variation_change(type);
+             on_reset_variation(type);
            });
          }
  
      };
  
      var on_slider_thumb_click = function(type,element) {
- 
+    
+
          --  among other things the fundamental things to do are changing zoom are active image, we would be doing it like hiding all the templates within the zoom area container first and the showing the current index template -- to h 
              --  very first do it basically by hiding maybe all nodes within the main zoom container class and then just show the node/element at index which need to be shows -- to h. since we need to start testing 1st revision asap so lets do this asap. 
-                 --  then eventually we may like to maintain based on the image template class(so hook would be required for it) and index, or just based on index. to ensure that maximum adaptability is ensured for external slider and zoom and even if within the main zoom area container the dom has complex structure then also things work fine, and it is like that slider/zoom plugins would have complex dom. -- to h 
+                  --  then eventually we may like to maintain based on the image template class(so hook would be required for it) and index, or just based on index. to ensure that maximum adaptability is ensured for external slider and zoom and even if within the main zoom area container the dom has complex structure then also things work fine, and it is like that slider/zoom plugins would have complex dom. -- to h 
  
          --  what could be other things that we need to do or would like to cover? -- to a  
              --  we need to stop the video of the current index(means the index which was already set before click) is actually gallery_item_type=video -- to h 
@@ -2457,9 +2499,9 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
  
      };
  
-     var on_reset_variation_change = function(type) {
+     var on_reset_variation = function(type) {
  
-         reset_variation_change(type);
+         reset_variation(type);
      
      };
  
@@ -2483,7 +2525,7 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
             // update one tamplate 
 
             process_zoom_template(_this.data.current_variation.variation_gallery_images,index,_this.data.current_variation.variation_gallery_images.length > 1);
-        window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'sp_slzm_refresh_zoom' ); 
+            window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'sp_slzm_refresh_zoom' ); 
 
         }else{
             // hide and show image elements
@@ -2493,25 +2535,32 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
 
     var variation_change = function(event, variation) {
 
-    _this.data.current_variation = variation;
+        _this.data.current_variation = variation;
 
-     -- to a  
-     for gallery_images it is not only the variation_change event but below list of events that also need to be listened to, so implement them -- to h 
-         --  show_variation
-         --  hide_variation
-         --  click on .reset_variations
-     --  and one strange matter is that there is not seem to be the variation_change event in the plugn we were exploring, but double check and it is likely be there -- to h. so either way need to implement all above events including variation_change since we may have had it and it make no sense to skip that. 
-         --  and on this regard better to create functions like init_gallery, init_variation_gallery and maybe also default_gallery and default_variation_gallery as this would create proper heirarchy like in the plugin we were exploring -- to h 
-         --  it is confirmed that there is no dependancy on the variations change function in the plugin we were exploring, however it still makes sense to use that only. but in the first place confirm if above show_variation and hide_variation events are actually available, and if they are available then decide which we should use. see we can use all of them but that can create mess if not always then in certain scenarios so to ensure neat execution lets just do the best suitable only -- to h 
-
-     //  here it will call the internal function swap_images( variation_id ) which will be doing one of the main process of this gallery_images module 
-         --  here the function should be named something like show_gallery_images, which would simply show initially or update and after that show, and also there would be show_variation_gallery_images which would be doing the same but for variation gallery images -- to h 
-             --  and both above function from inside call the process_template heirarchy of function like process_gallery_images_template -- to        
-     process_images_template(variation.variation_gallery_images);
+        /*ACTIVE_TODO_OC_START
+         -- to a  
+         for gallery_images it is not only the variation_change event but below list of events that also need to be listened to, so implement them -- to h 
+             --  show_variation
+             --  hide_variation
+             --  click on .reset_variations
+         --  and one strange matter is that there is not seem to be the variation_change event in the plugn we were exploring, but double check and it is likely be there -- to h. so either way need to implement all above events including variation_change since we may have had it and it make no sense to skip that. 
+             --  and on this regard better to create functions like init_gallery, init_variation_gallery and maybe also default_gallery and default_variation_gallery as this would create proper heirarchy like in the plugin we were exploring -- to h 
+                -- this might be invalid
+            
+             --  it is confirmed that there is no dependancy on the variations change function in the plugin we were exploring, however it still makes sense to use that only. but in the first place confirm if above show_variation and hide_variation events are actually available, and if they are available then decide which we should use. see we can use all of them but that can create mess if not always then in certain scenarios so to ensure neat execution lets just do the best suitable only -- to h 
+                
+                -- this might be invalid, because variation  change event is there
+         
+         //  here it will call the internal function swap_images( variation_id ) which will be doing one of the main process of this gallery_images module 
+             --  here the function should be named something like show_gallery_images, which would simply show initially or update and after that show, and also there would be show_variation_gallery_images which would be doing the same but for variation gallery images -- to h 
+                 --  and both above function from inside call the process_template heirarchy of function like process_gallery_images_template -- to h   
+                    --  we may not need show_gallery_images and show_variation_gallery_images, as long as we pass the right variable to process_images_template. and process_images_template is already created.      
+        ACTIVE_TODO_OC_END*/
+        process_images_template(variation.variation_gallery_images);
 
     };
  
-    var reset_variation_change = function(type) {
+    var reset_variation = function(type) {
 
     };
 
@@ -2694,7 +2743,7 @@ window.document.splugins.wbc.variations.gallery_images.sp_slzm.core = function( 
         init: function(){
 
             init_private();
-        };
+        },
 
         init_listener: function(callback) {
 
