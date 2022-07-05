@@ -1777,8 +1777,12 @@ class SP_Model_Single_Product extends SP_Single_Product {
 				keep it and use below data params to make our tempalte dynamic -- to b 	
 				------- m have this additional
 				ACTIVE_TODO_OC_END*/
+				$data['variable_item_data']['selected_item'] = sanitize_title( $data['woo_dropdown_attribute_html_data']['args'][ 'selected' ] );
 				if(in_array($data['woo_dropdown_attribute_html_data']['type'],array('dropdown_image','dropdown_image_only','dropdown'))) {
-					$data['variable_item_data']['selected_item'] = sanitize_title( $data['woo_dropdown_attribute_html_data']['args'][ 'selected' ] );
+
+					//moved above if condition
+					/*$data['variable_item_data']['selected_item'] = sanitize_title( $data['woo_dropdown_attribute_html_data']['args'][ 'selected' ] );*/
+					
 					if(!empty($data['variable_item_data']['selected_item'])){
 						$data['variable_item_data']['selected_item'] = wbc()->wc->get_term_by( 'slug',$data['variable_item_data']['selected_item'],$data['variable_item_data']['attribute']);
 						if(!is_wp_error($data['variable_item_data']['selected_item']) and !empty($data['variable_item_data']['selected_item']) ){
@@ -1968,29 +1972,29 @@ class SP_Model_Single_Product extends SP_Single_Product {
 					foreach ( $data['woo_dropdown_attribute_html_data']['options'] as $option ) {
 						// This handles < 2.4.0 bw compatibility where text attributes were not sanitized.
 
-						$data['variable_item_data']['options_loop_option'][$term->slug] = esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $option, null, $data['variable_item_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product'] ) );
+						$data['variable_item_data']['options_loop_option'][$option] = esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $option, null, $data['variable_item_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product'] ) );
 
-						$data['variable_item_data']['options_loop_is_selected'][$term->slug] = ( sanitize_title( $data['variable_item_data']['options_loop_option'][$term->slug] ) == sanitize_title( $data['woo_dropdown_attribute_html_data']['args']['selected'] ) );
+						$data['variable_item_data']['options_loop_is_selected'][$option] = ( sanitize_title( $data['variable_item_data']['options_loop_option'][$option] ) == sanitize_title( $data['woo_dropdown_attribute_html_data']['args']['selected'] ) );
 
-						$data['variable_item_data']['options_loop_selected_class'][$term->slug] = $data['variable_item_data']['options_loop_is_selected'][$term->slug] ? 'selected' : '';
-						$data['variable_item_data']['options_loop_tooltip'][$term->slug]        = trim( apply_filters( 'wvs_variable_item_tooltip', $data['variable_item_data']['options_loop_option'][$term->slug], $data['woo_dropdown_attribute_html_data']['options'], $data['woo_dropdown_attribute_html_data']['args'] ) );
+						$data['variable_item_data']['options_loop_selected_class'][$option] = $data['variable_item_data']['options_loop_is_selected'][$option] ? 'selected' : '';
+						$data['variable_item_data']['options_loop_tooltip'][$option]        = trim( apply_filters( 'wvs_variable_item_tooltip', $data['variable_item_data']['options_loop_option'][$option], $data['woo_dropdown_attribute_html_data']['options'], $data['woo_dropdown_attribute_html_data']['args'] ) );
 
 
 						if ( $data['variable_item_data']['is_archive'] && ! $show_archive_tooltip ) {
-							$data['variable_item_data']['options_loop_tooltip'][$term->slug] = false;
+							$data['variable_item_data']['options_loop_tooltip'][$option] = false;
 						}
 
-						$data['variable_item_data']['options_loop_tooltip_html_attr'][$term->slug]       = ! empty( $data['variable_item_data']['options_loop_tooltip'][$term->slug] ) ? sprintf( 'data-wvstooltip="%s"', esc_attr( $data['variable_item_data']['options_loop_tooltip'][$term->slug] ) ) : '';
-						$data['variable_item_data']['options_loop_screen_reader_html_attr'][$term->slug] = $data['variable_item_data']['options_loop_is_selected'][$term->slug] ? ' aria-checked="true"' : ' aria-checked="false"';
+						$data['variable_item_data']['options_loop_tooltip_html_attr'][$option]       = ! empty( $data['variable_item_data']['options_loop_tooltip'][$option] ) ? sprintf( 'data-wvstooltip="%s"', esc_attr( $data['variable_item_data']['options_loop_tooltip'][$option] ) ) : '';
+						$data['variable_item_data']['options_loop_screen_reader_html_attr'][$option] = $data['variable_item_data']['options_loop_is_selected'][$option] ? ' aria-checked="true"' : ' aria-checked="false"';
 
 						if ( wp_is_mobile() ) {
-							$data['variable_item_data']['options_loop_tooltip_html_attr'][$term->slug] .= ! empty( $data['variable_item_data']['options_loop_tooltip'][$term->slug] ) ? ' tabindex="2"' : '';
+							$data['variable_item_data']['options_loop_tooltip_html_attr'][$option] .= ! empty( $data['variable_item_data']['options_loop_tooltip'][$option] ) ? ' tabindex="2"' : '';
 						}
 
-						$data['variable_item_data']['options_loop_type'][$term->slug] = isset( $data['variable_item_data']['assigned'][ $data['variable_item_data']['options_loop_option'][$term->slug] ] ) ? $data['variable_item_data']['assigned'][ $data['variable_item_data']['options_loop_option'][$term->slug] ]['type'] : $data['variable_item_data']['options_loop_type'][$term->slug];
+						$data['variable_item_data']['options_loop_type'][$option] = isset( $data['variable_item_data']['assigned'][ $data['variable_item_data']['options_loop_option'][$option] ] ) ? $data['variable_item_data']['assigned'][ $data['variable_item_data']['options_loop_option'][$option] ]['type'] : $data['variable_item_data']['options_loop_type'][$option];
 
-						if ( ! isset( $data['variable_item_data']['assigned'][ $data['variable_item_data']['options_loop_option'][$term->slug]['option'] ] ) || empty( $data['variable_item_data']['assigned'][ $data['variable_item_data']['options_loop_option'][$term->slug] ]['image_id'] ) ) {
-							$data['variable_item_data']['options_loop_type'][$term->slug] = 'button';
+						if ( ! isset( $data['variable_item_data']['assigned'][ $data['variable_item_data']['options_loop_option'][$option]['option'] ] ) || empty( $data['variable_item_data']['assigned'][ $data['variable_item_data']['options_loop_option'][$option] ]['image_id'] ) ) {
+							$data['variable_item_data']['options_loop_type'][$option] = 'button';
 						}
 
 						/*ACTIVE_TODO_OC_START
@@ -1998,12 +2002,12 @@ class SP_Model_Single_Product extends SP_Single_Product {
 						--	and same for the many commented templates in the switch case statement below -- to b 
 						ACTIVE_TODO_OC_END*/
 
-						switch ( $data['variable_item_data']['options_loop_type'][$term->slug] ):
+						switch ( $data['variable_item_data']['options_loop_type'][$option] ):
 
 							case 'image':
-								$data['variable_item_data']['options_loop_attachment_id'][$term->slug] = $data['variable_item_data']['assigned'][ $data['variable_item_data']['options_loop_option'][$term->slug] ]['image_id'];
-								$data['variable_item_data']['options_loop_image_size'][$term->slug]    = sanitize_text_field( woo_variation_swatches()->get_option( 'attribute_image_size' ) );
-								$data['variable_item_data']['options_loop_image'][$term->slug]         = wp_get_attachment_image_src( $data['variable_item_data']['options_loop_attachment_id'][$term->slug], apply_filters( 'wvs_product_attribute_image_size', $data['variable_item_data']['options_loop_image_size'][$term->slug], $data['variable_item_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product'] ) );
+								$data['variable_item_data']['options_loop_attachment_id'][$option] = $data['variable_item_data']['assigned'][ $data['variable_item_data']['options_loop_option'][$option] ]['image_id'];
+								$data['variable_item_data']['options_loop_image_size'][$option]    = sanitize_text_field( woo_variation_swatches()->get_option( 'attribute_image_size' ) );
+								$data['variable_item_data']['options_loop_image'][$option]         = wp_get_attachment_image_src( $data['variable_item_data']['options_loop_attachment_id'][$option], apply_filters( 'wvs_product_attribute_image_size', $data['variable_item_data']['options_loop_image_size'][$option], $data['variable_item_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product'] ) );
 
 								// $data .= sprintf( '<img class="variable-item-image" aria-hidden="true" alt="%s" src="%s" width="%d" height="%d" />', esc_attr( $option ), esc_url( $image[0] ), esc_attr( $image[1] ), esc_attr( $image[2] ) );
 								// $data .= $image_html;
@@ -2011,7 +2015,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 
 							case 'button':
-								// $data .= sprintf( '<span class="variable-item-span variable-item-span-%s">%s</span>', esc_attr( $data['variable_item_data']['options_loop_type'][$term->slug] ), esc_html( $option ) );
+								// $data .= sprintf( '<span class="variable-item-span variable-item-span-%s">%s</span>', esc_attr( $data['variable_item_data']['options_loop_type'][$option] ), esc_html( $option ) );
 								break;
 
 							default:
