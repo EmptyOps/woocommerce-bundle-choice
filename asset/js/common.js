@@ -2585,6 +2585,8 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
             // hide and show image elements
         }
 
+        window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'slider_thumb_click' ); 
+        
      };
 
     var variation_change = function(event, variation) {
