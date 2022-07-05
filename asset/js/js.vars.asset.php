@@ -25,28 +25,23 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 
 		?>
 
-		if('is_category_page' == true){ 
+		window.document.splugins.common.is_category_page = <?php echo (is_product_category()) ? "true" : "false");?>; 
 
-			window.document.splugins.common.is_category_page = window.document.splugins.common.is_category_page || {};
+		window.document.splugins.common.is_item_page = <?php echo (is_product()) ? "true" : "false");?>;
 
-		}else if('is_category_page' == true){
-
-			window.document.splugins.common.is_item_page = window.document.splugins.common.is_item_page || {};
+		window.document.splugins.common.is_mobile = <?php echo (wbc_is_mobile()) ? "true" : "false");?>;
 		
-		}else if('is_mobile' == true){
-
-			window.document.splugins.common.is_mobile = window.document.splugins.common.is_mobile || {};
+		window.document.splugins.common.is_tablet = <?php echo (wbc_is_mobile()) ? "true" : "false");?>;
 		
-		}else if('is_tablet' == true){
-
-			window.document.splugins.common.is_tablet = window.document.splugins.common.is_tablet || {};
-		}
 
 	</script>
 <?php  
-
-	// ACTIVE_TODO even though now we are going to use the underscore js but so far it is only by the optionsUI feature so skip loading it here for the rest of features and just put the if condition here for lighter experience to all other users -- to s 
-	wp_enqueue_script('undescore'/*, includes_url('js') . '/underscore.min.js'*/ );	 
+	
+	if( is_product_category() || is_product() ) {
+	
+		// ACTIVE_TODO even though now we are going to use the underscore js but so far it is only by the optionsUI feature so skip loading it here for the rest of features and just put the if condition here for lighter experience to all other users -- to s 
+		wp_enqueue_script('undescore'/*, includes_url('js') . '/underscore.min.js'*/ );	 
+	}
 
 	$swatches_configs = array();
 	$gallery_images_configs = array();
@@ -56,8 +51,7 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 	$swatches_configs['product_variations_configs'] = wbc()->config->product_variations_configs();
 
 // ACTIVE_TODO admin options need to b loaded from variations.assets.php where b have already prepare all options -- to s 
-	$swatches_configs['options'] = array('show_variation_label' => false);
-
+	$swatches_configs['options'] = array('show_variation_label' => false, 'clickable_out_of_stock' => false);
 
 
 	$gallery_images_configs['types'] 					  = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->sp_variations_gallery_images_supported_types(array('is_base_type_only'=>true));
