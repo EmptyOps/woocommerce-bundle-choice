@@ -22,8 +22,8 @@ if ( $woo_dropdown_attribute_html_data['product'] && taxonomy_exists( $variable_
 
 foreach ( $options as $term ) {
         
-    if ( in_array( $term->slug, $woo_dropdown_attribute_html_data['options'] ) ) {
-        $selected_class = ( sanitize_title( $woo_dropdown_attribute_html_data['args'][ 'selected'] ) == $term->slug ) ? 'selected' : '';
+    if (!is_object($term) or in_array( $term->slug, $woo_dropdown_attribute_html_data['options'] ) ) {
+        //$selected_class = ( sanitize_title( $woo_dropdown_attribute_html_data['args'][ 'selected'] ) == $term->slug ) ? 'selected' : '';
 
         if (!empty($template_data['template_key'])) {
             $template_data['data']['term'] = $term; 
