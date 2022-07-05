@@ -90,8 +90,6 @@ class SP_Gallery_Slider extends \eo\wbc\controllers\publics\Controller{
             $args['page_section'] = 'slider_images';
             return $this->get_ui_definition($args);
 
-            
-            
         }else{  
 
             \eo\wbc\model\publics\variations\SP_Model_Gallery_Slider::instance()->render_ui( $this->get_ui_definition($args));
@@ -122,7 +120,6 @@ class SP_Gallery_Slider extends \eo\wbc\controllers\publics\Controller{
             $args['template_key'] = 'gallery_slider_{{template_key_device}}_image_loop';
 
         }
-
         return parent::get_ui_definition($args);
 
        /* if (!in_array($args)) {

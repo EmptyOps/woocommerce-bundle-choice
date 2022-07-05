@@ -191,6 +191,15 @@ class SP_WBC_Variations extends SP_Variations {
 
 		$props['extra_params_org'] = array('type' => $type);
 
+		if($type == 'video' or $type == 'video_url') {
+
+			// ACTIVE_TODO compatability research. it might be important. -- to h and -- to s or -- to a. the research we need to do is woo's support on video. as far as I can say it supports the video for main image but not sure if it supports the video for the main image of the variation also. and if it supports anything else regarding video. either way even if it do not support anything else our video implementation should strictly be following the video layers and standards of woo implementation regarding it. 
+			// ACTIVE_TODO for now and very soon we need to give option on admin to control if video should be embeded in iframe or in standard video tag of the html. -- to s 
+			// 	TODO and eventually we may also like to give option of specifying the embed type per variation or specific video level. or it can be a pro feature. 
+			$props['extra_params_org']['embed_type']   = 'video';
+
+		}
+
 		if($type == 'video_url') {
 
 			$props['src']   = esc_url( $attachment_id );

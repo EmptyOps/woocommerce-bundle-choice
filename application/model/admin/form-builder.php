@@ -612,7 +612,7 @@ class Form_Builder implements Builder {
 			wbc()->common->var_dump( "Form_Builder das_form_definition_support" );
 		}
 
-		if( $args["sub_action"] != "save" ) {
+		if( $args["sub_action"] != "save" && empty($args['data']['id']) ) {
 
 			//	just return the default value if it do not required any processing 
 			return $args['form_definition'];	
@@ -620,6 +620,8 @@ class Form_Builder implements Builder {
 
 		//	NOTE: due to true condition below the non tab based forms will not be supported. and either there is no plan to support nonn tab based forms for this das support and either way there should be no plan to support the non tab based forms as they are not as per the standards 
 		if(true || !empty($form['tabs'])){
+
+			$save_as_data = array();	
 
 			foreach ($args['form_definition'] as $tab_slug => $tab_data) {
 
@@ -680,6 +682,25 @@ class Form_Builder implements Builder {
 								if( $args["sub_action"] == "save" ) {
 
 									$added_counter = wbc()->sanitize->post($das_counter_field_id);
+								} else if( !empty($args['data']['id'])/*as long as entity id is available means it is not mere add mode but edit mode so then just ensure that repopulate support is provided.*/ ) {
+
+									// ACTIVE_TODO/TODO in future we would like to avoid the extra get call to db, by providing what is fetched from here, back to the caller. so they do not fetch it again during actual get. however it will make sense only when reducing one call have significant difference. -- to s  
+
+									if( empty($fv['save_as']) or $fv['save_as'] == "default" ) {
+
+										// ACTIVE_TODO we will need it very soon. so implement it. -- to s. to seamlessly do it here, simply get the option group based on the base_key property that we have added to cover such requirements.  
+										// 	ACTIVE_TODO and the plan is to replace all forms of dapii and so on with das support, where the edit mode is not supported due to the dynamic form limitation which is created there. but now with help of das support we can provide dynamic form and also edit support will be built once this if condition is implemented. -- to s 
+										// 		ACTIVE_TODO however if for any form or form section of dapii or other, if the user experience is affected due to this change then we need to do the needful but we can never compromise user expereince for the reusability -- to h and -- to s 
+
+									} elseif( $fv['save_as'] == "post_meta" ) {
+
+										if( !isset($save_as_data['post_meta']) ) {
+
+											$save_as_data['post_meta'] = get_post_meta( $args['data']['id'], $tab_slug.'_data', true );	
+										}
+									}
+
+									$added_counter = isset($save_as_data['post_meta'][$das_counter_field_id]) ? $save_as_data['post_meta'][$das_counter_field_id] : $added_counter;
 								}
 
 								//	ACTIVE_TODO during filter save (edit mode)
@@ -701,6 +722,8 @@ class Form_Builder implements Builder {
 									for($i=1; $i<=$added_counter; $i++) {
 
 										foreach ($dynamic_add_support_elements as $element_id => $element) {
+
+											// ACTIVE_TODO note that for repopulate form mode, the repopulation should happen from the js layers as we planned for ensuring similar flow of creating the das form fields, and that will also ensure the cleanliness and especially no additional maintaining of additional layers. 
 
 											//	repace the counter placeholder with actual counter 
 											$element_id = str_replace("{{data.added_counter}}", $this->das_added_counter_format($i), $element_id);	

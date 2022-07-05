@@ -89,7 +89,6 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 					// NOTE: id is standard column name that we use for our options module based simple entity storage, so for the legacy admin flows also where necessary we can simply use the same where the necessity arise to maintain one uniqid and I think it will be almost always. 
 					$args['hook_callback_args']['id'] = absint( $variation->ID );
 
-
 					// ACTIVE_TODO_OC_START
 					// need to use the wp media manager popup so in the file input that you added, please add the format field support -- to s 
 					// 	--	which should accept the allowed file extensions as an option -- to s 
@@ -213,7 +212,7 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 	    	if( $page_section == 'sp_variations' ) {
 
 		    	$form_definition = array(
-					'sp_variations'=>array(
+					$page_section/*'sp_variations'*/=>array(
 						'label'=>"Gallery Images and Video(optionsUI)",
 						'form'=>array(
 							'sp_frmb_saved_tab_key'=>array(
@@ -298,8 +297,10 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 
 			$form_definition = \eo\wbc\controllers\admin\Controller::instance()->pre_process_form_definition($form_definition,$args);
 
+			$args['form_definition'] = $form_definition;	
+
 			// return $form_definition;
-			return parent::get_form_defination__( array('form_definition'=>$form_definition) );
+			return parent::get_form_defination__( $args );
 	    }
 	}
 }		

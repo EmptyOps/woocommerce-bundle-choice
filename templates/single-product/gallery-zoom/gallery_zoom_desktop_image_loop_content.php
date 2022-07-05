@@ -36,7 +36,7 @@ if ( $image['extra_params_org']['type'] == 'video' or $image['extra_params_org']
         
         $template = array(
             'type' => 'div',
-            'class' => 'spui_360_video_container',
+            'class' => 'spui_video_container',
             'child' => array(
                 array(
                     'type' => 'video',

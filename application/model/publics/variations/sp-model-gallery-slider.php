@@ -108,8 +108,8 @@ class SP_Model_Gallery_Slider extends Eowbc_Base_Model_Publics {
 			//js template
 			$html = null;
 			$html = apply_filters('sp_slzm_slider_image_loop_js_template',$html);
-			// $html = \sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($html,'sp_variations_gallery_images_slider_container',true);
-			echo \eo\wbc\model\UI_Builder::instance()->js_template_wrap('sp_slzm_slider_image_loop','temp'/*$html*/,'wp');
+			$html = \sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($html,'sp_variations_gallery_images_slider_container',array(),true);
+			echo \eo\wbc\model\UI_Builder::instance()->js_template_wrap('sp_slzm_slider_image_loop',$html,'wp');
 
 		}, 10);	
 
