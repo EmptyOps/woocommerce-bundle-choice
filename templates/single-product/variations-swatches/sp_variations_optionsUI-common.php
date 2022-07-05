@@ -28,6 +28,7 @@ foreach ( $options as $term ) {
         if (!empty($template_data['template_key'])) {
             $template_data['data']['term'] = $term; 
             $template_data['data']['template_sub_dir'] = $template_data['template_sub_dir']; 
+            $template_data['data']['template_data'] = $template_data; 
             $template[] = wbc()->load->template($template_data['template_sub_dir'].'/'.$template_data['template_key'],(isset($template_data['data'])?$template_data['data']:array()),true,$template_data['singleton_function'],true);
         
         }

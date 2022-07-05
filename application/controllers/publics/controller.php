@@ -44,32 +44,7 @@ class Controller extends \eo\wbc\controllers\Controller{
                                     -- ACTIVE_TODO and in future what we can support is if any .php template file is added on template folder then the additional radio option for that respective template does show up on admin and when user enable that template system would load that template so it become handy for users to add new templates without needing to modify existing templates so that they can recieve our udpates and still continue to use their custom templates */
 
 
-        $template_dir = isset( $args['template_sub_dir']) ? $args['template_sub_dir'].'/' : '';
-
-        $template_key = null;
-
-        $template_key_option = null;
-
-        if(!empty($args['template_option_key'])) {
-            $template_key_option = wbc()->options->get_option($args['option_group_key'],$args['template_option_key']);
-        }
-
-        if(!empty($template_key_option)) {
-            $template_dir = str_replace('{{template_key}}',$template_key_option,$template_dir);
-        }
-
-        if (!empty($args['template_key'])) {
-            $template_key = $args['template_key'];
-
-            if(!empty($template_key_option)) {
-                $template_key = str_replace('{{template_key}}',$template_key_option,$template_key);
-            }
-
-        } else {
-            $template_key = $template_key_option;
-        }
-
-        $template_path = $template_dir.$template_key;
+        $template_path = wbc()->load->template_path($args); 
 
         if(!empty($template_path)) {
          

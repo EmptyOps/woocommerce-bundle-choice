@@ -67,7 +67,7 @@ $template = null;
 $template_inner = array();
 
 /*--- a code /woo-bundle-choice/application/model/publics/sp-model-single-product.php no che*/
-if ( $args['hook_callback_args']['hook_args']['show_option_none'] ) {
+if ( $woo_dropdown_attribute_html_data['args']['show_option_none'] ) {
     /*echo '<option value="">' . esc_html( $woo_dropdown_attribute_html_data['show_option_none_text'] ) . '</option>';*/
 
     $template_inner[] =  array(

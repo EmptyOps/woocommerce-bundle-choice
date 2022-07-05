@@ -55,8 +55,12 @@ class SP_Model_Gallery_Slider extends Eowbc_Base_Model_Publics {
             $template_data['data'] = $data;
             $template_data['singleton_function'] = 'wbc';
 
-            $template_data['data']['image'] = -1;
+            //$template_data['data']['image'] = -1;
         	$template_data['data']['index'] = -1;
+
+        	$template_data['data']['gallery_images_template_data'] = array();
+        	$template_data['data']['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'] = array();
+        	$template_data['data']['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'][$template_data['data']['index']] = -1;
             $html =  wbc()->load->template($template_data['template_sub_dir'].'/'.$template_data['template_key'],(isset($template_data['data'])?$template_data['data']:array()),true,$template_data['singleton_function'],true,true);
 
 			return $html;
@@ -78,36 +82,35 @@ class SP_Model_Gallery_Slider extends Eowbc_Base_Model_Publics {
 	
 	public function render_core(){
 
-		add_filter('sp_variations_gallery_images_slider_ui', function($ui){
-
-
-			$classes = array('sp-variations-gallery-images-slider');
-			$classes = apply_filters('sp_slzm_slider_container',$classes);
+		add_action('sp_variations_gallery_images_core', function(){
 
 			$images_data = array();
 			$images_data = apply_filters('sp_slzm_slider_images',$images_data);
 
-			$html = null;
-			$html = apply_filters('sp_slzm_slider_images_html',$html,$images_data);
+			add_filter('sp_variations_gallery_images_slider_ui', function($ui) use($images_data) {
 
-			$ui = array(
-				'type'=>'div',
-				'class'=>$classes,
-				'child'=>$html
-			);
-			//\sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui,'sp_variations_gallery_images_slider_container');
+				$classes = array('sp-variations-gallery-images-slider');
+				$classes = apply_filters('sp_slzm_slider_container',$classes);
+
+				$html = null;
+				$html = apply_filters('sp_slzm_slider_images_html',$html,$images_data);
+
+				$ui = array(
+					'type'=>'div',
+					'class'=>$classes,
+					'child'=>$html
+				);
+				//\sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui,'sp_variations_gallery_images_slider_container');
+
+				return $ui;
+			}, 10);	
 
 			//js template
 			$html = null;
 			$html = apply_filters('sp_slzm_slider_image_loop_js_template',$html);
-
-
-			$html = \sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($html,'sp_variations_gallery_images_slider_container',true);
-
-
+			// $html = \sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($html,'sp_variations_gallery_images_slider_container',true);
 			echo \eo\wbc\model\UI_Builder::instance()->js_template_wrap('sp_slzm_slider_image_loop','temp'/*$html*/,'wp');
 
-			return $ui;
 		}, 10);	
 
 	}

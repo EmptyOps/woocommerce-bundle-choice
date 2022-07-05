@@ -66,14 +66,14 @@ add_action( 'wp_enqueue_scripts' ,function(){
 
         document.addEventListener("DOMContentLoaded", function(event) {
             
-            window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.init_listener(function(){
+            // window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.init_listener(function(){
 
                 init_function();
-            });
-            window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.refresh_listener(function(){
+            // });
+            // window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.refresh_listener(function(){
 
-                init_function();
-            });
+            //     init_function();
+            // });
 
         } );
         jQuery(document).ready(function(){

@@ -15,14 +15,6 @@ add_action( 'wp_enqueue_scripts' ,function(){
 	        //     jQuery(".big-img").attr('src',jQuery(this).attr('src'));
 	        // });
 
-	        if(typeof(jQuery.fn.imagezoomsl)!=='function'){
-		        let script = document.createElement('script');
-		        script.src = "<?php echo constant( strtoupper( 'EOWBC_ASSET_URL' ) ).'js/variations/gallery_images/external-plugins/zoomsl/zoomsl.min.js'; ?>";
-		        document.head.append(script);
-
-		       
-		     }
-
 		    var init_function = function(){
 		    	
 		        jQuery(".big-img").imagezoomsl({
@@ -54,18 +46,32 @@ add_action( 'wp_enqueue_scripts' ,function(){
 
 		    var bind_listeners = function(){
 
-	            window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.init_listener(function(){
+	            // window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.init_listener(function(){
 
 	                init_function();
-	            });
-	            window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.refresh_listener(function(){
+	            // });
+	            // window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.refresh_listener(function(){
 	            	
-	                init_function();
-	            });
+	            //     init_function();
+	            // });
 
 		    };
 
-		    bind_listeners();
+	        if(typeof(jQuery.fn.imagezoomsl)!=='function'){
+				let script = document.createElement('script');
+				script.src = "<?php echo constant( strtoupper( 'EOWBC_ASSET_URL' ) ).'js/variations/gallery_images/external-plugins/zoomsl/zoomsl.min.js'; ?>";
+				document.head.append(script);
+
+		        window.setTimeout(function(){
+
+       			    bind_listeners();
+
+		        },2000);	
+
+			} else {
+
+			    bind_listeners();
+			}
 
 	        window.addEventListener('error', function(e){
 

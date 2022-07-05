@@ -4,9 +4,9 @@
  * in case if you want to implement your custom html then follow our documentation guide on how to add add custom html templates by following this link https://sphereplugins.com/docs/how-to-override-templates-using-custom-html
  */
 
+//wbc_pr($image); die();
 
-
-
+$template = null;
 $template = array(
     'type'=>'li',
     'class'=>'splide__slide',
@@ -19,4 +19,4 @@ $template = array(
 );
 
 
-$template = apply_filters( 'woocommerce_single_product_image_thumbnail_html',$template, $post_thumbnail_id );
+$template = apply_filters( 'woocommerce_single_product_image_thumbnail_html',$template, $gallery_images_template_data['attachment_ids_loop_post_thumbnail_id'][$index] );

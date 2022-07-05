@@ -1023,6 +1023,9 @@ class SP_Model_Single_Product extends SP_Single_Product {
         $type = null;	// 'select';     
         if(!empty($attribute->attribute_type)){
         	$type = $attribute->attribute_type;
+
+        	// ACTIVE_TODO we need to derive the type right from the woo layers, so need to ensure that we implement the flow like the plugin we were exploring is doing. it is critically important and should do asap. before beta version. -- to h and -- to s 
+        	$args['hook_callback_args']['hook_args']['type'] = $type;	
         } else {
         	$type = 'select';
         }
@@ -1045,7 +1048,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
         //         ))
         // 	);
         // }            
-
+        $args['hook_callback_args']['hook_args']['attribute_object'] = $attribute;
 
 
         /*ACTIVE_TODO_OC_START
@@ -1476,23 +1479,24 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		//and also do a action hook from here with key sp_variations_gallery_images_render -- to b done
 			//-- and the init core or render core function, whichever is applicable, will add action to above hook -- b done
 				//-- and so all three hooks of both slider and zoom module should be applied or bind to within this action hook -- to b done
+		do_action( 'sp_variations_gallery_images_core' );
 
-				$ui = array(
+		$ui = array(
+			'type'=>'div',
+			'class'=>'spui-sp-variations-gallery-images',
+			'child'=>array(
+				array(
 					'type'=>'div',
-					'class'=>'spui-sp-variations-gallery-images',
-					'child'=>array(
-						array(
-							'type'=>'html',
-							'child'=>apply_filters('sp_variations_gallery_images_slider_ui',null),
-						),
-						array(
-							'type'=>'html',
-							'child'=>apply_filters('sp_variations_gallery_images_zoom_ui',null),
-						),
-					)
-				);
-				//do_action( 'sp_variations_gallery_images_render');
-				\sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui,'sp_variations_gallery_images_container');
+					'child'=>apply_filters('sp_variations_gallery_images_slider_ui',null),
+				),
+				array(
+					'type'=>'html',
+					'child'=>apply_filters('sp_variations_gallery_images_zoom_ui',null),
+				),
+			)
+		);
+		\sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui,'sp_variations_gallery_images_container');
+		// wbc_pr( $ui );	//die();
 
 
 		//create list of woo hooks that are used below -- to d done
@@ -1635,6 +1639,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			)
 		);
 
+		// ACTIVE_TODO here we should be setting the values from the woo_dropdown data args and not from hook callback args, but still check the plugin we were exploring to see if there is any reason to do it other way around. -- to b 
 		$data['woo_dropdown_attribute_html_data']['type']                  = $args['hook_callback_args']['hook_args'][ 'type' ];
 		/*ACTIVE_TODO_OC_START
 		--------------a etlu wvs_default_button_variation_attribute_options alg che
@@ -1647,8 +1652,8 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		$data['woo_dropdown_attribute_html_data']['options']               = $args['hook_callback_args']['hook_args']['options'];
 		$data['woo_dropdown_attribute_html_data']['product']               = $args['hook_callback_args']['hook_args']['product'];
 		$data['woo_dropdown_attribute_html_data']['attribute']             = $args['hook_callback_args']['hook_args']['attribute'];
-		$data['woo_dropdown_attribute_html_data']['name']                  = $args['hook_callback_args']['hook_args']['name'] ? $args['hook_callback_args']['hook_args']['name'] : \eo\wbc\system\core\data_model\SP_Attribute::variation_attribute_name($attribute);
-		$data['woo_dropdown_attribute_html_data']['id']                    = $args['hook_callback_args']['hook_args']['id'] ? $args['hook_callback_args']['hook_args']['id'] : sanitize_title( $attribute );
+		$data['woo_dropdown_attribute_html_data']['name']                  = $args['hook_callback_args']['hook_args']['name'] ? $args['hook_callback_args']['hook_args']['name'] : \eo\wbc\system\core\data_model\SP_Attribute::variation_attribute_name($data['woo_dropdown_attribute_html_data']['attribute']);
+		$data['woo_dropdown_attribute_html_data']['id']                    = $args['hook_callback_args']['hook_args']['id'] ? $args['hook_callback_args']['hook_args']['id'] : sanitize_title( $data['woo_dropdown_attribute_html_data']['attribute']);
 		$data['woo_dropdown_attribute_html_data']['class']                 = $args['hook_callback_args']['hook_args']['class'];
 		$data['woo_dropdown_attribute_html_data']['show_option_none']      = $args['hook_callback_args']['hook_args']['show_option_none'] ? true : false;
 		$data['woo_dropdown_attribute_html_data']['show_option_none_text'] = $args['hook_callback_args']['hook_args']['show_option_none'] ? $args['hook_callback_args']['hook_args']['show_option_none'] : esc_html__( 'Choose an option', 'woocommerce' ); // We'll do our best to hide the placeholder, but we'll need to show something when resetting options.
@@ -1667,7 +1672,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		--------------a etlu wvs_default_button_variation_attribute_options alg che
 		ACTIVE_TODO_OC_END*/
 		if ( $data['woo_dropdown_attribute_html_data']['product'] ) {
-			$data['woo_dropdown_attribute_html_data']['attribute_name'] = \eo\wbc\system\core\data_model\SP_Attribute::variation_attribute_name($attribute);
+			$data['woo_dropdown_attribute_html_data']['attribute_name'] = \eo\wbc\system\core\data_model\SP_Attribute::variation_attribute_name($data['woo_dropdown_attribute_html_data']['attribute']);
 
 			/*echo '<select id="' . esc_attr( $id ) . '" class="' . esc_attr( $class ) . ' hide woo-variation-raw-select woo-variation-raw-type-' . $type . '" style="display:none" name="' . esc_attr( $name ) . '" data-attribute_name="' . esc_attr( wc_variation_attribute_name( $attribute ) ) . '" data-show_option_none="' . ( $show_option_none ? 'yes' : 'no' ) . '">';*/
 
@@ -1710,7 +1715,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 				$data['woo_dropdown_attribute_html_data']['options_loop_option_name'] = array();
 				foreach ( $data['woo_dropdown_attribute_html_data']['terms'] as $term ) {
 					if ( in_array( $term->slug, $data['woo_dropdown_attribute_html_data']['options'], true ) ) {
-						$data['woo_dropdown_attribute_html_data']['options_loop_option_name'][$term->slug] = \eo\wbc\system\core\data_model\SP_Attribute::variation_option_name( $term_name, $term, $attribute, $product);
+						$data['woo_dropdown_attribute_html_data']['options_loop_option_name'][$term->slug] = \eo\wbc\system\core\data_model\SP_Attribute::variation_option_name( $term->name, $term, $data['woo_dropdown_attribute_html_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product']);
 						/*echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) ) . '</option>';*/
 					}
 				}
@@ -1722,7 +1727,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 					// This handles < 2.4.0 bw compatibility where text attributes were not sanitized.
 					$data['woo_dropdown_attribute_html_data']['options_loop_selected'][$option] = sanitize_title( $args['hook_callback_args']['hook_args']['selected'] ) === $args['hook_callback_args']['hook_args']['selected'] ? selected( $args['hook_callback_args']['hook_args']['selected'], sanitize_title( $option ), false ) : selected( $args['hook_callback_args']['hook_args']['selected'], $option, false );
 
-					$data['woo_dropdown_attribute_html_data']['options_loop_option_name'][$option] = \eo\wbc\system\core\data_model\SP_Attribute::variation_option_name( $term_name, $term, $attribute, $product);
+					$data['woo_dropdown_attribute_html_data']['options_loop_option_name'][$option] = \eo\wbc\system\core\data_model\SP_Attribute::variation_option_name( $option, null, $data['woo_dropdown_attribute_html_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product']);
 					/*echo '<option value="' . esc_attr( $option ) . '" ' . $selected . '>' . esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) . '</option>';*/
 				}
 			}
@@ -2025,6 +2030,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 	public function prepare_variable_item_wrapper_data ($data,$args = array()){
 
+		//wbc_pr($data); die();
 		$data['variable_item_wrapper_data'] = array();
 		/*ACTIVE_TODO_OC_START
 		keep and make use of below data and load below ribbon wrapper tempalte -- to b 
@@ -2045,7 +2051,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		$data['variable_item_wrapper_data']['attribute'] = $data['woo_dropdown_attribute_html_data']['args']['attribute'];
 		$data['variable_item_wrapper_data']['options']   = $data['woo_dropdown_attribute_html_data']['args']['options'];
 
-		$data['variable_item_wrapper_data']['css_classes'] = apply_filters( 'wvs_variable_items_wrapper_class', array( "{$data['woo_dropdown_attribute_html_data']['type']}-variable-wrapper" ), $data['woo_dropdown_attribute_html_data']['type'], $data['woo_dropdown_attribute_html_data']['args'], $saved_attribute );
+		$data['variable_item_wrapper_data']['css_classes'] = array( "{$data['woo_dropdown_attribute_html_data']['type']}-variable-wrapper" );	/*ACTIVE_TODO nid to add hook if required.  apply_filters( 'wvs_variable_items_wrapper_class', array( "{$data['woo_dropdown_attribute_html_data']['type']}-variable-wrapper" ), $data['woo_dropdown_attribute_html_data']['type'], $data['woo_dropdown_attribute_html_data']['args'], $saved_attribute );*/
 		/*ACTIVE_TODO_OC_START
 		check about these clear_on_reselect flow, let us check if it is good to do -- to t 
 			--	you can check those available demos -- to t 

@@ -65,7 +65,11 @@ if(!in_array($variable_item_data['options_loop_type'][$term->slug],array('dropdo
 }
 ACTIVE_TODO_OC_END*/
 
-$template_inner = wbc()->load->template($template_sub_dir.'/'.$woo_dropdown_attribute_html_data['type'].'/sp_variations_optionsUI-'.$woo_dropdown_attribute_html_data['type'].'-option_template_part', array('args'=>$woo_dropdown_attribute_html_data['args'],'term'=>$term,'type'=>$variable_item_data['options_loop_type'][$term->slug]),true,'wbc',true);
+$template_data['data']['args'] = $woo_dropdown_attribute_html_data['args']; 
+$template_data['data']['term'] = $term; 
+$template_data['data']['type'] = $variable_item_data['options_loop_type'][$term->slug]; 
+
+$template_inner = wbc()->load->template($template_sub_dir.'/'.$woo_dropdown_attribute_html_data['type'].'/sp_variations_optionsUI-'.$woo_dropdown_attribute_html_data['type'].'-option_template_part', (isset($template_data['data'])?$template_data['data']:array()),true,'wbc',true);
 
 if(!in_array($variable_item_data['options_loop_type'][$term->slug],array('dropdown_image','dropdown_image_only','dropdown'))) {                 
     //$data .= '</li>';
@@ -74,7 +78,7 @@ if(!in_array($variable_item_data['options_loop_type'][$term->slug],array('dropdo
         'type' => 'header',
         'tag' => 'li',
         'class' => 'ui image middle aligned variable-item '.esc_attr( $variable_item_data['options_loop_type'][$term->slug] ).'-variable-item '.esc_attr( $variable_item_data['options_loop_type'][$term->slug] ).'-variable-item-'.esc_attr( $term->slug ).' '.esc_attr( $variable_item_data['options_loop_selected_class'][$term->slug]).' spui-wbc-swatches-variable-item-header spui-wbc-swatches-variable-item-'.$variable_item_data['options_loop_type'][$term->slug].'-header',
-        'attr' => array( 'title' => esc_html( $term->name ), 'data-value' => esc_attr( $term->slug ), 'role' => 'button', 'tabindex' => '0', 'data-id' => $id ),
+        'attr' => array( 'title' => esc_html( $term->name ), 'data-value' => esc_attr( $term->slug ), 'role' => 'button', 'tabindex' => '0'/*, 'data-id' => $id*/ ),
         'child' => $template_inner
         
     );

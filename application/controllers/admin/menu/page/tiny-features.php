@@ -231,7 +231,7 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 								'type'=>'icon',
 								'sanitize'=>'sanitize_text_field',
 								'dynamic_add_support_start'=>true,
-								'value'=>array(''),
+								'value'=>'',
 								'class'=>array(),
 								'size_class'=>array('eight','wide'),
 								'inline'=>true,
@@ -248,7 +248,7 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 								'label'=>'',
 								'type'=>'file',
 								'sanitize'=>'sanitize_text_field',
-								'value'=>array(''),
+								'value'=>'',
 								'class'=>array(),
 								'size_class'=>array('eight','wide'),
 								'inline'=>true,
@@ -294,7 +294,7 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 		    }
 
 			// maybe this hook is need to be moved controller right before the form_definition is passed to parent class function. and the form_definition will be filter parameter. -- and yeah there would be one hook only that maybe needed. not separate needed for render and save 
-			apply_filters('sp_variations_data_before_admin_form_render', $form_definition);
+			$form_definition = apply_filters('sp_variations_data_before_admin_form_render', $form_definition);
 
 			$form_definition = \eo\wbc\controllers\admin\Controller::instance()->pre_process_form_definition($form_definition,$args);
 

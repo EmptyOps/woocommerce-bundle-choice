@@ -152,6 +152,9 @@ class SP_WBC_Variations extends SP_Variations {
 	// for reference see wc_get_product_attachment_props function source code 
 	public function get_product_attachment_props( $attachment_id, $product_id = false, $type = null ) {
 
+		// wbc_pr( 'attachment_id >>>>>>>>>>>>> ' );
+		// wbc_pr( $attachment_id );
+
 		// check hooks like woo_variation_gallery of and do the needful, we can drop those hooks if is not sound so necessary for now. and later as required we can add our overrides -- to b or -- to d done		
 
 		$props      = array(
@@ -185,6 +188,8 @@ class SP_WBC_Variations extends SP_Variations {
 			'srcset'                  => '',
 			'sizes'                   => '',
 		);
+
+		$props['extra_params_org'] = array('type' => $type);
 
 		if($type == 'video_url') {
 
@@ -323,7 +328,7 @@ class SP_WBC_Variations extends SP_Variations {
 
 			}
 
-			$props['extra_params'] = wc_implode_html_attributes( array() );
+			$props['extra_params'] = wc_implode_html_attributes( $props['extra_params_org'] );
 
 		}
 
@@ -550,7 +555,11 @@ class SP_WBC_Variations extends SP_Variations {
 				array_unshift( $gallery_images, $placeholder_image_id );
 			}
 		}
+
 		$variation_get_max_purchase_quantity['variation_gallery_images'] = array();
+
+		// echo ">>>>>>>>>>> gallery_images";
+		// wbc_pr($gallery_images);
 
 		if ( !empty($data['sp_variations']["form"]) ) {
 
@@ -558,11 +567,9 @@ class SP_WBC_Variations extends SP_Variations {
 				
 				if ( is_array($value) ) {
 
-					$variation_get_max_purchase_quantity['variation_gallery_images'][ $i ] = $this->get_product_attachment_props( $value['value'],false,$value['type']);
-
 					$image = $this->get_product_attachment_props( $value['value'],false,$value['type']);
 
-					$image =  apply_filters('sp_variations_available_variation_image_attachment_props', $image, $value, $key );
+					$variation_get_max_purchase_quantity['variation_gallery_images'][ $i ] = apply_filters('sp_variations_available_variation_image_attachment_props', $image, $value, $key );
 				} else {
 
 					$variation_get_max_purchase_quantity['variation_gallery_images'][ $i ] = $this->get_product_attachment_props( $value);

@@ -45,7 +45,7 @@ class Options extends \eo\wbc\controllers\publics\Controller {
     				return $data['html'];
     			}
     			//wbc_pr($data); die();
-    			$this->load_view($data,$args);
+    			return $this->load_view($data,$args);
     		}
 
     	} elseif ($page_section == 'get_default_gallery') {
@@ -80,6 +80,8 @@ class Options extends \eo\wbc\controllers\publics\Controller {
             	$args['hook_callback_args']['html'] = $html;
             	$args['hook_callback_args']['hook_args'] = $hook_args;
 
+
+				// ACTIVE_TODO we are supposed to below built html from here, so that woo filter get it back. it is critically important. -- to h and -- to s. so confirm all the way till here that all html is returned.  
 	            return $this->selectron_hook_render($page_section,'woo_variation_attr_html',$args);
 
 			}, 200, 2);

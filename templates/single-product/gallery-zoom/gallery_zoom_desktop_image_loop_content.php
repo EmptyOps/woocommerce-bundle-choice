@@ -16,8 +16,8 @@ $template = array(
     'preHTML'=>$image['extra_params'],
 );
 
-if ( ! $options['has_only_thumbnail'] ) {
-    if ( isset( $image['video_link'] ) && ! empty( $image['video_link'] ) && $image['video_embed_type'] === 'iframe' ) {
+if ( $image['extra_params_org']['type'] == 'video' or $image['extra_params_org']['type'] == 'video_url' ) {
+    if ( $image['extra_params_org']['type'] == 'video' and isset( $image['extra_params_org']['embed_type'] ) && $image['extra_params_org']['embed_type'] === 'iframe' ) {
         
         $template = array(
             'type' => 'div',
@@ -32,7 +32,7 @@ if ( ! $options['has_only_thumbnail'] ) {
         );
     }
 
-    if ( isset( $image['video_link'] ) && ! empty( $image['video_link'] ) && $image['video_embed_type'] === 'video' ) {
+    if ( $image['extra_params_org']['type'] == 'video' and isset( $image['extra_params_org']['embed_type'] ) && $image['extra_params_org']['embed_type'] === 'video' ) {
         
         $template = array(
             'type' => 'div',
@@ -54,4 +54,4 @@ if ( ! $options['has_only_thumbnail'] ) {
     }
 }
 
-$template = apply_filters( 'woocommerce_single_product_image_thumbnail_html',$template, $post_thumbnail_id );
+$template = apply_filters( 'woocommerce_single_product_image_thumbnail_html',$template, $gallery_images_template_data['attachment_ids_loop_post_thumbnail_id'][$index] );

@@ -95,9 +95,49 @@ if(!class_exists('WBC_Loader')) {
 			}			
 		}
 
+	    public function template_path($args){
+
+	        /*function will accept the args param=null ... which will support the param like template_option_key, option_group_key 
+	            from that it will read template key  -- to b done
+	                and based on that it will load the files from the template folder which will be as per the wp template folder structure standards  -- to b done
+	                
+	                    the default template key must be default so that in template folder user can always find file named default.php  -- to b done
+	                        and now planned to have the folder for default as well for avoiding confusion and improving readability. and wbc swatches folder may have the default folder also and that will contain color(swatches) or button widget as default.
+
+	                        ACTIVE_TODO if the particular extension have more than one widget then the other widgets would in its specific folder like breadcrumb, filters etc. -- to b 
+
+	                            so the args param will support one more parameter like widget_key and if it is empty then the root folder of the template will be considered otherwise the specific inner folder -- to b done
+	                                widget_key flow is skipped and the implementation is erased
+			*/
+
+
+	        $template_dir = isset( $args['template_sub_dir']) ? $args['template_sub_dir'].'/' : '';
+
+	        $template_key = null;
+
+	        $template_key_option = '';
+
+	        if(!empty($args['template_option_key'])) {
+	            $template_key_option = wbc()->options->get_option($args['option_group_key'],$args['template_option_key'],isset($args['template_option_default'])?$args['template_option_default']:'');
+	        }
+
+            $template_dir = str_replace('{{template_key}}',$template_key_option,$template_dir);
+
+	        if (!empty($args['template_key'])) {
+	            $template_key = $args['template_key'];
+
+                $template_key = str_replace('{{template_key}}',$template_key_option,$template_key);
+
+	        } else {
+	            $template_key = $template_key_option;
+	        }
+
+	        return $template_dir.$template_key;
+	    }
+
 		public function template( $template_path, $data=array(),$is_template_dir_extended = false,$singleton_function = null,$is_return_template = false,$is_devices_templates = false) {
 			//	load template file under /view directory
-
+			//wbc_pr($template_path);
 			$path = null;
 			if ($is_template_dir_extended) {
 				$path = constant( strtoupper( $singleton_function ).'_TEMPLATE_DIR_EXTENDED').$template_path.".php";
@@ -109,6 +149,7 @@ if(!class_exists('WBC_Loader')) {
 			//devices templtes  
 			if($is_devices_templates){
 	        	$template_path_new = null;
+
 		        if(strpos($path,'{{template_key_device}}') !== FALSE){
 
 		            if (wbc_is_mobile()) {
@@ -124,9 +165,9 @@ if(!class_exists('WBC_Loader')) {
 		                
 		                $path = $template_path_new;
 		            }
-		           /* wbc_pr($path);
-		            wbc_pr($template_path_new);
-		            die();*/
+		            // wbc_pr( "path >>>>>>>>>>>>>>>>>>>>>>> " . $path );
+		            // wbc_pr( "template_path_new >>>>>>>>>>>>>>>>>>>>>>> " . $template_path_new );
+		            //	die();
 
 
 		        }

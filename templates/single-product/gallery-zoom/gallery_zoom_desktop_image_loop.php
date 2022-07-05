@@ -49,7 +49,7 @@ if(!empty($gallery_images_template_data['attachment_ids_loop_image'])){
         $options  = wp_parse_args( $options, $defaults );
 
         //$image             = $this->get_product_attachment_props( $id );
-        $post_thumbnail_id = $product->get_image_id();
+        //$post_thumbnail_id = $product->get_image_id();
 
         /*ACTIVE_TODO_OC_START
         $remove_featured_image = false;
