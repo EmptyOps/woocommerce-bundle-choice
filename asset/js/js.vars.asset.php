@@ -25,13 +25,13 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 
 		?>
 
-		window.document.splugins.common.is_category_page = <?php echo (is_product_category()) ? "true" : "false");?>; 
+		window.document.splugins.common.is_category_page = <?php echo ((is_product_category()) ? "true" : "false");?>; 
 
-		window.document.splugins.common.is_item_page = <?php echo (is_product()) ? "true" : "false");?>;
+		window.document.splugins.common.is_item_page = <?php echo ((is_product()) ? "true" : "false");?>;
 
-		window.document.splugins.common.is_mobile = <?php echo (wbc_is_mobile()) ? "true" : "false");?>;
+		window.document.splugins.common.is_mobile = <?php echo ((wbc_is_mobile()) ? "true" : "false");?>;
 		
-		window.document.splugins.common.is_tablet = <?php echo (wbc_is_mobile()) ? "true" : "false");?>;
+		window.document.splugins.common.is_tablet = <?php echo ((wbc_is_mobile()) ? "true" : "false");?>;
 		
 
 	</script>
