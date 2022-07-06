@@ -63,7 +63,8 @@ if(!empty($gallery_images_template_data['attachment_ids_loop_image'])){
         if ( isset( $image['video_link'] ) && ! empty( $image['video_link'] ) ) {
             array_push( $classes, '' );
         }
-
+        // echo ">>><<11>>>".$index;
+        // wbc_pr(apply_filters('sp_slzm_zoom_image_loop_have_html',false,$index,$image));
         $template_data['data']['image'] = $image;
         $template_data['data']['index'] = $index;
         if (!apply_filters('sp_slzm_zoom_image_loop_have_html',false,$index,$image)){
@@ -76,7 +77,9 @@ if(!empty($gallery_images_template_data['attachment_ids_loop_image'])){
            $template_inner[] =  apply_filters('sp_slzm_zoom_image_loop_html',null,$index,$image,$template_data['data']);
         }
 
-       
+       if ($gallery_images_configs['all_in_dom'] == 0) {
+           break;
+       }
     }
 }
 

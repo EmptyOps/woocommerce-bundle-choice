@@ -34,6 +34,8 @@ class SP_Model_Gallery_Zoom extends Eowbc_Base_Model_Publics {
 		
 		add_filter('sp_slzm_zoom_container', function($classes){
 			$classes[] = 'big-img';
+
+			return $classes;
 		});
 
 		add_filter('sp_slzm_zoom_image_loop_js_tempalte',function($html, $index, $image) {
@@ -103,6 +105,14 @@ class SP_Model_Gallery_Zoom extends Eowbc_Base_Model_Publics {
 			$images_data = apply_filters('sp_slzm_zoom_images',$images_data);
 
 			add_filter('sp_variations_gallery_images_zoom_ui', function($ui) use($images_data) {
+
+				$gallery_images_configs = array();
+
+				// ACTIVE_TODO we neet to manage the loding secuance here so that any zoom layers including external plugin implimentetion layers can add filter do it 
+				$gallery_images_configs['all_in_dom'] = apply_filters('sp_slzm_zoom_template_all_in_dom',0);
+
+				// ACTIVE_TODO ultimately we need to provide this configs to js layer so it is better that configs loed from here to the js layer and js vars asset.php should tac from hier or ned to mange sum how.
+				$images_data['gallery_images_configs'] = $gallery_images_configs;
 
 				$classes = array('sp-variations-gallery-images-zoom');
 				$classes = apply_filters('sp_slzm_zoom_container',$classes);

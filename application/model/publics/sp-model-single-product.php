@@ -1486,7 +1486,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			'class'=>'spui-sp-variations-gallery-images',
 			'child'=>array(
 				array(
-					'type'=>'div',
+					'type'=>'html',
 					'child'=>apply_filters('sp_variations_gallery_images_slider_ui',null),
 				),
 				array(
@@ -1496,7 +1496,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			)
 		);
 		\sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui,'sp_variations_gallery_images_container');
-		// wbc_pr( $ui );	//die();
+		//wbc_pr( $ui );	die();
 
 
 		//create list of woo hooks that are used below -- to d done

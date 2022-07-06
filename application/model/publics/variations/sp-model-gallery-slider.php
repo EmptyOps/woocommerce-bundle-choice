@@ -34,6 +34,8 @@ class SP_Model_Gallery_Slider extends Eowbc_Base_Model_Publics {
 		
 		add_filter('sp_slzm_slider_container', function($classes){
 			$classes[] = 'small-img';
+
+			return $classes;
 		});
 
 		add_filter('sp_slzm_slider_image_loop_js_template',function($html){

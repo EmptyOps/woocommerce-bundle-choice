@@ -202,7 +202,10 @@ class SP_WBC_Variations extends SP_Variations {
 
 		if($type == 'video_url') {
 
-			$props['src']   = esc_url( $attachment_id );
+			//NOTE: from here we are setting to video, so whatever data pre prepared for attachment should be set from here. and then it is planned that video url type would work as if it is video type, so all that is needed is setting data accurately from here.
+			$props['extra_params_org']['type']   = 'video';
+
+			$props['video_src']   = esc_url( $attachment_id );
 			return $props;
 
 		}
@@ -372,6 +375,7 @@ class SP_WBC_Variations extends SP_Variations {
 		$type = array();
 		$type['image']='Image';
 		$type['video']='Video';
+		$type['video_url'] = 'Video Url';
 
 		if(empty($type['is_base_type_only'])){
 
@@ -503,7 +507,8 @@ class SP_WBC_Variations extends SP_Variations {
 
 		$gallery_images = array();	
 		if ( !empty($data['sp_variations']["form"]) ) {
-
+			// echo"12121212112";
+			// wbc_pr($data['sp_variations']["form"]); 
 			foreach($data['sp_variations']["form"] as $key=>$fv){
 
 				if( !in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types())) {
@@ -530,8 +535,9 @@ class SP_WBC_Variations extends SP_Variations {
 
 				} else {
 
-					$value_arr = apply_filters('sp_variations_available_variation_type', array('type'=>null,'value'=>$value,'key'=>$key), $key );	
-
+					$value_arr = apply_filters('sp_variations_available_variation_type', array('type'=>null,'value'=>$value,'key'=>$key), $key );
+					echo "2222222222";	
+					wbc_pr($value_arr);
 					if( !empty($value_arr['type']) && !empty($gallery_images_types[$value_arr['type']]) ) {
 
 						array_push($gallery_images, $value_arr);
@@ -567,8 +573,8 @@ class SP_WBC_Variations extends SP_Variations {
 
 		$variation_get_max_purchase_quantity['variation_gallery_images'] = array();
 
-		// echo ">>>>>>>>>>> gallery_images";
-		// wbc_pr($gallery_images);
+		echo ">>>>>>>>>>> gallery_images";
+		wbc_pr($gallery_images);
 
 		if ( !empty($data['sp_variations']["form"]) ) {
 
@@ -578,7 +584,10 @@ class SP_WBC_Variations extends SP_Variations {
 
 					$image = $this->get_product_attachment_props( $value['value'],false,$value['type']);
 
-					$variation_get_max_purchase_quantity['variation_gallery_images'][ $i ] = apply_filters('sp_variations_available_variation_image_attachment_props', $image, $value, $key );
+					$variation_get_max_purchase_quantity['variation_gallery_images'][ $i ] = apply_filters('sp_variations_available_variation_image_attachment_props', $image, $value, $value['key'] );
+					echo ">>>>>>>>>>> gallery_images_finel".$i;
+		wbc_pr($variation_get_max_purchase_quantity['variation_gallery_images'][ $i ]);
+
 				} else {
 
 					$variation_get_max_purchase_quantity['variation_gallery_images'][ $i ] = $this->get_product_attachment_props( $value);
@@ -594,6 +603,9 @@ class SP_WBC_Variations extends SP_Variations {
 		/*	wbc_pr($variation_get_max_purchase_quantity);
 die();*/
 		}
+
+		echo ">>>>>>>>>>> gallery_images_finel";
+		wbc_pr($variation_get_max_purchase_quantity['variation_gallery_images']);
 
 		// apply filter hook here to let extensions filter over swatches data, with key sp_variations_available_variation -- to d or -- to b done
 		

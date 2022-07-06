@@ -15,7 +15,8 @@ $template = array(
     'attr' => array( /*'loading' => 'lazy',*/ 'width' => esc_attr( $image['src_w'] ), 'height' => esc_attr( $image['src_h'] ), 'alt' => esc_attr( $image['alt'] ), 'title' => esc_attr( $image['title'] ), 'data-caption' => esc_attr( $image['caption'] ), 'data-src' => esc_url( $image['full_src'] ), 'data-large_image' => esc_url( $image['full_src'] ), 'data-large_image_width' => esc_attr( $image['full_src_w'] ), 'data-large_image_height' => esc_attr( $image['full_src_h'] ), 'srcset' => esc_attr( $image['srcset'] ), 'sizes' => esc_attr( $image['sizes'] ) ),
     'preHTML'=>$image['extra_params'],
 );
-
+/*echo ">>>>>>>>>>> gallery_images_finel_template";
+wbc_pr($image);*/ 
 if ( $image['extra_params_org']['type'] == 'video' or $image['extra_params_org']['type'] == 'video_url' ) {
     if ( $image['extra_params_org']['type'] == 'video' and isset( $image['extra_params_org']['embed_type'] ) && $image['extra_params_org']['embed_type'] === 'iframe' ) {
         
@@ -25,7 +26,7 @@ if ( $image['extra_params_org']['type'] == 'video' or $image['extra_params_org']
             'child' => array(
                 array(
                     'type' => 'iframe',
-                    'src' => $image['video_embed_url'],
+                    'src' => $image['video_src'],
                     'attr' => array( 'width' => '454', 'height' => '454', 'frameborder' => '0', 'webkitallowfullscreen' => '', 'mozallowfullscreen' => '', 'allowfullscreen' => '' ),
                 ),
             ),
@@ -40,11 +41,12 @@ if ( $image['extra_params_org']['type'] == 'video' or $image['extra_params_org']
             'child' => array(
                 array(
                     'type' => 'video',
-                    'attr' => array( 'preload'=>'auto', 'controlsList'=>'nodownload','autoplay'=>''),
+                    'attr' => array('preload'=>'auto', 'controlsList'=>'nodownload','autoplay'=>''),
                     'child' => array(
                         array(
-                            'type' => 'source',
-                            'src' => $image['video_link'],
+                            'type'=>'header',
+                            'tag' => 'source',
+                            'src' => $image['video_src'],
                             'attr' => array( 'type' => 'video/mp4' ),
                         ),
                     ),
@@ -53,5 +55,4 @@ if ( $image['extra_params_org']['type'] == 'video' or $image['extra_params_org']
         );
     }
 }
-
 $template = apply_filters( 'woocommerce_single_product_image_thumbnail_html',$template, $gallery_images_template_data['attachment_ids_loop_post_thumbnail_id'][$index] );

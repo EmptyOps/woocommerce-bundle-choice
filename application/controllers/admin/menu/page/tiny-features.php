@@ -95,6 +95,10 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 					// 		--	but yeah for now we will support only specific types, so for that create function in form builder class. like there is that savable type function -- to s 
 					// 		--	and regarding our video field that should accept only mp4 -- to s 
 					// 		--	ACTIVE_TODO and on validation layer of form builder, we may need to add support for file field validation. which simply validates the uploaded file extensions, so the validate property of the form array should now accept the allowed_file_types as a key. or is it already? I think not -- to s 
+
+					// - need to research if video_url type can be saved as the wp attachement while still keeping the url external, but if it is possible then we can get video thumb etc support  -- to s
+					// -- and if it is not possible then need to research on whether other plugins support video thumb or just static video play icon  -- to s
+					// -- and in case if video is uploaded as attachment then we are planning to use what wp media manager provide or video thumb. -- to s
 					// ACTIVE_TODO_OC_END 		
 					if( false ) {
 
