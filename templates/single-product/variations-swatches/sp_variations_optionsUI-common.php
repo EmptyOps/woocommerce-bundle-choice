@@ -29,7 +29,7 @@ foreach ( $options as $term ) {
             $template_data['data']['term'] = $term; 
             $template_data['data']['template_sub_dir'] = $template_data['template_sub_dir']; 
             $template_data['data']['template_data'] = $template_data; 
-            $template[] = wbc()->load->template($template_data['template_sub_dir'].'/'.$template_data['template_key'],(isset($template_data['data'])?$template_data['data']:array()),true,$template_data['singleton_function'],true);
+            $template[] = wbc()->load->template($template_data['template_sub_dir'].'/'.$template_data['template_key'],(isset($template_data['data'])?$template_data['data']:array()),true,$template_data['singleton_function'],true,true);
         
         }
 

@@ -1474,6 +1474,9 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			}
 		}
 
+		// ACTIVE_TODO ultimately move all below core implementtaion in the new core class of gallery_images or maybe simply in the wbc variations class 
+
+		//////////////// start core
 
 		//bind to hook from here for the hook that is applied from both slider and zoom module for the images. means add filter here, and provide back with gallery_images data. so simply entire data var will be added to filter var but yeah the variation_gallery_images, attachment_ids etc. would be key -- to b done
 		add_filter('sp_slzm_slider_images',function($hook_data) use($data){
@@ -1492,9 +1495,12 @@ class SP_Model_Single_Product extends SP_Single_Product {
 				//-- and so all three hooks of both slider and zoom module should be applied or bind to within this action hook -- to b done
 		do_action( 'sp_variations_gallery_images_core' );
 
+		$classes = array('spui-sp-variations-gallery-images');
+		$classes = apply_filters('sp_variations_gallery_images_core_container_class',$classes);
+	
 		$ui = array(
 			'type'=>'div',
-			'class'=>'spui-sp-variations-gallery-images',
+			'class'=>$classes,
 			'child'=>array(
 				array(
 					'type'=>'html',
@@ -1508,6 +1514,8 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		);
 		\sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui,'sp_variations_gallery_images_container');
 		//wbc_pr( $ui );	die();
+
+		//////////////// end core
 
 
 		//create list of woo hooks that are used below -- to d done
