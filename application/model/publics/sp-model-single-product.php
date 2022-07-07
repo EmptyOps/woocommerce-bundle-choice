@@ -522,11 +522,11 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 		add_filter( 'woocommerce_post_class', function( $classes, $product ) {
 
-			$classes[] = 'wbc-sp-variations-gallery-images-woopost';
-			$classes[] = sprintf( 'wbc-sp-variations-gallery-images-woopost-theme-%s', wbc()->common->current_theme_key() );
+			$classes[] = 'wbc-sp-variations-gallery_images-woopost';
+			$classes[] = sprintf( 'wbc-sp-variations-gallery_images-woopost-theme-%s', wbc()->common->current_theme_key() );
 
 			if ( is_rtl() ) {
-				$classes[] = 'wbc-sp-variations-gallery-images-woopost-rtl';
+				$classes[] = 'wbc-sp-variations-gallery_images-woopost-rtl';
 			}
 
 			return $classes;
@@ -534,11 +534,11 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 		add_filter( 'body_class',  function($classes){
 
-			$classes[] = 'wbc-sp-variations-gallery-images';
-			$classes[] = sprintf( 'wbc-sp-variations-gallery-images-theme-%s', wbc()->common->current_theme_key() );
+			$classes[] = 'wbc-sp-variations-gallery_images';
+			$classes[] = sprintf( 'wbc-sp-variations-gallery_images-theme-%s', wbc()->common->current_theme_key() );
 
 			if ( is_rtl() ) {
-				$classes[] = 'wbc-sp-variations-gallery-images-rtl';
+				$classes[] = 'wbc-sp-variations-gallery_images-rtl';
 			}
 
 			return $classes;
@@ -547,11 +547,11 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 		add_filter( 'post_class',  function($classes){
 
-			$classes[] = 'wbc-sp-variations-gallery-images-post';
-			$classes[] = sprintf( 'wbc-sp-variations-gallery-images-post-theme-%s', wbc()->common->current_theme_key() );
+			$classes[] = 'wbc-sp-variations-gallery_images-post';
+			$classes[] = sprintf( 'wbc-sp-variations-gallery_images-post-theme-%s', wbc()->common->current_theme_key() );
 
 			if ( is_rtl() ) {
-				$classes[] = 'wbc-sp-variations-gallery-images-post-rtl';
+				$classes[] = 'wbc-sp-variations-gallery_images-post-rtl';
 			}
 
 			return $classes;
@@ -846,8 +846,8 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			if(!empty($toggle_status)){	
 				if(has_action('woocommerce_before_variations_form')){
 					add_action( 'woocommerce_before_variations_form',function( ) use($toggle_text){
-						wbc()->load->asset('css','fomantic/semantic.min');
-						wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
+						// wbc()->load->asset('css','fomantic/semantic.min');
+						// wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
 						ob_start();
 						?>
 							<span id="wbc_variation_toggle" class="ui raised segment">
@@ -856,9 +856,9 @@ class SP_Model_Single_Product extends SP_Single_Product {
 						<?php
 						echo ob_get_clean();
 					}, 10, 1 );	
-				} else {
-					wbc()->load->asset('css','fomantic/semantic.min');
-					wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
+				} elseif(false) {
+					// wbc()->load->asset('css','fomantic/semantic.min');
+					// wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
 					ob_start();
 					?>	
 						<script>
@@ -868,6 +868,9 @@ class SP_Model_Single_Product extends SP_Single_Product {
 					echo ob_get_clean();
 				}				
 			}
+
+			$this->load_asset();
+
 		});
 	
 		// move below hooks to the specific render_gallery_images and render_variations_swatches fucntions below. means both body_class and post_class hook, and also implement the woocommerce_post_class hook for both which is for now only for the gallery_images function only -- to b done 
@@ -919,6 +922,14 @@ class SP_Model_Single_Product extends SP_Single_Product {
 	}
 
 	public function load_asset(){
+
+		add_action( 'wp_enqueue_scripts' ,function(){
+			
+			wbc()->load->asset('css','fomantic/semantic.min');
+			wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
+
+			wbc()->load->asset( 'asset.php', constant( 'EOWBC_ASSET_DIR' ).'variations.assets.php');
+		}, 1049);	
 
 	}
 

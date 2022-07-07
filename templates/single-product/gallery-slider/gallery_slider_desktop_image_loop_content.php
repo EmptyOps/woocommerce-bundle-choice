@@ -9,7 +9,7 @@
 $template = null;
 $template = array(
     'type'=>'li',
-    'class'=>'splide__slide',
+    'class'=>array('splide__slide', 'img-item', 'img-item-'.$image['extra_params_org']['type'], 'img-item-'.$image['extra_params_org']['type'].'-'.wbc()->common->current_theme_key() ),
     'child'=>array(
         'type'=>'image',
         'src'=>esc_url( $image['gallery_thumbnail_src'] ),

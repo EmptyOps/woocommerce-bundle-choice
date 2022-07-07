@@ -87,7 +87,7 @@ if(!empty($gallery_images_template_data['attachment_ids_loop_image'])){
 -- main container */
 $template = array(
     'type'=>'div',
-    'class'=>'imgScrollWrap_v',
+    'class'=>array( 'imgScrollWrap_v', 'img-wrapper' ),
     'id'=>'slider1',
     'child'=>array(
         'type'=>'div',

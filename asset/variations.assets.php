@@ -1,5 +1,7 @@
 
---- a code /woo-bundle-choice/application/model/publics/sp-model-single-product.php no che
+<?php
+// --- a code /woo-bundle-choice/application/model/publics/sp-model-single-product.php no che
+?>
 <style type="text/css">
 	.ui.mini.images .variable-item.image{
 		width: auto;						
@@ -154,7 +156,15 @@
 	}
 </style>
 <script>
+	<?php 
+	if(!has_action('woocommerce_before_variations_form')) {
+	?>
+		jQuery(".variations_form").before('<span id="wbc_variation_toggle" class="ui raised segment"><?php _e($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i></span>');	
+
+	<?php } ?>
+	
 	jQuery(document).ready(function($){
+		// ACTIVE_TODO below sections might be of use so keeping it on for now, but we must double confirm like legacy woo js layers provide full dropdown template supports. but i think still sementic specific matters need to be managed because we are using sementic templates.
 		jQuery(".dropdown").dropdown().on('change',function(){
 			var target_selector =  $('#'+$(this).find('input[type="hidden"]').data('id'));
 			target_selector.val($(this).find('input[type="hidden"]').val());

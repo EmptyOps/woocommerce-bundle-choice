@@ -70,6 +70,6 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 
 	wbc()->load->asset('js','common',array('jquery'),"0.1.3",false,true,'common_configs',array('swatches_config'=>$swatches_configs, 'gallery_images_configs'=>$gallery_images_configs));
 
-}, 99);
+}, 999);
 
 ?>

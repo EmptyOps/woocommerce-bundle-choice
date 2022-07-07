@@ -89,7 +89,7 @@ if(!empty($gallery_images_template_data['attachment_ids_loop_image'])){
     -- main container */
 $template = array(
     'type'=>'div',
-    'class'=>'Zoom_Rigt-sec',
+    'class'=>'Zoom_Rigt-sec', array('Zoom_Rigt-sec', 'img-wrapper')
     'child'=>
 
         // ACTIVE_TODO_OC_START
