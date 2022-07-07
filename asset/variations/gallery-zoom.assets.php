@@ -1,6 +1,6 @@
 <?php
 add_action( 'wp_enqueue_scripts' ,function(){
-?>
+?> 
 	<!-- ---- a code /themes/purple_theme/woocommerce/content-single-product.php no che 
 	-- zoom no
 	 -->
@@ -46,14 +46,14 @@ add_action( 'wp_enqueue_scripts' ,function(){
 
 		    var bind_listeners = function(){
 
-	            // window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.init_listener(function(){
+	            window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.init_listener(function(){
 
 	                init_function();
-	            // });
-	            // window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.refresh_listener(function(){
+	            });
+	            window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.refresh_listener(function(){
 	            	
-	            //     init_function();
-	            // });
+	                init_function();
+	            });
 
 		    };
 

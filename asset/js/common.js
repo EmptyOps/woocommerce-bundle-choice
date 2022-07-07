@@ -575,11 +575,11 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
                                              --  and there will be nothing here for that from here in the swatches module but it will be from gallery_images module -- to h or -- to a. the gallery_images module will emit notification on its similar flow like here. I think gallery_images module will do it and there is nothing else to do. 
                                              --  and the extension would respond back with anything that it think can be handled on common layers here based on base type(here its very image or video type) -- to h or -- to a 
                                                 --  so will that be our recursive flow? I think that is what we thought ofm with simple and precise condition that would avoid the recursion in any scenarios -- to a 
-                                             NOTE: and there is no input_template_type implementation, but the type will be considered as base type while the e param provide type will be specific extended type. 
+                                             NOTE: and there is no input_template_type implementation, but the type will be considered as base type while the e param provide type will be specific extended type. INVALID there is slight change in this flow 
                                                 // --  so extra param will host one type field and additionally a types object within which there would be single type  -- to a done 
                                                     // --  and when the types is prepared, at that time simply type is considered -- to a done
-                                                        --  and then it extensions would respond back with object (base) type which could be further processed with recursive call -- to a 
-                                                            -- extentions can return object (base) type -- to a
+                                                        // --  and then it extensions would respond back with object (base) type which could be further processed with recursive call -- to a done
+                                                            // -- extentions can return object (base) type -- to a done
                          // ACTIVE_TODO_OC_END                
  
                      //  data applicable loops 
