@@ -32,6 +32,12 @@ class SP_Model_Gallery_Slider extends Eowbc_Base_Model_Publics {
 
 	public function render_ui(){
 		
+		add_filter('sp_variations_gallery_images_core_container_class', function($classes){
+			$classes[] = 'Product_Left_Wrapper_Plugin_Images';
+
+			return $classes;
+		});
+		
 		add_filter('sp_slzm_slider_container', function($classes){
 			$classes[] = 'small-img';
 
