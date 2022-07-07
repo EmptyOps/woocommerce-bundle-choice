@@ -1,8 +1,8 @@
-// /**
-//  * common js functions and also the common defs for the module, observer, prototype and singleton design patterns 
-//  * 
-//  * this asset file will contain the common layer and functions, and if there are common functions which are specific to admin only then that will not go here but on in the admin asset js file, and if there are common functions which are to be used by frontend but in some cases by admin or even if not going to be used by admin then also be added here. so this asset file will be loaded on both admin and frontend. the decision of managing common flows like this and priotizing what goes to frontend is because of the requirement of minimizing the number of assets that would be loaded on frontend. 
-//  */
+/**
+ * common js functions and also the common defs for the module, observer, prototype and singleton design patterns 
+ * 
+ * this asset file will contain the common layer and functions, and if there are common functions which are specific to admin only then that will not go here but on in the admin asset js file, and if there are common functions which are to be used by frontend but in some cases by admin or even if not going to be used by admin then also be added here. so this asset file will be loaded on both admin and frontend. the decision of managing common flows like this and priotizing what goes to frontend is because of the requirement of minimizing the number of assets that would be loaded on frontend. 
+ */
 window.document.splugins = window.document.splugins || {};
 window.document.splugins.common = window.document.splugins.common || {};
 
@@ -411,8 +411,8 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
  
  
  
- // the variations js module
- window.document.splugins.wbc.variations = window.document.splugins.wbc.variations || {};
+//  // the variations js module
+//  window.document.splugins.wbc.variations = window.document.splugins.wbc.variations || {};
  
 //  ACTIVE_TODO_OC_START
 //  //  TODO right now variations swatches and gallery images are managed through their own js modules and so far there is no need of the central variations core js module, but whenver required we need to create one. 
@@ -726,7 +726,7 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
  
 //              --  recently purchased 
  
- ACTIVE_TODO_OC_END
+//  ACTIVE_TODO_OC_END
  
  // the variations swatches js module
 window.document.splugins.wbc.variations.swatches = window.document.splugins.wbc.variations.swatches || {};
@@ -760,7 +760,7 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
     var init_private = function() {
 
-        window.document.splugins.events.api.createSubject( 'swatches', ['process_attribute_types'] );
+        window.document.splugins.events.api.createSubject( 'swatches', ['process_attribute_types', 'sp_variations_swatches_loaded'] );
 
         // init on all applicable events 
         jQuery(document).on('wc_variation_form', _this.base_container+':not(.spui-wbc-swatches-loaded)', function (event) {
@@ -887,7 +887,6 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
                     --  but first confirm if that dropdown is actually given the name of the raw and if saw is it on select of their parent raw? -- to s 
             --  ACTIVE_TODO and similarly and already implemented most classes for gallery_images, for gallery_images we need to make sure that the heirarchy of classes normally been applied by woo and the plugins we were exploring are followed in our templates layers and all the applicable classes are in place -- to s and -- to a 
                 --  ACTIVE_TODO and then t and a you need to appropriately plan the css for all those classes taking into consideration all different popular themes. but yeah css structuring should be generic so that it adapats as planned to all different themes. -- to t and -- to a. this task need to be executed very soon or now while we are approaching to finalize the 10 theme demos. 
-
                 heirachical and/or applicable css -- to t 
                     --  just research all the different classes, elements, events and flows and then plan the generic yet elegant css which I discussed with you about -- to t 
                         --  and look at the li.each loop below they had create and applied a common and generic selected class, which would be relied upon by all their templates of different types -- to t 
@@ -1093,6 +1092,13 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
     };
 
     var process_attribute_types = function( type=null, element=null ) {
+
+        
+
+        localize
+
+
+
 
         localize the configs var(localize like we are doing during admin-js load and so on) with common js load -- to s 
             --  it will host two vars for now below attribute_types, so call that function -- to s 
@@ -1673,7 +1679,6 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
             // ACTIVE_TODO do we need this check variations flow?
             jQuery(_this.base_container).trigger('check_variations');
             jQuery(target_selector).trigger('change');
-
             on_click(type, element, event);
         });
         ACTIVE_TODO_OC_END*/
@@ -1749,15 +1754,11 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
             }
 
             /*jQuery(element).on('change', 'input.spui-wbc-swatches-variable-item-radio:radio', function (e, params) {
-
               e.preventDefault();
               e.stopPropagation();
-
               if (params && params.radioChange) {
-
                 var value = jQuery(element).val();
                 var is_selected = jQuery(element).parent('li.spui-wbc-swatches-variable-item-radio').hasClass('selected');
-
                 if (is_selected) {
                   select.val('').trigger('change');
                   jQuery(element).parent('li.spui-wbc-swatches-variable-item-radio').trigger('spui-wbc-swatches-variable-item-unselected', [value, select, _this.$element]); // Custom Event for li
@@ -1765,7 +1766,6 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
                   select.val(value).trigger('change');
                   jQuery(element).parent('li.spui-wbc-swatches-variable-item-radio').trigger('spui-wbc-swatches-variable-item-selected', [value, select, _this.$element]); // Custom Event for li
                 }
-
                 select.trigger('click');
                 select.trigger('focusin');
                 if (_this.is_mobile) {
@@ -1799,17 +1799,13 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
             jQuery(element).on('change', 'input.spui-wbc-swatches-variable-item-radio:radio', function (event) {
               event.preventDefault();
               event.stopPropagation();
-
               var value = jQuery(element).val();
-
               select.val(value).trigger('change');
               select.trigger('click');
               select.trigger('focusin');
-
               if (_this.is_mobile) {
                 select.trigger('touchstart');
               }
-
               // Radio
               jQuery(element).parent('li.spui-wbc-swatches-variable-item-radio').removeClass('selected disabled').addClass('selected');
               jQuery(element).parent('li.spui-wbc-swatches-variable-item-radio').trigger('spui-wbc-swatches-variable-item-selected', [value, select, _this.$element]); // Custom Event for li
@@ -1854,6 +1850,31 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
     };
 
     var on_click = function(type, element, event) {
+
+
+        e.preventDefault();
+        e.stopPropagation();
+        var value = jQuery(element_inner).data('value');
+
+        
+        var value = jQuery(element_inner).val();
+
+
+        select.val(value).trigger('change');
+        select.trigger('click');
+        select.trigger('focusin');
+        if (window.document.splugins.common.is_mobile) {
+            select.trigger('touchstart');
+        }
+        jQuery(element_inner).trigger('focus'); // Mobile tooltip
+        jQuery(element_inner).trigger('wvs-selected-item', [value, select, _this.$element]); // Custom Event for li
+
+
+        jQuery(element_inner).trigger('wvs-unselected-item', [value, select, _this.$element]);
+
+
+        on_click(type, element_inner, event);
+
 
         click(type, element);
 
@@ -1965,15 +1986,7 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
  
 //     _this.configs = jQuery.extend({}, {}/*default configs*/, configs);  
 
-//     _this.base_container = jQuery( ( window.document.splugins.common._o( _this.configs, 'base_container_selector') ? _this.configs.base_container_selector : '.variations_form' ) );     
- 
-    
-//     _this.base_element = element;
-
-//     _this.$base_element = jQuery( _this.base_element );
-
-//     _this.$slider_container = jQuery( '.'+ _this.configs.classes.slider.container );
-//     _this.$zoom_container = jQuery( '.'+ _this.configs.classes.zoom.container );
+//     _this.base_container = jQuery( ( window.document.splugins.common._o( _this.configs, 'base_container_selector') ? _this.configs.base_container_selector : ''  ) );     
  
 //      //bhavesh pase thi class levano se
  
@@ -1995,98 +2008,78 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
  
 //     var init_private = function() {
  
-//         window.document.splugins.events.api.createSubject( 'gallery_images', ['process_images','sp_slzm_refresh'] );
+//         window.document.splugins.events.api.createSubject( 'gallery_images', ['process_images','sp_slzm_refresh', 'sp_variations_gallery_images_loaded', 'sp_slzm_init', 'sp_slzm_refresh_zoom', 'slider_thumb_click'] );
  
-//          // // For Single Product
-//          // $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery(); // Ajax and Variation Product
+//             // // For Single Product
+//             // $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery(); // Ajax and Variation Product
+//             init_preprocess(null);
  
-//          compatability('init');
+//         compatability('init');
+
  
- 
-//          preprocess();
- 
-//          return splugins._.debounce(function () {
-           
-//              preprocess();   
- 
-//              since we are going to provide the refresh api for external slider and zoom so similarly we should provide the init api function also, and it would most like be from here -- to h or -- to s. from here means after all the preprocess and everything else is covered. 
- 
-//              have t research on the photo swipe events and effects management that we might need to do -- to t. explore the plugin we are exploring and confirm the events and effects management that we would like to do. 
-//            _this.initPhotoswipe();
- 
-//             note that apart from above most important for us is to test extensively and that 10 demo and 5 slider zoom experiements must be covered in details, and we should research on what available on all community plugins and list out the set of things which we have issues, things that we would like to do and innovations that should be brought to community -- to t and -- to kk and -- to ks and -- to a 
-//          }, 500);
-//      }
+//     }
  
 //      var legacyBinding? = function() {
  
-//          remove this entire legacyBinding function, once the variation change event is bound from belo functions of this module -- to a 
+//          remove this entire legacyBinding function, once the variation change event is bound from below functions of this module -- to a 
 //          jQuery('#select_attribute_of_variation').on('woocommerce_variation_has_changed', function(){
 //              // do your magic here...
 //           }); 
  
 //      }
+
+//      var init_preprocess = function(event) {
+
+//         if(jQuery(_this.configs.base_container+':not(.spui-wbc-gallery_images-product-type-variable):not(.spui-wbc-gallery_images-loaded)').length>0) {
+
+//             preprocess(jQuery(_this.configs.base_container+':not(.spui-wbc-gallery_images-product-type-variable):not(.spui-wbc-gallery_images-loaded)'), event);
+
+//         }
+
+//      };
  
-//      var preprocess = function() {
- 
-//          //
-//          //  data applicable loops 
-//          //
-//          // pre process data and process collections that would be necessary for neat and quick ops 
-//          _this.data = preprocess_data( _this.data );   
- 
-//          // ACTIVE_TODO_OC_START
-//          // do necessary bindings for the gallery images  
-//          //     --done  will need a dedicated function namely process_images -- to d 
-//          //         --  and since the actual images would be available only after the variation change event(and specifically the event binding and other stat should be set and maintained for currently active images of current variation only so it must be on variation change event, and in case of simple product types that will not be the cases) so the process_images function should be called on each such stat changes -- to d 
-//          //             --done  move entire section below inside that function -- to d 
-//          // ACTIVE_TODO_OC_END
-//          process_images();   
- 
-//          //  template 
-//          _this.data.template_types.each( function( type ) {
- 
-//              //  do necessary logic if support is available, if not for example custom_html then manage accordingly  
-//              if( type == 'default'/*means the default template provided by slider and zoom*/ || type == 'custom_html' ) 
-//                  // ACTIVE_TODO_OC_START
-//                  // in case of custom_html as long as the slider and zoom events are not emitted and they would not be since we would be doing our custom html, but if they are then need to cancel them using their apis (only) as mentioned in the events functions below 
-//                  //     -- but one matter that we need to handle in detail is managing the slider thumb indexes which is providing anything custom like custom_html dom (like 360,  darker lighter, diamond meta and recently purchased) for their main image ares (which is also zoom area) 
-//                  //         --  and mostly none of the slider or zoom plugin would be providing such complex apis and even if they do then not sure if all have those and even if they do then not sure if all have it mature 
-//                  //             --  so one simple (but tricky, yeah it is trick and not standard) option is to simply hide the zoom area container and show the custom html. 
-//                  //                 --  but since it is not standard we should find standard, or can use that trick since it is simple and also effective option especially because it is less likely for most slider and zoom to provide support
-//                  //                     --  but if we are to use this trick then we need to bring it closer to standard implementation by ensuring the possible flows like always have our classes in zoom area container like sp-variations-zoom-container 
-//                  // ACTIVE_TODO_OC_END                    
-//          }); 
- 
-//          like in the swatches module we have the base_container_selector settings need to manage it here, to figure out the below _element -- to h and -- to a 
-//              --  and confirm if all below are fron the plugin we were exploring -- to a 
+//      var preprocess = function(element, event) {
+
+
+//         _this.base_element = element;
+//         _this.$base_element = jQuery( _this.base_element );
+        
+//         _this.$slider_container = _this.$base_element.find( '.'+ _this.configs.classes.slider.container );
+//         _this.$zoom_container = _this.$base_element.find( '.'+ _this.configs.classes.zoom.container );
+            
+//             /*ACTIVE_TODO_OC_START
 //                  --  then I will tell you which to keep and which to drop -- to a 
-//          _this.$wrapper = _this.$base_element.closest('.product');
-//          _this.$variations_form = _this.$wrapper.find(_this.base_container);
- 
+//             ACTIVE_TODO_OC_END*/
+//          _this.$wrapper = _this.$base_element.closest('.product');  /*ACTIVE_TODO we may need to manage this selector stability.*/
+//          _this.$variations_form = _this.$wrapper.find('.variations_form');
+            
+//                /*ACTIVE_TODO_OC_START
 //                this.$attributeFields = this.$variations_form.find('.variations select');
 //                this.$target = this._element.parent();
 //                this.$slider = $('.woo-variation-gallery-slider', this._element);
 //                this.$thumbnail = $('.woo-variation-gallery-thumbnail-slider', this._element);
+//                 ACTIVE_TODO_OC_END*/
+
 //          _this.product_id = _this.$variations_form.data('product_id');
 //          _this.is_variation_product = _this.$variations_form.length > 0;
  
 //          _this.$base_element.addClass('spui-wbc-gallery_images-loaded');
  
-//                this.defaultDimension();
-//                this.defaultGallery();
+//                // ACTIVE_TODO if required then need to inti def for simple product and so on.
+//                // this.defaultGallery();
  
-//          --  in our flow the events and other functions heirarchy called from this preprocess is, for us the initEvents level of flow -- to h. just for the notes. 
-//              --  and then the init or refresh function of the external slider/zoom api that is to be called, after the dom updated with slider/zoom templates is what will cover the image loaded flow of plugin we are exploring. 
-//          this.initEvents();
-//                this.initVariationGallery();
+//          // --  in our flow the events and other functions heirarchy called from this preprocess is, for us the initEvents level of flow -- to h. just for the notes. done
+//              // --  and then the init or refresh function of the external slider/zoom api that is to be called, after the dom updated with slider/zoom templates is what will cover the image loaded flow of plugin we are exploring. done
+//                 // ACTIVE_TODO however we are still not managing the reset layer so need to implement that in base reset_variation function. 
  
+//          /*ACTIVE_TODO_OC_START
 //          --  we need to call the update dom templates functions on page load when it is non variation product -- to h -- to a. tally this and all sub tasks below.  
-//              --  while for variation products it will be called by woo legacy api when the variation change event does fire on page load, so nothing to do in that case 
+//              // --  while for variation products it will be called by woo legacy api when the variation change event does fire on page load, so nothing to do in that case 
 //                  --  but yeah in either case after dom templates functions are done then need to call the required functions heirarchy which would cover something similar like what init set of functions doing in the plugin we were exploring -- to h. and so this function heirarchy calling would definitely include the call to init function of the js api for slider and zoom.  
 //                      --  so some set of functions heirarchy would not be called initially for variation products -- to h 
 //                          --  otherwise if required then we can simply call it during init and then it will be called again on woo legacy change event called during page load so in this case it would be called twice during page load -- to h 
 //                              --  so this in essense clears the loading stack quest and points mentioned/planned in the process_template function of this module -- to h. just for the notes. 
+//                             NOTE : some part of the above  rae covered but confirm to be sure  
 //          if (!this.is_variation_product) {
 //          this.imagesLoaded();
 //          }
@@ -2096,10 +2089,7 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
 //          this.initZoom();
 //          this.initPhotoswipe();
 //          }
- 
-//                this._element.data('woo_variation_gallery', this);
- 
-//                $(document).trigger('woo_variation_gallery_init', [this]);
+//          ACTIVE_TODO_OC_END*/
  
 //              _createClass(WooVariationGallery, [{
  
@@ -2112,12 +2102,12 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
 //                  // console.log(this._element.height(), this._element.width());
 //                  this._element.css('min-height', this._element.height()).css('min-width', this._element.width());
  
-//                  $(window).on('resize.wvg', _.debounce(function (event) {
+//                  $(window).on('resize.wvg', splugins._.debounce(function (event) {
 //                    if (event.originalEvent) {
 //                      _this2._element.css('min-height', _this2._element.height()).css('min-width', _this2._element.width());
 //                    }
 //                  }, 300));
-//                  $(window).on('resize.wvg', _.debounce(function (event) {
+//                  $(window).on('resize.wvg', splugins._.debounce(function (event) {
 //                    if (event.originalEvent) {
 //                      _this2._element.css('min-height', '').css('min-width', '');
 //                    }
@@ -2126,24 +2116,13 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
 //                    'trailing': false
 //                  }));
 //                }
-//              }, {
-//                key: "initEvents",
-//                value: function initEvents() {
-//                  var _this3 = this;
- 
-//                  this._element.on('woo_variation_gallery_image_loaded', this.init());
-//                }
-//              }, {
-//                key: "defaultGallery",
-//                value: function defaultGallery() {
+//              },
 //                  ACTIVE_TODO_OC_START
 //                  we would not like to manage extra layer of ajax to get default gallery and so on, if it is not necessary by standard flow but if by any chance standard flows does require handling any exceptional scenarios then we would need to do it -- to h and -- to d 
 //                      --  here check if that wc ajax event is if invoked by the plugin we were exploring? it might not be but still confirm and in the first place check if the execution even reaching till ajax since it was not noticed in the browser console -- to h 
 //                          --  still need to research about the ajax variation but above two tasks is mostly unnecessary so we can mark them invalid after 2nd revision -- to h
 //                              --  research about the ajax variation, but after discussing with me -- to s 
 //                  ACTIVE_TODO_OC_END
-//              }, {
-//              }, {
  
 //              for below mattter also research on WooCommerce ajax variations with keywords WooCommerce ajax variations legacy -- to h 
 //                  --  research about the ajax variation, but after discussing with me -- to s 
@@ -2153,30 +2132,61 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
 //              // $(document).on('wc_variation_form', '.variations_form', function () {
 //              //   $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery();
 //              // }); // Support for Jetpack's Infinite Scroll,
-//      ACTIVE_TODO_OC_START
+//         ACTIVE_TODO_OC_START
 //             //  so a call from here to the compatability function of this module, and that will cover all compatability matters of load time inlcuding the promize resolve block of the plugin we were exploring. so call compatability with section=bootstrap -- to d done
 //                  // ACTIVE_TODO we may like to mack use of promise resolve
  
  
-//      --  if our slider/zoom module is enabled then 
-//          --  simply listen legacy js layer events and on variation change etc. keep updating our dom 
-//      --  if our slide/zoom module is not enabled and we are binding to slider/zoom module of the user through the flows of theme adaption template file then 
-//          --  simply listen legacy js layer events and then do our applicable logic as well as call the slider/zoom module api that we are binding to 
-//      --  if none of the two above then 
-//          --  then listen to legacy js layer, do our logic and then publish events on our js layer 
-//              --  in this case sample applies for php layer as well as planned, means publishing the php events/data to the php hooks 
-//      --  if none of the three above then 
-//          --  then user would be using one of our recommend slider and zoom modules out of the 5 recommended plugins we planned to present 
-//              --  in this case it will be second if layer above so carry accoding to that layer flows 
+//          --  if our slider/zoom module is enabled then 
+//              --  simply listen legacy js layer events and on variation change etc. keep updating our dom 
+//          --  if our slide/zoom module is not enabled and we are binding to slider/zoom module of the user through the flows of theme adaption template file then 
+//              --  simply listen legacy js layer events and then do our applicable logic as well as call the slider/zoom module api that we are binding to 
+//          --  if none of the two above then 
+//              --  then listen to legacy js layer, do our logic and then publish events on our js layer 
+//                  --  in this case sample applies for php layer as well as planned, means publishing the php events/data to the php hooks 
+//          --  if none of the three above then 
+//              --  then user would be using one of our recommend slider and zoom modules out of the 5 recommended plugins we planned to present 
+//                  --  in this case it will be second if layer above so carry accoding to that layer flows 
+     
+//          // -   events 
+//          //     NOTE: in below events, all those events which falls in category of listener events of the slider or zoom layers, should strictly depend on and use only the underlying slider and zoom js/jquery plugins api. if we make any compromise in that then by definition the functioning of the layers related to it will not be perfect and will not be stable and reliable. -- then these listener category events will call our standard events handler for example slider_thumb_click_listerner would click our on_slider_thumb_click event 
+//          // --  ACTIVE_TODO so all events of slider/zoom listeners category should be ported as js api through our standard api interface that is published for each js modules or by means of our events observer pattern interface or something best suitable and feasible. -- we need to do it only when we finally want to provide php
+//          //  hooks and js api for our users to use their own preferred slider and zoom plugin. so it will be as per the user demand or something such. 
+//          // --  mouse events 
+//              - listener events 
+//          ACTIVE_TODO_OC_END
+
+//          return splugins._.debounce(function () {   
  
-//      // -   events 
-//      //     NOTE: in below events, all those events which falls in category of listener events of the slider or zoom layers, should strictly depend on and use only the underlying slider and zoom js/jquery plugins api. if we make any compromise in that then by definition the functioning of the layers related to it will not be perfect and will not be stable and reliable. -- then these listener category events will call our standard events handler for example slider_thumb_click_listerner would click our on_slider_thumb_click event 
-//      // --  ACTIVE_TODO so all events of slider/zoom listeners category should be ported as js api through our standard api interface that is published for each js modules or by means of our events observer pattern interface or something best suitable and feasible. -- we need to do it only when we finally want to provide php
-//      //  hooks and js api for our users to use their own preferred slider and zoom plugin. so it will be as per the user demand or something such. 
-//      // --  mouse events 
-//          - listener events 
-//      ACTIVE_TODO_OC_END
-//  }}}
+//             // since we are going to provide the refresh api for external slider and zoom so similarly we should provide the init api function also, and it would most like be from here -- to h or -- to s. from here means after all the preprocess and everything else is covered. done
+//                 // -- ACTIVE_TODO right now it is done from template functions, but if required then need to move init call after all function calls of events and effects are done. 
+            
+//             /*ACTIVE_TODO_OC_START
+//             have t research on the photo swipe events and effects management that we might need to do -- to t. explore the plugin we are exploring and confirm the events and effects management that we would like to do. 
+//             _this.initPhotoswipe();
+//             ACTIVE_TODO_OC_END*/
+ 
+//             note that apart from above most important for us is to test extensively and that 10 demo and 5 slider zoom experiements must be covered in details, and we should research on what available on all community plugins and list out the set of things which we have issues, things that we would like to do and innovations that should be brought to community -- to t and -- to kk and -- to ks and -- to a 
+
+//             //
+//             //  data applicable loops 
+//             //
+//             // pre process data and process collections that would be necessary for neat and quick ops 
+//             _this.data = preprocess_data( _this.data );   
+
+//             // ACTIVE_TODO_OC_START
+//             // do necessary bindings for the gallery images  
+//             //     --done  will need a dedicated function namely process_images -- to d 
+//             //         --  and since the actual images would be available only after the variation change event(and specifically the event binding and other stat should be set and maintained for currently active images of current variation only so it must be on variation change event, and in case of simple product types that will not be the cases) so the process_images function should be called on each such stat changes -- to d 
+//             //             --done  move entire section below inside that function -- to d 
+//             // ACTIVE_TODO_OC_END
+//             process_images();   
+         
+//         }, 500);
+
+//      }}
+
+//     };
 
 //     var preprocess_data = function(data) {
 
@@ -2348,8 +2358,10 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
 
 //         // NOTE: from here the process images template will be called only if we need to manage the templates at load time which is not required so far     
         
-//         var sp_slzm_init_callback = null;
-//         window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'sp_slzm_init', {} , sp_slzm_init_callback);
+//         if (!_this.is_variation_product) {
+         
+//             sp_slzm_init();
+//         }
 //     };
  
 //     var process_images_template = function(images) {
@@ -2373,8 +2385,23 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
 //       }
 
 //       splugins._.delay(function () {
-//         var sp_slzm_refresh_callback = null;
-//         window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'sp_slzm_refresh', {}, sp_slzm_refresh_callback );
+        
+//         if (_this.is_variation_product) {
+
+//             if(typeof(_this.data.is_sp_slzm_init_done) == undefined || _this.data.is_sp_slzm_init_done == false) {
+
+//                 // ACTIVE_TODO debug should be called once -- to s
+//                 console.log('is_variation_product sp_slzm_init called');
+//                 _this.data.is_sp_slzm_init_done = true;
+//                 sp_slzm_init();
+
+//             }
+           
+//         }
+
+//             var sp_slzm_refresh_callback = null;
+//             window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'sp_slzm_refresh', {}, sp_slzm_refresh_callback );
+
 //       }, 1); 
 
 //     };
@@ -2495,6 +2522,10 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
 //      };
  
 //      var variation_change_listener = function(type) {
+
+//         if(window.document.splugins.common._b(_this.binding_stats, 'variation_change_listener', type)){
+//             return false;
+//         }
  
 //          _this.$variations_form.on('show_variation', function (event, variation) {
 //            on_variation_change(event, variation);
@@ -2503,6 +2534,10 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
 //      };
  
 //      var reset_variation_listener = function(type) {
+
+//         if(window.document.splugins.common._b(_this.binding_stats, 'reset_variation_listener', type)){
+//             return false;
+//         }
 
 //          if (_this.configs.options.gallery_reset_on_variation_change) {
 //            _this.$variations_form.on('hide_variation', function () {
@@ -2531,6 +2566,7 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
 //                  --  and yeah need to make sure that if any additional notification is required then that is emitted from here, or if any extensions need to respond on notification_response callback then that is implemented -- to h 
 //              --  and zoom refresh seems to be needed to be called on each on_slider_thumb_click event, so just call that refresh event of the js api -- to h 
 //                  --  but yeah if the clicked gallery_item_type of the slider thumb is not image then skip above call -- to h 
+
 //         slider_thumb_click(type,element);
 //      };
  
@@ -2579,13 +2615,16 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
 //             // update one tamplate 
 
 //             process_zoom_template(_this.data.current_variation.variation_gallery_images,index,_this.data.current_variation.variation_gallery_images.length > 1);
-//             window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'sp_slzm_refresh_zoom' ); 
+
+//             var sp_slzm_refresh_zoom_callback = null;
+//             window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'sp_slzm_refresh_zoom', {}, sp_slzm_refresh_zoom_callback ); 
 
 //         }else{
-//             // hide and show image elements
+//             // ACTIVE_TODO hide and show image elements
 //         }
 
-//         window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'slider_thumb_click' ); 
+//         var slider_thumb_click_callback = null;
+//         window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'slider_thumb_click', {}, slider_thumb_click_callback ); 
         
 //      };
 
@@ -2648,23 +2687,35 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
  
 //          ////////////////////////////////////////////////////
 //          if(section == 'init'){
-//              jQuery(function ($)
+//              jQuery(function ($jQuery)
 //              {
-//                      $(document).on('wc_variation_form', _this.base_container, function () {
-//                        $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery();
+//                      $jQuery(document).on('wc_variation_form', '.variations_form', function (event) {
+//                        // $jQuery('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery();
+
+//                        init_preprocess(event);
+
 //                      }); // Support for Jetpack's Infinite Scroll,
  
-//                      $(document.body).on('post-load', function () {
-//                        $('.woo-variation-gallery-wrapper:not(.woo-variation-gallery-product-type-variable):not(.wvg-loaded)').WooVariationGallery();
+//                      $jQuery(document.body).on('post-load', function (event) {
+//                        // $jQuery('.woo-variation-gallery-wrapper:not(.woo-variation-gallery-product-type-variable):not(.wvg-loaded)').WooVariationGallery();
+
+//                        init_preprocess(event);
+
 //                      }); // YITH Quickview
  
-//                      $(document).on('qv_loader_stop', function () {
-//                        $('.woo-variation-gallery-wrapper:not(.woo-variation-gallery-product-type-variable):not(.wvg-loaded)').WooVariationGallery();
+//                      $jQuery(document).on('qv_loader_stop', function (event) {
+//                        // $jQuery('.woo-variation-gallery-wrapper:not(.woo-variation-gallery-product-type-variable):not(.wvg-loaded)').WooVariationGallery();
+
+//                        init_preprocess(event);
+
 //                      }); // Elementor
  
 //                      if (window.elementorFrontend && window.elementorFrontend.hooks) {
-//                        elementorFrontend.hooks.addAction('frontend/element_ready/woocommerce-product-images.default', function ($scope) {
-//                          $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery();
+//                        elementorFrontend.hooks.addAction('frontend/element_ready/woocommerce-product-images.default', function ($scope, event) {
+//                          // $jQuery('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery();
+                         
+//                          init_preprocess(event);
+
 //                        });
 //                      }
 //                  });     
@@ -2672,6 +2723,13 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
  
 //          /////////////////////////////////////////////////////        
  
+//      };
+
+//      var sp_slzm_init = function() {
+
+//         var sp_slzm_init_callback = null;
+//             window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'sp_slzm_init', {} , sp_slzm_init_callback);
+
 //      };
  
 //      // ACTIVE_TODO_OC_START
@@ -2694,7 +2752,7 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
 // if(window.document.splugins.common.is_item_page || window.document.splugins.common.is_category_page) {
 
 //     //  publish it 
-//     window.document.splugins.wbc.variations.gallery_images.api = window.document.splugins.wbc.variations.gallery_images.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
+//     window.document.splugins.wbc.variations.gallery_images.api = window.document.splugins.wbc.variations.gallery_images.core( {} );
 //     window.document.splugins.wbc.variations.gallery_images.api.init();
 
 // }
@@ -2704,79 +2762,79 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
 // //     --  and need to do the same for filter js and ssm variations class file -- to d 
 // // ACTIVE_TODO_OC_END  
 
-// // the variations sp_slzm js module
-// window.document.splugins.wbc.variations.gallery_images.sp_slzm = window.document.splugins.wbc.variations.gallery_images.sp_slzm || {};
+// the variations sp_slzm js module
+window.document.splugins.wbc.variations.gallery_images.sp_slzm = window.document.splugins.wbc.variations.gallery_images.sp_slzm || {};
 
-// window.document.splugins.wbc.variations.gallery_images.sp_slzm.core = function( configs ) {
+window.document.splugins.wbc.variations.gallery_images.sp_slzm.core = function( configs ) {
    
-//     var _this = this; 
+    var _this = this; 
     
-//     _this.init_callbacks = [];
-//     _this.refresh_callbacks = [];
-//     _this.zoom_callbacks = [];
+    _this.init_callbacks = [];
+    _this.refresh_callbacks = [];
+    _this.zoom_callbacks = [];
 
-//     var init_private = function(){
+    var init_private = function(){
 
-//         init_listener_private();
-//         refresh_listener_private();
-//     };
+        init_listener_private();
+        refresh_listener_private();
+    };
 
-//     var init_listener_private = function() {
+    var init_listener_private = function() {
     
-//         window.document.splugins.events.api.subscribeObserver( 'gallery_images', 'sp_slzm', 'sp_slzm_init',function(stat_object, notification_response){
+        window.document.splugins.events.api.subscribeObserver( 'gallery_images', 'sp_slzm', 'sp_slzm_init',function(stat_object, notification_response){
 
-//             jQuery(_this.init_callbacks).each(function (index,callback) {
+            jQuery(_this.init_callbacks).each(function (index,callback) {
 
-//                 callback();     
-//             });         
-//         });
+                callback();     
+            });         
+        });
 
-//     };
+    };
  
-//     var refresh_listener_private = function() {
+    var refresh_listener_private = function() {
 
-//         window.document.splugins.events.api.subscribeObserver( 'gallery_images', 'sp_slzm', 'sp_slzm_refresh',function(stat_object, notification_response){
+        window.document.splugins.events.api.subscribeObserver( 'gallery_images', 'sp_slzm', 'sp_slzm_refresh',function(stat_object, notification_response){
 
-//             jQuery(_this.refresh_callbacks).each(function (index,callback) {
+            jQuery(_this.refresh_callbacks).each(function (index,callback) {
 
-//                 callback();     
-//             });         
-//         });
+                callback();     
+            });         
+        });
 
-//         window.document.splugins.events.api.subscribeObserver( 'gallery_images', 'sp_slzm', 'sp_slzm_refresh_zoom',function(stat_object, notification_response){
+        window.document.splugins.events.api.subscribeObserver( 'gallery_images', 'sp_slzm', 'sp_slzm_refresh_zoom',function(stat_object, notification_response){
 
-//             jQuery(_this.zoom_callbacks).each(function (index,callback) {
+            jQuery(_this.zoom_callbacks).each(function (index,callback) {
 
-//                 callback();     
-//             });         
-//         });
-//     };
+                callback();     
+            });         
+        });
+    };
 
-//     return {
+    return {
  
-//         init: function(){
+        init: function(){
 
-//             init_private();
-//         },
+            init_private();
+        },
 
-//         init_listener: function(callback) {
+        init_listener: function(callback) {
 
-//             _this.init_callbacks.push(callback);
-//         },
+            _this.init_callbacks.push(callback);
+        },
  
-//         refresh_listener: function(callback) {
+        refresh_listener: function(callback) {
             
-//             _this.refresh_callbacks.push(callback);
-//         }
-//     };    
+            _this.refresh_callbacks.push(callback);
+        }
+    };    
  
-// };
+};
 
-// if(window.document.splugins.common.is_item_page || window.document.splugins.common.is_category_page) {
+if(window.document.splugins.common.is_item_page || window.document.splugins.common.is_category_page) {
     
-//     //  publish it 
-//     window.document.splugins.wbc.variations.gallery_images.sp_slzm.api = window.document.splugins.wbc.variations.gallery_images.sp_slzm.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
+    //  publish it 
+    window.document.splugins.wbc.variations.gallery_images.sp_slzm.api = window.document.splugins.wbc.variations.gallery_images.sp_slzm.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
 
-//     window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.init();
+    window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.init();
 
-// }
+}
