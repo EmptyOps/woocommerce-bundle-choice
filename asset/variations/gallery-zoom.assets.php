@@ -288,5 +288,5 @@ add_action( 'wp_enqueue_scripts' ,function(){
 		});
 	</script>
 <?php
-}, 10000);
+}, 1059);
 ?>

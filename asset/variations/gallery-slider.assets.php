@@ -112,6 +112,6 @@ add_action( 'wp_enqueue_scripts' ,function(){
         });
     </script>
 <?php
-},1000);
+},1049);
 ?>
 
