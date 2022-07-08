@@ -59,4 +59,4 @@ if(empty($image['extra_params_org']['type']) || $image['extra_params_org']['type
     }
 }
 
-$template = apply_filters( 'woocommerce_single_product_image_thumbnail_html',$template, $gallery_images_template_data['attachment_ids_loop_post_thumbnail_id'][$index] );
+$template = apply_filters( 'woocommerce_single_product_image_thumbnail_html',$template, $image['image_id'] );
