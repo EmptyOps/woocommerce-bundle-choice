@@ -784,7 +784,7 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
     // ACTIVE_TODO_OC_END
 
             
-            --  and then will do one more cycle finalizing the code implementation like confirming selector, find and so on statements, other such layers and definitely applying the remaining class structure everywhere -- to s 
+            // --  and then will do one more cycle finalizing the code implementation like confirming selector, find and so on statements, other such layers and definitely applying the remaining class structure everywhere -- to s done
 
     var init_private = function() {
 
@@ -797,13 +797,13 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
             preprocess( this, event );  
         });
 
-        below do apply our flows like -- to s 
+        // below do apply our flows like -- to s 
             // --  change with _this.base_container done
             // --  change $ with jQuery but only where it is used as $() var done
             // --  replace _ (underscore) js calls with sp_common._ done
             // --  replace loaded classs done
             // --  and other such matters if any done 
-            --  remove variation form
+            // --  remove variation form
             // Try to cover all ajax data complete
         jQuery(document).ajaxComplete(function (event, request, settings) {
           splugins._.delay(function () {
@@ -922,6 +922,7 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
                             --  and also for types of the extensions -- to t 
         ACTIVE_TODO_OC_END*/
 
+                /*ACTIVE_TODO_QC_START
                 our own heirachical structure -- to s and -- to a 
                     // --  the variable-items-wrapper loop below will work as type loop for us now, so implement similar there and comment from here -- to s done 
                         // --  and from within that loop all those functions will be called, and with function call pass the attribute type and if that is not available even in the variable-items-wrapper element then we will simply dump it there from our common woo attribute dropdown element -- to s done
@@ -937,7 +938,7 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
 
                 and some things that still is not came to the attention 
-
+                ACTIVE_TODO_QC_END*/
 
             // this.$element.find('ul.variable-items-wrapper').each(function (i, el) {
 
@@ -1070,12 +1071,6 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
             //     }
             //   });
             // // });
-
-
-            // check if below two events are been bound by anything -- to s done
-            this.$element.trigger('woo_variation_swatches_init', [this, this.product_variations]);
-
-            $(document).trigger('woo_variation_swatches_loaded', [this.$element, this.product_variations]);
           // }
 
     };
@@ -1120,23 +1115,6 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
     };
 
     var process_attribute_types = function( type=null, element=null ) {
-
-        
-
-        localize
-
-
-
-
-        localize the configs var(localize like we are doing during admin-js load and so on) with common js load -- to s 
-            --  it will host two vars for now below attribute_types, so call that function -- to s 
-                // --  and the function you call need to support one flag like is_base_type_only so pass that simply in the configs array as direct array -- to s done 
-            // --  it also need to host that very configs files, config function configs so add that too in the final configs array -- to s done
-                // --  so at first create the configs array at top and then we will keep adding the required var in it -- to s done
-            // --  and yeah it also need to have the template id param unde templates.slider.id and same for zoom. so create said level of elements in the configs array and look at the slider zoom models render core functions -- to s done
-            --  and at last set the configs below where it is exported, you can ask a if required -- to s 
-                --  actually the template vars will be required for the gallery_images module, so create config for that also and then set for that also where it is exported -- to s 
-                    --  gallery_images module will also have almost all similar vars, except that it will have additional tempalte var -- to s 
 
         // Append Selected Item Template
         if (_this.configs.options.show_variation_label) { 
@@ -1191,19 +1169,19 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
                     // if( type == 'radio' ) 
 
                     // ACTIVE_TODO_OC_START    
-                    //     -   configs 
-                    //             --  will control decision of whether to display certain section or not, for example whether to display template part of attribute name (for us ribbon wrapper)
-                    //             --  or whether to show tooltip or not 
+                    // //     -   configs 
+                    // //             --  will control decision of whether to display certain section or not, for example whether to display template part of attribute name (for us ribbon wrapper)
+                    // //             --  or whether to show tooltip or not 
 
-                    // --  it wil be a specific block here for devices and configs -- to d 
-                    // --  while for the rest create dedicated functions like process_template, process_events and so on. for the layers listed below. 
-                        --  create below list of functions after the process_attribute_types function, and apply above peudo flows there and rest of the flows those functions should adapt from the flow notes from the heirachical flow plan at top -- to d and -- to h 
-                    //         // -- process_template -- to d done
-                    //         // -- process_pages -- to d done
-                    //         // -- process_slider_and_zoom -- to d done
-                    //         // -- process_events -- to d done
-                    //         // -- process_and_manage_effects -- to d done
-                    //         // -- process_compatability_matters -- to d done
+                    // // --  it wil be a specific block here for devices and configs -- to d 
+                    // // --  while for the rest create dedicated functions like process_template, process_events and so on. for the layers listed below. 
+                    //     --  create below list of functions after the process_attribute_types function, and apply above peudo flows there and rest of the flows those functions should adapt from the flow notes from the heirachical flow plan at top -- to d and -- to h 
+                    // //         // -- process_template -- to d done
+                    // //         // -- process_pages -- to d done
+                    // //         // -- process_slider_and_zoom -- to d done
+                    // //         // -- process_events -- to d done
+                    // //         // -- process_and_manage_effects -- to d done
+                    // //         // -- process_compatability_matters -- to d done
                     // ACTIVE_TODO_OC_END  
 
                 }      
@@ -1320,7 +1298,10 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
         data.selects = [];
         data.disabled_selects = [];
         data.out_of_stock_selects = [];
-        data.$selected_variation_item = jQuery(element).parent().prev().find('.woo-selected-variation-item-name');
+        if (_this.configs.options.show_variation_label) {
+            // ACTIVE_TODO need to manage selector and we need to do it after the selected template task in template secion above is covered 
+            $selected_variation_item = jQuery(element).parent().prev().find('.woo-selected-variation-item-name');
+        }
        
         // this need to be moved to compatability function, so from here there would be call to the compatability function -- to s done
         // attribute_template
@@ -1374,7 +1355,7 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
                 jQuery(inner_element).addClass('selected');
                 jQuery(inner_element).attr('aria-checked', 'true');
 
-                if (woo_variation_swatches_options.show_variation_label) {
+                if (_this.configs.options.show_variation_label) {
                     $selected_variation_item.text(woo_variation_swatches_options.variation_label_separator + ' ' + data.attribute_title);
                 }
 
@@ -1637,14 +1618,20 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
                   if (params && params.radioChange) {
 
                         var value = jQuery(element_inner).val();
-                        var is_selected = jQuery(element_inner).parent('li.spui-wbc-swatches-variable-item-radio').hasClass('selected');
+
+                        var is_selected = jQuery(element_inner).parent('li.spui-wbc-swatches-variable-item-radio, .spui-wbc-swatches-variable-item-radio').hasClass('selected');
 
                         if (is_selected) {
                           select.val('').trigger('change');
-                          jQuery(element_inner).parent('li.spui-wbc-swatches-variable-item-radio').trigger('wvs-selected-item', [value, select, _this.$element]); // Custom Event for li
+
+                          // ACTIVE_TODO we do not need this, drop below commentd code after 2 revision 
+                          // jQuery(element_inner).parent('li.spui-wbc-swatches-variable-item-radio').trigger('wvs-selected-item', [value, select, _this.$element]); // Custom Event for li
+
                         } else {
                           select.val(value).trigger('change');
-                          jQuery(element_inner).parent('li.spui-wbc-swatches-variable-item-radio').trigger('wvs-selected-item', [value, select, _this.$element]); // Custom Event for li
+
+                          // ACTIVE_TODO we do not need this, drop below commentd code after 2 revision 
+                          // jQuery(element_inner).parent('li.spui-wbc-swatches-variable-item-radio').trigger('wvs-selected-item', [value, select, _this.$element]); // Custom Event for li
                         }
 
                         select.trigger('click');
@@ -1678,8 +1665,8 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
                   }
 
                   // Radio
-                  jQuery(element_inner).parent('li.spui-wbc-swatches-variable-item-radio').removeClass('selected disabled').addClass('selected');
-                  jQuery(element_inner).parent('li.spui-wbc-swatches-variable-item-radio').trigger('wvs-selected-item', [value, select, _this.$element]); // Custom Event for li
+                  jQuery(element_inner).parent('li.spui-wbc-swatches-variable-item-radio,.spui-wbc-swatches-variable-item-radio').removeClass('selected disabled').addClass('selected');
+                  jQuery(element_inner).parent('li.spui-wbc-swatches-variable-item-radio,.spui-wbc-swatches-variable-item-radio').trigger('wvs-selected-item', [value, select, _this.$element]); // Custom Event for li
 
                   on_change(type, element_inner, event);
 
@@ -1721,6 +1708,7 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
         if (reselect_clear) {
 
             // Non Selected Item Should Select
+            // ACTIVE_TODO here we need to manage non li templates
             jQuery(element).on(mouse_event_name, 'li:not(.selected):not(.radio-variable-item):not(.spui-wbc-swatches-variable-item-more)', function (event, element_inner) {
               // e.preventDefault();
               // e.stopPropagation();
@@ -1741,6 +1729,7 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
             });
 
             // Selected Item Should Non Select
+            // ACTIVE_TODO here we need to manage non li templates
             jQuery(element).on(mouse_event_name, 'li.selected:not(.radio-variable-item):not(.spui-wbc-swatches-variable-item-more)', function (event, element_inner) {
               // e.preventDefault();
               // e.stopPropagation();
@@ -1908,8 +1897,8 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
     var click = function(type, element, event, reselect_clear, is_selected_selctor) {
 
         if(reselect_clear) {
-            e.preventDefault();
-            e.stopPropagation();
+            event.preventDefault();
+            event.stopPropagation();
             var value = null;
 
             if (is_selected_selctor == true) {
@@ -1941,7 +1930,7 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
             if(type == 'radio') {
                 
-                e.stopPropagation();
+                event.stopPropagation();
                 jQuery(element_inner).trigger('change', { radioChange: true });
             }
 
@@ -2004,7 +1993,9 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
         } else if (section == 'attribute_options'){
 
             if (options.length < 1) {
-                object.data.select = jQuery(object.element).parent().find('select.woo-variation-raw-select');
+                // ACTIVE_TODO it will not work for our dropdown type, so need to manage that may be simply using if for that type so that stability of this default statemnet is not efected
+                // object.data.select = jQuery(object.element).parent().find('select.woo-variation-raw-select');
+                object.data.select = jQuery(object.element).closest('select.woo-variation-raw-select');
                 object.data.options = select.find('option');
                 object.data.disabled = select.find('option:disabled');
                 object.data.out_of_stock = select.find('option.enabled.out-of-stock');
@@ -2030,7 +2021,7 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 if(window.document.splugins.common.is_item_page || window.document.splugins.common.is_category_page) {
     jQuery(ducument).ready(function() {
         //  publish it 
-        window.document.splugins.wbc.variations.swatches.api = window.document.splugins.wbc.variations.swatches.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
+        window.document.splugins.wbc.variations.swatches.api = window.document.splugins.wbc.variations.swatches.core( common_configs.swatches_config );
 
         window.document.splugins.wbc.variations.swatches.api.init();
     } );
@@ -2062,7 +2053,7 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
          // --  and the first statement need to be moved to init_private, but anyway comment that there after moving -- to a done
              // --  and instead of that create our planned module for external slider and zoom inside common js for now -- to a. done
                  // --  it will have name sp_slzm, actually search with sp_slzm and there are related tasks above -- to a done
-                 --  and then as mentioned there call the init function of api from appropriate place, but I think it is not mentioned there and we need to decide right place if there is better place then above mentioned init_private location -- to a 
+                 // --  and then as mentioned there call the init function of api from appropriate place, but I think it is not mentioned there and we need to decide right place if there is better place then above mentioned init_private location -- to a done 
  
      ///////////////////////////////////////////////////////
  
@@ -2078,15 +2069,6 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
  
     };
  
-    var legacyBinding? = function() {
- 
-         remove this entire legacyBinding function, once the variation change event is bound from below functions of this module -- to a 
-         jQuery('#select_attribute_of_variation').on('woocommerce_variation_has_changed', function(){
-             // do your magic here...
-          }); 
- 
-    };
-
     var init_preprocess = function(event) {
 
         if(jQuery(_this.configs.base_container+':not(.spui-wbc-gallery_images-product-type-variable):not(.spui-wbc-gallery_images-loaded)').length>0) {
@@ -2829,7 +2811,7 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
 
     jQuery(document).ready(function() {
         //  publish it 
-        window.document.splugins.wbc.variations.gallery_images.api = window.document.splugins.wbc.variations.gallery_images.core( {} );
+        window.document.splugins.wbc.variations.gallery_images.api = window.document.splugins.wbc.variations.gallery_images.core( common_configs.gallery_images_configs );
         window.document.splugins.wbc.variations.gallery_images.api.init();
     });
 
