@@ -1,5 +1,6 @@
 <?php
 add_action( 'wp_enqueue_scripts' ,function(){
+
 	if (wbc_is_mobile()) {
 
 		wbc()->load->asset('css','variations/gallery_images/external-plugins/xzoom/xzoom',array(),"",false,true);
@@ -22,6 +23,7 @@ add_action( 'wp_enqueue_scripts' ,function(){
 		<?php
 	} else { ?> 
 
+?> 
 		<!-- ---- a code /themes/purple_theme/woocommerce/content-single-product.php no che 
 		-- zoom no
 		 -->
@@ -78,21 +80,38 @@ add_action( 'wp_enqueue_scripts' ,function(){
 
 			    };
 
-		        if(typeof(jQuery.fn.imagezoomsl)!=='function'){
-					let script = document.createElement('script');
-					script.src = "<?php echo constant( strtoupper( 'EOWBC_ASSET_URL' ) ).'js/variations/gallery_images/external-plugins/zoomsl/zoomsl.min.js'; ?>";
-					document.head.append(script);
+		  //       if(typeof(jQuery.fn.imagezoomsl)!=='function'){
+				// 	let script = document.createElement('script');
+					// script.src = "<?php /*echo constant( strtoupper( 'EOWBC_ASSET_URL' ) ).'js/variations/gallery_images/external-plugins/zoomsl/zoomsl.min.js';*/ ?>";
+				// 	document.head.append(script);
 
-			        window.setTimeout(function(){
+			 //        window.setTimeout(function(){
 
-	       			    bind_listeners();
+	   //     			    bind_listeners();
 
-			        },2000);	
+			 //        },2000);	
 
-				} else {
+				// } else {
 
-				    bind_listeners();
-				}
+				//     bind_listeners();
+				// }
+				jQuery( window ).on('load', function() {
+					if(typeof(jQuery.fn.imagezoomsl)!=='function'){
+						let script = document.createElement('script');
+						script.src = "<?php echo constant( strtoupper( 'EOWBC_ASSET_URL' ) ).'js/variations/gallery_images/external-plugins/zoomsl/zoomsl.min.js'; ?>";
+						document.head.append(script);
+
+				        window.setTimeout(function(){
+
+		       			    bind_listeners();
+
+				        },2000);	
+
+					} else {
+
+					    bind_listeners();
+					}
+				});
 
 		        window.addEventListener('error', function(e){
 
@@ -270,6 +289,7 @@ add_action( 'wp_enqueue_scripts' ,function(){
 			}
 		</style>
 		<script type="text/javascript">
+			// ACTIVE_TODO zoom asset.php ma last ma ek script haji rai gai, te I thikn similar che but please confirm -- to a 
 			jQuery(document).ready(function(){
 				//zoom
 			    
@@ -288,7 +308,6 @@ add_action( 'wp_enqueue_scripts' ,function(){
 			        let script = document.createElement('script');
 			        script.src = "https://demo.woochoiceplugin.com/jewelry-demo-1/wp-content/themes/purple_theme/assets/js/N-product/zoomsl.min.js";
 			        document.head.append(script);
-
 			        window.setTimeout(function(){
 			          jQuery(".big-img").imagezoomsl({
 			                // zoomrange:[3,3],

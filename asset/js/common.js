@@ -78,10 +78,18 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
  
  window.document.splugins.common._b = function(binding_stats, event, key) {
      
+     // console.log("_b called");
+     // console.log(binding_stats );
+
      binding_stats[event] = binding_stats[event]  || {};
+
+     // console.log(binding_stats );
+
  
-     if(typeof( binding_stats[event][key]) == undefined){
- 
+     if( !window.document.splugins.common._o(binding_stats[event], key) ){
+    
+     // console.log("_b called if");
+
           binding_stats[event][key] = true;
           return false;
  
@@ -112,20 +120,23 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
  window.document.splugins.events.subject = window.document.splugins.events.subject || {};
  
  window.document.splugins.events.subject.core = function( feature_unique_key, notifications ) {
-     this.feature_unique_key = feature_unique_key;
-     this.notifications = notifications;     // [];    //  list of notifications it can notify for.  
-     this.observers = [];
 
- 
+    var _this = this;
+
+     _this.feature_unique_key = feature_unique_key;
+     _this.notifications = notifications;     // [];    //  list of notifications it can notify for.  
+     _this.observers = [];
+
+
      return {
          feature_unique_key: function() {
      
-             return this.feature_unique_key;
+             return _this.feature_unique_key;
          },    
          subscribeObserver: function(observer) {
              // ACTIVE_TODO here check the callbacks of observer first and if this subject is not supporting the notifications for particular callback then simply throw error and do not subscriber the observer 
      
-             this.observers.push(observer);
+             _this.observers.push(observer);
 
              return observer;
          },
@@ -144,15 +155,15 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
              // }
          },
          notifyAllObservers: function(notification, stat_object, notification_response) {
-             for(var i = 0; i < this.observers.length; i++){
-                 this.observers[i].notify(i, notification, stat_object, notification_response);
+             for(var i = 0; i < _this.observers.length; i++){
+                 _this.observers[i].notify(i, notification, stat_object, notification_response);
              };
          },
          get_observer: function(subscriber_key) {
             
             var found_index = null;
-            for(var i = 0; i < this.observers.length; i++){
-               if( this.observers[i].subscriber_key() == subscriber_key ) {
+            for(var i = 0; i < _this.observers.length; i++){
+               if( _this.observers[i].subscriber_key() == subscriber_key ) {
 
                     found_index = i;
                     break;
@@ -164,25 +175,29 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
                 return null;
             } else {
 
-                return this.observers[found_index];
+                return _this.observers[found_index];
             }
          }
      };
  };
  
+ // NOTE: below statement will not have any use since we need to export separate modules for each subujects, it is necesary for cleanlieness. and same is applicable for other modules of events namespace like observer and so on. 
  //  publish it 
- window.document.splugins.events.subject.api = window.document.splugins.events.subject.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
+ window.document.splugins.events.subject.api = window.document.splugins.events.subject.core( {} );
  
  window.document.splugins.events.observer = window.document.splugins.events.observer || {};
  
  window.document.splugins.events.observer.core = function(subscriber_key) {
-    this.subscriber_key = subscriber_key; 
-    this.callbacks = {};     // [];    //  list of notifications callbacks it waits for. 
+
+    var _this = this;
+
+    _this.subscriber_key = subscriber_key; 
+    _this.callbacks = {};     // [];    //  list of notifications callbacks it waits for. 
  
     return {
         subscriber_key: function() {
      
-            return this.subscriber_key;
+            return _this.subscriber_key;
         },  
         notify: function(index, notification, stat_object, notification_response) {
             // console.log("Observer " + index + " is notified!");
@@ -193,24 +208,27 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
             // this.observers.splice(index, 1);
             // }
 
-            if(window.document.splugins.common._o( this.callbacks, notification)){
+            if(window.document.splugins.common._o( _this.callbacks, notification)){
 
-                this.callbacks[notification](stat_object, notification_response);
+                _this.callbacks[notification](stat_object, notification_response);
             }
         },
         subscribe_notification: function(notification, callback) {
             
-            this.callbacks[notification] = callback;
+            _this.callbacks[notification] = callback;
         },
 
     }
  }
  
  //  publish it 
- window.document.splugins.events.observer.api = window.document.splugins.events.observer.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
+ window.document.splugins.events.observer.api = window.document.splugins.events.observer.core( {} );
  
  window.document.splugins.events.core = function() {
-     this.subjects = [];
+
+    var _this = this;
+
+     _this.subjects = [];
  
      return {
  
@@ -223,7 +241,7 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
              // this.observers.splice(index, 1);
              // }
  
-             this.subjects.push( new window.document.splugins.events.subject( feature_unique_key, notifications ) );
+             _this.subjects.push( window.document.splugins.events.subject.core( feature_unique_key, notifications ) );
          },
          
          subscribeObserver: function(feature_unique_key, subscriber_key, notification_key, callback) {
@@ -231,29 +249,33 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
  
              // before subscribing the ovserver check if the feature_unique_key subject is created in the first place, if not then throw error 
              var found_index = null;
-             for(var i = 0; i < this.subjects.length; i++){
-                 if( this.subjects[i].feature_unique_key() == feature_unique_key ) {
+             for(var i = 0; i < _this.subjects.length; i++){
+                 if( _this.subjects[i].feature_unique_key() == feature_unique_key ) {
  
                      found_index = i;
                      break;
                  }
              }
- 
-             if( found_index == -1 ) {
+
+             if( found_index == null || found_index == -1 ) {
  
                  throw "There is no subject exist for specified feature_unique_key "+feature_unique_key;
 
              } else {
+
+                console.log('found_index '+found_index);
+                console.log('found_index_subject '+_this.subjects[found_index]);
+
                 
-                var observer = this.subjects[found_index].get_observer( subscriber_key );
+                var observer = _this.subjects[found_index].get_observer( subscriber_key );
                 
                 if(observer != null) {
 
-                    observer = this.subjects[found_index].subscribeObserver( observer );
+                    observer = _this.subjects[found_index].subscribeObserver( observer );
 
                 } else {
 
-                    observer = this.subjects[found_index].subscribeObserver( new window.document.splugins.events.observer( subscriber_key ) );
+                    observer = _this.subjects[found_index].subscribeObserver( window.document.splugins.events.observer.core( subscriber_key ) );
 
                 }
 
@@ -268,8 +290,8 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
  
              // check if the feature_unique_key subject is created in the first place, if not then throw error 
              var found_index = null;
-             for(var i = 0; i < this.subjects.length; i++){
-                 if( this.subjects[i].feature_unique_key() == feature_unique_key ) {
+             for(var i = 0; i < _this.subjects.length; i++){
+                 if( _this.subjects[i].feature_unique_key() == feature_unique_key ) {
  
                      found_index = i;
                      break;
@@ -281,7 +303,7 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
                  throw "There is no subject exist for specified feature_unique_key "+feature_unique_key;
              } else {
  
-                 this.subjects[found_index].notifyAllObservers( notification, stat_object, notification_response );
+                 _this.subjects[found_index].notifyAllObservers( notification, stat_object, notification_response );
              }
          }
  
@@ -371,7 +393,10 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
  window.document.splugins.compatability = window.document.splugins.compatability || {};
  
  window.document.splugins.compatability.core = function(configs) {
-     this.configs = jQuery.extend({}, {}/*default configs*/, configs);   
+
+    var _this = this;
+
+     _this.configs = jQuery.extend({}, {}/*default configs*/, configs);   
  
      var get_template = function( tmpl_id, templating_lib ) {
  
@@ -487,6 +512,13 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
  //                        --  and the extension types should also provide the templates for it -- to s 
  //                        --  and it will always be loaded from the loop base file -- to s 
  //                            --  (now its better to rename that templates to wrapper(we already named it ribbon wrapper so that is fine), the second would be variable-item-loop and third would be variable-item-loop-content), but still lets keep it as ACTIVE_TODO since there are many other priorities -- to s 
+ //            --  the very swatches templates 
+ //                --  it seems that we have no other option but to do the ui/li based templates very soon, because otherwise with other elements we need to avoid many other nodes by means of updating selectors and so on. so it is better we simply add ul/li layers and simply stick to that since that is standard. 
+ //                        --  but we should confirm once if we actually need to do it, and it will not be so challanging. but if we want to do then we should do asap otherwise we will waste time firstly in managing the div other such nodes. 
+ //                    --  so if we confirm to do then t please convert all templates of wbc and extension to ul/li -- to t 
+ //                        --  I think for wbc you can not change any node since that is semantic ui but you can simply add the ul/li in there -- to t 
+ //                    --  and once that is done we need to update the ui array -- to s 
+ //                        --  and together with that just move the classes to the ul/li only, so you only should do this task -- to s 
  //         -   pages 
  //             // -- category page 
  //             // -- item page 
@@ -788,14 +820,23 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
     var init_private = function() {
 
-        // window.document.splugins.events.api.createSubject( 'swatches', ['process_attribute_types', 'sp_variations_swatches_loaded'] );
+        window.document.splugins.events.api.createSubject( 'swatches', ['process_attribute_types', 'sp_variations_swatches_loaded'] );
+
+        console.log("init_private");
 
         // init on all applicable events 
-        jQuery(document).on('wc_variation_form', _this.base_container+':not(.spui-wbc-swatches-loaded)', function (event) {
+        jQuery(document).on('wc_variation_form', '.variations_form:not(.spui-wbc-swatches-loaded)', function (event) {
+
+            console.log("init_private wc_variation_form event");
+
 
             //  had we used the _jQueryInterface style the _jQueryInterface call would have started from here 
             preprocess( this, event );  
         });
+
+        // ACTIVE_TODO temp. 
+        // jQuery('.variations_form').wc_variation_form();
+        preprocess( jQuery('.variations_form'), event );  
 
         // below do apply our flows like -- to s 
             // --  change with _this.base_container done
@@ -805,9 +846,13 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
             // --  and other such matters if any done 
             // --  remove variation form
             // Try to cover all ajax data complete
+        console.log("init_private before ajaxComplete");
+
         jQuery(document).ajaxComplete(function (event, request, settings) {
+            console.log("init_private inner ajaxComplete");
+
           splugins._.delay(function () {
-            jQuery(_this.base_container+':not(.spui-wbc-swatches-loaded)').each(function () {
+            jQuery('.variations_form:not(.spui-wbc-swatches-loaded)').each(function () {
               jQuery(this).wc_variation_form();
             });
           }, 100);
@@ -815,12 +860,18 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
         // Composite product load
         // JS API: https://docs.woocommerce.com/document/composite-products/composite-products-js-api-reference/
+
+        console.log("init_private before wc-composite-initializing");
+
         jQuery(document.body).on('wc-composite-initializing', '.composite_data', function (event, composite) {
+
+            console.log("init_private after wc-composite-initializing");
+
           composite.actions.add_action('component_options_state_changed', function (self) {
            
             // ACTIVE_TODO whenever we remove loaded classs we also need to flush bindingf stats and also turn of event binding -- to s
                 // ACTIVE_TODO same for gallery_images module -- to a
-            jQuery(self.$component_content).find(_this.base_container).removeClass('spui-wbc-swatches-loaded .spui-wbc-swatches-pro__type__-loaded');
+            jQuery(self.$component_content).find('.variations_form').removeClass('spui-wbc-swatches-loaded .spui-wbc-swatches-pro__type__-loaded');
           });
 
           /* composite.actions.add_action('active_scenarios_updated', (self) => {
@@ -834,13 +885,19 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
         // so a call from here to the compatability function of this module, and that will cover all compatability matters of load time inlcuding the promize resolve block of the plugin we were exploring. so call compatability with section=preprocess -- to d done
             // ACTIVE_TODO we nedd to add promise resolve as required -- to s
-        compatability('preprocess');
+        compatability('init_private');
         // ACTIVE_TODO_OC_END
 
         // WooCommerce Filter Nav
+
+        console.log("init_private before aln_reloaded");
+
         jQuery('body').on('aln_reloaded', function () {
+        
+            console.log("init_private inner aln_reloaded");
+
           splugins._.delay(function () {
-            jQuery(_this.base_container+':not(.spui-wbc-swatches-loaded)').each(function () {
+            jQuery('.variations_form:not(.spui-wbc-swatches-loaded)').each(function () {
               jQuery(this).wc_variation_form();
             });
           }, 100);
@@ -859,7 +916,6 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
         _this.data.is_ajax_variation = _this.data.product_variations.length < 1;
         _this.data.product_id = _this.$base_element.data('product_id');
-              this.reset_variations = this.$element.find('.reset_variations');
 
         _this.$base_element.addClass('spui-wbc-swatches-loaded');
 
@@ -1103,12 +1159,12 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
             }
         });
 
-        data.in_stocks = splugins._.difference(selects, disabled_selects);
+        data.in_stocks = splugins._.difference(data.selects, data.disabled_selects);
 
         // console.log('out of stock', out_of_stock_selects)
         // console.log('in stock', in_stocks)
 
-        data.available = splugins._.difference(in_stocks, out_of_stock_selects);
+        data.available = splugins._.difference(data.in_stocks, data.out_of_stock_selects);
 
         return data;
 
@@ -1124,7 +1180,7 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
           });
         }
 
-        if(type != null){
+        if(type == null){
 
             // _this.data.attribute_types.each( function( i, type ) {
             _this.$base_element.find('ul.spui-wbc-swatches-variable-item,.spui-wbc-swatches-variable-item').each(function (i, element) {
@@ -1277,16 +1333,16 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
         data.select = jQuery(element).siblings('select.woo-variation-raw-select');
         data.selected = '';
-        data.options = select.find('option');
-        data.disabled = select.find('option:disabled');
-        data.out_of_stock = select.find('option.enabled.out-of-stock');
-        data.current = select.find('option:selected');
-        data.eq = select.find('option').eq(1);
+        data.options = data.select.find('option');
+        data.disabled = data.select.find('option:disabled');
+        data.out_of_stock = data.select.find('option.enabled.out-of-stock');
+        data.current = data.select.find('option:selected');
+        data.eq = data.select.find('option').eq(1);
 
 
         // ACTIVE_TODO we do not have any more (class woo-variation-swatches-variable-item-more) class related flow yet. but t you need to first plan the template structure -- to t
             // ACTIVE_TODO -- then once template ready then implaemnt on php side and do the needful on js layers -- to s
-        data.inner_element = jQuery(element).find('inner_element:not(.spui-wbc-swatches-variable-item-more)');
+       /* data.*/inner_list = jQuery(element).find('li:not(.spui-wbc-swatches-variable-item-more),div:not(.spui-wbc-swatches-variable-item-more)');
             // ACTIVE_TODO however note that, for this once t gives conclusion our final implementation will follow -- to t 
         data.reselect_clear = jQuery(element).hasClass('reselect-clear');
 
@@ -1316,13 +1372,9 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
         var object = compatability('attribute_options', {'element':element, 'data':data});
         data = object.data;
 
-        data.options = options;
-        data.disabled = disabled;
-        data.out_of_stock = out_of_stock;
-
         data = process_attribute_data(type, element, data, mode);
         
-        inner_list.each(function (index, inner_element, ) {
+        inner_list.each(function (index, inner_element ) {
 
             data.attribute_value = jQuery(inner_element).attr('data-value');
             data.attribute_title = jQuery(inner_element).attr('data-title');
@@ -1372,6 +1424,9 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
             }
         });
         // });
+
+        on_change_listener(type, element, data.reselect_clear); 
+
     };
 
 
@@ -1399,7 +1454,7 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
     var process_events = function(type, element){
 
-        on_change_listener(type, element);    
+        // on_change_listener(type, element);    
 
         on_click_listener(type, element);
 
@@ -1427,7 +1482,7 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
     // -   events 
     // --  mouse events 
-    var on_change_listener = function(type, element) {
+    var on_change_listener = function(type, element, reselect_clear) {
 
         if(window.document.splugins.common._b(_this.binding_stats, 'on_change_listener', type)){
             return false;
@@ -1676,9 +1731,12 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
     };
 
-    var on_click_listener = function(type, element) {
+    var on_click_listener = function(type, element, reselect_clear) {
+        console.log("on_click_listener");
 
         if(window.document.splugins.common._b(_this.binding_stats, 'on_click_listener', type)){
+        console.log("on_click_listener inner if");
+
             return false;
         }
         
@@ -1705,11 +1763,19 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
             ACTIVE_TODO_OC_END*/
         // Trigger Select event based on list
 
+        console.log("on_click_listener binding");
+
         if (reselect_clear) {
+
+            console.log("on_click_listener reselect_clear");
 
             // Non Selected Item Should Select
             // ACTIVE_TODO here we need to manage non li templates
-            jQuery(element).on(mouse_event_name, 'li:not(.selected):not(.radio-variable-item):not(.spui-wbc-swatches-variable-item-more)', function (event, element_inner) {
+            jQuery(element).on(mouse_event_name, 'li:not(.selected):not(.radio-variable-item):not(.spui-wbc-swatches-variable-item-more),div:not(.selected):not(.radio-variable-item):not(.spui-wbc-swatches-variable-item-more)', function (event, element_inner) {
+
+                console.log("on_click_listener reselect_clear li, div");
+
+
               // e.preventDefault();
               // e.stopPropagation();
               // var value = jQuery(element_inner).data('value');
@@ -1730,7 +1796,12 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
             // Selected Item Should Non Select
             // ACTIVE_TODO here we need to manage non li templates
-            jQuery(element).on(mouse_event_name, 'li.selected:not(.radio-variable-item):not(.spui-wbc-swatches-variable-item-more)', function (event, element_inner) {
+                // ACTIVE_TODO for the notes below event is most likely also used for category page or is maybe for category page only, so we may need to apply category page condition as applicable.
+            jQuery(element).on(mouse_event_name, 'li.selected:not(.radio-variable-item):not(.spui-wbc-swatches-variable-item-more),div.selected:not(.radio-variable-item):not(.spui-wbc-swatches-variable-item-more)', function (event, element_inner) {
+
+                console.log("on_click_listener reselect_clear li, selected, div");
+
+
               // e.preventDefault();
               // e.stopPropagation();
 
@@ -1792,7 +1863,9 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
             });*/
         } else {
 
-            jQuery(element).on(mouse_event_name, 'li:not(.radio-variable-item):not(.spui-wbc-swatches-variable-item-more)', function (event, element_inner) {
+            jQuery(element).on(mouse_event_name, 'li:not(.radio-variable-item):not(.spui-wbc-swatches-variable-item-more),div:not(.radio-variable-item):not(.spui-wbc-swatches-variable-item-more)', function (event, element_inner) {
+
+                console.log("on_click_listener else li, selected, div");
 
               // event.preventDefault();
               // event.stopPropagation();
@@ -1833,7 +1906,7 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
     var on_reset_listener = function(type, element) {
 
-        jQuery(_this.base_container).on('click', '.reset_variations'/*'woocommerce_variation_select_change'*//*'reset'*/,function(){
+        jQuery('.variations_form').on('click', '.reset_variations'/*'woocommerce_variation_select_change'*//*'reset'*/,function(){
 
             // ACTIVE_TODO neet to implement reset logic as applicable, need to confirm all reset flows of plugin we are exploring and also uncomment below m code if required and move to base reset function. -- to h & -- to s
             // jQuery('.variable-items-wrapper .selected').removeClass('selected');
@@ -1984,23 +2057,29 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
         //     --  that other plugin have some more theme specific patch fix, and some other patch for managing unexpected effects like blink and so on -- to d    
         // ACTIVE_TODO_OC_END    
 
-        if(section == 'preprocess'){
+        if(section == 'init_private'){
+
+            console.log("compatability before yith_infs_added_elem");
+
             jQuery(document).on('yith_infs_added_elem', function () {
-              jQuery(_this.base_container+':not(.spui-wbc-swatches-loaded)').each(function () {
+
+                console.log("compatability inner yith_infs_added_elem");
+
+              jQuery('.variations_form:not(.spui-wbc-swatches-loaded)').each(function () {
                 jQuery(this).wc_variation_form();
               });
             });
         } else if (section == 'attribute_options'){
 
-            if (options.length < 1) {
+            if (object.data.options.length < 1) {
                 // ACTIVE_TODO it will not work for our dropdown type, so need to manage that may be simply using if for that type so that stability of this default statemnet is not efected
                 // object.data.select = jQuery(object.element).parent().find('select.woo-variation-raw-select');
                 object.data.select = jQuery(object.element).closest('select.woo-variation-raw-select');
-                object.data.options = select.find('option');
-                object.data.disabled = select.find('option:disabled');
-                object.data.out_of_stock = select.find('option.enabled.out-of-stock');
-                object.data.current = select.find('option:selected');
-                object.data.eq = select.find('option').eq(1);
+                object.data.options = object.data.select.find('option');
+                object.data.disabled = object.data.select.find('option:disabled');
+                object.data.out_of_stock = object.data.select.find('option.enabled.out-of-stock');
+                object.data.current = object.data.select.find('option:selected');
+                object.data.eq = object.data.select.find('option').eq(1);
             }
 
         }
@@ -2019,11 +2098,18 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 };
 
 if(window.document.splugins.common.is_item_page || window.document.splugins.common.is_category_page) {
-    jQuery(document).ready(function() {
-        //  publish it 
-        window.document.splugins.wbc.variations.swatches.api = window.document.splugins.wbc.variations.swatches.core( common_configs.swatches_config );
 
-        window.document.splugins.wbc.variations.swatches.api.init();
+    jQuery(document).ready(function() {
+    
+        window.setTimeout(function(){
+
+            //  publish it 
+            window.document.splugins.wbc.variations.swatches.api = window.document.splugins.wbc.variations.swatches.core( common_configs.swatches_config );
+
+            window.document.splugins.wbc.variations.swatches.api.init();
+
+        },1000);    
+
     } );
 
 }
@@ -2037,13 +2123,18 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
  
     _this.configs = jQuery.extend({}, {}/*default configs*/, configs);  
 
-    _this.base_container = jQuery( ( window.document.splugins.common._o( _this.configs, 'base_container_selector') ? _this.configs.base_container_selector : ''  ) );     
- 
+    _this.base_container_selector = ( window.document.splugins.common._o( _this.configs, 'base_container_selector') ? _this.configs.base_container_selector : ''  );     
+
+    // NOTE: for the notes base_container object is the base_element if we consider it with analogy of _jQueryInterface style modules
+    _this.base_container = jQuery( _this.base_container_selector );     
  
     _this.data = {};
     _this.binding_stats = {};
  
- 
+
+    // NOTE: for products with simple type will not need this, but for variable products it will be needed. 
+    _this.data.current_variation = null;
+
      // and move below function at right place -- to a done
              // --  then need to call it from init_private function with section=init -- to a done
          // --  and remove the resolve part from it -- to a done
@@ -2055,12 +2146,14 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
      ///////////////////////////////////////////////////////
  
     var init_private = function() {
+
+        console.log(" gallery_images init_private ");
+
+        window.document.splugins.events.api.createSubject( 'gallery_images', ['process_images','sp_slzm_refresh', 'sp_variations_gallery_images_loaded', 'sp_slzm_init', 'sp_slzm_refresh_zoom', 'slider_thumb_click'] );
  
-        // window.document.splugins.events.api.createSubject( 'gallery_images', ['process_images','sp_slzm_refresh', 'sp_variations_gallery_images_loaded', 'sp_slzm_init', 'sp_slzm_refresh_zoom', 'slider_thumb_click'] );
- 
-            // // For Single Product
-            // $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery(); // Ajax and Variation Product
-            init_preprocess(null);
+        // // For Single Product
+        // $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery(); // Ajax and Variation Product
+        init_preprocess(null);
  
         compatability('init');
  
@@ -2068,9 +2161,13 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
  
     var init_preprocess = function(event) {
 
-        if(jQuery(_this.configs.base_container+':not(.spui-wbc-gallery_images-product-type-variable):not(.spui-wbc-gallery_images-loaded)').length>0) {
+        console.log(" gallery_images init_preprocess "+_this.base_container_selector);
 
-            preprocess(jQuery(_this.configs.base_container+':not(.spui-wbc-gallery_images-product-type-variable):not(.spui-wbc-gallery_images-loaded)'), event);
+        if(jQuery(_this.base_container_selector+':not(.spui-wbc-gallery_images-product-type-variable):not(.spui-wbc-gallery_images-loaded)').length>0) {
+
+            console.log(" gallery_images init_preprocess if ");
+
+            preprocess(jQuery(_this.base_container_selector+':not(.spui-wbc-gallery_images-product-type-variable):not(.spui-wbc-gallery_images-loaded)'), event);
 
         }
 
@@ -2078,6 +2175,8 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
  
     var preprocess = function(element, event) {
 
+
+        console.log(" gallery_images preprocess " );
 
         _this.base_element = element;
         _this.$base_element = jQuery( _this.base_element );
@@ -2088,9 +2187,26 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
             /*ACTIVE_TODO_OC_START
                  --  then I will tell you which to keep and which to drop -- to a 
             ACTIVE_TODO_OC_END*/
-         _this.$wrapper = _this.$base_element.closest('.product');  /*ACTIVE_TODO we may need to manage this selector stability.*/
-         _this.$variations_form = _this.$wrapper.find('.variations_form');
+            _this.$wrapper = _this.$base_element.closest('.product');  /*ACTIVE_TODO we may need to manage this selector stability.*/
+            _this.$variations_form = _this.$wrapper.find('.variations_form');
             
+        // ACTIVE_TODO_OC_START
+        // ACTIVE_TODO need to add produce class at the appropriate container, if rerequired then simply take a look at different theme demos of ours and at demos of other plugins we were exploring -- to t 
+        //     ACTIVE_TODO once the container is confirmed give its details to b or s to add it -- to b or -- to s 
+        //         ACTIVE_TODO and below conditional logic will go in compatability matters, and it will apply to all the themes. since it is about finding .product container -- to s 
+        //             --  ACTIVE_TODO and same for the variations_form and that will also go compatability matters for all the themes. and there is high chances that some theme might have the product class missing for the product container so lets do it asap -- to s 
+        // ACTIVE_TODO_OC_END
+        if( _this.$wrapper == null || _this.$wrapper.length == 0 ) {
+
+            _this.$wrapper = jQuery( '.product' );  //  ACTIVE_TODO need to mature workaround here, the body class might be so broad so maybe need to look for post class or woo post class hooks classes and consider them as selector. this selector matter may going to be so important. we wind out soon as we roll out -- to s
+        }
+        if( _this.$variations_form == null || _this.$variations_form.length == 0 ) {
+
+            _this.$variations_form = jQuery( 'form.variations_form' );  //  ACTIVE_TODO need to mature workaround here, or is it mature enough? -- to s
+        }
+
+        _this.data.product_variations = _this.$variations_form.data('product_variations') || [];      
+
                /*ACTIVE_TODO_OC_START
                this.$attributeFields = this.$variations_form.find('.variations select');
                this.$target = this._element.parent();
@@ -2203,8 +2319,11 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
              - listener events 
         ACTIVE_TODO_OC_END*/
 
-         return splugins._.debounce(function () {   
+        console.log(" gallery_images preprocess debounce called " );
+        splugins._.debounce(function () {   
  
+            console.log(" gallery_images debounce in  " );
+
             // since we are going to provide the refresh api for external slider and zoom so similarly we should provide the init api function also, and it would most like be from here -- to h or -- to s. from here means after all the preprocess and everything else is covered. done
                 // -- ACTIVE_TODO right now it is done from template functions, but if required then need to move init call after all function calls of events and effects are done. 
             
@@ -2231,11 +2350,14 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
             // ACTIVE_TODO_OC_END
             process_images();   
          
-        }, 500);
+        }, 500)();
 
     };
 
     var preprocess_data = function(data) {
+
+        console.log( " gallery_images preprocess_data ");
+        console.log( data.product_variations ); 
 
         data.types = [];
         jQuery( data.product_variations ).each(function (i, variation) {
@@ -2249,18 +2371,23 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
         });
         
         return data;
+    
     };
  
     var process_images = function(type=null, element=null) {
  
+        console.log(" gallery_images process_images " );
+
         // below types var neet to be prepaired in preprocess_data -- to a done
           // -- also neet to clear type managment in wbc variation class. simply set type in extra perance -- to b or -- to a done
             // -- also we neet to check base type flow and especially key to set , in shape config file -- to s done
 
-        if(type != null) {
+        if(type == null) {
             //  process images
-            jQuery( _this.data.types ).each( function( type_inner ) {
-     
+            jQuery( _this.data.types ).each( function( i, type_inner ) {
+    
+                console.log(" gallery_images process_images " + type_inner );
+ 
                  // ACTIVE_TODO_OC_START
                  // --  the key controller here in case of gallery_images module, for defining the calling sequences and flow will be, the image index(even though we had plan to use index but that is only when it is must to use that), otherwise there should be gallery_item_type field that take care implicitly the things like custom_html images for zoom area and so on 
                  //         --  so should we plan gallery_item_type field support? maybe it is good idea, to have such field support right from the config file function planned for each extensions, while for wbc gallery items like image and videos it will be gallery_item_type=image or video. -- to h 
@@ -2270,7 +2397,7 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
                  // is the woo input template type means dropdown is mandatorily kept by plugins, not seems likely but still confirm and then we need a way to determine(always) the exact input type based on the field/input type selected on woo panel or otherwise simply support the input_template_type field which will be set in background implicitly based on the field/input type selected on woo panel -- this field is simply better then managing many different template names of extensions and defining based on that -- and it will default to the above field/input type for wbc nothing to manage, only if condition below that if input_template_type is not defined then read simply above field/input type. and in case of extensions that need to be defined based on the template that is selected on their admin panel. so this template option should be only be defining it and passing it where applicable so that is gets here. and it is need to be defined based on that only to avoid confusion and many unnecessary and confusing configuration overheads. no simply need to stick to attribute type only means field/input-type selected on woo panel and that is standard and clean. so implement here based on that only. -- to h or -- to d 
                  // ACTIVE_TODO_OC_END
      
-                 if (splugins._.includes(_this.data.types, type_inner)) {
+                 if (splugins._.includes(_this.configs.types, type_inner)) {
                      
                     process_images_inner(type_inner, element);    
 
@@ -2524,11 +2651,11 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
  
          slider_thumb_click_listener(type);
  
-         zoom_area_hover_listener(tyep);
+         zoom_area_hover_listener(type);
  
          variation_change_listener(type);
  
-         reset_variation_change_listener(type);
+         reset_variation_listener(type);
  
     };
  
@@ -2622,6 +2749,7 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
         ACTIVE_TODO_OC_END*/
 
         slider_thumb_click(type,element);
+    
     };
  
     var on_zoom_area_hover = function(type) {
@@ -2732,8 +2860,8 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
              // ACTIVE_TODO_OC_END
  
      // -- base events - after the above events are handled by their particular function/layer, they would call below functions to do the ultimate work         
+        // NOTE : so far this not in use since base function variation change is handling all base logic but if requared central base logic of change couled be moved here 
      var change = function() {
- 
  
      };
  
@@ -2807,9 +2935,14 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
 if(window.document.splugins.common.is_item_page || window.document.splugins.common.is_category_page) {
 
     jQuery(document).ready(function() {
-        //  publish it 
-        window.document.splugins.wbc.variations.gallery_images.api = window.document.splugins.wbc.variations.gallery_images.core( common_configs.gallery_images_configs );
-        window.document.splugins.wbc.variations.gallery_images.api.init();
+
+        window.setTimeout(function(){
+
+            //  publish it 
+            window.document.splugins.wbc.variations.gallery_images.api = window.document.splugins.wbc.variations.gallery_images.core( common_configs.gallery_images_configs );
+            window.document.splugins.wbc.variations.gallery_images.api.init();
+
+        },1000);
     });
 
 }
@@ -2832,8 +2965,8 @@ window.document.splugins.wbc.variations.gallery_images.sp_slzm.core = function( 
 
     var init_private = function(){
 
-        // init_listener_private();
-        // refresh_listener_private();
+        init_listener_private();
+        refresh_listener_private();
     };
 
     var init_listener_private = function() {
@@ -2890,10 +3023,14 @@ window.document.splugins.wbc.variations.gallery_images.sp_slzm.core = function( 
 if(window.document.splugins.common.is_item_page || window.document.splugins.common.is_category_page) {
     
     jQuery(document).ready(function() {
-        //  publish it 
-        window.document.splugins.wbc.variations.gallery_images.sp_slzm.api = window.document.splugins.wbc.variations.gallery_images.sp_slzm.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
 
-        window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.init();
+        window.setTimeout(function(){
+
+            //  publish it 
+            window.document.splugins.wbc.variations.gallery_images.sp_slzm.api = window.document.splugins.wbc.variations.gallery_images.sp_slzm.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
+
+            window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.init();
+        }, 1000);
     });
 
 }
