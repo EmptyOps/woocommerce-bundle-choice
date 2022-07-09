@@ -10,9 +10,9 @@ printf( '<div class="variable-item-color-fill variable-item-span-%s" style="back
 
 
 
-
+$slug_or_option = is_object($term) ? $term->slug : $term;
 $template = array(
     'type' => 'div',
-    'class' => 'variable-item-color-fill variable-item-span-'.esc_attr( $variable_item_data['options_loop_type'][$term->slug] ),
-    'attr' => array( 'style' => 'background-color:'.esc_attr( $variable_item_data['options_loop_color'][$term->slug]['color'] ).';' ),
+    'class' => 'variable-item-color-fill variable-item-span-'.esc_attr( $variable_item_data['options_loop_type'][$slug_or_option] ),
+    'attr' => array( 'style' => 'background-color:'.esc_attr( $variable_item_data['options_loop_color'][$slug_or_option]['color'] ).';' ),
 );

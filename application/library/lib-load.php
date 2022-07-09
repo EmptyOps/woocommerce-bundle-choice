@@ -47,6 +47,30 @@ if(!class_exists('WBC_Loader')) {
 					$_path = constant('EOWBC_ASSET_URL').'js'.'/'.$path.'.js';	
 
 					if($load_instantly) {
+
+						// ACTIVE_TODO below if block is temporary, and we can not support localize on directly loads. and if we should then that would be direct script echo here with json_encode of var to be localized -- to s 
+						if( !empty($localize_var) && !empty($localize_var_val) ) {
+	
+							if(empty($param)){
+								$param = array('jquery');
+
+							}
+
+							if(empty($version)) {
+								wp_register_script($_handle, $_path, $param );
+							}
+							else {
+								wp_register_script($_handle, $_path, $param, $version );
+							}				
+							wp_enqueue_script($_handle);					
+
+							wp_localize_script(
+							    $_handle,
+							    $localize_var,
+							    $localize_var_val
+							);
+						}
+
 						if(isset($param[0]) && ($param[0]=='jquery' || $param[0]=='jQuery')) {
 							echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>';
 						}
@@ -84,10 +108,14 @@ if(!class_exists('WBC_Loader')) {
 						unset($param[0]);
 					}
 
+					// ACTIVE_TODO/TODO we have mixed here the deps(dependancies) param with the script parameters, so that should be fixed. -- to s 
+					// 	--	and in this function rename $param to $dependancies to avoid confusion -- to s
 					extract($param);
 					require_once $_path;
 					break;
 				case 'localize':
+
+					wbc_pr( "localize " . $_handle );	
 					wp_localize_script($_handle,array_keys($param)[0],$param[array_keys($param)[0]]);
 					break;				
 				default:				

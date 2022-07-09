@@ -6,8 +6,8 @@ window.document.splugins.wbc = window.document.splugins.wbc || {};
 
 // the filters js module
 window.document.splugins.wbc.filters = window.document.splugins.wbc.filters || {};
-//	maybe observer pattern with filters as subject, filter types like ring builder filters, shop/cat filters, shortcode filters and diamond quiz etc filters as observer(subscriber) but also the filter fields also as observer(subscriber)(as per standard it should be only filter types not fields but we can implement by adding subtype field in the definition arcitecture and still it is not pure standard but would work), and also the filter or any of its layers like network(ajax) or render(html render) as the singleton factory design pattern 
-	//	moved to asana 
+	maybe observer pattern with filters as subject, filter types like ring builder filters, shop/cat filters, shortcode filters and diamond quiz etc filters as observer(subscriber) but also the filter fields also as observer(subscriber)(as per standard it should be only filter types not fields but we can implement by adding subtype field in the definition arcitecture and still it is not pure standard but would work), and also the filter or any of its layers like network(ajax) or render(html render) as the singleton factory design pattern 
+		moved to asana 
 
 window.document.splugins.wbc.filters.core = function( configs ) {
 
@@ -21,22 +21,40 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     //	private functions 
     var init_private = function() {
 
-		// ACTIVE_TODO_OC_START
-		// 	    	do general development like published init tobe defined below will call this private init function -- to d 
+		ACTIVE_TODO_OC_START
+			    	do general development like published init tobe defined below will call this private init function -- to d 
 
 
-		// 	    	we like to move the events namespace under splugins instead of under the Feed, but the problem is that the events are initially planned for the Feed page however the events API is supposed to be used for any layers of any page and so on. 
-		// 	    		// --	so what maybe we could do is move the events api functions under the splugins namespace -- to d done 
-		// 	    		--	and we need something that says the event is for Feed page or item page or all pages. by default it need to define at least one page maybe
-		// 	    			--	it is clear that events are for the browser context so whatever js is loaded on the current page or say context is what the event subjects are for. 
-		// 	    				--	so maybe simply let events work on their own and for the modules like variations where maybe the same events can be reused on category page which was defined for the item page flows then that is fine and we are happy with reusability, but not sure if it can create disasters or mess in the flow. and this maybe a big question 
-		// 			//	the filter events 
-		// 			// 	ACTIVE_TODO commented below events subject creation, during testing only. so temporary only.
-		// 			// window.document.splugins.Feed.events.core.createSubject( 'filters', ['before_search', 'no_products_found'] );
-		// 				--	check if the events module is not exported like the way it is supposed to be means in the syntax style as in form builder, then just follow the export style of form builder and export it under ...api -- to d 
-		// 					--	in that case update the calls here in this file and also in the common js file -- to d 
-		// ACTIVE_TODO_OC_END
+			    	we like to move the events namespace under splugins instead of under the Feed, but the problem is that the events are initially planned for the Feed page however the events API is supposed to be used for any layers of any page and so on. 
+			    		// --	so what maybe we could do is move the events api functions under the splugins namespace -- to d done 
+			    		// --	and we need something that says the event is for Feed page or item page or all pages. by default it need to define at least one page maybe
+			    		// 	--	it is clear that events are for the browser context so whatever js is loaded on the current page or say context is what the event subjects are for. 
+			    				--	so maybe simply let events work on their own and for the modules like variations where maybe the same events can be reused on category page which was defined for the item page flows then that is fine and we are happy with reusability, but not sure if it can create disasters or mess in the flow. and this maybe a big question 
 
+		need to define below notifications -- to s 
+				--	the notifications for the filters module will be in detail since it will be almost central to everythings of the category page and many moduels that would come on different kind of category pages : NOTE 
+					--	NOTE: and maybe in future for some modules of item page also like, vertical pair builder. 
+			--	init search form 
+			--	before search -- already set but need to update 
+			--	show loader -- it might be used by some js layers of alternate templates or so if they want to alter/control ui. but that will not be its fundamental use case the fundamental might be some functions that some js layers would need to do around show loader and hide loader etc. events, like if they want to manage some ui/ux aspects which would be affected by these show hide_loader events 
+			--	prepare_query_data -- maybe many js layers including the extensions layers would be interested in this notification, and using the callback they may want to pass their modification/overrides. -- but is this correct data flow, and is this something that we envisioned and anticipated on filters js module. 
+			--	list all other here like before_send(so before search and before_send will be different and I think there was that flag checking logic in before_search or even before that), success, complete, error and so on. so this list will include even the smaller layers and so a detailed event flow will be here, and it may help pagination and tableview which are already seeing different issues. 
+						--	it is should_search where we have all that flags logic, and since we have should_search now so maybe we need to drop the before_search but keep the before_send of course. and maybe dropping the before_search is what we planned but check in related points listed in this module and confirm. 
+				--	and yeah it will also include like render_html, no_products_found, no_products_found render and so on 
+					--	so can we use the events above to pass data objct to other layers like tableview and so on. I think we had this task on queue already on backend layers. so we may like to do the needful at right time so that we do not need to worry about two different layers and something such. 
+						--	however above is only for data passing but apart from that I think we already had in place by m or had planned to use only one data response for any kind of result feeds like traditional gallery view, tableview and so on. 
+						--	and on this regard now we would like to finalize the flow of filter sets and the tabs that it creates on frontend so that becomes clear. 
+							--	and so also need to finalize on some advanced variation api feed layers of backend and frontend so that if there are concerns regarding flow then that become clear now 
+						--	and regarding above events maybe prepare_query_data or result/render level events might be of interest to loop box as well to control which variation image to show and so on. 
+							--	but I think that will be fully managed by the variations swatches layers of swatches module, out of the box , with their implementation of category page related functions or conditions that would going to come. -- so need to finalize the research and flow regarding the variations swatches on category page. 
+								--	gallery_images module will not even init on category page. 
+								--	and I think for swatches module if the independent structure seems helpful, neat and efficient than reusing the same item page module and if the reusability benefits are not making big difference than we can simply create the child module under swatches like category_page. and still in this case we can reuse code where possible of the parent module of swatches. 
+
+			NOTE: the callback implementation on each above notification will be fundamental, so that other layers can do their stuff, override certain things and so on. 
+
+		ACTIVE_TODO_OC_END
+
+		//	the filter events 
 		window.document.splugins.events.api.createSubject( 'filters', ['before_search', 'no_products_found'] );
 
 		bind_reset_click();

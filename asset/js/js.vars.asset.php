@@ -40,7 +40,9 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 	if( is_product_category() || is_product() ) {
 	
 		// ACTIVE_TODO even though now we are going to use the underscore js but so far it is only by the optionsUI feature so skip loading it here for the rest of features and just put the if condition here for lighter experience to all other users -- to s 
-		wp_enqueue_script('undescore'/*, includes_url('js') . '/underscore.min.js'*/ );	 
+		// ACTIVE_TODO right now below common js loaded directly due to some loading issues it was not loading, but fix it asap -- to s 
+		//wp_enqueue_script('underscore'/*, includes_url('js') . '/underscore.min.js'*/ );	 
+		echo '<script src="'.includes_url('js') . '/underscore.min.js'.'"></script>';
 	}
 
 	$swatches_configs = array();
@@ -68,7 +70,12 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 
 	$gallery_images_configs['options'] = array('gallery_reset_on_variation_change'=>false);
 
-	wbc()->load->asset('js','common',array('jquery'),"0.1.3",false,true,'common_configs',array('swatches_config'=>$swatches_configs, 'gallery_images_configs'=>$gallery_images_configs));
+	// ACTIVE_TODO asset enque and other asset flows
+		// --  first need to confirm that minified asset only are loaded -- to t
+		// --  and also that only necesary and partialy build assets are loaded -- to t 
+		// --  ned to make the versions dynamic of assets based on plugin, extensions and themes if there is no other versions system to maintan -- to s & -- to h
+	// ACTIVE_TODO right now below common js loaded directly due to some loading issues it was not loading, but fix it asap -- to s 
+	wbc()->load->asset('js','common',array('jquery'),"0.1.4",true,true,'common_configs',array('swatches_config'=>$swatches_configs, 'gallery_images_configs'=>$gallery_images_configs));
 
 }, 999);
 

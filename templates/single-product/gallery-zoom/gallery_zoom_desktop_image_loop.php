@@ -89,8 +89,8 @@ if(!empty($gallery_images_template_data['attachment_ids_loop_image'])){
     -- main container */
 $template = array(
     'type'=>'div',
-    'class'=>'Zoom_Rigt-sec', array('Zoom_Rigt-sec', 'img-wrapper')
-    'child'=>
+    'class'=> array('Zoom_Rigt-sec', 'img-wrapper'),
+    'child'=>$template_inner,
 
         // ACTIVE_TODO_OC_START
         // $pre_image_content,
@@ -111,8 +111,7 @@ $template = array(
 
         // array(
         //     'type'=>'html',
-        //     'child'=>
-            $template_inner/*$after_thumb_image*/
+        //     'child'=>$after_thumb_image
         // ),
 
 );

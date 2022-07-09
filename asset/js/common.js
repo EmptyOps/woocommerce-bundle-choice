@@ -788,7 +788,7 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
     var init_private = function() {
 
-        window.document.splugins.events.api.createSubject( 'swatches', ['process_attribute_types', 'sp_variations_swatches_loaded'] );
+        // window.document.splugins.events.api.createSubject( 'swatches', ['process_attribute_types', 'sp_variations_swatches_loaded'] );
 
         // init on all applicable events 
         jQuery(document).on('wc_variation_form', _this.base_container+':not(.spui-wbc-swatches-loaded)', function (event) {
@@ -1143,7 +1143,7 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
                      process_attribute_types_inner(type_inner, element);
 
                 }                          
-                else if( not for example slider input is not supported then host the listener event so that extension js do its job or simply skip it and let extension js do their part ) {
+                else {
                     // ACTIVE_TODO_OC_START
                     // --  and we can and should simply use observer pattern events to host for example the slider listener here and then emit internal change event from here     
                     //     --  still in this case the variation.swatches will register its event subject and emit bootstrap level notification like bootstrap/on.load maybe on.load is more user friendly 
@@ -2014,12 +2014,12 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
             
             init_private();
 
-        };
+        }
     }; 
 };
 
 if(window.document.splugins.common.is_item_page || window.document.splugins.common.is_category_page) {
-    jQuery(ducument).ready(function() {
+    jQuery(document).ready(function() {
         //  publish it 
         window.document.splugins.wbc.variations.swatches.api = window.document.splugins.wbc.variations.swatches.core( common_configs.swatches_config );
 
@@ -2039,10 +2039,6 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
 
     _this.base_container = jQuery( ( window.document.splugins.common._o( _this.configs, 'base_container_selector') ? _this.configs.base_container_selector : ''  ) );     
  
-     //bhavesh pase thi class levano se
- 
-    like we did the base_container and so on things, do them here also -- to a 
-        --  but for now that does not need to be updated -- to a 
     _this.data = {};
     _this.binding_stats = {};
  
@@ -2059,7 +2055,7 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
  
     var init_private = function() {
  
-        window.document.splugins.events.api.createSubject( 'gallery_images', ['process_images','sp_slzm_refresh', 'sp_variations_gallery_images_loaded', 'sp_slzm_init', 'sp_slzm_refresh_zoom', 'slider_thumb_click'] );
+        // window.document.splugins.events.api.createSubject( 'gallery_images', ['process_images','sp_slzm_refresh', 'sp_variations_gallery_images_loaded', 'sp_slzm_init', 'sp_slzm_refresh_zoom', 'slider_thumb_click'] );
  
             // // For Single Product
             // $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery(); // Ajax and Variation Product
@@ -2240,15 +2236,15 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
 
     var preprocess_data = function(data) {
 
-        data.types = {};
-        data.product_variations.each(function (i, variation) {
+        data.types = [];
+        jQuery( data.product_variations ).each(function (i, variation) {
 
           jQuery(variation.variation_gallery_images).each(function (index,image) {
 
             data.types.push(image.extra_params_org.type);
           });
 
-          break;
+          return false;
         });
         
         return data;
@@ -2263,7 +2259,7 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
 
         if(type != null) {
             //  process images
-            _this.data.types.each( function( type_inner ) {
+            jQuery( _this.data.types ).each( function( type_inner ) {
      
                  // ACTIVE_TODO_OC_START
                  // --  the key controller here in case of gallery_images module, for defining the calling sequences and flow will be, the image index(even though we had plan to use index but that is only when it is must to use that), otherwise there should be gallery_item_type field that take care implicitly the things like custom_html images for zoom area and so on 
@@ -2278,7 +2274,7 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
                      
                     process_images_inner(type_inner, element);    
 
-                  } else if( not for example slider input is not supported then host the listener event so that extension js do its job or simply skip it and let extension js do their part ) {
+                  } else {
                         //     ACTIVE_TODO_OC_START
                         //     --  and we can and should simply use observer pattern events to host for example the slider listener here and then emit internal change event from here     
                         //         --  still in this case the variation.swatches will register its event subject and emit bootstrap level notification like bootstrap/on.load maybe on.load is more user friendly 
@@ -2837,8 +2833,8 @@ window.document.splugins.wbc.variations.gallery_images.sp_slzm.core = function( 
 
     var init_private = function(){
 
-        init_listener_private();
-        refresh_listener_private();
+        // init_listener_private();
+        // refresh_listener_private();
     };
 
     var init_listener_private = function() {
