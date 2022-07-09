@@ -127,7 +127,7 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
      _this.notifications = notifications;     // [];    //  list of notifications it can notify for.  
      _this.observers = [];
 
- 
+
      return {
          feature_unique_key: function() {
      
@@ -2126,7 +2126,6 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
 
     _this.base_container = jQuery( ( window.document.splugins.common._o( _this.configs, 'base_container_selector') ? _this.configs.base_container_selector : ''  ) );     
  
- 
     _this.data = {};
     _this.binding_stats = {};
  
@@ -2336,6 +2335,7 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
         });
         
         return data;
+    
     };
  
     var process_images = function(type=null, element=null) {
@@ -2615,7 +2615,7 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
  
          variation_change_listener(type);
  
-         reset_variation_change_listener(type);
+         reset_variation_listener(type);
  
     };
  
@@ -2709,6 +2709,7 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
         ACTIVE_TODO_OC_END*/
 
         slider_thumb_click(type,element);
+    
     };
  
     var on_zoom_area_hover = function(type) {
@@ -2819,8 +2820,8 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
              // ACTIVE_TODO_OC_END
  
      // -- base events - after the above events are handled by their particular function/layer, they would call below functions to do the ultimate work         
+        // NOTE : so far this not in use since base function variation change is handling all base logic but if requared central base logic of change couled be moved here 
      var change = function() {
- 
  
      };
  
