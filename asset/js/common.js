@@ -116,7 +116,7 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
      this.notifications = notifications;     // [];    //  list of notifications it can notify for.  
      this.observers = [];
 
- 
+
      return {
          feature_unique_key: function() {
      
@@ -769,8 +769,8 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
     _this.base_container = jQuery( ( window.document.splugins.common._o( _this.configs, 'base_container_selector') ? _this.configs.base_container_selector : '.variations_form' ) );      
 
-    var _this.data = {};
-    var _this.binding_stats = {};     
+    _this.data = {};
+    _this.binding_stats = {};     
 
     // ACTIVE_TODO_OC_START
     // here mostly in the private scope, the variations module should subscribe to search filter events and pass those to variations core which would call the change event so that filters those affecting the variations data like images etc. are rendered accordingly. so that metal color based or shape based images render appropriately. 
@@ -2043,8 +2043,8 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
  
     like we did the base_container and so on things, do them here also -- to a 
         --  but for now that does not need to be updated -- to a 
-    var _this.data = {};
-    var _this.binding_stats = {};
+    _this.data = {};
+    _this.binding_stats = {};
  
  
      // and move below function at right place -- to a done
@@ -2252,6 +2252,7 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
         });
         
         return data;
+    
     };
  
     var process_images = function(type=null, element=null) {
@@ -2531,7 +2532,7 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
  
          variation_change_listener(type);
  
-         reset_variation_change_listener(type);
+         reset_variation_listener(type);
  
     };
  
@@ -2625,6 +2626,7 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
         ACTIVE_TODO_OC_END*/
 
         slider_thumb_click(type,element);
+    
     };
  
     var on_zoom_area_hover = function(type) {
@@ -2735,8 +2737,8 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
              // ACTIVE_TODO_OC_END
  
      // -- base events - after the above events are handled by their particular function/layer, they would call below functions to do the ultimate work         
+        // NOTE : so far this not in use since base function variation change is handling all base logic but if requared central base logic of change couled be moved here 
      var change = function() {
- 
  
      };
  
