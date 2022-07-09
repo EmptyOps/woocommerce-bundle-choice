@@ -638,8 +638,10 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			--	and do same all above for slider and zoom layers of their default implementation render layers also if not yet -- to b. note that it has nothing to do with their init_core and render_core fucntion.
 			ACTIVE_TODO_OC_END*/ 
 			ob_start();
-			?>
+
 				//--- move to /woo-bundle-choice/asset/variations.assets.php file ma
+			?>
+				
 				<!-- <style type="text/css">
 					.ui.mini.images .variable-item.image{
 						width: auto;						

@@ -57,21 +57,38 @@ add_action( 'wp_enqueue_scripts' ,function(){
 
 		    };
 
-	        if(typeof(jQuery.fn.imagezoomsl)!=='function'){
-				let script = document.createElement('script');
-				script.src = "<?php echo constant( strtoupper( 'EOWBC_ASSET_URL' ) ).'js/variations/gallery_images/external-plugins/zoomsl/zoomsl.min.js'; ?>";
-				document.head.append(script);
+	  //       if(typeof(jQuery.fn.imagezoomsl)!=='function'){
+			// 	let script = document.createElement('script');
+				// script.src = "<?php /*echo constant( strtoupper( 'EOWBC_ASSET_URL' ) ).'js/variations/gallery_images/external-plugins/zoomsl/zoomsl.min.js';*/ ?>";
+			// 	document.head.append(script);
 
-		        window.setTimeout(function(){
+		 //        window.setTimeout(function(){
 
-       			    bind_listeners();
+   //     			    bind_listeners();
 
-		        },2000);	
+		 //        },2000);	
 
-			} else {
+			// } else {
 
-			    bind_listeners();
-			}
+			//     bind_listeners();
+			// }
+			jQuery( window ).on('load', function() {
+				if(typeof(jQuery.fn.imagezoomsl)!=='function'){
+					let script = document.createElement('script');
+					script.src = "<?php echo constant( strtoupper( 'EOWBC_ASSET_URL' ) ).'js/variations/gallery_images/external-plugins/zoomsl/zoomsl.min.js'; ?>";
+					document.head.append(script);
+
+			        window.setTimeout(function(){
+
+	       			    bind_listeners();
+
+			        },2000);	
+
+				} else {
+
+				    bind_listeners();
+				}
+			});
 
 	        window.addEventListener('error', function(e){
 

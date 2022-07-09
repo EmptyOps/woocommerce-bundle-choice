@@ -64,7 +64,7 @@ add_action( 'wp_enqueue_scripts' ,function(){
             splide.mount();
         };
 
-        document.addEventListener("DOMContentLoaded", function(event) {
+        /*document.addEventListener("DOMContentLoaded", function(event) {
             
             window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.init_listener(function(){
 
@@ -75,7 +75,18 @@ add_action( 'wp_enqueue_scripts' ,function(){
                 init_function();
             });
 
-        } );
+        } );*/
+        jQuery( window ).on('load', function() {
+            window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.init_listener(function(){
+
+                init_function();
+            });
+            window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.refresh_listener(function(){
+
+                init_function();
+            });
+        });
+
         jQuery(document).ready(function(){
 
             // ACTIVETODO enable below code if requared
