@@ -639,7 +639,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			ACTIVE_TODO_OC_END*/ 
 			ob_start();
 			?>
-				//--- move to /woo-bundle-choice/asset/variations.assets.php file ma
+				<!-- --- move to /woo-bundle-choice/asset/variations.assets.php file ma -->
 				<!-- <style type="text/css">
 					.ui.mini.images .variable-item.image{
 						width: auto;						

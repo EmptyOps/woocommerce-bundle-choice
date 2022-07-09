@@ -115,7 +115,7 @@ if(!class_exists('WBC_Loader')) {
 					break;
 				case 'localize':
 
-					wbc_pr( "localize " . $_handle );	
+					//wbc_pr( "localize " . $_handle );	
 					wp_localize_script($_handle,array_keys($param)[0],$param[array_keys($param)[0]]);
 					break;				
 				default:				
@@ -192,10 +192,16 @@ if(!class_exists('WBC_Loader')) {
 		            if (file_exists($template_path_new)) {
 		                
 		                $path = $template_path_new;
+		            } else {
+
+		            	$template_path_new = str_replace('{{template_key_device}}','desktop',$path);
+		            	$path = $template_path_new;
 		            }
+
+
 		            // wbc_pr( "path >>>>>>>>>>>>>>>>>>>>>>> " . $path );
 		            // wbc_pr( "template_path_new >>>>>>>>>>>>>>>>>>>>>>> " . $template_path_new );
-		            //	die();
+		            	//die();
 
 
 		        }

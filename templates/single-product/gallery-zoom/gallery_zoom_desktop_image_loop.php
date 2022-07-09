@@ -93,6 +93,7 @@ $template = array(
     'child'=>$template_inner,
 
         // ACTIVE_TODO_OC_START
+        // --- /themes/purple_theme/application/controllers/publics/pages/Content_Single_Product.php  file ma line no 265 to 325 ma jovu
         // $pre_image_content,
         // we may like to consider this when we do refactoring 
         // array(
