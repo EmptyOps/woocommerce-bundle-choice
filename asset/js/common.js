@@ -347,7 +347,8 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
      var get_template = function( tmpl_id, templating_lib ) {
  
          if( templating_lib == 'wp' ) {
- 
+                
+            wp = (window || root || global || GLOBAL || this || self || {wp: undefined}).wp;
              return wp.template( tmpl_id );  
          }
      };
