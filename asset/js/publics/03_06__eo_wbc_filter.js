@@ -50,7 +50,12 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 								--	gallery_images module will not even init on category page. 
 								--	and I think for swatches module if the independent structure seems helpful, neat and efficient than reusing the same item page module and if the reusability benefits are not making big difference than we can simply create the child module under swatches like category_page. and still in this case we can reuse code where possible of the parent module of swatches. 
 
-			NOTE: the callback implementation on each above notification will be fundamental, so that other layers can do their stuff, override certain things and so on. 
+			NOTE: 
+				1 	the callback implementation on each above notification will be fundamental, so that other layers can do their stuff, override certain things and so on. 
+				2 	what we have rigth now is action filter kind of logic with observer pattern notifications -- to h . for the notes 
+					--  what we need for many flow here is filter hook kind of logic which returns data stat on notification/events.
+						--  we can achive it if child modules provide callbacks during main calls, it will be neat but require mantaining parameter passing and so on. so need to tweak observer pattern notifications to provide this kind of flow. still confirm once before implementing -- to s & -- to h
+						NOTE: wp maybe alredy provideing filter hook api but we can simply implement it in our observer pattern by adding some additional parameter and mainataining filter var stat. 
 
 		ACTIVE_TODO_OC_END
 
@@ -60,6 +65,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		bind_reset_click();
 		bind_click();
 		advance_filter_accordian();
+
+
+		ACTIVE_TODO need to confirm -- shraddha
+		init_search();
 
     };
 
@@ -141,6 +150,47 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 	jQuery.fn.eo_wbc_filter_change=function(init_call=false,form_selector="form[id*='eo_wbc_filter']",render_container='.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products') 
 	var eo_wbc_filter_change_wrapper_private = function() {
 
+		sould_search();
+
+		before_search();
+
+		prepare_query_data();
+
+		sp_filter_request variable tv_template.js ma move karavano, if required -- to h & -- to s
+		jQuery.fn.sp_filter_request = jQuery.ajax(
+		{
+			url: eo_wbc_object.eo_admin_ajax_url,//form.attr('action'),
+			data:form_data, // form data
+			type:'POST', // POST
+
+			beforeSend:beforeSend(xhr),
+
+			complete : function(){
+				// console.log(this.url);
+			},
+			success:function(data)
+			{
+
+				//console.log(data);
+				//document.write(data);
+				//jQuery("#loading").removeClass('loading');
+				// --	and this is called for the slick_table if block so is not the type should be slick_table here? discuss with shraddha -- to d 
+				// 	-- rectify if there are any such similar issue
+
+				//////// 02-04-2022 @shraddha /////// 
+				eo_wbc_e_render_table(type,data);	
+				window.eo_wbc_object.enable_filter_table = true;
+				// jQuery(".ui.sticky").sticky('refresh');
+			},
+			error:function(data){
+				jQuery("#loading").removeClass('loading');
+				console.log('error');
+				console.log(data);
+				window.eo_wbc_object.enable_filter_table = true;
+			},
+		} );		
+
+		compatability(section, object, expected_result);
 
 	};
 
@@ -193,36 +243,50 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			else
 			{
 				//form_data={_category:jQuery("[name='_category']").val().trim(),action:'eo_wbc_filter'};	
+				ACTIVE_TODO from tableview -- shraddha
 				form_data=jQuery("#tableview_order,#tableview_order_direction,[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
+
+				ACTIVE_TODO from -- shraddha
+				form_data=jQuery("[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
+
 				if(eo_wbc_e_tabview.eo_table_view_per_page){
 					form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
 				}
 			}
 
+			ACTIVE_TODO from pagination -- shraddha
 			if(jQuery("select[name='orderby']").length>0){
 				form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
 			}
 
+			ACTIVE_TODO from pagination -- shraddha
 			if(jQuery("select[name='orderby']").length>0){
 				form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
 			}
+			
+			ACTIVE_TODO from tableview -- shraddha
 			form_data.action='eo_wbc_e_tabview';
+
 		}
 		else{
+			ACTIVE_TODO from tableview -- shraddha
 			form_data=form.serialize();
 			if(eo_wbc_e_tabview.eo_table_view_per_page){
 				form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
 			}
 
+			ACTIVE_TODO from pagination -- shraddha
 			if(jQuery("select[name='orderby']").length>0){
 				form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
 			}
 
+			ACTIVE_TODO from tableview pagination -- shraddha
 			if(jQuery("#tableview_order").val()!=='' && jQuery("#tableview_order_direction").val()!==''){
 				form_data+='&tableview_order='+jQuery("#tableview_order").val();
 				form_data+='&tableview_order_direction='+jQuery("#tableview_order_direction").val();
 			}
 
+			ACTIVE_TODO from tableview -- shraddha
 			form_data+='&action=eo_wbc_e_tabview';
 		}
 
@@ -241,101 +305,101 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		var form=jQuery("form#eo_wbc_filter");	
 
-		jQuery(form).attr('method','POST');	
-		jQuery("[name*='action']").val("eo_wbc_e_tabview");	
+		// jQuery(form).attr('method','POST');	
+		// jQuery("[name*='action']").val("eo_wbc_e_tabview");	
 
-		form_data=undefined;
-		if(init_call){
-			if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
-				_products_in = jQuery("[name='products_in']").val()
-				if(_products_in == undefined){
-					_products_in = '';
-				} else {
-					_products_in = _products_in.trim();
-				}
-				form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:'eo_wbc_e_tabview',products_in:_products_in};
-				if(eo_wbc_e_tabview.eo_table_view_per_page){
-					form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
-				}
-			}
-			else
-			{
-				//form_data={_category:jQuery("[name='_category']").val().trim(),action:'eo_wbc_filter'};	
-				form_data=jQuery("#tableview_order,#tableview_order_direction,[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
-				if(eo_wbc_e_tabview.eo_table_view_per_page){
-					form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
-				}
-			}
+		// form_data=undefined;
+		// if(init_call){
+		// 	if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
+		// 		_products_in = jQuery("[name='products_in']").val()
+		// 		if(_products_in == undefined){
+		// 			_products_in = '';
+		// 		} else {
+		// 			_products_in = _products_in.trim();
+		// 		}
+		// 		form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:'eo_wbc_e_tabview',products_in:_products_in};
+		// 		if(eo_wbc_e_tabview.eo_table_view_per_page){
+		// 			form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
+		// 		}
+		// 	}
+		// 	else
+		// 	{
+		// 		//form_data={_category:jQuery("[name='_category']").val().trim(),action:'eo_wbc_filter'};	
+		// 		form_data=jQuery("#tableview_order,#tableview_order_direction,[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
+		// 		if(eo_wbc_e_tabview.eo_table_view_per_page){
+		// 			form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
+		// 		}
+		// 	}
 
-			if(jQuery("select[name='orderby']").length>0){
-				form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
-			}
+		// 	if(jQuery("select[name='orderby']").length>0){
+		// 		form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
+		// 	}
 
-			if(jQuery("select[name='orderby']").length>0){
-				form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
-			}
-		}
-		else{
-			form_data=form.serialize();
-			if(eo_wbc_e_tabview.eo_table_view_per_page){
-				form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
-			}
+		// 	if(jQuery("select[name='orderby']").length>0){
+		// 		form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
+		// 	}
+		// }
+		// else{
+		// 	form_data=form.serialize();
+		// 	if(eo_wbc_e_tabview.eo_table_view_per_page){
+		// 		form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
+		// 	}
 
-			if(jQuery("select[name='orderby']").length>0){
-				form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
-			}
+		// 	if(jQuery("select[name='orderby']").length>0){
+		// 		form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
+		// 	}
 
-			if(jQuery("#tableview_order").val()!=='' && jQuery("#tableview_order_direction").val()!==''){
-				form_data+='&tableview_order='+jQuery("#tableview_order").val();
-				form_data+='&tableview_order_direction='+jQuery("#tableview_order_direction").val();
-			}
-		}
+		// 	if(jQuery("#tableview_order").val()!=='' && jQuery("#tableview_order_direction").val()!==''){
+		// 		form_data+='&tableview_order='+jQuery("#tableview_order").val();
+		// 		form_data+='&tableview_order_direction='+jQuery("#tableview_order_direction").val();
+		// 	}
+		// }
 
 		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
 		// --add to be confirmed 3159 TO 3232--
 
-		var form=jQuery("form#eo_wbc_filter");	
+		// var form=jQuery("form#eo_wbc_filter");	
 										
-		jQuery(form).attr('method','POST');	
-		jQuery("[name*='action']").val("eo_wbc_e_tabview");	
+		// jQuery(form).attr('method','POST');	
+		// jQuery("[name*='action']").val("eo_wbc_e_tabview");	
 
-		form_data=undefined;
-		if(init_call){
-			if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
-				_products_in = jQuery("[name='products_in']").val()
-				if(_products_in == undefined){
-					_products_in = '';
-				} else {
-					_products_in = _products_in.trim();
-				}
-				form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:'eo_wbc_e_tabview',products_in:_products_in};
-				if(eo_wbc_e_tabview.eo_table_view_per_page){
-					form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
-				}
-			}
-			else
-			{
-				//form_data={_category:jQuery("[name='_category']").val().trim(),action:'eo_wbc_filter'};	
-				form_data=jQuery("[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
-				if(eo_wbc_e_tabview.eo_table_view_per_page){
-					form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
-				}
-			}
+		// form_data=undefined;
+		// if(init_call){
+		// 	if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
+		// 		_products_in = jQuery("[name='products_in']").val()
+		// 		if(_products_in == undefined){
+		// 			_products_in = '';
+		// 		} else {
+		// 			_products_in = _products_in.trim();
+		// 		}
+		// 		form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:'eo_wbc_e_tabview',products_in:_products_in};
+		// 		if(eo_wbc_e_tabview.eo_table_view_per_page){
+		// 			form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
+		// 		}
+		// 	}
+		// 	else
+		// 	{
+		// 		//form_data={_category:jQuery("[name='_category']").val().trim(),action:'eo_wbc_filter'};	
+		// 		form_data=jQuery("[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
+		// 		if(eo_wbc_e_tabview.eo_table_view_per_page){
+		// 			form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
+		// 		}
+		// 	}
 
-			if(jQuery("select[name='orderby']").length>0){
-				form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
-			}
-		}
-		else{
-			form_data=form.serialize();
-			if(eo_wbc_e_tabview.eo_table_view_per_page){
-				form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
-			}
+		// 	if(jQuery("select[name='orderby']").length>0){
+		// 		form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
+		// 	}
+		// }
+		// else{
+		// 	form_data=form.serialize();
+		// 	if(eo_wbc_e_tabview.eo_table_view_per_page){
+		// 		form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
+		// 	}
 
-			if(jQuery("select[name='orderby']").length>0){
-				form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
-			}
-		}
+		// 	if(jQuery("select[name='orderby']").length>0){
+		// 		form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
+		// 	}
+		// }
 
 		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template1.js
 		// --add to be confirmed 630 TO 734--
@@ -404,48 +468,48 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template2.js
 		// --add to be confirmed 302 TO 375--
 
-		// var form=jQuery("form#eo_wbc_filter");	
-							
-		// jQuery(form).attr('method','POST');	
-		// jQuery("[name*='action']").val("eo_wbc_e_tabview")
+					// var form=jQuery("form#eo_wbc_filter");	
+										
+					// jQuery(form).attr('method','POST');	
+					// jQuery("[name*='action']").val("eo_wbc_e_tabview")
 
-		// form_data=undefined;
-		// if(init_call){
-		// 	if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
-		// 		_products_in = jQuery("[name='products_in']").val()
-		// 		if(_products_in == undefined){
-		// 			_products_in = '';
-		// 		} else {
-		// 			_products_in = _products_in.trim();
-		// 		}
-		// 		form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:'eo_wbc_e_tabview',products_in:_products_in};
-		// 		if(eo_wbc_e_tabview.eo_table_view_per_page){
-		// 			form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
-		// 		}
-		// 	}
-		// 	else
-		// 	{
-		// 		//form_data={_category:jQuery("[name='_category']").val().trim(),action:'eo_wbc_filter'};	
-		// 		form_data=jQuery("[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
-		// 		if(eo_wbc_e_tabview.eo_table_view_per_page){
-		// 			form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
-		// 		}
-		// 	}
+					// form_data=undefined;
+					// if(init_call){
+					// 	if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
+					// 		_products_in = jQuery("[name='products_in']").val()
+					// 		if(_products_in == undefined){
+					// 			_products_in = '';
+					// 		} else {
+					// 			_products_in = _products_in.trim();
+					// 		}
+					// 		form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:'eo_wbc_e_tabview',products_in:_products_in};
+					// 		if(eo_wbc_e_tabview.eo_table_view_per_page){
+					// 			form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
+					// 		}
+					// 	}
+					// 	else
+					// 	{
+					// 		//form_data={_category:jQuery("[name='_category']").val().trim(),action:'eo_wbc_filter'};	
+					// 		form_data=jQuery("[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
+					// 		if(eo_wbc_e_tabview.eo_table_view_per_page){
+					// 			form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
+					// 		}
+					// 	}
 
-		// 	if(jQuery("select[name='orderby']").length>0){
-		// 		form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
-		// 	}
-		// }
-		// else{
-		// 	form_data=form.serialize();
-		// 	if(eo_wbc_e_tabview.eo_table_view_per_page){
-		// 		form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
-		// 	}
+					// 	if(jQuery("select[name='orderby']").length>0){
+					// 		form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
+					// 	}
+					// }
+					// else{
+					// 	form_data=form.serialize();
+					// 	if(eo_wbc_e_tabview.eo_table_view_per_page){
+					// 		form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
+					// 	}
 
-		// 	if(jQuery("select[name='orderby']").length>0){
-		// 		form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
-		// 	}
-		// }
+					// 	if(jQuery("select[name='orderby']").length>0){
+					// 		form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
+					// 	}
+					// }
 
 		/////////////////////////////////////////////////
 		// /var/www/html/drashti_project/27-05-2022/woocommerce-bundle-choice/asset/js/publics/eo_wbc_filter.js
@@ -455,7 +519,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// if(form.find('[name="html_destination"]').length>0){
 		// 	render_container = form.find('[name="html_destination"]').val();
 		// }
-		////////////////////shraddha/////////////////////////
+		/////////////////////////////////////////////////////
 		var site_url=eo_wbc_object.eo_cat_site_url;
 		var ajax_url = '';
 
@@ -465,18 +529,21 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			ajax_url = site_url+'/?'+eo_wbc_object.eo_cat_query;
 		}
 
-		console.log(eo_wbc_object);			
+		console.log(eo_wbc_object);	
+
+		success(data);		
 
 	};	
 
 	// so here there will be those ajax callback functions like beforeSend, complete, success, error and so on? mostly yes so that we can call it from wrapper and especially put all the refactored code from different instances of ht eo_wbc_filter_change functions in here 
-	// 	--	so let just do it -- to d. done. had already did it for two functions below 
-		// ACTIVE_TODO_OC_START
-		// --	for all four functions below bring the code from all applicable functions -- to d 
-		// 	--	and compare and put common only once and for identical means different put separetely and comment for both -- to d. ask b for how to do this process precisely, and do it precisely no more in rubbish way. 
-		// 	--	and note one thing clearly that identical table code that is identified here need to be moved in their own calling layers to this function, so there will be some call back or so that need to be defined that can cover it. or we can simply use what is available by way of observer pattern and their notification callback that is planned that maybe of help if finalized -- to d 
-		// ACTIVE_TODO_OC_END	
+		--	so let just do it -- to d. done. had already did it for two functions below 
+		ACTIVE_TODO_OC_START
+		--	for all four functions below bring the code from all applicable functions -- to d 
+			--	and compare and put common only once and for identical means different put separetely and comment for both -- to d. ask b for how to do this process precisely, and do it precisely no more in rubbish way. 
+			--	and note one thing clearly that identical table code that is identified here need to be moved in their own calling layers to this function, so there will be some call back or so that need to be defined that can cover it. or we can simply use what is available by way of observer pattern and their notification callback that is planned that maybe of help if finalized -- to d 
+		ACTIVE_TODO_OC_END	
 	var beforeSend = function(xhr) {
+
 		window.eo_wbc_object.enable_filter_table = false;
 		if(eo_wbc_object.hasOwnProperty('xhr')){
 			eo_wbc_object.xhr.abort();
@@ -708,37 +775,37 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			jQuery(render_container/*".products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products"*/).html('<p class="woocommerce-info" style="width: 100%;">No products were found matching your selection.</p>');	
 		}	
 
-		// ACTIVE_TODO_OC_START
-		// /*if(render_container===".products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products"){*/
-		// 	//Replacing Pagination details.....		
-		// 	//console.log(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html());
+		ACTIVE_TODO_OC_START
+		/*if(render_container===".products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products"){*/
+			//Replacing Pagination details.....		
+			//console.log(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html());
 
-		// 	//done move below logic to the pagination js module -- to d. including the compatibility conditions are there in the if else block, like planned above to keep the compatibility patches as it is if they are already implemented otherwise we will put them in the dedicated compatibility function. 
-		// 		-- //done create below functions in that module 
-		// 			-- //done 	bind_click -- to d. put comment inside function "it will bind to all kind of such on_click events of pagination, it will be private but it may broadcast notification with a callback which js layers of like tableview and so on can call when they recieve their own click event or they can simply call below on_click function". so it is private function. 
-		// 				-- //done 	and from this function call the private click function -- to d 
-		// 			-- //done 	on_click -- to d. put comment inside function "listen to all on_click events". so it is public function. 
-		// 			-- //done 	click -- to d. put comment inside function "it will internally implement all flows related to pagination link click event". so it is private function. 
-		// 				-- //done 	call this function from above on_click -- to d 	
-		// 				-- raise on_click notification using notifyAllObservers -- to d 
-		// 				-- in init_private function first create the subject for observer pattern also -- to d 
-		// 				-- //done  so also create init_private and init(public) function -- to d 
-		// 			-- //done 	compatibility -- to d. it is private function. 
-		// 			-- //done 	get_page_number -- to d. it is public function. 
-		// 			-- //done 	set_page_number -- to d. it is public function. 
-		// 				-- raise page_number_udpated notification using notifyAllObservers -- to d 
-		// 			-- //done 	on_reset -- to d. it is public function. 
-		// 				--	external layers would simply call this function, since observer pattern is not seem necessary here -- to d 
-		// 				-- //done 	and from this function call the private reset function -- to d 
-		// 			-- //done 	reset -- to d. it is private function. 
-		// 				-- raise on_reset notification using notifyAllObservers -- to d 
-		// 			tableview and so on would depend on that extended flow of observer pattern where notification will provide a callback, this flow is to be confirmed so either it or something else that is confirmed there on common js variations notes will be used. 
-		// 				-- tableview will use it for its flows like binding click event, which is ideal use case of the observer pattern -- to d 
-		// 				-- and it will also use it for triggerring the click event, means of its own pagination links dom -- to d 
-		// 					-- ACTIVE_TODO but very soon maybe the tableview may not have its own pagination links dom if that is not necessary for it -- to h and -- to d 
-		// 				-- and for setting and getting current page_number 
-		// 					--	for it may simply need to use the pagination modules published api interface -- to d 
-		// ACTIVE_TODO_OC_END					
+			//done move below logic to the pagination js module -- to d. including the compatibility conditions are there in the if else block, like planned above to keep the compatibility patches as it is if they are already implemented otherwise we will put them in the dedicated compatibility function. 
+				-- //done create below functions in that module 
+					-- //done 	bind_click -- to d. put comment inside function "it will bind to all kind of such on_click events of pagination, it will be private but it may broadcast notification with a callback which js layers of like tableview and so on can call when they recieve their own click event or they can simply call below on_click function". so it is private function. 
+						-- //done 	and from this function call the private click function -- to d 
+					-- //done 	on_click -- to d. put comment inside function "listen to all on_click events". so it is public function. 
+					-- //done 	click -- to d. put comment inside function "it will internally implement all flows related to pagination link click event". so it is private function. 
+						-- //done 	call this function from above on_click -- to d 	
+						-- raise on_click notification using notifyAllObservers -- to d 
+						-- in init_private function first create the subject for observer pattern also -- to d 
+						-- //done  so also create init_private and init(public) function -- to d 
+					-- //done 	compatibility -- to d. it is private function. 
+					-- //done 	get_page_number -- to d. it is public function. 
+					-- //done 	set_page_number -- to d. it is public function. 
+						-- raise page_number_udpated notification using notifyAllObservers -- to d 
+					-- //done 	on_reset -- to d. it is public function. 
+						--	external layers would simply call this function, since observer pattern is not seem necessary here -- to d 
+						-- //done 	and from this function call the private reset function -- to d 
+					-- //done 	reset -- to d. it is private function. 
+						-- raise on_reset notification using notifyAllObservers -- to d 
+					tableview and so on would depend on that extended flow of observer pattern where notification will provide a callback, this flow is to be confirmed so either it or something else that is confirmed there on common js variations notes will be used. 
+						-- tableview will use it for its flows like binding click event, which is ideal use case of the observer pattern -- to d 
+						-- and it will also use it for triggerring the click event, means of its own pagination links dom -- to d 
+							-- ACTIVE_TODO but very soon maybe the tableview may not have its own pagination links dom if that is not necessary for it -- to h and -- to d 
+						-- and for setting and getting current page_number 
+							--	for it may simply need to use the pagination modules published api interface -- to d 
+		ACTIVE_TODO_OC_END					
 			if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html()!==undefined) {
 				if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination').length>0){
 					jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html());
@@ -899,15 +966,15 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		////////////////////////
 
 		jQuery(".eo_wbc_srch_btn:eq(2)").click(function(){					
-		///////////////////////////////////////////
-		document.forms.eo_wbc_filter.reset();
-		jQuery(".eo_wbc_srch_btn:eq(2)").trigger('reset');
-		jQuery("#eo_wbc_attr_query").val("");
-		jQuery('[name="paged"]').val('1');
-		// jQuery.fn.eo_wbc_filter_change(true);
-		window.document.splugins.filters.api.eo_wbc_filter_change_wrapper(true);
+			///////////////////////////////////////////
+			document.forms.eo_wbc_filter.reset();
+			jQuery(".eo_wbc_srch_btn:eq(2)").trigger('reset');
+			jQuery("#eo_wbc_attr_query").val("");
+			jQuery('[name="paged"]').val('1');
+			// jQuery.fn.eo_wbc_filter_change(true);
+			window.document.splugins.filters.api.eo_wbc_filter_change_wrapper(true);
 
-	});	
+		});	
 
     }
 
@@ -944,6 +1011,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				render_container = jQuery(".elementor-products-grid");
 			}
 		}
+
+		var init_search_callback = null ;
+        window.document.splugins.events.api.notifyAllObservers( 'filters', 'init_search', {}, init_search_callback );
 
     }
     ///////////////////////////////////////////////////////
@@ -1021,6 +1091,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			and this function will simply call the private wrapper function eo_wbc_filter_change_wrapper_private -- to d 
 			ACTIVE_TODO_OC_END
 
+			eo_wbc_filter_change_wrapper_private();
+
 			// prepare_query_data 	
 				// var form=jQuery(form_selector);
 
@@ -1035,7 +1107,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				// 	return true;
 				// }
 
-			prepare_query_data();
+			// prepare_query_data();
 
 			ACTIVE_TODO_OC_START							
 			--	above call is okay but move it to private wrapper above and also the if statement above it but make that commented -- to d 
@@ -1120,7 +1192,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 }
 
 //  publish it 
-window.document.splugins.wbc.filters.api = window.document.splugins.wbc.filters.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
+window.document.splugins.wbc.filters.api = window.document.splugins.wbc.filters.core( {} );
 
 // the pagination js module
 window.document.splugins.wbc.pagination = window.document.splugins.wbc.pagination || {};
@@ -1133,13 +1205,16 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 
 	var init_private = function() {
 
+		/////////////////shraddha///////////////
+		bind_click();
+		/////////////////////////////////////////
 	};
 
 	var bind_click = function(){
 
-		// ACTIVE_TODO_OC_START
-		// NOTE : it will bind to all kind of such on_click events of pagination, it will be private but it may broadcast notification with a callback which js layers of like tableview and so on can call when they recieve their own click event or they can simply call below on_click function". so it is private function.
-		// ACTIVE_TODO_OC_END
+		ACTIVE_TODO_OC_START
+		NOTE : it will bind to all kind of such on_click events of pagination, it will be private but it may broadcast notification with a callback which js layers of like tableview and so on can call when they recieve their own click event or they can simply call below on_click function". so it is private function.
+		ACTIVE_TODO_OC_END
     	
 		jQuery('body').on('click','.navigation .page-numbers,.woocommerce-pagination a.page-numbers',function(e){
 			e.preventDefault();
@@ -1328,11 +1403,13 @@ function eo_wbc_filter_render_html(data,render_container) {
 	create two function show_loader and hide_loader in filters core js module -- to d 
 		--	and then move the below code in the hide_loader -- to d 
 		--	and check all the change function implementation and move show related code in the show_loader function and hide related code in the hide_loader function -- to d
-		--	needless to say but still note that the loader hide show event should be carefully caled from each related search events like search, complete, error and maybe also some other which handle some particular scenarios. -- to d 
+		--	needless to say but still note that the loader hide show event should be carefully called from each related search events like search, complete, error and maybe also some other which handle some particular scenarios. -- to d 
 			--	so that what happen is that in future if the events namespace is firing the search or any related events around and if by any change any event that the filters module recieve is related to the show hide loader flow then that is taken care of implicitly.  
 	ACTIVE_TODO_OC_END
 			
-	jQuery("#loading").removeClass('loading');
+	///////////////// shraddha //////////////////////		
+	// jQuery("#loading").removeClass('loading');
+	/////////////////////////////////////////////////
 
 	// ACTIVE_TODO_OC_START
 	// create one function update_result_count in filters core js module -- to d 
@@ -1492,14 +1569,18 @@ function eo_wbc_filter_render_html(data,render_container) {
 	// and below one to the hide_loader function -- to d 
 	// ACTIVE_TODO_OC_END
 
-	//jQuery("body").fadeTo('fast','1')									
-	jQuery("#loading").removeClass('loading');
+	//jQuery("body").fadeTo('fast','1')	
+
+	/////////////// shraddha //////////////////								
+	// jQuery("#loading").removeClass('loading');
+	///////////////////////////////////////////
 	
 	ACTIVE_TODO_OC_START
 	almost all of the below seems compatibility related to so move that to compatibility function, and at there we need to have section conditon like this would be broadly as product-listing -- to d 
 		--	you already moved below code, which I saw, but there is not comment below that it is moved so please let me know what is going on -- to d 
 	ACTIVE_TODO_OC_END
-		
+	
+	
 	jQuery('.products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)').addClass('product_grid_view');
 	//jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination').css('visibility','visible');
 	if(jQuery(".row-inner>.col-lg-9").length>0){
@@ -1508,9 +1589,11 @@ function eo_wbc_filter_render_html(data,render_container) {
 				jQuery(e).css('opacity','1');        
 		    }
 		});
+		
 		jQuery(".t-entry-visual-overlay").removeClass('t-entry-visual-overlay');
 		jQuery(".double-gutter .tmb").css('width','50%');
 		jQuery(".double-gutter .tmb").css('display','inline-flex');
+		
 	}
 	
 	jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination,jet-filters-pagination').css('visibility','visible');
