@@ -61,6 +61,11 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		bind_click();
 		advance_filter_accordian();
 
+
+		///////////////////shraddha////////////////////
+		init_search_form();
+		///////////////////////////////////////////////
+
     };
 
 	// --	and there will be one more function like should_search, which will also be private. and that will handle onle the logic of checking flags and so on like the enable_filter_table flag above 
@@ -141,6 +146,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 	jQuery.fn.eo_wbc_filter_change=function(init_call=false,form_selector="form[id*='eo_wbc_filter']",render_container='.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products') 
 	var eo_wbc_filter_change_wrapper_private = function() {
 
+		prepare_query_data();
 
 	};
 
@@ -1021,6 +1027,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			and this function will simply call the private wrapper function eo_wbc_filter_change_wrapper_private -- to d 
 			ACTIVE_TODO_OC_END
 
+			eo_wbc_filter_change_wrapper_private();
+
 			// prepare_query_data 	
 				// var form=jQuery(form_selector);
 
@@ -1035,7 +1043,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				// 	return true;
 				// }
 
-			prepare_query_data();
+			// prepare_query_data();
 
 			ACTIVE_TODO_OC_START							
 			--	above call is okay but move it to private wrapper above and also the if statement above it but make that commented -- to d 
@@ -1120,7 +1128,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 }
 
 //  publish it 
-window.document.splugins.wbc.filters.api = window.document.splugins.wbc.filters.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
+window.document.splugins.wbc.filters.api = window.document.splugins.wbc.filters.core( {} );
 
 // the pagination js module
 window.document.splugins.wbc.pagination = window.document.splugins.wbc.pagination || {};
@@ -1133,6 +1141,9 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 
 	var init_private = function() {
 
+		/////////////////shraddha///////////////
+		bind_click();
+		/////////////////////////////////////////
 	};
 
 	var bind_click = function(){
@@ -1328,11 +1339,13 @@ function eo_wbc_filter_render_html(data,render_container) {
 	create two function show_loader and hide_loader in filters core js module -- to d 
 		--	and then move the below code in the hide_loader -- to d 
 		--	and check all the change function implementation and move show related code in the show_loader function and hide related code in the hide_loader function -- to d
-		--	needless to say but still note that the loader hide show event should be carefully caled from each related search events like search, complete, error and maybe also some other which handle some particular scenarios. -- to d 
+		--	needless to say but still note that the loader hide show event should be carefully called from each related search events like search, complete, error and maybe also some other which handle some particular scenarios. -- to d 
 			--	so that what happen is that in future if the events namespace is firing the search or any related events around and if by any change any event that the filters module recieve is related to the show hide loader flow then that is taken care of implicitly.  
 	ACTIVE_TODO_OC_END
 			
-	jQuery("#loading").removeClass('loading');
+	///////////////// shraddha //////////////////////		
+	// jQuery("#loading").removeClass('loading');
+	////////////////////////////////////////////
 
 	// ACTIVE_TODO_OC_START
 	// create one function update_result_count in filters core js module -- to d 
