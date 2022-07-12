@@ -145,7 +145,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 
 		// window.document.splugins.Feed.events.core.notifyAllObservers( 'filters', 'before_search' ); 
-		window.document.splugins.events.api.notifyAllObservers( 'filters', 'before_search' ); 
+
+		var before_search_callback = null ;
+        window.document.splugins.events.api.notifyAllObservers( 'filters', 'before_search', {}, before_search_callback );
 
     };	 
 
@@ -171,29 +173,29 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 			beforeSend:beforeSend(xhr),
 
-			complete : function(){
-				// console.log(this.url);
-			},
-			success:function(data)
-			{
+			complete:complete(),
 
-				//console.log(data);
-				//document.write(data);
-				//jQuery("#loading").removeClass('loading');
-				// --	and this is called for the slick_table if block so is not the type should be slick_table here? discuss with shraddha -- to d 
-				// 	-- rectify if there are any such similar issue
+			success:success(data),
+			// {
 
-				//////// 02-04-2022 @shraddha /////// 
-				eo_wbc_e_render_table(type,data);	
-				window.eo_wbc_object.enable_filter_table = true;
-				// jQuery(".ui.sticky").sticky('refresh');
-			},
-			error:function(data){
-				jQuery("#loading").removeClass('loading');
-				console.log('error');
-				console.log(data);
-				window.eo_wbc_object.enable_filter_table = true;
-			},
+			// 	//console.log(data);
+			// 	//document.write(data);
+			// 	//jQuery("#loading").removeClass('loading');
+			// 	// --	and this is called for the slick_table if block so is not the type should be slick_table here? discuss with shraddha -- to d 
+			// 	// 	-- rectify if there are any such similar issue
+
+			// 	//////// 02-04-2022 @shraddha /////// 
+			// 	eo_wbc_e_render_table(type,data);	
+			// 	window.eo_wbc_object.enable_filter_table = true;
+			// 	// jQuery(".ui.sticky").sticky('refresh');
+			// },
+			error:error(data)
+			// {
+			// 	jQuery("#loading").removeClass('loading');
+			// 	console.log('error');
+			// 	console.log(data);
+			// 	window.eo_wbc_object.enable_filter_table = true;
+			// },
 		} );		
 
 		compatability(section, object, expected_result);
@@ -537,7 +539,11 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		console.log(eo_wbc_object);	
 
-		success(data);		
+		success(data);	
+
+		var prepare_query_data_callback = null ;
+        window.document.splugins.events.api.notifyAllObservers( 'filters', 'prepare_query_data', {}, prepare_query_data_callback );
+	
 
 	};	
 
@@ -607,7 +613,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		eo_wbc_e_render_table(data);
 
 
-		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template1.js
+		/*// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template1.js
 		// --add to be confirmed 630 TO 734--
 
 		eo_wbc_e_render_table(data);
@@ -615,7 +621,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template2.js
 		// --add to be confirmed 302 TO 375--
 
-		eo_wbc_e_render_table(data);
+		eo_wbc_e_render_table(data);*/
 
 
 		////////////////////////////
@@ -917,6 +923,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// }
 		// eo_wbc_object.xhr = xhr;
 		// jQuery("#loading").addClass('loading');
+
+		var show_loader_callback = null ;
+        window.document.splugins.events.api.notifyAllObservers( 'filters', 'show_loader', {}, show_loader_callback );
 
     }
 

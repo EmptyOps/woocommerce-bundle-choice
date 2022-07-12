@@ -76,7 +76,9 @@ add_action( 'wp_enqueue_scripts' ,function(){
             });
 
         } );*/
-        jQuery( window ).on('load', function() {
+
+        // jQuery( window ).on('load', function() {
+        document.addEventListener("DOMContentLoaded", function() { 
 
             // ACTIVE_TODO below timeout function is temporary. remove it when the loading sequence is fixed. 
             window.setTimeout(function(){
@@ -94,7 +96,7 @@ add_action( 'wp_enqueue_scripts' ,function(){
 
         });
 
-        jQuery(document).ready(function(){
+        document.addEventListener("DOMContentLoaded", function() { 
 
             // ACTIVETODO enable below code if requared
             // //slider

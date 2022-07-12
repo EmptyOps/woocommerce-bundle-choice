@@ -9,7 +9,8 @@ add_action( 'wp_enqueue_scripts' ,function(){
 		?>
 		<script type="text/javascript">
 			(function ($) {
-			    jQuery(document).ready(function() {        
+			    // jQuery(document).ready(function() {
+			    document.addEventListener("DOMContentLoaded", function() {         
 			        jQuery('.xzoom3, .xzoom-gallery3').xzoom({position: 'lens', lensShape: 'circle', sourceClass: 'xzoom-hidden'});
 			        jQuery('.xzoom-gallery3').on('click mouseenter mousemove mouseleave',function(){
 
@@ -28,7 +29,8 @@ add_action( 'wp_enqueue_scripts' ,function(){
 		-- zoom no
 		 -->
 		<script>
-		 	jQuery(document).ready(function(){
+		 	// jQuery(document).ready(function(){
+		 	document.addEventListener("DOMContentLoaded", function() { 
 		 		// ACTIVE_TODO_OC_START
 		 		// // ---- error event ma sem che
 		 		// ACTIVE_TODO_OC_END
@@ -95,7 +97,8 @@ add_action( 'wp_enqueue_scripts' ,function(){
 
 				//     bind_listeners();
 				// }
-				jQuery( window ).on('load', function() {
+				document.addEventListener("DOMContentLoaded", function() { 
+				// jQuery( window ).on('load', function() {
 					if(typeof(jQuery.fn.imagezoomsl)!=='function'){
 						let script = document.createElement('script');
 						script.src = "<?php echo constant( strtoupper( 'EOWBC_ASSET_URL' ) ).'js/variations/gallery_images/external-plugins/zoomsl/zoomsl.min.js'; ?>";
@@ -290,7 +293,8 @@ add_action( 'wp_enqueue_scripts' ,function(){
 		</style>
 		<script type="text/javascript">
 			// ACTIVE_TODO zoom asset.php ma last ma ek script haji rai gai, te I thikn similar che but please confirm -- to a 
-			jQuery(document).ready(function(){
+			// jQuery(document).ready(function(){
+			document.addEventListener("DOMContentLoaded", function() { 
 				//zoom
 			    
 			    if(typeof(jQuery.fn.imagezoomsl)=='function'){

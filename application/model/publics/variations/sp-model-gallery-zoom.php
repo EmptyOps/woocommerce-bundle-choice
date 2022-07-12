@@ -45,24 +45,24 @@ class SP_Model_Gallery_Zoom extends Eowbc_Base_Model_Publics {
 				return $html;	
 			}
 
-			$image['class'] = '{{class}}';
-			$image['src'] = '{{src}}';
-			$image['src_w'] = '{{src_w}}';
-			$image['src_h'] = '{{src_h}}';
-			$image['alt'] = '{{alt}}';
-			$image['title'] = '{{title}}';
-			$image['caption'] = '{{caption}}';
-			$image['full_src'] = '{{full_src}}';
-			$image['full_src_w'] = '{{full_src_w}}';
-			$image['full_src_h'] = '{{full_src_h}}';
-			$image['srcset'] = '{{srcset}}';
-			$image['sizes'] = '{{sizes}}';
-			$image['extra_params'] = '{{extra_params}}';
-			$options['has_only_thumbnail'] = '{{has_only_thumbnail}}';
-			$image['video_link'] = '{{video_link}}';
-			$image['video_embed_type'] = '{{video_embed_type}}';
-			$image['video_embed_url'] = '{{video_embed_url}}';
-			$image['post_thumbnail_id'] = '{{post_thumbnail_id}}';
+			$image['class'] = '{{data.class}}';
+			$image['src'] = '{{data.src}}';
+			$image['src_w'] = '{{data.src_w}}';
+			$image['src_h'] = '{{data.src_h}}';
+			$image['alt'] = '{{data.alt}}';
+			$image['title'] = '{{data.title}}';
+			$image['caption'] = '{{data.caption}}';
+			$image['full_src'] = '{{data.full_src}}';
+			$image['full_src_w'] = '{{data.full_src_w}}';
+			$image['full_src_h'] = '{{data.full_src_h}}';
+			$image['srcset'] = '{{data.srcset}}';
+			$image['sizes'] = '{{data.sizes}}';
+			$image['extra_params'] = '{{data.extra_params}}';
+			$options['has_only_thumbnail'] = '{{data.has_only_thumbnail}}';
+			$image['video_link'] = '{{data.video_link}}';
+			$image['video_embed_type'] = '{{data.video_embed_type}}';
+			$image['video_embed_url'] = '{{data.video_embed_url}}';
+			$image['post_thumbnail_id'] = '{{data.post_thumbnail_id}}';
 
 			$data = array();
 			$data['image'] = $image;
