@@ -364,6 +364,8 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			
 			// ACTIVE_TODO - we may like to implement defer loading logic.
 
+			return $tag;	
+
 		}, 10, 3);
 
 

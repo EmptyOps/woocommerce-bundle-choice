@@ -349,7 +349,7 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
          if( templating_lib == 'wp' ) {
                 
             wp = (window || root || global || GLOBAL || this || self || {wp: undefined}).wp;
-             return wp.template( tmpl_id );  
+            return wp.template( tmpl_id );  
          }
      };
  

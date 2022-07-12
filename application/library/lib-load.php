@@ -20,7 +20,7 @@ if(!class_exists('WBC_Loader')) {
 		}
 
 		public function asset($type,$path,$param = array(),$version="",$load_instantly=false,$is_prefix_handle=false,$localize_var=null,$localize_var_val=null) {
-
+			
 			if(!apply_filters('wbc_load_asset_filter',true,$type,$path,$param,$version,$load_instantly)) {
 				return true;
 			}

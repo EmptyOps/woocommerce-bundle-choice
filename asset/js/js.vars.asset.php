@@ -37,12 +37,12 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 	</script>
 <?php  
 		
-	if( is_product_category() || is_product() ) {
+	if( is_shop() || is_product_category() || is_product() ) {
 	
 		// ACTIVE_TODO even though now we are going to use the underscore js but so far it is only by the optionsUI feature so skip loading it here for the rest of features and just put the if condition here for lighter experience to all other users -- to s 
-		// ACTIVE_TODO right now below common js loaded directly due to some loading issues it was not loading, but fix it asap -- to s 
-		//wp_enqueue_script('underscore'/*, includes_url('js') . '/underscore.min.js'*/ );	 
-		echo '<script src="'.includes_url('js') . '/underscore.min.js'.'"></script>';
+		//	NOTE: below asset will load in footer, so far it is loading from header only because of the chained dependancy on the common js dependancy of the wc-cart variation asset given below 
+		wp_enqueue_script('underscore'/*, includes_url('js') . '/underscore.min.js'*/ );	 
+		// echo '<script src="'.includes_url('js') . '/underscore.min.js'.'"></script>';
 	}
 
 	$swatches_configs = array();
@@ -74,8 +74,8 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 		// --  first need to confirm that minified asset only are loaded -- to t
 		// --  and also that only necesary and partialy build assets are loaded -- to t 
 		// --  ned to make the versions dynamic of assets based on plugin, extensions and themes if there is no other versions system to maintan -- to s & -- to h
-	// ACTIVE_TODO right now below common js loaded directly due to some loading issues it was not loading, but fix it asap -- to s 
-	wbc()->load->asset('js','common',array('jquery'),"0.1.4",true,true,'common_configs',array('swatches_config'=>$swatches_configs, 'gallery_images_configs'=>$gallery_images_configs));
+	// ACTIVE_TODO/TODO when the variations and its child modules are moved out from the below loaded common js then at that time, also move te wc-cart variation dependancy mentioned below 
+	wbc()->load->asset('js','common',array('jquery','wc-add-to-cart-variation'),"0.1.4",false,true,'common_configs',array('swatches_config'=>$swatches_configs, 'gallery_images_configs'=>$gallery_images_configs));
 
 }, 999);
 

@@ -56,6 +56,12 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 					--  what we need for many flow here is filter hook kind of logic which returns data stat on notification/events.
 						--  we can achive it if child modules provide callbacks during main calls, it will be neat but require mantaining parameter passing and so on. so need to tweak observer pattern notifications to provide this kind of flow. still confirm once before implementing -- to s & -- to h
 						NOTE: wp maybe alredy provideing filter hook api but we can simply implement it in our observer pattern by adding some additional parameter and mainataining filter var stat. 
+							--	simply create the function subscribe_observer_filter or simply we can name it subscribe_filter or simply lets do add_filter -- to s 
+								--	and regarding the implementation let hope that wp.hooks is available in console, we may need to add some dependancy. 
+									--	if that is not available then we need to implement our own implementation 
+								--	and now the main events core module will contain one private var under _this.configs.core_library, and if we are use to wp.hooks then set that to wp hardcoded. 
+									--	and use that in if conditon and do implement wp.hooks based filters inside those conditional blocks and the other implementation can be provided conditionally 
+								--	maybe we can compare te existing subscribeObserver notification as the action in the analogy, but anyway we can turn to action hooks also but only if required and at some right time ACTIVE_TODO 
 
 		ACTIVE_TODO_OC_END
 
