@@ -57,6 +57,7 @@ class SP_Model_Gallery_Slider extends Eowbc_Base_Model_Publics {
 			$image['alt'] = '{{data.alt}}';
 			$image['title'] = '{{data.title}}';
 			$image['post_thumbnail_id'] = '{{data.post_thumbnail_id}}';
+			$image['index'] = '{{data.index}}';
 
 			$data = array();
 			$data['image'] = $image;

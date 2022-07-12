@@ -171,7 +171,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			data:form_data, // form data
 			type:'POST', // POST
 
-			beforeSend:beforeSend(xhr),
+			beforeSend:before_Send(xhr),
 
 			complete:complete(),
 
@@ -554,7 +554,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			--	and compare and put common only once and for identical means different put separetely and comment for both -- to d. ask b for how to do this process precisely, and do it precisely no more in rubbish way. 
 			--	and note one thing clearly that identical table code that is identified here need to be moved in their own calling layers to this function, so there will be some call back or so that need to be defined that can cover it. or we can simply use what is available by way of observer pattern and their notification callback that is planned that maybe of help if finalized -- to d 
 		ACTIVE_TODO_OC_END	
-	var beforeSend = function(xhr) {
+	var before_Send = function(xhr) {
 
 		window.eo_wbc_object.enable_filter_table = false;
 		if(eo_wbc_object.hasOwnProperty('xhr')){

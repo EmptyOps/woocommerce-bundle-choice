@@ -10,8 +10,8 @@ if(empty($image['extra_params_org']['type']) || $image['extra_params_org']['type
     $template = array(
         'type' => 'image',
         'class' => array('img-fluid','big-img',esc_attr( $image['class'] ), 'img-item', 'img-item-'.$image['extra_params_org']['type'], 'img-item-'.$image['extra_params_org']['type'].'-'.wbc()->common->current_theme_key() ),
-        'src' => esc_url( $image['src'] ),
-        'attr' => array( /*'loading' => 'lazy',*/ 'width' => esc_attr( $image['src_w'] ), 'height' => esc_attr( $image['src_h'] ), 'alt' => esc_attr( $image['alt'] ), 'title' => esc_attr( $image['title'] ), 'data-caption' => esc_attr( $image['caption'] ), 'data-src' => esc_url( $image['full_src'] ), 'data-large_image' => esc_url( $image['full_src'] ), 'data-large_image_width' => esc_attr( $image['full_src_w'] ), 'data-large_image_height' => esc_attr( $image['full_src_h'] ), 'srcset' => esc_attr( $image['srcset'] ), 'sizes' => esc_attr( $image['sizes'] ) ),
+        'src' => $image['src'],
+        'attr' => array( /*'loading' => 'lazy',*/ 'width' => esc_attr( $image['src_w'] ), 'height' => esc_attr( $image['src_h'] ), 'alt' => esc_attr( $image['alt'] ), 'title' => esc_attr( $image['title'] ), 'data-caption' => esc_attr( $image['caption'] ), 'data-src' => $image['full_src'], 'data-large_image' => $image['full_src'], 'data-large_image_width' => esc_attr( $image['full_src_w'] ), 'data-large_image_height' => esc_attr( $image['full_src_h'] ), 'srcset' => esc_attr( $image['srcset'] ), 'sizes' => esc_attr( $image['sizes'] ) ),
         'preHTML'=>$image['extra_params'],
     );
 

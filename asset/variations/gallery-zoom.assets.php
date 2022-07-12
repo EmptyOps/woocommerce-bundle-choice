@@ -108,11 +108,15 @@ add_action( 'wp_enqueue_scripts' ,function(){
 
 		       			    bind_listeners();
 
-				        },2000);	
+				        },3000);	
 
 					} else {
 
-					    bind_listeners();
+					    window.setTimeout(function(){
+
+		       			    bind_listeners();
+
+				        },3000);	
 					}
 				});
 
@@ -128,7 +132,7 @@ add_action( 'wp_enqueue_scripts' ,function(){
 
 	       			    bind_listeners();
 
-			        },2000);	
+			        },3000);	
 			     
 			    });
 

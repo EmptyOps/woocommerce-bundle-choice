@@ -552,6 +552,12 @@ class SP_WBC_Variations extends SP_Variations {
 			$gallery_images = $instance->get_gallery_image_ids();
 		}
 
+
+		/*ACTIVE_TODO here we still needd one more hook to let any layers set their item at particular index -- to s
+			--  apply filter from here
+				--  add filter from ssm_shared class 
+				--  and at there do swap logic*/
+
 		// NOTE: this function will return also the default(or say the data that are supported and provided by legacy api) data as applicable like below image or all other such applicable default data 
 		if ( $variation_image_id ) {
 			// Add Variation Default Image

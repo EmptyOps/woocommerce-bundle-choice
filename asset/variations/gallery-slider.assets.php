@@ -92,7 +92,7 @@ add_action( 'wp_enqueue_scripts' ,function(){
                     init_function();
                 });
 
-            },2000);    
+            },3000);    
 
         });
 
@@ -134,4 +134,3 @@ add_action( 'wp_enqueue_scripts' ,function(){
 <?php
 },1049);
 ?>
-

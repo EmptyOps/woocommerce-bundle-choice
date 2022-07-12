@@ -357,10 +357,10 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
         
 
          // template_data = {gallery_thumbnail_src:'http://54.162.191.228/staging/wp-content/uploads/2022/07/r-a-2-100x100.jpg'};
-         console.log("template");
-         console.log(template);
-         console.log("template_data");
-         console.log(template_data);
+         // console.log("template");
+         // console.log(template);
+         // console.log("template_data");
+         // console.log(template_data);
 
          if( templating_lib == 'wp' ) {
  
@@ -1226,7 +1226,7 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
                 // is the woo input template type means dropdown is mandatorily kept by plugins, not seems likely but still confirm and then we need a way to determine(always) the exact input type based on the field/input type selected on woo panel or otherwise simply support the input_template_type field which will be set in background implicitly based on the field/input type selected on woo panel -- this field is simply better then managing many different template names of extensions and defining based on that -- and it will default to the above field/input type for wbc nothing to manage, only if condition below that if input_template_type is not defined then read simply above field/input type. and in case of extensions that need to be defined based on the template that is selected on their admin panel. so this template option should be only be defining it and passing it where applicable so that is gets here. and it is need to be defined based on that only to avoid confusion and many unnecessary and confusing configuration overheads. no simply need to stick to attribute type only means field/input-type selected on woo panel and that is standard and clean. so implement here based on that only. -- to h or -- to d 
                 // ACTIVE_TODO_OC_END
 
-                if (splugins._.includes(_this.configs.attribute_types_keys, type_inner)) {
+                if (window.document.splugins.common._o(_this.configs.attribute_types_keys, type_inner)) {
 
                      process_attribute_types_inner(type_inner, element);
 
@@ -1240,7 +1240,7 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
                     var process_attribute_types_callback = function(type_inner_1) {
 
-                        if (splugins._.includes(_this.configs.attribute_types_keys, type_inner_1)) {
+                        if (window.document.splugins.common._o(_this.configs.attribute_types_keys, type_inner_1)) {
                             process_attribute_types(type_inner_1, element);
                             
                         }
@@ -2140,7 +2140,7 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
 
             window.document.splugins.wbc.variations.swatches.api.init();
 
-        },1000);    
+        },2000);    
 
     } );
 
@@ -2428,9 +2428,13 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
      
                  // is the woo input template type means dropdown is mandatorily kept by plugins, not seems likely but still confirm and then we need a way to determine(always) the exact input type based on the field/input type selected on woo panel or otherwise simply support the input_template_type field which will be set in background implicitly based on the field/input type selected on woo panel -- this field is simply better then managing many different template names of extensions and defining based on that -- and it will default to the above field/input type for wbc nothing to manage, only if condition below that if input_template_type is not defined then read simply above field/input type. and in case of extensions that need to be defined based on the template that is selected on their admin panel. so this template option should be only be defining it and passing it where applicable so that is gets here. and it is need to be defined based on that only to avoid confusion and many unnecessary and confusing configuration overheads. no simply need to stick to attribute type only means field/input-type selected on woo panel and that is standard and clean. so implement here based on that only. -- to h or -- to d 
                  // ACTIVE_TODO_OC_END
-     
-                 if (splugins._.includes(_this.configs.types, type_inner)) {
-                     
+                
+                 console.log(_this.configs.types);
+
+                 if (window.document.splugins.common._o(_this.configs.types, type_inner)) {
+                    
+                    console.log("gallery_images process_images inner if");
+
                     process_images_inner(type_inner, element);    
 
                   } else {
@@ -2449,7 +2453,7 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
 
                     var process_images_callback = function(type_inner_1) {
 
-                        if (splugins._.includes(_this.data.types, type_inner_1)) {
+                        if (window.document.splugins.common._o(_this.data.types, type_inner_1)) {
                             process_images(type_inner_1, element);
                             
                         }
@@ -2479,6 +2483,7 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
         }
 
         // ACTIVE_TODO temp. 
+        _this.data.current_variation = _this.data.product_variations[4];
         process_images_template(_this.data.product_variations[0].variation_gallery_images);
 
         var sp_variations_gallery_images_loaded_callback = null ;
@@ -2599,8 +2604,9 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
       splugins._.delay(function () {
         
         if (_this.is_variation_product) {
-
-            if(typeof(_this.data.is_sp_slzm_init_done) == undefined || _this.data.is_sp_slzm_init_done == false) {
+            
+            // if(typeof(_this.data.is_sp_slzm_init_done) == undefined || _this.data.is_sp_slzm_init_done == false) {
+            if( !window.document.splugins.common._o(_this.data, 'is_sp_slzm_init_done') ){
 
                 // ACTIVE_TODO debug should be called once -- to s
                 console.log('is_variation_product sp_slzm_init called');
@@ -2610,6 +2616,8 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
             }
            
         }
+
+            console.log("sp_slzm_refresh notification");
 
             var sp_slzm_refresh_callback = null;
             window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'sp_slzm_refresh', {}, sp_slzm_refresh_callback );
@@ -2640,7 +2648,7 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
 
         var templating_lib = window.document.splugins.common._o( _this.configs, 'templating_lib') ? _this.configs.templating_lib : 'wp';
 
-        console.log(" gallery_images process_zoom_template outer " );
+        // console.log(" gallery_images process_zoom_template outer " );
         
         var zoom_inner_html = '';
         jQuery( images).each(function (index_inner,image) {
@@ -2668,7 +2676,7 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
                 }
 
             }else{
-                console.log(" gallery_images process_zoom_template outer if" );
+                // console.log(" gallery_images process_zoom_template outer if" );
 
                 var template_var = template( _this.configs.template.zoom.id+'_'+index_inner, templating_lib );
 
@@ -2702,6 +2710,8 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
     };
  
     var process_events = function(type) {
+
+        console.log("process_events");
  
          slider_thumb_click_listener(type);
  
@@ -2732,12 +2742,18 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
     };
  
     var slider_thumb_click_listener = function(type) {
- 
+    
+        console.log("slider_thumb_click_listener");
+
         if(window.document.splugins.common._b(_this.binding_stats, 'slider_thumb_click_listener', type)){
             return false;
         }
- 
-        _this.$slider_container.find('img').on('click', function () {
+        
+        console.log("slider_thumb_click_listener 111111111111");
+        console.log(_this.$slider_container);
+
+        _this.$slider_container.on('click', 'img', function () {
+            console.log("slider_thumb_click_listener 2222222222");
             on_slider_thumb_click(type,this);            
         });
  
@@ -2856,6 +2872,8 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
             // ACTIVE_TODO hide and show image elements
         }
 
+        console.log("sp_slzm_refresh_zoom notification");
+
         var sp_slzm_refresh_zoom_callback = null;
         window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'sp_slzm_refresh_zoom', {}, sp_slzm_refresh_zoom_callback );
 
@@ -2874,7 +2892,7 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
              --  show_variation
              --  hide_variation
              --  click on .reset_variations
-         --  and one strange matter is that there is not seem to be the variation_change event in the plugn we were exploring, but double check and it is likely be there -- to h. so either way need to implement all above events including variation_change since we may have had it and it make no sense to skip that. 
+         --  and one strange matter is that there is not seem to be the variation_change event in the plugin we were exploring, but double check and it is likely be there -- to h. so either way need to implement all above events including variation_change since we may have had it and it make no sense to skip that. 
              --  and on this regard better to create functions like init_gallery, init_variation_gallery and maybe also default_gallery and default_variation_gallery as this would create proper heirarchy like in the plugin we were exploring -- to h 
                 -- this might be invalid
             
@@ -2964,6 +2982,8 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
 
      var sp_slzm_init = function() {
 
+        console.log("sp_slzm_init notification");
+
          var sp_slzm_init_callback = null;
             window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'sp_slzm_init', {} , sp_slzm_init_callback);
 
@@ -2996,7 +3016,7 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
             window.document.splugins.wbc.variations.gallery_images.api = window.document.splugins.wbc.variations.gallery_images.core( common_configs.gallery_images_configs );
             window.document.splugins.wbc.variations.gallery_images.api.init();
 
-        },1000);
+        },2000);
     });
 
 }
@@ -3025,9 +3045,15 @@ window.document.splugins.wbc.variations.gallery_images.sp_slzm.core = function( 
 
     var init_listener_private = function() {
     
+        console.log('init_listener_private');
+
         window.document.splugins.events.api.subscribeObserver( 'gallery_images', 'sp_slzm', 'sp_slzm_init',function(stat_object, notification_response){
 
+            console.log('init_listener_private 11111');
+
             jQuery(_this.init_callbacks).each(function (index,callback) {
+
+                console.log('init_listener_private 22222');
 
                 callback();     
             });         
@@ -3037,9 +3063,15 @@ window.document.splugins.wbc.variations.gallery_images.sp_slzm.core = function( 
  
     var refresh_listener_private = function() {
 
+        console.log('refresh_listener_private');
+
         window.document.splugins.events.api.subscribeObserver( 'gallery_images', 'sp_slzm', 'sp_slzm_refresh',function(stat_object, notification_response){
 
+            console.log('refresh_listener_private 1.11111');
+
             jQuery(_this.refresh_callbacks).each(function (index,callback) {
+
+                console.log('refresh_listener_private 1.22222');
 
                 callback();     
             });         
@@ -3047,7 +3079,11 @@ window.document.splugins.wbc.variations.gallery_images.sp_slzm.core = function( 
 
         window.document.splugins.events.api.subscribeObserver( 'gallery_images', 'sp_slzm', 'sp_slzm_refresh_zoom',function(stat_object, notification_response){
 
+            console.log('refresh_listener_private 2.11111');
+
             jQuery(_this.zoom_callbacks).each(function (index,callback) {
+
+                console.log('refresh_listener_private 2.22222');
 
                 callback();     
             });         
@@ -3084,7 +3120,7 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
             window.document.splugins.wbc.variations.gallery_images.sp_slzm.api = window.document.splugins.wbc.variations.gallery_images.sp_slzm.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
 
             window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.init();
-        }, 1000);
+        }, 2500);
     });
 
 }
