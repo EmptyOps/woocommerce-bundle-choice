@@ -354,7 +354,14 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
      };
  
      var apply_data = function( template, template_data, templating_lib ) {
- 
+        
+
+         // template_data = {gallery_thumbnail_src:'http://54.162.191.228/staging/wp-content/uploads/2022/07/r-a-2-100x100.jpg'};
+         console.log("template");
+         console.log(template);
+         console.log("template_data");
+         console.log(template_data);
+
          if( templating_lib == 'wp' ) {
  
              return template( template_data );   
@@ -2581,13 +2588,12 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
 
       process_slider_template(images);
 
-      process_zoom_template(images,-1,hasGallery);
+      process_zoom_template(images,0,hasGallery);
 
-      // ACTIVE_TODO shraddha pase thi class levana -- to a
       if (hasGallery) {
-        this.$target.addClass('woo-variation-gallery-has-product-thumbnail');
+        _this.$zoom_container.addClass('spui-wbc-gallery_images-has-product-thumbnail');
       } else {
-        this.$target.removeClass('woo-variation-gallery-has-product-thumbnail');
+        _this.$zoom_container.removeClass('spui-wbc-gallery_images-has-product-thumbnail');
       }
 
       splugins._.delay(function () {
@@ -2614,6 +2620,8 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
  
     var process_slider_template = function(images){
 
+        console.log(" gallery_images process_slider_template " );
+
         var templating_lib = window.document.splugins.common._o( _this.configs, 'templating_lib') ? _this.configs.templating_lib : 'wp';
         
         var template_var = template( _this.configs.template.slider.id, templating_lib );
@@ -2627,31 +2635,49 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
 
     var process_zoom_template = function(images,index,hasGallery){
 
+        console.log(" gallery_images process_zoom_template " );
+        console.log(index);
+
         var templating_lib = window.document.splugins.common._o( _this.configs, 'templating_lib') ? _this.configs.templating_lib : 'wp';
 
+        console.log(" gallery_images process_zoom_template outer " );
         
-        var zoom_inner_html = jQuery( images).each(function (index_inner,image) {
+        var zoom_inner_html = '';
+        jQuery( images).each(function (index_inner,image) {
+        
+            console.log(" gallery_images process_zoom_template inner loop" );
+            console.log(index_inner);
 
             if(_this.configs.template.zoom.all_in_dom == 0){
                 
+                console.log(" gallery_images process_zoom_template inner if" );
+
                 if(index == index_inner){
+                    
+                    console.log(" gallery_images process_zoom_template inner inner if" );
 
                     var template_var = template( _this.configs.template.zoom.id+'_'+index_inner, templating_lib );
 
-                    return apply_template_data(template_var, image, templating_lib);
+                    zoom_inner_html += apply_template_data(template_var, image, templating_lib);
 
                 }else{
-                    return '';
+
+                    console.log(" gallery_images process_zoom_template inner else" );
+
+                    // return '';
                 }
 
             }else{
+                console.log(" gallery_images process_zoom_template outer if" );
 
                 var template_var = template( _this.configs.template.zoom.id+'_'+index_inner, templating_lib );
 
-                return apply_template_data(template_var, image, templating_lib);
+                zoom_inner_html += apply_template_data(template_var, image, templating_lib);
             }
             
-        }).join('');
+        // }).join('');
+        });
+
 
         if (hasGallery) {
           _this.$zoom_container.html(zoom_inner_html);
