@@ -101,7 +101,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		window.document.splugins.events.api.createSubject( 'filters', ['before_search', 'no_products_found'] );
 
 		bind_reset_click();
+
 		bind_click();
+		
 		advance_filter_accordian();
 
 
@@ -1748,20 +1750,20 @@ function eo_wbc_filter_render_html(data,render_container) {
 
 jQuery(document).ready(function($){
 
-	// ACTIVE_TODO_OC_START
-	// if any of the below vars are related to the stat and so on vars that we planned to rename or move then should be covered here also, otherwise at runtime it will break and would not run and crash -- to d 
-	// ACTIVE_TODO_OC_END
+	ACTIVE_TODO_OC_START
+	if any of the below vars are related to the stat and so on vars that we planned to rename or move then should be covered here also, otherwise at runtime it will break and would not run and crash -- to d 
+	ACTIVE_TODO_OC_END
 		
 	window.eo_wbc_object = window.eo_wbc_object || {};
 	window.eo_wbc_object.enable_filter = window.eo_wbc_object.enable_filter || false;
 
-	// ACTIVE_TODO_OC_START
-	// //done move to pagination js modules bind_click function -- to d 
+	ACTIVE_TODO_OC_START
+	//done move to pagination js modules bind_click function -- to d 
 		
-	// 	--	and also be sure to the filter_change function call. and why that is so far not changed? -- to d 
-	// 	--//done  and comment code below but the pagination modules init function need to be called from here -- to d 
-	// 		--//done	so first export and publish that module under ...api -- to d 
-	// ACTIVE_TODO_OC_END		
+		--	and also be sure to the filter_change function call. and why that is so far not changed? -- to d 
+		--//done  and comment code below but the pagination modules init function need to be called from here -- to d 
+			--//done	so first export and publish that module under ...api -- to d 
+	ACTIVE_TODO_OC_END		
 
 	// jQuery('body').on('click','.navigation .page-numbers,.woocommerce-pagination a.page-numbers',function(e){
 	//     e.preventDefault();
@@ -1772,10 +1774,10 @@ jQuery(document).ready(function($){
 	// });
 	window.document.splugins.pagination.api.init();
 
-	// ACTIVE_TODO_OC_START
-	// ask t for what it is -- to d 
-	// 	-- then need to create if applicable then applicable function in applicable js module and mode code there -- to d 
-	// ACTIVE_TODO_OC_END
+	ACTIVE_TODO_OC_START
+	ask t for what it is -- to d 
+		-- then need to create if applicable then applicable function in applicable js module and mode code there -- to d 
+	ACTIVE_TODO_OC_END
 		
 	jQuery("[data-toggle_column]").click(function(){
 		if(jQuery(this).hasClass('active')){		
@@ -1824,7 +1826,7 @@ jQuery(document).ready(function($){
 		
 
 		//changes: mahesh@emptyops.com
-		// To prevent initila call for the ajax -- speed optimization -- stop ajax at init load;
+		// To prevent initial call for the ajax -- speed optimization -- stop ajax at init load;
 		if(typeof(eo_wbc_e_tabview)===typeof(undefined) || typeof(eo_wbc_e_tabview.init_data)===typeof(undefined) || typeof(eo_wbc_object)==typeof(eo_wbc_object) ){
 			// jQuery.fn.eo_wbc_filter_change(true);
 			window.document.splugins.filters.api.eo_wbc_filter_change_wrapper(true);

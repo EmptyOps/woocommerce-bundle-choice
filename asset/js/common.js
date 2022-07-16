@@ -3144,7 +3144,7 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
         window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'sp_slzm_refresh_zoom', {}, sp_slzm_refresh_zoom_callback );
 
         var slider_thumb_click_callback = null;
-        window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'slider_thumb_click', {}, slider_thumb_click_callback ); 
+        window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'slider_thumb_click', {type:type,image:_this.data.current_variation.variation_gallery_images[index]}, slider_thumb_click_callback ); 
         
     };
 
