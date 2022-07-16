@@ -37,7 +37,7 @@ add_action( 'wp_enqueue_scripts' ,function(){
     <!-- -- a tejas che api che -->
     <script type="text/javascript">
 
-        var init_function = function(){
+        var splide_init_function = function(){
 
             var splide = new Splide( '#slider1', {
                 direction   : 'ttb',
@@ -85,11 +85,11 @@ add_action( 'wp_enqueue_scripts' ,function(){
 
                 window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.init_listener(function(){
 
-                    init_function();
+                    splide_init_function();
                 });
                 window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.refresh_listener(function(){
 
-                    init_function();
+                    splide_init_function();
                 });
 
             },3000);    
