@@ -319,6 +319,11 @@ add_action( 'wp_enqueue_scripts' ,function(){
 			    position: relative;
 			    float: left;
 			}
+
+			.imagezoomsl_zoom_container {
+			    width: calc(100% - 130px);
+			    margin-left: 15px;
+			}
 			/*.img-fluid.big-img {
 			    display: none;
 			}*/

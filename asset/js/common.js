@@ -1249,7 +1249,7 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
         data.options.each(function () {
             if (jQuery(this).val() !== '') {
                 data.selects.push(jQuery(this).val());
-                data.selected = current.length === 0 ? eq.val() : current.val();
+                data.selected = data.current.length === 0 ? data.eq.val() : data.current.val();
             }
         });
 

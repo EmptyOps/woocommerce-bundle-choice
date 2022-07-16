@@ -1,8 +1,17 @@
+<style type="text/css">
+    .sp-variations-gallery-images-slider.splide_slider_container li img {
+        display: block;
+        margin: auto;
+    }
+</style>
 
-<!-- ---- a code /themes/purple_theme/woocommerce/content-single-product.php no che 
---- Splide_Slider
- -->
  <?php 
+
+// ---- a code /themes/purple_theme/woocommerce/content-single-product.php no che 
+// --- Splide_Slider
+
+
+
  // enqueue common assets 
 add_action( 'wp_enqueue_scripts' ,function(){
     wbc()->load->asset('css','variations/gallery_images/external-plugins/splide/splide-core.min',array(),"",false,true);
@@ -87,7 +96,7 @@ add_action( 'wp_enqueue_scripts' ,function(){
 
                 // ACTIVE_TODO temp.
                 return false;
-                
+
                 console.log("asset slider addEventListener");
 
                 window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.init_listener('splide',function(event, stat_object, notification_response){
