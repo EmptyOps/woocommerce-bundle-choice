@@ -621,27 +621,27 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// 	-- rectify if there are any such similar issue
 
 		//////// 02-04-2022 @shraddha /////// 
-		eo_wbc_e_render_table(type,data);	
-		window.eo_wbc_object.enable_filter_table = true;
+		// eo_wbc_e_render_table(type,data);	
+		// window.eo_wbc_object.enable_filter_table = true;
 		// jQuery(".ui.sticky").sticky('refresh');
 
 		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
 		// --add to be confirmed & 2187 TO 2324--
 
-		eo_wbc_e_render_table(type,data);	
-		window.eo_wbc_object.enable_filter_table = true; 
+		// eo_wbc_e_render_table(type,data);	
+		// window.eo_wbc_object.enable_filter_table = true; 
 
 
 		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
 		// --add to be confirmed 2601 TO 2705--
 
-		eo_wbc_e_render_table(data);
+		// eo_wbc_e_render_table(data);
 
 
 		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
 		// --add to be confirmed 3159 TO 3232--
 
-		eo_wbc_e_render_table(data);
+		// eo_wbc_e_render_table(data);
 
 
 		/*// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template1.js
@@ -1068,7 +1068,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     ///////////////////////////////////////////////////////
 
  	// ACTIVE_TODO_OC_START
-	// 		what other functions we would like to be here? maybe the functions like before_search, no_products_found, preprocess_data(it may contain some of those render_html layer logic like they are in this file or in that sp_tv_template file), find_container/locate_container/determine_target_container, reset_all_filters(should even create rest_filter and then send to that specific functions like reset_icon, reset_slider and so on? maybe yes), apply_filters and so on
+			// what other functions we would like to be here? maybe the functions like before_search, no_products_found, preprocess_data(it may contain some of those render_html layer logic like they are in this file or in that sp_tv_template file), find_container/locate_container/determine_target_container, reset_all_filters(should even create rest_filter and then send to that specific functions like reset_icon, reset_slider and so on? maybe yes), apply_filters and so on
 	// ACTIVE_TODO_OC_END 
 
     //	published public functions 
@@ -1167,9 +1167,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			//////// 27-05-2022 - @drashti /////////
 			// --add to be confirmed 630 TO 734--
 
-			if(!init_call){
-				jQuery(".reset_all_filters.mobile_2").removeClass('mobile_2_hidden');
-			}	
+			// if(!init_call){
+			// 	jQuery(".reset_all_filters.mobile_2").removeClass('mobile_2_hidden');
+			// }	
 
 			// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
 			//////// 27-05-2022 - @drashti /////////
@@ -1186,9 +1186,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			// --add to be confirmed & 2187 TO 2324--
 
 
-			if(!init_call){
-				jQuery(".reset_all_filters.mobile_2").removeClass('mobile_2_hidden');
-			}
+			// if(!init_call){
+			// 	jQuery(".reset_all_filters.mobile_2").removeClass('mobile_2_hidden');
+			// }
 
 
 

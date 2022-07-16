@@ -1172,9 +1172,10 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
     var process_attribute_data = function(type, element, data, mode = null) {
 
         data.options.each(function () {
-            if (jQuery(element).val() !== '') {
-                data.selects.push(jQuery(element).val());
-                data.selected = current.length === 0 ? eq.val() : current.val();
+
+            if (jQuery(this).val() !== '') {
+                data.selects.push(jQuery(this).val());
+                data.selected = data.current.length === 0 ? data.eq.val() : data.current.val();
             }
         });
 
