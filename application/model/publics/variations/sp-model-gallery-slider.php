@@ -43,7 +43,7 @@ class SP_Model_Gallery_Slider extends Eowbc_Base_Model_Publics {
 		});
 		
 		add_filter('sp_slzm_slider_container', function($classes){
-			$classes[] = 'small-img';
+			$classes[] = 'splide_slider_container';
 
 			return $classes;
 		});
@@ -69,7 +69,7 @@ class SP_Model_Gallery_Slider extends Eowbc_Base_Model_Publics {
             $template_data['singleton_function'] = 'wbc';
 
             //$template_data['data']['image'] = -1;
-        	$template_data['data']['index'] = -1;
+        	// $template_data['data']['index'] = -1;
 
         	$template_data['data']['gallery_images_template_data'] = array();
         	$template_data['data']['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'] = array();

@@ -39,7 +39,9 @@ add_action( 'wp_enqueue_scripts' ,function(){
 
         var init_function = function(){
 
-            var splide = new Splide( '#slider1', {
+            console.log("slider asset init_function");
+
+            var splide = new Splide( /*'#slider1'*/ '.splide_slider_container', {
                 direction   : 'ttb',
                  wheel       : true,
                  releaseWheel: true,
@@ -83,16 +85,22 @@ add_action( 'wp_enqueue_scripts' ,function(){
             // ACTIVE_TODO below timeout function is temporary. remove it when the loading sequence is fixed. 
             window.setTimeout(function(){
 
-                window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.init_listener(function(){
+                console.log("asset slider addEventListener");
+
+                window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.init_listener(function(event, stat_object, notification_response){
+
+                    console.log("asset slider init_listener");
 
                     init_function();
                 });
-                window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.refresh_listener(function(){
+                window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.refresh_listener(function(event, stat_object, notification_response){
+
+                    console.log("asset slider refresh_listener");
 
                     init_function();
                 });
 
-            },3000);    
+            },1000);    
 
         });
 

@@ -10,9 +10,9 @@
 $attribute = $woo_dropdown_attribute_html_data['args'][ 'attribute' ];
 $attribute_object = $variable_item_wrapper_data['attribute_object'];
 
-$css_classes = array("{$woo_dropdown_attribute_html_data['type']}-variable-wrapper");
+// $css_classes = array("{$woo_dropdown_attribute_html_data['type']}-variable-wrapper");
 
-array_push($css_classes, 'spui-wbc-swatches-variable-items-wrapper spui-wbc-swatches-variable-items-wrapper-'.$woo_dropdown_attribute_html_data['type']);
+// array_push($css_classes, 'spui-wbc-swatches-variable-items-wrapper spui-wbc-swatches-variable-items-wrapper-'.$woo_dropdown_attribute_html_data['type']);
 
 $ribbon_color = get_term_meta( $attribute_object->attribute_id,'wbc_ribbon_color',true);
 
@@ -36,7 +36,16 @@ $template = array(
             'child' => array(
                 array(
                     'type' =>'ul',
-                    'class' => 'ui mini images variable-items-wrapper '.trim( implode( ' ', array_unique( $css_classes ) ) ),
+                    'class' => array(
+                                        'ui',
+                                        'mini',
+                                        'images',
+                                        'variable-items-wrapper',
+                                        /*trim( implode( ' ', array_unique( $css_classes ) ) ),*/
+                                        'spui-wbc-swatches-variable-items-wrapper',
+                                        'spui-wbc-swatches-variable-items-wrapper-'.$woo_dropdown_attribute_html_data['type'],
+                                        $woo_dropdown_attribute_html_data['type']."-variable-wrapper"
+                                    ), 
                     // 'preHTML' => $contents,
                     'attr' => array( 'data-attribute_name' => esc_attr( wc_variation_attribute_name( $attribute ) ),'data-attribute_values' =>wc_esc_json( wp_json_encode( array_values( $woo_dropdown_attribute_html_data['options'] ) ) ), 'data-type'=>$woo_dropdown_attribute_html_data['type']),
                     'child' => $variable_item_ui

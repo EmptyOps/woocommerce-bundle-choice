@@ -33,13 +33,15 @@ class SP_Model_Gallery_Zoom extends Eowbc_Base_Model_Publics {
 	public function render_ui(){
 		
 		add_filter('sp_slzm_zoom_container', function($classes){
-			$classes[] = 'big-img';
+			$classes[] = 'imagezoomsl_zoom_container';
 
 			return $classes;
 		});
 
 		add_filter('sp_slzm_zoom_image_loop_js_tempalte',function($html, $index, $image) {
 
+			// wbc_pr( "SP_Model_Gallery_Zoom index ".$index );
+			// wbc_pr( $html );	
 			// NOTE: this hook will intend to run at last by setting the priority to 100, so that if any other layer wants to provide the js tempates then they can and in that case this hook will just provided html. so it will apply html from here only if html is not applied by any other layers. 
 			if( !empty($html) ) {
 				return $html;	
@@ -63,6 +65,7 @@ class SP_Model_Gallery_Zoom extends Eowbc_Base_Model_Publics {
 			$image['video_embed_type'] = '{{data.video_embed_type}}';
 			$image['video_embed_url'] = '{{data.video_embed_url}}';
 			$image['post_thumbnail_id'] = '{{data.post_thumbnail_id}}';
+			$image['index'] = '{{data.index}}';
 
 			$data = array();
 			$data['image'] = $image;
@@ -74,12 +77,15 @@ class SP_Model_Gallery_Zoom extends Eowbc_Base_Model_Publics {
             $template_data['singleton_function'] = 'wbc';
 
             //$template_data['data']['image'] = -1;
-        	$template_data['data']['index'] = -1;
+        	// $template_data['data']['index'] = -1;
 
         	$template_data['data']['gallery_images_template_data'] = array();
         	$template_data['data']['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'] = array();
         	$template_data['data']['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'][$template_data['data']['index']] = -1;
             $html =  wbc()->load->template($template_data['template_sub_dir'].'/'.$template_data['template_key'],(isset($template_data['data'])?$template_data['data']:array()),true,$template_data['singleton_function'],true,true);
+
+   //          wbc_pr( "SP_Model_Gallery_Zoom index ".$index );
+			// wbc_pr( $html );	
 
 			return $html;
 		}, 100, 3);

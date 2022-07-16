@@ -19,7 +19,7 @@ if(!class_exists('WBC_Loader')) {
 			//	no implemetations 
 		}
 
-		public function asset($type,$path,$param = array(),$version="",$load_instantly=false,$is_prefix_handle=false,$localize_var=null,$localize_var_val=null) {
+		public function asset($type,$path,$param = array(),$version="",$load_instantly=false,$is_prefix_handle=false,$localize_var=null,$localize_var_val=null,$in_footer = false) {
 			
 			if(!apply_filters('wbc_load_asset_filter',true,$type,$path,$param,$version,$load_instantly)) {
 				return true;
@@ -57,10 +57,10 @@ if(!class_exists('WBC_Loader')) {
 							}
 
 							if(empty($version)) {
-								wp_register_script($_handle, $_path, $param );
+								wp_register_script($_handle, $_path, $param, false, $in_footer );
 							}
 							else {
-								wp_register_script($_handle, $_path, $param, $version );
+								wp_register_script($_handle, $_path, $param, $version, $in_footer );
 							}				
 							wp_enqueue_script($_handle);					
 
@@ -82,12 +82,12 @@ if(!class_exists('WBC_Loader')) {
 
 						}
 
-						if(empty($version)) {
-							wp_register_script($_handle, $_path, $param );
-						}
-						else {
-							wp_register_script($_handle, $_path, $param, $version );
-						}				
+							if(empty($version)) {
+								wp_register_script($_handle, $_path, $param, false, $in_footer );
+							}
+							else {
+								wp_register_script($_handle, $_path, $param, $version, $in_footer );
+							}				
 						wp_enqueue_script($_handle);					
 
 						if( !empty($localize_var) && !empty($localize_var_val) ) {

@@ -56,13 +56,45 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 					--  what we need for many flow here is filter hook kind of logic which returns data stat on notification/events.
 						--  we can achive it if child modules provide callbacks during main calls, it will be neat but require mantaining parameter passing and so on. so need to tweak observer pattern notifications to provide this kind of flow. still confirm once before implementing -- to s & -- to h
 						NOTE: wp maybe alredy provideing filter hook api but we can simply implement it in our observer pattern by adding some additional parameter and mainataining filter var stat. 
-							--	simply create the function subscribe_observer_filter or simply we can name it subscribe_filter or simply lets do add_filter -- to s 
-								--	and regarding the implementation let hope that wp.hooks is available in console, we may need to add some dependancy. 
-									--	if that is not available then we need to implement our own implementation 
-								--	and now the main events core module will contain one private var under _this.configs.core_library, and if we are use to wp.hooks then set that to wp hardcoded. 
-									--	and use that in if conditon and do implement wp.hooks based filters inside those conditional blocks and the other implementation can be provided conditionally 
-								--	maybe we can compare te existing subscribeObserver notification as the action in the analogy, but anyway we can turn to action hooks also but only if required and at some right time ACTIVE_TODO 
+							// --	simply create the function subscribe_observer_filter or simply we can name it subscribe_filter or simply lets do add_filter -- to s done
+								// --	and regarding the implementation let hope that wp.hooks is available in console, we may need to add some dependancy. 
+								// 	--	if that is not available then we need to implement our own implementation 
+								// --	and now the main events core module will contain one private var under _this.configs.events_backend, and if we are use to wp.hooks then set that to wp hardcoded. 
+								// 	--	and use that in if conditon and do implement wp.hooks based filters inside those conditional blocks and the other implementation can be provided conditionally 
+								// --	maybe we can compare te existing subscribeObserver notification as the action in the analogy, but anyway we can turn to action hooks also but only if required and at some right time
+								// --	instead of mainataining our own events backend, lets mark that as default -- to s. done
+									// --	so if conditon of _o function and that events_backend property == 'jquery' then simply implement jquery backend connection. -- to s done
+									// --	and else conditon at last will always host our default backend implementation layers. we are not going to implement our own backend since that is like reinventing the wheel but yeah our events module and their now defined functions will remain at core and central to everythings -- to s done
+										--	ACTIVE_TODO but yeah we may like define the function names to make it lighter, shorter and more closer to analogy of jQuery events. -- to s 
+										NOTE: 
 
+											1 	and yeah we are not doing wp.hooks and only the jquery events is because they are much more popular and have vast community and support. and we will continue to use it if nothing else comes in the place. but yeah still there is something like our architecture of the events core and the standards we defined on one level callbacks only, the way subscribe params and response params are supposed to be will all remain in place. to ensure clean data and stat management and to keep the things simple. 
+											// 2 	and the subject key means feature key will be used for definining events key in format like splugins.events.feature_unique_key.notification_key -- to s done
+											// 3 	and we can consider the freature key as selector for events host for example document in case of example jQUery(document).on and can consider subscriber_key as listener selector. but that will lead to additional complexity of always defining feature_unique_key and subscriber key based on the actual dom selectors. 
+												// --	our objective of implementing central layer which can take some control or at least have everything under it so that is covered. 
+													// --	since recommends to avoid excessive use of document or document.body as events host selector so lets just use any lighter id based node that can always be present or we can simply create one simple hidden div in body, with id like splugins_events_host_node and just keep using that. -- to s done
+											4 	in case of jQuery events_backend the subject and observer will be self serving means there will be no need to create their object but jquery will simply keep events binding of subject under document.body while observer callbacks will also be maintained by it. 
+												// 4.1 	so simply route the createSubject call to nothing for now and we can keep the notifications stat to only accept supported notifications but we can do that later as required and necessary. so empty if condition block -- to s. done
+												// 4.2 	subscribeObserver will call .on method -- to s done
+												// 4.3 	notifyAllObservers will call trigger method -- to s done
+												// 4.4 	for data filter events we will use subscribe_observer_filter function against for add_filter -- to s done
+												// 4.5 	and for apply filters we will use apply_all_observer_filters, and it will use triggerHandler so call that. -- to s done
+														--	and all the subscriber callback functions must return the .data(event.data.event_key) and whoever interested in changing(filtering) data would change data using .data method. -- to s 
+															--	however we are interested more in ensuring that all callback functions are executed before the anything happens after apply_all_observer_filters call. and with mere trigger we can not surely say that but with triggerHandler we can surely confirm that. : NOTE 
+
+
+		--	loading sequence 
+			--	all in all, we want to do simple and self serving events, events binding and loading sequence architecture. so that we never need to maintain that with so unreliable setTimeout and setInterval and so on, actual more than unreliable they are burden to maintain always and if not cancelled/stopped properly then they would always weaken the seo reports. 
+			--	as per this link https://stackoverflow.com/questions/8996852/load-and-execute-order-of-scripts, we can simply load scripts in the priority we want to execute, all inline script in the footer, and they are also in the priority we want to execute using priority of the wp_footer hook. 
+				--	so for example all extensions variations assets inline script first, then anything that requires in between and at last the slider and zoom assets. 
+				--	however still what we need to manage in case of our sp_variations module is 
+					--	extensions should bind to the events 
+					--	then the sp_slzm module init for activating its listeners(here we are doing extra layer of providing listeners so that we can provide simple and synchronus experience that avoids complexity where possible) 
+						--	then the slider and zoom asset will call above listener 
+					--	then the sp_variations modules should init 
+					--	and then most challanging of all is external event dependancy, for example wc_variations_form. I think we can simply restructure our loading sequence a little bit as required but the external events should be take care of always witout failling. so we should simply give that ultimate priority and bind that always on time, whenever they want us to bind to them. and then structure rest of the loading sequence accordingly. 
+
+		 
 		ACTIVE_TODO_OC_END
 
 		//	the filter events 
@@ -73,7 +105,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		advance_filter_accordian();
 
 
-		ACTIVE_TODO need to confirm -- shraddha
+		// ACTIVE_TODO need to confirm -- shraddha
 		init_search();
 
     };
@@ -154,8 +186,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     // ACTIVE_TODO_OC_START
     // from tv js layer -- currently from sp_tv_template js layer 
     // ACTIVE_TODO_OC_END
-
-	jQuery.fn.eo_wbc_filter_change=function(init_call=false,form_selector="form[id*='eo_wbc_filter']",render_container='.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products') 
+ 
 	var eo_wbc_filter_change_wrapper_private = function() {
 
 		sould_search();
@@ -847,35 +878,38 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		and below one to the hide_loader function -- to d 
 		//jQuery("body").fadeTo('fast','1')									
 		jQuery("#loading").removeClass('loading');
-		// ACTIVE_TODO_OC_START
-		// almost all of the below seems compatibility related to so move that to compatibility function, and at there we need to have section conditon like this would be broadly as product-listing -- to d 
-		// 	--	you already moved below code, which I saw, but there is not comment below that it is moved so please let me know what is going on -- to d 
-		// ACTIVE_TODO_OC_END
-		jQuery('.products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)').addClass('product_grid_view');
-		//jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination').css('visibility','visible');
-		if(jQuery(".row-inner>.col-lg-9").length>0){
-			jQuery(".row-inner>.col-lg-9 *").each(function(i,e) {		
-			    if(jQuery(e).css('opacity') == '0'){
-					jQuery(e).css('opacity','1');        
-			    }
-			});
-			jQuery(".t-entry-visual-overlay").removeClass('t-entry-visual-overlay');
-			jQuery(".double-gutter .tmb").css('width','50%');
-			jQuery(".double-gutter .tmb").css('display','inline-flex');
-		}
+
+
+		ACTIVE_TODO_OC_START
+		almost all of the below seems compatibility related to so move that to compatibility function, and at there we need to have section conditon like this would be broadly as product-listing -- to d 
+			--	you already moved below code, which I saw, but there is not comment below that it is moved so please let me know what is going on -- to d 
+		ACTIVE_TODO_OC_END
+		// jQuery('.products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)').addClass('product_grid_view');
+		// //jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination').css('visibility','visible');
+		// if(jQuery(".row-inner>.col-lg-9").length>0){
+		// 	jQuery(".row-inner>.col-lg-9 *").each(function(i,e) {		
+		// 	    if(jQuery(e).css('opacity') == '0'){
+		// 			jQuery(e).css('opacity','1');        
+		// 	    }
+		// 	});
+		// 	jQuery(".t-entry-visual-overlay").removeClass('t-entry-visual-overlay');
+		// 	jQuery(".double-gutter .tmb").css('width','50%');
+		// 	jQuery(".double-gutter .tmb").css('display','inline-flex');
+		// }
 		
-		jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination,jet-filters-pagination').css('visibility','visible');
+		// jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination,jet-filters-pagination').css('visibility','visible');
 
-		// Fix for the yith wishlist.
-		if(typeof(yith_wcwl_l10n)=='object'){
-			eowbc_yith_wishlist_fix();
-		}
-		// lazyload
-		if(typeof(LazyLoad)=='function'){
-			eowbc_lazyload();
-		}
+		// // Fix for the yith wishlist.
+		// if(typeof(yith_wcwl_l10n)=='object'){
+		// 	eowbc_yith_wishlist_fix();
+		// }
+		// // lazyload
+		// if(typeof(LazyLoad)=='function'){
+		// 	eowbc_lazyload();
+		// }
+		compatability('product-listing');
 
-    }
+    };
 
     var show_loader = function(){
 
@@ -927,7 +961,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		var show_loader_callback = null ;
         window.document.splugins.events.api.notifyAllObservers( 'filters', 'show_loader', {}, show_loader_callback );
 
-    }
+    };
 
     var hide_loader = function(){
 

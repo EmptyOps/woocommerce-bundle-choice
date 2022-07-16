@@ -224,87 +224,162 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
  //  publish it 
  window.document.splugins.events.observer.api = window.document.splugins.events.observer.core( {} );
  
- window.document.splugins.events.core = function() {
-
-    var _this = this;
+ window.document.splugins.events.core = function( configs ) {
+ 
+     var _this = this; 
+ 
+     _this.configs = jQuery.extend({}, {}/*default configs*/, configs);  
 
      _this.subjects = [];
+
+     var init_private = function(){
+
+        events_host_node();
+
+     };
+
+     var events_host_node = function() {
+
+        _this.$events_host_node = jQuery('<div />').appendTo('body');
+        _this.$events_host_node.attr('id', 'splugins_events_host_node');  
+
+     };
+
+     var event_key = function(feature_unique_key, notification_key) {
+
+        return 'splugins.events.'+feature_unique_key+'.'+notification_key;
+     };
  
      return {
- 
+        
          createSubject: function( feature_unique_key, notifications ) {
-             // console.log("Observer " + index + " is notified!");
- 
-             // TODO check if subject already created and exist then throw error
-             // var index = this.observers.indexOf(observer);
-             // if(index > -1) {
-             // this.observers.splice(index, 1);
-             // }
- 
-             _this.subjects.push( window.document.splugins.events.subject.core( feature_unique_key, notifications ) );
+
+            if(window.document.splugins.common._o( _this.configs, 'events_backend') && _this.configs.events_backend == 'jquery' ) {
+
+
+
+            } else {
+                 // console.log("Observer " + index + " is notified!");
+     
+                 // TODO check if subject already created and exist then throw error
+                 // var index = this.observers.indexOf(observer);
+                 // if(index > -1) {
+                 // this.observers.splice(index, 1);
+                 // }
+     
+                 _this.subjects.push( window.document.splugins.events.subject.core( feature_unique_key, notifications ) );
+             }
          },
          
          subscribeObserver: function(feature_unique_key, subscriber_key, notification_key, callback) {
-             // console.log("Observer " + index + " is notified!");
- 
-             // before subscribing the ovserver check if the feature_unique_key subject is created in the first place, if not then throw error 
-             var found_index = null;
-             for(var i = 0; i < _this.subjects.length; i++){
-                 if( _this.subjects[i].feature_unique_key() == feature_unique_key ) {
- 
-                     found_index = i;
-                     break;
+
+            if(window.document.splugins.common._o( _this.configs, 'events_backend') && _this.configs.events_backend == 'jquery' ) {
+
+                jQuery(_this.$events_host_node).on(event_key(feature_unique_key, notification_key), callback);
+
+            } else {
+
+                 // console.log("Observer " + index + " is notified!");
+     
+                 // before subscribing the ovserver check if the feature_unique_key subject is created in the first place, if not then throw error 
+                 var found_index = null;
+                 for(var i = 0; i < _this.subjects.length; i++){
+                     if( _this.subjects[i].feature_unique_key() == feature_unique_key ) {
+     
+                         found_index = i;
+                         break;
+                     }
                  }
-             }
 
-             if( found_index == null || found_index == -1 ) {
- 
-                 throw "There is no subject exist for specified feature_unique_key "+feature_unique_key;
+                 if( found_index == null || found_index == -1 ) {
+     
+                     throw "There is no subject exist for specified feature_unique_key "+feature_unique_key;
 
-             } else {
+                 } else {
 
-                console.log('found_index '+found_index);
-                console.log('found_index_subject '+_this.subjects[found_index]);
+                    console.log('found_index '+found_index);
+                    console.log('found_index_subject '+_this.subjects[found_index]);
 
-                
-                var observer = _this.subjects[found_index].get_observer( subscriber_key );
-                
-                if(observer != null) {
+                    
+                    var observer = _this.subjects[found_index].get_observer( subscriber_key );
+                    
+                    if(observer != null) {
 
-                    observer = _this.subjects[found_index].subscribeObserver( observer );
+                        observer = _this.subjects[found_index].subscribeObserver( observer );
 
-                } else {
+                    } else {
 
-                    observer = _this.subjects[found_index].subscribeObserver( window.document.splugins.events.observer.core( subscriber_key ) );
+                        observer = _this.subjects[found_index].subscribeObserver( window.document.splugins.events.observer.core( subscriber_key ) );
 
-                }
+                    }
 
-                observer.subscribe_notification(notification_key, callback);
+                    observer.subscribe_notification(notification_key, callback);
+                 }
              }
          },
-         notifyAllObservers: function(feature_unique_key, notification, stat_object=null, notification_response=null ) {
- 
-             // NOTE: now the events module will officially support one way callback on the notification that is recieved by subscriber. and also the one more stat_object var. and the callback is strictly one way only and there is no plan to extend it further. and even if it is required for any flow then the base flow and architecture should be refactored to achieve that which will ensure simple and clean flow, and if extend callback flow further then it would help achieve high dynamics but would also lead to unnecessarily complex, sensitive to regression effects and the messy architecture resulting in many long debug sessions also. so instead in such cases js modules should refine there architecture a little as needed and simply publish public function under their api which would do the job. and if even by any chance we required to do this then it must be confirmed with the expertly designed architectures and design patterns which confirms that more level of callbacks would be fine and not lead to complex or messy flows or race conditions if followed certain standards. -- and on a side note one can make use of stat_object and some additional mechanisam to implement back and forth callbacks but as usual since we are not supporting the callbacks officially similarly we neither intend to implement or approve any such flow. so that should not be done in the first place. 
- 
-             // console.log("Observer " + index + " is notified!");
- 
-             // check if the feature_unique_key subject is created in the first place, if not then throw error 
-             var found_index = null;
-             for(var i = 0; i < _this.subjects.length; i++){
-                 if( _this.subjects[i].feature_unique_key() == feature_unique_key ) {
- 
-                     found_index = i;
-                     break;
+         notifyAllObservers: function(feature_unique_key, notification_key, stat_object=null, notification_response=null ) {
+            
+            if(window.document.splugins.common._o( _this.configs, 'events_backend') && _this.configs.events_backend == 'jquery' ) {
+
+                stat_object = stat_object || {};
+                stat_object.event_key = event_key(feature_unique_key, notification_key);
+
+                jQuery(_this.$events_host_node).trigger(stat_object.event_key, [stat_object, notification_response]);
+
+            } else {
+
+                 // NOTE: now the events module will officially support one way callback on the notification that is recieved by subscriber. and also the one more stat_object var. and the callback is strictly one way only and there is no plan to extend it further. and even if it is required for any flow then the base flow and architecture should be refactored to achieve that which will ensure simple and clean flow, and if extend callback flow further then it would help achieve high dynamics but would also lead to unnecessarily complex, sensitive to regression effects and the messy architecture resulting in many long debug sessions also. so instead in such cases js modules should refine there architecture a little as needed and simply publish public function under their api which would do the job. and if even by any chance we required to do this then it must be confirmed with the expertly designed architectures and design patterns which confirms that more level of callbacks would be fine and not lead to complex or messy flows or race conditions if followed certain standards. -- and on a side note one can make use of stat_object and some additional mechanisam to implement back and forth callbacks but as usual since we are not supporting the callbacks officially similarly we neither intend to implement or approve any such flow. so that should not be done in the first place. 
+     
+                 // console.log("Observer " + index + " is notified!");
+     
+                 // check if the feature_unique_key subject is created in the first place, if not then throw error 
+                 var found_index = null;
+                 for(var i = 0; i < _this.subjects.length; i++){
+                     if( _this.subjects[i].feature_unique_key() == feature_unique_key ) {
+     
+                         found_index = i;
+                         break;
+                     }
+                 }
+     
+                 if( found_index == -1 ) {
+     
+                     throw "There is no subject exist for specified feature_unique_key "+feature_unique_key;
+                 } else {
+     
+                     _this.subjects[found_index].notifyAllObservers( notification_key, stat_object, notification_response );
                  }
              }
- 
-             if( found_index == -1 ) {
- 
-                 throw "There is no subject exist for specified feature_unique_key "+feature_unique_key;
-             } else {
- 
-                 _this.subjects[found_index].notifyAllObservers( notification, stat_object, notification_response );
-             }
+         },
+         subscribe_observer_filter: function(feature_unique_key, subscriber_key, notification_key, callback) {
+
+            if(window.document.splugins.common._o( _this.configs, 'events_backend') && _this.configs.events_backend == 'jquery' ) {
+
+                jQuery(_this.$events_host_node).on(event_key(feature_unique_key, notification_key), callback);
+
+            } else {
+
+            }
+
+         },
+         apply_all_observer_filters: function(feature_unique_key, notification_key, stat_object=null, notification_response=null) {
+
+            if(window.document.splugins.common._o( _this.configs, 'events_backend') && _this.configs.events_backend == 'jquery' ) {
+
+                stat_object = stat_object || {};
+                stat_object.event_key = event_key(feature_unique_key, notification_key);
+
+                return jQuery(_this.$events_host_node).triggerHandler(stat_object.event_key, [stat_object, notification_response]);
+
+            } else {
+
+            }
+
+         },
+         init: function() {
+
+            init_private();
+
          }
  
      }
@@ -312,8 +387,9 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
  
  
  //  publish it 
- window.document.splugins.events.api = window.document.splugins.events.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
- 
+ window.document.splugins.events.api = window.document.splugins.events.core( {events_backend:'jquery'} );
+ window.document.splugins.events.api.init();
+
  // var subject = new Subject();
  
  // var observer1 = new Observer();
@@ -865,10 +941,9 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
             //  had we used the _jQueryInterface style the _jQueryInterface call would have started from here 
             preprocess( this, event );  
         });
-
-        // ACTIVE_TODO temp. 
-        // jQuery('.variations_form').wc_variation_form();
-        preprocess( jQuery('.variations_form'), event );  
+        // // ACTIVE_TODO temp. 
+        // // jQuery('.variations_form').wc_variation_form();
+        // preprocess( jQuery('.variations_form'), event );  
 
         // below do apply our flows like -- to s 
             // --  change with _this.base_container done
@@ -1215,10 +1290,11 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
         if(type == null){
 
             // _this.data.attribute_types.each( function( i, type ) {
-            _this.$base_element.find('ul.spui-wbc-swatches-variable-item,.spui-wbc-swatches-variable-item').each(function (i, element) {
-                
-                var type_inner = jQuery(element).data('type');
+            // _this.$base_element.find('ul.spui-wbc-swatches-variable-item,.spui-wbc-swatches-variable-item').each(function (i, element) {
+            _this.$base_element.find('ul.variable-items-wrapper').each(function (i, element) {
 
+                var type_inner = jQuery(element).data('type');
+                console.log("process_attribute_types data type" +type_inner);
                 // ACTIVE_TODO_OC_START
                 // --  so above preprocess_data call should simply prepare two attribute types list, first is attribute_types and second is ... or simply one only. and simply delegate everything else that is not coming under attribute_types, to the extensions layers. and should simply publish this list of attribute_types from backend. 
                 // NOTE: and one of the key benefit of this approach is that these layers will emit the broadcast notification event only if they detect the type to be the premiumly supported type and otherwise not. which would minimize process and little or not hanging processes and less debug console logs that would appear around. 
@@ -1226,7 +1302,7 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
                 // is the woo input template type means dropdown is mandatorily kept by plugins, not seems likely but still confirm and then we need a way to determine(always) the exact input type based on the field/input type selected on woo panel or otherwise simply support the input_template_type field which will be set in background implicitly based on the field/input type selected on woo panel -- this field is simply better then managing many different template names of extensions and defining based on that -- and it will default to the above field/input type for wbc nothing to manage, only if condition below that if input_template_type is not defined then read simply above field/input type. and in case of extensions that need to be defined based on the template that is selected on their admin panel. so this template option should be only be defining it and passing it where applicable so that is gets here. and it is need to be defined based on that only to avoid confusion and many unnecessary and confusing configuration overheads. no simply need to stick to attribute type only means field/input-type selected on woo panel and that is standard and clean. so implement here based on that only. -- to h or -- to d 
                 // ACTIVE_TODO_OC_END
 
-                if (window.document.splugins.common._o(_this.configs.attribute_types_keys, type_inner)) {
+                if ( true || window.document.splugins.common._o(_this.configs.attribute_types_keys, type_inner)) {
 
                      process_attribute_types_inner(type_inner, element);
 
@@ -1242,6 +1318,7 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
                         if (window.document.splugins.common._o(_this.configs.attribute_types_keys, type_inner_1)) {
                             process_attribute_types(type_inner_1, element);
+                            console.log("type_inner_1" +type_inner_1);
                             
                         }
 
@@ -1355,6 +1432,18 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
         
         var data = {};
 
+        // NOTE : uniquely_managed_type is not needed to be managed here
+        /*var uniquely_managed_type = null;
+        if(type == 'radio') {
+
+            uniquely_managed_type = type;
+
+        } else {
+
+            uniquely_managed_type = 'default';            
+            
+        }*/
+
         // ACTIVE_TODO is it needed? and why they did it? -- to s. check and update me 
         jQuery(element).parent().addClass('woo-variation-items-wrapper');
 
@@ -1374,11 +1463,12 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
         // ACTIVE_TODO we do not have any more (class woo-variation-swatches-variable-item-more) class related flow yet. but t you need to first plan the template structure -- to t
             // ACTIVE_TODO -- then once template ready then implaemnt on php side and do the needful on js layers -- to s
-       /* data.*/inner_list = jQuery(element).find('li:not(.spui-wbc-swatches-variable-item-more),div:not(.spui-wbc-swatches-variable-item-more)');
+       /* data.*/inner_list = jQuery(element).find('li:not(.spui-wbc-swatches-variable-item-more)');
             // ACTIVE_TODO however note that, for this once t gives conclusion our final implementation will follow -- to t 
         data.reselect_clear = jQuery(element).hasClass('reselect-clear');
 
-        data.mouse_event_name = 'click'; // 'touchstart click';
+        // data.mouse_event_name = 'click'; // 'touchstart click';
+        _this.configs.mouse_event_name = ( window.document.splugins.common._o( _this.configs, 'mouse_event_name') ? _this.configs.mouse_event_name : 'click'  ); // 'touchstart click';
 
         data.attribute = jQuery(element).data('attribute_name');
         // let attribute_values = ((_this.is_ajax_variation) ? [] : _this._generated[attribute])
@@ -1408,6 +1498,7 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
         
         inner_list.each(function (index, inner_element ) {
 
+            console.log("inner element " +inner_element);
             data.attribute_value = jQuery(inner_element).attr('data-value');
             data.attribute_title = jQuery(inner_element).attr('data-title');
 
@@ -1451,17 +1542,20 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
             // Out of Stock
 
-            if (available.length > 0 && splugins._.includes(data.out_of_stock_selects, data.attribute_value) && _this.configs.options.clickable_out_of_stock) {
+            if (data.available.length > 0 && splugins._.includes(data.out_of_stock_selects, data.attribute_value) && _this.configs.options.clickable_out_of_stock) {
               $(data.inner_element).removeClass('disabled').addClass('out-of-stock');
             }
         });
         // });
+        console.log("process_attribute_template");
 
-        on_change_listener(type, element, data.reselect_clear); 
+        on_click_listener(type, element, data.reselect_clear, data);
+
+        on_keydown_listener(type, element);   
+
+        on_change_listener(type, element, data.reselect_clear, null, data); 
 
     };
-
-
 
     var process_pages = function(type, element) {
 
@@ -1488,9 +1582,9 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
         // on_change_listener(type, element);    
 
-        on_click_listener(type, element);
+        // on_click_listener(type, element);
 
-        on_keydown_listener(type, element);   
+        // on_keydown_listener(type, element);   
 
     };
 
@@ -1514,19 +1608,34 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
     // -   events 
     // --  mouse events 
-    var on_change_listener = function(type, element, reselect_clear) {
+    var on_change_listener = function(type, element, reselect_clear, uniquely_managed_type, data) {
 
-        if(window.document.splugins.common._b(_this.binding_stats, 'on_change_listener', type)){
+        console.log("swatches on_change_listener");
+        // var uniquely_managed_type = null;
+        if(type == 'radio'/*change radio with your uniquely managed type*/) {
+
+            uniquely_managed_type = type;
+
+        } else {
+
+            uniquely_managed_type = 'default';            
+
+        }
+
+        if(window.document.splugins.common._b(_this.binding_stats, 'on_change_listener', uniquely_managed_type)){
             return false;
         }
 
         /*jQuery('#select_attribute_of_variation').on('woocommerce_variation_has_changed', function(){
             // do your magic here...
          }); */
+        
+        console.log("swatches on_change_listener after if");
 
         _this.$base_element.off('woocommerce_variation_has_changed');
         _this.$base_element.on('woocommerce_variation_has_changed', function (event) {
 
+            console.log("swatches on_change_listener after if woocommerce_variation_has_changed");
           // Don't use any propagation. It will disable composit product functionality
           // event.stopPropagation();
 
@@ -1709,22 +1818,22 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
                         var is_selected = jQuery(element_inner).parent('li.spui-wbc-swatches-variable-item-radio, .spui-wbc-swatches-variable-item-radio').hasClass('selected');
 
                         if (is_selected) {
-                          select.val('').trigger('change');
+                          data.select.val('').trigger('change');
 
                           // ACTIVE_TODO we do not need this, drop below commentd code after 2 revision 
                           // jQuery(element_inner).parent('li.spui-wbc-swatches-variable-item-radio').trigger('wvs-selected-item', [value, select, _this.$element]); // Custom Event for li
 
                         } else {
-                          select.val(value).trigger('change');
+                          data.select.val(value).trigger('change');
 
                           // ACTIVE_TODO we do not need this, drop below commentd code after 2 revision 
                           // jQuery(element_inner).parent('li.spui-wbc-swatches-variable-item-radio').trigger('wvs-selected-item', [value, select, _this.$element]); // Custom Event for li
                         }
 
-                        select.trigger('click');
-                        select.trigger('focusin');
+                        data.select.trigger('click');
+                        data.select.trigger('focusin');
                         if (window.document.splugins.common.is_mobile) {
-                          select.trigger('touchstart');
+                          data.select.trigger('touchstart');
                         }
                   }
 
@@ -1743,12 +1852,12 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
                   var value = jQuery(element_inner).val();
 
-                  select.val(value).trigger('change');
-                  select.trigger('click');
-                  select.trigger('focusin');
+                  data.select.val(value).trigger('change');
+                  data.select.trigger('click');
+                  data.select.trigger('focusin');
 
                   if (window.document.splugins.common.is_mobile) {
-                    select.trigger('touchstart');
+                    data.select.trigger('touchstart');
                   }
 
                   // Radio
@@ -1763,16 +1872,27 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
     };
 
-    var on_click_listener = function(type, element, reselect_clear) {
-        console.log("on_click_listener");
+    var on_click_listener = function(type, element, reselect_clear, data) {
+        console.log("on_click_listener__ " + type );
 
-        if(window.document.splugins.common._b(_this.binding_stats, 'on_click_listener', type)){
-        console.log("on_click_listener inner if");
+        /*var uniquely_managed_type = null;
+        if(type == 'radio') {
 
-            return false;
-        }
+            uniquely_managed_type = type;
+
+        } else {
+
+            uniquely_managed_type = 'default';            
+            
+        }*/
+
+        // if(window.document.splugins.common._b(_this.binding_stats, 'on_click_listener', type)){
+        // console.log("on_click_listener inner if");
+
+        //     return false;
+        // }
         
-        var mouse_event_name = 'click';
+        // var mouse_event_name = 'click';
 
         /*ACTIVE_TODO_OC_START
         here it seems that m have explicitly handled the click event, but we should do if it is by standard require and the legacy flows does need us to take care of it. so confirm first with the plugin we are exploring -- to h 
@@ -1803,7 +1923,9 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
             // Non Selected Item Should Select
             // ACTIVE_TODO here we need to manage non li templates
-            jQuery(element).on(mouse_event_name, 'li:not(.selected):not(.radio-variable-item):not(.spui-wbc-swatches-variable-item-more),div:not(.selected):not(.radio-variable-item):not(.spui-wbc-swatches-variable-item-more)', function (event, element_inner) {
+            jQuery(element).on(_this.configs.mouse_event_name, 'li:not(.selected):not(.radio-variable-item):not(.spui-wbc-swatches-variable-item-more)', function (event) {
+
+                var element_inner = this;
 
                 console.log("on_click_listener reselect_clear li, div");
 
@@ -1823,13 +1945,15 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
               // jQuery(element_inner).trigger('focus'); // Mobile tooltip
               // jQuery(element_inner).trigger('wvs-selected-item', [value, select, _this.$element]); // Custom Event for li
               
-              on_click(type, element_inner, event, reselect_clear, false);
+              on_click(type, element_inner, event, reselect_clear, false, data);
             });
 
             // Selected Item Should Non Select
             // ACTIVE_TODO here we need to manage non li templates
                 // ACTIVE_TODO for the notes below event is most likely also used for category page or is maybe for category page only, so we may need to apply category page condition as applicable.
-            jQuery(element).on(mouse_event_name, 'li.selected:not(.radio-variable-item):not(.spui-wbc-swatches-variable-item-more),div.selected:not(.radio-variable-item):not(.spui-wbc-swatches-variable-item-more)', function (event, element_inner) {
+            jQuery(element).on(_this.configs.mouse_event_name, 'li.selected:not(.radio-variable-item):not(.spui-wbc-swatches-variable-item-more)', function (event) {
+
+                var element_inner = this;
 
                 console.log("on_click_listener reselect_clear li, selected, div");
 
@@ -1852,7 +1976,7 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
               // jQuery(element_inner).trigger('wvs-unselected-item', [value, select, _this.$element]); // Custom Event for li
 
-              on_click(type, element_inner, event, reselect_clear, true);
+              on_click(type, element_inner, event, reselect_clear, true, data);
             });
 
             
@@ -1863,13 +1987,15 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
                 // On Click trigger change event on Radio button
 
-                jQuery(element_inner).on(mouse_event_name, 'input.spui-wbc-swatches-variable-item-radio:radio', function (event, element_inner) {
+                jQuery(element_inner).on(_this.configs.mouse_event_name, 'input.spui-wbc-swatches-variable-item-radio:radio', function (event) {
+
+                    var element_inner = this;
 
                   // e.stopPropagation();
 
                   // jQuery(element_inner).trigger('change', { radioChange: true });
 
-                  on_click(type, element_inner, event, reselect_clear);
+                    on_click(type, element_inner, event, reselect_clear, false, data);
                 });
             }
 
@@ -1895,10 +2021,15 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
             });*/
         } else {
 
-            jQuery(element).on(mouse_event_name, 'li:not(.radio-variable-item):not(.spui-wbc-swatches-variable-item-more),div:not(.radio-variable-item):not(.spui-wbc-swatches-variable-item-more)', function (event, element_inner) {
+            console.log("on_click_listener else");
+
+            jQuery(element).on(_this.configs.mouse_event_name, 'li:not(.radio-variable-item):not(.spui-wbc-swatches-variable-item-more)', function (event) {
+
+                var element_inner = this;
 
                 console.log("on_click_listener else li, selected, div");
-
+                console.log(element_inner);
+ 
               // event.preventDefault();
               // event.stopPropagation();
 
@@ -1914,7 +2045,7 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
               // jQuery(element_inner).trigger('wvs-selected-item', [value, select, _this._element]); // Custom Event for li
 
-              on_click(type, element_inner, event, reselect_clear);
+              on_click(type, element_inner, event, reselect_clear, false, data);
             });
 
             /* // Radio
@@ -1938,6 +2069,17 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
     var on_reset_listener = function(type, element) {
 
+        /*var uniquely_managed_type = null;
+        if(type == 'radio') {
+
+            uniquely_managed_type = type;
+
+        } else {
+
+            uniquely_managed_type = 'default';            
+            
+        }*/
+
         jQuery('.variations_form').on('click', '.reset_variations'/*'woocommerce_variation_select_change'*//*'reset'*/,function(){
 
             // ACTIVE_TODO neet to implement reset logic as applicable, need to confirm all reset flows of plugin we are exploring and also uncomment below m code if required and move to base reset function. -- to h & -- to s
@@ -1950,13 +2092,29 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
     };
 
     var on_keydown_listener = function(type, element) {
+        
+        console.log("on_keydown_listener in starting");
+        /*var uniquely_managed_type = null;
+        if(type == 'radio') {
+
+            uniquely_managed_type = type;
+
+        } else {
+
+            uniquely_managed_type = 'default';            
+            
+        }*/
 
         if(window.document.splugins.common._b(_this.binding_stats, 'on_keydown_listener', type)){
             return false;
         }
+        
+        console.log("on_keydown_listener after if");
 
         // Keyboard Access
         jQuery(element).on('keydown', 'li:not(.disabled):not(.spui-wbc-swatches-variable-item-more)', function (event) {
+
+            console.log("on_keydown_listener in event");
 
             on_keydown(type, element, event);
 
@@ -1965,15 +2123,15 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
     };
 
 
-    var on_change = function(type, element, event) {
+    var on_change = function(type, element, event, data) {
 
-        change(type, element);
+        change(type, element, data);
 
     };
 
-    var on_click = function(type, element, event, reselect_clear, is_selected_selctor) {
+    var on_click = function(type, element_inner, event, reselect_clear, is_selected_selctor, data) {
 
-        click(type, element, event, reselect_clear, is_selected_selctor);
+        click(type, element_inner, event, reselect_clear, is_selected_selctor, data);
 
     };
 
@@ -1995,11 +2153,11 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
 
     // -- base events - after the above events are handled by their particular function/layer, they would call below functions to do the ultimate work         
-    var change = function(type, element) {
+    var change = function(type, element, data) {
 
     };
 
-    var click = function(type, element, event, reselect_clear, is_selected_selctor) {
+    var click = function(type, element_inner, event, reselect_clear, is_selected_selctor, data) {
 
         if(reselect_clear) {
             event.preventDefault();
@@ -2015,11 +2173,11 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
             }
 
-            select.val(value).trigger('change');
-            select.trigger('click');
-            select.trigger('focusin');
+            data.select.val(value).trigger('change');
+            data.select.trigger('click');
+            data.select.trigger('focusin');
             if (window.document.splugins.common.is_mobile) {
-                select.trigger('touchstart');
+                data.select.trigger('touchstart');
             }
             jQuery(element_inner).trigger('focus'); // Mobile tooltip
 
@@ -2045,16 +2203,21 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
             event.stopPropagation();
 
             var value = jQuery(element_inner).data('value');
-            select.val(value).trigger('change');
-            select.trigger('click');
-            select.trigger('focusin');
+            // console.log("gggggggg");
+            // console.log(element_inner);
+            // console.log(data.select);
+            // console.log("value" +value);
+            data.select.val(value).trigger('change');
+            data.select.trigger('click');
+            data.select.trigger('focusin');
             if (window.document.splugins.common.is_mobile) {
-                select.trigger('touchstart');
+                data.select.trigger('touchstart');
             }
 
             jQuery(element_inner).trigger('focus'); // Mobile tooltip
 
-            jQuery(element_inner).trigger('wvs-selected-item', [value, select, _this._element]); // Custom Event for li
+            // ACTIVE_TODO here we may like to raise our notification evemnt to completly implement and finish our notifications structure and heirarchi 
+            // jQuery(element_inner).trigger('wvs-selected-item', [value, select, _this._element]); // Custom Event for li
         }
 
     };
@@ -2070,7 +2233,7 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
         if (event.keyCode && 32 === event.keyCode || event.key && ' ' === event.key || event.keyCode && 13 === event.keyCode || event.key && 'enter' === event.key.toLowerCase()) {
           event.preventDefault();
-          jQuery(element).trigger(mouse_event_name);
+          jQuery(element).trigger(_this.configs.mouse_event_name);
         }
     };
 
@@ -2133,14 +2296,14 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
 
     jQuery(document).ready(function() {
     
-        window.setTimeout(function(){
+        // window.setTimeout(function(){
 
             //  publish it 
             window.document.splugins.wbc.variations.swatches.api = window.document.splugins.wbc.variations.swatches.core( common_configs.swatches_config );
 
             window.document.splugins.wbc.variations.swatches.api.init();
 
-        },2000);    
+        // },2000);    
 
     } );
 
@@ -2633,9 +2796,15 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
         var templating_lib = window.document.splugins.common._o( _this.configs, 'templating_lib') ? _this.configs.templating_lib : 'wp';
         
         var template_var = template( _this.configs.template.slider.id, templating_lib );
-        var slider_inner_html = images.map(function (image) {
-            return apply_template_data(template_var, image, templating_lib);
-        }).join('');
+        
+        var slider_inner_html= '';
+        // var slider_inner_html = images.map(function (image) {
+        jQuery( images).each(function (index_inner,image) {
+
+            image.index = index_inner;
+
+            slider_inner_html += apply_template_data(template_var, image, templating_lib);
+        });
 
         _this.$slider_container.html(slider_inner_html);
 
@@ -2652,7 +2821,9 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
         
         var zoom_inner_html = '';
         jQuery( images).each(function (index_inner,image) {
-        
+            
+            image.index = index_inner;
+
             console.log(" gallery_images process_zoom_template inner loop" );
             console.log(index_inner);
 
@@ -2745,7 +2916,30 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
     
         console.log("slider_thumb_click_listener");
 
-        if(window.document.splugins.common._b(_this.binding_stats, 'slider_thumb_click_listener', type)){
+        /*ACTIVE_TODO_OC_START
+        // as per the one of the fundamental objective of the heirachical and layered calling sequence structures in these two modules, the type variable will be overridden here if there is anything in unique need to be handled in these layers. and the rest all will default to type equal to default. -- to s done
+            -- so here there will be radio type that will be allowed as is -- to s 
+                --  and since the actual type var would be needed down the layers for some business logic, to ensure dynamics, which is also one of the objectives of these looped, layered calling flow, so type var will be kept as it is and the new var uniquely_managed_type will be created -- to s 
+                    --  and uniquely_managed_type will be set to value radio for radio. -- to s 
+                        --  this might be invalid, we most likely only need to keep or put if condition based on type variable so uniquely_managed_type can be set to default even for radio. but lets give it a cross thought before doing so. -- to h & -- to s
+                            --  and since now all three listeners of swatches module are deriving from the attribute_template loop so uniquely_managed_type may not be needed even in rest of the functions down the listners layers. -- to h & -- to s
+                                    --  however for gallery_images module we most likely need it because our event binding is general based on slider thumb mostly. so lets confirm once before doing so. -- to h & -- to s 
+                        // --  and will be set to default for the rest all -- to s done
+            ACTIVE_TODO whenever we need to extend above logical peudo then that must be well thought and cross confirmed to avoid adding complexity or issues through peudo. 
+        ACTIVE_TODO_OC_END*/
+
+        var uniquely_managed_type = null;
+        if(type == 'radio'/*change radio with your uniquely managed type*/) {
+
+            uniquely_managed_type = type;
+
+        } else {
+
+            uniquely_managed_type = 'default';            
+
+        }
+
+        if(window.document.splugins.common._b(_this.binding_stats, 'slider_thumb_click_listener', uniquely_managed_type)){
             return false;
         }
         
@@ -2761,21 +2955,49 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
  
     var zoom_area_hover_listener = function(type) {
  
-         if(window.document.splugins.common._b(_this.binding_stats, 'zoom_area_hover_listener', type)){
-             return false;
-         }
+        var uniquely_managed_type = null;
+        if(type == 'radio'/*change radio with your uniquely managed type*/) {
+
+            uniquely_managed_type = type;
+
+        } else {
+
+            uniquely_managed_type = 'default';            
+            
+        }
+
+        if(window.document.splugins.common._b(_this.binding_stats, 'zoom_area_hover_listener', uniquely_managed_type)){
+            return false;
+        }
  
-         on_zoom_area_hover(type);
+        on_zoom_area_hover(type);
  
     };
  
     var variation_change_listener = function(type) {
 
-        if(window.document.splugins.common._b(_this.binding_stats, 'variation_change_listener', type)){
+        console.log("variation_change_listener");
+        var uniquely_managed_type = null;
+        if(type == 'radio'/*change radio with your uniquely managed type*/) {
+
+            uniquely_managed_type = type;
+
+        } else {
+
+            uniquely_managed_type = 'default';            
+            
+        }
+
+        if(window.document.splugins.common._b(_this.binding_stats, 'variation_change_listener', uniquely_managed_type)){
             return false;
         }
- 
+       
+        console.log("variation_change_listener 2");
+        
          _this.$variations_form.on('show_variation', function (event, variation) {
+            
+            console.log("variation_change_listener 2 show_variation");
+
            on_variation_change(event, variation);
          });
  
@@ -2783,16 +3005,43 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
  
     var reset_variation_listener = function(type) {
 
-        if(window.document.splugins.common._b(_this.binding_stats, 'reset_variation_listener', type)){
+        console.log("reset_variation_listener");
+
+        var uniquely_managed_type = null;
+        if(type == 'radio'/*change radio with your uniquely managed type*/) {
+
+            uniquely_managed_type = type;
+
+        } else {
+
+            uniquely_managed_type = 'default';            
+            
+        }
+
+        if(window.document.splugins.common._b(_this.binding_stats, 'reset_variation_listener', uniquely_managed_type)){
             return false;
         }
 
+        console.log("reset_variation_listener 2");
+
         if (_this.configs.options.gallery_reset_on_variation_change) {
+            
+            console.log("reset_variation_listener 2 inner if");
+
             _this.$variations_form.on('hide_variation', function () {
+
+                console.log("reset_variation_listener 2 inner if hide_variation");
+
                 on_reset_variation(type);
             });
         } else {
+            
+            console.log("reset_variation_listener 2 else");
+
             _this.$variations_form.on('click', '.reset_variations', function () {
+
+                console.log("reset_variation_listener 2 else reset_variations");
+
                 on_reset_variation(type);
             });
         }
@@ -3033,11 +3282,13 @@ window.document.splugins.wbc.variations.gallery_images.sp_slzm.core = function( 
    
     var _this = this; 
     
-    _this.init_callbacks = [];
-    _this.refresh_callbacks = [];
-    _this.zoom_callbacks = [];
+    // _this.init_callbacks = [];
+    // _this.refresh_callbacks = [];
+    // _this.zoom_callbacks = [];
 
     var init_private = function(){
+
+        window.document.splugins.events.api.createSubject( 'gallery_images.sp_slzm', ['sp_slzm_init', 'sp_slzm_refresh', 'sp_slzm_refresh_zoom'] );
 
         init_listener_private();
         refresh_listener_private();
@@ -3047,16 +3298,18 @@ window.document.splugins.wbc.variations.gallery_images.sp_slzm.core = function( 
     
         console.log('init_listener_private');
 
-        window.document.splugins.events.api.subscribeObserver( 'gallery_images', 'sp_slzm', 'sp_slzm_init',function(stat_object, notification_response){
+        window.document.splugins.events.api.subscribeObserver( 'gallery_images', 'sp_slzm', 'sp_slzm_init',function(event, stat_object, notification_response){
 
             console.log('init_listener_private 11111');
 
-            jQuery(_this.init_callbacks).each(function (index,callback) {
+            /*jQuery(_this.init_callbacks).each(function (index,callback) {
 
                 console.log('init_listener_private 22222');
 
                 callback();     
-            });         
+            });*/
+            var sp_slzm_init_callback = null ;
+            window.document.splugins.events.api.notifyAllObservers( 'gallery_images.sp_slzm', 'sp_slzm_init', {}, sp_slzm_init_callback );         
         });
 
     };
@@ -3065,28 +3318,40 @@ window.document.splugins.wbc.variations.gallery_images.sp_slzm.core = function( 
 
         console.log('refresh_listener_private');
 
-        window.document.splugins.events.api.subscribeObserver( 'gallery_images', 'sp_slzm', 'sp_slzm_refresh',function(stat_object, notification_response){
+        window.document.splugins.events.api.subscribeObserver( 'gallery_images', 'sp_slzm', 'sp_slzm_refresh',function(event, stat_object, notification_response){
 
             console.log('refresh_listener_private 1.11111');
 
-            jQuery(_this.refresh_callbacks).each(function (index,callback) {
+            // jQuery.each(_this.refresh_callbacks, function (index,callback) {
+
+            //     console.log('refresh_listener_private 1.22222');
+
+            //     callback();     
+            // });  
+            /*var i;
+            for (i = 0; i < _this.refresh_callbacks.length; ++i) {
 
                 console.log('refresh_listener_private 1.22222');
-
-                callback();     
-            });         
+                console.log(_this.refresh_callbacks[i]);
+                // _this.refresh_callbacks[i]();  
+            }*/
+            var sp_slzm_refresh_callback = null ;
+            window.document.splugins.events.api.notifyAllObservers( 'gallery_images.sp_slzm', 'sp_slzm_refresh', {}, sp_slzm_refresh_callback );   
+       
         });
 
-        window.document.splugins.events.api.subscribeObserver( 'gallery_images', 'sp_slzm', 'sp_slzm_refresh_zoom',function(stat_object, notification_response){
+        window.document.splugins.events.api.subscribeObserver( 'gallery_images', 'sp_slzm', 'sp_slzm_refresh_zoom',function(event, stat_object, notification_response){
 
             console.log('refresh_listener_private 2.11111');
 
-            jQuery(_this.zoom_callbacks).each(function (index,callback) {
+            /*jQuery(_this.zoom_callbacks).each(function (index,callback) {
 
                 console.log('refresh_listener_private 2.22222');
 
                 callback();     
-            });         
+            });*/
+            var sp_slzm_refresh_zoom_callback = null ;
+            window.document.splugins.events.api.notifyAllObservers( 'gallery_images.sp_slzm', 'sp_slzm_refresh_zoom', {}, sp_slzm_refresh_zoom_callback );         
         });
     };
 
@@ -3099,12 +3364,20 @@ window.document.splugins.wbc.variations.gallery_images.sp_slzm.core = function( 
 
         init_listener: function(callback) {
 
-            _this.init_callbacks.push(callback);
+            console.log("sp_slzm init_listener");
+
+            // _this.init_callbacks.push(callback);
+            window.document.splugins.events.api.subscribeObserver( 'gallery_images.sp_slzm', 'gallery_images.sp_slzm', 'sp_slzm_init', callback );
         },
  
         refresh_listener: function(callback) {
+
+            console.log("sp_slzm refresh_listener");
             
-            _this.refresh_callbacks.push(callback);
+            // _this.refresh_callbacks.push(callback);
+            window.document.splugins.events.api.subscribeObserver( 'gallery_images.sp_slzm', 'gallery_images.sp_slzm', 'sp_slzm_refresh', callback );
+
+            window.document.splugins.events.api.subscribeObserver( 'gallery_images.sp_slzm', 'gallery_images.sp_slzm', 'sp_slzm_refresh_zoom', callback );
         }
     };    
  
@@ -3114,13 +3387,13 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
     
     jQuery(document).ready(function() {
 
-        window.setTimeout(function(){
+        // window.setTimeout(function(){
 
             //  publish it 
             window.document.splugins.wbc.variations.gallery_images.sp_slzm.api = window.document.splugins.wbc.variations.gallery_images.sp_slzm.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
 
             window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.init();
-        }, 2500);
+        // }, 2500);
     });
 
 }

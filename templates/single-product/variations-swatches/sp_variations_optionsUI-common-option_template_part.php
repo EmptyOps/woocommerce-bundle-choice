@@ -77,11 +77,24 @@ if(!in_array($variable_item_data['options_loop_type'][$term->slug],array('dropdo
     $template = array(
         'type' => 'header',
         'tag' => 'li',
-        'class' => 'ui image middle aligned variable-item '.esc_attr( $variable_item_data['options_loop_type'][$term->slug] ).'-variable-item '.esc_attr( $variable_item_data['options_loop_type'][$term->slug] ).'-variable-item-'.esc_attr( $term->slug ).' '.esc_attr( $variable_item_data['options_loop_selected_class'][$term->slug]).' spui-wbc-swatches-variable-item-header spui-wbc-swatches-variable-item-'.$variable_item_data['options_loop_type'][$term->slug].'-header variable-item-'.wbc()->common->current_theme_key(). ' variable-item-'.esc_attr( $variable_item_data['options_loop_type'][$term->slug] ).'-'.wbc()->common->current_theme_key(),
-        'attr' => array( 'title' => esc_html( $term->name ), 'data-value' => esc_attr( $term->slug ), 'role' => 'button', 'tabindex' => '0'/*, 'data-id' => $id*/ ),
+        'class' => array(   'ui',
+                            'image', 
+                            'middle', 
+                            'aligned', 
+                            'variable-item',
+                            esc_attr( $variable_item_data['options_loop_type'][$term->slug] ).'-variable-item',
+                            esc_attr( $variable_item_data['options_loop_type'][$term->slug] ).'-variable-item-'.esc_attr( $term->slug ),
+                            esc_attr( $variable_item_data['options_loop_selected_class'][$term->slug]),
+                            'spui-wbc-swatches-variable-item',
+                            'spui-wbc-swatches-variable-item-'.$variable_item_data['options_loop_type'][$term->slug],
+                            'spui-wbc-swatches-variable-item-header',
+                            'spui-wbc-swatches-variable-item-'.$variable_item_data['options_loop_type'][$term->slug].'-header',
+                            'variable-item-'.wbc()->common->current_theme_key(),
+                            'variable-item-'.esc_attr( $variable_item_data['options_loop_type'][$term->slug] ).'-'.wbc()->common->current_theme_key(),
+                        ),
+
+        // 'ui image middle aligned variable-item '.esc_attr( $variable_item_data['options_loop_type'][$term->slug] ).'-variable-item '.esc_attr( $variable_item_data['options_loop_type'][$term->slug] ).'-variable-item-'.esc_attr( $term->slug ).' '.esc_attr( $variable_item_data['options_loop_selected_class'][$term->slug]).' spui-wbc-swatches-variable-item-header spui-wbc-swatches-variable-item-'.$variable_item_data['options_loop_type'][$term->slug].'-header variable-item-'.wbc()->common->current_theme_key(). ' variable-item-'.esc_attr( $variable_item_data['options_loop_type'][$term->slug] ).'-'.wbc()->common->current_theme_key(),
+        'attr' => array( 'title' => esc_html( $term->name ), 'data-title' => esc_html( $term->name ), 'data-value' => esc_attr( $term->slug ), 'role' => 'button', 'tabindex' => '0'/*, 'data-id' => $id*/ ),
         'child' => $template_inner
-        
     );
 }
-
-

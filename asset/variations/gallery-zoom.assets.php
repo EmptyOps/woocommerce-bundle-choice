@@ -42,6 +42,8 @@ add_action( 'wp_enqueue_scripts' ,function(){
 
 			    var init_function = function(){
 			    	
+	            	console.log(" zoom asset init_function ");
+
 			        jQuery(".big-img").imagezoomsl({
 			            /*zoomrange:[3,3],
 			            disablewheel: true,
@@ -71,12 +73,18 @@ add_action( 'wp_enqueue_scripts' ,function(){
 
 			    var bind_listeners = function(){
 
-		            window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.init_listener(function(){
+			    	console.log(" zoom asset bind_listeners ");
 
+		            window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.init_listener(function(event, stat_object, notification_response){
+
+		            	console.log(" zoom asset init_listener ");
+		                
 		                init_function();
 		            });
-		            window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.refresh_listener(function(){
+		            window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.refresh_listener(function(event, stat_object, notification_response){
 		            	
+		            	console.log(" zoom asset refresh_listener ");
+
 		                init_function();
 		            });
 
@@ -97,29 +105,43 @@ add_action( 'wp_enqueue_scripts' ,function(){
 
 				//     bind_listeners();
 				// }
+
+				console.log(" gallery zoom asset DOMContentLoaded");
+
 				document.addEventListener("DOMContentLoaded", function() { 
 				// jQuery( window ).on('load', function() {
+
+					console.log(" zoom asset DOMContentLoaded");
+
 					if(typeof(jQuery.fn.imagezoomsl)!=='function'){
+						
+						console.log(" zoom asset DOMContentLoaded");
+						
 						let script = document.createElement('script');
 						script.src = "<?php echo constant( strtoupper( 'EOWBC_ASSET_URL' ) ).'js/variations/gallery_images/external-plugins/zoomsl/zoomsl.min.js'; ?>";
 						document.head.append(script);
 
 				        window.setTimeout(function(){
 
+							console.log(" zoom asset DOMContentLoaded timeout if");
+
 		       			    bind_listeners();
 
-				        },3000);	
+				        },1000);	
 
 					} else {
 
 					    window.setTimeout(function(){
 
+							console.log(" zoom asset DOMContentLoaded timeout else");
+
 		       			    bind_listeners();
 
-				        },3000);	
+				        },1000);	
 					}
 				});
 
+				// ACTIVE_TODO we can use error event only for page loading context but after that we need to cancle them othrewising thay keep firing on any errors. 
 		        window.addEventListener('error', function(e){
 
 	   	            // ACTIVETODO enable below code if requared
@@ -130,9 +152,11 @@ add_action( 'wp_enqueue_scripts' ,function(){
 
 			        window.setTimeout(function(){
 
+		            	console.log(" zoom asset addEventListener error ");
+
 	       			    bind_listeners();
 
-			        },3000);	
+			        },1000);	
 			     
 			    });
 

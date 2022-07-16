@@ -4,7 +4,6 @@
  * in case if you want to implement your custom html then follow our documentation guide on how to add add custom html templates by following this link https://sphereplugins.com/docs/how-to-override-templates-using-custom-html
  */
 
-
 $template = null;
 
 // ACTIVE_TODO_OC_START
@@ -132,7 +131,7 @@ if ( $woo_dropdown_attribute_html_data['product'] && taxonomy_exists( $woo_dropd
 
     $template = array(
         'type' => 'select',
-        'class' => esc_attr( $woo_dropdown_attribute_html_data['class'] ),
+        'class' => esc_attr( $woo_dropdown_attribute_html_data['class'] ) . ' hide woo-variation-raw-select woo-variation-raw-type-' . esc_attr($woo_dropdown_attribute_html_data['type']). ' spui-wbc-swatches-raw-select spui-wbc-swatches-raw-select'.$woo_dropdown_attribute_html_data['type'],
         'id' => esc_attr( $woo_dropdown_attribute_html_data['id'] ),
         'name' => esc_attr( $woo_dropdown_attribute_html_data['name'] ),
         'attr' => array( 'data-attribute_name' => esc_attr( wc_variation_attribute_name( $woo_dropdown_attribute_html_data['attribute'] ) ), 'data-show_option_none' => ( $woo_dropdown_attribute_html_data['show_option_none'] ? 'yes' : 'no' ) ),
