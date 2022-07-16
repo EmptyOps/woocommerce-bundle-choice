@@ -1247,22 +1247,22 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
     var process_attribute_data = function(type, element, data, mode = null) {
 
         data.options.each(function () {
-            if (jQuery(element).val() !== '') {
-                data.selects.push(jQuery(element).val());
+            if (jQuery(this).val() !== '') {
+                data.selects.push(jQuery(this).val());
                 data.selected = current.length === 0 ? eq.val() : current.val();
             }
         });
 
         data.disabled.each(function () {
-            if (jQuery(element).val() !== '') {
-                data.disabled_selects.push(jQuery(element).val());
+            if (jQuery(this).val() !== '') {
+                data.disabled_selects.push(jQuery(this).val());
             }
         });
 
           // Out Of Stocks
         data.out_of_stock.each(function () {
-            if (jQuery(element).val() !== '') {
-                data.out_of_stock_selects.push($(element).val());
+            if (jQuery(this).val() !== '') {
+                data.out_of_stock_selects.push($(this).val());
             }
         });
 
@@ -1460,6 +1460,9 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
         data.current = data.select.find('option:selected');
         data.eq = data.select.find('option').eq(1);
 
+        console.log("select and disable log");
+        console.log(data.options);
+        console.log(data.disabled);
 
         // ACTIVE_TODO we do not have any more (class woo-variation-swatches-variable-item-more) class related flow yet. but t you need to first plan the template structure -- to t
             // ACTIVE_TODO -- then once template ready then implaemnt on php side and do the needful on js layers -- to s
@@ -1498,7 +1501,8 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
         
         inner_list.each(function (index, inner_element ) {
 
-            console.log("inner element " +inner_element);
+            console.log("inner element in loop");
+            console.log(inner_element);
             data.attribute_value = jQuery(inner_element).attr('data-value');
             data.attribute_title = jQuery(inner_element).attr('data-title');
 
@@ -1516,8 +1520,15 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
             // in_stocks.includes(attribute_value)
             // _.contains(in_stocks, attribute_value)
             // _.includes(in_stocks, attribute_value)
+           
+            console.log("process_attribute_template outer if ");
+            console.log(data.in_stocks);
+            console.log(data.attribute_value);
 
             if (splugins._.includes(data.in_stocks, data.attribute_value)) {
+        
+                console.log("process_attribute_template selected disabled in if ");
+                console.log(inner_element);
 
               jQuery(inner_element).removeClass('selected disabled');
               jQuery(inner_element).removeAttr('aria-hidden');
@@ -1526,8 +1537,14 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
               jQuery(inner_element).find('input.spui-wbc-swatches-variable-item-radio:radio').prop('disabled', false);
 
               if (data.attribute_value === data.selected) {
+                
+                console.log("process_attribute_template selected in if if");
+                console.log(inner_element);
 
                 jQuery(inner_element).addClass('selected');
+                
+                console.log("process_attribute_template after selected in if if");
+
                 jQuery(inner_element).attr('aria-checked', 'true');
 
                 if (_this.configs.options.show_variation_label) {
@@ -3362,22 +3379,22 @@ window.document.splugins.wbc.variations.gallery_images.sp_slzm.core = function( 
             init_private();
         },
 
-        init_listener: function(callback) {
+        init_listener: function(subscriber_key, callback) {
 
             console.log("sp_slzm init_listener");
 
             // _this.init_callbacks.push(callback);
-            window.document.splugins.events.api.subscribeObserver( 'gallery_images.sp_slzm', 'gallery_images.sp_slzm', 'sp_slzm_init', callback );
+            window.document.splugins.events.api.subscribeObserver( 'gallery_images.sp_slzm', 'gallery_images.sp_slzm.'+subscriber_key, 'sp_slzm_init', callback );
         },
  
-        refresh_listener: function(callback) {
+        refresh_listener: function(subscriber_key, callback) {
 
             console.log("sp_slzm refresh_listener");
             
             // _this.refresh_callbacks.push(callback);
-            window.document.splugins.events.api.subscribeObserver( 'gallery_images.sp_slzm', 'gallery_images.sp_slzm', 'sp_slzm_refresh', callback );
+            window.document.splugins.events.api.subscribeObserver( 'gallery_images.sp_slzm', 'gallery_images.sp_slzm.'+subscriber_key, 'sp_slzm_refresh', callback );
 
-            window.document.splugins.events.api.subscribeObserver( 'gallery_images.sp_slzm', 'gallery_images.sp_slzm', 'sp_slzm_refresh_zoom', callback );
+            window.document.splugins.events.api.subscribeObserver( 'gallery_images.sp_slzm', 'gallery_images.sp_slzm.'+subscriber_key, 'sp_slzm_refresh_zoom', callback );
         }
     };    
  

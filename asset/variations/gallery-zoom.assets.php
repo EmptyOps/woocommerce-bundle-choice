@@ -77,16 +77,14 @@ add_action( 'wp_enqueue_scripts' ,function(){
 
 			    	console.log(" zoom asset bind_listeners ");
 
-		            window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.init_listener(function(event, stat_object, notification_response){
+		            window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.init_listener('imagezoomsl', function(event, stat_object, notification_response){
 
 		            	console.log(" zoom asset init_listener ");
 		                
 		                zoom_init_function();
 
-		                zoom_init_function();
-
 		            });
-		            window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.refresh_listener(function(event, stat_object, notification_response){
+		            window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.refresh_listener('imagezoomsl' ,function(event, stat_object, notification_response){
 
 		            	console.log(" zoom asset refresh_listener ");
 
@@ -114,7 +112,7 @@ add_action( 'wp_enqueue_scripts' ,function(){
 
 				console.log(" gallery zoom asset DOMContentLoaded");
 
-				document.addEventListener("DOMContentLoaded", function() { 
+				// document.addEventListener("DOMContentLoaded", function() { 
 				// jQuery( window ).on('load', function() {
 
 					console.log(" zoom asset DOMContentLoaded");
@@ -145,7 +143,7 @@ add_action( 'wp_enqueue_scripts' ,function(){
 
 				        },1000);	
 					}
-				});
+				// });
 
 				// ACTIVE_TODO we can use error event only for page loading context but after that we need to cancle them othrewising thay keep firing on any errors. 
 		        window.addEventListener('error', function(e){
@@ -321,9 +319,9 @@ add_action( 'wp_enqueue_scripts' ,function(){
 			    position: relative;
 			    float: left;
 			}
-			.img-fluid.big-img {
+			/*.img-fluid.big-img {
 			    display: none;
-			}
+			}*/
 		</style>
 		<script type="text/javascript">
 			// ACTIVE_TODO zoom asset.php ma last ma ek script haji rai gai, te I thikn similar che but please confirm -- to a 
