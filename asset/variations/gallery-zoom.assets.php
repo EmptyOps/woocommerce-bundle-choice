@@ -40,7 +40,7 @@ add_action( 'wp_enqueue_scripts' ,function(){
 		        //     jQuery(".big-img").attr('src',jQuery(this).attr('src'));
 		        // });
 
-			    var init_function = function(){
+			    var zoom_init_function = function(){
 			    	
 	            	console.log(" zoom asset init_function ");
 
@@ -62,6 +62,8 @@ add_action( 'wp_enqueue_scripts' ,function(){
 				        zoomrange: [2,2],
 				        innerzoom: true,
 				        magnifierborder: "none",
+   			            magnifiersize: [502, 502],
+   			            cursorshadeborder: "1px solid black",
 				        /*disablewheel: true,
 		                zoomstart: 3,
 		                zoomrange: [3,3],
@@ -79,13 +81,17 @@ add_action( 'wp_enqueue_scripts' ,function(){
 
 		            	console.log(" zoom asset init_listener ");
 		                
-		                init_function();
+		                zoom_init_function();
+
+		                zoom_init_function();
+
 		            });
 		            window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.refresh_listener(function(event, stat_object, notification_response){
-		            	
+
 		            	console.log(" zoom asset refresh_listener ");
 
-		                init_function();
+		                zoom_init_function();
+
 		            });
 
 			    };
@@ -325,15 +331,15 @@ add_action( 'wp_enqueue_scripts' ,function(){
 			document.addEventListener("DOMContentLoaded", function() { 
 				//zoom
 			    
-			    if(typeof(jQuery.fn.imagezoomsl)=='function'){
-			        jQuery(".big-img").imagezoomsl({
-			            disablewheel: true,
-			            zoomstart: 3,
-			            zoomrange: [3,3],
-			            magnifiersize: [502, 502],
-			            cursorshadeborder: "1px solid black",
-			        });
-			    }
+			    // if(typeof(jQuery.fn.imagezoomsl)=='function'){
+			    //     jQuery(".big-img").imagezoomsl({
+			    //         disablewheel: true,
+			    //         zoomstart: 3,
+			    //         zoomrange: [3,3],
+			    //         magnifiersize: [502, 502],
+			    //         cursorshadeborder: "1px solid black",
+			    //     });
+			    // }
 
 			    /* -- a seme che uper lode kerli che
 			    if(typeof(jQuery.fn.imagezoomsl)!=='function'){

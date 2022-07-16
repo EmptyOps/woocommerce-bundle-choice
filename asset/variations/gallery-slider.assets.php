@@ -37,7 +37,7 @@ add_action( 'wp_enqueue_scripts' ,function(){
     <!-- -- a tejas che api che -->
     <script type="text/javascript">
 
-        var init_function = function(){
+        var splide_init_function = function(){
 
             console.log("slider asset init_function");
 
@@ -91,13 +91,13 @@ add_action( 'wp_enqueue_scripts' ,function(){
 
                     console.log("asset slider init_listener");
 
-                    init_function();
+                    splide_init_function();
                 });
                 window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.refresh_listener(function(event, stat_object, notification_response){
 
                     console.log("asset slider refresh_listener");
 
-                    init_function();
+                    splide_init_function();
                 });
 
             },1000);    
