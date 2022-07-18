@@ -50,7 +50,7 @@ add_action( 'wp_enqueue_scripts' ,function(){
 
             console.log("slider asset init_function");
 
-            var splide = new Splide( /*'#slider1'*/ '.splide_slider_container', {
+            var splide = new Splide( '#slider1'/* '.splide_slider_container'*/, {
                 direction   : 'ttb',
                  wheel       : true,
                  releaseWheel: true,
@@ -95,7 +95,7 @@ add_action( 'wp_enqueue_scripts' ,function(){
             window.setTimeout(function(){
 
                 // ACTIVE_TODO temp.
-                return false;
+                // return false;
 
                 console.log("asset slider addEventListener");
 

@@ -22,11 +22,11 @@ add_action( 'wp_enqueue_scripts' ,function(){
 			})(jQuery);
 		</script>
 		<?php
+
 	} else { 
 
 		// ---- a code /themes/purple_theme/woocommerce/content-single-product.php no che 
 		// -- zoom no
-		
 
 	?> 
 		<script>
