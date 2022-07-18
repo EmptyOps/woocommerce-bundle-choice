@@ -2396,6 +2396,8 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
         _this.$slider_container = _this.$base_element.find( '.'+ _this.configs.classes.slider.container );
         _this.$zoom_container = _this.$base_element.find( '.'+ _this.configs.classes.zoom.container );
             
+        _this.$slider_loop_container = _this.$slider_container.find( '.'+ _this.configs.classes.slider.loop_container );
+
             /*ACTIVE_TODO_OC_START
                  --  then I will tell you which to keep and which to drop -- to a 
             ACTIVE_TODO_OC_END*/
@@ -2823,7 +2825,7 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
             slider_inner_html += apply_template_data(template_var, image, templating_lib);
         });
 
-        _this.$slider_container.html(slider_inner_html);
+        _this.$slider_loop_container.html(slider_inner_html);
 
     };
 
@@ -2961,9 +2963,9 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
         }
         
         console.log("slider_thumb_click_listener 111111111111");
-        console.log(_this.$slider_container);
+        console.log(_this.$slider_loop_container);
 
-        _this.$slider_container.on('click', 'img', function () {
+        _this.$slider_loop_container.on('click', 'img', function () {
             console.log("slider_thumb_click_listener 2222222222");
             on_slider_thumb_click(type,this);            
         });
