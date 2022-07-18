@@ -22,10 +22,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     var init_private = function() {
 
 		ACTIVE_TODO_OC_START
-			    	do general development like published init tobe defined below will call this private init function -- to d 
+			    	// do general development like published init tobe defined below will call this private init function -- to d done
 
 
-			    	we like to move the events namespace under splugins instead of under the Feed, but the problem is that the events are initially planned for the Feed page however the events API is supposed to be used for any layers of any page and so on. 
+			    	// we like to move the events namespace under splugins instead of under the Feed, but the problem is that the events are initially planned for the Feed page however the events API is supposed to be used for any layers of any page and so on. 
 			    		// --	so what maybe we could do is move the events api functions under the splugins namespace -- to d done 
 			    		// --	and we need something that says the event is for Feed page or item page or all pages. by default it need to define at least one page maybe
 			    		// 	--	it is clear that events are for the browser context so whatever js is loaded on the current page or say context is what the event subjects are for. 
@@ -98,7 +98,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		ACTIVE_TODO_OC_END
 
 		//	the filter events 
-		window.document.splugins.events.api.createSubject( 'filters', ['before_search', 'no_products_found'] );
+		window.document.splugins.events.api.createSubject( 'filters', ['before_send', 'prepare_query_data', 'show_loader', 'init_search', 'no_products_found', 'should_search', 'complete', 'success', 'error', 'compatability', 'eo_wbc_filter_render_html', 'hide_loader', 'bind_reset_click', 'bind_click', 'advance_filter_accordian'] );
 
 		bind_reset_click();
 
@@ -106,8 +106,6 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		advance_filter_accordian();
 
-
-		ACTIVE_TODO need to confirm -- shraddha
 		init_search();
 
     };
@@ -118,15 +116,16 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     	// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
 		// --add to be confirmed 2601 TO 2705--		
 
-		if(init_call/* || typeof(window.eo_wbc_filter_change_table_view_service)===typeof(undefined)*/) {
-			/*window.eo_wbc_filter_change_table_view_service = true*/
-			return false;
-		}
-		console.log(init_call,window.eo_wbc_filter_change_table_view_service);
+		// if(init_call/* || typeof(window.eo_wbc_filter_change_table_view_service)===typeof(undefined)*/) {
+		// 	/*window.eo_wbc_filter_change_table_view_service = true*/
+		// 	return false;
+		// }
+		// console.log(init_call,window.eo_wbc_filter_change_table_view_service);
 
-		if(window.eo_wbc_object.enable_filter===false){
-			return false;
-		}
+		// // if(window.document.splugins.eo_wbc_object.enable_filter===false){
+		// if(window.eo_wbc_object.enable_filter===false){
+		// 	return false;
+		// }
 
 		//////////////////////
 
@@ -147,7 +146,12 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		if(window.eo_wbc_object.enable_filter===false){
 			return false;
-		}	
+		}
+		////////////////// shraddha ////////////////	
+		if(window.document.splugins.eo_wbc_object.enable_filter===false){
+			return false;
+		}
+		///////////////////////////////////////////
 
 		///////////
 
@@ -166,24 +170,14 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		//////////////////////
 		// /var/www/html/drashti_project/27-05-2022/woocommerce-bundle-choice/asset/js/publics/eo_wbc_filter.js
 
-		if(window.eo_wbc_object.enable_filter===false){
-			return false;
-		}					
+		// if(window.eo_wbc_object.enable_filter===false){
+		// 	return false;
+		// }
 
-    };	 
+		var should_search_callback = null ;
+        window.document.splugins.events.api.apply_all_observer_filters( 'filters', 'should_search', {}, should_search_callback );					
 
-    var before_search = function() {
-
-		// below before_search function need to make private 
-		// 	--	however it will continue to broadcast before search notification, and whoever interested in the before_search event should bind to that event notification 
-
-
-		// window.document.splugins.Feed.events.core.notifyAllObservers( 'filters', 'before_search' ); 
-
-		var before_search_callback = null ;
-        window.document.splugins.events.api.notifyAllObservers( 'filters', 'before_search', {}, before_search_callback );
-
-    };	 
+    };	 	 
 
     ACTIVE_TODO_OC_START
     from tv js layer -- currently from sp_tv_template js layer 
@@ -196,9 +190,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				--	so in this regard convert all notification that are raised before_send and including before_send to the filter notification -- to s 
 		sould_search();
 
-		before_search();
-
-		prepare_query_data();
+		prepare_query_data(form_data);
 
 		sp_filter_request variable tv_template.js ma move karavano, if required -- to h & -- to s
 		jQuery.fn.sp_filter_request = jQuery.ajax(
@@ -207,10 +199,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			data:form_data, // form data
 			type:'POST', // POST
 
-			fix the function name upper case later. always maintain same format for variables, function names, and so on. we are never using uppercase in those names. however in class names we use uppercase laters -- to s 
-			beforeSend:before_Send(xhr),
-
-			complete:complete(),
+			beforeSend:before_send(xhr),
 
 			success:success(data),
 			// {
@@ -226,13 +215,16 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			// 	window.eo_wbc_object.enable_filter_table = true;
 			// 	// jQuery(".ui.sticky").sticky('refresh');
 			// },
-			error:error(data)
+			error:error(data),
 			// {
 			// 	jQuery("#loading").removeClass('loading');
 			// 	console.log('error');
 			// 	console.log(data);
 			// 	window.eo_wbc_object.enable_filter_table = true;
 			// },
+
+			complete:complete()
+
 		} );		
 
 		double confirm that compatibility matters are well implemented so that their patches are actually applied and used when become necessary -- to s 
@@ -245,16 +237,18 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 					--	and remove the eo_wbc_filter_render_html call from inside the compatibility function. -- to s 
 		compatability(section, object, expected_result);
 
+		return true;
+
 	};
 
-	var prepare_query_data = function() {
+	var prepare_query_data = function(form_data) {
 
 		ACTIVE_TODO_OC_START
 		from 0= this file function 
 		bring here the code from there -- to d 
 
 		here we assume that all sections moved from different places, are now merged with duplicate check and so on. please confirm. -- to s 
-			--	and also confirm if they are logically correct with regard to execution sequence and the if conditions for different layers that are merged -- to s 
+			--	and also confirm if they are logically correct with regard to execution sequence and the if conditions for different layers that are merged -- to s
 		ACTIVE_TODO_OC_END
 
 		// from 1 	
@@ -591,8 +585,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		success(data);	
 
 		var prepare_query_data_callback = null ;
-        window.document.splugins.events.api.notifyAllObservers( 'filters', 'prepare_query_data', {}, prepare_query_data_callback );
+        window.document.splugins.events.api.apply_all_observer_filters( 'filters', 'prepare_query_data', {}, prepare_query_data_callback );
 	
+        return form_data;
 
 	};	
 
@@ -603,9 +598,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			--	and compare and put common only once and for identical means different put separetely and comment for both -- to d. ask b for how to do this process precisely, and do it precisely no more in rubbish way. 
 			--	and note one thing clearly that identical table code that is identified here need to be moved in their own calling layers to this function, so there will be some call back or so that need to be defined that can cover it. or we can simply use what is available by way of observer pattern and their notification callback that is planned that maybe of help if finalized -- to d 
 		ACTIVE_TODO_OC_END	
-	var before_Send = function(xhr) {
+	var before_send = function(xhr) {
 
 		window.eo_wbc_object.enable_filter_table = false;
+		window.document.splugins.eo_wbc_object.enable_filter_table = false;
 		if(eo_wbc_object.hasOwnProperty('xhr')){
 			eo_wbc_object.xhr.abort();
 		}
@@ -616,7 +612,11 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// /var/www/html/drashti_project/27-05-2022/woocommerce-bundle-choice/asset/js/publics/eo_wbc_filter.js
 
 		window.eo_wbc_object.enable_filter = false;
+		window.document.splugins.eo_wbc_object.enable_filter = false;
 		console.log(this.url);
+
+		var before_send_callback = null ;
+        window.document.splugins.events.api.apply_all_observer_filters( 'filters', 'before_send', {}, before_send_callback );
 
 		///////////////////////////
 
@@ -626,10 +626,12 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 	var complete = function(){
 		// console.log(this.url);
+
+		var complete_callback = null ;
+        window.document.splugins.events.api.notifyAllObservers( 'filters', 'complete', {}, complete_callback );
 	}; 
 
-	var success = function(data)
-	{
+	var success = function(data) {
 
 
 		//console.log(data);
@@ -639,14 +641,14 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// 	-- rectify if there are any such similar issue
 
 		//////// 02-04-2022 @shraddha /////// 
-		// eo_wbc_e_render_table(type,data);	
+		// eo_wbc_e_render_table(data, type);	
 		// window.eo_wbc_object.enable_filter_table = true;
 		// jQuery(".ui.sticky").sticky('refresh');
 
 		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
 		// --add to be confirmed & 2187 TO 2324--
 
-		// eo_wbc_e_render_table(type,data);	
+		// eo_wbc_e_render_table(data, type);	
 		// window.eo_wbc_object.enable_filter_table = true; 
 
 
@@ -677,26 +679,37 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// /var/www/html/drashti_project/27-05-2022/woocommerce-bundle-choice/asset/js/publics/eo_wbc_filter.js
 
 		eo_wbc_filter_render_html(data,render_container);
+
 		window.eo_wbc_object.enable_filter = true;
+		window.document.splugins.eo_wbc_object.enable_filter = true;
 
 		/////////////////////////////
+		var success_callback = null ;
+        window.document.splugins.events.api.notifyAllObservers( 'filters', 'success', {}, success_callback );
 
 	}; 
 
 	var error = function(data){
 		
-		console.log('error');
-		console.log(data);
+		// console.log('error');
+		// console.log(data);
+
+		ACTIVE_TODO from tableview /// shraddha
 		window.eo_wbc_object.enable_filter_table = true;
+		window.document.splugins.eo_wbc_object.enable_filter_table = true;
 
 		////////////////////////////
 		// /var/www/html/drashti_project/27-05-2022/woocommerce-bundle-choice/asset/js/publics/eo_wbc_filter.js
 
 		window.eo_wbc_object.enable_filter = true;
+		window.document.splugins.eo_wbc_object.enable_filter = true;
 
 		///////////////////////////////
 
 		hide_loader();
+
+		var error_callback = null ;
+        window.document.splugins.events.api.notifyAllObservers( 'filters', 'error', {}, error_callback );
 	};
 
     ///////////// -- 15-06-2022 -- @drashti -- ///////////////////////////////
@@ -731,13 +744,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
                 eowbc_lazyload();
             } 
         }
+
+        var compatability_callback = null ;
+        window.document.splugins.events.api.notifyAllObservers( 'filters', 'compatability', {}, compatability_callback );
         
-        ACTIVE_TODO_OC_START
-        -- check and let me know the below statement should not be here so give me instructions related to that which was given to you -- to d 
-        ACTIVE_TODO_OC_END
-
-        eo_wbc_filter_render_html();     
-
     };
 
     var eo_wbc_filter_render_html = function(data,render_container){
@@ -898,10 +908,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		jQuery("#loading").removeClass('loading');
 
 
-		ACTIVE_TODO_OC_START
-		almost all of the below seems compatibility related to so move that to compatibility function, and at there we need to have section conditon like this would be broadly as product-listing -- to d 
-			--	you already moved below code, which I saw, but there is not comment below that it is moved so please let me know what is going on -- to d 
-		ACTIVE_TODO_OC_END
+		// almost all of the below seems compatibility related to so move that to compatibility function, and at there we need to have section conditon like this would be broadly as product-listing -- to d done
+			// --	you already moved below code, which I saw, but there is not comment below that it is moved so please let me know what is going on -- to d done 
+		// below code block are moved in compatibility function
 		// jQuery('.products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)').addClass('product_grid_view');
 		// //jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination').css('visibility','visible');
 		// if(jQuery(".row-inner>.col-lg-9").length>0){
@@ -926,6 +935,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// 	eowbc_lazyload();
 		// }
 		compatability('product-listing');
+
+		var eo_wbc_filter_render_html_callback = null ;
+        window.document.splugins.events.api.notifyAllObservers( 'filters', 'eo_wbc_filter_render_html', {}, eo_wbc_filter_render_html_callback );
 
     };
 
@@ -977,7 +989,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// jQuery("#loading").addClass('loading');
 
 		var show_loader_callback = null ;
-        window.document.splugins.events.api.notifyAllObservers( 'filters', 'show_loader', {}, show_loader_callback );
+        window.document.splugins.events.api.apply_all_observer_filters( 'filters', 'show_loader', {}, show_loader_callback );
 
     };
 
@@ -1017,7 +1029,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		// jQuery("#loading").removeClass('loading');
 
-    }
+		var hide_loader_callback = null ;
+        window.document.splugins.events.api.notifyAllObservers( 'filters', 'hide_loader', {}, hide_loader_callback );
+
+    };
 
     var bind_reset_click = function(){
 
@@ -1045,7 +1060,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		});	
 
-    }
+		var bind_reset_click_callback = null ;
+        window.document.splugins.events.api.notifyAllObservers( 'filters', 'bind_reset_click', {}, bind_reset_click_callback );
+
+    };
 
     var bind_click = function(){
 
@@ -1057,7 +1075,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			});
 		}
 
-    }
+		var bind_click_callback = null ;
+        window.document.splugins.events.api.notifyAllObservers( 'filters', 'bind_click', {}, bind_click_callback );
+
+    };
 
     var advance_filter_accordian = function(){
 
@@ -1068,11 +1089,18 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			});
 		}
 
-    } 
+		var advance_filter_accordian_callback = null ;
+        window.document.splugins.events.api.notifyAllObservers( 'filters', 'advance_filter_accordian', {}, advance_filter_accordian_callback );
+
+    }; 
 
     var init_search = function(){
 
     	// /var/www/html/drashti_project/27-05-2022/woocommerce-bundle-choice/asset/js/publics/eo_wbc_filter.js
+
+    	// render_container ne _this ni under ma levanu -- to s
+    		// --  and aa module ma jya b use thay tya _this ni under ma use karavanu -- to s
+    			// and bija koi b aava var hoy te confirm karavana -- to s
 
     	if(render_container==='') {
 			render_container = jQuery(".products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)");
@@ -1082,9 +1110,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		}
 
 		var init_search_callback = null ;
-        window.document.splugins.events.api.notifyAllObservers( 'filters', 'init_search', {}, init_search_callback );
+        window.document.splugins.events.api.apply_all_observer_filters( 'filters', 'init_search', {}, init_search_callback );
 
-    }
+    };
     ///////////////////////////////////////////////////////
 
  	ACTIVE_TODO_OC_START
@@ -1121,7 +1149,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		    	regarding events 
 		    		--	the variations module would like bind to the render event of the filtrs, which would be broadcasted from the render_html function 
-		    			--	so that on each render event, variations module could take care the ops related to variations swatches and gallery changes/modification that is required on each render event -- means simply the loopbox refresh will be required 
+		    			--	so that on each render event, variations module could take care the ops related to variations swatches and gallery changes or modification that is required on each render event -- means simply the loopbox refresh will be required 
 			ACTIVE_TODO_OC_END 	
 
     	init: function() {
@@ -1253,12 +1281,13 @@ window.document.splugins.wbc.filters.core = function( configs ) {
         	// ACTIVE_TODO_OC_END	
 
 			// window.document.splugins.Feed.events.core.notifyAllObservers( 'filters', 'no_products_found' );
-			window.document.splugins.events.api.notifyAllObservers( 'filters', 'no_products_found' );
+			var no_products_found_callback = null;
+			window.document.splugins.events.api.notifyAllObservers( 'filters', 'no_products_found', {}, 'no_products_found_callback' );
 
         }, 
 
-    } 
-}
+    };
+};
 
 //  publish it 
 window.document.splugins.wbc.filters.api = window.document.splugins.wbc.filters.core( {} );
@@ -1396,6 +1425,10 @@ window.eo_wbc_object.enable_filter = window.eo_wbc_object.enable_filter || false
 window.eo_wbc_object = window.eo_wbc_object || {};
 window.eo_wbc_object.enable_filter = window.eo_wbc_object.enable_filter || false;
 /*>>>>>>> dad35916d59c134734156ded85678133f6c607a0*/
+//////////// shraddha ////////////////
+window.document.splugins.eo_wbc_object = window.document.splugins.eo_wbc_object || false;
+window.document.splugins.eo_wbc_object.enable_filter = window.document.splugins.eo_wbc_object.enable_filter || false;
+/////////////////////////////////////
 
 // mostly we are not going to do with below fix function flows and how we manage it. but should we need to do anything with it as of now?  
 	--	NO. but yeah better if we move it inside the compatibility private function or in compatibility layer within the filters core js module. and also check if we can put a single line or few line fix instead of putting the long script like below that would be possible by reusing their script and API instead of adding entire script like below. ACTIVE_TODO 
@@ -1467,227 +1500,228 @@ move all fundamental functions like below inside the filters core js module -- t
 	-- also wherever you have found the change function instance in any repo then there check for the eo_wbc_filter_render_html function like below and copy their code over to the filters js module where below code is moved, but yeah where you copy above it put a comment stating from which repo and which file line it is moved -- to d 
 ACTIVE_TODO_OC_END	
 //render products DOM to view
-function eo_wbc_filter_render_html(data,render_container) {
+// function eo_wbc_filter_render_html(data,render_container) {
 
 
-	/*jQuery("#loading").removeClass('loading');
-	return true;*/
+// 	/*jQuery("#loading").removeClass('loading');
+// 	return true;*/
 
-	render_data = data;
-	_render_container = render_container;
+// 	render_data = data;
+// 	_render_container = render_container;
 
-	ACTIVE_TODO_OC_START
-	create two function show_loader and hide_loader in filters core js module -- to d 
-		--	and then move the below code in the hide_loader -- to d 
-		--	and check all the change function implementation and move show related code in the show_loader function and hide related code in the hide_loader function -- to d
-		--	needless to say but still note that the loader hide show event should be carefully called from each related search events like search, complete, error and maybe also some other which handle some particular scenarios. -- to d 
-			--	so that what happen is that in future if the events namespace is firing the search or any related events around and if by any change any event that the filters module recieve is related to the show hide loader flow then that is taken care of implicitly.  
-	ACTIVE_TODO_OC_END
+// 	ACTIVE_TODO_OC_START
+// 	create two function show_loader and hide_loader in filters core js module -- to d 
+// 		--	and then move the below code in the hide_loader -- to d 
+// 		--	and check all the change function implementation and move show related code in the show_loader function and hide related code in the hide_loader function -- to d
+// 		--	needless to say but still note that the loader hide show event should be carefully called from each related search events like search, complete, error and maybe also some other which handle some particular scenarios. -- to d 
+// 			--	so that what happen is that in future if the events namespace is firing the search or any related events around and if by any change any event that the filters module recieve is related to the show hide loader flow then that is taken care of implicitly.  
+// 	ACTIVE_TODO_OC_END
 			
-	///////////////// shraddha //////////////////////		
-	// jQuery("#loading").removeClass('loading');
-	/////////////////////////////////////////////////
+// 	///////////////// shraddha //////////////////////		
+// 	// jQuery("#loading").removeClass('loading');
+// 	/////////////////////////////////////////////////
 
-	// ACTIVE_TODO_OC_START
-	// create one function update_result_count in filters core js module -- to d 
-	// --	and then move the below code in that -- to d 
-	// --	and check all the change function implementation and move show related code in that function -- to d 
-	// --	I have some doubt the below condition's logic it is setting to empty when there is not result count container is returned. but I guess that is exceptional scenario which would never be happening but if it happens then we need to handle that exceptional scenario, so for now keeping it open and if no such thing show up after 1st or 2nd revision then remove this task ACTIVE_TODO -- to b 
-	// 	--	move above task comment also with the code -- to d 
-	// ACTIVE_TODO_OC_END
+// 	// ACTIVE_TODO_OC_START
+// 	// create one function update_result_count in filters core js module -- to d 
+// 	// --	and then move the below code in that -- to d 
+// 	// --	and check all the change function implementation and move show related code in that function -- to d 
+// 	// --	I have some doubt the below condition's logic it is setting to empty when there is not result count container is returned. but I guess that is exceptional scenario which would never be happening but if it happens then we need to handle that exceptional scenario, so for now keeping it open and if no such thing show up after 1st or 2nd revision then remove this task ACTIVE_TODO -- to b 
+// 	// 	--	move above task comment also with the code -- to d 
+// 	// ACTIVE_TODO_OC_END
 		
-	//Replace Result Count Status...
-	if(jQuery('.woocommerce-result-count',jQuery(data)).html()!==undefined){
-		if(jQuery(".woocommerce-result-count").length>0){
-			jQuery(".woocommerce-result-count").html(jQuery('.woocommerce-result-count',jQuery(data)).html());
-		} else {
-			jQuery(jQuery('.woocommerce-result-count',jQuery(render_data)).get(0).outerHTML).insertBefore('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products');
-		}
-	}
-	else {
-		jQuery(".woocommerce-result-count").html('');	
-	}
+// 	//Replace Result Count Status...
+// 	if(jQuery('.woocommerce-result-count',jQuery(data)).html()!==undefined){
+// 		if(jQuery(".woocommerce-result-count").length>0){
+// 			jQuery(".woocommerce-result-count").html(jQuery('.woocommerce-result-count',jQuery(data)).html());
+// 		} else {
+// 			jQuery(jQuery('.woocommerce-result-count',jQuery(render_data)).get(0).outerHTML).insertBefore('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products');
+// 		}
+// 	}
+// 	else {
+// 		jQuery(".woocommerce-result-count").html('');	
+// 	}
 
-	//Replacing Product listings....
-	// ACTIVE_TODO_OC_START
-	// like vars under window object are moved filter core js module, similarly move below var also to filters js module and underneath below statement set it in the filters js module -- to d 
-	// ACTIVE_TODO_OC_END
+// 	//Replacing Product listings....
+// 	// ACTIVE_TODO_OC_START
+// 	// like vars under window object are moved filter core js module, similarly move below var also to filters js module and underneath below statement set it in the filters js module -- to d 
+// 	// ACTIVE_TODO_OC_END
 
-	document.wbc_data = data;
+// 	document.wbc_data = data;
 	
-	/*console.log(data);*/
+// 	/*console.log(data);*/
 
-	// ACTIVE_TODO_OC_START
-	// we can define a compatibility check flow, where the compatibility function will be available in each js module -- to d 
-	// 	-- that will recieve a object and second argument will be the excpected result. -- to d 
-	// 	-- if that is not matched then the compatibility function will apply its all available compatibility scenarios -- to d. like the below elementor-products-grid class statement would then go inside compatibility if. and .jet-woo-products also belong there, but let it be there and same for any js module layers where we have compatibility patch is mixed with basic/standard implementation statement to avoid the errors while separating them. 
-	// ACTIVE_TODO_OC_END
+// 	// ACTIVE_TODO_OC_START
+// 	// we can define a compatibility check flow, where the compatibility function will be available in each js module -- to d 
+// 	// 	-- that will recieve a object and second argument will be the excpected result. -- to d 
+// 	// 	-- if that is not matched then the compatibility function will apply its all available compatibility scenarios -- to d. like the below elementor-products-grid class statement would then go inside compatibility if. and .jet-woo-products also belong there, but let it be there and same for any js module layers where we have compatibility patch is mixed with basic/standard implementation statement to avoid the errors while separating them. 
+// 	// ACTIVE_TODO_OC_END
 		
-	let container_html = jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products',jQuery(data)).html();	
+// 	let container_html = jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products',jQuery(data)).html();	
 	
-	/*if(container_html===undefined || container_html==='') {
-		container_html = jQuery(jQuery(data),'.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products').html();
-	}*/
+// 	/*if(container_html===undefined || container_html==='') {
+// 		container_html = jQuery(jQuery(data),'.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products').html();
+// 	}*/
 
-	if(container_html===undefined || container_html==='') {
-		container_html = jQuery(".elementor-products-grid",jQuery(data)).html();
-	}
+// 	if(container_html===undefined || container_html==='') {
+// 		container_html = jQuery(".elementor-products-grid",jQuery(data)).html();
+// 	}
 
-	if(container_html!==undefined && container_html!=='') {	
-		if( typeof(is_card_view_rendered) == undefined || typeof(is_card_view_rendered) == 'undefined' || is_card_view_rendered == false ) {
-			if(jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products').length<=0) {
-				jQuery(render_container).html(container_html);
-			} else {
-				jQuery(render_container).html(container_html);
-			}			
-		}						
-		else {
+// 	if(container_html!==undefined && container_html!=='') {	
+// 		if( typeof(is_card_view_rendered) == undefined || typeof(is_card_view_rendered) == 'undefined' || is_card_view_rendered == false ) {
+// 			if(jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products').length<=0) {
+// 				jQuery(render_container).html(container_html);
+// 			} else {
+// 				jQuery(render_container).html(container_html);
+// 			}			
+// 		}						
+// 		else {
 
-			// ACTIVE_TODO_OC_START
-			// we need to track execution of this function so search in all 5 repos and confirm where this function is defined -- to d 
-			// 	--	and if that is found then only track above where is_card_view_rendered to see from which different locations it is defined and/or coming -- to d 
-			// ACTIVE_TODO_OC_END
+// 			// ACTIVE_TODO_OC_START
+// 			// we need to track execution of this function so search in all 5 repos and confirm where this function is defined -- to d 
+// 			// 	--	and if that is found then only track above where is_card_view_rendered to see from which different locations it is defined and/or coming -- to d 
+// 			// ACTIVE_TODO_OC_END
 				
-			wbc_attach_card_views();
-		}
+// 			wbc_attach_card_views();
+// 		}
 
-		var links=jQuery(".products a,.product-listing a");
-		jQuery.each(links,function(index,element) {
+// 		var links=jQuery(".products a,.product-listing a");
+// 		jQuery.each(links,function(index,element) {
 
-			var href=jQuery(element).attr('href');
-			if(typeof(href)!==typeof(undefined) && href.hasOwnProperty('indexOf')){
-				if(href.indexOf('?')==-1) {
-					jQuery(element).attr('href',jQuery(element).attr('href')+eo_wbc_object.eo_product_url);
-				} else {
-					jQuery(element).attr('href',href.substring(0,href.indexOf('?'))+eo_wbc_object.eo_product_url);
-				}
-			}
+// 			var href=jQuery(element).attr('href');
+// 			if(typeof(href)!==typeof(undefined) && href.hasOwnProperty('indexOf')){
+// 				if(href.indexOf('?')==-1) {
+// 					jQuery(element).attr('href',jQuery(element).attr('href')+eo_wbc_object.eo_product_url);
+// 				} else {
+// 					jQuery(element).attr('href',href.substring(0,href.indexOf('?'))+eo_wbc_object.eo_product_url);
+// 				}
+// 			}
 			
-		});
-	}
-	else {
+// 		});
+// 	}
+// 	else {
 
-		// ACTIVE_TODO_OC_START
-		// ACTIVE_TODO instead of determining if products are found or not on the js layer, it is really if we send a flag var from the php layer. so do it. in the dapii feed layers it is already like that but ensure that in wbc and tableview(in tableview also it is at least almost planned and roughly implemented) -- to h or -- to d 
-		// ACTIVE_TODO_OC_END
+// 		// ACTIVE_TODO_OC_START
+// 		// ACTIVE_TODO instead of determining if products are found or not on the js layer, it is really if we send a flag var from the php layer. so do it. in the dapii feed layers it is already like that but ensure that in wbc and tableview(in tableview also it is at least almost planned and roughly implemented) -- to h or -- to d 
+// 		// ACTIVE_TODO_OC_END
 
-		// 	ACTIVE_TODO commented below events subject creation, during testing only. so temporary only.
-		window.document.splugins.wbc.filters.core.no_products_found();
+// 		// 	ACTIVE_TODO commented below events subject creation, during testing only. so temporary only.
+// 		window.document.splugins.wbc.filters.core.no_products_found();
 
-		// ACTIVE_TODO_OC_START
-		// just move below line in the no_products_found function of the filters js module -- to d 
-		// 	--	and so now the render_container will recieve one parameter that is render_container, it will defaults to null so from where it is applicable it is passed otherwise it will be left blank -- to d 
-		// ACTIVE_TODO_OC_END
+// 		// ACTIVE_TODO_OC_START
+// 		// just move below line in the no_products_found function of the filters js module -- to d 
+// 		// 	--	and so now the render_container will recieve one parameter that is render_container, it will defaults to null so from where it is applicable it is passed otherwise it will be left blank -- to d 
+// 		// ACTIVE_TODO_OC_END
 			
-		jQuery(render_container/*".products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products"*/).html('<p class="woocommerce-info" style="width: 100%;">No products were found matching your selection.</p>');	
-	}	
+// 		jQuery(render_container/*".products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products"*/).html('<p class="woocommerce-info" style="width: 100%;">No products were found matching your selection.</p>');	
+// 	}	
 
-	/*if(render_container===".products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products"){*/
-		//Replacing Pagination details.....		
-		//console.log(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html());
+// 	if(render_container===".products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products"){
+// 		//Replacing Pagination details.....		
+// 		//console.log(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html());
 
-		// ACTIVE_TODO_OC_START
-		// //done move below logic to the pagination js module -- to d. including the compatibility conditions are there in the if else block, like planned above to keep the compatibility patches as it is if they are already implemented otherwise we will put them in the dedicated compatibility function. 
-		// 	-- //done create below functions in that module 
-		// 		-- //done 	bind_click -- to d. put comment inside function "it will bind to all kind of such on_click events of pagination, it will be private but it may broadcast notification with a callback which js layers of like tableview and so on can call when they recieve their own click event or they can simply call below on_click function". so it is private function. 
-		// 			-- //done 	and from this function call the private click function -- to d 
-		// 		-- //done 	on_click -- to d. put comment inside function "listen to all on_click events". so it is public function. 
-		// 		-- //done 	click -- to d. put comment inside function "it will internally implement all flows related to pagination link click event". so it is private function. 
-		// 			-- //done 	call this function from above on_click -- to d 	
-		// 			-- raise on_click notification using notifyAllObservers -- to d 
-		// 			-- in init_private function first create the subject for observer pattern also -- to d 
-		// 			-- //done  so also create init_private and init(public) function -- to d 
-		// 		-- //done 	compatibility -- to d. it is private function. 
-		// 		-- //done 	get_page_number -- to d. it is public function. 
-		// 		-- //done 	set_page_number -- to d. it is public function. 
-		// 			-- raise page_number_udpated notification using notifyAllObservers -- to d 
-		// 		-- //done 	on_reset -- to d. it is public function. 
-		// 			--	external layers would simply call this function, since observer pattern is not seem necessary here -- to d 
-		// 			-- //done 	and from this function call the private reset function -- to d 
-		// 		-- //done 	reset -- to d. it is private function. 
-		// 			-- raise on_reset notification using notifyAllObservers -- to d 
-		// 		tableview and so on would depend on that extended flow of observer pattern where notification will provide a callback, this flow is to be confirmed so either it or something else that is confirmed there on common js variations notes will be used. 
-		// 			-- tableview will use it for its flows like binding click event, which is ideal use case of the observer pattern -- to d 
-		// 			-- and it will also use it for triggerring the click event, means of its own pagination links dom -- to d 
-		// 				-- ACTIVE_TODO but very soon maybe the tableview may not have its own pagination links dom if that is not necessary for it -- to h and -- to d 
-		// 			-- and for setting and getting current page_number 
-		// 				--	for it may simply need to use the pagination modules published api interface -- to d 
-		// ACTIVE_TODO_OC_START
+// 		// ACTIVE_TODO_OC_START
+// 		// //done move below logic to the pagination js module -- to d. including the compatibility conditions are there in the if else block, like planned above to keep the compatibility patches as it is if they are already implemented otherwise we will put them in the dedicated compatibility function. 
+// 		// 	-- //done create below functions in that module 
+// 		// 		-- //done 	bind_click -- to d. put comment inside function "it will bind to all kind of such on_click events of pagination, it will be private but it may broadcast notification with a callback which js layers of like tableview and so on can call when they recieve their own click event or they can simply call below on_click function". so it is private function. 
+// 		// 			-- //done 	and from this function call the private click function -- to d 
+// 		// 		-- //done 	on_click -- to d. put comment inside function "listen to all on_click events". so it is public function. 
+// 		// 		-- //done 	click -- to d. put comment inside function "it will internally implement all flows related to pagination link click event". so it is private function. 
+// 		// 			-- //done 	call this function from above on_click -- to d 	
+// 		// 			-- raise on_click notification using notifyAllObservers -- to d 
+// 		// 			-- in init_private function first create the subject for observer pattern also -- to d 
+// 		// 			-- //done  so also create init_private and init(public) function -- to d 
+// 		// 		-- //done 	compatibility -- to d. it is private function. 
+// 		// 		-- //done 	get_page_number -- to d. it is public function. 
+// 		// 		-- //done 	set_page_number -- to d. it is public function. 
+// 		// 			-- raise page_number_udpated notification using notifyAllObservers -- to d 
+// 		// 		-- //done 	on_reset -- to d. it is public function. 
+// 		// 			--	external layers would simply call this function, since observer pattern is not seem necessary here -- to d 
+// 		// 			-- //done 	and from this function call the private reset function -- to d 
+// 		// 		-- //done 	reset -- to d. it is private function. 
+// 		// 			-- raise on_reset notification using notifyAllObservers -- to d 
+// 		// 		tableview and so on would depend on that extended flow of observer pattern where notification will provide a callback, this flow is to be confirmed so either it or something else that is confirmed there on common js variations notes will be used. 
+// 		// 			-- tableview will use it for its flows like binding click event, which is ideal use case of the observer pattern -- to d 
+// 		// 			-- and it will also use it for triggerring the click event, means of its own pagination links dom -- to d 
+// 		// 				-- ACTIVE_TODO but very soon maybe the tableview may not have its own pagination links dom if that is not necessary for it -- to h and -- to d 
+// 		// 			-- and for setting and getting current page_number 
+// 		// 				--	for it may simply need to use the pagination modules published api interface -- to d 
+// 		// ACTIVE_TODO_OC_START
 
-		if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html()!==undefined) {
-			if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination').length>0){
-				jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html());
-			} else {
+// 		if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html()!==undefined) {
+// 			if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination').length>0){
+// 				jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html());
+// 			} else {
 
-				// ACTIVE_TODO_OC_START
-				// @d once all the pagination related layers brought to this function, we need to check if the below incomplete implementation is completely implemented anywhere in our repo -- to d 
-				// 	--	if not then test with the elementor created category feed page and also with elementor hello themes custom loop to check if it works. if not then must uncomment the last uncommented line and finish the implementation -- to d or -- to b 
-				// ACTIVE_TODO_OC_END
+// 				// ACTIVE_TODO_OC_START
+// 				// @d once all the pagination related layers brought to this function, we need to check if the below incomplete implementation is completely implemented anywhere in our repo -- to d 
+// 				// 	--	if not then test with the elementor created category feed page and also with elementor hello themes custom loop to check if it works. if not then must uncomment the last uncommented line and finish the implementation -- to d or -- to b 
+// 				// ACTIVE_TODO_OC_END
 					
-				let product_container = jQuery(".products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)");
-				if(product_container.length<=0) {
-					product_container = jQuery(".elementor-products-grid");
-					if(product_container.length<=0) {
-						product_container = jQuery(".elementor-widget-container").has('[data-elementor-type="loop"]');
-						if(product_container.length<=0) {
-							product_container = jQuery("[data-widget_type='archive-posts.archive_custom']");						
-						}
-					}
-				}
-				//jQuery(product_container).append('<nav class="woocommerce-pagination">'+jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html()+'</nav>');
-			}
-		}
-		else {
-			jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html('');	
-		}
-	/*}*/
+// 				let product_container = jQuery(".products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)");
+// 				if(product_container.length<=0) {
+// 					product_container = jQuery(".elementor-products-grid");
+// 					if(product_container.length<=0) {
+// 						product_container = jQuery(".elementor-widget-container").has('[data-elementor-type="loop"]');
+// 						if(product_container.length<=0) {
+// 							product_container = jQuery("[data-widget_type='archive-posts.archive_custom']");						
+// 						}
+// 					}
+// 				}
+// 				//jQuery(product_container).append('<nav class="woocommerce-pagination">'+jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html()+'</nav>');
+// 			}
+// 		}
+// 		else {
+// 			jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html('');	
+// 		}
+// 	/*}*/
 
-	ACTIVE_TODO_OC_START
-	and below one to the hide_loader function -- to d 
-	ACTIVE_TODO_OC_END
+// 	ACTIVE_TODO_OC_START
+// 	and below one to the hide_loader function -- to d 
+// 	ACTIVE_TODO_OC_END
 
-	//jQuery("body").fadeTo('fast','1')	
+// 	//jQuery("body").fadeTo('fast','1')	
 
-	/////////////// shraddha //////////////////								
-	// jQuery("#loading").removeClass('loading');
-	///////////////////////////////////////////
+// 	/////////////// shraddha //////////////////								
+// 	// jQuery("#loading").removeClass('loading');
+// 	///////////////////////////////////////////
 	
-	ACTIVE_TODO_OC_START
-	almost all of the below seems compatibility related to so move that to compatibility function, and at there we need to have section conditon like this would be broadly as product-listing -- to d 
-		--	you already moved below code, which I saw, but there is not comment below that it is moved so please let me know what is going on -- to d 
-	ACTIVE_TODO_OC_END
+// 	ACTIVE_TODO_OC_START
+// 	almost all of the below seems compatibility related to so move that to compatibility function, and at there we need to have section conditon like this would be broadly as product-listing -- to d 
+// 		--	you already moved below code, which I saw, but there is not comment below that it is moved so please let me know what is going on -- to d 
+// 	ACTIVE_TODO_OC_END
 	
 	
-	jQuery('.products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)').addClass('product_grid_view');
-	//jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination').css('visibility','visible');
-	if(jQuery(".row-inner>.col-lg-9").length>0){
-		jQuery(".row-inner>.col-lg-9 *").each(function(i,e) {		
-		    if(jQuery(e).css('opacity') == '0'){
-				jQuery(e).css('opacity','1');        
-		    }
-		});
+// 	jQuery('.products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)').addClass('product_grid_view');
+// 	//jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination').css('visibility','visible');
+// 	if(jQuery(".row-inner>.col-lg-9").length>0){
+// 		jQuery(".row-inner>.col-lg-9 *").each(function(i,e) {		
+// 		    if(jQuery(e).css('opacity') == '0'){
+// 				jQuery(e).css('opacity','1');        
+// 		    }
+// 		});
 		
-		jQuery(".t-entry-visual-overlay").removeClass('t-entry-visual-overlay');
-		jQuery(".double-gutter .tmb").css('width','50%');
-		jQuery(".double-gutter .tmb").css('display','inline-flex');
+// 		jQuery(".t-entry-visual-overlay").removeClass('t-entry-visual-overlay');
+// 		jQuery(".double-gutter .tmb").css('width','50%');
+// 		jQuery(".double-gutter .tmb").css('display','inline-flex');
 		
-	}
+// 	}
 	
-	jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination,jet-filters-pagination').css('visibility','visible');
+// 	jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination,jet-filters-pagination').css('visibility','visible');
 
-	// Fix for the yith wishlist.
-	if(typeof(yith_wcwl_l10n)=='object'){
-		eowbc_yith_wishlist_fix();
-	}
-	// lazyload
-	if(typeof(LazyLoad)=='function'){
-		eowbc_lazyload();
-	}
-}
+// 	// Fix for the yith wishlist.
+// 	if(typeof(yith_wcwl_l10n)=='object'){
+// 		eowbc_yith_wishlist_fix();
+// 	}
+// 	// lazyload
+// 	if(typeof(LazyLoad)=='function'){
+// 		eowbc_lazyload();
+// 	}
+// }
 
 /*if(eo_wbc_object.disp_regular=='1'){
 	*/
 	window.eo_wbc_object.enable_filter = true;
+	window.document.splugins.eo_wbc_object.enable_filter = true;
 	jQuery.fn.eo_wbc_filter_change_native= function(init_call=false,form_selector="form#eo_wbc_filter",render_container='',parameters={}) {
 
 		ACTIVE_TODO_OC_START
@@ -1782,7 +1816,10 @@ jQuery(document).ready(function($){
 		
 	window.eo_wbc_object = window.eo_wbc_object || {};
 	window.eo_wbc_object.enable_filter = window.eo_wbc_object.enable_filter || false;
-
+	//////////// shraddha //////////////
+	window.document.splugins.eo_wbc_object = window.document.splugins.eo_wbc_object || {};
+	window.document.splugins.eo_wbc_object.enable_filter = window.document.splugins.eo_wbc_object.enable_filter || false;
+	////////////////////////////////////
 	ACTIVE_TODO_OC_START
 	//done move to pagination js modules bind_click function -- to d 
 		
