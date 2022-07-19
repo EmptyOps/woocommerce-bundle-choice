@@ -217,6 +217,10 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
             
             _this.callbacks[notification] = callback;
         },
+        unsubscribe_notification: function(notification, callback) {
+            
+            // TODO implement
+        }
 
     }
  }
@@ -317,6 +321,53 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
                  }
              }
          },
+         
+         unsubscribeObserver: function(feature_unique_key, subscriber_key, notification_key, callback = null) {
+
+            if(window.document.splugins.common._o( _this.configs, 'events_backend') && _this.configs.events_backend == 'jquery' ) {
+
+                jQuery(_this.$events_host_node).off(event_key(feature_unique_key, notification_key), callback);
+
+            } else {
+
+                 // console.log("Observer " + index + " is notified!");
+     
+                 // before subscribing the ovserver check if the feature_unique_key subject is created in the first place, if not then throw error 
+                 var found_index = null;
+                 for(var i = 0; i < _this.subjects.length; i++){
+                     if( _this.subjects[i].feature_unique_key() == feature_unique_key ) {
+     
+                         found_index = i;
+                         break;
+                     }
+                 }
+
+                 if( found_index == null || found_index == -1 ) {
+     
+                     throw "There is no subject exist for specified feature_unique_key "+feature_unique_key;
+
+                 } else {
+
+                    console.log('found_index '+found_index);
+                    console.log('found_index_subject '+_this.subjects[found_index]);
+
+                    
+                    var observer = _this.subjects[found_index].get_observer( subscriber_key );
+                    
+                    if(observer != null) {
+
+                        observer = _this.subjects[found_index].unsubscribeObserver( observer );
+
+                    } else {
+
+                        observer = _this.subjects[found_index].unsubscribeObserver( window.document.splugins.events.observer.core( subscriber_key ) );
+
+                    }
+
+                    observer.unsubscribe_notification(notification_key, callback);
+                 }
+             }
+         },
          notifyAllObservers: function(feature_unique_key, notification_key, stat_object=null, notification_response=null ) {
             
             if(window.document.splugins.common._o( _this.configs, 'events_backend') && _this.configs.events_backend == 'jquery' ) {
@@ -356,6 +407,18 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
             if(window.document.splugins.common._o( _this.configs, 'events_backend') && _this.configs.events_backend == 'jquery' ) {
 
                 jQuery(_this.$events_host_node).on(event_key(feature_unique_key, notification_key), callback);
+
+            } else {
+
+            }
+
+         },
+         
+         unsubscribe_observer_filter: function(feature_unique_key, subscriber_key, notification_key, callback = null) {
+
+            if(window.document.splugins.common._o( _this.configs, 'events_backend') && _this.configs.events_backend == 'jquery' ) {
+
+                jQuery(_this.$events_host_node).off(event_key(feature_unique_key, notification_key), callback);
 
             } else {
 
