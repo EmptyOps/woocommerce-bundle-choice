@@ -3208,8 +3208,10 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
         var sp_slzm_refresh_zoom_callback = null;
         window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'sp_slzm_refresh_zoom', {}, sp_slzm_refresh_zoom_callback );
 
+        // ACTIVE_TODO/TODO it is better heirachically, if the click is bind on our img-item class stuctor only, and then we recive here that element only in above function Arguments.
+        //     -- and than we can simply get type from element data-type which is mentanable due to well maintained heirachy insted of below index based image data read which is bound to change.
         var slider_thumb_click_callback = null;
-        window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'slider_thumb_click', {type:type,image:_this.data.current_variation.variation_gallery_images[index]}, slider_thumb_click_callback ); 
+        window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'slider_thumb_click', {type:_this.data.current_variation.variation_gallery_images[index].extra_params_org.type,image:_this.data.current_variation.variation_gallery_images[index]}, slider_thumb_click_callback ); 
         
     };
 
