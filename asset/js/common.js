@@ -2838,7 +2838,14 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
 
       process_slider_template(images);
 
-      process_zoom_template(images,0,hasGallery);
+        var index = 0;
+        if (typeof _this.$slider_loop_container.data('selected-index') !== 'undefined') {
+            index = _this.$slider_loop_container.data('selected-index');
+        }
+        
+        console.log('gallery_images process_images_template index=='+index);
+
+      process_zoom_template(images,index,hasGallery);
 
       if (hasGallery) {
         _this.$zoom_container.addClass('spui-wbc-gallery_images-has-product-thumbnail');
@@ -3230,6 +3237,9 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
         // ACTIVE_TODO_OC_END
 
         var index = jQuery(element).data('index'); 
+
+
+        _this.$slider_loop_container.data('selected-index',index);
 
         if(_this.configs.template.zoom.all_in_dom == 0){
             // update one tamplate 
