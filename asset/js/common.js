@@ -322,7 +322,7 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
              }
          },
          
-         unsubscribeObserver: function(feature_unique_key, subscriber_key, notification_key, callback = null) {
+         unsubscribe_observer: function(feature_unique_key, subscriber_key, notification_key, callback = null) {
 
             if(window.document.splugins.common._o( _this.configs, 'events_backend') && _this.configs.events_backend == 'jquery' ) {
 
