@@ -106,12 +106,12 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		advance_filter_accordian();
 
-		init_search();
+		init_search(render_container);
 
     };
 
 	// --	and there will be one more function like should_search, which will also be private. and that will handle onle the logic of checking flags and so on like the enable_filter_table flag above 
-    var should_search = function() {
+    var should_search = function(init_call) {
 
     	// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
 		// --add to be confirmed 2601 TO 2705--		
@@ -175,7 +175,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// }
 
 		var should_search_callback = null ;
-        window.document.splugins.events.api.apply_all_observer_filters( 'filters', 'should_search', {}, should_search_callback );					
+        window.document.splugins.events.api.apply_all_observer_filters( 'filters', 'should_search', {}, should_search_callback );	
+
+        return true;				
 
     };	 	 
 
@@ -183,12 +185,19 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     from tv js layer -- currently from sp_tv_template js layer 
     ACTIVE_TODO_OC_END
  
-	var eo_wbc_filter_change_wrapper_private = function() {
+	var eo_wbc_filter_change_wrapper_private = function(init_call=false,form_selector="form#eo_wbc_filter,form[id*='eo_wbc_filter']",render_container='.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products',parameters={}) {
 
 		it will be if condition here -- to s 
 			--	and like for almost all the notifications of filters module, the notification of the should_search will also be a notify all observer filter notification -- to s 
 				--	so in this regard convert all notification that are raised before_send and including before_send to the filter notification -- to s 
-		sould_search();
+
+		if( !should_search(init_call) ){
+
+			return false;	
+		
+		}
+
+		// sould_search();
 
 		prepare_query_data(form_data);
 
@@ -241,7 +250,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 	};
 
-	var prepare_query_data = function(form_data) {
+	var prepare_query_data = function(form_data, init_call) {
 
 		ACTIVE_TODO_OC_START
 		from 0= this file function 
@@ -286,6 +295,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				} else {
 					_products_in = _products_in.trim();
 				}
+				check -- to s
 				form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:'eo_wbc_e_tabview',products_in:_products_in};
 				if(eo_wbc_e_tabview.eo_table_view_per_page){
 					form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
@@ -294,37 +304,38 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			else
 			{
 				//form_data={_category:jQuery("[name='_category']").val().trim(),action:'eo_wbc_filter'};	
-				ACTIVE_TODO from tableview -- shraddha
-				form_data=jQuery("#tableview_order,#tableview_order_direction,[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
+				/*move to tableview done -- to s
+				form_data=jQuery("#tableview_order,#tableview_order_direction,[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();*/
 
-				ACTIVE_TODO from -- shraddha
 				form_data=jQuery("[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
 
+				ACTIVE_TODO from tableview  -- shraddha -- to s
 				if(eo_wbc_e_tabview.eo_table_view_per_page){
 					form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
 				}
 			}
 
-			ACTIVE_TODO from pagination -- shraddha
-			if(jQuery("select[name='orderby']").length>0){
-				form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
-			}
-
-			ACTIVE_TODO from pagination -- shraddha
+			// if(jQuery("select[name='orderby']").length>0){
+			// 	form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
+			// }
 			if(jQuery("select[name='orderby']").length>0){
 				form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
 			}
 			
-			ACTIVE_TODO from tableview -- shraddha
-			form_data.action='eo_wbc_e_tabview';
+			/*move to tableview done -- to s 
+			form_data.action='eo_wbc_e_tabview';*/
 
-		}
-		else{
-			ACTIVE_TODO from tableview -- shraddha
+		} else {
+
+			after all prepare_query_data move are finalized then we need to structure form_data preparation properly -- to h
+				--  like form serialize or base form preparation conataining all base wbc fields should happen in here on wbc layer only. -- to h & -- to s
+					--  so after above is done then remove from.serialize statements from tableview layer. -- to s
+					ACTIVE_TODO and same will be applicable to other js layers like diamond_quize and so on. -- to s
+			/*move to tableview done -- to s 
 			form_data=form.serialize();
 			if(eo_wbc_e_tabview.eo_table_view_per_page){
 				form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
-			}
+			}*/
 
 			ACTIVE_TODO from pagination -- shraddha
 			if(jQuery("select[name='orderby']").length>0){
@@ -582,10 +593,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		console.log(eo_wbc_object);	
 
-		success(data);	
+		// success(data);	
 
 		var prepare_query_data_callback = null ;
-        window.document.splugins.events.api.apply_all_observer_filters( 'filters', 'prepare_query_data', {}, prepare_query_data_callback );
+        window.document.splugins.events.api.apply_all_observer_filters( 'filters', 'prepare_query_data', {form_data:form_data, init_call:init_call }, prepare_query_data_callback );
 	
         return form_data;
 
@@ -685,7 +696,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		/////////////////////////////
 		var success_callback = null ;
-        window.document.splugins.events.api.notifyAllObservers( 'filters', 'success', {}, success_callback );
+        window.document.splugins.events.api.notifyAllObservers( 'filters', 'success', {data:data}, success_callback );
 
 	}; 
 
@@ -843,7 +854,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			just move below line in the no_products_found function of the filters js module -- to d 
 				--	and so now the render_container will recieve one parameter that is render_container, it will defaults to null so from where it is applicable it is passed otherwise it will be left blank -- to d 
 			ACTIVE_TODO_OC_END
-			jQuery(render_container/*".products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products"*/).html('<p class="woocommerce-info" style="width: 100%;">No products were found matching your selection.</p>');	
+			below line are moved in no_products_found -- to s
+			// jQuery(render_container/*".products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products"*/).html('<p class="woocommerce-info" style="width: 100%;">No products were found matching your selection.</p>');	
+			call proper -- to s
+			no_products_found();
 		}	
 
 		ACTIVE_TODO_OC_START
@@ -906,6 +920,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		and below one to the hide_loader function -- to d 
 		//jQuery("body").fadeTo('fast','1')									
 		jQuery("#loading").removeClass('loading');
+		window.document.splugins.wbc.filters.core.hide_loader();
 
 
 		// almost all of the below seems compatibility related to so move that to compatibility function, and at there we need to have section conditon like this would be broadly as product-listing -- to d done
@@ -1094,7 +1109,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     }; 
 
-    var init_search = function(){
+    var init_search = function(render_container){
 
     	// /var/www/html/drashti_project/27-05-2022/woocommerce-bundle-choice/asset/js/publics/eo_wbc_filter.js
 
@@ -1113,6 +1128,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
         window.document.splugins.events.api.apply_all_observer_filters( 'filters', 'init_search', {}, init_search_callback );
 
     };
+
     ///////////////////////////////////////////////////////
 
  	ACTIVE_TODO_OC_START
@@ -1188,7 +1204,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			and this function will simply call the private wrapper function eo_wbc_filter_change_wrapper_private -- to d 
 			ACTIVE_TODO_OC_END
 
-			eo_wbc_filter_change_wrapper_private();
+			eo_wbc_filter_change_wrapper_private(init_call, form_selector, render_container, parameters);
 
 			// prepare_query_data 	
 				// var form=jQuery(form_selector);
@@ -1281,6 +1297,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
         	// ACTIVE_TODO_OC_END	
 
 			// window.document.splugins.Feed.events.core.notifyAllObservers( 'filters', 'no_products_found' );
+
+			jQuery(render_container/*".products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products"*/).html('<p class="woocommerce-info" style="width: 100%;">No products were found matching your selection.</p>');	
+
 			var no_products_found_callback = null;
 			window.document.splugins.events.api.notifyAllObservers( 'filters', 'no_products_found', {}, 'no_products_found_callback' );
 
@@ -1302,10 +1321,6 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 	_this.configs = jQuery.extend({}, {}/*default configs*/, configs);	
 
 	var init_private = function() {
-
-		/////////////////shraddha///////////////
-		bind_click();
-		/////////////////////////////////////////
 
 		like from the filters module, we may need to raise notification from all key functions of this module as well.
 			--	like tableview may like to recieve click notification, but does it require to handle anuy logic related to it? since the wbc layers will only host the pagination module and layers so maybe tableview does not need to manage many or maybe not need to manage none of those things. 
