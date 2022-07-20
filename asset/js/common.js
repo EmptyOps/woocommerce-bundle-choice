@@ -217,6 +217,10 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
             
             _this.callbacks[notification] = callback;
         },
+        unsubscribe_notification: function(notification, callback) {
+            
+            // TODO implement
+        }
 
     }
  }
@@ -317,6 +321,53 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
                  }
              }
          },
+         
+         unsubscribe_observer: function(feature_unique_key, subscriber_key, notification_key, callback = null) {
+
+            if(window.document.splugins.common._o( _this.configs, 'events_backend') && _this.configs.events_backend == 'jquery' ) {
+
+                jQuery(_this.$events_host_node).off(event_key(feature_unique_key, notification_key), callback);
+
+            } else {
+
+                 // console.log("Observer " + index + " is notified!");
+     
+                 // before subscribing the ovserver check if the feature_unique_key subject is created in the first place, if not then throw error 
+                 var found_index = null;
+                 for(var i = 0; i < _this.subjects.length; i++){
+                     if( _this.subjects[i].feature_unique_key() == feature_unique_key ) {
+     
+                         found_index = i;
+                         break;
+                     }
+                 }
+
+                 if( found_index == null || found_index == -1 ) {
+     
+                     throw "There is no subject exist for specified feature_unique_key "+feature_unique_key;
+
+                 } else {
+
+                    console.log('found_index '+found_index);
+                    console.log('found_index_subject '+_this.subjects[found_index]);
+
+                    
+                    var observer = _this.subjects[found_index].get_observer( subscriber_key );
+                    
+                    if(observer != null) {
+
+                        observer = _this.subjects[found_index].unsubscribeObserver( observer );
+
+                    } else {
+
+                        observer = _this.subjects[found_index].unsubscribeObserver( window.document.splugins.events.observer.core( subscriber_key ) );
+
+                    }
+
+                    observer.unsubscribe_notification(notification_key, callback);
+                 }
+             }
+         },
          notifyAllObservers: function(feature_unique_key, notification_key, stat_object=null, notification_response=null ) {
             
             if(window.document.splugins.common._o( _this.configs, 'events_backend') && _this.configs.events_backend == 'jquery' ) {
@@ -356,6 +407,18 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
             if(window.document.splugins.common._o( _this.configs, 'events_backend') && _this.configs.events_backend == 'jquery' ) {
 
                 jQuery(_this.$events_host_node).on(event_key(feature_unique_key, notification_key), callback);
+
+            } else {
+
+            }
+
+         },
+         
+         unsubscribe_observer_filter: function(feature_unique_key, subscriber_key, notification_key, callback = null) {
+
+            if(window.document.splugins.common._o( _this.configs, 'events_backend') && _this.configs.events_backend == 'jquery' ) {
+
+                jQuery(_this.$events_host_node).off(event_key(feature_unique_key, notification_key), callback);
 
             } else {
 
@@ -3134,6 +3197,43 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
  
     var slider_thumb_click = function(type,element){
         
+        // ACTIVE_TODO_OC_START
+        // mobile zoom logic
+
+        // - need to check if darker and 360 dom is coming in that top side single image zoom like dom -- if required then check the darker lighter and 360 javascript to understand it
+
+        // -- then we most likely need to move the both mobile zoom template code inside the slider templates 
+        // -- now slider templates should drop the dom that is assumed to be rendered by zoom templates 
+
+        // -- and the zoom loop template will contain loop content templates will contain content will host all contents for js template.
+        // --- so zoom loop file will be empty
+
+        // -- and then if condition inside the slider thumb click for mobile
+        // --- and implement swipe or change event detection inside mobile block
+        // put below comment there
+        // NOTE: to develop the analogy of the quite significant slider click event, the mobile slider swipe event detection is implemented here 
+
+        // -- and once above flow is implemented also implement the mobile templates of darker lighter and 360 
+
+        // - and on wbc single product model id condition for mobile, to put zoom div at top. It is standard now for mobile but if any slider or zoom implementation differ than we may need to publish filter hook to let external slider and zoom specify the div priority. 
+
+        // - and now zoom loop and loop content need to be implemented
+        // -- however xzoom does updates the zoom area images but we are doing additionally so that maybe be fine 
+        // --- ACTIVE_TODO all below points applicable when slider/zoom thumb click event's template switching creates issues for either mobile or desktop implementation 
+        // ---- if the zoom do not allow any other html dom in their area(like needed for the darker lighter and 360) then what we could do is two different solutions.
+        //     // -----   first is broadcast pause/stop zoom notification which is simple but in this case we will have dependancy on external zoom to provide pause/stop api. 
+        //     //         INVALID
+        //     -----   ACTIVE_TODO second is hide zoom container div and create another one put the new template inside so that the zoom would even if active but will remain hidden. 
+        //             --  for this second option what we could do is simply maintain the valid structure. 
+        //                 --  so remove the zoom_container class from current zoom container div 
+        //                 --  then hide that div 
+        //                 --  create new div and add zoom_container class to that div 
+        //                 --  and then update the $zoom_container varible to point to new div. so this process will confirm that only one and the right zoom_container div is kept under $zoom_container which is under _this. 
+        //                 --  then reverse the process on out thumb click. 
+        //     // ------   but the other and even neat option is remove the zoom container div on the fly and create new one and apply the new templates on new one, it is when the next template to apply is some non zoom custom html like 360 and so on. with this option it would work for zooms with only one img-item in dom but with zoom with all_in_dom setting to true it will not work. so above second option is what seems optimal. 
+        //     // INVALID 
+        // ACTIVE_TODO_OC_END
+
         var index = jQuery(element).data('index'); 
 
         if(_this.configs.template.zoom.all_in_dom == 0){
