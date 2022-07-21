@@ -2424,7 +2424,7 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
 
         console.log(" gallery_images init_private ");
 
-        window.document.splugins.events.api.createSubject( 'gallery_images', ['process_images','sp_slzm_refresh', 'sp_variations_gallery_images_loaded', 'sp_slzm_init', 'sp_slzm_refresh_zoom', 'slider_thumb_click'] );
+        window.document.splugins.events.api.createSubject( 'gallery_images', ['process_images','sp_slzm_refresh', 'sp_variations_gallery_images_loaded', 'sp_slzm_init', 'sp_slzm_refresh_zoom', 'slider_thumb_click', 'process_zoom_template'] );
  
         // // For Single Product
         // $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery(); // Ajax and Variation Product
@@ -2838,7 +2838,14 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
 
       process_slider_template(images);
 
-      process_zoom_template(images,0,hasGallery);
+        var index = 0;
+        if (typeof _this.$slider_loop_container.data('selected-index') !== 'undefined') {
+            index = _this.$slider_loop_container.data('selected-index');
+        }
+        
+        console.log('gallery_images process_images_template index=='+index);
+
+      process_zoom_template(images,index,hasGallery);
 
       if (hasGallery) {
         _this.$zoom_container.addClass('spui-wbc-gallery_images-has-product-thumbnail');
@@ -2945,6 +2952,11 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
         } else {
           _this.$zoom_container.html('');
         } //this._element.trigger('woo_variation_gallery_init', [this, images]);
+
+        // ACTIVE_TODO/TODO it is better heirachically, if the click is bind on our img-item class stuctor only, and then we recive here that element only in above function Arguments.
+        //     -- and than we can simply get type from element data-type which is mentanable due to well maintained heirachy insted of below index based image data read which is bound to change.
+        var process_zoom_template_callback = null;
+        window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'process_zoom_template', {type:images[index].extra_params_org.type,image:images[index]}, process_zoom_template_callback ); 
 
     };
 
@@ -3231,6 +3243,9 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
 
         var index = jQuery(element).data('index'); 
 
+
+        _this.$slider_loop_container.data('selected-index',index);
+
         if(_this.configs.template.zoom.all_in_dom == 0){
             // update one tamplate 
 
@@ -3238,6 +3253,7 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
 
         }else{
             // ACTIVE_TODO hide and show image elements
+            // process_zoom_template(_this.data.current_variation.variation_gallery_images,index,_this.data.current_variation.variation_gallery_images.length > 1);          
         }
 
         console.log("sp_slzm_refresh_zoom notification");

@@ -61,9 +61,13 @@ class SP_Model_Gallery_Zoom extends Eowbc_Base_Model_Publics {
 			$image['sizes'] = '{{data.sizes}}';
 			$image['extra_params'] = '{{data.extra_params}}';
 			$options['has_only_thumbnail'] = '{{data.has_only_thumbnail}}';
+			$image['video_src'] = '{{data.video_src}}';
+
+			// ACTIVE_TODO remove below 3 filds, since thay are not used. but confirn first
 			$image['video_link'] = '{{data.video_link}}';
 			$image['video_embed_type'] = '{{data.video_embed_type}}';
 			$image['video_embed_url'] = '{{data.video_embed_url}}';
+
 			$image['post_thumbnail_id'] = '{{data.post_thumbnail_id}}';
 			$image['index'] = '{{data.index}}';
 
