@@ -123,6 +123,11 @@ class Extensions_Admin extends Admin {
 		$page_slug = wbc()->sanitize->get('page');
 		if(!empty($page_slug) and in_array($page_slug,$menu_slugs)){
 
+			add_filter('sp_is_legacy_admin_page', function($status) {
+
+				return false;
+			});
+
 			//	perform initial task 
 			$this->init();
 		}
