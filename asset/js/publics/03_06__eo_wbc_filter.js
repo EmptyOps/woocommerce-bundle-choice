@@ -99,11 +99,32 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		init_search();
 
-		bind_reset_click_listener();
+		on_reset_click_listener();
 
-		bind_click_listener();
+		on_change_listener();
 
-		advance_filter_accordian();
+		init_advance_filter_accordian();
+
+    };
+
+    var init_search = function(){
+
+    	// /var/www/html/drashti_project/27-05-2022/woocommerce-bundle-choice/asset/js/publics/eo_wbc_filter.js
+
+    	// render_container ne _this ni under ma levanu -- to s
+    		// --  and aa module ma jya b use thay tya _this ni under ma use karavanu -- to s
+    			// and bija koi b aava var hoy te confirm karavana -- to s
+
+    	/* below code block move in result_container()
+    	if(_this.render_container==='') {
+			_this.render_container = jQuery(".products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)");
+			if(_this.render_container.length<=0) {
+				_this.render_container = jQuery(".elementor-products-grid");
+			}
+		}*/
+
+		var init_search_callback = null ;
+        window.document.splugins.events.api.apply_all_observer_filters( 'filters', 'init_search', {}, init_search_callback );
 
     };
 
@@ -172,7 +193,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// }
 
 		var should_search_callback = null ;
-        window.document.splugins.events.api.apply_all_observer_filters( 'filters', 'should_search', {}, should_search_callback );	
+        window.document.splugins.events.api.apply_all_observer_filters( 'filters', 'should_search', {}, should_search_callback );
 
         return true;				
 
@@ -217,7 +238,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		if(init_call)
 		{
 			if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
-				_products_in = jQuery("[name='products_in']").val()
+				_products_in = jQuery("[name='products_in']").val();
 				if(_products_in == undefined){
 					_products_in = '';
 				} else {
@@ -561,7 +582,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 			beforeSend:before_send(xhr),
 
-			success:success(data),
+			success:success(data, render_container),
 			// {
 
 			// 	//console.log(data);
@@ -644,7 +665,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
         window.document.splugins.events.api.notifyAllObservers( 'filters', 'complete', {}, complete_callback );
 	}; 
 
-	var success = function(data) {
+	var success = function(data, render_container) {
 
 
 		//console.log(data);
@@ -727,6 +748,12 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 	var update_result_count = function(){
 
+		// create one function update_result_count in filters core js module -- to d done
+		// --	and then move the below code in that -- to d done
+		--	and check all the change function implementation and move show related code in that function -- to d 
+		--	I have some doubt the below condition's logic it is setting to empty when there is not result count container is returned. but I guess that is exceptional scenario which would never be happening but if it happens then we need to handle that exceptional scenario, so for now keeping it open and if no such thing show up after 1st or 2nd revision then remove this task ACTIVE_TODO -- to b 
+			// --	move above task comment also with the code -- to d done
+					
 		//Replace Result Count Status...
 		if(jQuery('.woocommerce-result-count',jQuery(data)).html()!==undefined){
 			if(jQuery(".woocommerce-result-count").length>0){
@@ -786,6 +813,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		render_data = data;
 		_render_container = render_container;
+
+		render_container = result_container(render_container);
+
 		ACTIVE_TODO_OC_START
 		// create two function show_loader and hide_loader in filters core js module -- to d done
 			// --	and then move the below code in the hide_loader -- to d done
@@ -794,11 +824,6 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				--	so that what happen is that in future if the events namespace is firing the search or any related events around and if by any change any event that the filters module recieve is related to the show hide loader flow then that is taken care of implicitly.  
 		// jQuery("#loading").removeClass('loading');
 
-		create one function update_result_count in filters core js module -- to d 
-		--	and then move the below code in that -- to d 
-		--	and check all the change function implementation and move show related code in that function -- to d 
-		--	I have some doubt the below condition's logic it is setting to empty when there is not result count container is returned. but I guess that is exceptional scenario which would never be happening but if it happens then we need to handle that exceptional scenario, so for now keeping it open and if no such thing show up after 1st or 2nd revision then remove this task ACTIVE_TODO -- to b 
-			--	move above task comment also with the code -- to d 
 		ACTIVE_TODO_OC_END	
 		// below code move in update_result_count function 
 		/*//Replace Result Count Status...
@@ -868,7 +893,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			ACTIVE_TODO instead of determining if products are found or not on the js layer, it is really if we send a flag var from the php layer. so do it. in the dapii feed layers it is already like that but ensure that in wbc and tableview(in tableview also it is at least almost planned and roughly implemented) -- to h or -- to d 
 			// 	ACTIVE_TODO commented below events subject creation, during testing only. so temporary only.
 			ACTIVE_TODO_OC_END
-			window.document.splugins.wbc.filters.core.no_products_found();
+			// window.document.splugins.wbc.filters.core.no_products_found();
 
 			ACTIVE_TODO_OC_START
 			just move below line in the no_products_found function of the filters js module -- to d 
@@ -1138,7 +1163,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     };
 
-    var advance_filter_accordian = function(){
+    var init_advance_filter_accordian = function(){
 
 		if(jQuery.fn.hasOwnProperty('accordion') && typeof(jQuery.fn.accordion)==='function'){
 			jQuery( ".eo_wbc_advance_filter" ).accordion({
@@ -1147,27 +1172,38 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			});
 		}
 
-    }; 
+    };
 
-    var init_search = function(){
+    var result_container = function(render_container) {
 
-    	// /var/www/html/drashti_project/27-05-2022/woocommerce-bundle-choice/asset/js/publics/eo_wbc_filter.js
-
-    	// render_container ne _this ni under ma levanu -- to s
-    		// --  and aa module ma jya b use thay tya _this ni under ma use karavanu -- to s
-    			// and bija koi b aava var hoy te confirm karavana -- to s
-
-    	if(_this.render_container==='') {
-			_this.render_container = jQuery(".products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)");
-			if(_this.render_container.length<=0) {
-				_this.render_container = jQuery(".elementor-products-grid");
+    	if(render_container==='') {
+			render_container = jQuery(".products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)");
+			if(render_container.length<=0) {
+				render_container = jQuery(".elementor-products-grid");
 			}
 		}
 
-		var init_search_callback = null ;
-        window.document.splugins.events.api.apply_all_observer_filters( 'filters', 'init_search', {}, init_search_callback );
+		compatability('render_container');
 
-    };
+		return render_container;
+
+    }; 
+
+    var no_products_found = function() {
+
+    	// ACTIVE_TODO_OC_START
+    	// create private counter part of the no_products_found function with name no_products_found_private, so that the inner private layers can call that internally -- to d 
+    	// 	--	and move below code there and from here just call that private fucntion -- to d 
+    	// ACTIVE_TODO_OC_END	
+
+		// window.document.splugins.Feed.events.core.notifyAllObservers( 'filters', 'no_products_found' );
+
+		jQuery(render_container/*".products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products"*/).html('<p class="woocommerce-info" style="width: 100%;">No products were found matching your selection.</p>');	
+
+		var no_products_found_callback = null;
+		window.document.splugins.events.api.notifyAllObservers( 'filters', 'no_products_found', {}, 'no_products_found_callback' );
+
+    }
 
     ///////////////////////////////////////////////////////
 
@@ -1214,6 +1250,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 
     		init_private();	
+
     	}, 		
 		eo_wbc_filter_change_wrapper: function(init_call=false,form_selector="form#eo_wbc_filter,form[id*='eo_wbc_filter']",render_container='.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products',parameters={}) {
 			// //	this eo_wbc_filter.js 
@@ -1283,23 +1320,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				jQuery(".reset_all_filters.mobile_2").removeClass('mobile_2_hidden');
 			}
 
-		}, 
-        no_products_found: function() {
-
-        	// ACTIVE_TODO_OC_START
-        	// create private counter part of the no_products_found function with name no_products_found_private, so that the inner private layers can call that internally -- to d 
-        	// 	--	and move below code there and from here just call that private fucntion -- to d 
-        	// ACTIVE_TODO_OC_END	
-
-			// window.document.splugins.Feed.events.core.notifyAllObservers( 'filters', 'no_products_found' );
-
-			jQuery(render_container/*".products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products"*/).html('<p class="woocommerce-info" style="width: 100%;">No products were found matching your selection.</p>');	
-
-			var no_products_found_callback = null;
-			window.document.splugins.events.api.notifyAllObservers( 'filters', 'no_products_found', {}, 'no_products_found_callback' );
-
-        }, 
-
+		} 
     };
 };
 
@@ -1324,10 +1345,13 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 				--	NOTE: and on this regard in case of dapii custom data based feed, when the pagination links are created by the dapii layers even then also all the standard and compatibility listeners of the bind_click for pagination links below will do its job. means roughly except the dapii creating the pagination links the rest all will be handled by the wbc layers. 
 
 				--	so whatever logic tableview requires after the pagination click can be covered by raised notification from here -- to s 
-					--	do the same for the other key functions below and raise notification but only if it is necessary otherwise we would skip that and only add when required. -- to s   
+					--	do the same for the other key functions below and raise notification but only if it is necessary otherwise we would skip that and only add when required. -- to s  
+
+		on_click_listener();
+
 	};
 
-	var bind_click = function(){
+	var on_click_listener = function(){
 
 		ACTIVE_TODO_OC_START
 		NOTE : it will bind to all kind of such on_click events of pagination, it will be private but it may broadcast notification with a callback which js layers of like tableview and so on can call when they recieve their own click event or they can simply call below on_click function". so it is private function.
@@ -1352,10 +1376,12 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 			if(jQuery(this).hasClass("next") || jQuery(this).hasClass("prev")){
 			
 				if(jQuery(this).hasClass("next")){
-					jQuery("[name='paged']").val(parseInt(jQuery(".page-numbers.current").text())+1);
+					// jQuery("[name='paged']").val(parseInt(jQuery(".page-numbers.current").text())+1);
+					set_page_number( get_page_number()+1 );
 				}
 				if(jQuery(this).hasClass("prev")){
-					jQuery("[name='paged']").val(parseInt(jQuery(".page-numbers.current").text())-1);
+					// jQuery("[name='paged']").val(parseInt(jQuery(".page-numbers.current").text())-1);
+					set_page_number( get_page_number()-1 );
 				}	
 			}		
 			else {
@@ -1366,15 +1392,21 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 			window.document.splugins.filters.api.eo_wbc_filter_change_wrapper(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
 		});
 
-		click();
+		on_click();
 
 	};
 
-    var click = function(){
+    var on_click = function(){
 
   		ACTIVE_TODO_OC_START
 		NOTE : it will internally implement all flows related to pagination link click event
 		ACTIVE_TODO_OC_END
+
+		click();
+
+    };
+
+    var click = function(){
 
     };
 
@@ -1382,7 +1414,7 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
         
     };
 
-    var reset = function(){
+    var reset_private = function(){
 
     };
 	
@@ -1393,27 +1425,42 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 			init_private();	
 		},
 
-		on_click: function() {
+		// on_click: function() {
 
-			// ACTIVE_TODO_OC_START
-			// NOTE : listen to all on_click events
-			// ACTIVE_TODO_OC_END
+		// 	// ACTIVE_TODO_OC_START
+		// 	// NOTE : listen to all on_click events
+		// 	// ACTIVE_TODO_OC_END
 
-			click();
+		// 	click();
+
+		// },
+
+		get_page_number: function(selector = null) {
+
+			if(selector == null) {
+				
+				return parseInt(jQuery(".page-numbers.current").text();
+
+			}
+
+			return parseInt(jQuery(selector).text().replace(',','');
 
 		},
 
-		get_page_number: function() {
+		set_page_number: function(page_number) {
+
+			if(page_number == 1 || empty(page_number)) {
+
+				reset_private();
+			}
+
+			jQuery("[name='paged']").val(get_page_number());
 
 		},
 
-		set_page_number: function() {
+		reset: function() {
 
-		},
-
-		on_reset: function() {
-
-			reset();
+			reset_private();
 
 		}
 
@@ -1918,6 +1965,7 @@ jQuery(document).ready(function($){
 
 		//done move to pagination js modules bind_click function -- to d 
 			--	and also be sure to the filter_change function call. and why that is so far not changed? -- to d 
+		below block are moved in filter module bind_click function. so do not consider this code block here. -- shraddha -- to s 
 		jQuery("body").on('click','.woocommerce-pagination a,.pagination a,.jet-filters-pagination a,.woocommerce-pagination .jet-filters-pagination__link,.pagination .jet-filters-pagination__link,.jet-filters-pagination .jet-filters-pagination__link',function(event){
 			
 			event.preventDefault();
