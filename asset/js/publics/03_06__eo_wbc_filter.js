@@ -841,7 +841,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		//Replacing Product listings....
 		like vars under window object are moved filter core js module, similarly move below var also to filters js module and underneath below statement set it in the filters js module -- to d 
-		document.wbc_data = data;
+		window.document.splugins.document.wbc_data = data;
 		
 		/*console.log(data);*/
 		ACTIVE_TODO_OC_START
@@ -1096,6 +1096,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     var on_reset_click_listener = function(){
 
+    	on_reset_click_listener();
     	jQuery(document).on('click',".reset_all_filters",function(){
         jQuery("[data-reset]").each(function(e){
             eval(jQuery(this).data('reset'));
@@ -1813,7 +1814,7 @@ ACTIVE_TODO_OC_END
 		// }
 
 			NOTE: if there are any return false etc statement occur below this statement then this core function call should be moved underneath the return statement because this core functions is supposed to be called only if search actually happens but yeah at earliest possible also so that there are any dependent flow below or elsewhere then they are taken care of properly 
-		window.document.splugins.wbc.filters.core.before_search();
+		window.document.splugins.wbc.filters.core.before_send();
 
 		and below will be inside the init_search also -- to d
 		// if(render_container==='') {
@@ -1823,10 +1824,10 @@ ACTIVE_TODO_OC_END
 		// 	}
 		// }
 
-		// var form=jQuery(form_selector/*"form#eo_wbc_filter"*/);	
-		// if(form.find('[name="html_destination"]').length>0){
-		// 	render_container = form.find('[name="html_destination"]').val();
-		// }
+		var form=jQuery(form_selector/*"form#eo_wbc_filter"*/);	
+		if(form.find('[name="html_destination"]').length>0){
+			render_container = form.find('[name="html_destination"]').val();
+		}
 		// var site_url=eo_wbc_object.eo_cat_site_url;
 		// var ajax_url = '';
 
@@ -1925,15 +1926,15 @@ jQuery(document).ready(function($){
 		--  and comment code below but the filters modules init function need to be called from here -- to d 
 		// 	--	so first export and publish that module under ...api -- to d done
 
-	jQuery(document).on('click',".reset_all_filters",function(){
+	/*jQuery(document).on('click',".reset_all_filters",function(){
         jQuery("[data-reset]").each(function(e){
             eval(jQuery(this).data('reset'));
         })
         jQuery.fn.eo_wbc_filter_change();
         return false;
-    });  
+    });*/  
 
- 	window.document.splugins.filters.api.init();
+  	window.document.splugins.wbc.filters.core.window.document.splugins.filters.api.init();
 
 	if(window.eo_wbc_object.disp_regular){
 	
@@ -2007,6 +2008,8 @@ jQuery(document).ready(function($){
 	in function bind_reset_click in filters js module and move below code there -- to d done
 		--	just confirm above point and then need to call the bind_reset_click function from below. or if we have better idea to call it from the filters js module itself there. I think it is better to call from thed filters js module. so bind_reset_click will be private function. -- to s 
 	//Reset form and display
+
+	
 	jQuery(".eo_wbc_srch_btn:eq(2)").click(function(){					
 		///////////////////////////////////////////
 		document.forms.eo_wbc_filter.reset();
