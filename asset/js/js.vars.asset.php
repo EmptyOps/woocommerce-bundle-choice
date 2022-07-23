@@ -45,37 +45,45 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 		// echo '<script src="'.includes_url('js') . '/underscore.min.js'.'"></script>';
 	}
 
-	$swatches_configs = array();
-	$gallery_images_configs = array();
+	if (!is_admin()) {
+		
+		$swatches_configs = array();
+		$gallery_images_configs = array();
 
-	$swatches_configs['attribute_types']            = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->sp_variations_swatches_supported_attribute_types(array('is_base_type_only'=>true));
-	$swatches_configs['product_variations_configs'] = wbc()->config->product_variations_configs();
+		$swatches_configs['attribute_types']            = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->sp_variations_swatches_supported_attribute_types(array('is_base_type_only'=>true));
+		$swatches_configs['product_variations_configs'] = wbc()->config->product_variations_configs();
 
-// ACTIVE_TODO admin options need to b loaded from variations.assets.php where b have already prepare all options -- to s 
-	$swatches_configs['options'] = array('show_variation_label' => false, 'clickable_out_of_stock' => false);
+	// ACTIVE_TODO admin options need to b loaded from variations.assets.php where b have already prepare all options -- to s 
+		$swatches_configs['options'] = array('show_variation_label' => false, 'clickable_out_of_stock' => false);
 
 
-	$gallery_images_configs['types'] 					  = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->sp_variations_gallery_images_supported_types(array('is_base_type_only'=>true));
-	$gallery_images_configs['product_variations_configs'] = wbc()->config->product_variations_configs();
+		$gallery_images_configs['types'] 					  = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->sp_variations_gallery_images_supported_types(array('is_base_type_only'=>true));
+		$gallery_images_configs['product_variations_configs'] = wbc()->config->product_variations_configs();
+		
+
+		$gallery_images_configs['base_container_selector']    = '.spui-sp-variations-gallery-images';
+
+
+		$gallery_images_configs['template'] 				  = array('slider'=>array('id'=>'sp_slzm_slider_image_loop'), 'zoom'=>array('id'=>'sp_slzm_zoom_image_loop'));	
+		$gallery_images_configs['classes'] 				      = array('slider'=>array('container'=>'sp-variations-gallery-images-slider','loop_container'=>'sp-variations-gallery-images-slider-loop'), 'zoom'=>array('container'=>'sp-variations-gallery-images-zoom'));	
+
+		// ACTIVE_TODO we neet to manage the loding secuance here so that any zoom layers including external plugin implimentetion layers can add filter do it 
+		$gallery_images_configs['template']['zoom']['all_in_dom'] = apply_filters('sp_slzm_zoom_template_all_in_dom',0);
+
+		$gallery_images_configs['options'] = array('gallery_reset_on_variation_change'=>false);
+
+		// ACTIVE_TODO asset enque and other asset flows
+			// --  first need to confirm that minified asset only are loaded -- to t
+			// --  and also that only necesary and partialy build assets are loaded -- to t 
+			// --  ned to make the versions dynamic of assets based on plugin, extensions and themes if there is no other versions system to maintan -- to s & -- to h
+		// ACTIVE_TODO/TODO when the variations and its child modules are moved out from the below loaded common js then at that time, also move te wc-cart variation dependancy mentioned below 
 	
+		wbc()->load->asset('js','common',array('jquery','wc-add-to-cart-variation'),"0.1.4",false,true,'common_configs',array('swatches_config'=>$swatches_configs, 'gallery_images_configs'=>$gallery_images_configs),true);
+		
+	} else {
 
-	$gallery_images_configs['base_container_selector']    = '.spui-sp-variations-gallery-images';
-
-
-	$gallery_images_configs['template'] 				  = array('slider'=>array('id'=>'sp_slzm_slider_image_loop'), 'zoom'=>array('id'=>'sp_slzm_zoom_image_loop'));	
-	$gallery_images_configs['classes'] 				      = array('slider'=>array('container'=>'sp-variations-gallery-images-slider','loop_container'=>'sp-variations-gallery-images-slider-loop'), 'zoom'=>array('container'=>'sp-variations-gallery-images-zoom'));	
-
-	// ACTIVE_TODO we neet to manage the loding secuance here so that any zoom layers including external plugin implimentetion layers can add filter do it 
-	$gallery_images_configs['template']['zoom']['all_in_dom'] = apply_filters('sp_slzm_zoom_template_all_in_dom',0);
-
-	$gallery_images_configs['options'] = array('gallery_reset_on_variation_change'=>false);
-
-	// ACTIVE_TODO asset enque and other asset flows
-		// --  first need to confirm that minified asset only are loaded -- to t
-		// --  and also that only necesary and partialy build assets are loaded -- to t 
-		// --  ned to make the versions dynamic of assets based on plugin, extensions and themes if there is no other versions system to maintan -- to s & -- to h
-	// ACTIVE_TODO/TODO when the variations and its child modules are moved out from the below loaded common js then at that time, also move te wc-cart variation dependancy mentioned below 
-	wbc()->load->asset('js','common',array('jquery','wc-add-to-cart-variation'),"0.1.4",false,true,'common_configs',array('swatches_config'=>$swatches_configs, 'gallery_images_configs'=>$gallery_images_configs),true);
+		wbc()->load->asset('js','common',array('jquery'),"0.1.4",false,true);
+	}
 
 }, 999);
 

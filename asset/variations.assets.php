@@ -2,6 +2,33 @@
 <?php
 // --- a code /woo-bundle-choice/application/model/publics/sp-model-single-product.php no che
 ?>
+
+<!-- /*tejas_22_07_2022 it for new QC upgrades so it is permenent*/ -->
+<style type="text/css">
+	table.variations tbody>tr:nth-child(odd)>td, table.variations tbody>tr:nth-child(odd)>th {
+	    background: transparent;
+	}
+
+	.woocommerce div.product form.cart .variations {
+	    display: inline-block;
+	}
+	.woocommerce div.product form.cart .variations th.label {
+	    padding: 15px 5px;
+	}
+	table.variations tbody tr:hover>td, table.variations tbody tr:hover>th {
+	    background-color: #fff;
+	}
+	.woocommerce div.product form.cart .variations th.label label {
+	    font-size: 15px;
+	    line-height: 1.1;
+	    text-transform: capitalize;
+	    text-align:left;
+	}
+	.woocommerce div.product form.cart .variations td, .woocommerce div.product form.cart .variations th {
+	    vertical-align: top;
+	}
+</style>
+
 <style type="text/css">
 	.ui.mini.images .variable-item.image{
 		width: auto;						

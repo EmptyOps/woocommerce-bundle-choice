@@ -177,6 +177,13 @@ function eowbc_ready($){
     };
     window.document.splugins.admin.upload_image_bind = function() {
 
+        if (window.document.splugins.common._o(window.document.splugins.admin,'is_upload_image_bind')) {
+
+            return true;
+        } 
+
+        window.document.splugins.admin.is_upload_image_bind = true;
+
         jQuery('.field.upload_image>.ui.button').off('click');
 
         // jQuery('.field.upload_image>.ui.button').on('click',function(event){
