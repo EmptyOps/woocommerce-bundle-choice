@@ -63,8 +63,8 @@ add_action( 'wp_enqueue_scripts' ,function(){
 				        zoomrange: [2,2],
 				        innerzoom: true,
 				        magnifierborder: "none",
-   			            magnifiersize: [502, 502],
-   			            cursorshadeborder: "1px solid black",
+   			            /*magnifiersize: [502, 502],
+   			            cursorshadeborder: "1px solid black",*/
 				        /*disablewheel: true,
 		                zoomstart: 3,
 		                zoomrange: [3,3],
@@ -225,87 +225,6 @@ add_action( 'wp_enqueue_scripts' ,function(){
 			}
 
 
-			/*====Slider=====*/
-
-
-			div#slider1 {
-			    float: left;
-			    width: 80px;
-			    position: relative;
-			}
-
-			.splide__list{
-			    height: auto;
-			}
-
-
-
-			body div#slider1 .splide__list li {
-			    border-radius: 5px;
-			    cursor: pointer;
-			    padding: 1px;
-			    margin-bottom: 10px;
-			}
-
-
-			div#slider1 .splide__list li img{
-			    width: 100%;
-			    height: 100%;
-			    object-fit: contain !important;
-			}
-
-
-
-			div#slider1 .splide__arrows .splide__arrow.splide__arrow--prev {
-			    top: -1.5rem;
-			    left: 50%;
-			    transform: translate(-50%);
-			    background: transparent;
-			    border: 0;
-			    cursor: pointer;
-			    position: absolute;
-			}
-
-
-			div#slider1 .splide__arrows .splide__arrow.splide__arrow--next {
-			    bottom: -0.8rem;
-			    top: auto;
-			    left: 50%;
-			    transform: translate(-50%);
-			    right: -2.5rem;
-			    background: transparent;
-			    border: 0;
-			    cursor: pointer;
-			    position: absolute;
-			}
-
-
-			div#slider1 .splide__arrows .splide__arrow.splide__arrow--prev svg {
-			    transform: rotate(-90deg);
-			    fill: #333;
-			    stroke: currentColor;
-			    stroke-linecap: square;
-			    stroke-width: 0px;
-			    height: 1.2rem;
-			    vertical-align: middle;
-			    width: 1.2rem;
-			}
-
-
-
-			 .splide__arrows .splide__arrow.splide__arrow--next svg {
-			    transform: rotate(90deg);
-			    fill: #333;
-			    stroke: currentColor;
-			    stroke-linecap: square;
-			    stroke-width: 0px;
-			    height: 1.2rem;
-			    vertical-align: middle;
-			    width: 1.2rem;
-			}
-
-
-
 			/*=======Zoom=====*/
 			img.img-fluid.big-img {
 			    width: 454px;
@@ -324,6 +243,9 @@ add_action( 'wp_enqueue_scripts' ,function(){
 			.imagezoomsl_zoom_container {
 			    width: calc(100% - 130px);
 			    margin-left: 15px;
+			    float: left;
+			    clear: right;
+			    position: relative;
 			}
 			/*.img-fluid.big-img {
 			    display: none;
