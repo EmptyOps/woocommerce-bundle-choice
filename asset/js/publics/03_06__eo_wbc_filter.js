@@ -1049,7 +1049,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// jQuery("#loading").addClass('loading');
 
 		var show_loader_callback = null ;
-        window.document.splugins.events.api.apply_all_observer_filters( 'filters', 'show_loader', {}, show_loader_callback );
+        // window.document.splugins.events.api.apply_all_observer_filters( 'filters', 'show_loader', {}, show_loader_callback );
+        window.document.splugins.events.api.notifyAllObservers( 'filters', 'show_loader', {}, show_loader_callback );
 
     };
 
@@ -1321,7 +1322,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				jQuery(".reset_all_filters.mobile_2").removeClass('mobile_2_hidden');
 			}
 
-		} 
+		}
     };
 };
 
@@ -1439,6 +1440,7 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 		get_page_number: function(selector = null) {
 
 			if(selector == null) {
+				
 				
 				return parseInt(jQuery(".page-numbers.current").text();
 
@@ -1934,7 +1936,7 @@ jQuery(document).ready(function($){
         return false;
     });*/  
 
-  	window.document.splugins.wbc.filters.core.window.document.splugins.filters.api.init();
+  	window.document.splugins.filters.core.init();
 
 	if(window.eo_wbc_object.disp_regular){
 	
@@ -2010,7 +2012,8 @@ jQuery(document).ready(function($){
 	//Reset form and display
 
 	
-	jQuery(".eo_wbc_srch_btn:eq(2)").click(function(){					
+	// below code block are move in 
+	/*jQuery(".eo_wbc_srch_btn:eq(2)").click(function(){					
 		///////////////////////////////////////////
 		document.forms.eo_wbc_filter.reset();
 		jQuery(".eo_wbc_srch_btn:eq(2)").trigger('reset');
@@ -2019,7 +2022,8 @@ jQuery(document).ready(function($){
 		// jQuery.fn.eo_wbc_filter_change(true);
 		window.document.splugins.filters.api.eo_wbc_filter_change_wrapper(true);
 
-	});	
+	});*/
+
 });
 
 // ACTIVE_TODO here if reset even is encapsulated within particule filter fields object then that field can have more control on its state changes -- to a and/or -- to h 
