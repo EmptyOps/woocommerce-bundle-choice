@@ -169,8 +169,10 @@ function eowbc_ready($){
         file_frame.on('select', function() {
             attachment = file_frame.state().get('selection').first().toJSON();          
             console.log(attachment);
-            action_root.find("img").attr('src',attachment.url).css( 'width', 'auto' );
+            action_root.find("img").attr('src',attachment.url).css( 'width', '64px'/*'auto'*/ );
             action_root.find("input[type='hidden']").val( attachment.id );
+
+            action_root.find("input[type='hidden']").trigger('change');
         });
         // Finally, open the modal
         file_frame.open();
