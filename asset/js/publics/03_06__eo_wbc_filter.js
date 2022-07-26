@@ -244,11 +244,11 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				} else {
 					_products_in = _products_in.trim();
 				}
-				check -- to s
-				form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:'eo_wbc_e_tabview',products_in:_products_in};
+				// move to tableview done -- to s
+				/*form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:'eo_wbc_e_tabview',products_in:_products_in};
 				if(eo_wbc_e_tabview.eo_table_view_per_page){
 					form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
-				}
+				}*/
 			}
 			else
 			{
@@ -258,10 +258,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 				form_data=jQuery("[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
 
-				ACTIVE_TODO from tableview  -- shraddha -- to s
-				if(eo_wbc_e_tabview.eo_table_view_per_page){
-					form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
-				}
+				// move to tableview done -- to s
+				// if(eo_wbc_e_tabview.eo_table_view_per_page){
+				// 	form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
+				// }
 			}
 
 			// if(jQuery("select[name='orderby']").length>0){
@@ -286,7 +286,6 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
 			}*/
 
-			ACTIVE_TODO from pagination -- shraddha
 			if(jQuery("select[name='orderby']").length>0){
 				form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
 			}
@@ -616,7 +615,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 						--	then confirm that compatibility function call below and the compatibility which is also called from inside the eo_wbc_filter_render_html has any issue. -- to s 
 				--	and we of course can not call compatibility simply from here. so lets simply call from different places with right section key. like we have did in those two modules and for example the compatibility most likely need to be called before eo_wbc_filter_render_html call since inside compatibility eo_wbc_filter_render_html is called. -- to h and -- to s 
 					--	and remove the eo_wbc_filter_render_html call from inside the compatibility function. -- to s 
-		compatability(section, object, expected_result);
+		// shraddha
+		// compatability(section, object, expected_result);
 
 		return true;
 
@@ -1969,6 +1969,8 @@ jQuery(document).ready(function($){
 		//done move to pagination js modules bind_click function -- to d 
 			--	and also be sure to the filter_change function call. and why that is so far not changed? -- to d 
 		below block are moved in filter module bind_click function. so do not consider this code block here. -- shraddha -- to s 
+		// and alredy call filter init function in this ready event and inside that function all listener are called.
+
 		jQuery("body").on('click','.woocommerce-pagination a,.pagination a,.jet-filters-pagination a,.woocommerce-pagination .jet-filters-pagination__link,.pagination .jet-filters-pagination__link,.jet-filters-pagination .jet-filters-pagination__link',function(event){
 			
 			event.preventDefault();
@@ -1999,6 +2001,7 @@ jQuery(document).ready(function($){
 	////////////////////////
 	// create function advance_filter_accordian in filters js module and move below code there -- to d done 
 		--	and then from just make call to that private function from the init_private of the same module -- to d /*done*/
+		this task is complete
 
 	if(jQuery.fn.hasOwnProperty('accordion') && typeof(jQuery.fn.accordion)==='function'){
 		jQuery( ".eo_wbc_advance_filter" ).accordion({
@@ -2009,6 +2012,7 @@ jQuery(document).ready(function($){
 
 	in function bind_reset_click in filters js module and move below code there -- to d done
 		--	just confirm above point and then need to call the bind_reset_click function from below. or if we have better idea to call it from the filters js module itself there. I think it is better to call from thed filters js module. so bind_reset_click will be private function. -- to s 
+	// below code are mover in on_reset_click_listener and e function init_private manthi call thay che. shraddha
 	//Reset form and display
 
 	
