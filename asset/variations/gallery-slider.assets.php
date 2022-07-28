@@ -9,7 +9,6 @@
         max-width: 58%;  /*---Change---*/
         min-width: 58%;  /*---Change---*/
         float: left;
-        overflow: hidden;
         clear: left;
     }
     .splide_slider_container {
@@ -50,7 +49,7 @@
 
 
     div#slider1 .splide__arrows .splide__arrow.splide__arrow--prev {
-        top: -1.5rem;
+        top: -2.5rem;
         left: 50%;
         transform: translate(-50%);
         background: transparent;
@@ -61,7 +60,7 @@
 
 
     div#slider1 .splide__arrows .splide__arrow.splide__arrow--next {
-        bottom: -1.8rem;
+        bottom: -2.8rem;
         top: auto;
         left: 50%;
         transform: translate(-50%);

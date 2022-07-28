@@ -17,7 +17,8 @@ class SP_Gallery_Slider extends \eo\wbc\controllers\publics\Controller{
     private function __construct() {
         
     }
-    public function should_init(){
+
+    public static function should_init($args = array()){
 
         /* --- ACTIVE_TODO implments*/
         return true;
