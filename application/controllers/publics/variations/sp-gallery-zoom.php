@@ -18,7 +18,7 @@ class SP_Gallery_Zoom extends \eo\wbc\controllers\publics\Controller{
         
     }
 
-    public function should_init(){
+    public static function should_init($args = array()){
 
         /*--- ACTIVE_TODO implments*/
         return true;

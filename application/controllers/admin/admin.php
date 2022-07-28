@@ -99,11 +99,6 @@ class Admin {
 
 	public static function legacy_admin_process($is_ajax=false){
 
-		add_filter('sp_is_legacy_admin_page', function($status) {
-
-			return true;
-		});
-
         //Initiate legacy admin 
         \eo\wbc\controllers\admin\legacy_admin\Legacy_Admin::instance()->init(); 
 	
@@ -122,6 +117,11 @@ class Admin {
 		$menu_slugs[]=$menu_items['slug'];
 		$page_slug = wbc()->sanitize->get('page');
 		if(!empty($page_slug) and in_array($page_slug,$menu_slugs)){
+
+			add_filter('sp_is_legacy_admin_page', function($status) {
+
+				return false;
+			});
 
 			//	perform initial task 
 			self::instance()->init();

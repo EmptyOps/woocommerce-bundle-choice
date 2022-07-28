@@ -9,12 +9,13 @@
 $template = null;
 $template = array(
     'type'=>'li',
-    'class'=>array(     'small-img',
-                        'splide__slide', 
-                        'img-item', 
-                        'img-item-'.$image['extra_params_org']['type'], 
-                        'img-item-'.$image['extra_params_org']['type'].'-'.wbc()->common->current_theme_key() 
-                    ),
+    'class'=>array(     
+        'small-img',
+        'splide__slide', 
+        'img-item', 
+        'img-item-'.$image['extra_params_org']['type'], 
+        'img-item-'.$image['extra_params_org']['type'].'-'.wbc()->common->current_theme_key() 
+    ),
     'child'=>array(
         'type'=>'image',
         'src'=>$image['gallery_thumbnail_src'],

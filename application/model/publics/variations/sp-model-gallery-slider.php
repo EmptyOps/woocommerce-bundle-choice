@@ -48,6 +48,12 @@ class SP_Model_Gallery_Slider extends Eowbc_Base_Model_Publics {
 			return $classes;
 		});
 
+		add_filter('sp_slzm_slider_loop_container', function($classes){
+			$classes[] = 'splide_slider_container-loop';
+
+			return $classes;
+		});
+
 		add_filter('sp_slzm_slider_image_loop_js_template',function($html){
 
 			$image['gallery_thumbnail_src'] = '{{data.gallery_thumbnail_src}}';
@@ -104,6 +110,12 @@ class SP_Model_Gallery_Slider extends Eowbc_Base_Model_Publics {
 
 				$classes = array('sp-variations-gallery-images-slider');
 				$classes = apply_filters('sp_slzm_slider_container',$classes);
+
+				// ACTIVE_TODO when it becomes necessary we need to implement loop from here or otherwise just get main container and loop container html in different hooks so we get html in different parts.
+				// 	ACTIVE_TODO and than what we need to do is create loop container div from here and apply loop container classes from here. right now it is passed from below to loop template file.
+				$images_data['slider_loop_container_classes'] = array('sp-variations-gallery-images-slider-loop');
+				$images_data['slider_loop_container_classes'] = apply_filters('sp_slzm_slider_loop_container',$images_data['slider_loop_container_classes']);
+
 
 				$html = null;
 				$html = apply_filters('sp_slzm_slider_images_html',$html,$images_data);
