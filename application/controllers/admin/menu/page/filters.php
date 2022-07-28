@@ -510,6 +510,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'class'=>array('field'),
 								'label'=>'<span class="ui large text">Advanced Setting</span>',
 							),
+							rename labels in below divider and checkbox, to something like Enable Collections Tabs(earlier: Two tabs setting) -- to b 
 							'filter_setting_advance_two_tabs_divider'=>array(
 								'label'=>'Two tabs setting',
 								'type'=>'devider',
@@ -524,6 +525,12 @@ if ( ! class_exists( 'Filters' ) ) {
 								'size_class'=>array('eight','wide'),
 								'inline'=>true,
 							),
+							--	comment four fields below -- to b 
+								--	and move the category field below to the filter set form -- to b 
+									--	and one more checkbox in filter set form with label (Add as Special Collections Tab) -- to b 
+							--	then on frontend find all the logic with below and above keys -- to b 
+								--	then first lets extend the php layer. so simply will implement loop instead of the two static tab implementation -- to b 
+								--	and on javascript layer nothing additional need to be done I think but lets confirm -- to b 
 							'filter_setting_advance_first_tabs'=>array(
 								'label'=>'Select first tab\'s filter set' ,
 								'type'=>'select',
