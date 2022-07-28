@@ -290,14 +290,14 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
 			}
 
-			ACTIVE_TODO from tableview pagination -- shraddha
+			/*move to tableview done -- to s
 			if(jQuery("#tableview_order").val()!=='' && jQuery("#tableview_order_direction").val()!==''){
 				form_data+='&tableview_order='+jQuery("#tableview_order").val();
 				form_data+='&tableview_order_direction='+jQuery("#tableview_order_direction").val();
-			}
+			}*/
 
-			ACTIVE_TODO from tableview -- shraddha
-			form_data+='&action=eo_wbc_e_tabview';
+			/*move to tableview done -- to s
+			form_data+='&action=eo_wbc_e_tabview';*/
 		}
 
 		////////////////////////////////
