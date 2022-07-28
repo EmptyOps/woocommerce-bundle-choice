@@ -495,7 +495,7 @@ class WBC_WC {
         return $opts_arr;
     } 
 
-    ////// 29-04-2022 -- @shraddha -- for options attribute //////
+    ////// 29-04-2022 -- @shraddha -- for options category //////
     public static function eo_wbc_prime_category($slug='',$prefix='',$opts_arr=array()) {
 
         $separator = wbc()->config->separator();
@@ -524,7 +524,7 @@ class WBC_WC {
         // return $category_option_list;
         return $opts_arr;
     }
-    ////// 29-04-2022 -- @shraddha -- for options attribute //////
+    ////// 29-04-2022 -- @shraddha -- for options attribute/category //////
     public static function wc_data_detailed_dropdown() {
 
         $attribute = self::instance()->eo_wbc_attributes();
