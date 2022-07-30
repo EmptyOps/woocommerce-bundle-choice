@@ -91,6 +91,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 					--	then the sp_variations modules should init 
 					--	and then most challanging of all is external event dependancy, for example wc_variations_form. I think we can simply restructure our loading sequence a little bit as required but the external events should be take care of always witout failling. so we should simply give that ultimate priority and bind that always on time, whenever they want us to bind to them. and then structure rest of the loading sequence accordingly. 
 
+			--	for the category page also we will need to follow same flow like above and the woocommerce and other legacy events need to be considered as central to entire loading sequance like we thought of for above item page loading sequence flow.
 		 
 		ACTIVE_TODO_OC_END
 
@@ -1097,7 +1098,6 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     var on_reset_click_listener = function(){
 
-    	on_reset_click_listener();
     	jQuery(document).on('click',".reset_all_filters",function(){
         jQuery("[data-reset]").each(function(e){
             eval(jQuery(this).data('reset'));
