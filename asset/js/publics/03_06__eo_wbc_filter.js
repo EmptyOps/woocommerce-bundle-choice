@@ -1789,12 +1789,14 @@ ACTIVE_TODO_OC_END
 
 /*if(eo_wbc_object.disp_regular=='1'){
 	*/
+--	disp_regular aa wbc and tableview ma serch ekaravano -- to s
 	window.eo_wbc_object.enable_filter = true;
 	window.document.splugins.eo_wbc_object.enable_filter = true;
 	jQuery.fn.eo_wbc_filter_change_native= function(init_call=false,form_selector="form#eo_wbc_filter",render_container='',parameters={}) {
 
 		ACTIVE_TODO_OC_START
-		on an important note there should a function parameter in this main function of the filters module, which specify the filter event is for what. it can be the form_selector but things can get complicated so better to have dedicated parameter so lets just support the dedicated parameter under the parameters object that it recieve, so it will be with the key caller_module -- to d. this will be necessary to manage logic or conditions based on the caller_module condition. 
+		on an important note there should a 
+		function parameter in this main function of the filters module, which specify the filter event is for what. it can be the form_selector but things can get complicated so better to have dedicated parameter so lets just support the dedicated parameter under the parameters object that it recieve, so it will be with the key caller_module -- to d. this will be necessary to manage logic or conditions based on the caller_module condition. 
 			but is it enough? 
 				--	with only the caller_module condition and the filters js module? 
 					--	maybe we need more stat holders, like on dapii we had the dedicated class to encapsulate and maintain the stat of each API and what not 
