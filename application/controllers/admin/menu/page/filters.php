@@ -299,7 +299,22 @@ if ( ! class_exists( 'Filters' ) ) {
 						'is_header' => 1,
 						'val' => 'Filter Set',
 						'field_id'=>'filter_set_name'
-					),					
+					),	
+					2=>array(
+						'is_header' => 2,
+						'val' => 'First(or Diamond) category filters',
+						'field_id'=>'filter_set_two_tabs_first'
+					),	
+					3=>array(
+						'is_header' => 3,
+						'val' => 'First(or Setting) category filters',
+						'field_id'=>'filter_set_two_tabs_second'
+					),
+					4=>array(
+						'is_header' => 4,
+						'val' => 'Category',
+						'field_id'=>'filter_set_category'
+					),			
 				),
 			);
 			$filter_set_table['body'] = array(
@@ -510,28 +525,31 @@ if ( ! class_exists( 'Filters' ) ) {
 								'class'=>array('field'),
 								'label'=>'<span class="ui large text">Advanced Setting</span>',
 							),
-							rename labels in below divider and checkbox, to something like Enable Collections Tabs(earlier: Two tabs setting) -- to b 
 							'filter_setting_advance_two_tabs_divider'=>array(
 								'label'=>'Two tabs setting',
 								'type'=>'devider',
 							),
-							'filter_setting_advance_two_tabs'=>array(
+							'move_to_filter_setting_advance_two_tabs'=>array(
+								'label'=>'Note: This setting is moved to "Woo Choice Plugin -> Filter -> Filter Sets"',
+								'type'=>'visible_info',
+							),
+							/*'filter_setting_advance_two_tabs'=>array(
 								'label'=>' ',
 								'type'=>'checkbox',
 								'sanitize'=>'sanitize_text_field',
 								'value'=>array(),
-								'options'=>array('filter_setting_advance_two_tabs'=>'Enable/Disable two tabs for the First(or Diamond) category filters'),
+								'options'=>array('filter_setting_advance_two_tabs'=>'Enable Collections Tabs(earlier: Two tabs setting) for the First(or Diamond) category filters'),
 								'class'=>array(),
 								'size_class'=>array('eight','wide'),
 								'inline'=>true,
-							),
-							--	comment four fields below -- to b 
-								--	and move the category field below to the filter set form -- to b 
-									--	and one more checkbox in filter set form with label (Add as Special Collections Tab) -- to b 
+							),*/
+							// --	comment four fields below -- to b done
+								// --	and move the category field below to the filter set form -- to b done
+									// --	and one more checkbox in filter set form with label (Add as Special Collections Tab) -- to b done
 							--	then on frontend find all the logic with below and above keys -- to b 
 								--	then first lets extend the php layer. so simply will implement loop instead of the two static tab implementation -- to b 
 								--	and on javascript layer nothing additional need to be done I think but lets confirm -- to b 
-							'filter_setting_advance_first_tabs'=>array(
+							/*'filter_setting_advance_first_tabs'=>array(
 								'label'=>'Select first tab\'s filter set' ,
 								'type'=>'select',
 								'value'=>'',
@@ -568,7 +586,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'options'=> \eo\wbc\controllers\admin\menu\page\Filters::eo_wbc_prime_category_(),
 								'class'=>array('fluid'),
 								'size_class'=>array('three','wide','required'),
-							),
+							),*/
 							'config_advance_end'=>array(
 								'type'=>'accordian',
 								'section_type'=>'end'
@@ -1420,6 +1438,35 @@ if ( ! class_exists( 'Filters' ) ) {
 									'class'=>array('small'),
 									// 'size_class'=>array('sixteen','wide'),
 								),
+							),
+							'filter_set_two_tabs_first'=>array(
+								'label'=>'First(or Diamond) category filters',
+								'type'=>'checkbox',
+								'sanitize'=>'sanitize_text_field',
+								'value'=>array(),
+								'options'=>array('filter_setting_advance_two_tabs'=>'Enable Collections Tabs(earlier: Two tabs setting) for the First(or Diamond) category filters'),
+								'class'=>array(),
+								'size_class'=>array('eight','wide'),
+								'inline'=>true,
+							),
+							'filter_set_two_tabs_second'=>array(
+								'label'=>'Second(or Setting) category filters',
+								'type'=>'checkbox',
+								'sanitize'=>'sanitize_text_field',
+								'value'=>array(),
+								'options'=>array('filter_setting_advance_two_tabs'=>'Enable Collections Tabs(earlier: Two tabs setting) for the Second(or Ring) category filters'),
+								'class'=>array(),
+								'size_class'=>array('eight','wide'),
+								'inline'=>true,
+							),
+							'filter_set_category'=>array(
+								'label'=>'Category for First Filter Set',
+								'type'=>'select',
+								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
+								'options'=> \eo\wbc\controllers\admin\menu\page\Filters::eo_wbc_prime_category_(),
+								'class'=>array('fluid'),
+								'size_class'=>array('three','wide','required'),
 							),	
 							'filter_set_add_enabled'=>array(
 								'type'=>'hidden',

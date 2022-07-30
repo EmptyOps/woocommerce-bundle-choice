@@ -1128,6 +1128,15 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     };
 
+    var on_filter_set_click_listener = function(){
+
+    	on_filter_set_click();
+
+		var on_filter_set_click_listener_callback = null ;
+        window.document.splugins.events.api.notifyAllObservers( 'filters', 'on_filter_set_click_listener', {}, on_filter_set_click_listener_callback );
+
+    };
+
     var on_change_listener = function(){
 
     	if(!eo_wbc_object.btnfilter_now){			
@@ -1151,6 +1160,12 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     };
 
+    var on_filter_set_click = function() {
+
+    	filter_set_click();
+
+    };
+
     var on_change = function() {
 
    		change();
@@ -1158,6 +1173,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     };
 
     var reset_click = function() {
+
+    };
+
+    var filter_set_click = function() {
 
     };
 
