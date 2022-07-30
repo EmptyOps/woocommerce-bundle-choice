@@ -19,7 +19,7 @@ class Options extends \eo\wbc\controllers\publics\Controller {
         
     }
 
-    public function should_init(){
+    public static function should_init($args = array()){
     	return true;
     }
     public function init($args = array()){

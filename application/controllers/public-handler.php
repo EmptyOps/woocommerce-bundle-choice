@@ -137,37 +137,59 @@ class Public_Handler {
 				                $_REQUEST['cat_filter_cat_link']=$_GET['CAT_LINK'];
 				            }
 
-				            if(wbc()->options->get_option('filters_filter_setting','filter_setting_advance_two_tabs')) {
-				            	$_first_tab_id = wbc()->options->get_option('filters_filter_setting','filter_setting_advance_first_category');
-				            	$_first_tab_key = wbc()->options->get_option('filters_filter_setting','filter_setting_advance_first_tabs');
-				            	$_second_tab_id = wbc()->options->get_option('filters_filter_setting','filter_setting_advance_second_category');
-				            	$_second_tab_key = wbc()->options->get_option('filters_filter_setting','filter_setting_advance_second_tabs');
 
-				            	$_current_category_id = false;
+				            // ACTIVE_TODO here we need to provide filter_prefix support since now the switch and caegory settings are in the filter sets tab 
+				            // 	ACTIVE_TODO it might be challenging to determine the filter_prefix here, so also think about it if it is the right layer here to implement below logic or lets just think about moving it to the filters class layers of the frontend class heirarchy 
+				            // 	--	ACTIVE_TODO it seems that Shop_Category_Filter and shortcode filters have no or limited support but lets implement the filter_prefix support everywhere. right now it is noticed at frontend filters form template. 
+				            /*ACTIVE_TODO_OC_START
+				            hire nid to detarmind navigetd Category in most conseravative way posibul
+				            	-- what is the right leyar for this? lats use router class if that is approaite.
+				            ACTIVE_TODO_OC_END*/
+				            $is_first_root_category = true;
+				            $filter_sets = unserialize(wbc()->options->get_option_group('filters_filter_set',"a:0:{}"));
+							//wbc()->common->pr($filter_sets);
+							if(!empty($filter_sets) and is_array($filter_sets)){
+								foreach ($filter_sets as $filter_sets_key => $filter_sets_val) {
+									//$filter_sets[$filter_sets_key] = $filter_sets_val['filter_set_name'];
+									//if(wbc()->options->get_option('filters_filter_setting','filter_setting_advance_two_tabs')) {
 
-				            	if(!empty($_REQUEST[$_first_tab_key])) {
-				            		$_current_category_id = $_first_tab_id;
-				            	} elseif(!empty($_REQUEST[$_second_tab_key])) {			            		
-				            		$_current_category_id = $_second_tab_id;
-				            	}
+									if ($is_first_root_category and !empty($filter_sets_val['filter_set_two_tabs_first'])) {
+											
+						            	$_first_tab_id = $filter_sets_val['filter_set_category']; //wbc()->options->get_option('filters_filter_setting','filter_setting_advance_first_category');
+						            	$_first_tab_key = $filter_sets_key; //wbc()->options->get_option('filters_filter_setting','filter_setting_advance_first_tabs');
+						            	/*$_second_tab_id = wbc()->options->get_option('filters_filter_setting','filter_setting_advance_second_category');
+						            	$_second_tab_key = wbc()->options->get_option('filters_filter_setting','filter_setting_advance_second_tabs');*/
 
-				            	if(!empty($_current_category_id)) {
-				            		
-				            		$_current_category_object = wbc()->wc->get_term_by('term_id',$_current_category_id,'product_cat');
-				            		if(!empty($_current_category_object) and !is_wp_error($_current_category_object)) {
-					            		$_GET['_current_category'] = $_current_category_object->slug;
-					                	$_REQUEST['_current_category']= $_current_category_object->slug;
+						            	$_current_category_id = false;
 
-					                	if(!empty($_GET['_category'])){
-					                		$_GET['_category'] .= ','.$_current_category_object->slug;
-					                		$_REQUEST['_category'] .= ','.$_current_category_object->slug;
-					                	} else {
-					                		$_GET['_category'] = $_current_category_object->slug;
-					                		$_REQUEST['_category'] = $_current_category_object->slug;
-					                	}
-					                }
-				            	}
-				            }
+						            	if(!empty($_REQUEST[$_first_tab_key])) {
+						            		$_current_category_id = $_first_tab_id;
+						            	} /*elseif(!empty($_REQUEST[$_second_tab_key])) {			            		
+						            		$_current_category_id = $_second_tab_id;
+						            	}*/
+
+						            	if(!empty($_current_category_id)) {
+						            		
+						            		$_current_category_object = wbc()->wc->get_term_by('term_id',$_current_category_id,'product_cat');
+						            		if(!empty($_current_category_object) and !is_wp_error($_current_category_object)) {
+							            		$_GET['_current_category'] = $_current_category_object->slug;
+							                	$_REQUEST['_current_category']= $_current_category_object->slug;
+
+							                	if(!empty($_GET['_category'])){
+							                		$_GET['_category'] .= ','.$_current_category_object->slug;
+							                		$_REQUEST['_category'] .= ','.$_current_category_object->slug;
+							                	} else {
+							                		$_GET['_category'] = $_current_category_object->slug;
+							                		$_REQUEST['_category'] = $_current_category_object->slug;
+							                	}
+							                }
+
+							                break;
+						            	}
+						            }
+						            //}
+								}
+							}				            
 
 				            \eo\wbc\controllers\ajax\Filter::instance()->filter();
 				            unset($_GET['eo_wbc_filter']);
