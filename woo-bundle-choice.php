@@ -190,6 +190,9 @@ if(!class_exists('Woo_Bundle_Choice') ) {
 
 		public function init() {
 
+			ACTIVE_TODO we need to create one function or flow to call all such hooks related binding from root class init function of this class end sp_index class.
+			\eo\wbc\model\data_model\SP_WBC_Product::hooks();
+
 			do_action( 'before_eowbc_load' );
 			
 			\eo\wbc\controllers\admin\Customizer::instance()->run();
