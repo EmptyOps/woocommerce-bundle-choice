@@ -787,8 +787,13 @@ window.document.splugins.wbc.filters.core = function( configs ) {
                 jQuery(".double-gutter .tmb").css('width','50%');
                 jQuery(".double-gutter .tmb").css('display','inline-flex');
             }
-            
-            jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination,jet-filters-pagination').css('visibility','visible');
+
+            -- amathi code seprate thay ne pagination no je se te pagination na compatibility function ma jase -- to h & to a
+            	-- but before that lets finish all that php side rendering and also toggleview click event implementation and than we can deside wich of below code need to be active since below code is for visibility hide show logic -- to h
+            		-- and if we have to use below code and seprate beetwin this module and pagination module compatibility function than need to think about notification layer -- to h 
+            // --- pagination module move this code ---
+            // jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination,jet-filters-pagination').css('visibility','visible');
+            // --- end ---
 
             // Fix for the yith wishlist.
             if(typeof(yith_wcwl_l10n)=='object'){
@@ -936,29 +941,31 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 						-- and for setting and getting current page_number 
 							--	for it may simply need to use the pagination modules published api interface -- to d 
 		ACTIVE_TODO_OC_END					
-			if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html()!==undefined) {
-				if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination').length>0){
-					jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html());
-				} else {
+			// --- pagination module move this code ---
+			// if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html()!==undefined) {
+			// 	if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination').length>0){
+			// 		jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html());
+			// 	} else {
 
-					@d once all the pagination related layers brought to this function, we need to check if the below incomplete implementation is completely implemented anywhere in our repo -- to d 
-						--	if not then test with the elementor created category feed page and also with elementor hello themes custom loop to check if it works. if not then must uncomment the last uncommented line and finish the implementation -- to d or -- to b 
-					let product_container = jQuery(".products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)");
-					if(product_container.length<=0) {
-						product_container = jQuery(".elementor-products-grid");
-						if(product_container.length<=0) {
-							product_container = jQuery(".elementor-widget-container").has('[data-elementor-type="loop"]');
-							if(product_container.length<=0) {
-								product_container = jQuery("[data-widget_type='archive-posts.archive_custom']");						
-							}
-						}
-					}
-					//jQuery(product_container).append('<nav class="woocommerce-pagination">'+jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html()+'</nav>');
-				}
-			}
-			else {
-				jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html('');	
-			}
+			// 		@d once all the pagination related layers brought to this function, we need to check if the below incomplete implementation is completely implemented anywhere in our repo -- to d 
+			// 			--	if not then test with the elementor created category feed page and also with elementor hello themes custom loop to check if it works. if not then must uncomment the last uncommented line and finish the implementation -- to d or -- to b 
+			// 		let product_container = jQuery(".products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)");
+			// 		if(product_container.length<=0) {
+			// 			product_container = jQuery(".elementor-products-grid");
+			// 			if(product_container.length<=0) {
+			// 				product_container = jQuery(".elementor-widget-container").has('[data-elementor-type="loop"]');
+			// 				if(product_container.length<=0) {
+			// 					product_container = jQuery("[data-widget_type='archive-posts.archive_custom']");						
+			// 				}
+			// 			}
+			// 		}
+			// 		//jQuery(product_container).append('<nav class="woocommerce-pagination">'+jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html()+'</nav>');
+			// 	}
+			// }
+			// else {
+			// 	jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html('');	
+			// }
+			// --- end ---
 		/*}*/
 
 
@@ -1347,10 +1354,43 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 
 				--	so whatever logic tableview requires after the pagination click can be covered by raised notification from here -- to s 
 					--	do the same for the other key functions below and raise notification but only if it is necessary otherwise we would skip that and only add when required. -- to s  
+		// --- move this code frome this file
+        jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination,jet-filters-pagination').css('visibility','visible');
 
 		on_click_listener();
 
 	};
+
+	var jet_filters_pagination_private = function(){
+		-- aa function mathi code pagination sub module na module ma move thase ane baki no jo applicable hoy to aa module ma rese. Pan aa point execute karvi te pela niche point confirm karvano rese. -- to a & -- to h
+			-- need to confirm ke aa call diamond api mathi j ave se ne ane te jo no male to ani calling sycuance hirenbhai sathe confirm karvi. -- to a
+			-- ane je aya compatibility no code dekhay se te aa code je module ma finally implement thay tena compatibility function ma move karva no -- to a
+		// --- move this code frome this file
+		if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html()!==undefined) {
+			if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination').length>0){
+				jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html());
+			} else {
+
+				@d once all the pagination related layers brought to this function, we need to check if the below incomplete implementation is completely implemented anywhere in our repo -- to d 
+					--	if not then test with the elementor created category feed page and also with elementor hello themes custom loop to check if it works. if not then must uncomment the last uncommented line and finish the implementation -- to d or -- to b 
+				let product_container = jQuery(".products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)");
+				if(product_container.length<=0) {
+					product_container = jQuery(".elementor-products-grid");
+					if(product_container.length<=0) {
+						product_container = jQuery(".elementor-widget-container").has('[data-elementor-type="loop"]');
+						if(product_container.length<=0) {
+							product_container = jQuery("[data-widget_type='archive-posts.archive_custom']");						
+						}
+					}
+				}
+				//jQuery(product_container).append('<nav class="woocommerce-pagination">'+jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html()+'</nav>');
+			}
+		}
+		else {
+			jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html('');	
+		}
+
+	}
 
 	var on_click_listener = function(){
 
@@ -1358,6 +1398,10 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 		NOTE : it will bind to all kind of such on_click events of pagination, it will be private but it may broadcast notification with a callback which js layers of like tableview and so on can call when they recieve their own click event or they can simply call below on_click function". so it is private function.
 		ACTIVE_TODO_OC_END
 
+		-- aa 3 mate comman click event banavano -- to a
+		-- compatibility function mathi selector lavano -- to a
+			-- compatibility function ma section ni condition kem implement karvani(shraddha ne pushvu) -- to a
+		-- click event no code rakhvano baki no base function ma move thase (360 ma karyo te rite)-- to a	
 		move all below bind click code to the click function. but instead just create the three functions like we do in the listener style. and then move the code -- to s     	
 		jQuery('body').on('click','.navigation .page-numbers,.woocommerce-pagination a.page-numbers',function(e){
 			e.preventDefault();
@@ -1383,6 +1427,34 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 				if(jQuery(this).hasClass("prev")){
 					// jQuery("[name='paged']").val(parseInt(jQuery(".page-numbers.current").text())-1);
 					set_page_number( get_page_number()-1 );
+				}	
+			}		
+			else {
+				// jQuery("[name='paged']").val(jQuery(this).text());
+				set_page_number( get_page_number());
+			}		
+
+			// jQuery.fn.eo_wbc_filter_change(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
+			window.document.splugins.filters.api.eo_wbc_filter_change_wrapper(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
+		});
+
+		// --- move this code frome this file
+		jQuery("body").on('click','.woocommerce-pagination a,.pagination a,.jet-filters-pagination a,.woocommerce-pagination .jet-filters-pagination__link,.pagination .jet-filters-pagination__link,.jet-filters-pagination .jet-filters-pagination__link',function(event){
+			
+			event.preventDefault();
+			event.stopPropagation();								
+			
+			// ACTIVE_TODO page nnumber text would break below with multilanguage so instead use the data attribute to store and read the page number -- to a and/or -- to h
+			if(jQuery(this).hasClass("next") || jQuery(this).hasClass("prev")){
+				
+				--  wherever .val is used then called set page_number from pagination -- to s
+					--  wherever .text is used then called get page_number from pagination -- to s
+
+				if(jQuery(this).hasClass("next")){
+					jQuery("[name='paged']").val(parseInt(jQuery(".page-numbers.current").text())+1);
+				}
+				if(jQuery(this).hasClass("prev")){
+					jQuery("[name='paged']").val(parseInt(jQuery(".page-numbers.current").text())-1);
 				}	
 			}		
 			else {
@@ -1437,13 +1509,14 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 		// },
 
 		get_page_number: function(selector = null) {
-
+			-- "," valu login if ane return bane mate jaruri se so implement -- to a
+				-- return karavelu se teno variable banavine call karavu
 			if(selector == null) {
 				
 				return parseInt(jQuery(".page-numbers.current").text();
 
 			}
-
+			-- ane else ma mukvanu
 			return parseInt(jQuery(selector).text().replace(',','');
 
 		},
@@ -1455,8 +1528,13 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 				reset_private();
 			}
 
-			jQuery("[name='paged']").val(get_page_number());
+			jQuery("[name='paged']").val(page_number);
 
+		},
+
+		jet_filters_pagination: function(){
+
+			jet_filters_pagination_private();
 		},
 
 		reset: function() {
@@ -1967,31 +2045,33 @@ jQuery(document).ready(function($){
 		//done move to pagination js modules bind_click function -- to d 
 			--	and also be sure to the filter_change function call. and why that is so far not changed? -- to d 
 		below block are moved in filter module bind_click function. so do not consider this code block here. -- shraddha -- to s 
-		jQuery("body").on('click','.woocommerce-pagination a,.pagination a,.jet-filters-pagination a,.woocommerce-pagination .jet-filters-pagination__link,.pagination .jet-filters-pagination__link,.jet-filters-pagination .jet-filters-pagination__link',function(event){
+		// --- pagination module move this code ---
+		// jQuery("body").on('click','.woocommerce-pagination a,.pagination a,.jet-filters-pagination a,.woocommerce-pagination .jet-filters-pagination__link,.pagination .jet-filters-pagination__link,.jet-filters-pagination .jet-filters-pagination__link',function(event){
 			
-			event.preventDefault();
-			event.stopPropagation();								
+		// 	event.preventDefault();
+		// 	event.stopPropagation();								
 			
-			// ACTIVE_TODO page nnumber text would break below with multilanguage so instead use the data attribute to store and read the page number -- to a and/or -- to h
-			if(jQuery(this).hasClass("next") || jQuery(this).hasClass("prev")){
+		// 	// ACTIVE_TODO page nnumber text would break below with multilanguage so instead use the data attribute to store and read the page number -- to a and/or -- to h
+		// 	if(jQuery(this).hasClass("next") || jQuery(this).hasClass("prev")){
 				
-				--  wherever .val is used then called set page_number from pagination -- to s
-					--  wherever .text is used then called get page_number from pagination -- to s
+		// 		--  wherever .val is used then called set page_number from pagination -- to s
+		// 			--  wherever .text is used then called get page_number from pagination -- to s
 
-				if(jQuery(this).hasClass("next")){
-					jQuery("[name='paged']").val(parseInt(jQuery(".page-numbers.current").text())+1);
-				}
-				if(jQuery(this).hasClass("prev")){
-					jQuery("[name='paged']").val(parseInt(jQuery(".page-numbers.current").text())-1);
-				}	
-			}		
-			else {
-				jQuery("[name='paged']").val(jQuery(this).text());
-			}		
+		// 		if(jQuery(this).hasClass("next")){
+		// 			jQuery("[name='paged']").val(parseInt(jQuery(".page-numbers.current").text())+1);
+		// 		}
+		// 		if(jQuery(this).hasClass("prev")){
+		// 			jQuery("[name='paged']").val(parseInt(jQuery(".page-numbers.current").text())-1);
+		// 		}	
+		// 	}		
+		// 	else {
+		// 		jQuery("[name='paged']").val(jQuery(this).text());
+		// 	}		
 
-			// jQuery.fn.eo_wbc_filter_change(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
-			window.document.splugins.filters.api.eo_wbc_filter_change_wrapper(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
-		});
+		// 	// jQuery.fn.eo_wbc_filter_change(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
+		// 	window.document.splugins.filters.api.eo_wbc_filter_change_wrapper(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
+		// });
+		// --- end ---
 	}
 	/////////////////////////
 	////////////////////////
