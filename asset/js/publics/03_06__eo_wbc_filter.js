@@ -1511,13 +1511,26 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 		get_page_number: function(selector = null) {
 			-- "," valu login if ane return bane mate jaruri se so implement -- to a
 				-- return karavelu se teno variable banavine call karavu
+			
+			var selector_perameter = "";
+			var selector_text = parseInt(jQuery(selector_perameter).text();
+
 			if(selector == null) {
 				
-				return parseInt(jQuery(".page-numbers.current").text();
+				var selector_perameter = ".page-numbers.current";	
+				// return parseInt(jQuery(".page-numbers.current").text();
+				return selector_text;
+
+			}else{
+				-- ane else ma mukvanu
+
+				var selector_perameter = selector;	
+				// return parseInt(jQuery(selector).text().replace(',','');
+				return selector_text.replace(',','');
 
 			}
-			-- ane else ma mukvanu
-			return parseInt(jQuery(selector).text().replace(',','');
+
+
 
 		},
 
