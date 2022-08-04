@@ -1420,8 +1420,8 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 		ACTIVE_TODO_OC_END
 
 		-- aa 3 mate comman click event banavano -- to a
-		-- compatibility function mathi selector lavano -- to a
-			-- compatibility function ma section ni condition kem implement karvani(shraddha ne pushvu) -- to a
+		-- compatibility function mathi selector lavano -- to a 
+			-- compatibility function ma section ni condition kem implement karvani(shraddha ne pushvu, compatibility function na example jova hoy to common.js ma swatches module mase) -- to a
 		// -- aama click no event binding j khali rese baki andar no code base function ma move thse(shradhha ne pusvu)-- to a	
 		// -- click event no code rakhvano baki no base function ma move thase (360 ma karyo te rite)-- to a	
 		move all below bind click code to the click function. but instead just create the three functions like we do in the listener style. and then move the code -- to s     	
@@ -1430,8 +1430,8 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 		// 	e.stopPropagation();
 			
 		// 	jQuery('[name="paged"]').val(parseInt(jQuery(this).text().replace(',','')));		
-		// 	// jQuery.fn.eo_wbc_filter_change(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
-		// 	window.document.splugins.filters.api.eo_wbc_filter_change_wrapper(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
+			// // jQuery.fn.eo_wbc_filter_change(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
+			// window.document.splugins.filters.api.eo_wbc_filter_change_wrapper(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
 		// });
 
 		jQuery("body").on('click','.woocommerce-pagination a,.pagination a,.jet-filters-pagination a,.woocommerce-pagination .jet-filters-pagination__link,.pagination .jet-filters-pagination__link,.jet-filters-pagination .jet-filters-pagination__link,.navigation .page-numbers,.woocommerce-pagination a.page-numbers',function(event){
@@ -1504,7 +1504,6 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 		}		
 
 		// jQuery('[name="paged"]').val(parseInt(jQuery(this).text().replace(',','')));
-		set_page_number( get_page_number().replace(',',''));
 		// jQuery.fn.eo_wbc_filter_change(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
 		window.document.splugins.filters.api.eo_wbc_filter_change_wrapper(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
     
