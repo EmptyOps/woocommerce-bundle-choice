@@ -30,7 +30,7 @@ class Eowbc_Filters extends Eowbc_Model {
 	}
 
 
-	public function get( $form_definition ) {
+	public function get( $form_definition,$args = null ) {
 		
 		//loop through form tabs and save 
 	    foreach ($form_definition as $key => $tab) {
@@ -168,7 +168,7 @@ class Eowbc_Filters extends Eowbc_Model {
 		wbc()->options->update_option('appearance_filters','slider_nodes_backcolor_active',sanitize_hex_color('#000000'));		
 	}
 
-	public function save( $form_definition, $is_auto_insert_for_template=false ) {
+	public function save( $form_definition, $is_auto_insert_for_template=false, $args = null ) {
 		
 		wbc()->sanitize->clean($form_definition);
 		wbc()->validate->check($form_definition);

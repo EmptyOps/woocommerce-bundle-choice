@@ -91,6 +91,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 					--	then the sp_variations modules should init 
 					--	and then most challanging of all is external event dependancy, for example wc_variations_form. I think we can simply restructure our loading sequence a little bit as required but the external events should be take care of always witout failling. so we should simply give that ultimate priority and bind that always on time, whenever they want us to bind to them. and then structure rest of the loading sequence accordingly. 
 
+			--	for the category page also we will need to follow same flow like above and the woocommerce and other legacy events need to be considered as central to entire loading sequance like we thought of for above item page loading sequence flow.
 		 
 		ACTIVE_TODO_OC_END
 
@@ -244,11 +245,11 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				} else {
 					_products_in = _products_in.trim();
 				}
-				check -- to s
-				form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:'eo_wbc_e_tabview',products_in:_products_in};
+				// move to tableview done -- to s
+				/*form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:'eo_wbc_e_tabview',products_in:_products_in};
 				if(eo_wbc_e_tabview.eo_table_view_per_page){
 					form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
-				}
+				}*/
 			}
 			else
 			{
@@ -258,10 +259,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 				form_data=jQuery("[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
 
-				ACTIVE_TODO from tableview  -- shraddha -- to s
-				if(eo_wbc_e_tabview.eo_table_view_per_page){
-					form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
-				}
+				// move to tableview done -- to s
+				// if(eo_wbc_e_tabview.eo_table_view_per_page){
+				// 	form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
+				// }
 			}
 
 			// if(jQuery("select[name='orderby']").length>0){
@@ -286,19 +287,18 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
 			}*/
 
-			ACTIVE_TODO from pagination -- shraddha
 			if(jQuery("select[name='orderby']").length>0){
 				form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
 			}
 
-			ACTIVE_TODO from tableview pagination -- shraddha
+			/*move to tableview done -- to s
 			if(jQuery("#tableview_order").val()!=='' && jQuery("#tableview_order_direction").val()!==''){
 				form_data+='&tableview_order='+jQuery("#tableview_order").val();
 				form_data+='&tableview_order_direction='+jQuery("#tableview_order_direction").val();
-			}
+			}*/
 
-			ACTIVE_TODO from tableview -- shraddha
-			form_data+='&action=eo_wbc_e_tabview';
+			/*move to tableview done -- to s
+			form_data+='&action=eo_wbc_e_tabview';*/
 		}
 
 		////////////////////////////////
@@ -616,7 +616,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 						--	then confirm that compatibility function call below and the compatibility which is also called from inside the eo_wbc_filter_render_html has any issue. -- to s 
 				--	and we of course can not call compatibility simply from here. so lets simply call from different places with right section key. like we have did in those two modules and for example the compatibility most likely need to be called before eo_wbc_filter_render_html call since inside compatibility eo_wbc_filter_render_html is called. -- to h and -- to s 
 					--	and remove the eo_wbc_filter_render_html call from inside the compatibility function. -- to s 
-		compatability(section, object, expected_result);
+		// shraddha
+		// compatability(section, object, expected_result);
 
 		return true;
 
@@ -1056,7 +1057,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// jQuery("#loading").addClass('loading');
 
 		var show_loader_callback = null ;
-        window.document.splugins.events.api.apply_all_observer_filters( 'filters', 'show_loader', {}, show_loader_callback );
+        // window.document.splugins.events.api.apply_all_observer_filters( 'filters', 'show_loader', {}, show_loader_callback );
+        window.document.splugins.events.api.notifyAllObservers( 'filters', 'show_loader', {}, show_loader_callback );
 
     };
 
@@ -1103,7 +1105,6 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     var on_reset_click_listener = function(){
 
-    	on_reset_click_listener();
     	jQuery(document).on('click',".reset_all_filters",function(){
         jQuery("[data-reset]").each(function(e){
             eval(jQuery(this).data('reset'));
@@ -1134,6 +1135,15 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     };
 
+    var on_filter_set_click_listener = function(){
+
+    	on_filter_set_click();
+
+		var on_filter_set_click_listener_callback = null ;
+        window.document.splugins.events.api.notifyAllObservers( 'filters', 'on_filter_set_click_listener', {}, on_filter_set_click_listener_callback );
+
+    };
+
     var on_change_listener = function(){
 
     	if(!eo_wbc_object.btnfilter_now){			
@@ -1157,6 +1167,12 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     };
 
+    var on_filter_set_click = function() {
+
+    	filter_set_click();
+
+    };
+
     var on_change = function() {
 
    		change();
@@ -1164,6 +1180,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     };
 
     var reset_click = function() {
+
+    };
+
+    var filter_set_click = function() {
 
     };
 
@@ -1328,7 +1348,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				jQuery(".reset_all_filters.mobile_2").removeClass('mobile_2_hidden');
 			}
 
-		} 
+		}
     };
 };
 
@@ -1870,12 +1890,14 @@ ACTIVE_TODO_OC_END
 
 /*if(eo_wbc_object.disp_regular=='1'){
 	*/
+--	disp_regular aa wbc and tableview ma serch ekaravano -- to s
 	window.eo_wbc_object.enable_filter = true;
 	window.document.splugins.eo_wbc_object.enable_filter = true;
 	jQuery.fn.eo_wbc_filter_change_native= function(init_call=false,form_selector="form#eo_wbc_filter",render_container='',parameters={}) {
 
 		ACTIVE_TODO_OC_START
-		on an important note there should a function parameter in this main function of the filters module, which specify the filter event is for what. it can be the form_selector but things can get complicated so better to have dedicated parameter so lets just support the dedicated parameter under the parameters object that it recieve, so it will be with the key caller_module -- to d. this will be necessary to manage logic or conditions based on the caller_module condition. 
+		on an important note there should a 
+		function parameter in this main function of the filters module, which specify the filter event is for what. it can be the form_selector but things can get complicated so better to have dedicated parameter so lets just support the dedicated parameter under the parameters object that it recieve, so it will be with the key caller_module -- to d. this will be necessary to manage logic or conditions based on the caller_module condition. 
 			but is it enough? 
 				--	with only the caller_module condition and the filters js module? 
 					--	maybe we need more stat holders, like on dapii we had the dedicated class to encapsulate and maintain the stat of each API and what not 
@@ -2017,7 +2039,7 @@ jQuery(document).ready(function($){
         return false;
     });*/  
 
-  	window.document.splugins.wbc.filters.core.window.document.splugins.filters.api.init();
+  	window.document.splugins.filters.core.init();
 
 	if(window.eo_wbc_object.disp_regular){
 	
@@ -2050,7 +2072,9 @@ jQuery(document).ready(function($){
 		//done move to pagination js modules bind_click function -- to d 
 			--	and also be sure to the filter_change function call. and why that is so far not changed? -- to d 
 		below block are moved in filter module bind_click function. so do not consider this code block here. -- shraddha -- to s 
+
 		// --- pagination module move this code ---
+		// and alredy call filter init function in this ready event and inside that function all listener are called.
 		// jQuery("body").on('click','.woocommerce-pagination a,.pagination a,.jet-filters-pagination a,.woocommerce-pagination .jet-filters-pagination__link,.pagination .jet-filters-pagination__link,.jet-filters-pagination .jet-filters-pagination__link',function(event){
 			
 		// 	event.preventDefault();
@@ -2082,6 +2106,7 @@ jQuery(document).ready(function($){
 	////////////////////////
 	// create function advance_filter_accordian in filters js module and move below code there -- to d done 
 		--	and then from just make call to that private function from the init_private of the same module -- to d /*done*/
+		this task is complete
 
 	if(jQuery.fn.hasOwnProperty('accordion') && typeof(jQuery.fn.accordion)==='function'){
 		jQuery( ".eo_wbc_advance_filter" ).accordion({
@@ -2092,10 +2117,12 @@ jQuery(document).ready(function($){
 
 	in function bind_reset_click in filters js module and move below code there -- to d done
 		--	just confirm above point and then need to call the bind_reset_click function from below. or if we have better idea to call it from the filters js module itself there. I think it is better to call from thed filters js module. so bind_reset_click will be private function. -- to s 
+	// below code are mover in on_reset_click_listener and e function init_private manthi call thay che. shraddha
 	//Reset form and display
 
 	
-	jQuery(".eo_wbc_srch_btn:eq(2)").click(function(){					
+	// below code block are move in 
+	/*jQuery(".eo_wbc_srch_btn:eq(2)").click(function(){					
 		///////////////////////////////////////////
 		document.forms.eo_wbc_filter.reset();
 		jQuery(".eo_wbc_srch_btn:eq(2)").trigger('reset');
@@ -2104,7 +2131,8 @@ jQuery(document).ready(function($){
 		// jQuery.fn.eo_wbc_filter_change(true);
 		window.document.splugins.filters.api.eo_wbc_filter_change_wrapper(true);
 
-	});	
+	});*/
+
 });
 
 // ACTIVE_TODO here if reset even is encapsulated within particule filter fields object then that field can have more control on its state changes -- to a and/or -- to h 
