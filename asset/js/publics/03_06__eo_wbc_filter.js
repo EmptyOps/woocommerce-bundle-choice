@@ -1365,14 +1365,15 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 		-- aa function mathi code pagination sub module na module ma move thase ane baki no jo applicable hoy to aa module ma rese. Pan aa point execute karvi te pela niche point confirm karvano rese. -- to a & -- to h
 			-- need to confirm ke aa call diamond api mathi j ave se ne ane te jo no male to ani calling sycuance hirenbhai sathe confirm karvi. -- to a
 			-- ane je aya compatibility no code dekhay se te aa code je module ma finally implement thay tena compatibility function ma move karva no -- to a
-		// --- move this code frome this file
+				-- aa code jya thi move thyo teni calling sycuanc(03-08-2022) -- to a
+		// --- move this code frome this file in this eo_wbc_filter_render_html()
 		if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html()!==undefined) {
 			if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination').length>0){
 				jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html());
 			} else {
 
-				@d once all the pagination related layers brought to this function, we need to check if the below incomplete implementation is completely implemented anywhere in our repo -- to d 
-					--	if not then test with the elementor created category feed page and also with elementor hello themes custom loop to check if it works. if not then must uncomment the last uncommented line and finish the implementation -- to d or -- to b 
+				@d once all the pagination related layers brought to this function, we need to check if the below incomplete implementation is completely implemented anywhere in our repo -- to d -- to a
+					--	if not then test with the elementor created category feed page and also with elementor hello themes custom loop to check if it works. if not then must uncomment the last uncommented line and finish the implementation -- to d or -- to b -- to a
 				let product_container = jQuery(".products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)");
 				if(product_container.length<=0) {
 					product_container = jQuery(".elementor-products-grid");
@@ -1401,71 +1402,52 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 		-- aa 3 mate comman click event banavano -- to a
 		-- compatibility function mathi selector lavano -- to a
 			-- compatibility function ma section ni condition kem implement karvani(shraddha ne pushvu) -- to a
-		-- click event no code rakhvano baki no base function ma move thase (360 ma karyo te rite)-- to a	
+		// -- aama click no event binding j khali rese baki andar no code base function ma move thse(shradhha ne pusvu)-- to a	
+		// -- click event no code rakhvano baki no base function ma move thase (360 ma karyo te rite)-- to a	
 		move all below bind click code to the click function. but instead just create the three functions like we do in the listener style. and then move the code -- to s     	
-		jQuery('body').on('click','.navigation .page-numbers,.woocommerce-pagination a.page-numbers',function(e){
-			e.preventDefault();
-			e.stopPropagation();
+		// jQuery('body').on('click','.navigation .page-numbers,.woocommerce-pagination a.page-numbers',function(e){
+		// 	e.preventDefault();
+		// 	e.stopPropagation();
 			
-			jQuery('[name="paged"]').val(parseInt(jQuery(this).text().replace(',','')));		
-			// jQuery.fn.eo_wbc_filter_change(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
-			window.document.splugins.filters.api.eo_wbc_filter_change_wrapper(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
+		// 	jQuery('[name="paged"]').val(parseInt(jQuery(this).text().replace(',','')));		
+		// 	// jQuery.fn.eo_wbc_filter_change(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
+		// 	window.document.splugins.filters.api.eo_wbc_filter_change_wrapper(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
+		// });
+
+		jQuery("body").on('click','.woocommerce-pagination a,.pagination a,.jet-filters-pagination a,.woocommerce-pagination .jet-filters-pagination__link,.pagination .jet-filters-pagination__link,.jet-filters-pagination .jet-filters-pagination__link,.navigation .page-numbers,.woocommerce-pagination a.page-numbers',function(event){
+			
+			on_click();
 		});
 
-		jQuery("body").on('click','.woocommerce-pagination a,.pagination a,.jet-filters-pagination a,.woocommerce-pagination .jet-filters-pagination__link,.pagination .jet-filters-pagination__link,.jet-filters-pagination .jet-filters-pagination__link',function(event){
+		// --- aa code aa file ma document.ready mathi move karelo se ---
+		// jQuery("body").on('click','.woocommerce-pagination a,.pagination a,.jet-filters-pagination a,.woocommerce-pagination .jet-filters-pagination__link,.pagination .jet-filters-pagination__link,.jet-filters-pagination .jet-filters-pagination__link',function(event){
 			
-			event.preventDefault();
-			event.stopPropagation();								
+		// 	event.preventDefault();
+		// 	event.stopPropagation();								
 			
-			// ACTIVE_TODO page nnumber text would break below with multilanguage so instead use the data attribute to store and read the page number -- to a and/or -- to h
-			if(jQuery(this).hasClass("next") || jQuery(this).hasClass("prev")){
-			
-				if(jQuery(this).hasClass("next")){
-					// jQuery("[name='paged']").val(parseInt(jQuery(".page-numbers.current").text())+1);
-					set_page_number( get_page_number()+1 );
-				}
-				if(jQuery(this).hasClass("prev")){
-					// jQuery("[name='paged']").val(parseInt(jQuery(".page-numbers.current").text())-1);
-					set_page_number( get_page_number()-1 );
-				}	
-			}		
-			else {
-				// jQuery("[name='paged']").val(jQuery(this).text());
-				set_page_number( get_page_number());
-			}		
-
-			// jQuery.fn.eo_wbc_filter_change(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
-			window.document.splugins.filters.api.eo_wbc_filter_change_wrapper(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
-		});
-
-		// --- move this code frome this file
-		jQuery("body").on('click','.woocommerce-pagination a,.pagination a,.jet-filters-pagination a,.woocommerce-pagination .jet-filters-pagination__link,.pagination .jet-filters-pagination__link,.jet-filters-pagination .jet-filters-pagination__link',function(event){
-			
-			event.preventDefault();
-			event.stopPropagation();								
-			
-			// ACTIVE_TODO page nnumber text would break below with multilanguage so instead use the data attribute to store and read the page number -- to a and/or -- to h
-			if(jQuery(this).hasClass("next") || jQuery(this).hasClass("prev")){
+		// 	// ACTIVE_TODO page nnumber text would break below with multilanguage so instead use the data attribute to store and read the page number -- to a and/or -- to h
+		// 	if(jQuery(this).hasClass("next") || jQuery(this).hasClass("prev")){
 				
-				--  wherever .val is used then called set page_number from pagination -- to s
-					--  wherever .text is used then called get page_number from pagination -- to s
+		// 		--  wherever .val is used then called set page_number from pagination -- to s
+		// 			--  wherever .text is used then called get page_number from pagination -- to s
 
-				if(jQuery(this).hasClass("next")){
-					jQuery("[name='paged']").val(parseInt(jQuery(".page-numbers.current").text())+1);
-				}
-				if(jQuery(this).hasClass("prev")){
-					jQuery("[name='paged']").val(parseInt(jQuery(".page-numbers.current").text())-1);
-				}	
-			}		
-			else {
-				jQuery("[name='paged']").val(jQuery(this).text());
-			}		
+		// 		if(jQuery(this).hasClass("next")){
+		// 			jQuery("[name='paged']").val(parseInt(jQuery(".page-numbers.current").text())+1);
+		// 		}
+		// 		if(jQuery(this).hasClass("prev")){
+		// 			jQuery("[name='paged']").val(parseInt(jQuery(".page-numbers.current").text())-1);
+		// 		}	
+		// 	}		
+		// 	else {
+		// 		jQuery("[name='paged']").val(jQuery(this).text());
+		// 	}		
 
-			// jQuery.fn.eo_wbc_filter_change(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
-			window.document.splugins.filters.api.eo_wbc_filter_change_wrapper(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
-		});
+		// 	// jQuery.fn.eo_wbc_filter_change(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
+		// 	window.document.splugins.filters.api.eo_wbc_filter_change_wrapper(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
+		// });
 
-		on_click();
+		-- confirm with hirenbhai --to a
+		// on_click();
 
 	};
 
@@ -1481,6 +1463,31 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 
     var click = function(){
 
+    	event.preventDefault();
+		event.stopPropagation();								
+		
+		// ACTIVE_TODO page nnumber text would break below with multilanguage so instead use the data attribute to store and read the page number -- to a and/or -- to h
+		if(jQuery(this).hasClass("next") || jQuery(this).hasClass("prev")){
+		
+			if(jQuery(this).hasClass("next")){
+				// jQuery("[name='paged']").val(parseInt(jQuery(".page-numbers.current").text())+1);
+				set_page_number( get_page_number()+1 );
+			}
+			if(jQuery(this).hasClass("prev")){
+				// jQuery("[name='paged']").val(parseInt(jQuery(".page-numbers.current").text())-1);
+				set_page_number( get_page_number()-1 );
+			}	
+		}		
+		else {
+			// jQuery("[name='paged']").val(jQuery(this).text());
+			set_page_number( get_page_number());
+		}		
+
+		// jQuery('[name="paged"]').val(parseInt(jQuery(this).text().replace(',','')));
+		set_page_number( get_page_number().replace(',',''));
+		// jQuery.fn.eo_wbc_filter_change(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
+		window.document.splugins.filters.api.eo_wbc_filter_change_wrapper(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
+    
     };
 
     var compatability = function(section, object, expected_result){
@@ -1509,28 +1516,13 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 		// },
 
 		get_page_number: function(selector = null) {
-			-- "," valu login if ane return bane mate jaruri se so implement -- to a
-				-- return karavelu se teno variable banavine call karavu
 			
-			var selector_perameter = "";
-			var selector_text = parseInt(jQuery(selector_perameter).text();
-
 			if(selector == null) {
-				
-				var selector_perameter = ".page-numbers.current";	
-				// return parseInt(jQuery(".page-numbers.current").text();
-				return selector_text;
+					
+				selector = ".page-numbers.current";
+			}			
 
-			}else{
-				-- ane else ma mukvanu
-
-				var selector_perameter = selector;	
-				// return parseInt(jQuery(selector).text().replace(',','');
-				return selector_text.replace(',','');
-
-			}
-
-
+			return parseInt(jQuery(selector).text().replace(',',''));
 
 		},
 
