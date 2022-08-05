@@ -117,6 +117,17 @@ window.document.splugins.common.admin.form_builder.core = function( configs ) {
     	return window.document.splugins.templating.core.get_template( tmpl_id, templating_lib );
     };
 
+    var set_sp_eid_private = function( thisObj, target_id ) {
+        
+        var parentdiv = jQuery( thisObj ).parent();
+        // jQuery( parentdiv ).find("#"+target_id)[0].val( jQuery( parentdiv ).dropdown("get selected").data("sp_eid") );
+        // console.log( jQuery( thisObj ).dropdown("get value") );
+        // console.log( jQuery( thisObj ).dropdown("get item", jQuery( thisObj ).dropdown("get value")) );
+        jQuery( "#"+target_id ).val( jQuery( jQuery( thisObj ).dropdown("get item", jQuery( thisObj ).dropdown("get value")) ).data("sp_eid") );
+        console.log( jQuery( "#"+target_id ).val( ) );
+    };
+
+
     return {
 
         das_add: function( tmpl_id, plus_button_id, templating_lib ) {
@@ -138,6 +149,10 @@ window.document.splugins.common.admin.form_builder.core = function( configs ) {
             	//	and then the populate or extend add core to accpet the populate layer so that it populates even before the template is bound to the dom, in this case we will not need the set val functions support but anyawy we need to do it standard way that is reliable and the former approach will require maintaining many additional placeholders so that will not work 
 
             }
+        },
+        set_sp_eid: function( thisObj, target_id ) {
+
+            set_sp_eid_private(thisObj, target_id);
         }
 
     }
