@@ -50,7 +50,7 @@ class SP_WBC_Variations extends SP_Variations {
 				return self::instance()->get_available_variation_hook_callback($variation_get_max_purchase_quantity,  $instance,  $variation, $args);
 			}, 90, 3);
 			
-		}elseif( $for_section == "swatches_init" ) {
+		}elseif( $for_section == "swatches_init" && $args['page'] != 'feed' ) {
 			add_filter( 'woocommerce_ajax_variation_threshold',  function($int){
 
 				// ACTIVE_TODO_OC_START
@@ -75,7 +75,7 @@ class SP_WBC_Variations extends SP_Variations {
 			}, 10, 2);
 
 
-		}elseif( $for_section == "swatches" || $for_section == "gallery_images") {
+		}elseif( ($for_section == "swatches" || $for_section == "gallery_images") && $args['page'] != 'feed' ) {
 
 			$sp_variations_data['attributes'] = $product->get_variation_attributes();
 			$sp_variations_data['variations'] = $product->get_available_variations();
