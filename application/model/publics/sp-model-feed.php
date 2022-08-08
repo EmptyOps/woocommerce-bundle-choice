@@ -188,16 +188,6 @@ class SP_Model_Feed extends SP_Feed {
 						<?php
 						echo ob_get_clean();
 					}, 10, 1 );	
-				} elseif(false) {
-					// wbc()->load->asset('css','fomantic/semantic.min');
-					// wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
-					ob_start();
-					?>	
-						<script>
-							jQuery(".variations_form").before('<span id="wbc_variation_toggle" class="ui raised segment"><?php _e($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i></span>');	
-						</script>
-					<?php
-					echo ob_get_clean();
 				}				
 			}
 
@@ -477,6 +467,12 @@ class SP_Model_Feed extends SP_Feed {
 			</div> <!-- .woo-variation-product-gallery -->
 		<?php do_action( 'woo_variation_product_gallery_end', $product ); ?> 
 		<?php
+	}
+
+	public function prepare_swatches_data($args = array()){
+
+		return \eo\wbc\model\publics\data_model\SP_WBC_Variations::prepare_swatches_data($args);
+
 	}
 
 }
