@@ -37,11 +37,18 @@ class SP_Model_Query extends SP_Query {
 						wbc()->common->var_dump( "SP_Model_Query wbc prepare_query pre_get_posts eowbc_filter_override ".$input_method );
 					}
 
-		            echo json_encode(apply_filters('eowbc_filter_response',array()));
+					$eowbc_filter_response = apply_filters('eowbc_filter_response',array());
+
+					do_action('sp_wbc_prepare_filter_response_feed',$eowbc_filter_response);
+
+		            // echo json_encode(/*apply_filters('eowbc_filter_response',array())*/);
 		            die();
 		        }
 
 		        $this->prepare_query_direct( $query, $input_method, $additional_data );
+
+		        ACTIVE_TODO need to implement lagecy respose
+				do_action('sp_wbc_prepare_filter_response_feed',$eowbc_filter_response);
 
 		        return apply_filters('filter_widget_ajax_post_query',$query);
 		    });		   
