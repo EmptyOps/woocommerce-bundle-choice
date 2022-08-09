@@ -250,6 +250,57 @@ class SP_Model_Feed extends SP_Feed {
 
 	public function render_gallery_images_template_callback($args = array()){
 		
+
+		
+		need to consider any applicable things or flow from below code block of one of the plugin we are exploring -- to h
+
+		add_action('woocommerce_init', array($this, 'replacing_template_loop_product_thumbnail'));
+
+
+        public function wc_template_loop_product_replaced_thumb() {
+            global $product;
+            $needed = array();
+            if (isset($this->settings['show_images_by_attr'])) {
+                $needed = $this->settings['show_images_by_attr'];
+            }
+            if (is_array($needed) AND count($needed)) {
+                if ($this->is_isset_in_request_data($this->get_swoof_search_slug()) AND $product->is_type("variable")) {
+                    $need_array = array();
+                    $request = $this->get_request_data();
+                    $need_array = array_intersect_key($request, array_flip($needed));
+                    $rate = array();
+                    if (count($need_array)) {
+                        $variations = $product->get_available_variations();
+                        foreach ($variations as $key => $variant) {
+                            if (isset($variant['attributes'])) {
+                                $rate[$key] = 0;
+                                foreach ($need_array as $attr_name => $values) {
+                                    if (isset($variant['attributes']["attribute_" . $attr_name]) AND in_array($variant['attributes']["attribute_" . $attr_name], explode(",", $values))) {
+                                        $rate[$key]++;
+                                    }
+                                }
+                            }
+                        }
+                        arsort($rate);
+                        $attr_key = array_key_first($rate);
+                        if (array_shift($rate)) {
+                            if (isset($variations[$attr_key]["image_id"]) AND $variations[$attr_key]["image_id"]) {
+                                $image_size = apply_filters('single_product_archive_thumbnail_size', 'woocommerce_thumbnail');
+                                $image = wp_get_attachment_image($variations[$attr_key]["image_id"], $image_size, false, array());
+                                if ($image) {
+                                    echo $image;
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            echo woocommerce_get_product_thumbnail();
+        }
+
+
+
 		global $product;
 
 		$data = \eo\wbc\model\publics\SP_Model_Feed::instance()->get_data('gallery_images');
@@ -369,11 +420,13 @@ class SP_Model_Feed extends SP_Feed {
 		//////////////// start core
 
 		//bind to hook from here for the hook that is applied from both slider and zoom module for the images. means add filter here, and provide back with gallery_images data. so simply entire data var will be added to filter var but yeah the variation_gallery_images, attachment_ids etc. would be key -- to b done
-		add_filter('sp_slzm_slider_images',function($hook_data) use($data){
+		
+		// add_filter('sp_slzm_slider_images',function($hook_data) use($data){
 
-			return $data;
+		// 	return $data;
 
-		});
+		// });
+
 		add_filter('sp_slzm_zoom_images',function($hook_data) use($data){
 
 			return $data;
@@ -391,7 +444,7 @@ class SP_Model_Feed extends SP_Feed {
 			'child'=>array(
 				array(
 					'type'=>'html',
-					'child'=>apply_filters('sp_variations_gallery_images_slider_ui',null),
+					'child'=>/*apply_filters('sp_variations_gallery_images_slider_ui',null)*/'',
 				),
 				array(
 					'type'=>'html',
@@ -467,6 +520,8 @@ class SP_Model_Feed extends SP_Feed {
 			</div> <!-- .woo-variation-product-gallery -->
 		<?php do_action( 'woo_variation_product_gallery_end', $product ); ?> 
 		<?php
+
+
 	}
 
 	public function prepare_swatches_data($args = array()){

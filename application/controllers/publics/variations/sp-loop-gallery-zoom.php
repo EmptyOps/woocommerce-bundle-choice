@@ -2,7 +2,7 @@
 namespace eo\wbc\controllers\publics\variations;
 defined( 'ABSPATH' ) || exit;
 
-class SP_Loop_Product_Thumbnail extends \eo\wbc\controllers\publics\Controller{
+class SP_Loop_Gallery_Zoom extends \eo\wbc\controllers\publics\Controller{
  
     private static $_instance = null;
 
@@ -26,15 +26,15 @@ class SP_Loop_Product_Thumbnail extends \eo\wbc\controllers\publics\Controller{
 
     public function init($args = array()){
 
-        \eo\wbc\model\publics\variations\SP_Model_Loop_Product_Thumbnail::instance()->init_core();
+        \eo\wbc\model\publics\variations\SP_Model_Loop_Gallery_Zoom::instance()->init_core();
         
         // ACTIVE_TODO_OC_START
         // --- get ui call
         // ACTIVE_TODO_OC_END
         
-        \eo\wbc\model\publics\variations\SP_Model_Loop_Product_Thumbnail::instance()->render_core();
+        \eo\wbc\model\publics\variations\SP_Model_Loop_Gallery_Zoom::instance()->render_core();
 
-        $this->selectron('loop_product_thumbnail',$args);
+        $this->selectron('loop_gallery_zoom',$args);
 
         $this->getUI(null,$args);
     }
@@ -43,15 +43,15 @@ class SP_Loop_Product_Thumbnail extends \eo\wbc\controllers\publics\Controller{
 
         $args['page_section'] = $page_section;
 
-        if ($page_section == 'loop_product_thumbnail') {
+        if ($page_section == 'loop_gallery_zoom') {
 
-            add_filter('sp_loop_product_thumbnail_html',function($html,$images_data) use($page_section,$args){
+            add_filter('sp_loop_gallery_zoom_html',function($html,$images_data) use($page_section,$args){
 
                 $args['hook_callback_args'] = array();
                 $args['hook_callback_args']['html'] = $html;
                 $args['hook_callback_args']['images_data'] = $images_data;
 
-                return $this->selectron_hook_render($page_section,'loop_product_thumbnail_html',$args);
+                return $this->selectron_hook_render($page_section,'loop_gallery_zoom_html',$args);
             },10,2);
 
         }       
@@ -60,15 +60,15 @@ class SP_Loop_Product_Thumbnail extends \eo\wbc\controllers\publics\Controller{
 
     public function selectron_hook_render($page_section,$container_class,$args = array()){
 
-        if ($page_section == 'loop_product_thumbnail') {
-            if ($container_class == 'loop_product_thumbnail_html') {
+        if ($page_section == 'loop_gallery_zoom') {
+            if ($container_class == 'loop_gallery_zoom_html') {
                 $data = $args['hook_callback_args']['images_data'];
                 unset($args['hook_callback_args']);
                 return $this->load_view($data,$args);
             }
         }else{
 
-            \eo\wbc\controller\publics\variations\SP_Loop_Product_Thumbnail::instance()->getUI();
+            $this->getUI();
         }
     }
 
@@ -83,14 +83,14 @@ class SP_Loop_Product_Thumbnail extends \eo\wbc\controllers\publics\Controller{
 
         $args['page_section'] = $page_section;
         
-        if ($page_section == 'loop_product_thumbnail') {
+        if ($page_section == 'loop_gallery_zoom') {
 
-            $args['page_section'] = 'loop_product_thumbnail';
+            $args['page_section'] = 'loop_gallery_zoom';
             return $this->get_ui_definition($args);
 
         }else{  
 
-           \eo\wbc\model\publics\variations\SP_Model_Loop_Product_Thumbnail::instance()->render_ui( $this->get_ui_definition($args));
+           \eo\wbc\model\publics\variations\SP_Model_Loop_Gallery_Zoom::instance()->render_ui( $this->get_ui_definition($args));
         }
         
     }
@@ -105,7 +105,7 @@ class SP_Loop_Product_Thumbnail extends \eo\wbc\controllers\publics\Controller{
 
         $args['singleton_function'] = 'wbc';
 
-        if ($args['page_section'] == 'loop_product_thumbnail') {
+        if ($args['page_section'] == 'loop_gallery_zoom') {
 
             $args['data']['template_data'] = array(); 
             $args['data']['template_data']['template_key'] = 'gallery_zoom_{{template_key_device}}_image_loop_content';

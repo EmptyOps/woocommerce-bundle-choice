@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
 
 use eo\wbc\system\core\publics\Eowbc_Base_Model_Publics ;
 
-class SP_Model_Loop_Product_Thumbnail extends Eowbc_Base_Model_Publics {
+class SP_Model_Loop_Gallery_Zoom extends Eowbc_Base_Model_Publics {
 
 	private static $_instance = null;
 
@@ -100,7 +100,7 @@ class SP_Model_Loop_Product_Thumbnail extends Eowbc_Base_Model_Publics {
 
 	public function load_asset(){
 
-		wbc()->load->asset( 'asset.php', constant( strtoupper( 'EOWBC_ASSET_DIR' ) ).'variations/loop-product-thumbnail.assets.php' );
+		wbc()->load->asset( 'asset.php', constant( strtoupper( 'EOWBC_ASSET_DIR' ) ).'variations/loop-gallery-zoom.assets.php' );
 	}
 
 	public function init_core(){
