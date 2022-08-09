@@ -1387,6 +1387,7 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 			-- ane je aya compatibility no code dekhay se te aa code je module ma finally implement thay tena compatibility function ma move karva no -- to a
 				-- aa code jya thi move thyo teni calling sycuanc(03-08-2022) -- to a
 		// --- move this code frome this file in this eo_wbc_filter_render_html()
+		-- aa code diamond api ma move nathi kavano aya j implementation karvanu-- to a
 		if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html()!==undefined) {
 			if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination').length>0){
 				jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html());
