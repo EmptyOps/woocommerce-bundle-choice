@@ -45,22 +45,52 @@ if( !class_exists('\\eo\wbc\model\data_model\SP_WBC_Data_Layer') ) {
 		public static function prod_structure_def(){
 
 			$prod_structure_def = array( 
-							'prod_field'=>array(
-								// 'post_title'=>'name',	
-								array( 'legacy_key'=> 'post_title', 'map_def_key'=>'name', 'requirement'=>'mandatory' ),
+							'prod_cat'=>array(
 
-								// ACTIVE_TODO sku as mandatory field so need to have array structure so that it can be easily extended whenever required, maybe something like below is simple 
-								array( 'legacy_key'=> 'woo_sku', 'map_def_key'=>'sku', 'requirement'=>'mandatory' ),
+							), 
+							'attr'=>array(
 
-								array( 'legacy_key'=> 'regular_price', 'map_def_key'=>'regular_price', 'requirement'=>'mandatory' ),
-
-								array( 'legacy_key'=> 'sales_price', 'map_def_key'=>'sales_price', 'requirement'=>'' ),
-							)
-					);
+							),
+							'variation'=>array(
+								array( 'legacy_key'=> 'meta', 'map_def_key'=>'meta', 'meta_key'=>'sp_variations_data need to confirm exact key', 'requirement'=>'' );
+							),
+						);
 			
-			$prod_structure_def = apply_filters('sp_data_layer_product_structure_def', $prod_structure_def);
+			return apply_filters('sp_data_layer_product_structure_def', $prod_structure_def);
 
-			return $prod_structure_def;
+			
+
+		}
+
+		public static function prod_structure_def_rendering_dd($args = array()) {
+
+			$dropdown_options = array();
+
+			$dropdown_options = apply_filters('sp_data_layer_prod_structure_def_rendering_dd', $dropdown_options, $args);
+
+			// NOTE: prod_structure_def function should be called and of use to those which supports entire loop and so on. like dapii, tableview and so on. 
+			$prod_structure_def = self::prod_structure_def();
+
+			foreach($prod_structure_def as $type => $val) {
+
+				if( $type == 'prod_cat' ) {
+
+					if(empty($args['filter_by']) || $args['filter_by']['prod_cat']) {
+
+		            	$dropdown_options = array_replace($dropdown_options, wbc()->wc->get_productCats('', 'detailed'));
+
+		            }
+
+	            } elseif( $type == 'attr' ) {
+
+	            	if(empty($args['filter_by']) || $args['filter_by']['attr']) {
+
+	            	$dropdown_options = array_replace($dropdown_options, wbc()->wc->get_productAttributes('detailed'));
+
+	            }
+			}
+
+			return $dropdown_options;
 
 		}
 
@@ -78,6 +108,29 @@ if( !class_exists('\\eo\wbc\model\data_model\SP_WBC_Data_Layer') ) {
 			);
 		}
 
+	    public static function to_column_names_schema($map_fields, $sp_eids=null, $column_names = array()) {
+	
+			foreach ($sp_eids as $key => $value) {
+				
+				if( $value["type"] == "variations" && $value["val"] == "meta" ) {
+					$column_names[$key] = $value["type"]."__".$value["val"]."__".$key;
+				}
+				else {
+
+					$column_names[$key] = $value["type"]."__".$value["val"];
+				}
+			}
+
+			return $column_names;
+	    }
+
+
+		public static function to_column_names($map_fields, $sp_eids=null) {
+
+	    	$column_names = self::to_column_names_schema($map_fields,$sp_eids,$column_names);
+
+	    	return apply_filters('sp_data_layer_to_column_names', $column_names, $map_fields, $sp_eids);
+	    }
 	}
 
 }

@@ -182,6 +182,214 @@
 		color: <?php _e($font_hover_color); ?>;	
 	}
 </style>
+
+<?php 
+
+if(is_category()) {
+?>
+
+	<!--Color-->
+	<style>
+	    .spui_color_widget{
+	        float: left;
+	        width: 100%;
+	    }
+	    .spui_color_widget ul {
+	        float: left;
+	        width: 100%;
+	        display: flex;
+	        flex-wrap: wrap;
+	        justify-content: flex-start;
+	        list-style-type: none;
+	        padding: 0;
+	        margin: 0;
+	    }
+	    .spui_color_widget ul li{
+	        margin: 4px;
+	        padding: 2px;
+	        position: relative;
+	        width: 30px;
+	        height: 30px;
+	        background: #ffffff;
+	        color: #000;
+	        border-radius: 2px;
+	        box-shadow: 0 0 0 1px #a8a8a8;
+	        cursor: pointer;
+	    }
+
+	    .spui_color_widget ul li .spui_color_variable_item_contents {
+	        float: left;
+	        -webkit-box-orient: vertical;
+	        -webkit-box-direction: normal;
+	        -webkit-box-pack: center;
+	        -ms-flex-pack: center;
+	        display: -webkit-box;
+	        display: -ms-flexbox;
+	        display: flex;
+	        -ms-flex-direction: column;
+	        flex-direction: column;
+	        height: 100%;
+	        justify-content: center;
+	        position: relative;
+	        width: 100%;
+	    }
+	    .spui_color_widget ul li.spui_color_variable_item.selected {
+	        box-shadow: 0 0 0 2px #000000;
+	    }
+	    .spui_color_widget ul li .spui_color_variable_item_contents span.spui_variable_item_span_color {
+	        display: block;
+	        height: 100%;
+	        width: 100%;
+	    }
+
+	</style>
+
+	<!--Size-->
+	<style>
+	    .spui_size_widget{
+	        float: left;
+	        width: 100%;
+	    }
+	    .spui_size_widget ul{
+	        -webkit-box-pack: start;
+	        -ms-flex-pack: start;
+	        display: -webkit-box;
+	        display: -ms-flexbox;
+	        display: flex;
+	        -ms-flex-wrap: wrap;
+	        flex-wrap: wrap;
+	        justify-content: flex-start;
+	        list-style: none;
+	        margin: 0;
+	        padding: 0;
+	    }
+	    .spui_size_widget ul li{
+	        margin: 4px;
+	        padding: 2px;
+	        position: relative;
+	        width: 30px;
+	        height: 30px;
+	        line-height: 30px;
+	        text-align: center;
+	        background: #ffffff;
+	        color: #000;
+	        border-radius: 2px;
+	        box-shadow: 0 0 0 1px #a8a8a8;
+	        cursor: pointer;
+	    }
+	    .spui_size_widget ul li.spui_size_variable_item.selected{
+	        box-shadow: 0 0 0 2px #000000;
+	    }
+	    .spui_size_widget ul li .spui_size_variable_item_contents {
+	        -webkit-box-orient: vertical;
+	        -webkit-box-direction: normal;
+	        -webkit-box-pack: center;
+	        -ms-flex-pack: center;
+	        display: -webkit-box;
+	        display: -ms-flexbox;
+	        display: flex;
+	        -ms-flex-direction: column;
+	        flex-direction: column;
+	        height: 100%;
+	        justify-content: center;
+	        position: relative;
+	        width: 100%;
+	    }
+	    .spui_size_widget ul li .spui_size_variable_item_contents span.spui_variable_item_span_size {
+	        padding: 0 5px;
+	    }
+
+	</style>
+
+	<!--Icon-->
+	<style>
+	   :root {
+	        --spui-check: url("data:image/svg+xml;utf8,%3Csvg filter='drop-shadow(0px 0px 2px rgb(0 0 0 / .8))' xmlns='http://www.w3.org/2000/svg'  viewBox='0 0 30 30'%3E%3Cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='4' d='M4 16L11 23 27 7'/%3E%3C/svg%3E");
+	        --spui-dis-check:url("data:image/svg+xml;utf8,%3Csvg filter='drop-shadow(0px 0px 5px rgb(255 255 255 / .6))' xmlns='http://www.w3.org/2000/svg' width='72px' height='72px' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23ff0000' stroke-linecap='round' stroke-width='0.6' d='M5 5L19 19M19 5L5 19'/%3E%3C/svg%3E");
+	    }
+	    .spui_color_icon_widget{
+	        float: left;
+	        width: 100%; 
+	    }
+	    .spui_color_icon_widget ul{
+	        -webkit-box-pack: start;
+	        -ms-flex-pack: start;
+	        display: -webkit-box;
+	        display: -ms-flexbox;
+	        display: flex;
+	        -ms-flex-wrap: wrap;
+	        flex-wrap: wrap;
+	        justify-content: flex-start;
+	        list-style: none;
+	        margin: 0;
+	        padding: 0; 
+	    }
+	    .spui_color_icon_widget ul li.spui_color_icon_variable_item{
+	        margin: 4px;
+	        padding: 2px;
+	        position: relative;
+	        width: 30px;
+	        height: 30px;
+	        line-height: 30px;
+	        text-align: center;
+	        background: #ffffff;
+	        color: #000;
+	        border-radius: 2px;
+	        box-shadow: 0 0 0 1px #a8a8a8;
+	        cursor: pointer;
+	    }
+	    .spui_color_icon_widget ul li.spui_color_icon_variable_item .spui_color_icon_variable_item_contents{
+	        webkit-box-orient: vertical;
+	        -webkit-box-direction: normal;
+	        -webkit-box-pack: center;
+	        -ms-flex-pack: center;
+	        display: -webkit-box;
+	        display: -ms-flexbox;
+	        display: flex;
+	        -ms-flex-direction: column;
+	        flex-direction: column;
+	        height: 100%;
+	        justify-content: center;
+	        position: relative;
+	        width: 100%;
+	    }
+	    .spui_color_icon_widget ul li.spui_color_icon_variable_item .spui_color_icon_variable_item_contents img.spui_variable_item_image {
+	        display: block;
+	        max-width: 100%;
+	        margin: auto;
+	    }
+	    .spui_color_icon_widget ul li.spui_color_icon_variable_item.selected {
+	        box-shadow: 0 0 0 2px #000000;
+	    }
+	    .spui_color_icon_widget ul li.spui_color_icon_variable_item.selected .spui_color_icon_variable_item_contents::before{
+	        background-image: var(--spui-check);
+	        background-position: 50%;
+	        background-repeat: no-repeat;
+	        background-size: 60%;
+	        content: " ";
+	        display: block;
+	        height: 100%;
+	        position: absolute;
+	        width: 100%;
+	    }
+	    .spui_color_icon_widget ul li.spui_color_icon_variable_item.disabled .spui_color_icon_variable_item_contents::before{
+	        background-image: var(--spui-dis-check);
+	        background-position: 50%;
+	        background-repeat: no-repeat;
+	        background-size: 60%;
+	        content: " ";
+	        display: block;
+	        height: 100%;
+	        position: absolute;
+	        width: 100%;
+	    }
+
+	</style>
+	
+<?php	
+}
+?>
+
 <script>
 	<?php 
 	if(!has_action('woocommerce_before_variations_form')) {

@@ -1285,10 +1285,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			// jQuery.fn.eo_wbc_filter_change_native= function(init_call=false,form_selector="form#eo_wbc_filter",render_container='',parameters={}) {
 
 			// // /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
-			// jQuery.fn.eo_wbc_filter_change=function(init_call=false,form_selector="form[id*='eo_wbc_filter']",render_container='.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products') 
+			jQuery.fn.eo_wbc_filter_change=function(init_call=false,form_selector="form[id*='eo_wbc_filter']",render_container='.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products') 
 
 			// // /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
-			// 					jQuery.fn.eo_wbc_filter_change=function(init_call=false) 
+								jQuery.fn.eo_wbc_filter_change=function(init_call=false) 
 
 			// // /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
 			// 				jQuery.fn.eo_wbc_filter_change=function(init_call=false) 
@@ -1387,6 +1387,7 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 			-- ane je aya compatibility no code dekhay se te aa code je module ma finally implement thay tena compatibility function ma move karva no -- to a
 				-- aa code jya thi move thyo teni calling sycuanc(03-08-2022) -- to a
 		// --- move this code frome this file in this eo_wbc_filter_render_html()
+		-- aa code diamond api ma move nathi kavano aya j implementation karvanu-- to a
 		if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html()!==undefined) {
 			if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination').length>0){
 				jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html());
