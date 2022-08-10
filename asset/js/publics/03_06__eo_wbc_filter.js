@@ -1482,7 +1482,7 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
     };
 
     var click = function(){
-
+    	-- event var aya sudhi pogadvano se -- to a
     	event.preventDefault();
 		event.stopPropagation();								
 		
