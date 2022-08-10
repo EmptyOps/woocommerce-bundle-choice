@@ -963,7 +963,7 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
  
  // ACTIVE_TODO_OC_END
  
- // the variations swatches js module
+// the variations swatches js module
 window.document.splugins.wbc.variations.swatches = window.document.splugins.wbc.variations.swatches || {};
 
 window.document.splugins.wbc.variations.swatches.core = function( configs ) {
@@ -3535,6 +3535,447 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
 
             window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.init();
         // }, 2500);
+    });
+
+}
+
+
+
+
+
+// the variations swatches js module
+window.document.splugins.wbc.variations.swatches.feed_page = window.document.splugins.wbc.variations.swatches.feed_page || {};
+
+window.document.splugins.wbc.variations.swatches.feed_page.core = function( configs ) {
+
+    var _this = this; 
+
+    _this.configs = jQuery.extend({}, {}/*default configs*/, configs);
+
+    _this.configs.attribute_types_keys = Object.keys( _this.configs.attribute_types );
+
+    _this.data = {};
+    _this.binding_stats = {};     
+
+
+    var init_private = function() {
+
+        window.document.splugins.wbc.variations.swatches.api.init();
+    };
+
+    var preprocess = function( element, event ) {
+
+    };
+
+    var preprocess_data = function(data) {
+
+       
+    
+    };
+
+    var process_attribute_data = function(type, element, data, mode = null) {
+
+    };
+
+    var process_attribute_types = function( type=null, element=null ) {
+
+    };
+
+    var process_template = function(type, element) {
+
+    };
+
+    var process_attribute_template = function(type, element, mode = null) {
+
+    };
+
+    var process_pages = function(type, element) {
+
+        /*ACTIVE_TODO_OC_START
+        fundamentally we are going to put here page specific handling and management 
+            --  but how we can make the many layers common which can work semalessly in common(means many things of different layers, not necessarily entire layers)? -- to h 
+                --  data layers already be common and that should remain common for most part except some conditions -- to h 
+                --  while we shuold do little or no common for events and effects since they are strictly ui bound layers so that would result in weak balance between modules -- to h 
+                --  what else?
+        ACTIVE_TODO_OC_END*/ 
+        if(window.document.splugins.common.is_category_page){
+
+        }else if(window.document.splugins.common.is_item_page){
+
+        }
+
+    };
+
+    var process_slider_and_zoom = function(type, element){
+        
+    };
+
+    var process_events = function(type, element){
+
+    };
+
+    var process_and_manage_effects = function(type, element){
+        
+    };
+
+    var on_click_listener = function(type, element, reselect_clear, data) {
+        console.log("on_click_listener__ " + type );
+
+        /*var uniquely_managed_type = null;
+        if(type == 'radio') {
+
+            uniquely_managed_type = type;
+
+        } else {
+
+            uniquely_managed_type = 'default';            
+            
+        }*/
+
+        // if(window.document.splugins.common._b(_this.binding_stats, 'on_click_listener', type)){
+        // console.log("on_click_listener inner if");
+
+        //     return false;
+        // }
+        
+        // var mouse_event_name = 'click';
+
+        /*ACTIVE_TODO_OC_START
+        here it seems that m have explicitly handled the click event, but we should do if it is by standard require and the legacy flows does need us to take care of it. so confirm first with the plugin we are exploring -- to h 
+        jQuery('.variable-item').on('click',function(){
+            var target_selector = $('#'+$(this).data('id'));
+            target_selector.val(jQuery(element).data('value'));
+            jQuery(element).parent().find('.selected').removeClass('selected');
+            jQuery(element).addClass('selected');
+            // ACTIVE_TODO do we need this check variations flow?
+            jQuery(_this.base_container).trigger('check_variations');
+            jQuery(target_selector).trigger('change');
+            on_click(type, element, event);
+        });
+        ACTIVE_TODO_OC_END*/
+
+        
+        // for all sections of update layers in below sections and elsewhere in this plugin, what we can do is simply call the process_attribute_template function but with mode param equal to update or so -- to s done
+            /*ACTIVE_TODO_OC_START
+            --  and also ensure to make the duplicate code common in the base functions where below events are ultimatly routing.  -- to s
+            ACTIVE_TODO_OC_END*/
+        // Trigger Select event based on list
+
+        console.log("on_click_listener binding");
+
+        if (reselect_clear) {
+
+            console.log("on_click_listener reselect_clear");
+
+            // Non Selected Item Should Select
+            // ACTIVE_TODO here we need to manage non li templates
+            jQuery(element).on(_this.configs.mouse_event_name, 'li:not(.selected):not(.radio-variable-item):not(.spui-wbc-swatches-variable-item-more)', function (event) {
+
+                var element_inner = this;
+
+                console.log("on_click_listener reselect_clear li, div");
+
+
+              // e.preventDefault();
+              // e.stopPropagation();
+              // var value = jQuery(element_inner).data('value');
+              // select.val(value).trigger('change');
+              // select.trigger('click');
+
+              // select.trigger('focusin');
+
+              // if (window.document.splugins.common.is_mobile) {
+              //   select.trigger('touchstart');
+              // }
+
+              // jQuery(element_inner).trigger('focus'); // Mobile tooltip
+              // jQuery(element_inner).trigger('wvs-selected-item', [value, select, _this.$element]); // Custom Event for li
+              
+              on_click(type, element_inner, event, reselect_clear, false, data);
+            });
+
+            // Selected Item Should Non Select
+            // ACTIVE_TODO here we need to manage non li templates
+                // ACTIVE_TODO for the notes below event is most likely also used for category page or is maybe for category page only, so we may need to apply category page condition as applicable.
+            jQuery(element).on(_this.configs.mouse_event_name, 'li.selected:not(.radio-variable-item):not(.spui-wbc-swatches-variable-item-more)', function (event) {
+
+                var element_inner = this;
+
+                console.log("on_click_listener reselect_clear li, selected, div");
+
+
+              // e.preventDefault();
+              // e.stopPropagation();
+
+              // var value = jQuery(element_inner).val();
+
+              // select.val('').trigger('change');
+              // select.trigger('click');
+
+              // select.trigger('focusin');
+
+              // if (window.document.splugins.common.is_mobile) {
+              //   select.trigger('touchstart');
+              // }
+
+              // jQuery(element_inner).trigger('focus'); // Mobile tooltip
+
+              // jQuery(element_inner).trigger('wvs-unselected-item', [value, select, _this.$element]); // Custom Event for li
+
+              on_click(type, element_inner, event, reselect_clear, true, data);
+            });
+
+            
+
+            if(type == 'radio') {
+
+                // RADIO
+
+                // On Click trigger change event on Radio button
+
+                jQuery(element_inner).on(_this.configs.mouse_event_name, 'input.spui-wbc-swatches-variable-item-radio:radio', function (event) {
+
+                    var element_inner = this;
+
+                  // e.stopPropagation();
+
+                  // jQuery(element_inner).trigger('change', { radioChange: true });
+
+                    on_click(type, element_inner, event, reselect_clear, false, data);
+                });
+            }
+
+            /*jQuery(element).on('change', 'input.spui-wbc-swatches-variable-item-radio:radio', function (e, params) {
+              e.preventDefault();
+              e.stopPropagation();
+              if (params && params.radioChange) {
+                var value = jQuery(element).val();
+                var is_selected = jQuery(element).parent('li.spui-wbc-swatches-variable-item-radio').hasClass('selected');
+                if (is_selected) {
+                  select.val('').trigger('change');
+                  jQuery(element).parent('li.spui-wbc-swatches-variable-item-radio').trigger('spui-wbc-swatches-variable-item-unselected', [value, select, _this.$element]); // Custom Event for li
+                } else {
+                  select.val(value).trigger('change');
+                  jQuery(element).parent('li.spui-wbc-swatches-variable-item-radio').trigger('spui-wbc-swatches-variable-item-selected', [value, select, _this.$element]); // Custom Event for li
+                }
+                select.trigger('click');
+                select.trigger('focusin');
+                if (_this.is_mobile) {
+                  select.trigger('touchstart');
+                }
+              }
+            });*/
+        } else {
+
+            console.log("on_click_listener else");
+
+            jQuery(element).on(_this.configs.mouse_event_name, 'li:not(.radio-variable-item):not(.spui-wbc-swatches-variable-item-more)', function (event) {
+
+                var element_inner = this;
+
+                console.log("on_click_listener else li, selected, div");
+                console.log(element_inner);
+ 
+              // event.preventDefault();
+              // event.stopPropagation();
+
+              // var value = jQuery(element_inner).data('value');
+              // select.val(value).trigger('change');
+              // select.trigger('click');
+              // select.trigger('focusin');
+              // if (window.document.splugins.common.is_mobile) {
+              //   select.trigger('touchstart');
+              // }
+
+              // jQuery(element_inner).trigger('focus'); // Mobile tooltip
+
+              // jQuery(element_inner).trigger('wvs-selected-item', [value, select, _this._element]); // Custom Event for li
+
+              on_click(type, element_inner, event, reselect_clear, false, data);
+            });
+
+            /* // Radio
+            jQuery(element).on('change', 'input.spui-wbc-swatches-variable-item-radio:radio', function (event) {
+              event.preventDefault();
+              event.stopPropagation();
+              var value = jQuery(element).val();
+              select.val(value).trigger('change');
+              select.trigger('click');
+              select.trigger('focusin');
+              if (_this.is_mobile) {
+                select.trigger('touchstart');
+              }
+              // Radio
+              jQuery(element).parent('li.spui-wbc-swatches-variable-item-radio').removeClass('selected disabled').addClass('selected');
+              jQuery(element).parent('li.spui-wbc-swatches-variable-item-radio').trigger('spui-wbc-swatches-variable-item-selected', [value, select, _this.$element]); // Custom Event for li
+            });*/
+        }
+
+    };
+
+    var on_click = function(type, element_inner, event, reselect_clear, is_selected_selctor, data) {
+
+    };
+
+    var click = function(type, element_inner, event, reselect_clear, is_selected_selctor, data) {
+
+    };
+
+    return {
+
+        init: function() {
+            
+            init_private();
+
+        }
+    }; 
+};
+
+if(window.document.splugins.common.is_item_page || window.document.splugins.common.is_category_page) {
+
+    jQuery(document).ready(function() {
+    
+        // window.setTimeout(function(){
+
+            //  publish it 
+            window.document.splugins.wbc.variations.swatches.feed_page.api = window.document.splugins.wbc.variations.swatches.feed_page.core( common_configs.feed_page_config );
+
+            window.document.splugins.wbc.variations.swatches.feed_page.api.init();
+
+        // },2000);    
+
+    } );
+
+}
+
+// the variations gallery images js module
+window.document.splugins.wbc.variations.gallery_images.single_product = window.document.splugins.wbc.variations.gallery_images.single_product || {};
+
+window.document.splugins.wbc.variations.gallery_images.single_product.core = function( configs ) {
+
+    var _this = this; 
+ 
+    _this.configs = jQuery.extend({}, {}/*default configs*/, configs);  
+ 
+    _this.data = {};
+    _this.binding_stats = {};
+ 
+    var init_private = function() {
+        
+        window.document.splugins.wbc.variations.gallery_images.api.init();
+
+    };
+ 
+    var init_preprocess = function(event) {
+
+    };
+ 
+    var preprocess = function(element, event) {
+
+    };
+
+    var preprocess_data = function(data) {
+    
+    };
+ 
+    var process_images = function(type=null, element=null) {
+ 
+    };
+
+    var process_images_inner = function(type, element){
+
+    };
+    
+    var template = function( tmpl_id, templating_lib ) {
+
+    };
+
+    var apply_template_data = function( template, template_data, templating_lib ) {
+
+    };
+
+    var process_template = function(type) {
+
+    };
+ 
+    var process_images_template = function(images) {
+
+    };
+ 
+    var process_pages = function(type) {
+ 
+    };
+ 
+    var process_compatability_matters = function(type) {
+
+    };
+ 
+    var slider_thumb_click_listener = function(type) {
+ 
+    };
+ 
+    var on_slider_thumb_click = function(type,element) {
+    
+
+        /*ACTIVE_TODO_OC_START
+         --  among other things the fundamental things to do are changing zoom are active image, we would be doing it like hiding all the templates within the zoom area container first and the showing the current index template -- to h 
+             --  very first do it basically by hiding maybe all nodes within the main zoom container class and then just show the node/element at index which need to be shows -- to h. since we need to start testing 1st revision asap so lets do this asap. 
+                  --  then eventually we may like to maintain based on the image template class(so hook would be required for it) and index, or just based on index. to ensure that maximum adaptability is ensured for external slider and zoom and even if within the main zoom area container the dom has complex structure then also things work fine, and it is like that slider/zoom plugins would have complex dom. -- to h 
+ 
+         --  what could be other things that we need to do or would like to cover? -- to a  
+             --  we need to stop the video of the current index(means the index which was already set before click) is actually gallery_item_type=video -- to h 
+             --  and of course if clicked thumb represents the gallery_item_type=video(note that gallery_item_type video would be providing the base video support means mp4 videos while for the other formats inlcuding 360 will have other premium types support) then call the play_video function(so there will be play_video and pause_video functions) but however the play_video may have nothing since by default we are implementing auto play support for the videos -- to h 
+                 --  ACTIVE_TODO so on this regard very soon on admin we may like to provide setting to disable preload and/or auto play support for the videos -- to h 
+             --  and of course other are covering the points mentioned in main flow above related to events, templates, compatability and so on as applicable if there are any there or anywhere else -- to h 
+                 --  and yeah need to make sure that if any additional notification is required then that is emitted from here, or if any extensions need to respond on notification_response callback then that is implemented -- to h 
+             // --  and zoom refresh seems to be needed to be called on each on_slider_thumb_click event, so just call that refresh event of the js api -- to h done
+                 --  but yeah if the clicked gallery_item_type of the slider thumb is not image then skip above call -- to h 
+                    I think it is invalid statements so above point might be INVALID
+        ACTIVE_TODO_OC_END*/
+
+        slider_thumb_click(type,element);
+    
+    };
+ 
+    var slider_thumb_click = function(type,element){
+        
+    };
+
+    var compatability = function(section, object, expected_result) {
+ 
+     };
+
+    var sp_slzm_init = function() {
+
+        console.log("sp_slzm_init notification");
+
+         var sp_slzm_init_callback = null;
+            window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'sp_slzm_init', {} , sp_slzm_init_callback);
+
+    };
+ 
+
+    return {
+ 
+         init: function() { 
+ 
+             init_private();
+         } 
+ 
+    }; 
+};
+
+if(window.document.splugins.common.is_item_page || window.document.splugins.common.is_category_page) {
+
+    jQuery(document).ready(function() {
+
+        window.setTimeout(function(){
+
+            //  publish it 
+            window.document.splugins.wbc.variations.gallery_images.single_product.api = window.document.splugins.wbc.variations.gallery_images.single_product.core( common_configs.single_product_configs );
+            window.document.splugins.wbc.variations.gallery_images.single_product.api.init();
+
+        },2000);
     });
 
 }

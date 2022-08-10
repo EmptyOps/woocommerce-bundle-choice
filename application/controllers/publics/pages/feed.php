@@ -85,7 +85,10 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
                         //--    and then create function prepare_swatches_data in single-product model in wbc, and move all code inside below to that selectron hook render in its swatches section -- to b done
         if ($page_section == 'gallery_images') {
             
+            // remove
             remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_template_loop_product_thumbnail', 10 );
+            \eo\wbc\model\SP_WBC_Compatibility::instance()->loop_render_compatability('before_shop_loop_item_loop_thumbnail_action', $args);
+            
             add_action( 'woocommerce_before_shop_loop_item_title', function() use($page_section,$args) {  
 
                 $args['hook_callback_args'] = array();
@@ -114,7 +117,10 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
     private function load_view($data,$args = array()){
         // NOTE: since so far we do not needed to create the view class and the actual ui is also coming from the templates folder so, so far not creating the view class. and just implementing the required logic from here. but if it become necessary then in future create the view class. 
 
-        if ($args['page_section'] == 'swatches') {
+        if ($page_section == 'gallery_images') {
+
+            $this->render_swatches_data_by_attribute_type($data,$args);
+        } elseif ($args['page_section'] == 'swatches') {
 
             $this->render_swatches_data_by_attribute_type($data,$args);
 

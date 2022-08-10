@@ -62,8 +62,36 @@ class SP_Compatibility {
 
  	}
 
- 	public function feed_quickview_container_compatability(){
+ 	public function feed_quickview_container_compatability($page_section,$args = array()){
 
+ 	}
+
+ 	public function loop_render_compatability($page_section,$args = array()){
+
+ 		if($page_section == 'before_shop_loop_item_loop_thumbnail_action') {
+	 	
+	 		$current_theme_key = wbc()->common->current_theme_key();
+
+	 		// themes
+	 		// NOTE: where compatibility is not causing any false positive issues then we can simply apply those extra or condition 
+	 		if($current_theme_key == 'themes___orchid' || strpos( $current_theme_key, 'orchid') !== FALSE){
+
+		 		remove_action( 'orchid_store_loop_product_thumbnail', 'woocommerce_template_loop_product_thumbnail', 10 );
+		 	
+		 	} elseif(class_exists('Flatsome_Default') /*$current_theme_key == 'themes___orchid' || strpos( $current_theme_key, 'orchid') !== FALSE*/){
+
+		 		remove_action('flatsome_woocommerce_shop_loop_images', 'woocommerce_template_loop_product_thumbnail', 10);
+		 	} 
+
+		 	// // plugins
+		 	// if(wbc()->wp->wbc_is_plugin_active('woocommerce-products-filter')) {
+
+		 		
+		  //       //flatsome theme compatibility
+		  //       remove_action('flatsome_woocommerce_shop_loop_images', 'woocommerce_template_loop_product_thumbnail', 10);
+	            
+		 	// }
+		 }
  	}
 
  	public function dokan(){
