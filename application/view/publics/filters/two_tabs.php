@@ -1,4 +1,23 @@
 
+<?php
+
+$category_array = array_column(eo\wbc\model\publics\component\EOWBC_Filter_Widget::instance()->get_widget()::$filter_sets_data, 'first_tab_label', 'first_tab_id');
+foreach ( eo\wbc\model\publics\component\EOWBC_Filter_Widget::instance()->get_widget()::$filter_sets_data as $key => $item ){
+  
+  if($key == "first_tab_id"){
+    <a class="item center <?php echo isset($_GET[$second_tab_id])?'':'active' ?>" data-category="<?php _e($first_tab_category); ?>" style="margin-right: 0px !important;" data-tab="filter_setting_advance_first_tabs" data-tab-name="<?php _e($item); ?>" data-tab-altname="<?php _e($second_tab_id); ?>">
+    <!-- $prefix.'_fconfig_set' -->  
+  }
+    
+  if($key == "first_tab_label"){
+  
+    <?php _e($item); ?>    
+  </a>
+  }
+
+}
+
+?>
 <?php if(in_array(wbc()->common->get_category('category',null,array(wbc()->options->get_option('configuration','first_slug'),wbc()->options->get_option('configuration','second_slug'))),array($first_tab_category,$second_tab_category))){  ?>
 <div class="ui top attached tabular menu filter_setting_advance_two_tabs" style="margin-top: 3em;">
   	<a class="item center <?php echo isset($_GET[$second_tab_id])?'':'active' ?>" data-category="<?php _e($first_tab_category); ?>" style="margin-right: 0px !important;" data-tab="filter_setting_advance_first_tabs" data-tab-name="<?php _e($first_tab_id); ?>" data-tab-altname="<?php _e($second_tab_id); ?>">
@@ -6,12 +25,14 @@
   	<?php _e($first_tab_label); ?>
   	</a>
 
-  	<a class="center item <?php echo isset($_GET[$second_tab_id])?'active':'' ?>" data-category="<?php _e($second_tab_category); ?>" style="margin-left: 0px !important;" data-tab="filter_setting_advance_second_tabs" data-tab-name="<?php _e($second_tab_id); ?>" data-tab-altname="<?php _e($first_tab_id); ?>">
-    <?php _e($second_tab_label); ?>
+  	<!-- <a class="center item <?php /*echo isset($_GET[$second_tab_id])?'active':'' */?>" data-category="<?php/* _e($second_tab_category);*/ ?>" style="margin-left: 0px !important;" data-tab="filter_setting_advance_second_tabs" data-tab-name="<?php/* _e($second_tab_id); */?>" data-tab-altname="<?php /*_e($first_tab_id); */?>">
+    <?php _e($second_tab_label); ?> -->
   	</a>
   	<script type="text/javascript">
 		jQuery(document).ready(function($){
-			$('.filter_setting_advance_two_tabs .item').on('click',function(event){
+		  --- aa code sp_metal_color/assets/variations.assets.php ma move karyo se @a ---
+      --- start ---
+    	$('.filter_setting_advance_two_tabs .item').on('click',function(event){
         
         /*let _category = $("[name='_category']").val();
         _category = _category.split(',');
@@ -76,13 +97,15 @@
         <?php endif; ?>
         //////// 27-05-2022 - @drashti /////////
         --add to be confirmed--
+        -- jo uniq hoy to subscribe mate call back nu emplent karvanu rese -- to a
         window.document.splugins.wbc.filters.core.eo_wbc_filter_change_wrapper(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
         jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
         ////////////////////////////////////////
 			});
       //jQuery('[data-tab="filter_setting_advance_first_tabs"]').trigger('click');
       jQuery('.filter_setting_advance_two_tabs .item.active').click();
-		});
+		  --- end ---
+    });
 	</script>
 </div>
 <?php } ?>
