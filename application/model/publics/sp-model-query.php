@@ -45,6 +45,8 @@ class SP_Model_Query extends SP_Query {
 		            die();
 		        }
 
+
+		        and to get the result obj we can rely on the post_get_posts which might be the alternative of the pre_get_posts -- to h & -- to a 
 		        $this->prepare_query_direct( $query, $input_method, $additional_data );
 
 		        ACTIVE_TODO need to implement lagecy respose
