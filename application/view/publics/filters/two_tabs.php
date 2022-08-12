@@ -1,25 +1,18 @@
 
-<?php
 
-$category_array = array_column(eo\wbc\model\publics\component\EOWBC_Filter_Widget::instance()->get_widget()::$filter_sets_data, 'first_tab_label', 'first_tab_id');
-foreach ( eo\wbc\model\publics\component\EOWBC_Filter_Widget::instance()->get_widget()::$filter_sets_data as $key => $item ){
-  
-  if($key == "first_tab_id"){
-    <a class="item center <?php echo isset($_GET[$second_tab_id])?'':'active' ?>" data-category="<?php _e($first_tab_category); ?>" style="margin-right: 0px !important;" data-tab="filter_setting_advance_first_tabs" data-tab-name="<?php _e($item); ?>" data-tab-altname="<?php _e($second_tab_id); ?>">
-    <!-- $prefix.'_fconfig_set' -->  
-  }
-    
-  if($key == "first_tab_label"){
-  
-    <?php _e($item); ?>    
-  </a>
-  }
+<?php $category_array = array_column($filter_sets_data, 'first_tab_category'); ?>
 
-}
-
-?>
-<?php if(in_array(wbc()->common->get_category('category',null,array(wbc()->options->get_option('configuration','first_slug'),wbc()->options->get_option('configuration','second_slug'))),array($first_tab_category,$second_tab_category))){  ?>
+<?php if(in_array(wbc()->common->get_category('category',null,array(wbc()->options->get_option('configuration','first_slug'),wbc()->options->get_option('configuration','second_slug'))),/*array($first_tab_category,$second_tab_category)*/$category_array)){  ?>
 <div class="ui top attached tabular menu filter_setting_advance_two_tabs" style="margin-top: 3em;">
+    <?php
+    
+    foreach ($filter_sets_data as $key => $tab_data ){  
+      <a class="item center <?php echo isset($_GET[$tab_data["first_tab_id"]])?'active':'' ?>" data-category="<?php _e($tab_data["first_tab_category"]); ?>" style="margin-right: 0px !important;" data-tab="filter_setting_advance_first_tabs" data-tab-name="<?php _e($tab_data["first_tab_id"]); ?>" data-tab-altname="<?php _e($second_tab_id); ?>">
+        // $prefix.'_fconfig_set' 
+      <?php _e($tab_data["first_tab_label"]); ?>
+      </a> 
+    }
+    ?>  
   	<a class="item center <?php echo isset($_GET[$second_tab_id])?'':'active' ?>" data-category="<?php _e($first_tab_category); ?>" style="margin-right: 0px !important;" data-tab="filter_setting_advance_first_tabs" data-tab-name="<?php _e($first_tab_id); ?>" data-tab-altname="<?php _e($second_tab_id); ?>">
   		<!-- $prefix.'_fconfig_set' -->
   	<?php _e($first_tab_label); ?>
