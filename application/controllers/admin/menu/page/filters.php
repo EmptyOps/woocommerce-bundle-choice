@@ -551,6 +551,8 @@ if ( ! class_exists( 'Filters' ) ) {
 								--	and on javascript layer nothing additional need to be done I think but lets confirm -- to b 
 									--	then search everywhere with above keywords in wbc, sp_tv. and let me know if there are any placed where the upgrade is not done yet. -- to a 
 										--	and like above also search in the custom numeric, custom attribute, heirarchical filters, diamond quiz and earring pendant builder. and in this case if found at any place then mark them as active todo. -- to a 
+									-- eowbc_bradcome ma if condition nu logic confirm karvanu baki se(12-08-2022) -- to h & -- to a
+									-- data "altname" vala logic jova na se two tabs vali file ma js se tema chek karvu(12-08-2022) -- to a
 							/*'filter_setting_advance_first_tabs'=>array(
 								'label'=>'Select first tab\'s filter set' ,
 								'type'=>'select',
