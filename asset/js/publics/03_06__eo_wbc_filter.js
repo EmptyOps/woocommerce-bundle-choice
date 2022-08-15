@@ -804,11 +804,18 @@ window.document.splugins.wbc.filters.core = function( configs ) {
             if(typeof(LazyLoad)=='function'){
                 eowbc_lazyload();
             } 
+        }else if(section == 'pagination_link_selector'){
+
+        	object = ',jet-filters-pagination';
+
+        }else if(section == 'products-grid'){
+
         }
 
         var compatability_callback = null ;
         window.document.splugins.events.api.notifyAllObservers( 'filters', 'compatability', {}, compatability_callback );
         
+        return object;
     };
 
     var eo_wbc_filter_render_html = function(data,render_container){
@@ -942,31 +949,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 						-- and for setting and getting current page_number 
 							--	for it may simply need to use the pagination modules published api interface -- to d 
 		ACTIVE_TODO_OC_END					
-			// --- pagination module move this code ---
-			// if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html()!==undefined) {
-			// 	if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination').length>0){
-			// 		jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html());
-			// 	} else {
+		window.document.splugins.wbc.pagination.core.set_pagination_html(data);
 
-			// 		@d once all the pagination related layers brought to this function, we need to check if the below incomplete implementation is completely implemented anywhere in our repo -- to d 
-			// 			--	if not then test with the elementor created category feed page and also with elementor hello themes custom loop to check if it works. if not then must uncomment the last uncommented line and finish the implementation -- to d or -- to b 
-			// 		let product_container = jQuery(".products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)");
-			// 		if(product_container.length<=0) {
-			// 			product_container = jQuery(".elementor-products-grid");
-			// 			if(product_container.length<=0) {
-			// 				product_container = jQuery(".elementor-widget-container").has('[data-elementor-type="loop"]');
-			// 				if(product_container.length<=0) {
-			// 					product_container = jQuery("[data-widget_type='archive-posts.archive_custom']");						
-			// 				}
-			// 			}
-			// 		}
-			// 		//jQuery(product_container).append('<nav class="woocommerce-pagination">'+jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html()+'</nav>');
-			// 	}
-			// }
-			// else {
-			// 	jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html('');	
-			// }
-			// --- end ---
 		/*}*/
 
 
@@ -1381,20 +1365,25 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 
 	};
 
-	var jet_filters_pagination_private = function(){
-		-- aa function mathi code pagination sub module na module ma move thase ane baki no jo applicable hoy to aa module ma rese. Pan aa point execute karvi te pela niche point confirm karvano rese. -- to a & -- to h
+	var get_pagination_html_private = function(){
+		
+	}
+
+	var set_pagination_html_private = function(data){
+		
+		// -- aa function mathi code pagination sub module na module ma move thase ane baki no jo applicable hoy to aa module ma rese. Pan aa point execute karvi te pela niche point confirm karvano rese. -- to a & -- to h INVALID 
 			-- need to confirm ke aa call diamond api mathi j ave se ne ane te jo no male to ani calling sycuance hirenbhai sathe confirm karvi. -- to a
 			-- ane je aya compatibility no code dekhay se te aa code je module ma finally implement thay tena compatibility function ma move karva no -- to a
 				-- aa code jya thi move thyo teni calling sycuanc(03-08-2022) -- to a
 		// --- move this code frome this file in this eo_wbc_filter_render_html()
 		-- aa code diamond api ma move nathi kavano aya j implementation karvanu-- to a
-		if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html()!==undefined) {
-			if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination').length>0){
-				jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html());
+		if(jQuery('.woocommerce-pagination,.pagination'+compatability('pagination_link_selector',null,null),jQuery(data)).html()!==undefined) {
+			if(jQuery('.woocommerce-pagination,.pagination'+compatability('pagination_link_selector',null,null)).length>0){
+				jQuery(".woocommerce-pagination,.pagination"+compatability('pagination_link_selector',null,null)).html(jQuery('.woocommerce-pagination,.pagination'+compatability('pagination_link_selector',null,null),jQuery(data)).html());
 			} else {
 
-				@d once all the pagination related layers brought to this function, we need to check if the below incomplete implementation is completely implemented anywhere in our repo -- to d -- to a
-					--	if not then test with the elementor created category feed page and also with elementor hello themes custom loop to check if it works. if not then must uncomment the last uncommented line and finish the implementation -- to d or -- to b -- to a
+				@d once all the pagination related layers brought to this function, we need to check if the below incomplete implementation is completely implemented anywhere in our repo -- to d 
+					--	if not then test with the elementor created category feed page and also with elementor hello themes custom loop to check if it works. if not then must uncomment the last uncommented line and finish the implementation -- to d or -- to b 
 				let product_container = jQuery(".products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)");
 				if(product_container.length<=0) {
 					product_container = jQuery(".elementor-products-grid");
@@ -1409,7 +1398,7 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 			}
 		}
 		else {
-			jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html('');	
+			jQuery(".woocommerce-pagination,.pagination"+compatability('pagination_link_selector',null,null)).html('');	
 		}
 
 	}
@@ -1557,9 +1546,14 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 
 		},
 
-		jet_filters_pagination: function(){
+		get_pagination_html: function(){
 
-			jet_filters_pagination_private();
+			get_pagination_html_private();
+		},
+
+		set_pagination_html: function(data){
+
+			set_pagination_html_private(data);
 		},
 
 		reset: function() {

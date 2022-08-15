@@ -153,7 +153,9 @@ class Public_Handler {
 									//$filter_sets[$filter_sets_key] = $filter_sets_val['filter_set_name'];
 									//if(wbc()->options->get_option('filters_filter_setting','filter_setting_advance_two_tabs')) {
 
-									if ($is_first_root_category and !empty($filter_sets_val['filter_set_two_tabs_first'])) {
+									if ( ( $is_first_root_category and !empty($filter_sets_val['filter_set_two_tabs_first']) ) or
+        								(!$is_first_root_category and !empty($filter_sets_val['filter_set_two_tabs_second']))
+    									) {
 											
 						            	$_first_tab_id = $filter_sets_val['filter_set_category']; //wbc()->options->get_option('filters_filter_setting','filter_setting_advance_first_category');
 						            	$_first_tab_key = $filter_sets_key; //wbc()->options->get_option('filters_filter_setting','filter_setting_advance_first_tabs');
