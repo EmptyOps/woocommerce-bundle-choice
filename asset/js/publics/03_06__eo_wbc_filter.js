@@ -256,15 +256,12 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				//form_data={_category:jQuery("[name='_category']").val().trim(),action:'eo_wbc_filter'};	
 				/*move to tableview done -- to s
 				form_data=jQuery("#tableview_order,#tableview_order_direction,[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();*/
-
 				form_data=jQuery("[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
-
 				// move to tableview done -- to s
 				// if(eo_wbc_e_tabview.eo_table_view_per_page){
 				// 	form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
 				// }
 			}
-
 			// if(jQuery("select[name='orderby']").length>0){
 			// 	form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
 			// }
@@ -274,9 +271,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			
 			/*move to tableview done -- to s 
 			form_data.action='eo_wbc_e_tabview';*/
-
 		} else {
-
 			after all prepare_query_data move are finalized then we need to structure form_data preparation properly -- to h
 				--  like form serialize or base form preparation conataining all base wbc fields should happen in here on wbc layer only. -- to h & -- to s
 					--  so after above is done then remove from.serialize statements from tableview layer. -- to s
@@ -286,39 +281,29 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			if(eo_wbc_e_tabview.eo_table_view_per_page){
 				form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
 			}*/
-
 			if(jQuery("select[name='orderby']").length>0){
 				form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
 			}
-
 			/*move to tableview done -- to s
 			if(jQuery("#tableview_order").val()!=='' && jQuery("#tableview_order_direction").val()!==''){
 				form_data+='&tableview_order='+jQuery("#tableview_order").val();
 				form_data+='&tableview_order_direction='+jQuery("#tableview_order_direction").val();
 			}*/
-
 			/*move to tableview done -- to s
 			form_data+='&action=eo_wbc_e_tabview';*/
 		}
-
 		////////////////////////////////
-
 		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
 		// --add to be confirmed 2601 TO 2705--
-
 		if(init_call) {
 			jQuery("form#eo_wbc_filter [name='paged']").val('1');
 			jQuery("form#eo_wbc_filter [name='last_paged']").val('1');
-
 			jQuery("form#eo_wbc_filter [name='_category']").val(jQuery("form#eo_wbc_filter [name='_current_category']"));
 			jQuery("form#eo_wbc_filter [name='_attribute']").val("");
 		}
-
 		var form=jQuery("form#eo_wbc_filter");	
-
 		// jQuery(form).attr('method','POST');	
 		// jQuery("[name*='action']").val("eo_wbc_e_tabview");	
-
 		// form_data=undefined;
 		// if(init_call){
 		// 	if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
@@ -341,11 +326,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// 			form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
 		// 		}
 		// 	}
-
 		// 	if(jQuery("select[name='orderby']").length>0){
 		// 		form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
 		// 	}
-
 		// 	if(jQuery("select[name='orderby']").length>0){
 		// 		form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
 		// 	}
@@ -355,25 +338,20 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// 	if(eo_wbc_e_tabview.eo_table_view_per_page){
 		// 		form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
 		// 	}
-
 		// 	if(jQuery("select[name='orderby']").length>0){
 		// 		form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
 		// 	}
-
 		// 	if(jQuery("#tableview_order").val()!=='' && jQuery("#tableview_order_direction").val()!==''){
 		// 		form_data+='&tableview_order='+jQuery("#tableview_order").val();
 		// 		form_data+='&tableview_order_direction='+jQuery("#tableview_order_direction").val();
 		// 	}
 		// }
-
 		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
 		// --add to be confirmed 3159 TO 3232--
-
 		// var form=jQuery("form#eo_wbc_filter");	
 										
 		// jQuery(form).attr('method','POST');	
 		// jQuery("[name*='action']").val("eo_wbc_e_tabview");	
-
 		// form_data=undefined;
 		// if(init_call){
 		// 	if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
@@ -396,7 +374,6 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// 			form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
 		// 		}
 		// 	}
-
 		// 	if(jQuery("select[name='orderby']").length>0){
 		// 		form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
 		// 	}
@@ -406,28 +383,21 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// 	if(eo_wbc_e_tabview.eo_table_view_per_page){
 		// 		form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
 		// 	}
-
 		// 	if(jQuery("select[name='orderby']").length>0){
 		// 		form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
 		// 	}
 		// }
-
 		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template1.js
 		// --add to be confirmed 630 TO 734--
-
 		// if(init_call) {
 		// 	jQuery("form#eo_wbc_filter [name='paged']").val('1');
 		// 	jQuery("form#eo_wbc_filter [name='last_paged']").val('1');
-
 		// 	jQuery("form#eo_wbc_filter [name='_category']").val(jQuery("form#eo_wbc_filter [name='_current_category']"));
 		// 	jQuery("form#eo_wbc_filter [name='_attribute']").val("");
 		// }
-
 		// var form=jQuery("form#eo_wbc_filter");	
-
 		// jQuery(form).attr('method','POST');	
 		// jQuery("[name*='action']").val(eo_wbc_e_tabview.eo_ajax_func);	
-
 		// form_data=undefined;
 		// if(init_call){
 		// 	if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
@@ -450,11 +420,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// 			form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
 		// 		}
 		// 	}
-
 		// 	if(jQuery("select[name='orderby']").length>0){
 		// 		form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
 		// 	}
-
 		// 	if(jQuery("select[name='orderby']").length>0){
 		// 		form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
 		// 	}
@@ -464,26 +432,20 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// 	if(eo_wbc_e_tabview.eo_table_view_per_page){
 		// 		form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
 		// 	}
-
 		// 	if(jQuery("select[name='orderby']").length>0){
 		// 		form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
 		// 	}
-
 		// 	if(jQuery("#tableview_order").val()!=='' && jQuery("#tableview_order_direction").val()!==''){
 		// 		form_data+='&tableview_order='+jQuery("#tableview_order").val();
 		// 		form_data+='&tableview_order_direction='+jQuery("#tableview_order_direction").val();
 		// 	}
 		// }
-
-
 		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template2.js
 		// --add to be confirmed 302 TO 375--
-
 					// var form=jQuery("form#eo_wbc_filter");	
 										
 					// jQuery(form).attr('method','POST');	
 					// jQuery("[name*='action']").val("eo_wbc_e_tabview")
-
 					// form_data=undefined;
 					// if(init_call){
 					// 	if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
@@ -506,7 +468,6 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 					// 			form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
 					// 		}
 					// 	}
-
 					// 	if(jQuery("select[name='orderby']").length>0){
 					// 		form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
 					// 	}
@@ -516,15 +477,12 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 					// 	if(eo_wbc_e_tabview.eo_table_view_per_page){
 					// 		form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
 					// 	}
-
 					// 	if(jQuery("select[name='orderby']").length>0){
 					// 		form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
 					// 	}
 					// }
-
 		/////////////////////////////////////////////////
 		// /var/www/html/drashti_project/27-05-2022/woocommerce-bundle-choice/asset/js/publics/eo_wbc_filter.js
-
 		////////////////////shraddha/////////////////////////
 		// var form=jQuery(form_selector/*"form#eo_wbc_filter"*/);	
 		// if(form.find('[name="html_destination"]').length>0){
@@ -701,12 +659,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		/*// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template1.js
 		// --add to be confirmed 630 TO 734--
-
 		eo_wbc_e_render_table(data);
-
 		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template2.js
 		// --add to be confirmed 302 TO 375--
-
 		eo_wbc_e_render_table(data);*/
 
 
@@ -767,14 +722,11 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			jQuery(".woocommerce-result-count").html('');	
 		}
 	};
-
     ///////////// -- 15-06-2022 -- @drashti -- ///////////////////////////////
     var compatability = function(section, object, expected_result) {
-
     	// ACTIVE_TODO_OC_START
     	// do the call from where the below section is moved here, and if you already did the call then show and confirm with me -- to d 
     	// ACTIVE_TODO_OC_END
-
         if(section == 'product-listing'){
             jQuery('.products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)').addClass('product_grid_view');
             //jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination').css('visibility','visible');
@@ -1400,15 +1352,11 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 		else {
 			jQuery(".woocommerce-pagination,.pagination"+compatability('pagination_link_selector',null,null)).html('');	
 		}
-
 	}
-
 	var on_click_listener = function(){
-
 		ACTIVE_TODO_OC_START
 		NOTE : it will bind to all kind of such on_click events of pagination, it will be private but it may broadcast notification with a callback which js layers of like tableview and so on can call when they recieve their own click event or they can simply call below on_click function". so it is private function.
 		ACTIVE_TODO_OC_END
-
 		-- aa 3 mate comman click event banavano -- to a
 		-- compatibility function mathi selector lavano -- to a 
 			-- compatibility function ma section ni condition kem implement karvani(shraddha ne pushvu, compatibility function na example jova hoy to common.js ma swatches module mase) -- to a
@@ -2124,7 +2072,6 @@ jQuery(document).ready(function($){
 		jQuery('[name="paged"]').val('1');
 		// jQuery.fn.eo_wbc_filter_change(true);
 		window.document.splugins.filters.api.eo_wbc_filter_change_wrapper(true);
-
 	});*/
 
 });
@@ -2180,4 +2127,3 @@ function reset_button(e,selector){
 	jQuery(selector).filter(".eo_wbc_button_selected").trigger('click');
 	return false;
 }
-	

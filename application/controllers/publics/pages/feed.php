@@ -276,13 +276,13 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
             //drop type var from below and set name of the one only template, simply set it hardcoded -- to b done
             $args['data']['template_data'] = array();
             $args['data']['template_data']['template_key'] = 'woo_dropdown_attribute-template_part';
-            $args['data']['template_data']['template_sub_dir'] = 'single-product/variations-swatches/woo_dropdown_attribute';
+            $args['data']['template_data']['template_sub_dir'] = 'loop/variations-swatches/woo_dropdown_attribute';
             $args['data']['template_data']['data'] = $args['data'];
             $args['data']['template_data']['singleton_function'] = 'wbc';
 
 
             $args['widget_key'] = '';
-            $args['template_sub_dir'] = 'single-product/variations-swatches/woo_dropdown_attribute';
+            $args['template_sub_dir'] = 'loop/variations-swatches/woo_dropdown_attribute';
             $args['template_option_key'] = '';
             $args['option_group_key'] = '';
             $args['template_key'] = 'woo_dropdown_attribute';
@@ -299,12 +299,12 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
                 ACTIVE_TODO_OC_END*/
             $args['data']['template_data'] = array();
             $args['data']['template_data']['template_key'] = 'sp_variations_optionsUI-common-option_template_part';
-            $args['data']['template_data']['template_sub_dir'] = 'single-product/variations-swatches';
+            $args['data']['template_data']['template_sub_dir'] = 'loop/variations-swatches';
             $args['data']['template_data']['data'] = $args['data'];
             $args['data']['template_data']['singleton_function'] = 'wbc';
 
             $args['widget_key'] = '';
-            $args['template_sub_dir'] = 'single-product/variations-swatches';
+            $args['template_sub_dir'] = 'loop/variations-swatches';
             $args['template_option_key'] = '';
             $args['option_group_key'] = '';
             $args['template_key'] = 'sp_variations_optionsUI-common';
@@ -316,7 +316,7 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
             // drop type var from below and set name of the one only template, simply set it hardcoded -- to b done
 
             $args['widget_key'] = '';
-            $args['template_sub_dir'] = 'single-product/variations-swatches';
+            $args['template_sub_dir'] = 'loop/variations-swatches';
             $args['template_option_key'] = '';
             $args['option_group_key'] = '';
             $args['template_key'] = 'sp_variations_optionsUI-common-ribbon_wrapper';

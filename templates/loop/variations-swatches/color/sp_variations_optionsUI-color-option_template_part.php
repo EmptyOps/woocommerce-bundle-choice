@@ -10,3 +10,51 @@
         <span class="spui_variable_item_span_color" style="background-color:#353535;"></span>
     </div>
 </li>
+
+
+<?php
+
+$template = array();
+
+$template = array(
+    'type' => 'div',
+    'class' => 'spui_color_widget',
+    'child' => array(
+        array(
+            'type' => 'ul',
+            'class' => 'spui_single_product_color_variable_items',
+            'attr' => array( 'role' => 'spui_radiogroup', 'aria-label' => 'spui_color' ),
+            'child' => array(
+                array(
+                    'type' => 'li',
+                    'class' => 'spui_color_variable_item',
+                    'attr' => array( 'aria-checked' => 'false', 'tabindex' => '0', 'role' => 'radio' ),
+                    'child' => array(
+                        array(
+                            'type' => 'div',
+                            'class' => 'spui_color_variable_item_contents',
+                            'child' => array(
+                                array(
+                                    'type' => 'span',
+                                    'class' => 'spui_variable_item_span_color',
+                                    'attr' => array( 'style' => 'background-color:#353535;' ),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+                array(
+                    'type' => 'li',
+                    'class' => 'spui_color_variation_item_more',
+                    'child' => array(
+                        array(
+                            'type' => 'a',
+                            'preHTML' => '+2 More',
+                            'href' => '#',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+    ),
+);
