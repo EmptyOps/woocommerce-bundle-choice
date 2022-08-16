@@ -1196,7 +1196,8 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
                       // var selects = [];
                       // var disabled_selects = [];
                       // var out_of_stock_selects = [];
-                      // var $selected_variation_item = $(this).parent().prev().find('.woo-selected-variation-item-name');
+                      // var $selected_variation_item = $(this).parent().prev()
+                      ('.woo-selected-variation-item-name');
 
                       // this need to be moved to compatability function, so from here there would be call to the compatability function -- to s 
                       // // For Avada FIX
@@ -2496,7 +2497,7 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
                 ACTIVE_TODO_OC_END*/
 
          _this.product_id = _this.$variations_form.data('product_id');
-         _this.is_variation_product = _this.$variations_form.length > 0;
+         _this.data.is_variation_product = _this.$variations_form.length > 0;
  
          _this.$base_element.addClass('spui-wbc-gallery_images-loaded');
  
@@ -3613,10 +3614,10 @@ window.document.splugins.wbc.variations.gallery_images.single_product.core = fun
 
     return {
  
-         init: function() { 
+        init: function() { 
  
-             init_private();
-         } 
+            init_private();
+        } 
  
     }; 
 };

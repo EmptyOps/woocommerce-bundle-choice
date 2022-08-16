@@ -1097,6 +1097,10 @@ class SP_WBC_Variations extends SP_Variations {
 			}
 		}
 
+		if( ( ! $is_product_page || $woocommerce_loop['name'] == 'related' ) ) {
+
+		}
+
 		/*echo '</select>';*/
 
 		return $data;
