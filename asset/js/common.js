@@ -513,6 +513,18 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
          //  TODO implement 
      };
  
+     var is_template_exists_private = function( tmpl_id, templating_lib ) {
+ 
+         //  TODO need to upgrade logic if below condition is not relible 
+         if(jQuery('#'+tmpl_id).length > 0) {
+            
+            return true;
+         } else{
+           
+            return false;
+         }
+     };
+
      return {
  
          get_template: function( tmpl_id, templating_lib ) {
@@ -526,6 +538,10 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
          set_template: function( tmpl_id, template_content, templating_lib ) {
  
              set_template( tmpl_id, template_content, templating_lib ); 
+         },
+         is_template_exists: function( tmpl_id, templating_lib ) {
+ 
+             return is_template_exists_private( tmpl_id, templating_lib ); 
          }
  
      };
@@ -533,6 +549,9 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
  
  //  publish it 
  window.document.splugins.templating.api = window.document.splugins.templating.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
+
+ // port it to access it easily
+ splugins.templating = window.document.splugins.templating.api; 
  
  ///////////// -- 15-06-2022 -- @drashti -- ///////////////////////////////
  
@@ -2409,7 +2428,9 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
  
     _this.data = {};
     _this.binding_stats = {};
- 
+    
+    _this.data.is_skip_sp_slzm = false;  
+    _this.data.is_skip_sp_slider = false;  
 
     // NOTE: for products with simple type will not need this, but for variable products it will be needed. 
     _this.data.current_variation = null;
@@ -2427,6 +2448,16 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
     var init_private = function() {
 
         console.log(" gallery_images init_private ");
+
+        if(window.document.splugins.common.is_category_page){
+
+            _this.data.is_skip_sp_slzm = true; 
+        }
+
+        if(window.document.splugins.common.is_category_page){
+
+            _this.data.is_skip_sp_slider = true; 
+        }
 
         window.document.splugins.events.api.createSubject( 'gallery_images', ['process_images','sp_slzm_refresh', 'sp_variations_gallery_images_loaded', 'sp_slzm_init', 'sp_slzm_refresh_zoom', 'slider_thumb_click', 'process_zoom_template'] );
  
@@ -2637,6 +2668,7 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
 
     var preprocess_data = function(data) {
 
+        -- ano base element no flow and loopbox_this.data no flow ma ave se k nay te confirm karvanu ? 
         console.log( " gallery_images preprocess_data ");
         console.log( data.product_variations ); 
 
@@ -2754,7 +2786,9 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
 
               process_pages(type);
               
-              process_slider_and_zoom(type);
+              if(!_this.data.is_skip_sp_slider){
+                process_slider_and_zoom(type);  
+              }
               
               process_events(type);
 
@@ -2838,16 +2872,19 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
       // this._element.trigger('before_woo_variation_gallery_init', [this, images]);
 
       // ACTIVE_TODO if requared we may neet to provide destroy or stop listener in our sp_slzm api 
-      // this.destroySlick();      
+      // this.destroySlick();    
 
-      process_slider_template(images);
+      if(!_this.data.is_skip_sp_slider){
 
-        var index = 0;
-        if (typeof _this.$slider_loop_container.data('selected-index') !== 'undefined') {
-            index = _this.$slider_loop_container.data('selected-index');
-        }
-        
-        console.log('gallery_images process_images_template index=='+index);
+        process_slider_template(images);  
+      }
+      
+      var index = 0;
+      if (typeof _this.$slider_loop_container.data('selected-index') !== 'undefined') {
+        index = _this.$slider_loop_container.data('selected-index');
+      }
+    
+      console.log('gallery_images process_images_template index=='+index);
 
       process_zoom_template(images,index,hasGallery);
 
@@ -2857,28 +2894,32 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
         _this.$zoom_container.removeClass('spui-wbc-gallery_images-has-product-thumbnail');
       }
 
-      splugins._.delay(function () {
-        
-        if (_this.is_variation_product) {
+      if(!_this.data.is_skip_sp_slzm){
+
+        splugins._.delay(function () {
             
-            // if(typeof(_this.data.is_sp_slzm_init_done) == undefined || _this.data.is_sp_slzm_init_done == false) {
-            if( !window.document.splugins.common._o(_this.data, 'is_sp_slzm_init_done') ){
+            if (_this.is_variation_product) {
+                
+                // if(typeof(_this.data.is_sp_slzm_init_done) == undefined || _this.data.is_sp_slzm_init_done == false) {
+                if( !window.document.splugins.common._o(_this.data, 'is_sp_slzm_init_done') ){
 
-                // ACTIVE_TODO debug should be called once -- to s
-                console.log('is_variation_product sp_slzm_init called');
-                _this.data.is_sp_slzm_init_done = true;
-                sp_slzm_init();
+                    // ACTIVE_TODO debug should be called once -- to s
+                    console.log('is_variation_product sp_slzm_init called');
+                    _this.data.is_sp_slzm_init_done = true;
+                    sp_slzm_init();
 
+                }
+               
             }
-           
-        }
 
             console.log("sp_slzm_refresh notification");
 
             var sp_slzm_refresh_callback = null;
             window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'sp_slzm_refresh', {}, sp_slzm_refresh_callback );
 
-      }, 1); 
+        }, 1); 
+
+      }
 
     };
  
@@ -2981,8 +3022,11 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
     var process_events = function(type) {
 
         console.log("process_events");
- 
-         slider_thumb_click_listener(type);
+        
+        if(!_this.data.is_skip_sp_slider){
+
+            slider_thumb_click_listener(type);   
+        }    
  
          zoom_area_hover_listener(type);
  
@@ -3260,10 +3304,14 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
             // process_zoom_template(_this.data.current_variation.variation_gallery_images,index,_this.data.current_variation.variation_gallery_images.length > 1);          
         }
 
-        console.log("sp_slzm_refresh_zoom notification");
+        if(!_this.data.is_skip_sp_slzm){
 
-        var sp_slzm_refresh_zoom_callback = null;
-        window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'sp_slzm_refresh_zoom', {}, sp_slzm_refresh_zoom_callback );
+            console.log("sp_slzm_refresh_zoom notification");
+
+            var sp_slzm_refresh_zoom_callback = null;
+            window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'sp_slzm_refresh_zoom', {}, sp_slzm_refresh_zoom_callback );
+
+        }
 
         // ACTIVE_TODO/TODO it is better heirachically, if the click is bind on our img-item class stuctor only, and then we recive here that element only in above function Arguments.
         //     -- and than we can simply get type from element data-type which is mentanable due to well maintained heirachy insted of below index based image data read which is bound to change.
@@ -3372,11 +3420,14 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
 
      var sp_slzm_init = function() {
 
-        console.log("sp_slzm_init notification");
+        if(!_this.data.is_skip_sp_slzm){
+            
+            console.log("sp_slzm_init notification");
 
-         var sp_slzm_init_callback = null;
+            var sp_slzm_init_callback = null;
             window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'sp_slzm_init', {} , sp_slzm_init_callback);
-
+        }
+        
      };
  
      // ACTIVE_TODO_OC_START
@@ -3609,7 +3660,104 @@ window.document.splugins.wbc.variations.gallery_images.single_product.core = fun
         
         window.document.splugins.wbc.variations.gallery_images.api.init();
 
+        init_preprocess(event);
+
     };
+
+    var init_preprocess = function(event) {
+
+        preprocess(element, event)
+    };
+
+    var preprocess = function(element, event) {
+
+        process_images(type,element);
+    };
+
+    var process_images = function(type=null, element=null) {
+
+        process_images_inner(type, element);    
+    };        
+
+    var process_images_inner = function(type, element) {
+
+        process_events(type);
+    };
+
+    var process_events = function(type) {
+
+        zoom_area_hover_in_listener(type);
+    
+        on_zoom_area_hover_in(type);
+    
+        zoom_area_hover_in(type);
+    
+        zoom_area_hover_out_listener(type);
+    
+        on_zoom_area_hover_out(type);
+    
+        zoom_area_hover_out(type);
+    
+    };
+
+    var zoom_area_hover_in_listener = function(type) {
+
+        if(window.document.splugins.common._b(_this.binding_stats, 'zoom_area_hover_in_listener', type)){
+            return false;
+        }        
+        
+        _this.$zoom_container.on("mouseenter","",function(){
+
+        });
+
+        on_zoom_area_hover_in(type);
+    }
+
+    var zoom_area_hover_out_listener = function(type) {
+        
+        if(window.document.splugins.common._b(_this.binding_stats, 'zoom_area_hover_out_listener', type)){
+            return false;
+        }   
+
+        _this.$zoom_container.on("mouseleave","",function(){
+
+        });   
+
+        on_zoom_area_hover_out(type);   
+    }
+
+    var on_zoom_area_hover_in = function(type) {
+        
+        zoom_area_hover_in(type);
+    }
+
+    var on_zoom_area_hover_out = function(type) {
+        
+        zoom_area_hover_out(type);
+    }
+
+    var zoom_area_hover_in = function(type) {
+        
+        var template_id = _this.configs.template.zoom.id+'_'+index_inner (?) + '_hover';
+
+        var template_var = template( _this.configs.template.zoom.id+'_'+index_inner, templating_lib );
+
+        if(splugins.templating.is_template_exists(template_id, templating_lib)) {
+
+        }
+    }
+
+    var zoom_area_hover_out = function(type) {
+        
+        var template_id = _this.configs.template.zoom.id+'_'+index_inner (?) + '_hover';
+
+        var template_var = template( _this.configs.template.zoom.id+'_'+index_inner, templating_lib );
+
+        if(splugins.templating.is_template_exists(template_id, templating_lib)) {
+
+        }
+                
+    }          
 
     return {
  
