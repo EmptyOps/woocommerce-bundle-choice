@@ -616,7 +616,7 @@ class SP_WBC_Variations extends SP_Variations {
 				$variation_get_max_purchase_quantity['variation_gallery_images'][ $i ] = $this->get_product_attachment_props( $variation_gallery_image_id );
 			}
 		/*	wbc_pr($variation_get_max_purchase_quantity);
-die();*/
+			die();*/
 		}
 
 		// echo ">>>>>>>>>>> gallery_images_finel";
@@ -764,7 +764,7 @@ die();*/
 				ACTIVE_TODO_OC_END*/
 
 		// ob_start();
-		$data = $this->get_data('swatches'); 
+		$data = $this->fetch_data($for_section, $product, $args )/*get_data('swatches')*/; 
 		$attributes = $data['attributes']; /*$product->get_variation_attributes();*/
 		$variations = $data['variations']; /*$product->get_available_variations();*/
 
@@ -1095,6 +1095,10 @@ die();*/
 					/*echo '<option value="' . esc_attr( $option ) . '" ' . $selected . '>' . esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) . '</option>';*/
 				}
 			}
+		}
+
+		if( ( ! $is_product_page || $woocommerce_loop['name'] == 'related' ) ) {
+
 		}
 
 		/*echo '</select>';*/

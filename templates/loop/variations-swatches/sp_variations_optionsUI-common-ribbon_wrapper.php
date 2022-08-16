@@ -14,7 +14,7 @@
 </div>
 
 
-<!--Size-->
+<!--Button-->
 <div class="spui_size_widget">
     <ul role="radiogroup" aria-label="spui_size" class="spui_single_product_size_variable_items spui_size_button_variable_items_wrapper">
     </ul>
