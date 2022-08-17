@@ -4,6 +4,82 @@
  * in case if you want to implement your custom html then follow our documentation guide on how to add add custom html templates by following this link https://sphereplugins.com/docs/how-to-override-templates-using-custom-html
  */
 
+<div class="spui_thumbnail_shop_wrap">
+    <!--asset-->
+    <div class="spui_thumbnail_shop_asset">
+        <img src="" alt="asset_shop_1" class="img-fluid">
+    </div>
+    <!--video-->
+    <div class="spui_thumbnail_shop_video">
+        <video autoplay muted>
+            <source src="" type="video/mp4">
+            <source src="" type="video/ogg">
+        </video>
+    </div>
+    <!--iframe-->
+    <div class="spui_thumbnail_shop_video_iframe">
+        <iframe src=""></iframe>
+    </div>
+
+</div>
+
+
+
+<?php 
+$template = array(
+    'type' => 'div',
+    'class' => 'spui_thumbnail_shop_wrap',
+    'child' => array(
+        array(
+            'type' => 'div',
+            'class' => 'spui_thumbnail_shop_asset',
+            'child' => array(
+                array(
+                    'type' => 'img',
+                    'class' => 'img-fluid',
+                    'src' => '',
+                    'attr' => array( 'alt' => 'asset_shop_1' ),
+                ),
+            ),
+        ),
+        array(
+            'type' => 'div',
+            'class' => 'spui_thumbnail_shop_video',
+            'child' => array(
+                array(
+                    'type' => 'video',
+                    'attr' => array( 'autoplay' => '', 'muted' => '' ),
+                    'child' => array(
+                        array(
+                            'type' => 'source',
+                            'src' => '',
+                            'attr' => array( 'type' => 'video/mp4' ),
+                        ),
+                        array(
+                            'type' => 'source',
+                            'src' => '',
+                            'attr' => array( 'type' => 'video/ogg' ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        array(
+            'type' => 'div',
+            'class' => 'spui_thumbnail_shop_video_iframe',
+            'child' => array(
+                array(
+                    'type'=>'header',
+                    'tag'=>'iframe',
+                    'src' => '',
+                ),
+            ),
+        ),
+    ),
+)
+
+
+
 $template = null;
 if(empty($image['extra_params_org']['type']) || $image['extra_params_org']['type'] == 'image' ) {
 

@@ -551,4 +551,9 @@ class WBC_WC {
         return false;
     }
 
+    /////// @shraddha ///////
+    public function get_sub_category_of_category_in_product() {
+
+    }
+
 }
