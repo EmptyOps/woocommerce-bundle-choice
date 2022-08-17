@@ -89,7 +89,7 @@ if(!empty($gallery_images_template_data['attachment_ids_loop_image'])){
     -- main container */
 $template = array(
     'type'=>'div',
-    'class'=> array('Zoom_Rigt-sec', 'img-wrapper'),
+    'class'=> 'spui_thumbnail_shop_wrap '.$image['gallery_images_wrapper_classes'],
     'child'=>$template_inner,
 
         // ACTIVE_TODO_OC_START

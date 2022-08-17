@@ -43,7 +43,7 @@ if(empty($image['extra_params_org']['type']) || $image['extra_params_org']['type
                 'child' => array(
                     array(
                         'type' => 'video',
-                        'attr' => array('preload'=>'auto', 'controlsList'=>'nodownload','autoplay'=>''),
+                        'attr' => array('preload'=>'auto', 'controlsList'=>'nodownload','autoplay'=>'','muted' => ''),
                         'child' => array(
                             array(
                                 'type'=>'header',
