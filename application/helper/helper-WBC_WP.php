@@ -249,7 +249,7 @@ class WBC_WP {
         // NOTE: we will always use plugin slug for such condition creation. or the most reliable and simpest method to check if certain plugin is active by passing their slug so we would need to create the applicable function in the wp helper.
 
         
-        ACTIVE_TODO implement based on  plugin slug -- to h
+        // ACTIVE_TODO implement based on  plugin slug -- to h
         return is_plugin_active( $plugin );
     }
 }
