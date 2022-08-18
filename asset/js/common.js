@@ -3774,13 +3774,13 @@ if(window.document.splugins.common.is_category_page) {
 
     jQuery(document).ready(function() {
 
-        window.setTimeout(function(){
+        // window.setTimeout(function(){
 
             //  publish it 
             window.document.splugins.wbc.variations.gallery_images.single_product.api = window.document.splugins.wbc.variations.gallery_images.single_product.core( common_configs.single_product_configs );
             window.document.splugins.wbc.variations.gallery_images.single_product.api.init();
 
-        },2000);
+        // },2000);
     });
 
 }
