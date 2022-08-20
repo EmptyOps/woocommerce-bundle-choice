@@ -1098,8 +1098,10 @@ class SP_WBC_Variations extends SP_Variations {
 			}
 		}
 
-		if( ( ! $is_product_page || $woocommerce_loop['name'] == 'related' ) ) {
-
+		need to be finalized -- to h & -- to s
+		global $woocommerce_loop;
+		if ( $defined_limit > 0 && ( ! is_product() || $woocommerce_loop['name'] == 'related' ) ) {
+			$terms = array_slice( $terms, 0, $defined_limit );
 		}
 
 		/*echo '</select>';*/
