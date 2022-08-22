@@ -5,9 +5,9 @@
  */
 class SP_SPlugins {
 
+    // NOTE: we needed to set element in the constructor since right now the class heirarchy is just following the name space. but very soon in future in 2nd or 3rd revision we should and must define standard class heirarchy where widget module class would be extending from some base widget module class and the class heirarchy for the same we could define. or we can simply follow the php class heirarchy to create the js layers class heirarchies or maybe the mix of both is what we need. 
+    //     NOTE: however in the meantime for the classes which are extended from here, which would be all for now, could extend simply pass null in first parameter during the object creation. 
     constructor(element, configs) {
-        
-        constructor(element, configs) {
         
         // Calling parent's constructor
         super(element, configs);
@@ -20,8 +20,6 @@ window.document.splugins.common = window.document.splugins.common || {};
 class SP_WBC extends SP_SPlugins {
 
     constructor(element, configs) {
-       
-        constructor(element, configs) {
         
         // Calling parent's constructor
         super(element, configs); 
@@ -627,8 +625,6 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
 class SP_WBC_Variations extends SP_WBC {
 
     constructor(element, configs) {
-
-        constructor(element, configs) {
         
         // Calling parent's constructor
         super(element, configs);
@@ -1263,8 +1259,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
                       // var selects = [];
                       // var disabled_selects = [];
                       // var out_of_stock_selects = [];
-                      // var $selected_variation_item = $(this).parent().prev()
-                      ('.woo-selected-variation-item-name');
+                      // var $selected_variation_item = $(this).parent().prev().find('.woo-selected-variation-item-name');
 
                       // this need to be moved to compatability function, so from here there would be call to the compatability function -- to s 
                       // // For Avada FIX
