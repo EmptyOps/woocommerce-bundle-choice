@@ -13,10 +13,6 @@
       </a> 
     }
     ?>  
-  	<a class="item center <?php echo isset($_GET[$second_tab_id])?'':'active' ?>" data-category="<?php _e($first_tab_category); ?>" style="margin-right: 0px !important;" data-tab="filter_setting_advance_first_tabs" data-tab-name="<?php _e($first_tab_id); ?>" data-tab-altname="<?php _e($second_tab_id); ?>">
-  		<!-- $prefix.'_fconfig_set' -->
-  	<?php _e($first_tab_label); ?>
-  	</a>
 
   	<!-- <a class="center item <?php /*echo isset($_GET[$second_tab_id])?'active':'' */?>" data-category="<?php/* _e($second_tab_category);*/ ?>" style="margin-left: 0px !important;" data-tab="filter_setting_advance_second_tabs" data-tab-name="<?php/* _e($second_tab_id); */?>" data-tab-altname="<?php /*_e($first_tab_id); */?>">
     <?php _e($second_tab_label); ?> -->
@@ -37,12 +33,16 @@
         $('[name="cat_filter__two_tabs"]').val($(this).data('category'));*/
 
         jQuery('[name="_current_category"]').val(jQuery(this).data('category'));
+
         jQuery('[name="_category"]').val(jQuery(this).data('category'));
 
         //cat_filter__two_tabs
 				$('.filter_setting_advance_two_tabs .item').removeClass('active');
+
 				$(this).addClass('active');
+
         let group_id = $(this).data('tab-name');
+
         let display_style = 'inline-block';
         <?php if(wp_is_mobile() and !wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
           display_style='block';
