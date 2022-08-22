@@ -1121,6 +1121,52 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     var filter_set_click = function() {
 
+       	window.document.splugins.events.api.subscribe_observer_filter('filters', 'wbc', 'filter_set_click');
+
+    	--- aa code woo-bundle-choice/application/view/publics/filters/two_tabs.php mathi move karyo se @a ---
+ 		--- start ---
+ 		let group_id_alt = $(this).data('tab-altname');
+        $('[data-tab-group="'+group_id_alt+'"]').css('display','none');
+
+        $('[data-tab-group="'+group_id_alt+'"]').each(function(){
+          let reset_script = $(this).find('[data-reset]').data('reset');
+          if(typeof(reset_script)!==typeof(undefined) && reset_script!=''){
+            eval(reset_script);
+          }        
+
+          <?php if(wp_is_mobile() and !wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
+            if($(this).hasClass('active')){
+              $(this).trigger('click');
+            }
+            reset_script = $(this).next().find('[data-reset]').data('reset');
+            if(typeof(reset_script)!==typeof(undefined) && reset_script!=''){
+              eval(reset_script);
+            }        
+          <?php endif; ?>
+
+          <?php if(wp_is_mobile() and wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
+            if($(this).hasClass('active')){
+              $(this).trigger('click');
+            }          
+            
+            reset_script = $(this).next().find('[data-reset]').data('reset');
+            if(typeof(reset_script)!==typeof(undefined) && reset_script!=''){
+              eval(reset_script);
+            }  
+
+            jQuery(".close_sticky_mob_filter").trigger('click');
+
+          <?php endif; ?>
+
+          
+        });
+
+        <?php if(wp_is_mobile() and wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
+          $('#advance_filter_mob_alternate').removeClass('status_hidden');
+          $(".toggle_sticky_mob_filter.advance_filter_mob[data-tab-group='"+$(this).data('tab-altname')+"'],.toggle_sticky_mob_filter.advance_filter_mob[data-tab-group='']").hide();
+        <?php endif; ?>    
+        --- end ---	
+
     };
 
     var change = function() {
