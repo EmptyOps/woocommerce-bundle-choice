@@ -385,6 +385,21 @@ if(is_category()) {
 	    }
 
 	</style>
+	<style type="text/css">
+		/*---more-css---*/
+	    .spui_swatches_more__container {
+	        width: auto !important;
+	        height: auto !important;
+	        box-shadow: none !important;
+	        border-radius: 0 !important;
+	        align-self: center !important;
+	    }
+	    .spui_swatches_more__container a{ 
+	        color: #0274be !important;
+	        text-decoration: none !important;
+	        display: block !important;
+	    }
+	</style>
 	
 <?php	
 }

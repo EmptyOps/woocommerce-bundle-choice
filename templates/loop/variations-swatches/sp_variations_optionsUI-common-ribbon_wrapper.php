@@ -41,7 +41,7 @@ if ($woo_dropdown_attribute_html_data['type'] == 'button') {
 if () {
     $template = array(
         'type' => 'li',
-        'class' => 'spui_variable_item_more',
+        'class' => 'spui_swatches_more__container',
         'child' => array(
             array(
                 'type' => 'a',
