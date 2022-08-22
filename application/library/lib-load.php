@@ -158,6 +158,18 @@ if(!class_exists('WBC_Loader')) {
 			}			
 		}
 		
+		public function template_key_option($args){
+
+	        
+	        $template_key_option = '';
+
+	        if(!empty($args['template_option_key'])) {
+	            $template_key_option = wbc()->options->get_option($args['option_group_key'],$args['template_option_key'],isset($args['template_option_default'])?$args['template_option_default']:'');
+	        }
+
+	        return $template_key_option;
+	    }
+
 	    public function template_path($args){
 
 	        /*function will accept the args param=null ... which will support the param like template_option_key, option_group_key 
@@ -178,11 +190,7 @@ if(!class_exists('WBC_Loader')) {
 
 	        $template_key = null;
 
-	        $template_key_option = '';
-
-	        if(!empty($args['template_option_key'])) {
-	            $template_key_option = wbc()->options->get_option($args['option_group_key'],$args['template_option_key'],isset($args['template_option_default'])?$args['template_option_default']:'');
-	        }
+	        $template_key_option = $this->template_key_option($args);
 
             $template_dir = str_replace('{{template_key}}',$template_key_option,$template_dir);
 
@@ -198,12 +206,18 @@ if(!class_exists('WBC_Loader')) {
 	        return $template_dir.$template_key;
 	    }
 
-		public function template( $template_path, $data=array(),$is_template_dir_extended = false,$singleton_function = null,$is_return_template = false,$is_devices_templates = false) {
+		public function template( $template_path, $data=array(),$is_template_dir_extended = false,$singleton_function = null,$is_return_template = false,$is_devices_templates = false, $alternate_widget_hook = null,$template_key_option = null) {
 			//	load template file under /view directory
 			//wbc_pr($template_path);
 			$path = null;
 			if ($is_template_dir_extended) {
-				$path = constant( strtoupper( $singleton_function ).'_TEMPLATE_DIR_EXTENDED').$template_path.".php";
+
+				if (empty($alternate_widget_hook)) {
+					$path = constant( strtoupper( $singleton_function ).'_TEMPLATE_DIR_EXTENDED').$template_path.".php";
+				}else{
+					$path = constant(apply_filters($alternate_widget_hook,strtoupper( $singleton_function ).'_TEMPLATE_DIR_EXTENDED'),$template_path,$data,$template_key_option)).$template_path.".php";
+				}
+				
 			}else{
 				$path = constant('EOWBC_TEMPLATE_DIR').$template_path.".php";
 			}
@@ -232,7 +246,6 @@ if(!class_exists('WBC_Loader')) {
 		            	$template_path_new = str_replace('{{template_key_device}}','desktop',$path);
 		            	$path = $template_path_new;
 		            }
-
 
 		            // wbc_pr( "path >>>>>>>>>>>>>>>>>>>>>>> " . $path );
 		            // wbc_pr( "template_path_new >>>>>>>>>>>>>>>>>>>>>>> " . $template_path_new );

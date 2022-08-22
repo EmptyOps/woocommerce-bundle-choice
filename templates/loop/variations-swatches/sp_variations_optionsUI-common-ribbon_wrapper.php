@@ -36,12 +36,24 @@ if ($woo_dropdown_attribute_html_data['type'] == 'button') {
 
 }
 
--- put difind limit if conndition -- to s
+$options = null;
 
-if () {
+if ( $woo_dropdown_attribute_html_data['product'] && taxonomy_exists( $variable_item_data['attribute'] ) ) {
+
+    $options = $variable_item_data['terms'];  
+
+} else {
+
+    $options = $woo_dropdown_attribute_html_data['options']; 
+
+}
+
+-- difind limit if conndition need to confirm data passing -- to s
+
+if ( count( $options ) > $woo_dropdown_attribute_html_data['defined_limit'] ) {
     $template = array(
         'type' => 'li',
-        'class' => 'spui_variable_item_more',
+        'class' => 'spui_swatches_more__container',
         'child' => array(
             array(
                 'type' => 'a',
