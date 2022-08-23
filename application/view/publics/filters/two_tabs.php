@@ -4,8 +4,6 @@
 $two_tabs_confings = array();
 $two_tabs_confings['filter_setting_alternate_mobile'] = wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile');
 
-
-
  ?>
 
 <?php $category_array = array_column($filter_sets_data, 'first_tab_category'); ?>
