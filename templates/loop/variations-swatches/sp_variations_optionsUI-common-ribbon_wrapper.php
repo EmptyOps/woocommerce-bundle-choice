@@ -70,7 +70,7 @@ $template = array(
     'child' => array(
         array(
             'type' => 'ul',
-            'class' => $ul_class . $woo_dropdown_attribute_html_data['swatches_variable_items_wrapper_classes'],
+            'class' => $ul_class . $variable_item_wrapper_data['class_wrapper'],
             'attr' => array( 'data-attribute_name' => esc_attr( wc_variation_attribute_name( $attribute ) ),'data-attribute_values' =>wc_esc_json( wp_json_encode( array_values( $woo_dropdown_attribute_html_data['options'] ) ) ), 'data-type'=>$woo_dropdown_attribute_html_data['type'],'role' => $ul_role, 'aria-label' => $ul_label),
             'child'=>array(
                 array(

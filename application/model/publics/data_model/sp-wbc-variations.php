@@ -215,6 +215,17 @@ class SP_WBC_Variations extends SP_Variations {
 			//NOTE: from here we are setting to video, so whatever data pre prepared for attachment should be set from here. and then it is planned that video url type would work as if it is video type, so all that is needed is setting data accurately from here.
 			$props['extra_params_org']['type']   = 'video';
 
+		}
+
+
+		// classes
+		$props['class']                         = 'img-item img-item-'.$props['extra_params_org']['type'].' img-item-'.$props['extra_params_org']['type'].'-'.wbc()->common->current_theme_key();
+
+		$props['class_wrapper']                 = '';
+
+
+		if($type == 'video_url') {
+
 			$props['video_src']   = esc_url( $attachment_id );
 			return $props;
 
@@ -1023,6 +1034,9 @@ class SP_WBC_Variations extends SP_Variations {
 		$data['woo_dropdown_attribute_html_data']['show_option_none']      = $args['hook_callback_args']['hook_args']['show_option_none'] ? true : false;
 		$data['woo_dropdown_attribute_html_data']['show_option_none_text'] = $args['hook_callback_args']['hook_args']['show_option_none'] ? $args['hook_callback_args']['hook_args']['show_option_none'] : esc_html__( 'Choose an option', 'woocommerce' ); // We'll do our best to hide the placeholder, but we'll need to show something when resetting options.
 
+		// classes
+		$data['woo_dropdown_attribute_html_data']['class']                 = 'variable-item ' .esc_attr( $variable_item_data['options_loop_type'][$term->slug] ).'-variable-item ' .esc_attr( $variable_item_data['options_loop_type'][$term->slug] ).'-variable-item-'.esc_attr( $term->slug ).' '.esc_attr( $variable_item_data['options_loop_selected_class'][$term->slug]). 'spui-wbc-swatches-variable-item spui-wbc-swatches-variable-item-'.$variable_item_data['options_loop_type'][$term->slug]. ' spui-wbc-swatches-variable-item-header spui-wbc-swatches-variable-item-'.$variable_item_data['options_loop_type'][$term->slug].'-header variable-item-'.wbc()->common->current_theme_key(). ' variable-item-'.esc_attr( $variable_item_data['options_loop_type'][$term->slug] ).'-'.wbc()->common->current_theme_key();
+
 		if ( empty( $data['woo_dropdown_attribute_html_data']['options'] ) && ! empty( $data['woo_dropdown_attribute_html_data']['product'] ) && ! empty( $data['woo_dropdown_attribute_html_data']['attribute'] ) ) {
 			/*ACTIVE_TODO_OC_START
 			-- recieve data in function params to till this function, since I think we have exact same data on above layers but still confirm -- to b 
@@ -1438,7 +1452,9 @@ class SP_WBC_Variations extends SP_Variations {
 		// <div aria-live="polite" aria-atomic="true" class="screen-reader-text">%1$s: <span data-default=""></span></div>
 		// $data = sprintf( '<ul role="radiogroup" aria-label="%1$s"  class="variable-items-wrapper %2$s" data-attribute_name="%3$s" data-attribute_values="%4$s">%5$s</ul>', esc_attr( wc_attribute_label( $attribute ) ), trim( implode( ' ', array_unique( $css_classes ) ) ), esc_attr( \eo\wbc\system\core\data_model\SP_Attribute::instance()->variation_attribute_name($attribute) ), wc_esc_json( wp_json_encode( array_values( $options ) ) ), $contents );
 		
-		
+		// classes
+		$data['variable_item_wrapper_data']['class_wrapper']                 = 'variable-items-wrapper spui-wbc-swatches-variable-items-wrapper spui-wbc-swatches-variable-items-wrapper-'.$woo_dropdown_attribute_html_data['type'].' '.$woo_dropdown_attribute_html_data['type'].'-variable-wrapper';
+
 		return $data;
 
 	}

@@ -124,9 +124,9 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
         } elseif ($page_section == 'swatches_cart_form') {
 
             if ($container_class == 'swatches_cart_form') {
-                $data = $args['hook_callback_args'];
-                unset($args['hook_callback_args']);
-                return $this->load_view($data,$args);
+                
+                remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
+                add_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_single_add_to_cart', 30 );
 
                 remove_action( 'woocommerce_before_shop_loop', '????????', 10 );
             \eo\wbc\model\SP_WBC_Compatibility::instance()->loop_render_compatability('before_shop_loop_item_loop_thumbnail_action', $args);
@@ -135,6 +135,9 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
 
                 } 
 
+                // $data = $args['hook_callback_args'];
+                // unset($args['hook_callback_args']);
+                // return $this->load_view($data,$args);
             }
 
         } elseif ($page_section == 'swatches_reset_link') {
@@ -194,24 +197,24 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
             }, 200, 2);
         } else if ($args['page_section'] == 'swatches_cart_form') {
 
-            $table_container_class = "\\sp\\wbc\\controller\\publics\\feed\\loop\\selectron\\Loop_Get_Template";                      
+            $table_container_class = "\\sp\\wbc\\controller\\publics\\feed\\loop\\selectron\\SP_SLCTRN_Swatches_Cart_Form";                      
             $table_container_object = call_user_func(array($table_container_class,'instance'));
 
             $sections = array(
                 $page_section=>array(
                     'handler_object'=>$table_container_object,
-                    'default_action'=>'',
+                    'default_action'=>'woocommerce_before_shop_loop',
                     'default_params'=>'',
-                    'default_priority'=>'',
+                    'default_priority'=>110,
                     'section'=>$page_section
                 )                    
             );
 
-            \sp\selectron\controller\publics\Publics::render('sp_tableview',$sections);
+            \sp\selectron\controller\publics\Publics::render('woo_bundle_choice',$sections);
 
         } else if ($args['page_section'] == 'swatches_reset_link') {
 
-            $table_container_class = "\\sp\\wbc\\controller\\publics\\feed\\loop\\selectron\\Loop_Get_Template";                      
+            $table_container_class = "\\sp\\wbc\\controller\\publics\\feed\\loop\\selectron\\SP_SLCTRN_Swatches_Reset_Link";                      
             $table_container_object = call_user_func(array($table_container_class,'instance'));
 
             $sections = array(
@@ -224,7 +227,7 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
                 )                    
             );
 
-            \sp\selectron\controller\publics\Publics::render('sp_tableview',$sections);
+            \sp\selectron\controller\publics\Publics::render('woo_bundle_choice',$sections);
 
         }
     }

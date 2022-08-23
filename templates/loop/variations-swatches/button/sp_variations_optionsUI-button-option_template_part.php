@@ -19,7 +19,7 @@ $slug_or_option = is_object($term) ? $term->slug : $term;
 
 $template = array(
     'type' => 'li',
-    'class' => 'spui_button_variable_item '.$woo_dropdown_attribute_html_data['swatches_variable_item_classes'],
+    'class' => 'spui_button_variable_item '.$woo_dropdown_attribute_html_data['class'],
     'attr' => array( 'aria-checked' => 'false', 'tabindex' => '0', 'role' => 'radio' ),
     'child' => array(
         array(
