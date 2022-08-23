@@ -85,7 +85,7 @@ if(empty($image['extra_params_org']['type']) || $image['extra_params_org']['type
 
     $template = array(
         'type' => 'div',
-        'class' => 'spui_thumbnail_shop_asset '.$image['gallery_images_item_classes'],
+        'class' => 'spui_thumbnail_shop_asset '.$image['class'],
         'child' => array(
             'type' => 'image',
             'class' => array('img-fluid','big-img',esc_attr( $image['class'] ), 'img-item', 'img-item-'.$image['extra_params_org']['type'], 'img-item-'.$image['extra_params_org']['type'].'-'.wbc()->common->current_theme_key() ),
@@ -105,7 +105,7 @@ if(empty($image['extra_params_org']['type']) || $image['extra_params_org']['type
              
             $template = array(
                 'type' => 'div',
-                'class' => 'spui_thumbnail_shop_video_iframe '.esc_attr( $image['class'] ) .' img-item img-item-'.$image['extra_params_org']['type'] .' img-item-'.$image['extra_params_org']['type'].'-'.wbc()->common->current_theme_key().' '.$image['gallery_images_item_classes'],
+                'class' => 'spui_thumbnail_shop_video_iframe '.esc_attr( $image['class'] ) .' img-item img-item-'.$image['extra_params_org']['type'] .' img-item-'.$image['extra_params_org']['type'].'-'.wbc()->common->current_theme_key().' '.$image['class'],
                 'child' => array(
                     array(
                         'type' => 'iframe',
@@ -120,7 +120,7 @@ if(empty($image['extra_params_org']['type']) || $image['extra_params_org']['type
             
             $template = array(
                 'type' => 'div',
-                'class' => 'spui_thumbnail_shop_video '.esc_attr( $image['class'] ) .' img-item img-item-'.$image['extra_params_org']['type'] .' img-item-'.$image['extra_params_org']['type'].'-'.wbc()->common->current_theme_key().' '.$image['gallery_images_item_classes'],
+                'class' => 'spui_thumbnail_shop_video '.esc_attr( $image['class'] ) .' img-item img-item-'.$image['extra_params_org']['type'] .' img-item-'.$image['extra_params_org']['type'].'-'.wbc()->common->current_theme_key().' '.$image['class'],
                 'child' => array(
                     array(
                         'type' => 'video',
