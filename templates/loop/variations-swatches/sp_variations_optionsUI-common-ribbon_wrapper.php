@@ -50,7 +50,7 @@ if ( $woo_dropdown_attribute_html_data['product'] && taxonomy_exists( $variable_
 
 -- difind limit if conndition need to confirm data passing -- to s
 
-if ( count( $options ) > $woo_dropdown_attribute_html_data['defined_limit'] ) {
+if ( $woo_dropdown_attribute_html_data['args']['sp_variations_swatches_cat_display_limit'] > 0 && $woo_dropdown_attribute_html_data['args']['actual_total_options'] > $woo_dropdown_attribute_html_data['args']['sp_variations_swatches_cat_display_limit'] ) {
     $template = array(
         'type' => 'li',
         'class' => 'spui_swatches_more__container',

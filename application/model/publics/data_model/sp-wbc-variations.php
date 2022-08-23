@@ -776,7 +776,7 @@ class SP_WBC_Variations extends SP_Variations {
 				ACTIVE_TODO_OC_END*/
 
 		// ob_start();
-		$data = $this->fetch_data($for_section, $product, $args )/*get_data('swatches')*/; 
+		$data = $this->fetch_data('swatches')/*get_data('swatches')*/; 
 		$attributes = $data['attributes']; /*$product->get_variation_attributes();*/
 		$variations = $data['variations']; /*$product->get_available_variations();*/
 
@@ -981,6 +981,40 @@ class SP_WBC_Variations extends SP_Variations {
 		$data = $this->prepare_variable_item_data($data,$args);
 		$data = $this->prepare_variable_item_wrapper_data($data,$args);
 
+		// TODO OPTIMIZATION in future if it seems worth it then we can prevent above layers from preparing unnecessary options and then we can simply skip array slice from below.
+		$data['woo_dropdown_attribute_html_data']['args']['actual_total_options'] = null;
+
+		if ( $data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit'] > 0 && ( ! is_product() || $woocommerce_loop['name'] == 'related' ) ) {
+			
+			if ( $woo_dropdown_attribute_html_data['product'] && taxonomy_exists( $variable_item_data['attribute'] ) ) {
+
+			  	$data['woo_dropdown_attribute_html_data']['args']['actual_total_options'] = count($data['variable_item_data']['terms']);  
+
+			} else {
+
+			  	$data['woo_dropdown_attribute_html_data']['args']['actual_total_options'] = count($data['woo_dropdown_attribute_html_data']['options']);  
+
+			}
+
+			if( $data['woo_dropdown_attribute_html_data']['args']['actual_total_options'] > $data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit'] ) {
+
+				if(isset($data['woo_dropdown_attribute_html_data']['terms'])){
+
+					$data['woo_dropdown_attribute_html_data']['terms'] = array_slice( $data['woo_dropdown_attribute_html_data']['terms'], 0, $data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit'] );
+				}
+
+				if(isset($data['woo_dropdown_attribute_html_data']['options'])){
+
+					$data['woo_dropdown_attribute_html_data']['options'] = array_slice( $data['woo_dropdown_attribute_html_data']['options'], 0, $data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit'] );
+				}
+
+				if(isset($data['variable_item_data']['terms'])){
+
+					$data['variable_item_data']['terms'] = array_slice( $data['variable_item_data']['terms'], 0, $data['variable_item_data']['args']['sp_variations_swatches_cat_display_limit'] );
+				}
+			}
+		}
+
 		return apply_filters('sp_prepare_swatches_data_by_attribute_type',$data);
 	}
 
@@ -1035,7 +1069,12 @@ class SP_WBC_Variations extends SP_Variations {
 		$data['woo_dropdown_attribute_html_data']['show_option_none_text'] = $args['hook_callback_args']['hook_args']['show_option_none'] ? $args['hook_callback_args']['hook_args']['show_option_none'] : esc_html__( 'Choose an option', 'woocommerce' ); // We'll do our best to hide the placeholder, but we'll need to show something when resetting options.
 
 		// classes
-		$data['woo_dropdown_attribute_html_data']['class']                 = 'variable-item ' .esc_attr( $variable_item_data['options_loop_type'][$term->slug] ).'-variable-item ' .esc_attr( $variable_item_data['options_loop_type'][$term->slug] ).'-variable-item-'.esc_attr( $term->slug ).' '.esc_attr( $variable_item_data['options_loop_selected_class'][$term->slug]). 'spui-wbc-swatches-variable-item spui-wbc-swatches-variable-item-'.$variable_item_data['options_loop_type'][$term->slug]. ' spui-wbc-swatches-variable-item-header spui-wbc-swatches-variable-item-'.$variable_item_data['options_loop_type'][$term->slug].'-header variable-item-'.wbc()->common->current_theme_key(). ' variable-item-'.esc_attr( $variable_item_data['options_loop_type'][$term->slug] ).'-'.wbc()->common->current_theme_key();
+		$data['woo_dropdown_attribute_html_data']['class']                 = 'variable-item ' .esc_attr( $data['woo_dropdown_attribute_html_data']['type'] ).'-variable-item spui-wbc-swatches-variable-item spui-wbc-swatches-variable-item-'.$data['woo_dropdown_attribute_html_data']['type']. ' spui-wbc-swatches-variable-item-header spui-wbc-swatches-variable-item-'.$data['woo_dropdown_attribute_html_data']['type'].'-header variable-item-'.wbc()->common->current_theme_key(). ' variable-item-'.esc_attr( $data['woo_dropdown_attribute_html_data']['type'] ).'-'.wbc()->common->current_theme_key();
+
+		// defined limit
+			// NOTE: right now we are limiting swatches options right from the data layer here and maintaining actual_total_options var which can be used on template layers. but if in future woo hiden select dropdown or js layer require all options then we need to provide that in seprate variable. 
+		$data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit'] = get_term_meta( $data['woo_dropdown_attribute_html_data']['id'], 'sp_variations_swatches_cat_display_limit', true );
+
 
 		if ( empty( $data['woo_dropdown_attribute_html_data']['options'] ) && ! empty( $data['woo_dropdown_attribute_html_data']['product'] ) && ! empty( $data['woo_dropdown_attribute_html_data']['attribute'] ) ) {
 			/*ACTIVE_TODO_OC_START
@@ -1086,23 +1125,35 @@ class SP_WBC_Variations extends SP_Variations {
 		}*/
 
 		if ( ! empty( $data['woo_dropdown_attribute_html_data']['options'] ) ) {
+
+			global $woocommerce_loop;
+
 			if ( $data['woo_dropdown_attribute_html_data']['product'] && taxonomy_exists( $data['woo_dropdown_attribute_html_data']['attribute'] ) ) {
 				// Get terms if this is a taxonomy - ordered. We need the names too.
 				$data['woo_dropdown_attribute_html_data']['terms'] = \eo\wbc\system\core\data_model\SP_Attribute::get_product_terms( $data['woo_dropdown_attribute_html_data']['product']->get_id(), $data['woo_dropdown_attribute_html_data']['attribute'], array( 'fields' => 'all' ) );
 
 				$data['woo_dropdown_attribute_html_data']['options_loop_selected'] = array();
 				$data['woo_dropdown_attribute_html_data']['options_loop_option_name'] = array();
+				$data['woo_dropdown_attribute_html_data']['options_loop_class'] = array();
 				foreach ( $data['woo_dropdown_attribute_html_data']['terms'] as $term ) {
 					if ( in_array( $term->slug, $data['woo_dropdown_attribute_html_data']['options'], true ) ) {
+
+						$data['woo_dropdown_attribute_html_data']['options_loop_class'][$term->slug] = esc_attr( $data['woo_dropdown_attribute_html_data']['type'] ).'-variable-item-'.esc_attr( $term->slug );
+
 						$data['woo_dropdown_attribute_html_data']['options_loop_option_name'][$term->slug] = \eo\wbc\system\core\data_model\SP_Attribute::variation_option_name( $term->name, $term, $data['woo_dropdown_attribute_html_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product']);
 						/*echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) ) . '</option>';*/
 					}
 				}
+
 			} else {
 
 				$data['woo_dropdown_attribute_html_data']['options_loop_selected'] = array();
 				$data['woo_dropdown_attribute_html_data']['options_loop_option_name'] = array();
+				$data['woo_dropdown_attribute_html_data']['options_loop_class'] = array();
 				foreach ( $data['woo_dropdown_attribute_html_data']['options'] as $option ) {
+
+					$data['woo_dropdown_attribute_html_data']['options_loop_class'][$option] = esc_attr( $data['woo_dropdown_attribute_html_data']['type'] ).'-variable-item-'.esc_attr( $option );
+
 					// This handles < 2.4.0 bw compatibility where text attributes were not sanitized.
 					$data['woo_dropdown_attribute_html_data']['options_loop_selected'][$option] = sanitize_title( $args['hook_callback_args']['hook_args']['selected'] ) === $args['hook_callback_args']['hook_args']['selected'] ? selected( $args['hook_callback_args']['hook_args']['selected'], sanitize_title( $option ), false ) : selected( $args['hook_callback_args']['hook_args']['selected'], $option, false );
 
@@ -1110,12 +1161,6 @@ class SP_WBC_Variations extends SP_Variations {
 					/*echo '<option value="' . esc_attr( $option ) . '" ' . $selected . '>' . esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) . '</option>';*/
 				}
 			}
-		}
-
-		need to be finalized -- to h & -- to s
-		global $woocommerce_loop;
-		if ( $defined_limit > 0 && ( ! is_product() || $woocommerce_loop['name'] == 'related' ) ) {
-			$terms = array_slice( $terms, 0, $defined_limit );
 		}
 
 		/*echo '</select>';*/
@@ -1254,6 +1299,8 @@ class SP_WBC_Variations extends SP_Variations {
 
 						$data['variable_item_data']['options_loop_selected_class'][$term->slug] = ( sanitize_title( $data['woo_dropdown_attribute_html_data']['args'][ 'selected' ] ) == $term->slug ) ? 'selected' : '';
 
+
+						$data['woo_dropdown_attribute_html_data']['options_loop_class'][$term->slug] = esc_attr( $data['woo_dropdown_attribute_html_data']['type'] ).'-variable-item-'.esc_attr( $term->slug ).' '.esc_attr( $data['variable_item_data']['options_loop_selected_class'][$term->slug]);
 
 						/*ACTIVE_TODO_OC_START
 						--------- a etlu wvs_default_variable_item alg che
@@ -1453,7 +1500,7 @@ class SP_WBC_Variations extends SP_Variations {
 		// $data = sprintf( '<ul role="radiogroup" aria-label="%1$s"  class="variable-items-wrapper %2$s" data-attribute_name="%3$s" data-attribute_values="%4$s">%5$s</ul>', esc_attr( wc_attribute_label( $attribute ) ), trim( implode( ' ', array_unique( $css_classes ) ) ), esc_attr( \eo\wbc\system\core\data_model\SP_Attribute::instance()->variation_attribute_name($attribute) ), wc_esc_json( wp_json_encode( array_values( $options ) ) ), $contents );
 		
 		// classes
-		$data['variable_item_wrapper_data']['class_wrapper']                 = 'variable-items-wrapper spui-wbc-swatches-variable-items-wrapper spui-wbc-swatches-variable-items-wrapper-'.$woo_dropdown_attribute_html_data['type'].' '.$woo_dropdown_attribute_html_data['type'].'-variable-wrapper';
+		$data['variable_item_wrapper_data']['class_wrapper']                 = 'variable-items-wrapper spui-wbc-swatches-variable-items-wrapper spui-wbc-swatches-variable-items-wrapper-'.$data['woo_dropdown_attribute_html_data']['type'].' '.$data['woo_dropdown_attribute_html_data']['type'].'-variable-wrapper';
 
 		return $data;
 

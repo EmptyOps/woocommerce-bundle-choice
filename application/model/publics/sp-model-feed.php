@@ -417,7 +417,7 @@ class SP_Model_Feed extends SP_Feed {
 		// 	}
 		// }
 
-        $data = \eo\wbc\model\publics\data_model\SP_WBC_Variations::prepare_gallery_template_data();
+        $data = \eo\wbc\model\publics\data_model\SP_WBC_Variations::prepare_gallery_template_data(array('page'=>'feed'));
         
 		//////////////// start core
 
@@ -530,6 +530,19 @@ class SP_Model_Feed extends SP_Feed {
 
 		return \eo\wbc\model\publics\data_model\SP_WBC_Variations::prepare_swatches_data($args);
 
+	}
+
+	public function prepare_swatches_reset_link_data($args = array()) {
+
+		$data = array();
+
+		$data['content'] = $args['hook_callback_args']['content'];
+
+		if ( ! is_product() ) {
+			$data['content'] = '';
+		}
+
+		return $data;
 	}
 
 }

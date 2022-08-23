@@ -19,10 +19,7 @@ class SP_SLCTRN_Swatches_Cart_Form extends sp\selectron\controller\publics\conta
 
 	public function hook_render() {
 
-		-- now most likly unassasary so hold for remover 
-		$this->js_render('.products',0);
-
-		if('loop/loop-end.php' === $template_name) {
+		// if('loop/loop-end.php' === $template_name) {
 			// ACTIVE_TODO whenver requred add support in selectron repo to support the local args and other var passing. or is it already implemented by m than jast use it 
 			$args = array(); 
 
@@ -32,7 +29,7 @@ class SP_SLCTRN_Swatches_Cart_Form extends sp\selectron\controller\publics\conta
 	        // $args['hook_callback_args']['located'] = $located;
 	        // $args['hook_callback_args']['hook_args'] = $hook_args;
 			\eo\wbc\controllers\publics\pages\Feed::selectron_hook_render('swatches_cart_form','SP_SLCTRN_Swatches_Cart_Form',false,$args);
-		}
+		// }
 
 	}
 
