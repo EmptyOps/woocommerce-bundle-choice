@@ -435,6 +435,13 @@ class SP_WBC_Variations extends SP_Variations {
 
 	}
 
+	public static function selected_variation_attributes($default_attributes) {
+
+		if none of the above 
+		self::get_default_attributes($data['gallery_images_template_data']['default_attributes']);
+
+	}
+
 	public static function get_default_variation_id($product, $attributes){
 
 		if ( is_numeric( $product ) ) {
@@ -1511,6 +1518,14 @@ class SP_WBC_Variations extends SP_Variations {
 		/*ACTIVE_TODO_OC_START
 		----product no peramiter pass kervano baki che
 		ACTIVE_TODO_OC_END*/
+
+		if(empty($args[$product])) {
+
+			global $product;
+		} else {
+
+			$product = $args[$product]
+		}
 
 		$this->fetch_data( $for_section, $product, $args );
 

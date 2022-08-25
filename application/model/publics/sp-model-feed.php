@@ -423,11 +423,11 @@ class SP_Model_Feed extends SP_Feed {
 
 		//bind to hook from here for the hook that is applied from both slider and zoom module for the images. means add filter here, and provide back with gallery_images data. so simply entire data var will be added to filter var but yeah the variation_gallery_images, attachment_ids etc. would be key -- to b done
 		
-		// add_filter('sp_slzm_slider_images',function($hook_data) use($data){
+		add_filter('sp_slzm_slider_images',function($hook_data) use($data){
 
-		// 	return $data;
+			return $data;
 
-		// });
+		});
 
 		add_filter('sp_slzm_zoom_images',function($hook_data) use($data){
 
@@ -446,7 +446,7 @@ class SP_Model_Feed extends SP_Feed {
 			'child'=>array(
 				array(
 					'type'=>'html',
-					'child'=>/*apply_filters('sp_variations_gallery_images_slider_ui',null)*/'',
+					'child'=>apply_filters('sp_variations_gallery_images_slider_ui',null),
 				),
 				array(
 					'type'=>'html',
