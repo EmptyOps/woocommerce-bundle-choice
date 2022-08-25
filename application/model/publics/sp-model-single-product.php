@@ -997,7 +997,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 	public function render_gallery_images_template_callback($args = array()){
 		
-		global $product;
+		// global $product;
 
 		// /*ACTIVE_TODO_OC_START
 		// ----product no peramiter pass kervano baki che
