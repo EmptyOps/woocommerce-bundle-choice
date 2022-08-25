@@ -1427,6 +1427,7 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 			jQuery(".woocommerce-pagination,.pagination"+compatability('pagination_link_selector',null,null)).html('');	
 		}
 	}
+	
 	var on_click_listener = function(){
 		ACTIVE_TODO_OC_START
 		NOTE : it will bind to all kind of such on_click events of pagination, it will be private but it may broadcast notification with a callback which js layers of like tableview and so on can call when they recieve their own click event or they can simply call below on_click function". so it is private function.
