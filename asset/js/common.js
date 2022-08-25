@@ -2462,6 +2462,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
     }
 }
+
 window.document.splugins.wbc.variations.swatches = window.document.splugins.wbc.variations.swatches || {};
 
 window.document.splugins.wbc.variations.swatches.core = function( configs ) {

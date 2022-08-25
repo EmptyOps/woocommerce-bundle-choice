@@ -165,10 +165,11 @@ class SP_Model_Loop_Gallery_Zoom extends Eowbc_Base_Model_Publics {
 				
 					$html = null;
 					$html = apply_filters($hook_key, $html, $index, $image);
-				}
 
-				$html = \sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($html,'sp_variations_gallery_images_zoom_container',array(),true);
-				echo \eo\wbc\model\UI_Builder::instance()->js_template_wrap('sp_slzm_zoom_image_loop_'.$index,$html,'wp');
+					$html = \sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($html,'sp_variations_gallery_images_zoom_container',array(),true);
+					echo \eo\wbc\model\UI_Builder::instance()->js_template_wrap('sp_slzm_zoom_image_loop_'.$index.($hook_key=='sp_slzm_zoom_image_loop_js_tempalte_hover'?'_hover':''),$html,'wp');
+				}
+				
 			}
 
 		}, 10);	

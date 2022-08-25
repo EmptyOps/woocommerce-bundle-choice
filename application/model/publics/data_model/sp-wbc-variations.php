@@ -1512,7 +1512,7 @@ class SP_WBC_Variations extends SP_Variations {
 		----product no peramiter pass kervano baki che
 		ACTIVE_TODO_OC_END*/
 
-		$this->fetch_data($for_section, $product, $args );
+		$this->fetch_data( $for_section, $product, $args );
 
 		$data['gallery_images_template_data'] = array();
 
