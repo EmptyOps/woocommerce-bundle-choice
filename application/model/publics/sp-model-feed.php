@@ -417,17 +417,17 @@ class SP_Model_Feed extends SP_Feed {
 		// 	}
 		// }
 
-        $data = \eo\wbc\model\publics\data_model\SP_WBC_Variations::prepare_gallery_template_data();
+        $data = \eo\wbc\model\publics\data_model\SP_WBC_Variations::prepare_gallery_template_data(array('page'=>'feed'));
         
 		//////////////// start core
 
 		//bind to hook from here for the hook that is applied from both slider and zoom module for the images. means add filter here, and provide back with gallery_images data. so simply entire data var will be added to filter var but yeah the variation_gallery_images, attachment_ids etc. would be key -- to b done
 		
-		// add_filter('sp_slzm_slider_images',function($hook_data) use($data){
+		add_filter('sp_slzm_slider_images',function($hook_data) use($data){
 
-		// 	return $data;
+			return $data;
 
-		// });
+		});
 
 		add_filter('sp_slzm_zoom_images',function($hook_data) use($data){
 
@@ -446,7 +446,7 @@ class SP_Model_Feed extends SP_Feed {
 			'child'=>array(
 				array(
 					'type'=>'html',
-					'child'=>/*apply_filters('sp_variations_gallery_images_slider_ui',null)*/'',
+					'child'=>apply_filters('sp_variations_gallery_images_slider_ui',null),
 				),
 				array(
 					'type'=>'html',
@@ -459,70 +459,6 @@ class SP_Model_Feed extends SP_Feed {
 
 		//////////////// end core
 			return;
-		?>
-
-		<?php do_action( 'woo_variation_product_gallery_start', $product ); ?>
-			<div data-product_id="<?php echo esc_attr( $product_id ) ?>" data-variation_id="<?php echo esc_attr( $default_variation_id ) ?>" style="<?php echo esc_attr( woo_variation_gallery()->get_inline_style( $inline_style ) ) ?>" class="<?php echo esc_attr( implode( ' ', array_map( 'sanitize_html_class', array_unique( $wrapper_classes ) ) ) ); ?>">
-				<div class="loading-gallery woo-variation-gallery-wrapper woo-variation-gallery-thumbnail-position-<?php echo esc_attr( $gallery_thumbnail_position ) ?>-<?php echo esc_attr( $gallery_thumbnail_position_small_device ) ?> woo-variation-gallery-product-type-<?php echo esc_attr( $product_type ) ?>">
-
-					<div class="woo-variation-gallery-container preload-style-<?php echo trim( woo_variation_gallery()->get_option( 'preload_style', 'blur', 'woo_variation_gallery_preload_style' ) ) ?>">
-
-						<div class="woo-variation-gallery-slider-wrapper">
-
-							<?php if ( $has_post_thumbnail && ( 'yes' === woo_variation_gallery()->get_option( 'lightbox', 'yes', 'woo_variation_gallery_lightbox' ) ) ): ?>
-								<a href="#" class="woo-variation-gallery-trigger woo-variation-gallery-trigger-position-<?php echo woo_variation_gallery()->get_option( 'zoom_position', 'top-right', 'woo_variation_gallery_zoom_position' ) ?>">
-									<span class="dashicons dashicons-search"></span>
-								</a>
-							<?php endif; ?>
-
-							<div class="woo-variation-gallery-slider" data-slick='<?php echo wc_esc_json( wp_json_encode( $gallery_slider_js_options ) ); // WPCS: XSS ok. ?>'>
-								<?php
-								// Main  Image
-								if ( $has_post_thumbnail ) {
-									echo apply_filters( 'woocommerce_single_product_image_thumbnail_html', woo_variation_gallery()->get_frontend()->get_gallery_image_html( $product, $post_thumbnail_id, array(
-										'is_main_thumbnail'  => true,
-										'has_only_thumbnail' => $only_has_post_thumbnail
-									) ), $post_thumbnail_id );
-								} else {
-									echo sprintf( '<div class="wvg-gallery-image wvg-gallery-image-placeholder"><div><div class="wvg-single-gallery-image-container"><img src="%s" alt="%s" class="wp-post-image" /></div></div></div>', esc_url( wc_placeholder_img_src() ), esc_html__( 'Awaiting product image', 'woocommerce' ) );
-								}
-
-
-								// Gallery Image
-								if ( $has_gallery_thumbnail ) {
-									foreach ( $attachment_ids as $attachment_id ) :
-										echo apply_filters( 'woocommerce_single_product_image_thumbnail_html', woo_variation_gallery()->get_frontend()->get_gallery_image_html( $product, $attachment_id, array(
-											'is_main_thumbnail'  => true,
-											'has_only_thumbnail' => $only_has_post_thumbnail
-										) ), $attachment_id );
-									endforeach;
-								}
-								?>
-							</div>
-						</div> <!-- .woo-variation-gallery-slider-wrapper -->
-
-						<div class="woo-variation-gallery-thumbnail-wrapper">
-							<div class="woo-variation-gallery-thumbnail-slider woo-variation-gallery-thumbnail-columns-<?php echo esc_attr( $columns ) ?>" data-slick='<?php echo wc_esc_json( wp_json_encode( $thumbnail_slider_js_options ) ); // WPCS: XSS ok. ?>'>
-								<?php
-								if ( $has_gallery_thumbnail ) {
-									// Main Image
-
-									echo apply_filters( 'woocommerce_single_product_image_thumbnail_html', woo_variation_gallery()->get_frontend()->get_gallery_image_html( $product, $post_thumbnail_id, array( 'is_main_thumbnail' => false ) ), $post_thumbnail_id );
-
-									// Gallery Image
-									foreach ( $attachment_ids as $key => $attachment_id ) :
-										echo apply_filters( 'woocommerce_single_product_image_thumbnail_html', woo_variation_gallery()->get_frontend()->get_gallery_image_html( $product, $attachment_id, array( 'is_main_thumbnail' => false ) ), $attachment_id );
-									endforeach;
-								}
-								?>
-							</div>
-						</div> <!-- .woo-variation-gallery-thumbnail-wrapper -->
-					</div> <!-- .woo-variation-gallery-container -->
-				</div> <!-- .woo-variation-gallery-wrapper -->
-			</div> <!-- .woo-variation-product-gallery -->
-		<?php do_action( 'woo_variation_product_gallery_end', $product ); ?> 
-		<?php
-
 
 	}
 
@@ -530,6 +466,19 @@ class SP_Model_Feed extends SP_Feed {
 
 		return \eo\wbc\model\publics\data_model\SP_WBC_Variations::prepare_swatches_data($args);
 
+	}
+
+	public function prepare_swatches_reset_link_data($args = array()) {
+
+		$data = array();
+
+		$data['content'] = $args['hook_callback_args']['content'];
+
+		if ( ! is_product() ) {
+			$data['content'] = '';
+		}
+
+		return $data;
 	}
 
 }

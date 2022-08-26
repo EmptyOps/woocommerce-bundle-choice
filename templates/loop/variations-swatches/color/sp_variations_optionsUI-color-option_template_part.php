@@ -23,9 +23,9 @@ $slug_or_option = is_object($term) ? $term->slug : $term;
 
 $template = array(
     'type' => 'li',
-    'class' => 'spui_color_variable_item '.$woo_dropdown_attribute_html_data['swatches_variable_item_classes'],
+    'class' => 'spui_color_variable_item '.$woo_dropdown_attribute_html_data['class'].' '.$woo_dropdown_attribute_html_data['options_loop_class'][$slug_or_option],
     'attr' => array( 'aria-checked' => 'false', 'tabindex' => '0', 'role' => 'radio','data-placement'=>'top','title'=>esc_html( $term->name ),'data-toggle'=>'popover', 'data-trigger'=>'hover' ),
-    'child' => array(
+     'child' => array(
         array(
             'type' => 'div',
             'class' => 'spui_color_variable_item_contents',

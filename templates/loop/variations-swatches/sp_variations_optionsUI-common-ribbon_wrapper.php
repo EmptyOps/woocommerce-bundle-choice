@@ -50,11 +50,12 @@ if ( $woo_dropdown_attribute_html_data['product'] && taxonomy_exists( $variable_
 
 -- difind limit if conndition need to confirm data passing -- to s
 
-if ( count( $options ) > $woo_dropdown_attribute_html_data['defined_limit'] ) {
+if ( $woo_dropdown_attribute_html_data['args']['sp_variations_swatches_cat_display_limit'] > 0 && $woo_dropdown_attribute_html_data['args']['actual_total_options'] > $woo_dropdown_attribute_html_data['args']['sp_variations_swatches_cat_display_limit'] ) {
     $template = array(
         'type' => 'li',
         'class' => 'spui_swatches_more__container',
         'child' => array(
+        need to set here the link that is provided in data variables from data layer -- to h & -- to s
             array(
                 'type' => 'a',
                 'preHTML' => '+2 More',
@@ -70,7 +71,7 @@ $template = array(
     'child' => array(
         array(
             'type' => 'ul',
-            'class' => $ul_class . $woo_dropdown_attribute_html_data['swatches_variable_items_wrapper_classes'],
+            'class' => $ul_class . $variable_item_wrapper_data['class_wrapper'],
             'attr' => array( 'data-attribute_name' => esc_attr( wc_variation_attribute_name( $attribute ) ),'data-attribute_values' =>wc_esc_json( wp_json_encode( array_values( $woo_dropdown_attribute_html_data['options'] ) ) ), 'data-type'=>$woo_dropdown_attribute_html_data['type'],'role' => $ul_role, 'aria-label' => $ul_label),
             'child'=>array(
                 array(

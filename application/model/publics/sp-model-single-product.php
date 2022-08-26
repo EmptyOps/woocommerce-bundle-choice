@@ -997,7 +997,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 	public function render_gallery_images_template_callback($args = array()){
 		
-		global $product;
+		// global $product;
 
 		// /*ACTIVE_TODO_OC_START
 		// ----product no peramiter pass kervano baki che
@@ -1213,7 +1213,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 		// // ACTIVE_TODO ultimately move all below core implementtaion in the new core class of gallery_images or maybe simply in the wbc variations class 
 
-		$data = \eo\wbc\model\publics\data_model\SP_WBC_Variations::prepare_gallery_template_data();
+		$data = \eo\wbc\model\publics\data_model\SP_WBC_Variations::prepare_gallery_template_data(array('page'=>'single-product'));
 
 		//////////////// start core
 

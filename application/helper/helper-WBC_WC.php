@@ -66,6 +66,45 @@ class WBC_WC {
         }
     }
 
+    public function get_term_children($id, $taxonomy='product_cat', $format='name') {
+
+        $children_ids = get_term_children( $id, $taxonomy );
+        
+        foreach($children_ids as $children_id){
+            
+            $term = get_term( $children_id, $taxonomy ); 
+            
+            if( $format == 'name' ) {
+
+                $terms_html[] = $term->name;  
+            } else {
+                
+                $term_link = get_term_link( $term, $taxonomy ); 
+                if ( is_wp_error( $term_link ) ) $term_link = '';
+
+                $terms_html[] = '<a href="' . esc_url( $term_link ) . '" rel="tag" class="' . $term->slug . '">' . $term->name . '</a>';
+            }
+        }
+
+        if( $format == 'name' ) {
+
+            return implode( ', ', $terms_html );
+    
+        } else {
+            
+            return '<span class="subcategories-category-id-' . $id . '">' . implode( ', ', $terms_html ) . '</span>';
+        }
+    }
+
+    /////// @shraddha ///////
+    public function get_sub_category_of_category_in_product($id, $product) {
+
+        // ACTIVE_TODO right now we are getting category using a separate get_term_children call but in future we should rely on $product object to get category structure of category and sub-category and from their at the sub-category to get the benefits of cashing and so on of woocommerce.
+
+        return $this->get_term_children($id);
+
+    }
+
     public function is_wc_endpoint_url( $endpoint = false ) {
         
         if(function_exists('is_wc_endpoint_url')) {         
@@ -549,11 +588,6 @@ class WBC_WC {
         }
 
         return false;
-    }
-
-    /////// @shraddha ///////
-    public function get_sub_category_of_category_in_product() {
-
     }
 
 }

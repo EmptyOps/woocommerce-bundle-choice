@@ -4,8 +4,6 @@
 $two_tabs_confings = array();
 $two_tabs_confings['filter_setting_alternate_mobile'] = wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile');
 
-
-
  ?>
 
 <?php $category_array = array_column($filter_sets_data, 'first_tab_category'); ?>
@@ -41,12 +39,16 @@ $two_tabs_confings['filter_setting_alternate_mobile'] = wbc()->options->get_opti
         $('[name="cat_filter__two_tabs"]').val($(this).data('category'));*/
 
         jQuery('[name="_current_category"]').val(jQuery(this).data('category'));
+
         jQuery('[name="_category"]').val(jQuery(this).data('category'));
 
         //cat_filter__two_tabs
 				$('.filter_setting_advance_two_tabs .item').removeClass('active');
+
 				$(this).addClass('active');
+
         let group_id = $(this).data('tab-name');
+
         let display_style = 'inline-block';
         <?php /*if(wp_is_mobile() and !wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')):*/ ?>
         <?php if(wp_is_mobile() and !$two_tabs_confings['filter_setting_alternate_mobile']): ?>

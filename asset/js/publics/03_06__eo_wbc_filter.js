@@ -900,7 +900,32 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 							-- ACTIVE_TODO but very soon maybe the tableview may not have its own pagination links dom if that is not necessary for it -- to h and -- to d 
 						-- and for setting and getting current page_number 
 							--	for it may simply need to use the pagination modules published api interface -- to d 
-		ACTIVE_TODO_OC_END					
+		ACTIVE_TODO_OC_END			
+			// --- pagination module move this code ---
+			// if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html()!==undefined) {
+			// 	if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination').length>0){
+			// 		jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html());
+			// 	} else {
+
+			// 		@d once all the pagination related layers brought to this function, we need to check if the below incomplete implementation is completely implemented anywhere in our repo -- to d 
+			// 			--	if not then test with the elementor created category feed page and also with elementor hello themes custom loop to check if it works. if not then must uncomment the last uncommented line and finish the implementation -- to d or -- to b 
+			// 		let product_container = jQuery(".products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)");
+			// 		if(product_container.length<=0) {
+			// 			product_container = jQuery(".elementor-products-grid");
+			// 			if(product_container.length<=0) {
+			// 				product_container = jQuery(".elementor-widget-container").has('[data-elementor-type="loop"]');
+			// 				if(product_container.length<=0) {
+			// 					product_container = jQuery("[data-widget_type='archive-posts.archive_custom']");						
+			// 				}
+			// 			}
+			// 		}
+			// 		//jQuery(product_container).append('<nav class="woocommerce-pagination">'+jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html()+'</nav>');
+			// 	}
+			// }
+			// else {
+			// 	jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html('');	
+			// }
+			// --- end ---				
 		window.document.splugins.wbc.pagination.core.set_pagination_html(data);
 
 		/*}*/
@@ -1399,6 +1424,7 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 			jQuery(".woocommerce-pagination,.pagination"+compatability('pagination_link_selector',null,null)).html('');	
 		}
 	}
+	
 	var on_click_listener = function(){
 		ACTIVE_TODO_OC_START
 		NOTE : it will bind to all kind of such on_click events of pagination, it will be private but it may broadcast notification with a callback which js layers of like tableview and so on can call when they recieve their own click event or they can simply call below on_click function". so it is private function.
