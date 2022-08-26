@@ -50,7 +50,7 @@ class SP_WBC_Variations extends SP_Variations {
 				return self::instance()->get_available_variation_hook_callback($variation_get_max_purchase_quantity,  $instance,  $variation, $args);
 			}, 90, 3);
 			
-		}elseif( $for_section == "swatches_init" && $args['page'] != 'feed' ) {
+		}elseif( $for_section == "swatches_init"/* && $args['page'] != 'feed'*/ ) {
 			add_filter( 'woocommerce_ajax_variation_threshold',  function($int){
 
 				// ACTIVE_TODO_OC_START
@@ -75,7 +75,8 @@ class SP_WBC_Variations extends SP_Variations {
 			}, 10, 2);
 
 
-		}elseif( ($for_section == "swatches" || $for_section == "gallery_images") && $args['page'] != 'feed' ) {
+		// comment by @s
+		}elseif( ($for_section == "swatches" /*|| $for_section == "gallery_images"*/)/* && $args['page'] != 'feed'*/ ) {
 
 			$sp_variations_data['attributes'] = $product->get_variation_attributes();
 			$sp_variations_data['variations'] = $product->get_available_variations();
@@ -214,6 +215,17 @@ class SP_WBC_Variations extends SP_Variations {
 			//NOTE: from here we are setting to video, so whatever data pre prepared for attachment should be set from here. and then it is planned that video url type would work as if it is video type, so all that is needed is setting data accurately from here.
 			$props['extra_params_org']['type']   = 'video';
 
+		}
+
+
+		// classes
+		$props['class']                         = 'img-item img-item-'.$props['extra_params_org']['type'].' img-item-'.$props['extra_params_org']['type'].'-'.wbc()->common->current_theme_key();
+
+		$props['class_wrapper']                 = '';
+
+
+		if($type == 'video_url') {
+
 			$props['video_src']   = esc_url( $attachment_id );
 			return $props;
 
@@ -338,7 +350,7 @@ class SP_WBC_Variations extends SP_Variations {
 				if ( is_array( $image_size_class ) ) {
 					$image_size_class = implode( 'x', $image_size_class );
 				}
-				$props['class']  = "wp-post-image wvg-post-image attachment-$image_size_class size-$image_size_class ";
+				$props['class']  = "wp-post-image spui-post-image attachment-$image_size_class size-$image_size_class ";
 				$props['srcset'] = wp_get_attachment_image_srcset( $attachment_id, $image_size );
 				$props['sizes']  = wp_get_attachment_image_sizes( $attachment_id, $image_size );
 
@@ -420,6 +432,17 @@ class SP_WBC_Variations extends SP_Variations {
 		}
 
 		return empty( $selected_attributes ) ? $default_attributes : $selected_attributes;
+
+	}
+
+	public static function selected_variation_attributes($default_attributes) {
+
+		check on google if woocommerce have any hook for 
+		check on google with keyword "woocommerce product default attributes hook" -- to h & -- to s
+		check on google with keyword "woocommerce javascript api default attributes override or default"
+		check on google with keyword "woocommerce javascript api selected variation settings"
+		                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+		self::get_default_attributes($data['gallery_images_template_data']['default_attributes']);
 
 	}
 
@@ -616,7 +639,7 @@ class SP_WBC_Variations extends SP_Variations {
 				$variation_get_max_purchase_quantity['variation_gallery_images'][ $i ] = $this->get_product_attachment_props( $variation_gallery_image_id );
 			}
 		/*	wbc_pr($variation_get_max_purchase_quantity);
-die();*/
+			die();*/
 		}
 
 		// echo ">>>>>>>>>>> gallery_images_finel";
@@ -764,7 +787,7 @@ die();*/
 				ACTIVE_TODO_OC_END*/
 
 		// ob_start();
-		$data = $this->get_data('swatches'); 
+		$data = $this->fetch_data('swatches')/*get_data('swatches')*/; 
 		$attributes = $data['attributes']; /*$product->get_variation_attributes();*/
 		$variations = $data['variations']; /*$product->get_available_variations();*/
 
@@ -969,6 +992,40 @@ die();*/
 		$data = $this->prepare_variable_item_data($data,$args);
 		$data = $this->prepare_variable_item_wrapper_data($data,$args);
 
+		// TODO OPTIMIZATION in future if it seems worth it then we can prevent above layers from preparing unnecessary options and then we can simply skip array slice from below.
+		$data['woo_dropdown_attribute_html_data']['args']['actual_total_options'] = null;
+
+		if ( $data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit'] > 0 && ( ! is_product() || $woocommerce_loop['name'] == 'related' ) ) {
+			
+			if ( $woo_dropdown_attribute_html_data['product'] && taxonomy_exists( $variable_item_data['attribute'] ) ) {
+
+			  	$data['woo_dropdown_attribute_html_data']['args']['actual_total_options'] = count($data['variable_item_data']['terms']);  
+
+			} else {
+
+			  	$data['woo_dropdown_attribute_html_data']['args']['actual_total_options'] = count($data['woo_dropdown_attribute_html_data']['options']);  
+
+			}
+
+			if( $data['woo_dropdown_attribute_html_data']['args']['actual_total_options'] > $data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit'] ) {
+
+				if(isset($data['woo_dropdown_attribute_html_data']['terms'])){
+
+					$data['woo_dropdown_attribute_html_data']['terms'] = array_slice( $data['woo_dropdown_attribute_html_data']['terms'], 0, $data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit'] );
+				}
+
+				if(isset($data['woo_dropdown_attribute_html_data']['options'])){
+
+					$data['woo_dropdown_attribute_html_data']['options'] = array_slice( $data['woo_dropdown_attribute_html_data']['options'], 0, $data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit'] );
+				}
+
+				if(isset($data['variable_item_data']['terms'])){
+
+					$data['variable_item_data']['terms'] = array_slice( $data['variable_item_data']['terms'], 0, $data['variable_item_data']['args']['sp_variations_swatches_cat_display_limit'] );
+				}
+			}
+		}
+
 		return apply_filters('sp_prepare_swatches_data_by_attribute_type',$data);
 	}
 
@@ -1022,6 +1079,14 @@ die();*/
 		$data['woo_dropdown_attribute_html_data']['show_option_none']      = $args['hook_callback_args']['hook_args']['show_option_none'] ? true : false;
 		$data['woo_dropdown_attribute_html_data']['show_option_none_text'] = $args['hook_callback_args']['hook_args']['show_option_none'] ? $args['hook_callback_args']['hook_args']['show_option_none'] : esc_html__( 'Choose an option', 'woocommerce' ); // We'll do our best to hide the placeholder, but we'll need to show something when resetting options.
 
+		// classes
+		$data['woo_dropdown_attribute_html_data']['class']                 = 'variable-item ' .esc_attr( $data['woo_dropdown_attribute_html_data']['type'] ).'-variable-item spui-wbc-swatches-variable-item spui-wbc-swatches-variable-item-'.$data['woo_dropdown_attribute_html_data']['type']. ' spui-wbc-swatches-variable-item-header spui-wbc-swatches-variable-item-'.$data['woo_dropdown_attribute_html_data']['type'].'-header variable-item-'.wbc()->common->current_theme_key(). ' variable-item-'.esc_attr( $data['woo_dropdown_attribute_html_data']['type'] ).'-'.wbc()->common->current_theme_key();
+
+		// defined limit
+			// NOTE: right now we are limiting swatches options right from the data layer here and maintaining actual_total_options var which can be used on template layers. but if in future woo hiden select dropdown or js layer require all options then we need to provide that in seprate variable. 
+		$data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit'] = get_term_meta( $data['woo_dropdown_attribute_html_data']['id'], 'sp_variations_swatches_cat_display_limit', true );
+
+
 		if ( empty( $data['woo_dropdown_attribute_html_data']['options'] ) && ! empty( $data['woo_dropdown_attribute_html_data']['product'] ) && ! empty( $data['woo_dropdown_attribute_html_data']['attribute'] ) ) {
 			/*ACTIVE_TODO_OC_START
 			-- recieve data in function params to till this function, since I think we have exact same data on above layers but still confirm -- to b 
@@ -1071,23 +1136,35 @@ die();*/
 		}*/
 
 		if ( ! empty( $data['woo_dropdown_attribute_html_data']['options'] ) ) {
+
+			global $woocommerce_loop;
+
 			if ( $data['woo_dropdown_attribute_html_data']['product'] && taxonomy_exists( $data['woo_dropdown_attribute_html_data']['attribute'] ) ) {
 				// Get terms if this is a taxonomy - ordered. We need the names too.
 				$data['woo_dropdown_attribute_html_data']['terms'] = \eo\wbc\system\core\data_model\SP_Attribute::get_product_terms( $data['woo_dropdown_attribute_html_data']['product']->get_id(), $data['woo_dropdown_attribute_html_data']['attribute'], array( 'fields' => 'all' ) );
 
 				$data['woo_dropdown_attribute_html_data']['options_loop_selected'] = array();
 				$data['woo_dropdown_attribute_html_data']['options_loop_option_name'] = array();
+				$data['woo_dropdown_attribute_html_data']['options_loop_class'] = array();
 				foreach ( $data['woo_dropdown_attribute_html_data']['terms'] as $term ) {
 					if ( in_array( $term->slug, $data['woo_dropdown_attribute_html_data']['options'], true ) ) {
+
+						$data['woo_dropdown_attribute_html_data']['options_loop_class'][$term->slug] = esc_attr( $data['woo_dropdown_attribute_html_data']['type'] ).'-variable-item-'.esc_attr( $term->slug );
+
 						$data['woo_dropdown_attribute_html_data']['options_loop_option_name'][$term->slug] = \eo\wbc\system\core\data_model\SP_Attribute::variation_option_name( $term->name, $term, $data['woo_dropdown_attribute_html_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product']);
 						/*echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) ) . '</option>';*/
 					}
 				}
+
 			} else {
 
 				$data['woo_dropdown_attribute_html_data']['options_loop_selected'] = array();
 				$data['woo_dropdown_attribute_html_data']['options_loop_option_name'] = array();
+				$data['woo_dropdown_attribute_html_data']['options_loop_class'] = array();
 				foreach ( $data['woo_dropdown_attribute_html_data']['options'] as $option ) {
+
+					$data['woo_dropdown_attribute_html_data']['options_loop_class'][$option] = esc_attr( $data['woo_dropdown_attribute_html_data']['type'] ).'-variable-item-'.esc_attr( $option );
+
 					// This handles < 2.4.0 bw compatibility where text attributes were not sanitized.
 					$data['woo_dropdown_attribute_html_data']['options_loop_selected'][$option] = sanitize_title( $args['hook_callback_args']['hook_args']['selected'] ) === $args['hook_callback_args']['hook_args']['selected'] ? selected( $args['hook_callback_args']['hook_args']['selected'], sanitize_title( $option ), false ) : selected( $args['hook_callback_args']['hook_args']['selected'], $option, false );
 
@@ -1234,6 +1311,8 @@ die();*/
 						$data['variable_item_data']['options_loop_selected_class'][$term->slug] = ( sanitize_title( $data['woo_dropdown_attribute_html_data']['args'][ 'selected' ] ) == $term->slug ) ? 'selected' : '';
 
 
+						$data['woo_dropdown_attribute_html_data']['options_loop_class'][$term->slug] = esc_attr( $data['woo_dropdown_attribute_html_data']['type'] ).'-variable-item-'.esc_attr( $term->slug ).' '.esc_attr( $data['variable_item_data']['options_loop_selected_class'][$term->slug]);
+
 						/*ACTIVE_TODO_OC_START
 						--------- a etlu wvs_default_variable_item alg che
 						ACTIVE_TODO_OC_END*/
@@ -1348,7 +1427,7 @@ die();*/
 							$data['variable_item_data']['options_loop_tooltip'][$option] = false;
 						}
 
-						$data['variable_item_data']['options_loop_tooltip_html_attr'][$option]       = ! empty( $data['variable_item_data']['options_loop_tooltip'][$option] ) ? sprintf( 'data-wvstooltip="%s"', esc_attr( $data['variable_item_data']['options_loop_tooltip'][$option] ) ) : '';
+						$data['variable_item_data']['options_loop_tooltip_html_attr'][$option]       = ! empty( $data['variable_item_data']['options_loop_tooltip'][$option] ) ? sprintf( 'data-spuitooltip="%s"', esc_attr( $data['variable_item_data']['options_loop_tooltip'][$option] ) ) : '';
 						$data['variable_item_data']['options_loop_screen_reader_html_attr'][$option] = $data['variable_item_data']['options_loop_is_selected'][$option] ? ' aria-checked="true"' : ' aria-checked="false"';
 
 						if ( wp_is_mobile() ) {
@@ -1431,9 +1510,239 @@ die();*/
 		// <div aria-live="polite" aria-atomic="true" class="screen-reader-text">%1$s: <span data-default=""></span></div>
 		// $data = sprintf( '<ul role="radiogroup" aria-label="%1$s"  class="variable-items-wrapper %2$s" data-attribute_name="%3$s" data-attribute_values="%4$s">%5$s</ul>', esc_attr( wc_attribute_label( $attribute ) ), trim( implode( ' ', array_unique( $css_classes ) ) ), esc_attr( \eo\wbc\system\core\data_model\SP_Attribute::instance()->variation_attribute_name($attribute) ), wc_esc_json( wp_json_encode( array_values( $options ) ) ), $contents );
 		
-		
+		// classes
+		$data['variable_item_wrapper_data']['class_wrapper']                 = 'variable-items-wrapper spui-wbc-swatches-variable-items-wrapper spui-wbc-swatches-variable-items-wrapper-'.$data['woo_dropdown_attribute_html_data']['type'].' '.$data['woo_dropdown_attribute_html_data']['type'].'-variable-wrapper';
+
 		return $data;
 
+	}
+
+	public function prepare_gallery_template_data($args = array()) {
+
+		/*ACTIVE_TODO_OC_START
+		----product no peramiter pass kervano baki che
+		ACTIVE_TODO_OC_END*/
+
+		if(empty($args[$product])) {
+
+			global $product;
+		} else {
+
+			$product = $args[$product]
+		}
+
+		$this->fetch_data( $for_section, $product, $args );
+
+		$data['gallery_images_template_data'] = array();
+
+		//here recieve the $data param of the caller function -- to b done
+
+		/*ACTIVE_TODO_OC_START
+			--	pass it in all three functions called below and prepare the daa in the heirachiical structure the way these loops and functions calls and data and template load sequence is -- to b 
+		ACTIVE_TODO_OC_END*/
+
+		// create two static methods in the wbc variations clas s, namely get_default_attributes and get_default_variation_id -- to d done
+		// 	and the move the respective logic from below to there -- to d done
+		// 		--	and then replace below statements with function calls to that class -- to d done
+		// and create one more function get_available_variation, a public static function in the same class wbc variations -- to d done
+		// 	and the ove the respective logic from below to there -- to d 
+		// 		--	and then replace below statements with function calls to that class -- to d done
+
+		// create two static methods in the SP_Product clas s, namely get_image_id and get_gallery_image_ids -- to d done 
+		// 	and the move the respective logic from below to there -- to d done
+		// 		--	and then replace below statements with function calls to that class -- to d done
+
+		$data['gallery_images_template_data']['product_id'] = $product->get_id();
+
+		$data['gallery_images_template_data']['default_attributes'] = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_default_attributes($data['gallery_images_template_data']['product_id']);
+
+		$data['gallery_images_template_data']['default_variation_id'] = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_default_variation_id($product, $data['gallery_images_template_data']['default_attributes'] );
+
+		$data['gallery_images_template_data']['product_type'] = $product->get_type();
+
+		// ACTIVE_TODO we may like to use the columns var later to till gallery_images slider and zoom module layers including till applicable js layers -- to h or -- to d 
+		$data['gallery_images_template_data']['columns'] = -1;	//	thumbnail columns 
+
+		$data['gallery_images_template_data']['post_thumbnail_id'] = \eo\wbc\system\core\data_model\SP_Product::get_image_id($product);
+
+		$data['gallery_images_template_data']['attachment_ids'] = \eo\wbc\system\core\data_model\SP_Product::get_gallery_image_ids($product);
+
+		$data['gallery_images_template_data']['has_post_thumbnail'] = has_post_thumbnail();
+
+		// No main image but gallery
+		if ( ! $data['gallery_images_template_data']['has_post_thumbnail'] && count( $data['gallery_images_template_data']['attachment_ids'] ) > 0 ) {
+			$data['gallery_images_template_data']['post_thumbnail_id'] = $data['gallery_images_template_data']['attachment_ids'][0];
+			array_shift( $data['gallery_images_template_data']['attachment_ids'] );
+			$data['gallery_images_template_data']['has_post_thumbnail'] = true;
+		}
+
+		if ( 'variable' === $data['gallery_images_template_data']['product_type'] && $data['gallery_images_template_data']['default_variation_id'] > 0 ) {
+
+			$data['gallery_images_template_data']['product_variation'] = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_available_variation($data['gallery_images_template_data']['product_id'], $data['gallery_images_template_data']['default_variation_id']);
+
+			if ( isset( $data['gallery_images_template_data']['product_variation']['image_id'] ) ) {
+				$data['gallery_images_template_data']['post_thumbnail_id']  = $data['gallery_images_template_data']['product_variation']['image_id'];
+				$data['gallery_images_template_data']['has_post_thumbnail'] = true;
+			}
+
+			if ( isset( $data['gallery_images_template_data']['product_variation']['variation_gallery_images'] ) ) {
+				$data['gallery_images_template_data']['attachment_ids'] = wp_list_pluck( $data['gallery_images_template_data']['product_variation']['variation_gallery_images'], 'image_id' );
+				array_shift( $data['gallery_images_template_data']['attachment_ids'] );
+			}
+		}
+
+		$data['gallery_images_template_data']['has_gallery_thumbnail'] = ( $data['gallery_images_template_data']['has_post_thumbnail'] && ( count( $data['gallery_images_template_data']['attachment_ids'] ) > 0 ) );
+
+		$data['gallery_images_template_data']['only_has_post_thumbnail'] = ( $data['gallery_images_template_data']['has_post_thumbnail'] && ( count( $data['gallery_images_template_data']['attachment_ids'] ) === 0 ) );
+
+		// $wrapper                          = sanitize_text_field( get_option( 'woo_variation_gallery_and_variation_wrapper', apply_filters( 'woo_variation_gallery_and_variation_default_wrapper', '.product' ) ) )
+		/*ACTIVE_TODO_OC_START
+		$slider_js_options = array(
+			'slidesToShow'   => 1,
+			'slidesToScroll' => 1,
+			'arrows'         => wc_string_to_bool( woo_variation_gallery()->get_option( 'slider_arrow', 'yes', 'woo_variation_gallery_slider_arrow' ) ),
+			'adaptiveHeight' => true,
+			// 'lazyLoad'       => 'progressive',
+			'rtl'            => is_rtl(),
+			'prevArrow'      => '<i class="wvg-slider-prev-arrow dashicons dashicons-arrow-left-alt2"></i>',
+			'nextArrow'      => '<i class="wvg-slider-next-arrow dashicons dashicons-arrow-right-alt2"></i>',
+			'speed'          => absint( woo_variation_gallery()->get_option( 'slide_speed', 300 ) )
+		);
+
+		if ( wc_string_to_bool( woo_variation_gallery()->get_option( 'thumbnail_slide', 'yes', 'woo_variation_gallery_thumbnail_slide' ) ) ) {
+			$slider_js_options['asNavFor'] = '.woo-variation-gallery-thumbnail-slider';
+		}
+
+		if ( wc_string_to_bool( woo_variation_gallery()->get_option( 'slider_autoplay', 'no', 'woo_variation_gallery_slider_autoplay' ) ) ) {
+			$slider_js_options['autoplay']      = true;
+			$slider_js_options['autoplaySpeed'] = absint( woo_variation_gallery()->get_option( 'slider_autoplay_speed', 5000, 'woo_variation_gallery_slider_autoplay_speed' ) );
+		}
+
+		if ( wc_string_to_bool( woo_variation_gallery()->get_option( 'slider_fade', 'no', 'woo_variation_gallery_slider_fade' ) ) ) {
+			$slider_js_options['fade'] = true;
+		}
+
+		$gallery_slider_js_options = apply_filters( 'woo_variation_gallery_slider_js_options', $slider_js_options );
+
+		$gallery_thumbnail_position              = sanitize_textarea_field( woo_variation_gallery()->get_option( 'thumbnail_position', 'bottom', 'woo_variation_gallery_thumbnail_position' ) );
+		$gallery_thumbnail_position_small_device = sanitize_textarea_field( woo_variation_gallery()->get_option( 'thumbnail_position_small_device', 'bottom' ) );
+
+
+		//
+		$thumbnail_js_options = array(
+			'slidesToShow'   => $columns,
+			'slidesToScroll' => $columns,
+			'focusOnSelect'  => true,
+			// 'dots'=>true,
+			'arrows'         => wc_string_to_bool( woo_variation_gallery()->get_option( 'thumbnail_arrow', 'yes' ) ),
+			'asNavFor'       => '.woo-variation-gallery-slider',
+			'centerMode'     => true,
+			'infinite'       => true,
+			'centerPadding'  => '0px',
+			'vertical'       => in_array( $gallery_thumbnail_position, array( 'left', 'right' ) ),
+			'rtl'            => woo_variation_gallery()->set_rtl_by_position( $gallery_thumbnail_position ),
+			'prevArrow'      => '<i class="wvg-thumbnail-prev-arrow dashicons dashicons-arrow-left-alt2"></i>',
+			'nextArrow'      => '<i class="wvg-thumbnail-next-arrow dashicons dashicons-arrow-right-alt2"></i>',
+			'responsive'     => array(
+				array(
+					'breakpoint' => 768,
+					'settings'   => array(
+						'vertical' => in_array( $gallery_thumbnail_position_small_device, array( 'left', 'right' ) ),
+						'rtl'      => woo_variation_gallery()->set_rtl_by_position( $gallery_thumbnail_position_small_device )
+					),
+				),
+			)
+		);
+
+		$thumbnail_slider_js_options = apply_filters( 'woo_variation_gallery_thumbnail_slider_js_options', $thumbnail_js_options );
+
+		$gallery_width = absint( woo_variation_gallery()->get_option( 'width', apply_filters( 'woo_variation_gallery_default_width', 30 ), 'woo_variation_gallery_width' ) );
+
+		$inline_style = apply_filters( 'woo_variation_product_gallery_inline_style', array() );
+
+		$wrapper_classes = apply_filters( 'woo_variation_gallery_product_wrapper_classes', array(
+			'woo-variation-product-gallery',
+			'woo-variation-product-gallery-thumbnail-columns-' . absint( $columns ),
+			$has_gallery_thumbnail ? 'woo-variation-gallery-has-product-thumbnail' : '',
+			( 'yes' === woo_variation_gallery()->get_option( 'thumbnail_slide', 'yes', 'woo_variation_gallery_thumbnail_slide' ) ) ? 'woo-variation-gallery-enabled-thumbnail-slider' : ''
+		) );
+
+		$post_thumbnail_id = (int) apply_filters( 'woo_variation_gallery_post_thumbnail_id', $post_thumbnail_id, $attachment_ids, $product );
+		$attachment_ids    = (array) apply_filters( 'woo_variation_gallery_attachment_ids', $attachment_ids, $post_thumbnail_id, $product );
+		ACTIVE_TODO_OC_END*/
+
+		$data['gallery_images_template_data']['attachment_ids_loop_image'] = array();
+		$data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'] = array();
+		$data['gallery_images_template_data']['attachment_ids_loop_remove_featured_image'] = array();
+		$data['gallery_images_template_data']['attachment_ids_loop_classes'] = array();
+
+		if('variable' === $data['gallery_images_template_data']['product_type']){
+
+			if(!empty(isset( $data['gallery_images_template_data']['product_variation']['variation_gallery_images'] ))){
+			    
+			    foreach ($data['gallery_images_template_data']['product_variation']['variation_gallery_images'] as $index=>$image) {
+
+			       	
+
+			        $data['gallery_images_template_data']['attachment_ids_loop_image'][$index] = $image;
+			        $data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'][$index] = $product->get_image_id();
+
+			        $data['gallery_images_template_data']['attachment_ids_loop_remove_featured_image'][$index] = false;
+
+			        if ( $data['gallery_images_template_data']['attachment_ids_loop_remove_featured_image'][$index] && absint( $id ) == absint( $data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'][$index] ) ) {
+			            return '';
+			        }
+
+			        $data['gallery_images_template_data']['attachment_ids_loop_classes'][$index] = array( '' );
+
+			        if ( isset( $data['gallery_images_template_data']['attachment_ids_loop_image'][$index]['video_link'] ) && ! empty( $data['gallery_images_template_data']['attachment_ids_loop_image'][$index]['video_link'] ) ) {
+			            array_push( $data['gallery_images_template_data']['attachment_ids_loop_classes'][$index], '' );
+			        }
+
+			        //ACTIVE_TODO publish hook if required 
+			        // $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id] = apply_filters( '', $classes, $id, $image );
+			        
+			       //return '<div class="' . esc_attr( implode( ' ', array_map( 'sanitize_html_class', array_unique( $classes ) ) ) ) . '"><div>' . $inner_html . '</div></div>';
+	     
+			    }
+			}
+
+		}
+
+		else {
+			if(!empty($data['gallery_images_template_data']['attachment_ids'])){
+			    
+			    foreach ($data['gallery_images_template_data']['attachment_ids'] as $index=>$id) {
+
+			       	
+
+			        $data['gallery_images_template_data']['attachment_ids_loop_image'][$index] = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_product_attachment_props( $id );
+			        $data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'][$index] = $product->get_image_id();
+
+			        $data['gallery_images_template_data']['attachment_ids_loop_remove_featured_image'][$index] = false;
+
+			        if ( $data['gallery_images_template_data']['attachment_ids_loop_remove_featured_image'][$index] && absint( $id ) == absint( $data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'][$index] ) ) {
+			            return '';
+			        }
+
+			        $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id] = array( '' );
+
+			        if ( isset( $data['gallery_images_template_data']['attachment_ids_loop_image'][$id]['video_link'] ) && ! empty( $data['gallery_images_template_data']['attachment_ids_loop_image'][$id]['video_link'] ) ) {
+			            array_push( $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id], '' );
+			        }
+
+			        //ACTIVE_TODO publish hook if required 
+			        // $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id] = apply_filters( '', $classes, $id, $image );
+			        
+			       //return '<div class="' . esc_attr( implode( ' ', array_map( 'sanitize_html_class', array_unique( $classes ) ) ) ) . '"><div>' . $inner_html . '</div></div>';
+	     
+			    }
+			}
+		}
+
+		return $data;
+
+		// ACTIVE_TODO ultimately move all below core implementtaion in the new core class of gallery_images or maybe simply in the wbc variations class 
 	}
 
 }

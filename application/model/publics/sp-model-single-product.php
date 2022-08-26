@@ -997,221 +997,223 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 	public function render_gallery_images_template_callback($args = array()){
 		
-		global $product;
+		// global $product;
 
-		/*ACTIVE_TODO_OC_START
-		----product no peramiter pass kervano baki che
-		ACTIVE_TODO_OC_END*/
-		$data = \eo\wbc\model\publics\SP_Model_Single_Product::instance()->get_data('gallery_images');
+		// /*ACTIVE_TODO_OC_START
+		// ----product no peramiter pass kervano baki che
+		// ACTIVE_TODO_OC_END*/
+		// $data = \eo\wbc\model\publics\SP_Model_Single_Product::instance()->get_data('gallery_images');
 
-		$data['gallery_images_template_data'] = array();
+		// $data['gallery_images_template_data'] = array();
 
-		//here recieve the $data param of the caller function -- to b done
+		// //here recieve the $data param of the caller function -- to b done
 
-		/*ACTIVE_TODO_OC_START
-			--	pass it in all three functions called below and prepare the daa in the heirachiical structure the way these loops and functions calls and data and template load sequence is -- to b 
-		ACTIVE_TODO_OC_END*/
+		// /*ACTIVE_TODO_OC_START
+		// 	--	pass it in all three functions called below and prepare the daa in the heirachiical structure the way these loops and functions calls and data and template load sequence is -- to b 
+		// ACTIVE_TODO_OC_END*/
 
-		// create two static methods in the wbc variations clas s, namely get_default_attributes and get_default_variation_id -- to d done
-		// 	and the move the respective logic from below to there -- to d done
-		// 		--	and then replace below statements with function calls to that class -- to d done
-		// and create one more function get_available_variation, a public static function in the same class wbc variations -- to d done
-		// 	and the ove the respective logic from below to there -- to d 
-		// 		--	and then replace below statements with function calls to that class -- to d done
+		// // create two static methods in the wbc variations clas s, namely get_default_attributes and get_default_variation_id -- to d done
+		// // 	and the move the respective logic from below to there -- to d done
+		// // 		--	and then replace below statements with function calls to that class -- to d done
+		// // and create one more function get_available_variation, a public static function in the same class wbc variations -- to d done
+		// // 	and the ove the respective logic from below to there -- to d 
+		// // 		--	and then replace below statements with function calls to that class -- to d done
 
-		// create two static methods in the SP_Product clas s, namely get_image_id and get_gallery_image_ids -- to d done 
-		// 	and the move the respective logic from below to there -- to d done
-		// 		--	and then replace below statements with function calls to that class -- to d done
+		// // create two static methods in the SP_Product clas s, namely get_image_id and get_gallery_image_ids -- to d done 
+		// // 	and the move the respective logic from below to there -- to d done
+		// // 		--	and then replace below statements with function calls to that class -- to d done
 
-		$data['gallery_images_template_data']['product_id'] = $product->get_id();
+		// $data['gallery_images_template_data']['product_id'] = $product->get_id();
 
-		$data['gallery_images_template_data']['default_attributes'] = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_default_attributes($data['gallery_images_template_data']['product_id']);
+		// $data['gallery_images_template_data']['default_attributes'] = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_default_attributes($data['gallery_images_template_data']['product_id']);
 
-		$data['gallery_images_template_data']['default_variation_id'] = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_default_variation_id($product, $data['gallery_images_template_data']['default_attributes'] );
+		// $data['gallery_images_template_data']['default_variation_id'] = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_default_variation_id($product, $data['gallery_images_template_data']['default_attributes'] );
 
-		$data['gallery_images_template_data']['product_type'] = $product->get_type();
+		// $data['gallery_images_template_data']['product_type'] = $product->get_type();
 
-		// ACTIVE_TODO we may like to use the columns var later to till gallery_images slider and zoom module layers including till applicable js layers -- to h or -- to d 
-		$data['gallery_images_template_data']['columns'] = -1;	//	thumbnail columns 
+		// // ACTIVE_TODO we may like to use the columns var later to till gallery_images slider and zoom module layers including till applicable js layers -- to h or -- to d 
+		// $data['gallery_images_template_data']['columns'] = -1;	//	thumbnail columns 
 
-		$data['gallery_images_template_data']['post_thumbnail_id'] = \eo\wbc\system\core\data_model\SP_Product::get_image_id($product);
+		// $data['gallery_images_template_data']['post_thumbnail_id'] = \eo\wbc\system\core\data_model\SP_Product::get_image_id($product);
 
-		$data['gallery_images_template_data']['attachment_ids'] = \eo\wbc\system\core\data_model\SP_Product::get_gallery_image_ids($product);
+		// $data['gallery_images_template_data']['attachment_ids'] = \eo\wbc\system\core\data_model\SP_Product::get_gallery_image_ids($product);
 
-		$data['gallery_images_template_data']['has_post_thumbnail'] = has_post_thumbnail();
+		// $data['gallery_images_template_data']['has_post_thumbnail'] = has_post_thumbnail();
 
-		// No main image but gallery
-		if ( ! $data['gallery_images_template_data']['has_post_thumbnail'] && count( $data['gallery_images_template_data']['attachment_ids'] ) > 0 ) {
-			$data['gallery_images_template_data']['post_thumbnail_id'] = $data['gallery_images_template_data']['attachment_ids'][0];
-			array_shift( $data['gallery_images_template_data']['attachment_ids'] );
-			$data['gallery_images_template_data']['has_post_thumbnail'] = true;
-		}
+		// // No main image but gallery
+		// if ( ! $data['gallery_images_template_data']['has_post_thumbnail'] && count( $data['gallery_images_template_data']['attachment_ids'] ) > 0 ) {
+		// 	$data['gallery_images_template_data']['post_thumbnail_id'] = $data['gallery_images_template_data']['attachment_ids'][0];
+		// 	array_shift( $data['gallery_images_template_data']['attachment_ids'] );
+		// 	$data['gallery_images_template_data']['has_post_thumbnail'] = true;
+		// }
 
-		if ( 'variable' === $data['gallery_images_template_data']['product_type'] && $data['gallery_images_template_data']['default_variation_id'] > 0 ) {
+		// if ( 'variable' === $data['gallery_images_template_data']['product_type'] && $data['gallery_images_template_data']['default_variation_id'] > 0 ) {
 
-			$data['gallery_images_template_data']['product_variation'] = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_available_variation($data['gallery_images_template_data']['product_id'], $data['gallery_images_template_data']['default_variation_id']);
+		// 	$data['gallery_images_template_data']['product_variation'] = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_available_variation($data['gallery_images_template_data']['product_id'], $data['gallery_images_template_data']['default_variation_id']);
 
-			if ( isset( $data['gallery_images_template_data']['product_variation']['image_id'] ) ) {
-				$data['gallery_images_template_data']['post_thumbnail_id']  = $data['gallery_images_template_data']['product_variation']['image_id'];
-				$data['gallery_images_template_data']['has_post_thumbnail'] = true;
-			}
+		// 	if ( isset( $data['gallery_images_template_data']['product_variation']['image_id'] ) ) {
+		// 		$data['gallery_images_template_data']['post_thumbnail_id']  = $data['gallery_images_template_data']['product_variation']['image_id'];
+		// 		$data['gallery_images_template_data']['has_post_thumbnail'] = true;
+		// 	}
 
-			if ( isset( $data['gallery_images_template_data']['product_variation']['variation_gallery_images'] ) ) {
-				$data['gallery_images_template_data']['attachment_ids'] = wp_list_pluck( $data['gallery_images_template_data']['product_variation']['variation_gallery_images'], 'image_id' );
-				array_shift( $data['gallery_images_template_data']['attachment_ids'] );
-			}
-		}
+		// 	if ( isset( $data['gallery_images_template_data']['product_variation']['variation_gallery_images'] ) ) {
+		// 		$data['gallery_images_template_data']['attachment_ids'] = wp_list_pluck( $data['gallery_images_template_data']['product_variation']['variation_gallery_images'], 'image_id' );
+		// 		array_shift( $data['gallery_images_template_data']['attachment_ids'] );
+		// 	}
+		// }
 
-		$data['gallery_images_template_data']['has_gallery_thumbnail'] = ( $data['gallery_images_template_data']['has_post_thumbnail'] && ( count( $data['gallery_images_template_data']['attachment_ids'] ) > 0 ) );
+		// $data['gallery_images_template_data']['has_gallery_thumbnail'] = ( $data['gallery_images_template_data']['has_post_thumbnail'] && ( count( $data['gallery_images_template_data']['attachment_ids'] ) > 0 ) );
 
-		$data['gallery_images_template_data']['only_has_post_thumbnail'] = ( $data['gallery_images_template_data']['has_post_thumbnail'] && ( count( $data['gallery_images_template_data']['attachment_ids'] ) === 0 ) );
+		// $data['gallery_images_template_data']['only_has_post_thumbnail'] = ( $data['gallery_images_template_data']['has_post_thumbnail'] && ( count( $data['gallery_images_template_data']['attachment_ids'] ) === 0 ) );
 
-		// $wrapper                          = sanitize_text_field( get_option( 'woo_variation_gallery_and_variation_wrapper', apply_filters( 'woo_variation_gallery_and_variation_default_wrapper', '.product' ) ) )
-		/*ACTIVE_TODO_OC_START
-		$slider_js_options = array(
-			'slidesToShow'   => 1,
-			'slidesToScroll' => 1,
-			'arrows'         => wc_string_to_bool( woo_variation_gallery()->get_option( 'slider_arrow', 'yes', 'woo_variation_gallery_slider_arrow' ) ),
-			'adaptiveHeight' => true,
-			// 'lazyLoad'       => 'progressive',
-			'rtl'            => is_rtl(),
-			'prevArrow'      => '<i class="wvg-slider-prev-arrow dashicons dashicons-arrow-left-alt2"></i>',
-			'nextArrow'      => '<i class="wvg-slider-next-arrow dashicons dashicons-arrow-right-alt2"></i>',
-			'speed'          => absint( woo_variation_gallery()->get_option( 'slide_speed', 300 ) )
-		);
+		// // $wrapper                          = sanitize_text_field( get_option( 'woo_variation_gallery_and_variation_wrapper', apply_filters( 'woo_variation_gallery_and_variation_default_wrapper', '.product' ) ) )
+		// ACTIVE_TODO_OC_START
+		// $slider_js_options = array(
+		// 	'slidesToShow'   => 1,
+		// 	'slidesToScroll' => 1,
+		// 	'arrows'         => wc_string_to_bool( woo_variation_gallery()->get_option( 'slider_arrow', 'yes', 'woo_variation_gallery_slider_arrow' ) ),
+		// 	'adaptiveHeight' => true,
+		// 	// 'lazyLoad'       => 'progressive',
+		// 	'rtl'            => is_rtl(),
+		// 	'prevArrow'      => '<i class="wvg-slider-prev-arrow dashicons dashicons-arrow-left-alt2"></i>',
+		// 	'nextArrow'      => '<i class="wvg-slider-next-arrow dashicons dashicons-arrow-right-alt2"></i>',
+		// 	'speed'          => absint( woo_variation_gallery()->get_option( 'slide_speed', 300 ) )
+		// );
 
-		if ( wc_string_to_bool( woo_variation_gallery()->get_option( 'thumbnail_slide', 'yes', 'woo_variation_gallery_thumbnail_slide' ) ) ) {
-			$slider_js_options['asNavFor'] = '.woo-variation-gallery-thumbnail-slider';
-		}
+		// if ( wc_string_to_bool( woo_variation_gallery()->get_option( 'thumbnail_slide', 'yes', 'woo_variation_gallery_thumbnail_slide' ) ) ) {
+		// 	$slider_js_options['asNavFor'] = '.woo-variation-gallery-thumbnail-slider';
+		// }
 
-		if ( wc_string_to_bool( woo_variation_gallery()->get_option( 'slider_autoplay', 'no', 'woo_variation_gallery_slider_autoplay' ) ) ) {
-			$slider_js_options['autoplay']      = true;
-			$slider_js_options['autoplaySpeed'] = absint( woo_variation_gallery()->get_option( 'slider_autoplay_speed', 5000, 'woo_variation_gallery_slider_autoplay_speed' ) );
-		}
+		// if ( wc_string_to_bool( woo_variation_gallery()->get_option( 'slider_autoplay', 'no', 'woo_variation_gallery_slider_autoplay' ) ) ) {
+		// 	$slider_js_options['autoplay']      = true;
+		// 	$slider_js_options['autoplaySpeed'] = absint( woo_variation_gallery()->get_option( 'slider_autoplay_speed', 5000, 'woo_variation_gallery_slider_autoplay_speed' ) );
+		// }
 
-		if ( wc_string_to_bool( woo_variation_gallery()->get_option( 'slider_fade', 'no', 'woo_variation_gallery_slider_fade' ) ) ) {
-			$slider_js_options['fade'] = true;
-		}
+		// if ( wc_string_to_bool( woo_variation_gallery()->get_option( 'slider_fade', 'no', 'woo_variation_gallery_slider_fade' ) ) ) {
+		// 	$slider_js_options['fade'] = true;
+		// }
 
-		$gallery_slider_js_options = apply_filters( 'woo_variation_gallery_slider_js_options', $slider_js_options );
+		// $gallery_slider_js_options = apply_filters( 'woo_variation_gallery_slider_js_options', $slider_js_options );
 
-		$gallery_thumbnail_position              = sanitize_textarea_field( woo_variation_gallery()->get_option( 'thumbnail_position', 'bottom', 'woo_variation_gallery_thumbnail_position' ) );
-		$gallery_thumbnail_position_small_device = sanitize_textarea_field( woo_variation_gallery()->get_option( 'thumbnail_position_small_device', 'bottom' ) );
+		// $gallery_thumbnail_position              = sanitize_textarea_field( woo_variation_gallery()->get_option( 'thumbnail_position', 'bottom', 'woo_variation_gallery_thumbnail_position' ) );
+		// $gallery_thumbnail_position_small_device = sanitize_textarea_field( woo_variation_gallery()->get_option( 'thumbnail_position_small_device', 'bottom' ) );
 
 
-		//
-		$thumbnail_js_options = array(
-			'slidesToShow'   => $columns,
-			'slidesToScroll' => $columns,
-			'focusOnSelect'  => true,
-			// 'dots'=>true,
-			'arrows'         => wc_string_to_bool( woo_variation_gallery()->get_option( 'thumbnail_arrow', 'yes' ) ),
-			'asNavFor'       => '.woo-variation-gallery-slider',
-			'centerMode'     => true,
-			'infinite'       => true,
-			'centerPadding'  => '0px',
-			'vertical'       => in_array( $gallery_thumbnail_position, array( 'left', 'right' ) ),
-			'rtl'            => woo_variation_gallery()->set_rtl_by_position( $gallery_thumbnail_position ),
-			'prevArrow'      => '<i class="wvg-thumbnail-prev-arrow dashicons dashicons-arrow-left-alt2"></i>',
-			'nextArrow'      => '<i class="wvg-thumbnail-next-arrow dashicons dashicons-arrow-right-alt2"></i>',
-			'responsive'     => array(
-				array(
-					'breakpoint' => 768,
-					'settings'   => array(
-						'vertical' => in_array( $gallery_thumbnail_position_small_device, array( 'left', 'right' ) ),
-						'rtl'      => woo_variation_gallery()->set_rtl_by_position( $gallery_thumbnail_position_small_device )
-					),
-				),
-			)
-		);
+		// //
+		// $thumbnail_js_options = array(
+		// 	'slidesToShow'   => $columns,
+		// 	'slidesToScroll' => $columns,
+		// 	'focusOnSelect'  => true,
+		// 	// 'dots'=>true,
+		// 	'arrows'         => wc_string_to_bool( woo_variation_gallery()->get_option( 'thumbnail_arrow', 'yes' ) ),
+		// 	'asNavFor'       => '.woo-variation-gallery-slider',
+		// 	'centerMode'     => true,
+		// 	'infinite'       => true,
+		// 	'centerPadding'  => '0px',
+		// 	'vertical'       => in_array( $gallery_thumbnail_position, array( 'left', 'right' ) ),
+		// 	'rtl'            => woo_variation_gallery()->set_rtl_by_position( $gallery_thumbnail_position ),
+		// 	'prevArrow'      => '<i class="wvg-thumbnail-prev-arrow dashicons dashicons-arrow-left-alt2"></i>',
+		// 	'nextArrow'      => '<i class="wvg-thumbnail-next-arrow dashicons dashicons-arrow-right-alt2"></i>',
+		// 	'responsive'     => array(
+		// 		array(
+		// 			'breakpoint' => 768,
+		// 			'settings'   => array(
+		// 				'vertical' => in_array( $gallery_thumbnail_position_small_device, array( 'left', 'right' ) ),
+		// 				'rtl'      => woo_variation_gallery()->set_rtl_by_position( $gallery_thumbnail_position_small_device )
+		// 			),
+		// 		),
+		// 	)
+		// );
 
-		$thumbnail_slider_js_options = apply_filters( 'woo_variation_gallery_thumbnail_slider_js_options', $thumbnail_js_options );
+		// $thumbnail_slider_js_options = apply_filters( 'woo_variation_gallery_thumbnail_slider_js_options', $thumbnail_js_options );
 
-		$gallery_width = absint( woo_variation_gallery()->get_option( 'width', apply_filters( 'woo_variation_gallery_default_width', 30 ), 'woo_variation_gallery_width' ) );
+		// $gallery_width = absint( woo_variation_gallery()->get_option( 'width', apply_filters( 'woo_variation_gallery_default_width', 30 ), 'woo_variation_gallery_width' ) );
 
-		$inline_style = apply_filters( 'woo_variation_product_gallery_inline_style', array() );
+		// $inline_style = apply_filters( 'woo_variation_product_gallery_inline_style', array() );
 
-		$wrapper_classes = apply_filters( 'woo_variation_gallery_product_wrapper_classes', array(
-			'woo-variation-product-gallery',
-			'woo-variation-product-gallery-thumbnail-columns-' . absint( $columns ),
-			$has_gallery_thumbnail ? 'woo-variation-gallery-has-product-thumbnail' : '',
-			( 'yes' === woo_variation_gallery()->get_option( 'thumbnail_slide', 'yes', 'woo_variation_gallery_thumbnail_slide' ) ) ? 'woo-variation-gallery-enabled-thumbnail-slider' : ''
-		) );
+		// $wrapper_classes = apply_filters( 'woo_variation_gallery_product_wrapper_classes', array(
+		// 	'woo-variation-product-gallery',
+		// 	'woo-variation-product-gallery-thumbnail-columns-' . absint( $columns ),
+		// 	$has_gallery_thumbnail ? 'woo-variation-gallery-has-product-thumbnail' : '',
+		// 	( 'yes' === woo_variation_gallery()->get_option( 'thumbnail_slide', 'yes', 'woo_variation_gallery_thumbnail_slide' ) ) ? 'woo-variation-gallery-enabled-thumbnail-slider' : ''
+		// ) );
 
-		$post_thumbnail_id = (int) apply_filters( 'woo_variation_gallery_post_thumbnail_id', $post_thumbnail_id, $attachment_ids, $product );
-		$attachment_ids    = (array) apply_filters( 'woo_variation_gallery_attachment_ids', $attachment_ids, $post_thumbnail_id, $product );
-		ACTIVE_TODO_OC_END*/
+		// $post_thumbnail_id = (int) apply_filters( 'woo_variation_gallery_post_thumbnail_id', $post_thumbnail_id, $attachment_ids, $product );
+		// $attachment_ids    = (array) apply_filters( 'woo_variation_gallery_attachment_ids', $attachment_ids, $post_thumbnail_id, $product );
+		// ACTIVE_TODO_OC_END
 
-		$data['gallery_images_template_data']['attachment_ids_loop_image'] = array();
-		$data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'] = array();
-		$data['gallery_images_template_data']['attachment_ids_loop_remove_featured_image'] = array();
-		$data['gallery_images_template_data']['attachment_ids_loop_classes'] = array();
+		// $data['gallery_images_template_data']['attachment_ids_loop_image'] = array();
+		// $data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'] = array();
+		// $data['gallery_images_template_data']['attachment_ids_loop_remove_featured_image'] = array();
+		// $data['gallery_images_template_data']['attachment_ids_loop_classes'] = array();
 
-		if('variable' === $data['gallery_images_template_data']['product_type']){
+		// if('variable' === $data['gallery_images_template_data']['product_type']){
 
-			if(!empty(isset( $data['gallery_images_template_data']['product_variation']['variation_gallery_images'] ))){
+		// 	if(!empty(isset( $data['gallery_images_template_data']['product_variation']['variation_gallery_images'] ))){
 			    
-			    foreach ($data['gallery_images_template_data']['product_variation']['variation_gallery_images'] as $index=>$image) {
+		// 	    foreach ($data['gallery_images_template_data']['product_variation']['variation_gallery_images'] as $index=>$image) {
 
 			       	
 
-			        $data['gallery_images_template_data']['attachment_ids_loop_image'][$index] = $image;
-			        $data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'][$index] = $product->get_image_id();
+		// 	        $data['gallery_images_template_data']['attachment_ids_loop_image'][$index] = $image;
+		// 	        $data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'][$index] = $product->get_image_id();
 
-			        $data['gallery_images_template_data']['attachment_ids_loop_remove_featured_image'][$index] = false;
+		// 	        $data['gallery_images_template_data']['attachment_ids_loop_remove_featured_image'][$index] = false;
 
-			        if ( $data['gallery_images_template_data']['attachment_ids_loop_remove_featured_image'][$index] && absint( $id ) == absint( $data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'][$index] ) ) {
-			            return '';
-			        }
+		// 	        if ( $data['gallery_images_template_data']['attachment_ids_loop_remove_featured_image'][$index] && absint( $id ) == absint( $data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'][$index] ) ) {
+		// 	            return '';
+		// 	        }
 
-			        $data['gallery_images_template_data']['attachment_ids_loop_classes'][$index] = array( '' );
+		// 	        $data['gallery_images_template_data']['attachment_ids_loop_classes'][$index] = array( '' );
 
-			        if ( isset( $data['gallery_images_template_data']['attachment_ids_loop_image'][$index]['video_link'] ) && ! empty( $data['gallery_images_template_data']['attachment_ids_loop_image'][$index]['video_link'] ) ) {
-			            array_push( $data['gallery_images_template_data']['attachment_ids_loop_classes'][$index], '' );
-			        }
+		// 	        if ( isset( $data['gallery_images_template_data']['attachment_ids_loop_image'][$index]['video_link'] ) && ! empty( $data['gallery_images_template_data']['attachment_ids_loop_image'][$index]['video_link'] ) ) {
+		// 	            array_push( $data['gallery_images_template_data']['attachment_ids_loop_classes'][$index], '' );
+		// 	        }
 
-			        //ACTIVE_TODO publish hook if required 
-			        // $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id] = apply_filters( '', $classes, $id, $image );
+		// 	        //ACTIVE_TODO publish hook if required 
+		// 	        // $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id] = apply_filters( '', $classes, $id, $image );
 			        
-			       //return '<div class="' . esc_attr( implode( ' ', array_map( 'sanitize_html_class', array_unique( $classes ) ) ) ) . '"><div>' . $inner_html . '</div></div>';
+		// 	       //return '<div class="' . esc_attr( implode( ' ', array_map( 'sanitize_html_class', array_unique( $classes ) ) ) ) . '"><div>' . $inner_html . '</div></div>';
 	     
-			    }
-			}
+		// 	    }
+		// 	}
 
-		}
+		// }
 
-		else {
-			if(!empty($data['gallery_images_template_data']['attachment_ids'])){
+		// else {
+		// 	if(!empty($data['gallery_images_template_data']['attachment_ids'])){
 			    
-			    foreach ($data['gallery_images_template_data']['attachment_ids'] as $index=>$id) {
+		// 	    foreach ($data['gallery_images_template_data']['attachment_ids'] as $index=>$id) {
 
 			       	
 
-			        $data['gallery_images_template_data']['attachment_ids_loop_image'][$index] = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_product_attachment_props( $id );
-			        $data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'][$index] = $product->get_image_id();
+		// 	        $data['gallery_images_template_data']['attachment_ids_loop_image'][$index] = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_product_attachment_props( $id );
+		// 	        $data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'][$index] = $product->get_image_id();
 
-			        $data['gallery_images_template_data']['attachment_ids_loop_remove_featured_image'][$index] = false;
+		// 	        $data['gallery_images_template_data']['attachment_ids_loop_remove_featured_image'][$index] = false;
 
-			        if ( $data['gallery_images_template_data']['attachment_ids_loop_remove_featured_image'][$index] && absint( $id ) == absint( $data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'][$index] ) ) {
-			            return '';
-			        }
+		// 	        if ( $data['gallery_images_template_data']['attachment_ids_loop_remove_featured_image'][$index] && absint( $id ) == absint( $data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'][$index] ) ) {
+		// 	            return '';
+		// 	        }
 
-			        $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id] = array( '' );
+		// 	        $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id] = array( '' );
 
-			        if ( isset( $data['gallery_images_template_data']['attachment_ids_loop_image'][$id]['video_link'] ) && ! empty( $data['gallery_images_template_data']['attachment_ids_loop_image'][$id]['video_link'] ) ) {
-			            array_push( $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id], '' );
-			        }
+		// 	        if ( isset( $data['gallery_images_template_data']['attachment_ids_loop_image'][$id]['video_link'] ) && ! empty( $data['gallery_images_template_data']['attachment_ids_loop_image'][$id]['video_link'] ) ) {
+		// 	            array_push( $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id], '' );
+		// 	        }
 
-			        //ACTIVE_TODO publish hook if required 
-			        // $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id] = apply_filters( '', $classes, $id, $image );
+		// 	        //ACTIVE_TODO publish hook if required 
+		// 	        // $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id] = apply_filters( '', $classes, $id, $image );
 			        
-			       //return '<div class="' . esc_attr( implode( ' ', array_map( 'sanitize_html_class', array_unique( $classes ) ) ) ) . '"><div>' . $inner_html . '</div></div>';
+		// 	       //return '<div class="' . esc_attr( implode( ' ', array_map( 'sanitize_html_class', array_unique( $classes ) ) ) ) . '"><div>' . $inner_html . '</div></div>';
 	     
-			    }
-			}
-		}
+		// 	    }
+		// 	}
+		// }
 
-		// ACTIVE_TODO ultimately move all below core implementtaion in the new core class of gallery_images or maybe simply in the wbc variations class 
+		// // ACTIVE_TODO ultimately move all below core implementtaion in the new core class of gallery_images or maybe simply in the wbc variations class 
+
+		$data = \eo\wbc\model\publics\data_model\SP_WBC_Variations::prepare_gallery_template_data(array('page'=>'single-product'));
 
 		//////////////// start core
 

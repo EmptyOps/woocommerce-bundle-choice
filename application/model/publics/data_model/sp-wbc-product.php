@@ -29,4 +29,11 @@ class SP_WBC_Product extends SP_Product {
 
     }
 
+    ////// @shraddha //////
+    public static function variations_data_before_admin_form_render() {
+
+    	question need to confirm -- to s
+
+    }
+
 }

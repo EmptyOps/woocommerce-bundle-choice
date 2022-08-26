@@ -2923,5 +2923,10 @@ class EOWBC_Filter_Widget {
 			\EOWBC_Error_Handler::log('Could not find current category in eo\wbc\model\publics\component\EO_WBC_Filter_Widget');
 		}
 	}
+
+	public function get_filter_sets($filter_prefix=''){
+
+		$filter_sets = unserialize(wbc()->options->get_option_group('filters_'.$filter_prefix.'filter_set',"a:0:{}"));
+	}	
 }	
 ?>

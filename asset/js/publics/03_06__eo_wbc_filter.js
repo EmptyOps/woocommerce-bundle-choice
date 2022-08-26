@@ -256,15 +256,12 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				//form_data={_category:jQuery("[name='_category']").val().trim(),action:'eo_wbc_filter'};	
 				/*move to tableview done -- to s
 				form_data=jQuery("#tableview_order,#tableview_order_direction,[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();*/
-
 				form_data=jQuery("[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
-
 				// move to tableview done -- to s
 				// if(eo_wbc_e_tabview.eo_table_view_per_page){
 				// 	form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
 				// }
 			}
-
 			// if(jQuery("select[name='orderby']").length>0){
 			// 	form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
 			// }
@@ -274,9 +271,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			
 			/*move to tableview done -- to s 
 			form_data.action='eo_wbc_e_tabview';*/
-
 		} else {
-
 			after all prepare_query_data move are finalized then we need to structure form_data preparation properly -- to h
 				--  like form serialize or base form preparation conataining all base wbc fields should happen in here on wbc layer only. -- to h & -- to s
 					--  so after above is done then remove from.serialize statements from tableview layer. -- to s
@@ -286,39 +281,29 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			if(eo_wbc_e_tabview.eo_table_view_per_page){
 				form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
 			}*/
-
 			if(jQuery("select[name='orderby']").length>0){
 				form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
 			}
-
 			/*move to tableview done -- to s
 			if(jQuery("#tableview_order").val()!=='' && jQuery("#tableview_order_direction").val()!==''){
 				form_data+='&tableview_order='+jQuery("#tableview_order").val();
 				form_data+='&tableview_order_direction='+jQuery("#tableview_order_direction").val();
 			}*/
-
 			/*move to tableview done -- to s
 			form_data+='&action=eo_wbc_e_tabview';*/
 		}
-
 		////////////////////////////////
-
 		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
 		// --add to be confirmed 2601 TO 2705--
-
 		if(init_call) {
 			jQuery("form#eo_wbc_filter [name='paged']").val('1');
 			jQuery("form#eo_wbc_filter [name='last_paged']").val('1');
-
 			jQuery("form#eo_wbc_filter [name='_category']").val(jQuery("form#eo_wbc_filter [name='_current_category']"));
 			jQuery("form#eo_wbc_filter [name='_attribute']").val("");
 		}
-
 		var form=jQuery("form#eo_wbc_filter");	
-
 		// jQuery(form).attr('method','POST');	
 		// jQuery("[name*='action']").val("eo_wbc_e_tabview");	
-
 		// form_data=undefined;
 		// if(init_call){
 		// 	if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
@@ -341,11 +326,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// 			form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
 		// 		}
 		// 	}
-
 		// 	if(jQuery("select[name='orderby']").length>0){
 		// 		form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
 		// 	}
-
 		// 	if(jQuery("select[name='orderby']").length>0){
 		// 		form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
 		// 	}
@@ -355,25 +338,20 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// 	if(eo_wbc_e_tabview.eo_table_view_per_page){
 		// 		form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
 		// 	}
-
 		// 	if(jQuery("select[name='orderby']").length>0){
 		// 		form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
 		// 	}
-
 		// 	if(jQuery("#tableview_order").val()!=='' && jQuery("#tableview_order_direction").val()!==''){
 		// 		form_data+='&tableview_order='+jQuery("#tableview_order").val();
 		// 		form_data+='&tableview_order_direction='+jQuery("#tableview_order_direction").val();
 		// 	}
 		// }
-
 		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
 		// --add to be confirmed 3159 TO 3232--
-
 		// var form=jQuery("form#eo_wbc_filter");	
 										
 		// jQuery(form).attr('method','POST');	
 		// jQuery("[name*='action']").val("eo_wbc_e_tabview");	
-
 		// form_data=undefined;
 		// if(init_call){
 		// 	if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
@@ -396,7 +374,6 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// 			form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
 		// 		}
 		// 	}
-
 		// 	if(jQuery("select[name='orderby']").length>0){
 		// 		form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
 		// 	}
@@ -406,28 +383,21 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// 	if(eo_wbc_e_tabview.eo_table_view_per_page){
 		// 		form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
 		// 	}
-
 		// 	if(jQuery("select[name='orderby']").length>0){
 		// 		form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
 		// 	}
 		// }
-
 		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template1.js
 		// --add to be confirmed 630 TO 734--
-
 		// if(init_call) {
 		// 	jQuery("form#eo_wbc_filter [name='paged']").val('1');
 		// 	jQuery("form#eo_wbc_filter [name='last_paged']").val('1');
-
 		// 	jQuery("form#eo_wbc_filter [name='_category']").val(jQuery("form#eo_wbc_filter [name='_current_category']"));
 		// 	jQuery("form#eo_wbc_filter [name='_attribute']").val("");
 		// }
-
 		// var form=jQuery("form#eo_wbc_filter");	
-
 		// jQuery(form).attr('method','POST');	
 		// jQuery("[name*='action']").val(eo_wbc_e_tabview.eo_ajax_func);	
-
 		// form_data=undefined;
 		// if(init_call){
 		// 	if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
@@ -450,11 +420,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// 			form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
 		// 		}
 		// 	}
-
 		// 	if(jQuery("select[name='orderby']").length>0){
 		// 		form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
 		// 	}
-
 		// 	if(jQuery("select[name='orderby']").length>0){
 		// 		form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
 		// 	}
@@ -464,26 +432,20 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// 	if(eo_wbc_e_tabview.eo_table_view_per_page){
 		// 		form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
 		// 	}
-
 		// 	if(jQuery("select[name='orderby']").length>0){
 		// 		form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
 		// 	}
-
 		// 	if(jQuery("#tableview_order").val()!=='' && jQuery("#tableview_order_direction").val()!==''){
 		// 		form_data+='&tableview_order='+jQuery("#tableview_order").val();
 		// 		form_data+='&tableview_order_direction='+jQuery("#tableview_order_direction").val();
 		// 	}
 		// }
-
-
 		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template2.js
 		// --add to be confirmed 302 TO 375--
-
 					// var form=jQuery("form#eo_wbc_filter");	
 										
 					// jQuery(form).attr('method','POST');	
 					// jQuery("[name*='action']").val("eo_wbc_e_tabview")
-
 					// form_data=undefined;
 					// if(init_call){
 					// 	if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
@@ -506,7 +468,6 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 					// 			form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
 					// 		}
 					// 	}
-
 					// 	if(jQuery("select[name='orderby']").length>0){
 					// 		form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
 					// 	}
@@ -516,15 +477,12 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 					// 	if(eo_wbc_e_tabview.eo_table_view_per_page){
 					// 		form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
 					// 	}
-
 					// 	if(jQuery("select[name='orderby']").length>0){
 					// 		form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
 					// 	}
 					// }
-
 		/////////////////////////////////////////////////
 		// /var/www/html/drashti_project/27-05-2022/woocommerce-bundle-choice/asset/js/publics/eo_wbc_filter.js
-
 		////////////////////shraddha/////////////////////////
 		// var form=jQuery(form_selector/*"form#eo_wbc_filter"*/);	
 		// if(form.find('[name="html_destination"]').length>0){
@@ -701,12 +659,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		/*// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template1.js
 		// --add to be confirmed 630 TO 734--
-
 		eo_wbc_e_render_table(data);
-
 		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template2.js
 		// --add to be confirmed 302 TO 375--
-
 		eo_wbc_e_render_table(data);*/
 
 
@@ -767,14 +722,11 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			jQuery(".woocommerce-result-count").html('');	
 		}
 	};
-
     ///////////// -- 15-06-2022 -- @drashti -- ///////////////////////////////
     var compatability = function(section, object, expected_result) {
-
     	// ACTIVE_TODO_OC_START
     	// do the call from where the below section is moved here, and if you already did the call then show and confirm with me -- to d 
     	// ACTIVE_TODO_OC_END
-
         if(section == 'product-listing'){
             jQuery('.products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)').addClass('product_grid_view');
             //jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination').css('visibility','visible');
@@ -804,11 +756,18 @@ window.document.splugins.wbc.filters.core = function( configs ) {
             if(typeof(LazyLoad)=='function'){
                 eowbc_lazyload();
             } 
+        }else if(section == 'pagination_link_selector'){
+
+        	object = ',jet-filters-pagination';
+
+        }else if(section == 'products-grid'){
+
         }
 
         var compatability_callback = null ;
         window.document.splugins.events.api.notifyAllObservers( 'filters', 'compatability', {}, compatability_callback );
         
+        return object;
     };
 
     var eo_wbc_filter_render_html = function(data,render_container){
@@ -941,7 +900,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 							-- ACTIVE_TODO but very soon maybe the tableview may not have its own pagination links dom if that is not necessary for it -- to h and -- to d 
 						-- and for setting and getting current page_number 
 							--	for it may simply need to use the pagination modules published api interface -- to d 
-		ACTIVE_TODO_OC_END					
+		ACTIVE_TODO_OC_END			
 			// --- pagination module move this code ---
 			// if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html()!==undefined) {
 			// 	if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination').length>0){
@@ -966,7 +925,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			// else {
 			// 	jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html('');	
 			// }
-			// --- end ---
+			// --- end ---				
+		window.document.splugins.wbc.pagination.core.set_pagination_html(data);
+
 		/*}*/
 
 
@@ -1185,6 +1146,52 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     var filter_set_click = function() {
 
+       	window.document.splugins.events.api.subscribe_observer_filter('filters', 'wbc', 'filter_set_click');
+
+    	--- aa code woo-bundle-choice/application/view/publics/filters/two_tabs.php mathi move karyo se @a ---
+ 		--- start ---
+ 		let group_id_alt = $(this).data('tab-altname');
+        $('[data-tab-group="'+group_id_alt+'"]').css('display','none');
+
+        $('[data-tab-group="'+group_id_alt+'"]').each(function(){
+          let reset_script = $(this).find('[data-reset]').data('reset');
+          if(typeof(reset_script)!==typeof(undefined) && reset_script!=''){
+            eval(reset_script);
+          }        
+
+          <?php if(wp_is_mobile() and !wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
+            if($(this).hasClass('active')){
+              $(this).trigger('click');
+            }
+            reset_script = $(this).next().find('[data-reset]').data('reset');
+            if(typeof(reset_script)!==typeof(undefined) && reset_script!=''){
+              eval(reset_script);
+            }        
+          <?php endif; ?>
+
+          <?php if(wp_is_mobile() and wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
+            if($(this).hasClass('active')){
+              $(this).trigger('click');
+            }          
+            
+            reset_script = $(this).next().find('[data-reset]').data('reset');
+            if(typeof(reset_script)!==typeof(undefined) && reset_script!=''){
+              eval(reset_script);
+            }  
+
+            jQuery(".close_sticky_mob_filter").trigger('click');
+
+          <?php endif; ?>
+
+          
+        });
+
+        <?php if(wp_is_mobile() and wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
+          $('#advance_filter_mob_alternate').removeClass('status_hidden');
+          $(".toggle_sticky_mob_filter.advance_filter_mob[data-tab-group='"+$(this).data('tab-altname')+"'],.toggle_sticky_mob_filter.advance_filter_mob[data-tab-group='']").hide();
+        <?php endif; ?>    
+        --- end ---	
+
     };
 
     var change = function() {
@@ -1381,20 +1388,25 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 
 	};
 
-	var jet_filters_pagination_private = function(){
-		-- aa function mathi code pagination sub module na module ma move thase ane baki no jo applicable hoy to aa module ma rese. Pan aa point execute karvi te pela niche point confirm karvano rese. -- to a & -- to h
+	var get_pagination_html_private = function(){
+		
+	}
+
+	var set_pagination_html_private = function(data){
+		
+		// -- aa function mathi code pagination sub module na module ma move thase ane baki no jo applicable hoy to aa module ma rese. Pan aa point execute karvi te pela niche point confirm karvano rese. -- to a & -- to h INVALID 
 			-- need to confirm ke aa call diamond api mathi j ave se ne ane te jo no male to ani calling sycuance hirenbhai sathe confirm karvi. -- to a
 			-- ane je aya compatibility no code dekhay se te aa code je module ma finally implement thay tena compatibility function ma move karva no -- to a
 				-- aa code jya thi move thyo teni calling sycuanc(03-08-2022) -- to a
 		// --- move this code frome this file in this eo_wbc_filter_render_html()
 		-- aa code diamond api ma move nathi kavano aya j implementation karvanu-- to a
-		if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html()!==undefined) {
-			if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination').length>0){
-				jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html());
+		if(jQuery('.woocommerce-pagination,.pagination'+compatability('pagination_link_selector',null,null),jQuery(data)).html()!==undefined) {
+			if(jQuery('.woocommerce-pagination,.pagination'+compatability('pagination_link_selector',null,null)).length>0){
+				jQuery(".woocommerce-pagination,.pagination"+compatability('pagination_link_selector',null,null)).html(jQuery('.woocommerce-pagination,.pagination'+compatability('pagination_link_selector',null,null),jQuery(data)).html());
 			} else {
 
-				@d once all the pagination related layers brought to this function, we need to check if the below incomplete implementation is completely implemented anywhere in our repo -- to d -- to a
-					--	if not then test with the elementor created category feed page and also with elementor hello themes custom loop to check if it works. if not then must uncomment the last uncommented line and finish the implementation -- to d or -- to b -- to a
+				@d once all the pagination related layers brought to this function, we need to check if the below incomplete implementation is completely implemented anywhere in our repo -- to d 
+					--	if not then test with the elementor created category feed page and also with elementor hello themes custom loop to check if it works. if not then must uncomment the last uncommented line and finish the implementation -- to d or -- to b 
 				let product_container = jQuery(".products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)");
 				if(product_container.length<=0) {
 					product_container = jQuery(".elementor-products-grid");
@@ -1409,17 +1421,14 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 			}
 		}
 		else {
-			jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html('');	
+			jQuery(".woocommerce-pagination,.pagination"+compatability('pagination_link_selector',null,null)).html('');	
 		}
-
 	}
-
+	
 	var on_click_listener = function(){
-
 		ACTIVE_TODO_OC_START
 		NOTE : it will bind to all kind of such on_click events of pagination, it will be private but it may broadcast notification with a callback which js layers of like tableview and so on can call when they recieve their own click event or they can simply call below on_click function". so it is private function.
 		ACTIVE_TODO_OC_END
-
 		-- aa 3 mate comman click event banavano -- to a
 		-- compatibility function mathi selector lavano -- to a 
 			-- compatibility function ma section ni condition kem implement karvani(shraddha ne pushvu, compatibility function na example jova hoy to common.js ma swatches module mase) -- to a
@@ -1557,9 +1566,14 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 
 		},
 
-		jet_filters_pagination: function(){
+		get_pagination_html: function(){
 
-			jet_filters_pagination_private();
+			get_pagination_html_private();
+		},
+
+		set_pagination_html: function(data){
+
+			set_pagination_html_private(data);
 		},
 
 		reset: function() {
@@ -2130,7 +2144,6 @@ jQuery(document).ready(function($){
 		jQuery('[name="paged"]').val('1');
 		// jQuery.fn.eo_wbc_filter_change(true);
 		window.document.splugins.filters.api.eo_wbc_filter_change_wrapper(true);
-
 	});*/
 
 });
@@ -2186,4 +2199,3 @@ function reset_button(e,selector){
 	jQuery(selector).filter(".eo_wbc_button_selected").trigger('click');
 	return false;
 }
-	

@@ -1,4 +1,10 @@
 
+<?php 
+
+$two_tabs_confings = array();
+$two_tabs_confings['filter_setting_alternate_mobile'] = wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile');
+
+ ?>
 
 <?php $category_array = array_column($filter_sets_data, 'first_tab_category'); ?>
 
@@ -13,18 +19,14 @@
       </a> 
     }
     ?>  
-  	<a class="item center <?php echo isset($_GET[$second_tab_id])?'':'active' ?>" data-category="<?php _e($first_tab_category); ?>" style="margin-right: 0px !important;" data-tab="filter_setting_advance_first_tabs" data-tab-name="<?php _e($first_tab_id); ?>" data-tab-altname="<?php _e($second_tab_id); ?>">
-  		<!-- $prefix.'_fconfig_set' -->
-  	<?php _e($first_tab_label); ?>
-  	</a>
 
   	<!-- <a class="center item <?php /*echo isset($_GET[$second_tab_id])?'active':'' */?>" data-category="<?php/* _e($second_tab_category);*/ ?>" style="margin-left: 0px !important;" data-tab="filter_setting_advance_second_tabs" data-tab-name="<?php/* _e($second_tab_id); */?>" data-tab-altname="<?php /*_e($first_tab_id); */?>">
     <?php _e($second_tab_label); ?> -->
   	</a>
   	<script type="text/javascript">
+
 		jQuery(document).ready(function($){
-		  --- aa code sp_metal_color/assets/variations.assets.php ma move karyo se @a ---
-      --- start ---
+
     	$('.filter_setting_advance_two_tabs .item').on('click',function(event){
         
         /*let _category = $("[name='_category']").val();
@@ -37,57 +39,67 @@
         $('[name="cat_filter__two_tabs"]').val($(this).data('category'));*/
 
         jQuery('[name="_current_category"]').val(jQuery(this).data('category'));
+
         jQuery('[name="_category"]').val(jQuery(this).data('category'));
 
         //cat_filter__two_tabs
 				$('.filter_setting_advance_two_tabs .item').removeClass('active');
+
 				$(this).addClass('active');
+
         let group_id = $(this).data('tab-name');
+
         let display_style = 'inline-block';
-        <?php if(wp_is_mobile() and !wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
+        <?php /*if(wp_is_mobile() and !wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')):*/ ?>
+        <?php if(wp_is_mobile() and !$two_tabs_confings['filter_setting_alternate_mobile']): ?>
           display_style='block';
         <?php endif; ?>
         $('[data-tab-group="'+group_id+'"]:not(.toggle_sticky_mob_filter.advance_filter_mob)').not('[data-tab-group]:has([data-switch_filter_type-alternate])').css('display',display_style);
 
-        let group_id_alt = $(this).data('tab-altname');
-        $('[data-tab-group="'+group_id_alt+'"]').css('display','none');
+        --- aa code woo-bundle-choice/asset/js/publics/03_06__eo_wbc_filter.js filter_set_click() ma move karyo se @a ---
+        --- start ---
+        // let group_id_alt = $(this).data('tab-altname');
+        // $('[data-tab-group="'+group_id_alt+'"]').css('display','none');
 
-        $('[data-tab-group="'+group_id_alt+'"]').each(function(){
-          let reset_script = $(this).find('[data-reset]').data('reset');
-          if(typeof(reset_script)!==typeof(undefined) && reset_script!=''){
-            eval(reset_script);
-          }          
-          <?php if(wp_is_mobile() and !wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
-            if($(this).hasClass('active')){
-              $(this).trigger('click');
-            }
-            reset_script = $(this).next().find('[data-reset]').data('reset');
-            if(typeof(reset_script)!==typeof(undefined) && reset_script!=''){
-              eval(reset_script);
-            }        
-          <?php endif; ?>
+        // $('[data-tab-group="'+group_id_alt+'"]').each(function(){
+        //   let reset_script = $(this).find('[data-reset]').data('reset');
+        //   if(typeof(reset_script)!==typeof(undefined) && reset_script!=''){
+        //     eval(reset_script);
+        //   }        
 
-          <?php if(wp_is_mobile() and wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
-            if($(this).hasClass('active')){
-              $(this).trigger('click');
-            }          
+          <?php /*if(wp_is_mobile() and !wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')):*/ ?>
+        //     if($(this).hasClass('active')){
+        //       $(this).trigger('click');
+        //     }
+        //     reset_script = $(this).next().find('[data-reset]').data('reset');
+        //     if(typeof(reset_script)!==typeof(undefined) && reset_script!=''){
+        //       eval(reset_script);
+        //     }        
+          <?php /*endif;*/ ?>
+
+          <?php /*if(wp_is_mobile() and wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')):*/ ?>
+        //     if($(this).hasClass('active')){
+        //       $(this).trigger('click');
+        //     }          
             
-            reset_script = $(this).next().find('[data-reset]').data('reset');
-            if(typeof(reset_script)!==typeof(undefined) && reset_script!=''){
-              eval(reset_script);
-            }  
+        //     reset_script = $(this).next().find('[data-reset]').data('reset');
+        //     if(typeof(reset_script)!==typeof(undefined) && reset_script!=''){
+        //       eval(reset_script);
+        //     }  
 
-            jQuery(".close_sticky_mob_filter").trigger('click');
+        //     jQuery(".close_sticky_mob_filter").trigger('click');
 
-          <?php endif; ?>
+          <?php /*endif;*/ ?>
 
           
-        });
+        // });
 
-        <?php if(wp_is_mobile() and wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
-          $('#advance_filter_mob_alternate').removeClass('status_hidden');
-          $(".toggle_sticky_mob_filter.advance_filter_mob[data-tab-group='"+$(this).data('tab-altname')+"'],.toggle_sticky_mob_filter.advance_filter_mob[data-tab-group='']").hide();
-        <?php endif; ?>
+        <?php /*if(wp_is_mobile() and wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')):*/ ?>
+        //   $('#advance_filter_mob_alternate').removeClass('status_hidden');
+        //   $(".toggle_sticky_mob_filter.advance_filter_mob[data-tab-group='"+$(this).data('tab-altname')+"'],.toggle_sticky_mob_filter.advance_filter_mob[data-tab-group='']").hide();
+        <?php /*endif;*/ ?>
+        --- end ---
+
         //////// 27-05-2022 - @drashti /////////
         --add to be confirmed--
         -- jo uniq hoy to subscribe mate call back nu emplent karvanu rese -- to a
@@ -97,7 +109,7 @@
 			});
       //jQuery('[data-tab="filter_setting_advance_first_tabs"]').trigger('click');
       jQuery('.filter_setting_advance_two_tabs .item.active').click();
-		  --- end ---
+
     });
 	</script>
 </div>

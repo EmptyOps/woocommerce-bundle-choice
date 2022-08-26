@@ -9,60 +9,29 @@
 $current_category = implode(',',$thisObj->___category);
 
 $is_first_root_category = true;
-$filter_sets = unserialize(wbc()->options->get_option_group('filters_filter_set',"a:0:{}"));
+// $filter_sets = unserialize(wbc()->options->get_option_group('filters_filter_set',"a:0:{}"));
+\eo\wbc\model\publics\component::instance()->get_filter_sets();
 //wbc()->common->pr($filter_sets);
 if(!empty($filter_sets) and is_array($filter_sets)){
 	foreach ($filter_sets as $filter_sets_key => $filter_sets_val) {
 		//$filter_sets[$filter_sets_key] = $filter_sets_val['filter_set_name'];
 		//if(wbc()->options->get_option('filters_filter_setting','filter_setting_advance_two_tabs')) {
 
-		if ($is_first_root_category and !empty($filter_sets_val['filter_set_two_tabs_first'])) {
-				
-        	$_first_tab_id = $filter_sets_val['filter_set_category']; //wbc()->options->get_option('filters_filter_setting','filter_setting_advance_first_category');
-        	$_first_tab_key = $filter_sets_key; //wbc()->options->get_option('filters_filter_setting','filter_setting_advance_first_tabs');
-        	/*$_second_tab_id = wbc()->options->get_option('filters_filter_setting','filter_setting_advance_second_category');
-        	$_second_tab_key = wbc()->options->get_option('filters_filter_setting','filter_setting_advance_second_tabs');*/
-
-        	$_current_category_id = false;
-
-        	if(!empty($_REQUEST[$_first_tab_key])) {
-        		$_current_category_id = $_first_tab_id;
-        	} /*elseif(!empty($_REQUEST[$_second_tab_key])) {			            		
-        		$_current_category_id = $_second_tab_id;
-        	}*/
-
-        	if(!empty($_current_category_id)) {
-        		
-        		$_current_category_object = wbc()->wc->get_term_by('term_id',$_current_category_id,'product_cat');
-        		if(!empty($_current_category_object) and !is_wp_error($_current_category_object)) {
-            		$_GET['_current_category'] = $_current_category_object->slug;
-                	$_REQUEST['_current_category']= $_current_category_object->slug;
-
-                	if(!empty($_GET['_category'])){
-                		$_GET['_category'] .= ','.$_current_category_object->slug;
-                		$_REQUEST['_category'] .= ','.$_current_category_object->slug;
-                	} else {
-                		$_GET['_category'] = $_current_category_object->slug;
-                		$_REQUEST['_category'] = $_current_category_object->slug;
-                	}
-                }
-
-                break;
-        	}
-        }
         //}
 
         //if(wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting','filter_setting_advance_two_tabs',false)) {
 
-        if ($is_first_root_category and !empty($filter_sets_val['filter_set_two_tabs_first'])) {
+        if ( ( $is_first_root_category and !empty($filter_sets_val['filter_set_two_tabs_first']) ) or
+        	(!$is_first_root_category and !empty($filter_sets_val['filter_set_two_tabs_second']))
+    		) {
 
-			$first_tab_term = wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting','filter_setting_advance_first_category',false);
+			$first_tab_term = $filter_sets_val['filter_set_category'];
 			if(!empty($first_tab_term)) {
 				$first_tab_term = wbc()->wc->get_term_by('id',$first_tab_term, 'product_cat');
 				if(!empty($first_tab_term) and !is_wp_error($first_tab_term)) {
 					$first_tab_term = $first_tab_term->slug;
 
-					if(!empty($_GET[wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting','filter_setting_advance_first_tabs',false)])) {
+					if(!empty($_GET[$filter_sets_val['filter_set_two_tabs_first']])) {
 
 						$current_category = $first_tab_term;
 					}
@@ -73,34 +42,34 @@ if(!empty($filter_sets) and is_array($filter_sets)){
 				$first_tab_term = false;
 			}
 
-			$second_tab_term = wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting','filter_setting_advance_second_category',false);
-			if(!empty($second_tab_term)) {
-				$second_tab_term = wbc()->wc->get_term_by('id',$second_tab_term, 'product_cat');
-				if(!empty($second_tab_term) and !is_wp_error($second_tab_term)) {
-					$second_tab_term = $second_tab_term->slug;
+			// $second_tab_term = wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting','filter_setting_advance_second_category',false);
+			// if(!empty($second_tab_term)) {
+			// 	$second_tab_term = wbc()->wc->get_term_by('id',$second_tab_term, 'product_cat');
+			// 	if(!empty($second_tab_term) and !is_wp_error($second_tab_term)) {
+			// 		$second_tab_term = $second_tab_term->slug;
 					
-					if( !empty($_GET[wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting','filter_setting_advance_second_tabs',false)]) ) {
-						$current_category = $second_tab_term;
-					}
-				} else {
-					$second_tab_term = false;
-				}
-			} else {
-				$second_tab_term = false;
-			}
+			// 		if( !empty($_GET[wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting','filter_setting_advance_second_tabs',false)]) ) {
+			// 			$current_category = $second_tab_term;
+			// 		}
+			// 	} else {
+			// 		$second_tab_term = false;
+			// 	}
+			// } else {
+			// 	$second_tab_term = false;
+			// }
 
 
-			if(isset($_GET[wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting','filter_setting_advance_second_tabs',false)])) {
+			if(!isset($_GET[$filter_sets_val['filter_set_two_tabs_first']])) {
 				if(array_search($first_tab_term,$thisObj->___category) !==false ) {			
 					unset($thisObj->___category[array_search($first_tab_term,$thisObj->___category)]);
 				}
 
 			} else {
 
-				if(array_search($second_tab_term,$thisObj->___category) !==false ) {
+				// if(array_search($second_tab_term,$thisObj->___category) !==false ) {
 
-					unset($thisObj->___category[array_search($second_tab_term,$thisObj->___category)]);
-				}		
+				// 	unset($thisObj->___category[array_search($second_tab_term,$thisObj->___category)]);
+				// }		
 			}
 			break;
 		}

@@ -30,12 +30,20 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
             $args['page_section'] = 'swatches';
             self::instance()->selectron($args['page_section'],$args);
             
+            // ACTIVE_TODO when we do product simple type implementation at that time most probably we need to move below section out of if or just implement the simple type counter part in else block of this if condition 
             $args['data'] = \eo\wbc\model\publics\SP_Model_Feed::instance()->get_data('gallery_images_init');
             $args['page_section'] = 'gallery_images';
             self::instance()->selectron($args['page_section'],$args);
+
+            $args['data'] = \eo\wbc\model\publics\SP_Model_Feed::instance()->get_data('swatches_cart_form');
+            $args['page_section'] = 'swatches_cart_form';
+            self::instance()->selectron($args['page_section'],$args);
+
+            $args['data'] = \eo\wbc\model\publics\SP_Model_Feed::instance()->get_data('swatches_reset_link');
+            $args['page_section'] = 'swatches_reset_link';
+            self::instance()->selectron($args['page_section'],$args);
         }
 
-        
         $this->getUI(null,$args);
     }
 
@@ -70,6 +78,32 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
                 // //wbc_pr($data); die();
                 // return $this->load_view($data,$args);
                 \eo\wbc\model\publics\SP_Model_Feed::instance()->render_gallery_images_template_callback($args);
+            }
+
+        } elseif ($page_section == 'swatches_cart_form') {
+
+            if ($container_class == 'SP_SLCTRN_Swatches_Cart_Form') {
+                
+                remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
+                add_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_single_add_to_cart', 30 );
+
+                remove_action( 'woocommerce_before_shop_loop', '????????', 10 );
+            \eo\wbc\model\SP_WBC_Compatibility::instance()->loop_render_compatability('before_shop_loop_item_loop_thumbnail_action', $args);
+            
+                add_action( 'woocommerce_before_shop_loop', function() use($page_section,$args) { 
+
+                } 
+
+                // $data = $args['hook_callback_args'];
+                // unset($args['hook_callback_args']);
+                // return $this->load_view($data,$args);
+            }
+
+        } elseif ($page_section == 'swatches_reset_link') {
+
+            if ($container_class == 'SP_SLCTRN_Swatches_Reset_Link') {
+
+                return \eo\wbc\model\publics\SP_Model_Feed::instance()->prepare_swatches_reset_link_data($args)['content'];
             }
 
         } else{
@@ -111,6 +145,40 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
                 return $this->selectron_hook_render($page_section,'swatches',$args);
 
             }, 200, 2);
+        } else if ($args['page_section'] == 'swatches_cart_form') {
+
+            $SP_SLCTRN_Swatches_Cart_Form_class = "\\sp\\wbc\\controller\\publics\\feed\\loop\\selectron\\SP_SLCTRN_Swatches_Cart_Form";                      
+            $SP_SLCTRN_Swatches_Cart_Form_object = call_user_func(array($SP_SLCTRN_Swatches_Cart_Form_class,'instance'));
+
+            $sections = array(
+                $page_section=>array(
+                    'handler_object'=>$SP_SLCTRN_Swatches_Cart_Form_object,
+                    'default_action'=>'woocommerce_before_shop_loop',
+                    'default_params'=>'',
+                    'default_priority'=>110,
+                    'section'=>$page_section
+                )                    
+            );
+
+            \sp\selectron\controller\publics\Publics::render('wbc',$sections);
+
+        } else if ($args['page_section'] == 'swatches_reset_link') {
+
+            $SP_SLCTRN_Swatches_Reset_Link_class = "\\sp\\wbc\\controller\\publics\\feed\\loop\\selectron\\SP_SLCTRN_Swatches_Reset_Link";                      
+            $SP_SLCTRN_Swatches_Reset_Link_object = call_user_func(array($SP_SLCTRN_Swatches_Reset_Link_class,'instance'));
+
+            $sections = array(
+                $page_section=>array(
+                    'handler_object'=>$SP_SLCTRN_Swatches_Reset_Link_object,
+                    'default_action'=>'woocommerce_reset_variations_link',
+                    'default_render_method'=>'add_filter',
+                    'default_params'=>'',
+                    'default_priority'=>'',
+                    'section'=>$page_section
+                )                    
+            );
+            \sp\selectron\controller\publics\Publics::render('wbc',$sections);
+
         }
     }
 
@@ -161,13 +229,13 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
             //drop type var from below and set name of the one only template, simply set it hardcoded -- to b done
             $args['data']['template_data'] = array();
             $args['data']['template_data']['template_key'] = 'woo_dropdown_attribute-template_part';
-            $args['data']['template_data']['template_sub_dir'] = 'single-product/variations-swatches/woo_dropdown_attribute';
+            $args['data']['template_data']['template_sub_dir'] = 'loop/variations-swatches/woo_dropdown_attribute';
             $args['data']['template_data']['data'] = $args['data'];
             $args['data']['template_data']['singleton_function'] = 'wbc';
 
 
             $args['widget_key'] = '';
-            $args['template_sub_dir'] = 'single-product/variations-swatches/woo_dropdown_attribute';
+            $args['template_sub_dir'] = 'loop/variations-swatches/woo_dropdown_attribute';
             $args['template_option_key'] = '';
             $args['option_group_key'] = '';
             $args['template_key'] = 'woo_dropdown_attribute';
@@ -184,12 +252,12 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
                 ACTIVE_TODO_OC_END*/
             $args['data']['template_data'] = array();
             $args['data']['template_data']['template_key'] = 'sp_variations_optionsUI-common-option_template_part';
-            $args['data']['template_data']['template_sub_dir'] = 'single-product/variations-swatches';
+            $args['data']['template_data']['template_sub_dir'] = 'loop/variations-swatches';
             $args['data']['template_data']['data'] = $args['data'];
             $args['data']['template_data']['singleton_function'] = 'wbc';
 
             $args['widget_key'] = '';
-            $args['template_sub_dir'] = 'single-product/variations-swatches';
+            $args['template_sub_dir'] = 'loop/variations-swatches';
             $args['template_option_key'] = '';
             $args['option_group_key'] = '';
             $args['template_key'] = 'sp_variations_optionsUI-common';
@@ -201,7 +269,7 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
             // drop type var from below and set name of the one only template, simply set it hardcoded -- to b done
 
             $args['widget_key'] = '';
-            $args['template_sub_dir'] = 'single-product/variations-swatches';
+            $args['template_sub_dir'] = 'loop/variations-swatches';
             $args['template_option_key'] = '';
             $args['option_group_key'] = '';
             $args['template_key'] = 'sp_variations_optionsUI-common-ribbon_wrapper';
