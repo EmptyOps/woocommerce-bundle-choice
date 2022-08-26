@@ -11,15 +11,15 @@ $template = null;
 wbc_pr($image);*/ 
 if ( $image['extra_params_org']['type'] == 'video' or $image['extra_params_org']['type'] == 'video_url' ) {
     if ( $image['extra_params_org']['type'] == 'video' and isset( $image['extra_params_org']['embed_type'] ) && $image['extra_params_org']['embed_type'] === 'iframe' ) {
-        
+         
         $template = array(
             'type' => 'div',
-            'class' => array('spui_iframes_video_container',esc_attr( $image['class'] ), 'img-item', 'img-item-'.$image['extra_params_org']['type'], 'img-item-'.$image['extra_params_org']['type'].'-'.wbc()->common->current_theme_key() ),
+            'class' => 'spui_thumbnail_shop_video_iframe '.esc_attr( $image['class'] ) .' img-item img-item-'.$image['extra_params_org']['type'] .' img-item-'.$image['extra_params_org']['type'].'-'.wbc()->common->current_theme_key().' '.$image['gallery_images_item_classes'],
             'child' => array(
                 array(
                     'type' => 'iframe',
                     'src' => $image['video_src'],
-                    'attr' => array( 'width' => '454', 'height' => '454', 'frameborder' => '0', 'webkitallowfullscreen' => '', 'mozallowfullscreen' => '', 'allowfullscreen' => '' ),
+                    'attr' => array( 'webkitallowfullscreen' => '', 'mozallowfullscreen' => '', 'allowfullscreen' => '' ),
                 ),
             ),
         );
@@ -29,17 +29,23 @@ if ( $image['extra_params_org']['type'] == 'video' or $image['extra_params_org']
         
         $template = array(
             'type' => 'div',
-            'class' => array('spui_video_container',esc_attr( $image['class'] ), 'img-item', 'img-item-'.$image['extra_params_org']['type'], 'img-item-'.$image['extra_params_org']['type'].'-'.wbc()->common->current_theme_key() ),
+            'class' => 'spui_thumbnail_shop_video '.esc_attr( $image['class'] ) .' img-item img-item-'.$image['extra_params_org']['type'] .' img-item-'.$image['extra_params_org']['type'].'-'.wbc()->common->current_theme_key().' '.$image['gallery_images_item_classes'],
             'child' => array(
                 array(
                     'type' => 'video',
-                    'attr' => array('preload'=>'auto', 'controlsList'=>'nodownload','autoplay'=>''),
+                    'attr' => array('controlsList'=>'nodownload','autoplay'=>'','muted'=>''),
                     'child' => array(
                         array(
                             'type'=>'header',
                             'tag' => 'source',
                             'src' => $image['video_src'],
                             'attr' => array( 'type' => 'video/mp4' ),
+                        ),
+                        array(
+                            'type'=>'header',
+                            'tag' => 'source',
+                            'src' => $image['video_src'],
+                            'attr' => array( 'type' => 'video/ogg' ),
                         ),
                     ),
                 ),
@@ -49,4 +55,4 @@ if ( $image['extra_params_org']['type'] == 'video' or $image['extra_params_org']
 }
 
 
-$template = apply_filters( 'woocommerce_single_product_image_thumbnail_html',$template, $image['image_id'] );
+// $template = apply_filters( 'woocommerce_single_product_image_thumbnail_html',$template, $image['image_id'] );

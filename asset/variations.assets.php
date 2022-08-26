@@ -460,3 +460,34 @@ if(is_category()) {
 		
 	});
 </script>
+
+/*---TOOLTIP--- @tejas*/
+/*----JS----*/
+<script type="text/javascript">
+jQuery( document ).ready(function() {
+    jQuery('[data-toggle="popover"]').popover(); 
+});
+</script>
+/*----CSS---*/
+<style type="text/css">
+	:root{
+        --spui_tooltip_bg:#8224e3;
+        --spui_tooltip_text:#fff;
+        --spui_tooltip_textsize:0.8rem;
+        --spui_tooltip_padding:.5rem 1.75rem;
+        --spui_tooltip_body:none;
+    }
+    .popover-header{
+        background: var(--spui_tooltip_bg);
+        color: var(--spui_tooltip_text);
+        font-size: var(--spui_tooltip_textsize);
+        font-weight: normal;
+        padding: var(--spui_tooltip_padding);
+    }
+    .popover-body{
+        display: var(--spui_tooltip_body);
+    }
+    .bs-popover-auto[x-placement^=top]>.arrow::after, .bs-popover-top>.arrow::after{
+        border-top-color:var(--spui_tooltip_bg);
+    }
+</style>
