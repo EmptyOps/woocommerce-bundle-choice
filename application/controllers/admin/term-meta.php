@@ -56,6 +56,18 @@ class Term_Meta {
 				add_filter('manage_edit-pa_' . $tax->attribute_name . '_columns', array(&$this, 'attribute_columns'));
 				
 				add_filter('manage_pa_' . $tax->attribute_name . '_custom_column', array(&$this, 'attribute_column'), 10, 3);
+
+
+
+
+				add_action('pa_' . $tax->attribute_name . '_add_form_fields', array($this, 'add_attribute_field_display_limit'));
+				
+				add_action('pa_' . $tax->attribute_name . '_edit_form_fields', array($this, 'edit_attributre_field_display_limit'), 10, 2);
+
+				add_filter('manage_edit-pa_' . $tax->attribute_name . '_columns', array(&$this, 'attribute_columns_display_limit'));
+				
+				add_filter('manage_pa_' . $tax->attribute_name . '_custom_column', array(&$this, 'attribute_column_display_limit'), 10, 3);
+
 			}
 		}		
 	}
@@ -78,9 +90,37 @@ class Term_Meta {
 			}
 		}
 	}
+
+	public function add_attribute_field_display_limit() {
+
+		if(!empty($this->attribute)) {
+			// $this->woocommerce_add_attribute_thumbnail_field();
+
+			$this->display_limit();
+		}
+	}
 	
 
 	public function edit_attributre_field($term, $taxonomy) {
+		if(!empty($this->attribute)) {
+			$this->woocommerce_edit_attributre_thumbnail_field($term,$taxonomy);
+			switch ($this->attribute->attribute_type) {
+				case 'color':					
+					$this->color_chooser(true,$term, $taxonomy);
+					break;
+
+				case 'image' or 'image_text' or 'dropdown_image' or 'dropdown_image_only':
+					$this->image_chooser(true,$term, $taxonomy);
+					break;
+
+				case 'button':
+					break;				
+			}
+
+		}
+	}
+
+	public function edit_attributre_field_display_limit($term, $taxonomy) {
 		if(!empty($this->attribute)) {
 			$this->woocommerce_edit_attributre_thumbnail_field($term,$taxonomy);
 			switch ($this->attribute->attribute_type) {
@@ -121,6 +161,18 @@ class Term_Meta {
 		<?php
 		echo ob_get_clean();
 	}	
+
+	public function display_limit($is_edit = false,$term = false, $taxonomy = false) {
+
+		ob_start();
+		?>
+			<div class="form-field term-slug-wrap">	
+				<input name="sp_variations_swatches_cat_display_limit" id="sp_variations_swatches_cat_display_limit" type="number" class="sp_variations_swatches_cat_display_limit"  style="width: 94%;">	
+				<p>Limit number of swatches options to display on shop/category page Loopbox.</p>
+			</div>			
+		<?php
+		echo ob_get_clean();
+	}
 
 	public function image_chooser($is_edit = false,$term = false, $taxonomy = false) {
 		global $woocommerce;
@@ -233,6 +285,26 @@ class Term_Meta {
 		return $columns;
 	}
 
+	public function attribute_columns_display_limit($columns) {
+		// $columns = $this->woocommerce_product_attribute_columns($columns);
+		$column_title = '';
+		$column_key = '';
+		if(!empty($this->attribute)) {			
+			
+			$column_title = 'Display Limit(Loopbox)';
+			$column_key = 'sp_variations_swatches_cat_display_limit';	
+		}
+
+		if(is_array($columns) and !empty($columns)){
+			$__columns = array();		
+			$__columns['cb'] = $columns['cb'];			
+			$__columns[$column_key] = __($column_title, 'woo-bundle-choice');			
+			unset($columns['cb']);			
+			$columns = array_merge($__columns, $columns);	
+		}
+		return $columns;
+	}
+
 	public function attribute_column($columns, $column, $id) {
 		$columns = $this->woocommerce_product_attribute_column($columns, $column, $id);
 		global $woocommerce; 
@@ -261,6 +333,25 @@ class Term_Meta {
 			$columns .= '<img src="' . esc_url( $src ) . '" alt="' . esc_attr__( 'Thumbnail', 'woo-bundle-choice' ) . '" class="wp-post-image" height="48" width="48" />';
 		}
 		//die($columns);
+		return $columns;
+	}
+
+	public function attribute_column_display_limit($columns, $column, $id) {
+		
+		// $columns = $this->woocommerce_product_attribute_column($columns, $column, $id);
+		global $woocommerce; 
+
+		$limit = 3;			
+		if (get_term_meta( $id,'sp_variations_swatches_cat_display_limit')) {
+            
+            $limit = get_term_meta( $id,'sp_variations_swatches_cat_display_limit',true);
+        } 
+
+        if(empty($limit)) {
+        	$limit = 3;			
+        }			
+		$columns .= '<div '.$limit.' ></div>';
+
 		return $columns;
 	}
 
