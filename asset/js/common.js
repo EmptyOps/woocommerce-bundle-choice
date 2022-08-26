@@ -3768,8 +3768,8 @@ class SP_WBC_Variations_Swatches_Feed_Page extends SP_WBC_Variations_Swatches {
 
     init() {
         
-        init_private();
-
+        var _this = this;
+        _this.#init_private();
     }
 
 }
@@ -3793,7 +3793,9 @@ if(window.document.splugins.common.is_category_page) {
             //  publish it 
             window.document.splugins.wbc.variations.swatches.feed_page.api = window.document.splugins.wbc.variations.swatches.feed_page.core( common_configs.feed_page_config );
 
-            window.document.splugins.wbc.variations.swatches.feed_page.api.init();
+            // window.document.splugins.wbc.variations.swatches.feed_page.api.init();
+            base_container = jQuery( ( window.document.splugins.common._o( common_configs.configs, 'base_container_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
+            jQuery(base_container).sp_wbc_variations_swatches_feed_page();
 
         // },2000);    
 
