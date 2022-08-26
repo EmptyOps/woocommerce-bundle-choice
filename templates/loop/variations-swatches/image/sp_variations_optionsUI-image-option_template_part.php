@@ -12,6 +12,10 @@
     </div>
 </li>*/
 
+/*---TOOLTIP---@tejas*/
+/*data-placement="top"
+title="Header"
+data-toggle="popover" data-trigger="hover"*/
 
 
 $temnplate = null;
@@ -21,7 +25,7 @@ $slug_or_option = is_object($term) ? $term->slug : $term;
 $template = array(
     'type' => 'li',
     'class' => 'spui_color_icon_variable_item '.$woo_dropdown_attribute_html_data['class'].' '.$woo_dropdown_attribute_html_data['options_loop_class'][$slug_or_option],
-    'attr' => array( 'aria-checked' => 'false', 'tabindex' => '0', 'role' => 'radio' ),
+    'attr' => array( 'aria-checked' => 'false', 'tabindex' => '0', 'role' => 'radio','data-placement'=>'top','title'=>esc_html( $term->name ),'data-toggle'=>'popover', 'data-trigger'=>'hover' ),
     'child' => array(
         array(
             'type' => 'div',

@@ -12,6 +12,18 @@ class SP_SPlugins {
         // Calling parent's constructor
         super(element, configs);
     }
+
+    #init_private(){
+
+    } 
+
+    init() {
+
+        var _this = this; 
+        _this.#init_private();
+
+    }  
+    
 }
 window.document.splugins = window.document.splugins || {};
 

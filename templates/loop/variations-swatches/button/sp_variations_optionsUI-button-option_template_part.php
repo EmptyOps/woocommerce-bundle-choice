@@ -6,12 +6,16 @@
 
 
 /*<!--Size-->
-<li aria-checked="false" tabindex="0" role="radio" class="spui_size_variable_item">
+<li aria-checked="false" tabindex="0" role="radio" class="spui_size_variable_item" >
     <div class="spui_size_variable_item_contents">
         <span class="spui_variable_item_span_size">L</span>
     </div>
 </li>*/
 
+/*---TOOLTIP---@tejas*/
+/*data-placement="top"
+title="Header"
+data-toggle="popover" data-trigger="hover"*/
 
 $template = null;
 
@@ -20,7 +24,7 @@ $slug_or_option = is_object($term) ? $term->slug : $term;
 $template = array(
     'type' => 'li',
     'class' => 'spui_button_variable_item '.$woo_dropdown_attribute_html_data['class'].' '.$woo_dropdown_attribute_html_data['options_loop_class'][$slug_or_option],
-    'attr' => array( 'aria-checked' => 'false', 'tabindex' => '0', 'role' => 'radio' ),
+    'attr' => array( 'aria-checked' => 'false', 'tabindex' => '0', 'role' => 'radio','data-placement'=>'top','title'=>esc_html( $term->name ),'data-toggle'=>'popover', 'data-trigger'=>'hover' ),
     'child' => array(
         array(
             'type' => 'div',
