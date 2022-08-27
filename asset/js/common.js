@@ -3543,23 +3543,23 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
         var _this = this;
          ////////////////////////////////////////////////////
          if(section == 'init'){
-             jQuery(function (#jQuery)
+             jQuery(function (jQuery)
              {
-                 #jQuery(document).on('wc_variation_form', '.variations_form', function (event) {
+                 jQuery(document).on('wc_variation_form', '.variations_form', function (event) {
                    // $jQuery('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery();
 
                    _this.#init_preprocess(event);
 
                  }); // Support for Jetpack's Infinite Scroll,
 
-                 #jQuery(document.body).on('post-load', function (event) {
+                 jQuery(document.body).on('post-load', function (event) {
                    // $jQuery('.woo-variation-gallery-wrapper:not(.woo-variation-gallery-product-type-variable):not(.wvg-loaded)').WooVariationGallery();
 
                    _this.#init_preprocess(event);
 
                  }); // YITH Quickview
 
-                 #jQuery(document).on('qv_loader_stop', function (event) {
+                 jQuery(document).on('qv_loader_stop', function (event) {
                    // $jQuery('.woo-variation-gallery-wrapper:not(.woo-variation-gallery-product-type-variable):not(.wvg-loaded)').WooVariationGallery();
 
                    _this.#init_preprocess(event);
@@ -3832,7 +3832,7 @@ if(window.document.splugins.common.is_category_page) {
             window.document.splugins.wbc.variations.swatches.feed_page.api = window.document.splugins.wbc.variations.swatches.feed_page.core( common_configs.feed_page_config );
 
             // window.document.splugins.wbc.variations.swatches.feed_page.api.init();
-            base_container = jQuery( ( window.document.splugins.common._o( common_configs.configs, 'base_container_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
+            base_container = jQuery( ( window.document.splugins.common._o( common_configs.configs, 'base_container_loop_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
             jQuery(base_container).sp_wbc_variations_swatches_feed_page();
 
         // },2000);    
@@ -3902,16 +3902,8 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
         _this.#zoom_area_hover_in_listener(type);
     
-        _this.#on_zoom_area_hover_in(type);
-    
-        _this.#zoom_area_hover_in(type);
-    
         _this.#zoom_area_hover_out_listener(type);
-    
-        _this.#on_zoom_area_hover_out(type);
-    
-        _this.#zoom_area_hover_out(type);
-    
+
     }
 
     #zoom_area_hover_in_listener(type) {
@@ -4039,7 +4031,7 @@ if(window.document.splugins.common.is_category_page) {
             window.document.splugins.wbc.variations.gallery_images.single_product.api = window.document.splugins.wbc.variations.gallery_images.single_product.core( common_configs.single_product_configs );
 
             // window.document.splugins.wbc.variations.gallery_images.single_product.api.init();
-            base_container = jQuery( ( window.document.splugins.common._o( common_configs.configs, 'base_container_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
+            base_container = jQuery( ( window.document.splugins.common._o( common_configs.configs, 'base_container_loop_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
             jQuery(base_container).SP_WBC_Variations_Gallery_Images_Feed_Page();
 
         // },2000);
