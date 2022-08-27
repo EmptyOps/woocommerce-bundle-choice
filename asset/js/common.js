@@ -2878,8 +2878,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
         }
 
         // ACTIVE_TODO temp. 
-        _this.data.current_variation = _this.data.product_variations[4];
-        _this.#process_images_template(_this.data.product_variations[0].variation_gallery_images);
+        // _this.data.current_variation = _this.data.product_variations[4];
+        // _this.#process_images_template(_this.data.product_variations[0].variation_gallery_images);
 
         var sp_variations_gallery_images_loaded_callback = null ;
         window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'sp_variations_gallery_images_loaded', {}, sp_variations_gallery_images_loaded_callback );

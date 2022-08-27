@@ -58,10 +58,10 @@ if ( $woo_dropdown_attribute_html_data['args']['sp_variations_swatches_cat_displ
         need to set here the link that is provided in data variables from data layer -- to h & -- to s
             array(
                 'type' => 'a',
-                'preHTML' => '+2 More',
+                'preHTML' => '+'.($woo_dropdown_attribute_html_data['args']['actual_total_options'] - $woo_dropdown_attribute_html_data['args']['sp_variations_swatches_cat_display_limit']).' More',
                 'href' => '#',
             ),
-        ),
+        ),  
     );
 }
 

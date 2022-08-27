@@ -438,11 +438,18 @@ class SP_WBC_Variations extends SP_Variations {
 	public static function selected_variation_attributes($default_attributes) {
 
 		check on google if woocommerce have any hook for 
-		check on google with keyword "woocommerce product default attributes hook" -- to h & -- to s
-		check on google with keyword "woocommerce javascript api default attributes override or default"
+		check on google with keyword "woocommerce product default attributes hook or hook overide" -- to h & -- to s
+		check on google with keyword "woocommerce javascript api default attributes override or default attributes"
 		check on google with keyword "woocommerce javascript api selected variation settings"
-		                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-		self::get_default_attributes($data['gallery_images_template_data']['default_attributes']);
+		if none of the above solves are problem then we need to find some mature woostandard otherwise it will be challenging to maintain -- to h & -- to s
+
+		$default_attributes = \eo\wbc\system\core\SP_Router::get_query_params_formated('attr', $input_method, 'key_value');
+
+		if(!empty($default_attributes)) {
+			
+		}
+
+		return $default_attributes;
 
 	}
 
@@ -1081,7 +1088,6 @@ class SP_WBC_Variations extends SP_Variations {
 
 		// classes
 		$data['woo_dropdown_attribute_html_data']['class']                 = 'variable-item ' .esc_attr( $data['woo_dropdown_attribute_html_data']['type'] ).'-variable-item spui-wbc-swatches-variable-item spui-wbc-swatches-variable-item-'.$data['woo_dropdown_attribute_html_data']['type']. ' spui-wbc-swatches-variable-item-header spui-wbc-swatches-variable-item-'.$data['woo_dropdown_attribute_html_data']['type'].'-header variable-item-'.wbc()->common->current_theme_key(). ' variable-item-'.esc_attr( $data['woo_dropdown_attribute_html_data']['type'] ).'-'.wbc()->common->current_theme_key();
-
 		// defined limit
 			// NOTE: right now we are limiting swatches options right from the data layer here and maintaining actual_total_options var which can be used on template layers. but if in future woo hiden select dropdown or js layer require all options then we need to provide that in seprate variable. 
 		$data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit'] = get_term_meta( $data['woo_dropdown_attribute_html_data']['id'], 'sp_variations_swatches_cat_display_limit', true );
@@ -1146,12 +1152,20 @@ class SP_WBC_Variations extends SP_Variations {
 				$data['woo_dropdown_attribute_html_data']['options_loop_selected'] = array();
 				$data['woo_dropdown_attribute_html_data']['options_loop_option_name'] = array();
 				$data['woo_dropdown_attribute_html_data']['options_loop_class'] = array();
+				$data['woo_dropdown_attribute_html_data']['options_loop_html_attr'] = array();
 				foreach ( $data['woo_dropdown_attribute_html_data']['terms'] as $term ) {
 					if ( in_array( $term->slug, $data['woo_dropdown_attribute_html_data']['options'], true ) ) {
 
 						$data['woo_dropdown_attribute_html_data']['options_loop_class'][$term->slug] = esc_attr( $data['woo_dropdown_attribute_html_data']['type'] ).'-variable-item-'.esc_attr( $term->slug );
 
+						$data['woo_dropdown_attribute_html_data']['options_loop_selected'][$term->slug] = sanitize_title( $args['hook_callback_args']['hook_args']['selected'] ) === $args['hook_callback_args']['hook_args']['selected'] ? selected( $args['hook_callback_args']['hook_args']['selected'], sanitize_title( $term->slug ), false ) : selected( $args['hook_callback_args']['hook_args']['selected'], $term->slug, false );
+
 						$data['woo_dropdown_attribute_html_data']['options_loop_option_name'][$term->slug] = \eo\wbc\system\core\data_model\SP_Attribute::variation_option_name( $term->name, $term, $data['woo_dropdown_attribute_html_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product']);
+
+						$data['woo_dropdown_attribute_html_data']['options_loop_html_attr'][$term->slug] = array('data-value'=>array(esc_attr( $term->slug ), 'data-title'=>$data['woo_dropdown_attribute_html_data']['options_loop_option_name'][$term->slug]) );
+
+						\eo\wbc\system\core\SP_Router::get_query_params_formated('attr', $input_method, 'key_value');
+
 						/*echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) ) . '</option>';*/
 					}
 				}
@@ -1161,6 +1175,7 @@ class SP_WBC_Variations extends SP_Variations {
 				$data['woo_dropdown_attribute_html_data']['options_loop_selected'] = array();
 				$data['woo_dropdown_attribute_html_data']['options_loop_option_name'] = array();
 				$data['woo_dropdown_attribute_html_data']['options_loop_class'] = array();
+				$data['woo_dropdown_attribute_html_data']['options_loop_html_attr'] = array();
 				foreach ( $data['woo_dropdown_attribute_html_data']['options'] as $option ) {
 
 					$data['woo_dropdown_attribute_html_data']['options_loop_class'][$option] = esc_attr( $data['woo_dropdown_attribute_html_data']['type'] ).'-variable-item-'.esc_attr( $option );
@@ -1169,6 +1184,9 @@ class SP_WBC_Variations extends SP_Variations {
 					$data['woo_dropdown_attribute_html_data']['options_loop_selected'][$option] = sanitize_title( $args['hook_callback_args']['hook_args']['selected'] ) === $args['hook_callback_args']['hook_args']['selected'] ? selected( $args['hook_callback_args']['hook_args']['selected'], sanitize_title( $option ), false ) : selected( $args['hook_callback_args']['hook_args']['selected'], $option, false );
 
 					$data['woo_dropdown_attribute_html_data']['options_loop_option_name'][$option] = \eo\wbc\system\core\data_model\SP_Attribute::variation_option_name( $option, null, $data['woo_dropdown_attribute_html_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product']);
+
+					$data['woo_dropdown_attribute_html_data']['options_loop_html_attr'] = array('data-value' => array(esc_attr( $option ), 'data-title' => esc_attr( $option )) );
+
 					/*echo '<option value="' . esc_attr( $option ) . '" ' . $selected . '>' . esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) . '</option>';*/
 				}
 			}
@@ -1294,6 +1312,7 @@ class SP_WBC_Variations extends SP_Variations {
 				$data['variable_item_data']['options_loop_image_size'] = array();
 				$data['variable_item_data']['options_loop_image'] = array();
 				$data['variable_item_data']['options_loop_id'] = array();
+				$data['variable_item_data']['options_loop_html_attr'] = array();
 				foreach ( $data['variable_item_data']['terms'] as $term ) {
 					
 					if ( in_array( $term->slug, $data['woo_dropdown_attribute_html_data']['options'], true ) ) {
@@ -1312,6 +1331,8 @@ class SP_WBC_Variations extends SP_Variations {
 
 
 						$data['woo_dropdown_attribute_html_data']['options_loop_class'][$term->slug] = esc_attr( $data['woo_dropdown_attribute_html_data']['type'] ).'-variable-item-'.esc_attr( $term->slug ).' '.esc_attr( $data['variable_item_data']['options_loop_selected_class'][$term->slug]);
+
+						$data['variable_item_data']['options_loop_html_attr'][$option] = array( 'data-value' => esc_html( $term->name ), 'data-title' => esc_attr( $term->slug ) );
 
 						/*ACTIVE_TODO_OC_START
 						--------- a etlu wvs_default_variable_item alg che
@@ -1412,6 +1433,7 @@ class SP_WBC_Variations extends SP_Variations {
 					$data['variable_item_data']['options_loop_image_size'] = array();
 					$data['variable_item_data']['options_loop_image'] = array();
 					$data['variable_item_data']['options_loop_id'] = array();
+					$data['variable_item_data']['options_loop_html_attr'] = array();
 					foreach ( $data['woo_dropdown_attribute_html_data']['options'] as $option ) {
 						// This handles < 2.4.0 bw compatibility where text attributes were not sanitized.
 
@@ -1422,6 +1444,7 @@ class SP_WBC_Variations extends SP_Variations {
 						$data['variable_item_data']['options_loop_selected_class'][$option] = $data['variable_item_data']['options_loop_is_selected'][$option] ? 'selected' : '';
 						$data['variable_item_data']['options_loop_tooltip'][$option]        = trim( apply_filters( 'wvs_variable_item_tooltip', $data['variable_item_data']['options_loop_option'][$option], $data['woo_dropdown_attribute_html_data']['options'], $data['woo_dropdown_attribute_html_data']['args'] ) );
 
+						$data['variable_item_data']['options_loop_html_attr'][$option] = array('data-value' => , 'data-title' => );
 
 						if ( $data['variable_item_data']['is_archive'] && ! $show_archive_tooltip ) {
 							$data['variable_item_data']['options_loop_tooltip'][$option] = false;
@@ -1555,6 +1578,8 @@ class SP_WBC_Variations extends SP_Variations {
 		$data['gallery_images_template_data']['product_id'] = $product->get_id();
 
 		$data['gallery_images_template_data']['default_attributes'] = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_default_attributes($data['gallery_images_template_data']['product_id']);
+
+		$data['gallery_images_template_data']['default_attributes'] = $this->selected_variation_attributes($data['gallery_images_template_data']['default_attributes']);
 
 		$data['gallery_images_template_data']['default_variation_id'] = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_default_variation_id($product, $data['gallery_images_template_data']['default_attributes'] );
 

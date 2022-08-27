@@ -88,3 +88,10 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 }, 999);
 
 ?>
+
+
+<script type="text/javascript">
+	
+jQuery(base_container).check_variations();
+
+</script>
