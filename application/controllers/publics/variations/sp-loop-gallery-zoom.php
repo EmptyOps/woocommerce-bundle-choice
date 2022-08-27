@@ -34,6 +34,7 @@ class SP_Loop_Gallery_Zoom extends \eo\wbc\controllers\publics\Controller{
         
         \eo\wbc\model\publics\variations\SP_Model_Loop_Gallery_Zoom::instance()->render_core();
 
+        $args['page_section'] = 'loop_gallery_zoom';
         $this->selectron('loop_gallery_zoom',$args);
 
         $this->getUI(null,$args);
@@ -109,12 +110,12 @@ class SP_Loop_Gallery_Zoom extends \eo\wbc\controllers\publics\Controller{
 
             $args['data']['template_data'] = array(); 
             $args['data']['template_data']['template_key'] = 'gallery_zoom_{{template_key_device}}_image_loop_content';
-            $args['data']['template_data']['template_sub_dir'] = 'single-product/gallery-zoom';
+            $args['data']['template_data']['template_sub_dir'] = 'loop/gallery-zoom';
             $args['data']['template_data']['data'] = $args['data'];
             $args['data']['template_data']['singleton_function'] = 'wbc';
 
             $args['widget_key'] = '';
-            $args['template_sub_dir'] = 'single-product/gallery-zoom';
+            $args['template_sub_dir'] = 'loop/gallery-zoom';
             $args['template_option_key'] = '';
             $args['option_group_key'] = '';
             $args['template_key'] = 'gallery_zoom_{{template_key_device}}_image_loop';
