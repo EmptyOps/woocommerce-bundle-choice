@@ -2241,25 +2241,30 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
 
 	var init_private = function() {
 
+        window.document.splugins.events.api.createSubject( 'filter_sets', ['filter_set_click_start'] );
+
 		init_preprocess();
 	};
     
     var init_preprocess = function(event) { 
 
         preprocess(element, event);
+
+      	jQuery('.filter_setting_advance_two_tabs .item.active').click();
+
     }
 
     var preprocess = function(element, event) { 
 
-        process_images(type,element);
+        process_types(type,element);
     }
 
-    var process_images = function(type=null, element=null) { 
+    var process_types = function(type=null, element=null) { 
 
-        process_images_inner(type, element);    
+        process_types_inner(type, element);    
     }       
 
-    var process_images_inner = function(type, element) { 
+    var process_types_inner = function(type, element) { 
 
         process_events(type);
     }
@@ -2272,10 +2277,13 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
     var filter_set_click_listener = function() { 
 		
 		var on_filter_set_click_listener_callback = null ;
-        
-        window.document.splugins.events.api.notifyAllObservers( 'filters', 'on_filter_set_click_listener', {}, on_filter_set_click_listener_callback );
 
-    	on_filter_set_click();
+		jQuery('.filter_setting_advance_two_tabs .item').on('click',function(event){
+
+			on_filter_set_click();
+		});
+
+    	
     }
 
     var on_filter_set_click = function() { 
@@ -2285,61 +2293,110 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
 
     var filter_set_click = function() {
 
-       	window.document.splugins.events.api.subscribe_observer_filter('filters', 'wbc', 'filter_set_click');
+    	// --- aa code woo-bundle-choice/application/view/publics/filters/two_tabs.php mathi move karyo se @a ---
+    	// --- start ---
 
-    	--- aa code woo-bundle-choice/application/view/publics/filters/two_tabs.php mathi move karyo se @a ---
- 		--- start ---
- 		
- 		let group_id_alt = $(this).data('tab-altname');
-        $('[data-tab-group="'+group_id_alt+'"]').css('display','none');
+	    let display_style = 'inline-block';
 
-        $('[data-tab-group="'+group_id_alt+'"]').each(function(){
-          let reset_script = $(this).find('[data-reset]').data('reset');
-          if(typeof(reset_script)!==typeof(undefined) && reset_script!=''){
-            eval(reset_script);
-          }        
+	    // <?php /*if(wp_is_mobile() and !wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')):*/ ?>
+	    if((window.document.splugins.common.is_mobile) and !(_this.configs.filter_setting_alternate_mobile)){
+	    
+	      display_style='block';
+	    
+	    }
 
-          // <?php if(wp_is_mobile() and !wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
-          if((window.document.splugins.common.is_mobile) and !(_this.configs.filter_setting_alternate_mobile)){
+    	var filter_set_click_callback = null;
+	    var stat_object = window.document.splugins.events.api.apply_all_observer_filters( 'filters', 'filter_set_click_start',{display_style:display_style},filter_set_click_callback);  
 
-            if($(this).hasClass('active')){
-              $(this).trigger('click');
-            }
-            reset_script = $(this).next().find('[data-reset]').data('reset');
-            if(typeof(reset_script)!==typeof(undefined) && reset_script!=''){
-              eval(reset_script);
-            }        
-          }
+	    /*let _category = $("[name='_category']").val();
+	    _category = _category.split(',');
+	    if(_category.indexOf('_two_tabs')==-1){
+	      _category.push('_two_tabs');
+	      $("[name='_category']").val(_category.join(','));
+	    }
 
-          // <?php if(wp_is_mobile() and wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
-          if((window.document.splugins.common.is_mobile) and (_this.configs.filter_setting_alternate_mobile)){
+	    $('[name="cat_filter__two_tabs"]').val($(this).data('category'));*/
 
-            if($(this).hasClass('active')){
-              $(this).trigger('click');
-            }          
-            
-            reset_script = $(this).next().find('[data-reset]').data('reset');
-            if(typeof(reset_script)!==typeof(undefined) && reset_script!=''){
-              eval(reset_script);
-            }  
+	    jQuery('[name="_current_category"]').val(jQuery(this).data('category'));
 
-            jQuery(".close_sticky_mob_filter").trigger('click');
+	    jQuery('[name="_category"]').val(jQuery(this).data('category'));
 
-          }  
+	    //cat_filter__two_tabs
+	    
+	    $('.filter_setting_advance_two_tabs .item').removeClass('active');
 
+		$(this).addClass('active');
+
+	    let group_id = $(this).data('tab-name');
+
+	    $('[data-tab-group="'+group_id+'"]:not(.toggle_sticky_mob_filter.advance_filter_mob)').not('[data-tab-group]:has([data-switch_filter_type-alternate])').css('display',stat_object.display_style);	        
+
+        jQuery( _this.configs.filter_sets_data ).each(function (i, tab_data) {
+
+        	if(group_id == tab_data.first_tab_id){
+
+        		continue;
+        	}
+
+			let group_id_alt = tab_data.first_tab_id/*$(this).data('tab-altname')*/;
+		    $('[data-tab-group="'+group_id_alt+'"]').css('display','none');        	
+
+			$('[data-tab-group="'+group_id_alt+'"]').each(function(){
+		      let reset_script = $(this).find('[data-reset]').data('reset');
+		      if(typeof(reset_script)!==typeof(undefined) && reset_script!=''){
+		        eval(reset_script);
+		      }        
+
+		      // <?php if(wp_is_mobile() and !wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
+		      if((window.document.splugins.common.is_mobile) and !(_this.configs.filter_setting_alternate_mobile)){
+
+		        if($(this).hasClass('active')){
+		          $(this).trigger('click');
+		        }
+		        reset_script = $(this).next().find('[data-reset]').data('reset');
+		        if(typeof(reset_script)!==typeof(undefined) && reset_script!=''){
+		          eval(reset_script);
+		        }        
+		      }
+
+		      // <?php if(wp_is_mobile() and wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
+		      if((window.document.splugins.common.is_mobile) and (_this.configs.filter_setting_alternate_mobile)){
+
+		        if($(this).hasClass('active')){
+		          $(this).trigger('click');
+		        }          
+		        
+		        reset_script = $(this).next().find('[data-reset]').data('reset');
+		        if(typeof(reset_script)!==typeof(undefined) && reset_script!=''){
+		          eval(reset_script);
+		        }  
+
+		        jQuery(".close_sticky_mob_filter").trigger('click');
+
+		      }  
+
+		      
+		    });        	
           
         });
 
-        // <?php if(wp_is_mobile() and wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
-        if((window.document.splugins.common.is_mobile) and (_this.configs.filter_setting_alternate_mobile)){
+	    // <?php if(wp_is_mobile() and wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
+	    if((window.document.splugins.common.is_mobile) and (_this.configs.filter_setting_alternate_mobile)){
 
-          $('#advance_filter_mob_alternate').removeClass('status_hidden');
-          $(".toggle_sticky_mob_filter.advance_filter_mob[data-tab-group='"+$(this).data('tab-altname')+"'],.toggle_sticky_mob_filter.advance_filter_mob[data-tab-group='']").hide();
-        }
+	      $('#advance_filter_mob_alternate').removeClass('status_hidden');
 
-        jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
-        --- end ---	
+		  jQuery( _this.configs.filter_sets_data ).each(function (i, tab_data) {
 
+		  	$(".toggle_sticky_mob_filter.advance_filter_mob[data-tab-group='"+tab_data.first_tab_id/*$(this).data('tab-altname')*/+"'],.toggle_sticky_mob_filter.advance_filter_mob[data-tab-group='']").hide();
+
+		  });
+	      
+	    }
+
+	    // window.document.splugins.wbc.filters.core.eo_wbc_filter_change_wrapper(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
+	    window.document.splugins.wbc.filters.core.eo_wbc_filter_change_wrapper(false,'form#'+_this.configs.filter_prefix +'eo_wbc_filter','',{'this':this,'event':event});
+
+	    // --- end ---	
     };
 
 	return {
@@ -2352,6 +2409,10 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
 
 };
 
-window.document.splugins.wbc.filter_sets.api = window.document.splugins.wbc.filter_sets.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
-window.document.splugins.wbc.filter_sets.api.init(); 
+window.document.splugins.wbc.filter_sets.api = window.document.splugins.wbc.filter_sets.core( filter_sets_confings.filter_sets_confings );
+jQuery(document).ready(function(){
+
+	window.document.splugins.wbc.filter_sets.api.init(); 	
+});
+
 

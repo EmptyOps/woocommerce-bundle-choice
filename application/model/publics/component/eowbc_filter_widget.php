@@ -2806,6 +2806,7 @@ class EOWBC_Filter_Widget {
 		
 		}
 
+
 		if(
 				// !empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_two_tabs',false)) 
 				// and 
@@ -2866,6 +2867,15 @@ class EOWBC_Filter_Widget {
 						)],array_values($non_adv_ordered_filter));			
 			}
 		}
+
+
+		$filter_sets_confings = array();
+		$filter_sets_confings['filter_setting_alternate_mobile'] = wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile');
+		$filter_sets_confings['filter_prefix'] = $this->filter_prefix;
+		$filter_sets_confings['filter_sets_data'] = $filter_sets_data;
+
+		wbc()->load->asset('localize','filter_sets',array("filter_sets_confings" => $filter_sets_confings));
+
 
 		/*echo "non_adv_ordered_filter and adv_ordered_filter dump 1";
 		wbc()->common->pr($non_adv_ordered_filter);
