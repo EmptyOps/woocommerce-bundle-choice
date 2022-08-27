@@ -4001,7 +4001,9 @@ if(window.document.splugins.common.is_category_page) {
             //  publish it 
             window.document.splugins.wbc.variations.gallery_images.single_product.api = window.document.splugins.wbc.variations.gallery_images.single_product.core( common_configs.single_product_configs );
 
-            window.document.splugins.wbc.variations.gallery_images.single_product.api.init();
+            // window.document.splugins.wbc.variations.gallery_images.single_product.api.init();
+            base_container = jQuery( ( window.document.splugins.common._o( common_configs.configs, 'base_container_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
+            jQuery(base_container).SP_WBC_Variations_Gallery_Images_Feed_Page();
 
         // },2000);
     });
