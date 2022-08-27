@@ -2502,21 +2502,21 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 //  publish it 
 window.document.splugins.wbc.variations.swatches.api = window.document.splugins.wbc.variations.swatches.core( common_configs.swatches_config );
             
-if(window.document.splugins.common.is_item_page) {
+// if(window.document.splugins.common.is_item_page) {
 
-    jQuery(document).ready(function() {
+//     jQuery(document).ready(function() {
     
-        // window.setTimeout(function(){
+//         // window.setTimeout(function(){
 
-            // window.document.splugins.wbc.variations.swatches.api.init();
-            base_container = jQuery( ( window.document.splugins.common._o( common_configs.configs, 'base_container_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
-            jQuery(base_container).sp_wbc_variations_swatches();
+//             // window.document.splugins.wbc.variations.swatches.api.init();
+//             base_container = jQuery( ( window.document.splugins.common._o( common_configs.configs, 'base_container_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
+//             jQuery(base_container).sp_wbc_variations_swatches();
 
-        // },2000);    
+//         // },2000);    
 
-    } );
+//     } );
 
-}
+// }
 
 // the variations gallery_images js module
 class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
@@ -2884,8 +2884,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
         }
 
         // ACTIVE_TODO temp. 
-        _this.data.current_variation = _this.data.product_variations[4];
-        _this.#process_images_template(_this.data.product_variations[0].variation_gallery_images);
+        // _this.data.current_variation = _this.data.product_variations[4];
+        // _this.#process_images_template(_this.data.product_variations[0].variation_gallery_images);
 
         var sp_variations_gallery_images_loaded_callback = null ;
         window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'sp_variations_gallery_images_loaded', {}, sp_variations_gallery_images_loaded_callback );
@@ -3627,20 +3627,20 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
 //  publish it 
 window.document.splugins.wbc.variations.gallery_images.api = window.document.splugins.wbc.variations.gallery_images.core( common_configs.gallery_images_configs );
 
-if(window.document.splugins.common.is_item_page) {
+// if(window.document.splugins.common.is_item_page) {
 
-    jQuery(document).ready(function() {
+//     jQuery(document).ready(function() {
 
-        // window.setTimeout(function(){
+//         // window.setTimeout(function(){
 
-            // window.document.splugins.wbc.variations.gallery_images.api.init();
-            base_container = jQuery( ( window.document.splugins.common._o( common_configs.configs, 'base_container_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
-            jQuery(base_container).sp_wbc_variations_gallery_images();
+//             // window.document.splugins.wbc.variations.gallery_images.api.init();
+//             base_container = jQuery( ( window.document.splugins.common._o( common_configs.configs, 'base_container_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
+//             jQuery(base_container).sp_wbc_variations_gallery_images();
 
-        // },2000);
-    });
+//         // },2000);
+//     });
 
-}
+// }
 
 // ACTIVE_TODO_OC_START
 // put ACTIVE_TODO_OC_START and ACTIVE_TODO_OC_END around each open comments section, and then comment them -- to d 
@@ -3765,7 +3765,7 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
             window.document.splugins.wbc.variations.gallery_images.sp_slzm.api = window.document.splugins.wbc.variations.gallery_images.sp_slzm.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
 
 
-            window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.init();
+            // window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.init();
         // }, 2500);
     });
 
@@ -3832,8 +3832,8 @@ if(window.document.splugins.common.is_category_page) {
             window.document.splugins.wbc.variations.swatches.feed_page.api = window.document.splugins.wbc.variations.swatches.feed_page.core( common_configs.feed_page_config );
 
             // window.document.splugins.wbc.variations.swatches.feed_page.api.init();
-            base_container = jQuery( ( window.document.splugins.common._o( common_configs.configs, 'base_container_loop_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
-            jQuery(base_container).sp_wbc_variations_swatches_feed_page();
+            // base_container = jQuery( ( window.document.splugins.common._o( common_configs.configs, 'base_container_loop_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
+            // jQuery(base_container).sp_wbc_variations_swatches_feed_page();
 
         // },2000);    
 
@@ -4031,8 +4031,8 @@ if(window.document.splugins.common.is_category_page) {
             window.document.splugins.wbc.variations.gallery_images.single_product.api = window.document.splugins.wbc.variations.gallery_images.single_product.core( common_configs.single_product_configs );
 
             // window.document.splugins.wbc.variations.gallery_images.single_product.api.init();
-            base_container = jQuery( ( window.document.splugins.common._o( common_configs.configs, 'base_container_loop_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
-            jQuery(base_container).SP_WBC_Variations_Gallery_Images_Feed_Page();
+            // base_container = jQuery( ( window.document.splugins.common._o( common_configs.configs, 'base_container_loop_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
+            // jQuery(base_container).SP_WBC_Variations_Gallery_Images_Feed_Page();
 
         // },2000);
     });
