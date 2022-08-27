@@ -1,9 +1,11 @@
 
 <?php 
 
-$two_tabs_confings = array();
-$two_tabs_confings['filter_setting_alternate_mobile'] = wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile');
+$filter_sets_confings = array();
+$filter_sets_confings['filter_setting_alternate_mobile'] = wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile');
 
+-- load asset ma localize use kari ne load karavanu -- to a
+wbc()->load->asset('localize','filter_sets',$filter_sets_confings);
  ?>
 
 <?php $category_array = array_column($filter_sets_data, 'first_tab_category'); ?>
@@ -104,7 +106,10 @@ $two_tabs_confings['filter_setting_alternate_mobile'] = wbc()->options->get_opti
         --add to be confirmed--
         -- jo uniq hoy to subscribe mate call back nu emplent karvanu rese -- to a
         window.document.splugins.wbc.filters.core.eo_wbc_filter_change_wrapper(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
-        jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
+        --- aa code woo-bundle-choice/asset/js/publics/03_06__eo_wbc_filter.js filter_set_click() ma move karyo se @a ---
+        --- start ---       
+        // jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
+        --- end ---
         ////////////////////////////////////////
 			});
       //jQuery('[data-tab="filter_setting_advance_first_tabs"]').trigger('click');

@@ -46,6 +46,9 @@ class WBC_Config {
 		 		array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."/application/model/publics/component/eowbc_filter_widget.php" ), 
 		 		
 		 		array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."/application/controllers/extensions-http-handler.php" ), 
+
+		 		array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."/application/model/publics/data_model/sp-wbc-product.php" ), 
+
 			)	
 
 		);

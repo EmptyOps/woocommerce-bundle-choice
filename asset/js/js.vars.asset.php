@@ -87,6 +87,73 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 
 }, 999);
 
+
+add_action('wp_footer',function(){               
+   ?>
+   <script>
+    	jQuery(document).ready(function() {
+
+    		if(window.document.splugins.common.is_item_page || window.document.splugins.common.is_category_page) {
+    
+		        // window.setTimeout(function(){
+
+		            window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.init();
+		            
+		        // }, 2500);
+
+			}
+
+        	if(window.document.splugins.common.is_item_page) {
+
+		        // window.setTimeout(function(){
+
+		            // window.document.splugins.wbc.variations.gallery_images.api.init();
+		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.configs, 'base_container_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
+		            jQuery(base_container).sp_wbc_variations_gallery_images();
+
+		        // },2000);
+
+			}
+
+			if(window.document.splugins.common.is_category_page) {
+
+		        // window.setTimeout(function(){
+
+		            // window.document.splugins.wbc.variations.gallery_images.single_product.api.init();
+		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.configs, 'base_container_loop_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
+		            jQuery(base_container).SP_WBC_Variations_Gallery_Images_Feed_Page();
+
+		        // },2000);
+
+			}
+
+        	if(window.document.splugins.common.is_item_page) {
+			    
+		        // window.setTimeout(function(){
+
+		            // window.document.splugins.wbc.variations.swatches.api.init();
+		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.configs, 'base_container_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
+		            jQuery(base_container).sp_wbc_variations_swatches();
+
+		        // },2000);    
+			}
+
+			if(window.document.splugins.common.is_category_page) {
+			    
+		        // window.setTimeout(function(){
+
+		            // window.document.splugins.wbc.variations.swatches.feed_page.api.init();
+		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.configs, 'base_container_loop_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
+		            jQuery(base_container).sp_wbc_variations_swatches_feed_page();
+
+		        // },2000);    
+
+			}
+    	});
+   </script>    
+  <?php      
+}, PHP_INT_MAX);
+
 ?>
 
 
