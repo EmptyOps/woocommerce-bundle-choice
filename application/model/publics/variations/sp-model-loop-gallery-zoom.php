@@ -83,6 +83,9 @@ class SP_Model_Loop_Gallery_Zoom extends Eowbc_Base_Model_Publics {
 
 				$template_data = array(); 
 	            
+				ACTIVE_TODO as soon as required we need to enable the loops product id based support for the jas template ids. and on the common.js swatches and gallery images module also need to enable the same product id support in the child module also feed page and at their we can simply enable it based on getting the product id data from the base container and i think we are alredy getting their and saving under _this.
+					ACTIVE_TODO need to do applicable things from the above for the hover templates as well. 
+
 	            if($hook_key == 'sp_slzm_zoom_image_loop_js_tempalte') {
 		            $template_data['template_key'] = 'gallery_zoom_{{template_key_device}}_image_loop_content';
 

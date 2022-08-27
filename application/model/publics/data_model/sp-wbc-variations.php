@@ -437,7 +437,11 @@ class SP_WBC_Variations extends SP_Variations {
 
 	public static function selected_variation_attributes($default_attributes) {
 
-		if none of the above 
+		check on google if woocommerce have any hook for 
+		check on google with keyword "woocommerce product default attributes hook" -- to h & -- to s
+		check on google with keyword "woocommerce javascript api default attributes override or default"
+		check on google with keyword "woocommerce javascript api selected variation settings"
+		                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
 		self::get_default_attributes($data['gallery_images_template_data']['default_attributes']);
 
 	}
