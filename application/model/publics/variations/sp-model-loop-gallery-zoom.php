@@ -32,13 +32,13 @@ class SP_Model_Loop_Gallery_Zoom extends Eowbc_Base_Model_Publics {
 
 	public function render_ui(){
 		
-		add_filter('sp_slzm_zoom_container', function($classes){
+		add_filter('sp_slzm_loop_zoom_container', function($classes){
 			$classes[] = 'imagezoomsl_zoom_container';
 
 			return $classes;
 		});
 
-		$hook_array = array('sp_slzm_zoom_image_loop_js_tempalte', 'sp_slzm_zoom_image_loop_js_tempalte_hover');	
+		$hook_array = array('sp_slzm_loop_zoom_image_loop_js_tempalte', 'sp_slzm_loop_zoom_image_loop_js_tempalte_hover');	
 		foreach($hook_array as $hook_key) {
 			add_filter($hook_key /*'sp_slzm_zoom_image_loop_js_tempalte'*/,function($html, $index, $image) use($hook_key){
 
@@ -49,7 +49,7 @@ class SP_Model_Loop_Gallery_Zoom extends Eowbc_Base_Model_Publics {
 					return $html;	
 				}
 
-				if($hook_key == 'sp_slzm_zoom_image_loop_js_tempalte_hover' && $image['extra_params_org']['type'] != 'video') {
+				if($hook_key == 'sp_slzm_loop_zoom_image_loop_js_tempalte_hover' && $image['extra_params_org']['type'] != 'video') {
 
 	            	return $html;
 	            }
@@ -86,7 +86,7 @@ class SP_Model_Loop_Gallery_Zoom extends Eowbc_Base_Model_Publics {
 				ACTIVE_TODO as soon as required we need to enable the loops product id based support for the jas template ids. and on the common.js swatches and gallery images module also need to enable the same product id support in the child module also feed page and at their we can simply enable it based on getting the product id data from the base container and i think we are alredy getting their and saving under _this.
 					ACTIVE_TODO need to do applicable things from the above for the hover templates as well. 
 
-	            if($hook_key == 'sp_slzm_zoom_image_loop_js_tempalte') {
+	            if($hook_key == 'sp_slzm_loop_zoom_image_loop_js_tempalte') {
 		            $template_data['template_key'] = 'gallery_zoom_{{template_key_device}}_image_loop_content';
 
 		        } else {
@@ -127,26 +127,26 @@ class SP_Model_Loop_Gallery_Zoom extends Eowbc_Base_Model_Publics {
 	
 	public function render_core(){
 		
-		add_action('sp_variations_gallery_images_core', function(){
+		add_action('sp_variations_loop_gallery_images_core', function(){
 
 			$images_data = array();
-			$images_data = apply_filters('sp_slzm_zoom_images',$images_data);
+			$images_data = apply_filters('sp_slzm_loop_zoom_images',$images_data);
 
-			add_filter('sp_variations_gallery_images_zoom_ui', function($ui) use($images_data) {
+			add_filter('sp_variations_loop_gallery_images_zoom_ui', function($ui) use($images_data) {
 
 				$gallery_images_configs = array();
 
 				// ACTIVE_TODO we neet to manage the loding secuance here so that any zoom layers including external plugin implimentetion layers can add filter do it 
-				$gallery_images_configs['all_in_dom'] = apply_filters('sp_slzm_zoom_template_all_in_dom',0);
+				$gallery_images_configs['all_in_dom'] = apply_filters('sp_slzm_loop_zoom_template_all_in_dom',0);
 
 				// ACTIVE_TODO ultimately we need to provide this configs to js layer so it is better that configs loed from here to the js layer and js vars asset.php should tac from hier or ned to mange sum how.
 				$images_data['gallery_images_configs'] = $gallery_images_configs;
 
-				$classes = array('sp-variations-gallery-images-zoom');
-				$classes = apply_filters('sp_slzm_zoom_container',$classes);
+				$classes = array('sp-variations-loop-gallery-images-zoom');
+				$classes = apply_filters('sp_slzm_loop_zoom_container',$classes);
 
 				$html = null;
-				$html = apply_filters('sp_slzm_zoom_images_html',$html,$images_data);
+				$html = apply_filters('sp_slzm_loop_zoom_images_html',$html,$images_data);
 
 				$ui = array(
 					'type'=>'div',
@@ -160,7 +160,7 @@ class SP_Model_Loop_Gallery_Zoom extends Eowbc_Base_Model_Publics {
 			}, 10);
 
 			
-			$hook_array = array('sp_slzm_zoom_image_loop_js_tempalte', 'sp_slzm_zoom_image_loop_js_tempalte_hover');	
+			$hook_array = array('sp_slzm_loop_zoom_image_loop_js_tempalte', 'sp_slzm_loop_zoom_image_loop_js_tempalte_hover');	
 			//js template
 			foreach( $images_data['gallery_images_template_data']['attachment_ids_loop_image'] as $index => $image ) {
 
@@ -170,7 +170,7 @@ class SP_Model_Loop_Gallery_Zoom extends Eowbc_Base_Model_Publics {
 					$html = apply_filters($hook_key, $html, $index, $image);
 
 					$html = \sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($html,'sp_variations_gallery_images_zoom_container',array(),true);
-					echo \eo\wbc\model\UI_Builder::instance()->js_template_wrap('sp_slzm_zoom_image_loop_'.$index.($hook_key=='sp_slzm_zoom_image_loop_js_tempalte_hover'?'_hover':''),$html,'wp');
+					echo \eo\wbc\model\UI_Builder::instance()->js_template_wrap('sp_slzm_loop_zoom_image_loop_'.$index.($hook_key=='sp_slzm_loop_zoom_image_loop_js_tempalte_hover'?'_hover':''),$html,'wp');
 				}
 				
 			}
