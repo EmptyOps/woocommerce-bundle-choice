@@ -108,7 +108,7 @@ add_action('wp_footer',function(){
 		        // window.setTimeout(function(){
 
 		            // window.document.splugins.wbc.variations.gallery_images.api.init();
-		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.configs, 'base_container_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
+		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
 		            jQuery(base_container).sp_wbc_variations_gallery_images();
 
 		        // },2000);
@@ -120,7 +120,7 @@ add_action('wp_footer',function(){
 		        // window.setTimeout(function(){
 
 		            // window.document.splugins.wbc.variations.gallery_images.single_product.api.init();
-		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.configs, 'base_container_loop_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
+		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_loop_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
 		            jQuery(base_container).SP_WBC_Variations_Gallery_Images_Feed_Page();
 
 		        // },2000);
@@ -132,7 +132,7 @@ add_action('wp_footer',function(){
 		        // window.setTimeout(function(){
 
 		            // window.document.splugins.wbc.variations.swatches.api.init();
-		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.configs, 'base_container_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
+		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.swatches_config, 'base_container_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
 		            jQuery(base_container).sp_wbc_variations_swatches();
 
 		        // },2000);    
@@ -143,7 +143,7 @@ add_action('wp_footer',function(){
 		        // window.setTimeout(function(){
 
 		            // window.document.splugins.wbc.variations.swatches.feed_page.api.init();
-		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.configs, 'base_container_loop_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
+		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.swatches_config, 'base_container_loop_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
 		            jQuery(base_container).sp_wbc_variations_swatches_feed_page();
 
 		        // },2000);    
