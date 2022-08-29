@@ -1032,14 +1032,14 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
         var _this = this; 
 
-        _this.configs = jQuery.extend({}, {}/*default configs*/, configs);
+        _this.#configs = jQuery.extend({}, {}/*default configs*/, configs);
 
-        _this.configs.attribute_types_keys = Object.keys( _this.configs.attribute_types );
+        _this.#configs.attribute_types_keys = Object.keys( _this.configs.attribute_types );
 
-        _this.base_container = jQuery( ( window.document.splugins.common._o( _this.configs, 'base_container_selector') ? _this.configs.base_container_selector : '.variations_form' ) );      
+        _this.#base_container = jQuery(element);    // jQuery( ( window.document.splugins.common._o( _this.configs, 'base_container_selector') ? _this.configs.base_container_selector : '.variations_form' ) );      
 
-        _this.data = {};
-        _this.binding_stats = {};     
+        _this.#data = {};
+        _this.#binding_stats = {};     
 
     }
 
@@ -1070,13 +1070,17 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
         console.log("init_private");
 
         // init on all applicable events 
-        jQuery(document).on('wc_variation_form', '.variations_form:not(.spui-wbc-swatches-loaded)', function (event) {
+        jQuery(document).on('wc_variation_form', _this.#.base_container/*'.variations_form:not(.spui-wbc-swatches-loaded)'*/, function (event) {
 
             console.log("init_private wc_variation_form event");
 
+            if( !( jQuery(this).has('.spui-wbc-swatches-loaded') ) ){
 
-            //  had we used the _jQueryInterface style the _jQueryInterface call would have started from here 
-            _this.#preprocess( this, event );  
+                //  had we used the _jQueryInterface style the _jQueryInterface call would have started from here 
+                _this.#preprocess( this, event );  
+
+            }
+            
         });
         // // ACTIVE_TODO temp. 
         // // jQuery('.variations_form').wc_variation_form();
@@ -1096,8 +1100,11 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
             console.log("init_private inner ajaxComplete");
 
           splugins._.delay(function () {
-            jQuery('.variations_form:not(.spui-wbc-swatches-loaded)').each(function () {
-              jQuery(this).wc_variation_form();
+            jQuery( _this.#.base_container /*'.variations_form:not(.spui-wbc-swatches-loaded)'*/).each(function () {
+
+                if( !( jQuery(this).has('.spui-wbc-swatches-loaded') ) ){
+                    jQuery(this).wc_variation_form();
+                }
             });
           }, 100);
         });
@@ -1141,8 +1148,10 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
             console.log("init_private inner aln_reloaded");
 
           splugins._.delay(function () {
-            jQuery('.variations_form:not(.spui-wbc-swatches-loaded)').each(function () {
-              jQuery(this).wc_variation_form();
+            jQuery( _this.#.base_container /*'.variations_form:not(.spui-wbc-swatches-loaded)'*/).each(function () {
+                if( !( jQuery(this).has('.spui-wbc-swatches-loaded') ) ){
+                    jQuery(this).wc_variation_form();
+                }
             });
           }, 100);
         });
@@ -2267,7 +2276,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
             
         }*/
 
-        jQuery('.variations_form').on('click', '.reset_variations'/*'woocommerce_variation_select_change'*//*'reset'*/,function(){
+        jQuery( _this.$base_element /*'.variations_form'*/).on('click', '.reset_variations'/*'woocommerce_variation_select_change'*//*'reset'*/,function(){
 
             // ACTIVE_TODO neet to implement reset logic as applicable, need to confirm all reset flows of plugin we are exploring and also uncomment below m code if required and move to base reset function. -- to h & -- to s
             // jQuery('.variable-items-wrapper .selected').removeClass('selected');
@@ -2455,9 +2464,12 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
                 console.log("compatability inner yith_infs_added_elem");
 
-              jQuery('.variations_form:not(.spui-wbc-swatches-loaded)').each(function () {
-                jQuery(this).wc_variation_form();
-              });
+                jQuery( _this.#.base_container /*'.variations_form:not(.spui-wbc-swatches-loaded)'*/).each(function () {
+
+                    if( !( jQuery(this).has('.spui-wbc-swatches-loaded') ) ){
+                        jQuery(this).wc_variation_form();
+                    }
+                });
             });
         } else if (section == 'attribute_options'){
 
@@ -2528,15 +2540,15 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
 
         var _this = this; 
      
-        _this.configs = jQuery.extend({}, {}/*default configs*/, configs);  
+        _this.#configs = jQuery.extend({}, {}/*default configs*/, configs);  
 
-        _this.base_container_selector = ( window.document.splugins.common._o( _this.configs, 'base_container_selector') ? _this.configs.base_container_selector : ''  );     
+        _this.#base_container_selector = ( window.document.splugins.common._o( _this.configs, 'base_container_selector') ? _this.configs.base_container_selector : ''  );     
 
         // NOTE: for the notes base_container object is the base_element if we consider it with analogy of _jQueryInterface style modules
-        _this.base_container = jQuery( _this.base_container_selector );     
+        _this.#base_container = jQuery( _this.base_container_selector );     
      
-        _this.data = {};
-        _this.binding_stats = {};
+        _this.#data = {};
+        _this.#binding_stats = {};
         
         _this.data.is_skip_sp_slzm = false;  
         _this.data.is_skip_sp_slider = false;  
