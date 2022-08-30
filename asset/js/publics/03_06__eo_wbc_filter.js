@@ -1409,6 +1409,10 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 	_this.base_container = null  /*jQuery( ( window.document.splugins.common._o( _this.configs, 'base_container_selector') ? _this.configs.base_container_selector : '' ) )*/;  // ACTIVE_TODO/TODO whenever it become necessary to use base_container for events or so then at that time need to init base_container using standard pagination section conatainer selector.
 
 	var init_private = function() {
+		
+		ACTIVE_TODO whenever in future if required  to run compatibility check during run time means after the base container selectore is defined than we can call compatibility layers additionaly from here 
+    	var base_container_selector_callback = null;
+		window.document.splugins.events.api.apply_all_observer_filters( 'pagination', 'base_container_selector',{},base_container_selector_callback);  
 
 		like from the filters module, we may need to raise notification from all key functions of this module as well.
 			--	like tableview may like to recieve click notification, but does it require to handle anuy logic related to it? since the wbc layers will only host the pagination module and layers so maybe tableview does not need to manage many or maybe not need to manage none of those things. 
@@ -1429,6 +1433,9 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 
 	var set_pagination_html_private = function(data){
 		
+        var set_pagination_html_callback = null;
+        window.document.splugins.events.api.notifyAllObservers( 'pagination', 'set_pagination_html', {}, set_pagination_html_callback ); 
+
 		// -- aa function mathi code pagination sub module na module ma move thase ane baki no jo applicable hoy to aa module ma rese. Pan aa point execute karvi te pela niche point confirm karvano rese. -- to a & -- to h INVALID 
 			-- need to confirm ke aa call diamond api mathi j ave se ne ane te jo no male to ani calling sycuance hirenbhai sathe confirm karvi. -- to a
 			-- ane je aya compatibility no code dekhay se te aa code je module ma finally implement thay tena compatibility function ma move karva no -- to a
@@ -1514,6 +1521,9 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 		-- confirm with hirenbhai --to a
 		// on_click();
 
+        var on_click_listener_callback = null;
+        window.document.splugins.events.api.notifyAllObservers( 'pagination', 'on_click_listener', {}, on_click_listener_callback ); 
+        
 	};
 
     var on_click = function(){
@@ -2306,7 +2316,7 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
 	    }
 
     	var filter_set_click_callback = null;
-	    var stat_object = window.document.splugins.events.api.apply_all_observer_filters( 'filters', 'filter_set_click_start',{display_style:display_style},filter_set_click_callback);  
+	    var stat_object = window.document.splugins.events.api.apply_all_observer_filters( 'filter_sets', 'filter_set_click_start',{display_style:display_style},filter_set_click_callback);  
 
 	    /*let _category = $("[name='_category']").val();
 	    _category = _category.split(',');
