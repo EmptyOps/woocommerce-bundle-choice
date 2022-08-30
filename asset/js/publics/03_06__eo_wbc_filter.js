@@ -1560,6 +1560,7 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 
     var reset_private = function(){
 
+    	set_page_number( 1 );
     };
 	
 	return {
