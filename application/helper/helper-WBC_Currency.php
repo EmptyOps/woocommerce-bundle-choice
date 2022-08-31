@@ -12,9 +12,9 @@ class WBC_Currency {
 		return self::$_instance;
 	}
 
-	public function to_price($amount, $rounding = 2){
+	public function to_price($amount, $rounding = array('decimals'=>2)){
 		// return \wc_price($amount, $rounding['decimals' => 2]);
-		return \wc_price($amount, $rounding[$decimals]);
+		return \wc_price($amount, $rounding);
 	}
 
 	public function formatted_price( $price, $rounding){
@@ -22,7 +22,7 @@ class WBC_Currency {
 	}
 }
 
-function wbc_to_price($amount, $rounding = 2){
+function wbc_to_price($amount, $rounding = array('decimals'=>2)){
 
 	return wbc()->currency->to_price($amount, $rounding);
 
