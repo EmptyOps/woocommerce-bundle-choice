@@ -71,7 +71,8 @@ $template_data['data']['type'] = $variable_item_data['options_loop_type'][$term-
 
 $template_inner = wbc()->load->template($template_sub_dir.'/'.$woo_dropdown_attribute_html_data['type'].'/sp_variations_optionsUI-'.$woo_dropdown_attribute_html_data['type'].'-option_template_part', (isset($template_data['data'])?$template_data['data']:array()),true,'wbc',true);
 
-if(!in_array($variable_item_data['options_loop_type'][$term->slug],array('dropdown_image','dropdown_image_only','dropdown'))) {                 
+// NOTE : hier in feed page we are dairkli looding specific type templat part so belo false candishon is added for now.
+if(false and !in_array($variable_item_data['options_loop_type'][$term->slug],array('dropdown_image','dropdown_image_only','dropdown'))) {                 
     //$data .= '</li>';
 
     $template = array(
@@ -97,4 +98,6 @@ if(!in_array($variable_item_data['options_loop_type'][$term->slug],array('dropdo
         'attr' => array_merge (array( 'title' => esc_html( $term->name ), 'data-title' => esc_html( $term->name ), 'data-value' => esc_attr( $term->slug ), 'role' => 'button', 'tabindex' => '0'/*, 'data-id' => $id*/ ), $woo_dropdown_attribute_html_data['options_loop_html_attr'][$term->slug] ),
         'child' => $template_inner
     );
+} else {
+    $template = $template_inner;
 }
