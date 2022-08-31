@@ -2550,15 +2550,15 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
 
         var _this = this; 
      
-        _this.#configs = jQuery.extend({}, {}/*default configs*/, configs);  
+        _this.#$configs = jQuery.extend({}, {}/*default configs*/, configs);  
 
-        _this.#base_container_selector = ( window.document.splugins.common._o( _this.#configs, 'base_container_selector') ? _this.#configs.base_container_selector : ''  );     
+        _this.#$base_container_selector = ( window.document.splugins.common._o( _this.configs, 'base_container_selector') ? _this.configs.base_container_selector : ''  );     
 
         // NOTE: for the notes base_container object is the base_element if we consider it with analogy of _jQueryInterface style modules
-        _this.#base_container = jQuery( _this.#base_container_selector );     
+        _this.#$base_container = jQuery( _this.base_container_selector );     
      
-        _this.#data = {};
-        _this.#binding_stats = {};
+        _this.#$data = {};
+        _this.#$binding_stats = {};
         
         _this.#data.is_skip_sp_slzm = false;  
         _this.#data.is_skip_sp_slider = false;  
@@ -2627,18 +2627,18 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
         console.log(" gallery_images preprocess " );
 
         _this.base_element = element;
-        _this.#base_element = jQuery( _this.base_element );
+        _this.#$base_element = jQuery( _this.base_element );
         
-        _this.#slider_container = _this.#base_element.find( '.'+ _this.#configs.classes.slider.container );
-        _this.#zoom_container = _this.#base_element.find( '.'+ _this.#configs.classes.zoom.container );
+        _this.#$slider_container = _this.#$base_element.find( '.'+ _this.configs.classes.slider.container );
+        _this.#$zoom_container = _this.#$base_element.find( '.'+ _this.configs.classes.zoom.container );
             
-        _this.#slider_loop_container = _this.#slider_container.find( '.'+ _this.#configs.classes.slider.loop_container );
+        _this.#$slider_loop_container = _this.#$slider_container.find( '.'+ _this.configs.classes.slider.loop_container );
 
             /*ACTIVE_TODO_OC_START
                  --  then I will tell you which to keep and which to drop -- to a 
             ACTIVE_TODO_OC_END*/
-            _this.#wrapper = _this.#base_element.closest('.product');  /*ACTIVE_TODO we may need to manage this selector stability.*/
-            _this.#variations_form = _this.#wrapper.find('.variations_form');
+            _this.#$wrapper = _this.#$base_element.closest('.product');  /*ACTIVE_TODO we may need to manage this selector stability.*/
+            _this.#$variations_form = _this.#$wrapper.find('.variations_form');
             
         // ACTIVE_TODO_OC_START
         // ACTIVE_TODO need to add produce class at the appropriate container, if rerequired then simply take a look at different theme demos of ours and at demos of other plugins we were exploring -- to t 
@@ -2646,14 +2646,14 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
         //         ACTIVE_TODO and below conditional logic will go in compatability matters, and it will apply to all the themes. since it is about finding .product container -- to s 
         //             --  ACTIVE_TODO and same for the variations_form and that will also go compatability matters for all the themes. and there is high chances that some theme might have the product class missing for the product container so lets do it asap -- to s 
         // ACTIVE_TODO_OC_END
-        if( _this.#wrapper == null || _this.#wrapper.length == 0 ) {
+        if( _this.#$wrapper == null || _this.#$wrapper.length == 0 ) {
 
-            _this.#wrapper = jQuery( '.product' );  //  ACTIVE_TODO need to mature workaround here, the body class might be so broad so maybe need to look for post class or woo post class hooks classes and consider them as selector. this selector matter may going to be so important. we wind out soon as we roll out -- to s
+            _this.#$wrapper = jQuery( '.product' );  //  ACTIVE_TODO need to mature workaround here, the body class might be so broad so maybe need to look for post class or woo post class hooks classes and consider them as selector. this selector matter may going to be so important. we wind out soon as we roll out -- to s
         }
-        if( _this.#variations_form == null || _this.#variations_form.length == 0 ) {
+        if( _this.#$variations_form == null || _this.#$variations_form.length == 0 ) {
 
             -- need to manage here selectore -- to s
-            _this.#variations_form = jQuery( 'form.variations_form' );  //  ACTIVE_TODO need to mature workaround here, or is it mature enough? -- to s
+            _this.#$variations_form = jQuery( 'form.variations_form' );  //  ACTIVE_TODO need to mature workaround here, or is it mature enough? -- to s
         }
 
         _this.#data.product_variations = _this.#variations_form.data('product_variations') || [];      
@@ -2668,7 +2668,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
          _this.product_id = _this.#variations_form.data('product_id');
          _this.#data.is_variation_product = _this.#variations_form.length > 0;
  
-         _this.#base_element.addClass('spui-wbc-gallery_images-loaded');
+         _this.#$base_element.addClass('spui-wbc-gallery_images-loaded');
  
                // ACTIVE_TODO if required then need to init def for simple product and so on.
                // this.defaultGallery();
@@ -3037,8 +3037,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
       }
       
       var index = 0;
-      if (typeof _this.#slider_loop_container.data('selected-index') !== 'undefined') {
-        index = _this.#slider_loop_container.data('selected-index');
+      if (typeof _this.#$slider_loop_container.data('selected-index') !== 'undefined') {
+        index = _this.#$slider_loop_container.data('selected-index');
       }
     
       console.log('gallery_images process_images_template index=='+index);
@@ -3046,9 +3046,9 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
       _this.#process_zoom_template(images,index,hasGallery);
 
       if (hasGallery) {
-        _this.#zoom_container.addClass('spui-wbc-gallery_images-has-product-thumbnail');
+        _this.#$zoom_container.addClass('spui-wbc-gallery_images-has-product-thumbnail');
       } else {
-        _this.#zoom_container.removeClass('spui-wbc-gallery_images-has-product-thumbnail');
+        _this.#$zoom_container.removeClass('spui-wbc-gallery_images-has-product-thumbnail');
       }
 
       if(!_this.#data.is_skip_sp_slzm){
@@ -3098,7 +3098,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
             slider_inner_html += _this.#apply_template_data(template_var, image, templating_lib);
         });
 
-        _this.#slider_loop_container.html(slider_inner_html);
+        _this.#$slider_loop_container.html(slider_inner_html);
 
     };
 
@@ -3152,9 +3152,9 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
 
 
         if (hasGallery) {
-          _this.#zoom_container.html(zoom_inner_html);
+          _this.#$zoom_container.html(zoom_inner_html);
         } else {
-          _this.#zoom_container.html('');
+          _this.#$zoom_container.html('');
         } //this._element.trigger('woo_variation_gallery_init', [this, images]);
 
         // ACTIVE_TODO/TODO it is better heirachically, if the click is bind on our img-item class stuctor only, and then we recive here that element only in above function Arguments.
@@ -3253,9 +3253,9 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
         }
         
         console.log("slider_thumb_click_listener 111111111111");
-        console.log(_this.#slider_loop_container);
+        console.log(_this.#$slider_loop_container);
 
-        _this.#slider_loop_container.on('click', 'img', function () {
+        _this.#$slider_loop_container.on('click', 'img', function () {
             console.log("slider_thumb_click_listener 2222222222");
             _this.#on_slider_thumb_click(type,this);            
         });
@@ -3307,7 +3307,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
        
         console.log("variation_change_listener 2");
         
-         _this.#variations_form.on('show_variation', function (event, variation) {
+         _this.#$variations_form.on('show_variation', function (event, variation) {
             
             console.log("variation_change_listener 2 show_variation");
 
@@ -3343,7 +3343,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
             
             console.log("reset_variation_listener 2 inner if");
 
-            _this.#variations_form.on('hide_variation', function () {
+            _this.#$variations_form.on('hide_variation', function () {
 
                 console.log("reset_variation_listener 2 inner if hide_variation");
 
@@ -3353,7 +3353,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
             
             console.log("reset_variation_listener 2 else");
 
-            _this.#variations_form.on('click', '.reset_variations', function () {
+            _this.#$variations_form.on('click', '.reset_variations', function () {
 
                 console.log("reset_variation_listener 2 else reset_variations");
 
@@ -3474,7 +3474,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
         var index = jQuery(element).data('index'); 
 
 
-        _this.#slider_loop_container.data('selected-index',index);
+        _this.#$slider_loop_container.data('selected-index',index);
 
         if(_this.configs.template.zoom.all_in_dom == 0){
             // update one tamplate 
@@ -3911,10 +3911,10 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
         
         var _this = this; 
      
-        _this.#configs = jQuery.extend({}, {}/*default configs*/, configs);  
+        _this.#$configs = jQuery.extend({}, {}/*default configs*/, configs);  
      
-        _this.#data = {};
-        _this.#binding_stats = {};        
+        _this.#$data = {};
+        _this.#$binding_stats = {};        
     
     }
  
@@ -4018,7 +4018,7 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
             return false;
         }   
 
-        _this.#zoom_container.on("mouseleave","",function() {
+        _this.#$zoom_container.on("mouseleave","",function() {
 
             _this.#on_zoom_area_hover_out(type); 
         });   
@@ -4085,15 +4085,16 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
 
             if (hasGallery) {
-              _this.#zoom_container.html(zoom_inner_html);
+              _this.#$zoom_container.html(zoom_inner_html);
             } else {
-              _this.#zoom_container.html('');
+              _this.#$zoom_container.html('');
             } //this._element.trigger('woo_variation_gallery_init', [this, images]);
 
             // ACTIVE_TODO/TODO it is better heirachically, if the click is bind on our img-item class stuctor only, and then we recive here that element only in above function Arguments.
             //     -- and than we can simply get type from element data-type which is mentanable due to well maintained heirachy insted of below index based image data read which is bound to change.
-            var process_zoom_template_callback = null;
-            window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'process_zoom_template', {type:images[index].extra_params_org.type,image:images[index]}, process_zoom_template_callback );            
+
+            var zoom_area_hover_in_callback = null;
+            window.document.splugins.events.api.notifyAllObservers( 'gallery_images_feed_page', 'zoom_area_hover_in', {type:images[index].extra_params_org.type,image:images[index]}, zoom_area_hover_in_callback );            
 
         } 
 
@@ -4111,6 +4112,9 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
         var images = super.get_current_variation().variation_gallery_images;
         
         super.process_zoom_template_public(images, 0, true/*we are simply setting it to true but if requred than need to manage it*/);
+
+        var zoom_area_hover_out_callback = null;
+        window.document.splugins.events.api.notifyAllObservers( 'gallery_images_feed_page', 'zoom_area_hover_out', {type:images[index].extra_params_org.type,image:images[index]}, zoom_area_hover_out_callback );       
                 
     }  
 
