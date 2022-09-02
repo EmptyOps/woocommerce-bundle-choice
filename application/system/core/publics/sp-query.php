@@ -153,6 +153,23 @@ class SP_Query {
                         );
                         $tax_query['relation'] = 'AND';
                     }
+                    ACTIVE_TODO need to finalaize -- to a & -- to h
+	  					ACTIVE_TODO if we can not confirm at bashed on the understanding of router and quarry layer and we can simply than lets skip it as active todo and if there are any issue comes up for tableview query layer especially the tableview legacy query layer which is now commented than we can think about it
+                    --- aa code sp_tableview/application/model/publics/sp-model-query.php mathi move thayo se @a ---
+                    --- start ---                    
+                    else {
+                        -- below code is aditional in tableview and is not there in wbc so we must check if it is really nessasary before running the code -- to h
+                        $tax_query[]=array(
+                            'relation' => 'AND',
+                            array(
+                                'taxonomy' => 'product_cat',
+                                'field' => 'slug',
+                                'terms' => array( $_category ),
+                                'compare'=>'EXISTS IN'
+                            )
+                        );                    
+                    }
+                    --- end ---
                 }  
             }
             
@@ -223,7 +240,21 @@ class SP_Query {
                                 'field' => 'term_id',
                                 'terms' => $this->range($attr,wbc()->sanitize->{$input_method_small}('min_'.$attr),wbc()->sanitize->{$input_method_small}('max_'.$attr),true),
                                 'compare'=>'EXISTS IN'
-                            );
+                            ),
+		                    ACTIVE_TODO need to finalaize -- to a & -- to h
+			  					ACTIVE_TODO if we can not confirm at bashed on the understanding of router and quarry layer and we can simply than lets skip it as active todo and if there are any issue comes up for tableview query layer especially the tableview legacy query layer which is now commented than we can think about it                            
+                            --- aa code sp_tableview/application/model/publics/sp-model-query.php mathi move karyo se @a ---
+                            --- start ---                            
+                            -- below code is aditional in tableview and is not there in wbc so we must check if it is really nessasary before running the code -- to h
+                            array(
+                                'taxonomy' => $attr,
+                                'operator' => 'NOT EXISTS'
+                            ),array(
+                                'key' => $attr,
+                                'value' => false,
+                                'type' => 'BOOLEAN'
+                            )
+                            --- end ---
                         }
                         else {
 
@@ -232,7 +263,20 @@ class SP_Query {
                                 'field' => 'term_id',
                                 'terms' => $this->range($attr,wbc()->sanitize->{$input_method_small}('min_'.$attr),wbc()->sanitize->{$input_method_small}('max_'.$attr)),
                                 'compare'=>'EXISTS IN'
-                            );
+                            ),
+		                    ACTIVE_TODO need to finalaize -- to a & -- to h
+			  					ACTIVE_TODO if we can not confirm at bashed on the understanding of router and quarry layer and we can simply than lets skip it as active todo and if there are any issue comes up for tableview query layer especially the tableview legacy query layer which is now commented than we can think about it                            
+                            --- aa code sp_tableview/application/model/publics/sp-model-query.php mathi move karyo se @a ---
+                            --- start ---
+                            array(
+                                'taxonomy' => $attr,
+                                'operator' => 'NOT EXISTS'
+                            ),array(
+                                'key' => $attr,
+                                'value' => false,
+                                'type' => 'BOOLEAN'
+                            )                                                       
+							--- end ---                            
                         }                   
                     }
                     elseif (isset($_DATA['checklist_'.$attr]) && !empty(wbc()->sanitize->{$input_method_small}('checklist_'.$attr))) {

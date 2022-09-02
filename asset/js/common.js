@@ -2489,6 +2489,16 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
         return object;
     } 
 
+    get_config() {
+
+        return _this.#configs;
+    }
+
+    set_config(configs) {
+
+        _this.#configs = configs;
+    }
+
     init() {
         
         var _this = this; 
@@ -2545,7 +2555,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
         _this.#$base_container_selector = ( window.document.splugins.common._o( _this.configs, 'base_container_selector') ? _this.configs.base_container_selector : ''  );     
 
         // NOTE: for the notes base_container object is the base_element if we consider it with analogy of _jQueryInterface style modules
-        _this.#$base_container = jQuery( _this.base_container_selector );     
+        _this.#$base_container = jQuery(element);   //( _this.base_container_selector );     
      
         _this.#$data = {};
         _this.#$binding_stats = {};
@@ -3606,12 +3616,22 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
         }
         
     }
+
+    get_config() {
+
+        return _this.#configs;
+    }
+
+    set_config(configs) {
+
+        _this.#configs = configs;
+    }
  
      // ACTIVE_TODO_OC_START
      // -   effects and managing after effects 
      //         --  may need to provide some effects but only where and if necessary, the majority of effects will be provided by the slider and zoom js/jQuery plugin 
      //         --  will need to manage the after effects very precisely, to ensure smooth and non cluttering experience 
-     //             --  it may or likely include managing the loading, swaping and updating of images 
+     //             --  it may or likely include managing the loading, swapping and updating of images 
      // ACTIVE_TODO_OC_END
  
     get_current_variation() {
@@ -3821,7 +3841,24 @@ class SP_WBC_Variations_Swatches_Feed_Page extends SP_WBC_Variations_Swatches {
 
     #init_private() {
 
+        var _this = this; 
+
         super.init();
+
+        _this.#update_configs();
+    }
+
+    #update_configs() {
+
+        NOTE: In future if we find better flow or structure which is mature standard then we can deprecate this function
+
+        var configs = super.get_config();
+        configs.template = configs.loop_template;
+        configs.class = configs.loop_class;
+
+        var configs = super.set_config();
+        configs.template = configs.loop_template;
+        configs.class = configs.loop_class;
     }
 
     init() {
@@ -3888,6 +3925,8 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
         super.init();
 
         _this.#init_preprocess(event);
+
+        _this.#update_configs();
 
     }
 
@@ -4077,7 +4116,20 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
         var zoom_area_hover_out_callback = null;
         window.document.splugins.events.api.notifyAllObservers( 'gallery_images_feed_page', 'zoom_area_hover_out', {type:images[index].extra_params_org.type,image:images[index]}, zoom_area_hover_out_callback );       
                 
-    }          
+    }  
+
+    #update_configs() {
+        
+        NOTE: In future if we find better flow or structure which is mature standard then we can deprecate this function
+
+        var configs = super.get_config();
+        configs.template = configs.loop_template;
+        configs.class = configs.loop_class;
+
+        var configs = super.set_config();
+        configs.template = configs.loop_template;
+        configs.class = configs.loop_class;
+    }        
  
     init() { 
 
