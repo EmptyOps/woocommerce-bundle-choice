@@ -274,18 +274,24 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				} else {
 					_products_in = _products_in.trim();
 				}
-				// move to tableview done -- to s
-				/*form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:'eo_wbc_e_tabview',products_in:_products_in};
+
+				// move to tableview -- to s
+				form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:'eo_wbc_e_tabview',products_in:_products_in};
+				s: question moved from tableview so need to managed flag
 				if(eo_wbc_e_tabview.eo_table_view_per_page){
 					form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
-				}*/
+				}
 			}
 			else
 			{
 				//form_data={_category:jQuery("[name='_category']").val().trim(),action:'eo_wbc_filter'};	
+
+
 				/*move to tableview done -- to s
 				form_data=jQuery("#tableview_order,#tableview_order_direction,[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();*/
+
 				form_data=jQuery("[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
+
 				// move to tableview done -- to s
 				// if(eo_wbc_e_tabview.eo_table_view_per_page){
 				// 	form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
@@ -298,28 +304,32 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
 			}
 			
-			/*move to tableview done -- to s 
-			form_data.action='eo_wbc_e_tabview';*/
+			// move to tableview -- to s 
+			form_data.action='eo_wbc_e_tabview';
 		} else {
 			after all prepare_query_data move are finalized then we need to structure form_data preparation properly -- to h
 				--  like form serialize or base form preparation conataining all base wbc fields should happen in here on wbc layer only. -- to h & -- to s
 					--  so after above is done then remove from.serialize statements from tableview layer. -- to s
 					ACTIVE_TODO and same will be applicable to other js layers like diamond_quize and so on. -- to s
-			/*move to tableview done -- to s 
+
+			s: question moved from tableview so need to managed flag
+			// move to tableview -- to s 
 			form_data=form.serialize();
 			if(eo_wbc_e_tabview.eo_table_view_per_page){
 				form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
-			}*/
+			}
 			if(jQuery("select[name='orderby']").length>0){
 				form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
 			}
+
 			/*move to tableview done -- to s
 			if(jQuery("#tableview_order").val()!=='' && jQuery("#tableview_order_direction").val()!==''){
 				form_data+='&tableview_order='+jQuery("#tableview_order").val();
 				form_data+='&tableview_order_direction='+jQuery("#tableview_order_direction").val();
 			}*/
-			/*move to tableview done -- to s
-			form_data+='&action=eo_wbc_e_tabview';*/
+
+			// move to tableview -- to s
+			form_data+='&action=eo_wbc_e_tabview';
 		}
 		////////////////////////////////
 		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js

@@ -65,6 +65,18 @@ if(!class_exists('WBC_Sanitize')) {
 			}
 		}
 
+		public function store_get(string $get_field, $val){
+			if(is_string($val)) {
+				$_GET[$get_field] = sanitize_text_field($val);
+			} elseif(is_array($val)) {
+				// ACTIVE_TODO use sanitize array function whichever is available in php or wp api
+				$_GET[$get_field] = sanitize_text_field($val);
+			} else {
+				// TODO here we may need to support other type if required
+				return false;
+			}
+		}
+
 		public function _get(string $get_field){
 			// ACTIVE_TODO this should be deprecated soon, and if there is requirement of using the input without sanitize then check for the standard process there must be something in php or in wp api 
 			if(isset($_GET[$get_field])) {
@@ -78,6 +90,18 @@ if(!class_exists('WBC_Sanitize')) {
 			if(isset($_POST[$post_field])) {
 				return sanitize_text_field($_POST[$post_field]);
 			} else {
+				return false;
+			}
+		}
+
+		public function store_post(string $post_field, $val){
+			if(is_string($val)) {
+				$_POST[$post_field] = sanitize_text_field($val);
+			} elseif(is_array($val)) {
+				// ACTIVE_TODO use sanitize array function whichever is available in php or wp api
+				$_POST[$post_field] = sanitize_text_field($val);
+			} else {
+				// TODO here we may need to support other type if required
 				return false;
 			}
 		}
@@ -97,6 +121,19 @@ if(!class_exists('WBC_Sanitize')) {
 			} else {
 				return false;
 			}
+		}
+
+		public function store_request(string $request_field, $val){
+			if(is_string($val)) {
+				$_REQUEST[$request_field] = sanitize_text_field($val);
+			} elseif(is_array($val)) {
+				// ACTIVE_TODO use sanitize array function whichever is available in php or wp api
+				$_REQUEST[$request_field] = sanitize_text_field($val);
+			} else {
+				// TODO here we may need to support other type if required
+				return false;
+			}
+		}
 		}
 
 		public function post_array(string $post_field){
