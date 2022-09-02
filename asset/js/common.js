@@ -2555,7 +2555,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
         _this.#$base_container_selector = ( window.document.splugins.common._o( _this.configs, 'base_container_selector') ? _this.configs.base_container_selector : ''  );     
 
         // NOTE: for the notes base_container object is the base_element if we consider it with analogy of _jQueryInterface style modules
-        _this.#$base_container = jQuery( _this.base_container_selector );     
+        _this.#$base_container = jQuery(element);   //( _this.base_container_selector );     
      
         _this.#$data = {};
         _this.#$binding_stats = {};
