@@ -539,7 +539,12 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		console.log(eo_wbc_object);	
 
-		// success(data);	
+		// success(data);
+
+		need to finalize, this code is not part6 of any logic here -- to h & -- to s 
+			if(typeof(form_data)==='string'){
+				form_data = Object.fromEntries(new URLSearchParams(form_data))
+			}	
 
 		var prepare_query_data_callback = null ;
         window.document.splugins.events.api.apply_all_observer_filters( 'filters', 'prepare_query_data', {form_data:form_data, init_call:init_call }, prepare_query_data_callback );
@@ -2030,6 +2035,7 @@ ACTIVE_TODO_OC_END
 		return false;
 	}	
 	
+	s: question need to manage this global layer
 	if(typeof(window.eo_wbc_filter_change) === 'undefined') {
 		window.eo_wbc_filter_change = jQuery.fn.eo_wbc_filter_change_native;
 	}
