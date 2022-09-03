@@ -1471,6 +1471,7 @@ class SP_WBC_Variations extends SP_Variations {
 						$data['variable_item_data']['options_loop_selected_class'][$option] = $data['variable_item_data']['options_loop_is_selected'][$option] ? 'selected' : '';
 						$data['variable_item_data']['options_loop_tooltip'][$option]        = trim( apply_filters( 'wvs_variable_item_tooltip', $data['variable_item_data']['options_loop_option'][$option], $data['woo_dropdown_attribute_html_data']['options'], $data['woo_dropdown_attribute_html_data']['args'] ) );
 
+						s: question value ma su pass karavanu chhe -- to s
 						$data['variable_item_data']['options_loop_html_attr'][$option] = array('data-value' => , 'data-title' => );
 
 						if ( $data['variable_item_data']['is_archive'] && ! $show_archive_tooltip ) {

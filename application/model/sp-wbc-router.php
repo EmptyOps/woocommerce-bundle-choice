@@ -67,10 +67,17 @@ class SP_WBC_Router extends SP_Router {
 
                 return explode(',', self::get_query_params('checklist_'.$key[1], $input_method) );
             }
-        } else {
+        }else if($type == 'url_and_form_field_raw') {
+
+        }else {
 
             return self::get_query_params($key, $input_method);
         }
+
+        if($key[0] == 'prod_cat'){
+            
+        }
+
     }
 
 }
