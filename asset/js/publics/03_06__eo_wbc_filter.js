@@ -1985,6 +1985,7 @@ ACTIVE_TODO_OC_END
 			NOTE: if there are any return false etc statement occur below this statement then this core function call should be moved underneath the return statement because this core functions is supposed to be called only if search actually happens but yeah at earliest possible also so that there are any dependent flow below or elsewhere then they are taken care of properly 
 		window.document.splugins.wbc.filters.core.before_send();
 
+		related to serise 3
 		and below will be inside the init_search also -- to d
 		// if(render_container==='') {
 		// 	render_container = jQuery(".products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)");
@@ -1993,6 +1994,7 @@ ACTIVE_TODO_OC_END
 		// 	}
 		// }
 
+		related to serise 3
 		var form=jQuery(form_selector/*"form#eo_wbc_filter"*/);	
 		if(form.find('[name="html_destination"]').length>0){
 			render_container = form.find('[name="html_destination"]').val();
