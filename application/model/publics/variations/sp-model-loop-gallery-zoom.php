@@ -78,6 +78,9 @@ class SP_Model_Loop_Gallery_Zoom extends Eowbc_Base_Model_Publics {
 				$image['post_thumbnail_id'] = '{{data.post_thumbnail_id}}';
 				$image['index'] = '{{data.index}}';
 
+				$image['class_wrapper'] = '{{data.class_wrapper}}';
+				$image['extra_params_org']['type'] = '{{data.extra_params_org.type}}';
+				//$image['extra_params_org']['embed_type'] = '{{data.extra_params_org.embed_type}}';
 				$data = array();
 				$data['image'] = $image;
 

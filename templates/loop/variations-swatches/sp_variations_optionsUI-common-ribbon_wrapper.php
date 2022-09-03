@@ -48,16 +48,15 @@ if ( $woo_dropdown_attribute_html_data['product'] && taxonomy_exists( $variable_
 
 }
 
--- difind limit if conndition need to confirm data passing -- to s
 
 if ( $woo_dropdown_attribute_html_data['args']['sp_variations_swatches_cat_display_limit'] > 0 && $woo_dropdown_attribute_html_data['args']['actual_total_options'] > $woo_dropdown_attribute_html_data['args']['sp_variations_swatches_cat_display_limit'] ) {
     $template = array(
         'type' => 'li',
         'class' => 'spui_swatches_more__container',
         'child' => array(
-        need to set here the link that is provided in data variables from data layer -- to h & -- to s
             array(
                 'type' => 'a',
+                'class'=>'spui-wbc-swatches-variable-item-more'
                 'preHTML' => '+'.($woo_dropdown_attribute_html_data['args']['actual_total_options'] - $woo_dropdown_attribute_html_data['args']['sp_variations_swatches_cat_display_limit']).' More',
                 'href' => '#',
             ),
