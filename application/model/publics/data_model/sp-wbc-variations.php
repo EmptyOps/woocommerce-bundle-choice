@@ -789,7 +789,16 @@ class SP_WBC_Variations extends SP_Variations {
 				ACTIVE_TODO_OC_END*/
 
 		// ob_start();
-		$data = $this->fetch_data('swatches')/*get_data('swatches')*/; 
+
+		if(empty($args[$product])) {
+
+			global $product;
+		} else {
+
+			$product = $args[$product]
+		}
+
+		$data = $this->fetch_data('swatches', $product, $args)/*get_data('swatches')*/; 
 		$attributes = $data['attributes']; /*$product->get_variation_attributes();*/
 		$variations = $data['variations']; /*$product->get_available_variations();*/
 
@@ -1572,7 +1581,7 @@ class SP_WBC_Variations extends SP_Variations {
 			$product = $args[$product]
 		}
 
-		$this->fetch_data( $for_section, $product, $args );
+		$data = $this->fetch_data( /*$for_section*/'gallery_images', $product, $args );
 
 		$data['gallery_images_template_data'] = array();
 
