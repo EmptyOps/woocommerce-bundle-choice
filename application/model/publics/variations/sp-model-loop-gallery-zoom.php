@@ -33,7 +33,7 @@ class SP_Model_Loop_Gallery_Zoom extends Eowbc_Base_Model_Publics {
 	public function render_ui(){
 		
 		add_filter('sp_slzm_loop_zoom_container', function($classes){
-			$classes[] = 'imagezoomsl_zoom_container';
+			// $classes[] = 'imagezoomsl_zoom_container';
 
 			return $classes;
 		});

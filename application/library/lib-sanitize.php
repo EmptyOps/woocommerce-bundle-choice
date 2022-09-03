@@ -134,8 +134,7 @@ if(!class_exists('WBC_Sanitize')) {
 				return false;
 			}
 		}
-		}
-
+		
 		public function post_array(string $post_field){
 			if(isset( $_POST[$post_field] ) and is_array($_POST[$post_field]) and !empty($_POST[$post_field])){
 

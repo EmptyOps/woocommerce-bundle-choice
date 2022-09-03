@@ -127,19 +127,21 @@ add_action('wp_footer',function(){
 
 		            // window.document.splugins.wbc.variations.gallery_images.single_product.api.init();
 		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_loop_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
-		            jQuery(base_container).SP_WBC_Variations_Gallery_Images_Feed_Page();
+		            jQuery(base_container).sp_wbc_variations_gallery_images_feed_page();
 
 		        // },2000);
 
 			}
 
+     		var base_container_swatches = null;
         	if(window.document.splugins.common.is_item_page) {
 			    
 		        // window.setTimeout(function(){
-
 		            // window.document.splugins.wbc.variations.swatches.api.init();
 		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.swatches_config, 'base_container_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
 		            jQuery(base_container).sp_wbc_variations_swatches();
+
+		            base_container_swatches = base_container;
 
 		        // },2000);    
 			}
@@ -152,19 +154,16 @@ add_action('wp_footer',function(){
 		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.swatches_config, 'base_container_loop_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
 		            jQuery(base_container).sp_wbc_variations_swatches_feed_page();
 
+		            base_container_swatches = base_container;
+
 		        // },2000);    
 
 			}
+
+			jQuery(base_container_swatches).check_variations();
     	});
    </script>    
   <?php      
 }, PHP_INT_MAX);
 
 ?>
-
-
-<script type="text/javascript">
-	
-jQuery(base_container).check_variations();
-
-</script>

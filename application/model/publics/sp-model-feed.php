@@ -81,12 +81,12 @@ class SP_Model_Feed extends SP_Feed {
 
 	public function render_gallery_images() {
 
-		if( \eo\wbc\controllers\publics\variations\SP_Gallery_Slider::instance()->should_init() ) {
+		/*if( \eo\wbc\controllers\publics\variations\SP_Gallery_Slider::instance()->should_init() ) {
 			\eo\wbc\controllers\publics\variations\SP_Gallery_Slider::instance()->init();
-		}
+		}*/
 
-		if( \eo\wbc\controllers\publics\variations\SP_Gallery_Zoom::instance()->should_init() ) {
-			\eo\wbc\controllers\publics\variations\SP_Gallery_Zoom::instance()->init();
+		if( \eo\wbc\controllers\publics\variations\SP_Loop_Gallery_Zoom::instance()->should_init() ) {
+			\eo\wbc\controllers\publics\variations\SP_Loop_Gallery_Zoom::instance()->init();
 		}
 
 		add_action( 'after_setup_theme', function(){
@@ -423,11 +423,12 @@ class SP_Model_Feed extends SP_Feed {
 
 		//bind to hook from here for the hook that is applied from both slider and zoom module for the images. means add filter here, and provide back with gallery_images data. so simply entire data var will be added to filter var but yeah the variation_gallery_images, attachment_ids etc. would be key -- to b done
 		
-		add_filter('sp_slzm_loop_slider_images',function($hook_data) use($data){
+		// ACTIVE_TODO we need to enable slider leyer for purple theme, and we sud do mast by 2nd rievisen. 
+		/*add_filter('sp_slzm_loop_slider_images',function($hook_data) use($data){
 
 			return $data;
 
-		});
+		});*/
 
 		add_filter('sp_slzm_loop_zoom_images',function($hook_data) use($data){
 
@@ -444,10 +445,10 @@ class SP_Model_Feed extends SP_Feed {
 			'type'=>'div',
 			'class'=>$classes,
 			'child'=>array(
-				array(
+				/*array(
 					'type'=>'html',
 					'child'=>apply_filters('sp_variations_loop_gallery_images_slider_ui',null),
-				),
+				),*/
 				array(
 					'type'=>'html',
 					'child'=>apply_filters('sp_variations_loop_gallery_images_zoom_ui',null),
