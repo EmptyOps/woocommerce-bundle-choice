@@ -84,10 +84,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			--	all in all, we want to do simple and self serving events, events binding and loading sequence architecture. so that we never need to maintain that with so unreliable setTimeout and setInterval and so on, actual more than unreliable they are burden to maintain always and if not cancelled/stopped properly then they would always weaken the seo reports. 
 			--	as per this link https://stackoverflow.com/questions/8996852/load-and-execute-order-of-scripts, we can simply load scripts in the priority we want to execute, all inline script in the footer, and they are also in the priority we want to execute using priority of the wp_footer hook. 
 				--	so for example all extensions variations assets inline script first, then anything that requires in between and at last the slider and zoom assets. 
-						--	so simply add the wp_footer hook in all applicable extensions which has the variations.asset.php file loaded from model load_asset, so the hook just need to be changed there. -- to s 
-							--	and keep the older hook commented there -- to s 
-						--	and if there is anything specific dependent on the common js modules of swatches and gallery_images, inside the wbc variations.asset.php file then that should be moved to below ultimate footer script hooki -- to s 
-						--	add the wp_footer hook at last in the js.vars.asset file, with priority php int max constant -- to s 
+						// --	so simply add the wp_footer hook in all applicable extensions which has the variations.asset.php file loaded from model load_asset, so the hook just need to be changed there. -- to s done
+						// 	--	and keep the older hook commented there -- to s done
+						// --	and if there is anything specific dependent on the common js modules of swatches and gallery_images, inside the wbc variations.asset.php file then that should be moved to below ultimate footer script hooki -- to s done
+						// --	add the wp_footer hook at last in the js.vars.asset file, with priority php int max constant -- to s done
 						--	should we enque the filters js and tableview js after the common js? maybe simply yes 
 							--	I think it is fine for tableview js that we modify its loading sequence but for filters jus we might need to once take a look at the overall js loading stack of the wbc 
 								--	for tableview lets do. but first just put the hook there over the sp model feed with the use statement as well. -- to s 
@@ -106,10 +106,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				--	however still what we need to manage in case of our sp_variations module is 
 					--	extensions should bind to the events 
 					--	then the sp_slzm module init for activating its listeners(here we are doing extra layer of providing listeners so that we can provide simple and synchronus experience that avoids complexity where possible) 
-						--	so move it inside the above ultimate footer script hook that is mentioned, simply move in the order they are mentioned here -- to s 						
+						// --	so move it inside the above ultimate footer script hook that is mentioned, simply move in the order they are mentioned here -- to s done						
 						--	then the slider and zoom asset will call above listener 
 					--	then the sp_variations modules should init 
-						--	so move it inside the above ultimate footer script hook that is mentioned, simply move in the order they are mentioned here -- to s 
+						// --	so move it inside the above ultimate footer script hook that is mentioned, simply move in the order they are mentioned here -- to s done
 						--	lets simply bring it under the document ready but need to confirm once with the t -- to t 
 					--	and then most challanging of all is external event dependancy, for example wc_variations_form. I think we can simply restructure our loading sequence a little bit as required but the external events should be take care of always witout failling. so we should simply give that ultimate priority and bind that always on time, whenever they want us to bind to them. and then structure rest of the loading sequence accordingly. 
 						--	to take care of this we can 
