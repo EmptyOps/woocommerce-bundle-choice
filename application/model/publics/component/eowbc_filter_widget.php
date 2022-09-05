@@ -2145,7 +2145,17 @@ class EOWBC_Filter_Widget {
 
 				}
 
+				--- start
+				$query_params = \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_filter_form', array('attr'), 'REQUEST', null);
+				$query_paramas_options = null;
+				if(in_array($term->slug , $query_params)){
+
+					$query_paramas_options = \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_filter_form', array('attr_options', $term->slug) , 'REQUEST', null);
+				}
+				--- end 			
+
 				$mark = in_array($term_item->id,$query_list);				
+
 				if($non_edit==false && in_array($term_item->id,$query_list)) {
 					$non_edit=true;						
 				}
@@ -2160,16 +2170,23 @@ class EOWBC_Filter_Widget {
 
 				if(empty($icon)) {					
 					$icon = $woocommerce->plugin_url() . '/assets/images/placeholder.png';
-				}
+				}			
 				
 				if(!empty(wbc()->sanitize->get('CAT_LINK'))) {
-					$query_list = array_filter(explode('|',str_replace([' ','+',','],'|',wbc()->sanitize->get('CAT_LINK'))));
+					-- need to plan flow for this -- to h
+					$query_list = array_filter(explode('|',str_replace([' ','+',','],'|',\eo\wbc\model\SP_WBC_Router::instance()->set_query_params_formatted( 'to_filter_field', 
+												                array('prod_cat'), 
+												                \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_form_field_raw',
+																				                array('prod_cat'),
+																				                'REQUEST',
+																				                null))/*wbc()->sanitize->get('CAT_LINK')*/)));
 
 					/*$query_list = explode('|', str_replace('' wbc()->sanitize->get('CAT_LINK') );*/
 
 				}
 
 				$mark = in_array($term_item->slug,$query_list);
+
 				if($non_edit==false && in_array($term_item->slug,$query_list)) {
 					$non_edit=true;						
 				}
