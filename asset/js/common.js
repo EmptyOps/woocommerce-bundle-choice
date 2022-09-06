@@ -128,8 +128,59 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
  
      return true;
  
- }
-  
+ }  
+
+/**
+ * http://stackoverflow.com/a/10997390/11236
+ */ 
+ window.document.splugins.common.updateURLParameter = function(url, param, paramVal){
+    var TheAnchor = null;
+    var newAdditionalURL = "";
+    var tempArray = url.split("?");
+    var baseURL = tempArray[0];
+    var additionalURL = tempArray[1];
+    var temp = "";
+
+    if (additionalURL) 
+    {
+        var tmpAnchor = additionalURL.split("#");
+        var TheParams = tmpAnchor[0];
+            TheAnchor = tmpAnchor[1];
+        if(TheAnchor)
+            additionalURL = TheParams;
+
+        tempArray = additionalURL.split("&");
+
+        for (var i=0; i<tempArray.length; i++)
+        {
+            if(tempArray[i].split('=')[0] != param)
+            {
+                newAdditionalURL += temp + tempArray[i];
+                temp = "&";
+            }
+        }        
+    }
+    else
+    {
+        var tmpAnchor = baseURL.split("#");
+        var TheParams = tmpAnchor[0];
+            TheAnchor  = tmpAnchor[1];
+
+        if(TheParams)
+            baseURL = TheParams;
+    }
+
+    if(TheAnchor)
+        paramVal += "#" + TheAnchor;
+
+    var rows_txt = temp + "" + param + "=" + paramVal;
+    return baseURL + "?" + newAdditionalURL + rows_txt;
+} 
+
+var newURL = updateURLParameter(window.location.href, 'locId', 'newLoc');
+newURL = updateURLParameter(newURL, 'resId', 'newResId');
+
+window.history.replaceState('', '', updateURLParameter(window.location.href, "param", "value"));
  
  //  TODO publish defs from here of the any design pattern that we define to be used as common patter like design pattern of the wbc.filters module 
      //  below the observer design pattern implemented for Feed.events act as one of published defs
@@ -3316,7 +3367,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
  
     }
 
-    #create_variation_url() {
+    #create_variation_url(variation) {
 
         var _this = this;
         
@@ -3327,40 +3378,40 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
                     id: jQuery(this).attr('name'),
                     value: value
                 });
-            } else {
+            }/* else {
                 allAttributesSet = false;
-            }
+            }*/
         });
+
+        var url = _this.#get_loop_box_anchor();
+        url = url +'?variation_id='+ variation.variation_id;
 
         ACTIVE_TODO as soon as required we need to enabled url support if applicable for simple type product 
             ACTIVE_TODO very soon we should also use here the router class Query perams function layer instant of directly using hard coded_attr_checklist etc formate  
         jQuery.each(attributes,function(key, val) {
 
-            // var attributeSlug = val.id.replace('attribute_pa_','');
-            var _attribute = checklist_pa_eo ni link avse te filter js ma nathi mali ;
-            var url = _this.#get_loop_box_anchor();
-            url = url +'?variation_id='+ variation.variation_id +'&'+_attribute+'=' + val.value;
+            var attributeSlug = val.id.replace('attribute_',''); //val.id.replace('attribute_pa_','');
+            url += '&_attribute=' + attributeSlug + '&checklist_' + attributeSlug + "=" + val.value;
         });
-        console.log('Relocating #' + variation.variation_id);
-        //window.location.replace(url);
-        window.location.href = url;
 
+        return url;
     }    
 
-    #set_variation_url() {
-
-        var _this = this;
-
-        var url = _this.#get_loop_box_anchor();
-        jQuery(url).attr("href", "");
-    }
-    
-    #get_loop_box_anchor() {
+    #get_loop_box_anchor(variation) {
 
         var anchor = jQuery(".products a,.product-listing a");
 
         return anchor;
     
+    }
+
+    #set_variation_url(variation) {
+
+        -- aa function swatchis module ma mukvanu hatu and gallery module ma mukelu se, since show_variation event swatches ma nathi -- to a
+        var _this = this;
+
+        var a = _this.#get_loop_box_anchor(variation);
+        jQuery(a).attr("href", "");
     }
 
     #reset_variation_listener(type) {
@@ -3576,7 +3627,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
         ACTIVE_TODO_OC_END*/
         _this.#process_images_template(variation.variation_gallery_images);
 
-        _this.#set_variation_url();
+        _this.#set_variation_url(variation);
 
     }
  

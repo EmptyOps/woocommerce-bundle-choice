@@ -65,7 +65,8 @@ class SP_WBC_Router extends SP_Router {
             if($key[0] == 'prod_cat'){
 
                 // NOTE: here we are simply returning but if required to controll logic then the standerd approch is to call the above set_query_params function    
-                -- need to finalize -- to h
+                // -- need to finalize -- to h
+                    // NOTE: since we are just continuing with older flow of m so nothing to here as of now, but if required than we need to manage     
                 return $val;
             }
         }else{

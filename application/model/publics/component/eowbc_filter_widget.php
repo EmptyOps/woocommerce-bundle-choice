@@ -2145,17 +2145,17 @@ class EOWBC_Filter_Widget {
 
 				}
 
-				--- start
 				$query_params = \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_filter_form', array('attr'), 'REQUEST', null);
 				$query_paramas_options = null;
 				if(in_array($term->slug , $query_params)){
 
 					$query_paramas_options = \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_filter_form', array('attr_options', $term->slug) , 'REQUEST', null);
-				}
-				--- end 			
+				}			
 
-				$mark = in_array($term_item->id,$query_list);				
+				// $mark = in_array($term_item->id,$query_list);				
+				$mark = in_array($term_item->slug,$query_paramas_options);				
 
+				// ACTIVE_TODO if non edit required to be supported by our new router based url attribute support than need to manage below 
 				if($non_edit==false && in_array($term_item->id,$query_list)) {
 					$non_edit=true;						
 				}
@@ -2173,7 +2173,8 @@ class EOWBC_Filter_Widget {
 				}			
 				
 				if(!empty(wbc()->sanitize->get('CAT_LINK'))) {
-					-- need to plan flow for this -- to h
+					// -- need to plan flow for this -- to h
+						// NOTE: since we are just continuing with older flow of m so nothing to here as of now, but if required than we need to manage     
 					$query_list = array_filter(explode('|',str_replace([' ','+',','],'|',\eo\wbc\model\SP_WBC_Router::instance()->set_query_params_formatted( 'to_filter_field', 
 												                array('prod_cat'), 
 												                \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_form_field_raw',
