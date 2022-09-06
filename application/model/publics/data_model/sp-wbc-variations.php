@@ -790,12 +790,12 @@ class SP_WBC_Variations extends SP_Variations {
 
 		// ob_start();
 
-		if(empty($args[$product])) {
+		if(empty($args['product'])) {
 
 			global $product;
 		} else {
 
-			$product = $args[$product]
+			$product = $args['product'];
 		}
 
 		$data = $this->fetch_data('swatches', $product, $args)/*get_data('swatches')*/; 
@@ -1574,12 +1574,12 @@ class SP_WBC_Variations extends SP_Variations {
 		----product no peramiter pass kervano baki che
 		ACTIVE_TODO_OC_END*/
 
-		if(empty($args[$product])) {
+		if(empty($args['product'])) {
 
 			global $product;
 		} else {
 
-			$product = $args[$product]
+			$product = $args['product'];
 		}
 
 		$data = $this->fetch_data( /*$for_section*/'gallery_images', $product, $args );
