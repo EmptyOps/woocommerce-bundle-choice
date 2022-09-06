@@ -133,8 +133,18 @@ class Public_Handler {
 				            if(!empty($_GET['CAT_LINK'])){			            
 				                $_GET['_category']='cat_link';
 				                $_REQUEST['_category']='cat_link';
-				                $_GET['cat_filter_cat_link']=$_GET['CAT_LINK'];
-				                $_REQUEST['cat_filter_cat_link']=$_GET['CAT_LINK'];
+				                $_GET['cat_filter_cat_link']= \eo\wbc\model\SP_WBC_Router::instance()->set_query_params_formatted( 'to_form_field', 
+												                array('prod_cat'), 
+												                \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_form_field_raw',
+																				                array('prod_cat'),
+																				                'REQUEST',
+																				                null)); //$_GET['CAT_LINK'];
+				                $_REQUEST['cat_filter_cat_link']= \eo\wbc\model\SP_WBC_Router::instance()->set_query_params_formatted( 'to_form_field', 
+												                array('prod_cat'), 
+												                \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_form_field_raw',
+																				                array('prod_cat'),
+																				                'REQUEST',
+																				                null)); //$_GET['CAT_LINK'];
 				            }
 
 

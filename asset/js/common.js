@@ -3315,7 +3315,54 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
          });
  
     }
- 
+
+    #create_variation_url() {
+
+        var _this = this;
+        
+        jQuery('table.variations select').each(function() {
+            var value = jQuery(this).val();
+            if (value) {
+                attributes.push({
+                    id: jQuery(this).attr('name'),
+                    value: value
+                });
+            } else {
+                allAttributesSet = false;
+            }
+        });
+
+        ACTIVE_TODO as soon as required we need to enabled url support if applicable for simple type product 
+            ACTIVE_TODO very soon we should also use here the router class Query perams function layer instant of directly using hard coded_attr_checklist etc formate  
+        jQuery.each(attributes,function(key, val) {
+
+            // var attributeSlug = val.id.replace('attribute_pa_','');
+            var _attribute = checklist_pa_eo ni link avse te filter js ma nathi mali ;
+            var url = _this.#get_loop_box_anchor();
+            url = url +'?variation_id='+ variation.variation_id +'&'+_attribute+'=' + val.value;
+        });
+        console.log('Relocating #' + variation.variation_id);
+        //window.location.replace(url);
+        window.location.href = url;
+
+    }    
+
+    #set_variation_url() {
+
+        var _this = this;
+
+        var url = _this.#get_loop_box_anchor();
+        jQuery(url).attr("href", "");
+    }
+    
+    #get_loop_box_anchor() {
+
+        var anchor = jQuery(".products a,.product-listing a");
+
+        return anchor;
+    
+    }
+
     #reset_variation_listener(type) {
 
         var _this = this;
@@ -3528,6 +3575,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
                     --  we may not need show_gallery_images and show_variation_gallery_images, as long as we pass the right variable to process_images_template. and process_images_template is already created.      
         ACTIVE_TODO_OC_END*/
         _this.#process_images_template(variation.variation_gallery_images);
+
+        _this.#set_variation_url();
 
     }
  

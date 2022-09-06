@@ -41,16 +41,34 @@ class SP_WBC_Router extends SP_Router {
 
     public static function set_query_params_formatted($type, $key, $val, $input_method = 'GET', $format = null) {
 
-        if($type == ?) {
+        // -- HOLD FOR REMOVAL if not of any use 
+        // if($type == ?) {
 
-            if( $key[0] == 'attr' ) {
+        //     if( $key[0] == 'attr' ) {
 
-                return explode(',', self::set_query_params('_attribute', $input_method) );
-            } elseif( $key[0] == 'attr_options' ) {
+        //         return explode(',', self::set_query_params('_attribute', $input_method) );
+        //     } elseif( $key[0] == 'attr_options' ) {
 
-                return explode(',', self::set_query_params('checklist_'.$key[1], $input_method) );
+        //         return explode(',', self::set_query_params('checklist_'.$key[1], $input_method) );
+        //     }
+        // }else
+
+        if($type == 'to_form_field') {
+
+            if($key[0] == 'prod_cat'){
+
+                // NOTE: here we are simply returning but if required to controll logic then the standerd approch is to call the above set_query_params function    
+                return $val;
             }
-        } else {
+        }else if($type == 'to_filter_field'){
+
+            if($key[0] == 'prod_cat'){
+
+                // NOTE: here we are simply returning but if required to controll logic then the standerd approch is to call the above set_query_params function    
+                -- need to finalize -- to h
+                return $val;
+            }
+        }else{
 
             return self::set_query_params($key, $val, $input_method);
         }
@@ -69,13 +87,14 @@ class SP_WBC_Router extends SP_Router {
             }
         }else if($type == 'url_and_form_field_raw') {
 
+            if($key[0] == 'prod_cat'){
+
+                return self::get_query_params('CAT_LINK', $input_method);
+            }
+
         }else {
 
             return self::get_query_params($key, $input_method);
-        }
-
-        if($key[0] == 'prod_cat'){
-            
         }
 
     }
