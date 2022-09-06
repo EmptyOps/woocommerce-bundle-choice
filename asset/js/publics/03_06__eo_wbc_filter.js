@@ -608,7 +608,11 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 			complete:complete()
 
-		} );		
+		} );	
+
+		if(!init_call){
+			jQuery(".reset_all_filters.mobile_2").removeClass('mobile_2_hidden');
+		}	
 
 		double confirm that compatibility matters are well implemented so that their patches are actually applied and used when become necessary -- to s 
 			--	and in that regard when compatibility patches are used then the normal default layer logic should be skipped or I think they are applied first and then compatibility so need of skipping. but yeah still lets confirm all patches and their execution sequence. -- to s 
@@ -1342,10 +1346,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			// jQuery.fn.eo_wbc_filter_change_native= function(init_call=false,form_selector="form#eo_wbc_filter",render_container='',parameters={}) {
 
 			// // /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
-			jQuery.fn.eo_wbc_filter_change=function(init_call=false,form_selector="form[id*='eo_wbc_filter']",render_container='.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products') 
+			// jQuery.fn.eo_wbc_filter_change=function(init_call=false,form_selector="form[id*='eo_wbc_filter']",render_container='.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products') 
 
 			// // /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
-								jQuery.fn.eo_wbc_filter_change=function(init_call=false) 
+								// jQuery.fn.eo_wbc_filter_change=function(init_call=false) 
 
 			// // /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
 			// 				jQuery.fn.eo_wbc_filter_change=function(init_call=false) 
@@ -1401,9 +1405,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			//////// 27-05-2022 - @drashti /////////
 			// --add to be confirmed 2601 TO 2705--
 
-			if(!init_call){
-				jQuery(".reset_all_filters.mobile_2").removeClass('mobile_2_hidden');
-			}
+			// if(!init_call){
+			// 	jQuery(".reset_all_filters.mobile_2").removeClass('mobile_2_hidden');
+			// }
 
 		}
     };
