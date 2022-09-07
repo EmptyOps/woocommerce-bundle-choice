@@ -278,6 +278,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				// move to tableview -- to s
 				form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:'eo_wbc_e_tabview',products_in:_products_in};
 				s: question moved from tableview so need to managed flag
+					--	it seems that per page if in tableview prepare_query_data need to manage a littel 
+					--	and all the code should be moved to filter js? it seems so anyway
 				if(eo_wbc_e_tabview.eo_table_view_per_page){
 					form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
 				}
@@ -1159,6 +1161,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     	if(!eo_wbc_object.btnfilter_now){			
 			jQuery("#eo_wbc_filter").on('change',"input:not(:checkbox)",function(){
 				jQuery('[name="paged"]').val('1');
+				window.document.splugins.wbc.pagination.core.reset();
 				// jQuery.fn.eo_wbc_filter_change();
 				window.document.splugins.filters.api.eo_wbc_filter_change_wrapper();										
 			});
@@ -2063,13 +2066,11 @@ jQuery(document).ready(function($){
 	window.document.splugins.eo_wbc_object = window.document.splugins.eo_wbc_object || {};
 	window.document.splugins.eo_wbc_object.enable_filter = window.document.splugins.eo_wbc_object.enable_filter || false;
 	////////////////////////////////////
-	ACTIVE_TODO_OC_START
 	//done move to pagination js modules bind_click function -- to d 
 		
-		--	and also be sure to the filter_change function call. and why that is so far not changed? -- to d 
+		// --	and also be sure to the filter_change function call. and why that is so far not changed? -- to d 
 		--//done  and comment code below but the pagination modules init function need to be called from here -- to d 
-			--//done	so first export and publish that module under ...api -- to d 
-	ACTIVE_TODO_OC_END		
+			--//done	so first export and publish that module under ...api -- to d 	
 
 	// jQuery('body').on('click','.navigation .page-numbers,.woocommerce-pagination a.page-numbers',function(e){
 	//     e.preventDefault();
@@ -2141,8 +2142,8 @@ jQuery(document).ready(function($){
 		//pagination for non-table based view
 
 		//done move to pagination js modules bind_click function -- to d 
-			--	and also be sure to the filter_change function call. and why that is so far not changed? -- to d 
-		below block are moved in filter module bind_click function. so do not consider this code block here. -- shraddha -- to s 
+			// --	and also be sure to the filter_change function call. and why that is so far not changed? -- to d 
+		// below block are moved in filter module bind_click function. so do not consider this code block here. -- shraddha -- to s 
 
 		// --- pagination module move this code ---
 		// and alredy call filter init function in this ready event and inside that function all listener are called.
@@ -2179,16 +2180,16 @@ jQuery(document).ready(function($){
 		--	and then from just make call to that private function from the init_private of the same module -- to d /*done*/
 		this task is complete
 
-	if(jQuery.fn.hasOwnProperty('accordion') && typeof(jQuery.fn.accordion)==='function'){
-		jQuery( ".eo_wbc_advance_filter" ).accordion({
-		  collapsible: true,
-		  active:false
-		});
-	}
+	// if(jQuery.fn.hasOwnProperty('accordion') && typeof(jQuery.fn.accordion)==='function'){
+	// 	jQuery( ".eo_wbc_advance_filter" ).accordion({
+	// 	  collapsible: true,
+	// 	  active:false
+	// 	});
+	// }
 
 	in function bind_reset_click in filters js module and move below code there -- to d done
 		--	just confirm above point and then need to call the bind_reset_click function from below. or if we have better idea to call it from the filters js module itself there. I think it is better to call from thed filters js module. so bind_reset_click will be private function. -- to s 
-	// below code are mover in on_reset_click_listener and e function init_private manthi call thay che. shraddha
+	// below code are moved in on_reset_click_listener and e function init_private manthi call thay che. shraddha
 	//Reset form and display
 
 	
