@@ -40,6 +40,15 @@ if(!class_exists('WBC_Loader')) {
 					wbc()->load->asset('css','https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',array(),"",false,true,null,null,false,true);
 					wbc()->load->asset('js','https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js',array('jquery'),"",false,true,null,null,false,true);
 					wbc()->load->asset('js','https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js',array('jquery'),"",false,true,null,null,false,true);			
+				case 'semantic':
+					//ACTIVE_TODO update code below to use wbc()->load->asset function call insted of below dairact wp api call.
+					add_action( 'wp_enqueue_scripts',function() { 
+		        	
+		            wp_register_style('fomantic-semantic.min',constant('EO_WBC_ETABLEVIEW_ASSET_URL').'css/ui/semantic.min.css');
+		            wp_enqueue_style( 'fomantic-semantic.min');
+		            wp_register_script('fomantic-semantic.min',constant('EO_WBC_ETABLEVIEW_ASSET_URL').'js/ui/semantic.min.js',array('jquery'),false);    
+		            wp_enqueue_script( 'fomantic-semantic.min');        
+		        },100);		
 				default:				
 					break;
 			}			
