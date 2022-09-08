@@ -52,11 +52,11 @@ if ( $woo_dropdown_attribute_html_data['product'] && taxonomy_exists( $variable_
 if ( $woo_dropdown_attribute_html_data['args']['sp_variations_swatches_cat_display_limit'] > 0 && $woo_dropdown_attribute_html_data['args']['actual_total_options'] > $woo_dropdown_attribute_html_data['args']['sp_variations_swatches_cat_display_limit'] ) {
     $template = array(
         'type' => 'li',
-        'class' => 'spui_swatches_more__container',
+        'class' => 'spui-wbc-swatches-variable-item-more spui_swatches_more__container',
         'child' => array(
             array(
                 'type' => 'a',
-                'class'=>'spui-wbc-swatches-variable-item-more'
+                'class'=>'spui-wbc-swatches-variable-item-more-a'
                 'preHTML' => '+'.($woo_dropdown_attribute_html_data['args']['actual_total_options'] - $woo_dropdown_attribute_html_data['args']['sp_variations_swatches_cat_display_limit']).' More',
                 'href' => '#',
             ),
