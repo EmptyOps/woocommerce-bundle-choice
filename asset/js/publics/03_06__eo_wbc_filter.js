@@ -1432,6 +1432,8 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 
 	var init_private = function() {
 
+		window.document.splugins.events.api.apply_all_observer_filters( 'pagination', 'base_container_selector',{});
+
 		like from the filters module, we may need to raise notification from all key functions of this module as well.
 			--	like tableview may like to recieve click notification, but does it require to handle anuy logic related to it? since the wbc layers will only host the pagination module and layers so maybe tableview does not need to manage many or maybe not need to manage none of those things. 
 				--	NOTE: and on this regard in case of dapii custom data based feed, when the pagination links are created by the dapii layers even then also all the standard and compatibility listeners of the bind_click for pagination links below will do its job. means roughly except the dapii creating the pagination links the rest all will be handled by the wbc layers. 
