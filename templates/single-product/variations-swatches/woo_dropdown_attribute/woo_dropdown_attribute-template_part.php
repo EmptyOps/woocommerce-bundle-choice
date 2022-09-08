@@ -29,7 +29,8 @@ $attr = null;
 $variation_option_name = null;
 if (is_object($term)) {
 //var_dump($term); 
-	$attr = array( 'value' => esc_attr( $term->slug ) );
+	
+	$attr = array_merge( array( 'value' => esc_attr( $term->slug ) ), $woo_dropdown_attribute_html_data['options_loop_html_attr'][$term->slug] ) ;
 	if (!empty(selected( sanitize_title( $woo_dropdown_attribute_html_data['args']['selected'] ), $term->slug, false ))) {
 		$attr['selected'] = 'selected';
 	}
@@ -38,7 +39,7 @@ if (is_object($term)) {
 
 } else{
 
-	$attr = array( 'value' => esc_attr( $term ) );
+	$attr = array_merge( array( 'value' => esc_attr( $term ) ), $woo_dropdown_attribute_html_data['options_loop_html_attr'][$term] );
 	if (!empty($woo_dropdown_attribute_html_data['options_loop_selected'][$term])) {
 		$attr['selected'] = 'selected';
 	}

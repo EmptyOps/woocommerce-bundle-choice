@@ -250,57 +250,6 @@ class SP_Model_Feed extends SP_Feed {
 
 	public function render_gallery_images_template_callback($args = array()){
 		
-
-		
-		need to consider any applicable things or flow from below code block of one of the plugin we are exploring -- to h
-
-		add_action('woocommerce_init', array($this, 'replacing_template_loop_product_thumbnail'));
-
-
-        public function wc_template_loop_product_replaced_thumb() {
-            global $product;
-            $needed = array();
-            if (isset($this->settings['show_images_by_attr'])) {
-                $needed = $this->settings['show_images_by_attr'];
-            }
-            if (is_array($needed) AND count($needed)) {
-                if ($this->is_isset_in_request_data($this->get_swoof_search_slug()) AND $product->is_type("variable")) {
-                    $need_array = array();
-                    $request = $this->get_request_data();
-                    $need_array = array_intersect_key($request, array_flip($needed));
-                    $rate = array();
-                    if (count($need_array)) {
-                        $variations = $product->get_available_variations();
-                        foreach ($variations as $key => $variant) {
-                            if (isset($variant['attributes'])) {
-                                $rate[$key] = 0;
-                                foreach ($need_array as $attr_name => $values) {
-                                    if (isset($variant['attributes']["attribute_" . $attr_name]) AND in_array($variant['attributes']["attribute_" . $attr_name], explode(",", $values))) {
-                                        $rate[$key]++;
-                                    }
-                                }
-                            }
-                        }
-                        arsort($rate);
-                        $attr_key = array_key_first($rate);
-                        if (array_shift($rate)) {
-                            if (isset($variations[$attr_key]["image_id"]) AND $variations[$attr_key]["image_id"]) {
-                                $image_size = apply_filters('single_product_archive_thumbnail_size', 'woocommerce_thumbnail');
-                                $image = wp_get_attachment_image($variations[$attr_key]["image_id"], $image_size, false, array());
-                                if ($image) {
-                                    echo $image;
-                                    return;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            echo woocommerce_get_product_thumbnail();
-        }
-
-
-
 		// global $product;
 
 		// $data = \eo\wbc\model\publics\SP_Model_Feed::instance()->get_data('gallery_images');

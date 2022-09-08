@@ -1151,10 +1151,10 @@ class SP_WBC_Variations extends SP_Variations {
 
 			
 			$query_params = \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_filter_form', array('attr'), 'REQUEST', null);
-			$query_paramas_options = null;
-			if(in_array(? , $query_params)){
+			$data['woo_dropdown_attribute_html_data']['query_paramas_options'] = null;
+			if(in_array($data['woo_dropdown_attribute_html_data']['attribute'] , $query_params)){
 
-				$query_paramas_options = \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_filter_form', array('attr_options', .append karavanu in_array ma je slug male e) , 'REQUEST', null);
+				$data['woo_dropdown_attribute_html_data']['query_paramas_options'] = \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_filter_form', array('attr_options', $data['woo_dropdown_attribute_html_data']['attribute']) , 'REQUEST', null);
 			}
 
 			if ( $data['woo_dropdown_attribute_html_data']['product'] && taxonomy_exists( $data['woo_dropdown_attribute_html_data']['attribute'] ) ) {
@@ -1170,12 +1170,12 @@ class SP_WBC_Variations extends SP_Variations {
 
 						$data['woo_dropdown_attribute_html_data']['options_loop_class'][$term->slug] = esc_attr( $data['woo_dropdown_attribute_html_data']['type'] ).'-variable-item-'.esc_attr( $term->slug );
 
-						s: question actual selected attribute set karavano baki chhe. -- to s
-						$data['woo_dropdown_attribute_html_data']['options_loop_selected'][$term->slug] = ( ( (sanitize_title( $args['hook_callback_args']['hook_args']['selected'] ) === $args['hook_callback_args']['hook_args']['selected']) || (!empty($query_paramas_options) && in_array($term->slug, $query_paramas_options)) ) ? selected( $args['hook_callback_args']['hook_args']['selected'], sanitize_title( $term->slug ), false ) : selected( $args['hook_callback_args']['hook_args']['selected'], $term->slug, false ) );
+						$data['woo_dropdown_attribute_html_data']['options_loop_selected'][$term->slug] = ( ( (sanitize_title( $args['hook_callback_args']['hook_args']['selected'] ) === $args['hook_callback_args']['hook_args']['selected']) || (!empty($data['woo_dropdown_attribute_html_data']['query_paramas_options']) && in_array($term->slug, $data['woo_dropdown_attribute_html_data']['query_paramas_options'])) ) ? selected( $args['hook_callback_args']['hook_args']['selected'], sanitize_title( $term->slug ), false ) : selected( $args['hook_callback_args']['hook_args']['selected'], $term->slug, false ) );
 
 						$data['woo_dropdown_attribute_html_data']['options_loop_option_name'][$term->slug] = \eo\wbc\system\core\data_model\SP_Attribute::variation_option_name( $term->name, $term, $data['woo_dropdown_attribute_html_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product']);
 
-						$data['woo_dropdown_attribute_html_data']['options_loop_html_attr'][$term->slug] = array('data-value'=>array(esc_attr( $term->slug ), 'data-title'=>$data['woo_dropdown_attribute_html_data']['options_loop_option_name'][$term->slug]) );
+						// ACTIVE_TODO right now we are managing selected attribute from the common woo dropdown attribute template but in future we should managing from the data layer here.
+						$data['woo_dropdown_attribute_html_data']['options_loop_html_attr'][$term->slug] = array('data-value'=>esc_attr( $term->slug ), 'data-title'=>$data['woo_dropdown_attribute_html_data']['options_loop_option_name'][$term->slug] );
 
 						\eo\wbc\system\core\SP_Router::get_query_params_formated('attr', $input_method, 'key_value');
 
@@ -1194,12 +1194,12 @@ class SP_WBC_Variations extends SP_Variations {
 					$data['woo_dropdown_attribute_html_data']['options_loop_class'][$option] = esc_attr( $data['woo_dropdown_attribute_html_data']['type'] ).'-variable-item-'.esc_attr( $option );
 
 					// This handles < 2.4.0 bw compatibility where text attributes were not sanitized.
-					s: question actual selected attribute set karavano baki chhe. -- to s
-					$data['woo_dropdown_attribute_html_data']['options_loop_selected'][$option] = ( ( ( sanitize_title( $args['hook_callback_args']['hook_args']['selected'] ) === $args['hook_callback_args']['hook_args']['selected']) || (!empty($query_paramas_options) && in_array($option, $query_paramas_options)) ) ? selected( $args['hook_callback_args']['hook_args']['selected'], sanitize_title( $option ), false ) : selected( $args['hook_callback_args']['hook_args']['selected'], $option, false ) );
+					$data['woo_dropdown_attribute_html_data']['options_loop_selected'][$option] = ( ( ( sanitize_title( $args['hook_callback_args']['hook_args']['selected'] ) === $args['hook_callback_args']['hook_args']['selected']) || (!empty($data['woo_dropdown_attribute_html_data']['query_paramas_options']) && in_array($option, $data['woo_dropdown_attribute_html_data']['query_paramas_options'])) ) ? selected( $args['hook_callback_args']['hook_args']['selected'], sanitize_title( $option ), false ) : selected( $args['hook_callback_args']['hook_args']['selected'], $option, false ) );
 
 					$data['woo_dropdown_attribute_html_data']['options_loop_option_name'][$option] = \eo\wbc\system\core\data_model\SP_Attribute::variation_option_name( $option, null, $data['woo_dropdown_attribute_html_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product']);
 
-					$data['woo_dropdown_attribute_html_data']['options_loop_html_attr'] = array('data-value' => array(esc_attr( $option ), 'data-title' => esc_attr( $option )) );
+					// ACTIVE_TODO right now we are managing selected attribute from the common woo dropdown attribute template but in future we should managing from the data layer here.
+					$data['woo_dropdown_attribute_html_data']['options_loop_html_attr'] = array('data-value' => esc_attr( $option ), 'data-title' => esc_attr( $option ) );
 
 					/*echo '<option value="' . esc_attr( $option ) . '" ' . $selected . '>' . esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) . '</option>';*/
 				}
@@ -1241,14 +1241,6 @@ class SP_WBC_Variations extends SP_Variations {
 		ACTIVE_TODO_OC_END*/
 
 		if ( ! empty( $data['woo_dropdown_attribute_html_data']['options'] ) ) {
-
-			$query_params = \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_filter_form', array('attr'), 'REQUEST', null);
-			$query_paramas_options = null;
-			if(in_array(? , $query_params)){
-
-				$query_paramas_options = \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_filter_form', array('attr_options', .append karavanu in_array ma je slug male e) , 'REQUEST', null);
-			}
-
 
 			if ( $data['woo_dropdown_attribute_html_data']['product'] && taxonomy_exists( $data['variable_item_data']['attribute'] ) ) {
 
@@ -1344,8 +1336,7 @@ class SP_WBC_Variations extends SP_Variations {
 						// $data['variable_item_data'][$term->slug]['option'] = esc_html( apply_filters( 'woocommerce_variation_option_name', $term->name, $term, $data['variable_item_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product'] ) );
 						$data['variable_item_data']['options_loop_option'][$term->slug] = esc_html( \eo\wbc\system\core\data_model\SP_Attribute::variation_option_name($term->name, $term, $data['variable_item_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product'] ) );
 
-						s: question actual selected attribute set karavano baki chhe. -- to s
-						$data['variable_item_data']['options_loop_is_selected'][$term->slug]    = ( ( sanitize_title( $data['woo_dropdown_attribute_html_data']['args']['selected'] ) == $term->slug ) ) || (!empty($query_paramas_options) && in_array($option, $query_paramas_options) ) ) ? true : false;
+						$data['variable_item_data']['options_loop_is_selected'][$term->slug]    = ( ( sanitize_title( $data['woo_dropdown_attribute_html_data']['args']['selected'] ) == $term->slug ) ) || (!empty($data['woo_dropdown_attribute_html_data']['query_paramas_options']) && in_array($term->slug, $data['woo_dropdown_attribute_html_data']['query_paramas_options']) ) ) ? true : false;
 						$data['variable_item_data']['options_loop_selected_class'][$term->slug] = $data['variable_item_data']['options_loop_is_selected'][$term->slug] ? 'selected' : '';
 
 						$data['variable_item_data']['options_loop_tooltip'][$term->slug]        = '';
@@ -1357,7 +1348,8 @@ class SP_WBC_Variations extends SP_Variations {
 
 						$data['woo_dropdown_attribute_html_data']['options_loop_class'][$term->slug] = esc_attr( $data['woo_dropdown_attribute_html_data']['type'] ).'-variable-item-'.esc_attr( $term->slug ).' '.esc_attr( $data['variable_item_data']['options_loop_selected_class'][$term->slug]);
 
-						$data['variable_item_data']['options_loop_html_attr'][$option] = array( 'data-value' => esc_html( $term->name ), 'data-title' => esc_attr( $term->slug ) );
+						// ACTIVE_TODO right now we are managing selected attribute from the common woo dropdown attribute template but in future we should managing from the data layer here.
+						$data['variable_item_data']['options_loop_html_attr'][$option] = array( 'data-value' => esc_html( $term->slug ), 'data-title' => esc_html( $term->slug ) );
 
 						/*ACTIVE_TODO_OC_START
 						--------- a etlu wvs_default_variable_item alg che
@@ -1464,15 +1456,14 @@ class SP_WBC_Variations extends SP_Variations {
 
 						$data['variable_item_data']['options_loop_option'][$option] = esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $option, null, $data['variable_item_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product'] ) );
 
-						s: question actual selected attribute set karavano baki chhe. -- to s
-						$data['variable_item_data']['options_loop_is_selected'][$option] = ( ( sanitize_title( $data['variable_item_data']['options_loop_option'][$option] ) == sanitize_title( $data['woo_dropdown_attribute_html_data']['args']['selected'] ) ) || (!empty($query_paramas_options) && in_array($option, $query_paramas_options) ) ) ? true : false;
+						$data['variable_item_data']['options_loop_is_selected'][$option] = ( ( sanitize_title( $data['variable_item_data']['options_loop_option'][$option] ) == sanitize_title( $data['woo_dropdown_attribute_html_data']['args']['selected'] ) ) || (!empty($data['woo_dropdown_attribute_html_data']['query_paramas_options']) && in_array($option, $data['woo_dropdown_attribute_html_data']['query_paramas_options']) ) ) ? true : false;
 
 
 						$data['variable_item_data']['options_loop_selected_class'][$option] = $data['variable_item_data']['options_loop_is_selected'][$option] ? 'selected' : '';
 						$data['variable_item_data']['options_loop_tooltip'][$option]        = trim( apply_filters( 'wvs_variable_item_tooltip', $data['variable_item_data']['options_loop_option'][$option], $data['woo_dropdown_attribute_html_data']['options'], $data['woo_dropdown_attribute_html_data']['args'] ) );
 
-						s: question value ma su pass karavanu chhe -- to s
-						$data['variable_item_data']['options_loop_html_attr'][$option] = array('data-value' => , 'data-title' => );
+						// ACTIVE_TODO right now we are managing selected attribute from the common woo dropdown attribute template but in future we should managing from the data layer here.
+						$data['variable_item_data']['options_loop_html_attr'][$option] = array('data-value' => esc_html( $option ), 'data-title' => esc_html( $option ));
 
 						if ( $data['variable_item_data']['is_archive'] && ! $show_archive_tooltip ) {
 							$data['variable_item_data']['options_loop_tooltip'][$option] = false;
