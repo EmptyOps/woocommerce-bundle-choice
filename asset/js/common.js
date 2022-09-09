@@ -3396,21 +3396,34 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
 
         ACTIVE_TODO as soon as required we need to enabled url support if applicable for simple type product 
             ACTIVE_TODO very soon we should also use here the router class Query perams function layer instant of directly using hard coded_attr_checklist etc formate  
+        var attributeSlug_global = '';
         jQuery.each(attributes,function(key, val) {
 
             var attributeSlug = val.id.replace('attribute_',''); //val.id.replace('attribute_pa_','');
-            url += '&_attribute=' + attributeSlug + '&checklist_' + attributeSlug + "=" + val.value;
+            // url += '&_attribute=' + attributeSlug + '&checklist_' + attributeSlug + "=" + val.value;
+            attributeSlug_global += ',' + attributeSlug;
+            url = window.document.splugins.common.updateURLParameter(url, 'checklist_' + attributeSlug + "=", val.value);
         });
+
+        url = window.document.splugins.common.updateURLParameter(url, '_attribute=', attributeSlug_global);
 
         return url;
     }    
 
     #get_loop_box_anchor(variation) {
 
-        var anchor = jQuery(".products a,.product-listing a");
+        -- 1 -- aa class thi find karvanu -- to a
+        var finalAncher = jQuery('div.woocommerce ul.products li.product a.woocommerce-LoopProduct-link');
 
-        return anchor;
-    
+        -- 2 -- a element structure thi find karvanu and <a> na path ma /product find kari ne <a> male -- to a
+        var aLocate = jQuery("div>ul>li a");
+        var aLocateHref = aLocate.attr("href");
+        if(aLocateHref.indexOf("/product/") >= 0) {
+
+            console.log("find success");
+        }
+
+        return finalAncher;
     }
 
     #set_variation_url(variation) {
@@ -3419,7 +3432,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
         var _this = this;
 
         var a = _this.#get_loop_box_anchor(variation);
-        jQuery(a).attr("href", "");
+        var base_url = jQuery(a).attr("href", "");
     }
 
     #reset_variation_listener(type) {
