@@ -337,6 +337,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
 		// --add to be confirmed 2601 TO 2705--
 		if(init_call) {
+			ACTIVE_TODO this should be moved in pagination as soon as possible, next by 2nd revision -- to h & -- to a
 			jQuery("form#eo_wbc_filter [name='paged']").val('1');
 			jQuery("form#eo_wbc_filter [name='last_paged']").val('1');
 			jQuery("form#eo_wbc_filter [name='_category']").val(jQuery("form#eo_wbc_filter [name='_current_category']"));

@@ -1076,6 +1076,11 @@ window.document.splugins.wbc.variations = window.document.splugins.wbc.variation
 // the variations swatches js module
 class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
+    #configs;
+    #base_container;
+    #data;
+    #binding_stats;
+
     constructor(element, configs) {
         
         // Calling parent's constructor
@@ -2329,7 +2334,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
         jQuery( _this.$base_element /*'.variations_form'*/).on('click', '.reset_variations'/*'woocommerce_variation_select_change'*//*'reset'*/,function(){
 
-            // ACTIVE_TODO neet to implement reset logic as applicable, need to confirm all reset flows of plugin we are exploring and also uncomment below m code if required and move to base reset function. -- to h & -- to s
+            // ACTIVE_TODO need to implement reset logic as applicable, need to confirm all reset flows of plugin we are exploring and also uncomment below m code if required and move to base reset function. -- to h & -- to s
             // jQuery('.variable-items-wrapper .selected').removeClass('selected');
             // jQuery('.variable-items-wrapper .dropdown').dropdown('restore defaults');
 
@@ -2390,6 +2395,9 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
     #on_reset(type, element, event) {
 
+        var _this = this; 
+        
+        _this.#click(type, element, event);
     }
 
     // ACTIVE_TODO_OC_START
@@ -2471,7 +2479,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
             jQuery(element_inner).trigger('focus'); // Mobile tooltip
 
-            // ACTIVE_TODO here we may like to raise our notification evemnt to completly implement and finish our notifications structure and heirarchi 
+            // ACTIVE_TODO here we may like to raise our notification evemnt to completly implement and finish our notifications structure and hierarchic 
             // jQuery(element_inner).trigger('wvs-selected-item', [value, select, _this._element]); // Custom Event for li
         }
 
@@ -2487,8 +2495,8 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
     #keydown(type, element) {
 
         if (event.keyCode && 32 === event.keyCode || event.key && ' ' === event.key || event.keyCode && 13 === event.keyCode || event.key && 'enter' === event.key.toLowerCase()) {
-          event.preventDefault();
-          jQuery(element).trigger(_this.#configs.mouse_event_name);
+            event.preventDefault();
+            jQuery(element).trigger(_this.#configs.mouse_event_name);
         }
     }
 
