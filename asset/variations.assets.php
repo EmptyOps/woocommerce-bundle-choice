@@ -181,6 +181,51 @@
 		background-color: <?php _e($bg_hover_color); ?>;
 		color: <?php _e($font_hover_color); ?>;	
 	}
+
+
+	/*--color-disable*/
+	.disabled .spui_color_variable_item_contents::before{
+        background-image: var(--spui-dis-check);
+        background-position: 50%;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        content: " ";
+        display: block;
+        height: 100%;
+        position: absolute;
+        width: 100%;
+    }
+
+	/*coman*/
+    .disabled {
+        cursor: not-allowed !important;
+        overflow: hidden;
+        pointer-events: all;
+        position: relative;
+        color: rgba(101,101,101,.5)!important;
+    }
+
+    
+	/*--btn-disabled--*/
+
+	.disabled .spui_button_variable_item_contents::before{
+        background-image: var(--spui-dis-check);
+        background-position: 50%;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        content: " ";
+        display: block;
+        height: 100%;
+        position: absolute;
+        width: 100%;
+    }
+
+    .out-of-stock {
+        opacity: 0.4;
+        cursor: not-allowed !important;
+        display: inline-block;
+    }
+
 </style>
 
 <?php 
