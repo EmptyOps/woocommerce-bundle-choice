@@ -2602,6 +2602,12 @@ window.document.splugins.wbc.variations.swatches.api = window.document.splugins.
 // the variations gallery_images js module
 class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
 
+    #configs;
+    #$base_container_selector;
+    #$base_container;
+    #data;
+    #binding_stats;
+
     constructor(element, configs){
         
         // Calling parent's constructor
@@ -3943,6 +3949,10 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
 // the variations swatches js module
 class SP_WBC_Variations_Swatches_Feed_Page extends SP_WBC_Variations_Swatches {
 
+    #configs;
+    #data;
+    #binding_stats;
+
     constructor(element, configs) {
 
         // Calling parent's constructor
@@ -4024,6 +4034,10 @@ if(window.document.splugins.common.is_category_page) {
 
 // the variations gallery images js module
 class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Gallery_Images {
+
+    #configs;
+    #data;
+    #binding_stats;
 
     constructor(element, configs) {
 

@@ -220,10 +220,61 @@
         width: 100%;
     }
 
+    /*------Out-OF-Stock-----*/
     .out-of-stock {
-        opacity: 0.4;
         cursor: not-allowed !important;
         display: inline-block;
+        pointer-events: none;
+    }
+    /*--OutStock_Color--*/
+     .out-of-stock .spui_color_variable_item_contents {
+        opacity: .6;
+    }
+    
+    .out-of-stock .spui_color_variable_item_contents::before {
+        position: absolute;
+        content: "";
+        background-image: var(--spui-dis-check);
+        background-position: 50%;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        display: block;
+        height: 100%;
+        width: 100%;
+    }
+    /*--OutStock_button--*/
+     .out-of-stock .spui_button_variable_item_contents{
+        opacity: .6;
+    }
+
+    .out-of-stock .spui_button_variable_item_contents::before {
+        position: absolute;
+        content: "";
+        background-image: var(--spui-dis-check);
+        background-position: 50%;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        display: block;
+        height: 100%;
+        width: 100%;
+    }
+    /*--Outstck_Image---*/
+
+   .out-of-stock .spui_color_icon_variable_item_contents {
+       opacity: .6;
+    }
+   
+
+    .out-of-stock .spui_color_icon_variable_item_contents::before {
+        position: absolute;
+        content: "";
+        background-image: var(--spui-dis-check);
+        background-position: 50%;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        display: block;
+        height: 100%;
+        width: 100%;
     }
 
 </style>
