@@ -1297,6 +1297,25 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		var no_products_found_callback = null;
 		window.document.splugins.events.api.notifyAllObservers( 'filters', 'no_products_found', {}, 'no_products_found_callback' );
 
+		// --- aa code sp_tableview/asset/js/publics/sp_tableview.js ma window.document.splugins.sp_tv.template.render_private() mathi move karyo se ---
+		// --- start ---
+		--	execute filters task -- to a 
+			--	it will mostly involve making sure that if there are any selectors or compatibility matters that wbc filter js module does not have then that is moved there if that is grid view or legacy standard flows specific -- to a 
+		jQuery(".products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)").html('<p class="woocommerce-info" style="width: 100%;display:table;">No products were found matching your selection.</p>');		
+		// --- end ---
+
+		// --- aa code sp_tableview/asset/js/publics/sp_tableview.js ma window.document.splugins.sp_tv.template.render_private() mathi move karyo se ---
+		// --- start ---
+		tableview will subscribe to no product found notification of filter js module -- to a 
+			--	and on notification recieved update dom with statement like below -- to a
+		jQuery("table#eo_wbc_filter_table").replaceWith('<p class="woocommerce-info" style="width: 100%;display:table;">No products were found matching your selection.</p>');
+		// --- end ---
+
+		// --- aa code sp_tableview/asset/js/publics/sp_tableview.js ma window.document.splugins.sp_tv.template.render_private() mathi move karyo se ---
+		// --- start ---
+		jQuery(".products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)").html('<p class="woocommerce-info" style="width: 100%;display:table;">No products were found matching your selection.</p>');
+		// --- end ---
+
     }
 
     ///////////////////////////////////////////////////////
@@ -1436,7 +1455,9 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 
 		ACTIVE_TODO whenever in future if required  to run compatibility check during run time means after the base container selectore is defined than we can call compatibility layers additionaly from here 
     	var base_container_selector_callback = null;
-		window.document.splugins.events.api.apply_all_observer_filters( 'pagination', 'base_container_selector',{},base_container_selector_callback);  
+		var stat_object = window.document.splugins.events.api.apply_all_observer_filters( 'pagination', 'base_container_selector',{_this.base_container:_this.base_container},base_container_selector_callback);  
+
+		_this.base_container = stat_object._this.base_container;
 
 		like from the filters module, we may need to raise notification from all key functions of this module as well.
 			--	like tableview may like to recieve click notification, but does it require to handle anuy logic related to it? since the wbc layers will only host the pagination module and layers so maybe tableview does not need to manage many or maybe not need to manage none of those things. 
