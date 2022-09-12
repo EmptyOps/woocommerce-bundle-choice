@@ -30,31 +30,31 @@ class SP_Model_Query extends SP_Query {
 				if( wbc()->sanitize->get('is_test') == 1 ) {
 					wbc()->common->var_dump( "SP_Model_Query wbc prepare_query pre_get_posts ".$input_method );
 				}
+				
+				// --- move to ssm_dt submodule sp_tableview/application/library/shared/submodule/sp_experimental_tobe_splitted/application/model/publics/sp-ssm-dt-model-feed.php do_loop() @a ---
+				// --- start ---
+		  //   	if(apply_filters('eowbc_filter_override',false) and (!empty($_REQUEST['eo_wbc_filter']))) {
 
-		    	if(apply_filters('eowbc_filter_override',false) and (!empty($_REQUEST['eo_wbc_filter']))) {
+				// 	if( wbc()->sanitize->get('is_test') == 1 ) {
+				// 		wbc()->common->var_dump( "SP_Model_Query wbc prepare_query pre_get_posts eowbc_filter_override ".$input_method );
+				// 	}
 
-					if( wbc()->sanitize->get('is_test') == 1 ) {
-						wbc()->common->var_dump( "SP_Model_Query wbc prepare_query pre_get_posts eowbc_filter_override ".$input_method );
-					}
-					// --- move to ssm_dt submodule sp_tableview/application/library/shared/submodule/sp_experimental_tobe_splitted/application/model/publics/sp-ssm-dt-model-feed.php do_loop() @a ---
-					// --- start ---
-					// $eowbc_filter_response = apply_filters('eowbc_filter_response',array());
+				// 	$eowbc_filter_response = apply_filters('eowbc_filter_response',array());
 
-					// do_action('sp_wbc_prepare_filter_response_feed',$eowbc_filter_response);
-		   //          --- end ---
+				// 	do_action('sp_wbc_prepare_filter_response_feed',$eowbc_filter_response);
+		            
 
-		            // echo json_encode(/*apply_filters('eowbc_filter_response',array())*/);
-		            die();
+		  //           // echo json_encode(/*apply_filters('eowbc_filter_response',array())*/);
+		  //           die();
 
-		        }
+		  //       }
 
 
-		        and to get the result obj we can rely on the post_get_posts which might be the alternative of the pre_get_posts -- to h & -- to a 
 		        $this->prepare_query_direct( $query, $input_method, $additional_data );
 
-		        ACTIVE_TODO need to implement lagecy respose
-				-- upper aa do action valo hook comment karyo to aya pan comment karvano se ? @a --
-				do_action('sp_wbc_prepare_filter_response_feed',$eowbc_filter_response);
+				// -- upper aa do action valo hook comment karyo to aya pan comment karvano se ? @a --
+				// do_action('sp_wbc_prepare_filter_response_feed',$eowbc_filter_response);
+				// --- end ---
 
 		        return apply_filters('filter_widget_ajax_post_query',$query);
 		    });		   

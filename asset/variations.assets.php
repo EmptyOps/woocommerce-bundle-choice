@@ -4,6 +4,10 @@
 ?>
 
 <!-- /*tejas_22_07_2022 it for new QC upgrades so it is permenent*/ -->
+<?php
+if( is_product() ) {
+?>
+
 <style type="text/css">
 	table.variations tbody>tr:nth-child(odd)>td, table.variations tbody>tr:nth-child(odd)>th {
 	    background: transparent;
@@ -280,8 +284,9 @@
 </style>
 
 <?php 
+} 
 
-if(is_category()) {
+if(is_shop() || is_product_category()) {
 ?>
 
 	<!--Color-->
@@ -511,6 +516,8 @@ if(is_category()) {
 	
 	jQuery(document).ready(function($){
 		// ACTIVE_TODO below sections might be of use so keeping it on for now, but we must double confirm like legacy woo js layers provide full dropdown template supports. but i think still sementic specific matters need to be managed because we are using sementic templates.
+			do we need to disable the blow change event implimention -- to h
+			 	eithere way blowo class would be loading only when the dropdown template of simentic is used on item page -- to h
 		jQuery(".dropdown").dropdown().on('change',function(){
 			var target_selector =  $('#'+$(this).find('input[type="hidden"]').data('id'));
 			target_selector.val($(this).find('input[type="hidden"]').val());
@@ -519,6 +526,10 @@ if(is_category()) {
 			jQuery(".variations_form" ).trigger('check_variations');
 			$(target_selector).trigger('change');
 		});
+
+
+		ACTIVE_TODO we shoud simply put this class on the perticuler template html dom and coment the code below -- to h & -- to s
+			for now lats comment the code but after confirming with t -- to t
 		if($('table.variations tbody>tr').length>0){
 			$('table.variations').addClass('ui raised segment');	
 		}
