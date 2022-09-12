@@ -242,7 +242,7 @@ class SP_Query {
                                 'compare'=>'EXISTS IN'
                             ),
 		                    ACTIVE_TODO need to finalaize -- to a & -- to h
-			  					ACTIVE_TODO if we can not confirm at bashed on the understanding of router and quarry layer and we can simply than lets skip it as active todo and if there are any issue comes up for tableview query layer especially the tableview legacy query layer which is now commented than we can think about it                            
+			  					ACTIVE_TODO if we can not confirm it based on the understanding of router and quarry layer and we can simply than lets keep it as active todo and if there are any issue comes up for tableview query layer especially the tableview legacy query layer which is now commented than we can think about it                            
                             --- aa code sp_tableview/application/model/publics/sp-model-query.php mathi move karyo se @a ---
                             --- start ---                            
                             -- below code is aditional in tableview and is not there in wbc so we must check if it is really nessasary before running the code -- to h
@@ -265,7 +265,7 @@ class SP_Query {
                                 'compare'=>'EXISTS IN'
                             ),
 		                    ACTIVE_TODO need to finalaize -- to a & -- to h
-			  					ACTIVE_TODO if we can not confirm at bashed on the understanding of router and quarry layer and we can simply than lets skip it as active todo and if there are any issue comes up for tableview query layer especially the tableview legacy query layer which is now commented than we can think about it                            
+			  					ACTIVE_TODO if we can not confirm it based on the understanding of router and quarry layer and we can simply than lets keep it as active todo and if there are any issue comes up for tableview query layer especially the tableview legacy query layer which is now commented than we can think about it                            
                             --- aa code sp_tableview/application/model/publics/sp-model-query.php mathi move karyo se @a ---
                             --- start ---
                             array(
