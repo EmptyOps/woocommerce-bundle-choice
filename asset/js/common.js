@@ -1090,7 +1090,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
         _this.#configs = jQuery.extend({}, {}/*default configs*/, configs);
 
-        _this.#configs.attribute_types_keys = Object.keys( _this.configs.attribute_types );
+        _this.#configs.attribute_types_keys = Object.keys( _this.#configs.attribute_types );
 
         _this.#base_container = jQuery(element);    // jQuery( ( window.document.splugins.common._o( _this.configs, 'base_container_selector') ? _this.configs.base_container_selector : '.variations_form' ) );      
 
@@ -2617,7 +2617,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
      
         _this.#$configs = jQuery.extend({}, {}/*default configs*/, configs);  
 
-        _this.#$base_container_selector = ( window.document.splugins.common._o( _this.configs, 'base_container_selector') ? _this.configs.base_container_selector : ''  );     
+        _this.#$base_container_selector = ( window.document.splugins.common._o( _this.#configs, 'base_container_selector') ? _this.#configs.base_container_selector : ''  );     
 
         // NOTE: for the notes base_container object is the base_element if we consider it with analogy of _jQueryInterface style modules
         _this.#$base_container = jQuery(element);   //( _this.base_container_selector );     
@@ -2694,10 +2694,10 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
         _this.base_element = element;
         _this.#$base_element = jQuery( _this.base_element );
         
-        _this.#$slider_container = _this.#$base_element.find( '.'+ _this.configs.classes.slider.container );
-        _this.#$zoom_container = _this.#$base_element.find( '.'+ _this.configs.classes.zoom.container );
+        _this.#$slider_container = _this.#$base_element.find( '.'+ _this.#configs.classes.slider.container );
+        _this.#$zoom_container = _this.#$base_element.find( '.'+ _this.#configs.classes.zoom.container );
             
-        _this.#$slider_loop_container = _this.#$slider_container.find( '.'+ _this.configs.classes.slider.loop_container );
+        _this.#$slider_loop_container = _this.#$slider_container.find( '.'+ _this.#configs.classes.slider.loop_container );
 
             /*ACTIVE_TODO_OC_START
                  --  then I will tell you which to keep and which to drop -- to a 
@@ -2939,14 +2939,14 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
                         //                     NOTE: and yeah on that note everything of the sp_variations module must be dynamic and nothing should be hardcoded so slider_no_variation input template type must be passed right from where the template is defined on admin to till here
 
 
-                    _this.#process_images_callback(type_inner_1) {
+                    var process_images_callback = function(type_inner_1) {
 
                         if (window.document.splugins.common._o(_this.#data.types, type_inner_1)) {
                             _this.#process_images(type_inner_1, element);
                             
                         }
 
-                    }
+                    };
 
                     window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'process_images', {type:type_inner}, process_images_callback );
 
@@ -3150,9 +3150,9 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
         var _this = this;
         console.log(" gallery_images process_slider_template " );
 
-        var templating_lib = window.document.splugins.common._o( _this.configs, 'templating_lib') ? _this.configs.templating_lib : 'wp';
+        var templating_lib = window.document.splugins.common._o( _this.#configs, 'templating_lib') ? _this.#configs.templating_lib : 'wp';
         
-        var template_var = _this.#template( _this.configs.template.slider.id, templating_lib );
+        var template_var = _this.#template( _this.#configs.template.slider.id, templating_lib );
         
         var slider_inner_html= '';
         // var slider_inner_html = images.map(function (image) {
@@ -3173,7 +3173,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
         console.log(" gallery_images process_zoom_template " );
         console.log(index);
 
-        var templating_lib = window.document.splugins.common._o( _this.configs, 'templating_lib') ? _this.configs.templating_lib : 'wp';
+        var templating_lib = window.document.splugins.common._o( _this.#configs, 'templating_lib') ? _this.#configs.templating_lib : 'wp';
 
         // console.log(" gallery_images process_zoom_template outer " );
         
@@ -3185,7 +3185,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
             console.log(" gallery_images process_zoom_template inner loop" );
             console.log(index_inner);
 
-            if(_this.configs.template.zoom.all_in_dom == 0){
+            if(_this.#configs.template.zoom.all_in_dom == 0){
                 
                 console.log(" gallery_images process_zoom_template inner if" );
 
@@ -3193,7 +3193,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
                     
                     console.log(" gallery_images process_zoom_template inner inner if" );
 
-                    var template_var = _this.#template( _this.configs.template.zoom.id+'_'+index_inner, templating_lib );
+                    var template_var = _this.#template( _this.#configs.template.zoom.id+'_'+index_inner, templating_lib );
 
                     zoom_inner_html += _this.#apply_template_data(template_var, image, templating_lib);
 
@@ -3207,7 +3207,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
             }else{
                 // console.log(" gallery_images process_zoom_template outer if" );
 
-                var template_var = _this.#template( _this.configs.template.zoom.id+'_'+index_inner, templating_lib );
+                var template_var = _this.#template( _this.#configs.template.zoom.id+'_'+index_inner, templating_lib );
 
                 zoom_inner_html += _this.#apply_template_data(template_var, image, templating_lib);
             }
@@ -3464,7 +3464,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
 
         console.log("reset_variation_listener 2");
 
-        if (_this.configs.options.gallery_reset_on_variation_change) {
+        if (_this.#configs.options.gallery_reset_on_variation_change) {
             
             console.log("reset_variation_listener 2 inner if");
 
@@ -3601,7 +3601,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
 
         _this.#$slider_loop_container.data('selected-index',index);
 
-        if(_this.configs.template.zoom.all_in_dom == 0){
+        if(_this.#configs.template.zoom.all_in_dom == 0){
             // update one tamplate 
 
             _this.#process_zoom_template(_this.#data.current_variation.variation_gallery_images,index,_this.#data.current_variation.variation_gallery_images.length > 1);             
