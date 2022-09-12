@@ -50,10 +50,8 @@ class SP_Model_Query extends SP_Query {
 		  //       }
 
 
-		  //       and to get the result obj we can rely on the post_get_posts which might be the alternative of the pre_get_posts -- to h & -- to a 
-		  //       $this->prepare_query_direct( $query, $input_method, $additional_data );
+		        $this->prepare_query_direct( $query, $input_method, $additional_data );
 
-		  //       ACTIVE_TODO need to implement lagecy respose
 				// -- upper aa do action valo hook comment karyo to aya pan comment karvano se ? @a --
 				// do_action('sp_wbc_prepare_filter_response_feed',$eowbc_filter_response);
 				// --- end ---

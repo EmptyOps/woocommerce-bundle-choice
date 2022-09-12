@@ -13,7 +13,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 	_this.configs = jQuery.extend({}, {}/*default configs*/, configs);	
 
-    _this.base_container = null  /*jQuery( ( window.document.splugins.common._o( _this.configs, 'base_container_selector') ? _this.configs.base_container_selector : '' ) )*/;  // ACTIVE_TODO/TODO whenever it become necessary to use base_container for events or so then at that time need to init base_container using our standard filters section conatainer selector.
+    // _this.$base_container =  null  /*jQuery( ( window.document.splugins.common._o( _this.configs, 'base_container_selector') ? _this.configs.base_container_selector : '' ) )*/;  // ACTIVE_TODO/TODO whenever it become necessary to use base_container for events or so then at that time need to init base_container using our standard filters section conatainer selector.
+    _this.$base_container = jQuery( ( window.document.splugins.common._o( _this.configs, 'base_container_selector') ? _this.configs.base_container_selector : "form#eo_wbc_filter,form[id*='eo_wbc_filter']" ) );
 
     //	private functions 
     var init_private = function() {
@@ -549,8 +550,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				form_data = Object.fromEntries(new URLSearchParams(form_data))
 			}	
 
-		var prepare_query_data_callback = null ;
-        window.document.splugins.events.api.apply_all_observer_filters( 'filters', 'prepare_query_data', {form_data:form_data, init_call:init_call }, prepare_query_data_callback );
+		// var prepare_query_data_callback = null ;
+  //       window.document.splugins.events.api.apply_all_observer_filters( 'filters', 'prepare_query_data', {form_data:form_data, init_call:init_call }, prepare_query_data_callback );
 	
         return form_data;
 
@@ -562,7 +563,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 	
 	ACTIVE_TODO if apply_all_observer_filters notification has any issues for tableview callback requirements then callbacks passed in below parameters var can also work. -- to h
 		--  but still first check points and notes above related to callbacks flow that we planed -- to h
-	var eo_wbc_filter_change_wrapper_private = function(init_call=false,form_selector="form#eo_wbc_filter,form[id*='eo_wbc_filter']",render_container='.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products',parameters={}) {
+	var eo_wbc_filter_change_wrapper_private = function(init_call=false,form_selector=null,render_container='.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products',parameters={}) {
 
 		it will be if condition here -- to s 
 			--	and like for almost all the notifications of filters module, the notification of the should_search will also be a notify all observer filter notification -- to s 
@@ -625,7 +626,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 						--	then confirm that compatibility function call below and the compatibility which is also called from inside the eo_wbc_filter_render_html has any issue. -- to s 
 				--	and we of course can not call compatibility simply from here. so lets simply call from different places with right section key. like we have did in those two modules and for example the compatibility most likely need to be called before eo_wbc_filter_render_html call since inside compatibility eo_wbc_filter_render_html is called. -- to h and -- to s 
 					--	and remove the eo_wbc_filter_render_html call from inside the compatibility function. -- to s 
-		// shraddha
+		// @s
 		// compatability(section, object, expected_result);
 
 		return true;
@@ -665,17 +666,17 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 	};
 
-	var complete = function(){
+	var complete = function(form_selector="form#eo_wbc_filter,form[id*='eo_wbc_filter']"){
 		// console.log(this.url);
 
 		// NOTE: hide_loader is called from success and error also but in future we most likely will remove call from success and error function.
 		hide_loader();
 
 		var complete_callback = null ;
-        window.document.splugins.events.api.notifyAllObservers( 'filters', 'complete', {}, complete_callback );
+        window.document.splugins.events.api.notifyAllObservers( 'filters', 'complete', {}, complete_callback, form_selector==null ? _this.$base_container : form_selector );
 	}; 
 
-	var success = function(data, render_container) {
+	var success = function(data, render_container, form_selector="form#eo_wbc_filter,form[id*='eo_wbc_filter']") {
 
 
 		//console.log(data);
@@ -726,11 +727,11 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		/////////////////////////////
 		var success_callback = null ;
-        window.document.splugins.events.api.notifyAllObservers( 'filters', 'success', {data:data}, success_callback );
+        window.document.splugins.events.api.notifyAllObservers( 'filters', 'success', {data:data}, success_callback, form_selector==null ? _this.$base_container : form_selector );
 
 	}; 
 
-	var error = function(data){
+	var error = function(data, form_selector="form#eo_wbc_filter,form[id*='eo_wbc_filter']"){
 		
 		// console.log('error');
 		// console.log(data);
@@ -750,7 +751,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		hide_loader();
 
 		var error_callback = null ;
-        window.document.splugins.events.api.notifyAllObservers( 'filters', 'error', {}, error_callback );
+        window.document.splugins.events.api.notifyAllObservers( 'filters', 'error', {}, error_callback, form_selector==null ? _this.$base_container : form_selector );
 	};
 
 	var update_result_count = function(){
@@ -774,7 +775,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		}
 	};
     ///////////// -- 15-06-2022 -- @drashti -- ///////////////////////////////
-    var compatability = function(section, object, expected_result) {
+    var compatability = function(section, object, expected_result, form_selector="form#eo_wbc_filter,form[id*='eo_wbc_filter']") {
     	// ACTIVE_TODO_OC_START
     	// do the call from where the below section is moved here, and if you already did the call then show and confirm with me -- to d 
     	// ACTIVE_TODO_OC_END
@@ -817,12 +818,12 @@ window.document.splugins.wbc.filters.core = function( configs ) {
         }
 
         var compatability_callback = null ;
-        window.document.splugins.events.api.notifyAllObservers( 'filters', 'compatability', {}, compatability_callback );
+        window.document.splugins.events.api.notifyAllObservers( 'filters', 'compatability', {}, compatability_callback, form_selector==null ? _this.$base_container : form_selector );
         
         return object;
     };
 
-    var eo_wbc_filter_render_html = function(data,render_container){
+    var eo_wbc_filter_render_html = function(data,render_container, form_selector="form#eo_wbc_filter,form[id*='eo_wbc_filter']"){
 
 
 		/*jQuery("#loading").removeClass('loading');
@@ -1018,11 +1019,11 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		compatability('product-listing');
 
 		var eo_wbc_filter_render_html_callback = null ;
-        window.document.splugins.events.api.notifyAllObservers( 'filters', 'eo_wbc_filter_render_html', {}, eo_wbc_filter_render_html_callback );
+        window.document.splugins.events.api.notifyAllObservers( 'filters', 'eo_wbc_filter_render_html', {}, eo_wbc_filter_render_html_callback, form_selector==null ? _this.$base_container : form_selector );
 
     };
 
-    var show_loader = function(){
+    var show_loader = function(form_selector="form#eo_wbc_filter,form[id*='eo_wbc_filter']"){
 
     	jQuery("#loading").addClass('loading');	
 
@@ -1071,11 +1072,11 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		var show_loader_callback = null ;
         // window.document.splugins.events.api.apply_all_observer_filters( 'filters', 'show_loader', {}, show_loader_callback );
-        window.document.splugins.events.api.notifyAllObservers( 'filters', 'show_loader', {}, show_loader_callback );
+        window.document.splugins.events.api.notifyAllObservers( 'filters', 'show_loader', {}, show_loader_callback, form_selector==null ? _this.$base_container : form_selector );
 
     };
 
-    var hide_loader = function(){
+    var hide_loader = function(form_selector="form#eo_wbc_filter,form[id*='eo_wbc_filter']"){
 
     	jQuery("#loading").removeClass('loading');
 
@@ -1112,11 +1113,11 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// jQuery("#loading").removeClass('loading');
 
 		var hide_loader_callback = null ;
-        window.document.splugins.events.api.notifyAllObservers( 'filters', 'hide_loader', {}, hide_loader_callback );
+        window.document.splugins.events.api.notifyAllObservers( 'filters', 'hide_loader', {}, hide_loader_callback, form_selector==null ? _this.$base_container : form_selector );
 
     };
 
-    var on_reset_click_listener = function(){
+    var on_reset_click_listener = function(form_selector="form#eo_wbc_filter,form[id*='eo_wbc_filter']"){
 
     	jQuery(document).on('click',".reset_all_filters",function(){
         jQuery("[data-reset]").each(function(e){
@@ -1144,7 +1145,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		on_reset_click();
 
 		var on_reset_click_listener_callback = null ;
-        window.document.splugins.events.api.notifyAllObservers( 'filters', 'on_reset_click_listener', {}, on_reset_click_listener_callback );
+        window.document.splugins.events.api.notifyAllObservers( 'filters', 'on_reset_click_listener', {}, on_reset_click_listener_callback, form_selector==null ? _this.$base_container : form_selector );
 
     };
 
@@ -1158,7 +1159,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
   //   };
 
-    var on_change_listener = function(){
+    var on_change_listener = function(form_selector="form#eo_wbc_filter,form[id*='eo_wbc_filter']"){
 
     	if(!eo_wbc_object.btnfilter_now){			
 			jQuery("#eo_wbc_filter").on('change',"input:not(:checkbox)",function(){
@@ -1172,7 +1173,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		on_change();
 
 		var on_change_listener_callback = null ;
-        window.document.splugins.events.api.notifyAllObservers( 'filters', 'on_change_listener', {}, on_change_listener_callback );
+        window.document.splugins.events.api.notifyAllObservers( 'filters', 'on_change_listener', {}, on_change_listener_callback, form_selector==null ? _this.$base_container : form_selector );
 
     };
  
@@ -1283,7 +1284,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     }; 
 
-    var no_products_found = function() {
+    var no_products_found = function(form_selector="form#eo_wbc_filter,form[id*='eo_wbc_filter']") {
 
     	// ACTIVE_TODO_OC_START
     	// create private counter part of the no_products_found function with name no_products_found_private, so that the inner private layers can call that internally -- to d 
@@ -1295,7 +1296,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		jQuery(render_container/*".products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products"*/).html('<p class="woocommerce-info" style="width: 100%;">No products were found matching your selection.</p>');	
 
 		var no_products_found_callback = null;
-		window.document.splugins.events.api.notifyAllObservers( 'filters', 'no_products_found', {}, 'no_products_found_callback' );
+		window.document.splugins.events.api.notifyAllObservers( 'filters', 'no_products_found', {}, no_products_found_callback, form_selector==null ? _this.$base_container : form_selector );
 
 		// --- aa code sp_tableview/asset/js/publics/sp_tableview.js ma window.document.splugins.sp_tv.template.render_private() mathi move karyo se ---
 		// --- start ---
@@ -1358,7 +1359,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     		init_private();	
 
     	}, 		
-		eo_wbc_filter_change_wrapper: function(init_call=false,form_selector="form#eo_wbc_filter,form[id*='eo_wbc_filter']",render_container='.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products',parameters={}) {
+		eo_wbc_filter_change_wrapper: function(init_call=false,form_selector=null,render_container='.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products',parameters={}) {
 			// //	this eo_wbc_filter.js 
 			// jQuery.fn.eo_wbc_filter_change_native= function(init_call=false,form_selector="form#eo_wbc_filter",render_container='',parameters={}) {
 
@@ -2349,9 +2350,6 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
 	    
 	    }
 
-    	var filter_set_click_callback = null;
-	    var stat_object = window.document.splugins.events.api.apply_all_observer_filters( 'filters', 'filter_set_click_start',{display_style:display_style},filter_set_click_callback);  
-
 	    /*let _category = $("[name='_category']").val();
 	    _category = _category.split(',');
 	    if(_category.indexOf('_two_tabs')==-1){
@@ -2373,7 +2371,13 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
 
 	    let group_id = $(this).data('tab-name');
 
-	    $('[data-tab-group="'+group_id+'"]:not(.toggle_sticky_mob_filter.advance_filter_mob)').not('[data-tab-group]:has([data-switch_filter_type-alternate])').css('display',stat_object.display_style);	        
+	    // $('[data-tab-group="'+group_id+'"]:not(.toggle_sticky_mob_filter.advance_filter_mob)').not('[data-tab-group]:has([data-switch_filter_type-alternate])').css('display',stat_object.display_style);	
+	    var filter_set_click_callback = function(stat_object){
+
+            $('[data-tab-group="'+group_id+'"]:not(.toggle_sticky_mob_filter.advance_filter_mob)').not('[data-tab-group]:has([data-switch_filter_type-alternate])').css('display',stat_object.display_style);	
+
+    	};
+	    window.document.splugins.events.api.notifyAllObservers( 'filters', 'filter_set_click_before_loop',{display_style:display_style},filter_set_click_callback);          
 
         jQuery( _this.configs.filter_sets_data ).each(function (i, tab_data) {
 
