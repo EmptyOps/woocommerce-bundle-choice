@@ -324,6 +324,17 @@ window.history.replaceState('', '', updateURLParameter(window.location.href, "pa
 
      };
 
+     var get_events_host_node = function($selector) {
+
+        if( $selector != null ){
+
+            return $selector;
+        } else {
+
+            return _this.$events_host_node;
+        }
+     };
+
      var events_host_node = function() {
 
         _this.$events_host_node = jQuery('<div />').appendTo('body');
@@ -357,11 +368,11 @@ window.history.replaceState('', '', updateURLParameter(window.location.href, "pa
              }
          },
          
-         subscribeObserver: function(feature_unique_key, subscriber_key, notification_key, callback) {
+         subscribeObserver: function(feature_unique_key, subscriber_key, notification_key, callback, $selector = null) {
 
             if(window.document.splugins.common._o( _this.configs, 'events_backend') && _this.configs.events_backend == 'jquery' ) {
 
-                jQuery(_this.$events_host_node).on(event_key(feature_unique_key, notification_key), callback);
+                jQuery(/*_this.$events_host_node*/ get_events_host_node($selector)).on(event_key(feature_unique_key, notification_key), callback);
 
             } else {
 
@@ -450,14 +461,14 @@ window.history.replaceState('', '', updateURLParameter(window.location.href, "pa
                  }
              }
          },
-         notifyAllObservers: function(feature_unique_key, notification_key, stat_object=null, notification_response=null ) {
+         notifyAllObservers: function(feature_unique_key, notification_key, stat_object=null, notification_response=null, $selector = null ) {
             
             if(window.document.splugins.common._o( _this.configs, 'events_backend') && _this.configs.events_backend == 'jquery' ) {
 
                 stat_object = stat_object || {};
                 stat_object.event_key = event_key(feature_unique_key, notification_key);
 
-                jQuery(_this.$events_host_node).trigger(stat_object.event_key, [stat_object, notification_response]);
+                jQuery(/*_this.$events_host_node*/ get_events_host_node($selector) ).trigger(stat_object.event_key, [stat_object, notification_response]);
 
             } else {
 
@@ -1077,7 +1088,7 @@ window.document.splugins.wbc.variations = window.document.splugins.wbc.variation
 class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
     #configs;
-    #base_container;
+    #$base_container;
     #data;
     #binding_stats;
 
@@ -1092,7 +1103,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
         _this.#configs.attribute_types_keys = Object.keys( _this.configs.attribute_types );
 
-        _this.#base_container = jQuery(element);    // jQuery( ( window.document.splugins.common._o( _this.configs, 'base_container_selector') ? _this.configs.base_container_selector : '.variations_form' ) );      
+        _this.#$base_container = jQuery(element);    // jQuery( ( window.document.splugins.common._o( _this.configs, 'base_container_selector') ? _this.configs.base_container_selector : '.variations_form' ) );      
 
         _this.#data = {};
         _this.#binding_stats = {};     
@@ -1126,7 +1137,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
         console.log("init_private");
 
         // init on all applicable events 
-        jQuery(document).on('wc_variation_form', _this.#base_container/*'.variations_form:not(.spui-wbc-swatches-loaded)'*/, function (event) {
+        jQuery(document).on('wc_variation_form', _this.#$base_container/*'.variations_form:not(.spui-wbc-swatches-loaded)'*/, function (event) {
 
             console.log("init_private wc_variation_form event");
 
@@ -1156,7 +1167,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
             console.log("init_private inner ajaxComplete");
 
           splugins._.delay(function () {
-            jQuery( _this.#base_container /*'.variations_form:not(.spui-wbc-swatches-loaded)'*/).each(function () {
+            jQuery( _this.#$base_container /*'.variations_form:not(.spui-wbc-swatches-loaded)'*/).each(function () {
 
                 if( !( jQuery(this).has('.spui-wbc-swatches-loaded') ) ){
                     jQuery(this).wc_variation_form();
@@ -1204,7 +1215,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
             console.log("init_private inner aln_reloaded");
 
           splugins._.delay(function () {
-            jQuery( _this.#base_container /*'.variations_form:not(.spui-wbc-swatches-loaded)'*/).each(function () {
+            jQuery( _this.#$base_container /*'.variations_form:not(.spui-wbc-swatches-loaded)'*/).each(function () {
                 if( !( jQuery(this).has('.spui-wbc-swatches-loaded') ) ){
                     jQuery(this).wc_variation_form();
                 }
@@ -1534,7 +1545,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
                         }
 
                     };
-                    window.document.splugins.events.api.notifyAllObservers( 'swatches', 'process_attribute_types', {type:type_inner}, process_attribute_types_callback );
+                    window.document.splugins.events.api.notifyAllObservers( 'swatches', 'process_attribute_types', {type:type_inner}, process_attribute_types_callback, _this.#$base_container );
 
                     //     --  and we are planning to host darker/lighter slider support also from here as usual so it will be just like above slider example 
                     //         --  but yeah after the change event is recieved here that will be emitted to the gallery_images module to let them do their job. since darker lighter is not part of the variation there is no further thing to do from here after the change event is recieved. 
@@ -1571,7 +1582,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
 
         var sp_variations_swatches_loaded_callback = null ;
-        window.document.splugins.events.api.notifyAllObservers( 'swatches', 'sp_variations_swatches_loaded', {type:type}, sp_variations_swatches_loaded_callback );
+        window.document.splugins.events.api.notifyAllObservers( 'swatches', 'sp_variations_swatches_loaded', {type:type}, sp_variations_swatches_loaded_callback, _this.#$base_container );
 
     }
 
@@ -2523,7 +2534,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
                 console.log("compatability inner yith_infs_added_elem");
 
-                jQuery( _this.#base_container /*'.variations_form:not(.spui-wbc-swatches-loaded)'*/).each(function () {
+                jQuery( _this.#$base_container /*'.variations_form:not(.spui-wbc-swatches-loaded)'*/).each(function () {
 
                     if( !( jQuery(this).has('.spui-wbc-swatches-loaded') ) ){
                         jQuery(this).wc_variation_form();
@@ -2674,9 +2685,9 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
     #init_preprocess(event) {
 
         var _this = this;
-        console.log(" gallery_images init_preprocess "+_this.#base_container_selector);
+        console.log(" gallery_images init_preprocess "+_this.#$base_container_selector);
 
-        if(jQuery(_this.#base_container_selector+':not(.spui-wbc-gallery_images-product-type-variable):not(.spui-wbc-gallery_images-loaded)').length>0) {
+        if(jQuery(_this.#$base_container_selector+':not(.spui-wbc-gallery_images-product-type-variable):not(.spui-wbc-gallery_images-loaded)').length>0) {
 
             console.log(" gallery_images init_preprocess if ");
 
@@ -2749,7 +2760,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
                      --  so some set of functions heirarchy would not be called initially for variation products -- to h 
                          --  otherwise if required then we can simply call it during init and then it will be called again on woo legacy change event called during page load so in this case it would be called twice during page load -- to h 
                              --  so this in essense clears the loading stack quest and points mentioned/planned in the process_template function of this module -- to h. just for the notes. 
-                            NOTE : some part of the above  rae covered but confirm to be sure  
+                            NOTE : some part of the above  are covered but confirm to be sure  
          if (!this.is_variation_product) {
          this.imagesLoaded();
          }
@@ -2948,7 +2959,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
 
                     }
 
-                    window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'process_images', {type:type_inner}, process_images_callback );
+                    window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'process_images', {type:type_inner}, process_images_callback, _this.#$base_container );
 
                     /*ACTIVE_TODO_OC_START
                     // --  it wil be a specific block here for devices and configs -- to d done
@@ -2975,7 +2986,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
         // _this.#process_images_template(_this.data.product_variations[0].variation_gallery_images);
 
         var sp_variations_gallery_images_loaded_callback = null ;
-        window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'sp_variations_gallery_images_loaded', {}, sp_variations_gallery_images_loaded_callback );
+        window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'sp_variations_gallery_images_loaded', {}, sp_variations_gallery_images_loaded_callback, _this.#$base_container );
  
     }
 
@@ -3137,7 +3148,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
             console.log("sp_slzm_refresh notification");
 
             var sp_slzm_refresh_callback = null;
-            window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'sp_slzm_refresh', {}, sp_slzm_refresh_callback );
+            window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'sp_slzm_refresh', {}, sp_slzm_refresh_callback, _this.#$base_container );
 
         }, 1); 
 
@@ -3823,7 +3834,7 @@ window.document.splugins.wbc.variations.gallery_images.sp_slzm = window.document
 window.document.splugins.wbc.variations.gallery_images.sp_slzm.core = function( configs ) {
    
     var _this = this; 
-    
+
     // _this.init_callbacks = [];
     // _this.refresh_callbacks = [];
     // _this.zoom_callbacks = [];
@@ -3840,6 +3851,7 @@ window.document.splugins.wbc.variations.gallery_images.sp_slzm.core = function( 
     
         console.log('init_listener_private');
 
+        // ACTIVE_TODO whenever slzm need to support selector based notification then at that time it should here bind subscriber for all the applicable loopbox gallery_images containers while the subscriber of this slzm listeners should pass the gallery_images container of perticular loopbox. that we need to implement whenever we needs support of selectro based notification. 
         window.document.splugins.events.api.subscribeObserver( 'gallery_images', 'sp_slzm', 'sp_slzm_init',function(event, stat_object, notification_response){
 
             console.log('init_listener_private 11111');
