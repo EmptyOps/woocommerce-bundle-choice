@@ -1306,13 +1306,6 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		// --- aa code sp_tableview/asset/js/publics/sp_tableview.js ma window.document.splugins.sp_tv.template.render_private() mathi move karyo se ---
 		// --- start ---
-		tableview will subscribe to no product found notification of filter js module -- to a 
-			--	and on notification recieved update dom with statement like below -- to a
-		jQuery("table#eo_wbc_filter_table").replaceWith('<p class="woocommerce-info" style="width: 100%;display:table;">No products were found matching your selection.</p>');
-		// --- end ---
-
-		// --- aa code sp_tableview/asset/js/publics/sp_tableview.js ma window.document.splugins.sp_tv.template.render_private() mathi move karyo se ---
-		// --- start ---
 		jQuery(".products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)").html('<p class="woocommerce-info" style="width: 100%;display:table;">No products were found matching your selection.</p>');
 		// --- end ---
 

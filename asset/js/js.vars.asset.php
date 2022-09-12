@@ -54,9 +54,8 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 		$swatches_configs['product_variations_configs'] = wbc()->config->product_variations_configs();
 
 	// ACTIVE_TODO admin options need to b loaded from variations.assets.php where b have already prepare all options -- to s 
-		$swatches_configs['options'] = array('show_variation_label' => false, 'clickable_out_of_stock' => false);
-
-
+		$swatches_configs['options'] = array('show_variation_label' => false, 'clickable_out_of_stock' => false);	
+		
 		$gallery_images_configs['types'] 					  = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->sp_variations_gallery_images_supported_types(array('is_base_type_only'=>true));
 		$gallery_images_configs['product_variations_configs'] = wbc()->config->product_variations_configs();
 		
@@ -76,7 +75,8 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 		// ACTIVE_TODO we neet to manage the loding secuance here so that any zoom layers including external plugin implimentetion layers can add filter do it 	
 		$gallery_images_configs['template_loop']['zoom']['all_in_dom'] = apply_filters('sp_slzm_loop_zoom_template_all_in_dom',0);	
 
-		$gallery_images_configs['options'] = array('gallery_reset_on_variation_change'=>false);
+		$gallery_images_configs['options'] = array('gallery_reset_on_variation_change'=>false,
+																 'tiny_features_option_ui_loop_box_hover_media_index'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_loop_box_hover_media_index','0'));
 
 		// ACTIVE_TODO asset enque and other asset flows
 			// --  first need to confirm that minified asset only are loaded -- to t
