@@ -4035,9 +4035,9 @@ if(window.document.splugins.common.is_category_page) {
 // the variations gallery images js module
 class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Gallery_Images {
 
-    #configs;
-    #data;
-    #binding_stats;
+    #$configs;
+    #$data;
+    #$binding_stats;
 
     constructor(element, configs) {
 
