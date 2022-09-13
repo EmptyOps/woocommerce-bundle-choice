@@ -22,9 +22,9 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
         return true;
     }
 
-    public function init($args = array()){
+    public static function init($args = array()){
 
-        if($this->should_load_options_view()) {
+        if(self::instance()->should_load_options_view()) {
          
             $args['data'] = \eo\wbc\model\publics\SP_Model_Feed::instance()->get_data('swatches_init');
             $args['page_section'] = 'swatches';
@@ -87,12 +87,14 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
                 remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
                 add_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_single_add_to_cart', 30 );
 
+                /*ACTIVE_TODO_OC_START
                 remove_action( 'woocommerce_before_shop_loop', '????????', 10 );
             \eo\wbc\model\SP_WBC_Compatibility::instance()->loop_render_compatability('before_shop_loop_item_loop_thumbnail_action', $args);
             
                 add_action( 'woocommerce_before_shop_loop', function() use($page_section,$args) { 
 
-                } 
+                });
+                ACTIVE_TODO_OC_END*/
 
                 // $data = $args['hook_callback_args'];
                 // unset($args['hook_callback_args']);

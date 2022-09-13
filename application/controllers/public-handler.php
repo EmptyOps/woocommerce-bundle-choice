@@ -220,15 +220,15 @@ class Public_Handler {
 				} elseif(is_shop()) {
 			    	\eo\wbc\controllers\publics\pages\Shop::instance()->init();
 
-			    	if(\eo\wbc\controllers\publics\pages\Feed::should_init($args)) {
-			    		\eo\wbc\controllers\publics\pages\Feed::init($args);
+			    	if(\eo\wbc\controllers\publics\pages\Feed::should_init()) {
+			    		\eo\wbc\controllers\publics\pages\Feed::init();
 			    	}
 
 			    } elseif (is_product_category()) {
 			        \eo\wbc\controllers\publics\pages\Category::instance()->init();
 
-			        if(\eo\wbc\controllers\publics\pages\Feed::should_init($args)) {
-			    		\eo\wbc\controllers\publics\pages\Feed::init($args);
+			        if(\eo\wbc\controllers\publics\pages\Feed::should_init()) {
+			    		\eo\wbc\controllers\publics\pages\Feed::init();
 			    	}
 
 			    } elseif(is_product()) {
