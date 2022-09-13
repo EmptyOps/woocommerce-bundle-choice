@@ -112,7 +112,7 @@ class SP_WBC_Compatibility extends SP_Compatibility {
         }
 	}
 
-	public function feed_quickview_container_compatability(){
+	public function feed_quickview_container_compatability($page_section,$args = array()){
 
  	}
 

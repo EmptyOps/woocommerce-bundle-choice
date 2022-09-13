@@ -1,0 +1,19 @@
+{
+    "name": "sphereplugins/selectron",
+    "description": "A package to add admin tab for the hooks and filter as well as query selector for various frontend rendering at third party themes reliably",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "CmdrMahesh",
+            "email": "mahesh@emptyops.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "sp\\selectron\\": "application"
+        }
+    }
+}

@@ -4198,7 +4198,9 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
         
         var templating_lib = window.document.splugins.common._o( _this.#configs, 'templating_lib') ? _this.#configs.templating_lib : 'wp';
 
-        var template_id = _this.#configs.template.zoom.id+'_'+index_inner (?) + '_hover';
+        /*-- index config add @a --*/
+        // var template_id = _this.#configs.template.zoom.id+'_'+index_inner (?) + '_hover';
+        var template_id = _this.#configs.template.zoom.id+'_'+_this.#configs.options.tiny_features_option_ui_loop_box_hover_media_index + '_hover';
 
         if(splugins.templating.is_template_exists(template_id, templating_lib)) {
 
@@ -4213,7 +4215,8 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
                 console.log(" gallery_images_child zoom_area_hover_in inner loop" );
                 console.log(index_inner);
 
-                if(index_inner (?) == index_inner){
+                // if(index_inner (?) == index_inner){
+                if( _this.#configs.options.tiny_features_option_ui_loop_box_hover_media_index == index_inner){
                     
                     console.log(" gallery_images_child zoom_area_hover_in inner inner if" );
 

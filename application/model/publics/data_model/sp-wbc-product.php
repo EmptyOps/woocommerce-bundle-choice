@@ -30,9 +30,12 @@ class SP_WBC_Product extends SP_Product {
     }
 
     ////// @shraddha //////
-    public static function variations_data_before_admin_form_render() {
+    public static function variations_and_simple_type_fields($extra_args = array()) {
 
-    	question need to confirm -- to s
+        /*ACTIVE_TODO_OC_START
+        question need to confirm -- to s
+            --  now it is not supposed to be deleted, so do not delete this function. 
+        ACTIVE_TODO_OC_END*/
 
     }
 

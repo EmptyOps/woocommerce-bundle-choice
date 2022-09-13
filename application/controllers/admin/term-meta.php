@@ -478,7 +478,9 @@ class Term_Meta {
 
 	public function add_taxonomy_type() {
 
+		/*ACTIVE_TODO_OC_START
 		@s admin pannel ma field add karvnu 6 woocommerce attribute page par jay already mahesh bhai e 1-2 field add karel 6 tya admin na section ma add akaravanu chhe. -- to s 
+		ACTIVE_TODO_OC_END*/
 
 		// Add additional type so we get the kind of the attribute's behaviour.
 		add_filter( 'product_attributes_type_selector',function($type){
