@@ -1,5 +1,5 @@
 <?php
-namespace sp\tableview\controller\publics\feed\loop\selectron;
+namespace sp\wbc\controller\publics\feed\loop\selectron;
 defined( 'ABSPATH' ) || exit;
 class SP_SLCTRN_Swatches_Cart_Form extends sp\selectron\controller\publics\container\Container{
 

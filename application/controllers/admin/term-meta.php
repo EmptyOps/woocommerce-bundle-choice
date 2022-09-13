@@ -60,6 +60,7 @@ class Term_Meta {
 
 
 
+			
 				add_action('pa_' . $tax->attribute_name . '_add_form_fields', array($this, 'add_attribute_field_display_limit'));
 				
 				add_action('pa_' . $tax->attribute_name . '_edit_form_fields', array($this, 'edit_attributre_field_display_limit'), 10, 2);
@@ -122,19 +123,9 @@ class Term_Meta {
 
 	public function edit_attributre_field_display_limit($term, $taxonomy) {
 		if(!empty($this->attribute)) {
-			$this->woocommerce_edit_attributre_thumbnail_field($term,$taxonomy);
-			switch ($this->attribute->attribute_type) {
-				case 'color':					
-					$this->color_chooser(true,$term, $taxonomy);
-					break;
-
-				case 'image' or 'image_text' or 'dropdown_image' or 'dropdown_image_only':
-					$this->image_chooser(true,$term, $taxonomy);
-					break;
-
-				case 'button':
-					break;				
-			}
+			// $this->woocommerce_edit_attributre_thumbnail_field($term,$taxonomy);
+			
+			$this->display_limit();
 
 		}
 	}
@@ -487,7 +478,9 @@ class Term_Meta {
 
 	public function add_taxonomy_type() {
 
+		/*ACTIVE_TODO_OC_START
 		@s admin pannel ma field add karvnu 6 woocommerce attribute page par jay already mahesh bhai e 1-2 field add karel 6 tya admin na section ma add akaravanu chhe. -- to s 
+		ACTIVE_TODO_OC_END*/
 
 		// Add additional type so we get the kind of the attribute's behaviour.
 		add_filter( 'product_attributes_type_selector',function($type){

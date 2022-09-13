@@ -301,17 +301,17 @@ if ( ! class_exists( 'Filters' ) ) {
 						'field_id'=>'filter_set_name'
 					),	
 					2=>array(
-						'is_header' => 2,
+						'is_header' => 1/*2*/,
 						'val' => 'First(or Diamond) category filters',
 						'field_id'=>'filter_set_two_tabs_first'
 					),	
 					3=>array(
-						'is_header' => 3,
+						'is_header' => 1/*3*/,
 						'val' => 'First(or Setting) category filters',
 						'field_id'=>'filter_set_two_tabs_second'
 					),
 					4=>array(
-						'is_header' => 4,
+						'is_header' => 1/*4*/,
 						'val' => 'Category',
 						'field_id'=>'filter_set_category'
 					),			

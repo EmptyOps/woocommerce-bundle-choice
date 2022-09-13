@@ -437,7 +437,9 @@ class SP_WBC_Variations extends SP_Variations {
 
 	public static function selected_variation_attributes($default_attributes) {
 
+		/*ACTIVE_TODO_OC_START
 		ACTIVE_TODO we must do it by second revision right now we are not supporting the variation id or query paramas of _attributs and checklist and so on to load selected variation based dom and its images. but we must do by second revision or before that as soon as the seo reports and so on requires that or something else requires it.
+		ACTIVE_TODO_OC_END*/
 		// $default_attributes = \eo\wbc\system\core\SP_Router::get_query_params_formated('attr', $input_method, 'key_value');
 
 		// if(!empty($default_attributes)) {
@@ -1336,7 +1338,7 @@ class SP_WBC_Variations extends SP_Variations {
 						// $data['variable_item_data'][$term->slug]['option'] = esc_html( apply_filters( 'woocommerce_variation_option_name', $term->name, $term, $data['variable_item_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product'] ) );
 						$data['variable_item_data']['options_loop_option'][$term->slug] = esc_html( \eo\wbc\system\core\data_model\SP_Attribute::variation_option_name($term->name, $term, $data['variable_item_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product'] ) );
 
-						$data['variable_item_data']['options_loop_is_selected'][$term->slug]    = ( ( sanitize_title( $data['woo_dropdown_attribute_html_data']['args']['selected'] ) == $term->slug ) ) || (!empty($data['woo_dropdown_attribute_html_data']['query_paramas_options']) && in_array($term->slug, $data['woo_dropdown_attribute_html_data']['query_paramas_options']) ) ) ? true : false;
+						$data['variable_item_data']['options_loop_is_selected'][$term->slug]    = ( ( sanitize_title( $data['woo_dropdown_attribute_html_data']['args']['selected'] ) == $term->slug ) ) || (!empty($data['woo_dropdown_attribute_html_data']['query_paramas_options']) && in_array($term->slug, $data['woo_dropdown_attribute_html_data']['query_paramas_options']) ) ? true : false;
 						$data['variable_item_data']['options_loop_selected_class'][$term->slug] = $data['variable_item_data']['options_loop_is_selected'][$term->slug] ? 'selected' : '';
 
 						$data['variable_item_data']['options_loop_tooltip'][$term->slug]        = '';
@@ -1559,7 +1561,7 @@ class SP_WBC_Variations extends SP_Variations {
 
 	}
 
-	public function prepare_gallery_template_data($args = array()) {
+	public static function prepare_gallery_template_data($args = array()) {
 
 		/*ACTIVE_TODO_OC_START
 		----product no peramiter pass kervano baki che
@@ -1573,7 +1575,7 @@ class SP_WBC_Variations extends SP_Variations {
 			$product = $args['product'];
 		}
 
-		$data = $this->fetch_data( /*$for_section*/'gallery_images', $product, $args );
+		$data = self::fetch_data( /*$for_section*/'gallery_images', $product, $args );
 
 		$data['gallery_images_template_data'] = array();
 
@@ -1598,7 +1600,7 @@ class SP_WBC_Variations extends SP_Variations {
 
 		$data['gallery_images_template_data']['default_attributes'] = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_default_attributes($data['gallery_images_template_data']['product_id']);
 
-		$data['gallery_images_template_data']['default_attributes'] = $this->selected_variation_attributes($data['gallery_images_template_data']['default_attributes']);
+		$data['gallery_images_template_data']['default_attributes'] = self::selected_variation_attributes($data['gallery_images_template_data']['default_attributes']);
 
 		$data['gallery_images_template_data']['default_variation_id'] = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_default_variation_id($product, $data['gallery_images_template_data']['default_attributes'] );
 
