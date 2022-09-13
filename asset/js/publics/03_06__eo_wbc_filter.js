@@ -815,7 +815,19 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
         }else if(section == 'products-grid'){
 
-        }
+        }else if(section == 'render_container'){
+
+			if(render_container.length<=0) {
+		
+				render_container = jQuery(".elementor-products-grid");
+		
+				if(render_container.length<=0) {
+
+					render_container = jQuery(".jet-woo-products");
+				}
+
+			}
+        } 
 
         var compatability_callback = null ;
         window.document.splugins.events.api.notifyAllObservers( 'filters', 'compatability', {}, compatability_callback, form_selector==null ? _this.$base_container : form_selector );
@@ -1273,18 +1285,19 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     	if(render_container==='') {
 			render_container = jQuery(".products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)");
-			if(render_container.length<=0) {
-				render_container = jQuery(".elementor-products-grid");
-			}
+			// -- move to compatability() @a --
+			// if(render_container.length<=0) {
+			// 	render_container = jQuery(".elementor-products-grid");
+			// }
 		}
 
-		compatability('render_container');
+		compatability('render_container', object, 1);
 
 		return render_container;
 
     }; 
 
-    var no_products_found = function(form_selector="form#eo_wbc_filter,form[id*='eo_wbc_filter']") {
+    var no_products_found_private = function(form_selector="form#eo_wbc_filter,form[id*='eo_wbc_filter']") {
 
     	// ACTIVE_TODO_OC_START
     	// create private counter part of the no_products_found function with name no_products_found_private, so that the inner private layers can call that internally -- to d 
@@ -1298,17 +1311,18 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		var no_products_found_callback = null;
 		window.document.splugins.events.api.notifyAllObservers( 'filters', 'no_products_found', {}, no_products_found_callback, form_selector==null ? _this.$base_container : form_selector );
 
-		// --- aa code sp_tableview/asset/js/publics/sp_tableview.js ma window.document.splugins.sp_tv.template.render_private() mathi move karyo se ---
-		// --- start ---
-		--	execute filters task -- to a 
-			--	it will mostly involve making sure that if there are any selectors or compatibility matters that wbc filter js module does not have then that is moved there if that is grid view or legacy standard flows specific -- to a 
-		jQuery(".products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)").html('<p class="woocommerce-info" style="width: 100%;display:table;">No products were found matching your selection.</p>');		
-		// --- end ---
+		-- aa je code move karyo se te upper code se tena jovo j se @a--
+			// --- aa code sp_tableview/asset/js/publics/sp_tableview.js ma window.document.splugins.sp_tv.template.render_private() mathi move karyo se ---
+			// --- start ---
+			--	execute filters task -- to a 
+				--	it will mostly involve making sure that if there are any selectors or compatibility matters that wbc filter js module does not have then that is moved there if that is grid view or legacy standard flows specific -- to a 
+			jQuery(".products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)").html('<p class="woocommerce-info" style="width: 100%;display:table;">No products were found matching your selection.</p>');		
+			// --- end ---
 
-		// --- aa code sp_tableview/asset/js/publics/sp_tableview.js ma window.document.splugins.sp_tv.template.render_private() mathi move karyo se ---
-		// --- start ---
-		jQuery(".products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)").html('<p class="woocommerce-info" style="width: 100%;display:table;">No products were found matching your selection.</p>');
-		// --- end ---
+			// --- aa code sp_tableview/asset/js/publics/sp_tableview.js ma window.document.splugins.sp_tv.template.render_private() mathi move karyo se ---
+			// --- start ---
+			jQuery(".products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)").html('<p class="woocommerce-info" style="width: 100%;display:table;">No products were found matching your selection.</p>');
+			// --- end ---
 
     }
 
@@ -1427,6 +1441,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			// 	jQuery(".reset_all_filters.mobile_2").removeClass('mobile_2_hidden');
 			// }
 
+		},
+		no_products_found: function() {
+
+			no_products_found_private();
 		}
     };
 };
