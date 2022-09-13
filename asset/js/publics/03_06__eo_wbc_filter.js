@@ -7,6 +7,10 @@ window.document.splugins.wbc.filters = window.document.splugins.wbc.filters || {
 	maybe observer pattern with filters as subject, filter types like ring builder filters, shop/cat filters, shortcode filters and diamond quiz etc filters as observer(subscriber) but also the filter fields also as observer(subscriber)(as per standard it should be only filter types not fields but we can implement by adding subtype field in the definition arcitecture and still it is not pure standard but would work), and also the filter or any of its layers like network(ajax) or render(html render) as the singleton factory design pattern 
 		moved to asana 
 
+
+
+		// ACTIVE_TODO/TODO now we are doing in adiition to above patterns the jQuery interface style plugin pattern which is a obvious base standard and maybe it was naturalroot direction for us that we now routed or something such but either way while we are in mix of this lets also try to implement above like observer patterns with jQuery interface style and something such that is inherantly popular in the entire community of javascript jQuery whenever we require something such or filter need of it.
+
 window.document.splugins.wbc.filters.core = function( configs ) {
 
     var _this = this; 
@@ -39,7 +43,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			--	list all other here like before_send(so before search and before_send will be different and I think there was that flag checking logic in before_search or even before that), success, complete, error and so on. so this list will include even the smaller layers and so a detailed event flow will be here, and it may help pagination and tableview which are already seeing different issues. 
 						--	it is should_search where we have all that flags logic, and since we have should_search now so maybe we need to drop the before_search but keep the before_send of course. and maybe dropping the before_search is what we planned but check in related points listed in this module and confirm. 
 				--	and yeah it will also include like render_html, no_products_found, no_products_found render and so on 
-					--	so can we use the events above to pass data objct to other layers like tableview and so on. I think we had this task on queue already on backend layers. so we may like to do the needful at right time so that we do not need to worry about two different layers and something such. 
+					--	so can we use the events above to pass data object to other layers like tableview and so on. I think we had this task on queue already on backend layers. so we may like to do the needful at right time so that we do not need to worry about two different layers and something such. 
 						--	however above is only for data passing but apart from that I think we already had in place by m or had planned to use only one data response for any kind of result feeds like traditional gallery view, tableview and so on. 
 						--	and on this regard now we would like to finalize the flow of filter sets and the tabs that it creates on frontend so that becomes clear. 
 							--	and so also need to finalize on some advanced variation api feed layers of backend and frontend so that if there are concerns regarding flow then that become clear now 
@@ -128,17 +132,17 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		//	the filter events 
 		window.document.splugins.events.api.createSubject( 'filters', ['before_send', 'prepare_query_data', 'show_loader', 'init_search', 'no_products_found', 'should_search', 'complete', 'success', 'error', 'compatability', 'eo_wbc_filter_render_html', 'hide_loader', 'on_reset_click_listener', 'on_change_listener'] );
 
-		init_search();
+		init_search(form_selector);
 
-		on_reset_click_listener();
+		on_reset_click_listener(form_selector);
 
-		on_change_listener();
+		on_change_listener(form_selector);
 
 		init_advance_filter_accordian();
 
     };
 
-    var init_search = function(){
+    var init_search = function(form_selector="form#eo_wbc_filter,form[id*='eo_wbc_filter']"){
 
     	// /var/www/html/drashti_project/27-05-2022/woocommerce-bundle-choice/asset/js/publics/eo_wbc_filter.js
 
@@ -155,12 +159,12 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		}*/
 
 		var init_search_callback = null ;
-        window.document.splugins.events.api.apply_all_observer_filters( 'filters', 'init_search', {}, init_search_callback );
+        window.document.splugins.events.api.notifyAllObservers( 'filters', 'init_search', {}, init_search_callback, form_selector==null ? _this.$base_container : form_selector );
 
     };
 
 	// --	and there will be one more function like should_search, which will also be private. and that will handle only the logic of checking flags and so on like the enable_filter_table flag above 
-    var should_search = function(init_call) {
+    var should_search = function(init_call, form_selector="form#eo_wbc_filter,form[id*='eo_wbc_filter']") {
 
     	// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
 		// --add to be confirmed 2601 TO 2705--		
@@ -224,7 +228,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// }
 
 		var should_search_callback = null ;
-        window.document.splugins.events.api.apply_all_observer_filters( 'filters', 'should_search', {}, should_search_callback );
+        window.document.splugins.events.api.notifyAllObservers( 'filters', 'should_search', {}, should_search_callback, form_selector==null ? _this.$base_container : form_selector );
 
         return true;				
 
@@ -252,7 +256,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		if(form.find('[name="filter_native"]').length>0) {
 			// jQuery.fn.eo_wbc_filter_change_native(init_call,form_selector,render_container);
 			ACTIVE_TODO now we need to restructure this, need to find out why mahesh had to maintain native and so on separetely? is it stemming due to the diamond quiz flow? -- to h and -- to s 
-			window.document.splugins.filters.api.eo_wbc_filter_change_wrapper(init_call, form_selector,render_container);
+			window.document.splugins.filters.api.eo_wbc_filter_change_wrapper( init_call, form_selector, render_container, parameters );
 			return true;
 		}					
 
@@ -556,13 +560,12 @@ window.document.splugins.wbc.filters.core = function( configs ) {
         return form_data;
 
 	};	
-
-    ACTIVE_TODO_OC_START
-    from tv js layer -- currently from sp_tv_template js layer 
-    ACTIVE_TODO_OC_END
 	
-	ACTIVE_TODO if apply_all_observer_filters notification has any issues for tableview callback requirements then callbacks passed in below parameters var can also work. -- to h
+	if apply_all_observer_filters notification has any issues for tableview callback requirements then callbacks passed in below parameters var can also work. -- to h
+		// INVALID NOTE: callback is not sufficent for the fundamental flow here which requires independent event or notification like bindings where child extensions like tableview and so on do not need to remember once the bind the events remember anything else 
+		ACTIVE_TODO_QC_START
 		--  but still first check points and notes above related to callbacks flow that we planed -- to h
+		ACTIVE_TODO_QC_END
 	var eo_wbc_filter_change_wrapper_private = function(init_call=false,form_selector=null,render_container='.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products',parameters={}) {
 
 		it will be if condition here -- to s 
@@ -577,7 +580,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		// sould_search();
 
-		prepare_query_data(form_data);
+		prepare_query_data(form_data, init_call);
 
 		sp_filter_request variable tv_template.js ma move karavano, if required -- to h & -- to s
 		jQuery.fn.sp_filter_request = jQuery.ajax(
@@ -586,9 +589,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			data:form_data, // form data
 			type:'POST', // POST
 
-			beforeSend:before_send(xhr),
+			beforeSend:before_send(xhr, form_selector),
 
-			success:success(data, render_container),
+			success:success(data, render_container, form_selector),
 			// {
 
 			// 	//console.log(data);
@@ -602,7 +605,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			// 	window.eo_wbc_object.enable_filter_table = true;
 			// 	// jQuery(".ui.sticky").sticky('refresh');
 			// },
-			error:error(data),
+			error:error(data, form_selector),
 			// {
 			// 	jQuery("#loading").removeClass('loading');
 			// 	console.log('error');
@@ -610,7 +613,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			// 	window.eo_wbc_object.enable_filter_table = true;
 			// },
 
-			complete:complete()
+			complete:complete(form_selector)
 
 		} );	
 
@@ -640,7 +643,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			--	and compare and put common only once and for identical means different put separetely and comment for both -- to d. ask b for how to do this process precisely, and do it precisely no more in rubbish way. 
 			--	and note one thing clearly that identical table code that is identified here need to be moved in their own calling layers to this function, so there will be some call back or so that need to be defined that can cover it. or we can simply use what is available by way of observer pattern and their notification callback that is planned that maybe of help if finalized -- to d 
 		ACTIVE_TODO_OC_END	
-	var before_send = function(xhr) {
+	var before_send = function(xhr, form_selector="form#eo_wbc_filter,form[id*='eo_wbc_filter']") {
 
 		window.eo_wbc_object.enable_filter_table = false;
 		window.document.splugins.eo_wbc_object.enable_filter_table = false;
@@ -658,7 +661,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		console.log(this.url);
 
 		var before_send_callback = null ;
-        window.document.splugins.events.api.apply_all_observer_filters( 'filters', 'before_send', {}, before_send_callback );
+        window.document.splugins.events.api.notifyAllObservers( 'filters', 'before_send', {}, before_send_callback, form_selector==null ? _this.$base_container : form_selector );
 
 		///////////////////////////
 
@@ -670,7 +673,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// console.log(this.url);
 
 		// NOTE: hide_loader is called from success and error also but in future we most likely will remove call from success and error function.
-		hide_loader();
+		hide_loader(form_selector);
 
 		var complete_callback = null ;
         window.document.splugins.events.api.notifyAllObservers( 'filters', 'complete', {}, complete_callback, form_selector==null ? _this.$base_container : form_selector );
@@ -720,7 +723,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		////////////////////////////
 		// /var/www/html/drashti_project/27-05-2022/woocommerce-bundle-choice/asset/js/publics/eo_wbc_filter.js
 
-		eo_wbc_filter_render_html(data,render_container);
+		eo_wbc_filter_render_html(data, render_container, form_selector);
 
 		window.eo_wbc_object.enable_filter = true;
 		window.document.splugins.eo_wbc_object.enable_filter = true;
@@ -748,7 +751,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		///////////////////////////////
 
-		hide_loader();
+		hide_loader(form_selector);
 
 		var error_callback = null ;
         window.document.splugins.events.api.notifyAllObservers( 'filters', 'error', {}, error_callback, form_selector==null ? _this.$base_container : form_selector );
@@ -823,7 +826,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
         return object;
     };
 
-    var eo_wbc_filter_render_html = function(data,render_container, form_selector="form#eo_wbc_filter,form[id*='eo_wbc_filter']"){
+    var eo_wbc_filter_render_html = function(data, render_container, form_selector="form#eo_wbc_filter,form[id*='eo_wbc_filter']"){
 
 
 		/*jQuery("#loading").removeClass('loading');
@@ -890,7 +893,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 					--	and if that is found then only track above where is_card_view_rendered to see from which different locations it is defined and/or coming -- to d 
 				It is 
 				wbc_attach_card_views();
-			}-
+			}
 
 			var links=jQuery(".products a,.product-listing a");
 			jQuery.each(links,function(index,element) {
@@ -920,7 +923,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			below line are moved in no_products_found -- to s
 			// jQuery(render_container/*".products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products"*/).html('<p class="woocommerce-info" style="width: 100%;">No products were found matching your selection.</p>');	
 			call proper -- to s
-			no_products_found();
+			no_products_found(form_selector);
 		}	
 
 		ACTIVE_TODO_OC_START
@@ -987,7 +990,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		and below one to the hide_loader function -- to d 
 		//jQuery("body").fadeTo('fast','1')									
 		// jQuery("#loading").removeClass('loading');
-		hide_loader();
+		hide_loader(form_selector);
 
 
 		// almost all of the below seems compatibility related to so move that to compatibility function, and at there we need to have section conditon like this would be broadly as product-listing -- to d done
@@ -1071,7 +1074,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// jQuery("#loading").addClass('loading');
 
 		var show_loader_callback = null ;
-        // window.document.splugins.events.api.apply_all_observer_filters( 'filters', 'show_loader', {}, show_loader_callback );
+        // window.document.splugins.events.api.notifyAllObservers( 'filters', 'show_loader', {}, show_loader_callback );
         window.document.splugins.events.api.notifyAllObservers( 'filters', 'show_loader', {}, show_loader_callback, form_selector==null ? _this.$base_container : form_selector );
 
     };
@@ -1124,7 +1127,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
             eval(jQuery(this).data('reset'));
         })
         // jQuery.fn.eo_wbc_filter_change();
-        window.document.splugins.filters.api.eo_wbc_filter_change_wrapper();
+
+        eo_wbc_filter_change_wrapper( init_call, form_selector, render_container, parameters );
         	return false;
 		})
 
@@ -1138,11 +1142,11 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			jQuery("#eo_wbc_attr_query").val("");
 			jQuery('[name="paged"]').val('1');
 			// jQuery.fn.eo_wbc_filter_change(true);
-			window.document.splugins.filters.api.eo_wbc_filter_change_wrapper(true);
+			eo_wbc_filter_change_wrapper( true, form_selector, render_container, parameters );
 
 		});	
 
-		on_reset_click();
+		on_reset_click(form_selector);
 
 		var on_reset_click_listener_callback = null ;
         window.document.splugins.events.api.notifyAllObservers( 'filters', 'on_reset_click_listener', {}, on_reset_click_listener_callback, form_selector==null ? _this.$base_container : form_selector );
@@ -1166,20 +1170,20 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				jQuery('[name="paged"]').val('1');
 				window.document.splugins.wbc.pagination.core.reset();
 				// jQuery.fn.eo_wbc_filter_change();
-				window.document.splugins.filters.api.eo_wbc_filter_change_wrapper();										
+				eo_wbc_filter_change_wrapper( init_call, form_selector, render_container, parameters );										
 			});
 		}
 
-		on_change();
+		on_change(form_selector);
 
 		var on_change_listener_callback = null ;
         window.document.splugins.events.api.notifyAllObservers( 'filters', 'on_change_listener', {}, on_change_listener_callback, form_selector==null ? _this.$base_container : form_selector );
 
     };
  
-    var on_reset_click = function() {
+    var on_reset_click = function(form_selector) {
 
-    	reset_click();
+    	reset_click(form_selector);
 
     };
 
@@ -1190,13 +1194,13 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     // };
 
-    var on_change = function() {
+    var on_change = function(form_selector) {
 
-   		change();
+   		change(form_selector);
 
     };
 
-    var reset_click = function() {
+    var reset_click = function(form_selector) {
 
     };
 
@@ -1254,7 +1258,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
    //  };
 
-    var change = function() {
+    var change = function(form_selector) {
 
     };
 
@@ -1600,8 +1604,8 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 
 		// jQuery('[name="paged"]').val(parseInt(jQuery(this).text().replace(',','')));
 		// jQuery.fn.eo_wbc_filter_change(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
-		window.document.splugins.filters.api.eo_wbc_filter_change_wrapper(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
-    
+		window.document.splugins.filters.api.eo_wbc_filter_change_wrapper(false, 'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id') );
+
     };
 
     var compatability = function(section, object, expected_result){
@@ -2018,7 +2022,7 @@ ACTIVE_TODO_OC_END
 		// }
 
 			NOTE: if there are any return false etc statement occur below this statement then this core function call should be moved underneath the return statement because this core functions is supposed to be called only if search actually happens but yeah at earliest possible also so that there are any dependent flow below or elsewhere then they are taken care of properly 
-		window.document.splugins.wbc.filters.core.before_send();
+		window.document.splugins.wbc.filters.api.before_send( xhr, form_selector );
 
 		related to serise 3
 		and below will be inside the init_search also -- to d
@@ -2151,7 +2155,7 @@ jQuery(document).ready(function($){
 			jQuery("#eo_wbc_filter").on('change',"input:not(:checkbox)",function(){
 				jQuery('[name="paged"]').val('1');
 				// jQuery.fn.eo_wbc_filter_change();	
-				window.document.splugins.filters.api.eo_wbc_filter_change_wrapper();									
+				window.document.splugins.filters.api.eo_wbc_filter_change_wrapper(init_call, form_selector, render_container, parameters);									
 			});
 		}
 
@@ -2164,7 +2168,7 @@ jQuery(document).ready(function($){
 		// To prevent initial call for the ajax -- speed optimization -- stop ajax at init load;
 		if(typeof(eo_wbc_e_tabview)===typeof(undefined) || typeof(eo_wbc_e_tabview.init_data)===typeof(undefined) || typeof(eo_wbc_object)==typeof(eo_wbc_object) ){
 			// jQuery.fn.eo_wbc_filter_change(true);
-			window.document.splugins.filters.api.eo_wbc_filter_change_wrapper(true);
+			window.document.splugins.filters.api.eo_wbc_filter_change_wrapper(true, form_selector, render_container, parameters);
 		}
 
 		//pagination for non-table based view
