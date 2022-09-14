@@ -757,7 +757,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
         window.document.splugins.events.api.notifyAllObservers( 'filters', 'error', {}, error_callback, form_selector==null ? _this.$base_container : form_selector );
 	};
 
-	var update_result_count = function(){
+	var update_result_count = function(render_container){
 
 		// create one function update_result_count in filters core js module -- to d done
 		// --	and then move the below code in that -- to d done
@@ -770,7 +770,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			if(jQuery(".woocommerce-result-count").length>0){
 				jQuery(".woocommerce-result-count").html(jQuery('.woocommerce-result-count',jQuery(data)).html());
 			} else {
-				jQuery(jQuery('.woocommerce-result-count',jQuery(render_data)).get(0).outerHTML).insertBefore('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products');
+				// jQuery(jQuery('.woocommerce-result-count',jQuery(render_data)).get(0).outerHTML).insertBefore('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products');
+				jQuery(jQuery('.woocommerce-result-count',jQuery(data)).get(0).outerHTML).insertBefore(render_container);
 			}
 		}
 		else {
@@ -786,11 +787,13 @@ window.document.splugins.wbc.filters.core = function( configs ) {
             jQuery('.products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)').addClass('product_grid_view');
             //jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination').css('visibility','visible');
             if(jQuery(".row-inner>.col-lg-9").length>0){
+
                 jQuery(".row-inner>.col-lg-9 *").each(function(i,e) {       
                     if(jQuery(e).css('opacity') == '0'){
                         jQuery(e).css('opacity','1');        
                     }
                 });
+
                 jQuery(".t-entry-visual-overlay").removeClass('t-entry-visual-overlay');
                 jQuery(".double-gutter .tmb").css('width','50%');
                 jQuery(".double-gutter .tmb").css('display','inline-flex');
@@ -802,7 +805,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
             // --- pagination module move this code ---
             // jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination,jet-filters-pagination').css('visibility','visible');
             // --- end ---
-            window.document.splugins.pagination.api.init();
+            window.document.splugins.wbc.pagination.api.init();
 
             // Fix for the yith wishlist.
             if(typeof(yith_wcwl_l10n)=='object'){
@@ -847,6 +850,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		render_data = data;
 		_render_container = render_container;
 
+		render_container_selectore = result_container(_render_container);
+
 		render_container = result_container(render_container);
 
 		ACTIVE_TODO_OC_START
@@ -870,7 +875,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		else {
 			jQuery(".woocommerce-result-count").html('');	
 		}*/
-		update_result_count();
+		update_result_count(render_container);
 
 		//Replacing Product listings....
 		like vars under window object are moved filter core js module, similarly move below var also to filters js module and underneath below statement set it in the filters js module -- to d 
@@ -882,23 +887,25 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			-- that will recieve a object and second argument will be the excpected result. -- to d 
 			-- if that is not matched then the compatibility function will apply its all available compatibility scenarios -- to d. like the below elementor-products-grid class statement would then go inside compatibility if. and .jet-woo-products also belong there, but let it be there and same for any js module layers where we have compatibility patch is mixed with basic/standard implementation statement to avoid the errors while separating them. 
 		ACTIVE_TODO_OC_END
-		let container_html = jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products',jQuery(data)).html();	
+
+		// let container_html = jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products',jQuery(data)).html();	
+		let container_html = jQuery(render_container_selectore, jQuery(data)).html();	
 		
 		/*if(container_html===undefined || container_html==='') {
 			container_html = jQuery(jQuery(data),'.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products').html();
 		}*/
 
 		if(container_html===undefined || container_html==='') {
-			container_html = jQuery(".elementor-products-grid",jQuery(data)).html();
+			// container_html = jQuery(".elementor-products-grid",jQuery(data)).html();
 		}
 
 		if(container_html!==undefined && container_html!=='') {	
 			if( typeof(is_card_view_rendered) == undefined || typeof(is_card_view_rendered) == 'undefined' || is_card_view_rendered == false ) {
-				if(jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products').length<=0) {
+				// if(jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products').length<=0) {
+					// jQuery(render_container).html(container_html);
+				// } else {
 					jQuery(render_container).html(container_html);
-				} else {
-					jQuery(render_container).html(container_html);
-				}			
+				// }			
 			}						
 			else {
 				we need to track execution of this function so search in all 5 repos and confirm where this function is defined -- to d /woo-bundle-choice/application/view/publics/category.php
@@ -907,6 +914,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				wbc_attach_card_views();
 			}
 
+			// ACTIVE_TODO as soon as we find the gallery_view_container or lopp box <a> container compatibility patche flow reliable and hop fully by secound revision. Than at that time let just apply on of that compatibility patch flow for this <a> links layer below -- to h & -- to a  
 			var links=jQuery(".products a,.product-listing a");
 			jQuery.each(links,function(index,element) {
 
@@ -994,7 +1002,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			// 	jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html('');	
 			// }
 			// --- end ---				
-		window.document.splugins.wbc.pagination.core.set_pagination_html(data);
+		window.document.splugins.wbc.pagination.api.set_pagination_html(data);
 
 		/*}*/
 
@@ -1152,7 +1160,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			document.forms.eo_wbc_filter.reset();
 			jQuery(".eo_wbc_srch_btn:eq(2)").trigger('reset');
 			jQuery("#eo_wbc_attr_query").val("");
-			jQuery('[name="paged"]').val('1');
+
+			// jQuery('[name="paged"]').val('1');
+			window.document.splugins.wbc.pagination.api.reset();
+
 			// jQuery.fn.eo_wbc_filter_change(true);
 			eo_wbc_filter_change_wrapper( true, form_selector, render_container, parameters );
 
@@ -1180,7 +1191,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     	if(!eo_wbc_object.btnfilter_now){			
 			jQuery("#eo_wbc_filter").on('change',"input:not(:checkbox)",function(){
 				jQuery('[name="paged"]').val('1');
-				window.document.splugins.wbc.pagination.core.reset();
+				window.document.splugins.wbc.pagination.api.reset();
 				// jQuery.fn.eo_wbc_filter_change();
 				eo_wbc_filter_change_wrapper( init_call, form_selector, render_container, parameters );										
 			});
@@ -1687,7 +1698,7 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 };
 
 //  publish it 
-window.document.splugins.pagination.api = window.document.splugins.pagination.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
+window.document.splugins.wbc.pagination.api = window.document.splugins.wbc.pagination.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
 
 ACTIVE_TODO_OC_START
 now this state mantaining flow should be inside its own module so inside the filters module above, but does it mean that we will stop keeping it direcly under the window object or we will keep it but start using the filters module stat everywhere and once everything sound stable then comment out below? 
@@ -2308,7 +2319,7 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
 
 	var init_private = function() {
 
-        window.document.splugins.events.api.createSubject( 'filter_sets', ['filter_set_click_start'] );
+        window.document.splugins.events.api.createSubject( 'filter_sets', ['filter_set_click_before_loop'] );
 
 		init_preprocess();
 	};
