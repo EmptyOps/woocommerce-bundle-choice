@@ -1213,15 +1213,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     	if(!eo_wbc_object.btnfilter_now){			
 			
 			jQuery("#eo_wbc_filter").on('change',"input:not(:checkbox)",function(){
-<<<<<<< HEAD
-				jQuery('[name="paged"]').val('1');
-				window.document.splugins.wbc.pagination.api.reset();
-				// jQuery.fn.eo_wbc_filter_change();
-				eo_wbc_filter_change_wrapper( init_call, form_selector, render_container, parameters );										
-=======
 				
 				on_change(form_selector);
->>>>>>> 68c708d9b9b96f4323a06f2c9967ac7a43f6a1f5
+
 			});
 		}
 
