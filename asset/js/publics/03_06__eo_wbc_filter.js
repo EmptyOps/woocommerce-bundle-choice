@@ -19,7 +19,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     // _this.$base_container =  null  /*jQuery( ( window.document.splugins.common._o( _this.configs, 'base_container_selector') ? _this.configs.base_container_selector : '' ) )*/;  // ACTIVE_TODO/TODO whenever it become necessary to use base_container for events or so then at that time need to init base_container using our standard filters section conatainer selector.
     NOTE: the serch form selector is the base_container of this filter module.
-    ACTIVE_TODO/TODO but however if required in future then we can define an additional $base_container_serce_widget something like that for the serch widget container to encapsulate this entire search widget area but only if that is necessary.
+	    ACTIVE_TODO/TODO but however if required in future then we can define an additional $base_container_search_widget something like that for the search widget container to encapsulate this entire search widget area but only if that is necessary.
+	    	NOTE: ultimately we should create common parent class & module for filters while the diamond quiz, shortcode filters and so on will have their own child modules just like the swatches and gallery images module. of course then it will be only jQuery interface style and there will be no form_selector param supported for the eo_wbc_filter_change_wrapper function. so diamond quiz, shortcode filters and so on would just init using their own selector like as if jQuery interface style plugin. 
+	    		ACTIVE_TODO and we may like to do it by 3rd revision or so. 
     _this.$base_container = jQuery( ( window.document.splugins.common._o( _this.configs, 'base_container_selector') ? _this.configs.base_container_selector : "form#eo_wbc_filter,form[id*='eo_wbc_filter']" ) );
 
     //	private functions 
@@ -134,11 +136,11 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		//	the filter events 
 		window.document.splugins.events.api.createSubject( 'filters', ['before_send', 'prepare_query_data', 'show_loader', 'init_search', 'no_products_found', 'should_search', 'complete', 'success', 'error', 'compatability', 'eo_wbc_filter_render_html', 'hide_loader', 'on_reset_click_listener', 'on_change_listener'] );
 
-		init_search(form_selector);
+		init_search();
 
-		on_reset_click_listener(form_selector);
+		on_reset_click_listener();
 
-		on_change_listener(form_selector);
+		on_change_listener();
 
 		init_advance_filter_accordian();
 
