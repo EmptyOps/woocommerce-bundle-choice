@@ -3457,6 +3457,41 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
             console.log("find success");
         }
 
+        -- 4 -- jo <a> ma aa class hase to direct <a> mali jase
+
+        var aLocate = _this.base_container.closest('.woocommerce-LoopProduct-link');
+
+        
+        -- 5 -- jo "li" no male to class thi loop find kare
+
+        var base_container = jQuery('.variation_form');
+        
+        _this = { "base_container": base_container };
+        
+        var liLocate = _this.base_container.closest('.product');
+
+        var aLocate = liLocate.find('a');
+        
+        if(aLocate.attr("href").indexOf("/product/") >= 0) {
+
+            console.log("find success");
+        }
+
+        -- 6 -- jo <li> male to tema <a> find thase
+        
+        var base_container = jQuery('.variation_form');
+        
+        _this = { "base_container": base_container };
+        
+        var liLocate = _this.base_container.closest('li');
+
+        var aLocate = liLocate.find('a');
+        
+        if(aLocate.attr("href").indexOf("/product/") >= 0) {
+
+            console.log("find success");
+        }
+
         return finalAncher;
     
     }
