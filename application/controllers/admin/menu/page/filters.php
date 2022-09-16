@@ -550,9 +550,14 @@ if ( ! class_exists( 'Filters' ) ) {
 								// --	then first lets extend the php layer. so simply will implement loop instead of the two static tab implementation -- to b done
 								// --	and on javascript layer nothing additional need to be done I think but lets confirm -- to b done
 									// --	then search everywhere with above keywords in wbc, sp_tv. and let me know if there are any placed where the upgrade is not done yet. -- to a done
+										/*ACTIVE_TODO_OC_START
 										--	and like above also search in the custom numeric, custom attribute, heirarchical filters, diamond quiz and earring pendant builder. and in this case if found at any place then mark them as active todo. -- to a 
 									-- eowbc_bradcome ma if condition nu logic confirm karvanu baki se(12-08-2022) -- to h & -- to a
+									ACTIVE_TODO_OC_END*/
 									// -- data "altname" vala logic jova na se two tabs vali file ma js se tema chek karvu(12-08-2022) -- to a done
+								/*ACTIVE_TODO_OC_START
+								-- the filter sets to work with earring pendant bilder we need to upgerad if condishons as aplicabel so that first and second switch here connect with right category
+								ACTIVE_TODO_OC_END*/
 							/*'filter_setting_advance_first_tabs'=>array(
 								'label'=>'Select first tab\'s filter set' ,
 								'type'=>'select',
@@ -1377,7 +1382,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							'config_advance_end'=>array(
 								'type'=>'accordian',
 								'section_type'=>'end'
-							),						
+							),					
 							's_fconfig_submit_btn'=>array(
 								'label'=>eowbc_lang('Save'),
 								'type'=>'button',
@@ -1468,8 +1473,10 @@ if ( ! class_exists( 'Filters' ) ) {
 							'filter_set_category'=>array(
 								'label'=>'Category for First Filter Set',
 								'type'=>'select',
+								'sanitize'=>'sanitize_text_field',
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
+								'validate'=>array('required'=>''),
 								'options'=> \eo\wbc\controllers\admin\menu\page\Filters::eo_wbc_prime_category_(),
 								'class'=>array('fluid'),
 								'size_class'=>array('three','wide','required'),

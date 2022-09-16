@@ -8,6 +8,8 @@
 
 $template = null;
 
+$attribute = $woo_dropdown_attribute_html_data['args'][ 'attribute' ];
+
 $div_class = null;
 $ul_class = null;
 $ul_role = null;
@@ -56,7 +58,7 @@ if ( $woo_dropdown_attribute_html_data['args']['sp_variations_swatches_cat_displ
         'child' => array(
             array(
                 'type' => 'a',
-                'class'=>'spui-wbc-swatches-variable-item-more-a'
+                'class'=>'spui-wbc-swatches-variable-item-more-a',
                 'preHTML' => '+'.($woo_dropdown_attribute_html_data['args']['actual_total_options'] - $woo_dropdown_attribute_html_data['args']['sp_variations_swatches_cat_display_limit']).' More',
                 'href' => '#',
             ),

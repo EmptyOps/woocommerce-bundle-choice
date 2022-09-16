@@ -9,8 +9,6 @@ class SP_SPlugins {
     //     NOTE: however in the meantime for the classes which are extended from here, which would be all for now, could extend simply pass null in first parameter during the object creation. 
     constructor(element, configs) {
         
-        // Calling parent's constructor
-        super(element, configs);
     }
 
     #init_private(){
@@ -1228,8 +1226,6 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
     #preprocess( element, event ) {
 
         var _this = this; 
-
-        we need to manage passing base_element in notification function calls -- to h & -- to s
 
         // NOTE: in future if insted of jQuery some other frontend library is used then that can managed from here that is why we are receiving this reference in element insted of jQuery object 
         _this.base_element = element;
