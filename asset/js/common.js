@@ -3425,22 +3425,40 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
         url = window.document.splugins.common.updateURLParameter(url, '_attribute=', attributeSlug_global);
 
         return url;
+    
     }    
 
     #get_loop_box_anchor(variation) {
 
         -- 1 -- aa class thi find karvanu -- to a
         var finalAncher = jQuery('div.woocommerce ul.products li.product a.woocommerce-LoopProduct-link');
+        var faLocateHref = finalAncher.attr("href");
+        if(faLocateHref.indexOf("/product/") >= 0){
+
+            console.log("find success");
+        }
 
         -- 2 -- a element structure thi find karvanu and <a> na path ma /product find kari ne <a> male -- to a
-        var aLocate = jQuery("div>ul>li a");
+        var aLocate = jQuery("ul>li a");
         var aLocateHref = aLocate.attr("href");
+         
         if(aLocateHref.indexOf("/product/") >= 0) {
 
             console.log("find success");
         }
 
+        -- 3 -- jema element thi no male tema 
+        var aLocate = jQuery(".products:eq(0) a");
+        var aLocateHref = aLocate.attr("href");
+        
+        if(aLocateHref.indexOf("/product/") >= 0) {
+
+
+            console.log("find success");
+        }
+
         return finalAncher;
+    
     }
 
     #set_variation_url(variation) {
@@ -3450,6 +3468,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
 
         var a = _this.#get_loop_box_anchor(variation);
         var base_url = jQuery(a).attr("href", "");
+    
     }
 
     #reset_variation_listener(type) {
@@ -4178,6 +4197,7 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
         var _this = this; 
 
         _this.#zoom_area_hover_in(type);
+    
     }
 
     #on_zoom_area_hover_out(type) {
@@ -4185,6 +4205,7 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
         var _this = this; 
 
         _this.#zoom_area_hover_out(type);
+    
     }
 
     #zoom_area_hover_in(type) {
