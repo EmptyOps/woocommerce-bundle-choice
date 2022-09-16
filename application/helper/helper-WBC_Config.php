@@ -39,12 +39,13 @@ class WBC_Config {
 
 		 		array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."/application/model/admin/eowbc_model.php" ), 
 
+				// TODO temp . remove it as sun as selectron autolode is updated
+				array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."vendor/sphereplugins/selectron/application/controller/publics/Controller.php" ),
+				array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."vendor/sphereplugins/selectron/application/controller/publics/container/container.php" ),
+				array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."vendor/sphereplugins/selectron/vendor/autoload.php" ),
+
 		 		array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."/application/controllers/publics/feed/loop/selectron/sp-slctrn-swatches-reset-link.php" ),
 		 		array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."/application/controllers/publics/feed/loop/selectron/sp-slctrn-swatches-cart-form.php" ),
-
-				array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."/vendor/sphereplugins/selectron/vendor/autoload.php" ),
-		 		// TODO temp . remove it as sun as selectron autolode is updated
-				//require_once dirname(dirname(__FILE__)) . '/application/controller/publics/container/container.php';
 
 			), 
 			'both'=> array(

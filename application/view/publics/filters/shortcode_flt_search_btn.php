@@ -18,9 +18,10 @@
 
 		function override_flt_change_function() {
 			//////// 27-05-2022 - @drashti /////////
-			--add to be confirmed--
-			window.document.splugins.wbc.filters.core.eo_wbc_filter_change_wrapper();
+			// --add to be confirmed--
+			// window.document.splugins.wbc.filters.core.eo_wbc_filter_change_wrapper();
 			if(typeof(jQuery.fn.eo_wbc_filter_change)!="undefined" && jQuery.fn.eo_wbc_filter_change!=undefined){
+				// ACTIVE_TODO we need to mange this when we upgarde shortcode filter for QCed version.
 				jQuery.fn.eo_wbc_filter_change= function(init_call=false) {				
 					//do nothing on change
 					return;

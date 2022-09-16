@@ -1,7 +1,7 @@
 <?php
 namespace sp\wbc\controller\publics\feed\loop\selectron;
 defined( 'ABSPATH' ) || exit;
-class SP_SLCTRN_Swatches_Cart_Form extends sp\selectron\controller\publics\container\Container{
+class SP_SLCTRN_Swatches_Cart_Form extends \sp\selectron\controller\publics\container\Container{
 
 	private static $_instance = null;
 
@@ -28,7 +28,7 @@ class SP_SLCTRN_Swatches_Cart_Form extends sp\selectron\controller\publics\conta
 	        // $args['hook_callback_args']['template_path'] = $template_path;
 	        // $args['hook_callback_args']['located'] = $located;
 	        // $args['hook_callback_args']['hook_args'] = $hook_args;
-			\eo\wbc\controllers\publics\pages\Feed::selectron_hook_render('swatches_cart_form','SP_SLCTRN_Swatches_Cart_Form',false,$args);
+			\eo\wbc\controllers\publics\pages\Feed::instance()->selectron_hook_render('swatches_cart_form','SP_SLCTRN_Swatches_Cart_Form',false,$args);
 		// }
 
 	}

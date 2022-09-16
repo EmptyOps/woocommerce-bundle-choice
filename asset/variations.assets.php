@@ -345,7 +345,7 @@ if(is_shop() || is_product_category()) {
 
 	</style>
 
-	<!--Size-->
+	<!--button-->
 	<style>
 	    .spui_size_widget{
 	        float: left;
@@ -402,7 +402,7 @@ if(is_shop() || is_product_category()) {
 
 	</style>
 
-	<!--Icon-->
+	<!--image-->
 	<style>
 	   :root {
 	        --spui-check: url("data:image/svg+xml;utf8,%3Csvg filter='drop-shadow(0px 0px 2px rgb(0 0 0 / .8))' xmlns='http://www.w3.org/2000/svg'  viewBox='0 0 30 30'%3E%3Cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='4' d='M4 16L11 23 27 7'/%3E%3C/svg%3E");

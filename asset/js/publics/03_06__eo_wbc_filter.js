@@ -2513,7 +2513,7 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
 	    }
 
 	    // window.document.splugins.wbc.filters.core.eo_wbc_filter_change_wrapper(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
-	    window.document.splugins.wbc.filters.core.eo_wbc_filter_change_wrapper(false,'form#'+_this.configs.filter_prefix +'eo_wbc_filter','',{'this':this,'event':event});
+	    window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false,'form#'+_this.configs.filter_prefix +'eo_wbc_filter','',{'this':this,'event':event});
 
 	    // --- end ---	
     };

@@ -85,9 +85,11 @@ class SP_Model_Loop_Gallery_Zoom extends Eowbc_Base_Model_Publics {
 				$data['image'] = $image;
 
 				$template_data = array(); 
-	            
+				
+	            /*ACTIVE_TODO_OC_START
 				ACTIVE_TODO as soon as required we need to enable the loops product id based support for the jas template ids. and on the common.js swatches and gallery images module also need to enable the same product id support in the child module also feed page and at their we can simply enable it based on getting the product id data from the base container and i think we are alredy getting their and saving under _this.
 					ACTIVE_TODO need to do applicable things from the above for the hover templates as well. 
+				ACTIVE_TODO_OC_END*/
 
 	            if($hook_key == 'sp_slzm_loop_zoom_image_loop_js_tempalte') {
 		            $template_data['template_key'] = 'gallery_zoom_{{template_key_device}}_image_loop_content';
@@ -97,7 +99,7 @@ class SP_Model_Loop_Gallery_Zoom extends Eowbc_Base_Model_Publics {
 		            $template_data['template_key'] = 'gallery_zoom_{{template_key_device}}_image_loop_content_hover';
 	            }
 
-	            $template_data['template_sub_dir'] = 'single-product/gallery-zoom';
+	            $template_data['template_sub_dir'] = 'loop/gallery-zoom';
 	            $template_data['data'] = $data;
 	            $template_data['singleton_function'] = 'wbc';
 
@@ -106,7 +108,7 @@ class SP_Model_Loop_Gallery_Zoom extends Eowbc_Base_Model_Publics {
 
 	        	$template_data['data']['gallery_images_template_data'] = array();
 	        	$template_data['data']['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'] = array();
-	        	$template_data['data']['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'][$template_data['data']['index']] = -1;
+	        	$template_data['data']['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'][$template_data['data']['image']['index']] = -1;
 	            $html =  wbc()->load->template($template_data['template_sub_dir'].'/'.$template_data['template_key'],(isset($template_data['data'])?$template_data['data']:array()),true,$template_data['singleton_function'],true,true);
 
 	            // wbc_pr( "SP_Model_Gallery_Zoom index ".$index );
