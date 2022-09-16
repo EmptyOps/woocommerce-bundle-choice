@@ -1456,6 +1456,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'options'=>array('filter_setting_advance_two_tabs'=>'Enable Collections Tabs(earlier: Two tabs setting) for the First(or Diamond) category filters'),
 								'class'=>array(),
 								'size_class'=>array('eight','wide'),
+								'is_id_as_name'=>true,
 								'inline'=>true,
 							),
 							'filter_set_two_tabs_second'=>array(
@@ -1466,6 +1467,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'options'=>array('filter_setting_advance_two_tabs'=>'Enable Collections Tabs(earlier: Two tabs setting) for the Second(or Ring) category filters'),
 								'class'=>array(),
 								'size_class'=>array('eight','wide'),
+								'is_id_as_name'=>true,
 								'inline'=>true,
 							),
 							'filter_set_category'=>array(

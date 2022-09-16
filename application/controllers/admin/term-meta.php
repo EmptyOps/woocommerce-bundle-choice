@@ -60,6 +60,7 @@ class Term_Meta {
 
 
 
+			
 				add_action('pa_' . $tax->attribute_name . '_add_form_fields', array($this, 'add_attribute_field_display_limit'));
 				
 				add_action('pa_' . $tax->attribute_name . '_edit_form_fields', array($this, 'edit_attributre_field_display_limit'), 10, 2);
@@ -122,19 +123,9 @@ class Term_Meta {
 
 	public function edit_attributre_field_display_limit($term, $taxonomy) {
 		if(!empty($this->attribute)) {
-			$this->woocommerce_edit_attributre_thumbnail_field($term,$taxonomy);
-			switch ($this->attribute->attribute_type) {
-				case 'color':					
-					$this->color_chooser(true,$term, $taxonomy);
-					break;
-
-				case 'image' or 'image_text' or 'dropdown_image' or 'dropdown_image_only':
-					$this->image_chooser(true,$term, $taxonomy);
-					break;
-
-				case 'button':
-					break;				
-			}
+			// $this->woocommerce_edit_attributre_thumbnail_field($term,$taxonomy);
+			
+			$this->display_limit();
 
 		}
 	}

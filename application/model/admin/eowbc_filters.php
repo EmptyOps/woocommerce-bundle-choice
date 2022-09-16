@@ -45,7 +45,10 @@ class Eowbc_Filters extends Eowbc_Model {
 					//wbc()->common->pr($form_definition, false, false);
 					// wbc()->common->var_dump('table data for key '.$key);
 					//wbc()->common->pr($filter_data, false, false);
-
+							if(wbc()->sanitize->get('is_test') == 1) {
+					        	wbc()->common->pr($filter_data);
+					        	echo "data save";
+					        }
 					$body = array();
 
 					// TODO had just put the empty array check but we should found in what cases the option is set to empty/null etc. which is not expected and possible behaviour
@@ -340,6 +343,11 @@ class Eowbc_Filters extends Eowbc_Model {
 
 		        	if(!empty(wbc()->sanitize->post($key_clean.'_id')) and !empty($filter_data[wbc()->sanitize->post($key_clean.'_id')])) {
 		        		$filter_data[wbc()->sanitize->post($key_clean.'_id')] = $table_data;
+
+					        // if(wbc()->sanitize->get('is_test') == 1) {
+					        // 	wbc()->common->pr($filter_data);
+					        // 	echo "data save";
+					        // }
 		        		$res["type"] = "success";
 		    			$res["msg"] = eowbc_lang('Filter updated successfully');
 		    			wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data) );

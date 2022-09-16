@@ -88,8 +88,9 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
                 add_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_single_add_to_cart', 30 );
 
                 /*ACTIVE_TODO_OC_START
+                --  here we have no compatibilitys patches planed so far but we may like to add here the compatibility patch for the select option link issue that we have noted on 4 themes during testing -- to h
                 remove_action( 'woocommerce_before_shop_loop', '????????', 10 );
-            \eo\wbc\model\SP_WBC_Compatibility::instance()->loop_render_compatability('before_shop_loop_item_loop_thumbnail_action', $args);
+                \eo\wbc\model\SP_WBC_Compatibility::instance()->loop_render_compatability('before_shop_loop_item_loop_thumbnail_action', $args);
             
                 add_action( 'woocommerce_before_shop_loop', function() use($page_section,$args) { 
 

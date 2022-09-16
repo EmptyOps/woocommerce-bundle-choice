@@ -870,13 +870,16 @@ class EOWBC_Filter_Widget {
 			}	
 
 			/*if(array_intersect(array(wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts'),wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts')),array('fc4','sc4'))){*/
-				ob_start();
+				ACTIVE_TODO we have a mood blowe css to standerd asset.php file but we need to move all above js css in this hook as soon as we get chance 
+				// ob_start();
 				?>
-					<style type="text/css">
-						<?php echo wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_additional_css',''); ?>
-					</style>
+					<!-- <style type="text/css"> -->
+						<?php /*echo wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_additional_css','');*/ ?>
+					<!-- </style> -->
 				<?php
-				echo ob_get_clean();
+				// echo ob_get_clean();
+				$this->load_asset('filter.asset.php');
+
 				/*
 			}  */
 			/*if(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_1' and wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active','#dde5ed')=='#dde5ed'){
@@ -889,6 +892,8 @@ class EOWBC_Filter_Widget {
 	
         // wp_register_script('eo_wbc_filter_js',plugins_url('asset/js/eo_wbc_filter.js',__FILE__),array('jquery'));
 		wbc()->load->asset('js','publics/eo_wbc_filter',array('jquery'));
+
+		$this->load_asset();
 
 		global $wp_query;
 		$site_url = '';
@@ -954,7 +959,29 @@ class EOWBC_Filter_Widget {
 
         /*wp_enqueue_script('eo_wbc_filter_js');*/
         
-	}		
+	}	
+
+	public function load_asset($args()){
+
+		if('filter.asset.php' == true){
+
+			add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts') ,function(){
+
+				wbc()->load->asset( 'asset.php', constant( 'EOWBC_ASSET_DIR' ).'js/filter.assets.php' );
+				
+			}, 1049);	
+
+		}else{
+
+			add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts') ,function(){
+
+				wbc()->load->asset('js','publics/eo_wbc_filter',array('jquery'));
+				
+			}, 1049);
+
+		}
+
+	}	
 
 	public function product_url() {
 		$url = '';
@@ -2812,8 +2839,7 @@ class EOWBC_Filter_Widget {
 
 			} elseif($is_second_category){
 
-				// TODO temp. temp true or.
-				if(true or !empty($filter_sets[$filter_sets_first_tab]['filter_set_two_tabs_second'])){
+				if(!empty($filter_sets[$filter_sets_first_tab]['filter_set_two_tabs_second'])){
 
 					$is_continue = false;
 				}
