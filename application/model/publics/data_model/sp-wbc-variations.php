@@ -698,7 +698,7 @@ class SP_WBC_Variations extends SP_Variations {
 		return $images;
 	}
 
-	public function prepare_swatches_data($args = array()){
+	public static function prepare_swatches_data($args = array()){
 
 		$data = array();
 		/*$html = $args['hook_callback_args']['html'];
@@ -800,7 +800,7 @@ class SP_WBC_Variations extends SP_Variations {
 			$product = $args['product'];
 		}
 
-		$data = $this->fetch_data('swatches', $product, $args)/*get_data('swatches')*/; 
+		$data = self::fetch_data('swatches', $product, $args)/*get_data('swatches')*/; 
 		$attributes = $data['attributes']; /*$product->get_variation_attributes();*/
 		$variations = $data['variations']; /*$product->get_available_variations();*/
 
@@ -883,7 +883,7 @@ class SP_WBC_Variations extends SP_Variations {
         	
 			if ( \eo\wbc\model\publics\data_model\SP_WBC_Variations::wc_product_has_attribute_type( $type, $args['hook_callback_args']['hook_args']['attribute'] ) ) {
 
-				$data = $this->prepare_swatches_data_by_attribute_type($data,$args);
+				$data = self::prepare_swatches_data_by_attribute_type($data,$args);
 
 			} else{
 				/*ACTIVE_TODO_OC_START
@@ -980,11 +980,11 @@ class SP_WBC_Variations extends SP_Variations {
 
 	}
 
-	public function prepare_swatches_data_by_attribute_type($data,$args = array()){
+	public static function prepare_swatches_data_by_attribute_type($data,$args = array()){
 
 		//here recieve the $data param of the caller function -- to b  done
 
-		$data = $this->prepare_woo_dropdown_attribute_html_data($data,$args);
+		$data = self::prepare_woo_dropdown_attribute_html_data($data,$args);
 
 		/*ACTIVE_TODO_OC_START
 		------------------a etlu wvs_default_button_variation_attribute_options alg che
@@ -1002,8 +1002,8 @@ class SP_WBC_Variations extends SP_Variations {
 		ACTIVE_TODO_OC_END*/
 		/*$content = wvs_variable_item( $type, $options, $args );*/
 
-		$data = $this->prepare_variable_item_data($data,$args);
-		$data = $this->prepare_variable_item_wrapper_data($data,$args);
+		$data = self::prepare_variable_item_data($data,$args);
+		$data = self::prepare_variable_item_wrapper_data($data,$args);
 
 		// TODO OPTIMIZATION in future if it seems worth it then we can prevent above layers from preparing unnecessary options and then we can simply skip array slice from below.
 		$data['woo_dropdown_attribute_html_data']['args']['actual_total_options'] = null;
@@ -1042,7 +1042,7 @@ class SP_WBC_Variations extends SP_Variations {
 		return apply_filters('sp_prepare_swatches_data_by_attribute_type',$data);
 	}
 
-	public function prepare_woo_dropdown_attribute_html_data ($data,$args = array()){
+	public static function prepare_woo_dropdown_attribute_html_data ($data,$args = array()){
 
 		$data['woo_dropdown_attribute_html_data'] = array();
 		$attributes = $data['attributes']; /*$product->get_variation_attributes();*/
@@ -1179,8 +1179,6 @@ class SP_WBC_Variations extends SP_Variations {
 						// ACTIVE_TODO right now we are managing selected attribute from the common woo dropdown attribute template but in future we should managing from the data layer here.
 						$data['woo_dropdown_attribute_html_data']['options_loop_html_attr'][$term->slug] = array('data-value'=>esc_attr( $term->slug ), 'data-title'=>$data['woo_dropdown_attribute_html_data']['options_loop_option_name'][$term->slug] );
 
-						\eo\wbc\system\core\SP_Router::get_query_params_formated('attr', $input_method, 'key_value');
-
 						/*echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) ) . '</option>';*/
 					}
 				}
@@ -1213,7 +1211,7 @@ class SP_WBC_Variations extends SP_Variations {
 		return $data;
 	}
 
-	public function prepare_variable_item_data ($data,$args = array()){
+	public static function prepare_variable_item_data ($data,$args = array()){
 
 		$data['variable_item_data'] = array();
 
@@ -1351,7 +1349,7 @@ class SP_WBC_Variations extends SP_Variations {
 						$data['woo_dropdown_attribute_html_data']['options_loop_class'][$term->slug] = esc_attr( $data['woo_dropdown_attribute_html_data']['type'] ).'-variable-item-'.esc_attr( $term->slug ).' '.esc_attr( $data['variable_item_data']['options_loop_selected_class'][$term->slug]);
 
 						// ACTIVE_TODO right now we are managing selected attribute from the common woo dropdown attribute template but in future we should managing from the data layer here.
-						$data['variable_item_data']['options_loop_html_attr'][$option] = array( 'data-value' => esc_html( $term->slug ), 'data-title' => esc_html( $term->slug ) );
+						$data['variable_item_data']['options_loop_html_attr'][$term->slug] = array( 'data-value' => esc_html( $term->slug ), 'data-title' => esc_html( $term->slug ) );
 
 						/*ACTIVE_TODO_OC_START
 						--------- a etlu wvs_default_variable_item alg che
@@ -1519,7 +1517,7 @@ class SP_WBC_Variations extends SP_Variations {
 
 	}
 
-	public function prepare_variable_item_wrapper_data ($data,$args = array()){
+	public static function prepare_variable_item_wrapper_data ($data,$args = array()){
 
 		//wbc_pr($data); die();
 		$data['variable_item_wrapper_data'] = array();

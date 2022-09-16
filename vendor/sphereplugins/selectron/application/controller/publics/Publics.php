@@ -33,11 +33,13 @@ class Publics {
 				
 				/*if(!empty(wbc()->options->get_option($key.'_'.$section['section'],$section['section'].'_render_method'))) {*/
 
+					$default_render_method = (isset($section['default_render_method'])?$section['default_render_method']:null);
+
 					$handler = $section['handler_object'];
 					$default_action = $section['default_action'];
 
 
-					switch(wbc()->options->get_option($key,$section['section'].'_render_method')) {
+					switch(wbc()->options->get_option($key,$section['section'].'_render_method', $default_render_method)) {
 						case 'add_filter':
 													
 							add_filter(	wbc()->options->get_option($key,$section['section'].'_hook_text',$section['default_action']),

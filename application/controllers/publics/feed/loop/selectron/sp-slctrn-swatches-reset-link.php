@@ -1,7 +1,7 @@
 <?php
 namespace sp\wbc\controller\publics\feed\loop\selectron;
 defined( 'ABSPATH' ) || exit;
-class SP_SLCTRN_Swatches_Reset_Link extends sp\selectron\controller\publics\container\Container{
+class SP_SLCTRN_Swatches_Reset_Link extends \sp\selectron\controller\publics\container\Container {
 
 	private static $_instance = null;
 
@@ -17,7 +17,14 @@ class SP_SLCTRN_Swatches_Reset_Link extends sp\selectron\controller\publics\cont
 		
 	}
 
-	public function hook_render($content) {
+	public function hook_render() {
+
+		parent::hook_render();
+
+		//stuff
+    	$arg_list = func_get_args();
+    	//wbc_pr($arg_list); die;
+    	$content = $arg_list[0];	//ACTIVE_TODO we need to confirm yet
 
 		// if('loop/loop-end.php' === $template_name) {
 			// ACTIVE_TODO whenver requred add support in selectron repo to support the local args and other var passing. or is it already implemented by m than jast use it 
@@ -25,12 +32,14 @@ class SP_SLCTRN_Swatches_Reset_Link extends sp\selectron\controller\publics\cont
 
 			$args['hook_callback_args'] = array();
 	        $args['hook_callback_args']['content'] = $content;
-			return \eo\tv\controller\publics\pages\Feed::selectron_hook_render('swatches_reset_link','SP_SLCTRN_Swatches_Reset_Link',false,$args);
+			return \eo\wbc\controllers\publics\pages\Feed::instance()->selectron_hook_render('swatches_reset_link','SP_SLCTRN_Swatches_Reset_Link',false,$args);
 		// }
 
 	}
 
 	public function js_render($selector,$delay) {
+
+		parent::js_render($selector,$delay);
 
 		if(empty($selector)) {
 			$selector = '';			

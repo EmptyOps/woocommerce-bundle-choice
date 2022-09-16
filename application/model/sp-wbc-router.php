@@ -32,9 +32,12 @@ class SP_WBC_Router extends SP_Router {
     }
 
     public static function get_query_params($key, $input_method = 'GET') {
+        
+        /*ACTIVE_TODO_OC_START
         ACTIVE_TODO now the way we can do is firstly support the standard woocommerce filter attributes -- to h & -- to t & -- to s
             ACTIVE_TODO sooner or later we should do the woocommerce filters standard based implementation and upgrade or revise and upgrade our filter layers to make sure that simply work based on the woocommerce standard filters backend and so on and so we do that above point will all naturaly be covered.
             --  and then we should use that links on new layers while as backward compatability can support our older structure of CAT_LINK and ATT_LINK -- to h & -- to s 
+        ACTIVE_TODO_OC_END*/
 
         return wbc()->sanitize->{strtolower($input_method)}($key);
     }
@@ -98,6 +101,48 @@ class SP_WBC_Router extends SP_Router {
             return self::get_query_params($key, $input_method);
         }
 
+    }
+
+    public static function is_number_category($step_number,$id = null, $slug = null){
+
+        $result = false;
+
+        // $term = wbc()->wc->get_term_by('id',$id,'product_cat');
+
+        // if( !empty($term) and !is_wp_error($term) ) {
+        //     $term_slug = $term->slug;
+        // }  
+
+        if (!empty($id)) {
+
+            // ACTIVE_TODO nid to imliment
+            if ($id == wbc()->options->get_option('configuration',($step_number == 1 ?'first_slug':'second_slug'))) {
+           
+                $result = true;
+            }
+
+        }elseif(!empty($slug)){
+
+            if ($slug == wbc()->options->get_option('configuration',($step_number == 1 ?'first_slug':'second_slug'))) {
+           
+                $result = true;
+            }
+
+        }
+
+        // ACTIVE_TODO we may like to publish hook here to suport the pair builders provided by extensions 
+
+        return $result;
+    }
+
+    public static function is_first_category($id = null, $slug = null){
+
+        return self::is_number_category(1, $id, $slug);
+    }
+
+    public static function is_second_category($id = null, $slug = null){
+
+        return self::is_number_category(2, $id, $slug);
     }
 
 }

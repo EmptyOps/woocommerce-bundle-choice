@@ -22,7 +22,7 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
         return true;
     }
 
-    public static function init($args = array()){
+    public function init($args = array()){
 
         if(self::instance()->should_load_options_view()) {
          
@@ -57,7 +57,7 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
         }
     }
 
-    public function selectron_hook_render($page_section,$container_class,$args = array()){
+    public function selectron_hook_render($page_section,$container_class,$builtin_container = false, $args = array()){
         
         if ($page_section == 'swatches') {
             if ($container_class == 'swatches') {
@@ -132,7 +132,7 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
                 // $args['hook_callback_args']['hook_args'] = $hook_args;
 
 
-                return $this->selectron_hook_render($page_section,'gallery_images',$args);
+                return $this->selectron_hook_render($page_section,'gallery_images',false,$args);
 
 
             }, 15 );
@@ -144,7 +144,7 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
                 $args['hook_callback_args']['hook_args'] = $hook_args;
 
 
-                return $this->selectron_hook_render($page_section,'swatches',$args);
+                return $this->selectron_hook_render($page_section,'swatches',false,$args);
 
             }, 200, 2);
         } else if ($args['page_section'] == 'swatches_cart_form') {
@@ -174,8 +174,8 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
                     'handler_object'=>$SP_SLCTRN_Swatches_Reset_Link_object,
                     'default_action'=>'woocommerce_reset_variations_link',
                     'default_render_method'=>'add_filter',
-                    'default_params'=>'',
-                    'default_priority'=>'',
+                    'default_params'=>'1',
+                    'default_priority'=>'10',
                     'section'=>$page_section
                 )                    
             );
@@ -187,7 +187,7 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
     private function load_view($data,$args = array()){
         // NOTE: since so far we do not needed to create the view class and the actual ui is also coming from the templates folder so, so far not creating the view class. and just implementing the required logic from here. but if it become necessary then in future create the view class. 
 
-        if ($page_section == 'gallery_images') {
+        if ($args['page_section'] == 'gallery_images') {
 
             $this->render_swatches_data_by_attribute_type($data,$args);
         } elseif ($args['page_section'] == 'swatches') {

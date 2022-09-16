@@ -228,7 +228,7 @@ class Public_Handler {
 			        \eo\wbc\controllers\publics\pages\Category::instance()->init();
 
 			        if(\eo\wbc\controllers\publics\pages\Feed::should_init()) {
-			    		\eo\wbc\controllers\publics\pages\Feed::init();
+			    		\eo\wbc\controllers\publics\pages\Feed::instance()->init();
 			    	}
 
 			    } elseif(is_product()) {

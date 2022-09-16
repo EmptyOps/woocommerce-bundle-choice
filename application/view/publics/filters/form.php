@@ -10,7 +10,7 @@ $current_category = implode(',',$thisObj->___category);
 
 $is_first_root_category = true;
 // $filter_sets = unserialize(wbc()->options->get_option_group('filters_filter_set',"a:0:{}"));
-\eo\wbc\model\publics\component::instance()->get_filter_sets();
+$filter_sets = \eo\wbc\model\publics\component\EOWBC_Filter_Widget::instance()->get_filter_sets($thisObj->filter_prefix);
 //wbc()->common->pr($filter_sets);
 if(!empty($filter_sets) and is_array($filter_sets)){
 	foreach ($filter_sets as $filter_sets_key => $filter_sets_val) {
