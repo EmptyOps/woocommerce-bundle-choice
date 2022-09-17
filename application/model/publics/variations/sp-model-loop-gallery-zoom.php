@@ -79,7 +79,7 @@ class SP_Model_Loop_Gallery_Zoom extends Eowbc_Base_Model_Publics {
 				$image['index'] = '{{data.index}}';
 
 				$image['class_wrapper'] = '{{data.class_wrapper}}';
-				$image['extra_params_org']['type'] = '{{data.extra_params_org.type}}';
+				//$image['extra_params_org']['type'] = '{{data.extra_params_org.type}}';
 				//$image['extra_params_org']['embed_type'] = '{{data.extra_params_org.embed_type}}';
 				$data = array();
 				$data['image'] = $image;
@@ -152,7 +152,6 @@ class SP_Model_Loop_Gallery_Zoom extends Eowbc_Base_Model_Publics {
 
 				$html = null;
 				$html = apply_filters('sp_slzm_loop_zoom_images_html',$html,$images_data);
-
 				$ui = array(
 					'type'=>'div',
 					'class'=>$classes,
