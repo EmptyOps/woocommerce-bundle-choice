@@ -870,7 +870,9 @@ class EOWBC_Filter_Widget {
 			}	
 
 			/*if(array_intersect(array(wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts'),wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts')),array('fc4','sc4'))){*/
-				ACTIVE_TODO we have a mood blowe css to standerd asset.php file but we need to move all above js css in this hook as soon as we get chance 
+				/*ACTIVE_TODO_OC_START
+				ACTIVE_TODO we have moved below css to standerd asset.php file but we need to move all above js css in this hook as soon as we get chance
+				ACTIVE_TODO_OC_END*/ 
 				// ob_start();
 				?>
 					<!-- <style type="text/css"> -->
@@ -878,7 +880,7 @@ class EOWBC_Filter_Widget {
 					<!-- </style> -->
 				<?php
 				// echo ob_get_clean();
-				$this->load_asset('filter.asset.php');
+				$this->load_asset(array('filter_assets_php'=> true));
 
 				/*
 			}  */
@@ -891,8 +893,7 @@ class EOWBC_Filter_Widget {
         }, 10 );
 	
         // wp_register_script('eo_wbc_filter_js',plugins_url('asset/js/eo_wbc_filter.js',__FILE__),array('jquery'));
-		wbc()->load->asset('js','publics/eo_wbc_filter',array('jquery'));
-
+		// wbc()->load->asset('js','publics/eo_wbc_filter',array('jquery'));
 		$this->load_asset();
 
 		global $wp_query;
@@ -961,9 +962,9 @@ class EOWBC_Filter_Widget {
         
 	}	
 
-	public function load_asset($args()){
+	public function load_asset($args = array()){
 
-		if('filter.asset.php' == true){
+		if(!empty($args['filter_assets_php'])){
 
 			add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts') ,function(){
 
