@@ -152,7 +152,6 @@ class SP_Model_Loop_Gallery_Zoom extends Eowbc_Base_Model_Publics {
 
 				$html = null;
 				$html = apply_filters('sp_slzm_loop_zoom_images_html',$html,$images_data);
-				var_dump($html); die();
 				$ui = array(
 					'type'=>'div',
 					'class'=>$classes,
