@@ -46,7 +46,7 @@ class SP_Loop_Gallery_Zoom extends \eo\wbc\controllers\publics\Controller{
 
         if ($page_section == 'loop_gallery_zoom') {
 
-            add_filter('sp_loop_gallery_zoom_html',function($html,$images_data) use($page_section,$args){
+            add_filter('sp_slzm_loop_zoom_images_html',function($html,$images_data) use($page_section,$args){
 
                 $args['hook_callback_args'] = array();
                 $args['hook_callback_args']['html'] = $html;
