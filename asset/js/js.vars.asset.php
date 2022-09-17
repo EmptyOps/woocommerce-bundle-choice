@@ -100,8 +100,9 @@ add_action('wp_footer',function(){
     	jQuery(document).ready(function() {
 
     		window.document.splugins.wbc.pagination.api.init();
-			window.document.splugins.pagination.api.init();
-			window.document.splugins.filters.api.init();
+
+			window.document.splugins.wbc.filters.api.init();
+
 			window.document.splugins.wbc.filter_sets.api.init();
 
     		if(window.document.splugins.common.is_item_page || window.document.splugins.common.is_category_page) {
