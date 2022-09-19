@@ -58,6 +58,9 @@ class WBC_Config {
 
 		 		array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."/application/model/publics/data_model/sp-wbc-product.php" ), 
 
+		 		array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."application/model/publics/data_model/sp-wbc-data-layer.php" ),
+		 		
+
 			)	
 
 		);

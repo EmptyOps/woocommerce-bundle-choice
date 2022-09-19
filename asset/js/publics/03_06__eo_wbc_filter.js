@@ -271,6 +271,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		//
 
 		form_data=undefined;
+
+		--	we most likely need to serialize form in init call case also means when init call is true. -- to h & -- to s
+		--	but maybe instead of serializing entire form in init call which is against the old flow so instead of right now changing all the changing major flow we can simply consider passing the additional fields that we need to pass like those attribute related fields and category related is i think already covered so i think we can do that. -- to h & -- to s
+			--	still maybe it is not either that much of concern if we serialize entire from because maybe things should just work still it is better idea that we go with the above option instead of this one.
 		if(init_call)
 		{
 			if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
@@ -1530,15 +1534,15 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 
 	_this.configs = jQuery.extend({}, {}/*default configs*/, configs);	
 
-	_this.base_container = null  /*jQuery( ( window.document.splugins.common._o( _this.configs, 'base_container_selector') ? _this.configs.base_container_selector : '' ) )*/;  // ACTIVE_TODO/TODO whenever it become necessary to use base_container for events or so then at that time need to init base_container using standard pagination section conatainer selector.
+	_this.$base_container = null  /*jQuery( ( window.document.splugins.common._o( _this.configs, 'base_container_selector') ? _this.configs.base_container_selector : '' ) )*/;  // ACTIVE_TODO/TODO whenever it become necessary to use base_container for events or so then at that time need to init base_container using standard pagination section conatainer selector.
 
 	var init_private = function() {
 
 		ACTIVE_TODO whenever in future if required  to run compatibility check during run time means after the base container selectore is defined than we can call compatibility layers additionaly from here 
     	var base_container_selector_callback = null;
-		var stat_object = window.document.splugins.events.api.apply_all_observer_filters( 'pagination', 'base_container_selector',{_this.base_container:_this.base_container},base_container_selector_callback);  
+		var stat_object = window.document.splugins.events.api.apply_all_observer_filters( 'pagination', 'base_container_selector',{_this.$base_container:_this.$base_container},base_container_selector_callback);  
 
-		_this.base_container = stat_object._this.base_container;
+		_this.$base_container = stat_object._this.$base_container;
 
 		like from the filters module, we may need to raise notification from all key functions of this module as well.
 			--	like tableview may like to recieve click notification, but does it require to handle anuy logic related to it? since the wbc layers will only host the pagination module and layers so maybe tableview does not need to manage many or maybe not need to manage none of those things. 
