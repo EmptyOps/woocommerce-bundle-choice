@@ -52,7 +52,7 @@ if( !class_exists('\\eo\wbc\model\data_model\SP_WBC_Data_Layer') ) {
 
 							),
 							'variation'=>array(
-								array( 'legacy_key'=> 'meta', 'map_def_key'=>'meta', 'meta_key'=>'sp_variations_data need to confirm exact key', 'requirement'=>'' );
+								array( 'legacy_key'=> 'meta', 'map_def_key'=>'meta', 'meta_key'=>'sp_variations_data need to confirm exact key', 'requirement'=>'' )
 							),
 						);
 			
@@ -85,9 +85,10 @@ if( !class_exists('\\eo\wbc\model\data_model\SP_WBC_Data_Layer') ) {
 
 	            	if(empty($args['filter_by']) || $args['filter_by']['attr']) {
 
-	            	$dropdown_options = array_replace($dropdown_options, wbc()->wc->get_productAttributes('detailed'));
+		            	$dropdown_options = array_replace($dropdown_options, wbc()->wc->get_productAttributes('detailed'));
 
-	            }
+		            }
+		        }
 			}
 
 			return $dropdown_options;
