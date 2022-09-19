@@ -3426,67 +3426,62 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
 
 //     #get_loop_box_anchor(variation) {
 
-//         -- 1 -- aa class thi find karvanu -- to a
-//         var finalAncher = jQuery('div.woocommerce ul.products li.product a.woocommerce-LoopProduct-link');
-//         var faLocateHref = finalAncher.attr("href");
-//         if(faLocateHref.indexOf("/product/") >= 0){
+        // -- 1 -- aa class thi find karvanu -- to a
+        // var finalAncher = jQuery('div.woocommerce ul.products li.product a.woocommerce-LoopProduct-link');
+        // var faLocateHref = finalAncher.attr("href");
+        // if(faLocateHref.indexOf("/product/") >= 0){
 
-//             console.log("find success");
-//         }
+        //     console.log("find success");
+        // }
+        // -- aa <a> find karva mate banavyu se final karva nu se @a--
+        // --- start ---
 
-//         -- 2 -- a element structure thi find karvanu and <a> na path ma /product find kari ne <a> male -- to a
-//         var aLocate = jQuery("ul>li a");
-//         var aLocateHref = aLocate.attr("href");
-         
-//         if(aLocateHref.indexOf("/product/") >= 0) {
+        // function isEmpty(val){
+        //     return (val == undefined || val == null || val.length <= 0) ? true : false;
+        // };
 
-//             console.log("find success");
-//         }
+        // function ancher_locate_function(base_container_p = 'variations_form',aLocateclass_p = 'woocommerce-LoopProduct-link',liLocate_class_p = 'product'){
 
-//         -- 3 -- jema element thi no male tema 
-//         var aLocate = jQuery(".products:eq(0) a");
-//         var aLocateHref = aLocate.attr("href");
-        
-//         if(aLocateHref.indexOf("/product/") >= 0) {
+        //     var base_container = jQuery('.' + base_container_p);
+            
+        //     var liLocate = base_container.closest('.' + liLocate_class_p);
 
+        //     if(isEmpty(liLocate)){
 
-//             console.log("find success");
-//         }
+        //         var liLocate = base_container.closest('li');
+                
+        //         console.log('li thi loop box malyu se');
+        //     }else{
 
-//         -- 4 -- jo <a> ma aa class hase to direct <a> mali jase
+        //         console.log('class thi loop box malyu se');
+        //     }
 
-//         var aLocate = _this.base_container.closest('.woocommerce-LoopProduct-link');
+        //     var aLocate = liLocate.find('a');
 
-        
-//         -- 5 -- jo "li" no male to class thi loop find kare
+        //     if(aLocate.attr('class').indexOf(' ') >= 0){
 
-//         var base_container = jQuery('.variation_form');
-        
-//         _this = { "base_container": base_container };
-        
-//         var liLocate = _this.base_container.closest('.product');
+        //         var aLocateclassAll = aLocate.attr('class').split(" ");
 
-//         var aLocate = liLocate.find('a');
-        
-//         if(aLocate.attr("href").indexOf("/product/") >= 0) {
+        //         var aLocateclass = aLocateclassAll.indexOf(aLocateclass_p);
 
-//             console.log("find success");
-//         }
+        //         console.log('<a> class split');
 
-//         -- 6 -- jo <li> male to tema <a> find thase
-        
-//         var base_container = jQuery('.variation_form');
-        
-//         _this = { "base_container": base_container };
-        
-//         var liLocate = _this.base_container.closest('li');
+        //     }else{
 
-//         var aLocate = liLocate.find('a');
-        
-//         if(aLocate.attr("href").indexOf("/product/") >= 0) {
+        //         var aLocateclass = aLocate.attr('class');
 
-//             console.log("find success");
-//         }
+        //         console.log('<a> class no split');
+        //     }        
+
+        //     if(aLocateclass = aLocateclass_p){
+
+        //         console.log("class thi <a> malyo");
+        //     }else if(aLocate.attr("href").indexOf("/product/") >= 0) {
+
+        //         console.log("HREF thi <a> malyo");
+        //     }
+        // };
+        // --- end ---
 
 //         return finalAncher;
     
