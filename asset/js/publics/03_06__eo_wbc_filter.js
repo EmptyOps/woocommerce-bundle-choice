@@ -256,7 +256,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		if(form.find('[name="filter_native"]').length>0) {
 			// jQuery.fn.eo_wbc_filter_change_native(init_call,form_selector,render_container);
 			ACTIVE_TODO now we need to restructure this, need to find out why mahesh had to maintain native and so on separetely? is it stemming due to the diamond quiz flow? -- to h and -- to s 
-			s: question 
+			s: question diamond quize manthi nathi aavelu (25.35)
 			window.document.splugins.filters.api.eo_wbc_filter_change_wrapper( init_call, form_selector );
 			return true;
 		}					
@@ -550,7 +550,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		// success(data);
 
-		need to finalize, this code is not part6 of any logic here -- to h & -- to s 
+		need to finalize, this code is not part of any logic here -- to h & -- to s 
 			if(typeof(form_data)==='string'){
 				form_data = Object.fromEntries(new URLSearchParams(form_data))
 			}	
@@ -642,7 +642,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			--	and in that regard when compatibility patches are used then the normal default layer logic should be skipped or I think they are applied first and then compatibility so need of skipping. but yeah still lets confirm all patches and their execution sequence. -- to s 
 				--	and on this regard need to have proper conditions to run the patches only when necessary. but I think we can simply run patche all the time. this seems normal but lets atleast confirm all the patches to confirm that they are not causing any harm to our normal code execution. -- to s 
 
-				--	before working on any of the below point, first comment entire eo_wbc_filter_render_html function which is now moved inside filters module. so just confirm everything from the outer function and then comment that -- to s 
+				--	before working on any of the below point, first comment entire eo_wbc_filter_render_html function which is now moved inside filters module. so just confirm everything from the outer function and then comment that -- to s (outside of filter module)
 						--	then confirm that compatibility function call below and the compatibility which is also called from inside the eo_wbc_filter_render_html has any issue. -- to s 
 				--	and we of course can not call compatibility simply from here. so lets simply call from different places with right section key. like we have did in those two modules and for example the compatibility most likely need to be called before eo_wbc_filter_render_html call since inside compatibility eo_wbc_filter_render_html is called. -- to h and -- to s 
 					--	and remove the eo_wbc_filter_render_html call from inside the compatibility function. -- to s 
@@ -665,7 +665,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		window.eo_wbc_object.enable_filter_table = false;
 		window.document.splugins.eo_wbc_object.enable_filter_table = false;
 		
-		--	to avoide duplicate real time calls
+		// to avoide duplicate real time calls
 		if(window.eo_wbc_object.hasOwnProperty('xhr')){
 			window.eo_wbc_object.xhr.abort();
 		}
@@ -1372,11 +1372,12 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     var get_enable_filter = function() {
 
-
+    	s:question hiren bhai ne puchhine karavanu baki chhe.
     };
 
     var set_enable_filter = function() {
 
+    	s:question hiren bhai ne puchhine karavanu baki chhe.
     };
 
     ///////////////////////////////////////////////////////
@@ -2171,7 +2172,9 @@ jQuery(document).ready(function($){
 	// 	jQuery('[name="paged"]').val(parseInt(jQuery(this).text().replace(',','')));		
 	// 	jQuery.fn.eo_wbc_filter_change(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
 	// });
-	window.document.splugins.pagination.api.init();
+
+	// moved to assets php
+	// window.document.splugins.wbc.pagination.api.init();
 
 	ACTIVE_TODO_OC_START
 	ask t for what it is -- to d 
@@ -2203,7 +2206,9 @@ jQuery(document).ready(function($){
         return false;
     });*/  
 
-  	window.document.splugins.filters.core.init();
+  	// window.document.splugins.filters.core.init();
+	// moved to assets php
+  	// window.document.splugins.filters.api.init();
 
 	if(window.eo_wbc_object.disp_regular){
 	
@@ -2211,6 +2216,7 @@ jQuery(document).ready(function($){
 			--	and then from just make call to that private function from the init_private of the same module -- to d done
 		//jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html('');	
 
+		s: question niche code block filter module na "on_change_listener" function ma chhe to e fucntion call karavanu -- to s
 		if(!window.eo_wbc_object.btnfilter_now){			
 			jQuery("#eo_wbc_filter").on('change',"input:not(:checkbox)",function(){
 				jQuery('[name="paged"]').val('1');
@@ -2524,14 +2530,14 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
 
 			init_private();
 		}
-	}
+	};
 
 };
 
 window.document.splugins.wbc.filter_sets.api = window.document.splugins.wbc.filter_sets.core( filter_sets_confings.filter_sets_confings );
-jQuery(document).ready(function(){
-
-	window.document.splugins.wbc.filter_sets.api.init(); 	
-});
+// jQuery(document).ready(function(){
+	// moved to assets php
+	// window.document.splugins.wbc.filter_sets.api.init(); 	
+// });
 
 
