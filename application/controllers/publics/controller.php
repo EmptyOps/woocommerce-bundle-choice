@@ -57,11 +57,11 @@ class Controller extends \eo\wbc\controllers\Controller{
 
     public static function should_init($args = array()){
 
-        if($args['page'] = 'feed' && (is_product_category() || is_shop()) ){
+        if($args['page'] == 'feed' && (is_product_category() || is_shop()) ){
 
             return true;
         
-        } elseif( $args['page'] = 'single-product' && is_product()){
+        } elseif( $args['page'] == 'single-product' && is_product()){
 
             return true;
         

@@ -1010,7 +1010,7 @@ class SP_WBC_Variations extends SP_Variations {
 
 		if ( $data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit'] > 0 && ( ! is_product() || $woocommerce_loop['name'] == 'related' ) ) {
 			
-			if ( $woo_dropdown_attribute_html_data['product'] && taxonomy_exists( $variable_item_data['attribute'] ) ) {
+			if ( $data['woo_dropdown_attribute_html_data']['product'] && taxonomy_exists( $data['variable_item_data']['attribute'] ) ) {
 
 			  	$data['woo_dropdown_attribute_html_data']['args']['actual_total_options'] = count($data['variable_item_data']['terms']);  
 
@@ -1034,7 +1034,7 @@ class SP_WBC_Variations extends SP_Variations {
 
 				if(isset($data['variable_item_data']['terms'])){
 
-					$data['variable_item_data']['terms'] = array_slice( $data['variable_item_data']['terms'], 0, $data['variable_item_data']['args']['sp_variations_swatches_cat_display_limit'] );
+					$data['variable_item_data']['terms'] = array_slice( $data['variable_item_data']['terms'], 0, $data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit'] );
 				}
 			}
 		}
@@ -1094,9 +1094,15 @@ class SP_WBC_Variations extends SP_Variations {
 
 		// classes
 		$data['woo_dropdown_attribute_html_data']['class']                 = 'variable-item ' .esc_attr( $data['woo_dropdown_attribute_html_data']['type'] ).'-variable-item spui-wbc-swatches-variable-item spui-wbc-swatches-variable-item-'.$data['woo_dropdown_attribute_html_data']['type']. ' spui-wbc-swatches-variable-item-header spui-wbc-swatches-variable-item-'.$data['woo_dropdown_attribute_html_data']['type'].'-header variable-item-'.wbc()->common->current_theme_key(). ' variable-item-'.esc_attr( $data['woo_dropdown_attribute_html_data']['type'] ).'-'.wbc()->common->current_theme_key();
+
 		// defined limit
 			// NOTE: right now we are limiting swatches options right from the data layer here and maintaining actual_total_options var which can be used on template layers. but if in future woo hiden select dropdown or js layer require all options then we need to provide that in seprate variable. 
-		$data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit'] = get_term_meta( $data['woo_dropdown_attribute_html_data']['id'], 'sp_variations_swatches_cat_display_limit', true );
+		$data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit'] = get_term_meta( $data['woo_dropdown_attribute_html_data']['args']['attribute_object']->attribute_id, 'sp_variations_swatches_cat_display_limit', true );
+		
+		if (empty($data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit'] )) {
+
+			$data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit'] = wbc()->config->product_variations_configs()['sp_variations_swatches_cat_display_limit'];
+		}
 
 
 		if ( empty( $data['woo_dropdown_attribute_html_data']['options'] ) && ! empty( $data['woo_dropdown_attribute_html_data']['product'] ) && ! empty( $data['woo_dropdown_attribute_html_data']['attribute'] ) ) {

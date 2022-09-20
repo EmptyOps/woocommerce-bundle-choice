@@ -115,47 +115,47 @@ class WBC_Config {
 		return array(			
 			'plugin_slug' => 'woo-bundle-choice', 
 			'widget_sections'=>array(
-						'category_page' => array(
-							'test_slug' => '/product-category/eo_setting_shape_cat', 
-							'mandatory' => array(
-								array(
-									'key' => 'woocommerce_before_main_content', 
-									'label' => '', 	//user friendly name (optional)
-									'type' => 'filter',	
-									'filter_priority_1' => 10,	
-									'filter_priority_2' => 1	
-								)
-							),
-							'recommended' => array(
-								array(
-									'key' => 'woocommerce_before_main_content', 
-									'label' => '', 	//user friendly name (optional)
-									'type' => 'filter',	
-									'filter_priority_1' => 10,	
-									'filter_priority_2' => 1	
-								)
-							)
-						), 
-						'item_page' => array(
-							'test_slug' => '/product-item-page-slug/of-our-sample-data-base-product', 
-							'mandatory' => array(
-								array(
-									'key' => 'woocommerce_before_add_to_cart_button', 
-									'label' => '', 	//user friendly name (optional)
-									'type' => 'action'	
-								)
-							),
-							'recommended' => array(
-								array(
-									'key' => 'woocommerce_product_additional_information', 
-									'label' => '', 	//user friendly name (optional)
-									'type' => 'action',	
-									'filter_priority_1' => 10,	
-									'filter_priority_2' => 1	
-								)
-							)
-						), 
-				)
+				'category_page' => array(
+					'test_slug' => '/product-category/eo_setting_shape_cat', 
+					'mandatory' => array(
+						array(
+							'key' => 'woocommerce_before_main_content', 
+							'label' => '', 	//user friendly name (optional)
+							'type' => 'filter',	
+							'filter_priority_1' => 10,	
+							'filter_priority_2' => 1	
+						)
+					),
+					'recommended' => array(
+						array(
+							'key' => 'woocommerce_before_main_content', 
+							'label' => '', 	//user friendly name (optional)
+							'type' => 'filter',	
+							'filter_priority_1' => 10,	
+							'filter_priority_2' => 1	
+						)
+					)
+				), 
+				'item_page' => array(
+					'test_slug' => '/product-item-page-slug/of-our-sample-data-base-product', 
+					'mandatory' => array(
+						array(
+							'key' => 'woocommerce_before_add_to_cart_button', 
+							'label' => '', 	//user friendly name (optional)
+							'type' => 'action'	
+						)
+					),
+					'recommended' => array(
+						array(
+							'key' => 'woocommerce_product_additional_information', 
+							'label' => '', 	//user friendly name (optional)
+							'type' => 'action',	
+							'filter_priority_1' => 10,	
+							'filter_priority_2' => 1	
+						)
+					)
+				), 
+			)
 		);
 	}
 
@@ -167,13 +167,14 @@ class WBC_Config {
 	public function product_variations_configs(){
 
 		return array( 
-					'sp_variations_attributes'=> array( 
+			'sp_variations_attributes'=> array( 
 
 
-					),
-					'sp_variations_data_fields'=> array( 
+			),
+			'sp_variations_data_fields'=> array( 
 
-					)
+			),
+			'sp_variations_swatches_cat_display_limit' => 3,
 
 		);
 	}

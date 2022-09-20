@@ -49,7 +49,8 @@ if ( $woo_dropdown_attribute_html_data['product'] && taxonomy_exists( $variable_
     $options = $woo_dropdown_attribute_html_data['options']; 
 
 }
-
+// wbc_pr($woo_dropdown_attribute_html_data['args']['actual_total_options']);
+// wbc_pr($woo_dropdown_attribute_html_data['args']['sp_variations_swatches_cat_display_limit']); die();
 
 if ( $woo_dropdown_attribute_html_data['args']['sp_variations_swatches_cat_display_limit'] > 0 && $woo_dropdown_attribute_html_data['args']['actual_total_options'] > $woo_dropdown_attribute_html_data['args']['sp_variations_swatches_cat_display_limit'] ) {
     $template = array(

@@ -61,13 +61,13 @@ class Term_Meta {
 
 
 			
-				add_action('pa_' . $tax->attribute_name . '_add_form_fields', array($this, 'add_attribute_field_display_limit'));
+				// add_action('pa_' . $tax->attribute_name . '_add_form_fields', array($this, 'add_attribute_field_display_limit'));
 				
-				add_action('pa_' . $tax->attribute_name . '_edit_form_fields', array($this, 'edit_attributre_field_display_limit'), 10, 2);
+				// add_action('pa_' . $tax->attribute_name . '_edit_form_fields', array($this, 'edit_attributre_field_display_limit'), 10, 2);
 
-				add_filter('manage_edit-pa_' . $tax->attribute_name . '_columns', array(&$this, 'attribute_columns_display_limit'));
+				// add_filter('manage_edit-pa_' . $tax->attribute_name . '_columns', array(&$this, 'attribute_columns_display_limit'));
 				
-				add_filter('manage_pa_' . $tax->attribute_name . '_custom_column', array(&$this, 'attribute_column_display_limit'), 10, 3);
+				// add_filter('manage_pa_' . $tax->attribute_name . '_custom_column', array(&$this, 'attribute_column_display_limit'), 10, 3);
 
 			}
 		}		
@@ -332,14 +332,14 @@ class Term_Meta {
 		// $columns = $this->woocommerce_product_attribute_column($columns, $column, $id);
 		global $woocommerce; 
 
-		$limit = 3;			
+		$limit = wbc()->config->product_variations_configs()['sp_variations_swatches_cat_display_limit'];			
 		if (get_term_meta( $id,'sp_variations_swatches_cat_display_limit')) {
             
             $limit = get_term_meta( $id,'sp_variations_swatches_cat_display_limit',true);
         } 
 
-        if(empty($limit)) {
-        	$limit = 3;			
+        if (empty($limit)) {
+        	$limit = wbc()->config->product_variations_configs()['sp_variations_swatches_cat_display_limit'];			
         }			
 		$columns .= '<div '.$limit.' ></div>';
 
@@ -502,7 +502,14 @@ class Term_Meta {
 				<label for="tag-slug">Ribbon Color</label>
 				<input name="wbc_color" id="wbc_color" type="color" class="wbc_color"  style="width: 94%;" value=''>	
 				<p>Choose a color for the ribbon on variation form.</p>
-			</div>			
+			</div>	
+
+			<div class="form-field term-slug-wrap">				
+				<label for="tag-slug">Display Limit(Loopbox)</label>
+				<input name="sp_variations_swatches_cat_display_limit" id="sp_variations_swatches_cat_display_limit" type="number" value="<?php echo wbc()->config->product_variations_configs()['sp_variations_swatches_cat_display_limit']; ?>" class="sp_variations_swatches_cat_display_limit"  style="width: 94%;" value=''>	
+				<p>Limit number of swatches options to display on shop/category page Loopbox.</p>
+			</div>		
+
 		<?php
 		echo ob_get_clean();
 	}
@@ -525,7 +532,23 @@ class Term_Meta {
 					<input name="wbc_color" id="wbc_color" type="color" class="wbc_color"  style="width: 94%;" value='<?php echo get_term_meta( $taxonomy_id ,'wbc_ribbon_color',true); ?>'>	
 					<p>Choose a color for the ribbon on variation form.</p>
 				</td>
-			</div>			
+			</div>	
+
+			<?php 
+				$display_limit = get_term_meta( $taxonomy_id ,'sp_variations_swatches_cat_display_limit',true);
+				if (empty($display_limit)) {
+					$display_limit = wbc()->config->product_variations_configs()['sp_variations_swatches_cat_display_limit'];
+				}
+			?>
+			<div class="form-field term-slug-wrap">				
+				<th scope="row" valign="top">				
+					<label for="tag-slug">Display Limit(Loopbox)</label>				
+				</th>
+				<td>
+					<input name="sp_variations_swatches_cat_display_limit" id="sp_variations_swatches_cat_display_limit" type="number" class="sp_variations_swatches_cat_display_limit"  style="width: 94%;" value='<?php echo $display_limit; ?>'>	
+					<p>Limit number of swatches options to display on shop/category page Loopbox.</p>
+				</td>
+			</div>
 		<?php
 		echo ob_get_clean();
 	}
@@ -533,7 +556,11 @@ class Term_Meta {
 	public function save_taxonomy_form($id, $data) {
 		if(!empty(wbc()->sanitize->post('wbc_color'))) {
 			update_term_meta($id,'wbc_ribbon_color',wbc()->sanitize->post('wbc_color'));
-		}		
+		}
+
+		if(!empty(wbc()->sanitize->post('sp_variations_swatches_cat_display_limit'))) {
+			update_term_meta($id,'sp_variations_swatches_cat_display_limit',wbc()->sanitize->post('sp_variations_swatches_cat_display_limit'));
+		}	
 	}
 }
 
