@@ -1507,6 +1507,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     };
 };
 
+should we pass here the eo_wbc_object or something such which is localized as js var ? -- to h & -- to s
 //  publish it 
 window.document.splugins.wbc.filters.api = window.document.splugins.wbc.filters.core( {} );
 
@@ -1740,6 +1741,7 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 
 };
 
+do we need to set any configs here?? -- to h & -- to s
 //  publish it 
 window.document.splugins.wbc.pagination.api = window.document.splugins.wbc.pagination.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
 
@@ -2221,13 +2223,13 @@ jQuery(document).ready(function($){
 		//jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html('');	
 
 		s: question niche code block filter module na "on_change_listener" function ma chhe to e fucntion call karavanu -- to s
-		if(!window.eo_wbc_object.btnfilter_now){			
+		/*if(!window.eo_wbc_object.btnfilter_now){			
 			jQuery("#eo_wbc_filter").on('change',"input:not(:checkbox)",function(){
 				jQuery('[name="paged"]').val('1');
 				// jQuery.fn.eo_wbc_filter_change();	
 				window.document.splugins.filters.api.eo_wbc_filter_change_wrapper();									
 			});
-		}
+		}*/
 
 		if(typeof(jQuery.fn.eo_wbc_filter_change) === typeof(undefined) &&  typeof(window.eo_wbc_filter_change) === 'function') {
 			jQuery.fn.eo_wbc_filter_change = window.eo_wbc_filter_change;				
