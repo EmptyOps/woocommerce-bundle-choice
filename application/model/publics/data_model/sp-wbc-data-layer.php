@@ -75,7 +75,7 @@ if( !class_exists('\\eo\wbc\model\data_model\SP_WBC_Data_Layer') ) {
 
 				if( $type == 'prod_cat' ) {
 
-					if(empty($args['filter_by']) || $args['filter_by']['prod_cat']) {
+					if(empty($args['filter_by']) || !empty($args['filter_by']['prod_cat']) ) {
 
 		            	$dropdown_options = array_replace($dropdown_options, wbc()->wc->get_productCats('', 'detailed'));
 
@@ -83,7 +83,7 @@ if( !class_exists('\\eo\wbc\model\data_model\SP_WBC_Data_Layer') ) {
 
 	            } elseif( $type == 'attr' ) {
 
-	            	if(empty($args['filter_by']) || $args['filter_by']['attr']) {
+	            	if(empty($args['filter_by']) || !empty($args['filter_by']['attr']) ) {
 
 		            	$dropdown_options = array_replace($dropdown_options, wbc()->wc->get_productAttributes('detailed'));
 
