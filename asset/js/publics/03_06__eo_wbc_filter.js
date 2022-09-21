@@ -876,9 +876,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		render_container_selectore = result_container(_render_container);
 
-		// render_container = result_container(render_container);
-		render_container = set_archive_html(container_html, render_container);
-	
+		render_container = result_container(render_container);
+
 		ACTIVE_TODO_OC_START
 		// create two function show_loader and hide_loader in filters core js module -- to d done
 			// --	and then move the below code in the hide_loader -- to d done
@@ -1383,20 +1382,6 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     var set_enable_filter = function() {
 
     	s:question hiren bhai ne puchhine karavanu baki chhe.
-    };
-
-    var get_archive_html = function() {
-    	// TODO implement when required
-    };
-
-    var set_archive_html = function(html, render_container=null) {
-
-    	if(render_container == null) {
-
-    		render_container = result_container();
-    	}
-
-    	jQuery(render_container).html(html);
     };
 
     ///////////////////////////////////////////////////////
@@ -2238,13 +2223,14 @@ jQuery(document).ready(function($){
 		//jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html('');	
 
 		s: question niche code block filter module na "on_change_listener" function ma chhe to e fucntion call karavanu -- to s
-		/*if(!window.eo_wbc_object.btnfilter_now){			
+			this seems to be limited 
+		if(!window.eo_wbc_object.btnfilter_now){			
 			jQuery("#eo_wbc_filter").on('change',"input:not(:checkbox)",function(){
 				jQuery('[name="paged"]').val('1');
 				// jQuery.fn.eo_wbc_filter_change();	
 				window.document.splugins.filters.api.eo_wbc_filter_change_wrapper();									
 			});
-		}*/
+		}
 
 		if(typeof(jQuery.fn.eo_wbc_filter_change) === typeof(undefined) &&  typeof(window.eo_wbc_filter_change) === 'function') {
 			jQuery.fn.eo_wbc_filter_change = window.eo_wbc_filter_change;				
