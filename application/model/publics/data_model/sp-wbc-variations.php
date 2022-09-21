@@ -77,10 +77,14 @@ class SP_WBC_Variations extends SP_Variations {
 
 		// comment by @s
 		}elseif( ($for_section == "swatches" /*|| $for_section == "gallery_images"*/)/* && $args['page'] != 'feed'*/ ) {
+			$this->swatches_hooks();
 
 			$sp_variations_data['attributes'] = $product->get_variation_attributes();
 			$sp_variations_data['variations'] = $product->get_available_variations();
 
+		}elseif( ($for_section == "gallery_images") {
+
+			$this->gallery_images_hooks();
 		}	
 
 					// ACTIVE_TODO_OC_START
@@ -1795,4 +1799,30 @@ class SP_WBC_Variations extends SP_Variations {
 		// ACTIVE_TODO ultimately move all below core implementtaion in the new core class of gallery_images or maybe simply in the wbc variations class 
 	}
 
+	private function swatches_hooks(){
+
+		add_filter( '? Well be provided leter in recoding',  function($data){
+
+			if (!empty($data)) {
+
+				return $data;
+			}
+
+			return $data;
+		});
+	}
+
+	private function gallery_images_hooks(){
+
+		add_filter( '? Well be provided leter in recoding',  function($data){
+
+			if (!empty($data)) {
+				
+				return $data;
+			}
+
+			return $data;
+		});
+
+	}
 }
