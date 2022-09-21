@@ -876,9 +876,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		render_container_selectore = result_container(_render_container);
 
-		// render_container = result_container(render_container);
-		render_container = set_archive_html(container_html, render_container);
-	
+		render_container = result_container(render_container);
+
 		ACTIVE_TODO_OC_START
 		// create two function show_loader and hide_loader in filters core js module -- to d done
 			// --	and then move the below code in the hide_loader -- to d done
@@ -1385,20 +1384,6 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     	s:question hiren bhai ne puchhine karavanu baki chhe.
     };
 
-    var get_archive_html = function() {
-    	// TODO implement when required
-    };
-
-    var set_archive_html = function(html, render_container=null) {
-
-    	if(render_container == null) {
-
-    		render_container = result_container();
-    	}
-
-    	jQuery(render_container).html(html);
-    };
-
     ///////////////////////////////////////////////////////
 
  	ACTIVE_TODO_OC_START
@@ -1522,6 +1507,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     };
 };
 
+should we pass here the eo_wbc_object or something such which is localized as js var ? -- to h & -- to s
 //  publish it 
 window.document.splugins.wbc.filters.api = window.document.splugins.wbc.filters.core( {} );
 
@@ -1540,9 +1526,7 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 
 		ACTIVE_TODO whenever in future if required  to run compatibility check during run time means after the base container selectore is defined than we can call compatibility layers additionaly from here 
     	var base_container_selector_callback = null;
-		var stat_object = window.document.splugins.events.api.apply_all_observer_filters( 'pagination', 'base_container_selector',{_this.$base_container:_this.$base_container},base_container_selector_callback);  
-
-		_this.$base_container = stat_object._this.$base_container;
+		var stat_object = window.document.splugins.events.api.apply_all_observer_filters( 'pagination', 'base_container_selector',{type:_this.$base_container},base_container_selector_callback);  
 
 		like from the filters module, we may need to raise notification from all key functions of this module as well.
 			--	like tableview may like to recieve click notification, but does it require to handle anuy logic related to it? since the wbc layers will only host the pagination module and layers so maybe tableview does not need to manage many or maybe not need to manage none of those things. 
@@ -1755,6 +1739,7 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 
 };
 
+do we need to set any configs here?? -- to h & -- to s
 //  publish it 
 window.document.splugins.wbc.pagination.api = window.document.splugins.wbc.pagination.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
 
@@ -2236,6 +2221,7 @@ jQuery(document).ready(function($){
 		//jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html('');	
 
 		s: question niche code block filter module na "on_change_listener" function ma chhe to e fucntion call karavanu -- to s
+			this seems to be limited 
 		if(!window.eo_wbc_object.btnfilter_now){			
 			jQuery("#eo_wbc_filter").on('change',"input:not(:checkbox)",function(){
 				jQuery('[name="paged"]').val('1');
