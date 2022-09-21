@@ -1526,9 +1526,7 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 
 		ACTIVE_TODO whenever in future if required  to run compatibility check during run time means after the base container selectore is defined than we can call compatibility layers additionaly from here 
     	var base_container_selector_callback = null;
-		var stat_object = window.document.splugins.events.api.apply_all_observer_filters( 'pagination', 'base_container_selector',{_this.$base_container:_this.$base_container},base_container_selector_callback);  
-
-		_this.$base_container = stat_object._this.$base_container;
+		var stat_object = window.document.splugins.events.api.apply_all_observer_filters( 'pagination', 'base_container_selector',{type:_this.$base_container},base_container_selector_callback);  
 
 		like from the filters module, we may need to raise notification from all key functions of this module as well.
 			--	like tableview may like to recieve click notification, but does it require to handle anuy logic related to it? since the wbc layers will only host the pagination module and layers so maybe tableview does not need to manage many or maybe not need to manage none of those things. 
