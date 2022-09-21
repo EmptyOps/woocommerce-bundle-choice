@@ -590,4 +590,32 @@ class WBC_WC {
         return false;
     }
 
+    public function get_terms_order_data(){
+
+        $attributes = array();        
+       
+        foreach (wc_get_attribute_taxonomies() as $taxonomy) {
+            
+            
+            $terms=get_terms(array('taxonomy'=>wc_attribute_taxonomy_name($taxonomy->attribute_name),'hide_empty'=>false));
+
+            if(is_wp_error($terms)){
+
+                $terms=get_terms(wc_attribute_taxonomy_name($taxonomy->attribute_name),array('hide_empty'=>false));
+            }
+            
+            if(!empty($terms) and !is_wp_error($terms)){
+               
+                $terms_collaction = array();                
+                foreach ($terms as $term_key => $term_value) {                    
+                    $terms_collaction[str_replace(' ','_',trim($term_value->name))] = $term_key;
+                    
+                }
+                $attributes[wc_attribute_taxonomy_name($taxonomy->attribute_name)] = $terms_collaction;
+            }            
+        }       
+        return $attributes;
+
+    }
+
 }

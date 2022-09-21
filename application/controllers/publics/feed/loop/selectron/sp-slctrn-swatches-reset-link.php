@@ -24,7 +24,7 @@ class SP_SLCTRN_Swatches_Reset_Link extends \sp\selectron\controller\publics\con
 		//stuff
     	$arg_list = func_get_args();
     	//wbc_pr($arg_list); die;
-    	$content = $arg_list[0];	//ACTIVE_TODO we need to confirm yet
+    	$content = $arg_list[0];
 
 		// if('loop/loop-end.php' === $template_name) {
 			// ACTIVE_TODO whenver requred add support in selectron repo to support the local args and other var passing. or is it already implemented by m than jast use it 
